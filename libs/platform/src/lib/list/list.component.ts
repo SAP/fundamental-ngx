@@ -946,7 +946,9 @@ export class ListComponent<T>
                 return;
             }
 
-            item.ariaPosinet = ++itemIndex;
+            item.ariaSetSize = this._ariaSetSize;
+
+            item.ariaPosinset = ++itemIndex;
 
             if (currentGroup) {
                 currentGroupItemIds.push(item.listItem.nativeElement.id);

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
 
-import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import {
     ListItemComponent,
@@ -16,6 +16,9 @@ import { BaseListItem } from '../base-list-item';
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => DisplayListItemComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
+    host: {
+        role: 'none'
+    },
     imports: [
         NgIf,
         ListItemComponent,
@@ -24,7 +27,8 @@ import { BaseListItem } from '../base-list-item';
         NgTemplateOutlet,
         ListTitleDirective,
         NgClass,
-        ListSecondaryDirective
+        ListSecondaryDirective,
+        AsyncPipe
     ]
 })
 export class DisplayListItemComponent extends BaseListItem {}

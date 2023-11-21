@@ -6,12 +6,23 @@ let nextListGrpHeaderId = 0;
 
 @Component({
     selector: 'fdp-list-group-header',
-    template: ` <li #listItem fd-list-group-header [attr.id]="id" role="group" [tabindex]="0">
+    template: ` <li
+        #listItem
+        fd-list-group-header
+        [attr.aria-labelledby]="ariaLabelledBy"
+        [attr.aria-label]="ariaLabel"
+        [attr.id]="id"
+        role="group"
+        [tabindex]="0"
+    >
         <span fd-list-title>{{ groupHeaderTitle }}</span>
         <ng-content></ng-content>
     </li>`,
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ListGroupHeaderComponent) }],
     standalone: true,
+    host: {
+        role: 'none'
+    },
     imports: [ListGroupHeaderDirective, ListTitleDirective]
 })
 export class ListGroupHeaderComponent extends BaseListItem implements OnInit {

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, forwardRef } from '@angular/core';
 
-import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -27,6 +27,9 @@ import { BaseListItem } from '../base-list-item';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
+    host: {
+        role: 'none'
+    },
     imports: [
         NgIf,
         ListItemComponent,
@@ -45,7 +48,8 @@ import { BaseListItem } from '../base-list-item';
         RadioButtonComponent,
         ButtonComponent,
         ObjectStatusComponent,
-        FdTranslatePipe
+        FdTranslatePipe,
+        AsyncPipe
     ]
 })
 export class StandardListItemComponent extends BaseListItem {}

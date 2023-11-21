@@ -13,7 +13,8 @@
         [class.fd-list__item--inactive]="listType === 'inactive'"
         [attr.aria-label]="ariaLabel"
         [attr.aria-level]="ariaLevel"
-        [attr.aria-posinet]="ariaPosinet"
+        [attr.aria-posinset]="ariaPosinset"
+        [attr.aria-setsize]="ariaSetSize | async"
         [attr.aria-selected]="_selected"
         [ariaRole]="_listItemRole"
         [attr.aria-selected]="_selectedAttr"
@@ -46,7 +47,8 @@
         (keyup)="_onKeyUp($event)"
         [attr.aria-label]="ariaLabel"
         [attr.aria-level]="ariaLevel"
-        [attr.aria-posinet]="ariaPosinet"
+        [attr.aria-posinset]="ariaPosinset"
+        [attr.aria-setsize]="ariaSetSize | async"
         [class.fd-list__item--inactive]="listType === 'inactive'"
         (click)="_onItemClick()"
         [ariaRole]="role"
@@ -65,7 +67,8 @@
         [attr.aria-label]="ariaLabel"
         class="fd-object-list__item"
         [attr.aria-level]="ariaLevel"
-        [attr.aria-posinet]="ariaPosinet"
+        [attr.aria-posinset]="ariaPosinset"
+        [attr.aria-setsize]="ariaSetSize | async"
     >
         <span fd-list-title [attr.aria-label]="noDataText" [attr.title]="noDataText">{{ noDataText }}</span>
     </li>

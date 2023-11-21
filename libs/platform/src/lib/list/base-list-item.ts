@@ -25,6 +25,7 @@ import { FD_LIST_UNREAD_INDICATOR, ListUnreadIndicator } from '@fundamental-ngx/
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { BaseComponent, isPresent } from '@fundamental-ngx/platform/shared';
 import { merge } from 'lodash-es';
+import { Observable } from 'rxjs';
 import { FdpListComponent } from './fdpListComponent.token';
 import { ListConfig } from './list.config';
 import { FdpList, ListType, SelectionType } from './models/list';
@@ -146,7 +147,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
 
     /** define position of item for screen reader */
     @Input()
-    ariaPosinet: number;
+    ariaPosinset: number;
 
     /** Avatar component properties. @see AvatarComponent for more details */
     @Input()
@@ -360,6 +361,9 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     get _listItemRole(): string {
         return this.role || this._defaultRole;
     }
+
+    /** @hidden */
+    ariaSetSize: Observable<number>;
 
     /** @hidden */
     private _rowSelection = false;

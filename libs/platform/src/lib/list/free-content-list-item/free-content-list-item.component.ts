@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, forwardRef, ViewEncapsulation } from '@angular/core';
 import { ListItemComponent } from '@fundamental-ngx/core/list';
 import { BaseListItem } from '../base-list-item';
@@ -10,6 +11,9 @@ import { BaseListItem } from '../base-list-item';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => FreeContentListItemComponent) }],
     standalone: true,
-    imports: [ListItemComponent]
+    host: {
+        role: 'none'
+    },
+    imports: [ListItemComponent, AsyncPipe]
 })
 export class FreeContentListItemComponent extends BaseListItem {}
