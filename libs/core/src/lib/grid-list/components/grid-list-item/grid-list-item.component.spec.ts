@@ -33,7 +33,7 @@ import { GridListComponent } from '../grid-list/grid-list.component';
                             <p>USA</p>
                         </div>
 
-                        <a href="#" class="fd-link" tabindex="0">john_li@example.com</a>
+                        <a href="#" class="fd-link" tabindex="0">john_li&#64;example.com</a>
                     </div>
                 </div>
             </fd-grid-list-item>

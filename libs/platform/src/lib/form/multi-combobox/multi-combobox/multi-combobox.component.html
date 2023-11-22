@@ -11,9 +11,7 @@
             [fillControlMode]="fillControlMode"
         >
             <fd-popover-control>
-                <ng-container>
-                    <ng-template [ngTemplateOutlet]="controlTemplate"></ng-template>
-                </ng-container>
+                <ng-template [ngTemplateOutlet]="controlTemplate"></ng-template>
             </fd-popover-control>
             <fd-popover-body [style.width.%]="!autoResize && 100">
                 <ng-template [ngTemplateOutlet]="listTemplate"></ng-template>

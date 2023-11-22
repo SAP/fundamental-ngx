@@ -105,26 +105,22 @@
                                     {{ item.label }}
                                 </fd-quick-view-group-item-label>
                                 <fd-quick-view-group-item-content>
-                                    @switch (item.label) {
-                                        @case (item.label === 'Mobile' || item.label === 'Phone' ? item.label : '') {
-                                            <a
-                                                [href]="'tel:' + item.value"
-                                                fd-link
-                                                fd-quick-view-group-item-content-element
-                                                >{{ item.value }}</a
-                                            >
-                                        }
-                                        @case ('Email') {
-                                            <a
-                                                [href]="'mailto:' + item.value"
-                                                fd-link
-                                                fd-quick-view-group-item-content-element
-                                                >{{ item.value }}</a
-                                            >
-                                        }
-                                        @default {
-                                            <div fd-quick-view-group-item-content-element>{{ item.value }}</div>
-                                        }
+                                    @if (item.label === 'Mobile' || item.label === 'Phone' ? item.label : '') {
+                                        <a
+                                            [href]="'tel:' + item.value"
+                                            fd-link
+                                            fd-quick-view-group-item-content-element
+                                            >{{ item.value }}</a
+                                        >
+                                    } @else if (item.label === 'Email') {
+                                        <a
+                                            [href]="'mailto:' + item.value"
+                                            fd-link
+                                            fd-quick-view-group-item-content-element
+                                            >{{ item.value }}</a
+                                        >
+                                    } @else {
+                                        <div fd-quick-view-group-item-content-element>{{ item.value }}</div>
                                     }
                                 </fd-quick-view-group-item-content>
                             </fd-quick-view-group-item>

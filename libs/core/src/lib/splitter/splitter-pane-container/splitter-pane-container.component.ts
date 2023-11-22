@@ -22,7 +22,7 @@ import {
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 
 import { PortalModule } from '@angular/cdk/portal';
 import { NgTemplateOutlet } from '@angular/common';
@@ -81,7 +81,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
     _directPanes: QueryList<SplitterSplitPaneComponent>;
 
     /** @hidden */
-    _defaultPane: SplitterSplitPaneComponent;
+    _defaultPane: Nullable<SplitterSplitPaneComponent>;
 
     /** @hidden */
     _pages: string[] = [];

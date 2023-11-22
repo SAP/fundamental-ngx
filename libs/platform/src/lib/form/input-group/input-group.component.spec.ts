@@ -10,6 +10,7 @@ import { PlatformInputGroupModule } from './input-group.module';
 import { InputGroupComponent } from './input-group.component';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
+import { CommonModule } from '@angular/common';
 
 const INPUT_GROUP_IDENTIFIER = 'platform-input-group-unit-test';
 

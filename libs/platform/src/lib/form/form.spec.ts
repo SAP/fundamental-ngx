@@ -429,7 +429,7 @@ describe('FdpFormField with Wrapper', () => {
     @Component({
         template: `
             <fdp-form-group #fg>
-                <ng-container *ngTemplateOutlet="fields; context: { $implicit: fg }"> </ng-container>
+                <ng-container [ngTemplateOutlet]="fields" [ngTemplateOutletContext]="{ $implicit: fg }"> </ng-container>
 
                 <ng-template #fields let-fg>
                     <fdp-wrapper>
@@ -459,11 +459,12 @@ describe('FdpFormField with Wrapper', () => {
         }).compileComponents();
     }));
 
-    beforeEach(() => {
+    beforeEach(async () => {
         fixture = TestBed.createComponent(HostFormComponent);
         host = fixture.componentInstance;
 
         fixture.detectChanges();
+        await fixture.whenStable();
     });
 
     it('should be created', () => {

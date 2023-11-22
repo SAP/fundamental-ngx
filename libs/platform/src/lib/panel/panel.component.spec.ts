@@ -9,6 +9,7 @@ import { PanelContentComponent } from './panel-content/panel-content.component';
 import { PanelActionsComponent } from './panel-actions.component';
 import { PlatformPanelModule } from './panel.module';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: ` <fdp-panel title="Panel Title">

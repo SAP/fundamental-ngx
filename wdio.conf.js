@@ -1,9 +1,13 @@
 /*require('ts-node').register({ transpileOnly: true });
 module.exports = require('./wdio.conf.ts');*/
 const { join } = require('path');
+import dns from 'node:dns';
 require('ts-node').register({ transpileOnly: true });
 AllureReporter = require('@wdio/allure-reporter').default;
 exports.config = {
+    beforeSession: () => {
+        dns.setDefaultResultOrder('ipv4first');
+    },
     //
     // ====================
     // Runner Configuration

@@ -3,13 +3,12 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TableModule } from '../table.module';
 import { TableService } from '../table.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: `
 <tr #directiveElement fd-table-row id="row">
-  @for (key of keys; track key) {
-    <td fd-table-cell [key]="key">{{ key }}</td>
-  }
+    <td *ngFor="let key of keys" fd-table-cell [key]="key">{{ key }}</td>
 </tr>
 `
 })
@@ -50,7 +49,7 @@ describe('TableRowDirective', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent],
-            imports: [TableModule],
+            imports: [TableModule, CommonModule],
             providers: [TableService]
         }).compileComponents();
     }));
@@ -66,7 +65,7 @@ describe('TableRowDirective', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should sort elements', () => {
+    it('should sort elements', async () => {
         let keys = component.keys;
 
         expect(getInnerTextFromNodes()).toEqual(keys);
@@ -76,8 +75,11 @@ describe('TableRowDirective', () => {
         (<any>component.tableRow)._resetCells(keys);
 
         fixture.detectChanges();
+        await fixture.whenStable();
 
-        expect(getInnerTextFromNodes()).toEqual(keys);
+        const textFromNodes = getInnerTextFromNodes();
+
+        expect(textFromNodes).toEqual(keys);
 
         keys = [component.keys[1], component.keys[0], component.keys[3], component.keys[2]];
 

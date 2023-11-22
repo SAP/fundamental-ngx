@@ -30,6 +30,7 @@
         <ng-template #triggerItem>
             <ng-content></ng-content>
         </ng-template>
+
         @if (hasErrors() && groupedErrors.length > 0) {
             @for (error of groupedErrors; track error) {
                 <fd-form-message [type]="error.directive.type">
@@ -53,6 +54,7 @@
                 </fd-form-message>
             }
         }
+
         @if (groupedErrors.length === 0 && hasErrors() && i18Strings) {
             <fd-form-message type="error">
                 <ng-template
@@ -64,6 +66,7 @@
         }
     </fdp-input-message-group>
 </ng-template>
+
 <ng-template #innerErrorRenderers>
     @if (hasErrors() && groupedErrors.length > 0) {
         @for (error of groupedErrors; track error) {
@@ -86,6 +89,7 @@
             }
         }
     }
+
     @if (groupedErrors.length === 0 && hasErrors() && i18Strings) {
         <ng-template
             [ngTemplateOutlet]="i18Strings"
@@ -94,6 +98,7 @@
         </ng-template>
     }
 </ng-template>
+
 <ng-template #labelTemplate>
     @if (hintTarget === 'label') {
         <label
@@ -111,9 +116,6 @@
             <span [id]="'fdp-form-label-content-' + id">{{ label }}</span>
         </label>
     } @else {
-        <div class="fd-col" [class]="_gapColumnLayoutClass"></div>
-    }
-    <ng-template #withoutHint>
         <label
             [id]="'fdp-form-label-' + id"
             [required]="editable && required"
@@ -123,8 +125,9 @@
         >
             <span [id]="'fdp-form-label-content-' + id">{{ label }}</span>
         </label>
-    </ng-template>
+    }
 </ng-template>
+
 <ng-template #gapTemplate>
     @if (hintTarget === 'input' && hintOptions.content) {
         <div class="fd-col fd-form-field-inline-help-container" [class]="_gapColumnLayoutClass">
@@ -142,7 +145,4 @@
     } @else {
         <div class="fd-col" [class]="_gapColumnLayoutClass"></div>
     }
-    <ng-template #withoutHint>
-        <div class="fd-col" [class]="_gapColumnLayoutClass"></div>
-    </ng-template>
 </ng-template>

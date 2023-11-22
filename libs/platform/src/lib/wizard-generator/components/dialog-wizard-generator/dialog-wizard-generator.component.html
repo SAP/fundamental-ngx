@@ -82,21 +82,19 @@
                             [ngTemplateOutletContext]="{ finish: _finishFn }"
                         ></ng-template>
                     }
-                    <ng-container>
-                        <ng-template #defaultCancelButtonTemplate>
-                            <fdp-button
-                                class="fd-bar__element"
-                                [fdContentDensity]="_navigationButtonLabels.cancel.contentDensity"
-                                [buttonType]="_navigationButtonLabels.cancel.type"
-                                [label]="_navigationButtonLabels.cancel.label"
-                                (click)="cancel()"
-                            ></fdp-button>
-                        </ng-template>
-                        <ng-template
-                            [ngTemplateOutlet]="cancelButtonTemplate || defaultCancelButtonTemplate"
-                            [ngTemplateOutletContext]="{ cancel: _cancelFn }"
-                        ></ng-template>
-                    </ng-container>
+                    <ng-template #defaultCancelButtonTemplate>
+                        <fdp-button
+                            class="fd-bar__element"
+                            [fdContentDensity]="_navigationButtonLabels.cancel.contentDensity"
+                            [buttonType]="_navigationButtonLabels.cancel.type"
+                            [label]="_navigationButtonLabels.cancel.label"
+                            (click)="cancel()"
+                        ></fdp-button>
+                    </ng-template>
+                    <ng-template
+                        [ngTemplateOutlet]="cancelButtonTemplate || defaultCancelButtonTemplate"
+                        [ngTemplateOutletContext]="{ cancel: _cancelFn }"
+                    ></ng-template>
                 </div>
             </div>
         }

@@ -25,16 +25,12 @@
                                     {{ item.label }}
                                 </fd-quick-view-group-item-label>
                                 <fd-quick-view-group-item-content>
-                                    @switch (item.label) {
-                                        @case (item.label === 'Mobile' || item.label === 'Phone' ? item.label : '') {
-                                            <a [href]="'tel:' + item.value" fd-link>{{ item.value }}</a>
-                                        }
-                                        @case ('Email') {
-                                            <a [href]="'mailto:' + item.value" fd-link>{{ item.value }}</a>
-                                        }
-                                        @default {
-                                            <div>{{ item.value }}</div>
-                                        }
+                                    @if (item.label === 'Mobile' || item.label === 'Phone' ? item.label : '') {
+                                        <a [href]="'tel:' + item.value" fd-link>{{ item.value }}</a>
+                                    } @else if (item.label === 'Email') {
+                                        <a [href]="'mailto:' + item.value" fd-link>{{ item.value }}</a>
+                                    } @else {
+                                        <div>{{ item.value }}</div>
                                     }
                                 </fd-quick-view-group-item-content>
                             </fd-quick-view-group-item>

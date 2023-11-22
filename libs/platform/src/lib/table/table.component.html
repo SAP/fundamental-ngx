@@ -188,27 +188,24 @@
                         <tr fd-table-row>
                             <td fd-table-cell class="fd-table__cell--no-data" [attr.colspan]="_tableColumnsLength">
                                 <div class="fdp-table__empty-table-message">
-                                    <ng-container>
-                                        <div #noDataWrapper>
-                                            <ng-content select="fdp-table-no-data-wrapper"></ng-content>
+                                    <div #noDataWrapper>
+                                        <ng-content select="fdp-table-no-data-wrapper"></ng-content>
+                                    </div>
+                                    @if (!noDataWrapper.hasChildNodes() && _tableService.visibleColumnsLength > 0) {
+                                        <div>
+                                            {{
+                                                emptyTableMessage || ('platformTable.defaultEmptyMessage' | fdTranslate)
+                                            }}
                                         </div>
-                                        @if (!noDataWrapper.hasChildNodes() && _tableService.visibleColumnsLength > 0) {
-                                            <div>
-                                                {{
-                                                    emptyTableMessage ||
-                                                        ('platformTable.defaultEmptyMessage' | fdTranslate)
-                                                }}
-                                            </div>
-                                        }
-                                        @if (_tableService.visibleColumnsLength === 0) {
-                                            <div>
-                                                {{
-                                                    noVisibleColumnsMessage ||
-                                                        ('platformTable.noVisibleColumnsMessage' | fdTranslate)
-                                                }}
-                                            </div>
-                                        }
-                                    </ng-container>
+                                    }
+                                    @if (_tableService.visibleColumnsLength === 0) {
+                                        <div>
+                                            {{
+                                                noVisibleColumnsMessage ||
+                                                    ('platformTable.noVisibleColumnsMessage' | fdTranslate)
+                                            }}
+                                        </div>
+                                    }
                                 </div>
                             </td>
                         </tr>

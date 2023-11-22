@@ -32,7 +32,7 @@ import { uniqBy } from 'lodash-es';
 import { BehaviorSubject, Observable, Subject, Subscription, combineLatest, filter, tap } from 'rxjs';
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, CommonModule, NgTemplateOutlet } from '@angular/common';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormItemComponent, FormLabelComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -96,6 +96,7 @@ const formGroupChildProvider: Provider = {
     providers: [formFieldProvider, formGroupChildProvider, FormFieldLayoutService],
     standalone: true,
     imports: [
+        CommonModule,
         FormItemComponent,
         NgTemplateOutlet,
         InputMessageGroupWithTemplate,

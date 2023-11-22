@@ -1,12 +1,10 @@
 <h3>Drag and drop</h3>
 <ul fd-list fd-dnd-list [(items)]="values">
-    <ng-container>
-        @for (value of values; track $index) {
-            <li fd-list-item fd-dnd-item>
-                <span fd-list-title> List item {{ value }} </span>
-            </li>
-        }
-    </ng-container>
+    @for (value of values; track $index) {
+        <li fd-list-item fd-dnd-item>
+            <span fd-list-title> List item {{ value }} </span>
+        </li>
+    }
 </ul>
 <h3>Drag and drop with replacement indicator</h3>
 <ul fd-list fd-dnd-list dropMode="group" [(items)]="secondValues">

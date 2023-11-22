@@ -2,7 +2,6 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { QuickViewGroupItemContentComponent } from '../quick-view-group-item-content/quick-view-group-item-content.component';
 import { QuickViewGroupItemLabelComponent } from '../quick-view-group-item-label/quick-view-group-item-label.component';
@@ -16,62 +15,54 @@ import { QuickViewComponent } from './quick-view.component';
 
 @Component({
     template: `
-<fd-quick-view #quickViewRef [id]="data.id">
-  <fd-quick-view-subheader>
-    <fd-avatar [image]="data.subHeader.avatar" size="s"></fd-avatar>
-    <fd-quick-view-subheader-title>
-      {{ data.subHeader.title }}
-    </fd-quick-view-subheader-title>
-    <fd-quick-view-subheader-subtitle>
-      {{ data.subHeader.subtitle }}
-    </fd-quick-view-subheader-subtitle>
-  </fd-quick-view-subheader>
-  @for (group of data.groups; track group) {
-    <fd-quick-view-group>
-      <fd-quick-view-group-title>
-        {{ group.title }}
-      </fd-quick-view-group-title>
-      @for (item of group.items; track item) {
-        <fd-quick-view-group-item>
-          <fd-quick-view-group-item-label>
-            {{ item.label }}
-          </fd-quick-view-group-item-label>
-          <fd-quick-view-group-item-content>
-            @switch (item.label) {
-              @case (item.label === 'Mobile' || item.label === 'Phone' ? item.label : '') {
-                <a
-                  [href]="'tel:' + item.value"
-                  fd-link
-                  >{{ item.value }}</a
-                  >
-                }
-                @case ('Email') {
-                  <a [href]="'mailto:' + item.value" fd-link>{{ item.value }}</a>
-                }
-                @default {
-                  <div>{{ item.value }}</div>
-                }
-              }
-            </fd-quick-view-group-item-content>
-          </fd-quick-view-group-item>
-        }
-      </fd-quick-view-group>
-    }
-  </fd-quick-view>
-  `,
+        <fd-quick-view #quickViewRef [id]="data.id">
+            <fd-quick-view-subheader>
+                <fd-avatar [image]="data.subHeader.avatar" size="s"></fd-avatar>
+                <fd-quick-view-subheader-title>
+                    {{ data.subHeader.title }}
+                </fd-quick-view-subheader-title>
+                <fd-quick-view-subheader-subtitle>
+                    {{ data.subHeader.subtitle }}
+                </fd-quick-view-subheader-subtitle>
+            </fd-quick-view-subheader>
+            @for (group of data.groups; track group) {
+                <fd-quick-view-group>
+                    <fd-quick-view-group-title>
+                        {{ group.title }}
+                    </fd-quick-view-group-title>
+                    @for (item of group.items; track item) {
+                        <fd-quick-view-group-item>
+                            <fd-quick-view-group-item-label>
+                                {{ item.label }}
+                            </fd-quick-view-group-item-label>
+                            <fd-quick-view-group-item-content>
+                                @if (item.label === 'Mobile' || item.label === 'Phone' ? item.label : '') {
+                                    <a [href]="'tel:' + item.value" fd-link>{{ item.value }}</a>
+                                } @else if (item.label === 'Email') {
+                                    <a [href]="'mailto:' + item.value" fd-link>{{ item.value }}</a>
+                                } @else {
+                                    <div>{{ item.value }}</div>
+                                }
+                            </fd-quick-view-group-item-content>
+                        </fd-quick-view-group-item>
+                    }
+                </fd-quick-view-group>
+            }
+        </fd-quick-view>
+    `,
     standalone: true,
     imports: [
-    QuickViewComponent,
-    QuickViewSubheaderComponent,
-    QuickViewSubheaderTitleComponent,
-    QuickViewSubheaderSubtitleComponent,
-    QuickViewGroupComponent,
-    QuickViewGroupTitleComponent,
-    QuickViewGroupItemComponent,
-    QuickViewGroupItemContentComponent,
-    QuickViewGroupItemLabelComponent,
-    AvatarComponent
-]
+        QuickViewComponent,
+        QuickViewSubheaderComponent,
+        QuickViewSubheaderTitleComponent,
+        QuickViewSubheaderSubtitleComponent,
+        QuickViewGroupComponent,
+        QuickViewGroupTitleComponent,
+        QuickViewGroupItemComponent,
+        QuickViewGroupItemContentComponent,
+        QuickViewGroupItemLabelComponent,
+        AvatarComponent
+    ]
 })
 class TestComponent {
     @ViewChild('quickViewRef', { read: ElementRef })
