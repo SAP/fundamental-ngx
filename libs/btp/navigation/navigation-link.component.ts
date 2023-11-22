@@ -44,7 +44,7 @@ import { FdbNavigationListItemComponent } from './navigation-list-item-component
                 ></span>
             }
         </ng-template>
-        <ng-container *ngTemplateOutlet="textRenderer" />
+        <ng-template [ngTemplateOutlet]="textRenderer" />
         <span
             class="fd-navigation__selection-indicator"
             role="presentation"

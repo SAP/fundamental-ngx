@@ -31,7 +31,7 @@
         </span>
     } @else {
         <ng-template
-            [ngTemplateOutlet]="_customRenderer!"
+            [ngTemplateOutlet]="_customRenderer"
             [ngTemplateOutletContext]="{ $implicit: term, inputText: inputText }"
         ></ng-template>
     }

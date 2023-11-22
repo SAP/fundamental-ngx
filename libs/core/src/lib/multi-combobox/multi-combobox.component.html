@@ -7,7 +7,7 @@
             (isOpenChange)="_popoverOpenChangeHandle($event)"
             [isOpen]="isOpen"
             [triggers]="[]"
-            [disabled]="this._cva.disabled"
+            [disabled]="_cva.disabled"
             [fillControlMode]="fillControlMode"
         >
             <fd-popover-control>
@@ -24,17 +24,17 @@
     <fd-form-input-message-group>
         <fd-input-group
             #inputGroup
-            [id]="this._cva.id + '-input-group-container'"
-            [state]="this._cva.state"
+            [id]="_cva.id + '-input-group-container'"
+            [state]="_cva.state"
             [buttonFocusable]="buttonFocusable"
-            [button]="!this._cva.readonly"
-            [glyph]="!this._cva.readonly ? 'navigation-down-arrow' : ' '"
+            [button]="!_cva.readonly"
+            [glyph]="!_cva.readonly ? 'navigation-down-arrow' : ' '"
             [isControl]="true"
-            [disabled]="this._cva.disabled || this._cva.readonly"
+            [disabled]="_cva.disabled || _cva.readonly"
             [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
-            [attr.aria-disabled]="this._cva.disabled || this._cva.readonly"
-            [attr.aria-readonly]="this._cva.readonly"
-            [glyphAriaLabel]="this._cva.ariaLabel || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)"
+            [attr.aria-disabled]="_cva.disabled || _cva.readonly"
+            [attr.aria-readonly]="_cva.readonly"
+            [glyphAriaLabel]="_cva.ariaLabel || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)"
             [iconTitle]="addonIconTitle || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)"
             (addOnButtonClicked)="_addOnClicked($event)"
             (click)="mobile && !isOpen && _onPrimaryButtonClick(false)"
@@ -51,7 +51,7 @@
                     [multiAnnouncerOptions]="_suggestions"
                 >
                     @for (token of _selectedSuggestions; track token) {
-                        <fd-token [readOnly]="this._cva.disabled" (onCloseClick)="_removeToken(token, $event)">
+                        <fd-token [readOnly]="_cva.disabled" (onCloseClick)="_removeToken(token, $event)">
                             {{ token.label }}
                         </fd-token>
                     }
@@ -65,49 +65,49 @@
                         role="combobox"
                         autocomplete="off"
                         [ariaLabel]="'coreMultiComboBox.multiComboBoxAriaLabel' | fdTranslate"
-                        [attr.aria-labelledby]="this._cva.ariaLabelledBy"
+                        [attr.aria-labelledby]="_cva.ariaLabelledBy"
                         [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
-                        [attr.aria-owns]="autoComplete && !mobile ? this._cva.id + '-result' : null"
+                        [attr.aria-owns]="autoComplete && !mobile ? _cva.id + '-result' : null"
                         [attr.aria-haspopup]="autoComplete && !mobile"
                         fd-form-control
                         fd-input-group-input
                         tabindex="0"
-                        [id]="this._cva.id"
-                        [name]="this._cva.name"
+                        [id]="_cva.id"
+                        [name]="_cva.name"
                         (keydown)="_onInputKeydownHandler($event)"
-                        [disabled]="this._cva.disabled"
+                        [disabled]="_cva.disabled"
                         [(ngModel)]="inputText"
                         (ngModelChange)="_searchTermChanged()"
-                        [placeholder]="this._cva.placeholder"
-                        (focus)="this._cva.onTouched(); tokenizer._showAllTokens()"
+                        [placeholder]="_cva.placeholder"
+                        (focus)="_cva.onTouched(); tokenizer._showAllTokens()"
                         (blur)="!mobile && _onBlur($event); tokenizer._hideTokens()"
                         [attr.aria-expanded]="isOpen"
-                        [readonly]="this._cva.readonly"
-                        [attr.aria-readonly]="this._cva.readonly"
-                        [attr.aria-required]="this._cva.required"
+                        [readonly]="_cva.readonly"
+                        [attr.aria-readonly]="_cva.readonly"
+                        [attr.aria-required]="_cva.required"
                         [displayFn]="_displayFn"
                         class="fd-tokenizer__input"
                     />
                 </fd-tokenizer>
             }
         </fd-input-group>
-        @if (mobile && isOpen ? false : !!this._cva.stateMessage) {
-            <fd-form-message [type]="this._cva.state" [innerHtml]="this._cva.stateMessage"></fd-form-message>
+        @if (mobile && isOpen ? false : !!_cva.stateMessage) {
+            <fd-form-message [type]="_cva.state" [innerHtml]="_cva.stateMessage"></fd-form-message>
         }
     </fd-form-input-message-group>
 </ng-template>
 <ng-template #mobileControlTemplate>
     <fd-input-group
-        [id]="this._cva.id + '-input-group-container'"
+        [id]="_cva.id + '-input-group-container'"
         class="fd-multi-combobox-input-group-custom"
-        [state]="this._cva.state"
+        [state]="_cva.state"
         [buttonFocusable]="false"
         [isControl]="true"
-        [disabled]="this._cva.disabled || this._cva.readonly"
+        [disabled]="_cva.disabled || _cva.readonly"
         [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
-        [attr.aria-disabled]="this._cva.disabled || this._cva.readonly"
-        [attr.aria-readonly]="this._cva.readonly"
-        [glyphAriaLabel]="this._cva.ariaLabel"
+        [attr.aria-disabled]="_cva.disabled || _cva.readonly"
+        [attr.aria-readonly]="_cva.readonly"
+        [glyphAriaLabel]="_cva.ariaLabel"
     >
         <input
             fdkAutoComplete
@@ -118,25 +118,25 @@
             role="combobox"
             autocomplete="off"
             [ariaLabel]="'coreMultiComboBox.multiComboBoxAriaLabel' | fdTranslate"
-            [attr.aria-labelledby]="this._cva.ariaLabelledBy"
+            [attr.aria-labelledby]="_cva.ariaLabelledBy"
             [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
-            [attr.aria-owns]="autoComplete && !mobile ? this._cva.id + '-result' : null"
+            [attr.aria-owns]="autoComplete && !mobile ? _cva.id + '-result' : null"
             [attr.aria-haspopup]="autoComplete && !mobile"
             fd-form-control
             fd-input-group-input
             tabindex="0"
-            [id]="this._cva.id"
-            [name]="this._cva.name"
+            [id]="_cva.id"
+            [name]="_cva.name"
             (keydown)="_onInputKeydownHandler($event)"
-            [disabled]="this._cva.disabled"
+            [disabled]="_cva.disabled"
             [(ngModel)]="inputText"
             (ngModelChange)="_searchTermChanged()"
-            [placeholder]="this._cva.placeholder"
-            (focus)="this._cva.onTouched()"
+            [placeholder]="_cva.placeholder"
+            (focus)="_cva.onTouched()"
             (blur)="!mobile && _onBlur($event)"
             [attr.aria-expanded]="isOpen"
-            [readonly]="this._cva.readonly"
-            [attr.aria-readonly]="this._cva.readonly"
+            [readonly]="_cva.readonly"
+            [attr.aria-readonly]="_cva.readonly"
             [displayFn]="_displayFn"
         />
     </fd-input-group>
@@ -147,18 +147,18 @@
         (focusEscapeList)="_handleListFocusEscape($event)"
         [dropdownMode]="true"
         class="fd-multi-combobox__list fd-list--multi-input"
-        [id]="this._cva.id + '-result'"
+        [id]="_cva.id + '-result'"
         role="listbox"
         [style.max-height]="!mobile && maxHeight"
         [style.min-width.px]="!mobile && minWidth"
         [style.max-width.px]="autoResize && maxWidth"
-        [attr.aria-labelledby]="this._cva.id + '-search'"
+        [attr.aria-labelledby]="_cva.id + '-search'"
         aria-multiselectable="true"
         (keydown.tab)="close()"
         (keydown.shift.tab)="close()"
     >
-        @if (!!this._cva.stateMessage) {
-            <fd-form-message [type]="this._cva.state" [innerHtml]="this._cva.stateMessage"></fd-form-message>
+        @if (!!_cva.stateMessage) {
+            <fd-form-message [type]="_cva.state" [innerHtml]="_cva.stateMessage"></fd-form-message>
         }
         @if (showSelectAll) {
             <fd-multi-combobox-select-all-toggler

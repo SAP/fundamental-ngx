@@ -22,6 +22,10 @@ import { DialogSize, dialogWidthToSize } from '../utils/dialog-width-to-size';
 import { DialogConfigBase } from './dialog-config-base.class';
 import { DialogRefBase } from './dialog-ref-base.class';
 
+function coerceMetricValue(value: string | number | undefined): string | undefined {
+    return typeof value === 'number' ? `${value}px` : value;
+}
+
 @Directive()
 export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRefBase<T>>
     implements OnInit, AfterViewInit, OnDestroy
@@ -154,10 +158,10 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
     /** @hidden Set dialog window position */
     private _setPosition(): void {
         if (this._config.position) {
-            this.dialogWindow.nativeElement.style.top = this._config.position.top;
-            this.dialogWindow.nativeElement.style.bottom = this._config.position.bottom;
-            this.dialogWindow.nativeElement.style.left = this._config.position.left;
-            this.dialogWindow.nativeElement.style.right = this._config.position.right;
+            this.dialogWindow.nativeElement.style.top = coerceMetricValue(this._config.position.top);
+            this.dialogWindow.nativeElement.style.bottom = coerceMetricValue(this._config.position.bottom);
+            this.dialogWindow.nativeElement.style.left = coerceMetricValue(this._config.position.left);
+            this.dialogWindow.nativeElement.style.right = coerceMetricValue(this._config.position.right);
         } else {
             this.dialogWindow.nativeElement.style.position = 'relative';
         }
@@ -165,12 +169,12 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
 
     /** @hidden Set dialog window width and height */
     private _setWidthHeight(): void {
-        this.dialogWindow.nativeElement.style.width = this._config.width;
-        this.dialogWindow.nativeElement.style.height = this._config.height;
-        this.dialogWindow.nativeElement.style.minWidth = this._config.minWidth;
-        this.dialogWindow.nativeElement.style.minHeight = this._config.minHeight;
-        this.dialogWindow.nativeElement.style.maxWidth = this._config.maxWidth;
-        this.dialogWindow.nativeElement.style.maxHeight = this._config.maxHeight;
+        this.dialogWindow.nativeElement.style.width = coerceMetricValue(this._config.width);
+        this.dialogWindow.nativeElement.style.height = coerceMetricValue(this._config.height);
+        this.dialogWindow.nativeElement.style.minWidth = coerceMetricValue(this._config.minWidth);
+        this.dialogWindow.nativeElement.style.minHeight = coerceMetricValue(this._config.minHeight);
+        this.dialogWindow.nativeElement.style.maxWidth = coerceMetricValue(this._config.maxWidth);
+        this.dialogWindow.nativeElement.style.maxHeight = coerceMetricValue(this._config.maxHeight);
     }
 
     /** @hidden Listen on window resize and adjust padding */

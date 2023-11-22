@@ -22,12 +22,12 @@ import {
     template: `
         @if (!_nestedListButton) {
             <div class="fdx-nested-list__link-container">
-                <ng-container *ngTemplateOutlet="containerContent"></ng-container>
+                <ng-template [ngTemplateOutlet]="containerContent"></ng-template>
             </div>
         }
         @if (_nestedListButton) {
             <a tabindex="0" class="fdx-nested-list__link-container">
-                <ng-container *ngTemplateOutlet="containerContent"></ng-container>
+                <ng-template [ngTemplateOutlet]="containerContent"></ng-template>
             </a>
         }
         <ng-content select="[fdx-nested-list-button]"></ng-content>

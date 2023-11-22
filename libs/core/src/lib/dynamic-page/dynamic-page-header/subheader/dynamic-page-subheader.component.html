@@ -23,11 +23,7 @@
                     [attr.aria-controls]="id"
                     (click)="toggleCollapse()"
                 >
-                    @if (!collapsed) {
-                        <i class="sap-icon--slim-arrow-up"></i>
-                    } @else {
-                        <i class="sap-icon--slim-arrow-down"></i>
-                    }
+                    <i [class.sap-icon--slim-arrow-up]="!collapsed" [class.sap-icon--slim-arrow-down]="collapsed"></i>
                 </button>
                 @if (pinnable && !collapsed) {
                     <button

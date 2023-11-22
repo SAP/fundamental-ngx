@@ -23,12 +23,7 @@
             <ng-template [ngTemplateOutlet]="renderer"></ng-template>
         </div>
     } @else {
-        <ng-content select="[fd-popover-body-header]"></ng-content>
-        <ng-content select="[fd-popover-body-subheader]"></ng-content>
-        <ng-content></ng-content>
-        {{ text }}
-        <ng-template [ngTemplateOutlet]="_templateToDisplay"></ng-template>
-        <ng-content select="[fd-popover-body-footer]"></ng-content>
+        <ng-template [ngTemplateOutlet]="renderer"></ng-template>
     }
     @if (_resizable) {
         <span fdkResizeHandle class="fd-popover__resize-handle"></span>

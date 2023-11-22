@@ -380,7 +380,7 @@ export class FormGroupComponent
     formRows: { [key: number]: FieldColumn | FieldGroup } = {};
 
     /** @hidden */
-    _hintOptions: HintOptions;
+    _hintOptions: Nullable<HintOptions>;
 
     /** @hidden */
     private _useForm = false;

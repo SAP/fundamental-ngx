@@ -15,7 +15,7 @@
         }
     </div>
 } @else {
-    <ng-content></ng-content>
+    <ng-template [ngTemplateOutlet]="projectedContent"></ng-template>
 }
 <ng-template #projectedContent>
     <ng-content></ng-content>

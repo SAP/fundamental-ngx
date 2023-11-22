@@ -3,7 +3,7 @@
         <ng-template [ngTemplateOutlet]="plainRenderer"></ng-template>
     </span>
 } @else {
-    <ng-content></ng-content>
+    <ng-template [ngTemplateOutlet]="plainRenderer"></ng-template>
 }
 <ng-template #plainRenderer>
     <ng-content></ng-content>

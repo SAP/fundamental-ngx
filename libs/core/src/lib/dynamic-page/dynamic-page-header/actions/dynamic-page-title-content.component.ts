@@ -17,13 +17,13 @@ import { DynamicPageResponsiveSize } from '../../constants';
                 [shouldOverflow]="true"
             >
                 <div fd-toolbar-item>
-                    <ng-container *ngTemplateOutlet="templateContentRef"></ng-container>
+                    <ng-template [ngTemplateOutlet]="templateContentRef"></ng-template>
                 </div>
             </fd-toolbar>
         }
         @if (_size !== 'small') {
             <div class="fd-dynamic-page__title-content">
-                <ng-container *ngTemplateOutlet="templateContentRef"></ng-container>
+                <ng-template [ngTemplateOutlet]="templateContentRef"></ng-template>
             </div>
         }
         <ng-template #templateContentRef>
