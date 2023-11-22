@@ -4714,9 +4714,9 @@
   integrity sha512-p86WqZZDuj3WGkf8Ltz+9OoRITkek4uk6GCz5zvbtWKHvEt2+Ib0xIbeD1/KfA5QmWe1G5YCrAtC8K0/CGJJHA==
 
 "@types/jasmine@^3.6.2":
-  version "3.10.17"
-  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-3.10.17.tgz#d82f75a7a89975de67420acb3739ee4fdbaa04b4"
-  integrity sha512-Ed8Vmp9skbdfuLO7QCEC60ZFhDnRlIe3w0xMWrNDLNbMGzrKKcgZYTw7BSFMQP+Qi751UAvPCpr+OM8J6RcVQQ==
+  version "3.10.18"
+  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-3.10.18.tgz#d442369fd2d06d5b2c607fae51c257b2f9caa94e"
+  integrity sha512-jOk52a1Kz+1oU5fNWwAcNe64/GsE7r/Q6ronwDox0D3ETo/cr4ICMQyeXrj7G6FPW1n8YjRoAZA2F0XBr6GicQ==
 
 "@types/jest@29.4.4":
   version "29.4.4"
@@ -4860,9 +4860,9 @@
   integrity sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==
 
 "@types/node@^18.0.0":
-  version "18.18.11"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.18.11.tgz#d43f6b92671eacfdd1fedb7a897388fb8880323f"
-  integrity sha512-c1vku6qnTeujJneYH94/4aq73XrVcsJe35UPyAsSok1ijiKrkRzK+AxQPSpNMUnC03roWBBwJx/9I8V7lQoxmA==
+  version "18.18.12"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.18.12.tgz#0c40e52e5ff2569386b160f6f6bb019ff1361cb4"
+  integrity sha512-G7slVfkwOm7g8VqcEF1/5SXiMjP3Tbt+pXDU3r/qhlM2KkGm786DUD4xyMA2QzEElFrv/KZV9gjygv4LnkpbMQ==
   dependencies:
     undici-types "~5.26.4"
 

@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 const tsConfig = require('../tsconfig.base.json');
 const tsNode = require('ts-node');
+const dns = require('node:dns');
 const tsConfigPaths = require('tsconfig-paths');
 const allureReporter = require('@wdio/allure-reporter').default;
 
@@ -12,6 +13,9 @@ module.exports = ({ runner, specs, projectName }) => {
     projectName = projectName.split(':').join('/');
 
     return {
+        beforeSession: () => {
+            dns.setDefaultResultOrder('ipv4first');
+        },
         runner,
         specs,
         exclude: [],
@@ -84,6 +88,7 @@ module.exports = ({ runner, specs, projectName }) => {
             browser.setWindowSize(1920, 1080);
         },
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         afterTest: async function (test, context, { error, result, duration, passed, retries }) {
             if (error !== undefined) {
                 const html = await browser.getPageSource();
