@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FocusableListModule } from '@fundamental-ngx/cdk';
+import { FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 
@@ -8,7 +8,7 @@ import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
     selector: 'fd-segmented-button-form-example',
     templateUrl: './segmented-button-form-example.component.html',
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, SegmentedButtonModule, ButtonComponent, FocusableListModule]
+    imports: [FormsModule, ReactiveFormsModule, SegmentedButtonModule, ButtonComponent, FocusableItemDirective]
 })
 export class SegmentedButtonFormExampleComponent {
     customForm = new FormGroup({

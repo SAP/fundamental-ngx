@@ -11,9 +11,11 @@ import {
     Host,
     HostListener,
     Input,
+    OnChanges,
     OnDestroy,
     Optional,
     QueryList,
+    SimpleChanges,
     ViewEncapsulation,
     forwardRef
 } from '@angular/core';
@@ -60,7 +62,7 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
     standalone: true,
     hostDirectives: [FocusableListDirective]
 })
-export class SegmentedButtonComponent implements AfterViewInit, ControlValueAccessor, OnDestroy {
+export class SegmentedButtonComponent implements AfterViewInit, ControlValueAccessor, OnDestroy, OnChanges {
     /** Whether segmented button is on toggle mode, which allows to toggle more than 1 button */
     @Input({ transform: coerceBooleanProperty })
     toggle: BooleanInput;
@@ -98,9 +100,11 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         @Optional() private _rtlService: RtlService
     ) {
         this._focusableList.navigationDirection = this.vertical ? 'vertical' : 'horizontal';
-        this._rtlService.rtl.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isRtl: boolean) => {
-            this._focusableList.contentDirection = isRtl ? 'rtl' : 'ltr';
-        });
+        if (this._rtlService) {
+            this._rtlService.rtl.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isRtl: boolean) => {
+                this._focusableList.contentDirection = isRtl ? 'rtl' : 'ltr';
+            });
+        }
     }
 
     /** @hidden */
@@ -120,6 +124,13 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     /** @hidden */
     ngAfterViewInit(): void {
         this._listenToButtonChanges();
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes && changes.vertical) {
+            this._focusableList.navigationDirection = this.vertical ? 'vertical' : 'horizontal';
+        }
     }
 
     /** @hidden */
