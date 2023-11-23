@@ -1,4 +1,4 @@
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { AsyncPipe, NgClass, NgFor, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
@@ -8,7 +8,6 @@ import {
     ElementRef,
     EventEmitter,
     HostBinding,
-    HostListener,
     Input,
     NgZone,
     OnChanges,
@@ -257,18 +256,6 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     }
 
     /** @hidden */
-    @HostListener('keydown.arrowLeft', ['$event'])
-    @HostListener('keydown.arrowRight', ['$event'])
-    private _onArrowKeydown($event: KeyboardEvent): void {
-        if ($event.target === this._elmRef.nativeElement && this.row.isTree) {
-            const shouldBeOpen = KeyUtil.isKeyCode($event, this._rtl ? LEFT_ARROW : RIGHT_ARROW);
-            if (shouldBeOpen !== this.row.expanded) {
-                this._toggleGroupRow();
-            }
-        }
-    }
-
-    /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
         this._fdpTableService.visibleColumns$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((columns) => {
@@ -324,6 +311,14 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     /** @hidden */
     _columnTrackBy(index: number, column: TableColumn): string {
         return column.name;
+    }
+
+    /** @hidden */
+    protected _handleCellSpaceKey(colIdx: number, tableCellElement: HTMLTableCellElement, $event: Event): void {
+        if ($event.target === tableCellElement && isTreeRowFirstCell(colIdx, this.row, $event)) {
+            $event.preventDefault();
+            this._toggleGroupRow();
+        }
     }
 
     /** @hidden */
