@@ -2,6 +2,7 @@ import { DestroyRef, ElementRef, EventEmitter, InjectionToken, QueryList, Signal
 
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { CvaDirective } from '@fundamental-ngx/cdk/forms';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { MobileMode, MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { Observable } from 'rxjs';
 import { OptionsInterface } from './options.interface';
@@ -16,7 +17,8 @@ export interface SelectInterface<ValueType = any> extends MobileMode {
     typeaheadDebounceInterval: number;
     value: ValueType;
     mobileConfig: MobileModeConfig;
-    _cvaDirective: CvaDirective<OptionsInterface<ValueType> | null>;
+    _selectedOption: Nullable<OptionsInterface<ValueType>>;
+    _cvaDirective: CvaDirective<ValueType | undefined>;
     _textDirection: Signal<'ltr' | 'rtl'>;
     _options: QueryList<OptionsInterface<ValueType>>;
     _destroyRef: DestroyRef;

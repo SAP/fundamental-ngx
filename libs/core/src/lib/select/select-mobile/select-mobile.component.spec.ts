@@ -24,11 +24,12 @@ const MOBILE_CONFIG: MobileModeConfig = { title: 'TITLE', hasCloseButton: true }
     `
 })
 class TestWrapperComponent {
-    options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
-    selectedValue: string;
-
     @ViewChild(SelectComponent, { static: true })
     selectComponent: SelectComponent;
+
+    options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
+
+    selectedValue: string;
 
     constructor(@Inject(MOBILE_CONFIG_TEST_TOKEN) public mobileConfig: MobileModeConfig) {}
 }
@@ -139,7 +140,7 @@ describe('SelectComponent in mobile mode', () => {
 
         await whenStable(fixture);
 
-        expect(fixture.componentInstance.selectedValue).toBe(testComponent.selectComponent.selected.value);
+        expect(fixture.componentInstance.selectedValue).toBe(testComponent.selectComponent._selectedOption?.value);
     });
 
     it('should properly render with empty MobileConfig', async () => {
@@ -162,8 +163,8 @@ describe('SelectComponent in mobile mode', () => {
         await setup({ approveButtonText: 'SUBMIT', hasCloseButton: true });
 
         await whenStable(fixture);
-
-        jest.spyOn(testComponent.selectComponent.valueChange, 'emit');
+        const emitListener = jest.fn();
+        testComponent.selectComponent.valueChange.subscribe(emitListener);
         testComponent.selectComponent.open();
 
         await whenStable(fixture);
@@ -172,7 +173,7 @@ describe('SelectComponent in mobile mode', () => {
 
         await whenStable(fixture);
 
-        expect(testComponent.selectComponent.valueChange.emit).not.toHaveBeenCalled();
+        expect(emitListener).not.toHaveBeenCalled();
 
         await whenStable(fixture);
     });

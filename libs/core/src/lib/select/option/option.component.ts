@@ -1,5 +1,5 @@
-import { FocusOrigin, FocusableOption } from '@angular/cdk/a11y';
-import { ENTER, SPACE, hasModifierKey } from '@angular/cdk/keycodes';
+import { FocusableOption, FocusOrigin } from '@angular/cdk/a11y';
+import { ENTER, hasModifierKey, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewChecked,
     AfterViewInit,
@@ -10,6 +10,7 @@ import {
     ElementRef,
     EventEmitter,
     HostBinding,
+    inject,
     Input,
     OnDestroy,
     Output,
@@ -23,27 +24,9 @@ import { ListTitleDirective } from '@fundamental-ngx/core/list';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { startWith } from 'rxjs/operators';
-import { OptionsInterface } from '../options.interface';
+import { FdOptionSelectionChange, OptionsInterface } from '../options.interface';
 
 let optionUniqueId = 0;
-
-/**
- * Event object emitted by OptionComponent when
- * selected or deselected.
- */
-export class FdOptionSelectionChange {
-    /**
-     * Reference to the OptionComponent that emitted the event.
-     * @param source The option that emitted the event.
-     * @param isUserInput Whether the change in the option's value was a result of a user interaction.
-     */
-    constructor(
-        /** Reference to the option that emitted the event. */
-        readonly source: OptionComponent,
-        /** Whether the change in the option's value was a result of a user action. */
-        readonly isUserInput = false
-    ) {}
-}
 
 /**
  * Used to represent an option of the select component.
@@ -85,6 +68,17 @@ export class FdOptionSelectionChange {
 export class OptionComponent<ValueType = any>
     implements AfterViewInit, AfterViewChecked, OnDestroy, FocusableOption, OptionsInterface<ValueType>
 {
+    /** Whether the option is selected. */
+    @HostBinding('class.is-selected')
+    set selected(value: boolean) {
+        this._selected = value;
+    }
+
+    /** Whether the option is selected. */
+    get selected(): boolean {
+        return this._selected;
+    }
+
     /** Option id attribute */
     @Input()
     id = `fd-option-${optionUniqueId++}`;
@@ -103,10 +97,6 @@ export class OptionComponent<ValueType = any>
     @Output()
     readonly selectionChange = new EventEmitter<FdOptionSelectionChange>();
 
-    /** @hidden */
-    @HostBinding('class.is-selected')
-    selected = false;
-
     /** @Hidden */
     @ContentChildren(ListTitleDirective)
     _listTitleDirectives: QueryList<ListTitleDirective> | undefined;
@@ -118,7 +108,7 @@ export class OptionComponent<ValueType = any>
      * The displayed value of the option. It shows the selected option in the select's trigger.
      */
     get viewValue(): string {
-        return (this._elementRef.nativeElement.textContent || '').trim();
+        return (this.elementRef.nativeElement.textContent || '').trim();
     }
 
     /** used in components like autocomplete where focus must remain on the input.*/
@@ -130,13 +120,19 @@ export class OptionComponent<ValueType = any>
     readonly _stateChanges = new Subject<void>();
 
     /** @hidden */
+    elementRef: ElementRef<HTMLElement> = inject(ElementRef);
+
+    /** @hidden */
+    private _selected = false;
+
+    /** @hidden */
     private _mostRecentViewValue = '';
 
     /** @hidden */
     private _active = false;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
     /** @Hidden */
     ngAfterViewInit(): void {
@@ -196,7 +192,7 @@ export class OptionComponent<ValueType = any>
     /** @hidden
      * Focuses the element. */
     focus(_origin?: FocusOrigin, options?: FocusOptions): void {
-        const element = this._elementRef.nativeElement;
+        const element = this.elementRef.nativeElement;
 
         if (typeof element.focus === 'function') {
             element.focus(options);
@@ -210,31 +206,25 @@ export class OptionComponent<ValueType = any>
         return this.viewValue;
     }
 
-    /** @hidden
-     * Returns HTMLElement representation of the component. */
-    _getHtmlElement(): HTMLElement {
-        return this._elementRef.nativeElement as HTMLElement;
-    }
-
     /** Selects the option.
      * * @hidden
      */
-    _select(): void {
+    _select(emitEvent = true): void {
         if (!this.selected) {
             this.selected = true;
             this._changeDetectorRef.markForCheck();
-            this.selectionChange.emit(new FdOptionSelectionChange(this, false));
+            emitEvent && this.selectionChange.emit(new FdOptionSelectionChange(this, false));
         }
     }
 
     /** @hidden
      * Deselects the option.
      */
-    _deselect(): void {
+    _deselect(emitEvent = true): void {
         if (this.selected) {
             this.selected = false;
             this._changeDetectorRef.markForCheck();
-            this.selectionChange.emit(new FdOptionSelectionChange(this, false));
+            emitEvent && this.selectionChange.emit(new FdOptionSelectionChange(this, false));
         }
     }
 

@@ -5,17 +5,17 @@ import {
     DoCheck,
     ElementRef,
     EventEmitter,
-    inject,
     Input,
-    isDevMode,
     OnDestroy,
     OnInit,
     Output,
-    ViewChild
+    ViewChild,
+    inject,
+    isDevMode
 } from '@angular/core';
 import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { filter, Subject, Subscription } from 'rxjs';
+import { Subject, Subscription, filter } from 'rxjs';
 import { isValidControlState } from '../helpers/state';
 import { BaseCVA } from '../models/cva';
 import { FormField, FormFieldControl } from '../models/form-field';
@@ -302,7 +302,6 @@ export class CvaDirective<T = any>
      */
     writeValue(value: T): void {
         this.value = value;
-        this.valueChange.emit(value);
         this.stateChanges.next('writeValue');
         this._markForCheck();
     }
@@ -377,6 +376,7 @@ export class CvaDirective<T = any>
         if (value !== this.value) {
             this.writeValue(value);
             if (emitOnChange) {
+                this.valueChange.emit(value);
                 this.onChange(value);
             }
             this._markForCheck();

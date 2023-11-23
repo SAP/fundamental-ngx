@@ -10,12 +10,12 @@ import { OptionComponent } from './option/option.component';
 import { SelectKeyManagerService } from './select-key-manager.service';
 import { SelectComponent } from './select.component';
 import { SelectModule } from './select.module';
+import { whenStable } from "@fundamental-ngx/core/tests";
 
 @Component({
     template: `
         <fd-select
             [(value)]="value"
-            formControlName="selectControl"
             (isOpenChange)="onOpen($event)"
             [fdCompact]="compact"
         >
@@ -65,12 +65,6 @@ class TestFilteringWrapperComponent {
     selectElement: ElementRef;
 
     value: string;
-
-    overlayOpened: boolean;
-
-    onOpen(isOpen: boolean): void {
-        this.overlayOpened = isOpen;
-    }
 }
 
 type CarType = { id: string; name: string };
@@ -139,18 +133,13 @@ describe('SelectComponent', () => {
         fixture = TestBed.createComponent(TestWrapperComponent);
         component = fixture.componentInstance.selectComponent;
         element = fixture.componentInstance.selectElement;
-        _keyService = component._getKeyService();
+        _keyService = component._keyManagerService;
         fixture.detectChanges();
         triggerControl = element.nativeElement.querySelector('.fd-button');
     });
 
-    async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
-        componentFixture.detectChanges();
-        await componentFixture.whenStable();
-    }
-
     describe('basic behavior', () => {
-        it('should create so that componennt instance is non null', () => {
+        it('should create so that component instance is non null', () => {
             expect(component).toBeTruthy();
         });
 
@@ -169,7 +158,7 @@ describe('SelectComponent', () => {
 
         it('should open options panel when we click on the trigger control.', async () => {
             triggerControl.click();
-            await wait(fixture);
+            await whenStable(fixture);
 
             expect(fixture.componentInstance.overlayOpened).toBeTruthy();
             expect(component._isOpen).toBeTruthy();
@@ -177,7 +166,7 @@ describe('SelectComponent', () => {
 
         it('should close options panel when we click on the trigger control while select is open', async () => {
             triggerControl.click();
-            await wait(fixture);
+            await whenStable(fixture);
 
             expect(fixture.componentInstance.overlayOpened).toBeTruthy();
             expect(component._isOpen).toBeTruthy();
@@ -188,11 +177,11 @@ describe('SelectComponent', () => {
 
         it('should close options panel when we select first optionItem', async () => {
             triggerControl.click();
-            await wait(fixture);
+            await whenStable(fixture);
 
             const option1 = document.querySelector('.cdk-overlay-container #option-1') as HTMLElement;
             option1.click();
-            await wait(fixture);
+            await whenStable(fixture);
 
             expect(fixture.componentInstance.overlayOpened).toBeFalsy();
             expect(component._isOpen).toBeFalsy();
@@ -201,12 +190,12 @@ describe('SelectComponent', () => {
         it('should close options panel when we click outside of the overlay and trigger', async () => {
             component.open();
 
-            await wait(fixture);
+            await whenStable(fixture);
             expect(fixture.componentInstance.overlayOpened).toBeTruthy();
             expect(component._isOpen).toBeTruthy();
 
             (document.querySelector('.fd-button') as HTMLElement).click();
-            await wait(fixture);
+            await whenStable(fixture);
 
             expect(fixture.componentInstance.overlayOpened).toBeFalsy();
             expect(component._isOpen).toBeFalsy();
@@ -216,49 +205,49 @@ describe('SelectComponent', () => {
     describe('option items selection process', () => {
         it('should select 2nd option when item is clicked so that select value is "value-2" ', async () => {
             component.open();
-            await wait(fixture);
+            await whenStable(fixture);
 
             const options: NodeListOf<HTMLElement> = document.querySelectorAll(
                 '.cdk-overlay-container .fd-list .fd-list__item '
             );
             options[1].click();
 
-            await wait(fixture);
+            await whenStable(fixture);
 
-            expect(component.selected.value).toBe('value-2');
+            expect(component._selectedOption?.value).toBe('value-2');
             expect(_keyService._keyManager.activeItem?.value).toBe('value-2');
         });
 
         it('should initialize select with option value-3 active when [value] binding is set ', async () => {
             component.value = 'value-3';
-            await wait(fixture);
+            await whenStable(fixture);
 
-            expect(component.selected.value).toBe('value-3');
+            expect(component._selectedOption?.value).toBe('value-3');
             expect(_keyService._keyManager.activeItem?.value).toBe('value-3');
         });
 
         it('should reset to NULL when initialized with non-existing value that is not part of original list', async () => {
             component.value = 'value-3aaa';
-            await wait(fixture);
+            await whenStable(fixture);
 
-            expect(component.selected).toBeUndefined();
+            expect(component._selectedOption).toBeUndefined();
             expect(_keyService._keyManager.activeItemIndex).toBe(-1);
         });
 
         it('should be able to change initially selected value after selected is initialized', async () => {
             const testValue = 'value-1';
             fixture.componentInstance.value = testValue;
-            await wait(fixture);
+            await whenStable(fixture);
 
-            expect(component.selected).toBeTruthy();
-            expect(component.selected.value).toBe(testValue);
+            expect(component._selectedOption).toBeTruthy();
+            expect(component._selectedOption?.value).toBe(testValue);
             expect(_keyService._keyManager.activeItem?.value).toBe(testValue);
 
             fixture.componentInstance.value = 'value-2';
-            await wait(fixture);
+            await whenStable(fixture);
 
-            expect(component.selected).toBeTruthy();
-            expect(component.selected.value).toBe('value-2');
+            expect(component._selectedOption).toBeTruthy();
+            expect(component._selectedOption?.value).toBe('value-2');
             expect(_keyService._keyManager.activeItem?.value).toBe('value-2');
         });
 
@@ -266,18 +255,18 @@ describe('SelectComponent', () => {
             const testValue = 'value-1';
             fixture.componentInstance.value = testValue;
             fixture.componentInstance.disabled = true;
-            await wait(fixture);
-            expect(component.selected).toBeTruthy();
-            expect(component.selected.value).toBe(testValue);
+            await whenStable(fixture);
+            expect(component._selectedOption).toBeTruthy();
+            expect(component._selectedOption?.value).toBe(testValue);
             expect(_keyService._keyManager.activeItem?.value).toBe(testValue);
 
             const optionComponent = component._options.toArray()[2];
-            optionComponent._getHtmlElement().click();
+            optionComponent.elementRef.nativeElement.click();
 
-            await wait(fixture);
+            await whenStable(fixture);
 
-            expect(component.selected).toBeTruthy();
-            expect(component.selected.value).toBe('value-3');
+            expect(component._selectedOption).toBeTruthy();
+            expect(component._selectedOption?.value).toBe('value-3');
             expect(_keyService._keyManager.activeItem?.value).toBe('value-3');
         });
     });
@@ -288,22 +277,22 @@ describe('SelectComponent', () => {
 
             jest.spyOn(component, 'focus');
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', TAB));
-            await wait(fixture);
+            await whenStable(fixture);
             expect(component.focus).toHaveBeenCalled();
         });
 
         it('should navigate to second item, when pressing ArrowDown and FirstItem is focused', async () => {
             component.value = 'value-1';
-            await wait(fixture);
+            await whenStable(fixture);
 
             triggerControl.click();
-            await wait(fixture);
+            await whenStable(fixture);
 
             expect(fixture.componentInstance.overlayOpened).toBeTruthy();
             expect(_keyService._keyManager.activeItemIndex).toBe(0);
 
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', DOWN_ARROW));
-            await wait(fixture);
+            await whenStable(fixture);
 
             expect(_keyService._keyManager.activeItemIndex).toBe(1);
             expect(_keyService._keyManager.activeItem?.active).toBeTruthy();
@@ -311,61 +300,61 @@ describe('SelectComponent', () => {
 
         it('should navigate to the end of the list when pressing END', async () => {
             component.value = 'value-1';
-            await wait(fixture);
+            await whenStable(fixture);
 
             triggerControl.click();
-            await wait(fixture);
+            await whenStable(fixture);
 
             expect(fixture.componentInstance.overlayOpened).toBeTruthy();
             expect(_keyService._keyManager.activeItemIndex).toBe(0);
 
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', END));
-            await wait(fixture);
+            await whenStable(fixture);
 
             expect(_keyService._keyManager.activeItemIndex).toBe(3);
         });
 
         it('should navigate to the top of the list when pressing HOME', async () => {
             component.value = 'value-3';
-            await wait(fixture);
+            await whenStable(fixture);
 
             triggerControl.click();
-            await wait(fixture);
+            await whenStable(fixture);
 
             expect(fixture.componentInstance.overlayOpened).toBeTruthy();
             expect(_keyService._keyManager.activeItemIndex).toBe(2);
 
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', HOME));
-            await wait(fixture);
+            await whenStable(fixture);
 
             expect(_keyService._keyManager.activeItemIndex).toBe(0);
         });
 
         it('should select the item and close option panel when pressing ENTER', async () => {
             component.value = 'value-1';
-            await wait(fixture);
+            await whenStable(fixture);
 
             triggerControl.click();
-            await wait(fixture);
+            await whenStable(fixture);
 
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', DOWN_ARROW));
-            await wait(fixture);
+            await whenStable(fixture);
 
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', ENTER));
-            await wait(fixture);
+            await whenStable(fixture);
 
             expect(component.value).toBe('value-2');
         });
 
         it('should select the item and close option panel when pressing SPACE', async () => {
             component.value = 'value-1';
-            await wait(fixture);
+            await whenStable(fixture);
 
             triggerControl.click();
-            await wait(fixture);
+            await whenStable(fixture);
 
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', DOWN_ARROW));
-            await wait(fixture);
+            await whenStable(fixture);
 
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', SPACE));
 
@@ -374,17 +363,17 @@ describe('SelectComponent', () => {
 
         it('should open option panel when pressing ENTER and having focus on the select trigger', async () => {
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', ENTER));
-            await wait(fixture);
+            await whenStable(fixture);
 
             expect(component._isOpen).toBeTruthy();
         });
 
         it('should close opened option panel when pressing ESC', async () => {
             triggerControl.click();
-            await wait(fixture);
+            await whenStable(fixture);
 
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', ESCAPE));
-            await wait(fixture);
+            await whenStable(fixture);
 
             expect(component._isOpen).toBe(false);
         });
@@ -396,15 +385,15 @@ describe('SelectComponent', () => {
                 component.value = 'value-2';
                 fixture.componentInstance.disabled = true;
 
-                await wait(fixture);
+                await whenStable(fixture);
                 triggerControl.click();
-                await wait(fixture);
+                await whenStable(fixture);
 
                 triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', DOWN_ARROW));
-                await wait(fixture);
+                await whenStable(fixture);
 
                 triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', ENTER));
-                await wait(fixture);
+                await whenStable(fixture);
 
                 expect(component.value).toBe('value-3');
             }
@@ -450,19 +439,16 @@ describe('SelectComponent', () => {
         beforeEach(() => {
             fixtureCompare = TestBed.createComponent(ValueCompareWithSelectComponent);
             instance = fixtureCompare.componentInstance;
-            fixtureCompare.detectChanges();
         });
 
         describe('compare by value', () => {
-            beforeEach(fakeAsync(() => {
+            beforeEach(async () => {
                 instance.useCompareByValue();
-                fixtureCompare.detectChanges();
-            }));
+                await whenStable(fixtureCompare);
+            });
 
-            it('should have a selection', async () => {
-                await wait(fixtureCompare);
-
-                const selectedOption = instance.selectComponent.selected as OptionComponent;
+            it('should have a selection', () => {
+                const selectedOption = instance.selectComponent._selectedOption as OptionComponent;
                 expect(selectedOption.value.id).toEqual('1');
                 expect(selectedOption.value.name).toEqual('Hatchback');
             });
@@ -470,9 +456,9 @@ describe('SelectComponent', () => {
             it('should update when making a new selection', async () => {
                 instance.options.last._selectViaInteraction();
 
-                await wait(fixtureCompare);
+                await whenStable(fixtureCompare);
 
-                const selectedOption = instance.selectComponent.selected as OptionComponent;
+                const selectedOption = instance.selectComponent._selectedOption as OptionComponent;
                 expect(instance.selectedCarType.id).toEqual('3');
                 expect(instance.selectedCarType.name).toEqual('Coupe');
                 expect(selectedOption.value.id).toEqual('3');
@@ -481,23 +467,23 @@ describe('SelectComponent', () => {
         });
 
         describe('compare by reference', () => {
-            beforeEach(fakeAsync(() => {
+            beforeEach(async () => {
                 instance.useCompareByReference();
-                fixtureCompare.detectChanges();
-            }));
+                await whenStable(fixtureCompare);
+            });
 
             it('should initialize with no selection despite having a value', fakeAsync(() => {
                 expect(instance.selectedCarType.id).toBe('1');
-                expect(instance.selectComponent.selected).toBeUndefined();
+                expect(instance.selectComponent._selectedOption).toBeUndefined();
             }));
 
             it('should not update the selection if value is copied on change', async () => {
                 instance.options.first._selectViaInteraction();
 
-                await wait(fixtureCompare);
+                await whenStable(fixtureCompare);
 
                 expect(instance.selectedCarType.id).toEqual('1');
-                expect(instance.selectComponent.selected).toBeUndefined();
+                expect(instance.selectComponent._selectedOption).toBeUndefined();
             });
         });
 

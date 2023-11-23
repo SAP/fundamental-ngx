@@ -42,17 +42,17 @@ describe('OptionComponent', () => {
 
     it('should make HTML Element available', () => {
         fixture.detectChanges();
-        expect(component._getHtmlElement()).toBeTruthy();
+        expect(component.elementRef.nativeElement).toBeTruthy();
     });
 
     it('should be focusable', () => {
         fixture.detectChanges();
         component.focus();
-        expect(document.activeElement).toBe(component._getHtmlElement());
+        expect(document.activeElement).toBe(component.elementRef.nativeElement);
     });
 
     it('should be selectable by click', () => {
-        component._getHtmlElement().click();
+        component.elementRef.nativeElement.click();
 
         expect(component.selected).toBe(true);
         expect(setSelectedSpy).toHaveBeenCalled();
@@ -60,8 +60,8 @@ describe('OptionComponent', () => {
     });
 
     it('should be selectable by keyboard', () => {
-        component._getHtmlElement().dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
-        component._getHtmlElement().dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
+        component.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+        component.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
 
         expect(component.selected).toBe(true);
         expect(setSelectedSpy).toHaveBeenCalled();
@@ -73,11 +73,11 @@ describe('OptionComponent', () => {
         component.disabled = true;
         fixture.detectChanges();
 
-        component._getHtmlElement().dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+        component.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
         fixture.detectChanges();
-        component._getHtmlElement().dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
+        component.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
         fixture.detectChanges();
-        component._getHtmlElement().click();
+        component.elementRef.nativeElement.click();
         fixture.detectChanges();
 
         expect(keyHandlerSpy).toHaveBeenCalledTimes(2);

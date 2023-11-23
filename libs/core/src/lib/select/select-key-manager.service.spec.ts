@@ -1,4 +1,4 @@
-import { ViewChild, Component, ElementRef } from '@angular/core';
+import { ViewChild, Component, ElementRef, inject } from '@angular/core';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 
 import { SelectKeyManagerService } from './select-key-manager.service';
@@ -27,11 +27,13 @@ class SelectTestComponent {
 
     isOpen: boolean;
 
+    disabled = false;
+
+    keyService = inject(SelectKeyManagerService);
+
     onOpen(isOpen: boolean): void {
         this.isOpen = isOpen;
     }
-
-    constructor(public keyService: SelectKeyManagerService) {}
 }
 
 describe('SelectKeyManagerService', () => {
@@ -53,14 +55,14 @@ describe('SelectKeyManagerService', () => {
         fixture = TestBed.createComponent(SelectTestComponent);
         _component = fixture.componentInstance;
         fixture.detectChanges();
-        service = _component.selectComponent._getKeyService();
+        service = _component.selectComponent._keyManagerService;
     });
 
     it('should be created', () => {
         expect(service).toBeDefined();
     });
 
-    it('should intialize the key manager', () => {
+    it('should initialize the key manager', () => {
         service._initKeyManager();
         fixture.detectChanges();
         expect(service._keyManager).not.toBeUndefined();

@@ -14,7 +14,7 @@
         [fillControlMode]="fillControlMode"
         [maxWidth]="600"
         [closeOnOutsideClick]="closeOnOutsideClick"
-        (isOpenChange)="_popoverOpenChangeHandle($event)"
+        (isOpenChange)="$event ? open() : close()"
     >
         <fd-popover-control>
             <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
@@ -57,7 +57,7 @@
         <div role="listitem" class="fd-select__text-content" [attr.aria-label]="triggerValue">
             <ng-container
                 [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
-                [ngTemplateOutletContext]="{ $implicit: triggerValue, selected: _cvaDirective.value }"
+                [ngTemplateOutletContext]="{ $implicit: triggerValue, selected: _selectedOption }"
             >
             </ng-container>
 
@@ -89,7 +89,7 @@
             !!_cvaDirective.stateMessage || (!!advancedStateMessage?.hasErrors && !!advancedStateMessage?.template)
         "
         [attr.id]="_cvaDirective.id + '-list-box'"
-        [style.max-height]="maxHeight || calculatedMaxHeight + 'px'"
+        [style.max-height]="maxHeight || _calculatedMaxHeight + 'px'"
         [attr.tooltip]="triggerValue"
     >
         <li

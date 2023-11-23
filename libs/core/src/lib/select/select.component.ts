@@ -16,8 +16,8 @@ import {
     Input,
     OnChanges,
     OnInit,
-    Optional,
     Output,
+    PLATFORM_ID,
     QueryList,
     Signal,
     SimpleChanges,
@@ -29,7 +29,7 @@ import {
     isDevMode,
     signal
 } from '@angular/core';
-import { BehaviorSubject, Observable, defer, filter, map, merge } from 'rxjs';
+import { Observable, ReplaySubject, defer, distinctUntilChanged, filter, map, merge } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 import { DynamicComponentService, KeyUtil, ModuleDeprecation, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -38,7 +38,7 @@ import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 import { ENTER, ESCAPE, SPACE } from '@angular/cdk/keycodes';
-import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgIf, NgTemplateOutlet, isPlatformBrowser } from '@angular/common';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import {
     CvaControl,
@@ -51,9 +51,8 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { get } from 'lodash-es';
-import { FdOptionSelectionChange, OptionComponent } from './option/option.component';
-import { OptionsInterface } from './options.interface';
+import { OptionComponent } from './option/option.component';
+import { FdOptionSelectionChange, OptionsInterface, isOptionsInterface } from './options.interface';
 import { SelectKeyManagerService } from './select-key-manager.service';
 import { SelectMobileComponent } from './select-mobile/select-mobile.component';
 import { SELECT_COMPONENT, SelectInterface } from './select.interface';
@@ -219,7 +218,7 @@ export class SelectComponent<T = any>
 
     /** @hidden */
     get value(): T {
-        return this._cvaDirective.value?.value as T;
+        return this._cvaDirective.value as T;
     }
 
     /** Event emitted when the popover open state changes. */
@@ -232,7 +231,7 @@ export class SelectComponent<T = any>
 
     /** @hidden */
     @ContentChildren(OptionComponent, { descendants: true })
-    _options: QueryList<OptionComponent<T>>;
+    _options: QueryList<OptionsInterface<T>>;
 
     /** @hidden */
     @ViewChild('selectControl')
@@ -311,17 +310,28 @@ export class SelectComponent<T = any>
         );
     });
 
+    /**
+     * Option, which is currently selected
+     **/
+    _selectedOption: Nullable<OptionsInterface<T>>;
+
     /** @hidden */
-    _cvaDirective: CvaDirective<OptionsInterface<T> | null> = inject(CvaDirective);
+    _cvaDirective: CvaDirective<T | undefined> = inject(CvaDirective);
+
+    /** @hidden */
+    readonly _keyManagerService: SelectKeyManagerService<T> = inject(SelectKeyManagerService);
+
+    /** @hidden */
+    protected _isBrowser: boolean;
 
     /**
      * @hidden
      * Observable used for syncing the input value and the rendered options
      **/
-    protected _valueInput$ = new BehaviorSubject<T | null>(null);
+    protected _valueInput$ = new ReplaySubject<T | undefined>(1);
 
     /** @hidden */
-    protected _cvaControl: CvaControl<OptionsInterface<T> | null> = inject(CvaControl);
+    protected _cvaControl: CvaControl<T | undefined> = inject(CvaControl);
 
     /** @hidden */
     private _controlElemFontSize = 0;
@@ -329,19 +339,13 @@ export class SelectComponent<T = any>
     /** @hidden */
     private _focused = false;
 
-    /**
-     * @hidden
-     * Stored calculated maxHeight from Option Panel
-     */
-    private _maxHeight: number;
-
     /** Retrieves selected value if any. */
     get triggerValue(): string {
         const emptyValue = ' ';
-        if (this.value === null) {
+        if (this.value === undefined) {
             return this._cvaDirective.placeholder || emptyValue;
         }
-        return this._cvaDirective.value?.viewValue || this._cvaDirective.placeholder || emptyValue;
+        return this._selectedOption?.viewValue || this._cvaDirective.placeholder || emptyValue;
     }
 
     /** equal to close
@@ -380,15 +384,12 @@ export class SelectComponent<T = any>
     /**
      * Function to compare the option values with the selected values. */
     @Input()
-    set compareWith(fn: ((o1: T, o2: T) => boolean) | string) {
-        if (typeof fn === 'string') {
-            this._compareWith = (o1: T, o2: T): boolean => get(o1, fn) === get(o2, fn);
-        } else {
-            this._compareWith = fn;
+    set compareWith(fn: (o1: T, o2: T) => boolean) {
+        if (typeof fn !== 'function') {
+            throw Error('`compareWith` must be a function.');
         }
-        if (this.value !== null) {
-            this._initializeSelection();
-        }
+        this._compareWith = fn;
+        this._initializeSelection();
     }
 
     /** @hidden */
@@ -397,35 +398,43 @@ export class SelectComponent<T = any>
     }
 
     /** @hidden */
-    get calculatedMaxHeight(): number {
-        return this._maxHeight || this._calculatedMaxHeight;
-    }
+    private readonly _contentDensityObserver = inject(ContentDensityObserver);
+    /** @hidden */
+    private readonly _changeDetectorRef = inject(ChangeDetectorRef);
+    /** @hidden */
+    private readonly _viewContainerRef = inject(ViewContainerRef);
+    /** @hidden */
+    private readonly _dynamicComponentService = inject(DynamicComponentService, { optional: true });
+    /** @hidden */
+    private readonly _injector = inject(Injector);
 
     /** @hidden */
-    constructor(
-        @Attribute('tabindex') _tabIndex: string,
-        private readonly _keyManagerService: SelectKeyManagerService<T>,
-        private readonly _changeDetectorRef: ChangeDetectorRef,
-        private readonly _viewContainerRef: ViewContainerRef,
-        @Optional() private readonly _dynamicComponentService: DynamicComponentService,
-        @Optional() private readonly _injector: Injector,
-        readonly _contentDensityObserver: ContentDensityObserver
-    ) {
+    constructor(@Attribute('tabindex') _tabIndex: string) {
+        this._keyManagerService._component = this;
         this._tabIndex = parseInt(_tabIndex, 10) || 0;
         const rtlService = inject(RtlService, { optional: true });
         this._textDirection = rtlService
             ? toSignal(rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'rtl' : 'ltr'))), { requireSync: true })
             : signal('ltr');
         this.valueChange = this._cvaDirective.valueChange.pipe(
+            distinctUntilChanged(),
             filter(() => this.canEmitValueChange),
             map(() => this.value)
         );
+        this._isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+        this._updateCalculatedHeight();
     }
 
-    /** @hidden */
+    /**
+     * Expose outside of this mixin to give component ability
+     * to update calculatedMaxHeight if needed
+     * @hidden
+     */
     @HostListener('window:resize')
-    _resizeScrollHandler(): void {
-        this._updateCalculatedHeight();
+    _updateCalculatedHeight(): void {
+        if (this._isBrowser) {
+            this._calculatedMaxHeight = window.innerHeight * 0.45;
+        }
     }
 
     /** Toggles the open state of the select. */
@@ -453,19 +462,15 @@ export class SelectComponent<T = any>
     /** @hidden */
     ngOnInit(): void {
         this._cvaControl.listenToChanges();
-        this._initializeCommonBehavior();
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
         this._keyManagerService._initKeyManager();
-        this._valueInput$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((v) => {
-            if (v === null || v === undefined) {
-                this._cvaDirective.setValue(null);
-            } else {
-                this._selectValue(v);
-            }
-        });
+        this._valueInput$
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe((v) => this._setSelectionByValue(v, false));
+        this._initializeSelection();
         this._setupMobileMode();
     }
 
@@ -534,13 +539,13 @@ export class SelectComponent<T = any>
     }
 
     /** @hidden */
-    _setSelectionByValue(value: T): void {
-        const correspondingOption = this._selectValue(value);
-
+    _setSelectionByValue(value: T | undefined, emitEvent = true): void {
+        const correspondingOption = this._select(value, emitEvent);
         // Shift focus to the active item. Note that we shouldn't do this in multiple
         // mode, because we don't know what option the user interacted with last.
         if (correspondingOption) {
-            this._keyManagerService._keyManager.setActiveItem(correspondingOption);
+            const optionIndex = this._options.toArray().indexOf(correspondingOption);
+            this._keyManagerService._keyManager?.setActiveItem(optionIndex);
         } else if (!this._isOpen) {
             // Otherwise reset the highlighted option. Note that we only want to do this while
             // closed, because doing it while open can shift the user's focus unnecessarily.
@@ -551,40 +556,30 @@ export class SelectComponent<T = any>
     }
 
     /** @hidden */
-    _selectValue(value: T): OptionComponent<T> | undefined {
-        const correspondingOption = this._options.find((option: OptionComponent) => {
-            try {
-                // Treat null as a special reset value.
-                return option.value !== null && this._compareWith(option.value, value);
-            } catch (error) {
-                if (isDevMode()) {
-                    // Notify developers of errors in their comparator.
-                    console.warn(error);
-                }
-                return false;
-            }
-        });
-
-        this._cvaDirective.setValue(correspondingOption ? correspondingOption : null);
-        return correspondingOption;
-    }
-
-    /** @hidden */
-    _popoverOpenChangeHandle(isOpen: boolean): void {
-        isOpen ? this.open() : this.close();
-    }
-
-    /** @hidden Returns _keyManagerService. */
-    _getKeyService(): SelectKeyManagerService {
-        return this._keyManagerService;
+    _select(valueOrOption?: T | OptionsInterface<T>, emitEvent = true): OptionsInterface<T> | undefined {
+        let val: T | undefined;
+        let opt: OptionsInterface<T> | undefined;
+        if (valueOrOption === undefined) {
+            val = undefined;
+            opt = undefined;
+        } else if (isOptionsInterface<T>(valueOrOption)) {
+            val = valueOrOption.value;
+            opt = valueOrOption;
+        } else {
+            val = valueOrOption;
+            opt = this._getOption(valueOrOption);
+        }
+        this._selectedOption = opt;
+        this._cvaDirective.setValue(val, emitEvent);
+        return opt;
     }
 
     /** @hidden */
     _highlightCorrectOption(): void {
-        if (this._keyManagerService._keyManager && this.value === null) {
+        if (this._keyManagerService._keyManager && this.value === undefined) {
             this._keyManagerService._keyManager.setFirstItemActive();
-        } else if (this._keyManagerService._keyManager && this.value !== null) {
-            // this._keyManagerService._keyManager.setActiveItem(this.selected);
+        } else if (this._keyManagerService._keyManager && this.value !== undefined && this._selectedOption) {
+            this._keyManagerService._keyManager.setActiveItem(this._selectedOption);
         }
     }
 
@@ -592,25 +587,14 @@ export class SelectComponent<T = any>
     _initializeSelection(): void {
         // Defer setting the value in order to avoid the "Expression
         // has changed after it was checked" errors from Angular.
-        Promise.resolve().then(() => {
-            if (this.value !== null) {
-                this._setSelectionByValue(this.value);
-            }
-        });
-    }
-
-    /**
-     * Expose outside of this mixin to give component ability
-     * to update caluclatedMaxHeight if needed
-     * @hidden
-     */
-    _updateCalculatedHeight(): void {
-        this._calculatedMaxHeight = window.innerHeight * 0.45;
+        if (this.value !== undefined) {
+            this._setSelectionByValue(this.value);
+        }
     }
 
     /** @hidden */
     _getOptionScrollPosition(optionIndex: number, itemHeight: number, currentScrollPosition: number): number {
-        const optionHeight = this._options.get(optionIndex)?._getHtmlElement().offsetHeight || itemHeight;
+        const optionHeight = this._options.get(optionIndex)?.elementRef.nativeElement.offsetHeight || itemHeight;
         const optionOffset = optionIndex * optionHeight;
         if (optionOffset < currentScrollPosition) {
             return optionOffset;
@@ -629,19 +613,13 @@ export class SelectComponent<T = any>
     }
 
     /** @hidden */
-    _initializeCommonBehavior(): void {
-        this._keyManagerService._component = this;
-
-        this._updateCalculatedHeight();
-    }
-
-    /** @hidden */
     _registerEventsAfterContentInit(): void {
-        this._cvaDirective.valueChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this._options.forEach((option) =>
-                this._compareWith(this.value, option.value) ? option._select() : option._deselect()
-            );
-        });
+        this._cvaDirective.valueChange
+            .pipe(distinctUntilChanged(), takeUntilDestroyed(this._destroyRef))
+            .subscribe((value) => {
+                this._options.forEach((option) => option._deselect(false));
+                this._select(value, false);
+            });
 
         this._options.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._resetOptions();
@@ -702,14 +680,14 @@ export class SelectComponent<T = any>
      * @hidden
      * Invoked when an option is clicked.
      */
-    private _onSelect(option: OptionComponent<T>, isUserInput: boolean): void {
+    private _onSelect(option: OptionsInterface<T>, isUserInput: boolean): void {
         const wasSelected = this._compareWith(option.value, this.value);
-        if ((option.value === null || option.value === undefined) && this.unselectMissingOption) {
+        if (option.value === undefined && this.unselectMissingOption) {
             option._deselect();
-            this._cvaDirective.setValue(null);
+            this._select();
         } else {
             if (wasSelected !== option.selected) {
-                this._cvaDirective.setValue(option.selected ? option : null);
+                this._select(option.selected ? option : undefined);
             }
             if (isUserInput) {
                 this._keyManagerService._keyManager.setActiveItem(option);
@@ -741,7 +719,7 @@ export class SelectComponent<T = any>
             parent: this._injector
         });
 
-        this._dynamicComponentService.createDynamicComponent(
+        this._dynamicComponentService?.createDynamicComponent(
             this.selectOptionsListTemplate,
             SelectMobileComponent,
             {
@@ -749,6 +727,22 @@ export class SelectComponent<T = any>
             },
             { injector }
         );
+    }
+
+    /** @hidden */
+    private _getOption(value: T): OptionsInterface<T> | undefined {
+        return this._options.find((option) => {
+            try {
+                // Treat null as a special reset value.
+                return option.value !== undefined && this._compareWith(option.value, value);
+            } catch (error) {
+                if (isDevMode()) {
+                    // Notify developers of errors in their comparator.
+                    console.warn(error);
+                }
+                return false;
+            }
+        });
     }
 }
 

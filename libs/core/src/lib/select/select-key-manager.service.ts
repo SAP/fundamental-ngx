@@ -67,7 +67,7 @@ export class SelectKeyManagerService<ValueType = any> {
             event.preventDefault();
             this._component.open();
         } else {
-            const previouslySelectedOption = this._component._cvaDirective.value;
+            const previouslySelectedOption = this._component._selectedOption;
 
             if (KeyUtil.isKeyCode(event, [HOME, END])) {
                 if (KeyUtil.isKeyCode(event, HOME)) {
@@ -78,7 +78,7 @@ export class SelectKeyManagerService<ValueType = any> {
                 event.preventDefault();
             }
 
-            const selectedOption = this._component._cvaDirective.value;
+            const selectedOption = this._component._selectedOption;
 
             // a11y Since the value has changed, we need to announce it.
             if (selectedOption && previouslySelectedOption !== selectedOption) {

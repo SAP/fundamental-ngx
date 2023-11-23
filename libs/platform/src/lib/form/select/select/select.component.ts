@@ -89,7 +89,7 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
 
         // setting option items
         this.select._options.forEach((option) => {
-            const optionItem = option._getHtmlElement();
+            const optionItem = option.elementRef.nativeElement;
 
             // set maxWidth default is 40rem
             if (this.maxWidth) {
@@ -142,7 +142,7 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
 
         // setting option items
         this.select._options.forEach((option) => {
-            const optionItem = option._getHtmlElement();
+            const optionItem = option.elementRef.nativeElement;
             const titleElement = <HTMLElement>optionItem.querySelector('[fd-list-title]');
             this._setOptionAttribute(titleElement, firstColumnProportion);
 
