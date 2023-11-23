@@ -4,7 +4,7 @@
 <div class="fd-overflow-layout__items-container" #layoutContainer>
     <div class="fd-overflow-layout__items-wrapper">
         <div class="fd-overflow-layout__items" #itemsWrapper>
-            @for (item of _allItems; track _itemsTrackFn($index, item)) {
+            @for (item of _allItems; track item.templateRef) {
                 <div
                     fdOverflowLayoutItemContainer
                     [first]="item.first"

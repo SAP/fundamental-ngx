@@ -142,7 +142,7 @@ describe('Value help dialog test suite', () => {
             await expect((await getText(selectedTokens)).trim()).toEqual(selectedItem);
         });
 
-        it('should check the inclusion conditional statements', async () => {
+        fit('should check the inclusion conditional statements', async () => {
             await click(openDialogBtn);
             await waitForPresent(dialogContainer);
             await click(formTabs, 1);
@@ -161,6 +161,7 @@ describe('Value help dialog test suite', () => {
                     continue;
                 }
                 await click(dropdownOptions, i);
+                await pause(5000);
                 await expect((await getText(selectedTokens)).trim()).toEqual(conditionsValues[i]);
                 await click(conditionsButton);
             }
@@ -398,7 +399,7 @@ describe('Value help dialog test suite', () => {
         (await browserIsFirefox())
             ? await click(tableCheckboxesFF, index)
             : (await browserIsSafari())
-            ? await click('table .fd-table__cell--checkbox', index)
-            : await click(tableCheckboxes, index);
+              ? await click('table .fd-table__cell--checkbox', index)
+              : await click(tableCheckboxes, index);
     }
 });

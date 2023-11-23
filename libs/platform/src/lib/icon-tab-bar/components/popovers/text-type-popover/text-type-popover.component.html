@@ -54,7 +54,7 @@
     </fd-popover>
 }
 <ng-template #subItem let-items="items" let-level="level">
-    @for (item of items; track _trackByTab($index, item)) {
+    @for (item of items; track item.uId) {
         <li
             [attr.aria-level]="level"
             class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"

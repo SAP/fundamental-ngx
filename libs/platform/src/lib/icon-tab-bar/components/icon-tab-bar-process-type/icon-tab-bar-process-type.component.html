@@ -21,7 +21,7 @@
             ></fdp-icon-tab-bar-popover>
         </li>
     }
-    @for (item of _tabs; track _trackByTab(idx, item); let idx = $index) {
+    @for (item of _tabs; track item.uId; let idx = $index) {
         <li
             [class]="item.cssClasses"
             class="fd-icon-tab-bar__item"

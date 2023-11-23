@@ -127,7 +127,7 @@
                         fdkIndirectFocusableList
                         #indirectFocusableList="fdkIndirectFocusableList"
                     >
-                        @for (item of hiddenActions; track _trackHiddenAction($index, item)) {
+                        @for (item of hiddenActions; track item.globalIndex) {
                             <ng-template
                                 [ngTemplateOutlet]="item.templateRef"
                                 [ngTemplateOutletContext]="{

@@ -1,9 +1,7 @@
 <table fd-table [keys]="displayedColumns" aria-label="Customizable Columns">
     <thead fd-table-header>
         <tr fd-table-row>
-            @for (column of displayedColumns; track column) {
-                <th fd-table-cell [key]="column">{{ column | uppercase }}</th>
-            }
+            <th *ngFor="let column of displayedColumns" fd-table-cell [key]="column">{{ column | uppercase }}</th>
         </tr>
     </thead>
     <tbody fd-table-body>

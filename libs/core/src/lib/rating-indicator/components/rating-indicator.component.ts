@@ -277,11 +277,6 @@ export class RatingIndicatorComponent
     }
 
     /** @hidden */
-    trackByFn(index: number, item: { id: string; value: number }): number | string {
-        return item.id;
-    }
-
-    /** @hidden */
     onSelect(value: number): void {
         this.value = this._value = value;
         this.onChange(value);

@@ -483,10 +483,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     }
 
     /** @hidden */
-    _trackBy = (index: number, optionItem: _OptionItem<ItemType, ValueType>): ValueType =>
-        this.valueFn(optionItem?.item);
-
-    /** @hidden */
     onChange: (value: any) => void = () => {};
 
     /** @hidden */

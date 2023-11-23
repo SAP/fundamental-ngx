@@ -330,9 +330,4 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
         }
         return injector;
     }
-
-    /** @hidden */
-    protected _trackHiddenAction(index: number, item: OverflowItemRef<ToolHeaderActionDirective>): number {
-        return item.globalIndex;
-    }
 }

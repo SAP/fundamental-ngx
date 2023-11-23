@@ -188,13 +188,13 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
     }
 
     /** @hidden Track function for main data */
-    _trackByTableRowFn(_index: number, item: T): number | string | undefined {
+    _trackByTableRowFn: (_index: number, item: T) => string | undefined = (_index: number, item: T) => {
         if (item) {
             return item[this.uniqueKey];
         }
 
         return undefined;
-    }
+    };
 
     /** @hidden Track function for filters */
     _trackByFilterFn(_index: number, item: VhdFilter): number | string | undefined {

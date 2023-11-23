@@ -19,7 +19,6 @@ import {
     Optional,
     Output,
     QueryList,
-    TemplateRef,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
@@ -331,11 +330,6 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
      */
     registerPopoverContent(content: OverflowPopoverContent): void {
         this._overflowPopoverContent = content;
-    }
-
-    /** @hidden */
-    _itemsTrackFn(_: number, item: OverflowItemRef): TemplateRef<any> {
-        return item.templateRef;
     }
 
     /** @hidden */

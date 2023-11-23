@@ -64,7 +64,7 @@
                 fdMultiAnnouncer
                 [multiAnnouncerOptions]="filterFn(dropdownValues, searchTerm)"
             >
-                @for (option of viewModel.selectedOptions; track _trackBy($index, option)) {
+                @for (option of viewModel.selectedOptions; track valueFn(option.item)) {
                     <fd-token
                         [disabled]="disabled"
                         (onCloseClick)="_onTokenClick(option, false, $event)"
@@ -115,7 +115,7 @@
                 (keydown.tab)="_close()"
                 aria-multiselectable="true"
             >
-                @for (option of viewModel.displayedOptions; track _trackBy(idx, option); let idx = $index) {
+                @for (option of viewModel.displayedOptions; track valueFn(option.item); let idx = $index) {
                     <li
                         fd-list-item
                         [attr.aria-label]="option.label"

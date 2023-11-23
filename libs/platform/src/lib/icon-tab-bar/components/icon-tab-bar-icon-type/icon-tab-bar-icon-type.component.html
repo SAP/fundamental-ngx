@@ -6,7 +6,7 @@
     [overflowOffset]="100"
     (overflowChanged)="_recalculateVisibleItems($event)"
 >
-    @for (item of _tabs; track _trackByTab(idx, item); let idx = $index) {
+    @for (item of _tabs; track item.uId; let idx = $index) {
         <li
             [ngClass]="item.cssClasses"
             [class.fd-icon-tab-bar__item--closable]="item.closable"

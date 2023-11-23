@@ -26,7 +26,7 @@
             </a>
         </li>
     }
-    @for (item of _tabs | slice: 1; track _trackByTab(idx, item); let idx = $index) {
+    @for (item of _tabs | slice: 1; track item.uId; let idx = $index) {
         <li
             [class]="item.cssClasses"
             class="fd-icon-tab-bar__item"

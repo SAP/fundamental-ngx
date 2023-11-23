@@ -564,9 +564,8 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     }
 
     /** @hidden */
-    _trackBySelectedFn(_index: number, item: T): number | string {
-        return item && item[this.uniqueKey];
-    }
+    _trackBySelectedFn: (_index: number, item: T) => number | string = (_index: number, item: T) =>
+        item && item[this.uniqueKey];
 
     /** @hidden */
     _trackByFilterFn(_index: number, item: VhdFilter): number | string {

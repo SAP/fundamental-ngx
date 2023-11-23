@@ -1,4 +1,4 @@
-import { UpperCasePipe } from '@angular/common';
+import { NgForOf, UpperCasePipe } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -33,7 +33,15 @@ const CELL_DATA: CellData[] = [
     selector: 'fd-table-custom-columns-example',
     templateUrl: './table-custom-columns-example.component.html',
     standalone: true,
-    imports: [FocusableGridDirective, TableModule, LinkComponent, IconComponent, ButtonComponent, UpperCasePipe]
+    imports: [
+        FocusableGridDirective,
+        TableModule,
+        LinkComponent,
+        IconComponent,
+        ButtonComponent,
+        UpperCasePipe,
+        NgForOf
+    ]
 })
 export class TableCustomColumnsExampleComponent {
     displayedColumns: string[];

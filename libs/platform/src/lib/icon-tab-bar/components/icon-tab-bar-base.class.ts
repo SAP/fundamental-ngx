@@ -103,7 +103,10 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     private _destroyed = false;
 
     /** @hidden */
-    constructor(protected _cd: ChangeDetectorRef, protected _ngZone: NgZone) {}
+    constructor(
+        protected _cd: ChangeDetectorRef,
+        protected _ngZone: NgZone
+    ) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -187,11 +190,6 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         } else {
             this._getTabUIElementFocusable(this._tabUIElements.get(tabIndex))?.focus();
         }
-    }
-
-    /** @hidden */
-    _trackByTab(index: number, tab: IconTabBarItem): string {
-        return tab.uId;
     }
 
     /**

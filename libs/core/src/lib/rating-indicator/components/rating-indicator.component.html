@@ -16,7 +16,7 @@
     <!-- Zero value if we don't have provided value from user, `ratingAverage` or `ratings` -->
     <ng-template [ngTemplateOutlet]="zeroRate"></ng-template>
     <!-- Available rate values -->
-    @for (rate of _rates; track trackByFn(i, rate); let i = $index) {
+    @for (rate of _rates; track rate.id; let i = $index) {
         <input
             [attr.aria-label]="i | ratingStarLabel: _rates.length : allowHalves"
             role="button"
@@ -64,7 +64,7 @@
     @for (rating of _ratingItems; track rating) {
         <div class="fd-rating-indicator__sum-row" [class]="sizeClass">
             <div class="fd-rating-indicator__container">
-                @for (rate of _rates; track trackByFn($index, rate)) {
+                @for (rate of _rates; track rate.id) {
                     <span
                         [class.fd-rating-indicator__input-checked]="rate.value === rating.rate"
                         class="fd-rating-indicator__input"
