@@ -190,9 +190,6 @@ export default {
     coreBreadcrumb: {
         overflowTitleMore: 'მეტი'
     },
-    platformActionBar: {
-        backButtonLabel: 'უკან დაბრუნება'
-    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'დამკვირვებლები',
         defaultTitle: 'დადასტურების პროცესი',
@@ -505,94 +502,6 @@ export default {
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR'
-    },
-    platformThumbnail: {
-        detailsGotoPreviousButtonTitle: 'წინაზე გადასვლა',
-        detailsGotoNextButtonTitle: 'მომდევნოზე გადასვლა',
-        detailsDialogCloseBtnLabel: 'დახურვა',
-        roleDescription: 'სურათი'
-    },
-    platformUploadCollection: {
-        moveToTitle: 'გადატანა',
-        moveToTitleFolder: 'საქაღალდე',
-        moveToNewFolderBtnLabel: 'ახალი საქაღალდე',
-        moveToAllFilesSubHeaderLabel: 'ყველა ფაილი',
-        moveToConfirmBtn: 'გადატანა',
-        moveToCloseBtn: 'გაუქმება',
-        newFolderTitle: 'ახალი საქაღალდე',
-        newFolderAtRootInputLabel: 'ახალი საქაღალდის სახელი',
-        newFolderAtFolderInputLabel: '{folderName}-ში ახალი საქაღალდის სახელი',
-        newFolderInputPlaceholder: 'აკრიფეთ აქ...',
-        newFolderInputErrorLabel: 'ნებადართულია მაქსიმუმ {count} სიმბოლო',
-        newFolderDialogCreateBtnLabel: 'შექმნა',
-        newFolderDialogCancelBtnLabel: 'გაუქმება',
-        breadcrumbLabelAllFiles: 'ყველა ფაილი',
-        breadcrumbLabelAllFilesWithTotal: 'ყველა ფაილი ({total})',
-        searchPlaceholder: 'ძებნა',
-        addBtnLabel: 'დამატება',
-        newFolderBtnLabel: 'ახალი საქაღალდე',
-        moveToBtnLabel: 'გადატანა',
-        downloadBtnLabel: 'ჩამოტვირთვა',
-        updateVersionBtnLabel: 'ვერსიის განახლება',
-        removeBtnLabel: 'ამოღება',
-        folderIconTitle: 'საქაღალდის სურათი',
-        fileIconTitle: 'ფაილის სურათი',
-        editFileNameInputPlaceholder: 'შეიყვანეთ სახელი',
-        editFileNameFileAlreadyExistsError: 'ამ სახელით ფაილი უკვე არსებობს',
-        editFileNameFolderAlreadyExistsError: 'ამ სახელით საქაღალდე უკვე არსებობს',
-        itemStatusSuccessful: 'წარმატებული',
-        itemStatusUnsuccessful: 'წარუმატებელი',
-        uploadNewFileAfterFailAction: 'გაშვება',
-        cancelUploadNewFileAction: 'გაუქმება',
-        itemMenuBtnTitle: 'მეტი',
-        dragDropAreaText: 'ჩააგდეთ ფაილი ასატვირთად',
-        noDataText: 'ფაილები არ მოიძებნა',
-        noDataDescription: 'ჩააგდეთ ფაილი ასატვირთად, ან დააჭირეთ "დამატებას"',
-        paginationTotal: 'ნაჩვენებია {from}-{to} {total}-დან',
-        resultsPerPage: 'რეზულტატი გვერდზე',
-        messageCreateFailed: '{folderName} ვერ შეიქმნა.',
-        messageCreateSuccess: '{folderName} შეიქმნა.',
-        messageUpdateVersionFailed: '{folderName}-ის ვერსიის განახლება ვერ მოხერხდა.',
-        messageUpdateVersionSuccess: '{folderName}-ის ვერსია განახლდა.',
-        messageFileRenameFailed: 'სახელის გადარქმევა "{from}"-დან "{to}"-ზე ვერ მოხერხდა.',
-        messageFileRenameSuccess: '"{from}"-ს დაერქვა "{to}".',
-        messageRemoveFoldersAndFilesFailed: '{foldersCount} საქაღალდის და {filesCount} ფაილის წაშლა ვერ მოხერხდა.',
-        messageRemoveFoldersAndFilesSuccess: '{foldersCount} საქაღალდე და {filesCount} ფაილი წაიშალა.',
-        messageRemoveFoldersFailed: '{foldersCount} საქაღალდე ვერ წაიშალა.',
-        messageRemoveFoldersSuccess: '{foldersCount} საქაღალდე წაიშალა.',
-        messageRemoveFilesFailed: '{filesCount} ფაილი ვერ წაიშალა.',
-        messageRemoveFilesSuccess: '{filesCount} ფაილი წაიშალა.',
-        messageRemoveFileOrFolderFailed: '{name} ვერ წაიშალა.',
-        messageRemoveFileOrFolderSuccess: '{name} წაიშალა.',
-        messageMoveFoldersAndFilesFailed:
-            '{foldersCount} საქაღალდის და {filesCount} ფაილის გადატანა ვერ მოხერხდა {to}-ში.',
-        messageMoveFoldersAndFilesSuccess: '{foldersCount} საქაღალდე და {filesCount} ფაილი გადატანილია {to}-ში.',
-        messageMoveFoldersFailed: '{foldersCount} საქაღალდის გადატანა ვერ მოხერხდა {to}-ში.',
-        messageMoveFoldersSuccess: '{foldersCount} საქაღალდე გადატანილია {to}-ში.',
-        messageMoveFilesFailed: '{filesCount} ფაილის გადატანა ვერ მოხერხდა {to}-ში.',
-        messageMoveFilesSuccess: '{filesCount} ფაილი გადატანილია {to}-ში.',
-        messageMoveFileOrFolderFailed: '{name}-ის გადატანა ვერ მოხდა {to}-ში.',
-        messageMoveFileOrFolderSuccess: '{name} გადატანილია {to}-ში.',
-        messageMoveRootFoldersAndFilesFailed: '{foldersCount} საქაღალდის და {filesCount} ფაილის გადატანა ვერ მოხერხდა.',
-        messageMoveRootFoldersAndFilesSuccess: '{foldersCount} საქაღალდე და {filesCount} ფაილი გადატანილია.',
-        messageMoveRootFoldersFailed: '{foldersCount} საქაღალდის გადატანა ვერ მოხერხდა.',
-        messageMoveRootFoldersSuccess: '{foldersCount} საქაღალდე გადატანილია.',
-        messageMoveRootFilesFailed: '{filesCount} ფაილის გადატანა ვერ მოხერხდა.',
-        messageMoveRootFilesSuccess: '{filesCount} ფაილი გადატანილია.',
-        messageMoveRootFileOrFolderFailed: '{name}-ის გადატანა ვერ მოხერხდა.',
-        messageMoveRootFileOrFolderSuccess: '{name} გადატანილია.',
-        messageFileTypeMismatchPlural:
-            '{filesCount} ფაილს აქვს აკრძალული გაფართოება. ნებადართული გაფართოებებია: {allowedTypes}.',
-        messageFileTypeMismatchSingular:
-            'ფაილს "{fileName}" აქვს აკრძალული გაფართოება. ნებადართული გაფართოებებია: {allowedTypes}.',
-        messageFileSizeExceededPlural:
-            '{filesCount} ფაილი აჭარბებს მაქსიმალურ მოცულობას. ნებადართული მაქსიმალური ზომაა: {maxFileSize}.',
-        messageFileSizeExceededSingular:
-            'ფაილი "{fileName}" აჭარბებს მაქსიმალურ მოცულობას. ნებადართული მაქსიმალური ზომაა: {maxFileSize}.',
-        messageFileNameLengthExceededPlural:
-            '{filesCount} ფაილი აჭარბებს მაქსიმალურ სახელის სიგრძეს. მაქსიმალური სიგრძეა: {maxFilenameLength} characters.',
-        messageFileNameLengthExceededSingular:
-            'ფაილი "{fileName}" აჭარბებს მაქსიმალურ სახელის სიგრძეს. მაქსიმალური სიგრძეა: {maxFilenameLength} characters.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'შესწორება'

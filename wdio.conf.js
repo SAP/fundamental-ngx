@@ -26,7 +26,6 @@ exports.config = {
     exclude: [],
     suites: {
         platformA: [
-            './e2e/wdio/platform/**/action-bar.e2e-spec.ts',
             './e2e/wdio/platform/**/action-list-item.e2e-spec.ts',
             './e2e/wdio/platform/**/approval-flow.e2e-spec.ts',
             './e2e/wdio/platform/**/button.e2e-spec.ts',
@@ -38,7 +37,6 @@ exports.config = {
             './e2e/wdio/platform/**/display-list-item.e2e-spec.ts',
             './e2e/wdio/platform/**/dynamic-page-layout.e2e-spec.ts',
             './e2e/wdio/platform/**/feed-input.e2e-spec.ts',
-            './e2e/wdio/platform/**/file-uploader.e2e-spec.ts',
             './e2e/wdio/platform/**/form-container.e2e-spec.ts',
             './e2e/wdio/platform/**/form-generator.e2e-spec.ts',
             './e2e/wdio/platform/**/icon-tab-bar.e2e-spec.ts',
@@ -69,9 +67,7 @@ exports.config = {
             './e2e/wdio/platform/**/step-input.e2e-spec.ts',
             './e2e/wdio/platform/**/switch.e2e-spec.ts',
             './e2e/wdio/platform/**/textarea.e2e-spec.ts',
-            './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
             './e2e/wdio/platform/**/time-picker.e2e-spec.ts',
-            './e2e/wdio/platform/**/upload-collection.e2e-spec.ts',
             './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',
             './e2e/wdio/platform/**/wizard-generator.e2e-spec.ts'
         ],

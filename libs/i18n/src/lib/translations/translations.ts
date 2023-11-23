@@ -190,9 +190,6 @@ export default {
     coreBreadcrumb: {
         overflowTitleMore: 'More'
     },
-    platformActionBar: {
-        backButtonLabel: 'Go Back'
-    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Watchers',
         defaultTitle: 'Approval process',
@@ -504,93 +501,6 @@ export default {
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR'
-    },
-    platformThumbnail: {
-        detailsGotoPreviousButtonTitle: 'Go to Previous',
-        detailsGotoNextButtonTitle: 'Go to Next',
-        detailsDialogCloseBtnLabel: 'Close',
-        roleDescription: 'Image'
-    },
-    platformUploadCollection: {
-        moveToTitle: 'Move to',
-        moveToTitleFolder: 'Folder',
-        moveToNewFolderBtnLabel: 'New Folder',
-        moveToAllFilesSubHeaderLabel: 'All files',
-        moveToConfirmBtn: 'Move',
-        moveToCloseBtn: 'Cancel',
-        newFolderTitle: 'New folder',
-        newFolderAtRootInputLabel: 'Name of new folder',
-        newFolderAtFolderInputLabel: 'Name of new folder inside of {folderName}',
-        newFolderInputPlaceholder: 'Type here...',
-        newFolderInputErrorLabel: 'Maximum {count} characters allowed',
-        newFolderDialogCreateBtnLabel: 'Create',
-        newFolderDialogCancelBtnLabel: 'Cancel',
-        breadcrumbLabelAllFiles: 'All files',
-        breadcrumbLabelAllFilesWithTotal: 'All files ({total})',
-        searchPlaceholder: 'Search',
-        addBtnLabel: 'Add',
-        newFolderBtnLabel: 'New Folder',
-        moveToBtnLabel: 'Move to',
-        downloadBtnLabel: 'Download',
-        updateVersionBtnLabel: 'Update version',
-        removeBtnLabel: 'Remove',
-        folderIconTitle: 'Folder icon',
-        fileIconTitle: 'File icon',
-        editFileNameInputPlaceholder: 'Enter a name',
-        editFileNameFileAlreadyExistsError: 'File with this name already exists',
-        editFileNameFolderAlreadyExistsError: 'Folder with this name already exists',
-        itemStatusSuccessful: 'Successful',
-        itemStatusUnsuccessful: 'Unsuccessful',
-        uploadNewFileAfterFailAction: 'Run',
-        cancelUploadNewFileAction: 'Cancel',
-        itemMenuBtnTitle: 'More',
-        dragDropAreaText: 'Drag files to upload',
-        noDataText: 'No files found',
-        noDataDescription: 'Drop files to upload, or use the \\u201CAdd\\u201D button.',
-        paginationTotal: 'Showing {from}-{to} of {total}',
-        resultsPerPage: 'Results per page',
-        messageCreateFailed: 'Failed to create {folderName}.',
-        messageCreateSuccess: '{folderName} has been created.',
-        messageUpdateVersionFailed: 'Failed to update version of {folderName}.',
-        messageUpdateVersionSuccess: '{folderName} version has been updated.',
-        messageFileRenameFailed: 'Failed to rename "{from}" to "{to}."',
-        messageFileRenameSuccess: '"{from}" has been renamed to "{to}".',
-        messageRemoveFoldersAndFilesFailed: 'Failed to remove {foldersCount} folders and {filesCount} files.',
-        messageRemoveFoldersAndFilesSuccess: '{foldersCount} folders and {filesCount} files have been removed.',
-        messageRemoveFoldersFailed: 'Failed to remove {foldersCount} folders.',
-        messageRemoveFoldersSuccess: '{foldersCount} folders have been removed.',
-        messageRemoveFilesFailed: 'Failed to remove {filesCount} files.',
-        messageRemoveFilesSuccess: '{filesCount} files have been removed.',
-        messageRemoveFileOrFolderFailed: 'Failed to remove {name}.',
-        messageRemoveFileOrFolderSuccess: '{name} has been removed.',
-        messageMoveFoldersAndFilesFailed: 'Failed to move {foldersCount} folders and {filesCount} files to {to}.',
-        messageMoveFoldersAndFilesSuccess: '{foldersCount} folders and {filesCount} files have been moved to {to}.',
-        messageMoveFoldersFailed: 'Failed to move {foldersCount} folders to {to}.',
-        messageMoveFoldersSuccess: '{foldersCount} folders have been moved to {to}.',
-        messageMoveFilesFailed: 'Failed to move {filesCount} files to {to}.',
-        messageMoveFilesSuccess: '{filesCount} files have been moved to {to}.',
-        messageMoveFileOrFolderFailed: 'Failed to move {name} to {to}.',
-        messageMoveFileOrFolderSuccess: '{name} has been moved to {to}.',
-        messageMoveRootFoldersAndFilesFailed:
-            'Failed to move {foldersCount} folders and {filesCount} files to all files.',
-        messageMoveRootFoldersAndFilesSuccess:
-            '{foldersCount} folders and {filesCount} files have been moved to all files.',
-        messageMoveRootFoldersFailed: 'Failed to move {foldersCount} folders to all files.',
-        messageMoveRootFoldersSuccess: '{foldersCount} folders have been moved to all files.',
-        messageMoveRootFilesFailed: 'Failed to move {filesCount} files to all files.',
-        messageMoveRootFilesSuccess: '{filesCount} files have been moved to all files.',
-        messageMoveRootFileOrFolderFailed: 'Failed to move {name} to all files.',
-        messageMoveRootFileOrFolderSuccess: '{name} has been moved to all files.',
-        messageFileTypeMismatchPlural: '{filesCount} files have the wrong type. Allowed types: {allowedTypes}.',
-        messageFileTypeMismatchSingular: 'The file "{fileName}" has the wrong type. Allowed types: {allowedTypes}.',
-        messageFileSizeExceededPlural:
-            '{filesCount} files exceeded the maximum file size. Allowed max file size: {maxFileSize}.',
-        messageFileSizeExceededSingular:
-            'The file "{fileName}" exceeded the maximum file size. Allowed max file size: {maxFileSize}.',
-        messageFileNameLengthExceededPlural:
-            '{filesCount} files exceeded the maximum filename length. Allowed filename length: {maxFilenameLength} characters.',
-        messageFileNameLengthExceededSingular:
-            'The name "{fileName}" exceeded the maximum filename length. Allowed filename length: {maxFilenameLength} characters.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edit'

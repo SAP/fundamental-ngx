@@ -192,9 +192,6 @@ export default {
     coreBreadcrumb: {
         overflowTitleMore: 'Altro'
     },
-    platformActionBar: {
-        backButtonLabel: 'Torna indietro'
-    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Osservatori',
         defaultTitle: 'Processo di approvazione',
@@ -508,94 +505,6 @@ export default {
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR'
-    },
-    platformThumbnail: {
-        detailsGotoPreviousButtonTitle: 'Vai a Precedente',
-        detailsGotoNextButtonTitle: 'Vai a Avanti',
-        detailsDialogCloseBtnLabel: 'Chiudi',
-        roleDescription: 'Immagine'
-    },
-    platformUploadCollection: {
-        moveToTitle: 'Sposta a',
-        moveToTitleFolder: 'Cartella',
-        moveToNewFolderBtnLabel: 'Nuova cartella',
-        moveToAllFilesSubHeaderLabel: 'Tutti i files',
-        moveToConfirmBtn: 'Sposta',
-        moveToCloseBtn: 'Annulla',
-        newFolderTitle: 'Nuova cartella',
-        newFolderAtRootInputLabel: 'Nome della nuova cartella',
-        newFolderAtFolderInputLabel: "Nome della nuova cartella all'interno di {folderName}",
-        newFolderInputPlaceholder: 'Scrivi qui..',
-        newFolderInputErrorLabel: 'Massimo {count} caratteri consentiti',
-        newFolderDialogCreateBtnLabel: 'Crea',
-        newFolderDialogCancelBtnLabel: 'Annulla',
-        breadcrumbLabelAllFiles: 'Tutti i files',
-        breadcrumbLabelAllFilesWithTotal: 'Tutti i files ({total})',
-        searchPlaceholder: 'Cerca',
-        addBtnLabel: 'Aggiungi',
-        newFolderBtnLabel: 'Nuova cartella',
-        moveToBtnLabel: 'Sposta a',
-        downloadBtnLabel: 'Scarica',
-        updateVersionBtnLabel: 'Aggiorna versione',
-        removeBtnLabel: 'Rimuovi',
-        folderIconTitle: 'Icona cartella',
-        fileIconTitle: 'Icona file',
-        editFileNameInputPlaceholder: 'Inserisci un nome',
-        editFileNameFileAlreadyExistsError: 'Il file con questo nome esiste già',
-        editFileNameFolderAlreadyExistsError: 'La cartella con questo nome esiste già',
-        itemStatusSuccessful: 'Successo',
-        itemStatusUnsuccessful: 'Non successo',
-        uploadNewFileAfterFailAction: 'Esegui',
-        cancelUploadNewFileAction: 'Annulla',
-        itemMenuBtnTitle: 'Altro',
-        dragDropAreaText: 'Trascina i file per caricarli',
-        noDataText: 'Nessun file trovato',
-        noDataDescription: 'Trascina i file da caricare o usa il pulsante "Aggiungi".',
-        paginationTotal: 'Visualizzazione di {from}-{to} di {total}',
-        resultsPerPage: 'Risultati per pagina',
-        messageCreateFailed: 'Impossibile creare {folderName}.',
-        messageCreateSuccess: '{folderName} è stato creato.',
-        messageUpdateVersionFailed: 'Impossibile aggiornare la versione di {folderName}.',
-        messageUpdateVersionSuccess: 'La versione di {folderName} è stata aggiornata.',
-        messageFileRenameFailed: 'Impossibile rinominare"{from}" in "{to}."',
-        messageFileRenameSuccess: '"{from}" è stato rinominato in "{to}".',
-        messageRemoveFoldersAndFilesFailed: 'Impossibile rimuovere le cartelle {foldersCount} e i file {filesCount}.',
-        messageRemoveFoldersAndFilesSuccess: 'Le cartelle {foldersCount} e i file {filesCount} sono state rimosse.',
-        messageRemoveFoldersFailed: 'Impossibile rimuovere le cartelle {foldersount}.',
-        messageRemoveFoldersSuccess: 'Le cartelle {foldersCount} sono state rimosse.',
-        messageRemoveFilesFailed: 'Impossibile rimuovere {filesCount} file.',
-        messageRemoveFilesSuccess: 'I file {filesCount} sono stati rimossi.',
-        messageRemoveFileOrFolderFailed: 'Impossibile rimuovere {name}.',
-        messageRemoveFileOrFolderSuccess: '{nome} è stato rimosso.',
-        messageMoveFoldersAndFilesFailed:
-            'Impossibile spostare le cartelle {foldersCount} e i file {filesCount} in {to}.',
-        messageMoveFoldersAndFilesSuccess: '{foldersCount} cartelle e {filesCount} file sono stati sposati in {to}.',
-        messageMoveFoldersFailed: 'Impossibile spostare le cartelle {foldersCount} in {to}.',
-        messageMoveFoldersSuccess: 'Le cartelle {foldersCount} sono state spostate in {to}.',
-        messageMoveFilesFailed: 'Impossibile spostare i file {filesCount} in {to}.',
-        messageMoveFilesSuccess: 'I file {filesCount} sono stati spostati in {to}.',
-        messageMoveFileOrFolderFailed: 'Impossibile spostare {name} in {to}.',
-        messageMoveFileOrFolderSuccess: '{name} è stato spostato in {to}.',
-        messageMoveRootFoldersAndFilesFailed:
-            'Impossibile spostare le cartelle {foldersCount} e i file {filesCount} in tutti i file.',
-        messageMoveRootFoldersAndFilesSuccess:
-            'Le cartelle {foldersCount} e i file {filesCount}  sono state spostate in tutti i file.',
-        messageMoveRootFoldersFailed: 'Impossibile spostare le cartelle {foldersCount} in tutti i file.',
-        messageMoveRootFoldersSuccess: '{foldersCount} le cartelle sono state spostate in tutti i file.',
-        messageMoveRootFilesFailed: 'Impossibile spostare i file {filesCount} in tutti i file.',
-        messageMoveRootFilesSuccess: '{filesCount} file sono stati spostati in tutti i file.',
-        messageMoveRootFileOrFolderFailed: 'Impossibile spostare {name} in tutti i file.',
-        messageMoveRootFileOrFolderSuccess: '{name} è stato spostato in tutti i file.',
-        messageFileTypeMismatchPlural: '{filesCount} file hanno il tipo sbagliato. Tipi consentiti: {allowedTypes}',
-        messageFileTypeMismatchSingular: 'Il file "{fileName}" ha il tipo errato. Tipi consentiti: {allowedTypes}.',
-        messageFileSizeExceededPlural:
-            '{filesCount} file hanno superato la dimensione massima del file. Dimensione file massima consentita: {maxFileSize}.',
-        messageFileSizeExceededSingular:
-            'Il file "{fileName}" ha superato le dimensioni massime del file. Dimensione file massima consentita: {maxFileSize}.',
-        messageFileNameLengthExceededPlural:
-            '{filesCount} file hanno superato la lunghezza massima del nome file. Lunghezza del nome file consentita: {maxFilenameLength} caratteri.',
-        messageFileNameLengthExceededSingular:
-            'Il nome "{fileName}" ha superato la lunghezza massima del nome del file. Lunghezza del nome consentita: {maxFilenameLength} caratteri.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edit'

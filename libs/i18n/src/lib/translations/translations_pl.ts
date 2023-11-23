@@ -190,9 +190,6 @@ export default {
     coreBreadcrumb: {
         overflowTitleMore: 'Więcej'
     },
-    platformActionBar: {
-        backButtonLabel: 'Powrót'
-    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Obserwatorzy',
         defaultTitle: 'Proces zatwierdzenia',
@@ -505,99 +502,6 @@ export default {
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR'
-    },
-    platformThumbnail: {
-        detailsGotoPreviousButtonTitle: 'Idź do poprzedniego',
-        detailsGotoNextButtonTitle: 'Idź do następnego',
-        detailsDialogCloseBtnLabel: 'Zamknij',
-        roleDescription: 'Obraz'
-    },
-    platformUploadCollection: {
-        moveToTitle: 'Przenieś do',
-        moveToTitleFolder: 'Folder',
-        moveToNewFolderBtnLabel: 'Nowy Folder',
-        moveToAllFilesSubHeaderLabel: 'Wszystkie pliki',
-        moveToConfirmBtn: 'Przesuń',
-        moveToCloseBtn: 'Anuluj',
-        newFolderTitle: 'Nowy folder',
-        newFolderAtRootInputLabel: 'Nazwa nowego folderu',
-        newFolderAtFolderInputLabel: 'Nazwa nowego folderu wewnątrz folderu {folderName}',
-        newFolderInputPlaceholder: 'Pisz tutaj...',
-        newFolderInputErrorLabel: 'Maksymalna liczba znaków {count}',
-        newFolderDialogCreateBtnLabel: 'Utwórz',
-        newFolderDialogCancelBtnLabel: 'Anuluj',
-        breadcrumbLabelAllFiles: 'Wszystkie pliki',
-        breadcrumbLabelAllFilesWithTotal: 'Wszystkie pliki ({total})',
-        searchPlaceholder: 'Szukaj',
-        addBtnLabel: 'Dodaj`',
-        newFolderBtnLabel: 'Nowy Folder',
-        moveToBtnLabel: 'Przenieś do',
-        downloadBtnLabel: 'Ściągnij',
-        updateVersionBtnLabel: 'Aktualizuj wersję',
-        removeBtnLabel: 'Usuń',
-        folderIconTitle: 'Obrazek folderu',
-        fileIconTitle: 'Obrazek pliku',
-        editFileNameInputPlaceholder: 'Wprowadz nazwę',
-        editFileNameFileAlreadyExistsError: 'Plik o podanej nazwie już istnieje',
-        editFileNameFolderAlreadyExistsError: 'Folder o podanej nazwie już istnieje',
-        itemStatusSuccessful: 'Sukces',
-        itemStatusUnsuccessful: 'Niepowodzenie',
-        uploadNewFileAfterFailAction: 'Idź',
-        cancelUploadNewFileAction: 'Anuluj',
-        itemMenuBtnTitle: 'Więcej',
-        dragDropAreaText: 'Przeciągnij by przekazać plik',
-        noDataText: 'Nie znaleziono żadnych plików',
-        noDataDescription: 'Upuść pliki żeby przekazać lub użyj przycisku “Dodaj”',
-        paginationTotal: 'Widoczne {from}-{to} z {total}',
-        resultsPerPage: 'Liczba wyników na strone',
-        messageCreateFailed: 'Nie udało się utworzyć {folderName}.',
-        messageCreateSuccess: '{folderName} został utworzony.',
-        messageUpdateVersionFailed: 'Nie udało się zaktualizować wersji {folderName}.',
-        messageUpdateVersionSuccess: '{folderName} wersja zaktualizowana.',
-        messageFileRenameFailed: 'Nie powiodła się zmiana nazwy z "{from}" na "{to}."',
-        messageFileRenameSuccess: '"{from}" został zmieniony na "{to}".',
-        messageRemoveFoldersAndFilesFailed:
-            'Nie powiodło się usunięcie folderów w liczbie {foldersCount} oraz plików w liczbie {filesCount} .',
-        messageRemoveFoldersAndFilesSuccess:
-            'Liczba folderów usunięta {foldersCount} oraz liczba plików usuniętych {filesCount}.',
-        messageRemoveFoldersFailed: 'Nie powiodło się usunięcie folderów w liczbie {foldersCount}.',
-        messageRemoveFoldersSuccess: 'Liczba folderów usuniętych {foldersCount}',
-        messageRemoveFilesFailed: 'Nie powiodło się usunięcie plików w liczbie {foldersCount}.',
-        messageRemoveFilesSuccess: 'Liczba plików usuniętych {foldersCount}',
-        messageRemoveFileOrFolderFailed: 'Nie powiodło się usunięcie {name}.',
-        messageRemoveFileOrFolderSuccess: 'Usunięto {name}.',
-        messageMoveFoldersAndFilesFailed:
-            'Nie powiodło się przeniesienie folderów w liczbie {foldersCount} oraz plików w liczbie {filesCount} do {to}.',
-        messageMoveFoldersAndFilesSuccess:
-            'Foldery w liczbie {foldersCount} oraz pliki w liczbie {filesCount} zostały przeniesione do {to}.',
-        messageMoveFoldersFailed: 'Nie powiodło się przeniesienie folderów w liczbie {foldersCount} do {to}.',
-        messageMoveFoldersSuccess: 'Foldery w liczbie {foldersCount} zostały przeniesione do {to}.',
-        messageMoveFilesFailed: 'Nie powiodło się przeniesienie plików w liczbie {filesCount} do {to}.',
-        messageMoveFilesSuccess: 'Pliki w liczbie {filesCount} zostały przeniesione do {to}.',
-        messageMoveFileOrFolderFailed: 'Nie powiodło się przeniesienie {name} do {to}.',
-        messageMoveFileOrFolderSuccess: '{name} przeniesiono do {to}.',
-        messageMoveRootFoldersAndFilesFailed:
-            'Nie powiodło się przeniesienie folderów w liczbie {foldersCount} oraz plików w liczbie {filesCount} do wszystkich plików.',
-        messageMoveRootFoldersAndFilesSuccess:
-            'Foldery w liczbie {foldersCount} oraz pliki w liczbie {filesCount} zostały przeniesione do wszystkich plików.',
-        messageMoveRootFoldersFailed:
-            'Nie powiodło się przeniesienie folderów w liczbie {foldersCount} do wszystkich folderów.',
-        messageMoveRootFoldersSuccess: 'Foldery w liczbie {foldersCount} zostały przeniesione do wszystkich folderów.',
-        messageMoveRootFilesFailed:
-            'Nie powiodło się przeniesienie plików w liczbie {filesCount} do wszystkich plików.',
-        messageMoveRootFilesSuccess: 'Pliki w liczbie {filesCount} zostały przeniesione do wszystkich plików.',
-        messageMoveRootFileOrFolderFailed: 'Nie powiodło się przeniesienie {name} do wszystkich plików.',
-        messageMoveRootFileOrFolderSuccess: '{name} przeniesiono do wszystkich plików.',
-        messageFileTypeMismatchPlural: 'Liczba plików ze złym typem {filesCount}. Typy dozwolone: {allowedTypes}.',
-        messageFileTypeMismatchSingular: 'Plik "{fileName}" ma zły typ. Typy dozwolone: {allowedTypes}.',
-        messageFileSizeExceededPlural:
-            'Liczba plików przekraczająca maksymalny rozmiar {filesCount}. Maksymalna wielkość pliku do: {maxFileSize}.',
-        messageFileSizeExceededSingular:
-            'Plik "{fileName}" przekroczył maksymalny rozmiar. Maksymalna wielkość pliku: {maxFileSize}.',
-        messageFileNameLengthExceededPlural:
-            'Liczba plików przekraczająca maksymalną długość nazwy {filesCount}. Maksymalna długość: {maxFilenameLength} znaków.',
-        messageFileNameLengthExceededSingular:
-            'Nazwa "{fileName}" przekroczyła maksymalną długość. Maksymalna długość: {maxFilenameLength} znaków.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edytuj'

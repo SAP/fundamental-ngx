@@ -38,10 +38,6 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('@fundamental-ngx/docs/platform/button').then(configurePlatformRoutes)
             },
             {
-                path: 'action-bar',
-                loadChildren: () => import('@fundamental-ngx/docs/platform/action-bar').then(configurePlatformRoutes)
-            },
-            {
                 path: 'checkbox',
                 loadChildren: () => import('@fundamental-ngx/docs/platform/checkbox').then(configurePlatformRoutes)
             },
@@ -160,10 +156,6 @@ export const ROUTES: Routes = [
                     import('@fundamental-ngx/docs/platform/standard-list-item').then(configurePlatformRoutes)
             },
             {
-                path: 'thumbnail',
-                loadChildren: () => import('@fundamental-ngx/docs/platform/thumbnail').then(configurePlatformRoutes)
-            },
-            {
                 path: 'time-picker',
                 loadChildren: () => import('@fundamental-ngx/docs/platform/time-picker').then(configurePlatformRoutes)
             },
@@ -198,15 +190,6 @@ export const ROUTES: Routes = [
             {
                 path: 'feed-input',
                 loadChildren: () => import('@fundamental-ngx/docs/platform/feed-input').then(configurePlatformRoutes)
-            },
-            {
-                path: 'file-uploader',
-                loadChildren: () => import('@fundamental-ngx/docs/platform/file-uploader').then(configurePlatformRoutes)
-            },
-            {
-                path: 'upload-collection',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/upload-collection').then(configurePlatformRoutes)
             },
             {
                 path: 'approval-flow',

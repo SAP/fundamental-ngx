@@ -190,9 +190,6 @@ export default {
     coreBreadcrumb: {
         overflowTitleMore: 'Më shumë'
     },
-    platformActionBar: {
-        backButtonLabel: 'Kthehu mbrapa'
-    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Vrojtuesit',
         defaultTitle: 'Procesi i aprovimit',
@@ -506,94 +503,6 @@ export default {
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR'
-    },
-    platformThumbnail: {
-        detailsGotoPreviousButtonTitle: 'Shko te paraardhësja',
-        detailsGotoNextButtonTitle: 'Shko te pasardhëstja',
-        detailsDialogCloseBtnLabel: 'Mbyll',
-        roleDescription: 'Imazhi'
-    },
-    platformUploadCollection: {
-        moveToTitle: 'Lëviz te',
-        moveToTitleFolder: 'Dosje',
-        moveToNewFolderBtnLabel: 'Dosje e re',
-        moveToAllFilesSubHeaderLabel: 'Të gjithë skedarët',
-        moveToConfirmBtn: 'Lëviz',
-        moveToCloseBtn: 'Anulo',
-        newFolderTitle: 'Dosje e re',
-        newFolderAtRootInputLabel: 'Emëro një dosje të re',
-        newFolderAtFolderInputLabel: 'Emëro një dosje të re brenda {folderName}',
-        newFolderInputPlaceholder: 'Shkruaj këtu..',
-        newFolderInputErrorLabel: 'Maksimuni i karaktereve te lejuara është {count}',
-        newFolderDialogCreateBtnLabel: 'Krijo',
-        newFolderDialogCancelBtnLabel: 'Anulo',
-        breadcrumbLabelAllFiles: 'Të gjithë skedarët',
-        breadcrumbLabelAllFilesWithTotal: 'Të gjithë skedarët ({total})',
-        searchPlaceholder: 'Kërko',
-        addBtnLabel: 'Shto',
-        newFolderBtnLabel: 'Dosje e re',
-        moveToBtnLabel: 'Lëviz te',
-        downloadBtnLabel: 'Shkarko',
-        updateVersionBtnLabel: 'Ngarko versionin',
-        removeBtnLabel: 'Fshi',
-        folderIconTitle: 'Ikona e dosjes',
-        fileIconTitle: 'Ikona e skedarit',
-        editFileNameInputPlaceholder: 'Shto emrin',
-        editFileNameFileAlreadyExistsError: 'Skedari me këtë emër ekziston.',
-        editFileNameFolderAlreadyExistsError: 'Dosja me këtë emër ekziston.',
-        itemStatusSuccessful: 'Sukses',
-        itemStatusUnsuccessful: 'Nuk ka sukses',
-        uploadNewFileAfterFailAction: 'Ekzekuto',
-        cancelUploadNewFileAction: 'Anulo',
-        itemMenuBtnTitle: 'Më shumë',
-        dragDropAreaText: 'Tërhiq skedarët për t`i ngarkuar',
-        noDataText: 'Nuk u gjet asnjë skedar',
-        noDataDescription: 'Hidhni skedarët për të ngarkuar ose përdorni butonin "Shto".',
-        paginationTotal: 'Po shfaqen {from}-{to} nga {total}',
-        resultsPerPage: 'Rezultatet për faqe',
-        messageCreateFailed: 'Dështoj krijimi i {folderName}.',
-        messageCreateSuccess: '{folderName} është krijuar.',
-        messageUpdateVersionFailed: 'Përditësimi i versionit të dështoi {folderName}.',
-        messageUpdateVersionSuccess: '{folderName} versioni është përditësuar.',
-        messageFileRenameFailed: 'Riemërtimi nga "{from}" në "{to}  dështoi."',
-        messageFileRenameSuccess: '"{from}" është riemërtuar në "{to}".',
-        messageRemoveFoldersAndFilesFailed: 'Dështoi për të hequr {foldersCount} dosje dhe {filesCount} skedare.',
-        messageRemoveFoldersAndFilesSuccess: '{foldersCount} dojse he {filesCount} skedare janë hequr.',
-        messageRemoveFoldersFailed: 'Dështoi për të hequr {foldersCount} dosje.',
-        messageRemoveFoldersSuccess: '{foldersCount} dosje janë hequr.',
-        messageRemoveFilesFailed: 'Dështoi për të hequr {filesCount} skedare.',
-        messageRemoveFilesSuccess: '{filesCount} skedare janë hequr.',
-        messageRemoveFileOrFolderFailed: 'Dështoi për të hequr {name}.',
-        messageRemoveFileOrFolderSuccess: '{name} ështe hequr.',
-        messageMoveFoldersAndFilesFailed:
-            'Zhvendosja e dosjeve {foldersCount} dhe skedarët {filesCount} në {to} dështoi.',
-        messageMoveFoldersAndFilesSuccess: '{foldersCount} dosje dhe {filesCount} janë zhvendosur në {to}.',
-        messageMoveFoldersFailed: 'Zhvendosja e dosjeve {foldersCount} dështoi në {to}.',
-        messageMoveFoldersSuccess: '{foldersCount} dosje janë zhvendosur në{to}.',
-        messageMoveFilesFailed: 'Zhvendosja e  {filesCount} skedarëve në {to} ka dështuar.',
-        messageMoveFilesSuccess: '{filesCount} dosje janë zhvendosur në {to}.',
-        messageMoveFileOrFolderFailed: 'Lëvizja e {name} në {to} ka dështuar.',
-        messageMoveFileOrFolderSuccess: '{name} është zhvendosur në {to}.',
-        messageMoveRootFoldersAndFilesFailed:
-            'Zhvendosja e skedarëve {foldersCount} dhe {filesCount} në të gjithë skedarët ka dështuar.',
-        messageMoveRootFoldersAndFilesSuccess:
-            '{foldersCount} dosje dhe {filesCount} skedarë janë zhvendosur në të gjithë skedarët.',
-        messageMoveRootFoldersFailed: 'Zhvendosja e dosjeve {foldersCount} në të gjithë skedarët dështoi.',
-        messageMoveRootFoldersSuccess: '{foldersCount} dosje janë zhvendosur në të gjithë skedarët.',
-        messageMoveRootFilesFailed: 'Zhvendosja e skedarëve {filesCount} në të gjithë skedarët dështoi.',
-        messageMoveRootFilesSuccess: '{filesCount} skedare janë zhvendosur në të gjithë skedarët.',
-        messageMoveRootFileOrFolderFailed: 'Zhvendosja e {emri} te të gjithë skedarët ka dështuar.',
-        messageMoveRootFileOrFolderSuccess: '{name} është zhvendosur në të gjithë skedarët.',
-        messageFileTypeMismatchPlural: '{filesCount} skedarët kanë llojin e gabuar. Llojet e lejuara: {allowedTypes}.',
-        messageFileTypeMismatchSingular: 'Skedari "{fileName}" ka llojin e gabuar. Llojet e lejuara: {allowedTypes}.',
-        messageFileSizeExceededPlural:
-            '{filesCount} skedarët tejkaluan madhësinë maksimale të skedarit. Madhësia maksimale e lejuar e skedarit:{maxFileSize}.',
-        messageFileSizeExceededSingular:
-            'Skedari "{fileName}" ka tejkaluar madhësinë maksimale të skedarit. Madhësia maksimale e lejuar e skedarit: {maxFileSize}.',
-        messageFileNameLengthExceededPlural:
-            '{filesCount} skedare tejkaluan gjatësinë maksimale të emrit. Gjatësia e lejuar e emrit të skedarit: {maxFilenameLength} karaktere.',
-        messageFileNameLengthExceededSingular:
-            'Emri "{fileName}" ka tejkaluar gjatësinë maksimale të emrit. Gjatësia e lejuar e emrit të skedarit: {maxFilenameLength} karaktere.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Redakto'
