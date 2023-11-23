@@ -47,6 +47,12 @@ export default {
         datetimeOkLabel: 'Ok',
         datetimeCancelLabel: 'Отмени'
     },
+    coreDynamicPage: {
+        expandLabel: 'Разширяване на заглавието',
+        collapseLabel: 'Свиване на заглавието',
+        pinLabel: 'Закачане на заглавието',
+        unpinLabel: 'Откачане на заглавието'
+    },
     coreFeedListItem: {
         moreLabel: 'Повече',
         lessLabel: 'По-малко'

@@ -4,8 +4,9 @@ import { PlatformConfig } from '@fundamental-ngx/platform/shared';
 
 /**
  * Default options for platform dynamic-page
+ * @deprecated use i18n coreDynamicPage key instead
  */
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class DynamicPageConfig extends PlatformConfig {
     /**
      * aria label for expand/collapse button when the Dynamic Page is collapsed

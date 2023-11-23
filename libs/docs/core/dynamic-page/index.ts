@@ -19,3 +19,4 @@ export const ROUTES: Routes = [
 ];
 export const LIBRARY_NAME = 'dynamic-page';
 export const API_FILE_KEY = 'dynamicPage';
+export const I18N_KEY = 'coreDynamicPage';

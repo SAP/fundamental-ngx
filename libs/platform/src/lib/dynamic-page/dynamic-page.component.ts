@@ -12,6 +12,7 @@ import {
     HostBinding,
     Input,
     OnDestroy,
+    Optional,
     Output,
     QueryList,
     ViewChild,
@@ -33,10 +34,12 @@ import {
     DynamicPageHeaderTitleDirective,
     DynamicPageLayoutActionsComponent,
     DynamicPageSubheaderComponent,
-    DynamicPageTitleContentComponent
+    DynamicPageTitleContentComponent,
+    patchHeaderI18nTexts
 } from '@fundamental-ngx/core/dynamic-page';
 import { FacetComponent } from '@fundamental-ngx/core/facets';
 import { TabListComponent, TabPanelComponent } from '@fundamental-ngx/core/tabs';
+import { FD_LANGUAGE } from '@fundamental-ngx/i18n';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import { DynamicPageContentHostComponent } from './dynamic-page-content/dynamic-page-content-host.component';
@@ -44,6 +47,7 @@ import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page
 import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-footer.component';
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
 import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
+import { DynamicPageConfig } from './dynamic-page.config';
 import { DynamicPageService } from './dynamic-page.service';
 
 /** Dynamic Page tab change event */
@@ -62,7 +66,14 @@ export class DynamicPageTabChangeEvent {
     styleUrls: ['./dynamic-page.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [DynamicPageService],
+    providers: [
+        DynamicPageService,
+        {
+            provide: FD_LANGUAGE,
+            useFactory: patchHeaderI18nTexts,
+            deps: [[new Optional(), DynamicPageConfig]]
+        }
+    ],
     standalone: true,
     imports: [
         CoreDynamicPageComponent,

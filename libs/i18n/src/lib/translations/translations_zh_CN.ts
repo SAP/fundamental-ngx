@@ -47,6 +47,12 @@ export default {
         datetimeOkLabel: '确定',
         datetimeCancelLabel: '取消'
     },
+    coreDynamicPage: {
+        expandLabel: '展开标题',
+        collapseLabel: '折叠标题',
+        pinLabel: '固定标题',
+        unpinLabel: '取消固定标题'
+    },
     coreFeedListItem: {
         moreLabel: '显示更多',
         lessLabel: '显示更少'

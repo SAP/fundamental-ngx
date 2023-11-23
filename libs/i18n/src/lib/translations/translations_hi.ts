@@ -47,6 +47,12 @@ export default {
         datetimeOkLabel: 'ठीक है',
         datetimeCancelLabel: 'रद्द करें'
     },
+    coreDynamicPage: {
+        expandLabel: 'हेडर विस्तारित करें',
+        collapseLabel: 'हेडर संकुचित करें',
+        pinLabel: 'हेडर पिन करें',
+        unpinLabel: 'हेडर अनपिन करें'
+    },
     coreFeedListItem: {
         moreLabel: 'अधिक',
         lessLabel: 'कम'

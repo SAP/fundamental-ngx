@@ -47,6 +47,12 @@ export default {
         datetimeOkLabel: 'Ok',
         datetimeCancelLabel: 'Annuler'
     },
+    coreDynamicPage: {
+        expandLabel: "Développer l'en-tête",
+        collapseLabel: "Réduire l'en-tête",
+        pinLabel: "Épingler l'en-tête",
+        unpinLabel: "Détacher l'en-tête"
+    },
     coreFeedListItem: {
         moreLabel: 'Plus',
         lessLabel: 'Moins'

@@ -47,6 +47,12 @@ export default {
         datetimeOkLabel: 'კარგი',
         datetimeCancelLabel: 'გაუქმება'
     },
+    coreDynamicPage: {
+        expandLabel: 'სათაურის გაშლა',
+        collapseLabel: 'სათაურის შეკუმშვა',
+        pinLabel: 'სათაურის მიმაგრება',
+        unpinLabel: 'სათაურის მოხსნა'
+    },
     coreFeedListItem: {
         moreLabel: 'მეტი',
         lessLabel: 'ნაკლები'
