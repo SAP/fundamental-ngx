@@ -1,6 +1,6 @@
 <fd-segmented-button [ngModel]="currentValue" (ngModelChange)="handleValueChange($event)">
     @for (value of values; track value) {
-        <button fd-button [label]="value" [attr.value]="value"></button>
+        <button fdkFocusableItem fd-button [label]="value" [attr.value]="value"></button>
     }
 </fd-segmented-button>
 <br />

@@ -8,16 +8,20 @@ import {
     ContentChildren,
     DestroyRef,
     ElementRef,
+    Host,
     HostListener,
     Input,
+    OnChanges,
     OnDestroy,
+    Optional,
     QueryList,
+    SimpleChanges,
     ViewEncapsulation,
     forwardRef
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { KeyUtil, destroyObservable } from '@fundamental-ngx/cdk/utils';
+import { FocusableListDirective, KeyUtil, RtlService, destroyObservable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { Subject, asyncScheduler, fromEvent, merge } from 'rxjs';
 import { filter, observeOn, startWith, takeUntil, tap } from 'rxjs/operators';
@@ -42,7 +46,7 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
     template: `<ng-content></ng-content>`,
     styleUrls: ['./segmented-button.component.scss'],
     host: {
-        role: 'group',
+        role: 'listbox',
         '[class.fd-segmented-button]': 'true',
         '[class.fd-segmented-button--vertical]': 'vertical'
     },
@@ -55,9 +59,10 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
             multi: true
         }
     ],
-    standalone: true
+    standalone: true,
+    hostDirectives: [FocusableListDirective]
 })
-export class SegmentedButtonComponent implements AfterViewInit, ControlValueAccessor, OnDestroy {
+export class SegmentedButtonComponent implements AfterViewInit, ControlValueAccessor, OnDestroy, OnChanges {
     /** Whether segmented button is on toggle mode, which allows to toggle more than 1 button */
     @Input({ transform: coerceBooleanProperty })
     toggle: BooleanInput;
@@ -90,8 +95,17 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     constructor(
         private readonly _changeDetRef: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
-        private readonly _destroyRef: DestroyRef
-    ) {}
+        private readonly _destroyRef: DestroyRef,
+        @Optional() @Host() private _focusableList: FocusableListDirective,
+        @Optional() private _rtlService: RtlService
+    ) {
+        this._focusableList.navigationDirection = this.vertical ? 'vertical' : 'horizontal';
+        if (this._rtlService) {
+            this._rtlService.rtl.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isRtl: boolean) => {
+                this._focusableList.contentDirection = isRtl ? 'rtl' : 'ltr';
+            });
+        }
+    }
 
     /** @hidden */
     @HostListener('click', ['$event'])
@@ -110,6 +124,13 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     /** @hidden */
     ngAfterViewInit(): void {
         this._listenToButtonChanges();
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes && changes.vertical) {
+            this._focusableList.navigationDirection = this.vertical ? 'vertical' : 'horizontal';
+        }
     }
 
     /** @hidden */
@@ -157,7 +178,10 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
                 this._onRefresh$.next();
                 this._toggleDisableButtons(this._isDisabled);
                 this._pickButtonsByValues(this._currentValue);
-                this._buttons.forEach((button) => this._listenToTriggerEvents(button));
+                this._buttons.forEach((button) => {
+                    button.elementRef.nativeElement.role = 'option';
+                    this._listenToTriggerEvents(button);
+                });
             });
     }
 

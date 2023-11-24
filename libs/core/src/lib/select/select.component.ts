@@ -364,6 +364,7 @@ export class SelectComponent<T = any>
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
         this._tabIndex = this.disabled ? -1 : 0;
+        this._changeDetectorRef.markForCheck();
     }
 
     /** Selected option. */
