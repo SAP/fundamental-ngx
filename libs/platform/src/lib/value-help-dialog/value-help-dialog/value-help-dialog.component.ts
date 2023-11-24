@@ -20,7 +20,7 @@ import { Observable, Subject, Subscription, isObservable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgTemplateOutlet, SlicePipe } from '@angular/common';
+import { NgForOf, NgTemplateOutlet, SlicePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DisplayFnPipe, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
@@ -128,7 +128,8 @@ let vhiUniqueId = 0;
         ButtonBarComponent,
         SlicePipe,
         FdTranslatePipe,
-        DisplayFnPipe
+        DisplayFnPipe,
+        NgForOf
     ]
 })
 export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnDestroy {

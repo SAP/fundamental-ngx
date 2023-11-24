@@ -22,12 +22,10 @@
                 >
                     @for (strategy of rule.strategies; track strategy) {
                         <li fd-option [value]="strategy">
-                            <span>
-                                {{
-                                    strategyLabels[strategy] || 'platformTable.P13FilterStrategyLabelNotDefined'
-                                        | fdTranslate
-                                }}
-                            </span>
+                            {{
+                                strategyLabels[strategy] || 'platformTable.P13FilterStrategyLabelNotDefined'
+                                    | fdTranslate
+                            }}
                         </li>
                     }
                 </fd-select>
@@ -57,52 +55,48 @@
                     ></ng-template>
                 </div>
             }
+
+            <!-- Rule Control Based on Data Type -->
+            <ng-template #ruleInputTemplate let-valueKey="valueKey">
+                @if (rule.dataType === DATA_TYPE.DATE) {
+                    <fd-date-picker
+                        class="filter-row__input"
+                        type="single"
+                        [required]="true"
+                        [name]="valueKey"
+                        [(ngModel)]="rule[valueKey]"
+                        (ngModelChange)="_onModelChange()"
+                    ></fd-date-picker>
+                } @else if (rule.dataType === DATA_TYPE.BOOLEAN) {
+                    <fd-select
+                        class="filter-row__select"
+                        [name]="valueKey"
+                        [(ngModel)]="rule[valueKey]"
+                        (ngModelChange)="_onModelChange()"
+                        [required]="true"
+                    >
+                        <li fd-option [value]="undefined">
+                            {{ 'platformTable.P13FilterBooleanOptionNotDefined' | fdTranslate }}
+                        </li>
+                        <li fd-option [value]="true">
+                            {{ 'platformTable.P13FilterBooleanOptionTrue' | fdTranslate }}
+                        </li>
+                        <li fd-option [value]="false">
+                            {{ 'platformTable.P13FilterBooleanOptionFalse' | fdTranslate }}
+                        </li>
+                    </fd-select>
+                } @else {
+                    <input
+                        type="text"
+                        class="filter-row__input"
+                        fd-form-control
+                        required
+                        [name]="valueKey"
+                        [(ngModel)]="rule[valueKey]"
+                        (ngModelChange)="_onModelChange()"
+                    />
+                }
+            </ng-template>
         </div>
     </div>
 </div>
-
-<!-- Rule Control Based on Data Type -->
-<ng-template #ruleInputTemplate let-valueKey="valueKey">
-    @switch (rule.dataType) {
-        @case (DATA_TYPE.DATE) {
-            <fd-date-picker
-                class="filter-row__input"
-                type="single"
-                [required]="true"
-                [name]="valueKey"
-                [(ngModel)]="rule[valueKey]"
-                (ngModelChange)="_onModelChange()"
-            ></fd-date-picker>
-        }
-        @case (DATA_TYPE.BOOLEAN) {
-            <fd-select
-                class="filter-row__select"
-                [name]="valueKey"
-                [(ngModel)]="rule[valueKey]"
-                (ngModelChange)="_onModelChange()"
-                [required]="true"
-            >
-                <li fd-option [value]="undefined">
-                    {{ 'platformTable.P13FilterBooleanOptionNotDefined' | fdTranslate }}
-                </li>
-                <li fd-option [value]="true">
-                    {{ 'platformTable.P13FilterBooleanOptionTrue' | fdTranslate }}
-                </li>
-                <li fd-option [value]="false">
-                    {{ 'platformTable.P13FilterBooleanOptionFalse' | fdTranslate }}
-                </li>
-            </fd-select>
-        }
-        @default {
-            <input
-                type="text"
-                class="filter-row__input"
-                fd-form-control
-                required
-                [name]="valueKey"
-                [(ngModel)]="rule[valueKey]"
-                (ngModelChange)="_onModelChange()"
-            />
-        }
-    }
-</ng-template>

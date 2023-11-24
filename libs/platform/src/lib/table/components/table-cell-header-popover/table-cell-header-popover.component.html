@@ -9,7 +9,12 @@
     >
         <fdp-list [noBorder]="true" [navigated]="true">
             @for (item of _popoverItems$.asObservable() | async; track item) {
-                <ng-template [ngTemplateOutlet]="item" [ngTemplateOutletContext]="{ popover: popover }"></ng-template>
+                <fdp-free-content-list-item>
+                    <ng-template
+                        [ngTemplateOutlet]="item"
+                        [ngTemplateOutletContext]="{ popover: popover }"
+                    ></ng-template>
+                </fdp-free-content-list-item>
             }
         </fdp-list>
     </fd-popover>

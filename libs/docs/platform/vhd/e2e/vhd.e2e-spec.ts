@@ -142,7 +142,7 @@ describe('Value help dialog test suite', () => {
             await expect((await getText(selectedTokens)).trim()).toEqual(selectedItem);
         });
 
-        fit('should check the inclusion conditional statements', async () => {
+        it('should check the inclusion conditional statements', async () => {
             await click(openDialogBtn);
             await waitForPresent(dialogContainer);
             await click(formTabs, 1);
@@ -161,7 +161,6 @@ describe('Value help dialog test suite', () => {
                     continue;
                 }
                 await click(dropdownOptions, i);
-                await pause(5000);
                 await expect((await getText(selectedTokens)).trim()).toEqual(conditionsValues[i]);
                 await click(conditionsButton);
             }
