@@ -11,7 +11,7 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import {
     NestedListDirective,
@@ -86,7 +86,7 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
             /** Refresh list of elements, that are being supported by keyboard */
             this.keyboardService.refreshItems(this.getLists());
         });
-        console.warn(`
+        warnOnce(`
             SideNavigationComponent is deprecated since version 0.40.0 and will be removed in future release.
             Use the vertical navigation component instead.
             For more information check the documentation.
