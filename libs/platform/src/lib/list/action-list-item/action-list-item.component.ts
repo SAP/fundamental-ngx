@@ -11,6 +11,7 @@ import {
 
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 
+import { AsyncPipe } from '@angular/common';
 import { ListItemComponent } from '@fundamental-ngx/core/list';
 import { BaseListItem, IS_ACTIVE_CLASS } from '../base-list-item';
 
@@ -25,7 +26,10 @@ export class ActionChangeEvent {
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ActionListItemComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [ListItemComponent]
+    host: {
+        role: 'none'
+    },
+    imports: [ListItemComponent, AsyncPipe]
 })
 export class ActionListItemComponent extends BaseListItem {
     /** Access button element*/

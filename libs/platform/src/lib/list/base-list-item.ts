@@ -25,6 +25,7 @@ import { FD_LIST_UNREAD_INDICATOR, ListUnreadIndicator } from '@fundamental-ngx/
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { BaseComponent, isPresent } from '@fundamental-ngx/platform/shared';
 import { merge } from 'lodash-es';
+import { Observable } from 'rxjs';
 import { FdpListComponent } from './fdpListComponent.token';
 import { ListConfig } from './list.config';
 import { FdpList, ListType, SelectionType } from './models/list';
@@ -106,6 +107,13 @@ export interface ListAdvancedDescription {
 
 export type ListDescription = string | ListAdvancedDescription;
 
+export enum LIST_ITEM_TYPE {
+    ITEM = 'item',
+    GROUP = 'group',
+    FOOTER = 'footer',
+    HEADER = 'header'
+}
+
 export class ModifyItemEvent {
     /** List Item component */
     source: BaseListItem;
@@ -139,7 +147,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
 
     /** define position of item for screen reader */
     @Input()
-    ariaPosinet: number;
+    ariaPosinset: number;
 
     /** Avatar component properties. @see AvatarComponent for more details */
     @Input()
@@ -236,7 +244,14 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
 
     /** By default selection mode is 'none' */
     @Input()
-    selectionMode: SelectionType = 'none';
+    set selectionMode(value: SelectionType) {
+        this._selectionMode = value;
+        this._setAttrRole();
+    }
+
+    get selectionMode(): SelectionType {
+        return this._selectionMode;
+    }
 
     /** By default selection mode is 'active' */
     @Input()
@@ -259,7 +274,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
 
     /** role */
     @Input()
-    role = 'option';
+    role: Nullable<string>;
 
     /**
      * event emitter for selected item
@@ -302,6 +317,9 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     @ViewChild(RadioButtonComponent)
     radioButtonComponent: RadioButtonComponent;
 
+    /** @hidden */
+    _type: LIST_ITEM_TYPE = LIST_ITEM_TYPE.ITEM;
+
     /**
      * @hidden
      * Whether By line mode is included to list component, by which
@@ -313,7 +331,14 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
      * @hidden
      * Whether listitem has row level selection enabled
      */
-    rowSelection: boolean;
+    set rowSelection(value: boolean) {
+        this._rowSelection = value;
+        this._setAttrRole();
+    }
+
+    get rowSelection(): boolean {
+        return this._rowSelection;
+    }
 
     /**
      * @hidden
@@ -321,11 +346,30 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
      */
     _selected = false;
 
+    /** @hidden */
+    get _selectedAttr(): boolean | null {
+        return !this.rowSelection && this.selectionMode === 'none' ? null : this._selected;
+    }
+
     /**
      * @hidden
      * get the focused element for key manager
      */
     _focused: boolean;
+
+    /** @hidden */
+    get _listItemRole(): string {
+        return this.role || this._defaultRole;
+    }
+
+    /** @hidden */
+    ariaSetSize: Observable<number>;
+
+    /** @hidden */
+    private _rowSelection = false;
+
+    /** @hidden */
+    private _defaultRole = 'listitem';
 
     /** @hidden */
     private _listComponent = inject<FdpList>(FdpListComponent);
@@ -336,21 +380,24 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     /** @hidden */
     private _iconConfig: ListIconConfig = new ListIconConfig();
 
+    /**
+     * @hidden
+     * radio button selected value binded to template
+     */
+    private _selectionValue: Nullable<string>;
+
+    /** @hidden */
+    private _selectionMode: SelectionType = 'none';
+
     /** @hidden */
     constructor(
-        protected _changeDetectorRef: ChangeDetectorRef,
+        _changeDetectorRef: ChangeDetectorRef,
         public itemEl: ElementRef<HTMLElement>,
         protected _listConfig: ListConfig,
         @Optional() @Inject(FD_LIST_UNREAD_INDICATOR) private readonly _list: ListUnreadIndicator
     ) {
         super(_changeDetectorRef);
     }
-
-    /**
-     * @hidden
-     * radio button selected value binded to template
-     */
-    private _selectionValue: Nullable<string>;
 
     /** Selection value */
     @Input()
@@ -363,6 +410,79 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     }
     get selectionValue(): Nullable<string> {
         return this._selectionValue;
+    }
+
+    /**
+     * @hidden
+     * On item click event will be emitted
+     */
+    @HostListener('click')
+    _onItemClick(): void {
+        if (this.rowSelection && this.selectionMode === 'multi') {
+            this._selected = !this._selected;
+        }
+
+        const event = new ModifyItemEvent();
+        event.source = this;
+        this._focused = !this._focused;
+        this.itemSelected.emit(event);
+        this._cd.markForCheck();
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    _handleKeyboardEvent(event: KeyboardEvent): void {
+        if (!KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+            return;
+        }
+
+        if (this.checkboxComponent || this.radioButtonComponent) {
+            this._onKeyboardClick(event);
+        }
+
+        this.anchor?.nativeElement.click();
+
+        if (this.rowSelection) {
+            this._selected = !this._selected;
+        }
+
+        const $event = new ModifyItemEvent();
+        $event.source = this;
+        this.itemSelected.emit($event);
+        this._cd.markForCheck();
+    }
+
+    /**
+     * @hidden
+     * Handler for mouse events
+     */
+    @HostListener('click', ['$event'])
+    _onClick(event: MouseEvent): void {
+        if (this.checkboxComponent && !this.anchor) {
+            if (!this.checkboxComponent.elementRef.nativeElement.contains(event.target as Node)) {
+                // clicking on the checkbox is not suppressed
+                // so we should only process clicks if clicked on the list-item, not checkbox itself
+                this.checkboxComponent.nextValue();
+            }
+
+            this.radioButtonComponent?.valueChange(event);
+        }
+
+        this._cd.markForCheck();
+        const $event = new ModifyItemEvent();
+        $event.source = this;
+        this.itemSelected.emit($event);
+    }
+
+    /**
+     * @hidden
+     * helps to avoid multi rows active class with navigation
+     */
+    @HostListener('focusout', ['$event'])
+    _onBlur(event: KeyboardEvent): void {
+        if (isPresent(this.anchor) && !KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+            this.anchor.nativeElement.classList.remove(IS_ACTIVE_CLASS);
+        }
     }
 
     /**
@@ -396,18 +516,12 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
             return;
         }
 
-        currentItem.setAttribute('role', 'option');
         const parentNode = currentItem.parentNode instanceof HTMLElement && currentItem.parentNode;
         if (parentNode) {
             parentNode.removeAttribute('title');
             parentNode.removeAttribute('aria-label');
         }
-
-        if (this.rowSelection || this.selectionMode === 'multi' || this.selectionMode === 'single') {
-            currentItem.setAttribute('aria-selected', `${!!this._selected}`);
-        }
-
-        this._changeDetectorRef.detectChanges();
+        this._cd.detectChanges();
     }
 
     /**
@@ -430,80 +544,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
         const event = new ModifyItemEvent();
         event.source = this;
         this._selected = selected;
-        this._changeDetectorRef.detectChanges();
-    }
-
-    /**
-     * @hidden
-     * On item click event will be emitted
-     */
-    @HostListener('click')
-    _onItemClick(): void {
-        if (this.rowSelection && this.selectionMode === 'multi') {
-            this._selected = !this._selected;
-        }
-
-        const event = new ModifyItemEvent();
-        event.source = this;
-        this._focused = !this._focused;
-        this.itemSelected.emit(event);
-        this._changeDetectorRef.markForCheck();
-    }
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    _handleKeyboardEvent(event: KeyboardEvent): void {
-        if (!KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
-            return;
-        }
-
-        if (this.checkboxComponent || this.radioButtonComponent) {
-            this._onKeyboardClick(event);
-        }
-
-        this.anchor?.nativeElement.click();
-
-        if (this.rowSelection) {
-            this._selected = !this._selected;
-        }
-
-        const $event = new ModifyItemEvent();
-        $event.source = this;
-        this.itemSelected.emit($event);
-        this._changeDetectorRef.markForCheck();
-    }
-
-    /**
-     * @hidden
-     * Handler for mouse events
-     */
-    @HostListener('click', ['$event'])
-    _onClick(event: MouseEvent): void {
-        if (this.checkboxComponent && !this.anchor) {
-            if (!this.checkboxComponent.elementRef.nativeElement.contains(event.target as Node)) {
-                // clicking on the checkbox is not suppressed
-                // so we should only process clicks if clicked on the list-item, not checkbox itself
-                this.checkboxComponent.nextValue();
-            }
-
-            this.radioButtonComponent?.valueChange(event);
-        }
-
-        this._changeDetectorRef.markForCheck();
-        const $event = new ModifyItemEvent();
-        $event.source = this;
-        this.itemSelected.emit($event);
-    }
-
-    /**
-     * @hidden
-     * helps to avoid multi rows active class with navigation
-     */
-    @HostListener('focusout', ['$event'])
-    _onBlur(event: KeyboardEvent): void {
-        if (isPresent(this.anchor) && !KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
-            this.anchor.nativeElement.classList.remove(IS_ACTIVE_CLASS);
-        }
+        this._cd.detectChanges();
     }
 
     /**
@@ -564,9 +605,18 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
         this.checkboxComponent?.nextValue();
         this.radioButtonComponent?.valueChange(event);
 
-        this._changeDetectorRef.markForCheck();
+        this._cd.markForCheck();
         const $event = new ModifyItemEvent();
         $event.source = this;
         this.itemSelected.emit($event);
+    }
+
+    /** @hidden */
+    private _setAttrRole(): void {
+        this._defaultRole =
+            this.rowSelection || this.selectionMode === 'single' || this.selectionMode === 'multi'
+                ? 'option'
+                : 'listitem';
+        this._cd.detectChanges();
     }
 }

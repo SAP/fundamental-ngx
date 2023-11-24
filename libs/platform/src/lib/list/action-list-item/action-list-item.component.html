@@ -8,8 +8,10 @@
     (keyup)="_onKeyUp($event)"
     [attr.aria-label]="ariaLabel"
     [attr.aria-level]="ariaLevel"
-    [attr.aria-posinet]="ariaPosinet"
-    [attr.role]="role"
+    [attr.aria-posinset]="ariaPosinset"
+    [attr.aria-setsize]="ariaSetSize | async"
+    [ariaRole]="_listItemRole"
+    [attr.aria-selected]="_selectedAttr"
 >
     <button #action class="fd-list__title" [attr.aria-label]="title" [attr.title]="title" (click)="_onActionClick()">
         {{ title }}
