@@ -9841,13 +9841,13 @@ git-remote-origin-url@^2.0.0:
     gitconfiglocal "^1.0.0"
     pify "^2.3.0"
 
-git-semver-tags@5.0.1, git-semver-tags@^5.0.0:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/git-semver-tags/-/git-semver-tags-5.0.1.tgz#db748aa0e43d313bf38dcd68624d8443234e1c15"
-  integrity sha512-hIvOeZwRbQ+7YEUmCkHqo8FOLQZCEn18yevLHADlFPZY02KJGsu5FZt9YW/lybfK2uhWFI7Qg/07LekJiTv7iA==
+git-semver-tags@7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/git-semver-tags/-/git-semver-tags-7.0.1.tgz#74426e7d7710e5a263655e78b4c651eed804d63e"
+  integrity sha512-NY0ZHjJzyyNXHTDZmj+GG7PyuAKtMsyWSwh07CR2hOZFa+/yoTsXci/nF2obzL8UDhakFNkD9gNdt/Ed+cxh2Q==
   dependencies:
-    meow "^8.1.2"
-    semver "^7.0.0"
+    meow "^12.0.1"
+    semver "^7.5.2"
 
 git-semver-tags@^4.0.0, git-semver-tags@^4.1.1:
   version "4.1.1"
@@ -9856,6 +9856,14 @@ git-semver-tags@^4.0.0, git-semver-tags@^4.1.1:
   dependencies:
     meow "^8.0.0"
     semver "^6.0.0"
+
+git-semver-tags@^5.0.0:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/git-semver-tags/-/git-semver-tags-5.0.1.tgz#db748aa0e43d313bf38dcd68624d8443234e1c15"
+  integrity sha512-hIvOeZwRbQ+7YEUmCkHqo8FOLQZCEn18yevLHADlFPZY02KJGsu5FZt9YW/lybfK2uhWFI7Qg/07LekJiTv7iA==
+  dependencies:
+    meow "^8.1.2"
+    semver "^7.0.0"
 
 git-up@^6.0.0:
   version "6.0.0"
@@ -12743,6 +12751,11 @@ memfs@^3.4.1, memfs@^3.4.12, memfs@^3.4.3:
   integrity sha512-EGowvkkgbMcIChjMTMkESFDbZeSh8xZ7kNSF0hAiAN4Jh6jgHCRS0Ga/+C8y6Au+oqpezRHCfPsmJ2+DwAgiwQ==
   dependencies:
     fs-monkey "^1.0.4"
+
+meow@^12.0.1:
+  version "12.1.1"
+  resolved "https://registry.yarnpkg.com/meow/-/meow-12.1.1.tgz#e558dddbab12477b69b2e9a2728c327f191bace6"
+  integrity sha512-BhXM0Au22RwUneMPwSCnyhTOizdWoIEPU9sp0Aqa1PnDMR5Wv2FGXYDjuzJEIX+Eo2Rb8xuYe5jrnm5QowQFkw==
 
 meow@^8.0.0, meow@^8.1.2:
   version "8.1.2"
@@ -15837,7 +15850,7 @@ semver@7.5.3:
   dependencies:
     lru-cache "^6.0.0"
 
-semver@7.5.4, semver@7.x, semver@^7.0.0, semver@^7.1.1, semver@^7.3.4, semver@^7.3.5, semver@^7.3.7, semver@^7.3.8, semver@^7.5.3:
+semver@7.5.4, semver@7.x, semver@^7.0.0, semver@^7.1.1, semver@^7.3.4, semver@^7.3.5, semver@^7.3.7, semver@^7.3.8, semver@^7.5.2, semver@^7.5.3:
   version "7.5.4"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.5.4.tgz#483986ec4ed38e1c6c48c34894a9182dbff68a6e"
   integrity sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==
