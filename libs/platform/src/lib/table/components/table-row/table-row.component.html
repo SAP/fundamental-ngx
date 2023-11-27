@@ -101,6 +101,7 @@
         last as isLast;
         trackBy: _columnTrackBy
     "
+    #tableCellElement
     [fdpTableCellResizable]="
         colIdx
             | columnResizableSide
@@ -139,6 +140,7 @@
     (keydown.enter)="_isTreeRowFirstCell(colIdx, row, $event) && _toggleGroupRow()"
     (keydown.arrowLeft)="_tableRowService.scrollToOverlappedCell()"
     (keydown.arrowRight)="_tableRowService.scrollToOverlappedCell()"
+    (keydown.space)="_handleCellSpaceKey(colIdx, tableCellElement, $event)"
 >
     <div [class.fd-table__text]="column.applyText" [class.fd-table__text--no-wrap]="column.noWrap">
         <span
