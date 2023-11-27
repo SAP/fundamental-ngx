@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.47.4-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.47.4-rc.7...v0.47.4-rc.8) (2023-11-27)
+
+
+### Bug Fixes
+
+* **platform:** fixed table row excessive focus and toggle handling with space ([#11000](https://github.com/SAP/fundamental-ngx/issues/11000)) ([ac758bb](https://github.com/SAP/fundamental-ngx/commit/ac758bbb9d1f9ca63b0d894bc3c823ec06ae6b1e))
+
+
+
+
+
 ## [0.47.4-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.47.4-rc.6...v0.47.4-rc.7) (2023-11-24)
 
 
