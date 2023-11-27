@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -8,7 +8,6 @@ import {
     ElementRef,
     EventEmitter,
     HostBinding,
-    HostListener,
     Input,
     NgZone,
     OnChanges,
@@ -220,18 +219,6 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     }
 
     /** @hidden */
-    @HostListener('keydown.arrowLeft', ['$event'])
-    @HostListener('keydown.arrowRight', ['$event'])
-    private _onArrowKeydown($event: KeyboardEvent): void {
-        if ($event.target === this._elmRef.nativeElement && this.isTreeRow) {
-            const shouldBeOpen = KeyUtil.isKeyCode($event, this._rtl ? LEFT_ARROW : RIGHT_ARROW);
-            if (shouldBeOpen !== this.row.expanded) {
-                this._toggleGroupRow();
-            }
-        }
-    }
-
-    /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
         this._fdpTableService.visibleColumns$.pipe(takeUntil(this._destroy$)).subscribe((columns) => {
@@ -267,6 +254,14 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
         this._refreshChildRows$.next();
         this._refreshChildRows$.complete();
         this._tableRowService.removeEditableCells(this.row);
+    }
+
+    /** @hidden */
+    protected _handleCellSpaceKey(colIdx: number, tableCellElement: HTMLTableCellElement, $event: Event): void {
+        if ($event.target === tableCellElement && isTreeRowFirstCell(colIdx, this.row, $event)) {
+            $event.preventDefault();
+            this._toggleGroupRow();
+        }
     }
 
     /** @hidden */
