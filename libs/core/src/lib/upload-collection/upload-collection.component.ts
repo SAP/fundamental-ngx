@@ -4,7 +4,7 @@ import { ListModule } from '@fundamental-ngx/core/list';
 @Component({
     selector: 'fd-upload-collection',
     host: { class: 'fd-upload-collection' },
-    styleUrls: ['./upload-collection.component.scss'],
+    styleUrl: './upload-collection.component.scss',
     template: `<ul fd-list [byline]="true" [selection]="selection">
         <ng-content></ng-content>
     </ul>`,

@@ -28,7 +28,7 @@ let switchUniqueId = 0;
 @Component({
     selector: 'fd-switch',
     templateUrl: './switch.component.html',
-    styleUrls: ['./switch.component.scss'],
+    styleUrl: './switch.component.scss',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,

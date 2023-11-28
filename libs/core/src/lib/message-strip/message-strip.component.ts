@@ -28,7 +28,7 @@ let messageStripUniqueId = 0;
 @Component({
     selector: 'fd-message-strip',
     templateUrl: './message-strip.component.html',
-    styleUrls: ['./message-strip.component.scss'],
+    styleUrl: './message-strip.component.scss',
     host: {
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',

@@ -45,7 +45,7 @@ import { FD_OVERFLOW_ITEM_REF } from './tokens/overflow-item-ref.token';
 @Component({
     selector: 'fd-overflow-layout',
     templateUrl: './overflow-layout.component.html',
-    styleUrls: ['./overflow-layout.component.scss'],
+    styleUrl: './overflow-layout.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

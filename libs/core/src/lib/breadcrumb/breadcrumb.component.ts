@@ -60,7 +60,7 @@ import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens'
         role: 'tree'
     },
     templateUrl: './breadcrumb.component.html',
-    styleUrls: ['./breadcrumb.component.scss'],
+    styleUrl: './breadcrumb.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

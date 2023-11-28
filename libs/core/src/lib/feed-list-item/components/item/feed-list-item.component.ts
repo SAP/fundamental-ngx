@@ -21,7 +21,7 @@ import { CSS_CLASS_NAME } from '../../constants';
 @Component({
     selector: 'fd-feed-list-item',
     templateUrl: './feed-list-item.component.html',
-    styleUrls: ['./feed-list-item.component.scss'],
+    styleUrl: './feed-list-item.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

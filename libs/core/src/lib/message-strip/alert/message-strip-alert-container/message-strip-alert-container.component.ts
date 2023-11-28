@@ -24,7 +24,7 @@ import { MessageStripAlert } from '../message-strip-alert/message-strip-alert.in
             [alertRefs]="alertRefs$ | async"
         ></fd-message-strip-alert-container-footer>
     `,
-    styleUrls: ['./message-strip-alert-container.component.scss'],
+    styleUrl: './message-strip-alert-container.component.scss',
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     imports: [PortalModule, ScrollbarDirective, MessageStripAlertContainerFooterComponent, AsyncPipe]

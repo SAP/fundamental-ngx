@@ -26,13 +26,13 @@ import { Observable } from 'rxjs';
                 <fd-checkbox tabIndexValue="-1" [ngModel]="checkboxValue" [tristate]="true">
                     {{
                         'coreMultiComboBox.selectAllLabel'
-                            | fdTranslate : { selectedItems: selectedItems.length, totalItems: flatItems.length }
+                            | fdTranslate: { selectedItems: selectedItems.length, totalItems: flatItems.length }
                     }}
                 </fd-checkbox>
             </div>
         </fd-toolbar>
     `,
-    styleUrls: ['./select-all-toggler.component.scss'],
+    styleUrl: './select-all-toggler.component.scss',
     providers: [
         {
             provide: ListFocusItem,

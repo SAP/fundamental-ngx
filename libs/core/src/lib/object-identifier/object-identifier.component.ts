@@ -27,7 +27,7 @@ import { startWith, takeUntil } from 'rxjs/operators';
             </p>
         }
     `,
-    styleUrls: ['./object-identifier.component.scss'],
+    styleUrl: './object-identifier.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

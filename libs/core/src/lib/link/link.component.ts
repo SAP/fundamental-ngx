@@ -27,7 +27,7 @@ import { FD_LINK_COMPONENT } from './tokens';
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fdLink], [fd-link]',
     templateUrl: './link.component.html',
-    styleUrls: ['./link.component.scss'],
+    styleUrl: './link.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

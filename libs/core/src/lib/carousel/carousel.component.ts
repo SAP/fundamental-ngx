@@ -64,7 +64,7 @@ class CarouselActiveSlides {
 @Component({
     selector: 'fd-carousel',
     templateUrl: './carousel.component.html',
-    styleUrls: ['./carousel.component.scss'],
+    styleUrl: './carousel.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [CarouselService],

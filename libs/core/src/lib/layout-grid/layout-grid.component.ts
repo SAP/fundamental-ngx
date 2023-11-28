@@ -21,7 +21,7 @@ import { LayoutGridRowDirective } from './directives/layout-grid-row.directive';
 @Component({
     selector: 'fd-layout-grid, [fdLayoutGrid]',
     templateUrl: './layout-grid.component.html',
-    styleUrls: ['./layout-grid.component.scss'],
+    styleUrl: './layout-grid.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

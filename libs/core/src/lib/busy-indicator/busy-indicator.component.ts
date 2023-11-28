@@ -17,7 +17,7 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
 @Component({
     selector: 'fd-busy-indicator',
     templateUrl: './busy-indicator.component.html',
-    styleUrls: ['./busy-indicator.component.scss'],
+    styleUrl: './busy-indicator.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

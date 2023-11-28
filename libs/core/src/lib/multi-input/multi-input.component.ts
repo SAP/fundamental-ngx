@@ -85,7 +85,7 @@ let uniqueHiddenLabel = 0;
 @Component({
     selector: 'fd-multi-input',
     templateUrl: './multi-input.component.html',
-    styleUrls: ['./multi-input.component.scss'],
+    styleUrl: './multi-input.component.scss',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,

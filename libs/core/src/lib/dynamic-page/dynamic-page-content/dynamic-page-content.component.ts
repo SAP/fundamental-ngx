@@ -15,7 +15,7 @@ import { addClassNameToElement } from '../utils';
 @Component({
     selector: 'fd-dynamic-page-content',
     templateUrl: './dynamic-page-content.component.html',
-    styleUrls: ['./dynamic-page-content.component.scss'],
+    styleUrl: './dynamic-page-content.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,

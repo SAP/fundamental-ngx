@@ -72,7 +72,7 @@ let datePickerCounter = 0;
 @Component({
     selector: 'fd-date-picker',
     templateUrl: './date-picker.component.html',
-    styleUrls: ['./date-picker.component.scss'],
+    styleUrl: './date-picker.component.scss',
     host: {
         '(blur)': 'onTouched()',
         '[class.fd-date-picker]': 'true',

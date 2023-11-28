@@ -15,7 +15,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-fieldset]',
     template: `<ng-content></ng-content>`,
-    styleUrls: ['./fieldset.component.scss'],
+    styleUrl: './fieldset.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true

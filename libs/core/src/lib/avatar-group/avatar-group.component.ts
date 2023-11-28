@@ -35,7 +35,7 @@ import { AvatarGroupHostConfig } from './types';
 @Component({
     selector: 'fd-avatar-group',
     templateUrl: './avatar-group.component.html',
-    styleUrls: ['./avatar-group.component.scss'],
+    styleUrl: './avatar-group.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

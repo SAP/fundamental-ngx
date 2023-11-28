@@ -17,7 +17,7 @@ let skeletonUniqueId = 0;
 @Component({
     selector: 'fd-skeleton',
     templateUrl: './skeleton.component.html',
-    styleUrls: ['./skeleton.component.scss'],
+    styleUrl: './skeleton.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

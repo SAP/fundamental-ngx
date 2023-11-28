@@ -10,7 +10,7 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
     >
         <ng-content></ng-content>
     </nav>`,
-    styleUrls: ['./vertical-navigation.component.scss'],
+    styleUrl: './vertical-navigation.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

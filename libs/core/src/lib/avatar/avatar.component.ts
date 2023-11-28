@@ -41,7 +41,7 @@ const ALTER_ICON_OPTIONS = {
 @Component({
     selector: 'fd-avatar',
     templateUrl: './avatar.component.html',
-    styleUrls: ['./avatar.component.scss'],
+    styleUrl: './avatar.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

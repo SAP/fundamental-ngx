@@ -61,7 +61,7 @@ let calendarUniqueId = 0;
 @Component({
     selector: 'fd-calendar',
     templateUrl: './calendar.component.html',
-    styleUrls: ['./calendar.component.scss'],
+    styleUrl: './calendar.component.scss',
     encapsulation: ViewEncapsulation.None,
     providers: [
         {

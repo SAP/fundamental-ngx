@@ -41,7 +41,7 @@ export interface TimeColumnItemOutput<T> {
 @Component({
     selector: 'fd-time-column',
     templateUrl: './time-column.component.html',
-    styleUrls: ['./time-column.component.scss'],
+    styleUrl: './time-column.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {

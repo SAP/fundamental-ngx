@@ -37,7 +37,7 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' 
             <span class="fd-object-status__text" [class]="_textClass">{{ label }}</span>
         }
     `,
-    styleUrls: ['./object-status.component.scss'],
+    styleUrl: './object-status.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

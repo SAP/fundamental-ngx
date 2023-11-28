@@ -18,7 +18,7 @@ export type GenericTagType = 'error' | 'success' | 'warning' | 'information';
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-generic-tag]',
     templateUrl: './generic-tag.component.html',
-    styleUrls: ['./generic-tag.component.scss'],
+    styleUrl: './generic-tag.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

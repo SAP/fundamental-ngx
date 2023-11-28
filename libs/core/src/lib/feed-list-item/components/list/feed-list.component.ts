@@ -21,7 +21,7 @@ import { FeedListItemComponent } from '../item/feed-list-item.component';
 @Component({
     selector: 'fd-feed-list',
     templateUrl: './feed-list.component.html',
-    styleUrls: ['./feed-list.component.scss'],
+    styleUrl: './feed-list.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true

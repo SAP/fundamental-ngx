@@ -36,7 +36,7 @@ import { AvatarGroupItemDirective } from '../../directives/avatar-group-item.dir
         class: 'fd-popover__wrapper',
         '[style.max-width.rem]': '20'
     },
-    styleUrls: ['./default-avatar-group-overflow-body.component.scss'],
+    styleUrl: './default-avatar-group-overflow-body.component.scss',
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush

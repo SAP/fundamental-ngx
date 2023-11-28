@@ -19,7 +19,7 @@ import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
             <span class="fd-object-marker__text">{{ label }}</span>
         }
         <ng-content></ng-content>`,
-    styleUrls: ['./object-marker.component.scss'],
+    styleUrl: './object-marker.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {

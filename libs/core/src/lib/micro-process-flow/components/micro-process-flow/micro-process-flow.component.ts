@@ -27,7 +27,7 @@ import { MicroProcessFlowItemComponent } from '../micro-process-flow-item/micro-
 @Component({
     selector: 'fd-micro-process-flow',
     templateUrl: './micro-process-flow.component.html',
-    styleUrls: ['./micro-process-flow.component.scss'],
+    styleUrl: './micro-process-flow.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {

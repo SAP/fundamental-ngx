@@ -102,7 +102,7 @@ type CardColumn = CardDefinitionDirective[];
 @Component({
     selector: 'fd-fixed-card-layout',
     templateUrl: './fixed-card-layout.component.html',
-    styleUrls: ['./fixed-card-layout.component.scss'],
+    styleUrl: './fixed-card-layout.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {

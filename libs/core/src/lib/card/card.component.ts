@@ -22,7 +22,7 @@ let cardId = 0;
 @Component({
     selector: 'fd-card',
     templateUrl: './card.component.html',
-    styleUrls: ['./card.component.scss'],
+    styleUrl: './card.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders()],

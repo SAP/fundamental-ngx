@@ -20,7 +20,7 @@ import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 @Component({
     selector: 'fd-form-input-message-group',
     templateUrl: './form-input-message-group.component.html',
-    styleUrls: ['./form-input-message-group.component.scss'],
+    styleUrl: './form-input-message-group.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

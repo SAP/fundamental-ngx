@@ -50,7 +50,7 @@ export type GridListItemStatus = 'success' | 'warning' | 'error' | 'neutral';
 @Component({
     selector: 'fd-grid-list-item',
     templateUrl: './grid-list-item.component.html',
-    styleUrls: ['./grid-list-item.component.scss'],
+    styleUrl: './grid-list-item.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,

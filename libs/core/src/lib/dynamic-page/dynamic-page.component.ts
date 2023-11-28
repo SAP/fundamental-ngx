@@ -40,7 +40,7 @@ import { debounceTime, map, observeOn, takeUntil } from 'rxjs/operators';
 @Component({
     selector: 'fd-dynamic-page',
     templateUrl: './dynamic-page.component.html',
-    styleUrls: ['./dynamic-page.component.scss'],
+    styleUrl: './dynamic-page.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [DynamicPageService],

@@ -72,7 +72,7 @@ let sliderId = 0;
 @Component({
     selector: 'fd-slider',
     templateUrl: './slider.component.html',
-    styleUrls: ['./slider.component.scss'],
+    styleUrl: './slider.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

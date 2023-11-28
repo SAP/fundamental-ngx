@@ -44,7 +44,7 @@ let cardUniqueId = 0;
 @Component({
     selector: 'fd-resizable-card-item',
     templateUrl: 'resizable-card-item.component.html',
-    styleUrls: ['./resizable-card-item.component.scss'],
+    styleUrl: './resizable-card-item.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,

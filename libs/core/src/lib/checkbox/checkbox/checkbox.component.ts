@@ -38,7 +38,7 @@ export type FdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
 @Component({
     selector: 'fd-checkbox',
     templateUrl: './checkbox.component.html',
-    styleUrls: ['./checkbox.component.scss'],
+    styleUrl: './checkbox.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

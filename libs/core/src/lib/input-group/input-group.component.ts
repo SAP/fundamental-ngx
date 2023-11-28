@@ -46,7 +46,7 @@ let addOnInputRandomId = 0;
 @Component({
     selector: 'fd-input-group',
     templateUrl: './input-group.component.html',
-    styleUrls: ['./input-group.component.scss'],
+    styleUrl: './input-group.component.scss',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,

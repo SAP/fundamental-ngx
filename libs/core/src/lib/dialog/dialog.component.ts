@@ -46,7 +46,7 @@ import { DialogRef } from './utils/dialog-ref.class';
  */
 @Component({
     selector: 'fd-dialog',
-    styleUrls: ['dialog.component.scss'],
+    styleUrl: 'dialog.component.scss',
     templateUrl: './dialog.component.html',
     host: {
         tabindex: '-1'

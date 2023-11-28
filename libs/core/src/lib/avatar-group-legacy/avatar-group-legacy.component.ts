@@ -34,7 +34,7 @@ let avatarGroupCount = 0;
 @Component({
     selector: 'fd-avatar-group-legacy',
     templateUrl: './avatar-group-legacy.component.html',
-    styleUrls: ['./avatar-group-legacy.component.scss'],
+    styleUrl: './avatar-group-legacy.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
@@ -123,7 +123,10 @@ export class AvatarGroupLegacyComponent
     private _dir: 'ltr' | 'rtl' | null = 'ltr';
 
     /** @hidden */
-    constructor(private readonly _viewportRuler: ViewportRuler, @Optional() private _rtlService: RtlService) {}
+    constructor(
+        private readonly _viewportRuler: ViewportRuler,
+        @Optional() private _rtlService: RtlService
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {

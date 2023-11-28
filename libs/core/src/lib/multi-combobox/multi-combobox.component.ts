@@ -73,7 +73,7 @@ export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory
 @Component({
     selector: 'fd-multi-combobox',
     templateUrl: './multi-combobox.component.html',
-    styleUrls: ['./multi-combobox.component.scss'],
+    styleUrl: './multi-combobox.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     hostDirectives: [

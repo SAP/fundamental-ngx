@@ -63,7 +63,7 @@ let timePickerCounter = 0;
         PopoverService,
         registerFormItemControl(TimePickerComponent)
     ],
-    styleUrls: ['./time-picker.component.scss'],
+    styleUrl: './time-picker.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

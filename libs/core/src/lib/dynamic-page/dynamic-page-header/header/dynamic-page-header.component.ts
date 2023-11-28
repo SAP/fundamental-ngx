@@ -34,7 +34,7 @@ export const ActionSquashBreakpointPx = 1280;
 @Component({
     selector: 'fd-dynamic-page-header',
     templateUrl: './dynamic-page-header.component.html',
-    styleUrls: ['./dynamic-page-header.component.scss'],
+    styleUrl: './dynamic-page-header.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {

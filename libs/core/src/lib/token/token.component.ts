@@ -30,7 +30,7 @@ import { Subscription, fromEvent } from 'rxjs';
 @Component({
     selector: 'fd-token',
     templateUrl: './token.component.html',
-    styleUrls: ['./token.component.scss'],
+    styleUrl: './token.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders()],

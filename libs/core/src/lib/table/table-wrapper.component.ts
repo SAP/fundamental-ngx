@@ -25,7 +25,7 @@ import {
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fd-table-wrapper',
     template: `<ng-content></ng-content>`,
-    styleUrls: ['./table.component.scss'],
+    styleUrl: './table.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders()],
@@ -36,7 +36,10 @@ export class TableWrapperComponent implements AfterContentInit, OnDestroy {
     private _contentDensitySettings: ContentDensityObserverTarget | undefined;
 
     /** @hidden */
-    constructor(private elementRef: ElementRef, private _contentDensityObserver: ContentDensityObserver) {}
+    constructor(
+        private elementRef: ElementRef,
+        private _contentDensityObserver: ContentDensityObserver
+    ) {}
 
     /** @hidden */
     ngAfterContentInit(): void {

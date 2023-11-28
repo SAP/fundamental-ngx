@@ -28,7 +28,7 @@ import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalend
 @Component({
     selector: 'fd-calendar-month-view',
     templateUrl: './calendar-month-view.component.html',
-    styleUrls: ['./calendar-month-view.component.scss'],
+    styleUrl: './calendar-month-view.component.scss',
     encapsulation: ViewEncapsulation.None,
     host: {
         '[attr.id]': 'viewId'

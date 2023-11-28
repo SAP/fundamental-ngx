@@ -30,7 +30,7 @@ let formLabelIdCount = 0;
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-form-label]',
     templateUrl: './form-label.component.html',
-    styleUrls: ['./form-label.component.scss'],
+    styleUrl: './form-label.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

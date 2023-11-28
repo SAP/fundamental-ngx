@@ -60,7 +60,7 @@ export const handleTimeoutReference = (): void => {
 @Component({
     selector: 'fd-wizard',
     templateUrl: './wizard.component.html',
-    styleUrls: ['./wizard.component.scss'],
+    styleUrl: './wizard.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

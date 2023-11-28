@@ -74,7 +74,7 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
 @Component({
     selector: 'fd-tab-list',
     templateUrl: './tab-list.component.html',
-    styleUrls: ['./tab-list.component.scss'],
+    styleUrl: './tab-list.component.scss',
     host: {
         class: 'fd-tabs-custom'
     },

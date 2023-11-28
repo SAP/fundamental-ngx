@@ -20,7 +20,7 @@ type TileSize = null | 's';
 @Component({
     selector: 'fd-tile',
     templateUrl: './tile.component.html',
-    styleUrls: ['./tile.component.scss'],
+    styleUrl: './tile.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

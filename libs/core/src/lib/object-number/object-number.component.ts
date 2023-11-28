@@ -15,7 +15,7 @@ type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
 @Component({
     selector: 'fd-object-number',
     templateUrl: './object-number.component.html',
-    styleUrls: ['./object-number.component.scss'],
+    styleUrl: './object-number.component.scss',
     host: {
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel'

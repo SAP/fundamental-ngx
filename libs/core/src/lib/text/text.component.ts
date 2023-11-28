@@ -17,7 +17,7 @@ export type HyphenationType = 'none' | 'manual' | 'auto' | null;
 @Component({
     selector: 'fd-text',
     templateUrl: './text.component.html',
-    styleUrls: ['./text.component.scss'],
+    styleUrl: './text.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [LineClampDirective, LineClampTargetDirective, LinkComponent, FdTranslatePipe],

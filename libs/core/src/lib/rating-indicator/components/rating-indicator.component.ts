@@ -43,7 +43,7 @@ interface RatingViewItem {
 @Component({
     selector: 'fd-rating-indicator',
     templateUrl: './rating-indicator.component.html',
-    styleUrls: ['./rating-indicator.component.scss'],
+    styleUrl: './rating-indicator.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

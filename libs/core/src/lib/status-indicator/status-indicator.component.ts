@@ -29,7 +29,7 @@ export class Point {
 @Component({
     selector: 'fd-status-indicator',
     templateUrl: './status-indicator.component.html',
-    styleUrls: ['./status-indicator.component.scss'],
+    styleUrl: './status-indicator.component.scss',
     host: {
         '[attr.aria-label]': 'ariaLabel',
         '[attr.aria-roledescription]': 'ariaRoleDescription',

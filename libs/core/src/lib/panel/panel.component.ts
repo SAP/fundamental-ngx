@@ -33,7 +33,7 @@ let panelExpandUniqueId = 0;
     selector: 'fd-panel',
     templateUrl: './panel.component.html',
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./panel.component.scss'],
+    styleUrl: './panel.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders()],
     standalone: true,

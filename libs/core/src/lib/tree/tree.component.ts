@@ -55,7 +55,7 @@ import { TreeService } from './tree.service';
     selector: 'fd-tree',
     templateUrl: './tree.component.html',
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./tree.component.scss'],
+    styleUrl: './tree.component.scss',
     hostDirectives: [
         {
             directive: DataSourceDirective,

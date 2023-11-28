@@ -57,7 +57,7 @@ import { TokenComponent } from './token.component';
 @Component({
     selector: 'fd-tokenizer',
     templateUrl: './tokenizer.component.html',
-    styleUrls: ['./tokenizer.component.scss'],
+    styleUrl: './tokenizer.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders()],

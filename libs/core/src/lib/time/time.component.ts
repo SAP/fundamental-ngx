@@ -40,7 +40,7 @@ type MeridianViewItem = SelectableViewItem<Meridian>;
 @Component({
     selector: 'fd-time',
     templateUrl: './time.component.html',
-    styleUrls: ['./time.component.scss'],
+    styleUrl: './time.component.scss',
     host: {
         '(focusout)': '_focusOut($event)',
         '(blur)': 'onTouched()'

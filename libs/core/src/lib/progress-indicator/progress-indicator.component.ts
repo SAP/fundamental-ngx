@@ -22,7 +22,7 @@ export type ProgressIndicatorState = 'informative' | 'positive' | 'critical' | '
 @Component({
     selector: 'fd-progress-indicator',
     templateUrl: './progress-indicator.component.html',
-    styleUrls: ['./progress-indicator.component.scss'],
+    styleUrl: './progress-indicator.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

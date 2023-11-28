@@ -26,7 +26,7 @@ let uniqueId = 0;
 @Component({
     selector: 'fd-radio-button',
     templateUrl: './radio-button.component.html',
-    styleUrls: ['./radio-button.component.scss'],
+    styleUrl: './radio-button.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [

@@ -41,7 +41,7 @@ let stepInputUniqueId = 0;
 @Component({
     selector: 'fd-step-input',
     templateUrl: './step-input.component.html',
-    styleUrls: ['./step-input.component.scss'],
+    styleUrl: './step-input.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

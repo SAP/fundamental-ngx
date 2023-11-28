@@ -32,7 +32,7 @@ import { SideNavigationInterface } from './side-navigation.interface';
 @Component({
     templateUrl: './side-navigation.component.html',
     selector: 'fd-side-nav',
-    styleUrls: ['side-navigation.component.scss'],
+    styleUrl: './side-navigation.component.scss',
     encapsulation: ViewEncapsulation.None,
     providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService],
     standalone: true,

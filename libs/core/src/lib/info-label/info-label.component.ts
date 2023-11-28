@@ -15,7 +15,7 @@ export type LabelType = 'numeric' | 'icon';
 @Component({
     selector: 'fd-info-label',
     templateUrl: './info-label.component.html',
-    styleUrls: ['./info-label.component.scss'],
+    styleUrl: './info-label.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

@@ -35,7 +35,7 @@ import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-m
 @Component({
     selector: 'fd-action-sheet',
     templateUrl: './action-sheet.component.html',
-    styleUrls: ['./action-sheet.component.scss'],
+    styleUrl: './action-sheet.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [KeyboardSupportService, DynamicComponentService],

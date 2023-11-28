@@ -33,7 +33,7 @@ let fileUploaderInputUniqueId = 0;
 @Component({
     selector: 'fd-file-uploader',
     templateUrl: './file-uploader.component.html',
-    styleUrls: ['./file-uploader.component.scss'],
+    styleUrl: './file-uploader.component.scss',
     host: {
         '(blur)': 'onTouched()',
         class: 'fd-file-uploader'

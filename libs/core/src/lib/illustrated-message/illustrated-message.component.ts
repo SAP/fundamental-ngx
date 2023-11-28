@@ -37,7 +37,7 @@ let illustratedMessageUniqueId = 0;
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-illustrated-message]',
     templateUrl: './illustrated-message.component.html',
-    styleUrls: ['./illustrated-message.component.scss'],
+    styleUrl: './illustrated-message.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

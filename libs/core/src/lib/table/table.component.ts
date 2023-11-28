@@ -39,7 +39,7 @@ export const FdTableContentDensityProviderParams = {
     selector: 'table[fd-table]',
     exportAs: 'fd-table',
     template: `<ng-content></ng-content>`,
-    styleUrls: ['./table.component.scss'],
+    styleUrl: './table.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [TableService, contentDensityObserverProviders(FdTableContentDensityProviderParams)],

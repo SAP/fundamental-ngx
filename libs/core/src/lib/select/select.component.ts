@@ -66,7 +66,7 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
 @Component({
     selector: 'fd-select',
     templateUrl: './select.component.html',
-    styleUrls: ['./select.component.scss'],
+    styleUrl: './select.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {

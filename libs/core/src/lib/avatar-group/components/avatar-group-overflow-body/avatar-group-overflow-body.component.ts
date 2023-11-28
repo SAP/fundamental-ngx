@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
     host: {
         class: 'fd-popover__wrapper'
     },
-    styleUrls: ['./avatar-group-overflow-body.component.scss'],
+    styleUrl: './avatar-group-overflow-body.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true

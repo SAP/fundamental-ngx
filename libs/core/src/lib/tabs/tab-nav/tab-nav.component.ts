@@ -28,7 +28,7 @@ import { TabModes, TabSizes } from '../tab-list.component';
     selector: '[fd-tab-nav]',
     template: ` <ng-content></ng-content>`,
     providers: [contentDensityObserverProviders()],
-    styleUrls: ['./tab-nav.component.scss'],
+    styleUrl: './tab-nav.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true

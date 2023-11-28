@@ -28,7 +28,7 @@ import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalend
 @Component({
     selector: 'fd-calendar-aggregated-year-view',
     templateUrl: './calendar-aggregated-year-view.component.html',
-    styleUrls: ['./calendar-aggregated-year-view.component.scss'],
+    styleUrl: './calendar-aggregated-year-view.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {

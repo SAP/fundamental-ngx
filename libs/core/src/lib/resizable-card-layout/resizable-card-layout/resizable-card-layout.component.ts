@@ -37,7 +37,7 @@ export type ResizableCardLayoutConfig = Array<ResizableCardItemConfig>;
 @Component({
     selector: 'fd-resizable-card-layout',
     templateUrl: 'resizable-card-layout.component.html',
-    styleUrls: ['./resizable-card-layout.component.scss'],
+    styleUrl: './resizable-card-layout.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true

@@ -59,7 +59,7 @@ const splitButtonTextClasses = [splitButtonTextClass];
 @Component({
     selector: 'fd-split-button',
     templateUrl: 'split-button.component.html',
-    styleUrls: ['./split-button.component.scss'],
+    styleUrl: './split-button.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [contentDensityObserverProviders()],

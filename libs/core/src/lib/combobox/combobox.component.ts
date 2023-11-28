@@ -92,7 +92,7 @@ let comboboxUniqueId = 0;
 @Component({
     selector: 'fd-combobox',
     templateUrl: './combobox.component.html',
-    styleUrls: ['./combobox.component.scss'],
+    styleUrl: './combobox.component.scss',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,

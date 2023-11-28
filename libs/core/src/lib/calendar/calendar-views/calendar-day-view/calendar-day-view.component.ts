@@ -34,7 +34,7 @@ import { CalendarType, DaysOfWeek } from '../../types';
 @Component({
     selector: 'fd-calendar-day-view',
     templateUrl: './calendar-day-view.component.html',
-    styleUrls: ['./calendar-day-view.component.scss'],
+    styleUrl: './calendar-day-view.component.scss',
     encapsulation: ViewEncapsulation.None,
     host: {
         '[attr.id]': 'viewId',

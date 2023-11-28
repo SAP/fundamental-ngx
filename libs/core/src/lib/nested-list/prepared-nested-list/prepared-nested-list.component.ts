@@ -21,7 +21,7 @@ import { NestedListDirective } from '../nested-list/nested-list.directive';
 @Component({
     selector: 'fd-prepared-nested-list',
     templateUrl: './prepared-nested-list.component.html',
-    styleUrls: ['./prepared-nested-list.component.scss'],
+    styleUrl: './prepared-nested-list.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

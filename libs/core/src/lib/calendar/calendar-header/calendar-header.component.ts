@@ -32,7 +32,7 @@ import { FdCalendarView } from '../types';
 @Component({
     selector: 'fd-calendar-header',
     templateUrl: './calendar-header.component.html',
-    styleUrls: ['./calendar-header.component.scss'],
+    styleUrl: './calendar-header.component.scss',
     encapsulation: ViewEncapsulation.None,
     host: {
         '[attr.id]': 'viewId'

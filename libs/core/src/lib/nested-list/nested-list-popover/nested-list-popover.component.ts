@@ -27,7 +27,7 @@ import { NestedListPopoverInterface } from './nested-list-popover.interface';
 @Component({
     selector: 'fd-nested-list-popover',
     templateUrl: './nested-list-popover.component.html',
-    styleUrls: ['./nested-list-popover.component.scss'],
+    styleUrl: './nested-list-popover.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

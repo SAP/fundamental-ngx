@@ -66,7 +66,7 @@ let paginationUniqueId = 0;
         '[class.fd-pagination--short]': '_lastPage <= 9'
     },
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./pagination.component.scss'],
+    styleUrl: './pagination.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     preserveWhitespaces: true,
     standalone: true,

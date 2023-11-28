@@ -33,7 +33,7 @@ import { FD_BUTTON_COMPONENT } from './tokens';
     selector: 'button[fd-button], a[fd-button]',
     exportAs: 'fd-button',
     templateUrl: './button.component.html',
-    styleUrls: ['./button.component.scss'],
+    styleUrl: './button.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {

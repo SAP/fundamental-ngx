@@ -31,7 +31,7 @@ let componentId = 0;
 @Component({
     selector: 'fd-dynamic-side-content',
     templateUrl: './dynamic-side-content.component.html',
-    styleUrls: ['./dynamic-side-content.component.scss'],
+    styleUrl: './dynamic-side-content.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

@@ -38,7 +38,7 @@ import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT } from './tokens';
 @Component({
     selector: 'fd-shellbar',
     templateUrl: './shellbar.component.html',
-    styleUrls: ['./shellbar.component.scss'],
+    styleUrl: './shellbar.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

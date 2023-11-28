@@ -22,7 +22,7 @@ import { MULTI_COMBOBOX_COMPONENT } from '../multi-combobox.token';
 @Component({
     selector: 'fd-mobile-multi-combobox',
     templateUrl: './mobile-multi-combobox.component.html',
-    styleUrls: ['./mobile-multi-combobox.component.scss'],
+    styleUrl: './mobile-multi-combobox.component.scss',
     standalone: true,
     imports: [
         DialogModule,

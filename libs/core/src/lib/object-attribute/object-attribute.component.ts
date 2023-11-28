@@ -14,7 +14,7 @@ import { warnOnce } from '@fundamental-ngx/cdk/utils';
 @Component({
     selector: 'fd-object-attribute, fdp-object-attribute',
     templateUrl: './object-attribute.component.html',
-    styleUrls: ['./object-attribute.component.scss'],
+    styleUrl: './object-attribute.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

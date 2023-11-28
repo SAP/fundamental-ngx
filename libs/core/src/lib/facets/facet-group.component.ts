@@ -5,7 +5,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 @Component({
     selector: 'fd-facet-group',
     template: ` <ng-content select="fd-facet"></ng-content> `,
-    styleUrls: ['./facet-group.component.scss'],
+    styleUrl: './facet-group.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {

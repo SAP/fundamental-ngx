@@ -60,7 +60,7 @@ import { FD_DATETIME_PICKER_COMPONENT, FD_DATETIME_PICKER_MOBILE_CONFIG } from '
 @Component({
     selector: 'fd-datetime-picker',
     templateUrl: './datetime-picker.component.html',
-    styleUrls: ['./datetime-picker.component.scss'],
+    styleUrl: './datetime-picker.component.scss',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
