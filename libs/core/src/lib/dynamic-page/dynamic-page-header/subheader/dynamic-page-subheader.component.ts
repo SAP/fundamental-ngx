@@ -6,6 +6,7 @@ import {
     EventEmitter,
     HostBinding,
     Input,
+    Optional,
     Output,
     ViewChild,
     ViewEncapsulation
@@ -13,9 +14,12 @@ import {
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { distinctUntilChanged } from 'rxjs/operators';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { FD_LANGUAGE, FdTranslatePipe, resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
 import { DynamicPageConfig } from '../../dynamic-page.config';
 import { DynamicPageService } from '../../dynamic-page.service';
+import { patchHeaderI18nTexts } from '../../patch-header-i18n-texts';
 
 let dynamicPageSubHeaderId = 0;
 @Component({
@@ -24,7 +28,14 @@ let dynamicPageSubHeaderId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [ButtonComponent]
+    imports: [ButtonComponent, FdTranslatePipe],
+    providers: [
+        {
+            provide: FD_LANGUAGE,
+            useFactory: patchHeaderI18nTexts,
+            deps: [[new Optional(), DynamicPageConfig]]
+        }
+    ]
 })
 export class DynamicPageSubheaderComponent {
     /**
@@ -57,13 +68,13 @@ export class DynamicPageSubheaderComponent {
      * ARIA label for button when the header is collapsed
      */
     @Input()
-    expandLabel: string = this._dynamicPageConfig.expandLabel;
+    expandLabel: string;
 
     /**
      * ARIA label for button when the header is expanded
      */
     @Input()
-    collapseLabel: string = this._dynamicPageConfig.collapseLabel;
+    collapseLabel: string;
 
     /** Header role  */
     @Input()
@@ -78,10 +89,6 @@ export class DynamicPageSubheaderComponent {
     id = `fd-dynamic-page-header-id-${dynamicPageSubHeaderId++}`;
 
     /**
-     * id for collapsible header
-     */
-    collapsibleHeaderId = `${this.id}-collapsible`;
-    /**
      * aria label for header
      */
     @Input()
@@ -91,13 +98,13 @@ export class DynamicPageSubheaderComponent {
      * aria label for pin state of pin button
      */
     @Input()
-    pinAriaLabel: string = this._dynamicPageConfig.pinLabel;
+    pinAriaLabel: string;
 
     /**
      * aria label for unpin state of pin button
      */
     @Input()
-    unpinAriaLabel: string = this._dynamicPageConfig.unpinLabel;
+    unpinAriaLabel: string;
 
     /** Collapse/Expand change event raised */
     @Output()
@@ -106,6 +113,31 @@ export class DynamicPageSubheaderComponent {
     /** Reference to page header content */
     @ViewChild('pincollapseContainer')
     pinCollapseContainer: ElementRef<HTMLElement>;
+
+    /**
+     * id for collapsible header
+     */
+    collapsibleHeaderId = `${this.id}-collapsible`;
+
+    /**
+     * Aria Label for the toggle button
+     * @hidden
+     **/
+    get _toggleButtonAriaLabel(): string {
+        const expandLabel = this.expandLabel || this._defaultExpandLabel();
+        const collapseLabel = this.collapseLabel || this._defaultCollapseLabel();
+        return this._collapsed ? expandLabel : collapseLabel;
+    }
+
+    /**
+     * Aria Label for the pin button
+     * @hidden
+     **/
+    get _pinButtonAriaLabel(): string {
+        const pinLabel = this.pinAriaLabel || this._defaultPinLabel();
+        const unpinLabel = this.unpinAriaLabel || this._defaultUnpinLabel();
+        return this._pinned ? unpinLabel : pinLabel;
+    }
 
     /**
      * tracking if pin button is pinned
@@ -119,13 +151,27 @@ export class DynamicPageSubheaderComponent {
     private _collapsed = false;
 
     /** @hidden */
+    private _resolveTranslationSignal = resolveTranslationSignalFn();
+
+    /** @hidden */
+    private _defaultExpandLabel = this._resolveTranslationSignal('coreDynamicPage.expandLabel');
+
+    /** @hidden */
+    private _defaultCollapseLabel = this._resolveTranslationSignal('coreDynamicPage.collapseLabel');
+
+    /** @hidden */
+    private _defaultPinLabel = this._resolveTranslationSignal('coreDynamicPage.pinLabel');
+
+    /** @hidden */
+    private _defaultUnpinLabel = this._resolveTranslationSignal('coreDynamicPage.unpinLabel');
+
+    /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef,
-        protected _dynamicPageConfig: DynamicPageConfig,
         private _dynamicPageService: DynamicPageService
     ) {
         this._dynamicPageService.collapsed
-            .pipe(distinctUntilChanged())
+            .pipe(takeUntilDestroyed(), distinctUntilChanged())
             .subscribe((collapsed) => this._handleCollapsedChange(collapsed));
     }
 

@@ -47,6 +47,12 @@ export default {
         datetimeOkLabel: 'Ok',
         datetimeCancelLabel: 'Cancel'
     },
+    coreDynamicPage: {
+        expandLabel: 'Expand Header',
+        collapseLabel: 'Collapse Header',
+        pinLabel: 'Pin Header',
+        unpinLabel: 'Unpin Header'
+    },
     coreFeedListItem: {
         moreLabel: '{count} more',
         lessLabel: 'Less'

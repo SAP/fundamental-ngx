@@ -47,6 +47,12 @@ export default {
         datetimeOkLabel: 'Ok',
         datetimeCancelLabel: 'Anuluj'
     },
+    coreDynamicPage: {
+        expandLabel: 'Rozwiń nagłówek',
+        collapseLabel: 'Zwiń nagłówek',
+        pinLabel: 'Przypnij nagłówek',
+        unpinLabel: 'Odepnij nagłówek'
+    },
     coreFeedListItem: {
         moreLabel: 'Więcej',
         lessLabel: 'Mniej'

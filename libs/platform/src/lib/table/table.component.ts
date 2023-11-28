@@ -1593,6 +1593,15 @@ export class TableComponent<T = any>
     /** @hidden */
     private _listenToTableRowsPipe(): void {
         this._subscriptions.add(
+            /*
+             * Reset table when the data source is changed,
+             * because new data source can have different set of data
+             */
+            this._dataSourceDirective.dataSourceChanged.subscribe(() => {
+                this._setTableRows([]);
+            })
+        );
+        this._subscriptions.add(
             this._dataSourceDirective.items$
                 .pipe(
                     // map source items to table rows
@@ -1846,7 +1855,7 @@ export class TableComponent<T = any>
     /** @hidden */
     private _calculateVisibleTableRows(): void {
         this._tableRowsVisible = this._tableRows.filter((row) => !row.hidden);
-
+        console.log({ visible: this._tableRowsVisible, total: this._tableRows });
         if (this._virtualScrollDirective?.virtualScroll) {
             this._virtualScrollDirective.calculateVirtualScrollRows();
         } else {

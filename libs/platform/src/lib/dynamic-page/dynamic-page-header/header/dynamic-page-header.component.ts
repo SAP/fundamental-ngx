@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, Templa
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
-import { DynamicPageConfig } from '../../dynamic-page.config';
 
 /** Dynamic Page collapse change event */
 export class DynamicPageCollapseChangeEvent {
@@ -11,7 +10,10 @@ export class DynamicPageCollapseChangeEvent {
      * @param source Dynamic Page component
      * @param payload Collapse state
      */
-    constructor(public source: DynamicPageHeaderComponent, public payload: boolean) {}
+    constructor(
+        public source: DynamicPageHeaderComponent,
+        public payload: boolean
+    ) {}
 }
 
 let dynamicPageHeaderId = 0;
@@ -59,13 +61,13 @@ export class DynamicPageHeaderComponent {
      * ARIA label for button when the header is collapsed
      */
     @Input()
-    expandLabel: string = this._dynamicPageConfig.expandLabel;
+    expandLabel: string;
 
     /**
      * ARIA label for button when the header is expanded
      */
     @Input()
-    collapseLabel: string = this._dynamicPageConfig.collapseLabel;
+    collapseLabel: string;
 
     /** Header role  */
     @Input()
@@ -87,13 +89,13 @@ export class DynamicPageHeaderComponent {
      * aria label for pin state of pin button
      */
     @Input()
-    pinAriaLabel: string = this._dynamicPageConfig.pinLabel;
+    pinAriaLabel: string;
 
     /**
      * aria label for unpin state of pin button
      */
     @Input()
-    unpinAriaLabel: string = this._dynamicPageConfig.unpinLabel;
+    unpinAriaLabel: string;
 
     /**
      * sets background for content to `list`, `transparent`, or `solid` background color.
@@ -123,9 +125,6 @@ export class DynamicPageHeaderComponent {
      */
     @ViewChild('contentTemplateRef')
     contentTemplateRef: TemplateRef<any>;
-
-    /** @hidden */
-    constructor(protected _dynamicPageConfig: DynamicPageConfig) {}
 
     /**
      * @hidden

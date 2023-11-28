@@ -47,6 +47,12 @@ export default {
         datetimeOkLabel: 'Ok',
         datetimeCancelLabel: 'Zrušit'
     },
+    coreDynamicPage: {
+        expandLabel: 'Rozbalit záhlaví',
+        collapseLabel: 'Sbalit záhlaví',
+        pinLabel: 'Připnout záhlaví',
+        unpinLabel: 'Odepnout záhlaví'
+    },
     coreFeedListItem: {
         moreLabel: 'Více',
         lessLabel: 'Méně'

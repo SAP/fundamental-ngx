@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 
 /**
  * Default options for core dynamic-page
+ * @deprecated use i18n coreDynamicPage key instead
  */
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class DynamicPageConfig {
     /**
      * aria label for expand/collapse button when the Dynamic Page is collapsed

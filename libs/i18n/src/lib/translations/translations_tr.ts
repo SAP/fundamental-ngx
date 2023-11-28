@@ -47,6 +47,12 @@ export default {
         datetimeOkLabel: 'Tamam',
         datetimeCancelLabel: 'İptal'
     },
+    coreDynamicPage: {
+        expandLabel: 'Başlığı genişlet',
+        collapseLabel: 'Başlığı daralt',
+        pinLabel: 'Başlığı sabitle',
+        unpinLabel: 'Başlığın sabitlemesini kaldır'
+    },
     coreFeedListItem: {
         moreLabel: 'Daha fazla',
         lessLabel: 'Daha az'
