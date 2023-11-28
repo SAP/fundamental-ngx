@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.47.4-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.47.4-rc.9...v0.47.4-rc.10) (2023-11-28)
+
+
+### Bug Fixes
+
+* **core,platform:** added missing translations for the dynamic page ([#10999](https://github.com/SAP/fundamental-ngx/issues/10999)) ([6f1f692](https://github.com/SAP/fundamental-ngx/commit/6f1f692b018985b8924a0af30352cc566be6342e))
+
+
+
+
+
 ## [0.47.4-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.47.4-rc.8...v0.47.4-rc.9) (2023-11-28)
 
 **Note:** Version bump only for package @fundamental-ngx/core
