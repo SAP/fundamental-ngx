@@ -37,7 +37,7 @@ import { dialogFade } from '../utils/dialog.animations';
 @Component({
     selector: 'fd-dialog-container',
     template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
-    styleUrls: ['./dialog-container.component.scss'],
+    styleUrl: './dialog-container.component.scss',
     animations: [dialogFade],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

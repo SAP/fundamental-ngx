@@ -1,11 +1,11 @@
 <div>
     <fd-toolbar fdType="transparent">
-        <ng-container *ngIf="_toolbarItems">
-            <ng-container *ngFor="let template of _toolbarItems">
+        @if (_toolbarItems) {
+            @for (template of _toolbarItems; track template) {
                 <ng-template [ngTemplateOutlet]="template"></ng-template>
                 <fd-toolbar-separator></fd-toolbar-separator>
-            </ng-container>
-        </ng-container>
+            }
+        }
         <fdp-search-field
             (inputChange)="_onSearchInputChange($event)"
             (searchSubmit)="submitForm()"
@@ -15,14 +15,15 @@
             [placeholder]="'platformSmartFilterBar.searchPlaceholder' | fdTranslate"
         ></fdp-search-field>
         <fd-toolbar-spacer></fd-toolbar-spacer>
-        <fdp-button
-            (click)="submitForm()"
-            buttonType="emphasized"
-            *ngIf="!liveUpdate"
-            fd-toolbar-item
-            [disabled]="_loading"
-            [label]="'platformSmartFilterBar.submitButtonLabel' | fdTranslate"
-        ></fdp-button>
+        @if (!liveUpdate) {
+            <fdp-button
+                (click)="submitForm()"
+                buttonType="emphasized"
+                fd-toolbar-item
+                [disabled]="_loading"
+                [label]="'platformSmartFilterBar.submitButtonLabel' | fdTranslate"
+            ></fdp-button>
+        }
         <fdp-button
             (click)="submitForm()"
             fd-toolbar-item
@@ -33,7 +34,7 @@
         <fdp-button
             (click)="showFilteringSettings()"
             [label]="
-                'platformSmartFilterBar.filtersButtonLabel' | fdTranslate : { filtersCount: _selectedFilters.length }
+                'platformSmartFilterBar.filtersButtonLabel' | fdTranslate: { filtersCount: _selectedFilters.length }
             "
             fd-toolbar-item
             [disabled]="_loading"
@@ -52,7 +53,6 @@
         ></fdp-button>
     </fd-toolbar>
 </div>
-
 <div class="fdp-smart-filter-bar__filters" [hidden]="!_showFilterBar">
     <fdp-form-generator
         (formCreated)="_onFormCreated()"

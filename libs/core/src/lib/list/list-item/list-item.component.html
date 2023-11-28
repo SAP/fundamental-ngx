@@ -1,14 +1,15 @@
-<ng-container *ngIf="checkbox || radio">
+@if (checkbox || radio) {
     <div fd-form-item class="fd-list__form-item">
         <ng-content select="fd-checkbox"></ng-content>
         <ng-content select="fd-radio-button"></ng-content>
     </div>
-</ng-container>
-
-<span *ngIf="unread && (!_list || _list.byline)" class="sap-icon--circle-task-2 fd-list__notification"></span>
-
+}
+@if (unread && (!_list || _list.byline)) {
+    <span class="sap-icon--circle-task-2 fd-list__notification"></span>
+}
 <ng-content></ng-content>
-
-<span *ngIf="counter || counter === 0" class="fd-list__item-counter">
-    {{ counter | number : '1.0-2' }}
-</span>
+@if (counter || counter === 0) {
+    <span class="fd-list__item-counter">
+        {{ counter | number: '1.0-2' }}
+    </span>
+}

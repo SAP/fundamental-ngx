@@ -1,13 +1,16 @@
-<input
-    *ngIf="_editMode"
-    fd-form-control
-    required
-    [style.pointer-events]="'all'"
-    class="fd-input"
-    type="text"
-    [attr.placeholder]="'coreUploadCollection.formItemPlaceholder' | fdTranslate"
-    [(ngModel)]="fileName"
-    [state]="!fileName ? 'error' : null"
-    (click)="$event.stopPropagation()"
-/>
-<span *ngIf="_editMode" class="fd-upload-collection__extension">.{{ _extension }}</span>
+@if (_editMode) {
+    <input
+        fd-form-control
+        required
+        [style.pointer-events]="'all'"
+        class="fd-input"
+        type="text"
+        [attr.placeholder]="'coreUploadCollection.formItemPlaceholder' | fdTranslate"
+        [(ngModel)]="fileName"
+        [state]="!fileName ? 'error' : null"
+        (click)="$event.stopPropagation()"
+    />
+}
+@if (_editMode) {
+    <span class="fd-upload-collection__extension">.{{ _extension }}</span>
+}

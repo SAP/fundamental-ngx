@@ -1,6 +1,5 @@
 <ng-content></ng-content>
-
-<ng-container *ngIf="hasPopup && submenu">
+@if (hasPopup && submenu) {
     <ul
         class="fd-menu__sublist"
         role="menu"
@@ -9,6 +8,6 @@
         [attr.aria-label]="submenu.ariaLabel"
         [attr.aria-labelledby]="submenu.ariaLabelledby"
     >
-        <ng-container *ngTemplateOutlet="submenu.templateRef"></ng-container>
+        <ng-template [ngTemplateOutlet]="submenu.templateRef"></ng-template>
     </ul>
-</ng-container>
+}

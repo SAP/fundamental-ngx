@@ -1,66 +1,70 @@
-<form #nativeForm (ngSubmit)="onSubmit.emit($event)" *ngIf="useForm; else body" [id]="id" [name]="name">
-    <ng-container *ngTemplateOutlet="body"></ng-container>
-</form>
-
+@if (useForm) {
+    <form #nativeForm (ngSubmit)="onSubmit.emit($event)" [id]="id" [name]="name">
+        <ng-template [ngTemplateOutlet]="body"></ng-template>
+    </form>
+} @else {
+    <!--  Render fields and field groups with assigned columns -->
+    <ng-template [ngTemplateOutlet]="fields"></ng-template>
+}
 <ng-template #body>
     <!--  Render fields and field groups with assigned columns -->
-    <ng-container *ngTemplateOutlet="fields"></ng-container>
+    <ng-template [ngTemplateOutlet]="fields"></ng-template>
 </ng-template>
-
 <ng-template #fields>
-    <div *ngIf="mainTitle && !hideMainTItle" class="fd-form-header">
-        <ng-template [ngTemplateOutlet]="mainTitleTemplate"></ng-template>
-    </div>
-
+    @if (mainTitle && !hideMainTItle) {
+        <div class="fd-form-header">
+            <ng-template [ngTemplateOutlet]="mainTitleTemplate"></ng-template>
+        </div>
+    }
     <div
         class="fd-container fd-form-layout-grid-container"
         [class.is-compact]="contentDensityObserver.isCompact$ | async"
     >
-        <div *ngFor="let column of formRows | keyvalue; trackBy: trackByFn" class="fd-row">
-            <div
-                *ngFor="let fields of column | fieldGroupRowValue | keyvalue; trackBy: trackByFn; let index = index"
-                class="fd-col fd-form-group"
-                [class]="xlCol"
-            >
-                <div class="fd-row" *ngIf="$fieldGroup(column.value) as value">
-                    <div class="fd-col">
-                        <div *ngIf="value.label" fdp-form-group-header [fieldGroup]="index === 0 ? value : null"></div>
+        @for (column of formRows | keyvalue; track $index) {
+            <div class="fd-row">
+                @for (fields of column | fieldGroupRowValue | keyvalue; track $index) {
+                    <div class="fd-col fd-form-group" [class]="xlCol">
+                        @if ($fieldGroup(column.value); as value) {
+                            <div class="fd-row">
+                                <div class="fd-col">
+                                    @if (value.label) {
+                                        <div fdp-form-group-header [fieldGroup]="$index === 0 ? value : null"></div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        @for (field of fields.value; track trackByFieldName($index, field)) {
+                            <div class="fd-row fd-form-item">
+                                <div class="fd-col" [class]="_inlineColumnLayoutClass" [style.order]="field.rank">
+                                    <ng-template [ngTemplateOutlet]="field?.renderer || null"></ng-template>
+                                </div>
+                            </div>
+                        }
                     </div>
-                </div>
-
-                <div *ngFor="let field of fields.value; trackBy: trackByFieldName" class="fd-row fd-form-item">
-                    <div class="fd-col" [class]="_inlineColumnLayoutClass" [style.order]="field.rank">
-                        <ng-container *ngTemplateOutlet="field?.renderer || null"></ng-container>
-                    </div>
-                </div>
+                }
             </div>
-        </div>
+        }
     </div>
 </ng-template>
-
 <!-- For nested form-group -->
 <ng-content select="fdp-form-group"></ng-content>
-
 <ng-template #mainTitleTemplate>
-    <ng-container *ngIf="_hintOptions?.content && _hintOptions.position === 'before'">
+    @if (_hintOptions && _hintOptions.content && _hintOptions.position === 'before') {
         <ng-template [ngTemplateOutlet]="hintTemplate"></ng-template>
-    </ng-container>
-
+    }
     <h5 class="fd-form-header__text">
         {{ mainTitle }}
     </h5>
-
-    <ng-container *ngIf="_hintOptions?.content && _hintOptions.position === 'after'">
+    @if (_hintOptions && _hintOptions.content && _hintOptions.position === 'after') {
         <ng-template [ngTemplateOutlet]="hintTemplate"></ng-template>
-    </ng-container>
-
+    }
     <ng-template #hintTemplate>
         <span fd-link [undecorated]="true">
             <fd-icon
-                [fd-inline-help]="_hintOptions.content"
-                [glyph]="_hintOptions.glyph"
-                [placement]="_hintOptions.placement || null"
-                [triggers]="_hintOptions.trigger || []"
+                [fd-inline-help]="_hintOptions!.content"
+                [glyph]="_hintOptions!.glyph"
+                [placement]="_hintOptions!.placement || null"
+                [triggers]="_hintOptions!.trigger || []"
                 tabindex="0"
             ></fd-icon>
         </span>

@@ -4,30 +4,37 @@
     <button fd-button (click)="showExample('input')">Show autofocus for input</button>
     <button fd-button (click)="showExample('textarea')">Show autofocus for textarea</button>
 </div>
-
 <div class="fdk-initial-focus-examples">
-    <div *ngIf="currentExample === 'link'">
-        <a fdkInitialFocus [routerLink]="['./']" fd-link aria-label="Standard">Link with autofocus</a>
-    </div>
-    <div *ngIf="currentExample === 'button'">
-        <button fdkInitialFocus fd-button>Button with autofocus</button>
-    </div>
-    <div *ngIf="currentExample === 'input'">
-        <div fd-form-item>
-            <label fd-form-label for="input-1">Default Input</label>
-            <input fdkInitialFocus fd-form-control type="text" id="input-1" placeholder="Input with autofocus" />
+    @if (currentExample === 'link') {
+        <div>
+            <a fdkInitialFocus [routerLink]="['./']" fd-link aria-label="Standard">Link with autofocus</a>
         </div>
-    </div>
-    <div *ngIf="currentExample === 'textarea'">
-        <div fd-form-item>
-            <label fd-form-label for="input-1">Default Textarea</label>
-            <textarea
-                fdkInitialFocus
-                fd-form-control
-                type="text"
-                id="textarea-1"
-                placeholder="Input with autofocus"
-            ></textarea>
+    }
+    @if (currentExample === 'button') {
+        <div>
+            <button fdkInitialFocus fd-button>Button with autofocus</button>
         </div>
-    </div>
+    }
+    @if (currentExample === 'input') {
+        <div>
+            <div fd-form-item>
+                <label fd-form-label for="input-1">Default Input</label>
+                <input fdkInitialFocus fd-form-control type="text" id="input-1" placeholder="Input with autofocus" />
+            </div>
+        </div>
+    }
+    @if (currentExample === 'textarea') {
+        <div>
+            <div fd-form-item>
+                <label fd-form-label for="input-1">Default Textarea</label>
+                <textarea
+                    fdkInitialFocus
+                    fd-form-control
+                    type="text"
+                    id="textarea-1"
+                    placeholder="Input with autofocus"
+                ></textarea>
+            </div>
+        </div>
+    }
 </div>

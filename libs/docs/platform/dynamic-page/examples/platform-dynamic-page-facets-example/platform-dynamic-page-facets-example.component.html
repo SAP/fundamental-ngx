@@ -1,6 +1,6 @@
 <button fd-button (click)="openPage()">Click to open full screen</button>
 <div class="overlay" #overlay>
-    <ng-container *ngIf="fullscreen">
+    @if (fullscreen) {
         <fdp-dynamic-page ariaLabel="Example Dynamic Page">
             <fdp-dynamic-page-title>
                 <span *fdpDynamicPageHeaderTitle="let collapsed">
@@ -26,13 +26,10 @@
                         <span>Jogging</span>
                     </fd-breadcrumb-item>
                 </fd-breadcrumb>
-
                 <fdp-dynamic-page-key-info> LAST DAY OF SALE </fdp-dynamic-page-key-info>
-
                 <fdp-dynamic-page-title-image>
                     <fd-avatar image="http://picsum.photos/id/1018/400" size="s"></fd-avatar>
                 </fdp-dynamic-page-title-image>
-
                 <fdp-dynamic-page-global-actions>
                     <!-- global actions -->
                     <fd-toolbar fdType="transparent" [clearBorder]="true">
@@ -228,5 +225,5 @@
                 </div>
             </fdp-dynamic-page-footer>
         </fdp-dynamic-page>
-    </ng-container>
+    }
 </div>

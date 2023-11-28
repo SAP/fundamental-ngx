@@ -1,7 +1,6 @@
 import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 import { Component, ViewChild } from '@angular/core';
 
-import { NgForOf, NgIf } from '@angular/common';
 import { KeyUtil, RtlService, Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import {
@@ -49,9 +48,7 @@ import { AvatarGroupLegacyDataExampleService } from './avatar-group-legacy-data-
         AvatarGroupLegacyOverflowItemDirective,
         AvatarGroupLegacyFocusableAvatarDirective,
         QuickViewModule,
-        LinkComponent,
-        NgIf,
-        NgForOf
+        LinkComponent
     ]
 })
 export class AvatarGroupLegacyGroupTypeExampleComponent {

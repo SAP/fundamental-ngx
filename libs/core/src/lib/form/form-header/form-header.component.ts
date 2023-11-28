@@ -11,7 +11,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-form-header]',
     template: `<span class="fd-form-header__text"><ng-content></ng-content></span>`,
-    styleUrls: ['./form-header.component.scss'],
+    styleUrl: './form-header.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true

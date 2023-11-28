@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, forwardRef } from '@angular/core';
 
-import { AsyncPipe, NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -31,7 +31,6 @@ import { BaseListItem } from '../base-list-item';
         role: 'none'
     },
     imports: [
-        NgIf,
         ListItemComponent,
         NgTemplateOutlet,
         ListLinkDirective,

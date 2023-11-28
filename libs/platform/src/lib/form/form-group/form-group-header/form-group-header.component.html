@@ -1,24 +1,23 @@
-<ng-container *ngIf="fieldGroup && hintOptions?.position === 'before'">
-    <ng-container *ngTemplateOutlet="inlineHelpRef"></ng-container>
-</ng-container>
-
+@if (fieldGroup && hintOptions?.position === 'before') {
+    <ng-template [ngTemplateOutlet]="inlineHelpRef"></ng-template>
+}
 <h6 class="fd-form-group__header-text">
     {{ fieldGroup?.label }}
 </h6>
-
-<ng-container *ngIf="fieldGroup && hintOptions?.position === 'after'">
-    <ng-container *ngTemplateOutlet="inlineHelpRef"></ng-container>
-</ng-container>
-
+@if (fieldGroup && hintOptions?.position === 'after') {
+    <ng-template [ngTemplateOutlet]="inlineHelpRef"></ng-template>
+}
 <ng-template #inlineHelpRef>
-    <span *ngIf="hintOptions" fd-link [undecorated]="true">
-        <fd-icon
-            [style.vertical-align]="'middle'"
-            [fd-inline-help]="hintOptions.content"
-            [glyph]="hintOptions.glyph"
-            [placement]="hintOptions.placement || null"
-            [triggers]="hintOptions.trigger || []"
-            tabindex="0"
-        ></fd-icon>
-    </span>
+    @if (hintOptions) {
+        <span fd-link [undecorated]="true">
+            <fd-icon
+                [style.vertical-align]="'middle'"
+                [fd-inline-help]="hintOptions.content"
+                [glyph]="hintOptions.glyph"
+                [placement]="hintOptions.placement || null"
+                [triggers]="hintOptions.trigger || []"
+                tabindex="0"
+            ></fd-icon>
+        </span>
+    }
 </ng-template>

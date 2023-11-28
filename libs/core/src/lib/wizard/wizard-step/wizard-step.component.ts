@@ -22,7 +22,6 @@ import { WizardContentComponent } from '../wizard-content/wizard-content.compone
 
 export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
 
-import { NgIf } from '@angular/common';
 import { COMPLETED_STEP_STATUS, CURRENT_STEP_STATUS, FD_WIZARD_STEP_INDICATOR } from '../constants';
 import { WizardStepIndicator } from '../models/wizard-step';
 import { WIZARD, WizardComponentInterface } from '../wizard-injection-token';
@@ -41,7 +40,7 @@ import { WIZARD, WizardComponentInterface } from '../wizard-injection-token';
     templateUrl: './wizard-step.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf]
+    imports: []
 })
 export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy {
     /**

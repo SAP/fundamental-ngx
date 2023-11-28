@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, Optional } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ModuleDeprecation, ModuleDeprecations } from '@fundamental-ngx/cdk/utils';
@@ -17,7 +16,7 @@ import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
         `
     ],
     standalone: true,
-    imports: [NgFor, MessageStripComponent, LinkComponent, RouterLink]
+    imports: [MessageStripComponent, LinkComponent, RouterLink]
 })
 export class DeprecatedAlertsComponent {
     constructor(@Optional() @Inject(ModuleDeprecations) readonly moduleDeprecations: ModuleDeprecation[]) {}

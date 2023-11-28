@@ -4,7 +4,7 @@ import { NavigationStart, Router, RouterEvent, RouterModule } from '@angular/rou
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
+
 import { Subject } from 'rxjs';
 
 import { MessageBoxConfig } from './utils/message-box-config.class';
@@ -12,6 +12,7 @@ import { MessageBoxComponent } from './message-box.component';
 import { MessageBoxRef } from './utils/message-box-ref.class';
 import { MessageBoxModule } from './message-box.module';
 import { FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: `

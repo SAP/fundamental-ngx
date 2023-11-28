@@ -1,3 +1,4 @@
 <ng-content></ng-content>
-
-<div *ngIf="_showSpacer" class="footer-spacer"></div>
+@if (_showSpacer) {
+    <div class="footer-spacer"></div>
+}

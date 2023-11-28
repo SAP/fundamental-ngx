@@ -31,7 +31,7 @@ import { FormItemControl, registerFormItemControl } from '../form-item-control/f
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'input[fd-form-control], textarea[fd-form-control]',
     template: ` <ng-content></ng-content>`,
-    styleUrls: ['./form-control.component.scss'],
+    styleUrl: './form-control.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ContentDensityModule],

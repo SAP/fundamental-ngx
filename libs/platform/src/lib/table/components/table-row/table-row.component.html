@@ -1,12 +1,12 @@
-<td
-    *ngIf="_fdpTableService._semanticHighlighting$ | async as semanticHighlighting"
-    fd-table-cell
-    fd-table-status-indicator
-    fdkDisabled
-    [addDisabledClass]="false"
-    [status]="row.value[semanticHighlighting]"
-></td>
-
+@if (_fdpTableService._semanticHighlighting$ | async; as semanticHighlighting) {
+    <td
+        fd-table-cell
+        fd-table-status-indicator
+        fdkDisabled
+        [addDisabledClass]="false"
+        [status]="row.value[semanticHighlighting]"
+    ></td>
+}
 <!-- hidden text for screenreader -->
 <ng-template #selectionScreenReaderText>
     <span
@@ -25,12 +25,10 @@
         {{ (row.checked ? 'platformTable.deselectSingleRow' : 'platformTable.selectSingleRow') | fdTranslate }}
     </span>
 </ng-template>
-
 <!-- Row Selection Cell -->
-<ng-container [ngSwitch]="selectionMode">
-    <ng-container *ngSwitchCase="SELECTION_MODE.SINGLE">
+@if (selectionMode === SELECTION_MODE.SINGLE) {
+    @if (row.value[selectableKey] !== false) {
         <td
-            *ngIf="row.value[selectableKey] !== false; else selectionMock"
             class="fd-table__cell--checkbox"
             [class.fd-table__cell--fixed]="fixed"
             [attr.role]="_hasRowHeaderColumn ? 'rowheader' : 'gridcell'"
@@ -40,7 +38,7 @@
             [style]="
                 _contentDensityObserver
                     | async
-                    | selectionCellStyles : _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
+                    | selectionCellStyles: _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
             "
             [attr.aria-selected]="row.checked"
             [attr.aria-labelledby]="_rowSelectionHelperTextId"
@@ -50,11 +48,19 @@
         >
             <ng-template [ngTemplateOutlet]="selectionScreenReaderText"></ng-template>
         </td>
-    </ng-container>
-
-    <ng-container *ngSwitchCase="SELECTION_MODE.MULTIPLE">
+    } @else {
         <td
-            *ngIf="row.value[selectableKey] !== false; else selectionMock"
+            class="fd-table__cell--checkbox"
+            role="gridcell"
+            fd-table-cell
+            fdkDisabled
+            [addDisabledClass]="false"
+            [class.fd-table__cell--fixed]="fixed"
+        ></td>
+    }
+} @else if (selectionMode === SELECTION_MODE.MULTIPLE) {
+    @if (row.value[selectableKey] !== false) {
+        <td
             class="fd-table__cell--checkbox"
             [class.fd-table__cell--fixed]="fixed"
             role="cell"
@@ -67,7 +73,7 @@
             [style]="
                 _contentDensityObserver
                     | async
-                    | selectionCellStyles : _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
+                    | selectionCellStyles: _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
             "
         >
             <ng-template [ngTemplateOutlet]="selectionScreenReaderText"></ng-template>
@@ -80,140 +86,122 @@
                 (ngModelChange)="_toggleMultiSelectRow(row)"
             ></fd-checkbox>
         </td>
-    </ng-container>
-</ng-container>
-
-<ng-template #selectionMock>
+    } @else {
+        <td
+            class="fd-table__cell--checkbox"
+            role="gridcell"
+            fd-table-cell
+            fdkDisabled
+            [addDisabledClass]="false"
+            [class.fd-table__cell--fixed]="fixed"
+        ></td>
+    }
+}
+@for (column of _fdpTableService.visibleColumns$ | async; track column.name) {
     <td
-        class="fd-table__cell--checkbox"
-        role="gridcell"
-        fd-table-cell
-        fdkDisabled
-        [addDisabledClass]="false"
-        [class.fd-table__cell--fixed]="fixed"
-    ></td>
-</ng-template>
-
-<td
-    *ngFor="
-        let column of _fdpTableService.visibleColumns$ | async;
-        let colIdx = index;
-        last as isLast;
-        trackBy: _columnTrackBy
-    "
-    #tableCellElement
-    [fdpTableCellResizable]="
-        colIdx
-            | columnResizableSide
-                : _fdpTableService.visibleColumnsLength
-                : (_fdpTableService._isShownNavigationColumn$ | async) === true
-    "
-    [columnName]="column.name"
-    [focusable]="true"
-    [attr.role]="column.role"
-    [headers]="rowId + '__' + column.name"
-    [ngClass]="[
-        'fdp-table__col--' + column.name,
-        column._freezed ? 'fd-table__cell--fixed' : '',
-        column.name === freezeColumnsTo ? 'fd-table__cell--fixed-last' : '',
-        column._endFreezed ? 'fd-table__cell--fixed-end' : '',
-        column.name === freezeEndColumnsTo ? 'fd-table__cell--fixed-end-last' : '',
-        row.isTree && colIdx === 0 ? 'fd-table__cell--expand' : '',
-        isLast && (_fdpTableService._isShownNavigationColumn$ | async) === false ? 'is-last-child' : ''
-    ]"
-    [ngStyle]="
-        column
-            | tableCellStyles
-                : _rtl
-                : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
-                : selectionColumnWidth
-                : column._freezed
-                : column._endFreezed
-                : _tableColumnResizeService.getPrevColumnsWidth(column.name)
-                : _tableColumnResizeService.getColumnWidthStyle(column.name)
-                : _tableColumnResizeService.getNextColumnsWidth(column.name)
-    "
-    [attr.aria-expanded]="_isTreeRowFirstCell(colIdx, row) ? row.expanded : null"
-    [attr.data-nesting-level]="colIdx === 0 ? row.level + 1 : null"
-    (cellFocused)="_tableRowService.cellFocused($event)"
-    (click)="_tableRowService.cellClicked({ index: colIdx, row })"
-    (keydown.enter)="_isTreeRowFirstCell(colIdx, row, $event) && _toggleGroupRow()"
-    (keydown.arrowLeft)="_tableRowService.scrollToOverlappedCell()"
-    (keydown.arrowRight)="_tableRowService.scrollToOverlappedCell()"
-    (keydown.space)="_handleCellSpaceKey(colIdx, tableCellElement, $event)"
->
-    <div [class.fd-table__text]="column.applyText" [class.fd-table__text--no-wrap]="column.noWrap">
-        <span
-            *ngIf="_isTreeRowFirstCell(colIdx, row)"
-            class="fd-table__expand"
-            [class.fd-table__expand--open]="row.expanded$ | async"
-            aria-hidden="true"
-        ></span>
-
-        <ng-container *ngIf="row.state === 'readonly'; else editModeCell">
-            <span
-                *ngIf="(row.value | valueByPath : column.key) === '' || (row.value | valueByPath : column.key) === null"
-                [ngStyle]="{
-                    position: 'absolute !important',
-                    height: '1px',
-                    width: '1px',
-                    overflow: 'hidden',
-                    clip: 'rect(1px, 1px, 1px, 1px)',
-                    color: 'transparent',
-                    display: 'block'
-                }"
-                >{{ 'platformTable.emptyCell' | fdTranslate }}</span
-            >
-            <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
-                <ng-container
-                    *ngTemplateOutlet="
-                        column.columnCellTemplate!;
-                        context: { $implicit: row.value, popping: false, rowIndex: row.index }
-                    "
-                ></ng-container>
-            </ng-container>
-        </ng-container>
-        <ng-template #defaultTableCellTemplate>{{ row.value | valueByPath : column.key }}</ng-template>
-
-        <ng-template #editModeCell>
-            <ng-container *ngIf="column?.editableColumnCellTemplate; else defaultEditableTableCellTemplate">
-                <ng-container
-                    *ngTemplateOutlet="
-                        column.editableColumnCellTemplate!;
-                        context: { $implicit: row.value, popping: false, rowIndex: row.index }
-                    "
-                ></ng-container>
-            </ng-container>
-
-            <ng-template #defaultEditableTableCellTemplate>
-                <fdp-table-editable-cell
-                    [row]="row"
-                    [column]="column"
-                    [columnValue]="row.value | valueByPath : column.key"
-                ></fdp-table-editable-cell>
-            </ng-template>
-        </ng-template>
-    </div>
-</td>
-
+        #tableCellElement
+        [fdpTableCellResizable]="
+            $index
+                | columnResizableSide
+                    : _fdpTableService.visibleColumnsLength
+                    : (_fdpTableService._isShownNavigationColumn$ | async) === true
+        "
+        [columnName]="column.name"
+        [focusable]="true"
+        [attr.role]="column.role"
+        [headers]="rowId + '__' + column.name"
+        [ngClass]="[
+            'fdp-table__col--' + column.name,
+            column._freezed ? 'fd-table__cell--fixed' : '',
+            column.name === freezeColumnsTo ? 'fd-table__cell--fixed-last' : '',
+            column._endFreezed ? 'fd-table__cell--fixed-end' : '',
+            column.name === freezeEndColumnsTo ? 'fd-table__cell--fixed-end-last' : '',
+            row.isTree && $index === 0 ? 'fd-table__cell--expand' : '',
+            $last && (_fdpTableService._isShownNavigationColumn$ | async) === false ? 'is-last-child' : ''
+        ]"
+        [ngStyle]="
+            column
+                | tableCellStyles
+                    : _rtl
+                    : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
+                    : selectionColumnWidth
+                    : column._freezed
+                    : column._endFreezed
+                    : _tableColumnResizeService.getPrevColumnsWidth(column.name)
+                    : _tableColumnResizeService.getColumnWidthStyle(column.name)
+                    : _tableColumnResizeService.getNextColumnsWidth(column.name)
+        "
+        [attr.aria-expanded]="_isTreeRowFirstCell($index, row) ? row.expanded : null"
+        [attr.data-nesting-level]="$index === 0 ? row.level + 1 : null"
+        (cellFocused)="_tableRowService.cellFocused($event)"
+        (click)="_tableRowService.cellClicked({ index: $index, row })"
+        (keydown.enter)="_isTreeRowFirstCell($index, row, $event) && _toggleGroupRow()"
+        (keydown.arrowLeft)="_tableRowService.scrollToOverlappedCell()"
+        (keydown.arrowRight)="_tableRowService.scrollToOverlappedCell()"
+        (keydown.space)="_handleCellSpaceKey($index, tableCellElement, $event)"
+    >
+        <div [class.fd-table__text]="column.applyText" [class.fd-table__text--no-wrap]="column.noWrap">
+            @if (_isTreeRowFirstCell($index, row)) {
+                <span
+                    class="fd-table__expand"
+                    [class.fd-table__expand--open]="row.expanded$ | async"
+                    aria-hidden="true"
+                ></span>
+            }
+            @if (row.state === 'readonly') {
+                @if ((row.value | valueByPath: column.key) === '' || (row.value | valueByPath: column.key) === null) {
+                    <span
+                        [ngStyle]="{
+                            position: 'absolute !important',
+                            height: '1px',
+                            width: '1px',
+                            overflow: 'hidden',
+                            clip: 'rect(1px, 1px, 1px, 1px)',
+                            color: 'transparent',
+                            display: 'block'
+                        }"
+                    >
+                        {{ 'platformTable.emptyCell' | fdTranslate }}
+                    </span>
+                }
+                @if (column?.columnCellTemplate) {
+                    <ng-template
+                        [ngTemplateOutlet]="column.columnCellTemplate!"
+                        [ngTemplateOutletContext]="{ $implicit: row.value, popping: false, rowIndex: row.index }"
+                    ></ng-template>
+                } @else {
+                    {{ row.value | valueByPath: column.key }}
+                }
+            } @else {
+                @if (column?.editableColumnCellTemplate) {
+                    <ng-template
+                        [ngTemplateOutlet]="column.editableColumnCellTemplate!"
+                        [ngTemplateOutletContext]="{ $implicit: row.value, popping: false, rowIndex: row.index }"
+                    ></ng-template>
+                } @else {
+                    <fdp-table-editable-cell
+                        [row]="row"
+                        [column]="column"
+                        [columnValue]="row.value | valueByPath: column.key"
+                    ></fdp-table-editable-cell>
+                }
+            }
+        </div>
+    </td>
+}
 <ng-content></ng-content>
-
-<td
-    *ngIf="_fdpTableService._isShownNavigationColumn$ | async"
-    fd-table-cell
-    class="fdp-table__cell--navigation is-last-child"
-    fdkDisabled
-    [addDisabledClass]="false"
->
-    <i
-        *ngIf="row.navigatable"
-        fd-table-icon
-        [navigation]="true"
-        [class]="_rtl ? 'sap-icon--slim-arrow-left' : 'sap-icon--slim-arrow-right'"
-        class="fdp-table__navigation-indicator"
-    ></i>
-</td>
-
+@if (_fdpTableService._isShownNavigationColumn$ | async) {
+    <td fd-table-cell class="fdp-table__cell--navigation is-last-child" fdkDisabled [addDisabledClass]="false">
+        @if (row.navigatable) {
+            <i
+                fd-table-icon
+                [navigation]="true"
+                [class]="_rtl ? 'sap-icon--slim-arrow-left' : 'sap-icon--slim-arrow-right'"
+                class="fdp-table__navigation-indicator"
+            ></i>
+        }
+    </td>
+}
 <td
     aria-hidden="true"
     class="fd-table__cell fd-table__cell--mock"

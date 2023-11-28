@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
@@ -45,7 +44,6 @@ const messageStripWidthExampleHtml = 'message-strip-width-example.component.html
         MessageStripAlertExampleComponent,
         MessageStripAutoDismissExampleComponent,
         PlayGroundComponent,
-        NgIf,
         MessageStripComponent
     ]
 })
@@ -132,7 +130,10 @@ export class MessageStripDocsComponent {
      */
     private _originalSchemaValues = Object.assign({}, this.data);
 
-    constructor(private schemaFactory: SchemaFactoryService, private readonly _cdr: ChangeDetectorRef) {
+    constructor(
+        private schemaFactory: SchemaFactoryService,
+        private readonly _cdr: ChangeDetectorRef
+    ) {
         this.schema = this.schemaFactory.getComponent('messageStrip');
     }
 

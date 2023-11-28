@@ -3,61 +3,53 @@
         <fd-dialog-header>
             <ng-template fdkTemplate="header">
                 <div fd-bar-left>
-                    <fd-bar-element *ngIf="isSubmenu">
-                        <button
-                            fd-button
-                            fdType="transparent"
-                            id="menu-mobile-navigate-back"
-                            fdCozy
-                            [attr.aria-label]="'Go to previous menu level: ' + title"
-                            [glyph]="navigationIcon$ | async"
-                            (click)="backToParentLevel()"
-                        ></button>
-                    </fd-bar-element>
+                    @if (isSubmenu) {
+                        <fd-bar-element>
+                            <button
+                                fd-button
+                                fdType="transparent"
+                                id="menu-mobile-navigate-back"
+                                fdCozy
+                                [attr.aria-label]="'Go to previous menu level: ' + title"
+                                [glyph]="navigationIcon$ | async"
+                                (click)="backToParentLevel()"
+                            ></button>
+                        </fd-bar-element>
+                    }
                     <fd-bar-element>
                         <h1 fd-title>{{ title }}</h1>
                     </fd-bar-element>
                 </div>
                 <div fd-bar-right>
                     <fd-bar-element>
-                        <button
-                            *ngIf="this.mobileConfig.hasCloseButton"
-                            fd-dialog-close-button
-                            [mobile]="true"
-                            (click)="close()"
-                        ></button>
+                        @if (this.mobileConfig.hasCloseButton) {
+                            <button fd-dialog-close-button [mobile]="true" (click)="close()"></button>
+                        }
                     </fd-bar-element>
                 </div>
             </ng-template>
         </fd-dialog-header>
-
         <fd-dialog-body>
-            <ng-container *ngTemplateOutlet="(isSubmenu ? subMenuTemplate : view) || null"> </ng-container>
+            <ng-template [ngTemplateOutlet]="(isSubmenu ? subMenuTemplate : view) || null"> </ng-template>
         </fd-dialog-body>
-
-        <fd-dialog-footer *ngIf="mobileConfig.approveButtonText || mobileConfig.cancelButtonText">
-            <fd-button-bar
-                *ngIf="mobileConfig.approveButtonText"
-                fdType="emphasized"
-                [label]="mobileConfig.approveButtonText"
-                (click)="close()"
-            >
-            </fd-button-bar>
-            <fd-button-bar
-                *ngIf="mobileConfig.cancelButtonText"
-                fdkInitialFocus
-                [label]="mobileConfig.cancelButtonText"
-                (click)="close()"
-            >
-            </fd-button-bar>
-        </fd-dialog-footer>
+        @if (mobileConfig.approveButtonText || mobileConfig.cancelButtonText) {
+            <fd-dialog-footer>
+                @if (mobileConfig.approveButtonText) {
+                    <fd-button-bar fdType="emphasized" [label]="mobileConfig.approveButtonText" (click)="close()">
+                    </fd-button-bar>
+                }
+                @if (mobileConfig.cancelButtonText) {
+                    <fd-button-bar fdkInitialFocus [label]="mobileConfig.cancelButtonText" (click)="close()">
+                    </fd-button-bar>
+                }
+            </fd-dialog-footer>
+        }
     </fd-dialog>
 </ng-template>
-
 <ng-template #subMenuTemplate>
     <nav class="fd-menu fd-menu--mobile">
         <ul class="fd-menu__sublist">
-            <ng-container *ngTemplateOutlet="view || null"></ng-container>
+            <ng-template [ngTemplateOutlet]="view || null"></ng-template>
         </ul>
     </nav>
 </ng-template>

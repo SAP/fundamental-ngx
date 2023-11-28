@@ -18,7 +18,6 @@
                     <div fd-card-subtitle>1.2k USD</div>
                 </span>
             </li>
-
             <li fd-list-item>
                 <span fd-list-title>
                     <h2 fd-card-title>Cordless Mouse</h2>
@@ -31,7 +30,6 @@
                     <div fd-card-subtitle>1.2k USD</div>
                 </span>
             </li>
-
             <li fd-list-item>
                 <span fd-list-title>
                     <h2 fd-card-title>7" Widescreen Portable DVD Player MP3</h2>
@@ -47,7 +45,6 @@
         </ul>
     </fd-card-content>
 </fd-card>
-
 <h2>Variant with Select control</h2>
 <fd-card>
     <fd-card-header>
@@ -64,10 +61,12 @@
                     [(value)]="selectedMovie"
                     (valueChange)="onValueChange()"
                 >
-                    <li fd-option *ngFor="let movie of movies" [value]="movie">{{ movie }}</li>
+                    @for (movie of movies; track movie) {
+                        <li fd-option [value]="movie">{{ movie }}</li>
+                    }
                 </fd-select>
             </li>
-            <ng-container *ngFor="let cast of casts">
+            @for (cast of casts; track cast) {
                 <li fd-list-item>
                     <span fd-list-thumbnail>
                         <fd-avatar
@@ -85,7 +84,7 @@
                         </div>
                     </div>
                 </li>
-            </ng-container>
+            }
         </ul>
     </fd-card-content>
 </fd-card>

@@ -2,8 +2,9 @@ import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CarouselDirective } from './carousel.directive';
 import { CarouselItemDirective } from './carousel-item.directive';
-import { CommonModule } from '@angular/common';
+
 import { CarouselConfig, CarouselService } from './carousel.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: `

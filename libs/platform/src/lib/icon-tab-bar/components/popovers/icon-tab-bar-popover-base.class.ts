@@ -170,9 +170,4 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
             this.isRtl ? this._focusNextPopoverItem(currentIndex) : this._focusPreviousPopoverItem(currentIndex);
         }
     }
-
-    /** @hidden */
-    _trackByTab(index: number, tab: IconTabBarItem): string {
-        return tab.uId;
-    }
 }

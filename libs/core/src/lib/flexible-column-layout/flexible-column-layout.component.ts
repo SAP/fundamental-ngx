@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -45,7 +45,7 @@ import { FD_FLEXIBLE_COLUMN_LAYOUT_COMPONENT } from './tokens';
 @Component({
     selector: 'fd-flexible-column-layout',
     templateUrl: './flexible-column-layout.component.html',
-    styleUrls: ['./flexible-column-layout.component.scss'],
+    styleUrl: './flexible-column-layout.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [
@@ -55,7 +55,7 @@ import { FD_FLEXIBLE_COLUMN_LAYOUT_COMPONENT } from './tokens';
         }
     ],
     standalone: true,
-    imports: [NgTemplateOutlet, NgIf, ButtonComponent, ContentDensityDirective]
+    imports: [NgTemplateOutlet, ButtonComponent, ContentDensityDirective]
 })
 export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit {
     /**

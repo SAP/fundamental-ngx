@@ -1,5 +1,5 @@
 import { DialogModule } from '@angular/cdk/dialog';
-import { AsyncPipe, NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -35,7 +35,7 @@ import { AvatarGroupHostConfig } from './types';
 @Component({
     selector: 'fd-avatar-group',
     templateUrl: './avatar-group.component.html',
-    styleUrls: ['./avatar-group.component.scss'],
+    styleUrl: './avatar-group.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
@@ -47,9 +47,7 @@ import { AvatarGroupHostConfig } from './types';
     ],
     imports: [
         AvatarGroupHostComponent,
-        NgIf,
         PopoverModule,
-        NgForOf,
         NgTemplateOutlet,
         FocusableItemDirective,
         DynamicPortalComponent,
@@ -121,11 +119,6 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
 
     /** @hidden */
     private _cdr = inject(ChangeDetectorRef);
-
-    /** @hidden */
-    _trackByFn(_: number, item: AvatarGroupItemDirective): AvatarGroupItemDirective {
-        return item;
-    }
 
     /** @hidden */
     _detectChanges(): void {

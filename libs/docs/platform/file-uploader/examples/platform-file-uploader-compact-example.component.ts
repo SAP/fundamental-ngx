@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
@@ -15,7 +14,7 @@ import {
     styleUrls: ['platform-file-uploader-compact-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FdpFormGroupModule, PlatformFileUploaderModule, ContentDensityDirective, FormsModule, NgFor]
+    imports: [FdpFormGroupModule, PlatformFileUploaderModule, ContentDensityDirective, FormsModule]
 })
 export class PlatformFileUploaderCompactExampleComponent {
     files: File[];

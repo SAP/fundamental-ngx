@@ -21,7 +21,7 @@ import {
 } from './constants';
 import { FlexibleColumnLayoutComponent } from './flexible-column-layout.component';
 
-function setViewport(width: number, height: number): void {
+function setViewport(width: number): void {
     window.innerWidth = width;
     const resizeEvt = new Event('resize');
     window.dispatchEvent(resizeEvt);
@@ -136,7 +136,7 @@ describe('FlexibleColumnLayoutComponent', () => {
 
     it('TWO_COLUMNS_START_EXPANDED should render 2 columns, start expanded, mid open', async () => {
         await whenStable(fixture);
-        setViewport(1023, 900);
+        setViewport(1023);
 
         testComponent.layout = TWO_COLUMNS_START_EXPANDED;
         fixture.detectChanges();
@@ -156,7 +156,7 @@ describe('FlexibleColumnLayoutComponent', () => {
 
     it('TWO_COLUMNS_MID_EXPANDED should render 2 columns, start open, mid expanded', async () => {
         await whenStable(fixture);
-        setViewport(1023, 900);
+        setViewport(1023);
 
         testComponent.layout = TWO_COLUMNS_MID_EXPANDED;
         fixture.detectChanges();
@@ -176,7 +176,7 @@ describe('FlexibleColumnLayoutComponent', () => {
 
     it('TWO_COLUMNS_END_EXPANDED should render 2 columns, mid open, end expanded', async () => {
         await whenStable(fixture);
-        setViewport(1023, 900);
+        setViewport(1023);
 
         testComponent.layout = TWO_COLUMNS_END_EXPANDED;
         fixture.detectChanges();
@@ -196,7 +196,7 @@ describe('FlexibleColumnLayoutComponent', () => {
 
     it('THREE_COLUMNS_MID_EXPANDED should render 3 columns, start open, mid expanded, end open', async () => {
         await whenStable(fixture);
-        setViewport(1300, 900);
+        setViewport(1300);
 
         testComponent.layout = THREE_COLUMNS_MID_EXPANDED;
         fixture.detectChanges();
@@ -219,7 +219,7 @@ describe('FlexibleColumnLayoutComponent', () => {
 
     it('THREE_COLUMNS_END_EXPANDED should render 3 columns, start open, mid open, end expanded', async () => {
         await whenStable(fixture);
-        setViewport(1300, 900);
+        setViewport(1300);
 
         testComponent.layout = THREE_COLUMNS_END_EXPANDED;
         fixture.detectChanges();
@@ -242,7 +242,7 @@ describe('FlexibleColumnLayoutComponent', () => {
 
     it('THREE_COLUMNS_START_MINIMIZED should render 3 columns, start minimized, mid expanded, end open', async () => {
         await whenStable(fixture);
-        setViewport(1023, 900);
+        setViewport(1023);
 
         testComponent.layout = THREE_COLUMNS_START_MINIMIZED;
         fixture.detectChanges();
@@ -281,7 +281,7 @@ describe('FlexibleColumnLayoutComponent', () => {
 
     it('THREE_COLUMNS_MID_EXPANDED should render THREE_COLUMNS_START_MINIMIZED in MD screen', async () => {
         await whenStable(fixture);
-        setViewport(1023, 900);
+        setViewport(1023);
 
         testComponent.layout = THREE_COLUMNS_MID_EXPANDED;
         fixture.detectChanges();
@@ -301,7 +301,7 @@ describe('FlexibleColumnLayoutComponent', () => {
 
     it('THREE_COLUMNS_END_EXPANDED should render TWO_COLUMNS_END_EXPANDED in MD screen', async () => {
         await whenStable(fixture);
-        setViewport(1023, 900);
+        setViewport(1023);
 
         testComponent.layout = THREE_COLUMNS_END_EXPANDED;
         fixture.detectChanges();

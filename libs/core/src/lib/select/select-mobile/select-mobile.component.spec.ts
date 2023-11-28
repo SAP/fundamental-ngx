@@ -13,15 +13,17 @@ const MOBILE_CONFIG: MobileModeConfig = { title: 'TITLE', hasCloseButton: true }
 
 @Component({
     template: `
-        <fd-select
-            placeholder="Select an option"
-            [(value)]="selectedValue"
-            [mobile]="true"
-            [mobileConfig]="mobileConfig"
-        >
-            <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
-        </fd-select>
-    `
+<fd-select
+  placeholder="Select an option"
+  [(value)]="selectedValue"
+  [mobile]="true"
+  [mobileConfig]="mobileConfig"
+  >
+  @for (option of options; track option) {
+    <li fd-option [value]="option">{{ option }}</li>
+  }
+</fd-select>
+`
 })
 class TestWrapperComponent {
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];

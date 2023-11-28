@@ -1,21 +1,23 @@
-<button
-    *ngIf="!_editMode && allowFileNameEdit"
-    [disabled]="disableFileNameEdit"
-    (click)="_editButtonClicked($event)"
-    fd-button
-    fdType="transparent"
-    glyph="edit"
-    [ariaLabel]="'coreUploadCollection.menuEditAriaLabel' | fdTranslate"
-></button>
-<button
-    *ngIf="!_editMode && allowFileDeletion"
-    [disabled]="disableFileDeletion"
-    (click)="_deleteButtonClicked($event)"
-    fd-button
-    fdType="transparent"
-    glyph="decline"
-    [ariaLabel]="'coreUploadCollection.menuDeleteAriaLabel' | fdTranslate"
-></button>
+@if (!_editMode && allowFileNameEdit) {
+    <button
+        [disabled]="disableFileNameEdit"
+        (click)="_editButtonClicked($event)"
+        fd-button
+        fdType="transparent"
+        glyph="edit"
+        [ariaLabel]="'coreUploadCollection.menuEditAriaLabel' | fdTranslate"
+    ></button>
+}
+@if (!_editMode && allowFileDeletion) {
+    <button
+        [disabled]="disableFileDeletion"
+        (click)="_deleteButtonClicked($event)"
+        fd-button
+        fdType="transparent"
+        glyph="decline"
+        [ariaLabel]="'coreUploadCollection.menuDeleteAriaLabel' | fdTranslate"
+    ></button>
+}
 <button
     #okButton
     [style.display]="_editMode ? 'inline-flex' : 'none'"
@@ -26,12 +28,13 @@
 >
     {{ 'coreUploadCollection.menuOkText' | fdTranslate }}
 </button>
-<button
-    *ngIf="_editMode"
-    (click)="_cancelButtonClicked($event)"
-    fd-button
-    fdType="transparent"
-    [ariaLabel]="'coreUploadCollection.menuCancelAriaLabel' | fdTranslate"
->
-    {{ 'coreUploadCollection.menuCancelText' | fdTranslate }}
-</button>
+@if (_editMode) {
+    <button
+        (click)="_cancelButtonClicked($event)"
+        fd-button
+        fdType="transparent"
+        [ariaLabel]="'coreUploadCollection.menuCancelAriaLabel' | fdTranslate"
+    >
+        {{ 'coreUploadCollection.menuCancelText' | fdTranslate }}
+    </button>
+}

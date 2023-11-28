@@ -1,26 +1,26 @@
 <h3>Cozy multi-selection list</h3>
 <ul fd-list [selection]="true">
-    <li fd-list-item *ngFor="let item of cozyObject" [selected]="item.selected">
-        <fd-checkbox [(ngModel)]="item.selected"></fd-checkbox>
-        <span fd-list-title>
-            {{ item.label }}
-        </span>
-    </li>
+    @for (item of cozyObject; track item) {
+        <li fd-list-item [selected]="item.selected">
+            <fd-checkbox [(ngModel)]="item.selected"></fd-checkbox>
+            <span fd-list-title>
+                {{ item.label }}
+            </span>
+        </li>
+    }
 </ul>
-
 <h3>Compact multi-selection list</h3>
-
 <ul fd-list fdCompact [selection]="true">
-    <li fd-list-item *ngFor="let item of compactObject" [selected]="item.selected">
-        <fd-checkbox [(ngModel)]="item.selected" fdCompact></fd-checkbox>
-        <span fd-list-title>
-            {{ item.label }}
-        </span>
-    </li>
+    @for (item of compactObject; track item) {
+        <li fd-list-item [selected]="item.selected">
+            <fd-checkbox [(ngModel)]="item.selected" fdCompact></fd-checkbox>
+            <span fd-list-title>
+                {{ item.label }}
+            </span>
+        </li>
+    }
 </ul>
-
 <h3>Cozy single-selection list</h3>
-
 <ul fd-list [selection]="true">
     <li fd-list-item [selected]="selectionValue === 'radio1'">
         <fd-radio-button name="radio1" id="radio1" value="radio1" [(ngModel)]="selectionValue"></fd-radio-button>
@@ -35,9 +35,7 @@
         <span fd-list-title> List item 3 </span>
     </li>
 </ul>
-
 <h3>Compact single-selection list</h3>
-
 <ul fd-list [selection]="true" fdCompact>
     <li fd-list-item [selected]="selectionValueTwo === 'radio1'">
         <fd-radio-button

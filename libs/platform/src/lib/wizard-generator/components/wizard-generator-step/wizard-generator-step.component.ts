@@ -24,15 +24,15 @@ import {
 import { isFunction } from '@fundamental-ngx/platform/shared';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
+import { WizardStepForms, WizardStepSubmittedForms } from '../../interfaces/wizard-generator-forms.interface';
 import { WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
+import { WizardGeneratorStep } from '../../interfaces/wizard-step.interface';
 import {
     DependencySteps,
     WizardGeneratorRefreshStrategy,
     WizardGeneratorService
 } from '../../wizard-generator.service';
-import { WizardGeneratorStep } from '../../interfaces/wizard-step.interface';
-import { WizardStepForms, WizardStepSubmittedForms } from '../../interfaces/wizard-generator-forms.interface';
-import { NgIf, NgFor } from '@angular/common';
+
 import { TitleComponent } from '@fundamental-ngx/core/title';
 
 @Component({
@@ -41,7 +41,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, TitleComponent, NgFor, FormGeneratorComponent]
+    imports: [TitleComponent, FormGeneratorComponent]
 })
 export class WizardGeneratorStepComponent implements WizardGeneratorStep, OnInit, OnDestroy, OnChanges {
     /**

@@ -69,7 +69,10 @@ export class ManageVariantItemComponent {
     private readonly _dialogConfig: SaveDialogContext;
 
     /** @hidden */
-    constructor(public dialog: DialogRef<SaveDialogContext>, private readonly _formBuilder: FormBuilder) {
+    constructor(
+        public dialog: DialogRef<SaveDialogContext>,
+        private readonly _formBuilder: FormBuilder
+    ) {
         this._dialogConfig = this.dialog.data;
         this._nameValidator = [this._variantNameValidator(this._dialogConfig)];
         this._form = this._formBuilder.group({

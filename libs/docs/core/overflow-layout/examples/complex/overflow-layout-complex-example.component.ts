@@ -1,5 +1,5 @@
 import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { KeyUtil, Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -26,12 +26,10 @@ import { AvatarGeneratorExampleService } from './avatar-generator-example.servic
     standalone: true,
     imports: [
         QuickViewModule,
-        NgIf,
         BarModule,
         AvatarComponent,
         LinkComponent,
         OverflowLayoutModule,
-        NgFor,
         PopoverComponent,
         PopoverControlComponent,
         NgTemplateOutlet,

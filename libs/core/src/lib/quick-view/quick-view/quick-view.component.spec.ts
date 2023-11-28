@@ -2,7 +2,6 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { QuickViewGroupItemContentComponent } from '../quick-view-group-item-content/quick-view-group-item-content.component';
 import { QuickViewGroupItemLabelComponent } from '../quick-view-group-item-label/quick-view-group-item-label.component';
@@ -26,29 +25,29 @@ import { QuickViewComponent } from './quick-view.component';
                     {{ data.subHeader.subtitle }}
                 </fd-quick-view-subheader-subtitle>
             </fd-quick-view-subheader>
-
-            <fd-quick-view-group *ngFor="let group of data.groups">
-                <fd-quick-view-group-title>
-                    {{ group.title }}
-                </fd-quick-view-group-title>
-                <fd-quick-view-group-item *ngFor="let item of group.items">
-                    <fd-quick-view-group-item-label>
-                        {{ item.label }}
-                    </fd-quick-view-group-item-label>
-                    <fd-quick-view-group-item-content>
-                        <ng-container [ngSwitch]="item.label">
-                            <a
-                                *ngSwitchCase="item.label === 'Mobile' || item.label === 'Phone' ? item.label : ''"
-                                [href]="'tel:' + item.value"
-                                fd-link
-                                >{{ item.value }}</a
-                            >
-                            <a *ngSwitchCase="'Email'" [href]="'mailto:' + item.value" fd-link>{{ item.value }}</a>
-                            <div *ngSwitchDefault>{{ item.value }}</div>
-                        </ng-container>
-                    </fd-quick-view-group-item-content>
-                </fd-quick-view-group-item>
-            </fd-quick-view-group>
+            @for (group of data.groups; track group) {
+                <fd-quick-view-group>
+                    <fd-quick-view-group-title>
+                        {{ group.title }}
+                    </fd-quick-view-group-title>
+                    @for (item of group.items; track item) {
+                        <fd-quick-view-group-item>
+                            <fd-quick-view-group-item-label>
+                                {{ item.label }}
+                            </fd-quick-view-group-item-label>
+                            <fd-quick-view-group-item-content>
+                                @if (item.label === 'Mobile' || item.label === 'Phone' ? item.label : '') {
+                                    <a [href]="'tel:' + item.value" fd-link>{{ item.value }}</a>
+                                } @else if (item.label === 'Email') {
+                                    <a [href]="'mailto:' + item.value" fd-link>{{ item.value }}</a>
+                                } @else {
+                                    <div>{{ item.value }}</div>
+                                }
+                            </fd-quick-view-group-item-content>
+                        </fd-quick-view-group-item>
+                    }
+                </fd-quick-view-group>
+            }
         </fd-quick-view>
     `,
     standalone: true,
@@ -62,10 +61,6 @@ import { QuickViewComponent } from './quick-view.component';
         QuickViewGroupItemComponent,
         QuickViewGroupItemContentComponent,
         QuickViewGroupItemLabelComponent,
-        NgSwitch,
-        NgSwitchCase,
-        NgSwitchDefault,
-        NgFor,
         AvatarComponent
     ]
 })

@@ -1,27 +1,26 @@
 <ng-template #renderer>
     <div [horizontal]="true" fd-form-item class="fd-row">
-        <div
-            class="fd-col"
-            #labelCol
-            [class]="_labelColumnLayoutClass"
-            *ngIf="!noLabelLayout"
-            [style.margin-bottom.px]="_controlExtrasHeightPx"
-        >
-            <ng-template [ngTemplateOutlet]="labelTemplate"></ng-template>
-        </div>
-        <ng-container *ngTemplateOutlet="withFormMessage"></ng-container>
-        <ng-container *ngTemplateOutlet="gapTemplate"></ng-container>
+        @if (!noLabelLayout) {
+            <div
+                class="fd-col"
+                #labelCol
+                [class]="_labelColumnLayoutClass"
+                [style.margin-bottom.px]="_controlExtrasHeightPx"
+            >
+                <ng-template [ngTemplateOutlet]="labelTemplate"></ng-template>
+            </div>
+        }
+        <ng-template [ngTemplateOutlet]="withFormMessage"></ng-template>
+        <ng-template [ngTemplateOutlet]="gapTemplate"></ng-template>
     </div>
     <span aria-hidden="true" [style.display]="'none'" [id]="'fdp-form-hint-' + id">
-        <ng-container *ngIf="isStringHint(hintOptions.content); else hintTemplate">
+        @if (isStringHint(hintOptions.content)) {
             {{ hintOptions.content }}
-        </ng-container>
-        <ng-template #hintTemplate>
+        } @else {
             <ng-template [ngTemplateOutlet]="$any(hintOptions.content)"></ng-template>
-        </ng-template>
+        }
     </span>
 </ng-template>
-
 <ng-template #withFormMessage>
     <fdp-input-message-group
         class="fd-col"
@@ -32,61 +31,76 @@
             <ng-content></ng-content>
         </ng-template>
 
-        <ng-container *ngIf="hasErrors() && groupedErrors.length > 0">
-            <fd-form-message *ngFor="let error of groupedErrors" [type]="error.directive.type">
+        @if (hasErrors() && groupedErrors.length > 0) {
+            @for (error of groupedErrors; track error) {
+                <fd-form-message [type]="error.directive.type">
+                    @if (error.directive._headingTemplateRef) {
+                        <ng-template
+                            [ngTemplateOutlet]="error.directive._headingTemplateRef"
+                            [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
+                        >
+                        </ng-template>
+                    }
+                    @if (error.directive._headingTemplateRef && error.directive._descriptionTemplateRef) {
+                        <br />
+                    }
+                    @if (error.directive._descriptionTemplateRef) {
+                        <ng-template
+                            [ngTemplateOutlet]="error.directive._descriptionTemplateRef"
+                            [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
+                        >
+                        </ng-template>
+                    }
+                </fd-form-message>
+            }
+        }
+
+        @if (groupedErrors.length === 0 && hasErrors() && i18Strings) {
+            <fd-form-message type="error">
                 <ng-template
-                    [ngIf]="error.directive._headingTemplateRef"
-                    [ngTemplateOutlet]="error.directive._headingTemplateRef"
-                    [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
-                >
-                </ng-template>
-                <ng-container *ngIf="error.directive._headingTemplateRef && error.directive._descriptionTemplateRef">
-                    <br />
-                </ng-container>
-                <ng-template
-                    [ngIf]="error.directive._descriptionTemplateRef"
-                    [ngTemplateOutlet]="error.directive._descriptionTemplateRef"
-                    [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
+                    [ngTemplateOutlet]="i18Strings"
+                    [ngTemplateOutletContext]="{ $implicit: control?.ngControl?.errors }"
                 >
                 </ng-template>
             </fd-form-message>
-        </ng-container>
-
-        <fd-form-message *ngIf="groupedErrors.length === 0 && hasErrors() && i18Strings" type="error">
-            <ng-container *ngTemplateOutlet="i18Strings; context: { $implicit: control?.ngControl?.errors }">
-            </ng-container>
-        </fd-form-message>
+        }
     </fdp-input-message-group>
 </ng-template>
 
 <ng-template #innerErrorRenderers>
-    <ng-container *ngIf="hasErrors() && groupedErrors.length > 0">
-        <ng-container *ngFor="let error of groupedErrors">
-            <ng-template
-                [ngIf]="error.directive._headingTemplateRef"
-                [ngTemplateOutlet]="error.directive._headingTemplateRef"
-                [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
-            >
-            </ng-template>
-            <ng-container *ngIf="error.directive._headingTemplateRef && error.directive._descriptionTemplateRef">
+    @if (hasErrors() && groupedErrors.length > 0) {
+        @for (error of groupedErrors; track error) {
+            @if (error.directive._headingTemplateRef) {
+                <ng-template
+                    [ngTemplateOutlet]="error.directive._headingTemplateRef"
+                    [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
+                >
+                </ng-template>
+            }
+            @if (error.directive._headingTemplateRef && error.directive._descriptionTemplateRef) {
                 <br />
-            </ng-container>
-            <ng-template
-                [ngIf]="error.directive._descriptionTemplateRef"
-                [ngTemplateOutlet]="error.directive._descriptionTemplateRef"
-                [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
-            >
-            </ng-template>
-        </ng-container>
-    </ng-container>
-    <ng-container *ngIf="groupedErrors.length === 0 && hasErrors() && i18Strings">
-        <ng-container *ngTemplateOutlet="i18Strings; context: { $implicit: control?.ngControl?.errors }">
-        </ng-container>
-    </ng-container>
+            }
+            @if (error.directive._descriptionTemplateRef) {
+                <ng-template
+                    [ngTemplateOutlet]="error.directive._descriptionTemplateRef"
+                    [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
+                >
+                </ng-template>
+            }
+        }
+    }
+
+    @if (groupedErrors.length === 0 && hasErrors() && i18Strings) {
+        <ng-template
+            [ngTemplateOutlet]="i18Strings"
+            [ngTemplateOutletContext]="{ $implicit: control?.ngControl?.errors }"
+        >
+        </ng-template>
+    }
 </ng-template>
 
 <ng-template #labelTemplate>
-    <ng-container *ngIf="hintTarget === 'label'; else withoutHint">
+    @if (hintTarget === 'label') {
         <label
             [id]="'fdp-form-label-' + id"
             [required]="editable && required"
@@ -101,8 +115,7 @@
         >
             <span [id]="'fdp-form-label-content-' + id">{{ label }}</span>
         </label>
-    </ng-container>
-    <ng-template #withoutHint>
+    } @else {
         <label
             [id]="'fdp-form-label-' + id"
             [required]="editable && required"
@@ -112,11 +125,11 @@
         >
             <span [id]="'fdp-form-label-content-' + id">{{ label }}</span>
         </label>
-    </ng-template>
+    }
 </ng-template>
 
 <ng-template #gapTemplate>
-    <ng-container *ngIf="hintTarget === 'input' && hintOptions.content; else withoutHint">
+    @if (hintTarget === 'input' && hintOptions.content) {
         <div class="fd-col fd-form-field-inline-help-container" [class]="_gapColumnLayoutClass">
             <span fd-link [undecorated]="true">
                 <fd-icon
@@ -129,8 +142,7 @@
                 </fd-icon>
             </span>
         </div>
-    </ng-container>
-    <ng-template #withoutHint>
+    } @else {
         <div class="fd-col" [class]="_gapColumnLayoutClass"></div>
-    </ng-template>
+    }
 </ng-template>

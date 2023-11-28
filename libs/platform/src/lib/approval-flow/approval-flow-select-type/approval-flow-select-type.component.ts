@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
@@ -52,7 +52,6 @@ export interface SelectTypeDialogFormData {
         FormItemComponent,
         RadioButtonComponent,
         FormsModule,
-        NgIf,
         CheckboxComponent,
         DialogFooterComponent,
         ButtonBarComponent,

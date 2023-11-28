@@ -1,5 +1,5 @@
 import { PortalModule } from '@angular/cdk/portal';
-import { AsyncPipe, NgForOf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -17,7 +17,7 @@ import { NavigationListItemComponent } from './navigation-list-item.component';
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'li[fdb-navigation-list-overflow-item]',
     standalone: true,
-    imports: [PortalModule, AsyncPipe, NgForOf],
+    imports: [PortalModule, AsyncPipe],
     providers: [
         PopoverService,
         {

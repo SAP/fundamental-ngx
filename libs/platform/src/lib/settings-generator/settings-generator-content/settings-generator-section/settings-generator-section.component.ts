@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -7,6 +8,7 @@ import {
     ViewEncapsulation,
     inject
 } from '@angular/core';
+import { AsyncOrSyncPipe, Nullable } from '@fundamental-ngx/cdk/utils';
 import { DynamicFormItem, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 import {
     FormSettingsItem,
@@ -15,9 +17,7 @@ import {
     SettingsTemplateTab,
     TemplateSettingsItem
 } from '../../models/settings.model';
-import { AsyncOrSyncPipe, Nullable } from '@fundamental-ngx/cdk/utils';
 import { SettingsGeneratorService } from '../../settings-generator.service';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
 
 export type SettingsSectionItemsModel = SettingsTemplateTab | SettingsFormTab | SettingsItem;
 
@@ -27,7 +27,7 @@ export type SettingsSectionItemsModel = SettingsTemplateTab | SettingsFormTab | 
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, FormGeneratorComponent, NgTemplateOutlet, AsyncOrSyncPipe]
+    imports: [FormGeneratorComponent, NgTemplateOutlet, AsyncOrSyncPipe]
 })
 export class SettingsGeneratorSectionComponent {
     /**

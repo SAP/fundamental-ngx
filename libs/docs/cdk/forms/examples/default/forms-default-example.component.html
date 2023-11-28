@@ -7,7 +7,9 @@
             [formControl]="ff1.formControl"
         ></fdk-custom-control-example>
         <ng-template #i18n let-errors>
-            <span *ngIf="errors.required" role="alert" aria-atomic="true"> Value is required </span>
+            @if (errors.required) {
+                <span role="alert" aria-atomic="true"> Value is required </span>
+            }
         </ng-template>
     </fdp-form-field>
     <fdp-form-field
@@ -21,9 +23,10 @@
     >
         <fd-multi-combobox [formControl]="ff2.formControl" [dataSource]="['one', 'two', 'three']"></fd-multi-combobox>
         <ng-template #i18n let-errors>
-            <span *ngIf="errors.required" role="alert" aria-atomic="true"> Value is required </span>
+            @if (errors.required) {
+                <span role="alert" aria-atomic="true"> Value is required </span>
+            }
         </ng-template>
     </fdp-form-field>
 </fdp-form-group>
-
 <button fd-button (click)="submit()">Submit</button>

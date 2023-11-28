@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf } from '@angular/common';
+
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
@@ -49,7 +49,6 @@ import { VariantManagementDataProvider } from './data-provider';
         FdpCellDef,
         FdpTableCell,
         IconComponent,
-        NgIf,
         InputComponent,
         FormsModule,
         RadioButtonComponent,
@@ -77,7 +76,10 @@ export class ManageVariantsDialogComponent {
     private readonly _dataProvider: VariantManagementDataProvider;
 
     /** @hidden */
-    constructor(public dialog: DialogRef<VariantItem[]>, private readonly _cdr: ChangeDetectorRef) {
+    constructor(
+        public dialog: DialogRef<VariantItem[]>,
+        private readonly _cdr: ChangeDetectorRef
+    ) {
         // We clone all variants, so we don't change original instances immediately.
         this._variants = this.dialog.data.map((oldVariant) => oldVariant.clone({}, false));
         this._dataProvider = new VariantManagementDataProvider(this._variants);

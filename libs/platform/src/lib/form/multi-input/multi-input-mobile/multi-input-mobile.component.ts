@@ -12,28 +12,28 @@ import {
 } from '@angular/core';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgTemplateOutlet } from '@angular/common';
+import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import {
     MOBILE_MODE_CONFIG,
     MobileModeBase,
     MobileModeConfigToken,
     MobileModeControl
 } from '@fundamental-ngx/core/mobile-mode';
-import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { MULTIINPUT_COMPONENT, PlatformMultiInputInterface } from '../multi-input.interface';
-import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { BarModule } from '@fundamental-ngx/core/bar';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { MULTIINPUT_COMPONENT, PlatformMultiInputInterface } from '../multi-input.interface';
 
 @Component({
     selector: 'fdp-multi-input-mobile',
     templateUrl: './multi-input-mobile.component.html',
-    styleUrls: ['./multi-input-mobile.component.scss'],
+    styleUrl: './multi-input-mobile.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [DialogModule, NgIf, TemplateDirective, BarModule, NgTemplateOutlet, CdkScrollable, ScrollbarDirective]
+    imports: [DialogModule, TemplateDirective, BarModule, NgTemplateOutlet, CdkScrollable, ScrollbarDirective]
 })
 export class PlatformMultiInputMobileComponent
     extends MobileModeBase<PlatformMultiInputInterface>

@@ -1,4 +1,3 @@
-import { NgFor, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, forwardRef } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -21,10 +20,6 @@ import { AsFormControlPipe, AsFormGroupPipe } from '../../pipes/type-casting.pip
     imports: [
         FormsModule,
         ReactiveFormsModule,
-        NgFor,
-        NgIf,
-        NgSwitch,
-        NgSwitchCase,
         FormItemComponent,
         FormLabelComponent,
         FormControlComponent,

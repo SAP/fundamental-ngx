@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CalendarComponent, DaysOfWeek } from '@fundamental-ngx/core/calendar';
@@ -24,9 +23,11 @@ import { SelectModule } from '@fundamental-ngx/core/select';
             (valueChange)="onChangeStartingDayOfWeek($event)"
             [value]="startingDayOfWeek"
         >
-            <li fd-option *ngFor="let option of startingDayOfWeekOptions" [value]="option">
-                {{ startingDayOfWeekOptionsInDays[option - 1] }}
-            </li>
+            @for (option of startingDayOfWeekOptions; track option) {
+                <li fd-option [value]="option">
+                    {{ startingDayOfWeekOptionsInDays[option - 1] }}
+                </li>
+            }
         </fd-select>
     `,
     providers: [
@@ -40,7 +41,7 @@ import { SelectModule } from '@fundamental-ngx/core/select';
         }
     ],
     standalone: true,
-    imports: [CalendarComponent, FormsModule, FormLabelComponent, SelectModule, NgFor, FdDatetimeModule]
+    imports: [CalendarComponent, FormsModule, FormLabelComponent, SelectModule, FdDatetimeModule]
 })
 export class CalendarMondayStartExampleComponent {
     date: FdDate = new FdDate(2020, 10, 25);

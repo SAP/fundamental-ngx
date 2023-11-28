@@ -23,16 +23,16 @@ import {
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
 import { startWith } from 'rxjs/operators';
-import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { InputComponent } from '../input/input.component';
 
+import { NgTemplateOutlet } from '@angular/common';
+import { InputGroupAddonBodyComponent } from './addon-body.component';
+import { InputGroupAddonComponent } from './addon.component';
 import { CSS_CLASS_NAME, INPUT_GROUP_CHILD_TOKEN } from './constants';
 import { InputGroupConfig } from './input-group.config';
-import { InputGroupAddonComponent } from './addon.component';
 import { InputGroupInputComponent } from './input.component';
-import { InputGroupAddonBodyComponent } from './addon-body.component';
-import { NgFor, NgTemplateOutlet, NgIf } from '@angular/common';
 
 /**
  * Fundamental input group component
@@ -49,7 +49,7 @@ import { NgFor, NgTemplateOutlet, NgIf } from '@angular/common';
 @Component({
     selector: 'fdp-input-group',
     templateUrl: './input-group.component.html',
-    styleUrls: ['./input-group.component.scss'],
+    styleUrl: './input-group.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
@@ -57,7 +57,7 @@ import { NgFor, NgTemplateOutlet, NgIf } from '@angular/common';
         contentDensityObserverProviders()
     ],
     standalone: true,
-    imports: [NgFor, InputGroupAddonBodyComponent, NgTemplateOutlet, NgIf, InputComponent]
+    imports: [InputGroupAddonBodyComponent, NgTemplateOutlet, InputComponent]
 })
 export class InputGroupComponent extends BaseInput implements OnInit, AfterContentInit, AfterViewInit {
     /** Input value */

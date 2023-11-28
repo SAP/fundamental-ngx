@@ -1,4 +1,4 @@
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -36,19 +36,17 @@ import { convertFormState, convertFormStateToMessagePopoverState } from './utils
 @Component({
     selector: 'fdp-message-popover',
     templateUrl: './message-popover.component.html',
-    styleUrls: ['./message-popover.component.scss'],
+    styleUrl: './message-popover.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        NgIf,
         PopoverModule,
         ButtonComponent,
         NgClass,
         BarModule,
         SegmentedButtonComponent,
         FormsModule,
-        NgFor,
         ObjectStatusComponent,
         InitialFocusDirective,
         MessageViewComponent,
@@ -96,7 +94,10 @@ export class MessagePopoverComponent implements MessagePopover, OnInit {
     private _groupedErrors: MessagePopoverErrorGroup[] = [];
 
     /** @hidden */
-    constructor(private readonly _cdr: ChangeDetectorRef, private readonly _destroyRef: DestroyRef) {}
+    constructor(
+        private readonly _cdr: ChangeDetectorRef,
+        private readonly _destroyRef: DestroyRef
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {

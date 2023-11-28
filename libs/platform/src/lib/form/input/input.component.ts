@@ -50,7 +50,7 @@ export type InputType = 'text' | 'number' | 'email' | 'password';
 @Component({
     selector: 'fdp-input',
     templateUrl: 'input.component.html',
-    styleUrls: ['./input.component.scss'],
+    styleUrl: './input.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: InputComponent, multi: true }],
     standalone: true,

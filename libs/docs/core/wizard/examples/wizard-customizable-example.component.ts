@@ -1,5 +1,5 @@
 import { A11yModule } from '@angular/cdk/a11y';
-import { NgIf } from '@angular/common';
+
 import {
     ChangeDetectionStrategy,
     Component,
@@ -24,7 +24,7 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
         class: 'fd-wizard-example'
     },
     standalone: true,
-    imports: [ButtonComponent, A11yModule, NgIf, WizardModule, ContentDensityDirective, BarModule]
+    imports: [ButtonComponent, A11yModule, WizardModule, ContentDensityDirective, BarModule]
 })
 export class WizardCustomizableExampleComponent {
     /**

@@ -18,7 +18,6 @@ import { takeUntil } from 'rxjs/operators';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
-import { NgIf } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarService } from '../calendar.service';
@@ -33,14 +32,14 @@ import { FdCalendarView } from '../types';
 @Component({
     selector: 'fd-calendar-header',
     templateUrl: './calendar-header.component.html',
-    styleUrls: ['./calendar-header.component.scss'],
+    styleUrl: './calendar-header.component.scss',
     encapsulation: ViewEncapsulation.None,
     host: {
         '[attr.id]': 'viewId'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [ButtonComponent, NgIf, FdTranslatePipe]
+    imports: [ButtonComponent, FdTranslatePipe]
 })
 export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges {
     /** Currently active view. Needed for a11y labels. */

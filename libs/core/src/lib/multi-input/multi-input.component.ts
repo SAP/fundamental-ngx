@@ -51,7 +51,7 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { TokenizerComponent, TokenModule } from '@fundamental-ngx/core/token';
 
-import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
@@ -85,7 +85,7 @@ let uniqueHiddenLabel = 0;
 @Component({
     selector: 'fd-multi-input',
     templateUrl: './multi-input.component.html',
-    styleUrls: ['./multi-input.component.scss'],
+    styleUrl: './multi-input.component.scss',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -100,7 +100,6 @@ let uniqueHiddenLabel = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        NgIf,
         NgTemplateOutlet,
         PopoverComponent,
         PopoverControlComponent,
@@ -108,7 +107,6 @@ let uniqueHiddenLabel = 0;
         PopoverBodyComponent,
         InputGroupModule,
         TokenModule,
-        NgFor,
         FormControlComponent,
         AutoCompleteDirective,
         ReactiveFormsModule,
@@ -483,10 +481,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
             this.onTouched();
         }
     }
-
-    /** @hidden */
-    _trackBy = (index: number, optionItem: _OptionItem<ItemType, ValueType>): ValueType =>
-        this.valueFn(optionItem?.item);
 
     /** @hidden */
     onChange: (value: any) => void = () => {};

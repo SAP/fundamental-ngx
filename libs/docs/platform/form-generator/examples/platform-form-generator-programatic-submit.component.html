@@ -6,14 +6,10 @@
     (formCreated)="onFormCreated()"
 >
 </fdp-form-generator>
-
-<fdp-button
-    *ngIf="formCreated"
-    (click)="submitForm()"
-    type="submit"
-    label="Submit button outside form generator"
-></fdp-button>
-
+@if (formCreated) {
+    <fdp-button (click)="submitForm()" type="submit" label="Submit button outside form generator"></fdp-button>
+}
 <p>Form created: {{ formCreated }}</p>
-
-<p *ngIf="formValue">Form value: {{ formValue | json }}</p>
+@if (formValue) {
+    <p>Form value: {{ formValue | json }}</p>
+}

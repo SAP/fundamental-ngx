@@ -1,5 +1,5 @@
 <footer fd-bar class="fd-dialog__footer" barDesign="footer" [fdCozy]="dialogConfig.mobile">
-    <ng-container *ngTemplateOutlet="footerTemplate ? footerTemplate : defaultTemplate"></ng-container>
+    <ng-template [ngTemplateOutlet]="footerTemplate ? footerTemplate : defaultTemplate"></ng-template>
 
     <ng-template #defaultTemplate>
         <div fd-bar-right>

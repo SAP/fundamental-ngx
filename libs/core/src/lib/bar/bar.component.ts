@@ -28,7 +28,7 @@ export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | '
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-bar]',
     templateUrl: './bar.component.html',
-    styleUrls: ['./bar.component.scss'],
+    styleUrl: './bar.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
@@ -67,7 +67,10 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef, private _contentDensityObserver: ContentDensityObserver) {
+    constructor(
+        public readonly elementRef: ElementRef,
+        private _contentDensityObserver: ContentDensityObserver
+    ) {
         this._contentDensityObserver.subscribe();
     }
 

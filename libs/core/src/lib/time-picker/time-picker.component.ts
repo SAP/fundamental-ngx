@@ -29,7 +29,7 @@ import { PopoverService } from '@fundamental-ngx/core/popover';
 import { Placement, ValueStateAriaMessageService } from '@fundamental-ngx/core/shared';
 import { TimeComponent } from '@fundamental-ngx/core/time';
 
-import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormMessageComponent } from '@fundamental-ngx/core/form';
@@ -63,7 +63,7 @@ let timePickerCounter = 0;
         PopoverService,
         registerFormItemControl(TimePickerComponent)
     ],
-    styleUrls: ['./time-picker.component.scss'],
+    styleUrl: './time-picker.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
@@ -73,13 +73,10 @@ let timePickerCounter = 0;
         InputGroupComponent,
         InputGroupInputDirective,
         PopoverBodyComponent,
-        NgIf,
         NgTemplateOutlet,
         FormMessageComponent,
         TimeComponent,
         FormsModule,
-        NgSwitch,
-        NgSwitchCase,
         FdTranslatePipe
     ]
 })

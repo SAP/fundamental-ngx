@@ -16,15 +16,15 @@
     <span class="fd-token__text no-text-select">
         <ng-container #viewContainer></ng-container>
     </span>
-    <span
-        (click)="closeClickHandler($event)"
-        role="button"
-        [attr.aria-label]="'coreToken.deleteButtonLabel' | fdTranslate"
-        *ngIf="!readOnly"
-        class="fd-token__close"
-    ></span>
+    @if (!readOnly) {
+        <span
+            (click)="closeClickHandler($event)"
+            role="button"
+            [attr.aria-label]="'coreToken.deleteButtonLabel' | fdTranslate"
+            class="fd-token__close"
+        ></span>
+    }
 </span>
-
 <ng-template #content>
     <ng-content></ng-content>
 </ng-template>

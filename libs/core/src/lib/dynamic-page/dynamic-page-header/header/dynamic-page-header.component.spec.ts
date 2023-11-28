@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
@@ -8,6 +8,7 @@ import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { DynamicPageModule } from '../../dynamic-page.module';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { ActionSquashBreakpointPx, DynamicPageHeaderComponent } from './dynamic-page-header.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: ` <fd-dynamic-page-header [title]="title" [subtitle]="subtitle">

@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import {
     AfterContentChecked,
     ChangeDetectionStrategy,
@@ -20,7 +19,7 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [ActionSheetModule, ButtonComponent, NgIf, NgFor, FdTranslatePipe]
+    imports: [ActionSheetModule, ButtonComponent, FdTranslatePipe]
 })
 export class ShellbarActionsMobileComponent implements AfterContentChecked {
     /** @hidden */

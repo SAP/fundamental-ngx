@@ -5,12 +5,14 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     template: `
-        <li #directiveElement fd-list-item [noData]="noData" [action]="action" [selected]="selected">
-            <a #linkElement *ngIf="link" fd-list-link>link</a>
-            <button fd-button #button></button>
-            List Item Test Text
-        </li>
-    `
+<li #directiveElement fd-list-item [noData]="noData" [action]="action" [selected]="selected">
+  @if (link) {
+    <a #linkElement fd-list-link>link</a>
+  }
+  <button fd-button #button></button>
+  List Item Test Text
+</li>
+`
 })
 class TestComponent {
     @ViewChild('directiveElement', { read: ElementRef })

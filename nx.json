@@ -53,22 +53,12 @@
         "prepare": {
             "dependsOn": ["build"]
         },
-        "test": {
-            "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"],
-            "cache": true
-        },
         "lint": {
             "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
             "cache": true
         },
-        "lint-noop": {
-            "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
-        },
         "transform-translations": {
             "inputs": ["{projectRoot}/**/*.properties", "default"],
-            "cache": true
-        },
-        "generate-typedoc": {
             "cache": true
         },
         "compile-typedoc": {
@@ -79,6 +69,19 @@
         },
         "e2e": {
             "cache": true
+        },
+        "@nx/jest:jest": {
+            "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"],
+            "cache": true,
+            "options": {
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
+            }
         }
     },
     "namedInputs": {

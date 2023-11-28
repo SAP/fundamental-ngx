@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
+import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -61,13 +61,11 @@ import { TableHeaderCellContentComponent } from '../table-header-cell-content/ta
     },
     standalone: true,
     imports: [
-        NgIf,
         TableCellDirective,
         TableStatusIndicatorDirective,
         DisabledBehaviorDirective,
         CheckboxComponent,
         FormsModule,
-        NgFor,
         PlatformTableCellResizableDirective,
         NgClass,
         NgStyle,

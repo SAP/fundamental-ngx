@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { CSS_CLASS_NAME } from './constants';
 import { LayoutGridRowDirective } from './directives/layout-grid-row.directive';
 
@@ -21,11 +21,11 @@ import { LayoutGridRowDirective } from './directives/layout-grid-row.directive';
 @Component({
     selector: 'fd-layout-grid, [fdLayoutGrid]',
     templateUrl: './layout-grid.component.html',
-    styleUrls: ['./layout-grid.component.scss'],
+    styleUrl: './layout-grid.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, NgTemplateOutlet, LayoutGridRowDirective]
+    imports: [NgTemplateOutlet, LayoutGridRowDirective]
 })
 export class LayoutGridComponent implements OnInit, OnChanges, CssClassBuilder {
     /** Custom classes */

@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { BusyIndicatorComponent, BusyIndicatorSize } from '@fundamental-ngx/core/busy-indicator';
 
@@ -6,7 +5,7 @@ import { BusyIndicatorComponent, BusyIndicatorSize } from '@fundamental-ngx/core
     selector: 'fd-busy-indicator-size-example',
     templateUrl: './busy-indicator-size-example.component.html',
     standalone: true,
-    imports: [NgFor, BusyIndicatorComponent]
+    imports: [BusyIndicatorComponent]
 })
 export class BusyIndicatorSizeExampleComponent {
     sizes: BusyIndicatorSize[] = ['s', 'm', 'l'];

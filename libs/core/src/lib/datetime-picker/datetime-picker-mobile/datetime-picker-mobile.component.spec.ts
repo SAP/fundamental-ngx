@@ -12,7 +12,7 @@ class MockDateTimePickerComponent<D> implements DateTimePicker<D> {
     date: Nullable<D>;
     isOpenChange = new EventEmitter<boolean>();
     dialogApprove(): void {}
-    dialogDismiss(value: Nullable<D>): void {}
+    dialogDismiss(): void {}
     mobile: boolean;
     mobileConfig = testDatePickerConfigObject;
 }

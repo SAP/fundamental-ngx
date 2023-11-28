@@ -1,15 +1,11 @@
-<ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
-
-<ng-template #mobileTemplate>
-    <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
-</ng-template>
-
+<ng-template [ngTemplateOutlet]="mobile ? controlTemplate : desktopTemplate"></ng-template>
 <ng-template #popoverMessageTemplate>
-    <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
-        {{ _message }}
-    </fd-form-message>
+    @if (_message) {
+        <fd-form-message [embedded]="true" [type]="state">
+            {{ _message }}
+        </fd-form-message>
+    }
 </ng-template>
-
 <ng-template #desktopTemplate>
     <fd-popover
         [(isOpen)]="isOpen"
@@ -25,15 +21,14 @@
             <ng-template [ngTemplateOutlet]="controlTemplate"></ng-template>
         </fd-popover-control>
         <fd-popover-body [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen">
-            <ng-container *ngIf="_showPopoverContents">
+            @if (_showPopoverContents) {
                 <ng-template [ngTemplateOutlet]="popoverMessageTemplate"></ng-template>
                 <ng-content></ng-content>
                 <ng-template [ngTemplateOutlet]="calendarTemplate"></ng-template>
-            </ng-container>
+            }
         </fd-popover-body>
     </fd-popover>
 </ng-template>
-
 <ng-template #controlTemplate>
     <fd-input-group
         #inputGroupComponent
@@ -70,7 +65,6 @@
         />
     </fd-input-group>
 </ng-template>
-
 <ng-template #calendarTemplate>
     <fd-calendar
         [activeView]="activeView"
@@ -96,32 +90,32 @@
         (activeViewChange)="handleCalendarActiveViewChange($event)"
         (closeCalendar)="closeFromCalendar()"
     ></fd-calendar>
-
-    <div *ngIf="showTodayButton" fd-bar barDesign="footer">
-        <div fd-bar-right>
-            <fd-bar-element>
-                <button fd-button [label]="todayButtonLabel" (click)="onTodayButtonClick()"></button>
-            </fd-bar-element>
+    @if (showTodayButton) {
+        <div fd-bar barDesign="footer">
+            <div fd-bar-right>
+                <fd-bar-element>
+                    <button fd-button [label]="todayButtonLabel" (click)="onTodayButtonClick()"></button>
+                </fd-bar-element>
+            </div>
         </div>
-    </div>
+    }
 </ng-template>
-
 <div [style.display]="'none'" aria-hidden="true">
     <div [attr.id]="_formValueStateMessageId" aria-atomic="true" aria-live="assertive">
-        <ng-container [ngSwitch]="state">
-            <ng-container *ngSwitchCase="'success'">
-                {{ 'coreDatePicker.valueStateSuccessMessage' | fdTranslate }}</ng-container
-            >
-            <ng-container *ngSwitchCase="'information'">
-                {{ 'coreDatePicker.valueStateInformationMessage' | fdTranslate }}</ng-container
-            >
-            <ng-container *ngSwitchCase="'warning'">
-                {{ 'coreDatePicker.valueStateWarningMessage' | fdTranslate }}</ng-container
-            >
-            <ng-container *ngSwitchCase="'error'">
+        @switch (state) {
+            @case ('success') {
+                {{ 'coreDatePicker.valueStateSuccessMessage' | fdTranslate }}
+            }
+            @case ('information') {
+                {{ 'coreDatePicker.valueStateInformationMessage' | fdTranslate }}
+            }
+            @case ('warning') {
+                {{ 'coreDatePicker.valueStateWarningMessage' | fdTranslate }}
+            }
+            @case ('error') {
                 {{ 'coreDatePicker.valueStateErrorMessage' | fdTranslate }}
-            </ng-container>
-        </ng-container>
+            }
+        }
         {{ _message }}
     </div>
 </div>

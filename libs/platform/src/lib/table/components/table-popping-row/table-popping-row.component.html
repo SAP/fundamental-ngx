@@ -1,4 +1,6 @@
-<td *ngIf="selectionMode !== SELECTION_MODE.NONE" fd-table-cell fdkDisabled [addDisabledClass]="false"></td>
+@if (selectionMode !== SELECTION_MODE.NONE) {
+    <td fd-table-cell fdkDisabled [addDisabledClass]="false"></td>
+}
 
 <td
     fd-table-cell
@@ -8,18 +10,18 @@
     (click)="cellClicked.emit({ index: 0, row })"
     (keydown.enter)="_isTreeRowFirstCell(0, row, $event) && toggleGroupRow.emit(row)"
 >
-    <div fd-table-text *ngFor="let poppingColumn of _fdpTableService.poppingColumns$ | async">
-        <label fd-form-label>{{ poppingColumn.label }}:</label>
+    @for (poppingColumn of _fdpTableService.poppingColumns$ | async; track poppingColumn.name) {
+        <div fd-table-text>
+            <label fd-form-label>{{ poppingColumn.label }}:</label>
 
-        <ng-container *ngIf="poppingColumn?.columnCellTemplate; else defaultTableCellTemplate">
-            <ng-container
-                *ngTemplateOutlet="
-                    poppingColumn.columnCellTemplate!;
-                    context: { $implicit: row.value, popping: true, rowIndex: row.index }
-                "
-            ></ng-container>
-        </ng-container>
-
-        <ng-template #defaultTableCellTemplate>{{ row.value | valueByPath : poppingColumn.key }}</ng-template>
-    </div>
+            @if (poppingColumn?.columnCellTemplate) {
+                <ng-template
+                    [ngTemplateOutlet]="poppingColumn.columnCellTemplate!"
+                    [ngTemplateOutletContext]="{ $implicit: row.value, popping: true, rowIndex: row.index }"
+                ></ng-template>
+            } @else {
+                {{ row.value | valueByPath: poppingColumn.key }}
+            }
+        </div>
+    }
 </td>

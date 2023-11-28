@@ -12,43 +12,45 @@
         [title]="title && !hideItemCount ? title + ' (' + (counter | async) + ')' : title"
         [shouldOverflow]="shouldOverflow"
     >
-        <ng-container *ngIf="_tableToolbarLeftActionsComponent">
+        @if (_tableToolbarLeftActionsComponent) {
             <span fd-toolbar-item fdOverflowPriority="never">
-                <fd-toolbar-separator *ngIf="!!title || !hideItemCount"></fd-toolbar-separator>
-                <ng-container *ngTemplateOutlet="_tableToolbarLeftActionsComponent._contentTemplateRef"></ng-container>
+                @if (!!title || !hideItemCount) {
+                    <fd-toolbar-separator></fd-toolbar-separator>
+                }
+                <ng-template [ngTemplateOutlet]="_tableToolbarLeftActionsComponent._contentTemplateRef"></ng-template>
             </span>
-        </ng-container>
+        }
         <fd-toolbar-spacer></fd-toolbar-spacer>
-
-        <fdp-search-field
-            fd-toolbar-item
-            *ngIf="!hideSearchInput"
-            [style.min-width.rem]="15.5"
-            [placeholder]="'platformTable.toolbarSearchPlaceholder' | fdTranslate"
-            [inputText]="_searchInputText"
-            [disabled]="!!(tableLoading$ | async)"
-            [suggestions]="searchSuggestions"
-            [ariaLabelledBy]="tableToolbarTitleId"
-            (searchSubmit)="submitSearch($event)"
-            (cancelSearch)="submitSearch($event)"
-            [disableSuggestionsFoundAnnouncer]="true"
-        ></fdp-search-field>
-
-        <ng-container *ngIf="editMode !== 'none'">
+        @if (!hideSearchInput) {
+            <fdp-search-field
+                fd-toolbar-item
+                [style.min-width.rem]="15.5"
+                [placeholder]="'platformTable.toolbarSearchPlaceholder' | fdTranslate"
+                [inputText]="_searchInputText"
+                [disabled]="!!(tableLoading$ | async)"
+                [suggestions]="searchSuggestions"
+                [ariaLabelledBy]="tableToolbarTitleId"
+                (searchSubmit)="submitSearch($event)"
+                (cancelSearch)="submitSearch($event)"
+                [disableSuggestionsFoundAnnouncer]="true"
+            ></fdp-search-field>
+        }
+        @if (editMode !== 'none') {
             <fdp-button
                 fd-toolbar-item
                 fdOverflowPriority="never"
                 [label]="'platformTable.toolbarActionCreateButtonLabel' | fdTranslate"
                 (click)="_addRow()"
             ></fdp-button>
-            <ng-container *ngIf="_showSaveButton">
-                <fdp-button
-                    fd-toolbar-item
-                    fdOverflowPriority="never"
-                    [label]="'platformTable.toolbarActionSaveButtonLabel' | fdTranslate"
-                    *ngIf="_showSaveButton"
-                    (click)="_saveRows()"
-                ></fdp-button>
+            @if (_showSaveButton) {
+                @if (_showSaveButton) {
+                    <fdp-button
+                        fd-toolbar-item
+                        fdOverflowPriority="never"
+                        [label]="'platformTable.toolbarActionSaveButtonLabel' | fdTranslate"
+                        (click)="_saveRows()"
+                    ></fdp-button>
+                }
                 <fd-toolbar-separator></fd-toolbar-separator>
                 <fdp-button
                     fd-toolbar-item
@@ -57,40 +59,33 @@
                     (click)="_cancelEditing()"
                     buttonType="transparent"
                 ></fdp-button>
-            </ng-container>
-            <fd-toolbar-separator
-                fd-toolbar-item
-                fdOverflowPriority="never"
-                *ngIf="
-                    tableToolbarActionsComponent ||
-                    (sortable | async) ||
-                    (filterable | async) ||
-                    (groupable | async) ||
-                    (columns | async)
-                "
-            ></fd-toolbar-separator>
-        </ng-container>
-
-        <span fd-toolbar-item *ngIf="tableToolbarActionsComponent" class="fdp-table-toolbar-actions">
-            <ng-container *ngTemplateOutlet="tableToolbarActionsComponent.contentTemplateRef"></ng-container>
-        </span>
-
-        <ng-container
-            *ngIf="
-                showExpandCollapseButtons ||
+            }
+            @if (
+                tableToolbarActionsComponent ||
                 (sortable | async) ||
                 (filterable | async) ||
                 (groupable | async) ||
                 (columns | async)
-            "
-        >
-            <fd-toolbar-separator
-                fd-toolbar-item
-                fdOverflowPriority="never"
-                *ngIf="tableToolbarActionsComponent"
-            ></fd-toolbar-separator>
-
-            <ng-container *ngIf="showExpandCollapseButtons">
+            ) {
+                <fd-toolbar-separator fd-toolbar-item fdOverflowPriority="never"></fd-toolbar-separator>
+            }
+        }
+        @if (tableToolbarActionsComponent) {
+            <span fd-toolbar-item class="fdp-table-toolbar-actions">
+                <ng-template [ngTemplateOutlet]="tableToolbarActionsComponent.contentTemplateRef"></ng-template>
+            </span>
+        }
+        @if (
+            showExpandCollapseButtons ||
+            (sortable | async) ||
+            (filterable | async) ||
+            (groupable | async) ||
+            (columns | async)
+        ) {
+            @if (tableToolbarActionsComponent) {
+                <fd-toolbar-separator fd-toolbar-item fdOverflowPriority="never"></fd-toolbar-separator>
+            }
+            @if (showExpandCollapseButtons) {
                 <fdp-button
                     fd-toolbar-item
                     fdOverflowPriority="never"
@@ -100,7 +95,6 @@
                     [ariaLabel]="'platformTable.toolbarActionExpandAllButtonTitle' | fdTranslate"
                     buttonType="transparent"
                 ></fdp-button>
-
                 <fdp-button
                     fd-toolbar-item
                     fdOverflowPriority="never"
@@ -110,52 +104,55 @@
                     [ariaLabel]="'platformTable.toolbarActionCollapseAllButtonTitle' | fdTranslate"
                     buttonType="transparent"
                 ></fdp-button>
-            </ng-container>
-
-            <fdp-button
-                fd-toolbar-item
-                fdOverflowPriority="never"
-                *ngIf="sortable | async"
-                glyph="sort"
-                [title]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
-                [ariaLabel]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
-                buttonType="transparent"
-                aria-haspopup="modal"
-                (click)="openSorting()"
-            ></fdp-button>
-            <fdp-button
-                fd-toolbar-item
-                fdOverflowPriority="never"
-                *ngIf="filterable | async"
-                glyph="filter"
-                [title]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
-                [ariaLabel]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
-                buttonType="transparent"
-                aria-haspopup="modal"
-                (click)="openFiltering()"
-            ></fdp-button>
-            <fdp-button
-                fd-toolbar-item
-                fdOverflowPriority="never"
-                *ngIf="groupable | async"
-                glyph="group-2"
-                [title]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
-                [ariaLabel]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
-                buttonType="transparent"
-                aria-haspopup="modal"
-                (click)="openGrouping()"
-            ></fdp-button>
-            <fdp-button
-                fd-toolbar-item
-                fdOverflowPriority="never"
-                *ngIf="columns | async"
-                glyph="action-settings"
-                [title]="'platformTable.toolbarActionColumnsButtonTitle' | fdTranslate"
-                [ariaLabel]="'platformTable.toolbarActionColumnsButtonTitle' | fdTranslate"
-                buttonType="transparent"
-                aria-haspopup="modal"
-                (click)="openColumns()"
-            ></fdp-button>
-        </ng-container>
+            }
+            @if (sortable | async) {
+                <fdp-button
+                    fd-toolbar-item
+                    fdOverflowPriority="never"
+                    glyph="sort"
+                    [title]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
+                    [ariaLabel]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
+                    buttonType="transparent"
+                    aria-haspopup="modal"
+                    (click)="openSorting()"
+                ></fdp-button>
+            }
+            @if (filterable | async) {
+                <fdp-button
+                    fd-toolbar-item
+                    fdOverflowPriority="never"
+                    glyph="filter"
+                    [title]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
+                    [ariaLabel]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
+                    buttonType="transparent"
+                    aria-haspopup="modal"
+                    (click)="openFiltering()"
+                ></fdp-button>
+            }
+            @if (groupable | async) {
+                <fdp-button
+                    fd-toolbar-item
+                    fdOverflowPriority="never"
+                    glyph="group-2"
+                    [title]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
+                    [ariaLabel]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
+                    buttonType="transparent"
+                    aria-haspopup="modal"
+                    (click)="openGrouping()"
+                ></fdp-button>
+            }
+            @if (columns | async) {
+                <fdp-button
+                    fd-toolbar-item
+                    fdOverflowPriority="never"
+                    glyph="action-settings"
+                    [title]="'platformTable.toolbarActionColumnsButtonTitle' | fdTranslate"
+                    [ariaLabel]="'platformTable.toolbarActionColumnsButtonTitle' | fdTranslate"
+                    buttonType="transparent"
+                    aria-haspopup="modal"
+                    (click)="openColumns()"
+                ></fdp-button>
+            }
+        }
     </fd-toolbar>
 </ng-template>

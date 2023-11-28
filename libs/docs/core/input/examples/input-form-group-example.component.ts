@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
     FormArray,
@@ -23,7 +22,6 @@ import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fu
         FormItemComponent,
         FormLabelComponent,
         FormControlComponent,
-        NgFor,
         ButtonComponent
     ]
 })

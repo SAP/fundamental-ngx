@@ -23,7 +23,7 @@ import { warnOnce } from '@fundamental-ngx/core/utils';
     host: {
         class: 'fd-action-bar'
     },
-    styleUrls: ['./action-bar.component.scss'],
+    styleUrl: './action-bar.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true

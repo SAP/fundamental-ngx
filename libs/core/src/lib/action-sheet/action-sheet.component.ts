@@ -25,7 +25,7 @@ import { DynamicComponentService, FocusEscapeDirection, KeyboardSupportService }
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
 
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { PopoverBodyComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.component';
 import { ActionSheetControlComponent } from './action-sheet-control/action-sheet-control.component';
@@ -35,12 +35,12 @@ import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-m
 @Component({
     selector: 'fd-action-sheet',
     templateUrl: './action-sheet.component.html',
-    styleUrls: ['./action-sheet.component.scss'],
+    styleUrl: './action-sheet.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [KeyboardSupportService, DynamicComponentService],
     standalone: true,
-    imports: [NgIf, PopoverComponent, PopoverControlComponent, NgTemplateOutlet, PopoverBodyComponent]
+    imports: [PopoverComponent, PopoverControlComponent, NgTemplateOutlet, PopoverBodyComponent]
 })
 export class ActionSheetComponent implements AfterContentInit, AfterViewInit, OnDestroy {
     /** Whether should be displayed in mobile mode */

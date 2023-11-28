@@ -1,4 +1,4 @@
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ClickedDirective, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 
@@ -6,7 +6,7 @@ import { ClickedDirective, FocusableItemDirective } from '@fundamental-ngx/cdk/u
     selector: 'fd-fn-click-basic-example',
     templateUrl: './basic-example.component.html',
     standalone: true,
-    imports: [FocusableItemDirective, ClickedDirective, NgIf, JsonPipe]
+    imports: [FocusableItemDirective, ClickedDirective, JsonPipe]
 })
 export class BasicExampleComponent {
     fnClickEvent: any;

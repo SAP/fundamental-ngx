@@ -15,45 +15,49 @@
     </fd-dialog-header>
 
     <fd-dialog-body>
-        <div class="group-row" *ngFor="let rule of rules; let i = index">
-            <fd-select
-                class="group-row__select"
-                [value]="rule.columnKey"
-                (valueChange)="_onRuleColumnKeyChange(rule, $event)"
-                [placeholder]="'platformTable.P13GroupDialogNoneSelectedColumnSelectPlaceholder' | fdTranslate"
-            >
-                <li fd-option *ngFor="let column of columns" [value]="column.key">
-                    {{ column.label }}
-                </li>
-            </fd-select>
+        @for (rule of rules; track rule) {
+            <div class="group-row">
+                <fd-select
+                    class="group-row__select"
+                    [value]="rule.columnKey"
+                    (valueChange)="_onRuleColumnKeyChange(rule, $event)"
+                    [placeholder]="'platformTable.P13GroupDialogNoneSelectedColumnSelectPlaceholder' | fdTranslate"
+                >
+                    @for (column of columns; track column) {
+                        <li fd-option [value]="column.key">
+                            {{ column.label }}
+                        </li>
+                    }
+                </fd-select>
 
-            <fd-checkbox
-                class="group-row__checkbox"
-                [ngModel]="rule.showAsColumn"
-                (ngModelChange)="_onRuleShowAsColumnChange(rule, $event)"
-                [label]="'platformTable.P13GroupDialogShowFieldAsColumnCheckboxLabel' | fdTranslate"
-            ></fd-checkbox>
+                <fd-checkbox
+                    class="group-row__checkbox"
+                    [ngModel]="rule.showAsColumn"
+                    (ngModelChange)="_onRuleShowAsColumnChange(rule, $event)"
+                    [label]="'platformTable.P13GroupDialogShowFieldAsColumnCheckboxLabel' | fdTranslate"
+                ></fd-checkbox>
 
-            <div class="group-row__actions">
-                <button
-                    fd-button
-                    fdType="transparent"
-                    glyph="sys-cancel"
-                    [attr.aria-label]="'platformTable.P13GroupDialogRemoveGroupBtnTitle' | fdTranslate"
-                    [title]="'platformTable.P13GroupDialogRemoveGroupBtnTitle' | fdTranslate"
-                    (click)="_removeRule(rule)"
-                ></button>
+                <div class="group-row__actions">
+                    <button
+                        fd-button
+                        fdType="transparent"
+                        glyph="sys-cancel"
+                        [attr.aria-label]="'platformTable.P13GroupDialogRemoveGroupBtnTitle' | fdTranslate"
+                        [title]="'platformTable.P13GroupDialogRemoveGroupBtnTitle' | fdTranslate"
+                        (click)="_removeRule(rule)"
+                    ></button>
 
-                <button
-                    fd-button
-                    fdType="transparent"
-                    glyph="add"
-                    [attr.aria-label]="'platformTable.P13GroupDialogAddNewGroupBtnTitle' | fdTranslate"
-                    [title]="'platformTable.P13GroupDialogAddNewGroupBtnTitle' | fdTranslate"
-                    (click)="_addNew(i)"
-                ></button>
+                    <button
+                        fd-button
+                        fdType="transparent"
+                        glyph="add"
+                        [attr.aria-label]="'platformTable.P13GroupDialogAddNewGroupBtnTitle' | fdTranslate"
+                        [title]="'platformTable.P13GroupDialogAddNewGroupBtnTitle' | fdTranslate"
+                        (click)="_addNew($index)"
+                    ></button>
+                </div>
             </div>
-        </div>
+        }
     </fd-dialog-body>
 
     <fd-dialog-footer>

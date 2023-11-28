@@ -9,7 +9,7 @@ const ELEMENT_DIMENSIONS = { width: 100 };
 class MockResizeObserver implements ResizeObserver {
     constructor(public callbackFn: ResizeObserverCallback) {}
 
-    observe(target: Element, options?: ResizeObserverOptions): void {
+    observe(target: Element): void {
         // Mutation observer observer any changes in DOM tree
         const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
@@ -30,7 +30,7 @@ class MockResizeObserver implements ResizeObserver {
 
     disconnect(): void {}
 
-    unobserve(target: Element): void {}
+    unobserve(): void {}
 }
 
 @Component({

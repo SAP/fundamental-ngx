@@ -40,7 +40,7 @@ let menuIdCounter = 0;
 @Component({
     selector: 'fdp-menu',
     templateUrl: './menu.component.html',
-    styleUrls: ['./menu.component.scss'],
+    styleUrl: './menu.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [contentDensityObserverProviders()],
@@ -112,7 +112,10 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     private _dirChangeSubscription = Subscription.EMPTY;
 
     /** @hidden */
-    constructor(@Optional() private _rtl: RtlService, readonly contentDensityObserver: ContentDensityObserver) {
+    constructor(
+        @Optional() private _rtl: RtlService,
+        readonly contentDensityObserver: ContentDensityObserver
+    ) {
         if (this._rtl) {
             this._dirChangeSubscription = this._rtl.rtl.subscribe((value: boolean) => {
                 this.direction = value ? 'rtl' : 'ltr';

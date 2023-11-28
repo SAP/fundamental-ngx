@@ -16,41 +16,44 @@
         (activeValueChange)="handleHourChange($event.value.value)"
         (activeStateChange)="changeActive('hour')"
     ></fd-time-column>
-    <fd-time-column
-        *ngIf="displayMinutes"
-        [active]="isActive('minute')"
-        [rows]="minuteViewItems"
-        [offset]="offset"
-        [elementsAtOnce]="elementsAtOnce"
-        [activeValue]="activeMinuteViewItem"
-        columnTranslationsPreset="minutes"
-        [spinners]="spinnerButtons"
-        (activeValueChange)="handleMinuteChange($event.value.value)"
-        (activeStateChange)="changeActive('minute')"
-    ></fd-time-column>
-    <fd-time-column
-        *ngIf="displaySeconds"
-        [active]="isActive('second')"
-        [rows]="secondViewItems"
-        [offset]="offset"
-        [elementsAtOnce]="elementsAtOnce"
-        [activeValue]="activeSecondViewItem"
-        columnTranslationsPreset="seconds"
-        [spinners]="spinnerButtons"
-        (activeValueChange)="handleSecondChange($event.value.value)"
-        (activeStateChange)="changeActive('second')"
-    ></fd-time-column>
-    <fd-time-column
-        *ngIf="meridian"
-        [active]="isActive('meridian')"
-        [rows]="meridianViewItems"
-        [activeValue]="activeMeridianViewItem"
-        [offset]="0"
-        [elementsAtOnce]="elementsAtOnce"
-        columnTranslationsPreset="period"
-        [meridian]="true"
-        [spinners]="spinnerButtons"
-        (activeValueChange)="handleMeridianChange($event.value.value)"
-        (activeStateChange)="changeActive('meridian')"
-    ></fd-time-column>
+    @if (displayMinutes) {
+        <fd-time-column
+            [active]="isActive('minute')"
+            [rows]="minuteViewItems"
+            [offset]="offset"
+            [elementsAtOnce]="elementsAtOnce"
+            [activeValue]="activeMinuteViewItem"
+            columnTranslationsPreset="minutes"
+            [spinners]="spinnerButtons"
+            (activeValueChange)="handleMinuteChange($event.value.value)"
+            (activeStateChange)="changeActive('minute')"
+        ></fd-time-column>
+    }
+    @if (displaySeconds) {
+        <fd-time-column
+            [active]="isActive('second')"
+            [rows]="secondViewItems"
+            [offset]="offset"
+            [elementsAtOnce]="elementsAtOnce"
+            [activeValue]="activeSecondViewItem"
+            columnTranslationsPreset="seconds"
+            [spinners]="spinnerButtons"
+            (activeValueChange)="handleSecondChange($event.value.value)"
+            (activeStateChange)="changeActive('second')"
+        ></fd-time-column>
+    }
+    @if (meridian) {
+        <fd-time-column
+            [active]="isActive('meridian')"
+            [rows]="meridianViewItems"
+            [activeValue]="activeMeridianViewItem"
+            [offset]="0"
+            [elementsAtOnce]="elementsAtOnce"
+            columnTranslationsPreset="period"
+            [meridian]="true"
+            [spinners]="spinnerButtons"
+            (activeValueChange)="handleMeridianChange($event.value.value)"
+            (activeStateChange)="changeActive('meridian')"
+        ></fd-time-column>
+    }
 </div>

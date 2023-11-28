@@ -53,7 +53,7 @@ import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { FormStates, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
 import { AutoCompleteDirective, DisplayFnPipe, SearchHighlightPipe } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -92,7 +92,7 @@ let comboboxUniqueId = 0;
 @Component({
     selector: 'fd-combobox',
     templateUrl: './combobox.component.html',
-    styleUrls: ['./combobox.component.scss'],
+    styleUrl: './combobox.component.scss',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -121,7 +121,6 @@ let comboboxUniqueId = 0;
         PopoverComponent,
         PopoverControlComponent,
         PopoverBodyComponent,
-        NgIf,
         ListModule,
         InputGroupModule,
         FormsModule,
@@ -129,7 +128,6 @@ let comboboxUniqueId = 0;
         ButtonComponent,
         IconComponent,
         ContentDensityModule,
-        NgFor,
         DisplayFnPipe,
         SearchHighlightPipe,
         FdTranslatePipe,

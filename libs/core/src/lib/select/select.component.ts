@@ -38,7 +38,7 @@ import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 import { ENTER, ESCAPE, SPACE } from '@angular/cdk/keycodes';
-import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { FormFieldAdvancedStateMessage, FormStates, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -66,7 +66,7 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
 @Component({
     selector: 'fd-select',
     templateUrl: './select.component.html',
-    styleUrls: ['./select.component.scss'],
+    styleUrl: './select.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
@@ -92,7 +92,6 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
         PopoverComponent,
         PopoverControlComponent,
         PopoverBodyComponent,
-        NgIf,
         NgClass,
         IconComponent,
         ListComponent,

@@ -9,11 +9,15 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { FILTER_STRATEGY, FilterableColumnDataType } from '@fundamental-ngx/platform/table-helpers';
+import {
+    FILTER_STRATEGY,
+    FILTER_STRATEGY_LABEL,
+    FilterableColumnDataType
+} from '@fundamental-ngx/platform/table-helpers';
 import { Subscription } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
-import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { LayoutGridColDirective, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
@@ -32,11 +36,7 @@ import { FilterRule } from './filtering.model';
         LayoutGridColDirective,
         SelectComponent,
         FormsModule,
-        NgFor,
         OptionComponent,
-        NgSwitch,
-        NgSwitchCase,
-        NgSwitchDefault,
         NgTemplateOutlet,
         DatePickerComponent,
         FormControlComponent,
@@ -58,6 +58,9 @@ export class FilterRuleComponent implements OnDestroy {
 
     /** @hidden */
     readonly DATA_TYPE = FilterableColumnDataType;
+
+    /** @hidden */
+    readonly strategyLabels = FILTER_STRATEGY_LABEL;
 
     /** @hidden */
     @ViewChild(NgForm)

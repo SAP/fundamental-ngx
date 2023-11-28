@@ -48,7 +48,7 @@ import {
     isFunction
 } from '@fundamental-ngx/platform/shared';
 
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ContentDensityModule,
     ContentDensityObserver,
@@ -85,7 +85,7 @@ export class MultiInputSelectionChangeEvent {
 @Component({
     selector: 'fdp-multi-input',
     templateUrl: './multi-input.component.html',
-    styleUrls: ['./multi-input.component.scss'],
+    styleUrl: './multi-input.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
@@ -103,11 +103,9 @@ export class MultiInputSelectionChangeEvent {
         PopoverControlComponent,
         PopoverBodyComponent,
         InputGroupModule,
-        NgIf,
         TokenComponent,
         TokenizerComponent,
         TokenizerInputDirective,
-        NgFor,
         FormControlComponent,
         FormsModule,
         AutoCompleteDirective,

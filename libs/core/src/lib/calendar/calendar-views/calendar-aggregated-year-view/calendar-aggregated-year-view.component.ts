@@ -18,7 +18,6 @@ import { takeUntil } from 'rxjs/operators';
 
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
-import { NgFor } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarService } from '../../calendar.service';
@@ -29,14 +28,14 @@ import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalend
 @Component({
     selector: 'fd-calendar-aggregated-year-view',
     templateUrl: './calendar-aggregated-year-view.component.html',
-    styleUrls: ['./calendar-aggregated-year-view.component.scss'],
+    styleUrl: './calendar-aggregated-year-view.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[attr.id]': 'viewId'
     },
     standalone: true,
-    imports: [NgFor, ButtonComponent, FdTranslatePipe]
+    imports: [ButtonComponent, FdTranslatePipe]
 })
 export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy, OnChanges, FocusableCalendarView {
     /** Parameter used in id of years used for help with focusing on the correct element during keyboard navigation. */

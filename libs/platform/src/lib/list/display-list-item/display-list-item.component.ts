@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
 
-import { AsyncPipe, NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import {
     ListItemComponent,
@@ -20,7 +20,6 @@ import { BaseListItem } from '../base-list-item';
         role: 'none'
     },
     imports: [
-        NgIf,
         ListItemComponent,
         ListLinkDirective,
         RouterLink,

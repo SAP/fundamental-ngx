@@ -1,5 +1,5 @@
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { AsyncPipe, NgClass, NgFor, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -83,18 +83,14 @@ import { TableEditableCellComponent } from '../table-editable-cell/table-editabl
     },
     standalone: true,
     imports: [
-        NgIf,
         TableCellDirective,
         TableStatusIndicatorDirective,
         DisabledBehaviorDirective,
         NgStyle,
-        NgSwitch,
-        NgSwitchCase,
         FdpCellSelectableDirective,
         NgTemplateOutlet,
         CheckboxComponent,
         FormsModule,
-        NgFor,
         PlatformTableCellResizableDirective,
         NgClass,
         TableEditableCellComponent,

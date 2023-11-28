@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NgIf } from '@angular/common';
+
 import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
@@ -399,29 +399,31 @@ describe('NumberStepInputComponent main functionality', () => {
 /** Usage with form */
 @Component({
     template: `
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <fdp-form-group #fg1 [formGroup]="form" [object]="initialFormModel">
-                <fdp-form-field
-                    #ff
-                    id="qty"
-                    label="Basic Number Step-Input with Platform Forms"
-                    placeholder="Start entering qty"
-                    [hint]="{ content: 'This is tooltip help', placement: 'left' }"
-                    zone="zLeft"
-                    rank="10"
-                    [validators]="stepInputValidators"
-                >
-                    <fdp-number-step-input name="qty" [formControl]="ff.formControl"></fdp-number-step-input>
-                </fdp-form-field>
-                <ng-template #i18n let-errors>
-                    <span *ngIf="errors && errors.required" class="error">This field is required.</span>
-                </ng-template>
-            </fdp-form-group>
-            <button type="submit" #submitButton>Submit</button>
-        </form>
-    `,
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <fdp-form-group #fg1 [formGroup]="form" [object]="initialFormModel">
+    <fdp-form-field
+      #ff
+      id="qty"
+      label="Basic Number Step-Input with Platform Forms"
+      placeholder="Start entering qty"
+      [hint]="{ content: 'This is tooltip help', placement: 'left' }"
+      zone="zLeft"
+      rank="10"
+      [validators]="stepInputValidators"
+      >
+      <fdp-number-step-input name="qty" [formControl]="ff.formControl"></fdp-number-step-input>
+    </fdp-form-field>
+    <ng-template #i18n let-errors>
+      @if (errors && errors.required) {
+        <span class="error">This field is required.</span>
+      }
+    </ng-template>
+  </fdp-form-group>
+  <button type="submit" #submitButton>Submit</button>
+</form>
+`,
     standalone: true,
-    imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformStepInputModule, NgIf],
+    imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformStepInputModule],
     providers: [RtlService]
 })
 class NumberStepInputFormTestWrapperComponent {

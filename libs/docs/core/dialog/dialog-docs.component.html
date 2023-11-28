@@ -20,19 +20,14 @@
     <fd-template-based-dialog-example></fd-template-based-dialog-example>
 </component-example>
 <code-example [exampleFiles]="templateDialog"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="form-dialog" componentName="dialog"> Form </fd-docs-section-title>
 <description> Form Dialog Example </description>
-
 <component-example>
     <fd-form-dialog-example></fd-form-dialog-example>
 </component-example>
 <code-example [exampleFiles]="formDialog"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="component-as-content" componentName="dialog"> Component Based Dialog </fd-docs-section-title>
 <description>
     To open a component based Dialog provide the component class to the DialogService open method. Inject the
@@ -45,9 +40,7 @@
     <fd-component-based-dialog-example></fd-component-based-dialog-example>
 </component-example>
 <code-example [exampleFiles]="componentAsContentSource"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="object" componentName="dialog"> Object Based Dialog </fd-docs-section-title>
 <description>
     The Dialog can be declared inside the <code>DialogDefaultContent</code> and opened with DialogService using the
@@ -66,9 +59,7 @@
     <fd-dialog-object-example></fd-dialog-object-example>
 </component-example>
 <code-example [exampleFiles]="objectDialog"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="state" componentName="dialog"> Dialog State </fd-docs-section-title>
 <description>
     The dialog state can be controlled by using <code>DialogRef</code>, providing such features as:
@@ -83,9 +74,7 @@
     <fd-dialog-state-example></fd-dialog-state-example>
 </component-example>
 <code-example [exampleFiles]="stateDialog"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="configuration" componentName="dialog"> Dialog Configuration </fd-docs-section-title>
 <description>
     Dialog behavior can be configured using the <code>DialogConfig</code> object passed as an argument to the
@@ -99,9 +88,7 @@
     <fd-dialog-configuration-example></fd-dialog-configuration-example>
 </component-example>
 <code-example [exampleFiles]="customConfiguration"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="auto-label" componentName="dialog"> Label dialog automatically </fd-docs-section-title>
 <description>
     Despite dialog can be labelled manually by providing <code>ariaLabelledBy</code> in the configuration it also
@@ -112,9 +99,7 @@
     <fd-auto-label-dialog-example></fd-auto-label-dialog-example>
 </component-example>
 <code-example [exampleFiles]="autoLabel"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="position" componentName="dialog"> Dialog Positioning </fd-docs-section-title>
 <description>
     The placement of the Dialog on the screen can be customized through the <code>DialogConfig.position</code> property.
@@ -123,9 +108,7 @@
     <fd-dialog-position-example></fd-dialog-position-example>
 </component-example>
 <code-example [exampleFiles]="dialogPosition"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="mobile" componentName="dialog"> Dialog On Mobile Devices </fd-docs-section-title>
 <description>
     To display the Dialog component in mobile mode, use the <code>DialogConfig.mobile</code> property. Dialog on mobile
@@ -137,9 +120,7 @@
     <fd-dialog-mobile-example></fd-dialog-mobile-example>
 </component-example>
 <code-example [exampleFiles]="dialogMobile"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="complex" componentName="dialog"> Complex Dialog </fd-docs-section-title>
 <description>
     To create more complex Dialogs it is possible to provide custom header, subheader and footer templates.<br />
@@ -158,9 +139,7 @@
     <fd-dialog-complex-example></fd-dialog-complex-example>
 </component-example>
 <code-example [exampleFiles]="complexDialog"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="stacked" componentName="dialog"> Stacked Dialogs </fd-docs-section-title>
 <description>
     The DialogService supports limitless stacked dialogs. Each can be closed individually and there is no specific
@@ -173,9 +152,7 @@
     <fd-dialog-stacked-example></fd-dialog-stacked-example>
 </component-example>
 <code-example [exampleFiles]="stackedDialogs"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="custom-backdrop-container-configuration" componentName="dialog">
     Custom Backdrop and Container
 </fd-docs-section-title>
@@ -196,9 +173,7 @@
     <fd-dialog-backdrop-container-example></fd-dialog-backdrop-container-example>
 </component-example>
 <code-example [exampleFiles]="customBackdropContainer"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="popover-inside-dialog" componentName="dialog">
     Dialog with inner popovers
 </fd-docs-section-title>
@@ -207,9 +182,7 @@
     <fd-dialog-inner-popover-example></fd-dialog-inner-popover-example>
 </component-example>
 <code-example [exampleFiles]="dialogInnerPopover"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="full-screen-dialog" componentName="dialog"> Full screen toggler </fd-docs-section-title>
 <description>
     <p>Dialog suports being toggled between defined width and height constraints and full-screen mode.</p>
@@ -222,14 +195,11 @@
     <fd-dialog-full-screen-example></fd-dialog-full-screen-example>
 </component-example>
 <code-example [exampleFiles]="fullScreenDialog"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="playground-dialog" componentName="dialog"> Playground Area </fd-docs-section-title>
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <button fd-button label="Open Dialog" (click)="openDialog(playgroundDialog)"></button>
 </playground>
-
 <ng-template
     [fdDialogTemplate]
     [fdDialogTemplateConfig]="playgroundDialogConfig"
@@ -241,19 +211,18 @@
         <fd-dialog-header>
             <h1 fd-title id="fd-dialog-header-11">Playground Dialog</h1>
             {{ dialogConfig | json }}
-            <button
-                fd-dialog-full-screen-toggler-button
-                *ngIf="dialogConfig.allowFullScreen"
-                [title]="(dialog.fullScreen | async) === true ? 'Leave full-screen mode' : 'Enter full-screen mode'"
-                (click)="dialog.toggleFullScreen()"
-            ></button>
+            @if (dialogConfig.allowFullScreen) {
+                <button
+                    fd-dialog-full-screen-toggler-button
+                    [title]="(dialog.fullScreen | async) === true ? 'Leave full-screen mode' : 'Enter full-screen mode'"
+                    (click)="dialog.toggleFullScreen()"
+                ></button>
+            }
             <button fd-dialog-close-button (click)="dialog.dismiss()" title="close"></button>
         </fd-dialog-header>
-
         <fd-dialog-body>
             <p id="fd-dialog-body-11" role="dialog">This is the dialog playground body text!</p>
         </fd-dialog-body>
-
         <fd-dialog-footer>
             <fd-button-bar fdType="emphasized" label="Close" (click)="dialog.close()" ariaLabel="Close Emphasized">
             </fd-button-bar>

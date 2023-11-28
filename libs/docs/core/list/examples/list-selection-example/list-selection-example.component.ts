@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
@@ -11,7 +10,7 @@ import { RadioModule } from '@fundamental-ngx/core/radio';
     templateUrl: './list-selection-example.component.html',
     styleUrls: ['./list-selection-example.component.scss'],
     standalone: true,
-    imports: [ListModule, NgFor, CheckboxComponent, FormsModule, ContentDensityDirective, RadioModule]
+    imports: [ListModule, CheckboxComponent, FormsModule, ContentDensityDirective, RadioModule]
 })
 export class ListSelectionExampleComponent {
     selectionValue: string | null = null;

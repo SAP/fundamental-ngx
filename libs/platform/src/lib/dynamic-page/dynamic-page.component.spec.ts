@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -14,6 +14,7 @@ import { DynamicPageComponent } from './dynamic-page.component';
 import { DynamicPageService } from './dynamic-page.service';
 import { PlatformDynamicPageModule } from './dynamic-page.module';
 import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: `
@@ -264,8 +265,7 @@ describe('DynamicPageComponent with collapsible set to false', () => {
     template: `
         <fdp-dynamic-page [size]="size" [background]="background">
             <!-- Wrapper -->
-            <ng-container>
-                <fdp-dynamic-page-title>
+            <fdp-dynamic-page-title>
                     <fdp-dynamic-page-global-actions>
                         <fd-toolbar fdType="transparent" [clearBorder]="true">
                             <button
@@ -289,26 +289,19 @@ describe('DynamicPageComponent with collapsible set to false', () => {
                         </fd-toolbar>
                     </fdp-dynamic-page-layout-actions>
                 </fdp-dynamic-page-title>
-            </ng-container>
             <!-- Wrapper -->
-            <ng-container>
-                <fdp-dynamic-page-header>
+            <fdp-dynamic-page-header>
                     <div id="test-header">Header</div>
                 </fdp-dynamic-page-header>
-            </ng-container>
             <!-- Wrapper -->
-            <ng-container>
-                <fdp-dynamic-page-content>
+            <fdp-dynamic-page-content>
                     <div id="test-content">DynamicPage Content Text</div>
                 </fdp-dynamic-page-content>
-            </ng-container>
 
             <!-- Wrapper -->
-            <ng-container>
-                <fdp-dynamic-page-footer>
+            <fdp-dynamic-page-footer>
                     <div id="test-footer">DynamicPage Footer</div>
                 </fdp-dynamic-page-footer>
-            </ng-container>
         </fdp-dynamic-page>
     `
 })

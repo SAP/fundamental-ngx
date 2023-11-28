@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
-import { NgIf } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
@@ -25,8 +24,7 @@ import { FdpFormGroupModule, PlatformTimePickerModule } from '@fundamental-ngx/p
         PlatformTimePickerModule,
         ContentDensityDirective,
         SegmentedButtonModule,
-        ButtonComponent,
-        NgIf
+        ButtonComponent
     ]
 })
 export class PlatformTimePickerReactiveExampleComponent {

@@ -1,13 +1,14 @@
-<div class="fdp-approval-flow-user-list__selected-count" *ngIf="_selectedItems.length">
-    <ng-container *ngIf="_selectedItems.length === 1; else multipleItems">
-        {{ 'platformApprovalFlow.userListSelectedItemsCountSingular' | fdTranslate }}
-    </ng-container>
-
-    <ng-template #multipleItems>
-        {{ 'platformApprovalFlow.userListSelectedItemsCountPlural' | fdTranslate : { count: _selectedItems.length } }}
-    </ng-template>
-</div>
-
+@if (_selectedItems.length) {
+    <div class="fdp-approval-flow-user-list__selected-count">
+        @if (_selectedItems.length === 1) {
+            {{ 'platformApprovalFlow.userListSelectedItemsCountSingular' | fdTranslate }}
+        } @else {
+            {{
+                'platformApprovalFlow.userListSelectedItemsCountPlural' | fdTranslate: { count: _selectedItems.length }
+            }}
+        }
+    </div>
+}
 <fdp-list
     [selectionMode]="isSelectable ? 'multi' : 'none'"
     [selection]="isSelectable"
@@ -17,13 +18,14 @@
     [selectedItems]="_selectedItems"
     (selectedItemChange)="_onSelect($event)"
 >
-    <fdp-standard-list-item
-        *ngFor="let _user of _displayUsers; trackBy: _trackByFn"
-        [attr.id]="_idPrefix + _user.id"
-        [avatar]="{ image: _user.imgUrl, ariaLabel: _user.name }"
-        [description]="_user.description"
-        [ariaLabel]="_user.name"
-        [title]="_user.name"
-        (click)="$event.stopPropagation(); onUserClick.emit(_user)"
-    ></fdp-standard-list-item>
+    @for (_user of _displayUsers; track _trackByFn($index, _user)) {
+        <fdp-standard-list-item
+            [attr.id]="_idPrefix + _user.id"
+            [avatar]="{ image: _user.imgUrl, ariaLabel: _user.name }"
+            [description]="_user.description"
+            [ariaLabel]="_user.name"
+            [title]="_user.name"
+            (click)="$event.stopPropagation(); onUserClick.emit(_user)"
+        ></fdp-standard-list-item>
+    }
 </fdp-list>

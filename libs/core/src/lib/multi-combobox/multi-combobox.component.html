@@ -1,121 +1,113 @@
 <div class="fd-multi-combobox">
-    <ng-container [ngTemplateOutlet]="controlTemplate" *ngIf="mobile"></ng-container>
-
-    <fd-popover
-        *ngIf="!mobile"
-        additionalBodyClass="fd-popover-custom-list fd-multi-combobox__list-container"
-        (isOpenChange)="_popoverOpenChangeHandle($event)"
-        [isOpen]="isOpen"
-        [triggers]="[]"
-        [disabled]="this._cva.disabled"
-        [fillControlMode]="fillControlMode"
-    >
-        <fd-popover-control>
-            <ng-container>
-                <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
-            </ng-container>
-        </fd-popover-control>
-        <fd-popover-body [style.width.%]="!autoResize && 100">
-            <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
-            <ng-content></ng-content>
-        </fd-popover-body>
-    </fd-popover>
+    @if (mobile) {
+        <ng-template [ngTemplateOutlet]="controlTemplate"></ng-template>
+    } @else {
+        <fd-popover
+            additionalBodyClass="fd-popover-custom-list fd-multi-combobox__list-container"
+            (isOpenChange)="_popoverOpenChangeHandle($event)"
+            [isOpen]="isOpen"
+            [triggers]="[]"
+            [disabled]="_cva.disabled"
+            [fillControlMode]="fillControlMode"
+        >
+            <fd-popover-control>
+                <ng-template [ngTemplateOutlet]="controlTemplate"></ng-template>
+            </fd-popover-control>
+            <fd-popover-body [style.width.%]="!autoResize && 100">
+                <ng-template [ngTemplateOutlet]="listTemplate"></ng-template>
+                <ng-content></ng-content>
+            </fd-popover-body>
+        </fd-popover>
+    }
 </div>
-
 <ng-template #controlTemplate>
     <fd-form-input-message-group>
         <fd-input-group
             #inputGroup
-            [id]="this._cva.id + '-input-group-container'"
-            [state]="this._cva.state"
+            [id]="_cva.id + '-input-group-container'"
+            [state]="_cva.state"
             [buttonFocusable]="buttonFocusable"
-            [button]="!this._cva.readonly"
-            [glyph]="!this._cva.readonly ? 'navigation-down-arrow' : ' '"
+            [button]="!_cva.readonly"
+            [glyph]="!_cva.readonly ? 'navigation-down-arrow' : ' '"
             [isControl]="true"
-            [disabled]="this._cva.disabled || this._cva.readonly"
+            [disabled]="_cva.disabled || _cva.readonly"
             [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
-            [attr.aria-disabled]="this._cva.disabled || this._cva.readonly"
-            [attr.aria-readonly]="this._cva.readonly"
-            [glyphAriaLabel]="this._cva.ariaLabel || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)"
+            [attr.aria-disabled]="_cva.disabled || _cva.readonly"
+            [attr.aria-readonly]="_cva.readonly"
+            [glyphAriaLabel]="_cva.ariaLabel || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)"
             [iconTitle]="addonIconTitle || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)"
             (addOnButtonClicked)="_addOnClicked($event)"
             (click)="mobile && !isOpen && _onPrimaryButtonClick(false)"
             (keydown)="_navigateByTokens($event)"
         >
-            <fd-tokenizer
-                *ngIf="_selectedSuggestions"
-                [tokenizerFocusable]="false"
-                [compactCollapse]="true"
-                #tokenizer
-                class="fd-multi-combobox-tokenizer-custom"
-                (moreClickedEvent)="_moreClicked()"
-                fdMultiAnnouncer
-                [multiAnnouncerOptions]="_suggestions"
-            >
-                <fd-token
-                    [readOnly]="this._cva.disabled"
-                    (onCloseClick)="_removeToken(token, $event)"
-                    *ngFor="let token of _selectedSuggestions"
+            @if (_selectedSuggestions) {
+                <fd-tokenizer
+                    [tokenizerFocusable]="false"
+                    [compactCollapse]="true"
+                    #tokenizer
+                    class="fd-multi-combobox-tokenizer-custom"
+                    (moreClickedEvent)="_moreClicked()"
+                    fdMultiAnnouncer
+                    [multiAnnouncerOptions]="_suggestions"
                 >
-                    {{ token.label }}
-                </fd-token>
-
-                <input
-                    #searchInputElement
-                    fdkAutoComplete
-                    (onComplete)="_onCompleteTerm($event)"
-                    [options]="_suggestions"
-                    [inputText]="inputText"
-                    type="text"
-                    role="combobox"
-                    autocomplete="off"
-                    [ariaLabel]="'coreMultiComboBox.multiComboBoxAriaLabel' | fdTranslate"
-                    [attr.aria-labelledby]="this._cva.ariaLabelledBy"
-                    [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
-                    [attr.aria-owns]="autoComplete && !mobile ? this._cva.id + '-result' : null"
-                    [attr.aria-haspopup]="autoComplete && !mobile"
-                    fd-form-control
-                    fd-input-group-input
-                    tabindex="0"
-                    [id]="this._cva.id"
-                    [name]="this._cva.name"
-                    (keydown)="_onInputKeydownHandler($event)"
-                    [disabled]="this._cva.disabled"
-                    [(ngModel)]="inputText"
-                    (ngModelChange)="_searchTermChanged()"
-                    [placeholder]="this._cva.placeholder"
-                    (focus)="this._cva.onTouched(); tokenizer._showAllTokens()"
-                    (blur)="!mobile && _onBlur($event); tokenizer._hideTokens()"
-                    [attr.aria-expanded]="isOpen"
-                    [readonly]="this._cva.readonly"
-                    [attr.aria-readonly]="this._cva.readonly"
-                    [attr.aria-required]="this._cva.required"
-                    [displayFn]="_displayFn"
-                    class="fd-tokenizer__input"
-                />
-            </fd-tokenizer>
+                    @for (token of _selectedSuggestions; track token) {
+                        <fd-token [readOnly]="_cva.disabled" (onCloseClick)="_removeToken(token, $event)">
+                            {{ token.label }}
+                        </fd-token>
+                    }
+                    <input
+                        #searchInputElement
+                        fdkAutoComplete
+                        (onComplete)="_onCompleteTerm($event)"
+                        [options]="_suggestions"
+                        [inputText]="inputText"
+                        type="text"
+                        role="combobox"
+                        autocomplete="off"
+                        [ariaLabel]="'coreMultiComboBox.multiComboBoxAriaLabel' | fdTranslate"
+                        [attr.aria-labelledby]="_cva.ariaLabelledBy"
+                        [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
+                        [attr.aria-owns]="autoComplete && !mobile ? _cva.id + '-result' : null"
+                        [attr.aria-haspopup]="autoComplete && !mobile"
+                        fd-form-control
+                        fd-input-group-input
+                        tabindex="0"
+                        [id]="_cva.id"
+                        [name]="_cva.name"
+                        (keydown)="_onInputKeydownHandler($event)"
+                        [disabled]="_cva.disabled"
+                        [(ngModel)]="inputText"
+                        (ngModelChange)="_searchTermChanged()"
+                        [placeholder]="_cva.placeholder"
+                        (focus)="_cva.onTouched(); tokenizer._showAllTokens()"
+                        (blur)="!mobile && _onBlur($event); tokenizer._hideTokens()"
+                        [attr.aria-expanded]="isOpen"
+                        [readonly]="_cva.readonly"
+                        [attr.aria-readonly]="_cva.readonly"
+                        [attr.aria-required]="_cva.required"
+                        [displayFn]="_displayFn"
+                        class="fd-tokenizer__input"
+                    />
+                </fd-tokenizer>
+            }
         </fd-input-group>
-
-        <fd-form-message
-            *ngIf="mobile && isOpen ? false : !!this._cva.stateMessage"
-            [type]="this._cva.state"
-            [innerHtml]="this._cva.stateMessage"
-        ></fd-form-message>
+        @if (mobile && isOpen ? false : !!_cva.stateMessage) {
+            <fd-form-message [type]="_cva.state" [innerHtml]="_cva.stateMessage"></fd-form-message>
+        }
     </fd-form-input-message-group>
 </ng-template>
-
 <ng-template #mobileControlTemplate>
     <fd-input-group
-        [id]="this._cva.id + '-input-group-container'"
+        [id]="_cva.id + '-input-group-container'"
         class="fd-multi-combobox-input-group-custom"
-        [state]="this._cva.state"
+        [state]="_cva.state"
         [buttonFocusable]="false"
         [isControl]="true"
-        [disabled]="this._cva.disabled || this._cva.readonly"
+        [disabled]="_cva.disabled || _cva.readonly"
         [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
-        [attr.aria-disabled]="this._cva.disabled || this._cva.readonly"
-        [attr.aria-readonly]="this._cva.readonly"
-        [glyphAriaLabel]="this._cva.ariaLabel"
+        [attr.aria-disabled]="_cva.disabled || _cva.readonly"
+        [attr.aria-readonly]="_cva.readonly"
+        [glyphAriaLabel]="_cva.ariaLabel"
     >
         <input
             fdkAutoComplete
@@ -126,80 +118,98 @@
             role="combobox"
             autocomplete="off"
             [ariaLabel]="'coreMultiComboBox.multiComboBoxAriaLabel' | fdTranslate"
-            [attr.aria-labelledby]="this._cva.ariaLabelledBy"
+            [attr.aria-labelledby]="_cva.ariaLabelledBy"
             [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
-            [attr.aria-owns]="autoComplete && !mobile ? this._cva.id + '-result' : null"
+            [attr.aria-owns]="autoComplete && !mobile ? _cva.id + '-result' : null"
             [attr.aria-haspopup]="autoComplete && !mobile"
             fd-form-control
             fd-input-group-input
             tabindex="0"
-            [id]="this._cva.id"
-            [name]="this._cva.name"
+            [id]="_cva.id"
+            [name]="_cva.name"
             (keydown)="_onInputKeydownHandler($event)"
-            [disabled]="this._cva.disabled"
+            [disabled]="_cva.disabled"
             [(ngModel)]="inputText"
             (ngModelChange)="_searchTermChanged()"
-            [placeholder]="this._cva.placeholder"
-            (focus)="this._cva.onTouched()"
+            [placeholder]="_cva.placeholder"
+            (focus)="_cva.onTouched()"
             (blur)="!mobile && _onBlur($event)"
             [attr.aria-expanded]="isOpen"
-            [readonly]="this._cva.readonly"
-            [attr.aria-readonly]="this._cva.readonly"
+            [readonly]="_cva.readonly"
+            [attr.aria-readonly]="_cva.readonly"
             [displayFn]="_displayFn"
         />
     </fd-input-group>
 </ng-template>
-
 <ng-template #listTemplate>
     <ul
         fd-list
         (focusEscapeList)="_handleListFocusEscape($event)"
         [dropdownMode]="true"
         class="fd-multi-combobox__list fd-list--multi-input"
-        [id]="this._cva.id + '-result'"
+        [id]="_cva.id + '-result'"
         role="listbox"
         [style.max-height]="!mobile && maxHeight"
         [style.min-width.px]="!mobile && minWidth"
         [style.max-width.px]="autoResize && maxWidth"
-        [attr.aria-labelledby]="this._cva.id + '-search'"
+        [attr.aria-labelledby]="_cva.id + '-search'"
         aria-multiselectable="true"
         (keydown.tab)="close()"
         (keydown.shift.tab)="close()"
     >
-        <fd-form-message
-            *ngIf="!!this._cva.stateMessage"
-            [type]="this._cva.state"
-            [innerHtml]="this._cva.stateMessage"
-        ></fd-form-message>
-        <fd-multi-combobox-select-all-toggler
-            *ngIf="showSelectAll"
-            [selectAllHandler]="_handleSelectAllItems"
-            [valueChanges]="selectionChange"
-            [selectedItems]="_selectedSuggestions"
-            [flatItems]="_flatSuggestions"
-        ></fd-multi-combobox-select-all-toggler>
+        @if (!!_cva.stateMessage) {
+            <fd-form-message [type]="_cva.state" [innerHtml]="_cva.stateMessage"></fd-form-message>
+        }
+        @if (showSelectAll) {
+            <fd-multi-combobox-select-all-toggler
+                [selectAllHandler]="_handleSelectAllItems"
+                [valueChanges]="selectionChange"
+                [selectedItems]="_selectedSuggestions"
+                [flatItems]="_flatSuggestions"
+            ></fd-multi-combobox-select-all-toggler>
+        }
         <ng-content></ng-content>
-        <ng-container *ngIf="isGroup; else flatList">
-            <ng-container *ngFor="let group of _suggestions">
-                <ng-container *ngIf="!groupItemTemplate; else groupItemTemplateRenderer">
+        @if (isGroup) {
+            @for (group of _suggestions; track group) {
+                @if (!groupItemTemplate) {
                     <label fd-list-group-header role="group">
                         <span fd-list-title>{{ group.label }}</span>
                     </label>
-                </ng-container>
-
-                <ng-template #groupItemTemplateRenderer>
-                    <ng-container
+                } @else {
+                    <ng-template
                         [ngTemplateOutlet]="groupItemTemplate"
                         [ngTemplateOutletContext]="{ $implicit: { label: group.label } }"
-                    ></ng-container>
-                </ng-template>
-
+                    ></ng-template>
+                }
+                @for (optionItem of group.children; track optionItem; let i = $index) {
+                    <li
+                        fd-list-item
+                        role="option"
+                        [tabindex]="0"
+                        (click)="!mobile && close()"
+                        (keydown)="_onItemKeyDownHandler($event)"
+                        [selected]="!!optionItem.selected"
+                    >
+                        <fd-checkbox
+                            (click)="_onOptionCheckboxClicked($event, i)"
+                            (ngModelChange)="_toggleSelection(optionItem)"
+                            [ngModel]="optionItem.selected"
+                        >
+                        </fd-checkbox>
+                        <ng-template
+                            [ngTemplateOutlet]="listItem"
+                            [ngTemplateOutletContext]="{ optionItem: optionItem, index: i }"
+                        ></ng-template>
+                    </li>
+                }
+            }
+        } @else {
+            @for (optionItem of _suggestions; track optionItem; let i = $index) {
                 <li
-                    *ngFor="let optionItem of group.children; let i = index"
                     fd-list-item
                     role="option"
                     [tabindex]="0"
-                    (click)="!mobile && close()"
+                    (click)="!mobile && _onOptionClicked($event, i)"
                     (keydown)="_onItemKeyDownHandler($event)"
                     [selected]="!!optionItem.selected"
                 >
@@ -209,92 +219,61 @@
                         [ngModel]="optionItem.selected"
                     >
                     </fd-checkbox>
-                    <ng-container
+                    <ng-template
                         [ngTemplateOutlet]="listItem"
                         [ngTemplateOutletContext]="{ optionItem: optionItem, index: i }"
-                    ></ng-container>
+                    ></ng-template>
                 </li>
-            </ng-container>
-        </ng-container>
-
-        <ng-template #flatList>
-            <li
-                *ngFor="let optionItem of _suggestions; let i = index"
-                fd-list-item
-                role="option"
-                [tabindex]="0"
-                (click)="!mobile && _onOptionClicked($event, i)"
-                (keydown)="_onItemKeyDownHandler($event)"
-                [selected]="!!optionItem.selected"
-            >
-                <fd-checkbox
-                    (click)="_onOptionCheckboxClicked($event, i)"
-                    (ngModelChange)="_toggleSelection(optionItem)"
-                    [ngModel]="optionItem.selected"
-                >
-                </fd-checkbox>
-                <ng-container
-                    [ngTemplateOutlet]="listItem"
-                    [ngTemplateOutletContext]="{ optionItem: optionItem, index: i }"
-                ></ng-container>
-            </li>
-        </ng-template>
+            }
+        }
     </ul>
 </ng-template>
-
 <ng-template let-optionItem="optionItem" let-index="index" #listItem>
-    <ng-container
-        *ngIf="optionItem.selected && !!selectedItemTemplate"
-        [ngTemplateOutlet]="selectedItemTemplate"
-        [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
-    ></ng-container>
-
-    <ng-container *ngIf="!(optionItem.selected && selectedItemTemplate)">
-        <ng-container
+    @if (optionItem.selected && !!selectedItemTemplate) {
+        <ng-template
+            [ngTemplateOutlet]="selectedItemTemplate"
+            [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
+        ></ng-template>
+    }
+    @if (!(optionItem.selected && selectedItemTemplate)) {
+        <ng-template
             [ngTemplateOutlet]="optionItemSource"
             [ngTemplateOutletContext]="{ optionItem: optionItem, index: index }"
-        ></ng-container>
-
-        <ng-container
+        ></ng-template>
+        <ng-template
             [ngTemplateOutlet]="secondaryTextSource"
             [ngTemplateOutletContext]="{ optionItem: optionItem }"
-        ></ng-container>
-    </ng-container>
+        ></ng-template>
+    }
 </ng-template>
-
 <ng-template let-optionItem="optionItem" let-index="index" #optionItemSource>
-    <ng-container *ngIf="!optionItemTemplate; else optionItemTemplateRenderer">
+    @if (!optionItemTemplate) {
         <span
             fd-list-title
             [attr.title]="optionItem.label"
-            [innerHTML]="optionItem.label | highlight : inputText"
+            [innerHTML]="optionItem.label | highlight: inputText"
         ></span>
-    </ng-container>
-
-    <ng-template #optionItemTemplateRenderer>
-        <ng-container
+    } @else {
+        <ng-template
             [ngTemplateOutlet]="optionItemTemplate"
             [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
-        ></ng-container>
-    </ng-template>
+        ></ng-template>
+    }
 </ng-template>
-
 <ng-template let-optionItem="optionItem" #secondaryTextSource>
-    <ng-container *ngIf="showSecondaryText">
-        <ng-container *ngIf="!secondaryItemTemplate; else secondaryItemTemplateRenderer">
+    @if (showSecondaryText) {
+        @if (!secondaryItemTemplate) {
             <span
                 [style.text-align]="secondaryTextAlignment"
                 fd-list-secondary
                 [attr.title]="optionItem.secondaryText"
-                [innerHTML]="optionItem.secondaryText | highlight : inputText"
+                [innerHTML]="optionItem.secondaryText | highlight: inputText"
             ></span>
-        </ng-container>
-
-        <ng-template #secondaryItemTemplateRenderer>
-            <ng-container
+        } @else {
+            <ng-template
                 [ngTemplateOutlet]="secondaryItemTemplate"
                 [ngTemplateOutletContext]="{ $implicit: optionItem.value }"
-            ></ng-container>
-        </ng-template>
-    </ng-container>
+            ></ng-template>
+        }
+    }
 </ng-template>

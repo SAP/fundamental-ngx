@@ -47,7 +47,7 @@ let menuUniqueId = 0;
 @Component({
     selector: 'fd-menu',
     templateUrl: './menu.component.html',
-    styleUrls: ['menu.component.scss'],
+    styleUrl: 'menu.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

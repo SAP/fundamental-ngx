@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -20,13 +20,16 @@ export type FillingDirection = 'clockwise' | 'counterclockwise';
 
 export class Point {
     /** @hidden */
-    constructor(public x: number, public y: number) {}
+    constructor(
+        public x: number,
+        public y: number
+    ) {}
 }
 
 @Component({
     selector: 'fd-status-indicator',
     templateUrl: './status-indicator.component.html',
-    styleUrls: ['./status-indicator.component.scss'],
+    styleUrl: './status-indicator.component.scss',
     host: {
         '[attr.aria-label]': 'ariaLabel',
         '[attr.aria-roledescription]': 'ariaRoleDescription',
@@ -42,7 +45,7 @@ export class Point {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, NgTemplateOutlet, NgFor]
+    imports: [NgTemplateOutlet]
 })
 export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssClassBuilder, OnInit {
     /**
@@ -168,7 +171,10 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
     pointsArray: string[] = [];
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef<HTMLElement>, private _cd: ChangeDetectorRef) {}
+    constructor(
+        public readonly elementRef: ElementRef<HTMLElement>,
+        private _cd: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     class: string;

@@ -8,31 +8,36 @@
                 class="fd-shellbar__button"
                 [attr.aria-label]="'coreShellbar.collapsedItemMenuLabel' | fdTranslate"
             >
-                <span *ngIf="totalNotifications" class="fd-button__badge">
-                    {{ totalNotifications }}
-                </span>
+                @if (totalNotifications) {
+                    <span class="fd-button__badge">
+                        {{ totalNotifications }}
+                    </span>
+                }
             </button>
         </fd-action-sheet-control>
-
         <fd-action-sheet-body>
-            <li
-                fd-action-sheet-item
-                *ngIf="searchExists"
-                tabindex="-1"
-                [glyph]="'search'"
-                [label]="'coreShellbar.search' | fdTranslate"
-                (click)="showSearch.emit(); actionSheet.close()"
-            ></li>
-            <li
-                fd-action-sheet-item
-                *ngFor="let action of shellbarActions"
-                tabindex="-1"
-                [glyph]="action.glyph"
-                [label]="action.label"
-                (click)="actionClicked(action, $event)"
-            >
-                <span *ngIf="action.notificationCount" class="fd-button__badge">{{ action.notificationCount }}</span>
-            </li>
+            @if (searchExists) {
+                <li
+                    fd-action-sheet-item
+                    tabindex="-1"
+                    [glyph]="'search'"
+                    [label]="'coreShellbar.search' | fdTranslate"
+                    (click)="showSearch.emit(); actionSheet.close()"
+                ></li>
+            }
+            @for (action of shellbarActions; track action) {
+                <li
+                    fd-action-sheet-item
+                    tabindex="-1"
+                    [glyph]="action.glyph"
+                    [label]="action.label"
+                    (click)="actionClicked(action, $event)"
+                >
+                    @if (action.notificationCount) {
+                        <span class="fd-button__badge">{{ action.notificationCount }}</span>
+                    }
+                </li>
+            }
         </fd-action-sheet-body>
     </fd-action-sheet>
 </div>

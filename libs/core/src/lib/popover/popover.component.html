@@ -1,17 +1,15 @@
-<div
-    *ngIf="!trigger"
-    cdkOverlayOrigin
-    class="fd-popover__control"
-    [class]="additionalTriggerClass"
-    (keydown)="triggerKeyDownHandler($event)"
->
-    <ng-content select="fd-popover-control, [fdPopoverControl]"></ng-content>
-</div>
-
+@if (!trigger) {
+    <div
+        cdkOverlayOrigin
+        class="fd-popover__control"
+        [class]="additionalTriggerClass"
+        (keydown)="triggerKeyDownHandler($event)"
+    >
+        <ng-content select="fd-popover-control, [fdPopoverControl]"></ng-content>
+    </div>
+}
 <ng-template #templateRef>
     <ng-content select="fd-popover-body"></ng-content>
-
     <ng-content></ng-content>
 </ng-template>
-
 <ng-container #container></ng-container>

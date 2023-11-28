@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import { NgFor, NgIf } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
@@ -66,12 +65,10 @@ const data = exampleDataSource();
     standalone: true,
     imports: [
         ButtonComponent,
-        NgIf,
         TokenComponent,
         TokenizerComponent,
         TokenizerInputDirective,
         ContentDensityDirective,
-        NgFor,
         PlatformValueHelpDialogModule
     ]
 })

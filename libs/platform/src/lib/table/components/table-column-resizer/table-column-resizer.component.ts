@@ -24,7 +24,7 @@ import { RtlService } from '@fundamental-ngx/cdk/utils';
 @Component({
     selector: `fdp-table-column-resizer`,
     template: ` <div class="fdp-table__resizer-inner"></div>`,
-    styleUrls: ['./table-column-resizer.component.scss'],
+    styleUrl: './table-column-resizer.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {

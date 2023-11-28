@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { MenuInteractiveComponent } from '@fundamental-ngx/core/menu';
 
@@ -26,7 +26,7 @@ import { MenuInteractiveComponent } from '@fundamental-ngx/core/menu';
 @Component({
     selector: 'fdp-menu-item',
     templateUrl: './menu-item.component.html',
-    styleUrls: ['./menu-item.component.scss'],
+    styleUrl: './menu-item.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
@@ -34,7 +34,7 @@ import { MenuInteractiveComponent } from '@fundamental-ngx/core/menu';
         tabindex: '-1'
     },
     standalone: true,
-    imports: [NgIf, NgTemplateOutlet]
+    imports: [NgTemplateOutlet]
 })
 export class MenuItemComponent implements OnDestroy, FocusableOption {
     /** Set the Menu Item as disabled/enabled */
@@ -78,7 +78,10 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
     _fdMenuInteractiveChild: MenuInteractiveComponent;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, private _cdr: ChangeDetectorRef) {}
+    constructor(
+        private _elementRef: ElementRef,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     ngOnDestroy(): void {

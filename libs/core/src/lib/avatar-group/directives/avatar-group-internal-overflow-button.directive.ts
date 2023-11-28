@@ -20,6 +20,8 @@ export class AvatarGroupInternalOverflowButtonDirective implements OnDestroy {
     }
 
     /** @hidden */
+    private readonly _templateContext: { $implicit: AvatarGroupItemRendererDirective[] } = { $implicit: [] };
+    /** @hidden */
     private readonly _templateRef: TemplateRef<{ $implicit: AvatarGroupItemRendererDirective[] }> = inject(TemplateRef);
     /** @hidden */
     private readonly _viewContainerRef = inject(ViewContainerRef);
@@ -40,14 +42,13 @@ export class AvatarGroupInternalOverflowButtonDirective implements OnDestroy {
 
     /** @hidden */
     private _show(hiddenItems: AvatarGroupItemRendererDirective[]): void {
-        const context = { $implicit: hiddenItems };
+        this._templateContext.$implicit = hiddenItems;
         if (this._embeddedView) {
-            this._embeddedView.context = context;
             this._embeddedView.detectChanges();
             return;
         }
         this._viewContainerRef.clear();
-        this._embeddedView = this._viewContainerRef.createEmbeddedView(this._templateRef, context);
+        this._embeddedView = this._viewContainerRef.createEmbeddedView(this._templateRef, this._templateContext);
         this._embeddedView.detectChanges();
     }
 

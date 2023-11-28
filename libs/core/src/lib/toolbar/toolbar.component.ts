@@ -22,7 +22,6 @@ import {
 } from '@angular/core';
 import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
 
-import { NgFor, NgIf } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     applyCssClass,
@@ -62,7 +61,7 @@ export const enum OverflowPriorityEnum {
 @Component({
     selector: 'fd-toolbar',
     templateUrl: './toolbar.component.html',
-    styleUrls: ['./toolbar.component.scss'],
+    styleUrl: './toolbar.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
@@ -71,15 +70,7 @@ export const enum OverflowPriorityEnum {
         })
     ],
     standalone: true,
-    imports: [
-        NgIf,
-        ToolbarSpacerDirective,
-        ToolbarSeparatorComponent,
-        PopoverModule,
-        ButtonComponent,
-        NgFor,
-        DynamicPortalComponent
-    ]
+    imports: [ToolbarSpacerDirective, ToolbarSeparatorComponent, PopoverModule, ButtonComponent, DynamicPortalComponent]
 })
 export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssClassBuilder, AfterContentInit {
     /**
@@ -242,20 +233,23 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
                 if (shouldOverflow) {
                     const _sortedByPriorityAndGroupItems = this._getSortedByPriorityAndGroupItems(toolbarItems);
                     const overflowItems: ToolbarItem[] = [];
-                    _sortedByPriorityAndGroupItems.reduce((_contentWidth, toolbarItem) => {
-                        const itemWidth = toolbarItem.width;
-                        const itemPriority = toolbarItem.priority;
-                        const shouldItemBeRemovedByWidth = itemWidth + _contentWidth > toolbarWidth;
-                        const shouldAlwaysBeInOverflow =
-                            itemPriority === OverflowPriorityEnum.ALWAYS || this.forceOverflow;
-                        const shouldNeverBeInOverflow = itemPriority === OverflowPriorityEnum.NEVER;
-                        if ((shouldItemBeRemovedByWidth && !shouldNeverBeInOverflow) || shouldAlwaysBeInOverflow) {
-                            overflowItems.push(toolbarItem);
-                            return shouldAlwaysBeInOverflow ? _contentWidth : MAX_CONTENT_SIZE;
-                        } else {
-                            return _contentWidth + itemWidth;
-                        }
-                    }, titleElement?.clientWidth || 0);
+                    _sortedByPriorityAndGroupItems.reduce(
+                        (_contentWidth, toolbarItem) => {
+                            const itemWidth = toolbarItem.width;
+                            const itemPriority = toolbarItem.priority;
+                            const shouldItemBeRemovedByWidth = itemWidth + _contentWidth > toolbarWidth;
+                            const shouldAlwaysBeInOverflow =
+                                itemPriority === OverflowPriorityEnum.ALWAYS || this.forceOverflow;
+                            const shouldNeverBeInOverflow = itemPriority === OverflowPriorityEnum.NEVER;
+                            if ((shouldItemBeRemovedByWidth && !shouldNeverBeInOverflow) || shouldAlwaysBeInOverflow) {
+                                overflowItems.push(toolbarItem);
+                                return shouldAlwaysBeInOverflow ? _contentWidth : MAX_CONTENT_SIZE;
+                            } else {
+                                return _contentWidth + itemWidth;
+                            }
+                        },
+                        titleElement?.clientWidth || 0
+                    );
                     // Hide orphans
                     for (const toolbarItem of overflowItems) {
                         const groupedCollection = this._getGroupedCollection(toolbarItems);

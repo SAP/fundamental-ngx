@@ -4,11 +4,12 @@ import { NotificationComponent } from './notification.component';
 import { NotificationService } from '../notification-service/notification.service';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { NotificationModule } from '../notification.module';
-import { CommonModule } from '@angular/common';
+
 import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { RouterTestingModule } from '@angular/router/testing';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: `

@@ -13,7 +13,6 @@ import {
 import { ContentDensity } from '@fundamental-ngx/cdk/utils';
 import { CollectionFilter, FILTER_STRATEGY, FilterType } from '@fundamental-ngx/platform/table-helpers';
 
-import { NgSwitch, NgSwitchCase } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -41,8 +40,6 @@ import { FILTERS_VIEW_STEP_TOKEN, FiltersViewStep } from './filters-active-step'
     imports: [
         ButtonComponent,
         TitleComponent,
-        NgSwitch,
-        NgSwitchCase,
         FilterSingleSelectComponent,
         FilterMultiSelectComponent,
         FilterCustomComponent,

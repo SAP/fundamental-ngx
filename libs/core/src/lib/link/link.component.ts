@@ -1,3 +1,4 @@
+import { DomPortal, Portal, PortalModule } from '@angular/cdk/portal';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -17,18 +18,16 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
-import { map, startWith, Subject, takeUntil, tap } from 'rxjs';
-import { DomPortal, Portal, PortalModule } from '@angular/cdk/portal';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
+import { Subject, map, startWith, takeUntil, tap } from 'rxjs';
 import { FD_LINK_COMPONENT } from './tokens';
-import { NgIf } from '@angular/common';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fdLink], [fd-link]',
     templateUrl: './link.component.html',
-    styleUrls: ['./link.component.scss'],
+    styleUrl: './link.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
@@ -46,7 +45,7 @@ import { NgIf } from '@angular/common';
             ]
         }
     ],
-    imports: [NgIf, PortalModule],
+    imports: [PortalModule],
     standalone: true
 })
 export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterViewInit, OnDestroy {

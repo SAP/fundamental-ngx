@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -28,7 +28,7 @@ let messageStripUniqueId = 0;
 @Component({
     selector: 'fd-message-strip',
     templateUrl: './message-strip.component.html',
-    styleUrls: ['./message-strip.component.scss'],
+    styleUrl: './message-strip.component.scss',
     host: {
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
@@ -41,7 +41,7 @@ let messageStripUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, ButtonComponent, ContentDensityDirective, I18nModule, NgTemplateOutlet, IconComponent]
+    imports: [ButtonComponent, ContentDensityDirective, I18nModule, NgTemplateOutlet, IconComponent]
 })
 export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder {
     /** User's custom classes */

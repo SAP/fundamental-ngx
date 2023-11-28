@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
@@ -9,7 +8,7 @@ import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
     selector: 'fd-segmented-button-complex-example',
     templateUrl: './segmented-button-complex-example.component.html',
     standalone: true,
-    imports: [SegmentedButtonModule, FormsModule, NgFor, ButtonComponent, FocusableItemDirective]
+    imports: [SegmentedButtonModule, FormsModule, ButtonComponent, FocusableItemDirective]
 })
 export class SegmentedButtonComplexExampleComponent {
     values: string[] = ['first', 'second', 'third'];

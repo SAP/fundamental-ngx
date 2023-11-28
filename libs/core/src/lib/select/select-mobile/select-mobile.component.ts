@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
@@ -39,15 +39,7 @@ import { SELECT_COMPONENT, SelectInterface } from '../select.interface';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     providers: [DynamicComponentService],
-    imports: [
-        DialogModule,
-        NgIf,
-        TitleComponent,
-        CdkScrollable,
-        ScrollbarDirective,
-        NgTemplateOutlet,
-        ButtonBarComponent
-    ]
+    imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, NgTemplateOutlet, ButtonBarComponent]
 })
 export class SelectMobileComponent extends MobileModeBase<SelectInterface> implements OnInit, AfterViewInit, OnDestroy {
     /** @hidden

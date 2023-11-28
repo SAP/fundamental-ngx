@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -26,11 +25,11 @@ import { ButtonComponent } from '@fundamental-ngx/platform/button';
 @Component({
     selector: 'fdp-feed-input',
     templateUrl: './feed-input.component.html',
-    styleUrls: ['./feed-input.component.scss'],
+    styleUrl: './feed-input.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, AvatarComponent, FormsModule, FormControlComponent, ButtonComponent, FdTranslatePipe]
+    imports: [AvatarComponent, FormsModule, FormControlComponent, ButtonComponent, FdTranslatePipe]
 })
 export class FeedInputComponent implements AfterViewInit {
     /** The user image source, If is not set, then the user image will display placeholder image.  */

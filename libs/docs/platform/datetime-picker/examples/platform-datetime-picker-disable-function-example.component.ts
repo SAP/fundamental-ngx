@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
-import { NgIf } from '@angular/common';
 import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { FdpFormGroupModule, PlatformDatetimePickerComponent } from '@fundamental-ngx/platform/form';
 
@@ -15,7 +14,7 @@ import { FdpFormGroupModule, PlatformDatetimePickerComponent } from '@fundamenta
         provideDateTimeFormats()
     ],
     standalone: true,
-    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformDatetimePickerComponent, NgIf]
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformDatetimePickerComponent]
 })
 export class PlatformDatetimePickerDisableFunctionExampleComponent {
     datetimePickerForm = new FormGroup({});

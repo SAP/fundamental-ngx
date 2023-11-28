@@ -19,7 +19,7 @@ import { VerticalNavigationMainNavigationComponent } from './vertical-navigation
 @Component({
     selector: 'fd-vertical-navigation',
     templateUrl: './vertical-navigation.component.html',
-    styleUrls: ['./vertical-navigation.component.scss'],
+    styleUrl: './vertical-navigation.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

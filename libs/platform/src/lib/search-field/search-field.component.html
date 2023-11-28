@@ -1,9 +1,7 @@
-<ng-container *ngTemplateOutlet="mobile ? mobileTemplate : inputFieldTemplate"></ng-container>
-
+<ng-template [ngTemplateOutlet]="mobile ? mobileTemplate : inputFieldTemplate"></ng-template>
 <ng-template #mobileTemplate>
-    <ng-container *ngTemplateOutlet="inputFieldTemplate"></ng-container>
+    <ng-template [ngTemplateOutlet]="inputFieldTemplate"></ng-template>
 </ng-template>
-
 <ng-template #searchCategoryMenu>
     <button
         class="fdp-search-field__category-button fd-input-group__button fd-button fd-button--menu {{
@@ -11,17 +9,18 @@
         }}"
         [fdpMenuTriggerFor]="categoryMenu"
     >
-        <span class="fdp-search-field__category-label" *ngIf="!hideCategoryLabel">
-            {{ _currentCategory?.label || categoryLabel }}
-        </span>
+        @if (!hideCategoryLabel) {
+            <span class="fdp-search-field__category-label">
+                {{ _currentCategory?.label || categoryLabel }}
+            </span>
+        }
     </button>
     <fdp-menu #categoryMenu>
-        <fdp-menu-item *ngFor="let category of categories" (itemSelect)="setCurrentCategory(category)"
-            >{{ category.label }}
-        </fdp-menu-item>
+        @for (category of categories; track category) {
+            <fdp-menu-item (itemSelect)="setCurrentCategory(category)">{{ category.label }} </fdp-menu-item>
+        }
     </fdp-menu>
 </ng-template>
-
 <ng-template #searchCategorySelect>
     <fd-select
         [placeholder]="categoryLabel"
@@ -29,10 +28,11 @@
         [selectDropdownButtonClass]="appearance?.categoryDropdownButtonClass"
         (valueChange)="setCurrentCategory($event)"
     >
-        <li fd-option *ngFor="let category of categories" [value]="category">{{ category.label }}</li>
+        @for (category of categories; track category) {
+            <li fd-option [value]="category">{{ category.label }}</li>
+        }
     </fd-select>
 </ng-template>
-
 <ng-template #inputFieldTemplate>
     <div
         class="fdp-search-field"
@@ -46,14 +46,13 @@
             class="fdp-search-field__input-group fd-input-group {{ appearance?.searchClass }}"
             [class.is-focus]="isFocused"
         >
-            <span
-                class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.searchCategoryClass }}"
-                *ngIf="_showCategoryDropdown"
-            >
-                <ng-template
-                    *ngTemplateOutlet="categoryMode === 'select' ? searchCategorySelect : searchCategoryMenu"
-                ></ng-template>
-            </span>
+            @if (_showCategoryDropdown) {
+                <span class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.searchCategoryClass }}">
+                    <ng-template
+                        [ngTemplateOutlet]="categoryMode === 'select' ? searchCategorySelect : searchCategoryMenu"
+                    ></ng-template>
+                </span>
+            }
             <input
                 #inputField
                 type="search"
@@ -75,93 +74,101 @@
                 (ngModelChange)="onValueChange($event)"
                 (click)="mobile && openMobileMode()"
             />
-            <span
-                class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.addonClass }}"
-                *ngIf="inputText && inputText.length > 0"
-            >
-                <button
-                    tabindex="-1"
-                    [attr.aria-hidden]="!mobile"
-                    [attr.aria-label]="'platformSearchField.clearButtonTitle' | fdTranslate"
-                    class="fdp-search-field__clear fd-button fd-button--transparent {{ appearance?.buttonClass }}"
-                    [class.fd-input-group__button]="!appearance?.removeGroupButtonClass"
-                    [attr.disabled]="disabled ? '' : null"
-                    [attr.id]="_clearId"
-                    (click)="clearTextInput()"
-                >
-                    <fd-icon glyph="decline"></fd-icon>
-                </button>
-            </span>
-            <span
-                class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.addonClass }} {{
-                    appearance?.searchSubmitClass
-                }}"
-                *ngIf="forceSearchButton || isLoading || (!isLoading && !_isSearchDone)"
-            >
-                <button
-                    tabindex="-1"
-                    [attr.aria-hidden]="!mobile"
-                    *ngIf="!disableSearch"
-                    [attr.aria-label]="'platformSearchField.submitButtonTitle' | fdTranslate"
-                    class="fdp-search-field__submit fd-button fd-button--transparent {{ appearance?.buttonClass }}"
-                    [class.fd-input-group__button]="!appearance?.removeGroupButtonClass"
-                    [attr.id]="_submitId"
-                    [attr.disabled]="disabled ? '' : null"
-                    (click)="onSearchSubmit()"
-                >
-                    <fd-icon glyph="search"></fd-icon>
-                </button>
-            </span>
-            <span
-                class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.addonClass }} {{
-                    appearance?.searchSubmitClass
-                }}"
-                *ngIf="!disableRefresh && !isLoading && (_isRefresh || _isSearchDone)"
-            >
-                <button
-                    [attr.aria-label]="'platformSearchField.synchronizeButtonTitle' | fdTranslate"
-                    class="fdp-search-field__loading fd-input-group__button fd-button fd-button--transparent {{
-                        appearance?.buttonClass
+            @if (inputText && inputText.length > 0) {
+                <span class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.addonClass }}">
+                    <button
+                        tabindex="-1"
+                        [attr.aria-hidden]="!mobile"
+                        [attr.aria-label]="'platformSearchField.clearButtonTitle' | fdTranslate"
+                        class="fdp-search-field__clear fd-button fd-button--transparent {{ appearance?.buttonClass }}"
+                        [class.fd-input-group__button]="!appearance?.removeGroupButtonClass"
+                        [attr.disabled]="disabled ? '' : null"
+                        [attr.id]="_clearId"
+                        (click)="clearTextInput()"
+                    >
+                        <fd-icon glyph="decline"></fd-icon>
+                    </button>
+                </span>
+            }
+            @if (forceSearchButton || isLoading || (!isLoading && !_isSearchDone)) {
+                <span
+                    class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.addonClass }} {{
+                        appearance?.searchSubmitClass
                     }}"
-                    [attr.disabled]="disabled ? '' : null"
-                    [attr.id]="_refreshId"
-                    (click)="onSearchSubmit()"
                 >
-                    <fd-icon glyph="synchronize"></fd-icon>
-                </button>
-            </span>
-            <div *ngIf="appearance?.helperClass" [ngClass]="appearance?.helperClass"></div>
+                    @if (!disableSearch) {
+                        <button
+                            tabindex="-1"
+                            [attr.aria-hidden]="!mobile"
+                            [attr.aria-label]="'platformSearchField.submitButtonTitle' | fdTranslate"
+                            class="fdp-search-field__submit fd-button fd-button--transparent {{
+                                appearance?.buttonClass
+                            }}"
+                            [class.fd-input-group__button]="!appearance?.removeGroupButtonClass"
+                            [attr.id]="_submitId"
+                            [attr.disabled]="disabled ? '' : null"
+                            (click)="onSearchSubmit()"
+                        >
+                            <fd-icon glyph="search"></fd-icon>
+                        </button>
+                    }
+                </span>
+            }
+            @if (!disableRefresh && !isLoading && (_isRefresh || _isSearchDone)) {
+                <span
+                    class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.addonClass }} {{
+                        appearance?.searchSubmitClass
+                    }}"
+                >
+                    <button
+                        [attr.aria-label]="'platformSearchField.synchronizeButtonTitle' | fdTranslate"
+                        class="fdp-search-field__loading fd-input-group__button fd-button fd-button--transparent {{
+                            appearance?.buttonClass
+                        }}"
+                        [attr.disabled]="disabled ? '' : null"
+                        [attr.id]="_refreshId"
+                        (click)="onSearchSubmit()"
+                    >
+                        <fd-icon glyph="synchronize"></fd-icon>
+                    </button>
+                </span>
+            }
+            @if (appearance?.helperClass) {
+                <div [ngClass]="appearance?.helperClass"></div>
+            }
         </div>
     </div>
 </ng-template>
-
 <ng-template #suggestionMenuTemplate>
-    <ng-container *ngIf="_dropdownValues$ | async | suggestionMatches : inputText : mobile as suggestions">
-        <div class="fdp-search-field__suggestion-dropdown" [attr.dir]="_dir" *ngIf="suggestions?.length">
-            <nav
-                class="fd-menu"
-                tabindex="-1"
-                [class.is-compact]="contentDensityObserver.isCompact$ | async"
-                [class.fd-menu--mobile]="mobile"
-                [class.fd-menu--overflow]="!mobile"
-                [attr.id]="_menuId"
-                #menu
-                (keydown)="onKeydown($event)"
-            >
-                <ul class="fd-menu__list" role="menu">
-                    <li
-                        fdpSearchFieldSuggestion
-                        class="fdp-search-field__suggestion-item fd-menu__item fd-menu__link"
-                        *ngFor="let value of suggestions"
-                        (keydown.enter)="onItemClick(value); $event.preventDefault()"
-                        (keydown.tab)="onItemClick(value)"
-                        (keyup.space)="onItemClick(value); $event.stopPropagation()"
-                        (click)="onItemClick(value)"
-                        [innerHTML]="value | highlight : inputText : true : true"
-                        role="menuitem"
-                    ></li>
-                </ul>
-            </nav>
-        </div>
-    </ng-container>
+    @if (_dropdownValues$ | async | suggestionMatches: inputText : mobile; as suggestions) {
+        @if (suggestions?.length) {
+            <div class="fdp-search-field__suggestion-dropdown" [attr.dir]="_dir">
+                <nav
+                    class="fd-menu"
+                    tabindex="-1"
+                    [class.is-compact]="contentDensityObserver.isCompact$ | async"
+                    [class.fd-menu--mobile]="mobile"
+                    [class.fd-menu--overflow]="!mobile"
+                    [attr.id]="_menuId"
+                    #menu
+                    (keydown)="onKeydown($event)"
+                >
+                    <ul class="fd-menu__list" role="menu">
+                        @for (value of suggestions; track value) {
+                            <li
+                                fdpSearchFieldSuggestion
+                                class="fdp-search-field__suggestion-item fd-menu__item fd-menu__link"
+                                (keydown.enter)="onItemClick(value); $event.preventDefault()"
+                                (keydown.tab)="onItemClick(value)"
+                                (keyup.space)="onItemClick(value); $event.stopPropagation()"
+                                (click)="onItemClick(value)"
+                                [innerHTML]="value | highlight: inputText : true : true"
+                                role="menuitem"
+                            ></li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+        }
+    }
 </ng-template>

@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -27,12 +27,11 @@ import { IconTabBarBackground, IconTabBarSize, TabDestinyMode, TabType } from '.
 @Component({
     selector: 'fdp-icon-tab-bar',
     templateUrl: './icon-tab-bar.component.html',
-    styleUrls: ['./icon-tab-bar.component.scss'],
+    styleUrl: './icon-tab-bar.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     imports: [
-        NgIf,
         NgTemplateOutlet,
         IconTabBarProcessTypeComponent,
         IconTabBarFilterTypeComponent,

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import {
     PlatformWizardGeneratorModule,
     WizardGeneratorFormsValue,
@@ -12,7 +12,7 @@ import {
     selector: 'fdp-wizard-generator-responsive-paddings-example',
     templateUrl: './wizard-generator-responsive-paddings-example.component.html',
     standalone: true,
-    imports: [PlatformWizardGeneratorModule, NgIf, JsonPipe]
+    imports: [PlatformWizardGeneratorModule, JsonPipe]
 })
 export class WizardGeneratorResponsivePaddingsExampleComponent {
     wizardValue: WizardGeneratorFormsValue;

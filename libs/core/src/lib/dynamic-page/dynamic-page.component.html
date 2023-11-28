@@ -17,17 +17,16 @@
             <ng-content select="fd-dynamic-page-subheader"></ng-content>
         </div>
     </header>
-
     <ng-content select="fd-tab-list"></ng-content>
-
-    <div fd-scrollbar *ngIf="!_tabComponent">
-        <ng-content select="fd-dynamic-page-content"></ng-content>
-    </div>
-
-    <div *ngIf="_tabComponent">
-        <ng-content select="fd-dynamic-page-content"></ng-content>
-    </div>
-
+    @if (!_tabComponent) {
+        <div fd-scrollbar>
+            <ng-content select="fd-dynamic-page-content"></ng-content>
+        </div>
+    } @else {
+        <div>
+            <ng-content select="fd-dynamic-page-content"></ng-content>
+        </div>
+    }
     <footer>
         <ng-content select="fd-dynamic-page-footer"></ng-content>
     </footer>

@@ -1,6 +1,6 @@
 <button fd-button (click)="openPage()">Click to open full screen</button>
 <div class="overlay" #overlay>
-    <ng-container *ngIf="fullscreen">
+    @if (fullscreen) {
         <fdp-dynamic-page size="medium" ariaLabel="Example Dynamic Page">
             <fdp-dynamic-page-title [title]="pageTitle" subtitle="Oversized multimaterial sneakers with quilted effect">
                 <!-- breadcrumb content -->
@@ -18,7 +18,6 @@
                         <span>Jogging</span>
                     </fd-breadcrumb-item>
                 </fd-breadcrumb>
-
                 <fdp-dynamic-page-key-info>
                     <!-- key information content -->
                     LAST DAY OF SALE
@@ -210,7 +209,6 @@
                 similique ut nobis, possimus mollitia dolorum blanditiis error quidem labore natus saepe dolore
                 veritatis iusto minima. Eius. Scrolling
             </fdp-dynamic-page-content>
-
             <fdp-dynamic-page-footer>
                 <!-- page footer content goes here -->
                 <div fd-bar barDesign="floating-footer">
@@ -221,5 +219,5 @@
                 </div>
             </fdp-dynamic-page-footer>
         </fdp-dynamic-page>
-    </ng-container>
+    }
 </div>

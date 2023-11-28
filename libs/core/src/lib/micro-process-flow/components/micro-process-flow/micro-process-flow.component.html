@@ -1,14 +1,15 @@
-<a
-    tabindex="0"
-    class="fd-micro-process-flow__link-previous"
-    role="button"
-    type="button"
-    (click)="goBack()"
-    (keypress)="onKeypressHandler(-1, $event)"
-    *ngIf="showPreviousButton"
->
-    {{ previousItemsCount }}
-</a>
+@if (showPreviousButton) {
+    <a
+        tabindex="0"
+        class="fd-micro-process-flow__link-previous"
+        role="button"
+        type="button"
+        (click)="goBack()"
+        (keypress)="onKeypressHandler(-1, $event)"
+    >
+        {{ previousItemsCount }}
+    </a>
+}
 <div class="fd-micro-process-flow__overflow-container" #container>
     <div
         class="fd-micro-process-flow__wrapper"
@@ -19,15 +20,16 @@
         <ng-content select="fd-micro-process-flow-item"></ng-content>
     </div>
 </div>
-<a
-    tabindex="0"
-    class="fd-micro-process-flow__link-next"
-    role="button"
-    type="button"
-    (click)="goNext()"
-    (keypress)="onKeypressHandler(1, $event)"
-    *ngIf="showNextButton"
-    #goNextButton
->
-    {{ nextItemsCount }}
-</a>
+@if (showNextButton) {
+    <a
+        tabindex="0"
+        class="fd-micro-process-flow__link-next"
+        role="button"
+        type="button"
+        (click)="goNext()"
+        (keypress)="onKeypressHandler(1, $event)"
+        #goNextButton
+    >
+        {{ nextItemsCount }}
+    </a>
+}

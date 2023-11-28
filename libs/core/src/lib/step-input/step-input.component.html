@@ -7,21 +7,22 @@
         [class.is-disabled]="disabled"
         [class.fd-step-input--without-buttons]="!hasStepButtons"
     >
-        <button
-            *ngIf="hasStepButtons"
-            fd-button
-            #decrementBtn
-            fdType="transparent"
-            class="fd-step-input__button"
-            tabindex="-1"
-            type="button"
-            [disabled]="!canDecrement"
-            [title]="'coreStepInput.decrementButtonTitle' | fdTranslate"
-            [glyph]="decrementButtonIcon"
-            (blur)="onTouched()"
-            [attr.aria-label]="'coreStepInput.decrementButtonTitle' | fdTranslate"
-            [attr.aria-controls]="inputId"
-        ></button>
+        @if (hasStepButtons) {
+            <button
+                fd-button
+                #decrementBtn
+                fdType="transparent"
+                class="fd-step-input__button"
+                tabindex="-1"
+                type="button"
+                [disabled]="!canDecrement"
+                [title]="'coreStepInput.decrementButtonTitle' | fdTranslate"
+                [glyph]="decrementButtonIcon"
+                (blur)="onTouched()"
+                [attr.aria-label]="'coreStepInput.decrementButtonTitle' | fdTranslate"
+                [attr.aria-controls]="inputId"
+            ></button>
+        }
         <input
             #inputElement
             [name]="name"
@@ -48,26 +49,29 @@
             type="text"
             inputmode="numeric"
         />
-        <button
-            *ngIf="hasStepButtons"
-            fd-button
-            #incrementBtn
-            fdType="transparent"
-            class="fd-step-input__button"
-            tabindex="-1"
-            type="button"
-            [disabled]="!canIncrement"
-            [title]="'coreStepInput.incrementButtonTitle' | fdTranslate"
-            [glyph]="incrementButtonIcon"
-            (blur)="onTouched()"
-            [attr.aria-label]="'coreStepInput.incrementButtonTitle' | fdTranslate"
-            [attr.aria-controls]="inputId"
-        ></button>
+        @if (hasStepButtons) {
+            <button
+                fd-button
+                #incrementBtn
+                fdType="transparent"
+                class="fd-step-input__button"
+                tabindex="-1"
+                type="button"
+                [disabled]="!canIncrement"
+                [title]="'coreStepInput.incrementButtonTitle' | fdTranslate"
+                [glyph]="incrementButtonIcon"
+                (blur)="onTouched()"
+                [attr.aria-label]="'coreStepInput.incrementButtonTitle' | fdTranslate"
+                [attr.aria-controls]="inputId"
+            ></button>
+        }
     </div>
-
-    <fd-form-message *ngIf="!!stateMessage" [type]="state" [innerHTML]="stateMessage"></fd-form-message>
+    @if (!!stateMessage) {
+        <fd-form-message [type]="state" [innerHTML]="stateMessage"></fd-form-message>
+    }
 </fd-form-input-message-group>
-
-<span *ngIf="canDisplayLabel" [id]="inputId + '__description'" class="fd-form-label fd-form-label--unit-description">
-    {{ unit || currencySign }}
-</span>
+@if (canDisplayLabel) {
+    <span [id]="inputId + '__description'" class="fd-form-label fd-form-label--unit-description">
+        {{ unit || currencySign }}
+    </span>
+}

@@ -1,7 +1,7 @@
 import {
     ChangeDetectorRef,
-    ContentChild,
     Component,
+    ContentChild,
     ElementRef,
     EventEmitter,
     HostBinding,
@@ -10,19 +10,26 @@ import {
     Output,
     Renderer2
 } from '@angular/core';
-import { NestedListButtonDirective, NestedListTitleDirective } from '../nested-list-directives';
-import { NestedItemService } from '../nested-item/nested-item.service';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { NestedListExpandIconComponent } from '../nested-list-directives';
+import { NestedItemService } from '../nested-item/nested-item.service';
+import {
+    NestedListButtonDirective,
+    NestedListExpandIconComponent,
+    NestedListTitleDirective
+} from '../nested-list-directives';
 
 @Component({
     template: `
-        <div *ngIf="!_nestedListButton" class="fdx-nested-list__link-container">
-            <ng-container *ngTemplateOutlet="containerContent"></ng-container>
-        </div>
-        <a *ngIf="_nestedListButton" tabindex="0" class="fdx-nested-list__link-container">
-            <ng-container *ngTemplateOutlet="containerContent"></ng-container>
-        </a>
+        @if (!_nestedListButton) {
+            <div class="fdx-nested-list__link-container">
+                <ng-template [ngTemplateOutlet]="containerContent"></ng-template>
+            </div>
+        }
+        @if (_nestedListButton) {
+            <a tabindex="0" class="fdx-nested-list__link-container">
+                <ng-template [ngTemplateOutlet]="containerContent"></ng-template>
+            </a>
+        }
         <ng-content select="[fdx-nested-list-button]"></ng-content>
         <ng-template #containerContent>
             <ng-content select="[fdx-nested-list-icon]"></ng-content>

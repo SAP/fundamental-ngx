@@ -1,5 +1,5 @@
 <!--  list item navigation with Arrow-->
-<ng-container *ngIf="navigationIndicator || (navigated && !(noDataText !== null && noDataText !== undefined))">
+@if (navigationIndicator || (navigated && !(noDataText !== null && noDataText !== undefined))) {
     <li
         #listItem
         fd-list-item
@@ -19,7 +19,7 @@
         [ariaRole]="_listItemRole"
         [attr.aria-selected]="_selectedAttr"
     >
-        <ng-container *ngTemplateOutlet="selectionTemplate"> </ng-container>
+        <ng-template [ngTemplateOutlet]="selectionTemplate"> </ng-template>
         <a
             #linkElement
             fd-list-link
@@ -30,12 +30,12 @@
             [navigated]="navigated"
             tabindex="-1"
         >
-            <ng-container *ngTemplateOutlet="objectTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="objectTemplate"></ng-template>
         </a>
     </li>
-</ng-container>
+}
 <!--  list item without navigation and used for simple list display-->
-<ng-container *ngIf="!navigationIndicator && !navigated && !(noDataText !== null && noDataText !== undefined)">
+@if (!navigationIndicator && !navigated && !(noDataText !== null && noDataText !== undefined)) {
     <li
         #listItem
         fd-list-item
@@ -54,11 +54,11 @@
         [ariaRole]="role"
         [attr.aria-selected]="_selectedAttr"
     >
-        <ng-container *ngTemplateOutlet="selectionTemplate"></ng-container>
-        <ng-container *ngTemplateOutlet="objectTemplate"></ng-container>
+        <ng-template [ngTemplateOutlet]="selectionTemplate"></ng-template>
+        <ng-template [ngTemplateOutlet]="objectTemplate"></ng-template>
     </li>
-</ng-container>
-<ng-container *ngIf="noDataText !== null && noDataText !== undefined">
+}
+@if (noDataText !== null && noDataText !== undefined) {
     <li
         #listItem
         fd-list-item
@@ -72,35 +72,38 @@
     >
         <span fd-list-title [attr.aria-label]="noDataText" [attr.title]="noDataText">{{ noDataText }}</span>
     </li>
-</ng-container>
+}
 <ng-template #objectTemplate>
     <div class="fd-object-list__container">
         <!--Optional text-->
-        <div class="fd-object-list__intro" *ngIf="introductionText">{{ introductionText }}</div>
+        @if (introductionText) {
+            <div class="fd-object-list__intro">{{ introductionText }}</div>
+        }
         <!--header content-->
         <div class="fd-object-list__header">
-            <fd-avatar
-                [size]="avatar.size"
-                [glyph]="avatar.glyph"
-                [zoomGlyph]="avatar.zoomGlyph"
-                *ngIf="avatar.label || avatar.image || avatar.glyph || avatar.zoomGlyph"
-                [label]="avatar.label"
-                [circle]="avatar.circle"
-                [placeholder]="avatar.placeholder"
-                [tile]="avatar.tile"
-                [colorAccent]="avatar.colorAccent"
-                [image]="avatar.image"
-                [transparent]="avatar.transparent"
-                [random]="avatar.random"
-                [class]="avatar.class"
-                [ariaLabel]="avatar.ariaLabel"
-                [ariaLabelledby]="avatar.ariaLabelledby"
-                [contain]="avatar.contain"
-                [border]="avatar.border"
-                [alterIcon]="avatar.alterIcon"
-                [backupImage]="avatar.backupImage"
-                [clickable]="avatar.clickable"
-            ></fd-avatar>
+            @if (avatar.label || avatar.image || avatar.glyph || avatar.zoomGlyph) {
+                <fd-avatar
+                    [size]="avatar.size"
+                    [glyph]="avatar.glyph"
+                    [zoomGlyph]="avatar.zoomGlyph"
+                    [label]="avatar.label"
+                    [circle]="avatar.circle"
+                    [placeholder]="avatar.placeholder"
+                    [tile]="avatar.tile"
+                    [colorAccent]="avatar.colorAccent"
+                    [image]="avatar.image"
+                    [transparent]="avatar.transparent"
+                    [random]="avatar.random"
+                    [class]="avatar.class"
+                    [ariaLabel]="avatar.ariaLabel"
+                    [ariaLabelledby]="avatar.ariaLabelledby"
+                    [contain]="avatar.contain"
+                    [border]="avatar.border"
+                    [alterIcon]="avatar.alterIcon"
+                    [backupImage]="avatar.backupImage"
+                    [clickable]="avatar.clickable"
+                ></fd-avatar>
+            }
             <!--left side header content-->
             <div class="fd-object-list__header-left">
                 <fd-object-identifier class="fd-object-list__object-identifier">{{ title }}</fd-object-identifier>
@@ -122,50 +125,47 @@
             <ng-content select="fdp-object-list-item-row"></ng-content>
         </div>
     </div>
-    <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
+    <ng-template [ngTemplateOutlet]="actionsTemplate"></ng-template>
 </ng-template>
 <ng-template #selectionTemplate>
-    <div
-        fd-form-item
-        class="fd-list__form-item"
-        *ngIf="(selectionMode === 'multi' || selectionMode === 'single') && !rowSelection"
-    >
-        <fd-checkbox *ngIf="selectionMode === 'multi'" role="checkbox" [(ngModel)]="_selected" tabIndexValue="-1">
-        </fd-checkbox>
-        <fd-radio-button
-            *ngIf="selectionMode === 'single'"
-            [value]="value"
-            [name]="name"
-            role="radio"
-            [(ngModel)]="selectionValue"
-        >
-        </fd-radio-button>
-    </div>
+    @if ((selectionMode === 'multi' || selectionMode === 'single') && !rowSelection) {
+        <div fd-form-item class="fd-list__form-item">
+            @if (selectionMode === 'multi') {
+                <fd-checkbox role="checkbox" [(ngModel)]="_selected" tabIndexValue="-1"> </fd-checkbox>
+            }
+            @if (selectionMode === 'single') {
+                <fd-radio-button [value]="value" [name]="name" role="radio" [(ngModel)]="selectionValue">
+                </fd-radio-button>
+            }
+        </div>
+    }
 </ng-template>
 <ng-template #actionsTemplate>
     <ng-content select="#secondaryAction"></ng-content>
-    <button
-        fd-button
-        *ngIf="listType === 'detail'"
-        role="button"
-        fdType="transparent"
-        glyph="edit"
-        title="detail"
-        [attr.aria-label]="'platformObjectListItem.detailsActionAriaLabel' | fdTranslate"
-        (keydown)="_onKeyButtonClick($event, 'edit')"
-        (click)="_onActionButtonClick('edit')"
-        [attr.id]="'detail-' + id"
-    ></button>
-    <button
-        fd-button
-        *ngIf="selectionMode === 'delete'"
-        role="button"
-        [attr.aria-label]="'platformObjectListItem.deleteActionAriaLabel' | fdTranslate"
-        title="delete"
-        fdType="transparent"
-        glyph="decline"
-        (keydown)="_onKeyButtonClick($event, 'delete')"
-        (click)="_onActionButtonClick('delete')"
-        [attr.id]="'delete-' + id"
-    ></button>
+    @if (listType === 'detail') {
+        <button
+            fd-button
+            role="button"
+            fdType="transparent"
+            glyph="edit"
+            title="detail"
+            [attr.aria-label]="'platformObjectListItem.detailsActionAriaLabel' | fdTranslate"
+            (keydown)="_onKeyButtonClick($event, 'edit')"
+            (click)="_onActionButtonClick('edit')"
+            [attr.id]="'detail-' + id"
+        ></button>
+    }
+    @if (selectionMode === 'delete') {
+        <button
+            fd-button
+            role="button"
+            [attr.aria-label]="'platformObjectListItem.deleteActionAriaLabel' | fdTranslate"
+            title="delete"
+            fdType="transparent"
+            glyph="decline"
+            (keydown)="_onKeyButtonClick($event, 'delete')"
+            (click)="_onActionButtonClick('delete')"
+            [attr.id]="'delete-' + id"
+        ></button>
+    }
 </ng-template>

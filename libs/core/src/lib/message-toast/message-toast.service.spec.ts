@@ -1,5 +1,5 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, Inject, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,6 +9,7 @@ import { MESSAGE_TOAST_DATA } from './constants/message-toast.token';
 import { MessageToastModule } from './message-toast.module';
 
 import { MessageToastService } from './message-toast.service';
+import { CommonModule } from '@angular/common';
 
 const testMessage = 'Test message';
 

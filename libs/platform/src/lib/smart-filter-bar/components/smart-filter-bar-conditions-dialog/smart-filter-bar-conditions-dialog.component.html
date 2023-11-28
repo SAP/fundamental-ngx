@@ -8,46 +8,55 @@
             </div>
         </ng-template>
     </fd-dialog-header>
-
     <fd-dialog-body>
-        <form *ngIf="loaded; else loadingTpl">
-            <fd-layout-grid *ngFor="let condition of _formItems; let i = index">
-                <div fdLayoutGridRow>
-                    <div colGrow fdLayoutGridCol>
-                        <!-- wrapping "formSubmitted" event payload as any, because it's type is more generic than we're expecting -->
-                        <fdp-form-generator
-                            (formSubmitted)="_onFormSubmitted($any($event))"
-                            [formItems]="condition"
-                            [unifiedLayout]="false"
-                            columnLayout="XL3-L3-M3-S3"
-                            [noAdditionalContent]="true"
-                        ></fdp-form-generator>
+        @if (loaded) {
+            <form>
+                @for (condition of _formItems; track condition; let i = $index) {
+                    <fd-layout-grid>
+                        <div fdLayoutGridRow>
+                            <div colGrow fdLayoutGridCol>
+                                <!-- wrapping "formSubmitted" event payload as any, because it's type is more generic than we're expecting -->
+                                <fdp-form-generator
+                                    (formSubmitted)="_onFormSubmitted($any($event))"
+                                    [formItems]="condition"
+                                    [unifiedLayout]="false"
+                                    columnLayout="XL3-L3-M3-S3"
+                                    [noAdditionalContent]="true"
+                                ></fdp-form-generator>
+                            </div>
+                            <div class="fdp-smart-filter-bar__actions-column" colGrow fdLayoutGridCol>
+                                <fdp-button
+                                    (click)="removeCondition(i)"
+                                    buttonType="transparent"
+                                    glyph="decline"
+                                    [title]="
+                                        'platformSmartFilterBar.defineConditionsRemoveConditionButtonTitle'
+                                            | fdTranslate
+                                    "
+                                    type="button"
+                                ></fdp-button>
+                            </div>
+                        </div>
+                    </fd-layout-grid>
+                }
+                <fd-layout-grid>
+                    <div fdLayoutGridRow>
+                        <div colGrow fdLayoutGridCol>&nbsp;</div>
+                        <div class="fdp-smart-filter-bar__actions-column" fdLayoutGridCol>
+                            <fdp-button
+                                (click)="addCondition()"
+                                [label]="'platformSmartFilterBar.defineConditionsAddConditionButtonLabel' | fdTranslate"
+                            ></fdp-button>
+                        </div>
                     </div>
-                    <div class="fdp-smart-filter-bar__actions-column" colGrow fdLayoutGridCol>
-                        <fdp-button
-                            (click)="removeCondition(i)"
-                            buttonType="transparent"
-                            glyph="decline"
-                            [title]="'platformSmartFilterBar.defineConditionsRemoveConditionButtonTitle' | fdTranslate"
-                            type="button"
-                        ></fdp-button>
-                    </div>
-                </div>
-            </fd-layout-grid>
-            <fd-layout-grid>
-                <div fdLayoutGridRow>
-                    <div colGrow fdLayoutGridCol>&nbsp;</div>
-                    <div class="fdp-smart-filter-bar__actions-column" fdLayoutGridCol>
-                        <fdp-button
-                            (click)="addCondition()"
-                            [label]="'platformSmartFilterBar.defineConditionsAddConditionButtonLabel' | fdTranslate"
-                        ></fdp-button>
-                    </div>
-                </div>
-            </fd-layout-grid>
-        </form>
+                </fd-layout-grid>
+            </form>
+        } @else {
+            <div [style.text-align]="'center'" [style.margin.rem]="1">
+                <fd-busy-indicator [loading]="true"></fd-busy-indicator>
+            </div>
+        }
     </fd-dialog-body>
-
     <fd-dialog-footer>
         <fd-button-bar
             (click)="applyConditions()"
@@ -55,7 +64,6 @@
             [label]="'platformSmartFilterBar.defineConditionsSubmitButtonLabel' | fdTranslate"
         >
         </fd-button-bar>
-
         <fd-button-bar
             (click)="_cancel()"
             fdType="transparent"
@@ -63,9 +71,3 @@
         ></fd-button-bar>
     </fd-dialog-footer>
 </fd-dialog>
-
-<ng-template #loadingTpl>
-    <div [style.text-align]="'center'" [style.margin.rem]="1">
-        <fd-busy-indicator [loading]="true"></fd-busy-indicator>
-    </div>
-</ng-template>

@@ -33,7 +33,7 @@ let fileUploaderInputUniqueId = 0;
 @Component({
     selector: 'fd-file-uploader',
     templateUrl: './file-uploader.component.html',
-    styleUrls: ['./file-uploader.component.scss'],
+    styleUrl: './file-uploader.component.scss',
     host: {
         '(blur)': 'onTouched()',
         class: 'fd-file-uploader'
@@ -282,7 +282,6 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
 
     /** @hidden */
     private _isEmpty(): boolean {
-        console.log('_isEmpty');
         return this.validFiles.length === 0 && this.invalidFiles.length === 0;
     }
 

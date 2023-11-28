@@ -6,9 +6,9 @@
     [class.fd-page-footer--sm]="size === 'sm'"
 >
     <div class="fd-page-footer__logo">
-        <ng-content *ngTemplateOutlet="logo"></ng-content>
+        <ng-template [ngTemplateOutlet]="logo"></ng-template>
     </div>
     <div class="fd-page-footer__container">
-        <ng-content *ngTemplateOutlet="content"></ng-content>
+        <ng-template [ngTemplateOutlet]="content"></ng-template>
     </div>
 </div>

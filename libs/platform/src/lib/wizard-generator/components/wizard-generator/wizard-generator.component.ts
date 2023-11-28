@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 
-import { NgIf } from '@angular/common';
 import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 import { WizardModule } from '@fundamental-ngx/core/wizard';
@@ -27,7 +26,7 @@ import { WizardBodyComponent } from '../wizard-body/wizard-body.component';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [WizardGeneratorService, FormGeneratorService],
     standalone: true,
-    imports: [NgIf, WizardBodyComponent, WizardModule, RepeatDirective, SkeletonComponent]
+    imports: [WizardBodyComponent, WizardModule, RepeatDirective, SkeletonComponent]
 })
 export class WizardGeneratorComponent extends BaseWizardGenerator {
     /**

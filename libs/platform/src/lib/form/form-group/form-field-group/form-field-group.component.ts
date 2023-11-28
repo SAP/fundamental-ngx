@@ -35,7 +35,7 @@ const formGroupChildProvider: Provider = {
 @Component({
     selector: 'fdp-form-field-group',
     template: ` <ng-content></ng-content>`,
-    styleUrls: ['./form-field-group.component.scss'],
+    styleUrl: './form-field-group.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [formFieldGroupProvider, formGroupChildProvider],

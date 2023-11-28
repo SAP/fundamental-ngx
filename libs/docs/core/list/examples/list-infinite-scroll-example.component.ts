@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { NgFor } from '@angular/common';
+
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
@@ -15,7 +15,7 @@ const ITEMS_AMOUNT_ON_LOAD = 5;
     templateUrl: './list-infinite-scroll-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [BusyIndicatorComponent, ListModule, InfiniteScrollModule, NgFor]
+    imports: [BusyIndicatorComponent, ListModule, InfiniteScrollModule]
 })
 export class ListInfiniteScrollExampleComponent {
     // List that is displayed to the user

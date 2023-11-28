@@ -1,30 +1,26 @@
-<fd-popover
-    *ngIf="!mobile"
-    [placement]="placement"
-    [isOpen]="isOpen"
-    (isOpenChange)="isOpenChangeHandle($event)"
-    [noArrow]="noArrow"
-    [focusTrapped]="true"
-    [triggers]="[]"
-    [focusAutoCapture]="true"
->
-    <fd-popover-control>
-        <ng-container *ngTemplateOutlet="actionSheetControl"></ng-container>
-    </fd-popover-control>
-
-    <fd-popover-body>
-        <ng-container *ngTemplateOutlet="actionSheetBodyTemplate"></ng-container>
-    </fd-popover-body>
-</fd-popover>
-
-<ng-container *ngIf="mobile">
-    <ng-container *ngTemplateOutlet="actionSheetControl"></ng-container>
-</ng-container>
-
+@if (!mobile) {
+    <fd-popover
+        [placement]="placement"
+        [isOpen]="isOpen"
+        (isOpenChange)="isOpenChangeHandle($event)"
+        [noArrow]="noArrow"
+        [focusTrapped]="true"
+        [triggers]="[]"
+        [focusAutoCapture]="true"
+    >
+        <fd-popover-control>
+            <ng-template [ngTemplateOutlet]="actionSheetControl"></ng-template>
+        </fd-popover-control>
+        <fd-popover-body>
+            <ng-template [ngTemplateOutlet]="actionSheetBodyTemplate"></ng-template>
+        </fd-popover-body>
+    </fd-popover>
+} @else {
+    <ng-template [ngTemplateOutlet]="actionSheetControl"></ng-template>
+}
 <ng-template #actionSheetBodyTemplate>
     <ng-content select="fd-action-sheet-body"></ng-content>
 </ng-template>
-
 <ng-template #actionSheetControl>
     <ng-content select="fd-action-sheet-control"></ng-content>
 </ng-template>

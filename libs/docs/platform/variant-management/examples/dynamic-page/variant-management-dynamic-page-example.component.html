@@ -1,6 +1,6 @@
 <button fd-button (click)="openPage()">Click to open full screen</button>
 <div class="overlay" #overlay>
-    <ng-container *ngIf="fullscreen">
+    @if (fullscreen) {
         <fdp-variant-management-wrapper>
             <fdp-dynamic-page ariaLabel="Example Dynamic Page">
                 <fdp-dynamic-page-title>
@@ -94,7 +94,6 @@
                             align="start"
                         >
                         </fdp-column>
-
                         <fdp-column
                             fdp-smart-filter-bar-field-definition
                             name="description"
@@ -103,7 +102,6 @@
                             label="Description"
                         >
                         </fdp-column>
-
                         <fdp-column
                             fdp-smart-filter-bar-field-definition
                             [dataType]="dataTypeEnum.NUMBER"
@@ -113,7 +111,6 @@
                             align="end"
                         >
                         </fdp-column>
-
                         <fdp-column
                             fdp-smart-filter-bar-field-definition
                             [filterType]="filterTypeEnum.MULTI"
@@ -125,7 +122,6 @@
                             hasOptions="true"
                         >
                         </fdp-column>
-
                         <fdp-column
                             fdp-smart-filter-bar-field-definition
                             [filterType]="filterTypeEnum.SINGLE"
@@ -136,7 +132,6 @@
                             hasOptions="true"
                         >
                         </fdp-column>
-
                         <fdp-column
                             fdp-smart-filter-bar-field-definition
                             [dataType]="dataTypeEnum.DATE"
@@ -144,7 +139,6 @@
                             key="date"
                             label="Date"
                         ></fdp-column>
-
                         <fdp-column
                             fdp-smart-filter-bar-field-definition
                             [filterType]="filterTypeEnum.SINGLE"
@@ -167,5 +161,5 @@
                 </fdp-dynamic-page-footer>
             </fdp-dynamic-page>
         </fdp-variant-management-wrapper>
-    </ng-container>
+    }
 </div>

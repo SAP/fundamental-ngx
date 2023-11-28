@@ -34,7 +34,7 @@ import {
 } from '@fundamental-ngx/platform/table';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf } from '@angular/common';
+
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     BarElementDirective,
@@ -85,7 +85,6 @@ import { SmartFilterBarOptionsDataProvider } from './data-provider';
         CdkScrollable,
         ScrollbarDirective,
         DialogBodyComponent,
-        NgIf,
         TableDataSourceDirective,
         TableHeaderResizerDirective,
         TableComponent,

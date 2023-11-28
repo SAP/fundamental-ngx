@@ -1,4 +1,4 @@
-import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -66,7 +66,6 @@ import { SelectionModeModel, TreeService } from '../../tree.service';
         SelectableItemDirective,
         NgClass,
         ClickedDirective,
-        NgIf,
         NgTemplateOutlet,
         IconComponent,
         SkeletonComponent,

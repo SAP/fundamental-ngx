@@ -1,194 +1,192 @@
-<ng-container *ngIf="totalItems">
-    <div class="fd-pagination__per-page" *ngIf="itemsPerPageTemplate || itemsPerPageOptions?.length">
-        <!-- note, that we're checking for the length of "itemsPerPageOptions", but using "_displayedPageSizeOptions" as "pageOptions" -->
-        <!-- these 2 can be different, as "_displayedPageSizeOptions" may also include "itemsPerPage" if it's not included in options -->
-        <ng-container
-            [ngTemplateOutlet]="itemsPerPageTemplate || perPage"
-            [ngTemplateOutletContext]="{ onSelect: _onChangePerPage, pageOptions: _displayedPageSizeOptions }"
-        ></ng-container>
-    </div>
-
-    <nav
-        fdkFocusKeyManagerList
-        orientation="horizontal"
-        [skipPredicate]="skipItemPredicate"
-        class="fd-pagination__nav"
-        [attr.aria-label]="'corePagination.ariaLabel' | fdTranslate"
-        [attr.aria-labelledby]="displayTotalItems ? _totalPagesElementId : null"
-        *ngIf="totalItems >= itemsPerPage"
-    >
-        <button
-            fdkFocusKeyManagerItem
-            fd-button
-            fdType="transparent"
-            glyph="media-rewind"
-            [disabled]="isFirstPage"
-            [ariaLabel]="'corePagination.firstLabel' | fdTranslate"
-            [title]="'corePagination.firstLabel' | fdTranslate"
-            class="fd-pagination__button fd-pagination__button--mobile"
-            [attr.aria-disabled]="isFirstPage"
-            (click)="goToFirstPage()"
-            (keyup.enter)="goToFirstPage()"
-            (keydown.space)="$event.preventDefault()"
-            (keyup.space)="goToFirstPage()"
-        ></button>
-
-        <button
-            fdkFocusKeyManagerItem
-            fd-button
-            fdType="transparent"
-            glyph="navigation-left-arrow"
-            [disabled]="isFirstPage"
-            [ariaLabel]="'corePagination.previousLabel' | fdTranslate"
-            [title]="'corePagination.previousLabel' | fdTranslate"
-            class="fd-pagination__button"
-            [attr.aria-disabled]="isFirstPage"
-            (click)="previousPage()"
-            (keyup.enter)="previousPage()"
-            (keydown.space)="$event.preventDefault()"
-            (keyup.space)="previousPage()"
-        ></button>
-
-        <!-- Duplicated to preserve the items order for keyboard navigation -->
-        <ng-container *ngFor="let page of _pagesBeforeCurrent">
-            <button
-                *ngIf="page !== _moreElementValue; else more"
-                fdkFocusKeyManagerItem
-                fd-button
-                fdType="transparent"
-                [ariaLabel]="'corePagination.pageLabel' | fdTranslate : { pageNumber: page }"
-                [title]="'corePagination.pageLabel' | fdTranslate : { pageNumber: page }"
-                class="fd-pagination__link"
-                (click)="goToPage(page)"
-                (keyup.enter)="goToPage(page, $event)"
-                (keydown.space)="$event.preventDefault()"
-                (keyup.space)="goToPage(page, $event)"
-            >
-                {{ page }}
-            </button>
-        </ng-container>
-
-        <button
-            #currentPageElement
-            fdkFocusKeyManagerItem
-            fd-button
-            fdType="transparent"
-            [ariaLabel]="'corePagination.pageLabel' | fdTranslate : { pageNumber: currentPage }"
-            class="fd-pagination__link is-active"
-            [attr.aria-current]="true"
+@if (totalItems) {
+    @if (itemsPerPageTemplate || itemsPerPageOptions.length) {
+        <div class="fd-pagination__per-page">
+            <!-- note, that we're checking for the length of "itemsPerPageOptions", but using "_displayedPageSizeOptions" as "pageOptions" -->
+            <!-- these 2 can be different, as "_displayedPageSizeOptions" may also include "itemsPerPage" if it's not included in options -->
+            <ng-template
+                [ngTemplateOutlet]="itemsPerPageTemplate || perPage"
+                [ngTemplateOutletContext]="{ onSelect: _onChangePerPage, pageOptions: _displayedPageSizeOptions }"
+            ></ng-template>
+        </div>
+    }
+    @if (totalItems >= itemsPerPage) {
+        <nav
+            fdkFocusKeyManagerList
+            orientation="horizontal"
+            [skipPredicate]="skipItemPredicate"
+            class="fd-pagination__nav"
+            [attr.aria-label]="'corePagination.ariaLabel' | fdTranslate"
+            [attr.aria-labelledby]="displayTotalItems ? _totalPagesElementId : null"
         >
-            {{ currentPage }}
-        </button>
-
-        <label fd-form-label class="fd-pagination__label">
-            {{ 'corePagination.labelBeforeInputMobile' | fdTranslate }}
-        </label>
-
-        <input
-            #pageInputElement
-            fdkFocusKeyManagerItem
-            fd-form-control
-            fdkOnlyDigits
-            required
-            size="1"
-            min="1"
-            type="number"
-            [max]="_lastPage"
-            [state]="currentPageModel.invalid ? 'error' : null"
-            class="fd-pagination__input"
-            #currentPageModel="ngModel"
-            [ngModel]="currentPage"
-            [attr.aria-label]="
-                'corePagination.inputAriaLabel' | fdTranslate : { pageNumber: currentPage, totalCount: _totalPages }
-            "
-            (keydown.enter)="goToPage(currentPageModel.value)"
-            (keydown.space)="goToPage(currentPageModel.value)"
-            (blur)="_restoreInputValue(currentPageModel)"
-        />
-
-        <label fd-form-label class="fd-pagination__label">
-            {{
-                'corePagination.labelAfterInputMobile'
-                    | fdTranslate : { pageNumber: currentPage, totalCount: _totalPages }
-            }}
-        </label>
-
-        <!-- Duplicated to preserve the items order for keyboard navigation -->
-        <ng-container *ngFor="let page of _pagesAfterCurrent">
             <button
-                *ngIf="page !== _moreElementValue; else more"
                 fdkFocusKeyManagerItem
                 fd-button
                 fdType="transparent"
-                [ariaLabel]="'corePagination.pageLabel' | fdTranslate : { pageNumber: page }"
-                [title]="'corePagination.pageLabel' | fdTranslate : { pageNumber: page }"
-                class="fd-pagination__link"
-                (click)="goToPage(page)"
-                (keyup.enter)="goToPage(page, $event)"
+                glyph="media-rewind"
+                [disabled]="isFirstPage"
+                [ariaLabel]="'corePagination.firstLabel' | fdTranslate"
+                [title]="'corePagination.firstLabel' | fdTranslate"
+                class="fd-pagination__button fd-pagination__button--mobile"
+                [attr.aria-disabled]="isFirstPage"
+                (click)="goToFirstPage()"
+                (keyup.enter)="goToFirstPage()"
                 (keydown.space)="$event.preventDefault()"
-                (keyup.space)="goToPage(page, $event)"
+                (keyup.space)="goToFirstPage()"
+            ></button>
+            <button
+                fdkFocusKeyManagerItem
+                fd-button
+                fdType="transparent"
+                glyph="navigation-left-arrow"
+                [disabled]="isFirstPage"
+                [ariaLabel]="'corePagination.previousLabel' | fdTranslate"
+                [title]="'corePagination.previousLabel' | fdTranslate"
+                class="fd-pagination__button"
+                [attr.aria-disabled]="isFirstPage"
+                (click)="previousPage()"
+                (keyup.enter)="previousPage()"
+                (keydown.space)="$event.preventDefault()"
+                (keyup.space)="previousPage()"
+            ></button>
+            <!-- Duplicated to preserve the items order for keyboard navigation -->
+            @for (page of _pagesBeforeCurrent; track page) {
+                @if (page !== _moreElementValue) {
+                    <button
+                        fdkFocusKeyManagerItem
+                        fd-button
+                        fdType="transparent"
+                        [ariaLabel]="'corePagination.pageLabel' | fdTranslate: { pageNumber: page }"
+                        [title]="'corePagination.pageLabel' | fdTranslate: { pageNumber: page }"
+                        class="fd-pagination__link"
+                        (click)="goToPage(page)"
+                        (keyup.enter)="goToPage(page, $event)"
+                        (keydown.space)="$event.preventDefault()"
+                        (keyup.space)="goToPage(page, $event)"
+                    >
+                        {{ page }}
+                    </button>
+                } @else {
+                    <span class="fd-pagination__more" aria-hidden="true" aria-label="..." role="presentation"></span>
+                }
+            }
+            <button
+                #currentPageElement
+                fdkFocusKeyManagerItem
+                fd-button
+                fdType="transparent"
+                [ariaLabel]="'corePagination.pageLabel' | fdTranslate: { pageNumber: currentPage }"
+                class="fd-pagination__link is-active"
+                [attr.aria-current]="true"
             >
-                {{ page }}
+                {{ currentPage }}
             </button>
-        </ng-container>
-
-        <button
-            fdkFocusKeyManagerItem
-            fd-button
-            fdType="transparent"
-            glyph="navigation-right-arrow"
-            [disabled]="isLastPage"
-            [ariaLabel]="'corePagination.nextLabel' | fdTranslate"
-            [title]="'corePagination.nextLabel' | fdTranslate"
-            class="fd-pagination__button"
-            [attr.aria-disabled]="isLastPage"
-            (click)="nextPage()"
-            (keyup.enter)="nextPage()"
-            (keydown.space)="$event.preventDefault()"
-            (keyup.space)="nextPage()"
-        ></button>
-
-        <button
-            fdkFocusKeyManagerItem
-            fd-button
-            fdType="transparent"
-            glyph="media-forward"
-            [disabled]="isLastPage"
-            [ariaLabel]="'corePagination.lastLabel' | fdTranslate"
-            [title]="'corePagination.lastLabel' | fdTranslate"
-            class="fd-pagination__button fd-pagination__button--mobile"
-            [attr.aria-disabled]="isLastPage"
-            (click)="goToLastPage()"
-            (keyup.enter)="goToLastPage()"
-            (keydown.space)="$event.preventDefault()"
-            (keyup.space)="goToLastPage()"
-        ></button>
-    </nav>
-
-    <span *ngIf="displayTotalItems" class="fd-pagination__total" [attr.id]="_totalPagesElementId">
-        <ng-container
-            [ngTemplateOutlet]="displayTextTemplate || total"
-            [ngTemplateOutletContext]="{ showing: _currentShowing }"
-        ></ng-container>
-    </span>
-</ng-container>
-
+            <label fd-form-label class="fd-pagination__label">
+                {{ 'corePagination.labelBeforeInputMobile' | fdTranslate }}
+            </label>
+            <input
+                #pageInputElement
+                fdkFocusKeyManagerItem
+                fd-form-control
+                fdkOnlyDigits
+                required
+                size="1"
+                min="1"
+                type="number"
+                [max]="_lastPage"
+                [state]="currentPageModel.invalid ? 'error' : null"
+                class="fd-pagination__input"
+                #currentPageModel="ngModel"
+                [ngModel]="currentPage"
+                [attr.aria-label]="
+                    'corePagination.inputAriaLabel' | fdTranslate: { pageNumber: currentPage, totalCount: _totalPages }
+                "
+                (keydown.enter)="goToPage(currentPageModel.value)"
+                (keydown.space)="goToPage(currentPageModel.value)"
+                (blur)="_restoreInputValue(currentPageModel)"
+            />
+            <label fd-form-label class="fd-pagination__label">
+                {{
+                    'corePagination.labelAfterInputMobile'
+                        | fdTranslate: { pageNumber: currentPage, totalCount: _totalPages }
+                }}
+            </label>
+            <!-- Duplicated to preserve the items order for keyboard navigation -->
+            @for (page of _pagesAfterCurrent; track page) {
+                @if (page !== _moreElementValue) {
+                    <button
+                        fdkFocusKeyManagerItem
+                        fd-button
+                        fdType="transparent"
+                        [ariaLabel]="'corePagination.pageLabel' | fdTranslate: { pageNumber: page }"
+                        [title]="'corePagination.pageLabel' | fdTranslate: { pageNumber: page }"
+                        class="fd-pagination__link"
+                        (click)="goToPage(page)"
+                        (keyup.enter)="goToPage(page, $event)"
+                        (keydown.space)="$event.preventDefault()"
+                        (keyup.space)="goToPage(page, $event)"
+                    >
+                        {{ page }}
+                    </button>
+                } @else {
+                    <span class="fd-pagination__more" aria-hidden="true" aria-label="..." role="presentation"></span>
+                }
+            }
+            <button
+                fdkFocusKeyManagerItem
+                fd-button
+                fdType="transparent"
+                glyph="navigation-right-arrow"
+                [disabled]="isLastPage"
+                [ariaLabel]="'corePagination.nextLabel' | fdTranslate"
+                [title]="'corePagination.nextLabel' | fdTranslate"
+                class="fd-pagination__button"
+                [attr.aria-disabled]="isLastPage"
+                (click)="nextPage()"
+                (keyup.enter)="nextPage()"
+                (keydown.space)="$event.preventDefault()"
+                (keyup.space)="nextPage()"
+            ></button>
+            <button
+                fdkFocusKeyManagerItem
+                fd-button
+                fdType="transparent"
+                glyph="media-forward"
+                [disabled]="isLastPage"
+                [ariaLabel]="'corePagination.lastLabel' | fdTranslate"
+                [title]="'corePagination.lastLabel' | fdTranslate"
+                class="fd-pagination__button fd-pagination__button--mobile"
+                [attr.aria-disabled]="isLastPage"
+                (click)="goToLastPage()"
+                (keyup.enter)="goToLastPage()"
+                (keydown.space)="$event.preventDefault()"
+                (keyup.space)="goToLastPage()"
+            ></button>
+        </nav>
+    }
+    @if (displayTotalItems) {
+        <span class="fd-pagination__total" [attr.id]="_totalPagesElementId">
+            <ng-template
+                [ngTemplateOutlet]="displayTextTemplate || total"
+                [ngTemplateOutletContext]="{ showing: _currentShowing }"
+            ></ng-template>
+        </span>
+    }
+}
 <ng-template #more>
     <span class="fd-pagination__more" aria-hidden="true" aria-label="..." role="presentation"></span>
 </ng-template>
-
 <ng-template #total let-showing="showing">
     <span fd-form-label class="fd-pagination__total-label">
-        {{ 'corePagination.totalResultsLabel' | fdTranslate : _currentShowing }}
+        {{ 'corePagination.totalResultsLabel' | fdTranslate: _currentShowing }}
     </span>
 </ng-template>
-
 <ng-template #perPage let-pageOptions="pageOptions">
     <label fd-form-label class="fd-pagination__per-page-label">
         {{ 'corePagination.itemsPerPageLabel' | fdTranslate }}
     </label>
-
     <fd-select class="fd-pagination__per-page-select" [value]="itemsPerPage" (valueChange)="_onChangePerPage($event)">
-        <li fd-option *ngFor="let option of pageOptions" [value]="option">{{ option }}</li>
+        @for (option of pageOptions; track option) {
+            <li fd-option [value]="option">{{ option }}</li>
+        }
     </fd-select>
 </ng-template>

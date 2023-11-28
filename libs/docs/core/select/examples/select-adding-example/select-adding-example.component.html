@@ -2,8 +2,9 @@
     <button fd-button label="Add Option" (click)="addOption()"></button>
     <button fd-button label="Remove Option" (click)="removeOption()"></button>
 </div>
-
 <fd-select placeholder="Select an option" [(value)]="selectedValue" [closeOnOutsideClick]="false">
-    <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+    @for (option of options; track option) {
+        <li fd-option [value]="option">{{ option }}</li>
+    }
 </fd-select>
 <small style="display: block">Selected value: {{ selectedValue }}</small>

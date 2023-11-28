@@ -1,6 +1,6 @@
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor, NgIf } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
@@ -50,36 +50,31 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
                     </div>
                 </ng-template>
             </fd-dialog-header>
-
             <fd-dialog-body>
-                <fd-message-strip *ngIf="showError" type="error" [dismissible]="false">
-                    At least 1 column has to be selected
-                </fd-message-strip>
-
+                @if (showError) {
+                    <fd-message-strip type="error" [dismissible]="false">
+                        At least 1 column has to be selected
+                    </fd-message-strip>
+                }
                 <ul fd-list [selection]="true" cdkDropList (cdkDropListDropped)="dropHandle($event)">
                     <li fd-list-item [selected]="allSelected">
                         <fd-checkbox name="All Keys" [ngModel]="allSelected" (ngModelChange)="handleAllChange($event)">
                         </fd-checkbox>
                         <span fd-list-title>All Keys</span>
                     </li>
-
-                    <li
-                        *ngFor="let column of columns | filter : filterPhrase : 'key'"
-                        cdkDrag
-                        fd-list-item
-                        [selected]="column.checked"
-                    >
-                        <fd-checkbox
-                            [name]="column.key"
-                            [(ngModel)]="column.checked"
-                            (ngModelChange)="handleChange(column, $event)"
-                        >
-                        </fd-checkbox>
-                        <span fd-list-title>{{ column.key }}</span>
-                    </li>
+                    @for (column of columns | filter: filterPhrase : 'key'; track column) {
+                        <li cdkDrag fd-list-item [selected]="column.checked">
+                            <fd-checkbox
+                                [name]="column.key"
+                                [(ngModel)]="column.checked"
+                                (ngModelChange)="handleChange(column, $event)"
+                            >
+                            </fd-checkbox>
+                            <span fd-list-title>{{ column.key }}</span>
+                        </li>
+                    }
                 </ul>
             </fd-dialog-body>
-
             <fd-dialog-footer>
                 <fd-button-bar fdType="emphasized" label="Save" (click)="save()"> </fd-button-bar>
                 <fd-button-bar fd-initial-focus label="Cancel" (click)="dismiss()"> </fd-button-bar>
@@ -98,12 +93,10 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
         FormsModule,
         CdkScrollable,
         ScrollbarDirective,
-        NgIf,
         MessageStripComponent,
         ListModule,
         CdkDropList,
         CheckboxComponent,
-        NgFor,
         CdkDrag,
         FilterPipe
     ]

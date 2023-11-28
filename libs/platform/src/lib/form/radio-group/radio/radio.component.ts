@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
 
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { RadioButtonComponent as CoreRadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
@@ -30,7 +30,7 @@ let uniqueId = 0;
     templateUrl: './radio.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [CoreRadioButtonComponent, FormsModule, NgIf, NgTemplateOutlet]
+    imports: [CoreRadioButtonComponent, FormsModule, NgTemplateOutlet]
 })
 export class RadioButtonComponent extends BaseInput implements AfterViewInit, FocusableOption {
     /** sets radio button tooltip */

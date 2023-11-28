@@ -41,36 +41,45 @@
     <fd-popover-body>
         <ng-template [ngTemplateOutlet]="formMessageTemplate"></ng-template>
         <ng-content></ng-content>
-        <fd-time
-            *ngIf="isOpen"
-            [tablet]="tablet"
-            [disabled]="disabled"
-            [keepTwoDigits]="keepTwoDigitsTime"
-            [ngModel]="time"
-            (ngModelChange)="_timeComponentValueChanged($event)"
-            [meridian]="_meridian"
-            [displayHours]="_displayHours"
-            [displayMinutes]="_displayMinutes"
-            [displaySeconds]="_displaySeconds"
-            [spinnerButtons]="spinnerButtons"
-        ></fd-time>
+        @if (isOpen) {
+            <fd-time
+                [tablet]="tablet"
+                [disabled]="disabled"
+                [keepTwoDigits]="keepTwoDigitsTime"
+                [ngModel]="time"
+                (ngModelChange)="_timeComponentValueChanged($event)"
+                [meridian]="_meridian"
+                [displayHours]="_displayHours"
+                [displayMinutes]="_displayMinutes"
+                [displaySeconds]="_displaySeconds"
+                [spinnerButtons]="spinnerButtons"
+            ></fd-time>
+        }
     </fd-popover-body>
 </fd-popover>
-
 <div [style.display]="'none'" aria-hidden="true">
     <div [attr.id]="_formValueStateMessageId" aria-atomic="true" aria-live="assertive">
-        <ng-container [ngSwitch]="state">
-            <ng-container *ngSwitchCase="'success'">{{ valueStateSuccessMessage }}</ng-container>
-            <ng-container *ngSwitchCase="'information'">{{ valueStateInformationMessage }}</ng-container>
-            <ng-container *ngSwitchCase="'warning'">{{ valueStateWarningMessage }}</ng-container>
-            <ng-container *ngSwitchCase="'error'">{{ valueStateErrorMessage }}</ng-container>
-        </ng-container>
+        @switch (state) {
+            @case ('success') {
+                {{ valueStateSuccessMessage }}
+            }
+            @case ('information') {
+                {{ valueStateInformationMessage }}
+            }
+            @case ('warning') {
+                {{ valueStateWarningMessage }}
+            }
+            @case ('error') {
+                {{ valueStateErrorMessage }}
+            }
+        }
         {{ _message }}
     </div>
 </div>
-
 <ng-template #formMessageTemplate>
-    <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
-        {{ _message }}
-    </fd-form-message>
+    @if (_message) {
+        <fd-form-message [embedded]="true" [type]="state">
+            {{ _message }}
+        </fd-form-message>
+    }
 </ng-template>

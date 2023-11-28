@@ -1,4 +1,4 @@
-<ng-container *ngIf="!_fdMenuInteractiveChild; else projectedContent">
+@if (!_fdMenuInteractiveChild) {
     <div
         class="fd-menu__link"
         [class.is-disabled]="disabled"
@@ -8,12 +8,15 @@
         role="menuitem"
     >
         <span class="fd-menu__title">
-            <ng-container [ngTemplateOutlet]="projectedContent"></ng-container>
+            <ng-template [ngTemplateOutlet]="projectedContent"></ng-template>
         </span>
-        <span *ngIf="isTrigger" class="fd-menu__addon-after fd-menu__addon-after--submenu"></span>
+        @if (isTrigger) {
+            <span class="fd-menu__addon-after fd-menu__addon-after--submenu"></span>
+        }
     </div>
-</ng-container>
-
+} @else {
+    <ng-template [ngTemplateOutlet]="projectedContent"></ng-template>
+}
 <ng-template #projectedContent>
     <ng-content></ng-content>
 </ng-template>

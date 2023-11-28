@@ -5,7 +5,7 @@ let platformPanelContentUniqueId = 0;
 @Component({
     selector: 'fdp-panel-content',
     template: `<ng-content></ng-content>`,
-    styleUrls: ['./panel-content.component.scss'],
+    styleUrl: './panel-content.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })

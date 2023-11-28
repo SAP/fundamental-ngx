@@ -1,66 +1,3 @@
-<!--  role="application" is used in order to let user to change value with left/right arrows in JAWS, since JAWS ovverrides these actions -->
-<div class="fd-rating-indicator__container" role="application" aria-roledescription="Rating indicator">
-    <!-- Zero value if we don't have provided value from user, `ratingAverage` or `ratings` -->
-    <ng-container *ngTemplateOutlet="zeroRate"></ng-container>
-    <!-- Available rate values -->
-    <ng-container *ngFor="let rate of _rates; index as i; trackBy: trackByFn">
-        <input
-            [attr.aria-label]="i | ratingStarLabel : _rates.length : allowHalves"
-            role="button"
-            type="radio"
-            class="fd-rating-indicator__input"
-            [disabled]="disabled || nonInteractive || displayMode"
-            [id]="rate.id"
-            name="rating-{{ viewRatingUID }}"
-            [value]="rate.value"
-            [checked]="viewValue === rate.value"
-            (click)="onSelect(rate.value)"
-        />
-        <label class="fd-rating-indicator__label" [for]="rate.id" aria-hidden="true">
-            <i *ngIf="ratedIcon" class="fd-rating-indicator__label-rated" [class]="unratedIcon"></i>
-            <i *ngIf="unratedIcon" class="fd-rating-indicator__label-unrated" [class]="ratedIcon"></i>
-        </label>
-    </ng-container>
-</div>
-<!-- Popover if displayAllRatings is true and we have ratings object -->
-<span
-    [fdPopoverTrigger]="allRatingContent"
-    *ngIf="displayAllRatings && _ratingItems?.length; else dynamicText"
-    class="fd-rating-indicator__dynamic-text"
->
-    (<span aria-label="Total raiting" fd-link>{{ totalRatings }}</span
-    >)
-</span>
-<fd-popover
-    #allRatingContent
-    [triggers]="['mouseenter', 'mouseleave']"
-    [noArrow]="false"
-    placement="top"
-    additionalBodyClass="fd-rating-indicator__popover"
->
-    <div class="fd-rating-indicator__sum-row" [class]="sizeClass" *ngFor="let rating of _ratingItems">
-        <div class="fd-rating-indicator__container">
-            <ng-container *ngFor="let rate of _rates; trackBy: trackByFn">
-                <span
-                    [class.fd-rating-indicator__input-checked]="rate.value === rating.rate"
-                    class="fd-rating-indicator__input"
-                ></span>
-                <label class="fd-rating-indicator__label">
-                    <i *ngIf="ratedIcon" class="fd-rating-indicator__label-rated" [class]="unratedIcon"></i>
-                    <i *ngIf="unratedIcon" class="fd-rating-indicator__label-unrated" [class]="ratedIcon"></i>
-                </label>
-            </ng-container>
-        </div>
-        ({{ rating.votes }})
-    </div>
-</fd-popover>
-
-<ng-template #dynamicText>
-    <span *ngIf="totalRatings" class="fd-rating-indicator__dynamic-text">({{ totalRatings }})</span>
-    <span *ngIf="!totalRatings" class="fd-rating-indicator__dynamic-text"
-        >({{ viewValue }} {{ dynamicTextIndicator }} {{ indicatorCount }})</span
-    >
-</ng-template>
 <ng-template #zeroRate let-halves="halves">
     <input
         aria-label="Reset to zero"
@@ -74,3 +11,75 @@
     />
     <label class="fd-rating-indicator__label fd-rating-indicator__label--zero-rating" aria-hidden="true"></label>
 </ng-template>
+<!--  role="application" is used in order to let user to change value with left/right arrows in JAWS, since JAWS ovverrides these actions -->
+<div class="fd-rating-indicator__container" role="application" aria-roledescription="Rating indicator">
+    <!-- Zero value if we don't have provided value from user, `ratingAverage` or `ratings` -->
+    <ng-template [ngTemplateOutlet]="zeroRate"></ng-template>
+    <!-- Available rate values -->
+    @for (rate of _rates; track rate.id; let i = $index) {
+        <input
+            [attr.aria-label]="i | ratingStarLabel: _rates.length : allowHalves"
+            role="button"
+            type="radio"
+            class="fd-rating-indicator__input"
+            [disabled]="disabled || nonInteractive || displayMode"
+            [id]="rate.id"
+            name="rating-{{ viewRatingUID }}"
+            [value]="rate.value"
+            [checked]="viewValue === rate.value"
+            (click)="onSelect(rate.value)"
+        />
+        <label class="fd-rating-indicator__label" [for]="rate.id" aria-hidden="true">
+            @if (ratedIcon) {
+                <i class="fd-rating-indicator__label-rated" [class]="unratedIcon"></i>
+            }
+            @if (unratedIcon) {
+                <i class="fd-rating-indicator__label-unrated" [class]="ratedIcon"></i>
+            }
+        </label>
+    }
+</div>
+<!-- Popover if displayAllRatings is true and we have ratings object -->
+@if (displayAllRatings && _ratingItems.length) {
+    <span [fdPopoverTrigger]="allRatingContent" class="fd-rating-indicator__dynamic-text">
+        (<span aria-label="Total raiting" fd-link>{{ totalRatings }}</span
+        >)
+    </span>
+} @else {
+    @if (totalRatings) {
+        <span class="fd-rating-indicator__dynamic-text">({{ totalRatings }})</span>
+    } @else {
+        <span class="fd-rating-indicator__dynamic-text"
+            >({{ viewValue }} {{ dynamicTextIndicator }} {{ indicatorCount }})</span
+        >
+    }
+}
+<fd-popover
+    #allRatingContent
+    [triggers]="['mouseenter', 'mouseleave']"
+    [noArrow]="false"
+    placement="top"
+    additionalBodyClass="fd-rating-indicator__popover"
+>
+    @for (rating of _ratingItems; track rating) {
+        <div class="fd-rating-indicator__sum-row" [class]="sizeClass">
+            <div class="fd-rating-indicator__container">
+                @for (rate of _rates; track rate.id) {
+                    <span
+                        [class.fd-rating-indicator__input-checked]="rate.value === rating.rate"
+                        class="fd-rating-indicator__input"
+                    ></span>
+                    <label class="fd-rating-indicator__label">
+                        @if (ratedIcon) {
+                            <i class="fd-rating-indicator__label-rated" [class]="unratedIcon"></i>
+                        }
+                        @if (unratedIcon) {
+                            <i class="fd-rating-indicator__label-unrated" [class]="ratedIcon"></i>
+                        }
+                    </label>
+                }
+            </div>
+            ({{ rating.votes }})
+        </div>
+    }
+</fd-popover>

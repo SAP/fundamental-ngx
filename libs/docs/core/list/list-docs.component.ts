@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import { NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { _secondaryListItemTypes } from '@fundamental-ngx/core/list';
 import {
@@ -69,7 +68,6 @@ const listLoadingHtml = 'list-loading-example/list-loading-example.component.htm
         ListActionExampleComponent,
         RouterLink,
         ListDataExampleComponent,
-        NgFor,
         ListSecondaryExampleComponent,
         ListIconExampleComponent,
         ListBorderlessExampleComponent,

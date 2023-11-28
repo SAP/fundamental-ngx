@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
@@ -10,7 +9,7 @@ import { RadioModule } from '@fundamental-ngx/core/radio';
     selector: 'fd-list-byline-selection-example',
     templateUrl: './list-byline-selection-example.component.html',
     standalone: true,
-    imports: [ListModule, NgFor, CheckboxComponent, FormsModule, IconComponent, RadioModule]
+    imports: [ListModule, CheckboxComponent, FormsModule, IconComponent, RadioModule]
 })
 export class ListBylineSelectionExampleComponent {
     selectionValue: string | null = null;

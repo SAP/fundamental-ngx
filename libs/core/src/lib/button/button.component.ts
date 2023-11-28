@@ -15,7 +15,6 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
 import { Subscription } from 'rxjs';
 import { BaseButton } from './base-button';
 
-import { NgIf } from '@angular/common';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FD_BUTTON_COMPONENT } from './tokens';
 
@@ -34,7 +33,7 @@ import { FD_BUTTON_COMPONENT } from './tokens';
     selector: 'button[fd-button], a[fd-button]',
     exportAs: 'fd-button',
     templateUrl: './button.component.html',
-    styleUrls: ['./button.component.scss'],
+    styleUrl: './button.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
@@ -51,7 +50,7 @@ import { FD_BUTTON_COMPONENT } from './tokens';
         }
     ],
     standalone: true,
-    imports: [NgIf, IconComponent]
+    imports: [IconComponent]
 })
 export class ButtonComponent
     extends BaseButton

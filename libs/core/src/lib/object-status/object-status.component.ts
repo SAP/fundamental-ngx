@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -19,20 +19,25 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' 
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-object-status]',
     template: `
-        <fd-icon
-            *ngIf="glyph"
-            class="fd-object-status__icon"
-            [glyph]="glyph"
-            [attr.role]="glyphAriaLabel ? 'presentation' : ''"
-            [ariaLabel]="glyphAriaLabel"
-        >
-        </fd-icon>
-        <span *ngIf="textTemplate" class="fd-object-status__text" [class]="_textClass">
-            <ng-template [ngTemplateOutlet]="textTemplate"></ng-template>
-        </span>
-        <span *ngIf="label" class="fd-object-status__text" [class]="_textClass">{{ label }}</span>
+        @if (glyph) {
+            <fd-icon
+                class="fd-object-status__icon"
+                [glyph]="glyph"
+                [attr.role]="glyphAriaLabel ? 'presentation' : ''"
+                [ariaLabel]="glyphAriaLabel"
+            >
+            </fd-icon>
+        }
+        @if (textTemplate) {
+            <span class="fd-object-status__text" [class]="_textClass">
+                <ng-template [ngTemplateOutlet]="textTemplate"></ng-template>
+            </span>
+        }
+        @if (label) {
+            <span class="fd-object-status__text" [class]="_textClass">{{ label }}</span>
+        }
     `,
-    styleUrls: ['./object-status.component.scss'],
+    styleUrl: './object-status.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
@@ -45,7 +50,7 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' 
         '[attr.tabindex]': 'clickable ? 0 : -1'
     },
     standalone: true,
-    imports: [NgIf, IconComponent, NgTemplateOutlet]
+    imports: [IconComponent, NgTemplateOutlet]
 })
 export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -12,6 +12,7 @@ import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
 import { PlatformThumbnailModule } from '../thumbnail.module';
 import { ThumbnailImageComponent } from './thumbnail-image.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: `<fdp-thumbnail-image #thumbnailImageComponent [mediaList]="mediaList"></fdp-thumbnail-image>`

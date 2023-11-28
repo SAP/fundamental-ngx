@@ -1,14 +1,15 @@
-<button
-    *ngFor="let page of pages"
-    fd-button
-    fdType="transparent"
-    class="fd-splitter__pagination-item"
-    [class.fd-splitter__pagination-item--active]="page === currentPage"
-    role="radio"
-    [attr.aria-label]="'coreSplitter.paginationItemAriaLabel' | fdTranslate"
-    [attr.aria-checked]="page === currentPage"
-    (click)="_changePage(page)"
-    (keydown.enter)="_changePage(page)"
->
-    <span class="fd-splitter__pagination-item-dot"></span>
-</button>
+@for (page of pages; track page) {
+    <button
+        fd-button
+        fdType="transparent"
+        class="fd-splitter__pagination-item"
+        [class.fd-splitter__pagination-item--active]="page === currentPage"
+        role="radio"
+        [attr.aria-label]="'coreSplitter.paginationItemAriaLabel' | fdTranslate"
+        [attr.aria-checked]="page === currentPage"
+        (click)="_changePage(page)"
+        (keydown.enter)="_changePage(page)"
+    >
+        <span class="fd-splitter__pagination-item-dot"></span>
+    </button>
+}

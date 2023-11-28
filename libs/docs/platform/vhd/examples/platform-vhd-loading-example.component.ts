@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import { NgFor } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     PlatformValueHelpDialogModule,
@@ -56,7 +55,7 @@ const data = exampleDataSource();
     selector: 'fdp-platform-vhd-loading-example',
     templateUrl: './platform-vhd-loading-example.component.html',
     standalone: true,
-    imports: [ButtonComponent, PlatformValueHelpDialogModule, NgFor]
+    imports: [ButtonComponent, PlatformValueHelpDialogModule]
 })
 export class PlatformVhdLoadingExampleComponent {
     filters = data.filters;

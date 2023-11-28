@@ -1,29 +1,28 @@
 import {
+    ContainerReflection,
+    DeclarationHierarchy,
     DeclarationReflection,
     DefaultThemeRenderContext,
-    JSX as React,
     JSX,
-    Reflection,
-    ContainerReflection,
-    RenderTemplate,
     PageEvent,
+    Reflection,
+    RenderTemplate,
     SignatureReflection,
-    DeclarationHierarchy,
     Type
 } from 'typedoc';
-import { member } from './partials/member';
-import { memberSignatures } from './partials/member.signatures';
-import { comment } from './partials/comment';
 import { index } from './partials';
-import { defaultLayout } from './partials/default.layout';
-import { memberGetterSetter } from './partials/member.getter-setter';
-import { memberSources } from './partials/member.sources';
+import { comment } from './partials/comment';
 import { commentSummary } from './partials/comment.summary';
-import { hierarchy } from './partials/hierarchy';
-import { type } from './partials/type';
-import { memberDeclaration } from './partials/member.declaration';
-import { reflectionTemplate } from './partials/reflection';
 import { commentTags } from './partials/comment.tags';
+import { defaultLayout } from './partials/default.layout';
+import { hierarchy } from './partials/hierarchy';
+import { member } from './partials/member';
+import { memberDeclaration } from './partials/member.declaration';
+import { memberGetterSetter } from './partials/member.getter-setter';
+import { memberSignatures } from './partials/member.signatures';
+import { memberSources } from './partials/member.sources';
+import { reflectionTemplate } from './partials/reflection';
+import { type } from './partials/type';
 
 export class FdThemeContext extends DefaultThemeRenderContext {
     override analytics = () => <></>;
@@ -34,7 +33,7 @@ export class FdThemeContext extends DefaultThemeRenderContext {
     override toolbar = () => <></>;
     override member = (props: DeclarationReflection) => member(this, props);
     override memberSignatures = (props: DeclarationReflection) => memberSignatures(this, props);
-    override comment = (props: Reflection) => comment(props);
+    comment = (props: Reflection) => comment(props);
     override commentTags = (props: Reflection) => commentTags(this, props);
     override commentSummary = (props: Reflection) => commentSummary(this, props);
     override index = (props: ContainerReflection) => index(this, props);

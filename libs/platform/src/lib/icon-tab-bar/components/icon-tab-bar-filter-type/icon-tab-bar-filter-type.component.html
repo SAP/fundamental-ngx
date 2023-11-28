@@ -6,64 +6,82 @@
     [overflowOffset]="100"
     (overflowChanged)="_recalculateVisibleItems($event)"
 >
-    <li *ngIf="showTotalTab" class="fd-icon-tab-bar__item" role="presentation" fdkOverflowListItem>
-        <a
-            (click)="_totalTab && _selectItem(_totalTab)"
-            (keydown)="_keyDownHandler($event, _totalTab, 0)"
-            [attr.aria-selected]="_totalTab?.uId === _selectedUid"
-            class="fd-icon-tab-bar__tab"
-            tabindex="0"
-            #tabItem
-            role="tab"
+    @if (showTotalTab) {
+        <li class="fd-icon-tab-bar__item" role="presentation" fdkOverflowListItem>
+            <a
+                (click)="_totalTab && _selectItem(_totalTab)"
+                (keydown)="_keyDownHandler($event, _totalTab, 0)"
+                [attr.aria-selected]="_totalTab?.uId === _selectedUid"
+                class="fd-icon-tab-bar__tab"
+                tabindex="0"
+                #tabItem
+                role="tab"
+            >
+                <div class="fd-icon-tab-bar__container fd-icon-tab-bar__container--filter">
+                    @if (_totalTab?.counter) {
+                        <span class="fd-icon-tab-bar__filter-counter">{{ _totalTab?.counter }}</span>
+                    }
+                    <span class="fd-icon-tab-bar__filter-label">{{ _totalTab?.label }}</span>
+                </div>
+            </a>
+        </li>
+    }
+    @for (item of _tabs | slice: 1; track item.uId; let idx = $index) {
+        <li
+            [class]="item.cssClasses"
+            class="fd-icon-tab-bar__item"
+            role="presentation"
+            fdkOverflowListItem
+            [attr.aria-hidden]="item.hidden"
         >
-            <div class="fd-icon-tab-bar__container fd-icon-tab-bar__container--filter">
-                <span *ngIf="_totalTab?.counter" class="fd-icon-tab-bar__filter-counter">{{ _totalTab?.counter }}</span>
-                <span class="fd-icon-tab-bar__filter-label">{{ _totalTab?.label }}</span>
-            </div>
-        </a>
-    </li>
-    <li
-        *ngFor="let item of _tabs | slice : 1; let idx = index; trackBy: _trackByTab"
-        [class]="item.cssClasses"
-        class="fd-icon-tab-bar__item"
-        role="presentation"
-        fdkOverflowListItem
-        [attr.aria-hidden]="item.hidden"
-    >
-        <a
-            (click)="_selectItem(item)"
-            [attr.aria-selected]="item.uId === _selectedUid"
-            class="fd-icon-tab-bar__tab"
-            #tabItem
-            [attr.tabindex]="showTotalTab ? -1 : idx > 0 ? -1 : 0"
-            (keydown)="_keyDownHandler($event, item, idx + (showTotalTab ? 1 : 0))"
-            role="tab"
-        >
-            <div class="fd-icon-tab-bar__container">
-                <span class="fd-icon-tab-bar__icon">
-                    <fd-icon [glyph]="item.icon"></fd-icon>
-                </span>
-                <span *ngIf="item.counter" class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
-            </div>
-            <div class="fd-icon-tab-bar__label">{{ item.label }}</div>
-            <div class="screenreader-only" *ngIf="item.color">
-                {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
-            </div>
-        </a>
-        <div class="fd-icon-tab-bar__button-container" *ngIf="item.closable">
-            <button fd-button class="fd-icon-tab-bar__button" fdType="transparent" (click)="_closeTab(item.uId)">
-                <fd-icon glyph="decline"></fd-icon>
-            </button>
-        </div>
-    </li>
-    <li *ngIf="_extraTabs.length" role="presentation" class="fd-icon-tab-bar__item fd-icon-tab-bar__item--overflow">
-        <fdp-icon-tab-bar-popover
-            [isRtl]="isRtl"
-            [extraTabs]="_extraTabs"
-            [colorAssociations]="colorAssociations"
-            (selectedExtraItem)="_selectExtraItem($event)"
-            (focusFirstVisibleItem)="_focusItem(0)"
-            (focusLastVisibleItem)="_focusItem(_lastVisibleTabIndex)"
-        ></fdp-icon-tab-bar-popover>
-    </li>
+            <a
+                (click)="_selectItem(item)"
+                [attr.aria-selected]="item.uId === _selectedUid"
+                class="fd-icon-tab-bar__tab"
+                #tabItem
+                [attr.tabindex]="showTotalTab ? -1 : idx > 0 ? -1 : 0"
+                (keydown)="_keyDownHandler($event, item, idx + (showTotalTab ? 1 : 0))"
+                role="tab"
+            >
+                <div class="fd-icon-tab-bar__container">
+                    <span class="fd-icon-tab-bar__icon">
+                        <fd-icon [glyph]="item.icon"></fd-icon>
+                    </span>
+                    @if (item.counter) {
+                        <span class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
+                    }
+                </div>
+                <div class="fd-icon-tab-bar__label">{{ item.label }}</div>
+                @if (item.color) {
+                    <div class="screenreader-only">
+                        {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
+                    </div>
+                }
+            </a>
+            @if (item.closable) {
+                <div class="fd-icon-tab-bar__button-container">
+                    <button
+                        fd-button
+                        class="fd-icon-tab-bar__button"
+                        fdType="transparent"
+                        (click)="_closeTab(item.uId)"
+                    >
+                        <fd-icon glyph="decline"></fd-icon>
+                    </button>
+                </div>
+            }
+        </li>
+    }
+    @if (_extraTabs.length) {
+        <li role="presentation" class="fd-icon-tab-bar__item fd-icon-tab-bar__item--overflow">
+            <fdp-icon-tab-bar-popover
+                [isRtl]="isRtl"
+                [extraTabs]="_extraTabs"
+                [colorAssociations]="colorAssociations"
+                (selectedExtraItem)="_selectExtraItem($event)"
+                (focusFirstVisibleItem)="_focusItem(0)"
+                (focusLastVisibleItem)="_focusItem(_lastVisibleTabIndex)"
+            ></fdp-icon-tab-bar-popover>
+        </li>
+    }
 </ul>

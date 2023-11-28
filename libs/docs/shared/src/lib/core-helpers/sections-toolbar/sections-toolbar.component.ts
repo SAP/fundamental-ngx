@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -38,8 +38,6 @@ const SMALL_SCREEN_BREAKPOINT = 992;
         FormsModule,
         SideNavigationModule,
         NestedListModule,
-        NgFor,
-        NgIf,
         NgTemplateOutlet,
         RouterLinkActive,
         RouterLink,

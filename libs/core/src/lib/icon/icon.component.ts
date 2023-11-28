@@ -44,7 +44,7 @@ export const FD_ICON_FONT_FAMILY: Record<IconFont, string> = {
 @Component({
     selector: 'fd-icon',
     template: ``,
-    styleUrls: ['./icon.component.scss'],
+    styleUrl: './icon.component.scss',
     providers: [
         {
             provide: FD_ICON_COMPONENT,

@@ -10,7 +10,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
@@ -64,7 +64,7 @@ class GroupRule {
 
 @Component({
     templateUrl: './grouping.component.html',
-    styleUrls: ['./grouping.component.scss'],
+    styleUrl: './grouping.component.scss',
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13GroupingDialogComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -81,7 +81,6 @@ class GroupRule {
         CdkScrollable,
         ScrollbarDirective,
         DialogBodyComponent,
-        NgFor,
         SelectComponent,
         OptionComponent,
         CheckboxComponent,

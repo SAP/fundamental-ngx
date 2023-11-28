@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -10,7 +9,7 @@ import { TableModule } from '@fundamental-ngx/core/table';
     templateUrl: './table-responsive-example.component.html',
     styleUrls: ['table-responsive-example.component.scss'],
     standalone: true,
-    imports: [TableModule, FocusableGridDirective, NgFor, LinkComponent, IconComponent]
+    imports: [TableModule, FocusableGridDirective, LinkComponent, IconComponent]
 })
 export class TableResponsiveExampleComponent implements OnInit {
     tableRows: any[];

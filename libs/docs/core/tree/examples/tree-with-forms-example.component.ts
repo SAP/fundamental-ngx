@@ -83,8 +83,8 @@ function generateItems<T = TreeItem<AdditionalTreeItemData>>(length = 20, level 
                 level === 1
                     ? generateItems(length, level + 1)
                     : level < 5
-                    ? new ExampleObservableTreeDataSource(level + 1)
-                    : []
+                      ? new ExampleObservableTreeDataSource(level + 1)
+                      : []
         } as T);
     }
 

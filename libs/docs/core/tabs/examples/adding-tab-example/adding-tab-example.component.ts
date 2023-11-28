@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
@@ -8,7 +7,7 @@ import { TabsModule } from '@fundamental-ngx/core/tabs';
     templateUrl: './adding-tab-example.component.html',
     styleUrls: ['./adding-tab-example.component.scss'],
     standalone: true,
-    imports: [TabsModule, NgFor, ButtonComponent]
+    imports: [TabsModule, ButtonComponent]
 })
 export class AddingTabExampleComponent {
     tabs = [

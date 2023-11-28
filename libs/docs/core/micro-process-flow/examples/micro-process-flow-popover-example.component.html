@@ -7,13 +7,17 @@
                     glyph="product"
                 ></fd-micro-process-flow-icon>
             </fd-popover-control>
-            <fd-popover-body *ngIf="list1 && list1.length">
-                <ul fd-list>
-                    <li fd-list-item *ngFor="let option of list1">
-                        <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
-                    </li>
-                </ul>
-            </fd-popover-body>
+            @if (list1 && list1.length) {
+                <fd-popover-body>
+                    <ul fd-list>
+                        @for (option of list1; track option) {
+                            <li fd-list-item>
+                                <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
+                            </li>
+                        }
+                    </ul>
+                </fd-popover-body>
+            }
         </fd-popover>
     </fd-micro-process-flow-item>
     <fd-micro-process-flow-item state="positive" [intermediate]="true">
@@ -24,13 +28,17 @@
                     glyph="pending"
                 ></fd-micro-process-flow-icon>
             </fd-popover-control>
-            <fd-popover-body *ngIf="list1 && list1.length">
-                <ul fd-list>
-                    <li fd-list-item *ngFor="let option of list1">
-                        <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
-                    </li>
-                </ul>
-            </fd-popover-body>
+            @if (list1 && list1.length) {
+                <fd-popover-body>
+                    <ul fd-list>
+                        @for (option of list1; track option) {
+                            <li fd-list-item>
+                                <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
+                            </li>
+                        }
+                    </ul>
+                </fd-popover-body>
+            }
         </fd-popover>
     </fd-micro-process-flow-item>
     <fd-micro-process-flow-item state="information">
@@ -41,13 +49,17 @@
                     glyph="phone"
                 ></fd-micro-process-flow-icon>
             </fd-popover-control>
-            <fd-popover-body *ngIf="list1 && list1.length">
-                <ul fd-list>
-                    <li fd-list-item *ngFor="let option of list1">
-                        <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
-                    </li>
-                </ul>
-            </fd-popover-body>
+            @if (list1 && list1.length) {
+                <fd-popover-body>
+                    <ul fd-list>
+                        @for (option of list1; track option) {
+                            <li fd-list-item>
+                                <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
+                            </li>
+                        }
+                    </ul>
+                </fd-popover-body>
+            }
         </fd-popover>
     </fd-micro-process-flow-item>
     <fd-micro-process-flow-item state="negative">
@@ -58,13 +70,17 @@
                     glyph="map"
                 ></fd-micro-process-flow-icon>
             </fd-popover-control>
-            <fd-popover-body *ngIf="list1 && list1.length">
-                <ul fd-list>
-                    <li fd-list-item *ngFor="let option of list1">
-                        <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
-                    </li>
-                </ul>
-            </fd-popover-body>
+            @if (list1 && list1.length) {
+                <fd-popover-body>
+                    <ul fd-list>
+                        @for (option of list1; track option) {
+                            <li fd-list-item>
+                                <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
+                            </li>
+                        }
+                    </ul>
+                </fd-popover-body>
+            }
         </fd-popover>
     </fd-micro-process-flow-item>
     <fd-micro-process-flow-item state="critical">
@@ -75,13 +91,17 @@
                     glyph="log"
                 ></fd-micro-process-flow-icon>
             </fd-popover-control>
-            <fd-popover-body *ngIf="list1 && list1.length">
-                <ul fd-list>
-                    <li fd-list-item *ngFor="let option of list1">
-                        <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
-                    </li>
-                </ul>
-            </fd-popover-body>
+            @if (list1 && list1.length) {
+                <fd-popover-body>
+                    <ul fd-list>
+                        @for (option of list1; track option) {
+                            <li fd-list-item>
+                                <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
+                            </li>
+                        }
+                    </ul>
+                </fd-popover-body>
+            }
         </fd-popover>
     </fd-micro-process-flow-item>
 </fd-micro-process-flow>

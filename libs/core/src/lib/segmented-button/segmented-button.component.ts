@@ -44,7 +44,7 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
 @Component({
     selector: 'fd-segmented-button',
     template: `<ng-content></ng-content>`,
-    styleUrls: ['./segmented-button.component.scss'],
+    styleUrl: './segmented-button.component.scss',
     host: {
         role: 'listbox',
         '[class.fd-segmented-button]': 'true',

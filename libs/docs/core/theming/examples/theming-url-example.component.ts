@@ -1,4 +1,4 @@
-import { JsonPipe, NgFor } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -18,13 +18,16 @@ import { CompleteThemeDefinition, THEMING_CONFIG_TOKEN, ThemingService } from '@
         }
     ],
     standalone: true,
-    imports: [NgFor, ButtonComponent, FormLabelComponent, JsonPipe]
+    imports: [ButtonComponent, FormLabelComponent, JsonPipe]
 })
 export class ThemingUrlExampleComponent {
     themes = this._themingService.getThemes();
     themeFromUrl: CompleteThemeDefinition | null;
 
-    constructor(private _themingService: ThemingService, private _router: Router) {
+    constructor(
+        private _themingService: ThemingService,
+        private _router: Router
+    ) {
         this._themingService.init();
 
         this._themingService.currentTheme.subscribe((theme) => {

@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -24,7 +23,7 @@ import { ThumbnailSettingsItem } from '../../../models/settings.model';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, SkeletonComponent, IconComponent, AvatarComponent]
+    imports: [SkeletonComponent, IconComponent, AvatarComponent]
 })
 export class SettingsGeneratorSidebarIconComponent {
     /** Thumbnail configuration. */

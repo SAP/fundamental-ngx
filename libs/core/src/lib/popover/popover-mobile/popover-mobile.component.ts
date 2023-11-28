@@ -15,19 +15,19 @@ import {
 import { Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgTemplateOutlet } from '@angular/common';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import {
     MOBILE_MODE_CONFIG,
     MobileModeBase,
     MobileModeConfigToken,
     MobileModeControl
 } from '@fundamental-ngx/core/mobile-mode';
-import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import { POPOVER_COMPONENT, PopoverInterface } from '../popover.interface';
-import { PopoverChildContent } from '../popover-child-content.interface';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { TitleComponent } from '@fundamental-ngx/core/title';
+import { PopoverChildContent } from '../popover-child-content.interface';
+import { POPOVER_COMPONENT, PopoverInterface } from '../popover.interface';
 
 let mobilePopoverUniqueId = 0;
 
@@ -37,7 +37,7 @@ let mobilePopoverUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [DialogModule, TitleComponent, NgIf, CdkScrollable, ScrollbarDirective, NgTemplateOutlet]
+    imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, NgTemplateOutlet]
 })
 export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> implements OnInit, OnDestroy {
     /** @hidden */

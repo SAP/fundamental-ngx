@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -60,7 +60,7 @@ export const handleTimeoutReference = (): void => {
 @Component({
     selector: 'fd-wizard',
     templateUrl: './wizard.component.html',
-    styleUrls: ['./wizard.component.scss'],
+    styleUrl: './wizard.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
@@ -75,7 +75,7 @@ export const handleTimeoutReference = (): void => {
         '[attr.aria-label]': 'ariaLabel || _defaultAriaLabel()'
     },
     standalone: true,
-    imports: [NgIf, ScrollSpyDirective, CdkScrollable, ScrollbarDirective, NgFor, NgTemplateOutlet]
+    imports: [ScrollSpyDirective, CdkScrollable, ScrollbarDirective, NgTemplateOutlet]
 })
 export class WizardComponent implements AfterViewInit, OnDestroy {
     /**

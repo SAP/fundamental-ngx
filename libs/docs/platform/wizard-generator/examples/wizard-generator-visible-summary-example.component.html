@@ -4,5 +4,6 @@
     [displaySummaryStep]="true"
     (wizardFinished)="wizardFinished($event)"
 ></fdp-wizard-generator>
-
-<p *ngIf="wizardValue">Wizard value: {{ wizardValue | json }}</p>
+@if (wizardValue) {
+    <p>Wizard value: {{ wizardValue | json }}</p>
+}

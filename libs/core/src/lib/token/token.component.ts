@@ -1,5 +1,5 @@
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { NgIf } from '@angular/common';
+
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -30,7 +30,7 @@ import { Subscription, fromEvent } from 'rxjs';
 @Component({
     selector: 'fd-token',
     templateUrl: './token.component.html',
-    styleUrls: ['./token.component.scss'],
+    styleUrl: './token.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders()],
@@ -38,7 +38,7 @@ import { Subscription, fromEvent } from 'rxjs';
         '[style.max-width.%]': '100'
     },
     standalone: true,
-    imports: [NgIf, FdTranslatePipe]
+    imports: [FdTranslatePipe]
 })
 export class TokenComponent implements AfterViewInit, OnDestroy {
     /** Whether the token is disabled. */

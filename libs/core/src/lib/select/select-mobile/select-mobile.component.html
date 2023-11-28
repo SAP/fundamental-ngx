@@ -1,35 +1,32 @@
 <ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
     <fd-dialog tabindex="-1" [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
-            <h1 id="fd-dialog-header" *ngIf="mobileConfig.title" fd-title>{{ mobileConfig.title }}</h1>
-            <button
-                role="button"
-                *ngIf="mobileConfig.hasCloseButton"
-                aria-label="close"
-                fd-dialog-close-button
-                [mobile]="true"
-                (click)="_cancel()"
-            ></button>
+            @if (mobileConfig.title) {
+                <h1 id="fd-dialog-header" fd-title>{{ mobileConfig.title }}</h1>
+            }
+            @if (mobileConfig.hasCloseButton) {
+                <button
+                    role="button"
+                    aria-label="close"
+                    fd-dialog-close-button
+                    [mobile]="true"
+                    (click)="_cancel()"
+                ></button>
+            }
         </fd-dialog-header>
-
         <fd-dialog-body>
-            <ng-container *ngTemplateOutlet="childContent"></ng-container>
+            <ng-template [ngTemplateOutlet]="childContent"></ng-template>
         </fd-dialog-body>
-
-        <fd-dialog-footer *ngIf="mobileConfig.approveButtonText || mobileConfig.cancelButtonText">
-            <fd-button-bar
-                *ngIf="mobileConfig?.approveButtonText"
-                fdType="emphasized"
-                [label]="mobileConfig.approveButtonText!"
-                (click)="_approve()"
-            >
-            </fd-button-bar>
-            <fd-button-bar
-                *ngIf="mobileConfig?.cancelButtonText"
-                [label]="mobileConfig.cancelButtonText!"
-                (click)="_cancel()"
-            >
-            </fd-button-bar>
-        </fd-dialog-footer>
+        @if (mobileConfig.approveButtonText || mobileConfig.cancelButtonText) {
+            <fd-dialog-footer>
+                @if (mobileConfig.approveButtonText) {
+                    <fd-button-bar fdType="emphasized" [label]="mobileConfig.approveButtonText!" (click)="_approve()">
+                    </fd-button-bar>
+                }
+                @if (mobileConfig.cancelButtonText) {
+                    <fd-button-bar [label]="mobileConfig.cancelButtonText!" (click)="_cancel()"> </fd-button-bar>
+                }
+            </fd-dialog-footer>
+        }
     </fd-dialog>
 </ng-template>

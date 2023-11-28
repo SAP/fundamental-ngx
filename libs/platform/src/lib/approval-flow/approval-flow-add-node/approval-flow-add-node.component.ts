@@ -13,7 +13,7 @@ import { FdDate } from '@fundamental-ngx/core/datetime';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
@@ -94,7 +94,6 @@ export enum APPROVAL_FLOW_APPROVER_TYPES {
         ContentDensityDirective,
         DialogHeaderComponent,
         TemplateDirective,
-        NgIf,
         IconComponent,
         SearchFieldComponent,
         CdkScrollable,
@@ -103,9 +102,6 @@ export enum APPROVAL_FLOW_APPROVER_TYPES {
         FormItemComponent,
         FormLabelComponent,
         SelectComponent,
-        NgFor,
-        NgSwitch,
-        NgSwitchCase,
         OptionComponent,
         MultiInputComponent,
         FormsModule,

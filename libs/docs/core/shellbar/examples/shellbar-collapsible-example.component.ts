@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -39,7 +38,6 @@ import {
         PlatformSearchFieldModule,
         ContentDensityDirective,
         ShellbarActionsComponent,
-        NgFor,
         ShellbarActionComponent,
         ProductSwitchModule
     ]

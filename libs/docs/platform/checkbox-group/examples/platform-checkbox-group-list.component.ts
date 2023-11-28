@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -15,8 +14,7 @@ import { CheckboxGroupComponent, FdpFormGroupModule } from '@fundamental-ngx/pla
         ReactiveFormsModule,
         CheckboxGroupComponent,
         PlatformButtonModule,
-        ContentDensityDirective,
-        NgIf
+        ContentDensityDirective
     ]
 })
 export class PlatformCheckboxGroupListComponent {

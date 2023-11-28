@@ -1,11 +1,10 @@
-<ng-template [ngIf]="renderShowMoreButton && showMorePosition === 'left'">
+@if (renderShowMoreButton && showMorePosition === 'left') {
     <ng-template [ngTemplateOutlet]="showMore"></ng-template>
-</ng-template>
-
+}
 <div class="fd-overflow-layout__items-container" #layoutContainer>
     <div class="fd-overflow-layout__items-wrapper">
         <div class="fd-overflow-layout__items" #itemsWrapper>
-            <ng-container *ngFor="let item of _allItems; trackBy: _itemsTrackFn">
+            @for (item of _allItems; track item.templateRef) {
                 <div
                     fdOverflowLayoutItemContainer
                     [first]="item.first"
@@ -26,15 +25,13 @@
                         ></ng-template>
                     </ng-container>
                 </div>
-            </ng-container>
+            }
         </div>
     </div>
 </div>
-
-<ng-template [ngIf]="renderShowMoreButton && showMorePosition === 'right'">
+@if (renderShowMoreButton && showMorePosition === 'right') {
     <ng-template [ngTemplateOutlet]="showMore"></ng-template>
-</ng-template>
-
+}
 <ng-template #showMore>
     <div class="fd-overflow-layout__more" [style.display]="_showMore ? 'block' : 'none'" #showMoreContainer>
         <ng-template #defaultShowMore>
@@ -47,12 +44,12 @@
             >
                 <fd-popover-control>
                     <button fd-button [fdMenu]="true" fdType="transparent">
-                        {{ 'coreOverflowLayout.moreItemsButton' | fdTranslate : { count: _hiddenItems.length } }}
+                        {{ 'coreOverflowLayout.moreItemsButton' | fdTranslate: { count: _hiddenItems.length } }}
                     </button>
                 </fd-popover-control>
                 <fd-popover-body>
                     <div fdOverflowLayoutPopoverContent [items]="_hiddenItems">
-                        <ng-container *ngFor="let item of _hiddenItems">
+                        @for (item of _hiddenItems; track item) {
                             <ng-template
                                 [ngTemplateOutlet]="item.templateRef"
                                 [ngTemplateOutletContext]="{
@@ -64,7 +61,7 @@
                                     injector: item.injector
                                 }"
                             ></ng-template>
-                        </ng-container>
+                        }
                     </div>
                 </fd-popover-body>
             </fd-popover>

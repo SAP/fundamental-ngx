@@ -55,7 +55,7 @@ import { MULTI_COMBOBOX_COMPONENT } from './multi-combobox.token';
 
 import { MultiComboboxDataSourceParser } from './data-source/multi-combobox-data-source-parser';
 
-import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
@@ -73,7 +73,7 @@ export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory
 @Component({
     selector: 'fd-multi-combobox',
     templateUrl: './multi-combobox.component.html',
-    styleUrls: ['./multi-combobox.component.scss'],
+    styleUrl: './multi-combobox.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     hostDirectives: [
@@ -105,7 +105,6 @@ export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory
     ],
     standalone: true,
     imports: [
-        NgIf,
         NgTemplateOutlet,
         PopoverComponent,
         PopoverControlComponent,
@@ -113,7 +112,6 @@ export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory
         FormInputMessageGroupComponent,
         InputGroupComponent,
         TokenizerComponent,
-        NgFor,
         TokenComponent,
         FormsModule,
         AutoCompleteDirective,

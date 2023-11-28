@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormControlComponent, FormItemComponent } from '@fundamental-ngx/core/form';
@@ -15,7 +14,6 @@ import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fu
         TokenComponent,
         TokenizerComponent,
         TokenizerInputDirective,
-        NgFor,
         FormControlComponent
     ]
 })

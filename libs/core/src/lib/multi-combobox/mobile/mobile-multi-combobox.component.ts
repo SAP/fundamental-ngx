@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { Component, ElementRef, Inject, OnDestroy, OnInit, Optional, TemplateRef, ViewChild } from '@angular/core';
 import { SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
@@ -22,11 +22,10 @@ import { MULTI_COMBOBOX_COMPONENT } from '../multi-combobox.token';
 @Component({
     selector: 'fd-mobile-multi-combobox',
     templateUrl: './mobile-multi-combobox.component.html',
-    styleUrls: ['./mobile-multi-combobox.component.scss'],
+    styleUrl: './mobile-multi-combobox.component.scss',
     standalone: true,
     imports: [
         DialogModule,
-        NgIf,
         TitleComponent,
         TemplateDirective,
         BarMiddleDirective,

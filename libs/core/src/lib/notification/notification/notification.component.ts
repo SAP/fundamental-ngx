@@ -36,7 +36,7 @@ import { NotificationRef } from '../notification-utils/notification-ref';
         <ng-content></ng-content>
         <ng-container #vc></ng-container>
     `,
-    styleUrls: ['./notification.component.scss'],
+    styleUrl: './notification.component.scss',
     encapsulation: ViewEncapsulation.None,
     host: {
         '[attr.aria-labelledby]': 'ariaLabelledBy',

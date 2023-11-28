@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
@@ -76,7 +76,6 @@ const INITIAL_DIRECTION = SortDirection.ASC;
         ListItemComponent,
         RadioButtonComponent,
         FormsModule,
-        NgFor,
         DialogFooterComponent,
         ButtonBarComponent,
         FdTranslatePipe
@@ -108,7 +107,10 @@ export class GroupingComponent implements Resettable {
     private _initialGrouping: SettingsGroupDialogResultData;
 
     /** @hidden */
-    constructor(public dialogRef: DialogRef<SettingsGroupDialogData>, private readonly _table: Table) {
+    constructor(
+        public dialogRef: DialogRef<SettingsGroupDialogData>,
+        private readonly _table: Table
+    ) {
         const data = this.dialogRef.data;
 
         this.columns = data.columns || [];

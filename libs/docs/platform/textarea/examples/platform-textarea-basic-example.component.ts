@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -11,7 +10,6 @@ import { FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/pla
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     imports: [
-        NgIf,
         FdpFormGroupModule,
         FormsModule,
         ReactiveFormsModule,

@@ -8,7 +8,7 @@ export type WizardContentBackground = 'solid' | 'list' | 'transparent';
     selector: 'fd-wizard-content',
     templateUrl: './wizard-content.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    styleUrls: ['./wizard-content.component.scss'],
+    styleUrl: './wizard-content.component.scss',
     standalone: true
 })
 export class WizardContentComponent {

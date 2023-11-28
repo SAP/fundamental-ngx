@@ -1,13 +1,14 @@
 <div fdkFocusableGrid shortRowFocus="first">
-    <div *ngFor="let list of [].constructor(5); let rowIndex = index" fdkFocusableList navigationDirection="grid">
-        <ng-container *ngIf="rowIndex % 2 === 0">
-            <span fdkFocusableItem> Content {{ rowIndex + 1 }} - 1 </span>
-        </ng-container>
-
-        <ng-container *ngIf="rowIndex % 2 !== 0">
-            <span *ngFor="let item of [].constructor(3); let columnIndex = index" fdkFocusableItem>
-                Content {{ rowIndex + 1 }} - {{ columnIndex + 1 }}
-            </span>
-        </ng-container>
-    </div>
+    @for (list of [].constructor(5); track list; let rowIndex = $index) {
+        <div fdkFocusableList navigationDirection="grid">
+            @if (rowIndex % 2 === 0) {
+                <span fdkFocusableItem> Content {{ rowIndex + 1 }} - 1 </span>
+            }
+            @if (rowIndex % 2 !== 0) {
+                @for (item of [].constructor(3); track item; let columnIndex = $index) {
+                    <span fdkFocusableItem> Content {{ rowIndex + 1 }} - {{ columnIndex + 1 }} </span>
+                }
+            }
+        </div>
+    }
 </div>

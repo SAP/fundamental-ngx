@@ -14,7 +14,7 @@ import {
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
-import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
@@ -29,13 +29,11 @@ import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        NgIf,
         PopoverComponent,
         PopoverControlComponent,
         PopoverBodyComponent,
         IconBarDndListDirective,
         NgTemplateOutlet,
-        NgFor,
         IconBarDndItemDirective,
         NgClass,
         ButtonComponent,

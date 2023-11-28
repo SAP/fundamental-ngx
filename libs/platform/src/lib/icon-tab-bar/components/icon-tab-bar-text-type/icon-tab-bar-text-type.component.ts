@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -42,11 +42,9 @@ type TabItem = ElementRef<HTMLElement> | TextTypePopoverComponent;
         IconBarDndContainerDirective,
         OverflowListDirective,
         IconBarDndListDirective,
-        NgFor,
         OverflowListItemDirective,
         IconBarDndItemDirective,
         NgClass,
-        NgIf,
         TextTypePopoverComponent,
         ButtonComponent,
         IconComponent

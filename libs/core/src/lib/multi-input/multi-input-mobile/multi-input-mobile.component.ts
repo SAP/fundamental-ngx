@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -30,13 +30,12 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.inter
 @Component({
     selector: 'fd-multi-input-mobile',
     templateUrl: './multi-input-mobile.component.html',
-    styleUrls: ['./multi-input-mobile.component.scss'],
+    styleUrl: './multi-input-mobile.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     imports: [
         DialogModule,
-        NgIf,
         TitleComponent,
         TemplateDirective,
         BarModule,

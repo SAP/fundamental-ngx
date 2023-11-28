@@ -38,7 +38,7 @@
 ></fdp-object-status>
 <br />
 <br />
-<ng-container *ngFor="let item of items">
+@for (item of items; track item) {
     <fdp-object-status
         [indicationColor]="item"
         [label]="'Indication Color' + item"
@@ -46,4 +46,4 @@
         (objectStatusClick)="showAlert(item)"
         [ariaLabel]="'Object status Indication Color' + item + 'Clickable'"
     ></fdp-object-status>
-</ng-container>
+}

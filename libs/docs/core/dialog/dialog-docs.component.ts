@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -111,8 +111,7 @@ const popoverDialogTs = 'dialog-inner-popover/dialog-inner-popover.component.ts'
         BarModule,
         DialogFullScreenExampleComponent,
         AsyncPipe,
-        JsonPipe,
-        NgIf
+        JsonPipe
     ]
 })
 export class DialogDocsComponent {
@@ -374,7 +373,10 @@ export class DialogDocsComponent {
         }
     ];
 
-    constructor(private _schemaFactory: SchemaFactoryService, private _dialogService: DialogService) {
+    constructor(
+        private _schemaFactory: SchemaFactoryService,
+        private _dialogService: DialogService
+    ) {
         this.schema = this._schemaFactory.getComponent('dialog');
     }
 

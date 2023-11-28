@@ -12,39 +12,37 @@ import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 @Component({
     selector: 'fdp-test-date-picker',
     template: `
-        <fdp-form-group #ffg [formGroup]="datePickerForm" [object]="datePickerFormData">
-            <fdp-form-field
-                #ffl1
-                id="birthday"
-                zone="zLeft"
-                rank="1"
-                required="true"
-                placeholder="Enter your birthday"
-                label="Birth Date:"
-            >
-                <fdp-date-picker name="birthday" type="single" [allowNull]="false" [formControl]="ffl1.formControl">
-                </fdp-date-picker>
-            </fdp-form-field>
-
-            <fdp-form-field #ffl2 id="journeydate" zone="zRight" rank="3" label="Journey Date:" required="true">
-                <fdp-date-picker
-                    name="journeydate"
-                    type="range"
-                    [allowNull]="false"
-                    fdCompact
-                    placeholder="When are you travelling?"
-                    formControlName="journeydate"
-                >
-                </fdp-date-picker>
-            </fdp-form-field>
-
-            <ng-template #i18n let-errors>
-                <ng-container *ngIf="errors.required">
-                    <span>Value is required</span>
-                </ng-container>
-            </ng-template>
-        </fdp-form-group>
-    `
+<fdp-form-group #ffg [formGroup]="datePickerForm" [object]="datePickerFormData">
+  <fdp-form-field
+    #ffl1
+    id="birthday"
+    zone="zLeft"
+    rank="1"
+    required="true"
+    placeholder="Enter your birthday"
+    label="Birth Date:"
+    >
+    <fdp-date-picker name="birthday" type="single" [allowNull]="false" [formControl]="ffl1.formControl">
+    </fdp-date-picker>
+  </fdp-form-field>
+  <fdp-form-field #ffl2 id="journeydate" zone="zRight" rank="3" label="Journey Date:" required="true">
+    <fdp-date-picker
+      name="journeydate"
+      type="range"
+      [allowNull]="false"
+      fdCompact
+      placeholder="When are you travelling?"
+      formControlName="journeydate"
+      >
+    </fdp-date-picker>
+  </fdp-form-field>
+  <ng-template #i18n let-errors>
+    @if (errors.required) {
+      <span>Value is required</span>
+    }
+  </ng-template>
+</fdp-form-group>
+`
 })
 class TestDatePickerComponent {
     @ViewChildren(PlatformDatePickerComponent)

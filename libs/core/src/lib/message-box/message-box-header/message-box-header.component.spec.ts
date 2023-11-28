@@ -33,11 +33,13 @@ class CustomHeaderTestComponent {
 
 @Component({
     template: `
-        <fd-message-box-header>
-            <fd-message-box-semantic-icon *ngIf="showProjectedIcon" glyph="account"></fd-message-box-semantic-icon>
-            <h1 fd-title>Default Title</h1>
-        </fd-message-box-header>
-    `
+<fd-message-box-header>
+  @if (showProjectedIcon) {
+    <fd-message-box-semantic-icon glyph="account"></fd-message-box-semantic-icon>
+  }
+  <h1 fd-title>Default Title</h1>
+</fd-message-box-header>
+`
 })
 class HeaderWithProjectedIconTestComponent {
     @ViewChild(MessageBoxHeaderComponent) messageBoxHeader: MessageBoxHeaderComponent;

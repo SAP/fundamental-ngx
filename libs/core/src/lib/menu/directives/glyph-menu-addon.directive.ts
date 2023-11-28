@@ -8,8 +8,7 @@ import { MenuComponent } from '../menu.component';
 import { FD_MENU_COMPONENT, TOGGLE_MENU_ITEM } from '../menu.tokens';
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: 'fd-menu-addon[glyph]',
+    selector: '[fdMenuAddonGlyph], [fd-menu-addon-glyph]',
     standalone: true
 })
 export class GlyphMenuAddonDirective implements OnDestroy {

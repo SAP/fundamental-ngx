@@ -1,19 +1,24 @@
 <div fd-popover-body-header>
     <div fd-bar barDesign="header">
-        <ng-container [ngSwitch]="align">
-            <div *ngSwitchCase="'left'" fd-bar-left>
-                <ng-container *ngTemplateOutlet="barElement"></ng-container>
-            </div>
-            <div *ngSwitchCase="'right'" fd-bar-right>
-                <ng-container *ngTemplateOutlet="barElement"></ng-container>
-            </div>
-            <div *ngSwitchDefault fd-bar-middle>
-                <ng-container *ngTemplateOutlet="barElement"></ng-container>
-            </div>
-        </ng-container>
+        @switch (align) {
+            @case ('left') {
+                <div fd-bar-left>
+                    <ng-template [ngTemplateOutlet]="barElement"></ng-template>
+                </div>
+            }
+            @case ('right') {
+                <div fd-bar-right>
+                    <ng-template [ngTemplateOutlet]="barElement"></ng-template>
+                </div>
+            }
+            @default {
+                <div fd-bar-middle>
+                    <ng-template [ngTemplateOutlet]="barElement"></ng-template>
+                </div>
+            }
+        }
     </div>
 </div>
-
 <ng-template #barElement>
     <fd-bar-element>
         <ng-content></ng-content>

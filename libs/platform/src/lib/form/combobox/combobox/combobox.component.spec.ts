@@ -1,5 +1,5 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
+
 import { Component, ViewChild } from '@angular/core';
 import {
     ComponentFixture,
@@ -23,6 +23,7 @@ import { ContentDensityMode, ContentDensityModule } from '@fundamental-ngx/core/
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { PlatformComboboxModule } from '../combobox.module';
 import { ComboboxComponent, ComboboxSelectionChangeEvent } from './combobox.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'fdp-combobox-test',

@@ -1,5 +1,5 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { NgIf } from '@angular/common';
+
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -20,11 +20,11 @@ type TileSize = null | 's';
 @Component({
     selector: 'fd-tile',
     templateUrl: './tile.component.html',
-    styleUrls: ['./tile.component.scss'],
+    styleUrl: './tile.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf]
+    imports: []
 })
 export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges {
     /** user's custom classes */

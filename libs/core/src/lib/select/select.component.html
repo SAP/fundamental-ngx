@@ -1,7 +1,6 @@
-<ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
-
+<ng-template [ngTemplateOutlet]="mobile ? mobileTemplate : desktopTemplate"></ng-template>
 <ng-template #desktopTemplate>
-    <!-- @deprecated leaving class fd-popover-custom-list to support backwards compatibility-->
+    <!-- &#64;deprecated leaving class fd-popover-custom-list to support backwards compatibility-->
     <fd-popover
         additionalBodyClass="fd-select-dropdown fd-popover-custom-list"
         [isOpen]="_isOpen"
@@ -17,16 +16,14 @@
         (isOpenChange)="_popoverOpenChangeHandle($event)"
     >
         <fd-popover-control>
-            <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="selectInputControlTemplate"></ng-template>
         </fd-popover-control>
-
-        <!-- @deprecated leaving class fd-popover-custom-select-body to support backwards compatibility-->
+        <!-- &#64;deprecated leaving class fd-popover-custom-select-body to support backwards compatibility-->
         <fd-popover-body class="fd-popover-custom-select-body">
-            <ng-container [ngTemplateOutlet]="selectOptionsListTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="selectOptionsListTemplate"></ng-template>
         </fd-popover-body>
     </fd-popover>
 </ng-template>
-
 <ng-template #selectInputControlTemplate>
     <div
         class="fd-select__control"
@@ -55,27 +52,26 @@
         (blur)="_onBlur()"
     >
         <div role="listitem" class="fd-select__text-content" [attr.aria-label]="triggerValue">
-            <ng-container
+            <ng-template
                 [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
                 [ngTemplateOutletContext]="{ $implicit: triggerValue, selected: selected }"
             >
-            </ng-container>
-
+            </ng-template>
             <ng-template #defaultSelectContent>
                 {{ triggerValue }}
             </ng-template>
         </div>
-        <span
-            class="fd-button fd-button--transparent fd-select__button"
-            [ngClass]="selectDropdownButtonClass"
-            [class.is-disabled]="disabled"
-            *ngIf="!readonly"
-        >
-            <fd-icon [ariaHidden]="true" [glyph]="glyph"></fd-icon>
-        </span>
+        @if (!readonly) {
+            <span
+                class="fd-button fd-button--transparent fd-select__button"
+                [ngClass]="selectDropdownButtonClass"
+                [class.is-disabled]="disabled"
+            >
+                <fd-icon [ariaHidden]="true" [glyph]="glyph"></fd-icon>
+            </span>
+        }
     </div>
 </ng-template>
-
 <ng-template #selectOptionsListTemplate>
     <ul
         #optionPanel
@@ -90,32 +86,25 @@
         [style.max-height]="maxHeight || calculatedMaxHeight + 'px'"
         [attr.tooltip]="triggerValue"
     >
-        <li
-            *ngIf="stateMessage"
-            [attr.aria-label]="stateMessage"
-            fd-list-message
-            tabindex="-1"
-            role="presentation"
-            [type]="state || 'default'"
-            [innerHtml]="stateMessage"
-        ></li>
-
-        <li
-            *ngIf="advancedStateMessage?.hasErrors && advancedStateMessage?.template"
-            fd-list-message
-            tabindex="-1"
-            role="presentation"
-            [type]="state || 'default'"
-        >
-            <ng-template [ngTemplateOutlet]="advancedStateMessage!.template!"></ng-template>
-        </li>
-
+        @if (stateMessage) {
+            <li
+                [attr.aria-label]="stateMessage"
+                fd-list-message
+                tabindex="-1"
+                role="presentation"
+                [type]="state || 'default'"
+                [innerHtml]="stateMessage"
+            ></li>
+        }
+        @if (advancedStateMessage?.hasErrors && advancedStateMessage?.template) {
+            <li fd-list-message tabindex="-1" role="presentation" [type]="state || 'default'">
+                <ng-template [ngTemplateOutlet]="advancedStateMessage!.template!"></ng-template>
+            </li>
+        }
         <ng-content></ng-content>
     </ul>
 </ng-template>
-
 <ng-template #mobileTemplate>
-    <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
-
+    <ng-template [ngTemplateOutlet]="selectInputControlTemplate"></ng-template>
     <div #dialogContainer></div>
 </ng-template>

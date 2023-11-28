@@ -22,7 +22,7 @@ import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { RangeSelector } from '@fundamental-ngx/cdk/utils';
 
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { FormGroupComponent } from '@fundamental-ngx/core/form';
 import {
     coerceArraySafe,
@@ -48,7 +48,7 @@ import { CheckboxComponent } from '../checkbox/checkbox.component';
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => CheckboxGroupComponent), multi: true }],
     standalone: true,
-    imports: [FormGroupComponent, NgIf, NgFor, NgTemplateOutlet, CheckboxComponent, FormsModule]
+    imports: [FormGroupComponent, NgTemplateOutlet, CheckboxComponent, FormsModule]
 })
 export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
     /**

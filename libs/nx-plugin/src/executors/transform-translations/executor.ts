@@ -25,7 +25,7 @@ export default async function runExecutor(options: TransformPropertiesExecutorSc
         });
         host.write(
             newFilePath,
-            format(
+            await format(
                 `
             /* eslint-disable */
             // Do not modify, it's automatically created. Modify ${
@@ -38,7 +38,7 @@ export default async function runExecutor(options: TransformPropertiesExecutorSc
         );
         host.write(
             newFileSpecPath,
-            format(
+            await format(
                 `
                 import translations from './${parsedPropertiesFilePath.name}';
                 import { translationTester } from "../utils/translation-tester";

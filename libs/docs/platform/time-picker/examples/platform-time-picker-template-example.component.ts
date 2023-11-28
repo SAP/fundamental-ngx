@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -17,7 +16,7 @@ import { FdpFormGroupModule, PlatformTimePickerModule } from '@fundamental-ngx/p
         provideDateTimeFormats()
     ],
     standalone: true,
-    imports: [FdpFormGroupModule, PlatformTimePickerModule, FormsModule, ContentDensityDirective, ButtonComponent, NgIf]
+    imports: [FdpFormGroupModule, PlatformTimePickerModule, FormsModule, ContentDensityDirective, ButtonComponent]
 })
 export class PlatformTimePickerTemplateExampleComponent {
     time24h: FdDate = new FdDate().setTime(18, 0, 0);

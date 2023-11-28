@@ -7,7 +7,7 @@ import { toastAnimation } from './constants/message-toast.animation';
 @Component({
     selector: 'fd-message-toast',
     template: `<ng-template cdkPortalOutlet></ng-template>`,
-    styleUrls: ['./message-toast.component.scss'],
+    styleUrl: './message-toast.component.scss',
     animations: [toastAnimation],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,

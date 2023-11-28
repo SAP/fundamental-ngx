@@ -17,7 +17,7 @@ export abstract class TitleToken {
         class: 'fd-title',
         '[class.fd-title--wrap]': 'wrap'
     },
-    styleUrls: ['./title.component.scss'],
+    styleUrl: './title.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: TitleToken, useExisting: TitleComponent }],

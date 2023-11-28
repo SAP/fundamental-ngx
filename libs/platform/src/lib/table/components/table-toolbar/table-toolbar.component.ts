@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
-import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
     ToolbarComponent,
     ToolbarItemDirective,
@@ -51,7 +51,6 @@ let tableToolbarTitleUniqueId = 0;
     standalone: true,
     imports: [
         ToolbarComponent,
-        NgIf,
         ToolbarItemDirective,
         ToolbarSeparatorComponent,
         NgTemplateOutlet,

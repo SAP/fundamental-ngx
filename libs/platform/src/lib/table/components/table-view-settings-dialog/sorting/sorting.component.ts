@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor, NgIf } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
@@ -77,8 +77,6 @@ const INITIAL_DIRECTION = SortDirection.ASC;
         ListItemComponent,
         RadioButtonComponent,
         FormsModule,
-        NgIf,
-        NgFor,
         DialogFooterComponent,
         ButtonBarComponent,
         FdTranslatePipe
@@ -112,7 +110,10 @@ export class SortingComponent implements Resettable {
     private _initialSorting: CollectionSort;
 
     /** @hidden */
-    constructor(public dialogRef: DialogRef<SettingsSortDialogData>, private _table: Table) {
+    constructor(
+        public dialogRef: DialogRef<SettingsSortDialogData>,
+        private _table: Table
+    ) {
         const data = this.dialogRef.data;
 
         this.columns = data.columns || [];

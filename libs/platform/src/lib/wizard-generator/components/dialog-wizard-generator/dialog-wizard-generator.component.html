@@ -16,81 +16,72 @@
             [contentHeight]="contentHeight"
             (statusChange)="stepStatusChanged($event.id, $event.status)"
         ></fdp-wizard-body>
-        <div
-            fd-bar
-            barDesign="floating-footer"
-            [class.fd-bar--responsive-paddings]="responsivePaddings"
-            *ngIf="wizardCreated"
-        >
-            <div fd-bar-right>
-                <ng-container *ngIf="!isFirstStep">
-                    <ng-template #defaultGoBackButtonTemplate>
-                        <fdp-button
-                            class="fd-bar__element"
-                            [fdContentDensity]="_navigationButtonLabels.goBack.contentDensity"
-                            [buttonType]="_navigationButtonLabels.goBack.type"
-                            [label]="_navigationButtonLabels.goBack.label"
-                            (click)="goBack()"
-                        ></fdp-button>
-                    </ng-template>
-                    <ng-template
-                        [ngTemplateOutlet]="goBackButtonTemplate || defaultGoBackButtonTemplate"
-                        [ngTemplateOutletContext]="{ goBack: _goBackFn }"
-                    ></ng-template>
-                </ng-container>
-                <ng-container *ngIf="!isLastStep">
-                    <ng-template #defaultGoNextButtonTemplate>
-                        <fdp-button
-                            class="fd-bar__element"
-                            [fdContentDensity]="_navigationButtonLabels.goNext.contentDensity"
-                            [buttonType]="_navigationButtonLabels.goNext.type"
-                            [label]="_navigationButtonLabels.goNext.label"
-                            (click)="goNext()"
-                        ></fdp-button>
-                    </ng-template>
-                    <ng-template #defaultReviewButtonTemplate>
-                        <fdp-button
-                            class="fd-bar__element"
-                            [fdContentDensity]="_navigationButtonLabels.review.contentDensity"
-                            [buttonType]="_navigationButtonLabels.review.type"
-                            [label]="_navigationButtonLabels.review.label"
-                            (click)="goNext()"
-                        ></fdp-button>
-                    </ng-template>
-                    <ng-template
-                        [ngIf]="
+        @if (wizardCreated) {
+            <div fd-bar barDesign="floating-footer" [class.fd-bar--responsive-paddings]="responsivePaddings">
+                <div fd-bar-right>
+                    @if (!isFirstStep) {
+                        <ng-template #defaultGoBackButtonTemplate>
+                            <fdp-button
+                                class="fd-bar__element"
+                                [fdContentDensity]="_navigationButtonLabels.goBack.contentDensity"
+                                [buttonType]="_navigationButtonLabels.goBack.type"
+                                [label]="_navigationButtonLabels.goBack.label"
+                                (click)="goBack()"
+                            ></fdp-button>
+                        </ng-template>
+                        <ng-template
+                            [ngTemplateOutlet]="goBackButtonTemplate || defaultGoBackButtonTemplate"
+                            [ngTemplateOutletContext]="{ goBack: _goBackFn }"
+                        ></ng-template>
+                    }
+                    @if (!isLastStep) {
+                        <ng-template #defaultGoNextButtonTemplate>
+                            <fdp-button
+                                class="fd-bar__element"
+                                [fdContentDensity]="_navigationButtonLabels.goNext.contentDensity"
+                                [buttonType]="_navigationButtonLabels.goNext.type"
+                                [label]="_navigationButtonLabels.goNext.label"
+                                (click)="goNext()"
+                            ></fdp-button>
+                        </ng-template>
+                        <ng-template #defaultReviewButtonTemplate>
+                            <fdp-button
+                                class="fd-bar__element"
+                                [fdContentDensity]="_navigationButtonLabels.review.contentDensity"
+                                [buttonType]="_navigationButtonLabels.review.type"
+                                [label]="_navigationButtonLabels.review.label"
+                                (click)="goNext()"
+                            ></fdp-button>
+                        </ng-template>
+                        @if (
                             (isBranchingStep && (!isCurrentStepCompleted || _stepsOrderChanged)) || !isNextStepSummary
-                        "
-                        [ngIfElse]="reviewButton"
-                    >
+                        ) {
+                            <ng-template
+                                [ngTemplateOutlet]="goNextButtonTemplate || defaultGoNextButtonTemplate"
+                                [ngTemplateOutletContext]="{ goNext: _goNextFn }"
+                            ></ng-template>
+                        } @else {
+                            <ng-template
+                                [ngTemplateOutlet]="reviewButtonTemplate || defaultReviewButtonTemplate"
+                                [ngTemplateOutletContext]="{ goNext: _goNextFn }"
+                            ></ng-template>
+                        }
+                    }
+                    @if (isLastStep) {
+                        <ng-template #defaultFinishButtonTemplate>
+                            <fdp-button
+                                class="fd-bar__element"
+                                [fdContentDensity]="_navigationButtonLabels.finish.contentDensity"
+                                [buttonType]="_navigationButtonLabels.finish.type"
+                                [label]="_navigationButtonLabels.finish.label"
+                                (click)="finish()"
+                            ></fdp-button>
+                        </ng-template>
                         <ng-template
-                            [ngTemplateOutlet]="goNextButtonTemplate || defaultGoNextButtonTemplate"
-                            [ngTemplateOutletContext]="{ goNext: _goNextFn }"
+                            [ngTemplateOutlet]="finishButtonTemplate || defaultFinishButtonTemplate"
+                            [ngTemplateOutletContext]="{ finish: _finishFn }"
                         ></ng-template>
-                    </ng-template>
-                    <ng-template #reviewButton>
-                        <ng-template
-                            [ngTemplateOutlet]="reviewButtonTemplate || defaultReviewButtonTemplate"
-                            [ngTemplateOutletContext]="{ goNext: _goNextFn }"
-                        ></ng-template>
-                    </ng-template>
-                </ng-container>
-                <ng-container *ngIf="isLastStep">
-                    <ng-template #defaultFinishButtonTemplate>
-                        <fdp-button
-                            class="fd-bar__element"
-                            [fdContentDensity]="_navigationButtonLabels.finish.contentDensity"
-                            [buttonType]="_navigationButtonLabels.finish.type"
-                            [label]="_navigationButtonLabels.finish.label"
-                            (click)="finish()"
-                        ></fdp-button>
-                    </ng-template>
-                    <ng-template
-                        [ngTemplateOutlet]="finishButtonTemplate || defaultFinishButtonTemplate"
-                        [ngTemplateOutletContext]="{ finish: _finishFn }"
-                    ></ng-template>
-                </ng-container>
-                <ng-container>
+                    }
                     <ng-template #defaultCancelButtonTemplate>
                         <fdp-button
                             class="fd-bar__element"
@@ -104,12 +95,11 @@
                         [ngTemplateOutlet]="cancelButtonTemplate || defaultCancelButtonTemplate"
                         [ngTemplateOutletContext]="{ cancel: _cancelFn }"
                     ></ng-template>
-                </ng-container>
+                </div>
             </div>
-        </div>
+        }
     </fd-dialog-body>
 </fd-dialog>
-
 <ng-template
     [fdMessageBoxTemplate]
     let-messageBox

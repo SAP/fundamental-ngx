@@ -1,22 +1,36 @@
-<ng-container *ngIf="mobile; then headerTmpl; else avatarContent"></ng-container>
+@if (mobile) {
+    <div class="fd-feed-list__wrapper">
+        <div class="fd-feed-list__wrapper fd-feed-list__wrapper--header">
+            <ng-template [ngTemplateOutlet]="avatarContent"></ng-template>
+            <div>
+                <ng-template [ngTemplateOutlet]="author"></ng-template>
+                <ng-template [ngTemplateOutlet]="footerContent"></ng-template>
+            </div>
+        </div>
+        <ng-template [ngTemplateOutlet]="actionContent"></ng-template>
+    </div>
+} @else {
+    <ng-content select="fd-feed-list-avatar"></ng-content>
+}
 <div class="fd-feed-list__content">
-    <ng-container *ngIf="!mobile">
-        <ng-container *ngTemplateOutlet="actionContent"></ng-container>
-    </ng-container>
+    @if (!mobile) {
+        <ng-template [ngTemplateOutlet]="actionContent"></ng-template>
+    }
     <p class="fd-feed-list__text">
-        <ng-container *ngIf="!isRichText">
-            <ng-container *ngTemplateOutlet="feedContent; context: { $implicit: author }"></ng-container>
-        </ng-container>
-        <ng-container *ngIf="isRichText">
-            <ng-container *ngTemplateOutlet="author"></ng-container>
+        @if (!isRichText) {
+            <ng-template
+                [ngTemplateOutlet]="feedContent"
+                [ngTemplateOutletContext]="{ $implicit: author }"
+            ></ng-template>
+        } @else {
+            <ng-template [ngTemplateOutlet]="author"></ng-template>
             <fd-formatted-text [htmlText]="text"></fd-formatted-text>
-        </ng-container>
+        }
     </p>
-    <ng-container *ngIf="!mobile">
-        <ng-container *ngTemplateOutlet="footerContent"></ng-container>
-    </ng-container>
+    @if (!mobile) {
+        <ng-template [ngTemplateOutlet]="footerContent"></ng-template>
+    }
 </div>
-
 <ng-template #avatarContent>
     <ng-content select="fd-feed-list-avatar"></ng-content>
 </ng-template>
@@ -26,54 +40,37 @@
 <ng-template #footerContent>
     <ng-content select="fd-feed-list-footer"></ng-content>
 </ng-template>
-
 <ng-template #author>
     <span class="fd-feed-list__name">
-        <ng-container *ngIf="authorLink; else authorTitleTemplate">
+        @if (authorLink) {
             <a
                 target="_blank"
                 fd-link
                 [attr.title]="authorTitle"
-                [attr.href]="authorLink | safe : 'url'"
+                [attr.href]="authorLink | safe: 'url'"
                 [emphasized]="true"
             >
-                <ng-container *ngTemplateOutlet="authorTitleTemplate"></ng-container>
-            </a> </ng-container
-        >:
+                <ng-template [ngTemplateOutlet]="authorTitleTemplate"></ng-template>
+            </a>
+        } @else {
+            {{ authorTitle }}
+        }
+        :
     </span>
 </ng-template>
 <ng-template #authorTitleTemplate>
     {{ authorTitle }}
 </ng-template>
-
 <ng-template #feedContent let-param>
-    <ng-container *ngTemplateOutlet="param"></ng-container>
+    <ng-template [ngTemplateOutlet]="param"></ng-template>
     <span>
-        {{ isCollapsed ? (text | truncate : maxChars) : text }}
+        {{ isCollapsed ? (text | truncate: maxChars) : text }}
     </span>
-    <a
-        fd-link
-        class="fd-feed-list__link--more"
-        tabindex="0"
-        *ngIf="!isRichText && hasMore"
-        (click)="toggleTextView()"
-        >{{
+    @if (!isRichText && hasMore) {
+        <a fd-link class="fd-feed-list__link--more" tabindex="0" (click)="toggleTextView()">{{
             isCollapsed
-                ? ('coreFeedListItem.moreLabel' | fdTranslate : { count: (text ? text.length : 0) - maxChars })
+                ? ('coreFeedListItem.moreLabel' | fdTranslate: { count: (text ? text.length : 0) - maxChars })
                 : ('coreFeedListItem.lessLabel' | fdTranslate)
-        }}</a
-    >
-</ng-template>
-
-<ng-template #headerTmpl>
-    <div class="fd-feed-list__wrapper">
-        <div class="fd-feed-list__wrapper fd-feed-list__wrapper--header">
-            <ng-container *ngTemplateOutlet="avatarContent"></ng-container>
-            <div>
-                <ng-container *ngTemplateOutlet="author"></ng-container>
-                <ng-container *ngTemplateOutlet="footerContent"></ng-container>
-            </div>
-        </div>
-        <ng-container *ngTemplateOutlet="actionContent"></ng-container>
-    </div>
+        }}</a>
+    }
 </ng-template>

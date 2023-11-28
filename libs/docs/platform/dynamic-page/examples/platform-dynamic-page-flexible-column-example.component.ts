@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { NgIf } from '@angular/common';
+
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbComponent, BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -20,7 +20,6 @@ import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-
     standalone: true,
     imports: [
         ButtonComponent,
-        NgIf,
         FlexibleColumnLayoutModule,
         CdkScrollable,
         PlatformDynamicPageModule,

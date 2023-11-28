@@ -1,7 +1,7 @@
 import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 import { Component, ViewChild } from '@angular/core';
 
-import { NgForOf, NgIf, SlicePipe } from '@angular/common';
+import { SlicePipe } from '@angular/common';
 import { KeyUtil, RtlService, Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import {
@@ -48,8 +48,6 @@ import { AvatarGroupLegacyDataExampleService } from './avatar-group-legacy-data-
         AvatarGroupLegacyOverflowBodyDirective,
         AvatarGroupLegacyOverflowItemDirective,
         AvatarGroupLegacyFocusableAvatarDirective,
-        NgForOf,
-        NgIf,
         SlicePipe
     ]
 })

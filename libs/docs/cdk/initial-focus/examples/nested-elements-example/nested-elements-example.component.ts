@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
@@ -45,10 +44,8 @@ import { SliderComponent } from '@fundamental-ngx/core/slider';
     standalone: true,
     imports: [
         ButtonComponent,
-        NgIf,
         SelectModule,
         InitialFocusDirective,
-        NgFor,
         ComboboxComponent,
         DatePickerComponent,
         FormsModule,

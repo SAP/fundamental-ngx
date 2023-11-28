@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf } from '@angular/common';
+
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -47,7 +47,7 @@ export interface ApprovalFlowApproverDetailsDialogRefData {
 @Component({
     selector: 'fdp-approval-flow-approver-details',
     templateUrl: './approval-flow-approver-details.component.html',
-    styleUrls: ['../styles/approval-flow-dialog.scss'],
+    styleUrl: '../styles/approval-flow-dialog.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
@@ -58,7 +58,6 @@ export interface ApprovalFlowApproverDetailsDialogRefData {
         DialogComponent,
         DialogHeaderComponent,
         TemplateDirective,
-        NgIf,
         IconComponent,
         SearchFieldComponent,
         ContentDensityDirective,

@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -26,7 +26,6 @@ import { MessageBoxContent } from '../utils/message-box-content.class';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        NgIf,
         MessageBoxComponent,
         MessageBoxHeaderComponent,
         TitleComponent,
@@ -53,7 +52,10 @@ export class MessageBoxDefaultComponent implements OnInit, AfterViewInit {
     _footerVisible: boolean;
 
     /** @hidden */
-    constructor(public _messageBoxConfig: MessageBoxConfig, private _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(
+        public _messageBoxConfig: MessageBoxConfig,
+        private _changeDetectorRef: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {

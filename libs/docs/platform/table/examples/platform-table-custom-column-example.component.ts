@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 import { Observable, of } from 'rxjs';
 
-import { AsyncPipe, NgFor, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -53,7 +53,6 @@ import {
         PopoverBodyComponent,
         PlatformListModule,
         ListModule,
-        NgFor,
         NgTemplateOutlet,
         FdpCellDef,
         FdpTableCell,

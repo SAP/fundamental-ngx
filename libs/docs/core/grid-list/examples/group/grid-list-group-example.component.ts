@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -18,7 +17,7 @@ interface GridListItem {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [GridListModule, NgIf, NgFor, AvatarComponent, LinkComponent, RouterLink]
+    imports: [GridListModule, AvatarComponent, LinkComponent, RouterLink]
 })
 export class GridListGroupExampleComponent {
     group1: GridListItem[] = [

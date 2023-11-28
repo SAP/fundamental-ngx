@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -29,7 +28,7 @@ import { FD_SHELLBAR_ACTION_COMPONENT } from '../tokens';
         }
     ],
     standalone: true,
-    imports: [ButtonComponent, ContentDensityDirective, NgIf]
+    imports: [ButtonComponent, ContentDensityDirective]
 })
 export class ShellbarActionComponent {
     /** The glyph (icon) name */

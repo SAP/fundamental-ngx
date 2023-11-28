@@ -57,8 +57,12 @@
             {{ showLabels ? incrementLabel : '' }}
         </button>
     </div>
-    <fd-form-message *ngIf="stateMessage" [type]="state" [innerHTML]="stateMessage"></fd-form-message>
+    @if (stateMessage) {
+        <fd-form-message [type]="state" [innerHTML]="stateMessage"></fd-form-message>
+    }
 </fd-form-input-message-group>
-<span *ngIf="description" [id]="id + '__description'" class="fd-form-label fd-form-label--unit-description">
-    {{ description }}
-</span>
+@if (description) {
+    <span [id]="id + '__description'" class="fd-form-label fd-form-label--unit-description">
+        {{ description }}
+    </span>
+}

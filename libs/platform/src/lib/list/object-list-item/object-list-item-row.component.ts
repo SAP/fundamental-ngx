@@ -18,7 +18,7 @@ import { ObjectAttributeComponent } from '@fundamental-ngx/core/object-attribute
             <ng-content></ng-content>
         </div>
     </div>`,
-    styleUrls: ['./object-list-item.component.scss'],
+    styleUrl: './object-list-item.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

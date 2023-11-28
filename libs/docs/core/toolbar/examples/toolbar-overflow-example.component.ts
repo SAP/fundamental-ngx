@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
@@ -29,7 +28,6 @@ import {
         ToolbarItemDirective,
         DatetimePickerComponent,
         SelectModule,
-        NgFor,
         CheckboxComponent,
         SplitButtonModule,
         MenuModule,

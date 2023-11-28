@@ -5,7 +5,7 @@ import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/di
 import { isObject } from '@fundamental-ngx/platform/shared';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor, NgIf } from '@angular/common';
+
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     BarElementDirective,
@@ -66,7 +66,6 @@ export interface MoveToComponentDialogData {
         TemplateDirective,
         BarLeftDirective,
         BarElementDirective,
-        NgIf,
         TitleComponent,
         ButtonComponent,
         BarRightDirective,
@@ -76,7 +75,6 @@ export interface MoveToComponentDialogData {
         ListComponent,
         ListItemComponent,
         ListTitleDirective,
-        NgFor,
         ListLinkDirective,
         IconComponent,
         ListIconDirective,

@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -30,7 +29,6 @@ import { cloneDeep } from 'lodash-es';
         ReactiveFormsModule,
         CvaDirective,
         forwardRef(() => CustomCdkControlExampleComponent),
-        NgIf,
         DataSourceDirective,
         MultiComboboxComponent,
         ButtonComponent
@@ -53,13 +51,15 @@ export class FormsDefaultExampleComponent {
 @Component({
     selector: 'fdk-custom-control-example',
     template: `
-        <ng-container [formGroup]="form" *ngFor="let option of _options">
-            <fd-checkbox
-                [formControlName]="option"
-                [state]="cvaControl.cvaDirective?.state || 'default'"
-                label="option"
-            ></fd-checkbox>
-        </ng-container>
+        @for (option of _options; track option) {
+            <ng-container [formGroup]="form">
+                <fd-checkbox
+                    [formControlName]="option"
+                    [state]="cvaControl.cvaDirective?.state || 'default'"
+                    label="option"
+                ></fd-checkbox>
+            </ng-container>
+        }
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     hostDirectives: [
@@ -73,7 +73,7 @@ export class FormsDefaultExampleComponent {
         { provide: FD_FORM_FIELD_CONTROL, useExisting: CustomCdkControlExampleComponent, multi: true }
     ],
     standalone: true,
-    imports: [NgFor, FormsModule, ReactiveFormsModule, CheckboxComponent]
+    imports: [FormsModule, ReactiveFormsModule, CheckboxComponent]
 })
 export class CustomCdkControlExampleComponent {
     @Input()

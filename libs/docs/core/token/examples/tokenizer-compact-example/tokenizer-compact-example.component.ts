@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -17,7 +16,6 @@ import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fu
         TokenizerComponent,
         TokenizerInputDirective,
         ContentDensityDirective,
-        NgFor,
         FormControlComponent
     ]
 })

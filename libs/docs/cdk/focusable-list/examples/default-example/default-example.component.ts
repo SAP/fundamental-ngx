@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
     FocusableItemDirective,
@@ -35,7 +34,7 @@ import {
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FocusableListDirective, NgFor, FocusableItemDirective]
+    imports: [FocusableListDirective, FocusableItemDirective]
 })
 export class DefaultExampleComponent {
     focusableItems = new Array(5).fill(undefined);

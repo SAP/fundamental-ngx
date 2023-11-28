@@ -39,7 +39,7 @@ import { SideNavigationUtilityDirective } from './side-navigation-utility.direct
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fdx-side-nav',
     templateUrl: './side-navigation.component.html',
-    styleUrls: ['side-navigation.component.scss'],
+    styleUrl: 'side-navigation.component.scss',
     encapsulation: ViewEncapsulation.None,
     providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService]
 })

@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor, NgIf } from '@angular/common';
+
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -64,7 +64,6 @@ interface FileItem {
         FormsModule,
         ButtonComponent,
         UploadCollectionComponent,
-        NgFor,
         ListModule,
         UploadCollectionItemDirective,
         CheckboxComponent,
@@ -74,7 +73,6 @@ interface FileItem {
         LinkComponent,
         UploadCollectionTitleDirective,
         UploadCollectionFormItemComponent,
-        NgIf,
         ObjectMarkerModule,
         UploadCollectionDescriptionDirective,
         UploadCollectionTextSeparatorDirective,
@@ -117,7 +115,10 @@ export class UploadCollectionComplexExampleComponent {
 
     private readonly _rangeSelector = new RangeSelector();
 
-    constructor(private _dialogService: DialogService, private _cdr: ChangeDetectorRef) {}
+    constructor(
+        private _dialogService: DialogService,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     alert(message: string): void {
         window.alert(message);

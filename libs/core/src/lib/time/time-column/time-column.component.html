@@ -1,23 +1,24 @@
 <label class="fd-time__slider-label">{{
     timeConfig?.label || (internalTranslationConfig && (internalTranslationConfig.label | fdTranslate))
 }}</label>
-<button
-    *ngIf="active && spinners"
-    fd-button
-    fdType="transparent"
-    glyph="navigation-up-arrow"
-    tabindex="-1"
-    [title]="
-        timeConfig?.decreaseLabel ||
-        (internalTranslationConfig && (internalTranslationConfig.decreaseLabel | fdTranslate))
-    "
-    [ariaLabel]="
-        timeConfig?.decreaseLabel ||
-        (internalTranslationConfig && (internalTranslationConfig.decreaseLabel | fdTranslate))
-    "
-    (keyup)="spinnerButtonKeyupHandle($event, true)"
-    (click)="scrollUp($event)"
-></button>
+@if (active && spinners) {
+    <button
+        fd-button
+        fdType="transparent"
+        glyph="navigation-up-arrow"
+        tabindex="-1"
+        [title]="
+            timeConfig?.decreaseLabel ||
+            (internalTranslationConfig && (internalTranslationConfig.decreaseLabel | fdTranslate))
+        "
+        [ariaLabel]="
+            timeConfig?.decreaseLabel ||
+            (internalTranslationConfig && (internalTranslationConfig.decreaseLabel | fdTranslate))
+        "
+        (keyup)="spinnerButtonKeyupHandle($event, true)"
+        (click)="scrollUp($event)"
+    ></button>
+}
 <div
     class="fd-time__wrapper"
     [class.fd-time__wrapper--active]="active"
@@ -33,19 +34,20 @@
         (dragStateChange)="handleDrag($event)"
         fdCarousel
     >
-        <li
-            class="fd-time__item"
-            fdCarouselItem
-            *ngFor="let row of rows; let index = index"
-            #item="fdCarouselItem"
-            [id]="_createColumnItemIdByIndex(index)"
-            [attr.data-displayed-value]="row.value"
-            [value]="row"
-        >
-            <span class="fd-time__unit" role="button" [attr.aria-label]="row.label" (click)="pick(item, index)">
-                {{ row.label }}
-            </span>
-        </li>
+        @for (row of rows; track row; let index = $index) {
+            <li
+                class="fd-time__item"
+                fdCarouselItem
+                #item="fdCarouselItem"
+                [id]="_createColumnItemIdByIndex(index)"
+                [attr.data-displayed-value]="row.value"
+                [value]="row"
+            >
+                <span class="fd-time__unit" role="button" [attr.aria-label]="row.label" (click)="pick(item, index)">
+                    {{ row.label }}
+                </span>
+            </li>
+        }
     </ul>
     <div
         class="fd-time__current-indicator"
@@ -74,24 +76,27 @@
             }}
         </span>
     </div>
-    <span *ngIf="!active" class="fd-time__item fd-time__item--collapsed">
-        {{ activeValue?.label }}
-    </span>
+    @if (!active) {
+        <span class="fd-time__item fd-time__item--collapsed">
+            {{ activeValue?.label }}
+        </span>
+    }
 </div>
-<button
-    *ngIf="active && spinners"
-    fd-button
-    fdType="transparent"
-    glyph="navigation-down-arrow"
-    tabindex="-1"
-    [title]="
-        timeConfig?.increaseLabel ||
-        (internalTranslationConfig && (internalTranslationConfig.increaseLabel | fdTranslate))
-    "
-    [ariaLabel]="
-        timeConfig?.increaseLabel ||
-        (internalTranslationConfig && (internalTranslationConfig.increaseLabel | fdTranslate))
-    "
-    (keyup)="spinnerButtonKeyupHandle($event)"
-    (click)="scrollDown()"
-></button>
+@if (active && spinners) {
+    <button
+        fd-button
+        fdType="transparent"
+        glyph="navigation-down-arrow"
+        tabindex="-1"
+        [title]="
+            timeConfig?.increaseLabel ||
+            (internalTranslationConfig && (internalTranslationConfig.increaseLabel | fdTranslate))
+        "
+        [ariaLabel]="
+            timeConfig?.increaseLabel ||
+            (internalTranslationConfig && (internalTranslationConfig.increaseLabel | fdTranslate))
+        "
+        (keyup)="spinnerButtonKeyupHandle($event)"
+        (click)="scrollDown()"
+    ></button>
+}

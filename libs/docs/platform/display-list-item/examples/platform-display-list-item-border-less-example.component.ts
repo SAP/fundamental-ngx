@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DisplayListItemModule, PlatformListModule } from '@fundamental-ngx/platform/list';
@@ -15,7 +14,7 @@ export interface Movie {
     selector: 'fdp-platform-display-list-item-border-less-example',
     templateUrl: './platform-display-list-item-border-less-example.component.html',
     standalone: true,
-    imports: [PlatformListModule, NgFor, DisplayListItemModule, ContentDensityDirective]
+    imports: [PlatformListModule, DisplayListItemModule, ContentDensityDirective]
 })
 export class PlatformDisplayListItemBorderLessExampleComponent {
     items: Movie[] = [

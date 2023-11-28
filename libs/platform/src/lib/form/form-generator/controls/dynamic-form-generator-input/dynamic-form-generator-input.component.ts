@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { NgIf } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from '../../../input/input.component';
 import { BaseDynamicFormGeneratorControl } from '../../base-dynamic-form-generator-control';
@@ -14,7 +13,7 @@ import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../p
     changeDetection: ChangeDetectionStrategy.OnPush,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider],
     standalone: true,
-    imports: [NgIf, FormsModule, ReactiveFormsModule, InputComponent]
+    imports: [FormsModule, ReactiveFormsModule, InputComponent]
 })
 export class DynamicFormGeneratorInputComponent extends BaseDynamicFormGeneratorControl<InputDynamicFormFieldItem> {
     /** @hidden */

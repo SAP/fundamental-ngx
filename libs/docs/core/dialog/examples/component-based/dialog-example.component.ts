@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { DialogModule, DialogRef } from '@fundamental-ngx/core/dialog';
@@ -12,18 +12,18 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
             <fd-dialog-header>
                 <h1 id="fd-dialog-header-1" fd-title>{{ dialogRef.data.title }}</h1>
             </fd-dialog-header>
-
             <fd-dialog-body>
                 <p id="fd-dialog-body-1" role="dialog" style="text-align: justify; margin: 0">
                     {{ dialogRef.data.pinnapleDescription }}
                 </p>
                 <ul style="margin-bottom: 0">
-                    <li *ngFor="let fact of dialogRef.data.pineappleFunFacts">
-                        {{ fact }}
-                    </li>
+                    @for (fact of dialogRef.data.pineappleFunFacts; track fact) {
+                        <li>
+                            {{ fact }}
+                        </li>
+                    }
                 </ul>
             </fd-dialog-body>
-
             <fd-dialog-footer>
                 <fd-button-bar
                     label="Interesting"
@@ -43,7 +43,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         </fd-dialog>
     `,
     standalone: true,
-    imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, NgFor, BarModule]
+    imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, BarModule]
 })
 export class DialogExampleComponent {
     constructor(public dialogRef: DialogRef) {}

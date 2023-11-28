@@ -14,7 +14,6 @@ import {
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { distinctUntilChanged } from 'rxjs/operators';
 
-import { NgIf } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FD_LANGUAGE, FdTranslatePipe, resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
@@ -29,7 +28,7 @@ let dynamicPageSubHeaderId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [NgIf, ButtonComponent, FdTranslatePipe],
+    imports: [ButtonComponent, FdTranslatePipe],
     providers: [
         {
             provide: FD_LANGUAGE,
@@ -167,7 +166,10 @@ export class DynamicPageSubheaderComponent {
     private _defaultUnpinLabel = this._resolveTranslationSignal('coreDynamicPage.unpinLabel');
 
     /** @hidden */
-    constructor(private _cd: ChangeDetectorRef, private _dynamicPageService: DynamicPageService) {
+    constructor(
+        private _cd: ChangeDetectorRef,
+        private _dynamicPageService: DynamicPageService
+    ) {
         this._dynamicPageService.collapsed
             .pipe(takeUntilDestroyed(), distinctUntilChanged())
             .subscribe((collapsed) => this._handleCollapsedChange(collapsed));

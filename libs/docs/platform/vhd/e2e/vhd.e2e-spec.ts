@@ -398,7 +398,7 @@ describe('Value help dialog test suite', () => {
         (await browserIsFirefox())
             ? await click(tableCheckboxesFF, index)
             : (await browserIsSafari())
-            ? await click('table .fd-table__cell--checkbox', index)
-            : await click(tableCheckboxes, index);
+              ? await click('table .fd-table__cell--checkbox', index)
+              : await click(tableCheckboxes, index);
     }
 });

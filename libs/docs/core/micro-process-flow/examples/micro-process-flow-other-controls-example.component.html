@@ -104,14 +104,16 @@
 </fd-micro-process-flow>
 <p>Label example:</p>
 <fd-micro-process-flow>
-    <fd-micro-process-flow-item *ngFor="let item of ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']">
-        <fd-info-label
-            fd-micro-process-flow-focusable-item
-            type="icon"
-            glyph="hide"
-            [label]="'Info label ' + item"
-            [color]="item"
-            title="Info Label with Icon"
-        ></fd-info-label>
-    </fd-micro-process-flow-item>
+    @for (item of ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']; track item) {
+        <fd-micro-process-flow-item>
+            <fd-info-label
+                fd-micro-process-flow-focusable-item
+                type="icon"
+                glyph="hide"
+                [label]="'Info label ' + item"
+                [color]="item"
+                title="Info Label with Icon"
+            ></fd-info-label>
+        </fd-micro-process-flow-item>
+    }
 </fd-micro-process-flow>

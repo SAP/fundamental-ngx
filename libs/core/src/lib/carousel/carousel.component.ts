@@ -1,6 +1,6 @@
 import { Direction } from '@angular/cdk/bidi';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
     AfterViewChecked,
@@ -55,13 +55,16 @@ export interface FittingSlidesAndWidth {
 let carouselCounter = 0;
 
 class CarouselActiveSlides {
-    constructor(public readonly activeItems: CarouselItemComponent[], public readonly slideDirection: string) {}
+    constructor(
+        public readonly activeItems: CarouselItemComponent[],
+        public readonly slideDirection: string
+    ) {}
 }
 
 @Component({
     selector: 'fd-carousel',
     templateUrl: './carousel.component.html',
-    styleUrls: ['./carousel.component.scss'],
+    styleUrl: './carousel.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [CarouselService],
@@ -69,7 +72,7 @@ class CarouselActiveSlides {
         '[style.width]': 'width'
     },
     standalone: true,
-    imports: [NgIf, NgTemplateOutlet, NgClass, NgFor, ButtonComponent, FdTranslatePipe]
+    imports: [NgTemplateOutlet, NgClass, ButtonComponent, FdTranslatePipe]
 })
 export class CarouselComponent implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnChanges {
     /** ID for the Carousel. */

@@ -15,7 +15,6 @@
             </div>
         </ng-template>
     </fd-dialog-header>
-
     <fd-dialog-body>
         <fd-toolbar>
             <fdp-search-field
@@ -25,19 +24,15 @@
                 (inputChange)="_searchInputChange($event)"
                 fdkInitialFocus
             ></fdp-search-field>
-
             <fd-toolbar-spacer></fd-toolbar-spacer>
-
             <!-- Show Selected/All -->
             <button fd-toolbar-item fd-button fdType="transparent" (click)="_toggleShowAll()">
-                <ng-container *ngIf="(_showAllItemsSubject | async) === true; else showAll">
+                @if ((_showAllItemsSubject | async) === true) {
                     {{ 'platformTable.P13ColumnsDialogsShowSelected' | fdTranslate }}
-                </ng-container>
-                <ng-template #showAll>
+                } @else {
                     {{ 'platformTable.P13ColumnsDialogShowAll' | fdTranslate }}
-                </ng-template>
+                }
             </button>
-
             <!-- Active Button Movement -->
             <button
                 fd-toolbar-item
@@ -49,7 +44,6 @@
                 [title]="'platformTable.P13ColumnsDialogMoveToTopBtn' | fdTranslate"
                 (click)="_moveActiveToTop()"
             ></button>
-
             <button
                 fd-toolbar-item
                 fd-button
@@ -60,7 +54,6 @@
                 [title]="'platformTable.P13ColumnsDialogMoveUpBtn' | fdTranslate"
                 (click)="_moveActiveUp()"
             ></button>
-
             <button
                 fd-toolbar-item
                 fd-button
@@ -71,7 +64,6 @@
                 [title]="'platformTable.P13ColumnsDialogMoveDownBtn' | fdTranslate"
                 (click)="_moveActiveDown()"
             ></button>
-
             <button
                 fd-toolbar-item
                 fd-button
@@ -83,7 +75,6 @@
                 (click)="_moveActiveToBottom()"
             ></button>
         </fd-toolbar>
-
         <ul fd-list>
             <li fd-list-item>
                 <fd-checkbox
@@ -102,28 +93,27 @@
                     }}
                 </span>
             </li>
-            <li
-                fd-list-item
-                *ngFor="let item of _filteredColumns; trackBy: _filterByColumnKy"
-                [class.fd-select-item--selected]="item.selected"
-                [class.fd-select-item--active]="item.active"
-                (click)="_setActiveColumn(item)"
-            >
-                <fd-checkbox [(ngModel)]="item.selected" (ngModelChange)="_onToggleColumn()"></fd-checkbox>
-                <span fd-list-title>
-                    {{ item.column.label }}
-                </span>
-            </li>
+            @for (item of _filteredColumns; track _filterByColumnKy($index, item)) {
+                <li
+                    fd-list-item
+                    [class.fd-select-item--selected]="item.selected"
+                    [class.fd-select-item--active]="item.active"
+                    (click)="_setActiveColumn(item)"
+                >
+                    <fd-checkbox [(ngModel)]="item.selected" (ngModelChange)="_onToggleColumn()"></fd-checkbox>
+                    <span fd-list-title>
+                        {{ item.column.label }}
+                    </span>
+                </li>
+            }
         </ul>
     </fd-dialog-body>
-
     <fd-dialog-footer>
         <fd-button-bar
             fdType="emphasized"
             [label]="'platformTable.P13ColumnsDialogConfirmationBtnLabel' | fdTranslate"
             (click)="confirm()"
         ></fd-button-bar>
-
         <fd-button-bar
             fdType="transparent"
             [label]="'platformTable.P13ColumnsDialogCancelBtnLabel' | fdTranslate"

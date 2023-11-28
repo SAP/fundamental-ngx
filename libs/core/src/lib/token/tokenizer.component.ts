@@ -9,7 +9,7 @@ import {
     SPACE,
     UP_ARROW
 } from '@angular/cdk/keycodes';
-import { AsyncPipe, DOCUMENT, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -57,13 +57,12 @@ import { TokenComponent } from './token.component';
 @Component({
     selector: 'fd-tokenizer',
     templateUrl: './tokenizer.component.html',
-    styleUrls: ['./tokenizer.component.scss'],
+    styleUrl: './tokenizer.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders()],
     standalone: true,
     imports: [
-        NgIf,
         NgTemplateOutlet,
         InputGroupModule,
         ButtonComponent,
@@ -71,7 +70,6 @@ import { TokenComponent } from './token.component';
         PopoverControlComponent,
         PopoverBodyComponent,
         ListModule,
-        NgFor,
         AsyncPipe,
         FdTranslatePipe
     ]

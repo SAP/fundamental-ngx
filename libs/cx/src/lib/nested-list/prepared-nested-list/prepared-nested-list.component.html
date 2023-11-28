@@ -1,55 +1,54 @@
 <ul fdx-nested-list [textOnly]="!!list?.textOnly">
-    <ng-container *ngFor="let item of list?.items">
-        <li *ngIf="item.headerTitle" fdx-nested-list-header>
-            {{ item.headerTitle }}
-        </li>
-        <li
-            *ngIf="!item.headerTitle"
-            fdx-nested-list-item
-            [expanded]="!!item.expanded"
-            (expandedChange)="_expandedChange($event, item)"
-        >
-            <fdx-nested-list-popover *ngIf="condensed && first && item.list" [title]="item.link?.title || ''">
-                <div fdx-nested-list-content [selected]="!!item.link?.selected">
-                    <ng-container [ngTemplateOutlet]="link" [ngTemplateOutletContext]="{ item: item }"></ng-container>
-                    <button fdx-nested-list-expand-icon></button>
-                </div>
-                <fdx-prepared-nested-list
-                    [first]="false"
-                    *ngIf="item.list"
-                    [list]="item.list"
-                ></fdx-prepared-nested-list>
-            </fdx-nested-list-popover>
-
-            <ng-container *ngIf="!item.list">
-                <ng-container [ngTemplateOutlet]="link" [ngTemplateOutletContext]="{ item: item }"></ng-container>
-            </ng-container>
-
-            <ng-container *ngIf="(!condensed || !first) && item.list">
-                <div fdx-nested-list-content>
-                    <ng-container [ngTemplateOutlet]="link" [ngTemplateOutletContext]="{ item: item }"></ng-container>
-                    <button fdx-nested-list-expand-icon></button>
-                </div>
-                <fdx-prepared-nested-list
-                    [first]="false"
-                    *ngIf="item.list"
-                    [list]="item.list"
-                ></fdx-prepared-nested-list>
-            </ng-container>
-
-            <ng-template let-item="item" #link>
-                <a
-                    fdx-nested-list-link
-                    *ngIf="item.link"
-                    [onClickCallback]="item.link.callback"
-                    [(selected)]="!item.list && item.link.selected"
-                    [attr.href]="item.link.href ? item.link.href : null"
-                    [routerLink]="item.link.routerLink ? item.link.routerLink : []"
-                >
-                    <span fdx-nested-list-icon *ngIf="item.link.icon" [glyph]="item.link.icon"></span>
-                    <span fdx-nested-list-title>{{ item.link.title }}</span>
-                </a>
-            </ng-template>
-        </li>
-    </ng-container>
+    @for (item of list?.items; track item) {
+        @if (item.headerTitle) {
+            <li fdx-nested-list-header>
+                {{ item.headerTitle }}
+            </li>
+        } @else {
+            <li fdx-nested-list-item [expanded]="!!item.expanded" (expandedChange)="_expandedChange($event, item)">
+                @if (condensed && first && item.list) {
+                    <fdx-nested-list-popover [title]="item.link?.title || ''">
+                        <div fdx-nested-list-content [selected]="!!item.link?.selected">
+                            <ng-template
+                                [ngTemplateOutlet]="link"
+                                [ngTemplateOutletContext]="{ item: item }"
+                            ></ng-template>
+                            <button fdx-nested-list-expand-icon></button>
+                        </div>
+                        @if (item.list) {
+                            <fdx-prepared-nested-list [first]="false" [list]="item.list"></fdx-prepared-nested-list>
+                        }
+                    </fdx-nested-list-popover>
+                }
+                @if (!item.list) {
+                    <ng-template [ngTemplateOutlet]="link" [ngTemplateOutletContext]="{ item: item }"></ng-template>
+                }
+                @if ((!condensed || !first) && item.list) {
+                    <div fdx-nested-list-content>
+                        <ng-template [ngTemplateOutlet]="link" [ngTemplateOutletContext]="{ item: item }"></ng-template>
+                        <button fdx-nested-list-expand-icon></button>
+                    </div>
+                    @if (item.list) {
+                        <fdx-prepared-nested-list [first]="false" [list]="item.list"></fdx-prepared-nested-list>
+                    }
+                }
+                <ng-template let-item="item" #link>
+                    @if (item.link) {
+                        <a
+                            fdx-nested-list-link
+                            [onClickCallback]="item.link.callback"
+                            [(selected)]="!item.list && item.link.selected"
+                            [attr.href]="item.link.href ? item.link.href : null"
+                            [routerLink]="item.link.routerLink ? item.link.routerLink : []"
+                        >
+                            @if (item.link.icon) {
+                                <span fdx-nested-list-icon [glyph]="item.link.icon"></span>
+                            }
+                            <span fdx-nested-list-title>{{ item.link.title }}</span>
+                        </a>
+                    }
+                </ng-template>
+            </li>
+        }
+    }
 </ul>

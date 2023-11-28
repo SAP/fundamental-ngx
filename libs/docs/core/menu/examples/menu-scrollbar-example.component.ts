@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MenuModule } from '@fundamental-ngx/core/menu';
@@ -7,7 +6,7 @@ import { MenuModule } from '@fundamental-ngx/core/menu';
     selector: 'fd-menu-scrollbar-example',
     templateUrl: './menu-scrollbar-example.component.html',
     standalone: true,
-    imports: [ButtonComponent, MenuModule, NgFor]
+    imports: [ButtonComponent, MenuModule]
 })
 export class MenuScrollbarExampleComponent {
     options = [

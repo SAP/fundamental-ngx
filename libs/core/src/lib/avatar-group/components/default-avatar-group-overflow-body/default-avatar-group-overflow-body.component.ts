@@ -1,5 +1,5 @@
 import { PortalModule } from '@angular/cdk/portal';
-import { NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -25,11 +25,9 @@ import { AvatarGroupItemDirective } from '../../directives/avatar-group-item.dir
     selector: 'fd-default-avatar-group-overflow-body',
     templateUrl: './default-avatar-group-overflow-body.component.html',
     imports: [
-        NgForOf,
         PortalModule,
         AvatarGroupItemRendererDirective,
         FocusableListDirective,
-        NgIf,
         NgTemplateOutlet,
         PopoverBodyHeaderDirective,
         BarModule
@@ -38,7 +36,7 @@ import { AvatarGroupItemDirective } from '../../directives/avatar-group-item.dir
         class: 'fd-popover__wrapper',
         '[style.max-width.rem]': '20'
     },
-    styleUrls: ['./default-avatar-group-overflow-body.component.scss'],
+    styleUrl: './default-avatar-group-overflow-body.component.scss',
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -87,10 +85,6 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
     /** @hidden */
     private readonly _rtlService = inject(RtlService, { optional: true });
 
-    /** @hidden */
-    _trackByFn(_: number, item: AvatarGroupItemRendererDirective): AvatarGroupItemRendererDirective {
-        return item;
-    }
     /** @hidden */
     ngAfterViewInit(): void {
         this._avatarGroupItemPortals.changes

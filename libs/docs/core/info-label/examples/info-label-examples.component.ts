@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 
@@ -14,7 +13,7 @@ export class InfoLableDefaultExampleComponent {}
     selector: 'fd-info-label-text-example',
     templateUrl: './info-label-text-example.component.html',
     standalone: true,
-    imports: [NgFor, InfoLabelModule]
+    imports: [InfoLabelModule]
 })
 export class InfoLableTextExampleComponent {}
 
@@ -22,7 +21,7 @@ export class InfoLableTextExampleComponent {}
     selector: 'fd-info-label-text-icon-example',
     templateUrl: './info-label-text-icon-example.component.html',
     standalone: true,
-    imports: [NgFor, InfoLabelModule]
+    imports: [InfoLabelModule]
 })
 export class InfoLableTextIconExampleComponent {}
 

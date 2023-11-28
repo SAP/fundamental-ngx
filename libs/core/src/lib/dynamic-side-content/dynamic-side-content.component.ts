@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { startWith } from 'rxjs/operators';
 
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import {
     DYNAMIC_SIDE_CONTENT_CHILD_TOKEN,
@@ -31,11 +31,11 @@ let componentId = 0;
 @Component({
     selector: 'fd-dynamic-side-content',
     templateUrl: './dynamic-side-content.component.html',
-    styleUrls: ['./dynamic-side-content.component.scss'],
+    styleUrl: './dynamic-side-content.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, NgTemplateOutlet]
+    imports: [NgTemplateOutlet]
 })
 export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, OnInit, AfterContentInit {
     /**

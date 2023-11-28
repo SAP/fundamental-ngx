@@ -18,7 +18,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor } from '@angular/common';
+
 import { DisabledBehaviorDirective, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     BarElementDirective,
@@ -75,7 +75,7 @@ class ValidatedSortRule implements SortRule {
 
 @Component({
     templateUrl: './sorting.component.html',
-    styleUrls: ['./sorting.component.scss'],
+    styleUrl: './sorting.component.scss',
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13SortingDialogComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -92,7 +92,6 @@ class ValidatedSortRule implements SortRule {
         CdkScrollable,
         ScrollbarDirective,
         DialogBodyComponent,
-        NgFor,
         SelectComponent,
         OptionComponent,
         ButtonComponent,
@@ -119,7 +118,10 @@ export class P13SortingDialogComponent implements Resettable {
     rules: ValidatedSortRule[] = [];
 
     /** @hidden */
-    constructor(public dialogRef: DialogRef<SortDialogData>, private cdr: ChangeDetectorRef) {
+    constructor(
+        public dialogRef: DialogRef<SortDialogData>,
+        private cdr: ChangeDetectorRef
+    ) {
         const { columns, collectionSort } = this.dialogRef.data;
 
         this.columns = columns || [];

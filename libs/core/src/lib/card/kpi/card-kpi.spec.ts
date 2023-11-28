@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -13,6 +13,7 @@ import { CardKpiValueDirective } from './card-kpi-value.directive';
 import { CardModule } from '../card.module';
 
 import { CLASS_NAME } from '../constants';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: `

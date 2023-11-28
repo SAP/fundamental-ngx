@@ -5,7 +5,7 @@ let quickViewUniqueId = 0;
 @Component({
     selector: 'fd-quick-view',
     templateUrl: './quick-view.component.html',
-    styleUrls: ['./quick-view.component.scss'],
+    styleUrl: './quick-view.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true

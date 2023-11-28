@@ -1,7 +1,7 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { BooleanInput } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -55,7 +55,7 @@ import { TreeService } from './tree.service';
     selector: 'fd-tree',
     templateUrl: './tree.component.html',
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./tree.component.scss'],
+    styleUrl: './tree.component.scss',
     hostDirectives: [
         {
             directive: DataSourceDirective,
@@ -87,8 +87,6 @@ import { TreeService } from './tree.service';
         NgTemplateOutlet,
         RepeatDirective,
         SkeletonComponent,
-        NgIf,
-        NgFor,
         TreeItemDirective,
         SelectableItemDirective,
         FdTranslatePipe

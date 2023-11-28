@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
-import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -18,7 +17,7 @@ import { ApprovalTeam } from '../interfaces';
 @Component({
     selector: 'fdp-approval-flow-team-list',
     templateUrl: './approval-flow-team-list.component.html',
-    styleUrls: ['./approval-flow-team-list.component.scss'],
+    styleUrl: './approval-flow-team-list.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
@@ -29,7 +28,6 @@ import { ApprovalTeam } from '../interfaces';
         ListComponent,
         ContentDensityDirective,
         FormGroupComponent,
-        NgFor,
         FormItemComponent,
         RadioButtonComponent,
         FormsModule,

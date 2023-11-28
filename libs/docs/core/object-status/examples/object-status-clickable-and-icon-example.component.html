@@ -33,7 +33,7 @@
 <a fd-object-status [clickable]="true" label="Default" aria-label="Object Status Default"></a>
 <br />
 <br />
-<ng-container *ngFor="let item of indicators">
+@for (item of indicators; track item) {
     <a
         fd-object-status
         [indicationColor]="item"
@@ -41,4 +41,4 @@
         label="Indication Color"
         aria-label="Object Status Indication Color"
     ></a>
-</ng-container>
+}

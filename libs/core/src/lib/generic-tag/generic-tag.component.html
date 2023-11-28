@@ -1,10 +1,13 @@
-<span
-    *ngIf="type"
-    class="fd-generic-tag__icon"
-    [class]="type ? 'sap-icon--message-' + type : ''"
-    role="presentation"
-    aria-hidden="true"
->
-</span>
+@if (type) {
+    <span
+        class="fd-generic-tag__icon"
+        [class]="type ? 'sap-icon--message-' + type : ''"
+        role="presentation"
+        aria-hidden="true"
+    >
+    </span>
+}
 <span class="fd-generic-tag__name">{{ name }}</span>
-<span class="fd-generic-tag__value" *ngIf="value">{{ value }}</span>
+@if (value) {
+    <span class="fd-generic-tag__value">{{ value }}</span>
+}

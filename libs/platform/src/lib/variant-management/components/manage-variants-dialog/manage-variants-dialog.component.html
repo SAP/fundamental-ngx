@@ -4,7 +4,6 @@
             {{ 'platformVariantManagement.manageViews' | fdTranslate }}
         </h1>
     </fd-dialog-header>
-
     <fd-dialog-body>
         <fdp-table [dataSource]="_source" [noVerticalBorders]="true" class="fd-variant-management__table">
             <fdp-column name="favourite" key="favourite">
@@ -21,8 +20,11 @@
             </fdp-column>
             <fdp-column [label]="'platformVariantManagement.view' | fdTranslate" name="name" key="name">
                 <fdp-table-cell *fdpCellDef="let item; as: _variantModel">
-                    <fdp-input *ngIf="!item.readonly" [(ngModel)]="item.name"></fdp-input>
-                    <ng-container *ngIf="item.readonly">{{ item.name }}</ng-container>
+                    @if (!item.readonly) {
+                        <fdp-input [(ngModel)]="item.name"></fdp-input>
+                    } @else {
+                        {{ item.name }}
+                    }
                 </fdp-table-cell>
             </fdp-column>
             <fdp-column [label]="'platformVariantManagement.sharing' | fdTranslate" name="access" key="access">
@@ -72,18 +74,18 @@
             ></fdp-column>
             <fdp-column name="actions">
                 <fdp-table-cell *fdpCellDef="let item; as: _variantModel">
-                    <fdp-button
-                        *ngIf="!item.readonly"
-                        buttonType="transparent"
-                        glyph="decline"
-                        [title]="'platformVariantManagement.removeVariant' | fdTranslate"
-                        (click)="_removeVariant(item)"
-                    ></fdp-button>
+                    @if (!item.readonly) {
+                        <fdp-button
+                            buttonType="transparent"
+                            glyph="decline"
+                            [title]="'platformVariantManagement.removeVariant' | fdTranslate"
+                            (click)="_removeVariant(item)"
+                        ></fdp-button>
+                    }
                 </fdp-table-cell>
             </fdp-column>
         </fdp-table>
     </fd-dialog-body>
-
     <fd-dialog-footer>
         <fd-button-bar
             fdType="emphasized"
@@ -91,7 +93,6 @@
             (click)="_saveVariants()"
             ariaLabel="Interested Emphasized"
         ></fd-button-bar>
-
         <fd-button-bar
             [label]="'platformVariantManagement.cancel' | fdTranslate"
             (click)="dialog.dismiss('Cancel')"

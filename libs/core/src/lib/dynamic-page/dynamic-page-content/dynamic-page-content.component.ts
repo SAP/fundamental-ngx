@@ -9,18 +9,17 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { NgIf } from '@angular/common';
 import { DYNAMIC_PAGE_CLASS_NAME } from '../constants';
 import { addClassNameToElement } from '../utils';
 
 @Component({
     selector: 'fd-dynamic-page-content',
     templateUrl: './dynamic-page-content.component.html',
-    styleUrls: ['./dynamic-page-content.component.scss'],
+    styleUrl: './dynamic-page-content.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [NgIf]
+    imports: []
 })
 export class DynamicPageContentComponent implements OnInit {
     /**

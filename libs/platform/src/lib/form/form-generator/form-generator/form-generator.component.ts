@@ -29,7 +29,7 @@ import { BehaviorSubject, Observable, Subject, Subscription, isObservable, merge
 import { debounceTime, filter, startWith, switchMap, take, takeUntil } from 'rxjs/operators';
 import { FormGeneratorFieldComponent } from '../form-generator-field/form-generator-field.component';
 
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 import { DefaultGapLayout, DefaultVerticalFieldLayout, DefaultVerticalLabelLayout } from '../../form-group/constants';
@@ -90,12 +90,10 @@ export interface SubmitFormEventResult {
     ],
     standalone: true,
     imports: [
-        NgIf,
         BusyIndicatorModule,
         FdpFormGroupModule,
         FormsModule,
         ReactiveFormsModule,
-        NgFor,
         NgTemplateOutlet,
         DynamicFormControlFieldDirective,
         FormGeneratorFieldComponent,

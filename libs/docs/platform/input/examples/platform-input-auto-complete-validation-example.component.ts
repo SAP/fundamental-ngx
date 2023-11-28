@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
@@ -9,7 +8,7 @@ import { PlatformInputModule } from '@fundamental-ngx/platform/form';
     templateUrl: './platform-input-auto-complete-validation-example.component.html',
     styleUrls: ['./platform-input-auto-complete-validation-example.component.scss'],
     standalone: true,
-    imports: [PopoverComponent, PopoverControlComponent, PlatformInputModule, FormsModule, PopoverBodyComponent, NgFor]
+    imports: [PopoverComponent, PopoverControlComponent, PlatformInputModule, FormsModule, PopoverBodyComponent]
 })
 export class PlatformInputAutoCompleteValidationExampleComponent implements OnInit {
     public inputText: string;

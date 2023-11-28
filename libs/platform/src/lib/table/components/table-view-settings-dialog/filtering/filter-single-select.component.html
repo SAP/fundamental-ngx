@@ -9,13 +9,15 @@
         ></fd-radio-button>
         <span fd-list-title>{{ 'platformTable.filterDialogNotFilteredLabel' | fdTranslate }}</span>
     </li>
-    <li fd-list-item *ngFor="let option of options" [selected]="option.value === _value">
-        <fd-radio-button
-            [ngModel]="_value"
-            (ngModelChange)="_onValueChange($event)"
-            [value]="option.value"
-            name="filtering-settings-single-select"
-        ></fd-radio-button>
-        <span fd-list-title>{{ option.label }}</span>
-    </li>
+    @for (option of options; track option) {
+        <li fd-list-item [selected]="option.value === _value">
+            <fd-radio-button
+                [ngModel]="_value"
+                (ngModelChange)="_onValueChange($event)"
+                [value]="option.value"
+                name="filtering-settings-single-select"
+            ></fd-radio-button>
+            <span fd-list-title>{{ option.label }}</span>
+        </li>
+    }
 </ul>

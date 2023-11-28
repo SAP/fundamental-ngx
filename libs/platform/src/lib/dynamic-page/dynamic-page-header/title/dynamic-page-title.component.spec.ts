@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { AfterViewInit, ChangeDetectorRef, Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -16,6 +16,7 @@ import { DynamicPageLayoutActionsComponent } from '../../dynamic-page-header/act
 import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
 import { PlatformDynamicPageModule } from '../../dynamic-page.module';
 import { DynamicPageComponent } from '../../dynamic-page.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: `

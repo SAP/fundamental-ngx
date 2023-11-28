@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
@@ -8,7 +7,7 @@ import { TableModule } from '@fundamental-ngx/core/table';
     selector: 'fd-layout-panel-edge-bleed-example',
     templateUrl: './layout-panel-edge-bleed-example.component.html',
     standalone: true,
-    imports: [LayoutPanelModule, FocusableGridDirective, TableModule, NgFor]
+    imports: [LayoutPanelModule, FocusableGridDirective, TableModule]
 })
 export class LayoutPanelEdgeBleedExampleComponent {
     tableHeaders = ['Column Header 1', 'Column Header 2', 'Column Header 3', 'Column Header 4'];

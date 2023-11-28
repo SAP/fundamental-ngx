@@ -39,7 +39,7 @@ import { TimeLinePositionStrategy, TimelineAxis, TimelineSidePosition } from './
 @Component({
     selector: 'fd-timeline',
     templateUrl: './timeline.component.html',
-    styleUrls: ['./timeline.component.scss'],
+    styleUrl: './timeline.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [TimelinePositionControlService],

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NgFor } from '@angular/common';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
@@ -56,7 +55,7 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
     selector: 'fdp-platform-vhd-mobile-example',
     templateUrl: './platform-vhd-mobile-example.component.html',
     standalone: true,
-    imports: [InputGroupModule, ButtonComponent, PlatformValueHelpDialogModule, NgFor]
+    imports: [InputGroupModule, ButtonComponent, PlatformValueHelpDialogModule]
 })
 export class PlatformVhdMobileExampleComponent implements OnInit {
     filters: FilterData[];

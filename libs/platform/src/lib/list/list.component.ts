@@ -44,7 +44,7 @@ import {
 } from 'rxjs';
 import { delay, takeUntil, tap } from 'rxjs/operators';
 
-import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { KeyUtil, Nullable, RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { InfiniteScrollDirective } from '@fundamental-ngx/core/infinite-scroll';
@@ -90,7 +90,7 @@ let nextListId = 0;
     selector: 'fdp-list',
     templateUrl: './list.component.html',
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./list.component.scss'],
+    styleUrl: './list.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         { provide: FD_FORM_FIELD_CONTROL, useExisting: ListComponent, multi: true },
@@ -106,12 +106,10 @@ let nextListId = 0;
     standalone: true,
     imports: [
         CoreListComponent,
-        NgIf,
         BusyIndicatorComponent,
         InfiniteScrollDirective,
         ListItemComponent,
         NgTemplateOutlet,
-        NgFor,
         RepeatDirective,
         SkeletonComponent,
         FdTranslatePipe,
@@ -920,8 +918,8 @@ export class ListComponent<T>
         this._ariaSetSize = this.ariaSetsize
             ? of(this.ariaSetsize)
             : this._dataSource && this._dataSource.dataProvider?.getTotalItems
-            ? this._dataSource.dataProvider.getTotalItems()
-            : of(this.listItems.length);
+              ? this._dataSource.dataProvider.getTotalItems()
+              : of(this.listItems.length);
 
         this._partialNavigation = this.listItems.some((item) => item.navigationIndicator || item.listType === 'detail');
 

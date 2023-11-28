@@ -27,7 +27,7 @@ import { defer, fromEvent, Observable, Subject, Subscription, timer } from 'rxjs
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 
 import { BooleanInput } from '@angular/cdk/coercion';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { coerceBoolean, Nullable } from '@fundamental-ngx/cdk/utils';
 import { DefaultMenuItem } from '../default-menu-item.class';
 import { MenuTitleDirective } from '../directives/menu-title.directive';
@@ -65,7 +65,7 @@ export const SUBMENU = new InjectionToken<BaseSubmenu>('Submenu component depend
         '[class.fd-menu--full-width]': 'menuService?.menuComponent?.mobile || false'
     },
     standalone: true,
-    imports: [NgIf, NgTemplateOutlet],
+    imports: [NgTemplateOutlet],
     providers: [
         {
             provide: FD_MENU_ITEM_COMPONENT,
@@ -196,8 +196,8 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
     /** @hidden Creates click listener on menu item interactive element */
     private _listenOnMenuLinkClick(): void {
         this._subscriptions.add(
-            fromEvent(this.menuInteractive.elementRef.nativeElement, 'click').subscribe(() =>
-                this.menuService?.setActive(true, this)
+            fromEvent(this.menuInteractive.elementRef.nativeElement, 'click').subscribe(
+                () => this.menuService?.setActive(true, this)
             )
         );
     }

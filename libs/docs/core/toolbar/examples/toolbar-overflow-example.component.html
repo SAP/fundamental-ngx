@@ -2,21 +2,17 @@
     <button fd-toolbar-item fd-button label="Button"></button>
     <button fd-toolbar-item fd-button label="Button"></button>
     <button fd-toolbar-item fd-button label="Button"></button>
-
     <fd-datetime-picker fd-toolbar-item></fd-datetime-picker>
-
     <fd-select fd-toolbar-item placeholder="Select an option" [closeOnOutsideClick]="false">
-        <li fd-option *ngFor="let option of ['Apple', 'Pineapple', 'Tomato', 'Strawberry']" [value]="option">
-            {{ option }}
-        </li>
+        @for (option of ['Apple', 'Pineapple', 'Tomato', 'Strawberry']; track option) {
+            <li fd-option [value]="option">
+                {{ option }}
+            </li>
+        }
     </fd-select>
-
     <button fd-toolbar-item fd-button label="Button"></button>
-
     <fd-checkbox fd-toolbar-item label="Option 1" [tristate]="true"> </fd-checkbox>
-
     <button fd-toolbar-item fd-button label="Button"></button>
-
     <fd-split-button fd-toolbar-item>
         <fd-menu>
             <li fd-menu-item>
@@ -31,7 +27,6 @@
             </li>
         </fd-menu>
     </fd-split-button>
-
     <label fd-toolbar-item fd-toolbar-label fd-form-label for="input-1">Default Input</label>
     <input
         fd-toolbar-item
@@ -41,7 +36,6 @@
         placeholder="Field placeholder text"
         style="max-width: 200px"
     />
-
     <button
         fd-toolbar-item
         fd-button
@@ -50,13 +44,11 @@
         label="Button"
         [fdMenu]="true"
     ></button>
-
     <fd-segmented-button fd-toolbar-item>
         <button fd-button label="Left"></button>
         <button fd-button label="Middle"></button>
         <button fd-button label="Right"></button>
     </fd-segmented-button>
-
     <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button"></button>
     <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button"></button>
     <fd-toolbar-spacer fd-toolbar-item [fixed]="true" width="200px"></fd-toolbar-spacer>

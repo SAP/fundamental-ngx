@@ -1,8 +1,8 @@
-<h4 *ngIf="title" class="fd-title fd-title--h4 fd-toolbar__title" [id]="titleId" #titleElement>{{ title }}</h4>
-
+@if (title) {
+    <h4 class="fd-title fd-title--h4 fd-toolbar__title" [id]="titleId" #titleElement>{{ title }}</h4>
+}
 <ng-content></ng-content>
-
-<ng-container *ngIf="overflownItems.length > 0">
+@if (overflownItems.length > 0) {
     <fd-toolbar-spacer></fd-toolbar-spacer>
     <fd-toolbar-separator></fd-toolbar-separator>
     <fd-popover placement="bottom-end" [noArrow]="true" class="fd-popover">
@@ -16,18 +16,17 @@
                 glyph="overflow"
             ></button>
         </fd-popover-control>
-
         <fd-popover-body>
             <div class="fd-toolbar__overflow">
-                <ng-container *ngFor="let overflowedItem of overflownItems">
+                @for (overflowedItem of overflownItems; track overflowedItem) {
                     <fdk-dynamic-portal
                         [domElement]="overflowedItem.element"
                         [style.display]="overflowedItem.priority === 'disappear' ? 'none' : 'flex'"
                         [style.flex-direction]="overflowedItem.priority === 'disappear' ? undefined : 'column'"
                     >
                     </fdk-dynamic-portal>
-                </ng-container>
+                }
             </div>
         </fd-popover-body>
     </fd-popover>
-</ng-container>
+}

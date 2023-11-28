@@ -1,7 +1,8 @@
 <div fdPopoverContainer>
-    <div *ngIf="showOverflowContainer" style="height: 200px"></div>
+    @if (showOverflowContainer) {
+        <div style="height: 200px"></div>
+    }
     <button fd-button (click)="resetOverflowContainer()">Change height in 2 seconds</button>
-
     <div class="fd-docs-flex-display-helper">
         <fd-popover title="photo 1 in circle">
             <fd-popover-control>

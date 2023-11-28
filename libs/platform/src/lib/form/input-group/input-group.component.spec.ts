@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -10,6 +10,7 @@ import { PlatformInputGroupModule } from './input-group.module';
 import { InputGroupComponent } from './input-group.component';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
+import { CommonModule } from '@angular/common';
 
 const INPUT_GROUP_IDENTIFIER = 'platform-input-group-unit-test';
 
@@ -92,30 +93,32 @@ describe('InputGroup component', () => {
 /** Usage with form */
 @Component({
     template: `
-        <fdp-form-group #fg [formGroup]="form" [object]="initialFormModel">
-            <fdp-form-field
-                #ff
-                id="qty"
-                placeholder="Placeholder"
-                [hint]="{ content: 'This is tooltip help', placement: 'left' }"
-                zone="zLeft"
-                rank="1"
-                [required]="true"
-            >
-                <fdp-input-group name="qty" [formControl]="ff.formControl">
-                    <fdp-input-group-addon>$</fdp-input-group-addon>
-                    <fdp-input-group-input></fdp-input-group-input>
-                    <fdp-input-group-addon>0.00</fdp-input-group-addon>
-                    <fdp-input-group-addon>
-                        <fdp-button label="Button"></fdp-button>
-                    </fdp-input-group-addon>
-                </fdp-input-group>
-            </fdp-form-field>
-            <ng-template #i18n let-errors>
-                <span *ngIf="errors?.required" class="error">This field is required.</span>
-            </ng-template>
-        </fdp-form-group>
-    `
+<fdp-form-group #fg [formGroup]="form" [object]="initialFormModel">
+  <fdp-form-field
+    #ff
+    id="qty"
+    placeholder="Placeholder"
+    [hint]="{ content: 'This is tooltip help', placement: 'left' }"
+    zone="zLeft"
+    rank="1"
+    [required]="true"
+    >
+    <fdp-input-group name="qty" [formControl]="ff.formControl">
+      <fdp-input-group-addon>$</fdp-input-group-addon>
+      <fdp-input-group-input></fdp-input-group-input>
+      <fdp-input-group-addon>0.00</fdp-input-group-addon>
+      <fdp-input-group-addon>
+        <fdp-button label="Button"></fdp-button>
+      </fdp-input-group-addon>
+    </fdp-input-group>
+  </fdp-form-field>
+  <ng-template #i18n let-errors>
+    @if (errors?.required) {
+      <span class="error">This field is required.</span>
+    }
+  </ng-template>
+</fdp-form-group>
+`
 })
 class InputGroupFormTestWrapperComponent {
     @ViewChild(InputGroupComponent)

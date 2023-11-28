@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ContentChild, Input } from '@angular/core';
 
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     BasePopoverClass,
@@ -30,7 +30,6 @@ import { FD_PRODUCT_SWITCH_COMPONENT } from '../tokens';
         ButtonComponent,
         PopoverBodyComponent,
         FdTranslatePipe,
-        NgIf,
         NgTemplateOutlet
     ]
 })

@@ -3,7 +3,6 @@ import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import dayjs, { Dayjs } from 'dayjs';
 
-import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
@@ -32,7 +31,7 @@ import 'dayjs/locale/fr';
         }
     ],
     standalone: true,
-    imports: [FormLabelComponent, SegmentedButtonModule, FormsModule, NgFor, ButtonComponent, DatePickerComponent]
+    imports: [FormLabelComponent, SegmentedButtonModule, FormsModule, ButtonComponent, DatePickerComponent]
 })
 export class DatePickerDayjsAdapterExampleComponent {
     @ViewChild(DatePickerComponent) datePicker: DatePickerComponent<Dayjs>;
@@ -48,7 +47,10 @@ export class DatePickerDayjsAdapterExampleComponent {
         { value: 'ar', label: 'Arabic' }
     ];
 
-    constructor(@Inject(LOCALE_ID) locale: string, private datetimeAdapter: DatetimeAdapter<Dayjs>) {
+    constructor(
+        @Inject(LOCALE_ID) locale: string,
+        private datetimeAdapter: DatetimeAdapter<Dayjs>
+    ) {
         // since datetimeAdapter instance is shared globally,
         // once loaded, we need to update value in it with LOCALE_ID provided for this component
         this.setLocale(locale);

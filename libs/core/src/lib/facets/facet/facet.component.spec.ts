@@ -33,7 +33,7 @@ import { FacetComponent } from './facet.component';
             </fd-facet-content>
             <fd-facet-content>
                 <fd-icon glyph="email"></fd-icon>
-                <a [routerLink]="['./']" fd-link tabindex="0">john.miller@company.com</a>
+                <a [routerLink]="['./']" fd-link tabindex="0">john.miller&#64;company.com</a>
             </fd-facet-content>
         </fd-facet>
     `

@@ -10,21 +10,21 @@ import {
 } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { NestedLinkComponent } from '../nested-link/nested-link.component';
-import { NestedListKeyboardService } from '../nested-list-keyboard.service';
+import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { Placement } from '@fundamental-ngx/core/shared';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { map } from 'rxjs/operators';
 import { NestedItemInterface } from '../nested-item/nested-item.interface';
 import { NestedItemService } from '../nested-item/nested-item.service';
+import { NestedLinkComponent } from '../nested-link/nested-link.component';
+import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListPopoverInterface } from './nested-list-popover.interface';
-import { RtlService } from '@fundamental-ngx/core/utils';
-import { Placement } from '@fundamental-ngx/core/shared';
-import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 
 @Component({
     selector: 'fdx-nested-list-popover',
     templateUrl: './nested-list-popover.component.html',
-    styleUrls: ['./nested-list-popover.component.scss'],
+    styleUrl: './nested-list-popover.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -17,7 +17,6 @@
     >
         <fdp-datetime-picker name="simple" [formControl]="ffl1.formControl"></fdp-datetime-picker>
     </fdp-form-field>
-
     <fdp-form-field
         #ffl2
         id="withAllowNull"
@@ -33,7 +32,6 @@
         >
         </fdp-datetime-picker>
     </fdp-form-field>
-
     <fdp-form-field #ffl3 id="storedDate" [column]="3" [required]="true" label="Passing datetime through form object:">
         <fdp-datetime-picker
             name="storedDate"
@@ -43,14 +41,17 @@
         >
         </fdp-datetime-picker>
     </fdp-form-field>
-
     <ng-template #i18n let-errors>
-        <span *ngIf="errors.required" role="alert" aria-atomic="true">Value is required</span>
-        <span *ngIf="errors.dateValidation" role="alert" aria-atomic="true">Date is invalid</span>
+        @if (errors.required) {
+            <span role="alert" aria-atomic="true">Value is required</span>
+        }
+        @if (errors.dateValidation) {
+            <span role="alert" aria-atomic="true">Date is invalid</span>
+        }
     </ng-template>
 </fdp-form-group>
-
 <button fd-button name="submitBtn" (click)="onSubmit()">Submit</button>
 <div>form valid: {{ datetimePickerForm.valid }}</div>
-
-<div *ngIf="stringValue">form value: {{ stringValue }}</div>
+@if (stringValue) {
+    <div>form value: {{ stringValue }}</div>
+}

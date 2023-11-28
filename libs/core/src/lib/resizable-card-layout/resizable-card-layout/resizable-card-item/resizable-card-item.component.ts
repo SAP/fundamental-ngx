@@ -1,5 +1,5 @@
 import { FocusableOption } from '@angular/cdk/a11y';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -44,11 +44,11 @@ let cardUniqueId = 0;
 @Component({
     selector: 'fd-resizable-card-item',
     templateUrl: 'resizable-card-item.component.html',
-    styleUrls: ['./resizable-card-item.component.scss'],
+    styleUrl: './resizable-card-item.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [NgIf, NgTemplateOutlet]
+    imports: [NgTemplateOutlet]
 })
 export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     /** Card properties from the config */

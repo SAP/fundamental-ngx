@@ -1,10 +1,12 @@
-<fd-icon *ngIf="glyph" class="fd-info-label__icon" [glyph]="glyph" [font]="font"></fd-icon>
-
-<span
-    *ngIf="label"
-    class="fd-info-label__text"
-    [attr.title]="title"
-    [attr.aria-label]="ariaLabel"
-    [attr.aria-labelledby]="ariaLabelledBy"
-    >{{ label }}</span
->
+@if (glyph) {
+    <fd-icon class="fd-info-label__icon" [glyph]="glyph" [font]="font"></fd-icon>
+}
+@if (label) {
+    <span
+        class="fd-info-label__text"
+        [attr.title]="title"
+        [attr.aria-label]="ariaLabel"
+        [attr.aria-labelledby]="ariaLabelledBy"
+        >{{ label }}</span
+    >
+}

@@ -21,7 +21,7 @@ let layoutPanelUniqueId = 0;
         '[class.fd-has-display-block]': 'true'
     },
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./layout-panel.component.scss'],
+    styleUrl: './layout-panel.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })

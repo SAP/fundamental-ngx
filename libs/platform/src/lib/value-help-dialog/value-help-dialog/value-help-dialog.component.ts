@@ -20,7 +20,7 @@ import { Observable, Subject, Subscription, isObservable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, SlicePipe } from '@angular/common';
+import { NgForOf, NgTemplateOutlet, SlicePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DisplayFnPipe, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
@@ -82,7 +82,7 @@ let vhiUniqueId = 0;
 @Component({
     selector: 'fdp-value-help-dialog',
     templateUrl: './value-help-dialog.component.html',
-    styleUrls: ['./value-help-dialog.component.scss'],
+    styleUrl: './value-help-dialog.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
@@ -94,11 +94,9 @@ let vhiUniqueId = 0;
         CdkScrollable,
         ScrollbarDirective,
         DialogBodyComponent,
-        NgIf,
         DialogFooterComponent,
         TitleComponent,
         TokenizerComponent,
-        NgFor,
         TokenComponent,
         ToolbarItemDirective,
         FormControlComponent,
@@ -128,11 +126,10 @@ let vhiUniqueId = 0;
         BarElementDirective,
         BarRightDirective,
         ButtonBarComponent,
-        NgSwitch,
-        NgSwitchCase,
         SlicePipe,
         FdTranslatePipe,
-        DisplayFnPipe
+        DisplayFnPipe,
+        NgForOf
     ]
 })
 export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnDestroy {
@@ -568,9 +565,8 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     }
 
     /** @hidden */
-    _trackBySelectedFn(_index: number, item: T): number | string {
-        return item && item[this.uniqueKey];
-    }
+    _trackBySelectedFn: (_index: number, item: T) => number | string = (_index: number, item: T) =>
+        item && item[this.uniqueKey];
 
     /** @hidden */
     _trackByFilterFn(_index: number, item: VhdFilter): number | string {

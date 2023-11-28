@@ -2,9 +2,11 @@
     <li fd-list-group-header>
         <span fd-list-title>List Group Header</span>
     </li>
-    <li fd-list-item *ngFor="let i of items">
-        <span fd-list-title> List Item {{ i }} </span>
-    </li>
+    @for (i of items; track i) {
+        <li fd-list-item>
+            <span fd-list-title> List Item {{ i }} </span>
+        </li>
+    }
     <li
         fd-list-item
         [action]="true"

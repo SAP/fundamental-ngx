@@ -7,7 +7,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogHeaderBase } from '../base/dialog-header-base.class';
@@ -29,11 +29,14 @@ import { DialogConfig } from '../utils/dialog-config.class';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [BarModule, ContentDensityDirective, NgTemplateOutlet, NgIf]
+    imports: [BarModule, ContentDensityDirective, NgTemplateOutlet]
 })
 export class DialogHeaderComponent extends DialogHeaderBase implements AfterContentInit {
     /** @hidden */
-    constructor(@Optional() public dialogConfig: DialogConfig, changeDetectorRef: ChangeDetectorRef) {
+    constructor(
+        @Optional() public dialogConfig: DialogConfig,
+        changeDetectorRef: ChangeDetectorRef
+    ) {
         super(changeDetectorRef);
         this.dialogConfig = this.dialogConfig || {};
     }

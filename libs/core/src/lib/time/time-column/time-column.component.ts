@@ -25,7 +25,6 @@ import { buffer, debounceTime, filter, map, tap } from 'rxjs/operators';
 import { KeyUtil, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { CarouselConfig, CarouselDirective, CarouselItemDirective, PanEndOutput } from '@fundamental-ngx/core/carousel';
 
-import { NgFor, NgIf } from '@angular/common';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -42,14 +41,14 @@ export interface TimeColumnItemOutput<T> {
 @Component({
     selector: 'fd-time-column',
     templateUrl: './time-column.component.html',
-    styleUrls: ['./time-column.component.scss'],
+    styleUrl: './time-column.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fd-time__col'
     },
     standalone: true,
-    imports: [NgIf, ButtonComponent, CarouselDirective, NgFor, CarouselItemDirective, FdTranslatePipe]
+    imports: [ButtonComponent, CarouselDirective, CarouselItemDirective, FdTranslatePipe]
 })
 export class TimeColumnComponent<K extends number, T extends SelectableViewItem<K> = SelectableViewItem<K>>
     implements AfterViewInit, OnInit, OnDestroy, OnChanges
@@ -221,7 +220,10 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
     private _numericInputTimeout: ReturnType<typeof setTimeout>;
 
     /** @hidden */
-    constructor(private _changeDetRef: ChangeDetectorRef, private _elmRef: ElementRef) {
+    constructor(
+        private _changeDetRef: ChangeDetectorRef,
+        private _elmRef: ElementRef
+    ) {
         this._subscriptions.add(
             combineLatest([this._viewInit$, this._elementsAtOnce$, this._offset$, this._resize$])
                 .pipe(

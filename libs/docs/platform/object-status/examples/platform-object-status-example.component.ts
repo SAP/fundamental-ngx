@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ColorAccent } from '@fundamental-ngx/cdk/utils';
 import { ObjectStatusComponent } from '@fundamental-ngx/platform/object-status';
@@ -26,7 +25,7 @@ export class PlatformObjectStatusTextExampleComponent {}
     templateUrl: './platform-object-status-generic-text-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
     standalone: true,
-    imports: [NgFor, ObjectStatusComponent]
+    imports: [ObjectStatusComponent]
 })
 export class PlatformObjectStatusGenericExampleComponent {
     items: ColorAccent[] = new Array(8).fill(null).map((_, index) => (index + 1) as ColorAccent);
@@ -55,7 +54,7 @@ export class PlatformObjectStatusInvertedTextExampleComponent {}
     templateUrl: './platform-object-status-inverted-generic-text-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
     standalone: true,
-    imports: [NgFor, ObjectStatusComponent]
+    imports: [ObjectStatusComponent]
 })
 export class PlatformObjectStatusInvertedGenericTextExampleComponent {
     items: ColorAccent[] = new Array(10).fill(null).map((_, index) => (index + 1) as ColorAccent);

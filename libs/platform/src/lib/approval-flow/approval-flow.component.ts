@@ -28,7 +28,7 @@ import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { GridListComponent, GridListSelectionEvent } from '@fundamental-ngx/core/grid-list';
 
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarComponent, BarElementDirective, BarRightDirective } from '@fundamental-ngx/core/bar';
@@ -115,7 +115,7 @@ let defaultId = 0;
 @Component({
     selector: 'fdp-approval-flow',
     templateUrl: './approval-flow.component.html',
-    styleUrls: ['./approval-flow.component.scss'],
+    styleUrl: './approval-flow.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [ApprovalFlowAddNodeViewService],
@@ -126,9 +126,7 @@ let defaultId = 0;
         GridListComponent,
         GridListTitleBarComponent,
         GridListTitleBarSpacerComponent,
-        NgIf,
         ApprovalFlowToolbarActionsComponent,
-        NgFor,
         AvatarComponent,
         MultiInputComponent,
         FormsModule,

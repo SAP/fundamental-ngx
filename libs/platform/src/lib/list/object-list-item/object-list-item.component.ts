@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { ColorAccent } from '@fundamental-ngx/cdk/utils';
 
-import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -27,7 +27,7 @@ import { ObjectListItemRowComponent } from './object-list-item-row.component';
 @Component({
     selector: 'fdp-object-list-item',
     templateUrl: './object-list-item.component.html',
-    styleUrls: ['./object-list-item.component.scss'],
+    styleUrl: './object-list-item.component.scss',
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ObjectListItemComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,7 +36,6 @@ import { ObjectListItemRowComponent } from './object-list-item-row.component';
         role: 'none'
     },
     imports: [
-        NgIf,
         ListItemComponent,
         NgTemplateOutlet,
         ListLinkDirective,

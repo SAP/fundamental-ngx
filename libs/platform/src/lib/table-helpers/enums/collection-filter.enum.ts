@@ -1,3 +1,4 @@
+import { FdLanguageKeyIdentifier } from '@fundamental-ngx/i18n';
 import { FilterableColumnDataType } from './filter-type.enum';
 
 /** All possible strategies */
@@ -20,6 +21,22 @@ export const FILTER_STRATEGY = {
 type FilterStrategyType = typeof FILTER_STRATEGY;
 
 export type FilterStrategy = FilterStrategyType[keyof FilterStrategyType];
+
+export const FILTER_STRATEGY_LABEL: Record<FilterStrategy, FdLanguageKeyIdentifier> = {
+    equalTo: 'platformTable.P13FilterStrategyLabelEqualTo',
+    contains: 'platformTable.P13FilterStrategyLabelContains',
+    between: 'platformTable.P13FilterStrategyLabelBetween',
+    beginsWith: 'platformTable.P13FilterStrategyLabelBeginsWith',
+    endsWith: 'platformTable.P13FilterStrategyLabelEndsWith',
+    greaterThan: 'platformTable.P13FilterStrategyLabelGreaterThan',
+    greaterThanOrEqualTo: 'platformTable.P13FilterStrategyLabelGreaterThanOrEqualTo',
+    lessThan: 'platformTable.P13FilterStrategyLabelLessThan',
+    lessThanOrEqualTo: 'platformTable.P13FilterStrategyLabelLessThanOrEqualTo',
+    after: 'platformTable.P13FilterStrategyLabelAfter',
+    onOrAfter: 'platformTable.P13FilterStrategyLabelOnOrAfter',
+    before: 'platformTable.P13FilterStrategyLabelBefore',
+    beforeOrOn: 'platformTable.P13FilterStrategyLabelBeforeOrOn'
+};
 
 /** Date Filter Strategies */
 export const FILTER_DATE_STRATEGY: Pick<

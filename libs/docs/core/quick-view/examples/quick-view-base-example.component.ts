@@ -1,4 +1,3 @@
-import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { Component } from '@angular/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { LinkComponent } from '@fundamental-ngx/core/link';
@@ -8,7 +7,7 @@ import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
     selector: 'fd-quick-view-base-example',
     templateUrl: './quick-view-base-example.component.html',
     standalone: true,
-    imports: [QuickViewModule, AvatarComponent, NgFor, NgSwitch, NgSwitchCase, LinkComponent, NgSwitchDefault]
+    imports: [QuickViewModule, AvatarComponent, LinkComponent]
 })
 export class QuickViewBaseExampleComponent {
     data = {

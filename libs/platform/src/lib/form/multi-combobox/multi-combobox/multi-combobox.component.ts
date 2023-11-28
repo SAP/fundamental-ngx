@@ -34,7 +34,7 @@ import {
     SelectableOptionItem
 } from '@fundamental-ngx/platform/shared';
 
-import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import {
     ContentDensityDirective,
@@ -67,7 +67,7 @@ let deprecationWarningShown = false;
 @Component({
     selector: 'fdp-multi-combobox',
     templateUrl: './multi-combobox.component.html',
-    styleUrls: ['./multi-combobox.component.scss'],
+    styleUrl: './multi-combobox.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [
@@ -80,7 +80,6 @@ let deprecationWarningShown = false;
     ],
     standalone: true,
     imports: [
-        NgIf,
         NgTemplateOutlet,
         PopoverComponent,
         PopoverControlComponent,
@@ -90,7 +89,6 @@ let deprecationWarningShown = false;
         TokenComponent,
         TokenizerComponent,
         TokenizerInputDirective,
-        NgFor,
         FormControlComponent,
         FormsModule,
         AutoCompleteDirective,
@@ -308,7 +306,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     }
 
     /** @hidden */
-    onItemKeyDownHandler(event: KeyboardEvent, index: number): void {
+    onItemKeyDownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, ESCAPE)) {
             this._focusToSearchField();
             this.close();

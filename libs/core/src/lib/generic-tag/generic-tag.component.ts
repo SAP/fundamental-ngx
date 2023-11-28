@@ -1,4 +1,4 @@
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -18,7 +18,7 @@ export type GenericTagType = 'error' | 'success' | 'warning' | 'information';
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-generic-tag]',
     templateUrl: './generic-tag.component.html',
-    styleUrls: ['./generic-tag.component.scss'],
+    styleUrl: './generic-tag.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
@@ -33,7 +33,7 @@ export type GenericTagType = 'error' | 'success' | 'warning' | 'information';
         role: 'button'
     },
     standalone: true,
-    imports: [NgIf, NgClass]
+    imports: [NgClass]
 })
 export class GenericTagComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */

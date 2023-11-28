@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ActionSheetComponent, ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -32,9 +32,7 @@ export type Notification = {
         NotificationModule,
         ActionSheetModule,
         TabsModule,
-        NgIf,
         NgTemplateOutlet,
-        NgFor,
         AvatarComponent,
         MessageToastModule
     ]

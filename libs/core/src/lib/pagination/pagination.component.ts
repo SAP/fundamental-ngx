@@ -25,7 +25,7 @@ import { Observable, Subscription, firstValueFrom } from 'rxjs';
 
 import { FocusKeyManagerItemDirective, FocusKeyManagerListDirective, RtlService } from '@fundamental-ngx/cdk/utils';
 
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { OnlyDigitsDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
@@ -66,17 +66,15 @@ let paginationUniqueId = 0;
         '[class.fd-pagination--short]': '_lastPage <= 9'
     },
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./pagination.component.scss'],
+    styleUrl: './pagination.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     preserveWhitespaces: true,
     standalone: true,
     imports: [
-        NgIf,
         NgTemplateOutlet,
         FocusKeyManagerListDirective,
         ButtonComponent,
         FocusKeyManagerItemDirective,
-        NgFor,
         FormLabelComponent,
         FormsModule,
         FormControlComponent,
@@ -251,7 +249,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     private _mobile = false;
 
     /** @hidden */
-    private _itemsPerPageOptions: number[];
+    private _itemsPerPageOptions: number[] = [];
 
     /** @hidden */
     private _currentPage = 1;

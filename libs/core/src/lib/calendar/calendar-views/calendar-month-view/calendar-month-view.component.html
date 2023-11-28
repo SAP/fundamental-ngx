@@ -4,49 +4,50 @@
     [attr.aria-roledescription]="'coreCalendar.calendarMonthViewDescription' | fdTranslate"
 >
     <tbody class="fd-calendar__group" role="rowgroup">
-        <tr class="fd-calendar__row" role="row" *ngFor="let colMonths of _calendarMonthListGrid; let rowIndex = index">
-            <td
-                class="fd-calendar__my-item"
-                role="gridcell"
-                *ngFor="let monthCell of colMonths; let colIndex = index"
-                [class.fd-calendar__my-item--current]="monthCell.current"
-                [class.is-active]="monthCell.selected"
-                [attr.tabIndex]="monthCell.tabIndex"
-                [attr.id]="monthCell.id"
-                [attr.aria-selected]="monthCell.selected"
-                [attr.aria-disabled]="monthCell.disabled"
-                [attr.data-fd-calendar-month]="monthCell.month"
-                (keydown)="_onKeydownMonthHandler($event, monthCell.index)"
-                (click)="selectMonth(monthCell, $event)"
-            >
-                <button
-                    fd-button
-                    fdType="transparent"
-                    class="fd-calendar__my-item-button"
-                    [class.is-active]="monthCell.current"
-                    tabindex="-1"
-                >
-                    <span
-                        class="fd-calendar__text"
-                        [attr.aria-labelledby]="
-                            monthCell.id +
-                            '-aria-label ' +
-                            (monthCell.current ? _todayLabelId + ' ' : '') +
-                            (monthCell.selected ? _selectedDateLabelId : '')
-                        "
+        @for (colMonths of _calendarMonthListGrid; track colMonths; let rowIndex = $index) {
+            <tr class="fd-calendar__row" role="row">
+                @for (monthCell of colMonths; track monthCell; let colIndex = $index) {
+                    <td
+                        class="fd-calendar__my-item"
+                        role="gridcell"
+                        [class.fd-calendar__my-item--current]="monthCell.current"
+                        [class.is-active]="monthCell.selected"
+                        [attr.tabIndex]="monthCell.tabIndex"
+                        [attr.id]="monthCell.id"
+                        [attr.aria-selected]="monthCell.selected"
+                        [attr.aria-disabled]="monthCell.disabled"
+                        [attr.data-fd-calendar-month]="monthCell.month"
+                        (keydown)="_onKeydownMonthHandler($event, monthCell.index)"
+                        (click)="selectMonth(monthCell, $event)"
                     >
-                        {{ monthCell.label }}
-                    </span>
-                </button>
-
-                <span hidden aria-hidden="true" [attr.id]="monthCell.id + '-aria-label'">
-                    {{ monthCell.ariaLabel }}
-                </span>
-            </td>
-        </tr>
+                        <button
+                            fd-button
+                            fdType="transparent"
+                            class="fd-calendar__my-item-button"
+                            [class.is-active]="monthCell.current"
+                            tabindex="-1"
+                        >
+                            <span
+                                class="fd-calendar__text"
+                                [attr.aria-labelledby]="
+                                    monthCell.id +
+                                    '-aria-label ' +
+                                    (monthCell.current ? _todayLabelId + ' ' : '') +
+                                    (monthCell.selected ? _selectedDateLabelId : '')
+                                "
+                            >
+                                {{ monthCell.label }}
+                            </span>
+                        </button>
+                        <span hidden aria-hidden="true" [attr.id]="monthCell.id + '-aria-label'">
+                            {{ monthCell.ariaLabel }}
+                        </span>
+                    </td>
+                }
+            </tr>
+        }
     </tbody>
 </table>
-
 <!-- Hidden elements for aria purposes -->
 <div hidden aria-hidden="true">
     <div [attr.id]="_todayLabelId">{{ 'coreCalendar.todayLabel' | fdTranslate }}</div>

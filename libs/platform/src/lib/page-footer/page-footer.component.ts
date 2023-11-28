@@ -19,7 +19,7 @@ export type footerSize = 'sm' | 'md' | 'lg' | 'xl';
 @Component({
     selector: 'fdp-page-footer',
     templateUrl: './page-footer.component.html',
-    styleUrls: ['./page-footer.component.scss'],
+    styleUrl: './page-footer.component.scss',
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     imports: [NgTemplateOutlet]
@@ -41,7 +41,10 @@ export class PlatformFooterComponent {
     public screenHeight: any;
 
     /** @hidden */
-    constructor(private _elRef: ElementRef, private readonly _cdRef: ChangeDetectorRef) {
+    constructor(
+        private _elRef: ElementRef,
+        private readonly _cdRef: ChangeDetectorRef
+    ) {
         warnOnce('PlatformFooterComponent component is deprecated since version 0.40.0');
     }
 

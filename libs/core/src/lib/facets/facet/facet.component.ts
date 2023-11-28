@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -20,14 +20,14 @@ let randomTitleId = 0;
 @Component({
     selector: 'fd-facet',
     templateUrl: './facet.component.html',
-    styleUrls: ['./facet.component.scss'],
+    styleUrl: './facet.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
         '[class.fd-facet]': 'true'
     },
     standalone: true,
-    imports: [NgIf, NgTemplateOutlet, TitleComponent, FormLabelComponent]
+    imports: [NgTemplateOutlet, TitleComponent, FormLabelComponent]
 })
 export class FacetComponent implements AfterViewInit {
     /** the type of Facet: form, key-value, image, rating-indicator */
@@ -80,7 +80,10 @@ export class FacetComponent implements AfterViewInit {
     titleId = `fd-facet-title-id-${randomTitleId++}`;
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
+    constructor(
+        public readonly elementRef: ElementRef<HTMLElement>,
+        private _renderer: Renderer2
+    ) {}
 
     /** @hidden */
     ngAfterViewInit(): void {

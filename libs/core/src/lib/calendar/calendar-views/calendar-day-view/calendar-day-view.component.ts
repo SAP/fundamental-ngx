@@ -23,7 +23,6 @@ import { CalendarCurrent } from '../../models/calendar-current';
 import { ActiveCalendarDayCellStrategy as CalendarActiveDayCellStrategy, CalendarDay } from '../../models/calendar-day';
 import { DateRange } from '../../models/date-range';
 
-import { NgFor, NgIf } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -35,7 +34,7 @@ import { CalendarType, DaysOfWeek } from '../../types';
 @Component({
     selector: 'fd-calendar-day-view',
     templateUrl: './calendar-day-view.component.html',
-    styleUrls: ['./calendar-day-view.component.scss'],
+    styleUrl: './calendar-day-view.component.scss',
     encapsulation: ViewEncapsulation.None,
     host: {
         '[attr.id]': 'viewId',
@@ -43,7 +42,7 @@ import { CalendarType, DaysOfWeek } from '../../types';
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, NgFor, FdTranslatePipe]
+    imports: [FdTranslatePipe]
 })
 export class CalendarDayViewComponent<D> implements OnInit, OnChanges, FocusableCalendarView {
     /**

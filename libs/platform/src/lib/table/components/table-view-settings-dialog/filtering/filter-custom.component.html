@@ -1,7 +1,5 @@
-<ng-container
-    *ngTemplateOutlet="
-        filter.customFilterTemplate;
-        context: { $implicit: _value, valueChangeEmitter: valueChange, contentDensity: contentDensity }
-    "
+<ng-template
+    [ngTemplateOutlet]="filter.customFilterTemplate"
+    [ngTemplateOutletContext]="{ $implicit: _value, valueChangeEmitter: valueChange, contentDensity: contentDensity }"
 >
-</ng-container>
+</ng-template>

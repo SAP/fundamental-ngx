@@ -18,9 +18,7 @@
     <fdp-settings-generator-default-example></fdp-settings-generator-default-example>
 </component-example>
 <code-example [exampleFiles]="settingsGeneratorDefaultExample"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="message-popover" componentName="settings-generator">
     Displaying validation errors with Settings Generator
 </fd-docs-section-title>
@@ -42,9 +40,7 @@
     <fdp-settings-generator-message-popover-example></fdp-settings-generator-message-popover-example>
 </component-example>
 <code-example [exampleFiles]="settingsGeneratorMessagePopoverLayoutExample"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="custom-layout" componentName="settings-generator">
     Settings Generator with Custom Layout
 </fd-docs-section-title>
@@ -66,9 +62,7 @@
     <fdp-settings-generator-custom-layout-example></fdp-settings-generator-custom-layout-example>
 </component-example>
 <code-example [exampleFiles]="settingsGeneratorCustomLayoutExample"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="custom-controls" componentName="settings-generator">
     Settings Generator with Custom Controls
 </fd-docs-section-title>
@@ -86,9 +80,7 @@
     <fdp-settings-generator-custom-control-example></fdp-settings-generator-custom-control-example>
 </component-example>
 <code-example [exampleFiles]="settingsGeneratorCustomControlExample"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="dialog" componentName="settings-generator">
     Settings Generator in Dialog
 </fd-docs-section-title>
@@ -100,9 +92,7 @@
     <fdp-settings-generator-dialog-example></fdp-settings-generator-dialog-example>
 </component-example>
 <code-example [exampleFiles]="settingsGeneratorDialogLayoutExample"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="default-config" componentName="settings-generator">
     Settings Generator default configuration
 </fd-docs-section-title>
@@ -113,6 +103,6 @@
         <code>SettingsGeneratorModule</code>, where <code>config</code> is your configuration object.
     </p>
 </description>
-<ng-container *ngIf="defaultConfigExample | async as defaultConfigExampleString">
+@if (defaultConfigExample | async; as defaultConfigExampleString) {
     <fd-code-snippet language="typescript" [contentBased]="true">{{ defaultConfigExampleString }}</fd-code-snippet>
-</ng-container>
+}

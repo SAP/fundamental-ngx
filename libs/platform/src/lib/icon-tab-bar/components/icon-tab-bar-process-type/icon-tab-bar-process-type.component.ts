@@ -1,7 +1,6 @@
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { take } from 'rxjs/operators';
 
-import { NgFor, NgIf } from '@angular/common';
 import { OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -17,9 +16,7 @@ import { IconTabBarPopoverComponent } from '../popovers/icon-tab-bar-popover/ico
     standalone: true,
     imports: [
         OverflowListDirective,
-        NgIf,
         IconTabBarPopoverComponent,
-        NgFor,
         OverflowListItemDirective,
         IconComponent,
         ButtonComponent

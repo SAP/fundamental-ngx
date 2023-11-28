@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NgFor, NgIf } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
@@ -64,12 +63,10 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
         ButtonComponent,
         ContentDensityDirective,
         PlatformValueHelpDialogModule,
-        NgFor,
         TokenComponent,
         TokenizerComponent,
         TokenizerInputDirective,
-        ToolbarItemDirective,
-        NgIf
+        ToolbarItemDirective
     ]
 })
 export class PlatformVhdInputExampleComponent implements OnInit {

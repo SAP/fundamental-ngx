@@ -1,5 +1,5 @@
 import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
-import { NgForOf, NgIf } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { KeyUtil, RtlService, Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -13,15 +13,7 @@ import { AvatarGroupDataExampleService } from '../avatar-group-data-example.serv
     selector: 'fd-avatar-group-group-type-example',
     templateUrl: './group-type-example.component.html',
     standalone: true,
-    imports: [
-        AvatarGroupComponent,
-        NgForOf,
-        NgIf,
-        AvatarComponent,
-        QuickViewModule,
-        LinkComponent,
-        AvatarGroupItemDirective
-    ]
+    imports: [AvatarGroupComponent, AvatarComponent, QuickViewModule, LinkComponent, AvatarGroupItemDirective]
 })
 export class GroupTypeExampleComponent {
     size: Size = 'l';

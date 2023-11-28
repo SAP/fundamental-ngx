@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, V
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { InitialFocusDirective, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -28,7 +28,6 @@ import { DialogDefaultContent } from '../utils/dialog-default-content.class';
         DialogComponent,
         DialogHeaderComponent,
         TitleComponent,
-        NgIf,
         DialogFullScreenTogglerButtonComponent,
         DialogCloseButtonComponent,
         TemplateDirective,

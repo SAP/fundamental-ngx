@@ -11,9 +11,7 @@
     <fd-list-example></fd-list-example>
 </component-example>
 <code-example [exampleFiles]="simpleList"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="navigation" componentName="list"> Navigation list </fd-docs-section-title>
 <description>
     For a standard list with navigation links, add anchor elements with <code>fd-list-link</code> directive. All items
@@ -23,9 +21,7 @@
     <fd-list-navigation-example></fd-list-navigation-example>
 </component-example>
 <code-example [exampleFiles]="listNavigation"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="indicator" componentName="list"> Navigation indicator </fd-docs-section-title>
 <description>
     If there is only a subset of list items that are navigable, they should be indicated with a navigation arrow. Do not
@@ -36,9 +32,7 @@
     <fd-list-nav-indicator-example></fd-list-nav-indicator-example>
 </component-example>
 <code-example [exampleFiles]="listNavIndicator"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="action" componentName="list"> Action list </fd-docs-section-title>
 <description>
     The action list is used to trigger an action directly from a list of options. To create an action item, add
@@ -49,9 +43,7 @@
     <fd-list-action-example></fd-list-action-example>
 </component-example>
 <code-example [exampleFiles]="listAction"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="sorting-filtering" componentName="list"> Filter and sort list </fd-docs-section-title>
 <description>
     List does not provide functionalities like filtering and sorting data. To implement those features, we recommend
@@ -62,9 +54,7 @@
     <fd-list-data-example></fd-list-data-example>
 </component-example>
 <code-example [exampleFiles]="listData"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="secondary" componentName="list"> Secondary item on list </fd-docs-section-title>
 <description>
     <p>The list component can be customized by adding additional information in additional columns.</p>
@@ -74,25 +64,23 @@
     </p>
     <p>Available types are</p>
     <ul>
-        <li *ngFor="let secondaryListItemType of _secondaryListItemTypes">{{ secondaryListItemType }}</li>
+        @for (secondaryListItemType of _secondaryListItemTypes; track secondaryListItemType) {
+            <li>{{ secondaryListItemType }}</li>
+        }
     </ul>
 </description>
 <component-example>
     <fd-list-secondary-example></fd-list-secondary-example>
 </component-example>
 <code-example [exampleFiles]="secondaryList"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="icon" componentName="list"> List with icons </fd-docs-section-title>
 <description>List can display icons on both sides of the list items.</description>
 <component-example>
     <fd-list-icon-example></fd-list-icon-example>
 </component-example>
 <code-example [exampleFiles]="iconList"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="borderless" componentName="list"> Borderless list </fd-docs-section-title>
 <description>
     It is possible to also remove the borders from the list items by passing <code>[noBorder]="true"</code>.
@@ -101,9 +89,7 @@
     <fd-list-borderless-example></fd-list-borderless-example>
 </component-example>
 <code-example [exampleFiles]="listBorderLess"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="interactive" componentName="list"> Interactive list </fd-docs-section-title>
 <description>
     The interactive (<code>[interactive]="true"</code>) mode will force list item to handle hover and active states.
@@ -113,9 +99,7 @@
     <fd-list-interactive-example></fd-list-interactive-example>
 </component-example>
 <code-example [exampleFiles]="listInteractive"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="icon-complex" componentName="list"> Complex list </fd-docs-section-title>
 <description>
     List items can be split into different groups with individual headers, accompanied by a footer at the bottom.
@@ -124,9 +108,7 @@
     <fd-list-complex-example></fd-list-complex-example>
 </component-example>
 <code-example [exampleFiles]="listComplex"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="selection" componentName="list"> Selection </fd-docs-section-title>
 <description>
     You can also make the list items selectable by adding specific classes to the list and list items.
@@ -139,9 +121,7 @@
     <fd-list-selection-example></fd-list-selection-example>
 </component-example>
 <code-example [exampleFiles]="listSelect"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="keyboard" componentName="list"> Keyboard support </fd-docs-section-title>
 <description>
     By default, list supports keyboard navigation. Keyboard support can be disabled by passing
@@ -153,9 +133,7 @@
     <fd-list-keyboard-example></fd-list-keyboard-example>
 </component-example>
 <code-example [exampleFiles]="keyboardList"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="dnd" componentName="list"> Drag and drop </fd-docs-section-title>
 <description>
     To use drag and drop features in your list, import <code>DragAndDropModule</code> and add the
@@ -165,9 +143,7 @@
     <fd-list-dnd-example></fd-list-dnd-example>
 </component-example>
 <code-example [exampleFiles]="listDnd"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="infinite-scroll" componentName="list"> Infinite scroll list </fd-docs-section-title>
 <description>
     It is possible to implement an infinite scroll function using the <code>fdInfiniteScroll</code> directive. It allows
@@ -178,7 +154,6 @@
     <fd-list-infinite-scroll-example></fd-list-infinite-scroll-example>
 </component-example>
 <code-example [exampleFiles]="infiniteScrollCode"></code-example>
-
 <fd-docs-section-title id="loading" componentName="list"> List loading </fd-docs-section-title>
 <description>
     Here is the examples of list in which content is hidden under loading placeholders (skeletons). For more info about

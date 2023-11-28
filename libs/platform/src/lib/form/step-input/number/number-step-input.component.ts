@@ -1,4 +1,4 @@
-import { NgIf, formatNumber } from '@angular/common';
+import { formatNumber } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -48,7 +48,7 @@ import { StepInputConfig } from '../step-input.config';
 @Component({
     selector: 'fdp-number-step-input',
     templateUrl: 'number-step-input.component.html',
-    styleUrls: ['number-step-input.component.scss'],
+    styleUrl: 'number-step-input.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
@@ -64,7 +64,6 @@ import { StepInputConfig } from '../step-input.config';
         StepInputControlDirective,
         OnlyDigitsDirective,
         StepInputIncrementDirective,
-        NgIf,
         FormMessageComponent,
         ContentDensityModule
     ]

@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -33,7 +32,7 @@ import { AvatarGroupHostConfig } from '../types';
     selector: 'fd-avatar-group-host',
     template: '<ng-content></ng-content>',
     standalone: true,
-    imports: [NgIf],
+    imports: [],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })

@@ -1,15 +1,13 @@
-<ng-container *ngIf="!isLoading; else loaderTmpl">
+@if (!isLoading) {
     <!-- Badge -->
-    <div *ngIf="badge" class="fd-badge" tabindex="0">{{ badge }}</div>
-
+    @if (badge) {
+        <div class="fd-badge" tabindex="0">{{ badge }}</div>
+    }
     <!-- Header and Content -->
     <ng-content></ng-content>
-
     <!-- Footer -->
     <ng-content select="fd-card-footer"></ng-content>
-</ng-container>
-
-<!-- Loader -->
-<ng-template #loaderTmpl>
+} @else {
     <ng-content select="fd-card-loader"></ng-content>
-</ng-template>
+}
+<!-- Loader -->

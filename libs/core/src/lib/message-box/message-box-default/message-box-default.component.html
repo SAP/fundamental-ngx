@@ -1,34 +1,39 @@
-<fd-message-box *ngIf="_messageBoxContent">
-    <fd-message-box-header>
-        <h1 fd-title>{{ _messageBoxContent.title }}</h1>
-    </fd-message-box-header>
-    <fd-message-box-body>
-        <ng-container *ngTemplateOutlet="_contentTemplate"></ng-container>
-    </fd-message-box-body>
-    <fd-message-box-footer *ngIf="_footerVisible">
-        <fd-button-bar
-            *ngIf="_messageBoxContent.approveButton"
-            fdkInitialFocus
-            fdType="emphasized"
-            [label]="_messageBoxContent.approveButton"
-            [ariaLabel]="_messageBoxContent.approveButtonAriaLabel"
-            [id]="_messageBoxContent.approveButtonId"
-            [fdCompact]="!_messageBoxConfig.mobile"
-            (click)="_onApproveButton()"
-        >
-        </fd-button-bar>
-        <fd-button-bar
-            *ngIf="_messageBoxContent.cancelButton"
-            [label]="_messageBoxContent.cancelButton"
-            [ariaLabel]="_messageBoxContent.closeButtonAriaLabel"
-            [id]="_messageBoxContent.cancelButtonId"
-            [fdCompact]="!_messageBoxConfig.mobile"
-            (click)="_onCancelButton()"
-        >
-        </fd-button-bar>
-    </fd-message-box-footer>
-</fd-message-box>
-
+@if (_messageBoxContent) {
+    <fd-message-box>
+        <fd-message-box-header>
+            <h1 fd-title>{{ _messageBoxContent.title }}</h1>
+        </fd-message-box-header>
+        <fd-message-box-body>
+            <ng-template [ngTemplateOutlet]="_contentTemplate"></ng-template>
+        </fd-message-box-body>
+        @if (_footerVisible) {
+            <fd-message-box-footer>
+                @if (_messageBoxContent.approveButton) {
+                    <fd-button-bar
+                        fdkInitialFocus
+                        fdType="emphasized"
+                        [label]="_messageBoxContent.approveButton"
+                        [ariaLabel]="_messageBoxContent.approveButtonAriaLabel"
+                        [id]="_messageBoxContent.approveButtonId"
+                        [fdCompact]="!_messageBoxConfig.mobile"
+                        (click)="_onApproveButton()"
+                    >
+                    </fd-button-bar>
+                }
+                @if (_messageBoxContent.cancelButton) {
+                    <fd-button-bar
+                        [label]="_messageBoxContent.cancelButton"
+                        [ariaLabel]="_messageBoxContent.closeButtonAriaLabel"
+                        [id]="_messageBoxContent.cancelButtonId"
+                        [fdCompact]="!_messageBoxConfig.mobile"
+                        (click)="_onCancelButton()"
+                    >
+                    </fd-button-bar>
+                }
+            </fd-message-box-footer>
+        }
+    </fd-message-box>
+}
 <ng-template #textContent>
     {{ _messageBoxContent?.content }}
 </ng-template>

@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -12,7 +11,7 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import {
     NestedListDirective,
@@ -33,11 +32,11 @@ import { SideNavigationInterface } from './side-navigation.interface';
 @Component({
     templateUrl: './side-navigation.component.html',
     selector: 'fd-side-nav',
-    styleUrls: ['side-navigation.component.scss'],
+    styleUrl: './side-navigation.component.scss',
     encapsulation: ViewEncapsulation.None,
     providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService],
     standalone: true,
-    imports: [NgIf, SideNavigationMainDirective, PreparedNestedListComponent, SideNavigationUtilityDirective]
+    imports: [SideNavigationMainDirective, PreparedNestedListComponent, SideNavigationUtilityDirective]
 })
 export class SideNavigationComponent implements AfterContentInit, AfterViewInit, OnInit, SideNavigationInterface {
     /**
@@ -79,12 +78,15 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
     additionalShellbarCssClass = 'fd-shellbar--side-nav';
 
     /** @hidden */
-    constructor(private keyboardService: NestedListKeyboardService, private nestedListState: NestedListStateService) {
+    constructor(
+        private keyboardService: NestedListKeyboardService,
+        private nestedListState: NestedListStateService
+    ) {
         this.keyboardService.refresh$.subscribe(() => {
             /** Refresh list of elements, that are being supported by keyboard */
             this.keyboardService.refreshItems(this.getLists());
         });
-        console.warn(`
+        warnOnce(`
             SideNavigationComponent is deprecated since version 0.40.0 and will be removed in future release.
             Use the vertical navigation component instead.
             For more information check the documentation.

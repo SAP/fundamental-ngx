@@ -25,7 +25,7 @@ import { GridListItemComponent } from '@fundamental-ngx/core/grid-list';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 
-import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
@@ -59,7 +59,7 @@ let defaultId = 0;
 @Component({
     selector: 'fdp-approval-flow-node',
     templateUrl: './approval-flow-node.component.html',
-    styleUrls: ['./approval-flow-node.component.scss'],
+    styleUrl: './approval-flow-node.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
@@ -69,7 +69,6 @@ let defaultId = 0;
     },
     standalone: true,
     imports: [
-        NgIf,
         ButtonComponent,
         ContentDensityDirective,
         MenuTriggerDirective,
@@ -77,8 +76,6 @@ let defaultId = 0;
         PlatformObjectStatusTextDirective,
         NgTemplateOutlet,
         ApprovalFlowDropZoneDirective,
-        NgSwitch,
-        NgSwitchCase,
         MenuComponent,
         MenuItemComponent,
         MenuInteractiveComponent,

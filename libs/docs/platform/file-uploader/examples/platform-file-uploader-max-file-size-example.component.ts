@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
     FdpFormGroupModule,
@@ -15,7 +14,7 @@ import {
     styleUrls: ['./platform-file-uploader-max-file-size-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FdpFormGroupModule, PlatformFileUploaderModule, FormsModule, NgFor]
+    imports: [FdpFormGroupModule, PlatformFileUploaderModule, FormsModule]
 })
 export class PlatformFileUploaderMaxFileSizeExampleComponent {
     files: File[];

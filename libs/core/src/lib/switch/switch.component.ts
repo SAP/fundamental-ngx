@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -28,7 +28,7 @@ let switchUniqueId = 0;
 @Component({
     selector: 'fd-switch',
     templateUrl: './switch.component.html',
-    styleUrls: ['./switch.component.scss'],
+    styleUrl: './switch.component.scss',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -46,7 +46,7 @@ let switchUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, FormsModule, AsyncPipe, FdTranslatePipe]
+    imports: [FormsModule, AsyncPipe, FdTranslatePipe]
 })
 export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormItemControl {
     /** @hidden */

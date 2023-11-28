@@ -55,16 +55,18 @@
                 ></fd-radio-button>
                 <span fd-list-title>{{ 'platformTable.groupDialogNotGroupedLabel' | fdTranslate }}</span>
             </li>
-            <li fd-list-item *ngFor="let column of columns" [selected]="column.key === field">
-                <fd-radio-button
-                    name="sort-by"
-                    [value]="column.key"
-                    state="default"
-                    [ngModel]="field"
-                    (ngModelChange)="_groupFieldChange($event)"
-                ></fd-radio-button>
-                <span fd-list-title>{{ column.label }}</span>
-            </li>
+            @for (column of columns; track column) {
+                <li fd-list-item [selected]="column.key === field">
+                    <fd-radio-button
+                        name="sort-by"
+                        [value]="column.key"
+                        state="default"
+                        [ngModel]="field"
+                        (ngModelChange)="_groupFieldChange($event)"
+                    ></fd-radio-button>
+                    <span fd-list-title>{{ column.label }}</span>
+                </li>
+            }
         </ul>
     </fd-dialog-body>
 

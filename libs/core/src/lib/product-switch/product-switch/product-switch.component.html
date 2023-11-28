@@ -13,18 +13,18 @@
         [disableScrollbar]="true"
     >
         <fd-popover-control>
-            <button
-                *ngIf="!customProductSwitchButton; else customProductSwitchButtonTmp"
-                fd-button
-                [attr.aria-label]="'coreProductSwitch.ariaLabel' | fdTranslate"
-                [attr.title]="'coreProductSwitch.ariaLabel' | fdTranslate"
-                class="fd-shellbar__button"
-                glyph="grid"
-                fdType="transparent"
-            ></button>
-            <ng-template #customProductSwitchButtonTmp>
-                <ng-container *ngTemplateOutlet="customProductSwitchButton.templateRef"></ng-container>
-            </ng-template>
+            @if (!customProductSwitchButton) {
+                <button
+                    fd-button
+                    [attr.aria-label]="'coreProductSwitch.ariaLabel' | fdTranslate"
+                    [attr.title]="'coreProductSwitch.ariaLabel' | fdTranslate"
+                    class="fd-shellbar__button"
+                    glyph="grid"
+                    fdType="transparent"
+                ></button>
+            } @else {
+                <ng-template [ngTemplateOutlet]="customProductSwitchButton.templateRef"></ng-template>
+            }
         </fd-popover-control>
         <fd-popover-body>
             <ng-content></ng-content>

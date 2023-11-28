@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
 
@@ -6,7 +5,7 @@ import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
     selector: 'fd-infinite-scroll-basic-example',
     templateUrl: './infinite-scroll-basic-example.component.html',
     standalone: true,
-    imports: [InfiniteScrollModule, NgFor]
+    imports: [InfiniteScrollModule]
 })
 export class InfiniteScrollBasicExampleComponent implements OnInit {
     // List that is displayed to the user

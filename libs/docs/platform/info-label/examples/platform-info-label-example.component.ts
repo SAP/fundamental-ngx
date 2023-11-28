@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { PlatformInfoLabelModule } from '@fundamental-ngx/platform/info-label';
 
@@ -14,7 +13,7 @@ export class PlatformInfoLabelExampleComponent {}
     selector: 'fdp-platform-info-label-text-example',
     templateUrl: './platform-info-label-text-example.component.html',
     standalone: true,
-    imports: [NgFor, PlatformInfoLabelModule]
+    imports: [PlatformInfoLabelModule]
 })
 export class PlatformInfoLableTextExampleComponent {}
 
@@ -22,7 +21,7 @@ export class PlatformInfoLableTextExampleComponent {}
     selector: 'fdp-platform-info-label-text-icon-example',
     templateUrl: './platform-info-label-text-and-icon-example.component.html',
     standalone: true,
-    imports: [NgFor, PlatformInfoLabelModule]
+    imports: [PlatformInfoLabelModule]
 })
 export class PlatformInfoLableTextIconExampleComponent {}
 

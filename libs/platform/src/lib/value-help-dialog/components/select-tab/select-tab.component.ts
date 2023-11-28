@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor, NgIf, SlicePipe } from '@angular/common';
+import { SlicePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FocusableGridDirective, RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { BarComponent, BarElementDirective, BarMiddleDirective } from '@fundamental-ngx/core/bar';
@@ -41,7 +41,7 @@ let titleUniqueId = 0;
 @Component({
     selector: 'fdp-select-tab',
     templateUrl: './select-tab.component.html',
-    styleUrls: ['./select-tab.component.scss'],
+    styleUrl: './select-tab.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
@@ -54,12 +54,10 @@ let titleUniqueId = 0;
         TableComponent,
         FormLabelComponent,
         TableHeaderDirective,
-        NgIf,
         TableRowDirective,
         TableCellDirective,
         CheckboxComponent,
         FormsModule,
-        NgFor,
         TableBodyDirective,
         TableTextDirective,
         BarComponent,
@@ -190,13 +188,13 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
     }
 
     /** @hidden Track function for main data */
-    _trackByTableRowFn(_index: number, item: T): number | string | undefined {
+    _trackByTableRowFn: (_index: number, item: T) => string | undefined = (_index: number, item: T) => {
         if (item) {
             return item[this.uniqueKey];
         }
 
         return undefined;
-    }
+    };
 
     /** @hidden Track function for filters */
     _trackByFilterFn(_index: number, item: VhdFilter): number | string | undefined {

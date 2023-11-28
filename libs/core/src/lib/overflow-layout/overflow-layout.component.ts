@@ -1,7 +1,7 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -19,7 +19,6 @@ import {
     Optional,
     Output,
     QueryList,
-    TemplateRef,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
@@ -46,7 +45,7 @@ import { FD_OVERFLOW_ITEM_REF } from './tokens/overflow-item-ref.token';
 @Component({
     selector: 'fd-overflow-layout',
     templateUrl: './overflow-layout.component.html',
-    styleUrls: ['./overflow-layout.component.scss'],
+    styleUrl: './overflow-layout.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
@@ -58,9 +57,7 @@ import { FD_OVERFLOW_ITEM_REF } from './tokens/overflow-item-ref.token';
     ],
     standalone: true,
     imports: [
-        NgIf,
         NgTemplateOutlet,
-        NgFor,
         OverflowLayoutItemContainerDirective,
         OverflowItemContainerRefDirective,
         PopoverComponent,
@@ -333,11 +330,6 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
      */
     registerPopoverContent(content: OverflowPopoverContent): void {
         this._overflowPopoverContent = content;
-    }
-
-    /** @hidden */
-    _itemsTrackFn(_: number, item: OverflowItemRef): TemplateRef<any> {
-        return item.templateRef;
     }
 
     /** @hidden */

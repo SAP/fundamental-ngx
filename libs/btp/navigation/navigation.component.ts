@@ -2,7 +2,7 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -61,7 +61,7 @@ import { FdbNavigationState, FdbNavigationType } from './navigation.types';
             useExisting: forwardRef(() => NavigationComponent)
         }
     ],
-    imports: [NgIf, NgTemplateOutlet, NavigationListComponent, NavigationListItemComponent, NavigationLinkComponent]
+    imports: [NgTemplateOutlet, NavigationListComponent, NavigationListItemComponent, NavigationLinkComponent]
 })
 export class NavigationComponent
     extends FdbNavigationComponent

@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -37,8 +36,6 @@ import { SettingsGeneratorSidebarIconComponent } from './settings-generator-side
     standalone: true,
     imports: [
         ListModule,
-        NgFor,
-        NgIf,
         SettingsGeneratorSidebarIconComponent,
         SkeletonComponent,
         SettingsGeneratorContentComponent,

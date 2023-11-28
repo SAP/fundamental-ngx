@@ -29,16 +29,16 @@ import {
     `,
     standalone: true,
     imports: [
-        NumericContentDirective,
-        NumericContentKpiContainerDirective,
-        NumericContentKpiDirective,
-        NumericContentLaunchIconContainerDirective,
-        NumericContentLaunchIconDirective,
-        NumericContentScaleArrowDirective,
-        NumericContentScaleContainerDirective,
-        NumericContentScaleDirective,
-        NumericContentScaleTextDirective
-    ]
+    NumericContentDirective,
+    NumericContentKpiContainerDirective,
+    NumericContentKpiDirective,
+    NumericContentLaunchIconContainerDirective,
+    NumericContentLaunchIconDirective,
+    NumericContentScaleArrowDirective,
+    NumericContentScaleContainerDirective,
+    NumericContentScaleDirective,
+    NumericContentScaleTextDirective
+]
 })
 export class TestComponent {
     @ViewChild(NumericContentDirective)

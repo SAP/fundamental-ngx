@@ -1,10 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CommonModule } from '@angular/common';
+
 import { Component, ViewChild } from '@angular/core';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { DynamicPageModule } from '../../dynamic-page.module';
 import { DynamicPageSubheaderComponent } from './dynamic-page-subheader.component';
 import { first } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: ` <fd-dynamic-page-subheader></fd-dynamic-page-subheader>`,

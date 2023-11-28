@@ -19,66 +19,73 @@
     (sendReminders)="sendReminders($event)"
 >
 </fdp-approval-flow>
-
 <ng-template #approvalStatusTemplate let-node="node">
-    <ng-container [ngSwitch]="node.status">
-        <ng-container *ngSwitchCase="'approved'">{{ 'Approved' }}</ng-container>
-        <ng-container *ngSwitchCase="'rejected'">{{ 'Rejected' }}</ng-container>
-        <ng-container *ngSwitchCase="'in progress'">{{ 'In progress' }}</ng-container>
-        <ng-container *ngSwitchCase="'not started'">{{ 'Not started' }}</ng-container>
-        <ng-container *ngSwitchCase="'denied'">{{ 'Denied' }}</ng-container>
-        <ng-container *ngSwitchCase="'withdrawn'">{{ 'Withdrawn' }}</ng-container>
-    </ng-container>
+    @switch (node.status) {
+        @case ('approved') {
+            {{ 'Approved' }}
+        }
+        @case ('rejected') {
+            {{ 'Rejected' }}
+        }
+        @case ('in progress') {
+            {{ 'In progress' }}
+        }
+        @case ('not started') {
+            {{ 'Not started' }}
+        }
+        @case ('denied') {
+            {{ 'Denied' }}
+        }
+        @case ('withdrawn') {
+            {{ 'Withdrawn' }}
+        }
+    }
 </ng-template>
-
 <ng-template #userDetailsTemplate let-data="data">
     <h4 style="margin-bottom: 1rem">Contact info</h4>
-
-    <p style="display: flex; flex-direction: column" *ngIf="data?.phone">
-        <span>Mobile</span>
-        <a [href]="'tel:' + data.phone">{{ data.phone }}</a>
-    </p>
-
-    <p style="display: flex; flex-direction: column" *ngIf="data?.phone">
-        <span>Phone</span>
-        <a [href]="'tel:' + data.phone">{{ data.phone }}</a>
-    </p>
-
-    <p style="display: flex; flex-direction: column" *ngIf="data?.email">
-        <span>E-mail</span>
-        <a [href]="'mailto:' + data.email">{{ data.email }}</a>
-    </p>
-
+    @if (data?.phone) {
+        <p style="display: flex; flex-direction: column">
+            <span>Mobile</span>
+            <a [href]="'tel:' + data.phone">{{ data.phone }}</a>
+        </p>
+    }
+    @if (data?.phone) {
+        <p style="display: flex; flex-direction: column">
+            <span>Phone</span>
+            <a [href]="'tel:' + data.phone">{{ data.phone }}</a>
+        </p>
+    }
+    @if (data?.email) {
+        <p style="display: flex; flex-direction: column">
+            <span>E-mail</span>
+            <a [href]="'mailto:' + data.email">{{ data.email }}</a>
+        </p>
+    }
     <h4 style="margin-top: 1.5rem; margin-bottom: 1rem">Company</h4>
-
     <p style="display: flex; flex-direction: column">
         <span>Name</span>
         <span>Company A{{ data?.email }}</span>
     </p>
-
     <p style="display: flex; flex-direction: column">
         <span>Address</span>
         <span>481 West Street, Anytown OH, 83749, USA</span>
     </p>
 </ng-template>
-
 <ng-template let-messageToast #reminderTemplate>
-    <ng-container *ngIf="messageToast.data.targets.length === 1; else multipleReceivers">
+    @if (messageToast.data.targets.length === 1) {
         Reminder has been sent to {{ messageToast.data.targets[0].name }}
-    </ng-container>
-
-    <ng-template #multipleReceivers>
+    } @else {
         Reminder has been sent to {{ messageToast.data.targets.length }} members of
         {{ messageToast.data.node.description }}
-    </ng-template>
+    }
 </ng-template>
-
 <!-- Playground code below, not related to the component itself -->
-
 <p>
     Selected example:
     <select [(ngModel)]="selectedExample" (ngModelChange)="changeExampleData()">
-        <option *ngFor="let example of examples" [value]="example">{{ example | titlecase }}</option>
+        @for (example of examples; track example) {
+            <option [value]="example">{{ example | titlecase }}</option>
+        }
     </select>
 </p>
 <p>Enable "Edit mode": <input type="checkbox" [(ngModel)]="editModeEnabled" /></p>
@@ -103,7 +110,6 @@
         />
         <label for="disableAddingNodeBefore">Disable adding before</label>
     </p>
-
     <p>
         <input
             id="disableAddingNodeAfter"
@@ -114,7 +120,6 @@
         />
         <label for="disableAddingNodeAfter">Disable adding after</label>
     </p>
-
     <p>
         <input
             id="disableAddingNodeParallel"
@@ -125,7 +130,6 @@
         />
         <label for="disableAddingNodeParallel">Disable adding parallel</label>
     </p>
-
     <p>
         <input
             id="disableEditingNode"
@@ -136,7 +140,6 @@
         />
         <label for="disableEditingNode">Disable editing</label>
     </p>
-
     <p>
         <input
             id="disableRemovingNode"
@@ -169,7 +172,6 @@
         />
         <label for="disableAddingNodeBeforeForNewNodes">Disable adding before</label>
     </p>
-
     <p>
         <input
             id="disableAddingNodeAfterForNewNodes"
@@ -180,7 +182,6 @@
         />
         <label for="disableAddingNodeAfterForNewNodes">Disable adding after</label>
     </p>
-
     <p>
         <input
             id="disableAddingNodeParallelForNewNodes"

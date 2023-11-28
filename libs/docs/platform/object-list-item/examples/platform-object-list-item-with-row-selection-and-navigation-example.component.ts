@@ -159,7 +159,10 @@ export class PlatformObjectListItemWithRowSelectionAndNavigationExampleComponent
     _dataSource = new ListDataSource<Product>(new ListDataProvider());
     _selectedItems: string;
 
-    constructor(private _render: Renderer2, private _elementRef: ElementRef) {}
+    constructor(
+        private _render: Renderer2,
+        private _elementRef: ElementRef
+    ) {}
 
     ngAfterViewInit(): void {
         const toolbar = this._elementRef.nativeElement.querySelector('fd-toolbar');

@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation, forwardRef } from '@angular/core';
 import { ClickedDirective } from '@fundamental-ngx/cdk/utils';
 import { ListModule } from '@fundamental-ngx/core/list';
@@ -11,19 +11,12 @@ import {
 @Component({
     selector: 'fdp-theme-selector-list',
     templateUrl: './theme-selector-list.component.html',
-    styleUrls: ['./theme-selector-list.component.scss'],
+    styleUrl: './theme-selector-list.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider],
     standalone: true,
-    imports: [
-        ListModule,
-        NgFor,
-        ClickedDirective,
-        NgIf,
-        forwardRef(() => ThemeSelectorListIconComponent),
-        NgTemplateOutlet
-    ]
+    imports: [ListModule, ClickedDirective, forwardRef(() => ThemeSelectorListIconComponent), NgTemplateOutlet]
 })
 export class ThemeSelectorListComponent extends BaseDynamicFormGeneratorControl implements OnInit {
     /** @hidden */

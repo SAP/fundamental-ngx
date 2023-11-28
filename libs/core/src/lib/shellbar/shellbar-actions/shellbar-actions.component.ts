@@ -1,34 +1,33 @@
 import {
-    Component,
-    ContentChildren,
-    Input,
-    QueryList,
-    ViewEncapsulation,
-    ContentChild,
-    ViewChild,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    inject,
-    Output,
+    Component,
+    ContentChild,
+    ContentChildren,
     EventEmitter,
+    HostBinding,
+    Input,
     OnDestroy,
-    HostBinding
+    Output,
+    QueryList,
+    ViewChild,
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 
-import { FD_COMBOBOX_COMPONENT, ComboboxInterface } from '@fundamental-ngx/core/combobox';
+import { ComboboxInterface, FD_COMBOBOX_COMPONENT } from '@fundamental-ngx/core/combobox';
 import { FD_PRODUCT_SWITCH_COMPONENT, ProductSwitchComponent } from '@fundamental-ngx/core/product-switch';
 
-import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
-import { ShellbarUserMenu } from '../model/shellbar-user-menu';
-import { ShellbarUser } from '../model/shellbar-user';
-import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
 import { CdkPortalOutlet, DomPortal, PortalModule } from '@angular/cdk/portal';
-import { FD_SHELLBAR_ACTION_COMPONENT, FD_SHELLBAR_COMPONENT } from '../tokens';
-import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { ShellbarSizes } from '../model/shellbar-sizes';
+import { ShellbarUser } from '../model/shellbar-user';
+import { ShellbarUserMenu } from '../model/shellbar-user-menu';
+import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
 import { ShellbarActionsMobileComponent } from '../shellbar-actions-mobile/shellbar-actions-mobile.component';
-import { NgIf } from '@angular/common';
+import { FD_SHELLBAR_ACTION_COMPONENT, FD_SHELLBAR_COMPONENT } from '../tokens';
+import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
 
 /**
  * The component that represents shellbar actions.
@@ -60,7 +59,7 @@ import { NgIf } from '@angular/common';
         '[class.fd-shellbar__group--actions]': 'true'
     },
     standalone: true,
-    imports: [NgIf, PortalModule, ShellbarActionsMobileComponent, ShellbarActionComponent, ShellbarUserMenuComponent]
+    imports: [PortalModule, ShellbarActionsMobileComponent, ShellbarActionComponent, ShellbarUserMenuComponent]
 })
 export class ShellbarActionsComponent implements OnDestroy {
     /** The user data. */

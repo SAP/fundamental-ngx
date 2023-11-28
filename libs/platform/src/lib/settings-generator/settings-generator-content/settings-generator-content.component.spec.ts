@@ -5,8 +5,8 @@ import { SettingsGeneratorContentComponent } from './settings-generator-content.
 import { PlatformFormGeneratorModule } from '@fundamental-ngx/platform/form';
 
 class SettingsGeneratorServiceStub {
-    _addFormGenerator(_: string[]): void {}
-    _removeFormGenerator(_: string[]): void {}
+    _addFormGenerator(): void {}
+    _removeFormGenerator(): void {}
 }
 
 describe('SettingsGeneratorContentComponent', () => {

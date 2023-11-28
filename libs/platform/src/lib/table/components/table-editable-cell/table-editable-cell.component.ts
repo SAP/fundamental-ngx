@@ -1,4 +1,3 @@
-import { NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -15,16 +14,7 @@ let controlUniqId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: EditableTableCell, useExisting: TableEditableCellComponent }],
     standalone: true,
-    imports: [
-        FormsModule,
-        NgSwitch,
-        NgSwitchCase,
-        InputComponent,
-        PlatformDatePickerComponent,
-        SwitchComponent,
-        NgSwitchDefault,
-        FdTranslatePipe
-    ]
+    imports: [FormsModule, InputComponent, PlatformDatePickerComponent, SwitchComponent, FdTranslatePipe]
 })
 export class TableEditableCellComponent implements EditableTableCell {
     /** Table row definition. */

@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 
-import { NgIf } from '@angular/common';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
@@ -31,7 +30,6 @@ import { PlatformDynamicPagePageOverflowService } from '../platform-dynamic-page
     standalone: true,
     imports: [
         ButtonComponent,
-        NgIf,
         PlatformDynamicPageModule,
         DynamicPageHeaderTitleDirective,
         DynamicPageHeaderSubtitleDirective,

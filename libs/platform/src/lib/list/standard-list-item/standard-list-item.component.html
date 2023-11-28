@@ -1,5 +1,5 @@
 <!--  list item navigation with Arrow-->
-<ng-container *ngIf="navigationIndicator || (navigated && !(noDataText !== null && noDataText !== undefined))">
+@if (navigationIndicator || (navigated && !(noDataText !== null && noDataText !== undefined))) {
     <li
         #listItem
         [unread]="unRead"
@@ -19,7 +19,7 @@
         [attr.aria-selected]="_selectedAttr"
         [attr.aria-setsize]="ariaSetSize | async"
     >
-        <ng-container *ngTemplateOutlet="selectionTemplate"> </ng-container>
+        <ng-template [ngTemplateOutlet]="selectionTemplate"> </ng-template>
         <a
             #linkElement
             fd-list-link
@@ -27,13 +27,12 @@
             [navigationIndicator]="navigationIndicator"
             [navigated]="navigated"
         >
-            <ng-container *ngTemplateOutlet="_hasByLine ? byLineTemplate : commonTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="_hasByLine ? byLineTemplate : commonTemplate"></ng-template>
         </a>
     </li>
-</ng-container>
-
+}
 <!--  list item without navigation and used for simple list display-->
-<ng-container *ngIf="!navigationIndicator && !navigated && !(noDataText !== null && noDataText !== undefined)">
+@if (!navigationIndicator && !navigated && !(noDataText !== null && noDataText !== undefined)) {
     <li
         #listItem
         [unread]="unRead"
@@ -52,12 +51,11 @@
         [attr.aria-selected]="_selectedAttr"
         [attr.aria-setsize]="ariaSetSize | async"
     >
-        <ng-container *ngTemplateOutlet="selectionTemplate"></ng-container>
-        <ng-container *ngTemplateOutlet="_hasByLine ? byLineTemplate : commonTemplate"></ng-container>
+        <ng-template [ngTemplateOutlet]="selectionTemplate"></ng-template>
+        <ng-template [ngTemplateOutlet]="_hasByLine ? byLineTemplate : commonTemplate"></ng-template>
     </li>
-</ng-container>
-
-<ng-container *ngIf="noDataText !== null && noDataText !== undefined">
+}
+@if (noDataText !== null && noDataText !== undefined) {
     <li
         #listItem
         fd-list-item
@@ -70,72 +68,11 @@
     >
         <span fd-list-title [attr.aria-label]="noDataText" [attr.title]="noDataText">{{ noDataText }}</span>
     </li>
-</ng-container>
-
+}
 <ng-template #commonTemplate>
-    <fd-icon
-        class="fd-list__icon"
-        *ngIf="icon.glyph"
-        [glyph]="icon.glyph"
-        [font]="icon.font"
-        [ariaLabel]="icon.ariaLabel"
-        [attr.alt]="icon.ariaLabel"
-        role="img"
-    >
-    </fd-icon>
-    <fd-avatar
-        [size]="avatar.size"
-        [glyph]="avatar.glyph"
-        [zoomGlyph]="avatar.zoomGlyph"
-        *ngIf="avatar.label || avatar.image || avatar.glyph || avatar.zoomGlyph"
-        [label]="avatar.label"
-        [circle]="avatar.circle"
-        [placeholder]="avatar.placeholder"
-        [tile]="avatar.tile"
-        [colorAccent]="avatar.colorAccent"
-        [image]="avatar.image"
-        [transparent]="avatar.transparent"
-        [random]="avatar.random"
-        [class]="'fd-list__icon ' + avatar.class"
-        [ariaLabel]="avatar.ariaLabel"
-        [ariaLabelledby]="avatar.ariaLabelledby"
-        [contain]="avatar.contain"
-        [border]="avatar.border"
-        [alterIcon]="avatar.alterIcon"
-        [backupImage]="avatar.backupImage"
-        [clickable]="avatar.clickable"
-        [attr.alt]="avatar.ariaLabel"
-        role="img"
-    ></fd-avatar>
-    <span *ngIf="title" fd-list-title [attr.aria-label]="ariaLabel" [attr.nowrap]="titleWrap" [attr.title]="title">
-        {{ title }}
-    </span>
-    <span
-        fd-list-secondary
-        [attr.aria-label]="secondary"
-        *ngIf="secondary !== null && secondary !== undefined"
-        [attr.title]="secondary"
-        [attr.nowrap]="secondaryWrap"
-    >
-        {{ secondary }}
-    </span>
-    <span
-        fd-list-secondary
-        class="fd-list__item-counter"
-        [attr.aria-label]="counter"
-        *ngIf="counter !== null && counter !== undefined"
-        [attr.title]="counter"
-    >
-        {{ counter }}
-    </span>
-    <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
-</ng-template>
-
-<ng-template #byLineTemplate>
-    <div fdListThumbnail>
+    @if (icon.glyph) {
         <fd-icon
             class="fd-list__icon"
-            *ngIf="icon.glyph"
             [glyph]="icon.glyph"
             [font]="icon.font"
             [ariaLabel]="icon.ariaLabel"
@@ -143,11 +80,12 @@
             role="img"
         >
         </fd-icon>
+    }
+    @if (avatar.label || avatar.image || avatar.glyph || avatar.zoomGlyph) {
         <fd-avatar
             [size]="avatar.size"
             [glyph]="avatar.glyph"
             [zoomGlyph]="avatar.zoomGlyph"
-            *ngIf="avatar.label || avatar.image || avatar.glyph || avatar.zoomGlyph"
             [label]="avatar.label"
             [circle]="avatar.circle"
             [placeholder]="avatar.placeholder"
@@ -156,7 +94,7 @@
             [image]="avatar.image"
             [transparent]="avatar.transparent"
             [random]="avatar.random"
-            [class]="avatar.class"
+            [class]="'fd-list__icon ' + avatar.class"
             [ariaLabel]="avatar.ariaLabel"
             [ariaLabelledby]="avatar.ariaLabelledby"
             [contain]="avatar.contain"
@@ -167,87 +105,144 @@
             [attr.alt]="avatar.ariaLabel"
             role="img"
         ></fd-avatar>
-    </div>
-
-    <div class="fd-list__content">
-        <div *ngIf="title" fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap" [attr.title]="title">
+    }
+    @if (title) {
+        <span fd-list-title [attr.aria-label]="ariaLabel" [attr.nowrap]="titleWrap" [attr.title]="title">
             {{ title }}
-        </div>
+        </span>
+    }
+    @if (secondary !== null && secondary !== undefined) {
+        <span fd-list-secondary [attr.aria-label]="secondary" [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
+            {{ secondary }}
+        </span>
+    }
+    @if (counter !== null && counter !== undefined) {
+        <span fd-list-secondary class="fd-list__item-counter" [attr.aria-label]="counter" [attr.title]="counter">
+            {{ counter }}
+        </span>
+    }
+    <ng-template [ngTemplateOutlet]="actionsTemplate"></ng-template>
+</ng-template>
+<ng-template #byLineTemplate>
+    <div fdListThumbnail>
+        @if (icon.glyph) {
+            <fd-icon
+                class="fd-list__icon"
+                [glyph]="icon.glyph"
+                [font]="icon.font"
+                [ariaLabel]="icon.ariaLabel"
+                [attr.alt]="icon.ariaLabel"
+                role="img"
+            >
+            </fd-icon>
+        }
+        @if (avatar.label || avatar.image || avatar.glyph || avatar.zoomGlyph) {
+            <fd-avatar
+                [size]="avatar.size"
+                [glyph]="avatar.glyph"
+                [zoomGlyph]="avatar.zoomGlyph"
+                [label]="avatar.label"
+                [circle]="avatar.circle"
+                [placeholder]="avatar.placeholder"
+                [tile]="avatar.tile"
+                [colorAccent]="avatar.colorAccent"
+                [image]="avatar.image"
+                [transparent]="avatar.transparent"
+                [random]="avatar.random"
+                [class]="avatar.class"
+                [ariaLabel]="avatar.ariaLabel"
+                [ariaLabelledby]="avatar.ariaLabelledby"
+                [contain]="avatar.contain"
+                [border]="avatar.border"
+                [alterIcon]="avatar.alterIcon"
+                [backupImage]="avatar.backupImage"
+                [clickable]="avatar.clickable"
+                [attr.alt]="avatar.ariaLabel"
+                role="img"
+            ></fd-avatar>
+        }
+    </div>
+    <div class="fd-list__content">
+        @if (title) {
+            <div fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap" [attr.title]="title">
+                {{ title }}
+            </div>
+        }
         <div class="fd-list__byline fd-list__byline--2-col">
-            <ng-container *ngIf="description">
-                <ng-container
+            @if (description) {
+                <ng-template
                     [ngTemplateOutlet]="_isAdvancedText(description) ? advancedDescription : simpleDescription"
                     [ngTemplateOutletContext]="{ $implicit: description }"
-                ></ng-container>
-            </ng-container>
-            <ng-container *ngIf="secondary">
-                <ng-container
+                ></ng-template>
+            }
+            @if (secondary) {
+                <ng-template
                     [ngTemplateOutlet]="_isAdvancedText(secondary) ? advancedSecondary : simpleSecondary"
                     [ngTemplateOutletContext]="{ $implicit: secondary }"
-                ></ng-container>
-            </ng-container>
+                ></ng-template>
+            }
         </div>
     </div>
-    <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
+    <ng-template [ngTemplateOutlet]="actionsTemplate"></ng-template>
 </ng-template>
-
 <ng-template #selectionTemplate>
-    <div
-        fd-form-item
-        class="fd-list__form-item"
-        *ngIf="(selectionMode === 'multi' || selectionMode === 'single') && !rowSelection"
-    >
-        <fd-checkbox
-            *ngIf="selectionMode === 'multi'"
-            (click)="$event.stopPropagation()"
-            [(ngModel)]="_selected"
-            [ariaLabel]="ariaLabel"
-            tabIndexValue="-1"
-            (ngModelChange)="_onCheckboxModelChange()"
-            [attr.aria-selected]="_selected"
-        >
-        </fd-checkbox>
-        <fd-radio-button
-            *ngIf="selectionMode === 'single'"
-            [value]="value"
-            [name]="name"
-            role="radio"
-            [(ngModel)]="selectionValue"
-            [attr.aria-selected]="_selected"
-        >
-        </fd-radio-button>
-    </div>
+    @if ((selectionMode === 'multi' || selectionMode === 'single') && !rowSelection) {
+        <div fd-form-item class="fd-list__form-item">
+            @if (selectionMode === 'multi') {
+                <fd-checkbox
+                    (click)="$event.stopPropagation()"
+                    [(ngModel)]="_selected"
+                    [ariaLabel]="ariaLabel"
+                    tabIndexValue="-1"
+                    (ngModelChange)="_onCheckboxModelChange()"
+                    [attr.aria-selected]="_selected"
+                >
+                </fd-checkbox>
+            }
+            @if (selectionMode === 'single') {
+                <fd-radio-button
+                    [value]="value"
+                    [name]="name"
+                    role="radio"
+                    [(ngModel)]="selectionValue"
+                    [attr.aria-selected]="_selected"
+                >
+                </fd-radio-button>
+            }
+        </div>
+    }
 </ng-template>
 <ng-template #actionsTemplate>
     <ng-content select="#secondaryAction"></ng-content>
-    <button
-        fd-button
-        #edit
-        [attr.id]="'detail-' + id"
-        *ngIf="listType === 'detail'"
-        role="button"
-        fdType="transparent"
-        glyph="edit"
-        (click)="_onActionButtonClick('edit')"
-        [attr.aria-label]="'platformStandardListItem.detailsActionAriaLabel' | fdTranslate"
-        [attr.title]="'platformStandardListItem.detailsActionAriaLabel' | fdTranslate"
-        (keydown)="_onKeyButtonClick($event, 'edit')"
-    ></button>
-    <button
-        fd-button
-        #delete
-        [attr.id]="'delete-' + id"
-        *ngIf="selectionMode === 'delete'"
-        role="button"
-        [attr.aria-label]="'platformStandardListItem.deleteActionAriaLabel' | fdTranslate"
-        [attr.title]="'platformStandardListItem.deleteActionAriaLabel' | fdTranslate"
-        fdType="transparent"
-        glyph="decline"
-        (click)="_onActionButtonClick('delete')"
-        (keydown)="_onKeyButtonClick($event, 'delete')"
-    ></button>
+    @if (listType === 'detail') {
+        <button
+            fd-button
+            #edit
+            [attr.id]="'detail-' + id"
+            role="button"
+            fdType="transparent"
+            glyph="edit"
+            (click)="_onActionButtonClick('edit')"
+            [attr.aria-label]="'platformStandardListItem.detailsActionAriaLabel' | fdTranslate"
+            [attr.title]="'platformStandardListItem.detailsActionAriaLabel' | fdTranslate"
+            (keydown)="_onKeyButtonClick($event, 'edit')"
+        ></button>
+    }
+    @if (selectionMode === 'delete') {
+        <button
+            fd-button
+            #delete
+            [attr.id]="'delete-' + id"
+            role="button"
+            [attr.aria-label]="'platformStandardListItem.deleteActionAriaLabel' | fdTranslate"
+            [attr.title]="'platformStandardListItem.deleteActionAriaLabel' | fdTranslate"
+            fdType="transparent"
+            glyph="decline"
+            (click)="_onActionButtonClick('delete')"
+            (keydown)="_onKeyButtonClick($event, 'delete')"
+        ></button>
+    }
 </ng-template>
-
 <ng-template #simpleDescription let-description>
     <span
         class="fd-list__byline-left"
@@ -268,46 +263,47 @@
         {{ description.text }}
     </span>
 </ng-template>
-
 <ng-template #simpleSecondary let-secondary>
-    <span
-        *ngIf="!inverted"
-        [attr.aria-label]="secondary"
-        class="fd-list__byline-right"
-        [class]="statusType ? 'fd-list__byline-right--' + statusType : ''"
-        [attr.title]="secondary"
-        [attr.nowrap]="secondaryWrap"
-    >
-        {{ secondary }}
-    </span>
-    <span
-        class="fd-list__byline-right"
-        *ngIf="inverted"
-        [attr.aria-label]="secondary"
-        [attr.title]="secondary"
-        [attr.nowrap]="secondaryWrap"
-    >
-        <fdp-object-status [status]="statusType" [inverted]="inverted" [label]="secondary"></fdp-object-status>
-    </span>
+    @if (!inverted) {
+        <span
+            [attr.aria-label]="secondary"
+            class="fd-list__byline-right"
+            [class]="statusType ? 'fd-list__byline-right--' + statusType : ''"
+            [attr.title]="secondary"
+            [attr.nowrap]="secondaryWrap"
+        >
+            {{ secondary }}
+        </span>
+    } @else {
+        <span
+            class="fd-list__byline-right"
+            [attr.aria-label]="secondary"
+            [attr.title]="secondary"
+            [attr.nowrap]="secondaryWrap"
+        >
+            <fdp-object-status [status]="statusType" [inverted]="inverted" [label]="secondary"></fdp-object-status>
+        </span>
+    }
 </ng-template>
 <ng-template #advancedSecondary let-secondary>
-    <span
-        *ngIf="!inverted"
-        [attr.aria-label]="secondary.ariaLabel ?? secondary.text"
-        class="fd-list__byline-right"
-        [class]="statusType ? 'fd-list__byline-right--' + statusType : ''"
-        [attr.title]="secondary.title ?? secondary.text"
-        [attr.nowrap]="secondaryWrap"
-    >
-        {{ secondary.text }}
-    </span>
-    <span
-        class="fd-list__byline-right"
-        *ngIf="inverted"
-        [attr.aria-label]="secondary.ariaLabel ?? secondary.text"
-        [attr.title]="secondary.title ?? secondary.text"
-        [attr.nowrap]="secondaryWrap"
-    >
-        <fdp-object-status [status]="statusType" [inverted]="inverted" [label]="secondary.text"></fdp-object-status>
-    </span>
+    @if (!inverted) {
+        <span
+            [attr.aria-label]="secondary.ariaLabel ?? secondary.text"
+            class="fd-list__byline-right"
+            [class]="statusType ? 'fd-list__byline-right--' + statusType : ''"
+            [attr.title]="secondary.title ?? secondary.text"
+            [attr.nowrap]="secondaryWrap"
+        >
+            {{ secondary.text }}
+        </span>
+    } @else {
+        <span
+            class="fd-list__byline-right"
+            [attr.aria-label]="secondary.ariaLabel ?? secondary.text"
+            [attr.title]="secondary.title ?? secondary.text"
+            [attr.nowrap]="secondaryWrap"
+        >
+            <fdp-object-status [status]="statusType" [inverted]="inverted" [label]="secondary.text"></fdp-object-status>
+        </span>
+    }
 </ng-template>

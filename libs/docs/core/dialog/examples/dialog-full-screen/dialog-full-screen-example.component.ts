@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { AsyncPipe, NgFor } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -28,18 +28,18 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
                 (click)="dialogRef.toggleFullScreen()"
             ></button>
         </fd-dialog-header>
-
         <fd-dialog-body>
             <p id="fd-dialog-body-1" role="dialog" style="text-align: justify; margin: 0">
                 {{ dialogRef.data.pinnapleDescription }}
             </p>
             <ul style="margin-bottom: 0">
-                <li *ngFor="let fact of dialogRef.data.pineappleFunFacts">
-                    {{ fact }}
-                </li>
+                @for (fact of dialogRef.data.pineappleFunFacts; track fact) {
+                    <li>
+                        {{ fact }}
+                    </li>
+                }
             </ul>
         </fd-dialog-body>
-
         <fd-dialog-footer>
             <fd-button-bar
                 label="Interesting"
@@ -51,10 +51,10 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
             <fd-button-bar label="Cancel" fdType="transparent" (click)="dialogRef.dismiss('Cancel')" ariaLabel="Cancel">
             </fd-button-bar>
         </fd-dialog-footer>
-    </fd-dialog> `,
+    </fd-dialog>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, NgFor, BarModule, AsyncPipe]
+    imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, BarModule, AsyncPipe]
 })
 export class DialogFullScreenInnerExampleComponent {
     constructor(public dialogRef: DialogRef) {}
@@ -69,7 +69,10 @@ export class DialogFullScreenInnerExampleComponent {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogFullScreenExampleComponent {
-    constructor(private _dialogService: DialogService, private _cdr: ChangeDetectorRef) {}
+    constructor(
+        private _dialogService: DialogService,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     @ViewChild('dialogContent', { read: TemplateRef })
     dialogContent: TemplateRef<any>;

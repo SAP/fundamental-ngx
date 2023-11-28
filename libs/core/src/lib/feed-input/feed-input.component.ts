@@ -15,7 +15,7 @@ import { FeedInputTextareaDirective } from './directives/feed-input-textarea.dir
 @Component({
     selector: 'fd-feed-input',
     templateUrl: './feed-input.component.html',
-    styleUrls: ['./feed-input.component.scss'],
+    styleUrl: './feed-input.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true

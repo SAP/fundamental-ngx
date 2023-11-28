@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { PopoverComponent, PopoverTriggerDirective } from '@fundamental-ngx/core/popover';
@@ -43,7 +43,7 @@ interface RatingViewItem {
 @Component({
     selector: 'fd-rating-indicator',
     templateUrl: './rating-indicator.component.html',
-    styleUrls: ['./rating-indicator.component.scss'],
+    styleUrl: './rating-indicator.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
@@ -55,7 +55,7 @@ interface RatingViewItem {
         registerFormItemControl(RatingIndicatorComponent)
     ],
     standalone: true,
-    imports: [NgTemplateOutlet, NgFor, NgIf, PopoverTriggerDirective, PopoverComponent, RatingStarLabelPipe]
+    imports: [NgTemplateOutlet, PopoverTriggerDirective, PopoverComponent, RatingStarLabelPipe]
 })
 export class RatingIndicatorComponent
     implements OnInit, OnChanges, CssClassBuilder, ControlValueAccessor, FormItemControl
@@ -198,7 +198,10 @@ export class RatingIndicatorComponent
     private _hideDynamicText = false;
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef, private readonly _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(
+        public readonly elementRef: ElementRef,
+        private readonly _changeDetectorRef: ChangeDetectorRef
+    ) {}
     /** @hidden */
     get viewRatingUID(): number {
         return this._ratingUID;
@@ -271,11 +274,6 @@ export class RatingIndicatorComponent
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-    }
-
-    /** @hidden */
-    trackByFn(index: number, item: { id: string; value: number }): number | string {
-        return item.id;
     }
 
     /** @hidden */

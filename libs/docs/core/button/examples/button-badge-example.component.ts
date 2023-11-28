@@ -1,4 +1,4 @@
-import { NgForOf, TitleCasePipe } from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ButtonBadgeDirective, ButtonComponent, badgeEnabledButtonTypes } from '@fundamental-ngx/core/button';
 
@@ -15,12 +15,14 @@ import { ButtonBadgeDirective, ButtonComponent, badgeEnabledButtonTypes } from '
         `
     ],
     template: `
-        <button fd-button [fdType]="buttonType" *ngFor="let buttonType of badgeEnabledButtonTypes; let index = index">
-            {{ buttonType | titlecase }}
-            <fd-button-badge [content]="index + 1"></fd-button-badge>
-        </button>
+        @for (buttonType of badgeEnabledButtonTypes; track buttonType; let index = $index) {
+            <button fd-button [fdType]="buttonType">
+                {{ buttonType | titlecase }}
+                <fd-button-badge [content]="index + 1"></fd-button-badge>
+            </button>
+        }
     `,
-    imports: [ButtonComponent, ButtonBadgeDirective, NgForOf, TitleCasePipe]
+    imports: [ButtonComponent, ButtonBadgeDirective, TitleCasePipe]
 })
 export class ButtonBadgeExampleComponent {
     badgeEnabledButtonTypes = badgeEnabledButtonTypes;

@@ -1,6 +1,6 @@
 <div class="table-header">
     <h5 fd-title role="heading" aria-level="5">
-        {{ 'platformVHD.selectTabDisplayCountLabel' | fdTranslate : { count: displayedData.length } }}
+        {{ 'platformVHD.selectTabDisplayCountLabel' | fdTranslate: { count: displayedData.length } }}
     </h5>
 </div>
 <div
@@ -25,41 +25,44 @@
         <label [id]="selectTabCountId" fd-form-label class="fdp-value-help-dialog__hidden_label">
             {{
                 'platformVHD.selectTabCountHiddenA11yLabel'
-                    | fdTranslate : { rowCount: displayedData.length, colCount: _tableFilters.main.length }
+                    | fdTranslate: { rowCount: displayedData.length, colCount: _tableFilters.main.length }
             }}
         </label>
         <label [id]="selectTabTitleId" fd-form-label class="fdp-value-help-dialog__hidden_label">
-            {{ 'platformVHD.selectTabDisplayCountLabel' | fdTranslate : { count: displayedData.length } }}
+            {{ 'platformVHD.selectTabDisplayCountLabel' | fdTranslate: { count: displayedData.length } }}
         </label>
         <thead fd-table-header>
-            <tr fd-table-row *ngIf="displayedData.length && _tableFilters">
-                <th fd-table-cell [fitContent]="mobile">
-                    <fd-checkbox
-                        *ngIf="isMultiSelection"
-                        [name]="uid + '-row-all'"
-                        [tristate]="true"
-                        [tristateSelectable]="false"
-                        [ngModel]="_selectedAll"
-                        (ngModelChange)="_toggleAllRows()"
-                    ></fd-checkbox>
-                </th>
-                <th
-                    fd-table-cell
-                    *ngFor="let filter of _tableFilters.main; trackBy: _trackByFilterFn; let colindex = index"
-                    [attr.aria-colindex]="colindex"
-                >
-                    {{ filter.label }}
-                </th>
-            </tr>
+            @if (displayedData.length && _tableFilters) {
+                <tr fd-table-row>
+                    <th fd-table-cell [fitContent]="mobile">
+                        @if (isMultiSelection) {
+                            <fd-checkbox
+                                [name]="uid + '-row-all'"
+                                [tristate]="true"
+                                [tristateSelectable]="false"
+                                [ngModel]="_selectedAll"
+                                (ngModelChange)="_toggleAllRows()"
+                            ></fd-checkbox>
+                        }
+                    </th>
+                    @for (
+                        filter of _tableFilters.main;
+                        track _trackByFilterFn(colindex, filter);
+                        let colindex = $index
+                    ) {
+                        <th fd-table-cell [attr.aria-colindex]="colindex">
+                            {{ filter.label }}
+                        </th>
+                    }
+                </tr>
+            }
         </thead>
         <tbody fd-table-body>
-            <ng-container
-                *ngFor="
-                    let row of displayedData | slice : _shownFrom : _shownCount;
-                    trackBy: _trackByTableRowFn;
-                    index as i
-                "
-            >
+            @for (
+                row of displayedData | slice: _shownFrom : _shownCount;
+                track _trackByTableRowFn(i, row);
+                let i = $index
+            ) {
                 <tr
                     fd-table-row
                     [hoverable]="!mobile"
@@ -69,70 +72,69 @@
                     (click)="!isMultiSelection && _toggleSelectRow(row)"
                 >
                     <td fd-table-cell [fitContent]="mobile">
-                        <fd-checkbox
-                            *ngIf="isMultiSelection"
-                            [name]="uid + '-row-' + i"
-                            [ngModel]="_selectedMap[row[uniqueKey]]"
-                            (change)="_toggleSelectRow(row)"
-                        ></fd-checkbox>
+                        @if (isMultiSelection) {
+                            <fd-checkbox
+                                [name]="uid + '-row-' + i"
+                                [ngModel]="_selectedMap[row[uniqueKey]]"
+                                (change)="_toggleSelectRow(row)"
+                            ></fd-checkbox>
+                        }
                     </td>
-                    <td
-                        fd-table-cell
-                        *ngFor="let filter of _tableFilters.main; let rowIndex = index"
-                        [attr.aria-rowindex]="rowIndex"
-                    >
-                        {{ row[filter.key] || '' }}
-                    </td>
-                </tr>
-
-                <tr
-                    fd-table-row
-                    *ngIf="mobile && _tableFilters.secondary.length"
-                    [secondary]="true"
-                    [attr.aria-selected]="_selectedMap[row[uniqueKey]]"
-                >
-                    <td fd-table-cell></td>
-                    <td colspan="100%" fd-table-cell [fitContent]="true">
-                        <p fd-table-text *ngFor="let filter of _tableFilters.secondary">
-                            <label>{{ filter.label }}:</label>
+                    @for (filter of _tableFilters.main; track filter; let rowIndex = $index) {
+                        <td fd-table-cell [attr.aria-rowindex]="rowIndex">
                             {{ row[filter.key] || '' }}
-                        </p>
-                    </td>
+                        </td>
+                    }
                 </tr>
-            </ng-container>
-            <tr
-                fd-table-row
-                *ngIf="displayedData.length && mobile && _shownCount && _shownCount !== displayedData.length"
-            >
-                <td colspan="100%">
-                    <div fd-bar barDesign="header-with-subheader">
-                        <div fd-bar-middle>
-                            <fd-bar-element>
-                                <button
-                                    fd-button
-                                    fdType="transparent"
-                                    [label]="'platformVHD.selectTabMoreBtnLabel' | fdTranslate"
-                                    (click)="_showMoreElements()"
-                                ></button>
-                            </fd-bar-element>
+                @if (mobile && _tableFilters.secondary.length) {
+                    <tr fd-table-row [secondary]="true" [attr.aria-selected]="_selectedMap[row[uniqueKey]]">
+                        <td fd-table-cell></td>
+                        <td colspan="100%" fd-table-cell [fitContent]="true">
+                            @for (filter of _tableFilters.secondary; track filter) {
+                                <p fd-table-text>
+                                    <label>{{ filter.label }}:</label>
+                                    {{ row[filter.key] || '' }}
+                                </p>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+            @if (displayedData.length && mobile && _shownCount && _shownCount !== displayedData.length) {
+                <tr fd-table-row>
+                    <td colspan="100%">
+                        <div fd-bar barDesign="header-with-subheader">
+                            <div fd-bar-middle>
+                                <fd-bar-element>
+                                    <button
+                                        fd-button
+                                        fdType="transparent"
+                                        [label]="'platformVHD.selectTabMoreBtnLabel' | fdTranslate"
+                                        (click)="_showMoreElements()"
+                                    ></button>
+                                </fd-bar-element>
+                            </div>
                         </div>
-                    </div>
-                </td>
-            </tr>
-            <ng-container *ngIf="loading && !displayedData.length">
-                <tr fd-table-row *fdkRepeat="3">
-                    <td fd-table-cell *fdkRepeat="3">
-                        <fd-skeleton [style.margin]="'auto 0'" type="text" textLines="1" width="60%"></fd-skeleton>
                     </td>
                 </tr>
-            </ng-container>
-            <tr fd-table-row *ngIf="!loading && !displayedData.length">
-                <td fd-table-cell colspan="100%">
-                    <div class="fdp-value-help-dialog__empty-message">
-                        {{ 'platformVHD.searchTableEmptyMessage' | fdTranslate }}
-                    </div>
-                </td>
-            </tr>
+            }
+            @if (!displayedData.length) {
+                @if (loading) {
+                    <tr fd-table-row *fdkRepeat="3">
+                        <td fd-table-cell *fdkRepeat="3">
+                            <fd-skeleton [style.margin]="'auto 0'" type="text" textLines="1" width="60%"></fd-skeleton>
+                        </td>
+                    </tr>
+                } @else {
+                    <tr fd-table-row>
+                        <td fd-table-cell colspan="100%">
+                            <div class="fdp-value-help-dialog__empty-message">
+                                {{ 'platformVHD.searchTableEmptyMessage' | fdTranslate }}
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
         </tbody>
     </table>
 </div>

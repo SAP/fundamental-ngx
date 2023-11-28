@@ -9,7 +9,7 @@ import { TabTagDirective } from '../tab-utils/tab-directives';
 @Component({
     selector: 'fd-item-expand',
     templateUrl: './tab-item-expand.component.html',
-    styleUrls: ['./tab-item-expand.component.scss'],
+    styleUrl: './tab-item-expand.component.scss',
     host: {
         role: 'tab',
         class: 'fd-tabs__item fd-tabs__item--overflow'

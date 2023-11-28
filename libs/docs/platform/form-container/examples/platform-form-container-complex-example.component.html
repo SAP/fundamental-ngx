@@ -21,7 +21,6 @@
         >
         </fdp-switch>
     </fdp-form-field>
-
     <fdp-form-field
         #ff3
         label="Input Field"
@@ -43,7 +42,6 @@
     >
         <fdp-number-step-input name="qty" [formControl]="ff7.formControl"></fdp-number-step-input>
     </fdp-form-field>
-
     <fdp-form-field #ff5 id="seasons6" label="Checkbox group " [rank]="4">
         <fdp-checkbox-group
             [list]="seasons"
@@ -79,9 +77,10 @@
             <fdp-radio-button value="autumn">Autumn</fdp-radio-button>
         </fdp-radio-group>
     </fdp-form-field>
-
     <ng-template #i18n let-errors>
-        <span *ngIf="errors.required"> Value is required </span>
+        @if (errors.required) {
+            <span> Value is required </span>
+        }
     </ng-template>
 </fdp-form-group>
 <br />

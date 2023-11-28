@@ -35,7 +35,7 @@ import { Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, skip, takeUntil } from 'rxjs/operators';
 
 import { NumberInput, coerceNumberProperty } from '@angular/cdk/coercion';
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     DragAndDropModule,
     Nullable,
@@ -102,7 +102,7 @@ type CardColumn = CardDefinitionDirective[];
 @Component({
     selector: 'fd-fixed-card-layout',
     templateUrl: './fixed-card-layout.component.html',
-    styleUrls: ['./fixed-card-layout.component.scss'],
+    styleUrl: './fixed-card-layout.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
@@ -112,13 +112,11 @@ type CardColumn = CardDefinitionDirective[];
     imports: [
         CdkDropListGroup,
         DragAndDropModule,
-        NgFor,
         CdkDropList,
         CdkDrag,
         FixedCardLayoutItemComponent,
         NgTemplateOutlet,
-        CdkDragPlaceholder,
-        NgIf
+        CdkDragPlaceholder
     ]
 })
 export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {

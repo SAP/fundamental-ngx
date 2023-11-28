@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
 import { ListModule } from '@fundamental-ngx/core/list';
@@ -8,7 +7,7 @@ import { ListModule } from '@fundamental-ngx/core/list';
     encapsulation: ViewEncapsulation.None,
     templateUrl: './list-dnd-example.component.html',
     standalone: true,
-    imports: [ListModule, DragAndDropModule, NgFor]
+    imports: [ListModule, DragAndDropModule]
 })
 export class ListDndExampleComponent {
     values = [1, 2, 3, 4, 5];

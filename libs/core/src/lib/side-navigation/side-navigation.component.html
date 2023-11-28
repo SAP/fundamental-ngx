@@ -1,23 +1,26 @@
 <nav class="fd-side-nav" [class.fd-side-nav--condensed]="condensed || sideNavigationConfiguration?.condensed">
-    <ng-container *ngIf="!sideNavigationConfiguration">
+    @if (!sideNavigationConfiguration) {
         <ng-content></ng-content>
-    </ng-container>
-    <ng-container *ngIf="sideNavigationConfiguration">
-        <div fd-side-nav-main *ngIf="sideNavigationConfiguration.mainNavigation">
-            <fd-prepared-nested-list
-                [condensed]="condensed || !!sideNavigationConfiguration.condensed"
-                [first]="true"
-                [list]="sideNavigationConfiguration.mainNavigation"
-            >
-            </fd-prepared-nested-list>
-        </div>
-        <div fd-side-nav-utility *ngIf="sideNavigationConfiguration.utilityNavigation">
-            <fd-prepared-nested-list
-                [condensed]="condensed || !!sideNavigationConfiguration.condensed"
-                [first]="true"
-                [list]="sideNavigationConfiguration.utilityNavigation"
-            >
-            </fd-prepared-nested-list>
-        </div>
-    </ng-container>
+    } @else {
+        @if (sideNavigationConfiguration.mainNavigation) {
+            <div fd-side-nav-main>
+                <fd-prepared-nested-list
+                    [condensed]="condensed || !!sideNavigationConfiguration.condensed"
+                    [first]="true"
+                    [list]="sideNavigationConfiguration.mainNavigation"
+                >
+                </fd-prepared-nested-list>
+            </div>
+        }
+        @if (sideNavigationConfiguration.utilityNavigation) {
+            <div fd-side-nav-utility>
+                <fd-prepared-nested-list
+                    [condensed]="condensed || !!sideNavigationConfiguration.condensed"
+                    [first]="true"
+                    [list]="sideNavigationConfiguration.utilityNavigation"
+                >
+                </fd-prepared-nested-list>
+            </div>
+        }
+    }
 </nav>

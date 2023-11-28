@@ -34,7 +34,7 @@ import { MessageBoxRef } from './utils/message-box-ref.class';
 @Component({
     selector: 'fd-message-box',
     templateUrl: './message-box.component.html',
-    styleUrls: ['./message-box.component.scss'],
+    styleUrl: './message-box.component.scss',
     host: {
         tabindex: '-1',
         role: 'dialog'

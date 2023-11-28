@@ -5,54 +5,47 @@
     [attr.aria-labelledby]="ariaLabelledBy"
     [attr.aria-required]="required"
 >
-    <ng-container *ngIf="!list">
-        <ng-container *ngFor="let checkbox of contentCheckboxes; let i = index">
-            <ng-container
-                *ngTemplateOutlet="
-                    checkboxtmpt;
-                    context: {
-                        id: id + i,
-                        idx: i,
-                        source: 'contentChildren',
-                        name: name,
-                        checkboxValue: checkbox.coreCheckbox?.values?.trueValue,
-                        labeltext: checkbox.label,
-                        disabled: disabled || checkbox.disabled,
-                        ariaLabel: checkbox.ariaLabel,
-                        ariaLabelledBy: checkbox.ariaLabelledBy,
-                        ariaDescribedBy: checkbox.ariaDescribedBy,
-                        title: checkbox.title
-                    }
-                "
-            >
-            </ng-container>
-        </ng-container>
-    </ng-container>
-    <ng-container *ngIf="list">
-        <ng-container *ngTemplateOutlet="listvalues"></ng-container>
-    </ng-container>
-</fd-form-group>
-
-<ng-template #listvalues>
-    <ng-container *ngFor="let item of list; let i = index">
-        <ng-container
-            *ngTemplateOutlet="
-                checkboxtmpt;
-                context: {
+    @if (!list) {
+        @for (checkbox of contentCheckboxes; track checkbox; let i = $index) {
+            <ng-template
+                [ngTemplateOutlet]="checkboxtmpt"
+                [ngTemplateOutletContext]="{
                     id: id + i,
                     idx: i,
-                    source: 'list',
+                    source: 'contentChildren',
                     name: name,
-                    checkboxValue: getLookupValue(item),
-                    labeltext: getDisplayValue(item),
-                    disabled: getListItemDisabledValue(item)
-                }
-            "
+                    checkboxValue: checkbox.coreCheckbox?.values?.trueValue,
+                    labeltext: checkbox.label,
+                    disabled: disabled || checkbox.disabled,
+                    ariaLabel: checkbox.ariaLabel,
+                    ariaLabelledBy: checkbox.ariaLabelledBy,
+                    ariaDescribedBy: checkbox.ariaDescribedBy,
+                    title: checkbox.title
+                }"
+            >
+            </ng-template>
+        }
+    } @else {
+        <ng-template [ngTemplateOutlet]="listvalues"></ng-template>
+    }
+</fd-form-group>
+<ng-template #listvalues>
+    @for (item of list; track item; let i = $index) {
+        <ng-template
+            [ngTemplateOutlet]="checkboxtmpt"
+            [ngTemplateOutletContext]="{
+                id: id + i,
+                idx: i,
+                source: 'list',
+                name: name,
+                checkboxValue: getLookupValue(item),
+                labeltext: getDisplayValue(item),
+                disabled: getListItemDisabledValue(item)
+            }"
         >
-        </ng-container>
-    </ng-container>
+        </ng-template>
+    }
 </ng-template>
-
 <ng-template
     #checkboxtmpt
     let-id="id"

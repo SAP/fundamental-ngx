@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { NgFor, NgIf } from '@angular/common';
+
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -36,7 +36,6 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
     standalone: true,
     imports: [
         ButtonComponent,
-        NgIf,
         FlexibleColumnLayoutModule,
         DynamicPageModule,
         BreadcrumbModule,
@@ -48,7 +47,6 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
         CdkScrollable,
         BarModule,
         TabsModule,
-        NgFor,
         MessageToastModule
     ]
 })

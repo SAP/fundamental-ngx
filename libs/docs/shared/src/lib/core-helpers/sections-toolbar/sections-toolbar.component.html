@@ -17,52 +17,48 @@
         <fd-side-nav>
             <div fd-side-nav-main fd-scrollbar>
                 <ul fd-nested-list [textOnly]="true">
-                    <li
-                        fd-nested-list-item
-                        *ngFor="let section of displayedSections; trackBy: trackBySection"
-                        [expanded]="true"
-                    >
-                        <div fd-nested-list-content>
-                            <a fd-nested-list-link>
-                                <span fd-nested-list-title>{{ section.header }}</span>
-                            </a>
-                            <button fd-nested-list-expand-icon></button>
-                        </div>
-                        <ul fd-nested-list>
-                            <ng-container
-                                *ngFor="
-                                    let item of $asSectionNestedContent(section.content) | sortBy : true : 'name';
-                                    trackBy: trackBySectionContent
-                                "
-                            >
-                                <ng-container *ngIf="item.subItems as itemSubItems; else rootListItem">
-                                    <li fd-nested-list-item [expanded]="true">
-                                        <div fd-nested-list-content>
-                                            <a fd-nested-list-link>
-                                                <span fd-nested-list-title>{{ item.name }}</span>
-                                            </a>
-                                            <button fd-nested-list-expand-icon></button>
-                                        </div>
-                                        <ul fd-nested-list>
-                                            <ng-container
-                                                *ngFor="let subItem of itemSubItems; trackBy: trackBySectionContent"
-                                                [ngTemplateOutlet]="listItemTpl"
-                                                [ngTemplateOutletContext]="{ $implicit: subItem }"
-                                            >
-                                            </ng-container>
-                                        </ul>
-                                    </li>
-                                </ng-container>
-                                <ng-template #rootListItem>
-                                    <ng-template
-                                        [ngTemplateOutlet]="listItemTpl"
-                                        [ngTemplateOutletContext]="{ $implicit: item }"
-                                    >
-                                    </ng-template>
-                                </ng-template>
-                            </ng-container>
-                        </ul>
-                    </li>
+                    @for (section of displayedSections; track trackBySection($index, section)) {
+                        <li fd-nested-list-item [expanded]="true">
+                            <div fd-nested-list-content>
+                                <a fd-nested-list-link>
+                                    <span fd-nested-list-title>{{ section.header }}</span>
+                                </a>
+                                <button fd-nested-list-expand-icon></button>
+                            </div>
+                            <ul fd-nested-list>
+                                @for (
+                                    item of $asSectionNestedContent(section.content) | sortBy: true : 'name';
+                                    track item.name
+                                ) {
+                                    @if (item.subItems; as itemSubItems) {
+                                        <li fd-nested-list-item [expanded]="true">
+                                            <div fd-nested-list-content>
+                                                <a fd-nested-list-link>
+                                                    <span fd-nested-list-title>{{ item.name }}</span>
+                                                </a>
+                                                <button fd-nested-list-expand-icon></button>
+                                            </div>
+                                            <ul fd-nested-list>
+                                                @for (subItem of itemSubItems; track subItem.name) {
+                                                    <ng-template
+                                                        [ngTemplateOutlet]="listItemTpl"
+                                                        [ngTemplateOutletContext]="{ $implicit: subItem }"
+                                                    >
+                                                    </ng-template>
+                                                }
+                                            </ul>
+                                        </li>
+                                    } @else {
+                                        <ng-template
+                                            [ngTemplateOutlet]="listItemTpl"
+                                            [ngTemplateOutletContext]="{ $implicit: item }"
+                                        >
+                                        </ng-template>
+                                    }
+                                }
+                            </ul>
+                        </li>
+                    }
                     <ng-template #listItemTpl let-item>
                         <li fd-nested-list-item>
                             <a

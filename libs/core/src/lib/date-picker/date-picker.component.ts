@@ -1,5 +1,5 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -72,7 +72,7 @@ let datePickerCounter = 0;
 @Component({
     selector: 'fd-date-picker',
     templateUrl: './date-picker.component.html',
-    styleUrls: ['./date-picker.component.scss'],
+    styleUrl: './date-picker.component.scss',
     host: {
         '(blur)': 'onTouched()',
         '[class.fd-date-picker]': 'true',
@@ -104,15 +104,12 @@ let datePickerCounter = 0;
     imports: [
         NgTemplateOutlet,
         PopoverModule,
-        NgIf,
         FormMessageComponent,
         InputGroupModule,
         FormsModule,
         CalendarComponent,
         BarModule,
         ButtonComponent,
-        NgSwitch,
-        NgSwitchCase,
         FdTranslatePipe
     ]
 })

@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SelectableItemDirective, SelectableListDirective } from '@fundamental-ngx/cdk/utils';
 import { CustomSelectableItemDirective } from './custom-selectable-item.directive';
@@ -23,7 +22,7 @@ import { CustomSelectableItemDirective } from './custom-selectable-item.directiv
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [SelectableListDirective, NgFor, SelectableItemDirective, CustomSelectableItemDirective]
+    imports: [SelectableListDirective, SelectableItemDirective, CustomSelectableItemDirective]
 })
 export class AdvancedUsageComponent {
     items = [1, 2, 3, 4, 5];

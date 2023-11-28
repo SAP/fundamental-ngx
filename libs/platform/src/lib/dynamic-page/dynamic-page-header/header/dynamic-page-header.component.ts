@@ -10,7 +10,10 @@ export class DynamicPageCollapseChangeEvent {
      * @param source Dynamic Page component
      * @param payload Collapse state
      */
-    constructor(public source: DynamicPageHeaderComponent, public payload: boolean) {}
+    constructor(
+        public source: DynamicPageHeaderComponent,
+        public payload: boolean
+    ) {}
 }
 
 let dynamicPageHeaderId = 0;

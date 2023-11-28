@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 
-import { DynamicComponentConfig } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentConfig, Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { DialogPosition } from '../utils/dialog-position.class';
 
@@ -10,22 +9,22 @@ export class DialogConfigBase<T> implements DynamicComponentConfig {
     id?: string;
 
     /** Width of the dialog. */
-    width?: string;
+    width?: string | number;
 
     /** Height of the dialog. */
-    height?: string;
+    height?: string | number;
 
     /** Minimum width of the dialog. */
-    minWidth?: string;
+    minWidth?: string | number;
 
     /** Minimum height of the dialog. */
-    minHeight?: string;
+    minHeight?: string | number;
 
     /** Maximum width of the dialog. */
-    maxWidth?: string;
+    maxWidth?: string | number;
 
     /** Maximum height of the dialog. */
-    maxHeight?: string;
+    maxHeight?: string | number;
 
     /** Position of the dialog. */
     position?: DialogPosition;

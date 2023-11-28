@@ -1,7 +1,9 @@
 <div class="fd-message-page__container">
-    <div *ngIf="hasIcon" class="fd-message-page__icon-container">
-        <i role="presentation" class="fd-message-page__icon" [class]="'sap-icon--' + glyph"></i>
-    </div>
+    @if (hasIcon) {
+        <div class="fd-message-page__icon-container">
+            <i role="presentation" class="fd-message-page__icon" [class]="'sap-icon--' + glyph"></i>
+        </div>
+    }
     <div role="status" aria-live="polite" class="fd-message-page__content">
         <ng-content select="fd-message-page-title"></ng-content>
         <ng-content select="fd-message-page-subtitle"></ng-content>

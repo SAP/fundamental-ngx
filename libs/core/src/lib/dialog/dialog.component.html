@@ -32,13 +32,12 @@
     (cdkDragEnded)="isDragged = false"
     (onResizeEnd)="adjustResponsivePadding()"
 >
-    <span fdkResizeHandle *ngIf="dialogConfig.resizable && !_fullScreen" class="fd-dialog__resize-handle"></span>
-
+    @if (dialogConfig.resizable && !_fullScreen) {
+        <span fdkResizeHandle class="fd-dialog__resize-handle"></span>
+    }
     <div cdkDragHandle [cdkDragHandleDisabled]="!dialogConfig.draggable">
         <ng-content select="fd-dialog-header"></ng-content>
     </div>
-
     <ng-content select="fd-dialog-body"></ng-content>
-
     <ng-content select="fd-dialog-footer"></ng-content>
 </div>

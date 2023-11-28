@@ -1,10 +1,11 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DialogService } from './dialog.service';
 import { DialogModule } from '../dialog.module';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: ``

@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
@@ -76,7 +75,7 @@ export class ExampleDataSourceParser<T> implements DataSourceParser<T, ExampleDa
         }
     ],
     standalone: true,
-    imports: [SelectModule, NgFor]
+    imports: [SelectModule]
 })
 export class DataSourceDefaultExampleComponent implements OnInit {
     arrayDataSource = new Array(20).fill(null).map((_v, i) => i);

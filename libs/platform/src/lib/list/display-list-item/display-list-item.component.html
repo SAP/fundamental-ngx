@@ -1,5 +1,5 @@
 <!--  list item navigation with Arrow-->
-<ng-container *ngIf="navigationIndicator || (navigated && !(noDataText !== null && noDataText !== undefined))">
+@if (navigationIndicator || (navigated && !(noDataText !== null && noDataText !== undefined))) {
     <li
         #listItem
         fd-list-item
@@ -24,13 +24,12 @@
             [navigationIndicator]="navigationIndicator"
             [navigated]="navigated"
         >
-            <ng-container *ngTemplateOutlet="commonTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="commonTemplate"></ng-template>
         </a>
     </li>
-</ng-container>
-
+}
 <!--  list item without navigation and used for simple list display-->
-<ng-container *ngIf="!navigationIndicator && !navigated && !(noDataText !== null && noDataText !== undefined)">
+@if (!navigationIndicator && !navigated && !(noDataText !== null && noDataText !== undefined)) {
     <li
         #listItem
         fd-list-item
@@ -47,22 +46,20 @@
         [ariaRole]="_listItemRole"
         [attr.aria-selected]="_selectedAttr"
     >
-        <ng-container *ngTemplateOutlet="commonTemplate"></ng-container>
+        <ng-template [ngTemplateOutlet]="commonTemplate"></ng-template>
     </li>
-</ng-container>
-
+}
 <ng-template #commonTemplate>
-    <span *ngIf="title" fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap" [attr.title]="title">{{
-        title
-    }}</span>
-    <ng-container *ngIf="secondary">
-        <ng-container
+    @if (title) {
+        <span fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap" [attr.title]="title">{{ title }}</span>
+    }
+    @if (secondary) {
+        <ng-template
             [ngTemplateOutlet]="_isAdvancedText(secondary) ? advancedSecondary : simpleSecondary"
             [ngTemplateOutletContext]="{ $implicit: secondary }"
-        ></ng-container>
-    </ng-container>
+        ></ng-template>
+    }
 </ng-template>
-
 <ng-template #simpleSecondary let-secondary>
     <span fd-list-secondary [attr.aria-label]="secondary" [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
         {{ secondary }}

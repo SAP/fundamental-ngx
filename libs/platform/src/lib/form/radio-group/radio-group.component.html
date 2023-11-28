@@ -6,41 +6,37 @@
     [attr.aria-orientation]="isInline ? 'horizontal' : 'vertical'"
     [attr.aria-required]="required"
 >
-    <ng-container *ngIf="!list">
-        <ng-container *ngFor="let radio of contentRadioButtons">
+    @if (!list) {
+        @for (radio of contentRadioButtons; track radio) {
             <div fd-form-item>
-                <ng-container
-                    *ngTemplateOutlet="
-                        radio?.renderer || null;
-                        context: {
-                            name: name,
-                            value: radio.value,
-                            state: state,
-                            disabled: disabled || radio.disabled,
-                            ariaLabel: radio.ariaLabel,
-                            ariaLabelledBy: radio.ariaLabelledBy,
-                            ariaDescribedBy: radio.ariaDescribedBy,
-                            title: radio.title
-                        }
-                    "
-                ></ng-container>
+                <ng-template
+                    [ngTemplateOutlet]="radio?.renderer || null"
+                    [ngTemplateOutletContext]="{
+                        name: name,
+                        value: radio.value,
+                        state: state,
+                        disabled: disabled || radio.disabled,
+                        ariaLabel: radio.ariaLabel,
+                        ariaLabelledBy: radio.ariaLabelledBy,
+                        ariaDescribedBy: radio.ariaDescribedBy,
+                        title: radio.title
+                    }"
+                ></ng-template>
             </div>
-        </ng-container>
-    </ng-container>
-    <ng-container *ngIf="list">
-        <ng-container *ngTemplateOutlet="listvalues"></ng-container>
-    </ng-container>
+        }
+    } @else {
+        <ng-template [ngTemplateOutlet]="listvalues"></ng-template>
+    }
 </fd-form-group>
-
 <ng-template #listvalues>
-    <ng-container *ngIf="hasNoValue">
+    @if (hasNoValue) {
         <div fd-form-item>
             <fdp-radio-button [name]="name" value="None" [state]="state" [disabled]="disabled" [forceRender]="true">
                 {{ noValueLabel }}
             </fdp-radio-button>
         </div>
-    </ng-container>
-    <ng-container *ngFor="let item of list">
+    }
+    @for (item of list; track item) {
         <div fd-form-item>
             <fdp-radio-button
                 [name]="name"
@@ -52,5 +48,5 @@
                 {{ getDisplayValue(item) }}
             </fdp-radio-button>
         </div>
-    </ng-container>
+    }
 </ng-template>

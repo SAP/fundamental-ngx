@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -30,7 +30,6 @@ import {
     imports: [
         PlatformButtonModule,
         ContentDensityDirective,
-        NgFor,
         TitleComponent,
         LayoutGridModule,
         FormLabelComponent,
@@ -40,7 +39,6 @@ import {
         ScrollbarDirective,
         BarModule,
         InitialFocusDirective,
-        NgIf,
         JsonPipe
     ]
 })

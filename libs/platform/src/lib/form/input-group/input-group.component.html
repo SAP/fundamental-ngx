@@ -1,11 +1,12 @@
 <div class="fd-input-group" [class.is-disabled]="disabled" [class]="_controlStateClass" [class.is-focus]="focused">
     <!-- Before input addons area -->
-    <fdp-input-group-addon-body *ngFor="let addon of _beforeInputAddons">
-        <ng-container *ngTemplateOutlet="addon.contentTemplateRef"></ng-container>
-    </fdp-input-group-addon-body>
-
+    @for (addon of _beforeInputAddons; track addon) {
+        <fdp-input-group-addon-body>
+            <ng-template [ngTemplateOutlet]="addon.contentTemplateRef"></ng-template>
+        </fdp-input-group-addon-body>
+    }
     <!-- Input -->
-    <ng-container *ngIf="_input">
+    @if (_input) {
         <fdp-input
             [name]="name"
             [id]="id"
@@ -20,10 +21,11 @@
             (focusChange)="_onFocusChanged($event)"
             (keypress)="_onKeyPress($event)"
         ></fdp-input>
-    </ng-container>
-
+    }
     <!-- After input addons area -->
-    <fdp-input-group-addon-body *ngFor="let addon of _afterInputAddons" [hasButton]="!!addon.button">
-        <ng-container *ngTemplateOutlet="addon.contentTemplateRef"></ng-container>
-    </fdp-input-group-addon-body>
+    @for (addon of _afterInputAddons; track addon) {
+        <fdp-input-group-addon-body [hasButton]="!!addon.button">
+            <ng-template [ngTemplateOutlet]="addon.contentTemplateRef"></ng-template>
+        </fdp-input-group-addon-body>
+    }
 </div>
