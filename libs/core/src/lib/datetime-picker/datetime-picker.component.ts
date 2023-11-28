@@ -357,12 +357,10 @@ export class DatetimePickerComponent<D>
     /** @hidden Reference to the inner calendar component. */
     @ViewChild(CalendarComponent, { static: false })
     private set _calendarCmp(calendar: CalendarComponent<D>) {
-        if (!this.isOpen) {
-            return;
-        }
-
-        calendar?.setCurrentlyDisplayed(this._calendarPendingDate);
-        calendar?.initialFocus();
+        setTimeout(() => {
+            calendar?.setCurrentlyDisplayed(this._calendarPendingDate);
+            calendar?.initialFocus();
+        });
         this._calendarComponent = calendar;
     }
 
@@ -570,8 +568,10 @@ export class DatetimePickerComponent<D>
         }
         this.onClose.emit();
         this.isOpen = false;
+        this._changeDetRef.detectChanges();
         this._onOpenStateChanged(this.isOpen);
         this.handleOnTouched();
+        this._showPopoverContents = false;
     }
 
     /** @hidden */
@@ -733,6 +733,10 @@ export class DatetimePickerComponent<D>
             this._inputElement.nativeElement.focus({
                 preventScroll: this.preventScrollOnFocus
             });
+        }
+        if (!isOpen) {
+            this._showPopoverContents = false;
+            this._changeDetRef.detectChanges();
         }
     }
 
