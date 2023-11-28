@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.0...v0.48.0-rc.1) (2023-11-28)
+
+
+### Bug Fixes
+
+* **platform:** remove action-bar, file-uploader, thumbnail, and upload collection ([#11024](https://github.com/SAP/fundamental-ngx/issues/11024)) ([a31f831](https://github.com/SAP/fundamental-ngx/commit/a31f83199627100bc53c434afbfb899881fbbc2d))
+
+
+### BREAKING CHANGES
+
+* **platform:** remove platform components: action-bar, file-uploader, thumbnail, and upload collection
+
+
+
+
+
 # [0.48.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.47.4...v0.48.0-rc.0) (2023-11-28)
 
 
