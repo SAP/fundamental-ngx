@@ -25,7 +25,7 @@ import { ButtonComponent } from '@fundamental-ngx/platform/button';
 @Component({
     selector: 'fdp-feed-input',
     templateUrl: './feed-input.component.html',
-    styleUrls: ['./feed-input.component.scss'],
+    styleUrl: './feed-input.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

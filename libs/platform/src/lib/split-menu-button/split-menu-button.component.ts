@@ -32,7 +32,7 @@ import { BaseComponent } from '@fundamental-ngx/platform/shared';
 @Component({
     selector: 'fdp-split-menu-button',
     templateUrl: './split-menu-button.component.html',
-    styleUrls: ['split-menu-button.component.scss'],
+    styleUrl: 'split-menu-button.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [ButtonComponent, MenuTriggerDirective]
@@ -99,7 +99,10 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
     }
 
     /** @hidden */
-    constructor(protected _cd: ChangeDetectorRef, @Optional() private _rtlService: RtlService) {
+    constructor(
+        protected _cd: ChangeDetectorRef,
+        @Optional() private _rtlService: RtlService
+    ) {
         super(_cd);
     }
 

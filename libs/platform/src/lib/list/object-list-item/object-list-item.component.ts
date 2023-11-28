@@ -27,7 +27,7 @@ import { ObjectListItemRowComponent } from './object-list-item-row.component';
 @Component({
     selector: 'fdp-object-list-item',
     templateUrl: './object-list-item.component.html',
-    styleUrls: ['./object-list-item.component.scss'],
+    styleUrl: './object-list-item.component.scss',
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ObjectListItemComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,

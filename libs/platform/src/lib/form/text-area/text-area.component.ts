@@ -37,7 +37,7 @@ export type WrapType = 'hard' | 'soft' | 'off';
 @Component({
     selector: 'fdp-textarea',
     templateUrl: 'text-area.component.html',
-    styleUrls: ['text-area.component.scss'],
+    styleUrl: 'text-area.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [

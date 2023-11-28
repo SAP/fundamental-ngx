@@ -28,7 +28,7 @@ import { Media } from '../thumbnail.interfaces';
 @Component({
     selector: 'fdp-thumbnail-image',
     templateUrl: './thumbnail-image.component.html',
-    styleUrls: ['./thumbnail-image.component.scss'],
+    styleUrl: './thumbnail-image.component.scss',
     standalone: true,
     imports: [AvatarComponent, SlicePipe, FdTranslatePipe]
 })

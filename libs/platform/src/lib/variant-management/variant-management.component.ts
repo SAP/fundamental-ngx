@@ -47,7 +47,7 @@ import { VariantItem } from './variant-item.class';
 @Component({
     selector: 'fdp-variant-management',
     templateUrl: './variant-management.component.html',
-    styleUrls: ['./variant-management.component.scss'],
+    styleUrl: './variant-management.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

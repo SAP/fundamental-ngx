@@ -13,7 +13,7 @@ import { ApprovalUser } from '../interfaces';
 @Component({
     selector: 'fdp-approval-flow-user-details',
     templateUrl: './approval-flow-user-details.component.html',
-    styleUrls: ['./approval-flow-user-details.component.scss'],
+    styleUrl: './approval-flow-user-details.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {

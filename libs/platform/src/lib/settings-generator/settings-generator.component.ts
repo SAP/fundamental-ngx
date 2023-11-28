@@ -16,24 +16,24 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
+import { BehaviorSubject, filter, Observable, Subscription } from 'rxjs';
+import { ThemeSelectorListComponent } from './controls/theme-selector-list/theme-selector-list.component';
 import { BaseSettingsGeneratorLayout } from './layouts/base-settings-generator-layout';
 import { SettingsGeneratorSidebarLayoutComponent } from './layouts/settings-generator-sidebar-layout/settings-generator-sidebar-layout.component';
 import { SettingsConfig } from './models/settings-config.model';
+import { SettingsGenerator } from './models/settings-generator.model';
 import { SettingsModel } from './models/settings.model';
 import { SettingsGeneratorLayoutAccessorService } from './settings-generator-layout-accessor.service';
 import { SettingsGeneratorReturnValue, SettingsGeneratorService } from './settings-generator.service';
-import { ThemeSelectorListComponent } from './controls/theme-selector-list/theme-selector-list.component';
-import { BehaviorSubject, filter, Observable, Subscription } from 'rxjs';
 import { FDP_SETTINGS_GENERATOR, FDP_SETTINGS_GENERATOR_CONFIG } from './tokens';
-import { SettingsGenerator } from './models/settings-generator.model';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fdp-settings-generator',
     templateUrl: './settings-generator.component.html',
-    styleUrls: ['./settings-generator.component.scss'],
+    styleUrl: './settings-generator.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

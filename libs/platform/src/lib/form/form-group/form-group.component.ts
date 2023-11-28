@@ -169,7 +169,7 @@ let formGroupUniqueId = 0;
 @Component({
     selector: 'fdp-form-group',
     templateUrl: 'form-group.component.html',
-    styleUrls: ['./form-group.component.scss'],
+    styleUrl: './form-group.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [formGroupProvider, FormFieldLayoutService, contentDensityObserverProviders()],

@@ -20,7 +20,7 @@ import { BaseComponent } from '@fundamental-ngx/platform/shared';
 @Component({
     selector: 'fdp-button',
     templateUrl: './button.component.html',
-    styleUrls: ['./button.component.scss'],
+    styleUrl: './button.component.scss',
     standalone: true,
     imports: [CoreButtonComponent]
 })
@@ -136,7 +136,10 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
     private _ariaPressed: Nullable<boolean>;
 
     /** @hidden */
-    constructor(protected _changeDetector: ChangeDetectorRef, private _elementRef: ElementRef) {
+    constructor(
+        protected _changeDetector: ChangeDetectorRef,
+        private _elementRef: ElementRef
+    ) {
         super(_changeDetector);
         warnOnce(
             "Platform's ButtonComponent is deprecated and will be removed in the next major release. Consider using Core's ButtonComponent instead."

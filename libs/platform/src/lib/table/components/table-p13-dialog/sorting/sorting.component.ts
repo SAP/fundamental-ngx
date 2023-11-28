@@ -75,7 +75,7 @@ class ValidatedSortRule implements SortRule {
 
 @Component({
     templateUrl: './sorting.component.html',
-    styleUrls: ['./sorting.component.scss'],
+    styleUrl: './sorting.component.scss',
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13SortingDialogComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush,

@@ -54,7 +54,7 @@ let titleUniqueId = 0;
 @Component({
     selector: 'fdp-define-tab',
     templateUrl: './define-tab.component.html',
-    styleUrls: ['./define-tab.component.scss'],
+    styleUrl: './define-tab.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

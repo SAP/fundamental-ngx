@@ -91,7 +91,7 @@ const formGroupChildProvider: Provider = {
 @Component({
     selector: 'fdp-form-field',
     templateUrl: 'form-field.component.html',
-    styleUrls: ['./form-field.component.scss'],
+    styleUrl: './form-field.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [formFieldProvider, formGroupChildProvider, FormFieldLayoutService],
     standalone: true,

@@ -93,7 +93,7 @@ let randomId = 0;
 @Component({
     selector: 'fdp-upload-collection',
     templateUrl: './upload-collection.component.html',
-    styleUrls: ['./upload-collection.component.scss'],
+    styleUrl: './upload-collection.component.scss',
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     imports: [

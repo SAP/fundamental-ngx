@@ -64,7 +64,7 @@ class GroupRule {
 
 @Component({
     templateUrl: './grouping.component.html',
-    styleUrls: ['./grouping.component.scss'],
+    styleUrl: './grouping.component.scss',
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13GroupingDialogComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush,

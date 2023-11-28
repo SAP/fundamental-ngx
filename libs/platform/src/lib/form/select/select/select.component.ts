@@ -29,7 +29,7 @@ import { SelectConfig } from '../select.config';
 @Component({
     selector: 'fdp-select',
     templateUrl: './select.component.html',
-    styleUrls: ['./select.component.scss'],
+    styleUrl: './select.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [DynamicComponentService, { provide: FD_FORM_FIELD_CONTROL, useExisting: SelectComponent, multi: true }],

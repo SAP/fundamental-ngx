@@ -29,7 +29,7 @@ import { MULTIINPUT_COMPONENT, PlatformMultiInputInterface } from '../multi-inpu
 @Component({
     selector: 'fdp-multi-input-mobile',
     templateUrl: './multi-input-mobile.component.html',
-    styleUrls: ['./multi-input-mobile.component.scss'],
+    styleUrl: './multi-input-mobile.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,

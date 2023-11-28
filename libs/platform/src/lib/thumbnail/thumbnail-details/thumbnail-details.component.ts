@@ -39,7 +39,7 @@ interface DialogRefData {
 @Component({
     selector: 'fdp-thumbnail-details',
     templateUrl: './thumbnail-details.component.html',
-    styleUrls: ['./thumbnail-details.component.scss'],
+    styleUrl: './thumbnail-details.component.scss',
     standalone: true,
     imports: [
         DialogComponent,

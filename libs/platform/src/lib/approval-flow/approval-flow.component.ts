@@ -115,7 +115,7 @@ let defaultId = 0;
 @Component({
     selector: 'fdp-approval-flow',
     templateUrl: './approval-flow.component.html',
-    styleUrls: ['./approval-flow.component.scss'],
+    styleUrl: './approval-flow.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [ApprovalFlowAddNodeViewService],

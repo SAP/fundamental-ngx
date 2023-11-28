@@ -82,7 +82,7 @@ let vhiUniqueId = 0;
 @Component({
     selector: 'fdp-value-help-dialog',
     templateUrl: './value-help-dialog.component.html',
-    styleUrls: ['./value-help-dialog.component.scss'],
+    styleUrl: './value-help-dialog.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

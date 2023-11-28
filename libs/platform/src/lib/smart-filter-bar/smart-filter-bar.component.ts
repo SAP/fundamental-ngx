@@ -92,7 +92,7 @@ const smartFilterBarProvider: Provider = {
 @Component({
     selector: 'fdp-smart-filter-bar',
     templateUrl: './smart-filter-bar.component.html',
-    styleUrls: ['./smart-filter-bar.component.scss'],
+    styleUrl: './smart-filter-bar.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

@@ -26,7 +26,7 @@ import { MenuInteractiveComponent } from '@fundamental-ngx/core/menu';
 @Component({
     selector: 'fdp-menu-item',
     templateUrl: './menu-item.component.html',
-    styleUrls: ['./menu-item.component.scss'],
+    styleUrl: './menu-item.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {

@@ -36,7 +36,7 @@ import { convertFormState, convertFormStateToMessagePopoverState } from './utils
 @Component({
     selector: 'fdp-message-popover',
     templateUrl: './message-popover.component.html',
-    styleUrls: ['./message-popover.component.scss'],
+    styleUrl: './message-popover.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

@@ -90,7 +90,7 @@ let nextListId = 0;
     selector: 'fdp-list',
     templateUrl: './list.component.html',
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./list.component.scss'],
+    styleUrl: './list.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         { provide: FD_FORM_FIELD_CONTROL, useExisting: ListComponent, multi: true },

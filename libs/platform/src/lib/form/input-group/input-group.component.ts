@@ -49,7 +49,7 @@ import { InputGroupInputComponent } from './input.component';
 @Component({
     selector: 'fdp-input-group',
     templateUrl: './input-group.component.html',
-    styleUrls: ['./input-group.component.scss'],
+    styleUrl: './input-group.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

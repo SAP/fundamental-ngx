@@ -47,7 +47,7 @@ export interface ApprovalFlowApproverDetailsDialogRefData {
 @Component({
     selector: 'fdp-approval-flow-approver-details',
     templateUrl: './approval-flow-approver-details.component.html',
-    styleUrls: ['../styles/approval-flow-dialog.scss'],
+    styleUrl: '../styles/approval-flow-dialog.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {

@@ -15,7 +15,7 @@ import { ApprovalGraphNode } from '../interfaces/approval-node';
 @Component({
     selector: 'fdp-approval-flow-toolbar-actions',
     templateUrl: './approval-flow-toolbar-actions.component.html',
-    styleUrls: ['./approval-flow-toolbar-actions.component.scss'],
+    styleUrl: './approval-flow-toolbar-actions.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {

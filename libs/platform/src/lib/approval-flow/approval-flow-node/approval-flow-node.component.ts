@@ -59,7 +59,7 @@ let defaultId = 0;
 @Component({
     selector: 'fdp-approval-flow-node',
     templateUrl: './approval-flow-node.component.html',
-    styleUrls: ['./approval-flow-node.component.scss'],
+    styleUrl: './approval-flow-node.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {

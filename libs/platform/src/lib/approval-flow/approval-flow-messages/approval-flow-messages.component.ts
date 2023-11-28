@@ -25,7 +25,7 @@ export interface ApprovalFlowMessage {
 @Component({
     selector: 'fdp-approval-flow-messages',
     templateUrl: './approval-flow-messages.component.html',
-    styleUrls: ['./approval-flow-messages.component.scss'],
+    styleUrl: './approval-flow-messages.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {

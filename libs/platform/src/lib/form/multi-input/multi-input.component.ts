@@ -85,7 +85,7 @@ export class MultiInputSelectionChangeEvent {
 @Component({
     selector: 'fdp-multi-input',
     templateUrl: './multi-input.component.html',
-    styleUrls: ['./multi-input.component.scss'],
+    styleUrl: './multi-input.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

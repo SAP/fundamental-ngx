@@ -1,9 +1,13 @@
 import { ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
 
-import { FormInputMessageGroupComponent } from '@fundamental-ngx/core/form';
-import { TriggerConfig } from '@fundamental-ngx/core/popover';
-import { PopoverBodyComponent, PopoverControlComponent, PopoverComponent } from '@fundamental-ngx/core/popover';
 import { NgTemplateOutlet } from '@angular/common';
+import { FormInputMessageGroupComponent } from '@fundamental-ngx/core/form';
+import {
+    PopoverBodyComponent,
+    PopoverComponent,
+    PopoverControlComponent,
+    TriggerConfig
+} from '@fundamental-ngx/core/popover';
 
 /**
  * This extends core implementation  to support richer extensibility and instead of relying
@@ -14,7 +18,7 @@ import { NgTemplateOutlet } from '@angular/common';
 @Component({
     selector: 'fdp-input-message-group',
     templateUrl: './input-message-group-with-template.component.html',
-    styleUrls: ['./input-message-group-with-template.component.scss'],
+    styleUrl: './input-message-group-with-template.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

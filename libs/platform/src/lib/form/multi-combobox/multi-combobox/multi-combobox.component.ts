@@ -67,7 +67,7 @@ let deprecationWarningShown = false;
 @Component({
     selector: 'fdp-multi-combobox',
     templateUrl: './multi-combobox.component.html',
-    styleUrls: ['./multi-combobox.component.scss'],
+    styleUrl: './multi-combobox.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [

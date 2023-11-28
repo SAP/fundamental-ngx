@@ -19,7 +19,7 @@ import { BaseComponent } from '@fundamental-ngx/platform/shared';
 @Component({
     selector: 'fdp-menu-button',
     templateUrl: './menu-button.component.html',
-    styleUrls: ['./menu-button.component.scss'],
+    styleUrl: './menu-button.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [ButtonComponent]

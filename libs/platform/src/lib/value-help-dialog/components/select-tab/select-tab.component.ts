@@ -41,7 +41,7 @@ let titleUniqueId = 0;
 @Component({
     selector: 'fdp-select-tab',
     templateUrl: './select-tab.component.html',
-    styleUrls: ['./select-tab.component.scss'],
+    styleUrl: './select-tab.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

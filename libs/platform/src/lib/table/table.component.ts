@@ -178,7 +178,7 @@ let tableUniqueId = 0;
 @Component({
     selector: 'fdp-table',
     templateUrl: './table.component.html',
-    styleUrls: ['./table.component.scss'],
+    styleUrl: './table.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

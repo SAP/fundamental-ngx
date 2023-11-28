@@ -36,7 +36,7 @@ const INTERVAL_IN_MS = 10;
 @Component({
     selector: 'fdp-approval-flow-user-list',
     templateUrl: './approval-flow-user-list.component.html',
-    styleUrls: ['./approval-flow-user-list.component.scss'],
+    styleUrl: './approval-flow-user-list.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {

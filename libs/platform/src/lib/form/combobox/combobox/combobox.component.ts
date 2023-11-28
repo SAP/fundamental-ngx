@@ -61,7 +61,7 @@ export class ComboboxSelectionChangeEvent {
 @Component({
     selector: 'fdp-combobox',
     templateUrl: './combobox.component.html',
-    styleUrls: ['./combobox.component.scss'],
+    styleUrl: './combobox.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [

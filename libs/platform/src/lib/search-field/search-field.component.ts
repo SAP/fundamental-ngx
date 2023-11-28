@@ -101,7 +101,7 @@ type Appearance = SearchComponent['appearance'] | undefined;
 @Component({
     selector: 'fdp-search-field',
     templateUrl: './search-field.component.html',
-    styleUrls: ['./search-field.component.scss'],
+    styleUrl: './search-field.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [

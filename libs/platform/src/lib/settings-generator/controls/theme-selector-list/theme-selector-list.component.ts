@@ -11,7 +11,7 @@ import {
 @Component({
     selector: 'fdp-theme-selector-list',
     templateUrl: './theme-selector-list.component.html',
-    styleUrls: ['./theme-selector-list.component.scss'],
+    styleUrl: './theme-selector-list.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider],

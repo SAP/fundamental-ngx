@@ -71,7 +71,7 @@ const INITIAL_SHOW_ALL_ITEMS = true;
 
 @Component({
     templateUrl: './columns.component.html',
-    styleUrls: ['./columns.component.scss'],
+    styleUrl: './columns.component.scss',
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13ColumnsDialogComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush,

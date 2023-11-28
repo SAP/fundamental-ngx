@@ -17,7 +17,7 @@ import { ApprovalTeam } from '../interfaces';
 @Component({
     selector: 'fdp-approval-flow-team-list',
     templateUrl: './approval-flow-team-list.component.html',
-    styleUrls: ['./approval-flow-team-list.component.scss'],
+    styleUrl: './approval-flow-team-list.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {

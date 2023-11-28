@@ -34,7 +34,7 @@ export { FilterDialogData, FilterDialogResultData };
 
 @Component({
     templateUrl: './filtering.component.html',
-    styleUrls: ['./filtering.component.scss'],
+    styleUrl: './filtering.component.scss',
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13FilteringDialogComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush,
