@@ -195,9 +195,6 @@ export default {
     coreBreadcrumb: {
         overflowTitleMore: 'Mais'
     },
-    platformActionBar: {
-        backButtonLabel: 'Voltar'
-    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Observadores',
         defaultTitle: 'Processo de aprovação',
@@ -509,94 +506,6 @@ export default {
         deselectAllCheckboxLabel: 'Desmarcar tudo',
         deselectSingleRow: 'Para desmarcar a linha, pressione a BARRA DE ESPAÇOS',
         selectSingleRow: 'Para selecionar a linha, pressione a BARRA DE ESPAÇOS'
-    },
-    platformThumbnail: {
-        detailsGotoPreviousButtonTitle: 'Ir para o anterior',
-        detailsGotoNextButtonTitle: 'Ir para o próximo',
-        detailsDialogCloseBtnLabel: 'Fechar',
-        roleDescription: 'Imagem'
-    },
-    platformUploadCollection: {
-        moveToTitle: 'Mover para',
-        moveToTitleFolder: 'Pasta',
-        moveToNewFolderBtnLabel: 'Nova pasta',
-        moveToAllFilesSubHeaderLabel: 'Todos os arquivos',
-        moveToConfirmBtn: 'Mover',
-        moveToCloseBtn: 'Cancelar',
-        newFolderTitle: 'Nova pasta',
-        newFolderAtRootInputLabel: 'Nome da nova pasta',
-        newFolderAtFolderInputLabel: 'Nome da nova pasta dentro de {folderName}',
-        newFolderInputPlaceholder: 'Digitar aqui...',
-        newFolderInputErrorLabel: 'É permitido no máximo {count} caracteres',
-        newFolderDialogCreateBtnLabel: 'Criar',
-        newFolderDialogCancelBtnLabel: 'Cancelar',
-        breadcrumbLabelAllFiles: 'Todos os arquivos',
-        breadcrumbLabelAllFilesWithTotal: 'Todos os arquivos ({total})',
-        searchPlaceholder: 'Pesquisar',
-        addBtnLabel: 'Adicionar',
-        newFolderBtnLabel: 'Nova pasta',
-        moveToBtnLabel: 'Mover para',
-        downloadBtnLabel: 'Fazer download',
-        updateVersionBtnLabel: 'Atualizar versão',
-        removeBtnLabel: 'Remover',
-        folderIconTitle: 'Ícone de pasta',
-        fileIconTitle: 'Ícone de arquivo',
-        editFileNameInputPlaceholder: 'Inserir um nome',
-        editFileNameFileAlreadyExistsError: 'Já existe um arquivo com este nome',
-        editFileNameFolderAlreadyExistsError: 'Já existe uma pasta com este nome',
-        itemStatusSuccessful: 'Com êxito',
-        itemStatusUnsuccessful: 'Sem êxito',
-        uploadNewFileAfterFailAction: 'Executar',
-        cancelUploadNewFileAction: 'Cancelar',
-        itemMenuBtnTitle: 'Mais',
-        dragDropAreaText: 'Arrastar arquivos para carregar',
-        noDataText: 'Nenhum arquivo encontrado',
-        noDataDescription: 'Soltar arquivos para carregar ou usar o botão ‚ÄúAdicionar‚Äù.',
-        paginationTotal: 'Mostrando {from}-{to} de {total}',
-        resultsPerPage: 'Resultados por página',
-        messageCreateFailed: 'Falha ao criar {folderName}.',
-        messageCreateSuccess: '{folderName} foi criado.',
-        messageUpdateVersionFailed: 'Falha ao atualizar versão de {folderName}.',
-        messageUpdateVersionSuccess: 'A versão de {folderName} foi atualizada.',
-        messageFileRenameFailed: 'Falha ao renomear "{from}" para "{to}."',
-        messageFileRenameSuccess: '"{from}" foi renomeado para "{to}".',
-        messageRemoveFoldersAndFilesFailed: 'Falha ao remover {foldersCount} pastas e {filesCount} arquivos.',
-        messageRemoveFoldersAndFilesSuccess: '{foldersCount} pastas e {filesCount} arquivos foram removidos.',
-        messageRemoveFoldersFailed: 'Falha ao remover {foldersCount} pastas.',
-        messageRemoveFoldersSuccess: '{foldersCount} pastas foram removidas.',
-        messageRemoveFilesFailed: 'Falha ao remover {filesCount} arquivos.',
-        messageRemoveFilesSuccess: '{filesCount} arquivos foram removidos.',
-        messageRemoveFileOrFolderFailed: 'Falha ao remover {name}.',
-        messageRemoveFileOrFolderSuccess: '{name} foi removido(a).',
-        messageMoveFoldersAndFilesFailed: 'Falha ao mover {foldersCount} pastas e {filesCount} arquivos para {to}.',
-        messageMoveFoldersAndFilesSuccess: '{foldersCount} pastas e {filesCount} arquivos foram movidos para {to}.',
-        messageMoveFoldersFailed: 'Falha ao mover {foldersCount} pastas para {to}.',
-        messageMoveFoldersSuccess: '{foldersCount} pastas foram movidas para {to}.',
-        messageMoveFilesFailed: 'Falha ao mover {filesCount} arquivos para {to}.',
-        messageMoveFilesSuccess: '{filesCount} arquivos foram movidos para {to}.',
-        messageMoveFileOrFolderFailed: 'Falha ao mover {name} para {to}.',
-        messageMoveFileOrFolderSuccess: '{name} foi movido para {to}.',
-        messageMoveRootFoldersAndFilesFailed:
-            'Falha ao mover {foldersCount} pastas e {filesCount} arquivos para todos os arquivos.',
-        messageMoveRootFoldersAndFilesSuccess:
-            '{foldersCount} pastas e {filesCount} arquivos foram movidos para todos os arquivos.',
-        messageMoveRootFoldersFailed: 'Falha ao mover {foldersCount} pastas para todos os arquivos.',
-        messageMoveRootFoldersSuccess: '{foldersCount} pastas foram movidas para todos os arquivos.',
-        messageMoveRootFilesFailed: 'Falha ao mover {filesCount} arquivos para todos os arquivos.',
-        messageMoveRootFilesSuccess: '{filesCount} arquivos foram movidos para todos os arquivos.',
-        messageMoveRootFileOrFolderFailed: 'Falha ao mover {name} para todos os arquivos.',
-        messageMoveRootFileOrFolderSuccess: '{name} foi movido(a) para todos os arquivos',
-        messageFileTypeMismatchPlural: '{filesCount} arquivos têm o tipo incorreto. Tipos permitidos: {allowedTypes}.',
-        messageFileTypeMismatchSingular:
-            'O arquivo "{fileName}" tem o tipo incorreto. Tipos permitidoss: {allowedTypes}.',
-        messageFileSizeExceededPlural:
-            '{filesCount} arquivos excederam o tamanho máximo de arquivo. Tamanho máximo permitido: {maxFileSize}.',
-        messageFileSizeExceededSingular:
-            'O arquivo "{fileName}" excedeu o tamanho máximo de arquivo. Tamanho máximo permitido: {maxFileSize}.',
-        messageFileNameLengthExceededPlural:
-            '{filesCount} arquivos excederam o comprimento máximo de nome de arquivo. Comprimento de nome de arquivo permitido: {maxFilenameLength} caracteres.',
-        messageFileNameLengthExceededSingular:
-            'O nome "{fileName}" excedeu o comprimento máximo de nome de arquivo. Comprimento de nome de arquivo permitido: {maxFilenameLength} caracteres.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Editar'

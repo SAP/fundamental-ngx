@@ -1,6 +1,5 @@
 export const appURLs = {
     platform: {
-        actionBar: '/action-bar',
         approvalFlow: '/approval-flow',
         button: '/button',
         checkbox: '/checkbox',
@@ -8,7 +7,6 @@ export const appURLs = {
         datePicker: '/date-picker',
         datetimePicker: '/datetime-picker',
         feedInput: '/feed-input',
-        fileUploader: '/file-uploader',
         infoLabel: '/info-label',
         input: '/input',
         inputGroup: '/input-group',
@@ -32,9 +30,7 @@ export const appURLs = {
         switch: '/switch',
         table: '/table',
         textarea: '/textarea',
-        thumbnail: '/thumbnail',
         timePicker: '/time-picker',
-        uploadCollections: '/upload-collection',
         valueHelpDialog: '/value-help-dialog',
         dynamicPageLayout: '/dynamic-page',
         formContainerLayout: '/form-container'

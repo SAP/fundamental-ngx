@@ -198,9 +198,6 @@ export default {
     coreBreadcrumb: {
         overflowTitleMore: 'Більше'
     },
-    platformActionBar: {
-        backButtonLabel: 'Повернутися назад'
-    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Спостерігачі',
         defaultTitle: 'Процес затвердження',
@@ -518,109 +515,6 @@ export default {
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'Щоб скасувати вибір, натисніть пробіл',
         selectSingleRow: 'Щоб вибрати рядок, натисніть пробіл'
-    },
-    platformThumbnail: {
-        detailsGotoPreviousButtonTitle: 'Перейти до попереднього',
-        detailsGotoNextButtonTitle: 'Перейти до наступного',
-        detailsDialogCloseBtnLabel: 'Закрити',
-        roleDescription: 'Зображення'
-    },
-    platformUploadCollection: {
-        moveToTitle: 'Перемістити до',
-        moveToTitleFolder: 'Папка',
-        moveToNewFolderBtnLabel: 'Нова папка',
-        moveToAllFilesSubHeaderLabel: 'Усі файли',
-        moveToConfirmBtn: 'Перемістити',
-        moveToCloseBtn: 'Скасувати',
-        newFolderTitle: 'Нова папка',
-        newFolderAtRootInputLabel: 'Назва нової папки',
-        newFolderAtFolderInputLabel: 'Назва нової папки усередині {folderName}',
-        newFolderInputPlaceholder: 'Введіть назву..',
-        newFolderInputErrorLabel:
-            'Максимально дозволено { count, plural, one {1 символ} few {# символи} other {# символів} }',
-        newFolderDialogCreateBtnLabel: 'Створити',
-        newFolderDialogCancelBtnLabel: 'Скасувати',
-        breadcrumbLabelAllFiles: 'Усі файли',
-        breadcrumbLabelAllFilesWithTotal: 'Усі файли ({total})',
-        searchPlaceholder: 'Пошук',
-        addBtnLabel: 'Додати',
-        newFolderBtnLabel: 'Нова папка',
-        moveToBtnLabel: 'Перемістити до',
-        downloadBtnLabel: 'Завантажити',
-        updateVersionBtnLabel: 'Оновити версію',
-        removeBtnLabel: 'Видалити',
-        folderIconTitle: 'Значок папки',
-        fileIconTitle: 'Значок файлу',
-        editFileNameInputPlaceholder: 'Введіть назву',
-        editFileNameFileAlreadyExistsError: 'Файл з такою назвою вже існує',
-        editFileNameFolderAlreadyExistsError: 'Папка з такою назвою вже існує',
-        itemStatusSuccessful: 'Успішно',
-        itemStatusUnsuccessful: 'Невдало',
-        uploadNewFileAfterFailAction: 'Виконати',
-        cancelUploadNewFileAction: 'Скасувати',
-        itemMenuBtnTitle: 'Більше',
-        dragDropAreaText: 'Перетягніть файли для завантаження',
-        noDataText: 'Файлів не знайдено',
-        noDataDescription: 'Перетягніть файли для завантаження або скористайтеся кнопкою «Додати».',
-        paginationTotal: 'Показано {from}-{to} із {total}',
-        resultsPerPage: 'Результатів на сторінці',
-        messageCreateFailed: 'Не вдалося створити {folderName}.',
-        messageCreateSuccess: '{folderName} успішно створено.',
-        messageUpdateVersionFailed: 'Не вдалося оновити версію {folderName}.',
-        messageUpdateVersionSuccess: 'Версія {folderName} оновлена.',
-        messageFileRenameFailed: 'Не вдалося перейменувати "{from}" на "{to}."',
-        messageFileRenameSuccess: '{from}" перейменовано на "{to}".',
-        messageRemoveFoldersAndFilesFailed:
-            'Не вдалося видалити { foldersCount, plural, one {1 папку} few {# папки} other {# папок} } і { filesCount, plural, one {1 файл} few {# файли} other {# файлів} }.',
-        messageRemoveFoldersAndFilesSuccess:
-            '{ foldersCount, plural, one {1 папку} few {# папки} other {# папок} } і { filesCount, plural, one {1 файл} few {# файли} other {# файлів} } видалено.',
-        messageRemoveFoldersFailed:
-            'Не вдалося видалити { foldersCount, plural, one {1 папку} few {# папки} other {# папок} }.',
-        messageRemoveFoldersSuccess: 'Видалено { foldersCount, plural, one {1 папку} few {# папки} other {# папок} }.',
-        messageRemoveFilesFailed:
-            'Не вдалося видалити { filesCount, plural, one {1 файл} few {# файли} other {# файлів} }.',
-        messageRemoveFilesSuccess: 'Видалено { filesCount, plural, one {1 файл} few {# файли} other {# файлів} }.',
-        messageRemoveFileOrFolderFailed: 'Не вдалося видалити {name}.',
-        messageRemoveFileOrFolderSuccess: '{name} видалено.',
-        messageMoveFoldersAndFilesFailed:
-            'Не вдалося перемістити { foldersCount, plural, one {1 папку} few {# папки} other {# папок} } і { filesCount, plural, one {1 файл} few {# файли} other {# файлів} } до {to}.',
-        messageMoveFoldersAndFilesSuccess:
-            '{ foldersCount, plural, one {1 папку} few {# папки} other {# папок} } і { filesCount, plural, one {1 файл} few {# файли} other {# файлів} } переміщено в {to}.',
-        messageMoveFoldersFailed:
-            'Не вдалося перемістити { foldersCount, plural, one {1 папку} few {# папки} other {# папок} } до {to}.',
-        messageMoveFoldersSuccess:
-            '{ foldersCount, plural, one {1 папку} few {# папки} other {# папок} } переміщено до {to}.',
-        messageMoveFilesFailed:
-            'Не вдалося перемістити { filesCount, plural, one {1 файл} few {# файли} other {# файлів} } до {to}.',
-        messageMoveFilesSuccess:
-            '{ filesCount, plural, one {1 файл} few {# файли} other {# файлів} } переміщено до {to}.',
-        messageMoveFileOrFolderFailed: 'Не вдалося перемістити {name} до {to}.',
-        messageMoveFileOrFolderSuccess: '{name} переміщено в {to}.',
-        messageMoveRootFoldersAndFilesFailed:
-            'Не вдалося перемістити { foldersCount, plural, one {1 папку} few {# папки} other {# папок} } і { filesCount, plural, one {1 файл} few {# файли} other {# файлів} } до всіх файлів.',
-        messageMoveRootFoldersAndFilesSuccess:
-            '{ foldersCount, plural, one {1 папку} few {# папки} other {# папок} } і { filesCount, plural, one {1 файл} few {# файли} other {# файлів} } переміщено до всіх файлів.',
-        messageMoveRootFoldersFailed:
-            'Не вдалося перемістити { foldersCount, plural, one {1 папку} few {# папки} other {# папок} } до всіх файлів.',
-        messageMoveRootFoldersSuccess:
-            '{ foldersCount, plural, one {1 папку} few {# папки} other {# папок} } переміщено до всіх файлів.',
-        messageMoveRootFilesFailed:
-            'Не вдалося перемістити { filesCount, plural, one {1 файл} few {# файли} other {# файлів} } до всіх файлів.',
-        messageMoveRootFilesSuccess:
-            '{ filesCount, plural, one {1 файл} few {# файли} other {# файлів} } переміщено до всіх файлів.',
-        messageMoveRootFileOrFolderFailed: 'Не вдалося перемістити {name} до всіх файлів.',
-        messageMoveRootFileOrFolderSuccess: '{name} переміщено до всіх файлів.',
-        messageFileTypeMismatchPlural:
-            '{filesCount, plural, one {1 файл} few {# файли} other {# файлів} } мають неправильний тип. Дозволені типи: {allowedTypes}.',
-        messageFileTypeMismatchSingular: 'Файл "{fileName}" має неправильний тип. Дозволені типи: {allowedTypes}.',
-        messageFileSizeExceededPlural:
-            '{ filesCount, plural, one {1 файл перевищує} few {# файли перевищують} other {# файлів перевищують} } максимальний розмір файлу. Дозволений максимальний розмір файлу: {maxFileSize}.',
-        messageFileSizeExceededSingular:
-            'Файл "{fileName}" перевищує максимальний розмір файлу. Дозволений максимальний розмір файлу: {maxFileSize}.',
-        messageFileNameLengthExceededPlural:
-            '{ filesCount, plural, one {1 файл перевищив} few {# файли перевищили} other {# файлів перевищили} } максимальну довжину імені файлу. Дозволена довжина імені файлу: {maxFilenameLength} символів.',
-        messageFileNameLengthExceededSingular:
-            'Назва "{fileName}" перевищує максимальну довжину імені файлу. Дозволена довжина імені файлу: {maxFilenameLength} символів.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Редагувати'

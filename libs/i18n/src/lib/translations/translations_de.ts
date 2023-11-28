@@ -196,9 +196,6 @@ export default {
     coreBreadcrumb: {
         overflowTitleMore: 'Mehr'
     },
-    platformActionBar: {
-        backButtonLabel: 'Zurück'
-    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Beobachter',
         defaultTitle: 'Genehmigungsprozess',
@@ -512,96 +509,6 @@ export default {
         deselectAllCheckboxLabel: 'Gesamte Auswahl aufheben',
         deselectSingleRow: 'Zum Aufheben der Zeilenauswahl LEERTASTE drücken',
         selectSingleRow: 'Zum Auswählen der Zeile LEERTASTE drücken'
-    },
-    platformThumbnail: {
-        detailsGotoPreviousButtonTitle: 'Zum vorherigen',
-        detailsGotoNextButtonTitle: 'Zum nächsten',
-        detailsDialogCloseBtnLabel: 'Schließen',
-        roleDescription: 'Bild'
-    },
-    platformUploadCollection: {
-        moveToTitle: 'Verschieben nach',
-        moveToTitleFolder: 'Ordner',
-        moveToNewFolderBtnLabel: 'Neuer Ordner',
-        moveToAllFilesSubHeaderLabel: 'Alle Dateien',
-        moveToConfirmBtn: 'Verschieben',
-        moveToCloseBtn: 'Abbrechen',
-        newFolderTitle: 'Neuer Ordner',
-        newFolderAtRootInputLabel: 'Name des neuen Ordners',
-        newFolderAtFolderInputLabel: 'Name des neuen Ordners in {folderName}',
-        newFolderInputPlaceholder: 'Hier eingeben ...',
-        newFolderInputErrorLabel: 'Maximal {count} Zeichen zulässig',
-        newFolderDialogCreateBtnLabel: 'Erstellen',
-        newFolderDialogCancelBtnLabel: 'Abbrechen',
-        breadcrumbLabelAllFiles: 'Alle Dateien',
-        breadcrumbLabelAllFilesWithTotal: 'Alle Dateien ({total})',
-        searchPlaceholder: 'Suchen',
-        addBtnLabel: 'Hinzufügen',
-        newFolderBtnLabel: 'Neuer Ordner',
-        moveToBtnLabel: 'Verschieben nach',
-        downloadBtnLabel: 'Herunterladen',
-        updateVersionBtnLabel: 'Version aktualisieren',
-        removeBtnLabel: 'Entfernen',
-        folderIconTitle: 'Ordnersymbol',
-        fileIconTitle: 'Dateisymbol',
-        editFileNameInputPlaceholder: 'Name eingeben',
-        editFileNameFileAlreadyExistsError: 'Eine Datei mit diesem Namen ist bereits vorhanden',
-        editFileNameFolderAlreadyExistsError: 'Ein Ordner mit diesem Namen ist bereits vorhanden.',
-        itemStatusSuccessful: 'Erfolgreich',
-        itemStatusUnsuccessful: 'Nicht erfolgreich',
-        uploadNewFileAfterFailAction: 'Ausführen',
-        cancelUploadNewFileAction: 'Abbrechen',
-        itemMenuBtnTitle: 'Mehr',
-        dragDropAreaText: 'Hochzuladende Dateien ziehen',
-        noDataText: 'Keine Dateien gefunden',
-        noDataDescription: 'Hochzuladende Dateien ablegen oder Schaltfläche Hinzufügen verwenden.',
-        paginationTotal: '{from}-{to} von {total} werden angezeigt',
-        resultsPerPage: 'Ergebnisse pro Seite',
-        messageCreateFailed: '{folderName} konnte nicht erstellt werden.',
-        messageCreateSuccess: '{folderName} wurde erstellt.',
-        messageUpdateVersionFailed: '{folderName}-Version konnte nicht aktualisiert werden.',
-        messageUpdateVersionSuccess: '{folderName}-Version wurde aktualisiert.',
-        messageFileRenameFailed: 'Umbenennen von "{from}" in "{to}." fehlgeschlagen',
-        messageFileRenameSuccess: '"{from}" wurde in "{to}" umbenannt.',
-        messageRemoveFoldersAndFilesFailed:
-            '{foldersCount} Ordner und {filesCount} Dateien konnten nicht entfernt werden.',
-        messageRemoveFoldersAndFilesSuccess: '{foldersCount} Ordner und {filesCount} Dateien wurden entfernt.',
-        messageRemoveFoldersFailed: '{foldersCount} Ordner konnten nicht entfernt werden.',
-        messageRemoveFoldersSuccess: '{foldersCount} Ordner wurden entfernt.',
-        messageRemoveFilesFailed: '{filesCount} Dateien konnten nicht entfernt werden.',
-        messageRemoveFilesSuccess: '{filesCount} Dateien wurden entfernt.',
-        messageRemoveFileOrFolderFailed: '{name} konnte nicht entfernt werden.',
-        messageRemoveFileOrFolderSuccess: '{name} wurde entfernt.',
-        messageMoveFoldersAndFilesFailed:
-            '{foldersCount} Ordner und {filesCount} Dateien konnten nicht in {to} verschoben werden.',
-        messageMoveFoldersAndFilesSuccess: '{foldersCount} Ordner und {filesCount} Dateien wurden in {to} verschoben.',
-        messageMoveFoldersFailed: '{foldersCount} Ordner konnten nicht in {to} verschoben werden.',
-        messageMoveFoldersSuccess: '{foldersCount} Ordner wurden in {to} verschoben.',
-        messageMoveFilesFailed: '{filesCount} Dateien konnten nicht in {to} verschoben werden.',
-        messageMoveFilesSuccess: '{filesCount} wurden in {to} verschoben.',
-        messageMoveFileOrFolderFailed: '{name} konnte nicht in {to} verschoben werden.',
-        messageMoveFileOrFolderSuccess: '{name} wurde in {to} verschoben.',
-        messageMoveRootFoldersAndFilesFailed:
-            '{foldersCount} Ordner und {filesCount} Dateien konnten nicht in alle Dateien verschoben werden.',
-        messageMoveRootFoldersAndFilesSuccess:
-            '{foldersCount} Ordner und {filesCount} wurden in alle Dateien verschoben.',
-        messageMoveRootFoldersFailed: '{foldersCount} Ordner konnten nicht in alle Dateien verschoben werden.',
-        messageMoveRootFoldersSuccess: '{foldersCount} Ordner wurden in alle Dateien verschoben.',
-        messageMoveRootFilesFailed: '{filesCount} Dateien konnten nicht in alle Dateien verschoben werden.',
-        messageMoveRootFilesSuccess: '{filesCount} Dateien wurden in alle Dateien verschoben.',
-        messageMoveRootFileOrFolderFailed: '{name} konnte nicht in alle Dateien verschoben werden.',
-        messageMoveRootFileOrFolderSuccess: '{name} wurde in alle Dateien verschoben.',
-        messageFileTypeMismatchPlural: '{filesCount} Dateien haben den falschen Typ. Zulässige Typen: {allowedTypes}.',
-        messageFileTypeMismatchSingular:
-            'Die Datei "{fileName}" hat den falschen Typ. Zulässige Typen: {allowedTypes}.',
-        messageFileSizeExceededPlural:
-            '{filesCount} Dateien überschreiten die maximale Dateigröße. Zulässige maximale Dateigröße: {maxFileSize}.',
-        messageFileSizeExceededSingular:
-            'Die Datei "{fileName}" hat die maximale Dateigröße überschritten. Zulässige maximale Dateigröße: {maxFileSize}.',
-        messageFileNameLengthExceededPlural:
-            '{filesCount} Dateien haben die maximale Länge für Dateinamen überschritten. Zulässige Länge für Dateinamen: {maxFilenameLength} Zeichen.',
-        messageFileNameLengthExceededSingular:
-            'Der Name "{fileName}" hat die maximale Länge für Dateinamen überschritten. Zulässige Länge für Dateinamen: {maxFilenameLength} Zeichen.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Bearbeiten'

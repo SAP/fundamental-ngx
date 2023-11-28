@@ -196,9 +196,6 @@ export default {
     coreBreadcrumb: {
         overflowTitleMore: 'Daha'
     },
-    platformActionBar: {
-        backButtonLabel: 'Geri dön'
-    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Gözlemciler',
         defaultTitle: 'Onay süreci',
@@ -511,93 +508,6 @@ export default {
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR'
-    },
-    platformThumbnail: {
-        detailsGotoPreviousButtonTitle: 'Öncekine Git',
-        detailsGotoNextButtonTitle: 'Sonrakine Git',
-        detailsDialogCloseBtnLabel: 'Kapat',
-        roleDescription: 'resim'
-    },
-    platformUploadCollection: {
-        moveToTitle: 'Taşınma',
-        moveToTitleFolder: 'Dizin',
-        moveToNewFolderBtnLabel: 'Yeni Dizin',
-        moveToAllFilesSubHeaderLabel: 'Tüm dosyalar',
-        moveToConfirmBtn: 'Move',
-        moveToCloseBtn: 'Vazgeç',
-        newFolderTitle: 'Yeni Dizinr',
-        newFolderAtRootInputLabel: 'Yeni Dizin adı',
-        newFolderAtFolderInputLabel: '{folderName} içindeki yeni dizin adı',
-        newFolderInputPlaceholder: 'Buraya yaz..',
-        newFolderInputErrorLabel: 'Maksimum {count} karaktere izin verilir',
-        newFolderDialogCreateBtnLabel: 'Oluşturma',
-        newFolderDialogCancelBtnLabel: 'Vazgeç',
-        breadcrumbLabelAllFiles: 'Tüm dosyalar',
-        breadcrumbLabelAllFilesWithTotal: 'Tüm dosyalar ({total})',
-        searchPlaceholder: 'Ara',
-        addBtnLabel: 'Ekle',
-        newFolderBtnLabel: 'Yeni Dizin',
-        moveToBtnLabel: 'Taşınma',
-        downloadBtnLabel: 'İndir',
-        updateVersionBtnLabel: 'Sürümü güncelle',
-        removeBtnLabel: 'Kaldır',
-        folderIconTitle: 'Dizin ikonu',
-        fileIconTitle: 'Dosya ikonu',
-        editFileNameInputPlaceholder: 'İsim girin',
-        editFileNameFileAlreadyExistsError: 'Bu adda dosya zaten var',
-        editFileNameFolderAlreadyExistsError: 'Bu adda dizin zaten var',
-        itemStatusSuccessful: 'Başarılı',
-        itemStatusUnsuccessful: 'Başarısız',
-        uploadNewFileAfterFailAction: 'Çalıştır',
-        cancelUploadNewFileAction: 'Vazgeç',
-        itemMenuBtnTitle: 'Daha',
-        dragDropAreaText: 'Yüklenecek dosyaları sürükleyin',
-        noDataText: 'Dosya bulunamadı',
-        noDataDescription: 'Yüklenecek dosyaları bırakın veya “Ekle” düğmesini kullanın.',
-        paginationTotal: '{total}/{from}-{to} arasında gösteriliyor',
-        resultsPerPage: 'Sayfa başına sonuç',
-        messageCreateFailed: '{folderName} oluşturulamadı.',
-        messageCreateSuccess: '{folderName} oluşturuladı.',
-        messageUpdateVersionFailed: '{folderName} sürümü güncellenemedi.',
-        messageUpdateVersionSuccess: '{folderName} sürümü güncellendi.',
-        messageFileRenameFailed: '"{from}" olarak yeniden adlandırılamadı "{to}"',
-        messageFileRenameSuccess: '"{from}\\ "{to}" olarak yeniden adlandırıldı.',
-        messageRemoveFoldersAndFilesFailed: '{foldersCount} dizin ve {filesCout} dosya kaldırılamadı.',
-        messageRemoveFoldersAndFilesSuccess: '{foldersCount} dizinleri ve {filesCount} dosyaları kaldırıldı.',
-        messageRemoveFoldersFailed: '{foldersCount} dizinleri kaldırılamadı',
-        messageRemoveFoldersSuccess: '{foldersCount} dizinleri kaldırıladı.',
-        messageRemoveFilesFailed: '{filesCount} dosyaları kaldırılamadı.',
-        messageRemoveFilesSuccess: '{filesCount}  dosyaları kaldırıldı.',
-        messageRemoveFileOrFolderFailed: '{name} kaldırılamadı.',
-        messageRemoveFileOrFolderSuccess: '{name} kaldırıldı.',
-        messageMoveFoldersAndFilesFailed: '{foldersCount} dizini ve {filesCount} dosyası, {to}  taşınamadı.',
-        messageMoveFoldersAndFilesSuccess: '{foldersCount} dizini ve {filesCount} dosyası, {to}  taşınadı.',
-        messageMoveFoldersFailed: '{foldersCount} dizini, {to}  taşınamadı.',
-        messageMoveFoldersSuccess: '{foldersCount} dizini, {to}  taşınadı.',
-        messageMoveFilesFailed: '{filesCount} dosyası, {to}  taşınamadı.',
-        messageMoveFilesSuccess: '{filesCount} dosyası, {to}  taşınadı.',
-        messageMoveFileOrFolderFailed: '{name}, {to} taşınamadı.',
-        messageMoveFileOrFolderSuccess: '{name}, {to} taşınadı.',
-        messageMoveRootFoldersAndFilesFailed:
-            '{foldersCount} dizinleri ve {filesCount} dosyaları tüm dosyalara taşınamadı.',
-        messageMoveRootFoldersAndFilesSuccess:
-            '{foldersCount} dizinleri ve {filesCount} dosyaları tüm dosyalara taşınadı.',
-        messageMoveRootFoldersFailed: '{foldersCount} dizini tüm dosyalara taşınamadı.',
-        messageMoveRootFoldersSuccess: '{foldersCount} dizinler tüm dosyalara taşındı.',
-        messageMoveRootFilesFailed: '{filesCount} dosyası tüm dosyalara taşınamadı.',
-        messageMoveRootFilesSuccess: '{filesCount} dizinler tüm dosyalara taşındı.',
-        messageMoveRootFileOrFolderFailed: '{name} tüm dosyalara taşınamadı.',
-        messageMoveRootFileOrFolderSuccess: '{name} tüm dosyalara taşındı.',
-        messageFileTypeMismatchPlural: '{filesCount} dosyalarının türü yanlış. İzin verilen türler: {allowedTypes}.',
-        messageFileTypeMismatchSingular: '"{fileName}" dosyasının türü yanlış. İzin verilen türler: {allowedTypes}.',
-        messageFileSizeExceededPlural:
-            '{filesCount} dosya maksimum dosya boyutunu aştı. İzin verilen maksimum dosya boyutu: {maxFileSize}.',
-        messageFileSizeExceededSingular:
-            '"{fileName}" dosyası maksimum dosya boyutunu aştı. İzin verilen maksimum dosya boyutu: {maxFileSize}.',
-        messageFileNameLengthExceededPlural:
-            '{filesCount} dosya maksimum dosya adı uzunluğunu aştı. İzin verilen dosya adı uzunluğu: {maxFilenameLength} karakter.',
-        messageFileNameLengthExceededSingular:
-            '"{fileName}\\ maksimum dosya adı uzunluğunu aştı. İzin verilen dosya adı uzunluğu: {maxFilenameLength} karakter.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Düzenle'

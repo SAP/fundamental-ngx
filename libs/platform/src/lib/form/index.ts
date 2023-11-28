@@ -99,9 +99,6 @@ export * from './multi-input/multi-input.config';
 export * from './multi-input/multi-input.interface';
 export * from './multi-input/multi-input.module';
 
-export * from './platform-file-uploader/platform-file-uploader.component';
-export * from './platform-file-uploader/platform-file-uploader.module';
-
 export * from './radio-group/radio-group.component';
 export * from './radio-group/radio-group.module';
 export * from './radio-group/radio/radio.component';

@@ -196,9 +196,6 @@ export default {
     coreBreadcrumb: {
         overflowTitleMore: 'और'
     },
-    platformActionBar: {
-        backButtonLabel: 'वापस जाएं'
-    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'नजर रखने वाले',
         defaultTitle: 'अनुमोदन प्रक्रिया',
@@ -511,95 +508,6 @@ export default {
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR'
-    },
-    platformThumbnail: {
-        detailsGotoPreviousButtonTitle: 'पिछले पर जाएं',
-        detailsGotoNextButtonTitle: 'अगले पर जाएं',
-        detailsDialogCloseBtnLabel: 'बंद करें',
-        roleDescription: 'छवि'
-    },
-    platformUploadCollection: {
-        moveToTitle: 'करने के लिए कदम',
-        moveToTitleFolder: 'फ़ोल्डर',
-        moveToNewFolderBtnLabel: 'नया फोल्डर',
-        moveToAllFilesSubHeaderLabel: 'सभी फाइलें',
-        moveToConfirmBtn: 'कदम',
-        moveToCloseBtn: 'रद्द करें',
-        newFolderTitle: 'नया फोल्डर',
-        newFolderAtRootInputLabel: 'नए फोल्डर का नाम',
-        newFolderAtFolderInputLabel: 'नए फोल्डर का नाम {folderName}',
-        newFolderInputPlaceholder: 'यहा लिखें..',
-        newFolderInputErrorLabel: 'अधिकतम {count} पात्र अनुमत',
-        newFolderDialogCreateBtnLabel: 'सृजन करें',
-        newFolderDialogCancelBtnLabel: 'रद्द करें',
-        breadcrumbLabelAllFiles: 'सभी फाइलें',
-        breadcrumbLabelAllFilesWithTotal: 'सभी फाइलें ({total})',
-        searchPlaceholder: 'तलाश करें',
-        addBtnLabel: 'जोड़ें',
-        newFolderBtnLabel: 'नया फोल्डर',
-        moveToBtnLabel: 'यहाँ ले जाएँ',
-        downloadBtnLabel: 'डाउनलोड करें',
-        updateVersionBtnLabel: 'नया संस्करण',
-        removeBtnLabel: 'हटाएं',
-        folderIconTitle: 'फ़ोल्डर आइकन',
-        fileIconTitle: 'फ़ाइल आइकन',
-        editFileNameInputPlaceholder: 'नाम डालें',
-        editFileNameFileAlreadyExistsError: 'इस नाम की फ़ाइल पहले से मौजूद है',
-        editFileNameFolderAlreadyExistsError: 'इस नाम का फोल्डर पहले से मौजूद है',
-        itemStatusSuccessful: 'सफल',
-        itemStatusUnsuccessful: 'असफल',
-        uploadNewFileAfterFailAction: 'चलाएं',
-        cancelUploadNewFileAction: 'रद्द करें',
-        itemMenuBtnTitle: 'अधिक',
-        dragDropAreaText: 'अपलोड करने के लिए फ़ाइलें खींचें',
-        noDataText: 'कोई फाइल नहीं मिली',
-        noDataDescription: 'अपलोड करने के लिए फ़ाइलें छोड़ें, या "जोड़ें" बटन का उपयोग करें।',
-        paginationTotal: '{from}-{to} of {total} दिखा रहा है',
-        resultsPerPage: 'प्रति पेज नतीजे',
-        messageCreateFailed: '{folderName} बनाने में विफल।',
-        messageCreateSuccess: '{folderName} बनाया गया है।',
-        messageUpdateVersionFailed: '{folderName}का संस्करण अपडेट करने में विफल।',
-        messageUpdateVersionSuccess: '{folderName} संस्करण अद्यतन किया गया है।',
-        messageFileRenameFailed: '"{from}" तक "{to}" नाम बदलने में विफल।',
-        messageFileRenameSuccess: '"{from}" का नाम बदलकर कर "{to}" दिया गया है।',
-        messageRemoveFoldersAndFilesFailed: '{foldersCount} फ़ोल्डर्स और {filesCount} फ़ाइलें हटाने में विफल।',
-        messageRemoveFoldersAndFilesSuccess: '{foldersCount} फ़ोल्डर्स और {filesCount} फ़ाइलें हटा दी गई हैं।',
-        messageRemoveFoldersFailed: '{foldersCount} फ़ोल्डर्स हटाने में विफल ।',
-        messageRemoveFoldersSuccess: '{foldersCount} फ़ोल्डर हटा दिए गए हैं।',
-        messageRemoveFilesFailed: '{filesCount} फ़ाइलें हटाने में विफल ।',
-        messageRemoveFilesSuccess: '{filesCount} फ़ाइलें हटा दी गई हैं।',
-        messageRemoveFileOrFolderFailed: '{name} हटाने में विफल ।',
-        messageRemoveFileOrFolderSuccess: '{name} निकाल दिया गया है।',
-        messageMoveFoldersAndFilesFailed:
-            '{to} तक {foldersCount} फ़ोल्डर्स और {filesCount} फ़ाइलें स्थानांतरित करने में विफल।',
-        messageMoveFoldersAndFilesSuccess:
-            '{foldersCount} फ़ोल्डर्स और {filesCount} फ़ाइलें स्थानांतरित कर दी गई हैं {to}।',
-        messageMoveFoldersFailed: '{to} तक {foldersCount} फ़ोल्डर्स स्थानांतरित करने में विफल।',
-        messageMoveFoldersSuccess: '{foldersCount} फ़ोल्डर्स को स्थानांतरित कर दिया गया है {to}।',
-        messageMoveFilesFailed: '{to} तक {filesCount} फ़ाइलें स्थानांतरित करने में विफल।',
-        messageMoveFilesSuccess: '{filesCount} फ़ाइलें स्थानांतरित कर दी गई हैं {to}।',
-        messageMoveFileOrFolderFailed: 'स्थानांतरित करने में विफल {name} प्रति {to}।',
-        messageMoveFileOrFolderSuccess: '{name} में ले जाया गया है {to}।',
-        messageMoveRootFoldersAndFilesFailed:
-            'स्थानांतरित करने में विफल {foldersCount} फ़ोल्डर्स और {filesCount} सभी फाइलों के लिए फ़ाइलें।',
-        messageMoveRootFoldersAndFilesSuccess:
-            '{foldersCount} फ़ोल्डर्स और {filesCount} फ़ाइलें सभी फ़ाइलों में ले जाया गया है।',
-        messageMoveRootFoldersFailed: 'स्थानांतरित करने में विफल {foldersCount} सभी फाइलों के लिए फ़ोल्डर।',
-        messageMoveRootFoldersSuccess: '{foldersCount} फ़ोल्डर्स को सभी फाइलों में ले जाया गया है।',
-        messageMoveRootFilesFailed: 'स्थानांतरित करने में विफल {filesCount} सभी फाइलों के लिए फ़ाइलें।',
-        messageMoveRootFilesSuccess: '{filesCount} फ़ाइलें सभी फ़ाइलों में ले जाया गया है।',
-        messageMoveRootFileOrFolderFailed: 'स्थानांतरित करने में विफल {name} सभी फाइलों के लिए।',
-        messageMoveRootFileOrFolderSuccess: '{name} सभी फाइलों में ले जाया गया है।',
-        messageFileTypeMismatchPlural: '{filesCount} फाइलों का प्रकार गलत है। अनुमत प्रकार: {allowedTypes}।',
-        messageFileTypeMismatchSingular: 'फ़ाइल "{fileName}" गलत प्रकार है। अनुमत प्रकार: {allowedTypes}।',
-        messageFileSizeExceededPlural:
-            '{filesCount} फ़ाइलें अधिकतम फ़ाइल आकार से अधिक हो गईं। अनुमत अधिकतम फ़ाइल आकार: {maxFileSize}।',
-        messageFileSizeExceededSingular:
-            'फ़ाइल "{fileName}" अधिकतम फ़ाइल आकार को पार कर गया। अनुमत अधिकतम फ़ाइल आकार: {maxFileSize}।',
-        messageFileNameLengthExceededPlural:
-            '{filesCount} फ़ाइलें फ़ाइल नाम की अधिकतम लंबाई को पार कर गई हैं। अनुमत फ़ाइल नाम लंबाई: {maxFilenameLength} पात्र।',
-        messageFileNameLengthExceededSingular:
-            'नाम "{fileName}" फ़ाइल नाम की अधिकतम लंबाई को पार कर गया। अनुमत फ़ाइल नाम लंबाई: {maxFilenameLength} पात्र।'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'संपादित करें'
