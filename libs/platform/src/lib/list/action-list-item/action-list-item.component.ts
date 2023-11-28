@@ -1,3 +1,4 @@
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -7,7 +8,6 @@ import {
     Output,
     ViewChild
 } from '@angular/core';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 
@@ -22,7 +22,10 @@ export class ActionChangeEvent {
     selector: 'fdp-action-list-item',
     templateUrl: './action-list-item.component.html',
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ActionListItemComponent) }],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        role: 'none'
+    }
 })
 export class ActionListItemComponent extends BaseListItem {
     /** Access button element*/

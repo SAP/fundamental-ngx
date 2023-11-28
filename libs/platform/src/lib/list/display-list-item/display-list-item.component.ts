@@ -6,6 +6,9 @@ import { BaseListItem } from '../base-list-item';
     selector: 'fdp-display-list-item',
     templateUrl: './display-list-item.component.html',
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => DisplayListItemComponent) }],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        role: 'none'
+    }
 })
 export class DisplayListItemComponent extends BaseListItem {}

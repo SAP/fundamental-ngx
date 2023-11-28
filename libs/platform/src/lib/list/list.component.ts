@@ -59,7 +59,7 @@ import {
     isDataSource,
     isPresent
 } from '@fundamental-ngx/platform/shared';
-import { BaseListItem, ListItemDef } from './base-list-item';
+import { BaseListItem, LIST_ITEM_TYPE, ListItemDef } from './base-list-item';
 import { FdpListComponent } from './fdpListComponent.token';
 import { ListConfig } from './list.config';
 import { LoadMoreContentContext, LoadMoreContentDirective } from './load-more-content.directive';
@@ -318,7 +318,10 @@ export class ListComponent<T>
     _destroyed = new Subject<void>();
 
     /** @hidden */
-    protected _dataSource: FdpListDataSource<T>;
+    _ariaSetSize: Observable<number> = new Observable();
+
+    /** @hidden */
+    protected _dataSource: ListDataSource<T>;
 
     /** @hidden */
     private _translationResolver = new TranslationResolver();
@@ -420,9 +423,49 @@ export class ListComponent<T>
         this._init();
     }
 
-    /** @hidden */
-    private async _init(): Promise<void> {
-        this._language = await firstValueFrom(this._language$);
+    /**
+     * @hidden
+     * on Update navgiation styles for non navigated items
+     * event:any to avoid code duplication
+     * seprate PR for custom event
+     */
+    @HostListener('click', ['$event'])
+    _updateNavigation(event: Event): void {
+        let selectedItemId: Nullable<string> = '0';
+        const element: Nullable<HTMLElement> = event.target instanceof HTMLElement ? event.target : null;
+        const parent = element?.closest('.fd-list__item');
+        if (isPresent(parent)) {
+            selectedItemId = parent?.getAttribute('id');
+        }
+
+        this.listItems.forEach((item, index) => {
+            item.anchor?.nativeElement.classList.remove('is-navigated');
+
+            if (item._focused) {
+                this._keyManager?.updateActiveItem(index);
+            }
+        });
+
+        const el = event.target instanceof HTMLElement && event.target;
+        if (!el) {
+            return;
+        }
+
+        const linkElement = el.querySelector('a');
+        if (el.tagName.toLowerCase() === 'a') {
+            el.classList.add('is-navigated');
+        } else if (el.tagName.toLowerCase() === 'li' && !!linkElement) {
+            linkElement.classList.add('is-navigated');
+        }
+
+        // TODO: selection management should be completely changed https://github.com/SAP/fundamental-ngx/issues/8008
+        if (this.rowSelection) {
+            this._handleRowSelect(selectedItemId);
+        } else if (this.selectionMode === 'single') {
+            this._handleSingleSelect(event, selectedItemId);
+        } else if (this.selectionMode === 'multi') {
+            this._handleMultiSelect(selectedItemId);
+        }
     }
 
     /** Get context for load more button */
@@ -609,49 +652,16 @@ export class ListComponent<T>
         this._updateNavigation(event);
     }
 
-    /**
-     * @hidden
-     * on Update navgiation styles for non navigated items
-     * event:any to avoid code duplication
-     * seprate PR for custom event
-     */
-    @HostListener('click', ['$event'])
-    _updateNavigation(event: Event): void {
-        let selectedItemId: Nullable<string> = '0';
-        const element: Nullable<HTMLElement> = event.target instanceof HTMLElement ? event.target : null;
-        const parent = element?.closest('.fd-list__item');
-        if (isPresent(parent)) {
-            selectedItemId = parent?.getAttribute('id');
-        }
-
-        this.listItems.forEach((item, index) => {
-            item.anchor?.nativeElement.classList.remove('is-navigated');
-
-            if (item._focused) {
-                this._keyManager?.updateActiveItem(index);
-            }
+    /** @hidden */
+    _setupListItem(item: BaseListItem): void {
+        item.selectionMode = this.selectionMode;
+        item.rowSelection = this.rowSelection;
+        item._hasByLine = this.hasByLine;
+        item.itemSelected.subscribe(() => {
+            this._keyManager?.setActiveItem(this.listItems.toArray().indexOf(item));
         });
 
-        const el = event.target instanceof HTMLElement && event.target;
-        if (!el) {
-            return;
-        }
-
-        const linkElement = el.querySelector('a');
-        if (el.tagName.toLowerCase() === 'a') {
-            el.classList.add('is-navigated');
-        } else if (el.tagName.toLowerCase() === 'li' && !!linkElement) {
-            linkElement.classList.add('is-navigated');
-        }
-
-        // TODO: selection management should be completely changed https://github.com/SAP/fundamental-ngx/issues/8008
-        if (this.rowSelection) {
-            this._handleRowSelect(selectedItemId);
-        } else if (this.selectionMode === 'single') {
-            this._handleSingleSelect(event, selectedItemId);
-        } else if (this.selectionMode === 'multi') {
-            this._handleMultiSelect(selectedItemId);
-        }
+        this.stateChanges.next(item);
     }
 
     /** @hidden */
@@ -870,18 +880,6 @@ export class ListComponent<T>
         });
     }
 
-    /** @hidden */
-    _setupListItem(item: BaseListItem): void {
-        item.selectionMode = this.selectionMode;
-        item.rowSelection = this.rowSelection;
-        item._hasByLine = this.hasByLine;
-        item.itemSelected.subscribe(() => {
-            this._keyManager?.setActiveItem(this.listItems.toArray().indexOf(item));
-        });
-
-        this.stateChanges.next(item);
-    }
-
     /**
      * @hidden
      * Setting values from list to list items
@@ -897,20 +895,46 @@ export class ListComponent<T>
             this.listItems.first.listItem.nativeElement.setAttribute('tabindex', '0');
         }
 
-        if (!this.ariaLabel) {
-            this.ariaSetsize = this.listItems.length;
-        }
+        this._ariaSetSize = this.ariaSetsize
+            ? of(this.ariaSetsize)
+            : this._dataSource && this._dataSource.dataProvider?.getTotalItems
+            ? this._dataSource.dataProvider.getTotalItems()
+            : of(this.listItems.length);
 
         this._partialNavigation = this.listItems.some((item) => item.navigationIndicator || item.listType === 'detail');
 
-        this.listItems.forEach((item, index) => {
+        let currentGroup: BaseListItem | null = null;
+        let currentGroupItemIds: string[] = [];
+        // Since we cannot use index from the iteration due to possible group item existence, we need to track it manually.
+        let itemIndex = 0;
+
+        this.listItems.forEach((item) => {
             if (!this._partialNavigation) {
                 item.navigated = this.navigated;
                 item.navigationIndicator = this.navigationIndicator;
                 item.listType = this.listType;
             }
+            if (item._type === LIST_ITEM_TYPE.HEADER) {
+                currentGroup?.listItem.nativeElement.setAttribute('aria-owns', currentGroupItemIds.join(' '));
+                currentGroupItemIds = [];
+                currentGroup = item;
+                return;
+            }
+            if (item._type !== LIST_ITEM_TYPE.ITEM) {
+                return;
+            }
 
-            item.ariaPosinet = index;
+            item.ariaSetSize = this._ariaSetSize;
+
+            item.ariaPosinset = ++itemIndex;
+
+            if (currentGroup) {
+                currentGroupItemIds.push(item.listItem.nativeElement.id);
+            }
+
+            if (item === this.listItems.last) {
+                currentGroup?.listItem.nativeElement.setAttribute('aria-owns', currentGroupItemIds.join(' '));
+            }
         });
 
         this._cd.markForCheck();
@@ -927,5 +951,10 @@ export class ListComponent<T>
                     )
                 )
             );
+    }
+
+    /** @hidden */
+    private async _init(): Promise<void> {
+        this._language = await firstValueFrom(this._language$);
     }
 }

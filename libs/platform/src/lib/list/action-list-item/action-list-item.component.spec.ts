@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -6,6 +7,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ActionListItemComponent } from './action-list-item.component';
 
 import { PlatformListModule } from '../list.module';
+import { SelectionType } from '../models/list';
+import { BaseListItem } from '../base-list-item';
+import { ListComponent } from '../list.component';
 
 export interface Action {
     title: string;
@@ -14,7 +18,7 @@ export interface Action {
 @Component({
     selector: 'fdp-test-fdp-action-list-item',
     template: `
-        <fdp-list>
+        <fdp-list [selectionMode]="selectionMode">
             <fdp-action-list-item title="Action 1"> </fdp-action-list-item>
             <fdp-action-list-item title="Action 2"> </fdp-action-list-item>
             <fdp-action-list-item title="Action 3"> </fdp-action-list-item>
@@ -26,8 +30,13 @@ class ActionListItemComponentTestComponent {
     @ViewChild(ActionListItemComponent, { read: ElementRef, static: true })
     actionListElement: ElementRef;
 
+    @ViewChild(ListComponent)
+    list: ListComponent<any>;
+
     itemclick: string;
     enterPress: string;
+
+    selectionMode: SelectionType = 'none';
 
     onItemClick(): void {
         this.itemclick = 'mouse is clicked';
@@ -84,10 +93,35 @@ describe('ActionListItemComponent', () => {
         expect(actionItems[0].nativeElement.classList).toContain('fd-list__item--action');
     });
 
-    it('Should display action item with role as option', () => {
+    it('Should display list item with role as listitem', () => {
         const listContainer = fixture.debugElement.query(By.css('fdp-action-list-item .fd-list__item--action'));
         fixture.detectChanges();
+        expect(listContainer.nativeElement.getAttribute('role')).toEqual('listitem');
+    });
+
+    it('Should display action item with role as option', async () => {
+        component.selectionMode = 'multi';
+        fixture.detectChanges();
+        const listItem = fixture.debugElement.query(By.css('fdp-action-list-item')).componentInstance as BaseListItem;
+        listItem.ngAfterViewInit();
+        fixture.detectChanges();
+        await fixture.whenStable();
+        let listContainer = fixture.debugElement.query(By.css('fdp-action-list-item .fd-list__item--action'));
         expect(listContainer.nativeElement.getAttribute('role')).toEqual('option');
+        component.selectionMode = 'single';
+        fixture.detectChanges();
+        listItem.ngAfterViewInit();
+        fixture.detectChanges();
+        await fixture.whenStable();
+        listContainer = fixture.debugElement.query(By.css('fdp-action-list-item .fd-list__item--action'));
+        expect(listContainer.nativeElement.getAttribute('role')).toEqual('option');
+        component.selectionMode = 'none';
+        fixture.detectChanges();
+        listItem.ngAfterViewInit();
+        fixture.detectChanges();
+        await fixture.whenStable();
+        listContainer = fixture.debugElement.query(By.css('fdp-action-list-item .fd-list__item--action'));
+        expect(listContainer.nativeElement.getAttribute('role')).toEqual('listitem');
     });
 
     it('Should Action 1 Action 2 Action 3 and as Action 4  as list item', () => {
