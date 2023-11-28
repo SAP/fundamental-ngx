@@ -17,8 +17,8 @@
                     fd-button
                     class="fd-dynamic-page__collapse-button"
                     aria-haspopup="true"
-                    [ariaLabel]="collapsed ? expandLabel : collapseLabel"
-                    [attr.title]="collapsed ? expandLabel : collapseLabel"
+                    [ariaLabel]="_toggleButtonAriaLabel"
+                    [attr.title]="_toggleButtonAriaLabel"
                     [attr.aria-expanded]="!collapsed"
                     [attr.aria-controls]="id"
                     (click)="toggleCollapse()"
@@ -29,8 +29,8 @@
                 <button
                     fd-button
                     class="fd-dynamic-page__pin-button"
-                    [ariaLabel]="_pinned ? unpinAriaLabel : pinAriaLabel"
-                    [attr.title]="_pinned ? unpinAriaLabel : pinAriaLabel"
+                    [ariaLabel]="_pinButtonAriaLabel"
+                    [attr.title]="_pinButtonAriaLabel"
                     [toggled]="_pinned"
                     (click)="togglePinned()"
                     *ngIf="pinnable && !collapsed"

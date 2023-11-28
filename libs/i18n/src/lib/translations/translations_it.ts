@@ -47,6 +47,12 @@ export default {
         datetimeOkLabel: 'Ok',
         datetimeCancelLabel: 'Anulla'
     },
+    coreDynamicPage: {
+        expandLabel: 'Espandi intestazione',
+        collapseLabel: 'Riduci intestazione',
+        pinLabel: 'Fissa intestazione',
+        unpinLabel: 'Sblocca intestazione'
+    },
     coreFeedListItem: {
         moreLabel: 'Altro',
         lessLabel: 'Meno'

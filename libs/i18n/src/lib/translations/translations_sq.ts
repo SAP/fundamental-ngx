@@ -47,6 +47,12 @@ export default {
         datetimeOkLabel: 'Ok',
         datetimeCancelLabel: 'Anulo'
     },
+    coreDynamicPage: {
+        expandLabel: 'Zgjero titullin',
+        collapseLabel: 'Tkurre titullin',
+        pinLabel: 'Fikso titullin',
+        unpinLabel: 'Çlirimi i titullit'
+    },
     coreFeedListItem: {
         moreLabel: 'Më shumë',
         lessLabel: 'Më pak'

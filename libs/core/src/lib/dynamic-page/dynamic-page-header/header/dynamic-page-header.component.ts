@@ -50,9 +50,6 @@ export const ActionSquashBreakpointPx = 1280;
     imports: [NgIf, NgTemplateOutlet, IgnoreClickOnSelectionDirective]
 })
 export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDestroy, DynamicPageHeader {
-    /** @hidden */
-    _collapsed = false;
-
     /** Title property for dynamic page */
     @Input()
     title: string;
@@ -98,6 +95,9 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     /** @hidden */
     @ContentChild(DynamicPageTitleContentComponent)
     _contentToolbar: DynamicPageTitleContentComponent;
+
+    /** @hidden */
+    _collapsed = false;
 
     /** @hidden */
     _actionsSquashed = false;
