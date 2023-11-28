@@ -99,6 +99,7 @@
 }
 @for (column of _fdpTableService.visibleColumns$ | async; track column.name) {
     <td
+        #tableCellElement
         [fdpTableCellResizable]="
             $index
                 | columnResizableSide
@@ -137,6 +138,7 @@
         (keydown.enter)="_isTreeRowFirstCell($index, row, $event) && _toggleGroupRow()"
         (keydown.arrowLeft)="_tableRowService.scrollToOverlappedCell()"
         (keydown.arrowRight)="_tableRowService.scrollToOverlappedCell()"
+        (keydown.space)="_handleCellSpaceKey($index, tableCellElement, $event)"
     >
         <div [class.fd-table__text]="column.applyText" [class.fd-table__text--no-wrap]="column.noWrap">
             @if (_isTreeRowFirstCell($index, row)) {

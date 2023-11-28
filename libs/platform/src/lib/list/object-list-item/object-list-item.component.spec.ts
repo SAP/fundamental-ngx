@@ -81,11 +81,11 @@ describe('ObjectListItemComponent', () => {
         });
     });
 
-    it('Object list item has role as option', () => {
+    it('Object list item has role as listitem', () => {
         const listItems = fixture.debugElement.queryAll(By.css('fdp-object-list-item .fd-object-list__item'));
         fixture.detectChanges();
         listItems.forEach((listElem) => {
-            expect(listElem.nativeElement.getAttribute('role')).toEqual('option');
+            expect(listElem.nativeElement.getAttribute('role')).toEqual('listitem');
         });
     });
 

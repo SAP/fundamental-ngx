@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 import { AsyncPipe } from '@angular/common';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
@@ -117,8 +117,12 @@ const list_elements: User[] = [
 ];
 
 export class ListDataProvider extends DataProvider<User> {
+    private readonly _totalItems = new BehaviorSubject(0);
     constructor() {
         super();
+    }
+    getTotalItems(): Observable<number> {
+        return this._totalItems.asObservable();
     }
     fetch(params: Map<string, string>): Observable<User[]> {
         let data = list_elements;
@@ -127,6 +131,9 @@ export class ListDataProvider extends DataProvider<User> {
             const keyword = name.toLowerCase();
             data = data.filter((user) => user.firstName.toLowerCase().indexOf(keyword) > -1);
         }
+
+        // Update total items count when new request completed.
+        this._totalItems.next(data.length);
 
         return of(data);
     }

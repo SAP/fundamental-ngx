@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { ColorAccent } from '@fundamental-ngx/cdk/utils';
 
-import { NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -32,6 +32,9 @@ import { ObjectListItemRowComponent } from './object-list-item-row.component';
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ObjectListItemComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
+    host: {
+        role: 'none'
+    },
     imports: [
         ListItemComponent,
         NgTemplateOutlet,
@@ -46,7 +49,8 @@ import { ObjectListItemRowComponent } from './object-list-item-row.component';
         FormsModule,
         RadioButtonComponent,
         ButtonComponent,
-        FdTranslatePipe
+        FdTranslatePipe,
+        AsyncPipe
     ]
 })
 export class ObjectListItemComponent extends BaseListItem {
