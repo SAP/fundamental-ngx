@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.47.4...v0.48.0-rc.0) (2023-11-28)
+
+
+### chore
+
+* **core, platform:** ng 17 migration ([#10995](https://github.com/SAP/fundamental-ngx/issues/10995)) ([83f399e](https://github.com/SAP/fundamental-ngx/commit/83f399e6c9ed2baa1af5a6689ea7fa8621a30f71))
+
+
+### BREAKING CHANGES
+
+* **core, platform:** Angular 17
+
+* chore: update angular to v17
+
+* chore: update libs
+
+* fix: template syntax
+
+* feat: control flow syntax
+
+* feat: optimise template refs
+
+* chore: bump min node version
+
+* fix: formatting
+
+* fix: restore some lib versions
+
+* fix: unit tests
+
+* fix: fix failing unit tests
+
+* fix(e2e): fix failing e2e requests
+
+* fix: minor fixes after control flow migration
+
+* fix(e2e): fix some failing e2e
+
+* fix: fix errors after control flow migration
+
+* chore(core): fixed deprecated context usage in avatar-group
+
+* chore: warning once about side navigation component deprecation
+
+* chore: added selector to the translations doc component to fight matched identifiers
+
+* fix(platform): fix cdr error
+
+* chore(core): replaced `styleUrls` with `styleUrl` in components
+
+* chore(cx,platform): replaced `styleUrls` with `styleUrl` in components
+
+
+
+
+
 ## [0.47.4](https://github.com/SAP/fundamental-ngx/compare/v0.47.4-rc.10...v0.47.4) (2023-11-28)
 
 **Note:** Version bump only for package @fundamental-ngx/btp
