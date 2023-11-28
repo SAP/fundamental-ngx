@@ -9,6 +9,7 @@
     (selectedItemChange)="_showItemInfo($event)"
     [selection]="true"
     [ariaMultiselectable]="true"
+    role="listbox"
 >
     <fdp-standard-list-item *fdpItemDef="let address" [title]="address.name"></fdp-standard-list-item>
 </fdp-list>

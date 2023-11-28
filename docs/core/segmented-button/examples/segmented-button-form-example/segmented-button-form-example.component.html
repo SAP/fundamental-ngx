@@ -2,9 +2,9 @@
     <div style="margin-bottom: 1rem">
         <h4>Forms</h4>
         <fd-segmented-button formControlName="basic">
-            <button fd-button label="Left" value="first"></button>
-            <button fd-button label="Middle" value="second"></button>
-            <button fd-button label="Right" value="third"></button>
+            <button fd-button fdkFocusableItem label="Left" value="first"></button>
+            <button fd-button fdkFocusableItem label="Middle" value="second"></button>
+            <button fd-button fdkFocusableItem label="Right" value="third"></button>
         </fd-segmented-button>
         <br />
         <small>Value: {{ customForm.controls.basic.value }} </small><br />
@@ -15,9 +15,9 @@
     <div>
         <h4>Disabled Forms</h4>
         <fd-segmented-button formControlName="disabled">
-            <button fd-button label="Left" value="first"></button>
-            <button fd-button label="Middle" value="second"></button>
-            <button fd-button label="Right" value="third"></button>
+            <button fd-button fdkFocusableItem label="Left" value="first"></button>
+            <button fd-button fdkFocusableItem label="Middle" value="second"></button>
+            <button fd-button fdkFocusableItem label="Right" value="third"></button>
         </fd-segmented-button>
         <br />
         <small>Value: {{ customForm.controls.disabled.value }} </small><br />
