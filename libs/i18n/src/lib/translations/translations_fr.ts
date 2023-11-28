@@ -196,9 +196,6 @@ export default {
     coreBreadcrumb: {
         overflowTitleMore: "Plus d'infos"
     },
-    platformActionBar: {
-        backButtonLabel: 'Revenir en arrière'
-    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Observateurs',
         defaultTitle: "Procédure d'approbation",
@@ -512,99 +509,6 @@ export default {
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR'
-    },
-    platformThumbnail: {
-        detailsGotoPreviousButtonTitle: 'Aller à la page précédente',
-        detailsGotoNextButtonTitle: 'Aller à la page suivante',
-        detailsDialogCloseBtnLabel: 'Fermer',
-        roleDescription: 'Image'
-    },
-    platformUploadCollection: {
-        moveToTitle: 'Déplacer vers',
-        moveToTitleFolder: 'Dossier',
-        moveToNewFolderBtnLabel: 'Nouveau dossier',
-        moveToAllFilesSubHeaderLabel: 'Tous les fichiers',
-        moveToConfirmBtn: 'Déplacer',
-        moveToCloseBtn: 'Annuler',
-        newFolderTitle: 'Nouveau dossier',
-        newFolderAtRootInputLabel: 'Nom du nouveau dossier',
-        newFolderAtFolderInputLabel: 'Nom du nouveau dossier dans {folderName}',
-        newFolderInputPlaceholder: 'Saisissez ici..',
-        newFolderInputErrorLabel: 'Maximum {count} de caractères autorisés',
-        newFolderDialogCreateBtnLabel: 'Créer',
-        newFolderDialogCancelBtnLabel: 'Annuler',
-        breadcrumbLabelAllFiles: 'Tous les fichiers',
-        breadcrumbLabelAllFilesWithTotal: 'Tous les fichiers ({total})',
-        searchPlaceholder: 'Recherchez',
-        addBtnLabel: 'Ajouter',
-        newFolderBtnLabel: 'Nouveau dossier',
-        moveToBtnLabel: 'Déplacer vers',
-        downloadBtnLabel: 'Télécharger',
-        updateVersionBtnLabel: 'Version de la mise à jour',
-        removeBtnLabel: 'Supprimer',
-        folderIconTitle: 'Icône de dossier',
-        fileIconTitle: 'Icône de fichier',
-        editFileNameInputPlaceholder: 'Entrez un nom',
-        editFileNameFileAlreadyExistsError: 'Un fichier portant ce nom existe déjà',
-        editFileNameFolderAlreadyExistsError: 'Un dossier avec ce nom existe déjà',
-        itemStatusSuccessful: "Succès de l'opération",
-        itemStatusUnsuccessful: "Échec de l'opération",
-        uploadNewFileAfterFailAction: 'Exécuter',
-        cancelUploadNewFileAction: 'Annuler',
-        itemMenuBtnTitle: "Plus d'infos",
-        dragDropAreaText: 'Faites glisser les fichiers à télécharger',
-        noDataText: 'Aucun fichier trouvé',
-        noDataDescription: 'Déposez les fichiers à télécharger, ou utilisez le bouton "Ajouter"..',
-        paginationTotal: 'Affichage de {from}-{ to} de {total}',
-        resultsPerPage: 'Résultats par page',
-        messageCreateFailed: 'Échec de la création de {folderName}.',
-        messageCreateSuccess: '{folderName} a été créé.',
-        messageUpdateVersionFailed: 'Impossible de mettre à jour la version de {folderName}.',
-        messageUpdateVersionSuccess: 'La version de {folderName} a été mise à jour.',
-        messageFileRenameFailed: 'Impossible de renommer "{from}" en "{to}."',
-        messageFileRenameSuccess: '"{from}" a été renommé en "{to}".',
-        messageRemoveFoldersAndFilesFailed:
-            'Échec de la suppression des dossiers {foldersCount} et des fichiers {filesCount}.',
-        messageRemoveFoldersAndFilesSuccess:
-            'Les dossiers {foldersCount} et les fichiers {filesCount} ont été supprimés',
-        messageRemoveFoldersFailed: 'Échec de la suppression des dossiers {foldersCount}.',
-        messageRemoveFoldersSuccess: 'Les dossiers {foldersCount} ont été supprimés',
-        messageRemoveFilesFailed: 'Échec de la suppression des fichiers {fichiersCount}.',
-        messageRemoveFilesSuccess: 'Les fichiers {filesCount} ont été supprimés',
-        messageRemoveFileOrFolderFailed: 'Échec de la suppression de {name}.',
-        messageRemoveFileOrFolderSuccess: '{name} a été supprimé',
-        messageMoveFoldersAndFilesFailed:
-            'Échec du déplacement des dossiers {foldersCount} et des fichiers {filesCount} vers {to}',
-        messageMoveFoldersAndFilesSuccess:
-            '{foldersCount} dossiers et {filesCount} fichiers ont été déplacés vers {to}.',
-        messageMoveFoldersFailed: 'Échec du déplacement de {foldersCount} dossiers vers {to}.',
-        messageMoveFoldersSuccess: '{foldersCount} dossiers ont été déplacés vers {to}.',
-        messageMoveFilesFailed: 'Échec du déplacement de {filesCount} fichiers vers {to}.',
-        messageMoveFilesSuccess: '{filesCount} fichiers ont été déplacés vers {to}.',
-        messageMoveFileOrFolderFailed: 'Échec du déplacement de {name} vers {to}.',
-        messageMoveFileOrFolderSuccess: '{name} a été déplacé vers {to}.',
-        messageMoveRootFoldersAndFilesFailed:
-            'Échec du déplacement des {foldersCount} dossiers et des {filesCount} fichiers vers tous les fichiers.',
-        messageMoveRootFoldersAndFilesSuccess:
-            '{foldersCount} dossiers et {filesCount} fichiers ont été déplacés vers tous les fichiers.',
-        messageMoveRootFoldersFailed: 'Impossible de déplacer les dossiers {foldersCount} vers tous les fichiers.',
-        messageMoveRootFoldersSuccess: '{foldersCount} dossiers ont été déplacés vers tous les fichiers.',
-        messageMoveRootFilesFailed: 'Impossible de déplacer les {filesCount} fichiers vers tous les fichiers.',
-        messageMoveRootFilesSuccess: '{filesCount} fichiers ont été déplacés vers tous les fichiers.',
-        messageMoveRootFileOrFolderFailed: 'Impossible de déplacer {name} vers tous les fichiers.',
-        messageMoveRootFileOrFolderSuccess: '{name} a été déplacé dans tous les fichiers.',
-        messageFileTypeMismatchPlural:
-            "{filesCount} fichiers n'ont pas le bon type. Types autorisés :  {allowedTypes}.",
-        messageFileTypeMismatchSingular:
-            'Le fichier "{fileName}" n\'a pas le bon type. Types autorisés : {allowedTypes}.',
-        messageFileSizeExceededPlural:
-            '{filesCount} fichiers ont dépassé la taille maximale du fichier. Taille maximale autorisée du fichier : {maxFileSize}.',
-        messageFileSizeExceededSingular:
-            'Le fichier "{fileName}" a dépassé la taille maximale du fichier. Taille maximale autorisée du fichier : {maxFileSize}.',
-        messageFileNameLengthExceededPlural:
-            '{filesCount} fichiers ont dépassé la longueur maximale du nom de fichier. Longueur autorisée du nom de fichier : {maxFilenameLength} caractères.',
-        messageFileNameLengthExceededSingular:
-            'Le nom "{fileName}" a dépassé la longueur maximale. Longueur autorisée du nom de fichier: {maxFilenameLength} caractères.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Editer'

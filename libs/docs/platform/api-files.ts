@@ -6,7 +6,6 @@
  * Names are sorted in the ApiComponent so order does not matter.
  */
 export const API_FILES = {
-    actionbar: ['ActionBarComponent', 'ActionButtonGroupComponent'],
     button: ['ButtonComponent'],
     checkbox: ['CheckboxComponent'],
     formGenerator: [
@@ -68,15 +67,12 @@ export const API_FILES = {
     multiCombobox: ['MultiComboboxComponent', 'BaseMultiCombobox'],
     list: ['ListComponent', 'StandardListItemComponent', 'ListFooter', 'ListGroupHeader', 'ListConfig'],
     standardlistitem: ['ListComponent', 'StandardListItemComponent', 'ListFooter', 'ListGroupHeader', 'ListConfig'],
-    thumbnail: ['ThumbnailComponent'],
     actionlistitem: ['ActionListItemComponent', 'ListComponent', 'ListConfig'],
     displaylistitem: ['DisplayListItemComponent', 'ListComponent', 'ListFooter', 'ListGroupHeader', 'ListConfig'],
     objectlistitem: ['ObjectListItemComponent', 'ListComponent', 'ListFooter', 'ListGroupHeader', 'ListConfig'],
     multiInput: ['PlatformMultiInputComponent'],
     valueHelpDialog: ['PlatformValueHelpDialogComponent', 'VhdFilterComponent', 'VhdSearchComponent'],
     feedInput: ['FeedInputComponent'],
-    fileUploader: ['PlatformFileUploaderComponent'],
-    uploadCollection: ['UploadCollectionComponent', 'UploadCollectionDataProvider', 'UploadCollectionDataSource'],
     approvalFlow: ['ApprovalFlowComponent'],
     slider: ['SliderComponent'],
     footer: ['PlatformFooterComponent'],

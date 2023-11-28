@@ -196,9 +196,6 @@ export default {
     coreBreadcrumb: {
         overflowTitleMore: 'Více'
     },
-    platformActionBar: {
-        backButtonLabel: 'Vraťit se zpět'
-    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Pozorovatelé',
         defaultTitle: 'Schvalovací proces',
@@ -511,94 +508,6 @@ export default {
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR'
-    },
-    platformThumbnail: {
-        detailsGotoPreviousButtonTitle: 'Go to Previous',
-        detailsGotoNextButtonTitle: 'Přejděte na Další',
-        detailsDialogCloseBtnLabel: 'Zavřít',
-        roleDescription: 'Obraz'
-    },
-    platformUploadCollection: {
-        moveToTitle: 'Přesunout do',
-        moveToTitleFolder: 'Složka',
-        moveToNewFolderBtnLabel: 'Nová složka',
-        moveToAllFilesSubHeaderLabel: 'Všechny soubory',
-        moveToConfirmBtn: 'Přesunout',
-        moveToCloseBtn: 'Zrušit',
-        newFolderTitle: 'Nová složka',
-        newFolderAtRootInputLabel: 'Název nové složky',
-        newFolderAtFolderInputLabel: 'Název nové složky uvnitř {folderName}',
-        newFolderInputPlaceholder: 'Napište sem..',
-        newFolderInputErrorLabel: 'Maximální povolený počet znaků: {count}',
-        newFolderDialogCreateBtnLabel: 'Vytvořit',
-        newFolderDialogCancelBtnLabel: 'Zrušit',
-        breadcrumbLabelAllFiles: 'All files',
-        breadcrumbLabelAllFilesWithTotal: 'Všechny soubory ({total})',
-        searchPlaceholder: 'Vyhledávání',
-        addBtnLabel: 'Přidat',
-        newFolderBtnLabel: 'Nová složka',
-        moveToBtnLabel: 'Přesunout do',
-        downloadBtnLabel: 'Stažení',
-        updateVersionBtnLabel: 'Aktualizovat verzi',
-        removeBtnLabel: 'Odstranit',
-        folderIconTitle: 'Ikona složky',
-        fileIconTitle: 'Ikona souboru',
-        editFileNameInputPlaceholder: 'Zadejte jméno',
-        editFileNameFileAlreadyExistsError: 'Soubor s tímto názvem již existuje',
-        editFileNameFolderAlreadyExistsError: 'Složka s tímto názvem již existuje',
-        itemStatusSuccessful: 'Úspěšný',
-        itemStatusUnsuccessful: 'Neúspěšný',
-        uploadNewFileAfterFailAction: 'Spustit',
-        cancelUploadNewFileAction: 'Zrušit',
-        itemMenuBtnTitle: 'Více',
-        dragDropAreaText: 'Přetáhněte soubory k nahrání',
-        noDataText: 'Nebyly nalezeny žádné soubory',
-        noDataDescription: 'Přetáhněte soubory, které chcete nahrát, nebo použijte tlačítko „Přidat“.',
-        paginationTotal: 'Zobrazeno {from}-{to} z {to}',
-        resultsPerPage: 'Výsledky na stránku',
-        messageCreateFailed: 'Vytvoření {folderName} se nezdařilo.',
-        messageCreateSuccess: '{folderName} byl vytvořen.',
-        messageUpdateVersionFailed: 'Aktualizace verze {folderName} se nezdařila.',
-        messageUpdateVersionSuccess: 'Verze {folderName} byla aktualizována.',
-        messageFileRenameFailed: 'Nepodařilo se přejmenovat "{from}" na "{to}."',
-        messageFileRenameSuccess: '"{from}" bylo přejmenováno na "{to}".',
-        messageRemoveFoldersAndFilesFailed: 'Nepodařilo se odstranit {foldersCount} složky a {filesCount} soubory.',
-        messageRemoveFoldersAndFilesSuccess: 'Bylo odstraněno {foldersCount} složek a {filesCount} souborů.',
-        messageRemoveFoldersFailed: 'Nepodařilo se odstranit složky ({foldersCount}).',
-        messageRemoveFoldersSuccess: 'Složky ({foldersCount}) byly odstraněny.',
-        messageRemoveFilesFailed: 'Nepodařilo se odstranit {filesCount} soubory.',
-        messageRemoveFilesSuccess: 'Soubory {filesCount} byly odstraněny.',
-        messageRemoveFileOrFolderFailed: 'Nepodařilo se odstranit {name}.',
-        messageRemoveFileOrFolderSuccess: '{name} bylo odstraněno.',
-        messageMoveFoldersAndFilesFailed:
-            'Nepodařilo se přesunout {foldersCount} složky a {filesCount} soubory do {to}.',
-        messageMoveFoldersAndFilesSuccess: 'Složky {foldersCount} a soubory {filesCount} byly přesunuty do {to}.',
-        messageMoveFoldersFailed: 'Přesunutí {foldersCount} složek do {to} se nezdařilo.',
-        messageMoveFoldersSuccess: 'Složky {foldersCount} byly přesunuty do {to}.',
-        messageMoveFilesFailed: 'Přesunutí {filesCount} souborů do {to} se nezdařilo.',
-        messageMoveFilesSuccess: 'Soubory {filesCount} byly přesunuty do {to}.',
-        messageMoveFileOrFolderFailed: 'Nepodařilo se přesunout {name} do {do}.',
-        messageMoveFileOrFolderSuccess: '{name} bylo přesunuto do {do}.',
-        messageMoveRootFoldersAndFilesFailed:
-            'Nepodařilo se přesunout {foldersCount} složky a {filesCount} soubory do všech souborů.',
-        messageMoveRootFoldersAndFilesSuccess:
-            '{foldersCount} složky a {filesCount} soubory byly přesunuty do všech souborů.',
-        messageMoveRootFoldersFailed: 'Přesunutí {foldersCount} složek do všech souborů se nezdařilo.',
-        messageMoveRootFoldersSuccess: 'Složky {foldersCount} byly přesunuty do všech souborů.',
-        messageMoveRootFilesFailed: 'Nepodařilo se přesunout {filesCount} soubory do všech souborů.',
-        messageMoveRootFilesSuccess: 'Soubory {filesCount} byly přesunuty do všech souborů.',
-        messageMoveRootFileOrFolderFailed: 'Nepodařilo se přesunout {name} do všech souborů.',
-        messageMoveRootFileOrFolderSuccess: '{name} bylo přesunuto do všech souborů.',
-        messageFileTypeMismatchPlural: 'Soubory {filesCount} mají nesprávný typ. Povolené typy: {allowTypes}.',
-        messageFileTypeMismatchSingular: 'Soubor "{fileName}" má nesprávný typ. Povolené typy: {allowTypes}.',
-        messageFileSizeExceededPlural:
-            '{filesCount} soubory překročily maximální velikost souboru. Povolená maximální velikost souboru: {maxFileSize}.',
-        messageFileSizeExceededSingular:
-            'Soubor "{fileName}" překročil maximální velikost souboru. Povolená maximální velikost souboru: {maxFileSize}.',
-        messageFileNameLengthExceededPlural:
-            '{filesCount} soubory překročily maximální délku souboru. Povolená délka názvu souboru: {maxFilenameLength} znaků.',
-        messageFileNameLengthExceededSingular:
-            'Název "{fileName}" překročil maximální délku souboru. Povolená délka názvu souboru: {maxFilenameLength} znaků.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Upravit'

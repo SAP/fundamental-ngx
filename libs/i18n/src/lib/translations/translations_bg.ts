@@ -198,9 +198,6 @@ export default {
     coreBreadcrumb: {
         overflowTitleMore: 'Повече'
     },
-    platformActionBar: {
-        backButtonLabel: 'Върни Се Обратно'
-    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Наблюдатели',
         defaultTitle: 'Процес на одобрение',
@@ -514,94 +511,6 @@ export default {
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR'
-    },
-    platformThumbnail: {
-        detailsGotoPreviousButtonTitle: 'Отиди на предишнита',
-        detailsGotoNextButtonTitle: 'Отиди на следващата',
-        detailsDialogCloseBtnLabel: 'Затвори',
-        roleDescription: 'Картинка'
-    },
-    platformUploadCollection: {
-        moveToTitle: 'Премести в',
-        moveToTitleFolder: 'Папка',
-        moveToNewFolderBtnLabel: 'Нова папка',
-        moveToAllFilesSubHeaderLabel: 'Всички файлове',
-        moveToConfirmBtn: 'Премести',
-        moveToCloseBtn: 'Отмени',
-        newFolderTitle: 'Нова папка',
-        newFolderAtRootInputLabel: 'Име на новата папка',
-        newFolderAtFolderInputLabel: 'Име на новата папка вътре в {folderName}',
-        newFolderInputPlaceholder: 'Пиши тук...',
-        newFolderInputErrorLabel: 'Максимум {count} символ(а) позволени',
-        newFolderDialogCreateBtnLabel: 'Създай',
-        newFolderDialogCancelBtnLabel: 'Отмени',
-        breadcrumbLabelAllFiles: 'Всички файлове',
-        breadcrumbLabelAllFilesWithTotal: 'Всички файлове ({total})',
-        searchPlaceholder: 'Търси',
-        addBtnLabel: 'Добави',
-        newFolderBtnLabel: 'Нова папка',
-        moveToBtnLabel: 'Премести в',
-        downloadBtnLabel: 'Изтегли',
-        updateVersionBtnLabel: 'Актуализирай версията',
-        removeBtnLabel: 'Премахни',
-        folderIconTitle: 'Икона на папка',
-        fileIconTitle: 'Икона на файл',
-        editFileNameInputPlaceholder: 'Въведи име',
-        editFileNameFileAlreadyExistsError: 'Файл с това име вече съществува',
-        editFileNameFolderAlreadyExistsError: 'Папка с това име вече съществува',
-        itemStatusSuccessful: 'Успешено',
-        itemStatusUnsuccessful: 'Неуспешно',
-        uploadNewFileAfterFailAction: 'Изпълни',
-        cancelUploadNewFileAction: 'Отмени',
-        itemMenuBtnTitle: 'Повече',
-        dragDropAreaText: 'Плъзнете файлове за качване',
-        noDataText: 'Няма намерени файлове',
-        noDataDescription: 'Пуснете файлове за качване или използвайте бутона „Добави“.',
-        paginationTotal: 'Показване {from}-{to} от {total}',
-        resultsPerPage: 'Резултати на страница',
-        messageCreateFailed: 'Неуспешно създадена {folderName}.',
-        messageCreateSuccess: '{folderName} е създаден.',
-        messageUpdateVersionFailed: 'Неуспешно актуализиране на версията на {folderName}.',
-        messageUpdateVersionSuccess: 'Версията на {folderName} е актуализирана.',
-        messageFileRenameFailed: 'Неуспешно преименуване от "{from}" на "{to}."',
-        messageFileRenameSuccess: '"{from}" беще преименуван на "{to}".',
-        messageRemoveFoldersAndFilesFailed: 'Неуспешно премахване на {foldersCount} папки и {filesCount} файлове.',
-        messageRemoveFoldersAndFilesSuccess: '{foldersCount} папки и {filesCount} файлове бяха изтрити.',
-        messageRemoveFoldersFailed: 'Неуспешно премахване на {foldersCount} папки.',
-        messageRemoveFoldersSuccess: '{foldersCount} папки са премахнати.',
-        messageRemoveFilesFailed: 'Неуспешно премахване на {filesCount} файлове.',
-        messageRemoveFilesSuccess: '{filesCount} файлове са премахнати.',
-        messageRemoveFileOrFolderFailed: 'Неуспешно премахване на {name}.',
-        messageRemoveFileOrFolderSuccess: '{name} беше изтрита.',
-        messageMoveFoldersAndFilesFailed: 'Неуспешно преместване {foldersCount} папки и {filesCount} файлове в {to}.',
-        messageMoveFoldersAndFilesSuccess: '{foldersCount} папки и {filesCount} файлове са преместени в {to}.',
-        messageMoveFoldersFailed: 'Неуспешно преместване {foldersCount} папки в {to}.',
-        messageMoveFoldersSuccess: '{foldersCount} папки беше преместена в {to}.',
-        messageMoveFilesFailed: 'Неуспешно преместване {filesCount} файлове в {to}.',
-        messageMoveFilesSuccess: '{filesCount} файлове бяха преместени в {to}.',
-        messageMoveFileOrFolderFailed: 'Неуспешно преместване {name} в {to}.',
-        messageMoveFileOrFolderSuccess: '{name} е изместен(а) в {to}.',
-        messageMoveRootFoldersAndFilesFailed:
-            'Неуспешно преместване {foldersCount} папки и {filesCount} файлове от всички файлове.',
-        messageMoveRootFoldersAndFilesSuccess: '{foldersCount} папки and {filesCount} файлове успешно преместени.',
-        messageMoveRootFoldersFailed: 'Неуспешно преместване {foldersCount} папки за всички файлове.',
-        messageMoveRootFoldersSuccess: '{foldersCount} папки бяха преместени за всички файлове.',
-        messageMoveRootFilesFailed: 'Неуспешно преместване {filesCount} файлове за всички файлове.',
-        messageMoveRootFilesSuccess: '{filesCount} файлове бяха изместени за всички файлове.',
-        messageMoveRootFileOrFolderFailed: 'Неуспешно преместване {name} за всички файлове.',
-        messageMoveRootFileOrFolderSuccess: '{name} е изместен за всички файлове.',
-        messageFileTypeMismatchPlural:
-            '{filesCount} файлове имат грешно разширение. Позволени разширения: {allowedTypes}.',
-        messageFileTypeMismatchSingular:
-            'Файлът "{fileName}" има грешно разширение. Позволени разширения: {allowedTypes}.',
-        messageFileSizeExceededPlural:
-            '{filesCount} файлове надвишават максималната големина на файла. Позволен максимален размер на файла: {maxFileSize}.',
-        messageFileSizeExceededSingular:
-            'Файлът "{fileName}" надвишава максималната големина на файла. Позволен максимален размер на файла: {maxFileSize}.',
-        messageFileNameLengthExceededPlural:
-            '{filesCount} файлове надвишават максималната дължина на името на файла. Позволена дължина на името на файла: {maxFilenameLength} символа.',
-        messageFileNameLengthExceededSingular:
-            'Името "{fileName}" надвишава максималната дължина на името на файла. Позволена дължина на името на файла: {maxFilenameLength} символа.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Редактирай'
