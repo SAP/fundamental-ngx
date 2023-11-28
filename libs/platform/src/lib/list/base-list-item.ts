@@ -617,6 +617,6 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
             this.rowSelection || this.selectionMode === 'single' || this.selectionMode === 'multi'
                 ? 'option'
                 : 'listitem';
-        this._cd.detectChanges();
+        this._cd.markForCheck();
     }
 }
