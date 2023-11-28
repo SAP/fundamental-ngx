@@ -1545,6 +1545,15 @@ export class TableComponent<T = any>
     /** @hidden */
     private _listenToTableRowsPipe(): void {
         this._subscriptions.add(
+            /*
+             * Reset table when the data source is changed,
+             * because new data source can have different set of data
+             */
+            this._dataSourceDirective.dataSourceChanged.subscribe(() => {
+                this._setTableRows([]);
+            })
+        );
+        this._subscriptions.add(
             this._dataSourceDirective.items$
                 .pipe(
                     // map source items to table rows
