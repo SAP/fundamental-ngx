@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.18](https://github.com/SAP/fundamental-ngx/compare/v0.43.17...v0.43.18) (2023-11-28)
+
+
+### Bug Fixes
+
+* **core,platform:** multi announcer improvements ([#10924](https://github.com/SAP/fundamental-ngx/issues/10924)) ([8782d1a](https://github.com/SAP/fundamental-ngx/commit/8782d1a290fc45d82945020087f88481ceaa142c))
+
+
+### Features
+
+* **core,platform:** dropdown control tabout strategy ([#10991](https://github.com/SAP/fundamental-ngx/issues/10991)) ([7f49f35](https://github.com/SAP/fundamental-ngx/commit/7f49f355f1e9e273e1e5a77cc6fe570c89637caf))
+
+
+
+
+
 ## [0.43.17](https://github.com/SAP/fundamental-ngx/compare/v0.43.16...v0.43.17) (2023-11-14)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk

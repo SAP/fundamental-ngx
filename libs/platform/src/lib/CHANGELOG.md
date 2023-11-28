@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.18](https://github.com/SAP/fundamental-ngx/compare/v0.43.17...v0.43.18) (2023-11-28)
+
+
+### Bug Fixes
+
+* **core,platform:** multi announcer improvements ([#10924](https://github.com/SAP/fundamental-ngx/issues/10924)) ([8782d1a](https://github.com/SAP/fundamental-ngx/commit/8782d1a290fc45d82945020087f88481ceaa142c))
+* **platform:** add cellFocused event and focusCell method to platform table ([#10966](https://github.com/SAP/fundamental-ngx/issues/10966)) ([1059203](https://github.com/SAP/fundamental-ngx/commit/10592036d706fb8268aa21902a761cda01c77896))
+* **platform:** clear table rows on data source changes ([#11019](https://github.com/SAP/fundamental-ngx/issues/11019)) ([#11021](https://github.com/SAP/fundamental-ngx/issues/11021)) ([12bf2e4](https://github.com/SAP/fundamental-ngx/commit/12bf2e4c329d16f15c1e6892e3e1d14188e3da21))
+* **platform:** fixed table row excessive focus and toggle handling with space ([#11000](https://github.com/SAP/fundamental-ngx/issues/11000)) ([#11015](https://github.com/SAP/fundamental-ngx/issues/11015)) ([f420e48](https://github.com/SAP/fundamental-ngx/commit/f420e48221acfc09eb62786a1ff17a509f55374c))
+* **platform:** move initial focus to search input on p13 ([#10972](https://github.com/SAP/fundamental-ngx/issues/10972)) ([acaa148](https://github.com/SAP/fundamental-ngx/commit/acaa1481db236d11cc99c24ceeda75960e7b4a1f))
+
+
+### Features
+
+* **core,platform:** dropdown control tabout strategy ([#10991](https://github.com/SAP/fundamental-ngx/issues/10991)) ([7f49f35](https://github.com/SAP/fundamental-ngx/commit/7f49f355f1e9e273e1e5a77cc6fe570c89637caf))
+
+
+
+
+
 ## [0.43.17](https://github.com/SAP/fundamental-ngx/compare/v0.43.16...v0.43.17) (2023-11-14)
 
 

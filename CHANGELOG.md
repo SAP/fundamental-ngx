@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.18](https://github.com/SAP/fundamental-ngx/compare/v0.43.17...v0.43.18) (2023-11-28)
+
+
+### Bug Fixes
+
+* **core,platform:** multi announcer improvements ([#10924](https://github.com/SAP/fundamental-ngx/issues/10924)) ([8782d1a](https://github.com/SAP/fundamental-ngx/commit/8782d1a290fc45d82945020087f88481ceaa142c))
+* **core:** bug where you cannot open the datetime picker a 2nd time ([#11020](https://github.com/SAP/fundamental-ngx/issues/11020)) ([ccd89fa](https://github.com/SAP/fundamental-ngx/commit/ccd89fa5fa577d1f35e310ca263f5a6f8cfb9a05))
+* **core:** downport ([#10951](https://github.com/SAP/fundamental-ngx/issues/10951)) ([7b5b8d8](https://github.com/SAP/fundamental-ngx/commit/7b5b8d8aa37c54c109e5b1eed603839719ca2b58))
+* **core:** fd-shellbar user menu showing dot for customized user menu… ([#10917](https://github.com/SAP/fundamental-ngx/issues/10917)) ([9d38a65](https://github.com/SAP/fundamental-ngx/commit/9d38a654a16e702655a948a3bf82cb7249cc3e18)), closes [#10888](https://github.com/SAP/fundamental-ngx/issues/10888)
+* **core:** fix file uploader clearing bugs ([#10974](https://github.com/SAP/fundamental-ngx/issues/10974)) ([3bcb222](https://github.com/SAP/fundamental-ngx/commit/3bcb222f8ac137417ce60bebd27a9bc224751ee2))
+* **platform:** add cellFocused event and focusCell method to platform table ([#10966](https://github.com/SAP/fundamental-ngx/issues/10966)) ([1059203](https://github.com/SAP/fundamental-ngx/commit/10592036d706fb8268aa21902a761cda01c77896))
+* **platform:** clear table rows on data source changes ([#11019](https://github.com/SAP/fundamental-ngx/issues/11019)) ([#11021](https://github.com/SAP/fundamental-ngx/issues/11021)) ([12bf2e4](https://github.com/SAP/fundamental-ngx/commit/12bf2e4c329d16f15c1e6892e3e1d14188e3da21))
+* **platform:** fixed table row excessive focus and toggle handling with space ([#11000](https://github.com/SAP/fundamental-ngx/issues/11000)) ([#11015](https://github.com/SAP/fundamental-ngx/issues/11015)) ([f420e48](https://github.com/SAP/fundamental-ngx/commit/f420e48221acfc09eb62786a1ff17a509f55374c))
+* **platform:** move initial focus to search input on p13 ([#10972](https://github.com/SAP/fundamental-ngx/issues/10972)) ([acaa148](https://github.com/SAP/fundamental-ngx/commit/acaa1481db236d11cc99c24ceeda75960e7b4a1f))
+
+
+### Features
+
+* **core,platform:** dropdown control tabout strategy ([#10991](https://github.com/SAP/fundamental-ngx/issues/10991)) ([7f49f35](https://github.com/SAP/fundamental-ngx/commit/7f49f355f1e9e273e1e5a77cc6fe570c89637caf))
+
+
+
+
+
 ## [0.43.17](https://github.com/SAP/fundamental-ngx/compare/v0.43.16...v0.43.17) (2023-11-14)
 
 
