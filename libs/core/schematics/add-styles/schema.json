@@ -10,6 +10,12 @@
             "$default": {
                 "$source": "projectName"
             }
+        },
+        "fonts": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether default fonts from theming should be added to styles file.",
+            "x-prompt": "Add default font imports into styles file?"
         }
     }
 }

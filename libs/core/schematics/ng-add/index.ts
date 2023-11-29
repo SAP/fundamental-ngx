@@ -1,16 +1,10 @@
-import { chain, Rule, schematic, SchematicContext, Tree } from '@angular-devkit/schematics';
-import { RunSchematicTask } from '@angular-devkit/schematics/tasks';
+import { chain, Rule, schematic } from '@angular-devkit/schematics';
+import { addDependencies } from '../add-dependencies';
 import { Schema } from '../models/schema';
 
 export function ngAdd(options: Schema): Rule {
-    return (tree: Tree, context: SchematicContext) => {
-        // First, queue dependency installation task.
-        const dependenciesTaskId = context.addTask(new RunSchematicTask('add-dependencies', options));
-
-        // Wait for dependencies to be installed and proceed with main schematics.
-        context.addTask(new RunSchematicTask('proceed-with-schematics', options), [dependenciesTaskId]);
-
-        return tree;
+    return () => {
+        return chain([addDependencies(options), proceedWithSchematics(options)]);
     };
 }
 
