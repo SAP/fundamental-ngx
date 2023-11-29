@@ -115,3 +115,9 @@ $block: fd-navigation;
 .fd-popover__body.fd-navigation__list-container {
     display: block;
 }
+
+.fd-navigation__item {
+    .fd-popover-custom {
+        max-width: none;
+    }
+}

@@ -1,0 +1,111 @@
+<!-- General renderer. -->
+<ng-template #renderer>
+    <div
+        class="fd-navigation__item"
+        [class.fd-navigation__item--group]="isGroup$()"
+        [class.fd-navigation__item--child]="normalizedLevel$() > 2"
+        [class.fd-navigation__item--overflow]="isOverflow$()"
+        [class.fd-navigation__item--with-expander]="!!link$()?.routerLink && hasChildren$()"
+        [attr.aria-level]="level$()"
+        [attr.aria-selected]="isActiveAttr$()"
+        [attr.aria-expanded]="expandedAttr$()"
+        [attr.normalized-level]="normalizedLevel$()"
+        (focusin)="_focusInHandler()"
+        fdbNavigationListItemMarker
+        #itemContainer
+    >
+        <ng-template
+            [ngIf]="!navigation.isSnapped$() || !hasChildren$()"
+            [ngIfThen]="linkRenderer"
+            [ngIfElse]="popoverRenderer"
+        ></ng-template>
+        <ng-template #popoverRenderer>
+            <ng-template
+                [ngTemplateOutlet]="linkRenderer"
+                [ngTemplateOutletContext]="{ $implicit: false }"
+            ></ng-template>
+            <fd-popover
+                #popover
+                [noArrow]="false"
+                additionalBodyClass="fd-navigation__list-container"
+                [isOpen]="popoverOpen$()"
+                (isOpenChange)="_onPopoverOpen($event, popover)"
+                [trigger]="itemContainer"
+                [focusAutoCapture]="true"
+                [restoreFocusOnClose]="false"
+                [focusTrapped]="true"
+                [placement]="'right-start'"
+                *ngIf="!isOverflow$()"
+            >
+                <fd-popover-body class="fd-navigation fd-navigation--snapped">
+                    <ng-template
+                        [ngTemplateOutlet]="wrapperRenderer"
+                        [ngTemplateOutletContext]="{ $implicit: true }"
+                    ></ng-template>
+                </fd-popover-body>
+            </fd-popover>
+        </ng-template>
+    </div>
+    <ng-template [ngIf]="isOverflow$() && hasChildren$()" [ngIfThen]="overflowItemListRenderer"></ng-template>
+    <ng-template [ngIf]="!navigation.isSnapped$()" [ngIfThen]="listRenderer"></ng-template>
+</ng-template>
+
+<!-- Generic link renderer. -->
+<ng-template #linkRenderer let-showToggleButton>
+    <ng-template [ngTemplateOutlet]="linkRef?.templateRef || null"></ng-template>
+    <button
+        (click)="toggleExpanded()"
+        *ngIf="!!showToggleButton && !!link$()?.routerLink && hasChildren$()"
+        fd-button
+        fdbNestedButton
+        class="fd-navigation__expander"
+    >
+        <fd-icon [glyph]="_toggleIcon$()"></fd-icon>
+    </button>
+</ng-template>
+
+<!-- Generic list renderer. Used when navigation is not snapped. -->
+<ng-template #listRenderer>
+    <ng-template [ngIf]="isGroup$() && normalizedLevel$() === 1" [ngIfElse]="childItemRenderer">
+        <ul fdb-navigation-list [listItems]="listItems$()" parentItems></ul>
+    </ng-template>
+</ng-template>
+
+<ng-template #childItemRenderer>
+    <div class="fd-navigation__list-container">
+        <ng-template
+            [ngTemplateOutlet]="wrapperRenderer"
+            [ngTemplateOutletContext]="{ $implicit: false }"
+        ></ng-template>
+    </div>
+</ng-template>
+
+<!-- Template used for rendering sublist of items for the list item that is currently in overflow menu. -->
+<ng-template #overflowItemListRenderer>
+    <div class="fd-navigation__list-container fd-navigation__list-container--submenu fd-menu__sublist">
+        <ng-template [ngTemplateOutlet]="wrapperRenderer" [ngTemplateOutletContext]="{ $implicit: true }"></ng-template>
+    </div>
+</ng-template>
+
+<!-- Generic list renderer. -->
+<ng-template #wrapperRenderer let-keyboardNavigation>
+    <div class="fd-navigation__list-wrapper">
+        <div
+            *ngIf="navigation.isSnapped$() && !isOverflow$()"
+            class="fd-navigation__item fd-navigation__item--title fd-navigation__item--child"
+        >
+            <ng-template
+                [ngTemplateOutlet]="linkRenderer"
+                [ngTemplateOutletContext]="{ $implicit: false }"
+            ></ng-template>
+        </div>
+        <ul
+            fdb-navigation-list
+            [listItems]="listItems$()"
+            [childItems]="normalizedLevel$() > 2"
+            (keydown)="false && _innerListKeydown($event)"
+            (focusBefore)="_focusLink()"
+            [withKeyboardNavigation]="keyboardNavigation"
+        ></ul>
+    </div>
+</ng-template>

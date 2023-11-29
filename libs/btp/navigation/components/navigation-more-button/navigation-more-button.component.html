@@ -1,0 +1,32 @@
+<div
+    aria-current="page"
+    role="menuitem"
+    class="fd-navigation__item"
+    [attr.aria-expanded]="popoverOpen$()"
+    aria-level="1"
+    (click)="togglePopover()"
+    (keydown)="_keydownPopoverToggle($event)"
+    #trigger
+>
+    <a fdb-navigation-link glyph="overflow" label="More Items"></a>
+    <fd-popover
+        [trigger]="trigger"
+        [triggers]="[]"
+        [isOpen]="popoverOpen$()"
+        (isOpenChange)="popoverOpen$.set($event)"
+        [focusTrapped]="true"
+        [noArrow]="false"
+        additionalBodyClass="fd-navigation__list-container fd-navigation__list-container--menu"
+        [placement]="'right-start'"
+    >
+        <fd-popover-body class="fd-navigation fd-navigation--snapped">
+            <ul
+                fdb-navigation-list
+                withKeyboardNavigation
+                [parentItems]="true"
+                class="fd-menu__list"
+                [listItems]="listItems"
+            ></ul>
+        </fd-popover-body>
+    </fd-popover>
+</div>

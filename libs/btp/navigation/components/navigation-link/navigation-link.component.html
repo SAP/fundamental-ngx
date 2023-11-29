@@ -1,0 +1,26 @@
+<ng-container *ngIf="glyph">
+    <fd-icon [glyph]="glyph" class="fd-navigation__icon" [attr.role]="'presentation'" [ariaHidden]="true"></fd-icon>
+</ng-container>
+<span class="fd-navigation__text">{{ label }}</span>
+<span
+    class="fd-navigation__external-link-indicator"
+    role="presentation"
+    aria-hidden="true"
+    aria-label="external link indicator"
+    *ngIf="external"
+></span>
+<span
+    class="fd-navigation__selection-indicator"
+    role="presentation"
+    aria-hidden="true"
+    aria-label="selection indicator"
+>
+</span>
+<span
+    *ngIf="_listItemComponent?.hasChildren$() && !inPopover && !routerLink"
+    class="fd-navigation__has-children-indicator"
+    role="presentation"
+    aria-hidden="true"
+    aria-label="has children indicator, expanded"
+>
+</span>

@@ -1,5 +1,5 @@
 import { Directive, inject } from '@angular/core';
-import { NavigationComponent } from '../navigation.component';
+import { NavigationComponent } from '../components/navigation/navigation.component';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector

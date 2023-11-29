@@ -80,7 +80,7 @@ export class PopoverComponent
 
     /** Reference to popover trigger element */
     @Input()
-    set trigger(trigger: ElementRef) {
+    set trigger(trigger: ElementRef | HTMLElement) {
         if (equal(trigger, this._trigger)) {
             return;
         }
@@ -88,7 +88,7 @@ export class PopoverComponent
         this._popoverService.updateTriggerElement(this._trigger);
     }
 
-    get trigger(): ElementRef {
+    get trigger(): ElementRef | HTMLElement {
         return this._trigger;
     }
 
@@ -141,7 +141,12 @@ export class PopoverComponent
     popoverFooterContentTemplate: TemplateRef<any>;
 
     /** @hidden */
-    private _trigger: ElementRef;
+    private get _triggerElement(): HTMLElement {
+        return this._trigger instanceof ElementRef ? this._trigger.nativeElement : this._trigger;
+    }
+
+    /** @hidden */
+    private _trigger: ElementRef | HTMLElement;
 
     /** @hidden */
     private _clickEventListener: null | (() => void);
@@ -264,7 +269,7 @@ export class PopoverComponent
                 this._popoverService.templateContent = this.templateRef;
             }
             this._popoverService.initialise(
-                this.trigger || this.triggerOrigin.elementRef,
+                this._triggerElement || this.triggerOrigin.elementRef,
                 this,
                 this._getPopoverBodyContent()
             );
@@ -321,7 +326,7 @@ export class PopoverComponent
         this._destroyEventListeners();
 
         if (this.trigger && this.mobile) {
-            this._clickEventListener = this._rendered.listen(this.trigger.nativeElement, 'click', () => this.toggle());
+            this._clickEventListener = this._rendered.listen(this._triggerElement, 'click', () => this.toggle());
         }
     }
 

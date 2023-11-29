@@ -1,0 +1,5 @@
+<ul fdb-navigation-list [listItems]="visibleItems$()"></ul>
+
+<ul noGrow fdb-navigation-list *ngIf="_showMoreButton$()" role="menubar" #moreContainer>
+    <li fdb-navigation-more-button [listItems]="hiddenItems$()"></li>
+</ul>

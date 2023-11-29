@@ -60,7 +60,7 @@ export class PopoverService extends BasePopoverClass {
     private _popoverBody: PopoverBodyComponent;
 
     /** @hidden */
-    private _triggerElement: ElementRef;
+    private _triggerElement: ElementRef<HTMLElement> | HTMLElement;
 
     /** @hidden */
     private _lastActiveElement: HTMLElement;
@@ -76,6 +76,11 @@ export class PopoverService extends BasePopoverClass {
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    /** @hidden */
+    private get _triggerHtmlElement(): HTMLElement {
+        return this._triggerElement instanceof ElementRef ? this._triggerElement.nativeElement : this._triggerElement;
+    }
 
     /** @hidden */
     constructor(
@@ -102,7 +107,7 @@ export class PopoverService extends BasePopoverClass {
      *   PopoverComponent and PopoverComponent instance
      */
     initialise(
-        triggerElement: ElementRef,
+        triggerElement: ElementRef | HTMLElement,
         config?: BasePopoverClass,
         templateData?: PopoverTemplate | TemplateRef<void> | null
     ): void {
@@ -295,7 +300,7 @@ export class PopoverService extends BasePopoverClass {
         if (this.triggers?.length) {
             this._normalizeTriggers().forEach((trigger) => {
                 this._eventRef.push(
-                    this._renderer.listen(this._triggerElement.nativeElement, trigger.trigger, (event: Event) => {
+                    this._renderer.listen(this._triggerHtmlElement, trigger.trigger, (event: Event) => {
                         if (this._ignoreTriggers) {
                             return;
                         }
@@ -316,7 +321,7 @@ export class PopoverService extends BasePopoverClass {
      * Updates trigger element and refreshes the listeners.
      * @param trigger Trigger element ref.
      */
-    updateTriggerElement(trigger: ElementRef): void {
+    updateTriggerElement(trigger: ElementRef | HTMLElement): void {
         this._triggerElement = trigger;
         this._refreshTriggerListeners();
     }
@@ -469,8 +474,7 @@ export class PopoverService extends BasePopoverClass {
 
     /** @hidden */
     private _triggerContainsTarget(event: Event): boolean {
-        const triggerElement = this._triggerElement.nativeElement;
-        return triggerElement.contains(this._getEventTarget(event));
+        return this._triggerHtmlElement.contains(this._getEventTarget(event) as HTMLElement);
     }
 
     /** @hidden */
@@ -519,7 +523,7 @@ export class PopoverService extends BasePopoverClass {
 
     /** @hidden */
     private _getTriggerWidth(): number {
-        return this._triggerElement.nativeElement.offsetWidth;
+        return this._triggerHtmlElement.offsetWidth;
     }
 
     /** @hidden */
@@ -544,7 +548,7 @@ export class PopoverService extends BasePopoverClass {
 
     /** @hidden */
     private _focusLastActiveElementBeforeOpen(focusLastElement = true): void {
-        if (focusLastElement && this.focusAutoCapture && this._lastActiveElement) {
+        if (focusLastElement && this.restoreFocusOnClose && this.focusAutoCapture && this._lastActiveElement) {
             this._lastActiveElement.focus();
         }
     }

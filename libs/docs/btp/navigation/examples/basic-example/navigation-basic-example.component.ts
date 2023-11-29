@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import {
@@ -6,10 +6,9 @@ import {
     NavigationComponent,
     NavigationContentEndComponent,
     NavigationContentStartComponent,
-    NavigationHomeDirective,
-    NavigationItemSpacerDirective,
+    NavigationItemSpacerComponent,
     NavigationLinkComponent,
-    NavigationListComponent,
+    NavigationLinkRefDirective,
     NavigationListItemComponent
 } from '@fundamental-ngx/btp/navigation';
 import { FdbViewMode } from '@fundamental-ngx/btp/shared';
@@ -20,19 +19,19 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
     selector: 'fdb-navigation-basic-example',
     templateUrl: './navigation-basic-example.component.html',
     imports: [
-        NavigationComponent,
-        NavigationListComponent,
-        NavigationListItemComponent,
-        NavigationLinkComponent,
         RouterLink,
-        NavigationHomeDirective,
-        NavigationContentStartComponent,
-        NavigationContentEndComponent,
         FormsModule,
         ButtonComponent,
         SegmentedButtonComponent,
-        NavigationItemSpacerDirective
+        NavigationComponent,
+        NavigationListItemComponent,
+        NavigationContentStartComponent,
+        NavigationContentEndComponent,
+        NavigationLinkComponent,
+        NavigationLinkRefDirective,
+        NavigationItemSpacerComponent
     ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
 export class NavigationBasicExampleComponent {

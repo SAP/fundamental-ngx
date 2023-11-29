@@ -104,6 +104,12 @@ export class BasePopoverClass {
     focusAutoCapture = false;
 
     /**
+     * Whether to move the focus after popover is closed to the last focused element before popover was opened.
+     */
+    @Input()
+    restoreFocusOnClose = true;
+
+    /**
      * Scroll strategy, there are 4 accepted
      * - CloseScrollStrategy
      * - NoopScrollStrategy
