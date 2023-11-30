@@ -1,4 +1,4 @@
-import { NgForOf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -8,6 +8,7 @@ import {
     ViewEncapsulation,
     signal
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { asyncScheduler, observeOn, startWith } from 'rxjs';
 import { FdbNavigationContentContainer } from '../../models/navigation-content-container.class';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
@@ -15,12 +16,11 @@ import { NavigationListComponent } from '../navigation-list/navigation-list.comp
 
 @Component({
     selector: 'fdb-navigation-content-end',
-    template: `<ul fdb-navigation-list [listItems]="totalListItems$()"></ul>`,
+    template: `<ul fdb-navigation-list [listItems]="allListItems$()"></ul>`,
     standalone: true,
-    imports: [NavigationListComponent, NgForOf, NgTemplateOutlet],
+    imports: [NavigationListComponent, NgTemplateOutlet],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    // eslint-disable-next-line @angular-eslint/no-host-metadata-property
     host: {
         class: 'fd-navigation__container fd-navigation__container--bottom'
     },
@@ -34,18 +34,21 @@ import { NavigationListComponent } from '../navigation-list/navigation-list.comp
 export class NavigationContentEndComponent extends FdbNavigationContentContainer implements AfterContentInit {
     /** @hidden */
     @ContentChildren(FdbNavigationListItem, { descendants: false })
-    listItems: QueryList<FdbNavigationListItem>;
+    private readonly _listItems: QueryList<FdbNavigationListItem>;
+
+    /** @hidden */
+    readonly listItems$ = signal<FdbNavigationListItem[]>([]);
 
     /** Whether the container is placed on the start position, or the end position of the navigation. */
     readonly placement: 'start' | 'end' = 'end';
 
     /** @hidden */
-    readonly totalListItems$ = signal<FdbNavigationListItem[]>([]);
-
-    /** @hidden */
     ngAfterContentInit(): void {
-        this.listItems.changes.pipe(startWith(null), observeOn(asyncScheduler)).subscribe(() => {
-            this.totalListItems$.set(this.listItems.toArray());
-        });
+        this._listItems.changes
+            .pipe(startWith(null), observeOn(asyncScheduler), takeUntilDestroyed(this._destroyRef))
+            .subscribe(() => {
+                this.allListItems$.set(this._listItems.toArray());
+                this.listItems$.set(this._listItems.toArray());
+            });
     }
 }

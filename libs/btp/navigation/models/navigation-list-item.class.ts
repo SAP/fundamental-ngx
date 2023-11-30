@@ -2,33 +2,38 @@ import { FocusOrigin, FocusableOption } from '@angular/cdk/a11y';
 import { Signal, TemplateRef, computed, inject, signal } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { NavigationListItemMarkerDirective } from '../components/navigation-item/navigation-list-item.component';
-import { NavigationLinkComponent } from '../components/navigation-link/navigation-link.component';
 import { NavigationListComponent } from '../components/navigation-list/navigation-list.component';
-import { NavigationComponent } from '../components/navigation/navigation.component';
 import { FdbNavigationContentContainer } from './navigation-content-container.class';
+import { FdbNavigationItemLink } from './navigation-item-link.class';
+import { FdbNavigation } from './navigation.class';
+
+export const LIST_ITEM_CLASS = 'fd-navigation__list-item';
 
 export abstract class FdbNavigationListItem implements FocusableOption {
     abstract type: 'item' | 'showMore';
+    abstract separator: boolean;
+    abstract spacer: boolean;
     abstract isVisible$: Signal<boolean>;
+    abstract skipNavigation: boolean;
     abstract placementContainer?: FdbNavigationContentContainer;
+    abstract parentListItemComponent: FdbNavigationListItemCmp | null;
+    abstract parentListItem: FdbNavigationListItem | null;
     abstract focus(origin?: FocusOrigin | undefined): void;
     abstract toggleExpanded(): void;
     abstract keyboardExpanded(shouldExpand: boolean): void;
     abstract popoverLinkArrowDown(): void;
-    abstract registerLink(link: NavigationLinkComponent): void;
-    abstract unregisterLink(link: NavigationLinkComponent): void;
+    abstract registerLink(link: FdbNavigationItemLink): void;
+    abstract unregisterLink(link: FdbNavigationItemLink): void;
     abstract registerChildList(list: NavigationListComponent): void;
     abstract unregisterChildList(list: NavigationListComponent): void;
     abstract handleHorizontalNavigation(isExpand: boolean): void;
+    abstract focusLink(closePopover?: boolean): void;
 
     /** Marker directive that is attached to the rendered list item. */
     marker: Nullable<NavigationListItemMarkerDirective>;
 
-    /** Optional parent list component. */
-    readonly parentListItemComponent = inject(FdbNavigationListItem, {
-        optional: true,
-        skipSelf: true
-    });
+    /** CSS class. */
+    readonly class$ = signal(LIST_ITEM_CLASS);
 
     /** @hidden */
     readonly listItems$ = signal<FdbNavigationListItem[]>([]);
@@ -42,7 +47,7 @@ export abstract class FdbNavigationListItem implements FocusableOption {
     /**
      * Link reference.
      */
-    readonly link$ = signal<Nullable<NavigationLinkComponent>>(null);
+    readonly link$ = signal<Nullable<FdbNavigationItemLink>>(null);
 
     /**
      * Item content renderer.
@@ -50,25 +55,30 @@ export abstract class FdbNavigationListItem implements FocusableOption {
     readonly renderer$ = signal<TemplateRef<any> | null>(null);
 
     /**
-     * Whether the item is in overflow menu.
+     * Whether the item should be hidden under "More" button.
      */
-    readonly isOverflow$ = signal(false);
+    readonly hidden$ = signal(false);
+
+    /**
+     * Whether the item is in overflow menu. Applicable only when the navigation is in snapped mode.
+     */
+    readonly isOverflow$ = computed(() => this.navigation.isSnapped$() && this.hidden$());
 
     /**
      * Item Hierarchy level in navigation tree.
      */
-    readonly level$ = computed(() => (this.parentListItemComponent?.level$() || 0) + 1);
+    readonly level$ = computed(() => (this.parentListItem?.level$() || 0) + 1);
 
     /**
      * Normalized level. Calculated based on location of the item, whether it is inside group or not.
      * Can be different than `level$`.
      */
     readonly normalizedLevel$ = computed(() => {
-        if (!this.parentListItemComponent) {
+        if (!this.parentListItem) {
             return this.inGroup$() ? this.level$() : this.level$() + 1;
         }
 
-        return this.parentListItemComponent.normalizedLevel$() + 1;
+        return this.parentListItem.normalizedLevel$() + 1;
     });
 
     /**
@@ -83,9 +93,7 @@ export abstract class FdbNavigationListItem implements FocusableOption {
     /**
      * Whether the item is inside group.
      */
-    readonly inGroup$ = computed(() =>
-        this.parentListItemComponent ? this.parentListItemComponent.inGroup$() : this.isGroup$()
-    );
+    readonly inGroup$ = computed(() => (this.parentListItem ? this.parentListItem.inGroup$() : this.isGroup$()));
 
     /** @hidden */
     readonly expanded$ = signal<boolean>(false);
@@ -94,5 +102,7 @@ export abstract class FdbNavigationListItem implements FocusableOption {
     readonly isGroup$ = signal(false);
 
     /** Navigation container reference. */
-    readonly navigation = inject(NavigationComponent);
+    readonly navigation = inject(FdbNavigation);
 }
+
+export abstract class FdbNavigationListItemCmp extends FdbNavigationListItem {}

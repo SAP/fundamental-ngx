@@ -1,5 +1,5 @@
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -13,7 +13,9 @@ import {
 } from '@angular/core';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core';
+import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
+import { FdbNavigation } from '../../models/navigation.class';
 import { NavigationLinkComponent } from '../navigation-link/navigation-link.component';
 import { NavigationListComponent } from '../navigation-list/navigation-list.component';
 
@@ -26,13 +28,13 @@ export interface NavigationMoreButtonRefContext {
     selector: 'li[fdb-navigation-more-button]',
     standalone: true,
     imports: [
-        NgIf,
         NavigationLinkComponent,
         NavigationListComponent,
         PopoverComponent,
         PopoverControlComponent,
         PopoverBodyComponent,
-        NgTemplateOutlet
+        NgTemplateOutlet,
+        NgClass
     ],
     providers: [
         {
@@ -53,12 +55,8 @@ export class NavigationMoreButtonComponent {
     listItems: FdbNavigationListItem[] = [];
 
     /** @hidden */
-    @ViewChild(NavigationLinkComponent)
-    private readonly _link: Nullable<NavigationLinkComponent>;
-
-    /** @hidden */
-    @ViewChild(NavigationListComponent)
-    private readonly _list: Nullable<NavigationListComponent>;
+    @ViewChild(FdbNavigationItemLink)
+    private readonly _link: Nullable<FdbNavigationItemLink>;
 
     /** @hidden */
     customMoreRenderer: Nullable<TemplateRef<any>>;
@@ -83,10 +81,13 @@ export class NavigationMoreButtonComponent {
     /** Whether item has child items. */
     readonly hasChildren$ = signal(false);
 
+    /** @hidden */
+    readonly _navigation = inject(FdbNavigation);
+
     /**
      * Link reference.
      */
-    readonly link$ = signal<Nullable<NavigationLinkComponent>>(null);
+    readonly link$ = signal<Nullable<FdbNavigationItemLink>>(null);
 
     /** @hidden */
     private readonly _rtl = inject(RtlService, {
@@ -123,7 +124,18 @@ export class NavigationMoreButtonComponent {
 
     /** @hidden */
     focus(): void {
+        this.focusLink();
+    }
+
+    /**
+     * Focuses inner link element.
+     * Optionally closes the popover.
+     */
+    focusLink(closePopover = false): void {
         this._link?.elementRef.nativeElement.focus();
+        if (closePopover) {
+            this.popoverOpen$.set(false);
+        }
     }
 
     /** @hidden */

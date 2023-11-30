@@ -1,36 +1,46 @@
-import { FocusKeyManager, FocusOrigin } from '@angular/cdk/a11y';
+import { FocusKeyManager } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { CommonModule, NgTemplateOutlet } from '@angular/common';
+import { CommonModule, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     ContentChild,
     ContentChildren,
+    DestroyRef,
     Directive,
     ElementRef,
     Input,
     NgZone,
+    OnChanges,
+    OnDestroy,
     QueryList,
+    SimpleChanges,
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
     computed,
     effect,
-    inject,
-    signal
+    inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NestedButtonDirective } from '@fundamental-ngx/btp/button';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { asyncScheduler, observeOn, startWith, take } from 'rxjs';
+import { Observable, asyncScheduler, filter, observeOn, startWith, take } from 'rxjs';
+import { NavigationListItemDirective } from '../../directives/navigation-list-item-ref.directive';
 import { FdbNavigationContentContainer } from '../../models/navigation-content-container.class';
-import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
+import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
+import {
+    FdbNavigationListItem,
+    FdbNavigationListItemCmp,
+    LIST_ITEM_CLASS
+} from '../../models/navigation-list-item.class';
 import { NavigationService } from '../../services/navigation.service';
-import { NavigationLinkComponent, NavigationLinkRefDirective } from '../navigation-link/navigation-link.component';
+import { NavigationLinkRefDirective } from '../navigation-link/navigation-link.component';
 import { NavigationListComponent } from '../navigation-list/navigation-list.component';
 
 @Directive({
@@ -59,7 +69,8 @@ export class NavigationListItemMarkerDirective {
         NavigationListItemMarkerDirective,
         IconComponent,
         ButtonComponent,
-        NestedButtonDirective
+        NestedButtonDirective,
+        NgClass
     ],
     templateUrl: './navigation-list-item.component.html',
     styles: [],
@@ -68,15 +79,27 @@ export class NavigationListItemMarkerDirective {
         {
             provide: FdbNavigationListItem,
             useExisting: NavigationListItemComponent
+        },
+        {
+            provide: FdbNavigationListItemCmp,
+            useExisting: NavigationListItemComponent
         }
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NavigationListItemComponent extends FdbNavigationListItem implements AfterViewInit {
+export class NavigationListItemComponent extends FdbNavigationListItem implements AfterViewInit, OnChanges, OnDestroy {
     /** @hidden */
     @Input()
     class: Nullable<string>;
+
+    /** Whether the list item should be rendered as a separator */
+    @Input({ transform: coerceBooleanProperty })
+    separator = false;
+
+    /** Whether the list item should be rendered as a spacer */
+    @Input({ transform: coerceBooleanProperty })
+    spacer = false;
 
     /** Whether the list item should be rendered as a group. */
     @Input({ transform: coerceBooleanProperty })
@@ -103,8 +126,8 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     listItems: QueryList<FdbNavigationListItem>;
 
     /** Link reference. */
-    @ContentChild(NavigationLinkComponent)
-    set link(value: Nullable<NavigationLinkComponent>) {
+    @ContentChild(FdbNavigationItemLink)
+    set link(value: Nullable<FdbNavigationItemLink>) {
         this.link$.set(value);
     }
 
@@ -117,18 +140,13 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     /** Renderer template reference. */
     @ViewChild('renderer')
     set renderer(renderer: TemplateRef<any> | undefined) {
-        this._zone.onStable.pipe(startWith(this._zone.isStable), take(1)).subscribe(() => {
+        this._onZoneStable().subscribe(() => {
             this.renderer$.set(renderer || null);
         });
     }
 
     /** Type of the list item. Whether its a standard item or a "show more" button container. */
     readonly type: 'item' | 'showMore' = 'item';
-
-    /**
-     * Whether the item is in overflow menu.
-     */
-    readonly isOverflow$ = signal(false);
 
     /** @hidden */
     readonly _toggleIcon$ = computed(() => {
@@ -153,7 +171,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             return false;
         }
 
-        if (!this.parentListItemComponent) {
+        if (!this.parentListItem) {
             return this.isGroup$() ? !this.navigation.isSnapped$() : true;
         }
 
@@ -161,14 +179,36 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             return this.normalizedLevel$() < 3;
         }
 
-        return this.parentListItemComponent.isVisible$() && this.parentListItemComponent.expanded$();
+        return this.parentListItem.isVisible$() && this.parentListItem.expanded$();
     });
 
+    /**
+     * Whether the item is navigatable via the keyboard.
+     */
+    get skipNavigation(): boolean {
+        return this.spacer || this.separator;
+    }
+
     /** aria-expanded attribute value. */
-    readonly expandedAttr$ = computed(() => (this.navigation.isSnapped$() ? this.popoverOpen$() : this.expanded$()));
+    readonly expandedAttr$ = computed(() =>
+        this.navigation.isSnapped$() ? this.popoverOpen$() && !this.isOverflow$() : this.expanded$()
+    );
+
+    /** Optional parent list component. */
+    readonly parentListItemComponent = inject(FdbNavigationListItemCmp, {
+        optional: true,
+        skipSelf: true
+    });
 
     /** @hidden */
-    private readonly _links: NavigationLinkComponent[] = [];
+    get parentListItem(): FdbNavigationListItem | null {
+        return (
+            this._parentNavigationListItemDirective?.parentNavListItemDirective?._item || this.parentListItemComponent
+        );
+    }
+
+    /** @hidden */
+    private readonly _links: FdbNavigationItemLink[] = [];
 
     /** @hidden */
     private readonly _childLists: NavigationListComponent[] = [];
@@ -184,6 +224,12 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         optional: true
     });
 
+    /**
+     * @hidden
+     * Directive that used during data-driven rendering.
+     */
+    private readonly _parentNavigationListItemDirective = inject(NavigationListItemDirective, { optional: true });
+
     /** @hidden */
     private readonly _parentNavigationService = inject(NavigationService, {
         skipSelf: true,
@@ -191,19 +237,64 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     });
 
     /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
     constructor() {
         super();
         effect(() => {
             if (this.popoverOpen$()) {
-                this._keyManager = new FocusKeyManager(this.listItems).withVerticalOrientation();
+                this._keyManager = new FocusKeyManager(this.listItems$())
+                    .withVerticalOrientation()
+                    .skipPredicate((item) => item.skipNavigation);
             } else {
                 this._keyManager?.destroy();
             }
         });
+
+        // We need to track child directives change and set list items based on that.
+        effect(
+            () => {
+                if (!this._parentNavigationListItemDirective?.childDirectives()) {
+                    return;
+                }
+
+                const children = this._parentNavigationListItemDirective.childDirectives();
+                const mappedItems = Array.from(children).map((child) => child._item!);
+
+                this.listItems$.set(mappedItems);
+            },
+            {
+                allowSignalWrites: true
+            }
+        );
+
+        this._parentNavigationListItemDirective?.registerItem(this);
     }
 
     /** @hidden */
-    _focusLink(): void {
+    ngOnChanges(changes: SimpleChanges): void {
+        if ('class' in changes || 'separator' in changes || 'spacer' in changes) {
+            this.class$.set(
+                [
+                    LIST_ITEM_CLASS,
+                    this.class,
+                    this.separator ? `${LIST_ITEM_CLASS}--separator` : '',
+                    this.spacer ? `${LIST_ITEM_CLASS}--spacer` : ''
+                ]
+                    .filter((k) => !!k)
+                    .join(' ')
+            );
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._keyManager?.destroy();
+    }
+
+    /** @hidden */
+    _focusPopoverLink(): void {
         if (this.popoverOpen$()) {
             this._links.find((link) => link.inPopover)?.elementRef.nativeElement.focus();
         }
@@ -214,7 +305,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
      * When item is focused, we notify list container about it to update active index in FocusKeyManager.
      */
     _focusInHandler(): void {
-        if (!this.parentListItemComponent?.popoverOpen$() && !this.isOverflow$()) {
+        if (!this.parentListItem?.popoverOpen$() && !this.isOverflow$()) {
             this.navigation.setActiveItem(this);
             return;
         }
@@ -223,20 +314,26 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this.listItems.changes.pipe(startWith(null)).subscribe(() => {
-            this.listItems$.set(this.listItems.toArray());
-        });
+        this.listItems.changes
+            .pipe(
+                filter(() => !this._parentNavigationListItemDirective),
+                startWith(null),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe(() => {
+                this.listItems$.set(this.listItems.toArray());
+            });
     }
 
     /** @hidden */
-    registerLink(link: NavigationLinkComponent): void {
+    registerLink(link: FdbNavigationItemLink): void {
         if (this._links.indexOf(link) === -1) {
             this._links.push(link);
         }
     }
 
     /** @hidden */
-    unregisterLink(link: NavigationLinkComponent): void {
+    unregisterLink(link: FdbNavigationItemLink): void {
         this._links.splice(this._links.indexOf(link), 1);
     }
 
@@ -318,14 +415,27 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
     /**
      * Focus method implementation.
+     * Used by main navigation component FocusKeyManager.
      * @param origin
      */
-    focus(origin?: FocusOrigin | undefined): void {
+    focus(): void {
         // If popover is open, focus will be automatically shifted to cloned link.
-        if (this.popoverOpen$()) {
+        if (this.popoverOpen$() && !this.isOverflow$()) {
             return;
         }
+        this.focusLink();
+    }
+
+    /**
+     * Focuses inner link element.
+     * Optionally closes the popover.
+     */
+    focusLink(closePopover = false): void {
         this.link$()?.elementRef.nativeElement.focus();
+
+        if (closePopover) {
+            this.popoverOpen$.set(false);
+        }
     }
 
     /** @hidden */
@@ -335,7 +445,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             return;
         }
 
-        this._zone.onStable.pipe(startWith(this._zone.isStable), observeOn(asyncScheduler), take(1)).subscribe(() => {
+        this._onZoneStable().subscribe(() => {
             popover.popoverBody._focusFirstTabbableElement(true);
         });
     }
@@ -344,7 +454,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     private _visibleItemKeyboardExpandedHandler(shouldExpand: boolean): void {
         if (!this.hasChildren$()) {
             if (!shouldExpand) {
-                this.parentListItemComponent?.focus();
+                this.parentListItem?.focus();
             }
             return;
         }
@@ -352,7 +462,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         if (!shouldExpand) {
             // If item already collapsed, shift focus to parent link
             if (!this.expanded$()) {
-                this.parentListItemComponent?.focus();
+                this.parentListItem?.focus();
                 return;
             }
             this.expanded$.set(false);
@@ -384,7 +494,6 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
      * Method used to handle keyboard navigation for list item that is inside overflow container.
      */
     private _overflowItemKeyboardExpandedHandler(shouldExpand: boolean): void {
-        console.log('_overflowItemKeyboardExpandedHandler');
         if (shouldExpand && this._childLists.length > 0) {
             const firstList = this._childLists[0];
             firstList.setActiveItemIndex(0);
@@ -396,5 +505,15 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             this.popoverOpen$.set(false);
             this.link?.elementRef.nativeElement.focus();
         }
+    }
+
+    /** @hidden */
+    private _onZoneStable(): Observable<void> {
+        return this._zone.onStable.pipe(
+            startWith(this._zone.isStable),
+            observeOn(asyncScheduler),
+            take(1),
+            takeUntilDestroyed(this._destroyRef)
+        );
     }
 }

@@ -1,5 +1,7 @@
-<li *ngFor="let renderer of renderers$(); index as i" class="fd-navigation__list-item">
-    <ng-template [ngTemplateOutlet]="renderer"></ng-template>
-</li>
+@for (item of listItems$(); track item) {
+    <li [class]="item.class$()">
+        <ng-template [ngTemplateOutlet]="item.renderer$()"></ng-template>
+    </li>
+}
 <!-- Keep this for "More" button -->
 <ng-content></ng-content>

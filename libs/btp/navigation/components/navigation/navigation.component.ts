@@ -1,46 +1,79 @@
 /* eslint-disable @angular-eslint/no-input-rename,@angular-eslint/no-host-metadata-property */
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    ContentChild,
     ContentChildren,
     ElementRef,
     HostListener,
     Input,
     OnChanges,
+    OnDestroy,
+    OnInit,
     QueryList,
+    Signal,
     ViewEncapsulation,
     computed,
     effect,
     inject,
     signal
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { CssClassBuilder, KeyUtil, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { map, of } from 'rxjs';
+import { NavigationListDataSourceDirective } from '../../directives/navigation-list-data-source.directive';
+import {
+    NavigationListItemDirective,
+    NavigationListItemRefDirective
+} from '../../directives/navigation-list-item-ref.directive';
+import { NavigationDataSourceItem } from '../../models/navigation-data-source-item.model';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
+import { FdbNavigation } from '../../models/navigation.class';
 import { FdbNavigationState, FdbNavigationType } from '../../models/navigation.types';
 import { NavigationService } from '../../services/navigation.service';
+import { NavigationContentEndComponent } from '../navigation-end/navigation-content-end.component';
+import { NavigationListItemComponent } from '../navigation-item/navigation-list-item.component';
+import { NavigationContentStartComponent } from '../navigation-start/navigation-content-start.component';
+
+interface GroupedDataSourceItems {
+    start: NavigationDataSourceItem[];
+    end: NavigationDataSourceItem[];
+}
 
 @Component({
     selector: 'fdb-navigation',
-    template: `
-        <ng-content></ng-content>
-        <ng-template #defaultLinkTemplate>
-            <a fdb-navigation-link glyph="home" label="Home"></a>
-        </ng-template>
-    `,
+    templateUrl: './navigation.component.html',
     styleUrls: ['./navigation.component.scss'],
     standalone: true,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [NavigationService],
+    providers: [
+        NavigationService,
+        {
+            provide: FdbNavigation,
+            useExisting: NavigationComponent
+        }
+    ],
     host: {
         role: 'navigation'
-    }
+    },
+    imports: [
+        NgTemplateOutlet,
+        NavigationListItemDirective,
+        NavigationContentStartComponent,
+        NavigationContentEndComponent,
+        NavigationListItemComponent
+    ]
 })
-export class NavigationComponent implements CssClassBuilder, OnChanges, AfterViewInit {
+export class NavigationComponent
+    extends FdbNavigation
+    implements CssClassBuilder, OnChanges, OnInit, AfterViewInit, OnDestroy
+{
     /** @hidden */
     @Input()
     class: string;
@@ -69,6 +102,12 @@ export class NavigationComponent implements CssClassBuilder, OnChanges, AfterVie
     type: FdbNavigationType = 'vertical';
 
     /** @hidden */
+    @ContentChild(NavigationListItemRefDirective)
+    set _navigationItemRef(value: Nullable<NavigationListItemRefDirective>) {
+        this._navigationItemRenderer.set(value || null);
+    }
+
+    /** @hidden */
     @ContentChildren(FdbNavigationListItem, { descendants: true })
     private readonly _navigationItems: QueryList<FdbNavigationListItem>;
 
@@ -87,17 +126,55 @@ export class NavigationComponent implements CssClassBuilder, OnChanges, AfterVie
      */
     readonly showMoreButton$ = signal<Nullable<FdbNavigationListItem>>(null);
 
+    /**
+     * Signal for navigation classList.
+     * Used by popover-based submenus.
+     */
+    readonly classList$ = signal<string[]>([]);
+
     /** @hidden */
     readonly elementRef = inject(ElementRef);
 
     /** @hidden */
+    readonly dataSourceItems: Signal<GroupedDataSourceItems | undefined>;
+
+    /** @hidden */
     private readonly _viewInited$ = signal(false);
+
+    /** @hidden */
+    readonly _navigationItemRenderer = signal<NavigationListItemRefDirective | null>(null);
+
+    /**
+     * @hidden
+     * Data source directive.
+     */
+    private readonly _dataSourceDirective = inject(NavigationListDataSourceDirective, {
+        optional: true,
+        self: true
+    });
 
     /** @hidden */
     private _keyManager: FocusKeyManager<FdbNavigationListItem>;
 
     /** @hidden */
     constructor() {
+        super();
+        this.dataSourceItems = toSignal(
+            !this._dataSourceDirective
+                ? of({ start: [], end: [] } as GroupedDataSourceItems)
+                : this._dataSourceDirective.dataChanged$.asObservable().pipe(
+                      map((data) => {
+                          const groupedItems: GroupedDataSourceItems = data.reduce(
+                              (acc, item) => {
+                                  acc[item.placement].push(item);
+                                  return acc;
+                              },
+                              { start: [], end: [] } as GroupedDataSourceItems
+                          );
+                          return groupedItems;
+                      })
+                  )
+        );
         // When show more button is shown, reset items list with added "More button".
         effect(() => {
             if (this._viewInited$()) {
@@ -109,16 +186,21 @@ export class NavigationComponent implements CssClassBuilder, OnChanges, AfterVie
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return [
-            this.class,
-            'fd-navigation',
-            `fd-navigation--${this.type}`,
-            this.mode ? `fd-navigation--${this.mode}` : '',
-            `fd-navigation--${this.state}`
-        ];
+        this.classList$.set(
+            [
+                this.class,
+                'fd-navigation',
+                this.mode ? `fd-navigation--${this.mode}` : '',
+                `fd-navigation--${this.state}`
+            ].filter((k) => !!k)
+        );
+        return [...this.classList$(), `fd-navigation--${this.type}`];
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Main keyboard navigation handler.
+     */
     @HostListener('keydown', ['$event'])
     private _keyDownHandler(event: KeyboardEvent): void {
         if (!KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW])) {
@@ -131,6 +213,11 @@ export class NavigationComponent implements CssClassBuilder, OnChanges, AfterVie
     }
 
     /** @hidden */
+    ngOnInit(): void {
+        this._dataSourceDirective?.dataSourceProvider?.match();
+    }
+
+    /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
@@ -139,9 +226,14 @@ export class NavigationComponent implements CssClassBuilder, OnChanges, AfterVie
     ngAfterViewInit(): void {
         this._keyManager = new FocusKeyManager(this._navigationItems)
             .withVerticalOrientation()
-            .skipPredicate((item) => !item.isVisible$());
+            .skipPredicate((item) => !item.isVisible$() || item.skipNavigation);
         this._keyManager.setActiveItem(0);
         this._viewInited$.set(true);
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._keyManager?.destroy();
     }
 
     /**
@@ -158,12 +250,15 @@ export class NavigationComponent implements CssClassBuilder, OnChanges, AfterVie
         this._keyManager.setActiveItem(item);
     }
 
-    /** @hidden */
+    /**
+     * Updates the list of items.
+     * Optionally inserts "More" button if overflow menu should be rendered.
+     * @param showMoreButton Whether to add "More" button.
+     */
     private _resetItemsList(showMoreButton: Nullable<FdbNavigationListItem>): void {
+        const items = [...this._navigationItems.toArray()];
+        const showMoreButtonIndex = items.findIndex((item) => item.type === 'showMore');
         if (!showMoreButton) {
-            const items = [...this._navigationItems.toArray()];
-            const showMoreButtonIndex = items.findIndex((item) => item.type === 'showMore');
-
             if (showMoreButtonIndex === -1) {
                 return;
             }
@@ -172,17 +267,19 @@ export class NavigationComponent implements CssClassBuilder, OnChanges, AfterVie
 
             this._navigationItems.reset(items);
         } else {
-            const items = [...this._navigationItems.toArray()];
-            const showMoreButtonIndex = items.findIndex((item) => item.type === 'showMore');
-
             if (showMoreButtonIndex > -1) {
                 return;
             }
 
-            const insertionIndex = items.findIndex(
-                (item) =>
-                    item.placementContainer?.placement === 'start' && item.placementContainer?.listItems.last === item
-            );
+            // Find last list item from the `Start` container.
+            const insertionIndex = items.findIndex((item) => {
+                const listItems = item.placementContainer?.listItems$();
+                if (!listItems) {
+                    return;
+                }
+
+                return item.placementContainer?.placement === 'start' && listItems[listItems.length - 1] === item;
+            });
 
             if (insertionIndex === -1) {
                 return;

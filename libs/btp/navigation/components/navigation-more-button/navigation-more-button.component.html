@@ -8,7 +8,7 @@
     (keydown)="_keydownPopoverToggle($event)"
     #trigger
 >
-    <a fdb-navigation-link glyph="overflow" label="More Items"></a>
+    <a fdb-navigation-link glyph="overflow">More Items</a>
     <fd-popover
         [trigger]="trigger"
         [triggers]="[]"
@@ -19,7 +19,7 @@
         additionalBodyClass="fd-navigation__list-container fd-navigation__list-container--menu"
         [placement]="'right-start'"
     >
-        <fd-popover-body class="fd-navigation fd-navigation--snapped">
+        <fd-popover-body [ngClass]="_navigation.classList$()">
             <ul
                 fdb-navigation-list
                 withKeyboardNavigation

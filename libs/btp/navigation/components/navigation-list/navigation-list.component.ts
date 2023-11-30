@@ -1,11 +1,12 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { NgForOf, NgTemplateOutlet } from '@angular/common';
+import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    DestroyRef,
     EventEmitter,
     HostBinding,
     HostListener,
@@ -15,10 +16,10 @@ import {
     Output,
     SimpleChanges,
     ViewEncapsulation,
-    computed,
     inject,
     signal
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { NavigationService } from '../../services/navigation.service';
@@ -27,7 +28,7 @@ import { NavigationService } from '../../services/navigation.service';
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'ul[fdb-navigation-list]',
     standalone: true,
-    imports: [NgForOf, NgTemplateOutlet],
+    imports: [NgTemplateOutlet],
     templateUrl: './navigation-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -85,9 +86,6 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
     /** List items. */
     readonly listItems$ = signal<FdbNavigationListItem[]>([]);
 
-    /** List item renderers. */
-    readonly renderers$ = computed(() => this.listItems$().map((item) => item.renderer$()));
-
     /** @hidden */
     private _listItemsArray: FdbNavigationListItem[] = [];
 
@@ -99,13 +97,19 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
         optional: true
     });
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Parent list item.
+     */
     private readonly _listItem = inject(FdbNavigationListItem, {
         optional: true
     });
 
     /** @hidden */
     private readonly _rtl = inject(RtlService);
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private get _activeItemIndex(): number {
@@ -132,13 +136,28 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
         if (KeyUtil.isKeyCode(event, UP_ARROW) && this._activeItemIndex <= 0) {
             this.focusBefore.emit();
             return;
-        } else if (KeyUtil.isKeyCode(event, DOWN_ARROW) && this._activeItemIndex === this._listItemsArray.length - 1) {
+        }
+        if (KeyUtil.isKeyCode(event, DOWN_ARROW) && this._activeItemIndex === this._listItemsArray.length - 1) {
             this.focusAfter.emit();
             return;
         }
 
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
             this._keyManager?.onKeydown(event);
+            return;
+        }
+
+        if (!KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
+            return;
+        }
+
+        // We need to cancel event bubbling since we may have parent list that will also try to focus it's parent list item.
+        event.stopImmediatePropagation();
+
+        const isExpandAction = KeyUtil.isKeyCode(event, this._rtl?.rtl.value ? LEFT_ARROW : RIGHT_ARROW);
+
+        if (!isExpandAction) {
+            this._listItem?.focusLink(true);
         }
     }
 
@@ -149,7 +168,7 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._navigationService?.currentItem$.subscribe((item) => {
+        this._navigationService?.currentItem$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((item) => {
             this._keyManager?.setActiveItem(item);
         });
     }
@@ -164,6 +183,7 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
     /** @hidden */
     ngOnDestroy(): void {
         this._listItem?.unregisterChildList(this);
+        this._keyManager?.destroy();
     }
 
     /** @hidden */
@@ -174,6 +194,8 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
             return;
         }
 
-        this._keyManager = new FocusKeyManager(this._listItemsArray).withVerticalOrientation();
+        this._keyManager = new FocusKeyManager(this._listItemsArray)
+            .withVerticalOrientation()
+            .skipPredicate((item) => item.skipNavigation);
     }
 }

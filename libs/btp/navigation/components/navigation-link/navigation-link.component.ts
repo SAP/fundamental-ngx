@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/no-host-metadata-property */
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -20,8 +20,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { of, startWith } from 'rxjs';
+import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
-import { NavigationComponent } from '../navigation/navigation.component';
+import { FdbNavigation } from '../../models/navigation.class';
 
 @Directive({
     selector: '[fdbNavigationLinkRef]',
@@ -35,18 +36,24 @@ export class NavigationLinkRefDirective {
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'a[fdb-navigation-link]',
-    imports: [NgIf, IconComponent, AsyncPipe, NgTemplateOutlet],
+    imports: [IconComponent, AsyncPipe, NgTemplateOutlet],
     hostDirectives: [RouterLinkActive],
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    providers: [
+        {
+            provide: FdbNavigationItemLink,
+            useExisting: NavigationLinkComponent
+        }
+    ],
     host: {
         class: 'fd-navigation__link',
         role: 'link'
     },
     templateUrl: './navigation-link.component.html'
 })
-export class NavigationLinkComponent implements OnDestroy {
+export class NavigationLinkComponent extends FdbNavigationItemLink implements OnDestroy {
     /** @hidden */
     @Input()
     class: string;
@@ -54,10 +61,6 @@ export class NavigationLinkComponent implements OnDestroy {
     /** @hidden */
     @Input()
     glyph: string;
-
-    /** Label to be displayed as a link text. */
-    @Input({ required: true })
-    label: string;
 
     /** Whether the link is for the external resource. */
     @Input()
@@ -102,10 +105,11 @@ export class NavigationLinkComponent implements OnDestroy {
     });
 
     /** @hidden */
-    private readonly _navigation = inject(NavigationComponent);
+    private readonly _navigation = inject(FdbNavigation);
 
     /** @hidden */
     constructor() {
+        super();
         this._listItemComponent?.registerLink(this);
         this.isActive$ = toSignal(
             this._routerLinkActive?.isActiveChange.pipe(startWith(this._routerLinkActive.isActive)) || of(false)

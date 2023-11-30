@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NavigationListItemComponent } from './navigation-list-item.component';
+import { NavigationContentStartComponent } from './navigation-content-start.component';
 
 describe('NavigationListItemComponent', () => {
-    let component: NavigationListItemComponent;
-    let fixture: ComponentFixture<NavigationListItemComponent>;
+    let component: NavigationContentStartComponent;
+    let fixture: ComponentFixture<NavigationContentStartComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [NavigationListItemComponent]
+            imports: [NavigationContentStartComponent]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(NavigationListItemComponent);
+        fixture = TestBed.createComponent(NavigationContentStartComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
