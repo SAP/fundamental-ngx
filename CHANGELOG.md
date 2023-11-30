@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.1...v0.48.0-rc.2) (2023-11-30)
+
+
+### Bug Fixes
+
+* **core:** dynamic page facets stackblitz ([#11029](https://github.com/SAP/fundamental-ngx/issues/11029)) ([5de7b7f](https://github.com/SAP/fundamental-ngx/commit/5de7b7f0f788a43ddb0801ba262fc6bc9715fafb))
+
+
+
+
+
 # [0.48.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.0...v0.48.0-rc.1) (2023-11-28)
 
 
