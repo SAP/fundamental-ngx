@@ -110,7 +110,7 @@ export class DynamicPageDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(dynamicPageFacetsExampleHtmlCode),
-            fileName: 'dynamic-page-responsive-example'
+            fileName: 'dynamic-page-facets-example'
         },
         {
             language: 'typescript',
