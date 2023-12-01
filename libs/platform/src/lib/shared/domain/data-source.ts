@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /**
  *
@@ -111,6 +112,8 @@ export type ProviderParams = ReadonlyMap<string, any>;
  *
  */
 export abstract class DataProvider<T> {
+    abstract fetch(params: ProviderParams, start?: number, end?: number): Observable<T[]>;
+
     /** @hidden */
     protected _keyPath: string;
 
@@ -120,7 +123,8 @@ export abstract class DataProvider<T> {
     /** @hidden */
     protected _matchingBy: MatchingBy | null = null;
 
-    abstract fetch(params: ProviderParams, start?: number, end?: number): Observable<T[]>;
+    /** @hidden */
+    getTotalItems?(): Observable<number>;
 
     /**
      * Tells if this DataProvider supports INSERT, REMOVE

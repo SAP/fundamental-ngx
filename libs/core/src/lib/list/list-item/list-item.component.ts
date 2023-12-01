@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import {
     AfterContentInit,
+    Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -132,6 +133,10 @@ export class ListItemComponent<T = any>
     @HostBinding('class.fd-list__item--link')
     link = false;
 
+    /** Aria-role attribute. */
+    @Input()
+    ariaRole: Nullable<string>;
+
     /** @hidden */
     @ContentChild(FD_RADIO_BUTTON_COMPONENT)
     set radio(value: RadioButtonComponent) {
@@ -187,6 +192,11 @@ export class ListItemComponent<T = any>
 
     /** @hidden */
     @HostBinding('attr.role')
+    private get roleAttr(): string {
+        return this.ariaRole || this._role;
+    }
+
+    /** @hidden */
     private _role = 'listitem'; // default for li elements
 
     /** @hidden */
@@ -201,6 +211,7 @@ export class ListItemComponent<T = any>
     constructor(
         public readonly elementRef: ElementRef,
         private readonly _changeDetectorRef: ChangeDetectorRef,
+        @Attribute('role') private readonly _defaultRole: string | null,
         @Optional() @Inject(FD_LIST_UNREAD_INDICATOR) private readonly _unreadIndicator?: ListUnreadIndicator
     ) {
         super(elementRef);

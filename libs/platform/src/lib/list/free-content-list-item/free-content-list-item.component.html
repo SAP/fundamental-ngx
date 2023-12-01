@@ -13,8 +13,10 @@
     [attr.aria-label]="ariaLabel"
     [ariaDescribedBy]="ariaDescribedBy"
     [attr.aria-level]="ariaLevel"
-    [attr.aria-posinet]="ariaPosinet"
-    [attr.role]="role"
+    [attr.aria-posinset]="ariaPosinset"
+    [attr.aria-setsize]="ariaSetSize | async"
+    [ariaRole]="_listItemRole"
+    [attr.aria-selected]="_selectedAttr"
 >
     <ng-content></ng-content>
 </li>

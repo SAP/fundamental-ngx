@@ -7,6 +7,9 @@ import { BaseListItem } from '../base-list-item';
     templateUrl: './standard-list-item.component.html',
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => StandardListItemComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        role: 'none'
+    }
 })
 export class StandardListItemComponent extends BaseListItem {}

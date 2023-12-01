@@ -14,8 +14,10 @@
         [attr.aria-label]="ariaLabel"
         [ariaDescribedBy]="ariaDescribedBy"
         [attr.aria-level]="ariaLevel"
-        [attr.aria-posinet]="ariaPosinet"
-        [attr.role]="role"
+        [attr.aria-posinset]="ariaPosinset"
+        [ariaRole]="_listItemRole"
+        [attr.aria-selected]="_selectedAttr"
+        [attr.aria-setsize]="ariaSetSize | async"
     >
         <ng-container *ngTemplateOutlet="selectionTemplate"> </ng-container>
         <a
@@ -44,9 +46,11 @@
         [attr.aria-label]="ariaLabel"
         [ariaDescribedBy]="ariaDescribedBy"
         [attr.aria-level]="ariaLevel"
-        [attr.aria-posinet]="ariaPosinet"
+        [attr.aria-posinset]="ariaPosinset"
         [class.fd-list__item--inactive]="listType === 'inactive'"
-        [attr.role]="role"
+        [ariaRole]="_listItemRole"
+        [attr.aria-selected]="_selectedAttr"
+        [attr.aria-setsize]="ariaSetSize | async"
     >
         <ng-container *ngTemplateOutlet="selectionTemplate"></ng-container>
         <ng-container *ngTemplateOutlet="_hasByLine ? byLineTemplate : commonTemplate"></ng-container>
@@ -61,7 +65,8 @@
         [tabindex]="0"
         [attr.aria-label]="ariaLabel"
         [attr.aria-level]="ariaLevel"
-        [attr.aria-posinet]="ariaPosinet"
+        [attr.aria-posinset]="ariaPosinset"
+        [attr.aria-setsize]="ariaSetSize | async"
     >
         <span fd-list-title [attr.aria-label]="noDataText" [attr.title]="noDataText">{{ noDataText }}</span>
     </li>

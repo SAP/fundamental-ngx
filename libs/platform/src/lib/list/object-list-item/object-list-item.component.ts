@@ -18,7 +18,10 @@ import { ObjectListItemRowComponent } from './object-list-item-row.component';
     styleUrls: ['./object-list-item.component.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ObjectListItemComponent) }],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        role: 'none'
+    }
 })
 export class ObjectListItemComponent extends BaseListItem {
     /** define label for screen reader */

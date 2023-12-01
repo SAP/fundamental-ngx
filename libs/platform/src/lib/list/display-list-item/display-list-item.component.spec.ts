@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -76,10 +77,10 @@ describe('DisplayListItemComponent', () => {
         expect(secondaryItems[0].nativeElement.getAttribute('aria-label')).toContain('secondary 1');
     });
 
-    it('Should display item role as option', () => {
+    it('Should display item role as listitem', () => {
         const listContainer = fixture.debugElement.query(By.css('fdp-display-list-item .fd-list__item'));
         fixture.detectChanges();
-        expect(listContainer.nativeElement.getAttribute('role')).toEqual('option');
+        expect(listContainer.nativeElement.getAttribute('role')).toEqual('listitem');
     });
 
     it('Should title 1 title2 2 title 3 and as title 4 as list item', () => {

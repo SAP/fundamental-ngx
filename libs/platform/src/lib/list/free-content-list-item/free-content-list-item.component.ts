@@ -7,6 +7,9 @@ import { BaseListItem } from '../base-list-item';
     styleUrls: ['./free-content-list-item.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: BaseListItem, useExisting: forwardRef(() => FreeContentListItemComponent) }]
+    providers: [{ provide: BaseListItem, useExisting: forwardRef(() => FreeContentListItemComponent) }],
+    host: {
+        role: 'none'
+    }
 })
 export class FreeContentListItemComponent extends BaseListItem {}
