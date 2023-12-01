@@ -1,0 +1,19 @@
+{
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "name": "moment-adapter-schematics",
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "options": {
+                "outputPath": "dist/libs/moment-adapter/schematics",
+                "tsConfig": "libs/moment-adapter/schematics/tsconfig.json",
+                "main": "libs/moment-adapter/schematics/ng-add/index.ts",
+                "assets": [
+                    "libs/moment-adapter/schematics/**/*/schema.json",
+                    "libs/moment-adapter/schematics/collection.json",
+                    "libs/moment-adapter/schematics/migrations.json"
+                ]
+            }
+        }
+    }
+}

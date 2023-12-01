@@ -1,0 +1,23 @@
+{
+    "name": "core-file-uploader",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/core/file-uploader",
+    "prefix": "fd",
+    "targets": {
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {
+                "lintFilePatterns": ["libs/core/file-uploader/**/*.ts", "libs/core/file-uploader/**/*.html"]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/core/file-uploader/jest.config.ts"
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fd"]
+}

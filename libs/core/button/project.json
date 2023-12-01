@@ -1,0 +1,23 @@
+{
+    "name": "core-button",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/core/button",
+    "prefix": "fd",
+    "targets": {
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {
+                "lintFilePatterns": ["libs/core/button/**/*.ts", "libs/core/button/**/*.html"]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/core/button/jest.config.ts"
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fd"]
+}

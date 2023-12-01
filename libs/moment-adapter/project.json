@@ -6,13 +6,13 @@
     "prefix": "fd",
     "targets": {
         "prepare": {
-            "executor": "@fundamental-ngx/nx-plugin:prepare-library",
+            "executor": "nx:run-commands",
             "options": {
-                "schematics": {
-                    "collection": "schematics",
-                    "tsConfig": "tsconfig.schematics.json"
-                },
-                "distPath": "dist/libs/moment-adapter"
+                "commands": [
+                    "npx nx run moment-adapter-schematics:build",
+                    "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=moment-adapter --verbose",
+                    "yarn pack --cwd dist/libs/moment-adapter"
+                ]
             }
         },
         "compile-typedoc": {

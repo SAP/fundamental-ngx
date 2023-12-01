@@ -6,6 +6,10 @@ import { callsProvidersFunction } from '../utils/calls-providers-function';
 import { getMainTsFilePath } from '../utils/main-ts-file-path';
 import { hasModuleImport } from '../utils/ng-module-utils';
 
+/**
+ * Adds animations to the project.
+ * @param options
+ */
 export function addAnimations(options: Schema): Rule {
     return chain([_addAnimations(options)]);
 }
@@ -59,6 +63,7 @@ async function addAnimationsModule(options: Schema, tree: Tree, context: Schemat
     if (options.animations) {
         if (hasModuleImport(tree, modulePath, noopAnimationsModuleName)) {
             context.logger.warn(
+                // eslint-disable-next-line max-len
                 `⚠️ Could not set up "${browserAnimationsModuleName} because "${noopAnimationsModuleName}" is already imported. Please manually set up browser animations.`
             );
 

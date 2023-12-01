@@ -1,0 +1,23 @@
+{
+    "name": "core-shared",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/core/shared",
+    "prefix": "fd",
+    "targets": {
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {
+                "lintFilePatterns": ["libs/core/shared/**/*.ts", "libs/core/shared/**/*.html"]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/core/shared/jest.config.ts"
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fd"]
+}

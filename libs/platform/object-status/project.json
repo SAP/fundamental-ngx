@@ -1,0 +1,24 @@
+{
+    "name": "platform-object-status",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/platform/object-status",
+    "prefix": "fdp",
+    "targets": {
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {
+                "lintFilePatterns": ["libs/platform/object-status/**/*.ts", "libs/platform/object-status/**/*.html"]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/platform/object-status/jest.config.ts"
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fdp"],
+    "implicitDependencies": []
+}

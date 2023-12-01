@@ -59,22 +59,22 @@
                         "output": "./assets"
                     },
                     {
-                        "input": "./libs/platform/src/lib",
+                        "input": "./libs/platform",
                         "glob": "README.md",
                         "output": "./assets/platform"
                     },
                     {
-                        "input": "./libs/cx/src/lib",
+                        "input": "./libs/cx",
                         "glob": "README.md",
                         "output": "./assets/cx"
                     },
                     {
-                        "input": "./libs/core/src/lib",
+                        "input": "./libs/core",
                         "glob": "README.md",
                         "output": "./assets/core"
                     },
                     {
-                        "input": "./libs/cdk/src/lib",
+                        "input": "./libs/cdk",
                         "glob": "README.md",
                         "output": "./assets/cdk"
                     },

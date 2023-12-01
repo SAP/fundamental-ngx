@@ -1,0 +1,23 @@
+{
+    "name": "core-vertical-navigation",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/core/vertical-navigation",
+    "prefix": "fd",
+    "targets": {
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {
+                "lintFilePatterns": ["libs/core/vertical-navigation/**/*.ts", "libs/core/vertical-navigation/**/*.html"]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/core/vertical-navigation/jest.config.ts"
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fd"]
+}

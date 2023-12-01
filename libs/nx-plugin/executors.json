@@ -6,11 +6,6 @@
             "schema": "./src/executors/compile-typedoc/schema.json",
             "description": "compile-typedoc executor"
         },
-        "prepare-library": {
-            "implementation": "./src/executors/prepare-library/executor",
-            "schema": "./src/executors/prepare-library/schema.json",
-            "description": "prepare-library executor"
-        },
         "e2e-test-app": {
             "implementation": "./src/executors/e2e-test-app/executor",
             "schema": "./src/executors/e2e-test-app/schema.json",

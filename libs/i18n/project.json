@@ -6,9 +6,13 @@
     "prefix": "fundamental-ngx",
     "targets": {
         "prepare": {
-            "executor": "@fundamental-ngx/nx-plugin:prepare-library",
+            "executor": "nx:run-commands",
             "options": {
-                "distPath": "dist/libs/i18n"
+                "commands": [
+                    "npx nx run core-schematics:build",
+                    "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=i18n --verbose",
+                    "yarn pack --cwd dist/libs/i18n"
+                ]
             }
         },
         "compile-typedoc": {

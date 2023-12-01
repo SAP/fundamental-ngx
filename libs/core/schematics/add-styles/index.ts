@@ -20,7 +20,7 @@ function addStylesToConfig(options: Schema): Rule {
                 additionalStyles.push('./node_modules/fundamental-styles/dist/fonts/sap_fonts.css');
             }
             const buildTarget = await getProjectBuildTarget(tree, options.project);
-            const stylesArray: AssetPattern[] = (buildTarget.options.styles as any) || [];
+            const stylesArray: AssetPattern[] = (buildTarget.options?.styles as any) || [];
             let stylesUpdated = false;
 
             additionalStyles.forEach((additionalStyle) => {
@@ -44,8 +44,13 @@ function addStylesToConfig(options: Schema): Rule {
                 await updateWorkspaceDefinition(tree, workspace);
                 return;
             }
-
-            buildTarget.options.styles = stylesArray as any;
+            if (buildTarget.options) {
+                buildTarget.options.styles = stylesArray as any;
+            } else {
+                buildTarget.options = {
+                    styles: stylesArray as any
+                };
+            }
         } catch (e) {
             throw new SchematicsException(
                 `Unable to find angular.json project styles. Please manually configure your styles array.`
@@ -78,7 +83,7 @@ function addAssetsToConfig(options: Schema): Rule {
                 }
             ];
             const buildTarget = await getProjectBuildTarget(tree, options.project);
-            let assetsArray: AssetPattern[] = (buildTarget.options as any)['assets'];
+            const assetsArray: AssetPattern[] = (buildTarget.options as any)['assets'];
             let assetsUpdated = false;
 
             additionalAssets.forEach((asset) => {

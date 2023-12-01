@@ -5,7 +5,7 @@ import { DragAndDropModule, FdDndDropEventMode, FdDropEvent } from '@fundamental
 @Component({
     selector: 'fundamental-ngx-cdk-disabled-example',
     templateUrl: './default-example.component.html',
-    styleUrls: ['../../../../../cdk/src/lib/utils/drag-and-drop/drag-and-drop.scss'],
+    styleUrls: ['../../../../../cdk/utils/drag-and-drop/drag-and-drop.scss'],
     styles: [
         `
             .fdk-sortable-list__item {

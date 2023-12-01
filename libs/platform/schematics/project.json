@@ -1,0 +1,19 @@
+{
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "name": "platform-schematics",
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "options": {
+                "outputPath": "dist/libs/platform/schematics",
+                "tsConfig": "libs/platform/schematics/tsconfig.json",
+                "main": "libs/platform/schematics/ng-add/index.ts",
+                "assets": [
+                    "libs/platform/schematics/**/*/schema.json",
+                    "libs/platform/schematics/collection.json",
+                    "libs/platform/schematics/migrations.json"
+                ]
+            }
+        }
+    }
+}

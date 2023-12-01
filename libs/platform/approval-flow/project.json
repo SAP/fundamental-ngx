@@ -1,0 +1,24 @@
+{
+    "name": "platform-approval-flow",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/platform/approval-flow",
+    "prefix": "fdp",
+    "targets": {
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {
+                "lintFilePatterns": ["libs/platform/approval-flow/**/*.ts", "libs/platform/approval-flow/**/*.html"]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/platform/approval-flow/jest.config.ts"
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fdp"],
+    "implicitDependencies": []
+}

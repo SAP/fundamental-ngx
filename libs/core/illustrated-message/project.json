@@ -1,0 +1,23 @@
+{
+    "name": "core-illustrated-message",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/core/illustrated-message",
+    "prefix": "fd",
+    "targets": {
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {
+                "lintFilePatterns": ["libs/core/illustrated-message/**/*.ts", "libs/core/illustrated-message/**/*.html"]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/core/illustrated-message/jest.config.ts"
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fd"]
+}

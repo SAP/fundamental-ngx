@@ -1,0 +1,24 @@
+{
+    "name": "platform-link",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/platform/link",
+    "prefix": "fdp",
+    "targets": {
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {
+                "lintFilePatterns": ["libs/platform/link/**/*.ts", "libs/platform/link/**/*.html"]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/platform/link/jest.config.ts"
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fdp"],
+    "implicitDependencies": []
+}

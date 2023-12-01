@@ -1,0 +1,10 @@
+{
+    "name": "platform-object-attribute",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/platform/object-attribute",
+    "prefix": "fdp",
+    "targets": {},
+    "tags": ["type:lib", "scope:fdp"],
+    "implicitDependencies": []
+}

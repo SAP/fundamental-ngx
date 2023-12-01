@@ -1,0 +1,47 @@
+{
+    "name": "cdk",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "root": "libs/cdk",
+    "sourceRoot": "libs/cdk/src",
+    "prefix": "fdk",
+    "targets": {
+        "prepare": {
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": [
+                    "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=cdk --verbose",
+                    "yarn pack --cwd dist/libs/cdk"
+                ]
+            }
+        },
+        "compile-typedoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
+            "options": {
+                "outputPath": "libs/docs/typedoc/cdk"
+            },
+            "outputs": ["{options.outputPath}"]
+        },
+        "build": {
+            "executor": "@nx/angular:package",
+            "outputs": ["{workspaceRoot}/dist/libs/cdk"],
+            "options": {
+                "tsConfig": "libs/cdk/tsconfig.lib.json",
+                "project": "libs/cdk/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/cdk/tsconfig.lib.prod.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {
+                "lintFilePatterns": ["libs/cdk/src/**/*.ts", "libs/cdk/src/**/*.html"]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:cdk"]
+}

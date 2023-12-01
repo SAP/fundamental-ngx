@@ -1,0 +1,47 @@
+{
+    "name": "cx",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/cx",
+    "prefix": "cx",
+    "targets": {
+        "prepare": {
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": [
+                    "npx nx run cx-schematics:build",
+                    "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=cx --verbose",
+                    "yarn pack --cwd dist/libs/cx"
+                ]
+            }
+        },
+        "compile-typedoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
+            "options": {
+                "outputPath": "libs/docs/typedoc/cx"
+            },
+            "outputs": ["{options.outputPath}"]
+        },
+        "build": {
+            "executor": "@nx/angular:package",
+            "outputs": ["{workspaceRoot}/dist/libs/cx"],
+            "options": {
+                "tsConfig": "libs/cx/tsconfig.lib.json",
+                "project": "libs/cx/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/cx/tsconfig.lib.prod.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {
+                "lintFilePatterns": ["libs/cx/src/lib/**/*.ts", "libs/cx/src/lib/**/*.html"]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:cx"]
+}

@@ -1,9 +1,8 @@
-import { Tree, SchematicsException } from '@angular-devkit/schematics';
+import { SchematicsException, Tree } from '@angular-devkit/schematics';
 
 import * as ts from 'typescript';
-import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 
-// Checks if an import is included in the module.
+/** Checks if an import is included in the module. */
 export function hasModuleImport(tree: Tree, modulePath: string, className: string): boolean {
     const moduleFileContent = tree.read(modulePath);
 
@@ -71,15 +70,4 @@ function isNgModuleCallExpression(callExpression: ts.CallExpression): boolean {
 
     const decoratorIdentifier = resolveIdentifierOfExpression(callExpression.expression);
     return decoratorIdentifier ? decoratorIdentifier.text === 'NgModule' : false;
-}
-
-// Borrowed from the Angular CDK
-export function getProjectFromWorkspace(workspace: WorkspaceSchema, projectName?: string): WorkspaceProject {
-    const project = workspace.projects[projectName || workspace.defaultProject];
-
-    if (!project) {
-        throw new SchematicsException(`Could not find project in workspace: ${projectName}`);
-    }
-
-    return project;
 }

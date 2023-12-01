@@ -1,0 +1,47 @@
+{
+    "name": "platform",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/platform/src",
+    "prefix": "fdp",
+    "targets": {
+        "prepare": {
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": [
+                    "npx nx run platform-schematics:build",
+                    "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=platform --verbose",
+                    "yarn pack --cwd dist/libs/platform"
+                ]
+            }
+        },
+        "compile-typedoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
+            "options": {
+                "outputPath": "libs/docs/typedoc/platform"
+            },
+            "outputs": ["{options.outputPath}"]
+        },
+        "build": {
+            "executor": "@nx/angular:package",
+            "outputs": ["{workspaceRoot}/dist/libs/platform"],
+            "options": {
+                "tsConfig": "libs/platform/tsconfig.lib.json",
+                "project": "libs/platform/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/platform/tsconfig.lib.prod.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {
+                "lintFilePatterns": ["libs/platform/src/lib/**/*.ts", "libs/platform/src/lib/**/*.html"]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fdp"]
+}

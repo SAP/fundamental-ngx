@@ -16,7 +16,7 @@ export class FdTheme extends DefaultTheme {
 }
 
 export default async function compileTypedocs(_options: CompileTypedocExecutorSchema, context: ExecutorContext) {
-    const projectPath = context.workspace?.projects[context.projectName as string].sourceRoot as string;
+    const projectPath = context.workspace?.projects[context.projectName as string].root as string;
     const { outputPath } = readTargetOptions(
         {
             project: context.projectName as string,
@@ -26,8 +26,8 @@ export default async function compileTypedocs(_options: CompileTypedocExecutorSc
         context
     );
     const { tsConfig } = readTargetOptions({ project: context.projectName as string, target: 'build' }, context);
-
-    const entryPoints = fastGlobSync(projectPath + '/**/*/ng-package.json').map((f) => {
+    const ngPackageJsonFiles = fastGlobSync(projectPath + '/**/*/ng-package.json');
+    const entryPoints = ngPackageJsonFiles.map((f) => {
         const json = JSON.parse(readFileSync(f, 'utf-8'));
         const main = json.lib.entryFile;
         return resolve(parse(f).dir, main);
