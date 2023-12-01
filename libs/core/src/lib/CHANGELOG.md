@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.4...v0.48.0-rc.5) (2023-12-01)
+
+
+### Features
+
+* **core:** ng-add is compatible with the standalone applications ([#11026](https://github.com/SAP/fundamental-ngx/issues/11026)) ([c7b730e](https://github.com/SAP/fundamental-ngx/commit/c7b730e43397a607e1446eb05b9605bd7cc7c1ce))
+
+
+
+
+
 # [0.48.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.3...v0.48.0-rc.4) (2023-12-01)
 
 **Note:** Version bump only for package @fundamental-ngx/core
