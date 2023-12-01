@@ -135,13 +135,17 @@ export class ShellbarCollapsibleExampleComponent {
             glyph: 'pool',
             callback: this.actionPoolCallback,
             label: 'Pool',
-            notificationCount: 3,
+            title: 'Pool',
+            ariaLabel: 'Pool',
+            notificationCount: 0,
             notificationLabel: 'Pool Count'
         },
         {
             glyph: 'bell',
             callback: this.actionNotificationCallback,
             label: 'Notifications',
+            title: 'Notifications',
+            ariaLabel: 'Notifications',
             notificationCount: 12,
             notificationLabel: 'Unread Notifications'
         }

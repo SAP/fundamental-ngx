@@ -33,6 +33,8 @@
                 [label]="action.label"
                 [notificationCount]="action.notificationCount"
                 [notificationLabel]="action.notificationLabel"
+                [title]="action.title"
+                [ariaLabel]="!action.notificationCount ? action.ariaLabel : ''"
             ></fd-shellbar-action>
 
             <fd-product-switch>

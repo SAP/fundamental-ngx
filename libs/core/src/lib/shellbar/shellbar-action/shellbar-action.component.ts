@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FD_SHELLBAR_ACTION_COMPONENT } from '../tokens';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
  * The component that represents a shellbar action.
@@ -45,4 +46,12 @@ export class ShellbarActionComponent {
     /** Represents the number of notifications. */
     @Input()
     notificationCount: number;
+
+    /** title of the action button. */
+    @Input()
+    title: Nullable<string>;
+
+    /** aria-label of the action button */
+    @Input()
+    ariaLabel: Nullable<string>;
 }
