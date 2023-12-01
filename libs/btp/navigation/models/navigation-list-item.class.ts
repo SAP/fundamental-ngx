@@ -18,6 +18,7 @@ export abstract class FdbNavigationListItem implements FocusableOption {
     abstract placementContainer?: FdbNavigationContentContainer;
     abstract parentListItemComponent: FdbNavigationListItemCmp | null;
     abstract parentListItem: FdbNavigationListItem | null;
+    abstract class$: Signal<string>;
     abstract focus(origin?: FocusOrigin | undefined): void;
     abstract toggleExpanded(): void;
     abstract keyboardExpanded(shouldExpand: boolean): void;
@@ -31,9 +32,6 @@ export abstract class FdbNavigationListItem implements FocusableOption {
 
     /** Marker directive that is attached to the rendered list item. */
     marker: Nullable<NavigationListItemMarkerDirective>;
-
-    /** CSS class. */
-    readonly class$ = signal(LIST_ITEM_CLASS);
 
     /** @hidden */
     readonly listItems$ = signal<FdbNavigationListItem[]>([]);
@@ -83,6 +81,7 @@ export abstract class FdbNavigationListItem implements FocusableOption {
 
     /**
      * Whether the List item should be marked as selected.
+     * Based on a `snapped` state will determine whether to highlight the link if it, or it's child links are active.
      */
     readonly isActiveAttr$ = computed(
         () =>

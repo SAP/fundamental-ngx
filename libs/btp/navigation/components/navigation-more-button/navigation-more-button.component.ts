@@ -12,7 +12,7 @@ import {
     signal
 } from '@angular/core';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk';
-import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
@@ -89,6 +89,8 @@ export class NavigationMoreButtonComponent {
      */
     readonly link$ = signal<Nullable<FdbNavigationItemLink>>(null);
 
+    private _popoverClicked = false;
+
     /** @hidden */
     private readonly _rtl = inject(RtlService, {
         optional: true
@@ -97,16 +99,18 @@ export class NavigationMoreButtonComponent {
     /** @hidden */
     constructor() {
         effect(() => {
-            if (this.popoverOpen$()) {
+            if (this.popoverOpen$() && !this._popoverClicked) {
                 setTimeout(() => {
                     this.listItems[0]?.focus();
                 });
             }
+            this._popoverClicked = false;
         });
     }
 
     /** @hidden */
-    togglePopover(): void {
+    togglePopover(withClick = false): void {
+        this._popoverClicked = withClick;
         this.popoverOpen$.update((value) => !value);
     }
 
@@ -152,6 +156,12 @@ export class NavigationMoreButtonComponent {
         const isRtl = this._rtl?.rtl.value || false;
 
         const isOpenAction = KeyUtil.isKeyCode(event, isRtl ? LEFT_ARROW : RIGHT_ARROW);
+
+        // If user clicked on popover opener button, and then tried to use keyboard, simply shift focus to the first item in the popover menu.
+        if (isOpenAction && this.popoverOpen$()) {
+            this.listItems[0]?.focus();
+            return;
+        }
 
         this.popoverOpen$.set(isOpenAction);
     }

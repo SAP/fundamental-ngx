@@ -1,0 +1,122 @@
+<p>Set navigation state</p>
+<fd-segmented-button [(ngModel)]="state">
+    <button fd-button label="Expanded" value="expanded"></button>
+    <button fd-button label="Snapped" value="snapped"></button>
+    <button fd-button label="Popup" value="popup"></button>
+</fd-segmented-button>
+<p>Set visual mode</p>
+<fd-segmented-button [(ngModel)]="mode">
+    <button fd-button label="Desktop" value=""></button>
+    <button fd-button label="Tablet" value="tablet"></button>
+    <button fd-button label="Mobile" value="phone"></button>
+</fd-segmented-button>
+<p>&nbsp;</p>
+
+<fdb-navigation
+    [state]="state"
+    [mode]="mode"
+    homeSeparator="false"
+    [style.width]="'fit-content'"
+    [style.height.px]="400"
+>
+    <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/btp/navigation']" glyph="home">Home</a>
+    <fdb-navigation-content-start>
+        <fdb-navigation-list-item home>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="home">Home</a>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item group expanded>
+            <a fdb-navigation-link *fdbNavigationLinkRef>Main items</a>
+            <fdb-navigation-list-item expanded>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="create-entry-time">Time</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item expanded>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="basket" [routerLink]="['/btp/navigation']"
+                    >Basket</a
+                >
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>Future orders</a>
+                </fdb-navigation-list-item>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>Current orders</a>
+                </fdb-navigation-list-item>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/core']" [external]="true"
+                        >Past orders (External link)</a
+                    >
+                </fdb-navigation-list-item>
+            </fdb-navigation-list-item>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item separator />
+        <fdb-navigation-list-item expanded>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="settings">Settings without wrapper</a>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>User Settings</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>Profile Settings</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>Password Change</a>
+            </fdb-navigation-list-item>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item group>
+            <a fdb-navigation-link *fdbNavigationLinkRef>Favourites</a>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="shield">Shield</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="settings">Settings</a>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>User Settings</a>
+                </fdb-navigation-list-item>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>Profile Settings</a>
+                </fdb-navigation-list-item>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>Password Change</a>
+                </fdb-navigation-list-item>
+            </fdb-navigation-list-item>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item group>
+            <a fdb-navigation-link *fdbNavigationLinkRef>Favourites</a>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="shield">Shield</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item expanded>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="settings">Settings</a>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>User Settings</a>
+                </fdb-navigation-list-item>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>Profile Settings</a>
+                </fdb-navigation-list-item>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>Password Change</a>
+                </fdb-navigation-list-item>
+            </fdb-navigation-list-item>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="shield">Shield without wrapper</a>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item expanded>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="settings">Settings</a>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>User Settings</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>Profile Settings</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>Password Change</a>
+            </fdb-navigation-list-item>
+        </fdb-navigation-list-item>
+    </fdb-navigation-content-start>
+    <fdb-navigation-content-end>
+        <fdb-navigation-list-item>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="sys-help">Help</a>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="compare">Legal</a>
+        </fdb-navigation-list-item>
+    </fdb-navigation-content-end>
+</fdb-navigation>

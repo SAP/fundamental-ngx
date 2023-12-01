@@ -1,8 +1,4 @@
 <ng-content></ng-content>
-<ng-template #defaultLinkTemplate>
-    <a fdb-navigation-link glyph="home" label="Home"></a>
-</ng-template>
-
 @if (_navigationItemRenderer()) {
     @if (dataSourceItems()?.start; as startItems) {
         <fdb-navigation-content-start [contentProjected]="false">
@@ -18,7 +14,7 @@
         </fdb-navigation-content-start>
     }
     @if (dataSourceItems()?.end; as endItems) {
-        <fdb-navigation-content-end>
+        <fdb-navigation-content-end [contentProjected]="false">
             @for (item of endItems; track item) {
                 <ng-container fdbNavigationListItem [item]="item" #listItemDirective="fdbListItem">
                     <ng-template

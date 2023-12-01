@@ -17,7 +17,7 @@ import {
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { KeyUtil, RtlService } from '@fundamental-ngx/cdk';
+import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { of, startWith } from 'rxjs';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
@@ -56,11 +56,11 @@ export class NavigationLinkRefDirective {
 export class NavigationLinkComponent extends FdbNavigationItemLink implements OnDestroy {
     /** @hidden */
     @Input()
-    class: string;
+    class: Nullable<string>;
 
     /** @hidden */
     @Input()
-    glyph: string;
+    glyph: Nullable<string>;
 
     /** Whether the link is for the external resource. */
     @Input()

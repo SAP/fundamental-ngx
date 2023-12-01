@@ -21,7 +21,10 @@ export class NavigationListItemDirective implements OnDestroy {
     @Input()
     item: any;
 
-    /** Injector used for rendering child list item component. */
+    /**
+     * Injector used for rendering child list item component.
+     * Allows list item component to inject parent list container and register itself as a child item.
+     */
     readonly injector = Injector.create({ providers: [], parent: inject(Injector) });
 
     /** @hidden */
@@ -30,41 +33,22 @@ export class NavigationListItemDirective implements OnDestroy {
         optional: true
     });
 
-    /** Set of child directives. */
+    /**
+     * Set of child directives.
+     * Used to build hierarchy tree.
+     */
     readonly childDirectives = signal(new Set<NavigationListItemDirective>());
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Navigation list item component instance.
+     */
     _item: Nullable<FdbNavigationListItem>;
 
     /** @hidden */
     private readonly _contentContainer = inject(FdbNavigationContentContainer, {
         optional: true
     });
-
-    /** Component property retranslator */
-    get normalizedLevel$(): FdbNavigationListItem['normalizedLevel$'] {
-        return this._item!.normalizedLevel$;
-    }
-
-    /** Component property retranslator */
-    get level$(): FdbNavigationListItem['level$'] {
-        return this._item!.level$;
-    }
-
-    /** Component property retranslator */
-    get hidden$(): FdbNavigationListItem['hidden$'] {
-        return this._item!.hidden$;
-    }
-
-    /** Component property retranslator */
-    get class$(): FdbNavigationListItem['class$'] {
-        return this._item!.class$;
-    }
-
-    /** Component property retranslator */
-    get renderer$(): FdbNavigationListItem['renderer$'] {
-        return this._item!.renderer$;
-    }
 
     /** @hidden */
     constructor() {
@@ -107,7 +91,15 @@ export class NavigationListItemDirective implements OnDestroy {
     selector: '[fdbNavigationListItemRef]',
     standalone: true
 })
-export class NavigationListItemRefDirective {
+export class NavigationListItemRefDirective<T = any> {
+    /** Type alias. */
+    @Input()
+    fdbNavigationListItemRefAs: T;
     /** Template reference. */
-    readonly templateRef = inject(TemplateRef);
+    readonly templateRef = inject<TemplateRef<T>>(TemplateRef);
+
+    /** @hidden */
+    static ngTemplateContextGuard<T>(dir: NavigationListItemRefDirective<T>, ctx: unknown): ctx is { $implicit: T } {
+        return true;
+    }
 }

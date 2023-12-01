@@ -106,7 +106,9 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
     });
 
     /** @hidden */
-    private readonly _rtl = inject(RtlService);
+    private readonly _rtl = inject(RtlService, {
+        optional: true
+    });
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);

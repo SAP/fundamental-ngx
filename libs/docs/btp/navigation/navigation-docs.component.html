@@ -17,7 +17,8 @@
 <code-example [exampleFiles]="basicExample"></code-example>
 
 <separator></separator>
-<fd-docs-section-title id="simple" componentName="FdbNavigation">Parent Navigation as Link</fd-docs-section-title>
+
+<fd-docs-section-title id="parent-link" componentName="FdbNavigation">Parent Navigation as Link</fd-docs-section-title>
 <description>
     <p>By default, the Parent Navigation Item functions as a Navigation Group.</p>
     <p>
@@ -26,10 +27,31 @@
     </p>
     <p>
         Although not recommended, the Navigation Item can function for navigation and expansion/collapse. In this case,
-        clicking on the arrow will show/hide Child Items, and clicking on the item will perform the navigation.
+        Navigation component will automatically detect that external toggle arrow is needed and will render it. Clicking
+        on the toggle arrow will show/hide Child Items, and clicking on the item will perform the navigation.
     </p>
 </description>
 <component-example [hasBackground]="false">
     <fdb-navigation-parent-item-link></fdb-navigation-parent-item-link>
+</component-example>
+<code-example [exampleFiles]="basicExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="data-source" componentName="FdbNavigation"
+    >Navigation with Data-source</fd-docs-section-title
+>
+<description>
+    <p>
+        In addition to content-projected approach, Navigation component supports passing data-source with custom list
+        item renderer.
+    </p>
+    <p>
+        To use Data-source approach be sure to import <code>NavigationListDataSourceDirective</code> to your Component
+        or NgModule.
+    </p>
+</description>
+<component-example [hasBackground]="false">
+    <fdp-navigation-data-source-example></fdp-navigation-data-source-example>
 </component-example>
 <code-example [exampleFiles]="basicExample"></code-example>

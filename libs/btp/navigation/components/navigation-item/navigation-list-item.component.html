@@ -92,7 +92,11 @@
 <ng-template #wrapperRenderer let-keyboardNavigation>
     <div class="fd-navigation__list-wrapper">
         @if (navigation.isSnapped$() && !isOverflow$()) {
-            <div class="fd-navigation__item fd-navigation__item--title fd-navigation__item--child">
+            <!-- If opener link itself is active, project aria-selected attribute to link repeater too. -->
+            <div
+                class="fd-navigation__item fd-navigation__item--title fd-navigation__item--child"
+                [attr.aria-selected]="link$()?.isActive$()"
+            >
                 <ng-template
                     [ngTemplateOutlet]="linkRenderer"
                     [ngTemplateOutletContext]="{ $implicit: false }"
@@ -104,7 +108,7 @@
             [listItems]="listItems$()"
             [childItems]="normalizedLevel$() > 2"
             (keydown)="false && _innerListKeydown($event)"
-            (focusBefore)="_focusPopoverLink()"
+            (focusBefore)="_focusBeforeList()"
             [withKeyboardNavigation]="keyboardNavigation"
         ></ul>
     </div>

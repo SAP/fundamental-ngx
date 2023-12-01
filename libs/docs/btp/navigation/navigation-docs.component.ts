@@ -11,6 +11,7 @@ import {
     getExampleFile
 } from '@fundamental-ngx/docs/shared';
 import { NavigationBasicExampleComponent } from './examples/basic-example/navigation-basic-example.component';
+import { NavigationDataSourceExampleComponent } from './examples/data-source/navigation-data-source-example.component';
 import { NavigationParentItemLinkComponent } from './examples/parent-item-link/navigation-parent-item-link.component';
 
 @Component({
@@ -25,7 +26,8 @@ import { NavigationParentItemLinkComponent } from './examples/parent-item-link/n
         CodeExampleComponent,
         NavigationBasicExampleComponent,
         SeparatorComponent,
-        NavigationParentItemLinkComponent
+        NavigationParentItemLinkComponent,
+        NavigationDataSourceExampleComponent
     ]
 })
 export class NavigationDocsComponent {

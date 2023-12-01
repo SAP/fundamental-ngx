@@ -6,7 +6,7 @@
 </fd-segmented-button>
 <p>Set visual mode</p>
 <fd-segmented-button [(ngModel)]="mode">
-    <button fd-button label="Desktop" value="desktop"></button>
+    <button fd-button label="Desktop" value=""></button>
     <button fd-button label="Tablet" value="tablet"></button>
     <button fd-button label="Mobile" value="phone"></button>
 </fd-segmented-button>
@@ -15,33 +15,22 @@
 <fdb-navigation
     [state]="state"
     [mode]="mode"
-    [dataSource]="dataSource"
-    [style.width]="'fit-content'"
-    [style.height.px]="400"
->
-    <fdb-navigation-list-item *fdbNavigationListItemRef="let item" [group]="item.group" [expanded]="item.expanded">
-        <a fdb-navigation-link *fdbNavigationLinkRef [glyph]="item.icon">{{ item.title }}</a>
-    </fdb-navigation-list-item>
-</fdb-navigation>
-
-<!-- <fdb-navigation
-    [state]="state"
-    [mode]="mode"
     homeSeparator="false"
     [style.width]="'fit-content'"
     [style.height.px]="400"
 >
     <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/btp/navigation']" glyph="home">Home</a>
     <fdb-navigation-content-start>
+        <fdb-navigation-list-item home>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="home">Home</a>
+        </fdb-navigation-list-item>
         <fdb-navigation-list-item group expanded>
             <a fdb-navigation-link *fdbNavigationLinkRef>Main items</a>
             <fdb-navigation-list-item expanded>
                 <a fdb-navigation-link *fdbNavigationLinkRef glyph="create-entry-time">Time</a>
             </fdb-navigation-list-item>
             <fdb-navigation-list-item expanded>
-                <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/btp/navigation']" glyph="basket"
-                    >Basket</a
-                >
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="basket">Basket</a>
                 <fdb-navigation-list-item>
                     <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/btp/navigation']">Future orders</a>
                 </fdb-navigation-list-item>
@@ -128,4 +117,4 @@
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="compare">Legal</a>
         </fdb-navigation-list-item>
     </fdb-navigation-content-end>
-</fdb-navigation> -->
+</fdb-navigation>

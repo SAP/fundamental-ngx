@@ -13,16 +13,15 @@ import {
     ElementRef,
     Input,
     NgZone,
-    OnChanges,
     OnDestroy,
     QueryList,
-    SimpleChanges,
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
     computed,
     effect,
-    inject
+    inject,
+    signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NestedButtonDirective } from '@fundamental-ngx/btp/button';
@@ -88,18 +87,44 @@ export class NavigationListItemMarkerDirective {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NavigationListItemComponent extends FdbNavigationListItem implements AfterViewInit, OnChanges, OnDestroy {
+export class NavigationListItemComponent extends FdbNavigationListItem implements AfterViewInit, OnDestroy {
     /** @hidden */
     @Input()
-    class: Nullable<string>;
+    set class(value: Nullable<string>) {
+        this._class$.set(value);
+    }
+
+    get class(): Nullable<string> {
+        return this._class$();
+    }
+
+    /** Whether the list item represents "Home" item. */
+    @Input({ transform: coerceBooleanProperty })
+    set home(value: boolean) {
+        this._home$.set(value);
+    }
+
+    get home(): boolean {
+        return this._home$();
+    }
 
     /** Whether the list item should be rendered as a separator */
     @Input({ transform: coerceBooleanProperty })
-    separator = false;
+    set separator(value: boolean) {
+        this._separator$.set(value);
+    }
+    get separator(): boolean {
+        return this._separator$();
+    }
 
     /** Whether the list item should be rendered as a spacer */
     @Input({ transform: coerceBooleanProperty })
-    spacer = false;
+    set spacer(value: boolean) {
+        this._spacer$.set(value);
+    }
+    get spacer(): boolean {
+        return this._spacer$();
+    }
 
     /** Whether the list item should be rendered as a group. */
     @Input({ transform: coerceBooleanProperty })
@@ -194,6 +219,19 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         this.navigation.isSnapped$() ? this.popoverOpen$() && !this.isOverflow$() : this.expanded$()
     );
 
+    /** CSS Class signal. */
+    readonly class$ = computed(() =>
+        [
+            LIST_ITEM_CLASS,
+            this._class$(),
+            this._separator$() ? `${LIST_ITEM_CLASS}--separator` : '',
+            this._spacer$() ? `${LIST_ITEM_CLASS}--spacer` : '',
+            this._home$() ? `${LIST_ITEM_CLASS}--home ${LIST_ITEM_CLASS}--home-without-separator` : ''
+        ]
+            .filter((k) => !!k)
+            .join(' ')
+    );
+
     /** Optional parent list component. */
     readonly parentListItemComponent = inject(FdbNavigationListItemCmp, {
         optional: true,
@@ -206,6 +244,18 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             this._parentNavigationListItemDirective?.parentNavListItemDirective?._item || this.parentListItemComponent
         );
     }
+
+    /** @hidden */
+    private readonly _home$ = signal(false);
+
+    /** @hidden */
+    private readonly _class$ = signal<Nullable<string>>(null);
+
+    /** @hidden */
+    private readonly _separator$ = signal(false);
+
+    /** @hidden */
+    private readonly _spacer$ = signal(false);
 
     /** @hidden */
     private readonly _links: FdbNavigationItemLink[] = [];
@@ -273,30 +323,14 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     }
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if ('class' in changes || 'separator' in changes || 'spacer' in changes) {
-            this.class$.set(
-                [
-                    LIST_ITEM_CLASS,
-                    this.class,
-                    this.separator ? `${LIST_ITEM_CLASS}--separator` : '',
-                    this.spacer ? `${LIST_ITEM_CLASS}--spacer` : ''
-                ]
-                    .filter((k) => !!k)
-                    .join(' ')
-            );
-        }
-    }
-
-    /** @hidden */
     ngOnDestroy(): void {
         this._keyManager?.destroy();
     }
 
     /** @hidden */
-    _focusPopoverLink(): void {
+    _focusBeforeList(): void {
         if (this.popoverOpen$()) {
-            this._links.find((link) => link.inPopover)?.elementRef.nativeElement.focus();
+            this._focusPopoverLink();
         }
     }
 
@@ -372,7 +406,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         }
 
         if (KeyUtil.isKeyCode(event, UP_ARROW) && this._keyManager?.activeItemIndex === 0) {
-            this._links.find((link) => link.inPopover)?.elementRef.nativeElement.focus();
+            this._focusPopoverLink();
             return;
         }
 
@@ -448,6 +482,10 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         this._onZoneStable().subscribe(() => {
             popover.popoverBody._focusFirstTabbableElement(true);
         });
+    }
+
+    private _focusPopoverLink(): void {
+        this._links.find((link) => link.inPopover)?.elementRef.nativeElement.focus();
     }
 
     /** @hidden */

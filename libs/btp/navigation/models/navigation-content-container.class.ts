@@ -2,14 +2,27 @@ import { DestroyRef, Signal, inject, signal } from '@angular/core';
 import { FdbNavigationListItem } from './navigation-list-item.class';
 
 export abstract class FdbNavigationContentContainer {
+    /**
+     * List containing child list items that needs to be rendered. Can be different than `allListItems$`.
+     */
     abstract listItems$: Signal<FdbNavigationListItem[]>;
+    /**
+     * Container placement in Navigation component.
+     */
     abstract placement: 'start' | 'end';
-    /** List items signal. */
+    /**
+     * List containing all child navigation list items.
+     */
     readonly allListItems$ = signal<FdbNavigationListItem[]>([]);
 
     /** @hidden */
     protected readonly _destroyRef = inject(DestroyRef);
 
+    /**
+     * @hidden
+     * List of registered navigation list items.
+     * Used only with data-driven navigation component.
+     */
     private readonly _registeredListItems: FdbNavigationListItem[] = [];
 
     /**

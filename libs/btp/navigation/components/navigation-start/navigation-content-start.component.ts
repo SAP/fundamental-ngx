@@ -134,7 +134,11 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
             });
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Calculates available space to fit the items.
+     * Determines whether to show the "More" button if available space is not enough to fit all list items.
+     */
     private _calculateVisibleItems(): void {
         if (this._calculationInProgress) {
             return;
@@ -169,12 +173,14 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
 
         const hiddenItems: FdbNavigationListItem[] = [];
 
+        // We are going from the bottom to the top and checking whether the available space is enough to fit the items.
         while (availableSpace < 0 && items.length > 0) {
             const item = items.pop();
             if (!item) {
                 continue;
             }
-            hiddenItems.push(item);
+            // Since we are going from the bottom to the top, we need to add item to the list as the first item of the array.
+            hiddenItems.unshift(item);
             availableSpace = availableSpace + item?.marker?.elementRef.nativeElement.clientHeight;
             item.hidden$.set(true);
         }

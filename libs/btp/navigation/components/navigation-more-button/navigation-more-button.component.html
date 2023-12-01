@@ -4,7 +4,7 @@
     class="fd-navigation__item"
     [attr.aria-expanded]="popoverOpen$()"
     aria-level="1"
-    (click)="togglePopover()"
+    (click)="togglePopover(true)"
     (keydown)="_keydownPopoverToggle($event)"
     #trigger
 >
