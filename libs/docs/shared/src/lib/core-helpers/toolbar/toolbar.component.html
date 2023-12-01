@@ -46,6 +46,12 @@
                         <fd-menu-addon [submenuIndicator]="true"></fd-menu-addon>
                     </div>
                 </li>
+                <li fd-menu-item [submenu]="versionSubmenu">
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Versions</span>
+                        <fd-menu-addon [submenuIndicator]="true"></fd-menu-addon>
+                    </div>
+                </li>
             </fd-menu>
             <fd-submenu #themeSubmenu>
                 <ng-template [ngTemplateOutlet]="themesTemplate"></ng-template>
@@ -96,6 +102,15 @@
             >
                 <ng-template [ngTemplateOutlet]="i18nTemplate"></ng-template>
             </fd-menu>
+            <button
+                fd-button
+                fdType="transparent"
+                [fdMenu]="true"
+                [fdMenuTrigger]="versionsMenu"
+                class="fd-shellbar__button fd-shellbar__button--menu fd-docs--toolbar__version fd-docs--theme-menu"
+            >
+                v{{ version.id }}
+            </button>
             <fd-menu #versionsMenu [fillControlMode]="null" placement="bottom-end">
                 <ng-template [ngTemplateOutlet]="versionsTemplate"></ng-template>
             </fd-menu>
@@ -144,7 +159,6 @@
                     ></path>
                 </g>
             </svg>
-            {{ version.id }}
         </a>
     </fd-shellbar-actions>
 </fd-shellbar>
