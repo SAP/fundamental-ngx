@@ -1,33 +1,26 @@
-import { chain, Rule, SchematicContext, SchematicsException, Tree } from '@angular-devkit/schematics';
-import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
+import { AssetPattern, AssetPatternClass } from '@angular-devkit/build-angular/src/builders/browser/schema';
+import { Rule, SchematicContext, SchematicsException, Tree, chain } from '@angular-devkit/schematics';
 import { Schema } from '../models/schema';
+import { getProjectBuildTarget, getWorkspaceDefinition, updateWorkspaceDefinition } from '../utils/workspace';
 
-const angularConfigPath = '/angular.json';
-
-interface AngularAssets {
-    glob: string;
-    input: string;
-    output: string;
-}
-
+/**
+ * Add styles to angular.json
+ * @param options
+ */
 export function addStyles(options: Schema): Rule {
     return chain([addStylesToConfig(options), addAssetsToConfig(options)]);
 }
 
 function addStylesToConfig(options: Schema): Rule {
-    return (tree: Tree, context: SchematicContext) => {
-        const workspaceJson = _getWorkspaceJson(tree);
-
+    return async (tree: Tree, context: SchematicContext) => {
         try {
             const additionalStyles = ['./node_modules/@fundamental-ngx/core/styles/fundamental-ngx-core.css'];
 
             if (options.fonts) {
                 additionalStyles.push('./node_modules/fundamental-styles/dist/fonts/sap_fonts.css');
             }
-
-            let stylesArray: (string | AngularAssets)[] = (
-                workspaceJson!.projects[options.project]!.architect!.build!.options as any
-            )['styles'];
+            const buildTarget = await getProjectBuildTarget(tree, options.project);
+            const stylesArray: AssetPattern[] = (buildTarget.options.styles as any) || [];
             let stylesUpdated = false;
 
             additionalStyles.forEach((additionalStyle) => {
@@ -47,35 +40,32 @@ function addStylesToConfig(options: Schema): Rule {
                 if (options.fonts) {
                     context.logger.info(`✅️ Found duplicate font styles to angular.json.`);
                 }
-
-                return tree;
+                const workspace = await getWorkspaceDefinition(tree);
+                await updateWorkspaceDefinition(tree, workspace);
+                return;
             }
 
-            (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['styles'] = stylesArray;
+            buildTarget.options.styles = stylesArray as any;
         } catch (e) {
             throw new SchematicsException(
                 `Unable to find angular.json project styles. Please manually configure your styles array.`
             );
         }
 
-        tree.overwrite(angularConfigPath, JSON.stringify(workspaceJson, null, 2));
-
         context.logger.info(`✅️ Added styles to angular.json.`);
 
         if (options.fonts) {
             context.logger.info(`✅️ Added font styles to angular.json.`);
         }
-
-        return tree;
     };
 }
 
 function addAssetsToConfig(options: Schema): Rule {
-    return (tree: Tree, context: SchematicContext) => {
-        const workspaceJson = _getWorkspaceJson(tree);
+    return async (tree: Tree, context: SchematicContext) => {
+        const workspaceJson = await getWorkspaceDefinition(tree);
 
         try {
-            const additionalAssets: AngularAssets[] = [
+            const additionalAssets: AssetPatternClass[] = [
                 {
                     glob: '**/css_variables.css',
                     input: './node_modules/@sap-theming/theming-base-content/content/Base/baseLib/',
@@ -87,9 +77,8 @@ function addAssetsToConfig(options: Schema): Rule {
                     output: './assets/fundamental-styles-theming/'
                 }
             ];
-            let assetsArray: (string | AngularAssets)[] = (
-                workspaceJson!.projects[options.project]!.architect!.build!.options as any
-            )['assets'];
+            const buildTarget = await getProjectBuildTarget(tree, options.project);
+            let assetsArray: AssetPattern[] = (buildTarget.options as any)['assets'];
             let assetsUpdated = false;
 
             additionalAssets.forEach((asset) => {
@@ -103,32 +92,20 @@ function addAssetsToConfig(options: Schema): Rule {
 
             if (!assetsUpdated) {
                 context.logger.info(`✅️ Found duplicate assets in angular.json. Skipping.`);
-                return tree;
+                return;
             }
 
-            (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['assets'] = assetsArray;
+            (buildTarget.options as any)['assets'] = assetsArray;
         } catch (e) {
             throw new SchematicsException(
                 `Unable to find angular.json project assets. Please manually configure your assets array.`
             );
         }
 
-        tree.overwrite(angularConfigPath, JSON.stringify(workspaceJson, null, 2));
+        await updateWorkspaceDefinition(tree, workspaceJson!);
 
         context.logger.info(`✅️ Added assets to angular.json.`);
 
-        return tree;
+        return;
     };
-}
-
-function _getWorkspaceJson(tree: Tree): WorkspaceSchema {
-    const workspaceConfig = tree.read(angularConfigPath);
-
-    if (!workspaceConfig) {
-        throw new SchematicsException(
-            `Unable to find angular.json. Please manually configure your assets & styles arrays.`
-        );
-    }
-
-    return JSON.parse(workspaceConfig.toString());
 }

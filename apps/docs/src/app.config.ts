@@ -4,7 +4,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { PreloadAllModules, provideRouter, withHashLocation, withPreloading } from '@angular/router';
 import { provideContentDensity } from '@fundamental-ngx/core/content-density';
 import { provideDialogService } from '@fundamental-ngx/core/dialog';
-import { provideTheming } from '@fundamental-ngx/core/theming';
+import { provideTheming, themingInitializer } from '@fundamental-ngx/core/theming';
 import { DocsService, LERNA_JSON, PACKAGE_JSON, Translations } from '@fundamental-ngx/docs/shared';
 import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
 import { MarkdownModule } from 'ngx-markdown';
@@ -20,6 +20,7 @@ export const appConfig: ApplicationConfig = {
         provideHttpClient(),
         provideRouter(applicationRoutes, withPreloading(PreloadAllModules), withHashLocation()),
         provideTheming({ defaultTheme: 'sap_horizon' }),
+        themingInitializer(),
         provideContentDensity({ storage: 'localStorage' }),
         provideDialogService(),
         DocsService,

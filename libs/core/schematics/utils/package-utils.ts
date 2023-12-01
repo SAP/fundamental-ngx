@@ -1,20 +1,7 @@
-import { Tree, SchematicsException, SchematicContext, Rule } from '@angular-devkit/schematics';
+import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 
-import * as ts from 'typescript';
-import { compare, CompareOperator } from 'compare-versions';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-
-// Gets the ts source file from a path
-export function getSourceFile(host: Tree, path: string): ts.SourceFile {
-    const buffer = host.read(path);
-    if (!buffer) {
-        throw new SchematicsException(`Could not find file for path: ${path}`);
-    }
-
-    const text = buffer.toString('utf-8');
-
-    return ts.createSourceFile(path, text, ts.ScriptTarget.Latest, true);
-}
+import { compare, CompareOperator } from 'compare-versions';
 
 // Get the version of a package name
 export function getPackageVersionFromPackageJson(tree: Tree, name: string): string | null {
