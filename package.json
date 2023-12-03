@@ -145,7 +145,7 @@
         "jest-environment-jsdom": "29.7.0",
         "jest-extended": "4.0.2",
         "jest-preset-angular": "13.1.4",
-        "lerna": "7.4.2",
+        "lerna": "8.0.0",
         "lint-staged": "15.1.0",
         "nan": "2.18.0",
         "ng-packagr": "17.0.2",
