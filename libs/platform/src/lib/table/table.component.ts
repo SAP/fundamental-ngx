@@ -1779,7 +1779,8 @@ export class TableComponent<T = any>
                 this.hasChildrenKey,
                 this.selectedKey,
                 this.expandedStateKey,
-                this.rowNavigatable
+                this.rowNavigatable,
+                this.enableTristateMode
             );
         }
         return [];
