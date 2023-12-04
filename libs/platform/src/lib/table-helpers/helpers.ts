@@ -148,7 +148,8 @@ export function convertTreeObjectsToTableRows<T>(
     hasChildrenKey: string,
     selectedKey: string,
     expandedStateKey: string,
-    rowNavigatable: string | boolean
+    rowNavigatable: string | boolean,
+    enableTristateMode = false
 ): TableRow<T>[] {
     const rows: TableRow<T>[] = [];
     const selectedRowsMap = getSelectionStatusByRowValue(source, selectionMode, tableRows, rowComparator);
@@ -185,7 +186,8 @@ export function convertTreeObjectsToTableRows<T>(
                 hasChildrenKey,
                 selectedKey,
                 expandedStateKey,
-                rowNavigatable
+                rowNavigatable,
+                enableTristateMode
             );
 
             children.forEach((c) => {
@@ -214,6 +216,9 @@ export function convertTreeObjectsToTableRows<T>(
                 const selectedSome = selectedChildren.length > 0;
                 if (r.checked) {
                     applySelectionToChildren(rows, r, [], []);
+                    return;
+                }
+                if (!enableTristateMode) {
                     return;
                 }
                 if (selectedAll) {
