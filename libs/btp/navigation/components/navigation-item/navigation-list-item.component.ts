@@ -320,6 +320,10 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         );
 
         this._parentNavigationListItemDirective?.registerItem(this);
+
+        this.navigation.closeAllPopups.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            this.popoverOpen$.set(false);
+        });
     }
 
     /** @hidden */

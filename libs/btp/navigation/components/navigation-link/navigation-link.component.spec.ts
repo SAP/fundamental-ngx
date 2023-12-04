@@ -5,12 +5,15 @@ import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { signal } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { IconComponent } from '@fundamental-ngx/core/icon';
+import { Subject } from 'rxjs';
 
 class NavigationComponentMock extends FdbNavigation {
     classList$ = signal([]);
     isSnapped$ = signal(false);
     showMoreButton$ = signal(null);
     _navigationItemRenderer = signal(null);
+    closeAllPopups = new Subject<void>();
+    closePopups(): void {}
     setActiveItem(): void {}
     getActiveItem(): FdbNavigationListItem | null {
         return null;

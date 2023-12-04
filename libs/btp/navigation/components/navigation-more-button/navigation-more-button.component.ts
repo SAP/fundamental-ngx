@@ -3,6 +3,7 @@ import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
+    DestroyRef,
     Input,
     TemplateRef,
     ViewChild,
@@ -11,6 +12,7 @@ import {
     inject,
     signal
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
@@ -105,6 +107,10 @@ export class NavigationMoreButtonComponent {
                 });
             }
             this._popoverClicked = false;
+        });
+
+        this._navigation.closeAllPopups.pipe(takeUntilDestroyed(inject(DestroyRef))).subscribe(() => {
+            this.popoverOpen$.set(false);
         });
     }
 

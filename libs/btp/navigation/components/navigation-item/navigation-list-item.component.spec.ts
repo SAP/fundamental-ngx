@@ -6,8 +6,11 @@ import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
 import { NavigationListItemComponent } from './navigation-list-item.component';
+import { Subject } from 'rxjs';
 
 class NavigationComponentMock extends FdbNavigation {
+    closeAllPopups = new Subject<void>();
+    closePopups(): void {}
     classList$ = signal([]);
     isSnapped$ = signal(false);
     showMoreButton$ = signal(null);

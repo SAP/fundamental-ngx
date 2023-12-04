@@ -119,6 +119,9 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
     /** @hidden */
     @HostListener('click')
     private _clickHandler(): void {
+        if (this.inPopover || !this._listItemComponent?.isVisible$() || this._listItemComponent?.isOverflow$()) {
+            this._navigation.closePopups();
+        }
         // Ignore click if link has URL applied to it.
         if (this.routerLink) {
             return;

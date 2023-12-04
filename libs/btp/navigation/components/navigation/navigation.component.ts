@@ -25,7 +25,7 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { CssClassBuilder, KeyUtil, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { map, of } from 'rxjs';
+import { Subject, map, of } from 'rxjs';
 import { NavigationListDataSourceDirective } from '../../directives/navigation-list-data-source.directive';
 import {
     NavigationListItemDirective,
@@ -144,6 +144,9 @@ export class NavigationComponent
     /** @hidden */
     readonly _navigationItemRenderer = signal<NavigationListItemRefDirective | null>(null);
 
+    /** Stream notifies to close all popups in child list items. */
+    readonly closeAllPopups = new Subject<void>();
+
     /**
      * @hidden
      * Data source directive.
@@ -248,6 +251,11 @@ export class NavigationComponent
      */
     setActiveItem(item: FdbNavigationListItem): void {
         this._keyManager.setActiveItem(item);
+    }
+
+    /** Notifies child list items that all popups should be closed. */
+    closePopups(): void {
+        this.closeAllPopups.next();
     }
 
     /**
