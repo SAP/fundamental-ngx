@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.5...v0.48.0-rc.6) (2023-12-04)
+
+
+### Bug Fixes
+
+* **platform:** do not select parent row if tristate is disabled ([#11046](https://github.com/SAP/fundamental-ngx/issues/11046)) ([889e9b2](https://github.com/SAP/fundamental-ngx/commit/889e9b244319c1a6ef9414e244353f628d388293))
+
+
+
+
+
 # [0.48.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.4...v0.48.0-rc.5) (2023-12-01)
 
 
