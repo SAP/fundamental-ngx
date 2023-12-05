@@ -403,7 +403,9 @@ export class MenuComponent
                 );
             }
         });
-        this.disableScrollbar = isSubmenu;
+        if (!this.disableScrollbar && isSubmenu) {
+            this.disableScrollbar = isSubmenu;
+        }
     }
 
     /**

@@ -149,4 +149,12 @@ describe('MenuComponent', () => {
         expect(destroyMobileSpy).toHaveBeenCalled();
         expect(menuServiceDestroySpy).toHaveBeenCalled();
     });
+
+    it('disableScrollbar should be false by default, but it should allow the developer to disable the scrollbar when there is no submenu', () => {
+        menu.ngAfterContentInit();
+        expect(menu.disableScrollbar).toBeFalsy();
+        menu.disableScrollbar = true;
+        menu.ngAfterContentInit();
+        expect(menu.disableScrollbar).toBeTruthy();
+    });
 });
