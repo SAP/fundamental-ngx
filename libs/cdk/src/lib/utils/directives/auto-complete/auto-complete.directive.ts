@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, NgZone, Output } from '@angular/core';
 import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { KeyUtil } from '../../functions/key-util';
 import {
@@ -7,6 +7,8 @@ import {
     FD_DEPRECATED_DIRECTIVE_SELECTOR,
     getDeprecatedModel
 } from '../../deprecated-selector.class';
+import { DestroyedService } from '../../services';
+import { fromEvent, switchMap, take, takeUntil, withLatestFrom } from 'rxjs';
 
 export interface AutoCompleteEvent {
     term: string;
@@ -18,6 +20,7 @@ export interface AutoCompleteEvent {
     selector: '[fdAutoComplete], [fd-auto-complete]',
     standalone: true,
     providers: [
+        DestroyedService,
         {
             provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
             useValue: getDeprecatedModel('[fdkAutoComplete]', '[fdAutoComplete], [fd-auto-complete]')
@@ -78,11 +81,35 @@ export class AutoCompleteDirective {
     private lastKeyUpEvent: KeyboardEvent;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    // eslint-disable-next-line @typescript-eslint/member-ordering
+    constructor(
+        private readonly _elementRef: ElementRef,
+        private readonly _zone: NgZone,
+        private readonly _destroy$: DestroyedService
+    ) {
+        /**
+         * Fixes #10710
+         * WIth chinese characters inputText property update was triggered after the keyup event trigger.
+         * By ensuring that we set all properties we can proceed with stable data.
+         */
+        this._zone.runOutsideAngular(() => {
+            const keyupEvent = fromEvent<KeyboardEvent>(this._elementRef.nativeElement, 'keyup');
+
+            keyupEvent
+                .pipe(
+                    switchMap(() => this._zone.onStable.pipe(take(1))),
+                    withLatestFrom(keyupEvent),
+                    takeUntil(this._destroy$)
+                )
+                .subscribe(([evt]) => {
+                    this._handleKeyboardEvent(evt);
+                    console.log(this.inputText);
+                });
+        });
+    }
 
     /** @hidden */
-    @HostListener('keyup', ['$event'])
-    handleKeyboardEvent(event: KeyboardEvent): void {
+    _handleKeyboardEvent(event: KeyboardEvent): void {
         if (this.enable) {
             if (KeyUtil.isKeyCode(event, this._stopKeys)) {
                 this._elementRef.nativeElement.value = this.inputText;
