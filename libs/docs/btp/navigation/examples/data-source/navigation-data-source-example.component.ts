@@ -123,7 +123,6 @@ export class NavigationDataSourceExampleComponent {
         },
         {
             title: 'Favourites',
-            icon: 'settings',
             placement: 'start',
             group: true,
             expanded: true,

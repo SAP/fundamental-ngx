@@ -17,7 +17,7 @@
         [focusTrapped]="true"
         [noArrow]="false"
         additionalBodyClass="fd-navigation__list-container fd-navigation__list-container--menu"
-        [placement]="'right-start'"
+        [placement]="_popoverPlacement$()"
     >
         <fd-popover-body [ngClass]="_navigation.classList$()">
             <ul

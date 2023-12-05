@@ -49,7 +49,7 @@
             [focusAutoCapture]="true"
             [restoreFocusOnClose]="false"
             [focusTrapped]="true"
-            [placement]="'right-start'"
+            [placement]="_popoverPlacement$()"
         >
             <fd-popover-body [ngClass]="navigation.classList$()">
                 <ng-template

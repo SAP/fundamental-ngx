@@ -23,13 +23,14 @@ import {
     inject,
     signal
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { NestedButtonDirective } from '@fundamental-ngx/btp/button';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { Observable, asyncScheduler, filter, observeOn, startWith, take } from 'rxjs';
+import { Placement } from '@fundamental-ngx/core/shared';
+import { Observable, asyncScheduler, filter, observeOn, of, startWith, take } from 'rxjs';
 import { NavigationListItemDirective } from '../../directives/navigation-list-item-ref.directive';
 import { FdbNavigationContentContainer } from '../../models/navigation-content-container.class';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
@@ -178,7 +179,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         if (this.expandedAttr$()) {
             return 'slim-arrow-down';
         }
-        return this._rtl?.rtl.value ? 'slim-arrow-left' : 'slim-arrow-right';
+        return this._rtl$() ? 'slim-arrow-left' : 'slim-arrow-right';
     });
 
     /** List item placement container. */
@@ -232,6 +233,12 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             .join(' ')
     );
 
+    /**
+     * @hidden
+     * Popover position. Changes based on rtl value.
+     */
+    readonly _popoverPlacement$ = computed<Placement>(() => (this._rtl$() ? 'left-start' : 'right-start'));
+
     /** Optional parent list component. */
     readonly parentListItemComponent = inject(FdbNavigationListItemCmp, {
         optional: true,
@@ -270,9 +277,11 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     private readonly _zone = inject(NgZone);
 
     /** @hidden */
-    private readonly _rtl = inject(RtlService, {
-        optional: true
-    });
+    private readonly _rtl$ = toSignal(
+        inject(RtlService, {
+            optional: true
+        })?.rtl || of(false)
+    );
 
     /**
      * @hidden
@@ -423,7 +432,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             return;
         }
 
-        const isGoBack = KeyUtil.isKeyCode(event, this._rtl?.rtl.value ? RIGHT_ARROW : LEFT_ARROW);
+        const isGoBack = KeyUtil.isKeyCode(event, this._rtl$() ? RIGHT_ARROW : LEFT_ARROW);
 
         if (!isGoBack) {
             return;

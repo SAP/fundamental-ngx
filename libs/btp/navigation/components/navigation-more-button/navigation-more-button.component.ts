@@ -8,13 +8,16 @@ import {
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
+    computed,
     effect,
     inject,
     signal
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { Placement } from '@fundamental-ngx/core/shared';
+import { of } from 'rxjs';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
@@ -91,12 +94,21 @@ export class NavigationMoreButtonComponent {
      */
     readonly link$ = signal<Nullable<FdbNavigationItemLink>>(null);
 
+    /**
+     * @hidden
+     * Popover position. Changes based on rtl value.
+     */
+    readonly _popoverPlacement$ = computed<Placement>(() => (this._rtl$() ? 'left-start' : 'right-start'));
+
+    /** @hidden */
     private _popoverClicked = false;
 
     /** @hidden */
-    private readonly _rtl = inject(RtlService, {
-        optional: true
-    });
+    private readonly _rtl$ = toSignal(
+        inject(RtlService, {
+            optional: true
+        })?.rtl || of(false)
+    );
 
     /** @hidden */
     constructor() {
@@ -159,7 +171,7 @@ export class NavigationMoreButtonComponent {
         if (!KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
             return;
         }
-        const isRtl = this._rtl?.rtl.value || false;
+        const isRtl = this._rtl$() || false;
 
         const isOpenAction = KeyUtil.isKeyCode(event, isRtl ? LEFT_ARROW : RIGHT_ARROW);
 
