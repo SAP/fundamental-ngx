@@ -1,5 +1,7 @@
 import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { DestroyRef, Directive, ElementRef, EventEmitter, Input, NgZone, Output, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { fromEvent, switchMap, take, withLatestFrom } from 'rxjs';
 import { KeyUtil } from '../../functions/key-util';
 
 export interface AutoCompleteEvent {
@@ -59,11 +61,36 @@ export class AutoCompleteDirective {
     private lastKeyUpEvent: KeyboardEvent;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    private readonly _elementRef = inject(ElementRef);
+
+    private readonly _zone = inject(NgZone);
 
     /** @hidden */
-    @HostListener('keyup', ['$event'])
-    handleKeyboardEvent(event: KeyboardEvent): void {
+    // eslint-disable-next-line @typescript-eslint/member-ordering
+    constructor() {
+        /**
+         * Fixes #10710
+         * WIth chinese characters inputText property update was triggered after the keyup event trigger.
+         * By ensuring that we set all properties we can proceed with stable data.
+         */
+        this._zone.runOutsideAngular(() => {
+            const keyupEvent = fromEvent<KeyboardEvent>(this._elementRef.nativeElement, 'keyup');
+
+            keyupEvent
+                .pipe(
+                    switchMap(() => this._zone.onStable.pipe(take(1))),
+                    withLatestFrom(keyupEvent),
+                    takeUntilDestroyed(inject(DestroyRef))
+                )
+                .subscribe(([evt]) => {
+                    this._handleKeyboardEvent(evt);
+                    console.log(this.inputText);
+                });
+        });
+    }
+
+    /** @hidden */
+    _handleKeyboardEvent(event: KeyboardEvent): void {
         if (this.enable) {
             if (KeyUtil.isKeyCode(event, this._stopKeys)) {
                 this._elementRef.nativeElement.value = this.inputText;
