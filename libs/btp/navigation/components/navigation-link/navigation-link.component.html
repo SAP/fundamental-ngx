@@ -1,0 +1,30 @@
+@if (glyph) {
+    <fd-icon [glyph]="glyph" class="fd-navigation__icon" [attr.role]="'presentation'" [ariaHidden]="true"></fd-icon>
+}
+<span class="fd-navigation__text">
+    <ng-content></ng-content>
+</span>
+@if (external) {
+    <span
+        class="fd-navigation__external-link-indicator"
+        role="presentation"
+        aria-hidden="true"
+        aria-label="external link indicator"
+    ></span>
+}
+<span
+    class="fd-navigation__selection-indicator"
+    role="presentation"
+    aria-hidden="true"
+    aria-label="selection indicator"
+>
+</span>
+@if (_listItemComponent?.hasChildren$() && !inPopover && !routerLink) {
+    <span
+        class="fd-navigation__has-children-indicator"
+        role="presentation"
+        aria-hidden="true"
+        aria-label="has children indicator, expanded"
+    >
+    </span>
+}

@@ -55,8 +55,8 @@ $block: fd-navigation;
         }
     }
 
-    .fd-navigation-list-item--home-without-separator {
-        margin-bottom: 0.09rem;
+    .fd-navigation__list-item--home-without-separator {
+        margin-bottom: 0.125rem;
     }
 }
 
@@ -114,4 +114,10 @@ $block: fd-navigation;
 
 .fd-popover__body.fd-navigation__list-container {
     display: block;
+}
+
+.fd-navigation__item {
+    .fd-popover-custom {
+        max-width: none;
+    }
 }

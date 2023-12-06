@@ -1,30 +1,20 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import {
-    NavigationComponent,
-    NavigationContentEndComponent,
-    NavigationContentStartComponent,
-    NavigationHomeDirective,
-    NavigationLinkComponent,
-    NavigationListComponent,
-    NavigationListItemComponent
-} from '@fundamental-ngx/btp/navigation';
+import { FDB_NAVIGATION, FdbNavigationState } from '@fundamental-ngx/btp/navigation';
+import { FdbViewMode } from '@fundamental-ngx/btp/shared';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 
 @Component({
     selector: 'fdb-navigation-parent-item-link',
     standalone: true,
-    imports: [
-        NavigationComponent,
-        NavigationListComponent,
-        NavigationListItemComponent,
-        NavigationLinkComponent,
-        RouterLink,
-        NavigationHomeDirective,
-        NavigationContentStartComponent,
-        NavigationContentEndComponent
-    ],
+    imports: [RouterLink, FormsModule, ButtonComponent, SegmentedButtonComponent, FDB_NAVIGATION],
     templateUrl: './navigation-parent-item-link.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NavigationParentItemLinkComponent {}
+export class NavigationParentItemLinkComponent {
+    state: FdbNavigationState = 'expanded';
+    mode: FdbViewMode = '';
+}
