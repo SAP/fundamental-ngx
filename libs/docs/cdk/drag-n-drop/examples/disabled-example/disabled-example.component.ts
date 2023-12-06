@@ -20,7 +20,7 @@ import { delay, of } from 'rxjs';
     templateUrl: './disabled-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    styleUrls: ['../../../../../cdk/src/lib/utils/drag-and-drop/drag-and-drop.scss'],
+    styleUrls: ['../../../../../cdk/utils/drag-and-drop/drag-and-drop.scss'],
     styles: [
         `
             .fdk-sortable-list__item {

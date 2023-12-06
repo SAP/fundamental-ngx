@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "$id": "SyncVersions",
+    "title": "",
+    "type": "object",
+    "properties": {
+        "project": {
+            "type": "string",
+            "description": "",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            },
+            "x-prompt": "Which project do you want to sync versions for?"
+        },
+        "files": {
+            "type": "array",
+            "description": "Which files do you want to sync versions for?"
+        }
+    },
+    "required": ["project"]
+}

@@ -6,9 +6,12 @@
     "prefix": "fundamental-ngx",
     "targets": {
         "prepare": {
-            "executor": "@fundamental-ngx/nx-plugin:prepare-library",
+            "executor": "nx:run-commands",
             "options": {
-                "distPath": "dist/libs/datetime-adapter"
+                "commands": [
+                    "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=datetime-adapter --verbose",
+                    "yarn pack --cwd dist/libs/datetime-adapter"
+                ]
             }
         },
         "compile-typedoc": {

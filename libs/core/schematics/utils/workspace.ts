@@ -5,17 +5,33 @@ import { askQuestion } from '@angular/cli/src/utilities/prompt';
 import { WorkspaceDefinition, writeWorkspace } from '@schematics/angular/utility';
 import { getWorkspace } from '@schematics/angular/utility/workspace';
 
-let _workspace: WorkspaceDefinition;
+let _workspace: WorkspaceDefinition | undefined;
 
 const buildTargets: Record<string, string> = {};
 
+/**
+ * Clears the cached workspace.
+ */
+export function clearWorkspaceCache(): void {
+    _workspace = undefined;
+}
+
+/**
+ * Gets the cached workspace definition.
+ * @param tree
+ */
 export async function getWorkspaceDefinition(tree: Tree): Promise<WorkspaceDefinition> {
     if (!_workspace) {
         _workspace = await getWorkspace(tree);
     }
-    return _workspace;
+    return _workspace as WorkspaceDefinition;
 }
 
+/**
+ * Gets the project definition for the given project name.
+ * @param tree
+ * @param projectName
+ */
 export async function getProjectDefinition(tree: Tree, projectName: string): Promise<ProjectDefinition> {
     const workspace = await getWorkspaceDefinition(tree);
     const project = workspace.projects.get(projectName);
@@ -25,11 +41,16 @@ export async function getProjectDefinition(tree: Tree, projectName: string): Pro
     return project;
 }
 
+/**
+ * Gets the build target for the given project name.
+ * @param tree
+ * @param projectName
+ */
 export async function getProjectBuildTarget(tree: Tree, projectName: string): Promise<TargetDefinition> {
     const projectDefinition = await getProjectDefinition(tree, projectName);
     if (!buildTargets[projectName]) {
         buildTargets[projectName] = 'build';
-        let buildTarget = projectDefinition.targets.get(buildTargets[projectName]);
+        const buildTarget = projectDefinition.targets.get(buildTargets[projectName]);
         if (!buildTarget) {
             buildTargets[projectName] = (await askQuestion(
                 "Please select your project's build target",
@@ -42,9 +63,15 @@ export async function getProjectBuildTarget(tree: Tree, projectName: string): Pr
             )) as string;
         }
     }
-    return projectDefinition.targets.get(buildTargets[projectName]);
+    return projectDefinition.targets.get(buildTargets[projectName]) as TargetDefinition;
 }
 
+/**
+ * Updates the project definition for the given project name.
+ * @param tree
+ * @param projectName
+ * @param updatedProject
+ */
 export async function updateProjectDefinition(
     tree: Tree,
     projectName: string,
@@ -55,7 +82,12 @@ export async function updateProjectDefinition(
     await writeWorkspace(tree, workspace);
 }
 
+/**
+ * Updates the workspace definition.
+ * @param tree
+ * @param updatedWorkspace
+ */
 export async function updateWorkspaceDefinition(tree: Tree, updatedWorkspace: WorkspaceDefinition): Promise<void> {
-    await writeWorkspace(tree, _workspace);
+    await writeWorkspace(tree, _workspace as WorkspaceDefinition);
     _workspace = updatedWorkspace;
 }

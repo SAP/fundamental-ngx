@@ -12,6 +12,11 @@
             "factory": "./src/generators/migrate-to-jest/generator",
             "schema": "./src/generators/migrate-to-jest/schema.json",
             "description": "migrate-to-jest generator"
+        },
+        "sync-versions": {
+            "factory": "./src/generators/sync-versions/generator",
+            "schema": "./src/generators/sync-versions/schema.json",
+            "description": "Synchronizes the versions in output files"
         }
     }
 }

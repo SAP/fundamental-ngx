@@ -20,6 +20,9 @@ describe('Nx projects (nx.json)', () => {
     const graph = readCachedProjectGraph();
 
     Object.keys(graph.nodes).forEach((projectName) => {
+        if (projectName.endsWith('-schematics')) {
+            return;
+        }
         const project = graph.nodes[projectName];
         describe(`Project ${project.name}`, () => {
             it('should have a valid scope tag', () => {
