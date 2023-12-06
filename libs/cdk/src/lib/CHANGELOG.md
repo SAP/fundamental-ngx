@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.19](https://github.com/SAP/fundamental-ngx/compare/v0.43.18...v0.43.19) (2023-12-06)
+
+
+### Bug Fixes
+
+* **cdk:** ensure stable zone before applying autocomplete ([#11052](https://github.com/SAP/fundamental-ngx/issues/11052)) ([fe6ea50](https://github.com/SAP/fundamental-ngx/commit/fe6ea50b182b3099968626944d84023337840afb))
+
+
+
+
+
 ## [0.43.18](https://github.com/SAP/fundamental-ngx/compare/v0.43.17...v0.43.18) (2023-11-28)
 
 
