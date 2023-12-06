@@ -1,7 +1,8 @@
 import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { DestroyRef, Directive, ElementRef, EventEmitter, Input, NgZone, Output, inject } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, NgZone, Output, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { fromEvent, switchMap, take, withLatestFrom } from 'rxjs';
+import { fromEvent, map, switchMap } from 'rxjs';
+import { first } from 'rxjs/operators';
 import { KeyUtil } from '../../functions/key-util';
 
 export interface AutoCompleteEvent {
@@ -70,22 +71,22 @@ export class AutoCompleteDirective {
     constructor() {
         /**
          * Fixes #10710
-         * WIth chinese characters inputText property update was triggered after the keyup event trigger.
+         * With chinese characters inputText property update was triggered after the keyup event trigger.
          * By ensuring that we set all properties we can proceed with stable data.
          */
         this._zone.runOutsideAngular(() => {
             const keyupEvent = fromEvent<KeyboardEvent>(this._elementRef.nativeElement, 'keyup');
-
             keyupEvent
                 .pipe(
-                    switchMap(() => this._zone.onStable.pipe(take(1))),
-                    withLatestFrom(keyupEvent),
-                    takeUntilDestroyed(inject(DestroyRef))
+                    switchMap((evt) =>
+                        this._zone.onStable.pipe(
+                            first(),
+                            map(() => evt)
+                        )
+                    ),
+                    takeUntilDestroyed()
                 )
-                .subscribe(([evt]) => {
-                    this._handleKeyboardEvent(evt);
-                    console.log(this.inputText);
-                });
+                .subscribe((evt) => this._handleKeyboardEvent(evt));
         });
     }
 
