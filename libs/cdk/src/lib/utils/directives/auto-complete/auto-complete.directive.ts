@@ -8,7 +8,7 @@ import {
     getDeprecatedModel
 } from '../../deprecated-selector.class';
 import { DestroyedService } from '../../services';
-import { fromEvent, switchMap, take, takeUntil, withLatestFrom } from 'rxjs';
+import { first, fromEvent, map, switchMap, takeUntil } from 'rxjs';
 
 export interface AutoCompleteEvent {
     term: string;
@@ -97,11 +97,15 @@ export class AutoCompleteDirective {
 
             keyupEvent
                 .pipe(
-                    switchMap(() => this._zone.onStable.pipe(take(1))),
-                    withLatestFrom(keyupEvent),
+                    switchMap((evt) =>
+                        this._zone.onStable.pipe(
+                            first(),
+                            map(() => evt)
+                        )
+                    ),
                     takeUntil(this._destroy$)
                 )
-                .subscribe(([evt]) => {
+                .subscribe((evt) => {
                     this._handleKeyboardEvent(evt);
                     console.log(this.inputText);
                 });
