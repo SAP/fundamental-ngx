@@ -96,7 +96,8 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
 
     /** @hidden */
     private readonly _routerLinkActive = inject(RouterLinkActive, {
-        optional: true
+        optional: true,
+        self: true
     });
 
     /** @hidden */

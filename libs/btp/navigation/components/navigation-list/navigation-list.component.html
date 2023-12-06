@@ -2,6 +2,10 @@
     <li [class]="item.class$()">
         <ng-template [ngTemplateOutlet]="item.renderer$()"></ng-template>
     </li>
+    <!-- Add separator after home list item. -->
+    @if (item.home) {
+        <li class="fd-navigation__list-item fd-navigation__list-item--separator"></li>
+    }
 }
 <!-- Keep this for "More" button -->
 <ng-content></ng-content>

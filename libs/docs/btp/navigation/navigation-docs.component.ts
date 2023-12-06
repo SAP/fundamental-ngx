@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
-import { TableModule } from '@fundamental-ngx/core/table';
 import {
     CodeExampleComponent,
     ComponentExampleComponent,
@@ -13,6 +11,7 @@ import {
 import { NavigationBasicExampleComponent } from './examples/basic-example/navigation-basic-example.component';
 import { NavigationDataSourceExampleComponent } from './examples/data-source/navigation-data-source-example.component';
 import { NavigationParentItemLinkComponent } from './examples/parent-item-link/navigation-parent-item-link.component';
+import { NavigationSelectionExampleComponent } from './examples/selection-example/navigation-selection-example.component';
 
 @Component({
     templateUrl: './navigation-docs.component.html',
@@ -20,14 +19,13 @@ import { NavigationParentItemLinkComponent } from './examples/parent-item-link/n
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,
-        FocusableGridDirective,
-        TableModule,
         ComponentExampleComponent,
         CodeExampleComponent,
         NavigationBasicExampleComponent,
         SeparatorComponent,
         NavigationParentItemLinkComponent,
-        NavigationDataSourceExampleComponent
+        NavigationDataSourceExampleComponent,
+        NavigationSelectionExampleComponent
     ]
 })
 export class NavigationDocsComponent {
@@ -36,5 +34,26 @@ export class NavigationDocsComponent {
             component: 'NavigationBasicExampleComponent'
         }),
         getExampleFile('basic-example/navigation-basic-example.component.html')
+    ];
+
+    dataSourceExample: ExampleFile[] = [
+        getExampleFile('data-source/navigation-data-source-example.component.ts', {
+            component: 'NavigationDataSourceExampleComponent'
+        }),
+        getExampleFile('basic-example/navigation-data-source-example.component.html')
+    ];
+
+    selectionExample: ExampleFile[] = [
+        getExampleFile('selection-example/navigation-selection-example.component.ts', {
+            component: 'NavigationSelectionExampleComponent'
+        }),
+        getExampleFile('selection-example/navigation-selection-example.component.html')
+    ];
+
+    parentItemLinkExample: ExampleFile[] = [
+        getExampleFile('parent-item-link/navigation-parent-item-link.component.ts', {
+            component: 'NavigationParentItemLinkComponent'
+        }),
+        getExampleFile('parent-item-link/navigation-parent-item-link.component.html')
     ];
 }

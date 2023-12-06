@@ -147,6 +147,16 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         return this.expanded$();
     }
 
+    /** Whether the item should be marked as selected. */
+    @Input({ transform: coerceBooleanProperty })
+    set selected(selected: boolean) {
+        this.selected$.set(selected);
+    }
+
+    get selected(): boolean {
+        return this.selected$();
+    }
+
     /** @hidden */
     @ContentChildren(FdbNavigationListItem, { descendants: false })
     listItems: QueryList<FdbNavigationListItem>;
@@ -227,11 +237,14 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             this._class$(),
             this._separator$() ? `${LIST_ITEM_CLASS}--separator` : '',
             this._spacer$() ? `${LIST_ITEM_CLASS}--spacer` : '',
-            this._home$() ? `${LIST_ITEM_CLASS}--home ${LIST_ITEM_CLASS}--home-without-separator` : ''
+            this._home$() ? `${LIST_ITEM_CLASS}--home` : ''
         ]
             .filter((k) => !!k)
             .join(' ')
     );
+
+    /** Selected Signal. */
+    readonly selected$ = signal(false);
 
     /**
      * @hidden

@@ -95,7 +95,7 @@
             <!-- If opener link itself is active, project aria-selected attribute to link repeater too. -->
             <div
                 class="fd-navigation__item fd-navigation__item--title fd-navigation__item--child"
-                [attr.aria-selected]="link$()?.isActive$()"
+                [attr.aria-selected]="link$()?.isActive$() || selected$()"
             >
                 <ng-template
                     [ngTemplateOutlet]="linkRenderer"

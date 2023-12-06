@@ -13,12 +13,14 @@ export abstract class FdbNavigationListItem implements FocusableOption {
     abstract type: 'item' | 'showMore';
     abstract separator: boolean;
     abstract spacer: boolean;
+    abstract home: boolean;
     abstract isVisible$: Signal<boolean>;
     abstract skipNavigation: boolean;
     abstract placementContainer?: FdbNavigationContentContainer;
     abstract parentListItemComponent: FdbNavigationListItemCmp | null;
     abstract parentListItem: FdbNavigationListItem | null;
     abstract class$: Signal<string>;
+    abstract selected$: Signal<boolean>;
     abstract focus(origin?: FocusOrigin | undefined): void;
     abstract toggleExpanded(): void;
     abstract keyboardExpanded(shouldExpand: boolean): void;
@@ -85,6 +87,7 @@ export abstract class FdbNavigationListItem implements FocusableOption {
      */
     readonly isActiveAttr$ = computed(
         () =>
+            this.selected$() ||
             this.link$()?.isActive$() ||
             (this.navigation.isSnapped$() && this.listItems$().some((item) => item.isActiveAttr$()))
     );

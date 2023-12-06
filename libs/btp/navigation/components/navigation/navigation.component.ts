@@ -217,6 +217,7 @@ export class NavigationComponent
 
     /** @hidden */
     ngOnInit(): void {
+        this.buildComponentCssClass();
         this._dataSourceDirective?.dataSourceProvider?.match();
     }
 
