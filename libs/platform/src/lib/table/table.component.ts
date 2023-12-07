@@ -1290,6 +1290,17 @@ export class TableComponent<T = any>
         tableEl.rows[position.rowIndex].cells[position.colIndex].focus();
     }
 
+    /**
+     * Clears the array of table rows. Triggered when new data source is applied.
+     */
+    clearTableRows(): void {
+        this._tableRows = [];
+        this._tableRowsVisible = [];
+        this._tableRowsInViewPortPlaceholder = [];
+        this._newTableRows = [];
+        this._dataSourceTableRows = [];
+    }
+
     // Private API
 
     /** @hidden */
@@ -1544,15 +1555,6 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _listenToTableRowsPipe(): void {
-        this._subscriptions.add(
-            /*
-             * Reset table when the data source is changed,
-             * because new data source can have different set of data
-             */
-            this._dataSourceDirective.dataSourceChanged.subscribe(() => {
-                this._setTableRows([]);
-            })
-        );
         this._subscriptions.add(
             this._dataSourceDirective.items$
                 .pipe(
