@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.10...v0.48.0-rc.11) (2023-12-07)
+
+
+### Bug Fixes
+
+* **platform:** reset table rows before new rows emitted ([#11058](https://github.com/SAP/fundamental-ngx/issues/11058)) ([92a534b](https://github.com/SAP/fundamental-ngx/commit/92a534bdcfa1659d0d79f564d641504bf8f4dabe))
+
+
+
+
+
 # [0.48.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.9...v0.48.0-rc.10) (2023-12-06)
 
 **Note:** Version bump only for package fundamental-ngx
