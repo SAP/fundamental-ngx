@@ -171,6 +171,8 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
 
     abstract refreshDndList(): void;
 
+    abstract clearTableRows(): void;
+
     /** Toolbar Sort Settings button click event */
     readonly openTableSortSettings: EventEmitter<void> = new EventEmitter<void>();
 
