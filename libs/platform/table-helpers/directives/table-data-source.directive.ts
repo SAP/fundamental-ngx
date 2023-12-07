@@ -233,5 +233,6 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
 
         this._tableDsSubscription?.unsubscribe();
         this._tableDsSubscription = null;
+        this._table.clearTableRows();
     }
 }
