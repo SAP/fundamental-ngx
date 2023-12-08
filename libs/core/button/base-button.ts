@@ -22,7 +22,7 @@ export class BaseButton {
     /** @hidden */
     @HostBinding('class.fd-button--toggled')
     @HostBinding('attr.aria-pressed')
-    _toggled: boolean;
+    _toggled: Nullable<boolean>;
 
     /** @hidden */
     _disabled = false;
@@ -78,9 +78,11 @@ export class BaseButton {
     /** Whether button is in toggled state. */
     @Input()
     set toggled(value: BooleanInput) {
-        this._toggled = coerceBooleanProperty(value);
+        if (value !== undefined && value !== null) {
+            this._toggled = coerceBooleanProperty(value);
+        }
     }
-    get toggled(): boolean {
+    get toggled(): Nullable<boolean> {
         return this._toggled;
     }
 
