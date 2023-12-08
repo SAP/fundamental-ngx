@@ -38,7 +38,10 @@ export class SplitterSplitPaneComponent implements OnInit, AfterViewInit, OnDest
     @Input()
     set size(size: string) {
         this._size = size;
-        this._actualSize = this._size;
+        if (this._actualSize !== this._size) {
+            this._actualSize = this._size;
+            this.sizeChange.emit();
+        }
     }
 
     get size(): string {
@@ -60,6 +63,10 @@ export class SplitterSplitPaneComponent implements OnInit, AfterViewInit, OnDest
     /** Event emitted when the pane appears on/disappears out of canvas. */
     @Output()
     readonly toggleOnCanvas = new EventEmitter<boolean>();
+
+    /** Event emitted when the size is changed via the input property. */
+    @Output()
+    readonly sizeChange = new EventEmitter<void>();
 
     /** @hidden */
     @ViewChild(TemplateRef, { static: true })
