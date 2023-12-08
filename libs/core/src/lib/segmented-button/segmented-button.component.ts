@@ -16,7 +16,7 @@ import {
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { filter, observeOn, startWith, takeUntil, tap } from 'rxjs/operators';
 import { Subject, merge, fromEvent, asyncScheduler } from 'rxjs';
-import { DestroyedService, KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { DestroyedService, KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -241,7 +241,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     }
 
     /** @hidden */
-    private _isButtonSelected(buttonComponent: ButtonComponent): boolean {
+    private _isButtonSelected(buttonComponent: ButtonComponent): Nullable<boolean> {
         return buttonComponent.toggled;
     }
 
@@ -281,7 +281,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         }
 
         const resButtons = this._buttons
-            .filter((button) => this._isButtonSelected(button))
+            .filter((button) => !!this._isButtonSelected(button))
             .map((button) => this._getButtonValue(button));
         if (!this.toggle) {
             return resButtons.length === 1 ? resButtons[0] : null;
