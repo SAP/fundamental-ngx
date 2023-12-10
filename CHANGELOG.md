@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.11...v0.48.0-rc.12) (2023-12-10)
+
+
+### Bug Fixes
+
+* **platform:** reset pagination when ds changed ([#11060](https://github.com/SAP/fundamental-ngx/issues/11060)) ([2a49710](https://github.com/SAP/fundamental-ngx/commit/2a49710dd85092d5c0eb9d3be8b23e9a1f667e2b))
+
+
+
+
+
 # [0.48.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.10...v0.48.0-rc.11) (2023-12-07)
 
 
