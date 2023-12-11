@@ -1,6 +1,6 @@
 <!--  list item navigation with Arrow-->
 @if (navigationIndicator || (navigated && !(noDataText !== null && noDataText !== undefined))) {
-    <li
+    <div
         #listItem
         fd-list-item
         [attr.id]="id"
@@ -26,11 +26,11 @@
         >
             <ng-template [ngTemplateOutlet]="commonTemplate"></ng-template>
         </a>
-    </li>
+    </div>
 }
 <!--  list item without navigation and used for simple list display-->
 @if (!navigationIndicator && !navigated && !(noDataText !== null && noDataText !== undefined)) {
-    <li
+    <div
         #listItem
         fd-list-item
         [attr.id]="id"
@@ -47,7 +47,7 @@
         [attr.aria-selected]="_selectedAttr"
     >
         <ng-template [ngTemplateOutlet]="commonTemplate"></ng-template>
-    </li>
+    </div>
 }
 <ng-template #commonTemplate>
     @if (title) {

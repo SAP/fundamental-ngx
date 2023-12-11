@@ -1,6 +1,6 @@
 <!--  list item navigation with Arrow-->
 @if (navigationIndicator || (navigated && !(noDataText !== null && noDataText !== undefined))) {
-    <li
+    <div
         #listItem
         [unread]="unRead"
         fd-list-item
@@ -29,11 +29,11 @@
         >
             <ng-template [ngTemplateOutlet]="_hasByLine ? byLineTemplate : commonTemplate"></ng-template>
         </a>
-    </li>
+    </div>
 }
 <!--  list item without navigation and used for simple list display-->
 @if (!navigationIndicator && !navigated && !(noDataText !== null && noDataText !== undefined)) {
-    <li
+    <div
         #listItem
         [unread]="unRead"
         fd-list-item
@@ -53,10 +53,10 @@
     >
         <ng-template [ngTemplateOutlet]="selectionTemplate"></ng-template>
         <ng-template [ngTemplateOutlet]="_hasByLine ? byLineTemplate : commonTemplate"></ng-template>
-    </li>
+    </div>
 }
 @if (noDataText !== null && noDataText !== undefined) {
-    <li
+    <div
         #listItem
         fd-list-item
         [attr.id]="id"
@@ -67,7 +67,7 @@
         [attr.aria-setsize]="ariaSetSize | async"
     >
         <span fd-list-title [attr.aria-label]="noDataText" [attr.title]="noDataText">{{ noDataText }}</span>
-    </li>
+    </div>
 }
 <ng-template #commonTemplate>
     @if (icon.glyph) {

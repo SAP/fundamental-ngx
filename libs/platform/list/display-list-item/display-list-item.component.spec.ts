@@ -54,13 +54,13 @@ describe('DisplayListItemComponent', () => {
     });
 
     it('Should display list container with role as list', () => {
-        const listContainer = fixture.debugElement.query(By.css('ul'));
+        const listContainer = fixture.debugElement.query(By.css('.fd-list'));
         fixture.detectChanges();
         expect(listContainer.nativeElement.getAttribute('role')).toEqual('list');
     });
 
     it('Should contain fd-list in list container', () => {
-        const listContainer = fixture.debugElement.query(By.css('ul'));
+        const listContainer = fixture.debugElement.query(By.css('.fd-list'));
         fixture.detectChanges();
         expect(listContainer.nativeElement.classList).toContain('fd-list');
     });
@@ -92,7 +92,7 @@ describe('DisplayListItemComponent', () => {
     });
 
     it('Should has unique identification for list item', () => {
-        const displayItems = fixture.debugElement.queryAll(By.css('li'));
+        const displayItems = fixture.debugElement.queryAll(By.css('.fd-list__item'));
         fixture.detectChanges();
         expect(displayItems[0].nativeElement.getAttribute('id')).toContain('fdp-list-item');
     });
@@ -110,7 +110,7 @@ describe('DisplayListItemComponent', () => {
     });
 
     it('Should has partial Navigation on 2 list item', () => {
-        const naviationItems = fixture.debugElement.queryAll(By.css('li'));
+        const naviationItems = fixture.debugElement.queryAll(By.css('.fd-list__item'));
         expect(naviationItems.length).toEqual(4);
         fixture.detectChanges();
         naviationItems.forEach((navElem) => {
@@ -168,13 +168,13 @@ describe('DisplayListItemComponent Imperative', () => {
     });
 
     it('should create display list items with given values', () => {
-        const displayListElems = fixture.debugElement.queryAll(By.css('li'));
+        const displayListElems = fixture.debugElement.queryAll(By.css('.fd-list__item'));
         expect(displayListElems.length).toEqual(4);
         displayListElems.forEach((listElem) => {
             expect(listElem.nativeElement.getAttribute('id')).toBeTruthy();
         });
 
-        const liElems = fixture.debugElement.queryAll(By.css('li'));
+        const liElems = fixture.debugElement.queryAll(By.css('.fd-list__item'));
         expect(liElems.length).toEqual(4);
         liElems.forEach((liElem) => {
             expect(liElem.nativeElement.getAttribute('tabindex')).toBeTruthy();
@@ -182,29 +182,29 @@ describe('DisplayListItemComponent Imperative', () => {
     });
 
     it('Title and secondary should to present for all Items', () => {
-        const li0 = fixture.debugElement.queryAll(By.css('li'))[0];
+        const li0 = fixture.debugElement.queryAll(By.css('.fd-list__item'))[0];
         const displayElems0 = li0.queryAll(By.css('span'));
         expect(displayElems0[0].nativeElement.getAttribute('title')).toEqual('title 1');
         expect(displayElems0[1].nativeElement.getAttribute('title')).toEqual('secondary 1');
 
-        const li1 = fixture.debugElement.queryAll(By.css('li'))[1];
+        const li1 = fixture.debugElement.queryAll(By.css('.fd-list__item'))[1];
         const displayElems1 = li1.queryAll(By.css('span'));
         expect(displayElems1[0].nativeElement.getAttribute('title')).toEqual('title 2');
         expect(displayElems1[1].nativeElement.getAttribute('title')).toEqual('secondary 2');
 
-        const li2 = fixture.debugElement.queryAll(By.css('li'))[2];
+        const li2 = fixture.debugElement.queryAll(By.css('.fd-list__item'))[2];
         const displayElems2 = li2.queryAll(By.css('span'));
         expect(displayElems2[0].nativeElement.getAttribute('title')).toEqual('title 3');
         expect(displayElems2[1].nativeElement.getAttribute('title')).toEqual('secondary 3');
 
-        const li3 = fixture.debugElement.queryAll(By.css('li'))[3];
+        const li3 = fixture.debugElement.queryAll(By.css('.fd-list__item'))[3];
         const displayElems3 = li3.queryAll(By.css('span'));
         expect(displayElems3[0].nativeElement.getAttribute('title')).toEqual('title 4');
         expect(displayElems3[1].nativeElement.getAttribute('title')).toEqual('secondary 4');
     });
 
     it('Should have partial Navigation enabled 4 list item', () => {
-        const naviationItemsImp = fixture.debugElement.queryAll(By.css('li'));
+        const naviationItemsImp = fixture.debugElement.queryAll(By.css('.fd-list__item'));
         expect(naviationItemsImp.length).toEqual(4);
         fixture.detectChanges();
         expect(naviationItemsImp[0].nativeElement.classList).toContain('fd-list__item--link');

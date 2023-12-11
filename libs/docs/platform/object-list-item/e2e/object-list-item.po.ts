@@ -5,7 +5,7 @@ export class ObjectListItemPo extends PlatformBaseComponentPo {
     root = '#page-content';
 
     // selectors for all items on the page
-    allObjsList = 'fdp-object-list-item li';
+    allObjsList = 'fdp-object-list-item .fd-list__item';
     allObjAvatars = 'fdp-object-list-item fd-avatar';
     allObjNumbers = 'fdp-object-list-item fd-object-number';
     allObjIcons = 'fdp-object-list-item i';
@@ -13,26 +13,26 @@ export class ObjectListItemPo extends PlatformBaseComponentPo {
     allObjAttrStatusRows = 'fdp-object-list-item fdp-object-list-item-row';
     // object list item examples
     objListAttr = 'fdp-platform-object-list-item-border-less-example fdp-list';
-    objListItem = 'fdp-platform-object-list-item-border-less-example li';
+    objListItem = 'fdp-platform-object-list-item-border-less-example .fd-list__item';
     obJListIntro = 'fdp-platform-object-list-item-border-less-example .fd-object-list__intro';
     objListAttributes =
         'fdp-platform-object-list-item-border-less-example fdp-object-list-item:first-of-type fd-object-attribute';
     objListStatuses =
         'fdp-platform-object-list-item-border-less-example fdp-object-list-item:first-of-type .fd-object-status';
     // obj list item with row selection examples
-    objListSelItem = 'fdp-platform-object-list-item-with-row-selection-example li';
+    objListSelItem = 'fdp-platform-object-list-item-with-row-selection-example .fd-list__item';
     obJListSelIntro = 'fdp-platform-object-list-item-with-row-selection-example .fd-object-list__intro';
     objListSelAttributes = 'fdp-platform-object-list-item-with-row-selection-example fd-object-attribute';
     objListSelStatuses = 'fdp-platform-object-list-item-with-row-selection-example .fd-object-status';
     objSelToolbar = 'fdp-platform-object-list-item-with-row-selection-example fd-toolbar';
     // obj navigation examples
     objNavLink = 'fdp-platform-object-list-item-with-row-navigation-example a';
-    objNavList = 'fdp-platform-object-list-item-with-row-navigation-example li';
+    objNavList = 'fdp-platform-object-list-item-with-row-navigation-example .fd-list__item';
     objNavAttributes = 'fdp-platform-object-list-item-with-row-navigation-example fd-object-attribute';
     objNavStatuses = 'fdp-platform-object-list-item-with-row-navigation-example .fd-object-status';
     // row selection and navigation examples
     objRowNavLink = 'fdp-platform-object-list-item-with-row-selection-and-navigation-example a';
-    objRowNavList = 'fdp-platform-object-list-item-with-row-selection-and-navigation-example li';
+    objRowNavList = 'fdp-platform-object-list-item-with-row-selection-and-navigation-example .fd-list__item';
     objRowNavAttributes = 'fdp-platform-object-list-item-with-row-selection-and-navigation-example fd-object-attribute';
     objRowNavStatuses = 'fdp-platform-object-list-item-with-row-selection-and-navigation-example .fd-object-status';
     objRowNavToolbar = 'fdp-platform-object-list-item-with-row-selection-and-navigation-example fd-toolbar';

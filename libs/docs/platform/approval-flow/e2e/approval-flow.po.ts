@@ -13,7 +13,7 @@ export class ApprovalFlowPo extends PlatformBaseComponentPo {
 
     detailsDialog = 'fd-dialog-container .fd-dialog--active';
     detailsDialogSearchInput = this.detailsDialog + ' input';
-    detailsDialogTeamMember = this.detailsDialog + ' li';
+    detailsDialogTeamMember = this.detailsDialog + ' .fd-list__item';
     detailsDialogTeamMemberName = this.detailsDialog + ' .fd-list__title';
     detailsDialogTeamMemberCheckBox = this.detailsDialogTeamMember + ' fd-checkbox ';
     detailsDialogBackIcon = this.detailsDialog + ' fd-icon';
@@ -39,7 +39,7 @@ export class ApprovalFlowPo extends PlatformBaseComponentPo {
     approvalFlowNodeActionMenuItem = '[role="menuitem"]';
 
     remaindersSendToInput = 'fd-multi-input fd-tokenizer input';
-    selectItem = '.fd-popover-custom-list .fd-list li[role="option"]';
+    selectItem = '.fd-popover-custom-list .fd-list .fd-list__item[role="option"]';
     bottomMenuItems = '.fd-bar__element button';
 
     addNode = '.fdp-approval-flow-node__add';

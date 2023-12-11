@@ -311,7 +311,7 @@ export class ListComponent<T>
 
     /** @hidden */
     get _ulElement(): Nullable<HTMLUListElement> {
-        return this.elementRef.nativeElement.querySelector('ul');
+        return this.elementRef.nativeElement.querySelector('.fd-list');
     }
 
     /**
@@ -474,7 +474,7 @@ export class ListComponent<T>
         const linkElement = el.querySelector('a');
         if (el.tagName.toLowerCase() === 'a') {
             el.classList.add('is-navigated');
-        } else if (el.tagName.toLowerCase() === 'li' && !!linkElement) {
+        } else if (el.classList.contains('fd-list__item') && !!linkElement) {
             linkElement.classList.add('is-navigated');
         }
 
