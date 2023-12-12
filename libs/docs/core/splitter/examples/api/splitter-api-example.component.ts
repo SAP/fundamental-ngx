@@ -31,4 +31,8 @@ export class SplitterApiExampleComponent {
 
         this.splitter.showPaneOnCanvas(this.paneTwo.id);
     }
+
+    adjustSize(): void {
+        this.paneTwo.size === '200px' ? (this.paneTwo.size = '100px') : (this.paneTwo.size = '200px');
+    }
 }

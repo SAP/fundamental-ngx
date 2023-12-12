@@ -363,6 +363,14 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
             })
         );
 
+        this._panes.forEach((pane) => {
+            this._subscription$.add(
+                pane.sizeChange.subscribe(() => {
+                    this._resizePanesToFitInContainer(true);
+                })
+            );
+        });
+
         this._subscription$.add(this._viewportRuler.change(10).subscribe(() => this._resizePanesToFitInContainer()));
     }
 
