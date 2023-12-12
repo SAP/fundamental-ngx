@@ -3,14 +3,14 @@
 export default {
     coreCalendar: {
         yearSelectionLabel: 'Seleziona anno',
-        yearsRangeSelectionLabel: 'Seleziona intervallo di anni',
+        yearsRangeSelectionLabel: 'Seleziona intervallo anni',
         monthSelectionLabel: 'Seleziona mese',
         dateSelectionLabel: 'Seleziona data',
         previousYearLabel: 'Anno precedente',
         nextYearLabel: 'Anno successivo',
         previousMonthLabel: 'Mese precedente',
         nextMonthLabel: 'Mese successivo',
-        weekColumnLabel: 'Settimana del calendario',
+        weekColumnLabel: 'Settimana di calendario',
         dateSelectedLabel: 'Data selezionata',
         todayLabel: 'Oggi',
         rangeStartLabel: 'Inizio intervallo',
@@ -18,49 +18,49 @@ export default {
         dayInPastLabel: 'Giorni passati',
         closeCalendarLabel: 'Chiudi calendario',
         calendarDayViewDescription: 'Calendario',
-        calendarMonthViewDescription: 'Selettore del mese',
-        calendarYearsViewDescription: "Selettore dell'anno",
-        calendarYearsRangeViewDescription: "Selettore dell'intervallo di anni"
+        calendarMonthViewDescription: 'Selettore mese',
+        calendarYearsViewDescription: 'Selettore anno',
+        calendarYearsRangeViewDescription: 'Selettore intervallo di anni'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Casella combinata multivalore',
-        selectAllLabel: 'Seleziona tutto ({selectedItems} di {totalItems})'
+        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        selectAllLabel: 'Seleziona tutti ({selectedItems} di {totalItems})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: "Vai all'elemento precedente",
         rightNavigationBtnLabel: "Vai all'elemento successivo"
     },
     coreDatePicker: {
-        dateInputLabel: 'Inserimento data',
-        dateRangeInputLabel: 'Inserimento intervallo di date',
-        displayCalendarToggleLabel: 'Selettore aperto',
-        valueStateSuccessMessage: 'Stato valore Success',
-        valueStateInformationMessage: 'Informazioni sullo stato del valore',
-        valueStateWarningMessage: 'Avviso stato valore',
-        valueStateErrorMessage: 'Errore stato valore'
+        dateInputLabel: 'Immissione data',
+        dateRangeInputLabel: 'Immissione intervallo date',
+        displayCalendarToggleLabel: 'Apri selettore',
+        valueStateSuccessMessage: 'Stato valore Operazione completata',
+        valueStateInformationMessage: 'Stato valore Informazione',
+        valueStateWarningMessage: 'Stato valore Avviso',
+        valueStateErrorMessage: 'Stato valore Errore'
     },
     coreDatetimePicker: {
-        datetimeInputLabel: 'Inserimento data/ora',
-        displayDatetimeToggleLabel: 'Visualizza/disattiva calendario',
+        datetimeInputLabel: 'Immissione data/ora',
+        displayDatetimeToggleLabel: 'Interruttore Visualizza calendario',
         displayTypeDateLabel: 'Data',
-        displayTypeTimeLabel: 'Volta',
-        datetimeOkLabel: 'Ok',
-        datetimeCancelLabel: 'Anulla'
+        displayTypeTimeLabel: 'Ora',
+        datetimeOkLabel: 'OK',
+        datetimeCancelLabel: 'Annulla'
     },
     coreDynamicPage: {
-        expandLabel: 'Espandi intestazione',
-        collapseLabel: 'Riduci intestazione',
-        pinLabel: 'Fissa intestazione',
-        unpinLabel: 'Sblocca intestazione'
+        expandLabel: 'Expand Header',
+        collapseLabel: 'Collapse Header',
+        pinLabel: 'Pin Header',
+        unpinLabel: 'Unpin Header'
     },
     coreFeedListItem: {
-        moreLabel: 'Altro',
+        moreLabel: 'Altri {count}',
         lessLabel: 'Meno'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Annulla',
-        listItemStatusAriaLabel: "L'articolo ha uno stato. Stato: {status}.",
-        listItemCounterAriaLabel: "L'articolo ha {count} sottoarticoli.",
+        listItemStatusAriaLabel: "L'elemento ha stato {status}",
+        listItemCounterAriaLabel: "L'elemento ha {count} subordinati.",
         listItemButtonDetailsTitle: 'Dettagli',
         listItemButtonDeleteTitle: 'Elimina',
         listItemStatusContainsErrors: 'Contiene errori',
@@ -68,123 +68,121 @@ export default {
         listItemStatusDraft: 'Bozza'
     },
     coreMessageStrip: {
-        dismissLabel: 'Congedare'
+        dismissLabel: 'Ignora'
     },
     coreMultiInput: {
-        countListResultsSingular: '1 elemento della lista dei risultati.',
-        countListResultsPlural: "{count} elementi dell'elenco dei risultati.",
-        multiInputAriaLabel: 'Multi Value Input',
-        noResults: 'No results.',
-        navigateSelectionsWithArrows: 'Navigate selections with the up and down arrows.',
+        countListResultsSingular: '1 voce elenco dei risultati.',
+        countListResultsPlural: '{0} voci elenco dei risultati',
+        multiInputAriaLabel: 'Immissione multivalore',
+        noResults: 'Nessun risultato.',
+        navigateSelectionsWithArrows: 'Navigare tra le selezioni con le frecce su e giù',
         escapeNavigateTokens:
-            'Press escape to exit the input field and use the left and right arrow keys to navigate through the selected options.',
+            'Premere Esc per chiudere il campo di immissione e utilizzare le frecce destra e sinistra per navigare tra le opzioni selezionate.',
         tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
-        mainNavigation: 'Main Navigation',
-        navigationPath: 'Navigation Path'
+        mainNavigation: 'Navigazione principale',
+        navigationPath: 'Percorso di navigazione'
     },
     coreNestedList: {
         linkItemAriaLabel: "Elemento dell'albero {itemDetails}, {index} di {total}{selectedDescription}"
     },
     coreOverflowLayout: {
-        moreItemsButton: '{ count, plural, one {1 più} other {Altri #} } articoli'
+        moreItemsButton: 'Altri {count}'
     },
     corePagination: {
         pageLabel: 'Pagina {pageNumber}',
-        currentPageAriaLabel: 'La pagina {pageNumber} è la pagina corrente',
+        currentPageAriaLabel: 'La pagina {pageNumber} è la pagina attuale',
         labelBeforeInputMobile: 'Pagina:',
         labelAfterInputMobile: 'di {totalCount}',
-        inputAriaLabel: 'Inserimento pagina, Pagina corrente, Pagina {pageNumber} di {totalCount}',
-        itemsPerPageLabel: 'Risultati per pagina:',
-        firstLabel: 'First',
-        previousLabel: 'Precedente',
-        nextLabel: 'Next',
-        lastLabel: 'Ultimo',
+        inputAriaLabel: 'Input pagina, pagina attuale, pagina {pageNumber} di {totalCount}',
+        itemsPerPageLabel: 'Risultati per pagina',
+        firstLabel: 'Prima',
+        previousLabel: 'Indietro',
+        nextLabel: 'Avanti',
+        lastLabel: 'Ultima',
         ariaLabel: 'Impaginazione',
-        totalResultsLabel: '{totalCount} Risultati'
+        totalResultsLabel: '{totalCount} risultati'
     },
     coreProductSwitch: {
-        ariaLabel: 'Commutatore del prodotto'
+        ariaLabel: 'Switch prodotti'
     },
     coreShellbar: {
-        collapsedItemMenuLabel: 'Menu di voci compresso',
-        cancel: 'Cancel',
-        search: 'Search'
+        collapsedItemMenuLabel: 'Voce menu compressa',
+        cancel: 'Annulla',
+        search: 'Cerca'
     },
     coreSlider: {
-        singleMinMaxDetails: 'Il valore minimo del dispositivo di scorrimento è {minimo}, il valore massimo è {max}',
+        singleMinMaxDetails: 'Il valore minimo del cursore è {min}, quello massimo è {max}',
         singleValueminDetails: 'Il valore è {value}',
         singleValuemaxDetails: 'Il valore è {value}',
         singleValueNowDetails: 'Il valore attuale è {value}',
-        multipleHandle1MinMaxDetails:
-            "Il valore minimo del dispositivo di scorrimento dell'intervallo è {min}, il valore massimo è {max}",
+        multipleHandle1MinMaxDetails: "Il valore minimo del cursore dell'intervallo è {min}, quello massimo è {max}",
         multipleHandle1ValueminDetails: 'Il valore è {value}',
         multipleHandle1ValuemaxDetails: 'Il valore è {value}',
         multipleHandle1ValueNowDetails: 'Il valore attuale è {value}',
-        multipleHandle2MinMaxDetails:
-            "Il valore minimo del dispositivo di scorrimento dell'intervallo è {min}, il valore massimo è {max}",
+        multipleHandle2MinMaxDetails: "Il valore minimo del cursore dell'intervallo è {min}, quello massimo è {max}",
         multipleHandle2ValueminDetails: 'Il valore è {value}',
         multipleHandle2ValuemaxDetails: 'Il valore è {value}',
         multipleHandle2ValueNowDetails: 'Il valore attuale è {value}'
     },
     coreSplitButton: {
-        expandButtonAriaLabel: 'Più azioni',
-        arialLabel: 'Pulsante Dividi'
+        expandButtonAriaLabel: 'Altre azioni',
+        arialLabel: 'Pulsante Suddividi'
     },
     coreSplitter: {
         paginationItemAriaLabel: 'Sezione'
     },
     coreStepInput: {
-        incrementButtonTitle: 'Incremento',
-        decrementButtonTitle: 'Decremento',
-        ariaRoleDescription: 'Ingresso passo'
+        incrementButtonTitle: 'Incrementa',
+        decrementButtonTitle: 'Diminuisci',
+        ariaRoleDescription: 'Immissione fase'
     },
     coreSwitch: {
-        semanticAcceptLabel: 'Accettare',
-        semanticDeclineLabel: 'Declino'
+        semanticAcceptLabel: 'Accetta',
+        semanticDeclineLabel: 'Rifiuta'
     },
     coreTabs: {
         tabListExpandButtonText: 'Di più'
     },
     coreText: {
         moreLabel: 'Di più',
-        lessLabel: 'Meno'
+        lessLabel: 'Di meno'
     },
     coreTime: {
-        componentAriaName: 'Selettore tempo',
-        increaseHoursLabel: 'Aumenta le ore',
+        componentAriaName: 'Selettore ora',
+        increaseHoursLabel: 'Aumenta ore',
         hrsLabel: 'Ore',
-        hoursLabel: 'Hours',
-        decreaseHoursLabel: 'Decrease hours',
-        increaseMinutesLabel: 'Increase minutes',
-        minLabel: 'Min',
-        minutesLabel: 'Minutes',
-        decreaseMinutesLabel: 'Decrease minutes',
-        increaseSecondsLabel: 'Increase seconds',
-        secLabel: 'Sec',
-        secondsLabel: 'Seconds',
+        hoursLabel: 'Ore',
+        decreaseHoursLabel: 'Diminuisci ore',
+        increaseMinutesLabel: 'Aumenta minuti',
+        minLabel: 'Min.',
+        minutesLabel: 'Minuti',
+        decreaseMinutesLabel: 'Diminuisci minuti',
+        increaseSecondsLabel: 'Aumenta secondi',
+        secLabel: 'Sec.',
+        secondsLabel: 'Secondi',
         decreaseSecondsLabel: 'Diminuisci secondi',
-        increasePeriodLabel: 'Aumento periodo',
+        increasePeriodLabel: 'Aumenta periodo',
         periodLabel: 'Periodo',
         decreasePeriodLabel: 'Diminuisci periodo',
         navigationInstruction:
-            "Per spostarti tra gli elementi di questo elenco, premi la freccia in alto o in basso. Per passare da un elenco all'altro, premere la freccia sinistra o la freccia destra."
+            "Per spostarsi tra le voci dell'elenco, premere la freccia su o la freccia giù. Per passare da un elenco all'altro, premere la freccia destra o la freccia sinistra."
     },
     coreTimePicker: {
-        timePickerInputLabel: 'Input per la selezione del tempo',
-        timePickerButtonLabel: 'Selettore aperto'
+        timePickerInputLabel: 'Immissione selettore ora',
+        timePickerButtonLabel: 'Apri selettore'
     },
     coreToken: {
-        deleteButtonLabel: 'Cancellabile',
-        ariaRoleDescription: 'gettone'
+        deleteButtonLabel: 'Eliminabile',
+        ariaRoleDescription: 'token'
     },
     coreTokenizer: {
-        moreLabel: '{ count, plural, one {1 più} other {Altri #} } articoli',
+        moreLabel: 'Altri {count}',
         tokenizerLabel: 'Tokenizer'
     },
     coreUploadCollection: {
-        menuOkText: 'Ok',
+        menuOkText: 'OK',
         menuCancelText: 'Annulla',
         menuEditAriaLabel: 'Modifica',
         menuDeleteAriaLabel: 'Elimina',
@@ -196,7 +194,7 @@ export default {
         ariaLabel: 'Procedura guidata'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Altro'
+        overflowTitleMore: 'Di più'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Osservatori',
@@ -204,48 +202,48 @@ export default {
         nextButtonAriaLabel: 'Vai alla diapositiva successiva',
         prevButtonAriaLabel: 'Vai alla diapositiva precedente',
         editModeSaveButtonLabel: 'Salva',
-        editModeExitButtonLabel: 'Uscita',
-        emptyTitle: 'Inizia ad aggiungere approvatori e osservatori',
+        editModeExitButtonLabel: 'Esci',
+        emptyTitle: 'Iniziare ad aggiungere approvatori e osservatori',
         emptyHint:
-            'Per aggiungere approvatori, fai clic su "Aggiungi un passaggio". Per aggiungere osservatori, fai clic sul campo Osservatori.',
+            'Per aggiungere approvatori, fare clic su "Aggiungi una fase". Per aggiungere osservatori, fare clic sul campo Osservatori.',
         addNodeDialogHeaderAddApprovers: 'Aggiungi approvatori',
-        addNodeDialogHeaderEditApprover: 'Modifica approvatori',
-        addNodeDialogHeaderAddApproverTeam: 'Utente/Squadra',
-        addNodeDialogHeaderDetail: 'Dettaglio',
+        addNodeDialogHeaderEditApprover: 'Modifica approvatore',
+        addNodeDialogHeaderAddApproverTeam: 'Utente/team',
+        addNodeDialogHeaderDetail: 'Dettagli',
         addNodeDialogNodeType: 'Parallelo o seriale',
         addNodeDialogNodeTypeSerial: 'Seriale',
         addNodeDialogNodeTypeParallel: 'Parallelo',
         addNodeDialogApproverType: 'Tipo di approvatore',
         addNodeDialogApproverTypeUser: 'Un utente',
-        addNodeDialogApproverTypeTeamAnyone: 'Chiunque nel team',
-        addNodeDialogApproverTypeTeamEveryone: 'Tutti in squadra',
-        addNodeDialogUserOrTeam: 'Utente/Squadra',
+        addNodeDialogApproverTypeTeamAnyone: 'Un membro del team',
+        addNodeDialogApproverTypeTeamEveryone: 'Tutti i membri del team',
+        addNodeDialogUserOrTeam: 'Utente/team',
         addNodeDialogAddToNext: 'Aggiungi al nodo seriale successivo',
-        addNodeDialogDueDate: 'Data di scadenza',
+        addNodeDialogDueDate: 'Scadenza',
         addNodeSearchPlaceholder: 'Cerca',
         addNodeAddActionBtnLabel: 'Aggiungi',
         addNodeCancelActionBtnLabel: 'Annulla',
         addNodeSelectApproverActionBtnLabel: 'Seleziona',
         addNodeCancelApproverSelectionActionBtnLabel: 'Annulla',
         addNodeApproverOrTeamDetailsCloseActionBtnLabel: 'Chiudi',
-        userDetailsHeader: 'Dettaglio',
+        userDetailsHeader: 'Dettagli',
         userDetailsSendReminderBtnLabel: 'Invia promemoria',
         userDetailsCancelBtnLabel: 'Annulla',
         messagesApproverAddedSuccess: '1 approvatore è stato aggiunto',
-        messagesTeamAddedSuccess: '1 squadra è stata aggiunta',
+        messagesTeamAddedSuccess: '1 team è stato aggiunto',
         messagesNodeEdited: '1 approvatore è stato modificato',
         messagesNodeRemovedSingular: '1 approvatore è stato rimosso',
         messagesNodeRemovedPlural: 'Gli approvatori sono stati rimossi',
-        messagesTeamRemoved: '1 squadra è stata rimossa',
+        messagesTeamRemoved: '1 team è stato rimosso',
         messagesErrorBuildGraph:
-            'Si è verificato un errore durante il tentativo di creare un grafico. Controllare i dati iniziali.',
-        messagesUndoAction: 'Anulla',
+            'Si è verificato un errore durante il tentativo di creazione del grafico. Controllare i dati iniziali.',
+        messagesUndoAction: 'Annulla',
         nodeMembersCount: '{count} membri',
-        nodeVariousTeams: 'Varie squadre',
-        nodeStatusDueToday: 'Scadenza oggi',
-        nodeStatusDueInXDays: 'Scadenza tra {count} giorni',
-        nodeStatusXDaysOverdue: '{count} giorni scaduti',
-        nodeActionAddApproversBefore: 'Aggiungi prima gli approvatori',
+        nodeVariousTeams: 'Vari team',
+        nodeStatusDueToday: 'Scade oggi',
+        nodeStatusDueInXDays: 'Scade tra {count} giorni',
+        nodeStatusXDaysOverdue: 'Scaduto da {count} giorni',
+        nodeActionAddApproversBefore: 'Aggiungi approvatori prima',
         nodeActionAddApproversAfter: 'Aggiungi approvatori dopo',
         nodeActionAddApproversParallel: 'Aggiungi approvatori paralleli',
         nodeActionEditApprover: 'Modifica approvatore',
@@ -256,47 +254,47 @@ export default {
         selectTypeDialogNodeTypeSerial: 'Approvatore seriale',
         selectTypeDialogConfirmButton: 'Conferma',
         selectTypeDialogCancelButton: 'Annulla',
-        toolbarAddStepButton: 'Aggiungi un passo',
+        toolbarAddStepButton: 'Aggiungi una fase',
         toolbarEditButton: 'Modifica',
-        toolbarAddApproversBefore: 'Aggiungi prima gli approvatori',
+        toolbarAddApproversBefore: 'Aggiungi approvatori prima',
         toolbarAddApproversAfter: 'Aggiungi approvatori dopo',
         toolbarAddApproversParallel: 'Aggiungi approvatori paralleli',
         toolbarRemove: 'Rimuovi',
         toolbarEditApprover: 'Modifica approvatore',
-        watchersInputPlaceholder: 'Cerca qui..',
-        userListSelectedItemsCountSingular: '1 elemento selezionato',
-        userListSelectedItemsCountPlural: '{count} elementi selezionati',
-        addNodeButtonTitle: 'Aggiungi un passo',
+        watchersInputPlaceholder: 'Cerca qui...',
+        userListSelectedItemsCountSingular: '1 voce selezionata',
+        userListSelectedItemsCountPlural: '{count} voci selezionate',
+        addNodeButtonTitle: 'Aggiungi nodo',
         nodeMenuButtonTitle: 'Menu',
-        statusApproved: 'approvato',
-        statusRejected: 'respinto',
-        statusInProgress: 'in corso',
-        statusNotStarted: 'non ancora iniziato'
+        statusApproved: 'approvata',
+        statusRejected: 'rifiutata',
+        statusInProgress: 'In corso',
+        statusNotStarted: 'non avviata'
     },
     platformFeedInput: {
         userTitle: 'Utente'
     },
     platformVHD: {
-        selectionBarLabel: 'Articoli selezionati e condizionati',
-        selectedAndConditionLabel: 'Articoli e condizioni selezionati',
-        footerClearSelectedTitle: 'cancella gli elementi selezionati',
-        footerClearSelectedAriaLabel: 'cancella gli elementi selezionati',
+        selectionBarLabel: 'Voci condizione e selezionate',
+        selectedAndConditionLabel: 'Voci e condizioni selezionate',
+        footerClearSelectedTitle: 'cancella voci selezionate',
+        footerClearSelectedAriaLabel: 'cancella voci selezionate',
         searchButtonLabel: 'Vai',
         successButtonLabel: 'OK',
         cancelButtonLabel: 'Annulla',
-        selectedEmptyLabel: 'Nessun articolo o condizione selezionato',
+        selectedEmptyLabel: 'Nessuna voce o condizione selezionata',
         searchPlaceholder: 'Cerca',
         searchAdvancedSearchLabel: 'Filtri',
         searchShowAdvancedSearchLabel: 'Mostra filtri',
         searchHideAdvancedSearchLabel: 'Nascondi filtri',
         searchShowAllAdvancedSearchLabel: 'Mostra tutti i filtri',
         searchHideAllAdvancedSearchLabel: 'Nascondi tutti i filtri',
-        selectTabDisplayCountLabel: 'Articoli ({count})',
-        selectTabMoreBtnLabel: 'Altro',
+        selectTabDisplayCountLabel: 'Voci ({count})',
+        selectTabMoreBtnLabel: 'Di più',
         selectTabCountHiddenA11yLabel: 'contiene {rowCount} righe e {colCount} colonne',
         selectMobileTabBackBtnTitle: 'Indietro',
         selectMobileTabBtnOpenDialogLabel: 'Apri finestra di dialogo',
-        selectMobileTabTitle: '{title} scheda',
+        selectMobileTabTitle: 'Scheda {title}',
         selectMobileConditionEmpty: 'Vuoto',
         defineConditionTitle: 'Prodotto',
         defineConditionSelectedValueHiddenA11yLabel: 'valore selezionato {value}',
@@ -310,30 +308,30 @@ export default {
         defineConditionAddConditionButtonTitle: 'Aggiungi condizione',
         defineConditionConditionStrategyLabelContains: 'contiene',
         defineConditionConditionStrategyLabelEqualTo: 'uguale a',
-        defineConditionConditionStrategyLabelBetween: 'fra',
+        defineConditionConditionStrategyLabelBetween: 'tra',
         defineConditionConditionStrategyLabelStartsWith: 'inizia con',
-        defineConditionConditionStrategyLabelEndsWith: 'finisce con',
-        defineConditionConditionStrategyLabelLessThan: 'meno di',
-        defineConditionConditionStrategyLabelLessThanEqual: 'meno che uguale',
-        defineConditionConditionStrategyLabelGreaterThan: 'più grande di',
-        defineConditionConditionStrategyLabelGreaterThanEqual: 'maggiore di uguale',
+        defineConditionConditionStrategyLabelEndsWith: 'termina con',
+        defineConditionConditionStrategyLabelLessThan: 'minore di',
+        defineConditionConditionStrategyLabelLessThanEqual: 'minore o uguale a',
+        defineConditionConditionStrategyLabelGreaterThan: 'maggiore di',
+        defineConditionConditionStrategyLabelGreaterThanEqual: 'maggiore o uguale a',
         defineConditionConditionStrategyLabelEmpty: 'vuoto',
-        defineConditionConditionStrategyLabelNotEqualTo: 'non uguale a',
-        defineConditionConditionStrategyLabelNotEmpty: 'no vuoto',
-        defineConditionMaxCountError: 'Immettere un valore con non più di {count} caratteri',
+        defineConditionConditionStrategyLabelNotEqualTo: 'diverso da',
+        defineConditionConditionStrategyLabelNotEmpty: 'non vuoto',
+        defineConditionMaxCountError: 'Immettere un valore con massimo {count} caratteri.',
         selectTabTitle: "Seleziona dall'elenco",
-        searchTableEmptyMessage: 'Usa la ricerca per ottenere risultati',
+        searchTableEmptyMessage: 'Utilizza la ricerca per ottenere dei risultati',
         defineTabTitle: 'Definisci condizioni'
     },
     platformCombobox: {
-        countListResultsSingular: '1 elemento della lista dei risultati',
-        countListResultsPlural: "{count} elementi dell'elenco dei risultati"
+        countListResultsSingular: '1 voce elenco dei risultati',
+        countListResultsPlural: '{count} voci elenco dei risultati'
     },
     platformMultiCombobox: {
-        inputGlyphAriaLabel: 'Seleziona Opzioni',
-        inputIconTitle: 'Seleziona Opzioni',
-        mobileShowAllItemsButton: 'Mostra tutti gli articoli',
-        mobileShowSelectedItemsButton: 'Mostra gli articoli selezionati'
+        inputGlyphAriaLabel: 'Seleziona opzioni',
+        inputIconTitle: 'Seleziona opzioni',
+        mobileShowAllItemsButton: 'Mostra tutte le voci',
+        mobileShowSelectedItemsButton: 'Mostra le voci selezionate'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 carattere oltre il limite',
@@ -345,14 +343,14 @@ export default {
         roleDescriptionWithMedia: 'Media: {media}'
     },
     platformList: {
-        loadingAriaLabel: 'caricamento in corso'
+        loadingAriaLabel: 'caricamento in corso...'
     },
     platformObjectListItem: {
-        detailsActionAriaLabel: 'dettaglio',
+        detailsActionAriaLabel: 'dettagli',
         deleteActionAriaLabel: 'elimina'
     },
     platformStandardListItem: {
-        detailsActionAriaLabel: 'dettaglio',
+        detailsActionAriaLabel: 'dettagli',
         deleteActionAriaLabel: 'elimina'
     },
     platformSearchField: {
@@ -361,10 +359,10 @@ export default {
         searchInputLabel: 'Cerca',
         synchronizeButtonTitle: 'Sincronizza',
         searchSuggestionMessage: '{count} suggerimenti trovati.',
-        searchSuggestionNavigateMessage: 'usa le frecce su e giù per navigare'
+        searchSuggestionNavigateMessage: 'utilizzare le frecce su e giù per navigare'
     },
     platformSwitch: {
-        ariaLabel: 'Interruttore'
+        ariaLabel: 'Immissione Passaggio'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Cerca',
@@ -386,69 +384,69 @@ export default {
         filterConditionEqualTo: 'uguale a',
         filterConditionBetween: 'tra',
         filterConditionBeginsWith: 'inizia con',
-        filterConditionEndsWith: 'finisce con',
+        filterConditionEndsWith: 'termina con',
         filterConditionLessThan: 'minore di',
         filterConditionLessThanOrEqualTo: 'minore o uguale a',
         filterConditionGreaterThan: 'maggiore di',
         filterConditionGreaterThanOrEqualTo: 'maggiore o uguale a',
         filterConditionAfter: 'dopo',
-        filterConditionOnOrAfter: 'su o dopo',
+        filterConditionOnOrAfter: 'il o dopo',
         filterConditionBefore: 'prima',
-        filterConditionBeforeOrOn: 'prima o sopra',
+        filterConditionBeforeOrOn: 'prima o il',
         filterConditionValuePlaceholder: 'valore',
         filterConditionValueFromPlaceholder: 'da',
         filterConditionValueToPlaceholder: 'a',
-        settingsCategoryAll: 'Tutto',
-        settingsCategoryVisible: 'Visibile',
-        settingsCategoryActive: 'Attivo',
-        settingsCategoryVisibleAndActive: 'Visibile e attivo',
-        settingsCategoryMandatory: 'Obbligatorio',
-        manageFieldConditions: 'Manage field conditions',
-        refreshButtonAriaLabel: 'Refresh'
+        settingsCategoryAll: 'Tutti',
+        settingsCategoryVisible: 'Visibili',
+        settingsCategoryActive: 'Attivi',
+        settingsCategoryVisibleAndActive: 'Visibili e attivi',
+        settingsCategoryMandatory: 'Obbligatori',
+        manageFieldConditions: 'Gestisci condizioni campo',
+        refreshButtonAriaLabel: 'Aggiorna'
     },
     platformTable: {
-        headerMenuSortAsc: 'Ordine crescente',
-        headerMenuSortDesc: 'Ordine decrescente',
-        headerMenuGroup: 'Gruppo',
-        headerMenuFreeze: 'Congela',
-        headerMenuEndFreeze: 'Freeze to End',
+        headerMenuSortAsc: 'Ordina in ordine crescente',
+        headerMenuSortDesc: 'Ordina in ordine decrescente',
+        headerMenuGroup: 'Raggruppa',
+        headerMenuFreeze: 'Blocca',
+        headerMenuEndFreeze: 'Blocca fino alla fine',
         headerMenuUnfreeze: 'Sblocca',
-        headerMenuFilter: 'Filtro',
-        defaultEmptyMessage: 'Nessun dato trovato',
+        headerMenuFilter: 'Filtra',
+        defaultEmptyMessage: 'Non sono stati trovati dati',
         emptyCell: 'Vuoto',
         noVisibleColumnsMessage:
-            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
-        resetChangesButtonLabel: 'Reset',
-        editableCellNumberPlaceholder: 'Inserisci valore',
-        editableCellDatePlaceholder: 'Inserisci valore',
-        editableCellStringPlaceholder: 'Inserisci valoree',
+            'Al momento non esistono colonne visibili nella tabella. Selezionare le colonne necessarie nelle impostazioni tabella.',
+        resetChangesButtonLabel: 'Reimposta',
+        editableCellNumberPlaceholder: 'Immetti il valore',
+        editableCellDatePlaceholder: 'Immetti il valore',
+        editableCellStringPlaceholder: 'Immetti il valore',
         P13ColumnsDialogHeader: 'Colonne',
         P13ColumnsDialogSearchPlaceholder: 'Cerca',
-        P13ColumnsDialogsShowSelected: 'Mostra selezionato',
+        P13ColumnsDialogsShowSelected: 'Mostra selezione',
         P13ColumnsDialogShowAll: 'Mostra tutto',
         P13ColumnsDialogSelectAll: 'Seleziona tutto ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',
         P13ColumnsDialogCancelBtnLabel: 'Annulla',
-        P13ColumnsDialogMoveToTopBtn: 'Sposta in alto',
+        P13ColumnsDialogMoveToTopBtn: 'Sposta in cima',
         P13ColumnsDialogMoveUpBtn: 'Sposta su',
-        P13ColumnsDialogMoveDownBtn: 'Sposta su',
-        P13ColumnsDialogMoveToBottomBtn: 'Sposta in basso',
-        P13FilterStrategyLabelBetween: 'fra',
+        P13ColumnsDialogMoveDownBtn: 'Sposta giù',
+        P13ColumnsDialogMoveToBottomBtn: 'Sposta in fondo',
+        P13FilterStrategyLabelBetween: 'tra',
         P13FilterStrategyLabelContains: 'contiene',
         P13FilterStrategyLabelBeginsWith: 'inizia con',
-        P13FilterStrategyLabelEndsWith: 'finisce con',
+        P13FilterStrategyLabelEndsWith: 'termina con',
         P13FilterStrategyLabelEqualTo: 'uguale a',
-        P13FilterStrategyLabelGreaterThan: 'più grande di',
+        P13FilterStrategyLabelGreaterThan: 'maggiore di',
         P13FilterStrategyLabelGreaterThanOrEqualTo: 'maggiore o uguale a',
-        P13FilterStrategyLabelLessThan: 'meno di',
+        P13FilterStrategyLabelLessThan: 'minore di',
         P13FilterStrategyLabelLessThanOrEqualTo: 'minore o uguale a',
         P13FilterStrategyLabelAfter: 'dopo',
-        P13FilterStrategyLabelOnOrAfter: 'sopra o dopo',
+        P13FilterStrategyLabelOnOrAfter: 'il o dopo',
         P13FilterStrategyLabelBefore: 'prima',
-        P13FilterStrategyLabelBeforeOrOn: 'prima o dopo',
+        P13FilterStrategyLabelBeforeOrOn: 'prima o il',
         P13FilterStrategyLabelNotDefined: 'Non definito',
         P13FilterBooleanOptionNotDefined: '',
-        P13FilterBooleanOptionTrue: 'Si',
+        P13FilterBooleanOptionTrue: 'Sì',
         P13FilterBooleanOptionFalse: 'No',
         P13FilterDialogHeader: 'Filtra per',
         P13FilterDialogIncludePanelTitleWithCount: 'Includi ({count})',
@@ -460,7 +458,7 @@ export default {
         P13FilterDialogConfirmationBtnLabel: 'OK',
         P13FilterDialogCancelBtnLabel: 'Annulla',
         P13GroupDialogHeader: 'Gruppo',
-        P13GroupDialogNoneSelectedColumnSelectPlaceholder: '(nessuno)',
+        P13GroupDialogNoneSelectedColumnSelectPlaceholder: '(nessun valore)',
         P13GroupDialogShowFieldAsColumnCheckboxLabel: 'Mostra campo come colonna',
         P13GroupDialogRemoveGroupBtnTitle: 'Rimuovi',
         P13GroupDialogAddNewGroupBtnTitle: 'Aggiungi nuovo',
@@ -472,30 +470,30 @@ export default {
         P13SortDialogSortOrderSelectOptionAsc: 'Crescente',
         P13SortDialogSortOrderSelectOptionDesc: 'Decrescente',
         P13SortDialogRemoveSortBtnTitle: 'Rimuovi',
-        P13SortDialogAddNewSortBtnTitle: 'Aggiungi nuovo',
+        P13SortDialogAddNewSortBtnTitle: 'Aggiungi riga',
         P13SortDialogConfirmationBtnLabel: 'OK',
         P13SortDialogCancelBtnLabel: 'Annulla',
         toolbarSearchPlaceholder: 'Cerca',
-        toolbarActionCreateButtonLabel: 'Create',
+        toolbarActionCreateButtonLabel: 'Crea',
         toolbarActionSaveButtonLabel: 'Salva',
         toolbarActionCancelButtonLabel: 'Annulla',
         toolbarActionSortButtonTitle: 'Ordina',
-        toolbarActionFilterButtonTitle: 'Filtro',
-        toolbarActionGroupButtonTitle: 'Gruppo',
+        toolbarActionFilterButtonTitle: 'Filtra',
+        toolbarActionGroupButtonTitle: 'Raggruppa',
         toolbarActionColumnsButtonTitle: 'Colonne',
-        toolbarActionExpandAllButtonTitle: 'Expand all',
-        toolbarActionCollapseAllButtonTitle: 'Collapse all',
+        toolbarActionExpandAllButtonTitle: 'Espandi tutto',
+        toolbarActionCollapseAllButtonTitle: 'Comprimi tutto',
         filterDialogNotFilteredLabel: '(Non filtrato)',
         filterDialogFilterByLabel: 'Filtra per: {filterLabel}',
-        filterDialogFilterTitle: 'Filtro',
+        filterDialogFilterTitle: 'Filtra',
         filterDialogFilterBy: 'Filtra per',
         filterDialogConfirmBtnLabel: 'OK',
         filterDialogCancelBtnLabel: 'Annulla',
         groupDialogHeader: 'Gruppo',
-        groupDialogGroupOrderHeader: 'Ordine di gruppo',
+        groupDialogGroupOrderHeader: 'Ordine di raggruppamento',
         groupDialogGroupOrderAsc: 'Crescente',
         groupDialogGroupOrderDesc: 'Decrescente',
-        groupDialogGroupByHeader: 'Gruppo per',
+        groupDialogGroupByHeader: 'Raggruppa per',
         groupDialogNotGroupedLabel: '(Non raggruppato)',
         groupDialogConfirmBtnLabel: 'OK',
         groupDialogCancelBtnLabel: 'Annulla',
@@ -503,63 +501,63 @@ export default {
         sortDialogSortOrderHeader: 'Ordinamento',
         sortDialogSortOrderAsc: 'Crescente',
         sortDialogSortOrderDesc: 'Decrescente',
-        sortDialogSortByHeader: 'Ordinato per',
+        sortDialogSortByHeader: 'Ordina per',
         sortDialogNotSortedLabel: '(Non ordinato)',
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogCancelBtnLabel: 'Annulla',
-        selectAllCheckboxLabel: 'Select all',
-        deselectAllCheckboxLabel: 'Deselect all',
-        deselectSingleRow: 'To deselect row, press SPACEBAR',
-        selectSingleRow: 'To select row, press SPACEBAR'
+        selectAllCheckboxLabel: 'Seleziona tutto',
+        deselectAllCheckboxLabel: 'Deseleziona tutto',
+        deselectSingleRow: 'Per deselezionare la riga, premere la BARRA SPAZIATRICE',
+        selectSingleRow: 'Per selezionare la riga, premere la BARRA SPAZIATRICE'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Edit'
+        summarySectionEditStep: 'Modifica'
     },
     platformMessagePopover: {
-        allErrors: 'All',
+        allErrors: 'Tutti',
         defaultErrors: {
-            email: 'Email is invalid',
-            max: 'The field exceeds maximum value',
-            maxLength: 'The field exceeds maximum length',
-            min: 'The field value is less than allowed',
-            minLength: 'The field length is less than allowed',
-            pattern: 'The field value is invalid',
-            required: 'The field is mandatory',
-            requiredTrue: 'The field is mandatory'
+            email: 'E-mail non valida',
+            max: 'Il campo supera il valore massimo',
+            maxLength: 'Il campo supera la lunghezza massima',
+            min: 'Il valore campo è minore del consentito',
+            minLength: 'La lunghezza del campo è minore del consentito',
+            pattern: 'Valore campo non valido',
+            required: 'Il campo è obbligatorio',
+            requiredTrue: 'Il campo è obbligatorio'
         }
     },
     platformVariantManagement: {
-        manage: 'Manage',
-        saveAs: 'Save as',
-        saveView: 'Save View',
-        save: 'Save',
-        myViews: 'My Views',
-        view: 'View',
-        setAsDefault: 'Set as Default',
-        public: 'Public',
-        applyAutomatically: 'Apply Automatically',
-        requiredFieldError: 'This field is required.',
-        nameTakenFieldError: 'Variant with such name already exists. Please chose a different name.',
-        cancel: 'Cancel',
-        manageViews: 'Manage Views',
-        markAsFavourite: 'Mark as Favourite',
-        sharing: 'Sharing',
-        default: 'Default',
-        createdBy: 'Created By',
-        removeVariant: 'Remove View',
-        search: 'Search',
+        manage: 'Gestisci',
+        saveAs: 'Salva con nome',
+        saveView: 'Salva view',
+        save: 'Salva',
+        myViews: 'Le mie view',
+        view: 'Visualizza',
+        setAsDefault: 'Imposta come valore predefinito',
+        public: 'Pubblico',
+        applyAutomatically: 'Applica automaticamente',
+        requiredFieldError: 'Questo campo è obbligatorio.',
+        nameTakenFieldError: 'Esiste già una variante con questo nome. Selezionare un nome differente.',
+        cancel: 'Annulla',
+        manageViews: 'Gestisci view',
+        markAsFavourite: 'Contrassegna come preferito',
+        sharing: 'In condivisione',
+        default: 'Predefinita',
+        createdBy: 'Autore',
+        removeVariant: 'Rimuovi view',
+        search: 'Cerca',
         access: {
-            public: 'Public',
-            private: 'Private'
+            public: 'Pubblico',
+            private: 'Privato'
         }
     },
     platformSelect: {
-        selectOptionLabel: 'Seleziona un opzione'
+        selectOptionLabel: "Selezionare un'opzione"
     },
     coreTree: {
-        expand: 'Expand node',
-        collapse: 'Collapse node',
-        noData: 'No data'
+        expand: 'Espandi nodo',
+        collapse: 'Comprimi nodo',
+        noData: 'Nessun dato'
     },
     btpSearchField: {
         searchButtonLabel: 'Cerca',
@@ -568,6 +566,6 @@ export default {
         searchInputAriaLabel: 'Cerca'
     },
     btpToolHeader: {
-        menuButtonAriaLabel: 'Pulsante Menù'
+        menuButtonAriaLabel: 'Pulsante menu'
     }
 };
