@@ -28,11 +28,23 @@
     headerId="fdp-vhd-header-1"
 >
     @for (filter of filters; track filter; let i = $index) {
-        <fdp-value-help-dialog-filter
-            [main]="i < 2"
-            [key]="filter.key"
-            [label]="filter.label"
-            [advanced]="i !== 0"
-        ></fdp-value-help-dialog-filter>
+        @if (filter.key === 'verified') {
+            <fdp-value-help-dialog-filter [main]="true" [key]="filter.key" [label]="filter.label" [advanced]="true">
+                <fd-combobox
+                    *fdpValueHelpFilterDef="let filterModel"
+                    [(ngModel)]="filterModel.value"
+                    [dropdownValues]="booleanDropdownValues"
+                    [placeholder]="filterModel.label"
+                    fd-form-control
+                ></fd-combobox>
+            </fdp-value-help-dialog-filter>
+        } @else {
+            <fdp-value-help-dialog-filter
+                [main]="i < 2"
+                [key]="filter.key"
+                [label]="filter.label"
+                [advanced]="i !== 0"
+            ></fdp-value-help-dialog-filter>
+        }
     }
 </fdp-value-help-dialog>

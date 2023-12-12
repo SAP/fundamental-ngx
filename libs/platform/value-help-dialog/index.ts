@@ -4,6 +4,7 @@ export * from './components/select-tab/select-tab.component';
 export * from './components/value-help-dialog-filter/value-help-dialog-filter.component';
 export * from './constans';
 export * from './directives/condition-count-message.directive';
+export * from './directives/value-help-filter-def.directive';
 export * from './models';
 export * from './value-help-dialog.module';
 export * from './value-help-dialog/value-help-dialog.component';

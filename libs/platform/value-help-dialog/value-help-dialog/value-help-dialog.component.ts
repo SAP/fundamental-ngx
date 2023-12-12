@@ -293,12 +293,6 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     _dir = 'ltr';
 
     /** @hidden */
-    private _selectTabTitle: string;
-
-    /** @hidden */
-    private _defineTabTitle: string;
-
-    /** @hidden */
     private _destroyed = new Subject<void>();
 
     /** @hidden */

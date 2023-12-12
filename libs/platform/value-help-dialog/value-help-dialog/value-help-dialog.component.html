@@ -190,13 +190,20 @@
                                                     [for]="'input' + filter.key"
                                                     >{{ filter.label }}:</label
                                                 >
-                                                <input
-                                                    [(ngModel)]="filter.value"
-                                                    fd-form-control
-                                                    type="text"
-                                                    [name]="'search-by-' + filter.label"
-                                                    [id]="'input' + filter.key"
-                                                />
+                                                @if (filter.filterDef) {
+                                                    <ng-template
+                                                        [ngTemplateOutlet]="filter.filterDef.templateRef"
+                                                        [ngTemplateOutletContext]="{ $implicit: filter }"
+                                                    ></ng-template>
+                                                } @else {
+                                                    <input
+                                                        [(ngModel)]="filter.value"
+                                                        fd-form-control
+                                                        type="text"
+                                                        [name]="'search-by-' + filter.label"
+                                                        [id]="'input' + filter.key"
+                                                    />
+                                                }
                                             </div>
                                         }
                                     }

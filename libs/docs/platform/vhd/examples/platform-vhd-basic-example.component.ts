@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
+import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 
+import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
 import {
     PlatformValueHelpDialogModule,
     ValueHelpDialogDataSource,
+    ValueHelpFilterDefDirective,
     VhdDataProvider,
     VhdDefineExcludeStrategy,
     VhdDefineIncludeStrategy,
@@ -25,6 +29,7 @@ interface ExampleTestModel {
     zipcode: string;
     address: string;
     nickname: string;
+    verified: string;
 }
 
 interface FilterData {
@@ -44,7 +49,8 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
             city: `City ${Math.floor(Math.random() * index)}`,
             zipcode: `zipcode ${Math.floor(Math.random() * index)}`,
             address: `Address ${Math.floor(Math.random() * index)}`,
-            nickname: `Nickname ${Math.floor(Math.random() * index)}`
+            nickname: `Nickname ${Math.floor(Math.random() * index)}`,
+            verified: Math.random() < 0.5 ? 'Yes' : 'No'
         }));
     return {
         dataSource,
@@ -69,7 +75,11 @@ const data = exampleDataSource();
         TokenizerComponent,
         TokenizerInputDirective,
         ContentDensityDirective,
-        PlatformValueHelpDialogModule
+        PlatformValueHelpDialogModule,
+        ComboboxComponent,
+        ValueHelpFilterDefDirective,
+        FormsModule,
+        FormControlComponent
     ]
 })
 export class PlatformVhdBasicExampleComponent {
@@ -77,6 +87,8 @@ export class PlatformVhdBasicExampleComponent {
     dataSource = new ValueHelpDialogDataSource(new DelayedVhdDataProvider(data.dataSource));
 
     actualValue: Partial<VhdValue<ExampleTestModel>> = {};
+
+    booleanDropdownValues = ['Yes', 'No'];
 
     actualItems: string[] = [];
     formatTokenFn = (value: VhdValueChangeEvent<ExampleTestModel>): void => {
