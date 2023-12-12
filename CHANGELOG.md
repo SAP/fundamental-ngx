@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.13...v0.48.0-rc.14) (2023-12-12)
+
+
+### Bug Fixes
+
+* **core:** allow for programmatic change of pane size ([#11063](https://github.com/SAP/fundamental-ngx/issues/11063)) ([44d413c](https://github.com/SAP/fundamental-ngx/commit/44d413cea3f255f4a05423bb6fd0fd2ae5461d48))
+
+
+
+
+
 # [0.48.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.12...v0.48.0-rc.13) (2023-12-12)
 
 
