@@ -74,38 +74,38 @@ describe('ListComponent', () => {
     });
 
     it('should display list container with role as list', () => {
-        const listContainer = fixture.debugElement.nativeElement.querySelector('ul');
+        const listContainer = fixture.debugElement.nativeElement.querySelector('.fd-list');
         fixture.detectChanges();
         expect(listContainer.getAttribute('role')).toEqual('list');
     });
 
     it('should contain fd-list in list container', () => {
-        const listContainer = fixture.debugElement.nativeElement.querySelector('ul');
+        const listContainer = fixture.debugElement.nativeElement.querySelector('.fd-list');
         fixture.detectChanges();
         expect(listContainer.classList).toContain('fd-list');
     });
 
     it('should contain list--no-border class', () => {
         fixture.detectChanges();
-        const listElement = fixture.debugElement.nativeElement.querySelector('ul');
+        const listElement = fixture.debugElement.nativeElement.querySelector('.fd-list');
         expect(listElement.classList).toContain('fd-list--no-border');
     });
 
     it('should contain by Line class', () => {
         fixture.detectChanges();
-        const listElement = fixture.debugElement.nativeElement.querySelector('ul');
+        const listElement = fixture.debugElement.nativeElement.querySelector('.fd-list');
         expect(listElement.classList).toContain('fd-list--byline');
     });
 
     it('should contain show navigation arrow', () => {
         fixture.detectChanges();
-        const listElement = fixture.debugElement.nativeElement.querySelector('ul');
+        const listElement = fixture.debugElement.nativeElement.querySelector('.fd-list');
         expect(listElement.classList).toContain('fd-list--navigation-indication');
     });
 
     it('should contain navigation', () => {
         fixture.detectChanges();
-        const listElement = fixture.debugElement.nativeElement.querySelector('ul');
+        const listElement = fixture.debugElement.nativeElement.querySelector('.fd-list');
         expect(listElement.classList).toContain('fd-list--navigation-indication');
     });
 });

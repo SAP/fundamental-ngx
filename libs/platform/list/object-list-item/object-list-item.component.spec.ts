@@ -56,13 +56,13 @@ describe('ObjectListItemComponent', () => {
     });
 
     it('Should contain fd-list in list container', () => {
-        const listContainer = fixture.debugElement.query(By.css('ul'));
+        const listContainer = fixture.debugElement.query(By.css('.fd-list'));
         fixture.detectChanges();
         expect(listContainer.nativeElement.classList).toContain('fd-list');
     });
 
     it('Should contain fd-list in list should have object list enabled', () => {
-        const listContainer = fixture.debugElement.query(By.css('ul'));
+        const listContainer = fixture.debugElement.query(By.css('.fd-list'));
         fixture.detectChanges();
         expect(listContainer.nativeElement.classList).toContain('fd-object-list');
     });
@@ -114,7 +114,7 @@ describe('ObjectListItemComponent', () => {
     });
 
     it('object list item should have id present', () => {
-        const listItems = fixture.debugElement.queryAll(By.css('li'));
+        const listItems = fixture.debugElement.queryAll(By.css('.fd-list__item'));
         fixture.detectChanges();
         listItems.forEach((listElem) => {
             expect(listElem.nativeElement.getAttribute('id')).toContain('fdp-list-item');
@@ -386,13 +386,13 @@ describe('Object  List Item Component with DataSource', () => {
     });
 
     it('Should Object list container with role as list', () => {
-        const listContainer = fixture.debugElement.query(By.css('ul'));
+        const listContainer = fixture.debugElement.query(By.css('.fd-list'));
         fixture.detectChanges();
         expect(listContainer.nativeElement.getAttribute('role')).toEqual('list');
     });
 
     it('Should contain fd-list and fd-object-list class in list', () => {
-        const listContainer = fixture.debugElement.query(By.css('ul'));
+        const listContainer = fixture.debugElement.query(By.css('.fd-list'));
         fixture.detectChanges();
         expect(listContainer.nativeElement.classList).toContain('fd-list');
         expect(listContainer.nativeElement.classList).toContain('fd-object-list');

@@ -39,19 +39,19 @@ describe('FreeContentListItemComponent', () => {
 
     it('should render a list item', () => {
         fixture.detectChanges();
-        const listElement = fixture.debugElement.nativeElement.querySelector('li');
+        const listElement = fixture.debugElement.nativeElement.querySelector('.fd-list__item');
         expect(listElement.classList).toContain('fd-list__item');
     });
 
     it('list item should have tabindex', () => {
         fixture.detectChanges();
-        const listElement = fixture.debugElement.nativeElement.querySelector('li');
+        const listElement = fixture.debugElement.nativeElement.querySelector('.fd-list__item');
         expect(listElement.getAttribute('tabindex')).toEqual('0');
     });
 
     it('list item should have id', () => {
         fixture.detectChanges();
-        const listElement = fixture.debugElement.nativeElement.querySelector('li');
+        const listElement = fixture.debugElement.nativeElement.querySelector('.fd-list__item');
         expect(listElement.getAttribute('id')).toContain('fdp-list-item-');
     });
 

@@ -8,11 +8,11 @@ export class DisplayListItemPo extends PlatformBaseComponentPo {
     displayLinks = 'fdp-platform-display-list-item-border-less-example a';
     cozyDisplayTitles = 'fdp-platform-display-list-item-border-less-example fdp-list:first-of-type a span';
     comfyDisplayTitles = 'fdp-platform-display-list-item-border-less-example fdp-list:nth-of-type(2) a span';
-    sections = 'fdp-platform-display-list-item-border-less-example ul';
+    sections = 'fdp-platform-display-list-item-border-less-example .fd-list';
 
     declarativeDisplayLinks = 'fdp-platform-display-list-item-with-navigation-example a';
     declarativeDisplayTitles = 'fdp-platform-display-list-item-with-navigation-example a span:first-of-type';
-    declarativeSection = 'fdp-platform-display-list-item-with-navigation-example ul';
+    declarativeSection = 'fdp-platform-display-list-item-with-navigation-example .fd-list';
 
     async open(): Promise<void> {
         await super.open(this.url);

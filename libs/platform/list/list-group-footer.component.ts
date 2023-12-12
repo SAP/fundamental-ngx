@@ -4,7 +4,7 @@ import { LIST_ITEM_TYPE } from './base-list-item';
 
 @Component({
     selector: 'fdp-list-footer',
-    template: `<li #listFooter class="fd-list__footer" [attr.id]="id" role="option"><ng-content></ng-content></li>`,
+    template: `<div #listFooter class="fd-list__footer" [attr.id]="id" role="option"><ng-content></ng-content></div>`,
     standalone: true,
     host: {
         role: 'none'
