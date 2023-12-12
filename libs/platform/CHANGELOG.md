@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.12...v0.48.0-rc.13) (2023-12-12)
+
+
+### Bug Fixes
+
+* **core,platform:** button should not set aria-pressed by default ([#11065](https://github.com/SAP/fundamental-ngx/issues/11065)) ([4f425ec](https://github.com/SAP/fundamental-ngx/commit/4f425ecb5647433a39a997683846b3ce3184068e))
+* **platform:** correct list markup ([#11078](https://github.com/SAP/fundamental-ngx/issues/11078)) ([6911b3a](https://github.com/SAP/fundamental-ngx/commit/6911b3a4ae727da19c2ee2082bed575d36b18cdb))
+
+
+
+
+
+# [0.48.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.11...v0.48.0-rc.12) (2023-12-10)
+
+
+### Bug Fixes
+
+* **platform:** reset pagination when ds changed ([#11060](https://github.com/SAP/fundamental-ngx/issues/11060)) ([2a49710](https://github.com/SAP/fundamental-ngx/commit/2a49710dd85092d5c0eb9d3be8b23e9a1f667e2b))
+
+
+
+
+
 # [0.48.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.10...v0.48.0-rc.11) (2023-12-07)
 
 

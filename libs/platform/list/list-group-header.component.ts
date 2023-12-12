@@ -6,7 +6,7 @@ let nextListGrpHeaderId = 0;
 
 @Component({
     selector: 'fdp-list-group-header',
-    template: ` <li
+    template: ` <div
         #listItem
         fd-list-group-header
         [attr.aria-labelledby]="ariaLabelledBy"
@@ -17,7 +17,7 @@ let nextListGrpHeaderId = 0;
     >
         <span fd-list-title>{{ groupHeaderTitle }}</span>
         <ng-content></ng-content>
-    </li>`,
+    </div>`,
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ListGroupHeaderComponent) }],
     standalone: true,
     host: {

@@ -1347,6 +1347,8 @@ export class TableComponent<T = any>
         this._tableRowsInViewPortPlaceholder = [];
         this._newTableRows = [];
         this._dataSourceTableRows = [];
+        this._setTableRows([]);
+        this._tableService.setCurrentPage(1);
     }
 
     // Private API

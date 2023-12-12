@@ -4,7 +4,7 @@ export class ActionListItemPo extends PlatformBaseComponentPo {
     url = '/action-list-item';
 
     actionBtns = 'fdp-action-list-item button';
-    actionSections = 'fdp-platform-action-list-item-border-less-example ul';
+    actionSections = 'fdp-platform-action-list-item-border-less-example .fd-list';
     cozyItem = 'fdp-platform-action-list-item-border-less-example fdp-list#cozy-list .fd-list__item';
     compactItem = 'fdp-platform-action-list-item-border-less-example fdp-list#compact-list .fd-list__item';
 

@@ -69,13 +69,13 @@ describe('ActionListItemComponent', () => {
     });
 
     it('Should display list container with role as list', () => {
-        const listContainer = fixture.debugElement.query(By.css('ul'));
+        const listContainer = fixture.debugElement.query(By.css('.fd-list'));
         fixture.detectChanges();
         expect(listContainer.nativeElement.getAttribute('role')).toEqual('list');
     });
 
     it('Should contain fd-list in list container', () => {
-        const listContainer = fixture.debugElement.query(By.css('ul'));
+        const listContainer = fixture.debugElement.query(By.css('.fd-list'));
         fixture.detectChanges();
         expect(listContainer.nativeElement.classList).toContain('fd-list');
     });
@@ -87,7 +87,7 @@ describe('ActionListItemComponent', () => {
     });
 
     it('Actionable items should has class list item actions', () => {
-        const actionItems = fixture.debugElement.queryAll(By.css('li'));
+        const actionItems = fixture.debugElement.queryAll(By.css('.fd-list__item'));
         fixture.detectChanges();
         expect(actionItems[0].nativeElement.classList).toContain('fd-list__item--action');
     });
@@ -133,7 +133,7 @@ describe('ActionListItemComponent', () => {
     });
 
     it('Should has unique identification for list item', () => {
-        const actionItems = fixture.debugElement.queryAll(By.css('li'));
+        const actionItems = fixture.debugElement.queryAll(By.css('.fd-list__item'));
         fixture.detectChanges();
         expect(actionItems[0].nativeElement.getAttribute('id')).toContain('fdp-list-item');
     });
@@ -192,13 +192,13 @@ describe('ActionListItemComponent Imperative', () => {
     });
 
     it('should create action list items with given values', () => {
-        const actionListElems = fixture.debugElement.queryAll(By.css('li'));
+        const actionListElems = fixture.debugElement.queryAll(By.css('.fd-list__item'));
         expect(actionListElems.length).toEqual(4);
         actionListElems.forEach((listElem) => {
             expect(listElem.nativeElement.getAttribute('id')).toBeTruthy();
         });
 
-        const liElems = fixture.debugElement.queryAll(By.css('li'));
+        const liElems = fixture.debugElement.queryAll(By.css('.fd-list__item'));
         expect(liElems.length).toEqual(4);
         liElems.forEach((liElem) => {
             expect(liElem.nativeElement.getAttribute('tabindex')).toBeTruthy();

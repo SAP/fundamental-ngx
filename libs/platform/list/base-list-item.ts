@@ -511,7 +511,8 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
      * will be deducted in list item
      */
     ngAfterViewChecked(): void {
-        const currentItem: Nullable<HTMLLIElement> = this.itemEl.nativeElement.querySelector('li');
+        const currentItem: Nullable<HTMLElement> =
+            this.itemEl.nativeElement.querySelector<HTMLElement>('.fd-list__item');
         if (!currentItem) {
             return;
         }
