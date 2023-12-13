@@ -7,5 +7,7 @@ export * from './components/value-help-dialog-filter/value-help-dialog-filter.co
 export * from './components/value-help-dialog-search/value-help-dialog-search.component';
 export * from './constans';
 export * from './directives/condition-count-message.directive';
+export * from './directives/value-help-column-def.directive';
+export * from './directives/value-help-filter-def.directive';
 export * from './models';
 export * from './value-help-dialog/value-help-dialog.component';

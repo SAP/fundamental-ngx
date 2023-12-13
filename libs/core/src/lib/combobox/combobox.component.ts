@@ -700,7 +700,7 @@ export class ComboboxComponent
 
     /** @hidden */
     private _defaultDisplay(str: any): string {
-        return str;
+        return `${str}`;
     }
 
     /** @hidden */

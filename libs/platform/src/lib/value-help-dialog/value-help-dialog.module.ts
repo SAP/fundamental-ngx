@@ -36,6 +36,8 @@ import { SelectTabComponent } from './components/select-tab/select-tab.component
 import { DefineTabComponent } from './components/define-tab/define-tab.component';
 import { ConditionCountMessageDirective } from './directives/condition-count-message.directive';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
+import { ValueHelpColumnDefDirective } from './directives/value-help-column-def.directive';
+import { ValueHelpFilterDefDirective } from './directives/value-help-filter-def.directive';
 
 @NgModule({
     declarations: [
@@ -77,14 +79,18 @@ import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
         PlatformContentDensityDeprecationsModule,
         ScrollbarModule,
         SkeletonModule,
-        RepeatModule
+        RepeatModule,
+        ValueHelpColumnDefDirective,
+        ValueHelpFilterDefDirective
     ],
     exports: [
         PlatformValueHelpDialogComponent,
         VhdFilterComponent,
         VhdSearchComponent,
         ContentDensityModule,
-        PlatformContentDensityDeprecationsModule
+        PlatformContentDensityDeprecationsModule,
+        ValueHelpColumnDefDirective,
+        ValueHelpFilterDefDirective
     ]
 })
 export class PlatformValueHelpDialogModule {}

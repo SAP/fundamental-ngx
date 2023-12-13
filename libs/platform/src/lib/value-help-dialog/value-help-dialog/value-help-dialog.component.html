@@ -192,13 +192,21 @@
                                         <label class="fd-form-group__header" fd-form-label [for]="'input' + filter.key"
                                             >{{ filter.label }}:</label
                                         >
-                                        <input
-                                            [(ngModel)]="filter.value"
-                                            fd-form-control
-                                            type="text"
-                                            [name]="'search-by-' + filter.label"
-                                            [id]="'input' + filter.key"
-                                        />
+                                        <ng-container *ngIf="filter.filterDef">
+                                            <ng-template
+                                                [ngTemplateOutlet]="filter.filterDef.templateRef"
+                                                [ngTemplateOutletContext]="{ $implicit: filter }"
+                                            ></ng-template>
+                                        </ng-container>
+                                        <ng-container *ngIf="!filter.filterDef">
+                                            <input
+                                                [(ngModel)]="filter.value"
+                                                fd-form-control
+                                                type="text"
+                                                [name]="'search-by-' + filter.label"
+                                                [id]="'input' + filter.key"
+                                            />
+                                        </ng-container>
                                     </div>
                                 </ng-container>
                             </ng-container>

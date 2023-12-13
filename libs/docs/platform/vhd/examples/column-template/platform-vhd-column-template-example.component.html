@@ -23,6 +23,9 @@
     (valueChange)="valueChange($event)"
     headerId="fdp-vhd-header-1"
 >
+    <ng-container *fdpValueHelpColumnDef="let row; column: 'verified'; let colName = key; let value = value">
+        {{ value ? 'Yes' : 'No' }}
+    </ng-container>
     <ng-container *ngFor="let filter of filters; let i = index">
         <fdp-value-help-dialog-filter
             *ngIf="filter.key === 'verified'"
@@ -31,13 +34,16 @@
             [label]="filter.label"
             [advanced]="true"
         >
-            <fd-combobox
+            <fd-select
                 *fdpValueHelpFilterDef="let filterModel"
                 [(ngModel)]="filterModel.value"
-                [dropdownValues]="booleanDropdownValues"
-                [placeholder]="filterModel.label"
                 fd-form-control
-            ></fd-combobox>
+                class="vhd-custom-select"
+            >
+                <li *ngFor="let option of booleanDropdownValues" fd-option [value]="option.value">
+                    <span fd-list-title>{{ option.displayValue }}</span>
+                </li>
+            </fd-select>
         </fdp-value-help-dialog-filter>
         <fdp-value-help-dialog-filter
             *ngIf="filter.key !== 'verified'"
