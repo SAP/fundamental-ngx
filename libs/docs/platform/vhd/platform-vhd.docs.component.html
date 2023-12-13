@@ -213,3 +213,19 @@
 <code-example [exampleFiles]="initialLoadingValueHelpDialog"></code-example>
 
 <separator></separator>
+
+<fd-docs-section-title id="custom-column" componentName="value-help-dialog">Custom columns</fd-docs-section-title>
+<description>
+    <p>
+        Developers can use structural directive <code>*fdpValueHelpColumnDef</code> to define custom template to render
+        the column.
+    </p>
+    <p>
+        This example shows how to transform boolean column value into a string representation (Yes/No) with the ability
+        to filter by boolean values.
+    </p>
+</description>
+<component-example>
+    <fdp-vhd-column-template-example></fdp-vhd-column-template-example>
+</component-example>
+<code-example [exampleFiles]="customColumnValueHelpDialog"></code-example>

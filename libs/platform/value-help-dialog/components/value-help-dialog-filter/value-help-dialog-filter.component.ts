@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Input } from '@angular/core';
 
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { ValueHelpFilterDefDirective } from '../../directives/value-help-filter-def.directive';
 import { VhdFilter } from '../../models/vhd-filter.model';
 
 @Component({
@@ -37,4 +39,8 @@ export class VhdFilterComponent implements VhdFilter {
     /** Allow to use filter for excluding in `define conditions tab` */
     @Input()
     exclude = true;
+
+    /** @hidden */
+    @ContentChild(ValueHelpFilterDefDirective)
+    filterDef: Nullable<ValueHelpFilterDefDirective>;
 }

@@ -3,17 +3,20 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    DestroyRef,
     EventEmitter,
     Input,
     OnChanges,
     Output,
     SimpleChanges,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { SlicePipe } from '@angular/common';
+import { NgTemplateOutlet, SlicePipe } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { FocusableGridDirective, RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { BarComponent, BarElementDirective, BarMiddleDirective } from '@fundamental-ngx/core/bar';
@@ -33,7 +36,10 @@ import {
 } from '@fundamental-ngx/core/table';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { startWith } from 'rxjs';
+import { ValueHelpColumnDefDirective } from '../../directives/value-help-column-def.directive';
 import { VdhTableSelection, VhdFilter } from '../../models';
+import { VhdComponent } from '../../models/vhd-component.model';
 import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
 
 let titleUniqueId = 0;
@@ -67,7 +73,8 @@ let titleUniqueId = 0;
         RepeatDirective,
         SkeletonComponent,
         SlicePipe,
-        FdTranslatePipe
+        FdTranslatePipe,
+        NgTemplateOutlet
     ]
 })
 export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, AfterViewInit {
@@ -162,14 +169,27 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
     }
 
     /** @hidden */
+    _columnDefMap = new Map<string, ValueHelpColumnDefDirective>();
+
+    /** @hidden */
     private selectedItems: T[] = [];
 
     /** @hidden */
-    private _emptyTableMessage: string;
+    private readonly _vhd = inject(VhdComponent, { optional: true });
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     ngAfterViewInit(): void {
         Promise.resolve(true).then(() => this._checkScrollAndShowMore());
+
+        this._vhd?.columnDef.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            this._columnDefMap.clear();
+            this._vhd?.columnDef.forEach((item) => {
+                this._columnDefMap.set(item.column, item);
+            });
+        });
     }
 
     /** @hidden  */
