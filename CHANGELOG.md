@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.14...v0.48.0-rc.15) (2023-12-13)
+
+
+### Features
+
+* **platform:** vhd custom filter controls ([#11080](https://github.com/SAP/fundamental-ngx/issues/11080)) ([4503852](https://github.com/SAP/fundamental-ngx/commit/45038529eb1feccc04e08e3591f851544bb88a6a))
+
+
+
+
+
 # [0.48.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.13...v0.48.0-rc.14) (2023-12-12)
 
 
