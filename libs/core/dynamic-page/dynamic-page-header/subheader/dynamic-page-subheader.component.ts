@@ -121,7 +121,7 @@ export class DynamicPageSubheaderComponent {
 
     /**
      * Aria Label for the toggle button
-     * @hidden
+     * @ignore
      **/
     get _toggleButtonAriaLabel(): string {
         const expandLabel = this.expandLabel || this._defaultExpandLabel();
@@ -131,7 +131,7 @@ export class DynamicPageSubheaderComponent {
 
     /**
      * Aria Label for the pin button
-     * @hidden
+     * @ignore
      **/
     get _pinButtonAriaLabel(): string {
         const pinLabel = this.pinAriaLabel || this._defaultPinLabel();
@@ -145,27 +145,27 @@ export class DynamicPageSubheaderComponent {
     _pinned = false;
 
     /**
-     * @hidden
+     * @ignore
      * tracking expand/collapse button
      */
     private _collapsed = false;
 
-    /** @hidden */
+    /** @ignore */
     private _resolveTranslationSignal = resolveTranslationSignalFn();
 
-    /** @hidden */
+    /** @ignore */
     private _defaultExpandLabel = this._resolveTranslationSignal('coreDynamicPage.expandLabel');
 
-    /** @hidden */
+    /** @ignore */
     private _defaultCollapseLabel = this._resolveTranslationSignal('coreDynamicPage.collapseLabel');
 
-    /** @hidden */
+    /** @ignore */
     private _defaultPinLabel = this._resolveTranslationSignal('coreDynamicPage.pinLabel');
 
-    /** @hidden */
+    /** @ignore */
     private _defaultUnpinLabel = this._resolveTranslationSignal('coreDynamicPage.unpinLabel');
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _cd: ChangeDetectorRef,
         private _dynamicPageService: DynamicPageService
@@ -185,7 +185,7 @@ export class DynamicPageSubheaderComponent {
     }
 
     /**
-     * @hidden
+     * @ignore
      * click action on pin button
      */
     togglePinned(): void {
@@ -193,7 +193,7 @@ export class DynamicPageSubheaderComponent {
         this._dynamicPageService.pinned.next(this._pinned);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleCollapsedChange(collapsed: boolean): void {
         if (collapsed === this._collapsed) {
             return;

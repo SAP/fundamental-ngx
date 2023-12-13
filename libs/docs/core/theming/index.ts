@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'theming';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/theming';
 export const API_FILE_KEY = 'theming';

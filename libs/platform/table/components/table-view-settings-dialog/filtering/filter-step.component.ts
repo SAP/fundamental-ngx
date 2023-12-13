@@ -81,13 +81,13 @@ export class FilterStepComponent implements FiltersViewStep {
     @ViewChild('bodyTemplate')
     bodyTemplateRef: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     readonly FILTER_TYPE = FilterType;
 
-    /** @hidden */
+    /** @ignore */
     _filterBy?: CollectionFilter;
 
-    /** @hidden */
+    /** @ignore */
     _onFilterValueChange(filterValue: any): void {
         const filterBy: CollectionFilter = this._filterBy || {
             field: this.columnKey,

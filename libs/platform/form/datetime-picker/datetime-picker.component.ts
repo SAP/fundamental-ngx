@@ -233,24 +233,24 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onClose: EventEmitter<void> = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(DatetimePickerComponent)
     dateTimePickerComponent: DatetimePickerComponent<D>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(DatetimePickerComponent, { static: true, read: ElementRef })
     protected _elRef: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(DatetimePickerComponent, { static: true, read: NgControl })
     protected _control: NgControl;
 
-    /** @hidden */
+    /** @ignore */
     get _isRequired(): boolean {
         return !!this.formField?.required;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         protected _cd: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -284,7 +284,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     disableFunction: (value: D) => boolean = () => false;
 
     /**
-     * @hidden
+     * @ignore
      */
     ngAfterViewInit(): void {
         // if used with platform forms, adjust width of datetimepicker to take 100% container space
@@ -293,14 +293,14 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     writeValue(value: D): void {
         super.writeValue(value);
         this._cd.markForCheck();
     }
 
     /**
-     * @hidden
+     * @ignore
      * override base functionality to catch new disabled state
      */
     setDisabledState(disabled: boolean): void {
@@ -309,7 +309,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     }
 
     /**
-     * @hidden
+     * @ignore
      * logic to handle validation from both platform forms and core datetiimepicker
      * @param datetime inputted
      */
@@ -354,7 +354,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     };
 
     /**
-     * @hidden
+     * @ignore
      * method that adjusts width of datetimepicker to take 100% container space
      */
     private _adjustPickerWidth(): void {

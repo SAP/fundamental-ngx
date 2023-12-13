@@ -8,23 +8,23 @@ import { TableRow } from '../models';
 import { TableChildrenDataProvider, TableDataProvider } from './table-data-provider';
 
 export abstract class BaseTableDataSource<T, P = T[], L = boolean> implements DataSource<T, P, L> {
-    /** @hidden */
+    /** @ignore */
     protected readonly _dataChanges$ = new BehaviorSubject<P>([] as any);
-    /** @hidden */
+    /** @ignore */
     protected readonly _onDataRequested$ = new Subject<boolean>();
-    /** @hidden */
+    /** @ignore */
     protected readonly _onDataReceived$ = new Subject<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     protected _dataLoading: L;
 
-    /** @hidden */
+    /** @ignore */
     protected readonly _dataLoading$: BehaviorSubject<L>;
 
-    /** @hidden */
+    /** @ignore */
     protected readonly _destroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         this._dataLoading$ = new BehaviorSubject(this._dataLoading);
     }
@@ -61,12 +61,12 @@ export abstract class BaseTableDataSource<T, P = T[], L = boolean> implements Da
         return this._dataChanges$.asObservable().pipe(takeUntil(this._destroy$));
     }
 
-    /** @hidden */
+    /** @ignore */
     get isDataLoading(): L {
         return this._dataLoading;
     }
 
-    /** @hidden */
+    /** @ignore */
     get data(): P {
         return this._dataChanges$.value;
     }
@@ -77,22 +77,22 @@ export abstract class BaseTableDataSource<T, P = T[], L = boolean> implements Da
      */
     abstract fetch(tableState: TableState, parentRows?: TableRow<T>[]): void;
 
-    /** @hidden */
+    /** @ignore */
     open(): Observable<P> {
         return this._dataChanges$.asObservable();
     }
 
-    /** @hidden */
+    /** @ignore */
     onDataRequested(): Observable<void> {
         return this._onDataRequested$.asObservable().pipe(map(() => void 0));
     }
 
-    /** @hidden */
+    /** @ignore */
     onDataReceived(): Observable<void> {
         return this._onDataReceived$.asObservable().pipe(map(() => void 0));
     }
 
-    /** @hidden */
+    /** @ignore */
     close(): void {}
 
     /**
@@ -106,7 +106,7 @@ export abstract class BaseTableDataSource<T, P = T[], L = boolean> implements Da
 
 export class TableDataSource<T> extends BaseTableDataSource<T> {
     /**
-     * @hidden
+     * @ignore
      */
     constructor(readonly dataProvider: TableDataProvider<T>) {
         super();
@@ -143,7 +143,7 @@ export class ChildTableDataSource<T> extends BaseTableDataSource<
     { row?: TableRow<T>; loading: boolean }[]
 > {
     /**
-     * @hidden
+     * @ignore
      */
     constructor(readonly dataProvider: TableChildrenDataProvider<T>) {
         super();

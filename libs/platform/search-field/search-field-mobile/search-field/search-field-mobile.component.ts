@@ -61,13 +61,13 @@ export class SearchFieldMobileComponent
     extends MobileModeBase<SearchFieldMobileInterface>
     implements OnInit, OnDestroy
 {
-    /** @hidden */
+    /** @ignore */
     childContent: SearchFieldChildContent | null = null;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,
@@ -77,17 +77,17 @@ export class SearchFieldMobileComponent
         super(elementRef, dialogService, searchFieldComponent, MobileModeControl.SEARCH_FIELD, mobileModes);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.listenChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         super.onDestroy();
     }
 
-    /** @hidden */
+    /** @ignore */
     listenChanges(): void {
         this._component.isOpenChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => {
             if (!isOpen) {
@@ -102,19 +102,19 @@ export class SearchFieldMobileComponent
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     _handleDismiss(): void {
         this.dialogRef.close();
         this._component.dialogDismiss();
     }
 
-    /** @hidden */
+    /** @ignore */
     _handleApprove(): void {
         this.dialogRef.close();
         this._component.dialogApprove();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _open(): void {
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
             mobile: true,

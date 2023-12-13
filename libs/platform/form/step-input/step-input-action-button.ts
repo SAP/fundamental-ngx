@@ -7,28 +7,28 @@ import { switchMap, takeUntil } from 'rxjs/operators';
  */
 @Directive()
 export abstract class StepInputActionButton implements OnDestroy {
-    /** @hidden */
+    /** @ignore */
     protected _destroyed = new Subject<void>();
 
     /**
-     * @hidden
+     * @ignore
      * Indicates if action can be handled
      */
     abstract canHandleAction(): boolean;
 
     /**
-     * @hidden
+     * @ignore
      * Step input button action handler
      */
     abstract runAction(): void;
 
-    /** @hidden  */
+    /** @ignore  */
     ngOnDestroy(): void {
         this._destroyed.next();
         this._destroyed.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('mousedown')
     click(): void {
         if (!this.canHandleAction()) {

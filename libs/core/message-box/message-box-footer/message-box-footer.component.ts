@@ -26,22 +26,22 @@ export const MessageBoxButtonClass = 'fd-message-box__decisive-button';
     imports: [BarComponent, ContentDensityDirective, NgTemplateOutlet, BarRightDirective]
 })
 export class MessageBoxFooterComponent extends DialogFooterBase implements AfterContentInit, AfterViewInit {
-    /** @hidden */
+    /** @ignore */
     get messageBoxConfig(): MessageBoxConfig {
         return this.messageBox?._messageBoxConfig || {};
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(@Optional() private messageBox?: MessageBoxHost) {
         super();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         super.ngAfterContentInit();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._listenForButtonChanges(MessageBoxButtonClass);
     }

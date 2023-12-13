@@ -64,7 +64,7 @@ export class SectionsToolbarComponent implements OnInit, OnChanges {
         return window.innerWidth < SMALL_SCREEN_BREAKPOINT;
     }
 
-    /** @hidden type enforcing */
+    /** @ignore type enforcing */
     $asSectionNestedContent = (sectionContent: SectionInterfaceContent[]): SectionInterfaceContentNested[] =>
         <any>sectionContent;
 

@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'inline-help';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/inline-help';
 export const API_FILE_KEY = 'inlineHelp';

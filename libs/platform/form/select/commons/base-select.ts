@@ -222,7 +222,7 @@ export abstract class BaseSelect
         return this._optionItems;
     }
 
-    /** @hidden */
+    /** @ignore */
     get canClose(): boolean {
         return !(this.mobile && this.mobileConfig.approveButtonText);
     }
@@ -231,44 +231,44 @@ export abstract class BaseSelect
     @Output()
     selectionChange = new EventEmitter<FdpSelectionChangeEvent>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(ListComponent)
     listComponent: ListComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(TemplateDirective)
     customTemplates: QueryList<TemplateDirective>;
 
     /** Custom Option item Template
-     * * @hidden
+     * * @ignore
      * */
     _optionItemTemplate: TemplateRef<any>;
 
     /**
      * Custom Secondary item Template
-     * @hidden
+     * @ignore
      * */
     _secondaryItemTemplate: TemplateRef<any>;
 
     /**
      * Custom Selected option item Template
-     * @hidden
+     * @ignore
      * */
     _selectedItemTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     _contentDensityService: ContentDensityService;
 
     /**
      * List of option items
-     * @hidden
+     * @ignore
      * */
     _optionItems: SelectOptionItem[];
 
-    /** @hidden */
+    /** @ignore */
     _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _searchInputElement: ElementRef;
 
     /** Whether the select is opened. */
@@ -277,23 +277,23 @@ export abstract class BaseSelect
     /**
      * Need for opening mobile version
      *
-     * @hidden
+     * @ignore
      */
     private _openChange = new Subject<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     private _dsSubscription?: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     private _element: HTMLElement = this.elementRef.nativeElement;
 
-    /** @hidden */
+    /** @ignore */
     private _firstColumnRatio: number;
 
-    /** @hidden */
+    /** @ignore */
     private _secondColumnRatio: number;
 
-    /** @hidden */
+    /** @ignore */
     protected constructor(
         readonly cd: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -307,14 +307,14 @@ export abstract class BaseSelect
         super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._initWindowResize();
         this._assignCustomTemplates();
         super.ngAfterViewInit();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         super.ngOnDestroy();
 
@@ -330,7 +330,7 @@ export abstract class BaseSelect
         return this.value.trim().length === 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     protected setValue(newValue: any, emitOnChange = true): void {
         if (newValue !== this._value) {
             this.writeValue(newValue);
@@ -343,7 +343,7 @@ export abstract class BaseSelect
         }
     }
 
-    /** @hidden
+    /** @ignore
      * Close list * */
     close(event: MouseEvent | null = null, forceClose: boolean = false): void {
         if (event) {
@@ -361,7 +361,7 @@ export abstract class BaseSelect
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     showList(isOpen: boolean): void {
         if (this._isOpen !== isOpen) {
             this._isOpen = isOpen;
@@ -372,7 +372,7 @@ export abstract class BaseSelect
         this.cd.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     handlePressEnter(event: KeyboardEvent, value: SelectOptionItem): void {
         if (!KeyUtil.isKeyCode(event, ENTER)) {
             return;
@@ -388,7 +388,7 @@ export abstract class BaseSelect
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initWindowResize(): void {
         this._getOptionsListWidth();
 
@@ -401,7 +401,7 @@ export abstract class BaseSelect
             .subscribe(() => this._getOptionsListWidth());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getOptionsListWidth(): void {
         const body = document.body;
         const rect = this._element.getBoundingClientRect();
@@ -412,7 +412,7 @@ export abstract class BaseSelect
 
     /**
      * Convert original data to OptionItems Interface
-     * @hidden
+     * @ignore
      */
     private _convertToOptionItems(items: any[]): SelectOptionItem[] {
         const item = items[0];
@@ -437,7 +437,7 @@ export abstract class BaseSelect
 
     /**
      * Convert data to OptionItems Interface
-     * @hidden
+     * @ignore
      */
     private _convertObjectsToOptionItems(items: any[]): SelectOptionItem[] {
         if (this.showSecondaryText && this.secondaryKey) {
@@ -449,7 +449,7 @@ export abstract class BaseSelect
 
     /**
      * Convert object[] data to Secondary OptionItems Interface
-     * @hidden
+     * @ignore
      */
     private _convertObjectsToSecondaryOptionItems<K>(items: K[]): SelectOptionItem[] {
         const selectItems: SelectOptionItem[] = [];
@@ -468,7 +468,7 @@ export abstract class BaseSelect
 
     /**
      * Convert Primitive data(Boolean, String, Number) to OptionItems Interface
-     * @hidden
+     * @ignore
      */
     private _convertPrimitiveToOptionItems(items: string[]): SelectOptionItem[] {
         const selectItems: SelectOptionItem[] = [];
@@ -483,7 +483,7 @@ export abstract class BaseSelect
 
     /**
      * Convert object[] to OptionItems Interface (Default)
-     * @hidden
+     * @ignore
      */
     private _convertObjectsToDefaultOptionItems(items: any[]): SelectOptionItem[] {
         const selectItems: SelectOptionItem[] = [];
@@ -499,7 +499,7 @@ export abstract class BaseSelect
         return selectItems;
     }
 
-    /** @hidden
+    /** @ignore
      * Assign custom templates
      * */
     private _assignCustomTemplates(): void {

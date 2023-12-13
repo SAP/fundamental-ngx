@@ -9,13 +9,13 @@ import { MICRO_PROCESS_FLOW, MicroProcessFlowComponentInterface } from './inject
     standalone: true
 })
 export class MicroProcessFlowFocusableItemDirective implements OnInit {
-    /** @hidden */
+    /** @ignore */
     constructor(
         public elRef: ElementRef<HTMLElement>,
         @Optional() @Inject(MICRO_PROCESS_FLOW) private _microProcessFlow: MicroProcessFlowComponentInterface
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.setFocusable();
     }
@@ -31,7 +31,7 @@ export class MicroProcessFlowFocusableItemDirective implements OnInit {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handler for focus events
      */
     @HostListener('focus')
@@ -40,7 +40,7 @@ export class MicroProcessFlowFocusableItemDirective implements OnInit {
         this._microProcessFlow?.canItemsReceiveFocus.next(false);
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('blur')
     onBlur(): void {
         this._microProcessFlow?.canItemsReceiveFocus.next(true);

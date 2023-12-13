@@ -10,13 +10,13 @@ let randomId = 0;
 /**
  * This class contains common properties used across components.
  * this can be extended to reduce the code duplication across components.
- * @hidden for form related Base , see BaseInput.
+ * @ignore for form related Base , see BaseInput.
  */
 @Directive()
 export abstract class BaseComponent implements OnDestroy {
-    /** @hidden */
+    /** @ignore */
     protected defaultId = `fdp-id-${randomId++}`;
-    /** @hidden */
+    /** @ignore */
     protected _disabled = false;
 
     /** Sets the `aria-label` attribute to the element. */
@@ -39,10 +39,10 @@ export abstract class BaseComponent implements OnDestroy {
     @Input()
     name: string;
 
-    /** @hidden */
+    /** @ignore */
     protected _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     protected _router: Router;
 
     /** width of the element */
@@ -58,16 +58,16 @@ export abstract class BaseComponent implements OnDestroy {
         return this._disabled;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(protected _cd: ChangeDetectorRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
     /**
-     * @hidden
+     * @ignore
      * For internal usage only
      *
      * Since all components use OnPush strategy in the fundamental lib
@@ -79,7 +79,7 @@ export abstract class BaseComponent implements OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      * For internal usage only
      *
      * Since all components use OnPush strategy in the fundamental lib

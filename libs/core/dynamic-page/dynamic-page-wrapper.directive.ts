@@ -5,6 +5,6 @@ import { Directive, ElementRef } from '@angular/core';
     standalone: true
 })
 export class DynamicPageWrapperDirective {
-    /** @hidden */
+    /** @ignore */
     constructor(public elementRef: ElementRef<HTMLElement>) {}
 }

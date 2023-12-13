@@ -66,23 +66,23 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
     @Input()
     ariaLabel: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     _numberPipeConfig = '';
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this._onChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._onChanges();
     }
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -97,13 +97,13 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _onChanges(): void {
         this.buildComponentCssClass();
         this._buildNumberPipeConfig();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _buildNumberPipeConfig(): void {
         this._numberPipeConfig = `0.${this.decimal}-${this.decimal}`;
     }

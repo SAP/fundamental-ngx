@@ -17,6 +17,11 @@
             "factory": "./src/generators/sync-versions/generator",
             "schema": "./src/generators/sync-versions/schema.json",
             "description": "Synchronizes the versions in output files"
+        },
+        "parse-libraries": {
+            "factory": "./src/generators/parse-libraries/generator",
+            "schema": "./src/generators/parse-libraries/schema.json",
+            "description": "Parses libraries using the compodoc and then groups output"
         }
     }
 }

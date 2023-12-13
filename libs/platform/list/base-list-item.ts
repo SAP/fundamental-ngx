@@ -51,43 +51,43 @@ export class ListIconConfig {
 }
 
 export class ListAvatarConfig {
-    /** @hidden */
+    /** @ignore */
     class = '';
-    /** @hidden */
+    /** @ignore */
     ariaLabel: Nullable<string> = null;
-    /** @hidden */
+    /** @ignore */
     ariaLabelledby: Nullable<string> = null;
-    /** @hidden */
+    /** @ignore */
     label: Nullable<string> = null;
-    /** @hidden */
+    /** @ignore */
     size: Size = 's';
-    /** @hidden */
+    /** @ignore */
     glyph: Nullable<string> = null;
-    /** @hidden */
+    /** @ignore */
     zoomGlyph: Nullable<string> = null;
-    /** @hidden */
+    /** @ignore */
     circle = false;
-    /** @hidden */
+    /** @ignore */
     transparent = false;
-    /** @hidden */
+    /** @ignore */
     contain = false;
-    /** @hidden */
+    /** @ignore */
     placeholder = false;
-    /** @hidden */
+    /** @ignore */
     tile = false;
-    /** @hidden */
+    /** @ignore */
     border = false;
-    /** @hidden */
+    /** @ignore */
     colorAccent: Nullable<ColorAccent> = null;
-    /** @hidden */
+    /** @ignore */
     random = false;
-    /** @hidden */
+    /** @ignore */
     clickable = false;
-    /** @hidden */
+    /** @ignore */
     image: Nullable<string> = null;
-    /** @hidden */
+    /** @ignore */
     alterIcon: Nullable<string> = null;
-    /** @hidden */
+    /** @ignore */
     backupImage: Nullable<string> = null;
 }
 
@@ -127,7 +127,7 @@ export class ModifyItemEvent {
 })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class ListItemDef implements ItemDef {
-    /** @hidden */
+    /** @ignore */
     constructor(/** @docs-private */ public templateRef: TemplateRef<any>) {}
 }
 
@@ -293,7 +293,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     @Output()
     buttonClicked = new EventEmitter<ModifyItemEvent>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('listItem', { read: ElementRef })
     listItem: ElementRef<HTMLLIElement>;
 
@@ -309,26 +309,26 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     @ViewChild('delete', { read: ElementRef })
     delete: ElementRef<HTMLButtonElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(CheckboxComponent)
     checkboxComponent: CheckboxComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(RadioButtonComponent)
     radioButtonComponent: RadioButtonComponent;
 
-    /** @hidden */
+    /** @ignore */
     _type: LIST_ITEM_TYPE = LIST_ITEM_TYPE.ITEM;
 
     /**
-     * @hidden
+     * @ignore
      * Whether By line mode is included to list component, by which
      * list item will accomdate the data in 2 column
      */
     _hasByLine = false;
 
     /**
-     * @hidden
+     * @ignore
      * Whether listitem has row level selection enabled
      */
     set rowSelection(value: boolean) {
@@ -341,55 +341,55 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * Whether listitem is selected binded to template
      */
     _selected = false;
 
-    /** @hidden */
+    /** @ignore */
     get _selectedAttr(): boolean | null {
         return !this.rowSelection && this.selectionMode === 'none' ? null : this._selected;
     }
 
     /**
-     * @hidden
+     * @ignore
      * get the focused element for key manager
      */
     _focused: boolean;
 
-    /** @hidden */
+    /** @ignore */
     get _listItemRole(): string {
         return this.role || this._defaultRole;
     }
 
-    /** @hidden */
+    /** @ignore */
     ariaSetSize: Observable<number>;
 
-    /** @hidden */
+    /** @ignore */
     private _rowSelection = false;
 
-    /** @hidden */
+    /** @ignore */
     private _defaultRole = 'listitem';
 
-    /** @hidden */
+    /** @ignore */
     private _listComponent = inject<FdpList>(FdpListComponent);
 
-    /** @hidden */
+    /** @ignore */
     private _avatarConfig: ListAvatarConfig = new ListAvatarConfig();
 
-    /** @hidden */
+    /** @ignore */
     private _iconConfig: ListIconConfig = new ListIconConfig();
 
     /**
-     * @hidden
+     * @ignore
      * radio button selected value binded to template
      */
     private _selectionValue: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     private _selectionMode: SelectionType = 'none';
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         _changeDetectorRef: ChangeDetectorRef,
         public itemEl: ElementRef<HTMLElement>,
@@ -413,7 +413,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * On item click event will be emitted
      */
     @HostListener('click')
@@ -429,7 +429,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
         this._cd.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     _handleKeyboardEvent(event: KeyboardEvent): void {
         if (!KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
@@ -453,7 +453,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handler for mouse events
      */
     @HostListener('click', ['$event'])
@@ -475,7 +475,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * helps to avoid multi rows active class with navigation
      */
     @HostListener('focusout', ['$event'])
@@ -486,26 +486,26 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * Show navigation for single list
      */
     ngOnInit(): void {
         this.id = `fdp-list-item-${nextListItemId++}`;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         super.ngOnDestroy();
         this.itemSelected.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._listComponent._setupListItem(this);
     }
 
     /**
-     * @hidden
+     * @ignore
      * To detect changes from parent-listbox to list item
      * for example single, multi option selection those details
      * will be deducted in list item
@@ -525,7 +525,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * Created focus on list item on mouseclick,
      * Up,down arrow press
      */
@@ -548,7 +548,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * on keydown append active styles on actionable item
      */
     _onKeyDown(event: KeyboardEvent): void {
@@ -558,7 +558,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * on keyup remove active styles from actionable item
      */
     _onKeyUp(event: KeyboardEvent): void {
@@ -567,7 +567,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _onCheckboxModelChange(): void {
         const event = new ModifyItemEvent();
         event.source = this;
@@ -575,7 +575,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handles action button click
      */
     _onActionButtonClick(action: 'delete' | 'edit'): void {
@@ -586,7 +586,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handles action button click on key press
      */
     _onKeyButtonClick(event: KeyboardEvent, action: 'delete' | 'edit'): void {
@@ -595,12 +595,12 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _isAdvancedText(text: ListDescription): text is ListAdvancedDescription {
         return typeof text !== 'string' && !!text.text;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _onKeyboardClick(event: KeyboardEvent): void {
         this.checkboxComponent?.nextValue();
         this.radioButtonComponent?.valueChange(event);
@@ -611,7 +611,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
         this.itemSelected.emit($event);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setAttrRole(): void {
         this._defaultRole =
             this.rowSelection || this.selectionMode === 'single' || this.selectionMode === 'multi'

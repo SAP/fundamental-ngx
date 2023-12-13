@@ -29,15 +29,15 @@ export class AutoDismissMessageStripDirective {
     /** Whether the message strip is currently opened. */
     opened = false;
 
-    /** @hidden */
+    /** @ignore */
     private messageStripComponent = inject(MessageStripComponent, { optional: false, host: true });
 
-    /** @hidden */
+    /** @ignore */
     private autoDismissTimeout?: ReturnType<typeof setTimeout>;
-    /** @hidden */
+    /** @ignore */
     private elementRef = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     private _destroyRef = inject(DestroyRef);
 
     /**
@@ -48,7 +48,7 @@ export class AutoDismissMessageStripDirective {
         fromEvent(this.elementRef.nativeElement, 'mouseleave').pipe(map(() => false))
     ).pipe(startWith(false));
 
-    /** @hidden */
+    /** @ignore */
     open(): void {
         this.opened = true;
         this.elementRef.nativeElement.classList.remove('fd-has-display-block');
@@ -64,7 +64,7 @@ export class AutoDismissMessageStripDirective {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private stopAutoDismiss = (): void => {
         if (this.autoDismissTimeout) {
             clearTimeout(this.autoDismissTimeout);
@@ -72,7 +72,7 @@ export class AutoDismissMessageStripDirective {
         }
     };
 
-    /** @hidden */
+    /** @ignore */
     private startAutoDismiss(): void {
         // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
         const startAutoDismissTimer$ = new Observable((res) => {
@@ -99,6 +99,6 @@ export class AutoDismissMessageStripDirective {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private dismiss = (): void => this.messageStripComponent.dismiss();
 }

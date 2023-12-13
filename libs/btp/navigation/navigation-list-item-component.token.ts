@@ -51,40 +51,40 @@ export abstract class FdbNavigationListItemComponent extends BasePopoverClass im
     abstract createPortal(): DomPortal;
     abstract destroyPortal(): void;
 
-    /** @hidden */
+    /** @ignore */
     _hidden = signal(false);
 
-    /** @hidden */
+    /** @ignore */
     hiddenItems = signal<FdbNavigationListItemComponent[]>([]);
 
-    /** @hidden */
+    /** @ignore */
     navigationComponent = inject(FdbNavigationComponent);
 
-    /** @hidden */
+    /** @ignore */
     hasPortalChildren = signal(false);
 
-    /** @hidden */
+    /** @ignore */
     childFocused = signal(false);
 
-    /** @hidden */
+    /** @ignore */
     parentNavigationListComponent = inject(FdbNavigationListComponent);
 
-    /** @hidden */
+    /** @ignore */
     protected readonly _rtl = inject(RtlService, { optional: true });
 
-    /** @hidden */
+    /** @ignore */
     protected readonly _isRtl = toSignal(this._rtl?.rtl || of(false), { requireSync: true });
 
-    /** @hidden */
+    /** @ignore */
     protected readonly _popoverService = inject(PopoverService);
 
-    /** @hidden */
+    /** @ignore */
     protected readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private _listenToSnappedExpandedState = true;
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         super();
         this._rtl?.rtl.pipe(takeUntilDestroyed()).subscribe((isRtl) => {
@@ -143,7 +143,7 @@ export abstract class FdbNavigationListItemComponent extends BasePopoverClass im
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._popoverService.close();
         this._popoverService.onDestroy();

@@ -32,7 +32,7 @@ export class SmartFilterBarFieldDefinitionDirective {
     @Input()
     conditionStrategy: CollectionFilterGroupStrategy = 'or';
 
-    /** @hidden */
+    /** @ignore */
     private _smartFilterBarFilterable = true;
 
     /** Whether this field can be filtered. Default value is true. */
@@ -44,7 +44,7 @@ export class SmartFilterBarFieldDefinitionDirective {
         return this._smartFilterBarFilterable;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _required = false;
 
     /** Whether this field filter is mandatory. */
@@ -56,7 +56,7 @@ export class SmartFilterBarFieldDefinitionDirective {
         return this._required;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _defaultSelected = false;
 
     /** Whether this field filter is selected by default. */
@@ -77,6 +77,6 @@ export class SmartFilterBarFieldDefinitionDirective {
         return this._hasOptions;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _hasOptions = false;
 }

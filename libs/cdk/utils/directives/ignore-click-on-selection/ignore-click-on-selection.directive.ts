@@ -18,7 +18,7 @@ import { IgnoreClickOnSelectionDirectiveToken } from './tokens';
     ]
 })
 export class IgnoreClickOnSelectionDirective {
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Inject(DOCUMENT) private document: Document,
         private _elementRef: ElementRef<HTMLElement>

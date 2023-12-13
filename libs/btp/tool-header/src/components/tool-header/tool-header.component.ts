@@ -133,7 +133,7 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @Input('orientation')
     set _orientation(orientation: 'landscape' | 'portrait') {
         if (orientation !== this.orientation()) {
@@ -189,47 +189,47 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
     @Output()
     logoClick = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(ToolHeaderActionClass)
     _contentActions: QueryList<ToolHeaderActionClass>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(ToolHeaderLogoDirective)
     _toolHeaderLogoDirective?: ToolHeaderLogoDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(SearchFieldComponent)
     set _searchField(searchField: SearchFieldComponent) {
         this.searchField.set(searchField);
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(ToolHeaderUserDirective)
     _toolHeaderUser?: ToolHeaderUserDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FD_PRODUCT_SWITCH_COMPONENT)
     _toolHeaderProductSwitch?: unknown;
 
-    /** @hidden */
+    /** @ignore */
     protected _hiddenActions$ = new BehaviorSubject<OverflowItemRef<ToolHeaderActionDirective>[]>([]);
 
-    /** @hidden */
+    /** @ignore */
     protected _delayedHiddenActions$ = this._hiddenActions$.pipe(delayWhen(() => this._ngZone.onStable));
 
-    /** @hidden */
+    /** @ignore */
     private _searchFieldOutsideClickSubscription?: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     private _ngZone = inject(NgZone);
 
-    /** @hidden */
+    /** @ignore */
     private _mapOfItemsAndInjectors = new WeakMap<OverflowItemRef<ToolHeaderActionDirective>, Injector>();
 
     /**
      * The handler, responsible for closing the search field
      * on outside click
-     * @hidden
+     * @ignore
      **/
     @HostListener('document:click', ['$event'])
     _onClick(event: MouseEvent): void {
@@ -249,7 +249,7 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
     /**
      * The handler, responsible for the focusing on the search field,
      * when the user presses `Ctrl + K` or `Cmd + K` keys
-     * @hidden
+     * @ignore
      **/
     @HostListener('document:keydown.control.k', ['$event'])
     @HostListener('document:keydown.meta.k', ['$event'])
@@ -260,7 +260,7 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         if (this._searchFieldOutsideClickSubscription) {
             this._searchFieldOutsideClickSubscription.unsubscribe();
@@ -277,7 +277,7 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _handleMenuLeftArrowKey(): void {
         if (this._rtl()) {
             this.menuExpand.emit();
@@ -286,7 +286,7 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _handleMenuRightArrowKey(): void {
         if (this._rtl()) {
             this.menuCollapse.emit();
@@ -295,7 +295,7 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _handleHiddenItemsChange($event: OverflowItemRef<ToolHeaderActionDirective>[]): void {
         this._ngZone.runOutsideAngular(() => {
             this._hiddenActions$.next(
@@ -310,7 +310,7 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _indirectFocusableItemInjector(
         parent: Injector,
         item: OverflowItemRef<ToolHeaderActionDirective>

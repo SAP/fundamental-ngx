@@ -110,58 +110,58 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     @Input()
     ariaLabel: string;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(WizardStepComponent, { descendants: true })
     steps: QueryList<WizardStepComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(WizardProgressBarDirective)
     progressBar: WizardProgressBarDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(WizardContentComponent)
     wizardContent: WizardContentComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('wrapperContainer')
     wrapperContainer: ElementRef<HTMLElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(ScrollbarDirective)
     scrollbar: ScrollbarDirective;
 
-    /** @hidden */
+    /** @ignore */
     contentTemplates: TemplateRef<any>[] = [];
 
-    /** @hidden */
+    /** @ignore */
     stackedStepsLeft: WizardStepComponent[] = [];
 
-    /** @hidden */
+    /** @ignore */
     stackedStepsRight: WizardStepComponent[] = [];
 
-    /** @hidden */
+    /** @ignore */
     protected _defaultAriaLabel = resolveTranslationSignal('coreWizard.ariaLabel');
 
-    /** @hidden */
+    /** @ignore */
     private _stepEventSubscriptions: Subscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions: Subscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _previousWidth: number;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _tabbableService = inject(TabbableElementService);
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elRef: ElementRef,
         private readonly _cdRef: ChangeDetectorRef,
         @Optional() @Inject(FD_DIALOG_BODY_COMPONENT) private _dialogBodyComponent: DialogBodyComponent
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('window:resize')
     resizeHandler(): void {
         const wizardWidth = this._elRef.nativeElement.getBoundingClientRect().width;
@@ -179,7 +179,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         setTimeout(() => {
             if (this._subscriptions.closed) {
@@ -201,14 +201,14 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._stepEventSubscriptions.unsubscribe();
         this._subscriptions.unsubscribe();
         this.wrapperContainer?.nativeElement.removeEventListener('scroll', handleTimeoutReference);
     }
 
-    /** @hidden */
+    /** @ignore */
     scrollSpyChange($event: HTMLElement): void {
         if (!_fromScrollToCurrentStep) {
             this.steps.forEach((step) => {
@@ -225,7 +225,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @private
      * This function determines the height of the wizard content by looking for the document's shellbar, the wizard
      * navigation and the wizard footer, and calculating the height based on their presence.
@@ -242,12 +242,12 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         return shellbarHeight + wizardNavHeight + wizardFooterHeight + dialogOffset;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getShellbarHeight(): number {
         return document.querySelector<HTMLElement>('.' + SHELLBAR_CLASS)?.clientHeight ?? 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getWizardNavHeight(): number {
         const wizard = this._elRef.nativeElement;
         let retVal;
@@ -259,7 +259,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         return retVal;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getWizardFooterHeight(): number {
         const wizard = this._elRef.nativeElement;
         let retVal;
@@ -273,7 +273,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         return retVal;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getDialogOffset(): number {
         let retVal = 0;
         if (this._dialogBodyComponent) {
@@ -291,7 +291,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         return retVal;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setContainerAndTallContentHeight(): void {
         const wizard = this._elRef.nativeElement;
         const combinedHeight = this.contentHeight ? this.contentHeight : this._calculateContentHeight();
@@ -315,7 +315,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setupStepEvents(): void {
         this._stepEventSubscriptions.unsubscribe();
         this._stepEventSubscriptions = new Subscription();
@@ -342,7 +342,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _wizardShrinking(): void {
         const currentStep = this._getCurrentStep();
         if (
@@ -356,7 +356,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setContentTemplates(): void {
         const templatesLength = this.contentTemplates.length;
         this.contentTemplates = [];
@@ -421,7 +421,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         this._setFinalStep();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _scrollToCurrentStep(): void {
         if (this.appendToWizard) {
             _fromScrollToCurrentStep = true;
@@ -448,18 +448,18 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _focusFirstTabbableElement(index = 0): void {
         const contentContainer = this._elRef.nativeElement.querySelectorAll('.fd-wizard__content')[index];
         this._tabbableService.getTabbableElement(contentContainer)?.focus();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setUpScrollListener(): void {
         this.wrapperContainer?.nativeElement.addEventListener('scroll', handleTimeoutReference, false);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _hideSomeStep(currentStep: WizardStepComponent): void {
         // If a small step was found, get the step with a visible label furthest away from the current step and hide the label
         let stepsArray = this.steps.toArray();
@@ -490,7 +490,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setStackedTop(): void {
         const currentStep = this._getCurrentStep();
         this.steps.forEach((step, index) => {
@@ -512,7 +512,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         this._getLastNonSummaryStep().stepIndicator?.setStackedItems(this.stackedStepsRight);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _resetStepClasses(): void {
         this.steps.forEach((step) => {
             step.getClassList().remove(STEP_STACKED_TOP_CLASS);
@@ -521,7 +521,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleStepOrStatusChanges(): void {
         if (this._isCurrentStepSummary() && !this.displaySummaryStep) {
             setTimeout(() => {
@@ -546,7 +546,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         this._setFinalStep();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setFinalStep(): void {
         const lastNonSummaryStep = this._getLastNonSummaryStep();
         if (lastNonSummaryStep) {
@@ -560,7 +560,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _showSummary(): void {
         this.steps.forEach((step) => {
             if (!step.isSummary) {
@@ -574,19 +574,19 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isCurrentStepSummary(): boolean {
         return this.steps.some((step) => step.status === CURRENT_STEP_STATUS && step.isSummary);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getCurrentStep(): WizardStepComponent {
         return this.steps.filter(
             (step) => step.status === CURRENT_STEP_STATUS || step.status === ACTIVE_STEP_STATUS
         )[0];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _shrinkWhileAnyStepIsTooNarrow(): void {
         // Add small delay for elements to render appropriately.
         setTimeout(() => {
@@ -603,12 +603,12 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         }, 10);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _anyStepIsTooNarrow(): boolean {
         return this.steps.some((step) => step.getStepClientWidth() < STEP_MIN_WIDTH);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _stepClicked(clickedStep: WizardStepComponent): void {
         if (!clickedStep) {
             clickedStep = this.steps.first;
@@ -633,7 +633,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getLastNonSummaryStep(): WizardStepComponent {
         if (this.steps.last.isSummary && !this.displaySummaryStep) {
             return this.steps.toArray()[this.steps.length - 2];

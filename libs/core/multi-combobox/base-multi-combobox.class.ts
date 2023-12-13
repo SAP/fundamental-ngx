@@ -59,10 +59,10 @@ export abstract class BaseMultiCombobox<T = any> {
     abstract dataRequested: EventEmitter<boolean>;
     // Injection section
 
-    /** @hidden */
+    /** @ignore */
     readonly cvaControl: CvaControl<T> = inject(CvaControl);
 
-    /** @hidden */
+    /** @ignore */
     readonly dataSourceDirective: DataSourceDirective<T, FdMultiComboBoxDataSource<T>> = inject(DataSourceDirective);
 
     /** Control Value Accessor directive for forms support. */
@@ -79,62 +79,62 @@ export abstract class BaseMultiCombobox<T = any> {
     readonly contentDensityObserver = inject(ContentDensityObserver);
 
     /**
-     * @hidden
+     * @ignore
      * List of selected suggestions
      */
     _selectedSuggestions: SelectableOptionItem<T>[] = [];
 
     /**
-     * @hidden
+     * @ignore
      * List of matched suggestions
      */
     _suggestions: SelectableOptionItem[];
 
     /**
-     * @hidden
+     * @ignore
      * Grouped suggestions mapped to array.
      */
     _flatSuggestions: SelectableOptionItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _fullFlatSuggestions: SelectableOptionItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     selectedShown$ = new BehaviorSubject(false);
 
-    /** @Hidden */
+    /** @ignore */
     protected readonly _elmRef = inject(ElementRef<HTMLElement>);
 
-    /** @hidden */
+    /** @ignore */
     protected readonly _cd = inject(ChangeDetectorRef);
 
-    /** @hidden */
+    /** @ignore */
     protected readonly _mapLimit = inject(FD_MAP_LIMIT);
 
-    /** @Hidden */
+    /** @ignore */
     protected readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     protected _dataSource: FdMultiComboboxAcceptableDataSource<T>;
 
-    /** @hidden */
+    /** @ignore */
     protected _inputTextValue: string;
 
-    /** @hidden */
+    /** @ignore */
     protected _previousInputText: string;
 
-    /** @hidden */
+    /** @ignore */
     protected _matchingStrategy: MatchingStrategy =
         this._multiComboboxConfig?.matchingStrategy ?? MatchingStrategy.CONTAINS;
 
-    /** @hidden */
+    /** @ignore */
     protected _dsSubscription: Subscription | null = null;
 
-    /** @hidden */
+    /** @ignore */
     protected _element: HTMLElement = this._elmRef.nativeElement;
 
     /**
-     * @hidden
+     * @ignore
      * Keys, that won't trigger the popover's open state, when dispatched on search input.
      */
     protected readonly _nonOpeningKeys: number[] = [
@@ -151,22 +151,22 @@ export abstract class BaseMultiCombobox<T = any> {
         ALT
     ];
 
-    /** @hidden */
+    /** @ignore */
     protected _timerSub$: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     protected _previousState?: FormStates;
 
-    /** @hidden */
+    /** @ignore */
     protected _previousStateMessage: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     protected readonly _rangeSelector = new RangeSelector();
 
-    /** @hidden */
+    /** @ignore */
     private _dataSourceChanged = false;
 
-    /** @hidden */
+    /** @ignore */
     writeValue(value: T[]): void {
         this.selectedItems = coerceArraySafe(value);
         this._cva.writeValue(this.selectedItems);
@@ -187,10 +187,10 @@ export abstract class BaseMultiCombobox<T = any> {
         this._emitChangeEvent();
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _displayFn = (value: T): string => displayValue(value, this.displayKey);
 
-    /** @hidden */
+    /** @ignore */
     protected _secondaryFn = (value: T): string => {
         if (isOptionItem(value)) {
             return value.secondaryText ?? '';
@@ -204,7 +204,7 @@ export abstract class BaseMultiCombobox<T = any> {
     };
 
     /**
-     * @hidden
+     * @ignore
      * Method to emit change event
      */
     protected _emitChangeEvent(): void {
@@ -213,7 +213,7 @@ export abstract class BaseMultiCombobox<T = any> {
         this.selectionChange.emit(event);
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _setSelectedSuggestions(): void {
         this._selectedSuggestions = [];
 
@@ -237,7 +237,7 @@ export abstract class BaseMultiCombobox<T = any> {
 
     /**
      * Convert original data to SelectableOptionItems Interface
-     * @hidden
+     * @ignore
      */
     protected _convertToOptionItems(items: T[]): SelectableOptionItem<T>[] {
         const item = items[0];
@@ -262,7 +262,7 @@ export abstract class BaseMultiCombobox<T = any> {
 
     /**
      * Convert data to SelectableOptionItems Interface
-     * @hidden
+     * @ignore
      */
     protected _convertObjectsToOptionItems(items: T[]): SelectableOptionItem<T>[] {
         if (this.isGroup) {
@@ -276,7 +276,7 @@ export abstract class BaseMultiCombobox<T = any> {
 
     /**
      * Convert object[] data to Group OptionItems Interface
-     * @hidden
+     * @ignore
      */
     protected _convertObjectsToGroupOptionItems<K extends T>(items: K[]): SelectableOptionItem<T>[] {
         const group: Record<string, K[]> = {};
@@ -316,7 +316,7 @@ export abstract class BaseMultiCombobox<T = any> {
 
     /**
      * Convert T[] data to Secondary SelectableOptionItems<T> Interface
-     * @hidden
+     * @ignore
      */
     protected _convertObjectsToSecondaryOptionItems<K extends T>(items: K[]): SelectableOptionItem<T>[] {
         const selectItems: SelectableOptionItem[] = [];
@@ -337,7 +337,7 @@ export abstract class BaseMultiCombobox<T = any> {
 
     /**
      * Convert Primitive data(Boolean, String, Number) to SelectableOptionItems Interface
-     * @hidden
+     * @ignore
      */
     protected _convertPrimitiveToOptionItems(items: any[]): SelectableOptionItem<T>[] {
         const selectItems: SelectableOptionItem[] = [];
@@ -356,7 +356,7 @@ export abstract class BaseMultiCombobox<T = any> {
 
     /**
      * Convert T[] to SelectableOptionItems<T> Interface (Default)
-     * @hidden
+     * @ignore
      */
     protected _convertObjectsToDefaultOptionItems(items: T[]): SelectableOptionItem<T>[] {
         const selectItems: SelectableOptionItem[] = [];
@@ -374,7 +374,7 @@ export abstract class BaseMultiCombobox<T = any> {
         return selectItems;
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _setInvalidEntry(): void {
         if (this._previousState || this._previousStateMessage) {
             return;
@@ -389,7 +389,7 @@ export abstract class BaseMultiCombobox<T = any> {
         this._cd.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _unsetInvalidEntry(): void {
         this._cva.state = this._previousState;
         this._previousState = undefined;
@@ -400,12 +400,12 @@ export abstract class BaseMultiCombobox<T = any> {
         this._cd.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _focusToSearchField(): void {
         this.searchInputElement?.nativeElement.focus();
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _mapAndUpdateModel(): void {
         const selectedItems = this._selectedSuggestions.map(({ value }) => value);
 
@@ -423,7 +423,7 @@ export abstract class BaseMultiCombobox<T = any> {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Prepares the data stream and subscribes to it.
      */
     protected _openDataStream(): void {
@@ -533,7 +533,7 @@ export abstract class BaseMultiCombobox<T = any> {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _processingEmptyData(): void {
         this.inputText = this._previousInputText;
 

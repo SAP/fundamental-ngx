@@ -3,7 +3,7 @@ import { TableColumnResizableSide } from '../directives/table-cell-resizable.dir
 
 @Pipe({ name: 'columnResizableSide', standalone: true })
 export class ColumnResizableSidePipe implements PipeTransform {
-    /** @hidden */
+    /** @ignore */
     transform(
         columnIndex: number,
         visibleColumnsLength: number,

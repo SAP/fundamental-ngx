@@ -36,40 +36,40 @@ export class IconBarDndContainerDirective implements OnDestroy {
     @Output()
     dropped = new EventEmitter<FdDnDEvent>();
 
-    /** @hidden */
+    /** @ignore */
     private _dragRefItems: DragRef[] = [];
 
-    /** @hidden  */
+    /** @ignore  */
     private dndItemDirectives: IconTabBarDndItem[] = [];
 
-    /** @hidden  */
+    /** @ignore  */
     private _dndListDirectives: Set<IconTabBarDndList> = new Set<IconTabBarDndList>();
 
-    /** @hidden */
+    /** @ignore */
     private _elementsCoordinates: ElementChord[];
 
-    /** @hidden */
+    /** @ignore */
     private _virtualSeparatorsCoordinates: ElementChord[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _closestItemIndex: number | null = null;
 
-    /** @hidden */
+    /** @ignore */
     private _closestSeparatorIndex: number | null = null;
 
-    /** @hidden */
+    /** @ignore */
     private _draggable = true;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onDestroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public elementRef: ElementRef,
         private _dragDrop: DragDrop
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -230,14 +230,14 @@ export class IconBarDndContainerDirective implements OnDestroy {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _changeDraggableState(draggable: boolean): void {
         for (const list of this._dndListDirectives) {
             list.changeDraggableState(draggable);
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isMouseOnFlipper(element: ElementChord, mousePosition: Point): boolean {
         const startX = element.x;
         const endX = element.x + element.width;
@@ -248,7 +248,7 @@ export class IconBarDndContainerDirective implements OnDestroy {
         return _between(mousePosition.x, startX, endX) && _between(mousePosition.y, startY, endY);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isMouseOnElement(element: ElementChord, mousePosition: Point, isVertical: boolean = false): boolean {
         const startX = element.x;
         const endX = element.x + element.width;
@@ -260,7 +260,7 @@ export class IconBarDndContainerDirective implements OnDestroy {
     }
 }
 
-/** @hidden */
+/** @ignore */
 function _between(x: number, min: number, max: number): boolean {
     return x >= min && x <= max;
 }

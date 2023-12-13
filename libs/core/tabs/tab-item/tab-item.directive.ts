@@ -43,24 +43,24 @@ export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
     @Input()
     fdTabItemClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(TabLinkDirective)
     linkItem: TabLinkDirective;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [

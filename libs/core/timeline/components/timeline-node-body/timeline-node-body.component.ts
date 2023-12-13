@@ -26,13 +26,13 @@ export class TimelineNodeBodyComponent {
     @Input()
     maxLines: number;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _ngZone: NgZone,
         private _timelinePositionControlService: TimelinePositionControlService
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     calculatePositions(): void {
         this._ngZone.onStable.pipe(first()).subscribe(() => {
             this._timelinePositionControlService.calculatePositions();

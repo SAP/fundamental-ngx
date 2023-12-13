@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'grid-list';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/grid-list';
 export const API_FILE_KEY = 'gridList';
 export const I18N_KEY = 'coreGridList';

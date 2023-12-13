@@ -77,24 +77,24 @@ export class TableGroupRowComponent<T> extends TableRowDirective implements OnCh
     @Output()
     toggleGroupRow = new EventEmitter<TableRow<T>>();
 
-    /** @hidden */
+    /** @ignore */
     _column: Nullable<TableColumn>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE)
     private set _focusableViewCellItems(items: QueryList<FocusableItemDirective>) {
         this.setItems(items);
     }
 
-    /** @hidden */
+    /** @ignore */
     private readonly _fdpTableService = inject(TableService);
 
-    /** @hidden */
+    /** @ignore */
     get _groupRulesMap(): Observable<Map<string, CollectionGroup>> {
         return this._fdpTableService.groupRules$;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         super.ngOnChanges(changes);
 

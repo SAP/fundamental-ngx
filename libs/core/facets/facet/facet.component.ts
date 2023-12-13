@@ -58,7 +58,7 @@ export class FacetComponent implements AfterViewInit {
     @Input()
     alignEnd = false;
 
-    /** @hidden
+    /** @ignore
      * the appropriate role for each facet type
      */
     @HostBinding('attr.role')
@@ -66,7 +66,7 @@ export class FacetComponent implements AfterViewInit {
         return this.type !== 'image' ? 'group' : '';
     }
 
-    /** @hidden
+    /** @ignore
      * the appropriate aria-labelledby to associate with the role
      */
     @HostBinding('attr.aria-labelledby')
@@ -74,25 +74,25 @@ export class FacetComponent implements AfterViewInit {
         return this.type !== 'image' ? this.titleId : '';
     }
 
-    /** @hidden
+    /** @ignore
      * the internal id for the title to be associated with the aria-labelledby
      */
     titleId = `fd-facet-title-id-${randomTitleId++}`;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef<HTMLElement>,
         private _renderer: Renderer2
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._setupAdditionalStyles();
         this._addAlignmentModifier();
     }
 
     /**
-     * @hidden
+     * @ignore
      * set up common styles and specific styles based on each facet type
      */
     private _setupAdditionalStyles(): void {
@@ -193,7 +193,7 @@ export class FacetComponent implements AfterViewInit {
         }
     }
 
-    /** @hidden
+    /** @ignore
      * adds the logic for `alignEnd` modifier
      */
     private _addAlignmentModifier(): void {
@@ -207,12 +207,12 @@ export class FacetComponent implements AfterViewInit {
         this.elementRef.nativeElement.classList.add(`fd-margin-begin--md`);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setStyleToHostElement(attribute: string, value: any): void {
         this._renderer.setStyle(this.elementRef.nativeElement, attribute, value);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addClassNameToCustomElement(element: Element, className: string): void {
         addClassNameToFacetElement(this._renderer, element, className);
     }

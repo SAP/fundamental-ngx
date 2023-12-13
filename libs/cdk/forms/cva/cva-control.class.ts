@@ -23,10 +23,10 @@ export class CvaControl<T> {
      */
     protected _changeDetector = inject(ChangeDetectorRef);
 
-    /** @Hidden */
+    /** @ignore */
     protected _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     listenToChanges(): void {
         this.cvaDirective?.markForCheck.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._changeDetector.detectChanges();

@@ -53,11 +53,11 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
     @Input()
     inline = true;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(CoreSelect, { static: true })
     select: CoreSelect;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         readonly cd: ChangeDetectorRef,
         readonly elementRef: ElementRef,
@@ -72,7 +72,7 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
         super(cd, elementRef, ngControl, controlContainer, ngForm, _selectConfig, formField, formControl);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
 
@@ -108,25 +108,25 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewChecked(): void {
         this._cd.detectChanges();
     }
 
     /**
      * Define is selected item selected
-     * @hidden
+     * @ignore
      */
     _isSelectedOptionItem(selectedItem: any): boolean {
         return this.value === this.lookupValue(selectedItem);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onSelection(value: any): void {
         this.setValue(value);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onOpenChange(isOpen: boolean): void {
         if (isOpen) {
             this.formMessage?._popover?.close();
@@ -134,7 +134,7 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
         this.formMessage?._popover?.setIgnoreTriggers(isOpen);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setColumnsRatio(firstColumnRatio: number, secondColumnRatio: number): void {
         const totalProportions = firstColumnRatio + secondColumnRatio;
         const firstColumnProportion = Math.round((firstColumnRatio / totalProportions) * 100);
@@ -151,7 +151,7 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setOptionAttribute(element: HTMLElement, proportion: number): void {
         element.setAttribute('style', 'width: ' + proportion + '%; max-width: ' + proportion + '%');
     }

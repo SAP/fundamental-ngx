@@ -3,55 +3,55 @@ import { Subject } from 'rxjs';
 
 @Injectable()
 export class DynamicPageService {
-    /** @hidden */
+    /** @ignore */
     private toggle = new Subject<void>();
-    /** @hidden */
+    /** @ignore */
     private expand = new Subject<void>();
-    /** @hidden */
+    /** @ignore */
     private collapse = new Subject<void>();
-    /** @hidden */
+    /** @ignore */
     private collapseValue = new Subject<boolean>();
-    /** @hidden */
+    /** @ignore */
     private isCollapsed = false;
 
-    /** @hidden */
+    /** @ignore */
     public $toggle = this.toggle.asObservable();
-    /** @hidden */
+    /** @ignore */
     public $expand = this.expand.asObservable();
-    /** @hidden */
+    /** @ignore */
     public $collapse = this.collapse.asObservable();
-    /** @hidden */
+    /** @ignore */
     public $collapseValue = this.collapseValue.asObservable();
 
-    /** @hidden */
+    /** @ignore */
     public toggleHeader(): void {
         this.toggle.next();
     }
 
-    /** @hidden */
+    /** @ignore */
     public expandHeader(): void {
         this.isCollapsed = false;
         this.expand.next();
     }
 
-    /** @hidden */
+    /** @ignore */
     public collapseHeader(): void {
         this.isCollapsed = true;
         this.collapse.next();
     }
 
-    /** @hidden */
+    /** @ignore */
     public setCollapseValue(val: boolean): void {
         this.setIsCollapsed(val);
         this.collapseValue.next(val);
     }
 
-    /** @hidden */
+    /** @ignore */
     public getIsCollapsed(): boolean {
         return this.isCollapsed;
     }
 
-    /** @hidden */
+    /** @ignore */
     public setIsCollapsed(collapsed: boolean): void {
         this.isCollapsed = collapsed;
     }

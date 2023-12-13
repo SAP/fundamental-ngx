@@ -11,11 +11,11 @@ import { SmartFilterBarFieldDefinitionDirective } from './smart-filter-bar-field
     standalone: true
 })
 export class SmartFilterBarSubjectDirective implements AfterViewInit {
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(SmartFilterBarFieldDefinitionDirective)
     _fieldDefinitions!: QueryList<SmartFilterBarFieldDefinitionDirective>;
 
-    /** @hidden */
+    /** @ignore */
     _fieldDefinitionsSubject = new BehaviorSubject<SmartFilterBarFieldDefinition[]>([]);
 
     /**
@@ -23,10 +23,10 @@ export class SmartFilterBarSubjectDirective implements AfterViewInit {
      */
     readonly fieldsStream = this._fieldDefinitionsSubject.asObservable();
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _subject: Table) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._fieldDefinitionsSubject.next(this._fieldDefinitions.toArray().map((d) => this._transformSubjectField(d)));
         this._fieldDefinitions.changes.subscribe((definitions: SmartFilterBarFieldDefinitionDirective[]) => {
@@ -55,7 +55,7 @@ export class SmartFilterBarSubjectDirective implements AfterViewInit {
         return this.getDataSource().dataProvider.getFieldOptions(field);
     }
 
-    /** @hidden */
+    /** @ignore */
     getDefaultFields(): string[] {
         return this.getSubjectFields()
             ?.filter((f) => f.defaultSelected)
@@ -74,7 +74,7 @@ export class SmartFilterBarSubjectDirective implements AfterViewInit {
         return this._subject;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _transformSubjectField(column: SmartFilterBarFieldDefinitionDirective): SmartFilterBarFieldDefinition {
         return {
             key: column.key,

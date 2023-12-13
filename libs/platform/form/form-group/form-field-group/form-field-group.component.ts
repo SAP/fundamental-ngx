@@ -71,7 +71,7 @@ export class FormFieldGroupComponent implements FormFieldGroup, OnInit, OnDestro
     get labelColumnLayout(): ColumnLayout {
         return this._labelColumnLayout;
     }
-    /** @hidden */
+    /** @ignore */
     private _labelColumnLayout: ColumnLayout;
 
     /**
@@ -86,7 +86,7 @@ export class FormFieldGroupComponent implements FormFieldGroup, OnInit, OnDestro
     get fieldColumnLayout(): ColumnLayout {
         return this._fieldColumnLayout;
     }
-    /** @hidden */
+    /** @ignore */
     private _fieldColumnLayout: ColumnLayout;
 
     /**
@@ -101,7 +101,7 @@ export class FormFieldGroupComponent implements FormFieldGroup, OnInit, OnDestro
     get gapColumnLayout(): ColumnLayout {
         return this._gapColumnLayout;
     }
-    /** @hidden */
+    /** @ignore */
     private _gapColumnLayout: ColumnLayout;
 
     /**
@@ -116,23 +116,23 @@ export class FormFieldGroupComponent implements FormFieldGroup, OnInit, OnDestro
     @ContentChildren(FD_FORM_FIELD, { descendants: true })
     fields: QueryList<PlatformFormField>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(@Optional() formGroupContainer: FormGroupContainer) {
         this.formGroupContainer = formGroupContainer;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._addToFormGroup();
         this._setDefaultLayout();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._removeFromFormGroup();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setDefaultLayout(): void {
         // If layout already defined, no need to set default one.
         if (this.labelColumnLayout) {
@@ -144,7 +144,7 @@ export class FormFieldGroupComponent implements FormFieldGroup, OnInit, OnDestro
         this.gapColumnLayout = this.formGroupContainer?.gapColumnLayout;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addToFormGroup(): void {
         if (!this.formGroupContainer) {
             return;
@@ -152,7 +152,7 @@ export class FormFieldGroupComponent implements FormFieldGroup, OnInit, OnDestro
         this.formGroupContainer.addFormFieldGroup(this);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _removeFromFormGroup(): void {
         if (!this.formGroupContainer) {
             return;

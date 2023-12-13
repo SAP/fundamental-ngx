@@ -17,4 +17,5 @@ export const ROUTES: Routes = [
 ];
 
 export const LIBRARY_NAME = 'avatar-group-legacy';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/avatar-group-legacy';
 export const API_FILE_KEY = 'avatarGroupLegacy';

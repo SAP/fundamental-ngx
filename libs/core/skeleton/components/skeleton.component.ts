@@ -63,25 +63,25 @@ export class SkeletonComponent implements OnChanges {
         return this._height;
     }
 
-    /** @hidden */
+    /** @ignore */
     _id = `fd-skeleton-${skeletonUniqueId++}`;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-skeleton')
     readonly _skeletonClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('style.width')
     _width: string;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('style.height')
     _height: string;
 
-    /** @hidden */
+    /** @ignore */
     private _textLines = 3;
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['type'] && this.type === 'text') {
             if (!this.width) {

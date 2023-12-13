@@ -55,7 +55,7 @@ export class InfoLabelComponent {
     @Input()
     title: string;
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         warnOnce(
             'InfoLabelComponent is deprecated. Use InfoLabelComponent from @fundamental-ngx/core/info-label instead.'

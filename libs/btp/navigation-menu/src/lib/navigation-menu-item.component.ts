@@ -48,36 +48,36 @@ export class NavigationMenuItemComponent implements FocusableItem, HasElementRef
     @Input()
     label: string;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.tabindex')
     tabindex = 0;
 
-    /** @hidden */
+    /** @ignore */
     elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     disabled = false;
 
-    /** @hidden */
+    /** @ignore */
     keydown: Observable<KeyboardEvent> = fromEvent<KeyboardEvent>(this.elementRef.nativeElement, 'keydown');
 
-    /** @hidden */
+    /** @ignore */
     element = (): HTMLElement => this.elementRef.nativeElement;
 
-    /** @hidden */
+    /** @ignore */
     isFocusable = (): boolean => !this.disabled;
 
-    /** @hidden */
+    /** @ignore */
     setTabbable(tabbable: boolean): void {
         this.tabindex = tabbable ? 0 : -1;
     }
 
-    /** @hidden */
+    /** @ignore */
     focus(): void {
         this.elementRef.nativeElement.focus();
     }
 
-    /** @hidden */
+    /** @ignore */
     getLabel(): string {
         return this.label;
     }

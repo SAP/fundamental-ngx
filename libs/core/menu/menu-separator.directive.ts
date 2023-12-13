@@ -13,10 +13,10 @@ import { Directive, ElementRef, inject } from '@angular/core';
     standalone: true
 })
 export class MenuSeparatorDirective {
-    /** @hidden */
+    /** @ignore */
     readonly elementRef = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         console.error(
             '<fd-menu-separator> has been removed. Use `hasSeparator` input on a `fd-menu-item` instead.',

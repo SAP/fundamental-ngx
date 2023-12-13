@@ -20,10 +20,10 @@ class MockStorage {
 
 @Injectable({ providedIn: 'root' })
 export class LocalStorageService {
-    /** @hidden */
+    /** @ignore */
     private _storage: Storage;
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         typeof localStorage !== 'undefined' ? (this._storage = localStorage) : (this._storage = new MockStorage());
     }

@@ -232,4 +232,4 @@ export function fixedMarkdown(markdown: DefaultThemeRenderContext['markdown'], c
     return markdown(content).split('<button>Copy</button>').join('');
 }
 
-const flagsNotRendered: string[] = ['@showCategories', '@showGroups', '@hideCategories', '@hideGroups', '@hidden'];
+const flagsNotRendered: string[] = ['@showCategories', '@showGroups', '@hideCategories', '@hideGroups', '@ignore'];

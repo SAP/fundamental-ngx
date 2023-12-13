@@ -42,22 +42,22 @@ export class FormItemComponent implements AfterViewInit {
     @HostBinding('class.fd-form-item--horizontal')
     horizontal = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-form-item')
     fdFormItemClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FormLabelComponent)
     formLabel?: FormLabelComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FORM_ITEM_CONTROL)
     formItemControl?: FormItemControl;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private ngZone: NgZone) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (this.formLabel && this.formItemControl && !this.formItemControl.ariaLabelledBy) {
             this.ngZone.onStable.pipe(first()).subscribe(() => {

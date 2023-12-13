@@ -73,7 +73,7 @@ export class WizardBranchingExampleComponent {
     @ViewChild('creditButton')
     creditButton: RadioButtonComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(WizardStepComponent)
     steps: QueryList<WizardStepComponent>;
 
@@ -168,7 +168,7 @@ export class WizardBranchingExampleComponent {
     }
 
     // Handle focus on key press
-    /** @hidden */
+    /** @ignore */
     handleFocus(event: KeyboardEvent, index: number): void {
         this._wizardService.progressBarKeyHandler(event, this.steps, index);
     }

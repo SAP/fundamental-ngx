@@ -27,7 +27,7 @@ import { toastAnimation } from './constants/message-toast.animation';
     imports: [PortalModule]
 })
 export class MessageToastComponent extends BaseToastDurationDismissibleContainerComponent<MessageToastConfig> {
-    /** @hidden */
+    /** @ignore */
     constructor(config: MessageToastConfig) {
         super(config);
     }

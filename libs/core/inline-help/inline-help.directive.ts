@@ -73,13 +73,13 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         this._setupScreenreaderElement(content);
     }
 
-    /** @hidden */
+    /** @ignore */
     _describedBy = '';
 
-    /** @hidden */
+    /** @ignore */
     private _srViewRef: EmbeddedViewRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _popoverService: PopoverService,
         private _elementRef: ElementRef,
@@ -90,7 +90,7 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         super();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if ('additionalBodyClass' in changes) {
             this._applyAdditionalInlineHelpClass();
@@ -98,7 +98,7 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         this._popoverService.refreshConfiguration(this);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._bodyRole = 'tooltip';
         this._describedBy = `fd-inline-help-${inlineHelpId++}`;
@@ -108,12 +108,12 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         this._popoverService.initialise(this._elementRef, this);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._popoverService.onDestroy();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _applyAdditionalInlineHelpClass(): void {
         this.additionalBodyClass = INLINE_HELP_CLASS + ' ' + this.additionalBodyClass;
 
@@ -124,7 +124,7 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setupScreenreaderElement(content: string | Nullable<TemplateRef<any>>): void {
         this._viewContainerRef.clear();
         let srElement = this._renderer.createElement('span');

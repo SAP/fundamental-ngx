@@ -66,20 +66,20 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     @Input()
     ariaLabelledBy: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [

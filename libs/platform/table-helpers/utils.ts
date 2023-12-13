@@ -123,7 +123,7 @@ export const getScrollBarWidth = (document: Document): number => {
     return scrollbarWidth;
 };
 
-/** @hidden */
+/** @ignore */
 export function isCollectionFilter(item: any): item is CollectionFilter {
     return item.type !== undefined && item.strategy !== undefined && item.value !== undefined;
 }

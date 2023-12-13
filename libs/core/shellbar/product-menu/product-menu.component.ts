@@ -74,11 +74,11 @@ export class ProductMenuComponent {
     @Input()
     closePopoverOnSelect = false;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(MenuComponent)
     menu: MenuComponent;
 
-    /** @hidden */
+    /** @ignore */
     itemClicked(item: ShellbarMenuItem, event: MouseEvent): void {
         if (this.closePopoverOnSelect) {
             this.menu.close();

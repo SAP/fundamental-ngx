@@ -54,7 +54,7 @@ export class DefaultExampleComponent {
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleShiftDropAction(
         dragItem: ListItem,
         dropItem: ListItem,
@@ -76,7 +76,7 @@ export class DefaultExampleComponent {
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleReplaceDropAction(
         dragItem: ListItem,
         dropItem: ListItem,
@@ -133,7 +133,7 @@ export class DefaultExampleComponent {
         };
     }
 
-    /** @hidden */
+    /** @ignore */
     private _findItemChildren(item: ListItem, property: string): ListItem[] {
         const allItems = this[property];
         const itemsLength = allItems.length;

@@ -36,7 +36,7 @@ import { cloneDeep } from 'lodash-es';
 export class PlatformApprovalFlowCustomStatusExampleComponent implements OnDestroy {
     private graphs = getGraphs();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(ApprovalFlowComponent)
     _approvalFlow: ApprovalFlowComponent;
 
@@ -69,10 +69,10 @@ export class PlatformApprovalFlowCustomStatusExampleComponent implements OnDestr
     allStatuses: ApprovalStatus[] = ['in progress', 'not started', 'approved', 'rejected', 'denied', 'withdrawn'];
     sendReminderStatuses: ApprovalStatus[] = ['in progress', 'not started'];
 
-    /** @hidden */
+    /** @ignore */
     disableSaveButton = false;
 
-    /** @hidden */
+    /** @ignore */
     disableExitButton = false;
 
     colorMapping: Record<ApprovalStatus, ObjectStatus> = {
@@ -86,7 +86,7 @@ export class PlatformApprovalFlowCustomStatusExampleComponent implements OnDestr
 
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private newNodes = new Map<ApprovalNode['id'], ApprovalNode>();
 
     constructor(private readonly _messageToastService: MessageToastService) {}

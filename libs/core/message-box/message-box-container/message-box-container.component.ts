@@ -48,14 +48,14 @@ export class MessageBoxContainerComponent
     @HostBinding('@state')
     _animationState = 'void';
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(CdkPortalOutlet)
     portalOutlet: CdkPortalOutlet;
 
-    /** @hidden */
+    /** @ignore */
     private _class = '';
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public messageBoxConfig: MessageBoxConfig,
         public ref: MessageBoxRef,
@@ -67,7 +67,7 @@ export class MessageBoxContainerComponent
         super(elementRef, injector, changeDetectorRef);
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [this.messageBoxConfig.containerClass ? this.messageBoxConfig.containerClass : '', this._class];
@@ -84,7 +84,7 @@ export class MessageBoxContainerComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         setTimeout(() => {
             this._loadContent();
@@ -92,7 +92,7 @@ export class MessageBoxContainerComponent
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _attached(event: CdkPortalOutletAttachedRef): void {
         if (event instanceof ComponentRef) {
             event.changeDetectorRef.markForCheck();
@@ -101,7 +101,7 @@ export class MessageBoxContainerComponent
         }
     }
 
-    /** @hidden Load received content */
+    /** @ignore Load received content */
     protected _loadContent(): void {
         if (this.childContent instanceof Type) {
             this._createFromComponent(this.childContent);
@@ -114,12 +114,12 @@ export class MessageBoxContainerComponent
         this._cdr.detectChanges();
     }
 
-    /** @hidden Returns context for embedded template*/
+    /** @ignore Returns context for embedded template*/
     private _templateContext(): { $implicit: MessageBoxRef; messageBoxConfig: MessageBoxConfig } {
         return { $implicit: this.ref, messageBoxConfig: this.messageBoxConfig };
     }
 
-    /** @hidden Load Dialog component from passed object */
+    /** @ignore Load Dialog component from passed object */
     private _createFromDefaultMessageBox(content: MessageBoxContent | null): void {
         this._createFromComponent(MessageBoxDefaultComponent);
         const instance = (this._componentRef as ComponentRef<MessageBoxDefaultComponent>).instance;
@@ -127,7 +127,7 @@ export class MessageBoxContainerComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * We need to wait until animation plays, and then send signal to the service to destroy the component.
      */
     private _listenOnClose(): void {

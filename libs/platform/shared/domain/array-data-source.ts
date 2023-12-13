@@ -5,28 +5,28 @@ import { BaseDataProvider } from './base-data-provider';
 import { ComboBoxDataSource, ListDataSource, MultiComboBoxDataSource, MultiInputDataSource } from './data-source';
 
 export class ArrayComboBoxDataSource<T> extends ComboBoxDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(private data: T[]) {
         super(new BaseDataProvider(data));
     }
 }
 
 export class ArrayMultiComboBoxDataSource<T> extends MultiComboBoxDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(private data: T[]) {
         super(new BaseDataProvider(data));
     }
 }
 
 export class ArrayListDataSource<T> extends ListDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(private data: T[]) {
         super(new BaseDataProvider(data));
     }
 }
 
 export class ArrayMultiInputDataSource<T> extends MultiInputDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(private data: T[]) {
         super(new BaseDataProvider(data));
     }

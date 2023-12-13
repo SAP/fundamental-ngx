@@ -20,10 +20,10 @@ import { IconTabBarPopoverComponent } from '../popovers/icon-tab-bar-popover/ico
     ]
 })
 export class IconTabBarIconTypeComponent extends ClosableIconTabBar {
-    /** @hidden list of tab html elements, that can receive focus */
+    /** @ignore list of tab html elements, that can receive focus */
     @ViewChildren('tabItem') _tabUIElements: QueryList<ElementRef<HTMLElement>>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(IconTabBarPopoverComponent) _tabBarPopover: IconTabBarPopoverComponent;
 
     /** Whether to display labels for tab items */

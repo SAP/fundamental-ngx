@@ -24,7 +24,7 @@ export class DisabledBehaviorDirective
     extends ReplaySubject<boolean>
     implements AfterViewInit, DisabledBehavior, DisabledViewModifier
 {
-    /** @hidden */
+    /** @ignore */
     @Input()
     set fdkDisabled(value: BooleanInput) {
         const val = coerceBooleanProperty(value);
@@ -48,12 +48,12 @@ export class DisabledBehaviorDirective
     @Input()
     disabledClass = 'is-disabled';
 
-    /** @hidden */
+    /** @ignore */
     private _disabled = false;
-    /** @hidden */
+    /** @ignore */
     private readonly _fdkDisableInput$ = new BehaviorSubject(false);
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
         private _destroyRef: DestroyRef,
@@ -63,12 +63,12 @@ export class DisabledBehaviorDirective
         this._destroyRef.onDestroy(() => this.complete());
     }
 
-    /** @hidden */
+    /** @ignore */
     setDisabledState = (isDisabled: boolean): void => {
         setDisabledState(this._elementRef, isDisabled, this.disabledClass, this.addDisabledClass);
     };
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._fdkDisableInput$
             .pipe(

@@ -11,6 +11,7 @@ export function configureRoutes<ApiFiles = Record<string, string[]>>(
 ): (routesImport: {
     ROUTES: Routes;
     LIBRARY_NAME: string;
+    LIBRARY_IMPORT_PATH?: string | string[];
     API_FILE_KEY?: keyof ApiFiles;
     I18N_KEY?: CanBeArray<keyof FdLanguage>;
 }) => Routes {

@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'breadcrumb';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/breadcrumb';
 export const API_FILE_KEY = 'breadcrumb';
 export const I18N_KEY = 'coreBreadcrumb';

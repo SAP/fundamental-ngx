@@ -56,10 +56,10 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
     @HostBinding('class.trigger')
     isTrigger = false;
 
-    /** @hidden */
+    /** @ignore */
     _isSelected = false;
     /**
-     * @hidden
+     * @ignore
      * set CSS class 'is-selected' if menu-item opens a sub-menu.
      */
     set isSelected(selected: boolean) {
@@ -68,22 +68,22 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
             this._cdr.markForCheck();
         }
     }
-    /** @hidden */
+    /** @ignore */
     get isSelected(): boolean {
         return this._isSelected;
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(MenuInteractiveComponent)
     _fdMenuInteractiveChild: MenuInteractiveComponent;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elementRef: ElementRef,
         private _cdr: ChangeDetectorRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this.hovered.complete();
     }
@@ -95,7 +95,7 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handle selection of item via keyboard 'Enter'
      */
     @HostListener('keydown', ['$event'])
@@ -108,7 +108,7 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handle click of item via mouse click.
      */
     @HostListener('click', ['$event'])
@@ -121,7 +121,7 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handle mouse enter event.
      */
     @HostListener('mouseenter')

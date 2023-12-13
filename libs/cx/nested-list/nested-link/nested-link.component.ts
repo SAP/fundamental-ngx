@@ -54,11 +54,11 @@ export class NestedLinkComponent {
     @HostBinding('class.is-selected')
     selected = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-label')
     _ariaLabel: string;
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     @HostBinding('attr.aria-describedby')
     ariaDescribedby: Nullable<string | number>;
@@ -67,30 +67,30 @@ export class NestedLinkComponent {
     @Output()
     selectedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdx-nested-list__link')
     cxNestedListItemClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.role')
     role = 'treeitem';
 
     /**
-     *  @hidden
+     *  @ignore
      *  Reference to title element, it is used, to get title for condensed mode.
      */
     @ContentChild(NestedListTitleDirective)
     title: NestedListTitleDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(NestedListButtonDirective)
     _nestedListButton: NestedListButtonDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(NestedListExpandIconComponent)
     _expandIcon: NestedListExpandIconComponent;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public changeDetRef: ChangeDetectorRef,
         private _renderer: Renderer2,
@@ -98,7 +98,7 @@ export class NestedLinkComponent {
         private _itemService: NestedItemService
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     get elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
     }
@@ -149,7 +149,7 @@ export class NestedLinkComponent {
         return this.title && this.title.getInnerText();
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _collapseOnly(): boolean {
         return !this._nestedListButton && this._expandIcon;
     }

@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'tile';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/tile';
 export const API_FILE_KEY = 'tile';

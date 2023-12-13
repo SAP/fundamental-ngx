@@ -82,12 +82,12 @@ export class ContentDensityDirective extends BehaviorSubject<LocalContentDensity
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         super(ContentDensityGlobalKeyword);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this.complete();
     }

@@ -8,16 +8,16 @@ import { TreeItemDefContext } from '../models/tree-item-def-context';
 })
 export class TreeItemDefDirective<T extends TreeItem = TreeItem> {
     /**
-     * @hidden
+     * @ignore
      * Used for type support.
      */
     @Input()
     fdTreeItemDefAs: T;
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard(dir: TreeItemDefDirective, ctx: TreeItemDefContext): ctx is TreeItemDefContext {
         return true;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(public templateRef: TemplateRef<TreeItemDefContext<T>>) {}
 }

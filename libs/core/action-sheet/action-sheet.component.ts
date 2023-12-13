@@ -78,39 +78,39 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     @Output()
     readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(ActionSheetBodyComponent)
     actionSheetBody: ActionSheetBodyComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(ActionSheetControlComponent)
     actionSheetControl: ActionSheetControlComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(ActionSheetItemComponent, { descendants: true })
     actionSheetItems: QueryList<ActionSheetItemComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('actionSheetBodyTemplate')
     actionSheetBodyTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(PopoverComponent)
     popoverComponent: PopoverComponent;
 
-    /** @hidden */
+    /** @ignore */
     actionSheetMobileDynamic: ComponentRef<ActionSheetMobileComponent>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>,
         private readonly _changeDetectionRef: ChangeDetectorRef,
@@ -118,7 +118,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         @Optional() private _dynamicComponentService: DynamicComponentService
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._initializeChildrenState();
         this._keyboardSupportService.setKeyboardService(this.actionSheetItems, true);
@@ -126,14 +126,14 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this._actionControlHandle();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (this.mobile) {
             this._setUpMobileMode();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._onDestroy$.next();
@@ -150,7 +150,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this.isOpenChangeHandle(false);
     }
 
-    /** @hidden */
+    /** @ignore */
     isOpenChangeHandle(isOpen: boolean): void {
         if (this.isOpen === isOpen) {
             return;
@@ -169,28 +169,28 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this._changeDetectionRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initializeChildrenState(): void {
         if (this.actionSheetBody) {
             this.actionSheetBody.mobile = this.mobile;
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _actionControlHandle(): void {
         this.actionSheetControl.clicked
             .pipe(takeUntil(this._onDestroy$))
             .subscribe(() => (this.isOpen ? this.close() : this.open()));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnItemsChange(): void {
         this.actionSheetItems.changes.pipe(startWith(1), takeUntil(this._onDestroy$)).subscribe(() => {
             this._listenOnItemsClick();
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnItemsClick(): void {
         /** Finish all of the streams, from before */
         this._onRefresh$.next();
@@ -207,12 +207,12 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         );
     }
 
-    /** @hidden Set fake focus on element with passed index */
+    /** @ignore Set fake focus on element with passed index */
     private _setItemActive(index: number): void {
         this._keyboardSupportService.keyManager?.setActiveItem(index);
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _setUpMobileMode(): Promise<void> {
         this.actionSheetMobileDynamic = this._dynamicComponentService.createDynamicComponent(
             {

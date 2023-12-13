@@ -11,7 +11,7 @@ export class TimelineNodeOutletContext<T> {
     /** Length of the number of total dataNodes. */
     count?: number;
 
-    /** @hidden */
+    /** @ignore */
     constructor(data: T) {
         this.$implicit = data;
     }
@@ -26,6 +26,6 @@ export class TimelineNodeDefDirective<T> {
     @Input()
     fdTimelineNodeData: T;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public template: TemplateRef<any>) {}
 }

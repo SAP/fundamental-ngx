@@ -17,10 +17,10 @@ export class DialogTitleDirective implements AfterViewInit {
     @Input()
     id = `fd-dialog-title-` + titleUniqueId++;
 
-    /** @hidden */
+    /** @ignore */
     constructor(@Optional() public dialogConfig: DialogConfig) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (this.dialogConfig && !this.dialogConfig.ariaLabelledBy) {
             this.dialogConfig.ariaLabelledBy = this.id;

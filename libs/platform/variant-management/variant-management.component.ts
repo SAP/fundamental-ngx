@@ -129,30 +129,30 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
     @ContentChild(VariantManagementDirtyLabelDirective)
     dirtyLabel: VariantManagementDirtyLabelDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('popover')
     _popover: PopoverComponent;
 
-    /** @hidden */
+    /** @ignore */
     _variantChanged = false;
 
     /** Selected variant. */
     activeVariant!: VariantItem<T>;
 
-    /** @hidden */
+    /** @ignore */
     _variants: VariantItem<T>[] = [];
 
-    /** @Hidden */
+    /** @ignore */
     _filterPhrase: Nullable<string> = null;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class')
     private readonly _initialClass = 'fd-variant-management';
 
-    /** @Hidden */
+    /** @ignore */
     private _originalActiveVariant: VariantItem<T>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _dialogService: DialogService,
         private readonly _cdr: ChangeDetectorRef
@@ -191,7 +191,7 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
         this.variantsChange.emit(this._variants);
     }
 
-    /** @hidden */
+    /** @ignore */
     _openSaveDialog(): void {
         this._popover?.close(false);
         const dialogRef = this._dialogService.open<SaveDialogContext>(ManageVariantItemComponent, {
@@ -225,7 +225,7 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     _openManageDialog(): void {
         this._popover?.close(false);
         const dialogRef = this._dialogService.open<VariantItem[]>(ManageVariantsDialogComponent, {
@@ -241,24 +241,24 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     _onSearchSubmit(search: SearchInput): void {
         this._filterPhrase = search.text;
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     _cancelSearch(): void {
         this._filterPhrase = null;
         this._cdr.detectChanges();
     }
 
-    /** @Hidden */
+    /** @ignore */
     _trackFn(index: number, item: VariantItem<T>): string {
         return item.id;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _transformVariants(items: Variant<T>[]): VariantItem[] {
         return items.map((variant) => new VariantItem(variant));
     }

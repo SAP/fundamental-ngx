@@ -257,11 +257,11 @@ export class SelectComponent<T = any>
     @Output()
     readonly valueChange = new EventEmitter<T>();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(OptionComponent, { descendants: true })
     _options: QueryList<OptionComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('selectControl')
     _controlElementRef: ElementRef<HTMLDivElement>;
 
@@ -269,54 +269,54 @@ export class SelectComponent<T = any>
     @ViewChild('selectOptionsListTemplate')
     selectOptionsListTemplate: TemplateRef<any>;
 
-    /** @hidden
+    /** @ignore
      * Reference to root element for the mobile mode dialog */
     @ViewChild('dialogContainer')
     _dialogContainerElementRef: ElementRef;
 
     /**
      * Overlay pane containing the options.
-     * @hidden
+     * @ignore
      */
     @ViewChild(CdkConnectedOverlay)
     _overlayDir: CdkConnectedOverlay;
 
-    /** @hidden
+    /** @ignore
      * Referent to the option;s container
      */
     @ViewChild('optionPanel', { read: ElementRef })
     _optionPanel: ElementRef;
 
     /** Whether popover is opened
-     * @hidden
+     * @ignore
      */
     _isOpen = false;
 
-    /** @hidden */
+    /** @ignore */
     _tabIndex: number;
 
-    /** @hidden */
+    /** @ignore */
     _liveAnnouncer: LiveAnnouncer;
 
-    /** @hidden */
+    /** @ignore */
     _internalValue: any;
 
-    /** @hidden */
+    /** @ignore */
     _calculatedMaxHeight: number;
 
-    /** @hidden */
+    /** @ignore */
     _rtl = false;
 
-    /** @hidden */
+    /** @ignore */
     _selectionModel: SelectionModel<OptionComponent>;
 
     /**
-     * @hidden
+     * @ignore
      * Triggers when component is destroyed
      */
     readonly _destroy = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     get _selectControlClass(): string {
         return [this.state ? `is-${this.state}` : '', this.selectControlClass]
             .filter((className) => !!className)
@@ -324,7 +324,7 @@ export class SelectComponent<T = any>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Combined stream of all of the child options' change events.
      */
     readonly _optionSelectionChanges: Observable<FdOptionSelectionChange> = defer(() => {
@@ -336,31 +336,31 @@ export class SelectComponent<T = any>
         );
     });
 
-    /** @hidden */
+    /** @ignore */
     private _extendedBodyTemplate = false;
 
-    /** @hidden */
+    /** @ignore */
     private _controlElemFontSize = 0;
 
-    /** @hidden */
+    /** @ignore */
     private _focused = false;
 
     /**
-     * @hidden
+     * @ignore
      * Stored calculated maxHeight from Option Panel
      */
     private _maxHeight: number;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions: Subscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('window:resize')
     _resizeScrollHandler(): void {
         this._updateCalculatedHeight();
     }
 
-    /** @hidden */
+    /** @ignore */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
         this._tabIndex = this.disabled ? -1 : 0;
@@ -414,7 +414,7 @@ export class SelectComponent<T = any>
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     _compareWith = (o1: any, o2: any): boolean => o1 === o2;
 
     /** Function to compare the option values with the selected values. */
@@ -433,17 +433,17 @@ export class SelectComponent<T = any>
         return this._compareWith;
     }
 
-    /** @hidden */
+    /** @ignore */
     get focused(): boolean {
         return this._focused || this._isOpen;
     }
 
-    /** @hidden */
+    /** @ignore */
     get calculatedMaxHeight(): number {
         return this._maxHeight || this._calculatedMaxHeight;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Attribute('tabindex') _tabIndex: string,
         @Optional() private readonly _rtlService: RtlService,
@@ -461,23 +461,23 @@ export class SelectComponent<T = any>
         this._tabIndex = parseInt(_tabIndex, 10) || 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._initializeCommonBehavior();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._keyManagerService._initKeyManager();
         this._setupMobileMode();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._registerEventsAfterContentInit();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['typeaheadDebounceInterval'] && this._keyManagerService._keyManager) {
             this._keyManagerService._keyManager.withTypeAhead(this.typeaheadDebounceInterval);
@@ -486,16 +486,16 @@ export class SelectComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._cleanupCommonBehavior();
     }
 
-    /** @hidden */
+    /** @ignore */
     onChange: (value: any) => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     onTouched = (): void => {};
 
     /** Toggles the open state of the select. */
@@ -525,7 +525,7 @@ export class SelectComponent<T = any>
         this.isOpenChange.emit(true);
     }
 
-    /** @hidden */
+    /** @ignore */
     close(forceClose = false, tabOut = false): void {
         if (this._isOpen || forceClose) {
             if (tabOut && this.tabOutStrategy === 'closeAndSelect') {
@@ -550,24 +550,24 @@ export class SelectComponent<T = any>
         (this._controlElementRef?.nativeElement as HTMLElement).blur();
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnChange(fn: (value: any) => void): void {
         this.onChange = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
-    /** @hidden from ControlValue Accessor */
+    /** @ignore from ControlValue Accessor */
     writeValue(value: any): void {
         if (this._options) {
             this._setSelectionByValue(value);
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _setSelectionByValue(value: any | any[]): void {
         this._selectionModel.clear();
         const correspondingOption = this._selectValue(value);
@@ -585,7 +585,7 @@ export class SelectComponent<T = any>
         this._changeDetectorRef.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     _selectValue(value: any): OptionComponent | undefined {
         const correspondingOption = this._options.find((option: OptionComponent) => {
             try {
@@ -607,17 +607,17 @@ export class SelectComponent<T = any>
         return correspondingOption;
     }
 
-    /** @hidden */
+    /** @ignore */
     _popoverOpenChangeHandle(isOpen: boolean): void {
         isOpen ? this.open() : this.close();
     }
 
-    /** @hidden Returns _keyManagerService. */
+    /** @ignore Returns _keyManagerService. */
     _getKeyService(): SelectKeyManagerService {
         return this._keyManagerService;
     }
 
-    /** @hidden */
+    /** @ignore */
     _setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
         this._changeDetectorRef.markForCheck();
@@ -625,7 +625,7 @@ export class SelectComponent<T = any>
         this._tabIndex = -1;
     }
 
-    /** @hidden */
+    /** @ignore */
     _highlightCorrectOption(): void {
         if (this._keyManagerService._keyManager && this._selectionModel.isEmpty()) {
             this._keyManagerService._keyManager.setFirstItemActive();
@@ -634,13 +634,13 @@ export class SelectComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _cleanupCommonBehavior(): void {
         this._destroy.next();
         this._destroy.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     _initializeSelection(): void {
         // Defer setting the value in order to avoid the "Expression
         // has changed after it was checked" errors from Angular.
@@ -652,13 +652,13 @@ export class SelectComponent<T = any>
     /**
      * Expose outside of this mixin to give component ability
      * to update caluclatedMaxHeight if needed
-     * @hidden
+     * @ignore
      */
     _updateCalculatedHeight(): void {
         this._calculatedMaxHeight = window.innerHeight * 0.45;
     }
 
-    /** @hidden */
+    /** @ignore */
     _getOptionScrollPosition(optionIndex: number, itemHeight: number, currentScrollPosition: number): number {
         const optionHeight = this._options.get(optionIndex)?._getHtmlElement().offsetHeight || itemHeight;
         const optionOffset = optionIndex * optionHeight;
@@ -672,13 +672,13 @@ export class SelectComponent<T = any>
         return currentScrollPosition;
     }
 
-    /** @hidden */
+    /** @ignore */
     _getItemHeight(): number {
         // also include border with default value 1.
         return this._controlElemFontSize * SELECT_ITEM_HEIGHT_EM + 1;
     }
 
-    /** @hidden */
+    /** @ignore */
     _initializeCommonBehavior(): void {
         this._selectionModel = new SelectionModel<OptionComponent>(false);
         this._keyManagerService._component = this;
@@ -686,7 +686,7 @@ export class SelectComponent<T = any>
         this._updateCalculatedHeight();
     }
 
-    /** @hidden */
+    /** @ignore */
     _isRtl(): boolean {
         if (this._rtlService) {
             this._subscriptions.add(
@@ -698,7 +698,7 @@ export class SelectComponent<T = any>
         return this._rtl === true ? true : false;
     }
 
-    /** @hidden */
+    /** @ignore */
     _registerEventsAfterContentInit(): void {
         this._selectionModel.changed.pipe(takeUntil(this._destroy)).subscribe((event) => {
             event.added.forEach((option) => option._select());
@@ -711,7 +711,7 @@ export class SelectComponent<T = any>
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     _handleKeydown(event: KeyboardEvent): void {
         if (!this.disabled && !this.readonly) {
@@ -724,7 +724,7 @@ export class SelectComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _getAriaActiveDescendant(): string | null {
         if (this._isOpen && this._keyManagerService._keyManager && this._keyManagerService._keyManager.activeItem) {
             return this._keyManagerService._keyManager.activeItem.id;
@@ -732,7 +732,7 @@ export class SelectComponent<T = any>
         return null;
     }
 
-    /** @hidden */
+    /** @ignore */
     _onFocus(): void {
         if (!this.disabled) {
             this._focused = true;
@@ -740,7 +740,7 @@ export class SelectComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _onBlur(): void {
         this._focused = false;
 
@@ -750,10 +750,10 @@ export class SelectComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _buttonClick(): void {}
 
-    /** @hidden */
+    /** @ignore */
     private _resetOptions(): void {
         const changedOrDestroyed = merge(this._options.changes, this._destroy);
 
@@ -776,7 +776,7 @@ export class SelectComponent<T = any>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Invoked when an option is clicked.
      */
     private _onSelect(option: OptionComponent, isUserInput: boolean): void {
@@ -799,7 +799,7 @@ export class SelectComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _emitSelectChange(defaultVal?: any): void {
         if (this.canEmitValueChange) {
             this._internalValue =
@@ -812,7 +812,7 @@ export class SelectComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getItemCount(): number {
         if (this._optionPanel && this._headerElements().length > 0) {
             return this._options.length + this._headerElements().length;
@@ -820,12 +820,12 @@ export class SelectComponent<T = any>
         return this._options.length;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _headerElements(): NodeListOf<Element> {
         return this._optionPanel?.nativeElement.querySelectorAll(SELECT_HEADER_IDENTIFIER);
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _setupMobileMode(): Promise<void> {
         if (!this.mobile) {
             return;
@@ -848,10 +848,10 @@ export class SelectComponent<T = any>
 }
 
 export class DeprecatedSelectCSSClasses implements ModuleDeprecation {
-    /** @hidden */
+    /** @ignore */
     message = `Select CSS classes fd-select--compact, fd-select--compact--mobile, fd-popover-custom-select-body, fd-popover-custom-list are deprecated`;
 
-    /** @hidden */
+    /** @ignore */
     alternative = {
         name: 'Inspect the elements of the Select component to see the new classes',
         link: ['/core', 'select']

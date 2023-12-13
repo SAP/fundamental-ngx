@@ -8,7 +8,7 @@ import { warnOnce } from '../helpers';
  */
 @Injectable()
 export class DestroyedService extends ReplaySubject<void> implements OnDestroy {
-    /** @hidden */
+    /** @ignore */
     constructor() {
         super(1);
         warnOnce(
@@ -16,7 +16,7 @@ export class DestroyedService extends ReplaySubject<void> implements OnDestroy {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this.next();
         this.complete();

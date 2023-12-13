@@ -12,14 +12,14 @@ import { HasElementRef } from '@fundamental-ngx/cdk/utils';
     standalone: true
 })
 export class ToolHeaderGroupDirective implements HasElementRef {
-    /** @hidden */
+    /** @ignore */
     @Input({ transform: coerceBooleanProperty })
     center: BooleanInput;
 
-    /** @hidden */
+    /** @ignore */
     @Input({ transform: coerceBooleanProperty })
     actions: BooleanInput;
 
-    /** @hidden */
+    /** @ignore */
     elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 }

@@ -12,7 +12,7 @@ import { warnOnce } from '@fundamental-ngx/cdk/utils';
     providers: [{ provide: DatetimeAdapter, useClass: MomentDatetimeAdapter }]
 })
 export class MomentDatetimeAdapterModule {
-    /** @hidden */
+    /** @ignore */
     constructor(private _adapter: DatetimeAdapter<Date>) {
         warnOnce(
             'MomentDatetimeAdapterModule is deprecated since version 0.20.0 and will be removed in future release.' +
@@ -29,7 +29,7 @@ export class MomentDatetimeAdapterModule {
     providers: [{ provide: DATE_TIME_FORMATS, useValue: MOMENT_DATETIME_FORMATS }]
 })
 export class MomentDatetimeModule {
-    /** @hidden */
+    /** @ignore */
     constructor(private _adapter: DatetimeAdapter<Date>) {
         warnOnce(
             'MomentDatetimeModule is deprecated since version 0.20.0 and will be removed in future release.' +

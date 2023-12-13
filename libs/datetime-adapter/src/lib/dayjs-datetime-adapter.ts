@@ -28,7 +28,7 @@ export const DAYJS_DATE_TIME_ADAPTER_OPTIONS = new InjectionToken<DayjsDatetimeA
     }
 );
 
-/** @hidden */
+/** @ignore */
 export function DAYJS_DATE_TIME_ADAPTER_OPTIONS_FACTORY(): DayjsDatetimeAdapterOptions {
     return {
         useUtc: false,
@@ -44,16 +44,16 @@ export function DAYJS_DATE_TIME_ADAPTER_OPTIONS_FACTORY(): DayjsDatetimeAdapterO
  */
 @Injectable()
 export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
-    /** @hidden */
+    /** @ignore */
     private _dayjsLocaleData: dayjs.GlobalLocaleDataReturn;
 
-    /** @hidden */
+    /** @ignore */
     private _localeData: DateLocale;
 
-    /** @hidden */
+    /** @ignore */
     fromNow: undefined;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Optional() @Inject(LOCALE_ID) localeId: string,
         @Optional() @Inject(DAYJS_DATE_TIME_ADAPTER_OPTIONS) private _options?: DayjsDatetimeAdapterOptions
@@ -384,7 +384,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     }
 
     /**
-     * @hidden
+     * @ignore
      * will attempt to parse longDataFormat (e.g. "L", "LT") and convert it to simple one.
      */
     _prepareFormat(displayFormat: string): string {
@@ -402,7 +402,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _createDayjsDate(date?: ConfigType, format?: string): Dayjs {
         const { strict, useUtc }: DayjsDatetimeAdapterOptions = this._options || {};
 

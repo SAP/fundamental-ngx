@@ -18,7 +18,7 @@ export abstract class BaseToastDurationDismissibleRef<
      */
     protected durationTimeoutId!: ReturnType<typeof setTimeout>;
 
-    /** @hidden */
+    /** @ignore */
     protected constructor(containerInstance: C, overlayRef: OverlayRef, positionStrategy: BaseToastPosition) {
         super(containerInstance, overlayRef, positionStrategy);
     }

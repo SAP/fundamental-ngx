@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'feed-input';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/feed-input';
 export const API_FILE_KEY = 'feedInput';

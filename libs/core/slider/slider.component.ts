@@ -216,7 +216,7 @@ export class SliderComponent
     @Input()
     vertical = false;
 
-    /** @hidden */
+    /** @ignore */
     _position: number | number[] = 0;
 
     /** Control value */
@@ -228,134 +228,134 @@ export class SliderComponent
         return this._value;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _popoverValueRef(): number[] {
         return [this._position as number, this._handle1Value, this._handle2Value];
     }
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('track', { read: ElementRef, static: true })
     trackEl: ElementRef<HTMLDivElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('handle', {
         read: ElementRef
     })
     handle: ElementRef<HTMLDivElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('rangeHandle1', {
         read: ElementRef
     })
     rangeHandle1: ElementRef<HTMLDivElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('rangeHandle2', {
         read: ElementRef
     })
     rangeHandle2: ElementRef<HTMLDivElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('rangeGroupHandle', { read: ElementRef, static: false })
     _rangeGroupHandle: ElementRef<HTMLDivElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(PopoverComponent)
     _popovers: QueryList<PopoverComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren('sliderTooltipWrapper')
     _sliderTooltipWrappers: QueryList<ElementRef<HTMLDivElement>>;
 
-    /** @hidden */
+    /** @ignore */
     _value: number | SliderTickMark | SliderTickMark[] | number[] = 0;
 
-    /** @hidden */
+    /** @ignore */
     _progress = 0;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-slider--range')
     _isRange = false;
 
-    /** @hidden */
+    /** @ignore */
     _handle1Position = 0;
 
-    /** @hidden */
+    /** @ignore */
     _handle2Position = 0;
 
-    /** @hidden */
+    /** @ignore */
     _handle1Value = 0;
 
-    /** @hidden */
+    /** @ignore */
     _handle2Value = 0;
 
-    /** @hidden */
+    /** @ignore */
     _rangeProgress = 0;
 
-    /** @hidden */
+    /** @ignore */
     _tickMarks: SliderTickMark[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _sliderValueTargets = SliderValueTargets;
 
-    /** @hidden */
+    /** @ignore */
     _popoverInputFieldClass = `fd-slider-popover-input-${sliderId}`;
 
-    /** @hidden */
+    /** @ignore */
     _isRtl = false;
 
     /**
-     * @hidden
+     * @ignore
      * whether to use value with a prefix for announcing
      */
     _useSliderValuePrefix = true;
 
-    /** @hidden */
+    /** @ignore */
     _handles = SliderRangeHandles;
 
-    /** @hidden */
+    /** @ignore */
     private _min = 0;
 
-    /** @hidden */
+    /** @ignore */
     private _max = 100;
 
-    /** @hidden */
+    /** @ignore */
     private _step = 1;
 
-    /** @hidden */
+    /** @ignore */
     private _jump = 10;
 
-    /** @hidden */
+    /** @ignore */
     private _tickmarksBetweenLabels = 1;
 
-    /** @hidden */
+    /** @ignore */
     private _valuesBySteps: number[] = [];
 
     /**
-     * @hidden
+     * @ignore
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     readonly _componentHovered$ = new BehaviorSubject(false);
 
-    /** @hidden */
+    /** @ignore */
     readonly _handleFocused$ = new BehaviorSubject(false);
 
-    /** @hidden */
+    /** @ignore */
     readonly _rangeHandle1Focused$ = new BehaviorSubject(false);
 
-    /** @hidden */
+    /** @ignore */
     readonly _rangeHandle2Focused$ = new BehaviorSubject(false);
 
-    /** @hidden */
+    /** @ignore */
     readonly _popoverInputFieldFocused$ = new BehaviorSubject(false);
 
-    /** @hidden */
+    /** @ignore */
     readonly _popoverInputFieldHovered$ = new BehaviorSubject(false);
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef,
         private readonly _cdr: ChangeDetectorRef,
@@ -370,7 +370,7 @@ export class SliderComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -388,7 +388,7 @@ export class SliderComponent
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._subscribeToRtl();
         this._attachResizeListener();
@@ -399,7 +399,7 @@ export class SliderComponent
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
         this._checkIsInRangeMode();
@@ -408,61 +408,61 @@ export class SliderComponent
         this._recalcHandlePositions();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._listenToInteractionChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     getValuenow(position: number | number[], sliderValueTarget: SliderValueTargets): string | number {
         return this.customValues.length > 0
             ? this.customValues[position as number].label
             : this._popoverValueRef[sliderValueTarget];
     }
 
-    /** @hidden */
+    /** @ignore */
     get minValue(): string | number {
         return this.customValues.length > 0 ? this.customValues[this.min as number].label : this.min;
     }
 
-    /** @hidden */
+    /** @ignore */
     get maxValue(): string | number {
         return this.customValues.length > 0 ? this.customValues[this.max as number].label : this.max;
     }
 
-    /** @hidden */
+    /** @ignore */
     onChange: (value: SliderControlValue) => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     onTouched = (): void => {};
 
-    /** @hidden */
+    /** @ignore */
     registerOnChange(fn: (value: SliderControlValue) => void): void {
         this.onChange = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
     }
 
-    /** @hidden */
+    /** @ignore */
     writeValue(value: SliderControlValue): void {
         this._setValue(value, false);
     }
 
-    /** @hidden */
+    /** @ignore */
     onTrackClick(event: MouseEvent): void {
         if (this.disabled || this._isRange) {
             return;
@@ -472,7 +472,7 @@ export class SliderComponent
         this.handle.nativeElement.focus();
     }
 
-    /** @hidden */
+    /** @ignore */
     onHandleClick(event: MouseEvent, group = false): void {
         if (this.disabled) {
             return;
@@ -533,7 +533,7 @@ export class SliderComponent
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     onKeyDown(event: KeyboardEvent, handle?: SliderRangeHandles): void {
         if (this.disabled) {
             return;
@@ -575,7 +575,7 @@ export class SliderComponent
         this._updatePopoversPosition();
     }
 
-    /** @hidden */
+    /** @ignore */
     _updateValueFromInput(value: string, target: SliderValueTargets): void {
         const newValue = this._processNewValue(+value) as number;
         if (!this._isRange && target === SliderValueTargets.SINGLE_SLIDER) {
@@ -596,7 +596,7 @@ export class SliderComponent
         this._updatePopoversPosition();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleRangeKeydown(handles: SliderRangeHandles | SliderRangeHandles[], diff: number, up: boolean): void {
         handles = Array.isArray(handles) ? handles : [handles];
         const valueMap = new Map<
@@ -626,7 +626,7 @@ export class SliderComponent
         this._setValue(this._constructRangeModelValue());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setValue(value: SliderControlValue, emitEvent = true): void {
         if (this._isRange) {
             this._initRangeMode((value ?? [0.0]) as number[] | SliderTickMark[]);
@@ -640,13 +640,13 @@ export class SliderComponent
         this._cdr.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updatePopoversPosition(): void {
         this._cdr.detectChanges();
         this._popovers.forEach((popover) => popover.refreshPosition());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateValueFromPointerPosition(
         coords: { clientY: number; clientX: number },
         takeCustomValue = true
@@ -661,7 +661,7 @@ export class SliderComponent
         return this._processNewValue(newValue, takeCustomValue);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _processNewValue(newValue: number, takeCustomValue = true): number | SliderTickMark {
         if (newValue > this.max) {
             newValue = this.max;
@@ -684,7 +684,7 @@ export class SliderComponent
         return value;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setRangeHandleValueAndPosition(handleIndex: SliderRangeHandles, value: number): void {
         const position = this._calcProgress(value, true);
         if (handleIndex === SliderRangeHandles.First) {
@@ -713,7 +713,7 @@ export class SliderComponent
         this._rangeProgress = Math.abs(this._handle2Position - this._handle1Position);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _constructRangeModelValue(): number[] | SliderTickMark[] {
         let rangeLowerValue: number | string;
         let rangeHigherValue: number | string;
@@ -734,20 +734,20 @@ export class SliderComponent
         return rangeValue;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _attachResizeListener(): void {
         fromEvent(window, 'resize')
             .pipe(debounceTime(500), takeUntil(this._onDestroy$))
             .subscribe(() => this._onResize());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _onResize(): void {
         this._constructTickMarks();
         this._cdr.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _constructValuesBySteps(): void {
         try {
             this._valuesBySteps = Array.from(
@@ -759,7 +759,7 @@ export class SliderComponent
         } catch (e) {}
     }
 
-    /** @hidden */
+    /** @ignore */
     private _constructTickMarks(): void {
         if (!this.showTicks) {
             this._tickMarks = [];
@@ -811,7 +811,7 @@ export class SliderComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _maxTickMarksNumber(): number | undefined {
         if (!this.trackEl || !this.trackEl.nativeElement) {
             return;
@@ -822,7 +822,7 @@ export class SliderComponent
         return Math.floor((this.vertical ? height : width) / MIN_DISTANCE_BETWEEN_TICKS);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calcProgress(value: number, skipRtl = false): number {
         let progress = ((value - this.min) / (this.max - this.min)) * 100;
         if (!skipRtl && this._isRtl) {
@@ -837,7 +837,7 @@ export class SliderComponent
         return progress;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _recalcHandlePositions(): void {
         if (this._isRange) {
             this._handle1Position = this._calcProgress(this._handle1Value);
@@ -847,12 +847,12 @@ export class SliderComponent
         this._progress = this._calcProgress(this._position as number, true);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _checkIsInRangeMode(): void {
         this._isRange = this.mode === 'range';
     }
 
-    /** @hidden Rtl change subscription */
+    /** @ignore Rtl change subscription */
     private _subscribeToRtl(): void {
         if (!this._rtlService) {
             return;
@@ -863,7 +863,7 @@ export class SliderComponent
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initSingeMode(value: number | SliderTickMark): void {
         if (this.customValues.length > 0) {
             this._initSingeModeWithCustomValue(value as SliderTickMark);
@@ -872,19 +872,19 @@ export class SliderComponent
         this._initSingeModeDefault(coerceNumberProperty(value, this.min));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initSingeModeDefault(value: number): void {
         this._position = value;
         this._progress = this._calcProgress(value, true);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initSingeModeWithCustomValue(sliderTickMark: SliderTickMark): void {
         const value = (this._getCustomValuesPosition(sliderTickMark) as number) || this.min;
         this._initSingeModeDefault(value);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initRangeMode(value: number[] | SliderTickMark[]): void {
         if (this.customValues.length > 0) {
             this._initRangeModeWithCustomValues(value as SliderTickMark[]);
@@ -895,20 +895,20 @@ export class SliderComponent
         this._initRangeModeDefault([firstHandle, secondHandle]);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initRangeModeDefault([firstHandle, secondHandle]: number[]): void {
         this._position = [firstHandle, secondHandle];
         this._setRangeHandleValueAndPosition(SliderRangeHandles.First, firstHandle);
         this._setRangeHandleValueAndPosition(SliderRangeHandles.Second, secondHandle);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initRangeModeWithCustomValues([firstHandle, secondHandle]: SliderTickMark[]): void {
         const value = this._getCustomValuesPosition([firstHandle, secondHandle]) || [this.min, this.max];
         this._initRangeModeDefault(value as number[]);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getCustomValuesPosition(value: SliderTickMark | SliderTickMark[]): number | number[] {
         this.min = 0;
         this.max = this.customValues.length - 1;
@@ -916,7 +916,7 @@ export class SliderComponent
         return this._getCustomValuesPositions(value);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getCustomValuesPositions(value: SliderTickMark | SliderTickMark[]): number | number[] {
         if (!value || (value as SliderTickMark[]).length === 0) {
             return this._isRange ? [0, this.customValues.length - 1] : 0;
@@ -945,12 +945,12 @@ export class SliderComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _instanceOfCustomValue(object: any): object is SliderCustomValue {
         return !!object && 'value' in object && 'label' in object;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToInteractionChanges(): void {
         combineLatest([
             this._handleFocused$,
@@ -986,7 +986,7 @@ export class SliderComponent
             });
     }
 
-    /** @hidden reset default prefix on leaving the slider */
+    /** @ignore reset default prefix on leaving the slider */
     private _resetPrefix(): void {
         // reset prefix string for slider current value that need to be announced
         this._useSliderValuePrefix = true;
@@ -994,7 +994,7 @@ export class SliderComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * Checks whether input popover element is hovered.
      * Will also return true, when hovering the gap between handle and the tooltip.
      * If yes, returns "true" instantly and "false" once it's not hovered anymore.

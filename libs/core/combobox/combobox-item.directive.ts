@@ -7,7 +7,7 @@ import { ComboboxItemDirectiveContext } from './combobox.interface';
 })
 export class ComboboxItemDirective<T = unknown> {
     /**
-     * @hidden
+     * @ignore
      * Used for type support.
      */
     @Input()
@@ -16,7 +16,7 @@ export class ComboboxItemDirective<T = unknown> {
     /** Template reference. */
     templateRef = inject(TemplateRef<ComboboxItemDirectiveContext<T>>);
 
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard<T>(
         dir: ComboboxItemDirective<T>,
         ctx: ComboboxItemDirectiveContext<T>

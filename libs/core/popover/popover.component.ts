@@ -108,48 +108,48 @@ export class PopoverComponent
     @Input()
     mobileConfig: MobileModeConfig = { hasCloseButton: true };
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('templateRef', { read: TemplateRef })
     templateRef: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('container', { read: ViewContainerRef })
     container: ViewContainerRef;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(CdkOverlayOrigin)
     triggerOrigin: CdkOverlayOrigin;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(PopoverBodyComponent)
     popoverBody: PopoverBodyComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(PopoverBodyDirective)
     popoverBodyDirective: PopoverBodyDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(PopoverControlComponent)
     popoverControl: PopoverControlComponent;
 
-    /** @hidden - template for Dialog body content */
+    /** @ignore - template for Dialog body content */
     @ContentChild('popoverBodyContent')
     popoverBodyContentTemplate: TemplateRef<any>;
 
-    /** @hidden - template for Dialog footer content */
+    /** @ignore - template for Dialog footer content */
     @ContentChild('popoverFooterContent')
     popoverFooterContentTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     private _trigger: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     private _clickEventListener: null | (() => void);
 
-    /** @hidden */
+    /** @ignore */
     private _mobileModeComponentRef: ComponentRef<PopoverMobileComponent>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _popoverService: PopoverService,
         private readonly _cdr: ChangeDetectorRef,
@@ -161,7 +161,7 @@ export class PopoverComponent
         super();
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     onKeyDown(event: KeyboardEvent): void {
         const activeElement = document.activeElement;
@@ -180,19 +180,19 @@ export class PopoverComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._setupView();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         if (this.popoverControl && this.triggers.includes('click')) {
             this.popoverControl._tabbable = true;
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         this._popoverService.refreshConfiguration(this);
 
@@ -201,7 +201,7 @@ export class PopoverComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._destroyMobileComponent();
         this._destroyEventListeners();
@@ -256,7 +256,7 @@ export class PopoverComponent
         }
     }
 
-    /** @hidden Select and instantiate popover view mode */
+    /** @ignore Select and instantiate popover view mode */
     private _setupView(): void {
         if (!this.mobile) {
             this._popoverService._mobile = false;
@@ -292,7 +292,7 @@ export class PopoverComponent
         return null;
     }
 
-    /** @hidden Open Popover in mobile mode */
+    /** @ignore Open Popover in mobile mode */
     private async _setupMobileMode(): Promise<void> {
         const injector = Injector.create({
             providers: [{ provide: POPOVER_COMPONENT, useValue: this }],
@@ -316,7 +316,7 @@ export class PopoverComponent
         this._listenOnTriggerRefClicks();
     }
 
-    /** @hidden - Listen on popover trigger ref clicks */
+    /** @ignore - Listen on popover trigger ref clicks */
     private _listenOnTriggerRefClicks(): void {
         this._destroyEventListeners();
 
@@ -326,7 +326,7 @@ export class PopoverComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * This is going to be removed in feature, on dialog and dynamic service component refactor
      */
     private _destroyEventListeners(): void {
@@ -336,7 +336,7 @@ export class PopoverComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _destroyMobileComponent(): void {
         if (this._mobileModeComponentRef) {
             this._mobileModeComponentRef.destroy();

@@ -58,10 +58,10 @@ export class ApprovalFlowTeamListComponent {
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onTeamRadioClick = new EventEmitter<ApprovalTeam>();
 
-    /** @hidden */
+    /** @ignore */
     _trackByFn = trackByFn;
 
-    /** @hidden */
+    /** @ignore */
     _showTeamDetails(team: ApprovalTeam): void {
         this.onTeamClick.emit(team);
     }

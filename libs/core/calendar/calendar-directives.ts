@@ -12,10 +12,10 @@ import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
     standalone: true
 })
 export class CalendarCloseButtonDirective {
-    /** @hidden */
+    /** @ignore */
     protected _closeCalendarLabel = resolveTranslationSignal('coreCalendar.closeCalendarLabel');
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Attribute('aria-label') protected _originalAriaLabel: string,
         @Attribute('title') protected _originalTitle: string

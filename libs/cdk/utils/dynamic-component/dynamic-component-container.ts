@@ -13,29 +13,29 @@ import { BehaviorSubject } from 'rxjs';
 import { Nullable } from '../models/nullable';
 
 export abstract class DynamicComponentContainer<T = TemplateRef<any> | Type<any>> {
-    /** @hidden */
+    /** @ignore */
     abstract portalOutlet: CdkPortalOutlet;
 
-    /** @hidden */
+    /** @ignore */
     childContent: Nullable<T> = undefined;
 
-    /** @hidden */
+    /** @ignore */
     protected _componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     protected _contentLoaded$ = new BehaviorSubject<boolean>(false);
 
-    /** @hidden */
+    /** @ignore */
     protected constructor(
         public elementRef: ElementRef,
         protected _injector: Injector,
         protected _cdr: ChangeDetectorRef
     ) {}
 
-    /** @hidden Load received content */
+    /** @ignore Load received content */
     protected abstract _loadContent(): void;
 
-    /** @hidden Load received content as component */
+    /** @ignore Load received content as component */
     protected _createFromComponent(content: Type<any>): void {
         this.portalOutlet?.attachedRef?.destroy();
         const injector = Injector.create({
@@ -45,7 +45,7 @@ export abstract class DynamicComponentContainer<T = TemplateRef<any> | Type<any>
         this._componentRef = this.portalOutlet.attach(new ComponentPortal(content, null, injector));
     }
 
-    /** @hidden Load received content as embedded view */
+    /** @ignore Load received content as embedded view */
     protected _createFromTemplate(content: TemplateRef<any>, context: any): void {
         this.portalOutlet?.attachedRef?.destroy();
         if (this.portalOutlet.hasAttached()) {

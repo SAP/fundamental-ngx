@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'page-footer';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/page-footer';
 export const API_FILE_KEY = 'footer';

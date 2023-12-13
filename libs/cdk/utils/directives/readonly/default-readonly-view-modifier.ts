@@ -3,10 +3,10 @@ import { ReadonlyViewModifier } from './readonly-view-modifier.interface';
 import { setReadonlyState } from './set-readonly-state';
 
 export class DefaultReadonlyViewModifier implements ReadonlyViewModifier {
-    /** @hidden */
+    /** @ignore */
     constructor(private elementRef: ElementRef<Element>) {}
 
-    /** @hidden */
+    /** @ignore */
     setReadonlyState = (isDisabled: boolean): void => {
         setReadonlyState(this.elementRef, isDisabled);
     };

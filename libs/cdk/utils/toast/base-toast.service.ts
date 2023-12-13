@@ -46,20 +46,20 @@ export abstract class BaseToastService<
     protected abstract defaultConfig: P;
 
     /**
-     * @hidden
+     * @ignore
      * Array of all current toasts.
      */
     protected _toasts: BaseToastRef[] = [];
 
     /**
-     * @hidden
+     * @ignore
      */
     protected _toastsMap = new Map<BaseToastPosition, BaseToastRef[]>();
 
-    /** @hidden */
+    /** @ignore */
     private _destroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     protected constructor(
         public overlay: Overlay,
         public injector: Injector
@@ -145,7 +145,7 @@ export abstract class BaseToastService<
     ): BaseToastRef<T | EmbeddedViewRef<any>, P>;
 
     /**
-     * @hidden
+     * @ignore
      * Places a new component or a template as the content of the Toast container.
      */
     protected _attach<T>(
@@ -217,7 +217,7 @@ export abstract class BaseToastService<
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._destroy$.next();
         this._destroy$.complete();
@@ -244,7 +244,7 @@ export abstract class BaseToastService<
     }
 
     /**
-     * @hidden
+     * @ignore
      * Creates a new overlay and places it in the correct location.
      */
     private _createOverlay(positionStrategy: BaseToastPosition): { overlay: OverlayRef; isAnchor: boolean } {
@@ -259,7 +259,7 @@ export abstract class BaseToastService<
     }
 
     /**
-     * @hidden
+     * @ignore
      * @returns Initial Position Strategy of the Toast Overlay Reference.
      */
     private _getPositionStrategy(positionStrategy: BaseToastPosition): {
@@ -284,7 +284,7 @@ export abstract class BaseToastService<
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param needlePosition
      * @private
      */
@@ -293,7 +293,7 @@ export abstract class BaseToastService<
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param connectedElm element to connect with.
      * @param positionStrategy Position Strategy
      * @returns Flexible Connected Position Strategy for Overlay Reference.
@@ -311,7 +311,7 @@ export abstract class BaseToastService<
     }
 
     /**
-     * @hidden
+     * @ignore
      * @returns Default Global Position for Overlay Reference.
      */
     private _composeGlobalPosition(
@@ -355,14 +355,14 @@ export abstract class BaseToastService<
         return position;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _refreshOverlayPositions(): void {
         this._toastsMap.forEach((toasts) => {
             this._updateOverlayPositionStrategy(toasts);
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updateOverlayPositionStrategy(toasts: BaseToastRef[]): void {
         toasts.forEach((toastRef) => {
             const positionStrategy = this._updatePositionStrategy(toastRef);
@@ -374,7 +374,7 @@ export abstract class BaseToastService<
     }
 
     /**
-     * @hidden
+     * @ignore
      * Updates the position of a current Overlay Reference.
      * @returns New Position Strategy.
      * @param toast Toast Reference
@@ -403,7 +403,7 @@ export abstract class BaseToastService<
         return this._composeFlexibleConnectedPosition(previousOverlay.overlayRef.overlayElement, positionStrategy);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isBoundGlobalPosition(position: any): position is ToastGlobalConnectedPosition {
         return !!position.boundTo;
     }

@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'facets';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/facets';
 export const API_FILE_KEY = 'facets';

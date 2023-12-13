@@ -22,7 +22,7 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
     imports: [ActionSheetModule, ButtonComponent, FdTranslatePipe]
 })
 export class ShellbarActionsMobileComponent implements AfterContentChecked {
-    /** @hidden */
+    /** @ignore */
     @Input()
     shellbarActions: QueryList<ShellbarActionComponent>;
 
@@ -32,21 +32,21 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
     @Input()
     searchExists = false;
 
-    /** @hidden */
+    /** @ignore */
     @Output()
     showSearch = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     totalNotifications: number;
 
-    /** @hidden */
+    /** @ignore */
     actionClicked(item: ShellbarActionComponent, event: MouseEvent): void {
         if (item.callback) {
             item.callback(event);
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentChecked(): void {
         this.totalNotifications = 0;
 

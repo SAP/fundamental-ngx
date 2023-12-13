@@ -40,11 +40,11 @@ let mobilePopoverUniqueId = 0;
     imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, NgTemplateOutlet]
 })
 export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> implements OnInit, OnDestroy {
-    /** @hidden */
+    /** @ignore */
     @ViewChild('dialogTemplate')
     _dialogTemplate: TemplateRef<any>;
 
-    /** @hidden
+    /** @ignore
      * from mobile class can not prefix _,
      * to avoid build issues
      */
@@ -58,18 +58,18 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     /** Dialog footer content */
     viewFooter: TemplateRef<any> | null;
 
-    /** @hidden */
+    /** @ignore */
     readonly id = 'fd-popover-mobile-' + mobilePopoverUniqueId++;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     get titleId(): string {
         return this.id + '-title';
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,
@@ -80,7 +80,7 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
         super(elementRef, dialogService, _popoverComponent, MobileModeControl.POPOVER, mobileModes);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._listenOnPopoverOpenChange();
 
@@ -91,7 +91,7 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
         this._changeDetectorref.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this.dialogRef?.close();
         super.onDestroy();
@@ -104,7 +104,7 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
         this._component.close();
     }
 
-    /** @hidden Opens/closes the Dialog based on Popover isOpenChange events */
+    /** @ignore Opens/closes the Dialog based on Popover isOpenChange events */
     private _listenOnPopoverOpenChange(): void {
         this._subscriptions.add(
             this._component.isOpenChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => {
@@ -117,7 +117,7 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
         );
     }
 
-    /** @hidden Opens the Dialog */
+    /** @ignore Opens the Dialog */
     private _openDialog(): void {
         this.dialogRef = this._dialogService.open(this._dialogTemplate, {
             verticalPadding: true,

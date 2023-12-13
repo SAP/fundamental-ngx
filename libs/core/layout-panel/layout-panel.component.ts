@@ -34,7 +34,7 @@ export class LayoutPanelComponent implements OnChanges, OnInit {
     @Input()
     id: string = 'fd-layout-panel-' + layoutPanelUniqueId++;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-layout-panel')
     fdLayoutPanelClass = true;
 
@@ -43,20 +43,20 @@ export class LayoutPanelComponent implements OnChanges, OnInit {
     @HostBinding('class.fd-layout-panel--transparent')
     transparent = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private elRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this._applyBackgroundImage();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._applyBackgroundImage();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _applyBackgroundImage(): void {
         if (this.backgroundImage) {
             (this.elRef.nativeElement as HTMLElement).style['background-image'] = 'url("' + this.backgroundImage + '")';

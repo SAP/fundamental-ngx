@@ -18,7 +18,7 @@ import { setReadonlyState } from './set-readonly-state';
     ]
 })
 export class ReadonlyBehaviorDirective extends ReplaySubject<boolean> implements ReadonlyBehavior, AfterViewInit {
-    /** @Hidden */
+    /** @ignore */
     @Input()
     set fdkReadonly(value: BooleanInput) {
         this._readonlyInput$.next(coerceBooleanProperty(value));
@@ -28,12 +28,12 @@ export class ReadonlyBehaviorDirective extends ReplaySubject<boolean> implements
         return this._readonly;
     }
 
-    /** @Hidden */
+    /** @ignore */
     _readonly = false;
-    /** @hidden */
+    /** @ignore */
     private readonly _readonlyInput$ = new BehaviorSubject(false);
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
         private _destroyRef: DestroyRef
@@ -42,12 +42,12 @@ export class ReadonlyBehaviorDirective extends ReplaySubject<boolean> implements
         this._destroyRef.onDestroy(() => this.complete());
     }
 
-    /** @Hidden */
+    /** @ignore */
     setReadonlyState = (isReadonly: boolean): void => {
         setReadonlyState(this._elementRef, isReadonly);
     };
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._readonlyInput$
             .pipe(

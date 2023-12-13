@@ -11,6 +11,6 @@ import { LIST_ITEM_TYPE } from './base-list-item';
     }
 })
 export class ListFooterComponent extends BaseComponent {
-    /** @hidden */
+    /** @ignore */
     _type = LIST_ITEM_TYPE.FOOTER;
 }

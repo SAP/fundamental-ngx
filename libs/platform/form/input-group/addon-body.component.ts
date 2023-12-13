@@ -30,7 +30,7 @@ export class InputGroupAddonBodyComponent implements OnInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
         private _renderer: Renderer2,
@@ -39,17 +39,17 @@ export class InputGroupAddonBodyComponent implements OnInit {
         contentDensityObserver.subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._addClassNameToHostElement(CSS_CLASS_NAME.addon);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addClassNameToHostElement(className: string): void {
         this._renderer.addClass(this._elementRef.nativeElement, className);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _removeClassNameFromHostElement(className: string): void {
         this._renderer.removeClass(this._elementRef.nativeElement, className);
     }

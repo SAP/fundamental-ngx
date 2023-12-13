@@ -295,32 +295,32 @@ export class FormFieldComponent
     onColumnChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /**
-     * @hidden
+     * @ignore
      * Form field template reference
      */
     @ViewChild('renderer', { static: true })
     renderer: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FormFieldControlExtrasComponent, { read: ElementRef })
     formFieldExtras?: ElementRef<HTMLElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('labelCol') labelCol?: ElementRef<HTMLDivElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(InputMessageGroupWithTemplate, { read: ElementRef })
     inputMessageGroup: ElementRef<HTMLElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('innerErrorRenderers')
     innerErrorRenderers: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FormFieldErrorDirective)
     private _errorDirectiveQuery: QueryList<FormError>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(InputMessageGroupWithTemplate)
     private readonly _inputMessageGroupCmp: QueryList<InputMessageGroupWithTemplate>;
 
@@ -329,7 +329,7 @@ export class FormFieldComponent
         return uniqBy([...this._errorDirectives, ...this._formGroupErrorDirectives], 'error');
     }
 
-    /** @hidden */
+    /** @ignore */
     isHorizontal$: Observable<boolean>;
 
     /**
@@ -337,13 +337,13 @@ export class FormFieldComponent
      */
     control: PlatformFormFieldControl | null;
 
-    /** @hidden */
+    /** @ignore */
     _labelColumnLayoutClass: string;
 
-    /** @hidden */
+    /** @ignore */
     _fieldColumnLayoutClass: string;
 
-    /** @hidden */
+    /** @ignore */
     _gapColumnLayoutClass: string;
 
     /**
@@ -351,7 +351,7 @@ export class FormFieldComponent
      */
     hintOptions: FieldHintOptions = defaultFormFieldHintOptions as unknown as FieldHintOptions;
 
-    /** @hidden */
+    /** @ignore */
     _errorDirectives: FormError[] = [];
 
     /** Grouped errors. */
@@ -361,68 +361,68 @@ export class FormFieldComponent
     errorsChange$ = new Subject<void>();
 
     /**
-     * @hidden
+     * @ignore
      * Optional FormControl
      */
     public formControl: FormControl;
 
-    /** @hidden */
+    /** @ignore */
     protected _columns: Column = 6;
 
-    /** @hidden */
+    /** @ignore */
     protected _editable = true;
 
-    /** @hidden */
+    /** @ignore */
     protected _formGroup: FormGroup;
 
-    /** @hidden */
+    /** @ignore */
     protected _required = false;
 
-    /** @hidden */
+    /** @ignore */
     protected _destroyed$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _isColumnLayoutEnabled = false;
 
-    /** @hidden column number for different screen sizes */
+    /** @ignore column number for different screen sizes */
     private _xlColumnNumber: number;
 
-    /** @hidden */
+    /** @ignore */
     private _lgColumnNumber: number;
 
-    /** @hidden */
+    /** @ignore */
     private _mdColumnNumber: number;
 
-    /** @hidden */
+    /** @ignore */
     private _sColumnNumber = 1;
 
-    /** @hidden */
+    /** @ignore */
     private _columnLayout: ColumnLayout;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _responsiveBreakPointConfig: ResponsiveBreakPointConfig;
 
-    /** @hidden */
+    /** @ignore */
     private _labelLayout: LabelLayout;
 
-    /** @hidden */
+    /** @ignore */
     private _labelColumnLayout: ColumnLayout;
 
-    /** @hidden */
+    /** @ignore */
     private _fieldColumnLayout: ColumnLayout;
-    /** @hidden */
+    /** @ignore */
     private _gapColumnLayout: ColumnLayout;
 
-    /** @hidden */
+    /** @ignore */
     private _formGroupErrorDirectives: FormError[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _formGroupErrorDirectivesSubscription: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     private _errorDirectivesCdr: Subscription;
 
-    /** @hidden whether label and control are vertically aligned */
+    /** @ignore whether label and control are vertically aligned */
     private get _isHorizontalAlignment(): boolean {
         if (!this.inputMessageGroup || !this.labelCol) {
             return false;
@@ -434,7 +434,7 @@ export class FormFieldComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * Sum of extra heights inside form control and formFieldExtras.
      * Label will be shifted by this number in order to be properly aligned with the control
      */
@@ -448,16 +448,16 @@ export class FormFieldComponent
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _labelColumnLayout$: BehaviorSubject<ColumnLayout>;
-    /** @hidden */
+    /** @ignore */
     private _fieldColumnLayout$: BehaviorSubject<ColumnLayout>;
-    /** @hidden */
+    /** @ignore */
     private _gapColumnLayout$: BehaviorSubject<ColumnLayout>;
-    /** @hidden */
+    /** @ignore */
     private _needsInlineHelpPlaceSubscription?: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     get _groupHost(): FormGroupContainer | FormFieldGroup {
         return this.formFieldGroup ? this.formFieldGroup : this.formGroupContainer;
     }
@@ -468,15 +468,15 @@ export class FormFieldComponent
      */
     hintTarget?: string;
 
-    /** @hidden */
+    /** @ignore */
     private _breakPointObserver: Observable<any>;
 
-    /** @hidden */
+    /** @ignore */
     private _formFieldLayoutService: FormFieldLayoutService;
-    /** @hidden */
+    /** @ignore */
     private readonly _defaultHintOptions: FieldHintOptions;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _cd: ChangeDetectorRef,
         @Optional() formGroupContainer: FormGroupContainer,
@@ -522,7 +522,7 @@ export class FormFieldComponent
         this.listenToInlineHelpPlaceRequirementChanges(() => (this.labelColumnLayout ? this : this._groupHost));
     }
 
-    /** @hidden */
+    /** @ignore */
     listenToInlineHelpPlaceRequirementChanges(getSource: () => any): void {
         if (this._needsInlineHelpPlaceSubscription) {
             this._needsInlineHelpPlaceSubscription.unsubscribe();
@@ -542,7 +542,7 @@ export class FormFieldComponent
             .subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         // provides capability to make a field disabled. useful in reactive form approach.
         this.formControl =
@@ -575,7 +575,7 @@ export class FormFieldComponent
         this.listenToInlineHelpPlaceRequirementChanges(() => this);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.hint) {
             this._updateHintOptions();
@@ -602,12 +602,12 @@ export class FormFieldComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._cd.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._assignErrorDirectives();
 
@@ -620,7 +620,7 @@ export class FormFieldComponent
         this._cd.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._formFieldLayoutService.removeEntry(this);
         this._removeFromFormGroup();
@@ -630,7 +630,7 @@ export class FormFieldComponent
         this._formGroupErrorDirectivesSubscription?.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     hasErrors(): boolean {
         return this._editable && !!this.control?.controlInvalid;
     }
@@ -776,14 +776,14 @@ export class FormFieldComponent
 
     /**
      * Returns whether content of the provided hint is a string.
-     * @hidden
+     * @ignore
      */
     isStringHint(hintOptions: HintContent): hintOptions is string {
         return typeof hintOptions === 'string';
     }
 
     /**
-     * @hidden
+     * @ignore
      * Listens to form message component changes and passes its instance to the form control component.
      */
     private _listenToFormMessage(): void {
@@ -801,7 +801,7 @@ export class FormFieldComponent
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _validateErrorHandler(): void {
         if (
             this._editable &&
@@ -814,13 +814,13 @@ export class FormFieldComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _hasValidators(): boolean {
         return this.validators && this.validators.length > 1;
     }
 
     /**
-     * @hidden
+     * @ignore
      * Add FormField to FormGroup
      */
     private _addToFormGroup(): void {
@@ -832,7 +832,7 @@ export class FormFieldComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * Remove FormField from FormGroup
      */
     private _removeFromFormGroup(): void {
@@ -843,7 +843,7 @@ export class FormFieldComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * Add FormControl from FormGroup
      */
     private _addControlToFormGroup(control: AbstractControl): void {
@@ -854,7 +854,7 @@ export class FormFieldComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * Remove FormControl from FormGroup
      */
     private _removeControlFromFormGroup(): void {
@@ -865,7 +865,7 @@ export class FormFieldComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * Need to be able to set these properties on every level.
      *  - Global FormGroup Level as well each field
      *
@@ -882,7 +882,7 @@ export class FormFieldComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setLayout(): void {
         try {
             const normalized = normalizeColumnLayout(this.columnLayout, 1);
@@ -896,7 +896,7 @@ export class FormFieldComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updateLayout(currentBreakingPointName: string): void {
         if (this._isColumnLayoutEnabled) {
             switch (currentBreakingPointName) {
@@ -921,7 +921,7 @@ export class FormFieldComponent
         this.onColumnChange.emit(true);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updateHintOptions(): void {
         // placement is here set up because hintPlacement is deprecated
         if (typeof this.hint === 'string' || this.hint instanceof TemplateRef) {
@@ -937,7 +937,7 @@ export class FormFieldComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _assignErrorDirectives(): void {
         this._errorDirectivesCdr?.unsubscribe();
         this._errorDirectives = this._errorDirectiveQuery.toArray();

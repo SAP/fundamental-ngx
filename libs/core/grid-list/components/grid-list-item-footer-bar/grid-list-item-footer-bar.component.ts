@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild } from '@ang
     standalone: true
 })
 export class GridListItemFooterBarComponent {
-    /** @hidden */
+    /** @ignore */
     @ViewChild(TemplateRef)
     contentTemplateRef: TemplateRef<any>;
 }

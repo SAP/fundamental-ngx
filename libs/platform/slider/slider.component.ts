@@ -104,7 +104,7 @@ export class SliderComponent extends BaseInput {
     @Output()
     readonly sliderChange = new EventEmitter<SliderChangeEvent>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -126,14 +126,14 @@ export class SliderComponent extends BaseInput {
         return this.getValue();
     }
 
-    /** @hidden */
+    /** @ignore */
     _onModelChange(modelValue: SliderControlValue): void {
         this._emitChangeEvent(modelValue);
         this.onTouched();
         this.stateChanges.next('Slider: onValueChange');
     }
 
-    /** @hidden
+    /** @ignore
      * Method to emit change event
      */
     private _emitChangeEvent(modelValue: SliderControlValue): void {

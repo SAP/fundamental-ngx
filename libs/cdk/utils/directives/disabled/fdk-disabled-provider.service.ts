@@ -9,18 +9,18 @@ import { FDK_DISABLED_DIRECTIVE } from './fdk-disabled.token';
 
 @Injectable()
 export class FdkDisabledProvider extends ReplaySubject<boolean> implements DisabledBehavior, OnDestroy {
-    /** @Hidden */
+    /** @ignore */
     fdkDisabled = false;
-    /** @Hidden */
+    /** @ignore */
     private readonly _destroy$ = new Subject<void>();
-    /** @hidden */
+    /** @ignore */
     private readonly _viewModifiers$: BehaviorSubject<DisabledViewModifier[]> = new BehaviorSubject<
         DisabledViewModifier[]
     >(this._getInitialViewModifiers());
-    /** @hidden */
+    /** @ignore */
     private _disabledChange$: Observable<boolean> = this._getDisabledChange$();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private ngZone: NgZone,
         private elementRef: ElementRef<HTMLElement>,
@@ -44,27 +44,27 @@ export class FdkDisabledProvider extends ReplaySubject<boolean> implements Disab
             .subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     addViewModifier(modifier: DisabledViewModifier): void {
         const viewModifiers = [...new Set([...this._viewModifiers$.value, modifier]).values()];
         this._viewModifiers$.next(viewModifiers);
     }
 
-    /** @hidden */
+    /** @ignore */
     setDisabledState(isDisabled: boolean): void {
         firstValueFrom(this.ngZone.onStable).then(() => {
             this._viewModifiers$.value.forEach((viewModifier) => viewModifier.setDisabledState(isDisabled));
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this.complete();
         this._destroy$.next();
         this.disabledObserver.unobserve(this.elementRef);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getDisabledChange$(): Observable<boolean> {
         let selfDisabled = false;
         let parentDisabled = false;
@@ -105,7 +105,7 @@ export class FdkDisabledProvider extends ReplaySubject<boolean> implements Disab
         return this.disabledObserver.observe(this.elementRef).pipe(distinctUntilChanged());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getInitialViewModifiers(): DisabledViewModifier[] {
         return !this.selfDisabled$ ? [new DefaultDisabledViewModifier(this.elementRef)] : [this.selfDisabled$];
     }

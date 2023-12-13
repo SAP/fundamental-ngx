@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'pagination';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/pagination';
 export const API_FILE_KEY = 'pagination';
 export const I18N_KEY = 'corePagination';

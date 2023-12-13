@@ -17,4 +17,5 @@ export const ROUTES: Routes = [
 ];
 
 export const LIBRARY_NAME = 'forms';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/cdk/forms';
 export const API_FILE_KEY = 'forms';

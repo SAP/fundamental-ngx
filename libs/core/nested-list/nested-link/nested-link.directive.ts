@@ -28,11 +28,11 @@ export class NestedLinkDirective implements NestedItemLink {
     @HostBinding('class.is-selected')
     selected = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-label')
     _ariaLabel: string;
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     @HostBinding('attr.aria-describedby')
     ariaDescribedby: Nullable<string | number>;
@@ -41,26 +41,26 @@ export class NestedLinkDirective implements NestedItemLink {
     @Output()
     selectedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-nested-list__link')
     fdNestedListItemClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.tabindex')
     tabIndex = 0;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.role')
     role = 'treeitem';
 
     /**
-     *  @hidden
+     *  @ignore
      *  Reference to title element, it is used, to get title for condensed mode.
      */
     @ContentChild(NestedListTitleDirective)
     title: NestedListTitleDirective;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public changeDetRef: ChangeDetectorRef,
         private _elementRef: ElementRef,

@@ -24,14 +24,14 @@ import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { ClosableIconTabBar } from '../closable-icon-tab-bar.class';
 import { TextTypePopoverComponent } from '../popovers/text-type-popover/text-type-popover.component';
 
-/** @hidden */
+/** @ignore */
 interface DataForReordering {
     arr: IconTabBarItem[];
     item: IconTabBarItem;
     parentUid: string;
 }
 
-/** @hidden */
+/** @ignore */
 type TabItem = ElementRef<HTMLElement> | TextTypePopoverComponent;
 
 @Component({
@@ -51,10 +51,10 @@ type TabItem = ElementRef<HTMLElement> | TextTypePopoverComponent;
     ]
 })
 export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
-    /** @hidden list of tab html elements, that can receive focus */
+    /** @ignore list of tab html elements, that can receive focus */
     @ViewChildren('tabItem') _tabUIElements: QueryList<TabItem>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('extraItemsPopover') _tabBarPopover: TextTypePopoverComponent;
 
     /**
@@ -75,13 +75,13 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
     @Output()
     reordered = new EventEmitter<IconTabBarItem[]>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(_cd: ChangeDetectorRef, _ngZone: NgZone) {
         super(_cd, _ngZone);
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param selectedItem
      */
     _selectExtraItem(selectedItem: IconTabBarItem | undefined): void {
@@ -98,7 +98,7 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param draggableItem
      * @param targetItem
      * @param action
@@ -138,7 +138,7 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
         this.reordered.emit(this._tabs);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _canDrop(event: FdDnDEvent): boolean {
         let parentUId: Nullable<string> =
             event.action === 'replace' ? event.targetItem.parentUId : event.targetItem.uId;
@@ -154,7 +154,7 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param data
      * @description Insert tab into another tab.
      */
@@ -175,7 +175,7 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param data
      * @description Insert tab between tabs
      */
@@ -191,7 +191,7 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
         this._triggerRecalculationVisibleItems();
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _getTabUIElementFocusable(tabUIElement: TabItem): HTMLElement {
         if (typeof tabUIElement === 'object' && 'nativeElement' in tabUIElement) {
             return tabUIElement.nativeElement;

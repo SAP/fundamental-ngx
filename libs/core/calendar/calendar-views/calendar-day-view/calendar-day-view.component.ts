@@ -176,52 +176,52 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     readonly selectedDateChange: EventEmitter<D> = new EventEmitter<D>();
 
     /**
-     * @hidden
+     * @ignore
      * Actual day grid with previous/current/next month days
      */
     _dayViewGrid: CalendarDay<D>[][];
 
     /**
-     * @hidden
+     * @ignore
      * Array of week numbers displayed for current month/year
      */
     _weeks: string[];
 
-    /** @hidden */
+    /** @ignore */
     private _selectedRangeDate: DateRange<D>;
 
-    /** @hidden */
+    /** @ignore */
     private _selectedDate: Nullable<D>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
     /**
-     * @hidden
+     * @ignore
      * Days per week
      */
     private readonly _amountOfCols = 7;
-    /** @hidden */
+    /** @ignore */
     private _isOnRangePick = false;
-    /** @hidden */
+    /** @ignore */
     private _isInitiated = false;
 
-    /** @hidden */
+    /** @ignore */
     private _currentlyDisplayed: CalendarCurrent;
 
     /**
-     * @hidden
+     * @ignore
      * Variable that contains short weekday names.
      */
     private _shortWeekDays: string[];
 
     /**
-     * @hidden
+     * @ignore
      * Variable that contains short weekday names.
      */
     private _longWeekDays: string[];
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private eRef: ElementRef,
         private changeDetRef: ChangeDetectorRef,
@@ -230,7 +230,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         public _dateTimeAdapter: DatetimeAdapter<D>
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._isInitiated = true;
 
@@ -247,7 +247,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         /** Changes of those properties are done inside its setters */
         if (!changes['selectedDate'] && !changes['selectedRangeDate'] && !changes['currentlyDisplayed']) {
@@ -321,7 +321,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         this.focusOnCellByIndex(cellToFocus.index);
     }
 
-    /** @hidden */
+    /** @ignore */
     _refreshHoverRange(day: CalendarDay<D>): void {
         const start = this.selectedRangeDate?.start;
         if (this._isOnRangePick && start) {
@@ -342,7 +342,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      *  Amount of selected days
      *  0, when there is no day selected, or start date is invalid,
      *  1, when there is only valid start date, or end date is same as start date,
@@ -369,7 +369,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that returns short weekday name.
      * Can be changed by user by providing other class which implements DatetimeAdapter
      */
@@ -378,7 +378,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that returns weekday name.
      * Can be changed by user by providing other class which implements DatetimeAdapter
      */
@@ -387,7 +387,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Function that gives array of all displayed CalendarDays
      */
     get _calendarDayList(): CalendarDay<D>[] {
@@ -407,7 +407,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Week column header ID
      */
     get _weekNumbersColumnHeaderId(): string {
@@ -415,7 +415,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Today cell label ID
      */
     get _todayLabelId(): string {
@@ -423,7 +423,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Selected date label ID
      */
     get _selectedDateLabelId(): string {
@@ -431,7 +431,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Date range start date label ID
      */
     get _dateRangeStartLabelId(): string {
@@ -439,7 +439,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Date range end date label ID
      */
     get _dateRangeEndLabelId(): string {
@@ -447,7 +447,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Date in past label ID
      */
     get _dateInPastLabelId(): string {
@@ -455,7 +455,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that handles day cells keydown events,
      * @param event KeyboardEvent
      * @param cell CalendarDay
@@ -472,7 +472,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      *  Method that allow to focus elements inside this component
      */
     _focusElementBySelector(elementSelector: string): void {
@@ -483,7 +483,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Standardized method to calculate grid [x][y] to index number of flatten list
      */
     _getIndex(rowIndex: number, colIndex: number): number {
@@ -491,7 +491,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that selects previous month
      * Triggered only when the month is changed during changing focus
      * Also triggers event to parent calendar component and rebuilds day view grid
@@ -503,7 +503,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that selects next month
      * Triggered only when the month is changed during changing focus
      * Also triggers event to parent calendar component and rebuilds day view grid
@@ -515,7 +515,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that creates array of CalendarDay models which will be shown on day grid,
      * depending on current month and year.
      */
@@ -544,7 +544,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that builds 2 dimensions day view grid, also sets up currently displayed month, or year,
      * when there is not any.
      */
@@ -582,7 +582,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Get id of calendar's day item
      */
     private _getCellIdByIndex(index: number): string {
@@ -590,7 +590,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method which provides array of CalendarDay,
      * which contains every single day of currently shown month/year.
      */
@@ -616,7 +616,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that returns active cell, which means:
      * if there is any selected day, return selected day
      * if there is no selected day, but there is today day, return today day
@@ -627,7 +627,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method which provides array of CalendarDay,
      * which contains last 0-6 days of previous month/year. Theses days
      * fills the gap between starting startingDayOfWeek and first day of current month
@@ -662,7 +662,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method which provides array of CalendarDay, which contains first days of next month/year. Theses days
      * fills the gap between last day of current day and end of 6-weeks calendar grid.
      */
@@ -681,13 +681,13 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         return calendarDays;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isWeekendDay(dayOfWeek: number): boolean {
         return dayOfWeek === 1 || dayOfWeek === 7;
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that generates whole day model basing on date, disabling functions, block functions, and actually
      * chosen range / single date.
      */
@@ -715,7 +715,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that is called to refresh i18n short week days.
      */
     private _refreshShortWeekDays(): void {
@@ -734,7 +734,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Gets special day number of specified date model
      */
     private _getSpecialDay(date: D): number | null {
@@ -746,7 +746,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that returns array of week's count
      */
     private _refreshWeekCount(): string[] {
@@ -759,7 +759,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Get year and month for previous year
      */
     private _getPreviousMonth(): CalendarCurrent {
@@ -771,7 +771,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Get year and month for next year
      */
     private _getNextMonth(): CalendarCurrent {
@@ -783,7 +783,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method to put configuration and listeners on calendar keyboard service
      */
     private _setupKeyboardService(): void {
@@ -829,7 +829,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Change selection flag on days to false, besides the selected one
      */
     private _changeSelectedSingleDay(day: CalendarDay<D> | undefined, calendar: CalendarDay<D>[]): void {
@@ -841,7 +841,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /**
-     * @hidden
+     * @ignore
      * Change properties of range days, this method is called, to not rebuild whole grid from scratch,
      * it just changes properties of newly selected/unselected days.
      */
@@ -921,14 +921,14 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private refreshTabIndex(calendar: CalendarDay<D>[]): void {
         calendar.forEach((_day) => (_day.isTabIndexed = false));
         const cell = this._getActiveCell(calendar.filter((_day) => _day.monthStatus === 'current'));
         cell && (cell.isTabIndexed = true);
     }
 
-    /** @hidden */
+    /** @ignore */
     private focusOnCellByIndex(index: number): void {
         this._focusElementBySelector(`#${this._getCellIdByIndex(index)}`);
     }

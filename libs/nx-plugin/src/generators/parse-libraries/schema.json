@@ -1,0 +1,13 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "$id": "parse-libraries",
+    "type": "object",
+    "properties": {
+        "config": {
+            "type": "string",
+            "default": ".compodocrc.json",
+            "description": "Compodoc Configuration file path"
+        }
+    },
+    "required": []
+}

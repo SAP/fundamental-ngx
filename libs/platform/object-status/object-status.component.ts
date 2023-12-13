@@ -100,16 +100,16 @@ export class ObjectStatusComponent {
     @Output()
     objectStatusClick: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(PlatformObjectStatusTextDirective)
     _textDirective: Nullable<PlatformObjectStatusTextDirective>;
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         warnOnce('ObjectStatusComponent is deprecated. Use ObjectStatusComponent from @fundamental-ngx/core instead.');
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     _onKeydown($event: KeyboardEvent): void {
         if (this.clickable && KeyUtil.isKeyCode($event, [ENTER, SPACE])) {

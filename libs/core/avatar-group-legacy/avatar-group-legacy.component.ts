@@ -74,33 +74,33 @@ export class AvatarGroupLegacyComponent
     /** Counter for visible in overflow popover avatars. */
     overflowItemsCount = 0;
 
-    /** @hidden Avatar Group items. */
+    /** @ignore Avatar Group items. */
     @ContentChildren(AvatarGroupLegacyItemDirective, { descendants: true })
     mainItems: QueryList<AvatarGroupLegacyItemDirective>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('avatarGroupContainer')
     avatarGroupContainer: ElementRef<HTMLDivElement>;
 
-    /** @hidden */
+    /** @ignore */
     rootClassNames: Record<string, boolean | undefined | null>;
 
-    /** @hidden */
+    /** @ignore */
     get isGroupType(): boolean {
         return this.type === 'group';
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _avatarGroupWidth(): number {
         return this.avatarGroupContainer?.nativeElement?.offsetWidth;
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _avatarGroupItemWidth(): number {
         return this.mainItems.first?._element.offsetWidth ?? 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _avatarGroupItemWithMarginsWidth(): number {
         if (!this.mainItems.first) {
             return this._avatarGroupItemWidth;
@@ -113,32 +113,32 @@ export class AvatarGroupLegacyComponent
         return this._avatarGroupItemWidth + parseInt(marginLeft, 10) + parseInt(marginRight, 10);
     }
 
-    /** @hidden FocusKeyManager instance */
+    /** @ignore FocusKeyManager instance */
     private _keyboardEventsManager: FocusKeyManager<AvatarGroupLegacyItemDirective>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _subscription = new Subscription();
 
-    /** @hidden handles rtl service */
+    /** @ignore handles rtl service */
     private _dir: 'ltr' | 'rtl' | null = 'ltr';
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _viewportRuler: ViewportRuler,
         @Optional() private _rtlService: RtlService
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._subscription.add(this._viewportRuler.change().subscribe(() => this._onResize()));
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this._assignCssClasses();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._reset();
 
@@ -153,13 +153,13 @@ export class AvatarGroupLegacyComponent
         this._subscribeToRtl();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscription.unsubscribe();
         this._keyboardEventsManager.destroy();
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keyup', ['$event'])
     keyUpHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, TAB)) {
@@ -177,18 +177,18 @@ export class AvatarGroupLegacyComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _setActiveItem(item: AvatarGroupLegacyItemDirective): void {
         this._keyboardEventsManager.setActiveItem(item);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _onResize(): void {
         this._reset();
         this._collapseItems();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _reset(): void {
         this.allItemsCount = this.mainItems.length;
         this.overflowItemsCount = 0;
@@ -199,7 +199,7 @@ export class AvatarGroupLegacyComponent
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _collapseItems(): void {
         const allItemsCounter = this.mainItems?.length || 0;
         let contentWidth = 0;
@@ -231,12 +231,12 @@ export class AvatarGroupLegacyComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenForItemChanges(): void {
         this._subscription.add(this.mainItems.changes.subscribe(() => this._onResize()));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _assignCssClasses(): void {
         this.rootClassNames = {
             'fd-avatar-group-legacy': true,
@@ -246,7 +246,7 @@ export class AvatarGroupLegacyComponent
         };
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setKeyboardEventsManager(): void {
         this._keyboardEventsManager?.destroy();
         this._keyboardEventsManager = new FocusKeyManager(this.mainItems)
@@ -254,7 +254,7 @@ export class AvatarGroupLegacyComponent
             .withHorizontalOrientation(this._dir);
     }
 
-    /** @hidden Rtl change subscription */
+    /** @ignore Rtl change subscription */
     private _subscribeToRtl(): void {
         if (!this._rtlService) {
             return;

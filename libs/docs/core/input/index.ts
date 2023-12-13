@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'input';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/form';
 export const API_FILE_KEY = 'inputGroup';

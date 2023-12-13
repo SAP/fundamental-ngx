@@ -78,15 +78,15 @@ export class FormInputMessageGroupComponent {
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('popoverPlacementContainer', { static: false, read: ElementRef })
     _popoverPlacementContainer: ElementRef | undefined;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('popover')
     _popover: PopoverComponent;
 
-    /** @hidden */
+    /** @ignore */
     readonly _elementRef = inject(ElementRef);
 
     /**

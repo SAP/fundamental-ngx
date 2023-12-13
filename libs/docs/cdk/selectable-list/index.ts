@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'selectable-list';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/cdk/utils';
 export const API_FILE_KEY = 'selectableList';

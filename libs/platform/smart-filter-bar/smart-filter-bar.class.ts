@@ -9,7 +9,7 @@ import { SmartFilterBarCondition } from './interfaces/smart-filter-bar-condition
 export abstract class SmartFilterBar implements PresetManagedComponent<SmartFilterBarManagedPreset> {
     abstract search: SearchInput | undefined;
 
-    /** @hidden */
+    /** @ignore */
     abstract getDisplayValue(condition: SmartFilterBarCondition, filterType: string): Promise<string>;
 
     /** Method for setting predefined configuration preset. */

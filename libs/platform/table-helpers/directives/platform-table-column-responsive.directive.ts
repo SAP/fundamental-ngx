@@ -26,10 +26,10 @@ export class PlatformTableColumnResponsiveDirective {
         return this._breakpoints;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _breakpoints: Record<number, FdpColumnResponsiveState> = {};
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _responsiveTableService: TableResponsiveService,
         @Optional() @Inject(TableColumn) private readonly _column: TableColumn | null

@@ -22,20 +22,20 @@ export class ListMessageDirective implements OnChanges, OnInit, CssClassBuilder 
     @Input()
     class: string;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied

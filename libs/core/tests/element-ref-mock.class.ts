@@ -1,7 +1,7 @@
 import { ElementRef } from '@angular/core';
 
 export class MockElementRef extends ElementRef {
-    /** @hidden */
+    /** @ignore */
     constructor() {
         super(null);
     }

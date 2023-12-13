@@ -189,41 +189,41 @@ export class BaseWizardGenerator implements OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     _visibleItems: PreparedWizardGeneratorItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _nextStepIndex: number;
 
-    /** @hidden */
+    /** @ignore */
     _stepsOrderChanged = false;
 
     /**
-     * @hidden
+     * @ignore
      */
     private _items: PreparedWizardGeneratorItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _appendToWizard = false;
 
     /**
-     * @hidden
+     * @ignore
      */
     private _formPending = false;
 
     /**
-     * @hidden
+     * @ignore
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
     protected readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /**
-     * @hidden
+     * @ignore
      */
     _navigationButtonLabels: Required<WizardNavigationButtons> = DEFAULT_WIZARD_NAVIGATION_BUTTONS;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         protected _wizardGeneratorService: WizardGeneratorService,
         private _cd: ChangeDetectorRef
@@ -269,7 +269,7 @@ export class BaseWizardGenerator implements OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     ngOnDestroy(): void {
         this._onDestroy$.next();
@@ -392,7 +392,7 @@ export class BaseWizardGenerator implements OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     private async _setVisibleSteps(): Promise<void> {
         await this._wizardGeneratorService.refreshStepVisibility();

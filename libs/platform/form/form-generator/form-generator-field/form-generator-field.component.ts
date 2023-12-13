@@ -87,7 +87,7 @@ export class FormGeneratorFieldComponent implements OnInit {
      */
     @ViewChild(forwardRef(() => FormFieldComponent)) fieldRenderer: PlatformFormField;
 
-    /** @hidden */
+    /** @ignore */
     get _placeholder(): string {
         if (!this.field) {
             return '';
@@ -101,32 +101,32 @@ export class FormGeneratorFieldComponent implements OnInit {
         return '';
     }
 
-    /** @hidden */
+    /** @ignore */
     _errorModels: { type: string; value: any }[] = [];
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _fgService: FormGeneratorService,
         private _cdr: ChangeDetectorRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._errorModels = this._getErrors();
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     _errorsTrackBy(_: number, error: { type: string; value: any }): string {
         return error.type;
     }
 
-    /** @hidden */
+    /** @ignore */
     _isAdvancedError(error: any): error is DynamicFormItemValidationObject {
         return error.heading && error.description && error.type;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getErrors(): { type: string; value: any }[] {
         const registeredErrors = this._fgService.validationErrorHints;
 

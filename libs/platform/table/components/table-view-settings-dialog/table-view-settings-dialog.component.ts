@@ -77,28 +77,28 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
     @Input()
     allowDisablingSorting = true;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(forwardRef(() => TableViewSettingsFilterComponent))
     filters: QueryList<TableViewSettingsFilterComponent>;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _tableSubscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     _table: Table;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private readonly _dialogService: DialogService) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._listenToFilters();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._unsubscribeFromTable();
@@ -188,21 +188,21 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToFilters(): void {
         this.filters.changes.pipe(startWith(null)).subscribe(() => {
             this._table?.showFilterSettingsInToolbar(this.filters.toArray().length > 0);
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setTable(table: Table): void {
         this._table = table;
         this._unsubscribeFromTable();
         this._subscribeToTable();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _subscribeToTable(): void {
         if (!this._table) {
             return;
@@ -213,14 +213,14 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
         this._listenToTableColumns();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToTableTriggersToOpenDialogs(): void {
         this._tableSubscriptions.add(this._table.openTableSortSettings.subscribe(() => this.showSortingSettings()));
         this._tableSubscriptions.add(this._table.openTableFilterSettings.subscribe(() => this.showFilteringSettings()));
         this._tableSubscriptions.add(this._table.openTableGroupSettings.subscribe(() => this.showGroupingSettings()));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToTableColumns(): void {
         this._tableSubscriptions.add(
             this._table.tableColumnsStream.subscribe((columns: TableColumn[]) => {
@@ -230,32 +230,32 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getTableState(): TableState {
         return this._table?.getTableState();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getTableColumns(): TableColumn[] {
         return this._table?.getTableColumns() || [];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _applySorting(field: string | null, direction: SortDirection): void {
         this._table?.sort(field ? [{ field, direction }] : []);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _applyFiltering(filters: CollectionFilter[]): void {
         this._table?.filter(filters);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _applyGrouping(field: string | null, direction: SortDirection): void {
         this._table?.group(field ? [{ field, direction, showAsColumn: true }] : []);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _unsubscribeFromTable(): void {
         this._tableSubscriptions.unsubscribe();
         this._tableSubscriptions = new Subscription();

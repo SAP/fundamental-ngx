@@ -44,67 +44,67 @@ import { NavigationListItemComponent } from './navigation-list-item.component';
 export class NavigationListComponent
     implements OnInit, OnChanges, CssClassBuilder, HasElementRef, FdbNavigationListComponent
 {
-    /** @hidden */
+    /** @ignore */
     @Input()
     class: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     showHome = true;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FdbNavigationListItemComponent)
     readonly listItems: QueryList<FdbNavigationListItemComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('homeListItem', { static: false, read: FdbNavigationListItemComponent })
     readonly homeListItem: Nullable<FdbNavigationListItemComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('homeListItem', { static: false, read: ElementRef })
     private readonly _homeListItemElement: Nullable<ElementRef<HTMLElement>>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('homeListSeparator', { static: false, read: ElementRef })
     private readonly _homeListSeparator: Nullable<ElementRef<HTMLElement>>;
 
-    /** @hidden */
+    /** @ignore */
     navigationContentComponent = inject(NavigationContentComponent);
 
-    /** @hidden */
+    /** @ignore */
     parentListItemComponent = inject(FdbNavigationListItemComponent, { optional: true });
 
-    /** @hidden */
+    /** @ignore */
     parentListComponent = inject(FdbNavigationListComponent, { optional: true, skipSelf: true });
 
-    /** @hidden */
+    /** @ignore */
     linkTemplate = computed(() => {
         const homeLinkTemplate = this._navigationComponent.homeLinkTemplate();
         return !this.parentListComponent && homeLinkTemplate;
     });
 
-    /** @hidden */
+    /** @ignore */
     elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     isParentGroupChild = computed(() => this.parentListItemComponent?.isGroup() ?? false);
 
-    /** @hidden */
+    /** @ignore */
     isInGroup = computed(() => this.isParentGroupChild() || !!this.parentListComponent?.isParentGroupChild());
 
-    /** @hidden */
+    /** @ignore */
     level = computed(() => (this.parentListComponent ? this.parentListComponent.level() + 1 : 1));
 
-    /** @hidden */
+    /** @ignore */
     normalizedLevel = computed(() => (this.isInGroup() ? this.level() : this.level() + (this.level() === 2 ? 1 : 0)));
 
-    /** @hidden */
+    /** @ignore */
     focused = false;
 
-    /** @hidden */
+    /** @ignore */
     readonly _navigationComponent = inject(FdbNavigationComponent);
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
@@ -115,29 +115,29 @@ export class NavigationListComponent
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('focusin')
     private _focusIn(): void {
         this.focused = true;
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('focusout')
     private _focusOut(): void {
         this.focused = false;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     getHomeElementSize(): { width: number; height: number } {
         const sizePlaceholder = { width: 0, height: 0 };
         const homeListItemSize = this._homeListItemElement?.nativeElement.getBoundingClientRect() || sizePlaceholder;

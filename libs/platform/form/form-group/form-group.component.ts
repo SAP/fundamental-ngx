@@ -229,10 +229,10 @@ export class FormGroupComponent
         return this._inlineColumnLayout;
     }
 
-    /** @hidden */
+    /** @ignore */
     _inlineColumnLayoutClass: string;
 
-    /** @hidden */
+    /** @ignore */
     private _inlineColumnLayout = DefaultVerticalFieldLayout;
 
     /**
@@ -319,16 +319,16 @@ export class FormGroupComponent
     @ViewChild('nativeForm', { read: NgForm })
     nativeForm: NgForm;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild('i18n', { static: true })
     i18Template: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FormFieldErrorDirective)
     private _errorDirectives: QueryList<FormFieldErrorDirective>;
 
     /**
-     * @hidden
+     * @ignore
      *
      * Keep track of added form fields children in correct order.
      *
@@ -349,7 +349,7 @@ export class FormGroupComponent
     protected formGroupChildren: QueryList<FormGroupField>;
 
     /**
-     * @hidden
+     * @ignore
      *
      * List of direct FdpFormGroup's children.
      *
@@ -360,38 +360,38 @@ export class FormGroupComponent
      */
     private _formGroupDirectChildren: Array<FormGroupField> = [];
 
-    /** @hidden */
+    /** @ignore */
     xlColumnsNumber: number;
-    /** @hidden */
+    /** @ignore */
     lgColumnsNumber: number;
-    /** @hidden */
+    /** @ignore */
     mdColumnsNumber: number;
 
     /**
-     * @hidden
+     * @ignore
      * User responsive layout
      */
     xlCol: string;
 
     /**
-     * @hidden
+     * @ignore
      * Packed fields which should be rendered
      */
     formRows: { [key: number]: FieldColumn | FieldGroup } = {};
 
-    /** @hidden */
+    /** @ignore */
     _hintOptions: Nullable<HintOptions>;
 
-    /** @hidden */
+    /** @ignore */
     private _useForm = false;
 
-    /** @hidden */
+    /** @ignore */
     protected _destroyed = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _cd: ChangeDetectorRef,
         private elementRef: ElementRef,
@@ -402,7 +402,7 @@ export class FormGroupComponent
         this.formGroup = <FormGroup>(this.formContainer ? this.formContainer.control : new FormGroup({}));
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         this.buildComponentCssClass();
         if (changes.hint) {
@@ -420,7 +420,7 @@ export class FormGroupComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         if (!this.formGroup) {
             this.formGroup = new FormGroup({});
@@ -429,7 +429,7 @@ export class FormGroupComponent
         this._updateInlineColumnLayout();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this.i18Strings = this.i18Strings ? this.i18Strings : this.i18Template;
 
@@ -441,7 +441,7 @@ export class FormGroupComponent
         this._cd.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this.i18Strings = this.i18Strings ? this.i18Strings : this.i18Template;
 
@@ -456,14 +456,14 @@ export class FormGroupComponent
         this._cd.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._destroyed.next();
         this._destroyed.complete();
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     addFormField(formField: PlatformFormField): void {
         // It's needed to set default FormField properties
         // on early stage otherwise validation errors
@@ -473,22 +473,22 @@ export class FormGroupComponent
         this._addDirectFormGroupChild(formField);
     }
 
-    /** @hidden */
+    /** @ignore */
     removeFormField(formField: PlatformFormField): void {
         this._removeDirectFormGroupChild(formField);
     }
 
-    /** @hidden */
+    /** @ignore */
     addFormFieldGroup(formFieldGroup: FormFieldGroup): void {
         this._addDirectFormGroupChild(formFieldGroup);
     }
 
-    /** @hidden */
+    /** @ignore */
     removeFormFieldGroup(formFieldGroup: FormFieldGroup): void {
         this._removeDirectFormGroupChild(formFieldGroup);
     }
 
-    /** @hidden */
+    /** @ignore */
     addFormControl(name: string, control: AbstractControl): void {
         this.formGroup.setControl(name, control);
         // letting control to set value. when provided value is 'false'.
@@ -497,30 +497,30 @@ export class FormGroupComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     removeFormControl(name: string): void {
         this.formGroup.removeControl(name);
     }
 
-    /** @hidden */
+    /** @ignore */
     trackByFn(index: number): number {
         return index;
     }
 
-    /** @hidden */
+    /** @ignore */
     trackByFieldName(index: number, field: Field): string | undefined {
         return field ? field.name : undefined;
     }
 
-    /** @hidden */
+    /** @ignore */
     buildComponentCssClass(): string[] {
         return ['fd-container', this.class];
     }
 
-    /** @hidden used for template side Type correction */
+    /** @ignore used for template side Type correction */
     $fieldGroup = (f: any): FieldGroup => f;
 
-    /** @hidden */
+    /** @ignore */
     private _listenToFormGroupChildren(): void {
         this.formGroupChildren.changes.subscribe(() => {
             this._updateFieldByColumn();
@@ -528,7 +528,7 @@ export class FormGroupComponent
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenFormFieldColumnChange(): void {
         this.formGroupChildren.forEach(
             (field: FormGroupField) =>
@@ -540,7 +540,7 @@ export class FormGroupComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * Assign a fields or field group to specified columns with rank.
      * if `columnLayoutType` is given a fields without column property will set on last column.
      * Otherwise the fields set 1 column.
@@ -588,7 +588,7 @@ export class FormGroupComponent
         this.formRows = rows;
     }
 
-    /** @hidden Validate column number */
+    /** @ignore Validate column number */
     private _validateFieldColumn(columnNumber: number | undefined): number {
         if (this.columnLayout && columnNumber) {
             if (isNaN(columnNumber)) {
@@ -605,7 +605,7 @@ export class FormGroupComponent
         return this.xlColumnsNumber;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updateFormFieldsProperties(): void {
         this._getFormGroupChildren().forEach((formField: FormGroupField) => {
             if (isFieldChild(formField)) {
@@ -619,7 +619,7 @@ export class FormGroupComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * Pass some global properties to each field. Even formGroup cna be inject directly inside form
      * field we are using here a setter method to initialize the
      *
@@ -635,7 +635,7 @@ export class FormGroupComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * if `columnLayoutType` is given, set those column layouts appropriately. Otherwise, a layout will set on 1 column
      */
     private _setUserLayout(): void {
@@ -663,7 +663,7 @@ export class FormGroupComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getColumnNumbers(layout: string): void {
         const [xl, lg, md] = layout.split('-');
         this.xlColumnsNumber = parseInt(xl.slice(2, xl.length), 10);
@@ -671,7 +671,7 @@ export class FormGroupComponent
         this.mdColumnsNumber = parseInt(md.slice(1, md.length), 10);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addDirectFormGroupChild(child: FormGroupField): void {
         if (this._formGroupDirectChildren.indexOf(child) > -1) {
             return;
@@ -679,13 +679,13 @@ export class FormGroupComponent
         this._formGroupDirectChildren.push(child);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _removeDirectFormGroupChild(child: PlatformFormField | FormFieldGroup): void {
         this._formGroupDirectChildren = this._formGroupDirectChildren.filter((_child) => _child !== child);
     }
 
     /**
-     * @hidden
+     * @ignore
      * Get direct form group children in the original order
      */
     private _getFormGroupChildren(): FormGroupField[] {
@@ -699,13 +699,13 @@ export class FormGroupComponent
         return children.filter((child) => this._formGroupDirectChildren.includes(child));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updateInlineColumnLayout(): void {
         this._inlineColumnLayoutClass = generateColumnClass(this.inlineColumnLayout);
     }
 
     /**
-     * @hidden
+     * @ignore
      * have to trigger change detection here in order to re-check contents
      * inside "FormField.renderer" template every time component's dimensions changed
      */

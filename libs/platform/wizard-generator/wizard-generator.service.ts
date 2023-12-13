@@ -43,7 +43,7 @@ export interface StepDependencyFields {
  */
 @Injectable()
 export class WizardGeneratorService {
-    /** @hidden */
+    /** @ignore */
     items: PreparedWizardGeneratorItem[];
 
     /**
@@ -62,7 +62,7 @@ export class WizardGeneratorService {
      */
     appendToWizard = true;
 
-    /** @hidden */
+    /** @ignore */
     _shouldRedirectToSummary = false;
 
     /**
@@ -70,28 +70,28 @@ export class WizardGeneratorService {
      */
     public visibleWizardSteps: PreparedWizardGeneratorItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _visibleWizardSteps$ = new Subject<PreparedWizardGeneratorItem[]>();
 
-    /** @hidden */
+    /** @ignore */
     private _appendToWizard$ = new BehaviorSubject<boolean>(this.appendToWizard);
 
-    /** @hidden */
+    /** @ignore */
     private _stepsComponents$ = new Subject<StepsComponents>();
 
-    /** @hidden */
+    /** @ignore */
     private _stepsOrderChanged$ = new Subject<number>();
 
-    /** @hidden */
+    /** @ignore */
     private _nextStepIndex$ = new BehaviorSubject<number>(1);
 
-    /** @hidden */
+    /** @ignore */
     private _submittedFormRawValues: WizardGeneratorFormsValue = {};
 
-    /** @hidden */
+    /** @ignore */
     private _wizardStepIds: string[] = [];
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _formGeneratorService: FormGeneratorService) {}
 
     /**
@@ -463,7 +463,7 @@ export class WizardGeneratorService {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param items
      * @param index
      * @param key
@@ -486,7 +486,7 @@ export class WizardGeneratorService {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @description Returns value from Promise-like, Observable-like, simple function or just some object.
      * @param obj
      * @returns
@@ -508,7 +508,7 @@ export class WizardGeneratorService {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @description Sets `branching` property for the steps that will create new branches.
      * @param items
      * @returns
@@ -534,7 +534,7 @@ export class WizardGeneratorService {
         return items;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _normalizeDependencyStep(
         dependency: { [p: string]: string[] },
         strategy: WizardGeneratorRefreshStrategy,
@@ -554,7 +554,7 @@ export class WizardGeneratorService {
         return newDependency;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _buildDependencyMap(items: PreparedWizardGeneratorItem[]): void {
         this.dependencySteps = {};
 
@@ -609,7 +609,7 @@ export class WizardGeneratorService {
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getCompletedStepIds(): string[] {
         return this.items.filter((i) => i.status === 'completed').map((i) => i.id);
     }

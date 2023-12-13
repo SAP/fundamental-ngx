@@ -7,7 +7,7 @@ import { Directive, HostBinding } from '@angular/core';
     standalone: true
 })
 export class IllustratedMessageTitleDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-illustrated-message__title')
     fdIllustratedMessageTitleClass = true;
 }

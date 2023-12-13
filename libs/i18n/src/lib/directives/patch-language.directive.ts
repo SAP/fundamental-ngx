@@ -18,9 +18,9 @@ import { FD_LANGUAGE } from '../utils/tokens';
     standalone: true
 })
 export class FdPatchLanguageDirective implements OnDestroy {
-    /** @hidden */
+    /** @ignore */
     private readonly _languagePatch$ = new BehaviorSubject<FdLanguagePatch | null>(null);
-    /** @hidden */
+    /** @ignore */
     private readonly _onDestroy$ = new Subject<void>();
 
     /** part of the language object to be overriden */
@@ -28,7 +28,7 @@ export class FdPatchLanguageDirective implements OnDestroy {
         this._languagePatch$.next(value);
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         @SkipSelf() @Inject(FD_LANGUAGE) parentFdLanguage$: Observable<FdLanguage>,
         @Self() @Inject(FD_LANGUAGE) fdLanguageSubject$: BehaviorSubject<FdLanguage>
@@ -43,7 +43,7 @@ export class FdPatchLanguageDirective implements OnDestroy {
             .subscribe((translation) => fdLanguageSubject$.next(translation));
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
     }

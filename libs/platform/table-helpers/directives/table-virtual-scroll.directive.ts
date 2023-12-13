@@ -40,25 +40,25 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
     @Input()
     rowHeight = ROW_HEIGHT.get(ContentDensityMode.COZY)!;
 
-    /** @hidden */
+    /** @ignore */
     virtualScrollTotalHeight = 0;
 
-    /** @hidden */
+    /** @ignore */
     virtualScrollTransform$ = new BehaviorSubject<number>(0);
 
-    /** @hidden */
+    /** @ignore */
     private _table: Table;
 
-    /** @hidden */
+    /** @ignore */
     private _virtualScrollCache = { startNodeIndex: -1, visibleNodeCount: -1, totalNodeCount: -1 };
 
-    /** @hidden */
+    /** @ignore */
     private readonly _tableScrollDispatcher = inject(TableScrollDispatcherService);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (!this._table.tableScrollable) {
             return;

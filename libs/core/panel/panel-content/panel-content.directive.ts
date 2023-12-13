@@ -17,7 +17,7 @@ let panelContentUniqueId = 0;
     standalone: true
 })
 export class PanelContentDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-panel__content')
     readonly fdPanelContentClass: boolean = true;
 
@@ -62,9 +62,9 @@ export class PanelContentDirective {
         return this._id;
     }
 
-    /** @hidden */
+    /** @ignore */
     private readonly _defaultId = 'fd-panel-content-' + panelContentUniqueId++;
 
-    /** @hidden */
+    /** @ignore */
     private _id: string = this._defaultId;
 }

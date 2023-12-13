@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'tree';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/tree';
 export const API_FILE_KEY = 'tree';
 export const I18N_KEY = 'coreTree';

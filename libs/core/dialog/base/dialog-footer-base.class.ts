@@ -15,26 +15,26 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 @Directive()
 export abstract class DialogFooterBase implements AfterContentInit {
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(TemplateDirective)
     customTemplates: QueryList<TemplateDirective>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FD_BUTTON_BAR_COMPONENT)
     buttons: QueryList<ButtonBarComponent>;
 
-    /** @hidden */
+    /** @ignore */
     footerTemplate: TemplateRef<any> | undefined;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _cdr = inject(ChangeDetectorRef);
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._assignCustomTemplates();
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _listenForButtonChanges(className: string): void {
         const addClassToButton = (button: ButtonComponent): void => {
             if (button && !button.class.includes(className)) {
@@ -50,7 +50,7 @@ export abstract class DialogFooterBase implements AfterContentInit {
         );
     }
 
-    /** @hidden Assign custom templates */
+    /** @ignore Assign custom templates */
     private _assignCustomTemplates(): void {
         const footerTemplate = this.customTemplates.find((template) => template.name === 'footer');
         this.footerTemplate = footerTemplate ? footerTemplate.templateRef : undefined;

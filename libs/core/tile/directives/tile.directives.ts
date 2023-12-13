@@ -6,7 +6,7 @@ import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/u
     standalone: true
 })
 export class TileContentDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__content')
     baseClass = true;
 
@@ -21,7 +21,7 @@ export class TileContentDirective {
     standalone: true
 })
 export class TileContentBylineDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__content-byline')
     baseClass = true;
 }
@@ -31,7 +31,7 @@ export class TileContentBylineDirective {
     standalone: true
 })
 export class TileContentTextDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__content-text')
     baseClass = true;
 }
@@ -41,7 +41,7 @@ export class TileContentTextDirective {
     standalone: true
 })
 export class TileFooterDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__footer')
     baseClass = true;
 
@@ -56,7 +56,7 @@ export class TileFooterDirective {
     standalone: true
 })
 export class TileFooterTextDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__footer-text')
     baseClass = true;
 }
@@ -66,7 +66,7 @@ export class TileFooterTextDirective {
     standalone: true
 })
 export class TileHeaderDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__header')
     baseClass = true;
 
@@ -81,7 +81,7 @@ export class TileHeaderDirective {
     standalone: true
 })
 export class TileHeaderContentDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__header-content')
     baseClass = true;
 }
@@ -91,7 +91,7 @@ export class TileHeaderContentDirective {
     standalone: true
 })
 export class TileSectionDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__section')
     baseClass = true;
 }
@@ -101,7 +101,7 @@ export class TileSectionDirective {
     standalone: true
 })
 export class TileSubtitleDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__subtitle')
     baseClass = true;
 }
@@ -111,7 +111,7 @@ export class TileSubtitleDirective {
     standalone: true
 })
 export class TileTitleDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__title')
     baseClass = true;
 }
@@ -121,7 +121,7 @@ export class TileTitleDirective {
     standalone: true
 })
 export class TileTitleContainerDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__title-container')
     baseClass = true;
 }
@@ -144,20 +144,20 @@ export class TileRefreshDirective implements OnInit, OnChanges, CssClassBuilder 
     @HostBinding('attr.aria-label')
     ariaLabel = 'Refresh';
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -178,7 +178,7 @@ let profileTileUniqueId = 0;
     standalone: true
 })
 export class TileProfileImgDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__profile-img')
     baseClass = true;
 
@@ -201,7 +201,7 @@ export class TileProfileImgDirective {
     @Input()
     backgroundImage: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('style.background-image')
     get image(): string {
         return 'url(' + this.backgroundImage + ')';
@@ -213,7 +213,7 @@ export class TileProfileImgDirective {
     standalone: true
 })
 export class TileLogoDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__logo')
     baseClass = true;
 }
@@ -223,7 +223,7 @@ export class TileLogoDirective {
     standalone: true
 })
 export class TileToggleDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__toggle')
     baseClass = true;
 }
@@ -233,7 +233,7 @@ export class TileToggleDirective {
     standalone: true
 })
 export class TileContainerDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile-container')
     baseClass = true;
 
@@ -248,7 +248,7 @@ export class TileContainerDirective {
     standalone: true
 })
 export class TileSlideContainerDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__container')
     baseClass = true;
 }
@@ -258,7 +258,7 @@ export class TileSlideContainerDirective {
     standalone: true
 })
 export class TileBackgroundImgDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__background-img')
     baseClass = true;
 
@@ -266,7 +266,7 @@ export class TileBackgroundImgDirective {
     @Input()
     backgroundImage: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('style.background-image')
     get image(): string {
         return 'url(' + this.backgroundImage + ')';
@@ -278,7 +278,7 @@ export class TileBackgroundImgDirective {
     standalone: true
 })
 export class TilePageIndicatorDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__page-indicator')
     baseClass = true;
 }
@@ -288,7 +288,7 @@ export class TilePageIndicatorDirective {
     standalone: true
 })
 export class TileDotDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__dot')
     baseClass = true;
 
@@ -307,21 +307,21 @@ export class TileActionCloseDirective implements OnInit, OnChanges, CssClassBuil
     @Input()
     class: string;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
         this._addCloseIcon();
     }
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -331,7 +331,7 @@ export class TileActionCloseDirective implements OnInit, OnChanges, CssClassBuil
         return ['fd-tile__action-close', this.class];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addCloseIcon(): void {
         const element = generateIcon('decline');
         this.elementRef.nativeElement.appendChild(element);
@@ -347,21 +347,21 @@ export class TileActionIndicatorDirective implements OnInit, OnChanges, CssClass
     @Input()
     class: string;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
         this._addIndicatorIcon();
     }
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -371,7 +371,7 @@ export class TileActionIndicatorDirective implements OnInit, OnChanges, CssClass
         return ['fd-tile__action-indicator', this.class];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addIndicatorIcon(): void {
         const element = generateIcon('overflow');
         this.elementRef.nativeElement.appendChild(element);
@@ -383,7 +383,7 @@ export class TileActionIndicatorDirective implements OnInit, OnChanges, CssClass
     standalone: true
 })
 export class TileActionContainerDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tile__action-container')
     baseClass = true;
 }

@@ -22,7 +22,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
     standalone: true
 })
 export class LayoutPanelBodyComponent {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-layout-panel__body')
     fdLayoutPanelBodyClass = true;
 

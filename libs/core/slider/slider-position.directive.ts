@@ -17,37 +17,37 @@ export class SliderPositionDirective implements OnInit, OnChanges, OnDestroy {
     @Input()
     vertical = false;
 
-    /** @hidden */
+    /** @ignore */
     private _isRtl = false;
 
-    /** @hidden */
+    /** @ignore */
     private _rtlSubscription: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _elementRef: ElementRef<HTMLElement>,
         private readonly _renderer: Renderer2,
         @Optional() private readonly _rtlService: RtlService
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._subscribeToRtl();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this._setPosition();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         if (this._rtlSubscription) {
             this._rtlSubscription.unsubscribe();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setPosition(): void {
         if (this.vertical) {
             this._renderer.setStyle(this._elementRef.nativeElement, 'bottom', `${this.position}%`);
@@ -58,7 +58,7 @@ export class SliderPositionDirective implements OnInit, OnChanges, OnDestroy {
         this._renderer.setStyle(this._elementRef.nativeElement, 'right', this._isRtl ? `${this.position}%` : 'unset');
     }
 
-    /** @hidden Rtl change subscription */
+    /** @ignore Rtl change subscription */
     private _subscribeToRtl(): void {
         this._rtlSubscription = this._rtlService?.rtl
             .pipe(startWith(this._rtlService.rtl.getValue()))

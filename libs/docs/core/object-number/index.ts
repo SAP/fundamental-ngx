@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'object-number';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/object-number';
 export const API_FILE_KEY = 'objectNumber';

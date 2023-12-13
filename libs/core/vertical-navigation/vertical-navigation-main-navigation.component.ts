@@ -17,7 +17,7 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
     imports: [FdTranslatePipe]
 })
 export class VerticalNavigationMainNavigationComponent {
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FD_LIST_COMPONENT)
     _list: ListComponent;
 }

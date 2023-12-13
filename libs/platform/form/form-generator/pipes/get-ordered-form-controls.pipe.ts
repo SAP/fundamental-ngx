@@ -7,7 +7,7 @@ import { DynamicFormControl, DynamicFormControlGroup, DynamicFormGroupControl } 
     standalone: true
 })
 export class GetOrderedFieldControlsPipe implements PipeTransform {
-    /** @hidden */
+    /** @ignore */
     transform(field: DynamicFormGroupControl): DynamicFormControl[] {
         // casting type explicity to the DynamicFormControl[] as this pipe will be used specifically with this data type
         return Object.values((field as DynamicFormControlGroup).controls).sort((a, b) =>

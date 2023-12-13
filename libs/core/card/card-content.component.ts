@@ -10,18 +10,18 @@ import { CLASS_NAME } from './constants';
     standalone: true
 })
 export class CardContentComponent implements OnInit, CssClassBuilder {
-    /** @hidden */
+    /** @ignore */
     class: string;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [CLASS_NAME.cardContent];

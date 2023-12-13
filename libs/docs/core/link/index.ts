@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'link';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/link';
 export const API_FILE_KEY = 'link';

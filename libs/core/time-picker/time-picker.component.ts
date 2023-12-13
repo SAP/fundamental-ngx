@@ -267,79 +267,79 @@ export class TimePickerComponent<D>
     @Output()
     isOpenChange = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(TimeComponent)
     child: TimeComponent<D>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('inputGroupComponent', { read: ElementRef })
     _inputGroupElement: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(InputGroupInputDirective, { read: ElementRef })
     _inputElement: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('formMessageTemplate')
     private readonly _formMessageTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     _message: string | null = null;
 
-    /** @hidden */
+    /** @ignore */
     _messageType: FormStates | null = null;
 
-    /** @hidden */
+    /** @ignore */
     _messageTriggers: string[] = ['focusin', 'focusout'];
 
     /**
-     * @hidden
+     * @ignore
      * Whether the input time is valid(success). Internal use.
      */
     _isInvalidTimeInput = false;
 
     /**
-     * @hidden
+     * @ignore
      * Indicates when popover is opened
      */
     isOpen: boolean;
 
-    /** @hidden */
+    /** @ignore */
     _meridian: boolean;
 
-    /** @hidden */
+    /** @ignore */
     _displaySeconds: boolean;
 
-    /** @hidden */
+    /** @ignore */
     _displayMinutes: boolean;
 
-    /** @hidden */
+    /** @ignore */
     _displayHours: boolean;
 
     /**
-     * @hidden
+     * @ignore
      * Input field value
      */
     _inputTimeValue = '';
 
-    /** @hidden */
+    /** @ignore */
     _formValueStateMessageId = `fd-time-picker-form-message-${timePickerCounter++}`;
 
-    /** @hidden */
+    /** @ignore */
     private _state: FormStates | null = null;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     get _placeholder(): string {
         return this.placeholder || this._getPlaceholder();
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _elementRef: ElementRef,
@@ -357,12 +357,12 @@ export class TimePickerComponent<D>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     onChange: (_: Nullable<D>) => void = () => {};
-    /** @hidden */
+    /** @ignore */
     onTouched: () => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._calculateTimeOptions();
         this._formatTimeInputField();
@@ -374,7 +374,7 @@ export class TimePickerComponent<D>
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (
             ['displayHours', 'displayMinutes', 'displaySeconds', 'meridian', 'displayFormat'].some(
@@ -388,20 +388,20 @@ export class TimePickerComponent<D>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this.initialiseVariablesInMessageService();
     }
 
     /**
-     * @hidden
+     * @ignore
      * Function that implements Validator Interface, adds validation support for forms
      */
     validate(): { [key: string]: any } | null {
@@ -437,7 +437,7 @@ export class TimePickerComponent<D>
         return this.parseFormat || this._dateTimeFormats.parse.timeInput;
     }
 
-    /** @hidden */
+    /** @ignore */
     _getFormattedTime(time = this.time): string {
         let formattedTime = '';
 
@@ -452,7 +452,7 @@ export class TimePickerComponent<D>
     }
 
     /**
-     *  @hidden
+     *  @ignore
      *  When the open state is changed, there should be at least one active item, which by default is hour.
      */
     _setIsOpen(isOpen: boolean): void {
@@ -461,7 +461,7 @@ export class TimePickerComponent<D>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Time input field changes handler
      */
     _timeInputChanged(inputValue: string): void {
@@ -489,7 +489,7 @@ export class TimePickerComponent<D>
         this._changeDetectorRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     _inputGroupClicked($event: MouseEvent): void {
         if (!this.isOpen && !this.disabled) {
             $event.stopPropagation();
@@ -497,19 +497,19 @@ export class TimePickerComponent<D>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _addOnButtonClicked(): void {
         if (!this.disabled) {
             this._setIsOpen(!this.isOpen);
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _popoverClosed(): void {
         this._setIsOpen(false);
     }
 
-    /** @hidden */
+    /** @ignore */
     _getPlaceholder(): string {
         let retVal = '';
 
@@ -529,7 +529,7 @@ export class TimePickerComponent<D>
         return retVal;
     }
 
-    /** @hidden */
+    /** @ignore */
     _timeComponentValueChanged(time: D): void {
         if (this._dateTimeAdapter.dateTimesEqual(time, this.time!)) {
             return;
@@ -543,23 +543,23 @@ export class TimePickerComponent<D>
 
     // #region ControlValueAccessor
 
-    /** @hidden */
+    /** @ignore */
     registerOnChange(fn: (time: Nullable<D>) => void): void {
         this.onChange = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
         this._changeDetectorRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     writeValue(time: D): void {
         if (!time) {
             this.time = null;
@@ -575,12 +575,12 @@ export class TimePickerComponent<D>
 
     // #endregion ControlValueAccessor
 
-    /** @hidden */
+    /** @ignore */
     _formatTimeInputField(time = this.time): string {
         return (this._inputTimeValue = this._getFormattedTime(time));
     }
 
-    /** @hidden */
+    /** @ignore */
     _changeMessageVisibility(): void {
         if (this.isOpen) {
             this._popoverFormMessage.hide();
@@ -589,7 +589,7 @@ export class TimePickerComponent<D>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _onOpenStateChanged(isOpen: boolean): void {
         this.isOpenChange.emit(isOpen);
         this._changeMessageVisibility();
@@ -603,14 +603,14 @@ export class TimePickerComponent<D>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _focusOut(event: FocusEvent): void {
         if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
             this.onTouched();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateTimeOptions(): void {
         const format = this.getDisplayFormat();
 
@@ -635,7 +635,7 @@ export class TimePickerComponent<D>
             this.displayHours != null ? this.displayHours : this._dateTimeAdapter.isTimeFormatIncludesHours(format);
     }
 
-    /** @hidden */
+    /** @ignore */
     private initialiseVariablesInMessageService(): void {
         this._popoverFormMessage.init(this._inputGroupElement);
         this._popoverFormMessage.message = this._formMessageTemplate;

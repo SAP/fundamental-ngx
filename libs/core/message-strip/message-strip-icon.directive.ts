@@ -5,6 +5,6 @@ import { Directive, TemplateRef } from '@angular/core';
     standalone: true
 })
 export class MessageStripIconDirective {
-    /** @hidden */
+    /** @ignore */
     constructor(readonly templateRef: TemplateRef<void>) {}
 }

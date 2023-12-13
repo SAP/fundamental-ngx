@@ -42,7 +42,7 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     get expanded(): boolean {
         return this._expanded;
     }
@@ -55,7 +55,7 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
     @Output()
     readonly keyboardTriggered: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     @HostBinding('class.fdx-nested-list__item')
     fdNestedListItemClass = true;
@@ -70,67 +70,67 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
     display = false;
 
     /**
-     * @hidden
+     * @ignore
      * Reference to the link directive, to allow manipulating the properties of this element.
      */
     @ContentChild(NestedLinkComponent)
     linkItem: NestedLinkComponent;
 
     /**
-     * @hidden
+     * @ignore
      * Mostly used, when this item has list
      * Reference to the content directive, to allow manipulating the properties of this element.
      */
     @ContentChild(NestedListContentDirective)
     contentItem: NestedListContentDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(NestedListExpandIconComponent, { descendants: true })
     expandIcon: NestedListExpandIconComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(forwardRef(() => NestedListComponent))
     _nestedList: NestedListComponent;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-level')
     _ariaLevel: Nullable<number> = null;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.title')
     _title: string;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('style.display')
     _display = 'block';
 
-    /** @hidden */
+    /** @ignore */
     _narrow = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.role')
     private _role: string;
 
-    /** @hidden */
+    /** @ignore */
     private _expanded = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-expanded')
     private _ariaExpanded: Nullable<boolean> = null;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-selected')
     private _ariaSelected: Nullable<boolean> = null;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-disabled')
     private _ariaDisabled = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-label')
     private _ariaLabel: string;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-hidden')
     private _ariaHidden = true;
 
@@ -140,7 +140,7 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
     /** Unique element ID */
     private readonly _elementId: string = 'fdNestedItem' + sideNavigationItemUniqueId++;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _itemService: NestedItemService,
         private _keyboardService: NestedListKeyboardService,
@@ -148,7 +148,7 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
         public elementRef: ElementRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._setUpSubscriptions();
         this._propagateHasChildrenProperty();
@@ -163,7 +163,7 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -239,7 +239,7 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
     }
 
     /**
-     * @hidden
+     * @ignore
      * Propagate open state to all of the children
      */
     private propagateOpenChange(open: boolean): void {
@@ -273,12 +273,12 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
         this.expandedChange.emit(open);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _shouldRefreshKeyboardService(): boolean {
         return !!(this._itemService.popover || this._itemService.list || this.contentItem);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setUpSubscriptions(): void {
         if (this._stateService.condensed) {
             this._role = 'menuitemradio';
@@ -308,7 +308,7 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
             .subscribe((id) => this._selectedChange(id));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _propagateHasChildrenProperty(): void {
         if (this.contentItem && this.hasChildren) {
             this._ariaExpanded = false;

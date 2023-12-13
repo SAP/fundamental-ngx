@@ -72,59 +72,59 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
     // eslint-disable-next-line @angular-eslint/no-output-native
     readonly resize = new EventEmitter<SplitterPaneResizeEvent[]>();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(SplitterSplitPaneComponent, { descendants: true })
     _panes: QueryList<SplitterSplitPaneComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(SplitterSplitPaneComponent)
     _directPanes: QueryList<SplitterSplitPaneComponent>;
 
-    /** @hidden */
+    /** @ignore */
     _defaultPane: Nullable<SplitterSplitPaneComponent>;
 
-    /** @hidden */
+    /** @ignore */
     _pages: string[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _currentPage: string;
 
-    /** @hidden */
+    /** @ignore */
     private _paneSizes: number[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _wantedPanesSizes: number[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _initialPaneSizes: number[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _directPaneSubscription$ = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _subscription$ = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     get _isHorizontal(): boolean {
         return this.orientation === SplitterPaneContainerOrientation.horizontal;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _isVertical(): boolean {
         return this.orientation === SplitterPaneContainerOrientation.vertical;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _isRootContainer(): boolean {
         return !this._parentSplitterPaneContainer;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _panesOnCanvas(): SplitterSplitPaneComponent[] {
         return this._directPanes.filter((pane) => pane.isOnCanvas);
     }
 
-    /** @hidden */
+    /** @ignore */
     get _activePanes(): SplitterSplitPaneComponent[] {
         if (this._currentPage === ROOT_PAGE) {
             return this._panesOnCanvas;
@@ -133,7 +133,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         return this._panes.filter((pane) => pane.id === this._currentPage);
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _panesInRightOrderForResize(): SplitterSplitPaneComponent[] {
         const panes = this._directPanes.filter((pane) => pane.id !== this._defaultPane?.id);
 
@@ -144,12 +144,12 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         return panes;
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _isRtl(): boolean {
         return this._rtlService?.rtl.getValue();
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _cdr: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
@@ -159,7 +159,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         @Optional() @SkipSelf() private readonly _parentSplitterPaneContainer: SplitterPaneContainerComponent
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         if (this._isRootContainer) {
             this._setDefaultPane();
@@ -171,18 +171,18 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._setPanes();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._directPaneSubscription$.unsubscribe();
         this._subscription$.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     _getPaneStyles(pane: SplitterSplitPaneComponent): { [klass: string]: string } {
         const style = {
             'min-width': PANE_AUTO_SIZE,
@@ -204,7 +204,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         return style;
     }
 
-    /** @hidden */
+    /** @ignore */
     _startResize(): void {
         this._paneSizes = [];
         this._initialPaneSizes = [];
@@ -217,7 +217,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     _endResize(): void {
         const changedPaneSizes: SplitterPaneResizeEvent[] = [];
 
@@ -236,7 +236,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         this._resizePanesToFitInContainer(true);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onResize(paneId: string, diff: number): void {
         if (diff === 0) {
             return;
@@ -279,14 +279,14 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         this._cdr.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     _onPageChange(page: string = ROOT_PAGE): void {
         this._currentPage = page;
 
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updatePages(): void {
         this._pages = [];
 
@@ -327,7 +327,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         this._cdr.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setPanes(): void {
         this._resizePanesToFitInContainer(true);
 
@@ -366,7 +366,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         this._subscription$.add(this._viewportRuler.change(10).subscribe(() => this._resizePanesToFitInContainer()));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setDefaultPane(): void {
         const setDefaultPane = (): void => {
             if (this._splitter.defaultPaneId) {
@@ -394,7 +394,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _resizePanesToFitInContainer(setInitialSize = false): void {
         if (setInitialSize) {
             this._cdr.detectChanges();
@@ -430,7 +430,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getPaneElementSizePx(paneId: string): number {
         const paneElement = this._getPaneElement(paneId);
 
@@ -441,7 +441,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         return this._isHorizontal ? paneElement.offsetHeight : paneElement.offsetWidth;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getPaneElement(paneId: string): HTMLElement {
         return this._elementRef.nativeElement.querySelector(`#${paneId}`);
     }
@@ -452,10 +452,10 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
     standalone: true
 })
 export class NoDefaultPanePipe implements PipeTransform {
-    /** @hidden */
+    /** @ignore */
     constructor(private readonly _splitterPaneContainer: SplitterPaneContainerComponent) {}
 
-    /** @hidden */
+    /** @ignore */
     transform(value: SplitterSplitPaneComponent[], excludingCondition = true): SplitterSplitPaneComponent[] {
         if (!excludingCondition) {
             return value;

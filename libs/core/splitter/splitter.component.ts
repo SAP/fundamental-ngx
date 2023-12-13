@@ -20,7 +20,7 @@ import { SplitterSplitPaneComponent } from './splitter-split-pane/splitter-split
     standalone: true
 })
 export class SplitterComponent {
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(SplitterSplitPaneComponent, { descendants: true })
     _panes: QueryList<SplitterSplitPaneComponent>;
 
@@ -36,10 +36,10 @@ export class SplitterComponent {
         return this._defaultPaneId;
     }
 
-    /** @hidden */
+    /** @ignore */
     _defaultPaneId$ = new Subject<string>();
 
-    /** @hidden */
+    /** @ignore */
     private _defaultPaneId: string;
 
     /** Check whether certain pane is on canvas. */

@@ -9,7 +9,7 @@ let notificationHeaderCounter = 0;
     standalone: true
 })
 export class NotificationHeaderComponent {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-notification__header')
     fdNotificationHeaderClass = true;
 

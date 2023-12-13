@@ -63,7 +63,7 @@ export class ToolHeaderAutoModeDirective implements HasElementRef {
      */
     protected _config = signal(DEFAULT_CONFIG);
 
-    /** @hidden */
+    /** @ignore */
     protected _contentDensity = inject(ContentDensityDirective);
 
     /**
@@ -89,7 +89,7 @@ export class ToolHeaderAutoModeDirective implements HasElementRef {
     protected _currentMode = computed(() => this._getMode(this._elementWidth(), this._config()));
 
     /**
-     * @hidden
+     * @ignore
      */
     constructor() {
         toObservable(this._currentMode)

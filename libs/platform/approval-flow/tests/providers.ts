@@ -6,7 +6,7 @@ import { ApprovalTeam, ApprovalUser } from '../interfaces';
 import { teams, users } from './data';
 
 export class UserDataProvider extends DataProvider<ApprovalUser> {
-    /** @hidden */
+    /** @ignore */
     fetch(params: ProviderParams): Observable<ApprovalUser[]> {
         let result = users;
         const query = params.get('query')?.toLowerCase();
@@ -16,7 +16,7 @@ export class UserDataProvider extends DataProvider<ApprovalUser> {
         return of(cloneDeep(result)).pipe(delay(500));
     }
 
-    /** @hidden */
+    /** @ignore */
     getOne(params: ProviderParams): Observable<ApprovalUser & { phone: string; email: string }> {
         const id = params.get('id');
         const found = users.find((user) => user.id === id)!;
@@ -29,7 +29,7 @@ export class UserDataProvider extends DataProvider<ApprovalUser> {
 }
 
 export class TeamDataProvider extends DataProvider<ApprovalTeam> {
-    /** @hidden */
+    /** @ignore */
     fetch(params: ProviderParams): Observable<ApprovalTeam[]> {
         let result = teams;
         const query = params.get('query')?.toLowerCase();

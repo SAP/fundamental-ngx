@@ -61,25 +61,25 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
     readonly yearClicked: EventEmitter<number> = new EventEmitter<number>();
 
     /**
-     * @hidden
+     * @ignore
      * This variable is used to define which year from calendarYearList should be focusable by tab key
      */
     _activeYear: number;
 
     /**
-     * @hidden
+     * @ignore
      * Parameter that stores the dozen of years that are currently being displayed.
      */
     _calendarYearListGrid: CalendarYear[][];
 
     /**
-     * @hidden
+     * @ignore
      * Parameter storing the year of the present day.
      */
     _currentYear: number;
 
     /**
-     * @hidden
+     * @ignore
      * Parameter storing first shown year on list
      */
     _firstYearInList: number;
@@ -90,7 +90,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
     }
 
     /**
-     * @hidden
+     * @ignore
      * Today cell label ID
      */
     get _todayLabelId(): string {
@@ -98,7 +98,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
     }
 
     /**
-     * @hidden
+     * @ignore
      * Selected date label ID
      */
     get _selectedDateLabelId(): string {
@@ -106,15 +106,15 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
     }
 
     /**
-     * @hidden
+     * @ignore
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _initiated = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _eRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
@@ -127,7 +127,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
         this._firstYearInList = this._currentYear;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._initiated = true;
 
@@ -141,14 +141,14 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (this._initiated && ('yearViewGrid' in changes || 'yearSelected' in changes || 'id' in changes)) {
             this._constructYearGrid();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -188,7 +188,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method for handling the keyboard navigation.
      */
     _onKeydownYearHandler(event: KeyboardEvent, index: number): void {
@@ -196,7 +196,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that allows to focus elements inside this component
      */
     _focusElementBySelector(elementSelector: string): void {
@@ -207,7 +207,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
     }
 
     /**
-     * @hidden
+     * @ignore
      * Standardized method to calculate grid [x][y] to index number of flatten list
      */
     _getIndex(rowIndex: number, colIndex: number): number {
@@ -215,7 +215,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
     }
 
     /**
-     * @hidden
+     * @ignore
      * Get grid cell id be index
      * @param index
      */
@@ -224,7 +224,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that returns active cell, which means:
      * if there is any selected year, return selected year
      * if there is no selected year, but there is current year, return current year
@@ -244,7 +244,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
         return this._calendarYearListGrid[0][0].year;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _constructYearGrid(): void {
         const displayedYearsAmount: number = this.yearViewGrid.cols * this.yearViewGrid.rows;
         const calendarYearList: CalendarYear[] = [];
@@ -279,7 +279,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
     }
 
     /**
-     * @hidden
+     * @ignore
      * Returns year name as a string.
      */
     private _getYearName(year: number): string {
@@ -288,7 +288,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
     }
 
     /**
-     * @hidden
+     * @ignore
      * Returns aria year name as a string.
      */
     private _getAriaYearName(year: number): string {
@@ -300,7 +300,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
     }
 
     /**
-     * @hidden
+     * @ignore
      * Returns year name taking into account yearMapping.
      */
     private _getYearString(year: number, defaultStr: string): string {
@@ -311,7 +311,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
     }
 
     /**
-     * @hidden
+     * @ignore
      * Returns transformed 1d array from 2d year grid.
      */
     private _getYearList(): CalendarYear[] {
@@ -319,7 +319,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
     }
 
     /**
-     * @hidden
+     * @ignore
      * Amount of years displayed in year view
      */
     private _getAmountOfYearsShownAtOnce(): number {
@@ -327,7 +327,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method to put configuration and listeners on calendar keyboard service
      */
     private _setupKeyboardService(): void {
@@ -356,7 +356,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _focusOnCellByIndex(index: number): void {
         this._focusElementBySelector(`#${this._getId(index)}`);
     }

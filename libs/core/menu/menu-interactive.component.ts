@@ -18,11 +18,11 @@ import { MenuItemInputDirective } from './directives/menu-item-input.directive';
     standalone: true
 })
 export class MenuInteractiveComponent {
-    /** @hidden */
+    /** @ignore */
     @ViewChild(CdkPortalOutlet)
     addonPortalOutlet: CdkPortalOutlet;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(MenuAddonDirective)
     private set _addon(addon: MenuAddonDirective) {
         if (
@@ -32,46 +32,46 @@ export class MenuInteractiveComponent {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.tabindex')
     tabindex = 0;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.is-disabled')
     disabled = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-controls')
     ariaControls: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.is-selected')
     @HostBinding('attr.aria-expanded')
     selected = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-haspopup')
     @HostBinding('class.has-child')
     ariaHaspopup = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-menu__link')
     readonly fdMenuLinkClass: boolean = true;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(MenuItemInputDirective)
     private _input: MenuItemInputDirective;
 
-    /** @hidden */
+    /** @ignore */
     _fromSplitButton = false;
 
-    /** @hidden */
+    /** @ignore */
     public elementRef: ElementRef = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     private _startAddonInstance: MenuAddonDirective;
 
-    /** @hidden */
+    /** @ignore */
     get startAddon(): MenuAddonDirective {
         if (!this._startAddonInstance) {
             this.addonPortalOutlet.detach();
@@ -83,7 +83,7 @@ export class MenuInteractiveComponent {
         return this._startAddonInstance;
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown.enter', ['$event'])
     @HostListener('keydown.space', ['$event'])
     _handleKeydown($event: KeyboardEvent): void {
@@ -92,18 +92,18 @@ export class MenuInteractiveComponent {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     setSelected(isSelected: boolean): void {
         this.selected = isSelected && (this.ariaHaspopup || this._fromSplitButton);
     }
 
-    /** @hidden */
+    /** @ignore */
     setDisabled(isDisabled: boolean): void {
         this.disabled = isDisabled;
         this.tabindex = isDisabled ? -1 : 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     setSubmenu(hasSubmenu: boolean, itemId?: string): void {
         this.ariaHaspopup = hasSubmenu;
         this.ariaControls = hasSubmenu ? itemId || this.ariaControls : null;

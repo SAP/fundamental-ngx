@@ -21,7 +21,7 @@ import { DynamicComponentInjector } from './dynamic-component-injector';
     providedIn: 'root'
 })
 export class DynamicComponentService {
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _componentFactoryResolver: ComponentFactoryResolver,
         private readonly _applicationRef: ApplicationRef,
@@ -87,14 +87,14 @@ export class DynamicComponentService {
         componentRef.destroy();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _createDependencyMap(services: any[] = []): WeakMap<any, any> {
         const dependencyMap = new WeakMap();
         services.filter((service) => !!service).forEach((service) => dependencyMap.set(service.constructor, service));
         return dependencyMap;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _attachToContainer<V>(componentRef: ComponentRef<V>, config: DynamicComponentConfig): void {
         const configObj = Object.assign({}, config);
         if (config.containerRef) {
@@ -111,7 +111,7 @@ export class DynamicComponentService {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _createComponent<V>(
         componentType: Type<V>,
         dependenciesMap: WeakMap<any, any>,
@@ -124,7 +124,7 @@ export class DynamicComponentService {
         return componentRef;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _passExternalContent<V>(
         componentRef: ComponentRef<V>,
         content: TemplateRef<any> | Type<any> | string | Record<string, any>

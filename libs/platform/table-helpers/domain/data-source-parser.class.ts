@@ -5,7 +5,7 @@ import { ObservableTableDataSource } from './observable-data-source';
 import { TableDataSource } from './table-data-source';
 
 export class TableDataSourceParser<T> implements DataSourceParser<T, TableDataSource<T>> {
-    /** @hidden */
+    /** @ignore */
     parse(source: DataSource<T>): TableDataSource<T> | undefined {
         if (isDataSource(source)) {
             return source as TableDataSource<T>;

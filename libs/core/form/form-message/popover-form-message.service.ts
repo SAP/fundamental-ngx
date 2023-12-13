@@ -4,22 +4,22 @@ import { PopoverService } from '@fundamental-ngx/core/popover';
 
 @Injectable()
 export class PopoverFormMessageService implements OnDestroy {
-    /** @hidden */
+    /** @ignore */
     private _message: Nullable<string | TemplateRef<any>>;
 
-    /** @hidden */
+    /** @ignore */
     private _hidden = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _popoverService: PopoverService) {}
 
-    /** @hidden */
+    /** @ignore */
     set message(message: Nullable<string | TemplateRef<any>>) {
         this._message = message;
         this._updatePopover();
     }
 
-    /** @hidden */
+    /** @ignore */
     set triggers(triggers: string[]) {
         this._popoverService.triggers = triggers;
         this._popoverService._refreshTriggerListeners();
@@ -42,23 +42,23 @@ export class PopoverFormMessageService implements OnDestroy {
         this._updatePopover();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._popoverService.onDestroy();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getAdditionalClass(): string[] {
         return [this._shouldBeHidden() ? 'fd-popover__body--hidden' : ''].filter((v): v is string => !!v);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updatePopover(): void {
         this._popoverService.additionalBodyClass = this._getAdditionalClass().join(' ');
         this._popoverService.updateContent(this._message, null);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _shouldBeHidden(): boolean {
         return this._hidden || !this._message;
     }

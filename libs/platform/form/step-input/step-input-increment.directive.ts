@@ -11,17 +11,17 @@ import { StepInputActionButton } from './step-input-action-button';
     standalone: true
 })
 export class StepInputIncrementDirective extends StepInputActionButton {
-    /** @hidden */
+    /** @ignore */
     constructor(@SkipSelf() private stepInput: StepInputComponent) {
         super();
     }
 
-    /** @hidden */
+    /** @ignore */
     canHandleAction(): boolean {
         return !!this.stepInput.canChangeValue;
     }
 
-    /** @hidden */
+    /** @ignore */
     runAction(): void {
         this.stepInput.increase();
     }

@@ -24,4 +24,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'button';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/button';
 export const API_FILE_KEY = 'button';

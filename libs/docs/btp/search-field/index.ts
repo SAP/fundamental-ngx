@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'search-field';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/btp/search-field';
 export const API_FILE_KEY = 'searchField';

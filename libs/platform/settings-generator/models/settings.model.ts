@@ -44,7 +44,7 @@ export interface SidebarSettingsModel<TAdditionalControlTypes extends BaseDynami
 export interface SettingsFormTab<TAdditionalControlTypes extends BaseDynamicFormFieldItem = AnyDynamicFormFieldItem> {
     /** Title of the tab. */
     title: FdpFormGeneratorAsyncProperty<string>;
-    /** @hidden */
+    /** @ignore */
     template?: never;
     /** ID of the tab. Will be used as a key in resulting form object. */
     id: string;
@@ -55,9 +55,9 @@ export interface SettingsFormTab<TAdditionalControlTypes extends BaseDynamicForm
 export interface SettingsTemplateTab {
     /** Title of the tab. */
     title: FdpFormGeneratorAsyncProperty<string>;
-    /** @hidden */
+    /** @ignore */
     items?: never;
-    /** @hidden */
+    /** @ignore */
     id?: never;
     /** Template Reference for tab content. */
     template: TemplateRef<any>;
@@ -77,14 +77,14 @@ export interface BaseSettingsItem {
 export interface IconBaseSettingsItem {
     /** Settings item icon configuration. */
     icon: Partial<ListIconConfig> | string | Observable<Partial<ListIconConfig> | string>;
-    /** @hidden */
+    /** @ignore */
     avatar?: never;
 }
 
 export interface AvatarBaseSettingsItem {
     /** Settings item avatar configuration. */
     avatar: Partial<ListAvatarConfig> | string | Observable<Partial<ListAvatarConfig> | string>;
-    /** @hidden */
+    /** @ignore */
     icon?: never;
 }
 
@@ -100,7 +100,7 @@ export interface FormSettingsItem<TAdditionalControlTypes extends BaseDynamicFor
     extends BaseSettingsItem {
     /** Settings item form controls. */
     items: SettingsGeneratorDynamicFormItem<TAdditionalControlTypes>[];
-    /** @hidden */
+    /** @ignore */
     template?: never;
     /** ID Of the section. Will be used as a key in resulting form object. */
     id: string;
@@ -109,9 +109,9 @@ export interface FormSettingsItem<TAdditionalControlTypes extends BaseDynamicFor
 export interface GroupedFormSettingsItem<
     TAdditionalControlTypes extends BaseDynamicFormFieldItem = AnyDynamicFormFieldItem
 > extends BaseSettingsItem {
-    /** @hidden */
+    /** @ignore */
     items?: never;
-    /** @hidden */
+    /** @ignore */
     template?: never;
     /** ID if the group. Will be used as a key in resulting form object. */
     id: string;
@@ -120,18 +120,18 @@ export interface GroupedFormSettingsItem<
 }
 
 export interface TemplateSettingsItem extends BaseSettingsItem {
-    /** @hidden */
+    /** @ignore */
     items?: never;
-    /** @hidden */
+    /** @ignore */
     id?: string;
     /** Template reference to be rendered as section content. */
     template: TemplateRef<any>;
 }
 
 export interface GroupedTemplateSettingsItem extends BaseSettingsItem {
-    /** @hidden */
+    /** @ignore */
     items?: never;
-    /** @hidden */
+    /** @ignore */
     template?: never;
     /** Groups array. */
     groups: SettingsTemplateTab[];

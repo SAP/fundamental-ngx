@@ -11,7 +11,7 @@ export abstract class DatetimeAdapter<D> {
     /** current locale */
     protected locale: string;
 
-    /** @hidden */
+    /** @ignore */
     private _localeChanges: Subject<void> = new Subject();
 
     /** locale changes stream */

@@ -30,17 +30,17 @@ export class OnlyDigitsDirective {
      */
     @Input() decimalSeparator = '.';
 
-    /** @hidden */
+    /** @ignore */
     private _inputElement: HTMLInputElement;
-    /** @hidden */
+    /** @ignore */
     private _hasDecimalPoint = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private readonly _el: ElementRef) {
         this._inputElement = this._el.nativeElement;
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     onKeyDown(e: KeyboardEvent): void {
         if (
@@ -83,7 +83,7 @@ export class OnlyDigitsDirective {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('paste', ['$event'])
     onPaste(event: any): void {
         if (window['clipboardData']) {
@@ -97,7 +97,7 @@ export class OnlyDigitsDirective {
         event.preventDefault();
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('drop', ['$event'])
     onDrop(event: DragEvent): void {
         const textData = event.dataTransfer?.getData('text') ?? '';
@@ -107,7 +107,7 @@ export class OnlyDigitsDirective {
         event.preventDefault();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _pasteData(pastedContent: string): void {
         const sanitizedContent = this._sanitizeInput(pastedContent);
         const pasted = document.execCommand('insertText', false, sanitizedContent);
@@ -133,7 +133,7 @@ export class OnlyDigitsDirective {
 
     // The following 2 methods were added from the below article for browsers that do not support setRangeText
     // https://stackoverflow.com/questions/11076975/how-to-insert-text-into-the-textarea-at-the-current-cursor-position
-    /** @hidden */
+    /** @ignore */
     private _insertAtCursor(myField: HTMLInputElement, myValue: string): void {
         const startPos = myField.selectionStart ?? 0;
         const endPos = myField.selectionEnd ?? 0;
@@ -148,7 +148,7 @@ export class OnlyDigitsDirective {
         this._triggerEvent(myField, 'input');
     }
 
-    /** @hidden */
+    /** @ignore */
     private _triggerEvent(el: HTMLInputElement, type: string): void {
         if ('createEvent' in document) {
             // modern browsers, IE9+
@@ -159,7 +159,7 @@ export class OnlyDigitsDirective {
     }
     // end stack overflow code
 
-    /** @hidden */
+    /** @ignore */
     private _sanitizeInput(input: string): string {
         let result = '';
         if (this.decimal && this._isValidDecimal(input)) {
@@ -183,7 +183,7 @@ export class OnlyDigitsDirective {
         return result;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isValidDecimal(string: string): boolean {
         if (!this._hasDecimalPoint) {
             return string.split(this.decimalSeparator).length <= 2;
@@ -198,14 +198,14 @@ export class OnlyDigitsDirective {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _getSelection(): string {
         const { selectionStart, selectionEnd } = this._inputElement;
 
         return this._inputElement.value.substring(selectionStart ?? 0, selectionEnd ?? 0);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _forecastValue(key: string): string {
         const { selectionStart, selectionEnd, value: oldValue } = this._inputElement;
         const selection = oldValue.substring(selectionStart ?? 0, selectionEnd ?? 0);

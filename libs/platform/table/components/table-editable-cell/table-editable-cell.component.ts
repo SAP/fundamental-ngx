@@ -40,9 +40,9 @@ export class TableEditableCellComponent implements EditableTableCell {
     @ViewChild(NgForm)
     form: NgForm;
 
-    /** @hidden */
+    /** @ignore */
     _controlUniqName = `input-${controlUniqId++}`;
 
-    /** @hidden */
+    /** @ignore */
     private _columnValue: any;
 }

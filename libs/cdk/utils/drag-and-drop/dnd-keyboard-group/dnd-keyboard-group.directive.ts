@@ -23,7 +23,7 @@ export class DndKeyboardGroupDirective {
     @Input()
     orientation: 'horizontal' | 'vertical' = 'vertical';
 
-    /** @hidden */
+    /** @ignore */
     _onDndItemFocus$ = new Subject<[number, number]>();
 
     /** Custom function to call when moving item inside the group */
@@ -36,7 +36,7 @@ export class DndKeyboardGroupDirective {
     customTransferFn = (group: any[], nextGroup: any[], fromIndex: number, toIndex: number): void =>
         transferArrayItem(group, nextGroup, fromIndex, toIndex);
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _cdr: ChangeDetectorRef,
         @Optional() private readonly _rtlService: RtlService
@@ -85,7 +85,7 @@ export class DndKeyboardGroupDirective {
         }
     }
 
-    /** @hidden Focus after moving elements with keyboard */
+    /** @ignore Focus after moving elements with keyboard */
     private _focusDndItem(groupIndex: number, itemIndex: number): void {
         this._cdr.detectChanges();
 

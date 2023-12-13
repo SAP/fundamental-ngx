@@ -102,7 +102,7 @@ import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-
     providers: []
 })
 export class FundamentalNgxPlatformModule {
-    /** @hidden */
+    /** @ignore */
     constructor(injector: Injector) {
         PlatformConfig.setInjector(injector);
     }

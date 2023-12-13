@@ -7,11 +7,11 @@ import { PositionStrategyFactory } from './position-strategies/position-strategy
 @Injectable()
 export class TimelinePositionControlService {
     /* List of TimelineNodeComponent */
-    /** @hidden */
+    /** @ignore */
     private _nodeItems: TimelineNodeComponentInterface[] = [];
 
     /* Current position strategy. It depends on axis and layout */
-    /** @hidden */
+    /** @ignore */
     private _positionStrategy: BaseStrategy;
 
     /** Calculate styles for timeline nodes */

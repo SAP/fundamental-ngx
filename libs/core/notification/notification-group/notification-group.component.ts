@@ -33,7 +33,7 @@ export class NotificationGroupComponent implements OnChanges, OnInit, CssClassBu
     @Input()
     width: string;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef,
         @Optional() @Inject(FD_POPOVER_COMPONENT) private _popover: BasePopoverClass
@@ -44,12 +44,12 @@ export class NotificationGroupComponent implements OnChanges, OnInit, CssClassBu
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden CssClassBuilder interface implementation
+    /** @ignore CssClassBuilder interface implementation
      * function is responsible for order which css classes are applied
      */
     @applyCssClass
@@ -61,7 +61,7 @@ export class NotificationGroupComponent implements OnChanges, OnInit, CssClassBu
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }

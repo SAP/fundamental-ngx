@@ -41,15 +41,15 @@ export class MessageStripAlertContainerComponent implements AfterViewInit {
      */
     alertRefs$!: Observable<MessageStripAlertRef[]>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(CdkPortalOutlet)
     portalOutlets: QueryList<CdkPortalOutlet>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(MessageStripAlertComponent)
     alerts: QueryList<MessageStripAlert>;
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this.alertRefs$ = this.portalOutlets.changes.pipe(
             startWith(this.portalOutlets),

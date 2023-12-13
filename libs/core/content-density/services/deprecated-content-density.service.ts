@@ -14,7 +14,7 @@ export class DeprecatedContentDensityService implements OnDestroy {
     /** Content Density BehaviourSubject */
     readonly contentDensity = new BehaviorSubject<ContentDensityMode>(this._defaultContentDensity);
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _contentDensityController: GlobalContentDensityService,
         @Inject(DEFAULT_CONTENT_DENSITY) private _defaultContentDensity: ContentDensityMode
@@ -27,17 +27,17 @@ export class DeprecatedContentDensityService implements OnDestroy {
             .subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     get _contentDensityListener(): Observable<ContentDensityMode> {
         return this._contentDensityController.contentDensityListener();
     }
 
-    /** @hidden */
+    /** @ignore */
     get _isCompactDensity(): Observable<boolean> {
         return this._contentDensityController.contentDensityListener().pipe(map(isCompact));
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this.contentDensity.complete();
     }

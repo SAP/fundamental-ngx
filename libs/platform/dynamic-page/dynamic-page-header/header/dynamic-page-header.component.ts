@@ -116,7 +116,7 @@ export class DynamicPageHeaderComponent {
     collapsedChange: EventEmitter<DynamicPageCollapseChangeEvent> = new EventEmitter<DynamicPageCollapseChangeEvent>();
 
     /**
-     * @hidden
+     * @ignore
      * The component view is wrapped in ng-template so
      * component's consumer have to use this templateRef to render it
      * in its view.
@@ -127,7 +127,7 @@ export class DynamicPageHeaderComponent {
     contentTemplateRef: TemplateRef<any>;
 
     /**
-     * @hidden
+     * @ignore
      * Delegate collapse change event
      */
     _onCollapseChange(collapsed: boolean): void {

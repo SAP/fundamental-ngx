@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'combobox';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/form';
 export const API_FILE_KEY = 'combobox';
 export const I18N_KEY = 'platformCombobox';

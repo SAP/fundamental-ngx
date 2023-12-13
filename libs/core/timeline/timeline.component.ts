@@ -86,45 +86,45 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
     layout: TimelineSidePosition = 'right';
 
     /* First outlet within the timeline template where the dataNodes will be inserted. */
-    /** @hidden */
+    /** @ignore */
     @ViewChild(TimelineFirstListOutletDirective, { static: true })
     private _firstListOutlet: TimelineFirstListOutletDirective;
 
     /* Second outlet within the timeline template where the dataNodes will be inserted. */
-    /** @hidden */
+    /** @ignore */
     @ViewChild(TimelineSecondListOutletDirective, { static: true })
     private _secondListOutlet: TimelineSecondListOutletDirective;
 
     /** The timeline node template for the timeline */
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(TimelineNodeDefDirective, { descendants: true })
     private _nodeDefs: QueryList<TimelineNodeDefDirective<T>>;
 
-    /** @hidden */
+    /** @ignore */
     _canShowFirstList = true;
 
-    /** @hidden */
+    /** @ignore */
     _canShowSecondList = true;
 
-    /** @hidden */
+    /** @ignore */
     _loading = true;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('loadingTemplate')
     _loadingTemplate: TemplateRef<any>;
 
-    /** @hidden
+    /** @ignore
      * Differ used to find the changes in the data provided by the data source.
      */
     private _dataDifferForFirstList: IterableDiffer<T>;
 
-    /** @hidden */
+    /** @ignore */
     private _dataDifferForSecondList: IterableDiffer<T>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onDestroy = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _differs: IterableDiffers,
         private _cd: ChangeDetectorRef,
@@ -134,7 +134,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
         private _ngZone: NgZone
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._dataDifferForFirstList = this._differs.find([]).create(this.trackBy);
         this._dataDifferForSecondList = this._differs.find([]).create(this.trackBy);
@@ -143,7 +143,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
         this._canShowSecondList = this.layout !== 'left' && this.layout !== 'top';
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if ('axis' in changes || 'layout' in changes) {
             this._canShowFirstList = this.layout !== 'right' && this.layout !== 'bottom';
@@ -157,7 +157,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         resizeObservable(this._elementRef.nativeElement)
             .pipe(debounceTime(50), takeUntil(this._onDestroy))
@@ -166,7 +166,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
         this.switchDataSource(this.dataSource);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._firstListOutlet.viewContainer.clear();
         this._onDestroy.next();
@@ -177,7 +177,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
      * Update state by new data source
      * If the data source is null, interpret this by clearing the node outlet.
      */
-    /** @hidden */
+    /** @ignore */
     private switchDataSource(data: T[]): void {
         this._loading = true;
         if (!data) {
@@ -200,7 +200,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
     }
 
     /** Check for changes made in the data and render each change (node added/removed/moved). */
-    /** @hidden */
+    /** @ignore */
     private _renderNodeChanges(data: T[], differ: IterableDiffer<T>, vcr: ViewContainerRef): void {
         const changes = differ.diff(data);
         if (!changes) {
@@ -222,7 +222,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setPositionStrategy(): void {
         this._timelinePositionControlService.setStrategy(`${this.axis}-${this.layout}` as TimeLinePositionStrategy);
     }
@@ -231,7 +231,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
      * Create the embedded view for the data node template and place it in the correct index location
      * within the data node view container.
      */
-    /** @hidden */
+    /** @ignore */
     private _insertNode(nodeData: T, index: number, vcr: ViewContainerRef): void {
         const node = this._getNodeDef(index);
 
@@ -245,7 +245,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
      * Finds the matching node definition that should be used for this node data. If there is only
      * one node definition, it is returned.
      */
-    /** @hidden */
+    /** @ignore */
     private _getNodeDef(i: number): TimelineNodeDefDirective<T> {
         if (this._nodeDefs.length === 1) {
             return this._nodeDefs.first;
@@ -256,7 +256,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
     /**
      * Split data list to two list first and second to represent timelines in two lists.
      */
-    /** @hidden */
+    /** @ignore */
     private _splitList(dataSource: T[]): T[][] {
         let dataForFirstList: T[] = [];
         let dataForSecondList: T[] = [];

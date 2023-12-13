@@ -14,21 +14,21 @@ export class ActionSheetMobileComponent {
     /** Whenever links should be visible */
     open = false;
 
-    /** @hidden */
+    /** @ignore */
     childContent: {
         actionSheetBodyTemplate: TemplateRef<any>;
         isOpenChangeHandle: OpenChangeHandle;
     } | null = null;
 
-    /** @hidden */
+    /** @ignore */
     get _isOpenChangeHandle(): OpenChangeHandle | undefined {
         return this.childContent?.isOpenChangeHandle;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(private readonly _changeDetectionRef: ChangeDetectorRef) {}
 
-    /** @hidden */
+    /** @ignore */
     toggleOpenState(isOpen: boolean): void {
         this.open = isOpen;
         this._changeDetectionRef.detectChanges();

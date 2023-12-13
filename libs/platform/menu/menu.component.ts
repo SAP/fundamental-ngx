@@ -96,22 +96,22 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     /** Menu direction */
     direction: 'ltr' | 'rtl' = 'ltr';
 
-    /** @hidden */
+    /** @ignore */
     menuId: string;
 
-    /** @hidden */
+    /** @ignore */
     private _id: string;
 
-    /** @hidden */
+    /** @ignore */
     private _keyManager: FocusKeyManager<MenuItemComponent>;
 
-    /** @hidden */
+    /** @ignore */
     private _tabSubscription = Subscription.EMPTY;
 
-    /** @hidden */
+    /** @ignore */
     private _dirChangeSubscription = Subscription.EMPTY;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Optional() private _rtl: RtlService,
         readonly contentDensityObserver: ContentDensityObserver
@@ -125,7 +125,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         warnOnce(`MenuComponent is deprecated. Use 'fd-menu' from '@fundamental-ngx/core/menu' instead.`);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (!this.menuId) {
             this.menuId = MENU_ID_ROOT + menuIdCounter++;
@@ -138,12 +138,12 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._setMenuItemCascadeDirection();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this.close.complete();
         this._tabSubscription.unsubscribe();
@@ -168,7 +168,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Menu keydown handler
      */
     _onKeydown(event: KeyboardEvent): void {
@@ -191,7 +191,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Menu click handler
      */
     _onClick(): void {
@@ -199,7 +199,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Get stream of menu items hover change
      */
     _menuItemHoverChange(): Observable<MenuItemComponent> {
@@ -210,7 +210,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         ) as Observable<MenuItemComponent>;
     }
 
-    /** @hidden */
+    /** @ignore */
     _setMenuItemCascadeDirection(): void {
         if (!this.menuItems) {
             return;
@@ -222,7 +222,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Check if cascade menu should appear from right
      */
     _cascadesRight(): boolean {
@@ -233,7 +233,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Check if cascade menu should appear from left
      */
     _cascadesLeft(): boolean {

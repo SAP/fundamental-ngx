@@ -118,7 +118,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         return this._selected;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _selected = false;
 
     /** Remove the padding from the Item body */
@@ -151,7 +151,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         return this._type;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _type: GridListItemType = 'inactive';
 
     /**
@@ -218,17 +218,17 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     @Output()
     locked = new EventEmitter<GridListItemOutputEvent<T>>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('gridListItem')
     _gridListItem: ElementRef<HTMLDivElement>;
 
-    /** @hidden
+    /** @ignore
      * The active state of the list item.
      * If set to true, the whole card has active state. Becomes false only when the Edit button is clicked.
      */
     _isActive = true;
 
-    /** @hidden */
+    /** @ignore */
     set gridLayoutClasses(value: string[]) {
         this._removeClassesNames(this._gridLayoutClasses);
         this._gridLayoutClasses = value;
@@ -238,22 +238,22 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         return this._gridLayoutClasses;
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(GridListItemFooterBarComponent)
     footerBarComponent: Nullable<GridListItemFooterBarComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(GridListItemToolbarComponent)
     itemToolbarComponent: Nullable<GridListItemToolbarComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(GridListItemBodyDirective)
     body: Nullable<GridListItemBodyDirective>;
 
-    /** @hidden */
+    /** @ignore */
     _selectedItem?: T;
 
-    /** @hidden */
+    /** @ignore */
     set selectionMode(mode: GridListSelectionMode | undefined) {
         this._selectionMode = mode;
 
@@ -273,19 +273,19 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         return this._selectionMode;
     }
 
-    /** @hidden */
+    /** @ignore */
     _index?: number;
 
-    /** @hidden */
+    /** @ignore */
     private _selectionMode?: GridListSelectionMode;
 
-    /** @hidden */
+    /** @ignore */
     private _gridLayoutClasses: string[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private readonly subscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _cd: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
@@ -299,12 +299,12 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         this.subscription.add(selectedItemsSub);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._cd.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
     }
@@ -314,7 +314,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         this._gridListItem?.nativeElement.focus(options);
     }
 
-    /** @hidden */
+    /** @ignore */
     _setActive(event: MouseEvent, isActive: boolean): void {
         if (this._isElementCanBeClicked(event)) {
             return;
@@ -323,7 +323,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         this._isActive = isActive;
     }
 
-    /** @hidden */
+    /** @ignore */
     _singleSelect(event: Event): void {
         this._preventDefault(event);
 
@@ -334,13 +334,13 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         this._gridList.setSelectedItem(this.value, this._index);
     }
 
-    /** @hidden */
+    /** @ignore */
     _checkboxClick(event: MouseEvent): void {
         const checked = (<HTMLInputElement>event.target).checked;
         this._selectionItem(checked, event);
     }
 
-    /** @hidden */
+    /** @ignore */
     _selectionItem(value: boolean | number | T, event?: MouseEvent): void {
         if (!this.value || this._index == null) {
             return;
@@ -355,42 +355,42 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         this._gridList.setSelectedItem(this.value, this._index, action, event);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onDetail(event: MouseEvent): void {
         this._preventDefault(event);
 
         this.detail.emit(this._outputEventValue);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onNavigate(event: MouseEvent): void {
         this._preventDefault(event);
 
         this.navigate.emit(this._outputEventValue);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onDelete(event: MouseEvent): void {
         this._preventDefault(event);
 
         this.delete.emit(this._outputEventValue);
     }
 
-    /** @hidden */
+    /** @ignore */
     _clickOnDraft(event: MouseEvent): void {
         this._preventDefault(event);
 
         this.draft.emit(this._outputEventValue);
     }
 
-    /** @hidden */
+    /** @ignore */
     _clickOnLocked(event: MouseEvent): void {
         this._preventDefault(event);
 
         this.locked.emit(this._outputEventValue);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onClick(event: MouseEvent): void {
         if (!this._isElementCanBeClicked(event)) {
             return;
@@ -408,7 +408,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         this.press.emit(this._outputEventValue);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onKeyDown(event: KeyboardEvent): void {
         const target = event.target as HTMLDivElement;
 
@@ -435,7 +435,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isElementCanBeClicked(event: MouseEvent): boolean {
         if (!event?.target) {
             return false;
@@ -454,7 +454,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isToolbarElement(element: HTMLElement): boolean {
         if (!this.itemToolbarComponent) {
             return false;
@@ -471,13 +471,13 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         return false;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _preventDefault(event: Event): void {
         event.preventDefault();
         event.stopPropagation();
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _outputEventValue(): GridListItemOutputEvent<T> {
         return {
             value: this.value,
@@ -485,14 +485,14 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         };
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addClassesNames(classesNames: string[]): void {
         for (const className of classesNames) {
             this._render.addClass(this._elementRef.nativeElement, className);
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _removeClassesNames(classesNames: string[]): void {
         for (const className of classesNames) {
             this._render.removeClass(this._elementRef.nativeElement, className);

@@ -20,11 +20,11 @@ export class VhdBaseTab {
     @Input()
     mobile = false;
 
-    /** @hidden */
+    /** @ignore */
     get type(): VhdTab {
         return VhdTab.defineConditions;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(readonly _changeDetectorRef: ChangeDetectorRef) {}
 }

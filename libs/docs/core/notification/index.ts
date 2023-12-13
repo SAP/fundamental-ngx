@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'notification';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/notification';
 export const API_FILE_KEY = 'notification';

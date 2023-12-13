@@ -17,7 +17,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     standalone: true
 })
 export class FormHeaderComponent {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-form-header')
     fdFormHeaderClass = true;
 }

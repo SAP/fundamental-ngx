@@ -305,7 +305,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     @Input()
     bodyMaxWidth: 'none' | 'container' | number = 'none';
 
-    /** @hidden */
+    /** @ignore */
     get _popoverMaxWidth(): Nullable<number> {
         if (this.bodyMaxWidth === 'none') {
             return null;
@@ -366,7 +366,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     @Input()
     displayAddonButton = true;
 
-    /** @hidden */
+    /** @ignore */
     private _tokenCountHiddenLabel = `fd-multi-input-token-count-id-${uniqueHiddenLabel++}`;
 
     /** token  count hidden label */
@@ -385,50 +385,50 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     @Output()
     readonly allItemsSelectedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(PopoverComponent)
     popoverRef: PopoverComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('control', { read: TemplateRef })
     controlTemplate: TemplateRef<{ displayAddonButton: boolean }>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('list', { read: TemplateRef })
     listTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(ListComponent)
     listComponent: ListComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('searchInputElement', { read: ElementRef })
     searchInputElement: ElementRef<HTMLInputElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(TokenizerComponent)
     tokenizer: TokenizerComponent;
 
-    /** @hidden */
+    /** @ignore */
     get _optionItems(): _OptionItem<ItemType, ValueType>[] {
         return this.optionItems$.value;
     }
-    /** @hidden */
+    /** @ignore */
     readonly optionItems$ = new BehaviorSubject<_OptionItem<ItemType, ValueType>[]>([]);
 
-    /** @hidden */
+    /** @ignore */
     readonly _onlySelected$ = new BehaviorSubject<boolean>(false);
 
-    /** @hidden */
+    /** @ignore */
     readonly _searchTermCtrl = new FormControl('');
 
-    /** @hidden */
+    /** @ignore */
     readonly _selectionModel = new PairSelectionModel<OptionItemIdentifier, OptionItem<ItemType, ValueType>>();
 
-    /** @hidden */
+    /** @ignore */
     readonly _viewModel$: Observable<ViewModel<ItemType, ValueType>> = this._getViewModel();
 
-    /** @hidden */
+    /** @ignore */
     _dir: string;
 
     /** typeahead matcher function */
@@ -439,13 +439,13 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         return (item: string, searchTerm: string) => item.startsWith(searchTerm);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _rangeSelector = new RangeSelector();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         readonly _contentDensityObserver: ContentDensityObserver,
         public readonly elementRef: ElementRef<HTMLElement>,
@@ -457,7 +457,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         @Optional() private readonly _focusTrapService: FocusTrapService
     ) {}
 
-    /** @hidden CssClassBuilder interface implementation
+    /** @ignore CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
@@ -474,7 +474,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         return ['fd-multi-input', 'fd-multi-input-custom', this.class];
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('focusout', ['$event'])
     private _focusOut(event: FocusEvent): void {
         if (!this.elementRef.nativeElement.contains(event.relatedTarget as Node)) {
@@ -482,13 +482,13 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     onChange: (value: any) => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     onTouched = (): void => {};
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
 
@@ -517,7 +517,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         this.buildComponentCssClass();
 
@@ -532,7 +532,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (this.mobile) {
             this._setUpMobileMode();
@@ -540,22 +540,22 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         this.tokenizer._showOverflowPopover = false;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnChange(fn: (selected: any[]) => void): void {
         this.onChange = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
         if (isDisabled) {
@@ -567,7 +567,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         this._changeDetRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     writeValue(selected: ValueType[]): void {
         this.selected = selected;
 
@@ -581,7 +581,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     openChangeHandle(open: boolean): void {
         if (this.disabled) {
             return;
@@ -628,7 +628,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         this._propagateChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     _onCheckboxKeyup(
         option: _OptionItem<ItemType, ValueType>,
         event: KeyboardEvent,
@@ -640,7 +640,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     async _onCheckboxClick(
         option: _OptionItem<ItemType, ValueType>,
         event: MouseEvent | KeyboardEvent,
@@ -664,13 +664,13 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _onTokenClick(option: _OptionItem<ItemType, ValueType>, resetSearch: boolean, event?: MouseEvent): void {
         event?.preventDefault(); // prevent this function from being called twice when checkbox updates
         this._handleSelect(false, option, resetSearch, true);
     }
 
-    /** @hidden */
+    /** @ignore */
     _handleSelect(
         checked: any,
         option: _OptionItem<ItemType, ValueType>,
@@ -703,7 +703,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         this._propagateChange(fromTokenCloseClick);
     }
 
-    /** @hidden */
+    /** @ignore */
     _handleInputKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) && !this.mobile) {
             if (event.altKey) {
@@ -728,7 +728,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _showAllClicked(event: Event): void {
         event.preventDefault();
         event.stopPropagation();
@@ -736,14 +736,14 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         this.searchInputElement.nativeElement.focus();
     }
 
-    /** @hidden */
+    /** @ignore */
     _showAllKeyDown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             this._showAllClicked(event);
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _onSubmit(): void {
         const searchTerm = this.searchTerm;
         if (searchTerm === '') {
@@ -759,7 +759,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _handleComplete({ term }): void {
         this.searchTerm = term;
     }
@@ -782,13 +782,13 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         this._resetSearchTerm();
     }
 
-    /** @hidden */
+    /** @ignore */
     _moreClicked(): void {
         this._onlySelected$.next(true);
         this.openChangeHandle(true);
     }
 
-    /** @hidden */
+    /** @ignore */
     _addOnButtonClicked(event: Event): void {
         this.addOnButtonClicked.emit(event);
         if (this.openDropdownOnAddOnClicked) {
@@ -798,30 +798,30 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     disableParentFocusTrap(): void {
         this._focusTrapService?.pauseCurrentFocusTrap();
     }
 
-    /** @hidden */
+    /** @ignore */
     enableParentFocusTrap(): void {
         this._focusTrapService?.unpauseCurrentFocusTrap();
     }
 
-    /** @hidden */
+    /** @ignore */
     _close(): void {
         this.searchInputElement.nativeElement.focus();
         this.openChangeHandle(false);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addNewTokenToDropDownValues(newToken): void {
         this.dropdownValues.push(newToken);
         const newOption = this._getOptionItem(newToken);
         this.optionItems$.next([...this._optionItems, newOption]);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _selectFirstFiltered(searchTerm: string): boolean {
         const filtered = this.filterFn(this.dropdownValues, searchTerm);
         if (Array.isArray(filtered) && filtered.length > 0 && this.autoComplete) {
@@ -834,7 +834,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         return false;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _defaultFilter(contentArray: this['dropdownValues'], searchTerm: string = ''): this['dropdownValues'] {
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter((item) => {
@@ -846,12 +846,12 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _defaultValueFn(value: ItemType | ValueType): ValueType {
         return value as ValueType;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _defaultDisplay(str: ItemType): string | undefined {
         if (typeof str === 'string') {
             return str;
@@ -861,22 +861,22 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _defaultParse(str: string): string {
         return str;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _defaultTokenValidate(str: string): boolean {
         return !!str;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _popoverOpenHandle(open: boolean): void {
         this.open = open;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _propagateChange(emitInMobile?: boolean): void {
         if (!this.mobile || emitInMobile) {
             const selected = this._selectionModel.selected.map((c) => c.value);
@@ -885,7 +885,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _shouldPopoverBeUpdated(previousLength: number, currentLength: number): boolean {
         return (
             !!this.popoverRef &&
@@ -893,7 +893,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _setUpMobileMode(): Promise<void> {
         const injector = Injector.create({
             providers: [{ provide: MULTI_INPUT_COMPONENT, useValue: this }],
@@ -913,7 +913,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getItemIdentifier(item: ItemType): OptionItemIdentifier {
         if (!this.optionItemIdentifier) {
             const value = this.valueFn(item);
@@ -931,13 +931,13 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         return get(item, this.optionItemIdentifier) as OptionItemIdentifier;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _resetSearchTerm(): void {
         this._searchTermCtrl.setValue('');
         this._changeDetRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getOptionItem(item: ItemType | _OptionItem<ItemType, ValueType>): _OptionItem<ItemType, ValueType> {
         if (isOptionItem<ItemType, ValueType>(item)) {
             return item;
@@ -952,7 +952,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         };
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getValueAndLabelOfItem(item: ItemType): OptionItemBase<ValueType> {
         const defaultDisplay = typeof item === 'object' && item !== null ? item[Object.keys(item)[0]] : item;
         let value = this.valueFn(item) ?? defaultDisplay;
@@ -968,7 +968,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         return { label, value };
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getViewModel(): Observable<ViewModel<ItemType, ValueType>> {
         return combineLatest([
             this._searchTermCtrl.valueChanges.pipe(startWith(this._searchTermCtrl.value)),

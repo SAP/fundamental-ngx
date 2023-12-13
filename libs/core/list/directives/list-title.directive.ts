@@ -5,7 +5,7 @@ import { Directive, ElementRef, HostBinding, Input, OnInit } from '@angular/core
     standalone: true
 })
 export class ListTitleDirective implements OnInit {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-list__title')
     fdListTitleClass = true;
 
@@ -14,10 +14,10 @@ export class ListTitleDirective implements OnInit {
     @HostBinding('class.fd-list__title--wrap')
     wrap = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public elRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         const nativeEl = this.elRef.nativeElement;
         if (nativeEl.tagName === 'A') {

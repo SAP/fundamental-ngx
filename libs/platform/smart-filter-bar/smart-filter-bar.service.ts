@@ -19,11 +19,11 @@ import { SmartFilterBarCustomFilterConfig } from './interfaces/smart-filter-bar-
 
 @Injectable()
 export class SmartFilterBarService {
-    /** @hidden */
+    /** @ignore */
     private _customFilterConditions: Map<Type<BaseDynamicFormGeneratorControl>, SmartFilterBarCustomFilterConfig> =
         new Map<Type<BaseDynamicFormGeneratorControl>, SmartFilterBarCustomFilterConfig>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _fgService: FormGeneratorService) {}
 
     /**
@@ -96,7 +96,7 @@ export class SmartFilterBarService {
         return filterDefinition?.filterStrategies || defaultConditions;
     }
 
-    /** @hidden */
+    /** @ignore */
     async getDisplayValue(condition: SmartFilterBarCondition, filterType: string): Promise<string> {
         const configuration = this.getCustomFilterConfiguration(filterType);
 
@@ -211,7 +211,7 @@ export class SmartFilterBarService {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Normalizes condition value.
      * @param value
      * @returns

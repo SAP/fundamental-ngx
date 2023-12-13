@@ -67,9 +67,9 @@ export abstract class TableColumn {
     /** Column role attribute. */
     abstract role: 'cell' | 'rowheader' | 'gridcell';
 
-    /** @hidden */
+    /** @ignore */
     abstract _freezed: boolean;
 
-    /** @hidden */
+    /** @ignore */
     abstract _endFreezed: boolean;
 }

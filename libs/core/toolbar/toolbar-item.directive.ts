@@ -9,7 +9,7 @@ import { OverflowPriorityEnum } from './toolbar.component';
     standalone: true
 })
 export class ToolbarItemDirective implements ToolbarItem {
-    /** @hidden */
+    /** @ignore */
     private lastWidth = 0;
     /** The priority of the item. */
     @Input()
@@ -18,27 +18,27 @@ export class ToolbarItemDirective implements ToolbarItem {
     @Input()
     fdOverflowGroup = 0;
 
-    /** @hidden */
+    /** @ignore */
     get group(): number {
         return this.fdOverflowGroup;
     }
 
-    /** @hidden */
+    /** @ignore */
     get priority(): OverflowPriority {
         return this.fdOverflowPriority;
     }
 
-    /** @hidden */
+    /** @ignore */
     get element(): HTMLElement {
         return this.elementRef.nativeElement;
     }
 
-    /** @hidden */
+    /** @ignore */
     get isSpacer(): boolean {
         return this.element.classList.contains('fd-toolbar__spacer');
     }
 
-    /** @hidden */
+    /** @ignore */
     get width(): number {
         if (!this.element.clientWidth) {
             return this.lastWidth;
@@ -47,6 +47,6 @@ export class ToolbarItemDirective implements ToolbarItem {
         return this.lastWidth;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(public elementRef: ElementRef) {}
 }

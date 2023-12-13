@@ -19,16 +19,16 @@ export const FDK_INDIRECT_FOCUSABLE_ITEM_ORDER = new InjectionToken<number | (()
     standalone: true
 })
 export class IndirectFocusableItemDirective {
-    /** @hidden */
+    /** @ignore */
     protected _focusableItem = inject<FocusableItem>(FDK_FOCUSABLE_ITEM_DIRECTIVE, { optional: true });
-    /** @hidden */
+    /** @ignore */
     protected _indirectFocusableList = inject(IndirectFocusableListDirective, { optional: true });
-    /** @hidden */
+    /** @ignore */
     protected _order: number | (() => number) | null = inject(FDK_INDIRECT_FOCUSABLE_ITEM_ORDER, { optional: true });
-    /** @hidden */
+    /** @ignore */
     protected _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         if (!this._focusableItem) {
             throw new Error(

@@ -16,7 +16,7 @@ import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../p
     imports: [FormsModule, ReactiveFormsModule, InputComponent]
 })
 export class DynamicFormGeneratorInputComponent extends BaseDynamicFormGeneratorControl<InputDynamicFormFieldItem> {
-    /** @hidden */
+    /** @ignore */
     constructor() {
         super();
     }

@@ -46,10 +46,10 @@ export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder
     @Input()
     label: string;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -59,12 +59,12 @@ export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder
         return ['fd-object-marker', this.clickable ? 'fd-object-marker--link' : '', this.class];
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }

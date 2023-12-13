@@ -226,7 +226,7 @@ export class DatePickerComponent<D>
         this._state = state || 'default';
     }
 
-    /** @hidden */
+    /** @ignore */
     get state(): FormStates {
         if (this._state == null && this.useValidation && this._isInvalidDateInput) {
             return 'error';
@@ -298,7 +298,7 @@ export class DatePickerComponent<D>
         return this._isOpen;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isOpen = false;
 
     /** Should date picker be inlined. */
@@ -365,95 +365,95 @@ export class DatePickerComponent<D>
     @ViewChildren(CalendarComponent)
     private readonly _calendars: QueryList<CalendarComponent<D>>;
 
-    /** @hidden */
+    /** @ignore */
     _calendarComponent: CalendarComponent<D>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('inputGroupComponent', {
         read: ElementRef
     })
     _inputGroupElement: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(InputGroupInputDirective, {
         read: ElementRef
     })
     _inputElement: ElementRef<HTMLInputElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('controlTemplate')
     private readonly _controlTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('calendarTemplate')
     private readonly _calendarTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('popoverMessageTemplate')
     private readonly _messagePopoverTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     _message: string | null = null;
 
-    /** @hidden */
+    /** @ignore */
     _processInputOnBlur = false;
 
-    /** @hidden */
+    /** @ignore */
     _messageTriggers: string[] = ['focusin', 'focusout'];
 
-    /** @hidden The value of the input */
+    /** @ignore The value of the input */
     _inputFieldDate: string | null = null;
 
-    /** @hidden Whether the date input is invalid */
+    /** @ignore Whether the date input is invalid */
     _isInvalidDateInput = false;
 
-    /** @hidden */
+    /** @ignore */
     _showPopoverContents = false;
 
-    /** @hidden */
+    /** @ignore */
     readonly _formValueStateMessageId = `fd-date-picker-form-message-${datePickerCounter++}`;
 
-    /** @hidden */
+    /** @ignore */
     private _calendarPendingDate: Nullable<D>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _state: FormStates = 'default';
 
-    /** @hidden */
+    /** @ignore */
     private readonly _injector = inject(Injector);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _dynamicComponentService = inject(DynamicComponentService);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _focusTrapService = inject(FocusTrapService, {
         optional: true
     });
 
-    /** @hidden */
+    /** @ignore */
     private _mobileComponentRef: Nullable<ComponentRef<DatePickerMobileComponent<D>>>;
 
-    /** @hidden */
+    /** @ignore */
     get _rangeDelimiter(): string {
         return this._dateTimeFormats.rangeDelimiter;
     }
 
     /**
      * Date input aria label key based on type
-     * @hidden
+     * @ignore
      */
     get _dateInputArialLabelKey(): FdLanguageKeyIdentifier {
         // return either input value or a key for "fdTranslate" pipe
         return this.type === 'range' ? 'coreDatePicker.dateRangeInputLabel' : 'coreDatePicker.dateInputLabel';
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _changeDetectionRef: ChangeDetectorRef,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
@@ -493,16 +493,16 @@ export class DatePickerComponent<D>
     @Input()
     disableRangeEndFunction: (value: D) => boolean = () => false;
 
-    /** @hidden */
+    /** @ignore */
     onChange: (value: any) => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     onTouched: any = () => {};
 
-    /** @hidden */
+    /** @ignore */
     dialogApprove(): void {}
 
-    /** @hidden */
+    /** @ignore */
     dialogDismiss(prevValue: D | DateRange<D>): void {
         if (this._isDateRange(prevValue)) {
             this.handleRangeDateChange(prevValue);
@@ -511,7 +511,7 @@ export class DatePickerComponent<D>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
             this.formatInputDate(this.selectedDate);
@@ -519,7 +519,7 @@ export class DatePickerComponent<D>
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if ('isOpen' in changes) {
             this._showPopoverContents = this.isOpen;
@@ -527,7 +527,7 @@ export class DatePickerComponent<D>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._InitialiseVariablesInMessageService();
 
@@ -550,7 +550,7 @@ export class DatePickerComponent<D>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._onDestroy$.next();
@@ -565,7 +565,7 @@ export class DatePickerComponent<D>
         this.activeViewChange.emit(activeView);
     }
 
-    /** @hidden */
+    /** @ignore */
     closeFromCalendar(): void {
         if (this.type === 'single' && this.closeOnDateChoose) {
             this.onTouched();
@@ -604,7 +604,7 @@ export class DatePickerComponent<D>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that is triggered by events from calendar component, when there is selected single date changed
      */
     handleSingleDateChange(date: D): void {
@@ -622,7 +622,7 @@ export class DatePickerComponent<D>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that is triggered date formatting in the date control
      */
     formatInputDate(date: Nullable<D>): void {
@@ -633,7 +633,7 @@ export class DatePickerComponent<D>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that is triggered by events from calendar component, when there is selected range date changed
      */
     handleRangeDateChange(dates: DateRange<D>): void {
@@ -658,7 +658,7 @@ export class DatePickerComponent<D>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that is triggered when Today-Selection-Button clicked, it changes selected date or date range to today's date
      */
     onTodayButtonClick(): void {
@@ -675,7 +675,7 @@ export class DatePickerComponent<D>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that is triggered when the text input is confirmed to ba changed, by clicking enter, or blur
      */
     handleInputChange(strDate: string, isTypeEvent: boolean): void {
@@ -688,7 +688,7 @@ export class DatePickerComponent<D>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Function that implements Validator Interface, adds validation support for forms
      */
     validate(): {
@@ -703,7 +703,7 @@ export class DatePickerComponent<D>
               };
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnChange(
         fn: (selected: any) => {
             void;
@@ -712,19 +712,19 @@ export class DatePickerComponent<D>
         this.onChange = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
         this._changeDetectionRef.detectChanges();
     }
 
     /**
-     * @hidden
+     * @ignore
      * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms
      */
     writeValue(selected: DateRange<D> | D | null): void {
@@ -772,7 +772,7 @@ export class DatePickerComponent<D>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method, which is responsible for transforming string to date, depending on type or
      * validation the results are different. It also changes to state of _isInvalidDateInput
      */
@@ -873,7 +873,7 @@ export class DatePickerComponent<D>
         return this.selectedDate || this.selectedRangeDate;
     }
 
-    /** @hidden */
+    /** @ignore */
     _changeMessageVisibility(): void {
         if (this.isOpen) {
             this._popoverFormMessage.hide();
@@ -882,7 +882,7 @@ export class DatePickerComponent<D>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _onOpenStateChanged(isOpen: boolean): void {
         this.isOpenChange.emit(isOpen);
         this._changeMessageVisibility();
@@ -894,7 +894,7 @@ export class DatePickerComponent<D>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _onBlur(event: FocusEvent): void {
         this.onTouched();
         this.handleInputChange((event.target as any).value, false);
@@ -928,37 +928,37 @@ export class DatePickerComponent<D>
         return this._dateTimeAdapter.isValid(date);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _refreshCurrentlyDisplayedCalendarDate(date: Nullable<D>): void {
         this._calendarPendingDate = date;
         this._calendarComponent?.setCurrentlyDisplayed(date);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _formatDate(date: Nullable<D>): string {
         return this._dateTimeAdapter.format(date, this._dateTimeFormats.display.dateInput);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _parseDate(date: unknown): D | null {
         return this._dateTimeAdapter.parse(date, this._dateTimeFormats.parse.dateInput);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _formatDateRange(dateRange: DateRange<D>): string {
         const startDate = this._formatDate(dateRange.start);
         const endDate = this._formatDate(dateRange.end);
         return startDate + this._rangeDelimiter + endDate;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _InitialiseVariablesInMessageService(): void {
         this._popoverFormMessage.init(this._inputGroupElement);
         this._popoverFormMessage.triggers = this._messageTriggers;
         this._popoverFormMessage.message = this._messagePopoverTemplate;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setOpenState(isOpen: boolean): void {
         this._showPopoverContents = isOpen;
         this._changeDetectionRef.detectChanges();
@@ -967,7 +967,7 @@ export class DatePickerComponent<D>
         this._changeDetectionRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setUpMobileMode(): void {
         const injector = Injector.create({
             providers: [
@@ -992,7 +992,7 @@ export class DatePickerComponent<D>
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isDateRange(value: any): value is DateRange<D> {
         return !!value && value.start && value.end;
     }

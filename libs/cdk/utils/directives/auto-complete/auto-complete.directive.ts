@@ -46,27 +46,27 @@ export class AutoCompleteDirective {
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onComplete: EventEmitter<AutoCompleteEvent> = new EventEmitter<AutoCompleteEvent>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _completeKeys: number[] = [ENTER];
 
-    /** @hidden */
+    /** @ignore */
     private readonly _fillKeys: number[] = [LEFT_ARROW, RIGHT_ARROW];
 
-    /** @hidden */
+    /** @ignore */
     private readonly _stopKeys: number[] = [BACKSPACE, DELETE, ESCAPE];
 
-    /** @hidden */
+    /** @ignore */
     private oldValue: string;
 
-    /** @hidden */
+    /** @ignore */
     private lastKeyUpEvent: KeyboardEvent;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _elementRef = inject(ElementRef);
 
     private readonly _zone = inject(NgZone);
 
-    /** @hidden */
+    /** @ignore */
     // eslint-disable-next-line @typescript-eslint/member-ordering
     constructor() {
         /**
@@ -90,7 +90,7 @@ export class AutoCompleteDirective {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     _handleKeyboardEvent(event: KeyboardEvent): void {
         if (this.enable) {
             if (KeyUtil.isKeyCode(event, this._stopKeys)) {
@@ -120,24 +120,24 @@ export class AutoCompleteDirective {
         this.lastKeyUpEvent = event;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _typeahead(displayedValue: string): void {
         this._elementRef.nativeElement.value = displayedValue;
         const selectionStartIndex = this.inputText.length;
         this._elementRef.nativeElement.setSelectionRange(selectionStartIndex, displayedValue.length);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isControlKey(event: KeyboardEvent): boolean {
         return KeyUtil.isKeyCode(event, CONTROL) || event.ctrlKey;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _defaultDisplay(value: any): string {
         return value;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _triggerTypeAhead(): boolean {
         if (
             this.lastKeyUpEvent &&
@@ -150,7 +150,7 @@ export class AutoCompleteDirective {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _sendCompleteEvent(forceClose: boolean): void {
         this.onComplete.emit({
             term: this._elementRef.nativeElement.value,
@@ -158,7 +158,7 @@ export class AutoCompleteDirective {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _moveIndicatorToLastCharacter(): void {
         const inputTextLength = this.inputText?.length ?? 0;
         this._elementRef.nativeElement.setSelectionRange(inputTextLength, inputTextLength);

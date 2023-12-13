@@ -259,88 +259,88 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onDataReceived = new EventEmitter<void>();
 
-    /** @hidden Fitlers for search table and defince conditions */
+    /** @ignore Fitlers for search table and defince conditions */
     @ContentChildren(VhdFilterComponent)
     filters: QueryList<VhdFilterComponent>;
 
-    /** @hidden Internal container for dialog */
+    /** @ignore Internal container for dialog */
     @ViewChild('container', { read: TemplateRef })
     dialogContainer: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     activeDialog?: DialogRef;
 
-    /** @hidden */
+    /** @ignore */
     _tabTypes = VhdTab;
 
-    /** @hidden */
+    /** @ignore */
     _hasAdvanced = true;
 
-    /** @hidden */
+    /** @ignore */
     _hasDefineFilters = true;
 
-    /** @hidden */
+    /** @ignore */
     _displayedFilters: VhdFilter[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _displayedData: T[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _mainSearch = '';
 
     /** handles rtl service
-     * @hidden */
+     * @ignore */
     _dir = 'ltr';
 
-    /** @hidden */
+    /** @ignore */
     private _selectTabTitle: string;
 
-    /** @hidden */
+    /** @ignore */
     private _defineTabTitle: string;
 
-    /** @hidden */
+    /** @ignore */
     private _destroyed = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _dataSource: FdpValueHelpDialogDataSource<any> | undefined;
 
-    /** @hidden for data source handling */
+    /** @ignore for data source handling */
     private _dsSubscription: Subscription | null;
 
-    /** @hidden Previous state */
+    /** @ignore Previous state */
     private _prevState: VhdValue<T> = {
         selected: [],
         conditions: []
     };
-    /** @hidden Current data for local manupulation */
+    /** @ignore Current data for local manupulation */
     private _currentValue: VhdValue<T> = {
         selected: [],
         conditions: []
     };
 
-    /** @hidden */
+    /** @ignore */
     selectedTab: VhdTab | null = null;
 
-    /** @hidden */
+    /** @ignore */
     shownFilterCount = Infinity;
 
-    /** @hidden */
+    /** @ignore */
     get loadingState(): boolean {
         return this.loading ?? this._internalLoadingState;
     }
 
-    /** @hidden
+    /** @ignore
      * To differentiate between first loading when skeletons be shown and subsequent loadings when busy indicator be shown
      */
     _firstLoadingDone = false;
 
-    /** @hidden */
+    /** @ignore */
     private _internalLoadingState = false;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onDestroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef,
         private readonly _changeDetectorRef: ChangeDetectorRef,
@@ -353,7 +353,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     get isMobileAdvancedSearchActive(): boolean {
         if (this.mobile) {
             return this.isOpenAdvanced;
@@ -361,57 +361,57 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         return false;
     }
 
-    /** @hidden */
+    /** @ignore */
     get hasSelectedTab(): boolean {
         return this.selectedTab != null && this.selectedTab in VhdTab;
     }
 
-    /** @hidden */
+    /** @ignore */
     get showSelectionTab(): boolean {
         return this.tabs !== 'define';
     }
 
-    /** @hidden */
+    /** @ignore */
     get showDefineTab(): boolean {
         return this.tabs !== 'select';
     }
 
-    /** @hidden */
+    /** @ignore */
     get isSelectionTab(): boolean {
         return this.selectedTab === VhdTab.selectFromList || this.selectedTab === VhdTab.advancedSearch;
     }
 
-    /** @hidden */
+    /** @ignore */
     get selectedItems(): T[] {
         return this._currentValue.selected || [];
     }
 
-    /** @hidden */
+    /** @ignore */
     get conditionItems(): BaseEntity[] {
         return this._currentValue.conditions || [];
     }
 
-    /** @hidden */
+    /** @ignore */
     get validConditions(): BaseEntity[] {
         return this._getValidCondition(this.conditionItems);
     }
 
-    /** @hidden */
+    /** @ignore */
     get hasSelectedAndConditions(): boolean {
         return Boolean(this.selectedItems.length + this.validConditions.length);
     }
 
-    /** @hidden */
+    /** @ignore */
     get isShowAllFilters(): boolean {
         return this.filters.length > this.maxShownInitialFilters && this.shownFilterCount > this.maxShownInitialFilters;
     }
 
-    /** @hidden */
+    /** @ignore */
     get isOpen(): boolean {
         return !!this.activeDialog;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (this.isOpen) {
             if ('dataSource' in changes) {
@@ -420,7 +420,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._resetState();
         this._onDestroy$.next();
@@ -564,21 +564,21 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _trackBySelectedFn: (_index: number, item: T) => number | string = (_index: number, item: T) =>
         item && item[this.uniqueKey];
 
-    /** @hidden */
+    /** @ignore */
     _trackByFilterFn(_index: number, item: VhdFilter): number | string {
         return item && item.key;
     }
 
-    /** @hidden */
+    /** @ignore */
     _trackByConditionFn(_index: number, item: BaseEntity): number | string | undefined {
         return item ? item.value + item.valueTo + item.strategy + item.key : undefined;
     }
 
-    /** @hidden */
+    /** @ignore */
     onSelect($event: T[]): void {
         this._currentValue.selected = $event;
         this._changeDetectorRef.markForCheck();
@@ -587,24 +587,24 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     onConditionChange($event: BaseEntity[]): void {
         this._currentValue.conditions = $event;
         this._changeDetectorRef.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     toggleShownFilters(): void {
         this.shownFilterCount =
             this.maxShownInitialFilters === this.shownFilterCount ? Infinity : this.maxShownInitialFilters;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initShownFilters(): void {
         this.shownFilterCount = this.maxShownInitialFilters || Infinity;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getValidCondition(items: BaseEntity[] = []): BaseEntity[] {
         return items.filter((item) => {
             if (
@@ -623,7 +623,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initializeDS(ds: FdpValueHelpDialogDataSource<any> | undefined = this.dataSource): void {
         this._resetSourceStream();
 
@@ -656,14 +656,14 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         }
     }
 
-    /** @hidden Save previous state */
+    /** @ignore Save previous state */
     private _savePreviousState(): void {
         const value = cloneDeep(this.value);
         this._currentValue = value;
         this._prevState = value;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initializeTab(): void {
         if (this.mobile) {
             this.isOpenAdvanced = false;
@@ -678,7 +678,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         this._initShownFilters();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenDialogEvents(): void {
         if (!this.activeDialog) {
             return;
@@ -703,7 +703,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _resetState(): void {
         this._destroyed.next();
         this._destroyed.complete();
@@ -711,7 +711,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         this.activeDialog = undefined;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updateFilters(): void {
         this._displayedFilters = this.filters.map((e) => ({
             ...e,
@@ -721,7 +721,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         this._hasAdvanced = this._displayedFilters.some((e: VhdFilter) => !!e.advanced);
     }
 
-    /** @hidden */
+    /** @ignore */
     private openDataStream(): Observable<T[]> {
         if (this._dataSource) {
             this._dataSource.match();
@@ -731,7 +731,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
     }
 
-    /** @hidden */
+    /** @ignore */
     private toDataStream(ds: FdpValueHelpDialogDataSource<T>): FdpValueHelpDialogDataSource<T> | undefined {
         if (isDataSource(ds)) {
             return ds as ValueHelpDialogDataSource<T>;
@@ -744,7 +744,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         return undefined;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _resetSourceStream(): void {
         if (isDataSource(this.dataSource)) {
             this.dataSource.close();
@@ -755,7 +755,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private isValidOptions(): boolean {
         if (this.showSelectionTab) {
             return (

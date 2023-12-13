@@ -13,10 +13,10 @@ import { TableDataSource } from './table-data-source';
  *
  */
 export class ObservableTableDataProvider<T> extends TableDataProvider<T> {
-    /** @hidden */
+    /** @ignore */
     protected items$: Observable<T[]>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(items$: Observable<T[]>, dateTimeAdapter?: DatetimeAdapter<any>) {
         super();
         this.items$ = items$;
@@ -49,7 +49,7 @@ export class ObservableTableDataProvider<T> extends TableDataProvider<T> {
 }
 
 export class ObservableTableDataSource<T> extends TableDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(data: Observable<T[]>, dateTimeAdapter?: DatetimeAdapter<any>) {
         super(new ObservableTableDataProvider(data, dateTimeAdapter));
     }

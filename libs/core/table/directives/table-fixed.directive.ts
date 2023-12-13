@@ -5,7 +5,7 @@ import { Directive, HostBinding } from '@angular/core';
     standalone: true
 })
 export class TableFixedDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-table--fixed')
     fdTableFixedClass = true;
 }

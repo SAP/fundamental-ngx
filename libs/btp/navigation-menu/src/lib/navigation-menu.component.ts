@@ -14,7 +14,7 @@ import { FocusableListDirective } from '@fundamental-ngx/cdk/utils';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationMenuComponent {
-    /** @hidden */
+    /** @ignore */
     constructor() {
         inject(FocusableListDirective).wrap = true;
     }

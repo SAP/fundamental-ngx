@@ -35,28 +35,28 @@ export class FocusKeyManagerListDirective<TItem extends FocusableOption = Record
     @Input()
     skipPredicate: (item: TItem) => boolean;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FOCUSABLE_ITEM)
     readonly _items: QueryList<TItem>;
 
-    /** @hidden */
+    /** @ignore */
     get focusKeyManager(): FocusKeyManager<TItem> {
         return this._focusKeyManager;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _focusKeyManager: FocusKeyManager<TItem>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onDestroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Optional() private readonly _rtlService: RtlService,
         private readonly _cdr: ChangeDetectorRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (!this._focusKeyManager) {
             return;
@@ -71,7 +71,7 @@ export class FocusKeyManagerListDirective<TItem extends FocusableOption = Record
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._focusKeyManager = new FocusKeyManager<TItem>(this._items).skipPredicate(this.skipPredicate);
 
@@ -87,7 +87,7 @@ export class FocusKeyManagerListDirective<TItem extends FocusableOption = Record
             .subscribe(() => this._applyOrientation());
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -103,7 +103,7 @@ export class FocusKeyManagerListDirective<TItem extends FocusableOption = Record
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _applyOrientation(): void {
         switch (this.orientation) {
             case 'horizontal':

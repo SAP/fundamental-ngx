@@ -19,7 +19,7 @@ export type FillingType = 'radial' | 'angled' | 'linearup' | 'lineardown' | 'lin
 export type FillingDirection = 'clockwise' | 'counterclockwise';
 
 export class Point {
-    /** @hidden */
+    /** @ignore */
     constructor(
         public x: number,
         public y: number
@@ -137,7 +137,7 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
     @Input()
     fillDirection: FillingDirection = 'clockwise';
 
-    /** @hidden */
+    /** @ignore */
     set _fillDirection(direction: FillingDirection) {
         this.fillDirection = direction;
     }
@@ -155,48 +155,48 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
     @Input()
     angle: number;
 
-    /** @hidden */
+    /** @ignore */
     fillCalculator: number;
-    /** @hidden */
+    /** @ignore */
     binaryString: string;
-    /** @hidden */
+    /** @ignore */
     x1: string;
-    /** @hidden */
+    /** @ignore */
     y1: string;
-    /** @hidden */
+    /** @ignore */
     x2: string;
-    /** @hidden */
+    /** @ignore */
     y2: string;
-    /** @hidden */
+    /** @ignore */
     pointsArray: string[] = [];
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef<HTMLElement>,
         private _cd: ChangeDetectorRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     class: string;
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._angleCalculation();
         this._cd.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this._calculateFilling();
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     public ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -215,7 +215,7 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateFilling(): void {
         if (this.fillPercentage < 0 || this.fillPercentage === undefined) {
             this.fillCalculator = 0;
@@ -224,7 +224,7 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _angleCalculation(): void {
         let sPointsAttributeValue: Array<Point>;
         let polygonPoints: string;
@@ -265,7 +265,7 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _convertAngleToBinary(angle: number): string {
         if (angle > 0 && angle <= 45) {
             return '1,0,0,1';
@@ -290,7 +290,7 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _assignBinaryValue(binaryString: string): void {
         const binaryValue = binaryString.split(',');
         this.x1 = binaryValue[0];
@@ -299,7 +299,7 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
         this.y2 = binaryValue[3];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getPolygonPointsForCircularFilling(value: number, boundingBoxSvg: DOMRect): Array<Point> {
         const angle = 3.6 * value;
         const points: Point[] = [];

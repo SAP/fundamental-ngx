@@ -72,7 +72,7 @@ export class NumberStepInputComponent extends StepInputComponent {
     /** Set description */
     @Input() description: string;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -101,14 +101,14 @@ export class NumberStepInputComponent extends StepInputComponent {
         );
     }
 
-    /** @hidden
+    /** @ignore
      * Create change event instance
      */
     createChangeEvent(value: number): StepInputChangeEvent {
         return new StepInputChangeEvent(this, value);
     }
 
-    /** @hidden
+    /** @ignore
      * Format value taking into account LOCALE_ID
      */
     formatValue(value: number | null): string {
@@ -117,7 +117,7 @@ export class NumberStepInputComponent extends StepInputComponent {
         return formatNumber(value || 0, this.localeId, digitsInfo);
     }
 
-    /** @hidden
+    /** @ignore
      * In order to avoid issues trying to parse formatted number
      * (potentially specific for each local)
      * we have to simplify number format once it's in focus mode.
@@ -132,7 +132,7 @@ export class NumberStepInputComponent extends StepInputComponent {
         return value.toString(10);
     }
 
-    /** @hidden
+    /** @ignore
      * Used to parse entered value
      */
     parseValueInFocusMode(value: string | null): number | null {

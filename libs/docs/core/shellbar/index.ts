@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'shellbar';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/shellbar';
 export const API_FILE_KEY = 'shellbar';
 export const I18N_KEY = 'coreShellbar';

@@ -5,7 +5,7 @@ import { Directive, HostBinding } from '@angular/core';
     standalone: true
 })
 export class PopoverBodyFooterDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-popover__body-footer')
     fdPopoverBodyFooterClass = true;
 }

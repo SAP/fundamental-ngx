@@ -61,22 +61,22 @@ export class FeedListComponent implements OnInit, AfterContentChecked, OnDestroy
     @ContentChildren(FeedListItemComponent)
     feedItems: QueryList<FeedListItemComponent>;
 
-    /** @hidden */
+    /** @ignore */
     private $feedItemChanges: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentChecked(): void {
         this._refreshItems();
         this._listenOnFeedItems();
     }
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if ('mobile' in changes || 'borderLess' in changes) {
             this.buildComponentCssClass();
@@ -84,14 +84,14 @@ export class FeedListComponent implements OnInit, AfterContentChecked, OnDestroy
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         if (this.$feedItemChanges) {
             this.$feedItemChanges.unsubscribe();
         }
     }
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -107,12 +107,12 @@ export class FeedListComponent implements OnInit, AfterContentChecked, OnDestroy
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnFeedItems(): void {
         this.$feedItemChanges = this.feedItems.changes.subscribe(() => this._refreshItems());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _refreshItems(): void {
         (this.feedItems || []).forEach((feedItem) => {
             feedItem.mobile = this.mobile;

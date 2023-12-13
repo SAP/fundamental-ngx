@@ -25,7 +25,7 @@ export class AvatarGroupLegacyFocusableAvatarDirective implements FocusableOptio
     @HostBinding('attr.tabindex')
     tabindex = 0;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef<HTMLElement>,
         @Optional()
@@ -41,7 +41,7 @@ export class AvatarGroupLegacyFocusableAvatarDirective implements FocusableOptio
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     focus(): void {
         this.elementRef.nativeElement.focus();
     }

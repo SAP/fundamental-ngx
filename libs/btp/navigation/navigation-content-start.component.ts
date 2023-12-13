@@ -56,61 +56,61 @@ const FD_NAVIGATION_OVERFLOW_ITEM_CLASS = 'fd-navigation__container--hidden-over
     hostDirectives: [ScrollbarDirective]
 })
 export class NavigationContentStartComponent extends NavigationContentComponent implements AfterViewInit {
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FdbNavigationListItemComponent, { descendants: true })
     private readonly _navigationItems: QueryList<FdbNavigationListItemComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FdbNavigationListComponent)
     private readonly _navigationLists: QueryList<FdbNavigationListComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('showMoreOverflowMenu', { static: false, read: ElementRef })
     private readonly _showMoreOverflow: ElementRef<HTMLElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('showMoreOverflowItem', { static: false, read: FdbNavigationListItemComponent })
     private set _showMoreOverflowItemCmp(value: Nullable<FdbNavigationListItemComponent>) {
         this.showMoreOverflowItem = value;
         this.refresh$.next();
     }
 
-    /** @hidden */
+    /** @ignore */
     linkTemplate = inject(FdbNavigationComponent).homeLinkTemplate;
-    /** @hidden */
+    /** @ignore */
     showHome = true;
 
-    /** @hidden */
+    /** @ignore */
     showOverflowButton = signal(false);
 
-    /** @hidden */
+    /** @ignore */
     _hiddenItems: FdbNavigationListItemComponent[] = [];
 
-    /** @hidden */
+    /** @ignore */
     override refresh$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _calculationInProgress = false;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _canTrackItems = signal(false);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _navigationComponent = inject(FdbNavigationComponent);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _elementRef = inject(ElementRef<HTMLElement>);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _cdr = inject(ChangeDetectorRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _scrollbar = inject(ScrollbarDirective);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         super();
 
@@ -133,7 +133,7 @@ export class NavigationContentStartComponent extends NavigationContentComponent 
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._canTrackItems.set(true);
         this._navigationItems.changes
@@ -162,7 +162,7 @@ export class NavigationContentStartComponent extends NavigationContentComponent 
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     getNavigatableItems(): FdbNavigationListItemComponent[] {
         const items = this._navigationItems.toArray();
         if (this.showMoreOverflowItem) {
@@ -171,12 +171,12 @@ export class NavigationContentStartComponent extends NavigationContentComponent 
         return items;
     }
 
-    /** @hidden */
+    /** @ignore */
     showMoreOpened(): boolean {
         return !!this.showMoreOverflowItem?.isOpen;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateVisibleItems(): void {
         if (this._calculationInProgress) {
             return;
@@ -257,7 +257,7 @@ export class NavigationContentStartComponent extends NavigationContentComponent 
         }, 5);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleOverflowItems(items: FdbNavigationListItemComponent[]): void {
         this.showOverflowButton.set(items.length > 0);
         this._hiddenItems = items;

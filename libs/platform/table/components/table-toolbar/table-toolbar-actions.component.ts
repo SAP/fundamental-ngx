@@ -21,7 +21,7 @@ import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild, ViewEncapsu
     standalone: true
 })
 export class TableToolbarActionsComponent {
-    /** @hidden */
+    /** @ignore */
     @ViewChild(TemplateRef)
     contentTemplateRef: TemplateRef<any>;
 }

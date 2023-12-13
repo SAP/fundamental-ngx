@@ -30,11 +30,11 @@ export class ListGroupHeaderComponent extends BaseListItem implements OnInit {
     @Input()
     groupHeaderTitle?: string;
 
-    /** @hidden */
+    /** @ignore */
     _type = LIST_ITEM_TYPE.HEADER;
 
     /**
-     * @hidden
+     * @ignore
      * Initialization of the list header component
      */
     ngOnInit(): void {

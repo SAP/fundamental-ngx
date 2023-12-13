@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'info-label';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/info-label';
 export const API_FILE_KEY = 'infoLabel';

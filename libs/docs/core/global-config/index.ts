@@ -18,4 +18,3 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'global-config';
-export const API_FILE_KEY = 'globalConfig';

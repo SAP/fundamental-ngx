@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     standalone: true
 })
 export class MessagePageActionsComponent {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-message-page__actions')
     fdMessagePageActionsClass = true;
 }

@@ -348,35 +348,35 @@ export class ComboboxComponent<T = any>
     @Output()
     inputTextChange: EventEmitter<string> = new EventEmitter<string>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(ListComponent)
     listComponent: ListComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('searchInputElement')
     searchInputElement: ElementRef<HTMLInputElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(PopoverComponent)
     popoverComponent: PopoverComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(InputGroupComponent)
     inputGroup: InputGroupComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FD_LIST_MESSAGE_DIRECTIVE)
     listMessages: QueryList<ListMessageDirective>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('controlTemplate')
     controlTemplate: TemplateRef<HTMLElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('listTemplate')
     listTemplate: TemplateRef<HTMLElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(ComboboxItemDirective)
     private readonly _comboboxItemRenderer: ComboboxItemDirective;
 
@@ -399,7 +399,7 @@ export class ComboboxComponent<T = any>
     /** Keys, that will close popover's body, when dispatched on search input */
     readonly closingKeys: number[] = [ESCAPE];
 
-    /** @hidden */
+    /** @ignore */
     readonly _repositionScrollStrategy: RepositionScrollStrategy;
 
     /** Whether the combobox is opened. */
@@ -407,31 +407,31 @@ export class ComboboxComponent<T = any>
 
     /**
      * Whether or not the input coup is in the shellbar. Only for internal use by combobox component
-     * @hidden
+     * @ignore
      */
     inShellbar = false;
 
-    /** @hidden */
+    /** @ignore */
     displayedValues: any[] = [];
 
-    /** @hidden */
+    /** @ignore */
     inputTextValue = '';
 
-    /** @hidden */
+    /** @ignore */
     clearInputBtnFocused = false;
 
-    /** @hidden */
+    /** @ignore */
     get _customRenderer(): Nullable<TemplateRef<ComboboxItemDirectiveContext<T>>> {
         return this._comboboxItemRenderer?.templateRef || this.itemTemplate;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _value: any;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _overlay: Overlay,
         private readonly _cdRef: ChangeDetectorRef,
@@ -443,13 +443,13 @@ export class ComboboxComponent<T = any>
         this._repositionScrollStrategy = this._overlay.scrollStrategies.reposition({ autoClose: true });
     }
 
-    /** @hidden */
+    /** @ignore */
     onChange: (value: any) => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     onTouched = (): void => {};
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         if (this.readOnly) {
             this.showDropdownButton = false;
@@ -457,19 +457,19 @@ export class ComboboxComponent<T = any>
         this._refreshDisplayedValues();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (this.dropdownValues && (changes.dropdownValues || changes.searchTerm)) {
             this._refreshDisplayedValues();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._addShellbarClass();
 
@@ -478,7 +478,7 @@ export class ComboboxComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     onInputKeydownHandler(event: KeyboardEvent): void {
         if (this.readOnly) {
             return;
@@ -523,7 +523,7 @@ export class ComboboxComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     onItemKeyDownHandler(event: KeyboardEvent, value: any): void {
         if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
             event.preventDefault();
@@ -531,7 +531,7 @@ export class ComboboxComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     onMenuClickHandler(value: any): void {
         if (value || value === 0) {
             const index: number = this.dropdownValues.findIndex((_value) => _value === value);
@@ -576,7 +576,7 @@ export class ComboboxComponent<T = any>
         return this.isSearch ? 'search' : this.glyph;
     }
 
-    /** @hidden */
+    /** @ignore */
     _handleClearSearchTerm(): void {
         this.inputTextValue = '';
         this.inputTextChange.emit('');
@@ -588,19 +588,19 @@ export class ComboboxComponent<T = any>
         this._cdRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     writeValue(value: any): void {
         this.inputTextValue = this.displayFn(value);
         this.setValue(value);
         this._cdRef.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnChange(fn: (value: any) => void): void {
         this.onChange = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
@@ -612,13 +612,13 @@ export class ComboboxComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     handleSearchTermChange(): void {
         this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
         this.popoverComponent?.refreshPosition();
     }
 
-    /** @hidden */
+    /** @ignore */
     onPrimaryButtonClick(): void {
         // Prevent primary button click behaviour on mobiles
         if (this.mobile) {
@@ -637,7 +637,7 @@ export class ComboboxComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     isOpenChangeHandle(isOpen: boolean): void {
         /** Reset displayed values on every mobile open */
         if (this.mobile && !this.open) {
@@ -656,7 +656,7 @@ export class ComboboxComponent<T = any>
         this._cdRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
         this._cdRef.detectChanges();
@@ -673,7 +673,7 @@ export class ComboboxComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     handleBlur(): void {
         if (!this.open) {
             this.onTouched();
@@ -684,12 +684,12 @@ export class ComboboxComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     clearInputBtnFocus(): void {
         this.clearInputBtnFocused = true;
     }
 
-    /** @hidden */
+    /** @ignore */
     clearInputBtnBlur(): void {
         this.clearInputBtnFocused = false;
     }
@@ -699,7 +699,7 @@ export class ComboboxComponent<T = any>
         return this._value;
     }
 
-    /** @hidden */
+    /** @ignore */
     _close(): void {
         this.inputText = this._value ? this.inputText : '';
         if (this.tabOutStrategy === 'closeAndSelect') {
@@ -727,7 +727,7 @@ export class ComboboxComponent<T = any>
         this.displayedValues = this.dropdownValues || [];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addShellbarClass(): void {
         if (this.inShellbar) {
             this.searchInputElement.nativeElement.classList.add('fd-shellbar__input-group-input');
@@ -737,12 +737,12 @@ export class ComboboxComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _defaultDisplay(str: any): string {
         return str;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _defaultFilter(contentArray: any[], searchTerm: any): any[] {
         this.filterHighlight = true;
         if (typeof searchTerm === 'string') {
@@ -759,7 +759,7 @@ export class ComboboxComponent<T = any>
         return contentArray || [];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleClickActions(term: any): void {
         if (this.closeOnSelect) {
             this.isOpenChangeHandle(false);
@@ -777,12 +777,12 @@ export class ComboboxComponent<T = any>
         this.handleSearchTermChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getOptionObjectByDisplayedValue(displayValue: string): any {
         return this.dropdownValues.filter((value) => this.displayFn(value) === displayValue);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _refreshDisplayedValues(): void {
         if (this.inputText) {
             this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
@@ -791,7 +791,7 @@ export class ComboboxComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _propagateChange(): void {
         if (this.communicateByObject) {
             const values = this._getOptionObjectByDisplayedValue(this.inputText);
@@ -805,7 +805,7 @@ export class ComboboxComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private setValue(value: any): void {
         if (this.communicateByObject) {
             this._value = value;
@@ -814,7 +814,7 @@ export class ComboboxComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _setUpMobileMode(): Promise<void> {
         const injector = Injector.create({
             providers: [{ provide: COMBOBOX_COMPONENT, useValue: this }],
@@ -830,7 +830,7 @@ export class ComboboxComponent<T = any>
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     isSelected(term: any): boolean {
         const termValue = this.communicateByObject ? term : this.displayFn(term);
         return this.getValue() === termValue;

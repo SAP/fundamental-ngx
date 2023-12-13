@@ -21,4 +21,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'toolbar';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/toolbar';
 export const API_FILE_KEY = 'toolbar';

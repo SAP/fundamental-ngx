@@ -9,7 +9,7 @@ import { HasElementRef } from '../../interfaces/has-element-ref.interface';
     providedIn: 'root'
 })
 export class AttributeObserver implements OnDestroy {
-    /** @Hidden */
+    /** @ignore */
     private readonly _observedElements = new Map<
         Element,
         {
@@ -19,15 +19,15 @@ export class AttributeObserver implements OnDestroy {
         }
     >();
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _mutationObserverFactory: MutationObserverFactory) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._observedElements.forEach((_, element) => this._cleanupObserver(element));
     }
 
-    /** @Hidden */
+    /** @ignore */
     observe(elementOrRef: Element | ElementRef<Element> | HasElementRef<Element>): Observable<MutationRecord[]> {
         const element = getNativeElement(elementOrRef);
         return new Observable((observer: Observer<MutationRecord[]>) => {
@@ -41,12 +41,12 @@ export class AttributeObserver implements OnDestroy {
         });
     }
 
-    /** @Hidden */
+    /** @ignore */
     unobserve(element: HasElementRef<Element> | Element | ElementRef<Element>): void {
         this._unobserveElement(getNativeElement(element));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _observeElement(element: Element): Subject<MutationRecord[]> {
         if (!this._observedElements.has(element)) {
             const stream = new Subject<MutationRecord[]>();
@@ -63,7 +63,7 @@ export class AttributeObserver implements OnDestroy {
         return this._observedElements.get(element)!.stream;
     }
 
-    /** @Hidden */
+    /** @ignore */
     private _unobserveElement(element: Element): void {
         if (this._observedElements.has(element)) {
             this._observedElements.get(element)!.count--;
@@ -73,7 +73,7 @@ export class AttributeObserver implements OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _cleanupObserver(element: Element): void {
         if (this._observedElements.has(element)) {
             const { observer, stream } = this._observedElements.get(element)!;

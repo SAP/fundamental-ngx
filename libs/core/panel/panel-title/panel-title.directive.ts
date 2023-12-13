@@ -15,7 +15,7 @@ let panelTitleUniqueId = 0;
     standalone: true
 })
 export class PanelTitleDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-panel__title')
     readonly fdPanelTitleClass: boolean = true;
 

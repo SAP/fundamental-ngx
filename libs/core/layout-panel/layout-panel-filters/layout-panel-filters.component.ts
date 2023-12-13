@@ -22,7 +22,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     standalone: true
 })
 export class LayoutPanelFiltersComponent {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-layout-panel__filters')
     fdLayoutPanelFiltersClass = true;
 }

@@ -13,13 +13,13 @@ export class AvatarGroupLegacyItemDirective implements FocusableOption {
     /** Item disable state */
     disabled = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _elementRef: ElementRef<HTMLElement>,
         @Optional() @Inject(AVATAR_GROUP_LEGACY_COMPONENT) private readonly _component: AvatarGroupLegacyInterface
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     get _element(): HTMLElement {
         return this._elementRef.nativeElement;
     }
@@ -32,7 +32,7 @@ export class AvatarGroupLegacyItemDirective implements FocusableOption {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     focus(): void {
         this._element.focus();
     }

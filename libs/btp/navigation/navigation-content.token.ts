@@ -8,6 +8,6 @@ export abstract class NavigationContentComponent {
     abstract getNavigatableItems(): FdbNavigationListItemComponent[];
     abstract showMoreOpened(): boolean;
 
-    /** @hidden */
+    /** @ignore */
     showMoreOverflowItem: Nullable<FdbNavigationListItemComponent>;
 }

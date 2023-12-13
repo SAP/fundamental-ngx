@@ -53,11 +53,11 @@ export class ActionSheetBodyComponent {
     @Input()
     ariaLabelledby: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('actionSheetElement')
     actionSheetElementRef: ElementRef<HTMLUListElement>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>,
         readonly _contentDensityObserver: ContentDensityObserver
@@ -69,7 +69,7 @@ export class ActionSheetBodyComponent {
         event.stopPropagation();
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
         if (this._keyboardSupportService.keyManager) {

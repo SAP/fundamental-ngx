@@ -13,10 +13,10 @@ import { TableDataSource } from './table-data-source';
  *
  */
 export class ArrayTableDataProvider<T> extends TableDataProvider<T> {
-    /** @hidden */
+    /** @ignore */
     protected items$ = new BehaviorSubject<T[]>([]);
 
-    /** @hidden */
+    /** @ignore */
     constructor(items: T[], dateTimeAdapter?: DatetimeAdapter<any>) {
         super();
         this.items = items;
@@ -50,7 +50,7 @@ export class ArrayTableDataProvider<T> extends TableDataProvider<T> {
 }
 
 export class ArrayTableDataSource<T> extends TableDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(data: T[], dateTimeAdapter?: DatetimeAdapter<any>) {
         super(new ArrayTableDataProvider(data, dateTimeAdapter));
     }

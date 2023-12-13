@@ -123,26 +123,26 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     @Input()
     role: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(LIST_ITEM_COMPONENT)
     items: QueryList<ListItemInterface>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(ListNavigationItemComponent)
     _navItems: QueryList<ListNavigationItemComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(ListFocusItem)
     private _focusItems: QueryList<ListFocusItem>;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.role')
     private get _ariaRole(): string {
         return this.role || this._defaultRole;
     }
 
     /**
-     * @hidden
+     * @ignore
      * Default role for lists
      */
     private _defaultRole = 'list';
@@ -153,7 +153,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _keyboardSupportService: KeyboardSupportService<ListFocusItem>,
         _contentDensityObserver: ContentDensityObserver
@@ -161,24 +161,24 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
         _contentDensityObserver.subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._listenOnListFocusEscape();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._keyboardSupportService.setKeyboardService(this._focusItems, false, false);
         this._listenOnQueryChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
         if (this.keyboardSupport) {
@@ -202,7 +202,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
         return this._keyboardSupportService.keyManager.activeItem;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnQueryChange(): void {
         this._focusItems.changes.pipe(startWith(0), takeUntil(this._onDestroy$)).subscribe(() => {
             this._recheckLinks();
@@ -214,7 +214,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnItemsClick(): void {
         /** Finish all the streams, from before */
         this._onRefresh$.next();
@@ -237,7 +237,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
             .subscribe(({ index, updateOnly }) => this.setItemActive(index, updateOnly));
     }
 
-    /** @hidden */
+    /** @ignore */
     private updateItemsProperties(): void {
         let closestListHeader: ListGroupHeaderDirective | null = null;
         this._focusItems.forEach((item, index) => {
@@ -250,7 +250,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _recheckLinks(): void {
         const items = this.items.filter((item) => item.link);
         this.hasNavigation = items.length > 0;
@@ -261,7 +261,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnListFocusEscape(): void {
         this._keyboardSupportService.focusEscapeList
             .pipe(takeUntil(this._onDestroy$))

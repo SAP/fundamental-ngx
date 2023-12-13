@@ -23,10 +23,10 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     /** Whether to clamp the date between 1 and 9999 to avoid IE and Edge errors. */
     private readonly _fixYearsRangeIssue: boolean;
 
-    /** @hidden */
+    /** @ignore */
     fromNow: undefined;
 
-    /** @hidden */
+    /** @ignore */
     constructor(@Optional() @Inject(LOCALE_ID) localeId: string, platform: Platform) {
         super();
 
@@ -370,7 +370,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Strip out unicode LTR and RTL characters. Edge and IE insert these into formatted dates while
      * other browsers do not. We remove them to make output consistent and because they interfere with
      * date parsing.
@@ -381,7 +381,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return str.replace(/[\u200e\u200f]/g, '').replace(/\u202f/g, ' ');
     }
 
-    /** @hidden */
+    /** @ignore */
     private _format(formatter: Intl.DateTimeFormat, date: Date): string {
         if (Number.isNaN(date.valueOf())) {
             return INVALID_DATE_ERROR;
@@ -399,7 +399,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Create native Date instance from FdDate
      * @param date FdDate instance
      * @returns date Native date instance
@@ -419,7 +419,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Create native Date instance in UTC
      * @param year The year
      * @param month The month as a number between 0 and 11
@@ -444,7 +444,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return utcDate;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _createFdDateFromDateInstance(date: Date): FdDate {
         return new FdDate(
             date.getFullYear(),
@@ -457,7 +457,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     /**
-     * @hidden
+     * @ignore
      *
      * Since FdDatetimeAdapter can parse only "en-US" locale
      * there is no reason to create comprehensive time parse

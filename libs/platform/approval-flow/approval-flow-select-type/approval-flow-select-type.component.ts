@@ -59,19 +59,19 @@ export interface SelectTypeDialogFormData {
     ]
 })
 export class ApprovalFlowSelectTypeComponent {
-    /** @hidden */
+    /** @ignore */
     _nodeType = APPROVAL_FLOW_NODE_TYPES.SERIAL;
 
-    /** @hidden */
+    /** @ignore */
     _nodeTypes = APPROVAL_FLOW_NODE_TYPES;
 
-    /** @hidden */
+    /** @ignore */
     _toNextSerial = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly _dialogRef: DialogRef) {}
 
-    /** @hidden */
+    /** @ignore */
     _submit(): void {
         this._dialogRef.close({ type: this._nodeType, toNextSerial: this._toNextSerial } as SelectTypeDialogFormData);
     }

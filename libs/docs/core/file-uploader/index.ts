@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'file-uploader';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/file-uploader';
 export const API_FILE_KEY = 'fileUploader';

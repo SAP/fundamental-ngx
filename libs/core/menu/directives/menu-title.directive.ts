@@ -9,7 +9,7 @@ import { Directive, ElementRef, HostBinding } from '@angular/core';
     standalone: true
 })
 export class MenuTitleDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-menu__title')
     fdMenuTitleClass = true;
 
@@ -19,6 +19,6 @@ export class MenuTitleDirective {
         return this._elementRef.nativeElement.textContent;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _elementRef: ElementRef) {}
 }

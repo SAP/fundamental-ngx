@@ -40,7 +40,7 @@ export abstract class BaseSettingsGeneratorLayout implements OnInit {
      */
     protected _settingsGenerator = inject(FDP_SETTINGS_GENERATOR);
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._settingsGeneratorService.settings.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((settings) => {
             this.settings = settings;

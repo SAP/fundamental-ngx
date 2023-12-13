@@ -101,15 +101,15 @@ export class OptionComponent implements AfterViewInit, AfterViewChecked, OnDestr
     @Output()
     readonly selectionChange = new EventEmitter<FdOptionSelectionChange>();
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.is-selected')
     selected = false;
 
-    /** @Hidden */
+    /** @ignore */
     @ContentChildren(ListTitleDirective)
     _listTitleDirectives: QueryList<ListTitleDirective> | undefined;
 
-    /** @hidden */
+    /** @ignore */
     _renderer: 'plain' | 'title' = 'title';
 
     /**
@@ -124,22 +124,22 @@ export class OptionComponent implements AfterViewInit, AfterViewChecked, OnDestr
         return this._active;
     }
 
-    /** @hidden */
+    /** @ignore */
     readonly _stateChanges = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _mostRecentViewValue = '';
 
-    /** @hidden */
+    /** @ignore */
     private _active = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef
     ) {}
 
-    /** @Hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._listTitleDirectives?.changes.pipe(startWith(null)).subscribe(() => {
             const directivesLength = this._listTitleDirectives?.length ?? 0;
@@ -149,7 +149,7 @@ export class OptionComponent implements AfterViewInit, AfterViewChecked, OnDestr
     }
 
     /**
-     * @hidden
+     * @ignore
      * Since select components could be using the option's label to display the selected values
      * and they don't have a way of knowing if the option's label has changed
      * we have to check for changes in the DOM ourselves and dispatch an event
@@ -165,12 +165,12 @@ export class OptionComponent implements AfterViewInit, AfterViewChecked, OnDestr
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._stateChanges.complete();
     }
 
-    /** @hidden
+    /** @ignore
      * This method sets display styles on the option to make it appear
      * active. This is used by the ActiveDescendantKeyManager so key
      * events will display the proper options as active on arrow key events.
@@ -182,7 +182,7 @@ export class OptionComponent implements AfterViewInit, AfterViewChecked, OnDestr
         }
     }
 
-    /** @hidden
+    /** @ignore
      * This method removes display styles on the option that made it appear
      * active. This is used by the ActiveDescendantKeyManager so key
      * events will display the proper options as active on arrow key events.
@@ -194,7 +194,7 @@ export class OptionComponent implements AfterViewInit, AfterViewChecked, OnDestr
         }
     }
 
-    /** @hidden
+    /** @ignore
      * Focuses the element. */
     focus(_origin?: FocusOrigin, options?: FocusOptions): void {
         const element = this._elementRef.nativeElement;
@@ -204,21 +204,21 @@ export class OptionComponent implements AfterViewInit, AfterViewChecked, OnDestr
         }
     }
 
-    /** @hidden
+    /** @ignore
      * option value
      */
     getLabel(): string {
         return this.viewValue;
     }
 
-    /** @hidden
+    /** @ignore
      * Returns HTMLElement representation of the component. */
     _getHtmlElement(): HTMLElement {
         return this._elementRef.nativeElement as HTMLElement;
     }
 
     /** Selects the option.
-     * * @hidden
+     * * @ignore
      */
     _select(): void {
         if (!this.selected) {
@@ -228,7 +228,7 @@ export class OptionComponent implements AfterViewInit, AfterViewChecked, OnDestr
         }
     }
 
-    /** @hidden
+    /** @ignore
      * Deselects the option.
      */
     _deselect(): void {
@@ -242,7 +242,7 @@ export class OptionComponent implements AfterViewInit, AfterViewChecked, OnDestr
     /**
      * Ensures the option is selected when activated from the keyboard.
      *
-     * @hidden
+     * @ignore
      */
     _handleKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE]) && !hasModifierKey(event)) {
@@ -251,7 +251,7 @@ export class OptionComponent implements AfterViewInit, AfterViewChecked, OnDestr
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _selectViaInteraction(): void {
         if (!this.disabled) {
             this.selected = true;

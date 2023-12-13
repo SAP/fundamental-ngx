@@ -72,33 +72,33 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
     @Output()
     primaryButtonClick: EventEmitter<any> = new EventEmitter();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('primaryBtn', { read: ElementRef })
     primaryBtn: ElementRef;
 
     /** used as id for Menu Button
-     * @hidden
+     * @ignore
      */
     public secondaryId: string;
 
     /** handles rtl service
-     * @hidden */
+     * @ignore */
     public dir: string;
 
-    /** @hidden */
+    /** @ignore */
     primaryButtonWidth: string;
     /** Defined max width of Split menu button */
     splitButtonMaxWidth = '12rem';
     /** handles rtl service
-     * @hidden */
+     * @ignore */
     private _rtlChangeSubscription = Subscription.EMPTY;
 
-    /** @hidden */
+    /** @ignore */
     get typeClass(): string {
         return this.type ? `fd-button-split--${this.type}` : '';
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         protected _cd: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService
@@ -111,7 +111,7 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
         return this.disabled ? -1 : 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.secondaryId = 'secondary-' + this.id;
         // if no title provided.
@@ -124,14 +124,14 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (this.fixedWidth) {
             this._setPrimaryButtonWidth();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._rtlChangeSubscription.unsubscribe();
     }
@@ -144,7 +144,7 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
         this.primaryButtonClick.emit();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setPrimaryButtonWidth(): void {
         if (this.primaryBtn && this.primaryBtn.nativeElement) {
             this.primaryButtonWidth = this.primaryBtn.nativeElement.getBoundingClientRect().width + 'px';

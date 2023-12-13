@@ -74,49 +74,49 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     @Input()
     ariaLabelSelected = 'Selected';
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-nested-list')
     fdNestedListItemClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-hidden')
     hidden = false;
 
     /**
-     * @hidden
+     * @ignore
      * This variable is mostly to keep track of this list's children. There is not usage of it inside this directive,
      * but it's used by services and NestedItemDirective by itself,
      */
     @ContentChildren(forwardRef(() => NestedItemDirective))
     nestedItems: QueryList<NestedItemDirective>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(NestedListHeaderDirective)
     private _nestedListHeader: NestedListHeaderDirective;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.role')
     private _role = 'tree';
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-roledescription')
     private _ariaRoledescription: Nullable<string> = this.ariaRoledescriptionTree;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-haspopup')
     private _ariaHaspopup: Nullable<string> = null;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.tabindex')
     private _tabindex = '-1';
 
-    /** @hidden */
+    /** @ignore */
     private readonly _translationResolver = new TranslationResolver();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Optional() private _nestedItemService: NestedItemService,
         private _nestedListKeyboardService: NestedListKeyboardService,
@@ -132,12 +132,12 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
         _contentDensityObserver.subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         let nestedLevel: number = this._getNestedLevel();
         /** If there is condensed mode, maximum 2nd level class of nest can be added */
@@ -159,19 +159,19 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
         this._handleNestedLevel(nestedLevel);
     }
 
-    /** @hidden */
+    /** @ignore */
     detectChanges(): void {
         this._changeDetectionRef.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleNestedLevel(level: number): void {
         /** Adding class with the nested level */
         this._elementRef.nativeElement.classList.add('level-' + level);
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method, that checks how deep is the list element
      */
     private _getNestedLevel(): number {
@@ -189,7 +189,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
         return filteredParentElements.length;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setAriaAttributes(level: number, lang: FdLanguage): void {
         this.nestedItems.forEach((item, i) => {
             item._ariaLevel = level;
@@ -212,7 +212,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
         this._changeDetectionRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setAccessibilityProperties(level: number): void {
         if (this._nestedListStateService.condensed && level === 1) {
             this._ariaRoledescription = this.ariaRoledescriptionMenuBar;

@@ -18,23 +18,23 @@ export class CardCounterDirective implements OnInit, OnChanges, CssClassBuilder 
     @Input()
     status: ObjectStatus;
 
-    /** @hidden */
+    /** @ignore */
     class: string;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         const objectStatusClasses = buildObjectStatusCssClasses(this);

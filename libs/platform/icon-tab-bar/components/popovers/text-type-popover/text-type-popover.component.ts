@@ -41,9 +41,9 @@ import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
     ]
 })
 export class TextTypePopoverComponent extends IconTabBarPopoverBase implements OnChanges {
-    /** @hidden reference for html element, that opens dropdown and can receive focus */
+    /** @ignore reference for html element, that opens dropdown and can receive focus */
     @ViewChild('dropdownTrigger') _dropdownTrigger: ElementRef<HTMLElement>;
-    /** @hidden list of tab html elements, that can receive focus */
+    /** @ignore list of tab html elements, that can receive focus */
     @ViewChildren('tabItem') _tabExtraUIElements: QueryList<ElementRef<HTMLElement>>;
 
     /**
@@ -76,10 +76,10 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
     @Output()
     selectedSubItem: EventEmitter<any> = new EventEmitter<any>();
 
-    /** @hidden */
+    /** @ignore */
     _containsSelected = false;
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         super.ngOnChanges(changes);
         if (!this.isExtraItemsMode && changes.parentTab && this.parentTab.subItems) {
@@ -91,7 +91,7 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param selectedItem
      */
     _selectItem(selectedItem: IconTabBarItem): void {
@@ -99,7 +99,7 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
         this.popover.close();
     }
 
-    /** @hidden */
+    /** @ignore */
     _textPopoverKeyDownHandler(event: KeyboardEvent, tab: IconTabBarItem): void {
         // using relative index within popover (first popover tab should start from 0)
         const baseIndex = this.parentTab ? this.parentTab.flatIndex + 1 : this.extraTabs[0].flatIndex;
@@ -107,14 +107,14 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
         super._keyDownHandler(event, tab, currentIndex);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateIfContainsSelected(): void {
         this._containsSelected =
             !!this.parentTab.subItems &&
             this._getChildren(this.parentTab.subItems).some(({ uId }) => uId === this.selectedSubItemUid);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getChildren(items: IconTabBarItem[]): IconTabBarItem[] {
         return items.reduce((acc: IconTabBarItem[], item: IconTabBarItem) => {
             acc = acc.concat(item);

@@ -71,9 +71,9 @@ let titleUniqueId = 0;
     ]
 })
 export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, AfterViewInit {
-    /** @hidden */
+    /** @ignore */
     protected defaultTitleId = `fd-select-tab-title-id-${titleUniqueId++}`;
-    /** @hidden */
+    /** @ignore */
     protected defaultCountId = `fd-select-tab-title-count-id-${titleUniqueId++}`;
 
     /** Select tab title element ID */
@@ -121,22 +121,22 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
     // eslint-disable-next-line @angular-eslint/no-output-native
     select = new EventEmitter<T[]>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(InfiniteScrollDirective) infiniteScrollTable: InfiniteScrollDirective;
 
-    /** @hidden indeterminate flag for `select all` checkbox */
+    /** @ignore indeterminate flag for `select all` checkbox */
     _selectedAll: boolean | null = false;
 
-    /** @hidden Shown items count in mobile view */
+    /** @ignore Shown items count in mobile view */
     _shownFrom = 0;
 
-    /** @hidden Shown items count in mobile view */
+    /** @ignore Shown items count in mobile view */
     _shownCount = 0;
 
-    /** @hidden Current page in desktop view */
+    /** @ignore Current page in desktop view */
     _currentPage = 0;
 
-    /** @hidden Headers and body for search table */
+    /** @ignore Headers and body for search table */
     _tableFilters: {
         main: VhdFilter[];
         secondary: VhdFilter[];
@@ -145,7 +145,7 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
         secondary: []
     };
 
-    /** @hidden */
+    /** @ignore */
     _selectedMap: { [key: string]: boolean } = {};
 
     /** Selection type getters */
@@ -161,18 +161,18 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
         return this.selection === 'multi';
     }
 
-    /** @hidden */
+    /** @ignore */
     private selectedItems: T[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _emptyTableMessage: string;
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         Promise.resolve(true).then(() => this._checkScrollAndShowMore());
     }
 
-    /** @hidden  */
+    /** @ignore  */
     ngOnChanges(changes: SimpleChanges): void {
         if ('filters' in changes) {
             this._initializeFilters();
@@ -187,7 +187,7 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
         }
     }
 
-    /** @hidden Track function for main data */
+    /** @ignore Track function for main data */
     _trackByTableRowFn: (_index: number, item: T) => string | undefined = (_index: number, item: T) => {
         if (item) {
             return item[this.uniqueKey];
@@ -196,12 +196,12 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
         return undefined;
     };
 
-    /** @hidden Track function for filters */
+    /** @ignore Track function for filters */
     _trackByFilterFn(_index: number, item: VhdFilter): number | string | undefined {
         return item && item.key ? item.key : undefined;
     }
 
-    /** @hidden Show more elements */
+    /** @ignore Show more elements */
     _showMoreElements(): void {
         if (this.pageSize && this._shownCount !== this.displayedData.length) {
             this._shownCount += this.pageSize;
@@ -212,7 +212,7 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
         this._changeDetectorRef.markForCheck();
     }
 
-    /** @hidden Refresh page in desktop view */
+    /** @ignore Refresh page in desktop view */
     _updatePage(pageNumber = 1): void {
         if (this.pageSize) {
             this._currentPage = pageNumber;
@@ -223,7 +223,7 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
         }
     }
 
-    /** @hidden Method toggle selected state for all items  */
+    /** @ignore Method toggle selected state for all items  */
     _toggleAllRows(): void {
         if (this._selectedAll) {
             this.selectedItems = [];
@@ -235,7 +235,7 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
         this._refreshTristate();
     }
 
-    /** @hidden Method toggle selected state for one items  */
+    /** @ignore Method toggle selected state for one items  */
     _toggleSelectRow(item: T): void {
         if (this.isMultiSelection) {
             const isSelected = this._selectedMap[item[this.uniqueKey]];
@@ -253,7 +253,7 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
         this._refreshTristate();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _checkScrollAndShowMore(): void {
         if (this.mobile) {
             return;
@@ -270,7 +270,7 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _resetShown(): void {
         if (this.mobile) {
             this._showMoreElements();
@@ -279,13 +279,13 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
         }
     }
 
-    /** @hidden Manually clear selected items */
+    /** @ignore Manually clear selected items */
     private _clearSelectedItems(): void {
         this._selectedMap = {};
         this.selectedItems = [];
     }
 
-    /** @hidden Refresh indeterminate attribute on `select all` checkbox */
+    /** @ignore Refresh indeterminate attribute on `select all` checkbox */
     private _refreshTristate(): void {
         const selected = Object.values(this._selectedMap).filter(Boolean).length;
         if (selected === 0) {
@@ -297,7 +297,7 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
         }
     }
 
-    /** @hidden Set up filters */
+    /** @ignore Set up filters */
     private _initializeFilters(): void {
         if (this.mobile) {
             let _mobileTableHeaders = this.filters.filter((f) => f.main).map((f) => f.key);
@@ -316,13 +316,13 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
         }
     }
 
-    /** @hidden Refresh display data */
+    /** @ignore Refresh display data */
     private _refreshDisplayedData(): void {
         this._resetShown();
         this._refreshTristate();
     }
 
-    /** @hidden Refresh selected map for display data */
+    /** @ignore Refresh selected map for display data */
     private _refreshSelectedMap(): void {
         this._selectedMap = {};
         for (const item of this.displayedData) {

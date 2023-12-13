@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'formatted-text';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/formatted-text';
 export const API_FILE_KEY = 'formattedText';

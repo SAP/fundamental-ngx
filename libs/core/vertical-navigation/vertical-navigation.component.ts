@@ -36,11 +36,11 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
         return this._condensed();
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(ListNavigationItemComponent, { descendants: true })
     private readonly _navigationItems: QueryList<ListNavigationItemComponent>;
 
-    /** @hidden
+    /** @ignore
      * Querylist of list-items in main navigation.
      */
     @ContentChildren(ListNavigationItemComponent)
@@ -48,7 +48,7 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
         this._mainNavItems.set(items?.toArray() ?? []);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _keyManager: FocusKeyManager<ListNavigationItemComponent>;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
@@ -57,16 +57,16 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _condensed = signal(false);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _contentInited = signal(false);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _mainNavItems = signal<ListNavigationItemComponent[]>([]);
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         effect(
             () => {
@@ -86,7 +86,7 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._contentInited.set(true);
 
@@ -97,7 +97,7 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
         this._listenOnQueryChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._keyManager?.destroy();
     }
@@ -111,7 +111,7 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnQueryChange(): void {
         this._navigationItems.changes.pipe(delay(0), startWith(0), takeUntil(this._onDestroy$)).subscribe(() => {
             this._listenOnItemsClick();
@@ -124,7 +124,7 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnItemsClick(): void {
         /** Finish all the streams, from before */
         this._onRefresh$.next();
@@ -142,7 +142,7 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
             .subscribe(({ index, updateOnly }) => this.setItemActive(index, updateOnly));
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
         this._keyManager.onKeydown(event);

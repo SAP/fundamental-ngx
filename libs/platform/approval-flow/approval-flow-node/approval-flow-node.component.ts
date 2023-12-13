@@ -123,49 +123,49 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     @HostBinding('class.fdp-approval-flow-node--next-blank')
     isNextNodeBlank: boolean;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdp-approval-flow-node--blank')
     get _blank(): boolean {
         return !!this.node?.blank;
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdp-approval-flow-node--space')
     get _space(): boolean {
         return !!this.node?.space;
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdp-approval-flow-node--root')
     get _isRoot(): boolean {
         return this.meta?.isRoot;
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdp-approval-flow-node--final')
     get _isFinal(): boolean {
         return this.meta?.isFinal;
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdp-approval-flow-node--line-before')
     get _renderLineBefore(): boolean {
         return !this.node?.blank;
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdp-approval-flow-node--line-after')
     get _renderLineAfter(): boolean {
         return !this.node?.blank || this._isFinal;
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdp-approval-flow-node--approved')
     get _isApproved(): boolean {
         return this.node && isNodeApproved(this.node);
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdp-approval-flow-node--parent-approved')
     get _isParentApproved(): boolean {
         if (!this.meta?.parents?.length) {
@@ -175,31 +175,31 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
         return this.meta.parents.every((node) => isNodeApproved(node));
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdp-approval-flow-node--selected')
     get _isNodeSelected(): boolean {
         return this.isEdit && this._isSelected;
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdp-approval-flow-node--parallel-start')
     get _isParallelStart(): boolean {
         return Boolean(this.meta?.parallelStart);
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdp-approval-flow-node--parallel-end')
     get _isParallelEnd(): boolean {
         return Boolean(this.meta?.parallelEnd);
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdp-approval-flow-node--first-in-parallel')
     get _isFirstInParallel(): boolean {
         return Boolean(this.meta?.isFirstInParallel);
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdp-approval-flow-node--last-in-parallel')
     get _isLastInParallel(): boolean {
         return Boolean(this.meta?.isLastInParallel);
@@ -211,18 +211,18 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
         return this._blank && this.node.targets.length === 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _isSelected(): boolean {
         return !!this.node.selected;
     }
 
-    /** @hidden */
+    /** @ignore */
     _objectStatus: ObjectStatus;
 
-    /** @hidden */
+    /** @ignore */
     _showDueDateWarning = false;
 
-    /** @hidden */
+    /** @ignore */
     _dueIn = 0;
 
     /** Event emitted on add node button clicked, value is the placement for the new node */
@@ -240,68 +240,68 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onDelete = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(MenuComponent)
     _menu: MenuComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('overflowMenuButton')
     _overflowMenuButton: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('nodeContent')
     _nodeContent: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(ApprovalFlowDropZoneDirective)
     _dropZones: QueryList<ApprovalFlowDropZoneDirective>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(GridListItemComponent)
     _gridListItem: GridListItemComponent<ApprovalGraphNode>;
 
-    /** @hidden */
+    /** @ignore */
     readonly approvalFlowNodeId = 'fdp-approval-flow-node-' + defaultId++;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _translationResolver = new TranslationResolver();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _elRef: ElementRef,
         private readonly _cdr: ChangeDetectorRef,
         @Optional() private readonly _rtlService: RtlService
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     get _nativeElement(): HTMLElement {
         return this._elRef.nativeElement;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _isNotStarted(): boolean {
         return !isNodeStarted(this.node);
     }
 
-    /** @hidden */
+    /** @ignore */
     get _isEditActionsAvailable(): boolean {
         return this.node.status === 'approved' || this.node.status === 'rejected';
     }
 
-    /** @hidden */
+    /** @ignore */
     get _activeDropZones(): ApprovalFlowDropZoneDirective[] {
         return this._dropZones.filter((z) => z.active);
     }
 
-    /** @hidden */
+    /** @ignore */
     get _isAnyDropZoneActive(): boolean {
         return this._activeDropZones.length > 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _isVerticalLineBeforeSolid(): boolean {
         if (!this.meta?.parents.length) {
             return !!this.meta?.isVerticalLineBeforeSolid;
@@ -310,7 +310,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
         return this.meta.parents.every((parentNode) => isNodeApproved(parentNode));
     }
 
-    /** @hidden */
+    /** @ignore */
     get _isVerticalLineAfterSolid(): boolean {
         if (!this.node?.targets.length) {
             return !!this.meta?.isVerticalLineAfterSolid;
@@ -319,17 +319,17 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
         return this._isVerticalLineBeforeSolid && this.allNodesInColumnApproved;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _showAddButton(): boolean {
         return this.isEdit && !this._blank && !this._space && !this.node?.disableActions;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _showAfterAllAddButton(): boolean {
         return this.isEdit && !this._space && !this.node?.disableActions;
     }
 
-    /** @hidden */
+    /** @ignore */
     _dropZonePartial(placement: ApprovalFlowNodeTarget): boolean {
         return (
             (!this._blank && (!this.isNextNodeBlank || placement === 'before')) ||
@@ -337,46 +337,46 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._checkNodeStatus();
 
         this._subscriptions.add(this._rtlService?.rtl.subscribe(() => this._cdr.markForCheck()));
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this._checkNodeStatus();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     _onMenuOpen(): void {
         this._menu.refreshPosition();
     }
 
-    /** @hidden */
+    /** @ignore */
     _focus(options?: FocusOptions): void {
         this._gridListItem?.focus(options);
     }
 
-    /** @hidden */
+    /** @ignore */
     _deactivateDropZones(): void {
         this._dropZones.forEach((dropZone) => (dropZone.active = false));
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     _checkIfNodeDraggedInDropZone(nodeRect: DOMRect): void {
         this._dropZones.forEach((dropZone) => dropZone._checkIfNodeDraggedInDropZone(nodeRect));
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _checkNodeStatus(): void {
         if (!this.node) {
             return;
@@ -399,7 +399,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getNodeStatusClass(): ObjectStatus {
         return (
             this.statusColorMapping

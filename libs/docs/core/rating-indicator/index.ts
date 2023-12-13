@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'rating-indicator';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/rating-indicator';
 export const API_FILE_KEY = 'ratingIndicator';

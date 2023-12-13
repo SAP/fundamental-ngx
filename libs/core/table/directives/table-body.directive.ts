@@ -5,7 +5,7 @@ import { Directive, HostBinding, Input } from '@angular/core';
     standalone: true
 })
 export class TableBodyDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-table__body')
     fdTableBodyClass = true;
 

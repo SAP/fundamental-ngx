@@ -43,15 +43,15 @@ export class TitleComponent extends TitleToken implements OnInit {
     @Input()
     wrap = false;
 
-    /** @hidden */
+    /** @ignore */
     private _appliedHeaderSize: number;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _elementRef: ElementRef) {
         super();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._setHeaderSize();
     }
@@ -61,7 +61,7 @@ export class TitleComponent extends TitleToken implements OnInit {
         return this._elementRef;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setHeaderSize(): void {
         let headerSize;
         if (this.headerSize) {

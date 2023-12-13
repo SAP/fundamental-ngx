@@ -7,7 +7,7 @@ import { ContentDensity } from '@fundamental-ngx/cdk/utils';
  */
 @Injectable({ providedIn: 'root' })
 export class PlatformConfig {
-    /** @hidden */
+    /** @ignore */
     private static injector: Injector | null = null;
 
     /**
@@ -15,12 +15,12 @@ export class PlatformConfig {
      */
     contentDensity: ContentDensity;
 
-    /** @hidden */
+    /** @ignore */
     static setInjector(injector: Injector): void {
         PlatformConfig.injector = injector;
     }
 
-    /** @hidden */
+    /** @ignore */
     static getInjector(): Injector | null {
         return PlatformConfig.injector;
     }

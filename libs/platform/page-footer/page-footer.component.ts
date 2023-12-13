@@ -35,12 +35,12 @@ export class PlatformFooterComponent {
     /** defines the padding and size of the footer based on screen */
     size: footerSize = 'xl';
 
-    /** @hidden */
+    /** @ignore */
     public screenWidth: any;
-    /** @hidden */
+    /** @ignore */
     public screenHeight: any;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elRef: ElementRef,
         private readonly _cdRef: ChangeDetectorRef
@@ -48,7 +48,7 @@ export class PlatformFooterComponent {
         warnOnce('PlatformFooterComponent component is deprecated since version 0.40.0');
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('window:resize', ['$event'])
     onResize(): void {
         this.screenWidth = window.innerWidth;

@@ -27,19 +27,19 @@ export enum MobileModeControl {
 }
 
 export abstract class MobileModeBase<T extends MobileMode> {
-    /** @hidden */
+    /** @ignore */
     dialogRef: DialogRef;
 
-    /** @hidden */
+    /** @ignore */
     dialogConfig?: DialogConfig;
 
-    /** @hidden */
+    /** @ignore */
     mobileConfig: MobileModeConfig;
 
-    /** @hidden */
+    /** @ignore */
     protected readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         protected _elementRef: ElementRef,
         protected _dialogService: DialogService,
@@ -52,13 +52,13 @@ export abstract class MobileModeBase<T extends MobileMode> {
         this.dialogConfig = this.mobileConfig.dialogConfig;
     }
 
-    /** @hidden */
+    /** @ignore */
     onDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getMobileModeConfig(): MobileModeConfig {
         const injectedConfig = this._mobileModes.find((mode) => mode.target === this.target);
 
@@ -71,7 +71,7 @@ export abstract class MobileModeBase<T extends MobileMode> {
         }
     }
 
-    /** @hidden New mobile mode config as a merge of config1 and config2. */
+    /** @ignore New mobile mode config as a merge of config1 and config2. */
     private _mergeConfigs(config1: MobileModeConfig, config2: MobileModeConfig): MobileModeConfig {
         return {
             ...config1,

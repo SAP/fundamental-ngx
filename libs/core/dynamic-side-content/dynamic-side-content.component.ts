@@ -63,49 +63,49 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
     id = 'fd-dynamic-side-content-id-' + componentId++;
 
     /**
-     * @hidden
+     * @ignore
      * required by CssClassBuilder
      */
     class: string;
 
     /**
-     * @hidden
+     * @ignore
      * Indicates when side content should be rendered before or after main content
      */
     _isSideBefore = true;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(DYNAMIC_SIDE_CONTENT_CHILD_TOKEN as any)
     private _children: QueryList<DynamicSideContentMainComponent | DynamicSideContentSideComponent>;
 
-    /** @hidden */
+    /** @ignore */
     private _isSideProjectedAsFirst = false;
 
-    /** @hidden */
+    /** @ignore */
     private _position: DynamicSideContentPosition = 'none';
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef<HTMLElement>,
         private readonly _changeDetectorRef: ChangeDetectorRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._listenToChildrenOrder();
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
@@ -115,7 +115,7 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
         ].filter((v): v is string => !!v);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToChildrenOrder(): void {
         this._children.changes.pipe(startWith(this._children)).subscribe(() => {
             this._isSideProjectedAsFirst = this._children.first instanceof DynamicSideContentSideComponent;
@@ -126,7 +126,7 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateSidePosition(): void {
         const position = this._position;
 

@@ -46,20 +46,20 @@ import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.cl
     ]
 })
 export class MessageBoxHeaderComponent extends DialogHeaderBase implements AfterViewInit {
-    /** @hidden */
+    /** @ignore */
     @ViewChild('defaultTemplateHeaderBar')
     defaultTemplateHeaderBar?: ElementRef<Element>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(MessageBoxSemanticIconComponent)
     _projectedSemanticIcon: MessageBoxSemanticIconComponent;
 
-    /** @hidden */
+    /** @ignore */
     get messageBoxConfig(): MessageBoxConfig {
         return this.messageBox?._messageBoxConfig || {};
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _cdr: ChangeDetectorRef,
         @Optional() private messageBox?: MessageBoxHost
@@ -67,7 +67,7 @@ export class MessageBoxHeaderComponent extends DialogHeaderBase implements After
         super(_cdr);
     }
 
-    /** @hidden */
+    /** @ignore */
     get _showSemanticIcon(): boolean {
         return (
             !this._projectedSemanticIcon &&
@@ -76,7 +76,7 @@ export class MessageBoxHeaderComponent extends DialogHeaderBase implements After
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         // need to re-check bindings after initialisation in order to reflect the proper state of "_showSemanticIcon" getter
         // running this in next microtask to avoid "ExpressionChangedAfterItHasBeenCheckedError"

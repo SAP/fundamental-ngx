@@ -8,23 +8,23 @@ import { NotificationComponent } from '../notification/notification.component';
 
 @Injectable()
 export class NotificationService {
-    /** @hidden */
+    /** @ignore */
     public notifications: {
         notificationComponent: ComponentRef<NotificationComponent>;
         notificationConfig: Readonly<NotificationConfig>;
     }[] = [];
 
-    /** @hidden */
+    /** @ignore */
     public containerRef: ComponentRef<NotificationContainer> | null;
 
     /**
-     * @hidden
+     * @ignore
      * Element that was focused before the notification was opened. Being used to restore focus upon close.
      */
     private _elementFocusedBeforeNotificationWasOpened?: HTMLOrSVGElement;
 
     /**
-     * @hidden
+     * @ignore
      */
     constructor(
         private _dynamicComponentService: DynamicComponentService,
@@ -109,7 +109,7 @@ export class NotificationService {
         return this.notifications && this.notifications.length > 0;
     }
 
-    /** @hidden Method that destroys the Notification component */
+    /** @ignore Method that destroys the Notification component */
     private _destroyNotificationComponent(notification: ComponentRef<NotificationComponent>): void {
         this.notifications = this.notifications.filter((item) => item.notificationComponent !== notification);
         this._dynamicComponentService.destroyComponent(notification);
@@ -130,7 +130,7 @@ export class NotificationService {
         }
     }
 
-    /** @hidden attempts to focus previously selected element */
+    /** @ignore attempts to focus previously selected element */
     private _restoreFocus(): void {
         if (typeof this._elementFocusedBeforeNotificationWasOpened?.focus === 'function') {
             this._elementFocusedBeforeNotificationWasOpened.focus();

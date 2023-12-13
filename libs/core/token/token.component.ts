@@ -45,15 +45,15 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
     @Input()
     disabled = false;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('tokenWrapperElement')
     tokenWrapperElement: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('content')
     readonly _content: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('viewContainer', { read: ViewContainerRef })
     readonly _viewContainer: ViewContainerRef;
 
@@ -99,29 +99,29 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
     @Output()
     elementFocused = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     _totalCount: number;
 
-    /** @hidden */
+    /** @ignore */
     _itemPosition: number;
 
-    /** @hidden */
+    /** @ignore */
     private _selected = false;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public elementRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
         readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._viewContainer.createEmbeddedView(this._content);
 
@@ -138,12 +138,12 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     closeClickHandler(event?): void {
         if (event) {
             event.stopPropagation();
@@ -153,12 +153,12 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     tokenClickHandler(event): void {
         this.onTokenClick.emit(event);
     }
 
-    /** @hidden */
+    /** @ignore */
     tokenKeydownHandler(event): void {
         this.onTokenKeydown.emit(event);
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
@@ -166,7 +166,7 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _setTotalCount(count: number, itemPosition: number): void {
         this._totalCount = count;
         this._itemPosition = itemPosition;

@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ContentDensityGlobalKeyword, LocalContentDensityMode } from '../content-density.types';
 import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
 
-/** @hidden */
+/** @ignore */
 export function mockedLocalContentDensityDirective(
     defaultValue: LocalContentDensityMode = ContentDensityGlobalKeyword
 ): { contentDensityDirectiveProvider: Provider; setContentDensity: (cd: LocalContentDensityMode) => void } {

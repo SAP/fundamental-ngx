@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'timeline';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/timeline';
 export const API_FILE_KEY = 'timeline';

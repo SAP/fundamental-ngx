@@ -5,7 +5,7 @@ import { Directive, HostBinding, Input } from '@angular/core';
     standalone: true
 })
 export class ListBylineLeftDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-list__byline-left')
     fdListBylineLeftClass = true;
 

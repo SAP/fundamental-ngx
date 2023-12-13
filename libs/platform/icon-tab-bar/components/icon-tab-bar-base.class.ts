@@ -31,12 +31,12 @@ import { IconTabBarPopoverBase } from './popovers/icon-tab-bar-popover-base.clas
 @Directive()
 export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit, OnDestroy {
     /**
-     * @hidden
+     * @ignore
      * List of tab elements, that can receive focus.
      * There's a separate mapping function to get actual html element: `_getTabUIElementFocusable`
      */
     abstract _tabUIElements: QueryList<unknown>;
-    /** @hidden */
+    /** @ignore */
     abstract _tabBarPopover: IconTabBarPopoverBase;
     /**
      * @description A tab bar configuration that stores the state of each tab. Based on this configuration, a tab bar is representing.
@@ -81,34 +81,34 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     @ViewChild(OverflowListDirective)
     overflowDirective: OverflowListDirective;
 
-    /** @hidden */
+    /** @ignore */
     _selectedUid?: string;
 
-    /** @hidden */
+    /** @ignore */
     _extraTabs: IconTabBarItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _lastVisibleTabIndex: number;
 
-    /** @hidden */
+    /** @ignore */
     _tabs: IconTabBarItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _densityMode: TabDestinyMode;
 
-    /** @hidden */
+    /** @ignore */
     private _onDestroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _destroyed = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         protected _cd: ChangeDetectorRef,
         protected _ngZone: NgZone
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.tabsConfig && !changes.tabsConfig.firstChange) {
             this._initTabs();
@@ -120,17 +120,17 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._initTabs();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._triggerRecalculationVisibleItems();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -138,7 +138,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param selectedItem
      * @param event
      */
@@ -149,7 +149,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         this.selected.emit(selectedItem);
     }
 
-    /** @hidden */
+    /** @ignore */
     _keyDownHandler(event: KeyboardEvent, tab: IconTabBarItem | undefined, currentIndex: number): void {
         if (tab && KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             event.preventDefault();
@@ -163,13 +163,13 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         }
     }
 
-    /** @hidden focuses next tab */
+    /** @ignore focuses next tab */
     _focusNextItem(currentIndex: number): void {
         const nextIndex = currentIndex === this._tabs.length - 1 ? 0 : currentIndex + 1;
         this._focusItem(nextIndex);
     }
 
-    /** @hidden focuses previous tab */
+    /** @ignore focuses previous tab */
     _focusPreviousItem(currentIndex: number): void {
         if (currentIndex === 0) {
             // if current focused element is first, focus the last one. If tabs are overflowed, focus the last tab in the popover
@@ -180,7 +180,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param tabIndex index of the tab to apply focus
      * @param focusLast whether to focus first or last item in the popover
      */
@@ -193,7 +193,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param selectedItem
      * @description select extra item inside popover
      */
@@ -229,7 +229,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param extraItems
      * @description recalculate _nextSteps and _prevSteps array if we have extra items
      */
@@ -251,7 +251,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * Mapping function to resolve UI tab element to it's focusable part/descendant
      */
     protected _getTabUIElementFocusable(tabUIElement: unknown): HTMLElement | null {
@@ -267,7 +267,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * @description trigger recalculation items, need to do it asynchronously after dom was rerendered
      */
     protected _triggerRecalculationVisibleItems(): void {
@@ -281,7 +281,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * @description initialize state of tabs
      */
     protected _initTabs(): void {
@@ -292,7 +292,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * @description generate IconTabItems from TabConfig array
      */
     private _generateTabBarItems(config: TabConfig[]): IconTabBarItem[] {
@@ -317,7 +317,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _generateSubItems(
         subItems: TabConfig[],
         parent: IconTabBarItem,
@@ -341,7 +341,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     }
 }
 
-/** @hidden helper object that is used in tab generation functions to calculate their indexes not depending on level of nesting */
+/** @ignore helper object that is used in tab generation functions to calculate their indexes not depending on level of nesting */
 interface FlatIndex {
     value: number;
 }

@@ -297,7 +297,7 @@ export class ListComponent<T>
     @ViewChild('link', { read: ElementRef })
     anchor: ElementRef<HTMLLinkElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(forwardRef(() => ListItemDef))
     listItemDef: ListItemDef;
 
@@ -309,58 +309,58 @@ export class ListComponent<T>
     @ContentChildren(forwardRef(() => BaseListItem), { descendants: true })
     listItems: QueryList<BaseListItem>;
 
-    /** @hidden */
+    /** @ignore */
     get _ulElement(): Nullable<HTMLUListElement> {
         return this.elementRef.nativeElement.querySelector('ul');
     }
 
     /**
-     * @hidden
+     * @ignore
      * To display loading symbol
      */
     _loading = false;
 
-    /** @hidden
+    /** @ignore
      * To differentiate between first loading when skeletons be shown and subsequent loadings when busy indicator be shown
      */
     _firstLoadingDone = false;
 
     /**
-     * @hidden
+     * @ignore
      * keyManger to handle keybord events used in template
      */
     _keyManager: Nullable<FocusKeyManager<BaseListItem>>;
 
-    /** @hidden */
+    /** @ignore */
     _items: T[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _destroyed = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     _ariaSetSize: Observable<number> = new Observable();
 
-    /** @hidden */
+    /** @ignore */
     protected _dataSource: ListDataSource<T>;
 
-    /** @hidden */
+    /** @ignore */
     private _translationResolver = new TranslationResolver();
 
     /**
-     * @hidden
+     * @ignore
      * Whether Navigation mode is included to list component
      * for all the items
      */
     private _navigated: boolean;
 
     /**
-     * @hidden
+     * @ignore
      * Whether By line is present in list item
      */
     private _hasByLine: boolean;
 
     /**
-     * @hidden
+     * @ignore
      * Whether Navigation mode is included to list component
      * only a subset of the list items are navigable
      * you should indicate those by displaying a navigation arrow
@@ -368,65 +368,65 @@ export class ListComponent<T>
     private _navigationIndicator: boolean;
 
     /**
-     * @hidden
+     * @ignore
      * Whether object present in list item
      */
     private _hasObject: boolean;
 
     /**
-     * @hidden
+     * @ignore
      * Verfies partial navigation enabled
      */
     protected _partialNavigation = false;
 
     /**
-     * @hidden
+     * @ignore
      * The model backing of the component.
      */
     private _selectionModel: SelectionModel<BaseListItem>;
 
     /**
-     * @hidden
+     * @ignore
      * Whether list component has multiselection
      * binding in tempate to append class
      */
     private _multiSelect = false;
 
-    /** @hidden */
+    /** @ignore */
     private _selectedvalue: Nullable<string>;
 
     /**
-     * @hidden
+     * @ignore
      * Whether row level selection mode is enabled to list component
      * for all the items
      */
     private _rowSelection: boolean;
 
-    /** @hidden To store */
+    /** @ignore To store */
     private _tempItems: T[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _startIndex = 0;
 
-    /** @hidden */
+    /** @ignore */
     private _lastIndex = this.itemSize;
 
-    /** @hidden */
+    /** @ignore */
     private _dsItems: T[] = [];
 
     /**
-     * @hidden
+     * @ignore
      * for data source handling
      */
     private _dsSubscription: Nullable<Subscription>;
 
-    /** @hidden */
+    /** @ignore */
     private _language: FdLanguage;
 
-    /** @hidden */
+    /** @ignore */
     private _afterViewInit$ = new BehaviorSubject(false);
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         protected _changeDetectorRef: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -444,7 +444,7 @@ export class ListComponent<T>
     }
 
     /**
-     * @hidden
+     * @ignore
      * on Update navgiation styles for non navigated items
      * event:any to avoid code duplication
      * seprate PR for custom event
@@ -514,7 +514,7 @@ export class ListComponent<T>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Initialization of the lis component with selection mode
      */
     ngOnInit(): void {
@@ -543,7 +543,7 @@ export class ListComponent<T>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Keyboard manager on list items, set values when passed via array
      */
     ngAfterViewInit(): void {
@@ -560,7 +560,7 @@ export class ListComponent<T>
         indicator?.setAttribute('aria-label', '');
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         super.ngOnDestroy();
 
@@ -574,7 +574,7 @@ export class ListComponent<T>
     }
 
     /**
-     * @hidden
+     * @ignore
      * handline keyboard operations
      * in template on list and list items
      */
@@ -603,13 +603,13 @@ export class ListComponent<T>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _setCurrentActiveItemIndex(activeItemIndex: number): void {
         this._keyManager?.setActiveItem(activeItemIndex);
     }
 
     /**
-     * @hidden
+     * @ignore
      * binded in template on scroll
      */
     _scrollHandler(): void {
@@ -619,7 +619,7 @@ export class ListComponent<T>
     }
 
     /**
-     * @hidden
+     * @ignore
      * load more on enter or space press
      */
     _loadOnKeyPress(event: KeyboardEvent): void {
@@ -629,7 +629,7 @@ export class ListComponent<T>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handles lazy loading data
      * used in template
      * onscroll and on more button click
@@ -664,7 +664,7 @@ export class ListComponent<T>
     }
 
     /**
-     * @hidden
+     * @ignore
      * used in tempate to get Selected items from a list
      * event:any to avoid code duplication
      */
@@ -672,7 +672,7 @@ export class ListComponent<T>
         this._updateNavigation(event);
     }
 
-    /** @hidden */
+    /** @ignore */
     _setupListItem(item: BaseListItem): void {
         item.selectionMode = this.selectionMode;
         item.rowSelection = this.rowSelection;
@@ -684,13 +684,13 @@ export class ListComponent<T>
         this.stateChanges.next(item);
     }
 
-    /** @hidden */
+    /** @ignore */
     _selectItem(item: BaseListItem): void {
         this._selectionModel.select(item);
         this.stateChanges.next(item);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setItems(): void {
         if (this._dsItems.length !== null && this.itemSize !== 0) {
             this._startIndex = 0;
@@ -703,7 +703,7 @@ export class ListComponent<T>
         this.stateChanges.next(this._items);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initializeDS(ds: FdpListDataSource<T>): void {
         this._dsItems = [];
         if (isDataSource(this.dataSource)) {
@@ -717,7 +717,7 @@ export class ListComponent<T>
         this._dataSource = this._openDataStream(ds);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _toDataStream(source: FdpListDataSource<T>): ListDataSource<T> | undefined {
         if (isDataSource(source)) {
             return <ListDataSource<T>>source;
@@ -735,7 +735,7 @@ export class ListComponent<T>
         return undefined;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _openDataStream(ds: FdpListDataSource<T>): ListDataSource<T> {
         const initDataSource = this._toDataStream(ds);
         if (initDataSource === undefined) {
@@ -784,7 +784,7 @@ export class ListComponent<T>
         return initDataSource;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _loadNewItems(): T[] {
         this._startIndex = this._startIndex + this.itemSize;
         this._lastIndex = this._lastIndex + this.itemSize;
@@ -794,7 +794,7 @@ export class ListComponent<T>
     }
 
     /**
-     * @hidden
+     * @ignore
      * List item with radio button styles, check, uncheckupdates
      * event:any to avoid code duplication
      */
@@ -826,7 +826,7 @@ export class ListComponent<T>
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleRowSelect(selectedItemId: Nullable<string>): void {
         // handles mutli select on row level without checkbox
         if (this.selectionMode === 'multi') {
@@ -875,7 +875,7 @@ export class ListComponent<T>
     }
 
     /**
-     * @hidden
+     * @ignore
      * List item with checkbox styles,check,uncheckupdates
      * event:any to avoid code duplication
      */
@@ -901,7 +901,7 @@ export class ListComponent<T>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Setting values from list to list items
      * example:
      * Does list item has navigation,
@@ -960,7 +960,7 @@ export class ListComponent<T>
         this._cd.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _waitForViewInit<SourceDataType>() {
         return (source: Observable<SourceDataType>): Observable<SourceDataType> =>
             source.pipe(
@@ -973,7 +973,7 @@ export class ListComponent<T>
             );
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _init(): Promise<void> {
         this._language = await firstValueFrom(this._language$);
     }

@@ -72,7 +72,7 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
     @Output()
     selectionChange = new EventEmitter<GridListSelectionEvent<T>>();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(GridListItemComponent, { descendants: true })
     set gridListItems(components: QueryList<GridListItemComponent<T>>) {
         this._gridListItems = components;
@@ -83,13 +83,13 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
         return this._gridListItems;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _gridListItems: QueryList<GridListItemComponent<T>>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _rangeSelector = new RangeSelector();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _selectedItems: GridListSelectionEvent<T> = {
         added: [],
         index: [],
@@ -97,16 +97,16 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
         selection: []
     };
 
-    /** @hidden */
+    /** @ignore */
     private readonly _selectedItemsSubject$ = new BehaviorSubject<GridListSelectionEvent<T>>(this._selectedItems);
 
-    /** @hidden */
+    /** @ignore */
     readonly _selectedItems$ = this._selectedItemsSubject$.asObservable();
 
-    /** @hidden */
+    /** @ignore */
     private readonly subscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(private readonly _cd: ChangeDetectorRef) {
         super();
         const selectedItemsSub = this._selectedItems$
@@ -116,7 +116,7 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
         this.subscription.add(selectedItemsSub);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (
             changes.layoutPattern &&
@@ -136,12 +136,12 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._cd.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
     }
@@ -158,7 +158,7 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
         this._selectedItemsSubject$.next(this._selectedItems);
     }
 
-    /** @hidden */
+    /** @ignore */
     setSelectedItem(
         item: T,
         componentIndex: number,
@@ -213,7 +213,7 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
         this._selectedItemsSubject$.next(this._selectedItems);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updateGridListItemsProperties(components: QueryList<GridListItemComponent<T>>): void {
         const layoutPattern = this.layoutPattern ? this.layoutPattern : 'XL4-L3-M2-S1';
         const baseLayoutItemPattern = parseLayoutPattern(layoutPattern);
@@ -233,7 +233,7 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updateGridListItemsProperty(key: string, value: string | string[]): void {
         this._gridListItems.forEach((componenet) => {
             componenet[key] = value;

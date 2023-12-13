@@ -15,20 +15,20 @@ export class DialogTemplateDirective<T = DialogConfig<any>> {
     @Input()
     fdDialogTemplateConfig: T;
 
-    /** @hidden */
+    /** @ignore */
     readonly templateRef = inject(TemplateRef<DialogTemplateDirectiveContext<T>>);
 
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard<T extends null>(
         dir: DialogTemplateDirective<T>,
         ctx: DialogTemplateDirectiveContext<DialogConfig<any>>
     ): ctx is DialogTemplateDirectiveContext<DialogConfig<any>>;
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard<T = DialogConfig<any>>(
         dir: DialogTemplateDirective<T>,
         ctx: DialogTemplateDirectiveContext<T>
     ): ctx is DialogTemplateDirectiveContext<T>;
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard<U extends DialogTemplateDirective<any>>(
         dir: U,
         ctx: DialogTemplateDirectiveContext<any>

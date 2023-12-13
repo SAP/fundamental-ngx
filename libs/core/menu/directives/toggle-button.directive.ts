@@ -22,13 +22,13 @@ import { TOGGLE_MENU_ITEM } from '../menu.tokens';
     ]
 })
 export class ToggleButtonDirective implements AfterViewInit {
-    /** @hidden */
+    /** @ignore */
     private _cvaControl = inject<CvaControl<boolean>>(CvaControl);
 
-    /** @hidden */
+    /** @ignore */
     private _destroyRef = inject(DestroyRef)!;
 
-    /** @hidden */
+    /** @ignore */
     private _interactiveItemComponent = inject(MenuInteractiveComponent, { host: true });
 
     /**
@@ -39,7 +39,7 @@ export class ToggleButtonDirective implements AfterViewInit {
         this._cvaControl.cvaDirective?.setValue(!this._cvaControl.cvaDirective!.value);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._cvaControl.listenToChanges();
         this._cvaControl.cvaDirective?.ngControl?.valueChanges

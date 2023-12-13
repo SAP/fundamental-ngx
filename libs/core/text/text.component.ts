@@ -66,29 +66,29 @@ export class TextComponent {
     @Output()
     isCollapsedChange = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     get _isCollapsed(): boolean {
         return this.isCollapsed && !!this.maxLines && this.maxLines > 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _expandable(): boolean {
         return this.expandable && !!this.maxLines && this.maxLines > 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     _hasMore = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {}
 
-    /** @hidden */
+    /** @ignore */
     toggleTextView(): void {
         this.isCollapsed = !this.isCollapsed;
         this.isCollapsedChange.emit(this.isCollapsed);
     }
 
-    /** @hidden */
+    /** @ignore */
     checkLineCount(count: number): void {
         this._hasMore = !!this.maxLines && count > this.maxLines;
         this._changeDetectorRef.detectChanges();

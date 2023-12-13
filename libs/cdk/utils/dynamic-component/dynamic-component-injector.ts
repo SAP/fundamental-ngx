@@ -1,7 +1,7 @@
 import { Injector } from '@angular/core';
 
 export class DynamicComponentInjector implements Injector {
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _parentInjector: Injector,
         private _additionalTokens: WeakMap<any, any>

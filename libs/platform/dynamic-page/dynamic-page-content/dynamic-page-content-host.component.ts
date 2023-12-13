@@ -58,24 +58,24 @@ export class DynamicPageContentHostComponent implements OnInit {
     }
 
     /**
-     * @hidden
+     * @ignore
      * tracking the background value
      */
     private _background: DynamicPageBackgroundType;
 
     /**
-     * @hidden
+     * @ignore
      * tracks the size for responsive padding
      */
     private _size: DynamicPageResponsiveSize;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef<HTMLElement>,
         protected _renderer: Renderer2
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._addClassNameToHostElement(CLASS_NAME.dynamicPageContent);
 
@@ -91,7 +91,7 @@ export class DynamicPageContentHostComponent implements OnInit {
     }
 
     /**
-     * @hidden
+     * @ignore
      * sets the style classes for background property
      * @param background
      */
@@ -112,7 +112,7 @@ export class DynamicPageContentHostComponent implements OnInit {
     }
 
     /**
-     * @hidden
+     * @ignore
      * sets the padding classes
      * @param sizeType
      */
@@ -134,12 +134,12 @@ export class DynamicPageContentHostComponent implements OnInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _removeClassNameToHostElement(className: string): void {
         this._renderer.removeClass(this.elementRef.nativeElement, className);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addClassNameToHostElement(className: string): void {
         addClassNameToElement(this._renderer, this.elementRef.nativeElement, className);
     }

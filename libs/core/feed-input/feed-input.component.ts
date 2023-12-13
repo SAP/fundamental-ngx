@@ -25,18 +25,18 @@ export class FeedInputComponent implements AfterContentInit, OnDestroy {
     @Input()
     disabled = false;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(forwardRef(() => FeedInputTextareaDirective))
     textareaElement: FeedInputTextareaDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(forwardRef(() => FeedInputButtonDirective))
     buttonElement: FeedInputButtonDirective;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         if (this.disabled) {
             this.textareaElement.disabled = true;
@@ -47,7 +47,7 @@ export class FeedInputComponent implements AfterContentInit, OnDestroy {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }

@@ -150,7 +150,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         return super.getValue();
     }
 
-    /** @hidden Emits event when the menu is opened/closed */
+    /** @ignore Emits event when the menu is opened/closed */
     @Output()
     readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -172,45 +172,45 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     @Output()
     readonly addOnButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(FdpListComponent)
     listComponent: ListComponent<MultiInputOption>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(TemplateDirective)
     customTemplates: QueryList<TemplateDirective>;
 
-    /** @hidden
+    /** @ignore
      * Custom Option item Template
      * */
     optionItemTemplate: TemplateRef<any>;
 
-    /** @hidden
+    /** @ignore
      * Custom Group Header item Template
      * */
     groupItemTemplate: TemplateRef<any>;
 
-    /** @hidden
+    /** @ignore
      * Custom Secondary item Template
      * */
     secondaryItemTemplate: TemplateRef<any>;
 
-    /** @hidden
+    /** @ignore
      * Custom Selected option item Template
      * */
     selectedItemTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('searchInputElement', { read: ElementRef })
     searchInputElement: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     _contentDensity: ContentDensity = this.multiInputConfig.contentDensity;
 
-    /** @hidden */
+    /** @ignore */
     abstract controlTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     abstract listTemplate: TemplateRef<any>;
 
     /** input text of the input. */
@@ -219,27 +219,27 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /** Whether the Multi Input is opened. */
     isOpen = false;
 
-    /** @hidden */
+    /** @ignore */
     get canClose(): boolean {
         return !(this.mobile && this.mobileConfig.approveButtonText);
     }
 
-    /** @hidden
+    /** @ignore
      * List of matched suggestions
      * */
     _suggestions: MultiInputOption[];
 
-    /** @hidden
+    /** @ignore
      * List of matched suggestions
      * */
     _newSuggestions: MultiInputOption[];
 
-    /** @hidden
+    /** @ignore
      * Max width of list container
      * */
     maxWidth?: number;
 
-    /** @hidden
+    /** @ignore
      * Min width of list container
      * */
     minWidth?: number;
@@ -247,21 +247,21 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /**
      * Need for opening mobile version
      *
-     * @hidden
+     * @ignore
      */
     openChange = new Subject<boolean>();
 
-    /** @hidden emits whenever there're changes to the inputs, that affect the data creation from data source */
+    /** @ignore emits whenever there're changes to the inputs, that affect the data creation from data source */
     private readonly _updateDataSourceValues$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     protected _dataSource: FdpMultiInputDataSource<any>;
 
-    /** @hidden */
+    /** @ignore */
     private _matchingStrategy: MatchingStrategy = this.multiInputConfig.matchingStrategy;
-    /** @hidden */
+    /** @ignore */
     private _dsSubscription?: Subscription;
-    /** @hidden */
+    /** @ignore */
     private _element: HTMLElement = this.elementRef.nativeElement;
     /** Keys, that won't trigger the popover's open state, when dispatched on search input */
     private readonly _nonOpeningKeys: number[] = [
@@ -278,10 +278,10 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         BACKSPACE
     ];
 
-    /** @hidden */
+    /** @ignore */
     private _displayFn = (value: any): string => this.displayValue(value);
 
-    /** @hidden */
+    /** @ignore */
     private _secondaryFn = (value: any): string => {
         if (isOptionItem(value)) {
             return value.secondaryText ?? '';
@@ -294,7 +294,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         }
     };
 
-    /** @hidden */
+    /** @ignore */
     protected constructor(
         readonly cd: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -309,21 +309,21 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._initWindowResize();
         this._assignCustomTemplates();
         super.ngAfterViewInit();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if ('group' in changes || 'groupKey' in changes) {
             this._updateDataSourceValues$.next();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         super.ngOnDestroy();
 
@@ -336,25 +336,25 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         }
     }
     /**
-     * @hidden
+     * @ignore
      * Define is this item selected
      */
     abstract isSelectedOptionItem(selectedItem: MultiInputOption): boolean;
 
     /**
-     * @hidden
+     * @ignore
      * Emit select OptionItem
      * */
     abstract selectOptionItem(item: MultiInputOption): void;
 
     /**
-     * @hidden
+     * @ignore
      * Define value as selected
      * */
     abstract setAsSelected(item: MultiInputOption[]): void;
 
     /**
-     * @hidden
+     * @ignore
      * Mathod for marking list option as selected.
      */
     abstract _markListItemsAsSelected(): void;
@@ -366,7 +366,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         super.writeValue(value);
     }
 
-    /** @hidden */
+    /** @ignore */
     _popoverOpenChangeHandle(isOpen: boolean): void {
         if (!isOpen) {
             this.close();
@@ -399,12 +399,12 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         this._cd.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     convertObjectToMultiInputOption(items: any[]): MultiInputOption[] {
         return this._convertObjectsToOptionItems(items);
     }
 
-    /** @hidden */
+    /** @ignore */
     searchTermChanged(text: string = this.inputText): void {
         if (text) {
             this.open();
@@ -419,7 +419,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         this.cd.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     showList(isOpen: boolean): void {
         if (this.isOpen !== isOpen) {
             if (isOpen) {
@@ -431,14 +431,14 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     handleOptionItem(value: MultiInputOption): void {
         if (value) {
             this.selectOptionItem(value);
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     handlePressEnter(event: KeyboardEvent, value: MultiInputOption): void {
         if (!KeyUtil.isKeyCode(event, ENTER)) {
             return;
@@ -449,7 +449,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /**
      * Handle Keydown on Input
-     * @hidden
+     * @ignore
      */
     onInputKeydownHandler(event: KeyboardEvent): void {
         if (this.readonly) {
@@ -494,12 +494,12 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     protected get ds(): MultiInputDataSource<any> {
         return this.dataSource as MultiInputDataSource<any>;
     }
 
-    /** @hidden
+    /** @ignore
      * Method that picks other value moved from current one by offset, called only when Multi Input is closed */
     private _chooseOtherItem(offset: number): void {
         const index: number = this._suggestions.findIndex((value) => value.label === this.inputText);
@@ -509,7 +509,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initializeDataSource(ds: FdpMultiInputDataSource<any>): void {
         this._suggestions = [];
 
@@ -525,7 +525,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         this._dataSource = this._openDataStream(ds);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _openDataStream(ds: FdpMultiInputDataSource<any>): MultiInputDataSource<any> {
         const initDataSource = this._toDataStream(ds);
 
@@ -572,7 +572,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         return initDataSource;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _toDataStream(source: FdpMultiInputDataSource<any>): MultiInputDataSource<any> | undefined {
         if (isDataSource(source)) {
             return source as MultiInputDataSource<any>;
@@ -590,7 +590,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         return undefined;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initWindowResize(): void {
         this._getOptionsListWidth();
 
@@ -603,7 +603,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             .subscribe(() => this._getOptionsListWidth());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getOptionsListWidth(): void {
         const body = document.body;
         const rect = (this._element.querySelector('fd-input-group') as HTMLElement).getBoundingClientRect();
@@ -614,7 +614,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /**
      * Convert original data to OptionItems Interface
-     * @hidden
+     * @ignore
      */
     private _convertToOptionItems(items: any[]): MultiInputOption[] {
         const item = items[0];
@@ -639,7 +639,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /**
      * Convert data to OptionItems Interface
-     * @hidden
+     * @ignore
      */
     private _convertObjectsToOptionItems(items: any[]): MultiInputOption[] {
         if (this.group && this.groupKey) {
@@ -653,7 +653,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /**
      * Convert object[] data to Group OptionItems Interface
-     * @hidden
+     * @ignore
      */
     private _convertObjectsToGroupOptionItems<K>(items: K[]): MultiInputOption[] {
         const group: { [key: string]: K[] } = {};
@@ -692,7 +692,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /**
      * Convert object[] data to Secondary OptionItems Interface
-     * @hidden
+     * @ignore
      */
     private _convertObjectsToSecondaryOptionItems<K>(items: K[]): MultiInputOption[] {
         const selectItems: MultiInputOption[] = [];
@@ -712,7 +712,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /**
      * Convert Primitive data(Boolean, String, Number) to OptionItems Interface
-     * @hidden
+     * @ignore
      */
     private _convertPrimitiveToOptionItems(items: any[]): MultiInputOption[] {
         const selectItems: MultiInputOption[] = [];
@@ -726,7 +726,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /**
      * Convert object[] to OptionItems Interface (Default)
-     * @hidden
+     * @ignore
      */
     private _convertObjectsToDefaultOptionItems(items: any[]): MultiInputOption[] {
         const selectItems: MultiInputOption[] = [];
@@ -742,7 +742,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         return selectItems;
     }
 
-    /** @hidden
+    /** @ignore
      * Assign custom templates
      * */
     private _assignCustomTemplates(): void {

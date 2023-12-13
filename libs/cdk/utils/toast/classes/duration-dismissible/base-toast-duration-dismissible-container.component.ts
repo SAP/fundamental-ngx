@@ -27,7 +27,7 @@ export abstract class BaseToastDurationDismissibleContainerComponent<P extends B
         this.mouseover$.next();
     }
 
-    /** @Hidden */
+    /** @ignore */
     override ngOnDestroy(): void {
         this.mouseover$.complete();
         this.mouseleave$.complete();

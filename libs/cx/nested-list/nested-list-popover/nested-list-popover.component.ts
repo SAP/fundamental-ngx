@@ -29,34 +29,34 @@ import { NestedListPopoverInterface } from './nested-list-popover.interface';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NestedListPopoverComponent implements NestedListPopoverInterface, OnInit {
-    /** @hidden */
+    /** @ignore */
     @ViewChild(PopoverComponent)
     popoverComponent: PopoverComponent;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdx-nested-list__popover')
     popoverClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(NestedLinkComponent)
     linkDirective: NestedLinkComponent;
 
     /**
-     * @hidden
+     * @ignore
      * Reference to parent item, to propagate open and close change from popover.
      */
     parentItemElement: NestedItemInterface;
 
-    /** @hidden */
+    /** @ignore */
     placement$: Observable<Placement>;
 
-    /** @hidden */
+    /** @ignore */
     open = false;
 
-    /** @hidden */
+    /** @ignore */
     _closeScrollStrategy: ScrollStrategy;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _keyboardNestService: NestedListKeyboardService,
         @Optional() private _itemService: NestedItemService,
@@ -70,7 +70,7 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, O
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._closeScrollStrategy = this._overlay.scrollStrategies.close();
     }
@@ -89,7 +89,7 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, O
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnKeyboardRefresh(): void {
         this._keyboardNestService.refresh$.subscribe(() => {
             /** Update popover position, on list of hidden items change */
@@ -99,7 +99,7 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, O
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _createRtlObservable(): void {
         this.placement$ = this._rtlService
             ? this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'left-start' : 'right-start')))

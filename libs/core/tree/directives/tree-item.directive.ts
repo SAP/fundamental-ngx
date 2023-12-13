@@ -15,7 +15,7 @@ export class TreeItemDirective<T extends TreeItem, P> implements OnDestroy {
     /** Injector to be used in a tree item component, to resolve a tree item directive. */
     readonly injector: Injector;
 
-    /** @hidden */
+    /** @ignore */
     constructor(injector: Injector) {
         this.injector = Injector.create({ providers: [], parent: injector });
     }
@@ -25,7 +25,7 @@ export class TreeItemDirective<T extends TreeItem, P> implements OnDestroy {
         this.treeItem = item;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this.treeItem = null;
     }

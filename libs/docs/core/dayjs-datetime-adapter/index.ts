@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'dayjs-datetime-adapter';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/datetime-adapter';
 export const API_FILE_KEY = 'dayjsDatetimeAdapter';

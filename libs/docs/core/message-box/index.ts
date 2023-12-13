@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'message-box';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/message-box';
 export const API_FILE_KEY = 'messageBox';

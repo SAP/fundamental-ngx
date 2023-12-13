@@ -8,7 +8,7 @@ type breakpointName = keyof typeof ResponsiveBreakpoints | 'XL';
 
 export type BreakpointName = Lowercase<breakpointName> | Uppercase<breakpointName>;
 
-/** @hidden */
+/** @ignore */
 export function getBreakpointName(width: number): breakpointName {
     if (width < ResponsiveBreakpoints.S) {
         return 'S';

@@ -12,13 +12,13 @@ export class RepeatDirective implements OnChanges {
     @Input('fdkRepeat')
     count: number;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _templateRef: TemplateRef<any>,
         private readonly _viewContainerRef: ViewContainerRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if ((changes['count'] || changes['deprecatedCount']) && Number.isInteger(this.count)) {
             this._viewContainerRef.clear();

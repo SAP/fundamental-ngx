@@ -39,7 +39,7 @@ export class DynamicPageConfig extends PlatformConfig {
         return useFactory;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(platformConfig: PlatformConfig) {
         super();
         this.contentDensity = platformConfig.contentDensity;

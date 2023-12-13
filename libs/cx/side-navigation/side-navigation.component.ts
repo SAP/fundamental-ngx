@@ -94,35 +94,35 @@ export class SideNavigationComponent
         this.nestedListState.selectable = selectable;
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(SideNavigationUtilityDirective)
     sideNavUtility: SideNavigationUtilityDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(SideNavigationMainComponent, { descendants: true })
     sideNavMain: SideNavigationMainComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(PreparedNestedListComponent)
     preparedNestedList: QueryList<PreparedNestedListComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('scrollDownButton', { read: ElementRef })
     _scrollDownButton: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     _showScrollUpButton = false;
 
-    /** @hidden */
+    /** @ignore */
     _showScrollDownButton = false;
 
-    /** @hidden */
+    /** @ignore */
     additionalShellbarCssClass = 'fd-shellbar--cx-side-nav';
 
-    /** @hidden */
+    /** @ignore */
     private _condensed = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private keyboardService: NestedListKeyboardService,
         private nestedListState: NestedListStateService,
@@ -134,7 +134,7 @@ export class SideNavigationComponent
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         /** Set up condensed state */
         this.nestedListState.condensed =
@@ -145,7 +145,7 @@ export class SideNavigationComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         if (!this.sideNavigationConfiguration) {
             this.keyboardService.refreshItems(this.getLists());
@@ -153,21 +153,21 @@ export class SideNavigationComponent
         this._setupScrollButtons();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.narrow) {
             this._setupScrollButtons();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (this.sideNavigationConfiguration) {
             this.keyboardService.refreshItems(this.getLists());
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('window:resize')
     onResize(): void {
         if (this.collapseWidth) {
@@ -175,7 +175,7 @@ export class SideNavigationComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _setupScrollButtons(): void {
         setTimeout(() => {
             if (
@@ -203,7 +203,7 @@ export class SideNavigationComponent
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     _scrollItems(direction: 'up' | 'down'): void {
         this.sideNavMain.elementRef.nativeElement.scrollBy({
             top: direction === 'up' ? -52 : 52,
@@ -213,7 +213,7 @@ export class SideNavigationComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that returns 1 deep level of lists.
      */
     private getLists(): NestedListComponent[] {

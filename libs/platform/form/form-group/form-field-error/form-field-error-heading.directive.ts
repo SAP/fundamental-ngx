@@ -16,7 +16,7 @@ export class FormFieldErrorHeadingDirective<T = any> implements FormErrorHeading
     @Input()
     fdpFormFieldErrorHeadingType: FormStates | undefined;
 
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard(
         dir: FormFieldErrorHeadingDirective,
         ctx: FormFieldErrorContext<any>
@@ -24,7 +24,7 @@ export class FormFieldErrorHeadingDirective<T = any> implements FormErrorHeading
         return true;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public templateRef: TemplateRef<FormFieldErrorContext<T>>,
         @Optional() @Inject(FDP_FORM_ERROR_DIRECTIVE) private _formFieldErrorDirective: FormError

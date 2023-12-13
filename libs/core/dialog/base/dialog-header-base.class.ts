@@ -13,13 +13,13 @@ import { TitleComponent, TitleToken } from '@fundamental-ngx/core/title';
 
 @Directive()
 export abstract class DialogHeaderBase implements AfterContentInit {
-    /** @hidden */
+    /** @ignore */
     headerTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     subHeaderTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(TitleToken)
     set defaultTitleSize(title: TitleComponent) {
         if (title && !title.headerSize) {
@@ -28,19 +28,19 @@ export abstract class DialogHeaderBase implements AfterContentInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(TemplateDirective)
     customTemplates: QueryList<TemplateDirective>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._assignCustomTemplates();
     }
 
-    /** @hidden Assign custom templates */
+    /** @ignore Assign custom templates */
     private _assignCustomTemplates(): void {
         this.customTemplates.forEach((template) => {
             switch (template.name) {

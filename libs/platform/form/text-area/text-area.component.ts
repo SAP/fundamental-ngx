@@ -123,27 +123,27 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         return super.getValue();
     }
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('counter')
     _textareaCounter?: ElementRef<HTMLDivElement>;
 
-    /** @hidden */
+    /** @ignore */
     hasTextExceeded = false;
 
-    /** @hidden excess character count */
+    /** @ignore excess character count */
     exceededCharCount = 0;
 
-    /** @hidden a string placeholder that toggles between 'remaining' and 'excess' for the select ICU expression */
+    /** @ignore a string placeholder that toggles between 'remaining' and 'excess' for the select ICU expression */
     counterExcessOrRemaining = 'remaining';
 
-    /** @hidden flag to check if there is an initial value set */
+    /** @ignore flag to check if there is an initial value set */
     isValueCustomSet = false;
 
-    /** @hidden */
+    /** @ignore */
     /** to keep track of number of characters in the textarea */
     private _textAreaCharCount = 0;
 
-    /** @hidden */
+    /** @ignore */
     private _isPasted = false;
 
     /** for i18n counter message translation */
@@ -152,19 +152,19 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     private readonly excessText = 'excess';
 
     /**
-     * @hidden
+     * @ignore
      * @see PlatformFormFieldControl.extraContentHeightPx
      */
     get extraContentHeightPx(): number | undefined {
         return this._textareaCounter?.nativeElement.offsetHeight;
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _shouldTrackTextLimit(): boolean {
         return this.maxLength > 0 && !this.showExceededText;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -181,7 +181,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         if (!this.wrapType || VALID_WRAP_TYPES.indexOf(this.wrapType) === -1) {
             throw new Error(`Textarea wrap type ${this.wrapType} is not supported`);
@@ -195,7 +195,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         super.ngOnInit();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         // set max height
         this._setMaxHeight();
@@ -208,7 +208,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         super.ngAfterViewInit();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewChecked(): void {
         // when value is custom set(initial value is present), the heights don't get
         // set to show the full text in the ngAfterViewInit immediately. therefore, we call autoGrowTextArea in
@@ -338,12 +338,12 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         return this.state; // return any other errors found by parent form field
     }
 
-    /** @hidden Native element  */
+    /** @ignore Native element  */
     get _targetElement(): HTMLTextAreaElement {
         return this._elementRef?.nativeElement;
     }
 
-    /** @hidden get the length of the textarea content */
+    /** @ignore get the length of the textarea content */
     private _getContentLength(): number {
         let contentLength;
         if (this._targetElement) {
@@ -355,7 +355,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         return contentLength;
     }
 
-    /** @hidden get the total height including borders and scroll height */
+    /** @ignore get the total height including borders and scroll height */
     private _getTextareaTotalHeight(): number {
         // Get the computed styles for the element
         const computed = window.getComputedStyle(this._targetElement);
@@ -368,7 +368,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         return height;
     }
 
-    /** @hidden set initial max height **/
+    /** @ignore set initial max height **/
     private _setMaxHeight(): void {
         if (this.growing && this._targetElement) {
             if (this.growingMaxLines) {

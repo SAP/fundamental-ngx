@@ -66,23 +66,23 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
     @Output()
     readonly rowsRearrange = new EventEmitter<TableRowsRearrangeEvent<T>>();
 
-    /** @hidden */
+    /** @ignore */
     get _rowsDraggable(): boolean {
         return this.isTreeTable && this.enableRowReordering;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _table: Table;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _ngZone = inject(NgZone);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _cdr = inject(ChangeDetectorRef, {
         host: true
     });
 
-    /** @hidden */
+    /** @ignore */
     dragDropInProgress = false;
 
     /** Sets table reference. */
@@ -168,7 +168,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Create table rows rearrange event
      */
     _emitRowsRearrangeEvent(row: TableRow, dropRow: TableRow, event: FdDropEvent<TableRow>): void {
@@ -192,13 +192,13 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isDroppedInsideItself(dropRow: TableRow, dragRow: TableRow): boolean {
         const dropRowParents = getRowParents(dropRow);
         return !!dropRowParents.find((row) => row === dragRow);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _dragDropUpdateDragParentRowAttributes(dragRow: TableRow): void {
         const parentRow = dragRow.parent;
 
@@ -214,7 +214,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _dragDropUpdateDropRowAttributes(dragRow: TableRow, dropRow: TableRow, mode: FdDndDropEventMode): void {
         if (dragRow.parent) {
             // Remove child row from previous parent row.
@@ -244,7 +244,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _dragDropRearrangeTreeRows(dragRow: TableRow, dropRow: TableRow, event: FdDropEvent<TableRow>): void {
         if (event.mode === 'shift') {
             this._handleShiftDropAction(dragRow, dropRow, event);
@@ -253,7 +253,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getNewDragDropRowsPosition(dragRow: TableRow, dropRow: TableRow): UpdatedDndRowsPosition {
         const allRows = this._table._tableRows;
 
@@ -278,7 +278,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
         };
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleShiftDropAction(dragRow: TableRow, dropRow: TableRow, event: FdDropEvent<TableRow>): void {
         const { allRows, rowsToMove, rowsAfterDropRow, dropRowItems } = this._getNewDragDropRowsPosition(
             dragRow,
@@ -294,7 +294,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleReplaceDropAction(dragRow: TableRow, dropRow: TableRow): void {
         const { allRows, rowsToMove, rowsAfterDropRow, dropRowItems } = this._getNewDragDropRowsPosition(
             dragRow,
@@ -304,7 +304,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
         this._table._tableRows = [...allRows, ...dropRowItems, ...rowsToMove, ...rowsAfterDropRow];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _onZoneFree(callback: () => void): void {
         this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
             callback();

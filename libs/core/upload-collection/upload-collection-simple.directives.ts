@@ -26,7 +26,7 @@ export class UploadCollectionThumbnailDirective {}
     standalone: true
 })
 export class UploadCollectionTitleDirective {
-    /** @hidden */
+    /** @ignore */
     constructor(public elRef: ElementRef) {}
 }
 
@@ -61,10 +61,10 @@ export class UploadCollectionStatusGroupDirective {}
     standalone: true
 })
 export class UploadCollectionStatusItemDirective implements OnInit {
-    /** @hidden */
+    /** @ignore */
     constructor(@Optional() @Inject(FD_OBJECT_STATUS_COMPONENT) private _objectStatus: ObjectStatusComponent) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         if (this._objectStatus) {
             this._objectStatus._textClass += ' fd-upload-collection__status-group-item-text';
@@ -78,7 +78,7 @@ export class UploadCollectionStatusItemDirective implements OnInit {
     standalone: true
 })
 export class UploadCollectionTitleContainerDirective {
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(ObjectMarkerComponent)
     _objectMarkerComponents: QueryList<ObjectMarkerComponent>;
 

@@ -11,7 +11,7 @@ import { MessageToastRef } from '../ref/message-toast.ref';
     standalone: true
 })
 export class MessageToastTextComponent implements ToastTextComponent {
-    /** @hidden */
+    /** @ignore */
     constructor(
         public toastRef: MessageToastRef<MessageToastTextComponent>,
         @Inject(MESSAGE_TOAST_DATA) public message: string

@@ -21,4 +21,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'select';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/select';
 export const API_FILE_KEY = 'select';

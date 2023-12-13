@@ -52,23 +52,23 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     @Output()
     readonly itemClicked: EventEmitter<void> = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _listMode: boolean;
 
-    /** @hidden */
+    /** @ignore */
     private _isRtl = false;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _viewportRuler: ViewportRuler,
         @Optional() private readonly _rtlService: RtlService,
         private readonly _cdr: ChangeDetectorRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._subscriptions.add(this._rtlService?.rtl.subscribe((isRtl) => (this._isRtl = isRtl)));
         this._subscriptions.add(
@@ -82,12 +82,12 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
         this._checkSize(width);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     _itemClick(item: ProductSwitchItem, event: MouseEvent): void {
         this.products.forEach((product) => (product.selected = product === item));
 
@@ -103,7 +103,7 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
         this.products = dropEvent.items;
     }
 
-    /** @hidden */
+    /** @ignore */
     _keyDownHandle(event: KeyboardEvent): void {
         const target = <HTMLElement>event.target;
 
@@ -121,17 +121,17 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _isSmallMode(): boolean {
         return this.products?.length < 7;
     }
 
-    /** @hidden */
+    /** @ignore */
     _isListMode(): boolean {
         return this._listMode || this.forceListMode;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _checkSize(width: number): void {
         if (this._isSmallMode()) {
             this._listMode = width < containerWidthPxSmallMode;
@@ -142,7 +142,7 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
         this._cdr.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleNoListKeydown(event: KeyboardEvent, target: HTMLElement, i: number): void {
         const previousElementSibling = <HTMLElement>target.previousElementSibling;
         const nextElementSibling = <HTMLElement>target.nextElementSibling;
@@ -170,7 +170,7 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleNoListMoreThanSeven(event: KeyboardEvent, target: HTMLElement, i: number): void {
         const nextIndexByColumn = 4;
         const children = target.parentElement?.children;
@@ -188,7 +188,7 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleNoListLessThanSeven(event: KeyboardEvent, target: HTMLElement, i: number): void {
         const nextIndexByColumn = 3;
         const children = target.parentElement?.children;
@@ -206,7 +206,7 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleListArrowUpDown(event: KeyboardEvent, target: HTMLElement): void {
         const targetIndex = Array.from(target.parentElement?.children ?? []).indexOf(target);
         const previousElementSibling =

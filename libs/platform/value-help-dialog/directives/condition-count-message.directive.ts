@@ -18,23 +18,23 @@ export class ConditionCountMessageDirective {
         return this._maxCharacters;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _maxCharacters = Number.MAX_SAFE_INTEGER;
 
-    /** @hidden */
+    /** @ignore */
     private readonly validator: ValidatorFn;
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         this.validator = this.checkError();
     }
 
-    /** @hidden */
+    /** @ignore */
     validate(control: FormControl): ValidationErrors | null {
         return this.validator(control);
     }
 
-    /** @hidden */
+    /** @ignore */
     private checkError(): ValidatorFn {
         return (control: AbstractControl) => {
             if (control.dirty && control.value && control.value.length > this.maxCharacters) {

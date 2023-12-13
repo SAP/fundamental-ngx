@@ -57,22 +57,22 @@ export class ProgressIndicatorComponent implements OnInit, OnDestroy, OnChanges,
     @Input()
     animate = false;
 
-    /** @hidden */
+    /** @ignore */
     hasPopover = false;
 
-    /** @hidden */
+    /** @ignore */
     _progressBarWidth = 0;
 
-    /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    /** @ignore An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elementRef: ElementRef,
         private _cdRef: ChangeDetectorRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.valueText) {
             this._handleTruncation();
@@ -83,7 +83,7 @@ export class ProgressIndicatorComponent implements OnInit, OnDestroy, OnChanges,
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         resizeObservable(this._elementRef.nativeElement)
             .pipe(debounceTime(20), takeUntil(this._onDestroy$))
@@ -92,23 +92,23 @@ export class ProgressIndicatorComponent implements OnInit, OnDestroy, OnChanges,
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._handleTruncation();
     }
 
-    /** @hidden */
+    /** @ignore */
     calculateProgressBarWidth(): number {
         return ((this.valueNow - this.valueMin) / (this.valueMax - this.valueMin)) * 100;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleTruncation(): void {
         const labelSpan = this._elementRef.nativeElement.querySelector('.fd-progress-indicator__label');
         this.hasPopover = labelSpan && labelSpan.offsetWidth < labelSpan.scrollWidth;

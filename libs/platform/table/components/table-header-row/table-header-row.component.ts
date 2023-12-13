@@ -126,46 +126,46 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
     @Input()
     freezeEndColumnsTo: string;
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     disableSelectionCheckbox = false;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE)
     private set _focusableCellItems(items: QueryList<FocusableItemDirective>) {
         this.setItems(items);
     }
 
-    /** @hidden */
+    /** @ignore */
     _rtl = false;
 
-    /** @hidden */
+    /** @ignore */
     readonly SELECTION_MODE = SelectionMode;
 
-    /** @hidden */
+    /** @ignore */
     readonly SORT_DIRECTION = SortDirection;
 
-    /** @hidden */
+    /** @ignore */
     readonly _tableColumnResizeService = inject(TableColumnResizeService);
 
-    /** @hidden */
+    /** @ignore */
     readonly _fdpTableService = inject(TableService);
 
-    /** @hidden */
+    /** @ignore */
     readonly _contentDensityObserver = inject(ContentDensityObserver);
 
-    /** @hidden */
+    /** @ignore */
     readonly _tableRowService = inject(TableRowService);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _rtlService = inject(RtlService, {
         optional: true
     });
 
-    /** @hidden */
+    /** @ignore */
     private readonly _cdr = inject(ChangeDetectorRef);
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         super();
         this._rtlService?.rtl.pipe(takeUntilDestroyed()).subscribe((isRtl) => {
@@ -173,7 +173,7 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         super.ngOnInit();
         this._tableColumnResizeService.markForCheck.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
@@ -181,22 +181,22 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     _columnTrackBy(index: number, column: TableColumn): string {
         return column.name;
     }
 }
 
-/** @hidden */
+/** @ignore */
 @Pipe({
     name: 'isColumnHasHeaderMenu',
     standalone: true
 })
 export class IsColumnHasHeaderMenuPipe implements PipeTransform {
-    /** @hidden */
+    /** @ignore */
     private readonly _fdpTableService = inject(TableService);
 
-    /** @hidden */
+    /** @ignore */
     transform(column: TableColumn): boolean {
         return (
             column.sortable ||

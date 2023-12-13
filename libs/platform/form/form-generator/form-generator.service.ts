@@ -40,16 +40,16 @@ export class FormGeneratorService implements OnDestroy {
      */
     validationErrorHints = DEFAULT_VALIDATION_ERRORS;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _config: FormGeneratorConfig = defaultFormGeneratorConfig;
 
     /**
-     * @hidden
+     * @ignore
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _fb: FormBuilder,
         private _componentsAccessor: FormGeneratorComponentsAccessorService,
@@ -66,7 +66,7 @@ export class FormGeneratorService implements OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     ngOnDestroy(): void {
         this._onDestroy$.next();
@@ -333,7 +333,7 @@ export class FormGeneratorService implements OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _getFormValueWithoutUngrouped(value: any): any {
         if (value[this._config.ungroupedControlsName]) {
             const ungroupedGroupValue: Record<string, any> = value[this._config.ungroupedControlsName];
@@ -346,7 +346,7 @@ export class FormGeneratorService implements OnDestroy {
         return value;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _assignFormItemValidators(
         formItem: PreparedDynamicFormFieldItem,
         form: DynamicFormGroup
@@ -381,7 +381,7 @@ export class FormGeneratorService implements OnDestroy {
         return formItem;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _generateDynamicFormItem(
         formItem: PreparedDynamicFormFieldItem,
         form: DynamicFormGroup
@@ -417,7 +417,7 @@ export class FormGeneratorService implements OnDestroy {
         return formControl;
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _checkFormControlsVisibility(
         form: DynamicFormGroup | DynamicFormControlGroup,
         formValue: any
@@ -451,7 +451,7 @@ export class FormGeneratorService implements OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param formItem
      * @param form
      * @param key
@@ -473,7 +473,7 @@ export class FormGeneratorService implements OnDestroy {
         return (await this._getFunctionValue(value)) as T;
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _getFormItemProperties<TTypes extends any[] = any[]>(
         formItem: DynamicFormFieldItem,
         form: DynamicFormGroup,
@@ -487,7 +487,7 @@ export class FormGeneratorService implements OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param formItem
      * @param form
      * @returns
@@ -509,7 +509,7 @@ export class FormGeneratorService implements OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @description Returns value from Promise-like, Observable-like, simple function or just some object.
      * @param obj
      * @returns
@@ -530,17 +530,17 @@ export class FormGeneratorService implements OnDestroy {
         return result;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _formatPasswordValue(password: string): string {
         return '*'.repeat(password?.length);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getMergedFormFieldItemConfig(formItem: DynamicFormItemMap): DynamicFormItemMap {
         return merge(cloneDeep(this._defaultItemConfig), formItem);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _transformFormItems(formItems: Map<string, DynamicFormItemMap>): Map<string, DynamicFormItemMap> {
         formItems.forEach((item, index) => {
             if (!isFormFieldItem(item)) {
@@ -553,7 +553,7 @@ export class FormGeneratorService implements OnDestroy {
         return formItems;
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _triggerFieldsOnchange(form: DynamicFormGroup | DynamicFormControlGroup): Promise<void> {
         for (const control of Object.values(form.controls)) {
             const formItem = control.formItem;
@@ -570,7 +570,7 @@ export class FormGeneratorService implements OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _cloneOldFormGroup(newGroup: DynamicFormControlGroup, oldGroup?: DynamicFormControlGroup): void {
         Object.keys(newGroup.controls).forEach((controlName) => {
             const control = newGroup.get(controlName);

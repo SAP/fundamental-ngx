@@ -42,7 +42,7 @@ export class ProductSwitchComponent extends BasePopoverClass {
     @Input()
     disabled = false;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(ProductSwitchButtonDirective)
     customProductSwitchButton: ProductSwitchButtonDirective;
 }

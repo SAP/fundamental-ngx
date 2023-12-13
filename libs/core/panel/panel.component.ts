@@ -77,13 +77,13 @@ export class PanelComponent implements OnInit, OnDestroy {
     @ContentChild(PanelContentDirective)
     panelContent: Nullable<PanelContentDirective>;
 
-    /** @hidden */
+    /** @ignore */
     _rtl = false;
 
-    /** @hidden */
+    /** @ignore */
     _subscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _cdRef: ChangeDetectorRef,
         public readonly elementRef: ElementRef,
@@ -91,12 +91,12 @@ export class PanelComponent implements OnInit, OnDestroy {
         @Optional() private _rtlService: RtlService
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._listenRtl();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscription.unsubscribe();
     }
@@ -107,12 +107,12 @@ export class PanelComponent implements OnInit, OnDestroy {
         this.expandedChange.emit(this.expanded);
     }
 
-    /** @hidden */
+    /** @ignore */
     _getButtonIcon(): string {
         return this.expanded ? 'slim-arrow-down' : this._rtl ? 'slim-arrow-left' : 'slim-arrow-right';
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenRtl(): void {
         if (this._rtlService) {
             this._subscription.add(

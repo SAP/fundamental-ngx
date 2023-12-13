@@ -56,25 +56,25 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
     /** Child items stream. */
     childItems$ = new Subject<Map<TableRow<T>, T[]>>();
 
-    /** @hidden */
+    /** @ignore */
     _tableDataSource: TableDataSource<T>;
 
-    /** @hidden */
+    /** @ignore */
     _firstLoadingDone = false;
 
-    /** @hidden */
+    /** @ignore */
     _internalLoadingState = false;
 
-    /** @hidden */
+    /** @ignore */
     _internalChildrenLoadingState = false;
 
-    /** @hidden */
+    /** @ignore */
     private _childDataSource: ChildTableDataSource<T> | null;
 
-    /** @hidden */
+    /** @ignore */
     private _childDsSubscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     set totalItems(value: number) {
         this.totalItems$.next(value);
     }
@@ -83,21 +83,21 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
         return this.totalItems$.value;
     }
 
-    /** @hidden for data source handling */
+    /** @ignore for data source handling */
     private _tableDsSubscription: Subscription | null;
 
-    /** @hidden */
+    /** @ignore */
     private _table: Table;
 
-    /** @hidden */
+    /** @ignore */
     private readonly initialState = inject<TableInitialState>(FDP_TABLE_STATE_DIRECTIVE, {
         optional: true
     });
 
-    /** @hidden */
+    /** @ignore */
     private readonly _tableService = inject(TableService);
 
-    /** @hidden */
+    /** @ignore */
     initializeDataSource(): void {
         this.dataSourceChanged.pipe(startWith(true), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._closeDataSource();
@@ -105,19 +105,19 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         super.ngOnDestroy();
         this._tableDsSubscription?.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     setTable(table: Table): void {
         this._table = table;
     }
 
     /**
-     * @hidden
+     * @ignore
      * Initializes the child data source to fetch child rows.
      */
     private _initializeChildDataSource(): void {
@@ -165,7 +165,7 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
     }
 
     /**
-     * @hidden
+     * @ignore
      * This is a single point of data entry to the component. We don't want to set data on different
      * places. If any new data comes in, or you do a search, and you want to pass initial data
      * its here.
@@ -223,7 +223,7 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
         this._tableDataSource = dataSourceStream;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _closeDataSource(): void {
         if (!this._tableDataSource) {
             return;

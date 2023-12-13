@@ -141,85 +141,85 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
     @Output()
     activeStateChange: EventEmitter<void> = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(CarouselDirective)
     carousel: CarouselDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(CarouselItemDirective)
     items: QueryList<CarouselItemDirective<T>>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('indicator', { read: ElementRef })
     indicator: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     wrapperHeight: number;
 
     /**
      * Time to wait in milliseconds after the last keydown before
      * focusing or selecting option based on numeric/alpha keys.
-     * @hidden
+     * @ignore
      */
     typeaheadDebounceInterval = 750;
 
-    /** @hidden */
+    /** @ignore */
     config: CarouselConfig;
 
-    /** @hidden */
+    /** @ignore */
     internalTranslationConfig: TimeColumnConfig | null = null;
 
-    /** @hidden */
+    /** @ignore */
     get currentIndicatorId(): string {
         return this.id + '-current-indicator';
     }
 
-    /** @hidden */
+    /** @ignore */
     get currentIndicatorValueId(): string {
         return this.currentIndicatorId + '-value';
     }
 
-    /** @hidden */
+    /** @ignore */
     private _elementsAtOnce$ = new BehaviorSubject(7);
 
-    /** @hidden */
+    /** @ignore */
     private _offset$ = new BehaviorSubject(3);
 
-    /** @hidden */
+    /** @ignore */
     private _active = false;
 
-    /** @hidden */
+    /** @ignore */
     private _queryKeyDownEvent: Subject<string> = new Subject<string>();
 
-    /** @hidden */
+    /** @ignore */
     private _activeValue: Nullable<T>;
 
-    /** @hidden */
+    /** @ignore */
     private _activeCarouselItem: CarouselItemDirective<T>;
 
-    /** @hidden */
+    /** @ignore */
     private _isDragging = false;
 
-    /** @hidden */
+    /** @ignore */
     private _viewInit$ = new BehaviorSubject<boolean>(false);
 
-    /** @hidden */
+    /** @ignore */
     private _resize$ = new BehaviorSubject<boolean>(false);
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions: Subscription = new Subscription();
 
-    /** @hidden
+    /** @ignore
      * logs numeric key inputs to set time using keyboard input.
      */
     private _keyLog: string[] = [];
 
-    /** @hidden
+    /** @ignore
      * Timeout variable used to set timeout for subsequent numeric key input to set time.
      */
     private _numericInputTimeout: ReturnType<typeof setTimeout>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _changeDetRef: ChangeDetectorRef,
         private _elmRef: ElementRef
@@ -253,13 +253,13 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._subscriptions.add(this._elementsAtOnce$.pipe(tap(() => this._setUpCarouselConfiguration())).subscribe());
         this._setUpQuerySubscription();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._subscriptions.add(
             resizeObservable(this._elmRef.nativeElement).subscribe(() => {
@@ -276,18 +276,18 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('click')
     onItemClick(): void {
         this.activeStateChange.emit();
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
@@ -303,7 +303,7 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('wheel', ['$event'])
     mouseScrollHandler(event: WheelEvent): void {
         event.preventDefault();
@@ -312,7 +312,7 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     spinnerButtonKeyupHandle(event: KeyboardEvent, upButton?: boolean): void {
         if (KeyUtil.isKeyCode(event, SPACE)) {
             if (upButton) {
@@ -326,7 +326,7 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     setValueOfActive(): void {
         if (this._active) {
             this._setUpInitialValue();
@@ -405,7 +405,7 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
      * Create id for column item
      * @param index column item index
      * @returns column item id
-     * @hidden
+     * @ignore
      */
     _createColumnItemIdByIndex(index: number): string {
         return this.id + index;
@@ -413,13 +413,13 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
 
     /**
      * On focus callback
-     * @hidden
+     * @ignore
      */
     _onFocusIndicator(): void {
         this.activeStateChange.emit();
     }
 
-    /** @hidden
+    /** @ignore
      * handles alphabetical key inputs to set period.
      */
     private _alphaKeyInputHandler(event: KeyboardEvent): void {
@@ -430,7 +430,7 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
         }
     }
 
-    /** @hidden
+    /** @ignore
      * handles numeric key inputs to set time.
      */
     private _numericKeyInputHandler(event: KeyboardEvent): void {
@@ -449,7 +449,7 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
         }
     }
 
-    /** @hidden
+    /** @ignore
      * set the time for given item value. used by _numericKeyInputHandler.
      */
     private _pickTimeOnValue(value: string | number): void {
@@ -469,7 +469,7 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
      * smooth => defines if transition time should be included in transform
      * emitEvent => defines if EventEmitter should be triggered by this change, set to false, when changed from outside
      * after => Defines if value was incremented/decremented, needed for hours to trigger AM/PM change
-     * @hidden
+     * @ignore
      */
     private _pickTime(item?: CarouselItemDirective<T>, smooth?: boolean, emitEvent?: boolean, after?: boolean): void {
         if (!item) {
@@ -493,13 +493,13 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
 
     /**
      * Returns item with passed value
-     * @hidden
+     * @ignore
      */
     private _getItem(_item: Nullable<T>): CarouselItemDirective<T> | undefined {
         return this.items.find((item) => item.value === _item);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _triggerCarousel(item: CarouselItemDirective<T>, smooth?: boolean): void {
         const array = this.items.toArray();
         let index: number = array.findIndex((_item) => _item === item) - this.offset;
@@ -513,13 +513,13 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
 
     /**
      * Focus current indicator, which allows to handle keydown events inside column
-     * @hidden
+     * @ignore
      */
     private _focusIndicator(): void {
         document.getElementById(this.currentIndicatorId)?.focus();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getValue(value: string): any {
         if (!isNaN(Number(value))) {
             return Number(value);
@@ -528,7 +528,7 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setUpQuerySubscription(): void {
         const trigger = this._queryKeyDownEvent.pipe(debounceTime(this.typeaheadDebounceInterval));
 
@@ -544,7 +544,7 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setUpCarouselConfiguration(): void {
         const config: CarouselConfig = {
             gestureSupport: true,
@@ -558,7 +558,7 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
         this.config = config;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setUpInitialValue(): void {
         if (!this._activeValue) {
             this._activeValue = this.items.first.value;
@@ -566,7 +566,7 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
         this._pickTime(this._getItem(this._activeValue), false);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updateInternalTranslationConfig(): void {
         switch (this.columnTranslationsPreset) {
             case 'hours':

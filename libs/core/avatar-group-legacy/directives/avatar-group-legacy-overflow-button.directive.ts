@@ -25,20 +25,20 @@ export class AvatarGroupLegacyOverflowButtonDirective implements OnInit, OnChang
     @Input()
     color: AvatarGroupLegacyOverflowButtonColor = 'neutral';
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
@@ -50,7 +50,7 @@ export class AvatarGroupLegacyOverflowButtonDirective implements OnInit, OnChang
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getMoreButtonColorCssClass(): string | null {
         if (this.color === 'random') {
             return `fd-avatar-group-legacy__more-button--accent-color-${getRandomColorAccent()}`;

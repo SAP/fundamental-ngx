@@ -5,6 +5,6 @@ import { Directive, ElementRef } from '@angular/core';
     standalone: true
 })
 export class OverflowListItemDirective {
-    /** @hidden */
+    /** @ignore */
     constructor(public el: ElementRef) {}
 }

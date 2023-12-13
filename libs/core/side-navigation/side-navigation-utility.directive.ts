@@ -6,11 +6,11 @@ import { NestedListDirective } from '@fundamental-ngx/core/nested-list';
     standalone: true
 })
 export class SideNavigationUtilityDirective {
-    /** @hidden */
+    /** @ignore */
     @ContentChild(NestedListDirective)
     list: NestedListDirective;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-side-nav__utility')
     classSideNavUtility = true;
 }

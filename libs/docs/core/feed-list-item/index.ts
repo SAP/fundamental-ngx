@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'feed-list-item';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/feed-list-item';
 export const API_FILE_KEY = 'feedListItem';
 export const I18N_KEY = 'coreFeedListItem';

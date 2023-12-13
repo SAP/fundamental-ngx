@@ -71,31 +71,31 @@ export class FormattedTextComponent implements OnInit, OnChanges {
     @HostBinding('style.width')
     width?: string;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('innerHTML')
     formattedText: SafeHtml = '';
 
-    /** @hidden */
+    /** @ignore */
     private _htmlSanitizer!: HtmlSanitizer;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private readonly domSanitizer: DomSanitizer) {
         this._htmlSanitizer = new HtmlSanitizer();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.render();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if ('htmlText' in changes) {
             this.render();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private render(): void {
         this._htmlSanitizer.extendAttrs({
             target: this.convertedLinksDefaultTarget

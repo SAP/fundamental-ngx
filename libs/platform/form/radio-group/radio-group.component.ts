@@ -105,19 +105,19 @@ export class RadioGroupComponent
     // eslint-disable-next-line @angular-eslint/no-output-native
     change: EventEmitter<RadioButtonComponent> = new EventEmitter<RadioButtonComponent>();
 
-    /** @hidden */
+    /** @ignore */
     private _activeItemSet = false;
 
-    /** @hidden The currently selected radio button. Should match value. */
+    /** @ignore The currently selected radio button. Should match value. */
     private _selected: RadioButtonComponent | null = null;
 
-    /** @hidden */
+    /** @ignore */
     private _destroy$ = new Subject<boolean>();
 
-    /** @hidden FocusKeyManager instance */
+    /** @ignore FocusKeyManager instance */
     private _keyboardEventsManager: FocusKeyManager<RadioButtonComponent>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         protected _cd: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -165,7 +165,7 @@ export class RadioGroupComponent
         this._selectedValueChanged(event);
     }
 
-    /** @hidden Selecting default button as provided as input */
+    /** @ignore Selecting default button as provided as input */
     ngAfterContentChecked(): void {
         if (!this._validateRadioButtons()) {
             throw new Error('fdp-radio-button-group must contain a fdp-radio-button');
@@ -175,7 +175,7 @@ export class RadioGroupComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * Initialize properties once fd-radio-buttons are available.
      * This allows us to propagate relevant attributes to associated buttons.
      */
@@ -187,19 +187,19 @@ export class RadioGroupComponent
         super.ngAfterViewInit();
     }
 
-    /** @hidden Destroys event subscription. */
+    /** @ignore Destroys event subscription. */
     ngOnDestroy(): void {
         this._destroy$.next(true);
         this._destroy$.complete();
         this._keyboardEventsManager?.destroy();
     }
 
-    /** @hidden */
+    /** @ignore */
     _getListItemDisabledValue(item: RadioGroupComponent['list'][number]): boolean {
         return this.disabled || (typeof item === 'object' && !!(<SelectItem>item).disabled);
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     _handleKeydown(event: KeyboardEvent): void {
         event.stopImmediatePropagation();
@@ -218,7 +218,7 @@ export class RadioGroupComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initialSetup(radioButtons: QueryList<RadioButtonComponent>): void {
         if (!radioButtons || radioButtons?.length === 0) {
             return;
@@ -261,7 +261,7 @@ export class RadioGroupComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * Selects given button, if value matches
      * @param button
      */
@@ -282,7 +282,7 @@ export class RadioGroupComponent
         }
     }
 
-    /** @hidden Called every time a radio button is clicked, In content child as well as viewchild */
+    /** @ignore Called every time a radio button is clicked, In content child as well as viewchild */
     private _selectedValueChanged(button: RadioButtonComponent): void {
         if (this._selected !== button) {
             this._resetTabIndex(button);
@@ -300,7 +300,7 @@ export class RadioGroupComponent
         this.onTouched();
     }
 
-    /** @hidden resets tabIndex for first radio in radio group. for accessibility tabIndex was set */
+    /** @ignore resets tabIndex for first radio in radio group. for accessibility tabIndex was set */
     private _resetTabIndex(selectedRadio: RadioButtonComponent): void {
         if (this.viewRadioButtons || this.contentRadioButtons) {
             const radios = this.viewRadioButtons.length > 0 ? this.viewRadioButtons : this.contentRadioButtons;
@@ -313,7 +313,7 @@ export class RadioGroupComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param button Set initial values, used while content children creation
      */
     private _setProperties(button: RadioButtonComponent): void {
@@ -324,7 +324,7 @@ export class RadioGroupComponent
         }
     }
 
-    /** @hidden Make sure we have expected child. */
+    /** @ignore Make sure we have expected child. */
     private _validateRadioButtons(): boolean {
         return (
             this.contentRadioButtons.filter((item) => !(item instanceof RadioButtonComponent || item['renderer']))

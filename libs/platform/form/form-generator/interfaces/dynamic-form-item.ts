@@ -232,7 +232,7 @@ export interface BaseDynamicFormFieldItem<T = any> {
     ) => void | Promise<void> | Observable<void>;
 
     /**
-     * @hidden
+     * @ignore
      * @description
      * Used as a static flag on should this form item be shown.
      */
@@ -345,7 +345,7 @@ type PreparedDynamicFormFieldItemFields = {
 };
 
 /**
- * @hidden
+ * @ignore
  * Internal representation of DynamicFormFieldItem with all fields resolved to a plain value
  */
 export type PreparedDynamicFormFieldItem<T extends BaseDynamicFormFieldItem = BaseDynamicFormFieldItem> = Omit<

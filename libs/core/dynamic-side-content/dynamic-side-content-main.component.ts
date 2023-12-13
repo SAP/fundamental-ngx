@@ -31,18 +31,18 @@ export class DynamicSideContentMainComponent implements OnInit {
     @HostBinding('attr.id')
     id = 'fd-dynamic-side-content-main-id-' + componentId++;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
         private _render: Renderer2
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._addClassName(DYNAMIC_SIDE_CONTENT_CLASS_NAME.main);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addClassName(className: string): void {
         return this._render.addClass(this._elementRef.nativeElement, className);
     }

@@ -160,15 +160,15 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     @HostBinding('style.top.px')
     top = 0;
 
-    /** @hidden while resizing this value will change to a greater value */
+    /** @ignore while resizing this value will change to a greater value */
     @HostBinding('style.z-index')
     zIndex = 0;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('style.position')
     position = 'absolute';
 
-    /** @hidden transition animation when layout re-draws */
+    /** @ignore transition animation when layout re-draws */
     @HostBinding('class.fd-resizable-card-layout__draw-transition')
     reDrawAnimation = true;
 
@@ -221,61 +221,61 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     /** Change in rank from previous value*/
     prevRank = 0;
 
-    /** @hidden Default width of card is 20rem ie. 1 column */
+    /** @ignore Default width of card is 20rem ie. 1 column */
     private _cardWidthColSpan = 1;
 
-    /** @hidden */
+    /** @ignore */
     private _cardHeightRowSpan: number;
 
-    /** @hidden helps in vertical step change event emit */
+    /** @ignore helps in vertical step change event emit */
     private _prevCardHeightRowSpan: number;
 
-    /** @hidden */
+    /** @ignore */
     private _cardMiniHeaderRowSpan: number;
 
-    /** @hidden */
+    /** @ignore */
     private _cardMiniContentRowSpan?: number;
 
-    /** @hidden config values for card */
+    /** @ignore config values for card */
     private _config: ResizableCardItemConfig;
 
-    /** @hidden previous cursor x position */
+    /** @ignore previous cursor x position */
     private _prevX: number;
 
-    /** @hidden previous cursor y position */
+    /** @ignore previous cursor y position */
     private _prevY: number;
 
-    /** @hidden */
+    /** @ignore */
     private _prevCardWidth: number;
 
-    /** @hidden */
+    /** @ignore */
     private _prevCardHeight: number;
 
-    /** @hidden flag to control resize */
+    /** @ignore flag to control resize */
     private _resize = false;
 
-    /** @hidden */
+    /** @ignore */
     private _resizeDirection: ResizeDirection;
 
-    /** @hidden */
+    /** @ignore */
     private _maxColumn: number;
 
     /**
-     * @hidden stores original width span of card.
+     * @ignore stores original width span of card.
      * It may reduce on small screen, so have to restore using this.
      */
     private _originalCardWidthSpan = 0;
 
-    /** @hidden */
+    /** @ignore */
     private _rank: number;
 
-    /** @hidden */
+    /** @ignore */
     private _rtl = false;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _cd: ChangeDetectorRef,
         public readonly elementRef: ElementRef,
@@ -286,7 +286,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
@@ -312,7 +312,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     }
 
     /**
-     * @hidden When mouse moves to resize the card.
+     * @ignore When mouse moves to resize the card.
      * using window:mousemove so, resize will happen smoothly
      * @param event: MouseEvent
      */
@@ -498,12 +498,12 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
         );
     }
 
-    /** @hidden Return previous height row span of the card */
+    /** @ignore Return previous height row span of the card */
     get previousCardHeightRowSpan(): number {
         return this._prevCardHeightRowSpan;
     }
 
-    /** @hidden Set card properties using config received */
+    /** @ignore Set card properties using config received */
     private _initialSetup(): void {
         this.cardWidthColSpan = this._config?.cardWidthColSpan || this.cardWidthColSpan;
         this.cardHeightRowSpan = this._config?.cardHeightRowSpan || this.cardHeightRowSpan;
@@ -514,7 +514,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
         this.resizable = this._config.resizable || this.resizable;
     }
 
-    /** @hidden Returns true when resize offset is crossed */
+    /** @ignore Returns true when resize offset is crossed */
     private _horizontalResizeWithOffset(): void {
         // positive value indicates that width has increased
         const widthIncrement = this.cardWidth - this._prevCardWidth;
@@ -551,7 +551,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     }
 
     /**
-     * @hidden make horizontal resize only on step of 20rem
+     * @ignore make horizontal resize only on step of 20rem
      */
     private _horizontalStepResizing(): void {
         this._horizontalResizeWithOffset();
@@ -564,7 +564,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     }
 
     /**
-     * @hidden make vertical resize only on step of 1rem
+     * @ignore make vertical resize only on step of 1rem
      */
     private _verticalStepResizing(): void {
         // positive value indicates that height has increased
@@ -579,7 +579,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     }
 
     /**
-     * @hidden Resize card horizontally by checking boundary condition
+     * @ignore Resize card horizontally by checking boundary condition
      * @param xPosition: current x-position of cursor
      */
     private _horizontalResizing(xPosition: number): void {
@@ -601,7 +601,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     }
 
     /**
-     * @hidden Resize card vertically.
+     * @ignore Resize card vertically.
      * takes care of mini-header height and mini-content height
      * @param yPosition: current y-position of cursor
      */
@@ -681,7 +681,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
         }
     }
 
-    /** @hidden reset involved variables while resizing */
+    /** @ignore reset involved variables while resizing */
     private _stopResizing(): void {
         if (this._resize) {
             this.cardState = 0;
@@ -693,25 +693,25 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
         }
     }
 
-    /** @hidden Returns cardWidth based on card column span */
+    /** @ignore Returns cardWidth based on card column span */
     private _setCardWidth(): void {
         this.cardWidth = this._cardWidthColSpan * horizontalResizeStep + (this._cardWidthColSpan - 1) * gap;
         this._cd.markForCheck();
     }
 
-    /** @hidden Returns cardHeight based on card row span */
+    /** @ignore Returns cardHeight based on card row span */
     private _setCardHeight(): void {
         this.cardHeight = this._cardHeightRowSpan * verticalResizeStep;
         this._cd.markForCheck();
     }
 
-    /** @hidden Returns card mini header height */
+    /** @ignore Returns card mini header height */
     private _setCardMiniHeaderHeight(): void {
         this.cardMiniHeaderHeight = this._cardMiniHeaderRowSpan * verticalResizeStep;
         this._cd.markForCheck();
     }
 
-    /** @hidden Returns card mini content height */
+    /** @ignore Returns card mini content height */
     private _setCardMiniContentHeight(): void {
         this.cardMiniContentHeight = this.cardMiniContentRowSpan * verticalResizeStep;
         this._cd.markForCheck();

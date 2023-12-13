@@ -242,15 +242,15 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     readonly activeViewChange = new EventEmitter<FdCalendarView>();
 
     /**
-     * @hidden core date-picker as child
+     * @ignore core date-picker as child
      */
     @ViewChild(FdDatePickerComponent)
     fdDatePickerComponent: FdDatePickerComponent<D>;
 
-    /** @hidden */
+    /** @ignore */
     private _datePickerValid = true;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         protected _changeDetectorRef: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -292,7 +292,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     disableRangeEndFunction: (value: D) => boolean = () => false;
 
-    /** @hidden */
+    /** @ignore */
     writeValue(value: D | DateRange<D> | null): void {
         super.writeValue(value);
         this._changeDetectorRef.detectChanges();
@@ -331,23 +331,23 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
         this.isOpenChange.emit(open);
     };
 
-    /** @hidden */
+    /** @ignore */
     handleSelectedDateChange = (fdDate: Nullable<D>): void => {
         this.selectedDateChange.emit(fdDate);
     };
 
-    /** @hidden */
+    /** @ignore */
     handleSelectedRangeDateChange = (fdRangeDate: DateRange<D>): void => {
         this.selectedRangeDateChange.emit(fdRangeDate);
     };
 
-    /** @hidden */
+    /** @ignore */
     handleActiveViewChange = (fdCalendarView: FdCalendarView): void => {
         this.activeViewChange.emit(fdCalendarView);
     };
 }
 
-/** @hidden */
+/** @ignore */
 export function createMissingDateImplementationError(provider: string): Error {
     return Error(
         `FdpDatePicker: No provider found for ${provider}. You must import one of the following ` +

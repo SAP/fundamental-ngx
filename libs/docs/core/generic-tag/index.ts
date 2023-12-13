@@ -19,4 +19,5 @@ export const ROUTES: Routes = [
 ];
 
 export const LIBRARY_NAME = 'generic-tag';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/generic-tag';
 export const API_FILE_KEY = 'genericTag';

@@ -9,7 +9,7 @@ export class DynamicPageHeaderSubtitleDirective {
     /** Template reference. */
     templateRef = inject<TemplateRef<DynamicPageTitleDirectiveContext>>(TemplateRef);
 
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard(
         dir: DynamicPageHeaderSubtitleDirective,
         ctx: DynamicPageTitleDirectiveContext

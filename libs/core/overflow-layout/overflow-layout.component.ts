@@ -126,93 +126,93 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
     hiddenItemsChange = new EventEmitter<OverflowItemRef[]>();
 
     /**
-     * @hidden
+     * @ignore
      * List of items to display.
      */
     @ContentChildren(FD_OVERFLOW_ITEM_REF, { descendants: true })
     _items: QueryList<OverflowItemRef>;
 
     /**
-     * @hidden
+     * @ignore
      * Template for the custom "More" button.
      */
     @ContentChild(FD_OVERFLOW_EXPAND)
     _moreButton: Nullable<OverflowExpand>;
 
     /**
-     * @hidden
+     * @ignore
      * List of items that can be focused
      */
     @ContentChildren(FD_OVERFLOW_FOCUSABLE_ITEM, { descendants: true })
     _focusableOverflowItems: QueryList<OverflowLayoutFocusableItem>;
 
     /**
-     * @hidden
+     * @ignore
      * List of rendered items.
      */
     @ViewChildren(OverflowLayoutItemContainerDirective)
     _visibleItems: QueryList<OverflowLayoutItemContainerDirective>;
 
     /**
-     * @hidden
+     * @ignore
      * Items wrapper directive.
      */
     @ViewChild('itemsWrapper')
     _itemsWrapper: ElementRef<HTMLElement>;
 
     /**
-     * @hidden
+     * @ignore
      * Layout container element.
      */
     @ViewChild('layoutContainer')
     _layoutContainer: ElementRef<HTMLDivElement>;
 
     /**
-     * @hidden
+     * @ignore
      * "More" button container element.
      */
     @ViewChild('showMoreContainer')
     _showMoreContainer: ElementRef<HTMLDivElement>;
 
-    /** @hidden */
+    /** @ignore */
     _allItems: OverflowItemRef[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _hiddenItems: OverflowItemRef[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _showMore = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class')
     readonly _initialClass = 'fd-overflow-layout';
 
-    /** @hidden */
+    /** @ignore */
     private readonly _subscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _overflowPopoverContent: OverflowPopoverContent;
 
-    /** @hidden */
+    /** @ignore */
     private _fillTrigger$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _maxVisibleItems = Infinity;
 
-    /** @hidden */
+    /** @ignore */
     private _canListenToResize = false;
 
-    /** @hidden */
+    /** @ignore */
     private _dir: 'rtl' | 'ltr' = 'ltr';
 
-    /** @hidden */
+    /** @ignore */
     private _keyboardEventsManager: Nullable<FocusKeyManager<OverflowLayoutFocusableItem>>;
 
     /** Overflow Layout more button text */
     @Input()
     moreItemsButtonText: (hiddenItemsCount: number) => string = (count) => `${count} more`;
 
-    /** @hidden */
+    /** @ignore */
     private get _config(): OverflowLayoutConfig {
         return {
             visibleItems: this._visibleItems.toArray(),
@@ -228,7 +228,7 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
         };
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _elementRef: ElementRef<HTMLElement>,
         private readonly _ngZone: NgZone,
@@ -244,12 +244,12 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._setupKeyboardListener();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._subscription.add(
             this._overflowLayoutService.detectChanges.subscribe(() => {
@@ -294,7 +294,7 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscription.unsubscribe();
         this._keyboardEventsManager?.destroy();
@@ -332,14 +332,14 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
         this._overflowPopoverContent = content;
     }
 
-    /** @hidden */
+    /** @ignore */
     _onPopoverStateChange(opened: boolean): void {
         if (opened) {
             this._overflowPopoverContent?.focusFirstTabbableElement();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setupKeyboardListener(): void {
         this._subscription.add(
             fromEvent<KeyboardEvent>(this._elementRef.nativeElement, this.navigationTrigger)
@@ -364,7 +364,7 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setFocusKeyManager(): void {
         if (!this.enableKeyboardNavigation) {
             return;
@@ -378,7 +378,7 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
             .skipPredicate((item) => !item.navigable || item.hidden);
     }
 
-    /** @hidden Rtl change subscription */
+    /** @ignore Rtl change subscription */
     private _subscribeToRtl(): void {
         if (!this._rtl || !this.enableKeyboardNavigation) {
             return;

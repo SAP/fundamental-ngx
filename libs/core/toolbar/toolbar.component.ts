@@ -138,15 +138,15 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     @HostBinding('attr.aria-labelledby')
     ariaLabelledBy: string;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('titleElement')
     titleElement: ElementRef<HTMLHeadElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(forwardRef(() => ToolbarItem))
     toolbarItems: QueryList<ToolbarItem>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(TitleToken)
     set titleComponent(title: TitleToken | null) {
         this._titleComponent$.next(title);
@@ -156,37 +156,37 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         return this._titleComponent$.value;
     }
 
-    /** @hidden */
+    /** @ignore */
     overflowItems$: Observable<ToolbarItem[]>;
 
-    /** @hidden */
+    /** @ignore */
     overflownItems: ToolbarItem[] = [];
 
     /** HTML Element Reference. */
     readonly elementRef = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.role')
     private readonly _role = 'toolbar';
 
-    /** @hidden */
+    /** @ignore */
     private _titleComponent$: BehaviorSubject<TitleToken | null> = new BehaviorSubject<TitleToken | null>(null);
 
-    /** @hidden */
+    /** @ignore */
     private _refreshOverflow$ = new BehaviorSubject<void>(undefined);
 
-    /** @hidden */
+    /** @ignore */
     private get _toolbarWidth(): number {
         return (this.elementRef.nativeElement as HTMLElement).clientWidth - OVERFLOW_SPACE;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _shouldOverflow = false;
 
-    /** @hidden */
+    /** @ignore */
     private shouldOverflow$ = new BehaviorSubject<boolean>(false);
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _cd: ChangeDetectorRef,
         readonly _contentDensityObserver: ContentDensityObserver,
@@ -197,7 +197,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         _contentDensityObserver.subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
@@ -210,7 +210,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this.overflowItems$ = combineLatest([
             this.resizeObserverService.observe(this.elementRef.nativeElement).pipe(map(() => this._toolbarWidth)),
@@ -283,12 +283,12 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewChecked(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         if (this.titleComponent) {
             this.titleComponent.elementRef?.nativeElement.classList.add('fd-toolbar__title');
@@ -306,7 +306,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         this._refreshOverflow$.next();
     }
 
-    /** @hidden Get group number with the lowest priority.
+    /** @ignore Get group number with the lowest priority.
      *  Uses for detecting a group of elements which would be hidden from the toolbar.
      *  */
     private _getLowestPriorityFromGroup(
@@ -333,7 +333,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         }, itemGroup as number);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getElementsFromCurrentGroup(
         itemGroup: number,
         groupedCollection?: Record<number, ToolbarItem[]>,
@@ -357,7 +357,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         return itemsToRemove;
     }
 
-    /** @hidden Get the object with grouped arrays of elements. */
+    /** @ignore Get the object with grouped arrays of elements. */
     private _getGroupedCollection(toolbarItems: ToolbarItem[]): Record<number, ToolbarItem[]> {
         return toolbarItems.reduce((acc, item) => {
             const itemPrio = item.priority;
@@ -377,7 +377,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         }, {});
     }
 
-    /** @hidden Get the object with the highest priority for each group of elements. */
+    /** @ignore Get the object with the highest priority for each group of elements. */
     private _getGroupedCollectionPriority(
         groupedCollection: Record<number, ToolbarItem[]>
     ): Record<number, OverflowPriority> {
@@ -395,12 +395,12 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         }, {});
     }
 
-    /** @hidden Sort priorities of elements/groups. */
+    /** @ignore Sort priorities of elements/groups. */
     private _sortPriorities(a: OverflowPriority, b: OverflowPriority): number {
         return OVERFLOW_PRIORITY_SCORE.get(b)! - OVERFLOW_PRIORITY_SCORE.get(a)!;
     }
 
-    /** @hidden Sort by group and priority and initial position */
+    /** @ignore Sort by group and priority and initial position */
     private _getSortedByPriorityAndGroupItems(toolbarItems: ToolbarItem[]): ToolbarItem[] {
         const notSorted = toolbarItems.map((element, index) => ({ element, index }));
 

@@ -15,7 +15,7 @@ export class NestedButtonDirective extends ButtonTypeGuard implements OnChanges 
     @Input({ transform: coerceBooleanProperty })
     square: BooleanInput;
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.fdType = this.square ? 'nested-square' : 'nested';
         super.ngOnChanges();

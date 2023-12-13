@@ -23,44 +23,44 @@ import { IconTabBarPopoverComponent } from '../popovers/icon-tab-bar-popover/ico
     ]
 })
 export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
-    /** @hidden list of tab html elements, that can receive focus */
+    /** @ignore list of tab html elements, that can receive focus */
     @ViewChildren('tabItem') _tabUIElements: QueryList<ElementRef<HTMLElement>>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(IconTabBarPopoverComponent) _tabBarPopover: IconTabBarPopoverComponent;
 
-    /** @hidden */
+    /** @ignore */
     _offsetOverflowDirective = 30;
 
     /**
-     * @hidden
+     * @ignore
      * An array containing extra tabs for the next steps
      */
     _nextSteps: IconTabBarItem[] = [];
 
     /**
-     * @hidden
+     * @ignore
      * An array containing extra tabs for the next steps
      */
     _prevSteps: IconTabBarItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _showLeftBtn = false;
 
-    /** @hidden */
+    /** @ignore */
     _showRightBtn = false;
 
-    /** @hidden */
+    /** @ignore */
     private _firstVisibleTabIndex = 0;
 
-    /** @hidden */
+    /** @ignore */
     private _currentStepIndex = 0;
 
-    /** @hidden */
+    /** @ignore */
     _anchorIndexForExtraBtnDirective: number;
 
     /**
-     * @hidden
+     * @ignore
      * @param selectedItem
      */
     _selectItem(selectedItem: IconTabBarItem): void {
@@ -69,7 +69,7 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param selectedItem
      * @description select extra item inside popover
      */
@@ -106,7 +106,7 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param extraItems
      * @description recalculate _nextSteps and _prevSteps array if we have extra items
      */
@@ -115,7 +115,7 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
         this.recalculateItemsByPrevArr(extraItems, amountOfPrevSteps);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _clearExtraList(): void {
         this._nextSteps = [];
         this._prevSteps = [];
@@ -126,7 +126,7 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param extraItems
      * @param amountOfNextSteps
      * @description We fill the array of the next steps to the selected tab,
@@ -172,7 +172,7 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param extraItems
      * @param amountOfPreviousSteps
      * @description We fill the array of the previous steps to the selected tab,

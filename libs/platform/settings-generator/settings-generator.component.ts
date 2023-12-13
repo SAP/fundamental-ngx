@@ -46,10 +46,10 @@ import { FDP_SETTINGS_GENERATOR, FDP_SETTINGS_GENERATOR_CONFIG } from './tokens'
     standalone: true
 })
 export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewInit, OnDestroy {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class')
     private readonly _initialClass = 'fdp-settings-generator';
-    /** @hidden */
+    /** @ignore */
     @ViewChild('renderer', { read: ViewContainerRef })
     private readonly _viewRef: ViewContainerRef;
 
@@ -75,25 +75,25 @@ export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewI
         return this._settings;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _settings: Nullable<SettingsModel>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _settingsGeneratorService = inject(SettingsGeneratorService);
 
-    /** @hidden */
+    /** @ignore */
     private _currentLayout: string;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _viewReady = new BehaviorSubject<boolean>(false);
 
-    /** @hidden */
+    /** @ignore */
     private _viewReadySub: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     private _layoutComponentRef: ComponentRef<BaseSettingsGeneratorLayout>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _fgService: FormGeneratorService,
         private readonly _settingsLayoutService: SettingsGeneratorLayoutAccessorService,
@@ -109,7 +109,7 @@ export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewI
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._viewReady.next(true);
 
@@ -119,7 +119,7 @@ export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewI
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._viewReady.complete();
         this._viewReadySub?.unsubscribe();
@@ -135,7 +135,7 @@ export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewI
         return this._settingsGeneratorService.submit();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setLayout(): void {
         this._viewReadySub?.unsubscribe();
 

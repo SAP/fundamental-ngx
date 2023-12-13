@@ -5,7 +5,7 @@ import { TableRow, TableRowClass } from '../models';
 
 @Pipe({ name: 'rowClasses', standalone: true })
 export class RowClassesPipe implements PipeTransform {
-    /** @hidden */
+    /** @ignore */
     transform(row: TableRow, rowsClass: TableRowClass): string {
         const treeRowClass = row.type === TableRowType.TREE ? 'fdp-table__row--tree' : '';
         const rowClasses = this._getRowCustomCssClasses(row, rowsClass);
@@ -13,7 +13,7 @@ export class RowClassesPipe implements PipeTransform {
         return rowClasses.concat(' ', treeRowClass).trim();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getRowCustomCssClasses(row: TableRow, rowsClass: TableRowClass): string {
         if (!rowsClass) {
             return '';

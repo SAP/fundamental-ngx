@@ -21,13 +21,13 @@ export class ButtonBadgeDirective implements OnChanges, HasElementRef {
     @Input()
     content: string | number;
 
-    /** @hidden */
+    /** @ignore */
     _buttonComponent = inject<BaseButton>(FD_BUTTON_COMPONENT, { host: true });
 
-    /** @hidden */
+    /** @ignore */
     elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.elementRef.nativeElement.innerHTML = `${this.content}` || '';
         if (isDevMode()) {

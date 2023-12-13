@@ -43,7 +43,7 @@ export class ActionSheetControlComponent {
         this.clicked.emit();
     }
 
-    /** @hidden */
+    /** @ignore */
     _focus(): void {
         this._focusedElementBeforeDialogOpened?.focus();
     }

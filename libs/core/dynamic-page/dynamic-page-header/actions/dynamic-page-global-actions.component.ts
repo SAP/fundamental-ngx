@@ -23,11 +23,11 @@ import { DynamicPageBaseActions } from './dynamic-page-base-actions';
     standalone: true
 })
 export class DynamicPageGlobalActionsComponent extends DynamicPageBaseActions implements AfterContentInit {
-    /** @hidden */
+    /** @ignore */
     @ContentChild(ToolbarComponent)
     _toolbarComponent: ToolbarComponent;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elementRef: ElementRef,
         private _renderer: Renderer2,
@@ -36,19 +36,19 @@ export class DynamicPageGlobalActionsComponent extends DynamicPageBaseActions im
         super();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageToolbar, this._elementRef);
     }
 
-    /** @hidden */
+    /** @ignore */
     _setSize(size: DynamicPageResponsiveSize): void {
         if (this._toolbarComponent) {
             this._handleOverflow(size === 'small');
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleOverflow(shouldBeHidden: boolean): void {
         this._toolbarComponent.forceOverflow = shouldBeHidden;
         this._toolbarComponent.shouldOverflow = shouldBeHidden;

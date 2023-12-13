@@ -10,34 +10,34 @@ import { FD_MENU_ITEM_COMPONENT } from '../../menu.tokens';
     standalone: true
 })
 export class SegmentedButtonOptionDirective<T> implements AfterViewInit {
-    /** @hidden */
+    /** @ignore */
     @Input() value: T;
 
-    /** @hidden */
+    /** @ignore */
     readonly elementRef = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     readonly menuItem = inject<MenuItemComponent>(FD_MENU_ITEM_COMPONENT, { host: true });
 
-    /** @hidden */
+    /** @ignore */
     readonly clicked: Observable<void>;
 
-    /** @hidden */
+    /** @ignore */
     readonly renderer2 = inject(Renderer2);
 
-    /** @hidden */
+    /** @ignore */
     private _clicked = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _dotElement: HTMLSpanElement;
 
-    /** @hidden */
+    /** @ignore */
     private _viewInit$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _selected$ = new BehaviorSubject<boolean>(false);
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         this.clicked = this._clicked.asObservable();
         const ngZone = inject(NgZone);
@@ -56,7 +56,7 @@ export class SegmentedButtonOptionDirective<T> implements AfterViewInit {
             .subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('click', ['$event'])
     @HostListener('keydown.enter', ['$event'])
     @HostListener('keydown.space', ['$event'])
@@ -65,12 +65,12 @@ export class SegmentedButtonOptionDirective<T> implements AfterViewInit {
         this._clicked.next();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._viewInit$.next();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _createDot(): void {
         this._dotElement = this.renderer2.createElement('span');
         this.renderer2.appendChild(this.elementRef.nativeElement, this._dotElement);
@@ -82,19 +82,19 @@ export class SegmentedButtonOptionDirective<T> implements AfterViewInit {
         addonGlyph.renderElement(new DomPortal(this._dotElement)).subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _showDot(): void {
         this.renderer2.setAttribute(this._dotElement, 'aria-hidden', 'false');
         this.renderer2.setStyle(this._dotElement, 'display', 'inline-block');
     }
 
-    /** @hidden */
+    /** @ignore */
     private _hideDot(): void {
         this.renderer2.setAttribute(this._dotElement, 'aria-hidden', 'true');
         this.renderer2.setStyle(this._dotElement, 'display', 'none');
     }
 
-    /** @hidden */
+    /** @ignore */
     set selected(isSelected: boolean) {
         this._selected$.next(isSelected);
     }

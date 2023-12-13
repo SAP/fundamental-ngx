@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'carousel';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/carousel';
 export const API_FILE_KEY = 'carousel';
 export const I18N_KEY = 'coreCarousel';

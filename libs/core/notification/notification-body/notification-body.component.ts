@@ -9,7 +9,7 @@ import { NotificationGroupBaseDirective } from '../notification-utils/notificati
     standalone: true
 })
 export class NotificationBodyComponent extends NotificationGroupBaseDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-notification__body')
     fdNotificationBodyClass = true;
 }

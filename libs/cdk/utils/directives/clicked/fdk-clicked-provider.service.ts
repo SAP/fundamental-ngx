@@ -6,14 +6,14 @@ import { ClickedDirective } from './clicked.directive';
 
 @Injectable()
 export class FdkClickedProvider extends Subject<MouseEvent | KeyboardEvent> implements OnDestroy {
-    /** @hidden */
+    /** @ignore */
     private _preventDefault = true;
-    /** @hidden */
+    /** @ignore */
     private _listeners!: Array<() => void>;
-    /** @hidden */
+    /** @ignore */
     private readonly _fdkClickedEventManagerPluginLoaded: boolean;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elementRef: ElementRef<Element>,
         private _renderer: Renderer2,
@@ -24,18 +24,18 @@ export class FdkClickedProvider extends Subject<MouseEvent | KeyboardEvent> impl
         this._initialize();
     }
 
-    /** @hidden */
+    /** @ignore */
     setPreventDefault(val: boolean): void {
         this._preventDefault = val;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._listeners.forEach((d) => d());
         this.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initialize(): void {
         const eventsList: string[] = this._fdkClickedEventManagerPluginLoaded
             ? [ClickedDirective.eventName]

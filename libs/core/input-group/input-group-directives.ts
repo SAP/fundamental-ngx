@@ -25,10 +25,10 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
     @Input()
     class: string;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef,
         private readonly _contentDensityObserver: ContentDensityObserver
@@ -36,22 +36,22 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
         _contentDensityObserver.subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -78,7 +78,7 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
     @Input()
     class: string;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-input-group__addon')
     fdInputGroupAddonClass = true;
 
@@ -107,10 +107,10 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
     @Input()
     button = false;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef,
         private renderer: Renderer2,
@@ -119,17 +119,17 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
         _contentDensityObserver.subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         /** Add fd-input-group__button to button child element */
         const button = this.elementRef.nativeElement.querySelector('button');
@@ -138,12 +138,12 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied

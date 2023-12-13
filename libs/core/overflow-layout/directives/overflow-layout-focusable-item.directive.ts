@@ -24,7 +24,7 @@ export class OverflowLayoutFocusableItemDirective implements OverflowLayoutFocus
     @Input()
     navigable = true;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.tabindex')
     private get _tabindex(): number {
         return this.focusable ? 0 : -1;
@@ -35,27 +35,27 @@ export class OverflowLayoutFocusableItemDirective implements OverflowLayoutFocus
         return !!this._overflowItem?.hidden;
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('focus')
     private _onFocus(): void {
         this._overflowContainer.setFocusedElement(this);
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _overflowContainer: OverflowLayoutComponent,
         @Inject(FD_OVERFLOW_ITEM) @Optional() private readonly _overflowItem: OverflowItem,
         public readonly elementRef: ElementRef<HTMLElement>
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         if (this._overflowItem) {
             this._overflowItem.focusableItem = this;
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     focus(): void {
         this.elementRef.nativeElement.focus();
     }

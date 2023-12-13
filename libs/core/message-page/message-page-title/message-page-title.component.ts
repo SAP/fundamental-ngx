@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     standalone: true
 })
 export class MessagePageTitleComponent {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-message-page__title')
     fdMessagePageTitleClass = true;
 }

@@ -107,42 +107,42 @@ export class BreakpointDirective implements OnChanges, AfterViewInit {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     templateViewRef?: EmbeddedViewRef<unknown>;
 
-    /** @hidden */
+    /** @ignore */
     onChanges$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     _sizeObservable$: BehaviorSubject<Observable<number>> = new BehaviorSubject<Observable<number>>(
         inject(ViewportSizeObservable)
     );
-    /** @hidden */
+    /** @ignore */
     private _showOnS = false;
-    /** @hidden */
+    /** @ignore */
     private _showOnM = false;
-    /** @hidden */
+    /** @ignore */
     private _showOnL = false;
 
-    /** @hidden */
+    /** @ignore */
     private _showOnXL = false;
 
-    /** @hidden */
+    /** @ignore */
     private viewportSize$ = inject(ViewportSizeObservable);
 
-    /** @hidden */
+    /** @ignore */
     private _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private _resizeObserverService = inject(ResizeObserverService);
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly templateRef: TemplateRef<any>,
         private readonly viewContainer: ViewContainerRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         combineLatest([this._sizeObservable$.pipe(switchMap((obs$) => obs$)), this.onChanges$.pipe(startWith(void 0))])
             .pipe(
@@ -169,12 +169,12 @@ export class BreakpointDirective implements OnChanges, AfterViewInit {
             .subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.onChanges$.next();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _shouldShow(width: number, currentBreakpoint: BreakpointName): boolean {
         const shouldShowOnBreakpoints = [
             this._showOnS && 'S',

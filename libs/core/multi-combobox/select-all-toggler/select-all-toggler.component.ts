@@ -55,25 +55,25 @@ export class SelectAllTogglerComponent extends ListFocusItem implements OnInit {
      */
     @Input() valueChanges: Observable<unknown>;
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     selectedItems: Array<unknown> = [];
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     flatItems: Array<unknown> = [];
 
-    /** @hidden */
+    /** @ignore */
     get allAreSelected(): boolean {
         return this.selectedItems.length === this.flatItems.length;
     }
 
-    /** @hidden */
+    /** @ignore */
     get someAreSelected(): boolean {
         return this.selectedItems.length > 0 && !this.allAreSelected;
     }
 
-    /** @hidden */
+    /** @ignore */
     get checkboxValue(): boolean | null {
         if (this.allAreSelected) {
             return true;
@@ -84,13 +84,13 @@ export class SelectAllTogglerComponent extends ListFocusItem implements OnInit {
         return false;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private changeDetector: ChangeDetectorRef = inject(ChangeDetectorRef);
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown.enter', ['$event'])
     @HostListener('keydown.space', ['$event'])
     onKeyDown($event: KeyboardEvent): void {
@@ -98,14 +98,14 @@ export class SelectAllTogglerComponent extends ListFocusItem implements OnInit {
         this.change(!this.checkboxValue);
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('click')
     onClick(): void {
         this.elementRef.nativeElement.focus();
         this.change(!this.checkboxValue);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.tabindex = 0;
         this.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
@@ -113,7 +113,7 @@ export class SelectAllTogglerComponent extends ListFocusItem implements OnInit {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     change(value: boolean): void {
         this.selectAllHandler(value);
     }

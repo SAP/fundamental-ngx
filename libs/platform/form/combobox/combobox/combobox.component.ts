@@ -91,22 +91,22 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
     /** Event emitted when item is selected. */
     @Output()
     selectionChange = new EventEmitter<ComboboxSelectionChangeEvent>();
-    /** @hidden */
+    /** @ignore */
     @ViewChild('searchInputElement')
     searchInputElement: ElementRef<HTMLInputElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('controlTemplate')
     controlTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('listTemplate')
     listTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     _selectedElement?: OptionItem;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         readonly cd: ChangeDetectorRef,
         readonly elementRef: ElementRef,
@@ -134,7 +134,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
             formControl
         );
     }
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         super.ngOnInit();
         const providers = this.providers?.size === 0 ? this._comboboxConfig.providers : this.providers;
@@ -144,7 +144,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
 
@@ -153,7 +153,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _onBlur(event: FocusEvent): void {
         if (this.mobile) {
             return;
@@ -177,14 +177,14 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         this._updateModel(optionItem ? optionItem.value : this.inputText);
     }
 
-    /** @hidden Method to emit change event */
+    /** @ignore Method to emit change event */
     emitChangeEvent<T>(modelValue: T): void {
         const event = new ComboboxSelectionChangeEvent(this, modelValue);
 
         this.selectionChange.emit(event);
     }
 
-    /** @hidden Method to set selected item */
+    /** @ignore Method to set selected item */
     selectOptionItem(item: OptionItem): void {
         if (this.mobile) {
             this._selectedElement = item;
@@ -199,7 +199,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         this.isOpenChangeHandle(false);
     }
 
-    /** @hidden Method to set as selected */
+    /** @ignore Method to set as selected */
     setAsSelected(item: OptionItem[]): void {
         const selectedItem = item[0];
 
@@ -211,7 +211,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         this.inputText = this.displayValue(this._selectedElement);
     }
 
-    /** @hidden Define is selected item selected */
+    /** @ignore Define is selected item selected */
     isSelectedOptionItem(selectedItem: any): boolean {
         return (
             (this.lookupKey && this.lookupValue(this._selectedElement) === this.lookupValue(selectedItem)) ||
@@ -219,7 +219,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         );
     }
 
-    /** @hidden Define is selected item selected by display value */
+    /** @ignore Define is selected item selected by display value */
     isSelectedOptionItemByDisplayValue(selectedItem: any): boolean {
         return this._selectedElement?.label === selectedItem;
     }
@@ -247,7 +247,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         this.isOpenChangeHandle(false);
     }
 
-    /** @hidden if not selected update model */
+    /** @ignore if not selected update model */
     private _checkAndUpdate(modelValue: OptionItem): void {
         if (this.isSelectedOptionItem(modelValue)) {
             return;
@@ -258,7 +258,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         this._updateModel(optionItem ? optionItem.value : this.inputText);
     }
 
-    /** @hidden Update model */
+    /** @ignore Update model */
     private _updateModel(value: any): void {
         // setting value, it will call setValue()
         this.value = value;
@@ -266,7 +266,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         this.emitChangeEvent(value ? value : null);
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _setUpMobileMode(): Promise<void> {
         const injector = Injector.create({
             providers: [{ provide: COMBOBOX_COMPONENT, useValue: this }],
@@ -283,7 +283,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getSelectedOptionItem(text: string): OptionItem | undefined {
         if (!this.isGroup) {
             return this._suggestions.find((item) => item.label === text);

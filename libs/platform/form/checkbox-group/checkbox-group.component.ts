@@ -86,13 +86,13 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
     @Output()
     readonly valueChange: EventEmitter<string[]> = new EventEmitter<string[]>();
 
-    /** @hidden */
+    /** @ignore */
     readonly _selectionModel = new SelectionModel(true);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _rangeSelector = new RangeSelector();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -125,7 +125,7 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param selectionState actual value of the checkbox
      * @param checkboxTrueValue thuthy value to compare the "selectionState" with
      */
@@ -141,7 +141,7 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
         this.valueChange.emit(this.value);
     }
 
-    /** @hidden */
+    /** @ignore */
     onCheckboxClick(index: number, source: 'contentChildren' | 'list', event?: MouseEvent): void {
         // this handler will be invoked after "valueChange"
         const queryList = source === 'list' ? this.viewCheckboxes : this.contentCheckboxes;
@@ -171,7 +171,7 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
         this.valueChange.emit(this.value);
     }
 
-    /** @hidden */
+    /** @ignore */
     writeValue(selectedValue: any): void {
         super.writeValue(coerceArraySafe(selectedValue));
         this._updateSelectionModelByValue();
@@ -191,7 +191,7 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
         return this.lookupValue(item);
     }
 
-    /** @hidden */
+    /** @ignore */
     getListItemDisabledValue(item: CheckboxGroupComponent['list'][number]): boolean {
         return this.disabled || !!(<SelectItem>item)?.disabled;
     }
@@ -201,13 +201,13 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
         super.setValue(coerceArraySafe(value), emitOnChange);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setValueBySelectionModel(): void {
         super.setValue(this._selectionModel.selected);
         this._cd.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updateSelectionModelByValue(): void {
         this._selectionModel.clear();
         this.value.forEach((v) => this._selectionModel.select(v));

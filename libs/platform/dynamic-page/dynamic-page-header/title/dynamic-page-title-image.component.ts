@@ -13,7 +13,7 @@ import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild, ViewEncapsu
 })
 export class DynamicPageTitleImageComponent {
     /**
-     * @hidden
+     * @ignore
      * The component view is wrapped in ng-template so
      * component's consumer have to use this templateRef to render it
      * in its view.

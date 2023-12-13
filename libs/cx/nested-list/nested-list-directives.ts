@@ -29,11 +29,11 @@ export class NestedListHeaderDirective {
     @HostBinding('attr.id')
     id: string | null = `fdx-nested-list-group-header-${++uniqueId}`;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdx-nested-list__group-header')
     cxNestedListHeaderClass = true;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _elementRef: ElementRef) {}
 
     /** Get the header title */
@@ -53,7 +53,7 @@ export class NestedListIconComponent extends IconComponent {
     @HostBinding('attr.role')
     role = 'presentation';
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdx-nested-list__icon')
     fdNestedListIconClass = true;
 }
@@ -62,11 +62,11 @@ export class NestedListIconComponent extends IconComponent {
     selector: '[cxNestedDirectivesTitle], [fdx-nested-list-title]'
 })
 export class NestedListTitleDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdx-nested-list__title')
     fdNestedListTitleClass = true;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private elementRef: ElementRef) {}
 
     /** Returns element's InnerText */
@@ -87,38 +87,38 @@ export class NestedListTitleDirective {
     encapsulation: ViewEncapsulation.None
 })
 export class NestedListExpandIconComponent {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdx-nested-list__arrow')
     fdNestedListArrowClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.sap-icon--navigation-down-arrow')
     get fdNestedListDownArrowClass(): boolean {
         return this.expanded;
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.sap-icon--navigation-right-arrow')
     get fdNestedListRightArrowClass(): any {
         return !this.expanded;
     }
 
     /**
-     * @hidden
+     * @ignore
      * Attribute controlled by the parent `NestedItemComponent`
      */
     @HostBinding('class.is-expanded')
     @HostBinding('attr.aria-expanded')
     expanded = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-hidden')
     ariaHidden = true;
 
-    /** @hidden */
+    /** @ignore */
     rtl$: Observable<boolean>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _itemService: NestedItemService,
         private _changeDetRef: ChangeDetectorRef,
@@ -142,13 +142,13 @@ export class NestedListExpandIconComponent {
         this._itemService.focus.next();
     }
 
-    /** @hidden */
+    /** @ignore */
     changeExpandedState(expanded: boolean): void {
         this.expanded = expanded;
         this._changeDetRef.detectChanges();
     }
 
-    /** @hidden Sets expand arrow depending on text direction */
+    /** @ignore Sets expand arrow depending on text direction */
     private _listenOnTextDirection(): void {
         this.rtl$ = this._rtlService ? this._rtlService.rtl.pipe(map((isRtl) => isRtl)) : of(false);
     }
@@ -158,15 +158,15 @@ export class NestedListExpandIconComponent {
     selector: '[cxNestedDirectivesButton], [fdx-nested-list-button]'
 })
 export class NestedListButtonDirective implements AfterContentInit {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdx-nested-list__button')
     fdNestedListButtonClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(NestedListExpandIconComponent)
     _expandIcon: NestedListExpandIconComponent;
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('click', ['$event'])
     @HostListener('keydown.enter', ['$event'])
     @HostListener('keydown.space', ['$event'])
@@ -176,7 +176,7 @@ export class NestedListButtonDirective implements AfterContentInit {
         this._expandIcon.onClick();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         if (this._expandIcon) {
             this._expandIcon.fdNestedListArrowClass = false;

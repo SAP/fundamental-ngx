@@ -69,65 +69,65 @@ const initialContentDensity = (
 
 @Injectable()
 export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> {
-    /** @hidden */
+    /** @ignore */
     readonly config: ContentDensityObserverSettings;
-    /** @hidden */
+    /** @ignore */
     private readonly _isCompact$ = new BehaviorSubject<boolean>(false);
-    /** @hidden */
+    /** @ignore */
     private readonly _isCozy$ = new BehaviorSubject<boolean>(false);
-    /** @hidden */
+    /** @ignore */
     private readonly _isCondensed$ = new BehaviorSubject<boolean>(false);
-    /** @hidden */
+    /** @ignore */
     // eslint-disable-next-line @typescript-eslint/member-ordering
     readonly isCompact$ = this._isCompact$.asObservable();
-    /** @hidden */
+    /** @ignore */
     // eslint-disable-next-line @typescript-eslint/member-ordering
     readonly isCozy$ = this._isCozy$.asObservable();
-    /** @hidden */
+    /** @ignore */
     // eslint-disable-next-line @typescript-eslint/member-ordering
     readonly isCondensed$ = this._isCondensed$.asObservable();
-    /** @hidden */
+    /** @ignore */
     get isCompact(): boolean {
         return this._isCompact$.value;
     }
-    /** @hidden */
+    /** @ignore */
     get isCozy(): boolean {
         return this._isCozy$.value;
     }
-    /** @hidden */
+    /** @ignore */
     get isCondensed(): boolean {
         return this._isCondensed$.value;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _globalContentDensityService = inject(GlobalContentDensityService, {
         optional: true
     });
 
-    /** @hidden */
+    /** @ignore */
     private _contentDensityDirective = inject(CONTENT_DENSITY_DIRECTIVE, {
         optional: true
     });
 
-    /** @hidden */
+    /** @ignore */
     private _parentContentDensityObserver = inject(ContentDensityObserver, {
         optional: true,
         skipSelf: true
     });
 
-    /** @hidden */
+    /** @ignore */
     private _renderer: Renderer2 | null = inject(Renderer2);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private _elementRef: ElementRef<any> | null = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     private _elements = [this._elementRef];
 
-    /** @hidden */
+    /** @ignore */
     private _alternativeTo = {
         [ContentDensityMode.COMPACT]: (): ContentDensityMode =>
             this._isSupported(ContentDensityMode.CONDENSED) ? ContentDensityMode.CONDENSED : ContentDensityMode.COZY,
@@ -136,7 +136,7 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
         [ContentDensityMode.COZY]: (): ContentDensityMode => ContentDensityMode.COZY // No alternative here, everyone should support it
     };
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _injector: Injector,
         private _providedConfig?: ContentDensityObserverSettings
@@ -195,7 +195,7 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     consume(...consumers: ContentDensityObserverTarget[]): void {
         this._elements.concat(...consumers.map((c) => c.elementRef));
     }
@@ -216,12 +216,12 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
         this._elements = [];
     }
 
-    /** @hidden */
+    /** @ignore */
     removeConsumer(consumer: ContentDensityObserverTarget): void {
         this._elements.splice(this._elements.indexOf(consumer.elementRef), 1);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _applyClass(): void {
         if (!this.config?.modifiers) {
             return;

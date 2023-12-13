@@ -47,6 +47,6 @@ export class TableHeaderCellContentComponent {
     @Input()
     sorting: Nullable<CollectionSort>;
 
-    /** @hidden */
+    /** @ignore */
     readonly SORT_DIRECTION = SortDirection;
 }

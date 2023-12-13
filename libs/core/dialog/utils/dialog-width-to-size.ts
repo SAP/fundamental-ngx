@@ -1,7 +1,7 @@
-/** @hidden Describes available dialog padding sizes */
+/** @ignore Describes available dialog padding sizes */
 export type DialogSize = 'sm' | 'md' | 'lg' | 'xl';
 
-/** @hidden Returns dialog size based on width
+/** @ignore Returns dialog size based on width
  * @param width - dialog window width
  **/
 export function dialogWidthToSize(width: number): DialogSize {

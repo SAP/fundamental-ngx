@@ -10,7 +10,7 @@ import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/m
     imports: [ButtonComponent, BusyIndicatorExtendedDirective, BusyIndicatorComponent, MessageToastModule]
 })
 export class BusyIndicatorExtendedExampleComponent {
-    /** @hidden */
+    /** @ignore */
     constructor(public messageToastService: MessageToastService) {}
 
     openFromTemplate(template): void {

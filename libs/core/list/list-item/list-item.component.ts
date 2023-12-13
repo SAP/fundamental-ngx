@@ -109,7 +109,7 @@ export class ListItemComponent<T = any>
     @HostBinding('class.fd-list__item--byline')
     byline = false;
 
-    /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
+    /** @ignore Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
@@ -121,7 +121,7 @@ export class ListItemComponent<T = any>
     @Input()
     ariaRole: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FD_RADIO_BUTTON_COMPONENT)
     set radio(value: RadioButtonComponent) {
         this._radio = value;
@@ -136,7 +136,7 @@ export class ListItemComponent<T = any>
         return this._radio;
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FD_CHECKBOX_COMPONENT)
     set checkbox(value: CheckboxComponent) {
         this._checkbox = value;
@@ -151,47 +151,47 @@ export class ListItemComponent<T = any>
         return this._checkbox;
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FD_LIST_LINK_DIRECTIVE)
     linkDirectives: QueryList<ListLinkDirective>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FD_BUTTON_COMPONENT, { descendants: true })
     buttons: QueryList<ButtonComponent>;
 
-    /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    /** @ignore An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onLinkListChanged$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _radio: RadioButtonComponent;
 
-    /** @hidden */
+    /** @ignore */
     private _checkbox: CheckboxComponent;
 
-    /** @hidden group header id, that is being set by parent list component */
+    /** @ignore group header id, that is being set by parent list component */
     _relatedGroupHeaderId: string | null;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.role')
     private get roleAttr(): string {
         return this.ariaRole || this._role;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _role = 'listitem'; // default for li elements
 
-    /** @hidden */
+    /** @ignore */
     readonly _uniqueId = 'fd-list-item-' + ++listItemUniqueId;
 
-    /** @hidden */
+    /** @ignore */
     readonly _list = inject(FD_LIST_UNREAD_INDICATOR, {
         optional: true
     });
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef,
         private readonly _changeDetectorRef: ChangeDetectorRef,
@@ -201,19 +201,19 @@ export class ListItemComponent<T = any>
         super(elementRef);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._listenOnLinkQueryChange();
         this._listenOnButtonQueryChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
@@ -235,7 +235,7 @@ export class ListItemComponent<T = any>
         this.keyDown.emit(event);
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keyup', ['$event'])
     keyupHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE]) && this.link) {
@@ -262,7 +262,7 @@ export class ListItemComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('focus')
     private _onFocus(): void {
         // Try to find inner focusable link
@@ -270,7 +270,7 @@ export class ListItemComponent<T = any>
         tabbableLink?.focus();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnLinkQueryChange(): void {
         this.linkDirectives.changes.pipe(startWith(this.linkDirectives), takeUntil(this._onDestroy$)).subscribe(() => {
             this._onLinkListChanged$.next();
@@ -279,21 +279,21 @@ export class ListItemComponent<T = any>
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnButtonQueryChange(): void {
         this.buttons.changes.pipe(startWith(0), takeUntil(this._onDestroy$)).subscribe(() => {
             this.buttons.forEach(this._addClassToButtons);
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addClassToButtons(button: ButtonComponent): void {
         button.class += ' fd-list__button';
         button.buildComponentCssClass();
         button.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _muteEvent(event: Event): void {
         event.stopPropagation();
         event.preventDefault();

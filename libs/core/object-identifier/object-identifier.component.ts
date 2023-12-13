@@ -47,36 +47,36 @@ export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy {
     @HostBinding('class.fd-object-identifier--medium')
     medium = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-object-identifier')
     objectIdentifierClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FD_LINK_COMPONENT, { read: ElementRef })
     linkComponents: QueryList<ElementRef>;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._listenOnLinkQueryChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnLinkQueryChange(): void {
         this.linkComponents.changes
             .pipe(takeUntil(this._onDestroy$), startWith(0))
             .subscribe(() => this.linkComponents.forEach((link) => this._addIdentifierClass(link)));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addIdentifierClass(link: ElementRef): void {
         link.nativeElement.classList.add('fd-object-identifier__link');
     }

@@ -20,45 +20,45 @@ import { SelectionService } from './selection.service';
 export class SelectableListDirective<T extends Element = HTMLElement, V = any>
     implements SelectComponentRootToken<T>, AfterViewInit
 {
-    /** @hidden */
+    /** @ignore */
     @Output()
     selectedChange = new EventEmitter<SelectableListValueType<T>>();
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     @coerceBoolean
     toggle: BooleanInput = false;
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     @coerceBoolean
     multiple: BooleanInput = false;
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     set selected(value: SelectableListValueType<T>) {
         this._selectionService.setValue(value);
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(SelectableItemToken) selectableItems!: QueryList<SelectableItemToken<T, V>>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _selectionService: SelectionService<T, V>) {
         this._selectionService.registerRootComponent(this);
     }
 
-    /** @hidden */
+    /** @ignore */
     select(item: SelectableItemToken<T, V>): void {
         this._selectionService.selectItem(item);
     }
 
-    /** @hidden */
+    /** @ignore */
     deselect(item: SelectableItemToken<T, V>): void {
         this._selectionService.deselectItem(item);
     }
 
-    /** @hidden */
+    /** @ignore */
     toggleSelect(item: SelectableItemToken<T, V>): void {
         if (item.getSelected()) {
             this.deselect(item);
@@ -67,12 +67,12 @@ export class SelectableListDirective<T extends Element = HTMLElement, V = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     onChange(value: SelectableListValueType<T>): void {
         this.selectedChange.emit(value);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._selectionService.initialize(this.selectableItems);
     }

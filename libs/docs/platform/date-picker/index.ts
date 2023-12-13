@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'date-picker';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/form';
 export const API_FILE_KEY = 'datePicker';

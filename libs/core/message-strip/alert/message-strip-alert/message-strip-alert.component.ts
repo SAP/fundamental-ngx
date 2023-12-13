@@ -36,7 +36,7 @@ export type MessageStripAlertPortalType<ComponentType> =
 export class MessageStripAlertComponent<ComponentType = unknown>
     implements MessageStripAlert, OnDestroy, AfterViewInit
 {
-    /** @hidden */
+    /** @ignore */
     @ViewChild(AutoDismissMessageStripDirective)
     autoDismissMessageStripDirective: AutoDismissMessageStripDirective;
 
@@ -47,9 +47,9 @@ export class MessageStripAlertComponent<ComponentType = unknown>
     /** Portal, which is responsible for correctly rendering user provided content. It can be any type of the portal */
     contentPortal: Portal<unknown>;
 
-    /** @hidden */
+    /** @ignore */
     private viewContainerRef = inject(ViewContainerRef);
-    /** @hidden */
+    /** @ignore */
     private renderer2 = inject(Renderer2);
 
     /**
@@ -63,7 +63,7 @@ export class MessageStripAlertComponent<ComponentType = unknown>
      *  */
     readonly alertRef = inject(MessageStripAlertRef);
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         this.messageStripConfig = this.data.messageStripConfig;
         this.contentPortal = this.getPortal(this.data.content);
@@ -76,12 +76,12 @@ export class MessageStripAlertComponent<ComponentType = unknown>
         this.messageStripConfig.onDismiss();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         clearTimeout(this.autoDismissTimeout);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this.autoDismissMessageStripDirective.open();
     }

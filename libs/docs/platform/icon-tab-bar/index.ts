@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'icon-tab-bar';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/icon-tab-bar';
 export const API_FILE_KEY = 'iconTabBar';

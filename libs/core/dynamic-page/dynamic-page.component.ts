@@ -91,7 +91,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         return this._size;
     }
 
-    /** @hidden */
+    /** @ignore */
     _size: DynamicPageResponsiveSize = 'extra-large';
 
     /** Offset in PX
@@ -106,41 +106,41 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     @Input()
     expandContent = true;
 
-    /** @hidden reference to header component  */
+    /** @ignore reference to header component  */
     @ContentChild(DynamicPageSubheaderComponent)
     _pageSubheaderComponent: DynamicPageSubheaderComponent;
 
-    /** @hidden reference to title component  */
+    /** @ignore reference to title component  */
     @ContentChild(DynamicPageHeaderComponent)
     _headerComponent: DynamicPageHeaderComponent;
 
-    /** @hidden reference to content component  */
+    /** @ignore reference to content component  */
     @ContentChildren(DynamicPageContentComponent, { descendants: true })
     _contentComponent: QueryList<DynamicPageContentComponent>;
 
-    /** @hidden reference to footer component  */
+    /** @ignore reference to footer component  */
     @ContentChild(DynamicPageFooterComponent)
     _footerComponent: DynamicPageContentComponent;
 
-    /** @hidden reference to tab component */
+    /** @ignore reference to tab component */
     @ContentChild(TabListComponent)
     _tabComponent: TabListComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('dynamicPageElement')
     _dynamicPageElement: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(ScrollbarDirective)
     _scrollbar: ScrollbarDirective;
 
-    /** @hidden */
+    /** @ignore */
     _headerCollapsible = true;
 
-    /** @hidden **/
+    /** @ignore **/
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         protected _cd: ChangeDetectorRef,
         private _elementRef: ElementRef<HTMLElement>,
@@ -150,7 +150,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         @Optional() private _dynamicPageWrapper: DynamicPageWrapperDirective
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._sizeChangeHandle();
         this._removeShadowWhenTabComponent();
@@ -172,7 +172,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         this._cd.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -193,7 +193,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         this._sizeChangeHandle();
     }
 
-    /** @hidden */
+    /** @ignore */
     _getScrollElement(): HTMLElement | null {
         return this._tabComponent?._scrollbar.elementRef.nativeElement || this._scrollbar?.elementRef.nativeElement;
     }
@@ -203,13 +203,13 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         this._setDynamicPageHeight();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _propagatePropertiesToChildren(): void {
         this._headerCollapsible = this._pageSubheaderComponent?.collapsible;
         this._propagateSizeToChildren();
     }
 
-    /** @hidden
+    /** @ignore
      * Functionality handling column layout changes,
      * - recalculate height of content element
      * - recheck size depending on width of DynamicPage
@@ -221,7 +221,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _propagateSizeToChildren(): void {
         if (this._headerComponent) {
             this._headerComponent.size = this.size;
@@ -229,14 +229,14 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         this._setContainerPositions();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnCollapse(): void {
         this._dynamicPageService.subheaderVisibilityChange
             .pipe(takeUntil(this._onDestroy$))
             .subscribe(() => this._setContainerPositions());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getCalculatedFullHeight(element: HTMLElement): string | null {
         if (!element) {
             return null;
@@ -245,7 +245,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         return 'calc(100vh - ' + (distanceFromTop + this.offset) + 'px)';
     }
 
-    /** @hidden */
+    /** @ignore */
     private _sizeChangeHandle(): void {
         if (!this._elementRef || !this.autoResponsive) {
             return;
@@ -260,7 +260,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addScrollListeners(): void {
         const element = this._getScrollElement();
         if (element) {
@@ -275,7 +275,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         }
     }
 
-    /** @hidden Listen for window resize and adjust tab and content positions accordingly */
+    /** @ignore Listen for window resize and adjust tab and content positions accordingly */
     private _listenOnResize(): void {
         const listener = this._dynamicPageWrapper ? this._listenToWrapperResize() : this._listenToWindowResize();
 
@@ -285,17 +285,17 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToWrapperResize(): Observable<ResizeObserverEntry[]> {
         return resizeObservable(this._dynamicPageWrapper.elementRef.nativeElement);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToWindowResize(): Observable<ResizeObserverEntry[]> {
         return fromEvent(window, 'resize').pipe(map(() => []));
     }
 
-    /** @hidden
+    /** @ignore
      * set top position of DynamicPage on scrolling
      */
     private _setDynamicPageHeight(): void {
@@ -306,7 +306,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         this._renderer.setStyle(element, 'height', this._getCalculatedFullHeight(element));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _removeShadowWhenTabComponent(): void {
         if (!this._pageSubheaderComponent?.collapsible || !this._tabComponent) {
             return;
@@ -323,7 +323,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setContentFooterSpacer(): void {
         this._contentComponent.changes
             .pipe(startWith(this._contentComponent.toArray()), observeOn(asyncScheduler), takeUntil(this._onDestroy$))

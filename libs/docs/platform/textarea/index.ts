@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'textarea';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/form';
 export const API_FILE_KEY = 'textarea';
 export const I18N_KEY = 'platformTextarea';

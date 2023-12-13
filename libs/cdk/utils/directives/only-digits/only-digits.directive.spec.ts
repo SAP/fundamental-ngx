@@ -2,7 +2,7 @@ import { ElementRef } from '@angular/core';
 import { OnlyDigitsDirective } from './only-digits.directive';
 
 export class MockElementRef extends ElementRef {
-    /** @hidden */
+    /** @ignore */
     constructor() {
         super(null);
     }

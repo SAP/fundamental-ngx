@@ -37,20 +37,20 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class')
     private readonly _initialClass = 'fd-overflow-layout__popover-container';
 
-    /** @hidden */
+    /** @ignore */
     private _keyboardEventsManager: FocusKeyManager<OverflowLayoutFocusableItem>;
 
-    /** @hidden */
+    /** @ignore */
     private _items: OverflowItemRef[];
 
-    /** @hidden */
+    /** @ignore */
     private _dir: 'ltr' | 'rtl' = 'ltr';
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Inject(FD_OVERFLOW_CONTAINER) private _overflowContainer: OverflowContainer,
         @Optional() private _rtl: RtlService
@@ -65,7 +65,7 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keyup', ['$event'])
     keyUpHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, TAB)) {
@@ -90,7 +90,7 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
         this._keyboardEventsManager.setActiveItem(0);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._keyboardEventsManager?.destroy();
     }

@@ -12,7 +12,7 @@ import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
     imports: [PopoverComponent, PopoverControlComponent, PopoverBodyComponent, IconComponent, NgClass, ButtonComponent]
 })
 export class IconTabBarPopoverComponent extends IconTabBarPopoverBase {
-    /** @hidden list of tab html elements, that can receive focus */
+    /** @ignore list of tab html elements, that can receive focus */
     @ViewChildren('tabItem') _tabExtraUIElements: QueryList<ElementRef<HTMLElement>>;
 
     /**

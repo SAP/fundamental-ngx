@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'illustrated-message';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/illustrated-message';
 export const API_FILE_KEY = 'illustratedMessage';

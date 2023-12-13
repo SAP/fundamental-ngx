@@ -67,66 +67,66 @@ export class NavigationComponent
     extends FdbNavigationComponent
     implements OnChanges, OnInit, CssClassBuilder, HasElementRef, AfterViewInit
 {
-    /** @hidden */
+    /** @ignore */
     @Input()
     class = '';
 
-    /** @hidden */
+    /** @ignore */
     @Input('state')
     set _state(state: FdbNavigationState) {
         this.state.set(state);
     }
 
-    /** @hidden */
+    /** @ignore */
     @Input('horizontal')
     set _horizontal(horizontal: boolean) {
         this.type.set(horizontal ? 'horizontal' : 'vertical');
     }
 
-    /** @hidden */
+    /** @ignore */
     @Input('mode')
     set _mode(mode: FdbViewMode) {
         this.mode.set(mode);
     }
 
-    /** @hidden */
+    /** @ignore */
     @Input('type')
     set _type(type: FdbNavigationType) {
         this.type.set(type);
     }
 
-    /** @hidden */
+    /** @ignore */
     @Input({ alias: 'homeSeparator', transform: coerceBooleanProperty })
     set _homeSeparator(value: BooleanInput) {
         // It will always be a boolean, because of the transform
         this.homeSeparator.set(value as boolean);
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(NavigationHomeDirective)
     set _homeDirective(homeDirective: NavigationHomeDirective) {
         this.homeDirective.set(homeDirective);
     }
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('defaultLinkTemplate')
     set _defaultLinkTemplate(templateRef: TemplateRef<any>) {
         this.defaultLinkTemplate.set(templateRef);
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FdbNavigationListItemComponent, { descendants: true })
     _navigationItems: QueryList<FdbNavigationListItemComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FdbNavigationListComponent, { descendants: true })
     _navigationLists: QueryList<FdbNavigationListComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(NavigationContentComponent, { descendants: true })
     private readonly _navigationContents: QueryList<NavigationContentComponent>;
 
-    /** @hidden */
+    /** @ignore */
     elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
     /**
@@ -135,33 +135,33 @@ export class NavigationComponent
      */
     homeSeparator = signal(true);
 
-    /** @hidden */
+    /** @ignore */
     mode = signal<FdbViewMode>('');
-    /** @hidden */
+    /** @ignore */
     state = signal<FdbNavigationState>('expanded');
-    /** @hidden */
+    /** @ignore */
     type = signal<FdbNavigationType>('vertical');
-    /** @hidden */
+    /** @ignore */
     homeDirective = signal<NavigationHomeDirective | null>(null);
 
-    /** @hidden */
+    /** @ignore */
     defaultLinkTemplate = signal<TemplateRef<any> | null>(null);
-    /** @hidden */
+    /** @ignore */
     homeLinkTemplate = computed(() => {
         const homeDirective = this.homeDirective();
         return homeDirective ? homeDirective.templateRef : this.defaultLinkTemplate();
     });
 
-    /** @hidden */
+    /** @ignore */
     private _keyboardEventsManager: Nullable<FocusKeyManager<FdbNavigationListItemComponent>>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _isSnapped$ = toObservable(this.isSnapped);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
@@ -174,7 +174,7 @@ export class NavigationComponent
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
@@ -182,17 +182,17 @@ export class NavigationComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._navigationContents.changes
             .pipe(
@@ -266,29 +266,29 @@ export class NavigationComponent
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     setNextItemActive(): void {
         this._keyboardEventsManager?.setNextItemActive();
     }
 
-    /** @hidden */
+    /** @ignore */
     setPreviousItemActive(): void {
         this._keyboardEventsManager?.setPreviousItemActive();
     }
 
-    /** @hidden */
+    /** @ignore */
     setActiveItem(item: FdbNavigationListItemComponent): void {
         this._keyboardEventsManager?.setActiveItem(item);
     }
 
-    /** @hidden */
+    /** @ignore */
     focusMoreButton(): void {
         const showMoreButton = this._navigationContents.find((c) => !!c.showMoreOverflowItem)?.showMoreOverflowItem;
         showMoreButton?.focus();
         showMoreButton?.collapse();
     }
 
-    /** @hidden */
+    /** @ignore */
     getMoreButton(): Nullable<FdbNavigationListItemComponent> {
         return this._navigationContents.find((c) => !!c.showMoreOverflowItem)?.showMoreOverflowItem;
     }

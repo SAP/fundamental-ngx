@@ -1,7 +1,7 @@
 import { EventEmitter } from '@angular/core';
 
 export class PairSelectionModel<KeyType, ValueType> {
-    /** @hidden */
+    /** @ignore */
     _selected = new Map<KeyType, ValueType>();
     /** Event emitted when the selection has changed. */
     selectionChanged = new EventEmitter<[KeyType, ValueType][]>();

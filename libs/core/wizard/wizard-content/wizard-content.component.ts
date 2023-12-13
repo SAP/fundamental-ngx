@@ -24,17 +24,17 @@ export class WizardContentComponent {
     @Input()
     size: WizardSize;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('contentTemplate')
     contentTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(WizardNextStepComponent)
     nextStep: WizardNextStepComponent;
 
-    /** @hidden */
+    /** @ignore */
     wizardContentId: string;
 
-    /** @hidden */
+    /** @ignore */
     tallContent = false;
 }

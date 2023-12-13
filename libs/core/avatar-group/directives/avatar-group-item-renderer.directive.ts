@@ -34,7 +34,7 @@ export class AvatarGroupItemRendererDirective implements OnInit, FocusableItem {
      **/
     element$: Observable<Nullable<HTMLElement>>;
 
-    /** @hidden */
+    /** @ignore */
     keydown: Observable<KeyboardEvent>;
 
     /**
@@ -77,36 +77,36 @@ export class AvatarGroupItemRendererDirective implements OnInit, FocusableItem {
         return this._lastSavedHeight;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _portalOutlet = inject(CdkPortalOutlet, { host: true });
 
-    /** @hidden */
+    /** @ignore */
     private _viewContainerRef = inject(ViewContainerRef);
 
     /**
-     * @hidden
+     * @ignore
      **/
     private _element$ = new BehaviorSubject<Nullable<HTMLElement>>(null);
 
-    /** @hidden */
+    /** @ignore */
     private _templatePortal?: TemplatePortal<void>;
 
-    /** @hidden */
+    /** @ignore */
     private _isFocusable = true;
 
-    /** @hidden */
+    /** @ignore */
     private _embeddedViewRef: EmbeddedViewRef<void>;
 
-    /** @hidden */
+    /** @ignore */
     private _lastSavedWidth = 0;
 
-    /** @hidden */
+    /** @ignore */
     private _lastSavedHeight = 0;
 
-    /** @hidden */
+    /** @ignore */
     private _hostConfig = inject(AVATAR_GROUP_HOST_CONFIG);
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         this.element$ = this._element$.asObservable();
         this.keydown = this._element$.pipe(
@@ -115,7 +115,7 @@ export class AvatarGroupItemRendererDirective implements OnInit, FocusableItem {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.show();
     }
@@ -158,7 +158,7 @@ export class AvatarGroupItemRendererDirective implements OnInit, FocusableItem {
         this.element.tabIndex = tabbable ? 0 : -1;
     }
 
-    /** @hidden */
+    /** @ignore */
     focus(): void {
         this.element?.focus();
     }

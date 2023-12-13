@@ -9,10 +9,10 @@ export abstract class ToolHeaderComponentClass {
     /** Mode signal */
     mode = signal<FdbViewMode>('');
 
-    /** @hidden */
+    /** @ignore */
     orientation = signal<'landscape' | 'portrait'>('landscape');
 
-    /** @hidden */
+    /** @ignore */
     protected fdbToolHeaderState = computed<FdbToolHeaderState>(() => {
         if (this.mode() === 'phone') {
             return {
@@ -70,12 +70,12 @@ export abstract class ToolHeaderComponentClass {
     /** Search field signal */
     protected searchField = signal<SearchFieldComponent | null>(null);
 
-    /** @hidden */
+    /** @ignore */
     protected searchFieldExpanded = signal<boolean>(false);
 
     /**
      * RTL signal
-     * @hidden
+     * @ignore
      */
     protected _rtl = toSignal(inject(RtlService).rtl);
 }

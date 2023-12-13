@@ -105,12 +105,12 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     /** Table column key associated with the currently selected filter  */
     activeFilterColumnKey: Nullable<string> = null;
 
-    /** @hidden */
+    /** @ignore */
     private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     /** Indicates when reset command is available */
     readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
 
-    /** @hidden */
+    /** @ignore */
     private _initialFilters: CollectionFilter[] = [];
 
     /**
@@ -131,7 +131,7 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     /** Current step component to render */
     activeFilterStepView: FiltersViewStep;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly dialogRef: DialogRef<FiltersDialogData>,
         private readonly _cd: ChangeDetectorRef,
@@ -209,12 +209,12 @@ export class FiltersComponent implements Resettable, AfterViewInit {
         this.dialogRef.close(result);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setInitialFilters(): void {
         this._initialFilters = this._table.initialState?.initialFilterBy ?? [];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _compareSelectedFilters(): void {
         if (equal(this._initialFilters, this.filterBy)) {
             return;

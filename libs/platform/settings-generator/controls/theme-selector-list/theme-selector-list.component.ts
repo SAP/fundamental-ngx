@@ -19,15 +19,15 @@ import {
     imports: [ListModule, ClickedDirective, forwardRef(() => ThemeSelectorListIconComponent), NgTemplateOutlet]
 })
 export class ThemeSelectorListComponent extends BaseDynamicFormGeneratorControl implements OnInit {
-    /** @hidden */
+    /** @ignore */
     currentTheme: string;
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.currentTheme = this.formItem.default;
     }
 
-    /** @hidden */
+    /** @ignore */
     setTheme(value: string): void {
         const control = this.form.get([this.formGroupName, this.name]);
         this.currentTheme = value;
@@ -43,7 +43,7 @@ export class ThemeSelectorListComponent extends BaseDynamicFormGeneratorControl 
     standalone: true
 })
 export class ThemeSelectorListIconComponent {
-    /** @hidden */
+    /** @ignore */
     @Input()
     size = 40;
 }

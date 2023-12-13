@@ -97,41 +97,41 @@ export interface TableRow<T = any> {
 
 export type TableRowClass<T = any> = string | ((row: T) => string);
 
-/** @hidden */
+/** @ignore */
 export function isTableRow<T = any>(row: TableRow<T>): row is TableRow<T> {
     return row && row.type !== undefined && row.value !== undefined && row.index >= 0 && row.state !== undefined;
 }
 
 export class TableRowImpl<T> implements TableRow<T> {
-    /** @hidden */
+    /** @ignore */
     set checked(value: boolean | null) {
         this._checkedSubject.next(value);
     }
     get checked(): boolean | null {
         return this._checkedSubject.value;
     }
-    /** @hidden */
+    /** @ignore */
     private readonly _checkedSubject = new BehaviorSubject<boolean | null>(false);
-    /** @hidden */
+    /** @ignore */
     readonly checked$ = this._checkedSubject.asObservable();
 
-    /** @hidden */
+    /** @ignore */
     readonly childItems$: Observable<T[]>;
 
-    /** @hidden */
+    /** @ignore */
     readonly stateChanged$ = new BehaviorSubject<boolean>(false);
 
-    /** @hidden */
+    /** @ignore */
     readonly childItemsLoading$ = new BehaviorSubject<boolean>(false);
 
-    /** @hidden */
+    /** @ignore */
     forceFetch = false;
 
-    /** @hidden */
+    /** @ignore */
     children: TableRow<T>[];
-    /** @hidden */
+    /** @ignore */
     expandable: boolean;
-    /** @hidden */
+    /** @ignore */
     set expanded(value: boolean) {
         this._expandedSubject.next(value);
         this.children.forEach((childRow) => {
@@ -141,38 +141,38 @@ export class TableRowImpl<T> implements TableRow<T> {
     get expanded(): boolean {
         return this._expandedSubject.value;
     }
-    /** @hidden */
+    /** @ignore */
     private readonly _expandedSubject = new BehaviorSubject<boolean>(false);
-    /** @hidden */
+    /** @ignore */
     readonly expanded$ = this._expandedSubject.asObservable();
 
-    /** @hidden */
+    /** @ignore */
     hidden: boolean;
-    /** @hidden */
+    /** @ignore */
     index: number;
-    /** @hidden */
+    /** @ignore */
     level: number;
-    /** @hidden */
+    /** @ignore */
     navigatable: boolean;
-    /** @hidden */
+    /** @ignore */
     parent: TableRow | null;
-    /** @hidden */
+    /** @ignore */
     state: TableRowState;
-    /** @hidden */
+    /** @ignore */
     type: TableRowType;
-    /** @hidden */
+    /** @ignore */
     readonly value: T;
 
-    /** @hidden */
+    /** @ignore */
     childDataSource: TableDataSource<T> | undefined;
 
-    /** @hidden */
+    /** @ignore */
     isTree: boolean;
 
-    /** @hidden */
+    /** @ignore */
     lastChild?: TableRow<T>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(row: Partial<TableRow>) {
         this.checked = row.checked || false;
         this.children = row.children || [];

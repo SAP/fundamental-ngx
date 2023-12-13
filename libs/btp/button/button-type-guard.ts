@@ -6,16 +6,16 @@ export abstract class ButtonTypeGuard implements OnInit, OnChanges {
     /** Type of the button. */
     abstract fdType: string;
 
-    /** @hidden */
+    /** @ignore */
     protected _buttonComponent = inject<ButtonComponent>(FD_BUTTON_COMPONENT, { host: true });
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._buttonComponent.fdType = this.fdType as any;
         this._buttonComponent.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this._buttonComponent.fdType = this.fdType as any;
         this._buttonComponent.buildComponentCssClass();

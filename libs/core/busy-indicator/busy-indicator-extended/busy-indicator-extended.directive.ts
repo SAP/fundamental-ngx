@@ -10,19 +10,19 @@ const messageToastClass = 'fd-message-toast';
     standalone: true
 })
 export class BusyIndicatorExtendedDirective implements AfterContentInit {
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FD_BUSY_INDICATOR_COMPONENT)
     busyIndicator: BusyIndicatorComponent;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._appendCssToParent();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _appendCssToParent(): void {
         const hasLabel = this.busyIndicator.label;
         if (!hasLabel) {

@@ -10,10 +10,10 @@ export interface TableCellHeaderPopoverDirectiveContext {
     standalone: true
 })
 export class TableCellHeaderPopoverDirective {
-    /** @hidden */
+    /** @ignore */
     constructor(public templateRef: TemplateRef<TableCellHeaderPopoverDirectiveContext>) {}
 
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard(
         directive: TableCellHeaderPopoverDirective,
         context: unknown

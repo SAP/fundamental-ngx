@@ -195,52 +195,52 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
     @ViewChild(SelectableItemDirective)
     selectableListItem: SelectableItemToken;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(BaseTreeItem)
     _projectedTreeItems: QueryList<BaseTreeItem>;
 
     /**
-     * @hidden
+     * @ignore
      * Whether the tree item should have a navigation indicator.
      */
     _navigationIndicator = false;
 
     /**
-     * @hidden
+     * @ignore
      * Selection state.
      */
     _selectionState = false;
 
-    /** @hidden */
+    /** @ignore */
     children: T[] = [];
 
-    /** @hidden */
+    /** @ignore */
     childrenLoaded = false;
 
-    /** @hidden */
+    /** @ignore */
     _selectionModel: Nullable<SelectionModeModel>;
 
-    /** @Hidden */
+    /** @ignore */
     _containerTabIndex = 0;
 
-    /** @hidden */
+    /** @ignore */
     _setSize: number;
-    /** @hidden */
+    /** @ignore */
     _currentPosition: number;
 
-    /** @hidden */
+    /** @ignore */
     _totalChildrenLoaded = false;
 
-    /** @hidden */
+    /** @ignore */
     readonly elementRef = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     private _parentId: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     private _level: number;
 
-    /** @hidden */
+    /** @ignore */
     private _expanded = false;
 
     /** Whether the tree item has any type of child nodes. */
@@ -265,46 +265,46 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
             : this._parentTreeItem.keyboardAccessible && this._parentTreeItem.expanded;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _dsChildrenNumber = 0;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _clicked$ = new Subject<MouseEvent | KeyboardEvent>();
 
     /** Clicked behavior implementation. */
     // eslint-disable-next-line @typescript-eslint/member-ordering
     clicked = this._clicked$.asObservable();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _treeItemDir = inject<TreeItemDirective<T, P>>(TreeItemDirective, {
         optional: true
     });
 
-    /** @hidden */
+    /** @ignore */
     private readonly _treeService = inject(TreeService);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _dataSourceDirective = inject<DataSourceDirective<T, FdTreeDataSource<T>>>(DataSourceDirective);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _cdr = inject(ChangeDetectorRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _parentTreeItem = inject(TreeItemComponent, {
         optional: true,
         skipSelf: true
     });
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         super();
         this._treeItemDir?.setTreeItem(this);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._treeService.selectionMode.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((model) => {
             this._selectionModel = model;
@@ -344,7 +344,7 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._projectedTreeItems.changes
             .pipe(startWith(null), distinctUntilChanged(), takeUntilDestroyed(this._destroyRef))
@@ -356,7 +356,7 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._treeService.removeExpandableItem(this.id, this.level!);
     }
@@ -382,7 +382,7 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
         this._cdr.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     _toggleExpandState(event: MouseEvent): void {
         // Do not bubble up to selection change event.
         event.stopImmediatePropagation();
@@ -391,7 +391,7 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
         this.focus();
     }
 
-    /** @hidden */
+    /** @ignore */
     _onClick(event: MouseEvent | KeyboardEvent): void {
         event.stopImmediatePropagation();
 
@@ -399,7 +399,7 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
         this.treeItemClick.emit(event);
     }
 
-    /** @hidden */
+    /** @ignore */
     _setSelected(selected: boolean): void {
         this._selectionState = selected;
     }

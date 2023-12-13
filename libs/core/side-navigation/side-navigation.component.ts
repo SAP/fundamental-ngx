@@ -62,22 +62,22 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
         this.nestedListState.selectable = selectable;
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(SideNavigationUtilityDirective)
     sideNavUtility: SideNavigationUtilityDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(SideNavigationMainDirective)
     sideNavMain: SideNavigationMainDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(PreparedNestedListComponent)
     preparedNestedList: QueryList<PreparedNestedListComponent>;
 
-    /** @hidden */
+    /** @ignore */
     additionalShellbarCssClass = 'fd-shellbar--side-nav';
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private keyboardService: NestedListKeyboardService,
         private nestedListState: NestedListStateService
@@ -93,7 +93,7 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
         `);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         /** Set up condensed state */
         this.nestedListState.condensed =
@@ -104,21 +104,21 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         if (!this.sideNavigationConfiguration) {
             this.keyboardService.refreshItems(this.getLists());
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (this.sideNavigationConfiguration) {
             this.keyboardService.refreshItems(this.getLists());
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('window:resize')
     onResize(): void {
         if (this.collapseWidth) {
@@ -127,7 +127,7 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that returns 1 deep level of lists.
      */
     private getLists(): NestedListDirective[] {

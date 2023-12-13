@@ -70,15 +70,15 @@ export class TablePoppingRowComponent<T> extends TableRowDirective {
     @Output()
     cellClicked = new EventEmitter<{ index: number; row: TableRow<T> }>();
 
-    /** @hidden */
+    /** @ignore */
     readonly SELECTION_MODE = SelectionMode;
 
-    /** @hidden */
+    /** @ignore */
     readonly _isTreeRow = isTreeRow;
 
-    /** @hidden */
+    /** @ignore */
     readonly _isTreeRowFirstCell = isTreeRowFirstCell;
 
-    /** @hidden */
+    /** @ignore */
     readonly _fdpTableService = inject(TableService);
 }

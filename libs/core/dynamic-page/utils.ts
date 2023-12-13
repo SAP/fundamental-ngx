@@ -5,7 +5,7 @@ export const addClassNameToElement = (renderer: Renderer2, element: Element, cla
     renderer.addClass(element, className);
 };
 
-/** @hidden Returns dynamic page size based on width
+/** @ignore Returns dynamic page size based on width
  * @param width - dynamic page window width
  **/
 export function dynamicPageWidthToSize(width: number): DynamicPageResponsiveSize {

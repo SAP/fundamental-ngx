@@ -29,7 +29,7 @@ export class GridListMoreBtnComponent {
     @Output()
     showMore = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     _onKeyDown(event: KeyboardEvent): void {
         if (!KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             return;

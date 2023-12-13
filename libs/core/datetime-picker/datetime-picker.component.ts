@@ -364,7 +364,7 @@ export class DatetimePickerComponent<D>
         return this._isInvalidDateInput && this._touched;
     }
 
-    /** @hidden Reference to the inner calendar component. */
+    /** @ignore Reference to the inner calendar component. */
     @ViewChild(CalendarComponent, { static: false })
     private set _calendarCmp(calendar: CalendarComponent<D>) {
         setTimeout(() => {
@@ -374,99 +374,99 @@ export class DatetimePickerComponent<D>
         this._calendarComponent = calendar;
     }
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('inputGroupComponent', {
         read: ElementRef
     })
     _inputGroupElement: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(InputGroupInputDirective, {
         read: ElementRef
     })
     _inputElement: ElementRef<HTMLInputElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('formMessageTemplate')
     private readonly _formMessageTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('pickerTemplate')
     private readonly _pickerTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     _calendarComponent: CalendarComponent<D>;
 
-    /** @hidden */
+    /** @ignore */
     _message: string | null = null;
 
-    /** @hidden */
+    /** @ignore */
     _messageTriggers: string[] = ['focusin', 'focusout'];
 
-    /** @hidden */
+    /** @ignore */
     _processInputOnBlur = false;
 
     /**
-     * @hidden
+     * @ignore
      * Date of the input field. Internal use.
      * For programmatic selection, use two-way binding on the date input.
      */
     _inputFieldDate: string | null = null;
 
-    /** @hidden */
+    /** @ignore */
     _isInvalidDateInput = false;
 
-    /** @hidden The temporary Time object for use before 'OK' is pressed. Internal use. */
+    /** @ignore The temporary Time object for use before 'OK' is pressed. Internal use. */
     _tempTime: Nullable<D>;
 
-    /** @hidden The temporary CalendarDay object for use before 'OK' is pressed. Internal use. */
+    /** @ignore The temporary CalendarDay object for use before 'OK' is pressed. Internal use. */
     _tempDate: Nullable<D>;
 
-    /** @hidden */
+    /** @ignore */
     _meridian: boolean;
 
-    /** @hidden */
+    /** @ignore */
     _displaySeconds: boolean;
 
-    /** @hidden */
+    /** @ignore */
     _displayMinutes: boolean;
 
-    /** @hidden */
+    /** @ignore */
     _displayHours: boolean;
 
-    /** @hidden whether to display date or time in mobile mode */
+    /** @ignore whether to display date or time in mobile mode */
     _displayType: 'date' | 'time' = 'date';
 
-    /** @hidden */
+    /** @ignore */
     _showPopoverContents = false;
 
-    /** @hidden */
+    /** @ignore */
     private _state: FormStates = 'default';
 
-    /** @hidden */
+    /** @ignore */
     private _calendarPendingDate: Nullable<D>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _injector = inject(Injector);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _dynamicComponentService = inject(DynamicComponentService);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _focusTrapService = inject(FocusTrapService, {
         optional: true
     });
 
-    /** @hidden */
+    /** @ignore */
     private _mobileComponentRef: Nullable<ComponentRef<DatetimePickerMobileComponent<D>>>;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _touched = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
@@ -493,13 +493,13 @@ export class DatetimePickerComponent<D>
     @Input()
     disableFunction: (value: D) => boolean = () => false;
 
-    /** @hidden */
+    /** @ignore */
     onChange: (value: D | null) => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     onTouched = (): void => {};
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes): void {
         if (changes.date) {
             this._setTempDateTime();
@@ -515,7 +515,7 @@ export class DatetimePickerComponent<D>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         if (this.date) {
             this._setTempDateTime();
@@ -532,13 +532,13 @@ export class DatetimePickerComponent<D>
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._mobileComponentRef?.destroy();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._InitialiseVariablesInMessageService();
 
@@ -554,7 +554,7 @@ export class DatetimePickerComponent<D>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Function that implements Validator Interface, adds validation support for forms
      */
     validate(): { [key: string]: any } | null {
@@ -618,29 +618,29 @@ export class DatetimePickerComponent<D>
         this._showPopoverContents = false;
     }
 
-    /** @hidden */
+    /** @ignore */
     setInvalidDateInputHandler(isInvalid: boolean): void {
         this._isInvalidDateInput = isInvalid;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnChange(fn: (selected: any) => { void }): void {
         this.onChange = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
         this._changeDetRef.detectChanges();
     }
 
     /**
-     * @hidden
+     * @ignore
      * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms
      */
     writeValue(selected: Nullable<D>): void {
@@ -654,7 +654,7 @@ export class DatetimePickerComponent<D>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that is triggered by events from calendar component, when there is selected date changed.
      * If invalid time model is detected, it takes time model data from TimeComponent.
      */
@@ -666,7 +666,7 @@ export class DatetimePickerComponent<D>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that is triggered by events from time component, when there is selected time changed
      */
     handleTimeChange(time: D): void {
@@ -677,7 +677,7 @@ export class DatetimePickerComponent<D>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that is triggered when 'OK' button is pressed.
      */
     submit(): void {
@@ -711,7 +711,7 @@ export class DatetimePickerComponent<D>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Function that is called when 'Cancel' button is pressed.
      */
     cancel(): void {
@@ -721,7 +721,7 @@ export class DatetimePickerComponent<D>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Looks like no one uses it. Should be removed?
      */
     focusArrowLeft(): void {
@@ -731,7 +731,7 @@ export class DatetimePickerComponent<D>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method, which is responsible for transforming string to datetime, depending on type or
      * validation the results are different. It also changes to state of _isInvalidDateInput.
      */
@@ -758,7 +758,7 @@ export class DatetimePickerComponent<D>
         this.onChange(this.date);
     }
 
-    /** @hidden */
+    /** @ignore */
     dialogApprove(): void {
         this.isOpen = false;
         this.submit();
@@ -773,7 +773,7 @@ export class DatetimePickerComponent<D>
         this.onChange(this.date);
     }
 
-    /** @hidden */
+    /** @ignore */
     _changeMessageVisibility(): void {
         if (this.isOpen) {
             this._popoverFormMessage.hide();
@@ -782,7 +782,7 @@ export class DatetimePickerComponent<D>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _onOpenStateChanged(isOpen: boolean): void {
         this.isOpenChange.emit(isOpen);
         this._changeMessageVisibility();
@@ -808,19 +808,19 @@ export class DatetimePickerComponent<D>
         return (date === null && this.allowNull) || this._dateTimeAdapter.isValid(date);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setInput(dateTime: Nullable<D>): void {
         this._inputFieldDate = dateTime ? this._formatDateTime(dateTime) : '';
         this._changeDetRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _refreshCurrentlyDisplayedCalendarDate(date: Nullable<D>): void {
         this._calendarPendingDate = date;
     }
 
     /**
-     * @hidden
+     * @ignore
      * Format date time entity.
      */
     private _formatDateTime(dateTime: D): string {
@@ -831,25 +831,25 @@ export class DatetimePickerComponent<D>
         return formattedDate || '';
     }
 
-    /** @hidden */
+    /** @ignore */
     private _InitialiseVariablesInMessageService(): void {
         this._popoverFormMessage.init(this._inputGroupElement);
         this._popoverFormMessage.message = this._formMessageTemplate;
         this._popoverFormMessage.triggers = this._messageTriggers;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _parseDate(date: unknown): D | null {
         return this._dateTimeAdapter.parse(date, this._dateTimeFormats.parse.dateInput);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setTempDateTime(): void {
         this._tempDate = this.date;
         this._tempTime = this.date;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateTimeOptions(): void {
         const format = this._dateTimeFormats.display.dateTimeInput;
 
@@ -874,7 +874,7 @@ export class DatetimePickerComponent<D>
             this.displayHours != null ? this.displayHours : this._dateTimeAdapter.isTimeFormatIncludesHours(format);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setUpMobileMode(): void {
         const injector = Injector.create({
             providers: [

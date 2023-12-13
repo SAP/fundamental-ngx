@@ -69,10 +69,10 @@ export class GenericTagComponent implements OnChanges, OnInit, CssClassBuilder {
     @Input()
     ariaRoleDescription: Nullable<string> = 'Generic Tag';
 
-    /** @hidden */
+    /** @ignore */
     readonly elementRef = inject(ElementRef);
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -82,12 +82,12 @@ export class GenericTagComponent implements OnChanges, OnInit, CssClassBuilder {
         return buildObjectStatusCssClasses(this);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }

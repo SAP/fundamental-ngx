@@ -9,6 +9,6 @@ import { Directive } from '@angular/core';
     standalone: true
 })
 export class QuickViewGroupItemContentElementDirective {
-    /** @hidden */
+    /** @ignore */
     static class = 'fd-quick-view__group-item__content-element';
 }

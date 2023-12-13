@@ -14,7 +14,7 @@ import { BaseSmartFilterBarConditionField } from './base-smart-filter-bar-condit
     imports: [FormsModule, ReactiveFormsModule, PlatformMultiInputComponent, FdTranslatePipe]
 })
 export class SmartFilterBarConditionFieldComponent extends BaseSmartFilterBarConditionField {
-    /** @hidden */
+    /** @ignore */
     constructor(dialogService: DialogService, smartFilterBarService: SmartFilterBarService, injector: Injector) {
         super(dialogService, smartFilterBarService, injector);
     }

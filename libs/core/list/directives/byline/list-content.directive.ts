@@ -5,7 +5,7 @@ import { Directive, HostBinding, Input } from '@angular/core';
     standalone: true
 })
 export class ListContentDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-list__content')
     fdListContentClass = true;
 

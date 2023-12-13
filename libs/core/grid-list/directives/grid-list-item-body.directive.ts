@@ -6,6 +6,6 @@ import { Directive, TemplateRef } from '@angular/core';
     standalone: true
 })
 export class GridListItemBodyDirective {
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly templateRef: TemplateRef<any>) {}
 }

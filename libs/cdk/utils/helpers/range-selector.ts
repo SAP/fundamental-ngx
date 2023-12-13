@@ -46,9 +46,9 @@ import { isNumber } from '../typecheck';
  * ```
  */
 export class RangeSelector {
-    /** @hidden */
+    /** @ignore */
     private _previousSelectedIndex: number | null = null;
-    /** @hidden */
+    /** @ignore */
     private _state: RangeSelectionState | null;
 
     /**
@@ -119,7 +119,7 @@ export class RangeSelector {
         this._previousSelectedIndex = null;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isNonNegativeInteger(num: Nullable<number>): num is number {
         return isNumber(num) && num >= 0;
     }

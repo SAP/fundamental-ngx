@@ -17,3 +17,4 @@ export const ROUTES: Routes = [
 ];
 
 export const LIBRARY_NAME = 'translation-resolver';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/i18n';

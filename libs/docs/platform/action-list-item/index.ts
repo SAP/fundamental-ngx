@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'action-list-item';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/list';
 export const API_FILE_KEY = 'actionlistitem';

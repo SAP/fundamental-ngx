@@ -41,41 +41,41 @@ import { NestedListPopoverInterface } from './nested-list-popover.interface';
     ]
 })
 export class NestedListPopoverComponent implements NestedListPopoverInterface, AfterContentInit {
-    /** @hidden
+    /** @ignore
      * For Internal Usage - Gets information about title, which should be displayed inside popover
      */
     @Input()
     title = '';
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(PopoverComponent)
     popoverComponent: PopoverComponent;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-nested-list__popover')
     popoverClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(NestedLinkDirective)
     linkDirective: NestedLinkDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(NestedListContentDirective)
     contentDirective: NestedListContentDirective;
 
     /**
-     * @hidden
+     * @ignore
      * Reference to parent item, to propagate open and close change from popover.
      */
     parentItemElement: NestedItemInterface;
 
-    /** @hidden */
+    /** @ignore */
     placement$: Observable<Placement>;
 
-    /** @hidden */
+    /** @ignore */
     open = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _keyboardNestService: NestedListKeyboardService,
         @Optional() private _itemService: NestedItemService,
@@ -88,7 +88,7 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         if (!this.title) {
             this.title = this._getTitle();
@@ -118,7 +118,7 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnKeyboardRefresh(): void {
         this._keyboardNestService.refresh$.subscribe(() => {
             /** Update popover position, on list of hidden items change */
@@ -128,7 +128,7 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _createRtlObservable(): void {
         this.placement$ = this._rtlService
             ? this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'left-start' : 'right-start')))

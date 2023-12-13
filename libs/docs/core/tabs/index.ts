@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'tabs';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/tabs';
 export const API_FILE_KEY = 'tabs';
 export const I18N_KEY = 'coreTabs';

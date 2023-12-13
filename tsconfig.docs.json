@@ -1,0 +1,14 @@
+{
+    "extends": ["tsconfig.base.json"],
+    "include": [
+        "libs/cdk/**/*.ts",
+        "libs/cx/**/*.ts",
+        "libs/btp/**/*.ts",
+        "libs/core/**/*.ts",
+        "libs/platform/**/*.ts",
+        "libs/i18n/**/*.ts",
+        "libs/datetime-adapter/**/*.ts",
+        "libs/moment-adapter/**/*.ts"
+    ],
+    "exclude": ["**/*/test.ts", "**/*.spec.ts"]
+}

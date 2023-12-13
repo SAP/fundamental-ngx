@@ -117,23 +117,23 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
     @Output()
     closeTab = new EventEmitter<IconTabBarItem>();
 
-    /** @hidden */
+    /** @ignore */
     _cssClassForContainer: string[];
 
-    /** @hidden */
+    /** @ignore */
     _isRtl = false;
 
-    /** @hidden */
+    /** @ignore */
     private _onDestroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _cd: ChangeDetectorRef,
         @Optional() private _contentDensityService: ContentDensityService,
         @Optional() private _rtlService: RtlService
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._cssClassForContainer = this._generateContainerStyles();
 
@@ -161,14 +161,14 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param event reordered array of IconTabBarItem
      */
     _onReorder(event: IconTabBarItem[]): void {
@@ -176,20 +176,20 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param selectedItem
      */
     _selectItem(selectedItem: IconTabBarItem): void {
         this.iconTabSelected.emit(selectedItem);
     }
 
-    /** @hidden */
+    /** @ignore */
     _closeTab(item: IconTabBarItem): void {
         this.closeTab.emit(item);
     }
 
     /**
-     * @hidden
+     * @ignore
      * @returns array of css classes for icon-tab-bar container
      */
     private _generateContainerStyles(): string[] {

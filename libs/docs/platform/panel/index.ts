@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'panel';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/panel';
 export const API_FILE_KEY = 'panel';

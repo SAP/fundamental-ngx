@@ -104,25 +104,25 @@ let deprecationWarningShown = false;
     ]
 })
 export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit, AfterViewInit {
-    /** @hidden */
+    /** @ignore */
     @ViewChild('mobileControlTemplate')
     mobileControlTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('listTemplate')
     listTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(TokenizerComponent)
     _tokenizer: TokenizerComponent;
 
     /**
-     * @hidden
+     * @ignore
      * List of selected suggestions
      */
     _selectedSuggestions: SelectableOptionItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         cd: ChangeDetectorRef,
         readonly elementRef: ElementRef,
@@ -161,7 +161,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         super.ngOnInit();
 
@@ -172,7 +172,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
 
@@ -185,7 +185,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         this._tokenizer._showOverflowPopover = false;
     }
 
-    /** @hidden */
+    /** @ignore */
     toggleSelection(item: SelectableOptionItem): void {
         const idx = this._getTokenIndexByIdlOrValue(item);
 
@@ -206,13 +206,13 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         this._cd.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     onOptionCheckboxClicked(event: MouseEvent, index: number): void {
         event.stopPropagation();
         this._onListElementClicked(event, index);
     }
 
-    /** @hidden */
+    /** @ignore */
     onCompleteTerm(event: AutoCompleteEvent): void {
         if (event.forceClose) {
             this.toggleSelectionByInputText(event.term);
@@ -220,7 +220,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     toggleSelectionByInputText(text = this.inputText): void {
         const item = this._getSelectItemByInputValue(text);
         if (item) {
@@ -230,7 +230,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that selects all possible options.
      * *select* attribute – if *true* select all, if *false* unselect all
      * */
@@ -242,14 +242,14 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         this._propagateChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     navigateByTokens(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW]) && this.isOpen) {
             this.listComponent.items?.first.focus();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     removeToken(token: SelectableOptionItem, event?: MouseEvent): void {
         if (event) {
             event.preventDefault();
@@ -258,7 +258,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         this._rangeSelector.reset();
     }
 
-    /** @hidden */
+    /** @ignore */
     moreClicked(): void {
         this._suggestions = this.isGroup
             ? this._convertObjectsToGroupOptionItems(this._selectedSuggestions.map(({ value }) => value))
@@ -271,7 +271,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         this._cd.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     onBlur(event: FocusEvent): void {
         const target = event.relatedTarget as HTMLElement;
         if (target) {
@@ -292,7 +292,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method to set input text as item label.
      */
     setInputTextFromOptionItem(item: OptionItem): void {
@@ -305,7 +305,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         this.showList(false);
     }
 
-    /** @hidden */
+    /** @ignore */
     onItemKeyDownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, ESCAPE)) {
             this._focusToSearchField();
@@ -326,13 +326,13 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     onOptionClicked(event: MouseEvent, index: number): void {
         this._onListElementClicked(event, index);
         this.close();
     }
 
-    /** @hidden */
+    /** @ignore */
     _addOnClicked(event: Event): void {
         this.addOnButtonClicked.emit(event);
         if (!this.mobile) {
@@ -340,7 +340,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         }
     }
 
-    /** @hidden Handle dialog dismissing, closes popover and sets backup data. */
+    /** @ignore Handle dialog dismissing, closes popover and sets backup data. */
     dialogDismiss(backup: SelectableOptionItem[]): void {
         this._selectedSuggestions = [...backup];
         this.inputText = '';
@@ -348,7 +348,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         this.selectedShown$.next(false);
     }
 
-    /** @hidden Handle dialog approval, closes popover and propagates data changes. */
+    /** @ignore Handle dialog approval, closes popover and propagates data changes. */
     dialogApprove(): void {
         this.inputText = '';
         this.showList(false);
@@ -356,7 +356,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     }
 
     /**
-     * @hidden
+     * @ignore
      * applying range selection. Note, that this function will be invoked after combobox item's value has been changed
      */
     private _onListElementClicked(event: MouseEvent, index: number): void {
@@ -387,12 +387,12 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
             this._tokenizer.tokenizerInnerEl.nativeElement.scrollWidth;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getTokenIndexByIdlOrValue(item: SelectableOptionItem): number {
         return this._selectedSuggestions.findIndex((token) => token.id === item.id || equal(token.value, item.value));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _mapAndUpdateModel(): void {
         const selectedItems = this._selectedSuggestions.map(({ value }) => value);
 
@@ -400,7 +400,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         this.value = selectedItems;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _propagateChange(emitInMobile?: boolean): void {
         if (!this.mobile || emitInMobile) {
             this.onChange(this._selectedSuggestions);
@@ -408,7 +408,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _setUpMobileMode(): Promise<void> {
         const injector = Injector.create({
             providers: [{ provide: MULTICOMBOBOX_COMPONENT, useValue: this }],

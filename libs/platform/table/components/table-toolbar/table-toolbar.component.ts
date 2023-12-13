@@ -91,34 +91,34 @@ export class TableToolbarComponent implements TableToolbarInterface, OnDestroy {
     @Input()
     editMode: EditMode = 'none';
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(TableToolbarActionsComponent)
     tableToolbarActionsComponent: TableToolbarActionsComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(TableToolbarLeftActionsComponent)
     _tableToolbarLeftActionsComponent: TableToolbarLeftActionsComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(TemplateRef)
     contentTemplateRef: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     tableToolbarTitleId: string = 'fd-table-toolbar-title-' + tableToolbarTitleUniqueId++;
 
-    /** @hidden */
+    /** @ignore */
     _showSaveButton = false;
 
-    /** @hidden */
+    /** @ignore */
     _searchInputText = '';
 
-    /** @hidden */
+    /** @ignore */
     readonly tableLoading$: Observable<boolean> = this._tableService.tableLoading$;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _cd: ChangeDetectorRef,
         private readonly _table: Table,
@@ -127,53 +127,53 @@ export class TableToolbarComponent implements TableToolbarInterface, OnDestroy {
         this._listenToTableEvents();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     submitSearch(search: SearchInput): void {
         this._table.search(search);
     }
 
-    /** @hidden */
+    /** @ignore */
     openSorting(): void {
         this._table.openTableSortSettings.emit();
     }
 
-    /** @hidden */
+    /** @ignore */
     openFiltering(): void {
         this._table.openTableFilterSettings.emit();
     }
 
-    /** @hidden */
+    /** @ignore */
     openGrouping(): void {
         this._table.openTableGroupSettings.emit();
     }
 
-    /** @hidden */
+    /** @ignore */
     openColumns(): void {
         this._table.openTableColumnSettings.emit();
     }
 
-    /** @hidden */
+    /** @ignore */
     _addRow(): void {
         this._table.addRow();
     }
 
-    /** @hidden */
+    /** @ignore */
     _saveRows(): void {
         this._table.saveRows();
     }
 
-    /** @hidden */
+    /** @ignore */
     _cancelEditing(): void {
         this._table.cancelEditing();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToTableEvents(): void {
         this._table.emptyRowAdded.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
             this._showSaveButton = true;
@@ -192,12 +192,12 @@ export class TableToolbarComponent implements TableToolbarInterface, OnDestroy {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     _expandAll(): void {
         this._table.expandAll();
     }
 
-    /** @hidden */
+    /** @ignore */
     _collapseAll(): void {
         this._table.collapseAll();
     }

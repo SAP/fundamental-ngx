@@ -43,7 +43,7 @@ export class FilterRule<T = any> {
         return this.valueExists(this.value) || this.valueExists(this.value2);
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         readonly columns: ReadonlyArray<FilterableColumn>,
         /** Column key the rule belongs to */
@@ -66,27 +66,27 @@ export class FilterRule<T = any> {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     setValid(isValid: boolean): void {
         this.isValid = isValid;
     }
 
-    /** @hidden */
+    /** @ignore */
     setValue(value: T | null): void {
         this.value = value;
     }
 
-    /** @hidden */
+    /** @ignore */
     setValue2(value: T | null): void {
         this.value2 = value;
     }
 
-    /** @hidden */
+    /** @ignore */
     setStrategy(strategy: FilterStrategy): void {
         this.strategy = strategy;
     }
 
-    /** @hidden */
+    /** @ignore */
     setStrategiesByColumnKey(columnKey?: string): void {
         const dataType = this.columns.find((column) => column.key === columnKey)?.dataType;
         if (!dataType) {
@@ -106,7 +106,7 @@ export class FilterRule<T = any> {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     setColumnKey(columnKey: string): void {
         if (columnKey === this.columnKey) {
             return;
@@ -124,7 +124,7 @@ export class FilterRule<T = any> {
         this.setStrategiesByColumnKey(columnKey);
     }
 
-    /** @hidden */
+    /** @ignore */
     setDataTypeByColumnKey(columnKey?: string): void {
         const dataType = this.columns.find((column) => column.key === columnKey)?.dataType;
 
@@ -135,7 +135,7 @@ export class FilterRule<T = any> {
         this.dataType = dataType;
     }
 
-    /** @hidden */
+    /** @ignore */
     private valueExists(value: any): boolean {
         return !!value || value === 0 || typeof value === 'boolean';
     }

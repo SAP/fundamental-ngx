@@ -19,30 +19,30 @@ export class PopoverTriggerDirective implements OnDestroy {
         this._setAriaAttributes(popover);
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-haspopup')
     ariaHasPopup: Nullable<boolean>;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-controls')
     ariaControls: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-expanded')
     ariaExpanded: Nullable<boolean>;
 
-    /** @hidden */
+    /** @ignore */
     private _isExpandedSubscription: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._unsubscribeExpandedListener();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnExpanded(popover: PopoverComponent): void {
         this._unsubscribeExpandedListener();
         if (popover) {
@@ -52,13 +52,13 @@ export class PopoverTriggerDirective implements OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setAriaAttributes(popover: Nullable<PopoverComponent>): void {
         this.ariaHasPopup = !!popover;
         this.ariaControls = popover ? popover.id : null;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _unsubscribeExpandedListener(): void {
         if (this._isExpandedSubscription) {
             this._isExpandedSubscription.unsubscribe();

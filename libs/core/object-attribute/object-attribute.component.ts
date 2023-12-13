@@ -41,7 +41,7 @@ export class ObjectAttributeComponent implements OnInit {
     @Output()
     objectAttributeclick = new EventEmitter<Event>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _el: ElementRef<HTMLElement>,
         private _renderer: Renderer2
@@ -51,7 +51,7 @@ export class ObjectAttributeComponent implements OnInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._renderer.addClass(this._el.nativeElement, 'fd-object-attribute');
         if (this.label !== null && this.label !== undefined) {

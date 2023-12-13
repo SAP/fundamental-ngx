@@ -95,21 +95,21 @@ export class SortingComponent implements Resettable {
     /** Table columns */
     readonly columns: SettingsSortDialogColumn[] = [];
 
-    /** @hidden */
+    /** @ignore */
     readonly _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     /** Indicates when reset command is available */
     readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
 
-    /** @hidden */
+    /** @ignore */
     readonly SORT_DIRECTION = SortDirection;
 
-    /** @hidden */
+    /** @ignore */
     readonly NOT_SORTED_OPTION_VALUE = NOT_SORTED_OPTION_VALUE;
 
-    /** @hidden */
+    /** @ignore */
     private _initialSorting: CollectionSort;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public dialogRef: DialogRef<SettingsSortDialogData>,
         private _table: Table
@@ -145,19 +145,19 @@ export class SortingComponent implements Resettable {
         this.dialogRef.close(result);
     }
 
-    /** @hidden */
+    /** @ignore */
     _sortDirectionChange(direction: SortDirection): void {
         this.direction = direction;
         this._onModelChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     _sortFieldChange(field: string): void {
         this.field = field;
         this._onModelChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     _onModelChange(): void {
         // Use this coercion cause fd-radio-button triggers extra ngModelChange events on initial phase
         const isInitialDiffers =
@@ -166,7 +166,7 @@ export class SortingComponent implements Resettable {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Since view settings dialog supports only one sorting, get the first one if available.
      */
     private _setInitialSorting(): void {
@@ -179,7 +179,7 @@ export class SortingComponent implements Resettable {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Compare initial sorting with selected one and set reset button if needed.
      */
     private _compareInitialSorting(): void {

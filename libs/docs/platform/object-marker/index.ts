@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'object-marker';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/object-marker';
 export const API_FILE_KEY = 'objectMarker';

@@ -9,15 +9,15 @@ import { QuickViewGroupItemContentElementDirective } from './quick-view-group-it
     standalone: true
 })
 export class QuickViewGroupItemContentComponent implements AfterViewInit {
-    /** @hidden */
+    /** @ignore */
     constructor(private readonly _elRef: ElementRef<Element>) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._bindElementAttributes();
     }
 
-    /** @hidden
+    /** @ignore
      * Needed for binding the id of the element and id of the proper label to aria-labelledby. */
     private _bindElementAttributes(): void {
         const parentId = this._elRef.nativeElement.closest('.fd-form-item')?.id;

@@ -24,19 +24,19 @@ import {
     providers: [{ provide: TABLE_SCROLLABLE, useExisting: forwardRef(() => TableScrollableDirective) }]
 })
 export class TableScrollableDirective implements TableScrollable, OnInit, OnDestroy {
-    /** @hidden */
+    /** @ignore */
     private _skipEvent = false;
 
-    /** @hidden */
+    /** @ignore */
     private _prevScrollTop = 0;
 
-    /** @hidden */
+    /** @ignore */
     private _prevScrollLeft = 0;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _document = inject(DOCUMENT);
 
     /** Scroll events stream */
@@ -69,19 +69,19 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
         tap(() => (this._prevScrollLeft = this.getScrollLeft()))
     );
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public elementRef: ElementRef<HTMLElement>,
         protected scrollDispatcher: TableScrollDispatcherService,
         protected ngZone: NgZone
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.scrollDispatcher.register(this);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this.scrollDispatcher.deregister(this);
     }

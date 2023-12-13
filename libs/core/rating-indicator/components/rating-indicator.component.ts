@@ -181,47 +181,47 @@ export class RatingIndicatorComponent
     @Output()
     ratingChanged = new EventEmitter<number>();
 
-    /** @hidden */
+    /** @ignore */
     sizeClass = this._getSizeClass(this.size);
-    /** @hidden */
+    /** @ignore */
     _rates: { id: string; value: number }[] = [];
-    /** @hidden */
+    /** @ignore */
     _ratingItems: RatingViewItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _ratingUID = ratingUID++;
-    /** @hidden */
+    /** @ignore */
     private _indicatorCapacity = INDICATOR_DEFAULT_CAPACITY;
-    /** @hidden */
+    /** @ignore */
     private _value = 0;
-    /** @hidden */
+    /** @ignore */
     private _hideDynamicText = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef,
         private readonly _changeDetectorRef: ChangeDetectorRef
     ) {}
-    /** @hidden */
+    /** @ignore */
     get viewRatingUID(): number {
         return this._ratingUID;
     }
-    /** @hidden */
+    /** @ignore */
     get indicatorCount(): number {
         return this._indicatorCapacity;
     }
-    /** @hidden */
+    /** @ignore */
     get viewValue(): number {
         return this._value;
     }
 
-    /** @hidden */
+    /** @ignore */
     onChange: (value: number) => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     onTouched = (): void => {};
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._value = this._convertToValue();
         this._rates = this._getRates();
@@ -229,7 +229,7 @@ export class RatingIndicatorComponent
         this._generateRatings();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (
             'class' in changes ||
@@ -256,27 +256,27 @@ export class RatingIndicatorComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     writeValue(value: number): void {
         this._value = this._parseValue(value);
         this._changeDetectorRef.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnChange(fn: (value: number) => void): void {
         this.onChange = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
-    /** @hidden */
+    /** @ignore */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
     }
 
-    /** @hidden */
+    /** @ignore */
     onSelect(value: number): void {
         this.value = this._value = value;
         this.onChange(value);
@@ -284,7 +284,7 @@ export class RatingIndicatorComponent
         this.ratingChanged.emit(value);
     }
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -304,7 +304,7 @@ export class RatingIndicatorComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * Generate rating items for popover content if rating object was defined
      */
     private _generateRatings(): void {
@@ -334,14 +334,14 @@ export class RatingIndicatorComponent
         this._value = this._convertToValue();
     }
     /**
-     * @hidden
+     * @ignore
      * get converted viewValue for render in component template from original value if it still exists, or ratingAverage.
      */
     private _convertToValue(): number {
         return this._parseValue(this.value || this.ratingAverage);
     }
     /**
-     * @hidden
+     * @ignore
      * get converted value from original to view value with depends on halves
      * For example,
      *  original value is equal to 2.34, you will get and render 2
@@ -364,7 +364,7 @@ export class RatingIndicatorComponent
         return Math.min(this.indicatorCount, v);
     }
     /**
-     * @hidden
+     * @ignore
      * get rating icons array with value and unic id
      */
     private _getRates(): { id: string; value: number }[] {
@@ -378,7 +378,7 @@ export class RatingIndicatorComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * get rating icons array with value and unic id
      */
     private _getSizeClass(size: RatingIndicatorSize): string {

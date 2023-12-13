@@ -106,18 +106,18 @@ export class P13SortingDialogComponent implements Resettable {
     /** Table columns available for sorting */
     readonly columns: SortDialogColumn[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     /** Indicates when reset command is available */
     readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
 
-    /** @hidden */
+    /** @ignore */
     readonly SORT_DIRECTION = SortDirection;
 
     /** Sort rules to render */
     rules: ValidatedSortRule[] = [];
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public dialogRef: DialogRef<SortDialogData>,
         private cdr: ChangeDetectorRef
@@ -147,7 +147,7 @@ export class P13SortingDialogComponent implements Resettable {
         this.dialogRef.close(result);
     }
 
-    /** @hidden */
+    /** @ignore */
     _removeRule(rule: ValidatedSortRule): void {
         this.rules = this.rules.filter((_rule) => _rule !== rule);
 
@@ -159,36 +159,36 @@ export class P13SortingDialogComponent implements Resettable {
         this._recalculateResetAvailability();
     }
 
-    /** @hidden */
+    /** @ignore */
     _addNew(index: number): void {
         this.rules.splice(index + 1, 0, new ValidatedSortRule());
     }
 
-    /** @hidden */
+    /** @ignore */
     _onRuleColumnKeyChange(rule: ValidatedSortRule, columnKey: string): void {
         rule.columnKey = columnKey;
         this._recalculateResetAvailability();
         this.cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     _onRuleDirectionChange(rule: ValidatedSortRule, direction: SortDirection): void {
         rule.direction = direction;
         this._recalculateResetAvailability();
     }
 
-    /** @hidden */
+    /** @ignore */
     _recalculateResetAvailability(): void {
         const hasOnlyOneEmptyRule = this.rules.length === 1 && !this.rules[0].isValid;
         this._isResetAvailableSubject$.next(!hasOnlyOneEmptyRule);
     }
 
-    /** @hidden */
+    /** @ignore */
     _trackByColumnKey(index: number, rule: ValidatedSortRule): string | null {
         return rule.columnKey;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initiateRules(collectionSort?: CollectionSort[]): void {
         this.rules = this._createRules(collectionSort);
 
@@ -200,12 +200,12 @@ export class P13SortingDialogComponent implements Resettable {
         this._recalculateResetAvailability();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _createRules(collectionSort: CollectionSort[] = []): ValidatedSortRule[] {
         return collectionSort.map(({ field, direction }): ValidatedSortRule => new ValidatedSortRule(field, direction));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getCollectionSortFromSortRules(rules = this.rules): CollectionSort[] {
         return rules.filter(this._isRuleValid).map(
             ({ columnKey, direction }): CollectionSort => ({
@@ -215,12 +215,12 @@ export class P13SortingDialogComponent implements Resettable {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getUniqueRules(rules: ValidatedSortRule[]): ValidatedSortRule[] {
         return getUniqueListValuesByKey(rules, 'columnKey');
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isRuleValid = (rule: ValidatedSortRule): boolean => rule?.isValid;
 }
 
@@ -230,7 +230,7 @@ export class P13SortingDialogComponent implements Resettable {
     standalone: true
 })
 export class GetAvailableSortColumnsPipe implements PipeTransform {
-    /** @hidden */
+    /** @ignore */
     transform(columns: SortDialogColumn[], rules: SortRule[], currentKey: string | null): SortDialogColumn[] {
         const usedKeys = new Set(rules.map((r) => r.columnKey));
         return columns.filter((c) => !usedKeys.has(c.key) || currentKey === c.key);

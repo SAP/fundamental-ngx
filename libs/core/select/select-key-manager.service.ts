@@ -9,15 +9,15 @@ import { SelectInterface } from './select.interface';
 
 @Injectable()
 export class SelectKeyManagerService {
-    /** @hidden */
+    /** @ignore */
     _component: SelectInterface;
 
-    /** @hidden */
+    /** @ignore */
     _keyManager: ActiveDescendantKeyManager<OptionsInterface>;
 
     /**
      * Sets up a key manager to listen to keyboard events on the overlay panel.
-     * @hidden
+     * @ignore
      */
     _initKeyManager(): void {
         this._keyManager = new ActiveDescendantKeyManager<OptionsInterface>(this._component._options)
@@ -43,7 +43,7 @@ export class SelectKeyManagerService {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     _scrollActiveOptionIntoView(): void {
         const activeOptionIndex = this._keyManager.activeItemIndex || 0;
         this._component._optionPanel.nativeElement.scrollTop = this._component._getOptionScrollPosition(
@@ -55,7 +55,7 @@ export class SelectKeyManagerService {
 
     /**
      * Handles keyboard events while the select is closed.
-     * @hidden
+     * @ignore
      */
     _handleClosedKeydown(event: KeyboardEvent): void {
         const isOpenKey = KeyUtil.isKeyCode(event, [ENTER, SPACE]);
@@ -91,7 +91,7 @@ export class SelectKeyManagerService {
     /**
      * Handles keyboard events when the selected is open.
      *
-     * @hidden
+     * @ignore
      */
     _handleOpenKeydown(event: KeyboardEvent): void {
         const manager = this._keyManager;

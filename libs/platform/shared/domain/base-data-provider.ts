@@ -11,12 +11,12 @@ import { DataProvider, MatchBy, MatchingStrategy, getMatchingStrategyStartsWithP
  * In Memory implementation of DataProvider that supports fulltext search
  */
 export class BaseDataProvider<T> extends DataProvider<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(protected values: Observable<T[]> | T[]) {
         super();
     }
 
-    /** @hidden */
+    /** @ignore */
     fetch(params: Map<string, any>): Observable<T[]> {
         const observable = isObservable(this.values) ? this.values : of(this.values);
 
@@ -67,7 +67,7 @@ export class BaseDataProvider<T> extends DataProvider<T> {
         return matched;
     }
 
-    /** @hidden */
+    /** @ignore */
     matchesBy(item: any, pattern: string, matchingBy: MatchBy): boolean {
         const value = isJsObject(item) && matchingBy ? matchingBy(item) : item;
 
@@ -87,7 +87,7 @@ export class BaseDataProvider<T> extends DataProvider<T> {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     protected hasObjectValue(obj: any, pattern: string): boolean {
         const values = objectValues(obj);
         const parentObj = objectToName(obj);
@@ -105,7 +105,7 @@ export class BaseDataProvider<T> extends DataProvider<T> {
         return length2 > 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     private withLimit(data: Array<T>, limit?: number): Array<T> {
         if (limit && data.length > limit) {
             return data.slice(0, limit);

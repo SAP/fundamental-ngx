@@ -102,13 +102,13 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     readonly checkedChange = new EventEmitter<any>();
 
     /**
-     * @hidden
+     * @ignore
      * is needed for the checkbox group to access component values
      */
     @ViewChild(FdCheckboxComponent)
     coreCheckbox: FdCheckboxComponent;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         elementRef: ElementRef,
         @Optional() @Self() ngControl: NgControl,

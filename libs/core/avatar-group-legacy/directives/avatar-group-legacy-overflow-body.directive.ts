@@ -41,23 +41,23 @@ export class AvatarGroupLegacyOverflowBodyDirective implements AfterViewInit, On
     @Input()
     noVerticalScroll = true;
 
-    /** @hidden Avatar Group Overflow items. */
+    /** @ignore Avatar Group Overflow items. */
     @ContentChildren(AVATAR_GROUP_LEGACY_FOCUSABLE_AVATAR_DIRECTIVE, { descendants: true })
     overflowItems: QueryList<FocusableWithElementRef>;
 
-    /** @hidden FocusKeyManager instance */
+    /** @ignore FocusKeyManager instance */
     private _keyboardEventsManager: FocusKeyManager<HasElementRef>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _subscription = new Subscription();
 
-    /** @hidden handles rtl service */
+    /** @ignore handles rtl service */
     private _dir: 'ltr' | 'rtl' | null = 'ltr';
 
-    /** @hidden */
+    /** @ignore */
     constructor(@Optional() private _rtlService: RtlService) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._listenForItemChanges();
 
@@ -66,13 +66,13 @@ export class AvatarGroupLegacyOverflowBodyDirective implements AfterViewInit, On
         this._subscribeToRtl();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscription.unsubscribe();
         this._keyboardEventsManager?.destroy();
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keyup', ['$event'])
     keyUpHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, TAB)) {
@@ -90,17 +90,17 @@ export class AvatarGroupLegacyOverflowBodyDirective implements AfterViewInit, On
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _setActiveItem(item: FocusableOption & HasElementRef): void {
         this._keyboardEventsManager.setActiveItem(item);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenForItemChanges(): void {
         this.overflowItems.changes.subscribe(() => this._setKeyboardEventsManager());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setKeyboardEventsManager(): void {
         this._keyboardEventsManager?.destroy();
         this._keyboardEventsManager = new FocusKeyManager(this.overflowItems)
@@ -110,7 +110,7 @@ export class AvatarGroupLegacyOverflowBodyDirective implements AfterViewInit, On
         this._keyboardEventsManager.setFirstItemActive();
     }
 
-    /** @hidden Rtl change subscription */
+    /** @ignore Rtl change subscription */
     private _subscribeToRtl(): void {
         if (!this._rtlService) {
             return;

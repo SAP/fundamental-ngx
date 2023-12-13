@@ -4,7 +4,7 @@ import { TableColumn } from '../table-column';
 
 @Pipe({ name: 'tableCellStyles', standalone: true })
 export class TableCellStylesPipe implements PipeTransform {
-    /** @hidden */
+    /** @ignore */
     transform(
         column: TableColumn,
         isRtl: boolean,

@@ -33,18 +33,18 @@ import { RtlService } from '@fundamental-ngx/cdk/utils';
     standalone: true
 })
 export class PlatformTableColumnResizerComponent implements OnInit {
-    /** @hidden */
+    /** @ignore */
     private _pointerMoveListener: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     private _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private get _rtl(): boolean {
         return this._rtlService?.rtl.getValue();
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _cd: ChangeDetectorRef,
         private readonly _ngZone: NgZone,
@@ -55,7 +55,7 @@ export class PlatformTableColumnResizerComponent implements OnInit {
         @Optional() private readonly _rtlService: RtlService
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._ngZone.runOutsideAngular(() => {
             fromEvent<MouseEvent>(this._elmRef.nativeElement, 'mousedown')
@@ -89,7 +89,7 @@ export class PlatformTableColumnResizerComponent implements OnInit {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenForMouseUp(): void {
         this._ngZone.runOutsideAngular(() => {
             this._pointerMoveListener?.unsubscribe();

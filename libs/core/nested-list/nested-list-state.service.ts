@@ -4,16 +4,16 @@ import { Subject } from 'rxjs';
 @Injectable()
 export class NestedListStateService {
     /**
-     * @hidden
+     * @ignore
      * The condensed state is modified by the parent and read by nested lists.
      */
     condensed = false;
 
     /**
-     * @hidden
+     * @ignore
      */
     selectable = true;
 
-    /** @hidden */
+    /** @ignore */
     onSelected: Subject<string> = new Subject<string>();
 }

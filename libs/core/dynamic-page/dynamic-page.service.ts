@@ -3,22 +3,22 @@ import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable()
 export class DynamicPageService {
-    /** @hidden */
+    /** @ignore */
     collapsed = new BehaviorSubject<boolean>(false);
 
-    /** @hidden */
+    /** @ignore */
     pinned = new BehaviorSubject<boolean>(false);
 
-    /** @hidden */
+    /** @ignore */
     pixelsSizeChanged = new BehaviorSubject<number>(0);
 
-    /** @hidden */
+    /** @ignore */
     subheaderVisibilityChange = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     focusLayoutAction = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     toggleCollapsed(): void {
         this.collapsed.next(!this.collapsed.value);
     }

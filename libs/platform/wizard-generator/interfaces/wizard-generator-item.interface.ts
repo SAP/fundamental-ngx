@@ -68,7 +68,7 @@ export interface WizardGeneratorItem {
     summary?: boolean;
 
     /**
-     * @hidden
+     * @ignore
      * @description Used for internal navigation logic to summary step.
      */
     completed?: boolean;
@@ -82,7 +82,7 @@ type PreparedWizardGeneratorItemFields = {
 };
 
 /**
- * @hidden
+ * @ignore
  * Internal representation of WizardGeneratorItem with all fields resolved to a plain value
  */
 export type PreparedWizardGeneratorItem = Omit<WizardGeneratorItem, keyof PreparedWizardGeneratorItemFields> &

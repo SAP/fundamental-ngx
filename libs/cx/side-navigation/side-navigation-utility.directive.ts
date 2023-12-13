@@ -6,11 +6,11 @@ import { NestedListComponent } from '@fundamental-ngx/cx/nested-list';
     selector: '[cxSideNavigationUtility], [fdx-side-nav-utility]'
 })
 export class SideNavigationUtilityDirective {
-    /** @hidden */
+    /** @ignore */
     @ContentChild(NestedListComponent)
     list: NestedListComponent;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdx-side-nav__utility')
     classSideNavUtility = true;
 }

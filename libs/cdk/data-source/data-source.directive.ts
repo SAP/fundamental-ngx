@@ -45,7 +45,7 @@ export class DataSourceDirective<T = any, P extends DataSourceProvider<T> = Data
         return this._dataSource;
     }
 
-    /** @hidden */
+    /** @ignore */
     dataSourceProvider: P | undefined;
 
     /**
@@ -53,25 +53,25 @@ export class DataSourceDirective<T = any, P extends DataSourceProvider<T> = Data
      */
     readonly dataChanged$ = new BehaviorSubject<T[]>([]);
 
-    /** @hidden */
+    /** @ignore */
     protected readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private _dataSource: DataSource<T, P> | null;
 
-    /** @hidden */
+    /** @ignore */
     private _dsSubscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _dataSourceTransformer = inject<DataSourceParser<T, P>>(FD_DATA_SOURCE_TRANSFORMER);
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this.dataSourceProvider?.unsubscribe();
         this._dsSubscription?.unsubscribe();
     }
 
-    /** @Hidden */
+    /** @ignore */
     protected _toDataStream(source: DataSource<T> | null): P | undefined {
         return !source
             ? undefined
@@ -80,7 +80,7 @@ export class DataSourceDirective<T = any, P extends DataSourceProvider<T> = Data
               : undefined;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initializeDataSource(): void {
         if (isDataSource(this.dataSource)) {
             this.dataSourceProvider?.unsubscribe();

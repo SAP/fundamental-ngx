@@ -66,28 +66,28 @@ export class DynamicPortalComponent implements AfterViewInit {
     @Output()
     attached = new EventEmitter<ComponentRef<any> | EmbeddedViewRef<any> | Element>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(CdkPortalOutlet)
     portalOutlet?: CdkPortalOutlet;
 
-    /** @hidden */
+    /** @ignore */
     private portalContent$ = new BehaviorSubject<
         DynamicPortalComponent['domElement' | 'component' | 'template'] | undefined
     >(undefined);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private viewContainerRef = inject(ViewContainerRef);
 
-    /** @hidden */
+    /** @ignore */
     private renderer = inject(Renderer2);
 
-    /** @hidden */
+    /** @ignore */
     private elementRef = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         const portalOutlet = this.portalOutlet as CdkPortalOutlet;
         this.portalContent$

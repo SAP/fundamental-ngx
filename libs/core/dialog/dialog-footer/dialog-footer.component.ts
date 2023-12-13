@@ -36,18 +36,18 @@ export const DialogButtonClass = 'fd-dialog__decisive-button';
     imports: [BarModule, ContentDensityDirective, NgTemplateOutlet]
 })
 export class DialogFooterComponent extends DialogFooterBase implements AfterContentInit, AfterViewInit {
-    /** @hidden */
+    /** @ignore */
     constructor(@Optional() public dialogConfig: DialogConfig) {
         super();
         this.dialogConfig = this.dialogConfig || {};
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         super.ngAfterContentInit();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._listenForButtonChanges(DialogButtonClass);
     }

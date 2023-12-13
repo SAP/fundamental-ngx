@@ -205,23 +205,23 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     @Output()
     readonly closeClicked: EventEmitter<void> = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(CalendarDayViewComponent)
     _dayViewComponent: CalendarDayViewComponent<D>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(CalendarMonthViewComponent)
     _monthViewComponent: CalendarMonthViewComponent<D>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(CalendarYearViewComponent)
     _yearViewComponent: CalendarYearViewComponent<D>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(CalendarAggregatedYearViewComponent)
     _aggregatedYearViewComponent: CalendarAggregatedYearViewComponent<D>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(CalendarHeaderComponent)
     _calendarHeaderComponent: CalendarHeaderComponent<D>;
 
@@ -244,24 +244,24 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     nextButtonDisableFunction: NavigationButtonDisableFunction<D>;
 
     /**
-     * @hidden
+     * @ignore
      * Currently displayed days depending on month and year
      */
     _currentlyDisplayed: CalendarCurrent;
 
-    /** @hidden */
+    /** @ignore */
     previousButtonDisabled: boolean;
 
-    /** @hidden */
+    /** @ignore */
     nextButtonDisabled: boolean;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _adapterStartingDayOfWeek: DaysOfWeek;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
@@ -312,18 +312,18 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     @Input()
     disableRangeEndFunction: DisableDateFunction<D> = () => false;
 
-    /** @hidden */
+    /** @ignore */
     onChange: (_: D | DateRange<D>) => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     onTouched: () => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._prepareDisplayedView();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (
             'nextButtonDisableFunction' in changes ||
@@ -334,18 +334,18 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     getWeekStartDay(): DaysOfWeek {
         return this.startingDayOfWeek === undefined ? this._adapterStartingDayOfWeek : this.startingDayOfWeek;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
     /**
-     * @hidden
+     * @ignore
      * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms.
      */
     writeValue(selected: DateRange<D> | D): void {
@@ -382,7 +382,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     }
 
     /**
-     * @hidden
+     * @ignore
      * Function that implements Validator Interface, adds validation support for forms
      */
     validate(): { [key: string]: any } | null {
@@ -395,12 +395,12 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
               };
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
@@ -433,7 +433,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that is triggered by events from day view component, when there is selected single date changed
      */
     selectedDateChanged(date: D): void {
@@ -445,7 +445,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that is triggered by events from day view component, when there is selected range date changed
      */
     selectedRangeDateChanged(dates: DateRange<D>): void {
@@ -578,7 +578,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     }
 
     /**
-     * @hidden
+     * @ignore
      * Function that handles changes from month view child component, changes actual view and changes currently displayed month
      */
     handleMonthViewChange(month: number): void {
@@ -605,25 +605,25 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         this.onYearViewSelected();
     }
 
-    /** @hidden */
+    /** @ignore */
     onDaysViewSelected(): void {
         this._changeDetectorRef.detectChanges();
         this._dayViewComponent?.setFocusOnCell();
     }
 
-    /** @hidden */
+    /** @ignore */
     onMonthViewSelected(): void {
         this._changeDetectorRef.detectChanges();
         this._monthViewComponent?.setFocusOnCell();
     }
 
-    /** @hidden */
+    /** @ignore */
     onYearViewSelected(): void {
         this._changeDetectorRef.detectChanges();
         this._yearViewComponent?.setFocusOnCell();
     }
 
-    /** @hidden */
+    /** @ignore */
     onYearsRangeViewSelected(): void {
         this._changeDetectorRef.detectChanges();
         this._aggregatedYearViewComponent?.setFocusOnCell();
@@ -644,7 +644,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         return false;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToLocaleChanges(): void {
         this._subscriptions.add(
             this._dateTimeAdapter.localeChanges.subscribe(() => {
@@ -655,7 +655,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that sets up the currently displayed variables, like shown month and year.
      * Day grid is based on currently displayed month and year
      */
@@ -684,7 +684,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getActiveFocusableView(): FocusableCalendarView | null {
         switch (this.activeView) {
             case 'day':
@@ -700,7 +700,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setNavigationButtonsStates(): void {
         this.previousButtonDisabled =
             typeof this.previousButtonDisableFunction === 'function' &&
@@ -711,7 +711,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         this._changeDetectorRef.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _focusOut(event: FocusEvent): void {
         if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
             this.onTouched();

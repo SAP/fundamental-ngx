@@ -35,7 +35,7 @@ export class WizardSummaryStepComponent {
     formattedWizardValue: WizardGeneratorSummaryItem[] = [];
 
     /**
-     * @hidden
+     * @ignore
      */
     _submittedForms: WizardGeneratorFormsValue;
 
@@ -72,16 +72,16 @@ export class WizardSummaryStepComponent {
     customSummaryStepTemplate: Nullable<TemplateRef<HTMLElement>>;
 
     /**
-     * @hidden
+     * @ignore
      */
     _shouldRender = false;
 
     /**
-     * @hidden
+     * @ignore
      */
     _wizardSteps: WizardGeneratorItem[];
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _wizardGeneratorService: WizardGeneratorService,
         private _formGeneratorService: FormGeneratorService,
@@ -97,7 +97,7 @@ export class WizardSummaryStepComponent {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param index
      * @returns step index
      */
@@ -105,10 +105,10 @@ export class WizardSummaryStepComponent {
         return step.id;
     }
 
-    /** @hidden */
+    /** @ignore */
     _editStepFn: (stepId: string) => void = (stepId: string) => this.editStep(stepId);
 
-    /** @hidden */
+    /** @ignore */
     private async _formatWizardValue(): Promise<void> {
         this.formattedWizardValue = [];
 
@@ -131,7 +131,7 @@ export class WizardSummaryStepComponent {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _formatStepValue(
         componentForms: WizardStepForms,
         step: WizardGeneratorItem

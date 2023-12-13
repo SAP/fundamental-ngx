@@ -6,10 +6,10 @@ import { ContentDensityMode } from '../types/content-density.mode';
 
 @Injectable()
 export class MemoryContentDensityStorage implements ContentDensityStorage {
-    /** @hidden */
+    /** @ignore */
     private _currentContentDensity$: BehaviorSubject<ContentDensityMode>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(@Inject(DEFAULT_CONTENT_DENSITY) defaultContentDensity: ContentDensityMode) {
         this._currentContentDensity$ = new BehaviorSubject(defaultContentDensity);
     }

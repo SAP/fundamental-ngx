@@ -18,7 +18,7 @@ import { TabColorAssociations } from '../../interfaces/tab-color-associations.in
 
 @Directive()
 export abstract class IconTabBarPopoverBase implements OnChanges {
-    /** @hidden list of tab html elements, that can receive focus. Each item should have "data-flatIndex" attribute */
+    /** @ignore list of tab html elements, that can receive focus. Each item should have "data-flatIndex" attribute */
     abstract _tabExtraUIElements: QueryList<ElementRef<HTMLElement>>;
 
     /**
@@ -71,15 +71,15 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
     closeTab = new EventEmitter<string>();
 
     /**
-     * @hidden
+     * @ignore
      * @description state of popover
      */
     _isOpen = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(protected _cd: ChangeDetectorRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.extraTabs) {
             this._setStyles(this.extraTabs);
@@ -87,7 +87,7 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @description Generate styles for subItems
      */
     protected _setStyles(items: IconTabBarItem[]): void {
@@ -102,7 +102,7 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param focusLast whether to focus first or last item in the popover
      */
     _openPopover(focusLast = false): void {
@@ -114,7 +114,7 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _focusPreviousPopoverItem(currentIndex: number): void {
         if (currentIndex === 0) {
             this.popover.close();
@@ -125,7 +125,7 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _focusNextPopoverItem(currentIndex: number): void {
         if (currentIndex === this._tabExtraUIElements.length - 1) {
             this.popover.close();
@@ -136,7 +136,7 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getOrderedTabExtraUIElements(): HTMLElement[] {
         return this._tabExtraUIElements
             .toArray()
@@ -149,7 +149,7 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param selectedItem
      */
     _selectItem(selectedItem: IconTabBarItem): void {
@@ -157,7 +157,7 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
         this.popover.close();
     }
 
-    /** @hidden */
+    /** @ignore */
     _keyDownHandler(event: KeyboardEvent, tab: IconTabBarItem, currentIndex: number): void {
         if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             event.preventDefault();

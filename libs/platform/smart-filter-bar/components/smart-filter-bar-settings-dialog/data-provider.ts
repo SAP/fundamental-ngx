@@ -3,7 +3,7 @@ import { FieldFilterItem } from '../../interfaces/smart-filter-bar-field-filter-
 import { SmartFilterBarVisibilityCategory } from '../../interfaces/smart-filter-bar-visibility-category';
 
 export class SmartFilterBarOptionsDataProvider extends ArrayTableDataProvider<FieldFilterItem> {
-    /** @hidden */
+    /** @ignore */
     constructor(items: FieldFilterItem[]) {
         super(items);
     }
@@ -37,27 +37,27 @@ export class SmartFilterBarOptionsDataProvider extends ArrayTableDataProvider<Fi
         this.items$.next(items);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getAllItems(): FieldFilterItem[] {
         return this.items;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getVisibleItems(): FieldFilterItem[] {
         return this.items.filter((i) => i.visible);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getActiveItems(): FieldFilterItem[] {
         return this.items.filter((i) => i.active);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getVisibleAndActiveItems(): FieldFilterItem[] {
         return this.items.filter((i) => i.visible || i.active);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getMandatoryItems(): FieldFilterItem[] {
         return this.items.filter((i) => i.mandatory);
     }

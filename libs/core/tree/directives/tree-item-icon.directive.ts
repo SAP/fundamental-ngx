@@ -8,11 +8,11 @@ import { Directive, HostBinding } from '@angular/core';
     standalone: true
 })
 export class TreeItemIconDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.role')
     private readonly _role = 'presentation';
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-hidden')
     private readonly _ariaHidden = true;
 }

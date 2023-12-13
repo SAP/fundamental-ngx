@@ -11,7 +11,7 @@ import { ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
     standalone: true
 })
 export class FixedCardLayoutItemComponent implements FocusableOption {
-    /** @hidden */
+    /** @ignore */
     constructor(private _elementRef: ElementRef) {}
 
     /** Set focus on the element. */

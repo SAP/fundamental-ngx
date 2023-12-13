@@ -10,10 +10,10 @@ import { DialogRefBase } from './dialog-ref-base.class';
 @Injectable()
 export abstract class DialogBaseService<T extends DialogContainer<any>> implements OnDestroy {
     abstract open<D>(content: unknown, config: DialogConfigBase<D>): DialogRefBase<D>;
-    /** @hidden Collection of existing dialog references */
+    /** @ignore Collection of existing dialog references */
     protected _dialogs: ComponentRef<T>[] = [];
 
-    /** @hidden */
+    /** @ignore */
     protected _destroy$ = new Subject<void>();
 
     /**
@@ -33,18 +33,18 @@ export abstract class DialogBaseService<T extends DialogContainer<any>> implemen
         this._dialogs = [];
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._destroy$.next();
         this._destroy$.complete();
     }
 
-    /** @hidden Extends configuration using default values*/
+    /** @ignore Extends configuration using default values*/
     protected _applyDefaultConfig(config: DialogConfig, defaultConfig: DialogConfig): DialogConfig {
         return { ...defaultConfig, ...config };
     }
 
-    /** @hidden Destroy existing dialog */
+    /** @ignore Destroy existing dialog */
     protected _destroyDialog(dialog: ComponentRef<T>): void {
         this._dialogs = this._dialogs.filter((d) => d !== dialog);
     }

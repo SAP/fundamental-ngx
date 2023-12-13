@@ -42,22 +42,22 @@ export class FilterMultiSelectComponent {
     valueChange: EventEmitter<any[]> = new EventEmitter();
 
     /**
-     * @hidden
+     * @ignore
      * Currently selected values
      */
     _value: any[];
 
-    /** @hidden */
+    /** @ignore */
     _selectableOptions: SelectableOption[];
 
-    /** @hidden */
+    /** @ignore */
     _onSelectChange(option: SelectableOption, selected: boolean): void {
         option.selected = selected;
         this._updateValueBasedOnOptions();
         this.valueChange.emit(this._value);
     }
 
-    /** @hidden */
+    /** @ignore */
     _updateValueBasedOnOptions(): void {
         this._value = this._selectableOptions.filter(({ selected }) => selected).map(({ value }) => value);
     }

@@ -5,10 +5,10 @@ import { Directive, ElementRef, HostBinding } from '@angular/core';
     standalone: true
 })
 export class ListNavigationItemTextDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-list__navigation-item-text')
     navigationItemTextClass = true;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 }

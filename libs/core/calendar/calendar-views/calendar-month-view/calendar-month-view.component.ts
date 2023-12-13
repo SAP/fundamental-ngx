@@ -59,31 +59,31 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     readonly monthClicked: EventEmitter<number> = new EventEmitter<number>();
 
     /**
-     * @hidden
+     * @ignore
      * Month grid table
      */
     _calendarMonthListGrid: CalendarMonth[][];
 
     /**
-     * @hidden
+     * @ignore
      * A number offset used to achieve the 1-12 representation of the calendar
      */
     private readonly _monthOffset: number = 1;
-    /** @hidden */
+    /** @ignore */
     private readonly _amountOfColPerRow: number = 3;
-    /** @hidden */
+    /** @ignore */
     private readonly _amountOfRows: number = 4;
 
     /**
-     * @hidden
+     * @ignore
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _initiated = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _eRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
@@ -92,7 +92,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
         private _dateTimeAdapter: DatetimeAdapter<D>
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._initiated = true;
         this._setupKeyboardService();
@@ -104,14 +104,14 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (this._initiated && ('monthSelected' in changes || 'year' in changes || 'id' in changes)) {
             this._constructMonthGrid();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -133,7 +133,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     }
 
     /**
-     * @hidden
+     * @ignore
      * Today cell label ID
      */
     get _todayLabelId(): string {
@@ -141,7 +141,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     }
 
     /**
-     * @hidden
+     * @ignore
      * Selected date label ID
      */
     get _selectedDateLabelId(): string {
@@ -170,7 +170,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method for handling the keyboard events (a11y)
      */
     _onKeydownMonthHandler(event: KeyboardEvent, index: number): void {
@@ -178,7 +178,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that allows to focus elements inside this component
      */
     _focusElementBySelector(elementSelector: string): void {
@@ -189,7 +189,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method returning id of month cell
      */
     _getIndex(rowIndex: number, colIndex: number): number {
@@ -197,7 +197,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param index month grid cell index
      */
     _getId(index: number): string {
@@ -205,7 +205,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that checks if this is current month
      */
     _isCurrent(id: number): boolean {
@@ -213,7 +213,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that check if this is selected month
      */
     _isSelected(id: number): boolean {
@@ -221,7 +221,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that create month grid with required meta data
      */
     private _constructMonthGrid(): void {
@@ -259,7 +259,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method to put configuration and listeners on calendar keyboard service
      */
     private _setupKeyboardService(): void {
@@ -277,14 +277,14 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     }
 
     /**
-     * @hidden
+     * @ignore
      * Returns transformed 1d array from 2d month grid.
      */
     private _getMonthList(): CalendarMonth[] {
         return (<CalendarMonth[]>[]).concat(...this._calendarMonthListGrid);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _focusOnCellByIndex(index: number): void {
         this._focusElementBySelector(`#${this._getId(index)}`);
     }

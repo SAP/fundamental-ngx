@@ -49,11 +49,11 @@ import { FD_LINK_COMPONENT } from './tokens';
     standalone: true
 })
 export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterViewInit, OnDestroy {
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FD_ICON_COMPONENT)
     iconComponents: QueryList<IconComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('content')
     contentSpan: ElementRef<HTMLSpanElement>;
 
@@ -81,33 +81,33 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
     @Input()
     undecorated: boolean;
 
-    /** @hidden */
+    /** @ignore */
     _prefixPortal: Portal<any> | null;
 
-    /** @hidden */
+    /** @ignore */
     _postfixPortal: Portal<any> | null;
 
-    /** @hidden */
+    /** @ignore */
     _prefixIconName: string;
-    /** @hidden */
+    /** @ignore */
     _postfixIconName: string;
 
-    /** @hidden */
+    /** @ignore */
     private _destroyed$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef<HTMLElement>,
         private changeDetectorRef: ChangeDetectorRef,
         @Inject('linkRouterTarget') readonly routerLink: RouterLink
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function is responsible for order which css classes are applied
      */
@@ -124,12 +124,12 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this.iconComponents.changes
             .pipe(
@@ -186,7 +186,7 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
             .subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._destroyed$.next();
         this._destroyed$.complete();

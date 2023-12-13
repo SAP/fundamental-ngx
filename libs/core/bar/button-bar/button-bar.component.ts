@@ -59,7 +59,7 @@ export class ButtonBarComponent extends BaseButton implements OnDestroy {
     @Input()
     ariaLabelledby: string;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _defaultId = `fd-button-bar-id-${randomButtonBarId++}`;
 
     /** id for this element */
@@ -71,32 +71,32 @@ export class ButtonBarComponent extends BaseButton implements OnDestroy {
         return this._id || this._defaultId;
     }
 
-    /** @hidden */
+    /** @ignore */
     _id: string | null | undefined;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-bar__element')
     _barElement = true;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('style.pointer-events')
     get pointerEvents(): string {
         return this._disabled ? 'none' : 'auto';
     }
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(ButtonComponent)
     _buttonComponent: ButtonComponent;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _cdRef: ChangeDetectorRef) {
         super();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }

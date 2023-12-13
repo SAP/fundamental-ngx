@@ -76,13 +76,13 @@ export abstract class PlatformFormField extends FormField {
     /** Form control */
     ngControl?: NgControl;
 
-    /** @hidden */
+    /** @ignore */
     formControl?: FormControl;
 
     /** Event emitted when errors being changed. */
     errorsChange$: Subject<void>;
 
-    /** @hidden */
+    /** @ignore */
     innerErrorRenderers?: TemplateRef<any>;
 
     /**
@@ -150,7 +150,7 @@ export abstract class PlatformFormFieldControl<T = any> implements FormFieldCont
      */
     abstract onContainerClick(event: MouseEvent): void;
 
-    /** @hidden */
+    /** @ignore */
     formMessage: Nullable<FormInputMessageGroupComponent>;
 
     /**

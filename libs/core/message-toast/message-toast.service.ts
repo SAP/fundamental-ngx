@@ -9,18 +9,18 @@ import { MessageToastRef } from './ref/message-toast.ref';
 
 @Injectable()
 export class MessageToastService<P = any> extends BaseDismissibleToastService<MessageToastConfig<P>> {
-    /** @Hidden */
+    /** @ignore */
     protected toastTextComponent = MessageToastTextComponent;
-    /** @Hidden */
+    /** @ignore */
     protected toastContainerComponent = MessageToastComponent;
-    /** @Hidden */
+    /** @ignore */
     protected toastDataInjectionToken = MESSAGE_TOAST_DATA;
-    /** @Hidden */
+    /** @ignore */
     protected toastPositionStrategy = ToastBottomCenterPosition;
-    /** @Hidden */
+    /** @ignore */
     protected defaultConfig;
 
-    /** @hidden */
+    /** @ignore */
     constructor(overlay: Overlay, injector: Injector, @Inject(MESSAGE_TOAST_CONFIG) config: MessageToastConfig) {
         super(overlay, injector);
         this.defaultConfig = config;
@@ -79,12 +79,12 @@ export class MessageToastService<P = any> extends BaseDismissibleToastService<Me
         return this._attach(template, config) as MessageToastRef<EmbeddedViewRef<any>>;
     }
 
-    /** @hidden */
+    /** @ignore */
     protected getContainerComponentProviders(config: MessageToastConfig<P>): StaticProvider[] {
         return [{ provide: MessageToastConfig, useValue: config }];
     }
 
-    /** @hidden */
+    /** @ignore */
     protected getContentComponentProviders<T>(
         config: MessageToastConfig<P>,
         messageToastRef: MessageToastRef<T>
@@ -95,7 +95,7 @@ export class MessageToastService<P = any> extends BaseDismissibleToastService<Me
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     protected getToastRef<T>(
         containerRef: MessageToastComponent,
         overlayRef: OverlayRef,

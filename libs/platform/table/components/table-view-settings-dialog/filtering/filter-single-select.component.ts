@@ -36,16 +36,16 @@ export class FilterSingleSelectComponent {
     @Output()
     valueChange: EventEmitter<any[]> = new EventEmitter();
 
-    /** @hidden */
+    /** @ignore */
     readonly NOT_FILTERED_OPTION_VALUE = NOT_FILTERED_OPTION_VALUE;
 
     /**
-     * @hidden
+     * @ignore
      * Currently selected value
      */
     _value: any;
 
-    /** @hidden */
+    /** @ignore */
     _onValueChange(value: unknown): void {
         if (value === this._value) {
             return;

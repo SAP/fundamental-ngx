@@ -29,23 +29,23 @@ export class MenuAddonDirective {
     @HostBinding('attr.aria-hidden')
     ariaHidden = true;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-menu__addon-after')
     fdAddonAfterClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-menu__addon-before')
     fdAddonBeforeClass = false;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(CdkPortalOutlet)
     set addonPortalOutlet(portalOutlet: CdkPortalOutlet) {
         this._addonGlyph.setGlyphPortalOutlet(portalOutlet);
     }
 
-    /** @hidden */
+    /** @ignore */
     readonly _addonGlyph = inject(GlyphMenuAddonDirective);
 
-    /** @hidden */
+    /** @ignore */
     readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 }

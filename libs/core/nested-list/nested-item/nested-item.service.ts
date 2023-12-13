@@ -4,9 +4,9 @@ import { NestedListInterface } from '../nested-list/nested-list.interface';
 
 /** Contains references to popover or list nested components, that are placed as direct children of item component */
 export class NestedItemService {
-    /** @hidden */
+    /** @ignore */
     list: NestedListInterface;
-    /** @hidden */
+    /** @ignore */
     popover?: NestedListPopoverInterface;
 
     /** Subject fired when expand icon is clicked */

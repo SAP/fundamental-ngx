@@ -15,7 +15,7 @@ export abstract class BaseToastActionDismissibleRef<
     /** Whether the Toast was dismissed using the action-dismissible button. */
     protected dismissedByAction = false;
 
-    /** @hidden */
+    /** @ignore */
     protected constructor(
         containerInstance: BaseToastDurationDismissibleContainerComponent<P>,
         overlayRef: OverlayRef,
@@ -42,7 +42,7 @@ export abstract class BaseToastActionDismissibleRef<
     }
 
     /**
-     * @hidden
+     * @ignore
      * Cleans up the DOM after closing.
      */
     protected override _finishDismiss(): void {

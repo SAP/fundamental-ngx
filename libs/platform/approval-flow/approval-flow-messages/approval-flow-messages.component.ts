@@ -51,15 +51,15 @@ export class ApprovalFlowMessagesComponent {
     @Output()
     undoLastAction = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     _trackByFn = trackByFn;
 
-    /** @hidden */
+    /** @ignore */
     _dismissMessage(messageIndex: number): void {
         this.messages.splice(messageIndex, 1);
     }
 
-    /** @hidden */
+    /** @ignore */
     _undoLastAction(messageIndex: number, event: Event): void {
         event.preventDefault();
 

@@ -8,10 +8,10 @@ import { ContentDensityMode } from '../types/content-density.mode';
 
 @Injectable()
 export class UrlContentDensityStorage implements ContentDensityStorage {
-    /** @hidden */
+    /** @ignore */
     private _current$: BehaviorSubject<ContentDensityMode>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _router: Router,
         private _activatedRoute: ActivatedRoute,
@@ -21,7 +21,7 @@ export class UrlContentDensityStorage implements ContentDensityStorage {
         this._initialize();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initialize(): void {
         this._current$ = new BehaviorSubject<ContentDensityMode>(this._defaultContentDensity);
 
@@ -32,7 +32,7 @@ export class UrlContentDensityStorage implements ContentDensityStorage {
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setUrlQueryParam(density: ContentDensityMode): void {
         const url = new URL(`https://google.com${this._router.url}`);
         url.searchParams.delete(this._storageKey);

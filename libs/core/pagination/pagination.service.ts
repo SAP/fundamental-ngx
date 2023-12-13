@@ -11,7 +11,7 @@ const SIDE_CURRENT_DISPLAY_PAGES = 2;
  */
 @Injectable()
 export class PaginationService {
-    /** @hidden */
+    /** @ignore */
     public readonly moreElementValue = -1;
 
     /**

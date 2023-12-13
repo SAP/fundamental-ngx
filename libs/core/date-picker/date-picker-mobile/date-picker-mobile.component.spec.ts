@@ -28,7 +28,7 @@ class MockDatePickerComponent<D> implements DatePicker<D> {
         return this.selectedDate || this.rangeDate;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isDateRange(value: any): value is DateRange<D> {
         return !!value && value.start && value.end;
     }

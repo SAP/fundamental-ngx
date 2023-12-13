@@ -44,7 +44,7 @@ export class DynamicPageContentComponent {
     size: DynamicPageResponsiveSize;
 
     /**
-     * @hidden
+     * @ignore
      * The component view is wrapped in ng-template so
      * component's consumer have to use this templateRef to render it
      * in its view.
@@ -54,6 +54,6 @@ export class DynamicPageContentComponent {
     @ViewChild('contentTemplateRef')
     contentTemplateRef: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
 }

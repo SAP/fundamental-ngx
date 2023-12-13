@@ -69,13 +69,13 @@ export class AvatarGroupOverflowButtonComponent
     @Input()
     class: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         super();
         this.fdkFocusableItem = inject(AVATAR_GROUP_HOST_CONFIG).type === 'individual';
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
@@ -86,12 +86,12 @@ export class AvatarGroupOverflowButtonComponent
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }

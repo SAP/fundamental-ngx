@@ -17,20 +17,20 @@ import { AfterContentChecked, ChangeDetectionStrategy, Component, ElementRef, Vi
     standalone: true
 })
 export class PopoverControlComponent implements AfterContentChecked {
-    /** @hidden */
+    /** @ignore */
     _tabbable = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public elRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentChecked(): void {
         if (this._tabbable) {
             this.makeTabbable();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     makeTabbable(): void {
         const elemChild = this.elRef.nativeElement.children[0];
         if (elemChild && elemChild.getAttribute('tabindex') !== '-1') {

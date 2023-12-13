@@ -6,21 +6,21 @@ import { NotificationHeaderComponent } from '../notification-header/notification
 
 @Directive()
 export abstract class NotificationGroupBaseDirective implements AfterViewInit, OnDestroy {
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(NotificationHeaderComponent, { descendants: true })
     notificationHeader: QueryList<NotificationHeaderComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(NotificationActionsComponent)
     notificationActions: QueryList<NotificationActionsComponent>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly onDestroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(private renderer: Renderer2) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         // TODO: update startWith args to be "undefined" after migration to rxjs 7.
         // Now it throws irrelevant warning about deprecation
@@ -58,7 +58,7 @@ export abstract class NotificationGroupBaseDirective implements AfterViewInit, O
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this.onDestroy$.next();
     }

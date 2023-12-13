@@ -49,76 +49,76 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     @HostBinding('class.fd-list__navigation-item--indicated')
     indicated = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-list__navigation-item')
     _navigationItemClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-list__navigation-item--expandable')
     _isExpandable = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.tabindex')
     _tabIndex;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-level')
     _ariaLevel: number;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FD_LIST_COMPONENT)
     _listComponent: ListComponentInterface;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(ListNavigationItemArrowDirective)
     _listNavigationItemArrow: ListNavigationItemArrowDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FD_ICON_COMPONENT)
     _iconComponent: IconComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(ListNavigationItemTextDirective)
     _text: ListNavigationItemTextDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(forwardRef(() => ListNavigationItemComponent), { descendants: true })
     _childItems: QueryList<ListNavigationItemComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-expanded')
     private get _ariaExpanded(): boolean | null {
         return this._isExpandable ? this._expanded : null;
     }
 
-    /** @hidden */
+    /** @ignore */
     _condensed = signal(false);
 
-    /** @hidden */
+    /** @ignore */
     _expanded = false;
 
-    /** @hidden */
+    /** @ignore */
     _innerText: string;
 
-    /** @hidden */
+    /** @ignore */
     readonly _focused$ = new Subject<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     readonly _clicked$ = new Subject<MouseEvent>();
 
     /**
-     * @hidden
+     * @ignore
      * false if list-item is within unexpanded list (not visible to user until list expanded). default is true
      */
     _isItemVisible = true;
 
-    /** @hidden handles rtl service */
+    /** @ignore handles rtl service */
     private _dir: 'ltr' | 'rtl' | null = 'ltr';
 
-    /** @hidden */
+    /** @ignore */
     private readonly _renderer2 = inject(Renderer2);
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elementRef: ElementRef,
         @Optional() private _rtlService: RtlService
@@ -132,14 +132,14 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('click', ['$event'])
     onItemClick(event: MouseEvent): void {
         event.stopPropagation();
         this._handleExpandedChanges(!this.expanded);
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [RIGHT_ARROW])) {
@@ -157,13 +157,13 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('focus', ['$event'])
     protected onFocus(event: FocusEvent): void {
         this._focused$.next(event.target !== this._elementRef?.nativeElement);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         if (this._listComponent) {
             this._isExpandable = true;
@@ -182,7 +182,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._subscribeToRtl();
         if (this._isExpandable) {
@@ -191,7 +191,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
         this._setIsItemVisible(this.expanded);
     }
 
-    /** @hidden
+    /** @ignore
      * set the _isItemVisible of sublist items to true if this(containing) list is expanded.
      */
     _setIsItemVisible(value: boolean): void {
@@ -202,7 +202,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _childIndicatedAndCollapsed(): boolean {
         let retVal = false;
         this._listComponent?._navItems?.forEach((navItem) => {
@@ -224,7 +224,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
         this._elementRef?.nativeElement?.click();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleExpandedChanges(expanded: boolean): void {
         if (this._isExpandable) {
             if (this.expanded === expanded) {
@@ -248,7 +248,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
         }
     }
 
-    /** @hidden Rtl change subscription */
+    /** @ignore Rtl change subscription */
     private _subscribeToRtl(): void {
         if (!this._rtlService) {
             return;

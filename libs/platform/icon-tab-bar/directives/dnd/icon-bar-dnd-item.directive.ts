@@ -54,19 +54,19 @@ export class IconBarDndItemDirective implements IconTabBarDndItem, AfterViewInit
      */
     readonly started = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     isVertical = false;
 
     /**
-     * @hidden
+     * @ignore
      * @description Drag reference, object created from DND CDK Service
      */
     dragRef: DragRef;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onDestroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public elementRef: ElementRef,
         protected _dragDrop: DragDrop,
@@ -74,13 +74,13 @@ export class IconBarDndItemDirective implements IconTabBarDndItem, AfterViewInit
         private _dndContainerDir: IconBarDndContainerDirective
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this.isVertical = this._dndListDir?.dndOrientation === 'vertical';
         this._setCDKDrag();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._dndListDir.removeDragItem(this);
         this._dndContainerDir.removeDragItem(this);
@@ -89,23 +89,23 @@ export class IconBarDndItemDirective implements IconTabBarDndItem, AfterViewInit
         this._onDestroy$.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     onCdkDragStart(): void {
         /** Adds class */
         this.started.next();
     }
 
-    /** @hidden */
+    /** @ignore */
     onCdkMove(position: Point): void {
         this.moved.next(position);
     }
 
-    /** @hidden */
+    /** @ignore */
     onCdkDragReleased(): void {
         this.released.next();
     }
 
-    /** @hidden */
+    /** @ignore */
     getElementCoordinates(): ElementChord {
         /** Takes distance from the beginning of window page */
         const rect = this.elementRef.nativeElement.getBoundingClientRect();
@@ -137,7 +137,7 @@ export class IconBarDndItemDirective implements IconTabBarDndItem, AfterViewInit
             : this.elementRef.nativeElement.classList.remove(...this.dndHoveredClass);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setCDKDrag(): void {
         this.dragRef = this._dragDrop.createDrag(this.elementRef);
         this.dragRef.previewClass = this.previewClass;

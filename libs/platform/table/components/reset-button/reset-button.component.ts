@@ -33,6 +33,6 @@ export const RESETTABLE_TOKEN = new InjectionToken<Resettable>('Resettable');
     imports: [ButtonComponent, AsyncPipe, FdTranslatePipe]
 })
 export class ResetButtonComponent {
-    /** @hidden */
+    /** @ignore */
     constructor(@Inject(RESETTABLE_TOKEN) public resettable: Resettable) {}
 }

@@ -53,7 +53,7 @@ export class WizardGeneratorComponent extends BaseWizardGenerator {
     @ContentChild(WizardGeneratorReviewButtonDirective, { read: TemplateRef })
     reviewButtonTemplate: TemplateRef<HTMLElement>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(_wizardGeneratorService: WizardGeneratorService, _cd: ChangeDetectorRef) {
         super(_wizardGeneratorService, _cd);
     }

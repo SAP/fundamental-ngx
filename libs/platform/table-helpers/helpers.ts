@@ -15,7 +15,7 @@ import { TableRow, TableRowImpl, isTableRow } from './models/table-row.model';
 import { GroupTableRowValueType, TreeLike } from './models/tree-table.model';
 import { TableColumn } from './table-column';
 
-/** @hidden */
+/** @ignore */
 export function newTableRow<T = any>(row: Partial<TableRow<T>>): TableRow<T> {
     if (!row.value) {
         throw new Error('Unexpected value. TableRow.value cannot be undefined.');
@@ -37,22 +37,22 @@ export function newTableRow<T = any>(row: Partial<TableRow<T>>): TableRow<T> {
     });
 }
 
-/** @hidden */
+/** @ignore */
 export function getSelectableRows(rows: TableRow[], selectableKey: string): TableRow[] {
     return rows.filter((row) => isSelectableRow(row, selectableKey));
 }
 
-/** @hidden */
+/** @ignore */
 export function isSelectableRow(row: TableRow, selectableKey: string): boolean {
     return (isItemRow(row) || isTreeRow(row)) && row.value[selectableKey] !== false;
 }
 
-/** @hidden */
+/** @ignore */
 export function isItemRow(row: TableRow): boolean {
     return row.type === TableRowType.ITEM;
 }
 
-/** @hidden */
+/** @ignore */
 export function isTreeRow(row: TableRow): boolean {
     return row.type === TableRowType.TREE;
 }
@@ -61,7 +61,7 @@ export function isTreeRow(row: TableRow): boolean {
  * Since we dont work with the tree, we need to convert incoming tree to
  * flat format while maintaining original state.
  *
- * @hidden
+ * @ignore
  */
 export function convertTreeTableRowToFlatList<T>(rows: TableRow<T>[], rowNavigatable: string | boolean): TableRow<T>[] {
     let flatList: TableRow[] = [];
@@ -78,7 +78,7 @@ export function convertTreeTableRowToFlatList<T>(rows: TableRow<T>[], rowNavigat
     return flatList;
 }
 
-/** @hidden */
+/** @ignore */
 export function isRowNavigatable<T>(row: T, rowNavigatable: string | boolean): boolean {
     if (!row) {
         return false;
@@ -92,7 +92,7 @@ export function isRowNavigatable<T>(row: T, rowNavigatable: string | boolean): b
     return !!rowNavigatable;
 }
 
-/** @hidden */
+/** @ignore */
 export function getFreezableColumns(columns: TableColumn[], freezeColumnsTo: string): Map<string, number> {
     const columnNames = new Map<string, number>();
 
@@ -116,7 +116,7 @@ export function getFreezableColumns(columns: TableColumn[], freezeColumnsTo: str
     return new Map();
 }
 
-/** @hidden */
+/** @ignore */
 export function getFreezableEndColumns(columns: TableColumn[], freezeEndColumnsTo: string): Map<string, number> {
     const columnNames = new Map<string, number>();
 
@@ -136,7 +136,7 @@ export function getFreezableEndColumns(columns: TableColumn[], freezeEndColumnsT
     return new Map();
 }
 
-/** @hidden */
+/** @ignore */
 export function convertTreeObjectsToTableRows<T>(
     source: T[],
     selectionMode: SelectionModeValue,
@@ -235,7 +235,7 @@ export function convertTreeObjectsToTableRows<T>(
 }
 
 /**
- * @hidden
+ * @ignore
  * Runs `rowComparator` function against checked rows and compares them with the new `source`
  * If matched, creates an association between the source item and checked status of corresponding row.
  *
@@ -263,7 +263,7 @@ export function getSelectionStatusByRowValue<T>(
     return rowMap;
 }
 
-/** @hidden */
+/** @ignore */
 export function applySelectionToChildren<T>(
     allRows: Array<TableRow<T>>,
     row: TableRow,
@@ -278,7 +278,7 @@ export function applySelectionToChildren<T>(
     });
 }
 
-/** @hidden */
+/** @ignore */
 export function findRowChildren<T>(row: TableRow<T>, allRows: TableRow<T>[]): TableRow<T>[] {
     const rowsLength = allRows.length;
 
@@ -308,7 +308,7 @@ export function findRowChildren<T>(row: TableRow<T>, allRows: TableRow<T>[]): Ta
  * @param row Row which parents we need to find
  * @param untilParent Parent to stop a search on. Default is "null" that means look up until the root
  * @returns parents list [direct parent, ..., ancestor]
- * @hidden
+ * @ignore
  */
 export function getRowParents<T>(row: TableRow<T>, untilParent: TableRow<T> | null = null): TableRow<T>[] {
     untilParent = untilParent || null; // to avoid "undefined"
@@ -321,7 +321,7 @@ export function getRowParents<T>(row: TableRow<T>, untilParent: TableRow<T> | nu
     return parents;
 }
 
-/** @hidden */
+/** @ignore */
 export function toDataStream<T>(source: FdpTableDataSource<T>): TableDataSource<T> | undefined {
     if (isDataSource(source)) {
         return source as TableDataSource<T>;
@@ -338,7 +338,7 @@ export function toDataStream<T>(source: FdpTableDataSource<T>): TableDataSource<
     return undefined;
 }
 /**
- * @hidden
+ * @ignore
  * Creates an empty column skeleton object.
  * @returns Column model.
  */
@@ -355,12 +355,12 @@ export function buildNewRowSkeleton<T>(editableRowSkeleton: T, columns: TableCol
     return newRow as T;
 }
 
-/** @hidden */
+/** @ignore */
 export function isGroupRow(row: TableRow): boolean {
     return row.type === TableRowType.GROUP;
 }
 
-/** @hidden */
+/** @ignore */
 export function sortTreeLikeGroupedRows(
     groupedRows: TreeLike<TableRow>[],
     groupRulesMap: Map<string, CollectionGroup>
@@ -401,7 +401,7 @@ export function sortTreeLikeGroupedRows(
     });
 }
 
-/** @hidden */
+/** @ignore */
 export function convertTreeLikeToFlatList<K>(treeLikeList: TreeLike<K>[]): K[] {
     let flatList: K[] = [];
 
@@ -418,7 +418,7 @@ export function convertTreeLikeToFlatList<K>(treeLikeList: TreeLike<K>[]): K[] {
 }
 
 /**
- * @hidden
+ * @ignore
  * Group table rows and return tree like rows list.
  * It's intended to be called recursively.
  * @param rules group rules to group by
@@ -506,7 +506,7 @@ export function createGroupedTableRowsTree(
     return groupedTableRows;
 }
 
-/** @hidden */
+/** @ignore */
 export function convertObjectsToTableRows<T>(
     source: T[],
     addedItems: T[],
@@ -537,7 +537,7 @@ export function convertObjectsToTableRows<T>(
     });
 }
 
-/** @hidden */
+/** @ignore */
 export function isTreeRowFirstCell(cellIndex: number, row: TableRow, event?: Event): boolean {
     return (cellIndex === 0 && isTreeRow(row)) || (!!event && !row.isTree);
 }

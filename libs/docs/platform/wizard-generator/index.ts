@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'wizard-generator';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/wizard-generator';
 export const API_FILE_KEY = 'wizardGenerator';
 export const I18N_KEY = 'platformWizardGenerator';

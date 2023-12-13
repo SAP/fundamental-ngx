@@ -84,7 +84,7 @@ export interface ExampleItem {
  *
  */
 export class ObservableTableDataProviderExample extends ObservableTableDataProvider<ExampleItem> {
-    /** @hidden */
+    /** @ignore */
     constructor(items: ExampleItem[], dateTimeAdapter?: DatetimeAdapter<any>) {
         super(of(items), dateTimeAdapter);
     }
@@ -239,7 +239,7 @@ export class ObservableTableDataProviderExample extends ObservableTableDataProvi
     }
 
     /**
-     * @hidden
+     * @ignore
      * String filtering strategy
      * @param item data source array item.
      * @param filter filter object
@@ -288,7 +288,7 @@ export class ObservableTableDataProviderExample extends ObservableTableDataProvi
     }
 
     /**
-     * @hidden
+     * @ignore
      * Number filtering strategy
      * @param item data source array item.
      * @param filter filter object
@@ -325,7 +325,7 @@ export class ObservableTableDataProviderExample extends ObservableTableDataProvi
     }
 
     /**
-     * @hidden
+     * @ignore
      * Date filtering strategy
      * @param item data source array item.
      * @param filter filter object
@@ -375,7 +375,7 @@ export class ObservableTableDataProviderExample extends ObservableTableDataProvi
     }
 
     /**
-     * @hidden
+     * @ignore
      * Boolean filtering strategy
      * @param item data source array item.
      * @param filter filter object
@@ -396,7 +396,7 @@ export class ObservableTableDataProviderExample extends ObservableTableDataProvi
     }
 
     /**
-     * @hidden
+     * @ignore
      * Array filtering strategy
      * @param item data source array item.
      * @param filter filter object

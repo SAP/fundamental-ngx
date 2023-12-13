@@ -10,7 +10,7 @@ import { WizardGeneratorFormsValue } from './interfaces/wizard-generator-forms.i
  */
 @Injectable()
 export class WizardDialogGeneratorService {
-    /** @hidden */
+    /** @ignore */
     constructor(private _dialogService: DialogService) {}
 
     /**

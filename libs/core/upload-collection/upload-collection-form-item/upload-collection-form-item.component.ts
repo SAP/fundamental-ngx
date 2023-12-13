@@ -12,7 +12,7 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
     imports: [FormControlComponent, FormsModule, FdTranslatePipe]
 })
 export class UploadCollectionFormItemComponent implements ControlValueAccessor {
-    /** @hidden */
+    /** @ignore */
     @Input()
     _editMode = false;
 
@@ -20,10 +20,10 @@ export class UploadCollectionFormItemComponent implements ControlValueAccessor {
     @Output()
     readonly fileNameChanged = new EventEmitter<string>();
 
-    /** @hidden */
+    /** @ignore */
     _fileNameValue: string;
 
-    /** @hidden */
+    /** @ignore */
     _extension: string;
 
     /** Value of the text input. */
@@ -37,23 +37,23 @@ export class UploadCollectionFormItemComponent implements ControlValueAccessor {
         return this._fileNameValue;
     }
 
-    /** @hidden */
+    /** @ignore */
     onChange: (value: string) => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     onTouched = (): void => {};
 
-    /** @hidden */
+    /** @ignore */
     writeValue(value: string): void {
         this.fileName = value;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnChange(fn: (value: string) => void): void {
         this.onChange = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }

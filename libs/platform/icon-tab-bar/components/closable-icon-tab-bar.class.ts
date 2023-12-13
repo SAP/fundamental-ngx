@@ -11,7 +11,7 @@ export abstract class ClosableIconTabBar extends IconTabBarBase {
     @Output()
     closeTab = new EventEmitter<IconTabBarItem>();
 
-    /** @hidden */
+    /** @ignore */
     _closeTab(itemIndex: string): void {
         const tab = this._getTabInfoFromMainList(itemIndex);
 
@@ -31,7 +31,7 @@ export abstract class ClosableIconTabBar extends IconTabBarBase {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param arr
      * @param parentUid
      * @description Update indexes, uIds, styles.
@@ -53,7 +53,7 @@ export abstract class ClosableIconTabBar extends IconTabBarBase {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param uid
      * @param arr
      * @returns {parent, tab}

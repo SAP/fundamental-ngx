@@ -43,13 +43,13 @@ import { FD_DATETIME_PICKER_COMPONENT, FD_DATETIME_PICKER_MOBILE_CONFIG } from '
     ]
 })
 export class DatetimePickerMobileComponent<D> extends MobileModeBase<DateTimePicker<D>> {
-    /** @hidden */
+    /** @ignore */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     private _selectedBackup: Nullable<D>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,
@@ -66,19 +66,19 @@ export class DatetimePickerMobileComponent<D> extends MobileModeBase<DateTimePic
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     handleApprove(): void {
         this.dialogRef.close();
         this._component.dialogApprove();
     }
 
-    /** @hidden */
+    /** @ignore */
     handleDismiss(): void {
         this.dialogRef.dismiss();
         this._component.dialogDismiss(this._selectedBackup);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _toggleDialog(open: boolean): void {
         if (open) {
             this._selectedBackup = this._component.date!;
@@ -88,7 +88,7 @@ export class DatetimePickerMobileComponent<D> extends MobileModeBase<DateTimePic
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _open(): void {
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
             mobile: true,

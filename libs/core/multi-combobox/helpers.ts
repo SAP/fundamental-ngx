@@ -2,7 +2,7 @@ import { isSelectItem, SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
 import { isFunction, isJsObject, isString } from '@fundamental-ngx/cdk/utils';
 import equal from 'fast-deep-equal';
 
-/** @hidden */
+/** @ignore */
 export function lookupValue(item: unknown, lookupKey: string): string {
     if (isSelectItem(item)) {
         return lookupKey && item ? item.value[lookupKey] : item.value;
@@ -11,7 +11,7 @@ export function lookupValue(item: unknown, lookupKey: string): string {
     }
 }
 
-/** @hidden */
+/** @ignore */
 export function displayValue(item: unknown, displayKey: string): string {
     if (isSelectItem(item)) {
         return item.label;
@@ -24,7 +24,7 @@ export function displayValue(item: unknown, displayKey: string): string {
     }
 }
 
-/** @hidden */
+/** @ignore */
 export function objectGet(obj: unknown, is: string | string[] | undefined): any {
     if (!isJsObject(obj)) {
         return obj;
@@ -37,7 +37,7 @@ export function objectGet(obj: unknown, is: string | string[] | undefined): any 
     }
 }
 
-/** @hidden */
+/** @ignore */
 export function getSelectItemByInputValue<T>(
     suggestions: SelectableOptionItem<T>[],
     needleValue: string
@@ -45,13 +45,13 @@ export function getSelectItemByInputValue<T>(
     return suggestions.find((value) => value.label === needleValue);
 }
 
-/** @hidden
+/** @ignore
  *  Map grouped values to array. */
 export function flattenGroups(items: SelectableOptionItem[]): SelectableOptionItem[] {
     return items.reduce((result, item) => result.concat(item.children ?? []), <SelectableOptionItem[]>[]);
 }
 
-/** @hidden */
+/** @ignore */
 export function getTokenIndexByIdlOrValue(item: SelectableOptionItem, suggestions: SelectableOptionItem[]): number {
     return suggestions.findIndex((token) => token.id === item.id || equal(token.value, item.value));
 }

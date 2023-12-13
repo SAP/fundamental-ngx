@@ -46,13 +46,13 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.inter
     ]
 })
 export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterface> implements OnInit, OnDestroy {
-    /** @hidden */
+    /** @ignore */
     allItemsSelected: boolean;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
-    /** @hidden
+    /** @ignore
      * For internal usage
      * Control element, which will be rendered inside dialog.
      * List element, which will be rendered inside dialog.
@@ -62,10 +62,10 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
         controlTemplate: TemplateRef<any>;
     }> = null;
 
-    /** @hidden */
+    /** @ignore */
     private _selectedBackup: any[];
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,
@@ -75,12 +75,12 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
         super(elementRef, dialogService, multiInputComponent, MobileModeControl.MULTI_INPUT, mobileModes);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._listenOnMultiInputOpenChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         super.onDestroy();
     }
@@ -90,19 +90,19 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
         this._component.selectAllItems(!selectAll);
     }
 
-    /** @hidden */
+    /** @ignore */
     handleDismiss(): void {
         this.dialogRef.dismiss();
         this._component.dialogDismiss(this._selectedBackup);
     }
 
-    /** @hidden */
+    /** @ignore */
     handleApprove(): void {
         this.dialogRef.close();
         this._component.dialogApprove();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _toggleDialog(open: boolean): void {
         if (!open) {
             return;
@@ -114,7 +114,7 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnMultiInputOpenChange(): void {
         this._component.openChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => this._toggleDialog(isOpen));
         this._component.allItemsSelectedChange
@@ -122,7 +122,7 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
             .subscribe((allItemsSelected) => (this.allItemsSelected = allItemsSelected));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _open(): void {
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
             mobile: true,

@@ -101,24 +101,24 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onSelect: EventEmitter<void> = new EventEmitter<void>();
 
-    /** @hidden Reference to the Menu Item title */
+    /** @ignore Reference to the Menu Item title */
     @ContentChild(MenuTitleDirective)
     menuItemTitle: MenuTitleDirective;
 
-    /** @hidden Reference to the Menu Item interactive element */
+    /** @ignore Reference to the Menu Item interactive element */
     @ContentChild(MenuInteractiveComponent)
     menuInteractive: MenuInteractiveComponent;
 
-    /** @hidden Whether sub-menu is currently visible*/
+    /** @ignore Whether sub-menu is currently visible*/
     submenuVisible = false;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions: Subscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _hoverSubscriptions: Subscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public elementRef: ElementRef,
         @Optional() public menuService: MenuService | null,
@@ -126,7 +126,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
         @Optional() @Inject(SUBMENU) private _submenu: BaseSubmenu | null
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         if (this.parentSubmenu) {
             this._submenu = this.parentSubmenu;
@@ -134,7 +134,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._setMenuService();
         this._initialiseItemState();
@@ -143,7 +143,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
         this._listenOnMenuMode();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['disabled'] && !changes['disabled'].firstChange) {
             this.menuInteractive.setDisabled(this.disabled);
@@ -153,7 +153,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         if (this.parentSubmenu) {
             this._submenu?._unregisterItem(this);
@@ -183,7 +183,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
         }
     }
 
-    /** @hidden Sets menu item as selected/unselected based on isSelected flag */
+    /** @ignore Sets menu item as selected/unselected based on isSelected flag */
     setSelected(isSelected: boolean, fromSplit?: boolean): void {
         this.menuInteractive.setSelected(isSelected);
         this.submenuVisible = isSelected && !!this.submenu;
@@ -193,7 +193,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
         this._changeDetectorRef.markForCheck();
     }
 
-    /** @hidden Creates click listener on menu item interactive element */
+    /** @ignore Creates click listener on menu item interactive element */
     private _listenOnMenuLinkClick(): void {
         this._subscriptions.add(
             fromEvent(this.menuInteractive.elementRef.nativeElement, 'click').subscribe(
@@ -202,7 +202,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
         );
     }
 
-    /** @hidden Creates hover listeners for activating/deactivating menu item */
+    /** @ignore Creates hover listeners for activating/deactivating menu item */
     private _listenOnMenuLinkHover(): Subscription {
         const hoverSubscriptions: Subscription = new Subscription();
 
@@ -241,13 +241,13 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
         return hoverSubscriptions;
     }
 
-    /** @hidden Initializes menu link state based on item initial state */
+    /** @ignore Initializes menu link state based on item initial state */
     private _initialiseItemState(): void {
         this.menuInteractive.setSubmenu(!!this.submenu, this.itemId);
         this.menuInteractive.setDisabled(this.disabled);
     }
 
-    /** @hidden Checks for Menu Service dependency and passes it if further */
+    /** @ignore Checks for Menu Service dependency and passes it if further */
     private _setMenuService(): void {
         this.menuService = this.menuService || this._submenu?.menuService || null;
         if (this.submenu && this.menuService) {
@@ -255,7 +255,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
         }
     }
 
-    /** @hidden Listen on menu mode and set proper mode listeners */
+    /** @ignore Listen on menu mode and set proper mode listeners */
     private _listenOnMenuMode(): void {
         this.menuService?.isMobileMode.subscribe((isMobile) => {
             this._hoverSubscriptions.unsubscribe();
@@ -265,7 +265,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
         });
     }
 
-    /** @hidden Updates focused menu item on outer focus */
+    /** @ignore Updates focused menu item on outer focus */
     private _listenOnOuterFocus(): void {
         this._subscriptions.add(
             fromEvent(this.menuInteractive.elementRef.nativeElement, 'focus').subscribe(() => {
@@ -299,39 +299,39 @@ export class SubmenuComponent implements BaseSubmenu, AfterContentInit {
     @Input()
     ariaLabelledby: Nullable<string>;
 
-    /** @hidden Reference to template with Submenu items  */
+    /** @ignore Reference to template with Submenu items  */
     @ViewChild(TemplateRef) templateRef: TemplateRef<any>;
 
-    /** @hidden Reference to Submenu MenuItems  */
+    /** @ignore Reference to Submenu MenuItems  */
     @ContentChildren(FD_MENU_ITEM_COMPONENT)
     _projectedItems: QueryList<MenuItemComponent>;
 
-    /** @hidden */
+    /** @ignore */
     _registeredItems: MenuItemComponent[] = [];
 
-    /** @hidden Reference to MenuService used by MenuItems */
+    /** @ignore Reference to MenuService used by MenuItems */
     menuService: MenuService;
 
-    /** @hidden */
+    /** @ignore */
     _menuItemsChange$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     get menuItems(): MenuItemComponent[] {
         return this._projectedItems.length ? this._projectedItems.toArray() : this._registeredItems;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._projectedItems.changes.subscribe(() => this._menuItemsChange$.next());
     }
 
-    /** @hidden method for manually registering item when it's not visible for @ContentChildren */
+    /** @ignore method for manually registering item when it's not visible for @ContentChildren */
     _registerItem(item: MenuItemComponent): void {
         this._registeredItems.push(item);
         this._menuItemsChange$.next();
     }
 
-    /** @hidden method for manually unregistering item when it's not visible for @ContentChildren */
+    /** @ignore method for manually unregistering item when it's not visible for @ContentChildren */
     _unregisterItem(item: MenuItemComponent): void {
         this._registeredItems = this._registeredItems.filter((i) => i !== item);
         this._menuItemsChange$.next();

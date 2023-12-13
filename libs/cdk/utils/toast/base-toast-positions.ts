@@ -74,12 +74,12 @@ export abstract class BaseToastPosition {
  * New items will stack after the first item.
  */
 export class ToastTopCenterPosition extends BaseToastPosition {
-    /** @hidden */
+    /** @ignore */
     static global: ToastGlobalPosition = {
         top: '1rem',
         center: true
     };
-    /** @hidden */
+    /** @ignore */
     static connected: ConnectedPosition = toastConnectedTopPosition;
 }
 
@@ -89,12 +89,12 @@ export class ToastTopCenterPosition extends BaseToastPosition {
  * New items will stack before first item.
  */
 export class ToastBottomCenterPosition extends BaseToastPosition {
-    /** @hidden */
+    /** @ignore */
     static global: ToastGlobalPosition = {
         bottom: '1rem',
         center: true
     };
-    /** @hidden */
+    /** @ignore */
     static connected: ConnectedPosition = toastConnectedBottomPosition;
 }
 
@@ -104,9 +104,9 @@ export class ToastBottomCenterPosition extends BaseToastPosition {
  * New items will stack after first item.
  */
 export class ToastTopLeftPosition extends ToastTopCenterPosition {
-    /** @hidden */
+    /** @ignore */
     static override global = { ...ToastTopCenterPosition.global, ...{ left: '1rem', center: false } };
-    /** @hidden */
+    /** @ignore */
     static override connected: ConnectedPosition = toastConnectedTopLeftPosition;
 }
 
@@ -116,9 +116,9 @@ export class ToastTopLeftPosition extends ToastTopCenterPosition {
  * New items will stack after first item.
  */
 export class ToastTopRightPosition extends ToastTopCenterPosition {
-    /** @hidden */
+    /** @ignore */
     static override global = { ...ToastTopCenterPosition.global, ...{ right: '1rem', center: false } };
-    /** @hidden */
+    /** @ignore */
     static override connected: ConnectedPosition = toastConnectedTopRightPosition;
 }
 
@@ -128,9 +128,9 @@ export class ToastTopRightPosition extends ToastTopCenterPosition {
  * New items will stack before first item.
  */
 export class ToastBottomLeftPosition extends ToastBottomCenterPosition {
-    /** @hidden */
+    /** @ignore */
     static override global = { ...ToastBottomCenterPosition.global, ...{ left: '1rem', center: false } };
-    /** @hidden */
+    /** @ignore */
     static override connected = toastConnectedBottomLeftPosition;
 }
 
@@ -140,8 +140,8 @@ export class ToastBottomLeftPosition extends ToastBottomCenterPosition {
  * New items will stack before first item.
  */
 export class ToastBottomRightPosition extends ToastBottomCenterPosition {
-    /** @hidden */
+    /** @ignore */
     static override global = { ...ToastBottomCenterPosition.global, ...{ right: '1rem', center: false } };
-    /** @hidden */
+    /** @ignore */
     static override connected = toastConnectedBottomRightPosition;
 }

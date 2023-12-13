@@ -21,10 +21,10 @@ export class ToolLayoutContentContainerDirective implements OnChanges, OnInit, C
     @Input()
     background: ToolLayoutContentContainerBackground;
 
-    /** @hidden */
+    /** @ignore */
     readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -38,12 +38,12 @@ export class ToolLayoutContentContainerDirective implements OnChanges, OnInit, C
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }

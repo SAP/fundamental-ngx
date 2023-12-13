@@ -69,33 +69,33 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         return super.getValue();
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(INPUT_GROUP_CHILD_TOKEN)
     _children: QueryList<InputGroupInputComponent | InputGroupAddonComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(InputGroupInputComponent)
     _input: InputGroupInputComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(InputComponent, { read: ElementRef })
     set _inputComponentElement(inputComponentElementRef: ElementRef<HTMLElement>) {
         this._setInputElementClass(inputComponentElementRef?.nativeElement);
     }
 
-    /** @hidden */
+    /** @ignore */
     _beforeInputAddons: InputGroupAddonComponent[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _afterInputAddons: InputGroupAddonComponent[] = [];
 
-    /** @hidden */
+    /** @ignore */
     get _controlStateClass(): string | null {
         const state = this.state;
         return state ? `is-${state}` : null;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -111,7 +111,7 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         super.ngOnInit();
         /**
@@ -121,13 +121,13 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         this._addClassNameToHostElement(CSS_CLASS_NAME.host);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._listenToChildrenQueryListChanges();
     }
 
     /**
-     * @hidden
+     * @ignore
      * override base functionality to catch new disabled state
      */
     setDisabledState(disabled: boolean): void {
@@ -135,12 +135,12 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         this._setAddonsOptions();
     }
 
-    /** @hidden */
+    /** @ignore */
     _onChangeInputValue(value: string): void {
         this.value = value;
     }
 
-    /** @hidden */
+    /** @ignore */
     _onKeyPress(event: KeyboardEvent): void {
         // prevent typing non-digit chars
         if (this._input.type === 'number') {
@@ -150,7 +150,7 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToChildrenQueryListChanges(): void {
         this._children.changes.pipe(startWith(this._children)).subscribe(() => {
             this._createAddonsGroups();
@@ -158,7 +158,7 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setInputElementClass(inputComponentElement: HTMLElement): void {
         if (!inputComponentElement) {
             return;
@@ -168,7 +168,7 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         this._renderer.addClass(inputElement, CSS_CLASS_NAME.input);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _createAddonsGroups(): void {
         const childrenList = this._children.toArray();
         const inputChildIndex = childrenList.findIndex((child) => this._isInputChild(child));
@@ -190,17 +190,17 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isInputChild(child: unknown): child is InputGroupInputComponent {
         return child instanceof InputGroupInputComponent;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isAddonChild(child: unknown): child is InputGroupAddonComponent {
         return child instanceof InputGroupAddonComponent;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setAddonsOptions(): void {
         const before = this._beforeInputAddons || [];
         const after = this._afterInputAddons || [];
@@ -209,7 +209,7 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addClassNameToHostElement(className: string): void {
         this._renderer.addClass(this._hostElementRef.nativeElement, className);
     }

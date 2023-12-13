@@ -68,7 +68,7 @@ export class SmartFilterBarConditionsDialogComponent {
     /** Available condition operator options. */
     conditionOperatorOptions: SelectItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _formItems: DynamicFormItem[][] = [];
 
     /**
@@ -77,10 +77,10 @@ export class SmartFilterBarConditionsDialogComponent {
     @ViewChildren(FormGeneratorComponent)
     formGenerators!: QueryList<FormGeneratorComponent>;
 
-    /** @hidden */
+    /** @ignore */
     loaded = false;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _conditionLabelKeys: SmartFilterBarStrategyLabels = {
         contains: 'filterConditionContains',
         equalTo: 'filterConditionEqualTo',
@@ -97,13 +97,13 @@ export class SmartFilterBarConditionsDialogComponent {
         beforeOrOn: 'filterConditionBeforeOrOn'
     };
 
-    /** @hidden */
+    /** @ignore */
     private _submittedForms: any[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private resolveTranslation = resolveTranslationSyncFn();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _dialogRef: DialogRef<SmartFilterBarConditionBuilder, SmartFilterBarCondition[]>,
         private readonly _cdr: ChangeDetectorRef,
@@ -112,7 +112,7 @@ export class SmartFilterBarConditionsDialogComponent {
         this._init();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _init(): void {
         this.config = this._dialogRef.data;
 
@@ -157,7 +157,7 @@ export class SmartFilterBarConditionsDialogComponent {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Callback function when form generator form has been submitted.
      * Will close dialog in case if all forms are valid.
      * @param form Form generator form value.
@@ -179,13 +179,13 @@ export class SmartFilterBarConditionsDialogComponent {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     _cancel(): void {
         this._dialogRef.dismiss();
     }
 
     /**
-     * @hidden
+     * @ignore
      * Returns applicable condition options of the filter.
      * @returns Array of applicable condition options.
      */
@@ -221,7 +221,7 @@ export class SmartFilterBarConditionsDialogComponent {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _generateFormGeneratorItems(condition?: SmartFilterBarCondition): DynamicFormItem[] {
         return [
             {

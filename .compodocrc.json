@@ -1,0 +1,12 @@
+{
+    "$schema": "node_modules/@compodoc/compodoc/src/config/schema.json",
+    "exportFormat": "json",
+    "output": "documentation-json",
+    "tsconfig": "tsconfig.docs.json",
+    "disableLifeCycleHooks": true,
+    "disablePrivate": true,
+    "disableProtected": true,
+    "disableSourceCode": true,
+    "disableCoverage": true,
+    "disableDependencies": false
+}

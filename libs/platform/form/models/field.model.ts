@@ -6,7 +6,7 @@ export interface FieldColumn {
 }
 
 export class Field {
-    /** @hidden */
+    /** @ignore */
     constructor(
         public name?: string,
         public rank?: number,
@@ -16,7 +16,7 @@ export class Field {
 }
 
 export class FieldGroup {
-    /** @hidden */
+    /** @ignore */
     constructor(
         public label: string,
         public fields: FieldColumn,

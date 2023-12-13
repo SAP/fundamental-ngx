@@ -72,7 +72,7 @@ export class WizardExampleComponent {
     addressLine1 = '';
     addressLine2 = '';
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(WizardStepComponent)
     steps: QueryList<WizardStepComponent>;
 

@@ -18,9 +18,9 @@ export class WizardNavigationComponent {
         return this._ariaLabel ?? this._wizard?.ariaLabel;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _ariaLabel: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(@Optional() @Inject(WIZARD) private _wizard?: WizardComponentInterface) {}
 }

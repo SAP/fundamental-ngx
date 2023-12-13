@@ -34,19 +34,19 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
     @Input()
     extension: string;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(UploadCollectionFormItemComponent)
     _formItemComponent: UploadCollectionFormItemComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(UploadCollectionTitleDirective)
     _titleDirective: UploadCollectionTitleDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(UploadCollectionButtonGroupComponent)
     _buttonGroupComponent: UploadCollectionButtonGroupComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(UploadCollectionTitleContainerDirective)
     _titleContainerDirective: UploadCollectionTitleContainerDirective;
 
@@ -58,22 +58,22 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
     @Output()
     readonly deleteClicked = new EventEmitter<any>();
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     fileNameFull: string;
 
-    /** @hidden */
+    /** @ignore */
     titleWidth: number;
 
-    /** @hidden used to compare to the current width to know whether to collapse or expand title */
+    /** @ignore used to compare to the current width to know whether to collapse or expand title */
     previousContainerWidth: number;
 
-    /** @hidden */
+    /** @ignore */
     containerWidth: number;
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this.fileNameFull = this.fileName + '.' + this.extension;
         this._titleDirective.elRef.nativeElement.tabIndex = '0';
@@ -85,21 +85,21 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         this._handleFormItemInputChangedSubscription();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         // Process resize after all the children views is initialized
         setTimeout(() => this.onResize());
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(public elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('window:resize', [])
     onResize(): void {
         if (!this.elementRef.nativeElement.parentElement) {
@@ -124,7 +124,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         this.previousContainerWidth = this.containerWidth;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleOkClickedSubscription(): void {
         this._subscriptions.add(
             this._buttonGroupComponent.okClicked.subscribe(() => {
@@ -142,7 +142,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleEditClickedSubscription(): void {
         this._subscriptions.add(
             this._buttonGroupComponent.editClicked.subscribe((event) => {
@@ -166,7 +166,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleDeleteClickedSubscription(): void {
         this._subscriptions.add(
             this._buttonGroupComponent.deleteClicked.subscribe(() => {
@@ -175,7 +175,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleFormItemInputChangedSubscription(): void {
         this._subscriptions.add(
             this._formItemComponent.fileNameChanged.subscribe((event) => {
@@ -185,18 +185,18 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private getTitleWidth(): number {
         return this._titleDirective.elRef.nativeElement.getBoundingClientRect().width;
     }
 
-    /** @hidden */
+    /** @ignore */
     private getContainerWidth(): number {
         return this._titleDirective.elRef.nativeElement.parentElement.getBoundingClientRect().width;
     }
 
     /**
-     * @hidden
+     * @ignore
      *
      * truncates the string by cutting out excess length in the middle and replacing with '...'
      */
@@ -212,7 +212,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
     }
 
     /**
-     * @hidden
+     * @ignore
      *
      * determines if file title needs to be truncated given container constraint.
      */

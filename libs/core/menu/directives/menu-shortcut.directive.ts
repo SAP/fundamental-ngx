@@ -13,30 +13,30 @@ export class MenuShortcutDirective implements AfterViewInit, OnDestroy {
     @Input()
     hideOnMobile = true;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-menu__shortcut')
     readonly fdMenuShortcutClass: boolean = true;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions: Subscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _menuItem: MenuItemComponent,
         private _elementRef: ElementRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._hideOnMobile();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _hideOnMobile(): void {
         this._subscriptions.add(
             this._menuItem.menuService?.isMobileMode.pipe(filter(() => this.hideOnMobile)).subscribe((isMobile) => {

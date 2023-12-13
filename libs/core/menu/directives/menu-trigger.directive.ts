@@ -22,30 +22,30 @@ export class MenuTriggerDirective implements OnDestroy {
         this._setAriaAttributes(menu);
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-haspopup')
     ariaHasPopup: Nullable<boolean>;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-controls')
     ariaControls: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-expanded')
     ariaExpanded: Nullable<boolean>;
 
-    /** @hidden */
+    /** @ignore */
     private _menuSubscription: Subscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._unsubscribeFromMenu();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _subscribeToMenu(menu: MenuComponent): void {
         this._menuSubscription.add(
             menu.isOpenChange.subscribe(() => {
@@ -54,13 +54,13 @@ export class MenuTriggerDirective implements OnDestroy {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _unsubscribeFromMenu(): void {
         this._menuSubscription.unsubscribe();
         this._menuSubscription = new Subscription();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setAriaAttributes(menu?: MenuComponent): void {
         this.ariaHasPopup = !!menu;
         this.ariaExpanded = menu?.isOpen;

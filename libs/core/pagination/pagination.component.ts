@@ -85,19 +85,19 @@ let paginationUniqueId = 0;
     ]
 })
 export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
-    /** @hidden */
+    /** @ignore */
     @ViewChild(FocusKeyManagerListDirective)
     readonly _focusKeyManagerList: FocusKeyManagerListDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(FocusKeyManagerItemDirective)
     readonly _focusKeyManagerItems: QueryList<FocusKeyManagerItemDirective>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('pageInputElement', { read: ElementRef })
     readonly _pageInputElement: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('currentPageElement', { read: ElementRef })
     readonly _currentPageElement: ElementRef;
 
@@ -181,13 +181,13 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     @Output()
     itemsPerPageChange = new EventEmitter<number>();
 
-    /** @hidden */
+    /** @ignore */
     _pages: number[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _pagesBeforeCurrent: number[];
 
-    /** @hidden */
+    /** @ignore */
     _pagesAfterCurrent: number[];
 
     /**
@@ -202,65 +202,65 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         };
     }
 
-    /** @hidden */
+    /** @ignore */
     get _lastPage(): number {
         return this.paginationService.getTotalPages(this.paginationObject);
     }
 
-    /** @hidden */
+    /** @ignore */
     get isFirstPage(): boolean {
         return this.currentPage === 1;
     }
 
-    /** @hidden */
+    /** @ignore */
     get isLastPage(): boolean {
         return this.currentPage === this.paginationService.getTotalPages(this.paginationObject);
     }
 
-    /** @hidden */
+    /** @ignore */
     get _totalPages(): number {
         return this.paginationService.getTotalPages(this.paginationObject);
     }
 
-    /** @hidden */
+    /** @ignore */
     get _totalPagesElementId(): string {
         return this.id + '__total';
     }
 
-    /** @hidden */
+    /** @ignore */
     get _moreElementValue(): number {
         return this.paginationService.moreElementValue;
     }
 
-    /** @hidden */
+    /** @ignore */
     _currentShowing: CurrentShowing = {
         from: 0,
         to: 0,
         totalCount: 0
     };
 
-    /** @hidden */
+    /** @ignore */
     _displayedPageSizeOptions: number[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _itemsPerPage: number = DEFAULT_ITEMS_PER_PAGE;
 
-    /** @hidden */
+    /** @ignore */
     private _mobile = false;
 
-    /** @hidden */
+    /** @ignore */
     private _itemsPerPageOptions: number[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _currentPage = 1;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _translationResolver = new TranslationResolver();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly paginationService: PaginationService,
         private readonly _cdr: ChangeDetectorRef,
@@ -270,7 +270,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes?.currentPage) {
             this.currentPage = changes.currentPage.currentValue;
@@ -286,17 +286,17 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         this._refreshPages();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._subscriptions.add(this._rtlService?.rtl.subscribe(() => this._refreshPages()));
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     skipItemPredicate(item: ElementRef & FocusableOption): boolean {
         return (
             getComputedStyle(item.nativeElement).display === 'none' ||
@@ -349,7 +349,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         this.goToPage(this._lastPage);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onChangePerPage = (event: number): void => {
         this.itemsPerPage = event;
         this.itemsPerPageChange.emit(this.itemsPerPage);
@@ -362,13 +362,13 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         }
     };
 
-    /** @hidden */
+    /** @ignore */
     _restoreInputValue(model: NgModel): void {
         model.reset(this.currentPage);
         this._cdr.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _refreshPages(): void {
         const pagination = this.paginationObject;
 
@@ -391,7 +391,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     /** Focus current page link/input using FocusKeyManager
-     * @hidden
+     * @ignore
      */
     private _focusCurrentPage(): void {
         const currentPageNativeElement =
@@ -426,7 +426,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         this._cdr.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _announcePage(page: number): Promise<void> {
         await this._liveAnnouncer.announce(
             this._translationResolver.resolve(

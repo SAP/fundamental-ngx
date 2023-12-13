@@ -50,7 +50,7 @@ export function isFunction(obj: any): boolean {
     return typeof obj === 'function';
 }
 
-/** @hidden */
+/** @ignore */
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function isType(obj: any): obj is Function {
     return isFunction(obj);

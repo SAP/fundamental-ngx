@@ -19,7 +19,7 @@ export class FocusKeyManagerItemDirective implements FocusableOption {
         this._initialFocus = coerceBooleanProperty(value);
     }
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     @HostBinding('attr.tabindex')
     get _tabindex(): number {
@@ -30,7 +30,7 @@ export class FocusKeyManagerItemDirective implements FocusableOption {
         return this.nativeElement?.tabIndex ?? -1;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initialFocus = false;
 
     /** Native element of the item */
@@ -38,25 +38,25 @@ export class FocusKeyManagerItemDirective implements FocusableOption {
         return this._elRef?.nativeElement;
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _focusKeyManager(): FocusKeyManager<FocusableOption> {
         return this._list.focusKeyManager;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _list: FocusKeyManagerListDirective,
         private readonly _elRef: ElementRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('focus')
     _onFocus(): void {
         // For cases where initially selected item doesn't have 0 index
         this._focusKeyManager?.updateActiveItem(this);
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     _onKeydown(event: KeyboardEvent): void {
         this._focusKeyManager?.onKeydown(event);

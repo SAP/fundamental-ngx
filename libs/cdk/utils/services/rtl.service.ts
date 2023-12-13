@@ -14,7 +14,7 @@ export class RtlService {
     /** RTL value */
     rtl: BehaviorSubject<boolean>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(@Optional() @Inject(RTL_LANGUAGE) injectedRtlLanguages: string[]) {
         injectedRtlLanguages = injectedRtlLanguages || DefaultRtlLanguages;
 

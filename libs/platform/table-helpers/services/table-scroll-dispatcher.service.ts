@@ -37,16 +37,16 @@ export const TABLE_SCROLLABLE = new InjectionToken<TableScrollable>('Table Scrol
 
 @Injectable()
 export class TableScrollDispatcherService implements OnDestroy {
-    /** @hidden */
+    /** @ignore */
     private _scrollSubject: Subject<TableScrollable> = new Subject();
-    /** @hidden */
+    /** @ignore */
     private _verticalScrollSubject: Subject<TableScrollable> = new Subject();
-    /** @hidden */
+    /** @ignore */
     private _horizontalScrollSubject: Subject<TableScrollable> = new Subject();
-    /** @hidden */
+    /** @ignore */
     private _scrollableSubscriptionsMap: Map<TableScrollable, Subscription> = new Map();
 
-    /** @hidden */
+    /** @ignore */
     register(scrollable: TableScrollable): void {
         if (this._scrollableSubscriptionsMap.has(scrollable)) {
             return;
@@ -60,7 +60,7 @@ export class TableScrollDispatcherService implements OnDestroy {
         this._scrollableSubscriptionsMap.set(scrollable, sub);
     }
 
-    /** @hidden */
+    /** @ignore */
     deregister(scrollable: TableScrollable): void {
         if (!this._scrollableSubscriptionsMap.has(scrollable)) {
             return;
@@ -84,7 +84,7 @@ export class TableScrollDispatcherService implements OnDestroy {
         return this._verticalScrollSubject.asObservable();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         Array.from(this._scrollableSubscriptionsMap.values()).forEach((subscription) => subscription.unsubscribe());
 

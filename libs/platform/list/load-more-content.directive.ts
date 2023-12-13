@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
     standalone: true
 })
 export class LoadMoreContentDirective {
-    /** @hidden */
+    /** @ignore */
     constructor(readonly templateRef: TemplateRef<LoadMoreContentContext>) {}
 }
 

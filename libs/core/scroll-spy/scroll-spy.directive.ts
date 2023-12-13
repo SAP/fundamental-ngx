@@ -62,16 +62,16 @@ export class ScrollSpyDirective implements OnInit {
     @Output()
     readonly spyChange: EventEmitter<HTMLElement> = new EventEmitter<HTMLElement>();
 
-    /** @hidden */
+    /** @ignore */
     private _currentActive: HTMLElement | undefined;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _elRef = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('scroll', ['$event'])
     onScroll(event?: Event, forced = false): void {
         if (this.scrollSpyDisabled) {
@@ -101,7 +101,7 @@ export class ScrollSpyDirective implements OnInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         // When the spy container being resized, re-evaluate scroll position.
         resizeObservable(this._elRef.nativeElement)

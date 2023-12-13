@@ -128,29 +128,29 @@ export class MessageViewComponent implements AfterViewInit {
     @Output()
     closePopover = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('listView', { read: ElementRef })
     private _listView: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('detailsView', { read: ElementRef })
     private _detailsView: ElementRef;
 
-    /** @Hidden */
+    /** @ignore */
     @HostBinding('class')
     private readonly _initialClass = 'fd-message-popover__view-container';
 
-    /** @hidden */
+    /** @ignore */
     private _activeListElement: Nullable<HTMLElement> = null;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _destroyRef: DestroyRef,
         private readonly _tabbableService: TabbableElementService,
         @Inject(DOCUMENT) private readonly _document: Document
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         resizeObservable(this._detailsView.nativeElement)
             .pipe(debounceTime(20), takeUntilDestroyed(this._destroyRef))
@@ -160,7 +160,7 @@ export class MessageViewComponent implements AfterViewInit {
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     _showDetails(entry: MessagePopoverEntry): void {
         this._activeListElement = this._document.activeElement as HTMLElement;
         if (!entry.description.message) {
@@ -171,7 +171,7 @@ export class MessageViewComponent implements AfterViewInit {
         this.openDetails.emit(entry);
     }
 
-    /** @hidden */
+    /** @ignore */
     _focusElement(event?: MouseEvent, item?: MessagePopoverEntry): void {
         if (!item?.element?.nativeElement) {
             return;
@@ -185,7 +185,7 @@ export class MessageViewComponent implements AfterViewInit {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     _onListAnimationComplete(event: any): void {
         if (event.toState === 'open' && this._activeListElement) {
             this._activeListElement.focus();

@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'text';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/text';
 export const API_FILE_KEY = 'text';
 export const I18N_KEY = 'coreText';

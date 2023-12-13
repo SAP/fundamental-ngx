@@ -17,6 +17,6 @@ import { Directive, TemplateRef } from '@angular/core';
     standalone: true
 })
 export class VariantManagementDirtyLabelDirective {
-    /** @hidden */
+    /** @ignore */
     constructor(public templateRef: TemplateRef<any>) {}
 }

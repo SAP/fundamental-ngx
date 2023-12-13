@@ -215,58 +215,58 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     @Output()
     valueChange = new EventEmitter<number | null>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('incrementBtn', { read: ElementRef })
     incrementButton: ElementRef<HTMLButtonElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('decrementBtn', { read: ElementRef })
     decrementButton: ElementRef<HTMLButtonElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('inputElement', { read: ElementRef, static: true })
     inputElement: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     lastEmittedValue: Nullable<number>;
 
-    /** @hidden */
+    /** @ignore */
     currencySign: string;
 
-    /** @hidden */
+    /** @ignore */
     focused: boolean;
 
-    /** @hidden */
+    /** @ignore */
     private _value: number | null = null;
 
-    /** @hidden */
+    /** @ignore */
     private _numerals: RegExp;
 
-    /** @hidden */
+    /** @ignore */
     private _decimalSeparator: RegExp;
 
-    /** @hidden */
+    /** @ignore */
     private _currency: RegExp;
 
-    /** @hidden */
+    /** @ignore */
     private _minusSign: RegExp;
 
-    /** @hidden */
+    /** @ignore */
     private _groupSeparator: RegExp;
 
-    /** @hidden */
+    /** @ignore */
     private _numberFormat: NumberFormat;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _index: any;
 
-    /** @hidden */
+    /** @ignore */
     private _firstEmittedValue: number;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Inject(LOCALE_ID) locale,
         private _changeDetectorRef: ChangeDetectorRef,
@@ -277,60 +277,60 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         this.locale = locale;
     }
 
-    /** @hidden */
+    /** @ignore */
     onChange: (value: Nullable<number>) => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     onTouched = (): void => {};
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._numberFormat = this._getNumberFormat();
         this._buildRegExps();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._updateViewValue();
         this._listenOnButtonsClick();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnChange(fn: (value: Nullable<number>) => void): void {
         this.onChange = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     writeValue(value: number | null): void {
         this.value = value;
     }
 
-    /** @hidden */
+    /** @ignore */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
     }
 
-    /** @hidden */
+    /** @ignore */
     get canIncrement(): boolean {
         return this.value == null || this.value + this.step <= this._max;
     }
 
-    /** @hidden */
+    /** @ignore */
     get canDecrement(): boolean {
         return this.value == null || this.value - this.step >= this._min;
     }
 
-    /** @hidden */
+    /** @ignore */
     get canDisplayLabel(): boolean {
         return !!this.unit || !!this.currencySign;
     }
@@ -345,7 +345,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         this._incrementOrDecrement('decrement');
     }
 
-    /** @hidden */
+    /** @ignore */
     handleKeyDown(event: KeyboardEvent): void {
         const muteEvent = (evnt: Event): void => {
             evnt.stopPropagation();
@@ -365,13 +365,13 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     handleFocusIn(): void {
         this.focused = true;
         this.onFocusIn.emit();
     }
 
-    /** @hidden */
+    /** @ignore */
     handleFocusOut(event: FocusEvent): void {
         this.focused = false;
         this.onFocusOut.emit();
@@ -380,7 +380,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     handleScroll(event: WheelEvent): void {
         if (this._canChangeValue && this.focused) {
             if (event.deltaY > 0) {
@@ -392,7 +392,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         }
     }
 
-    /** @hidden Updates viewValue and conditionally emits new value.
+    /** @ignore Updates viewValue and conditionally emits new value.
      * This method is called on (change) event, when user leaves input control. */
     updateOnInputChanged(): void {
         if (this.value !== this.lastEmittedValue) {
@@ -401,13 +401,13 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         this._updateViewValue();
     }
 
-    /** @hidden Track parsed value when user changes value of the input control. */
+    /** @ignore Track parsed value when user changes value of the input control. */
     trackInputValue(event: any): void {
         const parsedValue = this._parseValue(event.target.value);
         this._value = parsedValue != null ? this._checkValueLimits(parsedValue) : null;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _incrementOrDecrement(direction: 'increment' | 'decrement'): void {
         if ((direction === 'increment' && this.canIncrement) || (direction === 'decrement' && this.canDecrement)) {
             let _shouldChange = true;
@@ -431,12 +431,12 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _canChangeValue(): boolean {
         return !(this.disabled || this.readonly);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _cutFloatingNumberDistortion(value: number, step: number): number {
         const stepDecimals = `${step}`.split('.')[1];
         const valueDecimals = `${value}`.split('.')[1];
@@ -447,7 +447,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         return Number((value + step).toFixed(longestDecimal));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _checkValueLimits(value: number): number {
         if (value > this._max) {
             return this._max;
@@ -464,31 +464,31 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         return value;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _emitChangedValue(): void {
         this.lastEmittedValue = this.value;
         this.valueChange.emit(this.value);
         this.onChange(this.value);
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _max(): number {
         return !isNaN(this.max) ? this.max : Number.MAX_VALUE;
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _min(): number {
         return !isNaN(this.min) ? this.min : -Number.MAX_VALUE;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updateViewValue(): void {
         const value = this._formatToViewValue(this.value);
         this.inputElement.nativeElement.value = value;
         this._liveAnnouncer.announce(value);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnButtonsClick(): void {
         if (this.hasStepButtons) {
             this._subscriptions.add(
@@ -508,7 +508,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     }
 
     /**
-     * @hidden
+     * @ignore
      * Listens for click or space/enter keydown events.
      *
      * For long clicks will continuously emit event until "mouseup" event is detected
@@ -535,7 +535,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _parseValue(text: string): Nullable<number> {
         const trimmedText = text.trim();
 
@@ -559,7 +559,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         return null;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getNumberFormat(): NumberFormat {
         if (isDevMode() && this.minFractionDigits > this.maxFractionDigits) {
             throw new Error("Range error - minFractionDigits can't be bigger than maxFractionDigits");
@@ -577,7 +577,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getNumeralsExpressions(): RegExp {
         const numerals = [
             ...new NumberFormat(this.locale, { useGrouping: false }).format(9876543210).split('')
@@ -588,25 +588,25 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         return new RegExp(`[${numerals.join('')}]`, 'g');
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getDecimalSeparator(): RegExp {
         const formatter = new NumberFormat(this.locale, { useGrouping: false });
         return new RegExp(`[${formatter.format(1.1).trim().replace(this._numerals, '')}]`, 'g');
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getGroupingSeparator(): RegExp {
         const formatter = new NumberFormat(this.locale, { useGrouping: true });
         return new RegExp(`[${formatter.format(1000).trim().replace(this._numerals, '')}]`, 'g');
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getMinusSignExpression(): RegExp {
         const formatter = new NumberFormat(this.locale, { useGrouping: false });
         return new RegExp(`[${formatter.format(-1).trim().replace(this._numerals, '')}]`, 'g');
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getCurrencyExpression(): RegExp {
         if (this.currency) {
             const formatter = new NumberFormat(this.locale, {
@@ -628,7 +628,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         return new RegExp(`[]`, 'g');
     }
 
-    /** @hidden */
+    /** @ignore */
     private _buildRegExps(): void {
         this._numerals = this._getNumeralsExpressions();
         this._decimalSeparator = this._getDecimalSeparator();
@@ -637,7 +637,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         this._currency = this._getCurrencyExpression();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _formatToViewValue(number: Nullable<number>): string {
         if (number == null) {
             return '';

@@ -5,7 +5,7 @@ import { Directive, HostBinding } from '@angular/core';
     standalone: true
 })
 export class ListTitleTextDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-list__title-text')
     fdListTitleText = true;
 }

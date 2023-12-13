@@ -54,7 +54,7 @@ import { convertFormState, convertFormStateToMessagePopoverState } from './utils
     ]
 })
 export class MessagePopoverComponent implements MessagePopover, OnInit {
-    /** @hidden */
+    /** @ignore */
     @ViewChild('popover')
     readonly _popover: PopoverComponent;
 
@@ -72,34 +72,34 @@ export class MessagePopoverComponent implements MessagePopover, OnInit {
     /** Current error entry. */
     currentEntry: Nullable<MessagePopoverEntry>;
 
-    /** @hidden */
+    /** @ignore */
     _currentErrorType: MessagePopoverError['group'] = 'all';
 
-    /** @hidden */
+    /** @ignore */
     _errorTypes: MessagePopoverError[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _priorityStateItemsCount = 0;
 
-    /** @hidden */
+    /** @ignore */
     _priorityFormState: FormStates;
 
-    /** @hidden */
+    /** @ignore */
     _priorityState: MessagePopoverState;
 
-    /** @hidden */
+    /** @ignore */
     _filteredErrors: MessagePopoverErrorGroup[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _groupedErrors: MessagePopoverErrorGroup[] = [];
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _cdr: ChangeDetectorRef,
         private readonly _destroyRef: DestroyRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.wrapper?.setMessagePopover(this);
         this.wrapper?.errors.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((errors) => {
@@ -128,24 +128,24 @@ export class MessagePopoverComponent implements MessagePopover, OnInit {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     _showList(): void {
         this.currentScreen = 'list';
         this.currentEntry = null;
     }
 
-    /** @hidden */
+    /** @ignore */
     _showDetails(entry: MessagePopoverEntry): void {
         this.currentScreen = 'details';
         this.currentEntry = entry;
     }
 
-    /** @hidden */
+    /** @ignore */
     _closePopover(focusLast = true): void {
         this._popover.close(focusLast);
     }
 
-    /** @hidden */
+    /** @ignore */
     _filterErrors(): void {
         if (this._currentErrorType === 'all') {
             this._filteredErrors = this._groupedErrors;

@@ -24,34 +24,34 @@ const strictEquals = (a: unknown, b: unknown): boolean => a === b;
     ]
 })
 export class SegmentedButtonHeaderDirective<T> implements AfterViewInit {
-    /** @hidden */
+    /** @ignore */
     @Input()
     valueComparator: (a: T, b: T) => boolean = strictEquals;
 
-    /** @hidden */
+    /** @ignore */
     readonly elementRef = inject(ElementRef);
-    /** @hidden */
+    /** @ignore */
     readonly menuItem = inject<MenuItemComponent>(FD_MENU_ITEM_COMPONENT, { host: true });
 
-    /** @hidden */
+    /** @ignore */
     private _cvaControl: CvaControl<T> = inject(CvaControl)!;
-    /** @hidden */
+    /** @ignore */
     private _destroyRef = inject(DestroyRef)!;
 
-    /** @hidden */
+    /** @ignore */
     private _options$ = new BehaviorSubject<SegmentedButtonOptionDirective<T>[]>([]);
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         this.menuItem.hasSeparator = true;
     }
 
-    /** @hidden */
+    /** @ignore */
     setOptions(options: SegmentedButtonOptionDirective<T>[]): void {
         this._options$.next(options);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._cvaControl.listenToChanges();
         combineLatest([this._options$, this._cvaControl.cvaDirective?.ngControl?.valueChanges || of(undefined)])

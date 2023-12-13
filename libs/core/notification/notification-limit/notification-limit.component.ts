@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     standalone: true
 })
 export class NotificationLimitComponent {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-notification__limit')
     fdNotificationLimitClass = true;
 }

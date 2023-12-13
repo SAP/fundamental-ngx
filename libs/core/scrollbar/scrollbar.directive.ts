@@ -72,7 +72,7 @@ export class ScrollbarDirective implements OnDestroy, HasElementRef {
         return this._alwaysVisible;
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('style.overflow-x')
     get _overflowX(): ScrollbarOverflowOptions {
         if (this.noHorizontalScroll) {
@@ -82,7 +82,7 @@ export class ScrollbarDirective implements OnDestroy, HasElementRef {
         return this._overflow;
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('style.overflow-y')
     get _overflowY(): ScrollbarOverflowOptions {
         if (this.noVerticalScroll) {
@@ -92,31 +92,31 @@ export class ScrollbarDirective implements OnDestroy, HasElementRef {
         return this._overflow;
     }
 
-    /** @hidden */
+    /** @ignore */
     _inPopover = false;
 
-    /** @hidden */
+    /** @ignore */
     elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     private _document: Document = inject(DOCUMENT);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _csp_nonce = inject(CSP_NONCE, {
         optional: true
     });
 
-    /** @hidden */
+    /** @ignore */
     private _noHorizontalScroll = false;
 
-    /** @hidden */
+    /** @ignore */
     private _noVerticalScroll = false;
 
-    /** @hidden */
+    /** @ignore */
     private _alwaysVisible = false;
 
     /**
-     * @hidden
+     * @ignore
      */
     constructor(renderer2: Renderer2) {
         scrollbarElementsQuantity++;
@@ -131,7 +131,7 @@ export class ScrollbarDirective implements OnDestroy, HasElementRef {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('scroll', ['$event'])
     onScroll(event: Event): void {
         if (this._inPopover) {
@@ -139,7 +139,7 @@ export class ScrollbarDirective implements OnDestroy, HasElementRef {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         if (--scrollbarElementsQuantity === 0) {
             styleSheet?.remove();
@@ -152,7 +152,7 @@ export class ScrollbarDirective implements OnDestroy, HasElementRef {
         this.elementRef.nativeElement.scroll(options);
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _overflow(): ScrollbarOverflowOptions {
         if (this.alwaysVisible) {
             return 'scroll';

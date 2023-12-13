@@ -4,25 +4,25 @@ import { take } from 'rxjs/operators';
 import { BaseDataProvider, DataProvider, DataSource } from '@fundamental-ngx/platform/shared';
 
 export class ValueHelpDialogDataSource<T> implements DataSource<T> {
-    /** @hidden */
+    /** @ignore */
     protected _dataChanges: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
-    /** @hidden */
+    /** @ignore */
     protected _onDataRequested$ = new Subject<void>();
-    /** @hidden */
+    /** @ignore */
     protected _onDataReceived$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     protected _dataLoading = false;
 
-    /** @hidden */
+    /** @ignore */
     get isDataLoading(): boolean {
         return this._dataLoading;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(public dataProvider: DataProvider<T>) {}
 
-    /** @hidden */
+    /** @ignore */
     match(predicate?: string | Map<string, string>): void {
         this._onDataRequested$.next();
         this._dataLoading = true;
@@ -50,46 +50,46 @@ export class ValueHelpDialogDataSource<T> implements DataSource<T> {
             );
     }
 
-    /** @hidden */
+    /** @ignore */
     open(): Observable<T[]> {
         return this._dataChanges.asObservable();
     }
 
-    /** @hidden */
+    /** @ignore */
     onDataRequested(): Observable<void> {
         return this._onDataRequested$.asObservable();
     }
 
-    /** @hidden */
+    /** @ignore */
     onDataReceived(): Observable<void> {
         return this._onDataReceived$.asObservable();
     }
 
-    /** @hidden */
+    /** @ignore */
     close(): void {}
 }
 
 export class ArrayValueHelpDialogDataSource<T> extends ValueHelpDialogDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(data: T[]) {
         super(new BaseDataProvider(data));
     }
 }
 
 export class ObservableValueHelpDialogDataSource<T> extends ValueHelpDialogDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(data: Observable<T[]>) {
         super(new BaseDataProvider(data));
     }
 }
 
 export class VhdDataProvider<R extends object> extends DataProvider<R> {
-    /** @hidden */
+    /** @ignore */
     constructor(public values: R[]) {
         super();
     }
 
-    /** @hidden */
+    /** @ignore */
     fetch(params: Map<string, string>): Observable<R[]> {
         let data = this.values;
         const arrayParams = Array.from(params);

@@ -35,49 +35,49 @@ export class PopoverService extends BasePopoverClass {
     /** Template content displayed inside popover body */
     templateContent: Nullable<TemplateRef<any>>;
 
-    /** @hidden */
+    /** @ignore */
     _onLoad = new Subject<ElementRef>();
 
-    /** @hidden */
+    /** @ignore */
     _mobile = false;
 
-    /** @hidden */
+    /** @ignore */
     private _eventRef: (() => void)[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _overlayRef: OverlayRef;
 
-    /** @hidden */
+    /** @ignore */
     private _refresh$: Observable<boolean | void>;
 
-    /** @hidden */
+    /** @ignore */
     private _stopCloseListening$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _placementRefresh$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _popoverBody: PopoverBodyComponent;
 
-    /** @hidden */
+    /** @ignore */
     private _triggerElement: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     private _lastActiveElement: HTMLElement;
 
-    /** @hidden */
+    /** @ignore */
     private _templateData: Nullable<PopoverTemplate>;
 
-    /** @hidden */
+    /** @ignore */
     private _placementContainer: BasePopoverClass['placementContainer'];
 
-    /** @hidden */
+    /** @ignore */
     private _ignoreTriggers = false;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _overlay: Overlay,
         private _renderer: Renderer2,
@@ -321,7 +321,7 @@ export class PopoverService extends BasePopoverClass {
         this._refreshTriggerListeners();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _normalizeTriggers(): TriggerConfig[] {
         return this.triggers.map((trigger, index) => {
             if (typeof trigger === 'object' && trigger.trigger) {
@@ -339,7 +339,7 @@ export class PopoverService extends BasePopoverClass {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getOverlayConfig(position: FlexibleConnectedPositionStrategy): OverlayConfig {
         const direction = this._getDirection();
 
@@ -351,7 +351,7 @@ export class PopoverService extends BasePopoverClass {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnResize(): void {
         this._viewportRuler
             .change(15)
@@ -359,7 +359,7 @@ export class PopoverService extends BasePopoverClass {
             .subscribe(() => this._applyWidthOverlay());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getDirection(): 'rtl' | 'ltr' {
         if (!this._rtlService) {
             return 'ltr';
@@ -368,7 +368,7 @@ export class PopoverService extends BasePopoverClass {
         return this._rtlService.rtl.getValue() ? 'rtl' : 'ltr';
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getPositionStrategy(forcedPositions?: ConnectedPosition[]): FlexibleConnectedPositionStrategy {
         let resultPosition = forcedPositions ? forcedPositions : this._getPositions();
 
@@ -405,7 +405,7 @@ export class PopoverService extends BasePopoverClass {
         this._passVariablesToBody();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenForPositionChange(positionChange: Observable<ConnectedOverlayPositionChange>): void {
         this._placementRefresh$.next();
         positionChange
@@ -436,7 +436,7 @@ export class PopoverService extends BasePopoverClass {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _shouldClose(event: MouseEvent): boolean {
         return (
             this.isOpen &&
@@ -446,7 +446,7 @@ export class PopoverService extends BasePopoverClass {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _targetIsPopoverMobileDialog(event: MouseEvent): boolean {
         if (this._mobile) {
             let el = (event.target as HTMLElement).parentElement;
@@ -462,18 +462,18 @@ export class PopoverService extends BasePopoverClass {
         return false;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getEventTarget(event: Event): EventTarget | null {
         return event.composedPath ? event.composedPath()[0] : event.target;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _triggerContainsTarget(event: Event): boolean {
         const triggerElement = this._triggerElement.nativeElement;
         return triggerElement.contains(this._getEventTarget(event));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getPositions(): ConnectedPosition[] {
         if (this.cdkPositions) {
             return this.cdkPositions;
@@ -486,7 +486,7 @@ export class PopoverService extends BasePopoverClass {
         return [];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _applyWidthOverlay(): void {
         const maxWidthLimit = this.maxWidth ? this.maxWidth : MAX_BODY_SIZE;
         const width = Math.min(this._getTriggerWidth(), maxWidthLimit);
@@ -498,7 +498,7 @@ export class PopoverService extends BasePopoverClass {
         this._detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _passVariablesToBody(): void {
         const body = this._getPopoverBody();
         body.text = this.stringContent;
@@ -517,24 +517,24 @@ export class PopoverService extends BasePopoverClass {
         this._detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getTriggerWidth(): number {
         return this._triggerElement.nativeElement.offsetWidth;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getPopoverBody(): PopoverBodyComponent {
         return this._templateData?.popoverBody || this._popoverBody;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _detectChanges(): void {
         if (this._getPopoverBody()) {
             this._getPopoverBody().detectChanges();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _focusFirstTabbableElement(focusLastElement = true): void {
         if (focusLastElement && this.focusAutoCapture) {
             this._lastActiveElement = <HTMLElement>document.activeElement;
@@ -542,7 +542,7 @@ export class PopoverService extends BasePopoverClass {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _focusLastActiveElementBeforeOpen(focusLastElement = true): void {
         if (focusLastElement && this.focusAutoCapture && this._lastActiveElement) {
             this._lastActiveElement.focus();

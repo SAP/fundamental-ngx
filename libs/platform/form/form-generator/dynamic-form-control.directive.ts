@@ -55,7 +55,7 @@ export class DynamicFormControlDirective implements OnInit {
      */
     formFieldControl: PlatformFormFieldControl;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _formGeneratorService: FormGeneratorService,
         private readonly _vcRef: ViewContainerRef,
@@ -63,7 +63,7 @@ export class DynamicFormControlDirective implements OnInit {
         @Optional() @Inject(CONTENT_DENSITY_DIRECTIVE) private contentDensityDirective: Observable<ContentDensityMode>
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         const foundComponent = this._formGeneratorService.getComponentDefinitionByType(this.formItem.type);
 

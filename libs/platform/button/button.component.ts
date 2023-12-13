@@ -129,13 +129,13 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
     @HostBinding('attr.tabindex')
     tabIndex = '-1';
 
-    /** @hidden */
+    /** @ignore */
     private _ariaSelected: Nullable<boolean>;
 
-    /** @hidden */
+    /** @ignore */
     private _ariaPressed: Nullable<boolean>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         protected _changeDetector: ChangeDetectorRef,
         private _elementRef: ElementRef
@@ -146,7 +146,7 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._elementRef.nativeElement.childNodes[0].classList.add('fd-ellipsis');
     }
@@ -160,10 +160,10 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
 }
 
 export class DeprecatedButtonAriaSelected implements ModuleDeprecation {
-    /** @hidden */
+    /** @ignore */
     message = 'ariaSelected input property is deprecated.';
 
-    /** @hidden */
+    /** @ignore */
     alternative = {
         name: 'Use [toggled] input property instead',
         link: ['/platform', 'button'],
@@ -172,10 +172,10 @@ export class DeprecatedButtonAriaSelected implements ModuleDeprecation {
 }
 
 export class DeprecatedButtonAriaPressed implements ModuleDeprecation {
-    /** @hidden */
+    /** @ignore */
     message = 'ariaPressed input property is deprecated.';
 
-    /** @hidden */
+    /** @ignore */
     alternative = {
         name: 'Use [toggled] input property instead',
         link: ['/platform', 'button'],

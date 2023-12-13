@@ -53,11 +53,11 @@ let fileUploaderInputUniqueId = 0;
     imports: [FileUploaderDragndropDirective, ButtonComponent, FileUploaderSelectDirective]
 })
 export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, FormItemControl {
-    /** @hidden */
+    /** @ignore */
     @ViewChild('fileInput')
     inputRef: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('textInput')
     inputRefText: ElementRef;
 
@@ -156,44 +156,44 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onDragLeave = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _fileUploadService: FileUploaderService,
         private _changeDetRef: ChangeDetectorRef,
         readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     onChange: (values: File[]) => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     onTouched = (): void => {};
 
-    /** @hidden */
+    /** @ignore */
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
         this._changeDetRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     writeValue(files: File[]): void {
         if (files && files.length === 0) {
             this.clear();
@@ -204,20 +204,20 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     handleDrop(files: FileUploadOutput): void {
         this.validFiles = files.validFiles ?? [];
         this.invalidFiles = files.invalidFiles ?? [];
         this._propagateFiles();
     }
 
-    /** @hidden */
+    /** @ignore */
     selectHandler(event: File[]): void {
         this.validateFiles(event);
         this._propagateFiles();
     }
 
-    /** @hidden */
+    /** @ignore */
     validateFiles(event: File[]): void {
         if (this.fileLimit && event.length > this.fileLimit) {
             throw new Error('FileLimitError - Selected files count is more than specified limit ');
@@ -234,7 +234,7 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
         this.invalidFiles = fileOutput.invalidFiles ?? [];
     }
 
-    /** @hidden */
+    /** @ignore */
     setInputValue(selectedFiles: File[], fromClear = false): void {
         let fileName = '';
         selectedFiles.forEach((file) => (fileName = fileName.concat(' ' + file.name)));
@@ -254,7 +254,7 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     keyDownHandle(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             this.open();
@@ -280,12 +280,12 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
         this._propagateFiles();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isEmpty(): boolean {
         return this.validFiles.length === 0 && this.invalidFiles.length === 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _propagateFiles(): void {
         this.setInputValue(this.validFiles);
         this.onChange(this.validFiles);

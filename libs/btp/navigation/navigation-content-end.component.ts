@@ -31,32 +31,32 @@ import { FdbNavigationListItemComponent } from './navigation-list-item-component
     }
 })
 export class NavigationContentEndComponent extends NavigationContentComponent implements AfterViewInit {
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FdbNavigationListItemComponent, { descendants: true })
     private readonly _listItems: QueryList<FdbNavigationListItemComponent>;
 
-    /** @hidden */
+    /** @ignore */
     showHome = false;
 
-    /** @hidden */
+    /** @ignore */
     override refresh$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._listItems.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this.refresh$.next();
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     getNavigatableItems(): FdbNavigationListItemComponent[] {
         return this._listItems.toArray();
     }
 
-    /** @hidden */
+    /** @ignore */
     override showMoreOpened(): boolean {
         return false;
     }

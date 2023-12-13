@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'slider';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/slider';
 export const API_FILE_KEY = 'slider';
 export const I18N_KEY = 'coreSlider';

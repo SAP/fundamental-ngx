@@ -100,25 +100,25 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         return this._groupFlex;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _groupFlex: Nullable<ShellbarGroupFlexOptions>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FD_COMBOBOX_COMPONENT, { static: false })
     comboboxComponent: ComboboxInterface;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FD_BUTTON_COMPONENT, { read: ElementRef })
     buttons: QueryList<ElementRef>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(ShellbarActionsComponent)
     private _actions: ShellbarActionsComponent;
 
-    /** @hidden */
+    /** @ignore */
     private _searchPortal: DomPortal;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('searchPortalOutlet', { static: false, read: CdkPortalOutlet })
     private readonly _searchPortalOutlet: CdkPortalOutlet;
 
@@ -172,47 +172,47 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         return this._searchComponent;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _searchComponent: Nullable<SearchComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('shellbar')
     private readonly _shellbar: ElementRef<HTMLElement>;
 
-    /** @hidden */
+    /** @ignore */
     get _hideTitleComponents(): boolean {
         return this._currentSize !== 'xl' && this._currentSize !== 'l' && this._showMobileSearch;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _hideAllComponents(): boolean {
         return this._currentSize === 's' && this._showMobileSearch;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _currentSize(): ShellbarSizes {
         return this._size || this._breakpointSize;
     }
 
-    /** @hidden */
+    /** @ignore */
     private readonly _currentSize$ = new BehaviorSubject<ShellbarSizes>(this._currentSize);
 
-    /** @hidden */
+    /** @ignore */
     _showMobileSearch = false;
 
-    /** @hidden */
+    /** @ignore */
     private _size: ShellbarSizes | undefined;
 
-    /** @hidden */
+    /** @ignore */
     private _breakpointSize: ShellbarSizes = 'm';
 
-    /** @hidden */
+    /** @ignore */
     private readonly _cd = inject(ChangeDetectorRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private _breakpoints: NormalizedBreakpoint[] = this._normalizeBreakpoints({
         s: 0,
         m: 320,
@@ -220,16 +220,16 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         xl: 1240
     });
 
-    /** @hidden */
+    /** @ignore */
     private _searchSubmitSubscription: Nullable<Subscription>;
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this.applyShellbarModeToCombobox();
         this.applyShellbarModeToButtons();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         resizeObservable(this._shellbar.nativeElement)
             .pipe(debounceTime(10), takeUntilDestroyed(this._destroyRef))
@@ -238,13 +238,13 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         this._setSearchComponentListeners();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._searchSubmitSubscription?.unsubscribe();
         this._searchPortalOutlet?.dispose();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setSearchComponentListeners(): void {
         this._actions?.searchOpen.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((showSearch) => {
             this._showMobileSearch = showSearch;
@@ -272,28 +272,28 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     applyShellbarModeToCombobox(): void {
         if (this.comboboxComponent) {
             this.comboboxComponent.inShellbar = true;
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     applyShellbarModeToButtons(): void {
         this.buttons?.forEach((button) => {
             button.nativeElement.classList.add('fd-shellbar__button');
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     _closeMobileSearch(): void {
         this._showMobileSearch = false;
         this._actions._setSearchVisibility(false);
         this._cd.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     _getSideNavClass(): string {
         let retVal = ' ';
 
@@ -304,7 +304,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         return retVal;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setCurrentBreakpoint(): void {
         const { width } = this._shellbar.nativeElement.getBoundingClientRect();
 
@@ -319,7 +319,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         this._cd.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _normalizeBreakpoints(breakpoints: Breakpoints): NormalizedBreakpoint[] {
         const keys = Object.keys(breakpoints) as ShellbarSizes[];
         const normalizedBreakpoints: NormalizedBreakpoint[] = [];
@@ -337,7 +337,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         return normalizedBreakpoints;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _attachSearch(shouldFocus = false): void {
         if (this._searchPortalOutlet?.hasAttached()) {
             return;
@@ -351,7 +351,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _detachSearch(): void {
         if (!this._searchPortalOutlet?.hasAttached()) {
             this._actions._attachSearch(this._searchPortal, this._searchComponent, this._currentSize);

@@ -55,25 +55,25 @@ export class WizardStepIndicatorComponent implements WizardStepIndicator, OnDest
     @Output()
     stepIndicatorItemClicked = new EventEmitter<WizardStepComponent>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(ActionSheetComponent)
     actionSheet: ActionSheetComponent;
 
-    /** @hidden */
+    /** @ignore */
     stackedItems: WizardStepComponent[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _cdRef: ChangeDetectorRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     stepItemClicked(step?: WizardStepComponent, event?: MouseEvent): void {
         if (step && step.visited) {
             if (this.actionSheet) {
@@ -84,7 +84,7 @@ export class WizardStepIndicatorComponent implements WizardStepIndicator, OnDest
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     setStackedItems(items: WizardStepComponent[]): void {
         this.stackedItems = items || [];
         this._cdRef.detectChanges();

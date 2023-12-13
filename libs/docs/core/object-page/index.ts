@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'object-page';
+export const LIBRARY_IMPORT_PATH = ['@fundamental-ngx/core/dynamic-page', '@fundamental-ngx/core/facets'];
 export const API_FILE_KEY = 'dynamicPage';

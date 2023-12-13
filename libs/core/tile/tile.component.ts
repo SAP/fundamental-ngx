@@ -61,24 +61,24 @@ export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges 
     @Output()
     readonly tileClick = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('container')
     ref: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     private _clickable = false;
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -95,7 +95,7 @@ export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges 
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     get elementRef(): ElementRef {
         return this.ref;
     }

@@ -29,23 +29,23 @@ export class WizardNextStepComponent {
         return this._canHide;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _canHide = true;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _elRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     _getElRef(): ElementRef {
         return this._elRef;
     }
 
-    /** @hidden */
+    /** @ignore */
     _showElement(): void {
         this._elRef.nativeElement.style.removeProperty('display');
     }
 
-    /** @hidden */
+    /** @ignore */
     _hideElement(): void {
         this._elRef.nativeElement.style.display = 'none';
     }

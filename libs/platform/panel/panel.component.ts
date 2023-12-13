@@ -108,23 +108,23 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
     panelExpandChange: EventEmitter<PanelExpandChangeEvent> = new EventEmitter<PanelExpandChangeEvent>();
 
     /**
-     * @hidden
+     * @ignore
      * Button label based on the current state
      */
     _expandAriaLabel: string;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(PanelContentComponent)
     _panelContentComponent: Nullable<PanelContentComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(PanelTitleDirective)
     _panelTitleDirective: Nullable<PanelTitleDirective>;
 
-    /** @hidden id of the title element */
+    /** @ignore id of the title element */
     _titleId: string = 'fdp-panel-title-' + platformPanelTitleUniqueId++;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         protected _cd: ChangeDetectorRef,
         protected _panelConfig: PanelConfig,
@@ -133,12 +133,12 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
         super(_cd);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._calculateExpandAriaLabel();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.expanded) {
             this._calculateExpandAriaLabel();
@@ -154,7 +154,7 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Calculate expandAriaLabel based on panel state
      */
     private _calculateExpandAriaLabel(): void {

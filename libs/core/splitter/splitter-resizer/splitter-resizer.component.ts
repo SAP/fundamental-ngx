@@ -60,41 +60,41 @@ export class SplitterResizerComponent implements OnDestroy {
     // eslint-disable-next-line @angular-eslint/no-output-native
     resize = new EventEmitter<number>();
 
-    /** @hidden */
+    /** @ignore */
     _start: number | null = null;
 
-    /** @hidden */
+    /** @ignore */
     _isInFocus = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.role')
     get _role(): string {
         return 'separator';
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-orientation')
     get _ariaOrientation(): string {
         return this.orientation;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _isHorizontal(): boolean {
         return this.orientation === SplitterPaneContainerOrientation.horizontal;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _isVertical(): boolean {
         return this.orientation === SplitterPaneContainerOrientation.vertical;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _prevDiff = 0;
 
-    /** @hidden */
+    /** @ignore */
     private _pointerMoveListener = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _elementRef: ElementRef<Element>,
         private readonly _cdr: ChangeDetectorRef,
@@ -102,7 +102,7 @@ export class SplitterResizerComponent implements OnDestroy {
         @Optional() @Inject(DOCUMENT) private readonly _document: Document | null
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('mousedown', ['$event'])
     _onMouseDown(event: MouseEvent): void {
         event.preventDefault();
@@ -114,7 +114,7 @@ export class SplitterResizerComponent implements OnDestroy {
         this._listenToPointerMove();
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     _onKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
@@ -156,7 +156,7 @@ export class SplitterResizerComponent implements OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('focus')
     _onFocus(): void {
         this._isInFocus = true;
@@ -164,7 +164,7 @@ export class SplitterResizerComponent implements OnDestroy {
         this._cdr.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('blur')
     _onBlur(): void {
         this._isInFocus = false;
@@ -172,12 +172,12 @@ export class SplitterResizerComponent implements OnDestroy {
         this._cdr.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToPointerMove(): void {
         this._pointerMoveListener = new Subject<void>();
 
@@ -209,7 +209,7 @@ export class SplitterResizerComponent implements OnDestroy {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _emitResize(newPosition: number): void {
         const diff = newPosition - (this._start ?? newPosition);
 
@@ -218,7 +218,7 @@ export class SplitterResizerComponent implements OnDestroy {
         this._prevDiff = diff;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _unsubscribe(removeFocus = true): void {
         this._start = null;
         this._prevDiff = 0;

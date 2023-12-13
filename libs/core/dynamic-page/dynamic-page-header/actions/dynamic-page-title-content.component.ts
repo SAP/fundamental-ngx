@@ -37,16 +37,16 @@ import { DynamicPageResponsiveSize } from '../../constants';
     imports: [ToolbarComponent, ToolbarItemDirective, NgTemplateOutlet]
 })
 export class DynamicPageTitleContentComponent {
-    /** @hidden */
+    /** @ignore */
     _size: DynamicPageResponsiveSize;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _changeDetRef: ChangeDetectorRef,
         readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     _setSize(size: DynamicPageResponsiveSize): void {
         this._size = size;
         this._changeDetRef.detectChanges();

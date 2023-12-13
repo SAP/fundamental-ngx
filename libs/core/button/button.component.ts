@@ -60,12 +60,12 @@ export class ButtonComponent
     @Input()
     class = '';
 
-    /** @hidden */
+    /** @ignore */
     specialButtonType: Array<string> = ['emphasized', 'positive', 'negative', 'attention'];
 
     /**
      * Calculate aria-label attribute
-     * @hidden
+     * @ignore
      */
     get buttonArialabel(): string | null {
         if (this.ariaLabel) {
@@ -87,7 +87,7 @@ export class ButtonComponent
 
     /**
      * Calculate aria-description attribute
-     * @hidden
+     * @ignore
      */
     get buttonAriaDescription(): string | null {
         if (this.ariaDescription) {
@@ -101,10 +101,10 @@ export class ButtonComponent
         return null;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
@@ -124,7 +124,7 @@ export class ButtonComponent
         }
     }
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -149,17 +149,17 @@ export class ButtonComponent
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     detectChanges(): void {
         this._changeDetectorRef.detectChanges();
     }

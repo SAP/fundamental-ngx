@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'quick-view';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/quick-view';
 export const API_FILE_KEY = 'quickView';

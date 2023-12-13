@@ -32,7 +32,7 @@ export class FormFieldErrorDirective<T = any> implements FormError<T>, OnInit {
     @Input()
     fdpFormFieldErrorType: FormStates = 'error';
 
-    /** @hidden */
+    /** @ignore */
     detectChanges$ = new Subject<void>();
 
     /** Error type. Defines which type to return. Either self, or from heading directive. */
@@ -40,26 +40,26 @@ export class FormFieldErrorDirective<T = any> implements FormError<T>, OnInit {
         return this._headingDirective?.fdpFormFieldErrorHeadingType ?? this.fdpFormFieldErrorType;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _headingDirective: FormErrorHeading | undefined;
 
-    /** @hidden */
+    /** @ignore */
     private _descriptionDirective: FormErrorDescription | undefined;
 
-    /** @hidden */
+    /** @ignore */
     private _detectTimeout: ReturnType<typeof setTimeout>;
 
-    /** @hidden */
+    /** @ignore */
     get _headingTemplateRef(): TemplateRef<FormFieldErrorContext<T>> {
         return this._headingDirective?.templateRef ?? this.templateRef;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _descriptionTemplateRef(): TemplateRef<FormFieldErrorContext<T>> | null {
         return this._descriptionDirective?.templateRef ?? null;
     }
 
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard(
         dir: FormFieldErrorDirective,
         ctx: FormFieldErrorContext<any>
@@ -67,14 +67,14 @@ export class FormFieldErrorDirective<T = any> implements FormError<T>, OnInit {
         return true;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public templateRef: TemplateRef<FormFieldErrorContext<T>>,
         private _viewContainer: ViewContainerRef,
         private _cdr: ChangeDetectorRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         // We need to create view in order to initialize child directives immediately.
         this._createView();
@@ -92,13 +92,13 @@ export class FormFieldErrorDirective<T = any> implements FormError<T>, OnInit {
         this._detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _createView(): void {
         this._viewContainer.createEmbeddedView(this.templateRef);
         this._viewContainer.detach();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _detectChanges(): void {
         // Since child directives can register itself almost instantly, we need to trigger detect changes only one time,
         // in order to bypass error with expected/actual directives count.

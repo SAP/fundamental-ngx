@@ -78,9 +78,9 @@ let titleUniqueId = 0;
     ]
 })
 export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterViewInit {
-    /** @hidden */
+    /** @ignore */
     protected defaultId = `fd-title-id-${titleUniqueId++}`;
-    /** @hidden */
+    /** @ignore */
     protected defaultSelectId = `fd-select-title-id-${titleUniqueId++}`;
 
     /** title id for the table  */
@@ -91,56 +91,56 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
     @Input()
     selectedId: string = this.defaultSelectId;
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     conditions: ExtendedBaseEntity[] = [];
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     strategyLabels: { [key in keyof (typeof VhdDefineIncludeStrategy | typeof VhdDefineExcludeStrategy)]?: string } =
         {};
 
-    /** @hidden */
+    /** @ignore */
     @Output()
     includeChange: EventEmitter<ExtendedIncludedEntity[]> = new EventEmitter<ExtendedIncludedEntity[]>();
 
-    /** @hidden */
+    /** @ignore */
     @Output()
     excludeChange: EventEmitter<ExtendedExcludedEntity[]> = new EventEmitter<ExtendedExcludedEntity[]>();
 
-    /** @hidden */
+    /** @ignore */
     @Output()
     conditionChange: EventEmitter<BaseEntity[]> = new EventEmitter<BaseEntity[]>();
 
-    /** @hidden */
+    /** @ignore */
     _conditions: ExtendedBaseEntity[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _definePanelState = {
         included: false,
         excluded: false
     };
 
-    /** @hidden */
+    /** @ignore */
     _rules = {
         maxCharactersHintCount: MAX_CHARACTER_HINT_COUNT
     };
-    /** @hidden */
+    /** @ignore */
     _strategyIncludeValues = VhdDefineIncludeStrategy;
 
-    /** @hidden */
+    /** @ignore */
     _strategyExcludeValues = VhdDefineExcludeStrategy;
 
-    /** @hidden */
+    /** @ignore */
     _defineTypes = VhdDefineType;
 
-    /** @hidden */
+    /** @ignore */
     _includeStrategy: StategyItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _excludeStrategy: StategyItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if ('conditions' in changes) {
             this._conditions = (this.conditions as ExtendedIncludedEntity[]) || [];
@@ -148,12 +148,12 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._refreshStrategies();
     }
 
-    /** @hidden Track function for main data */
+    /** @ignore Track function for main data */
     _trackByKeyAndType(
         _index: number,
         item: ExtendedIncludedEntity | ExtendedExcludedEntity
@@ -165,18 +165,18 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
         return undefined;
     }
 
-    /** @hidden */
+    /** @ignore */
     _onSelectStrategy(): void {
         this._filterChanged();
     }
 
-    /** @hidden */
+    /** @ignore */
     _filterChanged(): void {
         this.conditionChange.emit(this._conditions);
         this._changeDetectorRef.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     addEmptyCondition(): void {
         const item = new ExtendedBaseEntity();
         item.value = '';
@@ -184,7 +184,7 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
         this._filterChanged();
     }
 
-    /** @hidden */
+    /** @ignore */
     removeCondition(index: number): void {
         this._conditions.splice(index, 1);
         this._initializeConditions();
@@ -192,13 +192,13 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
         this._changeDetectorRef.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     _validateConditionValue(item: ExtendedIncludedEntity | ExtendedExcludedEntity, valid: boolean | boolean[]): void {
         item.valid = Array.isArray(valid) ? valid.every(Boolean) : !!valid;
         this._filterChanged();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _refreshStrategies(): void {
         this._includeStrategy = Object.keys(VhdDefineIncludeStrategy).map((key) => ({
             key,
@@ -210,7 +210,7 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
         }));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initializeConditions(): void {
         if (this._conditions.length === 0) {
             this.addEmptyCondition();

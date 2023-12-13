@@ -139,7 +139,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
     collapseTitle: string;
 
     /**
-     * @hidden
+     * @ignore
      * left column separator value (between start and middle columns)
      * that specifies the direction of the arrow and
      * if the separator is visible
@@ -148,7 +148,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
     _leftColumnSeparator: ColumnSeparatorValue = null;
 
     /**
-     * @hidden
+     * @ignore
      * right column separator value (between middle and end columns)
      * that specifies the direction of the arrow and
      * if the separator is visible
@@ -157,38 +157,38 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
     _rightColumnSeparator: ColumnSeparatorValue = null;
 
     /**
-     * @hidden
+     * @ignore
      * allows to keep track of the previos layout
      * so we can go back to it on window resize
      */
     private _previousLayout: FlexibleColumnLayout = this.layout;
 
-    /** @hidden */
+    /** @ignore */
     private _screenSize: ScreenSize = LG_SCREEN_SIZE;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
     /**
-     * @hidden
+     * @ignore
      * the column layout representing the distribution of the width
      * between the first (start), the middle and the last(end) column
      */
     _columnLayout: { start: number; mid: number; end: number } = this.layoutDefinitions[this.layout];
 
     /**
-     * @hidden
+     * @ignore
      * set to 'true' if the layout is changed to fullscreen on window resize
      * this will allow the layout to switch to previous mode on SM->MD transition
      * if a layout is set by the user to fullscreen, it should persist on window resize
      */
     private _responsiveFullscreenLayout = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(@Inject(FD_FLEXIBLE_LAYOUT_CONFIG) private readonly _config: FlexibleLayoutConfig) {}
 
     /**
-     * @hidden
+     * @ignore
      * function that handles the click events on the left separator
      * and updates the layout
      */
@@ -213,7 +213,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
     }
 
     /**
-     * @hidden
+     * @ignore
      * function that handles the click events on the right separator
      * and updates the layout
      */
@@ -238,7 +238,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
     }
 
     /**
-     * @hidden
+     * @ignore
      * function to determine the screen size in 'sm' | 'md' | 'lg' | 'xl'
      * format depending on the window size in px
      */
@@ -253,7 +253,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
     }
 
     /**
-     * @hidden
+     * @ignore
      * handles the change of the layouts on reaching a break point
      */
     private _responsiveLayoutChangeHandler(): void {
@@ -345,7 +345,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
     }
 
     /**
-     * @hidden
+     * @ignore
      * Listen on window resize and update the layout
      * call user defined custom function if provided
      */
@@ -362,7 +362,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
     }
 
     /**
-     * @hidden
+     * @ignore
      * determines if the left separator should be visible
      * and the value that will specify the direction of the arrow
      */
@@ -381,7 +381,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
     }
 
     /**
-     * @hidden
+     * @ignore
      * determines if the right separator should be visible
      * and the value that will specify the direction of the arrow
      */
@@ -400,7 +400,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
     }
 
     /**
-     * @hidden
+     * @ignore
      * updates the column layout based on the layout name
      * makes a call to determine the new value of the left separator
      * makes a call to determine the new value of the right separator
@@ -412,7 +412,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
     }
 
     /**
-     * @hidden
+     * @ignore
      * updates the layout
      * emits an event
      * makes a call to the helper function that will update the column layout and the separators
@@ -427,19 +427,19 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._updateColumnLayoutParameters();
         this._previousLayout = this.layout;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._screenSize = this._getScreenSize(window.innerWidth);
         this._listenOnWindowResize();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         this._updateColumnLayoutParameters();
 
@@ -452,7 +452,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }

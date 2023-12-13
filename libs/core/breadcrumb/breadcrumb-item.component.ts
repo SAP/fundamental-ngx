@@ -36,7 +36,7 @@ import { FD_BREADCRUMB_ITEM_COMPONENT } from './tokens';
     standalone: true
 })
 export class BreadcrumbItemComponent implements AfterViewInit {
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FD_LINK_COMPONENT)
     breadcrumbLink: LinkComponent;
 
@@ -51,18 +51,18 @@ export class BreadcrumbItemComponent implements AfterViewInit {
      */
     portal: DomPortal;
 
-    /** @hidden */
+    /** @ignore */
     private _attached = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
 
-    /** @hidden */
+    /** @ignore */
     get _needsClickProxy(): boolean {
         return !!this.breadcrumbLink?.elementRef.nativeElement.getAttribute('href') || !!this.breadcrumbLink.routerLink;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._attach();
     }
@@ -76,7 +76,7 @@ export class BreadcrumbItemComponent implements AfterViewInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _detach(): void {
         if (!this._attached) {
             return;
@@ -93,7 +93,7 @@ export class BreadcrumbItemComponent implements AfterViewInit {
         this._attached = false;
     }
 
-    /** @hidden */
+    /** @ignore */
     _attach(): void {
         if (this._attached) {
             return;

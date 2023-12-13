@@ -38,7 +38,7 @@ export class TabTitleDirective {}
     standalone: true
 })
 export class TabCountDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-tabs__count')
     fdTabsCountClass = true;
 }
@@ -72,10 +72,10 @@ export class TabIconComponent implements CssClassBuilder, OnChanges {
     @Input()
     icon: string;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden
+    /** @ignore
      * Function runs when component is initialized
      * function should build component css class
      * function should build css style
@@ -84,7 +84,7 @@ export class TabIconComponent implements CssClassBuilder, OnChanges {
         this.buildComponentCssClass();
     }
 
-    /** @hidden CssClassBuilder interface implementation
+    /** @ignore CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */

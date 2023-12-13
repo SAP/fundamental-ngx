@@ -30,24 +30,24 @@ export class ThemingService implements OnDestroy {
         return this._currentThemeSubject.asObservable();
     }
 
-    /** @hidden */
+    /** @ignore */
     private readonly _renderer: Renderer2;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _availableThemes: Map<string, CompleteThemeDefinition>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _standardThemes: ThemeDefinition[] = [];
 
-    /** @hidden **/
+    /** @ignore **/
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _currentThemeSubject: BehaviorSubject<CompleteThemeDefinition | null> =
         new BehaviorSubject<CompleteThemeDefinition | null>(null);
 
     /**
-     * @hidden
+     * @ignore
      */
     constructor(
         private _rendererFactory: RendererFactory2,
@@ -90,7 +90,7 @@ export class ThemingService implements OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -137,7 +137,7 @@ export class ThemingService implements OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param type
      * @param resourceUrl
      * @private
@@ -153,7 +153,7 @@ export class ThemingService implements OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param type
      * @private
      */
@@ -173,7 +173,7 @@ export class ThemingService implements OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param themes
      * @private
      */
@@ -191,7 +191,7 @@ export class ThemingService implements OnDestroy {
         }) as CompleteThemeDefinition[];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getThemingResourceConfig(theme: ThemeDefinition): CompleteThemingResource {
         const existingConfig = theme.theming || {};
         const defaultConfig: CompleteThemingResource = {
@@ -203,7 +203,7 @@ export class ThemingService implements OnDestroy {
         return Object.assign(defaultConfig, existingConfig);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getNativeParameterByName(paramName: string): string {
         paramName = paramName.replace(/[[\\\]]/g, '\\$&');
         const regex = new RegExp('[?&]' + paramName + '(=([^&#]*)|&|#|$)'),
@@ -215,7 +215,7 @@ export class ThemingService implements OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Set theme according to additional URL parameter.
      * This parameter can be changed in function argument.
      **/

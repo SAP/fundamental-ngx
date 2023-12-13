@@ -60,10 +60,10 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     @ViewChild('renderer')
     renderer: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     _currentValue: any;
 
-    /** @hidden Radio checked status */
+    /** @ignore Radio checked status */
     _isChecked = false;
 
     /** click event to emit */
@@ -74,7 +74,7 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     @ViewChild(CoreRadioButtonComponent, { static: false })
     private coreRadioButton: CoreRadioButtonComponent;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -89,23 +89,23 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
         }
-        // @hidden have to set default initial values as base class has check and throws error
+        // @ignore have to set default initial values as base class has check and throws error
         this.id = `fdp-radio-id-${uniqueId}`;
         this.name = `fdp-radio-name-${uniqueId}`;
         uniqueId++;
     }
 
-    /** @hidden Controlvalue accessor */
+    /** @ignore Controlvalue accessor */
     writeValue(value: any): void {
         this._valueChange(value);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
     }
 
-    /** @hidden */
+    /** @ignore */
     _valueChange(value: any, emitEvent = false): void {
         if (this.disabled) {
             emitEvent = false;

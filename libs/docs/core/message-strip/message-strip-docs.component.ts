@@ -126,7 +126,7 @@ export class MessageStripDocsComponent {
      */
     shouldShow = true;
     /**
-     * @hidden
+     * @ignore
      */
     private _originalSchemaValues = Object.assign({}, this.data);
 

@@ -39,10 +39,10 @@ export class PlatformMultiInputMobileComponent
     extends MobileModeBase<PlatformMultiInputInterface>
     implements OnInit, OnDestroy
 {
-    /** @hidden */
+    /** @ignore */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
-    /** @hidden
+    /** @ignore
      * For internal usage
      * Control element, which will be rendered inside dialog.
      * List element, which will be rendered inside dialog.
@@ -52,10 +52,10 @@ export class PlatformMultiInputMobileComponent
         controlTemplate: TemplateRef<any>;
     }> = null;
 
-    /** @hidden */
+    /** @ignore */
     private _selectedBackup: any[];
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,
@@ -65,36 +65,36 @@ export class PlatformMultiInputMobileComponent
         super(elementRef, dialogService, multiInputComponent, MobileModeControl.MULTI_INPUT, mobileModes);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._listenOnMultiInputOpenChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         super.onDestroy();
     }
 
-    /** @hidden */
+    /** @ignore */
     _handleApprove(): void {
         this.dialogRef.close();
         this._component._dialogApprove();
     }
 
-    /** @hidden */
+    /** @ignore */
     _handleDismiss(): void {
         this.dialogRef.dismiss();
         this._component._dialogDismiss(this._selectedBackup);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnMultiInputOpenChange(): void {
         this._component.openChange
             .pipe(distinctUntilChanged(), takeUntil(this._onDestroy$))
             .subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _toggleDialog(open: boolean): void {
         if (!open) {
             this._handleApprove();
@@ -107,7 +107,7 @@ export class PlatformMultiInputMobileComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _open(): void {
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
             mobile: true,

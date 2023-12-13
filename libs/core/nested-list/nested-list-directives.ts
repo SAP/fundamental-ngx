@@ -29,11 +29,11 @@ export class NestedListHeaderDirective {
     @HostBinding('attr.id')
     id: string | null = `fd-nested-list-group-header-${++uniqueId}`;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-nested-list__group-header')
     fdNestedListHeaderClass = true;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _elementRef: ElementRef) {}
 
     /** Get the header title */
@@ -54,7 +54,7 @@ export class NestedListIconComponent extends IconComponent {
     @HostBinding('attr.role')
     role = 'presentation';
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-nested-list__icon')
     fdNestedListIconClass = true;
 }
@@ -64,11 +64,11 @@ export class NestedListIconComponent extends IconComponent {
     standalone: true
 })
 export class NestedListTitleDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-nested-list__title')
     fdNestedListTitleClass = true;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private elementRef: ElementRef) {}
 
     /** Returns element's InnerText */
@@ -94,30 +94,30 @@ export class NestedListTitleDirective {
     imports: [IconComponent, AsyncPipe]
 })
 export class NestedListExpandIconComponent {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-nested-list__button')
     fdNestedListTitleClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-button')
     fdButtonClass = true;
 
     /**
-     * @hidden
+     * @ignore
      * Attribute controlled by the parent `NestedItemDirective`
      */
     @HostBinding('class.is-expanded')
     @HostBinding('attr.aria-expanded')
     expanded = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-hidden')
     ariaHidden = true;
 
-    /** @hidden */
+    /** @ignore */
     sideArrowIcon$: Observable<string>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _itemService: NestedItemService,
         private _changeDetRef: ChangeDetectorRef,
@@ -140,13 +140,13 @@ export class NestedListExpandIconComponent {
         this._itemService.focus.next();
     }
 
-    /** @hidden */
+    /** @ignore */
     changeExpandedState(expanded: boolean): void {
         this.expanded = expanded;
         this._changeDetRef.detectChanges();
     }
 
-    /** @hidden Sets expand arrow depending on text direction */
+    /** @ignore Sets expand arrow depending on text direction */
     private _listenOnTextDirection(): void {
         this.sideArrowIcon$ = this._rtlService
             ? this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'navigation-left-arrow' : 'navigation-right-arrow')))

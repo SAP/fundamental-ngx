@@ -74,92 +74,92 @@ export class NavigationListItemComponent
     extends FdbNavigationListItemComponent
     implements OnInit, OnChanges, CssClassBuilder, HasElementRef, AfterViewInit, FocusableOption
 {
-    /** @hidden */
+    /** @ignore */
     @Input()
     class: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     set group(group: boolean) {
         this.isGroup.set(group);
     }
 
-    /** @hidden */
+    /** @ignore */
     @Input('expanded')
     set _expanded(expanded: boolean) {
         this.expanded.set(expanded);
     }
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     linkTemplate: TemplateRef<void>;
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     alwaysFocusable = false;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FdbNavigationListComponent)
     set _navigationListComponent(navigationListComponent: FdbNavigationListComponent) {
         this.childNavigationListComponent.set(navigationListComponent);
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(RouterLinkActive)
     set _routerLinkActive(routerLinkActive: RouterLinkActive) {
         this.routerLinkActive.set(routerLinkActive);
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(RouterLink)
     set _routerLink(routerLink: RouterLink) {
         this.routerLink.set(routerLink);
     }
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('childrenTemplate', { read: TemplateRef })
     set _childrenTemplate(templateRef: TemplateRef<void>) {
         this.childrenTemplate.set(templateRef);
     }
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('navigationItem')
     _navigationItem: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(NavigationLinkComponent)
     linkComponent: Nullable<NavigationLinkComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FdbNavigationListItemComponent, { descendants: true })
     private readonly _childNavigationListItems: QueryList<FdbNavigationListItemComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('clonedMainLink', { static: false, read: ElementRef })
     private readonly _clonedMainLink: Nullable<ElementRef>;
 
-    /** @hidden */
+    /** @ignore */
     injector = inject(Injector);
 
-    /** @hidden */
+    /** @ignore */
     elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     parentListItemComponent = inject(FdbNavigationListItemComponent, { optional: true, skipSelf: true });
 
-    /** @hidden */
+    /** @ignore */
     override noArrow = false;
 
-    /** @hidden */
+    /** @ignore */
     override additionalBodyClass = 'fd-navigation__list-container';
 
-    /** @hidden */
+    /** @ignore */
     routerLink = signal<RouterLink | null>(null);
 
-    /** @hidden */
+    /** @ignore */
     routerLinkActive = signal<RouterLinkActive | null>(null);
 
-    /** @hidden */
+    /** @ignore */
     isRouterLinkActive = computed(() => {
         const routerLinkActive = this.routerLinkActive();
         if (routerLinkActive) {
@@ -171,29 +171,29 @@ export class NavigationListItemComponent
         return false;
     });
 
-    /** @hidden */
+    /** @ignore */
     childNavigationListComponent = signal<FdbNavigationListComponent | null>(null);
-    /** @hidden */
+    /** @ignore */
     expanded = signal(false);
 
-    /** @hidden */
+    /** @ignore */
     fullPathExpanded = computed(
         () => (this.parentListItemComponent ? this.parentListItemComponent.expanded() : true) && this.expanded()
     );
 
-    /** @hidden */
+    /** @ignore */
     isGroup = signal(false);
 
-    /** @hidden */
+    /** @ignore */
     childrenTemplate = signal<TemplateRef<void> | null>(null);
 
-    /** @hidden */
+    /** @ignore */
     childrenActive = signal(false);
 
-    /** @hidden */
+    /** @ignore */
     inPortal = computed(() => this.parentInPortal() || this._selfInPortal());
 
-    /** @hidden */
+    /** @ignore */
     parentInPortal = computed(() => this.parentListItemComponent?.inPortal() || false);
 
     /**
@@ -214,12 +214,12 @@ export class NavigationListItemComponent
         return this.level() + 1;
     });
 
-    /** @hidden */
+    /** @ignore */
     _isInPopover = computed(
         () => this.navigationComponent.isSnapped() && (this.normalizedLevel() > 2 || this._hidden())
     );
 
-    /** @hidden */
+    /** @ignore */
     // eslint-disable-next-line max-len
     expandedAttr = computed(
         () =>
@@ -240,22 +240,22 @@ export class NavigationListItemComponent
         return this._isRtl() ? 'slim-arrow-left' : 'slim-arrow-right';
     });
 
-    /** @hidden */
+    /** @ignore */
     domPortal: Nullable<DomPortal>;
 
-    /** @hidden */
+    /** @ignore */
     private _selfInPortal = signal(false);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _cdr = inject(ChangeDetectorRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _tabbableService = inject(TabbableElementService);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _navigationComponent = inject(FdbNavigationComponent);
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         super();
         effect(() => {
@@ -270,13 +270,13 @@ export class NavigationListItemComponent
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [this.class || '', 'fd-navigation__list-item'];
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     private _keydownHandler(event: KeyboardEvent): void {
         if (this._isInPopover() && KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
@@ -329,7 +329,7 @@ export class NavigationListItemComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     clonedMainLinkKeydown(event: KeyboardEvent): void {
         if (this._isCollapseAction(event)) {
             this._popoverService.close();
@@ -342,12 +342,12 @@ export class NavigationListItemComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     calculateExpanded(): void {
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     focus(): void {
         if (this.linkComponent) {
             this.linkComponent.elementRef.nativeElement.focus();
@@ -356,34 +356,34 @@ export class NavigationListItemComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._popoverService.updateTriggerElement(this._navigationItem);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
         this._popoverService.refreshConfiguration(this);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     collapse(): void {
         this.expanded.set(false);
         this._popoverService.close();
     }
 
-    /** @hidden */
+    /** @ignore */
     expand(): void {
         this.expanded.set(true);
     }
 
-    /** @hidden */
+    /** @ignore */
     toggle(): void {
         if (this._hidden()) {
             return;
@@ -391,25 +391,25 @@ export class NavigationListItemComponent
         this.expanded.set(!this.expanded());
     }
 
-    /** @hidden */
+    /** @ignore */
     setSnappedActiveState(isActive: boolean): void {
         this.childrenActive.set(isActive);
     }
 
-    /** @hidden */
+    /** @ignore */
     hide(): void {
         this._hidden.set(true);
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     show(): void {
         this._hidden.set(false);
         this.elementRef.nativeElement.style.display = 'flex';
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     checkSelfHidden(): void {
         const shouldHide = this._childNavigationListItems
             ?.filter((item) => item.normalizedLevel() === this.normalizedLevel() + 1)
@@ -420,7 +420,7 @@ export class NavigationListItemComponent
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     focusOnClonedLink(): void {
         if (this._clonedMainLink) {
             this._clonedMainLink.nativeElement.focus();
@@ -434,14 +434,14 @@ export class NavigationListItemComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     createPortal(): DomPortal {
         this.domPortal = this.domPortal || new DomPortal(this.elementRef.nativeElement);
         this._selfInPortal.set(true);
         return this.domPortal;
     }
 
-    /** @hidden */
+    /** @ignore */
     destroyPortal(): void {
         if (this.domPortal?.isAttached) {
             this.domPortal.detach();
@@ -450,13 +450,13 @@ export class NavigationListItemComponent
         this._selfInPortal.set(false);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isCollapseAction(event: KeyboardEvent): boolean {
         const expandKey = this._rtl?.rtl.value ? RIGHT_ARROW : LEFT_ARROW;
         return KeyUtil.isKeyCode(event, expandKey);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _expandedStateKeyboardHandler(shouldExpand: boolean): void {
         if (shouldExpand && this.expanded()) {
             this.navigationComponent.setNextItemActive();
@@ -479,7 +479,7 @@ export class NavigationListItemComponent
         this.expanded.set(shouldExpand);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _snappedStateKeyboardHandler(shouldExpand: boolean): void {
         if (shouldExpand && this._hidden()) {
             this.expanded.set(shouldExpand);

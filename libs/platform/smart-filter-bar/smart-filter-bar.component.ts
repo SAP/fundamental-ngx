@@ -123,7 +123,7 @@ const smartFilterBarProvider: Provider = {
 })
 export class SmartFilterBarComponent extends SmartFilterBar implements AfterViewInit, OnDestroy {
     /**
-     * @hidden
+     * @ignore
      * Form generator component instance.
      */
     @ViewChild(FormGeneratorComponent) _formGenerator!: FormGeneratorComponent;
@@ -180,7 +180,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      */
     @Output()
     searchInputChanged: EventEmitter<SearchInput> = new EventEmitter<SearchInput>();
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(SmartFilterBarToolbarItemDirective)
     private readonly _toolbarItemRefs: QueryList<SmartFilterBarToolbarItemDirective>;
 
@@ -193,39 +193,39 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      * Search field value to apply for the subject's data source.
      */
     search: SearchInput | undefined;
-    /** @Hidden */
+    /** @ignore */
     _toolbarItems: TemplateRef<any>[] = [];
-    /** @hidden */
+    /** @ignore */
     _formItems: DynamicFormItem[];
-    /** @hidden */
+    /** @ignore */
     _selectedFilters: string[] = [];
-    /** @hidden */
+    /** @ignore */
     _showFilterBar = true;
 
-    /** @hidden */
+    /** @ignore */
     get _loading(): boolean {
         return this._subject?.getDataSource() ? this._subject.getDataSource().isDataLoading : true;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _subjectSubscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _transparent = false;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _formGeneratorReady = new BehaviorSubject<boolean>(false);
 
-    /** @hidden */
+    /** @ignore */
     private _ignorePresetChange = false;
 
-    /** @hidden */
+    /** @ignore */
     private _subject!: SmartFilterBarSubjectDirective;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _dialogService: DialogService,
         private _cdr: ChangeDetectorRef,
@@ -238,7 +238,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
         this._fgService.addComponent(SmartFilterBarConditionFieldComponent, [SMART_FILTER_BAR_RENDERER_COMPONENT]);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._toolbarItems = this._toolbarItemRefs.toArray().map((ref) => ref.templateRef);
 
@@ -247,7 +247,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._unsubscribeFromSubject();
@@ -287,13 +287,13 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     _onSearchInputChange(event: SearchInput): void {
         this.search = event;
         this.searchInputChanged.emit(event);
     }
 
-    /** @hidden */
+    /** @ignore */
     _cancelSearch(): void {
         this.search = undefined;
 
@@ -356,7 +356,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     }
 
     /**
-     * @hidden
+     * @ignore
      * Callback function when form generator form has been successfully validated and submitted.
      */
     _onFormSubmitted(event: any): void {
@@ -365,7 +365,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     }
 
     /**
-     * @hidden
+     * @ignore
      * Callback method when form has been created.
      * Populates selected filters array with user-defined default filters.
      */
@@ -390,7 +390,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     _toggleFilterBar(): void {
         this._showFilterBar = !this._showFilterBar;
@@ -406,7 +406,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
         return this._generateCollectionFilterGroups(formValue);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _generateCollectionFilterGroups(value: {
         [key: string]: SmartFilterBarCondition[];
     }): CollectionFilterGroup[] {
@@ -440,7 +440,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
         return collectionFilterGroups.filter((filterGroup) => filterGroup.filters?.length > 0);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setSubject(subject: SmartFilterBarSubjectDirective): void {
         if (!subject) {
             return;
@@ -451,14 +451,14 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
         this._listenToSubjectColumns();
     }
 
-    /** @hidden */
+    /** @ignore */
     private unsubscribeFromSubject(): void {
         if (!this._subject) {
             return;
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToSubjectColumns(): void {
         this._subjectSubscriptions.add(
             this._subject.fieldsStream.subscribe(async (columns: SmartFilterBarFieldDefinition[]) => {
@@ -470,7 +470,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     }
 
     /**
-     * @hidden
+     * @ignore
      * Generates form items to be consumed by form generator component.
      * @param columns columns definition
      */
@@ -523,7 +523,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _generateCustomFilterFieldItem(
         column: SmartFilterBarFieldDefinition,
         item: SmartFilterBarDynamicFormFieldItem
@@ -546,7 +546,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     }
 
     /**
-     * @hidden
+     * @ignore
      * Generates form item based on data type.
      * @param column
      * @param item
@@ -574,7 +574,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     }
 
     /**
-     * @hidden
+     * @ignore
      * Generates base form item object to be consumed by form generator component.
      * @param column column definition
      * @returns base form item object.
@@ -603,7 +603,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     }
 
     /**
-     * @hidden
+     * @ignore
      * Retrieves available options for particular column by using data source method.
      * @param column property name of the data source items.
      * @returns {Observable<SelectItem[]>} Observable with the array of available options.
@@ -612,7 +612,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
         return () => this._getFieldVariants(column);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getFilterDefaultOptions(column: string, filterType: FilterType): () => Promise<any[]> {
         return async () => {
             const variants = await firstValueFrom(this._getFieldVariants(column).pipe(take(1)));
@@ -634,7 +634,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
         };
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getFieldVariants(column: string): Observable<SelectItem[]> {
         return this.subject.getFieldVariants(column).pipe(
             take(1),
@@ -642,13 +642,13 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getSubjectDefinitions(): SmartFilterBarFieldDefinition[] {
         return this.subject?.getSubjectFields() || [];
     }
 
     /**
-     * @hidden
+     * @ignore
      * Sets provided filters directly to the data source.
      * @param filters array of filters.
      */
@@ -667,13 +667,13 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
         this._ignorePresetChange = false;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _unsubscribeFromSubject(): void {
         this._subjectSubscriptions.unsubscribe();
         this._subjectSubscriptions = new Subscription();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setSelectedFilters(filters: string[]): void {
         this._selectedFilters = filters.filter((f: string, i: number) => filters.indexOf(f) === i);
         this._formGenerator.refreshStepsVisibility();

@@ -21,30 +21,30 @@ import { NestedListComponent } from '@fundamental-ngx/cx/nested-list';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SideNavigationMainComponent implements AfterContentInit {
-    /** @hidden */
+    /** @ignore */
     @ContentChild(NestedListComponent)
     list: NestedListComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(InputGroupComponent, { descendants: true })
     _inputGroups: QueryList<InputGroupComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdx-side-nav__main-navigation')
     classSideNavMainNavigation = true;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elementRef: ElementRef,
         private _cdRef: ChangeDetectorRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     get elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._inputGroups.forEach((input) => {
             input.elementRef.nativeElement.classList.add('fdx-side-nav__input-group');

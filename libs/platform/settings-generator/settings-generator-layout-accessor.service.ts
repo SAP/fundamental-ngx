@@ -7,7 +7,7 @@ import { BaseSettingsGeneratorLayout } from './layouts/base-settings-generator-l
  */
 @Injectable()
 export class SettingsGeneratorLayoutAccessorService {
-    /** @hidden */
+    /** @ignore */
     private readonly _layouts = new Map<string, Type<BaseSettingsGeneratorLayout>>();
 
     /**

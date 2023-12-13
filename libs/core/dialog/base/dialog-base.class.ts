@@ -31,38 +31,38 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
     implements OnInit, AfterViewInit, OnDestroy
 {
     /**
-     * @hidden
+     * @ignore
      */
     @HostBinding('attr.dir')
     _dir: string;
 
-    /** @hidden Reference to dialog window element*/
+    /** @ignore Reference to dialog window element*/
     abstract dialogWindow: ElementRef;
 
-    /** @hidden Dialog padding sizes */
+    /** @ignore Dialog padding sizes */
     dialogPaddingSize: DialogSize;
 
-    /** @hidden */
+    /** @ignore */
     protected _focusTrapId: string;
 
-    /** @hidden */
+    /** @ignore */
     protected _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     abstract get _ref(): D;
 
-    /** @hidden */
+    /** @ignore */
     abstract get _config(): DialogConfigBase<any>;
 
     /**
-     * @hidden
+     * @ignore
      * Used to mute errors of focus trap during unit tests (jsdom incompatibility).
      */
     private readonly _focusTrapError = inject(FD_DIALOG_FOCUS_TRAP_ERROR, {
         optional: true
     });
 
-    /** @hidden Listen and close dialog on Escape key */
+    /** @ignore Listen and close dialog on Escape key */
     @HostListener('keydown', ['$event'])
     closeDialogEsc(event: KeyboardEvent): void {
         if (this._config.escKeyCloseable && KeyUtil.isKeyCode(event, ESCAPE)) {
@@ -70,7 +70,7 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
         }
     }
 
-    /** @hidden Listen and close dialog on Backdrop click */
+    /** @ignore Listen and close dialog on Backdrop click */
     @HostListener('mousedown', ['$event.target'])
     closeDialog(target: ElementRef): void {
         if (this._config.backdropClickCloseable && target === this.elementRef.nativeElement) {
@@ -78,7 +78,7 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         protected _router: Router,
         public readonly elementRef: ElementRef,
@@ -87,7 +87,7 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
         protected _focusTrapService: FocusTrapService
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._listenAndCloseOnNavigation();
         this._subscriptions.add(
@@ -98,7 +98,7 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._trapFocus();
         this._setPosition();
@@ -108,13 +108,13 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
         this._ref.loaded();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._deactivateFocusTrap();
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden Determine dialog padding size based on dialogs window width */
+    /** @ignore Determine dialog padding size based on dialogs window width */
     adjustResponsivePadding(): void {
         if (this._config.responsivePadding) {
             const dialogWidth = this.dialogWindow.nativeElement.getBoundingClientRect().width;
@@ -123,7 +123,7 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
         }
     }
 
-    /** @hidden Listen on NavigationStart event and dismiss the dialog */
+    /** @ignore Listen on NavigationStart event and dismiss the dialog */
     private _listenAndCloseOnNavigation(): void {
         if (this._router) {
             this._subscriptions.add(
@@ -134,7 +134,7 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
         }
     }
 
-    /** @hidden Trap focus inside dialog window */
+    /** @ignore Trap focus inside dialog window */
     private _trapFocus(): void {
         if (this._config.focusTrapped) {
             try {
@@ -150,12 +150,12 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _deactivateFocusTrap(): void {
         this._focusTrapService.deactivateFocusTrap(this._focusTrapId);
     }
 
-    /** @hidden Set dialog window position */
+    /** @ignore Set dialog window position */
     private _setPosition(): void {
         if (this._config.position) {
             this.dialogWindow.nativeElement.style.top = coerceMetricValue(this._config.position.top);
@@ -167,7 +167,7 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
         }
     }
 
-    /** @hidden Set dialog window width and height */
+    /** @ignore Set dialog window width and height */
     private _setWidthHeight(): void {
         this.dialogWindow.nativeElement.style.width = coerceMetricValue(this._config.width);
         this.dialogWindow.nativeElement.style.height = coerceMetricValue(this._config.height);
@@ -177,7 +177,7 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
         this.dialogWindow.nativeElement.style.maxHeight = coerceMetricValue(this._config.maxHeight);
     }
 
-    /** @hidden Listen on window resize and adjust padding */
+    /** @ignore Listen on window resize and adjust padding */
     private _listenOnWindowResize(): void {
         if (this._config.responsivePadding) {
             this._subscriptions.add(

@@ -11,6 +11,6 @@ import { NavigationComponent } from '../navigation.component';
     }
 })
 export class NavigationItemSpacerDirective {
-    /** @hidden */
+    /** @ignore */
     readonly _navigationComponent = inject(NavigationComponent);
 }

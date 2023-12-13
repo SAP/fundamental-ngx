@@ -17,14 +17,14 @@ export class ListGroupHeaderDirective {
     @HostBinding('attr.id')
     nativeElementId: string | null = `fd-list-group-header-${++uniqueId}`;
 
-    /** @hidden Implementation of KeyboardSupportItemInterface */
+    /** @ignore Implementation of KeyboardSupportItemInterface */
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(readonly elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
         this.keyDown.emit(event);

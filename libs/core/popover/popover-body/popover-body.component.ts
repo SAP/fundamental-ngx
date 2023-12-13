@@ -59,11 +59,11 @@ export class PopoverBodyComponent implements AfterViewInit {
     @Input()
     maxHeight: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(CdkTrapFocus)
     _cdkTrapFocus: CdkTrapFocus;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(ScrollbarDirective)
     _scrollbar: ScrollbarDirective;
 
@@ -85,46 +85,46 @@ export class PopoverBodyComponent implements AfterViewInit {
      */
     _focusAutoCapture = false;
 
-    /** @hidden Property bind to popover's body. */
+    /** @ignore Property bind to popover's body. */
     _popoverBodyWidth: number;
 
-    /** @hidden Property bind to popover's body. */
+    /** @ignore Property bind to popover's body. */
     _popoverBodyMinWidth: number;
 
-    /** @hidden Property bind to popover's body. */
+    /** @ignore Property bind to popover's body. */
     _maxWidth: Nullable<number>;
 
-    /** @hidden Property bind to popover's body. */
+    /** @ignore Property bind to popover's body. */
     _closeOnEscapeKey = false;
 
-    /** @hidden Aria role for the popover body. */
+    /** @ignore Aria role for the popover body. */
     _bodyRole: Nullable<string> = null;
 
-    /** @hidden Aria role for the popover body. */
+    /** @ignore Aria role for the popover body. */
     _bodyId: Nullable<string> = null;
 
     /** Classes added to arrow element. */
     _arrowClasses = '';
 
-    /** @hidden text rendered inside popover's body. */
+    /** @ignore text rendered inside popover's body. */
     text: Nullable<string> = null;
 
-    /** @hidden template rendered inside popover's body. */
+    /** @ignore template rendered inside popover's body. */
     _templateToDisplay: TemplateRef<any>;
 
-    /** @hidden Whether the popover body is resizable. */
+    /** @ignore Whether the popover body is resizable. */
     _resizable = false;
 
-    /** @hidden */
+    /** @ignore */
     _resizeHandleLocation: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' = 'bottom-right';
 
     /** Close event from popover body */
     onClose = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _bodyComponentClasses: string | null = null;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         readonly _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
@@ -142,14 +142,14 @@ export class PopoverBodyComponent implements AfterViewInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (this._scrollbar) {
             this._scrollbar._inPopover = true;
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _setBodyComponentClasses(classes: string | null): void {
         this._bodyComponentClasses?.split(' ').forEach((klass) => {
             this._renderer.removeClass(this._elementRef.nativeElement, klass);
@@ -163,7 +163,7 @@ export class PopoverBodyComponent implements AfterViewInit {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     _setArrowStyles(position: ConnectionPositionPair, rtl: 'rtl' | 'ltr'): void {
         this._resizeHandleLocation = `${position.overlayY === 'top' ? 'bottom' : 'top'}-${
             position.overlayX === 'start' ? 'right' : 'left'
@@ -213,14 +213,14 @@ export class PopoverBodyComponent implements AfterViewInit {
         this.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     detectChanges(): void {
         if (!this._changeDetectorRef['destroyed']) {
             this._changeDetectorRef.detectChanges();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _focusFirstTabbableElement(): void {
         if (this._focusAutoCapture) {
             this._cdkTrapFocus.focusTrap.focusFirstTabbableElement();

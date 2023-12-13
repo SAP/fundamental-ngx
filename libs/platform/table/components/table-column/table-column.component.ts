@@ -137,13 +137,13 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     /** Stores information for the header cell if the ellipsis are visible after the column resize */
     headerOverflows = false;
 
-    /** @hidden */
+    /** @ignore */
     _freezed = false;
 
-    /** @hidden */
+    /** @ignore */
     _endFreezed = false;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FdpCellDef)
     set fdpCellDef(fdpCellDef: Nullable<FdpCellDef>) {
         this.columnCellTemplate = fdpCellDef?.templateRef;
@@ -155,13 +155,13 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
         this.editableColumnCellTemplate = fdpEditableCellDef?.templateRef;
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FdpHeaderCellDef)
     set fdpHeaderCellDef(fdpHeaderCellDef: Nullable<FdpHeaderCellDef>) {
         this.headerCellTemplate = fdpHeaderCellDef?.templateRef;
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(TableCellHeaderPopoverDirective)
     set fdpHeaderCellPopover(popover: Nullable<TableCellHeaderPopoverDirective>) {
         this.headerCellPopoverTemplate = popover?.templateRef;
@@ -170,10 +170,10 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     /** Responsive state of the column. */
     responsiveState: FdpColumnResponsiveState = 'visible';
 
-    /** @hidden */
+    /** @ignore */
     private _width: string;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _tableColumnResizeService: TableColumnResizeService,
         @Optional() @Host() private readonly _tableService?: TableService
@@ -181,20 +181,20 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
         super();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._validateNameOption();
     }
 
     /** Table won't know about column properties update so notify about it manually
-     * @hidden */
+     * @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (this._tableService && (changes.sortable || changes.filterable || changes.groupable || changes.freezable)) {
             this._tableService.markForCheck();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _validateNameOption(): void {
         if (typeof this.name !== 'string') {
             throw Error('fdp-column: "name" option is required.');

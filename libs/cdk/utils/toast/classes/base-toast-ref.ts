@@ -11,21 +11,21 @@ export abstract class BaseToastRef<
     /** The instance of the component is making up the content of the Toast. */
     instance!: T;
 
-    /** @hidden */
+    /** @ignore */
     _defaultPositionStrategy = true;
 
-    /** @hidden
+    /** @ignore
      * Used for flagging the toast as an anchor for all next appearing toasts.
      */
     _isAnchor = false;
 
     /**
-     * @hidden
+     * @ignore
      * Subject for notifying the user that the Toast has been dismissed.
      */
     protected readonly _afterDismissed$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     protected constructor(
         public containerInstance: C,
         public overlayRef: OverlayRef,
@@ -52,7 +52,7 @@ export abstract class BaseToastRef<
     }
 
     /**
-     * @hidden
+     * @ignore
      * Cleans up the DOM after closing.
      */
     protected _finishDismiss(): void {

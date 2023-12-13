@@ -87,7 +87,7 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     @HostBinding('class.fd-feed-list__body')
     isFeedListItemBody = true;
 
-    /** @hidden */
+    /** @ignore */
     maxCharsAtDefault = false;
 
     /**
@@ -100,10 +100,10 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
      */
     hasMore = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -113,19 +113,19 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
         return [CSS_CLASS_NAME.item, this.class, this.isRichText ? '' : `${CSS_CLASS_NAME.item}--collapsible`];
     }
 
-    /** @hidden */
+    /** @ignore */
     setHasMore(): void {
         if (this.text) {
             this.hasMore = this.text.length > this.maxChars;
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     setDefaultMaxChars(): void {
         this.maxChars = this.mobile ? 300 : 500;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
         if (!this.maxChars) {
@@ -135,7 +135,7 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
         this.setHasMore();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if ('class' in changes || 'isRichText' in changes) {
             this.buildComponentCssClass();
@@ -144,7 +144,7 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
         this.setHasMore();
     }
 
-    /** @hidden */
+    /** @ignore */
     toggleTextView(): void {
         this.isCollapsed = !this.isCollapsed;
     }

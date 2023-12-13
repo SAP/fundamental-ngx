@@ -183,13 +183,13 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     @Output()
     readonly slideChange: EventEmitter<CarouselActiveSlides> = new EventEmitter<CarouselActiveSlides>();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(CarouselItemComponent, {
         descendants: true
     })
     slides: QueryList<CarouselItemComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('slideContainer')
     slideContainer: ElementRef;
 
@@ -197,54 +197,54 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     @ViewChild('carouselContainer')
     carouselContainer: ElementRef;
 
-    /** @hidden Start index of currently active items */
+    /** @ignore Start index of currently active items */
     currentActiveSlidesStartIndex = 0;
 
-    /** @hidden handles rtl service */
+    /** @ignore handles rtl service */
     dir: Direction = 'ltr';
 
-    /** @hidden Make left navigation button disabled */
+    /** @ignore Make left navigation button disabled */
     leftButtonDisabled = false;
 
-    /** @hidden Make right navigation button disabled */
+    /** @ignore Make right navigation button disabled */
     rightButtonDisabled = false;
 
-    /** @hidden Fake array for counting number of page indicator */
+    /** @ignore Fake array for counting number of page indicator */
     pageIndicatorsCountArray: number[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _slidesWrapperSize = 0;
 
-    /** @hidden */
+    /** @ignore */
     get _contentSizePx(): string {
         return this._slidesWrapperSize ? `${this._slidesWrapperSize}px` : this.width;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _visibleSlidesCount: number | 'auto' = 1;
 
-    /** @hidden */
+    /** @ignore */
     private _visibleSlidesNumericCount = 1;
 
-    /** @hidden */
+    /** @ignore */
     private _resourceStrings = CarouselResourceStringsEN;
 
-    /** @hidden */
+    /** @ignore */
     private _config: CarouselConfig = {};
 
-    /** @hidden */
+    /** @ignore */
     private _slidesCopy: CarouselItemComponent[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _previousVisibleSlidesCount: number;
 
-    /** @hidden */
+    /** @ignore */
     private _slideSwiped = false;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _elementRef: ElementRef<HTMLElement>,
         private readonly _renderer: Renderer2,
@@ -254,7 +254,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         @Optional() private readonly _rtlService: RtlService
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent): void {
         if (
@@ -279,19 +279,19 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._subscribeToRtl();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.visibleSlidesCount && this.slides?.length > 0) {
             this._notifySlideChange(SlideDirection.None);
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         // On carousel load, display first slide + number of slide visible
         this.currentActiveSlidesStartIndex = 0;
@@ -321,7 +321,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._changeDetectorRef.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._initializeServiceConfig();
         this._carouselService.initialise(this._config, this.slides, this.slideContainer);
@@ -329,7 +329,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._resizeContentContainer();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewChecked(): void {
         if (this._previousVisibleSlidesCount && this._previousVisibleSlidesCount !== this._visibleSlidesNumericCount) {
             this._initializeCarousel();
@@ -340,29 +340,29 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     get _showNavigationButtonInPageIndicatorContainer(): boolean {
         return this.navigatorInPageIndicator && this.pageIndicatorsCountArray.length > 1;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _showNavigationButtonInContent(): boolean {
         return !this.navigatorInPageIndicator && this.pageIndicatorsCountArray.length > 1;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _showPageIndicatorContainer(): boolean {
         return this.pageIndicatorContainer && (this.pageIndicatorsCountArray.length > 0 || this.numericIndicator);
     }
 
-    /** @hidden */
+    /** @ignore */
     get getPageIndicatorLabel(): string {
         return `${this.currentActiveSlidesStartIndex + 1} ${this.resourceStrings.fd_carousel_of} ${
             this.pageIndicatorsCountArray.length
         }`;
     }
 
-    /** @hidden */
+    /** @ignore */
     get screenReaderLabel(): string {
         // eslint-disable-next-line max-len
         return `${this.resourceStrings.fd_carousel_reader} ${this.currentActiveSlidesStartIndex + 1} ${
@@ -370,7 +370,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         } ${this.pageIndicatorsCountArray.length}`;
     }
 
-    /** @hidden */
+    /** @ignore */
     _focus(): void {
         const el = this._elementRef.nativeElement;
         if (el !== document.activeElement) {
@@ -413,14 +413,14 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._changeDetectorRef.detectChanges();
     }
 
-    /** @hidden Subscribe to carousel service events */
+    /** @ignore Subscribe to carousel service events */
     private _subscribeServiceEvents(): void {
         this._carouselService.activeChange$.subscribe((event) => this._onSlideSwipe(event));
         this._carouselService.dragStateChange$.subscribe((event) => this._onSlideDrag(event));
     }
 
     /**
-     * @hidden Prevent native focus flow related to button, if button will be disable on focus state.
+     * @ignore Prevent native focus flow related to button, if button will be disable on focus state.
      * It works only if carousel is not in circular loop.
      */
     private _preventDefaultBtnFocus(): void {
@@ -436,7 +436,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }
     }
 
-    /** @hidden Adjust position of active item, based on slide direction */
+    /** @ignore Adjust position of active item, based on slide direction */
     private _adjustActiveItemPosition(slideDirection: SlideDirection, step: number = 1): void {
         // Move one step in the direction
         const positionAdjustment = slideDirection === SlideDirection.NEXT ? step : -step;
@@ -454,7 +454,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }
     }
 
-    /** @hidden Handles navigation button visibility */
+    /** @ignore Handles navigation button visibility */
     private _buttonVisibility(): void {
         if (!this.loop) {
             // Need to disable navigation button if either direction limit has reached.
@@ -480,7 +480,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }
     }
 
-    /** @hidden Handle when slide is added or removed */
+    /** @ignore Handle when slide is added or removed */
     private _onSlideUpdates(): void {
         this._slidesCopy = this.slides.toArray();
         this.currentActiveSlidesStartIndex = 0;
@@ -495,7 +495,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._changeDetectorRef.detectChanges();
     }
 
-    /** @hidden Initialize carousel with visible items */
+    /** @ignore Initialize carousel with visible items */
     private _initializeCarousel(): void {
         this._zone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
             // Handles navigator button enabled/disabled state
@@ -525,7 +525,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _goToFirstItem(): void {
         if (
             this.pageIndicatorsCountArray.length === 0 &&
@@ -537,7 +537,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }
     }
 
-    /** @hidden Initialize config for Carousel service */
+    /** @ignore Initialize config for Carousel service */
     private _initializeServiceConfig(): void {
         this._config.vertical = this.vertical;
         this._config.elementsAtOnce = this._visibleSlidesNumericCount;
@@ -548,7 +548,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /**
-     * @hidden Returns the slide swapping steps
+     * @ignore Returns the slide swapping steps
      */
     private _getStepTaken(event: PanEndOutput, actualActiveSlideIndex: number): number {
         let stepsCalculated: number;
@@ -577,7 +577,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         return stepsCalculated;
     }
 
-    /** @hidden Handles notification on visible slide change */
+    /** @ignore Handles notification on visible slide change */
     private _notifySlideChange(slideDirection: SlideDirection, firstActiveSlide?: CarouselItemInterface | null): void {
         const activeSlides: CarouselItemComponent[] = [];
         let firstActiveSlideIndex: number;
@@ -602,7 +602,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this.slideChange.emit(new CarouselActiveSlides(activeSlides, direction));
     }
 
-    /** @hidden Manages visibility for slides. Useful in managing tab order */
+    /** @ignore Manages visibility for slides. Useful in managing tab order */
     private _manageSlideVisibility(firstActiveSlideIndex: number): void {
         setTimeout(() => {
             this.slides.forEach((_slides, index) => {
@@ -620,7 +620,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }, this.slideTransitionDuration);
     }
 
-    /** @hidden Rtl change subscription */
+    /** @ignore Rtl change subscription */
     private _subscribeToRtl(): void {
         const refreshDirection = (): void => {
             this.dir = this._isRtl() ? 'rtl' : 'ltr';
@@ -634,7 +634,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._rtlService?.rtl.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => refreshDirection());
     }
 
-    /** @hidden On Swiping of slide, manage page indicator */
+    /** @ignore On Swiping of slide, manage page indicator */
     private _onSlideSwipe(event: PanEndOutput): void {
         this._slideSwiped = true;
         const firstActiveSlide = event.item;
@@ -659,7 +659,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /**
-     * @hidden Making slides visible when slides are dragged. Otherwise, it looses the effect.
+     * @ignore Making slides visible when slides are dragged. Otherwise, it looses the effect.
      */
     private _onSlideDrag(isDragging: boolean): void {
         if (isDragging) {
@@ -677,7 +677,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /**
-     * @hidden
+     * @ignore
      * Resizes inner carousel container to fit all items in the viewport and hide those which are not fully in it.
      */
     private _resizeContentContainer(): void {
@@ -724,7 +724,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /**
-     * @hidden
+     * @ignore
      * Calculates how many slides can be shown within current carousel viewport.
      * @returns Object containing fitting slides count and total width of those slides.
      */
@@ -766,7 +766,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         };
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getVisibleSlidesCount(): number {
         if (this._visibleSlidesCount !== 'auto') {
             return this._visibleSlidesCount;

@@ -19,25 +19,25 @@ export class MessageBoxSemanticIconComponent {
     @Input()
     glyph: string;
 
-    /** @hidden */
+    /** @ignore */
     get messageBoxConfig(): MessageBoxConfig {
         return this.messageBox?._messageBoxConfig || {};
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(@Optional() private messageBox?: MessageBoxHost) {}
 
-    /** @hidden */
+    /** @ignore */
     get _showSemanticIcon(): boolean {
         return !!this.messageBoxConfig.showSemanticIcon;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _getIcon(): string {
         return this.glyph || this.messageBoxConfig.customSemanticIcon || this._semanticIcon;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _semanticIcon(): string {
         switch (this.messageBoxConfig.type) {
             case 'error':

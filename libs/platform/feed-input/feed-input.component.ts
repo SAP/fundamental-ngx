@@ -52,19 +52,19 @@ export class FeedInputComponent implements AfterViewInit {
     @Input()
     maxHeight: number;
 
-    /** @hidden Event emitted when user click on send button */
+    /** @ignore Event emitted when user click on send button */
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-native
     submit = new EventEmitter<string>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('textAreaElement', { read: ElementRef })
     textarea: ElementRef;
 
-    /** @hidden Textarea entered value */
+    /** @ignore Textarea entered value */
     value: string | null;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _renderer: Renderer2) {
         warnOnce(
             'FeedInputComponent is deprecated and will be removed in future release. ' +
@@ -72,7 +72,7 @@ export class FeedInputComponent implements AfterViewInit {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         const lineHeight = this._getTextareaLineHeight();
 
@@ -81,19 +81,19 @@ export class FeedInputComponent implements AfterViewInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     onChange(): void {
         this.resize();
     }
 
-    /** @hidden Handle submit feed input value*/
+    /** @ignore Handle submit feed input value*/
     onSubmit(): void {
         if (this.value) {
             this.submit.emit(this.value);
         }
     }
 
-    /** @hidden Make grow textarea */
+    /** @ignore Make grow textarea */
     resize(): void {
         this._renderer.setStyle(this.textarea.nativeElement, 'height', 'inherit');
 
@@ -101,7 +101,7 @@ export class FeedInputComponent implements AfterViewInit {
         this._renderer.setStyle(this.textarea.nativeElement, 'height', `${totalHeight}px`);
     }
 
-    /** @hidden get line height of textarea */
+    /** @ignore get line height of textarea */
     private _getTextareaLineHeight(): number {
         if (this.textarea && this.textarea.nativeElement) {
             const lineHeight = window.getComputedStyle(this.textarea.nativeElement).getPropertyValue('line-height');
@@ -117,7 +117,7 @@ export class FeedInputComponent implements AfterViewInit {
         return 1;
     }
 
-    /** @hidden Get the total height including borders and scroll height */
+    /** @ignore Get the total height including borders and scroll height */
     private _getTextareaTotalHeight(): number {
         const computed = window.getComputedStyle(this.textarea.nativeElement);
 

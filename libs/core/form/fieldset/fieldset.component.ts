@@ -21,7 +21,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     standalone: true
 })
 export class FieldsetComponent {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-fieldset')
     fdFieldClass = true;
 }

@@ -7,9 +7,9 @@ export const MESSAGE_BOX_DEFAULT_CONFIG = new InjectionToken<MessageBoxConfig>('
 
 export type MessageBoxType = 'error' | 'success' | 'warning' | 'information' | 'confirmation';
 
-/** @hidden */
+/** @ignore */
 export abstract class MessageBoxHost {
-    /** @hidden */
+    /** @ignore */
     _messageBoxConfig: MessageBoxConfig | undefined;
 }
 

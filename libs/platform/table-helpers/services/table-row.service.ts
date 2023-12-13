@@ -28,19 +28,19 @@ export interface CellClickedModel {
 
 @Injectable()
 export class TableRowService<T = any> {
-    /** @hidden */
+    /** @ignore */
     private readonly _toggleRowSubject = new Subject<ToggleRowModel>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _scrollToOverlappedCellSubject = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _cellClickedSubject = new Subject<CellClickedModel>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _cellFocusedSubject = new Subject<FocusableItemPosition>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _toggleAllSelectableRowsSubject = new Subject<boolean>();
 
     /** Stream that emits when toggling all selectable rows is needed. */
@@ -61,7 +61,7 @@ export class TableRowService<T = any> {
     /** Editable cells map. */
     readonly editableCells = new Map<TableRow<any>, EditableTableCell[]>();
 
-    /** @hidden */
+    /** @ignore */
     readonly childRowsAdded$ = new Subject<{ row: TableRow; rowIndex: number; items: T[] }>();
 
     /** Stream to load child items for a particular rows. */

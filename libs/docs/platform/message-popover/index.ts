@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'message-popover';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/message-popover';
 export const API_FILE_KEY = 'messagePopover';
 export const I18N_KEY = 'platformMessagePopover';

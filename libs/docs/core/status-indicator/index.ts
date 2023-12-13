@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'status-indicator';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/status-indicator';
 export const API_FILE_KEY = 'statusIndicator';

@@ -20,7 +20,7 @@ export class OverflowExpandDirective<T extends any[] = any[]> implements Overflo
     @Input()
     fdOverflowExpandItems: T;
 
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard(
         dir: OverflowExpandDirective,
         ctx: OverflowExpandDirectiveContext
@@ -28,6 +28,6 @@ export class OverflowExpandDirective<T extends any[] = any[]> implements Overflo
         return true;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(public templateRef: TemplateRef<OverflowExpandDirectiveContext<T>>) {}
 }

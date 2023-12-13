@@ -16,7 +16,7 @@ class TemplateTestComponent {
     @ViewChild('testTemplate2', { static: true }) anchor2: WizardStepComponent;
     @ViewChild('testTemplate3', { static: true }) anchor3: WizardStepComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(WizardStepComponent)
     steps: QueryList<WizardStepComponent>;
 

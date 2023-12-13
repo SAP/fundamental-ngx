@@ -13,32 +13,32 @@ import { MatchBy, MatchingBy, MatchingStrategy } from '../models/matching-strate
  * Base data provider class.
  */
 export abstract class AbstractDataProvider<T> {
-    /** @hidden */
+    /** @ignore */
     abstract fetch(params: ProviderParams, start?: number, end?: number): Observable<T[]>;
 
-    /** @hidden */
+    /** @ignore */
     abstract getTotalItems(params?: Map<string, any>): Observable<number>;
 
-    /** @hidden */
+    /** @ignore */
     protected _keyPath: string;
 
-    /** @hidden */
+    /** @ignore */
     protected _matchingStrategy: MatchingStrategy = MatchingStrategy.STARTS_WITH;
 
-    /** @hidden */
+    /** @ignore */
     protected _matchingBy: MatchingBy | null = null;
 
-    /** @hidden */
+    /** @ignore */
     setLookupKey(key: string): void {
         this._keyPath = key;
     }
 
-    /** @hidden */
+    /** @ignore */
     setMatchingBy(matchingBy: MatchingBy): void {
         this._matchingBy = matchingBy;
     }
 
-    /** @hidden */
+    /** @ignore */
     setMatchingStrategy(strategy: MatchingStrategy): void {
         this._matchingStrategy = strategy;
     }
@@ -50,12 +50,12 @@ export abstract class AbstractDataProvider<T> {
 export class DataProvider<T> extends AbstractDataProvider<T> {
     /** Default limit for the pagination. */
     public defaultLimit = 50;
-    /** @hidden */
+    /** @ignore */
     constructor(protected values: Observable<T[]> | T[]) {
         super();
     }
 
-    /** @hidden */
+    /** @ignore */
     fetch(params: Map<string, any>): Observable<T[]> {
         const observable = isObservable(this.values) ? this.values : of(this.values);
 
@@ -124,7 +124,7 @@ export class DataProvider<T> extends AbstractDataProvider<T> {
         return matched;
     }
 
-    /** @hidden */
+    /** @ignore */
     matchesBy(item: any, pattern: string, matchingBy: MatchBy): boolean {
         const value = isJsObject(item) && matchingBy ? matchingBy(item) : item;
 
@@ -144,7 +144,7 @@ export class DataProvider<T> extends AbstractDataProvider<T> {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     protected hasObjectValue(obj: any, pattern: string): boolean {
         const values = objectValues(obj);
         const parentObj = objectToName(obj);
@@ -162,7 +162,7 @@ export class DataProvider<T> extends AbstractDataProvider<T> {
         return length2 > 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     private withLimit(data: Array<T>, limit?: number): Array<T> {
         if (limit && data.length > limit) {
             return data.slice(0, limit);

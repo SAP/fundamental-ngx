@@ -73,31 +73,31 @@ export class AvatarGroupHostComponent
     items: QueryList<AvatarGroupItemDirective>;
 
     /**
-     * @hidden
+     * @ignore
      * The portals to be rendered in the avatar group.
      **/
     @ContentChildren(AvatarGroupItemRendererDirective, { descendants: true })
     _portals: QueryList<AvatarGroupItemRendererDirective>;
 
-    /** @hidden */
+    /** @ignore */
     _resizeEmitter: Observable<ResizeObserverEntry[]> = inject(ResizeObserverDirective).resized;
 
     /** The reference to the host element */
     elementRef = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     _hiddenItems = signal<AvatarGroupItemRendererDirective[]>([]);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private _cdr = inject(ChangeDetectorRef);
 
-    /** @hidden */
+    /** @ignore */
     private _onChanges$ = new Subject<SimpleChanges>();
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
@@ -110,18 +110,18 @@ export class AvatarGroupHostComponent
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         this.buildComponentCssClass();
         this._onChanges$.next(changes);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         combineLatest([
             this._resizeEmitter.pipe(map((entries) => entries[0].contentRect.width)),
@@ -144,7 +144,7 @@ export class AvatarGroupHostComponent
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateVisibility(
         containerWidth: number,
         items: AvatarGroupItemRendererDirective[]

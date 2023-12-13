@@ -6,7 +6,7 @@ import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
     standalone: true
 })
 export class TableIconDirective implements OnChanges, CssClassBuilder, OnInit {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-table__icon')
     fdTableIconClass = true;
 
@@ -26,7 +26,7 @@ export class TableIconDirective implements OnChanges, CssClassBuilder, OnInit {
     @Input()
     navigation = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
     /** Function runs when component is initialized
@@ -37,12 +37,12 @@ export class TableIconDirective implements OnChanges, CssClassBuilder, OnInit {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden CssClassBuilder interface implementation
+    /** @ignore CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */

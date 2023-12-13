@@ -15,12 +15,12 @@ import { DialogRef } from '../utils/dialog-ref.class';
     providedIn: 'root'
 })
 export class DialogService extends DialogBaseService<DialogContainerComponent> {
-    /** @hidden */
+    /** @ignore */
     private platformId = inject(PLATFORM_ID);
-    /** @hidden */
+    /** @ignore */
     private readonly htmlElement?: HTMLHtmlElement;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Optional() @Inject(DIALOG_DEFAULT_CONFIG) private _defaultConfig: DialogConfig,
         @Optional() private _rtlService: RtlService,

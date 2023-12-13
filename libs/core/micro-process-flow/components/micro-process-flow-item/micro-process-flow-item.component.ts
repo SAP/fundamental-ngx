@@ -41,14 +41,14 @@ export class MicroProcessFlowItemComponent {
     @Input()
     intermediate = false;
 
-    /** @hidden */
+    /** @ignore */
     _lastItem = false;
 
     /** Element that can receive focus. */
     @ContentChild(MicroProcessFlowFocusableItemDirective)
     focusableElement: MicroProcessFlowFocusableItemDirective;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _cd: ChangeDetectorRef,
         public elRef: ElementRef

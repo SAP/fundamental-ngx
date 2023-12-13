@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'dialog';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/dialog';
 export const API_FILE_KEY = 'dialog';

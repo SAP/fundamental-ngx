@@ -56,19 +56,19 @@ import { SaveDialogContext } from '../../models/save-dialog.model';
     ]
 })
 export class ManageVariantItemComponent {
-    /** @Hidden */
+    /** @ignore */
     _form: FormGroup;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('formContainer', { read: FormGroupDirective })
     private readonly _formContainer: FormGroupDirective;
-    /** @hidden */
+    /** @ignore */
     _nameValidator: ValidatorFn[];
 
-    /** @hidden */
+    /** @ignore */
     private readonly _dialogConfig: SaveDialogContext;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public dialog: DialogRef<SaveDialogContext>,
         private readonly _formBuilder: FormBuilder
@@ -87,7 +87,7 @@ export class ManageVariantItemComponent {
             favourite: false
         });
     }
-    /** @Hidden */
+    /** @ignore */
     _submitForm(): void {
         this._formContainer.onSubmit(new Event('submit'));
 
@@ -98,7 +98,7 @@ export class ManageVariantItemComponent {
         this.dialog.close(this._form.value);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _variantNameValidator(data: SaveDialogContext): ValidatorFn {
         return (control): ValidationErrors | null =>
             data.existingVariantNames.includes(control.value) ? { nameTaken: true } : null;

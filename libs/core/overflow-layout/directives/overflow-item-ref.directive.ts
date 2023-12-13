@@ -37,7 +37,7 @@ export class OverflowItemRefDirective<T = any> implements OverflowItemRef<T> {
         return this._hidden;
     }
 
-    /** @hidden */
+    /** @ignore */
     _hidden = false;
 
     /** Index of the item in the visible or hidden array of Overflow Layout Component's items. */
@@ -61,13 +61,13 @@ export class OverflowItemRefDirective<T = any> implements OverflowItemRef<T> {
     @Input('fdOverflowItemRef')
     item: T;
 
-    /** @hidden */
+    /** @ignore */
     readonly injector = inject(INJECTOR);
 
-    /** @hidden */
+    /** @ignore */
     constructor(public templateRef: TemplateRef<OverflowItemDirectiveContext<T>>) {}
 
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard(
         dir: OverflowItemRefDirective,
         ctx: OverflowItemDirectiveContext

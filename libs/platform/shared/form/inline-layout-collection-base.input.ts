@@ -51,18 +51,18 @@ export class ResponsiveBreakPointConfig {
     providedIn: 'root'
 })
 export class ResponsiveBreakpointsService {
-    /** @hidden */
+    /** @ignore */
     breakpoints: Record<string, any> = {};
-    /** @hidden */
+    /** @ignore */
     activeBreakpoints: string[];
-    /** @hidden */
+    /** @ignore */
     minWidth = 'min-width';
-    /** @hidden */
+    /** @ignore */
     maxWidth = 'max-width';
-    /** @hidden */
+    /** @ignore */
     unit = 'px';
 
-    /** @hidden */
+    /** @ignore */
     constructor(readonly _breakpointObserver: BreakpointObserver) {}
 
     /** subscribe to get current screen size based on config provided */
@@ -77,7 +77,7 @@ export class ResponsiveBreakpointsService {
         return breakPointName;
     }
 
-    /** @hidden when screen size changes from one breakpoint to another */
+    /** @ignore when screen size changes from one breakpoint to another */
     private _breakPointMeet(breakPointMatches: BreakpointState): string {
         let breakPointName: string | undefined;
 
@@ -92,7 +92,7 @@ export class ResponsiveBreakpointsService {
         return breakPointName ?? 'S';
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getBreakpoints(config: ResponsiveBreakPointConfig): string[] {
         let breakPointStr: string;
         this.activeBreakpoints = [];
@@ -125,7 +125,7 @@ export class ResponsiveBreakpointsService {
         return this.activeBreakpoints;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getBreakpointName(breakpointValue): string {
         return this.breakpoints[breakpointValue];
     }
@@ -146,31 +146,31 @@ export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInpu
         return this._inlineLayout;
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _inlineCurrentValue$ = new BehaviorSubject<boolean>(false);
 
-    /** @hidden */
+    /** @ignore */
     protected _responsiveBreakPointConfig: ResponsiveBreakPointConfig;
 
-    /** @hidden */
+    /** @ignore */
     private _inlineLayout: InlineLayout;
 
-    /** @hidden */
+    /** @ignore */
     private _xlIsInline: boolean;
 
-    /** @hidden */
+    /** @ignore */
     private _lgIsInline: boolean;
 
-    /** @hidden */
+    /** @ignore */
     private _mdIsInline: boolean;
 
-    /** @hidden */
+    /** @ignore */
     private _sIsInline: boolean;
 
-    /** @hidden */
+    /** @ignore */
     private _isInLineLayoutEnabled = false;
 
-    /** @hidden */
+    /** @ignore */
     protected constructor(
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -189,7 +189,7 @@ export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInpu
         this._responsiveBreakPointConfig = _defaultResponsiveBreakPointConfig || new ResponsiveBreakPointConfig();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         super.ngOnInit();
 
@@ -202,7 +202,7 @@ export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInpu
         }
     }
 
-    /** @hidden set values of inline for each screen layout */
+    /** @ignore set values of inline for each screen layout */
     private _setFieldLayout(inlineLayout?: InlineLayout): void {
         if (!inlineLayout) {
             this._isInLineLayoutEnabled = false;
@@ -218,7 +218,7 @@ export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInpu
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updateLayout(currentBreakingPointName: string): void {
         if (this._isInLineLayoutEnabled) {
             switch (currentBreakingPointName) {

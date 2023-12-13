@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'side-navigation';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/side-navigation';
 export const API_FILE_KEY = 'sideNavigation';
 export const I18N_KEY = 'coreNestedList';

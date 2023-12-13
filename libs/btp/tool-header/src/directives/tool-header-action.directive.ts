@@ -23,10 +23,10 @@ export class ToolHeaderActionDirective extends ToolHeaderActionClass {
     @ContentChild(ButtonComponent, { descendants: true })
     button: ButtonComponent;
 
-    /** @hidden */
+    /** @ignore */
     templateRef = inject<TemplateRef<ToolHeaderActionContext>>(TemplateRef);
 
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard(dir: ToolHeaderActionDirective, ctx: unknown): ctx is ToolHeaderActionContext {
         return !(dir.isSeparator || dir.forceVisibility);
     }

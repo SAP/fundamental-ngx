@@ -101,51 +101,51 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     @Output()
     readonly dropCancelled = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(DND_ITEM)
     dndItems: QueryList<DndItem<T>>;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class')
     private readonly _initialClass = 'fd-dnd-list';
 
-    /** @hidden */
+    /** @ignore */
     private _elementsCoordinates: ElementChord[];
 
-    /** @hidden */
+    /** @ignore */
     private _closestItemIndex: number | null = null;
 
-    /** @hidden */
+    /** @ignore */
     private _closestItemPosition: 'before' | 'after' | null = null;
 
     /** An RxJS Subject that will kill the current data stream (for unsubscribing)  */
     private readonly _refresh$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onDestroy$ = new Subject<void>();
 
-    /** @hidden  */
+    /** @ignore  */
     private _dndItemReference: DndItem[];
 
-    /** @hidden */
+    /** @ignore */
     private _draggable = true;
 
-    /** @hidden */
+    /** @ignore */
     private _detectedDropMode: 'shift' | 'group';
 
-    /** @hidden */
+    /** @ignore */
     private _linesRemoved = true;
 
-    /** @hidden */
+    /** @ignore */
     private _indicatorsRemoved = true;
 
-    /** @hidden */
+    /** @ignore */
     private _draggedItem: T | undefined;
 
-    /** @hidden */
+    /** @ignore */
     private _ignoreDrop = false;
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._changeDraggableState(this._draggable);
         this.dndItems.changes
@@ -153,7 +153,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
             .subscribe(() => this.refreshQueryList());
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -323,14 +323,14 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setDisabledItem(itemIndex: number): void {
         this.dndItems.forEach((item, index) => {
             item.setDisabledState(index === itemIndex);
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _selectDropModeIndicator(
         draggedItemIndex: number,
         closestItem: ElementChord | undefined,
@@ -369,19 +369,19 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _removeAllLines(): void {
         this._linesRemoved = true;
         this.dndItems.forEach((item) => item.removeLine());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _removeAllReplaceIndicators(): void {
         this._indicatorsRemoved = true;
         this.dndItems.forEach((item) => item.removeReplaceIndicator());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _createLine(closestItemIndex: number, linkPosition: LinkPosition): void {
         this._removeAllLines();
         this._removeAllReplaceIndicators();
@@ -389,7 +389,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         this._dndItemReference[closestItemIndex].createLine(linkPosition, this.gridMode);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _createReplaceIndicator(closestItemIndex: number): void {
         this._removeAllLines();
         this._removeAllReplaceIndicators();
@@ -398,7 +398,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     }
 
     /**
-     *  @hidden
+     *  @ignore
      * Return information if an element is placed before the dragged element
      */
     private _isBefore(draggedElement: ElementRef, targetElement: ElementRef): boolean {
@@ -421,7 +421,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _changeDraggableState(draggable: boolean): void {
         if (this.dndItems) {
             this.dndItems.forEach((item) => {

@@ -18,3 +18,4 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'button';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/btp/button';

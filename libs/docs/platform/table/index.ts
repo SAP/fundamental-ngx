@@ -61,5 +61,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'table';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/table';
 export const API_FILE_KEY = 'table';
 export const I18N_KEY = 'platformTable';

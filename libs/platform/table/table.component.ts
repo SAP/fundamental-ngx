@@ -383,7 +383,7 @@ export class TableComponent<T = any>
     @Input()
     loadPagesBefore = false;
 
-    /** @hidden */
+    /** @ignore */
     _selectionMode: SelectionModeValue = SelectionMode.NONE;
 
     /** Sets selection mode for the table. 'single' | 'multiple' | 'none' */
@@ -398,7 +398,7 @@ export class TableComponent<T = any>
         return this._selectionMode;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _enableTristateMode = false;
 
     /**
@@ -443,7 +443,7 @@ export class TableComponent<T = any>
     @Input()
     ariaLabelledBy: string;
 
-    /** @hidden */
+    /** @ignore */
     private _shouldCheckNewRows = false;
 
     /** Event emitted when current preset configuration has been changed. */
@@ -505,40 +505,40 @@ export class TableComponent<T = any>
     /** Event emitted when a cell is focused. */
     @Output()
     readonly cellFocused = new EventEmitter<any>();
-    /** @hidden */
+    /** @ignore */
     @ViewChild('tableScrollable')
     readonly tableScrollable: TableScrollable;
-    /** @hidden */
+    /** @ignore */
     @ViewChild('tableContainer')
     readonly tableContainer: ElementRef<HTMLDivElement>;
-    /** @hidden */
+    /** @ignore */
     @ViewChild(FdTableComponent, { read: ElementRef })
     readonly table: ElementRef<HTMLDivElement>;
-    /** @hidden */
+    /** @ignore */
     @ViewChild(FDK_FOCUSABLE_GRID_DIRECTIVE)
     readonly _focusableGrid: FocusableGridDirective;
-    /** @hidden */
+    /** @ignore */
     @ViewChild('tableBody', { read: ElementRef })
     private readonly _tableBody: ElementRef<HTMLElement>;
-    /** @hidden */
+    /** @ignore */
     @ViewChild(DndListDirective)
     private readonly _dndDirective: Nullable<DndListDirective<TableRow>>;
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(TableColumn)
     readonly columns: QueryList<TableColumn>;
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(EditableTableCell, { descendants: true })
     readonly customEditableCells: QueryList<EditableTableCell>;
-    /** @hidden */
+    /** @ignore */
     @ContentChild(TABLE_TOOLBAR)
     readonly tableToolbar: TableToolbarInterface;
-    /** @hidden */
+    /** @ignore */
     get initialSortBy(): CollectionSort[] {
         return this.initialState?.initialSortBy ?? [];
     }
 
     /**
-     * @hidden
+     * @ignore
      * Columns to be rendered in the template
      */
     get _visibleColumns(): TableColumn[] {
@@ -546,19 +546,19 @@ export class TableComponent<T = any>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Columns to be rendered as a pop-in columns.
      */
     get _poppingColumns(): TableColumn[] {
         return this._tableService.poppingColumns$.value;
     }
 
-    /** @hidden */
+    /** @ignore */
     get isTreeTable(): boolean {
         return !!this._dndTableDirective?.isTreeTable;
     }
 
-    /** @hidden */
+    /** @ignore */
     get enableRowReordering(): boolean {
         return !!this._dndTableDirective?.enableRowReordering;
     }
@@ -568,22 +568,22 @@ export class TableComponent<T = any>
         return !!this._dndTableDirective?.isTreeTable && !!this._dndTableDirective?.enableRowReordering;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _semanticHighlightingColumnWidth(): number {
         return this.semanticHighlighting ? SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH : 0;
     }
 
-    /** @hidden Sum of widths of fixed columns (semantic highlighting, selection) */
+    /** @ignore Sum of widths of fixed columns (semantic highlighting, selection) */
     get _fixedColumnsPadding(): number {
         return this._semanticHighlightingColumnWidth + this._selectionColumnWidth;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _tableWidthPx(): number {
         return this.tableContainer.nativeElement.getBoundingClientRect().width;
     }
 
-    /** @hidden */
+    /** @ignore */
     get loadingState(): boolean {
         return (
             this.loading ??
@@ -606,7 +606,7 @@ export class TableComponent<T = any>
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     get _ariaLabelledBy(): string | null {
         if (this.ariaLabelledBy) {
             return this.ariaLabelledBy;
@@ -615,86 +615,86 @@ export class TableComponent<T = any>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Representation of combined table rows.
      * Contains all rows including group rows.
      */
     _tableRows: TableRow<T>[] = [];
     /**
-     * @hidden
+     * @ignore
      * Representation of table rows that came from dataSource.
      * Contains all rows including group rows.
      */
     _dataSourceTableRows: TableRow<T>[] = [];
     /**
-     * @hidden
+     * @ignore
      * Representation of added table rows.
      */
     _newTableRows: TableRow<T>[] = [];
     /**
-     * @hidden
+     * @ignore
      * Visible table rows.
      * Rows list that is used to be rendered in the ui.
      * Based on _tableRows and excludes hidden rows.
      */
     _tableRowsVisible: TableRow<T>[] = [];
     /**
-     * @hidden
+     * @ignore
      * Table Column Map. Where key is column key and value is column
      */
     _keyToColumnMap: Map<string, TableColumn> = new Map();
     /**
-     * @hidden
+     * @ignore
      * Freezable column names and their respective indexes
      */
     _freezableColumns: Map<string, number> = new Map();
     /**
-     * @hidden
+     * @ignore
      * Freezable column names and their respective indexes for columns that will be frozen to the end of the table
      */
     _freezableEndColumns: Map<string, number> = new Map();
-    /** @hidden */
+    /** @ignore */
     _tableColumnsLength = 0;
-    /** @hidden */
+    /** @ignore */
     _checkedState: boolean | null = false;
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-table--group')
     _isGroupTable = false;
     /**
-     * @hidden
+     * @ignore
      * Used to create a row component placeholder and set data in it rather than re-create the row component when data changes.
      * Optimizes performance due to skipping initial setup of the component.
      */
     _tableRowsInViewPortPlaceholder: number[] = [];
-    /** @hidden */
+    /** @ignore */
     _dndTableRowsPlaceholder: TableRow[] = [];
-    /** @hidden */
+    /** @ignore */
     _isSelectionColumnShown = false;
-    /** @hidden */
+    /** @ignore */
     readonly _toolbarContext: ToolbarContext;
-    /** @hidden */
+    /** @ignore */
     _navigatedRowIndex: number;
-    /** @hidden */
+    /** @ignore */
     _selectionColumnWidth = 0;
-    /** @hidden */
+    /** @ignore */
     readonly tableColumnsStream: Observable<TableColumn[]>;
-    /** @hidden */
+    /** @ignore */
     _loadPreviousPages = false;
-    /** @hidden */
+    /** @ignore */
     _rtl = false;
-    /** @hidden */
+    /** @ignore */
     readonly _dataSourceDirective = inject<TableDataSourceDirective<T>>(TableDataSourceDirective);
-    /** @hidden */
+    /** @ignore */
     readonly _tableRowService = inject(TableRowService);
-    /** @hidden */
+    /** @ignore */
     readonly initialState = inject<TableInitialState>(FDP_TABLE_STATE_DIRECTIVE, {
         optional: true
     });
-    /** @hidden */
+    /** @ignore */
     readonly _virtualScrollDirective = inject<TableVirtualScroll>(FDP_TABLE_VIRTUAL_SCROLL_DIRECTIVE, {
         optional: true
     });
-    /** @hidden */
+    /** @ignore */
     readonly _dndTableDirective = inject<TableDraggable>(FDP_TABLE_DRAGGABLE_DIRECTIVE, {
         optional: true
     });
@@ -702,62 +702,62 @@ export class TableComponent<T = any>
     /** Loading state */
     @Input()
     private loading: boolean | undefined;
-    /** @hidden */
+    /** @ignore */
     private _semanticHighlightingKey: string;
-    /** @hidden */
+    /** @ignore */
     private _forceSemanticHighlighting = false;
-    /** @hidden */
+    /** @ignore */
     private readonly _isShownSortSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
-    /** @hidden */
+    /** @ignore */
     private readonly _isShownFilterSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
-    /** @hidden */
+    /** @ignore */
     private readonly _isShownGroupSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
-    /** @hidden */
+    /** @ignore */
     private readonly _isShownColumnSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
     /**
-     * @hidden
+     * @ignore
      * Indicates when all items are checked
      */
     private _checkedAll = false;
     /**
-     * @hidden
+     * @ignore
      * Indicates whether at least 1 item is checked
      */
     private _checkedAny = false;
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
-    /** @hidden */
+    /** @ignore */
     private _viewInitiated = false;
-    /** @hidden */
+    /** @ignore */
     private _addedItems: T[] = [];
-    /** @hidden */
+    /** @ignore */
     private _columnsWidthSet = false;
-    /** @hidden */
+    /** @ignore */
     private _dndLoadingState = false;
-    /** @hidden */
+    /** @ignore */
     private readonly _rangeSelector = new RangeSelector();
-    /** @hidden */
+    /** @ignore */
     private _currentPreset: PlatformTableManagedPreset = {};
-    /** @hidden */
+    /** @ignore */
     private _initialStateSet = false;
-    /** @hidden */
+    /** @ignore */
     private _rowHeightManuallySet = false;
-    /** @hidden */
+    /** @ignore */
     private _shouldEmitRowsChange = false;
-    /** @hidden */
+    /** @ignore */
     private readonly _tableHeaderResizer = inject(TableHeaderResizerDirective);
 
     /**
-     * @hidden
+     * @ignore
      * Mapping function for the trackBy, provided by the user.
      * Is needed, because we are wrapping user supplied data into a `TableRow` class.
      */
     _rowTrackBy: TrackByFunction<number>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _defaultTrackBy: TrackByFunction<number> = (index: number) => index;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _ngZone: NgZone,
         private readonly _cdr: ChangeDetectorRef,
@@ -819,7 +819,7 @@ export class TableComponent<T = any>
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if ('loading' in changes) {
             this._tableService.setTableLoading(this.loadingState);
@@ -861,14 +861,14 @@ export class TableComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._tableColumnResizeService.setTableRef(this);
 
         this._isGroupTable = (this.initialState?.initialGroupBy?.length ?? 0) > 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._viewInitiated = true;
 
@@ -919,7 +919,7 @@ export class TableComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewChecked(): void {
         // When table rows are set, emit an event to manipulate the view (e.g., scroll to some row).
         if (!this._shouldEmitRowsChange) {
@@ -932,7 +932,7 @@ export class TableComponent<T = any>
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
@@ -1056,7 +1056,7 @@ export class TableComponent<T = any>
         this.allRowsExpanded.emit();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _markAsExpanded(rows: TableRow<T>[]): void {
         rows.forEach((e) => {
             e.expanded = true;
@@ -1340,7 +1340,7 @@ export class TableComponent<T = any>
 
     // Private API
 
-    /** @hidden */
+    /** @ignore */
     _scrollToOverlappedCell(): void {
         this.tableScrollable.scrollToOverlappedCell(
             this._rtl,
@@ -1349,7 +1349,7 @@ export class TableComponent<T = any>
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     _calculatingLoading(isLoading: boolean): void {
         if (this._dndLoadingState === isLoading) {
             return;
@@ -1360,7 +1360,7 @@ export class TableComponent<T = any>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Toggle selectable row in SelectionMode.MULTIPLE
      */
     _toggleMultiSelectRow(rowToToggle: TableRow, event?: Event): void {
@@ -1391,7 +1391,7 @@ export class TableComponent<T = any>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Toggle selectable row in SelectionMode.SINGLE
      */
     _toggleSingleSelectableRow(rowToToggle: TableRow): void {
@@ -1422,7 +1422,7 @@ export class TableComponent<T = any>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Select / Unselect all selectable rows
      */
     _toggleAllSelectableRows(selectAll: boolean): void {
@@ -1447,7 +1447,7 @@ export class TableComponent<T = any>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Create table row selection event
      */
     _emitRowSelectionChangeEvent(added: TableRow[], removed: TableRow[], all: boolean = false): void {
@@ -1465,14 +1465,14 @@ export class TableComponent<T = any>
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     _onCellClick(colIdx: number, row: TableRow<T>): void {
         if (row.state === 'readonly' && isTreeRowFirstCell(colIdx, row)) {
             this._toggleGroupRow(row);
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _onRowClick(row: TableRow<T> | null, event: Event): void {
         if (row && row.state !== 'readonly') {
             return;
@@ -1494,7 +1494,7 @@ export class TableComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _emitRowActivate(row: TableRow<T>): void {
         if (!this.rowsActivable) {
             return;
@@ -1505,7 +1505,7 @@ export class TableComponent<T = any>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Expand/Collapse group row
      */
     _toggleGroupRow(groupRow: TableRow<T>): void {
@@ -1521,7 +1521,7 @@ export class TableComponent<T = any>
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     _emitRowNavigate(row: TableRow<T>): void {
         if (!row.navigatable) {
             return;
@@ -1540,13 +1540,13 @@ export class TableComponent<T = any>
         this._dataSourceDirective._tableDataSource.fetch(this.getTableState());
     }
 
-    /** @hidden */
+    /** @ignore */
     onTableRowsChanged(): void {
         this._calculateVisibleTableRows();
         this._calculateCheckedAll();
     }
 
-    /** @hidden */
+    /** @ignore */
     toggleExpandableTableRow(rowToToggle: TableRow, forceFetch = false): void {
         rowToToggle.forceFetch = forceFetch;
         const expanded = (rowToToggle.expanded = !rowToToggle.expanded);
@@ -1567,7 +1567,7 @@ export class TableComponent<T = any>
         this.onTableRowsChanged();
     }
 
-    /** @hidden */
+    /** @ignore */
     _onSpyIntersect(intersected: boolean): void {
         if (!intersected) {
             return;
@@ -1590,7 +1590,7 @@ export class TableComponent<T = any>
         this._tableRows.map((row, index) => (row.index = index));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToTableRowsPipe(): void {
         this._subscriptions.add(
             /*
@@ -1657,7 +1657,7 @@ export class TableComponent<T = any>
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToTableStateChanges(): void {
         this._subscriptions.add(
             this._tableService.tableStateChanges$.subscribe(() => {
@@ -1719,7 +1719,7 @@ export class TableComponent<T = any>
         this._listenToTableRowStateChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToTableRowStateChange(): void {
         this._subscriptions.add(
             this._tableRowService.scrollToOverlappedCell$.subscribe(() => {
@@ -1783,7 +1783,7 @@ export class TableComponent<T = any>
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _createTableRowsByDataSourceItems(source: T[]): TableRow<T>[] {
         let rows: TableRow<T>[];
         if (this.isTreeTable) {
@@ -1809,7 +1809,7 @@ export class TableComponent<T = any>
         return rows;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _createTreeTableRowsByDataSourceItems(source: T[]): TableRow<T>[] {
         const item = source[0] as any;
 
@@ -1834,7 +1834,7 @@ export class TableComponent<T = any>
         return [];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setTableRows(rows = this._dataSourceTableRows): void {
         this._dataSourceTableRows = rows;
         this._tableRows = [...this._newTableRows, ...this._dataSourceTableRows];
@@ -1853,7 +1853,7 @@ export class TableComponent<T = any>
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateVisibleTableRows(): void {
         this._tableRowsVisible = this._tableRows.filter((row) => !row.hidden);
         if (this._virtualScrollDirective?.virtualScroll) {
@@ -1863,7 +1863,7 @@ export class TableComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToRowHeightChange(): void {
         this._subscriptions.add(
             this.contentDensityObserver
@@ -1884,7 +1884,7 @@ export class TableComponent<T = any>
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToColumns(): void {
         this.columns.changes.pipe(startWith(null)).subscribe(() => {
             const columns = this.getTableColumns();
@@ -1950,17 +1950,17 @@ export class TableComponent<T = any>
         this._calculateTableColumnsLength();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateTableColumnsLength(): void {
         this._tableColumnsLength = this._visibleColumns.length + (this._isSelectionColumnShown ? 1 : 0);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateIsShownNavigationColumn(): void {
         this._tableService._isShownNavigationColumn$.next(this._tableRows.some((tableRow) => tableRow.navigatable));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setFreezableInfo(): void {
         this._freezableColumns = getFreezableColumns(this._visibleColumns, this.freezeColumnsTo);
         this._freezableEndColumns = getFreezableEndColumns(this._visibleColumns, this.freezeEndColumnsTo);
@@ -1971,12 +1971,12 @@ export class TableComponent<T = any>
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _buildColumnsMap(columns = this._tableService.tableColumns$.value): void {
         this._keyToColumnMap = new Map(columns.map((column) => [column.key, column]));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateCheckedAll(): void {
         const selectableRows = getSelectableRows(this._tableRows, this.selectableKey);
         const totalSelected = selectableRows.filter((r) => r.checked);
@@ -1989,7 +1989,7 @@ export class TableComponent<T = any>
      * Propagates tristate selection mode to the tree. It starts with updating a state for all the parents and then
      * to children
      *
-     * @hidden
+     * @ignore
      */
     private _applyTristateSelection(row: TableRow, addedRows: TableRow<T>[], removedRows: TableRow<T>[]): void {
         if (!this.enableTristateMode) {
@@ -1999,7 +1999,7 @@ export class TableComponent<T = any>
         this._applySelectionToChildren(row, addedRows, removedRows);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _applySelectionToParents(row: TableRow, addedRows: TableRow<T>[], removedRows: TableRow<T>[]): void {
         let currentRow = row.parent;
 
@@ -2026,12 +2026,12 @@ export class TableComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _applySelectionToChildren(row: TableRow, addedRows: TableRow<T>[], removedRows: TableRow<T>[]): void {
         applySelectionToChildren(this._tableRows, row, addedRows, removedRows);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToPageScrolling(): void {
         this._subscriptions.add(
             this._tableScrollDispatcher
@@ -2048,7 +2048,7 @@ export class TableComponent<T = any>
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToColumnPropertiesChange(): void {
         this._subscriptions.add(
             this._tableService.markForCheck$.pipe(debounceTime(5)).subscribe(() => this._cdr.markForCheck())
@@ -2058,7 +2058,7 @@ export class TableComponent<T = any>
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToTableWidthChanges(): void {
         this._subscriptions.add(
             resizeObservable(this.tableContainer.nativeElement)
@@ -2086,7 +2086,7 @@ export class TableComponent<T = any>
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToTableContainerMouseLeave(): void {
         this._ngZone.runOutsideAngular(() => {
             this._subscriptions.add(
@@ -2097,7 +2097,7 @@ export class TableComponent<T = any>
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initScrollPosition(): void {
         const state = this.getTableState();
 
@@ -2108,7 +2108,7 @@ export class TableComponent<T = any>
     }
 
     /**
-     * @hidden
+     * @ignore
      * Resets editable rows discarding the editable rows array.
      */
     private _resetEditState(): void {
@@ -2119,7 +2119,7 @@ export class TableComponent<T = any>
         this._setTableRows();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToLoadingAndRefocusCell(): void {
         this._subscriptions.add(
             this._tableService.tableLoading$.pipe(filter((loadingState) => !loadingState)).subscribe(() => {
@@ -2132,27 +2132,27 @@ export class TableComponent<T = any>
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _onZoneFree(callback: () => void): void {
         this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
             callback();
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setSemanticHighlighting(): void {
         this._tableService._semanticHighlighting$.next(this.semanticHighlighting);
         this._tableService._semanticHighlightingColumnWidth$.next(this._semanticHighlightingColumnWidth);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setSelectionColumnWidth(): void {
         this._selectionColumnWidth = this._isSelectionColumnShown
             ? SELECTION_COLUMN_WIDTH.get(this.contentDensityObserver.value) ?? 0
             : 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _checkCellMock(): void {
         this._tableColumnResizeService.cellMockVisible$.next(
             this._tableColumnResizeService.fixedWidth &&

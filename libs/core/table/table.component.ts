@@ -47,7 +47,7 @@ export const FdTableContentDensityProviderParams = {
     standalone: true
 })
 export class TableComponent implements AfterContentInit, AfterViewInit {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-table')
     fdTableClass = true;
 
@@ -95,14 +95,14 @@ export class TableComponent implements AfterContentInit, AfterViewInit {
         return this._allCellsFocusable;
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(TableCellDirective, { descendants: true })
     readonly _cells: QueryList<TableCellDirective>;
 
-    /** @hidden */
+    /** @ignore */
     private _allCellsFocusable = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _tableService: TableService,
         private readonly _contentDensityObserver: ContentDensityObserver,
@@ -112,14 +112,14 @@ export class TableComponent implements AfterContentInit, AfterViewInit {
         this._contentDensityObserver.subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._cells.changes
             .pipe(startWith(this._cells), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this._updateCells());
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._propagateKeys(this.keys);
     }
@@ -129,14 +129,14 @@ export class TableComponent implements AfterContentInit, AfterViewInit {
         this._propagateKeys(keys);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _propagateKeys(keys: string[]): void {
         if (keys) {
             this._tableService.changeKeys([...keys]);
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updateCells(): void {
         this._ngZone.onStable.pipe(first()).subscribe(() => {
             this._cells?.forEach((cell) => (cell.focusable = cell.focusable || this.allCellsFocusable));

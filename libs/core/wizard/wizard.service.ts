@@ -6,10 +6,10 @@ import { WizardStepComponent } from './wizard-step/wizard-step.component';
 
 @Injectable()
 export class WizardService {
-    /** @hidden */
+    /** @ignore */
     constructor(@Optional() private _rtlService: RtlService) {}
 
-    /** @hidden */
+    /** @ignore */
     progressBarKeyHandler(event: any, steps: QueryList<WizardStepComponent>, index: number): void {
         const rtlDirection: boolean = this._rtlService && this._rtlService.rtl.getValue();
         if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
@@ -34,7 +34,7 @@ export class WizardService {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _focusNext(index: number, steps: QueryList<WizardStepComponent>): void {
         if (index + 1 < steps.length) {
             steps.get(index + 1)?.progressBarLink.nativeElement.focus();
@@ -43,7 +43,7 @@ export class WizardService {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _focusPrevious(index: number, steps: QueryList<WizardStepComponent>): void {
         if (index - 1 >= 0) {
             steps.get(index - 1)?.progressBarLink.nativeElement.focus();

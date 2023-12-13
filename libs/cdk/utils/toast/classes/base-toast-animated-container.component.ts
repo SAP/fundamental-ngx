@@ -10,23 +10,23 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
     implements OnDestroy
 {
     /**
-     * @hidden
+     * @ignore
      * The state of the Message Toast animations.
      */
     @HostBinding('@state')
     private _animationState = 'void';
 
     /**
-     * @hidden
+     * @ignore
      * Whether the animations should be disabled.
      */
     @HostBinding('@.disabled')
     private _animationsDisabled = false;
 
-    /** @hidden */
+    /** @ignore */
     protected _ngZone = inject(NgZone);
 
-    /** @hidden */
+    /** @ignore */
     constructor(config: P) {
         super(config);
         this._animationsDisabled = !config.animated;
@@ -42,13 +42,13 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
         this._animationState = 'hidden';
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._completeExit();
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handle end of animations, updating the state of the Message Toast.
      */
     @HostListener('@state.done', ['$event'])
@@ -72,7 +72,7 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
     }
 
     /**
-     * @hidden
+     * @ignore
      * Waits for the zone to settle before removing the element. Helps prevent
      * errors where we end up removing an element which is in the middle of an animation.
      */

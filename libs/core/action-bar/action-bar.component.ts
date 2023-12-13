@@ -29,7 +29,7 @@ import { warnOnce } from '@fundamental-ngx/core/utils';
     standalone: true
 })
 export class ActionBarComponent {
-    /** @hidden */
+    /** @ignore */
     constructor() {
         warnOnce('ActionBarComponent is deprecated since version 0.40.0 and will be removed in future release.');
     }

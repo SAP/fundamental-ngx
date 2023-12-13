@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'multi-input';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/multi-input';
 export const API_FILE_KEY = 'multiInput';
 export const I18N_KEY = 'coreMultiInput';

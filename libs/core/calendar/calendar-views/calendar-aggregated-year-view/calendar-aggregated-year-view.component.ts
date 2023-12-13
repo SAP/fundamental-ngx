@@ -74,7 +74,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Today cell label ID
      */
     get _todayLabelId(): string {
@@ -82,7 +82,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Selected date label ID
      */
     get _selectedDateLabelId(): string {
@@ -90,45 +90,45 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      *  This variable is used to define which year from calendarYearList should be focusable by tab key
      */
     _activeYear: AggregatedYear;
 
     /**
-     * @hidden
+     * @ignore
      *  Parameter that stores the dozen of years that are currently being displayed.
      */
     _calendarYearListGrid: CalendarAggregatedYear[][];
 
     /**
-     * @hidden
+     * @ignore
      * Current period of years selected
      */
     _yearsSelected: AggregatedYear | null;
 
     /**
-     * @hidden
+     * @ignore
      * Parameter storing the year of the present day.
      */
     _currentYear: number;
 
     /**
-     * @hidden
+     * @ignore
      * Parameter storing first shown year on list
      */
     private _firstYearInList: number;
 
     /**
-     * @hidden
+     * @ignore
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _initiated = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _eRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
@@ -140,7 +140,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
         this._currentYear = _dateTimeAdapter.getYear(_dateTimeAdapter.today());
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._initiated = true;
 
@@ -156,7 +156,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (
             this._initiated &&
@@ -169,7 +169,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -214,7 +214,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that allows to focus elements inside this component
      */
     _focusElementBySelector(elementSelector: string): void {
@@ -225,7 +225,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method returning index of aggregated year index cell
      */
     _getIndex(rowIndex: number, colIndex: number): number {
@@ -233,7 +233,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Get id of calendar's aggregated year item
      */
     _getId(index: number): string {
@@ -241,14 +241,14 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Check if specified year is between start year and end year)
      */
     _isBetween(aggregatedYear: AggregatedYear, yearToCheck: number): boolean {
         return aggregatedYear.endYear >= yearToCheck && aggregatedYear.startYear <= yearToCheck;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _constructYearsGrid(): void {
         const displayedYearsAmount: number = this.aggregatedYearsViewGrid.cols * this.aggregatedYearsViewGrid.rows;
         const calendarYearList: CalendarAggregatedYear[] = [];
@@ -295,7 +295,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Returns year name as a string.
      */
     private _getYearsName(years: AggregatedYear): string {
@@ -312,7 +312,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Returns aria year name as a string.
      */
     private _getAriaYearsName(years: AggregatedYear): string {
@@ -331,7 +331,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Returns year name taking into account yearMapping.
      */
     private _getYearString(year: number, defaultStr: string): string {
@@ -342,7 +342,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Amount of years displayed in year view
      */
     private _yearsInOnePeriod(): number {
@@ -354,7 +354,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Amount of years displayed in aggregated year view
      */
     private _periodsAmount(): number {
@@ -362,7 +362,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that returns active cell, which means:
      * if there is any selected year, return selected year
      * if there is no selected year, but there is current year, return current year
@@ -383,7 +383,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Returns transformed 1d array from 2d year grid.
      */
     private _getYearsList(): CalendarAggregatedYear[] {
@@ -391,7 +391,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method to put configuration and listeners on calendar keyboard service
      */
     private _setupKeyboardService(): void {
@@ -421,7 +421,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _focusOnCellByIndex(index: number): void {
         this._focusElementBySelector(`#${this._getId(index)}`);
     }

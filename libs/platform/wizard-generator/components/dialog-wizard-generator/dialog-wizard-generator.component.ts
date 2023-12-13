@@ -48,7 +48,7 @@ import { WizardBodyComponent } from '../wizard-body/wizard-body.component';
     ]
 })
 export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
-    /** @hidden */
+    /** @ignore */
     @ViewChild('defaultConfirmationDialogTemplate') defaultConfirmationDialogTemplate: TemplateRef<HTMLElement>;
 
     /**
@@ -102,10 +102,10 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
     /** User-defined template for "Review" button */
     reviewButtonTemplate?: TemplateRef<HTMLElement>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _messageBoxService = inject(MessageBoxService);
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         _wizardGeneratorService: WizardGeneratorService,
         _cd: ChangeDetectorRef,
@@ -197,21 +197,21 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     _goBackFn: () => void = () => this.goBack();
     /**
-     * @hidden
+     * @ignore
      */
     _goNextFn: () => Promise<void> = () => this.goNext();
 
     /**
-     * @hidden
+     * @ignore
      */
     _finishFn: () => Promise<void> = () => this.finish();
 
     /**
-     * @hidden
+     * @ignore
      */
     _cancelFn: () => void = () => this.cancel();
 }

@@ -36,7 +36,7 @@ export class TranslationResolver {
         return this._resolveWithoutFallback(fallbackLanguage, key, args, locale);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _resolveWithoutFallback(
         lang: FdLanguage,
         key: FdLanguageKeyIdentifier,
@@ -51,7 +51,7 @@ export class TranslationResolver {
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     private _interpolate(expression: string, args: FdLanguageKeyArgs = {}, locale?: Nullable<string>): string {
         if (expression.indexOf('{') === -1) {
@@ -87,7 +87,7 @@ export class TranslationResolver {
         return val ?? '';
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getFdLanguageKeyValue(
         lang: FdLanguage,
         key: FdLanguageKeyIdentifier,
@@ -100,7 +100,7 @@ export class TranslationResolver {
         return this._tryExecuteLanguageFunction(resolvedKey, args);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _tryResolveKey(lang: FdLanguage, path: any): FdLanguageKey | null {
         try {
             const expression: FdLanguageKey = get(lang, path);
@@ -113,7 +113,7 @@ export class TranslationResolver {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _tryExecuteLanguageFunction(
         expression?: Nullable<FdLanguageKeyFunction<any>>,
         args: FdLanguageKeyArgs = {}
@@ -130,7 +130,7 @@ export class TranslationResolver {
 
     /**
      * Applies replacements to the raw string
-     * @hidden */
+     * @ignore */
     private _applyReplacements(rawString: string, replacements: Array<[string, string]> = []): string {
         (replacements as Array<[string, string]>).forEach(([internalReference, replacementValue]) => {
             rawString = rawString.split(internalReference).join(replacementValue);

@@ -10,6 +10,6 @@ export class ToolHeaderActionClass<ActionTemplateContext = any> {
     /** Template of the action section */
     templateRef: TemplateRef<ActionTemplateContext>;
 
-    /** @hidden */
+    /** @ignore */
     readonly isSeparator: boolean;
 }

@@ -49,7 +49,7 @@ let switchUniqueId = 0;
     imports: [FormsModule, AsyncPipe, FdTranslatePipe]
 })
 export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormItemControl {
-    /** @hidden */
+    /** @ignore */
     @ViewChild('switchInput')
     inputElement: ElementRef<HTMLInputElement>;
 
@@ -100,26 +100,26 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     @Output()
     readonly checkedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('switchEl', { read: ElementRef })
     _switchLabelWrapperEl: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _changeDetectorRef: ChangeDetectorRef,
         readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     onChange: (value: boolean) => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     onTouched = (): void => {};
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
@@ -154,7 +154,7 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param value Sets the value of the *checked* property of the switch.
      */
     writeValue(value: boolean): void {
@@ -164,7 +164,7 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param fn User defined function that handles the *onChange* event of the switch.
      */
     registerOnChange(fn: (value: boolean) => void): void {
@@ -172,7 +172,7 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param fn User defined function that handles the *onTouch* event of the switch.
      */
     registerOnTouched(fn: () => void): void {
@@ -180,7 +180,7 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param isDisabled Sets the value of the *disabled* property of the switch.
      */
     setDisabledState(isDisabled: boolean): void {

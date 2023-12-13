@@ -68,14 +68,14 @@ export class BusyIndicatorComponent {
     @Input()
     ariaLive: Nullable<'assertive' | 'polite' | 'off'> = null;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('fakeFocusElement')
     fakeFocusElement: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _elementRef: ElementRef) {}
 
-    /** @hidden If focus escapes busy container focus element after wrapped content */
+    /** @ignore If focus escapes busy container focus element after wrapped content */
     @HostListener('keydown', ['$event'])
     hostFocusChangeHandler(event: KeyboardEvent): void {
         if (this.loading && KeyUtil.isKeyCode(event, TAB) && !event.shiftKey) {
@@ -83,7 +83,7 @@ export class BusyIndicatorComponent {
         }
     }
 
-    /** @hidden If busy container is navigated as "previous focusable element",
+    /** @ignore If busy container is navigated as "previous focusable element",
      * focus busy indicator to prevent from focusing wrapped content */
     fakeElementFocusHandler(event: FocusEvent): void {
         if (this.loading && event.relatedTarget !== this._elementRef.nativeElement) {

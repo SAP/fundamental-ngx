@@ -197,7 +197,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     @Output()
     selectionChange = new EventEmitter<MultiComboboxSelectionChangeEvent>();
 
-    /** @hidden Emits event when the menu is opened/closed. */
+    /** @ignore Emits event when the menu is opened/closed. */
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -213,46 +213,46 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     @Output()
     addOnButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(ListComponent)
     listComponent: ListComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('searchInputElement', { read: ElementRef })
     searchInputElement: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(TemplateDirective)
     customTemplates: QueryList<TemplateDirective>;
 
     /**
-     * @hidden
+     * @ignore
      * Custom Option item Template.
      */
     optionItemTemplate: TemplateRef<any>;
 
     /**
-     * @hidden
+     * @ignore
      * Custom Group Header item Template.
      */
     groupItemTemplate: TemplateRef<any>;
 
     /**
-     * @hidden
+     * @ignore
      * Custom Secondary item Template.
      */
     secondaryItemTemplate: TemplateRef<any>;
 
     /**
-     * @hidden
+     * @ignore
      * Custom Selected option item Template.
      */
     selectedItemTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     _contentDensity: ContentDensity = this.multiComboboxConfig.contentDensity;
 
-    /** @hidden */
+    /** @ignore */
     listTemplate: TemplateRef<any>;
 
     /** Set the input text of the input. */
@@ -272,7 +272,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         return this.inputText.trim().length === 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     get isGroup(): boolean {
         return !!(this.group && this.groupKey);
     }
@@ -281,67 +281,67 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     isOpen = false;
 
     /**
-     * @hidden
+     * @ignore
      * List of matched suggestions
      */
     _suggestions: SelectableOptionItem[];
 
     /**
-     * @hidden
+     * @ignore
      * Grouped suggestions mapped to array.
      */
     _flatSuggestions: SelectableOptionItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _fullFlatSuggestions: SelectableOptionItem[] = [];
 
     /**
-     * @hidden
+     * @ignore
      * List of selected suggestions
      */
     _selectedSuggestions: SelectableOptionItem[];
 
     /**
-     * @hidden
+     * @ignore
      * Max width of list container
      */
     maxWidth: number;
 
     /**
-     * @hidden
+     * @ignore
      * Min width of list container
      */
     minWidth: number;
 
     /**
-     * @hidden
+     * @ignore
      * Need for opening mobile version
      */
     openChange = new Subject<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     selectedShown$ = new BehaviorSubject(false);
 
-    /** @hidden */
+    /** @ignore */
     protected _dataSource: FdpMultiComboboxDataSource<any>;
 
-    /** @hidden */
+    /** @ignore */
     private _inputTextValue: string;
 
-    /** @hidden */
+    /** @ignore */
     private _previousInputText: string;
 
-    /** @hidden */
+    /** @ignore */
     private _matchingStrategy: MatchingStrategy = this.multiComboboxConfig.matchingStrategy;
 
-    /** @hidden */
+    /** @ignore */
     private _dsSubscription: Subscription | null = null;
 
-    /** @hidden */
+    /** @ignore */
     private _element: HTMLElement = this.elementRef.nativeElement;
 
     /**
-     * @hidden
+     * @ignore
      * Keys, that won't trigger the popover's open state, when dispatched on search input.
      */
     private readonly _nonOpeningKeys: number[] = [
@@ -358,22 +358,22 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         ALT
     ];
 
-    /** @hidden */
+    /** @ignore */
     private _timerSub$: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     private _previousState?: FormStates;
 
-    /** @hidden */
+    /** @ignore */
     private _previousStateMessage: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     protected readonly _rangeSelector = new RangeSelector();
 
-    /** @hidden */
+    /** @ignore */
     private _displayFn = (value: any): string => this.displayValue(value);
 
-    /** @hidden */
+    /** @ignore */
     private _secondaryFn = (value: any): string => {
         if (isOptionItem(value)) {
             return value.secondaryText ?? '';
@@ -386,7 +386,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         }
     };
 
-    /** @hidden */
+    /** @ignore */
     protected constructor(
         protected readonly _cd: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -402,7 +402,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         super(_cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         const dataSourceChange = changes['dataSource'];
 
@@ -411,7 +411,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._initWindowResize();
         this._assignCustomTemplates();
@@ -419,7 +419,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         super.ngAfterViewInit();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         super.ngOnDestroy();
 
@@ -433,19 +433,19 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method to set input text as item label.
      */
     abstract setInputTextFromOptionItem(item: SelectableOptionItem): void;
 
     /**
-     * @hidden
+     * @ignore
      * Toggle item selection.
      */
     abstract toggleSelection(item: SelectableOptionItem): void;
 
     /**
-     * @hidden
+     * @ignore
      * Toggle item selection by input text value.
      */
     abstract toggleSelectionByInputText(): void;
@@ -458,14 +458,14 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         this._emitChangeEvent();
     }
 
-    /** @hidden */
+    /** @ignore */
     popoverOpenChangeHandle(isOpen: boolean): void {
         this.isOpen = isOpen;
         this._rangeSelector.reset();
         this._onOpenChange(this.isOpen);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onOpenChange(isOpen: boolean): void {
         if (isOpen) {
             this.formMessage._popover.close();
@@ -492,7 +492,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         this._cd.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     showList(isOpen: boolean): void {
         if (this.isOpen !== isOpen) {
             this.isOpen = isOpen;
@@ -507,7 +507,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         this._cd.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     searchTermChanged(text: string = this.inputText): void {
         if (text) {
             this.open();
@@ -527,7 +527,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
     /**
      * Handle Click on Button
-     * @hidden
+     * @ignore
      */
     onPrimaryButtonClick(isOpen: boolean): void {
         if (!isOpen) {
@@ -545,7 +545,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
     /**
      * Handle Keydown on Input
-     * @hidden
+     * @ignore
      */
     onInputKeydownHandler(event: KeyboardEvent): void {
         if (this.readonly) {
@@ -596,7 +596,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method to emit change event
      */
     _emitChangeEvent(): void {
@@ -618,7 +618,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         this._emitChangeEvent();
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _setSelectedSuggestions(): void {
         this._selectedSuggestions = [];
 
@@ -655,17 +655,17 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         this._cd.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     protected get ds(): MultiComboBoxDataSource<any> {
         return this.dataSource as MultiComboBoxDataSource<any>;
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _focusToSearchField(): void {
         this.searchInputElement?.nativeElement.focus();
     }
 
-    /** @hidden
+    /** @ignore
      * Method that picks other value moved from current one by offset, called only when Multi Combobox is closed */
     private _chooseOtherItem(offset: number): void {
         if (this._selectedSuggestions?.length === this._flatSuggestions.length) {
@@ -688,18 +688,18 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _getSelectItemByInputValue(displayValue: string): SelectableOptionItem | undefined {
         return this._flatSuggestions.find((value) => value.label === displayValue);
     }
 
-    /** @hidden
+    /** @ignore
      *  Map grouped values to array. */
     protected _flattenGroups(items: SelectableOptionItem[]): SelectableOptionItem[] {
         return items.reduce((result, item) => result.concat(item.children ?? []), <SelectableOptionItem[]>[]);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initializeDataSource(ds: FdpMultiComboboxDataSource<any>): void {
         this._suggestions = [];
         this._flatSuggestions = [];
@@ -716,7 +716,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         this._dataSource = this._openDataStream(ds);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _openDataStream(ds: FdpMultiComboboxDataSource<any>): MultiComboBoxDataSource<any> {
         const initDataSource = this._toDataStream(ds);
         let isInitDataSource = true;
@@ -808,7 +808,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         return initDataSource;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _processingEmptyData(): void {
         this._cd.detectChanges();
 
@@ -823,7 +823,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         this._timerSub$ = timer(3000).subscribe(() => this._unsetInvalidEntry());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setInvalidEntry(): void {
         if (this._previousState || this._previousStateMessage) {
             return;
@@ -838,7 +838,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         this._cd.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _unsetInvalidEntry(): void {
         this.state = this._previousState;
         this._previousState = undefined;
@@ -849,7 +849,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         this._cd.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _toDataStream(source: FdpMultiComboboxDataSource<any>): MultiComboBoxDataSource<any> | undefined {
         if (isDataSource(source)) {
             return source as MultiComboBoxDataSource<any>;
@@ -866,7 +866,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         return undefined;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initWindowResize(): void {
         this._getOptionsListWidth();
 
@@ -879,7 +879,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
             .subscribe(() => this._getOptionsListWidth());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getOptionsListWidth(): void {
         const body = document.body;
         const rect = (this._element.querySelector('fd-input-group') as HTMLElement).getBoundingClientRect();
@@ -891,7 +891,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
     /**
      * Convert original data to SelectableOptionItems Interface
-     * @hidden
+     * @ignore
      */
     private _convertToOptionItems(items: any[]): SelectableOptionItem[] {
         const item = items[0];
@@ -916,7 +916,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
     /**
      * Convert data to SelectableOptionItems Interface
-     * @hidden
+     * @ignore
      */
     private _convertObjectsToOptionItems(items: any[]): SelectableOptionItem[] {
         if (this.isGroup) {
@@ -930,7 +930,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
     /**
      * Convert object[] data to Group OptionItems Interface
-     * @hidden
+     * @ignore
      */
     protected _convertObjectsToGroupOptionItems<K>(items: K[]): SelectableOptionItem[] {
         const group: { [key: string]: K[] } = {};
@@ -970,7 +970,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
     /**
      * Convert object[] data to Secondary SelectableOptionItems Interface
-     * @hidden
+     * @ignore
      */
     private _convertObjectsToSecondaryOptionItems<K>(items: K[]): SelectableOptionItem[] {
         const selectItems: SelectableOptionItem[] = [];
@@ -991,7 +991,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
     /**
      * Convert Primitive data(Boolean, String, Number) to SelectableOptionItems Interface
-     * @hidden
+     * @ignore
      */
     private _convertPrimitiveToOptionItems(items: any[]): SelectableOptionItem[] {
         const selectItems: SelectableOptionItem[] = [];
@@ -1010,7 +1010,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
     /**
      * Convert object[] to SelectableOptionItems Interface (Default)
-     * @hidden
+     * @ignore
      */
     private _convertObjectsToDefaultOptionItems(items: any[]): SelectableOptionItem[] {
         const selectItems: SelectableOptionItem[] = [];
@@ -1029,7 +1029,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     }
 
     /**
-     * @hidden
+     * @ignore
      * Assign custom templates
      */
     private _assignCustomTemplates(): void {

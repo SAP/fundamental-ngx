@@ -1,6 +1,6 @@
 const messages = new Set<string>();
 
-/** @hidden */
+/** @ignore */
 export function warnOnce(message: string): void {
     if (!messages.has(message)) {
         console.warn(message);

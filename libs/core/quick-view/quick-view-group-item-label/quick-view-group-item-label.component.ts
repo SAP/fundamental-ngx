@@ -9,15 +9,15 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
     imports: [FormLabelComponent]
 })
 export class QuickViewGroupItemLabelComponent implements AfterViewInit {
-    /** @hidden */
+    /** @ignore */
     constructor(private readonly _elRef: ElementRef<Element>) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._bindElementAttributes();
     }
 
-    /** @hidden
+    /** @ignore
      * Needed for binding the id to the label element (and this id needed for aria-labelledby of proper element). */
     private _bindElementAttributes(): void {
         const parentId = this._elRef.nativeElement.closest('.fd-form-item')?.id;

@@ -9,15 +9,15 @@ import { AttributeObserver } from '../../services/observers/attribute.observer';
     providedIn: 'root'
 })
 export class ReadonlyObserver {
-    /** @Hidden */
+    /** @ignore */
     constructor(private _attributeObserver: AttributeObserver) {}
 
-    /** @Hidden */
+    /** @ignore */
     static isReadonly(element: Element): boolean {
         return element.classList.contains('is-readonly') || element.hasAttribute('readonly');
     }
 
-    /** @hidden */
+    /** @ignore */
     observe(element: HasElementRef<Element> | Element | ElementRef<Element>): Observable<boolean> {
         return this._attributeObserver.observe(element).pipe(
             map(() => ReadonlyObserver.isReadonly(getNativeElement(element))),
@@ -25,7 +25,7 @@ export class ReadonlyObserver {
         );
     }
 
-    /** @Hidden */
+    /** @ignore */
     unobserve(element: HasElementRef<Element> | Element | ElementRef<Element>): void {
         this._attributeObserver.unobserve(element);
     }

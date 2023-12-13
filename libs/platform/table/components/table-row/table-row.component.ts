@@ -155,75 +155,75 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     @Output()
     keyboardDrag = new EventEmitter<TableRowKeyboardDrag>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE)
     private set _focusableViewCellItems(items: QueryList<FocusableItemDirective>) {
         this.setItems(items);
     }
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(EditableTableCell)
     private readonly _editableCells: QueryList<EditableTableCell>;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-selected')
     private get _ariaSelected(): boolean {
         return !!this.row.checked;
     }
 
-    /** @hidden */
+    /** @ignore */
     _hasRowHeaderColumn = false;
 
-    /** @hidden */
+    /** @ignore */
     _rtl = false;
 
-    /** @hidden */
+    /** @ignore */
     _rowSelectionHelperTextId = `rowSelectionHelper-${uuidv4()}`;
 
-    /** @hidden */
+    /** @ignore */
     readonly _isTreeRowFirstCell = isTreeRowFirstCell;
 
-    /** @hidden */
+    /** @ignore */
     readonly SELECTION_MODE = SelectionMode;
 
-    /** @hidden */
+    /** @ignore */
     readonly _contentDensityObserver = inject(ContentDensityObserver);
 
-    /** @hidden */
+    /** @ignore */
     readonly _tableColumnResizeService = inject(TableColumnResizeService);
 
-    /** @hidden */
+    /** @ignore */
     readonly _fdpTableService = inject(TableService);
 
-    /** @hidden */
+    /** @ignore */
     readonly _tableRowService = inject(TableRowService);
 
-    /** @hidden */
+    /** @ignore */
     readonly _isTreeRow = isTreeRow;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _refreshChildRows$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _rtlService = inject(RtlService, {
         optional: true
     });
 
-    /** @hidden */
+    /** @ignore */
     private readonly _cdr = inject(ChangeDetectorRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _zone = inject(NgZone);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _elmRef = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _dndTableDirective = inject(TableDraggableDirective, {
         optional: true
     });
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         super();
         this._rtlService?.rtl.pipe(takeUntilDestroyed()).subscribe((rtl) => {
@@ -251,7 +251,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         super.ngOnInit();
         this._fdpTableService.visibleColumns$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((columns) => {
@@ -260,7 +260,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
         this._editableCells.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
@@ -273,7 +273,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         super.ngOnChanges(changes);
         if ('row' in changes) {
@@ -281,7 +281,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         super.ngOnDestroy();
         this._refreshChildRows$.next();
@@ -289,27 +289,27 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
         this._tableRowService.removeEditableCells(this.row);
     }
 
-    /** @hidden */
+    /** @ignore */
     _toggleGroupRow(): void {
         this._tableRowService.toggleRow({ type: 'toggleRow', row: this.row });
     }
 
-    /** @hidden */
+    /** @ignore */
     _toggleSingleSelectableRow(): void {
         this._tableRowService.toggleRow({ type: 'toggleSingleSelectableRow', row: this.row });
     }
 
-    /** @hidden */
+    /** @ignore */
     _toggleMultiSelectRow(row: TableRow<T>, event?: Event): void {
         this._tableRowService.toggleRow({ ...{ row, event }, ...{ type: 'toggleMultiSelectRow' } });
     }
 
-    /** @hidden */
+    /** @ignore */
     _columnTrackBy(index: number, column: TableColumn): string {
         return column.name;
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _handleCellSpaceKey(colIdx: number, tableCellElement: HTMLTableCellElement, $event: Event): void {
         if ($event.target === tableCellElement && isTreeRowFirstCell(colIdx, this.row, $event)) {
             $event.preventDefault();
@@ -317,7 +317,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToRowExpansion(): void {
         this._refreshChildRows$.next();
         const refresh = merge(this._refreshChildRows$, destroyObservable(this._destroyRef));
@@ -332,7 +332,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _onKeyDown(event: KeyboardEvent): void {
         const isArrowDown = KeyUtil.isKeyCode(event, DOWN_ARROW);
         const isArrowUp = KeyUtil.isKeyCode(event, UP_ARROW);

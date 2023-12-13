@@ -44,14 +44,14 @@ export class StackblitzService {
     fioriFonts: string;
     horizonFonts: string;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _themingService = inject(ThemingService, {
         optional: true
     });
 
-    /** @hidden */
+    /** @ignore */
     private readonly _currentLib = inject(CURRENT_LIB);
-    /** @hidden */
+    /** @ignore */
     private readonly _docsService = inject(DocsService);
 
     constructor() {

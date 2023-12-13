@@ -21,7 +21,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     standalone: true
 })
 export class LayoutPanelHeadComponent {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-layout-panel__head')
     fdLayoutPanelHeadClass = true;
 }

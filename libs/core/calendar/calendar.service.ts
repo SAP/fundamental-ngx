@@ -30,7 +30,7 @@ export class CalendarService {
     /** Function that is called when the focus would escape the element. */
     focusEscapeFunction: EscapeFocusFunction;
 
-    /** @hidden */
+    /** @ignore */
     constructor(@Optional() private _rtlService: RtlService) {}
 
     /**
@@ -116,7 +116,7 @@ export class CalendarService {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Right Element focus trigger
      */
     focusRightElement(index: number): void {
@@ -128,7 +128,7 @@ export class CalendarService {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Left Element focus trigger
      */
     focusLeftElement(index: number): void {

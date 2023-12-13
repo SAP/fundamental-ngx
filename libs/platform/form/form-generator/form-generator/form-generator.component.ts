@@ -180,7 +180,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     inlineColumnLayout: ColumnLayout = DefaultVerticalFieldLayout;
 
     /**
-     * @hidden
+     * @ignore
      * Removes extra empty row.
      * TODO: remove after #7533 has been fixed.
      */
@@ -221,7 +221,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     @ViewChildren(FormGeneratorFieldComponent)
     fields: QueryList<FormGeneratorFieldComponent>;
 
-    /** @hidden */
+    /** @ignore */
     doCheck$ = new Subject<void>();
 
     /** Array of form field controls. */
@@ -267,48 +267,48 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     formValue$ = new BehaviorSubject<DynamicFormValue>({});
 
     /**
-     * @hidden
+     * @ignore
      * To differentiate between first loading when skeletons be shown and subsequent loadings when busy indicator be shown
      */
     _firstLoadingDone = false;
 
     /**
-     * @hidden
+     * @ignore
      */
     hintOptions: HintOptions;
 
-    /** @hidden */
+    /** @ignore */
     _errorModels: { type: string; value: any }[] = [];
 
     /**
-     * @hidden
+     * @ignore
      */
     private _formItems: FormGeneratorAcceptableItems;
 
     /**
-     * @hidden
+     * @ignore
      */
     private _formValueSubscription: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     private _refresh$ = new Subject<void>();
 
     /**
-     * @hidden
+     * @ignore
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _defaultHintOptions: FieldHintOptions;
 
-    /** @hidden */
+    /** @ignore */
     private _ngSubmitSubscription: Subscription | undefined;
 
-    /** @hidden */
+    /** @ignore */
     private _mappedFormitems: Map<string, DynamicFormItemMap> = new Map();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _fgService: FormGeneratorService,
         private _cd: ChangeDetectorRef,
@@ -322,7 +322,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
         this._errorModels = this._getErrors();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.hint) {
             if (typeof this.hint === 'string' || this.hint instanceof TemplateRef) {
@@ -340,7 +340,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     ngOnDestroy(): void {
         this._onDestroy$.next();
@@ -357,7 +357,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     async _onSubmit(): Promise<void> {
         this.form.markAllAsTouched();
@@ -407,13 +407,13 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
 
     /**
      *
-     * @hidden
+     * @ignore
      */
     _trackFn(index: number, value: DynamicFormGroupControl): string {
         return `${index}_${value.formItem.name}`;
     }
 
-    /** @hidden */
+    /** @ignore */
     _groupTrackFn(index: number, value: DynamicFormGroupControl): string {
         return (value as DynamicFormControlGroup).formItem.name;
     }
@@ -427,18 +427,18 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
         this.formGroup.onSubmit(new Event('submit'));
     }
 
-    /** @hidden */
+    /** @ignore */
     _isAdvancedError(error: any): error is DynamicFormItemValidationObject {
         return error.heading && error.description && error.type;
     }
 
-    /** @hidden */
+    /** @ignore */
     _errorsTrackBy(_: number, error: { type: string; value: any }): string {
         return error.type;
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     private async _generateForm(): Promise<void> {
         this.formLoading = true;
@@ -476,14 +476,14 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
         this._listenToSubmit();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getOrderedControls(controls: DynamicFormGroupControls): (DynamicFormControl | DynamicFormControlGroup)[] {
         return Object.values(controls).sort(
             (a, b) => (a.formItem?.rank ?? -Infinity) - (b.formItem?.rank ?? -Infinity)
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getErrors(): { type: string; value: any }[] {
         const returnErrors: { type: string; value: any }[] = [];
         const registeredErrors = this._fgService.validationErrorHints;
@@ -499,7 +499,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
         return returnErrors;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToSubmit(): void {
         this._ngSubmitSubscription?.unsubscribe();
         this._ngSubmitSubscription = this.formGroup.ngSubmit
@@ -519,7 +519,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _onFormItemsChange(items: Observable<DynamicFormItem[]>): void {
         this._refresh$.next();
         this._refresh$.complete();
@@ -532,7 +532,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _applyRank(items: DynamicFormItem[]): DynamicFormItem[] {
         items = items.map((item, index) => {
             item.rank = item.rank || index;
@@ -545,7 +545,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
         return items;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addControlToFormItems(item: DynamicFormItem, path?: string[]): void {
         if (!path) {
             this._mappedFormitems.set(item.name, transformFormItem(item, this._mappedFormitems.size));
@@ -562,7 +562,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
         parentItem.items.set(item.name, transformFormItem(item, parentItem.items.size));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _removeControlFromItems(name: string, path?: string[]): void {
         if (!path) {
             this._mappedFormitems.delete(name);

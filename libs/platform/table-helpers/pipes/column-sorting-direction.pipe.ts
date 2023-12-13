@@ -15,7 +15,7 @@ export const ARIA_SORT: Record<`${SortDirection}`, string> = {
     name: 'fdpTableColumnSortingDirection'
 })
 export class TableColumnSortingDirectionPipe implements PipeTransform {
-    /** @hidden */
+    /** @ignore */
     transform(sorting: Nullable<CollectionSort>): string {
         if (!sorting) {
             return 'none';

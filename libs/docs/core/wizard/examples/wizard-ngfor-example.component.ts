@@ -86,7 +86,7 @@ export class WizardNgForExampleComponent {
         }
     ];
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(WizardStepComponent)
     wizardStepComponents: QueryList<WizardStepComponent>;
 
@@ -142,7 +142,7 @@ export class WizardNgForExampleComponent {
     }
 
     // Handle focus on key press first example
-    /** @hidden */
+    /** @ignore */
     handleFocus(event: KeyboardEvent, index: number): void {
         this._wizardService.progressBarKeyHandler(event, this.wizardStepComponents, index);
     }

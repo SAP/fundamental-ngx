@@ -30,19 +30,19 @@ export class GlyphMenuAddonDirective implements OnDestroy {
         import('@fundamental-ngx/core/icon').then(({ IconComponent }) => IconComponent)
     ).pipe(shareReplay(1));
 
-    /** @hidden */
+    /** @ignore */
     private _menuComponent = inject<MenuComponent>(FD_MENU_COMPONENT, { optional: true });
 
-    /** @hidden */
+    /** @ignore */
     private _addonGlyphPortalOutlet$ = new Subject<CdkPortalOutlet>();
 
-    /** @hidden */
+    /** @ignore */
     private _glyphName$ = new Subject<string | undefined>();
 
-    /** @hidden */
+    /** @ignore */
     private _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         combineLatest([this._addonGlyphPortalOutlet$, this._glyphName$])
             .pipe(
@@ -71,20 +71,20 @@ export class GlyphMenuAddonDirective implements OnDestroy {
             .subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     setGlyphPortalOutlet(outlet: CdkPortalOutlet): void {
         this._addonGlyphPortalOutlet$.next(outlet);
     }
 
-    /** @hidden */
+    /** @ignore */
     renderElement<ComponentType>(element: ComponentPortal<ComponentType>): Observable<ComponentRef<ComponentType>>;
-    /** @hidden */
+    /** @ignore */
     renderElement<TemplateContext>(
         element: TemplatePortal<TemplateContext>
     ): Observable<EmbeddedViewRef<TemplateContext>>;
-    /** @hidden */
+    /** @ignore */
     renderElement(element: DomPortal): Observable<any>;
-    /** @hidden */
+    /** @ignore */
     renderElement(element: Portal<any>): Observable<any> {
         return this._addonGlyphPortalOutlet$.pipe(
             first(),
@@ -93,17 +93,17 @@ export class GlyphMenuAddonDirective implements OnDestroy {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._removeGlyphAddonFromMenu();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addGlyphAddonToMenu(): void {
         this._menuComponent?.registerAddon(this);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _removeGlyphAddonFromMenu(): void {
         this._menuComponent?.unregisterAddon(this);
     }

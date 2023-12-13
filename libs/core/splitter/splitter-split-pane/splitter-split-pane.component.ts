@@ -61,23 +61,23 @@ export class SplitterSplitPaneComponent implements OnInit, AfterViewInit, OnDest
     @Output()
     readonly toggleOnCanvas = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(TemplateRef, { static: true })
     _templateRef: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     _actualSize = PANE_AUTO_SIZE;
 
-    /** @hidden */
+    /** @ignore */
     private _size = PANE_AUTO_SIZE;
 
-    /** @hidden */
+    /** @ignore */
     private _contentPortal: TemplatePortal | null = null;
 
-    /** @hidden */
+    /** @ignore */
     private _isOnCanvas = true;
 
-    /** @hidden */
+    /** @ignore */
     private _unsubscribe$ = new Subject<void>();
 
     /** Returns if the pane is on canvas. */
@@ -85,35 +85,35 @@ export class SplitterSplitPaneComponent implements OnInit, AfterViewInit, OnDest
         return this._isOnCanvas;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _content(): TemplatePortal | null {
         return this._contentPortal;
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _window(): Nullable<Window & typeof globalThis> {
         return this._document?.defaultView;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _viewportRuler: ViewportRuler,
         @Optional() @Inject(DOCUMENT) private readonly _document: Document | null
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._contentPortal = new TemplatePortal(this._templateRef, this._viewContainerRef);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._processPaneOnCanvas();
         this._listenToResize();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._unsubscribe$.next();
         this._unsubscribe$.complete();
@@ -141,7 +141,7 @@ export class SplitterSplitPaneComponent implements OnInit, AfterViewInit, OnDest
         this.toggleOnCanvas.emit(true);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToResize(): void {
         if (!this._window) {
             return;
@@ -153,7 +153,7 @@ export class SplitterSplitPaneComponent implements OnInit, AfterViewInit, OnDest
             .subscribe(() => this._processPaneOnCanvas());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _processPaneOnCanvas(): void {
         if (!this._window) {
             return;

@@ -31,17 +31,17 @@ export class ListLinkDirective implements OnChanges {
     @HostBinding('class.fd-list__link--focusable')
     focusable = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-list__link')
     fdListLinkClass = true;
 
     /** Emits when some of the properties, that should be read by screenreader, are changed */
     readonly _onReadablePropertyChanged$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(public elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.navigationIndicator || changes.navigated) {
             this._onReadablePropertyChanged$.next();

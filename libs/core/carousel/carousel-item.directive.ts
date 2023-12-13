@@ -25,7 +25,7 @@ export class CarouselItemDirective<T = unknown> {
     @HostBinding('attr.id')
     id: string = 'carousel-item-id-' + carouselItemCounter++;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private readonly _elementRef: ElementRef<HTMLElement>) {}
 
     /** Native element  */

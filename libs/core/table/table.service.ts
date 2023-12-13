@@ -1,10 +1,10 @@
 import { BehaviorSubject } from 'rxjs';
 
 export class TableService {
-    /** @hidden */
+    /** @ignore */
     propagateKeys$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
-    /** @hidden */
+    /** @ignore */
     changeKeys(keys: string[]): void {
         if (keys && keys.length > 0) {
             this.propagateKeys$.next([...keys]);

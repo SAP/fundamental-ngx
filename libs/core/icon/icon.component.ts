@@ -118,18 +118,18 @@ export class IconComponent implements CssClassBuilder {
     @HostBinding('class.fd-list__navigation-item-icon')
     _navigationItemIcon = false;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _glyph = signal<any>('');
-    /** @hidden */
+    /** @ignore */
     private readonly _font = signal<IconFont>('SAP-icons');
 
-    /** @hidden */
+    /** @ignore */
     private readonly _color = signal<IconColor | null>(null);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _background = signal<IconColor | null>(null);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _fontIconClass = computed(() => {
         const fontFamily = FD_ICON_FONT_FAMILY[this._font()];
 
@@ -146,7 +146,7 @@ export class IconComponent implements CssClassBuilder {
         return returnIconClass.join(' ');
     });
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {
         effect(() => {
             this.buildComponentCssClass();
@@ -154,7 +154,7 @@ export class IconComponent implements CssClassBuilder {
     }
 
     /**
-     * @hidden
+     * @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied

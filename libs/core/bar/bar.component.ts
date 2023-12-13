@@ -63,10 +63,10 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
     @Input()
     size: SizeType = '';
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef,
         private _contentDensityObserver: ContentDensityObserver
@@ -74,22 +74,22 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
         this._contentDensityObserver.subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied

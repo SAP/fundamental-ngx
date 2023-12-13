@@ -110,28 +110,28 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
     @Output()
     hiddenItemsCount = new EventEmitter<number>();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FD_BREADCRUMB_ITEM_COMPONENT)
     private readonly _contentItems: QueryList<BreadcrumbItemComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(MenuComponent)
     private readonly _menuComponent: MenuComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(OverflowLayoutComponent)
     private readonly _overflowLayout: OverflowLayoutComponent;
 
     /**
-     * @hidden
+     * @ignore
      * Array of breadcrumb items.
      */
     _items: BreadcrumbItemComponent[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _placement$ = new BehaviorSubject<Placement>('bottom-start');
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public elementRef: ElementRef<HTMLElement>,
         private _destroyRef: DestroyRef,
@@ -139,14 +139,14 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
         private _cdr: ChangeDetectorRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._rtlService?.rtl
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((value) => this._placement$.next(value ? 'bottom-end' : 'bottom-start'));
     }
 
-    /** @hidden */
+    /** @ignore */
     onResize(): void {
         this._overflowLayout.triggerRecalculation();
     }
@@ -162,20 +162,20 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._setItems();
 
         this._contentItems.changes.subscribe(() => this._setItems());
     }
 
-    /** @hidden */
+    /** @ignore */
     _keyDownHandle(event: Event): void {
         this._menuComponent.toggle();
         event.preventDefault();
     }
 
-    /** @hidden */
+    /** @ignore */
     _onHiddenChange(isHidden: boolean, breadcrumb: BreadcrumbItemComponent): void {
         if (!isHidden) {
             breadcrumb._detach();
@@ -184,17 +184,17 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _onVisibleItemsCountChange(visibleItemsCount: number): void {
         this.visibleItemsCount.emit(visibleItemsCount);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onHiddenItemsCountChange(hiddenItemsCount: number): void {
         this.hiddenItemsCount.emit(hiddenItemsCount);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setItems(): void {
         this._contentItems.forEach((item) => item.setPortal());
         this._items = this._contentItems.toArray();

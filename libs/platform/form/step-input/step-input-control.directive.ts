@@ -12,11 +12,11 @@ import { StepInputComponent } from './base.step-input';
     standalone: true
 })
 export class StepInputControlDirective {
-    /** @hidden */
+    /** @ignore */
     constructor(@SkipSelf() private stepInput: StepInputComponent) {}
 
     /**
-     * @hidden
+     * @ignore
      * Handle "input" event to keep track of what user is entering
      */
     @HostListener('input', ['$event'])
@@ -30,7 +30,7 @@ export class StepInputControlDirective {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handle "change" event to commit entered value
      */
     @HostListener('change')
@@ -42,7 +42,7 @@ export class StepInputControlDirective {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handle "focus" event
      */
     @HostListener('focus')
@@ -51,7 +51,7 @@ export class StepInputControlDirective {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handle "blur" event
      */
     @HostListener('blur')
@@ -60,7 +60,7 @@ export class StepInputControlDirective {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handle "keydown" event
      */
     @HostListener('keydown', ['$event'])
@@ -87,7 +87,7 @@ export class StepInputControlDirective {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handle mouse wheel
      */
     @HostListener('wheel', ['$event'])
@@ -104,7 +104,7 @@ export class StepInputControlDirective {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Mute event
      */
     private _muteEvent(e: Event): void {

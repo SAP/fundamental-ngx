@@ -16,13 +16,13 @@ export class FileUploaderSelectDirective {
     @Output()
     readonly fileSelected = new EventEmitter<File[]>();
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.multiple')
     get multipleBinding(): boolean | undefined {
         return this.multiple ? true : undefined;
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('change', ['$event'])
     onChange(event: Event): void {
         if (event.target instanceof HTMLInputElement) {

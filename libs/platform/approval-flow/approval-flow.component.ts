@@ -244,87 +244,87 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onDataReceived = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('graphContainerEl') _graphContainerEl: ElementRef<HTMLDivElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('graphEl') _graphEl: ElementRef<HTMLDivElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('gridList') _gridList: GridListComponent<ApprovalGraphNode>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(ApprovalFlowNodeComponent) _nodeComponents: QueryList<ApprovalFlowNodeComponent>;
 
-    /** @hidden */
+    /** @ignore */
     _approvalProcess: ApprovalProcess;
 
-    /** @hidden */
+    /** @ignore */
     _initialApprovalProcess?: ApprovalProcess;
 
-    /** @hidden */
+    /** @ignore */
     _previousApprovalProcess?: ApprovalProcess;
 
-    /** @hidden */
+    /** @ignore */
     _graph: ApprovalFlowGraph;
 
-    /** @hidden */
+    /** @ignore */
     _isCarousel = false;
 
-    /** @hidden */
+    /** @ignore */
     _graphMetadata: ApprovalGraphMetadata = {};
 
-    /** @hidden */
+    /** @ignore */
     _isEditMode = false;
 
-    /** @hidden */
+    /** @ignore */
     _usersForWatchersList: ApprovalUser[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _selectedWatchers: ApprovalUser[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _selectedWatcherIds: ApprovalUser['id'][] = [];
 
-    /** @hidden */
+    /** @ignore */
     _messages: ApprovalFlowMessage[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _displayUserFn = displayUserFn;
 
-    /** @hidden */
+    /** @ignore */
     _userValueFn = userValueFn;
 
-    /** @hidden */
+    /** @ignore */
     _trackByFn = trackByFn;
 
-    /** @hidden */
+    /** @ignore */
     _emptyApprovalFlowSpotConfig = {
         spot: { url: '', id: 'sapIllus-Spot-NoData' }
     };
 
-    /** @hidden */
+    /** @ignore */
     _multipleRootNodes = false;
 
-    /** @hidden */
+    /** @ignore */
     _multipleFinalNodes = false;
 
-    /** @hidden */
+    /** @ignore */
     _dragDropInProgress = false;
 
-    /** @hidden */
+    /** @ignore */
     readonly approvalFlowUniqueId = `fdp-approval-flow-${++defaultId}`;
 
-    /** @hidden */
+    /** @ignore */
     private _editModeInitSub: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _dataSourceChanged$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _dialogService: DialogService,
         private readonly _cdr: ChangeDetectorRef,
@@ -340,17 +340,17 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         return cloneDeep(this._approvalProcess);
     }
 
-    /** @hidden */
+    /** @ignore */
     get _rtl(): boolean {
         return this._rtlService?.rtl.getValue();
     }
 
-    /** @hidden */
+    /** @ignore */
     get _selectedNodes(): ApprovalGraphNode[] {
         return getGraphNodes(this._graph).filter((node) => node.selected);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         if (!this.userDataSource) {
             const usersDP = this.usersDataProviderEntityKey && this.providers?.get(this.usersDataProviderEntityKey);
@@ -382,7 +382,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         this._setupDataSourceSubscription();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.value) {
             const process = this.value ?? { watchers: [], nodes: [] };
@@ -395,12 +395,12 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     _isNextNodeBlank(node: ApprovalGraphNode, columnIndex: number, nodeIndex: number): boolean {
         const nextNode = this._graph.columns[columnIndex + 1]?.nodes[nodeIndex];
         const nextNodeBlank = nextNode?.blank;
@@ -409,12 +409,12 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         return !node.blank && !!nextNodeBlank && !nextNodeParallelEnd;
     }
 
-    /** @hidden */
+    /** @ignore */
     _isCdkDragDisabled(node: ApprovalGraphNode): boolean {
         return !this._isEditMode || node.blank || node.space || node.status !== 'not started';
     }
 
-    /** @hidden Node click handler */
+    /** @ignore Node click handler */
     _onNodeClick(node: ApprovalNode): void {
         if (this._dragDropInProgress) {
             return;
@@ -441,17 +441,17 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         this.nodeClick.emit(node);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onNodeAdd(node: ApprovalNode): void {
         this.afterNodeAdd.emit(node);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onNodeEdit(node: ApprovalNode): void {
         this.afterNodeEdit.emit(node);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onNodeSelectionChange(event: GridListSelectionEvent<ApprovalGraphNode>): void {
         this._graph.columns.forEach((column) => {
             column.nodes.forEach((node) => {
@@ -460,7 +460,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         });
     }
 
-    /** @hidden Watcher's avatar click handler */
+    /** @ignore Watcher's avatar click handler */
     _onWatcherClick(watcher: ApprovalUser, event: Event): void {
         event.preventDefault();
         this._dialogService.open<ApprovalFlowApproverDetailsDialogRefData>(ApprovalFlowApproverDetailsComponent, {
@@ -498,7 +498,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     _setScrollPosition(pos: number): void {
         this._graphContainerEl.nativeElement.scrollTo({
             left: pos,
@@ -506,7 +506,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _moveColInView(colIndex: number): any {
         const node = this._graphEl.nativeElement.children[colIndex].firstElementChild;
         if (!node) {
@@ -529,7 +529,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         }
     }
 
-    /** @hidden Handle node keydown and focus other node based on which key is pressed */
+    /** @ignore Handle node keydown and focus other node based on which key is pressed */
     _onNodeKeyDown(event: KeyboardEvent, node: ApprovalGraphNode): void {
         if (!KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW, RIGHT_ARROW, LEFT_ARROW])) {
             return;
@@ -560,7 +560,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         }
     }
 
-    /** @hidden Fetch all necessary data and enter edit mode */
+    /** @ignore Fetch all necessary data and enter edit mode */
     _enterEditMode(): void {
         // there's no support for searching in multi-input, so grabbing all watchers
         // triggering initial loading of data in data sources
@@ -576,7 +576,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         this._subscriptions.add(this._editModeInitSub);
     }
 
-    /** @hidden Send update approval process calls to DataSource and exit edit mode*/
+    /** @ignore Send update approval process calls to DataSource and exit edit mode*/
     _saveEditModeChanges(): void {
         this._editModeInitSub?.unsubscribe();
         this.watcherDataSource.close();
@@ -595,7 +595,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         this.valueChange.emit(updated);
     }
 
-    /** @hidden Restore initial approval flow state and exit edit mode */
+    /** @ignore Restore initial approval flow state and exit edit mode */
     _exitEditMode(): void {
         this._editModeInitSub?.unsubscribe();
         this.watcherDataSource.close();
@@ -608,7 +608,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         this._buildView(this._approvalProcess);
     }
 
-    /** @hidden */
+    /** @ignore */
     _watchersSelectionChanged(selectedIds: ApprovalUser['id'][]): void {
         const idsSet = new Set(selectedIds);
         // updating watchers selection
@@ -620,7 +620,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         );
     }
 
-    /** @hidden Restore previously saved approval process state */
+    /** @ignore Restore previously saved approval process state */
     _undoLastAction(): void {
         this._approvalProcess = cloneDeep(this._previousApprovalProcess!);
         this._previousApprovalProcess = undefined;
@@ -628,7 +628,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         this._buildView(this._approvalProcess);
     }
 
-    /** @hidden Open add node dialog */
+    /** @ignore Open add node dialog */
     _addNode(source: ApprovalGraphNode, type: ApprovalFlowNodeTarget): void {
         const showNodeTypeSelect = type === 'before' && !source.actionsConfig?.disableAddParallel;
 
@@ -718,7 +718,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         });
     }
 
-    /** @hidden Open edit node dialog */
+    /** @ignore Open edit node dialog */
     _editNode(node: ApprovalNode): void {
         const dialog = this._dialogService.open<AddNodeDialogRefData>(
             ApprovalFlowAddNodeComponent,
@@ -748,7 +748,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         });
     }
 
-    /** @hidden "Delete" button click handler */
+    /** @ignore "Delete" button click handler */
     _onNodeDelete(nodeToDelete: ApprovalNode): void {
         this._cacheCurrentApprovalProcess();
         this._deleteNode(nodeToDelete);
@@ -756,7 +756,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         this._buildView(this._approvalProcess);
     }
 
-    /** @hidden */
+    /** @ignore */
     _deleteSelectedNodes(): void {
         this._cacheCurrentApprovalProcess();
 
@@ -772,7 +772,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         this._showMessage('nodesRemove');
     }
 
-    /** @hidden Node drag move handler, used to check if need to highlight a drop zone rectangle */
+    /** @ignore Node drag move handler, used to check if need to highlight a drop zone rectangle */
     _onNodeDragMoved(node: ApprovalGraphNode): void {
         const draggedNodeDimensions = this._nodeComponents
             .find((comp) => comp.node === node)
@@ -789,7 +789,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         });
     }
 
-    /** @hidden Node drop handler */
+    /** @ignore Node drop handler */
     _onNodeDrop(nodeToDrop: ApprovalGraphNode, drag: CdkDrag): void {
         drag.reset();
 
@@ -874,18 +874,18 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _finishDragDropProcess(nodeToDrop: ApprovalGraphNode): void {
         this._approvalProcess.nodes.push(nodeToDrop);
         this._buildView(this._approvalProcess);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _showMessage(type: ApprovalFlowMessageType): void {
         this._messages = [{ type }];
     }
 
-    /** @hidden Build Approval Flow graph and render it */
+    /** @ignore Build Approval Flow graph and render it */
     private _buildView(approvalProcess: ApprovalProcess): void {
         if (!approvalProcess.nodes) {
             approvalProcess.nodes = [];
@@ -916,7 +916,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         }
     }
 
-    /** @hidden Listen window resize and distribute cards on column change */
+    /** @ignore Listen window resize and distribute cards on column change */
     private _listenOnResize(): void {
         this._subscriptions.add(
             merge(fromEvent(window, 'resize'), fromEvent(this._graphContainerEl.nativeElement, 'scroll'))
@@ -927,7 +927,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     _focusNode(node: ApprovalGraphNode): void {
         const nodeToFocus = this._nodeComponents.find((comp) => comp.node === node);
 
@@ -938,7 +938,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         nodeToFocus._focus({ preventScroll: true });
     }
 
-    /** @hidden Update node object in local approval process data structure */
+    /** @ignore Update node object in local approval process data structure */
     private _updateNode(node: ApprovalNode): void {
         const nodeIndex = this._approvalProcess.nodes.findIndex((n) => n.id === node.id);
 
@@ -947,7 +947,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         }
     }
 
-    /** @hidden Delete node object in local approval process data structure */
+    /** @ignore Delete node object in local approval process data structure */
     private _deleteNode(nodeToDelete: ApprovalNode): void {
         const nodesToDelete = [nodeToDelete];
         const graphNodes = getGraphNodes(this._graph);
@@ -979,7 +979,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         this._approvalProcess.nodes = this._approvalProcess.nodes.filter((node) => !nodesToDelete.includes(node));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addParallelTargets(targetNodeId: string, nodeIdToAdd: string): void {
         this._approvalProcess.nodes.forEach((node) => {
             if (isNodeTargetsIncludeId(node, targetNodeId)) {
@@ -988,7 +988,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         });
     }
 
-    /** @hidden Replace all occurrences of "idToReplace" in all nodes' "targets" with ones in "replaceWith" array */
+    /** @ignore Replace all occurrences of "idToReplace" in all nodes' "targets" with ones in "replaceWith" array */
     private _replaceTargets(IdToReplace: string, replaceWithId: string[]): void {
         this._approvalProcess.nodes.forEach((n) => {
             if (isNodeTargetsIncludeId(n, IdToReplace)) {
@@ -998,12 +998,12 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         });
     }
 
-    /** @hidden Save current state of approval process data to be able to undo an action made in edit mode */
+    /** @ignore Save current state of approval process data to be able to undo an action made in edit mode */
     private _cacheCurrentApprovalProcess(): void {
         this._previousApprovalProcess = cloneDeep(this._approvalProcess);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getNextHorizontalNode = (
         nodeIndex: number,
         columnIndex: number,
@@ -1024,7 +1024,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         return nextNode;
     };
 
-    /** @hidden */
+    /** @ignore */
     private _getNextVerticalNode = (
         nodeIndex: number,
         columnIndex: number,
@@ -1045,12 +1045,12 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         return nextNode;
     };
 
-    /** @hidden */
+    /** @ignore */
     private get _carouselStepSize(): number {
         return this._graphEl.nativeElement.scrollWidth / this._carouselStepsCount;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _scrollDiff(): number {
         if (!this._graphEl) {
             return 0;
@@ -1058,24 +1058,24 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         return this._graphEl.nativeElement.scrollWidth - this._graphEl.nativeElement.clientWidth;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _carouselStepsCount(): number {
         return this._graphEl.nativeElement.children.length;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _carouselStepsLeft(): number {
         return Math.ceil(this._graphContainerEl.nativeElement.scrollLeft / this._carouselStepSize);
     }
 
-    /** @hidden */
+    /** @ignore */
     get _carouselStepsRight(): number {
         return Math.ceil(
             (this._scrollDiff - Math.round(this._graphContainerEl.nativeElement.scrollLeft)) / this._carouselStepSize
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _defaultDialogOptions(): DefaultDialogOptions {
         return {
             teamDataSource: this.teamDataSource,
@@ -1085,7 +1085,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         };
     }
 
-    /** @hidden */
+    /** @ignore */
     private _findSerialNode(yIndex?: number, targets?: string[]): string[] {
         const targetIsParent =
             Number.isInteger(yIndex) &&
@@ -1102,7 +1102,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         return this._findSerialNode(yIndex, targetNode?.targets);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _processAddingParallelNode(
         addedNode: ApprovalGraphNode,
         sourceNode: ApprovalGraphNode,
@@ -1137,7 +1137,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setupDataSourceSubscription(): void {
         const sub = this._dataSourceChanged$
             .pipe(

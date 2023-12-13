@@ -25,22 +25,22 @@ export abstract class ListFocusItem<T = any> implements KeyboardSupportItemInter
     @Input()
     value: T;
 
-    /** @hidden */
+    /** @ignore */
     readonly _focused$ = new Subject<{ focusedWithin: boolean }>();
 
-    /** @hidden */
+    /** @ignore */
     readonly _clicked$ = new Subject<MouseEvent>();
 
-    /** @hidden */
+    /** @ignore */
     protected _isFirstItem = false;
 
-    /** @hidden */
+    /** @ignore */
     protected _tabIndex: number | undefined;
 
-    /** @hidden Implementation of KeyboardSupportItemInterface */
+    /** @ignore Implementation of KeyboardSupportItemInterface */
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('focusin', ['$event'])
     protected onFocus(event: FocusEvent): void {
         this._focused$.next({
@@ -48,20 +48,20 @@ export abstract class ListFocusItem<T = any> implements KeyboardSupportItemInter
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(readonly elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     click(): void {
         this.elementRef?.nativeElement?.click();
     }
 
-    /** @hidden */
+    /** @ignore */
     focus(): void {
         this.elementRef?.nativeElement?.focus();
     }
 
-    /** @hidden */
+    /** @ignore */
     setIsFirst(value: boolean): void {
         this._isFirstItem = value;
     }

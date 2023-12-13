@@ -62,22 +62,22 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
     @Input()
     ariaLabelledBy: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-label')
     private get ariaLabelBinding(): string {
         return this.ariaLabelAttr || this.ariaLabel || '';
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-labelledby')
     private get ariaLabelledByBinding(): string {
         return this.ariaLabelledByAttr || this.ariaLabelledBy || '';
     }
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public elementRef: ElementRef<HTMLInputElement | HTMLTextAreaElement>,
         _contentDensityObserver: ContentDensityObserver,
@@ -88,7 +88,7 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
     }
 
     /**
-     * @hidden
+     * @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -103,17 +103,17 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }

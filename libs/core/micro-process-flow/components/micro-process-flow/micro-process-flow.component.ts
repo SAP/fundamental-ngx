@@ -88,39 +88,39 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
         return this.previousItemsCount > 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('wrapperContainer')
     private _wrapperContainer: ElementRef<HTMLElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('container')
     private _container: ElementRef<HTMLElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('goNextButton')
     private _goNextButton: ElementRef<HTMLElement>;
 
-    /** @hidden */
+    /** @ignore */
     private _isRtl = false;
 
-    /** @hidden */
+    /** @ignore */
     private get _paginationDirection(): number {
         return this._isRtl ? 1 : -1;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _navigationKeys = [LEFT_ARROW, RIGHT_ARROW];
 
-    /** @hidden */
+    /** @ignore */
     private _actionKeys = [SPACE, ENTER];
 
-    /** @hidden */
+    /** @ignore */
     private _focusedElementIndex = -1;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _cd: ChangeDetectorRef,
         @Optional() private _rtl: RtlService,
@@ -129,7 +129,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
         _contentDensityObserver.subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         // If any element is currently focused, disable ability to navigate bentween items with tab.
         this._subscriptions.add(
@@ -155,17 +155,17 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this.listenOnItemsChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, this._navigationKeys)) {
@@ -296,7 +296,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
     }
 
     /**
-     * @hidden
+     * @ignore
      * Performs scrolling to the defined element based on the offset argument.
      * @param offset How much items needs to be scrolled relatively to the hidden previous items.
      */
@@ -329,7 +329,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
     }
 
     /**
-     * @hidden
+     * @ignore
      * Calculates total width of previously shown items.
      * @returns {Number} total width of previously shown items.
      */
@@ -340,12 +340,12 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
             .reduce((width, item) => item.elRef.nativeElement.offsetWidth + width, 0);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _disableFocusableItems(): void {
         this.items.forEach((item) => item.focusableElement?.setFocusable(false));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setFocusableVisibleItems(): void {
         this._disableFocusableItems();
 
@@ -368,7 +368,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getPreviousItemsCount(): number {
         return this._focusedElementIndex === -1 ? this.previousItemsCount : this._focusedElementIndex;
     }

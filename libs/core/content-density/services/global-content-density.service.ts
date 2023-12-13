@@ -14,10 +14,10 @@ export class GlobalContentDensityService implements OnDestroy {
      */
     currentContentDensity: ContentDensityMode;
 
-    /** @hidden */
+    /** @ignore */
     private _subscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Inject(ContentDensityStorage) private _storage: ContentDensityStorage,
         @Inject(DEFAULT_CONTENT_DENSITY) private _defaultContentDensity: ContentDensityMode
@@ -39,7 +39,7 @@ export class GlobalContentDensityService implements OnDestroy {
         return this._storage.setContentDensity(density);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscription.unsubscribe();
     }

@@ -61,20 +61,20 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
     }
 
     /**
-     * @hidden
+     * @ignore
      * The icon of the Message Page.
      */
     private _glyph = 'documents';
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function is responsible for order which css classes are applied
      */
@@ -83,14 +83,14 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
         return ['fd-message-page', this.class];
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
         this._getMessagePageIcon();
     }
 
     /**
-     * @hidden
+     * @ignore
      * Determine the icon based on the Message Page type
      * If no type is specified, the default icon is 'documents'
      */

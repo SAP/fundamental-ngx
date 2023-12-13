@@ -31,7 +31,7 @@ import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
     standalone: true
 })
 export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-form-group')
     fdFormGroupClass = true;
 
@@ -41,18 +41,18 @@ export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
     @Input()
     isInline: boolean;
 
-    /** @hidden */
+    /** @ignore */
     class: string;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }

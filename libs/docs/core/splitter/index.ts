@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'splitter';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/splitter';
 export const API_FILE_KEY = 'splitter';
 export const I18N_KEY = 'coreSplitter';

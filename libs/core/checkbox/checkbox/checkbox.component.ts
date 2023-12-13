@@ -59,11 +59,11 @@ export type FdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
     imports: [FormsModule, NgClass, ContentDensityModule, PortalModule]
 })
 export class CheckboxComponent<T = unknown> implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {
-    /** @hidden */
+    /** @ignore */
     @ViewChild('inputElement')
     inputElement: ElementRef<HTMLInputElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('labelElement')
     labelElement: ElementRef;
 
@@ -154,26 +154,26 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
     @Input()
     standalone = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('style.position')
     readonly position = 'relative';
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('style.outline')
     readonly outline = 'none';
 
     /** Emits event on focus change */
     @Output() focusChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('domPortal')
     private readonly _domPortalContent: ElementRef<HTMLElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(CdkPortalOutlet, { static: false })
     private readonly _portalOutlet: CdkPortalOutlet;
 
-    /** @hidden */
+    /** @ignore */
     _projectedDomPortal: Portal<any>;
 
     /** Stores current checkbox value. */
@@ -181,29 +181,29 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
     /** Stores current checkbox state. */
     checkboxState: FdCheckboxTypes;
 
-    /** @hidden */
+    /** @ignore */
     _projectedContent = false;
 
-    /** @hidden Used to define if control is in 'indeterminate' state.*/
+    /** @ignore Used to define if control is in 'indeterminate' state.*/
     get isIndeterminate(): boolean {
         return this.checkboxState === 'indeterminate';
     }
 
-    /** @hidden Used to define if control is in 'checked' / 'unchecked' state. */
+    /** @ignore Used to define if control is in 'checked' / 'unchecked' state. */
     get isChecked(): boolean {
         return this.checkboxState === 'checked' || this.checkboxState === 'force-checked';
     }
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden values returned by control. */
+    /** @ignore values returned by control. */
     private _values: FdCheckboxValues = { ...FD_CHECKBOX_VALUES_DEFAULT };
 
-    /** @hidden */
+    /** @ignore */
     _domPortal: DomPortal<HTMLElement>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public elementRef: ElementRef<Element>,
         @Attribute('tabIndexValue') public tabIndexValue: number = 0,
@@ -214,12 +214,12 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
         this.tabIndexValue = tabIndexValue;
     }
 
-    /** @hidden Reference to callback provided by FormControl.*/
+    /** @ignore Reference to callback provided by FormControl.*/
     public onTouched = (): void => {};
-    /** @hidden Reference to callback provided by FormControl.*/
+    /** @ignore Reference to callback provided by FormControl.*/
     public onValueChange: (value: T) => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._contentDensityObserver.consume(
             {
@@ -236,13 +236,13 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
         this._portalOutlet?.attach(this._domPortal);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
     /**
-     * @hidden ControlValueAccessor interface
+     * @ignore ControlValueAccessor interface
      * - sets new control value
      * - updates control state
      */
@@ -252,24 +252,24 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
         this._detectChanges();
     }
 
-    /** @hidden ControlValueAccessor interface method - sets onValueChange callback.*/
+    /** @ignore ControlValueAccessor interface method - sets onValueChange callback.*/
     registerOnChange(fn: (value: T) => void): void {
         this.onValueChange = fn;
     }
 
-    /** @hidden ControlValueAccessor interface method - sets onTouched callback.*/
+    /** @ignore ControlValueAccessor interface method - sets onTouched callback.*/
     registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
-    /** @hidden Called by FormControl - used to disable / enable control.*/
+    /** @ignore Called by FormControl - used to disable / enable control.*/
     setDisabledState(disabled: boolean): void {
         this.disabled = disabled;
         this._detectChanges();
     }
 
     /**
-     * @hidden
+     * @ignore
      * Based on current control state:
      * - sets next control value
      * - emits new control value
@@ -299,7 +299,7 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
         this._detectChanges();
     }
 
-    /** @hidden handles blur event */
+    /** @ignore handles blur event */
     _onBlur(): void {
         if (typeof this.onTouched === 'function') {
             this.onTouched();
@@ -307,12 +307,12 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
         this.focusChange.emit(false);
     }
 
-    /** @hidden handles focus event */
+    /** @ignore handles focus event */
     _onFocus(): void {
         this.focusChange.emit(true);
     }
 
-    /** @hidden handles click on the label associated with native checkbox input */
+    /** @ignore handles click on the label associated with native checkbox input */
     _onLabelClick(event: MouseEvent): void {
         // We have to stop propagation for click events on the input label.
         // By default, when a user clicks on a label element, a generated click event will be
@@ -324,7 +324,7 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
     }
 
     /**
-     * @hidden
+     * @ignore
      * Event handler for cases when checkbox was toggled with the help of keyboard.
      * @param event
      */
@@ -333,7 +333,7 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
         this._handleDisplayOnlyMode(event);
     }
 
-    /** @hidden handles click on the native checkbox input */
+    /** @ignore handles click on the native checkbox input */
     _onInputClick(event: MouseEvent): void {
         // When there's a click event dispatched from the input, we have to catch it, process and then re-dispatch it further.
         // This is needed in order to set the value to the component before any external listeners will receive it.
@@ -346,7 +346,7 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
         this.elementRef.nativeElement.dispatchEvent(new MouseEvent(event.type, event));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleDisplayOnlyMode(event: Event): void {
         if (!this.displayOnly) {
             return;
@@ -355,7 +355,7 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
         event.stopImmediatePropagation();
     }
 
-    /** @hidden Based on current control value sets new control state. */
+    /** @ignore Based on current control value sets new control state. */
     private _setState(): void {
         if (equal(this.checkboxValue, this.values.trueValue)) {
             this.checkboxState = 'checked';

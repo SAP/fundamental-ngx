@@ -15,7 +15,7 @@ export abstract class BaseToastContainerComponent<P extends BaseToastConfig = Ba
     implements ToastContainerComponent<P>
 {
     /**
-     * @hidden
+     * @ignore
      * The portal outlet inside this container into which the Toast content will be loaded.
      */
     @ViewChild(CdkPortalOutlet, { static: true })
@@ -60,7 +60,7 @@ export abstract class BaseToastContainerComponent<P extends BaseToastConfig = Ba
     /** ID of the Toast. */
     id: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     protected constructor(public config: P) {
         super();
         this.minWidth = this.config.minWidth;

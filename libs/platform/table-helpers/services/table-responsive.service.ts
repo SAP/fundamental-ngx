@@ -15,16 +15,16 @@ export interface FdpTableBreakpoint {
 
 @Injectable()
 export class TableResponsiveService implements OnDestroy {
-    /** @hidden */
+    /** @ignore */
     private readonly _responsiveBreakpoints = new Map<TableColumn, FdpTableBreakpoint[]>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onDestroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _resizeSubscription: Subscription | undefined;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Inject(Table) private readonly _table: Table,
         private readonly _tableService: TableService,
@@ -42,14 +42,14 @@ export class TableResponsiveService implements OnDestroy {
         this._listenToTableResize();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
     /**
-     * @hidden
+     * @ignore
      * Transforms plain breakpoints into a list with minimal/maximal element width with it's visibility state.
      */
     private _normalizeBreakpoints(breakpoints: Record<string, FdpColumnResponsiveState>): FdpTableBreakpoint[] {
@@ -70,7 +70,7 @@ export class TableResponsiveService implements OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Listens to the table element resize and calculates columns visibility based on the current breakpoint.
      */
     private _listenToTableResize(): void {
@@ -83,7 +83,7 @@ export class TableResponsiveService implements OnDestroy {
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _processResponsiveColumns(): void {
         let shouldNotify = false;
         const { width } = this._elmRef.nativeElement.getBoundingClientRect();

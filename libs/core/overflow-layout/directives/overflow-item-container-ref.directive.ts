@@ -8,13 +8,13 @@ import { Directive, ElementRef, OnDestroy, TemplateRef, ViewContainerRef, ViewRe
     standalone: true
 })
 export class OverflowItemContainerRefDirective implements OnDestroy {
-    /** @hidden */
+    /** @ignore */
     private _viewRef: ViewRef;
 
-    /** @hidden */
+    /** @ignore */
     private _detached = false;
 
-    /** @hidden */
+    /** @ignore */
     private _hidden = false;
 
     /**
@@ -35,7 +35,7 @@ export class OverflowItemContainerRefDirective implements OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _templateRef: TemplateRef<any>,
         private _viewContainerRef: ViewContainerRef,
@@ -45,7 +45,7 @@ export class OverflowItemContainerRefDirective implements OnDestroy {
         this._viewContainerRef.createEmbeddedView(this._templateRef);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._viewRef?.destroy();
     }

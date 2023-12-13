@@ -12,7 +12,7 @@ type HandlerRemoveFunction = () => void;
  */
 @Injectable()
 export class ClickedEventPlugin {
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Inject(DOCUMENT) private document: Document,
         @Inject(PLATFORM_ID) private platformId: any
@@ -22,12 +22,12 @@ export class ClickedEventPlugin {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     addEventListener(element: HTMLElement, eventName: string, handler: EventHandlerFunction): ($event: Event) => void {
         return this._setupEventBinding(element, handler);
     }
 
-    /** @hidden */
+    /** @ignore */
     addGlobalEventListener(
         higherOrderElement: string,
         eventName: string,
@@ -37,12 +37,12 @@ export class ClickedEventPlugin {
         return this._setupEventBinding(target, handler);
     }
 
-    /** @hidden */
+    /** @ignore */
     supports(eventName: string): boolean {
         return eventName === ClickedDirective.eventName;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _parseHigherOrderElement(selector: string): EventTarget {
         if (this.platformId !== 'browser') {
             return this.document;
@@ -59,7 +59,7 @@ export class ClickedEventPlugin {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setupEventBinding(target: EventTarget, handler: EventHandlerFunction): HandlerRemoveFunction {
         const addProxyFunction = (): void => {
             target.addEventListener('click', proxyFunction, false);

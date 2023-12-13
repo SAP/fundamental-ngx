@@ -52,21 +52,21 @@ export class FilterCustomComponent implements DoCheck {
         return this.contentDensityObserver.value;
     }
     /**
-     * @hidden
+     * @ignore
      * Currently selected value
      */
     _value: Record<string, any>;
 
     /**
-     * @hidden
+     * @ignore
      * Last emitted value
      */
     _valueLastEmitted: Record<string, any>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private contentDensityObserver: ContentDensityObserver) {}
 
-    /** @hidden */
+    /** @ignore */
     ngDoCheck(): void {
         try {
             // Didn't find a better way to catch changes in the custom template

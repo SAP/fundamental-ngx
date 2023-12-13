@@ -61,43 +61,43 @@ export class CarouselService implements OnDestroy {
         return this._currentTransitionPx;
     }
 
-    /** @hidden */
+    /** @ignore */
     private get elementsAtOnce(): number {
         const num = this.config?.elementsAtOnce ?? 1;
 
         return Math.max(1, num);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _lastDistance = 0;
 
-    /** @hidden */
+    /** @ignore */
     private _currentTransitionPx = 0;
 
-    /** @hidden */
+    /** @ignore */
     private _element: HTMLElement;
 
-    /** @hidden */
+    /** @ignore */
     private _initialDragPosition = 0;
 
-    /** @hidden */
+    /** @ignore */
     private _lastDragPosition = 0;
 
-    /** @hidden */
+    /** @ignore */
     private _listenToMouseMove = false;
-    /** @hidden */
+    /** @ignore */
     private _dragStarted = false;
 
     /**
-     * @hidden
+     * @ignore
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(@Inject(DOCUMENT) private readonly _document: Document | null) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -184,7 +184,7 @@ export class CarouselService implements OnDestroy {
         this.active = itemToActivate;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _centerActive(index: number): void {
         const size = this._getSize(this.items.first);
         if (isNaN(size)) {
@@ -219,7 +219,7 @@ export class CarouselService implements OnDestroy {
         this._transitionCarousel(this._currentTransitionPx + this._getSize(this.items.first) * missingItems);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _transitionToIndex(index: number, smooth?: boolean): void {
         let transitionPx: number = this._getSize(this.items.first) * index;
 
@@ -232,7 +232,7 @@ export class CarouselService implements OnDestroy {
         this._transitionCarousel(transitionPx);
     }
 
-    /** @hidden Get closes element, based on current transition */
+    /** @ignore Get closes element, based on current transition */
     private _getClosest(): CarouselItemInterface {
         /** If transition is positive, it should go to first element */
         if (
@@ -275,7 +275,7 @@ export class CarouselService implements OnDestroy {
         return item || this.items.last;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getIndexOfItem(item?: CarouselItemInterface): number {
         if (!item) {
             return -1;
@@ -283,7 +283,7 @@ export class CarouselService implements OnDestroy {
         return this.items.toArray().findIndex((_item) => _item === item);
     }
 
-    /** @hidden Getting size of carousel, width for horizontal, height for vertical */
+    /** @ignore Getting size of carousel, width for horizontal, height for vertical */
     private _getSize(item: CarouselItemInterface): number {
         if (this.config.vertical) {
             return item.getHeight();
@@ -292,7 +292,7 @@ export class CarouselService implements OnDestroy {
         return item.getWidth();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handlePan(delta: number): void {
         const distance = delta - this._lastDistance;
 
@@ -301,7 +301,7 @@ export class CarouselService implements OnDestroy {
         this._transitionCarousel(this._currentTransitionPx + distance);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handlePanEnd(delta: number): void {
         this._handlePan(delta);
 
@@ -328,7 +328,7 @@ export class CarouselService implements OnDestroy {
     }
 
     /**
-     * @hidden Animates the carousel to the currently selected slide.
+     * @ignore Animates the carousel to the currently selected slide.
      */
     private _transitionCarousel(transitionPx: number): void {
         this._currentTransitionPx = transitionPx;
@@ -337,20 +337,20 @@ export class CarouselService implements OnDestroy {
         this._element.style.transform = `translate${axis}(${this._currentTransitionPx}px)`;
     }
 
-    /** @hidden Pam Start handler, removes transition duration, */
+    /** @ignore Pam Start handler, removes transition duration, */
     private _handlePanStart(): void {
         this._element.style.transitionDuration = '0s';
         this.dragStateChange$.emit(true);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setupGestures(): void {
         this._setupDragStart();
         this._setupDrag();
         this._setupDragEnd();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _subscribeToEvents(
         events: string[],
         element: HTMLElement | Document,
@@ -365,7 +365,7 @@ export class CarouselService implements OnDestroy {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setupDragStart(): void {
         const events = ['mousedown', 'touchstart'];
 
@@ -376,7 +376,7 @@ export class CarouselService implements OnDestroy {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setupDrag(): void {
         const events = ['mousemove', 'touchmove'];
 
@@ -398,7 +398,7 @@ export class CarouselService implements OnDestroy {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setupDragEnd(): void {
         const events = ['mouseup', 'touchend'];
 
@@ -424,19 +424,19 @@ export class CarouselService implements OnDestroy {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getTransition(): string {
         return this.config?.transition ?? DEFAULT_TRANSITION_DURATION;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getDraggedDelta(offset: number): number {
         this._lastDragPosition = offset;
 
         return offset - this._initialDragPosition;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getDragCoordinate(event: MouseEvent | TouchEvent): number {
         let coordinates: Touch | MouseEvent;
 
@@ -449,7 +449,7 @@ export class CarouselService implements OnDestroy {
         return this.config.vertical ? coordinates.pageY : coordinates.pageX;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isTouchEvent(event: MouseEvent | TouchEvent): event is TouchEvent {
         return window.TouchEvent && event instanceof TouchEvent;
     }

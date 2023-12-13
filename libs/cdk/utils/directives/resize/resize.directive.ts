@@ -58,7 +58,7 @@ export class ResizeDirective implements OnChanges, AfterViewInit, OnDestroy {
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onResizeEnd = new EventEmitter<void>();
 
-    /** @hidden Reference to Resize handle */
+    /** @ignore Reference to Resize handle */
     @ContentChild(ResizeHandleDirective, { static: false })
     set resizeHandleReference(value: Nullable<ResizeHandleDirective>) {
         this._resizeHandleReference = value;
@@ -72,25 +72,25 @@ export class ResizeDirective implements OnChanges, AfterViewInit, OnDestroy {
         return this._resizeHandleReference;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _resizeHandleReference: Nullable<ResizeHandleDirective>;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _resizeSubscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _isRtl = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
         @Optional() private _rtlService: RtlService
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['disabled']) {
             if (changes['disabled'].previousValue === false && changes['disabled'].currentValue === true) {
@@ -101,7 +101,7 @@ export class ResizeDirective implements OnChanges, AfterViewInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (this._rtlService) {
             this._subscriptions.add(this._rtlService.rtl.subscribe((isRtl) => (this._isRtl = isRtl)));
@@ -112,24 +112,24 @@ export class ResizeDirective implements OnChanges, AfterViewInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._resizeSubscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _direction(): number {
         return this._isRtl ? -1 : 1;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _unsubscribe(): void {
         this._resizeSubscriptions.unsubscribe();
         this._resizeSubscriptions = new Subscription();
     }
 
-    /** @hidden Sets Resize listeners */
+    /** @ignore Sets Resize listeners */
     private _setResizeListeners(): void {
         this._unsubscribe();
         const resize = this._getResizeFunction();
@@ -175,7 +175,7 @@ export class ResizeDirective implements OnChanges, AfterViewInit, OnDestroy {
         this._resizeSubscriptions.add(preventOtherPointerEvents$.subscribe());
     }
 
-    /** @hidden Creates resize function*/
+    /** @ignore Creates resize function*/
     private _getResizeFunction(): (move: ResizeMove) => void {
         return (move: ResizeMove) => {
             this._elementRef.nativeElement.style.width = `${this._elementRef.nativeElement.offsetWidth + move.x}px`;
@@ -183,7 +183,7 @@ export class ResizeDirective implements OnChanges, AfterViewInit, OnDestroy {
         };
     }
 
-    /** @hidden Creates move function */
+    /** @ignore Creates move function */
     private _getMoveOffsetFunction(): (event1: MouseEvent, event2: MouseEvent) => ResizeMove {
         let verticalModifier: 1 | -1;
         let horizontalModifier: 1 | -1;
@@ -218,7 +218,7 @@ export class ResizeDirective implements OnChanges, AfterViewInit, OnDestroy {
         };
     }
 
-    /** @hidden Return boundary container */
+    /** @ignore Return boundary container */
     private _findResizeContainer(): Element | null {
         let resizeContainer: Element | null;
         if (typeof this.resizeBoundary === 'string') {
@@ -238,7 +238,7 @@ export class ResizeDirective implements OnChanges, AfterViewInit, OnDestroy {
         }
     }
 
-    /** @hidden Check whether resizable container is overflowing boundary container */
+    /** @ignore Check whether resizable container is overflowing boundary container */
     private _getBoundaryOverflowFunction(resizeContainer: Element): (move: ResizeMove) => boolean {
         return (move: ResizeMove) => {
             const containerPosition = resizeContainer.getBoundingClientRect();
@@ -269,7 +269,7 @@ export class ResizeDirective implements OnChanges, AfterViewInit, OnDestroy {
         };
     }
 
-    /** @hidden Create Observable notifying on resize actions */
+    /** @ignore Create Observable notifying on resize actions */
     private _getResizeEventsNotifiers(trigger$: Observable<boolean>): Observable<any> {
         const emitResizableStart$ = trigger$.pipe(
             filter((isActive) => isActive),
@@ -284,7 +284,7 @@ export class ResizeDirective implements OnChanges, AfterViewInit, OnDestroy {
         return merge(emitResizableStart$, emitResizableEnd$);
     }
 
-    /** @hidden Block resizable container pointer events when resizing  */
+    /** @ignore Block resizable container pointer events when resizing  */
     private _blockOtherPointerEvents(trigger$: Observable<boolean>): Observable<any> {
         return trigger$.pipe(
             tap((isActive) => {

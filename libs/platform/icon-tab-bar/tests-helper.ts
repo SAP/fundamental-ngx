@@ -2,7 +2,7 @@ import { UNIQUE_KEY_SEPARATOR } from './constants';
 import { IconTabBarItem } from './interfaces/icon-tab-bar-item.interface';
 import { TabConfig } from './interfaces/tab-config.interface';
 
-/** @hidden */
+/** @ignore */
 export function getGetCenterCoordsOfElement(el: HTMLElement | null): { clientX: number; clientY: number } {
     const rect = el?.getBoundingClientRect();
     return {
@@ -11,7 +11,7 @@ export function getGetCenterCoordsOfElement(el: HTMLElement | null): { clientX: 
     };
 }
 
-/** @hidden */
+/** @ignore */
 export function generateTestConfig(length: number, subTabs: boolean = false): TabConfig[] {
     const items: TabConfig[] = [];
     for (let i = 0; i < length; i++) {
@@ -25,7 +25,7 @@ export function generateTestConfig(length: number, subTabs: boolean = false): Ta
     return items;
 }
 
-/** @hidden */
+/** @ignore */
 export function generateTabBarItems(config: TabConfig[], flatIndexRef = { value: 0 }): IconTabBarItem[] {
     return config.map((item, index) => {
         const result: IconTabBarItem = {

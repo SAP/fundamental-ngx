@@ -95,7 +95,7 @@ export class P13GroupingDialogComponent implements Resettable {
     /** Table columns available for grouping */
     readonly columns: GroupDialogColumn[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     /** Indicates when reset command is available */
     readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
@@ -103,7 +103,7 @@ export class P13GroupingDialogComponent implements Resettable {
     /** Group rules to render */
     rules: GroupRule[] = [];
 
-    /** @hidden */
+    /** @ignore */
     constructor(public dialogRef: DialogRef<GroupDialogData>) {
         const { columns, collectionGroup } = this.dialogRef.data;
 
@@ -130,13 +130,13 @@ export class P13GroupingDialogComponent implements Resettable {
         this.dialogRef.close(result);
     }
 
-    /** @hidden */
+    /** @ignore */
     _recalculateResetAvailability(): void {
         const hasOnlyOneEmptyRule = this.rules.length === 1 && !this.rules[0].isValid;
         this._isResetAvailableSubject$.next(!hasOnlyOneEmptyRule);
     }
 
-    /** @hidden */
+    /** @ignore */
     _removeRule(rule: GroupRule): void {
         this.rules = this.rules.filter((_rule) => _rule !== rule);
 
@@ -148,24 +148,24 @@ export class P13GroupingDialogComponent implements Resettable {
         this._recalculateResetAvailability();
     }
 
-    /** @hidden */
+    /** @ignore */
     _addNew(index: number): void {
         this.rules.splice(index + 1, 0, new GroupRule());
     }
 
-    /** @hidden */
+    /** @ignore */
     _onRuleColumnKeyChange(rule: GroupRule, columnKey: string): void {
         rule.columnKey = columnKey;
         this._recalculateResetAvailability();
     }
 
-    /** @hidden */
+    /** @ignore */
     _onRuleShowAsColumnChange(rule: GroupRule, value: boolean): void {
         rule.showAsColumn = value;
         this._recalculateResetAvailability();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initiateRules(collectionGroup?: CollectionGroup[]): void {
         this.rules = this._createGroupRules(collectionGroup);
 
@@ -177,12 +177,12 @@ export class P13GroupingDialogComponent implements Resettable {
         this._recalculateResetAvailability();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _createGroupRules(collectionGroup: CollectionGroup[] = []): GroupRule[] {
         return collectionGroup.map(({ field, showAsColumn }): GroupRule => new GroupRule(field, showAsColumn));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getCollectionGroupFromGroupRules(rules = this.rules): CollectionGroup[] {
         return rules.filter(this._isRuleValid).map(
             ({ columnKey, showAsColumn }): CollectionGroup => ({
@@ -193,11 +193,11 @@ export class P13GroupingDialogComponent implements Resettable {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getUniqueRules(rules: GroupRule[]): GroupRule[] {
         return getUniqueListValuesByKey(rules, 'columnKey');
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isRuleValid = (rule: GroupRule): boolean => rule?.isValid;
 }

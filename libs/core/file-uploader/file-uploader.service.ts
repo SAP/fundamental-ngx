@@ -42,7 +42,7 @@ export class FileUploaderService {
         return fileUploadOutput;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _checkExtension(file: File, allowedExtensions: string[] | null): boolean {
         if (!allowedExtensions) {
             return true;
@@ -51,7 +51,7 @@ export class FileUploaderService {
         return allowedExtensions.lastIndexOf(extension) !== -1;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _checkSize(fileSize: number, maxSize: number, minSize: number): boolean {
         if (maxSize && fileSize > maxSize) {
             return false;

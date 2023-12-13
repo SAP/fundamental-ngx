@@ -7,49 +7,49 @@ import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
  overwritten.  By extending this class, we instead add library styles to the user's classList rather than replace them.
  */
 
-/** @hidden */
+/** @ignore */
 @Directive()
 export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
-    /** @hidden */
+    /** @ignore */
     private _elementRef: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     @Input() class: string; // user's custom classes
 
     /*
      each directive that extends this class will implement this function and populate it with one or more calls to
      the '_addClassToElement' function, passing the style names to be added with each call
      */
-    /** @hidden */
+    /** @ignore */
     abstract _setProperties(): void;
 
-    /** @hidden */
+    /** @ignore */
     _setClassToElement(className: string): void {
         (this._elementRef.nativeElement as HTMLElement).classList.value = `${className} ${this.class}`;
     }
 
-    /** @hidden */
+    /** @ignore */
     _clearElementClass(): void {
         (this._elementRef.nativeElement as HTMLElement).classList.value = '';
     }
 
-    /** @hidden */
+    /** @ignore */
     _addClassToElement(className: string): void {
         (this._elementRef.nativeElement as HTMLElement).classList.add(...className.split(' '));
     }
 
-    /** @hidden */
+    /** @ignore */
     _addStyleToElement(attribute, value): void {
         (this._elementRef.nativeElement as HTMLElement).style[attribute] = value;
     }
 
-    /** @hidden */
+    /** @ignore */
     protected constructor(elementRef: ElementRef) {
         this._elementRef = elementRef;
         this._setProperties();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         const classList = (this._elementRef.nativeElement as HTMLElement).classList;
         while (classList.length > 0) {
@@ -62,7 +62,7 @@ export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
         this._setProperties();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._setProperties();
     }

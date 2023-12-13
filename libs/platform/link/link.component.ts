@@ -117,7 +117,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     // eslint-disable-next-line @angular-eslint/no-output-native
     click: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FD_ICON_COMPONENT)
     icon: IconComponent;
 
@@ -125,14 +125,14 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     @ViewChild('link', { read: ElementRef })
     anchor: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     emphasized = false;
-    /** @hidden */
+    /** @ignore */
     subtle = false;
-    /** @hidden */
+    /** @ignore */
     private _inverted = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         protected _cd: ChangeDetectorRef,
         private renderer2: Renderer2
@@ -141,7 +141,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
         warnOnce(`LinkComponent is deprecated. Use 'fd-link' from '@fundamental-ngx/core/link' instead.`);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         /* if link disabled, for Avoiding tab focus and click. marking href undefined. */
         if (this.disabled) {
@@ -158,7 +158,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
         }
     }
 
-    /** @hidden Throw error for blank text/icon link */
+    /** @ignore Throw error for blank text/icon link */
     ngAfterViewInit(): void {
         if (!this.anchor.nativeElement.innerHTML) {
             throw new Error('Mandatory text/icon for fdp-link missing');

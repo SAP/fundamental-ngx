@@ -20,10 +20,10 @@ export class ResizeObserverDirective implements HasElementRef {
      **/
     elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     private _resizeObserverService = inject(ResizeObserverService);
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         this.resized = this._resizeObserverService.observe(this.elementRef.nativeElement);
     }

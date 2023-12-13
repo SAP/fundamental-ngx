@@ -54,38 +54,38 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
     @Input()
     overflowPopoverTitle: string;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(AvatarGroupItemRendererDirective)
     _avatarGroupItemPortals: QueryList<AvatarGroupItemRendererDirective>;
 
-    /** @hidden */
+    /** @ignore */
     _overflowPopoverStage: 'main' | 'details' = 'main';
 
-    /** @hidden */
+    /** @ignore */
     _selectedItem: AvatarGroupItemDirective;
 
-    /** @hidden */
+    /** @ignore */
     get _isDetailStage(): boolean {
         return this._overflowPopoverStage === 'details';
     }
 
-    /** @hidden */
+    /** @ignore */
     get isRtl(): boolean {
         return !!this._rtlService?.rtl.value;
     }
-    /** @hidden */
+    /** @ignore */
     private _itemClickSubscription: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _changeDetectorRef = inject(ChangeDetectorRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _renderer = inject(Renderer2);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _rtlService = inject(RtlService, { optional: true });
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._avatarGroupItemPortals.changes
             .pipe(
@@ -111,14 +111,14 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         if (this._itemClickSubscription) {
             this._itemClickSubscription.unsubscribe();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _openOverflowMain(): void {
         this._overflowPopoverStage = 'main';
         this._changeDetectorRef.detectChanges();

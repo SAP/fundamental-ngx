@@ -19,15 +19,15 @@ export type ButtonType =
 
 @Directive()
 export class BaseButton {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-button--toggled')
     @HostBinding('attr.aria-pressed')
     _toggled: boolean;
 
-    /** @hidden */
+    /** @ignore */
     _disabled = false;
 
-    /** @hidden */
+    /** @ignore */
     _ariaDisabled: boolean;
 
     /**

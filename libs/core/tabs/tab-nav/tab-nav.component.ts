@@ -49,27 +49,27 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     @Input()
     size: TabSizes = 'm';
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(TabLinkDirective, { descendants: true })
     links: QueryList<TabLinkDirective>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(TabItemDirective, { descendants: true })
     items: QueryList<TabItemDirective>;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _keyboardEventsManager: FocusKeyManager<TabLinkDirective>;
 
-    /** @hidden */
+    /** @ignore */
     private _dir: 'ltr' | 'rtl' = this._rtlService?.rtl.value ? 'rtl' : 'ltr';
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef,
         private readonly _contentDensityObserver: ContentDensityObserver,
@@ -78,24 +78,24 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
         this._contentDensityObserver.subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._setupKeyManager();
         this._refreshSubscription();
         this._listenOnContentQueryListChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._onDestroy$.next();
@@ -103,7 +103,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
         this._keyboardEventsManager?.destroy();
     }
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -134,7 +134,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     }
 
     /**
-     * @hidden
+     * @ignore
      * Every time any of query is changed, ex. tab is removed or added
      * reference to keydown subscriptions handler is renewed
      */
@@ -155,7 +155,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToFocusedLinks(): void {
         const links = this.links.toArray();
         links.forEach((link) => {
@@ -167,7 +167,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setupKeyManager(): void {
         this._keyboardEventsManager?.destroy();
         this._keyboardEventsManager = new FocusKeyManager(this.links).withWrap().withHorizontalOrientation(this._dir);
@@ -177,7 +177,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keyup', ['$event'])
     private _keyUpHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {

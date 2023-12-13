@@ -14,7 +14,7 @@ import { NestedListComponent } from '../nested-list/nested-list.component';
 })
 export class PreparedNestedListComponent {
     /**
-     * @hidden
+     * @ignore
      * For internal usage.
      * Defines if the component is first
      */
@@ -30,7 +30,7 @@ export class PreparedNestedListComponent {
     list: Nullable<NestedListModel>;
 
     /**
-     * @hidden
+     * @ignore
      */
     @ViewChild(forwardRef(() => NestedListComponent))
     _nestedListComponent: NestedListComponent;
@@ -43,7 +43,7 @@ export class PreparedNestedListComponent {
         return this._nestedListComponent;
     }
 
-    /** @hidden */
+    /** @ignore */
     _expandedChange(expanded: boolean, item: NestedListItem): void {
         item.expanded = expanded;
     }

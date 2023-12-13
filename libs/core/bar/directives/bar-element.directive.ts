@@ -14,7 +14,7 @@ export class BarElementDirective {
     @HostBinding('class.fd-bar__element--full-width')
     fullWidth = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-bar__element')
     barElement = true;
 }

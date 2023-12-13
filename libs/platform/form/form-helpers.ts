@@ -4,27 +4,27 @@ import { FormFieldGroupComponent } from './form-group/form-field-group/form-fiel
 import { FormFieldComponent } from './form-group/form-field/form-field.component';
 import { Field } from './models/field.model';
 
-/** @hidden */
+/** @ignore */
 export function isFieldChild(child: unknown): child is PlatformFormField {
     return child instanceof FormFieldComponent;
 }
 
-/** @hidden */
+/** @ignore */
 export function isFieldGroupWrapperChild(child: unknown): child is FormGeneratorFieldComponent {
     return child instanceof FormGeneratorFieldComponent;
 }
 
-/** @hidden */
+/** @ignore */
 export function isFieldGroupChild(child: unknown): child is FormFieldGroupComponent {
     return child instanceof FormFieldGroupComponent;
 }
 
-/** @hidden */
+/** @ignore */
 export function getFormField(field: PlatformFormField | FormGeneratorFieldComponent): PlatformFormField {
     return isFieldGroupWrapperChild(field) ? field.fieldRenderer : field;
 }
 
-/** @hidden */
+/** @ignore */
 export function getField(field: PlatformFormField): Field {
     field = isFieldGroupWrapperChild(field) ? field.fieldRenderer : field;
 

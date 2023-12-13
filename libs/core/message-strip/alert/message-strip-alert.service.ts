@@ -24,19 +24,19 @@ import { MessageStripAlertComponentData, MessageStripAlertContainerPosition } fr
     providedIn: 'root'
 })
 export class MessageStripAlertService {
-    /** @hidden */
+    /** @ignore */
     private injector = inject(Injector);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _overlay: Overlay = inject(Overlay);
 
-    /** @hidden */
+    /** @ignore */
     private viewportSize$ = inject(ViewportSizeObservable);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _messageStripAlertService = inject(MessageStripAlertService, { optional: true, skipSelf: true });
 
-    /** @hidden */
+    /** @ignore */
     private _messageAlerts$ = new BehaviorSubject<
         Array<
             Required<OpenMessageStripAlertConfig> & {
@@ -45,7 +45,7 @@ export class MessageStripAlertService {
         >
     >([]);
 
-    /** @hidden */
+    /** @ignore */
     private _overlayRefs: Partial<
         Record<
             MessageStripAlertPosition,
@@ -56,15 +56,15 @@ export class MessageStripAlertService {
         >
     > = {};
 
-    /** @hidden */
+    /** @ignore */
     private _messageStripAlertContainerFooters$ = new BehaviorSubject<
         Partial<Record<MessageStripAlertPosition, Type<any>>>
     >({});
 
-    /** @hidden */
+    /** @ignore */
     footerComponents$ = this._messageStripAlertContainerFooters$.asObservable();
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         if (this._messageStripAlertService) {
             throw new Error('MessageStripAlertService is already provided');
@@ -92,7 +92,7 @@ export class MessageStripAlertService {
         return alertRef;
     }
 
-    /** @hidden */
+    /** @ignore */
     private getMessageStripAlertRef<ComponentType = unknown>(
         config: Required<OpenMessageStripAlertConfig<ComponentType>>
     ): MessageStripAlertRef {
@@ -145,7 +145,7 @@ export class MessageStripAlertService {
         return alertRef;
     }
 
-    /** @hidden */
+    /** @ignore */
     private listenToItemsChanges(): void {
         combineLatest([this.viewportSize$, this._messageAlerts$.asObservable()])
             .pipe(
@@ -199,7 +199,7 @@ export class MessageStripAlertService {
             .subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     private syncExistingOverlays(
         messageAlertsByPosition: Partial<Record<MessageStripAlertPosition, ComponentPortal<MessageStripAlert>[]>>,
         bottomSectionIsOpened: boolean,
@@ -229,7 +229,7 @@ export class MessageStripAlertService {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private getOverlayRef(position: MessageStripAlertPosition): {
         ref: OverlayRef;
         containerRef: ComponentRef<MessageStripAlertContainerComponent>;
@@ -257,7 +257,7 @@ export class MessageStripAlertService {
         return this._overlayRefs[position]!;
     }
 
-    /** @hidden */
+    /** @ignore */
     private createOverlay(verticalPosition: string, horizontalPosition: string): OverlayRef {
         return this._overlay.create({
             panelClass: [

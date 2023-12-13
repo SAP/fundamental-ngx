@@ -5,7 +5,7 @@ export interface DeprecatedSelectorModel {
     current: string;
 }
 
-/** @hidden */
+/** @ignore */
 export function getDeprecatedModel(current: string, deprecated: string): DeprecatedSelectorModel {
     return {
         current,
@@ -13,7 +13,7 @@ export function getDeprecatedModel(current: string, deprecated: string): Depreca
     };
 }
 
-/** @hidden */
+/** @ignore */
 export function deprecatedModelProvider(current: string, deprecated: string): ValueProvider {
     return {
         provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
@@ -26,17 +26,17 @@ export const FD_DEPRECATED_DIRECTIVE_SELECTOR = new InjectionToken<DeprecatedSel
 );
 
 export abstract class DeprecatedSelector {
-    /** @hidden */
+    /** @ignore */
     protected _selectors: DeprecatedSelectorModel | null = inject(FD_DEPRECATED_DIRECTIVE_SELECTOR, { optional: true });
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         if (isDevMode() && this._selectors) {
             console.warn(this._messageGenerator(this._selectors.deprecated, this._selectors.current));
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _messageGenerator(deprecated: string, current: string): string {
         const segments = [`${deprecated} selector(s) are deprecated and may affect input properties`];
         if (current) {

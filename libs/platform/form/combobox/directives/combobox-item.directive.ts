@@ -10,9 +10,9 @@ export type FdoComboboxItemDefType =
 
 @Directive()
 export abstract class FdpComboboxItemDef<T = unknown> {
-    /** @hidden */
+    /** @ignore */
     abstract name: FdoComboboxItemDefType;
-    /** @hidden */
+    /** @ignore */
     templateRef = inject(TemplateRef<T>);
 }
 
@@ -27,14 +27,14 @@ export abstract class FdpComboboxItemDef<T = unknown> {
     ]
 })
 export class ComboboxItemDirective<T = unknown> extends FdpComboboxItemDef<{ $implicit: T; index: number }> {
-    /** @hidden */
+    /** @ignore */
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('fdpComboboxItemUse')
     useModel: T;
-    /** @hidden */
+    /** @ignore */
     name: FdoComboboxItemDefType = 'optionItemTemplate';
 
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard<T>(
         dir: ComboboxItemDirective<T>,
         ctx: { $implicit: T; index: number }
@@ -54,14 +54,14 @@ export class ComboboxItemDirective<T = unknown> extends FdpComboboxItemDef<{ $im
     ]
 })
 export class ComboboxSelectedItemDirective<T = unknown> extends FdpComboboxItemDef<{ $implicit: T; index: number }> {
-    /** @hidden */
+    /** @ignore */
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('fdpComboboxSelectedItemUse')
     useModel: T;
-    /** @hidden */
+    /** @ignore */
     name: FdoComboboxItemDefType = 'selectedItemTemplate';
 
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard<T>(
         dir: ComboboxSelectedItemDirective<T>,
         ctx: { $implicit: T; index: number }
@@ -81,10 +81,10 @@ export class ComboboxSelectedItemDirective<T = unknown> extends FdpComboboxItemD
     ]
 })
 export class ComboboxItemGroupDirective extends FdpComboboxItemDef<{ $implicit: { label: string } }> {
-    /** @hidden */
+    /** @ignore */
     name: FdoComboboxItemDefType = 'groupItemTemplate';
 
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard(
         dir: ComboboxItemGroupDirective,
         ctx: { $implicit: { label: string } }
@@ -104,15 +104,15 @@ export class ComboboxItemGroupDirective extends FdpComboboxItemDef<{ $implicit: 
     ]
 })
 export class ComboboxSecondaryItemDirective<T = unknown> extends FdpComboboxItemDef<{ $implicit: T }> {
-    /** @hidden */
+    /** @ignore */
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('fdpComboboxSecondaryItemUse')
     useModel: T;
 
-    /** @hidden */
+    /** @ignore */
     name: FdoComboboxItemDefType = 'secondaryItemTemplate';
 
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard<T>(
         dir: ComboboxSelectedItemDirective<T>,
         ctx: { $implicit: T }

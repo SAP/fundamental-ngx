@@ -29,7 +29,7 @@ export class CarouselDirective implements AfterContentInit {
     @Input()
     active: CarouselItemDirective;
 
-    /** @hidden */
+    /** @ignore */
     get carouselService(): CarouselService {
         return this._carouselService;
     }
@@ -42,17 +42,17 @@ export class CarouselDirective implements AfterContentInit {
     @Output()
     readonly dragStateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(CarouselItemDirective, { descendants: true })
     items: QueryList<CarouselItemDirective>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _elementRef: ElementRef,
         private readonly _carouselService: CarouselService
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._carouselService.initialise(this.config, this.items, this._elementRef);
 

@@ -76,18 +76,18 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     @Input()
     filteringFromHeaderDisabled: Nullable<boolean> = false;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(PopoverComponent, { static: false })
     popover: Nullable<PopoverComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(TemplateDirective)
     _popoverItems: QueryList<TemplateDirective>;
 
-    /** @hidden */
+    /** @ignore */
     _popoverItems$ = new BehaviorSubject<TemplateRef<any>[]>([]);
 
-    /** @hidden */
+    /** @ignore */
     _headerPopoverTriggers: TriggerConfig[] = [
         {
             trigger: 'click',
@@ -109,32 +109,32 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
         }
     ];
 
-    /** @hidden */
+    /** @ignore */
     protected readonly SORT_DIRECTION = SortDirection;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _tableService = inject(TableService);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _table = inject(Table);
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._popoverItems.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._popoverItems$.next(this._popoverItems.map((t) => t.templateRef));
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     _setColumnHeaderSortBy(field: TableColumn['key'], direction: SortDirection): void {
         this._tableService.setSort([{ field, direction }]);
         this.popover?.close();
     }
 
-    /** @hidden */
+    /** @ignore */
     _setColumnHeaderGroupBy(field: TableColumn['key']): void {
         const state = this._tableService.getTableState();
         if (state.groupBy?.length === 1 && state.groupBy[0].field === field) {
@@ -145,7 +145,7 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _setColumnHeaderFilterBy(field: TableColumn['key'], value: any): void {
         if (!value) {
             this._tableService.removeFilters([field]);
@@ -163,13 +163,13 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
         this.popover?.close();
     }
 
-    /** @hidden */
+    /** @ignore */
     _freeze(): void {
         this._table.freezeToColumn(this.column.name, this.column.endFreezable);
         this.popover?.close();
     }
 
-    /** @hidden */
+    /** @ignore */
     _unFreeze(): void {
         this._table.unfreeze(this.column.name, this.column.endFreezable);
         this.popover?.close();

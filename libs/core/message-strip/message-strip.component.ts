@@ -90,15 +90,15 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     @ContentChild(MessageStripIconDirective)
     icon: MessageStripIconDirective;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
@@ -111,7 +111,7 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
         return !!this.icon || !!this.type;
     }
 
-    /** @hidden */
+    /** @ignore */
     get typeSpecificIconName(): string {
         switch (this.type) {
             case 'warning':
@@ -136,7 +136,7 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
         this.onDismiss.emit();
     }
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied

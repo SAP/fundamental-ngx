@@ -34,20 +34,20 @@ export class TreeService {
         return this._navigationIndicator$.asObservable();
     }
 
-    /** @hidden */
+    /** @ignore */
     private readonly _expandableItems = new Map<number, { [key: string]: boolean }>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _selectionMode$ = new BehaviorSubject<SelectionModeModel>({ mode: 'none', placement: 'none' });
 
-    /** @hidden */
+    /** @ignore */
     private readonly _expandedLevel = new BehaviorSubject<number | undefined>(undefined);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _navigationIndicator$ = new BehaviorSubject<boolean>(false);
 
     /**
-     * @hidden
+     * @ignore
      */
     readonly detectChanges = new Subject<void>();
 
@@ -56,7 +56,7 @@ export class TreeService {
         this._navigationIndicator$.next(value);
     }
 
-    /** @hidden */
+    /** @ignore */
     normalizeTreeItems<T extends TreeItem = TreeItem>(
         items: Nullable<T[]>,
         parentId: string | null = null,
@@ -109,7 +109,7 @@ export class TreeService {
         this._selectionMode$.next({ mode, placement });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _emitNewExpandedLevel(): void {
         // We need to go from level 1 to deeper level since level 4 may be expanded, yet level 2 not.
         const levels = Array.from(this._expandableItems.keys()).sort();

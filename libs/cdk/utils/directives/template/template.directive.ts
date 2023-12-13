@@ -9,10 +9,10 @@ export class TemplateDirective {
     @Input('fdkTemplate')
     name: string;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public templateRef: TemplateRef<any>) {}
 
-    /** @hidden */
+    /** @ignore */
     getName(): string {
         return this.name;
     }

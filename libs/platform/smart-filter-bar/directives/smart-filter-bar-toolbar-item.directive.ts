@@ -5,6 +5,6 @@ import { Directive, TemplateRef } from '@angular/core';
     standalone: true
 })
 export class SmartFilterBarToolbarItemDirective {
-    /** @hidden */
+    /** @ignore */
     constructor(public templateRef: TemplateRef<any>) {}
 }

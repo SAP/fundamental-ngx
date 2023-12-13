@@ -25,7 +25,7 @@ import { SelectionService } from './selection.service';
 export class SelectableItemDirective<ElementType extends Element = HTMLElement, ValueType = any>
     implements SelectableItemToken<ElementType, ValueType>
 {
-    /** @hidden */
+    /** @ignore */
     @Input()
     set value(val: ValueType) {
         this._value = val;
@@ -37,7 +37,7 @@ export class SelectableItemDirective<ElementType extends Element = HTMLElement, 
         return this._value;
     }
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     set fdkSelectableItem(value: BooleanInput) {
         const isSelectable = coerceBooleanProperty(value);
@@ -58,7 +58,7 @@ export class SelectableItemDirective<ElementType extends Element = HTMLElement, 
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     @Output()
     clicked: Observable<MouseEvent | KeyboardEvent>;
 
@@ -66,14 +66,14 @@ export class SelectableItemDirective<ElementType extends Element = HTMLElement, 
     @Output()
     selected = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     private _value!: ValueType;
-    /** @hidden */
+    /** @ignore */
     private _selected = false;
-    /** @hidden */
+    /** @ignore */
     private _selectable = true;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Optional()
         @Inject(FDK_SELECTABLE_ITEM_PROVIDER)
@@ -89,7 +89,7 @@ export class SelectableItemDirective<ElementType extends Element = HTMLElement, 
         this._listenToDisablingEvents();
     }
 
-    /** @hidden */
+    /** @ignore */
     getSelected(): boolean {
         if (this.provider?.getSelected) {
             return this.provider.getSelected();
@@ -97,7 +97,7 @@ export class SelectableItemDirective<ElementType extends Element = HTMLElement, 
         return this._selected;
     }
 
-    /** @hidden */
+    /** @ignore */
     setSelected(isSelected: boolean): void {
         if (this.provider?.setSelected) {
             this.provider.setSelected(isSelected);
@@ -116,7 +116,7 @@ export class SelectableItemDirective<ElementType extends Element = HTMLElement, 
         this.selected.emit(isSelected);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToDisablingEvents(): void {
         const disablingEvents$: Observable<boolean>[] = [];
         if (this.disabled$) {
@@ -128,7 +128,7 @@ export class SelectableItemDirective<ElementType extends Element = HTMLElement, 
         merge(...disablingEvents$).subscribe(() => this._updateSelectionAndSelectableWatcher());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updateSelectionAndSelectableWatcher(): void {
         if (this.disabled$?.fdkDisabled) {
             this.selectionService.deselectItem(this);
@@ -136,7 +136,7 @@ export class SelectableItemDirective<ElementType extends Element = HTMLElement, 
         this._updateSelectableWatcher();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updateSelectableWatcher(): void {
         this.selectionService.listenToItemInteractions();
     }

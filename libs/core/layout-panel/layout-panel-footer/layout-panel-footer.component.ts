@@ -29,20 +29,20 @@ export class LayoutPanelFooterComponent implements OnInit, OnChanges, CssClassBu
      */
     @Input() position: Nullable<FooterPosition>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [

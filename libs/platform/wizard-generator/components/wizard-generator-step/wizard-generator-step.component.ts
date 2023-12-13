@@ -78,32 +78,32 @@ export class WizardGeneratorStepComponent implements WizardGeneratorStep, OnInit
     formsCreated = new EventEmitter<WizardStepForms>();
 
     /**
-     * @hidden
+     * @ignore
      */
     private _submittedForms: WizardStepSubmittedForms = {};
 
     /**
-     * @hidden
+     * @ignore
      */
     private _formSubmitted$ = new Subject<WizardStepSubmittedForms | null>();
 
     /**
-     * @hidden
+     * @ignore
      */
     private _forms: WizardStepForms = {};
 
     /**
-     * @hidden
+     * @ignore
      */
     private _trackedFields: DependencySteps;
 
     /**
-     * @hidden
+     * @ignore
      */
     _visibleFormGroupIds: Record<string, boolean>;
 
     /**
-     * @hidden
+     * @ignore
      * @private
      */
     private _hiddenFormGroupValues: {
@@ -111,26 +111,26 @@ export class WizardGeneratorStepComponent implements WizardGeneratorStep, OnInit
     } = {};
 
     /**
-     * @hidden
+     * @ignore
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _wizardGeneratorService: WizardGeneratorService,
         private _formGeneratorService: FormGeneratorService
     ) {}
 
     /**
-     * @hidden
+     * @ignore
      */
     ngOnInit(): void {
         this.refreshFormsVisibility();
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     ngOnDestroy(): void {
         this._wizardGeneratorService.removeWizardStepComponent(this.item.id);
@@ -138,7 +138,7 @@ export class WizardGeneratorStepComponent implements WizardGeneratorStep, OnInit
         this._onDestroy$.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     async ngOnChanges(changes: SimpleChanges): Promise<void> {
         if (changes.stepStatus && changes.stepStatus.currentValue === 'current' && this.formGenerators?.length > 0) {
             await this.updateFormsState();
@@ -228,7 +228,7 @@ export class WizardGeneratorStepComponent implements WizardGeneratorStep, OnInit
     }
 
     /**
-     * @hidden
+     * @ignore
      * @description Keeps track on dependency fields for other steps and refreshes the view when they changed.
      * @param form
      * @param key

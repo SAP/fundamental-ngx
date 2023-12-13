@@ -60,22 +60,22 @@ import { VariantManagementDataProvider } from './data-provider';
     ]
 })
 export class ManageVariantsDialogComponent {
-    /** @hidden */
+    /** @ignore */
     _source: TableDataSource<VariantItem>;
 
     /**
-     * @hidden
+     * @ignore
      * Used to apply typings in template.
      */
     _variantModel!: VariantItem;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _variants: VariantItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private readonly _dataProvider: VariantManagementDataProvider;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public dialog: DialogRef<VariantItem[]>,
         private readonly _cdr: ChangeDetectorRef
@@ -86,12 +86,12 @@ export class ManageVariantsDialogComponent {
         this._source = new TableDataSource(this._dataProvider);
     }
 
-    /** @Hidden */
+    /** @ignore */
     _markAsFavourite(item: VariantItem): void {
         item.favourite = !item.favourite;
     }
 
-    /** @hidden */
+    /** @ignore */
     _removeVariant(item: VariantItem): void {
         this._variants.splice(
             this._variants.findIndex((variant) => item.id === variant.id),
@@ -102,7 +102,7 @@ export class ManageVariantsDialogComponent {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Closes dialog with updated variants array.
      */
     _saveVariants(): void {

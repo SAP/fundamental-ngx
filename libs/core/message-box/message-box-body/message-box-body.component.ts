@@ -18,10 +18,10 @@ import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.cl
     standalone: true
 })
 export class MessageBoxBodyComponent {
-    /** @hidden */
+    /** @ignore */
     get messageBoxConfig(): MessageBoxConfig {
         return this.messageBox?._messageBoxConfig || {};
     }
-    /** @hidden */
+    /** @ignore */
     constructor(@Optional() private messageBox?: MessageBoxHost) {}
 }

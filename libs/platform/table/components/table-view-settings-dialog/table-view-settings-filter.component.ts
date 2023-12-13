@@ -60,7 +60,7 @@ export class TableViewSettingsFilterComponent {
     /** Custom filter template directive reference */
     customFilterTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FdpViewSettingsFilterCustomDef)
     set _filterCustomDef(filterCustomDef: FdpViewSettingsFilterCustomDef) {
         this.customFilterTemplate = filterCustomDef?.templateRef;

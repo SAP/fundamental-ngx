@@ -32,7 +32,7 @@ export class WizardMobileExampleComponent {
     example2step2status: WizardStepStatus = 'upcoming';
     example2step3status: WizardStepStatus = 'upcoming';
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(WizardStepComponent)
     steps: QueryList<WizardStepComponent>;
 
@@ -105,13 +105,13 @@ export class WizardMobileExampleComponent {
     }
 
     // Handle focus on key press first example
-    /** @hidden */
+    /** @ignore */
     handleFocus(event: KeyboardEvent, index: number): void {
         this._wizardService.progressBarKeyHandler(event, this.steps, index);
     }
 
     // Handle focus on key press second example
-    /** @hidden */
+    /** @ignore */
     handleFocus1(event: KeyboardEvent, index: number): void {
         this._wizardService.progressBarKeyHandler(event, this.steps, index);
     }

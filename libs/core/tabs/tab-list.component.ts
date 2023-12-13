@@ -178,54 +178,54 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     @Output()
     hiddenItemsCount = new EventEmitter<number>();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(forwardRef(() => TabPanelComponent))
     tabPanels: QueryList<TabPanelComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(TabLinkDirective)
     tabHeaderLinks: QueryList<TabLinkDirective>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(TabItemDirective)
     tabHeaders: QueryList<TabItemDirective>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(TabItemExpandComponent, { read: ElementRef })
     overflowTrigger: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('headerContainer', { read: ElementRef })
     headerContainer: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(ScrollbarDirective)
     _scrollbar: ScrollbarDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('menu', { read: MenuComponent })
     menu: MenuComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(OverflowLayoutComponent)
     private _overflowLayout: OverflowLayoutComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('scrollSpy', { read: ScrollSpyDirective })
     private readonly _scrollSpy: Nullable<ScrollSpyDirective>;
 
-    /** @hidden */
+    /** @ignore */
     get contentContainer(): ElementRef<HTMLElement> {
         return this._scrollbar?.elementRef;
     }
 
-    /** @hidden Collection of tabs in original order */
+    /** @ignore Collection of tabs in original order */
     _tabArray: TabInfo[] = [];
 
-    /** @hidden Whether to disable scroll spy */
+    /** @ignore Whether to disable scroll spy */
     _disableScrollSpy = false;
 
-    /** @hidden */
+    /** @ignore */
     _init = true;
 
     /** Event is thrown always when tab is selected by keyboard actions */
@@ -234,13 +234,13 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     /** Event is thrown always, when some property is changed */
     readonly tabPanelPropertyChanged: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _zone = inject(NgZone);
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _changeDetectorRef: ChangeDetectorRef,
         readonly _contentDensityObserver: ContentDensityObserver,
@@ -249,12 +249,12 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         warnOnce('TabListComponent is deprecated, use `@fundamental-ngx/platform/icon-tab-bar` instead');
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._setupTabPanelsChangeListeners();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._initStackContentSubscription();
         this._listenOnTabPanelsExpandedChange();
@@ -262,17 +262,17 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         this._listenOnPropertiesChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     _tabHeaderClickHandler(tabPanel: TabPanelComponent): void {
         this._expandTab(tabPanel, !tabPanel.expanded);
     }
 
-    /** @hidden */
+    /** @ignore */
     _tabHeaderKeydownHandler(event: KeyboardEvent, tabPanel: TabPanelComponent): void {
         if (!KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             return;
@@ -282,7 +282,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         this._tabHeaderClickHandler(tabPanel);
     }
 
-    /** @hidden */
+    /** @ignore */
     _overflowingTabHeaderClickHandler(tabPanel: TabPanelComponent): void {
         this._tabArray.forEach((tab) => {
             tab.panel._forcedVisibility = tab.panel === tabPanel;
@@ -295,7 +295,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         this._detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     _highlightActiveTab({ id }: HTMLElement): void {
         const tab = this._tabArray.find((_tab) => _tab.panel._panelId === id);
         if (tab) {
@@ -307,7 +307,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _onTriggerKeydown(event: KeyboardEvent, menuRef: MenuComponent): void {
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             event.preventDefault();
@@ -315,7 +315,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _tabPanelsChange$(): Observable<TabPanelComponent[]> {
         return this.tabPanels.changes.pipe(
             startWith(this.tabPanels),
@@ -324,19 +324,19 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _detectChanges(): void {
         if (this._changeDetectorRef && !this._changeDetectorRef['destroyed']) {
             this._changeDetectorRef.detectChanges();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setupTabPanelsChangeListeners(): void {
         this._listenOnTabPanelsAndUpdateStorageStructures();
     }
 
-    /** @hidden Setup mechanisms required for handling the stacked content behavior */
+    /** @ignore Setup mechanisms required for handling the stacked content behavior */
     private _initStackContentSubscription(): void {
         this._tabPanelsChange$
             .pipe(
@@ -349,7 +349,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
             );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnTabPanelsAndUpdateStorageStructures(): void {
         this._tabPanelsChange$
             .pipe(
@@ -365,7 +365,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnTabPanelsExpandedChange(): void {
         this._tabPanelsChange$
             .pipe(
@@ -376,7 +376,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
             .subscribe((event) => this._expandTab(event.target, event.state));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnTabPanelsAndInitiallyExpandTabPanel(): void {
         this._tabPanelsChange$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             const activeTab = this._tabArray.find((_tab) => _tab.active);
@@ -398,14 +398,14 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnPropertiesChange(): void {
         merge(this.tabPanelPropertyChanged, this.tabPanels.changes)
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this._detectChanges());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _activateStackedTab(tabPanel: TabPanelComponent, scroll = true): void {
         if (scroll) {
             this._scrollToPanel(tabPanel);
@@ -415,7 +415,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _activateExpandableTab(tabPanel: TabPanelComponent, expand: boolean): void {
         const collapse = this.collapsibleTabs && !expand;
 
@@ -427,7 +427,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _expandTab(tabPanel: TabPanelComponent, expand: boolean, detectChanges = true): void {
         if (this.stackContent) {
             this._activateStackedTab(tabPanel);
@@ -446,7 +446,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         this._selectedTabChange(tabPanel);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _scrollToPanel(tabPanel: TabPanelComponent): void {
         const panelElement = tabPanel.elementRef.nativeElement;
         const containerElement = this.contentContainer.nativeElement;
@@ -467,12 +467,12 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         }
     }
 
-    /** @hidden Whether tab can be expanded/collapsed */
+    /** @ignore Whether tab can be expanded/collapsed */
     private _canChangeExpandState(tabPanel: TabPanelComponent, expand: boolean): boolean {
         return !tabPanel.disabled && expand !== tabPanel.expanded && expand === false ? this.collapsibleTabs : true;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _selectedTabChange(tabPanel: TabPanelComponent): void {
         this.selectedTabChange.emit(tabPanel);
 

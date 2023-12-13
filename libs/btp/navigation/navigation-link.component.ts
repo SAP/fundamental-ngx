@@ -76,11 +76,11 @@ import { FdbNavigationListItemComponent } from './navigation-list-item-component
     }
 })
 export class NavigationLinkComponent implements OnInit, OnChanges, CssClassBuilder, HasElementRef {
-    /** @hidden */
+    /** @ignore */
     @Input()
     class: string;
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     glyph: string;
 
@@ -92,52 +92,52 @@ export class NavigationLinkComponent implements OnInit, OnChanges, CssClassBuild
     @Input()
     external = false;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('textRenderer')
     textRenderer: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.tabindex')
     _tabindex = 0;
 
-    /** @hidden */
+    /** @ignore */
     readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     readonly _routerLink = inject(RouterLink, {
         optional: true,
         self: true
     });
 
-    /** @hidden */
+    /** @ignore */
     readonly _routerLinkActive = inject(RouterLinkActive, { optional: true });
 
     /**
      * If user applies RouterLink, we need to check if the link is active
-     * @hidden
+     * @ignore
      **/
     protected isActive = toSignal(inject(RouterLinkActive).isActiveChange);
 
-    /** @hidden */
+    /** @ignore */
     protected navigationListItemComponent = inject(FdbNavigationListItemComponent);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _navigationComponent = inject(FdbNavigationComponent);
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         this.navigationListItemComponent.linkComponent = this;
         this.navigationListItemComponent.routerLink.set(this._routerLink);
         this.navigationListItemComponent.routerLinkActive.set(this._routerLinkActive);
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [this.class || '', 'fd-navigation__link'];
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('click')
     private _onClick(): void {
         if (this.navigationListItemComponent.childNavigationListComponent()) {
@@ -145,18 +145,18 @@ export class NavigationLinkComponent implements OnInit, OnChanges, CssClassBuild
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('focus')
     private _focusHandler(): void {
         this._navigationComponent.setActiveItem(this.navigationListItemComponent);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }

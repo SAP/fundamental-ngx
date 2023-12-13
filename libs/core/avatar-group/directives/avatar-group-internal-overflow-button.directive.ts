@@ -19,28 +19,28 @@ export class AvatarGroupInternalOverflowButtonDirective implements OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private readonly _templateContext: { $implicit: AvatarGroupItemRendererDirective[] } = { $implicit: [] };
-    /** @hidden */
+    /** @ignore */
     private readonly _templateRef: TemplateRef<{ $implicit: AvatarGroupItemRendererDirective[] }> = inject(TemplateRef);
-    /** @hidden */
+    /** @ignore */
     private readonly _viewContainerRef = inject(ViewContainerRef);
-    /** @hidden */
+    /** @ignore */
     private _embeddedView?: EmbeddedViewRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard(
         _directive: AvatarGroupInternalOverflowButtonDirective,
         context: unknown
     ): context is { $implicit: AvatarGroupItemRendererDirective[] } {
         return true;
     }
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._hide();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _show(hiddenItems: AvatarGroupItemRendererDirective[]): void {
         this._templateContext.$implicit = hiddenItems;
         if (this._embeddedView) {
@@ -52,7 +52,7 @@ export class AvatarGroupInternalOverflowButtonDirective implements OnDestroy {
         this._embeddedView.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _hide(): void {
         this._viewContainerRef.clear();
         this._embeddedView = undefined;

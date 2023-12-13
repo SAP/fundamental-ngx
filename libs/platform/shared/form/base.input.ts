@@ -169,7 +169,7 @@ export abstract class BaseInput
 
     abstract set value(value: any);
 
-    /** @hidden */
+    /** @ignore */
     formMessage: FormInputMessageGroupComponent;
 
     /**
@@ -180,7 +180,7 @@ export abstract class BaseInput
     /** set when input field is mandatory form field */
     required: boolean;
 
-    /** @hidden */
+    /** @ignore */
     innerErrorsTemplate?: TemplateRef<any>;
 
     /** Whether control has errors */
@@ -188,7 +188,7 @@ export abstract class BaseInput
         return this._controlInvalid;
     }
 
-    /** @hidden */
+    /** @ignore */
     advancedStateMessage: Nullable<FormFieldAdvancedStateMessage>;
 
     /**
@@ -196,36 +196,36 @@ export abstract class BaseInput
      */
     readonly stateChanges: Subject<any> = new Subject<any>();
 
-    /** @hidden */
+    /** @ignore */
     readonly formField: PlatformFormField | null = null;
 
-    /** @hidden */
+    /** @ignore */
     readonly _doCheck$ = inject(FDP_DO_CHECK, { optional: true });
 
     /**
-     * @hidden
+     * @ignore
      * The state of the form control - applies css classes.
      * Can be `success`, `error`, `warning`, `information` or 'default'
      */
     protected _state: FormStates | undefined;
 
-    /** @hidden */
+    /** @ignore */
     protected defaultId = `fdp-input-id-${randomId++}`;
-    /** @hidden */
+    /** @ignore */
     protected _disabled: boolean;
-    /** @hidden */
+    /** @ignore */
     protected _value: any;
-    /** @hidden */
+    /** @ignore */
     protected _editable = true;
-    /** @hidden */
+    /** @ignore */
     protected _destroyed = new Subject<void>();
 
     /**
-     * @hidden
+     * @ignore
      */
     private _controlInvalid = false;
 
-    /** @hidden */
+    /** @ignore */
     protected constructor(
         cd: ChangeDetectorRef,
         readonly elementRef: ElementRef,
@@ -255,13 +255,13 @@ export abstract class BaseInput
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     onChange: (value: any) => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     onTouched = (): void => {};
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         if (this.formField) {
             this.formField.registerFormFieldControl(this);
@@ -278,7 +278,7 @@ export abstract class BaseInput
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (this.ngControl) {
             this._subscriptions.add(
@@ -317,17 +317,17 @@ export abstract class BaseInput
         this._cd.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnChange(fn: (_: any) => void): void {
         this.onChange = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         super.ngOnDestroy();
         this.stateChanges.complete();
@@ -338,7 +338,7 @@ export abstract class BaseInput
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     setDisabledState(isDisabled: BooleanInput): void {
         const newState = coerceBooleanProperty(isDisabled);
         this._cd.markForCheck();
@@ -433,7 +433,7 @@ export abstract class BaseInput
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     protected getValue(): any {
         return this._value;
     }

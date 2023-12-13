@@ -177,7 +177,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     @ContentChildren(DynamicPageContentComponent, { descendants: true })
     contentComponents: QueryList<DynamicPageContentComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(TabListComponent)
     _tabListComponent: TabListComponent;
 
@@ -185,23 +185,23 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     @ViewChildren(TabPanelComponent)
     dynamicPageTabs: QueryList<TabPanelComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(DynamicPageContentHostComponent)
     _contentHostComponents: QueryList<DynamicPageContentHostComponent>;
 
     /**
-     * @hidden
+     * @ignore
      * whether tabbed content is present in this page
      */
     _isTabbed = false;
 
     /**
-     * @hidden
+     * @ignore
      * holds the tab content
      */
     _tabs: DynamicPageContentComponent[] = [];
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         protected _cd: ChangeDetectorRef,
         public readonly elementRef: ElementRef<HTMLElement>
@@ -209,19 +209,19 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         super(_cd);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._listenToContentComponentsListChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._cd.detectChanges();
 
         this._tabListComponent?.headerContainer.nativeElement.classList.add('fd-dynamic-page__tabs');
     }
 
-    /** @hidden */
+    /** @ignore */
     ngDoCheck(): void {
         /** Used to detect changes in projected components that displayed using templates,
          * https://github.com/angular/angular/issues/44112
@@ -244,21 +244,21 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     _onSelectedTabChange(event: TabPanelComponent): void {
         const content = this.contentComponents.find((contentComponent) => contentComponent.id === event.id);
 
         content && this.tabChange.emit(new DynamicPageTabChangeEvent(content, event));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToContentComponentsListChanges(): void {
         this.contentComponents.changes.pipe(startWith(this.contentComponents)).subscribe(() => {
             this._createContentTabs();
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _createContentTabs(): void {
         const contentComponents = this.contentComponents.toArray();
 
@@ -286,7 +286,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isTabContentPresent(contentComponents: DynamicPageContentComponent[]): boolean {
         contentComponents.forEach((contentComponent) => {
             if (contentComponent.tabLabel) {

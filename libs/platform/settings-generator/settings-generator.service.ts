@@ -38,25 +38,25 @@ export class SettingsGeneratorService implements OnDestroy {
     readonly mobileState$ = new BehaviorSubject<boolean>(false);
 
     /**
-     * @hidden
+     * @ignore
      * Form generators collected from all items and groups.
      */
     private readonly _formGenerators = new Map<string, FormGeneratorComponent>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _messagePopover = inject(MessagePopoverFormWrapperComponent, {
         optional: true
     });
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         this._listenToMessagePopoverItemClick();
     }
 
-    /** @hidden */
+    /** @ignore */
     _addFormGenerator(path: string[], formGenerator: FormGeneratorComponent): void {
         const joinedPath = path.join('.');
         this._formGenerators.set(joinedPath, formGenerator);
@@ -72,7 +72,7 @@ export class SettingsGeneratorService implements OnDestroy {
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     _removeFormGenerator(path: string[]): void {
         const joinedPath = path.join('.');
         this._formGenerators.delete(joinedPath);
@@ -111,7 +111,7 @@ export class SettingsGeneratorService implements OnDestroy {
         this.mobileState$.next(isMobile);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._formGenerators.clear();
         this._destroy$.next();
@@ -119,7 +119,7 @@ export class SettingsGeneratorService implements OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Subscribes to click events from message popover and tries to open the section where invalid input is located.
      */
     private _listenToMessagePopoverItemClick(): void {

@@ -2,7 +2,7 @@ import { ElementRef } from '@angular/core';
 import { getNativeElement } from '../../helpers/get-native-element';
 import { HasElementRef } from '../../interfaces/has-element-ref.interface';
 
-/** @hidden */
+/** @ignore */
 export function setDisabledState(
     element: HasElementRef<Element> | Element | ElementRef<Element>,
     isDisabled: boolean,

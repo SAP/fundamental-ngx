@@ -24,14 +24,14 @@ import { DynamicPageBaseActions } from './dynamic-page-base-actions';
     standalone: true
 })
 export class DynamicPageLayoutActionsComponent extends DynamicPageBaseActions implements AfterContentInit {
-    /** @hidden */
+    /** @ignore */
     @ContentChild(ToolbarComponent)
     toolbarComponent: ToolbarComponent;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef,
         private _renderer: Renderer2,
@@ -40,7 +40,7 @@ export class DynamicPageLayoutActionsComponent extends DynamicPageBaseActions im
         super();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageLayoutActionsToolbar, this.elementRef);
         this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageToolbar, this.elementRef);

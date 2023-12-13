@@ -68,33 +68,33 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onSelectionChange = new EventEmitter<ApprovalUser[]>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(ListComponent)
     list: ListComponent<ApprovalUser>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(StandardListItemComponent)
     listItems: QueryList<StandardListItemComponent>;
 
-    /** @hidden */
+    /** @ignore */
     _selectedItems: BaseListItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _idPrefix = 'approval-node-user-';
 
-    /** @hidden */
+    /** @ignore */
     _trackByFn = trackByFn;
 
-    /** @hidden */
+    /** @ignore */
     _displayUsers: ApprovalUser[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _intervalID?: number;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _cdr: ChangeDetectorRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (this.selectedUsers.length) {
             const selectedApproversNames = this.selectedUsers.map((approver) => approver.name);
@@ -112,33 +112,33 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.users) {
             this._collectDataProgressive();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._killInterval();
     }
 
-    /** @hidden */
+    /** @ignore */
     _onSelect(event: SelectionChangeEvent): void {
         this._selectedItems = event.selectedItems;
 
         this.onSelectionChange.emit(this._getUsersFromSelectedItems(event.selectedItems));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getUsersFromSelectedItems(items: BaseListItem[]): ApprovalUser[] {
         return items
             .map((item) => this.users.find((user) => `${this._idPrefix + user.id}` === item.itemEl.nativeElement.id))
             .filter((u): u is ApprovalUser => !!u);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _collectDataProgressive(): void {
         this._killInterval();
         this._displayUsers = [];
@@ -157,7 +157,7 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _userCollectorIntervalFn(tracker: { currentIndex: number }): void {
         const nextIndex = tracker.currentIndex + ITEMS_RENDERED_AT_ONCE;
 
@@ -178,7 +178,7 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
         this._cdr.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _killInterval(): void {
         if (this._intervalID) {
             clearInterval(this._intervalID);

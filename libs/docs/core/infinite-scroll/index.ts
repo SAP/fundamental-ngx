@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'infinite-scroll';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/infinite-scroll';
 export const API_FILE_KEY = 'infiniteScroll';

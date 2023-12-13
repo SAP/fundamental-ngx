@@ -11,13 +11,13 @@ export class PopoverContainerDirective implements OnInit, OnDestroy {
     /** Subject which emits when popover position refresh is required. */
     refreshPosition$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _destroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _elmRef: ElementRef<HTMLElement>) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         resizeObservable(this._elmRef.nativeElement)
             .pipe(takeUntil(this._destroy$))
@@ -26,7 +26,7 @@ export class PopoverContainerDirective implements OnInit, OnDestroy {
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._destroy$.next();
         this._destroy$.complete();

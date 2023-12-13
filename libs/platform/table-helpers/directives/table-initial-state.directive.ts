@@ -49,18 +49,18 @@ export class TableInitialStateDirective extends TableInitialState {
         return this.getTableState();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _table: Table;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _tableService = inject(TableService);
 
-    /** @hidden */
+    /** @ignore */
     setTable(table: Table): void {
         this._table = table;
     }
 
-    /** @hidden */
+    /** @ignore */
     setInitialState(): void {
         const prevState = this.getTableState();
         const columns = this._table.getTableColumns();

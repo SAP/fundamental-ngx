@@ -7,28 +7,28 @@ import { BaseDataProvider } from './base-data-provider';
 import { ComboBoxDataSource, ListDataSource, MultiComboBoxDataSource, MultiInputDataSource } from './data-source';
 
 export class ObservableComboBoxDataSource<T> extends ComboBoxDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(private data: Observable<T[]>) {
         super(new BaseDataProvider(data));
     }
 }
 
 export class ObservableMultiComboBoxDataSource<T> extends MultiComboBoxDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(private data: Observable<T[]>) {
         super(new BaseDataProvider(data));
     }
 }
 
 export class ObservableListDataSource<T> extends ListDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(private data: Observable<T[]>) {
         super(new BaseDataProvider(data));
     }
 }
 
 export class ObservableMultiInputDataSource<T> extends MultiInputDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(private data: Observable<T[]>) {
         super(new BaseDataProvider(data));
     }

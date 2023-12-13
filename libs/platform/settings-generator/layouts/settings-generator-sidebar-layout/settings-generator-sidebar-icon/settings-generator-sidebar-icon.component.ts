@@ -43,22 +43,22 @@ export class SettingsGeneratorSidebarIconComponent {
         return this._thumbnail;
     }
 
-    /** @hidden */
+    /** @ignore */
     _avatarConfig: ListAvatarConfig | undefined;
 
-    /** @hidden */
+    /** @ignore */
     _iconConfig: ListIconConfig | undefined;
 
-    /** @hidden */
+    /** @ignore */
     private _thumbnail: ThumbnailSettingsItem;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _cdr = inject(ChangeDetectorRef);
 
-    /** @hidden */
+    /** @ignore */
     private _transformAvatarConfig(
         config$: Partial<ListAvatarConfig> | string | Observable<Partial<ListAvatarConfig> | string>
     ): void {
@@ -69,7 +69,7 @@ export class SettingsGeneratorSidebarIconComponent {
         });
     }
 
-    /** @Hidden */
+    /** @ignore */
     private _transformIconConfig(
         config$: Partial<ListIconConfig> | string | Observable<Partial<ListIconConfig> | string>
     ): void {
@@ -80,7 +80,7 @@ export class SettingsGeneratorSidebarIconComponent {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getConfigFromObservable<T>(config: T | Observable<T>, callback: (config: T) => void): void {
         if (isSubscribable(config)) {
             config.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((_config) => {

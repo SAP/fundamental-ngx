@@ -107,49 +107,49 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     @Output()
     readonly primaryButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(SplitButtonActionTitle, { read: TemplateRef })
     titleTemplate: TemplateRef<any> | null;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(MenuComponent)
     menu: MenuComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('mainActionButton', { read: ElementRef })
     mainActionBtn: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('menuActionButton', { read: ElementRef })
     menuActionBtn: ElementRef;
 
     /** The Title for main action button */
     mainActionTitle: string;
 
-    /** @hidden */
+    /** @ignore */
     mainButtonWidth: string;
 
-    /** @hidden */
+    /** @ignore */
     get typeClass(): string {
         return this.fdType ? `fd-button-split--${this.fdType}` : '';
     }
 
-    /** @hidden */
+    /** @ignore */
     private _mainActionTitle: string;
 
-    /** @hidden */
+    /** @ignore */
     private _menuItemSubscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _menuSubscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _contentDensitySubscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _menuActivePathSubscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _cdRef: ChangeDetectorRef,
         private _destroyRef: DestroyRef,
@@ -157,7 +157,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         private _renderer: Renderer2
     ) {}
 
-    /** @hidden Emits event when main button is clicked */
+    /** @ignore Emits event when main button is clicked */
     onMainButtonClick(event: MouseEvent): void {
         this.primaryButtonClicked.emit(event);
         if (this.selected) {
@@ -168,7 +168,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         event.stopPropagation();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this.menu._menuItems.forEach((item) => {
             item.menuInteractive._fromSplitButton = true;
@@ -194,14 +194,14 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._contentDensityObserver.isCompact$
             .pipe(tap(this._addButtonTextClass), takeUntilDestroyed(this._destroyRef))
             .subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if ('selected' in changes) {
             this.selectMenuItem(this.selected);
@@ -211,7 +211,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._menuItemSubscriptions.unsubscribe();
         this._menuSubscription.unsubscribe();
@@ -235,14 +235,14 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         this._focusTriggerElement();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getMainButtonWidth(): void {
         if (this.mainActionBtn && this.mainActionBtn.nativeElement) {
             this.mainButtonWidth = this.mainActionBtn.nativeElement.getBoundingClientRect().width + 'px';
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setupMenuItemSubscriptions(): void {
         this.menu._menuItems.forEach((menuItem) => {
             menuItem.onSelect.pipe(first()).subscribe(() => {
@@ -258,7 +258,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleMenuItemSelection(menuItem: MenuItemComponent): void {
         if (!this.mainAction || !this.mainAction.keepMainAction) {
             this.selected = menuItem;
@@ -272,7 +272,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setupMenuSubscription(): void {
         this._menuSubscription = this.menu._menuItems.changes.subscribe(() => {
             this._menuItemSubscriptions.unsubscribe();
@@ -283,7 +283,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         this._menuSubscription.add(this.menu.isOpenChange.subscribe(() => this._cdRef.markForCheck()));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleMainActionObject(): void {
         if (this.mainAction && typeof this.mainAction.mainActionTitle === 'string') {
             this.mainActionTitle = this.mainAction.mainActionTitle;
@@ -292,7 +292,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addButtonTextClass = (): void => {
         const textSpanElement = this.mainActionBtn?.nativeElement.querySelector('.fd-button__text');
         if (!textSpanElement) {
@@ -302,7 +302,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         this._renderer.addClass(textSpanElement, splitButtonTextClass);
     };
 
-    /** @hidden */
+    /** @ignore */
     private _focusTriggerElement(): void {
         this.menuActionBtn?.nativeElement.focus();
     }

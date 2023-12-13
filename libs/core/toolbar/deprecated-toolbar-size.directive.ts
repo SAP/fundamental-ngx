@@ -42,16 +42,16 @@ export class DeprecatedToolbarSizeDirective
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     readonly message: string;
 
-    /** @hidden */
+    /** @ignore */
     readonly alternative = {
         name: 'Use [fdContentDensity] directive instead',
         link: ['/core', 'content-density']
     };
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         super(ContentDensityMode.COMPACT);
         this.message = `Usage of fd-toolbar[size] is deprecated`;
@@ -60,7 +60,7 @@ export class DeprecatedToolbarSizeDirective
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this.complete();
     }

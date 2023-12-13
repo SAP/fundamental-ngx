@@ -5,7 +5,7 @@ import { Directive, TemplateRef, ViewContainerRef } from '@angular/core';
     standalone: true
 })
 export class ProductSwitchButtonDirective {
-    /** @hidden */
+    /** @ignore */
     constructor(
         readonly templateRef: TemplateRef<any>,
         private _viewContainerRef: ViewContainerRef

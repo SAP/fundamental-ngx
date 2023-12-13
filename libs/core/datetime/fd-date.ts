@@ -42,7 +42,7 @@ export class FdDate {
     /**
      * Validation state
      */
-    /** @hidden */
+    /** @ignore */
     private _isValid: boolean;
 
     /**

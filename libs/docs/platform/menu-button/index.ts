@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'menu-button';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/menu-button';
 export const API_FILE_KEY = 'menuButton';

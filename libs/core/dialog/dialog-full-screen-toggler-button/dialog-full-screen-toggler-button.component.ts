@@ -36,21 +36,21 @@ export class DialogFullScreenTogglerButtonComponent implements OnInit {
     @Input()
     title: string;
 
-    /** @hidden */
+    /** @ignore */
     _fullscreen = false;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _ref = inject(DialogRef, {
         optional: true
     });
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _cdr = inject(ChangeDetectorRef);
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._ref?.fullScreen.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isFullScreen) => {
             this._fullscreen = isFullScreen;

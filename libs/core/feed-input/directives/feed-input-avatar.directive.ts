@@ -13,24 +13,24 @@ export class FeedInputAvatarDirective implements OnInit, OnChanges, CssClassBuil
     @Input()
     class: string;
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     placeholder: boolean;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-feed-input__thumb', this.placeholder ? `fd-avatar--placeholder` : '', this.class];

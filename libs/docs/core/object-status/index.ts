@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'object-status';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/object-status';
 export const API_FILE_KEY = 'objectStatus';

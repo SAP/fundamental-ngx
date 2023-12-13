@@ -21,10 +21,10 @@ import { IconTabBarPopoverComponent } from '../popovers/icon-tab-bar-popover/ico
     ]
 })
 export class IconTabBarFilterTypeComponent extends ClosableIconTabBar {
-    /** @hidden list of tab html elements, that can receive focus */
+    /** @ignore list of tab html elements, that can receive focus */
     @ViewChildren('tabItem') _tabUIElements: QueryList<ElementRef<HTMLElement>>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(IconTabBarPopoverComponent) _tabBarPopover: IconTabBarPopoverComponent;
 
     /**
@@ -33,11 +33,11 @@ export class IconTabBarFilterTypeComponent extends ClosableIconTabBar {
     @Input()
     showTotalTab = true;
 
-    /** @hidden */
+    /** @ignore */
     _totalTab?: IconTabBarItem;
 
     /**
-     * @hidden
+     * @ignore
      * @description initialize state of tabs
      */
     protected _initTabs(): void {

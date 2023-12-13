@@ -24,12 +24,12 @@ export class FormFieldLayoutService {
      * hintOptions config set the way that it might end up on 'input', then it will emit true
      */
     readonly needsInlineHelpPlace: Observable<boolean>;
-    /** @hidden */
+    /** @ignore */
     private _needsInlineHelpPlace$ = new BehaviorSubject<boolean>(false);
-    /** @hidden */
+    /** @ignore */
     private _elementsMap: Map<Record<string, any>, boolean> = new Map();
 
-    /** @hidden */
+    /** @ignore */
     constructor(@Inject(FDP_FORM_FIELD_HINT_LAYOUT_CONFIG) private _hintLayoutConfig: HintLayoutConfig) {
         this.needsInlineHelpPlace = this._needsInlineHelpPlace$.pipe(distinctUntilChanged());
     }
@@ -90,7 +90,7 @@ export class FormFieldLayoutService {
      * Will loop through all registered components and if any of them has need for
      * inline help place, then it will notify listeners about it and also will set
      * local variable
-     * @hidden
+     * @ignore
      */
     private _updateCombinedValue(): void {
         for (const [, needed] of this._elementsMap) {

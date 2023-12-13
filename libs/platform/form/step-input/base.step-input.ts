@@ -140,53 +140,53 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     @Output()
     valueChange = new EventEmitter<StepInputChangeEvent>();
 
-    /** @hidden */
+    /** @ignore */
     lastEmittedValue: number;
 
-    /** @hidden */
+    /** @ignore */
     canIncrement = true;
 
-    /** @hidden */
+    /** @ignore */
     canDecrement = true;
 
-    /** @hidden
+    /** @ignore
      * Indicates if control has an error
      */
     isErrorState = false;
 
-    /** @hidden */
+    /** @ignore */
     get canChangeValue(): boolean {
         return !(this.disabled || !this.editable);
     }
 
-    /** @hidden */
+    /** @ignore */
     _contentDensity: ContentDensity = this.config.contentDensity;
 
-    /** @hidden */
+    /** @ignore */
     _align: StepInputAlign | null;
 
-    /** @hidden */
+    /** @ignore */
     private _max: number = Number.MAX_VALUE;
 
-    /** @hidden */
+    /** @ignore */
     private _min: number = -Number.MAX_VALUE;
 
-    /** @hidden */
+    /** @ignore */
     private _step = 1;
 
-    /** @hidden */
+    /** @ignore */
     private _stepFn: StepInputStepFunction;
 
-    /** @hidden */
+    /** @ignore */
     private _precision: number;
 
-    /** @hidden */
+    /** @ignore */
     private _align$ = new BehaviorSubject<StepInputAlign | null>(null);
 
-    /** @hidden */
+    /** @ignore */
     private _pendingEnteredValue: number | Error | null = null;
 
-    /** @hidden */
+    /** @ignore */
     private get _currentValue(): number | null {
         const pendingValue = this._pendingEnteredValue;
 
@@ -201,7 +201,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         return pendingValue;
     }
 
-    /** @hidden */
+    /** @ignore */
     protected constructor(
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -217,7 +217,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         super.ngOnInit();
 
@@ -232,7 +232,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         this._listenToAlign();
     }
 
-    /** @hidden
+    /** @ignore
      * Override writeValue method to keep input view value up to date
      */
     writeValue(value: number): void {
@@ -273,7 +273,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         this.decrease(step);
     }
 
-    /** @hidden
+    /** @ignore
      * catch value during entering from view.
      */
     onEnterValue(value: string): void {
@@ -292,7 +292,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         }
     }
 
-    /** @hidden
+    /** @ignore
      * Commit entered value from view.
      */
     commitEnteredValue(): void {
@@ -311,7 +311,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         }
     }
 
-    /** @hidden
+    /** @ignore
      * Indicates when input gets focused
      */
     onFocus(): void {
@@ -326,7 +326,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         }
     }
 
-    /** @hidden
+    /** @ignore
      * Indicates when input loses focus
      */
     onBlur(): void {
@@ -346,7 +346,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     /** Parse value entered "in focus" mode */
     abstract parseValueInFocusMode(value: string): number | null;
 
-    /** @hidden */
+    /** @ignore */
     private _listenToFormErrorState(): void {
         this.stateChanges
             .asObservable()
@@ -360,7 +360,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToAlign(): void {
         this._align$
             .asObservable()
@@ -393,24 +393,24 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _emitChangedValue(): void {
         const value = this._value;
         this.lastEmittedValue = value;
         this.valueChange.emit(this.createChangeEvent(value));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getStepValueForIncrease(): number {
         return this._getStepValue('increase');
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getStepValueForDecrease(): number {
         return this._getStepValue('decrease');
     }
 
-    /** @hidden
+    /** @ignore
      * Get step value based either on "stepFn" or "step"
      */
     private _getStepValue(action: StepInputStepFunctionAction): number {
@@ -422,13 +422,13 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         return this.step;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updateViewValue(): void {
         const formatted = this._formatValue();
         this._renderValue(formatted);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _formatValue(value = this._value): string {
         if (this.focused) {
             return this.formatValueInFocusMode(value);
@@ -436,18 +436,18 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         return this.formatValue(value);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _renderValue(value: string): void {
         const inputEl = this._getInputNativeElement();
         this._renderer.setProperty(inputEl, 'value', value);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getInputNativeElement(): HTMLInputElement | null {
         return this._elementRef.nativeElement as HTMLInputElement | null;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getValueSelection(): { selectionStart: number; selectionEnd: number } {
         const inputEl = this._getInputNativeElement();
         const selectionStart = inputEl?.selectionStart || 0;
@@ -455,7 +455,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         return { selectionStart, selectionEnd };
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setValueSelection(selectionStart: number, selectionEnd: number): void {
         const inputEl = this._getInputNativeElement();
         if (!inputEl) {
@@ -464,30 +464,30 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         inputEl.setSelectionRange(selectionStart, selectionEnd);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateCanIncrement(): void {
         const step = this._getStepValueForIncrease();
         this.canIncrement = (this._value || 0) + step <= this._max;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateCanDecrement(): void {
         const step = this._getStepValueForDecrease();
         this.canDecrement = (this._value || 0) - step >= this._min;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateCanDecrementIncrement(): void {
         this._calculateCanDecrement();
         this._calculateCanIncrement();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _validateValueByLimits(value: number): number {
         return Math.min(Math.max(value, this._min), this._max);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _checkAndThrowErrorIfStepDoesntMatchPrecision(precision: number, step: number): void {
         // Check if "precision" is valid comparing to "step"
         const stepDecimalLength = getNumberDecimalLength(step);
@@ -499,12 +499,12 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setPendingEnteredValue(value: number | Error): void {
         this._pendingEnteredValue = value;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _resetPendingEnteredValue(): void {
         this._pendingEnteredValue = null;
     }

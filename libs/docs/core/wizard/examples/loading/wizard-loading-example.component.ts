@@ -41,7 +41,7 @@ export class WizardLoadingExampleComponent {
      */
     fullscreen = false;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(WizardStepComponent)
     steps: QueryList<WizardStepComponent>;
 

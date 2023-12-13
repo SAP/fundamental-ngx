@@ -32,10 +32,10 @@ export class ToolLayoutComponent implements OnChanges, OnInit, CssClassBuilder, 
     @Input()
     mode: Nullable<FdbViewMode>;
 
-    /** @hidden */
+    /** @ignore */
     readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -45,12 +45,12 @@ export class ToolLayoutComponent implements OnChanges, OnInit, CssClassBuilder, 
         return ['fd-tool-layout', this.mode ? `fd-tool-layout--${this.mode}` : '', this.class];
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }

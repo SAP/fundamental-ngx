@@ -15,7 +15,7 @@ export class MessagePopoverFormItemDirective {
     @Input()
     errorTypes: MessagePopoverConfig['errors'];
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef,
         @Optional() public readonly control: NgControl

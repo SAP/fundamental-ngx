@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'resizable-card-layout';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/resizable-card-layout';
 export const API_FILE_KEY = 'resizableCardLayout';

@@ -96,31 +96,31 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     @Input()
     overflowPopoverTitle: string;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(AvatarGroupItemRendererDirective)
     _avatarRenderers: QueryList<AvatarGroupItemRendererDirective>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(AvatarGroupItemDirective)
     _avatars: QueryList<AvatarGroupItemDirective>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(AvatarGroupOverflowButtonDirective)
     _overflowButton: AvatarGroupOverflowButtonDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(AvatarGroupOverflowBodyDirective)
     _avatarGroupPopoverBody: AvatarGroupOverflowBodyDirective;
 
-    /** @hidden */
+    /** @ignore */
     _contentDirection$: Observable<'rtl' | 'ltr'> = (inject(RtlService, { optional: true })?.rtl || of(false)).pipe(
         map((isRtl) => (isRtl ? 'rtl' : 'ltr'))
     );
 
-    /** @hidden */
+    /** @ignore */
     private _cdr = inject(ChangeDetectorRef);
 
-    /** @hidden */
+    /** @ignore */
     _detectChanges(): void {
         this._cdr.detectChanges();
     }

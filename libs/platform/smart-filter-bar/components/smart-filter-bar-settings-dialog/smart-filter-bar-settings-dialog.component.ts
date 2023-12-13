@@ -113,19 +113,19 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
      */
     source!: TableDataSource<FieldFilterItem>;
 
-    /** @hidden */
+    /** @ignore */
     _availableFields!: FieldFilterItem[];
 
-    /** @hidden */
+    /** @ignore */
     _filterVisibilityOptions: SelectItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     loaded = false;
 
     /** Indicates when reset command is available */
     readonly isResetAvailable$: Observable<boolean>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _categoryLabelKeys: SmartFilterBarVisibilityCategoryLabels = {
         all: 'settingsCategoryAll',
         visible: 'settingsCategoryVisible',
@@ -134,25 +134,25 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
         mandatory: 'settingsCategoryMandatory'
     };
 
-    /** @hidden */
+    /** @ignore */
     private _sourceSubscription!: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     private _selectedFilters: string[] = [];
 
     /**
-     * @hidden
+     * @ignore
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _translationResolver = new TranslationResolver();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _dialogRef: DialogRef<SmartFilterSettingsDialogConfig, string[]>,
         @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>,
@@ -163,7 +163,7 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
         this._init();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this.setSelectedFilters();
     }
@@ -185,7 +185,7 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -217,23 +217,23 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
         this.source = new TableDataSource(new SmartFilterBarOptionsDataProvider(this._availableFields));
     }
 
-    /** @hidden */
+    /** @ignore */
     _cancel(): void {
         this._dialogRef.dismiss();
     }
 
-    /** @hidden */
+    /** @ignore */
     _confirm(): void {
         this._dialogRef.close(this._selectedFilters);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onRowSelectionChange(event: TableRowSelectionChangeEvent<FieldFilterItem>): void {
         this._selectedFilters = event.selection.map((c) => c.name);
         this._isResetAvailableSubject$.next(true);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onFilterVisibilityChange(event: FdpSelectionChangeEvent): void {
         if (!this.table) {
             return;
@@ -242,7 +242,7 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
         this.source.fetch(this.table.getTableState());
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _init(): Promise<void> {
         await this._transformVisibilityLabels();
         this.loaded = true;

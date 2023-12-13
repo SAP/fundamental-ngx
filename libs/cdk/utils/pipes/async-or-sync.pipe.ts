@@ -9,12 +9,12 @@ import { isPromise, isSubscribable } from '../typecheck';
     pure: false
 })
 export class AsyncOrSyncPipe implements OnDestroy, PipeTransform {
-    /** @hidden */
+    /** @ignore */
     private _cdr: ChangeDetectorRef | null;
-    /** @hidden */
+    /** @ignore */
     private _asyncPipe: AsyncPipe | null;
 
-    /** @hidden */
+    /** @ignore */
     constructor(ref: ChangeDetectorRef) {
         this._cdr = ref;
         this._asyncPipe = new AsyncPipe(this._cdr);
@@ -28,7 +28,7 @@ export class AsyncOrSyncPipe implements OnDestroy, PipeTransform {
         return !isPromise(value) && !isSubscribable(value) ? value : this._asyncPipe?.transform(value) ?? null;
     }
 
-    /** @Hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._asyncPipe?.ngOnDestroy();
         this._asyncPipe = null;

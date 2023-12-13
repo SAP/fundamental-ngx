@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'approval-flow';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/approval-flow';
 export const API_FILE_KEY = 'approvalFlow';
 export const I18N_KEY = 'platformApprovalFlow';

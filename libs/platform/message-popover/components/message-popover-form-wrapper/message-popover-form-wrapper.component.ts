@@ -42,15 +42,15 @@ export type MessagePopoverForm = NgForm | FormGroupDirective;
     standalone: true
 })
 export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper, AfterViewInit, OnDestroy {
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(ControlContainer, { descendants: true })
     private readonly _projectedForm: QueryList<MessagePopoverForm>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FD_FORM_FIELD_CONTROL, { descendants: true })
     private readonly _projectedFormFieldControls!: QueryList<PlatformFormFieldControl>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(MessagePopoverFormItemDirective, { descendants: true })
     private readonly _directiveItems!: QueryList<MessagePopoverFormItemDirective>;
 
@@ -83,7 +83,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
         return this._formFields;
     }
 
-    /** @hidden */
+    /** @ignore */
     private readonly _errors$ = new BehaviorSubject<MessagePopoverErrorGroup[]>([]);
 
     /**
@@ -92,28 +92,28 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
     // eslint-disable-next-line @typescript-eslint/member-ordering
     errors = this._errors$.asObservable();
 
-    /** @hidden */
+    /** @ignore */
     private _formFields: PlatformFormFieldControl[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _formErrorsSubscription: Subscription | undefined;
 
-    /** @hidden */
+    /** @ignore */
     private _ngForms: (NgForm | FormGroupDirective)[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _formItemErrorsSubscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _formSubmitted = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _destroyRef: DestroyRef,
         @Inject(FDP_MESSAGE_POPOVER_CONFIG) private readonly _config: MessagePopoverConfig
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         // Forms are passed via input property.
         if (this._ngForms.length > 0) {
@@ -152,13 +152,13 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
         this._listenToFormFieldErrors(this._formFields);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._formItemErrorsSubscription.unsubscribe();
     }
 
     /**
-     * @hidden
+     * @ignore
      * Listens to the form submission and collects form control errors.
      */
     private _startListeningForErrors(): void {
@@ -196,7 +196,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToFormFieldErrors(fields: PlatformFormFieldControl[]): void {
         this._formItemErrorsSubscription.unsubscribe();
 
@@ -218,7 +218,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _collectPlainFormData(): MessagePopoverErrorGroup[] {
         const errors: MessagePopoverErrorGroup[] = [
             {
@@ -277,7 +277,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
         return errors;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _collectAdvancedFormData(): MessagePopoverErrorGroup[] {
         let errors: MessagePopoverErrorGroup[] = [];
         const fields = this.formFields.length > 0 ? this.formFields : this._projectedFormFieldControls.toArray();
@@ -344,7 +344,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
     }
 
     /**
-     * @hidden
+     * @ignore
      * Creates error model
      */
     private _getErrorModel(
@@ -380,7 +380,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
     }
 
     /**
-     * @hidden
+     * @ignore
      * Creates error text based on the type of the error.
      * @param field Form Field Control.
      * @param errorDirective Optional Error directive
@@ -420,7 +420,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
         return errorTextObj;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getGroupName(formField: Nullable<PlatformFormField>): string {
         const parts: string[] = [];
 
@@ -435,7 +435,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
         return parts.join(', ');
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getConfigErrorModel(
         errorKey: string,
         customErrorTypes?: MessagePopoverConfig['errors']
@@ -454,7 +454,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
         };
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isAdvancedError(error: string | MessagePopoverErrorConfig): error is MessagePopoverErrorConfig {
         return !!error && typeof error !== 'string';
     }

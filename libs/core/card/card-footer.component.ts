@@ -24,19 +24,19 @@ import { CardFooterActionItemDirective } from './card-footer-action-item.directi
     imports: [NgTemplateOutlet]
 })
 export class CardFooterComponent implements AfterViewInit, OnDestroy {
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(CardFooterActionItemDirective) cardActionItems: QueryList<CardFooterActionItemDirective>;
 
-    /** @hidden */
+    /** @ignore */
     actionItems: CardFooterActionItemDirective[];
 
-    /** @hidden */
+    /** @ignore */
     private _destroyed$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this.cardActionItems.changes
             .pipe(
@@ -48,7 +48,7 @@ export class CardFooterComponent implements AfterViewInit, OnDestroy {
             .subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._destroyed$.next();
         this._destroyed$.complete();

@@ -17,22 +17,22 @@ export abstract class FdbNavigationComponent {
     abstract focusMoreButton(): void;
     abstract getMoreButton(): Nullable<FdbNavigationListItemComponent>;
 
-    /** @hidden */
+    /** @ignore */
     isSnapped = computed(() => this.state() === 'snapped' && !this.isPhone());
-    /** @hidden */
+    /** @ignore */
     isPopup = computed(() => this.state() === 'popup' || this.isPhone());
-    /** @hidden */
+    /** @ignore */
     isExpanded = computed(() => this.state() === 'expanded' && !this.isPhone());
 
-    /** @hidden */
+    /** @ignore */
     isHorizontal = computed(() => this.type() === 'horizontal');
-    /** @hidden */
+    /** @ignore */
     isVertical = computed(() => this.type() === 'vertical');
 
-    /** @hidden */
+    /** @ignore */
     isDesktop = computed(() => this.mode() === '');
-    /** @hidden */
+    /** @ignore */
     isTablet = computed(() => this.mode() === 'tablet');
-    /** @hidden */
+    /** @ignore */
     isPhone = computed(() => this.mode() === 'phone');
 }

@@ -31,11 +31,11 @@ export class NestedListContentDirective implements AfterContentInit, OnDestroy {
     @HostBinding('class.is-selected')
     selected = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.role')
     role = 'treeitem';
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-expanded')
     ariaExpanded = false;
 
@@ -51,29 +51,29 @@ export class NestedListContentDirective implements AfterContentInit, OnDestroy {
     @Output()
     readonly clicked: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-nested-list__content')
     fdNestedListContentClass = true;
 
     /**
-     * @hidden
+     * @ignore
      * Attribute controlled by the parent `NestedItemDirective`
      */
     @HostBinding('class.has-child')
     hasChildren = false;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(NestedLinkDirective)
     nestedLink: NestedLinkDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(NestedListExpandIconComponent)
     nestedExpandIcon: NestedListExpandIconComponent;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public changeDetRef: ChangeDetectorRef,
         private _renderer: Renderer2,
@@ -81,13 +81,13 @@ export class NestedListContentDirective implements AfterContentInit, OnDestroy {
         private _itemService: NestedItemService
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._makeLinkUnFocusable();
         this._setFocusSubscription();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this.onDestroy$.next();
         this.onDestroy$.complete();

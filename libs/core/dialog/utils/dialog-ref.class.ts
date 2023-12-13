@@ -16,13 +16,13 @@ export interface DialogRefLoadingConfiguration {
  */
 @Injectable()
 export class DialogRef<T = any, P = any> extends DialogRefBase<T, P> implements DialogRefLoadingConfiguration {
-    /** @hidden */
+    /** @ignore */
     private readonly _onHide = new BehaviorSubject<boolean>(false);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onLoading = new BehaviorSubject<boolean>(false);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _fullScreen = new BehaviorSubject<boolean>(false);
 
     /** Observable that is triggered whenever the dialog should be visually hidden or visible.*/

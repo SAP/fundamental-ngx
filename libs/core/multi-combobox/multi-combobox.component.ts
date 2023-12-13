@@ -267,7 +267,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     @Output()
     selectionChange = new EventEmitter<MultiComboboxSelectionChangeEvent>();
 
-    /** @hidden Emits event when the menu is opened/closed. */
+    /** @ignore Emits event when the menu is opened/closed. */
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -283,59 +283,59 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     @Output()
     dataReceived = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('searchInputElement', { read: ElementRef })
     readonly searchInputElement: Nullable<ElementRef<HTMLInputElement>>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(FD_LIST_COMPONENT)
     private readonly listComponent: ListComponentInterface;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(TemplateDirective)
     private readonly customTemplates: QueryList<TemplateDirective>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('mobileControlTemplate')
     private readonly mobileControlTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('listTemplate')
     private readonly listTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(TokenizerComponent)
     private readonly _tokenizer: TokenizerComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('inputGroup', { read: ElementRef })
     private readonly _inputGroup: ElementRef<HTMLElement>;
 
     /**
-     * @hidden
+     * @ignore
      * Custom Option item Template.
      */
     optionItemTemplate: TemplateRef<any>;
 
     /**
-     * @hidden
+     * @ignore
      * Custom Group Header item Template.
      */
     groupItemTemplate: TemplateRef<any>;
 
     /**
-     * @hidden
+     * @ignore
      * Custom Secondary item Template.
      */
     secondaryItemTemplate: TemplateRef<any>;
 
     /**
-     * @hidden
+     * @ignore
      * Custom Selected option item Template.
      */
     selectedItemTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     _contentDensity: ContentDensity = this._multiComboboxConfig?.contentDensity ?? 'cozy';
 
     /** Set the input text of the input. */
@@ -355,7 +355,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         return this.inputText.trim().length === 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     get isGroup(): boolean {
         return !!(this.group && this.groupKey);
     }
@@ -364,27 +364,27 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     isOpen = false;
 
     /**
-     * @hidden
+     * @ignore
      * Max width of list container
      */
     maxWidth: number;
 
     /**
-     * @hidden
+     * @ignore
      * Min width of list container
      */
     minWidth: number;
 
     /**
-     * @hidden
+     * @ignore
      * Need for opening mobile version
      */
     openChange = new Subject<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     private _selectedItems: T[] = [];
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
@@ -395,13 +395,13 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         this.contentDensityObserver.subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.cvaControl.listenToChanges();
         this._openDataStream();
     }
 
-    /** @hidden */
+    /** @ignore */
     async ngAfterViewInit(): Promise<void> {
         if (this.mobile) {
             await this._setUpMobileMode();
@@ -414,7 +414,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         this._tokenizer._showOverflowPopover = false;
     }
 
-    /** @hidden */
+    /** @ignore */
     _toggleSelection(item: SelectableOptionItem, fromTokenCloseClick = false): void {
         const idx = getTokenIndexByIdlOrValue(item, this._selectedSuggestions);
         if (idx === -1) {
@@ -434,13 +434,13 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         this._cd.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     _onOptionCheckboxClicked(event: MouseEvent, index: number): void {
         event.stopPropagation();
         this._onListElementClicked(event, index);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onCompleteTerm(event: AutoCompleteEvent): void {
         if (event.forceClose) {
             this._toggleSelectionByInputText(event.term);
@@ -449,7 +449,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that selects all possible options.
      * *select* attribute – if *true* select all, if *false* unselect all
      * */
@@ -462,14 +462,14 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         this._propagateChange();
     };
 
-    /** @hidden */
+    /** @ignore */
     _navigateByTokens(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW]) && this.isOpen) {
             this.listComponent.items?.first.focus();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _removeToken(token: SelectableOptionItem, event?: MouseEvent): void {
         if (event) {
             event.preventDefault();
@@ -481,7 +481,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _moreClicked(): void {
         this._suggestions = this.isGroup
             ? this._convertObjectsToGroupOptionItems(this._selectedSuggestions.map(({ value }) => value))
@@ -494,7 +494,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         this._cd.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     _onBlur(event: FocusEvent): void {
         const target = event.relatedTarget as HTMLElement;
         if (target) {
@@ -514,7 +514,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _onItemKeyDownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, ESCAPE)) {
             this._focusToSearchField();
@@ -535,14 +535,14 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _onOptionClicked(event: MouseEvent, index: number): void {
         this._onListElementClicked(event, index);
         this.close();
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handle dialog dismissing, closes popover and sets backup data.
      */
     _dialogDismiss(backup: SelectableOptionItem[]): void {
@@ -553,7 +553,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handle dialog approval, closes popover and propagates data changes.
      */
     _dialogApprove(): void {
@@ -562,7 +562,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         this._propagateChange(true);
     }
 
-    /** @hidden */
+    /** @ignore */
     _popoverOpenChangeHandle(isOpen: boolean): void {
         this.isOpen = isOpen;
         this._rangeSelector.reset();
@@ -587,7 +587,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         this._cd.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     _showList(isOpen: boolean): void {
         if (this.isOpen !== isOpen) {
             this.isOpen = isOpen;
@@ -602,7 +602,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         this._cd.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     _searchTermChanged(text: string = this.inputText): void {
         const map = new Map();
         map.set('query', text);
@@ -622,7 +622,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
     /**
      * Handle Click on Button
-     * @hidden
+     * @ignore
      */
     _onPrimaryButtonClick(isOpen: boolean): void {
         if (!isOpen) {
@@ -642,7 +642,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
     /**
      * Handle Keydown on Input
-     * @hidden
+     * @ignore
      */
     _onInputKeydownHandler(event: KeyboardEvent): void {
         if (this._cva.readonly) {
@@ -686,7 +686,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method passed to list component.
      */
     _handleListFocusEscape(direction: FocusEscapeDirection): void {
@@ -696,7 +696,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     _addOnClicked($event: Event): void {
         this.addOnButtonClicked.emit($event);
@@ -705,7 +705,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         }
     }
     /**
-     * @hidden
+     * @ignore
      * Iterate over every item and perform callback
      */
     private _onEveryItem(items: SelectableOptionItem[], callback: (item: SelectableOptionItem) => void): void {
@@ -717,7 +717,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _toggleSelectionByInputText(text = this.inputText): void {
         const item = getSelectItemByInputValue<T>(this._fullFlatSuggestions, text);
         if (item) {
@@ -729,7 +729,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method to set input text as item label.
      */
     private _setInputTextFromOptionItem(item: OptionItem): void {
@@ -743,7 +743,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     }
 
     /**
-     * @hidden
+     * @ignore
      * applying range selection. Note, that this function will be invoked after combobox item's value has been changed
      */
     private _onListElementClicked(event: MouseEvent, index: number): void {
@@ -773,14 +773,14 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
             this._tokenizer.tokenizerInnerEl.nativeElement.scrollWidth;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _propagateChange(emitInMobile?: boolean): void {
         if (!this.mobile || emitInMobile) {
             this._mapAndUpdateModel();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _setUpMobileMode(): Promise<void> {
         const injector = Injector.create({
             providers: [{ provide: MULTI_COMBOBOX_COMPONENT, useValue: this }],
@@ -798,7 +798,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     }
 
     /**
-     * @hidden
+     * @ignore
      * Method that picks other value moved from current one by offset, called only when Multi Combobox is closed.
      */
     private _chooseOtherItem(offset: number): void {
@@ -822,7 +822,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initWindowResize(): void {
         this._getOptionsListWidth();
 
@@ -835,7 +835,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
             .subscribe(() => this._getOptionsListWidth());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getOptionsListWidth(): void {
         const body = document.body;
         const rect = this._inputGroup.nativeElement.getBoundingClientRect();
@@ -846,7 +846,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     }
 
     /**
-     * @hidden
+     * @ignore
      * Assign custom templates
      */
     private _assignCustomTemplates(): void {

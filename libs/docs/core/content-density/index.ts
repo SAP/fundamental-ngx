@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'content-density';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/content-density';
 export const API_FILE_KEY = 'contentDensity';

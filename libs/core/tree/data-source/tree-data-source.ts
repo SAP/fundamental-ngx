@@ -2,23 +2,23 @@ import { AbstractDataProvider, BaseDataSource, DataProvider } from '@fundamental
 import { Observable } from 'rxjs';
 
 export class FdTreeDataSource<T> extends BaseDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     limitless = true;
-    /** @hidden */
+    /** @ignore */
     constructor(public dataProvider: AbstractDataProvider<T>) {
         super(dataProvider);
     }
 }
 
 export class ArrayTreeDataSource<T> extends FdTreeDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(data: T[]) {
         super(new DataProvider(data));
     }
 }
 
 export class ObservableTreeDataSource<T> extends FdTreeDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(data: Observable<T[]>) {
         super(new DataProvider(data));
     }

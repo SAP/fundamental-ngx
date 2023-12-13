@@ -63,21 +63,21 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     @Input()
     disabled = false;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(ButtonComponent, { read: ElementRef })
     buttonComponent: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     @Output()
     keyDown = new EventEmitter<KeyboardEvent>();
 
-    /** @hidden */
+    /** @ignore */
     clicked = new EventEmitter<ActionSheetClickEvent>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(private readonly _elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
         this.keyDown.emit(event);
@@ -91,12 +91,12 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
         });
     }
 
-    /** @hidden Support for KeyboardSupportItemInterface */
+    /** @ignore Support for KeyboardSupportItemInterface */
     click(): void {
         this._elementRef.nativeElement.click();
     }
 
-    /** @hidden */
+    /** @ignore */
     focus(): void {
         this.buttonComponent.nativeElement.focus();
     }

@@ -175,14 +175,14 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
     @Output()
     readonly isOpenChange = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(TimePickerComponent)
     timePickerComponent: TimePickerComponent<D>;
 
-    /** @hidden */
+    /** @ignore */
     private _meridian: boolean;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         cd: ChangeDetectorRef,
         elementRef: ElementRef,

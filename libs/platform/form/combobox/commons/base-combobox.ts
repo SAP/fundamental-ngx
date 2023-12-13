@@ -80,16 +80,16 @@ export abstract class BaseCombobox
     extends CollectionBaseInput
     implements SingleDropdownValueControl, AfterViewInit, OnDestroy
 {
-    /** @hidden Method to emit change event */
+    /** @ignore Method to emit change event */
     abstract emitChangeEvent<K>(value: K): void;
 
-    /** @hidden Define is this item selected */
+    /** @ignore Define is this item selected */
     abstract isSelectedOptionItem(selectedItem: OptionItem): boolean;
 
-    /** @hidden Emit select OptionItem */
+    /** @ignore Emit select OptionItem */
     abstract selectOptionItem(item: OptionItem): void;
 
-    /** @hidden Define value as selected */
+    /** @ignore Define value as selected */
     abstract setAsSelected(item: OptionItem[]): void;
     /** Provides maximum height for the optionPanel */
     @Input()
@@ -210,34 +210,34 @@ export abstract class BaseCombobox
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onDataReceived = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(ListComponent)
     listComponent: ListComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(TemplateDirective)
     private readonly _customTemplates: QueryList<TemplateDirective>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FDP_COMBOBOX_ITEM_DEF)
     private readonly _customItemDef: QueryList<FdpComboboxItemDef>;
 
-    /** @hidden Custom Option item Template */
+    /** @ignore Custom Option item Template */
     optionItemTemplate: TemplateRef<any>;
 
-    /** @hidden Custom Group Header item Template */
+    /** @ignore Custom Group Header item Template */
     groupItemTemplate: TemplateRef<any>;
 
-    /** @hidden Custom Secondary item Template */
+    /** @ignore Custom Secondary item Template */
     secondaryItemTemplate: TemplateRef<any>;
 
-    /** @hidden Custom Selected option item Template */
+    /** @ignore Custom Selected option item Template */
     selectedItemTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     searchInputElement: ElementRef<HTMLInputElement>;
 
-    /** @hidden */
+    /** @ignore */
     _contentDensity: ContentDensity = this.comboboxConfig.contentDensity;
 
     /** Input text of the input. */
@@ -259,19 +259,19 @@ export abstract class BaseCombobox
         return !(this.mobile && this.mobileConfig.approveButtonText);
     }
 
-    /** @hidden List of matched suggestions */
+    /** @ignore List of matched suggestions */
     _suggestions: OptionItem[];
 
-    /** @hidden Max width of list container */
+    /** @ignore Max width of list container */
     maxWidth?: number;
 
-    /** @hidden Min width of list container */
+    /** @ignore Min width of list container */
     minWidth?: number;
 
-    /** @hidden Need for opening mobile version */
+    /** @ignore Need for opening mobile version */
     openChange = new Subject<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     get isGroup(): boolean {
         return !!(this.group && this.groupKey);
     }
@@ -281,22 +281,22 @@ export abstract class BaseCombobox
         return this._suggestions.length === 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     _flatSuggestions: OptionItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     protected _dataSource: FdpComboBoxDataSource<any>;
 
-    /** @hidden */
+    /** @ignore */
     private _inputTextValue: string;
 
-    /** @hidden */
+    /** @ignore */
     private _matchingStrategy: MatchingStrategy = this.comboboxConfig.matchingStrategy;
 
-    /** @hidden */
+    /** @ignore */
     private _dsSubscription?: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     private _element: HTMLElement = this.elementRef.nativeElement;
 
     /** Keys, that won't trigger the popover's open state, when dispatched on search input */
@@ -328,7 +328,7 @@ export abstract class BaseCombobox
         NUMPAD_NINE
     ];
 
-    /** @hidden */
+    /** @ignore */
     protected constructor(
         readonly cd: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -343,14 +343,14 @@ export abstract class BaseCombobox
         super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._initWindowResize();
         this._assignCustomTemplates();
         super.ngAfterViewInit();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         super.ngOnDestroy();
 
@@ -375,7 +375,7 @@ export abstract class BaseCombobox
         super.writeValue(value);
     }
 
-    /** @hidden */
+    /** @ignore */
     searchTermChanged(text: string): void {
         if (this.inputText === text) {
             return;
@@ -389,7 +389,7 @@ export abstract class BaseCombobox
         this.ds.match(queryMap);
     }
 
-    /** @hidden */
+    /** @ignore */
     isOpenChangeHandle(isOpen: boolean): void {
         if (this.isOpen === isOpen) {
             return;
@@ -403,7 +403,7 @@ export abstract class BaseCombobox
         this.cd.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     _onOpenChange(isOpen: boolean): void {
         if (isOpen) {
             this.formMessage._popover.close();
@@ -411,7 +411,7 @@ export abstract class BaseCombobox
         this.formMessage._popover.setIgnoreTriggers(isOpen);
     }
 
-    /** @hidden */
+    /** @ignore */
     handleOptionItem(value: OptionItem): void {
         if (value) {
             this.selectOptionItem(value);
@@ -420,7 +420,7 @@ export abstract class BaseCombobox
         this.searchInputElement.nativeElement.focus();
     }
 
-    /** @hidden */
+    /** @ignore */
     handlePressEnter(event: KeyboardEvent, value: OptionItem): void {
         if (!KeyUtil.isKeyCode(event, ENTER)) {
             return;
@@ -431,7 +431,7 @@ export abstract class BaseCombobox
 
     /**
      * Handle Click on Button
-     * @hidden
+     * @ignore
      */
     onPrimaryButtonClick(): void {
         // if it's mobile mode ignore this click
@@ -448,7 +448,7 @@ export abstract class BaseCombobox
 
     /**
      * Handle click on input group in mobile mode
-     * @hidden
+     * @ignore
      */
     openInMobileMode(): void {
         // if it's already opened just ignore this click
@@ -463,7 +463,7 @@ export abstract class BaseCombobox
 
     /**
      * Handle Keydown on Input
-     * @hidden
+     * @ignore
      */
     onInputKeydownHandler(event: KeyboardEvent): void {
         if (this.readonly) {
@@ -518,7 +518,7 @@ export abstract class BaseCombobox
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _onCompleteTerm(event: AutoCompleteEvent): void {
         if (event.forceClose) {
             this.toggleSelectionByInputText(event.term);
@@ -526,7 +526,7 @@ export abstract class BaseCombobox
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     toggleSelectionByInputText(text = this.inputText): void {
         let optionItem = this._getSelectItemByInputValue(text);
         if (!optionItem) {
@@ -539,7 +539,7 @@ export abstract class BaseCombobox
         this.selectOptionItem(optionItem);
     }
 
-    /** @hidden */
+    /** @ignore */
     _close(): void {
         if (this.tabOutStrategy === 'closeAndSelect') {
             const focusedItem = this.listComponent.getActiveItem();
@@ -554,25 +554,25 @@ export abstract class BaseCombobox
         this._cd.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _getSelectItemByInputValue(displayValue: string): OptionItem | undefined {
         return this._flatSuggestions.find((value) => value.label === displayValue);
     }
 
-    /** @hidden */
+    /** @ignore */
     protected get ds(): ComboBoxDataSource<any> {
         return this.dataSource as ComboBoxDataSource<any>;
     }
 
-    /** @hidden Map grouped values to array. */
+    /** @ignore Map grouped values to array. */
     protected _flatGroups(items: OptionItem[]): OptionItem[] {
         return items.reduce((result: OptionItem[], item: OptionItem) => result.concat(item.children ?? []), []);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _displayFn = (value: any): string => this.displayValue(value);
 
-    /** @hidden */
+    /** @ignore */
     private _secondaryFn = (value: any): string => {
         if (isOptionItem(value)) {
             return value.secondaryText ?? '';
@@ -588,7 +588,7 @@ export abstract class BaseCombobox
     };
 
     /**
-     * @hidden
+     * @ignore
      * Method that picks other value moved from current one by offset, called only when combobox is closed
      */
     private _chooseOtherItem(offset: number): void {
@@ -600,12 +600,12 @@ export abstract class BaseCombobox
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getSelectItemByValue(displayValue: string): OptionItem | undefined {
         return this._suggestions.find((value) => value.label === displayValue);
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _initializeDataSource(ds: FdpComboBoxDataSource<any>): Promise<void> {
         this._suggestions = [];
 
@@ -625,7 +625,7 @@ export abstract class BaseCombobox
         this._dataSource = this._openDataStream(ds);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _openDataStream(ds: FdpComboBoxDataSource<any>): ComboBoxDataSource<any> {
         const initDataSource = this._toDataStream(ds);
 
@@ -675,7 +675,7 @@ export abstract class BaseCombobox
         return initDataSource;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _toDataStream(source: FdpComboBoxDataSource<any>): ComboBoxDataSource<any> | undefined {
         if (isDataSource(source)) {
             return source as ComboBoxDataSource<any>;
@@ -693,7 +693,7 @@ export abstract class BaseCombobox
         return undefined;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initWindowResize(): void {
         this._getOptionsListWidth();
 
@@ -702,7 +702,7 @@ export abstract class BaseCombobox
             .subscribe(() => this._getOptionsListWidth());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getOptionsListWidth(): void {
         const gap = 5;
         const { offsetWidth, clientWidth } = document.body;
@@ -717,7 +717,7 @@ export abstract class BaseCombobox
 
     /**
      * Convert original data to OptionItems Interface
-     * @hidden
+     * @ignore
      */
     private _convertToOptionItems(items: any[]): OptionItem[] {
         const item = items[0];
@@ -742,7 +742,7 @@ export abstract class BaseCombobox
 
     /**
      * Convert data to OptionItems Interface
-     * @hidden
+     * @ignore
      */
     private _convertObjectsToOptionItems(items: any[]): OptionItem[] {
         if (this.group && this.groupKey) {
@@ -756,7 +756,7 @@ export abstract class BaseCombobox
 
     /**
      * Convert object[] data to Group OptionItems Interface
-     * @hidden
+     * @ignore
      */
     private _convertObjectsToGroupOptionItems<K>(items: K[]): OptionItem[] {
         const group: { [key: string]: K[] } = {};
@@ -796,7 +796,7 @@ export abstract class BaseCombobox
 
     /**
      * Convert object[] data to Secondary OptionItems Interface
-     * @hidden
+     * @ignore
      */
     private _convertObjectsToSecondaryOptionItems<K>(items: K[]): OptionItem[] {
         const selectItems: OptionItem[] = [];
@@ -815,7 +815,7 @@ export abstract class BaseCombobox
 
     /**
      * Convert Primitive data(Boolean, String, Number) to OptionItems Interface
-     * @hidden
+     * @ignore
      */
     private _convertPrimitiveToOptionItems(items: any[]): OptionItem[] {
         const selectItems: OptionItem[] = [];
@@ -830,7 +830,7 @@ export abstract class BaseCombobox
 
     /**
      * Convert object[] to OptionItems Interface (Default)
-     * @hidden
+     * @ignore
      */
     private _convertObjectsToDefaultOptionItems(items: any[]): OptionItem[] {
         const selectItems: OptionItem[] = [];
@@ -846,7 +846,7 @@ export abstract class BaseCombobox
         return selectItems;
     }
 
-    /** @hidden Assign custom templates */
+    /** @ignore Assign custom templates */
     private _assignCustomTemplates(): void {
         combineLatest([this._customTemplates.changes, this._customItemDef.changes])
             .pipe(

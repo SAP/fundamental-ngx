@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'list';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/list';
 export const API_FILE_KEY = 'list';
 export const I18N_KEY = 'platformList';

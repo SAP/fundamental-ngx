@@ -62,7 +62,7 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
     type: InputType = 'text';
 
     /**
-     * @hidden
+     * @ignore
      * This `required` field is used internally by other components such as Input Group.
      * Input group will not be able to set required value to input, until `required` is input through the`@Input` property.
      */
@@ -81,12 +81,12 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
     /** Emits event on focus change */
     @Output() focusChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     get inputElementRef(): ElementRef {
         return this._elementRef;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -99,7 +99,7 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
         super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         super.ngOnInit();
         if (!this.type || VALID_INPUT_TYPES.indexOf(this.type) === -1) {
@@ -107,14 +107,14 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _onFocus(): void {
         this._onFocusChanged(true);
         // propagate event
         this.focusChange.emit(true);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onBlur(): void {
         this._onFocusChanged(false);
         // propagate event

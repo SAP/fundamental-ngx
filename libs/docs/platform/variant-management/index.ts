@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'variant-management';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/variant-management';
 export const API_FILE_KEY = 'variantManagement';
 export const I18N_KEY = 'platformVariantManagement';

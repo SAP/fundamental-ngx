@@ -23,4 +23,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'icon';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/icon';
 export const API_FILE_KEY = 'icon';

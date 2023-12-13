@@ -5,7 +5,7 @@ import { Directive, HostBinding } from '@angular/core';
     standalone: true
 })
 export class TableInnerDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-table__inner')
     fdTableInnerClass = true;
 }

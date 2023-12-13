@@ -16,11 +16,11 @@ import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/butt
     standalone: true
 })
 export class NotificationActionsComponent {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-notification__actions')
     fdNotificationActionsClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FD_BUTTON_COMPONENT)
     buttons: QueryList<ButtonComponent>;
 }

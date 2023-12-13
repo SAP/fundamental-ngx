@@ -42,7 +42,7 @@ import { NestedListDirective } from '../nested-list/nested-list.directive';
 })
 export class PreparedNestedListComponent {
     /**
-     * @hidden
+     * @ignore
      * For internal usage.
      * Defines if the component is first
      */
@@ -58,7 +58,7 @@ export class PreparedNestedListComponent {
     list: Nullable<NestedListModel>;
 
     /**
-     * @hidden
+     * @ignore
      */
     @ViewChild(forwardRef(() => NestedListDirective))
     _nestedListDirective: NestedListDirective;
@@ -71,7 +71,7 @@ export class PreparedNestedListComponent {
         return this._nestedListDirective;
     }
 
-    /** @hidden */
+    /** @ignore */
     _expandedChange(expanded: boolean, item: NestedListItem): void {
         item.expanded = expanded;
     }

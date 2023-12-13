@@ -51,7 +51,7 @@ let uniqueId = 0;
 export class RadioButtonComponent<T = any>
     implements OnChanges, AfterViewInit, CssClassBuilder, ControlValueAccessor, OnDestroy, FormItemControl
 {
-    /** @hidden */
+    /** @ignore */
     @ViewChild('inputElement')
     inputElement: ElementRef<HTMLInputElement>;
 
@@ -83,7 +83,7 @@ export class RadioButtonComponent<T = any>
         return this._tabIndex;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _tabIndex: number;
 
     /** The field to set state of radio button using:
@@ -144,63 +144,63 @@ export class RadioButtonComponent<T = any>
         return this.currentValue === this.value;
     }
 
-    /** @hidden */
+    /** @ignore */
     class: string;
 
-    /** @hidden */
+    /** @ignore */
     currentValue: T;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private changeDetectionRef: ChangeDetectorRef,
         readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
         this._checkMandatoryFields();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this.buildComponentCssClass();
         this._checkMandatoryFields();
     }
 
     // ControlValueAccessor implementation
-    /** @hidden */
+    /** @ignore */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onChange = (value: T): void => {};
 
-    /** @hidden */
+    /** @ignore */
     onTouched = (): void => {};
 
-    /** @hidden */
+    /** @ignore */
     registerOnChange(fn: (value: T) => void): void {
         this.onChange = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
         this.changeDetectionRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     writeValue(value: T): void {
         this.valueChange(value, false);
     }
@@ -216,12 +216,12 @@ export class RadioButtonComponent<T = any>
         return ['fd-radio', this.state !== 'default' ? `is-${this.state}` : ''];
     }
 
-    /** @hidden */
+    /** @ignore */
     get elementRef(): ElementRef {
         return this.inputElement;
     }
 
-    /** @hidden */
+    /** @ignore */
     labelClicked(event: MouseEvent | KeyboardEvent, applyFocus = true): void {
         this.valueChange(this.value);
 
@@ -232,7 +232,7 @@ export class RadioButtonComponent<T = any>
         event.stopPropagation();
     }
 
-    /** @hidden */
+    /** @ignore */
     valueChange(value: T, emitEvent = true): void {
         this.currentValue = value;
 
@@ -244,7 +244,7 @@ export class RadioButtonComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _checkMandatoryFields(): void {
         if (this.standalone) {
             return;
@@ -257,14 +257,14 @@ export class RadioButtonComponent<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setFocusOnNativeElement(): void {
         if (this.inputElement) {
             this.inputElement.nativeElement.focus();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setNativeElementCheckedState(): void {
         if (this.inputElement) {
             this.inputElement.nativeElement.checked = this.checked;

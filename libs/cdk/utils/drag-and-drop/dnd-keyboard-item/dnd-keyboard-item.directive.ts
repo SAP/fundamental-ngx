@@ -51,16 +51,16 @@ export class DndKeyboardItemDirective implements OnInit, OnDestroy {
     @Input()
     groupIndex: number;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onDestroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _dndGroup: DndKeyboardGroupDirective,
         private readonly _elementRef: ElementRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._dndGroup._onDndItemFocus$.subscribe(([groupIndex, itemIndex]) => {
             if (this.groupIndex === groupIndex && this.itemIndex === itemIndex) {
@@ -69,13 +69,13 @@ export class DndKeyboardItemDirective implements OnInit, OnDestroy {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     _onKeyDown(event: KeyboardEvent): void {
         this._dndGroup.processDragDrop(event, this.itemIndex, this.groupIndex);

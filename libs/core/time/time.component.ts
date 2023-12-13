@@ -120,7 +120,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     @Input()
     spinnerButtons = true;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(TimeColumnComponent)
     columns: QueryList<TimeColumnComponent<number, SelectableViewItem<number>>>;
 
@@ -133,56 +133,56 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     }
 
     /**
-     * @hidden
+     * @ignore
      * container for [0 - 23] hours
      */
     hourViewItems: HourViewItem[] = [];
     /**
-     * @hidden
+     * @ignore
      * reference to currently selected hourViewItems element
      */
     activeHourViewItem?: HourViewItem;
 
     /**
-     * @hidden
+     * @ignore
      * container for [0 - 59] minutes
      */
     minuteViewItems: MinuteViewItem[] = [];
     /**
-     * @hidden
+     * @ignore
      * reference to currently selected minuteViewItems element
      */
     activeMinuteViewItem?: MinuteViewItem;
 
     /**
-     * @hidden
+     * @ignore
      * container for [0 - 59] seconds
      */
     secondViewItems: SecondViewItem[] = [];
     /**
-     * @hidden
+     * @ignore
      * reference to currently selected secondViewItems element
      */
     activeSecondViewItem?: SecondViewItem;
 
     /**
-     * @hidden
+     * @ignore
      * container for [am, pm] meridian values
      */
     meridianViewItems: MeridianViewItem[] = [];
     /**
-     * @hidden
+     * @ignore
      * reference to currently selected meridianViewItems element
      */
     activeMeridianViewItem?: MeridianViewItem;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _elementRef: ElementRef,
@@ -198,7 +198,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         this.time = this._getDefaultValue();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
             this._setUpViewGrid();
@@ -208,7 +208,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         this._setUpViewGrid();
     }
 
-    /** @hidden
+    /** @ignore
      * Reacts only when there is meridian or time input change
      */
     ngOnChanges(changes: SimpleChanges): void {
@@ -220,47 +220,47 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this.refreshColumns();
     }
 
-    /** @hidden */
+    /** @ignore */
     onChange: (value: D) => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     onTouched = (): void => {};
 
-    /** @hidden */
+    /** @ignore */
     registerOnChange(fn: (time: D) => void): void {
         this.onChange = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
         this._changeDetectorRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     refreshColumns(): void {
         this.columns.forEach((column) => column.setValueOfActive());
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handles meridian change.
      * This implicitly changes hours by +/- 12
      */
@@ -281,14 +281,14 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         this.handleHourChange(newHour);
     }
 
-    /** @hidden */
+    /** @ignore */
     handleSecondChange(second: number): void {
         this.time = this._dateTimeAdapter.setSeconds(this.time, second);
         this._calculateActiveSecondViewItem();
         this.onChange(this.time);
     }
 
-    /** @hidden */
+    /** @ignore */
     handleMinuteChange(minute: number): void {
         this.time = this._dateTimeAdapter.setMinutes(this.time, minute);
         this._calculateActiveMinuteViewItem();
@@ -296,7 +296,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handles changes of displayed hour value from template.
      */
     handleHourChange(hour: number): void {
@@ -310,7 +310,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         this.onChange(this.time);
     }
 
-    /** @hidden */
+    /** @ignore */
     handleNextColumnFocus(column: FdTimeActiveView): void {
         const columns = this._getVisibleColumnsWithRtl();
         let nextIndex = columns.indexOf(column) + 1;
@@ -320,7 +320,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         this.changeActive(columns[nextIndex]);
     }
 
-    /** @hidden */
+    /** @ignore */
     handlePreviousColumnFocus(column: FdTimeActiveView): void {
         const columns = this._getVisibleColumnsWithRtl();
         let nextIndex = columns.indexOf(column) - 1;
@@ -330,7 +330,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         this.changeActive(columns[nextIndex]);
     }
 
-    /** @hidden */
+    /** @ignore */
     handleKeyDownEvent(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
             this.handlePreviousColumnFocus(this.activeView);
@@ -343,7 +343,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     writeValue(time: D): void {
         if (!time || !this._dateTimeAdapter.isValid(time)) {
             time = this._getDefaultValue();
@@ -355,24 +355,24 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         this._changeDetectorRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     changeActive(view: FdTimeActiveView): void {
         this.activeView = view;
         this._changeDetectorRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     isActive(view: FdTimeActiveView): boolean {
         return this.activeView === view;
     }
 
-    /** @hidden */
+    /** @ignore */
     focusActiveColumn(): void {
         const column = this.columns.find(({ active }) => active);
         column?.focus();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _focusOut(event: FocusEvent): void {
         if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
             this.onTouched();
@@ -402,7 +402,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         return this._rtlService?.rtl.value ? columns.reverse() : columns;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setUpViewGrid(): void {
         this._constructHourViewItems();
         this._constructMinuteViewItems();
@@ -412,7 +412,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         this._setUpActiveViewItems();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setUpActiveViewItems(): void {
         this._calculateActiveHourViewItem();
         this._calculateActiveMinuteViewItem();
@@ -420,7 +420,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         this._calculateActiveMeridianViewItem();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _constructHourViewItems(): void {
         this.hourViewItems = this._dateTimeAdapter
             .getHourNames({ meridian: this.meridian, twoDigit: this.keepTwoDigits })
@@ -430,7 +430,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
             }));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _constructMinuteViewItems(): void {
         this.minuteViewItems = this._dateTimeAdapter
             .getMinuteNames({ twoDigit: this.keepTwoDigits })
@@ -440,7 +440,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
             }));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _constructSecondViewItems(): void {
         this.secondViewItems = this._dateTimeAdapter
             .getSecondNames({ twoDigit: this.keepTwoDigits })
@@ -450,7 +450,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
             }));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _constructMeridianViewItems(): void {
         const [amLabel, pmLabel] = this._dateTimeAdapter.getDayPeriodNames();
         this.meridianViewItems = [
@@ -459,32 +459,32 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateActiveHourViewItem(): void {
         const hour = this._getModelHour();
         this.activeHourViewItem = this.hourViewItems.find(({ value }) => value === hour);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateActiveMinuteViewItem(): void {
         const minute = this._getModelMinute();
         this.activeMinuteViewItem = this.minuteViewItems.find(({ value }) => value === minute);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateActiveSecondViewItem(): void {
         const second = this._getModelSecond();
         this.activeSecondViewItem = this.secondViewItems.find(({ value }) => value === second);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateActiveMeridianViewItem(): void {
         const meridian = this._getDayPeriodByHour();
         this.activeMeridianViewItem = this.meridianViewItems.find(({ value }) => value === meridian);
     }
 
     /**
-     * @hidden
+     * @ignore
      * Model hours (0 - 23)
      */
     private _getModelHour(): number {
@@ -492,7 +492,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     }
 
     /**
-     * @hidden
+     * @ignore
      * Model minutes (0 - 59)
      */
     private _getModelMinute(): number {
@@ -500,7 +500,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     }
 
     /**
-     * @hidden
+     * @ignore
      * Model seconds (0 - 59)
      */
     private _getModelSecond(): number {
@@ -508,20 +508,20 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     }
 
     /**
-     * @hidden
+     * @ignore
      * Get meridian period based on a given hours
      */
     private _getDayPeriodByHour(hour = this._getModelHour()): Meridian {
         return this._isPm(hour) ? Meridian.PM : Meridian.AM;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isPm(hours: number = this._getModelHour()): boolean {
         return hours >= 12;
     }
 
     /**
-     * @hidden
+     * @ignore
      * @returns default time 00:00:00
      */
     private _getDefaultValue(): D {

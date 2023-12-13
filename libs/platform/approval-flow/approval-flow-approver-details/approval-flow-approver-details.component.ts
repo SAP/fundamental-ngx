@@ -72,33 +72,33 @@ export interface ApprovalFlowApproverDetailsDialogRefData {
     ]
 })
 export class ApprovalFlowApproverDetailsComponent implements OnInit {
-    /** @hidden */
+    /** @ignore */
     _isListMode = false;
 
-    /** @hidden */
+    /** @ignore */
     _listItems: ApprovalUser[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _selectedUsers: ApprovalUser[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _userToShowDetails?: ApprovalUser;
 
-    /** @hidden */
+    /** @ignore */
     _userToShowDetailsData$: Observable<any>;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public dialogRef: DialogRef<ApprovalFlowApproverDetailsDialogRefData>,
         private _cdr: ChangeDetectorRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     get _data(): ApprovalFlowApproverDetailsDialogRefData {
         return this.dialogRef.data;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._isListMode = (this._data.node?.approvers.length ?? 0) > 1;
 
@@ -114,19 +114,19 @@ export class ApprovalFlowApproverDetailsComponent implements OnInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _setListItems(items: ApprovalUser[] = []): void {
         this._listItems = [...items];
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     _exitUserDetailsMode(): void {
         this._userToShowDetails = undefined;
         this._isListMode = true;
     }
 
-    /** @hidden */
+    /** @ignore */
     _seeUserDetails(user: ApprovalUser): void {
         this._userToShowDetails = user;
         this._userToShowDetailsData$ = this._data.userDataSource.dataProvider.getOne(new Map([['id', user.id]]));
@@ -135,13 +135,13 @@ export class ApprovalFlowApproverDetailsComponent implements OnInit {
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     _sendReminder(): void {
         const reminderTargets = this._isListMode ? this._selectedUsers : this._data.node?.approvers;
         this.dialogRef.close(reminderTargets);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onSearchStringChange(searchString: string): void {
         if (!searchString) {
             this._setListItems(this._data.node?.approvers);

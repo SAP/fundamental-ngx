@@ -42,20 +42,20 @@ import { SELECT_COMPONENT, SelectInterface } from '../select.interface';
     imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, NgTemplateOutlet, ButtonBarComponent]
 })
 export class SelectMobileComponent extends MobileModeBase<SelectInterface> implements OnInit, AfterViewInit, OnDestroy {
-    /** @hidden
+    /** @ignore
      * from mobile class can not prefix _,
      * to avoid build issues
      */
     childContent: TemplateRef<any> | null = null;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('dialogTemplate')
     _dialogTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     onItemKeydown(event: KeyboardEvent): void {
         if (event && KeyUtil.isKeyCode(event, [ESCAPE])) {
@@ -63,7 +63,7 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         _elementRef: ElementRef,
         _dialogService: DialogService,
@@ -73,18 +73,18 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
         super(_elementRef, _dialogService, _selectComponent, MobileModeControl.SELECT, mobileModes);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._listenOnSelectOpenChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._openDialog();
         this.dialogRef.hide(true);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this.dialogRef.close();
         super.onDestroy();
@@ -93,18 +93,18 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
 
     /**
      * Only when we have Approve.
-     * @hidden
+     * @ignore
      */
     _cancel(): void {
         this._component.close(true);
     }
 
-    /** @hidden */
+    /** @ignore */
     _approve(): void {
         this._component.close(true);
     }
 
-    /** @hidden Hide/Show the Dialog when Select Open/Close*/
+    /** @ignore Hide/Show the Dialog when Select Open/Close*/
     private _listenOnSelectOpenChange(): void {
         this._subscriptions.add(
             this._component.isOpenChange.subscribe((isOpen) => {
@@ -114,7 +114,7 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _openDialog(): void {
         this.dialogRef = this._dialogService.open(this._dialogTemplate, {
             ...this.dialogConfig,

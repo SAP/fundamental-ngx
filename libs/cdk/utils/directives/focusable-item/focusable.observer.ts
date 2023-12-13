@@ -11,10 +11,10 @@ import { isElementFocusableByDefault } from './is-element-focusable-by-default';
     providedIn: 'root'
 })
 export class FocusableObserver {
-    /** @hidden */
+    /** @ignore */
     constructor(private _attributeObserver: AttributeObserver) {}
 
-    /** @Hidden */
+    /** @ignore */
     static isFocusable(element: Element, respectTabIndex: boolean): boolean {
         if (DisabledObserver.isDisabled(element)) {
             return false;
@@ -32,7 +32,7 @@ export class FocusableObserver {
         return tabIndex > -1;
     }
 
-    /** @hidden */
+    /** @ignore */
     observe(
         element: HasElementRef<Element> | Element | ElementRef<Element>,
         respectTabIndex = true
@@ -44,7 +44,7 @@ export class FocusableObserver {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     unobserve(element: HasElementRef<Element> | Element | ElementRef<Element>): void {
         this._attributeObserver.unobserve(element);
     }

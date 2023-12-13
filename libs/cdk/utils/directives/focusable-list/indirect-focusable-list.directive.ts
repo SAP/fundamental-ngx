@@ -11,16 +11,16 @@ import { FDK_FOCUSABLE_LIST_DIRECTIVE } from './focusable-list.tokens';
     standalone: true
 })
 export class IndirectFocusableListDirective {
-    /** @hidden */
+    /** @ignore */
     injector = inject(Injector);
-    /** @hidden */
+    /** @ignore */
     _focusableList = inject<FocusableListDirective>(FDK_FOCUSABLE_LIST_DIRECTIVE, { optional: true });
-    /** @hidden */
+    /** @ignore */
     _indirectChildren = new BehaviorSubject<FocusableItem[]>([]);
-    /** @hidden */
+    /** @ignore */
     _indirectChildrenMap = new Map<FocusableItem, number | (() => number)>();
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         if (this._focusableList) {
             const queryList: ItemsQueryList<FocusableItem> = {
@@ -41,19 +41,19 @@ export class IndirectFocusableListDirective {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     register(item: FocusableItem, itemOrder: number | (() => number)): void {
         this._indirectChildrenMap.set(item, itemOrder);
         this._updateIndirectChildren();
     }
 
-    /** @hidden */
+    /** @ignore */
     unregister(item: FocusableItem): void {
         this._indirectChildrenMap.delete(item);
         this._updateIndirectChildren();
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _updateIndirectChildren(): void {
         this._indirectChildren.next(
             Array.from(this._indirectChildrenMap.entries())

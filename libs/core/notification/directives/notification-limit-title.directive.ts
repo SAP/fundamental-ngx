@@ -5,7 +5,7 @@ import { Directive, HostBinding } from '@angular/core';
     standalone: true
 })
 export class NotificationLimitTitleDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-notification__limit--title')
     fdNotificationTitleClass = true;
 }

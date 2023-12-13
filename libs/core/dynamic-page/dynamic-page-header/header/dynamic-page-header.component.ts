@@ -67,48 +67,48 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     subtitleWrap = false;
 
     /**
-     * @hidden
+     * @ignore
      * Template used to provide a custom content for the subtitle page header area.
      */
     @ContentChild(DynamicPageHeaderSubtitleDirective)
     _subtitleTemplate: Nullable<DynamicPageHeaderSubtitleDirective>;
 
     /**
-     * @hidden
+     * @ignore
      * Template used to provide a custom content for the title page header area.
      */
     @ContentChild(DynamicPageHeaderTitleDirective)
     _titleTemplate: Nullable<DynamicPageHeaderSubtitleDirective>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FD_BREADCRUMB_COMPONENT)
     _breadcrumbComponent: BreadcrumbComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(DynamicPageGlobalActionsComponent)
     _globalActions: DynamicPageGlobalActionsComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(DynamicPageLayoutActionsComponent)
     _layoutActions: DynamicPageLayoutActionsComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(DynamicPageTitleContentComponent)
     _contentToolbar: DynamicPageTitleContentComponent;
 
-    /** @hidden */
+    /** @ignore */
     _collapsed = false;
 
-    /** @hidden */
+    /** @ignore */
     _actionsSquashed = false;
 
-    /** @hidden */
+    /** @ignore */
     _size: DynamicPageResponsiveSize;
 
-    /** @hidden **/
+    /** @ignore **/
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
         private _renderer: Renderer2,
@@ -116,13 +116,13 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
         private _changeDetRef: ChangeDetectorRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._addClassNameToHostElement(DYNAMIC_PAGE_CLASS_NAME.dynamicPageTitleArea);
         this._listenToPageChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._addCustomClassToBreadcrumb();
 
@@ -132,7 +132,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -147,13 +147,13 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
         this._size = sizeType;
     }
 
-    /** @hidden */
+    /** @ignore */
     stopPropagation(event: MouseEvent): void {
         event.stopPropagation();
     }
 
     /**
-     * @hidden
+     * @ignore
      * sets the padding classes
      * @param sizeType
      */
@@ -166,17 +166,17 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addClassNameToHostElement(className: string): void {
         addClassNameToElement(this._renderer, this._elementRef.nativeElement, className);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addClassNameToCustomElement(element: Element, className: string): void {
         addClassNameToElement(this._renderer, element, className);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addCustomClassToBreadcrumb(): void {
         if (this._breadcrumbComponent) {
             this._addClassNameToCustomElement(
@@ -186,7 +186,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToPageChanges(): void {
         this._dynamicPageService.pixelsSizeChanged.pipe(takeUntil(this._onDestroy$)).subscribe((pixels) => {
             const actionsSquashed: boolean = pixels < ActionSquashBreakpointPx;

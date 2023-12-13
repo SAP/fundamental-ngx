@@ -34,7 +34,7 @@ export class SchemaComponent implements OnInit, OnChanges, OnDestroy {
     schemaGroup: FormGroup;
 
     /**
-     * @hidden
+     * @ignore
      */
     private _resetted = false;
 
@@ -42,7 +42,7 @@ export class SchemaComponent implements OnInit, OnChanges, OnDestroy {
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /**
-     * @hidden
+     * @ignore
      */
     ngOnDestroy(): void {
         this._onDestroy$.next();
@@ -50,7 +50,7 @@ export class SchemaComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     ngOnInit(): void {
         this._constructSchemaGroup();
@@ -73,7 +73,7 @@ export class SchemaComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     private _constructSchemaGroup(): void {
         this.schemaGroup = this._constructProperties(this.schema.properties);
@@ -86,7 +86,7 @@ export class SchemaComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     private _constructProperties(properties: Properties): FormGroup {
         const formGroup = {};

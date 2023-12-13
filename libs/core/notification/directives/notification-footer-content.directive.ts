@@ -5,7 +5,7 @@ import { Directive, HostBinding } from '@angular/core';
     standalone: true
 })
 export class NotificationFooterContentDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-notification__footer-content')
     fdNotificationTitleClass = true;
 }

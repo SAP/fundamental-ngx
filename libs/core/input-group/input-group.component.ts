@@ -139,7 +139,7 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     @Input()
     showFocus = true;
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     isExpanded = false;
 
@@ -174,40 +174,40 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     @Output()
     search = new EventEmitter<Event>();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(InputGroupInputDirective)
     inputElement: InputGroupInputDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(InputGroupInputDirective)
     localInputElement: InputGroupInputDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(InputGroupAddOnDirective)
     addOnElement: InputGroupAddOnDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(InputGroupAddonButtonDirective, { static: false, read: ElementRef })
     private readonly _localButtonElement: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     _inputTextValue: string;
 
-    /** @hidden */
+    /** @ignore */
     _inputId = `fd-input-group-input-id-${addOnInputRandomId++}`;
 
-    /** @hidden */
+    /** @ignore */
     _addOnNonButtonId = `fd-input-group-non-button-id-${addOnNonButtonRandomId++}`;
 
-    /** @hidden */
+    /** @ignore */
     _addOnButtonId = `fd-input-group-button-id-${addOnButtonRandomId++}`;
 
-    /** @hidden */
+    /** @ignore */
     _inputFocused$: Observable<boolean>;
 
     /**
      * Whether the input group is in the shellbar. Only for internal use by combobox component.
-     * @hidden
+     * @ignore
      */
     inShellbar = false;
 
@@ -224,7 +224,7 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     get inputText(): string {
         return this._inputTextValue;
     }
-    /** @hidden
+    /** @ignore
      *  Calculate the correct ids for input aria-labelledby
      */
     get _inputAriaLabelledBy(): string {
@@ -237,7 +237,7 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
         return ariaLabelledByIds;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _elementRef: ElementRef,
         private readonly _changeDetectorRef: ChangeDetectorRef,
@@ -246,78 +246,78 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
         this._contentDensityObserver.subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onChange = (value: string): void => {};
 
-    /** @hidden */
+    /** @ignore */
     onTouched = (): void => {};
 
-    /** @hidden */
+    /** @ignore */
     get elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._listenInputFocus();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     writeValue(value: string): void {
         this._inputTextValue = value;
 
         this._changeDetectorRef.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnChange(fn): void {
         this.onChange = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnTouched(fn): void {
         this.onTouched = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
 
         this._changeDetectorRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     setInShellbar(value: boolean): void {
         this.inShellbar = value;
 
         this._changeDetectorRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     _buttonClicked(event: Event): void {
         this.addOnButtonClicked.emit(event);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onSearchEvent(event: Event): void {
         this.search.emit(event);
     }
 
-    /** @hidden */
+    /** @ignore */
     _preventFocus(event: MouseEvent): void {
         if (!this.buttonFocusable) {
             event.preventDefault();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenInputFocus(): void {
         const inputElement =
             this.inputElement?.elementRef?.nativeElement || this.localInputElement?.elementRef?.nativeElement;
@@ -347,7 +347,7 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
         this._changeDetectorRef.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _focusOut(event: FocusEvent): void {
         if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
             this.onTouched();

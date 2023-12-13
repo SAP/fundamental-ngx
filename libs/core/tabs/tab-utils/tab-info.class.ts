@@ -4,18 +4,18 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { TabItemState } from '../tab-item/tab-item.directive';
 import { TabPanelComponent } from '../tab-panel/tab-panel.component';
 
-/** @hidden */
+/** @ignore */
 export class TabInfo {
     /** Whether the tab is active */
     active: boolean;
 
-    /** @hidden Width of the tab header */
+    /** @ignore Width of the tab header */
     headerWidth: number;
 
     /** Corresponding tab panel */
     panel: TabPanelComponent;
 
-    /** @hidden */
+    /** @ignore */
     constructor(tabPanel: TabPanelComponent) {
         this.panel = tabPanel;
         this.active = tabPanel.expanded;
@@ -36,47 +36,47 @@ export class TabInfo {
         return this.panel.header;
     }
 
-    /** @hidden */
+    /** @ignore */
     get id(): Nullable<string> {
         return this.panel.id;
     }
 
-    /** @hidden */
+    /** @ignore */
     get ariaLabel(): Nullable<string> {
         return this.panel.ariaLabel;
     }
 
-    /** @hidden */
+    /** @ignore */
     get ariaLabelledBy(): Nullable<string> {
         return this.panel.ariaLabelledBy;
     }
 
-    /** @hidden */
+    /** @ignore */
     get tabState(): Nullable<TabItemState> {
         return this.panel.tabState;
     }
 
-    /** @hidden */
+    /** @ignore */
     get titleTemplate(): TemplateRef<any> {
         return this.panel.titleTemplate;
     }
 
-    /** @hidden */
+    /** @ignore */
     get count(): Nullable<string> {
         return this.panel.count;
     }
 
-    /** @hidden */
+    /** @ignore */
     get glyph(): string {
         return this.panel.glyph;
     }
 
-    /** @hidden */
+    /** @ignore */
     get forcedVisibility(): boolean {
         return this.panel._forcedVisibility;
     }
 
-    /** @hidden */
+    /** @ignore */
     get panelId(): string {
         return this.panel._panelId;
     }

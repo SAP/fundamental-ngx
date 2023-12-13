@@ -79,26 +79,26 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
     @Input()
     class: string;
 
-    /** @hidden */
+    /** @ignore */
     _href: string;
 
-    /** @hidden */
+    /** @ignore */
     _isSmallScreen: boolean;
 
-    /** @hidden */
+    /** @ignore */
     _inlineSvg: SafeHtml | undefined;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
         private _sanitizer: DomSanitizer
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         this.buildComponentCssClass();
         if ('svgConfig' in changes) {
@@ -106,26 +106,26 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
         this._constructHref();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (this.type === 'scene') {
             this._subscriptions.add(fromEvent(window, 'resize').subscribe(() => this._constructHref()));
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
     /**
-     * @hidden
+     * @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -135,7 +135,7 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
         return ['fd-illustrated-message', this.type ? `fd-illustrated-message--${this.type}` : '', this.class];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _constructHref(): void {
         let inlineSvg;
         this._inlineSvg = undefined;

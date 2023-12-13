@@ -59,17 +59,17 @@ export class OverflowLayoutItemDirective implements OverflowItem, OnInit {
     /** Reference to the element */
     elmRef = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     protected _overflowItemRef: OverflowItemRef | null = inject(FD_OVERFLOW_ITEM_REF, {
         optional: true,
         skipSelf: true
     });
-    /** @hidden */
+    /** @ignore */
     private _forceVisibility = false;
-    /** @hidden */
+    /** @ignore */
     private _overflowContainer = inject(OverflowLayoutComponent);
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._overflowItemRef?.setElementRef(this.elmRef);
         this._overflowItemRef?.setOverflowItem(this);

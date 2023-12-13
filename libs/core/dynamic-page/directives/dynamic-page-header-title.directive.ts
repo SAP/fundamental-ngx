@@ -9,7 +9,7 @@ export class DynamicPageHeaderTitleDirective {
     /** Template reference. */
     templateRef = inject<TemplateRef<DynamicPageTitleDirectiveContext>>(TemplateRef);
 
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard(
         dir: DynamicPageHeaderTitleDirective,
         ctx: DynamicPageTitleDirectiveContext

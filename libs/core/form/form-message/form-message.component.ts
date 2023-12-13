@@ -42,24 +42,24 @@ export class FormMessageComponent implements CssClassBuilder, OnInit, OnChanges 
     @Input()
     embedded = false;
 
-    /** @hidden User's custom classes */
+    /** @ignore User's custom classes */
     @Input()
     class: string;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [

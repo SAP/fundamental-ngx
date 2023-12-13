@@ -30,7 +30,7 @@ import { NavigationListItemComponent } from './navigation-list-item.component';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationListOverflowItemComponent extends NavigationListItemComponent {
-    /** @hidden */
+    /** @ignore */
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('hiddenItems')
     set _hiddenItems(items: FdbNavigationListItemComponent[]) {
@@ -39,14 +39,14 @@ export class NavigationListOverflowItemComponent extends NavigationListItemCompo
         this.hiddenItems.set(items);
     }
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('childrenTemplate', { read: TemplateRef })
     _portal: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     override additionalBodyClass = 'fd-navigation__list-container fd-navigation__list-container--menu';
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         super();
         effect(

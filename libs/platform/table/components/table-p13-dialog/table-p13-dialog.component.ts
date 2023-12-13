@@ -77,35 +77,35 @@ export class TableP13DialogComponent implements OnDestroy {
         return this._table;
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(TableP13SortComponent)
     sort: TableP13SortComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(TableP13FilterComponent)
     filter: TableP13FilterComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(TableP13GroupComponent)
     group: TableP13GroupComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(TableP13ColumnsComponent)
     columns: TableP13ColumnsComponent;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _tableSubscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     _table: Table;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private readonly _dialogService: DialogService) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._unsubscribeFromTable();
@@ -230,7 +230,7 @@ export class TableP13DialogComponent implements OnDestroy {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setTable(table: Table): void {
         this._table = table;
 
@@ -241,13 +241,13 @@ export class TableP13DialogComponent implements OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _subscribeToTable(): void {
         this._listenToTableTriggersToOpenDialogs();
         this._listenToTableColumns();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToTableTriggersToOpenDialogs(): void {
         this._tableSubscriptions.add(this._table.openTableSortSettings.subscribe(() => this.showSortingSettings()));
         this._tableSubscriptions.add(this._table.openTableFilterSettings.subscribe(() => this.showFilteringSettings()));
@@ -255,7 +255,7 @@ export class TableP13DialogComponent implements OnDestroy {
         this._tableSubscriptions.add(this._table.openTableColumnSettings.subscribe(() => this.showColumnsSettings()));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToTableColumns(): void {
         this._tableSubscriptions.add(
             this._table.tableColumnsStream.subscribe((columns: TableColumn[]) => {
@@ -272,37 +272,37 @@ export class TableP13DialogComponent implements OnDestroy {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getTableState(): TableState {
         return this._table?.getTableState();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getTableColumns(): TableColumn[] {
         return this._table?.getTableColumns() || [];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _applySorting(collectionSort: CollectionSort[]): void {
         this._table?.sort(collectionSort);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _applyFiltering(filters: CollectionFilter[]): void {
         this._table?.filter(filters);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _applyGrouping(collectionGroup: CollectionGroup[]): void {
         this._table?.group(collectionGroup);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _applyColumns(columns: string[]): void {
         this._table?.setColumns(columns);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _unsubscribeFromTable(): void {
         this._tableSubscriptions.unsubscribe();
         this._tableSubscriptions = new Subscription();

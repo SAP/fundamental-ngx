@@ -74,7 +74,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     @Input({ transform: coerceBooleanProperty })
     vertical: BooleanInput;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FD_BUTTON_COMPONENT)
     _buttons: QueryList<ButtonComponent>;
 
@@ -85,13 +85,13 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
      */
     private _currentValue: SegmentedButtonValue;
 
-    /** @hidden */
+    /** @ignore */
     private _isDisabled = false;
 
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _changeDetRef: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
@@ -107,7 +107,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('click', ['$event'])
     private _click(event: MouseEvent): void {
         if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
@@ -115,37 +115,37 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     onChange: (value: SegmentedButtonValue) => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     onTouched = (): void => {};
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._listenToButtonChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes && changes.vertical) {
             this._focusableList.navigationDirection = this.vertical ? 'vertical' : 'horizontal';
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onRefresh$.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     writeValue(values: string[] | string): void {
         this._currentValue = values;
         this._pickButtonsByValues(values);
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param fn User defined function that handles the *onChange* event of the SegmentedButtons.
      */
     registerOnChange(fn: (value: SegmentedButtonValue) => void): void {
@@ -153,7 +153,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param fn User defined function that handles the *onTouch* event of the SegmentedButtons.
      */
     registerOnTouched(fn: () => void): void {
@@ -161,7 +161,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param isDisabled Sets the value of the *disabled* property of the SegmentedButtons.
      */
     setDisabledState(isDisabled: boolean): void {
@@ -170,7 +170,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         this._changeDetRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToButtonChanges(): void {
         this._buttons.changes
             .pipe(startWith(1), observeOn(asyncScheduler), takeUntilDestroyed(this._destroyRef))
@@ -185,7 +185,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToTriggerEvents(buttonComponent: ButtonComponent): void {
         const htmlElement = buttonComponent.elementRef.nativeElement;
 
@@ -205,7 +205,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         triggerEvents$.pipe(takeUntil(refresh$)).subscribe(() => this._handleTriggerOnButton(buttonComponent));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleTriggerOnButton(buttonComponent: ButtonComponent): void {
         if (!this._isButtonDisabled(buttonComponent)) {
             if (!this._isButtonSelected(buttonComponent) && !this.toggle) {
@@ -223,13 +223,13 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _propagateChange(): void {
         this.onChange(this._getValuesBySelected());
         this._currentValue = this._getValuesBySelected();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _toggleButton(buttonComponent: ButtonComponent): void {
         if (this._isButtonSelected(buttonComponent)) {
             this._deselectButton(buttonComponent);
@@ -238,7 +238,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _pickButtonsByValues(values: SegmentedButtonValue): void {
         if (!this._buttons) {
             return;
@@ -248,7 +248,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         this._changeDetRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getButtonsByValues(values: SegmentedButtonValue): ButtonComponent[] {
         if (!values) {
             return [];
@@ -261,27 +261,27 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _selectButton(buttonComponent: ButtonComponent): void {
         buttonComponent.toggled = true;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _deselectButton(buttonComponent: ButtonComponent): void {
         buttonComponent.toggled = false;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isButtonSelected(buttonComponent: ButtonComponent): boolean {
         return buttonComponent.toggled;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isButtonDisabled(buttonComponent: ButtonComponent): boolean {
         return buttonComponent._disabled || buttonComponent.ariaDisabled;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _toggleDisableButtons(disable: boolean): void {
         if (!this._buttons) {
             return;
@@ -294,7 +294,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         this._changeDetRef.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getButtonValue(buttonComponent: ButtonComponent): string | null {
         const element = buttonComponent.elementRef.nativeElement;
         if (element instanceof HTMLButtonElement) {
@@ -303,7 +303,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         return element.getAttribute('value');
     }
 
-    /** @hidden
+    /** @ignore
      * Returns values depending on selected state of buttons
      */
     private _getValuesBySelected(): SegmentedButtonValue {

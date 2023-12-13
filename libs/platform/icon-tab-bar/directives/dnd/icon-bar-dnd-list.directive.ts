@@ -23,26 +23,26 @@ export class IconBarDndListDirective implements IconTabBarDndList, AfterViewInit
     @Input()
     dndAutoScroll = true;
 
-    /** @hidden */
+    /** @ignore */
     private _dropListRef: DropListRef;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onDestroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _dragRefItems: DragRef[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private readonly _dndItems$ = new ReplaySubject<void>(1);
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public elementRef: ElementRef,
         private _dragDrop: DragDrop,
         private _dndContainer: IconBarDndContainerDirective
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._dropListRef = this._dragDrop.createDropList(this.elementRef.nativeElement);
         this._dropListRef.sortingDisabled = true;
@@ -57,7 +57,7 @@ export class IconBarDndListDirective implements IconTabBarDndList, AfterViewInit
             .subscribe(() => this._dropListRef.withItems(this._dragRefItems));
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();

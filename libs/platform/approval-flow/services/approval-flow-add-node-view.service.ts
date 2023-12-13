@@ -10,57 +10,57 @@ export enum VIEW_MODES {
 
 @Injectable()
 export class ApprovalFlowAddNodeViewService {
-    /** @hidden */
+    /** @ignore */
     onViewChange = new EventEmitter();
 
-    /** @hidden */
+    /** @ignore */
     private currentView?: VIEW_MODES;
-    /** @hidden */
+    /** @ignore */
     private selectedTeam?: ApprovalTeam;
 
-    /** @hidden */
+    /** @ignore */
     get isUserDetailsMode(): boolean {
         return this.currentView === VIEW_MODES.USER_DETAILS;
     }
 
-    /** @hidden */
+    /** @ignore */
     get isTeamMembersMode(): boolean {
         return this.currentView === VIEW_MODES.VIEW_TEAM_MEMBERS;
     }
 
-    /** @hidden */
+    /** @ignore */
     get isSelectUserMode(): boolean {
         return this.currentView === VIEW_MODES.SELECT_USER;
     }
 
-    /** @hidden */
+    /** @ignore */
     get isSelectTeamMode(): boolean {
         return this.currentView === VIEW_MODES.SELECT_TEAM;
     }
 
-    /** @hidden */
+    /** @ignore */
     get team(): ApprovalTeam | undefined {
         return this.selectedTeam;
     }
 
-    /** @hidden */
+    /** @ignore */
     setCurrentView(view: VIEW_MODES): void {
         this.currentView = view;
         this.onViewChange.emit();
     }
 
-    /** @hidden */
+    /** @ignore */
     resetView(): void {
         this.currentView = undefined;
         this.onViewChange.emit();
     }
 
-    /** @hidden */
+    /** @ignore */
     selectTeam(team: ApprovalTeam): void {
         this.selectedTeam = team;
     }
 
-    /** @hidden */
+    /** @ignore */
     resetTeam(): void {
         this.selectedTeam = undefined;
     }

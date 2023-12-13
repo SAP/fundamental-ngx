@@ -116,46 +116,46 @@ export class MenuComponent
     @Output()
     readonly activePath = new EventEmitter<MenuItemComponent[]>();
 
-    /** @hidden Reference to the menu root template */
+    /** @ignore Reference to the menu root template */
     @ViewChild('menuRootTemplate')
     _menuRootTemplate: TemplateRef<any>;
 
-    /** @hidden Reference to all menu Items */
+    /** @ignore Reference to all menu Items */
     @ContentChildren(FD_MENU_ITEM_COMPONENT)
     _menuItems: QueryList<MenuItemComponent>;
 
-    /** @hidden Menu item segmented item headers */
+    /** @ignore Menu item segmented item headers */
     @ContentChildren(SegmentedButtonHeaderDirective)
     _segmentedButtonHeaderItems: QueryList<SegmentedButtonHeaderDirective<unknown>>;
 
-    /** @hidden Menu item segmented item options */
+    /** @ignore Menu item segmented item options */
     @ContentChildren(SegmentedButtonOptionDirective)
     _segmentedButtonOptions: QueryList<SegmentedButtonOptionDirective<unknown>>;
 
-    /** @hidden Whether use a menu in mobile mode */
+    /** @ignore Whether use a menu in mobile mode */
     private _mobile = false;
 
-    /** @hidden Reference to external menu trigger */
+    /** @ignore Reference to external menu trigger */
     private _externalTrigger: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     private _addons: Set<unknown> = new Set();
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _mobileModeComponentRef: ComponentRef<MenuMobileComponent>;
 
-    /** @hidden */
+    /** @ignore */
     private _clickEventListener: null | (() => void);
 
-    /** @hidden */
+    /** @ignore */
     get hasAddons(): boolean {
         return this._addons.size > 0;
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _popoverConfig(): BasePopoverClass {
         return {
             ...this,
@@ -163,7 +163,7 @@ export class MenuComponent
         };
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef,
         @Optional() public readonly dialogConfig: DialogConfig,
@@ -179,7 +179,7 @@ export class MenuComponent
         super();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         /** keep isOpen up to date */
         this.isOpenChange.subscribe((isOpen) => {
@@ -207,13 +207,13 @@ export class MenuComponent
         this._changeDetectorRef.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._menuService.setMenuComponent(this);
         this._listenOnMenuItemsChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._menuService.isMobileMode.subscribe((isMobile) => {
             this._setupView();
@@ -282,7 +282,7 @@ export class MenuComponent
             .subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._destroyMobileComponent();
         this._destroyEventListeners();
@@ -291,7 +291,7 @@ export class MenuComponent
         this._popoverService.onDestroy();
     }
 
-    /** @hidden */
+    /** @ignore */
     set trigger(trigger: ElementRef) {
         this._externalTrigger = trigger;
         this._popoverService.initialise(this._externalTrigger);
@@ -339,17 +339,17 @@ export class MenuComponent
         this._popoverService.refreshPosition();
     }
 
-    /** @hidden */
+    /** @ignore */
     detectChanges(): void {
         this._changeDetectorRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _cleanUpMenuAfterClose(): void {
         this._menuService.resetMenuState();
     }
 
-    /** @hidden Select and instantiate menu view mode */
+    /** @ignore Select and instantiate menu view mode */
     private _setupView(): void {
         if (this.mobile) {
             this._setupMobileMode();
@@ -360,7 +360,7 @@ export class MenuComponent
         this.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setupPopoverService(): void {
         this._subscriptions.add(
             this._popoverService._onLoad.subscribe((elementRef) => this._menuService.addKeyboardSupport(elementRef))
@@ -370,7 +370,7 @@ export class MenuComponent
         this._popoverService.initialise(this._externalTrigger, this._popoverConfig);
     }
 
-    /** @hidden Open Menu in mobile mode */
+    /** @ignore Open Menu in mobile mode */
     private async _setupMobileMode(): Promise<void> {
         const injector = Injector.create({
             providers: [{ provide: MENU_COMPONENT, useValue: this }],
@@ -389,7 +389,7 @@ export class MenuComponent
         this._listenOnTriggerRefClicks();
     }
 
-    /** @hidden Listen on menu items change and rebuild menu */
+    /** @ignore Listen on menu items change and rebuild menu */
     private _listenOnMenuItemsChange(): void {
         this._subscriptions.add(this._menuItems.changes.subscribe(() => this._menuService.rebuildMenu()));
 
@@ -409,7 +409,7 @@ export class MenuComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * This is going to be removed in feature, on dialog and dynamic service component refactor
      */
     private _listenOnTriggerRefClicks(): void {
@@ -421,7 +421,7 @@ export class MenuComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * This is going to be removed in feature, on dialog and dynamic service component refactor
      */
     private _destroyEventListeners(): void {
@@ -431,14 +431,14 @@ export class MenuComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _destroyMobileComponent(): void {
         if (this._mobileModeComponentRef) {
             this._mobileModeComponentRef.destroy();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _focusTrigger(): void {
         if (this.focusTrapped && this.trigger) {
             this.trigger.nativeElement.focus();

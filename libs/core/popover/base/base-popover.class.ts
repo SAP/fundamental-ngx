@@ -151,10 +151,10 @@ export class BasePopoverClass {
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden Aria role for the popover body. */
+    /** @ignore Aria role for the popover body. */
     _bodyRole: string | null = null;
 
-    /** @hidden ID for the popover body. */
+    /** @ignore ID for the popover body. */
     _bodyId: string | null = null;
 }
 

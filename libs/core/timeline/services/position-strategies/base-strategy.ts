@@ -14,12 +14,12 @@ export abstract class BaseStrategy {
     /** Calculate styles for timeline nodes */
     abstract calculateStyles(nodes: TimelineNodeComponentInterface[]): any;
 
-    /** @hidden */
+    /** @ignore */
     protected _getOffset(node: TimelineNodeComponentInterface): number {
         return node.glyph ? this.BIG_OFFSET : this.SMALL_OFFSET;
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _getTwoListFromOne(
         nodes: TimelineNodeComponentInterface[]
     ): [TimelineNodeComponentInterface[], TimelineNodeComponentInterface[]] {
@@ -29,7 +29,7 @@ export abstract class BaseStrategy {
         return [firstList, secondList];
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _setStylesForSingleList(nodes: TimelineNodeComponentInterface[], axis: TimelineAxis): void {
         const [offsetProperty, sizeProperty] =
             axis === 'horizontal' ? ['offsetLeft', 'width'] : ['offsetTop', 'height'];
@@ -50,7 +50,7 @@ export abstract class BaseStrategy {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _setStylesForDoubleList(nodes: TimelineNodeComponentInterface[], axis: TimelineAxis): void {
         const [firstList, secondList] = this._getTwoListFromOne(nodes);
         const [offsetProp, sizeProp, sizeOffsetProp] =

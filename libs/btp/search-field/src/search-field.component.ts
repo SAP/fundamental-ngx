@@ -38,11 +38,11 @@ export class SearchFieldComponent implements AfterViewInit, HasElementRef {
     /** Event emitted when the search button is clicked. */
     @Output() search = new EventEmitter<string>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('searchInputField')
     protected _searchInputField?: ElementRef<HTMLInputElement>;
 
-    /** @hidden */
+    /** @ignore */
     elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
     /** Value of the input field. */
@@ -50,20 +50,20 @@ export class SearchFieldComponent implements AfterViewInit, HasElementRef {
 
     /**
      * Whether the search field is focused
-     * @hidden */
+     * @ignore */
     protected _inputFocused = signal(false);
 
-    /** @hidden */
+    /** @ignore */
     private _cvaControl: CvaControl<string> = inject(CvaControl);
 
-    /** @hidden */
+    /** @ignore */
     private _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     focus(): void {
         this._searchInputField?.nativeElement.focus();
     }
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._cvaControl.listenToChanges();
         (this._cvaControl.cvaDirective?.ngControl?.valueChanges || of(undefined))
@@ -74,13 +74,13 @@ export class SearchFieldComponent implements AfterViewInit, HasElementRef {
             .subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     protected updateValue($event: string): void {
         this._value = $event;
         this._cvaControl.cvaDirective?.setValue($event);
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _search(): void {
         this.search.emit(this._value);
     }

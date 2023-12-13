@@ -109,68 +109,68 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     @Output()
     readonly itemFocused = new EventEmitter<FocusableListItemFocusedEvent>();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE, { descendants: true })
     readonly _projectedFocusableItems: ItemsQueryList<FocusableItem>;
 
-    /** @hidden */
+    /** @ignore */
     get _focusableItems(): ItemsQueryList<FocusableItem> {
         return this._items ? this._items : this._projectedFocusableItems;
     }
 
-    /** @hidden */
+    /** @ignore */
     _items: ItemsQueryList<FocusableItem> | undefined;
 
-    /** @hidden */
+    /** @ignore */
     readonly _gridItemFocused$ = new Subject<FocusableItemPosition>();
 
-    /** @hidden */
+    /** @ignore */
     readonly _gridListFocused$ = new Subject<FocusableListPosition>();
 
-    /** @hidden */
+    /** @ignore */
     readonly _keydown$ = new Subject<FocusableListKeydownEvent>();
 
-    /** @hidden */
+    /** @ignore */
     _isVisible = false;
 
-    /** @hidden */
+    /** @ignore */
     protected readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     protected _focusable = false;
 
-    /** @hidden */
+    /** @ignore */
     private _gridPosition: { rowIndex: number; totalRows: number };
 
-    /** @hidden */
+    /** @ignore */
     private _keyManager?: FocusKeyManager<FocusableItem>;
 
-    /** @hidden */
+    /** @ignore */
     private _tabbable = false;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _refreshItems$ = new Subject<void>();
-    /** @hidden */
+    /** @ignore */
     private readonly _refresh$ = new Subject<void>();
-    /** @hidden */
+    /** @ignore */
     private readonly _renderer = inject(Renderer2);
-    /** @hidden */
+    /** @ignore */
     private readonly _elementRef: ElementRef<HTMLElement> = inject(ElementRef);
-    /** @hidden */
+    /** @ignore */
     private readonly _liveAnnouncer = inject(LiveAnnouncer);
-    /** @hidden */
+    /** @ignore */
     private readonly _focusableObserver = inject(FocusableObserver);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _document = inject(DOCUMENT);
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.tabindex')
     get _tabindex(): number {
         return this._tabbable ? 0 : -1;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         intersectionObservable(this._elementRef.nativeElement, { threshold: 0.25 })
             .pipe(takeUntilDestroyed())
@@ -186,7 +186,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     _onKeydown(event: KeyboardEvent): void {
         // Already handled
@@ -216,7 +216,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
         this._keydown$.next({ list: this, event, activeItemIndex: this._keyManager?.activeItemIndex ?? null });
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('focus')
     async _onFocus(): Promise<void> {
         if (this._gridPosition) {
@@ -229,7 +229,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (!this._keyManager) {
             return;
@@ -244,7 +244,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._listenOnItems();
     }
@@ -255,7 +255,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
         this._listenOnItems();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._keyManager?.destroy();
     }
@@ -292,7 +292,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
         this._tabbable = state;
     }
 
-    /** @hidden */
+    /** @ignore */
     _updateNavigationDirection(): void {
         if (!this._keyManager) {
             return;
@@ -307,12 +307,12 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _setItemsTabbable(state: boolean): void {
         this._focusableItems.forEach((item) => item.setTabbable(state));
     }
 
-    /** @hidden */
+    /** @ignore */
     _setGridPosition(position: FocusableListPosition): void {
         this._gridPosition = position;
 
@@ -330,7 +330,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
             );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initializeFocusManager(items: FocusableItem[], config: FocusableListConfig = {}): void {
         this._refreshItems$.next();
 
@@ -385,12 +385,12 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
             .subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _defaultListFocusedEventAnnouncer(position: FocusableListPosition): string {
         return `Row: ${position.rowIndex + 1} of ${position.totalRows}, use F2 button to dive in and focus list's item`;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnItems(): void {
         const refresh$ = merge(this._refresh$, destroyObservable(this._destroyRef));
         this._refresh$.next();

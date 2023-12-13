@@ -29,7 +29,7 @@ export class TableCellDirective extends FocusableItemDirective implements AfterC
     @Input()
     activable = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-table__cell--focusable')
     @Input()
     set focusable(value: BooleanInput) {
@@ -63,21 +63,21 @@ export class TableCellDirective extends FocusableItemDirective implements AfterC
     @Input()
     key: string;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FD_CHECKBOX_COMPONENT)
     _checkboxes: QueryList<CheckboxComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-table__cell')
     _fdTableCellClass = true;
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         super();
         this.fdkFocusableItem = false;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         const cell = this.elementRef.nativeElement;
 

@@ -167,7 +167,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
     @Output() zoomGlyphClicked = new EventEmitter<void>();
 
     /**
-     * @hidden
+     * @ignore
      */
     set bgImage(image: Nullable<string>) {
         this._bgImage = image;
@@ -179,37 +179,37 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
         return this._bgImage;
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.role')
     get role(): string {
         return this.zoomGlyph ? 'button' : 'img';
     }
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('content')
     set content(value: ElementRef) {
         this._content = value;
     }
 
-    /** @hidden */
+    /** @ignore */
     abbreviate: Nullable<string> = null;
 
-    /** @hidden */
+    /** @ignore */
     private _image: Nullable<string> = null;
 
-    /** @hidden */
+    /** @ignore */
     private _alterIcon: Nullable<string> = null;
 
-    /** @hidden */
+    /** @ignore */
     private _content: Nullable<ElementRef> = null;
 
-    /** @hidden */
+    /** @ignore */
     private _backupImage: Nullable<string> = null;
 
-    /** @hidden */
+    /** @ignore */
     private _bgImage: Nullable<string> = null;
 
-    /** @hidden */
+    /** @ignore */
     get _tabindex(): number | null {
         if (this.hostTabindex != null) {
             return this.hostTabindex;
@@ -222,7 +222,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
         return !this.abbreviate && !this._image && !this.glyph;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef,
         private readonly _cdr: ChangeDetectorRef,
@@ -230,7 +230,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
         @Attribute('tabindex') private hostTabindex: number | null
     ) {}
 
-    /** @hidden
+    /** @ignore
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -252,7 +252,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('click', ['$event'])
     @HostListener('keydown.enter', ['$event'])
     @HostListener('keydown.space', ['$event'])
@@ -267,12 +267,12 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         if (this.zoomGlyph) {
             this.clickable = true;
@@ -280,14 +280,14 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     zoomClicked(event: Event): void {
         event.preventDefault();
         this.elementRef.nativeElement.focus();
         this.zoomGlyphClicked.next();
     }
 
-    /** @hidden Get an abbreviate from the label or return null if not fit requirements */
+    /** @ignore Get an abbreviate from the label or return null if not fit requirements */
     private _getAbbreviate(label: Nullable<string>): string | null {
         if (!label || this._image) {
             return null;
@@ -296,7 +296,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
         return this._generateAbbreviation(label);
     }
 
-    /** @hidden Get the abbreviation string */
+    /** @ignore Get the abbreviation string */
     private _generateAbbreviation(label: Nullable<string>): string | null {
         if (!label) {
             return null;
@@ -312,7 +312,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
         return abbreviate;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setImage(value: Nullable<string>): void {
         this._image = value;
 
@@ -323,7 +323,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _verifyImageUrl(srcValue: string, onLoadCallback: () => void, onErrorCallback: () => void): void {
         // Don't load the same image all the time check happens
         if (srcValue === this.bgImage) {
@@ -336,12 +336,12 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
         this._assignBgImage(srcValue);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _assignBgImage(srcValue: Nullable<string>): void {
         this.bgImage = srcValue ? `url(${srcValue})` : null;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _onErrorCallback(): void {
         if (!this._alterIcon) {
             this._showDefaultIcon();
@@ -400,7 +400,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _showDefaultIcon(): void {
         this.abbreviate = null;
         this._image = null;

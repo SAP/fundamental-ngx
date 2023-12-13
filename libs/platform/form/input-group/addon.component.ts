@@ -48,7 +48,7 @@ export const inputGroupAddonChildProvider: Provider = {
     standalone: true
 })
 export class InputGroupAddonComponent implements AfterContentInit {
-    /** @hidden */
+    /** @ignore */
     set disabled(disabled: boolean) {
         this._disabled = disabled;
         this._setButtonControlOptions();
@@ -57,32 +57,32 @@ export class InputGroupAddonComponent implements AfterContentInit {
         return this._disabled;
     }
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(TemplateRef)
     contentTemplateRef: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(ButtonComponent)
     button: ButtonComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(ButtonComponent, { read: ElementRef })
     set buttonElementRef(buttonComponentElementRef: ElementRef<HTMLElement>) {
         this._setButtonElementClass(buttonComponentElementRef?.nativeElement);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _disabled = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _renderer: Renderer2) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._setButtonControlOptions();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setButtonControlOptions(): void {
         const button = this.button;
 
@@ -95,7 +95,7 @@ export class InputGroupAddonComponent implements AfterContentInit {
         button.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setButtonElementClass(buttonComponentElement: HTMLElement): void {
         if (!buttonComponentElement) {
             return;

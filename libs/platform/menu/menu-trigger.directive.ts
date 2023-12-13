@@ -42,24 +42,24 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         return this._menu;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _menu: MenuComponent;
-    /** @hidden */
+    /** @ignore */
     private _overlayRef: OverlayRef | null;
-    /** @hidden */
+    /** @ignore */
     private _portal: TemplatePortal;
-    /** @hidden */
+    /** @ignore */
     private _isMenuOpen = false;
-    /** @hidden */
+    /** @ignore */
     private _outsideClickSubscription: Subscription = Subscription.EMPTY;
-    /** @hidden */
+    /** @ignore */
     private _menuCloseSubscription: Subscription = Subscription.EMPTY;
-    /** @hidden */
+    /** @ignore */
     private _parentMenuCloseSubscription: Subscription = Subscription.EMPTY;
-    /** @hidden */
+    /** @ignore */
     private _menuItemHoverChangeSubscription: Subscription = Subscription.EMPTY;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _element: ElementRef<HTMLElement>,
         private _overlay: Overlay,
@@ -68,7 +68,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         @Optional() private _parentMenu: MenuComponent
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         if (this._isMenuItem()) {
             // mark menu item as trigger
@@ -89,7 +89,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         if (this._overlayRef) {
             this._overlayRef.dispose();
@@ -107,7 +107,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handle click on trigger element.
      */
     @HostListener('click', ['$event'])
@@ -125,7 +125,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Handled keypress which focus is on trigger element.
      */
     @HostListener('keydown', ['$event'])
@@ -162,7 +162,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Toggle display of associated menu.
      */
     toggleMenu(): void {
@@ -178,7 +178,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Open associated menu.
      */
     openMenu(): void {
@@ -240,7 +240,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Close associated menu.
      */
     closeMenu(): void {
@@ -248,7 +248,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
     }
 
     /**
-     * @hidden
+     * @ignore
      * destroy associated menu.
      */
     private _destroyMenu(): void {
@@ -267,7 +267,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         this._isMenuOpen = false;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getOverlayConfig(): OverlayConfig {
         const positions = this._getPositions();
         const positionStrategy = this._overlay
@@ -286,7 +286,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         return overlayConfig;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getPositions(): ConnectedPosition[] {
         let positions: ConnectedPosition[] = [];
         const offsetYPosition = 0;
@@ -379,7 +379,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         return positions;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isMenuItem(): boolean {
         return !!(this._parentMenu && this._menuItem);
     }

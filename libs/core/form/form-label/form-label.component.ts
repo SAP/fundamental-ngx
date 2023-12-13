@@ -93,19 +93,19 @@ export class FormLabelComponent implements OnChanges {
         return typeof this.inlineHelpContent === 'string' ? this.inlineHelpContent : '';
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-form-label__wrapper')
     defaultClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-form-label__wrapper--inline-help')
     inlineHelpClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-form-label__wrapper--inline-help--after')
     inlineHelpAfter = true;
 
-    /** @hidden */
+    /** @ignore */
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('id')
     @HostBinding('id')
@@ -116,13 +116,13 @@ export class FormLabelComponent implements OnChanges {
         return this._formLabelId;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _formLabelId = `fd-form-label-${++formLabelIdCount}`;
 
-    /** @hidden */
+    /** @ignore */
     private _inlineHelpLabel?: string;
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.inlineHelpClass = !!this.inlineHelpContent;
         this.inlineHelpAfter = !!this.inlineHelpContent && this.inlineHelpPlacement === 'after';

@@ -17,7 +17,7 @@ export class ClickedDirective {
      */
     @Output() fdkClicked: Observable<MouseEvent | KeyboardEvent>;
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         const { nativeElement: element } = inject<ElementRef<HTMLElement>>(ElementRef);
         const renderer = inject(Renderer2);

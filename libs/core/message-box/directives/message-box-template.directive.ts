@@ -18,20 +18,20 @@ export class MessageBoxTemplateDirective<T = MessageBoxConfig<any>> {
     @Input()
     fdMessageBoxTemplateConfig: T;
 
-    /** @hidden */
+    /** @ignore */
     readonly templateRef = inject(TemplateRef<MessageBoxTemplateDirectiveContext<T>>);
 
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard<T extends null>(
         dir: MessageBoxTemplateDirective<T>,
         ctx: MessageBoxTemplateDirectiveContext<MessageBoxConfig<any>>
     ): ctx is MessageBoxTemplateDirectiveContext<MessageBoxConfig<any>>;
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard<T = MessageBoxConfig<any>>(
         dir: MessageBoxTemplateDirective<T>,
         ctx: MessageBoxTemplateDirectiveContext<T>
     ): ctx is MessageBoxTemplateDirectiveContext<T>;
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard<U extends MessageBoxTemplateDirective<any>>(
         dir: U,
         ctx: MessageBoxTemplateDirectiveContext<any>

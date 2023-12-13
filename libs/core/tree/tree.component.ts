@@ -95,7 +95,7 @@ import { TreeService } from './tree.service';
 export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeItem = FdTreeItemType<P>>
     implements CssClassBuilder, OnInit, OnChanges, AfterViewInit, SelectComponentRootToken, OnDestroy
 {
-    /** @hidden */
+    /** @ignore */
     @Input()
     class: string;
 
@@ -137,7 +137,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         return this._navigationIndicator;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _navigationIndicator = false;
 
     /** Event emitted when data loading is started. */
@@ -152,7 +152,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     @Output()
     selectedChange = new EventEmitter<any>();
 
-    /** @hidden */
+    /** @ignore */
     _items: TreeItem<TreeItemGeneric<T>>[] = [];
 
     /** Tree item template definition. */
@@ -168,96 +168,96 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         return this._treeItemDef;
     }
 
-    /** @hidden */
+    /** @ignore */
     get multiple(): BooleanInput {
         return this.selection === 'multiple';
     }
 
-    /** @hidden */
+    /** @ignore */
     get toggle(): BooleanInput {
         return true;
     }
 
     /**
-     * @hidden
+     * @ignore
      * Used for skeleton to appear before first meaningful data being loaded.
      */
     _initialDataLoaded = false;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(TreeItemDirective)
     _treeItemDirectives: QueryList<TreeItemDirective<TreeItem, any>>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(BaseTreeItem, { descendants: true })
     readonly _projectedTreeItems: QueryList<BaseTreeItem>;
 
-    /** @hidden */
+    /** @ignore */
     private _treeItemDef: Nullable<TreeItemDefDirective>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _contentDensityObserver = inject(ContentDensityObserver);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _dataSourceDirective = inject<DataSourceDirective<T, FdTreeDataSource<T>>>(DataSourceDirective);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     public readonly elementRef = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _treeService = inject(TreeService);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _selectionService = inject(SelectionService);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _rtl = inject(RtlService, {
         optional: true
     });
 
-    /** @hidden */
+    /** @ignore */
     private readonly _cvaDirective = inject(CvaDirective);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _cdr = inject(ChangeDetectorRef);
 
-    /** @hidden */
+    /** @ignore */
     private _dsSubscription: Subscription | null = null;
 
-    /** @hidden */
+    /** @ignore */
     private _expandedLevel: number | undefined;
 
-    /** @hidden */
+    /** @ignore */
     private _focusKeyManager: FocusKeyManager<BaseTreeItem>;
 
     /**
-     * @hidden
+     * @ignore
      * Sorted tree item components.
      */
     private _sortedTreeItems: BaseTreeItem[] = [];
 
     /**
-     * @hidden
+     * @ignore
      * All tree item components.
      */
     private _allItems: BaseTreeItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _eventSub: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     private _selectionSub: Subscription | undefined;
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         this._selectionService.registerRootComponent(this);
         this._contentDensityObserver.subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._openDataStream();
         this.buildComponentCssClass();
@@ -283,7 +283,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         this.buildComponentCssClass();
 
@@ -293,20 +293,20 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._listenToTreeItemsChanges();
         this._listenToTreeItemDirectiveChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._dsSubscription?.unsubscribe();
         this._eventSub?.unsubscribe();
         this._selectionSub?.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setSelectionListener(): void {
         this._selectionSub?.unsubscribe();
         if (this.selection !== 'none') {
@@ -320,7 +320,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToTreeItemDirectiveChanges(): void {
         this._treeItemDirectives.changes
             .pipe(
@@ -335,7 +335,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToTreeItemsChanges(): void {
         this._projectedTreeItems.changes
             .pipe(
@@ -350,7 +350,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setFlattenedItems(items: BaseTreeItem[]): void {
         this._sortedTreeItems = items;
 
@@ -371,7 +371,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         this._setupEventListeners();
     }
 
-    /** @hidden */
+    /** @ignore */
     _onItemFocused(treeItem: BaseTreeItem): void {
         let focusedIndex = -1;
         this._sortedTreeItems.forEach((item, index) => {
@@ -389,7 +389,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         this._focusKeyManager.setActiveItem(focusedIndex);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setupEventListeners(): void {
         this._eventSub?.unsubscribe();
         this._eventSub = new Subscription();
@@ -408,7 +408,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _sortTreeItems(items: BaseTreeItem[]): BaseTreeItem[] {
         const components: BaseTreeItem[] = [];
         const rootItems = items.filter((item) => item.level === 1);
@@ -440,7 +440,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         return components;
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
@@ -454,7 +454,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     }
 
     /**
-     * @hidden
+     * @ignore
      * Keyboard navigation
      * @param event Keyboard event.
      */
@@ -469,7 +469,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _onItemKeyDown(event: KeyboardEvent, treeItem: Nullable<BaseTreeItem>): void {
         if (!treeItem) {
             return;
@@ -500,13 +500,13 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _trackFn(index: number, item: TreeItem<TreeItemGeneric<T>>): string {
         return item.id;
     }
 
     /**
-     * @hidden
+     * @ignore
      * Select list interface method implementation.
      * Sets value for control value accessor and emits it.
      * @param value value of the selection.
@@ -515,7 +515,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         this._cvaDirective.setValue(value, true);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _expandTreeSection(treeItem: BaseTreeItem): void {
         if (treeItem.expanded) {
             // Shift focus on the first child item
@@ -532,7 +532,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _collapseTreeSection(treeItem: BaseTreeItem): void {
         if (!treeItem.expanded && treeItem.parentId) {
             const parentItemIndex = this._sortedTreeItems.findIndex((item) => item.id === treeItem.parentId);
@@ -546,7 +546,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _openDataStream(): void {
         this._dsSubscription?.unsubscribe();
         this._dsSubscription = new Subscription();

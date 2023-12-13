@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'wizard';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/wizard';
 export const API_FILE_KEY = 'wizard';
 export const I18N_KEY = 'coreWizard';

@@ -65,7 +65,7 @@ export class CodeExampleComponent implements OnInit {
     exampleFilesNetworkEntity$: Observable<ExamplesEntity>;
     states = ExampleEntityState;
     /**
-     * @hidden
+     * @ignore
      */
     _displayedFiles: ReplaySubject<ExampleFile[]> = new ReplaySubject<ExampleFile[]>(1);
     _exampleFiles: ExampleFile<string, string, string>[];

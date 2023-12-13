@@ -32,7 +32,7 @@ export abstract class BaseTableDataProvider<T, P = T[]> {
     /** Additional search query provided by outside component. */
     protected searchInput?: SearchInput;
 
-    /** @hidden */
+    /** @ignore */
     protected _destroy$ = new Subject<void>();
 
     abstract fetch(state?: TableState, parentRows?: TableRow<T>[]): Observable<P>;
@@ -60,7 +60,7 @@ export abstract class BaseTableDataProvider<T, P = T[]> {
         return items;
     }
 
-    /** @hidden */
+    /** @ignore */
     getSelectItemValue(item: any): any {
         return isSelectItem(item) ? item.value : item;
     }
@@ -324,7 +324,7 @@ export abstract class BaseTableDataProvider<T, P = T[]> {
         return !filterValues.length || filter.exclude ? !result : result;
     }
 
-    /** @hidden */
+    /** @ignore */
     protected unsubscribe(): void {
         this._destroy$.next();
         this._destroy$.complete();

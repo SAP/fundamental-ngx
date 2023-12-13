@@ -127,7 +127,7 @@ export class DisabledExampleComponent {
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleShiftDropAction(dragItem: ListItem, dropItem: ListItem, event: FdDropEvent<ListItem>): void {
         const { allItems, itemsToMove, itemsAfterDropItem, dropItemItems } = this._getNewDragDropItemsPosition(
             dragItem,
@@ -143,7 +143,7 @@ export class DisabledExampleComponent {
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleReplaceDropAction(dragItem: ListItem, dropItem: ListItem, event: FdDropEvent<ListItem>): void {
         const { allItems, itemsToMove, itemsAfterDropItem, dropItemItems } = this._getNewDragDropItemsPosition(
             dragItem,
@@ -190,7 +190,7 @@ export class DisabledExampleComponent {
         };
     }
 
-    /** @hidden */
+    /** @ignore */
     private _findItemChildren(item: ListItem): ListItem[] {
         const allItems = this.values;
         const itemsLength = allItems.length;

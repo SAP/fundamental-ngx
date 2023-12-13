@@ -40,10 +40,10 @@ export function MOMENT_DATE_TIME_ADAPTER_OPTIONS_FACTORY(): MomentDatetimeAdapte
  */
 @Injectable()
 export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
-    /** @hidden */
+    /** @ignore */
     private _momentLocaleData: Locale;
 
-    /** @hidden */
+    /** @ignore */
     private _localeData: DateLocale;
 
     fromNow: undefined;
@@ -329,7 +329,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     }
 
     /**
-     * @hidden
+     * @ignore
      * _prepareFormat will remove escaped text, and will check for moment localized formats.
      * But it works only with simple long date formats, combined formats will not be handled,
      * for example these will not be handled: 'MM-DD-YYYY LT', 'L LT'.
@@ -347,7 +347,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
         return format;
     }
 
-    /** @hidden */
+    /** @ignore */
     _createMomentDate(date?: MomentInput, format?: MomentFormatSpecification, locale?: string): Moment {
         const { strict, useUtc }: MomentDatetimeAdapterOptions = this._options || {};
 

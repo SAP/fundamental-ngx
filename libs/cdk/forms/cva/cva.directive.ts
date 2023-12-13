@@ -59,21 +59,21 @@ export class CvaDirective<T = any>
      */
     readonly elementRef = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     value: T;
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _defaultId = `fd-input-id-${randomId++}`;
-    /** @hidden */
+    /** @ignore */
     private _disabled: boolean;
-    /** @hidden */
+    /** @ignore */
     private _editable = true;
 
     /** ID for the Element */
@@ -115,7 +115,7 @@ export class CvaDirective<T = any>
     stateMessage: Nullable<string>;
 
     /**
-     * @hidden
+     * @ignore
      * The state of the form control - applies css classes.
      * Can be `success`, `error`, `warning`, `information` or 'default'
      */
@@ -181,7 +181,7 @@ export class CvaDirective<T = any>
     @Output()
     markForCheck = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     protected _subscriptions = new Subscription();
 
     /**
@@ -201,7 +201,7 @@ export class CvaDirective<T = any>
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     private _controlInvalid = false;
     /**
@@ -209,7 +209,7 @@ export class CvaDirective<T = any>
      */
     readonly stateChanges: Subject<any> = new Subject<any>();
 
-    /** @hidden */
+    /** @ignore */
     readonly formField: FormField | null = inject(FD_FORM_FIELD, {
         skipSelf: true,
         optional: true
@@ -218,13 +218,13 @@ export class CvaDirective<T = any>
     /** set when input field is mandatory form field */
     required: boolean;
 
-    /** @hidden */
+    /** @ignore */
     onChange: (value: any) => void = () => {};
 
-    /** @hidden */
+    /** @ignore */
     onTouched = (): void => {};
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.formField?.registerFormFieldControl(this);
     }
@@ -239,7 +239,7 @@ export class CvaDirective<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (this.ngControl) {
             this._subscriptions.add(
@@ -260,24 +260,24 @@ export class CvaDirective<T = any>
         this._markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnChange(fn: (_: any) => void): void {
         this.onChange = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this.stateChanges.complete();
         this.formField?.unregisterFormFieldControl(this);
     }
 
-    /** @hidden */
+    /** @ignore */
     setDisabledState(isDisabled: BooleanInput): void {
         const newState = coerceBooleanProperty(isDisabled);
         this._markForCheck();
@@ -373,12 +373,12 @@ export class CvaDirective<T = any>
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _markForCheck(): void {
         this.markForCheck.emit();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _detectChanges(): void {
         this.detectChanges.emit();
     }

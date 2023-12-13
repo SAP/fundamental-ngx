@@ -25,20 +25,20 @@ import { NotificationGroupHeaderComponent } from '../notification-group-header/n
     imports: []
 })
 export class NotificationGroupListComponent implements AfterContentInit, OnDestroy {
-    /** @hidden */
+    /** @ignore */
     @ContentChild(forwardRef(() => NotificationGroupHeaderComponent))
     groupHeader: NotificationGroupHeaderComponent;
 
     /** Whether the Notification list content is expanded */
     expanded: boolean;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this.expanded = this.groupHeader.expanded;
 
@@ -50,7 +50,7 @@ export class NotificationGroupListComponent implements AfterContentInit, OnDestr
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }

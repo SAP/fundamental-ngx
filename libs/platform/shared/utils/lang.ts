@@ -1,11 +1,11 @@
 import { Observable } from 'rxjs';
 
-/** @hidden */
+/** @ignore */
 export function objectValues(obj: any): any[] {
     return Object.keys(obj).map((key) => obj[key]);
 }
 
-/** @hidden */
+/** @ignore */
 export function objectToName(target: any): string {
     if (isBlank(target) || (!isStringMap(target) && !isType(target))) {
         throw new Error(' Cannot convert. Uknown object');
@@ -14,64 +14,64 @@ export function objectToName(target: any): string {
     return isType(target) ? target.prototype.constructor.name : target.constructor.name;
 }
 
-/** @hidden */
+/** @ignore */
 export function isJsObject(o: any): boolean {
     return o !== null && (typeof o === 'function' || typeof o === 'object');
 }
 
-/** @hidden */
+/** @ignore */
 export function isPresent(obj: any): boolean {
     return obj !== undefined && obj !== null;
 }
 
-/** @hidden */
+/** @ignore */
 export function isBlank(obj: any): boolean {
     return obj === undefined || obj === null;
 }
 
-/** @hidden */
+/** @ignore */
 export function isBoolean(obj: any): boolean {
     return typeof obj === 'boolean';
 }
 
-/** @hidden */
+/** @ignore */
 export function isNumber(obj: any): boolean {
     return typeof obj === 'number';
 }
 
-/** @hidden */
+/** @ignore */
 export function isString(obj: any): obj is string {
     return typeof obj === 'string';
 }
 
-/** @hidden */
+/** @ignore */
 export function isFunction(obj: any): boolean {
     return typeof obj === 'function';
 }
 
-/** @hidden */
+/** @ignore */
 export function isType(obj: any): boolean {
     return isFunction(obj);
 }
 
-/** @hidden */
+/** @ignore */
 export function isStringMap(obj: any): obj is Record<string, any> {
     return typeof obj === 'object' && obj !== null;
 }
 
-/** @hidden */
+/** @ignore */
 export function isObject<T>(item: T): boolean {
     return typeof item === 'object' && !Array.isArray(item) && item !== null;
 }
 
-/** @hidden */
+/** @ignore */
 export function isPromise<T = any>(obj: any): obj is Promise<T> {
     // allow any Promise/A+ compliant thenable.
     // It's up to the caller to ensure that obj.then conforms to the spec
     return !!obj && isFunction(obj.then);
 }
 
-/** @hidden */
+/** @ignore */
 export function isSubscribable(obj: any | Observable<any>): obj is Observable<any> {
     return !!obj && isFunction(obj.subscribe);
 }

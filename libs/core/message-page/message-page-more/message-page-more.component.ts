@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     standalone: true
 })
 export class MessagePageMoreComponent {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-message-page__more')
     fdMessagePageMoreClass = true;
 }

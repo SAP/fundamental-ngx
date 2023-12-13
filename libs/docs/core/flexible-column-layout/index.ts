@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'flexible-column-layout';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/flexible-column-layout';
 export const API_FILE_KEY = 'flexibleColumnLayout';

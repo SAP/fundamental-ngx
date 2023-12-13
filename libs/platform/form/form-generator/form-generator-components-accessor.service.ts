@@ -13,7 +13,7 @@ import { FormComponentDefinition } from './interfaces/form-component-definition'
 })
 export class FormGeneratorComponentsAccessorService {
     /**
-     * @hidden
+     * @ignore
      */
     private _formComponentDefinitions: FormComponentDefinition[] = DEFAULT_COMPONENTS_LIST;
 

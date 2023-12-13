@@ -53,16 +53,16 @@ export class FilterRuleComponent implements OnDestroy {
     /** Emits when rule state is changed */
     @Output() ruleStateChange: EventEmitter<boolean> = new EventEmitter();
 
-    /** @hidden */
+    /** @ignore */
     readonly FILTER_STRATEGY = FILTER_STRATEGY;
 
-    /** @hidden */
+    /** @ignore */
     readonly DATA_TYPE = FilterableColumnDataType;
 
-    /** @hidden */
+    /** @ignore */
     readonly strategyLabels = FILTER_STRATEGY_LABEL;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(NgForm)
     set ngForm(ngForm: NgForm) {
         if (!ngForm) {
@@ -82,15 +82,15 @@ export class FilterRuleComponent implements OnDestroy {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     _onModelChange(): void {
         this.ruleChange.emit();
     }

@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'dynamic-side-content';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/dynamic-side-content';
 export const API_FILE_KEY = 'dynamicSideContent';

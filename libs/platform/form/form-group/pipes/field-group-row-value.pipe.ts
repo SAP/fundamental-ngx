@@ -7,7 +7,7 @@ import { FieldColumn, FieldGroup } from '../../models/field.model';
     standalone: true
 })
 export class FieldGroupRowValuePipe implements PipeTransform {
-    /** @hidden */
+    /** @ignore */
     transform(row: KeyValue<any, FieldColumn | FieldGroup>): FieldColumn {
         return row.value instanceof FieldGroup ? row.value.fields : row.value;
     }

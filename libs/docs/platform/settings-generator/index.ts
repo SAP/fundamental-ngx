@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'settings-generator';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/settings-generator';
 export const API_FILE_KEY = 'settingsGenerator';

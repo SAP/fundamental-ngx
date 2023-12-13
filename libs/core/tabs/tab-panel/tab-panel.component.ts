@@ -98,29 +98,29 @@ export class TabPanelComponent implements OnChanges {
     @Output()
     closed = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(TabTitleDirective, { read: TemplateRef })
     titleTemplate: TemplateRef<any>;
 
-    /** @hidden Event that is emitted when the tab panel . */
+    /** @ignore Event that is emitted when the tab panel . */
     _expandedStateChange = new Subject<TabPanelStateChange>();
 
-    /** @hidden */
+    /** @ignore */
     _forcedVisibility = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.is-expanded')
     _expandedClass = false;
 
-    /** @hidden Whether to display tab panel content */
+    /** @ignore Whether to display tab panel content */
     private _expanded = false;
 
-    /** @hidden */
+    /** @ignore */
     get _panelId(): string {
         return this.id + '-panel';
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
@@ -128,7 +128,7 @@ export class TabPanelComponent implements OnChanges {
         @Optional() @Inject(LIST_COMPONENT) private readonly _tabsComponent: TabListComponentInterface | null
     ) {}
 
-    /** @hidden
+    /** @ignore
      * Thanks to OnPush change strategy detection on tab-list parent component,
      * every change of any property should be reported. */
     ngOnChanges(): void {
@@ -145,7 +145,7 @@ export class TabPanelComponent implements OnChanges {
         this._expandedStateChange.next(new TabPanelStateChange(this, open));
     }
 
-    /** @hidden Set new expand state */
+    /** @ignore Set new expand state */
     _expand(expanded: boolean): void {
         if (this._expanded !== expanded) {
             this._expanded = expanded;
@@ -162,14 +162,14 @@ export class TabPanelComponent implements OnChanges {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _focusFirstFocusableElement(): void {
         this.elementRef.nativeElement
             .querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
             ?.focus({ preventScroll: true });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updateHost(): void {
         this._expandedClass = this.expanded;
     }

@@ -14,16 +14,16 @@ export abstract class BaseDataSource<T> implements DataSourceProvider<T> {
      */
     limitless = false;
 
-    /** @hidden */
+    /** @ignore */
     protected readonly _dataChanges$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
-    /** @hidden */
+    /** @ignore */
     protected readonly _dataRequested$ = new BehaviorSubject<boolean>(false);
-    /** @hidden */
+    /** @ignore */
     protected readonly _dataReceived$ = new BehaviorSubject<boolean>(false);
-    /** @hidden */
+    /** @ignore */
     protected readonly _destroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     protected readonly _dataLoading$ = new BehaviorSubject<boolean>(false);
 
     /**
@@ -58,7 +58,7 @@ export abstract class BaseDataSource<T> implements DataSourceProvider<T> {
         return this._dataChanges$.asObservable().pipe(takeUntil(this._destroy$));
     }
 
-    /** @hidden */
+    /** @ignore */
     protected constructor(public dataProvider: AbstractDataProvider<any>) {}
 
     /**
@@ -106,7 +106,7 @@ export abstract class BaseDataSource<T> implements DataSourceProvider<T> {
         this._destroy$.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getSearchParams(predicate: string | Map<string, string>): Map<string, any> {
         const searchParam = new Map<string, any>();
 

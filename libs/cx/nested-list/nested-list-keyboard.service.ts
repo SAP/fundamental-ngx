@@ -13,7 +13,7 @@ import { NestedListInterface } from './nested-list/nested-list.interface';
  */
 @Injectable()
 export class NestedListKeyboardService {
-    /** @hidden handles rtl service */
+    /** @ignore handles rtl service */
     private _dir: 'ltr' | 'rtl' | null = 'ltr';
 
     /**
@@ -22,7 +22,7 @@ export class NestedListKeyboardService {
      */
     readonly refresh$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Inject(MenuKeyboardService) private keyboardService: MenuKeyboardService,
         @Optional() private _rtlService: RtlService | null
@@ -104,7 +104,7 @@ export class NestedListKeyboardService {
         this.keyboardService.keyDownHandler(keyboardEvent, index, items);
     }
 
-    /** @hidden Rtl change subscription */
+    /** @ignore Rtl change subscription */
     private _subscribeToRtl(): void {
         if (!this._rtlService) {
             return;

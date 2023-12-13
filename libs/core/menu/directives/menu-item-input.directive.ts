@@ -10,7 +10,7 @@ import { HasElementRef } from '@fundamental-ngx/cdk/utils';
     standalone: true
 })
 export class MenuItemInputDirective implements HasElementRef {
-    /** @hidden */
+    /** @ignore */
     elementRef = inject(ElementRef);
 
     /**

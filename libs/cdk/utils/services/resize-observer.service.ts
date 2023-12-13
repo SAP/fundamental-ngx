@@ -18,13 +18,13 @@ export class ResizeObserverFactory {
 
 @Injectable({ providedIn: 'root' })
 export class ResizeObserverService implements OnDestroy {
-    /** @hidden */
+    /** @ignore */
     private _observedElements = new Map<Element, ObservedElement>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _resizeObserverFactory: ResizeObserverFactory) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._observedElements.forEach((_, element) => this._cleanupObserver(element));
     }

@@ -24,23 +24,23 @@ export class InfiniteScrollDirective implements OnInit, OnDestroy {
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onScrollAction = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _subscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _element: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._listenOnScroll();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscription.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     shouldTriggerAction(): boolean {
         const element = this._element.nativeElement;
         const offset: number = element.scrollTop + element.offsetHeight;
@@ -51,7 +51,7 @@ export class InfiniteScrollDirective implements OnInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnScroll(): void {
         this._subscription.add(
             fromEvent(this._element.nativeElement, 'scroll')

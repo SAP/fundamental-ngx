@@ -21,26 +21,26 @@ export class TruncateDirective implements OnChanges, AfterViewInit {
     @Input()
     fdkTruncateState = false;
 
-    /** @hidden */
+    /** @ignore */
     private _customWidthCount = 200;
 
-    /** @hidden */
+    /** @ignore */
     private _truncateTarget: HTMLElement;
 
-    /** @hidden
+    /** @ignore
      * saves default style of element before truncating
      */
     private _defaultStyle: string;
 
-    /** @hidden */
+    /** @ignore */
     private takeDefaultStyleOnce = true;
 
-    /** @hidden
+    /** @ignore
      * truncation style for truncating element
      */
     private _truncationStyle: string;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private readonly _elementRef: ElementRef) {}
 
     /**
@@ -59,19 +59,19 @@ export class TruncateDirective implements OnChanges, AfterViewInit {
             this.takeDefaultStyleOnce = false;
         }
     }
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (this.rootElement) {
             this._truncate();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this._truncate();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _truncate(): void {
         this._truncateTarget = this.rootElement;
 

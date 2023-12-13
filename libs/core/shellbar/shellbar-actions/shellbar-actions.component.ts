@@ -80,34 +80,34 @@ export class ShellbarActionsComponent implements OnDestroy {
     @Output()
     searchOpen = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FD_SHELLBAR_ACTION_COMPONENT)
     shellbarActions: QueryList<ShellbarActionComponent>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(ShellbarUserMenuComponent)
     userComponent: ShellbarUserMenuComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(ShellbarUserMenuComponent)
     userComponentView: ShellbarUserMenuComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FD_COMBOBOX_COMPONENT)
     comboboxComponent: ComboboxInterface;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FD_PRODUCT_SWITCH_COMPONENT, { static: false })
     productSwitchComponent: ProductSwitchComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(CdkPortalOutlet)
     _portalOutlet: CdkPortalOutlet;
 
-    /** @hidden */
+    /** @ignore */
     _addSearchIcon = false;
 
-    /** @hidden */
+    /** @ignore */
     _searchPortal: DomPortal;
 
     /**
@@ -115,38 +115,38 @@ export class ShellbarActionsComponent implements OnDestroy {
      */
     showSearch = false;
 
-    /** @hidden */
+    /** @ignore */
     currentSize: ShellbarSizes;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _cd = inject(ChangeDetectorRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _shellbar = inject(FD_SHELLBAR_COMPONENT, {
         optional: true
     });
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-shellbar__group--shrink')
     private get _groupShrink(): boolean {
         return !!this._shellbar?.groupFlex?.actions?.shrink;
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-shellbar__group--basis-auto')
     private get _groupBasisAuto(): boolean {
         return !!this._shellbar?.groupFlex?.actions?.flexBasisAuto;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _searchComponent: Nullable<SearchComponent>;
 
-    /** @hidden */
+    /** @ignore */
     _toggleSearch: () => void = () => {
         this._setSearchVisibility(!this.showSearch);
     };
 
-    /** @hidden */
+    /** @ignore */
     public get userItem(): ShellbarUser {
         if (this.userComponent) {
             return this.userComponent.user;
@@ -155,12 +155,12 @@ export class ShellbarActionsComponent implements OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._portalOutlet?.dispose();
     }
 
-    /** @hidden */
+    /** @ignore */
     _attachSearch(portal: DomPortal, searchComponent: Nullable<SearchComponent>, size: ShellbarSizes): void {
         this._searchPortal = portal;
         this._addSearchIcon = true;
@@ -170,7 +170,7 @@ export class ShellbarActionsComponent implements OnDestroy {
         this._cd.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     _detachSearch(): void {
         if (this._portalOutlet?.hasAttached()) {
             this._portalOutlet.detach();
@@ -181,7 +181,7 @@ export class ShellbarActionsComponent implements OnDestroy {
         this._cd.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     _triggerItems(): void {
         if (!this.closePopoverOnSelect) {
             return;
@@ -190,7 +190,7 @@ export class ShellbarActionsComponent implements OnDestroy {
         this.userComponent?.menu.close();
     }
 
-    /** @hidden */
+    /** @ignore */
     _setSearchVisibility(visible: boolean): void {
         this.showSearch = visible;
         this.searchOpen.emit(this.showSearch);
@@ -202,7 +202,7 @@ export class ShellbarActionsComponent implements OnDestroy {
         this._toggleSearchPortal(visible, visible);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _toggleSearchPortal(visible: boolean, focusSearch = false): void {
         if (visible) {
             this._portalOutlet.detach();

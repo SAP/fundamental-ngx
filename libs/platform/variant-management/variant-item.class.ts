@@ -23,7 +23,7 @@ export class VariantItem<T = any> implements Variant<T> {
     /** Whether variant is editable. */
     readonly = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(config: Partial<Variant>) {
         Object.keys(config).forEach((configKey) => {
             this[configKey] = config[configKey];

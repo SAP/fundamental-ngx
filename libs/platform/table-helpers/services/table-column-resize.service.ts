@@ -18,55 +18,55 @@ export const TABLE_RESIZER_BORDER_WIDTH = 3;
  */
 @Injectable()
 export class TableColumnResizeService implements OnDestroy {
-    /** @hidden */
+    /** @ignore */
     private _fixedColumnsWidthMap = new Map<string, string>();
 
-    /** @hidden */
+    /** @ignore */
     private _columnsCellMap = new Map<string, ElementRef<HTMLTableDataCellElement>[]>();
 
-    /** @hidden */
+    /** @ignore */
     private _visibleColumnNames: string[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _visibleColumnLeftNeighbourMap = new Map<string, string | undefined>();
 
-    /** @hidden */
+    /** @ignore */
     private _visibleColumnRightNeighbourMap = new Map<string, string | undefined>();
 
-    /** @hidden */
+    /** @ignore */
     private _visibleColumnLeftOffsetPxMap = new Map<string, number>();
 
-    /** @hidden */
+    /** @ignore */
     private _visibleColumnRightOffsetPxMap = new Map<string, number>();
 
-    /** @hidden */
+    /** @ignore */
     private _startX: number | null = null;
 
-    /** @hidden */
+    /** @ignore */
     private _clientStartX: number | null = null;
 
-    /** @hidden */
+    /** @ignore */
     private _resizeInProgress = false;
 
-    /** @hidden */
+    /** @ignore */
     private _resizedColumn: string;
 
-    /** @hidden */
+    /** @ignore */
     private _resizerPosition: number | null = null;
 
-    /** @hidden */
+    /** @ignore */
     private _scrollLeft = 0;
 
-    /** @hidden */
+    /** @ignore */
     private _markForCheck = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _destroyed = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _resizerMoveSubscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _tableRef: Table;
 
     /** Indicate if resizing process in progress. */
@@ -98,12 +98,12 @@ export class TableColumnResizeService implements OnDestroy {
         return this._fixedColumnsWidthMap.size === this._visibleColumnNames.length;
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _rtl(): boolean {
         return this._rtlService?.rtl.getValue();
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _tableScrollDispatcherService: TableScrollDispatcherService,
         @Optional() private readonly _rtlService: RtlService
@@ -114,7 +114,7 @@ export class TableColumnResizeService implements OnDestroy {
             .subscribe((scrollable) => (this._scrollLeft = scrollable.getScrollLeft()));
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._resizeInProgress = false;
         this.resizeInProgress$.next(false);
@@ -125,12 +125,12 @@ export class TableColumnResizeService implements OnDestroy {
         this._resizerMoveSubscription.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     setTableRef(ref: Table): void {
         this._tableRef = ref;
     }
 
-    /** @hidden initializes service with data, trigger columns width calculation. */
+    /** @ignore initializes service with data, trigger columns width calculation. */
     setColumnNames(visibleColumnNames: string[]): void {
         this._visibleColumnLeftNeighbourMap.clear();
         this._visibleColumnRightNeighbourMap.clear();
@@ -144,7 +144,7 @@ export class TableColumnResizeService implements OnDestroy {
         this.updateFrozenColumnsWidth();
     }
 
-    /** @hidden */
+    /** @ignore */
     updateFrozenColumnsWidth(): void {
         let allPreviousWidths = 0,
             allNextWidths = 0;
@@ -160,7 +160,7 @@ export class TableColumnResizeService implements OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     updateFrozenColumnsWidthAfterResize(columnName: string, diffX: number): void {
         let found = false;
         for (const [column, width] of this._visibleColumnLeftOffsetPxMap.entries()) {

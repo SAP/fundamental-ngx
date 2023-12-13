@@ -5,7 +5,7 @@ import { SELECTION_COLUMN_WIDTH } from '../constants';
 
 @Pipe({ name: 'selectionCellStyles', standalone: true })
 export class SelectionCellStylesPipe implements PipeTransform {
-    /** @hidden */
+    /** @ignore */
     transform(
         contentDensity: Nullable<ContentDensityMode>,
         rtl: boolean,

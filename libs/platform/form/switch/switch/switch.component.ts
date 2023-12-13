@@ -59,12 +59,12 @@ export class SwitchComponent extends BaseInput {
         return this.getValue();
     }
 
-    /** @hidden
+    /** @ignore
      * tracking switch current value
      */
     switchCurrentValue = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -91,14 +91,14 @@ export class SwitchComponent extends BaseInput {
         super.writeValue(value);
     }
 
-    /** @hidden
+    /** @ignore
      * update model
      */
     private _updateModel(modelValue: boolean): void {
         this._emitChangeEvent(modelValue);
     }
 
-    /** @hidden
+    /** @ignore
      * Method to emit change event
      */
     private _emitChangeEvent(modelValue: boolean): void {

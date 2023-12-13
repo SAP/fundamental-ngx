@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'vhd';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/platform/value-help-dialog';
 export const API_FILE_KEY = 'valueHelpDialog';
 export const I18N_KEY = 'platformVHD';

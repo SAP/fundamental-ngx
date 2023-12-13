@@ -64,41 +64,41 @@ export class FocusableItemDirective implements FocusableItem {
     /** Element reference. */
     readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     readonly keydown = new Subject<KeyboardEvent>();
 
-    /** @hidden */
+    /** @ignore */
     _position: FocusableItemPosition;
 
-    /** @hidden */
+    /** @ignore */
     protected readonly _destroyRef = inject(DestroyRef);
-    /** @hidden */
+    /** @ignore */
     protected readonly _zone = inject(NgZone);
 
-    /** @hidden */
+    /** @ignore */
     private _focusable = true;
 
-    /** @hidden */
+    /** @ignore */
     private _tabbableElements = new Map<HTMLElement, number>();
 
-    /** @hidden */
+    /** @ignore */
     private _tabbable = true;
-    /** @hidden */
+    /** @ignore */
     private _timerId: ReturnType<typeof setTimeout> | null;
-    /** @hidden */
+    /** @ignore */
     private readonly _focusableObserver = inject(FocusableObserver);
-    /** @hidden */
+    /** @ignore */
     private readonly _tabbableElementService = inject(TabbableElementService);
-    /** @hidden */
+    /** @ignore */
     private readonly _liveAnnouncer = inject(LiveAnnouncer);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _renderer2 = inject(Renderer2);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _document = inject(DOCUMENT);
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         this._focusableObserver
             .observe(this.elementRef, false)
@@ -130,15 +130,15 @@ export class FocusableItemDirective implements FocusableItem {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     element = (): HTMLElement => this.elementRef.nativeElement;
 
-    /** @hidden */
+    /** @ignore */
     isFocusable(): boolean {
         return this._focusable;
     }
 
-    /** @hidden */
+    /** @ignore */
     focus(): void {
         this.elementRef.nativeElement.focus();
     }
@@ -155,7 +155,7 @@ export class FocusableItemDirective implements FocusableItem {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _onFocusin(): Promise<void> {
         if (!this.fdkFocusableItem) {
             return;
@@ -177,7 +177,7 @@ export class FocusableItemDirective implements FocusableItem {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _onFocusout(): void {
         if (!this.fdkFocusableItem) {
             return;
@@ -187,7 +187,7 @@ export class FocusableItemDirective implements FocusableItem {
         this._timerId = setTimeout(() => (this._timerId = null));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _onKeydown(event: KeyboardEvent): void {
         if (!this.fdkFocusableItem) {
             return;
@@ -223,7 +223,7 @@ export class FocusableItemDirective implements FocusableItem {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _enableTabbableElements(): void {
         if (this._tabbableElements.size === 0) {
             return;
@@ -233,7 +233,7 @@ export class FocusableItemDirective implements FocusableItem {
         this._tabbable = false;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _disableTabbableElements(): void {
         // Since we cannot select by tabindex attribute (links, inputs, buttons might not have one but still can be focusable),
         // Select all elements from the cell and filter by tabIndex property.
@@ -245,7 +245,7 @@ export class FocusableItemDirective implements FocusableItem {
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _defaultItemFocusedEventAnnouncer(position: FocusableItemPosition): string {
         return `Column ${position.colIndex + 1} of ${position.totalCols}, row: ${position.rowIndex + 1} of ${
             position.totalRows

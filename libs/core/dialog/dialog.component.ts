@@ -89,11 +89,11 @@ export class DialogComponent
         this.dialogConfig = value;
     }
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('dialogWindow')
     dialogWindow: ElementRef;
 
-    /** @hidden If dialog sub-components didn't receive DialogConfig from Injector, DialogConfig is passed from parent.
+    /** @ignore If dialog sub-components didn't receive DialogConfig from Injector, DialogConfig is passed from parent.
      * This is necessary when dialog has been passed as TemplateRef and created as EmbeddedView.
      * In such case parent injector of DialogComponent is the component that DECLARED the TemplateRef.
      **/
@@ -104,7 +104,7 @@ export class DialogComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(DialogBodyComponent)
     set dialogBodyConfig(component: DialogBodyComponent) {
         if (component) {
@@ -113,7 +113,7 @@ export class DialogComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(DialogFooterComponent)
     set dialogFooterConfig(component: DialogFooterComponent) {
         if (component) {
@@ -121,7 +121,7 @@ export class DialogComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(DialogTitleDirective)
     set dialogTitle(component: DialogTitleDirective) {
         if (component) {
@@ -129,25 +129,25 @@ export class DialogComponent
         }
     }
 
-    /** @hidden Whenever dialog should be visible */
+    /** @ignore Whenever dialog should be visible */
     showDialogWindow: boolean;
 
-    /** @hidden Whenever dialog is dragged */
+    /** @ignore Whenever dialog is dragged */
     isDragged: boolean;
 
     /**
-     * @hidden
+     * @ignore
      * Whether the Dialog in full-screen mode.
      */
     _fullScreen = false;
 
-    /** @hidden */
+    /** @ignore */
     private _class = '';
 
-    /** @hidden */
+    /** @ignore */
     private _onHidden: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Optional() public dialogConfig: DialogConfig,
         @Optional() private _dialogRef: DialogRef,
@@ -160,42 +160,42 @@ export class DialogComponent
         super(router, elementRef, changeDetectorRef, rtlService, focusTrapService);
     }
 
-    /** @hidden */
+    /** @ignore */
     get _config(): DialogConfig {
         return this.dialogConfig;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _ref(): DialogRef {
         return this._dialogRef;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         super.ngOnInit();
         this._listenOnHidden();
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
         this._listenOnHidden();
         this._listenOnFullScreen();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         super.ngOnDestroy();
         this._onHidden.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
@@ -207,7 +207,7 @@ export class DialogComponent
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnFullScreen(): void {
         this._subscriptions.add(
             this._ref.fullScreen.subscribe((isFullScreen) => {
@@ -218,7 +218,7 @@ export class DialogComponent
         );
     }
 
-    /** @hidden Listen on Dialog visibility */
+    /** @ignore Listen on Dialog visibility */
     private _listenOnHidden(): void {
         if (this._onHidden) {
             this._onHidden.unsubscribe();

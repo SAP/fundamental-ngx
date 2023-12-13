@@ -12,7 +12,7 @@ export class FdpCellSelectableDirective {
     /** Whether the selection is enabled. */
     @Input()
     enabled = true;
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     onKeyDown(event: KeyboardEvent): void {
         if (!this.enabled) {

@@ -21,7 +21,7 @@ import { NavigationMenuPopoverControlDirective } from './navigation-menu-popover
     standalone: true
 })
 export class NavigationMenuPopoverComponent {
-    /** @hidden */
+    /** @ignore */
     @ContentChild(NavigationMenuPopoverControlDirective)
     protected _control!: NavigationMenuPopoverControlDirective;
 }

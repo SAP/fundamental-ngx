@@ -65,7 +65,7 @@ export { FilterDialogData, FilterDialogResultData };
     ]
 })
 export class P13FilteringDialogComponent implements Resettable {
-    /** @hidden */
+    /** @ignore */
     private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     /** Indicates when reset command is available */
     readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
@@ -74,42 +74,42 @@ export class P13FilteringDialogComponent implements Resettable {
     readonly columns: FilterableColumn[] = [];
 
     /**
-     * @hidden
+     * @ignore
      * Include Rules
      */
     _includeRules: FilterRule[] = [];
 
     /**
-     * @hidden
+     * @ignore
      * Exclude Rules
      */
     _excludeRules: FilterRule[] = [];
 
     /**
-     * @hidden
+     * @ignore
      * Count of valid included rules
      */
     _validIncludeRulesCount = 0;
 
     /**
-     * @hidden
+     * @ignore
      * Count of valid excluded rules
      */
     _validExcludeRulesCount = 0;
 
     /**
-     * @hidden
+     * @ignore
      * Panel opened/closed flag
      */
     _includePanelExpanded = true;
 
     /**
-     * @hidden
+     * @ignore
      * Panel opened/closed flag
      */
     _excludePanelExpanded = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public dialogRef: DialogRef<FilterDialogData>) {
         const { columns, collectionFilter } = this.dialogRef.data;
 
@@ -145,7 +145,7 @@ export class P13FilteringDialogComponent implements Resettable {
         this.dialogRef.close(result);
     }
 
-    /** @hidden */
+    /** @ignore */
     _removeRule(rule: FilterRule, rules: FilterRule[]): void {
         const index = rules.indexOf(rule);
 
@@ -165,25 +165,25 @@ export class P13FilteringDialogComponent implements Resettable {
         this._calculateValidRulesCount();
     }
 
-    /** @hidden */
+    /** @ignore */
     _addNewRule(rules: FilterRule[]): void {
         const lastRule = rules.slice(-1)[0];
         rules.push(new FilterRule(this.columns, lastRule?.columnKey, lastRule?.strategy));
     }
 
-    /** @hidden */
+    /** @ignore */
     _recalculateResetAvailability(): void {
         const hasOnlyOneEmptyIncludeRule = this._includeRules.length === 1 && !this._includeRules[0].hasValue;
         const hasOnlyOneEmptyExcludeRule = this._excludeRules.length === 1 && !this._excludeRules[0].hasValue;
         this._isResetAvailableSubject$.next(!hasOnlyOneEmptyIncludeRule || !hasOnlyOneEmptyExcludeRule);
     }
 
-    /** @hidden */
+    /** @ignore */
     _onRuleStateChange(): void {
         this._calculateValidRulesCount();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _initiateRules(initialRules?: CollectionFilter[]): void {
         this._includeRules = this._createRules(initialRules?.filter(({ exclude }) => !exclude));
         this._excludeRules = this._createRules(initialRules?.filter(({ exclude }) => exclude));
@@ -198,7 +198,7 @@ export class P13FilteringDialogComponent implements Resettable {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _createRules(collectionFilter: CollectionFilter[] = []): FilterRule[] {
         return collectionFilter.map(
             ({ field, value, value2, strategy }): FilterRule =>
@@ -206,7 +206,7 @@ export class P13FilteringDialogComponent implements Resettable {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getCollectionFiltersFromRules(rules: FilterRule[]): CollectionFilter[] {
         return rules.filter(this._isRuleValid).map(
             ({ columnKey, strategy, value, value2 }): CollectionFilter => ({
@@ -218,7 +218,7 @@ export class P13FilteringDialogComponent implements Resettable {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getCollectionFiltersFromIncludeRules(): CollectionFilter[] {
         return this._getCollectionFiltersFromRules(this._includeRules).map(
             (collectionFilter): CollectionFilter => ({
@@ -228,7 +228,7 @@ export class P13FilteringDialogComponent implements Resettable {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getCollectionFiltersFromExcludeRules(): CollectionFilter[] {
         return this._getCollectionFiltersFromRules(this._excludeRules).map(
             (collectionFilter): CollectionFilter => ({
@@ -238,12 +238,12 @@ export class P13FilteringDialogComponent implements Resettable {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateValidRulesCount = (): void => {
         this._validIncludeRulesCount = this._includeRules.filter(this._isRuleValid).length;
         this._validExcludeRulesCount = this._excludeRules.filter(this._isRuleValid).length;
     };
 
-    /** @hidden */
+    /** @ignore */
     private _isRuleValid = (rule: FilterRule): boolean => rule?.isValid;
 }

@@ -11,19 +11,19 @@ import { resolveTranslationObservableFn } from '../utils';
     standalone: true
 })
 export class FdTranslatePipe implements PipeTransform {
-    /** @hidden */
+    /** @ignore */
     private readonly _translationResolver = resolveTranslationObservableFn();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _key$ = new BehaviorSubject<FdLanguageKeyIdentifier | undefined>(undefined);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _args$ = new BehaviorSubject<FdLanguageKeyArgs | undefined>(undefined);
 
-    /** @hidden */
+    /** @ignore */
     private _value: string | undefined;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private readonly _destroyRef: DestroyRef, private _cdr: ChangeDetectorRef) {
         this._instantiateSubscription();
     }
@@ -36,7 +36,7 @@ export class FdTranslatePipe implements PipeTransform {
         return this._value || defaultValue;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _instantiateSubscription(): void {
         combineLatest([
             this._key$.pipe(skip(1), filter(Boolean), distinctUntilChanged()),

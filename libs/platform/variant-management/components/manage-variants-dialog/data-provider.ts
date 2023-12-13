@@ -2,7 +2,7 @@ import { ArrayTableDataProvider } from '@fundamental-ngx/platform/table';
 import { VariantItem } from '../../variant-item.class';
 
 export class VariantManagementDataProvider extends ArrayTableDataProvider<VariantItem> {
-    /** @hidden */
+    /** @ignore */
     constructor(items: VariantItem[]) {
         super(items);
     }

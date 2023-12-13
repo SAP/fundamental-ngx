@@ -9,10 +9,10 @@ import { BaseDynamicFormItemGuiOptions, DynamicFormItemGuiOptions } from '../int
     standalone: true
 })
 export class GetHintOptionsPipe implements PipeTransform {
-    /** @hidden */
+    /** @ignore */
     private readonly _defaultHintOptions: FieldHintOptions;
 
-    /** @hidden */
+    /** @ignore */
     constructor(@Inject(FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS) _providedHintOptions: FieldHintOptions) {
         this._defaultHintOptions = {
             ...defaultFormGeneratorHintOptions,

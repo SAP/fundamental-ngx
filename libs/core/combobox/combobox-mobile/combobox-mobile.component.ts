@@ -49,21 +49,21 @@ import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
     ]
 })
 export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> implements OnInit, OnDestroy {
-    /** @hidden */
+    /** @ignore */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
     /**
-     * @hidden
+     * @ignore
      * For internal usage
      * Control element, which will be rendered inside dialog.
      * List element, which will be rendered inside dialog.
      */
     childContent: { listTemplate: TemplateRef<any>; controlTemplate: TemplateRef<any> } | null = null;
 
-    /** @hidden */
+    /** @ignore */
     private _selectedBackup: string;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,
@@ -73,29 +73,29 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
         super(elementRef, dialogService, comboboxComponent, MobileModeControl.COMBOBOX, mobileModes);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._listenOnMultiInputOpenChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         super.onDestroy();
     }
 
-    /** @hidden */
+    /** @ignore */
     handleDismiss(): void {
         this.dialogRef.dismiss();
         this._component.dialogDismiss(this._selectedBackup);
     }
 
-    /** @hidden */
+    /** @ignore */
     handleApprove(): void {
         this.dialogRef.close();
         this._component.dialogApprove();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _toggleDialog(open: boolean): void {
         if (open) {
             this._selectedBackup = this._component.getValue();
@@ -105,12 +105,12 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnMultiInputOpenChange(): void {
         this._component.openChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _open(): void {
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
             mobile: true,
@@ -132,7 +132,7 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _focusInputElementOnceOpened(): void {
         this.dialogRef.afterLoaded
             .pipe(

@@ -10,7 +10,7 @@ export class MessageToastRef<T = any> extends BaseToastDurationDismissibleRef<T,
     /** Data passed from the service open method. */
     readonly data: T;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public containerInstance: MessageToastComponent,
         public overlayRef: OverlayRef,

@@ -32,7 +32,7 @@ export class WizardSummarySectionComponent {
     editStep = new EventEmitter<string>();
 
     /**
-     * @hidden
+     * @ignore
      * @description Sets current step on wizard.
      * @param event Mouse click event to prevent.
      */
@@ -41,7 +41,7 @@ export class WizardSummarySectionComponent {
         this.editStep.emit(this.step.id);
     }
 
-    /** @hidden */
+    /** @ignore */
     _trackFn(_: number, form: FormattedFormStep): string {
         return form.id;
     }

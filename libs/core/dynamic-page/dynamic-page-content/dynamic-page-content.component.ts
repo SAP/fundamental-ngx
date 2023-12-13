@@ -34,29 +34,29 @@ export class DynamicPageContentComponent implements OnInit {
     @Input()
     id: string;
 
-    /** @hidden */
+    /** @ignore */
     _showSpacer = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly _renderer: Renderer2,
         public readonly elementRef: ElementRef<HTMLElement>,
         private readonly _cdr: ChangeDetectorRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._addClassNameToHostElement(DYNAMIC_PAGE_CLASS_NAME.dynamicPageContent);
     }
 
-    /** @hidden */
+    /** @ignore */
     _toggleSpacer(state: boolean): void {
         this._showSpacer = state;
 
         this._cdr.markForCheck();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _addClassNameToHostElement(className: string): void {
         addClassNameToElement(this._renderer, this.elementRef.nativeElement, className);
     }

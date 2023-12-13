@@ -34,12 +34,12 @@ export const generateItems = (length = 50): SourceItem[] =>
     );
 
 export class TableDataProviderMock extends TableDataProvider<SourceItem> {
-    /** @hidden */
+    /** @ignore */
     items = generateItems(50);
-    /** @hidden */
+    /** @ignore */
     totalItems = 50;
 
-    /** @hidden */
+    /** @ignore */
     fetch(): Observable<SourceItem[]> {
         return of(this.items);
     }
@@ -78,36 +78,36 @@ export const generateLazyTreeItems = (length = 50, level = 0): LazySourceTreeIte
     );
 
 export class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
-    /** @hidden */
+    /** @ignore */
     items = generateTreeItems(treeItemParentsCount);
-    /** @hidden */
+    /** @ignore */
     totalItems = totalTreeItems;
 
-    /** @hidden */
+    /** @ignore */
     fetch(): Observable<SourceTreeItem[]> {
         return of(this.items);
     }
 }
 
 export class TreeTableRootDataProviderMock extends TableDataProvider<LazySourceTreeItem> {
-    /** @hidden */
+    /** @ignore */
     items = generateLazyTreeItems(treeItemParentsCount);
-    /** @hidden */
+    /** @ignore */
     totalTreeItems = totalTreeItems;
-    /** @hidden */
+    /** @ignore */
     fetch(): Observable<LazySourceTreeItem[]> {
         return of(this.items);
     }
 }
 
 export class TreeTableChildDataProviderMock extends TableChildrenDataProvider<LazySourceTreeItem> {
-    /** @hidden */
+    /** @ignore */
     public childItemsCount = treeItemsChildrenPerParentCount;
-    /** @hidden */
+    /** @ignore */
     rowChildrenCount(row: TableRow<LazySourceTreeItem>): Observable<number> {
         return of(row.level === 0 ? this.childItemsCount : 0);
     }
-    /** @hidden */
+    /** @ignore */
     fetch(
         _?: TableState,
         parentRows?: TableRow<LazySourceTreeItem>[]

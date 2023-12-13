@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'upload-collection';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/upload-collection';
 export const API_FILE_KEY = 'uploadCollection';
 export const I18N_KEY = 'coreUploadCollection';

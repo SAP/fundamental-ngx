@@ -19,13 +19,13 @@ export class IntersectionSpyDirective implements OnInit {
     @Output()
     intersected = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _elementRef = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         intersectionObservable(this._elementRef.nativeElement, this.viewportOptions)
             .pipe(

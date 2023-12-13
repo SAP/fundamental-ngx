@@ -7,7 +7,7 @@ import { DATE_TIME_FORMATS, DateTimeFormats } from './datetime-formats';
     standalone: true
 })
 export class DateFormatPipe<D> implements PipeTransform {
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
@@ -28,7 +28,7 @@ export class DateFormatPipe<D> implements PipeTransform {
     standalone: true
 })
 export class DateTimeFormatPipe<D> implements PipeTransform {
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
@@ -49,7 +49,7 @@ export class DateTimeFormatPipe<D> implements PipeTransform {
     standalone: true
 })
 export class DateFromNowPipe<D> implements PipeTransform {
-    /** @hidden */
+    /** @ignore */
     constructor(private _dateTimeAdapter: DatetimeAdapter<D>) {}
 
     /** Format date object */

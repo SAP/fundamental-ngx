@@ -31,7 +31,7 @@ export abstract class CollectionBaseInput extends BaseInput {
         return this._list;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _list: Array<SelectItem | string | object>;
 
     /**
@@ -50,7 +50,7 @@ export abstract class CollectionBaseInput extends BaseInput {
     @Input()
     displayKey: string;
 
-    /** @hidden */
+    /** @ignore */
     protected constructor(
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -63,7 +63,7 @@ export abstract class CollectionBaseInput extends BaseInput {
         super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }
 
-    /** @hidden */
+    /** @ignore */
     public lookupValue(item: any): string {
         if (isSelectItem(item)) {
             return this.lookupKey && item ? item.value[this.lookupKey] : item.value;
@@ -72,7 +72,7 @@ export abstract class CollectionBaseInput extends BaseInput {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     public displayValue(item: any): string {
         if (isSelectItem(item)) {
             return item.label;
@@ -85,7 +85,7 @@ export abstract class CollectionBaseInput extends BaseInput {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     public objectGet(obj: any, is: string | string[] | undefined): any {
         if (!isJsObject(obj)) {
             return obj;

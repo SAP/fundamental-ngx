@@ -32,7 +32,7 @@ import { DialogConfig } from '../utils/dialog-config.class';
     imports: [BarModule, ContentDensityDirective, NgTemplateOutlet]
 })
 export class DialogHeaderComponent extends DialogHeaderBase implements AfterContentInit {
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Optional() public dialogConfig: DialogConfig,
         changeDetectorRef: ChangeDetectorRef
@@ -41,7 +41,7 @@ export class DialogHeaderComponent extends DialogHeaderBase implements AfterCont
         this.dialogConfig = this.dialogConfig || {};
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         super.ngAfterContentInit();
     }

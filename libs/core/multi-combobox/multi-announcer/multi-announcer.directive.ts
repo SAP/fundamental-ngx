@@ -11,30 +11,30 @@ import { resolveTranslationSyncFn } from '@fundamental-ngx/i18n';
     standalone: true
 })
 export class MultiAnnouncerDirective {
-    /** @hidden */
+    /** @ignore */
     @Input()
     multiAnnouncerOptions: unknown[];
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(TokenComponent, { descendants: true })
     private _tokens: QueryList<TokenComponent>;
 
-    /** @hidden */
+    /** @ignore */
     private _noResultsAnnounced = false;
 
-    /** @hidden */
+    /** @ignore */
     private _resultsAnnounced = false;
 
-    /** @hidden */
+    /** @ignore */
     private _announcement = '';
 
-    /** @hidden */
+    /** @ignore */
     private readonly _liveAnnouncer: LiveAnnouncer = inject(LiveAnnouncer);
 
-    /** @hidden */
+    /** @ignore */
     private _resolveTranslation = resolveTranslationSyncFn();
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keyup', ['$event'])
     private _makeSearchTermChangeAnnouncements(event: KeyboardEvent): void {
         if (KeyUtil.isKeyType(event, 'alphabetical') || KeyUtil.isKeyType(event, 'numeric')) {
@@ -68,12 +68,12 @@ export class MultiAnnouncerDirective {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _buildAnnouncement(message: string): void {
         this._announcement = this._announcement + message + ' ';
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _makeAnnouncement(message: string): Promise<void> {
         await this._liveAnnouncer.announce(message, 'assertive').then(() => {
             this._announcement = '';

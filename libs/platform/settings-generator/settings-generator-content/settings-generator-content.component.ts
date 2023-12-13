@@ -44,19 +44,19 @@ import { SettingsGeneratorSectionComponent } from './settings-generator-section/
     ]
 })
 export class SettingsGeneratorContentComponent {
-    /** @hidden */
+    /** @ignore */
     private readonly _cdr = inject(ChangeDetectorRef);
 
-    /** @hidden */
+    /** @ignore */
     private _settings: Nullable<SettingsItem>;
 
-    /** @hidden */
+    /** @ignore */
     _groups: (SettingsTemplateTab | SettingsFormTab)[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _index: number;
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     set settings(value: Nullable<SettingsItem>) {
         this._settings = value;
@@ -82,29 +82,29 @@ export class SettingsGeneratorContentComponent {
     @Output()
     goBack = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     _id: Nullable<string>;
 
-    /** @hidden */
+    /** @ignore */
     _renderer: 'form' | 'template' = 'form';
 
-    /** @hidden */
+    /** @ignore */
     _contentLayout: 'form' | 'tabs' = 'form';
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class')
     private readonly _initialClass = 'fdp-settings-generator__content-section';
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(TabPanelComponent)
     private readonly _tabPanels: QueryList<TabPanelComponent>;
 
-    /** @hidden */
+    /** @ignore */
     isTemplateLayout(settings: Nullable<SettingsItem>): settings is TemplateSettingsItem {
         return !!settings?.template;
     }
 
-    /** @hidden */
+    /** @ignore */
     isGroupedSettings(settings: any): settings is GroupedFormSettingsItem | GroupedTemplateSettingsItem {
         return settings?.groups?.length > 0;
     }

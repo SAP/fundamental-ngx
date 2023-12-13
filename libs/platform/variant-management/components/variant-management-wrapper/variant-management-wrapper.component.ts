@@ -60,11 +60,11 @@ export class VariantManagementWrapperComponent implements AfterViewInit, OnDestr
     @Input()
     variantManager: VariantManagement;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FDP_PRESET_MANAGED_COMPONENT, { descendants: true })
     private readonly _managedComponents: QueryList<PresetManagedComponent<any>>;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FDP_VARIANT_MANAGEMENT, { descendants: true })
     private set _projectedVariantManager(variantManager: VariantManagement) {
         this._variantManager = variantManager;
@@ -75,24 +75,24 @@ export class VariantManagementWrapperComponent implements AfterViewInit, OnDestr
         return this._variantManager;
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _variantManagement(): VariantManagement {
         return this._projectedVariantManager || this.variantManager;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _variantManager: VariantManagement;
 
-    /** @hidden */
+    /** @ignore */
     private _activeVariantSubscription: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     private _componentsPresetChangeSubscription: Subscription;
 
-    /** @hidden */
+    /** @ignore */
     private _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._setPresets();
 
@@ -103,14 +103,14 @@ export class VariantManagementWrapperComponent implements AfterViewInit, OnDestr
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._activeVariantSubscription?.unsubscribe();
         this._componentsPresetChangeSubscription?.unsubscribe();
     }
 
     /**
-     * @hidden
+     * @ignore
      * Listens to the preset change in Variant Management component and applies new configuration across projected components..
      */
     private _setPresets(): void {
@@ -131,7 +131,7 @@ export class VariantManagementWrapperComponent implements AfterViewInit, OnDestr
     }
 
     /**
-     * @hidden
+     * @ignore
      * Listens to preset configuration changes in projected components and sends updated config to Variant Management component.
      */
     private _listenToPresetChanges(): void {
@@ -156,7 +156,7 @@ export class VariantManagementWrapperComponent implements AfterViewInit, OnDestr
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getComponentPreset(): Map<PresetManagedComponent<any>, any> {
         const components = this._managedComponents.toArray();
         const data = this._variantManagement.getActiveVariantData();

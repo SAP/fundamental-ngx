@@ -10,6 +10,6 @@ import { AvatarGroupItemRendererDirective } from './avatar-group-item-renderer.d
     standalone: true
 })
 export class AvatarGroupOverflowBodyDirective {
-    /** @hidden */
+    /** @ignore */
     readonly _templateRef: TemplateRef<{ hiddenItems: AvatarGroupItemRendererDirective[] }> = inject(TemplateRef);
 }

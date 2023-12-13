@@ -18,7 +18,7 @@ export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChange
         this._colGrow = coerceBooleanProperty(value);
     }
 
-    /** @hidden */
+    /** @ignore */
     get colGrow(): boolean {
         return this._colGrow;
     }
@@ -51,27 +51,27 @@ export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChange
     @Input()
     colOffsetXl: number;
 
-    /** @hidden */
+    /** @ignore */
     @Input()
     class: string;
 
-    /** @hidden */
+    /** @ignore */
     private _colGrow: boolean;
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
@@ -89,7 +89,7 @@ export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChange
         ].filter((v): v is string => !!v);
     }
 
-    /** @hidden */
+    /** @ignore */
     getCssClassWithColWidth(classPrefix: string, colWidth: NumberInput): string | null {
         if (!colWidth) {
             return null;

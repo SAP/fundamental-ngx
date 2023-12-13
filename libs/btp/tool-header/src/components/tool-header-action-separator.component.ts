@@ -17,10 +17,10 @@ import { ToolHeaderActionClass } from '../tool-header-action.class';
     standalone: true
 })
 export class ToolHeaderActionSeparatorComponent extends ToolHeaderActionClass {
-    /** @hidden */
+    /** @ignore */
     @ViewChild(TemplateRef)
     templateRef: TemplateRef<void>;
 
-    /** @hidden */
+    /** @ignore */
     readonly isSeparator = true;
 }

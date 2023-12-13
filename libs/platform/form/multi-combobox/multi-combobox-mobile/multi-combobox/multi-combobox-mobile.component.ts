@@ -48,10 +48,10 @@ import { MULTICOMBOBOX_COMPONENT, MultiComboboxInterface } from '../../multi-com
     ]
 })
 export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxInterface> implements OnInit, OnDestroy {
-    /** @hidden */
+    /** @ignore */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
-    /** @hidden
+    /** @ignore
      * For internal usage
      * Control element, which will be rendered inside dialog.
      * List element, which will be rendered inside dialog.
@@ -61,13 +61,13 @@ export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxIn
         controlTemplate: TemplateRef<any>;
     }> = null;
 
-    /** @hidden */
+    /** @ignore */
     selectedShown$ = this._component.selectedShown$;
 
-    /** @hidden */
+    /** @ignore */
     private _selectedBackup: SelectableOptionItem[];
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,
@@ -77,17 +77,17 @@ export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxIn
         super(elementRef, dialogService, multiComboboxComponent, MobileModeControl.MULTI_COMBOBOX, mobileModes);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._listenOnMultiComboboxOpenChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         super.onDestroy();
     }
 
-    /** @hidden */
+    /** @ignore */
     showSelected(): void {
         const isSelectedShown = this.selectedShown$.getValue();
 
@@ -100,19 +100,19 @@ export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxIn
         this._component.moreClicked();
     }
 
-    /** @hidden */
+    /** @ignore */
     handleDismiss(): void {
         this.dialogRef.dismiss();
         this._component.dialogDismiss(this._selectedBackup);
     }
 
-    /** @hidden */
+    /** @ignore */
     handleApprove(): void {
         this.dialogRef.close();
         this._component.dialogApprove();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _toggleDialog(open: boolean): void {
         if (!open) {
             return;
@@ -126,12 +126,12 @@ export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxIn
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenOnMultiComboboxOpenChange(): void {
         this._component.openChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 
-    /** @hidden */
+    /** @ignore */
     private _open(): void {
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
             mobile: true,

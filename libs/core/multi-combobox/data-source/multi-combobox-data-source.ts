@@ -2,23 +2,23 @@ import { AbstractDataProvider, BaseDataSource, DataProvider } from '@fundamental
 import { Observable } from 'rxjs';
 
 export class FdMultiComboBoxDataSource<T> extends BaseDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     limitless = false;
-    /** @hidden */
+    /** @ignore */
     constructor(public dataProvider: AbstractDataProvider<T>) {
         super(dataProvider);
     }
 }
 
 export class ArrayMultiComboBoxDataSource<T> extends FdMultiComboBoxDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(data: T[]) {
         super(new DataProvider(data));
     }
 }
 
 export class ObservableMultiComboBoxDataSource<T> extends FdMultiComboBoxDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(data: Observable<T[]>) {
         super(new DataProvider(data));
     }

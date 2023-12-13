@@ -44,7 +44,7 @@ export class PlatformObjectMarkerComponent {
     @Input()
     title: string;
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         warnOnce(
             'PlatformObjectMarkerComponent is deprecated. Use ObjectMarkerComponent from `@fundamental-ngx/core/object-marker` instead.'

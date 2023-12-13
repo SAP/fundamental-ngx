@@ -1,24 +1,24 @@
 import { of, Subject } from 'rxjs';
 
 export class TableColumnResizeServiceMock {
-    /** @hidden */
+    /** @ignore */
     resizerPosition = null;
 
-    /** @hidden */
+    /** @ignore */
     resizerPosition$ = new Subject<number>();
 
-    /** @hidden */
+    /** @ignore */
     resizeInProgress$ = new Subject<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     resizeInProgress = false;
 
-    /** @hidden */
+    /** @ignore */
     markForCheck = of(null);
 
-    /** @hidden */
+    /** @ignore */
     startResize(): void {}
 
-    /** @hidden */
+    /** @ignore */
     finishResize(): void {}
 }

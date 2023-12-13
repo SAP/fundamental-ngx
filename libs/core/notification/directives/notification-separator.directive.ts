@@ -5,7 +5,7 @@ import { Directive, HostBinding } from '@angular/core';
     standalone: true
 })
 export class NotificationSeparatorDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-notification__separator')
     fdNotificationSeparatorClass = true;
 }

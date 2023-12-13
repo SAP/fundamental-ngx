@@ -13,25 +13,25 @@ export type SelectionItemsList<ElementType extends Element, ValueType = ElementT
 
 @Injectable()
 export class SelectionService<ElementType extends Element, ValueType = ElementType> implements OnDestroy {
-    /** @hidden */
+    /** @ignore */
     value$: Observable<SelectableListValueType<ValueType>>;
 
-    /** @hidden */
+    /** @ignore */
     private _items$!: Observable<SelectableItemToken<ElementType, ValueType>[]>;
-    /** @hidden */
+    /** @ignore */
     private _value$ = new ReplaySubject<SelectableListValueType<ValueType>>(1);
-    /** @hidden */
+    /** @ignore */
     private _normalizedValue$: Observable<ValueType[]>;
-    /** @hidden */
+    /** @ignore */
     private _rootComponent!: SelectComponentRootToken<ElementType>;
-    /** @hidden */
+    /** @ignore */
     private _destroy$ = new Subject<void>();
-    /** @hidden */
+    /** @ignore */
     private _clear$ = new Subject<void>();
-    /** @hidden */
+    /** @ignore */
     private _value: ValueType[] = [];
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _cd: ChangeDetectorRef) {
         this._normalizedValue$ = this._value$.pipe(
             distinctUntilChanged(equal),
@@ -83,7 +83,7 @@ export class SelectionService<ElementType extends Element, ValueType = ElementTy
         this._value$.next(v);
     }
 
-    /** @hidden */
+    /** @ignore */
     getValue(): SelectableListValueType<ElementType> {
         return this._getProperValues(this._value as SelectableListValueType<ElementType>);
     }
@@ -130,12 +130,12 @@ export class SelectionService<ElementType extends Element, ValueType = ElementTy
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._destroy$.next();
     }
 
-    /** @hidden */
+    /** @ignore */
     selectItem(item: SelectableItemToken<ElementType, ValueType>): void {
         if (item.fdkSelectableItem !== false) {
             const val: ValueType[] = [item.value, ...this._value];
@@ -145,7 +145,7 @@ export class SelectionService<ElementType extends Element, ValueType = ElementTy
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     deselectItem(item: SelectableItemToken<ElementType, ValueType>): void {
         const canBeDeselected = this._rootComponent.toggle || (this._isMultipleMode && this._value.length > 1);
         if (canBeDeselected) {
@@ -158,12 +158,12 @@ export class SelectionService<ElementType extends Element, ValueType = ElementTy
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _isMultipleMode(): boolean {
         return this._rootComponent.multiple === true;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _itemClicked(item: SelectableItemToken<ElementType, ValueType>): void {
         const wasSelected = this._value.includes(item.value);
         if (wasSelected) {
@@ -173,13 +173,13 @@ export class SelectionService<ElementType extends Element, ValueType = ElementTy
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getSelectedValues(items: SelectableItemToken<ElementType, ValueType>[]): ElementType | ElementType[] {
         const selectedValues = items.filter((itm) => itm.getSelected()).map((itm) => itm.value);
         return this._getProperValues(selectedValues as SelectableListValueType<ElementType>);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getProperValues(values: SelectableListValueType<ElementType>): SelectableListValueType<ElementType> {
         return this._isMultipleMode ? values : values[0];
     }

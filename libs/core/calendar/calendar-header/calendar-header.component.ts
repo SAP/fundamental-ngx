@@ -146,7 +146,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     }
 
     /**
-     * @hidden
+     * @ignore
      * Previous button id
      */
     get _prevButtonId(): string {
@@ -154,7 +154,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     }
 
     /**
-     * @hidden
+     * @ignore
      * Next button id
      */
     get _nextButtonId(): string {
@@ -162,7 +162,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     }
 
     /**
-     * @hidden
+     * @ignore
      * Month label id
      */
     get _monthButtonLabelId(): string {
@@ -170,7 +170,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     }
 
     /**
-     * @hidden
+     * @ignore
      * Select month aria label id
      */
     get _selectMonthButtonAriaLabelId(): string {
@@ -178,7 +178,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     }
 
     /**
-     * @hidden
+     * @ignore
      * Year label id
      */
     get _yearButtonLabelId(): string {
@@ -186,7 +186,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     }
 
     /**
-     * @hidden
+     * @ignore
      * Select year aria label id
      */
     get _selectYearButtonAriaLabelId(): string {
@@ -194,7 +194,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     }
 
     /**
-     * @hidden
+     * @ignore
      * Years range label id
      */
     get _yearsRangeButtonLabelId(): string {
@@ -202,14 +202,14 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     }
 
     /**
-     * @hidden
+     * @ignore
      * Select years range aria label id
      */
     get _selectYearsRangeButtonAriaLabelId(): string {
         return this.viewId + '-select-years-range-aria-label';
     }
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('prevButton', { read: ElementRef })
     _prevButtonComponent: ElementRef;
 
@@ -222,20 +222,20 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     /** Get information about amount of years displayed at once on year view  */
     private _amountOfYearsPerPeriod = 1;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _changeDetRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
         private _dateTimeAdapter: DatetimeAdapter<D>
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (
             (changes.currentlyDisplayed && !changes.currentlyDisplayed.firstChange) ||
@@ -245,7 +245,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._calendarService.leftArrowId = this._prevButtonId;
 
@@ -263,7 +263,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
         this._prevButtonComponent.nativeElement?.focus();
     }
 
-    /** @hidden */
+    /** @ignore */
     _processViewChange(type: FdCalendarView, event?: MouseEvent): void {
         if (event) {
             event.stopPropagation();
@@ -274,7 +274,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
         this.activeViewChange.emit(this.activeView);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToLocaleChanges(): void {
         this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
             this._calculateMonthNames();
@@ -283,36 +283,36 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateLabels(): void {
         this._calculateSelectMonthLabel();
         this._calculateSelectYearLabel();
         this._calculateSelectAggregatedYearLabel();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateSelectMonthLabel(): void {
         this.selectMonthLabel = this._monthNames[this.currentlyDisplayed.month - 1];
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateSelectYearLabel(): void {
         this.selectYearLabel = this._getYearName(this.currentlyDisplayed.year);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateSelectAggregatedYearLabel(): void {
         this.selectAggregatedYearLabel = `${this._getYearName(this.currentlyDisplayed.year)}-${this._getYearName(
             this.currentlyDisplayed.year + this._amountOfYearsPerPeriod
         )}`;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateMonthNames(): void {
         this._monthNames = this._dateTimeAdapter.getMonthNames('long');
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getYearName(year: number): string {
         return this._dateTimeAdapter.getYearName(this._dateTimeAdapter.createDate(year, 1, 1));
     }

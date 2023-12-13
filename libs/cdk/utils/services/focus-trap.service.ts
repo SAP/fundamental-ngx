@@ -6,7 +6,7 @@ import { uuidv4 } from '../functions/uuidv4-generator';
     providedIn: 'root'
 })
 export class FocusTrapService {
-    /** @hidden */
+    /** @ignore */
     private _focusTrapInstances: Map<any, FocusTrap> = new Map();
 
     /**
@@ -95,14 +95,14 @@ export class FocusTrapService {
         return this._focusTrapInstances.get(id);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getLastTrapedItem(): FocusTrap | undefined {
         const lastItem = Array.from(this._focusTrapInstances).pop();
 
         return lastItem ? lastItem[1] : undefined;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _focusTrapExists(id: string): boolean {
         return this._focusTrapInstances.has(id);
     }

@@ -48,14 +48,14 @@ export class UploadCollectionButtonGroupComponent {
     @Input()
     disableFileDeletion = false;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('okButton')
     _okButton: ButtonComponent;
 
-    /** @hidden */
+    /** @ignore */
     _editMode = false;
 
-    /** @hidden */
+    /** @ignore */
     _editButtonClicked(event?: MouseEvent): void {
         if (event) {
             event.stopPropagation();
@@ -64,7 +64,7 @@ export class UploadCollectionButtonGroupComponent {
         this._editMode = true;
     }
 
-    /** @hidden */
+    /** @ignore */
     _deleteButtonClicked(event?: MouseEvent): void {
         if (event) {
             event.stopPropagation();
@@ -72,7 +72,7 @@ export class UploadCollectionButtonGroupComponent {
         this.deleteClicked.emit();
     }
 
-    /** @hidden */
+    /** @ignore */
     _okButtonClicked(event?: MouseEvent): void {
         if (event) {
             event.stopPropagation();
@@ -80,7 +80,7 @@ export class UploadCollectionButtonGroupComponent {
         this.okClicked.emit();
     }
 
-    /** @hidden */
+    /** @ignore */
     _cancelButtonClicked(event?: MouseEvent): void {
         if (event) {
             event.stopPropagation();

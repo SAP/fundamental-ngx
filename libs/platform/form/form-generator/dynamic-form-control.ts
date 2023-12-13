@@ -10,14 +10,14 @@ export interface DynamicFormGroupControls {
 }
 
 export class DynamicFormControlGroup extends FormGroup {
-    /** @hidden */
+    /** @ignore */
     public formItem: DynamicFormFieldGroupMap;
-    /** @hidden */
+    /** @ignore */
     public type = 'group';
-    /** @hidden */
+    /** @ignore */
     public override controls: DynamicFormGroupControls;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         formItem: DynamicFormFieldGroupMap,
         controls: DynamicFormGroupControls,
@@ -30,9 +30,9 @@ export class DynamicFormControlGroup extends FormGroup {
 }
 
 export class DynamicFormControl extends FormControl {
-    /** @hidden */
+    /** @ignore */
     public formItem: PreparedDynamicFormFieldItem;
-    /** @hidden */
+    /** @ignore */
     public type = 'field';
 
     /**

@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'tool-header';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/btp/tool-header';
 export const API_FILE_KEY = 'toolHeader';

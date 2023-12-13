@@ -50,17 +50,17 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
     @ContentChildren(OverflowListItemDirective)
     overflowItems: QueryList<OverflowListItemDirective>;
 
-    /** @hidden */
+    /** @ignore */
     private _onDestroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _el: ElementRef,
         private _viewportRuler: ViewportRuler,
         private _ngZone: NgZone
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._viewportRuler
             .change(50)
@@ -71,7 +71,7 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
         this._calculateAmountOfOverflowedItems();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -91,14 +91,14 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
         return this._checkWidthWithOffset(elements, contentWidth);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _calculateAmountOfOverflowedItems(): void {
         const extra = this.getAmountOfExtraItems();
         this.overflowChanged.emit(extra);
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param arrItems
      * @param containerWidth
      * @param checkWithOffset
@@ -137,7 +137,7 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
 
     /**
      * @param arrItems
-     * @hidden
+     * @ignore
      * */
     private _clearTempStyles(arrItems: HTMLElement[]): void {
         arrItems.forEach((item) => {

@@ -73,7 +73,7 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     @Input()
     label: string;
 
-    /** @hidden */
+    /** @ignore */
     glyph: string;
 
     /**
@@ -112,11 +112,11 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     @Output()
     stepIndicatorItemClicked = new EventEmitter<WizardStepComponent>();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(WizardContentComponent)
     content: WizardContentComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(FD_WIZARD_STEP_INDICATOR)
     stepIndicator: WizardStepIndicator<WizardStepComponent>;
 
@@ -124,33 +124,33 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     @ViewChild('wizardLabel', { read: ElementRef })
     wizardLabel: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('progressBarLink', { read: ElementRef })
     progressBarLink: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     visited = false;
 
-    /** @hidden */
+    /** @ignore */
     completed = false;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions: Subscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     _stepId: number;
 
-    /** @hidden */
+    /** @ignore */
     _finalStep = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
         @Optional() @Inject(WIZARD) private _wizard: WizardComponentInterface
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes && changes.status) {
             if (
@@ -163,7 +163,7 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (this.isSummary && !this._wizard?.displaySummaryStep) {
             this._summaryInit();
@@ -172,18 +172,18 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     setFinalStep(val: boolean): void {
         this._finalStep = val;
         this._cdRef.detectChanges();
     }
 
-    /** @hidden */
+    /** @ignore */
     async stepContainerKeypress(event?: KeyboardEvent): Promise<void> {
         if (event) {
             event.preventDefault();
@@ -200,35 +200,35 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     getClassList(): DOMTokenList {
         return this._elRef.nativeElement.classList;
     }
 
-    /** @hidden */
+    /** @ignore */
     hasLabel(label: string): boolean {
         return this._elRef.nativeElement.classList.contains(label);
     }
 
-    /** @hidden */
+    /** @ignore */
     getStepClientWidth(): number {
         return this._elRef.nativeElement.clientWidth;
     }
 
-    /** @hidden */
+    /** @ignore */
     removeFromDom(): void {
         if (this._elRef.nativeElement.parentNode) {
             this._elRef.nativeElement.parentNode.removeChild(this._elRef.nativeElement);
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _summaryInit(): void {
         this._elRef.nativeElement.style.display = 'none';
         this.content.tallContent = true;
     }
 
-    /** @hidden */
+    /** @ignore */
     _notSummaryInit(): void {
         this._subscriptions.add(
             this.stepIndicator.stepIndicatorItemClicked.subscribe((step) => {

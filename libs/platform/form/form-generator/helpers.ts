@@ -7,12 +7,12 @@ import {
     DynamicFormItemMap
 } from './interfaces/dynamic-form-item';
 
-/** @hidden */
+/** @ignore */
 export function isHintOptions(opts: string | HintOptions): opts is HintOptions {
     return !!opts && typeof opts !== 'string';
 }
 
-/** @hidden */
+/** @ignore */
 export function mapFormItems(formItems?: DynamicFormItem[]): Map<string, DynamicFormItemMap> {
     const mappedItems: Map<string, DynamicFormItemMap> = new Map();
 
@@ -29,7 +29,7 @@ export function mapFormItems(formItems?: DynamicFormItem[]): Map<string, Dynamic
     return mappedItems;
 }
 
-/** @hidden */
+/** @ignore */
 export function transformFormItem(
     item: DynamicFormItem,
     index: number
@@ -58,12 +58,12 @@ export function isFormFieldItem(item: any): item is DynamicFormFieldItem {
  * @param item form item.
  * @returns is current form item is a group.
  */
-/** @hidden */
+/** @ignore */
 export function isFormGroupItem(item: any): item is DynamicFormFieldGroup {
     return !!(item as DynamicFormFieldGroup).items;
 }
 
-/** @hidden */
+/** @ignore */
 export function getParentItem(path: string[], rootItems: Map<string, DynamicFormItemMap>): DynamicFormItemMap | null {
     return path.reduce((acc: DynamicFormItemMap | null, chunk) => {
         const parent = acc === null ? rootItems : acc.items;

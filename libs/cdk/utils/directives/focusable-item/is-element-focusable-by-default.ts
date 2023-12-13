@@ -17,7 +17,7 @@ const focusableTagOptions = [
     }
 ];
 
-/** @hidden */
+/** @ignore */
 export function isElementFocusableByDefault(el: HasElementRef<Element> | Element | ElementRef<Element>): boolean {
     const element = getNativeElement(el);
     const tagName = element.tagName.toLowerCase();

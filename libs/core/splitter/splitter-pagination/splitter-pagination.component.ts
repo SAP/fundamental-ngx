@@ -29,10 +29,10 @@ export class SplitterPaginationComponent {
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onPageChange = new EventEmitter<string>();
 
-    /** @Hidden */
+    /** @ignore */
     constructor(private readonly _splitter: SplitterComponent) {}
 
-    /** @hidden */
+    /** @ignore */
     _changePage(page: string): void {
         if (page === this.currentPage) {
             return;

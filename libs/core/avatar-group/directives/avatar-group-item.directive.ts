@@ -20,7 +20,7 @@ export class AvatarGroupItemDirective {
     @Input('fdAvatarGroupItemForceVisibility')
     forceVisibility = false;
 
-    /** @hidden */
+    /** @ignore */
     _templateRef: TemplateRef<void> = inject(TemplateRef);
 
     /**
@@ -39,6 +39,6 @@ export class AvatarGroupItemDirective {
         return this._details;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _details: TemplateRef<void>;
 }

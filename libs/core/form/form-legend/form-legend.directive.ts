@@ -12,7 +12,7 @@ import { Directive, HostBinding } from '@angular/core';
     standalone: true
 })
 export class FormLegendDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-fieldset__legend')
     fdFormLegendClass = true;
 }

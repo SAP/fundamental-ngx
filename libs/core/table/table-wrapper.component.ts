@@ -32,16 +32,16 @@ import {
     standalone: true
 })
 export class TableWrapperComponent implements AfterContentInit, OnDestroy {
-    /** @hidden */
+    /** @ignore */
     private _contentDensitySettings: ContentDensityObserverTarget | undefined;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private elementRef: ElementRef,
         private _contentDensityObserver: ContentDensityObserver
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         if (this.elementRef.nativeElement && this.elementRef.nativeElement.firstChild) {
             const tableElement = this.elementRef.nativeElement.firstChild;
@@ -67,7 +67,7 @@ export class TableWrapperComponent implements AfterContentInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         if (!this._contentDensitySettings) {
             return;

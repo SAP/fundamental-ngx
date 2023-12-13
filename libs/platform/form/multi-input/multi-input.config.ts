@@ -32,7 +32,7 @@ export class MultiInputConfig {
         return useFactory;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(platformConfig: PlatformConfig) {
         this.contentDensity = platformConfig.contentDensity;
     }

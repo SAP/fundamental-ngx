@@ -35,11 +35,11 @@ export const HIDDEN_CLASS_NAME = 'fd-table--hidden';
     standalone: true
 })
 export class TableRowDirective extends FocusableListDirective implements AfterViewInit, OnDestroy, OnInit {
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(TableCellDirective)
     cells: QueryList<TableCellDirective>;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-table__row')
     fdTableRowClass = true;
 
@@ -85,17 +85,17 @@ export class TableRowDirective extends FocusableListDirective implements AfterVi
     @Input()
     active = false;
 
-    /** @hidden */
+    /** @ignore */
     elementRef: ElementRef<HTMLTableRowElement> = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     private _propagateKeysSubscription: Subscription;
-    /** @hidden */
+    /** @ignore */
     private readonly _changeDetRef = inject(ChangeDetectorRef);
-    /** @hidden */
+    /** @ignore */
     private _tableService = inject(TableService);
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.navigationDirection = 'grid';
         this._updateNavigationDirection();
@@ -104,20 +104,20 @@ export class TableRowDirective extends FocusableListDirective implements AfterVi
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
         this._resetCells(this._tableService.propagateKeys$.getValue());
         this._setupCellsSubscription();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         super.ngOnDestroy();
         this._propagateKeysSubscription.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _resetCells(keys: string[]): void {
         if (this.cells && keys && keys.length > 0) {
             this._changeVisibility(keys);
@@ -132,7 +132,7 @@ export class TableRowDirective extends FocusableListDirective implements AfterVi
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _sortMethod(a: TableCellDirective, b: TableCellDirective, keys: string[]): number {
         if (keys.findIndex((_key) => _key === a.key) < keys.findIndex((_key) => _key === b.key)) {
             return -1;
@@ -141,14 +141,14 @@ export class TableRowDirective extends FocusableListDirective implements AfterVi
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _sortNativeElements(): void {
         this.cells.forEach(
             (cell) => cell.elementRef.nativeElement.parentNode?.appendChild(cell.elementRef.nativeElement)
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _changeVisibility(keys: string[]): void {
         this.cells.forEach((cell) => cell.elementRef.nativeElement.classList.remove(HIDDEN_CLASS_NAME));
         const notFoundElements: TableCellDirective[] = this.cells.filter(
@@ -157,12 +157,12 @@ export class TableRowDirective extends FocusableListDirective implements AfterVi
         notFoundElements.forEach(this._hideElement);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _hideElement(element: TableCellDirective): void {
         element.elementRef.nativeElement.classList.add(HIDDEN_CLASS_NAME);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setupCellsSubscription(): void {
         this.cells.changes.pipe(startWith(null)).subscribe(() => {
             this.cells.forEach((cell, index) => {

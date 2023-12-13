@@ -8,7 +8,7 @@ import { SmartFilterBarConditionsDialogComponent } from '../smart-filter-bar-con
 
 @Directive()
 export abstract class BaseSmartFilterBarConditionField extends BaseDynamicFormGeneratorControl {
-    /** @hidden */
+    /** @ignore */
     protected constructor(
         protected _dialogService: DialogService,
         protected _smartFilterBarService: SmartFilterBarService,

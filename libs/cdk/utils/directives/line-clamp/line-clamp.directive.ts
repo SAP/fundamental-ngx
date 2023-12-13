@@ -34,7 +34,7 @@ export class LineClampTargetDirective implements OnChanges, AfterViewInit {
      */
     @Output() update = new EventEmitter<LineClampTargetDirective>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(private readonly _elementRef: ElementRef) {}
 
     /**
@@ -44,12 +44,12 @@ export class LineClampTargetDirective implements OnChanges, AfterViewInit {
         return this._elementRef.nativeElement;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.update.emit(this);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this.update.emit(this);
     }
@@ -81,24 +81,24 @@ export class LineClampDirective implements OnChanges, AfterViewInit {
     @Output()
     lineCountUpdate = new EventEmitter<number>();
 
-    /** @hidden */
+    /** @ignore */
     private _lineClampTarget: HTMLElement;
-    /** @hidden */
+    /** @ignore */
     private _originalText: string;
 
-    /** @hidden */
+    /** @ignore */
     private _isNativeSupport = true;
 
-    /** @hidden */
+    /** @ignore */
     private _lineCount: number;
 
-    /** @hidden */
+    /** @ignore */
     private viewportSize$ = inject(ViewportSizeObservable);
 
-    /** @hidden */
+    /** @ignore */
     private _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     /**
      * Root native element of clamping box
      */
@@ -106,14 +106,14 @@ export class LineClampDirective implements OnChanges, AfterViewInit {
         return this._elementRef.nativeElement;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _elementRef: ElementRef,
         private readonly _renderer: Renderer2,
         private readonly _cdRef: ChangeDetectorRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._isNativeSupport = typeof this.rootElement.style.webkitLineClamp !== 'undefined';
 
@@ -129,13 +129,13 @@ export class LineClampDirective implements OnChanges, AfterViewInit {
             });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.reset();
         this.refreshClamp();
     }
 
-    /** @hidden */
+    /** @ignore */
     reset(): void {
         if (this._lineClampTarget && this._originalText) {
             this._lineClampTarget.textContent = this._originalText;
@@ -145,14 +145,14 @@ export class LineClampDirective implements OnChanges, AfterViewInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     refreshTarget(event: LineClampTargetDirective): void {
         this._lineClampTarget = event.targetElement;
         this._originalText = event.fdLineClampTargetText;
         this._checkLineCount();
     }
 
-    /** @hidden */
+    /** @ignore */
     refreshClamp(): void {
         if (this.fdLineclampState && this._lineCount) {
             this.native();
@@ -162,7 +162,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit {
         }
     }
 
-    /** @hidden
+    /** @ignore
      * Truncate text in the target box, if browser not support lineclamp style
      */
     private _truncate(): void {
@@ -181,7 +181,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit {
         ellipsisText();
     }
 
-    /** @hidden
+    /** @ignore
      * Get lineheight for rootelement, if browser not support lineclamp style
      */
     private getLineHeight(): number {
@@ -193,7 +193,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit {
         return parseFloat(lineHeight);
     }
 
-    /** @hidden
+    /** @ignore
      * Setup native styles for lineclamp text
      */
     private native(): void {
@@ -206,7 +206,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit {
         }
     }
 
-    /** @hidden
+    /** @ignore
      * Reset native styles for lineclamp text
      */
     private _resetNative(): void {
@@ -219,7 +219,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _checkLineCount(): void {
         if (!this.rootElement) {
             return;

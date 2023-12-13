@@ -66,13 +66,13 @@ export class ApprovalFlowToolbarActionsComponent {
     @Output()
     deleteSelectedNodes = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     _canRemoveSelectedNodes = false;
 
-    /** @hidden */
+    /** @ignore */
     private _selectedNodes: ApprovalGraphNode[] = [];
 
-    /** @hidden */
+    /** @ignore */
     get _notApprovedSelectedNode(): ApprovalGraphNode | null {
         if (this.selectedNodes.length !== 1) {
             return null;
@@ -81,7 +81,7 @@ export class ApprovalFlowToolbarActionsComponent {
         return !isNodeApproved(this.selectedNodes[0]) ? this.selectedNodes[0] : null;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _canAddBefore(): boolean {
         const node = this._notApprovedSelectedNode;
 
@@ -93,7 +93,7 @@ export class ApprovalFlowToolbarActionsComponent {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     get _canAddAfter(): boolean {
         const node = this._notApprovedSelectedNode;
 
@@ -105,7 +105,7 @@ export class ApprovalFlowToolbarActionsComponent {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     get _canAddParallel(): boolean {
         const node = this._notApprovedSelectedNode;
 
@@ -117,20 +117,20 @@ export class ApprovalFlowToolbarActionsComponent {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     get _canEditNode(): boolean {
         const node = this._notApprovedSelectedNode;
 
         return !!node && !node.disableActions && !node.actionsConfig?.disableEdit;
     }
 
-    /** @hidden */
+    /** @ignore */
     _addNode(target: ApprovalFlowNodeTarget): void {
         const node = this.selectedNodes[0];
         this.addNode.emit({ node, target });
     }
 
-    /** @hidden */
+    /** @ignore */
     _editSelectedNode(): void {
         const node = this.selectedNodes[0];
         this.editSelectedNode.emit(node);

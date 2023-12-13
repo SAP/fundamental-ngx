@@ -23,6 +23,6 @@ export class WizardProgressBarDirective {
     @Input()
     size: Nullable<WizardSize> = null;
 
-    /** @hidden */
+    /** @ignore */
     visible = true;
 }

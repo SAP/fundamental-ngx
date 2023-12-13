@@ -63,17 +63,17 @@ export class FocusableGridDirective implements AfterViewInit {
     @Output()
     readonly rowFocused = new EventEmitter<FocusableListPosition>();
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(FDK_FOCUSABLE_LIST_DIRECTIVE, { descendants: true })
     private readonly _focusableLists: QueryList<FocusableListDirective>;
 
-    /** @hidden */
+    /** @ignore */
     private _wrapHorizontally = false;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._focusableLists.changes
             .pipe(startWith(this._focusableLists), takeUntilDestroyed(this._destroyRef))
@@ -135,7 +135,7 @@ export class FocusableGridDirective implements AfterViewInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _onKeydown(event: KeyboardEvent, list: FocusableListDirective, activeItemIndex: Nullable<number>): void {
         if (!KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, PAGE_DOWN, PAGE_UP])) {
             return;
@@ -202,7 +202,7 @@ export class FocusableGridDirective implements AfterViewInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getItemIndex(list: FocusableListDirective, activeIndex: number): Nullable<number> {
         if (activeIndex >= 0 && activeIndex < list._focusableItems.length) {
             return activeIndex;

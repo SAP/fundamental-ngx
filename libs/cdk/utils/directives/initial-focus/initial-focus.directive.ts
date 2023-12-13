@@ -37,20 +37,20 @@ export class InitialFocusDirective implements AfterViewInit {
     @Input()
     focusLastElement = false;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _enabled$ = new BehaviorSubject<boolean>(true);
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elmRef: ElementRef<HTMLElement>,
         private _ngZone: NgZone,
         private readonly _tabbableService: TabbableElementService
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this._enabled$
             .pipe(
@@ -64,7 +64,7 @@ export class InitialFocusDirective implements AfterViewInit {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Executes a function when the zone is stable.
      */
     private _executeOnEmpty(fn: () => any): void {
@@ -76,7 +76,7 @@ export class InitialFocusDirective implements AfterViewInit {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Searches for an appropriate focusable element
      */
     private _getFocusableElement(): HTMLElement | null {
@@ -96,7 +96,7 @@ export class InitialFocusDirective implements AfterViewInit {
         return this._tabbableService.getTabbableElement(this._elmRef.nativeElement, this.focusLastElement);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _focus(): void {
         if (!this.enabled) {
             return;

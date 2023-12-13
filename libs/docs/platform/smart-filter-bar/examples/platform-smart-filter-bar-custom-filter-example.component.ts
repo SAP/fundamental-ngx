@@ -225,11 +225,11 @@ export interface ExampleItem {
  *
  */
 export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
-    /** @hidden */
+    /** @ignore */
     protected itemsSubject = new BehaviorSubject<ExampleItem[]>([]);
     protected items$ = this.itemsSubject.asObservable();
 
-    /** @hidden */
+    /** @ignore */
     constructor(items: ExampleItem[], dateTimeAdapter?: DatetimeAdapter<any>) {
         super();
         this.items = items;
@@ -386,7 +386,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     }
 
     /**
-     * @hidden
+     * @ignore
      * String filtering strategy
      * @param item data source array item.
      * @param filter filter object
@@ -435,7 +435,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Number filtering strategy
      * @param item data source array item.
      * @param filter filter object
@@ -472,7 +472,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Date filtering strategy
      * @param item data source array item.
      * @param filter filter object
@@ -522,7 +522,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Boolean filtering strategy
      * @param item data source array item.
      * @param filter filter object
@@ -543,7 +543,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Array filtering strategy
      * @param item data source array item.
      * @param filter filter object

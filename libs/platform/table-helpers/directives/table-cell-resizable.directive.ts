@@ -51,28 +51,28 @@ export class PlatformTableCellResizableDirective
     @Input()
     columnName: string;
 
-    /** @hidden */
+    /** @ignore */
     private _resizableSide: TableColumnResizableSide = 'both';
 
-    /** @hidden */
+    /** @ignore */
     private get _isRtl(): boolean {
         return this._rtlService?.rtl.getValue() ?? false;
     }
 
-    /** @hidden */
+    /** @ignore */
     private readonly _tableColumnResizeService = inject(TableColumnResizeService);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _rtlService = inject(RtlService, {
         optional: true
     });
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         super();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._zone.runOutsideAngular(() => {
             fromEvent<MouseEvent>(this.elementRef.nativeElement, 'mousemove')
@@ -93,7 +93,7 @@ export class PlatformTableCellResizableDirective
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (this.columnName == null) {
             return;
@@ -102,12 +102,12 @@ export class PlatformTableCellResizableDirective
         this._tableColumnResizeService?.registerColumnCell(this.columnName, this.elementRef);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._tableColumnResizeService?.unregisterColumnCell(this.columnName, this.elementRef);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getResizer(event: MouseEvent): { resizerPosition: number; resizedColumn: string } | null {
         const el = this.elementRef.nativeElement;
         const elPosition = el.getBoundingClientRect();

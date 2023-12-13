@@ -24,10 +24,10 @@ export class FdpCellDef<T = any> {
     /** Property to support typings. */
     @Input()
     fdpCellDefAs: T;
-    /** @hidden */
+    /** @ignore */
     constructor(public templateRef: TemplateRef<FdpCellDefContext<T>>) {}
 
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard<T>(dir: FdpCellDef<T>, ctx: FdpCellDefContext): ctx is FdpCellDefContext<T> {
         return true;
     }
@@ -36,7 +36,7 @@ export class FdpCellDef<T = any> {
 @Directive({ selector: '[fdpEditableCellDef]', standalone: true })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class FdpEditableCellDef {
-    /** @hidden */
+    /** @ignore */
     constructor(public templateRef: TemplateRef<any>) {}
 }
 
@@ -46,6 +46,6 @@ export class FdpEditableCellDef {
     providers: [{ provide: EditableTableCell, useExisting: FdpEditableCellFormDirective }]
 })
 export class FdpEditableCellFormDirective implements EditableTableCell {
-    /** @hidden */
+    /** @ignore */
     constructor(public form: NgForm) {}
 }

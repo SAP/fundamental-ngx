@@ -5,7 +5,7 @@ import { Directive, HostBinding } from '@angular/core';
     standalone: true
 })
 export class ListThumbnailDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-list__thumbnail')
     fdListThumbnailClass = true;
 }

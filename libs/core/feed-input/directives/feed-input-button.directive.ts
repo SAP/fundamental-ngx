@@ -11,28 +11,28 @@ import { Directive, ElementRef, HostBinding, OnInit, Renderer2 } from '@angular/
     standalone: true
 })
 export class FeedInputButtonDirective implements OnInit {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('attr.aria-disabled')
     @HostBinding('class.is-disabled')
     disabled = true;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _elementRef: ElementRef<HTMLElement>,
         private _renderer: Renderer2
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.createArrowIcon();
     }
 
-    /** @hidden */
+    /** @ignore */
     get elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
     }
 
-    /** @hidden create button icon */
+    /** @ignore create button icon */
     createArrowIcon(): void {
         const icon = this._renderer.createElement('i');
         this._renderer.addClass(icon, 'sap-icon--feeder-arrow');

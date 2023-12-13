@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'busy-indicator';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/busy-indicator';
 export const API_FILE_KEY = 'busyIndicator';

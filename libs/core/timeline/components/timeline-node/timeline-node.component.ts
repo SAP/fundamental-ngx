@@ -37,18 +37,18 @@ export class TimelineNodeComponent implements TimelineNodeComponentInterface, On
     @ViewChild('lineEl')
     lineEl: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public el: ElementRef,
         private _timelinePositionControl: TimelinePositionControlService
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._timelinePositionControl.registerNode(this);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._timelinePositionControl.removeNode(this);
     }

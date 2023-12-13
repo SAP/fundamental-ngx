@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'segmented-button';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/segmented-button';
 export const API_FILE_KEY = 'segmentedButton';

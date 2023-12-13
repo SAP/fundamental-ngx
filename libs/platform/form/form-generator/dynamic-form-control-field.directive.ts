@@ -36,37 +36,37 @@ export class DynamicFormControlFieldDirective implements OnInit {
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     private _control: DynamicFormControl;
 
     /**
-     * @hidden
+     * @ignore
      */
     private _originalValidators?: Nullable<ValidatorFn | ValidatorFn[]>;
 
     /**
-     * @hidden
+     * @ignore
      */
     private _originalAsyncValidators: Nullable<AsyncValidatorFn | AsyncValidatorFn[]>;
 
     /**
-     * @hidden
+     * @ignore
      */
     private _componentRemoved = true;
 
     /**
-     * @hidden
+     * @ignore
      */
     private _shouldShowFormItem: boolean;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private readonly _templateRef: TemplateRef<any>,
         private readonly _viewContainer: ViewContainerRef
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._updateView();
     }
@@ -92,7 +92,7 @@ export class DynamicFormControlFieldDirective implements OnInit {
         this._control.updateValueAndValidity({ emitEvent: false });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _updateView(): void {
         if (this._shouldShowFormItem && this._componentRemoved) {
             this._viewContainer.createEmbeddedView(this._templateRef);

@@ -29,18 +29,18 @@ export class MenuService {
     /** Collection of active menu nodes */
     private _isMobileMode = new Subject<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     private _menuComponent: MenuComponent;
 
-    /** @hidden */
+    /** @ignore */
     private _destroyKeyboardHandlerListener: () => void;
 
-    /** @hidden */
+    /** @ignore */
     get _isRtl(): boolean {
         return this._rtlService?.rtl.value;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _renderer: Renderer2,
         @Optional() private readonly _rtlService: RtlService
@@ -139,17 +139,17 @@ export class MenuService {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     onDestroy(): void {
         this.removeKeyboardSupport();
     }
 
-    /** @hidden Returns siblings of given node */
+    /** @ignore Returns siblings of given node */
     private _nodeSiblings(node: MenuNode): MenuNode[] | undefined {
         return node.parent ? node.parent.children : this.menuMap.get(null)?.children;
     }
 
-    /** @hidden Adds given element to the Active Node Path and setts as active*/
+    /** @ignore Adds given element to the Active Node Path and setts as active*/
     private _addToActivePath(menuItem: MenuItemComponent): void {
         const menuNode = this.menuMap.get(menuItem);
 
@@ -161,7 +161,7 @@ export class MenuService {
         }
     }
 
-    /** @hidden Removes given element and all its successors from the Active Node Path and setts as inactive*/
+    /** @ignore Removes given element and all its successors from the Active Node Path and setts as inactive*/
     private _removeFromActivePath(menuItem: MenuItemComponent | null): void {
         const menuNode = this.menuMap.get(menuItem);
         if (menuNode) {
@@ -175,14 +175,14 @@ export class MenuService {
         }
     }
 
-    /** @hidden Removes all elements from the Active Node Path and sets them as closed */
+    /** @ignore Removes all elements from the Active Node Path and sets them as closed */
     private _clearActivePath(): void {
         if (this.activeNodePath.length) {
             this._removeFromActivePath(this.activeNodePath[0].item);
         }
     }
 
-    /** @hidden
+    /** @ignore
      * - Builds Menu Nodes based on Menu Items
      * - Creates Map of the Menu Nodes */
     private _buildMenuMap(menu: MenuComponent): MenuMap {
@@ -221,7 +221,7 @@ export class MenuService {
         return toMap(menuTree);
     }
 
-    /** @hidden Removes active sibling of a given menu item from the Active Path */
+    /** @ignore Removes active sibling of a given menu item from the Active Path */
     private _removeActiveSibling(menuItem: MenuItemComponent): void {
         const menuNode = this.menuMap.get(menuItem);
         const children = menuNode?.parent?.children.map((i) => i.item);
@@ -233,7 +233,7 @@ export class MenuService {
         }
     }
 
-    /** @hidden Adds keyboard support */
+    /** @ignore Adds keyboard support */
     private _setKeyboardSupport(elementRef: ElementRef): void {
         this._destroyKeyboardHandlerListener = this._renderer.listen(
             elementRef.nativeElement,
@@ -242,7 +242,7 @@ export class MenuService {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     private _handleKey(event: KeyboardEvent): void {
         const focusRight = (node): void => {
             setTimeout(() => this.setFocused(node.children[0].item));
@@ -297,12 +297,12 @@ export class MenuService {
         }
     }
 
-    /** @hidden Emits an array of active menu items */
+    /** @ignore Emits an array of active menu items */
     private _emitActivePath(): void {
         this.menuComponent.activePath.emit(this.activeNodePath.map((node) => node.item) as MenuItemComponent[]);
     }
 
-    /** @hidden Depending on direction returns closest enabled sibling of given node */
+    /** @ignore Depending on direction returns closest enabled sibling of given node */
     private _closestEnabled(node: MenuNode, direction: 'up' | 'down'): MenuNode | null {
         const siblings =
             direction === 'up' ? [...(this._nodeSiblings(node) ?? [])].reverse() : this._nodeSiblings(node);

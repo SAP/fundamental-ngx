@@ -99,7 +99,7 @@ export function getMatchingStrategyStartsWithPerTermReqexp(value: string): RegEx
     return new RegExp(`(\\s|^)(${value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
 }
 
-/** @hidden */
+/** @ignore */
 export function isDataSource<T = any>(value: any): value is DataSource<T> {
     return value && typeof value.open === 'function';
 }
@@ -113,16 +113,16 @@ export type ProviderParams = ReadonlyMap<string, any>;
 export abstract class DataProvider<T> {
     abstract fetch(params: ProviderParams, start?: number, end?: number): Observable<T[]>;
 
-    /** @hidden */
+    /** @ignore */
     protected _keyPath: string;
 
-    /** @hidden */
+    /** @ignore */
     protected _matchingStrategy: MatchingStrategy = MatchingStrategy.STARTS_WITH;
 
-    /** @hidden */
+    /** @ignore */
     protected _matchingBy: MatchingBy | null = null;
 
-    /** @hidden */
+    /** @ignore */
     getTotalItems?(): Observable<number>;
 
     /**
@@ -135,69 +135,69 @@ export abstract class DataProvider<T> {
 
     // Implement to support CRUD operations.
 
-    /** @hidden */
+    /** @ignore */
     getOne(params: ProviderParams): Observable<T> {
         throw new Error('Not supported');
     }
 
-    /** @hidden */
+    /** @ignore */
     insert(payload: any, params?: ProviderParams): Observable<T> {
         throw new Error('Not supported');
     }
 
-    /** @hidden */
+    /** @ignore */
     remove(params: ProviderParams): Observable<boolean> {
         throw new Error('Not supported');
     }
 
-    /** @hidden */
+    /** @ignore */
     update(payload: any, params?: ProviderParams): Observable<T> {
         throw new Error('Not supported');
     }
 
-    /** @hidden */
+    /** @ignore */
     setLookupKey(key: string): void {
         this._keyPath = key;
     }
 
-    /** @hidden */
+    /** @ignore */
     setMatchingBy(matchingBy: MatchingBy): void {
         this._matchingBy = matchingBy;
     }
 
-    /** @hidden */
+    /** @ignore */
     setMatchingStrategy(strategy: MatchingStrategy): void {
         this._matchingStrategy = strategy;
     }
 }
 
 export class ComboBoxDataSource<T> implements DataSource<T> {
-    /** @hidden */
+    /** @ignore */
     static readonly MaxLimit = 5;
 
-    /** @hidden */
+    /** @ignore */
     limitless = false;
 
-    /** @hidden */
+    /** @ignore */
     protected readonly _dataChanges: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
-    /** @hidden */
+    /** @ignore */
     protected readonly _onDataRequested$ = new Subject<void>();
-    /** @hidden */
+    /** @ignore */
     protected readonly _onDataReceived$ = new Subject<void>();
-    /** @hidden */
+    /** @ignore */
     protected readonly _onDestroy$ = new Subject<void>();
-    /** @hidden */
+    /** @ignore */
     protected _dataLoading = false;
 
-    /** @hidden */
+    /** @ignore */
     get isDataLoading(): boolean {
         return this._dataLoading;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(public dataProvider: DataProvider<any>) {}
 
-    /** @hidden */
+    /** @ignore */
     match(predicate: string | Map<string, string> = new Map<string, string>(), start = 0, end = Infinity): void {
         this._onDataRequested$.next();
         this._dataLoading = true;
@@ -231,66 +231,66 @@ export class ComboBoxDataSource<T> implements DataSource<T> {
             );
     }
 
-    /** @hidden */
+    /** @ignore */
     open(): Observable<T[]> {
         return this._dataChanges.pipe(takeUntil(this._onDestroy$));
     }
 
-    /** @hidden */
+    /** @ignore */
     close(): void {
         this._onDestroy$.next();
     }
 
-    /** @hidden */
+    /** @ignore */
     onDataRequested(): Observable<void> {
         return this._onDataRequested$.asObservable();
     }
 
-    /** @hidden */
+    /** @ignore */
     onDataReceived(): Observable<void> {
         return this._onDataReceived$.asObservable();
     }
 }
 
 export class MultiComboBoxDataSource<T> extends ComboBoxDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(public dataProvider: DataProvider<any>) {
         super(dataProvider);
     }
 }
 
 export class SearchFieldDataSource<T> extends ComboBoxDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(public dataProvider: DataProvider<any>) {
         super(dataProvider);
     }
 }
 
 export class ListDataSource<T> extends ComboBoxDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     limitless = true;
-    /** @hidden */
+    /** @ignore */
     constructor(public dataProvider: DataProvider<any>) {
         super(dataProvider);
     }
 }
 
 export class MultiInputDataSource<T> extends ComboBoxDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(public dataProvider: DataProvider<any>) {
         super(dataProvider);
     }
 }
 
 export class ApprovalFlowUserDataSource<T> extends ComboBoxDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(public dataProvider: DataProvider<T>) {
         super(dataProvider);
     }
 }
 
 export class ApprovalFlowTeamDataSource<T> extends ComboBoxDataSource<T> {
-    /** @hidden */
+    /** @ignore */
     constructor(public dataProvider: DataProvider<T>) {
         super(dataProvider);
     }

@@ -49,12 +49,12 @@ import { NotificationRef } from '../notification-utils/notification-ref';
     standalone: true
 })
 export class NotificationComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit, OnDestroy {
-    /** @hidden */
+    /** @ignore */
     @ViewChild('vc', { read: ViewContainerRef })
     containerRef: ViewContainerRef;
 
     /**
-     * @hidden
+     * @ignore
      */
     _dir: string;
 
@@ -90,22 +90,22 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     /** Reference to the component or the embedded view */
     public componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onDestroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _afterViewInit$ = new BehaviorSubject(false);
 
-    /** @hidden The class that traps and manages focus within the notification. */
+    /** @ignore The class that traps and manages focus within the notification. */
     private _focusTrap: FocusTrap;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-notification--in-dialog')
     get _inDialog(): boolean {
         return this._popover?.mobile;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _elRef: ElementRef,
         private _componentFactoryResolver: ComponentFactoryResolver,
@@ -122,7 +122,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         this._setNotificationConfig(this._notificationConfig);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl) => {
             this._dir = isRtl ? 'rtl' : 'ltr';
@@ -133,7 +133,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         this._setProperties();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (this.childContent) {
             if (this.childContent instanceof Type) {
@@ -162,12 +162,12 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         return this._focusTrap.focusFirstTabbableElementWhenReady();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._onDestroy$.next();
     }
 
-    /** @hidden Listen and close notification on Escape key */
+    /** @ignore Listen and close notification on Escape key */
     @HostListener('window:keyup', ['$event'])
     _closeNotificationEsc(event: KeyboardEvent): void {
         if (this.escKeyCloseable && KeyUtil.isKeyCode(event, ESCAPE) && this._notificationRef) {
@@ -175,7 +175,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         }
     }
 
-    /** @hidden Listen on NavigationStart event and dismiss the dialog */
+    /** @ignore Listen on NavigationStart event and dismiss the dialog */
     private _listenAndCloseOnNavigation(): void {
         if (this._router && this._notificationRef) {
             this._router.events
@@ -187,14 +187,14 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _loadFromComponent(content: Type<any>): void {
         this.containerRef.clear();
         const componentFactory = this._componentFactoryResolver.resolveComponentFactory(content);
         this.componentRef = this.containerRef.createComponent(componentFactory);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _loadFromTemplate(content: TemplateRef<any>): void {
         this.containerRef.clear();
         const context = {
@@ -203,7 +203,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         this.componentRef = this.containerRef.createEmbeddedView(content, context);
     }
 
-    /** @hidden */
+    /** @ignore */
     _setProperties(): void {
         this._addClassToElement('fd-notification');
         this._addClassToElement('fd-notification-custom-block');
@@ -212,7 +212,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setNotificationConfig(notificationConfig: NotificationConfig): void {
         Object.keys(notificationConfig || {})
             .filter((key) => key !== 'data' && key !== 'container')

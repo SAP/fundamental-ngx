@@ -50,19 +50,19 @@ import { NotificationGroupBaseDirective } from '../notification-utils/notificati
     imports: [ButtonComponent, ContentDensityDirective]
 })
 export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirective implements OnInit, OnDestroy {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-notification__group-header')
     fdNotificationGroupHeaderClass = true;
 
-    /** @hidden */
+    /** @ignore */
     get expandDescribedBy(): string {
         return this.notificationHeader?.first?.uniqueId;
     }
 
-    /** @hidden */
+    /** @ignore */
     _rtl = false;
 
-    /** @hidden */
+    /** @ignore */
     _subscriptions = new Subscription();
 
     /** Whether the expand button is in compact mode */
@@ -85,12 +85,12 @@ export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirec
     @Output()
     expandedChange = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     get _expandButtonContentDensity(): LocalContentDensityMode {
         return typeof this.expandCompact === 'undefined' ? 'global' : ContentDensityMode.COMPACT;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private _cdRef: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService,
@@ -99,12 +99,12 @@ export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirec
         super(renderer);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._listenRtl();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
@@ -115,12 +115,12 @@ export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirec
         this.expandedChange.emit(this.expanded);
     }
 
-    /** @hidden */
+    /** @ignore */
     _getButtonIcon(): string {
         return this.expanded ? 'slim-arrow-down' : this._rtl ? 'slim-arrow-left' : 'slim-arrow-right';
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenRtl(): void {
         if (this._rtlService) {
             this._subscriptions.add(

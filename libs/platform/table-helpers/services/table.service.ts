@@ -38,13 +38,13 @@ export type TableStateProperty<
 export class TableService {
     /** Table state stream. */
     readonly tableState$ = new BehaviorSubject(DEFAULT_TABLE_STATE);
-    /** @hidden */
+    /** @ignore */
     readonly _semanticHighlighting$ = new BehaviorSubject<string>('');
-    /** @hidden */
+    /** @ignore */
     readonly _isFilteringFromHeaderDisabled$ = new BehaviorSubject<boolean>(false);
-    /** @hidden */
+    /** @ignore */
     readonly _isShownNavigationColumn$ = new BehaviorSubject<boolean>(false);
-    /** @hidden */
+    /** @ignore */
     readonly _semanticHighlightingColumnWidth$ = new BehaviorSubject(0);
     /** Visible columns stream. */
     readonly visibleColumns$ = new BehaviorSubject<TableColumn[]>([]);
@@ -56,7 +56,7 @@ export class TableService {
     _poppingColumnsLength = 0;
     /** Table columns stream. */
     readonly tableColumns$ = new BehaviorSubject<TableColumn[]>([]);
-    /** @hidden */
+    /** @ignore */
     readonly tableStateChanges$ = this.tableState$.pipe(skip(1));
     /** Stream that emits when search state changes. */
     readonly searchChange$ = new Subject<SearchChange>();
@@ -74,7 +74,7 @@ export class TableService {
     readonly pageChange$ = new Subject<PageChange>();
     /** Stream that emits when new fetch of data is needed. */
     readonly needFetch$ = new Subject<void>();
-    /** @hidden */
+    /** @ignore */
     readonly stateChange$ = new Subject<TableStateChange>();
     /** Stream that emits when loading state changes. */
     readonly tableLoading$ = new BehaviorSubject<boolean>(false);

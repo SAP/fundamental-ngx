@@ -9,10 +9,10 @@ import { AttributeObserver } from '../../services/observers/attribute.observer';
     providedIn: 'root'
 })
 export class DisabledObserver {
-    /** @hidden */
+    /** @ignore */
     constructor(private _attributeObserver: AttributeObserver) {}
 
-    /** @hidden */
+    /** @ignore */
     static isDisabled(el: Element): boolean {
         return (
             el.hasAttribute('disabled') ||
@@ -21,7 +21,7 @@ export class DisabledObserver {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     observe(element: HasElementRef<Element> | Element | ElementRef<Element>): Observable<boolean> {
         return this._attributeObserver.observe(element).pipe(
             map(() => DisabledObserver.isDisabled(getNativeElement(element))),
@@ -29,7 +29,7 @@ export class DisabledObserver {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     unobserve(element: HasElementRef<Element> | Element | ElementRef<Element>): void {
         this._attributeObserver.unobserve(element);
     }

@@ -91,22 +91,22 @@ export class GroupingComponent implements Resettable {
     /** Table columns */
     readonly columns: SettingsGroupDialogColumn[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     /** Indicates if reset command is active */
     readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
 
-    /** @hidden */
+    /** @ignore */
     readonly SORT_DIRECTION = SortDirection;
 
     /** Not Grouped Option model value */
     readonly NOT_GROUPED_OPTION_VALUE = NOT_GROUPED_OPTION_VALUE;
 
-    /** @hidden */
+    /** @ignore */
     private _initialGrouping: SettingsGroupDialogResultData;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public dialogRef: DialogRef<SettingsGroupDialogData>,
         private readonly _table: Table
@@ -141,19 +141,19 @@ export class GroupingComponent implements Resettable {
         this.dialogRef.close(result);
     }
 
-    /** @hidden */
+    /** @ignore */
     _groupOrderChange(direction: SortDirection): void {
         this.direction = direction;
         this._onModelChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     _groupFieldChange(field: string): void {
         this.field = field;
         this._onModelChange();
     }
 
-    /** @hidden */
+    /** @ignore */
     _onModelChange(): void {
         // Use this coercion cause fd-radio-button triggers extra ngModelChange events on initial phase
         const isInitialDiffers =
@@ -161,7 +161,7 @@ export class GroupingComponent implements Resettable {
         this._isResetAvailableSubject$.next(isInitialDiffers);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setInitialGrouping(): void {
         const initialGrouping = (this._table.initialState?.initialGroupBy || [])[0];
         this._initialGrouping = {
@@ -170,7 +170,7 @@ export class GroupingComponent implements Resettable {
         };
     }
 
-    /** @hidden */
+    /** @ignore */
     private _compareInitialGrouping(): void {
         const appliedGrouping: SettingsGroupDialogResultData = {
             field: this.field,

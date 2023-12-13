@@ -41,7 +41,7 @@ export class ActionListItemComponent extends BaseListItem {
     actionClicked = new EventEmitter<ActionChangeEvent>();
 
     /**
-     * @hidden
+     * @ignore
      * Handles action click
      */
     _onActionClick(): void {
@@ -51,7 +51,7 @@ export class ActionListItemComponent extends BaseListItem {
     }
 
     /**
-     * @hidden
+     * @ignore
      * on keydown append active styles on actionable item
      */
     _onKeyDown(event: KeyboardEvent): void {
@@ -61,7 +61,7 @@ export class ActionListItemComponent extends BaseListItem {
     }
 
     /**
-     * @hidden
+     * @ignore
      * on keyup remove active styles from actionable item
      */
     _onKeyUp(event: KeyboardEvent): void {

@@ -46,15 +46,15 @@ export class SettingsGeneratorSidebarLayoutComponent
     extends BaseSettingsGeneratorLayout
     implements OnInit, AfterViewInit
 {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fdp-settings-generator__sidebar-layout--mobile')
     _isMobile: boolean;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class')
     private readonly _initialClass = 'fdp-settings-generator__sidebar-layout';
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('settingsGeneratorContent')
     private readonly _settingsGeneratorContent: SettingsGeneratorContentComponent;
 
@@ -62,33 +62,33 @@ export class SettingsGeneratorSidebarLayoutComponent
      * Selected settings section.
      */
     _selectedIndex = -1;
-    /** @hidden */
+    /** @ignore */
     _sidebarWidth: SidebarWidthConfiguration;
 
-    /** @hidden */
+    /** @ignore */
     protected _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _config = inject<SidebarSettingsGeneratorConfig>(FDP_SETTINGS_GENERATOR_CONFIG);
 
-    /** @hidden */
+    /** @ignore */
     private _sidebarVisible = true;
 
-    /** @hidden */
+    /** @ignore */
     private _initialSelectedItemSet = false;
 
-    /** @hidden */
+    /** @ignore */
     get _mobileSidebarVisible(): boolean {
         return this._isMobile && this._sidebarVisible;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         super();
         this._sidebarWidth = this._getNormalizedSidebarWidth(this._config.sidebar?.width);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         super.ngOnInit();
         this._settingsGeneratorService.settings.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((settings) => {
@@ -99,7 +99,7 @@ export class SettingsGeneratorSidebarLayoutComponent
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     focusElementByPath(path: string, element: ElementRef<HTMLElement>): void {
         const pathArray = path.split('.');
         // We are interested only in sections with ID.
@@ -126,7 +126,7 @@ export class SettingsGeneratorSidebarLayoutComponent
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         if (this._settingsGenerator.elementRef.nativeElement && this._config.sidebar?.mobileBreakpoint) {
             resizeObservable(this._settingsGenerator.elementRef.nativeElement)
@@ -155,29 +155,29 @@ export class SettingsGeneratorSidebarLayoutComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _setSelectedIndex(index: number): void {
         this._selectedIndex = index;
         this._sidebarVisible = index === -1;
         this._cdr.detectChanges();
     }
 
-    /** @Hidden */
+    /** @ignore */
     _goBack(): void {
         this._setSelectedIndex(-1);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getNormalizedSidebarWidth(width: string | SidebarWidthConfiguration): SidebarWidthConfiguration {
         return typeof width === 'string' ? { minWidth: width, maxWidth: width, width } : width;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isSidebarSettings(settings: Nullable<any>): settings is SidebarSettingsModel<any> {
         return settings?.appearance === 'sidebar';
     }
 
-    /** @hidden */
+    /** @ignore */
     private _isFormGeneratorSection(section: SettingsItem): section is FormSettingsItem | GroupedFormSettingsItem {
         return !!(section as any).id;
     }

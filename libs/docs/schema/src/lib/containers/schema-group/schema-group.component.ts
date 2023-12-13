@@ -69,7 +69,7 @@ export class SchemaGroupComponent implements OnInit {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     _isFormControl(form: AbstractControl): boolean {
         return form instanceof FormControl;
     }

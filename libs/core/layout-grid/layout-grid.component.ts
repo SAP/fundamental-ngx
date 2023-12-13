@@ -47,27 +47,27 @@ export class LayoutGridComponent implements OnInit, OnChanges, CssClassBuilder {
     @Input()
     noVerticalGap: boolean;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChildren(LayoutGridRowDirective)
     _rowsQueryList: QueryList<LayoutGridRowDirective>;
 
-    /** @hidden */
+    /** @ignore */
     private _class = '';
 
-    /** @hidden */
+    /** @ignore */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [

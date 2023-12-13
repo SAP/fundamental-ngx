@@ -17,15 +17,15 @@ export class ListSecondaryDirective implements OnChanges {
     @Input()
     type: SecondaryListItemType;
 
-    /** @hidden */
+    /** @ignore */
     ngClass = inject(NgClass);
 
-    /** @hidden */
+    /** @ignore */
     constructor() {
         this.ngClass.ngClass = ['fd-list__secondary'];
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         if (this.type && !_secondaryListItemTypes.includes(this.type) && isDevMode()) {
             console.warn(

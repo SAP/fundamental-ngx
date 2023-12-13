@@ -28,7 +28,7 @@ export class FeedInputTextareaDirective implements HasElementRef, OnInit {
     @Input()
     fdFeedInputTextareaMaxRows: number;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('disabled')
     disabled: boolean;
 
@@ -36,20 +36,20 @@ export class FeedInputTextareaDirective implements HasElementRef, OnInit {
     @Output()
     valueChange = new EventEmitter<string>();
 
-    /** @hidden */
+    /** @ignore */
     elementRef: ElementRef<HTMLTextAreaElement> = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     private _renderer = inject(Renderer2);
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keyup')
     onKeyup(): void {
         this.resize();
         this.valueChange.emit(this.elementRef.nativeElement.value);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         if (this.fdFeedInputTextareaMaxRows) {
             const lineHeight = this._getTextareaLineHeight();
@@ -57,7 +57,7 @@ export class FeedInputTextareaDirective implements HasElementRef, OnInit {
         }
     }
 
-    /** @hidden make to grow textarea */
+    /** @ignore make to grow textarea */
     resize(): void {
         this._renderer.setStyle(this.elementRef.nativeElement, 'height', 'inherit');
 
@@ -65,7 +65,7 @@ export class FeedInputTextareaDirective implements HasElementRef, OnInit {
         this._renderer.setStyle(this.elementRef.nativeElement, 'height', `${totalHeight}px`);
     }
 
-    /** @hidden get line height of textarea */
+    /** @ignore get line height of textarea */
     private _getTextareaLineHeight(): number {
         const lineHeight = window.getComputedStyle(this.elementRef.nativeElement).getPropertyValue('line-height');
 
@@ -78,7 +78,7 @@ export class FeedInputTextareaDirective implements HasElementRef, OnInit {
         return parseInt(lineHeight, 10);
     }
 
-    /** @hidden get the total height including borders and scroll height */
+    /** @ignore get the total height including borders and scroll height */
     private _getTextareaTotalHeight(): number {
         const computed = window.getComputedStyle(this.elementRef.nativeElement);
 

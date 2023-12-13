@@ -18,40 +18,40 @@ import { TableRowService } from '../services/table-row.service';
     standalone: true
 })
 export class TableHeaderResizerDirective implements OnInit {
-    /** @hidden */
+    /** @ignore */
     focusedCellPosition: Nullable<FocusableCellPosition>;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _rtl = inject(RtlService, {
         optional: true
     });
 
-    /** @hidden */
+    /** @ignore */
     private readonly _elmRef = inject(ElementRef);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _tableColumnResizeService = inject(TableColumnResizeService);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _tableRowService = inject(TableRowService);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _zone = inject(NgZone);
 
-    /** @hidden */
+    /** @ignore */
     private readonly _document = inject(DOCUMENT);
 
-    /** @hidden */
+    /** @ignore */
     private _focusinTimerId: any;
 
-    /** @hidden */
+    /** @ignore */
     private get _headerCellFocused(): boolean {
         return this._document.activeElement?.tagName.toLowerCase() === 'th';
     }
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._zone.runOutsideAngular(() => {
             fromEvent<KeyboardEvent>(this._elmRef.nativeElement, 'keydown')
@@ -102,7 +102,7 @@ export class TableHeaderResizerDirective implements OnInit {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     private _onCellFocused(position: FocusableItemPosition): void {
         this.focusedCellPosition = { rowIndex: position.rowIndex, colIndex: position.colIndex };
     }

@@ -67,14 +67,14 @@ export class MessageBoxComponent
         this._messageBoxConfig = value;
     }
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('dialogWindow')
     dialogWindow: ElementRef;
 
-    /** @hidden */
+    /** @ignore */
     private _class = '';
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Optional() public _messageBoxConfig: MessageBoxConfig,
         @Optional() private _messageBoxRef: MessageBoxRef,
@@ -87,38 +87,38 @@ export class MessageBoxComponent
         super(router, elementRef, changeDetectorRef, rtlService, focusTrapService);
     }
 
-    /** @hidden */
+    /** @ignore */
     get _config(): MessageBoxConfig {
         return this._messageBoxConfig;
     }
 
-    /** @hidden */
+    /** @ignore */
     get _ref(): MessageBoxRef {
         return this._messageBoxRef;
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         super.ngOnInit();
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         super.ngOnDestroy();
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
@@ -130,7 +130,7 @@ export class MessageBoxComponent
         ];
     }
 
-    /** @hidden */
+    /** @ignore */
     private get _messageBoxTypeClass(): string {
         switch (this._config.type) {
             case 'error':

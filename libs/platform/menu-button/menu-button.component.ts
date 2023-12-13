@@ -46,7 +46,7 @@ export class MenuButtonComponent extends BaseComponent {
     @Output()
     buttonClicked: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
 
-    /** @hidden */
+    /** @ignore */
     constructor(_cd: ChangeDetectorRef) {
         super(_cd);
         warnOnce(
@@ -55,7 +55,7 @@ export class MenuButtonComponent extends BaseComponent {
     }
 
     /**
-     * @hidden disabling fd-button does not disables menu button.
+     * @ignore disabling fd-button does not disables menu button.
      * because menu trigger is on menu-button; menu gets open.
      * to prevent this, need to apply disabled at menu-button level as well.
      */
@@ -64,7 +64,7 @@ export class MenuButtonComponent extends BaseComponent {
         return this.disabled;
     }
 
-    /** @hidden tabindex for button. */
+    /** @ignore tabindex for button. */
     get tabindex(): number {
         return this.disabled ? -1 : 0;
     }

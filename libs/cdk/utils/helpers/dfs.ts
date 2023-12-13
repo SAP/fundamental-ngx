@@ -1,20 +1,20 @@
 import { get } from 'lodash-es';
 
-/** @hidden */
+/** @ignore */
 interface DfsOptions<T> {
     children: string | ((item: T) => Array<T>);
     shouldVisit: (item: T) => boolean;
     postOrder: boolean;
 }
 
-/** @hidden */
+/** @ignore */
 const _defaultDfsOptions: DfsOptions<any> = {
     children: 'children',
     shouldVisit: () => true,
     postOrder: true
 };
 
-/** @hidden */
+/** @ignore */
 function postOrderDfs<T>(): (item: T, callback: (item: T) => void, options: DfsOptions<T>) => void {
     const iterator = (item: T, callback: (item: T) => void, options: DfsOptions<T>): void => {
         if (options.shouldVisit(item)) {
@@ -27,7 +27,7 @@ function postOrderDfs<T>(): (item: T, callback: (item: T) => void, options: DfsO
     return iterator;
 }
 
-/** @hidden */
+/** @ignore */
 function preOrderDfs<T>(): (item: T, callback: (item: T) => void, options: DfsOptions<T>) => void {
     const iterator = (item: T, callback: (item: T) => void, options: DfsOptions<T>): void => {
         if (options.shouldVisit(item)) {

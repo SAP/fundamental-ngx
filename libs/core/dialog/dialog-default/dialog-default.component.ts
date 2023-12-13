@@ -42,16 +42,16 @@ import { DialogDefaultContent } from '../utils/dialog-default-content.class';
     ]
 })
 export class DialogDefaultComponent implements AfterViewInit {
-    /** @hidden */
+    /** @ignore */
     _defaultDialogContent: Nullable<DialogDefaultContent>;
 
-    /** @hidden */
+    /** @ignore */
     _defaultDialogConfiguration: DialogConfig;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
-    /** @hidden
+    /** @ignore
      * TODO: Inspect why DialogDefaultComponents needs change detection re-run to render adjusted content (dialog header title)
      * */
     ngAfterViewInit(): void {
@@ -66,22 +66,22 @@ export class DialogDefaultComponent implements AfterViewInit {
         );
     }
 
-    /** @hidden */
+    /** @ignore */
     _closeButtonClicked(): void {
         this._defaultDialogContent?.closeButtonCallback?.();
     }
 
-    /** @hidden */
+    /** @ignore */
     _approveButtonClicked(): void {
         this._defaultDialogContent?.approveButtonCallback?.();
     }
 
-    /** @hidden */
+    /** @ignore */
     _cancelButtonClicked(): void {
         this._defaultDialogContent?.cancelButtonCallback?.();
     }
 
-    /** @hidden */
+    /** @ignore */
     _fullScreenButtonClicked(): void {
         this._defaultDialogContent?.fullScreenButtonCallback?.();
     }

@@ -18,10 +18,10 @@ export class FdpTableHeader {}
 @Directive({ selector: '[fdpHeaderCellDef]', standalone: true })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class FdpHeaderCellDef<T = any> {
-    /** @hidden */
+    /** @ignore */
     constructor(public templateRef: TemplateRef<FdpCellDefContext<T>>) {}
 
-    /** @hidden */
+    /** @ignore */
     static ngTemplateContextGuard(dir: FdpHeaderCellDef, ctx: FdpHeaderCellDefContext): ctx is FdpHeaderCellDefContext {
         return true;
     }

@@ -55,7 +55,7 @@ export class DialogContainerComponent
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(CdkPortalOutlet)
     portalOutlet: CdkPortalOutlet;
 
@@ -63,10 +63,10 @@ export class DialogContainerComponent
     @HostBinding('@state')
     _animationState = 'void';
 
-    /** @hidden */
+    /** @ignore */
     private _class = '';
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public dialogConfig: DialogConfig,
         public ref: DialogRef,
@@ -78,7 +78,7 @@ export class DialogContainerComponent
         super(elementRef, injector, changeDetectorRef);
     }
 
-    /** @hidden */
+    /** @ignore */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [this.dialogConfig.containerClass ? this.dialogConfig.containerClass : '', this._class];
@@ -95,7 +95,7 @@ export class DialogContainerComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         setTimeout(() => {
             this._loadContent();
@@ -103,14 +103,14 @@ export class DialogContainerComponent
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentChecked(): void {
         if (this.portalOutlet) {
             this._cdr.markForCheck();
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     protected _attached(event: CdkPortalOutletAttachedRef): void {
         if (event instanceof ComponentRef) {
             event.changeDetectorRef.markForCheck();
@@ -119,7 +119,7 @@ export class DialogContainerComponent
         }
     }
 
-    /** @hidden Load received content */
+    /** @ignore Load received content */
     protected _loadContent(): void {
         if ((this._cdr as ViewRef).destroyed) {
             return;
@@ -135,12 +135,12 @@ export class DialogContainerComponent
         this._cdr.detectChanges();
     }
 
-    /** @hidden Returns context for embedded template*/
+    /** @ignore Returns context for embedded template*/
     private _templateContext(): DialogTemplateDirectiveContext {
         return { $implicit: this.ref, dialogConfig: this.dialogConfig };
     }
 
-    /** @hidden Load Dialog component from passed object */
+    /** @ignore Load Dialog component from passed object */
     private _createFromDefaultDialog(config: Nullable<DialogDefaultContent>): void {
         this._createFromComponent(DialogDefaultComponent);
         const instance = (this._componentRef as ComponentRef<DialogDefaultComponent>).instance;
@@ -149,7 +149,7 @@ export class DialogContainerComponent
     }
 
     /**
-     * @hidden
+     * @ignore
      * We need to wait until animation plays, and then send signal to the service to destroy the component.
      */
     private _listenOnClose(): void {

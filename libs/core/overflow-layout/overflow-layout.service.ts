@@ -44,22 +44,22 @@ export class OverflowLayoutService implements OnDestroy {
      */
     result = new OverflowLayoutListeningResult();
 
-    /** @hidden */
+    /** @ignore */
     private _listenToItemResize = true;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _subscription = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _allItems: OverflowItemRef[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _hiddenItems: OverflowItemRef[] = [];
 
-    /** @hidden */
+    /** @ignore */
     private _detectChanges$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _result$ = new Subject<OverflowLayoutListeningResult>();
 
     /**
@@ -76,32 +76,32 @@ export class OverflowLayoutService implements OnDestroy {
         return this._result$.asObservable();
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _elRef: ElementRef<HTMLElement>) {}
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscription.unsubscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     startListening(config: OverflowLayoutConfig): void {
         this.setConfig(config);
         this.fitVisibleItems();
         this._listenToSizeChanges(this._elRef.nativeElement, this.config.itemsWrapper);
     }
 
-    /** @hidden */
+    /** @ignore */
     setConfig(config: OverflowLayoutConfig): void {
         this.config = config;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _emitResult(): void {
         this._result$.next(this.result);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenToSizeChanges(...elements: HTMLElement[]): void {
         elements.forEach((element) =>
             this._subscription.add(
@@ -271,7 +271,7 @@ export class OverflowLayoutService implements OnDestroy {
         this._listenToItemResize = true;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getForcedItemsIndexes(): number[] {
         return this._allItems
             .map((item, index) => (item.overflowItem.forceVisibility ? index : -1))
@@ -279,7 +279,7 @@ export class OverflowLayoutService implements OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      * Returns combined width of the element including margins.
      * @param element Element to calculate width of.
      */

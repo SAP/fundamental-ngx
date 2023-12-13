@@ -14,7 +14,7 @@ import { MessageBoxRef } from '../utils/message-box-ref.class';
 /** Service used to create a message box. */
 @Injectable()
 export class MessageBoxService extends DialogBaseService<MessageBoxContainerComponent> {
-    /** @hidden */
+    /** @ignore */
     constructor(
         @Optional() @Inject(MESSAGE_BOX_DEFAULT_CONFIG) private _defaultConfig: MessageBoxConfig,
         @Optional() private _rtlService: RtlService,

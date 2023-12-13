@@ -11,13 +11,13 @@ import { provideFdkClicked } from './provide-fdk-clicked';
     exports: [ClickedDirective]
 })
 export class ClickedBehaviorModule {
-    /** @hidden */
+    /** @ignore */
     constructor() {
         console.warn(
             `ClickedBehaviorModule is deprecated and will be removed in the next major release. Use ClickedDirective instead.`
         );
     }
-    /** @hidden */
+    /** @ignore */
     static forRoot(): ModuleWithProviders<ClickedBehaviorModule> {
         if (isDevMode()) {
             console.warn(

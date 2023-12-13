@@ -40,7 +40,7 @@ import { DialogRef } from '../utils/dialog-ref.class';
     imports: [DynamicPortalComponent, BusyIndicatorComponent, AsyncPipe]
 })
 export class DialogBodyComponent {
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef,
         @Optional() public dialogConfig: DialogConfig,

@@ -163,13 +163,13 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     finish = new EventEmitter<void>();
 
     /**
-     * @hidden
+     * @ignore
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /**
-     * @hidden
+     * @ignore
      */
     private _visibleItems: PreparedWizardGeneratorItem[];
 
@@ -185,7 +185,7 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
         return this._visibleItems || this._wizardGeneratorService.items;
     }
 
-    /** @hidden */
+    /** @ignore */
     // eslint-disable-next-line @typescript-eslint/member-ordering
     constructor(
         private _wizardGeneratorService: WizardGeneratorService,
@@ -193,12 +193,12 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     ) {}
 
     /**
-     * @hidden
+     * @ignore
      */
     _goNextFn: () => void = () => this.goNext.emit();
 
     /**
-     * @hidden
+     * @ignore
      */
     _finishFn: () => void = () => this.finish.emit();
 
@@ -225,7 +225,7 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     ngOnInit(): void {
         this._wizardGeneratorService
@@ -238,7 +238,7 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * @hidden
+     * @ignore
      */
     ngOnDestroy(): void {
         this._onDestroy$.next();
@@ -257,14 +257,14 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     stepClicked(stepId: string): void {
         const stepIndex = this._wizardGeneratorService.getStepIndex(stepId);
         this._wizardGeneratorService.setNextStepIndex(stepIndex + 1);
     }
 
     /**
-     * @hidden
+     * @ignore
      * @param _index
      * @param item
      * @returns

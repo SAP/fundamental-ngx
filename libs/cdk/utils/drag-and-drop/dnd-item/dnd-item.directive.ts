@@ -70,34 +70,34 @@ export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnD
     /** Defines if every element in list is draggable */
     listDraggable = true;
 
-    /** @hidden
+    /** @ignore
      * Drag reference, object created from DND CDK Service
      */
     private _dragRef: DragRef;
 
-    /** @hidden */
+    /** @ignore */
     private _draggable = true;
 
-    /** @hidden */
+    /** @ignore */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
+    /** @ignore */
     private _placeholderElement: HTMLElement | null;
 
-    /** @hidden */
+    /** @ignore */
     private _lineElement: HTMLElement | null;
 
-    /** @hidden */
+    /** @ignore */
     private _replaceIndicator: HTMLElement | null;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public readonly elementRef: ElementRef,
         private readonly _dragDrop: DragDrop,
         private readonly _renderer: Renderer2
     ) {}
 
-    /** @hidden */
+    /** @ignore */
     getElementCoordinates(isBefore: boolean): ElementChord {
         /** Takes distance from the beginning of window page */
         const rect = this.elementRef.nativeElement.getBoundingClientRect();
@@ -115,24 +115,24 @@ export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnD
         };
     }
 
-    /** @hidden */
+    /** @ignore */
     ngAfterContentInit(): void {
         this._setCDKDrag();
         this._listenElementEvents();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._dragRef.dispose();
     }
 
-    /** @hidden */
+    /** @ignore */
     onCdkMove(position: ElementPosition): void {
         this.moved.emit(position);
     }
 
-    /** @hidden */
+    /** @ignore */
     onCdkDragReleased(): void {
         /** Remove class which is added, when element is dragged */
         this.elementRef.nativeElement.classList.remove(this.classWhenElementDragged);
@@ -145,7 +145,7 @@ export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnD
         this.removePlaceholder();
     }
 
-    /** @hidden */
+    /** @ignore */
     onCdkDragStart(): void {
         /** Adds class */
         this.elementRef.nativeElement.classList.add(this.classWhenElementDragged);
@@ -156,7 +156,7 @@ export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnD
         this.started.emit();
     }
 
-    /** @hidden */
+    /** @ignore */
     removePlaceholder(): void {
         if (this._placeholderElement && this._placeholderElement.parentNode) {
             // IE11 workaround
@@ -165,7 +165,7 @@ export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnD
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     removeLine(): void {
         if (this._lineElement && this._lineElement.parentNode) {
             // IE11 workaround
@@ -174,7 +174,7 @@ export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnD
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     removeReplaceIndicator(): void {
         if (this._replaceIndicator && this._replaceIndicator.parentNode) {
             // IE11 workaround
@@ -183,7 +183,7 @@ export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnD
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     createReplaceIndicator(): void {
         this._replaceIndicator = document.createElement('DIV');
         this._replaceIndicator.classList.add('fd-replace-indicator');
@@ -199,7 +199,7 @@ export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnD
         container.appendChild(this._replaceIndicator);
     }
 
-    /** @hidden */
+    /** @ignore */
     createLine(position: LinkPosition, gridMode: boolean): void {
         /** Creating of line element */
         this._lineElement = document.createElement('div');
@@ -229,7 +229,7 @@ export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnD
         container.appendChild(this._lineElement);
     }
 
-    /** @hidden */
+    /** @ignore */
     changeCDKDragState(): void {
         if (this._dragRef) {
             this._dragRef.disabled = !(this._draggable && this.listDraggable);
@@ -248,7 +248,7 @@ export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnD
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private createPlaceholder(): void {
         const placeholder = this.elementRef.nativeElement.cloneNode(true);
         /** Cloning container element */
@@ -263,7 +263,7 @@ export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnD
         this._placeAfter(this.elementRef.nativeElement, placeholder);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setPlaceholderStyles(): void {
         const offset = this._getOffsetToParent(this.elementRef.nativeElement);
 
@@ -281,7 +281,7 @@ export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnD
         this._placeholderElement.style.height = this.elementRef.nativeElement.offsetHeight + 'px';
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getOffsetToParent(element: Element): { x: number; y: number } | undefined {
         const parentElement = element.parentElement;
         if (!parentElement) {
@@ -300,7 +300,7 @@ export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnD
         };
     }
 
-    /** @hidden */
+    /** @ignore */
     private _setCDKDrag(): void {
         this._dragRef = this._dragDrop.createDrag(this.elementRef);
         this._dragRef.disabled = !this._draggable;
@@ -316,7 +316,7 @@ export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnD
         element.parentNode?.insertBefore(docFrag, element.nextSibling);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _listenElementEvents(): void {
         this._subscriptions.add(
             this.released

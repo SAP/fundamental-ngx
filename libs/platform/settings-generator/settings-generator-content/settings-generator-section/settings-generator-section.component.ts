@@ -57,13 +57,13 @@ export class SettingsGeneratorSectionComponent {
         return this._items;
     }
 
-    /** @hidden */
+    /** @ignore */
     private readonly _settingsGeneratorService = inject(SettingsGeneratorService);
 
-    /** @hidden */
+    /** @ignore */
     private _items: Nullable<SettingsSectionItemsModel>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(FormGeneratorComponent)
     private set _formGeneratorCmp(component: FormGeneratorComponent | undefined) {
         this._formGenerator = component;
@@ -83,19 +83,19 @@ export class SettingsGeneratorSectionComponent {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private _formGenerator: FormGeneratorComponent | undefined;
 
-    /** @hidden */
+    /** @ignore */
     _renderer: 'form' | 'template' = 'form';
 
-    /** @hidden */
+    /** @ignore */
     _templateRef: TemplateRef<any> | null = null;
 
-    /** @hidden */
+    /** @ignore */
     _formItems: DynamicFormItem[] = [];
 
-    /** @hidden */
+    /** @ignore */
     _isTemplateLayout(settings: any): settings is TemplateSettingsItem {
         return !!settings?.template;
     }

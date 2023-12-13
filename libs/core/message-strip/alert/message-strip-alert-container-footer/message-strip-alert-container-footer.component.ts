@@ -28,7 +28,7 @@ import { MessageStripAlertContainerAlertRefs, MessageStripAlertContainerPosition
     imports: [PortalModule]
 })
 export class MessageStripAlertContainerFooterComponent implements AfterViewInit {
-    /** @hidden */
+    /** @ignore */
     @Input()
     set alertRefs(alertRefs: Nullable<MessageStripAlertRef[]>) {
         this.alertRefs$.next(alertRefs);
@@ -44,10 +44,10 @@ export class MessageStripAlertContainerFooterComponent implements AfterViewInit 
      */
     private position = inject(MessageStripAlertContainerPosition);
 
-    /** @hidden */
+    /** @ignore */
     private _destroyRef = inject(DestroyRef);
 
-    /** @hidden */
+    /** @ignore */
     private messageStripAlertService = inject(MessageStripAlertService);
 
     /**
@@ -55,7 +55,7 @@ export class MessageStripAlertContainerFooterComponent implements AfterViewInit 
      */
     private alertRefs$ = new BehaviorSubject<Nullable<MessageStripAlertRef[]>>([]);
 
-    /** @hidden */
+    /** @ignore */
     ngAfterViewInit(): void {
         this.messageStripAlertService.footerComponents$
             .pipe(

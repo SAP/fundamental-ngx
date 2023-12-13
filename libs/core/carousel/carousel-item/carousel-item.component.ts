@@ -70,19 +70,19 @@ export class CarouselItemComponent<T = any> implements CarouselItemInterface {
     @Input()
     value: T;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-carousel__item')
     carouselItem = true;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-carousel__item--active')
     carouselItemActive = true;
 
-    /** @hidden Hide/show slide, useful for managing tab order */
+    /** @ignore Hide/show slide, useful for managing tab order */
     @HostBinding('style.visibility')
     _visibility: Visibility = 'visible';
 
-    /** @hidden */
+    /** @ignore */
     set visibility(visibility: Visibility) {
         this._visibility = visibility;
     }
@@ -91,7 +91,7 @@ export class CarouselItemComponent<T = any> implements CarouselItemInterface {
         return this._visibility;
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(private readonly _elementRef: ElementRef<HTMLElement>) {}
 
     /** Native element  */

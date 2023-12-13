@@ -54,7 +54,7 @@ import { MenuService } from '../services/menu.service';
     ]
 })
 export class MenuMobileComponent extends MobileModeBase<MenuInterface> implements OnInit, OnDestroy {
-    /** @hidden */
+    /** @ignore */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
     /** Current menu title */
@@ -63,16 +63,16 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     /** Whether current menu level is submenu */
     isSubmenu: boolean;
 
-    /** @hidden External content */
+    /** @ignore External content */
     childContent: TemplateRef<any> | undefined = undefined;
 
-    /** @hidden Currently rendered menu view */
+    /** @ignore Currently rendered menu view */
     view: TemplateRef<any> | undefined;
 
-    /** @hidden Navigation icon name based on RTL */
+    /** @ignore Navigation icon name based on RTL */
     navigationIcon$: Observable<string>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild(DialogBodyComponent)
     set _watch(_dialogBody: DialogBodyComponent) {
         if (_dialogBody) {
@@ -80,7 +80,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,
@@ -94,14 +94,14 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
         super(elementRef, dialogService, menuComponent, MobileModeControl.MENU, mobileModes);
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         this._listenOnActivePathChange();
         this._listenOnMenuOpenChange();
         this._listenOnTextDirection();
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         super.onDestroy();
     }
@@ -121,7 +121,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
         });
     }
 
-    /** @hidden Opens the Dialog */
+    /** @ignore Opens the Dialog */
     private _openDialog(): void {
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
             mobile: true,
@@ -133,7 +133,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
         });
     }
 
-    /** @hidden Listens on Active Path changes and updates mobile view */
+    /** @ignore Listens on Active Path changes and updates mobile view */
     private _listenOnActivePathChange(): void {
         const initialItemPath: MenuItemComponent[] = this._menuService.activeNodePath
             .map((node) => node.item)
@@ -144,7 +144,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     }
 
     /**
-     * @hidden
+     * @ignore
      * Executes a function when the zone is stable.
      */
     private _executeOnStable(fn: () => any): void {
@@ -155,7 +155,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
         }
     }
 
-    /** @hidden Sets menu view, title and isSubmenu flag */
+    /** @ignore Sets menu view, title and isSubmenu flag */
     private _setMenuView(items: MenuItemComponent[]): void {
         const lastItem: MenuItemComponent = items[items.length - 1];
         this.isSubmenu = !!items.length;
@@ -167,21 +167,21 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
         });
     }
 
-    /** @hidden Opens/closes the Dialog based on Menu isOpenChange events */
+    /** @ignore Opens/closes the Dialog based on Menu isOpenChange events */
     private _listenOnMenuOpenChange(): void {
         this._component.isOpenChange
             .pipe(takeUntil(this._onDestroy$))
             .subscribe((isOpen) => (isOpen ? this._openDialog() : this.dialogRef.close()));
     }
 
-    /** @hidden Sets navigation arrow depending on text direction */
+    /** @ignore Sets navigation arrow depending on text direction */
     private _listenOnTextDirection(): void {
         this.navigationIcon$ = this._rtlService
             ? this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow')))
             : of('navigation-left-arrow');
     }
 
-    /** @hidden Returns dialog title */
+    /** @ignore Returns dialog title */
     private _getDialogTitle(menuItem: MenuItemComponent): string {
         if (this.isSubmenu) {
             return menuItem.menuItemTitle ? menuItem.menuItemTitle.title : '';
@@ -190,7 +190,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
         return this.mobileConfig.title || '';
     }
 
-    /** @hidden Returns dialog content view */
+    /** @ignore Returns dialog content view */
     private _getMenuView(menuItem: MenuItemComponent): TemplateRef<any> | undefined {
         if (this.isSubmenu) {
             return menuItem.submenu ? menuItem.submenu.templateRef : this.view;

@@ -9,21 +9,21 @@ import { ReadonlyObserver } from './readonly.observer';
 
 @Injectable()
 export class FdkReadonlyProvider extends ReplaySubject<boolean> implements ReadonlyBehavior, OnDestroy {
-    /** @Hidden */
+    /** @ignore */
     fdkReadonly = false;
 
-    /** @hidden */
+    /** @ignore */
     private readonly _viewModifiers$: BehaviorSubject<ReadonlyViewModifier[]> = new BehaviorSubject<
         ReadonlyViewModifier[]
     >(this._getInitialViewModifiers());
 
-    /** @hidden */
+    /** @ignore */
     private _readonlyChange$: Observable<boolean> = this._getReadonlyChange$();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _destroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         private ngZone: NgZone,
         private elementRef: ElementRef<Element>,
@@ -47,20 +47,20 @@ export class FdkReadonlyProvider extends ReplaySubject<boolean> implements Reado
             .subscribe();
     }
 
-    /** @hidden */
+    /** @ignore */
     addViewModifier(modifier: ReadonlyViewModifier): void {
         const viewModifiers = [...new Set([...this._viewModifiers$.value, modifier]).values()];
         this._viewModifiers$.next(viewModifiers);
     }
 
-    /** @hidden */
+    /** @ignore */
     setReadonlyState(isReadonly: boolean): void {
         firstValueFrom(this.ngZone.onStable).then(() => {
             this._viewModifiers$.value.forEach((viewModifier) => viewModifier.setReadonlyState(isReadonly));
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         this.complete();
         this._destroy$.next();
@@ -68,7 +68,7 @@ export class FdkReadonlyProvider extends ReplaySubject<boolean> implements Reado
         this.readonlyObserver.unobserve(this.elementRef);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getReadonlyChange$(): Observable<boolean> {
         let selfReadonly = false;
         let parentReadonly = false;
@@ -109,7 +109,7 @@ export class FdkReadonlyProvider extends ReplaySubject<boolean> implements Reado
         return this.readonlyObserver.observe(this.elementRef).pipe(distinctUntilChanged());
     }
 
-    /** @hidden */
+    /** @ignore */
     private _getInitialViewModifiers(): ReadonlyViewModifier[] {
         return !this.selfReadonly$ ? [new DefaultReadonlyViewModifier(this.elementRef)] : [this.selfReadonly$];
     }

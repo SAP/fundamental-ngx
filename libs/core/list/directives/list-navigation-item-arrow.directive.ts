@@ -10,19 +10,19 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
     standalone: true
 })
 export class ListNavigationItemArrowDirective {
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.fd-list__navigation-item-arrow')
     navigationItemArrowClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.sap-icon--navigation-right-arrow')
     rightArrowClass = true;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.sap-icon--navigation-down-arrow')
     downArrowClass = false;
 
-    /** @hidden */
+    /** @ignore */
     @HostBinding('class.is-expanded')
     expanded = false;
 
@@ -31,7 +31,7 @@ export class ListNavigationItemArrowDirective {
     @HostBinding('attr.aria-hidden')
     ariaHidden: Nullable<boolean> = true;
 
-    /** @hidden */
+    /** @ignore */
     _setExpanded(expanded: boolean): void {
         if (this.expanded !== expanded) {
             this.rightArrowClass = !this.rightArrowClass;

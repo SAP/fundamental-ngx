@@ -19,23 +19,23 @@ export class KeyboardSupportService<T> {
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _keyManager: FocusKeyManager<T>;
 
-    /** @hidden */
+    /** @ignore */
     get keyManager(): FocusKeyManager<T> {
         return this._keyManager;
     }
 
-    /** @hidden */
+    /** @ignore */
     private _itemList: QueryList<KeyboardSupportItemInterface & T>;
 
-    /** @hidden
+    /** @ignore
      * allow tab key navigation. default is true.
      */
     private _tabKeyNavigation = true;
 
-    /** @hidden */
+    /** @ignore */
     setKeyboardService(
         queryList: QueryList<KeyboardSupportItemInterface & T>,
         wrap?: boolean,
@@ -49,7 +49,7 @@ export class KeyboardSupportService<T> {
             .subscribe(() => this._refreshEscapeLogic(queryList));
     }
 
-    /** @hidden */
+    /** @ignore */
     onKeyDown(event: KeyboardEvent): void {
         this._keyManager.onKeydown(event);
         if (KeyUtil.isKeyCode(event, TAB)) {
@@ -69,7 +69,7 @@ export class KeyboardSupportService<T> {
         this._keyManager.destroy();
     }
 
-    /** @hidden */
+    /** @ignore */
     private _refreshEscapeLogic(queryList: QueryList<KeyboardSupportItemInterface & T>): void {
         const createEscapeListener = (
             listItem: KeyboardSupportItemInterface & T,

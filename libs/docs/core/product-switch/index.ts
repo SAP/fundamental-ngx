@@ -18,5 +18,6 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'product-switch';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/product-switch';
 export const API_FILE_KEY = 'productSwitch';
 export const I18N_KEY = 'coreProductSwitch';

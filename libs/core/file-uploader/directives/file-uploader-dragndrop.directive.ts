@@ -45,13 +45,13 @@ export class FileUploaderDragndropDirective {
     @Output()
     readonly dragLeave = new EventEmitter<void>();
 
-    /** @hidden */
+    /** @ignore */
     private elementStateCounter = 0;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private _fileUploadService: FileUploaderService) {}
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('dragover', ['$event'])
     public onDragover(event: Event): void {
         if (this.dragndrop) {
@@ -59,7 +59,7 @@ export class FileUploaderDragndropDirective {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('dragenter', [])
     public onDragenter(): void {
         ++this.elementStateCounter;
@@ -68,7 +68,7 @@ export class FileUploaderDragndropDirective {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('dragleave', ['$event'])
     public onDragleave(event: Event): void {
         --this.elementStateCounter;
@@ -78,7 +78,7 @@ export class FileUploaderDragndropDirective {
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('drop', ['$event'])
     public onDrop(event: any): void {
         this.elementStateCounter = 0;
@@ -108,7 +108,7 @@ export class FileUploaderDragndropDirective {
         this.fileChanged.emit(fileOutput);
     }
 
-    /** @hidden */
+    /** @ignore */
     private _muteEvent(event: Event): void {
         event.preventDefault();
         event.stopPropagation();

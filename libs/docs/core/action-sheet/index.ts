@@ -18,4 +18,5 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'action-sheet';
+export const LIBRARY_IMPORT_PATH = '@fundamental-ngx/core/action-sheet';
 export const API_FILE_KEY = 'actionSheet';

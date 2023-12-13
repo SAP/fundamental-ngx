@@ -89,16 +89,16 @@ export class DynamicPageTitleComponent implements DynamicPageHeader {
     @ContentChild(DynamicPageTitleImageComponent)
     imageComponent: DynamicPageTitleImageComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(DynamicPageHeaderTitleDirective)
     _titleDirective: DynamicPageHeaderTitleDirective;
 
-    /** @hidden */
+    /** @ignore */
     @ContentChild(DynamicPageHeaderSubtitleDirective)
     _subtitleDirective: DynamicPageHeaderSubtitleDirective;
 
     /**
-     * @hidden
+     * @ignore
      * The component view is wrapped in ng-template so
      * component's consumer have to use this templateRef to render it
      * in its view.

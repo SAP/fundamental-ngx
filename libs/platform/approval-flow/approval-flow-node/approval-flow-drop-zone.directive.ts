@@ -16,10 +16,10 @@ export class ApprovalFlowDropZoneDirective {
     /** Whether drop zone is active (pointer with dragged node over the drop zone) */
     active = false;
 
-    /** @hidden */
+    /** @ignore */
     constructor(private readonly elRef: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     _checkIfNodeDraggedInDropZone(nodeRect: DOMRect): void {
         this.active = false;
 

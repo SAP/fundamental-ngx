@@ -85,10 +85,10 @@ export interface ValueLabelItem {
     standalone: true
 })
 export class SearchFieldSuggestionDirective implements FocusableOption {
-    /** @hidden */
+    /** @ignore */
     constructor(private element: ElementRef) {}
 
-    /** @hidden */
+    /** @ignore */
     focus(): void {
         this.element.nativeElement.focus();
     }
@@ -271,127 +271,127 @@ export class SearchFieldComponent
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('categoryDropdown', { static: false })
     categoryDropdown: PopoverComponent;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('inputGroup', { static: false })
     inputGroup: ElementRef<HTMLElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('inputField', { static: false })
     inputField: ElementRef<HTMLElement>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('inputFieldTemplate')
     inputFieldTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChild('suggestionMenuTemplate', { static: false })
     suggestionMenuTemplate: TemplateRef<any>;
 
-    /** @hidden */
+    /** @ignore */
     @ViewChildren(SearchFieldSuggestionDirective)
     suggestionItems: QueryList<SearchFieldSuggestionDirective>;
 
-    /** @hidden */
+    /** @ignore */
     get searchFieldValue(): SearchInput {
         return {
             text: this.inputText,
             category: this._currentCategory?.value || null
         };
     }
-    /** @hidden Focus state */
+    /** @ignore Focus state */
     get isFocused(): boolean {
         return this._document?.activeElement === this.inputField?.nativeElement;
     }
 
     /**
      * Observable list of string values taken from `suggestions` to populate dropdown menu.
-     * @hidden
+     * @ignore
      */
     _dropdownValues$: Observable<string[]> = of([]);
 
     /**
      * Currently set category.
-     * @hidden
+     * @ignore
      */
     _currentCategory?: ValueLabelItem;
 
     /**
      * Whether or not to show typeahead dropdown.
-     * @hidden
+     * @ignore
      */
     _showDropdown = false;
 
     /**
      * Whether or not to show category dropdown. This is dependent on length of `categoryValues` property.
-     * @hidden
+     * @ignore
      */
     _showCategoryDropdown = false;
 
-    /** @hidden */
+    /** @ignore */
     _inputId = '';
 
-    /** @hidden */
+    /** @ignore */
     _submitId = '';
 
-    /** @hidden */
+    /** @ignore */
     _menuId = '';
 
-    /** @hidden */
+    /** @ignore */
     _refreshId = '';
 
-    /** @hidden */
+    /** @ignore */
     _clearId = '';
 
-    /** @hidden */
+    /** @ignore */
     _dir: Direction = 'ltr';
 
-    /** @hidden */
+    /** @ignore */
     isOpen = false;
 
-    /** @hidden */
+    /** @ignore */
     _isRefresh = false;
 
-    /** @hidden */
+    /** @ignore */
     _isSearchDone = false;
 
-    /** @hidden */
+    /** @ignore */
     private _suggestions: SuggestionItem[] | Observable<SuggestionItem[]>;
 
-    /** @hidden */
+    /** @ignore */
     private _dataSource: SearchFieldDataSource<any>;
 
-    /** @hidden */
+    /** @ignore */
     private _categories: ValueLabelItem[];
 
-    /** @hidden */
+    /** @ignore */
     private _currentSearchSuggestionAnnouncementMessage = '';
 
-    /** @hidden */
+    /** @ignore */
     private _suggestionOverlayRef: OverlayRef | null;
 
-    /** @hidden */
+    /** @ignore */
     private _suggestionPortal: TemplatePortal;
 
-    /** @hidden */
+    /** @ignore */
     private _suggestionkeyManager: FocusKeyManager<SearchFieldSuggestionDirective>;
 
-    /** @hidden */
+    /** @ignore */
     private resolveTranslation = resolveTranslationSyncFn();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _onDestroy$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private readonly _dataSourceChanged$ = new Subject<void>();
 
-    /** @hidden */
+    /** @ignore */
     private _appearance: Appearance;
 
-    /** @hidden */
+    /** @ignore */
     constructor(
         public elementRef: ElementRef<HTMLElement>,
         private readonly _overlay: Overlay,
@@ -407,7 +407,7 @@ export class SearchFieldComponent
         super(_cd);
     }
 
-    /** @hidden */
+    /** @ignore */
     @HostListener('keydown', ['$event'])
     handleKeydown(event: KeyboardEvent): void {
         if (this.mobile && this.isOpen && KeyUtil.isKeyCode(event, [ESCAPE])) {
@@ -415,7 +415,7 @@ export class SearchFieldComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnInit(): void {
         const baseId = 'fdp-search-field';
         this._inputId = `${baseId}-input-${searchFieldIdCount++}`;
@@ -436,14 +436,14 @@ export class SearchFieldComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnChanges(changes: SimpleChanges): void {
         if ('categories' in changes || 'currentCategory' in changes) {
             this.setCurrentCategory(this.currentCategory);
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     ngOnDestroy(): void {
         if (this._suggestionOverlayRef) {
             this._suggestionOverlayRef.dispose();
@@ -479,7 +479,7 @@ export class SearchFieldComponent
 
     /**
      * Capturing value change in input text field of combobox.
-     * @hidden
+     * @ignore
      */
     onValueChange(event: string): void {
         // when search result not changed but input text is changed.
@@ -516,7 +516,7 @@ export class SearchFieldComponent
 
     /**
      * Capturing item selection from dropdown menu of combobox.
-     * @hidden
+     * @ignore
      */
     onItemClick(event: string): void {
         this.inputText = event;
@@ -532,7 +532,7 @@ export class SearchFieldComponent
 
     /**
      * Callback function which gets executed on keyboard enter of input text field.
-     * @hidden
+     * @ignore
      */
     onSearchSubmit(event?: Event): void {
         event?.preventDefault();
@@ -555,7 +555,7 @@ export class SearchFieldComponent
 
     /**
      * Sets current category.
-     * @hidden
+     * @ignore
      */
     setCurrentCategory(currentCategory: ValueLabelItem): void {
         this._currentCategory =
@@ -609,22 +609,22 @@ export class SearchFieldComponent
         this._showDropdown = true;
     }
 
-    /** @hidden */
+    /** @ignore */
     openMobileMode(): void {
         this.showDialog(true);
     }
 
-    /** @hidden */
+    /** @ignore */
     dialogApprove(): void {
         this.onItemClick(this.inputText);
     }
 
-    /** @hidden */
+    /** @ignore */
     dialogDismiss(): void {
         this.showDialog(false);
     }
 
-    /** @hidden */
+    /** @ignore */
     showDialog(isOpen: boolean): void {
         if (this.isOpen !== isOpen) {
             this.isOpen = isOpen;
@@ -633,7 +633,7 @@ export class SearchFieldComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     closeSuggestionMenu(focus = true): void {
         if (!this._suggestionOverlayRef) {
             return;
@@ -645,7 +645,7 @@ export class SearchFieldComponent
         this._showDropdown = false;
     }
 
-    /** @hidden */
+    /** @ignore */
     clearTextInput(): void {
         this.inputText = '';
         this._cd.detectChanges();
@@ -659,7 +659,7 @@ export class SearchFieldComponent
         this.focus();
     }
 
-    /** @hidden */
+    /** @ignore */
     _createSuggetionOverlayConfig(): OverlayConfig {
         const positions: ConnectedPosition[] = [
             {
@@ -689,7 +689,7 @@ export class SearchFieldComponent
         });
     }
 
-    /** @hidden */
+    /** @ignore */
     _initializeDataSource(dataSource: SearchFieldDataSource<any>): void {
         this._dataSourceChanged$.next();
         dataSource
@@ -702,7 +702,7 @@ export class SearchFieldComponent
     }
 
     /**
-     * @hidden return count for matching suggestion with input text
+     * @ignore return count for matching suggestion with input text
      * @returns number
      */
     private _getSuggestionsLength(): number {
@@ -718,7 +718,7 @@ export class SearchFieldComponent
         return count;
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _updateSearchAnnouncementText(): Promise<void> {
         // create search suggestion message with count.
         const suggestionCount = this._getSuggestionsLength();
@@ -735,7 +735,7 @@ export class SearchFieldComponent
         }
     }
 
-    /** @hidden */
+    /** @ignore */
     private async _setUpMobileMode(): Promise<void> {
         const injector = Injector.create({
             providers: [{ provide: SEARCH_FIELD_COMPONENT, useValue: this }],
@@ -757,7 +757,7 @@ export class SearchFieldComponent
     standalone: true
 })
 export class SuggestionMatchesPipe implements PipeTransform {
-    /** @hidden */
+    /** @ignore */
     transform(values: string[] | null, match: string, mobile = false): string[] {
         if (!values) {
             values = [];
