@@ -58,6 +58,7 @@ import { DefineTabComponent } from '../components/define-tab/define-tab.componen
 import { SelectTabComponent } from '../components/select-tab/select-tab.component';
 import { VhdFilterComponent } from '../components/value-help-dialog-filter/value-help-dialog-filter.component';
 import { defaultConditionDisplayFn } from '../constans/condition-display.function';
+import { ValueHelpColumnDefDirective } from '../directives/value-help-column-def.directive';
 import {
     ArrayValueHelpDialogDataSource,
     BaseEntity,
@@ -71,6 +72,7 @@ import {
     VhdValue,
     VhdValueChangeEvent
 } from '../models';
+import { VhdComponent } from '../models/vhd-component.model';
 
 export type FdpValueHelpDialogDataSource<T> =
     | ValueHelpDialogDataSource<T>
@@ -85,6 +87,12 @@ let vhiUniqueId = 0;
     styleUrl: './value-help-dialog.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: VhdComponent,
+            useExisting: PlatformValueHelpDialogComponent
+        }
+    ],
     standalone: true,
     imports: [
         DialogComponent,
@@ -132,7 +140,7 @@ let vhiUniqueId = 0;
         NgForOf
     ]
 })
-export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnDestroy {
+export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent implements OnChanges, OnDestroy {
     /** Id of the popover */
     @Input()
     id: string = 'fdp-vhd-' + vhiUniqueId++;
@@ -263,6 +271,10 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     @ContentChildren(VhdFilterComponent)
     filters: QueryList<VhdFilterComponent>;
 
+    /** Column definitions. */
+    @ContentChildren(ValueHelpColumnDefDirective)
+    columnDef: QueryList<ValueHelpColumnDefDirective>;
+
     /** @hidden Internal container for dialog */
     @ViewChild('container', { read: TemplateRef })
     dialogContainer: TemplateRef<any>;
@@ -341,6 +353,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         private readonly _dialogService: DialogService,
         @Optional() private readonly _rtlService: RtlService
     ) {
+        super();
         /** Default display function for define conditions */
         if (!this.conditionDisplayFn || typeof this.conditionDisplayFn !== 'function') {
             this.conditionDisplayFn = defaultConditionDisplayFn;
@@ -485,7 +498,9 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
 
         if (!onlySearch) {
             this._displayedFilters
-                .filter(({ value }) => !!value && value.trim().length)
+                .filter(({ value }) =>
+                    !!value && typeof value === 'string' ? value.trim().length : value !== undefined
+                )
                 .forEach((e) => nonEmptyFilters.set(e.key, e.value));
         }
 

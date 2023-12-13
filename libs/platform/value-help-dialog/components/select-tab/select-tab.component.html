@@ -82,7 +82,18 @@
                     </td>
                     @for (filter of _tableFilters.main; track filter; let rowIndex = $index) {
                         <td fd-table-cell [attr.aria-rowindex]="rowIndex">
-                            {{ row[filter.key] || '' }}
+                            @if (_columnDefMap.get(filter.key); as columnDef) {
+                                <ng-template
+                                    [ngTemplateOutlet]="columnDef.templateRef"
+                                    [ngTemplateOutletContext]="{
+                                        $implicit: row,
+                                        key: filter.key,
+                                        value: row[filter.key] || ''
+                                    }"
+                                ></ng-template>
+                            } @else {
+                                {{ row[filter.key] || '' }}
+                            }
                         </td>
                     }
                 </tr>

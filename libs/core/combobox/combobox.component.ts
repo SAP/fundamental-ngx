@@ -739,7 +739,7 @@ export class ComboboxComponent<T = any>
 
     /** @hidden */
     private _defaultDisplay(str: any): string {
-        return str;
+        return `${str}`;
     }
 
     /** @hidden */
