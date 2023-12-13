@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Odabirima navigirajte strelicama Gore i Dolje.',
         escapeNavigateTokens:
             'Za izlaz iz polja unosa pritisnite gumb Escape i upotrijebite gumbe sa strelicama Lijevo i Desno za navigiranje kroz odabrane mogućnosti.',
-        tokensCountText: 'Sadrži {length, plural, =0 {no token} =1 {1 token} ostali {# tokens} }.'
+        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
         mainNavigation: 'Glavna navigacija',
@@ -237,7 +237,7 @@ export default {
         messagesTeamRemoved: 'Uklonjen je 1 tim',
         messagesErrorBuildGraph: 'Došlo je do pogreške pri pokušaju izrade grafikona. Provjerite početne podatke.',
         messagesUndoAction: 'Poništi',
-        nodeMembersCount: 'Broj članova: {{count}}',
+        nodeMembersCount: 'Broj članova: {count}',
         nodeVariousTeams: 'Razni timovi',
         nodeStatusDueToday: 'Rok je danas',
         nodeStatusDueInXDays: 'Rok je za {count} dana',
@@ -262,7 +262,7 @@ export default {
         toolbarEditApprover: 'Uredi odobravatelja',
         watchersInputPlaceholder: 'Pretraži ovdje..',
         userListSelectedItemsCountSingular: 'Odabrana je 1 stavka',
-        userListSelectedItemsCountPlural: 'Broj odabranih stavki: {{count}}',
+        userListSelectedItemsCountPlural: 'Broj odabranih stavki: {count}',
         addNodeButtonTitle: 'Dodaj čvor',
         nodeMenuButtonTitle: 'Izbornik',
         statusApproved: 'odobreno',

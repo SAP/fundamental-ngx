@@ -237,7 +237,7 @@ export default {
         messagesTeamRemoved: '1 equipe foi removida',
         messagesErrorBuildGraph: 'Ocorreu um erro ao tentar criar o gráfico. Verifique os dados iniciais.',
         messagesUndoAction: 'Desfazer',
-        nodeMembersCount: '{{count}} membros',
+        nodeMembersCount: '{count} membros',
         nodeVariousTeams: 'Várias equipes',
         nodeStatusDueToday: 'Vencimento hoje',
         nodeStatusDueInXDays: 'Vencimento em {count} dias',
