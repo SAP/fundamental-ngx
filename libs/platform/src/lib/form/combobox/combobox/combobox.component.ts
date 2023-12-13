@@ -192,7 +192,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
             if (this.lookupKey) {
                 return this.lookupValue(this._selectedElement) === this.lookupValue(selectedItem);
             } else {
-                return selectedItem === this._selectedElement;
+                return selectedItem.value === this._selectedElement.value;
             }
         } else {
             return false;
