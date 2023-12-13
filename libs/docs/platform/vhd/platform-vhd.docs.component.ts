@@ -25,6 +25,9 @@ const loadingVhdTs = 'platform-vhd-loading-example.component.ts';
 const initialLoadingVhdHtml = 'initial-loading/platform-vhd-initial-loading-example.component.html';
 const initialLoadingVhdTs = 'initial-loading/platform-vhd-initial-loading-example.component.ts';
 
+const customColumnVhdHtml = 'column-template/platform-vhd-column-template-example.component.html';
+const customColumnVhdTs = 'column-template/platform-vhd-column-template-example.component.ts';
+
 @Component({
     selector: 'app-platform-vhd',
     templateUrl: './platform-vhd.docs.component.html'
@@ -139,6 +142,20 @@ export class PlatformVhdDocsComponent {
             component: 'PlatformVhdInitialLoadingExampleComponent',
             code: getAssetFromModuleAssets(initialLoadingVhdTs),
             fileName: 'platform-vhd-initial-loading-example'
+        }
+    ];
+
+    customColumnValueHelpDialog: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(customColumnVhdHtml),
+            fileName: 'platform-vhd-column-template-example'
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformVhdColumnTemplateExampleComponent',
+            code: getAssetFromModuleAssets(customColumnVhdTs),
+            fileName: 'platform-vhd-column-template-example'
         }
     ];
 }

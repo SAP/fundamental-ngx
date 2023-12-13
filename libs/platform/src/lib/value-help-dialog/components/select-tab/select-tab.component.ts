@@ -1,19 +1,24 @@
 import {
-    Component,
-    Input,
-    Output,
-    EventEmitter,
-    ChangeDetectionStrategy,
-    SimpleChanges,
-    ViewEncapsulation,
-    OnChanges,
     AfterViewInit,
-    ViewChild
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    Output,
+    SimpleChanges,
+    ViewChild,
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
-
-import { InfiniteScrollDirective } from '@fundamental-ngx/core/infinite-scroll';
-import { VhdFilter, VdhTableSelection } from '../../models';
 import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
+import { VhdFilter } from '../../models/vhd-filter.model';
+import { VdhTableSelection } from '../../models/vhd-table-selection.type';
+import { InfiniteScrollDirective } from '@fundamental-ngx/core/infinite-scroll';
+import { ValueHelpColumnDefDirective } from '../../directives/value-help-column-def.directive';
+import { VhdComponent } from '../../models/vhd-component.model';
+import { startWith, takeUntil } from 'rxjs';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 let titleUniqueId = 0;
 
@@ -22,7 +27,8 @@ let titleUniqueId = 0;
     templateUrl: './select-tab.component.html',
     styleUrls: ['./select-tab.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DestroyedService]
 })
 export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, AfterViewInit {
     /** @hidden */
@@ -126,8 +132,24 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
     }
 
     /** @hidden */
+    _columnDefMap = new Map<string, ValueHelpColumnDefDirective>();
+
+    /** @hidden */
+    private readonly _vhd = inject(VhdComponent, { optional: true });
+
+    /** @hidden */
+    private readonly _destroy$ = inject(DestroyedService);
+
+    /** @hidden */
     ngAfterViewInit(): void {
         Promise.resolve(true).then(() => this._checkScrollAndShowMore());
+
+        this._vhd?.columnDef.changes.pipe(startWith(null), takeUntil(this._destroy$)).subscribe(() => {
+            this._columnDefMap.clear();
+            this._vhd?.columnDef.forEach((item) => {
+                this._columnDefMap.set(item.column, item);
+            });
+        });
     }
 
     /** @hidden  */

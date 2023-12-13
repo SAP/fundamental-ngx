@@ -81,7 +81,19 @@
                         *ngFor="let filter of _tableFilters.main; let rowIndex = index"
                         [attr.aria-rowindex]="rowIndex"
                     >
-                        {{ row[filter.key] || '' }}
+                        <ng-container *ngIf="_columnDefMap.get(filter.key) as columnDef; else defaultColumnRenderer">
+                            <ng-template
+                                [ngTemplateOutlet]="columnDef.templateRef"
+                                [ngTemplateOutletContext]="{
+                                    $implicit: row,
+                                    key: filter.key,
+                                    value: row[filter.key] || ''
+                                }"
+                            ></ng-template>
+                        </ng-container>
+                        <ng-template #defaultColumnRenderer>
+                            {{ row[filter.key] || '' }}
+                        </ng-template>
                     </td>
                 </tr>
 

@@ -31,6 +31,9 @@ import {
 import { PlatformVhdLoadingExampleComponent } from './examples/platform-vhd-loading-example.component';
 import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 import { PlatformVhdInitialLoadingExampleComponent } from './examples/initial-loading/platform-vhd-initial-loading-example.component';
+import { PlatformVhdColumnTemplateExampleComponent } from './examples/column-template/platform-vhd-column-template-example.component';
+import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 const routes: Routes = [
     {
@@ -55,7 +58,9 @@ const routes: Routes = [
         TokenModule,
         ToolbarModule,
         PlatformValueHelpDialogModule,
-        CheckboxModule
+        CheckboxModule,
+        ComboboxModule,
+        SelectModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -68,7 +73,8 @@ const routes: Routes = [
         PlatformVhdInputExampleComponent,
         PlatformVhdMobileExampleComponent,
         PlatformVhdStrategyLabelExampleComponent,
-        PlatformVhdInitialLoadingExampleComponent
+        PlatformVhdInitialLoadingExampleComponent,
+        PlatformVhdColumnTemplateExampleComponent
     ],
     providers: [
         platformContentDensityModuleDeprecationsProvider('fdp-value-help-dialog'),
