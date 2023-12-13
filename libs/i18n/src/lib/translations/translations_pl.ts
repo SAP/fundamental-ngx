@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Nawiguj po wyborach za pomocą strzałek w górę i w dół.',
         escapeNavigateTokens:
             'Naciśnij klawisz escape, aby opuścić pole do wprowadzania i użyj klawiszy strzałek w lewo i w prawo, aby poruszać się po wybranych opcjach.',
-        tokensCountText: 'Zawiera {length, plural, =0 {no token} =1 {1 token} inne {# tokens} }.'
+        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
         mainNavigation: 'Nawigacja główna',

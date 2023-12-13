@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Navigasi pemilihan dengan anak panah atas dan bawah.',
         escapeNavigateTokens:
             'Tekan kekunci keluar untuk keluar daripada medan input dan gunakan kekunci anak panah kiri dan kanan untuk navigasi melalui pilihan yang dipilih.',
-        tokensCountText: 'Mengandungi {length, plural, =0 {no token} =1 {1 token} lain-lain {# tokens} }.'
+        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
         mainNavigation: 'Navigasi Utama',

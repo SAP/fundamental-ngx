@@ -237,7 +237,7 @@ export default {
         messagesTeamRemoved: '1 team er fjernet',
         messagesErrorBuildGraph: 'Der opstod en fejl under forsøget på at oprette grafen. Kontrollér startdataene.',
         messagesUndoAction: 'Fortryd',
-        nodeMembersCount: '{{count}} medlemmer',
+        nodeMembersCount: '{count} medlemmer',
         nodeVariousTeams: 'Forskellige teams',
         nodeStatusDueToday: 'Forfalder i dag',
         nodeStatusDueInXDays: 'Forfalder om {count} dage',

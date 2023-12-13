@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Naviger utvalg med oppover og nedover pilene.',
         escapeNavigateTokens:
             'Trykk på Escape for å avslutte inndatafeltet og bruk venstre og høyre piltastene til å navigere gjennom de valgte alternativene.',
-        tokensCountText: 'Inneholder {length, plural, =0 {no token} =1 {1 token} andre {# tokens} }.'
+        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
         mainNavigation: 'Hovednavigering',
@@ -238,7 +238,7 @@ export default {
         messagesErrorBuildGraph:
             'Det oppstod en feil ved forsøk på å bygge grafen. Kontroller de opprinnelige dataene.',
         messagesUndoAction: 'Angre',
-        nodeMembersCount: '{{count}} medlemmer',
+        nodeMembersCount: '{count} medlemmer',
         nodeVariousTeams: 'Forskjellige team',
         nodeStatusDueToday: 'Forfaller i dag',
         nodeStatusDueInXDays: 'Forfaller om {count} dager',
@@ -263,7 +263,7 @@ export default {
         toolbarEditApprover: 'Rediger godkjenner',
         watchersInputPlaceholder: 'Søk her...',
         userListSelectedItemsCountSingular: '1 element valgt',
-        userListSelectedItemsCountPlural: '{{count}} elementer valgt',
+        userListSelectedItemsCountPlural: '{count} elementer valgt',
         addNodeButtonTitle: 'Legg til knutepunkt',
         nodeMenuButtonTitle: 'Meny',
         statusApproved: 'godkjent',
