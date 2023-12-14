@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { FdLanguage, FdLanguageKeyArgs } from '../models/lang';
 import { PluralizationSet1 } from './pluralization/set1';
 
@@ -212,8 +213,7 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         periodLabel: 'Период',
         decreasePeriodLabel: 'Уменьшить период',
         navigationInstruction:
-            'Для перемещения между элементами в этом списке используйте стрелку вверх или вниз. ' +
-            'Для переключения между списками используйте стрелку влево или вправо.'
+            'Для перемещения между элементами в этом списке используйте стрелку вверх или вниз. Для переключения между списками используйте стрелку влево или вправо.'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Поле ввода времени',
