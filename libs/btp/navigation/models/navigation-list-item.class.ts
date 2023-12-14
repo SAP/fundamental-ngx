@@ -36,6 +36,9 @@ export abstract class FdbNavigationListItem implements FocusableOption {
     marker: Nullable<NavigationListItemMarkerDirective>;
 
     /** @hidden */
+    showPhoneSubmenu$ = signal(false);
+
+    /** @hidden */
     readonly listItems$ = signal<FdbNavigationListItem[]>([]);
 
     /** Whether item has child items. */

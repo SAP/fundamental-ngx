@@ -176,8 +176,8 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
     }
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if ('withKeyboardNavigation' in changes) {
+    ngOnChanges(changes?: SimpleChanges): void {
+        if (changes && 'withKeyboardNavigation' in changes) {
             this._setupKeyManager();
         }
     }

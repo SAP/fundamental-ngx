@@ -1,6 +1,9 @@
 @if (glyph) {
     <fd-icon [glyph]="glyph" class="fd-navigation__icon" [attr.role]="'presentation'" [ariaHidden]="true"></fd-icon>
 }
+@if (_listItemComponent?.showPhoneSubmenu$()) {
+    <span class="fd-navigation__back-indicator" role="presentation" aria-hidden="true"></span>
+}
 <span class="fd-navigation__text">
     <ng-content></ng-content>
 </span>

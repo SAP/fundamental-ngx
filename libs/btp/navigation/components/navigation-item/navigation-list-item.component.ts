@@ -5,15 +5,18 @@ import { CommonModule, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
     ContentChildren,
     DestroyRef,
     Directive,
     ElementRef,
+    EventEmitter,
     Input,
     NgZone,
     OnDestroy,
+    Output,
     QueryList,
     TemplateRef,
     ViewChild,
@@ -157,6 +160,10 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         return this.selected$();
     }
 
+    /** Event emitted when the child navigation popover is toggled. */
+    @Output()
+    childNavigationPopoverToggled = new EventEmitter<boolean>();
+
     /** @hidden */
     @ContentChildren(FdbNavigationListItem, { descendants: false })
     listItems: QueryList<FdbNavigationListItem>;
@@ -266,6 +273,9 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     }
 
     /** @hidden */
+    menu = false;
+
+    /** @hidden */
     private readonly _home$ = signal(false);
 
     /** @hidden */
@@ -312,7 +322,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    constructor() {
+    constructor(private _cdr: ChangeDetectorRef) {
         super();
         effect(() => {
             if (this.popoverOpen$()) {
@@ -351,6 +361,13 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     /** @hidden */
     ngOnDestroy(): void {
         this._keyManager?.destroy();
+    }
+
+    /** @hidden */
+    _itemClicked(): void {
+        if (this.showPhoneSubmenu$() && this.hasChildren$()) {
+            this.childNavigationPopoverToggled.emit(false);
+        }
     }
 
     /** @hidden */
@@ -501,6 +518,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     /** @hidden */
     _onPopoverOpen(isOpen: boolean, popover: PopoverComponent): void {
         this.popoverOpen$.set(isOpen);
+        this.childNavigationPopoverToggled.emit(isOpen);
         if (!isOpen) {
             return;
         }

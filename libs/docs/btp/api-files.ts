@@ -17,5 +17,6 @@ export const API_FILES = {
         'ToolHeaderLogoDirective'
     ],
     toolLayout: [],
-    searchField: ['SearchFieldComponent']
+    searchField: ['SearchFieldComponent'],
+    userMenu: ['UserMenuComponent']
 } as const;

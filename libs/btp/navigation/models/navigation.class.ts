@@ -5,6 +5,7 @@ import { FdbNavigationListItem } from './navigation-list-item.class';
 
 export abstract class FdbNavigation {
     abstract classList$: Signal<string[]>;
+    abstract isUser$: Signal<boolean>;
     abstract isSnapped$: Signal<boolean>;
     abstract showMoreButton$: WritableSignal<Nullable<FdbNavigationListItem>>;
     abstract _navigationItemRenderer: Signal<any>;

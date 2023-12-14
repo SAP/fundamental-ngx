@@ -38,7 +38,8 @@ const FD_NAVIGATION_OVERFLOW_ITEM_CLASS = 'fd-navigation__container--hidden-over
     encapsulation: ViewEncapsulation.None,
     // eslint-disable-next-line @angular-eslint/no-host-metadata-property
     host: {
-        class: 'fd-navigation__container fd-navigation__container--top',
+        '[class.fd-navigation__container]': '_showPhoneSubmenu() === false',
+        '[class.fd-navigation__container--top]': '_showPhoneSubmenu() === false',
         '[style.flex-grow]': '1'
     },
     providers: [
@@ -139,13 +140,28 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
      * Calculates available space to fit the items.
      * Determines whether to show the "More" button if available space is not enough to fit all list items.
      */
-    private _calculateVisibleItems(): void {
+    _calculateVisibleItems(): void {
         if (this._calculationInProgress) {
             return;
         }
         const items = [...this.listItems$()];
-        items.forEach((item) => item.hidden$.set(false));
-        this.visibleItems$.set([...items]);
+        const submenu = items.find((item) => item.showPhoneSubmenu$() === true);
+        const hiddenItems: FdbNavigationListItem[] = [];
+        if (submenu) {
+            items.forEach((item) => {
+                if (item === submenu) {
+                    this.visibleItems$.set([item]);
+                    item.hidden$.set(false);
+                } else {
+                    hiddenItems.push(item);
+                    item.hidden$.set(true);
+                }
+            });
+            this.hiddenItems$.set(hiddenItems);
+        } else {
+            items.forEach((item) => item.hidden$.set(false));
+            this.visibleItems$.set([...items]);
+        }
         this._cdr.detectChanges();
         if (!this.navigation.isSnapped$()) {
             this._showMoreButton$.set(false);
@@ -171,8 +187,6 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
         this._cdr.detectChanges();
         availableSpace = availableSpace - (this._moreContainer?.nativeElement.clientHeight || 0);
 
-        const hiddenItems: FdbNavigationListItem[] = [];
-
         // We are going from the bottom to the top and checking whether the available space is enough to fit the items.
         while (availableSpace < 0 && items.length > 0) {
             const item = items.pop();
@@ -196,5 +210,10 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
         this.navigation.showMoreButton$.set(this._showMoreButton);
 
         this._calculationInProgress = false;
+    }
+
+    /** @hidden */
+    _showPhoneSubmenu(): boolean {
+        return [...this.listItems$()].find((item) => item.showPhoneSubmenu$() === true) === undefined;
     }
 }

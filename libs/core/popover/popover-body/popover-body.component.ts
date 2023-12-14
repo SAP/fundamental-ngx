@@ -67,6 +67,10 @@ export class PopoverBodyComponent implements AfterViewInit {
     @ViewChild(ScrollbarDirective)
     _scrollbar: ScrollbarDirective;
 
+    /** @hidden */
+    @ViewChild('popoverBodyDiv', { read: ElementRef })
+    _popoverBodyDiv: ElementRef;
+
     /** Whether to wrap content with fd-scrollbar directive. */
     _disableScrollbar = false;
 

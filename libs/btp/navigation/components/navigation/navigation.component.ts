@@ -99,7 +99,12 @@ export class NavigationComponent
      * Navigation type.
      */
     @Input()
-    type: FdbNavigationType = 'vertical';
+    set type(value: FdbNavigationType) {
+        this.type$.set(value);
+    }
+    get type(): FdbNavigationType {
+        return this.type$();
+    }
 
     /** @hidden */
     @ContentChild(NavigationListItemRefDirective)
@@ -117,9 +122,19 @@ export class NavigationComponent
     readonly state$ = signal<FdbNavigationState>('expanded');
 
     /**
+     * Type signal.
+     */
+    readonly type$ = signal<FdbNavigationType>('vertical');
+
+    /**
      * Whether the navigation is in snapped mode.
      */
     readonly isSnapped$ = computed(() => this.state$() === 'snapped');
+
+    /**
+     * Whether the navigation is the 'user' type.
+     */
+    readonly isUser$ = computed(() => this.type$() === 'user');
 
     /**
      * Whether to show "More" button. Applicable for `snapped` state only.
@@ -212,7 +227,7 @@ export class NavigationComponent
 
         event.preventDefault();
 
-        this._keyManager.onKeydown(event);
+        this._keyManager?.onKeydown(event);
     }
 
     /** @hidden */
@@ -231,7 +246,7 @@ export class NavigationComponent
         this._keyManager = new FocusKeyManager(this._navigationItems)
             .withVerticalOrientation()
             .skipPredicate((item) => !item.isVisible$() || item.skipNavigation);
-        this._keyManager.setActiveItem(0);
+        this._keyManager?.setActiveItem(0);
         this._viewInited$.set(true);
     }
 
@@ -244,14 +259,14 @@ export class NavigationComponent
      * Returns currently focused list item.
      */
     getActiveItem(): FdbNavigationListItem | null {
-        return this._keyManager.activeItem;
+        return this._keyManager?.activeItem;
     }
 
     /**
      * Sets focused item.
      */
     setActiveItem(item: FdbNavigationListItem): void {
-        this._keyManager.setActiveItem(item);
+        this._keyManager?.setActiveItem(item);
     }
 
     /** Notifies child list items that all popups should be closed. */

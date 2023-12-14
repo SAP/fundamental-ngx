@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+@import 'fundamental-styles/dist/user-menu.css';
+
+// TODO: fix in styles
+.fd-navigation__list--child-items {
+    margin: 0.5rem !important;
+
+    .fd-navigation__list-item:not(:last-child) {
+        margin-bottom: 0.25rem !important;
+    }
+}
+
+.fd-navigation__list-item {
+    gap: 0 !important;
+}
+
+.fd-popover__body {
+    flex-direction: column !important;
+}

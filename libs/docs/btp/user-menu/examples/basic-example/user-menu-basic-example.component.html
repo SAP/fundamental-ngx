@@ -1,0 +1,43 @@
+<p>Set visual mode</p>
+<fd-segmented-button [(ngModel)]="mode">
+    <button fd-button label="Desktop" value="desktop"></button>
+    <button fd-button label="Tablet" value="tablet"></button>
+    <button fd-button label="Mobile" value="phone"></button>
+</fd-segmented-button>
+<p>&nbsp;</p>
+
+<fdb-user-menu userGlyph="customer" userName="Kevin Miller" userRole="Design Expert" (signOut)="signOutClicked($event)">
+    <fdb-navigation [mode]="mode" homeSeparator="false" [style.width]="'fit-content'" [style.height.px]="400">
+        <fdb-navigation-content-start>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="person-placeholder">User Account</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="action-settings">Settings</a>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>Personalization</a>
+                </fdb-navigation-list-item>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/btp/navigation']"
+                        >Users and Permissions</a
+                    >
+                </fdb-navigation-list-item>
+                <fdb-navigation-list-item>
+                    <a fdb-navigation-link *fdbNavigationLinkRef>Product Settings</a>
+                </fdb-navigation-list-item>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="product">Product Specific</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="flag">Product Specific</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="card">Product Specific</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef glyph="card">Legal Information</a>
+            </fdb-navigation-list-item>
+        </fdb-navigation-content-start>
+    </fdb-navigation>
+</fdb-user-menu>

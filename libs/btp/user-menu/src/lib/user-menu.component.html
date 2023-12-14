@@ -1,0 +1,36 @@
+<fd-popover (isOpenChange)="popoverOpenChange($event)" [focusTrapped]="true" [focusAutoCapture]="true">
+    <fd-popover-control>
+        <fd-avatar size="xs" [glyph]="userGlyph" [image]="image" [circle]="true" [clickable]="true"></fd-avatar>
+    </fd-popover-control>
+    <fd-popover-body class="fd-user-menu fd-user-menu--tool-header" #popoverBody>
+        <div class="fd-user-menu__body">
+            @if (!showPhoneSubmenu$()) {
+                <div class="fd-user-menu__header">
+                    <fd-avatar
+                        class="fd-user-menu__avatar"
+                        [glyph]="userGlyph"
+                        [image]="image"
+                        [circle]="true"
+                    ></fd-avatar>
+                </div>
+                <div class="fd-user-menu__subheader">
+                    <div class="fd-user-menu__user-name">{{ userName }}</div>
+                    <div class="fd-user-menu__user-role">{{ userRole }}</div>
+                </div>
+            }
+
+            <div class="fd-user-menu__navigation-menu">
+                <ng-content select="fdb-navigation"></ng-content>
+            </div>
+        </div>
+        @if (!showPhoneSubmenu$()) {
+            <div class="fd-user-menu__footer">
+                <button
+                    fd-button
+                    (click)="signOutClicked($event)"
+                    [label]="'btpUserMenu.signOutButtonLabel' | fdTranslate"
+                ></button>
+            </div>
+        }
+    </fd-popover-body>
+</fd-popover>

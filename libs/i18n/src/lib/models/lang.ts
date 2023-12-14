@@ -731,4 +731,7 @@ export interface FdLanguage {
     btpToolHeader: {
         menuButtonAriaLabel: FdLanguageKey;
     };
+    btpUserMenu: {
+        signOutButtonLabel: FdLanguageKey;
+    };
 }

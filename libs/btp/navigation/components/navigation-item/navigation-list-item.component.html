@@ -7,11 +7,14 @@
             [class.fd-navigation__item--child]="normalizedLevel$() > 2"
             [class.fd-navigation__item--overflow]="isOverflow$()"
             [class.fd-navigation__item--with-expander]="!!link$()?.routerLink && hasChildren$()"
+            [class.fd-navigation__item--title]="showPhoneSubmenu$() && hasChildren$()"
             [attr.aria-level]="level$()"
             [attr.aria-selected]="isActiveAttr$()"
             [attr.aria-expanded]="expandedAttr$()"
             [attr.normalized-level]="normalizedLevel$()"
             (focusin)="_focusInHandler()"
+            (click)="_itemClicked()"
+            (keydown.enter)="_itemClicked()"
             fdbNavigationListItemMarker
             #itemContainer
         >
@@ -34,11 +37,14 @@
             <ng-template [ngTemplateOutlet]="listRenderer"></ng-template>
         }
     }
+    @if (showPhoneSubmenu$()) {
+        <ng-template [ngTemplateOutlet]="wrapperRenderer" [ngTemplateOutletContext]="{ $implicit: true }"></ng-template>
+    }
 </ng-template>
 <!-- Snapped navigation list item renderer. Implicit context points to the popover trigger element. -->
 <ng-template #snappedNavigationItemRenderer let-itemContainer>
     <ng-template [ngTemplateOutlet]="linkRenderer" [ngTemplateOutletContext]="{ $implicit: false }"></ng-template>
-    @if (!isOverflow$()) {
+    @if (!isOverflow$() && !showPhoneSubmenu$()) {
         <fd-popover
             #popover
             [noArrow]="false"
@@ -91,7 +97,7 @@
 <!-- Generic list renderer. Implicit context defines whether the inner list should handle keyboard navigation by its own. -->
 <ng-template #wrapperRenderer let-keyboardNavigation>
     <div class="fd-navigation__list-wrapper">
-        @if (navigation.isSnapped$() && !isOverflow$()) {
+        @if (navigation.isSnapped$() && !navigation.isUser$() && !isOverflow$()) {
             <!-- If opener link itself is active, project aria-selected attribute to link repeater too. -->
             <div
                 class="fd-navigation__item fd-navigation__item--title fd-navigation__item--child"

@@ -39,6 +39,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('@fundamental-ngx/docs/btp/navigation').then(configureBtpRoutes)
             },
             {
+                path: 'search-field',
+                loadChildren: () => import('@fundamental-ngx/docs/btp/search-field').then(configureBtpRoutes)
+            },
+            {
                 path: 'tool-header',
                 loadChildren: () => import('@fundamental-ngx/docs/btp/tool-header').then(configureBtpRoutes)
             },
@@ -47,8 +51,8 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('@fundamental-ngx/docs/btp/tool-layout').then(configureBtpRoutes)
             },
             {
-                path: 'search-field',
-                loadChildren: () => import('@fundamental-ngx/docs/btp/search-field').then(configureBtpRoutes)
+                path: 'user-menu',
+                loadChildren: () => import('@fundamental-ngx/docs/btp/user-menu').then(configureBtpRoutes)
             }
         ]
     }
