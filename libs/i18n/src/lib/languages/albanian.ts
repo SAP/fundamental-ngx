@@ -1,8 +1,6 @@
+/* eslint-disable */
 import { FdLanguage } from '../models/lang';
 
-/**
- * Default set of translations of Fundamental UI libarary for Albanian language
- */
 export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
     coreCalendar: {
         yearSelectionLabel: 'Zgjidhni vitin',
@@ -27,7 +25,7 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
     },
     coreMultiComboBox: {
         multiComboBoxAriaLabel: 'Kutia e kombinuar me shumë vlera',
-        selectAllLabel: 'Selekto të gjitha ({{ selectedItems }} nga {{ totalItems }})'
+        selectAllLabel: 'Selekto të gjitha ({{selectedItems}} nga {{totalItems}})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Shko te artikulli i mëparshëm',
@@ -50,117 +48,103 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         datetimeOkLabel: 'Ok',
         datetimeCancelLabel: 'Anulo'
     },
-    coreFeedListItem: {
-        moreLabel: 'Më shumë',
-        lessLabel: 'Më pak'
-    },
+    coreFeedListItem: { moreLabel: 'Më shumë', lessLabel: 'Më pak' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Anulo',
-        listItemStatusAriaLabel: 'Artikulli ka status. Statusi: {{ status }}.',
-        listItemCounterAriaLabel: 'Artikulli ka {{ count }} nënartikuj.',
+        listItemStatusAriaLabel: 'Artikulli ka status. Statusi: {{status}}.',
+        listItemCounterAriaLabel: 'Artikulli ka {{count}} nënartikuj.',
         listItemButtonDetailsTitle: 'Detaje',
         listItemButtonDeleteTitle: 'Fshi',
         listItemStatusContainsErrors: 'Përmban gabime.',
         listItemStatusLocked: 'I kyçur',
         listItemStatusDraft: 'Draft'
     },
-    coreMessageStrip: {
-        dismissLabel: 'Largoje'
-    },
+    coreMessageStrip: { dismissLabel: 'Largoje' },
     coreMultiInput: {
         multiInputAriaLabel: 'Multi Value Input',
         noResults: 'No results.',
         navigateSelectionsWithArrows: 'Navigate selections with the up and down arrows.',
         countListResultsSingular: '1 artikull i listës së rezultateve.',
-        countListResultsPlural: '{{ count }} artikujt e listës së rezultateve.',
+        countListResultsPlural: '{{count}} artikujt e listës së rezultateve.',
         escapeNavigateTokens:
             'Press escape to exit the input field and use the left and right arrow keys to navigate through the selected options.',
-        tokensCountText: ({ length }) => `Contains ${length || 'no'} token${length === 1 ? '' : 's'}.`
+        tokensCountText: (params) => {
+            return `Contains ${(() => {
+                if (params['length'] == 0) {
+                    return `no token`;
+                }
+                if (params['length'] == 1) {
+                    return `1 token`;
+                } else {
+                    return `${params['length']} tokens`;
+                }
+            })()}.`;
+        }
     },
-    coreNavigation: {
-        mainNavigation: 'Main Navigation',
-        navigationPath: 'Navigation Path'
-    },
+    coreNavigation: { mainNavigation: 'Main Navigation', navigationPath: 'Navigation Path' },
     coreNestedList: {
-        linkItemAriaLabel: 'Artikulli i pemës {{ itemDetails }}, {{ index }} nga {{ total }}{{ selectedDescription }}'
+        linkItemAriaLabel: 'Artikulli i pemës {{itemDetails}}, {{index}} nga {{total}}{{selectedDescription}}'
     },
     coreOverflowLayout: {
         moreItemsButton: (params) => {
-            const count = params['count'];
-            if (count === 1) {
-                return '1 artikuj më shumë';
-            }
-            return `${count} artikuj të tjerë`;
+            return `${params['count']} artikuj ${(() => {
+                if (params['count'] === 1) {
+                    return `më shumë`;
+                } else {
+                    return `të tjerë`;
+                }
+            })()}`;
         }
     },
     corePagination: {
-        pageLabel: 'Faqja {{ pageNumber }}',
-        currentPageAriaLabel: 'Faqja {{ pageNumber }} është faqja aktuale',
+        pageLabel: 'Faqja {{pageNumber}}',
+        currentPageAriaLabel: 'Faqja {{pageNumber}} është faqja aktuale',
         labelBeforeInputMobile: 'Faqja:',
-        labelAfterInputMobile: 'nga {{ totalCount }}',
-        inputAriaLabel: 'Hyrja e faqes, Faqja aktuale, Faqja {{pageNumber }} nga {{ TotalCount }}',
+        labelAfterInputMobile: 'nga {{totalCount}}',
+        inputAriaLabel: 'Hyrja e faqes, Faqja aktuale, Faqja {{pageNumber}} nga {{TotalCount}}',
         itemsPerPageLabel: 'Rezultatet për faqe:',
         firstLabel: 'Së pari',
         previousLabel: 'E mëparshme',
         nextLabel: 'Tjetër',
         lastLabel: 'E fundit',
         ariaLabel: 'Faqimi',
-        totalResultsLabel: '{{ totalCount }} Rezultate'
+        totalResultsLabel: '{{totalCount}} Rezultate'
     },
-    coreProductSwitch: {
-        ariaLabel: 'Ndërprerësi i produktit'
-    },
-    coreShellbar: {
-        collapsedItemMenuLabel: 'Menyja e artikullit të palosur',
-        cancel: 'Cancel',
-        search: 'Search'
-    },
+    coreProductSwitch: { ariaLabel: 'Ndërprerësi i produktit' },
+    coreShellbar: { collapsedItemMenuLabel: 'Menyja e artikullit të palosur', cancel: 'Cancel', search: 'Search' },
     coreSlider: {
-        singleMinMaxDetails: 'Vlera minimale e rrëshqitësit është {{ min }}, vlera maksimale është {{ max }}',
-        singleValueminDetails: 'Vlera është {{ value }}',
-        singleValuemaxDetails: 'Vlera është  {{ value }}',
-        singleValueNowDetails: 'Vlera aktuale është {{ value }}',
-        multipleHandle1MinMaxDetails: 'Vlera minimale e rrëshqitësit është {{ min }}, vlera maksimale është {{ max }}',
-        multipleHandle1ValueminDetails: 'Vlera është  {{ value }}',
-        multipleHandle1ValuemaxDetails: 'Vlera është {{ value }}',
-        multipleHandle1ValueNowDetails: 'Vlera aktuale është{{ value }}',
-        multipleHandle2MinMaxDetails: 'Vlera minimale e rrëshqitësit është {{ min }}, vlera maksimale është{{ max }}',
-        multipleHandle2ValueminDetails: 'Vlera është {{ value }}',
-        multipleHandle2ValuemaxDetails: 'Vlera është {{ value }}',
-        multipleHandle2ValueNowDetails: 'Vlera aktuale është {{ value }}'
+        singleMinMaxDetails: 'Vlera minimale e rrëshqitësit është {{min}}, vlera maksimale është {{max}}',
+        singleValueminDetails: 'Vlera është {{value}}',
+        singleValuemaxDetails: 'Vlera është  {{value}}',
+        singleValueNowDetails: 'Vlera aktuale është {{value}}',
+        multipleHandle1MinMaxDetails: 'Vlera minimale e rrëshqitësit është {{min}}, vlera maksimale është {{max}}',
+        multipleHandle1ValueminDetails: 'Vlera është  {{value}}',
+        multipleHandle1ValuemaxDetails: 'Vlera është {{value}}',
+        multipleHandle1ValueNowDetails: 'Vlera aktuale është{{value}}',
+        multipleHandle2MinMaxDetails: 'Vlera minimale e rrëshqitësit është {{min}}, vlera maksimale është{{max}}',
+        multipleHandle2ValueminDetails: 'Vlera është {{value}}',
+        multipleHandle2ValuemaxDetails: 'Vlera është {{value}}',
+        multipleHandle2ValueNowDetails: 'Vlera aktuale është {{value}}'
     },
-    coreSplitButton: {
-        expandButtonAriaLabel: 'Më shumë veprime',
-        arialLabel: 'Butoni i ndarjes'
-    },
-    coreSplitter: {
-        paginationItemAriaLabel: 'Seksioni'
-    },
+    coreSplitButton: { expandButtonAriaLabel: 'Më shumë veprime', arialLabel: 'Butoni i ndarjes' },
+    coreSplitter: { paginationItemAriaLabel: 'Seksioni' },
     coreStepInput: {
         incrementButtonTitle: 'Rritje',
         decrementButtonTitle: 'Zvogëlimi',
         ariaRoleDescription: 'Hyrja në hap'
     },
-    coreSwitch: {
-        semanticAcceptLabel: 'Pranoje',
-        semanticDeclineLabel: 'Rënia'
-    },
-    coreTabs: {
-        tabListExpandButtonText: 'Më shumë'
-    },
-    coreText: {
-        moreLabel: 'Më shumë',
-        lessLabel: 'Më pak'
-    },
+    coreSwitch: { semanticAcceptLabel: 'Pranoje', semanticDeclineLabel: 'Rënia' },
+    coreTabs: { tabListExpandButtonText: 'Më shumë' },
+    coreText: { moreLabel: 'Më shumë', lessLabel: 'Më pak' },
     coreTime: {
         componentAriaName: 'Zgjedhësi i kohës',
         increaseHoursLabel: 'Rritja e orëve',
         hrsLabel: 'Hrs',
-        decreaseHoursLabel: 'Ul oraret',
-        increaseMinutesLabel: 'Rritja e minutave',
+        decreaseHoursLabel: 'Decrease hours',
+        increaseMinutesLabel: 'Increase minutes',
         minLabel: 'Min',
-        decreaseMinutesLabel: 'Zvogëlo minutat',
-        increaseSecondsLabel: 'Rritja e sekondave',
+        decreaseMinutesLabel: 'Decrease minutes',
+        increaseSecondsLabel: 'Increase seconds',
         secLabel: 'Sec',
         hoursLabel: 'Hours',
         minutesLabel: 'Minutes',
@@ -172,21 +156,17 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         navigationInstruction:
             'Për të lëvizur midis artikujve në këtë listë, shtypni shigjetën lart ose shigjetën e poshtme. Për të kaluar midis listave, shtypni shigjetën majtas ose shigjetën djathtas.'
     },
-    coreTimePicker: {
-        timePickerInputLabel: 'Hyrja e zgjedhësit të kohës',
-        timePickerButtonLabel: 'Zgjedhësi i hapur'
-    },
-    coreToken: {
-        deleteButtonLabel: 'E fshishme',
-        ariaRoleDescription: 'shenjë'
-    },
+    coreTimePicker: { timePickerInputLabel: 'Hyrja e zgjedhësit të kohës', timePickerButtonLabel: 'Zgjedhësi i hapur' },
+    coreToken: { deleteButtonLabel: 'E fshishme', ariaRoleDescription: 'shenjë' },
     coreTokenizer: {
         moreLabel: (params) => {
-            const count = params['count'];
-            if (count === 1) {
-                return '1 artikuj më shumë';
-            }
-            return `${count} artikuj të tjerë`;
+            return `${params['count']} artikuj ${(() => {
+                if (params['count'] === 1) {
+                    return `më shumë`;
+                } else {
+                    return `të tjerë`;
+                }
+            })()}`;
         },
         tokenizerLabel: 'Tokenizer'
     },
@@ -199,15 +179,9 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         menuCancelAriaLabel: 'Anulo',
         formItemPlaceholder: 'Emri i skedarit'
     },
-    coreWizard: {
-        ariaLabel: 'Magjistar'
-    },
-    coreBreadcrumb: {
-        overflowTitleMore: 'Më shumë'
-    },
-    platformActionBar: {
-        backButtonLabel: 'Kthehu mbrapa'
-    },
+    coreWizard: { ariaLabel: 'Magjistar' },
+    coreBreadcrumb: { overflowTitleMore: 'Më shumë' },
+    platformActionBar: { backButtonLabel: 'Kthehu mbrapa' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Shto një hap',
         nodeMenuButtonTitle: 'Menyja',
@@ -252,11 +226,11 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         messagesErrorBuildGraph:
             'Pati një gabim gjatë përpjekjes për të ndërtuar grafikun. Kontrolloni të dhënat fillestare.',
         messagesUndoAction: 'Zhbëj',
-        nodeMembersCount: '{{ count }} anëtarë',
+        nodeMembersCount: '{{count}} anëtarë',
         nodeVariousTeams: 'Skuadra të ndryshme',
         nodeStatusDueToday: 'Afati kohor është sot',
-        nodeStatusDueInXDays: ' Afati kohor në {{ count }} ditë',
-        nodeStatusXDaysOverdue: '{{ count }} ditë me vonesë',
+        nodeStatusDueInXDays: 'Afati kohor në {{count}} ditë',
+        nodeStatusXDaysOverdue: '{{count}} ditë me vonesë',
         nodeActionAddApproversBefore: 'Shto miratues më parë',
         nodeActionAddApproversAfter: 'Shto miratues më pas',
         nodeActionAddApproversParallel: 'Shto miratues paralel',
@@ -277,15 +251,13 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         toolbarEditApprover: 'Redakto miratuesin',
         watchersInputPlaceholder: 'Kërko këtu..',
         userListSelectedItemsCountSingular: '1 artikull i zgjedhur',
-        userListSelectedItemsCountPlural: '{{ count }} artikujt të zgjedhur',
+        userListSelectedItemsCountPlural: '{{count}} artikujt të zgjedhur',
         statusApproved: 'aprovuar',
         statusRejected: 'refuzuar',
         statusInProgress: 'në zhvillim',
         statusNotStarted: 'nuk ka filluar'
     },
-    platformFeedInput: {
-        userTitle: 'Përdoruesi'
-    },
+    platformFeedInput: { userTitle: 'Përdoruesi' },
     platformVHD: {
         selectionBarLabel: 'Artikujt e zgjedhur dhe të gjendjes',
         selectedAndConditionLabel: 'Artikujt e zgjedhur dhe të gjendjes',
@@ -301,15 +273,15 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         searchHideAdvancedSearchLabel: 'Fshih filtrat',
         searchShowAllAdvancedSearchLabel: 'Shfaq të gjithë filtrat',
         searchHideAllAdvancedSearchLabel: 'Fshih të gjithë filtrat',
-        selectTabDisplayCountLabel: 'Artikujt ({{ count }})',
+        selectTabDisplayCountLabel: 'Artikujt ({{count}})',
         selectTabMoreBtnLabel: 'Më shumë',
-        selectTabCountHiddenA11yLabel: 'përmban {{ rowCount }} rreshta dhe {{ colCount }} kolona',
+        selectTabCountHiddenA11yLabel: 'përmban {{rowCount}} rreshta dhe {{colCount}} kolona',
         selectMobileTabBackBtnTitle: 'Pas',
         selectMobileTabBtnOpenDialogLabel: 'Hap dialogun',
-        selectMobileTabTitle: '{{ title }} skeda',
+        selectMobileTabTitle: '{{title}} skeda',
         selectMobileConditionEmpty: 'Bosh',
         defineConditionTitle: 'Produkt',
-        defineConditionSelectedValueHiddenA11yLabel: 'vlera e zgjedhur {{ value }}',
+        defineConditionSelectedValueHiddenA11yLabel: 'vlera e zgjedhur {{value}}',
         defineConditionConditionsGroupHeaderInclude: 'Përfshij',
         defineConditionConditionsGroupHeaderExclude: 'Përjashto',
         defineConditionFromPlaceholder: 'nga',
@@ -330,14 +302,14 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'bosh',
         defineConditionConditionStrategyLabelNotEqualTo: 'jo e barabartë me',
         defineConditionConditionStrategyLabelNotEmpty: 'jo bosh',
-        defineConditionMaxCountError: 'Shto një vlerë me jo më shumë se {{ count }} karaktere.',
+        defineConditionMaxCountError: 'Shto një vlerë me jo më shumë se {{count}} karaktere.',
         selectTabTitle: 'Zgjidh nga lista',
         searchTableEmptyMessage: 'Përdor kërkimin për të marrë rezultate',
         defineTabTitle: 'Përcaktoni kushtet'
     },
     platformCombobox: {
         countListResultsSingular: '1 artikull i listës së rezultateve',
-        countListResultsPlural: '{{ count }} artikujt e listës së rezultateve'
+        countListResultsPlural: '{{count}} artikujt e listës së rezultateve'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Zgjidhni Opsionet',
@@ -346,37 +318,27 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         mobileShowSelectedItemsButton: 'Shfaq artikujt e zgjedhur'
     },
     platformTextarea: {
-        counterMessageCharactersOverTheLimitSingular: '1 karakter mbi limitin ',
-        counterMessageCharactersOverTheLimitPlural: '{{ count }} karaktere mbi limitin',
+        counterMessageCharactersOverTheLimitSingular: '1 karakter mbi limitin',
+        counterMessageCharactersOverTheLimitPlural: '{{count}} karaktere mbi limitin',
         counterMessageCharactersRemainingSingular: '1 karakter i mbetur',
-        counterMessageCharactersRemainingPlural: '{{ count }} karaktere të mbetur'
+        counterMessageCharactersRemainingPlural: '{{count}} karaktere të mbetur'
     },
-    platformLink: {
-        roleDescriptionWithMedia: 'Media: {{ media }}'
-    },
-    platformList: {
-        loadingAriaLabel: 'duke u ngarkuar'
-    },
-    platformObjectListItem: {
-        detailsActionAriaLabel: 'detaje',
-        deleteActionAriaLabel: 'fshi'
-    },
-    platformStandardListItem: {
-        detailsActionAriaLabel: 'detaje',
-        deleteActionAriaLabel: 'fshi'
-    },
+    platformLink: { roleDescriptionWithMedia: 'Media: {{media}}' },
+    platformList: { loadingAriaLabel: 'duke u ngarkuar' },
+    platformObjectListItem: { detailsActionAriaLabel: 'detaje', deleteActionAriaLabel: 'fshi' },
+    platformStandardListItem: { detailsActionAriaLabel: 'detaje', deleteActionAriaLabel: 'fshi' },
     platformSearchField: {
         clearButtonTitle: 'Pastro',
         submitButtonTitle: 'Kërko',
         searchInputLabel: 'Kërko',
         synchronizeButtonTitle: 'Sinkronizo',
-        searchSuggestionMessage: '{{ count }} sugjerime u gjetën.',
+        searchSuggestionMessage: '{{count}} sugjerime u gjetën.',
         searchSuggestionNavigateMessage: 'përdor shigjetat lart e poshtë për të lundruar'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Kërko',
         submitButtonLabel: 'Shko',
-        filtersButtonLabel: 'Filtrat ({{ filtersCount }})',
+        filtersButtonLabel: 'Filtrat ({{filtersCount}})',
         showFiltersButtonLabel: 'Shfaq filtrat',
         hideFiltersButtonLabel: 'Fshih filtrat',
         defineConditionsRemoveConditionButtonTitle: 'Hiq kushtin',
@@ -433,7 +395,7 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         P13ColumnsDialogSearchPlaceholder: 'Kërko',
         P13ColumnsDialogsShowSelected: 'Shfaq të zgjedhurat',
         P13ColumnsDialogShowAll: 'Shfaq të gjitha',
-        P13ColumnsDialogSelectAll: 'Përzgjidh të gjitha ({{ selectedColumnsCount }}/{{ selectableColumnsCount }})',
+        P13ColumnsDialogSelectAll: 'Përzgjidh të gjitha ({{selectedColumnsCount}}/{{selectableColumnsCount}})',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',
         P13ColumnsDialogCancelBtnLabel: 'Anulo',
         P13ColumnsDialogMoveToTopBtn: 'Kalo në krye',
@@ -454,13 +416,13 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         P13FilterStrategyLabelBefore: 'përpara',
         P13FilterStrategyLabelBeforeOrOn: 'përpara ose mbi',
         P13FilterStrategyLabelNotDefined: 'E papërcaktuar',
-        P13FilterBooleanOptionNotDefined: ' ',
+        P13FilterBooleanOptionNotDefined: '',
         P13FilterBooleanOptionTrue: 'Po',
         P13FilterBooleanOptionFalse: 'Jo',
         P13FilterDialogHeader: 'Filtro sipas',
-        P13FilterDialogIncludePanelTitleWithCount: 'Përfshi ({{ count }})',
+        P13FilterDialogIncludePanelTitleWithCount: 'Përfshi ({{count}})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'Përfshi',
-        P13FilterDialogExcludePanelTitleWithCount: 'Përjashto ({{ count }})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Përjashto ({{count}})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Përjashto',
         P13FilterDialogRemoveFilterBtnTitle: 'Hiq filtrin',
         P13FilterDialoAddFilterBtnTitle: 'Shto filtrin',
@@ -493,7 +455,7 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Not Filtered)',
-        filterDialogFilterByLabel: 'Filtro sipas: {{ filterLabel }}',
+        filterDialogFilterByLabel: 'Filtro sipas: {{filterLabel}}',
         filterDialogFilterTitle: 'Filtro',
         filterDialogFilterBy: 'Filtro sipas',
         filterDialogConfirmBtnLabel: 'OK',
@@ -610,9 +572,7 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         messageFileNameLengthExceededSingular:
             'Emri "{{ fileName }}" ka tejkaluar gjatësinë maksimale të emrit. Gjatësia e lejuar e emrit të skedarit: {{ maxFilenameLength }} karaktere.'
     },
-    platformWizardGenerator: {
-        summarySectionEditStep: 'Redakto'
-    },
+    platformWizardGenerator: { summarySectionEditStep: 'Redakto' },
     platformMessagePopover: {
         allErrors: 'All',
         defaultErrors: {
@@ -646,27 +606,15 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         createdBy: 'Created By',
         removeVariant: 'Remove View',
         search: 'Search',
-        access: {
-            public: 'Public',
-            private: 'Private'
-        }
+        access: { public: 'Public', private: 'Private' }
     },
-    platformSelect: {
-        selectOptionLabel: 'Zgjidhni një opsion'
-    },
+    platformSelect: { selectOptionLabel: 'Zgjidhni një opsion' },
     fnSlider: {
         minMaxDetails: 'Vlera minimale e rrëshqitësit është {{ min }}, vlera maksimale është {{ max }}',
         valueminDetails: 'Vlera është  {{ value }}',
         valuemaxDetails: 'Vlera është  {{ value }}',
         valueNowDetails: 'Vlera aktuale është  {{ value }}'
     },
-    fnSwitch: {
-        semanticAcceptLabel: 'Pranoje',
-        semanticDeclineLabel: 'Rënia'
-    },
-    coreTree: {
-        expand: 'Expand node',
-        collapse: 'Collapse node',
-        noData: 'No data'
-    }
+    fnSwitch: { semanticAcceptLabel: 'Pranoje', semanticDeclineLabel: 'Rënia' },
+    coreTree: { expand: 'Expand node', collapse: 'Collapse node', noData: 'No data' }
 };

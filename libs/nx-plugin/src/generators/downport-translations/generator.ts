@@ -149,6 +149,16 @@ export async function downportTranslationsGenerator(tree: Tree, options: Downpor
         `
         );
     });
+    const indexTsContent = tree
+        .children('libs/i18n/src/lib/languages')
+        .reduce((acc: string[], fileName) => {
+            if (fileName !== 'index.ts' && fileName !== 'pluralization') {
+                acc.push(`export * from './${fileName.replace('.ts', '')}';`);
+            }
+            return acc;
+        }, [])
+        .join('\n');
+    tree.write('libs/i18n/src/lib/languages/index.ts', indexTsContent);
     await formatFiles(tree);
 }
 

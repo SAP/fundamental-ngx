@@ -1,8 +1,6 @@
+/* eslint-disable */
 import { FdLanguage } from '../models/lang';
 
-/**
- * Default set of translations of Fundamental UI library for English language
- */
 export const FD_LANGUAGE_ENGLISH: FdLanguage = {
     coreCalendar: {
         yearSelectionLabel: 'Select year',
@@ -29,10 +27,7 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         multiComboBoxAriaLabel: 'Multi Value Combo Box',
         selectAllLabel: 'Select all ({{selectedItems}} of {{totalItems}})'
     },
-    coreCarousel: {
-        leftNavigationBtnLabel: 'Go to previous item',
-        rightNavigationBtnLabel: 'Go to next item'
-    },
+    coreCarousel: { leftNavigationBtnLabel: 'Go to previous item', rightNavigationBtnLabel: 'Go to next item' },
     coreDatePicker: {
         dateInputLabel: 'Date input',
         dateRangeInputLabel: 'Date range input',
@@ -50,102 +45,82 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         datetimeOkLabel: 'Ok',
         datetimeCancelLabel: 'Cancel'
     },
-    coreFeedListItem: {
-        moreLabel: '{{count}} more',
-        lessLabel: 'Less'
-    },
+    coreFeedListItem: { moreLabel: '{{count}} more', lessLabel: 'Less' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Cancel',
-        listItemStatusAriaLabel: 'Item has status. Status: {{ status }}.',
-        listItemCounterAriaLabel: 'Item has {{ count }} children.',
+        listItemStatusAriaLabel: 'Item has status. Status: {{status}}.',
+        listItemCounterAriaLabel: 'Item has {{count}} children.',
         listItemButtonDetailsTitle: 'Details',
         listItemButtonDeleteTitle: 'Delete',
         listItemStatusContainsErrors: 'Contains errors',
         listItemStatusLocked: 'Locked',
         listItemStatusDraft: 'Draft'
     },
-    coreMessageStrip: {
-        dismissLabel: 'Dismiss'
-    },
+    coreMessageStrip: { dismissLabel: 'Dismiss' },
     coreMultiInput: {
         multiInputAriaLabel: 'Multi Value Input',
         noResults: 'No results.',
         navigateSelectionsWithArrows: 'Navigate selections with the up and down arrows.',
         countListResultsSingular: '1 result list item.',
-        countListResultsPlural: '{{ count }} result list items.',
+        countListResultsPlural: '{{count}} result list items.',
         escapeNavigateTokens:
             'Press escape to exit the input field and use the left and right arrow keys to navigate through the selected options.',
-        tokensCountText: ({ length }) => `Contains ${length || 'no'} token${length === 1 ? '' : 's'}.`
+        tokensCountText: (params) => {
+            return `Contains ${(() => {
+                if (params['length'] == 0) {
+                    return `no token`;
+                }
+                if (params['length'] == 1) {
+                    return `1 token`;
+                } else {
+                    return `${params['length']} tokens`;
+                }
+            })()}.`;
+        }
     },
-    coreNavigation: {
-        mainNavigation: 'Main Navigation',
-        navigationPath: 'Navigation Path'
-    },
-    coreNestedList: {
-        linkItemAriaLabel: 'Tree Item {{ itemDetails }}, {{ index }} of {{ total }}{{ selectedDescription }}'
-    },
-    coreOverflowLayout: {
-        moreItemsButton: '{{ count }} more'
-    },
+    coreNavigation: { mainNavigation: 'Main Navigation', navigationPath: 'Navigation Path' },
+    coreNestedList: { linkItemAriaLabel: 'Tree Item {{itemDetails}}, {{index}} of {{total}}{{selectedDescription}}' },
+    coreOverflowLayout: { moreItemsButton: '{{count}} more' },
     corePagination: {
-        pageLabel: 'Page {{ pageNumber }}',
-        currentPageAriaLabel: 'Page {{ pageNumber }} is current page',
+        pageLabel: 'Page {{pageNumber}}',
+        currentPageAriaLabel: 'Page {{pageNumber}} is current page',
         labelBeforeInputMobile: 'Page:',
-        labelAfterInputMobile: 'of {{ totalCount }}',
-        inputAriaLabel: 'Page input, Current page, Page {{ pageNumber }} of {{ totalCount }}',
+        labelAfterInputMobile: 'of {{totalCount}}',
+        inputAriaLabel: 'Page input, Current page, Page {{pageNumber}} of {{totalCount}}',
         itemsPerPageLabel: 'Results per Page:',
         firstLabel: 'First',
         previousLabel: 'Previous',
         nextLabel: 'Next',
         lastLabel: 'Last',
         ariaLabel: 'Pagination',
-        totalResultsLabel: '{{ totalCount }} Results'
+        totalResultsLabel: '{{totalCount}} Results'
     },
-    coreProductSwitch: {
-        ariaLabel: 'Product Switch'
-    },
-    coreShellbar: {
-        collapsedItemMenuLabel: 'Collapsed Item Menu',
-        cancel: 'Cancel',
-        search: 'Search'
-    },
+    coreProductSwitch: { ariaLabel: 'Product Switch' },
+    coreShellbar: { collapsedItemMenuLabel: 'Collapsed Item Menu', cancel: 'Cancel', search: 'Search' },
     coreSlider: {
-        singleMinMaxDetails: 'Slider minimum value is {{ min }}, maximum value is {{ max }}',
-        singleValueminDetails: 'Value is {{ value }}',
-        singleValuemaxDetails: 'Value is {{ value }}',
-        singleValueNowDetails: 'Current value is {{ value }}',
-        multipleHandle1MinMaxDetails: 'Range slider minimum value is {{ min }}, maximum value is {{ max }}',
-        multipleHandle1ValueminDetails: 'Value is {{ value }}',
-        multipleHandle1ValuemaxDetails: 'Value is {{ value }}',
-        multipleHandle1ValueNowDetails: 'Current value is {{ value }}',
-        multipleHandle2MinMaxDetails: 'Range slider minimum value is {{ min }}, maximum value is {{ max }}',
-        multipleHandle2ValueminDetails: 'Value is {{ value }}',
-        multipleHandle2ValuemaxDetails: 'Value is {{ value }}',
-        multipleHandle2ValueNowDetails: 'Current value is {{ value }}'
+        singleMinMaxDetails: 'Slider minimum value is {{min}}, maximum value is {{max}}',
+        singleValueminDetails: 'Value is {{value}}',
+        singleValuemaxDetails: 'Value is {{value}}',
+        singleValueNowDetails: 'Current value is {{value}}',
+        multipleHandle1MinMaxDetails: 'Range slider minimum value is {{min}}, maximum value is {{max}}',
+        multipleHandle1ValueminDetails: 'Value is {{value}}',
+        multipleHandle1ValuemaxDetails: 'Value is {{value}}',
+        multipleHandle1ValueNowDetails: 'Current value is {{value}}',
+        multipleHandle2MinMaxDetails: 'Range slider minimum value is {{min}}, maximum value is {{max}}',
+        multipleHandle2ValueminDetails: 'Value is {{value}}',
+        multipleHandle2ValuemaxDetails: 'Value is {{value}}',
+        multipleHandle2ValueNowDetails: 'Current value is {{value}}'
     },
-    coreSplitButton: {
-        expandButtonAriaLabel: 'More actions',
-        arialLabel: 'Split button'
-    },
-    coreSplitter: {
-        paginationItemAriaLabel: 'Section'
-    },
+    coreSplitButton: { expandButtonAriaLabel: 'More actions', arialLabel: 'Split button' },
+    coreSplitter: { paginationItemAriaLabel: 'Section' },
     coreStepInput: {
         incrementButtonTitle: 'Increment',
         decrementButtonTitle: 'Decrement',
         ariaRoleDescription: 'Step Input'
     },
-    coreSwitch: {
-        semanticAcceptLabel: 'Accept',
-        semanticDeclineLabel: 'Decline'
-    },
-    coreTabs: {
-        tabListExpandButtonText: 'More'
-    },
-    coreText: {
-        moreLabel: '{{count}} more',
-        lessLabel: 'Less'
-    },
+    coreSwitch: { semanticAcceptLabel: 'Accept', semanticDeclineLabel: 'Decline' },
+    coreTabs: { tabListExpandButtonText: 'More' },
+    coreText: { moreLabel: 'More', lessLabel: 'Less' },
     coreTime: {
         componentAriaName: 'Time picker',
         increaseHoursLabel: 'Increase hours',
@@ -166,18 +141,9 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         navigationInstruction:
             'To move between items in this list, press top arrow or bottom arrow. To switch between lists press left arrow or right arrow.'
     },
-    coreTimePicker: {
-        timePickerInputLabel: 'Time picker input',
-        timePickerButtonLabel: 'Open picker'
-    },
-    coreToken: {
-        deleteButtonLabel: 'Deletable',
-        ariaRoleDescription: 'token'
-    },
-    coreTokenizer: {
-        moreLabel: '{{count}} more',
-        tokenizerLabel: 'Tokenizer'
-    },
+    coreTimePicker: { timePickerInputLabel: 'Time picker input', timePickerButtonLabel: 'Open picker' },
+    coreToken: { deleteButtonLabel: 'Deletable', ariaRoleDescription: 'token' },
+    coreTokenizer: { moreLabel: '{{count}} more', tokenizerLabel: 'Tokenizer' },
     coreUploadCollection: {
         menuOkText: 'Ok',
         menuCancelText: 'Cancel',
@@ -187,15 +153,9 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         menuCancelAriaLabel: 'Cancel',
         formItemPlaceholder: 'Filename'
     },
-    coreWizard: {
-        ariaLabel: 'Wizard'
-    },
-    coreBreadcrumb: {
-        overflowTitleMore: 'More'
-    },
-    platformActionBar: {
-        backButtonLabel: 'Go Back'
-    },
+    coreWizard: { ariaLabel: 'Wizard' },
+    coreBreadcrumb: { overflowTitleMore: 'More' },
+    platformActionBar: { backButtonLabel: 'Go Back' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Add node',
         nodeMenuButtonTitle: 'Menu',
@@ -238,11 +198,11 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         messagesTeamRemoved: '1 team has been removed',
         messagesErrorBuildGraph: 'There was an error when trying to build graph. Check the initial data.',
         messagesUndoAction: 'Undo',
-        nodeMembersCount: '{{ count }} members',
+        nodeMembersCount: '{{count}} members',
         nodeVariousTeams: 'Various teams',
         nodeStatusDueToday: 'Due today',
-        nodeStatusDueInXDays: ' Due in {{ count }} days',
-        nodeStatusXDaysOverdue: '{{ count }} days overdue',
+        nodeStatusDueInXDays: 'Due in {{count}} days',
+        nodeStatusXDaysOverdue: '{{count}} days overdue',
         nodeActionAddApproversBefore: 'Add approvers before',
         nodeActionAddApproversAfter: 'Add approvers after',
         nodeActionAddApproversParallel: 'Add parallel approvers',
@@ -263,15 +223,13 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         toolbarEditApprover: 'Edit approver',
         watchersInputPlaceholder: 'Search here..',
         userListSelectedItemsCountSingular: '1 item selected',
-        userListSelectedItemsCountPlural: '{{ count }} items selected',
+        userListSelectedItemsCountPlural: '{{count}} items selected',
         statusApproved: 'approved',
         statusRejected: 'rejected',
         statusInProgress: 'in progress',
         statusNotStarted: 'not started'
     },
-    platformFeedInput: {
-        userTitle: 'User'
-    },
+    platformFeedInput: { userTitle: 'User' },
     platformVHD: {
         selectionBarLabel: 'Selected and condition items',
         selectedAndConditionLabel: 'Selected Items and Conditions',
@@ -287,15 +245,15 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         searchHideAdvancedSearchLabel: 'Hide filters',
         searchShowAllAdvancedSearchLabel: 'Show all filters',
         searchHideAllAdvancedSearchLabel: 'Hide all filters',
-        selectTabDisplayCountLabel: 'Items ({{ count }})',
+        selectTabDisplayCountLabel: 'Items ({{count}})',
         selectTabMoreBtnLabel: 'More',
-        selectTabCountHiddenA11yLabel: 'contains {{ rowCount }} rows and {{ colCount }} columns',
+        selectTabCountHiddenA11yLabel: 'contains {{rowCount}} rows and {{colCount}} columns',
         selectMobileTabBackBtnTitle: 'Back',
         selectMobileTabBtnOpenDialogLabel: 'Open dialog',
-        selectMobileTabTitle: '{{ title }} tab',
+        selectMobileTabTitle: '{{title}} tab',
         selectMobileConditionEmpty: 'Empty',
         defineConditionTitle: 'Product',
-        defineConditionSelectedValueHiddenA11yLabel: 'selected value {{ value }}',
+        defineConditionSelectedValueHiddenA11yLabel: 'selected value {{value}}',
         defineConditionConditionsGroupHeaderInclude: 'Include',
         defineConditionConditionsGroupHeaderExclude: 'Exclude',
         defineConditionFromPlaceholder: 'from',
@@ -316,14 +274,14 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'empty',
         defineConditionConditionStrategyLabelNotEqualTo: 'not equal to',
         defineConditionConditionStrategyLabelNotEmpty: 'not empty',
-        defineConditionMaxCountError: 'Enter a value with no more than {{ count }} characters',
+        defineConditionMaxCountError: 'Enter a value with no more than {{count}} characters',
         selectTabTitle: 'Select from list',
         searchTableEmptyMessage: 'Use the search to get results',
         defineTabTitle: 'Define Conditions'
     },
     platformCombobox: {
         countListResultsSingular: '1 result list item',
-        countListResultsPlural: '{{ count }} result list items'
+        countListResultsPlural: '{{count}} result list items'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Select Options',
@@ -333,36 +291,26 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 character over the limit',
-        counterMessageCharactersOverTheLimitPlural: '{{ count }} characters over the limit',
+        counterMessageCharactersOverTheLimitPlural: '{{count}} characters over the limit',
         counterMessageCharactersRemainingSingular: '1 character remaining',
-        counterMessageCharactersRemainingPlural: '{{ count }} characters remaining'
+        counterMessageCharactersRemainingPlural: '{{count}} characters remaining'
     },
-    platformLink: {
-        roleDescriptionWithMedia: 'Media: {{ media }}'
-    },
-    platformList: {
-        loadingAriaLabel: 'loading'
-    },
-    platformObjectListItem: {
-        detailsActionAriaLabel: 'detail',
-        deleteActionAriaLabel: 'delete'
-    },
-    platformStandardListItem: {
-        detailsActionAriaLabel: 'detail',
-        deleteActionAriaLabel: 'delete'
-    },
+    platformLink: { roleDescriptionWithMedia: 'Media: {{media}}' },
+    platformList: { loadingAriaLabel: 'loading' },
+    platformObjectListItem: { detailsActionAriaLabel: 'detail', deleteActionAriaLabel: 'delete' },
+    platformStandardListItem: { detailsActionAriaLabel: 'detail', deleteActionAriaLabel: 'delete' },
     platformSearchField: {
         clearButtonTitle: 'Clear',
         submitButtonTitle: 'Search',
         searchInputLabel: 'Search',
         synchronizeButtonTitle: 'Synchronize',
-        searchSuggestionMessage: '{{ count }} suggestions found.',
+        searchSuggestionMessage: '{{count}} suggestions found.',
         searchSuggestionNavigateMessage: 'use up and down arrows to navigate'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Search',
         submitButtonLabel: 'Go',
-        filtersButtonLabel: 'Filters ({{ filtersCount }})',
+        filtersButtonLabel: 'Filters ({{filtersCount}})',
         showFiltersButtonLabel: 'Show filters',
         hideFiltersButtonLabel: 'Hide filters',
         defineConditionsRemoveConditionButtonTitle: 'Remove condition',
@@ -419,7 +367,7 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         P13ColumnsDialogSearchPlaceholder: 'Search',
         P13ColumnsDialogsShowSelected: 'Show Selected',
         P13ColumnsDialogShowAll: 'Show all',
-        P13ColumnsDialogSelectAll: 'Select All ({{ selectedColumnsCount }}/{{ selectableColumnsCount }})',
+        P13ColumnsDialogSelectAll: 'Select All ({{selectedColumnsCount}}/{{selectableColumnsCount}})',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',
         P13ColumnsDialogCancelBtnLabel: 'Cancel',
         P13ColumnsDialogMoveToTopBtn: 'Move to Top',
@@ -440,13 +388,13 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         P13FilterStrategyLabelBefore: 'before',
         P13FilterStrategyLabelBeforeOrOn: 'before or on',
         P13FilterStrategyLabelNotDefined: 'Not Defined',
-        P13FilterBooleanOptionNotDefined: ' ',
+        P13FilterBooleanOptionNotDefined: '',
         P13FilterBooleanOptionTrue: 'Yes',
         P13FilterBooleanOptionFalse: 'No',
         P13FilterDialogHeader: 'Filter By',
-        P13FilterDialogIncludePanelTitleWithCount: 'Include ({{ count }})',
+        P13FilterDialogIncludePanelTitleWithCount: 'Include ({{count}})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'Include',
-        P13FilterDialogExcludePanelTitleWithCount: 'Exclude ({{ count }})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Exclude ({{count}})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Exclude',
         P13FilterDialogRemoveFilterBtnTitle: 'Remove Filter',
         P13FilterDialoAddFilterBtnTitle: 'Add Filter',
@@ -479,7 +427,7 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Not Filtered)',
-        filterDialogFilterByLabel: 'Filter by: {{ filterLabel }}',
+        filterDialogFilterByLabel: 'Filter by: {{filterLabel}}',
         filterDialogFilterTitle: 'Filter',
         filterDialogFilterBy: 'Filter By',
         filterDialogConfirmBtnLabel: 'OK',
@@ -595,9 +543,7 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         messageFileNameLengthExceededSingular:
             'The name "{{ fileName }}" exceeded the maximum filename length. Allowed filename length: {{ maxFilenameLength }} characters.'
     },
-    platformWizardGenerator: {
-        summarySectionEditStep: 'Edit'
-    },
+    platformWizardGenerator: { summarySectionEditStep: 'Edit' },
     platformMessagePopover: {
         allErrors: 'All',
         defaultErrors: {
@@ -631,27 +577,15 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         createdBy: 'Created By',
         removeVariant: 'Remove View',
         search: 'Search',
-        access: {
-            public: 'Public',
-            private: 'Private'
-        }
+        access: { public: 'Public', private: 'Private' }
     },
-    platformSelect: {
-        selectOptionLabel: 'Select an Option'
-    },
+    platformSelect: { selectOptionLabel: 'Select an Option' },
     fnSlider: {
         minMaxDetails: 'Slider minimum value is {{ min }}, maximum value is {{ max }}',
         valueminDetails: 'Value is {{ value }}',
         valuemaxDetails: 'Value is {{ value }}',
         valueNowDetails: 'Current value is {{ value }}'
     },
-    fnSwitch: {
-        semanticAcceptLabel: 'Accept',
-        semanticDeclineLabel: 'Decline'
-    },
-    coreTree: {
-        expand: 'Expand node',
-        collapse: 'Collapse node',
-        noData: 'No data'
-    }
+    fnSwitch: { semanticAcceptLabel: 'Accept', semanticDeclineLabel: 'Decline' },
+    coreTree: { expand: 'Expand node', collapse: 'Collapse node', noData: 'No data' }
 };

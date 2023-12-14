@@ -1,5 +1,5 @@
-/* eslint-disable max-len */
-import { FdLanguage } from '../models';
+/* eslint-disable */
+import { FdLanguage } from '../models/lang';
 
 export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
     coreCalendar: {
@@ -11,21 +11,21 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         nextYearLabel: 'Próximo ano',
         previousMonthLabel: 'Mês anterior',
         nextMonthLabel: 'Próximo mês',
-        weekColumnLabel: 'Semana do calendário',
+        weekColumnLabel: 'Semana do ano',
         dateSelectedLabel: 'Data selecionada',
         todayLabel: 'Hoje',
         rangeStartLabel: 'Início do intervalo',
         rangeEndLabel: 'Fim do intervalo',
-        dayInPastLabel: 'Dias passados',
+        dayInPastLabel: 'Últimos dias',
         closeCalendarLabel: 'Fechar calendário',
         calendarDayViewDescription: 'Calendário',
-        calendarMonthViewDescription: 'Seletor de mês',
-        calendarYearsViewDescription: 'Seletor de ano',
-        calendarYearsRangeViewDescription: 'Seletor de intervalo de anos'
+        calendarMonthViewDescription: 'Selecionador de mês',
+        calendarYearsViewDescription: 'Selecionador de ano',
+        calendarYearsRangeViewDescription: 'Selecionador de intervalo de anos'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Caixa de combinação de vários valores',
-        selectAllLabel: 'Selecionar tudo ({{selectedItems}} de {{totalItems}})'
+        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        selectAllLabel: 'Selecionar todos os ({{selectedItems}} de {{totalItems}})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Ir para o item anterior',
@@ -35,23 +35,20 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         dateInputLabel: 'Entrada de data',
         dateRangeInputLabel: 'Entrada de intervalo de datas',
         displayCalendarToggleLabel: 'Abrir selecionador',
-        valueStateSuccessMessage: 'Estado de valor Êxito',
-        valueStateInformationMessage: 'Estado de valor Informação',
-        valueStateWarningMessage: 'Estado de valor Aviso',
-        valueStateErrorMessage: 'Estado de valor Erro'
+        valueStateSuccessMessage: 'Status de valor Sucesso',
+        valueStateInformationMessage: 'Status de valor Informação',
+        valueStateWarningMessage: 'Status de valor Advertência',
+        valueStateErrorMessage: 'Status de valor Erro'
     },
     coreDatetimePicker: {
-        datetimeInputLabel: 'Entrada de data e hora',
+        datetimeInputLabel: 'Entrada de data/hora',
         displayDatetimeToggleLabel: 'Exibir alternância de calendário',
         displayTypeDateLabel: 'Data',
         displayTypeTimeLabel: 'Hora',
-        datetimeOkLabel: 'Ok',
+        datetimeOkLabel: 'OK',
         datetimeCancelLabel: 'Cancelar'
     },
-    coreFeedListItem: {
-        moreLabel: 'mais {{count}}',
-        lessLabel: 'Menos'
-    },
+    coreFeedListItem: { moreLabel: 'Mais {{count}}', lessLabel: 'Menos' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Cancelar',
         listItemStatusAriaLabel: 'O item tem status. Status: {{status}}.',
@@ -62,38 +59,33 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         listItemStatusLocked: 'Bloqueado',
         listItemStatusDraft: 'Rascunho'
     },
-    coreMessageStrip: {
-        dismissLabel: 'Ignorar'
-    },
+    coreMessageStrip: { dismissLabel: 'Ignorar' },
     coreMultiInput: {
         multiInputAriaLabel: 'Entrada de valores múltiplos',
-        noResults: 'Sem resultados.',
-        navigateSelectionsWithArrows: 'Navegue pelas seleções com as setas para cima e para baixo.',
+        noResults: 'Nenhum resultado.',
+        navigateSelectionsWithArrows: 'Navegue nas seleções com as setas para cima e para baixo.',
         countListResultsSingular: '1 item da lista de resultados.',
         countListResultsPlural: '{{count}} itens da lista de resultados.',
         escapeNavigateTokens:
-            'Pressione escape para sair do campo de entrada e use as teclas de seta para a esquerda e para a direita para navegar pelas opções selecionadas.',
-        tokensCountText: ({ length }) => {
-            let plural = `${length} tokens`;
-            if (length === 0) {
-                plural = 'nenhum token';
-            }
-            if (length === 1) {
-                plural = '1 token';
-            }
-            return `Contém ${plural}.`;
+            'Pressione escape para sair do campo de entrada e use as teclas para a esquerda e para a direita para navegar pelas opções selecionadas.',
+        tokensCountText: (params) => {
+            return `Contém ${(() => {
+                if (params['length'] == 0) {
+                    return `no token`;
+                }
+                if (params['length'] == 1) {
+                    return `1 token`;
+                } else {
+                    return `${params['length']} tokens`;
+                }
+            })()}.`;
         }
     },
-    coreNavigation: {
-        mainNavigation: 'Navegação principal',
-        navigationPath: 'Caminho de navegação'
-    },
+    coreNavigation: { mainNavigation: 'Navegação principal', navigationPath: 'Caminho de navegação' },
     coreNestedList: {
         linkItemAriaLabel: 'Item da árvore {{itemDetails}}, {{index}} de {{total}}{{selectedDescription}}'
     },
-    coreOverflowLayout: {
-        moreItemsButton: 'mais {{count}}'
-    },
+    coreOverflowLayout: { moreItemsButton: 'Mais {{count}}' },
     corePagination: {
         pageLabel: 'Página {{pageNumber}}',
         currentPageAriaLabel: 'A página {{pageNumber}} é a página atual',
@@ -108,16 +100,10 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         ariaLabel: 'Paginação',
         totalResultsLabel: '{{totalCount}} resultados'
     },
-    coreProductSwitch: {
-        ariaLabel: 'Product Switch'
-    },
-    coreShellbar: {
-        collapsedItemMenuLabel: 'Menu de item recolhido',
-        cancel: 'Cancelar',
-        search: 'Pesquisar'
-    },
+    coreProductSwitch: { ariaLabel: 'Alternância de produtos' },
+    coreShellbar: { collapsedItemMenuLabel: 'Menu de item recolhido', cancel: 'Cancelar', search: 'Pesquisar' },
     coreSlider: {
-        singleMinMaxDetails: 'O valor mínimo do cursor é {{min}}, o valor máximo é {{max}}',
+        singleMinMaxDetails: 'O valor mínimo do controle deslizante é {{min}}, o valor máximo é {{max}}',
         singleValueminDetails: 'O valor é {{value}}',
         singleValuemaxDetails: 'O valor é {{value}}',
         singleValueNowDetails: 'O valor atual é {{value}}',
@@ -130,63 +116,41 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         multipleHandle2ValuemaxDetails: 'O valor é {{value}}',
         multipleHandle2ValueNowDetails: 'O valor atual é {{value}}'
     },
-    coreSplitButton: {
-        expandButtonAriaLabel: 'Mais ações',
-        arialLabel: 'Botão Ratear'
-    },
-    coreSplitter: {
-        paginationItemAriaLabel: 'Seção'
-    },
+    coreSplitButton: { expandButtonAriaLabel: 'Mais ações', arialLabel: 'Botão Ratear' },
+    coreSplitter: { paginationItemAriaLabel: 'Seção' },
     coreStepInput: {
-        incrementButtonTitle: 'Aumentar',
+        incrementButtonTitle: 'Incrementar',
         decrementButtonTitle: 'Reduzir',
         ariaRoleDescription: 'Entrada de passo'
     },
-    coreSwitch: {
-        semanticAcceptLabel: 'Aceitar',
-        semanticDeclineLabel: 'Recusar'
-    },
-    coreTabs: {
-        tabListExpandButtonText: 'Mais'
-    },
-    coreText: {
-        moreLabel: 'Mais',
-        lessLabel: 'Menos'
-    },
+    coreSwitch: { semanticAcceptLabel: 'Aceitar', semanticDeclineLabel: 'Recusar' },
+    coreTabs: { tabListExpandButtonText: 'Mais' },
+    coreText: { moreLabel: 'Mais', lessLabel: 'Menos' },
     coreTime: {
-        componentAriaName: 'Selecionador de horas',
+        componentAriaName: 'Seletor de hora',
         increaseHoursLabel: 'Aumentar horas',
         hoursLabel: 'Horas',
-        hrsLabel: 'h',
-        decreaseHoursLabel: 'Reduzir horas',
+        hrsLabel: 'Horas',
+        decreaseHoursLabel: 'Diminuir horas',
         increaseMinutesLabel: 'Aumentar minutos',
         minutesLabel: 'Minutos',
         minLabel: 'min',
-        decreaseMinutesLabel: 'Reduzir minutos',
+        decreaseMinutesLabel: 'Diminuir minutos',
         increaseSecondsLabel: 'Aumentar segundos',
         secondsLabel: 'Segundos',
         secLabel: 's',
-        decreaseSecondsLabel: 'Reduzir segundos',
+        decreaseSecondsLabel: 'Diminuir segundos',
         increasePeriodLabel: 'Aumentar período',
         periodLabel: 'Período',
-        decreasePeriodLabel: 'Reduzir período',
+        decreasePeriodLabel: 'Diminuir período',
         navigationInstruction:
-            'Para mover-se entre os itens nessa lista, pressione a seta para cima ou para baixo. Para mover-se entre as listas, pressione a seta para a esquerda ou a seta para a direita.'
+            'Para se mover entre os itens nessa lista, pressione a seta para cima ou para baixo. Para alternar entre listas, pressione a seta para a esquerda ou para a direita.'
     },
-    coreTimePicker: {
-        timePickerInputLabel: 'Entrada de selecionador de horas',
-        timePickerButtonLabel: 'Abrir selecionador'
-    },
-    coreToken: {
-        deleteButtonLabel: 'Excluível',
-        ariaRoleDescription: 'token'
-    },
-    coreTokenizer: {
-        moreLabel: 'mais {{count}}',
-        tokenizerLabel: 'Tokenizador'
-    },
+    coreTimePicker: { timePickerInputLabel: 'Entrada de seletor de hora', timePickerButtonLabel: 'Abrir selecionador' },
+    coreToken: { deleteButtonLabel: 'Excluível', ariaRoleDescription: 'token' },
+    coreTokenizer: { moreLabel: 'Mais {{count}}', tokenizerLabel: 'Tokenizador' },
     coreUploadCollection: {
-        menuOkText: 'Ok',
+        menuOkText: 'OK',
         menuCancelText: 'Cancelar',
         menuEditAriaLabel: 'Editar',
         menuDeleteAriaLabel: 'Excluir',
@@ -194,17 +158,11 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         menuCancelAriaLabel: 'Cancelar',
         formItemPlaceholder: 'Nome do arquivo'
     },
-    coreWizard: {
-        ariaLabel: 'Assistente'
-    },
-    coreBreadcrumb: {
-        overflowTitleMore: 'Mais'
-    },
-    platformActionBar: {
-        backButtonLabel: 'Voltar'
-    },
+    coreWizard: { ariaLabel: 'Assistente' },
+    coreBreadcrumb: { overflowTitleMore: 'Mais' },
+    platformActionBar: { backButtonLabel: 'Voltar' },
     platformApprovalFlow: {
-        addNodeButtonTitle: 'Adicionar um passo',
+        addNodeButtonTitle: 'Adicionar nó',
         nodeMenuButtonTitle: 'Menu',
         defaultWatchersLabel: 'Observadores',
         defaultTitle: 'Processo de aprovação',
@@ -213,11 +171,12 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         editModeSaveButtonLabel: 'Salvar',
         editModeExitButtonLabel: 'Sair',
         emptyTitle: 'Comece a adicionar aprovadores e observadores',
-        emptyHint: 'Para adicionar aprovadores, clique em "Adicionar um passo". Para adicionar observadores',
+        emptyHint:
+            'Para adicionar aprovadores, clique em "Adicionar um passo". Para adicionar observadores, clique no campo Observadores.',
         addNodeDialogHeaderAddApprovers: 'Adicionar aprovadores',
         addNodeDialogHeaderEditApprover: 'Editar aprovador',
         addNodeDialogHeaderAddApproverTeam: 'Usuário/equipe',
-        addNodeDialogHeaderDetail: 'Detalhes',
+        addNodeDialogHeaderDetail: 'Detalhe',
         addNodeDialogNodeType: 'Paralelo ou serial',
         addNodeDialogNodeTypeSerial: 'Serial',
         addNodeDialogNodeTypeParallel: 'Paralelo',
@@ -234,7 +193,7 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         addNodeSelectApproverActionBtnLabel: 'Selecionar',
         addNodeCancelApproverSelectionActionBtnLabel: 'Cancelar',
         addNodeApproverOrTeamDetailsCloseActionBtnLabel: 'Fechar',
-        userDetailsHeader: 'Detalhes',
+        userDetailsHeader: 'Detalhe',
         userDetailsSendReminderBtnLabel: 'Enviar lembrete',
         userDetailsCancelBtnLabel: 'Cancelar',
         messagesApproverAddedSuccess: '1 aprovador foi adicionado',
@@ -248,7 +207,7 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         nodeMembersCount: '{{count}} membros',
         nodeVariousTeams: 'Várias equipes',
         nodeStatusDueToday: 'Vencimento hoje',
-        nodeStatusDueInXDays: ' Vencimento em {{count}} dias',
+        nodeStatusDueInXDays: 'Vencimento em {{count}} dias',
         nodeStatusXDaysOverdue: '{{count}} dias vencidos',
         nodeActionAddApproversBefore: 'Adicionar aprovadores antes',
         nodeActionAddApproversAfter: 'Adicionar aprovadores após',
@@ -276,9 +235,7 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         statusInProgress: 'em andamento',
         statusNotStarted: 'não iniciado'
     },
-    platformFeedInput: {
-        userTitle: 'Usuário'
-    },
+    platformFeedInput: { userTitle: 'Usuário' },
     platformVHD: {
         selectionBarLabel: 'Itens e condições selecionados',
         selectedAndConditionLabel: 'Itens e condições selecionados',
@@ -298,7 +255,7 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         selectTabMoreBtnLabel: 'Mais',
         selectTabCountHiddenA11yLabel: 'contém {{rowCount}} linhas e {{colCount}} colunas',
         selectMobileTabBackBtnTitle: 'Voltar',
-        selectMobileTabBtnOpenDialogLabel: 'Abrir caixa de diálogo',
+        selectMobileTabBtnOpenDialogLabel: 'Abrir diálogo',
         selectMobileTabTitle: 'Guia {{title}}',
         selectMobileConditionEmpty: 'Vazio',
         defineConditionTitle: 'Produto',
@@ -314,7 +271,7 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         defineConditionConditionStrategyLabelContains: 'contém',
         defineConditionConditionStrategyLabelEqualTo: 'igual a',
         defineConditionConditionStrategyLabelBetween: 'entre',
-        defineConditionConditionStrategyLabelStartsWith: 'inicia com',
+        defineConditionConditionStrategyLabelStartsWith: 'começa com',
         defineConditionConditionStrategyLabelEndsWith: 'termina com',
         defineConditionConditionStrategyLabelLessThan: 'menor que',
         defineConditionConditionStrategyLabelLessThanEqual: 'menor que ou igual a',
@@ -324,7 +281,7 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         defineConditionConditionStrategyLabelNotEqualTo: 'não igual a',
         defineConditionConditionStrategyLabelNotEmpty: 'não vazio',
         defineConditionMaxCountError: 'Inserir um valor com um máximo de {{count}} caracteres',
-        selectTabTitle: 'Selecionar na lista',
+        selectTabTitle: 'Selecionar da lista',
         searchTableEmptyMessage: 'Usar a pesquisa para obter resultados',
         defineTabTitle: 'Definir condições'
     },
@@ -344,27 +301,17 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         counterMessageCharactersRemainingSingular: '1 caractere restante',
         counterMessageCharactersRemainingPlural: '{{count}} caracteres restantes'
     },
-    platformLink: {
-        roleDescriptionWithMedia: 'Mídia: {{media}}'
-    },
-    platformList: {
-        loadingAriaLabel: 'carregando'
-    },
-    platformObjectListItem: {
-        detailsActionAriaLabel: 'detalhes',
-        deleteActionAriaLabel: 'excluir'
-    },
-    platformStandardListItem: {
-        detailsActionAriaLabel: 'detalhes',
-        deleteActionAriaLabel: 'excluir'
-    },
+    platformLink: { roleDescriptionWithMedia: 'Mídia: {{media}}' },
+    platformList: { loadingAriaLabel: 'carregando' },
+    platformObjectListItem: { detailsActionAriaLabel: 'detalhes', deleteActionAriaLabel: 'excluir' },
+    platformStandardListItem: { detailsActionAriaLabel: 'detalhes', deleteActionAriaLabel: 'excluir' },
     platformSearchField: {
         clearButtonTitle: 'Limpar',
         submitButtonTitle: 'Pesquisar',
         searchInputLabel: 'Pesquisar',
         synchronizeButtonTitle: 'Sincronizar',
         searchSuggestionMessage: '{{count}} sugestões encontradas.',
-        searchSuggestionNavigateMessage: 'usar setas para cima e para baixo para navegar'
+        searchSuggestionNavigateMessage: 'usar as setas para cima e para baixo para navegar'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Pesquisar',
@@ -385,7 +332,7 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         filterConditionContains: 'contém',
         filterConditionEqualTo: 'igual a',
         filterConditionBetween: 'entre',
-        filterConditionBeginsWith: 'inicia com',
+        filterConditionBeginsWith: 'começa com',
         filterConditionEndsWith: 'termina com',
         filterConditionLessThan: 'menor que',
         filterConditionLessThanOrEqualTo: 'menor que ou igual a',
@@ -403,7 +350,7 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         settingsCategoryActive: 'Ativo',
         settingsCategoryVisibleAndActive: 'Visível e ativo',
         settingsCategoryMandatory: 'Obrigatório',
-        manageFieldConditions: 'Gerenciar condições de campo',
+        manageFieldConditions: 'Gerenciar campos de condição',
         refreshButtonAriaLabel: 'Atualizar'
     },
     platformTable: {
@@ -411,13 +358,13 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         headerMenuSortDesc: 'Classificar em ordem decrescente',
         headerMenuGroup: 'Agrupar',
         headerMenuFreeze: 'Congelar',
-        headerMenuEndFreeze: 'Término do congelamento',
+        headerMenuEndFreeze: 'Congelar até o fim',
         headerMenuUnfreeze: 'Descongelar',
         headerMenuFilter: 'Filtrar',
-        defaultEmptyMessage: 'Não foram encontrados dados',
+        defaultEmptyMessage: 'Nenhum dado encontrado',
         emptyCell: 'Vazio',
         noVisibleColumnsMessage:
-            'No momento, não há colunas visíveis na tabela. Selecione as colunas de que você precisa nas configurações da tabela.',
+            'Neste momento, não existem colunas visíveis na tabela. Selecione as colunas de que você necessita nas configurações de tabela.',
         resetChangesButtonLabel: 'Redefinir',
         editableCellNumberPlaceholder: 'Inserir valor',
         editableCellDatePlaceholder: 'Inserir valor',
@@ -446,8 +393,8 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         P13FilterStrategyLabelOnOrAfter: 'a partir de',
         P13FilterStrategyLabelBefore: 'antes',
         P13FilterStrategyLabelBeforeOrOn: 'até',
-        P13FilterStrategyLabelNotDefined: 'Não definido',
-        P13FilterBooleanOptionNotDefined: ' ',
+        P13FilterStrategyLabelNotDefined: 'Não definida',
+        P13FilterBooleanOptionNotDefined: '',
         P13FilterBooleanOptionTrue: 'Sim',
         P13FilterBooleanOptionFalse: 'Não',
         P13FilterDialogHeader: 'Filtrar por',
@@ -509,8 +456,8 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         sortDialogCancelBtnLabel: 'Cancelar',
         selectAllCheckboxLabel: 'Selecionar tudo',
         deselectAllCheckboxLabel: 'Desmarcar tudo',
-        deselectSingleRow: 'Para desmarcar a linha, pressione a BARRA DE ESPAÇOS',
-        selectSingleRow: 'Para selecionar a linha, pressione a BARRA DE ESPAÇOS'
+        deselectSingleRow: 'Pressione a BARRA DE ESPAÇOS para desmarcar a linha',
+        selectSingleRow: 'Pressione a BARRA DE ESPAÇOS para selecionar a linha'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Ir para o anterior',
@@ -603,17 +550,15 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         messageFileNameLengthExceededSingular:
             'O nome "{{fileName}}" excedeu o comprimento máximo de nome de arquivo. Comprimento de nome de arquivo permitido: {{maxFilenameLength}} caracteres.'
     },
-    platformWizardGenerator: {
-        summarySectionEditStep: 'Editar'
-    },
+    platformWizardGenerator: { summarySectionEditStep: 'Editar' },
     platformMessagePopover: {
         allErrors: 'Tudo',
         defaultErrors: {
-            email: 'O e-mail é inválido',
+            email: 'O e-mail é inválido.',
             max: 'O campo excede o valor máximo',
-            maxLength: 'O campo excede o comprimento máximo',
+            maxLength: 'O campo excede o tamanho máximo',
             min: 'O valor do campo é inferior ao permitido',
-            minLength: 'O comprimento do campo é inferior ao permitido',
+            minLength: 'O tamanho do campo é inferior ao permitido',
             pattern: 'O valor do campo é inválido',
             required: 'O campo é obrigatório',
             requiredTrue: 'O campo é obrigatório'
@@ -630,7 +575,7 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         public: 'Público',
         applyAutomatically: 'Aplicar automaticamente',
         requiredFieldError: 'Este campo é obrigatório.',
-        nameTakenFieldError: 'Já existe uma variante com este nome. Escolha um nome diferente.',
+        nameTakenFieldError: 'Já existe uma variante com esse nome. Escolha um nome diferente.',
         cancel: 'Cancelar',
         manageViews: 'Gerenciar visualizações',
         markAsFavourite: 'Marcar como favorito',
@@ -639,27 +584,15 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         createdBy: 'Criado por',
         removeVariant: 'Remover visualização',
         search: 'Pesquisar',
-        access: {
-            public: 'Público',
-            private: 'Privado'
-        }
+        access: { public: 'Público', private: 'Privado' }
     },
-    platformSelect: {
-        selectOptionLabel: 'Selecionar uma opção'
-    },
+    platformSelect: { selectOptionLabel: 'Selecionar uma opção' },
     fnSlider: {
         minMaxDetails: 'O valor mínimo do cursor é {{min}}, o valor máximo é {{max}}',
         valueminDetails: 'O valor é {{value}}',
         valuemaxDetails: 'O valor é {{value}}',
         valueNowDetails: 'O valor atual é {{value}}'
     },
-    fnSwitch: {
-        semanticAcceptLabel: 'Aceitar',
-        semanticDeclineLabel: 'Recusar'
-    },
-    coreTree: {
-        expand: 'Expandir nó',
-        collapse: 'Recolher nó',
-        noData: 'Não há dados'
-    }
+    fnSwitch: { semanticAcceptLabel: 'Aceitar', semanticDeclineLabel: 'Recusar' },
+    coreTree: { expand: 'Expandir nó', collapse: 'Recolher nó', noData: 'Não há dados' }
 };
