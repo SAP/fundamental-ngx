@@ -1,8 +1,6 @@
+/* eslint-disable */
 import { FdLanguage } from '../models/lang';
 
-/**
- * Default set of translations of Fundamental UI library for Hindi language
- */
 export const FD_LANGUAGE_HINDI: FdLanguage = {
     coreCalendar: {
         yearSelectionLabel: 'वर्ष चुनें',
@@ -25,14 +23,8 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         calendarYearsViewDescription: 'वर्ष चयनकर्ता',
         calendarYearsRangeViewDescription: 'वर्षों की सीमा चयनकर्ता'
     },
-    coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'मल्टी वैल्यू कॉम्बो बॉक्स',
-        selectAllLabel: 'सबका चयन करें'
-    },
-    coreCarousel: {
-        leftNavigationBtnLabel: 'पिछले वस्तु पर जाएं',
-        rightNavigationBtnLabel: 'अगले वस्तु पर जाएं'
-    },
+    coreMultiComboBox: { multiComboBoxAriaLabel: 'मल्टी वैल्यू कॉम्बो बॉक्स', selectAllLabel: 'सबका चयन करें' },
+    coreCarousel: { leftNavigationBtnLabel: 'पिछले वस्तु पर जाएं', rightNavigationBtnLabel: 'अगले वस्तु पर जाएं' },
     coreDatePicker: {
         dateInputLabel: 'दिनांक इनपुट',
         dateRangeInputLabel: 'दिनांक सीमा इनपुट',
@@ -50,112 +42,92 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         datetimeOkLabel: 'ठीक है',
         datetimeCancelLabel: 'रद्द करें'
     },
-    coreFeedListItem: {
-        moreLabel: 'अधिक',
-        lessLabel: 'कम'
-    },
+    coreFeedListItem: { moreLabel: 'अधिक', lessLabel: 'कम' },
     coreGridList: {
         filterBarCancelButtonTitle: 'रद्द करें',
-        listItemStatusAriaLabel: 'वस्तु की स्थिति है। स्थिति: {{ status }}',
-        listItemCounterAriaLabel: 'वस्तु के {{ count }} उपसूची है।',
+        listItemStatusAriaLabel: 'वस्तु की स्थिति है। स्थिति: {{status}}',
+        listItemCounterAriaLabel: 'वस्तु के {{count}} उपसूची है।',
         listItemButtonDetailsTitle: 'विवरण',
         listItemButtonDeleteTitle: 'मिटायें',
         listItemStatusContainsErrors: 'इसमें गलतियां हैं',
         listItemStatusLocked: 'बंद',
         listItemStatusDraft: 'प्रालेख'
     },
-    coreMessageStrip: {
-        dismissLabel: 'खारिज करें'
-    },
+    coreMessageStrip: { dismissLabel: 'खारिज करें' },
     coreMultiInput: {
         multiInputAriaLabel: 'Multi Value Input',
         noResults: 'No results.',
         navigateSelectionsWithArrows: 'Navigate selections with the up and down arrows.',
         countListResultsSingular: '1 परिणाम सूची आइटम',
-        countListResultsPlural: '{{ count }} परिणाम सूची आइटम',
+        countListResultsPlural: '{{count}} परिणाम सूची आइटम',
         escapeNavigateTokens:
             'Press escape to exit the input field and use the left and right arrow keys to navigate through the selected options.',
-        tokensCountText: ({ length }) => `Contains ${length || 'no'} token${length === 1 ? '' : 's'}.`
+        tokensCountText: (params) => {
+            return `Contains ${(() => {
+                if (params['length'] == 0) {
+                    return `no token`;
+                }
+                if (params['length'] == 1) {
+                    return `1 token`;
+                } else {
+                    return `${params['length']} tokens`;
+                }
+            })()}.`;
+        }
     },
-    coreNavigation: {
-        mainNavigation: 'Main Navigation',
-        navigationPath: 'Navigation Path'
-    },
-    coreNestedList: {
-        linkItemAriaLabel: 'ट्री वस्तु {{ itemDetails }}, {{ index }} का {{ total }}{{ selectedDescription }}'
-    },
-    coreOverflowLayout: {
-        moreItemsButton: '{{ count }} अधिक'
-    },
+    coreNavigation: { mainNavigation: 'Main Navigation', navigationPath: 'Navigation Path' },
+    coreNestedList: { linkItemAriaLabel: 'ट्री वस्तु {{itemDetails}}, {{index}} का {{total}}{{selectedDescription}}' },
+    coreOverflowLayout: { moreItemsButton: '{{count}} अधिक' },
     corePagination: {
-        pageLabel: 'पृष्ठ {{ pageNumber }}',
-        currentPageAriaLabel: 'पृष्ठ {{ pageNumber }} वर्तमान पृष्ठ है',
+        pageLabel: 'पृष्ठ {{pageNumber}}',
+        currentPageAriaLabel: 'पृष्ठ {{pageNumber}} वर्तमान पृष्ठ है',
         labelBeforeInputMobile: 'पृष्ठ :',
-        labelAfterInputMobile: 'का {{ totalCount }}',
-        inputAriaLabel: 'पेज इनपुट, वर्तमान पृष्ठ, पृष्ठ {{ pageNumber }} का {{ totalCount }}',
+        labelAfterInputMobile: 'का {{totalCount}}',
+        inputAriaLabel: 'पेज इनपुट, वर्तमान पृष्ठ, पृष्ठ {{pageNumber}} का {{totalCount}}',
         itemsPerPageLabel: 'प्रति पृष्ठ परिणाम :',
         firstLabel: 'पहला',
         previousLabel: 'पिछला',
         nextLabel: 'अगला',
         lastLabel: 'अंतिम',
         ariaLabel: 'पृष्ठ अंकन',
-        totalResultsLabel: '{{ totalCount }} परिणाम'
+        totalResultsLabel: '{{totalCount}} परिणाम'
     },
-    coreProductSwitch: {
-        ariaLabel: 'उत्पाद स्विच'
-    },
-    coreShellbar: {
-        collapsedItemMenuLabel: 'छोटा किया गया आइटम मेनू',
-        cancel: 'Cancel',
-        search: 'Search'
-    },
+    coreProductSwitch: { ariaLabel: 'उत्पाद स्विच' },
+    coreShellbar: { collapsedItemMenuLabel: 'छोटा किया गया आइटम मेनू', cancel: 'Cancel', search: 'Search' },
     coreSlider: {
-        singleMinMaxDetails: 'स्लाइडर न्यूनतम मूल्य है {{ min }}, अधिकतम मूल्य है {{ max }}',
-        singleValueminDetails: 'मूल्य है {{ value }}',
-        singleValuemaxDetails: 'मूल्य है {{ value }}',
-        singleValueNowDetails: 'वर्तमान मूल्य है {{ value }}',
-        multipleHandle1MinMaxDetails: 'रेंज स्लाइडर न्यूनतम मूल्य है {{ min }}, अधिकतम मूल्य है {{ max }}',
-        multipleHandle1ValueminDetails: 'मूल्य है {{ value }}',
-        multipleHandle1ValuemaxDetails: 'मूल्य है {{ value }}',
-        multipleHandle1ValueNowDetails: 'वर्तमान मूल्य है {{ value }}',
-        multipleHandle2MinMaxDetails: 'रेंज स्लाइडर न्यूनतम मूल्य है {{ min }}, अधिकतम मूल्य है {{ max }}',
-        multipleHandle2ValueminDetails: 'मूल्य है {{ value }}',
-        multipleHandle2ValuemaxDetails: 'मूल्य है {{ value }}',
-        multipleHandle2ValueNowDetails: 'वर्तमान मूल्य है {{ value }}'
+        singleMinMaxDetails: 'स्लाइडर न्यूनतम मूल्य है {{min}}, अधिकतम मूल्य है {{max}}',
+        singleValueminDetails: 'मूल्य है {{value}}',
+        singleValuemaxDetails: 'मूल्य है {{value}}',
+        singleValueNowDetails: 'वर्तमान मूल्य है {{value}}',
+        multipleHandle1MinMaxDetails: 'रेंज स्लाइडर न्यूनतम मूल्य है {{min}}, अधिकतम मूल्य है {{max}}',
+        multipleHandle1ValueminDetails: 'मूल्य है {{value}}',
+        multipleHandle1ValuemaxDetails: 'मूल्य है {{value}}',
+        multipleHandle1ValueNowDetails: 'वर्तमान मूल्य है {{value}}',
+        multipleHandle2MinMaxDetails: 'रेंज स्लाइडर न्यूनतम मूल्य है {{min}}, अधिकतम मूल्य है {{max}}',
+        multipleHandle2ValueminDetails: 'मूल्य है {{value}}',
+        multipleHandle2ValuemaxDetails: 'मूल्य है {{value}}',
+        multipleHandle2ValueNowDetails: 'वर्तमान मूल्य है {{value}}'
     },
-    coreSplitButton: {
-        expandButtonAriaLabel: 'अधिक क्रियाएं',
-        arialLabel: 'बाँटा हुआ बटन'
-    },
-    coreSplitter: {
-        paginationItemAriaLabel: 'भाग'
-    },
+    coreSplitButton: { expandButtonAriaLabel: 'अधिक क्रियाएं', arialLabel: 'बाँटा हुआ बटन' },
+    coreSplitter: { paginationItemAriaLabel: 'भाग' },
     coreStepInput: {
         incrementButtonTitle: 'इसे बढ़ाएँ',
         decrementButtonTitle: 'इसे घटाएं',
         ariaRoleDescription: 'स्टेप इनपुट'
     },
-    coreSwitch: {
-        semanticAcceptLabel: 'स्वीकार करें',
-        semanticDeclineLabel: 'अस्वीकार करें'
-    },
-    coreTabs: {
-        tabListExpandButtonText: 'अधिक'
-    },
-    coreText: {
-        moreLabel: 'अधिक',
-        lessLabel: 'कम'
-    },
+    coreSwitch: { semanticAcceptLabel: 'स्वीकार करें', semanticDeclineLabel: 'अस्वीकार करें' },
+    coreTabs: { tabListExpandButtonText: 'अधिक' },
+    coreText: { moreLabel: 'अधिक', lessLabel: 'कम' },
     coreTime: {
         componentAriaName: 'समय चुनने वाला',
         increaseHoursLabel: 'घंटे बढ़ाएँ',
         hrsLabel: 'घंटे',
-        decreaseHoursLabel: 'घंटे घटाएं',
-        increaseMinutesLabel: 'मिनट बढ़ाएँ',
-        minLabel: 'मिनट',
-        decreaseMinutesLabel: 'मिनट घटाएं',
-        increaseSecondsLabel: 'सेकंड बढ़ाएँ',
-        secLabel: 'सेकंड',
+        decreaseHoursLabel: 'Decrease hours',
+        increaseMinutesLabel: 'Increase minutes',
+        minLabel: 'Min',
+        decreaseMinutesLabel: 'Decrease minutes',
+        increaseSecondsLabel: 'Increase seconds',
+        secLabel: 'Sec',
         hoursLabel: 'Hours',
         minutesLabel: 'Minutes',
         secondsLabel: 'Seconds',
@@ -166,18 +138,9 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         navigationInstruction:
             'इस सूची में वस्तुओं के बीच जाने के लिए, ऊपर तीर या निचला तीर दबाएं। सूचियों के बीच स्विच करने के लिए बायाँ तीर या दायाँ तीर दबाएँ।'
     },
-    coreTimePicker: {
-        timePickerInputLabel: 'समय चुनने वाला इनपुट',
-        timePickerButtonLabel: 'चुनने वाला खोलें'
-    },
-    coreToken: {
-        deleteButtonLabel: 'हटाने-योग्य',
-        ariaRoleDescription: 'टोकन'
-    },
-    coreTokenizer: {
-        moreLabel: '{{ count }} अधिक',
-        tokenizerLabel: 'Tokenizer'
-    },
+    coreTimePicker: { timePickerInputLabel: 'समय चुनने वाला इनपुट', timePickerButtonLabel: 'चुनने वाला खोलें' },
+    coreToken: { deleteButtonLabel: 'हटाने-योग्य', ariaRoleDescription: 'टोकन' },
+    coreTokenizer: { moreLabel: '{{count}} अधिक', tokenizerLabel: 'Tokenizer' },
     coreUploadCollection: {
         menuOkText: 'ठीक है',
         menuCancelText: 'रद्द करें',
@@ -187,15 +150,9 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         menuCancelAriaLabel: 'रद्द करें',
         formItemPlaceholder: 'फ़ाइल का नाम'
     },
-    coreWizard: {
-        ariaLabel: 'विज़ार्ड'
-    },
-    coreBreadcrumb: {
-        overflowTitleMore: 'और'
-    },
-    platformActionBar: {
-        backButtonLabel: 'वापस जाएं'
-    },
+    coreWizard: { ariaLabel: 'विज़ार्ड' },
+    coreBreadcrumb: { overflowTitleMore: 'और' },
+    platformActionBar: { backButtonLabel: 'वापस जाएं' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'अनुमोदक जोड़ें',
         nodeMenuButtonTitle: 'अनुमोदक मेनू',
@@ -239,11 +196,11 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         messagesTeamRemoved: '1 समूह को हटा दिया गया है',
         messagesErrorBuildGraph: 'ग्राफ़ बनाने का प्रयास करते समय एक गलति हुई| प्रारंभिक डेटा की जाँच करें।',
         messagesUndoAction: 'पूर्ववत करें',
-        nodeMembersCount: '{{ count }} सदस्य',
+        nodeMembersCount: '{{count}} सदस्य',
         nodeVariousTeams: 'विविध समूह',
         nodeStatusDueToday: 'नियत तिथि',
-        nodeStatusDueInXDays: '{{ count }} दिनों में देय है',
-        nodeStatusXDaysOverdue: '{{ count }} दिन अतिदेय',
+        nodeStatusDueInXDays: '{{count}} दिनों में देय है',
+        nodeStatusXDaysOverdue: '{{count}} दिन अतिदेय',
         nodeActionAddApproversBefore: 'पहले अनुमोदक जोड़ें',
         nodeActionAddApproversAfter: 'बाद में अनुमोदक जोड़ें',
         nodeActionAddApproversParallel: 'समानांतर अनुमोदक जोड़ें',
@@ -264,15 +221,13 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         toolbarEditApprover: 'अनुमोदक संपादित करें',
         watchersInputPlaceholder: 'यहां खोजें..',
         userListSelectedItemsCountSingular: '1 आइटम चुना गया',
-        userListSelectedItemsCountPlural: '{{ count }} आइटम चुने गए',
+        userListSelectedItemsCountPlural: '{{count}} आइटम चुने गए',
         statusApproved: 'मंजूर',
         statusRejected: 'अस्वीकृत',
         statusInProgress: 'कार्यान्वित',
         statusNotStarted: 'शुरू नहीं हुआ'
     },
-    platformFeedInput: {
-        userTitle: 'उपयोगकर्ता'
-    },
+    platformFeedInput: { userTitle: 'उपयोगकर्ता' },
     platformVHD: {
         selectionBarLabel: 'निर्वाचित और शर्त आइटम',
         selectedAndConditionLabel: 'चयनित आइटम और शर्तें',
@@ -288,15 +243,15 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         searchHideAdvancedSearchLabel: 'फ़िल्टर छुपाएं',
         searchShowAllAdvancedSearchLabel: 'सभी फ़िल्टर दिखाएं',
         searchHideAllAdvancedSearchLabel: 'सभी फ़िल्टर छुपाएं',
-        selectTabDisplayCountLabel: '({{ count }}) वस्तुएं',
+        selectTabDisplayCountLabel: '({{count}}) वस्तुएं',
         selectTabMoreBtnLabel: 'और',
-        selectTabCountHiddenA11yLabel: 'इसमें {{ rowCount }} पंक्तियाँ और {{ colCount }} कॉलम हैं',
+        selectTabCountHiddenA11yLabel: 'इसमें {{rowCount}} पंक्तियाँ और {{colCount}} कॉलम हैं',
         selectMobileTabBackBtnTitle: 'वापस',
         selectMobileTabBtnOpenDialogLabel: 'डायलॉग खोलें',
-        selectMobileTabTitle: '{{ title }} टैब',
+        selectMobileTabTitle: '{{title}} टैब',
         selectMobileConditionEmpty: 'खाली',
         defineConditionTitle: 'उत्पाद',
-        defineConditionSelectedValueHiddenA11yLabel: 'चयनित मूल्य {{ value }}',
+        defineConditionSelectedValueHiddenA11yLabel: 'चयनित मूल्य {{value}}',
         defineConditionConditionsGroupHeaderInclude: 'शामिल करें',
         defineConditionConditionsGroupHeaderExclude: 'बहिष्कृत करें',
         defineConditionFromPlaceholder: 'से',
@@ -317,14 +272,14 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'खाली',
         defineConditionConditionStrategyLabelNotEqualTo: 'के बराबर नहीं',
         defineConditionConditionStrategyLabelNotEmpty: 'खाली नही',
-        defineConditionMaxCountError: '{{ count }} से अधिक अक्षरो वाला कोई मूल्य दर्ज करें',
+        defineConditionMaxCountError: '{{count}} से अधिक अक्षरो वाला कोई मूल्य दर्ज करें',
         selectTabTitle: 'सूची में से चयन करें',
         searchTableEmptyMessage: 'परिणाम प्राप्त करने के लिए खोज का प्रयोग करें',
         defineTabTitle: 'शर्तों को परिभाषित करें'
     },
     platformCombobox: {
         countListResultsSingular: '1 परिणाम सूची आइटम',
-        countListResultsPlural: '{{ count }} परिणाम सूची आइटम'
+        countListResultsPlural: '{{count}} परिणाम सूची आइटम'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'विकल्प चुनें',
@@ -334,36 +289,26 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 सीमा से अधिक चरित्र',
-        counterMessageCharactersOverTheLimitPlural: '{{ count }} सीमा से अधिक वर्ण',
+        counterMessageCharactersOverTheLimitPlural: '{{count}} सीमा से अधिक वर्ण',
         counterMessageCharactersRemainingSingular: '1 चरित्र शेष',
-        counterMessageCharactersRemainingPlural: '{{ count }} शेष वर्ण'
+        counterMessageCharactersRemainingPlural: '{{count}} शेष वर्ण'
     },
-    platformLink: {
-        roleDescriptionWithMedia: 'मीडिया: {{ media }}'
-    },
-    platformList: {
-        loadingAriaLabel: 'लोड हो रहा है'
-    },
-    platformObjectListItem: {
-        detailsActionAriaLabel: 'विवरण',
-        deleteActionAriaLabel: 'हटाएं'
-    },
-    platformStandardListItem: {
-        detailsActionAriaLabel: 'विवरण',
-        deleteActionAriaLabel: 'हटाएं'
-    },
+    platformLink: { roleDescriptionWithMedia: 'मीडिया: {{media}}' },
+    platformList: { loadingAriaLabel: 'लोड हो रहा है' },
+    platformObjectListItem: { detailsActionAriaLabel: 'विवरण', deleteActionAriaLabel: 'हटाएं' },
+    platformStandardListItem: { detailsActionAriaLabel: 'विवरण', deleteActionAriaLabel: 'हटाएं' },
     platformSearchField: {
         clearButtonTitle: 'साफ़ करें',
         submitButtonTitle: 'खोज करें',
         searchInputLabel: 'खोज करें',
         synchronizeButtonTitle: 'सिंक्रनाइज़ करें',
-        searchSuggestionMessage: '{{ count }} सुझाव मिले',
+        searchSuggestionMessage: '{{count}} सुझाव मिले',
         searchSuggestionNavigateMessage: 'नेविगेट करने के लिए ऊपर और नीचे तीरों का उपयोग करें'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'खोज करें',
         submitButtonLabel: 'जाओ',
-        filtersButtonLabel: 'फिल्टर ({{ filtersCount }})',
+        filtersButtonLabel: 'फिल्टर ({{filtersCount}})',
         showFiltersButtonLabel: 'फ़िल्टर दिखाएं',
         hideFiltersButtonLabel: 'फ़िल्टर छुपाएं',
         defineConditionsRemoveConditionButtonTitle: 'शर्त हटाएं',
@@ -420,7 +365,7 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         P13ColumnsDialogSearchPlaceholder: 'खोज',
         P13ColumnsDialogsShowSelected: 'चयनित दिखाएँ',
         P13ColumnsDialogShowAll: 'सब दिखाएं',
-        P13ColumnsDialogSelectAll: 'सभी का चयन करे ({{ selectedColumnsCount }}/{{ selectableColumnsCount }})',
+        P13ColumnsDialogSelectAll: 'सभी का चयन करे ({{selectedColumnsCount}}/{{selectableColumnsCount}})',
         P13ColumnsDialogConfirmationBtnLabel: 'ठीक है',
         P13ColumnsDialogCancelBtnLabel: 'रद्द करो',
         P13ColumnsDialogMoveToTopBtn: 'शीर्ष पर जाएं',
@@ -441,13 +386,13 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         P13FilterStrategyLabelBefore: 'इससे पहले',
         P13FilterStrategyLabelBeforeOrOn: 'पहले या आगे',
         P13FilterStrategyLabelNotDefined: 'परिभाषित नहीं',
-        P13FilterBooleanOptionNotDefined: ' ',
+        P13FilterBooleanOptionNotDefined: '',
         P13FilterBooleanOptionTrue: 'हां',
         P13FilterBooleanOptionFalse: 'नहीं',
         P13FilterDialogHeader: 'के द्वारा छनित',
-        P13FilterDialogIncludePanelTitleWithCount: 'शामिल ({{ count }})',
+        P13FilterDialogIncludePanelTitleWithCount: 'शामिल ({{count}})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'शामिल',
-        P13FilterDialogExcludePanelTitleWithCount: 'निकालना ({{ count }})',
+        P13FilterDialogExcludePanelTitleWithCount: 'निकालना ({{count}})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'निकालना',
         P13FilterDialogRemoveFilterBtnTitle: 'फ़िल्टर हटाएं',
         P13FilterDialoAddFilterBtnTitle: 'फ़िल्टर जोड़ें',
@@ -480,7 +425,7 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(फ़िल्टर नहीं किया गया)',
-        filterDialogFilterByLabel: 'के द्वारा छनित: {{ filterLabel }}',
+        filterDialogFilterByLabel: 'के द्वारा छनित: {{filterLabel}}',
         filterDialogFilterTitle: 'फ़िल्टर',
         filterDialogFilterBy: 'के द्वारा छनित',
         filterDialogConfirmBtnLabel: 'अनुमोदन',
@@ -595,9 +540,7 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         messageFileNameLengthExceededSingular:
             'नाम "{{ fileName }}" फ़ाइल नाम की अधिकतम लंबाई को पार कर गया। अनुमत फ़ाइल नाम लंबाई: {{ maxFilenameLength }} पात्र।'
     },
-    platformWizardGenerator: {
-        summarySectionEditStep: 'संपादित करें'
-    },
+    platformWizardGenerator: { summarySectionEditStep: 'संपादित करें' },
     platformMessagePopover: {
         allErrors: 'All',
         defaultErrors: {
@@ -631,27 +574,15 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         createdBy: 'Created By',
         removeVariant: 'Remove View',
         search: 'Search',
-        access: {
-            public: 'Public',
-            private: 'Private'
-        }
+        access: { public: 'Public', private: 'Private' }
     },
-    platformSelect: {
-        selectOptionLabel: 'एक विकल्प चुनें'
-    },
+    platformSelect: { selectOptionLabel: 'एक विकल्प चुनें' },
     fnSlider: {
         minMaxDetails: 'स्लाइडर न्यूनतम मूल्य {{ min }}, अधिकतम मूल्य {{ max }}',
         valueminDetails: 'मूल्य {{ value }}',
         valuemaxDetails: 'मूल्य {{ value }}',
         valueNowDetails: 'वर्तमान मूल्य {{ value }}'
     },
-    fnSwitch: {
-        semanticAcceptLabel: 'स्वीकार करें',
-        semanticDeclineLabel: 'अस्वीकार करें'
-    },
-    coreTree: {
-        expand: 'Expand node',
-        collapse: 'Collapse node',
-        noData: 'No data'
-    }
+    fnSwitch: { semanticAcceptLabel: 'स्वीकार करें', semanticDeclineLabel: 'अस्वीकार करें' },
+    coreTree: { expand: 'Expand node', collapse: 'Collapse node', noData: 'No data' }
 };

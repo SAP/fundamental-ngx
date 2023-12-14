@@ -1,0 +1,13 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "$id": "DownportTranslations",
+    "title": "",
+    "type": "object",
+    "properties": {
+        "translationsGlob": {
+            "type": "string",
+            "description": "Glob pattern for translation files to downport. Understands only .properties files."
+        }
+    },
+    "required": []
+}

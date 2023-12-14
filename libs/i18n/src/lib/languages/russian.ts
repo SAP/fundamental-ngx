@@ -1,11 +1,8 @@
-import { FdLanguage, FdLanguageKeyArgs } from '../models/lang';
+/* eslint-disable */
+import { FdLanguage } from '../models/lang';
 import { PluralizationSet1 } from './pluralization/set1';
-
 const pluralization = new PluralizationSet1();
 
-/**
- * Default set of translations of Fundamental UI library for Russian language
- */
 export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     coreCalendar: {
         yearSelectionLabel: 'Выбрать год',
@@ -53,24 +50,21 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         datetimeOkLabel: 'ОК',
         datetimeCancelLabel: 'Отменить'
     },
-    coreFeedListItem: {
-        moreLabel: 'Больше',
-        lessLabel: 'Меньше'
-    },
+    coreFeedListItem: { moreLabel: 'Больше', lessLabel: 'Меньше' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Отмена',
-        listItemStatusAriaLabel: 'Элемент имеет статус. Статус: {{ status }}.',
+        listItemStatusAriaLabel: 'Элемент имеет статус. Статус: {{status}}.',
         listItemCounterAriaLabel: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Элемент имеет 1 дочерний элемент.`;
-                case 'few':
-                    return `Элемент имеет ${count} дочерних элемента.`;
-                default:
-                    return `Элемент имеет ${count} дочeрних элементов.`;
-            }
+            return `Элемент имеет ${(() => {
+                if (params['count'] === 1) {
+                    return `1 дочерний элемент`;
+                }
+                if (pluralization.process(params['count']) === 'few') {
+                    return `${params['count']} дочерних элемента`;
+                } else {
+                    return `${params['count']} дочерних элементов`;
+                }
+            })()}.`;
         },
         listItemButtonDetailsTitle: 'Подробности',
         listItemButtonDeleteTitle: 'Удалить',
@@ -78,132 +72,116 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         listItemStatusLocked: 'Заблокировано',
         listItemStatusDraft: 'Черновик'
     },
-    coreMessageStrip: {
-        dismissLabel: 'Закрыть'
-    },
+    coreMessageStrip: { dismissLabel: 'Закрыть' },
     coreMultiInput: {
         multiInputAriaLabel: 'Multi Value Input',
         noResults: 'No results.',
         navigateSelectionsWithArrows: 'Navigate selections with the up and down arrows.',
         countListResultsSingular: '1 элемент.',
         countListResultsPlural: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
+            return `${(() => {
+                if (params['count'] === 1) {
                     return `1 элемент.`;
-                case 'few':
-                    return `${count} элемента.`;
-                default:
-                    return `${count || 0} элементов.`;
-            }
+                }
+                if (pluralization.process(params['count']) === 'few') {
+                    return `${params['count']} элемента.`;
+                } else {
+                    return `${params['count']} элементов.`;
+                }
+            })()}`;
         },
         escapeNavigateTokens:
             'Press escape to exit the input field and use the left and right arrow keys to navigate through the selected options.',
-        tokensCountText: ({ length }) => {
-            const option = pluralization.process(length);
-            switch (option) {
-                case 'zero':
-                    return 'Нет выбранных вариантов.';
-                case 'one':
-                    return `Выбран 1 вариант.`;
-                case 'few':
-                    return `Выбрано ${length} варианта.`;
-                default:
-                    return `Выбрано ${length} вариантов.`;
-            }
+        tokensCountText: (params) => {
+            return `${(() => {
+                if (params['length'] == 0) {
+                    return `Нет выбранных`;
+                }
+                if (params['length'] === 1) {
+                    return `Выбран 1`;
+                } else {
+                    return `Выбрано ${params['length']}`;
+                }
+            })()} ${(() => {
+                if (params['length'] === 1) {
+                    return ` вариант `;
+                }
+                if (pluralization.process(params['length']) === 'few') {
+                    return ` варианта `;
+                } else {
+                    return ` вариантов `;
+                }
+            })()}.`;
         }
     },
-    coreNavigation: {
-        mainNavigation: 'Главная Навигация',
-        navigationPath: 'Путь навигации'
-    },
+    coreNavigation: { mainNavigation: 'Главная Навигация', navigationPath: 'Путь навигации' },
     coreNestedList: {
-        linkItemAriaLabel: 'Элемент дерева {{ itemDetails }}, {{ index }} из {{ total }}{{ selectedDescription }}'
+        linkItemAriaLabel: 'Элемент дерева {{itemDetails}}, {{index}} из {{total}}{{selectedDescription}}'
     },
     coreOverflowLayout: {
         moreItemsButton: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Еще 1 елемент`;
-                case 'few':
-                    return `Еще ${count} елемента`;
-                default:
-                    return `Еще ${count} елементов`;
-            }
+            return `Еще ${(() => {
+                if (params['count'] === 1) {
+                    return `1 елемент`;
+                }
+                if (pluralization.process(params['count']) === 'few') {
+                    return `${params['count']} елемента`;
+                } else {
+                    return `${params['count']} елементов`;
+                }
+            })()}`;
         }
     },
     corePagination: {
-        pageLabel: 'Страница {{ pageNumber }}',
-        currentPageAriaLabel: 'Страница {{ pageNumber }} активна',
+        pageLabel: 'Страница {{pageNumber}}',
+        currentPageAriaLabel: 'Страница {{pageNumber}} активна',
         labelBeforeInputMobile: 'Страница:',
-        labelAfterInputMobile: 'из {{ totalCount }}',
-        inputAriaLabel: 'Поле ввода страницы, Текущая страница, Страница {{ pageNumber }} из {{ totalCount }}',
+        labelAfterInputMobile: 'из {{totalCount}}',
+        inputAriaLabel: 'Поле ввода страницы, Текущая страница, Страница {{pageNumber}} из {{totalCount}}',
         itemsPerPageLabel: 'Результатов на странице:',
         firstLabel: 'Перейти к первой',
         previousLabel: 'Перейти к предыдущей',
         nextLabel: 'Перейти к следующей',
         lastLabel: 'Перейти к последней',
         ariaLabel: 'Нумерация страниц',
-        totalResultsLabel: '{{ totalCount }} результатов'
+        totalResultsLabel: '{{totalCount}} результатов'
     },
-    coreProductSwitch: {
-        ariaLabel: 'Переключатель'
-    },
-    coreShellbar: {
-        collapsedItemMenuLabel: 'Свернутое меню элементов',
-        cancel: 'Отмена',
-        search: 'Поиск'
-    },
+    coreProductSwitch: { ariaLabel: 'Переключатель' },
+    coreShellbar: { collapsedItemMenuLabel: 'Свернутое меню элементов', cancel: 'Отмена', search: 'Поиск' },
     coreSlider: {
-        singleMinMaxDetails: 'Минимальное значение слайдера {{ min }}, максимальное значение {{ max }}',
-        singleValueminDetails: 'Значение равно {{ value }}',
-        singleValuemaxDetails: 'Значение равно {{ value }}',
-        singleValueNowDetails: 'Текущее значение: {{ value }}',
-        multipleHandle1MinMaxDetails: 'Минимальное значение слайдера {{ min }}, максимальное значение {{ max }}',
-        multipleHandle1ValueminDetails: 'Значение равно {{ value }}',
-        multipleHandle1ValuemaxDetails: 'Значение равно {{ value }}',
-        multipleHandle1ValueNowDetails: 'Текущее значение: {{ value }}',
-        multipleHandle2MinMaxDetails: 'Минимальное значение слайдера {{ min }}, максимальное значение {{ max }}',
-        multipleHandle2ValueminDetails: 'Значение равно {{ value }}',
-        multipleHandle2ValuemaxDetails: 'Значение равно {{ value }}',
-        multipleHandle2ValueNowDetails: 'Текущее значение: {{ value }}'
+        singleMinMaxDetails: 'Минимальное значение слайдера {{min}}, максимальное значение {{max}}',
+        singleValueminDetails: 'Значение равно {{value}}',
+        singleValuemaxDetails: 'Значение равно {{value}}',
+        singleValueNowDetails: 'Текущее значение: {{value}}',
+        multipleHandle1MinMaxDetails: 'Минимальное значение слайдера {{min}}, максимальное значение {{max}}',
+        multipleHandle1ValueminDetails: 'Значение равно {{value}}',
+        multipleHandle1ValuemaxDetails: 'Значение равно {{value}}',
+        multipleHandle1ValueNowDetails: 'Текущее значение: {{value}}',
+        multipleHandle2MinMaxDetails: 'Минимальное значение слайдера {{min}}, максимальное значение {{max}}',
+        multipleHandle2ValueminDetails: 'Значение равно {{value}}',
+        multipleHandle2ValuemaxDetails: 'Значение равно {{value}}',
+        multipleHandle2ValueNowDetails: 'Текущее значение: {{value}}'
     },
-    coreSplitButton: {
-        expandButtonAriaLabel: 'Больше действий',
-        arialLabel: 'Кнопка разделения'
-    },
-    coreSplitter: {
-        paginationItemAriaLabel: 'Секция'
-    },
+    coreSplitButton: { expandButtonAriaLabel: 'Больше действий', arialLabel: 'Кнопка разделения' },
+    coreSplitter: { paginationItemAriaLabel: 'Секция' },
     coreStepInput: {
         incrementButtonTitle: 'Увеличить',
         decrementButtonTitle: 'Уменьшить',
         ariaRoleDescription: 'Шаг ввода'
     },
-    coreSwitch: {
-        semanticAcceptLabel: 'Принять',
-        semanticDeclineLabel: 'Отклонить'
-    },
-    coreTabs: {
-        tabListExpandButtonText: 'Больше'
-    },
-    coreText: {
-        moreLabel: 'Больше',
-        lessLabel: 'Меньше'
-    },
+    coreSwitch: { semanticAcceptLabel: 'Принять', semanticDeclineLabel: 'Отклонить' },
+    coreTabs: { tabListExpandButtonText: 'Больше' },
+    coreText: { moreLabel: 'Больше', lessLabel: 'Меньше' },
     coreTime: {
         componentAriaName: 'Выбор времени',
         increaseHoursLabel: 'Увеличить часы',
         hrsLabel: 'Час',
-        decreaseHoursLabel: 'Уменьшить часы',
-        increaseMinutesLabel: 'Увеличить минуты',
-        minLabel: 'Мин',
-        decreaseMinutesLabel: 'Уменьшить минуты',
-        increaseSecondsLabel: 'Увеличить секунды',
-        secLabel: 'Сек',
+        decreaseHoursLabel: 'Decrease hours',
+        increaseMinutesLabel: 'Increase minutes',
+        minLabel: 'Min',
+        decreaseMinutesLabel: 'Decrease minutes',
+        increaseSecondsLabel: 'Increase seconds',
+        secLabel: 'Sec',
         hoursLabel: 'Hours',
         minutesLabel: 'Minutes',
         secondsLabel: 'Seconds',
@@ -212,29 +190,22 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         periodLabel: 'Период',
         decreasePeriodLabel: 'Уменьшить период',
         navigationInstruction:
-            'Для перемещения между элементами в этом списке используйте стрелку вверх или вниз. ' +
-            'Для переключения между списками используйте стрелку влево или вправо.'
+            'Для перемещения между элементами в этом списке используйте стрелку вверх или вниз. Для переключения между списками используйте стрелку влево или вправо.'
     },
-    coreTimePicker: {
-        timePickerInputLabel: 'Поле ввода времени',
-        timePickerButtonLabel: 'Открыть окно выбора'
-    },
-    coreToken: {
-        deleteButtonLabel: 'Удаляемый',
-        ariaRoleDescription: 'токен'
-    },
+    coreTimePicker: { timePickerInputLabel: 'Поле ввода времени', timePickerButtonLabel: 'Открыть окно выбора' },
+    coreToken: { deleteButtonLabel: 'Удаляемый', ariaRoleDescription: 'токен' },
     coreTokenizer: {
         moreLabel: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Еще 1 елемент`;
-                case 'few':
-                    return `Еще ${count} елемента`;
-                default:
-                    return `Еще ${count} елементов`;
-            }
+            return `Еще ${(() => {
+                if (params['count'] === 1) {
+                    return `1 елемент`;
+                }
+                if (pluralization.process(params['count']) === 'few') {
+                    return `${params['count']} елемента`;
+                } else {
+                    return `${params['count']} елементов`;
+                }
+            })()}`;
         },
         tokenizerLabel: 'Tokenizer'
     },
@@ -247,15 +218,9 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         menuCancelAriaLabel: 'Отменить',
         formItemPlaceholder: 'Имя файла'
     },
-    coreWizard: {
-        ariaLabel: 'Мастер'
-    },
-    coreBreadcrumb: {
-        overflowTitleMore: 'Больше'
-    },
-    platformActionBar: {
-        backButtonLabel: 'Вернуться назад'
-    },
+    coreWizard: { ariaLabel: 'Мастер' },
+    coreBreadcrumb: { overflowTitleMore: 'Больше' },
+    platformActionBar: { backButtonLabel: 'Вернуться назад' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'Добавить',
         nodeMenuButtonTitle: 'Меню',
@@ -300,42 +265,42 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         messagesErrorBuildGraph: 'При попытке построить график произошла ошибка. Проверьте входящие данные.',
         messagesUndoAction: 'Отменить',
         nodeMembersCount: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `1 член команды`;
-                case 'few':
-                    return `${count} члена команды`;
-                default:
-                    return `${count || 0} членов команды`;
-            }
+            return `${(() => {
+                if (params['count'] === 1) {
+                    return `1 член`;
+                }
+                if (pluralization.process(params['count']) === 'few') {
+                    return `${params['count']} члена`;
+                } else {
+                    return `${params['count']} членов`;
+                }
+            })()} команды`;
         },
         nodeVariousTeams: 'Различные команды',
         nodeStatusDueToday: 'Срок выполнения сегодня',
         nodeStatusDueInXDays: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Срок выполнения через 1 день`;
-                case 'few':
-                    return `Срок выполнения через ${count} дня`;
-                default:
-                    return `Срок выполнения через ${count || 0} дней`;
-            }
+            return `Срок выполнения через ${(() => {
+                if (params['count'] === 1) {
+                    return `1 день`;
+                }
+                if (pluralization.process(params['count']) === 'few') {
+                    return `${params['count']} дня`;
+                } else {
+                    return `${params['count']} дней`;
+                }
+            })()}`;
         },
         nodeStatusXDaysOverdue: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Просрочено на 1 день`;
-                case 'few':
-                    return `Просрочено на ${count} дня`;
-                default:
-                    return `Просрочено на ${count || 0} дней`;
-            }
+            return `Просрочено на ${(() => {
+                if (params['count'] === 1) {
+                    return `1 день`;
+                }
+                if (pluralization.process(params['count']) === 'few') {
+                    return `${params['count']} дня`;
+                } else {
+                    return `${params['count']} дней`;
+                }
+            })()}`;
         },
         nodeActionAddApproversBefore: 'Добавить утверждающих до',
         nodeActionAddApproversAfter: 'Добавить утверждающих после',
@@ -358,25 +323,23 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         watchersInputPlaceholder: 'Поиск',
         userListSelectedItemsCountSingular: 'Выбран 1 элемент',
         userListSelectedItemsCountPlural: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Выбрано 1 элемент`;
-                case 'few':
-                    return `Выбрано ${count} элемента`;
-                default:
-                    return `Выбрано ${count || 0} элементов`;
-            }
+            return `Выбрано ${(() => {
+                if (params['count'] === 1) {
+                    return `1 элемент`;
+                }
+                if (pluralization.process(params['count']) === 'few') {
+                    return `${params['count']} элемента`;
+                } else {
+                    return `${params['count']} элементов`;
+                }
+            })()}`;
         },
         statusApproved: 'утверждено',
         statusRejected: 'отклонено',
         statusInProgress: 'в процессе',
         statusNotStarted: 'не начато'
     },
-    platformFeedInput: {
-        userTitle: 'Пользователь'
-    },
+    platformFeedInput: { userTitle: 'Пользователь' },
     platformVHD: {
         selectionBarLabel: 'Выбранные элементы и условия',
         selectedAndConditionLabel: 'Выбранные элементы и условия',
@@ -392,45 +355,35 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         searchHideAdvancedSearchLabel: 'Скрыть фильтры',
         searchShowAllAdvancedSearchLabel: 'Показать все фильтры',
         searchHideAllAdvancedSearchLabel: 'Скрыть все фильтры',
-        selectTabDisplayCountLabel: 'Элементы ({{ count }})',
+        selectTabDisplayCountLabel: 'Элементы ({{count}})',
         selectTabMoreBtnLabel: 'Больше',
         selectTabCountHiddenA11yLabel: (params) => {
-            const rowCount = params['rowCount'];
-            const rowOption = pluralization.process(rowCount);
-            let rowPart: string;
-            switch (rowOption) {
-                case 'one':
-                    rowPart = 'содержит 1 строку';
-                    break;
-                case 'few':
-                    rowPart = `содержит ${rowCount} строки`;
-                    break;
-                default:
-                    rowPart = `содержит ${rowCount} строк`;
-                    break;
-            }
-            const colCount = params['colCount'];
-            const colOption = pluralization.process(colCount);
-            let colPart: string;
-            switch (colOption) {
-                case 'one':
-                    colPart = '1 столбец';
-                    break;
-                case 'few':
-                    colPart = `${colCount} столбца`;
-                    break;
-                default:
-                    colPart = `${colCount} столбцов`;
-                    break;
-            }
-            return `${rowPart} и ${colPart}`;
+            return `содержит ${(() => {
+                if (params['rowCount'] === 1) {
+                    return `1 строку`;
+                }
+                if (pluralization.process(params['rowCount']) === 'few') {
+                    return `${params['rowCount']} строки`;
+                } else {
+                    return `${params['rowCount']} строк`;
+                }
+            })()} и ${(() => {
+                if (params['colCount'] === 1) {
+                    return `1 столбец`;
+                }
+                if (pluralization.process(params['colCount']) === 'few') {
+                    return `${params['colCount']} столбца`;
+                } else {
+                    return `${params['colCount']} столбцов`;
+                }
+            })()}`;
         },
         selectMobileTabBackBtnTitle: 'Назад',
         selectMobileTabBtnOpenDialogLabel: 'Открыть диалоговое окно',
-        selectMobileTabTitle: '{{ title }} вкладка',
+        selectMobileTabTitle: '{{title}} вкладка',
         selectMobileConditionEmpty: 'Пусто',
         defineConditionTitle: 'Продукт',
-        defineConditionSelectedValueHiddenA11yLabel: 'выбранное значение {{ value }}',
+        defineConditionSelectedValueHiddenA11yLabel: 'выбранное значение {{value}}',
         defineConditionConditionsGroupHeaderInclude: 'Включающие условия',
         defineConditionConditionsGroupHeaderExclude: 'Исключительные условия',
         defineConditionFromPlaceholder: 'от',
@@ -452,14 +405,13 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         defineConditionConditionStrategyLabelNotEqualTo: 'не равно',
         defineConditionConditionStrategyLabelNotEmpty: 'не пусто',
         defineConditionMaxCountError: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Введите значение не более 1 символа`;
-                default:
-                    return `Введите значение не более ${count || 0} символов`;
-            }
+            return `Введите значение не более ${(() => {
+                if (params['count'] === 1) {
+                    return `1 символа`;
+                } else {
+                    return `${params['count']} символов`;
+                }
+            })()}`;
         },
         selectTabTitle: 'Выбрать из списка',
         searchTableEmptyMessage: 'Используйте поиск для получения результатов',
@@ -468,16 +420,16 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     platformCombobox: {
         countListResultsSingular: '1 элемент',
         countListResultsPlural: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
+            return `${(() => {
+                if (params['count'] === 1) {
                     return `1 элемент`;
-                case 'few':
-                    return `${count} элемента`;
-                default:
-                    return `${count || 0} элементов`;
-            }
+                }
+                if (pluralization.process(params['count']) === 'few') {
+                    return `${params['count']} элемента`;
+                } else {
+                    return `${params['count']} элементов`;
+                }
+            })()}`;
         }
     },
     platformMultiCombobox: {
@@ -489,69 +441,58 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'Превышен лимит на 1 символ',
         counterMessageCharactersOverTheLimitPlural: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Превышен лимит на 1 символ`;
-                case 'few':
-                    return `Превышен лимит на ${count} символа`;
-                default:
-                    return `Превышен лимит на ${count || 0} символов`;
-            }
+            return `Превышен лимит на ${(() => {
+                if (params['count'] === 1) {
+                    return `1 символ`;
+                }
+                if (pluralization.process(params['count']) === 'few') {
+                    return `${params['count']} символа`;
+                } else {
+                    return `${params['count']} символов`;
+                }
+            })()}`;
         },
         counterMessageCharactersRemainingSingular: 'Остался 1 символ',
         counterMessageCharactersRemainingPlural: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
+            return `${(() => {
+                if (params['count'] === 1) {
                     return `Остался 1 символ`;
-                case 'few':
-                    return `Осталось ${count} символа`;
-                default:
-                    return `Осталось ${count || 0} символов`;
-            }
+                }
+                if (pluralization.process(params['count']) === 'few') {
+                    return `Осталось ${params['count']} символа`;
+                } else {
+                    return `Осталось ${params['count']} символов`;
+                }
+            })()}`;
         }
     },
-
-    platformLink: {
-        roleDescriptionWithMedia: 'Медиа: {{ media }}'
-    },
-    platformList: {
-        loadingAriaLabel: 'загрузка'
-    },
-    platformObjectListItem: {
-        detailsActionAriaLabel: 'детали',
-        deleteActionAriaLabel: 'удалить'
-    },
-    platformStandardListItem: {
-        detailsActionAriaLabel: 'детали',
-        deleteActionAriaLabel: 'удалить'
-    },
+    platformLink: { roleDescriptionWithMedia: 'Медиа: {{media}}' },
+    platformList: { loadingAriaLabel: 'загрузка' },
+    platformObjectListItem: { detailsActionAriaLabel: 'детали', deleteActionAriaLabel: 'удалить' },
+    platformStandardListItem: { detailsActionAriaLabel: 'детали', deleteActionAriaLabel: 'удалить' },
     platformSearchField: {
         clearButtonTitle: 'Очистить',
         submitButtonTitle: 'Поиск',
         searchInputLabel: 'Поиск',
         synchronizeButtonTitle: 'Синхронизировать',
         searchSuggestionMessage: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
+            return `${(() => {
+                if (params['count'] === 1) {
                     return `Найден 1 вариант`;
-                case 'few':
-                    return `Найдено ${count} варианта`;
-                default:
-                    return `Найдено ${count || 0} вариантов`;
-            }
+                }
+                if (pluralization.process(params['count']) === 'few') {
+                    return `Найдено ${params['count']} варианта`;
+                } else {
+                    return `Найдено ${params['count']} вариантов`;
+                }
+            })()}`;
         },
         searchSuggestionNavigateMessage: 'используйте стрелки вверх и вниз для навигации'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Поиск',
         submitButtonLabel: 'Перейти',
-        filtersButtonLabel: 'Фильтры ({{ filtersCount }})',
+        filtersButtonLabel: 'Фильтры ({{filtersCount}})',
         showFiltersButtonLabel: 'Показать фильтры',
         hideFiltersButtonLabel: 'Скрыть фильтры',
         defineConditionsRemoveConditionButtonTitle: 'Удалить условие',
@@ -608,7 +549,7 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         P13ColumnsDialogSearchPlaceholder: 'Поиск',
         P13ColumnsDialogsShowSelected: 'Показать выбранное',
         P13ColumnsDialogShowAll: 'Показать все',
-        P13ColumnsDialogSelectAll: 'Выбрать все ({{ selectedColumnsCount }}/{{ selectableColumnsCount }})',
+        P13ColumnsDialogSelectAll: 'Выбрать все ({{selectedColumnsCount}}/{{selectableColumnsCount}})',
         P13ColumnsDialogConfirmationBtnLabel: 'ОК',
         P13ColumnsDialogCancelBtnLabel: 'Отмена',
         P13ColumnsDialogMoveToTopBtn: 'Переместить вверх',
@@ -629,13 +570,13 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         P13FilterStrategyLabelBefore: 'до',
         P13FilterStrategyLabelBeforeOrOn: 'до или равно',
         P13FilterStrategyLabelNotDefined: 'Не определено',
-        P13FilterBooleanOptionNotDefined: ' ',
+        P13FilterBooleanOptionNotDefined: '',
         P13FilterBooleanOptionTrue: 'Да',
         P13FilterBooleanOptionFalse: 'Нет',
         P13FilterDialogHeader: 'Фильтровать по',
-        P13FilterDialogIncludePanelTitleWithCount: 'Включающие условия ({{ count }})',
+        P13FilterDialogIncludePanelTitleWithCount: 'Включающие условия ({{count}})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'Включающие условия',
-        P13FilterDialogExcludePanelTitleWithCount: 'Исключающие условия ({{ count }})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Исключающие условия ({{count}})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Исключающие условия',
         P13FilterDialogRemoveFilterBtnTitle: 'Удалить фильтр',
         P13FilterDialoAddFilterBtnTitle: 'Добавить фильтр',
@@ -668,7 +609,7 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Не отфильтровано)',
-        filterDialogFilterByLabel: 'Фильтр: {{ filterLabel }}',
+        filterDialogFilterByLabel: 'Фильтр: {{filterLabel}}',
         filterDialogFilterTitle: 'Фильтр',
         filterDialogFilterBy: 'Фильтровать по',
         filterDialogConfirmBtnLabel: 'ОК',
@@ -756,36 +697,297 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         messageFileRenameFailed: 'Не удалось переименовать "{{ from }}" в "{{ to }}."',
         messageFileRenameSuccess: '{{ from }}" переименовано в "{{ to }}".',
         messageRemoveFoldersAndFilesFailed: (params) =>
-            `Не удалось удалить ${folderNamePluralization(params)} и ${fileNamePluralization(params)}.`,
+            `Не удалось удалить ${(() => {
+                const foldersCount = params['foldersCount'];
+                const foldersCountOption = pluralization.process(foldersCount);
+                switch (foldersCountOption) {
+                    case 'one':
+                        return '1 папку';
+                    case 'few':
+                        return `${foldersCount} папки`;
+                    default:
+                        return `${foldersCount || 0} папок`;
+                }
+            })()} и ${(() => {
+                const filesCount = params['filesCount'];
+                const filesCountOption = pluralization.process(filesCount);
+                switch (filesCountOption) {
+                    case 'one':
+                        return '1 файл';
+                    case 'few':
+                        return `${filesCount} файла`;
+                    default:
+                        return `${filesCount || 0} файлов`;
+                }
+            })()}.`,
         messageRemoveFoldersAndFilesSuccess: (params) =>
-            `${folderNamePluralization(params)} и ${fileNamePluralization(params)} удалено.`,
-        messageRemoveFoldersFailed: (params) => `Не удалось удалить ${folderNamePluralization(params)}.`,
-        messageRemoveFoldersSuccess: (params) => `Удалено ${folderNamePluralization(params)}.`,
+            `${(() => {
+                const foldersCount = params['foldersCount'];
+                const foldersCountOption = pluralization.process(foldersCount);
+                switch (foldersCountOption) {
+                    case 'one':
+                        return '1 папку';
+                    case 'few':
+                        return `${foldersCount} папки`;
+                    default:
+                        return `${foldersCount || 0} папок`;
+                }
+            })()} и ${(() => {
+                const filesCount = params['filesCount'];
+                const filesCountOption = pluralization.process(filesCount);
+                switch (filesCountOption) {
+                    case 'one':
+                        return '1 файл';
+                    case 'few':
+                        return `${filesCount} файла`;
+                    default:
+                        return `${filesCount || 0} файлов`;
+                }
+            })()} удалено.`,
+        messageRemoveFoldersFailed: (params) =>
+            `Не удалось удалить ${(() => {
+                const foldersCount = params['foldersCount'];
+                const foldersCountOption = pluralization.process(foldersCount);
+                switch (foldersCountOption) {
+                    case 'one':
+                        return '1 папку';
+                    case 'few':
+                        return `${foldersCount} папки`;
+                    default:
+                        return `${foldersCount || 0} папок`;
+                }
+            })()}.`,
+        messageRemoveFoldersSuccess: (params) =>
+            `Удалено ${(() => {
+                const foldersCount = params['foldersCount'];
+                const foldersCountOption = pluralization.process(foldersCount);
+                switch (foldersCountOption) {
+                    case 'one':
+                        return '1 папку';
+                    case 'few':
+                        return `${foldersCount} папки`;
+                    default:
+                        return `${foldersCount || 0} папок`;
+                }
+            })()}.`,
         messageRemoveFilesFailed: 'Не удалось удалить файлы {{ filesCount }}.',
-        messageRemoveFilesSuccess: (params) => `Удалено ${fileNamePluralization(params)}.`,
+        messageRemoveFilesSuccess: (params) =>
+            `Удалено ${(() => {
+                const filesCount = params['filesCount'];
+                const filesCountOption = pluralization.process(filesCount);
+                switch (filesCountOption) {
+                    case 'one':
+                        return '1 файл';
+                    case 'few':
+                        return `${filesCount} файла`;
+                    default:
+                        return `${filesCount || 0} файлов`;
+                }
+            })()}.`,
         messageRemoveFileOrFolderFailed: 'Не удалось удалить {{ name }}.',
         messageRemoveFileOrFolderSuccess: '{{ name }} удалено.',
         messageMoveFoldersAndFilesFailed: (params) =>
-            `Не удалось переместить ${folderNamePluralization(params)} и ${fileNamePluralization(params)} в {{ to }}.`,
+            `Не удалось переместить ${(() => {
+                const foldersCount = params['foldersCount'];
+                const foldersCountOption = pluralization.process(foldersCount);
+                switch (foldersCountOption) {
+                    case 'one':
+                        return '1 папку';
+                    case 'few':
+                        return `${foldersCount} папки`;
+                    default:
+                        return `${foldersCount || 0} папок`;
+                }
+            })()} и ${(() => {
+                const filesCount = params['filesCount'];
+                const filesCountOption = pluralization.process(filesCount);
+                switch (filesCountOption) {
+                    case 'one':
+                        return '1 файл';
+                    case 'few':
+                        return `${filesCount} файла`;
+                    default:
+                        return `${filesCount || 0} файлов`;
+                }
+            })()} в {{ to }}.`,
         messageMoveFoldersAndFilesSuccess: (params) =>
-            `${folderNamePluralization(params)} и ${fileNamePluralization(params)} перемещены в {{ to }}.`,
-        messageMoveFoldersFailed: (params) => `Не удалось переместить ${folderNamePluralization(params)} в {{ to }}.`,
-        messageMoveFoldersSuccess: (params) => `${folderNamePluralization(params)} перемещен в {{ to }}.`,
-        messageMoveFilesFailed: (params) => `Не удалось переместить ${fileNamePluralization(params)} в {{ to }}.`,
-        messageMoveFilesSuccess: (params) => `${fileNamePluralization(params)} перемещен в {{ to }}.`,
+            `${(() => {
+                const foldersCount = params['foldersCount'];
+                const foldersCountOption = pluralization.process(foldersCount);
+                switch (foldersCountOption) {
+                    case 'one':
+                        return '1 папку';
+                    case 'few':
+                        return `${foldersCount} папки`;
+                    default:
+                        return `${foldersCount || 0} папок`;
+                }
+            })()} и ${(() => {
+                const filesCount = params['filesCount'];
+                const filesCountOption = pluralization.process(filesCount);
+                switch (filesCountOption) {
+                    case 'one':
+                        return '1 файл';
+                    case 'few':
+                        return `${filesCount} файла`;
+                    default:
+                        return `${filesCount || 0} файлов`;
+                }
+            })()} перемещены в {{ to }}.`,
+        messageMoveFoldersFailed: (params) =>
+            `Не удалось переместить ${(() => {
+                const foldersCount = params['foldersCount'];
+                const foldersCountOption = pluralization.process(foldersCount);
+                switch (foldersCountOption) {
+                    case 'one':
+                        return '1 папку';
+                    case 'few':
+                        return `${foldersCount} папки`;
+                    default:
+                        return `${foldersCount || 0} папок`;
+                }
+            })()} в {{ to }}.`,
+        messageMoveFoldersSuccess: (params) =>
+            `${(() => {
+                const foldersCount = params['foldersCount'];
+                const foldersCountOption = pluralization.process(foldersCount);
+                switch (foldersCountOption) {
+                    case 'one':
+                        return '1 папку';
+                    case 'few':
+                        return `${foldersCount} папки`;
+                    default:
+                        return `${foldersCount || 0} папок`;
+                }
+            })()} перемещен в {{ to }}.`,
+        messageMoveFilesFailed: (params) =>
+            `Не удалось переместить ${(() => {
+                const filesCount = params['filesCount'];
+                const filesCountOption = pluralization.process(filesCount);
+                switch (filesCountOption) {
+                    case 'one':
+                        return '1 файл';
+                    case 'few':
+                        return `${filesCount} файла`;
+                    default:
+                        return `${filesCount || 0} файлов`;
+                }
+            })()} в {{ to }}.`,
+        messageMoveFilesSuccess: (params) =>
+            `${(() => {
+                const filesCount = params['filesCount'];
+                const filesCountOption = pluralization.process(filesCount);
+                switch (filesCountOption) {
+                    case 'one':
+                        return '1 файл';
+                    case 'few':
+                        return `${filesCount} файла`;
+                    default:
+                        return `${filesCount || 0} файлов`;
+                }
+            })()} перемещен в {{ to }}.`,
         messageMoveFileOrFolderFailed: 'Не удалось переместить {{ name }} в {{ to }}.',
         messageMoveFileOrFolderSuccess: '{{ name }} перемещен в {{ to }}.',
         messageMoveRootFoldersAndFilesFailed: (params) =>
-            `Не удалось переместить ${folderNamePluralization(params)} и ${fileNamePluralization(
-                params
-            )} во все файлы.`,
+            `Не удалось переместить ${(() => {
+                const foldersCount = params['foldersCount'];
+                const foldersCountOption = pluralization.process(foldersCount);
+                switch (foldersCountOption) {
+                    case 'one':
+                        return '1 папку';
+                    case 'few':
+                        return `${foldersCount} папки`;
+                    default:
+                        return `${foldersCount || 0} папок`;
+                }
+            })()} и ${(() => {
+                const filesCount = params['filesCount'];
+                const filesCountOption = pluralization.process(filesCount);
+                switch (filesCountOption) {
+                    case 'one':
+                        return '1 файл';
+                    case 'few':
+                        return `${filesCount} файла`;
+                    default:
+                        return `${filesCount || 0} файлов`;
+                }
+            })()} во все файлы.`,
         messageMoveRootFoldersAndFilesSuccess: (params) =>
-            `${folderNamePluralization(params)} и ${fileNamePluralization(params)} перемещены ко всем файлам.`,
+            `${(() => {
+                const foldersCount = params['foldersCount'];
+                const foldersCountOption = pluralization.process(foldersCount);
+                switch (foldersCountOption) {
+                    case 'one':
+                        return '1 папку';
+                    case 'few':
+                        return `${foldersCount} папки`;
+                    default:
+                        return `${foldersCount || 0} папок`;
+                }
+            })()} и ${(() => {
+                const filesCount = params['filesCount'];
+                const filesCountOption = pluralization.process(filesCount);
+                switch (filesCountOption) {
+                    case 'one':
+                        return '1 файл';
+                    case 'few':
+                        return `${filesCount} файла`;
+                    default:
+                        return `${filesCount || 0} файлов`;
+                }
+            })()} перемещены ко всем файлам.`,
         messageMoveRootFoldersFailed: (params) =>
-            `Не удалось переместить ${folderNamePluralization(params)} во все файлы.`,
-        messageMoveRootFoldersSuccess: (params) => `${folderNamePluralization(params)} перемещен ко всем файлам.`,
-        messageMoveRootFilesFailed: (params) => `Не удалось переместить ${fileNamePluralization(params)} во все файлы.`,
-        messageMoveRootFilesSuccess: (params) => `${fileNamePluralization(params)} перемещены ко всем файлам.`,
+            `Не удалось переместить ${(() => {
+                const foldersCount = params['foldersCount'];
+                const foldersCountOption = pluralization.process(foldersCount);
+                switch (foldersCountOption) {
+                    case 'one':
+                        return '1 папку';
+                    case 'few':
+                        return `${foldersCount} папки`;
+                    default:
+                        return `${foldersCount || 0} папок`;
+                }
+            })()} во все файлы.`,
+        messageMoveRootFoldersSuccess: (params) =>
+            `${(() => {
+                const foldersCount = params['foldersCount'];
+                const foldersCountOption = pluralization.process(foldersCount);
+                switch (foldersCountOption) {
+                    case 'one':
+                        return '1 папку';
+                    case 'few':
+                        return `${foldersCount} папки`;
+                    default:
+                        return `${foldersCount || 0} папок`;
+                }
+            })()} перемещен ко всем файлам.`,
+        messageMoveRootFilesFailed: (params) =>
+            `Не удалось переместить ${(() => {
+                const filesCount = params['filesCount'];
+                const filesCountOption = pluralization.process(filesCount);
+                switch (filesCountOption) {
+                    case 'one':
+                        return '1 файл';
+                    case 'few':
+                        return `${filesCount} файла`;
+                    default:
+                        return `${filesCount || 0} файлов`;
+                }
+            })()} во все файлы.`,
+        messageMoveRootFilesSuccess: (params) =>
+            `${(() => {
+                const filesCount = params['filesCount'];
+                const filesCountOption = pluralization.process(filesCount);
+                switch (filesCountOption) {
+                    case 'one':
+                        return '1 файл';
+                    case 'few':
+                        return `${filesCount} файла`;
+                    default:
+                        return `${filesCount || 0} файлов`;
+                }
+            })()} перемещены ко всем файлам.`,
         messageMoveRootFileOrFolderFailed: 'Не удалось переместить {{ name }} во все файлы.',
         messageMoveRootFileOrFolderSuccess: '{{ name }} перемещен ко всем файлам.',
         messageFileTypeMismatchPlural: (params) => {
@@ -835,9 +1037,7 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         messageFileNameLengthExceededSingular:
             'Имя "{{ fileName }}" превышает максимальную длину имени файла. Разрешена длина имени файла: {{ maxFilenameLength }} символов.'
     },
-    platformWizardGenerator: {
-        summarySectionEditStep: 'Редактировать'
-    },
+    platformWizardGenerator: { summarySectionEditStep: 'Редактировать' },
     platformMessagePopover: {
         allErrors: 'Все',
         defaultErrors: {
@@ -871,69 +1071,15 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         createdBy: 'Создал(а)',
         removeVariant: 'Удалить вид',
         search: 'Поиск',
-        access: {
-            public: 'Публичное',
-            private: 'Приватное'
-        }
+        access: { public: 'Публичное', private: 'Приватное' }
     },
-    platformSelect: {
-        selectOptionLabel: 'Выберите вариант'
-    },
+    platformSelect: { selectOptionLabel: 'Выберите вариант' },
     fnSlider: {
         minMaxDetails: 'Минимальное значение слайдера {{ min }}, максимальное значение {{ max }}',
         valueminDetails: 'Значение равно {{ value }}',
         valuemaxDetails: 'Значение равно {{ value }}',
         valueNowDetails: 'Текущее значение: {{ value }}'
     },
-    fnSwitch: {
-        semanticAcceptLabel: 'Принять',
-        semanticDeclineLabel: 'Отклонить'
-    },
-    coreTree: {
-        expand: 'Развернуть узел',
-        collapse: 'Свернуть узел',
-        noData: 'Нет данных'
-    }
+    fnSwitch: { semanticAcceptLabel: 'Принять', semanticDeclineLabel: 'Отклонить' },
+    coreTree: { expand: 'Развернуть узел', collapse: 'Свернуть узел', noData: 'Нет данных' }
 };
-
-/**
- * Pluralization for "file" word in russian language
- *
- * Output samples:
- * * 1 файл
- * * 2 файла
- * * 10 файлов
- */
-function fileNamePluralization(params: FdLanguageKeyArgs): string {
-    const filesCount = params['filesCount'];
-    const filesCountOption = pluralization.process(filesCount);
-    switch (filesCountOption) {
-        case 'one':
-            return '1 файл';
-        case 'few':
-            return `${filesCount} файла`;
-        default:
-            return `${filesCount || 0} файлов`;
-    }
-}
-
-/**
- * Pluralization for "folder" word in russian language
- *
- * Outputs samples:
- * * 1 папку
- * * 2 папки
- * * 10 папок
- */
-function folderNamePluralization(params: FdLanguageKeyArgs): string {
-    const foldersCount = params['foldersCount'];
-    const foldersCountOption = pluralization.process(foldersCount);
-    switch (foldersCountOption) {
-        case 'one':
-            return '1 папку';
-        case 'few':
-            return `${foldersCount} папки`;
-        default:
-            return `${foldersCount || 0} папок`;
-    }
-}
