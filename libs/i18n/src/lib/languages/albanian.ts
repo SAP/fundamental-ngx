@@ -170,8 +170,7 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         periodLabel: 'Periudha',
         decreasePeriodLabel: 'Periudha e zvogëlimit',
         navigationInstruction:
-            'Për të lëvizur midis artikujve në këtë listë, shtypni shigjetën lart ose shigjetën e poshtme. ' +
-            'Për të kaluar midis listave, shtypni shigjetën majtas ose shigjetën djathtas.'
+            'Për të lëvizur midis artikujve në këtë listë, shtypni shigjetën lart ose shigjetën e poshtme. Për të kaluar midis listave, shtypni shigjetën majtas ose shigjetën djathtas.'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Hyrja e zgjedhësit të kohës',

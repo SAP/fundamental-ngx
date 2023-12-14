@@ -166,8 +166,7 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         periodLabel: 'Období',
         decreasePeriodLabel: 'Snížit období',
         navigationInstruction:
-            'Chcete-li se pohybovat mezi položkami v tomto seznamu, stiskněte horní nebo dolní šipku. ' +
-            'Pro přepínání mezi seznamy stiskněte levou nebo pravou šipku.'
+            'Chcete-li se pohybovat mezi položkami v tomto seznamu, stiskněte horní nebo dolní šipku. Pro přepínání mezi seznamy stiskněte levou nebo pravou šipku.'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Time picker input',

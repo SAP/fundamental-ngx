@@ -173,8 +173,7 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         periodLabel: 'Periodo',
         decreasePeriodLabel: 'Diminuisci periodo',
         navigationInstruction:
-            'Per spostarti tra gli elementi di questo elenco, premi la freccia in alto o in basso. ' +
-            "Per passare da un elenco all'altro, premere la freccia sinistra o la freccia destra."
+            "Per spostarti tra gli elementi di questo elenco, premi la freccia in alto o in basso. Per passare da un elenco all'altro, premere la freccia sinistra o la freccia destra."
     },
     coreTimePicker: {
         timePickerInputLabel: 'Input per la selezione del tempo',

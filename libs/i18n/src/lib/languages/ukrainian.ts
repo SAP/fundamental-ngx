@@ -1,4 +1,4 @@
-import { FdLanguage, FdLanguageKeyArgs } from '../models/lang';
+import { FdLanguage } from '../models/lang';
 import { PluralizationSet1 } from './pluralization/set1';
 
 const pluralization = new PluralizationSet1();
@@ -211,8 +211,7 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         periodLabel: 'Період',
         decreasePeriodLabel: 'Зменшити період',
         navigationInstruction:
-            'Щоб переміщатися між елементами в цьому списку, використовуйте стрілку вверх або вниз. ' +
-            'Для переключення між списками використовуйте стрілку вліво або вправо.'
+            'Щоб переміщатися між елементами в цьому списку, використовуйте стрілку вверх або вниз. Для переключення між списками використовуйте стрілку вліво або вправо.'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Поле вводу часу',
@@ -754,37 +753,299 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         messageFileRenameFailed: 'Не вдалося перейменувати "{{ from }}" на "{{ to }}."',
         messageFileRenameSuccess: '{{ from }}" перейменовано на "{{ to }}".',
         messageRemoveFoldersAndFilesFailed: (params) =>
-            `Не вдалося видалити ${folderNamePluralization(params)} і ${fileNamePluralization(params)}.`,
+            `Не вдалося видалити ${(() => {
+    const foldersCount = params['foldersCount'];
+    const foldersCountOption = pluralization.process(foldersCount);
+    switch (foldersCountOption) {
+        case 'one':
+            return '1 папку';
+        case 'few':
+            return `${foldersCount} папки`;
+        default:
+            return `${foldersCount || 0} папок`;
+    }
+})()} і ${(() => {
+    const filesCount = params['filesCount'];
+    const filesCountOption = pluralization.process(filesCount);
+    switch (filesCountOption) {
+        case 'one':
+            return '1 файл';
+        case 'few':
+            return `${filesCount} файли`;
+        default:
+            return `${filesCount || 0} файлів`;
+    }
+})()}.`,
         messageRemoveFoldersAndFilesSuccess: (params) =>
-            `${folderNamePluralization(params)} і ${fileNamePluralization(params)} видалено.`,
-        messageRemoveFoldersFailed: (params) => `Не вдалося видалити ${folderNamePluralization(params)}.`,
-        messageRemoveFoldersSuccess: (params) => `Видалено ${folderNamePluralization(params)}.`,
-        messageRemoveFilesFailed: (params) => `Не вдалося видалити ${fileNamePluralization(params)}.`,
-        messageRemoveFilesSuccess: (params) => `Видалено ${fileNamePluralization(params)}.`,
+            `${(() => {
+    const foldersCount = params['foldersCount'];
+    const foldersCountOption = pluralization.process(foldersCount);
+    switch (foldersCountOption) {
+        case 'one':
+            return '1 папку';
+        case 'few':
+            return `${foldersCount} папки`;
+        default:
+            return `${foldersCount || 0} папок`;
+    }
+})()} і ${(() => {
+    const filesCount = params['filesCount'];
+    const filesCountOption = pluralization.process(filesCount);
+    switch (filesCountOption) {
+        case 'one':
+            return '1 файл';
+        case 'few':
+            return `${filesCount} файли`;
+        default:
+            return `${filesCount || 0} файлів`;
+    }
+})()} видалено.`,
+        messageRemoveFoldersFailed: (params) => `Не вдалося видалити ${(() => {
+    const foldersCount = params['foldersCount'];
+    const foldersCountOption = pluralization.process(foldersCount);
+    switch (foldersCountOption) {
+        case 'one':
+            return '1 папку';
+        case 'few':
+            return `${foldersCount} папки`;
+        default:
+            return `${foldersCount || 0} папок`;
+    }
+})()}.`,
+        messageRemoveFoldersSuccess: (params) => `Видалено ${(() => {
+    const foldersCount = params['foldersCount'];
+    const foldersCountOption = pluralization.process(foldersCount);
+    switch (foldersCountOption) {
+        case 'one':
+            return '1 папку';
+        case 'few':
+            return `${foldersCount} папки`;
+        default:
+            return `${foldersCount || 0} папок`;
+    }
+})()}.`,
+        messageRemoveFilesFailed: (params) => `Не вдалося видалити ${(() => {
+    const filesCount = params['filesCount'];
+    const filesCountOption = pluralization.process(filesCount);
+    switch (filesCountOption) {
+        case 'one':
+            return '1 файл';
+        case 'few':
+            return `${filesCount} файли`;
+        default:
+            return `${filesCount || 0} файлів`;
+    }
+})()}.`,
+        messageRemoveFilesSuccess: (params) => `Видалено ${(() => {
+    const filesCount = params['filesCount'];
+    const filesCountOption = pluralization.process(filesCount);
+    switch (filesCountOption) {
+        case 'one':
+            return '1 файл';
+        case 'few':
+            return `${filesCount} файли`;
+        default:
+            return `${filesCount || 0} файлів`;
+    }
+})()}.`,
         messageRemoveFileOrFolderFailed: 'Не вдалося видалити {{ name }}.',
         messageRemoveFileOrFolderSuccess: '{{ name }} видалено.',
         messageMoveFoldersAndFilesFailed: (params) =>
-            `Не вдалося перемістити ${folderNamePluralization(params)} і ${fileNamePluralization(params)} до {{ to }}.`,
+            `Не вдалося перемістити ${(() => {
+    const foldersCount = params['foldersCount'];
+    const foldersCountOption = pluralization.process(foldersCount);
+    switch (foldersCountOption) {
+        case 'one':
+            return '1 папку';
+        case 'few':
+            return `${foldersCount} папки`;
+        default:
+            return `${foldersCount || 0} папок`;
+    }
+})()} і ${(() => {
+    const filesCount = params['filesCount'];
+    const filesCountOption = pluralization.process(filesCount);
+    switch (filesCountOption) {
+        case 'one':
+            return '1 файл';
+        case 'few':
+            return `${filesCount} файли`;
+        default:
+            return `${filesCount || 0} файлів`;
+    }
+})()} до {{ to }}.`,
         messageMoveFoldersAndFilesSuccess: (params) =>
-            `${folderNamePluralization(params)} і ${fileNamePluralization(params)} переміщено в {{ to }}.`,
-        messageMoveFoldersFailed: (params) => `Не вдалося перемістити ${folderNamePluralization(params)} до {{ to }}.`,
-        messageMoveFoldersSuccess: (params) => `${folderNamePluralization(params)} переміщено до {{ to }}.`,
-        messageMoveFilesFailed: (params) => `Не вдалося перемістити ${fileNamePluralization(params)} до {{ to }}.`,
-        messageMoveFilesSuccess: (params) => `${fileNamePluralization(params)} переміщено до {{ to }}.`,
+            `${(() => {
+    const foldersCount = params['foldersCount'];
+    const foldersCountOption = pluralization.process(foldersCount);
+    switch (foldersCountOption) {
+        case 'one':
+            return '1 папку';
+        case 'few':
+            return `${foldersCount} папки`;
+        default:
+            return `${foldersCount || 0} папок`;
+    }
+})()} і ${(() => {
+    const filesCount = params['filesCount'];
+    const filesCountOption = pluralization.process(filesCount);
+    switch (filesCountOption) {
+        case 'one':
+            return '1 файл';
+        case 'few':
+            return `${filesCount} файли`;
+        default:
+            return `${filesCount || 0} файлів`;
+    }
+})()} переміщено в {{ to }}.`,
+        messageMoveFoldersFailed: (params) => `Не вдалося перемістити ${(() => {
+    const foldersCount = params['foldersCount'];
+    const foldersCountOption = pluralization.process(foldersCount);
+    switch (foldersCountOption) {
+        case 'one':
+            return '1 папку';
+        case 'few':
+            return `${foldersCount} папки`;
+        default:
+            return `${foldersCount || 0} папок`;
+    }
+})()} до {{ to }}.`,
+        messageMoveFoldersSuccess: (params) => `${(() => {
+    const foldersCount = params['foldersCount'];
+    const foldersCountOption = pluralization.process(foldersCount);
+    switch (foldersCountOption) {
+        case 'one':
+            return '1 папку';
+        case 'few':
+            return `${foldersCount} папки`;
+        default:
+            return `${foldersCount || 0} папок`;
+    }
+})()} переміщено до {{ to }}.`,
+        messageMoveFilesFailed: (params) => `Не вдалося перемістити ${(() => {
+    const filesCount = params['filesCount'];
+    const filesCountOption = pluralization.process(filesCount);
+    switch (filesCountOption) {
+        case 'one':
+            return '1 файл';
+        case 'few':
+            return `${filesCount} файли`;
+        default:
+            return `${filesCount || 0} файлів`;
+    }
+})()} до {{ to }}.`,
+        messageMoveFilesSuccess: (params) => `${(() => {
+    const filesCount = params['filesCount'];
+    const filesCountOption = pluralization.process(filesCount);
+    switch (filesCountOption) {
+        case 'one':
+            return '1 файл';
+        case 'few':
+            return `${filesCount} файли`;
+        default:
+            return `${filesCount || 0} файлів`;
+    }
+})()} переміщено до {{ to }}.`,
         messageMoveFileOrFolderFailed: 'Не вдалося перемістити {{ name }} до {{ to }}.',
         messageMoveFileOrFolderSuccess: '{{ name }} переміщено в {{ to }}.',
         messageMoveRootFoldersAndFilesFailed: (params) =>
-            `Не вдалося перемістити ${folderNamePluralization(params)} і ${fileNamePluralization(
-                params
-            )} до всіх файлів.`,
+            `Не вдалося перемістити ${(() => {
+    const foldersCount = params['foldersCount'];
+    const foldersCountOption = pluralization.process(foldersCount);
+    switch (foldersCountOption) {
+        case 'one':
+            return '1 папку';
+        case 'few':
+            return `${foldersCount} папки`;
+        default:
+            return `${foldersCount || 0} папок`;
+    }
+})()} і ${(() => {
+    const filesCount = params['filesCount'];
+    const filesCountOption = pluralization.process(filesCount);
+    switch (filesCountOption) {
+        case 'one':
+            return '1 файл';
+        case 'few':
+            return `${filesCount} файли`;
+        default:
+            return `${filesCount || 0} файлів`;
+    }
+})()} до всіх файлів.`,
         messageMoveRootFoldersAndFilesSuccess: (params) =>
-            `${folderNamePluralization(params)} і ${fileNamePluralization(params)} переміщено до всіх файлів.`,
+            `${(() => {
+    const foldersCount = params['foldersCount'];
+    const foldersCountOption = pluralization.process(foldersCount);
+    switch (foldersCountOption) {
+        case 'one':
+            return '1 папку';
+        case 'few':
+            return `${foldersCount} папки`;
+        default:
+            return `${foldersCount || 0} папок`;
+    }
+})()} і ${(() => {
+    const filesCount = params['filesCount'];
+    const filesCountOption = pluralization.process(filesCount);
+    switch (filesCountOption) {
+        case 'one':
+            return '1 файл';
+        case 'few':
+            return `${filesCount} файли`;
+        default:
+            return `${filesCount || 0} файлів`;
+    }
+})()} переміщено до всіх файлів.`,
         messageMoveRootFoldersFailed: (params) =>
-            `Не вдалося перемістити ${folderNamePluralization(params)} до всіх файлів.`,
-        messageMoveRootFoldersSuccess: (params) => `${folderNamePluralization(params)} переміщено до всіх файлів.`,
+            `Не вдалося перемістити ${(() => {
+    const foldersCount = params['foldersCount'];
+    const foldersCountOption = pluralization.process(foldersCount);
+    switch (foldersCountOption) {
+        case 'one':
+            return '1 папку';
+        case 'few':
+            return `${foldersCount} папки`;
+        default:
+            return `${foldersCount || 0} папок`;
+    }
+})()} до всіх файлів.`,
+        messageMoveRootFoldersSuccess: (params) => `${(() => {
+    const foldersCount = params['foldersCount'];
+    const foldersCountOption = pluralization.process(foldersCount);
+    switch (foldersCountOption) {
+        case 'one':
+            return '1 папку';
+        case 'few':
+            return `${foldersCount} папки`;
+        default:
+            return `${foldersCount || 0} папок`;
+    }
+})()} переміщено до всіх файлів.`,
         messageMoveRootFilesFailed: (params) =>
-            `Не вдалося перемістити ${fileNamePluralization(params)} до всіх файлів.`,
-        messageMoveRootFilesSuccess: (params) => `${fileNamePluralization(params)} переміщено до всіх файлів.`,
+            `Не вдалося перемістити ${(() => {
+    const filesCount = params['filesCount'];
+    const filesCountOption = pluralization.process(filesCount);
+    switch (filesCountOption) {
+        case 'one':
+            return '1 файл';
+        case 'few':
+            return `${filesCount} файли`;
+        default:
+            return `${filesCount || 0} файлів`;
+    }
+})()} до всіх файлів.`,
+        messageMoveRootFilesSuccess: (params) => `${(() => {
+    const filesCount = params['filesCount'];
+    const filesCountOption = pluralization.process(filesCount);
+    switch (filesCountOption) {
+        case 'one':
+            return '1 файл';
+        case 'few':
+            return `${filesCount} файли`;
+        default:
+            return `${filesCount || 0} файлів`;
+    }
+})()} переміщено до всіх файлів.`,
         messageMoveRootFileOrFolderFailed: 'Не вдалося перемістити {{ name }} до всіх файлів.',
         messageMoveRootFileOrFolderSuccess: '{{ name }} переміщено до всіх файлів.',
         messageFileTypeMismatchPlural: (params) => {
@@ -894,45 +1155,3 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         noData: 'Немає даних'
     }
 };
-
-/**
- * Pluralization for "file" word in ukrainian language
- *
- * Output samples:
- * * 1 файл
- * * 2 файли
- * * 10 файлів
- */
-function fileNamePluralization(params: FdLanguageKeyArgs): string {
-    const filesCount = params['filesCount'];
-    const filesCountOption = pluralization.process(filesCount);
-    switch (filesCountOption) {
-        case 'one':
-            return '1 файл';
-        case 'few':
-            return `${filesCount} файли`;
-        default:
-            return `${filesCount || 0} файлів`;
-    }
-}
-
-/**
- * Pluralization for "folder" word in ukrainian language
- *
- * Outputs samples:
- * * 1 папку
- * * 2 папки
- * * 10 папок
- */
-function folderNamePluralization(params: FdLanguageKeyArgs): string {
-    const foldersCount = params['foldersCount'];
-    const foldersCountOption = pluralization.process(foldersCount);
-    switch (foldersCountOption) {
-        case 'one':
-            return '1 папку';
-        case 'few':
-            return `${foldersCount} папки`;
-        default:
-            return `${foldersCount || 0} папок`;
-    }
-}

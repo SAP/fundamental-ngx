@@ -165,8 +165,7 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         periodLabel: 'Period',
         decreasePeriodLabel: 'Diminuer la durée',
         navigationInstruction:
-            'Pour vous déplacer entre les éléments de cette liste, appuyez sur la flèche du haut ou la flèche du bas. ' +
-            "Pour passer d'une liste à l'autre, appuyez sur la flèche gauche ou la flèche droite."
+            "Pour vous déplacer entre les éléments de cette liste, appuyez sur la flèche du haut ou la flèche du bas. Pour passer d'une liste à l'autre, appuyez sur la flèche gauche ou la flèche droite."
     },
     coreTimePicker: {
         timePickerInputLabel: 'Saisie du sélecteur de temps',
@@ -598,8 +597,7 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         messageFileSizeExceededSingular:
             'Le fichier "{{ fileName }}" a dépassé la taille maximale du fichier. Taille maximale autorisée du fichier : {{ maxFileSize }}.',
         messageFileNameLengthExceededPlural:
-            '{{ filesCount }} fichiers ont dépassé la longueur maximale du nom de fichier. ' +
-            'Longueur autorisée du nom de fichier : {{ maxFilenameLength }} caractères.',
+            '{{ filesCount }} fichiers ont dépassé la longueur maximale du nom de fichier. Longueur autorisée du nom de fichier : {{ maxFilenameLength }} caractères.',
         messageFileNameLengthExceededSingular:
             'Le nom "{{ fileName }}" a dépassé la longueur maximale. Longueur autorisée du nom de fichier: {{ maxFilenameLength }} caractères.'
     },
