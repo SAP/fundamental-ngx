@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.16...v0.48.0-rc.17) (2023-12-15)
+
+
+### Bug Fixes
+
+* **platform:** fdp-combobox selection issues ([#11081](https://github.com/SAP/fundamental-ngx/issues/11081)) ([6da495e](https://github.com/SAP/fundamental-ngx/commit/6da495e005f47a48c353d9b65f905af2ab564851))
+
+
+
+
+
 # [0.48.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.15...v0.48.0-rc.16) (2023-12-13)
 
 

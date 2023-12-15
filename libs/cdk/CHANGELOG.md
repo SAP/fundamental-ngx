@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.16...v0.48.0-rc.17) (2023-12-15)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
 # [0.48.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.15...v0.48.0-rc.16) (2023-12-13)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk
