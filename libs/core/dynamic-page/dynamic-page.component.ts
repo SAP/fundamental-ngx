@@ -38,6 +38,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { asyncScheduler, fromEvent, Observable, startWith } from 'rxjs';
 import { debounceTime, map, observeOn } from 'rxjs/operators';
+import { DynamicPage } from './dynamic-page.interface';
+import { FD_DYNAMIC_PAGE } from './dynamic-page.tokens';
 
 @Component({
     selector: 'fd-dynamic-page',
@@ -45,30 +47,32 @@ import { debounceTime, map, observeOn } from 'rxjs/operators';
     styleUrl: './dynamic-page.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [DynamicPageService],
+    providers: [
+        DynamicPageService,
+        {
+            provide: FD_DYNAMIC_PAGE,
+            useExisting: DynamicPageComponent
+        }
+    ],
     standalone: true,
     imports: [CdkScrollable, ScrollbarDirective]
 })
-export class DynamicPageComponent implements AfterViewInit {
+export class DynamicPageComponent implements AfterViewInit, DynamicPage {
     /** Whether DynamicPage should snap on scroll */
-    @Input()
-    disableSnapOnScroll = false;
+    @Input() disableSnapOnScroll = false;
 
     /** Page role  */
     @Input()
-    @HostBinding('attr.role')
-    role = 'region';
+    @HostBinding('attr.role') role = 'region';
 
     /** aria label for the page */
-    @Input()
-    ariaLabel: Nullable<string>;
+    @Input() ariaLabel: Nullable<string>;
 
     /**
      * sets background for content to `list`, `transparent`, or `solid` background color.
      * Default is `solid`.
      */
-    @Input()
-    background: DynamicPageBackgroundType = 'solid';
+    @Input() background: DynamicPageBackgroundType = 'solid';
 
     /** Whether DynamicPage should have responsive sides spacing changing with Page window width.
      * max-width: 599px                         - small
@@ -76,8 +80,7 @@ export class DynamicPageComponent implements AfterViewInit {
      * min-width: 1024px and max-width: 1439px  - large
      * min-width: 1440px                        - extra large
      */
-    @Input()
-    autoResponsive = true;
+    @Input() autoResponsive = true;
 
     /**
      * sets size which in turn adds corresponding padding for the size type.
@@ -96,14 +99,12 @@ export class DynamicPageComponent implements AfterViewInit {
     /** Offset in PX
      * Should be added, when there is something else at the bottom and dynamic page is not expanded to bottom's corners
      */
-    @Input()
-    offset = 0;
+    @Input() offset = 0;
 
     /**
      * Whether dynamic page should be expanded in whole page.
      */
-    @Input()
-    expandContent = true;
+    @Input() expandContent = true;
 
     /** @hidden reference to header component  */
     @ContentChild(DynamicPageSubheaderComponent)

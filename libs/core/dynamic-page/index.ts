@@ -17,3 +17,5 @@ export * from './dynamic-page.service';
 export * from './models/title-directive-context';
 export * from './patch-header-i18n-texts';
 export * from './utils';
+export * from './dynamic-page.interface';
+export * from './dynamic-page.tokens';

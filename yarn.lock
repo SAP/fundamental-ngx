@@ -2776,10 +2776,10 @@
   dependencies:
     tslib "^2.4.0"
 
-"@fundamental-styles/cx@0.33.1-rc.13":
-  version "0.33.1-rc.13"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.33.1-rc.13.tgz#629673a7a99a56d4c9fa68cd18d11d6e8de66226"
-  integrity sha512-tFHjhgAKNi8fGDmKkPoy/80Mtcu4E8BBEx9bG+oQyNO391f0rEDQFiarKyP9QNitRJeGcgOf82r3aDz+o0lwew==
+"@fundamental-styles/cx@0.33.0":
+  version "0.33.0"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.33.0.tgz#293d61d2ece97ed62262b0e27f4b4a943e565f1f"
+  integrity sha512-gfAMFwQpNjpCcEhKojZ8ZDu1ZRhQdh23MXzktQ1id1jQuUWnwDfNJNbMM8+BhfpmgUJh1I95RTALkssJtPt9tg==
 
 "@hapi/hoek@^9.0.0":
   version "9.3.0"
@@ -4168,10 +4168,10 @@
   resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.9.0.tgz#bd46458c7ed58cfb23e4e0ec620c9780a5711a5b"
   integrity sha512-EOAYDx13SU9Wd18qgAR+FYTrywC5dk+IU3oM5NGAz0GxJLpiGQkSONYnAMJK/Gqk9QhU7uqWQsjrcnOcOl0fxA==
 
-"@sap-ui/common-css@0.32.0":
-  version "0.32.0"
-  resolved "https://registry.yarnpkg.com/@sap-ui/common-css/-/common-css-0.32.0.tgz#73135dc02e4364a7db602288b4f5f8877f9fc953"
-  integrity sha512-Oerll5+aVesdaack3frMeYTATs5ZLkgth/3BtaYwno0gNF9TeeJxdngotq3n42M8LQfNj+OddiXgm3Az39arWQ==
+"@sap-ui/common-css@0.33.0":
+  version "0.33.0"
+  resolved "https://registry.yarnpkg.com/@sap-ui/common-css/-/common-css-0.33.0.tgz#22189ea2657c364cde475252dc674ed42b596409"
+  integrity sha512-mWa7+gaEMYXN4k/hxRZh86+n5PCI9oInFvbb4YnyeceZp8oNu2auPvFnN+7SsZl2lvdlMiM4OelinIQfqIvjBQ==
   dependencies:
     "@sap-theming/theming-base-content" "^11.9.0"
 
@@ -6192,14 +6192,6 @@ babel-jest@^29.7.0:
     chalk "^4.0.0"
     graceful-fs "^4.2.9"
     slash "^3.0.0"
-
-babel-loader@9.1.0:
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-9.1.0.tgz#839e9ae88aea930864ef9ec0f356dfca96ecf238"
-  integrity sha512-Antt61KJPinUMwHwIIz9T5zfMgevnfZkEVWYDWlG888fgdvRRGD0JTuf/fFozQnfT+uq64sk1bmdHDy/mOEWnA==
-  dependencies:
-    find-cache-dir "^3.3.2"
-    schema-utils "^4.0.0"
 
 babel-loader@9.1.3, babel-loader@^9.1.2:
   version "9.1.3"
@@ -10224,10 +10216,10 @@ functions-have-names@^1.2.2, functions-have-names@^1.2.3:
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.3.tgz#0404fe4ee2ba2f607f0e0ec3c80bae994133b834"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
-fundamental-styles@0.33.1-rc.13:
-  version "0.33.1-rc.13"
-  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.33.1-rc.13.tgz#ea4e40c6087ac63f79dcc35be57e994be9a05a19"
-  integrity sha512-EHlL7611Ny2otfTE1AnebKqCpNNsYqzZ9QFtNuWY2VlhjKIOclmE1tbJRMyUW2VjnuygThcrh/TdYXpByQ7ISw==
+fundamental-styles@0.33.0:
+  version "0.33.0"
+  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.33.0.tgz#3ef655e8c7e94640792b0675b727ef88f995ff93"
+  integrity sha512-mspglEi8ckEceVO46u9ww+SbxyWSKrPxzZz5PTjpevywMRsm5uvVsAAjox3hcAUpreyJU9BbdlBDJy03166lTg==
 
 fuse.js@7.0.0:
   version "7.0.0"

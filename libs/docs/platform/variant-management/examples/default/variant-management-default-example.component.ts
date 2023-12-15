@@ -13,6 +13,7 @@ import {
     TableInitialStateDirective
 } from '@fundamental-ngx/platform/table-helpers';
 import { Variant, VariantManagementModule } from '@fundamental-ngx/platform/variant-management';
+import { TitleComponent } from "@fundamental-ngx/core/title";
 
 export interface CombinedVariantManagementPreset {
     platformSmartFilterBar?: SmartFilterBarManagedPreset;
@@ -30,7 +31,8 @@ export interface CombinedVariantManagementPreset {
         TableDataSourceDirective,
         TableHeaderResizerDirective,
         PlatformTableModule,
-        TableInitialStateDirective
+        TableInitialStateDirective,
+        TitleComponent
     ]
 })
 export class VariantManagementDefaultExampleComponent {
