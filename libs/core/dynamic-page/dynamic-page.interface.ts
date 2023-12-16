@@ -1,4 +1,5 @@
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Observable } from 'rxjs';
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 
 export interface DynamicPage {
@@ -10,6 +11,7 @@ export interface DynamicPage {
     size: DynamicPageResponsiveSize;
     offset: number;
     expandContent: boolean;
+    collapsed$: Observable<boolean>;
 
     /** toggle the visibility of the header on click of title area. */
     toggleCollapse(): void;

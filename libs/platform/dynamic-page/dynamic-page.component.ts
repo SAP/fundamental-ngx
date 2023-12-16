@@ -6,10 +6,12 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    DestroyRef,
     DoCheck,
     ElementRef,
     EventEmitter,
     HostBinding,
+    inject,
     Input,
     OnDestroy,
     Optional,
@@ -22,24 +24,29 @@ import {
 import { startWith } from 'rxjs/operators';
 
 import { NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
 import {
     DynamicPageComponent as CoreDynamicPageComponent,
     DynamicPageContentComponent as CoreDynamicPageContentComponent,
     DynamicPageFooterComponent as CoreDynamicPageFooterComponent,
-    DynamicPageGlobalActionsComponent,
     DynamicPageHeaderComponent as CoreDynamicPageHeaderComponent,
+    DynamicPage,
+    DynamicPageGlobalActionsComponent,
     DynamicPageHeaderSubtitleDirective,
     DynamicPageHeaderTitleDirective,
     DynamicPageLayoutActionsComponent,
     DynamicPageSubheaderComponent,
     DynamicPageTitleContentComponent,
+    FD_DYNAMIC_PAGE,
     patchHeaderI18nTexts
 } from '@fundamental-ngx/core/dynamic-page';
 import { FacetComponent } from '@fundamental-ngx/core/facets';
 import { TabListComponent, TabPanelComponent } from '@fundamental-ngx/core/tabs';
 import { FD_LANGUAGE } from '@fundamental-ngx/i18n';
+import { BaseComponent } from '@fundamental-ngx/platform/shared';
+import { BehaviorSubject } from 'rxjs';
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import { DynamicPageContentHostComponent } from './dynamic-page-content/dynamic-page-content-host.component';
 import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
@@ -47,10 +54,8 @@ import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-f
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
 import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 import { DynamicPageConfig } from './dynamic-page.config';
-import { DynamicPageService } from './dynamic-page.service';
-import { BaseComponent } from '@fundamental-ngx/platform/shared';
-import { PlatformDynamicPage } from './platform-dynamic-page.interface';
 import { FDP_DYNAMIC_PAGE } from './dynamic-page.tokens';
+import { PlatformDynamicPage } from './platform-dynamic-page.interface';
 
 /** Dynamic Page tab change event */
 export class DynamicPageTabChangeEvent {
@@ -72,7 +77,6 @@ export class DynamicPageTabChangeEvent {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [
-        DynamicPageService,
         {
             provide: FD_LANGUAGE,
             useFactory: patchHeaderI18nTexts,
@@ -104,12 +108,16 @@ export class DynamicPageTabChangeEvent {
         CoreDynamicPageContentComponent
     ]
 })
-export class DynamicPageComponent extends BaseComponent implements AfterContentInit, AfterViewInit, DoCheck, OnDestroy, PlatformDynamicPage {
+export class DynamicPageComponent
+    extends BaseComponent
+    implements AfterContentInit, AfterViewInit, DoCheck, OnDestroy, PlatformDynamicPage
+{
     /** Whether DynamicPage should snap on scroll */
     @Input() disableSnapOnScroll = false;
     /** Page role  */
     @Input()
-    @HostBinding('attr.role') role = 'region';
+    @HostBinding('attr.role')
+    role = 'region';
 
     /** aria label for the page */
     @Input() ariaLabel: Nullable<string>;
@@ -166,11 +174,12 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     @ContentChild(DynamicPageContentComponent) contentComponent: DynamicPageContentComponent;
 
     /** reference to content components list */
-    @ContentChildren(DynamicPageContentComponent, { descendants: true }) contentComponents: QueryList<DynamicPageContentComponent>;
+    @ContentChildren(DynamicPageContentComponent, { descendants: true })
+    contentComponents: QueryList<DynamicPageContentComponent>;
 
     /** @hidden */
-    @ViewChild(CoreDynamicPageComponent)
-    _dynamicPageComponent: CoreDynamicPageComponent;
+    @ViewChild(FD_DYNAMIC_PAGE)
+    _dynamicPageComponent: DynamicPage;
 
     /** @hidden */
     @ViewChild(TabListComponent)
@@ -183,6 +192,9 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     @ViewChildren(DynamicPageContentHostComponent)
     _contentHostComponents: QueryList<DynamicPageContentHostComponent>;
 
+    /** Whether Dynamic page is collapsed */
+    collapsed$ = new BehaviorSubject(false);
+
     /**
      * @hidden
      * whether tabbed content is present in this page
@@ -194,6 +206,9 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
      * holds the tab content
      */
     _tabs: DynamicPageContentComponent[] = [];
+
+    /** @hidden */
+    protected _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -223,6 +238,9 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         this._cd.detectChanges();
 
         this._tabListComponent?.headerContainer.nativeElement.classList.add('fd-dynamic-page__tabs');
+        this._dynamicPageComponent.collapsed$
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe((c) => this.collapsed$.next(c));
     }
 
     /** @hidden */

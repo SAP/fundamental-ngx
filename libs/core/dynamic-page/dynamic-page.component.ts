@@ -34,7 +34,7 @@ import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { asyncScheduler, fromEvent, Observable, startWith } from 'rxjs';
 import { debounceTime, map, observeOn } from 'rxjs/operators';
@@ -63,7 +63,8 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
 
     /** Page role  */
     @Input()
-    @HostBinding('attr.role') role = 'region';
+    @HostBinding('attr.role')
+    role = 'region';
 
     /** aria label for the page */
     @Input() ariaLabel: Nullable<string>;
@@ -133,6 +134,9 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
     /** @hidden */
     @ViewChild(ScrollbarDirective)
     _scrollbar: ScrollbarDirective;
+
+    /** Whether the dynamic page is collapsed */
+    collapsed$: Observable<boolean> = toObservable(this._dynamicPageService.collapsed);
 
     /** @hidden */
     _size: DynamicPageResponsiveSize = 'extra-large';

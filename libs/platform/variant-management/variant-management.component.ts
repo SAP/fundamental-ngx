@@ -1,5 +1,6 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -9,7 +10,8 @@ import {
     Input,
     Output,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { FilterStringsPipe, Nullable } from '@fundamental-ngx/cdk/utils';
 import {
@@ -20,6 +22,7 @@ import {
     ButtonBarComponent
 } from '@fundamental-ngx/core/bar';
 import { DialogService } from '@fundamental-ngx/core/dialog';
+import { DynamicPage, DynamicPageService, FD_DYNAMIC_PAGE } from '@fundamental-ngx/core/dynamic-page';
 import { ListComponent, ListItemComponent, ListLinkDirective, ListTitleDirective } from '@fundamental-ngx/core/list';
 import {
     PopoverBodyComponent,
@@ -31,10 +34,11 @@ import {
 } from '@fundamental-ngx/core/popover';
 import { HeaderSizes, TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FDP_DYNAMIC_PAGE } from '@fundamental-ngx/platform/dynamic-page';
 import { MenuButtonComponent } from '@fundamental-ngx/platform/menu-button';
 import { SearchFieldComponent, SearchInput } from '@fundamental-ngx/platform/search-field';
 import equal from 'fast-deep-equal';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { ManageVariantItemComponent } from './components/manage-variant-item/manage-variant-item.component';
 import { ManageVariantsDialogComponent } from './components/manage-variants-dialog/manage-variants-dialog.component';
 import { VariantManagementDirtyLabelDirective } from './directives/variant-management-dirty-label.directive';
@@ -77,10 +81,12 @@ import { VariantItem } from './variant-item.class';
         BarRightDirective,
         ButtonBarComponent,
         FdTranslatePipe,
-        FilterStringsPipe
+        FilterStringsPipe,
+        AsyncPipe,
+        NgClass
     ]
 })
-export class VariantManagementComponent<T = any> implements VariantManagement<T> {
+export class VariantManagementComponent<T = any> implements VariantManagement<T>, AfterViewInit {
     /** Initial variants array. */
     @Input()
     set variants(items: Variant<T>[]) {
@@ -119,11 +125,6 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
     activeVariantChange = new EventEmitter<Variant<T>>();
 
     /**
-     * Used internally for communicating with wrapper component.
-     */
-    activeVariantChangeSubject = new BehaviorSubject<Variant<T> | null>(null);
-
-    /**
      * Custom dirty label directive.
      */
     @ContentChild(VariantManagementDirtyLabelDirective)
@@ -132,6 +133,15 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
     /** @hidden */
     @ViewChild('popover')
     _popover: PopoverComponent;
+
+    /** @hidden */
+    @HostBinding('class')
+    private readonly _initialClass = 'fd-variant-management';
+
+    /**
+     * Used internally for communicating with wrapper component.
+     */
+    activeVariantChangeSubject = new BehaviorSubject<Variant<T> | null>(null);
 
     /** @hidden */
     _variantChanged = false;
@@ -146,17 +156,54 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
     _filterPhrase: Nullable<string> = null;
 
     /** @hidden */
-    @HostBinding('class')
-    private readonly _initialClass = 'fd-variant-management';
+    get _dynamicPage(): DynamicPage | null {
+        return this._coreDynamicPage || this._platformDynamicPage;
+    }
 
+    /** @hidden */
+    protected _titleClass$: Observable<Record<string, boolean>> = new Observable<Record<string, boolean>>(
+        (observer) => {
+            let subscription: Subscription;
+            const baseClasses = {
+                'fd-variant-management__title': true
+            };
+            if (this._dynamicPage) {
+                subscription = this._dynamicPage.collapsed$.subscribe((collapsed) => {
+                    observer.next({
+                        ...baseClasses,
+                        'fd-variant-management__title--dynamic-page': true,
+                        'fd-variant-management__title--dynamic-page--collapsed': collapsed
+                    });
+                });
+            } else {
+                observer.next(baseClasses);
+            }
+
+            return () => subscription?.unsubscribe();
+        }
+    );
+
+    /** @hidden */
+    protected _coreDynamicPage = inject(FD_DYNAMIC_PAGE, { optional: true });
+    /** @hidden */
+    protected _platformDynamicPage = inject(FDP_DYNAMIC_PAGE, { optional: true });
     /** @Hidden */
     private _originalActiveVariant: VariantItem<T>;
+    /** @Hidden */
+    private readonly _dynamicPageService = inject(DynamicPageService, { optional: true });
 
     /** @hidden */
     constructor(
         private readonly _dialogService: DialogService,
         private readonly _cdr: ChangeDetectorRef
-    ) {}
+    ) {
+        console.log({ _dynamicPage: this._dynamicPage, _dynamicPageService: this._dynamicPageService });
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        console.log(this._dynamicPage?.collapsed$);
+    }
 
     /**
      * Manually select variant.
