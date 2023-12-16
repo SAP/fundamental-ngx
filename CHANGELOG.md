@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.22](https://github.com/SAP/fundamental-ngx/compare/v0.43.21...v0.43.22) (2023-12-16)
+
+
+### Bug Fixes
+
+* **core,platform:** button should not set aria-pressed by default ([#11064](https://github.com/SAP/fundamental-ngx/issues/11064)) ([8f5499f](https://github.com/SAP/fundamental-ngx/commit/8f5499f20fc6b4e517612d7f918774e92619cc2d))
+* **platform:** fdp-combobox selection issues ([#11082](https://github.com/SAP/fundamental-ngx/issues/11082)) ([c515108](https://github.com/SAP/fundamental-ngx/commit/c515108c4ff6a5b93c44c387a7b127e76519030e))
+
+
+### Features
+
+* **i18n:** translation delivery ([#11093](https://github.com/SAP/fundamental-ngx/issues/11093)) ([a3b5016](https://github.com/SAP/fundamental-ngx/commit/a3b5016d0408db22e2e2c0fcb97ef55fcc7e542e))
+* **platform:** vhd custom filter controls and column renderer ([#11083](https://github.com/SAP/fundamental-ngx/issues/11083)) ([88b5efd](https://github.com/SAP/fundamental-ngx/commit/88b5efda841407e2ba7f0e304626ff52dada5fe3))
+
+
+
+
+
 ## [0.43.21](https://github.com/SAP/fundamental-ngx/compare/v0.43.20...v0.43.21) (2023-12-08)
 
 
