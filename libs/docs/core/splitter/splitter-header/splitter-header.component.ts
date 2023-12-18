@@ -8,7 +8,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 
 @Component({
-    selector: 'fd-slider-header',
+    selector: 'fd-splitter-header',
     templateUrl: './splitter-header.component.html',
     standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
