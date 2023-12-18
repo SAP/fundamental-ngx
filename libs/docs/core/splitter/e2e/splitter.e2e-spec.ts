@@ -14,7 +14,7 @@ import {
 
 describe('Standard List test suite', () => {
     const splitterPage = new SplitterPo();
-    const { basicExample, splitterSection, requiredWidthExample, sliderApiExample, button, resizer, paginationItem } =
+    const { basicExample, splitterSection, requiredWidthExample, splitterApiExample, button, resizer, paginationItem } =
         splitterPage;
 
     beforeAll(async () => {
@@ -54,32 +54,32 @@ describe('Standard List test suite', () => {
         });
     });
 
-    describe('Slider API example', () => {
+    describe('Splitter API example', () => {
         it('should check horizontal resizing', async () => {
-            await checkHorizontalResize(sliderApiExample);
+            await checkHorizontalResize(splitterApiExample);
         });
 
         it('should check hiding sections by buttons', async () => {
-            await click(sliderApiExample + button);
-            await expect(await getElementArrayLength(sliderApiExample + splitterSection)).toBe(
+            await click(splitterApiExample + button);
+            await expect(await getElementArrayLength(splitterApiExample + splitterSection)).toBe(
                 2,
                 'section is not hidden'
             );
 
             await click(paginationItem, 1);
-            await expect(await getElementArrayLength(sliderApiExample + splitterSection)).toBe(
+            await expect(await getElementArrayLength(splitterApiExample + splitterSection)).toBe(
                 1,
                 'section is not hidden'
             );
 
             await click(paginationItem, 0);
-            await expect(await getElementArrayLength(sliderApiExample + splitterSection)).toBe(
+            await expect(await getElementArrayLength(splitterApiExample + splitterSection)).toBe(
                 2,
                 'section is not displayed back'
             );
 
-            await click(sliderApiExample + button, 1);
-            await expect(await getElementArrayLength(sliderApiExample + splitterSection)).toBe(
+            await click(splitterApiExample + button, 1);
+            await expect(await getElementArrayLength(splitterApiExample + splitterSection)).toBe(
                 3,
                 'section is not displayed back'
             );
