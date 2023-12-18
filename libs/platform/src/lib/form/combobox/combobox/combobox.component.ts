@@ -233,9 +233,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
             return;
         }
 
-        const optionItem = this._getSelectedOptionItem(this.inputText);
-
-        this._updateModel(optionItem ? optionItem.value : this.inputText);
+        this._updateModel(modelValue.value);
     }
 
     /** @hidden Update model */
