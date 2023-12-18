@@ -573,5 +573,8 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Кнопка меню'
+    },
+    btpUserMenu: {
+        signOutButtonLabel: 'Sign Out'
     }
 };
