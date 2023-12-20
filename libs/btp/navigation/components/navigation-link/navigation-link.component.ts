@@ -1,5 +1,4 @@
 /* eslint-disable @angular-eslint/no-host-metadata-property */
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
@@ -13,16 +12,18 @@ import {
     Signal,
     TemplateRef,
     ViewEncapsulation,
-    inject
+    inject,
+    signal
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk';
+import { Nullable } from '@fundamental-ngx/cdk';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 import { of, startWith } from 'rxjs';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
+import { NavigationService } from '../../services/navigation.service';
 
 @Directive({
     selector: '[fdbNavigationLinkRef]',
@@ -73,7 +74,11 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
     /** @hidden */
     @HostBinding('attr.tabindex')
     private get _tabIndex(): number {
-        return this._listItemComponent?.popoverOpen$() || this._navigation.getActiveItem()?.link$() === this ? 0 : -1;
+        return this._listItemComponent?.popoverOpen$() ||
+            this._navigation.getActiveItem()?.link$() === this ||
+            (this._navigation.getActiveItem() === null && this._navigation.getFirstFocusableItem()?.link$() === this)
+            ? 0
+            : -1;
     }
 
     /** Whether the link is inside popover. */
@@ -83,6 +88,9 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
 
     /** Element reference. */
     readonly elementRef = inject<ElementRef<HTMLLinkElement>>(ElementRef);
+
+    /** @hidden */
+    readonly hasRouterLink$ = signal(false);
 
     /** @hidden */
     readonly isActive$: Signal<boolean | undefined>;
@@ -105,17 +113,16 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
     });
 
     /** @hidden */
-    private readonly _rtl = inject(RtlService, {
-        optional: true
-    });
+    private readonly _navigation = inject(FdbNavigation);
 
     /** @hidden */
-    private readonly _navigation = inject(FdbNavigation);
+    private readonly _navigationService = inject(NavigationService);
 
     /** @hidden */
     constructor() {
         super();
         this._listItemComponent?.registerLink(this);
+        this.hasRouterLink$.set(!!this.routerLink);
         this.isActive$ = toSignal(
             this._routerLinkActive?.isActiveChange.pipe(startWith(this._routerLinkActive.isActive)) || of(false)
         );
@@ -137,21 +144,16 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
     /** @hidden */
     @HostListener('keydown', ['$event'])
     private _keyDownHandler(event: KeyboardEvent): void {
-        if (this.inPopover && KeyUtil.isKeyCode(event, DOWN_ARROW)) {
-            this._listItemComponent?.popoverLinkArrowDown();
-            return;
-        }
-        if (!KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
-            return;
-        }
-
-        const expansionKey = this._rtl?.rtl ? RIGHT_ARROW : LEFT_ARROW;
-
-        this._listItemComponent?.keyboardExpanded(KeyUtil.isKeyCode(event, expansionKey));
+        this._navigationService.linkKeydownHandler(event, this.inPopover, this._listItemComponent);
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._listItemComponent?.unregisterLink(this);
+    }
+
+    /** Focus link. */
+    focus(): void {
+        this.elementRef.nativeElement.focus();
     }
 }

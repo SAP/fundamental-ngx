@@ -14,6 +14,10 @@ $block: fd-navigation;
         height: auto;
     }
 
+    &__text:empty {
+        display: none;
+    }
+
     &--snapped {
         .#{$block}__list-item--home {
             position: relative;
@@ -38,6 +42,23 @@ $block: fd-navigation;
         }
     }
 
+    &--horizontal {
+        display: block;
+
+        .#{$block}__container {
+            display: flex;
+            justify-content: space-between;
+            &--hidden-overflow {
+                opacity: 0 !important;
+                overflow: hidden !important;
+            }
+
+            .fd-navigation__list-item:not(.fd-navigation__list-item--visible) {
+                // opacity: 0;
+            }
+        }
+    }
+
     &--expanded,
     &--popup {
         .#{$block}__list-item--home {
@@ -58,58 +79,78 @@ $block: fd-navigation;
     .fd-navigation__list-item--home-without-separator {
         margin-bottom: 0.125rem;
     }
-}
+    &--snapped {
+        .#{$block}__list-container.#{$block}__list-container--menu {
+            position: relative;
+            transition: none;
+        }
+    }
 
-.#{$block}--snapped .#{$block}__list-container.#{$block}__list-container--menu {
-    position: relative;
-    transition: none;
+    &:not(.#{$block}--horizontal) {
+        .#{$block}__list-container--menu {
+            .#{$block}__list--parent-items {
+                .#{$block}__list-item {
+                    // Give more focus area for submenu
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: -1rem;
+                        right: -1rem;
+                    }
+                    > .#{$block}__list-container {
+                        display: none;
+                        top: -0.5rem;
+                    }
+
+                    &:hover,
+                    &:focus,
+                    &:focus-within {
+                        > .#{$block}__list-container {
+                            display: block;
+                        }
+                    }
+
+                    .#{$block}__list-container--submenu {
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            top: -2rem;
+                            bottom: 0;
+                            right: 0;
+                            left: 0;
+                        }
+                    }
+                }
+            }
+            > .fd-scrollbar {
+                overflow: visible !important;
+            }
+        }
+    }
+
+    &--horizontal {
+        .fd-navigation__list-container--submenu {
+            display: block;
+        }
+        .fd-navigation__list-container--menu {
+            max-height: 100%;
+            height: 100%;
+            > .fd-scrollbar {
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+            }
+            // Since scrollbar would hide overflowing elements, focused border also being cut sometimes.
+            .fd-navigation__list--parent-items {
+                padding: 0.265rem;
+            }
+        }
+    }
 }
 
 .#{$block}__list-item:not(.#{$block}__list-item--home) {
     position: relative;
-}
-
-.#{$block}__list-container--menu {
-    > .fd-scrollbar {
-        overflow: visible !important;
-    }
-
-    .#{$block}__list--parent-items {
-        .#{$block}__list-item {
-            // Give more focus area for submenu
-            &::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: -1rem;
-                right: -1rem;
-            }
-            > .#{$block}__list-container {
-                display: none;
-                top: -0.5rem;
-            }
-
-            &:hover,
-            &:focus,
-            &:focus-within {
-                > .#{$block}__list-container {
-                    display: block;
-                }
-            }
-
-            .#{$block}__list-container--submenu {
-                &::before {
-                    content: '';
-                    position: absolute;
-                    top: -2rem;
-                    bottom: 0;
-                    right: 0;
-                    left: 0;
-                }
-            }
-        }
-    }
 }
 
 .fd-popover__body.fd-navigation__list-container {
@@ -119,5 +160,26 @@ $block: fd-navigation;
 .fd-navigation__item {
     .fd-popover-custom {
         max-width: none;
+    }
+}
+
+fd-popover-body {
+    &.#{$block} {
+        &.#{$block}--horizontal {
+            background: transparent;
+            height: auto;
+            padding: 0;
+            width: auto;
+            .#{$block}__list-container {
+                --fdPopover_Offset: 0.3875rem !important;
+                .#{$block}__list {
+                    flex-direction: column !important;
+                }
+                &.fd-navigation__list-container--menu {
+                    top: var(--fdPopover_Offset) !important;
+                    position: relative !important;
+                }
+            }
+        }
     }
 }

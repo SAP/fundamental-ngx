@@ -1,0 +1,83 @@
+<fdb-navigation type="horizontal" style="margin-bottom: 200px; max-width: 800px">
+    <fdb-navigation-container>
+        <fdb-navigation-list-item home>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="home">Home</a>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item expanded>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="create-entry-time">Time</a>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item expanded selected>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="basket">Basket</a>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/btp/navigation']">Future orders</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>Current orders</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/core']" [external]="true"
+                    >Past orders (External link)</a
+                >
+            </fdb-navigation-list-item>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item expanded>
+            <a fdb-navigation-link *fdbNavigationLinkRef routerLink="/core" glyph="settings"
+                >Settings without wrapper</a
+            >
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>User Settings</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>Profile Settings</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>Password Change</a>
+            </fdb-navigation-list-item>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="shield">Shield</a>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="settings">Settings</a>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>User Settings</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>Profile Settings</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>Password Change</a>
+            </fdb-navigation-list-item>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="shield">Shield</a>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item expanded>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="settings">Settings</a>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>User Settings</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>Profile Settings</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>Password Change</a>
+            </fdb-navigation-list-item>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="shield">Shield without wrapper</a>
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item expanded>
+            <a fdb-navigation-link *fdbNavigationLinkRef glyph="settings">Settings</a>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>User Settings</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>Profile Settings</a>
+            </fdb-navigation-list-item>
+            <fdb-navigation-list-item>
+                <a fdb-navigation-link *fdbNavigationLinkRef>Password Change</a>
+            </fdb-navigation-list-item>
+        </fdb-navigation-list-item>
+    </fdb-navigation-container>
+</fdb-navigation>

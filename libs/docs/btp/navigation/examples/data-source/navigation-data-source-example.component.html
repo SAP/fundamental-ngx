@@ -1,3 +1,17 @@
+<p>Set navigation state</p>
+<fd-segmented-button [(ngModel)]="state">
+    <button fd-button label="Expanded" value="expanded"></button>
+    <button fd-button label="Snapped" value="snapped"></button>
+    <button fd-button label="Popup" value="popup"></button>
+</fd-segmented-button>
+<p>Set visual mode</p>
+<fd-segmented-button [(ngModel)]="mode">
+    <button fd-button label="Desktop" value=""></button>
+    <button fd-button label="Tablet" value="tablet"></button>
+    <button fd-button label="Mobile" value="phone"></button>
+</fd-segmented-button>
+<p>&nbsp;</p>
+
 <fdb-navigation
     [state]="state"
     [mode]="mode"
@@ -5,6 +19,7 @@
     [style.width]="'fit-content'"
     [style.height.px]="400"
 >
+    <a fdb-navigation-link glyph="overflow" *fdbNavigationMoreButton>Show more items</a>
     <fdb-navigation-list-item
         *fdbNavigationListItemRef="let item; as: type"
         [group]="item.group"

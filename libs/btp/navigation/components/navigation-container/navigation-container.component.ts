@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+import { FocusKeyManager } from '@angular/cdk/a11y';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -16,37 +16,35 @@ import {
     signal
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { Nullable, resizeObservable } from '@fundamental-ngx/cdk';
-import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { asyncScheduler, debounceTime, filter, merge, observeOn, startWith, switchMap, take } from 'rxjs';
 import { FdbNavigationContentContainer } from '../../models/navigation-content-container.class';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
+import { NavigationService } from '../../services/navigation.service';
 import { NavigationListComponent } from '../navigation-list/navigation-list.component';
 import { NavigationMoreButtonComponent } from '../navigation-more-button/navigation-more-button.component';
 
 const FD_NAVIGATION_OVERFLOW_ITEM_CLASS = 'fd-navigation__container--hidden-overflow';
 
 @Component({
-    selector: 'fdb-navigation-content-start',
-    templateUrl: './navigation-content-start.component.html',
+    selector: 'fdb-navigation-container',
     standalone: true,
     imports: [NavigationListComponent, NavigationMoreButtonComponent],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './navigation-container.component.html',
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        class: 'fd-navigation__container fd-navigation__container--top',
-        '[style.flex-grow]': '1'
+        class: 'fd-navigation__container'
     },
     providers: [
         {
             provide: FdbNavigationContentContainer,
-            useExisting: NavigationContentStartComponent
+            useExisting: NavigationContainerComponent
         }
-    ],
-    hostDirectives: [ScrollbarDirective]
+    ]
 })
-export class NavigationContentStartComponent extends FdbNavigationContentContainer implements AfterContentInit {
+export class NavigationContainerComponent extends FdbNavigationContentContainer implements AfterContentInit {
     /** Whether the list items are content-projected. Used only with data-driven navigation. */
     @Input()
     contentProjected = true;
@@ -56,10 +54,6 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
     private readonly _listItems: QueryList<FdbNavigationListItem>;
 
     /** @hidden */
-    @ViewChild('listContainer', { read: ElementRef })
-    private readonly _listContainer: ElementRef<HTMLElement>;
-
-    /** @hidden */
     @ViewChild('moreContainer', { read: ElementRef, static: false })
     private readonly _moreContainer: Nullable<ElementRef>;
 
@@ -67,11 +61,12 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
     @ViewChild(NavigationMoreButtonComponent, { static: false })
     private readonly _showMoreButton: Nullable<FdbNavigationListItem>;
 
-    @ViewChild('moreButton', { read: ElementRef, static: false })
-    private readonly _showMoreButtonElement: Nullable<ElementRef<HTMLLIElement>>;
+    /** @hidden */
+    @ViewChild('listContainer', { read: ElementRef })
+    private readonly _listContainer: ElementRef<HTMLElement>;
 
-    /** Whether the container is placed on the start position, or the end position of the navigation. */
-    readonly placement: 'start' | 'end' = 'start';
+    /** Container placement. */
+    placement: 'start' | 'end' = 'start';
 
     /** Navigation component reference. */
     readonly navigation = inject(FdbNavigation);
@@ -97,24 +92,19 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
     readonly hiddenItems$ = signal<FdbNavigationListItem[]>([]);
 
     /** @hidden */
-    private _calculationInProgress = false;
+    private readonly _renderers$ = toObservable(computed(() => this.listItems$().map((i) => i.renderer$())));
 
-    /** @hidden */
     private readonly _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-    /** @hidden */
-    private readonly _isSnappedObservable = toObservable(this.navigation.isSnapped$).pipe(
-        startWith(this.navigation.isSnapped$())
-    );
+    private _hiddenItemsKeyManager: FocusKeyManager<FdbNavigationListItem>;
 
-    /** @hidden */
-    private readonly _listItemsObservable = toObservable(this.listItems$);
-
-    /** @hidden */
+    private readonly _zone = inject(NgZone);
     private readonly _cdr = inject(ChangeDetectorRef);
 
+    private readonly _navigationService = inject(NavigationService);
+
     /** @hidden */
-    private readonly _zone = inject(NgZone);
+    private _calculationInProgress = false;
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -129,39 +119,43 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
                 this.allListItems$.set(this._listItems.toArray());
             });
 
-        const resize = resizeObservable(this._elementRef.nativeElement).pipe(debounceTime(30));
+        const resize = resizeObservable(this._elementRef.nativeElement).pipe(debounceTime(0));
 
-        merge(this._isSnappedObservable, this._listItemsObservable, resize)
-            .pipe(switchMap(() => this._zone.onStable.pipe(startWith(this._zone.isStable), take(1))))
+        merge(this._renderers$, resize)
+            .pipe(
+                switchMap(() => this._zone.onStable.pipe(startWith(this._zone.isStable), take(1))),
+                takeUntilDestroyed(this._destroyRef)
+            )
             .subscribe(() => {
                 this._calculateVisibleItems();
             });
     }
 
-    /**
-     * @hidden
-     * Calculates available space to fit the items.
-     * Determines whether to show the "More" button if available space is not enough to fit all list items.
-     */
     private _calculateVisibleItems(): void {
         if (this._calculationInProgress) {
             return;
         }
+        this._elementRef.nativeElement.classList.add(FD_NAVIGATION_OVERFLOW_ITEM_CLASS);
         this._calculationInProgress = true;
         const items = [...this.listItems$()];
         items.forEach((item) => item.hidden$.set(false));
         this.visibleItems$.set([...items]);
         this._cdr.detectChanges();
-        if (!this.navigation.isSnapped$()) {
+
+        let availableSpace = this._elementRef.nativeElement.clientWidth - this._elementRef.nativeElement.scrollWidth;
+
+        if (availableSpace >= 0) {
             this._showMoreButton$.set(false);
             this._calculationInProgress = false;
             this.navigation.showMoreButton$.set(null);
+            this._cdr.detectChanges();
+            this._elementRef.nativeElement.classList.remove(FD_NAVIGATION_OVERFLOW_ITEM_CLASS);
             return;
         }
 
-        this._elementRef.nativeElement.classList.add(FD_NAVIGATION_OVERFLOW_ITEM_CLASS);
-
-        let availableSpace = this._elementRef.nativeElement.clientHeight - this._elementRef.nativeElement.scrollHeight;
+        this._showMoreButton$.set(true);
+        this._cdr.detectChanges();
+        availableSpace = availableSpace - (this._moreContainer?.nativeElement.clientWidth || 0);
 
         if (availableSpace >= 0) {
             this._showMoreButton$.set(false);
@@ -172,16 +166,10 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
             return;
         }
 
-        this._showMoreButton$.set(true);
-        this._cdr.detectChanges();
-        availableSpace = availableSpace - (this._showMoreButtonElement?.nativeElement.clientHeight || 0);
-
         const hiddenItems: FdbNavigationListItem[] = [];
 
         const gap = parseInt(getComputedStyle(this._listContainer.nativeElement).gap, 10);
-        let i = 0;
 
-        // We are going from the bottom to the top and checking whether the available space is enough to fit the items.
         while (availableSpace < 0 && items.length > 0) {
             const item = items.pop();
             if (!item) {
@@ -189,15 +177,11 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
             }
             // Since we are going from the bottom to the top, we need to add item to the list as the first item of the array.
             hiddenItems.unshift(item);
-            const clientHeight =
-                Math.ceil(item?.marker?.elementRef.nativeElement.getBoundingClientRect().height || 0) +
-                gap * (i === 0 ? 1 : 2);
-            availableSpace = availableSpace + clientHeight;
+            const elementWidth =
+                Math.ceil(item?.marker?.elementRef.nativeElement.getBoundingClientRect().width || 0) + gap;
+            availableSpace = availableSpace + elementWidth;
             item.hidden$.set(true);
-            i++;
         }
-
-        this._elementRef.nativeElement.classList.remove(FD_NAVIGATION_OVERFLOW_ITEM_CLASS);
 
         this.visibleItems$.set([...items]);
         this.hiddenItems$.set([...hiddenItems]);
@@ -207,6 +191,9 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
 
         this.navigation.showMoreButton$.set(this._showMoreButton);
 
+        this._elementRef.nativeElement.classList.remove(FD_NAVIGATION_OVERFLOW_ITEM_CLASS);
+
         this._calculationInProgress = false;
+        this._navigationService.hiddenItems$.set(this._listItems.filter((item) => item.isOverflow$()));
     }
 }

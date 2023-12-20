@@ -1,4 +1,4 @@
-<fd-docs-section-title id="simple" componentName="FdbNavigation">Basic example</fd-docs-section-title>
+<fd-docs-section-title id="simple" componentName="navigation">Basic example</fd-docs-section-title>
 <description>
     <p>
         Vertical navigation can accept multiple states, such as: <code>expanded</code>, <code>snapped</code>,
@@ -18,7 +18,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="parent-link" componentName="FdbNavigation">Parent Navigation as Link</fd-docs-section-title>
+<fd-docs-section-title id="parent-link" componentName="navigation">Parent Navigation as Link</fd-docs-section-title>
 <description>
     <p>By default, the Parent Navigation Item functions as a Navigation Group.</p>
     <p>
@@ -38,9 +38,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="data-source" componentName="FdbNavigation"
-    >Navigation with Data-source</fd-docs-section-title
->
+<fd-docs-section-title id="data-source" componentName="navigation">Navigation with Data-source</fd-docs-section-title>
 <description>
     <p>
         In addition to content-projected approach, Navigation component supports passing data-source with custom list
@@ -50,15 +48,16 @@
         To use Data-source approach be sure to import <code>NavigationListDataSourceDirective</code> to your Component
         or NgModule.
     </p>
+    <p>In addition to defining list item template, developers can define template for <b>"More"</b> button</p>
 </description>
 <component-example [hasBackground]="false">
-    <fdp-navigation-data-source-example></fdp-navigation-data-source-example>
+    <fdb-navigation-data-source-example></fdb-navigation-data-source-example>
 </component-example>
 <code-example [exampleFiles]="dataSourceExample"></code-example>
 
 <separator></separator>
 
-<fd-docs-section-title id="selection" componentName="FdbNavigation">Selecting Navigation Item</fd-docs-section-title>
+<fd-docs-section-title id="selection" componentName="navigation">Selecting Navigation Item</fd-docs-section-title>
 <description>
     <p>
         By default, Navigation component listens to <code>RouterLinkActive</code> directive applied to
@@ -73,3 +72,21 @@
     <fdb-navigation-selection-example></fdb-navigation-selection-example>
 </component-example>
 <code-example [exampleFiles]="selectionExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="horizontal" componentName="navigation">Horizontal Navigation</fd-docs-section-title>
+<description>
+    <p>Navigation component can be rendered as a horizontal by providing <code>horizontal</code> input property.</p>
+    <p>
+        <b>Important:</b> Horizontal navigation uses <code>fdb-navigation-container</code> component inside instead of
+        <code>fdb-navigation-content-start</code> or <code>fdb-navigation-content-end</code>
+    </p>
+    <p>
+        <b>Important:</b> Horizontal navigation does not support list items with <code>[group]</code> input properties.
+    </p>
+</description>
+<component-example [hasBackground]="true">
+    <fdb-navigation-horizontal-example></fdb-navigation-horizontal-example>
+</component-example>
+<code-example [exampleFiles]="horizontalExample"></code-example>

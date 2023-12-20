@@ -1,6 +1,6 @@
 <ul #listContainer fdb-navigation-list [listItems]="visibleItems$()"></ul>
 @if (_showMoreButton$()) {
     <ul noGrow fdb-navigation-list role="menubar" #moreContainer>
-        <li fdb-navigation-more-button #moreButton [listItems]="hiddenItems$()"></li>
+        <li fdb-navigation-more-button [showLink]="false" [listItems]="hiddenItems$()"></li>
     </ul>
 }

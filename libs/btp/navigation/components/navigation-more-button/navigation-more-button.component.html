@@ -5,27 +5,42 @@
     [attr.aria-expanded]="popoverOpen$()"
     aria-level="1"
     (click)="togglePopover(true)"
+    (focusin)="_focusInHandler()"
     (keydown)="_keydownPopoverToggle($event)"
     #trigger
 >
-    <a fdb-navigation-link glyph="overflow">More Items</a>
+    @if (_navigation.moreButtonRenderer$(); as buttonRenderer) {
+        <ng-container fdbNavigationMoreButtonContainer #directive="fdbNavigationMoreButtonContainer">
+            <ng-template
+                [ngTemplateOutlet]="buttonRenderer"
+                [ngTemplateOutletInjector]="directive.injector"
+            ></ng-template>
+        </ng-container>
+    } @else {
+        <a fdb-navigation-link glyph="overflow">
+            @if (showLink) {
+                More Items
+            }
+        </a>
+    }
     <fd-popover
         [trigger]="trigger"
         [triggers]="[]"
         [isOpen]="popoverOpen$()"
         (isOpenChange)="popoverOpen$.set($event)"
         [focusTrapped]="true"
-        [noArrow]="false"
+        [noArrow]="_navigation.horizontal$()"
         additionalBodyClass="fd-navigation__list-container fd-navigation__list-container--menu"
         [placement]="_popoverPlacement$()"
     >
-        <fd-popover-body [ngClass]="_navigation.classList$()">
+        <fd-popover-body (keydown.escape)="_closePopoverWithEsc()" [ngClass]="_navigation.classList$()">
             <ul
                 fdb-navigation-list
-                withKeyboardNavigation
+                [withKeyboardNavigation]="!_navigation.horizontal$()"
                 [parentItems]="true"
                 class="fd-menu__list"
                 [listItems]="listItems"
+                (keydown)="_keydownHandler($event)"
             ></ul>
         </fd-popover-body>
     </fd-popover>

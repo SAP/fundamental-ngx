@@ -3,7 +3,7 @@
         <ng-template [ngTemplateOutlet]="item.renderer$()"></ng-template>
     </li>
     <!-- Add separator after home list item. -->
-    @if (item.home) {
+    @if (item.home && !_navigation.horizontal$()) {
         <li class="fd-navigation__list-item fd-navigation__list-item--separator"></li>
     }
 }

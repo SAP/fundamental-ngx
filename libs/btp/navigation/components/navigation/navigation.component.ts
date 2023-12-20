@@ -1,6 +1,4 @@
 /* eslint-disable @angular-eslint/no-input-rename,@angular-eslint/no-host-metadata-property */
-import { FocusKeyManager } from '@angular/cdk/a11y';
-import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
@@ -8,29 +6,31 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     HostListener,
     Input,
     OnChanges,
-    OnDestroy,
     OnInit,
     QueryList,
     Signal,
+    TemplateRef,
     ViewEncapsulation,
     computed,
     effect,
     inject,
     signal
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FdbViewMode } from '@fundamental-ngx/btp/shared';
-import { CssClassBuilder, KeyUtil, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { Subject, map, of } from 'rxjs';
+import { CssClassBuilder, Nullable, RtlService, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { Subject, map, of, startWith } from 'rxjs';
 import { NavigationListDataSourceDirective } from '../../directives/navigation-list-data-source.directive';
 import {
     NavigationListItemDirective,
     NavigationListItemRefDirective
 } from '../../directives/navigation-list-item-ref.directive';
+import { NavigationMoreButtonDirective } from '../../directives/navigation-more-button.directive';
 import { NavigationDataSourceItem } from '../../models/navigation-data-source-item.model';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
@@ -70,10 +70,7 @@ interface GroupedDataSourceItems {
         NavigationListItemComponent
     ]
 })
-export class NavigationComponent
-    extends FdbNavigation
-    implements CssClassBuilder, OnChanges, OnInit, AfterViewInit, OnDestroy
-{
+export class NavigationComponent extends FdbNavigation implements CssClassBuilder, OnChanges, OnInit, AfterViewInit {
     /** @hidden */
     @Input()
     class: string;
@@ -99,7 +96,17 @@ export class NavigationComponent
      * Navigation type.
      */
     @Input()
-    type: FdbNavigationType = 'vertical';
+    set type(value: FdbNavigationType) {
+        this._type$.set(value);
+    }
+    get type(): FdbNavigationType {
+        return this._type$();
+    }
+
+    @ContentChild(NavigationMoreButtonDirective)
+    private set _moreButtonRef(value: Nullable<NavigationMoreButtonDirective>) {
+        this.moreButtonRenderer$.set(value?.templateRef || null);
+    }
 
     /** @hidden */
     @ContentChild(NavigationListItemRefDirective)
@@ -111,6 +118,12 @@ export class NavigationComponent
     @ContentChildren(FdbNavigationListItem, { descendants: true })
     private readonly _navigationItems: QueryList<FdbNavigationListItem>;
 
+    /** Custom "More" button renderer. */
+    readonly moreButtonRenderer$ = signal<TemplateRef<any> | null>(null);
+
+    /** Whether the navigation is norizontal. */
+    readonly horizontal$ = computed(() => this._type$() === 'horizontal');
+
     /**
      * State signal.
      */
@@ -119,7 +132,7 @@ export class NavigationComponent
     /**
      * Whether the navigation is in snapped mode.
      */
-    readonly isSnapped$ = computed(() => this.state$() === 'snapped');
+    readonly isSnapped$ = computed(() => this.state$() === 'snapped' || this.horizontal$());
 
     /**
      * Whether to show "More" button. Applicable for `snapped` state only.
@@ -139,13 +152,16 @@ export class NavigationComponent
     readonly dataSourceItems: Signal<GroupedDataSourceItems | undefined>;
 
     /** @hidden */
-    private readonly _viewInited$ = signal(false);
-
-    /** @hidden */
     readonly _navigationItemRenderer = signal<NavigationListItemRefDirective | null>(null);
 
     /** Stream notifies to close all popups in child list items. */
     readonly closeAllPopups = new Subject<void>();
+
+    /** @hidden */
+    private readonly _viewInited$ = signal(false);
+
+    /** @hidden */
+    private readonly _type$ = signal<FdbNavigationType>('vertical');
 
     /**
      * @hidden
@@ -157,7 +173,13 @@ export class NavigationComponent
     });
 
     /** @hidden */
-    private _keyManager: FocusKeyManager<FdbNavigationListItem>;
+    private readonly _rtl$ = toSignal(inject(RtlService, { optional: true })?.rtl || of(false));
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    private readonly _navigationService = inject(NavigationService);
 
     /** @hidden */
     constructor() {
@@ -179,11 +201,26 @@ export class NavigationComponent
                   )
         );
         // When show more button is shown, reset items list with added "More button".
-        effect(() => {
-            if (this._viewInited$()) {
-                this._resetItemsList(this.showMoreButton$());
+        effect(
+            () => {
+                if (this._viewInited$()) {
+                    this._resetItemsList(this.showMoreButton$());
+                }
+            },
+            {
+                allowSignalWrites: true
             }
-        });
+        );
+
+        effect(
+            () => {
+                this._navigationService.horizontal$.set(this.horizontal$());
+                this._navigationService.isSnapped$.set(this.isSnapped$());
+            },
+            {
+                allowSignalWrites: true
+            }
+        );
     }
 
     /** @hidden */
@@ -194,7 +231,8 @@ export class NavigationComponent
                 this.class,
                 'fd-navigation',
                 this.mode ? `fd-navigation--${this.mode}` : '',
-                `fd-navigation--${this.state}`
+                `fd-navigation--${this.state}`,
+                this.horizontal$() ? `fd-navigation--${this.type}` : ''
             ].filter((k) => !!k)
         );
         return [...this.classList$(), `fd-navigation--${this.type}`];
@@ -206,13 +244,7 @@ export class NavigationComponent
      */
     @HostListener('keydown', ['$event'])
     private _keyDownHandler(event: KeyboardEvent): void {
-        if (!KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW])) {
-            return;
-        }
-
-        event.preventDefault();
-
-        this._keyManager.onKeydown(event);
+        this._navigationService.onRootKeyDown(event);
     }
 
     /** @hidden */
@@ -228,30 +260,25 @@ export class NavigationComponent
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._keyManager = new FocusKeyManager(this._navigationItems)
-            .withVerticalOrientation()
-            .skipPredicate((item) => !item.isVisible$() || item.skipNavigation);
-        this._keyManager.setActiveItem(0);
         this._viewInited$.set(true);
-    }
 
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._keyManager?.destroy();
+        this._navigationItems.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            this._navigationService.allItems$.set(this._navigationItems.toArray());
+        });
     }
 
     /**
      * Returns currently focused list item.
      */
     getActiveItem(): FdbNavigationListItem | null {
-        return this._keyManager.activeItem;
+        return this._navigationService.getRootActiveItem();
     }
 
     /**
-     * Sets focused item.
+     * Returns first focusable list item.
      */
-    setActiveItem(item: FdbNavigationListItem): void {
-        this._keyManager.setActiveItem(item);
+    getFirstFocusableItem(): FdbNavigationListItem | null {
+        return this._navigationItems?.find((item) => item.isVisible$() && !item.skipNavigation) || null;
     }
 
     /** Notifies child list items that all popups should be closed. */
@@ -296,6 +323,7 @@ export class NavigationComponent
 
             items.splice(insertionIndex, 0, showMoreButton);
             this._navigationItems.reset(items);
+            this._navigationItems.notifyOnChanges();
         }
     }
 }

@@ -22,6 +22,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
+import { FdbNavigation } from '../../models/navigation.class';
 import { NavigationService } from '../../services/navigation.service';
 
 @Component({
@@ -77,14 +78,17 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
 
     /** Event emitted when user tries to navigate to the item before the list itself. */
     @Output()
-    focusBefore = new EventEmitter<void>();
+    focusBefore = new EventEmitter<KeyboardEvent>();
 
     /** Event emitted when user tries to navigate to the item after the list itself. */
     @Output()
-    focusAfter = new EventEmitter<void>();
+    focusAfter = new EventEmitter<KeyboardEvent>();
 
     /** List items. */
     readonly listItems$ = signal<FdbNavigationListItem[]>([]);
+
+    /** @hidden */
+    readonly _navigation = inject(FdbNavigation);
 
     /** @hidden */
     private _listItemsArray: FdbNavigationListItem[] = [];
@@ -136,16 +140,20 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
             event.stopImmediatePropagation();
         }
         if (KeyUtil.isKeyCode(event, UP_ARROW) && this._activeItemIndex <= 0) {
-            this.focusBefore.emit();
+            this.focusBefore.emit(event);
             return;
         }
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) && this._activeItemIndex === this._listItemsArray.length - 1) {
-            this.focusAfter.emit();
+            this.focusAfter.emit(event);
             return;
         }
 
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
             this._keyManager?.onKeydown(event);
+            return;
+        }
+
+        if (this._navigation.horizontal$()) {
             return;
         }
 

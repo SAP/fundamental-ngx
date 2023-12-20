@@ -1,6 +1,6 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { CommonModule, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
@@ -49,7 +49,7 @@ import { NavigationListComponent } from '../navigation-list/navigation-list.comp
 })
 export class NavigationListItemMarkerDirective {
     /** Element reference. */
-    readonly elementRef = inject(ElementRef);
+    readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
     /** @hidden */
     constructor() {
         inject(NavigationListItemComponent).marker = this;
@@ -75,7 +75,6 @@ export class NavigationListItemMarkerDirective {
     templateUrl: './navigation-list-item.component.html',
     styles: [],
     providers: [
-        NavigationService,
         {
             provide: FdbNavigationListItem,
             useExisting: NavigationListItemComponent
@@ -161,12 +160,6 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     @ContentChildren(FdbNavigationListItem, { descendants: false })
     listItems: QueryList<FdbNavigationListItem>;
 
-    /** Link reference. */
-    @ContentChild(FdbNavigationItemLink)
-    set link(value: Nullable<FdbNavigationItemLink>) {
-        this.link$.set(value);
-    }
-
     /**
      * Link template reference.
      */
@@ -186,6 +179,9 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
 
     /** @hidden */
     readonly _toggleIcon$ = computed(() => {
+        if (this.navigation.horizontal$()) {
+            return 'megamenu';
+        }
         if (this.expandedAttr$()) {
             return 'slim-arrow-down';
         }
@@ -250,7 +246,9 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
      * @hidden
      * Popover position. Changes based on rtl value.
      */
-    readonly _popoverPlacement$ = computed<Placement>(() => (this._rtl$() ? 'left-start' : 'right-start'));
+    readonly _popoverPlacement$ = computed<Placement>(() =>
+        this.navigation.horizontal$() ? 'bottom-start' : this._rtl$() ? 'left-start' : 'right-start'
+    );
 
     /** Optional parent list component. */
     readonly parentListItemComponent = inject(FdbNavigationListItemCmp, {
@@ -281,9 +279,6 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     private readonly _links: FdbNavigationItemLink[] = [];
 
     /** @hidden */
-    private readonly _childLists: NavigationListComponent[] = [];
-
-    /** @hidden */
     private _keyManager: Nullable<FocusKeyManager<FdbNavigationListItem>>;
 
     /** @hidden */
@@ -309,6 +304,9 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     });
 
     /** @hidden */
+    private readonly _navigationService = inject(NavigationService);
+
+    /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
@@ -316,6 +314,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         super();
         effect(() => {
             if (this.popoverOpen$()) {
+                this._keyManager?.destroy();
                 this._keyManager = new FocusKeyManager(this.listItems$())
                     .withVerticalOrientation()
                     .skipPredicate((item) => item.skipNavigation);
@@ -346,6 +345,15 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         this.navigation.closeAllPopups.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this.popoverOpen$.set(false);
         });
+
+        this._navigationService.closePopoverExcept$
+            .pipe(
+                filter((item) => item !== this),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe(() => {
+                this.popoverOpen$.set(false);
+            });
     }
 
     /** @hidden */
@@ -354,10 +362,19 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     }
 
     /** @hidden */
-    _focusBeforeList(): void {
-        if (this.popoverOpen$()) {
-            this._focusPopoverLink();
+    _focusBeforeList(event: KeyboardEvent): void {
+        event.preventDefault();
+        // Ignore when in horizontal mode.
+        if (!this.popoverOpen$() || this.navigation.horizontal$()) {
+            return;
         }
+        this._focusPopoverLink();
+    }
+
+    /** @hidden */
+    _closePopoverWithEsc(): void {
+        this.popoverOpen$.set(false);
+        this.link$()?.focus();
     }
 
     /**
@@ -366,7 +383,11 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
      */
     _focusInHandler(): void {
         if (!this.parentListItem?.popoverOpen$() && !this.isOverflow$()) {
-            this.navigation.setActiveItem(this);
+            this._navigationService.setRootActiveItem(this);
+            return;
+        }
+        if (this.navigation.horizontal$()) {
+            this._navigationService.setActiveOverflowItem(this);
             return;
         }
         this._parentNavigationService?.currentItem$.next(this);
@@ -390,32 +411,30 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         if (this._links.indexOf(link) === -1) {
             this._links.push(link);
         }
+
+        this.link$.set(this._links[0]);
     }
 
     /** @hidden */
     unregisterLink(link: FdbNavigationItemLink): void {
         this._links.splice(this._links.indexOf(link), 1);
+        this.link$.set(this._links[0]);
     }
 
     /** @hidden */
     registerChildList(list: NavigationListComponent): void {
-        if (this._childLists.includes(list)) {
+        if (this.childLists.includes(list)) {
             return;
         }
-        this._childLists.push(list);
+        this.childLists.push(list);
     }
 
     /** @hidden */
     unregisterChildList(list: NavigationListComponent): void {
-        if (!this._childLists.includes(list)) {
+        if (!this.childLists.includes(list)) {
             return;
         }
-        this._childLists.splice(this._childLists.indexOf(list), 1);
-    }
-
-    /** @hidden */
-    handleHorizontalNavigation(isExpand: boolean): void {
-        console.log(isExpand);
+        this.childLists.splice(this.childLists.indexOf(list), 1);
     }
 
     /**
@@ -423,35 +442,6 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
      */
     popoverLinkArrowDown(): void {
         this._keyManager?.setActiveItem(0);
-    }
-
-    /** @Hidden */
-    _innerListKeydown(event: KeyboardEvent): void {
-        if (!this.popoverOpen$()) {
-            return;
-        }
-
-        if (KeyUtil.isKeyCode(event, UP_ARROW) && this._keyManager?.activeItemIndex === 0) {
-            this._focusPopoverLink();
-            return;
-        }
-
-        if (KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW])) {
-            this._keyManager?.onKeydown(event);
-            return;
-        }
-
-        if (!KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
-            return;
-        }
-
-        const isGoBack = KeyUtil.isKeyCode(event, this._rtl$() ? RIGHT_ARROW : LEFT_ARROW);
-
-        if (!isGoBack) {
-            return;
-        }
-
-        this._snappedItemKeyboardExpandedHandler(false);
     }
 
     /** Toggles expanded state of the item. */
@@ -462,17 +452,6 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         this.expanded$.update((expanded) => !expanded);
     }
 
-    /** Callback method when user used keyboard arrows to expand/collapse list item. */
-    keyboardExpanded(shouldExpand: boolean): void {
-        if (this.isOverflow$()) {
-            this._overflowItemKeyboardExpandedHandler(shouldExpand);
-        } else if (this.navigation.isSnapped$()) {
-            this._snappedItemKeyboardExpandedHandler(shouldExpand);
-        } else {
-            this._visibleItemKeyboardExpandedHandler(shouldExpand);
-        }
-    }
-
     /**
      * Focus method implementation.
      * Used by main navigation component FocusKeyManager.
@@ -480,7 +459,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
      */
     focus(): void {
         // If popover is open, focus will be automatically shifted to cloned link.
-        if (this.popoverOpen$() && !this.isOverflow$()) {
+        if (!this.navigation.horizontal$() && this.popoverOpen$() && !this.isOverflow$()) {
             return;
         }
         this.focusLink();
@@ -491,11 +470,24 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
      * Optionally closes the popover.
      */
     focusLink(closePopover = false): void {
-        this.link$()?.elementRef.nativeElement.focus();
+        this.link$()?.focus();
 
         if (closePopover) {
             this.popoverOpen$.set(false);
         }
+    }
+
+    /** @hidden */
+    _itemMarkerKeydown(event: KeyboardEvent): void {
+        if (!this.navigation.horizontal$()) {
+            return;
+        }
+
+        if (this.isOverflow$()) {
+            this._handleArrowNavInPopover(event);
+        }
+
+        this._navigationService.handleArrowNavOnRoot(event, this);
     }
 
     /** @hidden */
@@ -510,65 +502,26 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         });
     }
 
+    /** @hidden */
+    private _handleArrowNavInPopover(event: KeyboardEvent): void {
+        if (!KeyUtil.isKeyCode(event, [RIGHT_ARROW, LEFT_ARROW])) {
+            return;
+        }
+
+        const isExpand = KeyUtil.isKeyCode(event, this._rtl$() ? RIGHT_ARROW : LEFT_ARROW);
+
+        if (isExpand && this.hasChildren$()) {
+            this.firstChildList?.setActiveItemIndex(0);
+        }
+
+        if (!isExpand && this.parentListItemComponent) {
+            this.parentListItemComponent.focus();
+        }
+    }
+
+    /** @hidden */
     private _focusPopoverLink(): void {
-        this._links.find((link) => link.inPopover)?.elementRef.nativeElement.focus();
-    }
-
-    /** @hidden */
-    private _visibleItemKeyboardExpandedHandler(shouldExpand: boolean): void {
-        if (!this.hasChildren$()) {
-            if (!shouldExpand) {
-                this.parentListItem?.focus();
-            }
-            return;
-        }
-
-        if (!shouldExpand) {
-            // If item already collapsed, shift focus to parent link
-            if (!this.expanded$()) {
-                this.parentListItem?.focus();
-                return;
-            }
-            this.expanded$.set(false);
-        } else {
-            if (this.expanded$()) {
-                this.listItems.first?.focus();
-                return;
-            }
-            this.expanded$.set(true);
-        }
-    }
-
-    /** @hidden */
-    private _snappedItemKeyboardExpandedHandler(shouldExpand: boolean): void {
-        if (!this.hasChildren$()) {
-            return;
-        }
-        if (shouldExpand && !this.popoverOpen$()) {
-            this.popoverOpen$.set(true);
-        }
-        if (!shouldExpand && this.popoverOpen$()) {
-            this.popoverOpen$.set(false);
-            this.link$()?.elementRef.nativeElement.focus();
-        }
-    }
-
-    /**
-     * @hidden
-     * Method used to handle keyboard navigation for list item that is inside overflow container.
-     */
-    private _overflowItemKeyboardExpandedHandler(shouldExpand: boolean): void {
-        if (shouldExpand && this._childLists.length > 0) {
-            const firstList = this._childLists[0];
-            firstList.setActiveItemIndex(0);
-        }
-        if (shouldExpand && !this.popoverOpen$()) {
-            this.popoverOpen$.set(true);
-        }
-        if (!shouldExpand && this.popoverOpen$()) {
-            this.popoverOpen$.set(false);
-            this.link?.elementRef.nativeElement.focus();
-        }
+        this._links.find((link) => link.inPopover)?.focus();
     }
 
     /** @hidden */

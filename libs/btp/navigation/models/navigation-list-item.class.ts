@@ -1,5 +1,5 @@
 import { FocusOrigin, FocusableOption } from '@angular/cdk/a11y';
-import { Signal, TemplateRef, computed, inject, signal } from '@angular/core';
+import { QueryList, Signal, TemplateRef, computed, inject, signal } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { NavigationListItemMarkerDirective } from '../components/navigation-item/navigation-list-item.component';
 import { NavigationListComponent } from '../components/navigation-list/navigation-list.component';
@@ -21,15 +21,14 @@ export abstract class FdbNavigationListItem implements FocusableOption {
     abstract parentListItem: FdbNavigationListItem | null;
     abstract class$: Signal<string>;
     abstract selected$: Signal<boolean>;
+    abstract listItems: QueryList<FdbNavigationListItem>;
     abstract focus(origin?: FocusOrigin | undefined): void;
     abstract toggleExpanded(): void;
-    abstract keyboardExpanded(shouldExpand: boolean): void;
     abstract popoverLinkArrowDown(): void;
     abstract registerLink(link: FdbNavigationItemLink): void;
     abstract unregisterLink(link: FdbNavigationItemLink): void;
     abstract registerChildList(list: NavigationListComponent): void;
     abstract unregisterChildList(list: NavigationListComponent): void;
-    abstract handleHorizontalNavigation(isExpand: boolean): void;
     abstract focusLink(closePopover?: boolean): void;
 
     /** Marker directive that is attached to the rendered list item. */
@@ -62,7 +61,9 @@ export abstract class FdbNavigationListItem implements FocusableOption {
     /**
      * Whether the item is in overflow menu. Applicable only when the navigation is in snapped mode.
      */
-    readonly isOverflow$ = computed(() => this.navigation.isSnapped$() && this.hidden$());
+    readonly isOverflow$ = computed(
+        () => this.navigation.isSnapped$() && (this.hidden$() || this.parentListItem?.isOverflow$())
+    );
 
     /**
      * Item Hierarchy level in navigation tree.
@@ -103,8 +104,21 @@ export abstract class FdbNavigationListItem implements FocusableOption {
     /** @hidden */
     readonly isGroup$ = signal(false);
 
+    /** @hidden */
+    readonly childLists: NavigationListComponent[] = [];
+
     /** Navigation container reference. */
     readonly navigation = inject(FdbNavigation);
+
+    /** @hidden */
+    get firstChildList(): NavigationListComponent | null {
+        return this.childLists[0] || null;
+    }
+
+    /** @hidden */
+    togglePopover(): void {
+        this.popoverOpen$.update((isOpen) => !isOpen);
+    }
 }
 
 export abstract class FdbNavigationListItemCmp extends FdbNavigationListItem {}

@@ -1,4 +1,3 @@
-import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
@@ -6,7 +5,6 @@ import {
     DestroyRef,
     Input,
     TemplateRef,
-    ViewChild,
     ViewEncapsulation,
     computed,
     effect,
@@ -14,13 +12,15 @@ import {
     signal
 } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk';
+import { Nullable, RtlService } from '@fundamental-ngx/cdk';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { of } from 'rxjs';
+import { NavigationMoreBUttonContainerDirective } from '../../directives/navigation-more-button.directive';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
+import { NavigationService } from '../../services/navigation.service';
 import { NavigationLinkComponent } from '../navigation-link/navigation-link.component';
 import { NavigationListComponent } from '../navigation-list/navigation-list.component';
 
@@ -39,7 +39,8 @@ export interface NavigationMoreButtonRefContext {
         PopoverControlComponent,
         PopoverBodyComponent,
         NgTemplateOutlet,
-        NgClass
+        NgClass,
+        NavigationMoreBUttonContainerDirective
     ],
     providers: [
         {
@@ -59,9 +60,9 @@ export class NavigationMoreButtonComponent {
     @Input()
     listItems: FdbNavigationListItem[] = [];
 
-    /** @hidden */
-    @ViewChild(FdbNavigationItemLink)
-    private readonly _link: Nullable<FdbNavigationItemLink>;
+    /** Whether to show "More items" text. */
+    @Input()
+    showLink = true;
 
     /** @hidden */
     customMoreRenderer: Nullable<TemplateRef<any>>;
@@ -98,7 +99,9 @@ export class NavigationMoreButtonComponent {
      * @hidden
      * Popover position. Changes based on rtl value.
      */
-    readonly _popoverPlacement$ = computed<Placement>(() => (this._rtl$() ? 'left-start' : 'right-start'));
+    readonly _popoverPlacement$ = computed<Placement>(() =>
+        this._navigation.horizontal$() ? 'bottom-end' : this._rtl$() ? 'left-start' : 'right-start'
+    );
 
     /** @hidden */
     private _popoverClicked = false;
@@ -111,11 +114,14 @@ export class NavigationMoreButtonComponent {
     );
 
     /** @hidden */
+    private readonly _navigationService = inject(NavigationService);
+
+    /** @hidden */
     constructor() {
         effect(() => {
             if (this.popoverOpen$() && !this._popoverClicked) {
                 setTimeout(() => {
-                    this.listItems[0]?.focus();
+                    this.listItems.find((item) => !item.separator && !item.spacer)?.focus();
                 });
             }
             this._popoverClicked = false;
@@ -133,10 +139,14 @@ export class NavigationMoreButtonComponent {
     }
 
     /** @hidden */
-    registerLink(): void {}
+    registerLink(link: FdbNavigationItemLink): void {
+        this.link$.set(link);
+    }
 
     /** @hidden */
-    unregisterLink(): void {}
+    unregisterLink(): void {
+        this.link$.set(null);
+    }
 
     /** @hidden */
     registerChildList(): void {}
@@ -154,7 +164,7 @@ export class NavigationMoreButtonComponent {
      * Optionally closes the popover.
      */
     focusLink(closePopover = false): void {
-        this._link?.elementRef.nativeElement.focus();
+        this.link$()?.focus();
         if (closePopover) {
             this.popoverOpen$.set(false);
         }
@@ -168,19 +178,22 @@ export class NavigationMoreButtonComponent {
 
     /** @hidden */
     _keydownPopoverToggle(event: KeyboardEvent): void {
-        if (!KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
-            return;
-        }
-        const isRtl = this._rtl$() || false;
+        this._navigationService.overflowButtonKeydownHandler(event, this as unknown as FdbNavigationListItem);
+    }
 
-        const isOpenAction = KeyUtil.isKeyCode(event, isRtl ? LEFT_ARROW : RIGHT_ARROW);
+    /** @hidden */
+    _keydownHandler(event: KeyboardEvent): void {
+        this._navigationService.overflowMenuKeydown(event);
+    }
 
-        // If user clicked on popover opener button, and then tried to use keyboard, simply shift focus to the first item in the popover menu.
-        if (isOpenAction && this.popoverOpen$()) {
-            this.listItems[0]?.focus();
-            return;
-        }
+    /** @hidden */
+    _focusInHandler(): void {
+        this._navigationService.setRootActiveItem(this as unknown as FdbNavigationListItem);
+    }
 
-        this.popoverOpen$.set(isOpenAction);
+    /** @hidden */
+    _closePopoverWithEsc(): void {
+        this.popoverOpen$.set(false);
+        this.link$()?.focus();
     }
 }

@@ -7,4 +7,6 @@ export abstract class FdbNavigationItemLink {
     abstract inPopover: boolean;
     abstract isActive$: Signal<boolean | undefined>;
     abstract routerLink: Nullable<RouterLink>;
+    abstract hasRouterLink$: Signal<boolean>;
+    abstract focus(): void;
 }

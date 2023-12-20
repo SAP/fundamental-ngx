@@ -10,6 +10,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { NavigationBasicExampleComponent } from './examples/basic-example/navigation-basic-example.component';
 import { NavigationDataSourceExampleComponent } from './examples/data-source/navigation-data-source-example.component';
+import { NavigationHorizontalExampleComponent } from './examples/horizontal/navigation-horizontal-example.component';
 import { NavigationParentItemLinkComponent } from './examples/parent-item-link/navigation-parent-item-link.component';
 import { NavigationSelectionExampleComponent } from './examples/selection-example/navigation-selection-example.component';
 
@@ -25,7 +26,8 @@ import { NavigationSelectionExampleComponent } from './examples/selection-exampl
         SeparatorComponent,
         NavigationParentItemLinkComponent,
         NavigationDataSourceExampleComponent,
-        NavigationSelectionExampleComponent
+        NavigationSelectionExampleComponent,
+        NavigationHorizontalExampleComponent
     ]
 })
 export class NavigationDocsComponent {
@@ -55,5 +57,12 @@ export class NavigationDocsComponent {
             component: 'NavigationParentItemLinkComponent'
         }),
         getExampleFile('parent-item-link/navigation-parent-item-link.component.html')
+    ];
+
+    horizontalExample: ExampleFile[] = [
+        getExampleFile('horizontal/navigation-horizontal-example.component.ts', {
+            component: 'NavigationHorizontalExampleComponent'
+        }),
+        getExampleFile('horizontal/navigation-horizontal-example.component.html')
     ];
 }
