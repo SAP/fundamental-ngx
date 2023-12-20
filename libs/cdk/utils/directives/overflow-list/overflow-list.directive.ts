@@ -91,7 +91,6 @@ export class OverflowListDirective implements AfterViewInit {
 
     /** @hidden */
     private _calculateAmountOfOverflowedItems(): void {
-        console.log('calculate');
         const extra = this.getAmountOfExtraItems();
         this.overflowChanged.emit(extra);
     }
