@@ -3,18 +3,24 @@ import { ChangeDetectionStrategy, Component, ViewChild, signal } from '@angular/
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { Subject } from 'rxjs';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
 import { NavigationListItemComponent } from './navigation-list-item.component';
-import { Subject } from 'rxjs';
+import { NavigationService } from '../../services/navigation.service';
 
 class NavigationComponentMock extends FdbNavigation {
     closeAllPopups = new Subject<void>();
-    closePopups(): void {}
     classList$ = signal([]);
     isSnapped$ = signal(false);
     showMoreButton$ = signal(null);
     _navigationItemRenderer = signal(null);
+    horizontal$ = signal(false);
+    moreButtonRenderer$ = signal(null);
+    getFirstFocusableItem(): FdbNavigationListItem | null {
+        return null;
+    }
+    closePopups(): void {}
     setActiveItem(): void {}
     getActiveItem(): FdbNavigationListItem | null {
         return null;
@@ -47,6 +53,7 @@ describe('NavigationListItemComponent', () => {
         await TestBed.configureTestingModule({
             imports: [TestComponent],
             providers: [
+                NavigationService,
                 {
                     provide: FdbNavigation,
                     useValue: navComponent

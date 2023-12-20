@@ -17,7 +17,7 @@ import {
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Nullable } from '@fundamental-ngx/cdk';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 import { of, startWith } from 'rxjs';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';

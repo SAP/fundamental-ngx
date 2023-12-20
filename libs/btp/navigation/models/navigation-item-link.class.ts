@@ -1,6 +1,6 @@
 import { ElementRef, Signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Nullable } from '@fundamental-ngx/cdk';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 export abstract class FdbNavigationItemLink {
     abstract elementRef: ElementRef<HTMLLinkElement>;

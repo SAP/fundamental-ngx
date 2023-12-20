@@ -16,7 +16,7 @@ import {
     signal
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { Nullable, resizeObservable } from '@fundamental-ngx/cdk';
+import { Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { asyncScheduler, debounceTime, filter, merge, observeOn, startWith, switchMap, take } from 'rxjs';
 import { FdbNavigationContentContainer } from '../../models/navigation-content-container.class';

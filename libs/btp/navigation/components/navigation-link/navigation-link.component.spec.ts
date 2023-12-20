@@ -6,13 +6,19 @@ import { signal } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { Subject } from 'rxjs';
+import { NavigationService } from '../../services/navigation.service';
 
 class NavigationComponentMock extends FdbNavigation {
+    closeAllPopups = new Subject<void>();
     classList$ = signal([]);
     isSnapped$ = signal(false);
     showMoreButton$ = signal(null);
     _navigationItemRenderer = signal(null);
-    closeAllPopups = new Subject<void>();
+    horizontal$ = signal(false);
+    moreButtonRenderer$ = signal(null);
+    getFirstFocusableItem(): FdbNavigationListItem | null {
+        return null;
+    }
     closePopups(): void {}
     setActiveItem(): void {}
     getActiveItem(): FdbNavigationListItem | null {
@@ -30,6 +36,7 @@ describe('NavigationLinkComponent', () => {
         await TestBed.configureTestingModule({
             imports: [NavigationLinkComponent],
             providers: [
+                NavigationService,
                 {
                     provide: FdbNavigation,
                     useValue: navComponent
