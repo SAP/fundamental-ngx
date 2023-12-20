@@ -3,6 +3,8 @@ import { ChangeDetectorRef, OnDestroy, Pipe, PipeTransform } from '@angular/core
 import { Observable } from 'rxjs';
 import { isPromise, isSubscribable } from '../typecheck';
 
+export type FdkAsyncProperty<T> = T | Observable<T> | Promise<T>;
+
 @Pipe({
     name: 'fdkAsyncOrSync',
     standalone: true,
@@ -24,7 +26,7 @@ export class AsyncOrSyncPipe implements OnDestroy, PipeTransform {
      * Transforms raw async-like value into static one.
      * @param value raw value. Can be either a static value, or Promise-like, or Observable-like.
      */
-    transform<T>(value: T | Promise<T> | Observable<T>): T | null {
+    transform<T>(value: FdkAsyncProperty<T>): T | null {
         return !isPromise(value) && !isSubscribable(value) ? value : this._asyncPipe?.transform(value) ?? null;
     }
 

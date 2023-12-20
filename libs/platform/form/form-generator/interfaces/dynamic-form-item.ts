@@ -3,7 +3,7 @@ import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Observable } from 'rxjs';
 
-import { ColorAccent, ContentDensity } from '@fundamental-ngx/cdk/utils';
+import { ColorAccent, ContentDensity, FdkAsyncProperty } from '@fundamental-ngx/cdk/utils';
 import { FdDate } from '@fundamental-ngx/core/datetime';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 import { ColumnLayout, FieldHintInput, HintInput, InlineLayout, SelectItem } from '@fundamental-ngx/platform/shared';
@@ -96,7 +96,8 @@ export interface DynamicFormFieldGroupMap extends BaseDynamicFormFieldGroup {
     items?: Map<string, DynamicFormItemMap>;
 }
 
-export type FdpFormGeneratorAsyncProperty<T = string> = T | Promise<T> | Observable<T>;
+// Just to keep the original type available.
+export type FdpFormGeneratorAsyncProperty<T = string> = FdkAsyncProperty<T>;
 
 export interface BaseDynamicFormFieldItem<T = any> {
     /**
@@ -121,18 +122,14 @@ export interface BaseDynamicFormFieldItem<T = any> {
      * Display name of the form item.
      * @param formValue the form value hash.
      */
-    message:
-        | FdpFormGeneratorAsyncProperty<string>
-        | ((formValue?: DynamicFormValue) => FdpFormGeneratorAsyncProperty<string>);
+    message: FdkAsyncProperty<string> | ((formValue?: DynamicFormValue) => FdkAsyncProperty<string>);
 
     /**
      * @description
      * Display placeholder of the form item.
      * @param formValue the form value hash.
      */
-    placeholder?:
-        | FdpFormGeneratorAsyncProperty<string>
-        | ((formValue?: DynamicFormValue) => FdpFormGeneratorAsyncProperty<string>);
+    placeholder?: FdkAsyncProperty<string> | ((formValue?: DynamicFormValue) => FdkAsyncProperty<string>);
 
     /**
      * @description
@@ -144,7 +141,7 @@ export interface BaseDynamicFormFieldItem<T = any> {
      * @description
      * Default value of the form item.
      */
-    default?: FdpFormGeneratorAsyncProperty<T> | ((formValue?: DynamicFormValue) => FdpFormGeneratorAsyncProperty<T>);
+    default?: FdkAsyncProperty<T> | ((formValue?: DynamicFormValue) => FdkAsyncProperty<T>);
 
     /**
      * @description
