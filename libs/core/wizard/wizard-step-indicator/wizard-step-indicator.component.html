@@ -11,6 +11,7 @@
                     fd-action-sheet-item
                     [label]="step.label"
                     [glyph]="step.glyph"
+                    [glyphFont]="glyphFont"
                     [disabled]="!step.visited"
                     (click)="stepItemClicked(step, $event)"
                 ></li>

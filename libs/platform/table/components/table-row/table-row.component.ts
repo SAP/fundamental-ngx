@@ -35,6 +35,7 @@ import {
 } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import {
     TableCellDirective,
     TableIconDirective,
@@ -100,7 +101,8 @@ import { TableEditableCellComponent } from '../table-editable-cell/table-editabl
         FdTranslatePipe,
         SelectionCellStylesPipe,
         TableCellStylesPipe,
-        ColumnResizableSidePipe
+        ColumnResizableSidePipe,
+        IconComponent
     ]
 })
 export class TableRowComponent<T> extends TableRowDirective implements OnInit, AfterViewInit, OnDestroy, OnChanges {

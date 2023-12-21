@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild, EventEmitter } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NotificationModule } from '../notification.module';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 
 @Component({
     template: `
@@ -48,7 +49,7 @@ describe('NotificationGroupHeaderComponent', () => {
 
     it('should change the icon when the button is clicked', () => {
         button = fixture.debugElement.query(By.css('button'));
-        buttonIcon = fixture.debugElement.query(By.css('i'));
+        buttonIcon = fixture.debugElement.query(By.directive(IconComponent));
 
         expect(buttonIcon.nativeElement.classList).toContain('sap-icon--slim-arrow-right');
 

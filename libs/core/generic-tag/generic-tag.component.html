@@ -1,11 +1,10 @@
 @if (type) {
-    <span
+    <fd-icon
         class="fd-generic-tag__icon"
-        [class]="type ? 'sap-icon--message-' + type : ''"
+        [glyph]="type ? 'message-' + type : ''"
         role="presentation"
         aria-hidden="true"
-    >
-    </span>
+    ></fd-icon>
 }
 <span class="fd-generic-tag__name">{{ name }}</span>
 @if (value) {

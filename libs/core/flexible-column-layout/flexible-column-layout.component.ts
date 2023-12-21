@@ -17,6 +17,7 @@ import {
 } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import {
@@ -55,7 +56,7 @@ import { FD_FLEXIBLE_COLUMN_LAYOUT_COMPONENT } from './tokens';
         }
     ],
     standalone: true,
-    imports: [NgTemplateOutlet, ButtonComponent, ContentDensityDirective]
+    imports: [NgTemplateOutlet, ButtonComponent, ContentDensityDirective, IconComponent]
 })
 export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit {
     /**

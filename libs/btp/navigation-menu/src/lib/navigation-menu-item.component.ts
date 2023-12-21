@@ -6,14 +6,20 @@ import {
     IndirectFocusableItemDirective,
     Nullable
 } from '@fundamental-ngx/cdk/utils';
-import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 import { fromEvent, Observable } from 'rxjs';
 
 @Component({
     selector: 'fdb-navigation-menu-item, li[fdb-navigation-menu-item]',
     template: `
         @if (glyph) {
-            <fd-icon class="fd-navigation-menu__icon" [glyph]="glyph" role="presentation" aria-hidden="true"></fd-icon>
+            <fd-icon
+                class="fd-navigation-menu__icon"
+                [glyph]="glyph"
+                [font]="glyphFont"
+                role="presentation"
+                aria-hidden="true"
+            ></fd-icon>
         }
         @if (label) {
             <span class="fd-navigation-menu__text">
@@ -41,6 +47,10 @@ export class NavigationMenuItemComponent implements FocusableItem, HasElementRef
      */
     @Input()
     glyph: Nullable<string>;
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /**
      * Text to be displayed.

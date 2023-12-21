@@ -193,12 +193,12 @@
 @if (_fdpTableService._isShownNavigationColumn$ | async) {
     <td fd-table-cell class="fdp-table__cell--navigation is-last-child" fdkDisabled [addDisabledClass]="false">
         @if (row.navigatable) {
-            <i
+            <fd-icon
                 fd-table-icon
                 [navigation]="true"
-                [class]="_rtl ? 'sap-icon--slim-arrow-left' : 'sap-icon--slim-arrow-right'"
+                [glyph]="_rtl ? 'slim-arrow-left' : 'slim-arrow-right'"
                 class="fdp-table__navigation-indicator"
-            ></i>
+            ></fd-icon>
         }
     </td>
 }

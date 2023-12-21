@@ -5,6 +5,7 @@
         class="fd-shellbar__button"
         fdCozy
         [glyph]="glyph"
+        [glyphFont]="glyphFont"
         (click)="callback ? callback($event) : ''"
     >
         @if (notificationCount) {

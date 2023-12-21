@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
 import { MenuComponent, MenuTriggerDirective } from '@fundamental-ngx/platform/menu';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
@@ -58,9 +59,13 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
     @Input()
     menu: MenuComponent;
 
-    /** The Sap-icon to include in the menu-button */
+    /** The icon to include in the menu-button */
     @Input()
     icon: string;
+
+    /** Glyph font family */
+    @Input()
+    iconFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** The type of the button.
      * 'Emphasized', 'Ghost', 'standard', 'positive', 'negative', 'transparent'

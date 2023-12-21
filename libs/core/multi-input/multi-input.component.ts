@@ -55,6 +55,7 @@ import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MultiAnnouncerDirective } from '@fundamental-ngx/core/multi-combobox';
@@ -153,6 +154,10 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     /** Icon of the button on the right of the input field. */
     @Input()
     glyph = 'value-help';
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** Values to be displayed in the unfiltered dropdown. */
     @Input()
