@@ -35,7 +35,7 @@
             @if (displayedData.length && _tableFilters) {
                 <tr fd-table-row>
                     <th fd-table-cell [fitContent]="mobile">
-                        @if (isMultiSelection) {
+                        @if (isMultiSelection && allowSelectAll) {
                             <fd-checkbox
                                 [name]="uid + '-row-all'"
                                 [tristate]="true"
