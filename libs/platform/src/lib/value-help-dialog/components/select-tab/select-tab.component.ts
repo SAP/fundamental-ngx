@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -82,6 +83,10 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
     /** Displayed data for search table */
     @Input()
     displayedData: T[] = [];
+
+    /** Whether to allow users to select all table entries with one checkbox. */
+    @Input()
+    allowSelectAll = true;
 
     /** Event emitted when row was selected. */
     @Output()
