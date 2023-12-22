@@ -272,6 +272,7 @@
             [pageSize]="searchTablePageSize"
             [defaultMobileHeaders]="searchTableMobileHeaders"
             [filters]="_displayedFilters"
+            [allowSelectAll]="allowSelectAll"
             (select)="onSelect($event)"
         ></fdp-select-tab>
     </fd-busy-indicator>

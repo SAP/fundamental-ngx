@@ -175,6 +175,10 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
     @Input()
     defineTabTitle: string;
 
+    /** Whether to allow users to select all table entries with one checkbox. */
+    @Input()
+    allowSelectAll = true;
+
     /** Custom strategies labels
      * Allowed keys: contains, equalTo, between, startsWith, endsWith, lessThan, lessThanEqual, greaterThan, greaterThanEqual, empty
      */
