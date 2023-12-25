@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.19...v0.48.0-rc.20) (2023-12-25)
+
+
+### Bug Fixes
+
+* **core:** first forced item case ([#11141](https://github.com/SAP/fundamental-ngx/issues/11141)) ([6de3a1c](https://github.com/SAP/fundamental-ngx/commit/6de3a1c617d4b6a7c23414efcf17ee3fe32a4a76))
+
+
+
+
+
 # [0.48.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.18...v0.48.0-rc.19) (2023-12-21)
 
 
