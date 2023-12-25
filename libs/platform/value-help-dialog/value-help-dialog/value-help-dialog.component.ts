@@ -16,10 +16,12 @@ import {
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
+    computed,
     inject
 } from '@angular/core';
 import { Observable, Subject, Subscription, isObservable } from 'rxjs';
 
+import { Direction } from '@angular/cdk/bidi';
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgForOf, NgTemplateOutlet, SlicePipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -308,7 +310,7 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
 
     /** handles rtl service
      * @hidden */
-    _dir = 'ltr';
+    _dir$ = computed<Direction>(() => (this._rtlService?.rtlSignal() ? 'rtl' : 'ltr'));
 
     /** @hidden */
     private _destroyed = inject(DestroyRef);
@@ -709,13 +711,6 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
         this.filters.changes.pipe(takeUntilDestroyed(this._destroyed)).subscribe(() => {
             this._updateFilters();
         });
-
-        if (this._rtlService) {
-            this._dir = this._rtlService.rtl.getValue() ? 'rtl' : 'ltr';
-            this._rtlService.rtl.pipe(takeUntilDestroyed(this._destroyed)).subscribe((isRtl: boolean) => {
-                this._dir = isRtl ? 'rtl' : 'ltr';
-            });
-        }
     }
 
     /** @hidden */

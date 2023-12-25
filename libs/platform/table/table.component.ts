@@ -764,7 +764,6 @@ export class TableComponent<T = any>
         readonly _tableService: TableService,
         private readonly _tableScrollDispatcher: TableScrollDispatcherService,
         public readonly _tableColumnResizeService: TableColumnResizeService,
-        private readonly _elRef: ElementRef,
         @Optional() private readonly _rtlService: RtlService,
         readonly contentDensityObserver: ContentDensityObserver,
         readonly injector: Injector,
@@ -786,15 +785,6 @@ export class TableComponent<T = any>
         };
 
         this.tableColumnsStream = this._tableService.tableColumns$.asObservable();
-
-        if (this._rtlService) {
-            this._subscriptions.add(
-                this._rtlService.rtl.subscribe((isRtl) => {
-                    this._rtl = isRtl;
-                    this._cdr.markForCheck();
-                })
-            );
-        }
 
         this._subscriptions.add(
             this._tableRowService.cellFocused$.subscribe((event) => {
@@ -1356,7 +1346,7 @@ export class TableComponent<T = any>
     /** @hidden */
     _scrollToOverlappedCell(): void {
         this.tableScrollable.scrollToOverlappedCell(
-            this._rtl,
+            !!this._rtlService?.rtlSignal(),
             this._freezableColumns.size,
             this._freezableEndColumns.size
         );

@@ -8,6 +8,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    computed,
     Directive,
     ElementRef,
     EventEmitter,
@@ -347,7 +348,7 @@ export class SearchFieldComponent
     _clearId = '';
 
     /** @hidden */
-    _dir: Direction = 'ltr';
+    readonly _dir$ = computed<Direction>(() => (this._rtl?.rtlSignal() ? 'rtl' : 'ltr'));
 
     /** @hidden */
     isOpen = false;
@@ -423,13 +424,6 @@ export class SearchFieldComponent
         this._menuId = `${baseId}-menu-${searchFieldIdCount++}`;
 
         this._isRefresh = true;
-
-        if (this._rtl) {
-            this._rtl.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
-                this._dir = isRtl ? 'rtl' : 'ltr';
-                this._cd.detectChanges();
-            });
-        }
 
         if (this.mobile) {
             this._setUpMobileMode();

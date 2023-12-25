@@ -20,6 +20,7 @@ import {
     ViewChild,
     ViewChildren,
     ViewEncapsulation,
+    computed,
     forwardRef
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -301,9 +302,6 @@ export class SliderComponent
     /** @hidden */
     _popoverInputFieldClass = `fd-slider-popover-input-${sliderId}`;
 
-    /** @hidden */
-    _isRtl = false;
-
     /**
      * @hidden
      * whether to use value with a prefix for announcing
@@ -356,6 +354,9 @@ export class SliderComponent
     readonly _popoverInputFieldHovered$ = new BehaviorSubject(false);
 
     /** @hidden */
+    private readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
+
+    /** @hidden */
     constructor(
         public readonly elementRef: ElementRef,
         private readonly _cdr: ChangeDetectorRef,
@@ -390,7 +391,6 @@ export class SliderComponent
 
     /** @hidden */
     ngOnInit(): void {
-        this._subscribeToRtl();
         this._attachResizeListener();
         this._onResize();
         if (this._valuesBySteps.length === 0) {
@@ -543,8 +543,8 @@ export class SliderComponent
             return;
         }
         event.preventDefault();
-        const upActionKey = KeyUtil.isKeyCode(event, [UP_ARROW, this._isRtl ? LEFT_ARROW : RIGHT_ARROW]);
-        const downActionKey = KeyUtil.isKeyCode(event, [DOWN_ARROW, this._isRtl ? RIGHT_ARROW : LEFT_ARROW]);
+        const upActionKey = KeyUtil.isKeyCode(event, [UP_ARROW, this._rtl$() ? LEFT_ARROW : RIGHT_ARROW]);
+        const downActionKey = KeyUtil.isKeyCode(event, [DOWN_ARROW, this._rtl$() ? RIGHT_ARROW : LEFT_ARROW]);
 
         if (!upActionKey && !downActionKey) {
             return;
@@ -654,7 +654,7 @@ export class SliderComponent
         const { left, width, bottom, height } = this.trackEl.nativeElement.getBoundingClientRect();
         let percentage = this.vertical ? (bottom - coords.clientY) / height : (coords.clientX - left) / width;
 
-        if (this._isRtl) {
+        if (this._rtl$()) {
             percentage = 1 - percentage;
         }
         const newValue = this.min + percentage * (this.max - this.min);
@@ -825,7 +825,7 @@ export class SliderComponent
     /** @hidden */
     private _calcProgress(value: number, skipRtl = false): number {
         let progress = ((value - this.min) / (this.max - this.min)) * 100;
-        if (!skipRtl && this._isRtl) {
+        if (!skipRtl && this._rtl$()) {
             progress = 100 - progress;
         }
         if (progress > 100) {
@@ -850,17 +850,6 @@ export class SliderComponent
     /** @hidden */
     private _checkIsInRangeMode(): void {
         this._isRange = this.mode === 'range';
-    }
-
-    /** @hidden Rtl change subscription */
-    private _subscribeToRtl(): void {
-        if (!this._rtlService) {
-            return;
-        }
-        this._rtlService.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
-            this._isRtl = isRtl;
-            this._cdr.markForCheck();
-        });
     }
 
     /** @hidden */

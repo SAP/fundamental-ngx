@@ -1,4 +1,4 @@
-import { ElementRef, EventEmitter, InjectionToken, QueryList } from '@angular/core';
+import { ElementRef, EventEmitter, InjectionToken, QueryList, Signal } from '@angular/core';
 
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MobileMode, MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -13,6 +13,7 @@ export const SELECT_COMPONENT = new InjectionToken<SelectInterface>('SelectInter
  */
 export interface SelectInterface<TOption = any> extends MobileMode {
     typeaheadDebounceInterval: number;
+    rtl$: Signal<boolean>;
     selected: OptionComponent;
     mobileConfig: MobileModeConfig;
     _options: QueryList<TOption>;
@@ -29,7 +30,6 @@ export interface SelectInterface<TOption = any> extends MobileMode {
     open(): void;
     focus(): void;
     blur(): void;
-    _isRtl(): boolean;
     _getItemHeight(): number;
     _getOptionScrollPosition(optionIndex: number, optionHeight: number, currentScrollPosition: number): void;
 }

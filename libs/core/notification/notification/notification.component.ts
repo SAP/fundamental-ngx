@@ -1,4 +1,5 @@
 import { ConfigurableFocusTrapFactory, FocusTrap } from '@angular/cdk/a11y';
+import { Direction } from '@angular/cdk/bidi';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
@@ -20,7 +21,8 @@ import {
     Type,
     ViewChild,
     ViewContainerRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed
 } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { AbstractFdNgxClass, KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -41,7 +43,7 @@ import { NotificationRef } from '../notification-utils/notification-ref';
     host: {
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
-        '[attr.dir]': '_dir',
+        '[attr.dir]': '_dir$()',
         role: 'alertdialog',
         '[attr.id]': 'id'
     },
@@ -53,11 +55,6 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     @ViewChild('vc', { read: ViewContainerRef })
     containerRef: ViewContainerRef;
 
-    /**
-     * @hidden
-     */
-    _dir: string;
-
     /** User defined width for the notification */
     @HostBinding('style.width')
     @Input()
@@ -65,6 +62,11 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
 
     /** Whether the notificatioon is in mobile mode */
     @Input() mobile: boolean;
+
+    /**
+     * @hidden
+     */
+    _dir$ = computed<Direction>(() => (this._rtlService?.rtlSignal() ? 'rtl' : 'ltr'));
 
     /** ID of the notification */
     id: string;
@@ -124,11 +126,6 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
 
     /** @hidden */
     ngOnInit(): void {
-        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl) => {
-            this._dir = isRtl ? 'rtl' : 'ltr';
-            this._cdRef.markForCheck();
-        });
-
         this._listenAndCloseOnNavigation();
         this._setProperties();
     }

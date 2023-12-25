@@ -10,6 +10,7 @@ import {
     QueryList,
     ViewChildren,
     ViewEncapsulation,
+    computed,
     forwardRef,
     inject
 } from '@angular/core';
@@ -137,7 +138,7 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
     }
 
     /** @hidden */
-    _rtl = false;
+    readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
     readonly SELECTION_MODE = SelectionMode;
@@ -168,9 +169,6 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
     /** @hidden */
     constructor() {
         super();
-        this._rtlService?.rtl.pipe(takeUntilDestroyed()).subscribe((isRtl) => {
-            this._rtl = isRtl;
-        });
     }
 
     /** @hidden */

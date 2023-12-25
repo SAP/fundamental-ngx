@@ -21,7 +21,6 @@ import {
     Input,
     OnChanges,
     OnDestroy,
-    OnInit,
     Optional,
     Output,
     QueryList,
@@ -29,11 +28,13 @@ import {
     TemplateRef,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed
 } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, skip, takeUntil } from 'rxjs/operators';
 
+import { Direction } from '@angular/cdk/bidi';
 import { NumberInput, coerceNumberProperty } from '@angular/cdk/coercion';
 import { NgTemplateOutlet } from '@angular/common';
 import {
@@ -119,7 +120,7 @@ type CardColumn = CardDefinitionDirective[];
         CdkDragPlaceholder
     ]
 })
-export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
+export class FixedCardLayoutComponent implements AfterViewInit, OnChanges, OnDestroy {
     /** Drag drop behavior can be disabled */
     @Input()
     disableDragDrop: boolean;
@@ -188,7 +189,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     _containerHeight = 0;
 
     /** @hidden handles rtl service */
-    _dir = 'ltr';
+    _dir$ = computed<Direction>(() => (this._rtlService?.rtlSignal() ? 'rtl' : 'ltr'));
 
     /** @hidden first number is the CardDefinition rank, i.e. id */
     _groupIndexes = new Map<number, number>();
@@ -233,11 +234,6 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
         private readonly _changeDetector: ChangeDetectorRef,
         @Optional() private readonly _rtlService: RtlService
     ) {}
-
-    /** @hidden */
-    ngOnInit(): void {
-        this._subscribeToRtl();
-    }
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -423,14 +419,6 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     private _accessibilitySetup(): void {
         this._keyboardEventsManager?.destroy();
         this._keyboardEventsManager = new FocusKeyManager(this._cardContainers).withWrap();
-    }
-
-    /** @hidden Rtl change subscription */
-    private _subscribeToRtl(): void {
-        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl) => {
-            this._dir = isRtl ? 'rtl' : 'ltr';
-            this._changeDetector.markForCheck();
-        });
     }
 
     /** @hidden Listen window resize and distribute cards on column change */

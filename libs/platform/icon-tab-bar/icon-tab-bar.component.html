@@ -15,7 +15,7 @@
 <ng-template #processType>
     <fdp-icon-tab-bar-process-type
         [tabsConfig]="tabsConfig"
-        [isRtl]="_isRtl"
+        [isRtl]="_rtl$()"
         [densityMode]="densityMode"
         [colorAssociations]="colorAssociations"
         (selected)="_selectItem($event)"
@@ -25,7 +25,7 @@
     <fdp-icon-tab-bar-filter-type
         [tabsConfig]="tabsConfig"
         [showTotalTab]="showTotalTab"
-        [isRtl]="_isRtl"
+        [isRtl]="_rtl$()"
         [densityMode]="densityMode"
         [colorAssociations]="colorAssociations"
         (selected)="_selectItem($event)"
@@ -35,7 +35,7 @@
     <fdp-icon-tab-bar-icon-type
         [showLabel]="iconTabType === 'icon'"
         [tabsConfig]="tabsConfig"
-        [isRtl]="_isRtl"
+        [isRtl]="_rtl$()"
         [densityMode]="densityMode"
         [colorAssociations]="colorAssociations"
         (selected)="_selectItem($event)"
@@ -46,7 +46,7 @@
     <fdp-icon-tab-bar-text-type
         [tabsConfig]="tabsConfig"
         [layoutMode]="layoutMode"
-        [isRtl]="_isRtl"
+        [isRtl]="_rtl$()"
         [densityMode]="densityMode"
         [enableTabReordering]="enableTabReordering"
         [colorAssociations]="colorAssociations"

@@ -18,7 +18,7 @@
         [style]="
             _contentDensityObserver
                 | async
-                | selectionCellStyles: _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
+                | selectionCellStyles: _rtl$() : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
         "
         (keydown.enter)="_tableRowService.toggleAllSelectableRows(!checkedState)"
         (keydown.space)="_tableRowService.toggleAllSelectableRows(!checkedState)"
@@ -69,7 +69,7 @@
         [ngStyle]="
             column
                 | tableCellStyles
-                    : _rtl
+                    : _rtl$()
                     : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
                     : selectionColumnWidth
                     : column._freezed

@@ -1,4 +1,5 @@
-import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
+import { Inject, Injectable, InjectionToken, Optional, Signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
 
 const DefaultRtlLanguages = ['ar', 'arc', 'dv', 'fa', 'ha', 'he', 'khw', 'ks', 'ku', 'ps', 'ur', 'yi'];
@@ -14,6 +15,9 @@ export class RtlService {
     /** RTL value */
     rtl: BehaviorSubject<boolean>;
 
+    /** Signal wrapper for RTL value. */
+    rtlSignal: Signal<boolean | undefined>;
+
     /** @hidden */
     constructor(@Optional() @Inject(RTL_LANGUAGE) injectedRtlLanguages: string[]) {
         injectedRtlLanguages = injectedRtlLanguages || DefaultRtlLanguages;
@@ -21,5 +25,7 @@ export class RtlService {
         const filtered = injectedRtlLanguages.filter((language) => navigator.language.includes(language));
 
         this.rtl = new BehaviorSubject(filtered.length > 0);
+
+        this.rtlSignal = toSignal(this.rtl);
     }
 }

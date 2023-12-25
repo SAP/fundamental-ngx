@@ -17,14 +17,14 @@ import {
     Input,
     NgZone,
     OnChanges,
-    OnInit,
-    Optional,
     Output,
     QueryList,
     Renderer2,
     SimpleChanges,
     ViewChild,
     ViewEncapsulation,
+    computed,
+    effect,
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -74,7 +74,7 @@ class CarouselActiveSlides {
     standalone: true,
     imports: [NgTemplateOutlet, NgClass, ButtonComponent, FdTranslatePipe]
 })
-export class CarouselComponent implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnChanges {
+export class CarouselComponent implements AfterContentInit, AfterViewInit, AfterViewChecked, OnChanges {
     /** ID for the Carousel. */
     @Input()
     @HostBinding('attr.id')
@@ -201,7 +201,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     currentActiveSlidesStartIndex = 0;
 
     /** @hidden handles rtl service */
-    dir: Direction = 'ltr';
+    readonly _dir$ = computed<Direction>(() => (this._rtl$() ? 'rtl' : 'ltr'));
 
     /** @hidden Make left navigation button disabled */
     leftButtonDisabled = false;
@@ -245,14 +245,29 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
+    private readonly _rtlService = inject(RtlService, {
+        optional: true
+    });
+
+    /** @hidden */
+    private readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
+
+    /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef<HTMLElement>,
         private readonly _renderer: Renderer2,
         private readonly _changeDetectorRef: ChangeDetectorRef,
         private readonly _carouselService: CarouselService,
-        private readonly _zone: NgZone,
-        @Optional() private readonly _rtlService: RtlService
-    ) {}
+        private readonly _zone: NgZone
+    ) {
+        effect(() => {
+            const isRtl = this._rtl$();
+            this._carouselService.isRtl = isRtl;
+            if (this._carouselService.items && this._carouselService.active) {
+                this._carouselService.goToItem(this._carouselService.active, false);
+            }
+        });
+    }
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
@@ -264,10 +279,10 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             event.preventDefault();
 
             if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
-                this._isRtl() ? this.next() : this.previous();
+                this._rtl$() ? this.next() : this.previous();
             }
             if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
-                this._isRtl() ? this.previous() : this.next();
+                this._rtl$() ? this.previous() : this.next();
             }
             if (KeyUtil.isKeyCode(event, UP_ARROW)) {
                 this.previous();
@@ -277,11 +292,6 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             }
             this.carouselContainer.nativeElement.focus();
         }
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this._subscribeToRtl();
     }
 
     /** @hidden */
@@ -378,11 +388,6 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
                 preventScroll: true
             });
         }
-    }
-
-    /** get value for rtl */
-    _isRtl(): boolean {
-        return this._rtlService?.rtl.getValue();
     }
 
     /** Transitions to the previous slide in the carousel. */
@@ -553,8 +558,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     private _getStepTaken(event: PanEndOutput, actualActiveSlideIndex: number): number {
         let stepsCalculated: number;
         if (
-            (!this._isRtl() && event.after) ||
-            (this._isRtl() && !event.after && !this.vertical) ||
+            (!this._rtl$() && event.after) ||
+            (this._rtl$() && !event.after && !this.vertical) ||
             (this.vertical && event.after)
         ) {
             if (actualActiveSlideIndex === 0 && this.currentActiveSlidesStartIndex === 0) {
@@ -620,20 +625,6 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }, this.slideTransitionDuration);
     }
 
-    /** @hidden Rtl change subscription */
-    private _subscribeToRtl(): void {
-        const refreshDirection = (): void => {
-            this.dir = this._isRtl() ? 'rtl' : 'ltr';
-            this._carouselService.isRtl = this.dir === 'rtl';
-            if (this._carouselService.items && this._carouselService.active) {
-                this._carouselService.goToItem(this._carouselService.active, false);
-            }
-            this._changeDetectorRef.detectChanges();
-        };
-        refreshDirection();
-        this._rtlService?.rtl.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => refreshDirection());
-    }
-
     /** @hidden On Swiping of slide, manage page indicator */
     private _onSlideSwipe(event: PanEndOutput): void {
         this._slideSwiped = true;
@@ -642,7 +633,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         const stepTaken = this._getStepTaken(event, actualActiveSlideIndex);
         if (stepTaken > 0) {
             let slideDirection: SlideDirection;
-            if (!this._isRtl()) {
+            if (!this._rtl$()) {
                 slideDirection = event.after ? SlideDirection.NEXT : SlideDirection.PREVIOUS;
             } else {
                 // vertical carousel slide direction is same in ltr and rtl

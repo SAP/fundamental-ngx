@@ -13,9 +13,6 @@ import { NestedListInterface } from './nested-list/nested-list.interface';
  */
 @Injectable()
 export class NestedListKeyboardService {
-    /** @hidden handles rtl service */
-    private _dir: 'ltr' | 'rtl' | null = 'ltr';
-
     /**
      * Event, that is thrown always, when the open/close i being called on item components.
      * Also triggers changing of elements, to remove closed/hidden elements
@@ -26,9 +23,7 @@ export class NestedListKeyboardService {
     constructor(
         @Inject(MenuKeyboardService) private keyboardService: MenuKeyboardService,
         @Optional() private _rtlService: RtlService | null
-    ) {
-        this._subscribeToRtl();
-    }
+    ) {}
 
     /**
      * Function called after refresh$ event is triggered.
@@ -80,10 +75,11 @@ export class NestedListKeyboardService {
      */
     private _handleKeyDown(keyboardEvent: KeyboardEvent, index: number, items: NestedItemInterface[]): void {
         const item: NestedItemInterface = items[index];
+        const isRtl = !!this._rtlService?.rtlSignal();
 
         if (
-            (this._dir === 'ltr' && KeyUtil.isKeyCode(keyboardEvent, RIGHT_ARROW)) ||
-            (this._dir === 'rtl' && KeyUtil.isKeyCode(keyboardEvent, LEFT_ARROW))
+            (!isRtl && KeyUtil.isKeyCode(keyboardEvent, RIGHT_ARROW)) ||
+            (isRtl && KeyUtil.isKeyCode(keyboardEvent, LEFT_ARROW))
         ) {
             if (!item.expanded && item.hasChildren) {
                 item.triggerOpen();
@@ -92,8 +88,8 @@ export class NestedListKeyboardService {
         }
 
         if (
-            (this._dir === 'ltr' && KeyUtil.isKeyCode(keyboardEvent, LEFT_ARROW)) ||
-            (this._dir === 'rtl' && KeyUtil.isKeyCode(keyboardEvent, RIGHT_ARROW))
+            (!isRtl && KeyUtil.isKeyCode(keyboardEvent, LEFT_ARROW)) ||
+            (isRtl && KeyUtil.isKeyCode(keyboardEvent, RIGHT_ARROW))
         ) {
             if (item.expanded && item.hasChildren) {
                 item.triggerClose();
@@ -102,16 +98,5 @@ export class NestedListKeyboardService {
         }
 
         this.keyboardService.keyDownHandler(keyboardEvent, index, items);
-    }
-
-    /** @hidden Rtl change subscription */
-    private _subscribeToRtl(): void {
-        if (!this._rtlService) {
-            return;
-        }
-
-        this._rtlService.rtl.subscribe((isRtl) => {
-            this._dir = isRtl ? 'rtl' : 'ltr';
-        });
     }
 }

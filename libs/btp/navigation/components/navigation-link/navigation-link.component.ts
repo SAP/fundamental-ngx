@@ -145,7 +145,7 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
             return;
         }
 
-        const expansionKey = this._rtl?.rtl ? RIGHT_ARROW : LEFT_ARROW;
+        const expansionKey = this._rtl?.rtl.value ? RIGHT_ARROW : LEFT_ARROW;
 
         this._listItemComponent?.keyboardExpanded(KeyUtil.isKeyCode(event, expansionKey));
     }

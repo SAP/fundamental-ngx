@@ -18,6 +18,7 @@ import {
     SimpleChanges,
     ViewChildren,
     ViewEncapsulation,
+    computed,
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -177,7 +178,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     _hasRowHeaderColumn = false;
 
     /** @hidden */
-    _rtl = false;
+    readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
     _rowSelectionHelperTextId = `rowSelectionHelper-${uuidv4()}`;
@@ -228,10 +229,6 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     /** @hidden */
     constructor() {
         super();
-        this._rtlService?.rtl.pipe(takeUntilDestroyed()).subscribe((rtl) => {
-            this._rtl = rtl;
-        });
-
         this._tableColumnResizeService.resizeInProgress$
             .pipe(
                 switchMap(() => this._tableColumnResizeService.markForCheck),

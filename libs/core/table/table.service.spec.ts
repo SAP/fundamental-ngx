@@ -19,10 +19,10 @@ describe('TableServiceService', () => {
     it('should propagate keys', () => {
         const keys = ['test1', 'test2'];
 
-        jest.spyOn(service.propagateKeys$, 'next');
+        jest.spyOn(service.propagateKeys$, 'set');
 
         service.changeKeys(keys);
 
-        expect(service.propagateKeys$.next).toHaveBeenCalledWith(keys);
+        expect(service.propagateKeys$.set).toHaveBeenCalledWith(keys);
     });
 });

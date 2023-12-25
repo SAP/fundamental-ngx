@@ -1,4 +1,4 @@
-import { ElementRef, Injectable, OnDestroy, Optional } from '@angular/core';
+import { ElementRef, Injectable, OnDestroy, Optional, computed } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, Subscription, fromEvent } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
@@ -99,9 +99,7 @@ export class TableColumnResizeService implements OnDestroy {
     }
 
     /** @hidden */
-    private get _rtl(): boolean {
-        return this._rtlService?.rtl.getValue();
-    }
+    private readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
     constructor(
@@ -234,7 +232,7 @@ export class TableColumnResizeService implements OnDestroy {
         this.resizerPosition$.next(this.resizerPosition);
 
         if (resizerPosition != null) {
-            const scrollLeftOffset = this._scrollLeft * (this._rtl ? 1 : -1);
+            const scrollLeftOffset = this._scrollLeft * (this._rtl$() ? 1 : -1);
             this._resizerPosition = resizerPosition - TABLE_RESIZER_BORDER_WIDTH + scrollLeftOffset;
             this.resizerPosition$.next(this.resizerPosition);
         }
@@ -275,7 +273,7 @@ export class TableColumnResizeService implements OnDestroy {
 
         if (this._startX != null) {
             const clientStartX = this._clientStartX ?? 0;
-            const diffX = this._rtl ? clientStartX - event.clientX : event.clientX - clientStartX;
+            const diffX = this._rtl$() ? clientStartX - event.clientX : event.clientX - clientStartX;
 
             this._processResize(diffX);
         }
@@ -336,8 +334,8 @@ export class TableColumnResizeService implements OnDestroy {
         this._fixedColumnsWidthMap.set(this._resizedColumn, updatedWidth + 'px');
         this.updateFrozenColumnsWidthAfterResize(this._resizedColumn, diffX);
 
-        const computed = window.getComputedStyle(resizedElement);
-        const padding = parseInt(computed.paddingLeft, 10) + parseInt(computed.paddingRight, 10);
+        const computedStyles = window.getComputedStyle(resizedElement);
+        const padding = parseInt(computedStyles.paddingLeft, 10) + parseInt(computedStyles.paddingRight, 10);
         this._updateHeaderOverflowState(updatedWidth - padding);
         this._markForCheck.next();
     }
@@ -348,7 +346,7 @@ export class TableColumnResizeService implements OnDestroy {
             .pipe(debounceTime(10))
             .subscribe((event) => {
                 const clientStartX = this._clientStartX ?? 0;
-                const diffX = this._rtl ? clientStartX - event.clientX : event.clientX - clientStartX;
+                const diffX = this._rtl$() ? clientStartX - event.clientX : event.clientX - clientStartX;
 
                 this._resizerPosition = (this._startX ?? 0) + diffX;
                 this.resizerPosition$.next(this.resizerPosition);

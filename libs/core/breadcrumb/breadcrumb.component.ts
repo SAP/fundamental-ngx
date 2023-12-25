@@ -16,7 +16,6 @@ import {
     inject,
     signal
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
@@ -37,7 +36,6 @@ import {
 } from '@fundamental-ngx/core/overflow-layout';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { of } from 'rxjs';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens';
 
@@ -134,7 +132,12 @@ export class BreadcrumbComponent implements AfterViewInit {
     readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
     /** @hidden */
-    private readonly _rtl$ = toSignal(inject(RtlService, { optional: true })?.rtl || of(false));
+    private readonly _rtlService = inject(RtlService, {
+        optional: true
+    });
+
+    /** @hidden */
+    private readonly _rtl$ = computed<boolean>(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
     onResize(): void {

@@ -17,6 +17,7 @@ import {
     Output,
     QueryList,
     ViewEncapsulation,
+    computed,
     inject
 } from '@angular/core';
 
@@ -107,7 +108,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
     private _layoutShifted = false;
 
     /** @hidden */
-    private _directionPosition: 'left' | 'right' = 'left';
+    private _directionPosition$ = computed<'left' | 'right'>(() => (this._rtlService?.rtlSignal() ? 'right' : 'left'));
 
     /** @hidden */
     constructor(
@@ -134,9 +135,6 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
         this._columnsHeight = new Array(this._columns);
         this._columnsHeight.fill(0);
         // initialise value 0
-
-        this._subscribeToRtl();
-
         // detect initial window size and set layout
         this._createLayout();
     }
@@ -472,10 +470,9 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      * @param card: ResizableCardItemComponent
      */
     private _updateColumnsHeight(card: ResizableCardItemComponent): void {
+        const directionPosition = this._directionPosition$();
         const columnsStart =
-            card[this._directionPosition] != null
-                ? Math.floor(card[this._directionPosition]! / horizontalResizeStep)
-                : 0;
+            card[directionPosition] != null ? Math.floor(card[directionPosition]! / horizontalResizeStep) : 0;
 
         // Get width of current card resizing and assign width here for that card
         const cardBaseColSpan = Math.floor(card.cardWidth / horizontalResizeStep);
@@ -503,8 +500,9 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      * @param index : index value of card in array of ResizableCardItemComponent
      */
     private _setCardPositionValues(card: ResizableCardItemComponent, index: number): void {
+        const directionPosition = this._directionPosition$();
         if (index === 0) {
-            card[this._directionPosition] = 0 + this._paddingLeft;
+            card[directionPosition] = 0 + this._paddingLeft;
             card.top = 0;
             card.startingColumnPosition = 0;
             return;
@@ -525,6 +523,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      * @returns It returns true when card position id found otherwise it returns false.
      */
     private _isPositionSetSuccess(height: number, card: ResizableCardItemComponent): boolean {
+        const directionPosition = this._directionPosition$();
         const columnPositions: number[] = [];
         let index = 0;
         for (const columnHeight of this._columnsHeight) {
@@ -541,7 +540,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
         startingColumnPosition = this._fitCardColumnPosition(card, columnPositions, height);
         if (startingColumnPosition !== -1) {
             isFitting = true;
-            card[this._directionPosition] =
+            card[directionPosition] =
                 startingColumnPosition * horizontalResizeStep +
                 this._paddingLeft +
                 (startingColumnPosition > 0 ? gap * startingColumnPosition : 0);
@@ -626,21 +625,5 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      */
     private _sortCards(firstCard: ResizableCardItemComponent, secondCard: ResizableCardItemComponent): number {
         return firstCard.rank - secondCard.rank;
-    }
-
-    /** get value for rtl */
-    private get _isRtl(): boolean {
-        return this._rtlService?.rtl.getValue();
-    }
-
-    /** @hidden Rtl change subscription */
-    private _subscribeToRtl(): void {
-        const refreshDirection = (isRtl): void => {
-            this._directionPosition = isRtl ? 'right' : 'left';
-            this._cd.detectChanges();
-        };
-
-        refreshDirection(this._isRtl);
-        this._rtlService?.rtl.pipe(takeUntilDestroyed(this._destroy$)).subscribe(refreshDirection);
     }
 }

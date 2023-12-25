@@ -26,6 +26,8 @@ import {
     ViewChild,
     ViewContainerRef,
     ViewEncapsulation,
+    computed,
+    inject,
     isDevMode
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
@@ -448,9 +450,15 @@ export class SelectComponent<T = any>
     }
 
     /** @hidden */
+    readonly rtl$ = computed(() => !!this._rtlService?.rtlSignal());
+
+    private readonly _rtlService = inject(RtlService, {
+        optional: true
+    });
+
+    /** @hidden */
     constructor(
         @Attribute('tabindex') _tabIndex: string,
-        @Optional() private readonly _rtlService: RtlService,
         private readonly _keyManagerService: SelectKeyManagerService,
         private readonly _changeDetectorRef: ChangeDetectorRef,
         private readonly _viewContainerRef: ViewContainerRef,
@@ -536,7 +544,7 @@ export class SelectComponent<T = any>
                 this._keyManagerService._keyManager.activeItem?._selectViaInteraction();
             }
             this._isOpen = false;
-            this._keyManagerService._keyManager.withHorizontalOrientation(this._isRtl() ? 'rtl' : 'ltr');
+            this._keyManagerService._keyManager.withHorizontalOrientation(this.rtl$() ? 'rtl' : 'ltr');
             this._changeDetectorRef.markForCheck();
             this.onTouched();
 
@@ -688,18 +696,6 @@ export class SelectComponent<T = any>
         this._keyManagerService._component = this;
 
         this._updateCalculatedHeight();
-    }
-
-    /** @hidden */
-    _isRtl(): boolean {
-        if (this._rtlService) {
-            this._subscriptions.add(
-                this._rtlService.rtl.subscribe((rtl) => {
-                    this._rtl = rtl;
-                })
-            );
-        }
-        return this._rtl === true ? true : false;
     }
 
     /** @hidden */
