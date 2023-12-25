@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.23](https://github.com/SAP/fundamental-ngx/compare/v0.43.22...v0.43.23) (2023-12-25)
+
+
+### Features
+
+* **platform:** allow disabling select all in vhd ([#11128](https://github.com/SAP/fundamental-ngx/issues/11128)) ([167aae3](https://github.com/SAP/fundamental-ngx/commit/167aae3c9702399ccb4e2bcbbaa7db0ec52169dc))
+
+
+
+
+
 ## [0.43.22](https://github.com/SAP/fundamental-ngx/compare/v0.43.21...v0.43.22) (2023-12-16)
 
 
