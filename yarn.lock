@@ -2789,10 +2789,10 @@
   dependencies:
     tslib "^2.4.0"
 
-"@fundamental-styles/cx@0.33.1-rc.9":
-  version "0.33.1-rc.9"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.33.1-rc.9.tgz#bdb7e41668979996474d862e064bc36a0eca00b0"
-  integrity sha512-J9jhPvPWfnxg33M7QAmduGHMnBQC7g6T76bXOJGumRWPiUutTSW0gN/B03EprjRYos+dgPuX/O3g4KE81cGTNg==
+"@fundamental-styles/cx@0.33.1-rc.12":
+  version "0.33.1-rc.12"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.33.1-rc.12.tgz#163f12e824016a46e9e4599bf053f3f593807141"
+  integrity sha512-4nZtbPkTBOoM2skN94+S6S49gEYXY4bq8R/x1r0mTa7Pl7mvz83iwac5xp1OGvfOhqfqgqrpEoYyVKp3hm9XGw==
 
 "@hapi/hoek@^9.0.0":
   version "9.3.0"
@@ -4181,10 +4181,10 @@
   resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.9.0.tgz#bd46458c7ed58cfb23e4e0ec620c9780a5711a5b"
   integrity sha512-EOAYDx13SU9Wd18qgAR+FYTrywC5dk+IU3oM5NGAz0GxJLpiGQkSONYnAMJK/Gqk9QhU7uqWQsjrcnOcOl0fxA==
 
-"@sap-ui/common-css@0.33.1-rc.9":
-  version "0.33.1-rc.9"
-  resolved "https://registry.yarnpkg.com/@sap-ui/common-css/-/common-css-0.33.1-rc.9.tgz#8b9370f7d1471a389c2b149576060d1baaaa4475"
-  integrity sha512-4T3IQjXBkpPf5IzoGpA4vyQPOlQar9OnSqPNOnyEgKX3d0pHZfu/NGDGnmhwqC83KycmE7+Oa/0ZchTeYOH1jA==
+"@sap-ui/common-css@0.33.1-rc.12":
+  version "0.33.1-rc.12"
+  resolved "https://registry.yarnpkg.com/@sap-ui/common-css/-/common-css-0.33.1-rc.12.tgz#d51fc0b547c3bf5e24ddfc3d75e3a841b95b9378"
+  integrity sha512-wSwwRmBd30YFP9eBR9eVPKvJgSO/yfc6Th38TrHM4P3hToWf6UTHwl3sa0KUw3SAUENEW8Rs75t3CYO3bSDPVg==
   dependencies:
     "@sap-theming/theming-base-content" "^11.9.0"
 
@@ -6168,10 +6168,10 @@ axios@0.21.4, axios@^0.21.1:
   dependencies:
     follow-redirects "^1.14.0"
 
-axios@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.2.0.tgz#1cb65bd75162c70e9f8d118a905126c4a201d383"
-  integrity sha512-zT7wZyNYu3N5Bu0wuZ6QccIf93Qk1eV8LOewxgjOZFd2DenOs98cJ7+Y6703d0wkaXGY6/nZd4EweJaHz9uzQw==
+axios@1.6.0, axios@^1.5.1:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.6.0.tgz#f1e5292f26b2fd5c2e66876adc5b06cdbd7d2102"
+  integrity sha512-EZ1DYihju9pwVB+jg67ogm+Tmqc6JmhamRN6I4Zt8DfZu5lbcQGw3ozH9lFejSJgs/ibaef3A9PMXPLeefFGJg==
   dependencies:
     follow-redirects "^1.15.0"
     form-data "^4.0.0"
@@ -6195,15 +6195,6 @@ axios@^1.0.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.4.0.tgz#38a7bf1224cd308de271146038b551d725f0be1f"
   integrity sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==
-  dependencies:
-    follow-redirects "^1.15.0"
-    form-data "^4.0.0"
-    proxy-from-env "^1.1.0"
-
-axios@^1.5.1:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.6.0.tgz#f1e5292f26b2fd5c2e66876adc5b06cdbd7d2102"
-  integrity sha512-EZ1DYihju9pwVB+jg67ogm+Tmqc6JmhamRN6I4Zt8DfZu5lbcQGw3ozH9lFejSJgs/ibaef3A9PMXPLeefFGJg==
   dependencies:
     follow-redirects "^1.15.0"
     form-data "^4.0.0"
@@ -10363,10 +10354,10 @@ functions-have-names@^1.2.2, functions-have-names@^1.2.3:
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.3.tgz#0404fe4ee2ba2f607f0e0ec3c80bae994133b834"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
-fundamental-styles@0.33.1-rc.9:
-  version "0.33.1-rc.9"
-  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.33.1-rc.9.tgz#47fad259fd0600ecbd57b7227240661733e19763"
-  integrity sha512-dwu3xAa5KbI6/py3dwBFe/424glbHdzpqnzCjfA4VXhQmqJjrS8HC8halxPxE3hbbaksRQiB6iXCO1EFhgpTsQ==
+fundamental-styles@0.33.1-rc.12:
+  version "0.33.1-rc.12"
+  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.33.1-rc.12.tgz#874c3f269950461c42371075daba336202961087"
+  integrity sha512-VwiNVSrJ8WN1ng2Tol06uABISXtV+eDSq+YbnVdhzjKUaR17nxplMFkZOds5MQu3oJCbGG6VyxVdtQxmvHVM0Q==
 
 fuse.js@7.0.0:
   version "7.0.0"
