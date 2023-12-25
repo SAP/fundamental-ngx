@@ -28,7 +28,14 @@
     </div>
     @if (glyph) {
         <span fd-input-group-addon #inputGroupAddOn [button]="true" placement="after">
-            <button fd-button class="fd-tokenizer-addon" fdType="transparent" [glyph]="glyph" type="button"></button>
+            <button
+                fd-button
+                class="fd-tokenizer-addon"
+                fdType="transparent"
+                [glyph]="glyph"
+                [glyphFont]="glyphFont"
+                type="button"
+            ></button>
         </span>
     }
 </div>

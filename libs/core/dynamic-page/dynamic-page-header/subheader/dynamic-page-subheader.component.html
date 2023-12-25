@@ -23,7 +23,7 @@
                     [attr.aria-controls]="id"
                     (click)="toggleCollapse()"
                 >
-                    <i [class.sap-icon--slim-arrow-up]="!collapsed" [class.sap-icon--slim-arrow-down]="collapsed"></i>
+                    <fd-icon [glyph]="collapsed ? 'slim-arrow-down' : 'slim-arrow-up'"></fd-icon>
                 </button>
                 @if (pinnable && !collapsed) {
                     <button
@@ -34,7 +34,7 @@
                         [toggled]="_pinned"
                         (click)="togglePinned()"
                     >
-                        <i class="sap-icon--pushpin-off"></i>
+                        <fd-icon glyph="pushpin-off"></fd-icon>
                     </button>
                 }
             </div>

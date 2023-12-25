@@ -17,6 +17,7 @@ import { Subscription } from 'rxjs';
 import { FdDropEvent, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 
 import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ProductSwitchItem } from './product-switch.item';
 
 const containerWidthPxSmallMode = 588;
@@ -29,7 +30,7 @@ const containerWidthPx = 776;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [DragAndDropModule]
+    imports: [DragAndDropModule, IconComponent]
 })
 export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     /** Defines if drag and drop functionality should be included in product switch*/

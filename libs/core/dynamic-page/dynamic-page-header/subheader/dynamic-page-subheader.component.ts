@@ -16,6 +16,7 @@ import { distinctUntilChanged } from 'rxjs/operators';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FD_LANGUAGE, FdTranslatePipe, resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
 import { DynamicPageConfig } from '../../dynamic-page.config';
 import { DynamicPageService } from '../../dynamic-page.service';
@@ -28,7 +29,7 @@ let dynamicPageSubHeaderId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [ButtonComponent, FdTranslatePipe],
+    imports: [ButtonComponent, FdTranslatePipe, IconComponent],
     providers: [
         {
             provide: FD_LANGUAGE,

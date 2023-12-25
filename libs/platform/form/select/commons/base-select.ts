@@ -32,6 +32,7 @@ import {
     TemplateDirective,
     warnOnce
 } from '@fundamental-ngx/cdk/utils';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
 import { ListComponent } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
@@ -97,6 +98,10 @@ export abstract class BaseSelect
     /** Glyph to add icon in the select component. */
     @Input()
     glyph = 'slim-arrow-down';
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** The element to which the popover should be appended. */
     @Input()

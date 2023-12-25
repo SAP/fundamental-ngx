@@ -14,6 +14,8 @@ import { FD_ICON_COMPONENT } from './tokens';
 
 export type IconFont = 'SAP-icons' | 'BusinessSuiteInAppSymbols' | 'SAP-icons-TNT';
 
+export const FD_DEFAULT_ICON_FONT_FAMILY = 'SAP-icons';
+
 export type IconColor =
     | 'default'
     | 'contrast'
@@ -33,6 +35,35 @@ export const FD_ICON_FONT_FAMILY: Record<IconFont, string> = {
     BusinessSuiteInAppSymbols: `${SAP_ICONS_PREFIX}-businessSuiteInAppSymbols`,
     'SAP-icons-TNT': `${SAP_ICONS_PREFIX}-TNT`
 };
+
+/**
+ * Helper function to build icon css class.
+ * @param font Font family
+ * @param glyph Icon
+ * @param color Icon color
+ * @param background Icon background color
+ * @returns Computed css class string.
+ */
+export function fdBuildIconClass(
+    font: IconFont,
+    glyph: any,
+    color?: IconColor | null,
+    background?: IconColor | null
+): string {
+    const fontFamily = FD_ICON_FONT_FAMILY[font];
+
+    const returnIconClass = [`${fontFamily}--${glyph}`];
+
+    if (color) {
+        returnIconClass.push(`${fontFamily}--color-${color}`);
+    }
+
+    if (background) {
+        returnIconClass.push(`${fontFamily}--background-${background}`);
+    }
+
+    return returnIconClass.join(' ');
+}
 
 /**
  * The component that represents an icon.
@@ -121,7 +152,7 @@ export class IconComponent implements CssClassBuilder {
     /** @hidden */
     private readonly _glyph = signal<any>('');
     /** @hidden */
-    private readonly _font = signal<IconFont>('SAP-icons');
+    private readonly _font = signal<IconFont>(FD_DEFAULT_ICON_FONT_FAMILY);
 
     /** @hidden */
     private readonly _color = signal<IconColor | null>(null);
@@ -130,21 +161,9 @@ export class IconComponent implements CssClassBuilder {
     private readonly _background = signal<IconColor | null>(null);
 
     /** @hidden */
-    private readonly _fontIconClass = computed(() => {
-        const fontFamily = FD_ICON_FONT_FAMILY[this._font()];
-
-        const returnIconClass = [`${fontFamily}--${this._glyph()}`];
-
-        if (this._color()) {
-            returnIconClass.push(`${fontFamily}--color-${this._color()}`);
-        }
-
-        if (this._background()) {
-            returnIconClass.push(`${fontFamily}--background-${this._background()}`);
-        }
-
-        return returnIconClass.join(' ');
-    });
+    private readonly _fontIconClass = computed(() =>
+        fdBuildIconClass(this._font(), this._glyph(), this._color(), this._background())
+    );
 
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {

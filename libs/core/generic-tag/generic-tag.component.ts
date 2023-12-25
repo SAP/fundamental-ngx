@@ -10,6 +10,7 @@ import {
     inject
 } from '@angular/core';
 import { CssClassBuilder, Nullable, NullableObject, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FD_GENERIC_TAG_COMPONENT } from './tokens';
 
 export type GenericTagType = 'error' | 'success' | 'warning' | 'information';
@@ -33,7 +34,7 @@ export type GenericTagType = 'error' | 'success' | 'warning' | 'information';
         role: 'button'
     },
     standalone: true,
-    imports: [NgClass]
+    imports: [NgClass, IconComponent]
 })
 export class GenericTagComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */

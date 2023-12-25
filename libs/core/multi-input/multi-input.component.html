@@ -47,6 +47,7 @@
             [isExpanded]="open && !mobile && viewModel.displayedOptions.length > 0"
             [isControl]="true"
             [glyph]="showAddonButton ? glyph : ''"
+            [glyphFont]="glyphFont"
             [addonButtonAriaHidden]="!!title"
             (addOnButtonClicked)="_addOnButtonClicked($event)"
         >
