@@ -1,0 +1,47 @@
+@if (_isRootContainer) {
+    @if (_defaultPane?.isOnCanvas && _activePanes.length > 1) {
+        <ng-template
+            [ngTemplateOutlet]="panesTemplate"
+            [ngTemplateOutletContext]="{ panes: [_defaultPane], showResizer: true }"
+        ></ng-template>
+    }
+    <div
+        class="fd-splitter__split-pane"
+        [class.fd-splitter__split-pane--translucent]="paneType === 'translucent'"
+        [class.fd-splitter__split-pane--solid]="paneType === 'solid'"
+    >
+        <ng-template
+            [ngTemplateOutlet]="panesTemplate"
+            [ngTemplateOutletContext]="{
+                panes: _activePanes | noDefaultPane: _defaultPane?.isOnCanvas && _activePanes.length > 1
+            }"
+        ></ng-template>
+    </div>
+    @if (_pages.length) {
+        <fdb-splitter-pagination
+            [pages]="_pages"
+            [currentPage]="_currentPage"
+            (onPageChange)="_onPageChange($event)"
+        ></fdb-splitter-pagination>
+    }
+} @else {
+    <ng-template [ngTemplateOutlet]="panesTemplate" [ngTemplateOutletContext]="{ panes: _panesOnCanvas }"></ng-template>
+}
+<!-- IDE won't recognize types properly below -->
+<ng-template #panesTemplate let-panes="panes" let-showResizer="showResizer">
+    @for (pane of panes; track pane; let last = $last) {
+        <section [id]="pane.id" class="fd-splitter__split-pane" [style]="_getPaneStyles(pane)">
+            <ng-template [cdkPortalOutlet]="pane._content"></ng-template>
+        </section>
+        @if (!last || showResizer) {
+            <fdb-splitter-resizer
+                [orientation]="orientation"
+                (startResize)="_startResize()"
+                (endResize)="_endResize()"
+                (resize)="_onResize(pane.id, $event)"
+                [class.fd-splitter__resizer--translucent]="resizerType === 'translucent'"
+                [class.fd-splitter__resizer--solid]="resizerType === 'solid'"
+            ></fdb-splitter-resizer>
+        }
+    }
+</ng-template>

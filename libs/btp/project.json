@@ -39,14 +39,7 @@
         "lint": {
             "executor": "@nx/eslint:lint",
             "options": {
-                "lintFilePatterns": [
-                    "libs/btp/**/*.ts",
-                    "libs/btp/**/*.html",
-                    "libs/btp/navigation-menu/**/*.ts",
-                    "libs/btp/navigation-menu/**/*.html",
-                    "libs/btp/shared/**/*.ts",
-                    "libs/btp/shared/**/*.html"
-                ]
+                "lintFilePatterns": ["libs/btp/**/*.ts", "libs/btp/**/*.html"]
             }
         },
         "test": {

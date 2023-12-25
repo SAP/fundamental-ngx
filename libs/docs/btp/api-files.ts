@@ -17,5 +17,6 @@ export const API_FILES = {
         'ToolHeaderLogoDirective'
     ],
     toolLayout: [],
+    splitter: ['SplitterComponent', 'SplitterPaneContainerComponent', 'SplitterSplitPaneComponent'],
     searchField: ['SearchFieldComponent']
 } as const;
