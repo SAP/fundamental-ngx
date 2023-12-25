@@ -81,7 +81,7 @@
         "@angular-eslint/template-parser": "17.1.0",
         "@angular/cli": "~17.0.0",
         "@angular/compiler-cli": "17.0.4",
-        "@angular/language-service": "17.0.4",
+        "@angular/language-service": "17.0.8",
         "@babel/core": "7.21.3",
         "@babel/runtime": "7.21.0",
         "@commitlint/cli": "17.7.1",
