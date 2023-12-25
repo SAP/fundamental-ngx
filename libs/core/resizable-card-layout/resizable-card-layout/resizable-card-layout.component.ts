@@ -6,6 +6,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     HostListener,
@@ -15,11 +16,11 @@ import {
     Optional,
     Output,
     QueryList,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import {
     ResizableCardItemComponent,
@@ -100,7 +101,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
     private _keyboardEventsManager: FocusKeyManager<ResizableCardItemComponent>;
 
     /** @hidden */
-    private readonly _destroy$ = new Subject<void>();
+    private readonly _destroy$ = inject(DestroyRef);
 
     /** @hidden */
     private _layoutShifted = false;
@@ -114,6 +115,19 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
         public readonly elementRef: ElementRef,
         @Optional() private readonly _rtlService: RtlService
     ) {}
+
+    /** @hidden handles keyboard accessibility */
+    @HostListener('keydown', ['$event'])
+    _handleKeydown(event: KeyboardEvent): void {
+        event.stopImmediatePropagation();
+        if (!this._keyboardEventsManager.activeItemIndex) {
+            this._keyboardEventsManager.setFirstItemActive();
+        }
+
+        if (this._keyboardEventsManager) {
+            this._keyboardEventsManager.onKeydown(event);
+        }
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -149,22 +163,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._destroy$.next();
-        this._destroy$.complete();
         this._keyboardEventsManager?.destroy();
-    }
-
-    /** @hidden handles keyboard accessibility */
-    @HostListener('keydown', ['$event'])
-    handleKeydown(event: KeyboardEvent): void {
-        event.stopImmediatePropagation();
-        if (!this._keyboardEventsManager.activeItemIndex) {
-            this._keyboardEventsManager.setFirstItemActive();
-        }
-
-        if (this._keyboardEventsManager) {
-            this._keyboardEventsManager.onKeydown(event);
-        }
     }
 
     /** @hidden */
@@ -246,25 +245,29 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
             }
 
             resizeCardItem.resizing
-                .pipe(takeUntil(this._destroy$))
+                .pipe(takeUntilDestroyed(this._destroy$))
                 .subscribe((event: ResizedEvent) => this.cardResizing(event));
 
             // listen for resize complete event of card item
             resizeCardItem.resized
-                .pipe(takeUntil(this._destroy$))
+                .pipe(takeUntilDestroyed(this._destroy$))
                 .subscribe((event: ResizedEvent) => this.cardResizeComplete(event));
 
             // listen for mini-header height event of card item
-            resizeCardItem.miniHeaderReached.pipe(takeUntil(this._destroy$)).subscribe((event: ResizedEvent) => {
-                this.miniHeaderReached.emit(event);
-                this.stepChange.emit(event);
-            });
+            resizeCardItem.miniHeaderReached
+                .pipe(takeUntilDestroyed(this._destroy$))
+                .subscribe((event: ResizedEvent) => {
+                    this.miniHeaderReached.emit(event);
+                    this.stepChange.emit(event);
+                });
 
             // listen for mini-content height event of card item
-            resizeCardItem.miniContentReached.pipe(takeUntil(this._destroy$)).subscribe((event: ResizedEvent) => {
-                this.miniContentReached.emit(event);
-                this.stepChange.emit(event);
-            });
+            resizeCardItem.miniContentReached
+                .pipe(takeUntilDestroyed(this._destroy$))
+                .subscribe((event: ResizedEvent) => {
+                    this.miniContentReached.emit(event);
+                    this.stepChange.emit(event);
+                });
         });
     }
 
@@ -638,6 +641,6 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
         };
 
         refreshDirection(this._isRtl);
-        this._rtlService?.rtl.pipe(takeUntil(this._destroy$)).subscribe(refreshDirection);
+        this._rtlService?.rtl.pipe(takeUntilDestroyed(this._destroy$)).subscribe(refreshDirection);
     }
 }

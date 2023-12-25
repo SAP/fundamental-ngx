@@ -37,7 +37,7 @@ import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import equal from 'fast-deep-equal';
 import { BehaviorSubject, fromEvent, isObservable, Observable, Subject, Subscription, timer } from 'rxjs';
-import { skip, takeUntil } from 'rxjs/operators';
+import { skip } from 'rxjs/operators';
 
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import {
@@ -71,6 +71,7 @@ import {
     SelectableOptionItem
 } from '@fundamental-ngx/platform/shared';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { TextAlignment } from '../../combobox';
 import { MultiComboboxConfig } from '../multi-combobox.config';
@@ -735,7 +736,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         this._dsSubscription = new Subscription();
         const dsSub = initDataSource
             .open()
-            .pipe(skip(1), takeUntil(this._destroyed))
+            .pipe(skip(1), takeUntilDestroyed(this._destroyed))
             .subscribe((data) => {
                 if (data.length === 0) {
                     this._processingEmptyData();
@@ -875,7 +876,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         }
 
         fromEvent(window, 'resize')
-            .pipe(takeUntil(this._destroyed))
+            .pipe(takeUntilDestroyed(this._destroyed))
             .subscribe(() => this._getOptionsListWidth());
     }
 

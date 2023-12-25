@@ -35,8 +35,9 @@ import {
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import { combineLatest, fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { startWith } from 'rxjs/operators';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
@@ -539,7 +540,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
          */
         this._dsSubscription = new Subscription();
         const dsSub = combineLatest([initDataSource.open(), this._updateDataSourceValues$.pipe(startWith(null))])
-            .pipe(takeUntil(this._destroyed))
+            .pipe(takeUntilDestroyed(this._destroyed))
             .subscribe(([data]) => {
                 this._suggestions = this._convertToOptionItems(data);
                 this.stateChanges.next('initDataSource.open().');
@@ -599,7 +600,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         }
 
         fromEvent(window, 'resize')
-            .pipe(takeUntil(this._destroyed))
+            .pipe(takeUntilDestroyed(this._destroyed))
             .subscribe(() => this._getOptionsListWidth());
     }
 

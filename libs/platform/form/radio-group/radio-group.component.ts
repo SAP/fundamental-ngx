@@ -7,6 +7,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     Host,
@@ -21,12 +22,13 @@ import {
     SkipSelf,
     ViewChildren,
     ViewEncapsulation,
-    forwardRef
+    forwardRef,
+    inject
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
-import { Subject, merge } from 'rxjs';
-import { startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { merge } from 'rxjs';
+import { startWith, switchMap } from 'rxjs/operators';
 
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import {
@@ -40,6 +42,7 @@ import {
 } from '@fundamental-ngx/platform/shared';
 
 import { NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormGroupComponent, FormItemComponent } from '@fundamental-ngx/core/form';
 import { RadioButtonComponent } from './radio/radio.component';
 
@@ -112,7 +115,7 @@ export class RadioGroupComponent
     private _selected: RadioButtonComponent | null = null;
 
     /** @hidden */
-    private _destroy$ = new Subject<boolean>();
+    private readonly _destroy$ = inject(DestroyRef);
 
     /** @hidden FocusKeyManager instance */
     private _keyboardEventsManager: FocusKeyManager<RadioButtonComponent>;
@@ -143,6 +146,25 @@ export class RadioGroupComponent
             _defaultResponsiveBreakPointConfig
         );
         this.id = `radio-group-${nextUniqueId++}`;
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    _handleKeydown(event: KeyboardEvent): void {
+        event.stopImmediatePropagation();
+        if (this._keyboardEventsManager) {
+            // sets Active item. so arrow key starts after the active item.
+            // Need to do only once, when one radio is already selected
+            if (this._selected && !this._activeItemSet) {
+                this._keyboardEventsManager.setActiveItem(this._selected);
+                this._activeItemSet = true;
+            }
+
+            if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
+                // passing the event to key manager so we get a change fired
+                this._keyboardEventsManager.onKeydown(event);
+            }
+        }
     }
 
     /** Control Value Accessor */
@@ -189,33 +211,12 @@ export class RadioGroupComponent
 
     /** @hidden Destroys event subscription. */
     ngOnDestroy(): void {
-        this._destroy$.next(true);
-        this._destroy$.complete();
         this._keyboardEventsManager?.destroy();
     }
 
     /** @hidden */
     _getListItemDisabledValue(item: RadioGroupComponent['list'][number]): boolean {
         return this.disabled || (typeof item === 'object' && !!(<SelectItem>item).disabled);
-    }
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    _handleKeydown(event: KeyboardEvent): void {
-        event.stopImmediatePropagation();
-        if (this._keyboardEventsManager) {
-            // sets Active item. so arrow key starts after the active item.
-            // Need to do only once, when one radio is already selected
-            if (this._selected && !this._activeItemSet) {
-                this._keyboardEventsManager.setActiveItem(this._selected);
-                this._activeItemSet = true;
-            }
-
-            if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
-                // passing the event to key manager so we get a change fired
-                this._keyboardEventsManager.onKeydown(event);
-            }
-        }
     }
 
     /** @hidden */
@@ -255,7 +256,7 @@ export class RadioGroupComponent
                     }
                     return merge(...checkedEvents);
                 }),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroy$)
             )
             .subscribe((ev) => this._selectedValueChanged(ev));
     }

@@ -10,8 +10,9 @@ import {
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { BehaviorSubject, of } from 'rxjs';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ContentDensity, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
 import { StepInputConfig } from './step-input.config';
@@ -350,7 +351,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     private _listenToFormErrorState(): void {
         this.stateChanges
             .asObservable()
-            .pipe(takeUntil(this._destroyed))
+            .pipe(takeUntilDestroyed(this._destroyed))
             .subscribe(() => {
                 const oldValue = this.isErrorState;
                 this.isErrorState = this.state === 'error';
@@ -385,7 +386,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
                         })
                     );
                 }),
-                takeUntil(this._destroyed)
+                takeUntilDestroyed(this._destroyed)
             )
             .subscribe((align) => {
                 this._align = align;

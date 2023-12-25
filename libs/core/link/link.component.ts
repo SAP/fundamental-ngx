@@ -5,22 +5,24 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     Inject,
     Input,
     OnChanges,
-    OnDestroy,
     OnInit,
     Optional,
     QueryList,
     Self,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
-import { Subject, map, startWith, takeUntil, tap } from 'rxjs';
+import { map, startWith, tap } from 'rxjs';
 import { FD_LINK_COMPONENT } from './tokens';
 
 @Component({
@@ -48,7 +50,7 @@ import { FD_LINK_COMPONENT } from './tokens';
     imports: [PortalModule],
     standalone: true
 })
-export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterViewInit, OnDestroy {
+export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterViewInit {
     /** @hidden */
     @ContentChildren(FD_ICON_COMPONENT)
     iconComponents: QueryList<IconComponent>;
@@ -93,7 +95,7 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
     _postfixIconName: string;
 
     /** @hidden */
-    private _destroyed$ = new Subject<void>();
+    private readonly _destroyed$ = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -102,12 +104,8 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
         @Inject('linkRouterTarget') readonly routerLink: RouterLink
     ) {}
 
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden
+    /**
+     * @hidden
      * CssClassBuilder interface implementation
      * function is responsible for order which css classes are applied
      */
@@ -122,6 +120,11 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
             this.undecorated ? 'fd-link--undecorated' : '',
             this.class
         ];
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */
@@ -181,14 +184,8 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
                 tap(() => {
                     this.changeDetectorRef.detectChanges();
                 }),
-                takeUntil(this._destroyed$)
+                takeUntilDestroyed(this._destroyed$)
             )
             .subscribe();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._destroyed$.next();
-        this._destroyed$.complete();
     }
 }

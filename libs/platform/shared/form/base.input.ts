@@ -2,6 +2,7 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterViewInit,
     ChangeDetectorRef,
+    DestroyRef,
     Directive,
     DoCheck,
     ElementRef,
@@ -21,8 +22,9 @@ import {
 } from '@angular/core';
 import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { Observable, Subject, filter, takeUntil } from 'rxjs';
+import { Observable, Subject, filter } from 'rxjs';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     FD_FORM_FIELD,
     FD_FORM_FIELD_CONTROL,
@@ -218,7 +220,7 @@ export abstract class BaseInput
     /** @hidden */
     protected _editable = true;
     /** @hidden */
-    protected _destroyed = new Subject<void>();
+    protected _destroyed = inject(DestroyRef);
 
     /**
      * @hidden
@@ -250,7 +252,7 @@ export abstract class BaseInput
         // We have to ignore "formField" if there is "formControl" wrapper
         this.formField = formField && !formControl ? formField : null;
 
-        this._doCheck$?.pipe(takeUntil(this._destroyed)).subscribe(() => {
+        this._doCheck$?.pipe(takeUntilDestroyed(this._destroyed)).subscribe(() => {
             this.ngDoCheck();
         });
     }
@@ -304,7 +306,7 @@ export abstract class BaseInput
         this.stateChanges
             .pipe(
                 filter(() => !!this.formField),
-                takeUntil(this._destroyed)
+                takeUntilDestroyed(this._destroyed)
             )
             .subscribe(() => {
                 this.advancedStateMessage = {
@@ -331,8 +333,6 @@ export abstract class BaseInput
     ngOnDestroy(): void {
         super.ngOnDestroy();
         this.stateChanges.complete();
-        this._destroyed.next();
-        this._destroyed.complete();
         if (this.formField) {
             this.formField.unregisterFormFieldControl(this);
         }
