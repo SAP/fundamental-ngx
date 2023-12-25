@@ -41,12 +41,8 @@ export async function getProjectDefinition(tree: Tree, projectName: string): Pro
     return project;
 }
 
-/**
- * Gets the build target for the given project name.
- * @param tree
- * @param projectName
- */
-export async function getProjectBuildTarget(tree: Tree, projectName: string): Promise<TargetDefinition> {
+/** Gets the build target name for the given project. */
+export async function getProjectBuildTargetName(tree: Tree, projectName: string): Promise<string> {
     const projectDefinition = await getProjectDefinition(tree, projectName);
     if (!buildTargets[projectName]) {
         buildTargets[projectName] = 'build';
@@ -63,7 +59,17 @@ export async function getProjectBuildTarget(tree: Tree, projectName: string): Pr
             )) as string;
         }
     }
-    return projectDefinition.targets.get(buildTargets[projectName]) as TargetDefinition;
+    return buildTargets[projectName];
+}
+
+/**
+ * Gets the build target for the given project name.
+ * @param tree
+ * @param projectName
+ */
+export async function getProjectBuildTarget(tree: Tree, projectName: string): Promise<TargetDefinition> {
+    const projectDefinition = await getProjectDefinition(tree, projectName);
+    return projectDefinition.targets.get(await getProjectBuildTargetName(tree, projectName)) as TargetDefinition;
 }
 
 /**
