@@ -3,21 +3,20 @@ import { AsyncPipe } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChildren,
-    DestroyRef,
     ElementRef,
     EventEmitter,
     Input,
-    OnInit,
-    Optional,
     Output,
     QueryList,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed,
+    inject,
+    signal
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
@@ -38,7 +37,7 @@ import {
 } from '@fundamental-ngx/core/overflow-layout';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { BehaviorSubject } from 'rxjs';
+import { of } from 'rxjs';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens';
 
@@ -89,7 +88,7 @@ import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens'
         FdTranslatePipe
     ]
 })
-export class BreadcrumbComponent implements OnInit, AfterViewInit {
+export class BreadcrumbComponent implements AfterViewInit {
     /** Whether to append items to the overflow dropdown in reverse order. Default is true. */
     @Input()
     reverse = false;
@@ -126,25 +125,16 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
      * @hidden
      * Array of breadcrumb items.
      */
-    _items: BreadcrumbItemComponent[] = [];
+    _items$ = signal<BreadcrumbItemComponent[]>([]);
 
     /** @hidden */
-    _placement$ = new BehaviorSubject<Placement>('bottom-start');
+    _placement$ = computed<Placement>(() => (this._rtl$() ? 'bottom-end' : 'bottom-start'));
+
+    /** Element reference. */
+    readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
     /** @hidden */
-    constructor(
-        public elementRef: ElementRef<HTMLElement>,
-        private _destroyRef: DestroyRef,
-        @Optional() private _rtlService: RtlService | null,
-        private _cdr: ChangeDetectorRef
-    ) {}
-
-    /** @hidden */
-    ngOnInit(): void {
-        this._rtlService?.rtl
-            .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe((value) => this._placement$.next(value ? 'bottom-end' : 'bottom-start'));
-    }
+    private readonly _rtl$ = toSignal(inject(RtlService, { optional: true })?.rtl || of(false));
 
     /** @hidden */
     onResize(): void {
@@ -197,7 +187,6 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
     /** @hidden */
     private _setItems(): void {
         this._contentItems.forEach((item) => item.setPortal());
-        this._items = this._contentItems.toArray();
-        this._cdr.detectChanges();
+        this._items$.set(this._contentItems.toArray());
     }
 }
