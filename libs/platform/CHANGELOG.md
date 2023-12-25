@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.20...v0.48.0-rc.21) (2023-12-25)
+
+
+### Features
+
+* **btp,core,platform:** glyph font family support ([#11129](https://github.com/SAP/fundamental-ngx/issues/11129)) ([35fd421](https://github.com/SAP/fundamental-ngx/commit/35fd4217467fe92dbb0e56a27b6786ac44fa1447))
+
+
+
+
+
 # [0.48.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.19...v0.48.0-rc.20) (2023-12-25)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
