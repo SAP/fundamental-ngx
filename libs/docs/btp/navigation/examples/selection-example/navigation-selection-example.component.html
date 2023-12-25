@@ -1,4 +1,24 @@
-<fdb-navigation [dataSource]="dataSource" [style.width]="'fit-content'" [style.height.px]="400">
+<p>Set navigation state</p>
+<fd-segmented-button [(ngModel)]="state">
+    <button fd-button label="Expanded" value="expanded"></button>
+    <button fd-button label="Snapped" value="snapped"></button>
+    <button fd-button label="Popup" value="popup"></button>
+</fd-segmented-button>
+<p>Set visual mode</p>
+<fd-segmented-button [(ngModel)]="mode">
+    <button fd-button label="Desktop" value=""></button>
+    <button fd-button label="Tablet" value="tablet"></button>
+    <button fd-button label="Mobile" value="phone"></button>
+</fd-segmented-button>
+<p>&nbsp;</p>
+
+<fdb-navigation
+    [state]="state"
+    [mode]="mode"
+    [dataSource]="dataSource"
+    [style.width]="'fit-content'"
+    [style.height.px]="400"
+>
     <fdb-navigation-list-item
         *fdbNavigationListItemRef="let item; as: type"
         [group]="item.group"
@@ -6,8 +26,13 @@
         [expanded]="item.expanded"
         [selected]="item.selected"
     >
-        <a fdb-navigation-link *fdbNavigationLinkRef [glyph]="item.icon" (click)="toggleSelection(item)">{{
-            item.title
-        }}</a>
+        <a
+            fdb-navigation-link
+            *fdbNavigationLinkRef
+            [glyph]="item.icon"
+            (click)="toggleSelection(item)"
+            (keydown.space)="toggleSelection(item)"
+            >{{ item.title }}</a
+        >
     </fdb-navigation-list-item>
 </fdb-navigation>

@@ -1,5 +1,9 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { FDB_NAVIGATION, NavigationDataSourceItem } from '@fundamental-ngx/btp/navigation';
+import { FormsModule } from '@angular/forms';
+import { FDB_NAVIGATION, FdbNavigationState, NavigationDataSourceItem } from '@fundamental-ngx/btp/navigation';
+import { FdbViewMode } from '@fundamental-ngx/btp/shared';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 
 interface ExampleNavigationItem {
     icon?: string;
@@ -14,13 +18,16 @@ interface ExampleNavigationItem {
 @Component({
     selector: 'fdb-navigation-selection-example',
     standalone: true,
-    imports: [FDB_NAVIGATION],
+    imports: [FormsModule, ButtonComponent, SegmentedButtonComponent, FDB_NAVIGATION],
     templateUrl: './navigation-selection-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationSelectionExampleComponent {
     type: ExampleNavigationItem;
+
+    state: FdbNavigationState = 'expanded';
+    mode: FdbViewMode = '';
 
     dataSource: NavigationDataSourceItem<ExampleNavigationItem>[] = [
         {

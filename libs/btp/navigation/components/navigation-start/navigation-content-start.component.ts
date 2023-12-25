@@ -22,6 +22,7 @@ import { asyncScheduler, debounceTime, filter, merge, observeOn, startWith, swit
 import { FdbNavigationContentContainer } from '../../models/navigation-content-container.class';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
+import { NavigationService } from '../../services/navigation.service';
 import { NavigationListComponent } from '../navigation-list/navigation-list.component';
 import { NavigationMoreButtonComponent } from '../navigation-more-button/navigation-more-button.component';
 
@@ -117,6 +118,9 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
     private readonly _zone = inject(NgZone);
 
     /** @hidden */
+    private readonly _navigationService = inject(NavigationService);
+
+    /** @hidden */
     ngAfterContentInit(): void {
         this._listItems.changes
             .pipe(
@@ -131,7 +135,12 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
 
         const resize = resizeObservable(this._elementRef.nativeElement).pipe(debounceTime(30));
 
-        merge(this._isSnappedObservable, this._listItemsObservable, resize)
+        merge(
+            this._isSnappedObservable,
+            this._listItemsObservable,
+            resize,
+            this._navigationService.recalculateVisibleItems$
+        )
             .pipe(switchMap(() => this._zone.onStable.pipe(startWith(this._zone.isStable), take(1))))
             .subscribe(() => {
                 this._calculateVisibleItems();
@@ -177,29 +186,30 @@ export class NavigationContentStartComponent extends FdbNavigationContentContain
         availableSpace = availableSpace - (this._showMoreButtonElement?.nativeElement.clientHeight || 0);
 
         const hiddenItems: FdbNavigationListItem[] = [];
+        const visibleItems: FdbNavigationListItem[] = [];
 
         const gap = parseInt(getComputedStyle(this._listContainer.nativeElement).gap, 10);
-        let i = 0;
 
         // We are going from the bottom to the top and checking whether the available space is enough to fit the items.
-        while (availableSpace < 0 && items.length > 0) {
-            const item = items.pop();
-            if (!item) {
+        for (let index = items.length - 1; index >= 0; index--) {
+            const item = items[index];
+
+            if (item.isActiveAttr$() || availableSpace >= 0) {
+                visibleItems.unshift(item);
                 continue;
             }
+
             // Since we are going from the bottom to the top, we need to add item to the list as the first item of the array.
             hiddenItems.unshift(item);
             const clientHeight =
-                Math.ceil(item?.marker?.elementRef.nativeElement.getBoundingClientRect().height || 0) +
-                gap * (i === 0 ? 1 : 2);
+                Math.ceil(item?.marker?.elementRef.nativeElement.getBoundingClientRect().height || 0) + gap * 1;
             availableSpace = availableSpace + clientHeight;
             item.hidden$.set(true);
-            i++;
         }
 
         this._elementRef.nativeElement.classList.remove(FD_NAVIGATION_OVERFLOW_ITEM_CLASS);
 
-        this.visibleItems$.set([...items]);
+        this.visibleItems$.set([...visibleItems]);
         this.hiddenItems$.set([...hiddenItems]);
 
         this._showMoreButton$.set(hiddenItems.length > 0);

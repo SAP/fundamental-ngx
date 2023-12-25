@@ -25,6 +25,12 @@ export class NavigationService {
     /** @hidden */
     readonly isSnapped$ = signal(false);
 
+    /** Stream emitted when recalculation of visible items was requested. */
+    readonly recalculateVisibleItems$ = new Subject<void>();
+
+    /** @hidden */
+    _recalculationInProgress = false;
+
     /** @hidden */
     private readonly _rtl$ = toSignal(inject(RtlService, { optional: true })?.rtl || of(false));
 
@@ -47,23 +53,31 @@ export class NavigationService {
         });
     }
 
-    /** @hidden */
+    /** Request visible items recalculation. */
+    recalculateVisibleItems(): void {
+        if (this._recalculationInProgress) {
+            return;
+        }
+        this.recalculateVisibleItems$.next();
+    }
+
+    /** Get currently active item on the root level. */
     getRootActiveItem(): FdbNavigationListItem | null {
         return this._rootKeyManager.activeItem;
     }
 
-    /** @hidden */
+    /** Set currently active item on the root level. */
     setRootActiveItem(item: FdbNavigationListItem): void {
         this._rootKeyManager.setActiveItem(item);
         this.closePopoverExcept$.next(item);
     }
 
-    /** @hidden */
+    /** Set currently active item on the overflow level. */
     setActiveOverflowItem(item: FdbNavigationListItem): void {
         this._overflowKeyManager.setActiveItem(item);
     }
 
-    /** @hidden */
+    /** Callback function for keyboard navigation of the root level items. */
     onRootKeyDown(event: KeyboardEvent): void {
         const navigationKeys = this.horizontal$() ? [LEFT_ARROW, RIGHT_ARROW] : [UP_ARROW, DOWN_ARROW];
         if (!KeyUtil.isKeyCode(event, navigationKeys)) {

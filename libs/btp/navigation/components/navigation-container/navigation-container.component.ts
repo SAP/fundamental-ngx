@@ -121,7 +121,7 @@ export class NavigationContainerComponent extends FdbNavigationContentContainer 
 
         const resize = resizeObservable(this._elementRef.nativeElement).pipe(debounceTime(0));
 
-        merge(this._renderers$, resize)
+        merge(this._renderers$, this._navigationService.recalculateVisibleItems$, resize)
             .pipe(
                 switchMap(() => this._zone.onStable.pipe(startWith(this._zone.isStable), take(1))),
                 takeUntilDestroyed(this._destroyRef)
@@ -131,10 +131,12 @@ export class NavigationContainerComponent extends FdbNavigationContentContainer 
             });
     }
 
+    /** @hidden */
     private _calculateVisibleItems(): void {
         if (this._calculationInProgress) {
             return;
         }
+        this._navigationService._recalculationInProgress = true;
         this._elementRef.nativeElement.classList.add(FD_NAVIGATION_OVERFLOW_ITEM_CLASS);
         this._calculationInProgress = true;
         const items = [...this.listItems$()];
@@ -150,6 +152,7 @@ export class NavigationContainerComponent extends FdbNavigationContentContainer 
             this.navigation.showMoreButton$.set(null);
             this._cdr.detectChanges();
             this._elementRef.nativeElement.classList.remove(FD_NAVIGATION_OVERFLOW_ITEM_CLASS);
+            this._navigationService._recalculationInProgress = false;
             return;
         }
 
@@ -163,18 +166,24 @@ export class NavigationContainerComponent extends FdbNavigationContentContainer 
             this.navigation.showMoreButton$.set(null);
             this._elementRef.nativeElement.classList.remove(FD_NAVIGATION_OVERFLOW_ITEM_CLASS);
             this._cdr.detectChanges();
+            this._navigationService._recalculationInProgress = false;
             return;
         }
 
         const hiddenItems: FdbNavigationListItem[] = [];
+        const visibleItems: FdbNavigationListItem[] = [];
 
         const gap = parseInt(getComputedStyle(this._listContainer.nativeElement).gap, 10);
 
-        while (availableSpace < 0 && items.length > 0) {
-            const item = items.pop();
-            if (!item) {
+        // We are going from the bottom to the top and checking whether the available space is enough to fit the items.
+        for (let index = items.length - 1; index >= 0; index--) {
+            const item = items[index];
+
+            if (item.itemSelected$() || item.childSelected$() || availableSpace >= 0) {
+                visibleItems.unshift(item);
                 continue;
             }
+
             // Since we are going from the bottom to the top, we need to add item to the list as the first item of the array.
             hiddenItems.unshift(item);
             const elementWidth =
@@ -183,7 +192,7 @@ export class NavigationContainerComponent extends FdbNavigationContentContainer 
             item.hidden$.set(true);
         }
 
-        this.visibleItems$.set([...items]);
+        this.visibleItems$.set([...visibleItems]);
         this.hiddenItems$.set([...hiddenItems]);
 
         this._showMoreButton$.set(hiddenItems.length > 0);
@@ -195,5 +204,6 @@ export class NavigationContainerComponent extends FdbNavigationContentContainer 
 
         this._calculationInProgress = false;
         this._navigationService.hiddenItems$.set(this._listItems.filter((item) => item.isOverflow$()));
+        this._navigationService._recalculationInProgress = false;
     }
 }

@@ -4,6 +4,7 @@ import { FdbNavigation } from '../../models/navigation.class';
 import { signal } from '@angular/core';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { Subject } from 'rxjs';
+import { NavigationService } from '../../services/navigation.service';
 
 class NavigationComponentMock extends FdbNavigation {
     closeAllPopups = new Subject<void>();
@@ -33,6 +34,7 @@ describe('NavigationContentStartComponent', () => {
         await TestBed.configureTestingModule({
             imports: [NavigationContentStartComponent],
             providers: [
+                NavigationService,
                 {
                     provide: FdbNavigation,
                     useValue: navigationCmp

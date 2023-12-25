@@ -23,14 +23,14 @@ import {
     inject,
     signal
 } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { NestedButtonDirective } from '@fundamental-ngx/btp/button';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { Observable, asyncScheduler, filter, observeOn, of, startWith, take } from 'rxjs';
+import { Observable, asyncScheduler, distinctUntilChanged, filter, observeOn, of, startWith, take } from 'rxjs';
 import { NavigationListItemDirective } from '../../directives/navigation-list-item-ref.directive';
 import { FdbNavigationContentContainer } from '../../models/navigation-content-container.class';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
@@ -166,6 +166,11 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     @ContentChild(NavigationLinkRefDirective)
     linkRef: Nullable<NavigationLinkRefDirective>;
 
+    @ContentChild(FdbNavigationItemLink)
+    private set _link(link: Nullable<FdbNavigationItemLink>) {
+        this.link$.set(link);
+    }
+
     /** Renderer template reference. */
     @ViewChild('renderer')
     set renderer(renderer: TemplateRef<any> | undefined) {
@@ -276,10 +281,13 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     private readonly _spacer$ = signal(false);
 
     /** @hidden */
-    private readonly _links: FdbNavigationItemLink[] = [];
+    private _links: FdbNavigationItemLink[] = [];
 
     /** @hidden */
     private _keyManager: Nullable<FocusKeyManager<FdbNavigationListItem>>;
+
+    /** @hidden */
+    private readonly _viewInited$ = signal(false);
 
     /** @hidden */
     private readonly _zone = inject(NgZone);
@@ -323,6 +331,17 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             }
         });
 
+        // When item becomes active, notify service that recalculation of visible items is requested.
+        toObservable(this.itemSelected$)
+            .pipe(
+                distinctUntilChanged(),
+                filter((selected) => selected),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe(() => {
+                this._navigationService.recalculateVisibleItems();
+            });
+
         // We need to track child directives change and set list items based on that.
         effect(
             () => {
@@ -359,6 +378,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     /** @hidden */
     ngOnDestroy(): void {
         this._keyManager?.destroy();
+        this._links = [];
     }
 
     /** @hidden */
@@ -404,6 +424,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
             .subscribe(() => {
                 this.listItems$.set(this.listItems.toArray());
             });
+        this._viewInited$.set(true);
     }
 
     /** @hidden */
@@ -411,14 +432,11 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         if (this._links.indexOf(link) === -1) {
             this._links.push(link);
         }
-
-        this.link$.set(this._links[0]);
     }
 
     /** @hidden */
     unregisterLink(link: FdbNavigationItemLink): void {
         this._links.splice(this._links.indexOf(link), 1);
-        this.link$.set(this._links[0]);
     }
 
     /** @hidden */

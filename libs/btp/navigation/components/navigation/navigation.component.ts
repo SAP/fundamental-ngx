@@ -308,14 +308,10 @@ export class NavigationComponent extends FdbNavigation implements CssClassBuilde
             }
 
             // Find last list item from the `Start` container.
-            const insertionIndex = items.findIndex((item) => {
-                const listItems = item.placementContainer?.listItems$();
-                if (!listItems) {
-                    return;
-                }
-
-                return item.placementContainer?.placement === 'start' && listItems[listItems.length - 1] === item;
-            });
+            const lastStartContainerItem = items
+                .filter((item) => item.placementContainer?.placement === 'start')
+                .slice(-1)[0];
+            const insertionIndex = items.indexOf(lastStartContainerItem);
 
             if (insertionIndex === -1) {
                 return;

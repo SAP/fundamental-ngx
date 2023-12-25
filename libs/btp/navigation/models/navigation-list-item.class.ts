@@ -82,15 +82,18 @@ export abstract class FdbNavigationListItem implements FocusableOption {
         return this.parentListItem.normalizedLevel$() + 1;
     });
 
+    /** Whether the current item is selected. */
+    readonly itemSelected$ = computed(() => this.selected$() || !!this.link$()?.isActive$());
+
+    /** Whether any of the child items is selected. */
+    readonly childSelected$ = computed(() => this.listItems$().some((item) => item.itemSelected$()));
+
     /**
      * Whether the List item should be marked as selected.
      * Based on a `snapped` state will determine whether to highlight the link if it, or it's child links are active.
      */
     readonly isActiveAttr$ = computed(
-        () =>
-            this.selected$() ||
-            this.link$()?.isActive$() ||
-            (this.navigation.isSnapped$() && this.listItems$().some((item) => item.isActiveAttr$()))
+        () => this.itemSelected$() || (this.navigation.isSnapped$() && this.childSelected$())
     );
 
     /**
