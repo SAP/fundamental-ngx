@@ -5,6 +5,7 @@ import { ConnectedPosition, Overlay, OverlayConfig, OverlayRef } from '@angular/
 import { TemplatePortal } from '@angular/cdk/portal';
 import { AsyncPipe, DOCUMENT, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -59,7 +60,6 @@ import {
     SEARCH_FIELD_COMPONENT,
     SearchFieldMobileInterface
 } from './search-field-mobile/search-field-mobile.interface';
-import { PlatformSearchFieldMobileModule } from './search-field-mobile/search-field-mobile.module';
 import { SearchFieldMobileComponent } from './search-field-mobile/search-field/search-field-mobile.component';
 
 export interface SearchInput {
@@ -132,7 +132,7 @@ type Appearance = SearchComponent['appearance'] | undefined;
 })
 export class SearchFieldComponent
     extends BaseComponent
-    implements OnInit, OnChanges, OnDestroy, SearchFieldMobileInterface, SearchComponent
+    implements OnInit, OnChanges, OnDestroy, SearchFieldMobileInterface, SearchComponent, AfterViewInit
 {
     /** Type of component used to render the categories dropdown. */
     @Input()
@@ -424,7 +424,10 @@ export class SearchFieldComponent
         this._menuId = `${baseId}-menu-${searchFieldIdCount++}`;
 
         this._isRefresh = true;
+    }
 
+    /** @hidden */
+    ngAfterViewInit(): void {
         if (this.mobile) {
             this._setUpMobileMode();
         }
@@ -730,18 +733,21 @@ export class SearchFieldComponent
     }
 
     /** @hidden */
-    private async _setUpMobileMode(): Promise<void> {
+    private _setUpMobileMode(): void {
         const injector = Injector.create({
             providers: [{ provide: SEARCH_FIELD_COMPONENT, useValue: this }],
             parent: this._injector
         });
 
-        await this._dynamicComponentService.createDynamicModule(
+        this._dynamicComponentService.createDynamicComponent(
             { inputFieldTemplate: this.inputFieldTemplate, suggestionMenuTemplate: this.suggestionMenuTemplate },
-            PlatformSearchFieldMobileModule,
             SearchFieldMobileComponent,
-            this._viewContainerRef,
-            injector
+            {
+                containerRef: this._viewContainerRef
+            },
+            {
+                injector
+            }
         );
     }
 }
