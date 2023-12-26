@@ -21,6 +21,7 @@ import {
     SimpleChanges,
     ViewChildren,
     ViewEncapsulation,
+    effect,
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -41,7 +42,7 @@ import {
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { Subscription, distinctUntilChanged, filter, fromEvent, startWith, switchMap } from 'rxjs';
+import { Subscription, filter, fromEvent, startWith, switchMap } from 'rxjs';
 import { FdTreeAcceptableDataSource, FdTreeDataSource, FdTreeItemType } from './data-source/tree-data-source';
 import { TreeDataSourceParser } from './data-source/tree-data-source-parser';
 import { TreeItemDefDirective } from './directives/tree-item-def.directive';
@@ -193,6 +194,9 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     readonly elementRef = inject(ElementRef);
 
     /** @hidden */
+    readonly _treeService = inject(TreeService);
+
+    /** @hidden */
     private _navigationIndicator = false;
 
     /** @hidden */
@@ -206,9 +210,6 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
-
-    /** @hidden */
-    private readonly _treeService = inject(TreeService);
 
     /** @hidden */
     private readonly _selectionService = inject(SelectionService);
@@ -255,6 +256,11 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     constructor() {
         this._selectionService.registerRootComponent(this);
         this._contentDensityObserver.subscribe();
+
+        effect(() => {
+            this._expandedLevel = this._treeService.expandedLevel();
+            this.buildComponentCssClass();
+        });
     }
 
     /** @hidden */
@@ -290,14 +296,6 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     ngOnInit(): void {
         this._openDataStream();
         this.buildComponentCssClass();
-
-        this._treeService.expandedLevel
-            .pipe(distinctUntilChanged(), takeUntilDestroyed(this._destroyRef))
-            .subscribe((level) => {
-                this._expandedLevel = level;
-                this.buildComponentCssClass();
-                this._cdr.detectChanges();
-            });
 
         this._treeService.detectChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._cdr.detectChanges();
