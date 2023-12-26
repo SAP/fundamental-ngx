@@ -1,8 +1,7 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, InjectionToken, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, InjectionToken, Signal, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { Observable } from 'rxjs';
 
 /**
  * Reset button.
@@ -13,7 +12,7 @@ import { Observable } from 'rxjs';
 
 export interface Resettable {
     reset: () => void;
-    isResetAvailable$: Observable<boolean>;
+    isResetAvailable$: Signal<boolean>;
 }
 
 export const RESETTABLE_TOKEN = new InjectionToken<Resettable>('Resettable');
@@ -25,7 +24,7 @@ export const RESETTABLE_TOKEN = new InjectionToken<Resettable>('Resettable');
         fdType="transparent"
         [label]="'platformTable.resetChangesButtonLabel' | fdTranslate"
         (click)="resettable.reset()"
-        [disabled]="(resettable.isResetAvailable$ | async) === false"
+        [disabled]="!resettable.isResetAvailable$()"
     ></button>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,

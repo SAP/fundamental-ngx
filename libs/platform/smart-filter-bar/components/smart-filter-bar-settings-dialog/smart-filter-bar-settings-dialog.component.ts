@@ -6,9 +6,10 @@ import {
     Inject,
     OnDestroy,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    signal
 } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, Subscription, asyncScheduler, firstValueFrom } from 'rxjs';
+import { Observable, Subject, Subscription, asyncScheduler, firstValueFrom } from 'rxjs';
 import { observeOn, takeUntil } from 'rxjs/operators';
 
 import {
@@ -123,7 +124,7 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
     loaded = false;
 
     /** Indicates when reset command is available */
-    readonly isResetAvailable$: Observable<boolean>;
+    readonly isResetAvailable$ = signal(false);
 
     /** @hidden */
     private readonly _categoryLabelKeys: SmartFilterBarVisibilityCategoryLabels = {
@@ -147,9 +148,6 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-    /** @hidden */
     private readonly _translationResolver = new TranslationResolver();
 
     /** @hidden */
@@ -158,7 +156,6 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
         @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>,
         private readonly _cdr: ChangeDetectorRef
     ) {
-        this.isResetAvailable$ = this._isResetAvailableSubject$.asObservable();
         this.setInitialTableState();
         this._init();
     }
@@ -230,7 +227,7 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
     /** @hidden */
     _onRowSelectionChange(event: TableRowSelectionChangeEvent<FieldFilterItem>): void {
         this._selectedFilters = event.selection.map((c) => c.name);
-        this._isResetAvailableSubject$.next(true);
+        this.isResetAvailable$.set(true);
     }
 
     /** @hidden */
