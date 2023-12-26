@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { SplitterRequiredParentWidthExampleComponent } from './examples/required-parent-width/splitter-required-parent-width-example.component';
 import { SplitterDocsComponent } from './splitter-docs.component';
 import { SplitterHeaderComponent } from './splitter-header/splitter-header.component';
 
@@ -15,6 +16,10 @@ export const ROUTES: Routes = [
         data: {
             primary: true
         }
+    },
+    {
+        path: 'example',
+        component: SplitterRequiredParentWidthExampleComponent
     }
 ];
 export const LIBRARY_NAME = 'splitter';

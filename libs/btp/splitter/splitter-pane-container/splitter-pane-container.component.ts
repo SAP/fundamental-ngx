@@ -6,18 +6,17 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
+    inject,
     Input,
     OnDestroy,
     Optional,
     Output,
-    Pipe,
-    PipeTransform,
     QueryList,
     SkipSelf,
-    ViewEncapsulation,
-    forwardRef
+    ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -32,6 +31,7 @@ import { SplitterPaginationComponent } from '../splitter-pagination/splitter-pag
 import { SplitterResizerComponent } from '../splitter-resizer/splitter-resizer.component';
 import { SplitterSplitPaneComponent } from '../splitter-split-pane/splitter-split-pane.component';
 import { SplitterComponent } from '../splitter.component';
+import { NoDefaultPanePipe } from './no-default-pane.pipe';
 import {
     SplitterPaneContainerOrientation,
     SplitterPaneContainerOrientationType
@@ -69,13 +69,7 @@ export function transformPaneTypeInput(paneType: PaneTypeInput): Nullable<PaneTy
         '[class.fd-splitter__pane-container--vertical]': '_isRootContainer || _isVertical'
     },
     standalone: true,
-    imports: [
-        NgTemplateOutlet,
-        SplitterPaginationComponent,
-        PortalModule,
-        SplitterResizerComponent,
-        forwardRef(() => NoDefaultPanePipe)
-    ]
+    imports: [NgTemplateOutlet, SplitterPaginationComponent, PortalModule, SplitterResizerComponent, NoDefaultPanePipe]
 })
 export class SplitterPaneContainerComponent implements AfterContentInit, AfterViewInit, OnDestroy {
     /** Pane type - vertical (default) or horizontal. */
@@ -115,6 +109,9 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
 
     /** @hidden */
     _currentPage: string;
+
+    /** @hidden */
+    _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _paneSizes: number[] = [];
@@ -184,7 +181,9 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         private readonly _viewportRuler: ViewportRuler,
         @Optional() private readonly _rtlService: RtlService,
         @Optional() @SkipSelf() private readonly _parentSplitterPaneContainer: SplitterPaneContainerComponent
-    ) {}
+    ) {
+        console.log({ _destroyRef: this._destroyRef });
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -276,8 +275,8 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         const resizedPane = this._panesInRightOrderForResize[resizedPaneIndex];
 
         let siblingPaneIndex = resizedPaneIndex;
-        let siblingPane;
-        let siblingPaneSize;
+        let siblingPane: SplitterSplitPaneComponent;
+        let siblingPaneSize: number;
 
         do {
             siblingPaneIndex += diff < 0 ? -1 : 1;
@@ -312,6 +311,10 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
 
         this._cdr.detectChanges();
     }
+
+    /** @hidden */
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    protected _SplitterSplitPaneComponent = (p: unknown) => p as SplitterSplitPaneComponent[];
 
     /** @hidden */
     private _updatePages(): void {
@@ -479,23 +482,5 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
     /** @hidden */
     private _getPaneElement(paneId: string): HTMLElement {
         return this._elementRef.nativeElement.querySelector(`#${paneId}`);
-    }
-}
-
-@Pipe({
-    name: 'noDefaultPane',
-    standalone: true
-})
-export class NoDefaultPanePipe implements PipeTransform {
-    /** @hidden */
-    constructor(private readonly _splitterPaneContainer: SplitterPaneContainerComponent) {}
-
-    /** @hidden */
-    transform(value: SplitterSplitPaneComponent[], excludingCondition = true): SplitterSplitPaneComponent[] {
-        if (!excludingCondition) {
-            return value;
-        }
-
-        return value.filter((pane) => pane.id !== this._splitterPaneContainer._defaultPane?.id);
     }
 }

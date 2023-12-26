@@ -1,1 +1,458 @@
-@import 'fundamental-styles/dist/splitter';
+@charset "UTF-8";
+/*!
+ * Fundamental Library Styles v0.33.1-rc.8
+ * Copyright (c) 2023 SAP SE or an SAP affiliate company.
+ * Licensed under Apache License 2.0 (https://github.com/SAP/fundamental-styles/blob/main/LICENSE)
+ */
+.fd-splitter {
+    --fdSplitter_Split_Pane_BoxShadow: none;
+    --fdSplitter_Split_Pane_Background: transparent;
+    --fdSplitter_Pane_Container_Flex_Direction: row;
+    --fdSplitter_Pagination_Dot_Value: '';
+    --fdSplitter_Pagination_Container_Height: 2rem;
+    --fdSplitter_Resizer_Gap: 2rem;
+    --fdSplitter_Resizer_Width: auto;
+    --fdSplitter_Resizer_Height: auto;
+    --fdSplitter_Resizer_Cursor: auto;
+    --fdSplitter_Resizer_Grip_Cursor: auto;
+    --fdSplitter_Resizer_Flex_Direction: row;
+    --fdSplitter_Resizer_Background: transparent;
+    --fdSplitter_Resizer_Before_Width: 4rem;
+    --fdSplitter_Resizer_Before_Height: 0.0625rem;
+    --fdSplitter_Resizer_Before_Border_Radius: 0.125rem;
+    --fdSplitter_Resizer_Before_Background: linear-gradient(to left, var(--sapGroup_TitleBorderColor), transparent);
+    --fdSplitter_Resizer_After_Width: 4rem;
+    --fdSplitter_Resizer_After_Height: 0.0625rem;
+    --fdSplitter_Resizer_After_Border_Radius: 0.125rem;
+    --fdSplitter_Resizer_After_Background: linear-gradient(to right, var(--sapGroup_TitleBorderColor), transparent);
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+.fd-splitter,
+.fd-splitter__pagination,
+.fd-splitter__pagination-item-dot {
+    -webkit-box-sizing: border-box;
+    border: 0;
+    box-sizing: border-box;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-size: var(--sapFontSize);
+    font-weight: 400;
+    forced-color-adjust: none;
+    line-height: normal;
+    margin: 0;
+    padding: 0;
+}
+
+.fd-splitter:after,
+.fd-splitter:before,
+.fd-splitter__pagination-item-dot:after,
+.fd-splitter__pagination-item-dot:before,
+.fd-splitter__pagination:after,
+.fd-splitter__pagination:before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+
+.fd-splitter__resizer,
+.fd-splitter__resizer-decoration-after,
+.fd-splitter__resizer-decoration-before,
+.fd-splitter__resizer-grip,
+.fd-splitter__resizer-grip-icon {
+    -webkit-box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    border: 0;
+    box-sizing: border-box;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-size: var(--sapFontSize);
+    font-weight: 400;
+    forced-color-adjust: none;
+    line-height: normal;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+.fd-splitter__resizer-decoration-after:after,
+.fd-splitter__resizer-decoration-after:before,
+.fd-splitter__resizer-decoration-before:after,
+.fd-splitter__resizer-decoration-before:before,
+.fd-splitter__resizer-grip-icon:after,
+.fd-splitter__resizer-grip-icon:before,
+.fd-splitter__resizer-grip:after,
+.fd-splitter__resizer-grip:before,
+.fd-splitter__resizer:after,
+.fd-splitter__resizer:before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+
+.fd-splitter__pane,
+.fd-splitter__pane-container {
+    -webkit-box-sizing: border-box;
+    border: 0;
+    box-sizing: border-box;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-size: var(--sapFontSize);
+    font-weight: 400;
+    forced-color-adjust: none;
+    line-height: normal;
+    margin: 0;
+    max-height: 100%;
+    max-width: 100%;
+    padding: 0;
+}
+
+.fd-splitter__pane-container:after,
+.fd-splitter__pane-container:before,
+.fd-splitter__pane:after,
+.fd-splitter__pane:before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+
+.fd-splitter__pane-container {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    -ms-flex-direction: var(--fdSplitter_Pane_Container_Flex_Direction);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    flex-direction: var(--fdSplitter_Pane_Container_Flex_Direction);
+}
+
+.fd-splitter__pane-container--horizontal {
+    --fdSplitter_Resizer_Width: auto;
+    --fdSplitter_Resizer_Height: 1rem;
+    --fdSplitter_Resizer_Flex_Direction: row;
+    --fdSplitter_Pane_Container_Flex_Direction: column;
+    --fdSplitter_Resizer_Before_Width: 4rem;
+    --fdSplitter_Resizer_Before_Height: 0.0625rem;
+    --fdSplitter_Resizer_Before_Background: linear-gradient(to left, var(--sapGroup_TitleBorderColor), transparent);
+    --fdSplitter_Resizer_After_Width: 4rem;
+    --fdSplitter_Resizer_After_Height: 0.0625rem;
+    --fdSplitter_Resizer_After_Background: linear-gradient(to right, var(--sapGroup_TitleBorderColor), transparent);
+}
+
+.fd-splitter__pane-container--horizontal > .fd-splitter__resizer .fd-splitter__resizer-grip {
+    --fdSplitter_Resizer_Grip_Cursor: row-resize;
+}
+
+.fd-splitter__pane-container--horizontal
+    > .fd-splitter__resizer
+    .fd-splitter__resizer-grip.is-focus
+    ~ .fd-splitter__resizer-decoration-before,
+.fd-splitter__pane-container--horizontal
+    > .fd-splitter__resizer
+    .fd-splitter__resizer-grip:focus
+    ~ .fd-splitter__resizer-decoration-before {
+    --fdSplitter_Resizer_Before_Background: linear-gradient(to left, var(--sapContent_FocusColor), transparent);
+}
+
+.fd-splitter__pane-container--horizontal > .fd-splitter__resizer .fd-splitter__resizer-grip.is-focus,
+.fd-splitter__pane-container--horizontal > .fd-splitter__resizer .fd-splitter__resizer-grip:focus {
+    z-index: 5;
+}
+
+.fd-splitter__pane-container--horizontal
+    > .fd-splitter__resizer
+    .fd-splitter__resizer-grip.is-focus
+    ~ .fd-splitter__resizer-decoration-after,
+.fd-splitter__pane-container--horizontal
+    > .fd-splitter__resizer
+    .fd-splitter__resizer-grip:focus
+    ~ .fd-splitter__resizer-decoration-after {
+    --fdSplitter_Resizer_After_Background: linear-gradient(to right, var(--sapContent_FocusColor), transparent);
+}
+
+.fd-splitter__pane-container--horizontal
+    > .fd-splitter__resizer
+    .fd-splitter__resizer-grip.is-active
+    ~ .fd-splitter__resizer-decoration-before,
+.fd-splitter__pane-container--horizontal
+    > .fd-splitter__resizer
+    .fd-splitter__resizer-grip:active
+    ~ .fd-splitter__resizer-decoration-before {
+    --fdSplitter_Resizer_Before_Width: 100%;
+    --fdSplitter_Resizer_Before_Background: var(--sapGroup_TitleBorderColor);
+}
+
+.fd-splitter__pane-container--horizontal
+    > .fd-splitter__resizer
+    .fd-splitter__resizer-grip.is-active
+    ~ .fd-splitter__resizer-decoration-after,
+.fd-splitter__pane-container--horizontal
+    > .fd-splitter__resizer
+    .fd-splitter__resizer-grip:active
+    ~ .fd-splitter__resizer-decoration-after {
+    --fdSplitter_Resizer_After_Width: 100%;
+    --fdSplitter_Resizer_After_Background: var(--sapGroup_TitleBorderColor);
+}
+
+.fd-splitter__pane-container--vertical {
+    --fdSplitter_Resizer_Width: 1rem;
+    --fdSplitter_Resizer_Cursor: col-resize;
+    --fdSplitter_Resizer_Flex_Direction: column;
+    --fdSplitter_Resizer_Before_Height: 4rem;
+    --fdSplitter_Resizer_Before_Width: 0.0625rem;
+    --fdSplitter_Resizer_Before_Background: linear-gradient(to top, var(--sapGroup_TitleBorderColor), transparent);
+    --fdSplitter_Resizer_After_Height: 4rem;
+    --fdSplitter_Resizer_After_Width: 0.0625rem;
+    --fdSplitter_Resizer_After_Background: linear-gradient(to bottom, var(--sapGroup_TitleBorderColor), transparent);
+}
+
+.fd-splitter__pane-container--vertical > .fd-splitter__resizer .fd-splitter__resizer-grip {
+    --fdSplitter_Resizer_Grip_Cursor: col-resize;
+}
+
+.fd-splitter__pane-container--vertical
+    > .fd-splitter__resizer
+    .fd-splitter__resizer-grip.is-focus
+    ~ .fd-splitter__resizer-decoration-before,
+.fd-splitter__pane-container--vertical
+    > .fd-splitter__resizer
+    .fd-splitter__resizer-grip:focus
+    ~ .fd-splitter__resizer-decoration-before {
+    --fdSplitter_Resizer_Before_Background: linear-gradient(to top, var(--sapContent_FocusColor), transparent);
+}
+
+.fd-splitter__pane-container--vertical > .fd-splitter__resizer .fd-splitter__resizer-grip.is-focus,
+.fd-splitter__pane-container--vertical > .fd-splitter__resizer .fd-splitter__resizer-grip:focus {
+    z-index: 5;
+}
+
+.fd-splitter__pane-container--vertical
+    > .fd-splitter__resizer
+    .fd-splitter__resizer-grip.is-focus
+    ~ .fd-splitter__resizer-decoration-after,
+.fd-splitter__pane-container--vertical
+    > .fd-splitter__resizer
+    .fd-splitter__resizer-grip:focus
+    ~ .fd-splitter__resizer-decoration-after {
+    --fdSplitter_Resizer_After_Background: linear-gradient(to bottom, var(--sapContent_FocusColor), transparent);
+}
+
+.fd-splitter__pane-container--vertical
+    > .fd-splitter__resizer
+    .fd-splitter__resizer-grip.is-active
+    ~ .fd-splitter__resizer-decoration-before,
+.fd-splitter__pane-container--vertical
+    > .fd-splitter__resizer
+    .fd-splitter__resizer-grip:active
+    ~ .fd-splitter__resizer-decoration-before {
+    --fdSplitter_Resizer_Before_Height: 100%;
+    --fdSplitter_Resizer_Before_Background: var(--sapGroup_TitleBorderColor);
+}
+
+.fd-splitter__pane-container--vertical
+    > .fd-splitter__resizer
+    .fd-splitter__resizer-grip.is-active
+    ~ .fd-splitter__resizer-decoration-after,
+.fd-splitter__pane-container--vertical
+    > .fd-splitter__resizer
+    .fd-splitter__resizer-grip:active
+    ~ .fd-splitter__resizer-decoration-after {
+    --fdSplitter_Resizer_After_Height: 100%;
+    --fdSplitter_Resizer_After_Background: var(--sapGroup_TitleBorderColor);
+}
+
+.fd-splitter__pane-container--vertical > .fd-splitter__resizer.is-active,
+.fd-splitter__pane-container--vertical > .fd-splitter__resizer:active {
+    --fdSplitter_Resizer_Before_Height: 100%;
+    --fdSplitter_Resizer_Before_Width: 0.0625rem;
+    --fdSplitter_Resizer_After_Height: 100%;
+    --fdSplitter_Resizer_After_Width: 0.0625rem;
+}
+
+.fd-splitter__pane-container--vertical > .fd-splitter__resizer.is-focus,
+.fd-splitter__pane-container--vertical > .fd-splitter__resizer:focus {
+    --fdSplitter_Resizer_Before_Background: linear-gradient(to top, var(--sapContent_FocusColor), transparent);
+    --fdSplitter_Resizer_After_Background: linear-gradient(to bottom, var(--sapContent_FocusColor), transparent);
+    z-index: 5;
+}
+
+.fd-splitter__pane-container--vertical > .fd-splitter__resizer.is-focus.is-active,
+.fd-splitter__pane-container--vertical > .fd-splitter__resizer.is-focus:active,
+.fd-splitter__pane-container--vertical > .fd-splitter__resizer:focus.is-active,
+.fd-splitter__pane-container--vertical > .fd-splitter__resizer:focus:active {
+    --fdSplitter_Resizer_Before_Height: 100%;
+    --fdSplitter_Resizer_Before_Width: 0.0625rem;
+    --fdSplitter_Resizer_After_Height: 100%;
+    --fdSplitter_Resizer_After_Width: 0.0625rem;
+}
+
+.fd-splitter__split-pane {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    -webkit-box-shadow: var(--fdSplitter_Split_Pane_BoxShadow);
+    background: var(--fdSplitter_Split_Pane_Background);
+    border-radius: 0.5rem;
+    box-shadow: var(--fdSplitter_Split_Pane_BoxShadow);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: auto;
+    text-overflow: ellipsis;
+}
+
+.fd-splitter__split-pane--translucent {
+    --fdSplitter_Split_Pane_Background: var(--sapBackgroundColor);
+    --fdSplitter_Split_Pane_BoxShadow: var(--sapSplitPane_Shadow1);
+}
+
+.fd-splitter__split-pane--solid {
+    --fdSplitter_Split_Pane_BoxShadow: var(--sapSplitPane_Shadow1);
+    --fdSplitter_Split_Pane_Background: var(--sapGroup_ContentBackground);
+}
+
+.fd-splitter__resizer {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: var(--fdSplitter_Resizer_Flex_Direction);
+    align-items: center;
+    background: var(--fdSplitter_Resizer_Background);
+    border: var(--fdSplitter_Resizer_Border);
+    border-radius: 0.5rem;
+    cursor: var(--fdSplitter_Resizer_Cursor);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: var(--fdSplitter_Resizer_Flex_Direction);
+    gap: var(--fdSplitter_Resizer_Gap);
+    height: var(--fdSplitter_Resizer_Height);
+    justify-content: center;
+    overflow: visible;
+    width: var(--fdSplitter_Resizer_Width);
+    position: relative;
+}
+
+.fd-splitter__resizer--translucent {
+    --fdSplitter_Resizer_Background: var(--sapGroup_ContentBackground);
+}
+
+.fd-splitter__resizer--solid {
+    --fdSplitter_Resizer_Background: var(--sapContent_ForegroundColor);
+}
+
+.fd-splitter__resizer.is-active,
+.fd-splitter__resizer:active {
+    --fdSplitter_Resizer_Before_Width: 100%;
+    --fdSplitter_Resizer_Before_Background: var(--sapGroup_TitleBorderColor);
+    --fdSplitter_Resizer_After_Width: 100%;
+    --fdSplitter_Resizer_After_Background: var(--sapGroup_TitleBorderColor);
+}
+
+.fd-splitter__resizer.is-focus,
+.fd-splitter__resizer:focus {
+    --fdSplitter_Resizer_Before_Background: linear-gradient(to left, var(--sapContent_FocusColor), transparent);
+    --fdSplitter_Resizer_After_Background: linear-gradient(to right, var(--sapContent_FocusColor), transparent);
+    z-index: 5;
+}
+
+.fd-splitter__resizer.is-focus.is-active,
+.fd-splitter__resizer.is-focus:active,
+.fd-splitter__resizer:focus.is-active,
+.fd-splitter__resizer:focus:active {
+    --fdSplitter_Resizer_Before_Width: 100%;
+    --fdSplitter_Resizer_Before_Background: var(--sapGroup_TitleBorderColor);
+    --fdSplitter_Resizer_After_Width: 100%;
+    --fdSplitter_Resizer_After_Background: var(--sapGroup_TitleBorderColor);
+}
+
+.fd-splitter__resizer-decoration-before {
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    -webkit-transition: all 0.1s ease-in;
+    background: var(--fdSplitter_Resizer_Before_Background);
+    border-radius: var(--fdSplitter_Resizer_Before_Border_Radius);
+    height: var(--fdSplitter_Resizer_Before_Height);
+    min-width: var(--fdSplitter_Resizer_Before_Width);
+    order: 1;
+    transition: all 0.1s ease-in;
+}
+
+.fd-splitter__resizer-decoration-after {
+    -webkit-box-ordinal-group: 4;
+    -ms-flex-order: 3;
+    -webkit-transition: all 0.1s ease-in;
+    background: var(--fdSplitter_Resizer_After_Background);
+    border-radius: var(--fdSplitter_Resizer_After_Border_Radius);
+    height: var(--fdSplitter_Resizer_After_Height);
+    min-width: var(--fdSplitter_Resizer_After_Width);
+    order: 3;
+    transition: all 0.1s ease-in;
+}
+
+.fd-splitter .fd-splitter__resizer-grip {
+    -webkit-box-ordinal-group: 3;
+    -ms-flex-order: 2;
+    cursor: var(--fdSplitter_Resizer_Grip_Cursor);
+    order: 2;
+    position: absolute;
+}
+
+.fd-splitter__pagination {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    height: var(--fdSplitter_Pagination_Container_Height);
+    justify-content: center;
+    width: 100%;
+}
+
+.fd-splitter__pagination,
+.fd-splitter__pagination-item-dot:before {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.fd-splitter__pagination-item-dot:before {
+    content: var(--fdSplitter_Pagination_Dot_Value);
+    font-family: SAP-icons-TNT;
+    font-size: 0.75rem;
+    line-height: 0.75rem;
+}
+
+.fd-splitter__pagination-item--active {
+    --fdSplitter_Pagination_Dot_Value: '';
+}
+
+.fd-splitter[class*='-compact'],
+.fd-splitter[class*='-condensed'],
+[class*='-compact'] .fd-splitter:not([class*='-cozy']),
+[class*='-condensed'] .fd-splitter:not([class*='-cozy']) {
+    --fdSplitter_Resizer_Gap: 1.625rem;
+    --fdSplitter_Pagination_Container_Height: 1.625rem;
+}
