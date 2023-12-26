@@ -1,3 +1,12 @@
+## [0.40.5](https://github.com/SAP/fundamental-ngx/compare/v0.40.4...v0.40.5) (2023-12-26)
+
+
+### Bug Fixes
+
+* **core:** first forced item case ([#11141](https://github.com/SAP/fundamental-ngx/issues/11141)) ([6484506](https://github.com/SAP/fundamental-ngx/commit/648450619a4b3fadfb8eddc4049d10656c4a0cbf))
+
+
+
 ## [0.40.4](https://github.com/SAP/fundamental-ngx/compare/v0.40.3...v0.40.4) (2023-06-14)
 
 
