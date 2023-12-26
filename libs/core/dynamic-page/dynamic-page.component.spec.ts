@@ -70,18 +70,18 @@ describe('DynamicPageComponent default values', () => {
         fixture.detectChanges();
         element.dispatchEvent(new Event('scroll'));
         tick(15);
-        expect((<any>dynamicPageComponent)._dynamicPageService.collapsed.value).toBe(true);
+        expect((<any>dynamicPageComponent)._dynamicPageService.collapsed()).toBe(true);
     }));
 
     it('should not collapse on scroll content, when pinned', fakeAsync(() => {
         fixture.detectChanges();
-        (<any>dynamicPageComponent)._dynamicPageService.pinned.next(true);
+        (<any>dynamicPageComponent)._dynamicPageService.pinned.set(true);
         const element = dynamicPageComponent._contentComponent.first.elementRef.nativeElement;
         element.scrollTop = 1000;
         fixture.detectChanges();
         element.dispatchEvent(new Event('scroll'));
         tick(15);
-        expect((<any>dynamicPageComponent)._dynamicPageService.collapsed.value).toBe(false);
+        expect((<any>dynamicPageComponent)._dynamicPageService.collapsed()).toBe(false);
     }));
 
     it('should handle collapse', () => {

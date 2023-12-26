@@ -1,6 +1,5 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -12,9 +11,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { distinctUntilChanged } from 'rxjs/operators';
 
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FD_LANGUAGE, FdTranslatePipe, resolveTranslationSignalFn } from '@fundamental-ngx/i18n';
@@ -58,11 +55,12 @@ export class DynamicPageSubheaderComponent {
      */
     @Input()
     set collapsed(collapsed: boolean) {
-        this._handleCollapsedChange(collapsed);
+        this._dynamicPageService.collapsed.set(collapsed);
+        this._dynamicPageService.subheaderVisibilityChange.next();
     }
 
     get collapsed(): boolean {
-        return this._collapsed;
+        return this._dynamicPageService.collapsed();
     }
 
     /**
@@ -167,14 +165,7 @@ export class DynamicPageSubheaderComponent {
     private _defaultUnpinLabel = this._resolveTranslationSignal('coreDynamicPage.unpinLabel');
 
     /** @hidden */
-    constructor(
-        private _cd: ChangeDetectorRef,
-        private _dynamicPageService: DynamicPageService
-    ) {
-        this._dynamicPageService.collapsed
-            .pipe(takeUntilDestroyed(), distinctUntilChanged())
-            .subscribe((collapsed) => this._handleCollapsedChange(collapsed));
-    }
+    constructor(readonly _dynamicPageService: DynamicPageService) {}
 
     /**
      * toggles the state of the header and
@@ -182,7 +173,8 @@ export class DynamicPageSubheaderComponent {
      */
     toggleCollapse(): void {
         this._pinned = false;
-        this._handleCollapsedChange(!this._collapsed);
+        this.collapsed = !this.collapsed;
+        this.collapsedChange.emit(this._collapsed);
     }
 
     /**
@@ -191,19 +183,6 @@ export class DynamicPageSubheaderComponent {
      */
     togglePinned(): void {
         this._pinned = !this._pinned;
-        this._dynamicPageService.pinned.next(this._pinned);
-    }
-
-    /** @hidden */
-    private _handleCollapsedChange(collapsed: boolean): void {
-        if (collapsed === this._collapsed) {
-            return;
-        }
-
-        this._collapsed = collapsed;
-        this._dynamicPageService.collapsed.next(collapsed);
-        this.collapsedChange.emit(this._collapsed);
-        this._cd.detectChanges();
-        this._dynamicPageService.subheaderVisibilityChange.next();
+        this._dynamicPageService.pinned.set(this._pinned);
     }
 }

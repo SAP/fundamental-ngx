@@ -91,9 +91,6 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         return this._size;
     }
 
-    /** @hidden */
-    _size: DynamicPageResponsiveSize = 'extra-large';
-
     /** Offset in PX
      * Should be added, when there is something else at the bottom and dynamic page is not expanded to bottom's corners
      */
@@ -133,6 +130,9 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     @ViewChild(ScrollbarDirective)
     _scrollbar: ScrollbarDirective;
+
+    /** @hidden */
+    _size: DynamicPageResponsiveSize = 'extra-large';
 
     /** @hidden */
     _headerCollapsible = true;
@@ -251,7 +251,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
             return;
         }
         const dynamicPageWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
-        this._dynamicPageService.pixelsSizeChanged.next(dynamicPageWidth);
+        this._dynamicPageService.pixelsSizeChanged.set(dynamicPageWidth);
         const size = dynamicPageWidthToSize(dynamicPageWidth);
 
         if (size !== this.size) {
@@ -268,9 +268,9 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
                 .pipe(debounceTime(10), takeUntil(this._onDestroy$))
                 .subscribe(() => {
                     const collapse =
-                        !this._dynamicPageService.pinned.value &&
+                        !this._dynamicPageService.pinned() &&
                         (element.scrollTop > 0 || element.scrollHeight <= element.clientHeight);
-                    this._dynamicPageService.collapsed.next(collapse);
+                    this._dynamicPageService.collapsed.set(collapse);
                 });
         }
     }
