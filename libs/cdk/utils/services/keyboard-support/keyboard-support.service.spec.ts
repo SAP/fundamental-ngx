@@ -3,6 +3,7 @@ import { KeyboardSupportItemInterface } from '../../interfaces/keyboard-support-
 import { EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { TestBed } from '@angular/core/testing';
 
 class MockKeyboardListElement implements KeyboardSupportItemInterface {
     keyDown = new EventEmitter<KeyboardEvent>();
@@ -17,8 +18,9 @@ describe('MenuKeyboardService', () => {
     let items: MockKeyboardListElement[];
 
     beforeEach(() => {
+        TestBed.configureTestingModule({ providers: [KeyboardSupportService] });
         items = [new MockKeyboardListElement(), new MockKeyboardListElement(), new MockKeyboardListElement()];
-        service = new KeyboardSupportService();
+        service = TestBed.inject(KeyboardSupportService);
         menuItems = {
             changes: new Subject(),
             length: items.length,
