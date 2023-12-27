@@ -4,7 +4,6 @@ import {
     EventEmitter,
     HostBinding,
     Input,
-    OnDestroy,
     Optional,
     Output,
     Renderer2,
@@ -49,7 +48,7 @@ import { NotificationGroupBaseDirective } from '../notification-utils/notificati
     standalone: true,
     imports: [ButtonComponent, ContentDensityDirective, IconComponent]
 })
-export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirective implements OnDestroy {
+export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirective {
     /** @hidden */
     @HostBinding('class.fd-notification__group-header')
     fdNotificationGroupHeaderClass = true;

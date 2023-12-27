@@ -5,11 +5,12 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     HostBinding,
+    inject,
     Inject,
     Input,
-    OnDestroy,
     Optional,
     QueryList,
     Renderer2,
@@ -33,9 +34,10 @@ import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { asyncScheduler, fromEvent, Observable, startWith, Subject } from 'rxjs';
-import { debounceTime, map, observeOn, takeUntil } from 'rxjs/operators';
+import { asyncScheduler, fromEvent, Observable, startWith } from 'rxjs';
+import { debounceTime, map, observeOn } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-dynamic-page',
@@ -47,7 +49,7 @@ import { debounceTime, map, observeOn, takeUntil } from 'rxjs/operators';
     standalone: true,
     imports: [CdkScrollable, ScrollbarDirective]
 })
-export class DynamicPageComponent implements AfterViewInit, OnDestroy {
+export class DynamicPageComponent implements AfterViewInit {
     /** Whether DynamicPage should snap on scroll */
     @Input()
     disableSnapOnScroll = false;
@@ -138,7 +140,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     _headerCollapsible = true;
 
     /** @hidden **/
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -170,12 +172,6 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         setTimeout(() => this._setContainerPositions());
 
         this._cd.detectChanges();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /** toggle the visibility of the header on click of title area. */
@@ -215,7 +211,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
      * - recheck size depending on width of DynamicPage
      */
     private _listenToLayoutChange(): void {
-        this._columnLayout.layoutChange.pipe(debounceTime(50), takeUntil(this._onDestroy$)).subscribe(() => {
+        this._columnLayout.layoutChange.pipe(debounceTime(50), takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
             this.refreshSize();
             this._sizeChangeHandle();
         });
@@ -232,7 +228,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _listenOnCollapse(): void {
         this._dynamicPageService.subheaderVisibilityChange
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._onDestroy$))
             .subscribe(() => this._setContainerPositions());
     }
 
@@ -265,7 +261,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         const element = this._getScrollElement();
         if (element) {
             fromEvent(element, 'scroll')
-                .pipe(debounceTime(10), takeUntil(this._onDestroy$))
+                .pipe(debounceTime(10), takeUntilDestroyed(this._onDestroy$))
                 .subscribe(() => {
                     const collapse =
                         !this._dynamicPageService.pinned() &&
@@ -279,7 +275,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     private _listenOnResize(): void {
         const listener = this._dynamicPageWrapper ? this._listenToWrapperResize() : this._listenToWindowResize();
 
-        listener.pipe(debounceTime(100), takeUntil(this._onDestroy$)).subscribe(() => {
+        listener.pipe(debounceTime(100), takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
             this._setContainerPositions();
             this._sizeChangeHandle();
         });
@@ -326,7 +322,11 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _setContentFooterSpacer(): void {
         this._contentComponent.changes
-            .pipe(startWith(this._contentComponent.toArray()), observeOn(asyncScheduler), takeUntil(this._onDestroy$))
+            .pipe(
+                startWith(this._contentComponent.toArray()),
+                observeOn(asyncScheduler),
+                takeUntilDestroyed(this._onDestroy$)
+            )
             .subscribe((components) => {
                 components.forEach((content, index) => {
                     /** show spacer when:

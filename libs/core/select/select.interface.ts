@@ -1,8 +1,7 @@
-import { ElementRef, EventEmitter, InjectionToken, QueryList, Signal } from '@angular/core';
+import { DestroyRef, ElementRef, EventEmitter, InjectionToken, QueryList, Signal } from '@angular/core';
 
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MobileMode, MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { Subject } from 'rxjs';
 import { OptionComponent } from './option/option.component';
 
 export const SELECT_COMPONENT = new InjectionToken<SelectInterface>('SelectInterface');
@@ -17,7 +16,7 @@ export interface SelectInterface<TOption = any> extends MobileMode {
     selected: OptionComponent;
     mobileConfig: MobileModeConfig;
     _options: QueryList<TOption>;
-    _destroy: Subject<void>;
+    _destroy: DestroyRef;
     _optionPanel: ElementRef;
     _isOpen: boolean;
     _calculatedMaxHeight: number;

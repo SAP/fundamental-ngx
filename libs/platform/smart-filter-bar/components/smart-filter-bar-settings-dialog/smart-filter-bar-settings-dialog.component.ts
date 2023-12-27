@@ -3,14 +3,15 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     Inject,
-    OnDestroy,
     ViewChild,
     ViewEncapsulation,
+    inject,
     signal
 } from '@angular/core';
-import { Observable, Subject, Subscription, asyncScheduler, firstValueFrom } from 'rxjs';
-import { observeOn, takeUntil } from 'rxjs/operators';
+import { Observable, Subscription, asyncScheduler, firstValueFrom } from 'rxjs';
+import { observeOn } from 'rxjs/operators';
 
 import {
     DialogBodyComponent,
@@ -36,6 +37,7 @@ import {
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     BarElementDirective,
@@ -103,7 +105,7 @@ import { SmartFilterBarOptionsDataProvider } from './data-provider';
         FdTranslatePipe
     ]
 })
-export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterViewInit, OnDestroy {
+export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterViewInit {
     /**
      * Table instance
      */
@@ -145,7 +147,7 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
     private readonly _translationResolver = new TranslationResolver();
@@ -172,7 +174,7 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
         this._sourceSubscription?.unsubscribe();
         this._sourceSubscription = this.source
             .open()
-            .pipe(observeOn(asyncScheduler), takeUntil(this._onDestroy$))
+            .pipe(observeOn(asyncScheduler), takeUntilDestroyed(this._onDestroy$))
             .subscribe((items) => {
                 items.forEach((field, index) => {
                     if (field.visible) {
@@ -180,12 +182,6 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
                     }
                 });
             });
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /**

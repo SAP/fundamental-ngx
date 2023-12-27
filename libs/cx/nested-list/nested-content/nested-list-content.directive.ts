@@ -2,18 +2,17 @@ import {
     AfterContentInit,
     ChangeDetectorRef,
     ContentChild,
+    DestroyRef,
     Directive,
     ElementRef,
     EventEmitter,
     HostBinding,
     HostListener,
     Input,
-    OnDestroy,
     Output,
-    Renderer2
+    inject
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedLinkComponent } from '../nested-link/nested-link.component';
 import { NestedListExpandIconComponent } from '../nested-list-directives';
@@ -24,7 +23,7 @@ import { NestedListExpandIconComponent } from '../nested-list-directives';
         tabindex: '0'
     }
 })
-export class NestedListContentDirective implements AfterContentInit, OnDestroy {
+export class NestedListContentDirective implements AfterContentInit {
     /** Whether this element is selected*/
     @Input()
     @HostBinding('class.is-selected')
@@ -69,13 +68,12 @@ export class NestedListContentDirective implements AfterContentInit, OnDestroy {
     @ContentChild(NestedListExpandIconComponent)
     nestedExpandIcon: NestedListExpandIconComponent;
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly onDestroy$: Subject<void> = new Subject<void>();
+    /** @hidden */
+    private readonly onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
     constructor(
         public changeDetRef: ChangeDetectorRef,
-        private _renderer: Renderer2,
         private _elementRef: ElementRef,
         private _itemService: NestedItemService
     ) {}
@@ -84,12 +82,6 @@ export class NestedListContentDirective implements AfterContentInit, OnDestroy {
     ngAfterContentInit(): void {
         this._makeLinkUnFocusable();
         this._setFocusSubscription();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this.onDestroy$.next();
-        this.onDestroy$.complete();
     }
 
     /** Keyboard Event Handler */
@@ -126,7 +118,7 @@ export class NestedListContentDirective implements AfterContentInit, OnDestroy {
 
     /** Add subscription for child focusing */
     private _setFocusSubscription(): void {
-        this._itemService.focus.pipe(takeUntil(this.onDestroy$)).subscribe(() => this.focus());
+        this._itemService.focus.pipe(takeUntilDestroyed(this.onDestroy$)).subscribe(() => this.focus());
     }
 
     /** Hide link child element from tab key */

@@ -5,22 +5,22 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    DestroyRef,
     EventEmitter,
     Inject,
     Input,
-    OnDestroy,
     OnInit,
     Optional,
     Output,
     TemplateRef,
     ViewChild,
     ViewContainerRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PANE_AUTO_SIZE } from '../constants';
 
 let paneUniqueId = 0;
@@ -33,7 +33,7 @@ let paneUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
-export class SplitterSplitPaneComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SplitterSplitPaneComponent implements OnInit, AfterViewInit {
     /** Size (height in vertical orientation, width in horizontal orientation) of the pane. */
     @Input()
     set size(size: string) {
@@ -85,7 +85,7 @@ export class SplitterSplitPaneComponent implements OnInit, AfterViewInit, OnDest
     private _isOnCanvas = true;
 
     /** @hidden */
-    private _unsubscribe$ = new Subject<void>();
+    private _destroy$ = inject(DestroyRef);
 
     /** Returns if the pane is on canvas. */
     get isOnCanvas(): boolean {
@@ -120,12 +120,6 @@ export class SplitterSplitPaneComponent implements OnInit, AfterViewInit, OnDest
         this._listenToResize();
     }
 
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._unsubscribe$.next();
-        this._unsubscribe$.complete();
-    }
-
     /** Hide pane from the canvas. */
     hideFromCanvas(): void {
         if (!this.isOnCanvas) {
@@ -156,7 +150,7 @@ export class SplitterSplitPaneComponent implements OnInit, AfterViewInit, OnDest
 
         this._viewportRuler
             .change(10)
-            .pipe(takeUntil(this._unsubscribe$))
+            .pipe(takeUntilDestroyed(this._destroy$))
             .subscribe(() => this._processPaneOnCanvas());
     }
 

@@ -1,10 +1,11 @@
-import { ElementRef, Injectable, OnDestroy, Optional, computed } from '@angular/core';
+import { DestroyRef, ElementRef, Injectable, OnDestroy, Optional, computed, inject } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, Subscription, fromEvent } from 'rxjs';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { TABLE_COLUMN_MIN_WIDTH } from '../constants';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Table } from '../table';
 import { TableScrollDispatcherService } from './table-scroll-dispatcher.service';
 
@@ -61,7 +62,7 @@ export class TableColumnResizeService implements OnDestroy {
     private _markForCheck = new Subject<void>();
 
     /** @hidden */
-    private _destroyed = new Subject<void>();
+    private _destroyed = inject(DestroyRef);
 
     /** @hidden */
     private _resizerMoveSubscription = new Subscription();
@@ -108,7 +109,7 @@ export class TableColumnResizeService implements OnDestroy {
     ) {
         this._tableScrollDispatcherService
             ?.horizontallyScrolled()
-            .pipe(takeUntil(this._destroyed))
+            .pipe(takeUntilDestroyed(this._destroyed))
             .subscribe((scrollable) => (this._scrollLeft = scrollable.getScrollLeft()));
     }
 
@@ -116,9 +117,6 @@ export class TableColumnResizeService implements OnDestroy {
     ngOnDestroy(): void {
         this._resizeInProgress = false;
         this.resizeInProgress$.next(false);
-
-        this._destroyed.next();
-        this._destroyed.complete();
 
         this._resizerMoveSubscription.unsubscribe();
     }

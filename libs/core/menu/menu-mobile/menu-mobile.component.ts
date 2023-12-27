@@ -7,7 +7,6 @@ import {
     ElementRef,
     Inject,
     NgZone,
-    OnDestroy,
     OnInit,
     Optional,
     TemplateRef,
@@ -15,6 +14,7 @@ import {
     ViewEncapsulation,
     computed
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InitialFocusDirective, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -28,7 +28,7 @@ import {
 } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleModule } from '@fundamental-ngx/core/title';
-import { startWith, take, takeUntil } from 'rxjs/operators';
+import { startWith, take } from 'rxjs/operators';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MENU_COMPONENT, MenuInterface } from '../menu.interface';
 import { MenuService } from '../services/menu.service';
@@ -53,7 +53,7 @@ import { MenuService } from '../services/menu.service';
         AsyncPipe
     ]
 })
-export class MenuMobileComponent extends MobileModeBase<MenuInterface> implements OnInit, OnDestroy {
+export class MenuMobileComponent extends MobileModeBase<MenuInterface> implements OnInit {
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
@@ -102,11 +102,6 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
         this._listenOnMenuOpenChange();
     }
 
-    /** @hidden */
-    ngOnDestroy(): void {
-        super.onDestroy();
-    }
-
     /** Closes the Dialog and Menu component */
     close(): void {
         this.dialogRef.close();
@@ -140,7 +135,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
             .map((node) => node.item)
             .filter((v): v is MenuItemComponent => !!v);
         this._component.activePath
-            .pipe(takeUntil(this._onDestroy$), startWith(initialItemPath))
+            .pipe(startWith(initialItemPath), takeUntilDestroyed(this._onDestroy$))
             .subscribe((items) => this._setMenuView(items));
     }
 
@@ -171,7 +166,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     /** @hidden Opens/closes the Dialog based on Menu isOpenChange events */
     private _listenOnMenuOpenChange(): void {
         this._component.isOpenChange
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._onDestroy$))
             .subscribe((isOpen) => (isOpen ? this._openDialog() : this.dialogRef.close()));
     }
 

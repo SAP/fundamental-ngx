@@ -14,6 +14,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     Directive,
     ElementRef,
     EventEmitter,
@@ -29,14 +30,16 @@ import {
     ViewChild,
     ViewChildren,
     ViewEncapsulation,
-    computed
+    computed,
+    inject
 } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
-import { debounceTime, filter, skip, takeUntil } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { debounceTime, filter, skip } from 'rxjs/operators';
 
 import { Direction } from '@angular/cdk/bidi';
 import { NumberInput, coerceNumberProperty } from '@angular/cdk/coercion';
 import { NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     DragAndDropModule,
     Nullable,
@@ -227,13 +230,23 @@ export class FixedCardLayoutComponent implements AfterViewInit, OnChanges, OnDes
     private _cardsSizeChangeSubscription = new Subscription();
 
     /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
     constructor(
         private readonly _changeDetector: ChangeDetectorRef,
         @Optional() private readonly _rtlService: RtlService
     ) {}
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    handleKeydown(event: KeyboardEvent): void {
+        event.stopImmediatePropagation();
+
+        if (this._keyboardEventsManager) {
+            this._keyboardEventsManager.onKeydown(event);
+        }
+    }
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -262,19 +275,6 @@ export class FixedCardLayoutComponent implements AfterViewInit, OnChanges, OnDes
     ngOnDestroy(): void {
         this._cardsSizeChangeSubscription.unsubscribe();
         this._keyboardEventsManager?.destroy();
-
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
-    }
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    handleKeydown(event: KeyboardEvent): void {
-        event.stopImmediatePropagation();
-
-        if (this._keyboardEventsManager) {
-            this._keyboardEventsManager.onKeydown(event);
-        }
     }
 
     /** Distribute cards on window resize */
@@ -429,7 +429,7 @@ export class FixedCardLayoutComponent implements AfterViewInit, OnChanges, OnDes
                 filter(
                     (entries) => this._listenResize && !!(entries[0].contentRect.height || entries[0].contentRect.width)
                 ),
-                takeUntil(this._onDestroy$)
+                takeUntilDestroyed(this._onDestroy$)
             )
             .subscribe(() => this.updateLayout());
     }

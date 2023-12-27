@@ -2,22 +2,22 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     Inject,
     Input,
     OnChanges,
-    OnDestroy,
     OnInit,
     Output,
     SimpleChanges,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarService } from '../../calendar.service';
@@ -37,7 +37,7 @@ import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalend
     standalone: true,
     imports: [ButtonComponent, FdTranslatePipe]
 })
-export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy, OnChanges, FocusableCalendarView {
+export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnChanges, FocusableCalendarView {
     /** Parameter used in id of years used for help with focusing on the correct element during keyboard navigation. */
     @Input()
     id: string;
@@ -123,7 +123,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
     private _initiated = false;
@@ -150,7 +150,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
 
         this._constructYearsGrid();
 
-        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
             this._constructYearsGrid();
             this._changeDetectorRef.markForCheck();
         });
@@ -167,12 +167,6 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
         ) {
             this._constructYearsGrid();
         }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /** Method that sends the year to the parent component when it is clicked. */
@@ -400,21 +394,21 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
 
         this._calendarService.focusEscapeFunction = this.focusEscapeFunction;
 
-        this._calendarService.onFocusIdChange.pipe(takeUntil(this._onDestroy$)).subscribe((index) => {
+        this._calendarService.onFocusIdChange.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe((index) => {
             this._focusOnCellByIndex(index);
         });
 
         this._calendarService.onKeySelect
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._onDestroy$))
             .subscribe((index) => this.selectYear(this._getYearsList()[index]));
 
-        this._calendarService.onListStartApproach.pipe(takeUntil(this._onDestroy$)).subscribe((index) => {
+        this._calendarService.onListStartApproach.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe((index) => {
             this.loadPreviousYearsList();
             this._changeDetectorRef.detectChanges();
             this._focusOnCellByIndex(index);
         });
 
-        this._calendarService.onListEndApproach.pipe(takeUntil(this._onDestroy$)).subscribe((index) => {
+        this._calendarService.onListEndApproach.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe((index) => {
             this.loadNextYearsList();
             this._changeDetectorRef.detectChanges();
             this._focusOnCellByIndex(index);

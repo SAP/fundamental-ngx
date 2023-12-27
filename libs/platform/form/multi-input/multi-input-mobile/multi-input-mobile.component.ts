@@ -3,17 +3,17 @@ import {
     Component,
     ElementRef,
     Inject,
-    OnDestroy,
     OnInit,
     Optional,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
@@ -35,10 +35,7 @@ import { MULTIINPUT_COMPONENT, PlatformMultiInputInterface } from '../multi-inpu
     standalone: true,
     imports: [DialogModule, TemplateDirective, BarModule, NgTemplateOutlet, CdkScrollable, ScrollbarDirective]
 })
-export class PlatformMultiInputMobileComponent
-    extends MobileModeBase<PlatformMultiInputInterface>
-    implements OnInit, OnDestroy
-{
+export class PlatformMultiInputMobileComponent extends MobileModeBase<PlatformMultiInputInterface> implements OnInit {
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
@@ -71,11 +68,6 @@ export class PlatformMultiInputMobileComponent
     }
 
     /** @hidden */
-    ngOnDestroy(): void {
-        super.onDestroy();
-    }
-
-    /** @hidden */
     _handleApprove(): void {
         this.dialogRef.close();
         this._component._dialogApprove();
@@ -90,7 +82,7 @@ export class PlatformMultiInputMobileComponent
     /** @hidden */
     private _listenOnMultiInputOpenChange(): void {
         this._component.openChange
-            .pipe(distinctUntilChanged(), takeUntil(this._onDestroy$))
+            .pipe(distinctUntilChanged(), takeUntilDestroyed(this._onDestroy$))
             .subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 

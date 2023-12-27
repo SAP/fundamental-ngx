@@ -1,8 +1,8 @@
 import { DOCUMENT } from '@angular/common';
-import { ElementRef, EventEmitter, Inject, Injectable, OnDestroy, QueryList } from '@angular/core';
+import { DestroyRef, ElementRef, EventEmitter, Inject, Injectable, OnDestroy, QueryList, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { Observable, Subject, fromEvent, merge } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, fromEvent, merge } from 'rxjs';
 
 export const DEFAULT_TRANSITION_DURATION = '150ms';
 
@@ -92,16 +92,13 @@ export class CarouselService implements OnDestroy {
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
     constructor(@Inject(DOCUMENT) private readonly _document: Document | null) {}
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
-
         this.activeChange$.complete();
         this.dragStateChange$.complete();
     }
@@ -358,7 +355,7 @@ export class CarouselService implements OnDestroy {
     ): void {
         merge(events.map((e) => fromEvent<MouseEvent | TouchEvent>(element, e, { passive: true }))).forEach(
             (evt: Observable<MouseEvent | TouchEvent>) => {
-                evt.pipe(takeUntil(this._onDestroy$)).subscribe((event) => {
+                evt.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe((event) => {
                     callback(event);
                 });
             }

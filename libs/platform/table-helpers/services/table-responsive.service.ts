@@ -1,7 +1,8 @@
-import { ElementRef, Inject, Injectable, OnDestroy } from '@angular/core';
+import { DestroyRef, ElementRef, Inject, Injectable, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { resizeObservable } from '@fundamental-ngx/cdk/utils';
-import { Subject, Subscription } from 'rxjs';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { FdpColumnResponsiveState } from '../interfaces/column-responsive-state.interface';
 import { Table } from '../table';
 import { TableColumn } from '../table-column';
@@ -14,12 +15,12 @@ export interface FdpTableBreakpoint {
 }
 
 @Injectable()
-export class TableResponsiveService implements OnDestroy {
+export class TableResponsiveService {
     /** @hidden */
     private readonly _responsiveBreakpoints = new Map<TableColumn, FdpTableBreakpoint[]>();
 
     /** @hidden */
-    private readonly _onDestroy$ = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
     private _resizeSubscription: Subscription | undefined;
@@ -41,13 +42,6 @@ export class TableResponsiveService implements OnDestroy {
 
         this._listenToTableResize();
     }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
-    }
-
     /**
      * @hidden
      * Transforms plain breakpoints into a list with minimal/maximal element width with it's visibility state.
@@ -77,7 +71,7 @@ export class TableResponsiveService implements OnDestroy {
         this._resizeSubscription?.unsubscribe();
 
         this._resizeSubscription = resizeObservable(this._elmRef.nativeElement)
-            .pipe(debounceTime(20), takeUntil(this._onDestroy$))
+            .pipe(debounceTime(20), takeUntilDestroyed(this._onDestroy$))
             .subscribe(() => {
                 this._processResponsiveColumns();
             });

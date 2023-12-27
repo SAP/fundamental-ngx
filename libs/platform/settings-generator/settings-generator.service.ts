@@ -1,21 +1,10 @@
-import { ElementRef, Injectable, OnDestroy, inject } from '@angular/core';
+import { DestroyRef, ElementRef, Injectable, OnDestroy, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 import { MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
 import { set } from 'lodash-es';
-import {
-    BehaviorSubject,
-    Observable,
-    Subject,
-    combineLatest,
-    delay,
-    filter,
-    map,
-    switchMap,
-    take,
-    takeUntil,
-    tap
-} from 'rxjs';
+import { BehaviorSubject, Observable, Subject, combineLatest, delay, filter, map, switchMap, take, tap } from 'rxjs';
 import { SettingsModel } from './models/settings.model';
 
 export type SettingsGeneratorReturnValue = Record<string, unknown>;
@@ -49,7 +38,7 @@ export class SettingsGeneratorService implements OnDestroy {
     });
 
     /** @hidden */
-    private readonly _destroy$ = new Subject<void>();
+    private readonly _destroy$ = inject(DestroyRef);
 
     /** @hidden */
     constructor() {
@@ -64,7 +53,7 @@ export class SettingsGeneratorService implements OnDestroy {
             .pipe(
                 filter((loading) => !loading),
                 take(1),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroy$)
             )
             .subscribe(() => {
                 this._messagePopover?.addForms(formGenerator.formGroup);
@@ -92,14 +81,14 @@ export class SettingsGeneratorService implements OnDestroy {
                 filter((status) => status.success),
                 take(1),
                 map((result) => result.value as DynamicFormValue),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroy$)
             );
         });
 
         return combineLatest(joinedEvents).pipe(
             map((result) => Object.entries(result).reduce((a, b) => set(a, b[0], b[1]), {})),
             take(1),
-            takeUntil(this._destroy$)
+            takeUntilDestroyed(this._destroy$)
         );
     }
 
@@ -114,8 +103,6 @@ export class SettingsGeneratorService implements OnDestroy {
     /** @hidden */
     ngOnDestroy(): void {
         this._formGenerators.clear();
-        this._destroy$.next();
-        this._destroy$.complete();
     }
 
     /**
@@ -127,7 +114,7 @@ export class SettingsGeneratorService implements OnDestroy {
             ?.pipe(
                 switchMap((messagePopover) => messagePopover.focusItem),
                 filter((entry) => !!entry.formField),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroy$)
             )
             .subscribe((entry) => {
                 this._formGenerators.forEach((formGenerator, path) => {

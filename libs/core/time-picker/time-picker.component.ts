@@ -3,9 +3,11 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     forwardRef,
+    inject,
     Inject,
     Input,
     OnChanges,
@@ -19,8 +21,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { FormItemControl, PopoverFormMessageService, registerFormItemControl } from '@fundamental-ngx/core/form';
@@ -30,6 +31,7 @@ import { Placement, ValueStateAriaMessageService } from '@fundamental-ngx/core/s
 import { TimeComponent } from '@fundamental-ngx/core/time';
 
 import { NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormMessageComponent } from '@fundamental-ngx/core/form';
@@ -329,7 +331,7 @@ export class TimePickerComponent<D>
     private _state: FormStates | null = null;
 
     /** @hidden */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -367,7 +369,7 @@ export class TimePickerComponent<D>
         this._calculateTimeOptions();
         this._formatTimeInputField();
 
-        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
             this._calculateTimeOptions();
             this._formatTimeInputField();
             this._changeDetectorRef.detectChanges();
@@ -391,8 +393,6 @@ export class TimePickerComponent<D>
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /** @hidden */

@@ -1,6 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    DestroyRef,
     EventEmitter,
     Input,
     OnChanges,
@@ -10,7 +11,8 @@ import {
     QueryList,
     SimpleChanges,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
@@ -23,7 +25,7 @@ import {
 } from '@fundamental-ngx/platform/form';
 import { isFunction } from '@fundamental-ngx/platform/shared';
 import { Subject } from 'rxjs';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 import { WizardStepForms, WizardStepSubmittedForms } from '../../interfaces/wizard-generator-forms.interface';
 import { WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
 import { WizardGeneratorStep } from '../../interfaces/wizard-step.interface';
@@ -33,6 +35,7 @@ import {
     WizardGeneratorService
 } from '../../wizard-generator.service';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 
 @Component({
@@ -114,7 +117,7 @@ export class WizardGeneratorStepComponent implements WizardGeneratorStep, OnInit
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -134,8 +137,6 @@ export class WizardGeneratorStepComponent implements WizardGeneratorStep, OnInit
      */
     ngOnDestroy(): void {
         this._wizardGeneratorService.removeWizardStepComponent(this.item.id);
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /** @hidden */
@@ -244,19 +245,21 @@ export class WizardGeneratorStepComponent implements WizardGeneratorStep, OnInit
                 const revalidateForms = strategies[WizardGeneratorRefreshStrategy.REVALIDATE_STEP_FORMS];
                 const refreshFormVisibility = strategies[WizardGeneratorRefreshStrategy.REFRESH_FORM_VISIBILITY];
 
-                control?.valueChanges.pipe(debounceTime(50), takeUntil(this._onDestroy$)).subscribe(async () => {
-                    if (refreshSteps) {
-                        await this._wizardGeneratorService.refreshStepVisibility();
-                    }
+                control?.valueChanges
+                    .pipe(debounceTime(50), takeUntilDestroyed(this._onDestroy$))
+                    .subscribe(async () => {
+                        if (refreshSteps) {
+                            await this._wizardGeneratorService.refreshStepVisibility();
+                        }
 
-                    if (revalidateForms?.length) {
-                        this._wizardGeneratorService.notifyStepsToRevalidateForms(revalidateForms);
-                    }
+                        if (revalidateForms?.length) {
+                            this._wizardGeneratorService.notifyStepsToRevalidateForms(revalidateForms);
+                        }
 
-                    if (refreshFormVisibility?.length) {
-                        await this._wizardGeneratorService.refreshFormsVisibility(refreshFormVisibility);
-                    }
-                });
+                        if (refreshFormVisibility?.length) {
+                            await this._wizardGeneratorService.refreshFormsVisibility(refreshFormVisibility);
+                        }
+                    });
             });
         }
     }

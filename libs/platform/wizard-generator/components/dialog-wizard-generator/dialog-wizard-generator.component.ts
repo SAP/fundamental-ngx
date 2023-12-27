@@ -8,10 +8,11 @@ import {
     inject
 } from '@angular/core';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -166,7 +167,7 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
         messageBoxRef.afterClosed
             .pipe(
                 filter((result) => result),
-                takeUntil(this._onDestroy$)
+                takeUntilDestroyed(this._onDestroy$)
             )
             .subscribe(() => {
                 this._dialogRef.dismiss();
@@ -185,7 +186,7 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
 
         const currentStepId = this._wizardGeneratorService.getCurrentStepId();
         this.submitStepForms(currentStepId)
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._onDestroy$))
             .subscribe(async (result) => {
                 if (result && Object.values(result).some((r) => !r.success)) {
                     return;

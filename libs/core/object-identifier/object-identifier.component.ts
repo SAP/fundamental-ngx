@@ -3,17 +3,18 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     HostBinding,
     Input,
-    OnDestroy,
     QueryList,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_LINK_COMPONENT } from '@fundamental-ngx/core/link';
-import { Subject } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { startWith } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-object-identifier',
@@ -33,7 +34,7 @@ import { startWith, takeUntil } from 'rxjs/operators';
     standalone: true,
     imports: []
 })
-export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy {
+export class ObjectIdentifierComponent implements AfterContentInit {
     /** Description text */
     @Input()
     description: Nullable<string>;
@@ -56,7 +57,7 @@ export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy {
     linkComponents: QueryList<ElementRef>;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -64,15 +65,9 @@ export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy {
     }
 
     /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
-    }
-
-    /** @hidden */
     private _listenOnLinkQueryChange(): void {
         this.linkComponents.changes
-            .pipe(takeUntil(this._onDestroy$), startWith(0))
+            .pipe(startWith(0), takeUntilDestroyed(this._onDestroy$))
             .subscribe(() => this.linkComponents.forEach((link) => this._addIdentifierClass(link)));
     }
 

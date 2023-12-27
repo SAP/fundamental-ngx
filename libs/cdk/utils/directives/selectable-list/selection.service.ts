@@ -1,8 +1,10 @@
 import { coerceArray } from '@angular/cdk/coercion';
-import { ChangeDetectorRef, Injectable, OnDestroy, QueryList } from '@angular/core';
+import { ChangeDetectorRef, DestroyRef, Injectable, QueryList, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import equal from 'fast-deep-equal';
 import { Observable, ReplaySubject, Subject, combineLatest, isObservable, merge, of, switchMap } from 'rxjs';
 import { distinctUntilChanged, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
+import { destroyObservable } from '../../helpers/destroy-observable';
 import { SelectComponentRootToken, SelectableListValueType } from './select-component-root.token';
 import { SelectableItemToken } from './selectable-item.token';
 
@@ -12,7 +14,7 @@ export type SelectionItemsList<ElementType extends Element, ValueType = ElementT
     | SelectableItemToken<ElementType, ValueType>[];
 
 @Injectable()
-export class SelectionService<ElementType extends Element, ValueType = ElementType> implements OnDestroy {
+export class SelectionService<ElementType extends Element, ValueType = ElementType> {
     /** @hidden */
     value$: Observable<SelectableListValueType<ValueType>>;
 
@@ -25,7 +27,7 @@ export class SelectionService<ElementType extends Element, ValueType = ElementTy
     /** @hidden */
     private _rootComponent!: SelectComponentRootToken<ElementType>;
     /** @hidden */
-    private _destroy$ = new Subject<void>();
+    private _destroy$ = inject(DestroyRef);
     /** @hidden */
     private _clear$ = new Subject<void>();
     /** @hidden */
@@ -39,7 +41,7 @@ export class SelectionService<ElementType extends Element, ValueType = ElementTy
             map((value) => (this._isMultipleMode ? value : [value[0]])),
             map((coerced: ValueType[]) => coerced.filter(Boolean))
         );
-        this._normalizedValue$.pipe(takeUntil(this._destroy$)).subscribe((val) => (this._value = val));
+        this._normalizedValue$.pipe(takeUntilDestroyed(this._destroy$)).subscribe((val) => (this._value = val));
         this.value$ = this._normalizedValue$.pipe(
             map((v) => this._getProperValues(v as SelectableListValueType<ElementType>)),
             shareReplay(1)
@@ -94,7 +96,7 @@ export class SelectionService<ElementType extends Element, ValueType = ElementTy
      * */
     listenToItemInteractions(): void {
         this.clear();
-        const unsubscribe$ = merge(this._destroy$, this._clear$);
+        const unsubscribe$ = merge(destroyObservable(this._destroy$), this._clear$);
         if (this._items$) {
             this._items$
                 .pipe(
@@ -128,11 +130,6 @@ export class SelectionService<ElementType extends Element, ValueType = ElementTy
                 )
                 .subscribe();
         }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._destroy$.next();
     }
 
     /** @hidden */

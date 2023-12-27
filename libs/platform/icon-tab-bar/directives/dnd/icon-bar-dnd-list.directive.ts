@@ -1,8 +1,9 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
-import { ReplaySubject, Subject } from 'rxjs';
+import { AfterViewInit, DestroyRef, Directive, ElementRef, Input, OnDestroy, inject } from '@angular/core';
+import { ReplaySubject } from 'rxjs';
 
 import { DragDrop, DragRef, DropListRef } from '@angular/cdk/drag-drop';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { debounceTime } from 'rxjs/operators';
 import { IconTabBarDndItem, IconTabBarDndList } from '../../interfaces/icon-tab-bar-item.interface';
 import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive';
 
@@ -27,7 +28,7 @@ export class IconBarDndListDirective implements IconTabBarDndList, AfterViewInit
     private _dropListRef: DropListRef;
 
     /** @hidden */
-    private readonly _onDestroy$ = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
     private _dragRefItems: DragRef[] = [];
@@ -53,14 +54,12 @@ export class IconBarDndListDirective implements IconTabBarDndList, AfterViewInit
         this._dndContainer.registerDndList(this);
 
         this._dndItems$
-            .pipe(debounceTime(100), takeUntil(this._onDestroy$))
+            .pipe(debounceTime(100), takeUntilDestroyed(this._onDestroy$))
             .subscribe(() => this._dropListRef.withItems(this._dragRefItems));
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
         this._dropListRef.dispose();
         this._dndContainer.removeDndList(this);
     }

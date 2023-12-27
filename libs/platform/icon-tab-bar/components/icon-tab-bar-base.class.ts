@@ -1,9 +1,11 @@
 import {
     AfterViewInit,
     ChangeDetectorRef,
+    DestroyRef,
     Directive,
     ElementRef,
     EventEmitter,
+    inject,
     Input,
     isDevMode,
     NgZone,
@@ -15,10 +17,10 @@ import {
     SimpleChanges,
     ViewChild
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, OverflowListDirective } from '@fundamental-ngx/cdk/utils';
 import { cloneDeep } from 'lodash-es';
 import { ICON_TAB_HIDDEN_CLASS_NAME, UNIQUE_KEY_SEPARATOR } from '../constants';
@@ -97,7 +99,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     private _densityMode: TabDestinyMode;
 
     /** @hidden */
-    private _onDestroy$ = new Subject<void>();
+    private _onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
     private _destroyed = false;
@@ -132,8 +134,6 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
         this._destroyed = true;
     }
 
@@ -271,7 +271,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @description trigger recalculation items, need to do it asynchronously after dom was rerendered
      */
     protected _triggerRecalculationVisibleItems(): void {
-        this._ngZone.onMicrotaskEmpty.pipe(take(1), takeUntil(this._onDestroy$)).subscribe(() => {
+        this._ngZone.onMicrotaskEmpty.pipe(take(1), takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
             if (this.overflowDirective && !this._destroyed) {
                 const extra = this.overflowDirective.getAmountOfExtraItems();
                 this._recalculateVisibleItems(extra);

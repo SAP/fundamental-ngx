@@ -2,24 +2,24 @@ import { ViewportRuler } from '@angular/cdk/overlay';
 import {
     AfterViewInit,
     ContentChildren,
+    DestroyRef,
     Directive,
     ElementRef,
     EventEmitter,
     Input,
     NgZone,
-    OnDestroy,
     Output,
-    QueryList
+    QueryList,
+    inject
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { OverflowListItemDirective } from './overflow-list-item.directive';
 
 @Directive({
     selector: '[fdkOverflowList]',
     standalone: true
 })
-export class OverflowListDirective implements AfterViewInit, OnDestroy {
+export class OverflowListDirective implements AfterViewInit {
     /**
      * @description Offset to calculate correct position
      */
@@ -51,7 +51,7 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
     overflowItems: QueryList<OverflowListItemDirective>;
 
     /** @hidden */
-    private _onDestroy$ = new Subject<void>();
+    private _onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -64,17 +64,11 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
     ngAfterViewInit(): void {
         this._viewportRuler
             .change(50)
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._onDestroy$))
             // ViewportRuler invoked out of zone, that is why I need to invoke function in zone
             .subscribe(() => this._ngZone.run(() => this._calculateAmountOfOverflowedItems()));
 
         this._calculateAmountOfOverflowedItems();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /**

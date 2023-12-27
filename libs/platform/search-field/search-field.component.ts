@@ -10,11 +10,13 @@ import {
     ChangeDetectorRef,
     Component,
     computed,
+    DestroyRef,
     Directive,
     ElementRef,
     EventEmitter,
     forwardRef,
     HostListener,
+    inject,
     Inject,
     Injector,
     Input,
@@ -37,8 +39,10 @@ import {
 import { fromEvent, isObservable, merge, Observable, of, Subject } from 'rxjs';
 import { filter, map, take, takeUntil } from 'rxjs/operators';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import {
+    destroyObservable,
     DynamicComponentService,
     KeyUtil,
     Nullable,
@@ -384,7 +388,7 @@ export class SearchFieldComponent
     private resolveTranslation = resolveTranslationSyncFn();
 
     /** @hidden */
-    private readonly _onDestroy$ = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
     private readonly _dataSourceChanged$ = new Subject<void>();
@@ -447,8 +451,6 @@ export class SearchFieldComponent
             this._suggestionOverlayRef = null;
         }
         this._suggestionkeyManager?.destroy();
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /**
@@ -595,7 +597,7 @@ export class SearchFieldComponent
                     );
                 }),
                 take(1),
-                takeUntil(this._onDestroy$)
+                takeUntilDestroyed(this._onDestroy$)
             )
             .subscribe((event) => {
                 const target = event.target as HTMLElement;
@@ -691,7 +693,7 @@ export class SearchFieldComponent
         this._dataSourceChanged$.next();
         dataSource
             .open()
-            .pipe(takeUntil(merge(this._onDestroy$, this._dataSourceChanged$)))
+            .pipe(takeUntil(merge(destroyObservable(this._onDestroy$), this._dataSourceChanged$)))
             .subscribe((data) => {
                 this._dropdownValues$ = of(data);
             });
@@ -704,7 +706,7 @@ export class SearchFieldComponent
      */
     private _getSuggestionsLength(): number {
         let count = 0;
-        this._dropdownValues$.pipe(takeUntil(this._onDestroy$)).subscribe((suggestions) => {
+        this._dropdownValues$.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe((suggestions) => {
             suggestions?.forEach((suggestion) => {
                 if (this.inputText && suggestion?.toLowerCase().indexOf(this.inputText?.trim()?.toLowerCase()) > -1) {
                     count++;

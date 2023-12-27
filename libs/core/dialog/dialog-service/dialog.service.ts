@@ -2,8 +2,8 @@ import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, Injector, Optional, PLATFORM_ID, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { takeUntil } from 'rxjs';
 import { DialogBaseService } from '../base/dialog-base.service';
 import { DialogContainerComponent } from '../dialog-container/dialog-container.component';
 import { DialogContentType } from '../dialog.types';
@@ -76,7 +76,7 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
         this._dialogs.push(componentRef);
 
         this.htmlElement && (this.htmlElement.style.overflow = 'hidden');
-        dialogRef._endClose$.pipe(takeUntil(this._destroy$)).subscribe(() => {
+        dialogRef._endClose$.pipe(takeUntilDestroyed(this._destroy$)).subscribe(() => {
             this._destroyDialog(componentRef);
             componentRef.destroy();
             overlayRef.dispose();

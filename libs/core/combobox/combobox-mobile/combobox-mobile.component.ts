@@ -4,14 +4,13 @@ import {
     ElementRef,
     Inject,
     isDevMode,
-    OnDestroy,
     OnInit,
     Optional,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { observeOn, takeUntil } from 'rxjs/operators';
+import { observeOn } from 'rxjs/operators';
 
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import {
@@ -23,6 +22,7 @@ import {
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InitialFocusDirective, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
@@ -48,7 +48,7 @@ import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
         InitialFocusDirective
     ]
 })
-export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> implements OnInit, OnDestroy {
+export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> implements OnInit {
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
@@ -79,11 +79,6 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
     }
 
     /** @hidden */
-    ngOnDestroy(): void {
-        super.onDestroy();
-    }
-
-    /** @hidden */
     handleDismiss(): void {
         this.dialogRef.dismiss();
         this._component.dialogDismiss(this._selectedBackup);
@@ -107,7 +102,9 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
 
     /** @hidden */
     private _listenOnMultiInputOpenChange(): void {
-        this._component.openChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => this._toggleDialog(isOpen));
+        this._component.openChange
+            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 
     /** @hidden */
@@ -137,7 +134,7 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
         this.dialogRef.afterLoaded
             .pipe(
                 observeOn(asyncScheduler), // making the listener async
-                takeUntil(this._onDestroy$)
+                takeUntilDestroyed(this._onDestroy$)
             )
             .subscribe(() => {
                 try {

@@ -1,17 +1,18 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChild,
+    DestroyRef,
     Input,
-    OnDestroy,
     TemplateRef,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     ToolbarComponent,
     ToolbarItemDirective,
@@ -22,7 +23,6 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { SearchFieldComponent, SearchInput, SuggestionItem } from '@fundamental-ngx/platform/search-field';
 import { Table, TableService } from '@fundamental-ngx/platform/table-helpers';
-import { takeUntil } from 'rxjs/operators';
 import { TABLE_TOOLBAR, TableToolbarInterface } from './table-toolbar';
 import { TableToolbarActionsComponent } from './table-toolbar-actions.component';
 import { TableToolbarLeftActionsComponent } from './table-toolbar-left-actions.component';
@@ -61,7 +61,7 @@ let tableToolbarTitleUniqueId = 0;
         FdTranslatePipe
     ]
 })
-export class TableToolbarComponent implements TableToolbarInterface, OnDestroy {
+export class TableToolbarComponent implements TableToolbarInterface {
     /**
      * Whether the toolbar should hide elements in popover when they overflow.
      * */
@@ -116,21 +116,14 @@ export class TableToolbarComponent implements TableToolbarInterface, OnDestroy {
     readonly tableLoading$: Observable<boolean> = this._tableService.tableLoading$;
 
     /** @hidden */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
     constructor(
-        private readonly _cd: ChangeDetectorRef,
         private readonly _table: Table,
         private readonly _tableService: TableService
     ) {
         this._listenToTableEvents();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /** @hidden */
@@ -175,19 +168,19 @@ export class TableToolbarComponent implements TableToolbarInterface, OnDestroy {
 
     /** @hidden */
     private _listenToTableEvents(): void {
-        this._table.emptyRowAdded.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        this._table.emptyRowAdded.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
             this._showSaveButton = true;
         });
 
-        this._table.save.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        this._table.save.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
             this._showSaveButton = false;
         });
 
-        this._table.cancel.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        this._table.cancel.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
             this._showSaveButton = false;
         });
 
-        this._table.presetChanged.pipe(takeUntil(this._onDestroy$)).subscribe((state) => {
+        this._table.presetChanged.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe((state) => {
             this._searchInputText = state.searchInput?.text ?? '';
         });
     }

@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChildren,
+    DestroyRef,
     EventEmitter,
     HostBinding,
     HostListener,
@@ -11,14 +12,17 @@ import {
     OnInit,
     Output,
     QueryList,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     FocusEscapeDirection,
     KeyboardSupportService,
     LIST_ITEM_COMPONENT,
     ListItemInterface,
-    Nullable
+    Nullable,
+    destroyObservable
 } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Observable, Subject, merge } from 'rxjs';
@@ -151,7 +155,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -159,6 +163,14 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
         _contentDensityObserver: ContentDensityObserver
     ) {
         _contentDensityObserver.subscribe();
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    keyDownHandler(event: KeyboardEvent): void {
+        if (this.keyboardSupport) {
+            this._keyboardSupportService.onKeyDown(event);
+        }
     }
 
     /** @hidden */
@@ -174,16 +186,8 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
-    }
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    keyDownHandler(event: KeyboardEvent): void {
-        if (this.keyboardSupport) {
-            this._keyboardSupportService.onKeyDown(event);
-        }
+        this._onRefresh$.next();
+        this._onRefresh$.complete();
     }
 
     /** Set fake focus on element with passed index */
@@ -204,7 +208,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
 
     /** @hidden */
     private _listenOnQueryChange(): void {
-        this._focusItems.changes.pipe(startWith(0), takeUntil(this._onDestroy$)).subscribe(() => {
+        this._focusItems.changes.pipe(startWith(0), takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
             this._recheckLinks();
             this._listenOnItemsClick();
             setTimeout(() => {
@@ -224,7 +228,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
         }
 
         /** Merge refresh/destroy observables */
-        const completion$ = merge(this._onRefresh$, this._onDestroy$);
+        const completion$ = merge(this._onRefresh$, destroyObservable(this._onDestroy$));
         const interactionChangesIndexes: Observable<{ index: number; updateOnly: boolean }>[] = this._focusItems.map(
             (item, index) =>
                 merge(
@@ -264,7 +268,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     /** @hidden */
     private _listenOnListFocusEscape(): void {
         this._keyboardSupportService.focusEscapeList
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._onDestroy$))
             .subscribe((direction) => this.focusEscapeList.emit(direction));
     }
 }

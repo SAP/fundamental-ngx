@@ -8,11 +8,11 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     ElementRef,
     HostBinding,
     Input,
     OnChanges,
-    OnDestroy,
     OnInit,
     Optional,
     QueryList,
@@ -21,23 +21,15 @@ import {
     ViewChildren,
     ViewEncapsulation,
     computed,
-    forwardRef
+    forwardRef,
+    inject
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BehaviorSubject, Observable, Subject, combineLatest, fromEvent, of } from 'rxjs';
-import {
-    debounceTime,
-    distinctUntilChanged,
-    map,
-    mapTo,
-    skip,
-    startWith,
-    switchMap,
-    take,
-    takeUntil
-} from 'rxjs/operators';
+import { BehaviorSubject, Observable, combineLatest, fromEvent, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, mapTo, skip, startWith, switchMap, take } from 'rxjs/operators';
 
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     CssClassBuilder,
     KeyUtil,
@@ -103,7 +95,7 @@ let sliderId = 0;
     ]
 })
 export class SliderComponent
-    implements OnInit, OnChanges, AfterViewInit, OnDestroy, ControlValueAccessor, CssClassBuilder, FormItemControl
+    implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor, CssClassBuilder, FormItemControl
 {
     /** Slider id, it has some default value if not set,  */
     @Input()
@@ -333,7 +325,7 @@ export class SliderComponent
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
     readonly _componentHovered$ = new BehaviorSubject(false);
@@ -411,12 +403,6 @@ export class SliderComponent
     /** @hidden */
     ngAfterViewInit(): void {
         this._listenToInteractionChanges();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /** @hidden */
@@ -737,7 +723,7 @@ export class SliderComponent
     /** @hidden */
     private _attachResizeListener(): void {
         fromEvent(window, 'resize')
-            .pipe(debounceTime(500), takeUntil(this._onDestroy$))
+            .pipe(debounceTime(500), takeUntilDestroyed(this._onDestroy$))
             .subscribe(() => this._onResize());
     }
 
@@ -963,7 +949,7 @@ export class SliderComponent
                 }),
                 debounceTime(10),
                 distinctUntilChanged(),
-                takeUntil(this._onDestroy$)
+                takeUntilDestroyed(this._onDestroy$)
             )
             .subscribe((focused) => {
                 if (focused) {

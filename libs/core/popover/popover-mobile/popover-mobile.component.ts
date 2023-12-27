@@ -13,10 +13,10 @@ import {
 } from '@angular/core';
 
 import { Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import {
     MOBILE_MODE_CONFIG,
@@ -94,7 +94,6 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     /** @hidden */
     ngOnDestroy(): void {
         this.dialogRef?.close();
-        super.onDestroy();
         this._subscriptions.unsubscribe();
     }
 
@@ -107,7 +106,7 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     /** @hidden Opens/closes the Dialog based on Popover isOpenChange events */
     private _listenOnPopoverOpenChange(): void {
         this._subscriptions.add(
-            this._component.isOpenChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => {
+            this._component.isOpenChange.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe((isOpen) => {
                 if (isOpen) {
                     this._openDialog();
                 } else {

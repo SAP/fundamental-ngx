@@ -1,20 +1,22 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, TAB, UP_ARROW, hasModifierKey } from '@angular/cdk/keycodes';
-import { Injectable, QueryList } from '@angular/core';
+import { DestroyRef, Injectable, OnDestroy, QueryList, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject, merge } from 'rxjs';
 import { filter, startWith, takeUntil, tap } from 'rxjs/operators';
 import { KeyUtil } from '../../functions';
+import { destroyObservable } from '../../helpers/destroy-observable';
 import { KeyboardSupportItemInterface } from '../../interfaces/keyboard-support-item.interface';
 
 export type FocusEscapeDirection = 'up' | 'down';
 
-@Injectable({ providedIn: 'root' })
-export class KeyboardSupportService<T> {
+@Injectable()
+export class KeyboardSupportService<T> implements OnDestroy {
     /** Subject that is thrown, when focus escapes the list */
     focusEscapeList = new Subject<FocusEscapeDirection>();
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
@@ -45,7 +47,7 @@ export class KeyboardSupportService<T> {
         this._tabKeyNavigation = tabKeyNavigation;
         this._keyManager = new FocusKeyManager(queryList).withWrap(wrap).withHomeAndEnd();
         queryList.changes
-            .pipe(takeUntil(this._onDestroy$), startWith(0))
+            .pipe(startWith(0), takeUntilDestroyed(this._onDestroy$))
             .subscribe(() => this._refreshEscapeLogic(queryList));
     }
 
@@ -63,10 +65,8 @@ export class KeyboardSupportService<T> {
     }
 
     /** Destroys KeyboardSupportService dependencies */
-    onDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
-        this._keyManager.destroy();
+    ngOnDestroy(): void {
+        this._keyManager?.destroy();
     }
 
     /** @hidden */
@@ -88,7 +88,7 @@ export class KeyboardSupportService<T> {
         /** Finish all of the streams, form before */
         this._onRefresh$.next();
 
-        const unsubscribe$ = merge(this._onRefresh$, this._onDestroy$);
+        const unsubscribe$ = merge(this._onRefresh$, destroyObservable(this._onDestroy$));
 
         if (queryList.length) {
             createEscapeListener(queryList.last, DOWN_ARROW, 'down');

@@ -2,22 +2,22 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     Input,
     OnChanges,
-    OnDestroy,
     OnInit,
     Output,
     SimpleChanges,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarService } from '../calendar.service';
@@ -41,7 +41,7 @@ import { FdCalendarView } from '../types';
     standalone: true,
     imports: [ButtonComponent, FdTranslatePipe]
 })
-export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges {
+export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
     /** Currently active view. Needed for a11y labels. */
     @Input()
     activeView: FdCalendarView;
@@ -214,7 +214,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     _prevButtonComponent: ElementRef;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** Month names */
     private _monthNames: string[] = [];
@@ -228,12 +228,6 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
         private _calendarService: CalendarService,
         private _dateTimeAdapter: DatetimeAdapter<D>
     ) {}
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
-    }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -276,7 +270,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
 
     /** @hidden */
     private _listenToLocaleChanges(): void {
-        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
             this._calculateMonthNames();
             this._calculateLabels();
             this._changeDetRef.markForCheck();

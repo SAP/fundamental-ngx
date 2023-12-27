@@ -1,7 +1,6 @@
-import { DragDrop, DragRef, Point } from '@angular/cdk/drag-drop';
-import { Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { DragRef, Point } from '@angular/cdk/drag-drop';
+import { DestroyRef, Directive, ElementRef, EventEmitter, Input, Output, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FLIPPER_SIZE } from '../../constants';
 import {
     ElementChord,
@@ -20,7 +19,7 @@ export interface FdDnDEvent {
     selector: '[fdpIconBarDndContainer], [fdp-icon-bar-dnd-container]',
     standalone: true
 })
-export class IconBarDndContainerDirective implements OnDestroy {
+export class IconBarDndContainerDirective {
     /**
      * @description Defines if drag and drop feature should be enabled for list items
      */
@@ -61,19 +60,10 @@ export class IconBarDndContainerDirective implements OnDestroy {
     private _draggable = true;
 
     /** @hidden */
-    private readonly _onDestroy$ = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
-    constructor(
-        public elementRef: ElementRef,
-        private _dragDrop: DragDrop
-    ) {}
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
-    }
+    constructor(public elementRef: ElementRef) {}
 
     /**
      * @description Method called, when element is started to be dragged
@@ -184,9 +174,9 @@ export class IconBarDndContainerDirective implements OnDestroy {
     registerDragItem(dragItem: IconTabBarDndItem): void {
         this._dragRefItems.push(dragItem.dragRef);
         this.dndItemDirectives.push(dragItem);
-        dragItem.moved.pipe(takeUntil(this._onDestroy$)).subscribe((position: Point) => this.onMove(position));
-        dragItem.started.pipe(takeUntil(this._onDestroy$)).subscribe(() => this.dragStart());
-        dragItem.released.pipe(takeUntil(this._onDestroy$)).subscribe(() => this.dragEnd(dragItem));
+        dragItem.moved.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe((position: Point) => this.onMove(position));
+        dragItem.started.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => this.dragStart());
+        dragItem.released.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => this.dragEnd(dragItem));
     }
 
     /**

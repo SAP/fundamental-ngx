@@ -4,23 +4,25 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     forwardRef,
+    inject,
     Input,
-    OnDestroy,
     Output,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { debounceTime, filter, fromEvent, map, merge, Observable, Subject, takeUntil } from 'rxjs';
+import { debounceTime, filter, fromEvent, map, merge, Observable } from 'rxjs';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
@@ -74,7 +76,7 @@ let addOnInputRandomId = 0;
         IconComponent
     ]
 })
-export class InputGroupComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {
+export class InputGroupComponent implements ControlValueAccessor, AfterViewInit, FormItemControl {
     /**
      * The placement of the add-on.
      * Options include *before* and *after*
@@ -218,7 +220,7 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     inShellbar = false;
 
     /** An RxJS Subject that will kill the stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** Value of the text input. */
     set inputText(value) {
@@ -267,12 +269,6 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     /** @hidden */
     ngAfterViewInit(): void {
         this._listenInputFocus();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /** @hidden */
@@ -347,7 +343,7 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
             // debounceTime is needed in order to filter subsequent focus-blur events, that happen simultaneously
             debounceTime(10),
             filter(() => this.showFocus),
-            takeUntil(this._onDestroy$)
+            takeUntilDestroyed(this._onDestroy$)
         );
 
         this._changeDetectorRef.markForCheck();

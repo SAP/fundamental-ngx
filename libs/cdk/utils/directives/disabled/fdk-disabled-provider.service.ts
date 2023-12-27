@@ -1,6 +1,18 @@
-import { ElementRef, Inject, Injectable, NgZone, OnDestroy, Optional, Self, SkipSelf } from '@angular/core';
-import { BehaviorSubject, Observable, ReplaySubject, Subject, combineLatest, firstValueFrom } from 'rxjs';
-import { distinctUntilChanged, startWith, takeUntil, tap } from 'rxjs/operators';
+import {
+    DestroyRef,
+    ElementRef,
+    Inject,
+    Injectable,
+    NgZone,
+    OnDestroy,
+    Optional,
+    Self,
+    SkipSelf,
+    inject
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject, Observable, ReplaySubject, combineLatest, firstValueFrom } from 'rxjs';
+import { distinctUntilChanged, startWith, tap } from 'rxjs/operators';
 import { DefaultDisabledViewModifier } from './default-disabled-view-modifier';
 import { DisabledBehavior } from './disabled-behavior.interface';
 import { DisabledViewModifier } from './disabled-view-modifier.interface';
@@ -12,7 +24,7 @@ export class FdkDisabledProvider extends ReplaySubject<boolean> implements Disab
     /** @Hidden */
     fdkDisabled = false;
     /** @Hidden */
-    private readonly _destroy$ = new Subject<void>();
+    private readonly _destroy$ = inject(DestroyRef);
     /** @hidden */
     private readonly _viewModifiers$: BehaviorSubject<DisabledViewModifier[]> = new BehaviorSubject<
         DisabledViewModifier[]
@@ -32,14 +44,14 @@ export class FdkDisabledProvider extends ReplaySubject<boolean> implements Disab
         combineLatest([this._disabledChange$, this._viewModifiers$])
             .pipe(
                 tap(([isDisabled]) => this.setDisabledState(isDisabled)),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroy$)
             )
             .subscribe();
         this._disabledChange$
             .pipe(
                 tap((isDisabled) => (this.fdkDisabled = isDisabled)),
                 tap((isDisabled) => this.next(isDisabled)),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroy$)
             )
             .subscribe();
     }
@@ -60,7 +72,6 @@ export class FdkDisabledProvider extends ReplaySubject<boolean> implements Disab
     /** @hidden */
     ngOnDestroy(): void {
         this.complete();
-        this._destroy$.next();
         this.disabledObserver.unobserve(this.elementRef);
     }
 
@@ -83,7 +94,7 @@ export class FdkDisabledProvider extends ReplaySubject<boolean> implements Disab
                             this.setDisabledState(false);
                         }
                     }),
-                    takeUntil(this._destroy$)
+                    takeUntilDestroyed(this._destroy$)
                 )
                 .subscribe();
         }
@@ -98,7 +109,7 @@ export class FdkDisabledProvider extends ReplaySubject<boolean> implements Disab
                             this.setDisabledState(isDisabled);
                         }
                     }),
-                    takeUntil(this._destroy$)
+                    takeUntilDestroyed(this._destroy$)
                 )
                 .subscribe();
         }

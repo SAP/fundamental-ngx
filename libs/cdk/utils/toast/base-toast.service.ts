@@ -10,18 +10,18 @@ import {
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import {
     ComponentRef,
+    DestroyRef,
     EmbeddedViewRef,
     Injectable,
     InjectionToken,
     Injector,
-    OnDestroy,
     StaticProvider,
     TemplateRef,
     Type,
-    ViewContainerRef
+    ViewContainerRef,
+    inject
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BaseToastPosition, ToastGlobalConnectedPosition, ToastGlobalPosition } from './base-toast-positions';
 import { BaseToastConfig } from './classes/base-toast-config';
 import { BaseToastRef } from './classes/base-toast-ref';
@@ -32,8 +32,7 @@ import { ToastTextComponent } from './interfaces/toast-text-component.interface'
 export abstract class BaseToastService<
     P extends BaseToastConfig,
     C extends ToastContainerComponent<P> = ToastContainerComponent<P>
-> implements OnDestroy
-{
+> {
     /** Component for simple text toast. */
     protected abstract toastTextComponent: Type<ToastTextComponent>;
     /** Component for Toast Container. */
@@ -57,7 +56,7 @@ export abstract class BaseToastService<
     protected _toastsMap = new Map<BaseToastPosition, BaseToastRef[]>();
 
     /** @hidden */
-    private _destroy$ = new Subject<void>();
+    private _destroy$ = inject(DestroyRef);
 
     /** @hidden */
     protected constructor(
@@ -217,12 +216,6 @@ export abstract class BaseToastService<
         });
     }
 
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._destroy$.next();
-        this._destroy$.complete();
-    }
-
     /**
      * Animates the old Toast out and the new one in.
      */
@@ -231,7 +224,7 @@ export abstract class BaseToastService<
         // When the toast is dismissed, clear the reference to it.
         toastRef
             .afterDismissed()
-            .pipe(takeUntil(this._destroy$))
+            .pipe(takeUntilDestroyed(this._destroy$))
             .subscribe(() => {
                 const allToasts = this._toastsMap.get(positionStrategy) || [];
                 allToasts.splice(allToasts.indexOf(toastRef), 1);
