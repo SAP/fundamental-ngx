@@ -3,7 +3,9 @@ import {
     Component,
     ContentChild,
     DestroyRef,
+    Directive,
     Input,
+    Signal,
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
@@ -27,9 +29,35 @@ import { TABLE_TOOLBAR, TableToolbarInterface } from './table-toolbar';
 import { TableToolbarActionsComponent } from './table-toolbar-actions.component';
 import { TableToolbarLeftActionsComponent } from './table-toolbar-left-actions.component';
 
+export interface ToolbarContext {
+    counter: Signal<number>;
+    sortable: Signal<boolean>;
+    filterable: Signal<boolean>;
+    groupable: Signal<boolean>;
+    columns: Signal<boolean>;
+    hasAnyActions: Signal<boolean>;
+}
+
 export type EditMode = 'none' | 'inline';
 
 let tableToolbarTitleUniqueId = 0;
+
+@Directive({
+    selector: '[fdpTableToolbarTemplate]',
+    standalone: true
+})
+export class TableToolbarTemplateDirective {
+    /** @hidden */
+    readonly templateRef = inject<TemplateRef<ToolbarContext>>(TemplateRef);
+
+    /** @hidden */
+    static ngTemplateContextGuard(
+        _directive: TableToolbarTemplateDirective,
+        context: unknown
+    ): context is ToolbarContext {
+        return true;
+    }
+}
 
 /**
  * The component that represents a table toolbar.
@@ -58,7 +86,8 @@ let tableToolbarTitleUniqueId = 0;
         SearchFieldComponent,
         ButtonComponent,
         AsyncPipe,
-        FdTranslatePipe
+        FdTranslatePipe,
+        TableToolbarTemplateDirective
     ]
 })
 export class TableToolbarComponent implements TableToolbarInterface {

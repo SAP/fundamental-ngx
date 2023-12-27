@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
@@ -42,7 +42,6 @@ import { MULTICOMBOBOX_COMPONENT, MultiComboboxInterface } from '../../multi-com
         ButtonComponent,
         CdkScrollable,
         ScrollbarDirective,
-        AsyncPipe,
         FdTranslatePipe
     ]
 })
@@ -83,11 +82,11 @@ export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxIn
 
     /** @hidden */
     showSelected(): void {
-        const isSelectedShown = this.selectedShown$.getValue();
+        const isSelectedShown = this.selectedShown$();
 
         if (isSelectedShown) {
             this._component.searchTermChanged();
-            this.selectedShown$.next(false);
+            this.selectedShown$.set(false);
             return;
         }
 

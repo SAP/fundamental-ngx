@@ -1,5 +1,5 @@
-import { InjectionToken } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { InjectionToken, WritableSignal } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { MobileMode } from '@fundamental-ngx/core/mobile-mode';
 import { SelectableOptionItem } from '@fundamental-ngx/platform/shared';
@@ -13,7 +13,7 @@ export const MULTICOMBOBOX_COMPONENT = new InjectionToken<string[]>('MultiCombob
 export interface MultiComboboxInterface extends MobileMode {
     _suggestions: SelectableOptionItem[];
     _selectedSuggestions: SelectableOptionItem[];
-    selectedShown$: BehaviorSubject<boolean>;
+    selectedShown$: WritableSignal<boolean>;
     openChange: Subject<boolean>;
 
     moreClicked(): void;

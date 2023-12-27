@@ -28,6 +28,7 @@ import {
     Output,
     QueryList,
     Self,
+    signal,
     SimpleChanges,
     SkipSelf,
     TemplateRef,
@@ -36,7 +37,7 @@ import {
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import equal from 'fast-deep-equal';
-import { BehaviorSubject, fromEvent, isObservable, Observable, Subject, Subscription, timer } from 'rxjs';
+import { fromEvent, isObservable, Observable, Subject, Subscription, timer } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
 import { FormStates } from '@fundamental-ngx/cdk/forms';
@@ -321,7 +322,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     openChange = new Subject<boolean>();
 
     /** @hidden */
-    selectedShown$ = new BehaviorSubject(false);
+    selectedShown$ = signal(false);
 
     /** @hidden */
     protected _dataSource: FdpMultiComboboxDataSource<any>;
@@ -484,7 +485,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     /** Closes the select popover body. */
     close(): void {
         this._rangeSelector.reset();
-        this.selectedShown$.next(false);
+        this.selectedShown$.set(false);
         this.inputText = '';
         this._focusToSearchField();
 

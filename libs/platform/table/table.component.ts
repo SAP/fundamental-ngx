@@ -23,6 +23,7 @@ import {
     Optional,
     Output,
     QueryList,
+    signal,
     SimpleChanges,
     TrackByFunction,
     ViewChild,
@@ -127,22 +128,14 @@ import {
     TableVirtualScroll
 } from '@fundamental-ngx/platform/table-helpers';
 import equal from 'fast-deep-equal';
-import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
+import { fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, take, tap } from 'rxjs/operators';
-import { TABLE_TOOLBAR, TableToolbarInterface } from './components';
+import { TABLE_TOOLBAR, TableToolbarInterface, ToolbarContext } from './components';
 import { PlatformTableColumnResizerComponent } from './components/table-column-resizer/table-column-resizer.component';
 import { TableGroupRowComponent } from './components/table-group-row/table-group-row.component';
 import { TableHeaderRowComponent } from './components/table-header-row/table-header-row.component';
 import { TablePoppingRowComponent } from './components/table-popping-row/table-popping-row.component';
 import { TableRowComponent } from './components/table-row/table-row.component';
-
-interface ToolbarContext {
-    counter: Observable<number>;
-    sortable: Observable<boolean>;
-    filterable: Observable<boolean>;
-    groupable: Observable<boolean>;
-    columns: Observable<boolean>;
-}
 
 let tableUniqueId = 0;
 
@@ -705,13 +698,13 @@ export class TableComponent<T = any>
     /** @hidden */
     private _forceSemanticHighlighting = false;
     /** @hidden */
-    private readonly _isShownSortSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
+    private readonly _isShownSortSettingsInToolbar$ = signal(false);
     /** @hidden */
-    private readonly _isShownFilterSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
+    private readonly _isShownFilterSettingsInToolbar$ = signal(false);
     /** @hidden */
-    private readonly _isShownGroupSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
+    private readonly _isShownGroupSettingsInToolbar$ = signal(false);
     /** @hidden */
-    private readonly _isShownColumnSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
+    private readonly _isShownColumnSettingsInToolbar$ = signal(false);
     /**
      * @hidden
      * Indicates when all items are checked
@@ -779,7 +772,14 @@ export class TableComponent<T = any>
             sortable: this._isShownSortSettingsInToolbar$,
             filterable: this._isShownFilterSettingsInToolbar$,
             groupable: this._isShownGroupSettingsInToolbar$,
-            columns: this._isShownColumnSettingsInToolbar$
+            columns: this._isShownColumnSettingsInToolbar$,
+            hasAnyActions: computed(
+                () =>
+                    this._isShownSortSettingsInToolbar$() ||
+                    this._isShownFilterSettingsInToolbar$() ||
+                    this._isShownGroupSettingsInToolbar$() ||
+                    this._isShownColumnSettingsInToolbar$()
+            )
         };
 
         this.tableColumnsStream = this._tableService.tableColumns$.asObservable();
@@ -1077,22 +1077,22 @@ export class TableComponent<T = any>
 
     /** Toolbar Sort Settings button visibility */
     showSortSettingsInToolbar(showSortSettings: boolean): void {
-        this._isShownSortSettingsInToolbar$.next(showSortSettings);
+        this._isShownSortSettingsInToolbar$.set(showSortSettings);
     }
 
     /** Toolbar Filter Settings button visibility */
     showFilterSettingsInToolbar(showFilterSettings: boolean): void {
-        this._isShownFilterSettingsInToolbar$.next(showFilterSettings);
+        this._isShownFilterSettingsInToolbar$.set(showFilterSettings);
     }
 
     /** Toolbar Group Settings button visibility */
     showGroupSettingsInToolbar(showGroupSettings: boolean): void {
-        this._isShownGroupSettingsInToolbar$.next(showGroupSettings);
+        this._isShownGroupSettingsInToolbar$.set(showGroupSettings);
     }
 
     /** Toolbar Columns Settings button visibility */
     showColumnSettingsInToolbar(showColumnSettings: boolean): void {
-        this._isShownColumnSettingsInToolbar$.next(showColumnSettings);
+        this._isShownColumnSettingsInToolbar$.set(showColumnSettings);
     }
 
     /** Disable filter from column heder menu */
@@ -1574,7 +1574,7 @@ export class TableComponent<T = any>
         const {
             page: { currentPage, pageSize }
         } = this.getTableState();
-        const totalItems = this._dataSourceDirective.totalItems$.value;
+        const totalItems = this._dataSourceDirective.totalItems$();
         const lastPage = Math.ceil(totalItems / (pageSize || totalItems));
         if (currentPage >= lastPage) {
             return;
