@@ -12,6 +12,16 @@
             "factory": "./src/generators/migrate-to-jest/generator",
             "schema": "./src/generators/migrate-to-jest/schema.json",
             "description": "migrate-to-jest generator"
+        },
+        "sync-versions": {
+            "factory": "./src/generators/sync-versions/generator",
+            "schema": "./src/generators/sync-versions/schema.json",
+            "description": "Synchronizes the versions in output files"
+        },
+        "downport-translations": {
+            "factory": "./src/generators/downport-translations/generator",
+            "schema": "./src/generators/downport-translations/schema.json",
+            "description": "Downports translations from ng16+ format to ng15 format"
         }
     }
 }

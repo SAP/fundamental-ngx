@@ -188,10 +188,15 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
 
     /** @hidden Define is selected item selected */
     isSelectedOptionItem(selectedItem: any): boolean {
-        return (
-            (this.lookupKey && this.lookupValue(this._selectedElement) === this.lookupValue(selectedItem)) ||
-            this.displayValue(this._selectedElement) === this.displayValue(selectedItem)
-        );
+        if (!!this._selectedElement && !!selectedItem) {
+            if (this.lookupKey) {
+                return this.lookupValue(this._selectedElement) === this.lookupValue(selectedItem);
+            } else {
+                return selectedItem.value === this._selectedElement.value;
+            }
+        } else {
+            return false;
+        }
     }
 
     /** @hidden Define is selected item selected by display value */

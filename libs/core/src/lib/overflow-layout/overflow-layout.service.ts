@@ -96,31 +96,6 @@ export class OverflowLayoutService implements OnDestroy {
         this.config = config;
     }
 
-    /** @hidden */
-    private _emitResult(): void {
-        this._result$.next(this.result);
-    }
-
-    /** @hidden */
-    private _listenToSizeChanges(...elements: HTMLElement[]): void {
-        elements.forEach((element) =>
-            this._subscription.add(
-                resizeObservable(element)
-                    .pipe(
-                        skip(1),
-                        filter(() => this._listenToItemResize),
-                        distinctUntilChanged(),
-                        debounceTime(30)
-                    )
-                    .subscribe(() => {
-                        setTimeout(() => {
-                            this.fitVisibleItems();
-                        });
-                    })
-            )
-        );
-    }
-
     /**
      * Calculates available space for items and hides items that are not fitting into the container.
      */
@@ -210,6 +185,10 @@ export class OverflowLayoutService implements OnDestroy {
 
         visibleContainerItems.forEach((item, index) => {
             const itemRef = allItems[index];
+            // If item is forced to be visible, just display the item since it's size calculation was already taken care of in previous iteration.
+            if (itemRef.overflowItem.forceVisibility) {
+                return;
+            }
             if (shouldHideItems && !itemRef.overflowItem.forceVisibility) {
                 item.containerRef.hidden = true;
                 item.softHidden = false;
@@ -287,5 +266,30 @@ export class OverflowLayoutService implements OnDestroy {
         const elementSize = elementWidth + parseFloat(elementStyle.marginLeft) + parseFloat(elementStyle.marginRight);
 
         return Math.ceil(elementSize);
+    }
+
+    /** @hidden */
+    private _emitResult(): void {
+        this._result$.next(this.result);
+    }
+
+    /** @hidden */
+    private _listenToSizeChanges(...elements: HTMLElement[]): void {
+        elements.forEach((element) =>
+            this._subscription.add(
+                resizeObservable(element)
+                    .pipe(
+                        skip(1),
+                        filter(() => this._listenToItemResize),
+                        distinctUntilChanged(),
+                        debounceTime(30)
+                    )
+                    .subscribe(() => {
+                        setTimeout(() => {
+                            this.fitVisibleItems();
+                        });
+                    })
+            )
+        );
     }
 }

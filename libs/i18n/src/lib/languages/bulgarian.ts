@@ -1,588 +1,468 @@
+/* eslint-disable */
 import { FdLanguage } from '../models/lang';
-import { PluralizationSet1 } from './pluralization/set1';
 
-const pluralization = new PluralizationSet1();
-
-/**
- * Default set of translations of Fundamental UI library for Bulgarian language
- */
 export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
     coreCalendar: {
-        yearSelectionLabel: 'Изберете година',
-        yearsRangeSelectionLabel: 'Изберете обхват на години',
-        monthSelectionLabel: 'Изберете месец',
-        dateSelectionLabel: 'Изберете дата',
+        yearSelectionLabel: 'Избор на година',
+        yearsRangeSelectionLabel: 'Избор на диапазон от години',
+        monthSelectionLabel: 'Избор на месец',
+        dateSelectionLabel: 'Избор на дата',
         previousYearLabel: 'Предходна година',
         nextYearLabel: 'Следваща година',
         previousMonthLabel: 'Предходен месец',
         nextMonthLabel: 'Следващ месец',
-        weekColumnLabel: 'Седмица в календара',
+        weekColumnLabel: 'Календарна седмица',
         dateSelectedLabel: 'Избрана дата',
         todayLabel: 'Днес',
-        rangeStartLabel: 'Начало на обхвата',
-        rangeEndLabel: 'Край на обхвата',
+        rangeStartLabel: 'Начална дата на диапазона',
+        rangeEndLabel: 'Крайна дата на диапазона',
         dayInPastLabel: 'Минали дни',
         closeCalendarLabel: 'Затвори календара',
         calendarDayViewDescription: 'Календар',
-        calendarMonthViewDescription: 'Избор на месец',
-        calendarYearsViewDescription: 'Избор на година',
-        calendarYearsRangeViewDescription: 'Избор на обхват на години'
+        calendarMonthViewDescription: 'Средство за избор на месец',
+        calendarYearsViewDescription: 'Средство за избор на година',
+        calendarYearsRangeViewDescription: 'Средство за избор на диапазона от години'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Комбинирана кутия с множество стойности',
-        selectAllLabel: 'Избери всички ({{selectedItems}} от {{totalItems}})'
+        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        selectAllLabel: 'Избор на всички ({{selectedItems}} от {{totalItems}})'
     },
     coreCarousel: {
-        leftNavigationBtnLabel: 'Отиди на предишния елемент',
-        rightNavigationBtnLabel: 'Отиди на следващия елемент'
+        leftNavigationBtnLabel: 'Към предишната позиция',
+        rightNavigationBtnLabel: 'Към следващата позиция'
     },
     coreDatePicker: {
-        dateInputLabel: 'Поле за дата',
-        dateRangeInputLabel: 'Поле за дата интервал',
-        displayCalendarToggleLabel: 'Избери дата',
-        valueStateSuccessMessage: 'Състояние Успех',
-        valueStateInformationMessage: 'Състояние Информиране',
-        valueStateWarningMessage: 'Състояние Предупреждение',
-        valueStateErrorMessage: 'Състояние Грешка'
+        dateInputLabel: 'Въвеждане на дата',
+        dateRangeInputLabel: 'Въвеждане на диапазон от дати',
+        displayCalendarToggleLabel: 'Отваряне на средство за избор',
+        valueStateSuccessMessage: 'Статус стойност "Успех"',
+        valueStateInformationMessage: 'Статус стойност “Информация”',
+        valueStateWarningMessage: 'Статус стойност "Предупреждение"',
+        valueStateErrorMessage: 'Статус стойност "Грешка”'
     },
     coreDatetimePicker: {
-        datetimeInputLabel: 'Поле за дата и час',
-        displayDatetimeToggleLabel: 'Покажи/Скрий календар',
+        datetimeInputLabel: 'Въвеждане на дата и час',
+        displayDatetimeToggleLabel: 'Показване на превключвателя за календара',
         displayTypeDateLabel: 'Дата',
         displayTypeTimeLabel: 'Час',
-        datetimeOkLabel: 'Ok',
-        datetimeCancelLabel: 'Отмени'
+        datetimeOkLabel: 'OK',
+        datetimeCancelLabel: 'Отказ'
     },
-    coreFeedListItem: {
-        moreLabel: 'Повече',
-        lessLabel: 'По-малко'
-    },
+    coreFeedListItem: { moreLabel: 'още {{count}}', lessLabel: 'По-малко' },
     coreGridList: {
-        filterBarCancelButtonTitle: 'Отмени',
-        listItemStatusAriaLabel: 'Артикулът има статус. Статус: {{ status }}.',
-        listItemCounterAriaLabel: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return 'Артикулът има 1 дете.';
-                default:
-                    return 'Артикулът има {{ count }} деца.';
-            }
-        },
-        listItemButtonDetailsTitle: 'Подробности',
-        listItemButtonDeleteTitle: 'Изтрий',
+        filterBarCancelButtonTitle: 'Отказ',
+        listItemStatusAriaLabel: 'Позицията има статус. Статус: {{status}}.',
+        listItemCounterAriaLabel: 'Позицията има {{count}} подчинени елемента.',
+        listItemButtonDetailsTitle: 'Подробни данни',
+        listItemButtonDeleteTitle: 'Изтриване',
         listItemStatusContainsErrors: 'Съдържа грешки',
-        listItemStatusLocked: 'Заключен',
+        listItemStatusLocked: 'Заключено',
         listItemStatusDraft: 'Чернова'
     },
-    coreMessageStrip: {
-        dismissLabel: 'Отхвърляне'
-    },
+    coreMessageStrip: { dismissLabel: 'Отхвърляне' },
     coreMultiInput: {
-        multiInputAriaLabel: 'Multi Value Input',
-        noResults: 'No results.',
-        navigateSelectionsWithArrows: 'Navigate selections with the up and down arrows.',
-        countListResultsSingular: '1 елемент от списъка с резултати.',
-        countListResultsPlural: '{{ count }} елемента от списъка с резултати.',
+        multiInputAriaLabel: 'Въвеждане на множество стойности',
+        noResults: 'Няма резултати.',
+        navigateSelectionsWithArrows: 'Със стрелките нагоре и надолу може да преминавате през избора.',
+        countListResultsSingular: '1 позиция от списъка с резултати.',
+        countListResultsPlural: '{{count}} позиции от списъка с резултати.',
         escapeNavigateTokens:
-            'Press escape to exit the input field and use the left and right arrow keys to navigate through the selected options.',
-        tokensCountText: ({ length }) => `Contains ${length || 'no'} token${length === 1 ? '' : 's'}.`
-    },
-    coreNavigation: {
-        mainNavigation: 'Main Navigation',
-        navigationPath: 'Navigation Path'
-    },
-    coreNestedList: {
-        linkItemAriaLabel: 'Елемент от дърво {{ itemDetails }}, {{ index }} от {{ total }}{{ selectedDescription }}'
-    },
-    coreOverflowLayout: {
-        moreItemsButton: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return 'Още 1 елемент';
-                default:
-                    return 'Още {{ count }} елемента';
-            }
+            'За изход от полето за въвеждане, натиснете Escape и използвайте клавишите със стрелки наляво и надясно, за да преминете през избраните опции.',
+        tokensCountText: (params) => {
+            return `Contains ${(() => {
+                if (params['length'] == 0) {
+                    return `no token`;
+                }
+                if (params['length'] == 1) {
+                    return `1 token`;
+                } else {
+                    return `${params['length']} tokens`;
+                }
+            })()}.`;
         }
     },
+    coreNavigation: { mainNavigation: 'Основна навигация', navigationPath: 'Път на навигацията' },
+    coreNestedList: {
+        linkItemAriaLabel: 'Позиция от дърво {{itemDetails}}, {{index}} от {{total}}{{selectedDescription}}'
+    },
+    coreOverflowLayout: { moreItemsButton: 'още {{count}}' },
     corePagination: {
-        pageLabel: 'Страница {{ pageNumber }}',
-        currentPageAriaLabel: 'Страница {{ pageNumber }} е активна',
+        pageLabel: 'Страница {{pageNumber}}',
+        currentPageAriaLabel: 'Страница {{pageNumber}} е текущата страница',
         labelBeforeInputMobile: 'Страница:',
-        labelAfterInputMobile: 'от {{ totalCount }}',
-        inputAriaLabel: 'Поле за страница, Текуща страница, Page {{ pageNumber }} of {{ totalCount }}',
-        itemsPerPageLabel: 'Резултати на Страница:',
+        labelAfterInputMobile: 'от {{totalCount}}',
+        inputAriaLabel: 'Въвеждане на страница, Текуща страница, Страница {{pageNumber}} от {{totalCount}}',
+        itemsPerPageLabel: 'Резултата на страница:',
         firstLabel: 'Първа',
-        previousLabel: 'Предна',
-        nextLabel: 'Следваща',
+        previousLabel: 'Назад',
+        nextLabel: 'Напред',
         lastLabel: 'Последна',
-        ariaLabel: 'Пагинация',
-        totalResultsLabel: '{{ totalCount }} резултати'
+        ariaLabel: 'Оформяне на страниците',
+        totalResultsLabel: '{{totalCount}} резултата'
     },
-    coreProductSwitch: {
-        ariaLabel: 'Продуктов превключвател'
-    },
-    coreShellbar: {
-        collapsedItemMenuLabel: 'Collapsed Item Menu',
-        cancel: 'Cancel',
-        search: 'Search'
-    },
+    coreProductSwitch: { ariaLabel: 'Превключвател за продукти' },
+    coreShellbar: { collapsedItemMenuLabel: 'Свито меню на позиции', cancel: 'Отказ', search: 'Търсене' },
     coreSlider: {
-        singleMinMaxDetails: 'Минималната стойност на плъзгача е {{ min }}, максималната стойност е {{ max }}',
-        singleValueminDetails: 'Стойността е {{ value }}',
-        singleValuemaxDetails: 'Стойността е {{ value }}',
-        singleValueNowDetails: 'Текущата стойност е {{ value }}',
+        singleMinMaxDetails: 'Минималната стойност на плъзгача е {{min}}, а максималната е {{max}}',
+        singleValueminDetails: 'Стойността е {{value}}',
+        singleValuemaxDetails: 'Стойността е {{value}}',
+        singleValueNowDetails: 'Текущата стойност е {{value}}',
         multipleHandle1MinMaxDetails:
-            'Минималната стойност на плъзгача за обхват е {{ min }}, максималната стойност е {{ max }}',
-        multipleHandle1ValueminDetails: 'Стойността е {{ value }}',
-        multipleHandle1ValuemaxDetails: 'Стойността е {{ value }}',
-        multipleHandle1ValueNowDetails: 'Текущата стойност е {{ value }}',
+            'Минималната стойност на плъзгача за диапазона  е {{min}}, а максималната е {{max}}',
+        multipleHandle1ValueminDetails: 'Стойността е {{value}}',
+        multipleHandle1ValuemaxDetails: 'Стойността е {{value}}',
+        multipleHandle1ValueNowDetails: 'Текущата стойност е {{value}}',
         multipleHandle2MinMaxDetails:
-            'Минималната стойност на плъзгача за обхват е {{ min }}, максималната стойност е {{ max }}',
-        multipleHandle2ValueminDetails: 'Стойността е {{ value }}',
-        multipleHandle2ValuemaxDetails: 'Стойността е {{ value }}',
-        multipleHandle2ValueNowDetails: 'Текущата стойност е {{ value }}'
+            'Минималната стойност на плъзгача за диапазона е {{min}}, а максималната е {{max}}',
+        multipleHandle2ValueminDetails: 'Стойността е {{value}}',
+        multipleHandle2ValuemaxDetails: 'Стойността е {{value}}',
+        multipleHandle2ValueNowDetails: 'Текущата стойност е {{value}}'
     },
-    coreSplitButton: {
-        expandButtonAriaLabel: 'Повече възможности',
-        arialLabel: 'Разделен бутон'
-    },
-    coreSplitter: {
-        paginationItemAriaLabel: 'Секция'
-    },
+    coreSplitButton: { expandButtonAriaLabel: 'Още действия', arialLabel: 'Бутон разделяне' },
+    coreSplitter: { paginationItemAriaLabel: 'Раздел' },
     coreStepInput: {
-        incrementButtonTitle: 'Увеличи',
-        decrementButtonTitle: 'Намали',
-        ariaRoleDescription: 'Поле за стъпка'
+        incrementButtonTitle: 'Увеличаване',
+        decrementButtonTitle: 'Намаляване',
+        ariaRoleDescription: 'Въвеждане на стъпка'
     },
-    coreSwitch: {
-        semanticAcceptLabel: 'Приеми',
-        semanticDeclineLabel: 'Отхвърли'
-    },
-    coreTabs: {
-        tabListExpandButtonText: 'Повече'
-    },
-    coreText: {
-        moreLabel: 'Повече',
-        lessLabel: 'По-малко'
-    },
+    coreSwitch: { semanticAcceptLabel: 'Приемане', semanticDeclineLabel: 'Отхвърляне' },
+    coreTabs: { tabListExpandButtonText: 'Още' },
+    coreText: { moreLabel: 'Повече', lessLabel: 'По-малко' },
     coreTime: {
-        componentAriaName: 'Избери час',
-        increaseHoursLabel: 'Увеличи часовете',
-        hrsLabel: 'Час',
-        decreaseHoursLabel: 'Намали часовете',
-        increaseMinutesLabel: 'Увеличи минутите',
-        minLabel: 'Мин',
-        decreaseMinutesLabel: 'Намали минутите',
-        increaseSecondsLabel: 'Увеличи секундите',
-        secLabel: 'Сек',
-        hoursLabel: 'Hours',
-        minutesLabel: 'Minutes',
-        secondsLabel: 'Seconds',
-        decreaseSecondsLabel: 'Намали секундите',
-        increasePeriodLabel: 'Увеличи интервала',
-        periodLabel: 'Интервал',
-        decreasePeriodLabel: 'Намали интервала',
+        componentAriaName: 'Средство за избор на време',
+        increaseHoursLabel: 'Увеличаване на часовете',
+        hrsLabel: 'Часа',
+        decreaseHoursLabel: 'Намаляване на часовете',
+        increaseMinutesLabel: 'Увеличаване на минутите',
+        minLabel: 'Мин.',
+        decreaseMinutesLabel: 'Намаляване на минутите',
+        increaseSecondsLabel: 'Увеличаване на секундите',
+        secLabel: 'Сек.',
+        hoursLabel: 'Часове',
+        minutesLabel: 'Минути',
+        secondsLabel: 'Секунди',
+        decreaseSecondsLabel: 'Намаляване на секундите',
+        increasePeriodLabel: 'Увеличаване на периода',
+        periodLabel: 'Период',
+        decreasePeriodLabel: 'Намаляване на периода',
         navigationInstruction:
-            'За да се придвижвате между елементите в този списък, натиснете горната стрелка или долната стрелка. ' +
-            'За да превключвате между списъците, натиснете стрелка наляво или стрелка надясно.'
+            'За да се движите между позициите в този списък, натиснете стрелките нагоре или надолу. За да превключвате между списъците, натиснете стрелките наляво или надясно.'
     },
     coreTimePicker: {
-        timePickerInputLabel: 'Поле за избор на час',
-        timePickerButtonLabel: 'Избери време'
+        timePickerInputLabel: 'Въвеждане на средство за избор на време',
+        timePickerButtonLabel: 'Отваряне на средство за избор'
     },
-    coreToken: {
-        deleteButtonLabel: 'Изтриваем',
-        ariaRoleDescription: 'жетон'
-    },
-    coreTokenizer: {
-        moreLabel: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return 'Още 1 елемент';
-                default:
-                    return 'Още {{ count }} елемента';
-            }
-        },
-        tokenizerLabel: 'Tokenizer'
-    },
+    coreToken: { deleteButtonLabel: 'За изтриване', ariaRoleDescription: 'токен' },
+    coreTokenizer: { moreLabel: 'още {{count}}', tokenizerLabel: 'Генератор за токени' },
     coreUploadCollection: {
         menuOkText: 'OK',
-        menuCancelText: 'Отмени',
-        menuEditAriaLabel: 'Редактирай',
-        menuDeleteAriaLabel: 'Изтрий',
-        menuOkAriaLabel: 'Редактирай',
-        menuCancelAriaLabel: 'Отмени',
+        menuCancelText: 'Отказ',
+        menuEditAriaLabel: 'Редактиране',
+        menuDeleteAriaLabel: 'Изтриване',
+        menuOkAriaLabel: 'Редактиране',
+        menuCancelAriaLabel: 'Отказ',
         formItemPlaceholder: 'Име на файл'
     },
-    coreWizard: {
-        ariaLabel: 'Помощник'
-    },
-    coreBreadcrumb: {
-        overflowTitleMore: 'Повече'
-    },
-    platformActionBar: {
-        backButtonLabel: 'Върни Се Обратно'
-    },
+    coreWizard: { ariaLabel: 'Асистент' },
+    coreBreadcrumb: { overflowTitleMore: 'Повече' },
+    platformActionBar: { backButtonLabel: 'Върни Се Обратно' },
     platformApprovalFlow: {
-        addNodeButtonTitle: 'Добавете стъпка',
+        addNodeButtonTitle: 'Добавяне на възел',
         nodeMenuButtonTitle: 'Меню',
         defaultWatchersLabel: 'Наблюдатели',
         defaultTitle: 'Процес на одобрение',
-        nextButtonAriaLabel: 'Преминете към следващия слайд',
-        prevButtonAriaLabel: 'Отидете на предишния слайд',
-        editModeSaveButtonLabel: 'Запази',
-        editModeExitButtonLabel: 'Излез',
-        emptyTitle: 'Започнете да добавяте одобряващи и наблюдатели',
+        nextButtonAriaLabel: 'Към следващия слайд',
+        prevButtonAriaLabel: 'Към предишния слайд',
+        editModeSaveButtonLabel: 'Запазване',
+        editModeExitButtonLabel: 'Изход',
+        emptyTitle: 'Започнете да добавяте одобряващи лица и наблюдатели',
         emptyHint:
-            'За да добавите одобряващи, щракнете "Добавете стъпка". За да добавите наблюдатели, щракнете върху полето Наблюдатели.',
-        addNodeDialogHeaderAddApprovers: 'Добавете одобряващи',
-        addNodeDialogHeaderEditApprover: 'Редактиране на одобряващия',
+            'За да добавите одобряващи лица, кликнете върху „Добавяне на стъпка”. За да добавите наблюдатели, кликнете върху полето „Наблюдатели”.',
+        addNodeDialogHeaderAddApprovers: 'Добавяне на одобряващи лица',
+        addNodeDialogHeaderEditApprover: 'Редактиране на одобряващо лице',
         addNodeDialogHeaderAddApproverTeam: 'Потребител/Екип',
-        addNodeDialogHeaderDetail: 'Детайл',
-        addNodeDialogNodeType: 'Паралелно или последователно',
-        addNodeDialogNodeTypeSerial: 'Последователно',
+        addNodeDialogHeaderDetail: 'Подробна информация',
+        addNodeDialogNodeType: 'Паралелно или серийно',
+        addNodeDialogNodeTypeSerial: 'Серийно',
         addNodeDialogNodeTypeParallel: 'Паралелно',
-        addNodeDialogApproverType: 'Тип одобряващ',
+        addNodeDialogApproverType: 'Вид одобряващо лице',
         addNodeDialogApproverTypeUser: 'Потребител',
-        addNodeDialogApproverTypeTeamAnyone: 'Всеки от екипа',
+        addNodeDialogApproverTypeTeamAnyone: 'Който и да е от екипа',
         addNodeDialogApproverTypeTeamEveryone: 'Всички в екипа',
         addNodeDialogUserOrTeam: 'Потребител/Екип',
-        addNodeDialogAddToNext: 'Добавете към следващия последователен възел',
+        addNodeDialogAddToNext: 'Добавяне към следващия сериен възел',
         addNodeDialogDueDate: 'Краен срок',
-        addNodeSearchPlaceholder: 'Търси',
-        addNodeAddActionBtnLabel: 'Добаве',
-        addNodeCancelActionBtnLabel: 'Отмени',
-        addNodeSelectApproverActionBtnLabel: 'Избери',
-        addNodeCancelApproverSelectionActionBtnLabel: 'Отмени',
-        addNodeApproverOrTeamDetailsCloseActionBtnLabel: 'Затвори',
-        userDetailsHeader: 'Детайл',
-        userDetailsSendReminderBtnLabel: 'Изпрати напомняне',
-        userDetailsCancelBtnLabel: 'Отмени',
-        messagesApproverAddedSuccess: 'Добавен е 1 одобряващ',
+        addNodeSearchPlaceholder: 'Търсене',
+        addNodeAddActionBtnLabel: 'Добавяне',
+        addNodeCancelActionBtnLabel: 'Отказ',
+        addNodeSelectApproverActionBtnLabel: 'Избор',
+        addNodeCancelApproverSelectionActionBtnLabel: 'Отказ',
+        addNodeApproverOrTeamDetailsCloseActionBtnLabel: 'Затваряне',
+        userDetailsHeader: 'Подробна информация',
+        userDetailsSendReminderBtnLabel: 'Изпращане на напомняне',
+        userDetailsCancelBtnLabel: 'Отказ',
+        messagesApproverAddedSuccess: '1 одобряващо лице е добавено',
         messagesTeamAddedSuccess: '1 екип е добавен',
-        messagesNodeEdited: '1 одобряващ е редактиран',
-        messagesNodeRemovedSingular: '1 одобряващ е премахнат',
-        messagesNodeRemovedPlural: 'Одобряващите са премахнати',
-        messagesTeamRemoved: '1 отбор е премахнат',
-        messagesErrorBuildGraph: 'Възникна грешка при опит за изграждане на графиката. Проверете първоначалните данни.',
-        messagesUndoAction: 'Отмяна',
-        nodeMembersCount: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return '1 член';
-                default:
-                    return '{{ count }} членове';
-            }
-        },
+        messagesNodeEdited: '1 одобряващо лице е редактирано',
+        messagesNodeRemovedSingular: '1 одобряващо лице е премахнато',
+        messagesNodeRemovedPlural: 'Одобряващи лица са премахнати',
+        messagesTeamRemoved: '1 екип е премахнат',
+        messagesErrorBuildGraph: 'Възникна грешка при опита за създаване на графика. Проверете началните данни.',
+        messagesUndoAction: 'Отмяна на последното действие',
+        nodeMembersCount: '{{count}} членове',
         nodeVariousTeams: 'Различни екипи',
-        nodeStatusDueToday: 'Предстои днес',
-        nodeStatusDueInXDays: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return 'Предстои след 1 ден';
-                default:
-                    return 'Предстои след {{ count }} дни';
-            }
-        },
-        nodeStatusXDaysOverdue: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return '1 ден просрочие';
-                default:
-                    return '{{ count }} дни просрочие';
-            }
-        },
-        nodeActionAddApproversBefore: 'Добавете одобряващи преди',
-        nodeActionAddApproversAfter: 'Добавете одобряващи след това',
-        nodeActionAddApproversParallel: 'Добавете паралелни одобряващи',
-        nodeActionEditApprover: 'Редактиране на одобряващия',
-        nodeActionRemove: 'Изтрий',
-        selectTypeDialogMoveApproverAs: 'Move approver as',
-        selectTypeDialogParallelOrSerial: 'Паралелно или последователно',
-        selectTypeDialogNodeTypeParallel: 'Паралелен одобряващ',
-        selectTypeDialogNodeTypeSerial: 'Последователен одобряващ',
-        selectTypeDialogConfirmButton: 'Потвърди',
-        selectTypeDialogCancelButton: 'Отмени',
-        toolbarAddStepButton: 'Добавете стъпка',
-        toolbarEditButton: 'Редактирай',
-        toolbarAddApproversBefore: 'Добавете одобряващи преди',
-        toolbarAddApproversAfter: 'Добавете одобряващи след това',
-        toolbarAddApproversParallel: 'Добавете паралелни одобряващи',
-        toolbarRemove: 'Изтрий',
-        toolbarEditApprover: 'Редактирай на одобряващия',
-        watchersInputPlaceholder: 'Търси тук...',
-        userListSelectedItemsCountSingular: 'Избран е 1 елемент',
-        userListSelectedItemsCountPlural: 'Избрани са {{ count }} елементи',
+        nodeStatusDueToday: 'Със срок днес',
+        nodeStatusDueInXDays: 'Краен срок след {{count}} дни',
+        nodeStatusXDaysOverdue: 'Просрочено с {{count}} дни',
+        nodeActionAddApproversBefore: 'Добавяне на одобряващи лица преди',
+        nodeActionAddApproversAfter: 'Добавяне на одобряващи лица след',
+        nodeActionAddApproversParallel: 'Добавяне на паралелни одобряващи лица',
+        nodeActionEditApprover: 'Редактиране на одобряващо лице',
+        nodeActionRemove: 'Премахване',
+        selectTypeDialogMoveApproverAs: 'Преместване на одобряващо лице като',
+        selectTypeDialogParallelOrSerial: 'Паралелно или серийно',
+        selectTypeDialogNodeTypeParallel: 'Паралелно одобряващо лице',
+        selectTypeDialogNodeTypeSerial: 'Серийно одобряващо лице',
+        selectTypeDialogConfirmButton: 'Потвърждаване',
+        selectTypeDialogCancelButton: 'Отказ',
+        toolbarAddStepButton: 'Добавяне на стъпка',
+        toolbarEditButton: 'Редактиране',
+        toolbarAddApproversBefore: 'Добавяне на одобряващи лица преди',
+        toolbarAddApproversAfter: 'Добавяне на одобряващи лица след',
+        toolbarAddApproversParallel: 'Добавяне на паралелни одобряващи лица',
+        toolbarRemove: 'Премахване',
+        toolbarEditApprover: 'Редактиране на одобряващо лице',
+        watchersInputPlaceholder: 'Потърсете тук...',
+        userListSelectedItemsCountSingular: '1 избрана позиция',
+        userListSelectedItemsCountPlural: 'Избрани са {{count}} позиции',
         statusApproved: 'одобрено',
         statusRejected: 'отхвърлено',
-        statusInProgress: 'в ход',
-        statusNotStarted: 'не е започнато'
+        statusInProgress: 'изпълнява се',
+        statusNotStarted: 'незапочнато'
     },
-    platformFeedInput: {
-        userTitle: 'User'
-    },
+    platformFeedInput: { userTitle: 'Потребител' },
     platformVHD: {
-        selectionBarLabel: 'Избрани и кондиционирани артикули',
-        selectedAndConditionLabel: 'Избрани артикули и условия',
-        footerClearSelectedTitle: 'изчистете избраните елементи',
-        footerClearSelectedAriaLabel: 'изчистете избраните елементи',
-        searchButtonLabel: 'Търси',
+        selectionBarLabel: 'Избрани позиции и позиции на условия',
+        selectedAndConditionLabel: 'Избрани позиции и условия',
+        footerClearSelectedTitle: 'изчистване на избраните позиции',
+        footerClearSelectedAriaLabel: 'изчистване на избраните позиции',
+        searchButtonLabel: 'Старт',
         successButtonLabel: 'ОК',
-        cancelButtonLabel: 'Отмени',
-        selectedEmptyLabel: 'Няма избрани елементи или условия',
-        searchPlaceholder: 'Потърси',
+        cancelButtonLabel: 'Отказ',
+        selectedEmptyLabel: 'Няма избрани позиции или условия',
+        searchPlaceholder: 'Търсене',
         searchAdvancedSearchLabel: 'Филтри',
-        searchShowAdvancedSearchLabel: 'Показване на филтри',
+        searchShowAdvancedSearchLabel: 'Показване на филтрите',
         searchHideAdvancedSearchLabel: 'Скриване на филтрите',
         searchShowAllAdvancedSearchLabel: 'Показване на всички филтри',
         searchHideAllAdvancedSearchLabel: 'Скриване на всички филтри',
-        selectTabDisplayCountLabel: '({{ count }}) артикули',
-        selectTabMoreBtnLabel: 'Повече',
-        selectTabCountHiddenA11yLabel: 'съдържа {{ rowCount }} ред(а) и {{ colCount }} колонa/и',
-        selectMobileTabBackBtnTitle: 'Обратно',
-        selectMobileTabBtnOpenDialogLabel: 'Отвори диалоговия прозорец',
-        selectMobileTabTitle: '{{ title }} раздел',
-        selectMobileConditionEmpty: 'Празен',
+        selectTabDisplayCountLabel: 'Позиции: ({{count}})',
+        selectTabMoreBtnLabel: 'Още',
+        selectTabCountHiddenA11yLabel: 'съдържа {{rowCount}} реда и {{colCount}} колони',
+        selectMobileTabBackBtnTitle: 'Назад',
+        selectMobileTabBtnOpenDialogLabel: 'Отвори диалогов прозорец',
+        selectMobileTabTitle: 'Таб {{title}}',
+        selectMobileConditionEmpty: 'Празно',
         defineConditionTitle: 'Продукт',
-        defineConditionSelectedValueHiddenA11yLabel: 'избрана стойност {{ value }}',
-        defineConditionConditionsGroupHeaderInclude: 'Включи',
-        defineConditionConditionsGroupHeaderExclude: 'Изключи',
+        defineConditionSelectedValueHiddenA11yLabel: 'Избрана стойност {{value}}',
+        defineConditionConditionsGroupHeaderInclude: 'Включване',
+        defineConditionConditionsGroupHeaderExclude: 'Изключване',
         defineConditionFromPlaceholder: 'от',
         defineConditionToPlaceholder: 'до',
         defineConditionValuePlaceholder: 'стойност',
-        defineConditionRemoveConditionButtonTitle: 'Премахни Условие',
-        defineConditionAddConditionButtonLabel: 'Добави',
-        defineConditionAddConditionButtonTitle: 'Добави Условие',
+        defineConditionRemoveConditionButtonTitle: 'Премахване на условие',
+        defineConditionAddConditionButtonLabel: 'Добавяне',
+        defineConditionAddConditionButtonTitle: 'Добавяне на условие',
         defineConditionConditionStrategyLabelContains: 'съдържа',
         defineConditionConditionStrategyLabelEqualTo: 'равно на',
         defineConditionConditionStrategyLabelBetween: 'между',
-        defineConditionConditionStrategyLabelStartsWith: 'започна с',
+        defineConditionConditionStrategyLabelStartsWith: 'започва с',
         defineConditionConditionStrategyLabelEndsWith: 'завършва с',
         defineConditionConditionStrategyLabelLessThan: 'по-малко от',
-        defineConditionConditionStrategyLabelLessThanEqual: 'по-малко или равно от',
+        defineConditionConditionStrategyLabelLessThanEqual: 'по-малко от или равно на',
         defineConditionConditionStrategyLabelGreaterThan: 'по-голямо от',
-        defineConditionConditionStrategyLabelGreaterThanEqual: 'по-голямо или равно от',
+        defineConditionConditionStrategyLabelGreaterThanEqual: 'по-голямо от или равно на',
         defineConditionConditionStrategyLabelEmpty: 'празно',
         defineConditionConditionStrategyLabelNotEqualTo: 'не е равно на',
-        defineConditionConditionStrategyLabelNotEmpty: 'не празно',
-        defineConditionMaxCountError: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return 'Въведи стойност с не повече от 1 символ';
-                default:
-                    return 'Въведи стойност с не повече от {{ count }} символа';
-            }
-        },
-        selectTabTitle: 'Избери от списъка',
-        searchTableEmptyMessage: 'Use the search to get results',
+        defineConditionConditionStrategyLabelNotEmpty: 'не е празно',
+        defineConditionMaxCountError: 'Въведете стойност с не повече от {{count}} символа',
+        selectTabTitle: 'Избор от списък',
+        searchTableEmptyMessage: 'Използвайте търсенето, за да ви излязат резултати',
         defineTabTitle: 'Дефиниране на условия'
     },
     platformCombobox: {
-        countListResultsSingular: '1 елемент от списъка с резултати',
-        countListResultsPlural: '{{ count }} елемента от списъка с резултати'
+        countListResultsSingular: '1 позиция от списъка с резултати',
+        countListResultsPlural: '{{count}} позиции от списъка с резултати'
     },
     platformMultiCombobox: {
-        inputGlyphAriaLabel: 'Избери Опции',
-        inputIconTitle: 'Избери Опции',
-        mobileShowAllItemsButton: 'Покажи всички елементи',
-        mobileShowSelectedItemsButton: 'Покажи избраните елементи'
+        inputGlyphAriaLabel: 'Избор на опции',
+        inputIconTitle: 'Избор на опции',
+        mobileShowAllItemsButton: 'Показване на всички позиции',
+        mobileShowSelectedItemsButton: 'Показване на избраните позиции'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 символ над ограничението',
-        counterMessageCharactersOverTheLimitPlural: '{{ count }} символи над ограничението',
+        counterMessageCharactersOverTheLimitPlural: '{{count}} символа над ограничението',
         counterMessageCharactersRemainingSingular: 'Остава 1 символ',
-        counterMessageCharactersRemainingPlural: 'Остават {{ count }} символи'
+        counterMessageCharactersRemainingPlural: 'Остават {{count}} символа'
     },
-    platformLink: {
-        roleDescriptionWithMedia: 'Медия: {{ media }}'
-    },
-    platformList: {
-        loadingAriaLabel: 'зареждане'
-    },
-    platformObjectListItem: {
-        detailsActionAriaLabel: 'детайл',
-        deleteActionAriaLabel: 'изтрий'
-    },
-    platformStandardListItem: {
-        detailsActionAriaLabel: 'детайл',
-        deleteActionAriaLabel: 'изтрий'
-    },
+    platformLink: { roleDescriptionWithMedia: 'Медии: {{media}}' },
+    platformList: { loadingAriaLabel: 'зареждане' },
+    platformObjectListItem: { detailsActionAriaLabel: 'подробности', deleteActionAriaLabel: 'изтриване' },
+    platformStandardListItem: { detailsActionAriaLabel: 'подробности', deleteActionAriaLabel: 'изтриване' },
     platformSearchField: {
-        clearButtonTitle: 'Изчисти',
-        submitButtonTitle: 'Търси',
-        searchInputLabel: 'Търси',
-        synchronizeButtonTitle: 'Синхронизирай',
-        searchSuggestionMessage: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return 'Намерено е 1 предложение.';
-                default:
-                    return 'Намерени са {{ count }} предложения.';
-            }
-        },
-        searchSuggestionNavigateMessage: 'използвайте стрелки нагоре и надолу за навигация'
+        clearButtonTitle: 'Изчистване',
+        submitButtonTitle: 'Търсене',
+        searchInputLabel: 'Търсене',
+        synchronizeButtonTitle: 'Синхронизиране',
+        searchSuggestionMessage: 'Намерени са {{count}} предложения.',
+        searchSuggestionNavigateMessage: 'за придвижване, използвайте стрелките нагоре и надолу'
     },
     platformSmartFilterBar: {
-        searchPlaceholder: 'Търси',
-        submitButtonLabel: 'Търси',
-        filtersButtonLabel: 'Филтри ({{ filtersCount }})',
-        showFiltersButtonLabel: 'Покажи филтрите',
-        hideFiltersButtonLabel: 'Скрий филтрите',
-        defineConditionsRemoveConditionButtonTitle: 'Премахни Условие',
-        defineConditionsAddConditionButtonLabel: 'Добави Условие',
-        defineConditionsSubmitButtonLabel: 'Търси',
-        defineConditionsCancelButton: 'Отмени',
-        selectFiltersHeader: 'Filters',
+        searchPlaceholder: 'Търсене',
+        submitButtonLabel: 'Напред',
+        filtersButtonLabel: 'Филтри ({{filtersCount}})',
+        showFiltersButtonLabel: 'Показване на филтрите',
+        hideFiltersButtonLabel: 'Скриване на филтрите',
+        defineConditionsRemoveConditionButtonTitle: 'Премахване на условие',
+        defineConditionsAddConditionButtonLabel: 'Добавяне на условие',
+        defineConditionsSubmitButtonLabel: 'Прилагане',
+        defineConditionsCancelButton: 'Отказ',
+        selectFiltersHeader: 'Филтри',
         selectFiltersAvailableFiltersText: 'Налични филтри',
         selectFiltersFilterColumnLabel: 'Филтър',
-        selectFiltersActiveColumnLabel: 'Активни',
-        selectFiltersSubmitButtonLabel: 'Филтрирай',
-        selectFiltersCancelButton: 'Отмени',
+        selectFiltersActiveColumnLabel: 'Активно',
+        selectFiltersSubmitButtonLabel: 'Прилагане',
+        selectFiltersCancelButton: 'Отказ',
         filterConditionContains: 'съдържа',
         filterConditionEqualTo: 'равно на',
         filterConditionBetween: 'между',
-        filterConditionBeginsWith: 'започна с',
+        filterConditionBeginsWith: 'започва с',
         filterConditionEndsWith: 'завършва с',
         filterConditionLessThan: 'по-малко от',
-        filterConditionLessThanOrEqualTo: 'по-малко или равно',
+        filterConditionLessThanOrEqualTo: 'по-малко от или равно на',
         filterConditionGreaterThan: 'по-голямо от',
-        filterConditionGreaterThanOrEqualTo: 'по-голямо или равно от',
+        filterConditionGreaterThanOrEqualTo: 'по-голямо от или равно на',
         filterConditionAfter: 'след',
-        filterConditionOnOrAfter: 'равно или повече',
+        filterConditionOnOrAfter: 'на или след',
         filterConditionBefore: 'преди',
-        filterConditionBeforeOrOn: 'до или равно',
+        filterConditionBeforeOrOn: 'преди или на',
         filterConditionValuePlaceholder: 'стойност',
         filterConditionValueFromPlaceholder: 'от',
         filterConditionValueToPlaceholder: 'до',
-        settingsCategoryAll: 'Всички',
-        settingsCategoryVisible: 'Видими',
-        settingsCategoryActive: 'Активни',
-        settingsCategoryVisibleAndActive: 'Видими и Активни',
-        settingsCategoryMandatory: 'Задължителни',
-        manageFieldConditions: 'Manage field conditions',
-        refreshButtonAriaLabel: 'Refresh'
+        settingsCategoryAll: 'Всичко',
+        settingsCategoryVisible: 'Видимо',
+        settingsCategoryActive: 'Активно',
+        settingsCategoryVisibleAndActive: 'Видимо и активно',
+        settingsCategoryMandatory: 'Задължително',
+        manageFieldConditions: 'Управление на условията за полето',
+        refreshButtonAriaLabel: 'Опресняване'
     },
     platformTable: {
-        headerMenuSortAsc: 'Сортирай Възходящо',
-        headerMenuSortDesc: 'Сортирай Нисходящо',
-        headerMenuGroup: 'Групирай',
-        headerMenuFreeze: 'Замрази',
-        headerMenuEndFreeze: 'Freeze to End',
-        headerMenuUnfreeze: 'Размрази',
+        headerMenuSortAsc: 'Сортиране във възходящ ред',
+        headerMenuSortDesc: 'Сортиране в низходящ ред',
+        headerMenuGroup: 'Група',
+        headerMenuFreeze: 'Фиксиране',
+        headerMenuEndFreeze: 'Фиксиране до края',
+        headerMenuUnfreeze: 'Отмяна на фиксирането',
         headerMenuFilter: 'Филтър',
-        defaultEmptyMessage: 'Няма намерени данни',
-        emptyCell: 'Празна',
+        defaultEmptyMessage: 'Не са намерени данни',
+        emptyCell: 'Празно',
         noVisibleColumnsMessage:
-            'В момента в таблицата няма видими колони. Моля, изберете нужните колони в настройките на таблицата.',
-        resetChangesButtonLabel: 'Нулиране',
-        editableCellNumberPlaceholder: 'Въведи стойност',
-        editableCellDatePlaceholder: 'Въведи стойност',
-        editableCellStringPlaceholder: 'Въведи стойност',
+            'В момента в таблицата няма видими колони. Моля, изберете онези, които ви трябват, от настройките на таблицата.',
+        resetChangesButtonLabel: 'Изчистване',
+        editableCellNumberPlaceholder: 'Въведете стойност',
+        editableCellDatePlaceholder: 'Въведете стойност',
+        editableCellStringPlaceholder: 'Въведете стойност',
         P13ColumnsDialogHeader: 'Колони',
-        P13ColumnsDialogSearchPlaceholder: 'Търси',
-        P13ColumnsDialogsShowSelected: 'Покажи избраните',
-        P13ColumnsDialogShowAll: 'Покажи всички',
-        P13ColumnsDialogSelectAll: 'Покажи всички ({{ selectedColumnsCount }}/{{ selectableColumnsCount }})',
-        P13ColumnsDialogConfirmationBtnLabel: 'OK',
-        P13ColumnsDialogCancelBtnLabel: 'Отмени',
-        P13ColumnsDialogMoveToTopBtn: 'Измести най-отгоре',
-        P13ColumnsDialogMoveUpBtn: 'Измести нагоре',
-        P13ColumnsDialogMoveDownBtn: 'Измести надолу',
-        P13ColumnsDialogMoveToBottomBtn: 'Измести най-отдолу',
+        P13ColumnsDialogSearchPlaceholder: 'Търсене',
+        P13ColumnsDialogsShowSelected: 'Показване на избраните',
+        P13ColumnsDialogShowAll: 'Показване на всички',
+        P13ColumnsDialogSelectAll: 'Избор на всички ({{selectedColumnsCount}}/{{selectableColumnsCount}})',
+        P13ColumnsDialogConfirmationBtnLabel: 'ОК',
+        P13ColumnsDialogCancelBtnLabel: 'Отказ',
+        P13ColumnsDialogMoveToTopBtn: 'Преместване най-отгоре',
+        P13ColumnsDialogMoveUpBtn: 'Преместване нагоре',
+        P13ColumnsDialogMoveDownBtn: 'Преместване надолу',
+        P13ColumnsDialogMoveToBottomBtn: 'Преместване най-отдолу',
         P13FilterStrategyLabelBetween: 'между',
         P13FilterStrategyLabelContains: 'съдържа',
         P13FilterStrategyLabelBeginsWith: 'започва с',
         P13FilterStrategyLabelEndsWith: 'завършва с',
         P13FilterStrategyLabelEqualTo: 'равно на',
         P13FilterStrategyLabelGreaterThan: 'по-голямо от',
-        P13FilterStrategyLabelGreaterThanOrEqualTo: 'по-голямо или равно от',
+        P13FilterStrategyLabelGreaterThanOrEqualTo: 'по-голямо от или равно на',
         P13FilterStrategyLabelLessThan: 'по-малко от',
-        P13FilterStrategyLabelLessThanOrEqualTo: 'по-малко или равно от',
+        P13FilterStrategyLabelLessThanOrEqualTo: 'по-малко от или равно на',
         P13FilterStrategyLabelAfter: 'след',
-        P13FilterStrategyLabelOnOrAfter: 'равно или повече',
+        P13FilterStrategyLabelOnOrAfter: 'на или след',
         P13FilterStrategyLabelBefore: 'преди',
-        P13FilterStrategyLabelBeforeOrOn: 'до или равно',
-        P13FilterStrategyLabelNotDefined: 'Недефинирано',
-        P13FilterBooleanOptionNotDefined: ' ',
+        P13FilterStrategyLabelBeforeOrOn: 'преди или на',
+        P13FilterStrategyLabelNotDefined: 'Не е дефинирано',
+        P13FilterBooleanOptionNotDefined: '',
         P13FilterBooleanOptionTrue: 'Да',
         P13FilterBooleanOptionFalse: 'Не',
-        P13FilterDialogHeader: 'Филтрирано от',
-        P13FilterDialogIncludePanelTitleWithCount: 'Добави ({{ count }})',
-        P13FilterDialogIncludePanelTitleWithoutCount: 'Добави',
-        P13FilterDialogExcludePanelTitleWithCount: 'Изключи ({{ count }})',
-        P13FilterDialogExcludePanelTitleWithoutCount: 'Exclude',
-        P13FilterDialogRemoveFilterBtnTitle: 'Премахни Филтър',
+        P13FilterDialogHeader: 'Филтриране по',
+        P13FilterDialogIncludePanelTitleWithCount: 'Включващи ({{count}})',
+        P13FilterDialogIncludePanelTitleWithoutCount: 'Включващи',
+        P13FilterDialogExcludePanelTitleWithCount: 'Изключващи ({{count}})',
+        P13FilterDialogExcludePanelTitleWithoutCount: 'Изключващи',
+        P13FilterDialogRemoveFilterBtnTitle: 'Премахване на филтър',
         P13FilterDialoAddFilterBtnTitle: 'Добави Филтър',
-        P13FilterDialogConfirmationBtnLabel: 'OK',
-        P13FilterDialogCancelBtnLabel: 'Отмени',
-        P13GroupDialogHeader: 'Групирай',
-        P13GroupDialogNoneSelectedColumnSelectPlaceholder: '(нито един)',
-        P13GroupDialogShowFieldAsColumnCheckboxLabel: 'Show Field as Column',
-        P13GroupDialogRemoveGroupBtnTitle: 'Премахни',
-        P13GroupDialogAddNewGroupBtnTitle: 'Добави Нова',
-        P13GroupDialogConfirmationBtnLabel: 'OK',
-        P13GroupDialogCancelBtnLabel: 'Отмени',
-        P13SortDialogHeader: 'Сортирай',
-        P13SortDialogNoneSelectedColumn: '(нито един)',
-        P13SortDialogNoneSelectedSorting: '(нито един)',
-        P13SortDialogSortOrderSelectOptionAsc: 'Възходящ',
-        P13SortDialogSortOrderSelectOptionDesc: 'Низходящ',
-        P13SortDialogRemoveSortBtnTitle: 'Премахни',
-        P13SortDialogAddNewSortBtnTitle: 'Добави Ново',
-        P13SortDialogConfirmationBtnLabel: 'OK',
-        P13SortDialogCancelBtnLabel: 'Отмени',
-        toolbarSearchPlaceholder: 'Търси',
-        toolbarActionCreateButtonLabel: 'Създай',
-        toolbarActionSaveButtonLabel: 'Запиши',
-        toolbarActionCancelButtonLabel: 'Отмени',
-        toolbarActionSortButtonTitle: 'Сортирай',
-        toolbarActionFilterButtonTitle: 'Филтрирай',
-        toolbarActionGroupButtonTitle: 'Групирай',
+        P13FilterDialogConfirmationBtnLabel: 'ОК',
+        P13FilterDialogCancelBtnLabel: 'Отказ',
+        P13GroupDialogHeader: 'Групиране',
+        P13GroupDialogNoneSelectedColumnSelectPlaceholder: '(няма)',
+        P13GroupDialogShowFieldAsColumnCheckboxLabel: 'Показване на полето като колона',
+        P13GroupDialogRemoveGroupBtnTitle: 'Премахване',
+        P13GroupDialogAddNewGroupBtnTitle: 'Добавяне на нов',
+        P13GroupDialogConfirmationBtnLabel: 'ОК',
+        P13GroupDialogCancelBtnLabel: 'Отказ',
+        P13SortDialogHeader: 'Сортиране',
+        P13SortDialogNoneSelectedColumn: '(няма)',
+        P13SortDialogNoneSelectedSorting: '(няма)',
+        P13SortDialogSortOrderSelectOptionAsc: 'Възходящо',
+        P13SortDialogSortOrderSelectOptionDesc: 'Низходящо',
+        P13SortDialogRemoveSortBtnTitle: 'Премахване',
+        P13SortDialogAddNewSortBtnTitle: 'Добавяне на ново',
+        P13SortDialogConfirmationBtnLabel: 'ОК',
+        P13SortDialogCancelBtnLabel: 'Отказ',
+        toolbarSearchPlaceholder: 'Търсене',
+        toolbarActionCreateButtonLabel: 'Създаване',
+        toolbarActionSaveButtonLabel: 'Запазване',
+        toolbarActionCancelButtonLabel: 'Отказ',
+        toolbarActionSortButtonTitle: 'Сортиране',
+        toolbarActionFilterButtonTitle: 'Филтър',
+        toolbarActionGroupButtonTitle: 'Група',
         toolbarActionColumnsButtonTitle: 'Колони',
-        toolbarActionExpandAllButtonTitle: 'Expand all',
-        toolbarActionCollapseAllButtonTitle: 'Collapse all',
-        filterDialogNotFilteredLabel: '(Нефилтрирано)',
-        filterDialogFilterByLabel: 'Филтрирано по: {{ filterLabel }}',
+        toolbarActionExpandAllButtonTitle: 'Разгръщане на всички',
+        toolbarActionCollapseAllButtonTitle: 'Свиване на всички',
+        filterDialogNotFilteredLabel: '(Без филтриране)',
+        filterDialogFilterByLabel: 'Филтриране по: {{filterLabel}}',
         filterDialogFilterTitle: 'Филтър',
-        filterDialogFilterBy: 'Филтрирано по',
-        filterDialogConfirmBtnLabel: 'OK',
-        filterDialogCancelBtnLabel: 'Отмени',
+        filterDialogFilterBy: 'Филтриране по',
+        filterDialogConfirmBtnLabel: 'ОК',
+        filterDialogCancelBtnLabel: 'Отказ',
         groupDialogHeader: 'Група',
         groupDialogGroupOrderHeader: 'Ред на групиране',
-        groupDialogGroupOrderAsc: 'Възходяща',
-        groupDialogGroupOrderDesc: 'Низходяща',
-        groupDialogGroupByHeader: 'Групирано по',
-        groupDialogNotGroupedLabel: '(Негрупирано)',
-        groupDialogConfirmBtnLabel: 'OK',
-        groupDialogCancelBtnLabel: 'Отмени',
-        sortDialogHeader: 'Сортирай',
-        sortDialogSortOrderHeader: 'Сортирано',
-        sortDialogSortOrderAsc: 'Възходяща',
-        sortDialogSortOrderDesc: 'Низходяща',
-        sortDialogSortByHeader: 'Сортирай по',
-        sortDialogNotSortedLabel: '(Несортирано)',
-        sortDialogConfirmBtnLabel: 'OK',
-        sortDialogCancelBtnLabel: 'Отмени',
-        selectAllCheckboxLabel: 'Select all',
-        deselectAllCheckboxLabel: 'Deselect all',
-        deselectSingleRow: 'To deselect row, press SPACEBAR',
-        selectSingleRow: 'To select row, press SPACEBAR'
+        groupDialogGroupOrderAsc: 'Възходящо',
+        groupDialogGroupOrderDesc: 'Низходящо',
+        groupDialogGroupByHeader: 'Групиране по',
+        groupDialogNotGroupedLabel: '(Без групиране)',
+        groupDialogConfirmBtnLabel: 'ОК',
+        groupDialogCancelBtnLabel: 'Отказ',
+        sortDialogHeader: 'Сортиране',
+        sortDialogSortOrderHeader: 'Ред на сортиране',
+        sortDialogSortOrderAsc: 'Възходящо',
+        sortDialogSortOrderDesc: 'Низходящо',
+        sortDialogSortByHeader: 'Сортиране по',
+        sortDialogNotSortedLabel: '(Без сортиране)',
+        sortDialogConfirmBtnLabel: 'ОК',
+        sortDialogCancelBtnLabel: 'Отказ',
+        selectAllCheckboxLabel: 'Избиране на всички',
+        deselectAllCheckboxLabel: 'Отмяна на избора на всички',
+        deselectSingleRow: 'За премахване на ред от избраните, натиснете ИНТЕРВАЛ',
+        selectSingleRow: 'За избор на ред, натиснете ИНТЕРВАЛ'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Отиди на предишнита',
@@ -676,63 +556,49 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         messageFileNameLengthExceededSingular:
             'Името "{{ fileName }}" надвишава максималната дължина на името на файла. Позволена дължина на името на файла: {{ maxFilenameLength }} символа.'
     },
-    platformWizardGenerator: {
-        summarySectionEditStep: 'Редактирай'
-    },
+    platformWizardGenerator: { summarySectionEditStep: 'Редактиране' },
     platformMessagePopover: {
-        allErrors: 'All',
+        allErrors: 'Всички',
         defaultErrors: {
-            email: 'Email is invalid',
-            max: 'The field exceeds maximum value',
-            maxLength: 'The field exceeds maximum length',
-            min: 'The field value is less than allowed',
-            minLength: 'The field length is less than allowed',
-            pattern: 'The field value is invalid',
-            required: 'The field is mandatory',
-            requiredTrue: 'The field is mandatory'
+            email: 'Имейлът е невалиден',
+            max: 'Полето надхвърля максималната стойност',
+            maxLength: 'Полето надхвърля максималната дължина',
+            min: 'Стойността на полето е по-малка от разрешената',
+            minLength: 'Дължината на полето е по-малка от разрешената',
+            pattern: 'Стойността на полето е невалидна',
+            required: 'Полето е задължително',
+            requiredTrue: 'Полето е задължително'
         }
     },
     platformVariantManagement: {
-        manage: 'Manage',
-        saveAs: 'Save as',
-        saveView: 'Save View',
-        save: 'Save',
-        myViews: 'My Views',
-        view: 'View',
-        setAsDefault: 'Set as Default',
-        public: 'Public',
-        applyAutomatically: 'Apply Automatically',
-        requiredFieldError: 'This field is required.',
-        nameTakenFieldError: 'Variant with such name already exists. Please chose a different name.',
-        cancel: 'Cancel',
-        manageViews: 'Manage Views',
-        markAsFavourite: 'Mark as Favourite',
-        sharing: 'Sharing',
-        default: 'Default',
-        createdBy: 'Created By',
-        removeVariant: 'Remove View',
-        search: 'Search',
-        access: {
-            public: 'Public',
-            private: 'Private'
-        }
+        manage: 'Управление',
+        saveAs: 'Запазване като',
+        saveView: 'Запазване на изгледа',
+        save: 'Запазване',
+        myViews: 'Моите изгледи',
+        view: 'Преглед',
+        setAsDefault: 'Задаване по подразбиране',
+        public: 'Публично',
+        applyAutomatically: 'Автоматично прилагане',
+        requiredFieldError: 'Това поле е задължително.',
+        nameTakenFieldError: 'Вече съществува вариант с такова име. Моля, изберете друго име.',
+        cancel: 'Отказ',
+        manageViews: 'Управление на изгледите',
+        markAsFavourite: 'Маркиране като любимо',
+        sharing: 'Споделено',
+        default: 'По подразбиране',
+        createdBy: 'Създал',
+        removeVariant: 'Премахване на изгледа',
+        search: 'Търсене',
+        access: { public: 'Публично', private: 'Частно' }
     },
-    platformSelect: {
-        selectOptionLabel: 'Изберете опция'
-    },
+    platformSelect: { selectOptionLabel: 'Избор на опция' },
     fnSlider: {
         minMaxDetails: 'Минималната стойност на плъзгача е {{ min }}, максималната стойност е {{ max }}',
         valueminDetails: 'Стойността е {{ value }}',
         valuemaxDetails: 'Стойността е {{ value }}',
         valueNowDetails: 'Текущата стойност е {{ value }}'
     },
-    fnSwitch: {
-        semanticAcceptLabel: 'Приеми',
-        semanticDeclineLabel: 'Отхвърли'
-    },
-    coreTree: {
-        expand: 'Expand node',
-        collapse: 'Collapse node',
-        noData: 'No data'
-    }
+    fnSwitch: { semanticAcceptLabel: 'Приеми', semanticDeclineLabel: 'Отхвърли' },
+    coreTree: { expand: 'Разширяване на възела', collapse: 'Скриване на възела', noData: 'Няма данни' }
 };

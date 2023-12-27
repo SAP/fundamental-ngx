@@ -1,8 +1,6 @@
+/* eslint-disable */
 import { FdLanguage } from '../models/lang';
 
-/**
- * Default set of translations of Fundamental UI library for Georgian language
- */
 export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
     coreCalendar: {
         yearSelectionLabel: 'წელის არჩევა',
@@ -50,113 +48,94 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         datetimeOkLabel: 'კარგი',
         datetimeCancelLabel: 'გაუქმება'
     },
-    coreFeedListItem: {
-        moreLabel: 'მეტი',
-        lessLabel: 'ნაკლები'
-    },
+    coreFeedListItem: { moreLabel: 'მეტი', lessLabel: 'ნაკლები' },
     coreGridList: {
         filterBarCancelButtonTitle: 'გაუქმება',
-        listItemStatusAriaLabel: 'ელემენტის სტატუსია: {{ status }}.',
-        listItemCounterAriaLabel: 'ელემენტს აქვს {{ count }} შვილი.',
+        listItemStatusAriaLabel: 'ელემენტის სტატუსია: {{status}}.',
+        listItemCounterAriaLabel: 'ელემენტს აქვს {{count}} შვილი.',
         listItemButtonDetailsTitle: 'დეტალები',
         listItemButtonDeleteTitle: 'წაშლა',
         listItemStatusContainsErrors: 'შეიცავს შეცდომებს',
         listItemStatusLocked: 'დაბლოკილი',
         listItemStatusDraft: 'დაუსრულებელი'
     },
-    coreMessageStrip: {
-        dismissLabel: 'გაუქმება'
-    },
+    coreMessageStrip: { dismissLabel: 'გაუქმება' },
     coreMultiInput: {
         multiInputAriaLabel: 'Multi Value Input',
         noResults: 'No results.',
         navigateSelectionsWithArrows: 'Navigate selections with the up and down arrows.',
         countListResultsSingular: '1 რეზულტატი.',
-        countListResultsPlural: '{{ count }} რეზულტატი.',
+        countListResultsPlural: '{{count}} რეზულტატი.',
         escapeNavigateTokens:
             'Press escape to exit the input field and use the left and right arrow keys to navigate through the selected options.',
-        tokensCountText: ({ length }) => `Contains ${length || 'no'} token${length === 1 ? '' : 's'}.`
+        tokensCountText: (params) => {
+            return `Contains ${(() => {
+                if (params['length'] == 0) {
+                    return `no token`;
+                }
+                if (params['length'] == 1) {
+                    return `1 token`;
+                } else {
+                    return `${params['length']} tokens`;
+                }
+            })()}.`;
+        }
     },
-    coreNavigation: {
-        mainNavigation: 'მთავარი ნავიგაცია',
-        navigationPath: 'ნავიგაციის გზა'
-    },
+    coreNavigation: { mainNavigation: 'მთავარი ნავიგაცია', navigationPath: 'ნავიგაციის გზა' },
     coreNestedList: {
-        linkItemAriaLabel:
-            'სიის ელემენტი {{ itemDetails }}, ინდექსით {{ index }} {{ total }}-დან {{ selectedDescription }}'
+        linkItemAriaLabel: 'სიის ელემენტი {{itemDetails}}, ინდექსით {{index}} {{total}}-დან {{selectedDescription}}'
     },
-    coreOverflowLayout: {
-        moreItemsButton: 'დანარჩენი {{ count }}'
-    },
+    coreOverflowLayout: { moreItemsButton: 'დანარჩენი {{count}}' },
     corePagination: {
-        pageLabel: 'გვერდი {{ pageNumber }}',
-        currentPageAriaLabel: 'მიმდინარე გვერდია {{ pageNumber }}',
+        pageLabel: 'გვერდი {{pageNumber}}',
+        currentPageAriaLabel: 'მიმდინარე გვერდია {{pageNumber}}',
         labelBeforeInputMobile: 'გვერდი:',
-        labelAfterInputMobile: '{{ totalCount }}-დან',
-        inputAriaLabel: 'გვერდის ველი, მიმდინარე გვერდი, გვერდი {{ pageNumber }} {{ totalCount }}-დან',
+        labelAfterInputMobile: '{{totalCount}}-დან',
+        inputAriaLabel: 'გვერდის ველი, მიმდინარე გვერდი, გვერდი {{pageNumber}} {{totalCount}}-დან',
         itemsPerPageLabel: 'შედეგები გვერდზე:',
         firstLabel: 'პირველი',
         previousLabel: 'წინა',
         nextLabel: 'შემდეგი',
         lastLabel: 'ბოლო',
         ariaLabel: 'გვერდები',
-        totalResultsLabel: 'სულ {{ totalCount }} შედეგი'
+        totalResultsLabel: 'სულ {{totalCount}} შედეგი'
     },
-    coreProductSwitch: {
-        ariaLabel: 'გადამრთველი'
-    },
-    coreShellbar: {
-        collapsedItemMenuLabel: 'დამალული ელემენტი',
-        cancel: 'Cancel',
-        search: 'Search'
-    },
+    coreProductSwitch: { ariaLabel: 'გადამრთველი' },
+    coreShellbar: { collapsedItemMenuLabel: 'დამალული ელემენტი', cancel: 'Cancel', search: 'Search' },
     coreSlider: {
-        singleMinMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {{ min }}, მაქსიმუმი - {{ max }}',
-        singleValueminDetails: 'მნიშვნელობაა {{ value }}',
-        singleValuemaxDetails: 'მნიშვნელობაა {{ value }}',
-        singleValueNowDetails: 'მიმდინარე მნიშვნელობაა {{ value }}',
-        multipleHandle1MinMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {{ min }}, მაქსიმუმი - {{ max }}',
-        multipleHandle1ValueminDetails: 'მნიშვნელობაა {{ value }}',
-        multipleHandle1ValuemaxDetails: 'მნიშვნელობაა {{ value }}',
-        multipleHandle1ValueNowDetails: 'მიმდინარე მნიშვნელობაა {{ value }}',
-        multipleHandle2MinMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {{ min }}, მაქსიმუმი - {{ max }}',
-        multipleHandle2ValueminDetails: 'მნიშვნელობაა {{ value }}',
-        multipleHandle2ValuemaxDetails: 'მნიშვნელობაა {{ value }}',
-        multipleHandle2ValueNowDetails: 'მიმდინარე მნიშვნელობაა {{ value }}'
+        singleMinMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {{min}}, მაქსიმუმი - {{max}}',
+        singleValueminDetails: 'მნიშვნელობაა {{value}}',
+        singleValuemaxDetails: 'მნიშვნელობაა {{value}}',
+        singleValueNowDetails: 'მიმდინარე მნიშვნელობაა {{value}}',
+        multipleHandle1MinMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {{min}}, მაქსიმუმი - {{max}}',
+        multipleHandle1ValueminDetails: 'მნიშვნელობაა {{value}}',
+        multipleHandle1ValuemaxDetails: 'მნიშვნელობაა {{value}}',
+        multipleHandle1ValueNowDetails: 'მიმდინარე მნიშვნელობაა {{value}}',
+        multipleHandle2MinMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {{min}}, მაქსიმუმი - {{max}}',
+        multipleHandle2ValueminDetails: 'მნიშვნელობაა {{value}}',
+        multipleHandle2ValuemaxDetails: 'მნიშვნელობაა {{value}}',
+        multipleHandle2ValueNowDetails: 'მიმდინარე მნიშვნელობაა {{value}}'
     },
-    coreSplitButton: {
-        expandButtonAriaLabel: 'მეტი ქმედებები',
-        arialLabel: 'გამოყოფილი ღილაკები'
-    },
-    coreSplitter: {
-        paginationItemAriaLabel: 'სექცია'
-    },
+    coreSplitButton: { expandButtonAriaLabel: 'მეტი ქმედებები', arialLabel: 'გამოყოფილი ღილაკები' },
+    coreSplitter: { paginationItemAriaLabel: 'სექცია' },
     coreStepInput: {
         incrementButtonTitle: 'მომატება',
         decrementButtonTitle: 'დაკლება',
         ariaRoleDescription: 'ნაბიჯის შეყვანა'
     },
-    coreSwitch: {
-        semanticAcceptLabel: 'მიღება',
-        semanticDeclineLabel: 'უარყოფა'
-    },
-    coreTabs: {
-        tabListExpandButtonText: 'მაჩვენე მეტი'
-    },
-    coreText: {
-        moreLabel: 'მეტი',
-        lessLabel: 'ნაკლები'
-    },
+    coreSwitch: { semanticAcceptLabel: 'მიღება', semanticDeclineLabel: 'უარყოფა' },
+    coreTabs: { tabListExpandButtonText: 'მაჩვენე მეტი' },
+    coreText: { moreLabel: 'მეტი', lessLabel: 'ნაკლები' },
     coreTime: {
         componentAriaName: 'დროის ველი',
         increaseHoursLabel: 'საათის გაზრდა',
         hrsLabel: 'სთ',
-        decreaseHoursLabel: 'საათის შემცირება',
-        increaseMinutesLabel: 'წუთის გაზრდა',
-        minLabel: 'წთ',
-        decreaseMinutesLabel: 'წუთის შემცირება',
-        increaseSecondsLabel: 'წამის გაზრდა',
-        secLabel: 'წმ',
+        decreaseHoursLabel: 'Decrease hours',
+        increaseMinutesLabel: 'Increase minutes',
+        minLabel: 'Min',
+        decreaseMinutesLabel: 'Decrease minutes',
+        increaseSecondsLabel: 'Increase seconds',
+        secLabel: 'Sec',
         hoursLabel: 'Hours',
         minutesLabel: 'Minutes',
         secondsLabel: 'Seconds',
@@ -167,18 +146,9 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         navigationInstruction:
             'სიაში სამოძრაოდ დააჭირეთ ზედა და ქვედა ღილაკებს. სიებს შორის სამოძრაოდ - მარჯვენა და მარცხენა ღილაკებს.'
     },
-    coreTimePicker: {
-        timePickerInputLabel: 'დროის შესაყვანი ველი',
-        timePickerButtonLabel: 'ასარჩევის გახსნა'
-    },
-    coreToken: {
-        deleteButtonLabel: 'წაშლადი',
-        ariaRoleDescription: 'ტოკენი'
-    },
-    coreTokenizer: {
-        moreLabel: '{{count}} სხვა',
-        tokenizerLabel: 'Tokenizer'
-    },
+    coreTimePicker: { timePickerInputLabel: 'დროის შესაყვანი ველი', timePickerButtonLabel: 'ასარჩევის გახსნა' },
+    coreToken: { deleteButtonLabel: 'წაშლადი', ariaRoleDescription: 'ტოკენი' },
+    coreTokenizer: { moreLabel: '{{count}} სხვა', tokenizerLabel: 'Tokenizer' },
     coreUploadCollection: {
         menuOkText: 'კარგი',
         menuCancelText: 'გაუქმება',
@@ -188,15 +158,9 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         menuCancelAriaLabel: 'გაუქმება',
         formItemPlaceholder: 'ფაილი'
     },
-    coreWizard: {
-        ariaLabel: 'ოსტატი'
-    },
-    coreBreadcrumb: {
-        overflowTitleMore: 'მეტი'
-    },
-    platformActionBar: {
-        backButtonLabel: 'უკან დაბრუნება'
-    },
+    coreWizard: { ariaLabel: 'ოსტატი' },
+    coreBreadcrumb: { overflowTitleMore: 'მეტი' },
+    platformActionBar: { backButtonLabel: 'უკან დაბრუნება' },
     platformApprovalFlow: {
         addNodeButtonTitle: 'დამატება',
         nodeMenuButtonTitle: 'მენიუ',
@@ -240,11 +204,11 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         messagesTeamRemoved: 'გუნდი წაიშალა',
         messagesErrorBuildGraph: 'გრაფის დამუშავებისას წარმოიშვა შეცდომა. შეამოწმეთ საწყისი მონაცემები.',
         messagesUndoAction: 'უკან დაბრუნება',
-        nodeMembersCount: '{{ count }} წევრი',
+        nodeMembersCount: '{{count}} წევრი',
         nodeVariousTeams: 'სხვადასხვა გუნდი',
         nodeStatusDueToday: 'ვადა იწურება დღეს',
-        nodeStatusDueInXDays: ' ვადა იწურება {{ count }} დღეში',
-        nodeStatusXDaysOverdue: 'ვადას გადაცდა {{ count }} დღე',
+        nodeStatusDueInXDays: 'ვადა იწურება {{count}} დღეში',
+        nodeStatusXDaysOverdue: 'ვადას გადაცდა {{count}} დღე',
         nodeActionAddApproversBefore: 'დაამატე დამდასტურებელი წინ',
         nodeActionAddApproversAfter: 'დაამატე დამდასტურებელი შემდეგ',
         nodeActionAddApproversParallel: 'დაამატე პარალელური დამდასტურებელი',
@@ -265,15 +229,13 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         toolbarEditApprover: 'შეასწორე დამდასტურებელი',
         watchersInputPlaceholder: 'ძებნა...',
         userListSelectedItemsCountSingular: '1 ელემენტი არჩეულია',
-        userListSelectedItemsCountPlural: '{{ count }} ელემენტი არჩეულია',
+        userListSelectedItemsCountPlural: '{{count}} ელემენტი არჩეულია',
         statusApproved: 'დადასტურებული',
         statusRejected: 'უარყოფილი',
         statusInProgress: 'მიმდინარე',
         statusNotStarted: 'არ დაწყებულა'
     },
-    platformFeedInput: {
-        userTitle: 'მომხმარებელი'
-    },
+    platformFeedInput: { userTitle: 'მომხმარებელი' },
     platformVHD: {
         selectionBarLabel: 'არჩეული ელემენტები',
         selectedAndConditionLabel: 'არჩეული ელემენტები',
@@ -289,15 +251,15 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         searchHideAdvancedSearchLabel: 'დამალე ფილტრები',
         searchShowAllAdvancedSearchLabel: 'მაჩვენე ყველა ფილტრი',
         searchHideAllAdvancedSearchLabel: 'დამალე ყველა ფილტრი',
-        selectTabDisplayCountLabel: 'ელემენტები ({{ count }})',
+        selectTabDisplayCountLabel: 'ელემენტები ({{count}})',
         selectTabMoreBtnLabel: 'მეტი',
-        selectTabCountHiddenA11yLabel: 'შეიცავს {{ rowCount }} სტრიქონს და {{ colCount }} სვეტს',
+        selectTabCountHiddenA11yLabel: 'შეიცავს {{rowCount}} სტრიქონს და {{colCount}} სვეტს',
         selectMobileTabBackBtnTitle: 'უკან',
         selectMobileTabBtnOpenDialogLabel: 'დიალოგური ფანჯრის გახსნა',
-        selectMobileTabTitle: '{{ title }} ტაბი',
+        selectMobileTabTitle: '{{title}} ტაბი',
         selectMobileConditionEmpty: 'ცარიელი',
         defineConditionTitle: 'სახელი',
-        defineConditionSelectedValueHiddenA11yLabel: 'არჩეული მნიშვნელობა {{ value }}',
+        defineConditionSelectedValueHiddenA11yLabel: 'არჩეული მნიშვნელობა {{value}}',
         defineConditionConditionsGroupHeaderInclude: 'მოცვა',
         defineConditionConditionsGroupHeaderExclude: 'გამოყოფა',
         defineConditionFromPlaceholder: 'საიდან',
@@ -318,15 +280,12 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'ცარიელი',
         defineConditionConditionStrategyLabelNotEqualTo: 'არ უდრის',
         defineConditionConditionStrategyLabelNotEmpty: 'არ არის ცარიელი',
-        defineConditionMaxCountError: 'შეიყვანეთ მნიშვნელობა, არანაკლებ {{ count }} სიმბოლო',
+        defineConditionMaxCountError: 'შეიყვანეთ მნიშვნელობა, არანაკლებ {{count}} სიმბოლო',
         selectTabTitle: 'სიიდან არჩევა',
         searchTableEmptyMessage: 'გამოიყენეთ ძებნა შედეგების მისაღებად',
         defineTabTitle: 'პირობის განსაზღვრა'
     },
-    platformCombobox: {
-        countListResultsSingular: '1 რეზულტატი',
-        countListResultsPlural: '{{ count }} რეზულტატი'
-    },
+    platformCombobox: { countListResultsSingular: '1 რეზულტატი', countListResultsPlural: '{{count}} რეზულტატი' },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'აირჩიეთ ოფციები',
         inputIconTitle: 'აირჩიეთ ოფციები',
@@ -335,36 +294,26 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 სიმბოლო აღემატება ლიმიტს',
-        counterMessageCharactersOverTheLimitPlural: '{{ count }} სიმბოლო აღემატება ლიმიტს',
+        counterMessageCharactersOverTheLimitPlural: '{{count}} სიმბოლო აღემატება ლიმიტს',
         counterMessageCharactersRemainingSingular: 'დარჩა 1 სიმბოლო',
-        counterMessageCharactersRemainingPlural: 'დარჩა {{ count }} სიმბოლო'
+        counterMessageCharactersRemainingPlural: 'დარჩა {{count}} სიმბოლო'
     },
-    platformLink: {
-        roleDescriptionWithMedia: 'მედია: {{ media }}'
-    },
-    platformList: {
-        loadingAriaLabel: 'იტვირთება'
-    },
-    platformObjectListItem: {
-        detailsActionAriaLabel: 'დეტალები',
-        deleteActionAriaLabel: 'წაშლა'
-    },
-    platformStandardListItem: {
-        detailsActionAriaLabel: 'დეტალები',
-        deleteActionAriaLabel: 'წაშლა'
-    },
+    platformLink: { roleDescriptionWithMedia: 'მედია: {{media}}' },
+    platformList: { loadingAriaLabel: 'იტვირთება' },
+    platformObjectListItem: { detailsActionAriaLabel: 'დეტალები', deleteActionAriaLabel: 'წაშლა' },
+    platformStandardListItem: { detailsActionAriaLabel: 'დეტალები', deleteActionAriaLabel: 'წაშლა' },
     platformSearchField: {
         clearButtonTitle: 'გასუფთავება',
         submitButtonTitle: 'ძებნა',
         searchInputLabel: 'ძებნა',
         synchronizeButtonTitle: 'სინქრონიზაცია',
-        searchSuggestionMessage: 'ნაპოვნია {{ count }} შემოთავაზება.',
+        searchSuggestionMessage: 'ნაპოვნია {{count}} შემოთავაზება.',
         searchSuggestionNavigateMessage: 'ნავიგაციისთვის გამოიყენეთ ზედა და ქვედა ღილაკები'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'ძებნა',
         submitButtonLabel: 'წინ',
-        filtersButtonLabel: 'ფილტრები ({{ filtersCount }})',
+        filtersButtonLabel: 'ფილტრები ({{filtersCount}})',
         showFiltersButtonLabel: 'მაჩვენე ფილტრები',
         hideFiltersButtonLabel: 'დამალე ფილტრები',
         defineConditionsRemoveConditionButtonTitle: 'პირობის ამოღება',
@@ -421,7 +370,7 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         P13ColumnsDialogSearchPlaceholder: 'ძებნა',
         P13ColumnsDialogsShowSelected: 'მაჩვენე არჩეული',
         P13ColumnsDialogShowAll: 'მაჩვენე ყველა',
-        P13ColumnsDialogSelectAll: 'აირჩიე ყველა ({{ selectedColumnsCount }}/{{ selectableColumnsCount }})',
+        P13ColumnsDialogSelectAll: 'აირჩიე ყველა ({{selectedColumnsCount}}/{{selectableColumnsCount}})',
         P13ColumnsDialogConfirmationBtnLabel: 'კარგი',
         P13ColumnsDialogCancelBtnLabel: 'გაუქმება',
         P13ColumnsDialogMoveToTopBtn: 'ზემოთ ატანა',
@@ -442,13 +391,13 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         P13FilterStrategyLabelBefore: 'ადრე',
         P13FilterStrategyLabelBeforeOrOn: 'ადრე ან თარიღში',
         P13FilterStrategyLabelNotDefined: 'არაარის განსაზღვრული',
-        P13FilterBooleanOptionNotDefined: ' ',
+        P13FilterBooleanOptionNotDefined: '',
         P13FilterBooleanOptionTrue: 'დიახ',
         P13FilterBooleanOptionFalse: 'არა',
         P13FilterDialogHeader: 'ფილტრი',
-        P13FilterDialogIncludePanelTitleWithCount: 'ჩართე ({{ count }})',
+        P13FilterDialogIncludePanelTitleWithCount: 'ჩართე ({{count}})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'ჩართე',
-        P13FilterDialogExcludePanelTitleWithCount: 'გამოტოვე ({{ count }})',
+        P13FilterDialogExcludePanelTitleWithCount: 'გამოტოვე ({{count}})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'გამოტოვე',
         P13FilterDialogRemoveFilterBtnTitle: 'ფილტრის მოხსნა',
         P13FilterDialoAddFilterBtnTitle: 'ფილტრის დამატება',
@@ -481,7 +430,7 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(გაუფილტრავი)',
-        filterDialogFilterByLabel: 'გაფილტრე: {{ filterLabel }}',
+        filterDialogFilterByLabel: 'გაფილტრე: {{filterLabel}}',
         filterDialogFilterTitle: 'ფილტრი',
         filterDialogFilterBy: 'გაფილტრე',
         filterDialogConfirmBtnLabel: 'კარგი',
@@ -598,9 +547,7 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         messageFileNameLengthExceededSingular:
             'ფაილი "{{ fileName }}" აჭარბებს მაქსიმალურ სახელის სიგრძეს. მაქსიმალური სიგრძეა: {{ maxFilenameLength }} characters.'
     },
-    platformWizardGenerator: {
-        summarySectionEditStep: 'შესწორება'
-    },
+    platformWizardGenerator: { summarySectionEditStep: 'შესწორება' },
     platformMessagePopover: {
         allErrors: 'ყველა',
         defaultErrors: {
@@ -634,27 +581,15 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         createdBy: 'შემქმნელი',
         removeVariant: 'ვარიანტის წაშლა',
         search: 'ძებნა',
-        access: {
-            public: 'საჯარო',
-            private: 'პირადი'
-        }
+        access: { public: 'საჯარო', private: 'პირადი' }
     },
-    platformSelect: {
-        selectOptionLabel: 'აირჩიეთ ვარიანტი'
-    },
+    platformSelect: { selectOptionLabel: 'აირჩიეთ ვარიანტი' },
     fnSlider: {
         minMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {{ min }}, მაქსიმალური - {{ max }}',
         valueminDetails: 'მნიშვნელობა არის {{ value }}',
         valuemaxDetails: 'მნიშვნელობა არის {{ value }}',
         valueNowDetails: 'მიმდინარე მნიშვნელობა {{ value }}'
     },
-    fnSwitch: {
-        semanticAcceptLabel: 'დათანხმება',
-        semanticDeclineLabel: 'უარყოფა'
-    },
-    coreTree: {
-        expand: 'Expand node',
-        collapse: 'Collapse node',
-        noData: 'No data'
-    }
+    fnSwitch: { semanticAcceptLabel: 'დათანხმება', semanticDeclineLabel: 'უარყოფა' },
+    coreTree: { expand: 'Expand node', collapse: 'Collapse node', noData: 'No data' }
 };

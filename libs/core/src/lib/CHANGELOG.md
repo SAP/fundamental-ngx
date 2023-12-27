@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.23](https://github.com/SAP/fundamental-ngx/compare/v0.43.22...v0.43.23) (2023-12-25)
+
+
+### Bug Fixes
+
+* **core:** first forced item case ([#11141](https://github.com/SAP/fundamental-ngx/issues/11141)) ([c4b98b5](https://github.com/SAP/fundamental-ngx/commit/c4b98b51609216a9da3bb7c4c811a5fc8b0a6cbf))
+
+
+### Features
+
+* **platform:** allow disabling select all in vhd ([#11128](https://github.com/SAP/fundamental-ngx/issues/11128)) ([167aae3](https://github.com/SAP/fundamental-ngx/commit/167aae3c9702399ccb4e2bcbbaa7db0ec52169dc))
+
+
+
+
+
+## [0.43.22](https://github.com/SAP/fundamental-ngx/compare/v0.43.21...v0.43.22) (2023-12-16)
+
+
+### Bug Fixes
+
+* **core,platform:** button should not set aria-pressed by default ([#11064](https://github.com/SAP/fundamental-ngx/issues/11064)) ([8f5499f](https://github.com/SAP/fundamental-ngx/commit/8f5499f20fc6b4e517612d7f918774e92619cc2d))
+
+
+### Features
+
+* **platform:** vhd custom filter controls and column renderer ([#11083](https://github.com/SAP/fundamental-ngx/issues/11083)) ([88b5efd](https://github.com/SAP/fundamental-ngx/commit/88b5efda841407e2ba7f0e304626ff52dada5fe3))
+
+
+
+
+
 ## [0.43.21](https://github.com/SAP/fundamental-ngx/compare/v0.43.20...v0.43.21) (2023-12-08)
 
 **Note:** Version bump only for package @fundamental-ngx/core
