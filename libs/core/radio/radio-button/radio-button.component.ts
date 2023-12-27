@@ -1,5 +1,4 @@
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
-import { AsyncPipe } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -46,7 +45,7 @@ let uniqueId = 0;
         '(focusout)': 'onTouched()'
     },
     standalone: true,
-    imports: [FormsModule, AsyncPipe]
+    imports: [FormsModule]
 })
 export class RadioButtonComponent<T = any>
     implements OnChanges, AfterViewInit, CssClassBuilder, ControlValueAccessor, OnDestroy, FormItemControl

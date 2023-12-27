@@ -545,14 +545,6 @@ export class TableComponent<T = any>
         return this._tableService.visibleColumns$.value;
     }
 
-    /**
-     * @hidden
-     * Columns to be rendered as a pop-in columns.
-     */
-    get _poppingColumns(): TableColumn[] {
-        return this._tableService.poppingColumns$.value;
-    }
-
     /** @hidden */
     get isTreeTable(): boolean {
         return !!this._dndTableDirective?.isTreeTable;
@@ -1101,7 +1093,7 @@ export class TableComponent<T = any>
 
     /** Disable filter from column heder menu */
     setHeaderColumnFilteringDisabled(disabled: boolean): void {
-        this._tableService._isFilteringFromHeaderDisabled$.next(disabled);
+        this._tableService._isFilteringFromHeaderDisabled$.set(disabled);
     }
 
     /** Set the row navigation */
@@ -1951,7 +1943,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _calculateIsShownNavigationColumn(): void {
-        this._tableService._isShownNavigationColumn$.next(this._tableRows.some((tableRow) => tableRow.navigatable));
+        this._tableService._isShownNavigationColumn$.set(this._tableRows.some((tableRow) => tableRow.navigatable));
     }
 
     /** @hidden */
@@ -2135,8 +2127,8 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _setSemanticHighlighting(): void {
-        this._tableService._semanticHighlighting$.next(this.semanticHighlighting);
-        this._tableService._semanticHighlightingColumnWidth$.next(this._semanticHighlightingColumnWidth);
+        this._tableService._semanticHighlighting$.set(this.semanticHighlighting);
+        this._tableService._semanticHighlightingColumnWidth$.set(this._semanticHighlightingColumnWidth);
     }
 
     /** @hidden */
@@ -2148,7 +2140,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _checkCellMock(): void {
-        this._tableColumnResizeService.cellMockVisible$.next(
+        this._tableColumnResizeService.cellMockVisible$.set(
             this._tableColumnResizeService.fixedWidth &&
                 (this.tableContainer?.nativeElement?.scrollWidth ?? 0) > (this.table?.nativeElement?.scrollWidth ?? 0)
         );

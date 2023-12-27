@@ -9,7 +9,7 @@ import {
     SPACE,
     UP_ARROW
 } from '@angular/cdk/keycodes';
-import { AsyncPipe, DOCUMENT, NgTemplateOutlet } from '@angular/common';
+import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -54,7 +54,7 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { BehaviorSubject, Observable, Subscription, fromEvent, merge, startWith } from 'rxjs';
+import { BehaviorSubject, Subscription, fromEvent, merge, startWith } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
 import { TokenComponent } from './token.component';
 
@@ -74,7 +74,6 @@ import { TokenComponent } from './token.component';
         PopoverControlComponent,
         PopoverBodyComponent,
         ListModule,
-        AsyncPipe,
         FdTranslatePipe
     ]
 })
@@ -115,22 +114,6 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     /** @hidden */
     get _hiddenTokens(): TokenComponent[] {
         return this.tokenList.filter((token) => token.elementRef.nativeElement.style.display === 'none');
-    }
-
-    /**
-     * @hidden
-     * Observable state of the compact mode.
-     */
-    get _compact$(): Observable<boolean> {
-        return this._contentDensityObserver.isCompact$;
-    }
-
-    /**
-     * @hidden
-     * Component is in compact mode, determined by the consumer
-     */
-    get _compact(): boolean {
-        return this._contentDensityObserver.isCompact;
     }
 
     /** @hidden */
@@ -284,7 +267,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             });
         });
 
-        if (!this._compact && !this.compactCollapse) {
+        if (!this._contentDensityObserver.isCompact && !this.compactCollapse) {
             this._handleCozyTokenCount();
         }
         this._listenElementEvents();
@@ -398,7 +381,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             const elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
             this._resetTokens();
             this.previousElementWidth = elementWidth;
-            if (!this._compact && !this.compactCollapse) {
+            if (!this._contentDensityObserver.isCompact && !this.compactCollapse) {
                 this._handleCozyTokenCount();
             }
         }
@@ -578,7 +561,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         if (this._forceAllTokensToDisplay) {
             return;
         }
-        if (!this._compact && !this.compactCollapse) {
+        if (!this._contentDensityObserver.isCompact && !this.compactCollapse) {
             this._getHiddenCozyTokenCount();
             return;
         }
@@ -642,7 +625,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     private _resetTokens(): void {
         this.moreTokensLeft = [];
         this.moreTokensRight = [];
-        if (this._compact || this.compactCollapse || this._forceAllTokensToDisplay) {
+        if (this._contentDensityObserver.isCompact || this.compactCollapse || this._forceAllTokensToDisplay) {
             this.tokenList.forEach((token) => {
                 this._makeElementVisible(token.elementRef);
             });

@@ -46,7 +46,7 @@ import { AbstractControl, ControlContainer, FormGroup, FormsModule, NgForm } fro
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import { AsyncPipe, KeyValuePipe, NgTemplateOutlet } from '@angular/common';
+import { KeyValuePipe, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormField } from '@fundamental-ngx/cdk/forms';
 import { Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
@@ -182,7 +182,6 @@ let formGroupUniqueId = 0;
         LinkComponent,
         IconComponent,
         InlineHelpDirective,
-        AsyncPipe,
         KeyValuePipe,
         FieldGroupRowValuePipe,
         ContentDensityModule

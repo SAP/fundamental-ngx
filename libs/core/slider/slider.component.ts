@@ -28,7 +28,7 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
 import { BehaviorSubject, Observable, combineLatest, fromEvent, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, mapTo, skip, startWith, switchMap, take } from 'rxjs/operators';
 
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     CssClassBuilder,
@@ -90,7 +90,6 @@ let sliderId = 0;
         PopoverModule,
         FormsModule,
         OnlyDigitsDirective,
-        AsyncPipe,
         FdTranslatePipe
     ]
 })

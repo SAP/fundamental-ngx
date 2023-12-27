@@ -1,11 +1,11 @@
-@if (_fdpTableService._semanticHighlighting$ | async) {
+@if (_fdpTableService._semanticHighlighting$()) {
     <th
         [class.fd-table__cell--fixed]="fixed"
         fd-table-cell
         fd-table-status-indicator
         fdkDisabled
-        [style.min-width]="_fdpTableService._semanticHighlightingColumnWidth$ | async"
-        [style.max-width]="_fdpTableService._semanticHighlightingColumnWidth$ | async"
+        [style.min-width]="_fdpTableService._semanticHighlightingColumnWidth$()"
+        [style.max-width]="_fdpTableService._semanticHighlightingColumnWidth$()"
     ></th>
 }
 
@@ -16,9 +16,8 @@
         [class.fd-table__cell--fixed]="fixed"
         class="fd-table__cell--checkbox"
         [style]="
-            _contentDensityObserver
-                | async
-                | selectionCellStyles: _rtl$() : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
+            _contentDensityObserver.contentDensity$()
+                | selectionCellStyles: _rtl$() : _fdpTableService._semanticHighlightingColumnWidth$()
         "
         (keydown.enter)="_tableRowService.toggleAllSelectableRows(!checkedState)"
         (keydown.space)="_tableRowService.toggleAllSelectableRows(!checkedState)"
@@ -51,26 +50,26 @@
             $index
                 | columnResizableSide
                     : _fdpTableService.visibleColumnsLength
-                    : (_fdpTableService._isShownNavigationColumn$ | async)
+                    : _fdpTableService._isShownNavigationColumn$()
         "
         [columnName]="column.name"
         [id]="rowId + '__' + column.name"
         [attr.aria-colindex]="$index"
-        [attr.aria-sort]="(_fdpTableService.sortRules$ | async)?.get(column.key) | fdpTableColumnSortingDirection"
+        [attr.aria-sort]="_fdpTableService.sortRules$().get(column.key) | fdpTableColumnSortingDirection"
         [ngClass]="[
             'fdp-table__col--' + column.name,
             column._freezed ? 'fd-table__cell--fixed' : '',
             column.name === freezeColumnsTo ? 'fd-table__cell--fixed-last' : '',
             column._endFreezed ? 'fd-table__cell--fixed-end' : '',
             column.name === freezeEndColumnsTo ? 'fd-table__cell--fixed-end-last' : '',
-            $last && (_fdpTableService._isShownNavigationColumn$ | async) !== true ? 'is-last-child' : '',
+            $last && !_fdpTableService._isShownNavigationColumn$() ? 'is-last-child' : '',
             (column | isColumnHasHeaderMenu) ? 'fd-table__item--clickable' : ''
         ]"
         [ngStyle]="
             column
                 | tableCellStyles
                     : _rtl$()
-                    : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
+                    : _fdpTableService._semanticHighlightingColumnWidth$()
                     : selectionColumnWidth
                     : column._freezed
                     : column._endFreezed
@@ -83,14 +82,7 @@
         (keydown.arrowLeft)="_tableRowService.scrollToOverlappedCell()"
         (keydown.arrowRight)="_tableRowService.scrollToOverlappedCell()"
     >
-        <fdp-table-header-cell-content
-            [id]="rowId"
-            [column]="column"
-            [hasFilter]="(_fdpTableService.filterRules$ | async)?.has(column.key) === true"
-            [hasSorting]="(_fdpTableService.sortRules$ | async)?.has(column.key) === true"
-            [sorting]="(_fdpTableService.sortRules$ | async)?.get(column.key)"
-            [attr.title]="column.label"
-        >
+        <fdp-table-header-cell-content [id]="rowId" [column]="column" [attr.title]="column.label">
             <!-- Header menu -->
             <fdp-table-cell-header-popover
                 #tablePopover
@@ -98,19 +90,19 @@
                 [columnFrozen]="column._freezed || column._endFreezed"
                 [column]="column"
                 [popoverTemplate]="(column | isColumnHasHeaderMenu) ? column.headerCellPopoverTemplate : null"
-                [filteringFromHeaderDisabled]="_fdpTableService._isFilteringFromHeaderDisabled$ | async"
+                [filteringFromHeaderDisabled]="_fdpTableService._isFilteringFromHeaderDisabled$()"
             ></fdp-table-cell-header-popover>
         </fdp-table-header-cell-content>
     </th>
 }
 
-@if (_fdpTableService._isShownNavigationColumn$ | async) {
+@if (_fdpTableService._isShownNavigationColumn$()) {
     <th fd-table-cell class="fdp-table__cell--navigation is-last-child" role="columnheader"></th>
 }
 
 <th
     aria-hidden="true"
     class="fd-table__cell fd-table__cell--mock"
-    [class.fd-table__cell--mock-borderless]="(_tableColumnResizeService.cellMockVisible$ | async) !== true"
+    [class.fd-table__cell--mock-borderless]="!_tableColumnResizeService.cellMockVisible$()"
     fdkDisabled
 ></th>

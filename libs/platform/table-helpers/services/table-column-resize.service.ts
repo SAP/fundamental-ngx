@@ -1,4 +1,4 @@
-import { DestroyRef, ElementRef, Injectable, OnDestroy, Optional, computed, inject } from '@angular/core';
+import { DestroyRef, ElementRef, Injectable, OnDestroy, Optional, computed, inject, signal } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -79,7 +79,7 @@ export class TableColumnResizeService implements OnDestroy {
     readonly resizeInProgress$ = new BehaviorSubject<boolean>(this._resizeInProgress);
 
     /** Whether cell mock should be visible. */
-    readonly cellMockVisible$ = new BehaviorSubject<boolean>(false);
+    readonly cellMockVisible$ = signal(false);
 
     /** Current column resizer position. */
     get resizerPosition(): number {

@@ -1,5 +1,4 @@
 import { PortalModule } from '@angular/cdk/portal';
-import { AsyncPipe } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -82,7 +81,6 @@ import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens'
         MenuTriggerDirective,
         LinkComponent,
         IconComponent,
-        AsyncPipe,
         FdTranslatePipe
     ]
 })

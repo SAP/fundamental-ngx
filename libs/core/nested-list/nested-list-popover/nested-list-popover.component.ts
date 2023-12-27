@@ -11,7 +11,6 @@ import {
     computed
 } from '@angular/core';
 
-import { AsyncPipe } from '@angular/common';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
@@ -35,8 +34,7 @@ import { NestedListPopoverInterface } from './nested-list-popover.interface';
         PopoverControlComponent,
         PopoverBodyComponent,
         NestedLinkDirective,
-        NestedListTitleDirective,
-        AsyncPipe
+        NestedListTitleDirective
     ]
 })
 export class NestedListPopoverComponent implements NestedListPopoverInterface, AfterContentInit {

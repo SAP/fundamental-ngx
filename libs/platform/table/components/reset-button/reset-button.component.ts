@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, InjectionToken, Signal, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -29,7 +28,7 @@ export const RESETTABLE_TOKEN = new InjectionToken<Resettable>('Resettable');
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [ButtonComponent, AsyncPipe, FdTranslatePipe]
+    imports: [ButtonComponent, FdTranslatePipe]
 })
 export class ResetButtonComponent {
     /** @hidden */

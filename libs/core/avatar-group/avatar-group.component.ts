@@ -1,6 +1,6 @@
 import { Direction } from '@angular/cdk/bidi';
 import { DialogModule } from '@angular/cdk/dialog';
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -53,7 +53,6 @@ import { AvatarGroupHostConfig } from './types';
         FocusableItemDirective,
         DynamicPortalComponent,
         FocusableListDirective,
-        AsyncPipe,
         DialogModule,
         AvatarGroupItemRendererDirective,
         AvatarGroupOverflowButtonComponent,

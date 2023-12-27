@@ -20,6 +20,7 @@ import {
     Provider,
     QueryList,
     Self,
+    Signal,
     SimpleChanges,
     SkipSelf,
     TemplateRef,
@@ -34,8 +35,8 @@ import { uniqBy } from 'lodash-es';
 import { BehaviorSubject, Observable, Subject, Subscription, combineLatest, filter, tap } from 'rxjs';
 import { map, startWith, switchMap } from 'rxjs/operators';
 
-import { AsyncPipe, CommonModule, NgTemplateOutlet } from '@angular/common';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormItemComponent, FormLabelComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -107,8 +108,7 @@ const formGroupChildProvider: Provider = {
         FormLabelComponent,
         LinkComponent,
         IconComponent,
-        InlineHelpDirective,
-        AsyncPipe
+        InlineHelpDirective
     ]
 })
 export class FormFieldComponent
@@ -333,7 +333,7 @@ export class FormFieldComponent
     }
 
     /** @hidden */
-    isHorizontal$: Observable<boolean>;
+    isHorizontal$: Signal<boolean | undefined>;
 
     /**
      * Child FormFieldControl
@@ -512,6 +512,23 @@ export class FormFieldComponent
         this._breakPointObserver = this._responsiveBreakpointsService.observeBreakpointByConfig(
             this._responsiveBreakPointConfig
         );
+
+        this.isHorizontal$ = toSignal(
+            combineLatest([
+                this._labelColumnLayout$.pipe(filter(Boolean), map(normalizeColumnLayout)),
+                this._fieldColumnLayout$.pipe(filter(Boolean), map(normalizeColumnLayout)),
+                this._gapColumnLayout$.pipe(map((g) => normalizeColumnLayout(g || { S: 0 })))
+            ]).pipe(
+                switchMap(([label, field, gap]) =>
+                    this._breakPointObserver.pipe(
+                        map(
+                            (breakpointName) =>
+                                label[breakpointName] + field[breakpointName] + gap[breakpointName] <= 12
+                        )
+                    )
+                )
+            )
+        );
     }
 
     /**
@@ -564,17 +581,6 @@ export class FormFieldComponent
 
         this._addToFormGroup();
 
-        this.isHorizontal$ = combineLatest([
-            this._labelColumnLayout$.pipe(filter(Boolean), map(normalizeColumnLayout)),
-            this._fieldColumnLayout$.pipe(filter(Boolean), map(normalizeColumnLayout)),
-            this._gapColumnLayout$.pipe(map((g) => normalizeColumnLayout(g || { S: 0 })))
-        ]).pipe(
-            switchMap(([label, field, gap]) =>
-                this._breakPointObserver.pipe(
-                    map((breakpointName) => label[breakpointName] + field[breakpointName] + gap[breakpointName] <= 12)
-                )
-            )
-        );
         this.listenToInlineHelpPlaceRequirementChanges(() => this);
     }
 

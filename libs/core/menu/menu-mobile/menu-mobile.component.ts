@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -49,8 +49,7 @@ import { MenuService } from '../services/menu.service';
         CdkScrollable,
         ScrollbarDirective,
         NgTemplateOutlet,
-        InitialFocusDirective,
-        AsyncPipe
+        InitialFocusDirective
     ]
 })
 export class MenuMobileComponent extends MobileModeBase<MenuInterface> implements OnInit {

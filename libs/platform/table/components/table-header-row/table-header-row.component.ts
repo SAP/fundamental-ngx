@@ -201,7 +201,7 @@ export class IsColumnHasHeaderMenuPipe implements PipeTransform {
             column.groupable ||
             column.freezable ||
             column.endFreezable ||
-            (column.filterable && !this._fdpTableService._isFilteringFromHeaderDisabled$.value)
+            (column.filterable && !this._fdpTableService._isFilteringFromHeaderDisabled$())
         );
     }
 }

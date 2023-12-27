@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import equal from 'fast-deep-equal';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -39,19 +39,19 @@ export class TableService {
     /** Table state stream. */
     readonly tableState$ = new BehaviorSubject(DEFAULT_TABLE_STATE);
     /** @hidden */
-    readonly _semanticHighlighting$ = new BehaviorSubject<string>('');
+    readonly _semanticHighlighting$ = signal('');
     /** @hidden */
-    readonly _isFilteringFromHeaderDisabled$ = new BehaviorSubject<boolean>(false);
+    readonly _isFilteringFromHeaderDisabled$ = signal(false);
     /** @hidden */
-    readonly _isShownNavigationColumn$ = new BehaviorSubject<boolean>(false);
+    readonly _isShownNavigationColumn$ = signal(false);
     /** @hidden */
-    readonly _semanticHighlightingColumnWidth$ = new BehaviorSubject(0);
+    readonly _semanticHighlightingColumnWidth$ = signal(0);
     /** Visible columns stream. */
     readonly visibleColumns$ = new BehaviorSubject<TableColumn[]>([]);
     /** Visible columns length. */
     visibleColumnsLength = 0;
     /** Popping columns stream. */
-    readonly poppingColumns$ = new BehaviorSubject<TableColumn[]>([]);
+    readonly poppingColumns$ = signal<TableColumn[]>([]);
     /** Popping columns length. */
     _poppingColumnsLength = 0;
     /** Table columns stream. */
@@ -83,12 +83,12 @@ export class TableService {
     /** Listen for immediate changes in table subcomponents (mostly table column) */
     readonly detectChanges$ = new Subject<void>();
     /** Sort rules stream. */
-    readonly sortRules$ = new BehaviorSubject<Map<string, CollectionSort>>(new Map());
+    readonly sortRules$ = signal<Map<string, CollectionSort>>(new Map());
     /**
      * Filter Rules Map stream. Where key is column key, and value is the associated filter rules.
      * Many filters can be applied to one column.
      */
-    readonly filterRules$ = new BehaviorSubject<Map<string, CollectionFilter[]>>(new Map());
+    readonly filterRules$ = signal<Map<string, CollectionFilter[]>>(new Map());
 
     /**
      * Group Rules Map stream. Where key is column key and value is associated group rule
@@ -374,7 +374,7 @@ export class TableService {
      * @param columns Popping columns to share.
      */
     setPoppingColumns(columns: TableColumn[]): void {
-        this.poppingColumns$.next(columns);
+        this.poppingColumns$.set(columns);
         this._poppingColumnsLength = columns.length;
     }
 
@@ -392,7 +392,7 @@ export class TableService {
      * @param state Table state
      */
     buildSortRulesMap(state = this.getTableState()): void {
-        this.sortRules$.next(new Map(state.sortBy.filter((rule) => rule.field).map((rule) => [rule.field!, rule])));
+        this.sortRules$.set(new Map(state.sortBy.filter((rule) => rule.field).map((rule) => [rule.field!, rule])));
     }
 
     /**
@@ -400,7 +400,7 @@ export class TableService {
      * @param state Table state.
      */
     buildFilterRulesMap(state = this.getTableState()): void {
-        this.filterRules$.next(
+        this.filterRules$.set(
             state.filterBy.reduce((hash, rule) => {
                 const key = rule.field;
                 if (!hash.has(key)) {

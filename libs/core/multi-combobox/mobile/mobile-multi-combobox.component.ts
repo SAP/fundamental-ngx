@@ -35,8 +35,8 @@ import { MULTI_COMBOBOX_COMPONENT } from '../multi-combobox.token';
         CdkScrollable,
         ScrollbarDirective,
         ButtonBarComponent,
-        AsyncPipe,
-        FdTranslatePipe
+        FdTranslatePipe,
+        AsyncPipe
     ]
 })
 export class MobileMultiComboboxComponent extends MobileModeBase<MobileMultiComboboxInterface> implements OnInit {

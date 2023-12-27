@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -90,7 +89,7 @@ export class NestedListTitleDirective {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [IconComponent, AsyncPipe]
+    imports: [IconComponent]
 })
 export class NestedListExpandIconComponent {
     /** @hidden */

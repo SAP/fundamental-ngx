@@ -35,7 +35,7 @@
             [attr.role]="isTreeTable ? 'treegrid' : 'grid'"
             class="fdp-table__body-table"
             [allCellsFocusable]="true"
-            [popIn]="_poppingColumns.length > 0"
+            [popIn]="_tableService.poppingColumns$().length > 0"
             [class.fd-table--no-outer-border]="noOuterBorders"
             [attr.aria-labelledby]="_ariaLabelledBy"
         >
@@ -123,7 +123,7 @@
                                     ></tr>
                                 }
                             }
-                            @if (row.type === 'item' && _poppingColumns.length > 0) {
+                            @if (row.type === 'item' && _tableService.poppingColumns$().length > 0) {
                                 <tr
                                     fdp-table-popping-row
                                     [secondary]="true"
