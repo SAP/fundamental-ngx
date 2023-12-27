@@ -16,7 +16,7 @@ import {
     ActionSheetControlComponent,
     ActionSheetItemComponent
 } from '@fundamental-ngx/core/action-sheet';
-import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 import { Subscription } from 'rxjs';
 import { FD_WIZARD_STEP_INDICATOR } from '../constants';
 import { WizardStepIndicator } from '../models/wizard-step';
@@ -48,6 +48,10 @@ export class WizardStepIndicatorComponent implements WizardStepIndicator, OnDest
      */
     @Input()
     glyph: Nullable<string>;
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /**
      * Event emitted when this step indicator is clicked.

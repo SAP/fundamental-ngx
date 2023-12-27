@@ -13,6 +13,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
@@ -26,7 +27,7 @@ export type ProgressIndicatorState = 'informative' | 'positive' | 'critical' | '
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgTemplateOutlet, PopoverComponent, PopoverControlComponent, PopoverBodyComponent]
+    imports: [NgTemplateOutlet, PopoverComponent, PopoverControlComponent, PopoverBodyComponent, IconComponent]
 })
 export class ProgressIndicatorComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
     /** The text to display if you would like to override the default percentage text. */

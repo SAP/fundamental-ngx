@@ -8,6 +8,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 
 export type MessagePageType = '' | 'filter' | 'search' | 'no-items' | 'error';
 
@@ -18,7 +19,7 @@ export type MessagePageType = '' | 'filter' | 'search' | 'no-items' | 'error';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: []
+    imports: [IconComponent]
 })
 export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom class */
@@ -40,6 +41,10 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
      */
     @Input()
     hasIcon = true;
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /**
      * The icon of the Message Page.

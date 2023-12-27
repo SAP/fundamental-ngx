@@ -27,6 +27,7 @@ import { KeyUtil, LIST_ITEM_COMPONENT, ListItemInterface, Nullable } from '@fund
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
 import { FormItemComponent } from '@fundamental-ngx/core/form';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FD_RADIO_BUTTON_COMPONENT, RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
@@ -61,7 +62,7 @@ let listItemUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [FormItemComponent, DecimalPipe]
+    imports: [FormItemComponent, DecimalPipe, IconComponent]
 })
 export class ListItemComponent<T = any>
     extends ListFocusItem<T>

@@ -1,5 +1,5 @@
 @if (glyph && glyphPosition === 'before') {
-    <fd-icon [glyph]="glyph"></fd-icon>
+    <fd-icon [glyph]="glyph" [font]="glyphFont"></fd-icon>
 }
 @if (label) {
     <span class="fd-button__text">
@@ -9,7 +9,7 @@
 <ng-content></ng-content>
 <ng-content select="fd-button-badge"></ng-content>
 @if (glyph && glyphPosition === 'after') {
-    <fd-icon [glyph]="glyph"></fd-icon>
+    <fd-icon [glyph]="glyph" [font]="glyphFont"></fd-icon>
 }
 @if (fdMenu) {
     <fd-icon glyph="slim-arrow-down"></fd-icon>

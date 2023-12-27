@@ -1,4 +1,4 @@
-# Slider
+# Splitter
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.14.
 
@@ -14,7 +14,7 @@ Run `ng build splitter` to build the project. The build artifacts will be stored
 
 ## Publishing
 
-After building your library with `ng build splitter`, go to the dist folder `cd dist/slider` and run `npm publish`.
+After building your library with `ng build splitter`, go to the dist folder `cd dist/splitter` and run `npm publish`.
 
 ## Running unit tests
 

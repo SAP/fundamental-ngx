@@ -1,7 +1,7 @@
 <div class="fd-message-page__container">
     @if (hasIcon) {
         <div class="fd-message-page__icon-container">
-            <i role="presentation" class="fd-message-page__icon" [class]="'sap-icon--' + glyph"></i>
+            <fd-icon role="presentation" class="fd-message-page__icon" [glyph]="glyph" [font]="glyphFont"></fd-icon>
         </div>
     }
     <div role="status" aria-live="polite" class="fd-message-page__content">

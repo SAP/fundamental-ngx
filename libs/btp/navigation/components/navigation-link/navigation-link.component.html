@@ -1,5 +1,11 @@
 @if (glyph) {
-    <fd-icon [glyph]="glyph" class="fd-navigation__icon" [attr.role]="'presentation'" [ariaHidden]="true"></fd-icon>
+    <fd-icon
+        [glyph]="glyph"
+        [font]="glyphFont"
+        class="fd-navigation__icon"
+        [attr.role]="'presentation'"
+        [ariaHidden]="true"
+    ></fd-icon>
 }
 <span class="fd-navigation__text">
     <ng-content></ng-content>

@@ -62,7 +62,7 @@ import {
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
@@ -191,6 +191,10 @@ export class ComboboxComponent<T = any>
     /** Icon to display in the right-side button. */
     @Input()
     glyph = 'navigation-down-arrow';
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /**
      * Whether to show the clear search term button when the Combobox is a Search Field
@@ -401,6 +405,9 @@ export class ComboboxComponent<T = any>
 
     /** @hidden */
     readonly _repositionScrollStrategy: RepositionScrollStrategy;
+
+    /** @hidden */
+    readonly _defaultFontFamily = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** Whether the combobox is opened. */
     open = false;

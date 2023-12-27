@@ -41,7 +41,7 @@ import { ENTER, ESCAPE, SPACE } from '@angular/cdk/keycodes';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { FormFieldAdvancedStateMessage, FormStates, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 import { ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -179,6 +179,10 @@ export class SelectComponent<T = any>
     /** Glyph to add icon in the select component. */
     @Input()
     glyph = 'slim-arrow-down';
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** Whether close the popover on outside click. */
     @Input()

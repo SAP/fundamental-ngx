@@ -27,10 +27,10 @@
                 class="fd-flexible-column-layout__button"
                 [title]="_leftColumnSeparator === 'left' ? expandTitle : collapseTitle"
             >
-                <i
-                    [class]="_leftColumnSeparator ? 'sap-icon--slim-arrow-' + _leftColumnSeparator : ''"
+                <fd-icon
+                    [glyph]="_leftColumnSeparator ? 'slim-arrow-' + _leftColumnSeparator : ''"
                     role="presentation"
-                ></i>
+                ></fd-icon>
             </button>
         </div>
     }
@@ -58,10 +58,10 @@
                 class="fd-flexible-column-layout__button"
                 [title]="_rightColumnSeparator === 'left' ? expandTitle : collapseTitle"
             >
-                <i
-                    [class]="_rightColumnSeparator ? 'sap-icon--slim-arrow-' + _rightColumnSeparator : ''"
+                <fd-icon
+                    [glyph]="_rightColumnSeparator ? 'slim-arrow-' + _rightColumnSeparator : ''"
                     role="presentation"
-                ></i>
+                ></fd-icon>
             </button>
         </div>
     }

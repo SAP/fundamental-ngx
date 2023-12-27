@@ -43,6 +43,7 @@
     <fd-input-group
         [button]="showDropdownButton"
         [glyph]="showDropdownButton ? glyphValue : null"
+        [glyphFont]="isSearch ? _defaultFontFamily : glyphFont"
         [state]="state"
         [buttonFocusable]="buttonFocusable"
         [disabled]="disabled"

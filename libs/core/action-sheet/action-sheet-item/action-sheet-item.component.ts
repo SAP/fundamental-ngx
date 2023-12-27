@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { KeyboardSupportItemInterface } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
 
 export interface ActionSheetClickEvent {
     shouldClose: boolean;
@@ -50,6 +51,10 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     /** Sets icon of action item. */
     @Input()
     glyph: string;
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** Indicate state of the button.*/
     @Input()

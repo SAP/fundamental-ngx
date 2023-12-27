@@ -1,5 +1,6 @@
-import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit, inject } from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont, fdBuildIconClass } from '@fundamental-ngx/core/icon';
 
 @Directive({
     selector: '[fdListIcon], [fd-list-icon]',
@@ -12,6 +13,10 @@ export class ListIconDirective implements OnChanges, OnInit, CssClassBuilder {
     @Input()
     glyph: string;
 
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
+
     /** Apply user custom styles */
     @Input()
     class: string;
@@ -22,7 +27,17 @@ export class ListIconDirective implements OnChanges, OnInit, CssClassBuilder {
     role = 'presentation';
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
+    readonly elementRef = inject(ElementRef);
+
+    /** @hidden
+     * CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return ['fd-list__icon', this.glyph ? fdBuildIconClass(this.glyphFont, this.glyph) : '', this.class];
+    }
 
     /** @hidden */
     ngOnChanges(): void {
@@ -32,15 +47,5 @@ export class ListIconDirective implements OnChanges, OnInit, CssClassBuilder {
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-    }
-
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return ['fd-list__icon', this.glyph ? 'sap-icon--' + this.glyph : '', this.class];
     }
 }
