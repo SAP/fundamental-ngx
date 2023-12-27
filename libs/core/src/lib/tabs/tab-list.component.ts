@@ -301,13 +301,15 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     }
 
     /** @hidden */
-    _highlightActiveTab({ id }: HTMLElement): void {
-        const tab = this._tabArray.find((_tab) => _tab.panel._panelId === id);
-        if (tab) {
-            const _tabWasActive = tab.active;
-            this._activateStackedTab(tab.panel, false);
-            if (!_tabWasActive) {
-                this._selectedTabChange(tab.panel);
+    _highlightActiveTab(element: HTMLElement): void {
+        if (element) {
+            const tab = this._tabArray.find((_tab) => _tab.panel._panelId === element.id);
+            if (tab) {
+                const _tabWasActive = tab.active;
+                this._activateStackedTab(tab.panel, false);
+                if (!_tabWasActive) {
+                    this._selectedTabChange(tab.panel);
+                }
             }
         }
     }
@@ -365,7 +367,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
                 switchMap(() => this._zone.onStable.pipe(startWith(this._zone.isStable))),
                 takeUntilDestroyed(this._destroyRef)
             )
-            .subscribe((tabs) => {
+            .subscribe(() => {
                 this.stackContent && this._scrollSpy?.onScroll(undefined, true);
             });
     }
