@@ -6,6 +6,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    computed,
     ContentChild,
     ContentChildren,
     ElementRef,
@@ -218,7 +219,8 @@ let tableUniqueId = 0;
     host: {
         class: 'fdp-table',
         '[class.fd-table--no-horizontal-borders]': 'noHorizontalBorders || noBorders',
-        '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders'
+        '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders',
+        '[class.fd-table--group]': '_isGroupTable$()'
     },
     standalone: true,
     imports: [
@@ -542,7 +544,7 @@ export class TableComponent<T = any>
      * Columns to be rendered in the template
      */
     get _visibleColumns(): TableColumn[] {
-        return this._tableService.visibleColumns$.value;
+        return this._tableService.visibleColumns$();
     }
 
     /** @hidden */
@@ -594,7 +596,7 @@ export class TableComponent<T = any>
         return (
             this._isSelectionColumnShown &&
             !!this._tableRowsVisible.length &&
-            this._tableService.visibleColumnsLength > 0
+            this._tableService.visibleColumnsLength() > 0
         );
     }
 
@@ -651,7 +653,11 @@ export class TableComponent<T = any>
     _checkedState: boolean | null = false;
     /** @hidden */
     @HostBinding('class.fd-table--group')
-    _isGroupTable = false;
+    _isGroupTable$ = computed(() => {
+        const groupRules = this._tableService.groupRules$();
+
+        return groupRules ? groupRules.size > 0 : (this.initialState?.initialGroupBy?.length ?? 0) > 0;
+    });
     /**
      * @hidden
      * Used to create a row component placeholder and set data in it rather than re-create the row component when data changes.
@@ -846,8 +852,6 @@ export class TableComponent<T = any>
     /** @hidden */
     ngOnInit(): void {
         this._tableColumnResizeService.setTableRef(this);
-
-        this._isGroupTable = (this.initialState?.initialGroupBy?.length ?? 0) > 0;
     }
 
     /** @hidden */
@@ -1596,7 +1600,7 @@ export class TableComponent<T = any>
                     switchMap((rows: TableRow[]) =>
                         this.isTreeTable
                             ? of(rows)
-                            : this._tableService.groupRules$.pipe(
+                            : this._tableService.groupRulesSubject.pipe(
                                   map((groupRules) =>
                                       this._tableRowService.groupTableRows(rows, groupRules.values(), groupRules)
                                   )
@@ -1660,12 +1664,6 @@ export class TableComponent<T = any>
                 .subscribe((state) => {
                     this._dataSourceDirective._tableDataSource.fetch(state);
                 })
-        );
-
-        this._subscriptions.add(
-            this._tableService.groupRules$.subscribe((rules) => {
-                this._isGroupTable = rules.size > 0;
-            })
         );
 
         this._subscriptions.add(

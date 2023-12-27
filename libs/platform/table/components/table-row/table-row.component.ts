@@ -175,7 +175,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     }
 
     /** @hidden */
-    _hasRowHeaderColumn = false;
+    _hasRowHeaderColumn$ = computed(() => this._fdpTableService.visibleColumns$().some((c) => c.role === 'rowheader'));
 
     /** @hidden */
     readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
@@ -253,10 +253,6 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
-        this._fdpTableService.visibleColumns$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((columns) => {
-            this._hasRowHeaderColumn = columns.some((c) => c.role === 'rowheader');
-            this._cdr.markForCheck();
-        });
     }
 
     /** @hidden */

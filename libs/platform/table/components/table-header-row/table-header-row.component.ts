@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -73,7 +73,6 @@ import { TableHeaderCellContentComponent } from '../table-header-cell-content/ta
         PopoverTriggerDirective,
         TableHeaderCellContentComponent,
         TableCellHeaderPopoverComponent,
-        AsyncPipe,
         FdTranslatePipe,
         SelectionCellStylesPipe,
         TableCellStylesPipe,

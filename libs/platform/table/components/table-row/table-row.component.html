@@ -31,7 +31,7 @@
         <td
             class="fd-table__cell--checkbox"
             [class.fd-table__cell--fixed]="fixed"
-            [attr.role]="_hasRowHeaderColumn ? 'rowheader' : 'gridcell'"
+            [attr.role]="_hasRowHeaderColumn$() ? 'rowheader' : 'gridcell'"
             fd-table-cell
             fd-table-cell-selectable
             [focusable]="true"
@@ -95,13 +95,13 @@
         ></td>
     }
 }
-@for (column of _fdpTableService.visibleColumns$ | async; track column.name) {
+@for (column of _fdpTableService.visibleColumns$(); track column.name) {
     <td
         #tableCellElement
         [fdpTableCellResizable]="
             $index
                 | columnResizableSide
-                    : _fdpTableService.visibleColumnsLength
+                    : _fdpTableService.visibleColumnsLength()
                     : _fdpTableService._isShownNavigationColumn$()
         "
         [columnName]="column.name"

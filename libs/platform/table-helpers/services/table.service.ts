@@ -1,10 +1,11 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, computed, signal } from '@angular/core';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import equal from 'fast-deep-equal';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { skip } from 'rxjs/operators';
 import { DEFAULT_TABLE_STATE } from '../constants';
 
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CollectionFilter, CollectionGroup, CollectionPage, CollectionSort, TableState } from '../interfaces';
 import {
     ColumnsChange,
@@ -47,9 +48,9 @@ export class TableService {
     /** @hidden */
     readonly _semanticHighlightingColumnWidth$ = signal(0);
     /** Visible columns stream. */
-    readonly visibleColumns$ = new BehaviorSubject<TableColumn[]>([]);
+    readonly visibleColumns$ = signal<TableColumn[]>([]);
     /** Visible columns length. */
-    visibleColumnsLength = 0;
+    visibleColumnsLength = computed(() => this.visibleColumns$().length);
     /** Popping columns stream. */
     readonly poppingColumns$ = signal<TableColumn[]>([]);
     /** Popping columns length. */
@@ -93,7 +94,10 @@ export class TableService {
     /**
      * Group Rules Map stream. Where key is column key and value is associated group rule
      */
-    readonly groupRules$ = new BehaviorSubject<Map<string, CollectionGroup>>(new Map());
+    readonly groupRulesSubject = new BehaviorSubject<Map<string, CollectionGroup>>(new Map());
+
+    /** Group Rules Map signal. */
+    readonly groupRules$ = toSignal(this.groupRulesSubject);
 
     /** Get current state/settings of the Table. */
     getTableState(): TableState {
@@ -365,8 +369,7 @@ export class TableService {
      * @param columns Visible columns to share.
      */
     setVisibleColumns(columns: TableColumn[]): void {
-        this.visibleColumns$.next(columns);
-        this.visibleColumnsLength = columns.length;
+        this.visibleColumns$.set(columns);
     }
 
     /**
@@ -384,7 +387,7 @@ export class TableService {
      */
     buildGroupRulesMap(state = this.getTableState()): void {
         const groupMap = new Map(state.groupBy.map((rule) => [rule.field, rule]));
-        this.groupRules$.next(groupMap);
+        this.groupRulesSubject.next(groupMap);
     }
 
     /**
