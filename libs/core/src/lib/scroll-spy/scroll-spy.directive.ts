@@ -86,9 +86,7 @@ export class ScrollSpyDirective implements OnInit {
 
         if (forced || ((spiedTag || this.fireEmpty) && spiedTag !== this._currentActive)) {
             this._currentActive = spiedTag;
-            if (this._currentActive) {
-                this.spyChange.emit(this._currentActive);
-            }
+            this.spyChange.emit(this._currentActive);
         }
     }
 

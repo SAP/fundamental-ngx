@@ -241,13 +241,15 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     }
 
     /** @hidden */
-    _highlightActiveTab({ id }: HTMLElement): void {
-        const tab = this._tabArray.find((_tab) => _tab.panel._panelId === id);
-        if (tab) {
-            const _tabWasActive = tab.active;
-            this._activateStackedTab(tab.panel, false);
-            if (!_tabWasActive) {
-                this.selectedTabChange.emit(tab.panel);
+    _highlightActiveTab(element: HTMLElement): void {
+        if (element) {
+            const tab = this._tabArray.find((_tab) => _tab.panel._panelId === element.id);
+            if (tab) {
+                const _tabWasActive = tab.active;
+                this._activateStackedTab(tab.panel, false);
+                if (!_tabWasActive) {
+                    this.selectedTabChange.emit(tab.panel);
+                }
             }
         }
     }
