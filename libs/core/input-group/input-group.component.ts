@@ -23,6 +23,7 @@ import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 import {
     InputGroupAddonButtonDirective,
     InputGroupAddOnDirective,
@@ -69,7 +70,8 @@ let addOnInputRandomId = 0;
         InputGroupAddonButtonDirective,
         FormsModule,
         InputGroupInputDirective,
-        AsyncPipe
+        AsyncPipe,
+        IconComponent
     ]
 })
 export class InputGroupComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {
@@ -107,6 +109,10 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     /** The icon value for the add-on. */
     @Input()
     glyph: Nullable<string>;
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** Whether the icon add-on or the text add-on is a button. */
     @Input()

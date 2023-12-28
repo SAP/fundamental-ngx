@@ -19,6 +19,7 @@ import {
     ContentDensityMode,
     LocalContentDensityMode
 } from '@fundamental-ngx/core/content-density';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { Subscription } from 'rxjs';
 import { NotificationGroupBaseDirective } from '../notification-utils/notification-group-base';
 
@@ -36,7 +37,7 @@ import { NotificationGroupBaseDirective } from '../notification-utils/notificati
             [attr.aria-labelledby]="expandAriaLabelledBy"
             (click)="toggleExpand()"
         >
-            <i [class]="'sap-icon--' + _getButtonIcon()"></i>
+            <fd-icon [glyph]="_getButtonIcon()"></fd-icon>
         </button>
         <div class="fd-notification__content">
             <ng-content select="fd-notification-header"></ng-content>
@@ -47,7 +48,7 @@ import { NotificationGroupBaseDirective } from '../notification-utils/notificati
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [ButtonComponent, ContentDensityDirective]
+    imports: [ButtonComponent, ContentDensityDirective, IconComponent]
 })
 export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirective implements OnInit, OnDestroy {
     /** @hidden */

@@ -107,6 +107,10 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
     @Input()
     selection: VdhTableSelection = 'single';
 
+    /** Whether to allow users to select all table entries with one checkbox. */
+    @Input()
+    allowSelectAll = true;
+
     /** Uniq field from data source */
     @Input()
     uniqueKey = 'id';

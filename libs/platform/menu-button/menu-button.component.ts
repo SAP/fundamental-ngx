@@ -10,6 +10,7 @@ import {
 
 import { warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
 /**
@@ -33,9 +34,13 @@ export class MenuButtonComponent extends BaseComponent {
     @Input()
     title: string;
 
-    /** The Sap-icon to include in the menu-button */
+    /** The Icon to include in the menu-button */
     @Input()
     icon: string;
+
+    /** Glyph font family */
+    @Input()
+    iconFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** The type of the button. Types include 'standard', 'positive', 'negative', 'transparent', 'attention', 'emphasized', 'ghost'.
      * Leave empty for default.'*/

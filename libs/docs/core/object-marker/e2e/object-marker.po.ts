@@ -8,7 +8,7 @@ export class ObjectMarkerPo extends CoreBaseComponentPo {
     iconOnlyMarkers = 'fd-object-marker-example span';
     objectMarkerClickableExample = 'fd-object-marker-clickable-example ';
     link = 'a';
-    icon = 'i';
+    icon = 'fd-icon';
 
     async open(): Promise<void> {
         await super.open(this.url);

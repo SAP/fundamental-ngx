@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
 import { FD_SHELLBAR_ACTION_COMPONENT } from '../tokens';
 
 /**
@@ -34,6 +35,10 @@ export class ShellbarActionComponent {
     /** The glyph (icon) name */
     @Input()
     glyph: string;
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** Callback that hanldles the response to clicks on any of the actions. */
     @Input()

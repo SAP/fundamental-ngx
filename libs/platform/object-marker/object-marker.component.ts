@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
 import { ObjectMarkerComponent } from '@fundamental-ngx/core/object-marker';
 
 /**
@@ -19,6 +20,10 @@ export class PlatformObjectMarkerComponent {
      */
     @Input()
     glyph: string;
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** Whether the Object marker is clickable. */
     @Input()

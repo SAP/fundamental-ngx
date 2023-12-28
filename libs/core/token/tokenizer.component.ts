@@ -46,6 +46,7 @@ import {
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
@@ -147,6 +148,10 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     /** Icon of the button on the right of the input field. */
     @Input()
     glyph: string;
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** Word to use for when there are extra tokens. */
     @Input()

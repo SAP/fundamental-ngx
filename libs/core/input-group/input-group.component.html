@@ -30,6 +30,7 @@
                     [attr.tabindex]="buttonFocusable ? 0 : -1"
                     [attr.title]="iconTitle || glyphAriaLabel || glyph"
                     [glyph]="glyph"
+                    [glyphFont]="glyphFont"
                     [class.fd-shellbar__button]="inShellbar"
                     [class.is-expanded]="isExpanded"
                     [attr.aria-haspopup]="isControl"
@@ -58,7 +59,7 @@
                 @if (!glyph) {
                     {{ addOnText }}
                 } @else {
-                    <span [className]="'sap-icon--' + glyph"></span>
+                    <fd-icon [glyph]="glyph" [font]="glyphFont"></fd-icon>
                 }
             </span>
         }
