@@ -48,7 +48,7 @@ interface GroupedDataSourceItems {
 @Component({
     selector: 'fdb-navigation',
     templateUrl: './navigation.component.html',
-    styleUrls: ['./navigation.component.scss'],
+    styleUrls: ['../../../../../node_modules/fundamental-styles/dist/navigation.css', './navigation.component.scss'],
     standalone: true,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

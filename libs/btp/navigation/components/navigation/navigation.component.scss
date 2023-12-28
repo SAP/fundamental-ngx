@@ -1,5 +1,3 @@
-@import 'fundamental-styles/dist/navigation';
-
 $block: fd-navigation;
 
 .#{$block} {
@@ -53,10 +51,10 @@ $block: fd-navigation;
                 opacity: 0 !important;
                 overflow: hidden !important;
             }
+        }
 
-            .fd-navigation__list-item:not(.fd-navigation__list-item--visible) {
-                // opacity: 0;
-            }
+        .fd-navigation__list--parent-items {
+            display: flex;
         }
     }
 

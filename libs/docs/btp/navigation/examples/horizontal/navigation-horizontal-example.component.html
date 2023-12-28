@@ -1,15 +1,22 @@
-<fdb-navigation type="horizontal" style="margin-bottom: 200px; max-width: 800px">
+<p>Set visual mode</p>
+<fd-segmented-button [(ngModel)]="mode">
+    <button fd-button label="Desktop" value=""></button>
+    <button fd-button label="Tablet" value="tablet"></button>
+    <button fd-button label="Mobile" value="phone"></button>
+</fd-segmented-button>
+<p>&nbsp;</p>
+<fdb-navigation [mode]="mode" type="horizontal" style="margin-bottom: 200px; max-width: 800px">
     <fdb-navigation-container>
         <fdb-navigation-list-item home>
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="home">Home</a>
         </fdb-navigation-list-item>
-        <fdb-navigation-list-item expanded>
+        <fdb-navigation-list-item>
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="create-entry-time">Time</a>
         </fdb-navigation-list-item>
-        <fdb-navigation-list-item expanded selected>
+        <fdb-navigation-list-item>
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="basket">Basket</a>
             <fdb-navigation-list-item>
-                <a fdb-navigation-link *fdbNavigationLinkRef [routerLink]="['/btp/navigation']">Future orders</a>
+                <a fdb-navigation-link *fdbNavigationLinkRef>Future orders</a>
             </fdb-navigation-list-item>
             <fdb-navigation-list-item>
                 <a fdb-navigation-link *fdbNavigationLinkRef>Current orders</a>
@@ -20,7 +27,7 @@
                 >
             </fdb-navigation-list-item>
         </fdb-navigation-list-item>
-        <fdb-navigation-list-item expanded>
+        <fdb-navigation-list-item>
             <a fdb-navigation-link *fdbNavigationLinkRef routerLink="/core" glyph="settings"
                 >Settings without wrapper</a
             >
@@ -52,7 +59,7 @@
         <fdb-navigation-list-item>
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="shield">Shield</a>
         </fdb-navigation-list-item>
-        <fdb-navigation-list-item expanded>
+        <fdb-navigation-list-item>
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="settings">Settings</a>
             <fdb-navigation-list-item>
                 <a fdb-navigation-link *fdbNavigationLinkRef>User Settings</a>
@@ -67,7 +74,7 @@
         <fdb-navigation-list-item>
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="shield">Shield without wrapper</a>
         </fdb-navigation-list-item>
-        <fdb-navigation-list-item expanded>
+        <fdb-navigation-list-item>
             <a fdb-navigation-link *fdbNavigationLinkRef glyph="settings">Settings</a>
             <fdb-navigation-list-item>
                 <a fdb-navigation-link *fdbNavigationLinkRef>User Settings</a>

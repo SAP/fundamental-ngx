@@ -6,6 +6,7 @@
             [class.fd-navigation__item--group]="isGroup$()"
             [class.fd-navigation__item--child]="normalizedLevel$() > 2"
             [class.fd-navigation__item--overflow]="isOverflow$()"
+            [class.fd-navigation__item--submenu-child]="isOverflow$() && navigation.horizontal$()"
             [class.fd-navigation__item--with-expander]="!!link$()?.hasRouterLink$() && hasChildren$()"
             [attr.aria-level]="level$()"
             [attr.aria-selected]="isActiveAttr$()"
