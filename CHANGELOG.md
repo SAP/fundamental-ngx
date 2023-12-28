@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.24](https://github.com/SAP/fundamental-ngx/compare/v0.43.23...v0.43.24) (2023-12-28)
+
+
+### Bug Fixes
+
+* **core:** tab list highlight fix ([b292de8](https://github.com/SAP/fundamental-ngx/commit/b292de8b925344a030484439a0135bd368b258c7))
+
+
+
+
+
 ## [0.43.23](https://github.com/SAP/fundamental-ngx/compare/v0.43.22...v0.43.23) (2023-12-25)
 
 
