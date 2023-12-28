@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.21...v0.48.0-rc.22) (2023-12-28)
+
+
+### Bug Fixes
+
+* **core:** non-focusable object status ([3eacc6d](https://github.com/SAP/fundamental-ngx/commit/3eacc6d2960a5bbc0ab5f75f4074c54fb7ddfe27))
+
+
+
+
+
 # [0.48.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.20...v0.48.0-rc.21) (2023-12-25)
 
 
