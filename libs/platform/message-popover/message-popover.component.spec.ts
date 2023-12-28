@@ -1,11 +1,10 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Injectable, NO_ERRORS_SCHEMA, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
 
-import { MessagePopoverComponent } from './message-popover.component';
-import { MessagePopoverWrapper } from './models/message-popover-wrapper.interface';
-import { MessagePopoverErrorGroup } from './models/message-popover-entry.interface';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MessagePopoverComponent } from './message-popover.component';
+import { MessagePopoverErrorGroup } from './models/message-popover-entry.interface';
+import { MessagePopoverWrapper } from './models/message-popover-wrapper.interface';
 
 const stubErrors: MessagePopoverErrorGroup[] = [
     {
@@ -88,8 +87,9 @@ const stubErrors: MessagePopoverErrorGroup[] = [
     }
 ];
 
+@Injectable()
 export class MessagePopoverWrapperStub implements MessagePopoverWrapper {
-    errors = of(stubErrors);
+    errors$ = signal(stubErrors);
     formFields: [];
     setMessagePopover(): void {}
 }
@@ -101,12 +101,13 @@ describe('MessagePopoverComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [MessagePopoverComponent, NoopAnimationsModule],
+            providers: [MessagePopoverWrapperStub],
             schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
         }).compileComponents();
 
         fixture = TestBed.createComponent(MessagePopoverComponent);
         component = fixture.componentInstance;
-        component.wrapper = new MessagePopoverWrapperStub();
+        component.wrapper = TestBed.inject(MessagePopoverWrapperStub);
         fixture.detectChanges();
     });
 
@@ -117,16 +118,17 @@ describe('MessagePopoverComponent', () => {
     it('should get errors from wrapper', async () => {
         await fixture.whenStable();
 
-        expect(component._errorTypes.length).toBeGreaterThan(0);
-        expect(component._errorTypes.map((e) => e.state)).toEqual(['critical', 'negative']);
+        expect(component._errorTypes$().length).toBeGreaterThan(0);
+        expect(component._errorTypes$().map((e) => e.state)).toEqual(['critical', 'negative']);
     });
 
     it('should filter errors', async () => {
         await fixture.whenStable();
 
-        component._currentErrorType = 'error';
-        component._filterErrors();
+        component._currentErrorType$.set('error');
 
-        expect(component._filteredErrors.every((e) => e.errors.every((error) => error.type === 'error'))).toBe(true);
+        fixture.detectChanges();
+
+        expect(component._filteredErrors$().every((e) => e.errors.every((error) => error.type === 'error'))).toBe(true);
     });
 });

@@ -1,4 +1,15 @@
-import { DestroyRef, ElementRef, Inject, Injectable, NgZone, Optional, Self, SkipSelf, inject } from '@angular/core';
+import {
+    DestroyRef,
+    ElementRef,
+    Inject,
+    Injectable,
+    NgZone,
+    OnDestroy,
+    Optional,
+    Self,
+    SkipSelf,
+    inject
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, Observable, ReplaySubject, combineLatest, firstValueFrom } from 'rxjs';
 import { distinctUntilChanged, startWith, tap } from 'rxjs/operators';
@@ -9,7 +20,7 @@ import { ReadonlyViewModifier } from './readonly-view-modifier.interface';
 import { ReadonlyObserver } from './readonly.observer';
 
 @Injectable()
-export class FdkReadonlyProvider extends ReplaySubject<boolean> implements ReadonlyBehavior {
+export class FdkReadonlyProvider extends ReplaySubject<boolean> implements ReadonlyBehavior, OnDestroy {
     /** @Hidden */
     fdkReadonly = false;
 
@@ -33,11 +44,6 @@ export class FdkReadonlyProvider extends ReplaySubject<boolean> implements Reado
         @Optional() @SkipSelf() @Inject(FDK_READONLY_DIRECTIVE) private parentReadonly$: ReadonlyBehavior
     ) {
         super(1);
-
-        this._destroyRef.onDestroy(() => {
-            this.complete();
-            this.readonlyObserver.unobserve(this.elementRef);
-        });
 
         combineLatest([this._readonlyChange$, this._viewModifiers$])
             .pipe(
@@ -65,6 +71,12 @@ export class FdkReadonlyProvider extends ReplaySubject<boolean> implements Reado
         firstValueFrom(this.ngZone.onStable).then(() => {
             this._viewModifiers$.value.forEach((viewModifier) => viewModifier.setReadonlyState(isReadonly));
         });
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this.complete();
+        this.readonlyObserver.unobserve(this.elementRef);
     }
 
     /** @hidden */
