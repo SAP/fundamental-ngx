@@ -134,7 +134,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
             .map((node) => node.item)
             .filter((v): v is MenuItemComponent => !!v);
         this._component.activePath
-            .pipe(startWith(initialItemPath), takeUntilDestroyed(this._onDestroy$))
+            .pipe(startWith(initialItemPath), takeUntilDestroyed(this._destroyRef))
             .subscribe((items) => this._setMenuView(items));
     }
 
@@ -165,7 +165,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     /** @hidden Opens/closes the Dialog based on Menu isOpenChange events */
     private _listenOnMenuOpenChange(): void {
         this._component.isOpenChange
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((isOpen) => (isOpen ? this._openDialog() : this.dialogRef.close()));
     }
 

@@ -85,7 +85,7 @@ export class SplitterSplitPaneComponent implements OnInit, AfterViewInit {
     private _isOnCanvas = true;
 
     /** @hidden */
-    private _destroy$ = inject(DestroyRef);
+    private _destroyRef = inject(DestroyRef);
 
     /** Returns if the pane is on canvas. */
     get isOnCanvas(): boolean {
@@ -150,7 +150,7 @@ export class SplitterSplitPaneComponent implements OnInit, AfterViewInit {
 
         this._viewportRuler
             .change(10)
-            .pipe(takeUntilDestroyed(this._destroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this._processPaneOnCanvas());
     }
 

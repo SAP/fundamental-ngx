@@ -331,7 +331,7 @@ export class TimePickerComponent<D>
     private _state: FormStates | null = null;
 
     /** @hidden */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -369,7 +369,7 @@ export class TimePickerComponent<D>
         this._calculateTimeOptions();
         this._formatTimeInputField();
 
-        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._calculateTimeOptions();
             this._formatTimeInputField();
             this._changeDetectorRef.detectChanges();

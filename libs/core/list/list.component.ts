@@ -155,7 +155,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -208,7 +208,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
 
     /** @hidden */
     private _listenOnQueryChange(): void {
-        this._focusItems.changes.pipe(startWith(0), takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
+        this._focusItems.changes.pipe(startWith(0), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._recheckLinks();
             this._listenOnItemsClick();
             setTimeout(() => {
@@ -228,7 +228,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
         }
 
         /** Merge refresh/destroy observables */
-        const completion$ = merge(this._onRefresh$, destroyObservable(this._onDestroy$));
+        const completion$ = merge(this._onRefresh$, destroyObservable(this._destroyRef));
         const interactionChangesIndexes: Observable<{ index: number; updateOnly: boolean }>[] = this._focusItems.map(
             (item, index) =>
                 merge(
@@ -268,7 +268,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     /** @hidden */
     private _listenOnListFocusEscape(): void {
         this._keyboardSupportService.focusEscapeList
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((direction) => this.focusEscapeList.emit(direction));
     }
 }

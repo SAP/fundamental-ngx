@@ -64,7 +64,7 @@ export class IconBarDndItemDirective implements IconTabBarDndItem, AfterViewInit
     dragRef: DragRef;
 
     /** @hidden */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -144,11 +144,11 @@ export class IconBarDndItemDirective implements IconTabBarDndItem, AfterViewInit
         this._dndContainerDir?.registerDragItem(this);
 
         this.dragRef.moved
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((event) => this.onCdkMove(event.pointerPosition));
 
-        this.dragRef.released.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => this.onCdkDragReleased());
+        this.dragRef.released.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this.onCdkDragReleased());
 
-        this.dragRef.started.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => this.onCdkDragStart());
+        this.dragRef.started.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this.onCdkDragStart());
     }
 }

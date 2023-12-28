@@ -428,7 +428,7 @@ export class DatePickerComponent<D>
     private _calendarPendingDate: Nullable<D>;
 
     /** @hidden */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -524,7 +524,7 @@ export class DatePickerComponent<D>
 
     /** @hidden */
     ngOnInit(): void {
-        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this.formatInputDate(this.selectedDate);
             this._changeDetectionRef.detectChanges();
         });
@@ -542,7 +542,7 @@ export class DatePickerComponent<D>
     ngAfterViewInit(): void {
         this._InitialiseVariablesInMessageService();
 
-        this._calendars.changes.pipe(startWith(null), takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
+        this._calendars.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             const calendar = this._calendars.first;
             this._calendarComponent = calendar;
             setTimeout(() => {

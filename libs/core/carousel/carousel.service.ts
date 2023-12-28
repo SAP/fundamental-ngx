@@ -90,9 +90,8 @@ export class CarouselService implements OnDestroy {
 
     /**
      * @hidden
-     * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(@Inject(DOCUMENT) private readonly _document: Document | null) {}
@@ -355,7 +354,7 @@ export class CarouselService implements OnDestroy {
     ): void {
         merge(events.map((e) => fromEvent<MouseEvent | TouchEvent>(element, e, { passive: true }))).forEach(
             (evt: Observable<MouseEvent | TouchEvent>) => {
-                evt.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe((event) => {
+                evt.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((event) => {
                     callback(event);
                 });
             }

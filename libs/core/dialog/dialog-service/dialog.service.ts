@@ -76,7 +76,7 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
         this._dialogs.push(componentRef);
 
         this.htmlElement && (this.htmlElement.style.overflow = 'hidden');
-        dialogRef._endClose$.pipe(takeUntilDestroyed(this._destroy$)).subscribe(() => {
+        dialogRef._endClose$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._destroyDialog(componentRef);
             componentRef.destroy();
             overlayRef.dispose();

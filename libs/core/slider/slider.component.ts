@@ -324,7 +324,7 @@ export class SliderComponent
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     readonly _componentHovered$ = new BehaviorSubject(false);
@@ -722,7 +722,7 @@ export class SliderComponent
     /** @hidden */
     private _attachResizeListener(): void {
         fromEvent(window, 'resize')
-            .pipe(debounceTime(500), takeUntilDestroyed(this._onDestroy$))
+            .pipe(debounceTime(500), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this._onResize());
     }
 
@@ -948,7 +948,7 @@ export class SliderComponent
                 }),
                 debounceTime(10),
                 distinctUntilChanged(),
-                takeUntilDestroyed(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((focused) => {
                 if (focused) {

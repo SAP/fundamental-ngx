@@ -121,9 +121,8 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnChanges
 
     /**
      * @hidden
-     * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _initiated = false;
@@ -150,7 +149,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnChanges
 
         this._constructYearsGrid();
 
-        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._constructYearsGrid();
             this._changeDetectorRef.markForCheck();
         });
@@ -394,21 +393,21 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnChanges
 
         this._calendarService.focusEscapeFunction = this.focusEscapeFunction;
 
-        this._calendarService.onFocusIdChange.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe((index) => {
+        this._calendarService.onFocusIdChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
             this._focusOnCellByIndex(index);
         });
 
         this._calendarService.onKeySelect
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((index) => this.selectYear(this._getYearsList()[index]));
 
-        this._calendarService.onListStartApproach.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe((index) => {
+        this._calendarService.onListStartApproach.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
             this.loadPreviousYearsList();
             this._changeDetectorRef.detectChanges();
             this._focusOnCellByIndex(index);
         });
 
-        this._calendarService.onListEndApproach.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe((index) => {
+        this._calendarService.onListEndApproach.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
             this.loadNextYearsList();
             this._changeDetectorRef.detectChanges();
             this._focusOnCellByIndex(index);

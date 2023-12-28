@@ -13,7 +13,7 @@ export abstract class DialogBaseService<T extends DialogContainer<any>> {
     protected _dialogs: ComponentRef<T>[] = [];
 
     /** @hidden */
-    protected _destroy$ = inject(DestroyRef);
+    protected _destroyRef = inject(DestroyRef);
 
     /**
      * Status of the dialog service.

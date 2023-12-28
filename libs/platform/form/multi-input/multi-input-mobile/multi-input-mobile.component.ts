@@ -82,7 +82,7 @@ export class PlatformMultiInputMobileComponent extends MobileModeBase<PlatformMu
     /** @hidden */
     private _listenOnMultiInputOpenChange(): void {
         this._component.openChange
-            .pipe(distinctUntilChanged(), takeUntilDestroyed(this._onDestroy$))
+            .pipe(distinctUntilChanged(), takeUntilDestroyed(this._destroyRef))
             .subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 

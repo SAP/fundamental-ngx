@@ -99,7 +99,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     private _densityMode: TabDestinyMode;
 
     /** @hidden */
-    private _onDestroy$ = inject(DestroyRef);
+    private _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _destroyed = false;
@@ -271,7 +271,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @description trigger recalculation items, need to do it asynchronously after dom was rerendered
      */
     protected _triggerRecalculationVisibleItems(): void {
-        this._ngZone.onMicrotaskEmpty.pipe(take(1), takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
+        this._ngZone.onMicrotaskEmpty.pipe(take(1), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             if (this.overflowDirective && !this._destroyed) {
                 const extra = this.overflowDirective.getAmountOfExtraItems();
                 this._recalculateVisibleItems(extra);

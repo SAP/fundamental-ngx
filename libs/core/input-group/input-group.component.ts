@@ -220,7 +220,7 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     inShellbar = false;
 
     /** An RxJS Subject that will kill the stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** Value of the text input. */
     set inputText(value) {
@@ -343,7 +343,7 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
             // debounceTime is needed in order to filter subsequent focus-blur events, that happen simultaneously
             debounceTime(10),
             filter(() => this.showFocus),
-            takeUntilDestroyed(this._onDestroy$)
+            takeUntilDestroyed(this._destroyRef)
         );
 
         this._changeDetectorRef.markForCheck();

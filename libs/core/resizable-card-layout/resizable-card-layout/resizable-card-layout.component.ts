@@ -102,7 +102,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
     private _keyboardEventsManager: FocusKeyManager<ResizableCardItemComponent>;
 
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _layoutShifted = false;
@@ -243,17 +243,17 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
             }
 
             resizeCardItem.resizing
-                .pipe(takeUntilDestroyed(this._destroy$))
+                .pipe(takeUntilDestroyed(this._destroyRef))
                 .subscribe((event: ResizedEvent) => this.cardResizing(event));
 
             // listen for resize complete event of card item
             resizeCardItem.resized
-                .pipe(takeUntilDestroyed(this._destroy$))
+                .pipe(takeUntilDestroyed(this._destroyRef))
                 .subscribe((event: ResizedEvent) => this.cardResizeComplete(event));
 
             // listen for mini-header height event of card item
             resizeCardItem.miniHeaderReached
-                .pipe(takeUntilDestroyed(this._destroy$))
+                .pipe(takeUntilDestroyed(this._destroyRef))
                 .subscribe((event: ResizedEvent) => {
                     this.miniHeaderReached.emit(event);
                     this.stepChange.emit(event);
@@ -261,7 +261,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
 
             // listen for mini-content height event of card item
             resizeCardItem.miniContentReached
-                .pipe(takeUntilDestroyed(this._destroy$))
+                .pipe(takeUntilDestroyed(this._destroyRef))
                 .subscribe((event: ResizedEvent) => {
                     this.miniContentReached.emit(event);
                     this.stepChange.emit(event);

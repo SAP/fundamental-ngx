@@ -101,7 +101,7 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
     /** @hidden */
     private _listenOnMultiInputOpenChange(): void {
         this._component.openChange
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 
@@ -116,7 +116,7 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
         });
 
         // Have to fire "detectChanges" to fix "ExpressionChangedAfterItHasBeenCheckedError"
-        this.dialogRef.afterLoaded.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
+        this.dialogRef.afterLoaded.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._component.detectChanges();
         });
 

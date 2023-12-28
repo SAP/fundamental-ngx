@@ -50,7 +50,7 @@ export class ThemingService {
     private readonly _standardThemes: ThemeDefinition[] = [];
 
     /** @hidden **/
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _currentThemeSubject: BehaviorSubject<CompleteThemeDefinition | null> =
@@ -232,7 +232,7 @@ export class ThemingService {
 
         this._activatedRoute.queryParams
             .pipe(
-                takeUntilDestroyed(this._onDestroy$),
+                takeUntilDestroyed(this._destroyRef),
                 filter((param) => param && param[paramName])
             )
             .subscribe((param) => this.setTheme(param[paramName]));

@@ -57,7 +57,7 @@ export class ObjectIdentifierComponent implements AfterContentInit {
     linkComponents: QueryList<ElementRef>;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -67,7 +67,7 @@ export class ObjectIdentifierComponent implements AfterContentInit {
     /** @hidden */
     private _listenOnLinkQueryChange(): void {
         this.linkComponents.changes
-            .pipe(startWith(0), takeUntilDestroyed(this._onDestroy$))
+            .pipe(startWith(0), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this.linkComponents.forEach((link) => this._addIdentifierClass(link)));
     }
 

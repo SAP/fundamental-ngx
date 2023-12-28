@@ -388,7 +388,7 @@ export class SearchFieldComponent
     private resolveTranslation = resolveTranslationSyncFn();
 
     /** @hidden */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _dataSourceChanged$ = new Subject<void>();
@@ -597,7 +597,7 @@ export class SearchFieldComponent
                     );
                 }),
                 take(1),
-                takeUntilDestroyed(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((event) => {
                 const target = event.target as HTMLElement;
@@ -693,7 +693,7 @@ export class SearchFieldComponent
         this._dataSourceChanged$.next();
         dataSource
             .open()
-            .pipe(takeUntil(merge(destroyObservable(this._onDestroy$), this._dataSourceChanged$)))
+            .pipe(takeUntil(merge(destroyObservable(this._destroyRef), this._dataSourceChanged$)))
             .subscribe((data) => {
                 this._dropdownValues$ = of(data);
             });
@@ -706,7 +706,7 @@ export class SearchFieldComponent
      */
     private _getSuggestionsLength(): number {
         let count = 0;
-        this._dropdownValues$.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe((suggestions) => {
+        this._dropdownValues$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((suggestions) => {
             suggestions?.forEach((suggestion) => {
                 if (this.inputText && suggestion?.toLowerCase().indexOf(this.inputText?.trim()?.toLowerCase()) > -1) {
                     count++;

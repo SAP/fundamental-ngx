@@ -110,7 +110,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     actionSheetMobileDynamic: ComponentRef<ActionSheetMobileComponent>;
 
     /** @hidden */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _onRefresh$ = new Subject<void>();
@@ -187,13 +187,13 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden */
     private _actionControlHandle(): void {
         this.actionSheetControl.clicked
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => (this.isOpen ? this.close() : this.open()));
     }
 
     /** @hidden */
     private _listenOnItemsChange(): void {
-        this.actionSheetItems.changes.pipe(startWith(1), takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
+        this.actionSheetItems.changes.pipe(startWith(1), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._listenOnItemsClick();
         });
     }
@@ -203,7 +203,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         /** Finish all of the streams, from before */
         this._onRefresh$.next();
         /** Merge refresh/destroy observables */
-        const refresh$ = merge(this._onRefresh$, destroyObservable(this._onDestroy$));
+        const refresh$ = merge(this._onRefresh$, destroyObservable(this._destroyRef));
 
         this.actionSheetItems.forEach((item, index) =>
             item.clicked.pipe(takeUntil(refresh$)).subscribe((event: ActionSheetClickEvent) => {

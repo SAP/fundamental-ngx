@@ -76,9 +76,8 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
 
     /**
      * @hidden
-     * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _initiated = false;
@@ -98,7 +97,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
         this._setupKeyboardService();
         this._constructMonthGrid();
 
-        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._constructMonthGrid();
             this._changeDetectorRef.markForCheck();
         });
@@ -262,11 +261,11 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
         this._calendarService.focusEscapeFunction = this.focusEscapeFunction;
 
         this._calendarService.onFocusIdChange
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((index) => this._focusOnCellByIndex(index));
 
         this._calendarService.onKeySelect
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((index) => this.selectMonth(this._getMonthList()[index]));
     }
 

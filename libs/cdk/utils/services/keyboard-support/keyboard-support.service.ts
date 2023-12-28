@@ -15,8 +15,8 @@ export class KeyboardSupportService<T> implements OnDestroy {
     /** Subject that is thrown, when focus escapes the list */
     focusEscapeList = new Subject<FocusEscapeDirection>();
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    /** @hidden  */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
@@ -43,11 +43,12 @@ export class KeyboardSupportService<T> implements OnDestroy {
         wrap?: boolean,
         tabKeyNavigation = true
     ): void {
+        this._keyManager?.destroy();
         this._itemList = queryList;
         this._tabKeyNavigation = tabKeyNavigation;
         this._keyManager = new FocusKeyManager(queryList).withWrap(wrap).withHomeAndEnd();
         queryList.changes
-            .pipe(startWith(0), takeUntilDestroyed(this._onDestroy$))
+            .pipe(startWith(0), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this._refreshEscapeLogic(queryList));
     }
 
@@ -88,7 +89,7 @@ export class KeyboardSupportService<T> implements OnDestroy {
         /** Finish all of the streams, form before */
         this._onRefresh$.next();
 
-        const unsubscribe$ = merge(this._onRefresh$, destroyObservable(this._onDestroy$));
+        const unsubscribe$ = merge(this._onRefresh$, destroyObservable(this._destroyRef));
 
         if (queryList.length) {
             createEscapeListener(queryList.last, DOWN_ARROW, 'down');

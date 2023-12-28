@@ -205,7 +205,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     private _directionShiftIsRight: boolean | null = null;
 
     /** An RxJS Subject that will kill the data stream upon destruction (for unsubscribing)  */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _eventListeners: (() => void)[] = [];
@@ -830,7 +830,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             .pipe(
                 // debounceTime is needed in order to filter subsequent focus-blur events, that happen simultaneously
                 debounceTime(10),
-                takeUntilDestroyed(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((focused) => {
                 this._tokenizerHasFocus = focused;
@@ -842,7 +842,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     private _listenOnResize(): void {
         this.onResize();
         resizeObservable(this.elementRef.nativeElement)
-            .pipe(debounceTime(30), takeUntilDestroyed(this._onDestroy$))
+            .pipe(debounceTime(30), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this.onResize());
     }
 

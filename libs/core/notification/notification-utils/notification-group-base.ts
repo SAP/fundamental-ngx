@@ -16,7 +16,7 @@ export abstract class NotificationGroupBaseDirective implements AfterViewInit {
     notificationActions: QueryList<NotificationActionsComponent>;
 
     /** @hidden */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(private renderer: Renderer2) {}
@@ -40,7 +40,7 @@ export abstract class NotificationGroupBaseDirective implements AfterViewInit {
             .pipe(
                 debounceTime(10), // omitting extra emissions
                 filter(() => this.notificationHeader.length > 0 && this.notificationActions.length > 0),
-                takeUntilDestroyed(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
                 // using only the first header for "aria-describedby" of associated buttons

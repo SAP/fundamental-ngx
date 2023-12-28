@@ -20,7 +20,7 @@ export class NestedListKeyboardService {
     readonly refresh$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(@Inject(MenuKeyboardService) private keyboardService: MenuKeyboardService) {}
@@ -37,7 +37,7 @@ export class NestedListKeyboardService {
         /** Putting the keyboard support function to each of the items */
         items.forEach((item, index) => {
             item.keyboardTriggered
-                .pipe(takeUntil(merge(this.refresh$, destroyObservable(this._destroy$))))
+                .pipe(takeUntil(merge(this.refresh$, destroyObservable(this._destroyRef))))
                 .subscribe((keyboardEvent: KeyboardEvent) => this._handleKeyDown(keyboardEvent, index, items));
         });
     }

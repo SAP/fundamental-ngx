@@ -56,7 +56,7 @@ export abstract class BaseToastService<
     protected _toastsMap = new Map<BaseToastPosition, BaseToastRef[]>();
 
     /** @hidden */
-    private _destroy$ = inject(DestroyRef);
+    private _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     protected constructor(
@@ -224,7 +224,7 @@ export abstract class BaseToastService<
         // When the toast is dismissed, clear the reference to it.
         toastRef
             .afterDismissed()
-            .pipe(takeUntilDestroyed(this._destroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 const allToasts = this._toastsMap.get(positionStrategy) || [];
                 allToasts.splice(allToasts.indexOf(toastRef), 1);

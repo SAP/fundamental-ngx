@@ -27,7 +27,7 @@ export class SelectionService<ElementType extends Element, ValueType = ElementTy
     /** @hidden */
     private _rootComponent!: SelectComponentRootToken<ElementType>;
     /** @hidden */
-    private _destroy$ = inject(DestroyRef);
+    private _destroyRef = inject(DestroyRef);
     /** @hidden */
     private _clear$ = new Subject<void>();
     /** @hidden */
@@ -41,7 +41,7 @@ export class SelectionService<ElementType extends Element, ValueType = ElementTy
             map((value) => (this._isMultipleMode ? value : [value[0]])),
             map((coerced: ValueType[]) => coerced.filter(Boolean))
         );
-        this._normalizedValue$.pipe(takeUntilDestroyed(this._destroy$)).subscribe((val) => (this._value = val));
+        this._normalizedValue$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((val) => (this._value = val));
         this.value$ = this._normalizedValue$.pipe(
             map((v) => this._getProperValues(v as SelectableListValueType<ElementType>)),
             shareReplay(1)
@@ -96,7 +96,7 @@ export class SelectionService<ElementType extends Element, ValueType = ElementTy
      * */
     listenToItemInteractions(): void {
         this.clear();
-        const unsubscribe$ = merge(destroyObservable(this._destroy$), this._clear$);
+        const unsubscribe$ = merge(destroyObservable(this._destroyRef), this._clear$);
         if (this._items$) {
             this._items$
                 .pipe(

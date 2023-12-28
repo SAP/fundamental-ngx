@@ -38,7 +38,7 @@ export class SettingsGeneratorService implements OnDestroy {
     });
 
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor() {
@@ -53,7 +53,7 @@ export class SettingsGeneratorService implements OnDestroy {
             .pipe(
                 filter((loading) => !loading),
                 take(1),
-                takeUntilDestroyed(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
                 this._messagePopover?.addForms(formGenerator.formGroup);
@@ -81,14 +81,14 @@ export class SettingsGeneratorService implements OnDestroy {
                 filter((status) => status.success),
                 take(1),
                 map((result) => result.value as DynamicFormValue),
-                takeUntilDestroyed(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             );
         });
 
         return combineLatest(joinedEvents).pipe(
             map((result) => Object.entries(result).reduce((a, b) => set(a, b[0], b[1]), {})),
             take(1),
-            takeUntilDestroyed(this._destroy$)
+            takeUntilDestroyed(this._destroyRef)
         );
     }
 
@@ -114,7 +114,7 @@ export class SettingsGeneratorService implements OnDestroy {
             ?.pipe(
                 switchMap((messagePopover) => messagePopover.focusItem),
                 filter((entry) => !!entry.formField),
-                takeUntilDestroyed(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((entry) => {
                 this._formGenerators.forEach((formGenerator, path) => {

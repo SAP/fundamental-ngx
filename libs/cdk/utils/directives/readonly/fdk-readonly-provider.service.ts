@@ -22,7 +22,7 @@ export class FdkReadonlyProvider extends ReplaySubject<boolean> implements Reado
     private _readonlyChange$: Observable<boolean> = this._getReadonlyChange$();
 
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -34,7 +34,7 @@ export class FdkReadonlyProvider extends ReplaySubject<boolean> implements Reado
     ) {
         super(1);
 
-        this._destroy$.onDestroy(() => {
+        this._destroyRef.onDestroy(() => {
             this.complete();
             this.readonlyObserver.unobserve(this.elementRef);
         });
@@ -42,14 +42,14 @@ export class FdkReadonlyProvider extends ReplaySubject<boolean> implements Reado
         combineLatest([this._readonlyChange$, this._viewModifiers$])
             .pipe(
                 tap(([isReadonly]) => this.setReadonlyState(isReadonly)),
-                takeUntilDestroyed(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe();
         this._readonlyChange$
             .pipe(
                 tap((isDisabled) => (this.fdkReadonly = isDisabled)),
                 tap((isDisabled) => this.next(isDisabled)),
-                takeUntilDestroyed(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe();
     }
@@ -86,7 +86,7 @@ export class FdkReadonlyProvider extends ReplaySubject<boolean> implements Reado
                             this.setReadonlyState(false);
                         }
                     }),
-                    takeUntilDestroyed(this._destroy$)
+                    takeUntilDestroyed(this._destroyRef)
                 )
                 .subscribe();
         }
@@ -101,7 +101,7 @@ export class FdkReadonlyProvider extends ReplaySubject<boolean> implements Reado
                             this.setReadonlyState(isReadonly);
                         }
                     }),
-                    takeUntilDestroyed(this._destroy$)
+                    takeUntilDestroyed(this._destroyRef)
                 )
                 .subscribe();
         }

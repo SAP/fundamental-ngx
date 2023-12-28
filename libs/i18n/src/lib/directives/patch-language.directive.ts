@@ -22,7 +22,7 @@ export class FdPatchLanguageDirective {
     /** @hidden */
     private readonly _languagePatch$ = new BehaviorSubject<FdLanguagePatch | null>(null);
     /** @hidden */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** part of the language object to be overriden */
     @Input('fdPatchLanguage') set languagePatch(value: FdLanguagePatch) {
@@ -39,7 +39,7 @@ export class FdPatchLanguageDirective {
                 map(([parentLang, languagePatch]) =>
                     merge(cloneDeep(parentLang), patchedObj(parentLang, languagePatch || {}))
                 ),
-                takeUntilDestroyed(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((translation) => fdLanguageSubject$.next(translation));
     }

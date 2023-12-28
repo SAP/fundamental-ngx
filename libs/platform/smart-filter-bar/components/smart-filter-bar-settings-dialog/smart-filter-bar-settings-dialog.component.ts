@@ -147,7 +147,7 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _translationResolver = new TranslationResolver();
@@ -174,7 +174,7 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
         this._sourceSubscription?.unsubscribe();
         this._sourceSubscription = this.source
             .open()
-            .pipe(observeOn(asyncScheduler), takeUntilDestroyed(this._onDestroy$))
+            .pipe(observeOn(asyncScheduler), takeUntilDestroyed(this._destroyRef))
             .subscribe((items) => {
                 items.forEach((field, index) => {
                     if (field.visible) {

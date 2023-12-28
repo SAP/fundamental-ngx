@@ -116,7 +116,7 @@ export class MobileMultiComboboxComponent extends MobileModeBase<MobileMultiComb
     /** @hidden */
     private _listenOnMultiComboboxOpenChange(): void {
         this._component.openChange
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 

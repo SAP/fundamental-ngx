@@ -47,7 +47,7 @@ export class FormGeneratorService {
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -398,7 +398,7 @@ export class FormGeneratorService {
 
         if (isFunction(formItem.onchange)) {
             formControl.valueChanges
-                .pipe(debounceTime(50), takeUntilDestroyed(this._onDestroy$))
+                .pipe(debounceTime(50), takeUntilDestroyed(this._destroyRef))
                 .subscribe(async (value) => {
                     const obj = formItem.onchange!(value, this.forms, formControl);
 

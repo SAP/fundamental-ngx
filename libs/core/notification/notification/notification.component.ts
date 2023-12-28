@@ -95,7 +95,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     public componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
     /** @hidden */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _afterViewInit$ = new BehaviorSubject(false);
@@ -162,7 +162,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
      */
     async trapFocus(): Promise<boolean> {
         // waiting for afterViewInit hook to fire
-        await this._afterViewInit$.pipe(filter(Boolean), take(1), takeUntilDestroyed(this._onDestroy$)).toPromise();
+        await this._afterViewInit$.pipe(filter(Boolean), take(1), takeUntilDestroyed(this._destroyRef)).toPromise();
         if (!this._focusTrap) {
             this._focusTrap = this._focusTrapFactory.create(this._elRef.nativeElement);
         }
@@ -175,7 +175,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
             this._router.events
                 .pipe(
                     filter((event) => event instanceof NavigationStart && this.closeOnNavigation),
-                    takeUntilDestroyed(this._onDestroy$)
+                    takeUntilDestroyed(this._destroyRef)
                 )
                 .subscribe(() => this._notificationRef.dismiss());
         }

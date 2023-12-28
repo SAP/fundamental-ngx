@@ -126,7 +126,7 @@ export class IconTabBarComponent implements OnInit {
     readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
-    private _onDestroy$ = inject(DestroyRef);
+    private _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -141,7 +141,7 @@ export class IconTabBarComponent implements OnInit {
 
         if (this.densityMode === 'inherit') {
             this._contentDensityService?._contentDensityListener
-                .pipe(distinctUntilChanged(), takeUntilDestroyed(this._onDestroy$))
+                .pipe(distinctUntilChanged(), takeUntilDestroyed(this._destroyRef))
                 .subscribe((density) => {
                     this.densityMode = density;
                     if (density !== 'compact') {

@@ -86,7 +86,7 @@ export class PopoverService extends BasePopoverClass {
     private _ignoreTriggers = false;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private get _triggerHtmlElement(): HTMLElement {
@@ -105,9 +105,9 @@ export class PopoverService extends BasePopoverClass {
         super();
 
         /** Merge observables - close or destroy */
-        this._refresh$ = merge(this.isOpenChange, destroyObservable(this._onDestroy$));
+        this._refresh$ = merge(this.isOpenChange, destroyObservable(this._destroyRef));
 
-        this._onDestroy$.onDestroy(() => {
+        this._destroyRef.onDestroy(() => {
             this._removeTriggerListeners();
             if (this._overlayRef) {
                 this._overlayRef.detach();
@@ -426,7 +426,7 @@ export class PopoverService extends BasePopoverClass {
                 filter(() => !this.noArrow && !!this._getPopoverBody()),
                 distinctUntilChanged((previous, current) => previous.connectionPair === current.connectionPair),
                 takeUntil(this._placementRefresh$),
-                takeUntilDestroyed(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((event) => this._getPopoverBody()._setArrowStyles(event.connectionPair, this._getDirection()));
     }

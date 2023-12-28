@@ -126,7 +126,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     private readonly _refresh$ = new Subject<void>();
 
     /** @hidden */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden  */
     private _dndItemReference: DndItem[];
@@ -153,7 +153,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     ngAfterContentInit(): void {
         this._changeDraggableState(this._draggable);
         this.dndItems.changes
-            .pipe(startWith(null), takeUntilDestroyed(this._onDestroy$))
+            .pipe(startWith(null), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this.refreshQueryList());
     }
 
@@ -167,7 +167,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
      * Refreshes the indexes of the items.
      */
     refreshQueryList(): void {
-        const refresh$ = merge(this._refresh$, destroyObservable(this._onDestroy$));
+        const refresh$ = merge(this._refresh$, destroyObservable(this._destroyRef));
         this._refresh$.next();
 
         this._dndItemReference = this.dndItems.toArray();

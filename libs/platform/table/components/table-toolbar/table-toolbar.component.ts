@@ -145,7 +145,7 @@ export class TableToolbarComponent implements TableToolbarInterface {
     readonly tableLoading$: Observable<boolean> = this._tableService.tableLoading$;
 
     /** @hidden */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -197,19 +197,19 @@ export class TableToolbarComponent implements TableToolbarInterface {
 
     /** @hidden */
     private _listenToTableEvents(): void {
-        this._table.emptyRowAdded.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
+        this._table.emptyRowAdded.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._showSaveButton = true;
         });
 
-        this._table.save.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
+        this._table.save.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._showSaveButton = false;
         });
 
-        this._table.cancel.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
+        this._table.cancel.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._showSaveButton = false;
         });
 
-        this._table.presetChanged.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe((state) => {
+        this._table.presetChanged.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((state) => {
             this._searchInputText = state.searchInput?.text ?? '';
         });
     }

@@ -24,7 +24,7 @@ export class FdkDisabledProvider extends ReplaySubject<boolean> implements Disab
     /** @Hidden */
     fdkDisabled = false;
     /** @Hidden */
-    private readonly _destroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
     /** @hidden */
     private readonly _viewModifiers$: BehaviorSubject<DisabledViewModifier[]> = new BehaviorSubject<
         DisabledViewModifier[]
@@ -44,14 +44,14 @@ export class FdkDisabledProvider extends ReplaySubject<boolean> implements Disab
         combineLatest([this._disabledChange$, this._viewModifiers$])
             .pipe(
                 tap(([isDisabled]) => this.setDisabledState(isDisabled)),
-                takeUntilDestroyed(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe();
         this._disabledChange$
             .pipe(
                 tap((isDisabled) => (this.fdkDisabled = isDisabled)),
                 tap((isDisabled) => this.next(isDisabled)),
-                takeUntilDestroyed(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe();
     }
@@ -94,7 +94,7 @@ export class FdkDisabledProvider extends ReplaySubject<boolean> implements Disab
                             this.setDisabledState(false);
                         }
                     }),
-                    takeUntilDestroyed(this._destroy$)
+                    takeUntilDestroyed(this._destroyRef)
                 )
                 .subscribe();
         }
@@ -109,7 +109,7 @@ export class FdkDisabledProvider extends ReplaySubject<boolean> implements Disab
                             this.setDisabledState(isDisabled);
                         }
                     }),
-                    takeUntilDestroyed(this._destroy$)
+                    takeUntilDestroyed(this._destroyRef)
                 )
                 .subscribe();
         }

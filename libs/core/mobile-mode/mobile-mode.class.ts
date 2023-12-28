@@ -37,7 +37,7 @@ export abstract class MobileModeBase<T extends MobileMode> {
     mobileConfig: MobileModeConfig;
 
     /** @hidden */
-    protected readonly _onDestroy$ = inject(DestroyRef);
+    protected readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(

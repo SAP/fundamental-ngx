@@ -12,7 +12,7 @@ export class PopoverContainerDirective implements OnInit {
     refreshPosition$ = new Subject<void>();
 
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(private _elmRef: ElementRef<HTMLElement>) {}
@@ -20,7 +20,7 @@ export class PopoverContainerDirective implements OnInit {
     /** @hidden */
     ngOnInit(): void {
         resizeObservable(this._elmRef.nativeElement)
-            .pipe(takeUntilDestroyed(this._destroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 this.refreshPosition$.next();
             });

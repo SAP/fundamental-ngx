@@ -60,7 +60,7 @@ export class IconBarDndContainerDirective {
     private _draggable = true;
 
     /** @hidden */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(public elementRef: ElementRef) {}
@@ -174,9 +174,9 @@ export class IconBarDndContainerDirective {
     registerDragItem(dragItem: IconTabBarDndItem): void {
         this._dragRefItems.push(dragItem.dragRef);
         this.dndItemDirectives.push(dragItem);
-        dragItem.moved.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe((position: Point) => this.onMove(position));
-        dragItem.started.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => this.dragStart());
-        dragItem.released.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => this.dragEnd(dragItem));
+        dragItem.moved.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((position: Point) => this.onMove(position));
+        dragItem.started.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this.dragStart());
+        dragItem.released.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this.dragEnd(dragItem));
     }
 
     /**

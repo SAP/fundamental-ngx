@@ -117,7 +117,7 @@ export class WizardGeneratorStepComponent implements WizardGeneratorStep, OnInit
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -246,7 +246,7 @@ export class WizardGeneratorStepComponent implements WizardGeneratorStep, OnInit
                 const refreshFormVisibility = strategies[WizardGeneratorRefreshStrategy.REFRESH_FORM_VISIBILITY];
 
                 control?.valueChanges
-                    .pipe(debounceTime(50), takeUntilDestroyed(this._onDestroy$))
+                    .pipe(debounceTime(50), takeUntilDestroyed(this._destroyRef))
                     .subscribe(async () => {
                         if (refreshSteps) {
                             await this._wizardGeneratorService.refreshStepVisibility();

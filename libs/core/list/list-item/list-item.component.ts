@@ -159,7 +159,7 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     buttons: QueryList<ButtonComponent>;
 
     /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _onLinkListChanged$ = new Subject<void>();
@@ -266,7 +266,7 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     /** @hidden */
     private _listenOnLinkQueryChange(): void {
         this.linkDirectives.changes
-            .pipe(startWith(this.linkDirectives), takeUntilDestroyed(this._onDestroy$))
+            .pipe(startWith(this.linkDirectives), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 this._onLinkListChanged$.next();
                 this.link = this.linkDirectives.length > 0;
@@ -276,7 +276,7 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
 
     /** @hidden */
     private _listenOnButtonQueryChange(): void {
-        this.buttons.changes.pipe(startWith(0), takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
+        this.buttons.changes.pipe(startWith(0), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this.buttons.forEach(this._addClassToButtons);
         });
     }

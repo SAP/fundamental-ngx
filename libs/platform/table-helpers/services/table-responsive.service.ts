@@ -20,7 +20,7 @@ export class TableResponsiveService {
     private readonly _responsiveBreakpoints = new Map<TableColumn, FdpTableBreakpoint[]>();
 
     /** @hidden */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _resizeSubscription: Subscription | undefined;
@@ -71,7 +71,7 @@ export class TableResponsiveService {
         this._resizeSubscription?.unsubscribe();
 
         this._resizeSubscription = resizeObservable(this._elmRef.nativeElement)
-            .pipe(debounceTime(20), takeUntilDestroyed(this._onDestroy$))
+            .pipe(debounceTime(20), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 this._processResponsiveColumns();
             });

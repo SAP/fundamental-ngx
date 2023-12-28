@@ -106,7 +106,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     private _ariaHidden = true;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** Unique element ID */
     private readonly _elementId: string = 'fdNestedItem' + sideNavigationItemUniqueId++;
@@ -253,22 +253,22 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
         }
 
         /** Subscribe to mouse click event, thrown by link item */
-        this._itemService.toggle.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => this.toggle());
+        this._itemService.toggle.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this.toggle());
 
         /** Subscribe to mouse click event, thrown by link item */
         this._itemService.click
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this._stateService.onSelected.next(this._elementId));
 
         /** Subscribe to keyboard event and throw it farther */
         this._itemService.keyDown
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((keyboardEvent) => this.keyboardTriggered.emit(keyboardEvent));
 
         /** Subscribe to selected state change, it's not triggered, when selectable flag is disabled*/
         this._stateService.onSelected
             .pipe(
-                takeUntilDestroyed(this._onDestroy$),
+                takeUntilDestroyed(this._destroyRef),
                 filter(() => this._stateService.selectable)
             )
             .subscribe((id) => this._selectedChange(id));

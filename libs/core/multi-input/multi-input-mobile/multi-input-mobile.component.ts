@@ -111,10 +111,10 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
     /** @hidden */
     private _listenOnMultiInputOpenChange(): void {
         this._component.openChange
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((isOpen) => this._toggleDialog(isOpen));
         this._component.allItemsSelectedChange
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((allItemsSelected) => (this.allItemsSelected = allItemsSelected));
     }
 

@@ -178,7 +178,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     activeMeridianViewItem?: MeridianViewItem;
 
     /** @hidden */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -201,7 +201,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
 
     /** @hidden */
     ngOnInit(): void {
-        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._setUpViewGrid();
             this._changeDetectorRef.detectChanges();
         });

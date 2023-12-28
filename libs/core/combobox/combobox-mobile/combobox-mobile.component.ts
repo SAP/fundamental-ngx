@@ -103,7 +103,7 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
     /** @hidden */
     private _listenOnMultiInputOpenChange(): void {
         this._component.openChange
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 
@@ -134,7 +134,7 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
         this.dialogRef.afterLoaded
             .pipe(
                 observeOn(asyncScheduler), // making the listener async
-                takeUntilDestroyed(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
                 try {

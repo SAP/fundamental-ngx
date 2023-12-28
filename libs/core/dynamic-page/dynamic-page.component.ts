@@ -140,7 +140,7 @@ export class DynamicPageComponent implements AfterViewInit {
     _headerCollapsible = true;
 
     /** @hidden **/
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -211,7 +211,7 @@ export class DynamicPageComponent implements AfterViewInit {
      * - recheck size depending on width of DynamicPage
      */
     private _listenToLayoutChange(): void {
-        this._columnLayout.layoutChange.pipe(debounceTime(50), takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
+        this._columnLayout.layoutChange.pipe(debounceTime(50), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this.refreshSize();
             this._sizeChangeHandle();
         });
@@ -228,7 +228,7 @@ export class DynamicPageComponent implements AfterViewInit {
     /** @hidden */
     private _listenOnCollapse(): void {
         this._dynamicPageService.subheaderVisibilityChange
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this._setContainerPositions());
     }
 
@@ -261,7 +261,7 @@ export class DynamicPageComponent implements AfterViewInit {
         const element = this._getScrollElement();
         if (element) {
             fromEvent(element, 'scroll')
-                .pipe(debounceTime(10), takeUntilDestroyed(this._onDestroy$))
+                .pipe(debounceTime(10), takeUntilDestroyed(this._destroyRef))
                 .subscribe(() => {
                     const collapse =
                         !this._dynamicPageService.pinned() &&
@@ -275,7 +275,7 @@ export class DynamicPageComponent implements AfterViewInit {
     private _listenOnResize(): void {
         const listener = this._dynamicPageWrapper ? this._listenToWrapperResize() : this._listenToWindowResize();
 
-        listener.pipe(debounceTime(100), takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
+        listener.pipe(debounceTime(100), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._setContainerPositions();
             this._sizeChangeHandle();
         });
@@ -325,7 +325,7 @@ export class DynamicPageComponent implements AfterViewInit {
             .pipe(
                 startWith(this._contentComponent.toArray()),
                 observeOn(asyncScheduler),
-                takeUntilDestroyed(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((components) => {
                 components.forEach((content, index) => {

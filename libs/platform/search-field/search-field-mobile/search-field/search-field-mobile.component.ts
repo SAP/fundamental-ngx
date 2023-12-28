@@ -79,7 +79,7 @@ export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobile
 
     /** @hidden */
     listenChanges(): void {
-        this._component.isOpenChange.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe((isOpen) => {
+        this._component.isOpenChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isOpen) => {
             if (!isOpen) {
                 this._handleDismiss();
 

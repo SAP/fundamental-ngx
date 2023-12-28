@@ -51,7 +51,7 @@ export class OverflowListDirective implements AfterViewInit {
     overflowItems: QueryList<OverflowListItemDirective>;
 
     /** @hidden */
-    private _onDestroy$ = inject(DestroyRef);
+    private _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -64,7 +64,7 @@ export class OverflowListDirective implements AfterViewInit {
     ngAfterViewInit(): void {
         this._viewportRuler
             .change(50)
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             // ViewportRuler invoked out of zone, that is why I need to invoke function in zone
             .subscribe(() => this._ngZone.run(() => this._calculateAmountOfOverflowedItems()));
 

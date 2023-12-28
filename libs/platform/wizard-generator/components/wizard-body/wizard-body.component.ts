@@ -168,7 +168,7 @@ export class WizardBodyComponent implements OnInit {
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /**
      * @hidden
@@ -232,7 +232,7 @@ export class WizardBodyComponent implements OnInit {
     ngOnInit(): void {
         this._wizardGeneratorService
             .getVisibleSteps()
-            .pipe(debounceTime(50), takeUntilDestroyed(this._onDestroy$))
+            .pipe(debounceTime(50), takeUntilDestroyed(this._destroyRef))
             .subscribe((visibleSteps) => {
                 this._visibleItems = visibleSteps;
                 this._cd.detectChanges();

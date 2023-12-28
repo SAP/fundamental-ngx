@@ -167,7 +167,7 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
         messageBoxRef.afterClosed
             .pipe(
                 filter((result) => result),
-                takeUntilDestroyed(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
                 this._dialogRef.dismiss();
@@ -186,7 +186,7 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
 
         const currentStepId = this._wizardGeneratorService.getCurrentStepId();
         this.submitStepForms(currentStepId)
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(async (result) => {
                 if (result && Object.values(result).some((r) => !r.success)) {
                     return;

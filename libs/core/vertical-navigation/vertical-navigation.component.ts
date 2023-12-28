@@ -56,7 +56,7 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
     private _keyManager: FocusKeyManager<ListNavigationItemComponent>;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$ = new Subject<void>();
@@ -120,7 +120,7 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
     /** @hidden */
     private _listenOnQueryChange(): void {
         this._navigationItems.changes
-            .pipe(delay(0), startWith(0), takeUntilDestroyed(this._onDestroy$))
+            .pipe(delay(0), startWith(0), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 this._listenOnItemsClick();
                 setTimeout(() => {
@@ -138,7 +138,7 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
         this._onRefresh$.next();
 
         /** Merge refresh/destroy observables */
-        const completion$ = merge(this._onRefresh$, destroyObservable(this._onDestroy$));
+        const completion$ = merge(this._onRefresh$, destroyObservable(this._destroyRef));
         const interactionChangesIndexes = this._navigationItems.map((item, index) =>
             merge(
                 item._clicked$.pipe(map(() => ({ index, updateOnly: false }))),

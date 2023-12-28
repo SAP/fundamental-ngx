@@ -115,7 +115,7 @@ export class RadioGroupComponent
     private _selected: RadioButtonComponent | null = null;
 
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden FocusKeyManager instance */
     private _keyboardEventsManager: FocusKeyManager<RadioButtonComponent>;
@@ -256,7 +256,7 @@ export class RadioGroupComponent
                     }
                     return merge(...checkedEvents);
                 }),
-                takeUntilDestroyed(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((ev) => this._selectedValueChanged(ev));
     }

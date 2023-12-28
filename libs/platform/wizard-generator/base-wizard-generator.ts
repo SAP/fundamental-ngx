@@ -217,7 +217,7 @@ export class BaseWizardGenerator {
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    protected readonly _onDestroy$ = inject(DestroyRef);
+    protected readonly _destroyRef = inject(DestroyRef);
 
     /**
      * @hidden
@@ -231,7 +231,7 @@ export class BaseWizardGenerator {
     ) {
         this._wizardGeneratorService
             .getVisibleSteps()
-            .pipe(debounceTime(10), takeUntilDestroyed(this._onDestroy$))
+            .pipe(debounceTime(10), takeUntilDestroyed(this._destroyRef))
             .subscribe((visibleSteps) => {
                 this.visibleItems = visibleSteps;
                 this._cd.detectChanges();
@@ -239,7 +239,7 @@ export class BaseWizardGenerator {
 
         this._wizardGeneratorService
             .trackStepsComponents()
-            .pipe(debounceTime(10), takeUntilDestroyed(this._onDestroy$))
+            .pipe(debounceTime(10), takeUntilDestroyed(this._destroyRef))
             .subscribe(async (stepsComponents) => {
                 if (stepsComponents.size === this.items?.length) {
                     await this._setVisibleSteps();
@@ -248,14 +248,14 @@ export class BaseWizardGenerator {
 
         this._wizardGeneratorService
             .trackAppendToWizardState()
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((value) => {
                 this._appendToWizard = value;
             });
 
         this._wizardGeneratorService
             .trackStepsOrder()
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((newNextStep) => {
                 this._nextStepIndex = newNextStep;
                 this._stepsOrderChanged = true;
@@ -263,7 +263,7 @@ export class BaseWizardGenerator {
 
         this._wizardGeneratorService
             .trackNextStepIndex()
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((index) => {
                 this._nextStepIndex = index;
             });
@@ -304,7 +304,7 @@ export class BaseWizardGenerator {
 
         this._wizardGeneratorService
             .validateStepForms()
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(async (result) => {
                 if (!result) {
                     return;
@@ -359,7 +359,7 @@ export class BaseWizardGenerator {
 
         this._wizardGeneratorService
             .validateStepForms()
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(async (result) => {
                 if (!result) {
                     return;

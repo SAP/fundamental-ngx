@@ -69,7 +69,7 @@ export class NestedListContentDirective implements AfterContentInit {
     nestedExpandIcon: NestedListExpandIconComponent;
 
     /** @hidden */
-    private readonly onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -118,7 +118,7 @@ export class NestedListContentDirective implements AfterContentInit {
 
     /** Add subscription for child focusing */
     private _setFocusSubscription(): void {
-        this._itemService.focus.pipe(takeUntilDestroyed(this.onDestroy$)).subscribe(() => this.focus());
+        this._itemService.focus.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this.focus());
     }
 
     /** Hide link child element from tab key */

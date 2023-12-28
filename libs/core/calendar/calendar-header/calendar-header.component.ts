@@ -213,8 +213,8 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
     @ViewChild('prevButton', { read: ElementRef })
     _prevButtonComponent: ElementRef;
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    /** @hidden  */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** Month names */
     private _monthNames: string[] = [];
@@ -270,7 +270,7 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
 
     /** @hidden */
     private _listenToLocaleChanges(): void {
-        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._calculateMonthNames();
             this._calculateLabels();
             this._changeDetRef.markForCheck();

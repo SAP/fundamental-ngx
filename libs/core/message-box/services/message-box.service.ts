@@ -54,7 +54,7 @@ export class MessageBoxService extends DialogBaseService<MessageBoxContainerComp
 
         this._dialogs.push(componentRef);
 
-        messageBoxRef._endClose$.pipe(takeUntilDestroyed(this._destroy$)).subscribe(() => {
+        messageBoxRef._endClose$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._destroyDialog(componentRef);
             componentRef.destroy();
             overlayRef.dispose();

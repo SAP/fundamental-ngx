@@ -70,7 +70,7 @@ export class NestedListContentDirective implements AfterContentInit {
     nestedExpandIcon: NestedListExpandIconComponent;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -126,7 +126,7 @@ export class NestedListContentDirective implements AfterContentInit {
 
     /** Add subscription for child focusing */
     private _setFocusSubscription(): void {
-        this._itemService.focus.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => this.focus());
+        this._itemService.focus.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this.focus());
     }
 
     /** Hide link child element from tab key */

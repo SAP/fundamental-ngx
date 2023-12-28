@@ -63,7 +63,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     private _subscriptions = new Subscription();
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _keyboardEventsManager: FocusKeyManager<TabLinkDirective>;
@@ -140,7 +140,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
      */
     private _listenOnContentQueryListChange(): void {
         merge(this.links.changes, this.items.changes)
-            .pipe(takeUntilDestroyed(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this._refreshSubscription());
     }
 
@@ -150,7 +150,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
         this._subscriptions = new Subscription();
         this._listenToFocusedLinks();
 
-        this.links.changes.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe(() => {
+        this.links.changes.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._listenToFocusedLinks();
         });
     }
@@ -172,7 +172,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
         this._keyboardEventsManager?.destroy();
         this._keyboardEventsManager = new FocusKeyManager(this.links).withWrap().withHorizontalOrientation(this._dir);
 
-        this._rtlService?.rtl.pipe(takeUntilDestroyed(this._onDestroy$)).subscribe((isRtl) => {
+        this._rtlService?.rtl.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isRtl) => {
             this._keyboardEventsManager.withHorizontalOrientation(isRtl ? 'rtl' : 'ltr');
         });
     }

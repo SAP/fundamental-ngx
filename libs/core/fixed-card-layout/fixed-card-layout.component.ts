@@ -229,8 +229,8 @@ export class FixedCardLayoutComponent implements AfterViewInit, OnChanges, OnDes
     /** @hidden */
     private _cardsSizeChangeSubscription = new Subscription();
 
-    /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    /** @hidden  */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -429,7 +429,7 @@ export class FixedCardLayoutComponent implements AfterViewInit, OnChanges, OnDes
                 filter(
                     (entries) => this._listenResize && !!(entries[0].contentRect.height || entries[0].contentRect.width)
                 ),
-                takeUntilDestroyed(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => this.updateLayout());
     }

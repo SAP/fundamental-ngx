@@ -28,7 +28,7 @@ export class IconBarDndListDirective implements IconTabBarDndList, AfterViewInit
     private _dropListRef: DropListRef;
 
     /** @hidden */
-    private readonly _onDestroy$ = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _dragRefItems: DragRef[] = [];
@@ -54,7 +54,7 @@ export class IconBarDndListDirective implements IconTabBarDndList, AfterViewInit
         this._dndContainer.registerDndList(this);
 
         this._dndItems$
-            .pipe(debounceTime(100), takeUntilDestroyed(this._onDestroy$))
+            .pipe(debounceTime(100), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this._dropListRef.withItems(this._dragRefItems));
     }
 

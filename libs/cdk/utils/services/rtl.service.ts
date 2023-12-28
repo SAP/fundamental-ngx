@@ -16,7 +16,7 @@ export class RtlService {
     rtl: BehaviorSubject<boolean>;
 
     /** Signal wrapper for RTL value. */
-    rtlSignal: Signal<boolean | undefined>;
+    rtlSignal: Signal<boolean>;
 
     /** @hidden */
     constructor(@Optional() @Inject(RTL_LANGUAGE) injectedRtlLanguages: string[]) {
@@ -26,6 +26,6 @@ export class RtlService {
 
         this.rtl = new BehaviorSubject(filtered.length > 0);
 
-        this.rtlSignal = toSignal(this.rtl);
+        this.rtlSignal = toSignal(this.rtl, { requireSync: true });
     }
 }
