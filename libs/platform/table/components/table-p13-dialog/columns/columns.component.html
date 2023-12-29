@@ -75,8 +75,8 @@
                 (click)="_moveActiveToBottom()"
             ></button>
         </fd-toolbar>
-        <ul fd-list>
-            <li fd-list-item>
+        <ul fd-list [selection]="true" aria-multiselectable="true">
+            <li fd-list-item [selected]="_selectedColumnsCount === _selectableColumns.length">
                 <fd-checkbox
                     [ngModel]="_selectedColumnsCount === _selectableColumns.length"
                     (ngModelChange)="_toggleSelectAll($event)"
@@ -97,7 +97,7 @@
                 <li
                     fd-list-item
                     [class.fd-select-item--selected]="item.selected"
-                    [class.fd-select-item--active]="item.active"
+                    [selected]="item.selected"
                     (click)="_setActiveColumn(item)"
                 >
                     <fd-checkbox [(ngModel)]="item.selected" (ngModelChange)="_onToggleColumn()"></fd-checkbox>
