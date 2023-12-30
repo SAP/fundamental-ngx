@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.22...v0.48.0-rc.23) (2023-12-30)
+
+
+### Features
+
+* **core,platform,cx:** partial signals migration ([#11142](https://github.com/SAP/fundamental-ngx/issues/11142)) ([4a7ba11](https://github.com/SAP/fundamental-ngx/commit/4a7ba11b96913403dc29198e33f6c81238860008))
+
+
+
+
+
 # [0.48.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.21...v0.48.0-rc.22) (2023-12-28)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk
