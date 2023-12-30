@@ -1,18 +1,18 @@
-import { Directive, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { DestroyRef, Directive, ElementRef, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Directive({
     selector: '[fdPopoverContainer]',
     standalone: true
 })
-export class PopoverContainerDirective implements OnInit, OnDestroy {
+export class PopoverContainerDirective implements OnInit {
     /** Subject which emits when popover position refresh is required. */
     refreshPosition$ = new Subject<void>();
 
     /** @hidden */
-    private _destroy$ = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(private _elmRef: ElementRef<HTMLElement>) {}
@@ -20,15 +20,9 @@ export class PopoverContainerDirective implements OnInit, OnDestroy {
     /** @hidden */
     ngOnInit(): void {
         resizeObservable(this._elmRef.nativeElement)
-            .pipe(takeUntil(this._destroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 this.refreshPosition$.next();
             });
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._destroy$.next();
-        this._destroy$.complete();
     }
 }

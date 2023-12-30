@@ -1,6 +1,6 @@
-import { Injectable, TemplateRef } from '@angular/core';
+import { Injectable, Signal, TemplateRef, signal } from '@angular/core';
 import { Nullable, uuidv4 } from '@fundamental-ngx/cdk/utils';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { BaseTreeItem } from './models/base-tree-item.class';
 import { SelectionPlacement, SelectionType } from './models/selection-type';
 import { TreeItem, TreeItemGeneric } from './models/tree-item';
@@ -20,40 +20,40 @@ export class TreeService {
     focusedTreeItem: Nullable<BaseTreeItem>;
 
     /** Current expanded level. */
-    get expandedLevel(): Observable<number | undefined> {
-        return this._expandedLevel.asObservable();
+    get expandedLevel(): Signal<number | undefined> {
+        return this._expandedLevel.asReadonly();
     }
 
     /** Tree selection mode. */
-    get selectionMode(): Observable<SelectionModeModel> {
-        return this._selectionMode$.asObservable();
+    get selectionMode(): Signal<SelectionModeModel> {
+        return this._selectionMode$.asReadonly();
     }
 
     /** Whether to show navigation indicator. */
-    get navigationIndicator(): Observable<boolean> {
-        return this._navigationIndicator$.asObservable();
+    get navigationIndicator(): Signal<boolean> {
+        return this._navigationIndicator$.asReadonly();
     }
-
-    /** @hidden */
-    private readonly _expandableItems = new Map<number, { [key: string]: boolean }>();
-
-    /** @hidden */
-    private readonly _selectionMode$ = new BehaviorSubject<SelectionModeModel>({ mode: 'none', placement: 'none' });
-
-    /** @hidden */
-    private readonly _expandedLevel = new BehaviorSubject<number | undefined>(undefined);
-
-    /** @hidden */
-    private readonly _navigationIndicator$ = new BehaviorSubject<boolean>(false);
 
     /**
      * @hidden
      */
     readonly detectChanges = new Subject<void>();
 
+    /** @hidden */
+    private readonly _expandableItems = new Map<number, { [key: string]: boolean }>();
+
+    /** @hidden */
+    private readonly _selectionMode$ = signal<SelectionModeModel>({ mode: 'none', placement: 'none' });
+
+    /** @hidden */
+    private readonly _expandedLevel = signal<number | undefined>(undefined);
+
+    /** @hidden */
+    private readonly _navigationIndicator$ = signal(false);
+
     /** Sets whether the navigation indicator should be visible. */
     setNavigationIndicator(value: boolean): void {
-        this._navigationIndicator$.next(value);
+        this._navigationIndicator$.set(value);
     }
 
     /** @hidden */
@@ -106,7 +106,7 @@ export class TreeService {
      * @param placement Selection control placement.
      */
     setSelectionMode(mode: SelectionType, placement: SelectionPlacement): void {
-        this._selectionMode$.next({ mode, placement });
+        this._selectionMode$.set({ mode, placement });
     }
 
     /** @hidden */
@@ -125,6 +125,6 @@ export class TreeService {
             lastLevel = level;
         }
 
-        this._expandedLevel.next(lastLevel);
+        this._expandedLevel.set(lastLevel);
     }
 }

@@ -2,17 +2,18 @@ import {
     AfterContentInit,
     Component,
     ContentChild,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     HostBinding,
     Input,
-    OnDestroy,
     Output,
-    forwardRef
+    forwardRef,
+    inject
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { NestedListContentDirective } from '../nested-content/nested-list-content.directive';
 import { NestedLinkComponent } from '../nested-link/nested-link.component';
@@ -34,7 +35,7 @@ let sideNavigationItemUniqueId = 0;
         role: 'treeitem'
     }
 })
-export class NestedItemComponent implements AfterContentInit, NestedItemInterface, OnDestroy {
+export class NestedItemComponent implements AfterContentInit, NestedItemInterface {
     /** Whether item should be expanded */
     @Input() set expanded(expanded: boolean) {
         if (expanded !== this._expanded) {
@@ -134,8 +135,8 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
     @HostBinding('attr.aria-hidden')
     private _ariaHidden = true;
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** Unique element ID */
     private readonly _elementId: string = 'fdNestedItem' + sideNavigationItemUniqueId++;
@@ -161,12 +162,6 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
             this._ariaDisabled = !this._stateService.selectable && !this.linkItem.selected;
             this._title = this.linkItem.getTitle();
         }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /** Check if the item element has any child */
@@ -286,23 +281,23 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
 
         if (!this.display) {
             /** Subscribe to mouse click event, thrown by link item */
-            this._itemService.toggle.pipe(takeUntil(this._onDestroy$)).subscribe(() => this.toggle());
+            this._itemService.toggle.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this.toggle());
 
             /** Subscribe to mouse click event, thrown by link item */
             this._itemService.click
-                .pipe(takeUntil(this._onDestroy$))
+                .pipe(takeUntilDestroyed(this._destroyRef))
                 .subscribe(() => this._stateService.onSelected.next(this._elementId));
         }
 
         /** Subscribe to keyboard event and throw it farther */
         this._itemService.keyDown
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((keyboardEvent) => this.keyboardTriggered.emit(keyboardEvent));
 
         /** Subscribe to selected state change, it's not triggered, when selectable flag is disabled*/
         this._stateService.onSelected
             .pipe(
-                takeUntil(this._onDestroy$),
+                takeUntilDestroyed(this._destroyRef),
                 filter(() => this._stateService.selectable)
             )
             .subscribe((id) => this._selectedChange(id));

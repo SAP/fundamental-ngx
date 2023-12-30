@@ -18,7 +18,7 @@
     }
     <div
         class="fd-container fd-form-layout-grid-container"
-        [class.is-compact]="contentDensityObserver.isCompact$ | async"
+        [class.is-compact]="contentDensityObserver.isCompactSignal()"
     >
         @for (column of formRows | keyvalue; track $index) {
             <div class="fd-row">

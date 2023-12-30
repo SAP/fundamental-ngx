@@ -110,13 +110,13 @@ describe('DynamicPageTitleComponent', () => {
     it('should squash actions, when pixels are below breakpoint', () => {
         fixture.detectChanges();
         header.ngOnInit();
-        component.dynamicPageService.pixelsSizeChanged.next(ActionSquashBreakpointPx - 10);
+        component.dynamicPageService.pixelsSizeChanged.set(ActionSquashBreakpointPx - 10);
         fixture.detectChanges();
-        expect((<any>header)._actionsSquashed).toBe(true);
+        expect((<any>header)._actionsSquashed$()).toBe(true);
 
-        component.dynamicPageService.pixelsSizeChanged.next(ActionSquashBreakpointPx + 10);
+        component.dynamicPageService.pixelsSizeChanged.set(ActionSquashBreakpointPx + 10);
         fixture.detectChanges();
-        expect((<any>header)._actionsSquashed).toBe(false);
+        expect((<any>header)._actionsSquashed$()).toBe(false);
     });
 });
 
@@ -157,7 +157,7 @@ describe('DynamicPageTitleComponent with custom subtitle', () => {
     }));
 
     it('should set subtitle template properties correctly', async () => {
-        fixture.componentInstance.dynamicPageService.collapsed.next(false);
+        fixture.componentInstance.dynamicPageService.collapsed.set(false);
         fixture.detectChanges();
         await fixture.whenStable();
 
@@ -168,7 +168,7 @@ describe('DynamicPageTitleComponent with custom subtitle', () => {
         expect(subtitle.textContent).toEqual(`Subtitle expanded`);
         expect(title.textContent).toEqual('Title expanded');
 
-        fixture.componentInstance.dynamicPageService.collapsed.next(true);
+        fixture.componentInstance.dynamicPageService.collapsed.set(true);
         fixture.detectChanges();
         await fixture.whenStable();
 

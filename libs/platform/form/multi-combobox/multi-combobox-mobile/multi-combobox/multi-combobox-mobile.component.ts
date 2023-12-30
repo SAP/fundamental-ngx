@@ -3,16 +3,15 @@ import {
     Component,
     ElementRef,
     Inject,
-    OnDestroy,
     OnInit,
     Optional,
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -43,11 +42,10 @@ import { MULTICOMBOBOX_COMPONENT, MultiComboboxInterface } from '../../multi-com
         ButtonComponent,
         CdkScrollable,
         ScrollbarDirective,
-        AsyncPipe,
         FdTranslatePipe
     ]
 })
-export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxInterface> implements OnInit, OnDestroy {
+export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxInterface> implements OnInit {
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
@@ -83,17 +81,12 @@ export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxIn
     }
 
     /** @hidden */
-    ngOnDestroy(): void {
-        super.onDestroy();
-    }
-
-    /** @hidden */
     showSelected(): void {
-        const isSelectedShown = this.selectedShown$.getValue();
+        const isSelectedShown = this.selectedShown$();
 
         if (isSelectedShown) {
             this._component.searchTermChanged();
-            this.selectedShown$.next(false);
+            this.selectedShown$.set(false);
             return;
         }
 
@@ -128,7 +121,9 @@ export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxIn
 
     /** @hidden */
     private _listenOnMultiComboboxOpenChange(): void {
-        this._component.openChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => this._toggleDialog(isOpen));
+        this._component.openChange
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 
     /** @hidden */

@@ -1,6 +1,7 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { Component, ElementRef, Inject, OnDestroy, OnInit, Optional, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, Optional, TemplateRef, ViewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarElementDirective, BarMiddleDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
@@ -15,7 +16,6 @@ import {
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { takeUntil } from 'rxjs/operators';
 import { MobileMultiComboboxInterface } from '../models/multi-combobox.interface';
 import { MULTI_COMBOBOX_COMPONENT } from '../multi-combobox.token';
 
@@ -35,14 +35,11 @@ import { MULTI_COMBOBOX_COMPONENT } from '../multi-combobox.token';
         CdkScrollable,
         ScrollbarDirective,
         ButtonBarComponent,
-        AsyncPipe,
-        FdTranslatePipe
+        FdTranslatePipe,
+        AsyncPipe
     ]
 })
-export class MobileMultiComboboxComponent
-    extends MobileModeBase<MobileMultiComboboxInterface>
-    implements OnInit, OnDestroy
-{
+export class MobileMultiComboboxComponent extends MobileModeBase<MobileMultiComboboxInterface> implements OnInit {
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
@@ -75,11 +72,6 @@ export class MobileMultiComboboxComponent
     /** @hidden */
     ngOnInit(): void {
         this._listenOnMultiComboboxOpenChange();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        super.onDestroy();
     }
 
     /** @hidden */
@@ -123,7 +115,9 @@ export class MobileMultiComboboxComponent
 
     /** @hidden */
     private _listenOnMultiComboboxOpenChange(): void {
-        this._component.openChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => this._toggleDialog(isOpen));
+        this._component.openChange
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 
     /** @hidden */

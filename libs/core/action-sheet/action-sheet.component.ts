@@ -7,6 +7,7 @@ import {
     ComponentRef,
     ContentChild,
     ContentChildren,
+    DestroyRef,
     EventEmitter,
     Input,
     OnDestroy,
@@ -16,16 +17,23 @@ import {
     TemplateRef,
     ViewChild,
     ViewContainerRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { Subject, Subscription, merge } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 
-import { DynamicComponentService, FocusEscapeDirection, KeyboardSupportService } from '@fundamental-ngx/cdk/utils';
+import {
+    DynamicComponentService,
+    FocusEscapeDirection,
+    KeyboardSupportService,
+    destroyObservable
+} from '@fundamental-ngx/cdk/utils';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
 
 import { NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PopoverBodyComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.component';
 import { ActionSheetControlComponent } from './action-sheet-control/action-sheet-control.component';
@@ -102,10 +110,10 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     actionSheetMobileDynamic: ComponentRef<ActionSheetMobileComponent>;
 
     /** @hidden */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    private readonly _onRefresh$: Subject<void> = new Subject<void>();
+    private readonly _onRefresh$ = new Subject<void>();
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -136,8 +144,8 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
+        this._onRefresh$.next();
+        this._onRefresh$.complete();
     }
 
     /** Method that opens action sheet */
@@ -179,13 +187,13 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden */
     private _actionControlHandle(): void {
         this.actionSheetControl.clicked
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => (this.isOpen ? this.close() : this.open()));
     }
 
     /** @hidden */
     private _listenOnItemsChange(): void {
-        this.actionSheetItems.changes.pipe(startWith(1), takeUntil(this._onDestroy$)).subscribe(() => {
+        this.actionSheetItems.changes.pipe(startWith(1), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._listenOnItemsClick();
         });
     }
@@ -195,7 +203,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         /** Finish all of the streams, from before */
         this._onRefresh$.next();
         /** Merge refresh/destroy observables */
-        const refresh$ = merge(this._onRefresh$, this._onDestroy$);
+        const refresh$ = merge(this._onRefresh$, destroyObservable(this._destroyRef));
 
         this.actionSheetItems.forEach((item, index) =>
             item.clicked.pipe(takeUntil(refresh$)).subscribe((event: ActionSheetClickEvent) => {

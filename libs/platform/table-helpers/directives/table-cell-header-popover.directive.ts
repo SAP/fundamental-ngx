@@ -1,8 +1,7 @@
-import { Directive, TemplateRef } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Directive, Signal, TemplateRef } from '@angular/core';
 
 export interface TableCellHeaderPopoverDirectiveContext {
-    $implicit: Observable<TemplateRef<any>[]>;
+    $implicit: Signal<TemplateRef<any>[]>;
 }
 
 @Directive({

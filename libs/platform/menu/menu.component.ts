@@ -19,7 +19,6 @@ import {
 import { Observable, Subscription, merge } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 
-import { AsyncPipe } from '@angular/common';
 import { KeyUtil, RtlService, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { MenuItemComponent } from './menu-item.component';
@@ -44,8 +43,7 @@ let menuIdCounter = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [contentDensityObserverProviders()],
-    standalone: true,
-    imports: [AsyncPipe]
+    standalone: true
 })
 export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy {
     /** Menu ID */

@@ -1,5 +1,4 @@
-import { ComponentRef, Injectable, OnDestroy } from '@angular/core';
-import { Subject } from 'rxjs';
+import { ComponentRef, DestroyRef, Injectable, inject } from '@angular/core';
 
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogContainer } from '../utils/dialog-container.model';
@@ -8,13 +7,13 @@ import { DialogRefBase } from './dialog-ref-base.class';
 
 /** Service used to dynamically generate a dialog. */
 @Injectable()
-export abstract class DialogBaseService<T extends DialogContainer<any>> implements OnDestroy {
+export abstract class DialogBaseService<T extends DialogContainer<any>> {
     abstract open<D>(content: unknown, config: DialogConfigBase<D>): DialogRefBase<D>;
     /** @hidden Collection of existing dialog references */
     protected _dialogs: ComponentRef<T>[] = [];
 
     /** @hidden */
-    protected _destroy$ = new Subject<void>();
+    protected _destroyRef = inject(DestroyRef);
 
     /**
      * Status of the dialog service.
@@ -31,12 +30,6 @@ export abstract class DialogBaseService<T extends DialogContainer<any>> implemen
             item.destroy();
         });
         this._dialogs = [];
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._destroy$.next();
-        this._destroy$.complete();
     }
 
     /** @hidden Extends configuration using default values*/

@@ -42,7 +42,7 @@ import {
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { Observable, Subject, Subscription, combineLatest, fromEvent, isObservable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
@@ -67,6 +67,7 @@ import {
     isString
 } from '@fundamental-ngx/platform/shared';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
 import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { ComboboxConfig } from '../combobox.config';
@@ -640,7 +641,7 @@ export abstract class BaseCombobox
          */
         const dsSub = initDataSource
             .open()
-            .pipe(takeUntil(this._destroyed))
+            .pipe(takeUntilDestroyed(this._destroyed))
             .subscribe((data) => {
                 this._suggestions = this._convertToOptionItems(data);
                 this._flatSuggestions = this.isGroup ? this._flatGroups(this._suggestions) : this._suggestions;
@@ -698,7 +699,7 @@ export abstract class BaseCombobox
         this._getOptionsListWidth();
 
         fromEvent(window, 'resize')
-            .pipe(takeUntil(this._destroyed))
+            .pipe(takeUntilDestroyed(this._destroyed))
             .subscribe(() => this._getOptionsListWidth());
     }
 
@@ -854,7 +855,7 @@ export abstract class BaseCombobox
                 map(() =>
                     this._customItemDef.length > 0 ? this._customItemDef.toArray() : this._customTemplates.toArray()
                 ),
-                takeUntil(this._destroyed)
+                takeUntilDestroyed(this._destroyed)
             )
             .subscribe((data) => {
                 data.forEach((template: FdpComboboxItemDef | TemplateDirective) => {

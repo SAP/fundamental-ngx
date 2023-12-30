@@ -6,6 +6,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     HostListener,
@@ -15,11 +16,12 @@ import {
     Optional,
     Output,
     QueryList,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed,
+    inject
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import {
     ResizableCardItemComponent,
@@ -100,13 +102,13 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
     private _keyboardEventsManager: FocusKeyManager<ResizableCardItemComponent>;
 
     /** @hidden */
-    private readonly _destroy$ = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _layoutShifted = false;
 
     /** @hidden */
-    private _directionPosition: 'left' | 'right' = 'left';
+    private _directionPosition$ = computed<'left' | 'right'>(() => (this._rtlService?.rtlSignal() ? 'right' : 'left'));
 
     /** @hidden */
     constructor(
@@ -115,14 +117,24 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
         @Optional() private readonly _rtlService: RtlService
     ) {}
 
+    /** @hidden handles keyboard accessibility */
+    @HostListener('keydown', ['$event'])
+    _handleKeydown(event: KeyboardEvent): void {
+        event.stopImmediatePropagation();
+        if (!this._keyboardEventsManager.activeItemIndex) {
+            this._keyboardEventsManager.setFirstItemActive();
+        }
+
+        if (this._keyboardEventsManager) {
+            this._keyboardEventsManager.onKeydown(event);
+        }
+    }
+
     /** @hidden */
     ngOnInit(): void {
         this._columnsHeight = new Array(this._columns);
         this._columnsHeight.fill(0);
         // initialise value 0
-
-        this._subscribeToRtl();
-
         // detect initial window size and set layout
         this._createLayout();
     }
@@ -149,22 +161,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._destroy$.next();
-        this._destroy$.complete();
         this._keyboardEventsManager?.destroy();
-    }
-
-    /** @hidden handles keyboard accessibility */
-    @HostListener('keydown', ['$event'])
-    handleKeydown(event: KeyboardEvent): void {
-        event.stopImmediatePropagation();
-        if (!this._keyboardEventsManager.activeItemIndex) {
-            this._keyboardEventsManager.setFirstItemActive();
-        }
-
-        if (this._keyboardEventsManager) {
-            this._keyboardEventsManager.onKeydown(event);
-        }
     }
 
     /** @hidden */
@@ -246,25 +243,29 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
             }
 
             resizeCardItem.resizing
-                .pipe(takeUntil(this._destroy$))
+                .pipe(takeUntilDestroyed(this._destroyRef))
                 .subscribe((event: ResizedEvent) => this.cardResizing(event));
 
             // listen for resize complete event of card item
             resizeCardItem.resized
-                .pipe(takeUntil(this._destroy$))
+                .pipe(takeUntilDestroyed(this._destroyRef))
                 .subscribe((event: ResizedEvent) => this.cardResizeComplete(event));
 
             // listen for mini-header height event of card item
-            resizeCardItem.miniHeaderReached.pipe(takeUntil(this._destroy$)).subscribe((event: ResizedEvent) => {
-                this.miniHeaderReached.emit(event);
-                this.stepChange.emit(event);
-            });
+            resizeCardItem.miniHeaderReached
+                .pipe(takeUntilDestroyed(this._destroyRef))
+                .subscribe((event: ResizedEvent) => {
+                    this.miniHeaderReached.emit(event);
+                    this.stepChange.emit(event);
+                });
 
             // listen for mini-content height event of card item
-            resizeCardItem.miniContentReached.pipe(takeUntil(this._destroy$)).subscribe((event: ResizedEvent) => {
-                this.miniContentReached.emit(event);
-                this.stepChange.emit(event);
-            });
+            resizeCardItem.miniContentReached
+                .pipe(takeUntilDestroyed(this._destroyRef))
+                .subscribe((event: ResizedEvent) => {
+                    this.miniContentReached.emit(event);
+                    this.stepChange.emit(event);
+                });
         });
     }
 
@@ -469,10 +470,9 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      * @param card: ResizableCardItemComponent
      */
     private _updateColumnsHeight(card: ResizableCardItemComponent): void {
+        const directionPosition = this._directionPosition$();
         const columnsStart =
-            card[this._directionPosition] != null
-                ? Math.floor(card[this._directionPosition]! / horizontalResizeStep)
-                : 0;
+            card[directionPosition] != null ? Math.floor(card[directionPosition]! / horizontalResizeStep) : 0;
 
         // Get width of current card resizing and assign width here for that card
         const cardBaseColSpan = Math.floor(card.cardWidth / horizontalResizeStep);
@@ -500,8 +500,9 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      * @param index : index value of card in array of ResizableCardItemComponent
      */
     private _setCardPositionValues(card: ResizableCardItemComponent, index: number): void {
+        const directionPosition = this._directionPosition$();
         if (index === 0) {
-            card[this._directionPosition] = 0 + this._paddingLeft;
+            card[directionPosition] = 0 + this._paddingLeft;
             card.top = 0;
             card.startingColumnPosition = 0;
             return;
@@ -522,6 +523,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      * @returns It returns true when card position id found otherwise it returns false.
      */
     private _isPositionSetSuccess(height: number, card: ResizableCardItemComponent): boolean {
+        const directionPosition = this._directionPosition$();
         const columnPositions: number[] = [];
         let index = 0;
         for (const columnHeight of this._columnsHeight) {
@@ -538,7 +540,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
         startingColumnPosition = this._fitCardColumnPosition(card, columnPositions, height);
         if (startingColumnPosition !== -1) {
             isFitting = true;
-            card[this._directionPosition] =
+            card[directionPosition] =
                 startingColumnPosition * horizontalResizeStep +
                 this._paddingLeft +
                 (startingColumnPosition > 0 ? gap * startingColumnPosition : 0);
@@ -623,21 +625,5 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      */
     private _sortCards(firstCard: ResizableCardItemComponent, secondCard: ResizableCardItemComponent): number {
         return firstCard.rank - secondCard.rank;
-    }
-
-    /** get value for rtl */
-    private get _isRtl(): boolean {
-        return this._rtlService?.rtl.getValue();
-    }
-
-    /** @hidden Rtl change subscription */
-    private _subscribeToRtl(): void {
-        const refreshDirection = (isRtl): void => {
-            this._directionPosition = isRtl ? 'right' : 'left';
-            this._cd.detectChanges();
-        };
-
-        refreshDirection(this._isRtl);
-        this._rtlService?.rtl.pipe(takeUntil(this._destroy$)).subscribe(refreshDirection);
     }
 }

@@ -2,10 +2,10 @@ import { Inject, Injectable, Injector, Optional } from '@angular/core';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { DialogBaseService } from '@fundamental-ngx/core/dialog';
-import { takeUntil } from 'rxjs';
 
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MessageBoxContainerComponent } from '../message-box-container/message-box-container.component';
 import { MessageBoxContentType } from '../message-box-content.type';
 import { MESSAGE_BOX_DEFAULT_CONFIG, MessageBoxConfig } from '../utils/message-box-config.class';
@@ -54,7 +54,7 @@ export class MessageBoxService extends DialogBaseService<MessageBoxContainerComp
 
         this._dialogs.push(componentRef);
 
-        messageBoxRef._endClose$.pipe(takeUntil(this._destroy$)).subscribe(() => {
+        messageBoxRef._endClose$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._destroyDialog(componentRef);
             componentRef.destroy();
             overlayRef.dispose();

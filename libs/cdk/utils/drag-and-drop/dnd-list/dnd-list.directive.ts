@@ -1,19 +1,23 @@
 import {
     AfterContentInit,
     ContentChildren,
+    DestroyRef,
     Directive,
     ElementRef,
     EventEmitter,
     forwardRef,
     HostBinding,
+    inject,
     Input,
     OnDestroy,
     Output,
     QueryList
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { merge, Observable, Subject } from 'rxjs';
 import { startWith, take, takeUntil } from 'rxjs/operators';
 import { selectStrategy } from '../../async-strategy';
+import { destroyObservable } from '../../helpers';
 import { DndItem, ElementChord, ElementPosition, FdDndDropType, FdDropEvent, LinkPosition } from '../dnd.interfaces';
 import { DND_ITEM, DND_LIST } from '../tokens';
 
@@ -122,7 +126,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     private readonly _refresh$ = new Subject<void>();
 
     /** @hidden */
-    private readonly _onDestroy$ = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden  */
     private _dndItemReference: DndItem[];
@@ -149,21 +153,21 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     ngAfterContentInit(): void {
         this._changeDraggableState(this._draggable);
         this.dndItems.changes
-            .pipe(startWith(null), takeUntil(this._onDestroy$))
+            .pipe(startWith(null), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this.refreshQueryList());
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
+        this._refresh$.next();
+        this._refresh$.complete();
     }
 
     /**
      * Refreshes the indexes of the items.
      */
     refreshQueryList(): void {
-        const refresh$ = merge(this._refresh$, this._onDestroy$);
+        const refresh$ = merge(this._refresh$, destroyObservable(this._destroyRef));
         this._refresh$.next();
 
         this._dndItemReference = this.dndItems.toArray();

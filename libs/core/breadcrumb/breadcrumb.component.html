@@ -5,7 +5,7 @@
     (visibleItemsCount)="_onVisibleItemsCountChange($event)"
     (hiddenItemsCount)="_onHiddenItemsCountChange($event)"
 >
-    @for (breadcrumb of _items; track breadcrumb) {
+    @for (breadcrumb of _items$(); track breadcrumb) {
         <div
             *fdOverflowItemRef="breadcrumb; let hidden"
             fdOverflowLayoutItem
@@ -14,8 +14,8 @@
             <ng-template [cdkPortalOutlet]="breadcrumb.portal"></ng-template>
         </div>
     }
-    <ng-container *fdOverflowExpand="let breadcrumbs; items: _items">
-        <fd-menu #menu [closeOnEscapeKey]="true" [focusAutoCapture]="true" [placement]="_placement$ | async">
+    <ng-container *fdOverflowExpand="let breadcrumbs; items: _items$()">
+        <fd-menu #menu [closeOnEscapeKey]="true" [focusAutoCapture]="true" [placement]="_placement$()">
             @for (breadcrumbItem of breadcrumbs; track breadcrumbItem) {
                 <li
                     fd-menu-item

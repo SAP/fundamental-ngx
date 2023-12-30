@@ -30,7 +30,6 @@ import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms
 import {
     BehaviorSubject,
     Observable,
-    Subject,
     Subscription,
     asyncScheduler,
     filter,
@@ -42,9 +41,10 @@ import {
     startWith,
     switchMap
 } from 'rxjs';
-import { delay, takeUntil, tap } from 'rxjs/operators';
+import { delay, tap } from 'rxjs/operators';
 
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { InfiniteScrollDirective } from '@fundamental-ngx/core/infinite-scroll';
@@ -335,9 +335,6 @@ export class ListComponent<T>
     _items: T[] = [];
 
     /** @hidden */
-    _destroyed = new Subject<void>();
-
-    /** @hidden */
     _ariaSetSize: Observable<number> = new Observable();
 
     /** @hidden */
@@ -533,7 +530,7 @@ export class ListComponent<T>
 
         this._selectionModel = new SelectionModel<BaseListItem>(this._multiSelect, this.selectedItems);
 
-        this._selectionModel.changed.pipe(takeUntil(this._destroyed)).subscribe(() => {
+        this._selectionModel.changed.pipe(takeUntilDestroyed(this._destroyed)).subscribe(() => {
             this.selectedItems = this._selectionModel.selected;
             const event = new SelectionChangeEvent();
             event.selectedItems = this.selectedItems;
@@ -649,7 +646,7 @@ export class ListComponent<T>
                     await this._liveAnnouncer.announce(this.loadingLabel, 'assertive');
                 }),
                 delay(this.delayTime),
-                takeUntil(this._destroyed)
+                takeUntilDestroyed(this._destroyed)
             )
             .subscribe((result) => {
                 if (isPresent(result)) {
@@ -752,7 +749,7 @@ export class ListComponent<T>
             .pipe(
                 // Set new items when component is fully initiated and all child components are available.
                 this._waitForViewInit(),
-                takeUntil(this._destroyed)
+                takeUntilDestroyed(this._destroyed)
             )
             .subscribe((data) => {
                 this._dsItems = data || [];

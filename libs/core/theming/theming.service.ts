@@ -1,10 +1,20 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, isDevMode, OnDestroy, Optional, Renderer2, RendererFactory2 } from '@angular/core';
+import {
+    DestroyRef,
+    inject,
+    Inject,
+    Injectable,
+    isDevMode,
+    Optional,
+    Renderer2,
+    RendererFactory2
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { Nullable, THEME_SWITCHER_ROUTER_MISSING_ERROR } from '@fundamental-ngx/cdk/utils';
 import { cloneDeep, merge } from 'lodash-es';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { BaseThemingConfig } from './config';
 import {
     CompleteThemeDefinition,
@@ -17,7 +27,7 @@ import { STANDARD_THEMES } from './standard-themes';
 import { THEMING_CONFIG_TOKEN } from './tokens';
 
 @Injectable()
-export class ThemingService implements OnDestroy {
+export class ThemingService {
     /**
      * Theming configuration.
      */
@@ -40,7 +50,7 @@ export class ThemingService implements OnDestroy {
     private readonly _standardThemes: ThemeDefinition[] = [];
 
     /** @hidden **/
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _currentThemeSubject: BehaviorSubject<CompleteThemeDefinition | null> =
@@ -88,12 +98,6 @@ export class ThemingService implements OnDestroy {
         } else if (this._currentThemeSubject.value?.id) {
             this.setTheme(this._currentThemeSubject.value.id);
         }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /**
@@ -228,7 +232,7 @@ export class ThemingService implements OnDestroy {
 
         this._activatedRoute.queryParams
             .pipe(
-                takeUntil(this._onDestroy$),
+                takeUntilDestroyed(this._destroyRef),
                 filter((param) => param && param[paramName])
             )
             .subscribe((param) => this.setTheme(param[paramName]));

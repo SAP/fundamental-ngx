@@ -8,7 +8,7 @@
         [triggers]="_headerPopoverTriggers"
     >
         <fdp-list [noBorder]="true" [navigated]="true">
-            @for (item of _popoverItems$.asObservable() | async; track item) {
+            @for (item of _popoverItems$(); track item) {
                 <fdp-free-content-list-item>
                     <ng-template
                         [ngTemplateOutlet]="item"
@@ -21,7 +21,7 @@
 } @else {
     <ng-template
         [ngTemplateOutlet]="popoverTemplate!"
-        [ngTemplateOutletContext]="{ $implicit: _popoverItems$.asObservable() }"
+        [ngTemplateOutletContext]="{ $implicit: _popoverItems$.asReadonly() }"
     ></ng-template>
 }
 @if (column?.sortable) {

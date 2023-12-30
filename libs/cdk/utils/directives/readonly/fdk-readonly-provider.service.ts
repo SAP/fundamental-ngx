@@ -1,6 +1,18 @@
-import { ElementRef, Inject, Injectable, NgZone, OnDestroy, Optional, Self, SkipSelf } from '@angular/core';
-import { BehaviorSubject, Observable, ReplaySubject, Subject, combineLatest, firstValueFrom } from 'rxjs';
-import { distinctUntilChanged, startWith, takeUntil, tap } from 'rxjs/operators';
+import {
+    DestroyRef,
+    ElementRef,
+    Inject,
+    Injectable,
+    NgZone,
+    OnDestroy,
+    Optional,
+    Self,
+    SkipSelf,
+    inject
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject, Observable, ReplaySubject, combineLatest, firstValueFrom } from 'rxjs';
+import { distinctUntilChanged, startWith, tap } from 'rxjs/operators';
 import { DefaultReadonlyViewModifier } from './default-readonly-view-modifier';
 import { FDK_READONLY_DIRECTIVE } from './fdk-readonly.token';
 import { ReadonlyBehavior } from './readonly-behavior.interface';
@@ -21,7 +33,7 @@ export class FdkReadonlyProvider extends ReplaySubject<boolean> implements Reado
     private _readonlyChange$: Observable<boolean> = this._getReadonlyChange$();
 
     /** @hidden */
-    private readonly _destroy$ = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -32,17 +44,18 @@ export class FdkReadonlyProvider extends ReplaySubject<boolean> implements Reado
         @Optional() @SkipSelf() @Inject(FDK_READONLY_DIRECTIVE) private parentReadonly$: ReadonlyBehavior
     ) {
         super(1);
+
         combineLatest([this._readonlyChange$, this._viewModifiers$])
             .pipe(
                 tap(([isReadonly]) => this.setReadonlyState(isReadonly)),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe();
         this._readonlyChange$
             .pipe(
                 tap((isDisabled) => (this.fdkReadonly = isDisabled)),
                 tap((isDisabled) => this.next(isDisabled)),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe();
     }
@@ -63,8 +76,6 @@ export class FdkReadonlyProvider extends ReplaySubject<boolean> implements Reado
     /** @hidden */
     ngOnDestroy(): void {
         this.complete();
-        this._destroy$.next();
-        this._destroy$.complete();
         this.readonlyObserver.unobserve(this.elementRef);
     }
 
@@ -87,7 +98,7 @@ export class FdkReadonlyProvider extends ReplaySubject<boolean> implements Reado
                             this.setReadonlyState(false);
                         }
                     }),
-                    takeUntil(this._destroy$)
+                    takeUntilDestroyed(this._destroyRef)
                 )
                 .subscribe();
         }
@@ -102,7 +113,7 @@ export class FdkReadonlyProvider extends ReplaySubject<boolean> implements Reado
                             this.setReadonlyState(isReadonly);
                         }
                     }),
-                    takeUntil(this._destroy$)
+                    takeUntilDestroyed(this._destroyRef)
                 )
                 .subscribe();
         }
