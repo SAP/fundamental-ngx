@@ -70,7 +70,6 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { ComboboxItem } from './combobox-item';
 import { ComboboxItemDirective } from './combobox-item.directive';
 import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
-import { ComboboxMobileModule } from './combobox-mobile/combobox-mobile.module';
 import { COMBOBOX_COMPONENT, ComboboxInterface, ComboboxItemDirectiveContext } from './combobox.interface';
 import { GroupFunction, ListGroupPipe } from './list-group.pipe';
 import { FD_COMBOBOX_COMPONENT } from './tokens';
@@ -720,6 +719,12 @@ export class ComboboxComponent<T = any>
         this.searchInputElement.nativeElement.focus();
     }
 
+    /** @hidden */
+    isSelected(term: any): boolean {
+        const termValue = this.communicateByObject ? term : this.displayFn(term);
+        return this.getValue() === termValue;
+    }
+
     /** Method that picks other value moved from current one by offset, called only when combobox is closed */
     private _chooseOtherItem(offset: number): void {
         const activeValue: any = this._getOptionObjectByDisplayedValue(this.inputTextValue)[0];
@@ -822,24 +827,21 @@ export class ComboboxComponent<T = any>
     }
 
     /** @hidden */
-    private async _setUpMobileMode(): Promise<void> {
+    private _setUpMobileMode(): void {
         const injector = Injector.create({
             providers: [{ provide: COMBOBOX_COMPONENT, useValue: this }],
             parent: this._injector
         });
 
-        await this._dynamicComponentService.createDynamicModule(
+        this._dynamicComponentService.createDynamicComponent(
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
-            ComboboxMobileModule,
             ComboboxMobileComponent,
-            this._viewContainerRef,
-            injector
+            {
+                containerRef: this._viewContainerRef
+            },
+            {
+                injector
+            }
         );
-    }
-
-    /** @hidden */
-    isSelected(term: any): boolean {
-        const termValue = this.communicateByObject ? term : this.displayFn(term);
-        return this.getValue() === termValue;
     }
 }

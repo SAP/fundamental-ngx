@@ -1,7 +1,7 @@
 <input
     type="radio"
     class="fd-radio"
-    [class.is-compact]="_contentDensityObserver.isCompact$ | async"
+    [class.is-compact]="_contentDensityObserver.isCompactSignal()"
     [disabled]="disabled"
     [id]="id"
     [attr.name]="name"

@@ -48,7 +48,7 @@ export class CalendarService {
      * @param index which is number (0 - (rowAmount * colAmount))
      */
     onKeydownHandler(event: KeyboardEvent, index: number): void {
-        const rtl: boolean = this._rtlService && this._rtlService.rtl.getValue();
+        const rtl = !!this._rtlService?.rtlSignal();
 
         switch (event.key) {
             case 'Spacebar':

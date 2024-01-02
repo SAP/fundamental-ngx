@@ -1,7 +1,8 @@
-import { ChangeDetectorRef, Directive, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { debounceTime, finalize, takeUntil } from 'rxjs/operators';
+import { ChangeDetectorRef, DestroyRef, Directive, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { debounceTime, finalize } from 'rxjs/operators';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
@@ -45,7 +46,7 @@ export const DEFAULT_WIZARD_NAVIGATION_BUTTONS: Required<WizardNavigationButtons
  * @description Base Wizard Generator component with necessary inputs and methods.
  */
 @Directive()
-export class BaseWizardGenerator implements OnDestroy {
+export class BaseWizardGenerator {
     /**
      * @description Whether or not apply responsive paddings styling.
      */
@@ -216,7 +217,7 @@ export class BaseWizardGenerator implements OnDestroy {
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    protected readonly _onDestroy$: Subject<void> = new Subject<void>();
+    protected readonly _destroyRef = inject(DestroyRef);
 
     /**
      * @hidden
@@ -230,7 +231,7 @@ export class BaseWizardGenerator implements OnDestroy {
     ) {
         this._wizardGeneratorService
             .getVisibleSteps()
-            .pipe(debounceTime(10), takeUntil(this._onDestroy$))
+            .pipe(debounceTime(10), takeUntilDestroyed(this._destroyRef))
             .subscribe((visibleSteps) => {
                 this.visibleItems = visibleSteps;
                 this._cd.detectChanges();
@@ -238,7 +239,7 @@ export class BaseWizardGenerator implements OnDestroy {
 
         this._wizardGeneratorService
             .trackStepsComponents()
-            .pipe(debounceTime(10), takeUntil(this._onDestroy$))
+            .pipe(debounceTime(10), takeUntilDestroyed(this._destroyRef))
             .subscribe(async (stepsComponents) => {
                 if (stepsComponents.size === this.items?.length) {
                     await this._setVisibleSteps();
@@ -247,14 +248,14 @@ export class BaseWizardGenerator implements OnDestroy {
 
         this._wizardGeneratorService
             .trackAppendToWizardState()
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((value) => {
                 this._appendToWizard = value;
             });
 
         this._wizardGeneratorService
             .trackStepsOrder()
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((newNextStep) => {
                 this._nextStepIndex = newNextStep;
                 this._stepsOrderChanged = true;
@@ -262,18 +263,10 @@ export class BaseWizardGenerator implements OnDestroy {
 
         this._wizardGeneratorService
             .trackNextStepIndex()
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((index) => {
                 this._nextStepIndex = index;
             });
-    }
-
-    /**
-     * @hidden
-     */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /**
@@ -311,7 +304,7 @@ export class BaseWizardGenerator implements OnDestroy {
 
         this._wizardGeneratorService
             .validateStepForms()
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(async (result) => {
                 if (!result) {
                     return;
@@ -366,7 +359,7 @@ export class BaseWizardGenerator implements OnDestroy {
 
         this._wizardGeneratorService
             .validateStepForms()
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(async (result) => {
                 if (!result) {
                     return;

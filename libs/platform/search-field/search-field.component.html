@@ -38,7 +38,7 @@
         class="fdp-search-field"
         [class.with-categories]="_showCategoryDropdown"
         [class.is-loading]="isLoading"
-        [class.is-compact]="contentDensityObserver.isCompact$ | async"
+        [class.is-compact]="contentDensityObserver.isCompactSignal()"
         [class.hide-category-label]="hideCategoryLabel"
     >
         <div
@@ -142,11 +142,11 @@
 <ng-template #suggestionMenuTemplate>
     @if (_dropdownValues$ | async | suggestionMatches: inputText : mobile; as suggestions) {
         @if (suggestions?.length) {
-            <div class="fdp-search-field__suggestion-dropdown" [attr.dir]="_dir">
+            <div class="fdp-search-field__suggestion-dropdown" [attr.dir]="_dir$()">
                 <nav
                     class="fd-menu"
                     tabindex="-1"
-                    [class.is-compact]="contentDensityObserver.isCompact$ | async"
+                    [class.is-compact]="contentDensityObserver.isCompactSignal()"
                     [class.fd-menu--mobile]="mobile"
                     [class.fd-menu--overflow]="!mobile"
                     [attr.id]="_menuId"

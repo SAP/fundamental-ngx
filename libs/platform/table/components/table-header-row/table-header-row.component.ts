@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -10,6 +10,7 @@ import {
     QueryList,
     ViewChildren,
     ViewEncapsulation,
+    computed,
     forwardRef,
     inject
 } from '@angular/core';
@@ -72,7 +73,6 @@ import { TableHeaderCellContentComponent } from '../table-header-cell-content/ta
         PopoverTriggerDirective,
         TableHeaderCellContentComponent,
         TableCellHeaderPopoverComponent,
-        AsyncPipe,
         FdTranslatePipe,
         SelectionCellStylesPipe,
         TableCellStylesPipe,
@@ -137,7 +137,7 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
     }
 
     /** @hidden */
-    _rtl = false;
+    readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
     readonly SELECTION_MODE = SelectionMode;
@@ -168,9 +168,6 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
     /** @hidden */
     constructor() {
         super();
-        this._rtlService?.rtl.pipe(takeUntilDestroyed()).subscribe((isRtl) => {
-            this._rtl = isRtl;
-        });
     }
 
     /** @hidden */
@@ -203,7 +200,7 @@ export class IsColumnHasHeaderMenuPipe implements PipeTransform {
             column.groupable ||
             column.freezable ||
             column.endFreezable ||
-            (column.filterable && !this._fdpTableService._isFilteringFromHeaderDisabled$.value)
+            (column.filterable && !this._fdpTableService._isFilteringFromHeaderDisabled$())
         );
     }
 }

@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 import { CollectionFilter } from '@fundamental-ngx/platform/table-helpers';
-import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
@@ -65,10 +64,8 @@ export { FilterDialogData, FilterDialogResultData };
     ]
 })
 export class P13FilteringDialogComponent implements Resettable {
-    /** @hidden */
-    private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     /** Indicates when reset command is available */
-    readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
+    readonly isResetAvailable$ = signal(false);
 
     /** Table columns available for filtering */
     readonly columns: FilterableColumn[] = [];
@@ -127,7 +124,7 @@ export class P13FilteringDialogComponent implements Resettable {
     /** Reset changes to the initial state */
     reset(): void {
         this._initiateRules();
-        this._isResetAvailableSubject$.next(false);
+        this.isResetAvailable$.set(false);
     }
 
     /** Close dialog */
@@ -175,7 +172,7 @@ export class P13FilteringDialogComponent implements Resettable {
     _recalculateResetAvailability(): void {
         const hasOnlyOneEmptyIncludeRule = this._includeRules.length === 1 && !this._includeRules[0].hasValue;
         const hasOnlyOneEmptyExcludeRule = this._excludeRules.length === 1 && !this._excludeRules[0].hasValue;
-        this._isResetAvailableSubject$.next(!hasOnlyOneEmptyIncludeRule || !hasOnlyOneEmptyExcludeRule);
+        this.isResetAvailable$.set(!hasOnlyOneEmptyIncludeRule || !hasOnlyOneEmptyExcludeRule);
     }
 
     /** @hidden */

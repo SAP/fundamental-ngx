@@ -17,7 +17,7 @@
 <ng-template #tableCellExpandTemplate>
     <div class="fd-table__expand-wrapper">
         <span class="fd-table__expand" [class.fd-table__expand--open]="row.expanded" aria-hidden="true"></span>
-        @if (_groupRulesMap | async; as groupRules) {
+        @if (_fdpTableService.groupRules$(); as groupRules) {
             <!-- Group row template when no nested groups -->
             @if (groupRules.size === 1) {
                 <div class="fd-table__text fd-table__text--no-wrap">

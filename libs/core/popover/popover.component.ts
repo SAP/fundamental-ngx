@@ -210,7 +210,6 @@ export class PopoverComponent
     ngOnDestroy(): void {
         this._destroyMobileComponent();
         this._destroyEventListeners();
-        this._popoverService.onDestroy();
     }
 
     /** Toggles menu open/close state */

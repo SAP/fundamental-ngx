@@ -11,11 +11,10 @@ import {
     inject,
     signal
 } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { of } from 'rxjs';
 import { NavigationMoreBUttonContainerDirective } from '../../directives/navigation-more-button.directive';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
@@ -107,11 +106,12 @@ export class NavigationMoreButtonComponent {
     private _popoverClicked = false;
 
     /** @hidden */
-    private readonly _rtl$ = toSignal(
-        inject(RtlService, {
-            optional: true
-        })?.rtl || of(false)
-    );
+    private readonly _rtlService = inject(RtlService, {
+        optional: true
+    });
+
+    /** @hidden */
+    private readonly _rtl$ = computed<boolean>(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
     private readonly _navigationService = inject(NavigationService);

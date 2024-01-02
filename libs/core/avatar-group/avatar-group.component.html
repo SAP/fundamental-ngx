@@ -7,7 +7,7 @@
         [orientation]="orientation"
         fdkResizeObserver
         fdkFocusableList
-        [contentDirection]="_contentDirection$ | async"
+        [contentDirection]="_contentDirection$()"
         [wrap]="true"
         [navigationDirection]="orientation"
         [items]="_avatars"

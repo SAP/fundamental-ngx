@@ -9,7 +9,8 @@ import {
     OnDestroy,
     Optional,
     Output,
-    SimpleChanges
+    SimpleChanges,
+    computed
 } from '@angular/core';
 import { Observable, Subscription, fromEvent, merge } from 'rxjs';
 import { filter, map, pairwise, takeUntil, tap } from 'rxjs/operators';
@@ -82,7 +83,7 @@ export class ResizeDirective implements OnChanges, AfterViewInit, OnDestroy {
     private _resizeSubscriptions = new Subscription();
 
     /** @hidden */
-    private _isRtl = false;
+    private readonly _direction$ = computed(() => (this._rtlService?.rtlSignal() ? -1 : 1));
 
     /** @hidden */
     constructor(
@@ -103,10 +104,6 @@ export class ResizeDirective implements OnChanges, AfterViewInit, OnDestroy {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (this._rtlService) {
-            this._subscriptions.add(this._rtlService.rtl.subscribe((isRtl) => (this._isRtl = isRtl)));
-        }
-
         if (!this.disabled) {
             this._setResizeListeners();
         }
@@ -116,11 +113,6 @@ export class ResizeDirective implements OnChanges, AfterViewInit, OnDestroy {
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._resizeSubscriptions.unsubscribe();
-    }
-
-    /** @hidden */
-    private get _direction(): number {
-        return this._isRtl ? -1 : 1;
     }
 
     /** @hidden */
@@ -208,7 +200,7 @@ export class ResizeDirective implements OnChanges, AfterViewInit, OnDestroy {
         }
 
         return (event1: MouseEvent, event2: MouseEvent) => {
-            const x = (event2.screenX - event1.screenX) * this._direction;
+            const x = (event2.screenX - event1.screenX) * this._direction$();
             const y = event2.screenY - event1.screenY;
 
             return {

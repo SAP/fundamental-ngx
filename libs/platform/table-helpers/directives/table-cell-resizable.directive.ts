@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, computed, Directive, inject, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -55,9 +55,7 @@ export class PlatformTableCellResizableDirective
     private _resizableSide: TableColumnResizableSide = 'both';
 
     /** @hidden */
-    private get _isRtl(): boolean {
-        return this._rtlService?.rtl.getValue() ?? false;
-    }
+    private readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
     private readonly _tableColumnResizeService = inject(TableColumnResizeService);
@@ -115,24 +113,24 @@ export class PlatformTableCellResizableDirective
         let resizerPosition: number | undefined;
         let resizedColumn: string | undefined;
 
-        const pointerOnLeft = this._isRtl
+        const pointerOnLeft = this._rtl$()
             ? elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX
             : event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX;
 
         if (pointerOnLeft && this._resizableSide !== 'end') {
-            resizerPosition = this._isRtl
+            resizerPosition = this._rtl$()
                 ? el.parentElement!.offsetWidth - (el.offsetLeft + el.offsetWidth)
                 : el.offsetLeft;
 
             resizedColumn = this._tableColumnResizeService.getPreviousColumnName(this.columnName);
         }
 
-        const pointerOnRight = this._isRtl
+        const pointerOnRight = this._rtl$()
             ? event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX
             : elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX;
 
         if (pointerOnRight && this._resizableSide !== 'start') {
-            resizerPosition = this._isRtl
+            resizerPosition = this._rtl$()
                 ? el.parentElement!.offsetWidth - el.offsetLeft
                 : el.offsetLeft + el.offsetWidth;
 

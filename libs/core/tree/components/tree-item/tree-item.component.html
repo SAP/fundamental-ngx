@@ -18,7 +18,7 @@
         wrapContent ? 'fd-tree__content--wrap' : ''
     ]"
 >
-    @if (_selectionModel?.placement === 'left') {
+    @if (_treeService.selectionMode().placement === 'left') {
         <ng-template [ngTemplateOutlet]="selection"></ng-template>
     }
     @if (hasChildren) {
@@ -42,7 +42,7 @@
                 <fd-skeleton type="rectangle" width="1rem" height="1rem"></fd-skeleton>
             </div>
         }
-        @if (_selectionModel?.placement === 'afterExpand') {
+        @if (_treeService.selectionMode().placement === 'afterExpand') {
             <ng-template [ngTemplateOutlet]="selection"></ng-template>
         }
     }
@@ -51,10 +51,10 @@
         <ng-content select="[fdTreeItemText]"></ng-content>
     </div>
     <ng-content select="[fdTreeItemButton]"></ng-content>
-    @if (_selectionModel?.placement === 'right') {
+    @if (_treeService.selectionMode().placement === 'right') {
         <ng-template [ngTemplateOutlet]="selection"></ng-template>
     }
-    @if (navigatable && _navigationIndicator) {
+    @if (navigatable && _treeService.navigationIndicator()) {
         <fd-icon glyph="slim-arrow-right" class="fd-tree__icon fd-tree__icon--navigation"></fd-icon>
     }
 </div>
@@ -65,7 +65,7 @@
 }
 <ng-template #selection>
     <div class="fd-form-item">
-        @if (_selectionModel?.mode === 'multiple') {
+        @if (_treeService.selectionMode().mode === 'multiple') {
             <fd-checkbox
                 [(ngModel)]="_selectionState"
                 [ngModelOptions]="{ standalone: true }"
@@ -73,7 +73,7 @@
                 tabIndexValue="-1"
             ></fd-checkbox>
         }
-        @if (_selectionModel?.mode === 'single') {
+        @if (_treeService.selectionMode().mode === 'single') {
             <fd-radio-button
                 [(ngModel)]="_selectionState"
                 [ngModelOptions]="{ standalone: true }"

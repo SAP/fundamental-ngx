@@ -1,5 +1,4 @@
 import { computed, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { SearchFieldComponent } from '@fundamental-ngx/btp/search-field';
 import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
@@ -77,5 +76,8 @@ export abstract class ToolHeaderComponentClass {
      * RTL signal
      * @hidden
      */
-    protected _rtl = toSignal(inject(RtlService).rtl);
+    protected _rtl = computed<boolean>(() => !!this._rtlService?.rtlSignal());
+
+    /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
 }

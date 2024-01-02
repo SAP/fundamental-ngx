@@ -5,6 +5,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     HostListener,
     Input,
@@ -13,12 +14,13 @@ import {
     OnInit,
     Optional,
     QueryList,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CssClassBuilder, KeyUtil, RtlService, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { Subject, Subscription, merge } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subscription, merge } from 'rxjs';
 import { TabItemDirective } from '../tab-item/tab-item.directive';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 import { TabModes, TabSizes } from '../tab-list.component';
@@ -61,7 +63,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     private _subscriptions = new Subscription();
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _keyboardEventsManager: FocusKeyManager<TabLinkDirective>;
@@ -98,8 +100,6 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
         this._keyboardEventsManager?.destroy();
     }
 
@@ -140,7 +140,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
      */
     private _listenOnContentQueryListChange(): void {
         merge(this.links.changes, this.items.changes)
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this._refreshSubscription());
     }
 
@@ -150,7 +150,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
         this._subscriptions = new Subscription();
         this._listenToFocusedLinks();
 
-        this.links.changes.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        this.links.changes.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._listenToFocusedLinks();
         });
     }
@@ -172,7 +172,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
         this._keyboardEventsManager?.destroy();
         this._keyboardEventsManager = new FocusKeyManager(this.links).withWrap().withHorizontalOrientation(this._dir);
 
-        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl) => {
+        this._rtlService?.rtl.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isRtl) => {
             this._keyboardEventsManager.withHorizontalOrientation(isRtl ? 'rtl' : 'ltr');
         });
     }

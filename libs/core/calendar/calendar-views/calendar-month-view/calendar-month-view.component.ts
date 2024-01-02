@@ -2,22 +2,22 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     Inject,
     Input,
     OnChanges,
-    OnDestroy,
     OnInit,
     Output,
     SimpleChanges,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarService } from '../../calendar.service';
@@ -37,7 +37,7 @@ import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalend
     standalone: true,
     imports: [ButtonComponent, FdTranslatePipe]
 })
-export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChanges, FocusableCalendarView {
+export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, FocusableCalendarView {
     /** The id of the calendar passed from the parent component */
     @Input()
     id: string;
@@ -76,9 +76,8 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
 
     /**
      * @hidden
-     * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _initiated = false;
@@ -98,7 +97,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
         this._setupKeyboardService();
         this._constructMonthGrid();
 
-        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._constructMonthGrid();
             this._changeDetectorRef.markForCheck();
         });
@@ -109,12 +108,6 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
         if (this._initiated && ('monthSelected' in changes || 'year' in changes || 'id' in changes)) {
             this._constructMonthGrid();
         }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /** Get a number (1-12) representing the current month  */
@@ -268,11 +261,11 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
         this._calendarService.focusEscapeFunction = this.focusEscapeFunction;
 
         this._calendarService.onFocusIdChange
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((index) => this._focusOnCellByIndex(index));
 
         this._calendarService.onKeySelect
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((index) => this.selectMonth(this._getMonthList()[index]));
     }
 

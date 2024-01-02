@@ -7,18 +7,18 @@
         >
             <ng-content select="fd-token"></ng-content>
         </div>
-        @if (_showOverflowPopover && ((_compact$ | async) || compactCollapse)) {
+        @if (_showOverflowPopover && (_contentDensityObserver.isCompactSignal() || compactCollapse)) {
             <ng-template [ngTemplateOutlet]="tokensOverflow"></ng-template>
         } @else {
             @if (_showMoreElement && _hiddenTokens.length > 0) {
                 <span (click)="moreClicked()" #moreElementSpan class="fd-tokenizer-more" role="button" tabindex="-1">
-                    @if ((_compact$ | async) || compactCollapse) {
+                    @if (_contentDensityObserver.isCompactSignal() || compactCollapse) {
                         {{
                             'coreTokenizer.moreLabel'
                                 | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length }
                         }}
                     }
-                    @if ((_compact$ | async) === false && !compactCollapse) {
+                    @if (!_contentDensityObserver.isCompactSignal() && !compactCollapse) {
                         {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount } }}
                     }
                 </span>
@@ -66,10 +66,10 @@
 <ng-template #moreElement>
     @if (_showMoreElement && _hiddenTokens.length > 0) {
         <span (click)="moreClicked()" #moreElementSpan class="fd-tokenizer-more" role="button" tabindex="-1">
-            @if ((_compact$ | async) || compactCollapse) {
+            @if (_contentDensityObserver.isCompactSignal() || compactCollapse) {
                 {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length } }}
             }
-            @if ((_compact$ | async) === false && !compactCollapse) {
+            @if (!_contentDensityObserver.isCompactSignal() && !compactCollapse) {
                 {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount } }}
             }
         </span>
