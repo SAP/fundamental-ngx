@@ -32,10 +32,12 @@ import { SplitterResizerComponent } from '../splitter-resizer/splitter-resizer.c
 import { SplitterSplitPaneComponent } from '../splitter-split-pane/splitter-split-pane.component';
 import { SplitterComponent } from '../splitter.component';
 import { NoDefaultPanePipe } from './no-default-pane.pipe';
+import { FD_SPLITTER_PANE_CONTAINER } from './splitter-pane-container.token';
 import {
     SplitterPaneContainerOrientation,
     SplitterPaneContainerOrientationType
 } from './splitter-pane-orientation.enum';
+import { SplitterPaneContainer } from './splitter-pane.container';
 
 /** Splitter pane available types */
 export type PaneType = 'translucent' | 'solid';
@@ -68,25 +70,30 @@ export function transformPaneTypeInput(paneType: PaneTypeInput): Nullable<PaneTy
         '[class.fd-splitter__pane-container--horizontal]': '!_isRootContainer && _isHorizontal',
         '[class.fd-splitter__pane-container--vertical]': '_isRootContainer || _isVertical'
     },
+    providers: [
+        {
+            provide: FD_SPLITTER_PANE_CONTAINER,
+            useExisting: SplitterPaneContainerComponent
+        }
+    ],
     standalone: true,
     imports: [NgTemplateOutlet, SplitterPaginationComponent, PortalModule, SplitterResizerComponent, NoDefaultPanePipe]
 })
-export class SplitterPaneContainerComponent implements AfterContentInit, AfterViewInit, OnDestroy {
+export class SplitterPaneContainerComponent
+    implements SplitterPaneContainer, AfterContentInit, AfterViewInit, OnDestroy
+{
     /** Pane type - vertical (default) or horizontal. */
-    @Input()
-    orientation: SplitterPaneContainerOrientationType = SplitterPaneContainerOrientation.vertical;
+    @Input() orientation: SplitterPaneContainerOrientationType = SplitterPaneContainerOrientation.vertical;
 
     /**
      * Style of the resizer.
      */
-    @Input({ transform: transformPaneTypeInput })
-    resizerType: Nullable<PaneTypeInput> = null;
+    @Input({ transform: transformPaneTypeInput }) resizerType: Nullable<PaneTypeInput> = null;
 
     /**
      * Style of the pane
      */
-    @Input({ transform: transformPaneTypeInput })
-    paneType: Nullable<PaneTypeInput> = null;
+    @Input({ transform: transformPaneTypeInput }) paneType: Nullable<PaneTypeInput> = null;
 
     /** Event emitted after container's panes has resized. */
     @Output()
@@ -94,12 +101,10 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
     readonly resize = new EventEmitter<SplitterPaneResizeEvent[]>();
 
     /** @hidden */
-    @ContentChildren(SplitterSplitPaneComponent, { descendants: true })
-    _panes: QueryList<SplitterSplitPaneComponent>;
+    @ContentChildren(SplitterSplitPaneComponent, { descendants: true }) _panes: QueryList<SplitterSplitPaneComponent>;
 
     /** @hidden */
-    @ContentChildren(SplitterSplitPaneComponent)
-    _directPanes: QueryList<SplitterSplitPaneComponent>;
+    @ContentChildren(SplitterSplitPaneComponent) _directPanes: QueryList<SplitterSplitPaneComponent>;
 
     /** @hidden */
     _defaultPane: Nullable<SplitterSplitPaneComponent>;
@@ -181,9 +186,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         private readonly _viewportRuler: ViewportRuler,
         @Optional() private readonly _rtlService: RtlService,
         @Optional() @SkipSelf() private readonly _parentSplitterPaneContainer: SplitterPaneContainerComponent
-    ) {
-        console.log({ _destroyRef: this._destroyRef });
-    }
+    ) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
