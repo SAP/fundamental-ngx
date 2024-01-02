@@ -13,10 +13,7 @@
             }
         },
         "lint": {
-            "executor": "@nx/eslint:lint",
-            "options": {
-                "lintFilePatterns": ["libs/platform/table-helpers/**/*.ts", "libs/platform/table-helpers/**/*.html"]
-            }
+            "executor": "@nx/eslint:lint"
         }
     },
     "tags": ["type:lib", "scope:fdp"],
