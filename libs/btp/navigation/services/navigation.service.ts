@@ -1,9 +1,8 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { Injectable, effect, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
-import { Subject, of } from 'rxjs';
+import { Subject } from 'rxjs';
 import { FdbNavigationListItem } from '../models/navigation-list-item.class';
 
 @Injectable()
@@ -32,7 +31,7 @@ export class NavigationService {
     _recalculationInProgress = false;
 
     /** @hidden */
-    private readonly _rtl$ = toSignal(inject(RtlService, { optional: true })?.rtl || of(false));
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
     private _overflowKeyManager: FocusKeyManager<FdbNavigationListItem>;
@@ -49,7 +48,7 @@ export class NavigationService {
         });
 
         effect(() => {
-            this._updateKeyManager(this.allItems$(), this.horizontal$(), this._rtl$() || false);
+            this._updateKeyManager(this.allItems$(), this.horizontal$(), !!this._rtlService?.rtlSignal());
         });
     }
 
@@ -125,7 +124,7 @@ export class NavigationService {
             return;
         }
 
-        const expansionKey = !this._rtl$() ? RIGHT_ARROW : LEFT_ARROW;
+        const expansionKey = !this._rtlService?.rtlSignal() ? RIGHT_ARROW : LEFT_ARROW;
 
         this._onItemKeyboardExpansion(KeyUtil.isKeyCode(event, expansionKey), listItem);
     }
@@ -144,7 +143,7 @@ export class NavigationService {
         if (!KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
             return;
         }
-        const isRtl = this._rtl$();
+        const isRtl = !!this._rtlService?.rtlSignal();
 
         const isOpenAction = KeyUtil.isKeyCode(event, isRtl ? LEFT_ARROW : RIGHT_ARROW);
 
