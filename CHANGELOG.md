@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.23...v0.48.0-rc.24) (2024-01-02)
+
+
+### Bug Fixes
+
+* **core:** hover tooltip for multi input ([#11121](https://github.com/SAP/fundamental-ngx/issues/11121)) ([e31808a](https://github.com/SAP/fundamental-ngx/commit/e31808a170abb98d25df09d3cd0b105625027d19))
+
+
+
+
+
 # [0.48.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.22...v0.48.0-rc.23) (2023-12-30)
 
 
