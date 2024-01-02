@@ -1,6 +1,5 @@
 import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -11,6 +10,7 @@ import {
     Output,
     ViewChild,
     ViewEncapsulation,
+    effect,
     inject
 } from '@angular/core';
 import { FilterStringsPipe, Nullable } from '@fundamental-ngx/cdk/utils';
@@ -22,7 +22,7 @@ import {
     ButtonBarComponent
 } from '@fundamental-ngx/core/bar';
 import { DialogService } from '@fundamental-ngx/core/dialog';
-import { DynamicPage, DynamicPageService, FD_DYNAMIC_PAGE } from '@fundamental-ngx/core/dynamic-page';
+import { DynamicPage, FD_DYNAMIC_PAGE } from '@fundamental-ngx/core/dynamic-page';
 import { ListComponent, ListItemComponent, ListLinkDirective, ListTitleDirective } from '@fundamental-ngx/core/list';
 import {
     PopoverBodyComponent,
@@ -38,7 +38,7 @@ import { FDP_DYNAMIC_PAGE } from '@fundamental-ngx/platform/dynamic-page';
 import { MenuButtonComponent } from '@fundamental-ngx/platform/menu-button';
 import { SearchFieldComponent, SearchInput } from '@fundamental-ngx/platform/search-field';
 import equal from 'fast-deep-equal';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { ManageVariantItemComponent } from './components/manage-variant-item/manage-variant-item.component';
 import { ManageVariantsDialogComponent } from './components/manage-variants-dialog/manage-variants-dialog.component';
 import { VariantManagementDirtyLabelDirective } from './directives/variant-management-dirty-label.directive';
@@ -86,7 +86,7 @@ import { VariantItem } from './variant-item.class';
         NgClass
     ]
 })
-export class VariantManagementComponent<T = any> implements VariantManagement<T>, AfterViewInit {
+export class VariantManagementComponent<T = any> implements VariantManagement<T> {
     /** Initial variants array. */
     @Input()
     set variants(items: Variant<T>[]) {
@@ -161,27 +161,7 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
     }
 
     /** @hidden */
-    protected _titleClass$: Observable<Record<string, boolean>> = new Observable<Record<string, boolean>>(
-        (observer) => {
-            let subscription: Subscription;
-            const baseClasses = {
-                'fd-variant-management__title': true
-            };
-            if (this._dynamicPage) {
-                subscription = this._dynamicPage.collapsed$.subscribe((collapsed) => {
-                    observer.next({
-                        ...baseClasses,
-                        'fd-variant-management__title--dynamic-page': true,
-                        'fd-variant-management__title--dynamic-page--collapsed': collapsed
-                    });
-                });
-            } else {
-                observer.next(baseClasses);
-            }
-
-            return () => subscription?.unsubscribe();
-        }
-    );
+    protected _dynamicPageCollapsed$ = new BehaviorSubject(false);
 
     /** @hidden */
     protected _coreDynamicPage = inject(FD_DYNAMIC_PAGE, { optional: true });
@@ -189,20 +169,17 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
     protected _platformDynamicPage = inject(FDP_DYNAMIC_PAGE, { optional: true });
     /** @Hidden */
     private _originalActiveVariant: VariantItem<T>;
-    /** @Hidden */
-    private readonly _dynamicPageService = inject(DynamicPageService, { optional: true });
 
     /** @hidden */
     constructor(
         private readonly _dialogService: DialogService,
         private readonly _cdr: ChangeDetectorRef
     ) {
-        console.log({ _dynamicPage: this._dynamicPage, _dynamicPageService: this._dynamicPageService });
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        console.log(this._dynamicPage?.collapsed$);
+        if (this._dynamicPage) {
+            effect(() => {
+                this._dynamicPageCollapsed$.next(this._dynamicPage!.collapsed());
+            });
+        }
     }
 
     /**

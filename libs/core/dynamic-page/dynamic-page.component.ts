@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    computed,
     ContentChild,
     ContentChildren,
     DestroyRef,
@@ -34,7 +35,7 @@ import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { asyncScheduler, fromEvent, Observable, startWith } from 'rxjs';
 import { debounceTime, map, observeOn } from 'rxjs/operators';
@@ -136,7 +137,7 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
     _scrollbar: ScrollbarDirective;
 
     /** Whether the dynamic page is collapsed */
-    collapsed$: Observable<boolean> = toObservable(this._dynamicPageService.collapsed);
+    collapsed = computed(() => this._dynamicPageService.collapsed());
 
     /** @hidden */
     _size: DynamicPageResponsiveSize = 'extra-large';

@@ -17,6 +17,8 @@ import {
     Optional,
     Output,
     QueryList,
+    Signal,
+    signal,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
@@ -24,7 +26,6 @@ import {
 import { startWith } from 'rxjs/operators';
 
 import { NgTemplateOutlet } from '@angular/common';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
 import {
@@ -46,7 +47,6 @@ import { FacetComponent } from '@fundamental-ngx/core/facets';
 import { TabListComponent, TabPanelComponent } from '@fundamental-ngx/core/tabs';
 import { FD_LANGUAGE } from '@fundamental-ngx/i18n';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
-import { BehaviorSubject } from 'rxjs';
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import { DynamicPageContentHostComponent } from './dynamic-page-content/dynamic-page-content-host.component';
 import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
@@ -193,7 +193,7 @@ export class DynamicPageComponent
     _contentHostComponents: QueryList<DynamicPageContentHostComponent>;
 
     /** Whether Dynamic page is collapsed */
-    collapsed$ = new BehaviorSubject(false);
+    collapsed: Signal<boolean> = signal(false);
 
     /**
      * @hidden
@@ -238,9 +238,7 @@ export class DynamicPageComponent
         this._cd.detectChanges();
 
         this._tabListComponent?.headerContainer.nativeElement.classList.add('fd-dynamic-page__tabs');
-        this._dynamicPageComponent.collapsed$
-            .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe((c) => this.collapsed$.next(c));
+        this.collapsed = this._dynamicPageComponent.collapsed;
     }
 
     /** @hidden */
