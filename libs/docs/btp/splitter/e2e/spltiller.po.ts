@@ -1,6 +1,6 @@
-import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
+import { BtpBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
-export class SplitterPo extends CoreBaseComponentPo {
+export class SplitterPo extends BtpBaseComponentPo {
     private url = '/splitter';
 
     basicExample = 'fd-splitter-default-example ';

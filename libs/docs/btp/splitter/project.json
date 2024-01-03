@@ -1,5 +1,5 @@
 {
-    "name": "docs-core-splitter",
+    "name": "docs-btp-splitter",
     "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/btp/splitter",
     "projectType": "library",
