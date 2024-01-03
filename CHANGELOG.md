@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.24...v0.48.0-rc.25) (2024-01-03)
+
+
+### Bug Fixes
+
+* **core:** dynamically render search field ([#11143](https://github.com/SAP/fundamental-ngx/issues/11143)) ([0acb1aa](https://github.com/SAP/fundamental-ngx/commit/0acb1aaa423c21473e8502206810f45d834006ba))
+
+
+
+
+
 # [0.48.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.23...v0.48.0-rc.24) (2024-01-02)
 
 
