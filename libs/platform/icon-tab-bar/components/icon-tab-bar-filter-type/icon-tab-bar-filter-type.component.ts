@@ -1,6 +1,6 @@
 import { SlicePipe } from '@angular/common';
 import { Component, ElementRef, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
+import { AsyncOrSyncPipe, OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
@@ -17,7 +17,8 @@ import { IconTabBarPopoverComponent } from '../popovers/icon-tab-bar-popover/ico
         IconComponent,
         IconTabBarPopoverComponent,
         SlicePipe,
-        ButtonComponent
+        ButtonComponent,
+        AsyncOrSyncPipe
     ]
 })
 export class IconTabBarFilterTypeComponent extends ClosableIconTabBar {
@@ -42,6 +43,6 @@ export class IconTabBarFilterTypeComponent extends ClosableIconTabBar {
      */
     protected _initTabs(): void {
         super._initTabs();
-        this._totalTab = this.showTotalTab ? this._tabs[0] : undefined;
+        this._totalTab = this.showTotalTab ? this._tabs$()[0] : undefined;
     }
 }

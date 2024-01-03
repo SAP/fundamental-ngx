@@ -27,7 +27,7 @@ describe('IconTabBarProcessTypeComponent', () => {
 
         component.tabsConfig = generateTestConfig(100);
         fixture.detectChanges();
-        component._selectItem(component._tabs[50]); // Select random item
+        component._selectItem(component._tabs$()[50]); // Select random item
         component._lastVisibleTabIndex = 60; // Random big number
         component.overflowDirective = fakeOverflowDirective as OverflowListDirective;
         component._recalculateVisibleItems(AMOUNT_OF_EXTRA_TABS);

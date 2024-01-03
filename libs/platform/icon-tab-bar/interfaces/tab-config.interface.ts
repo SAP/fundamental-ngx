@@ -1,10 +1,10 @@
-import { NullableObject } from '@fundamental-ngx/cdk/utils';
+import { FdkAsyncProperty, NullableObject } from '@fundamental-ngx/cdk/utils';
 import { SemanticColor } from '../types';
 
 /** This is config that user should provide to input */
 export type TabConfig = NullableObject<{
     icon: string;
-    label: string;
+    label: FdkAsyncProperty<string>;
     color: SemanticColor;
     counter: number;
     /** whether the tab is selected */
