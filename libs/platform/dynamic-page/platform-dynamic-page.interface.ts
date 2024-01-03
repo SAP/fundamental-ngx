@@ -1,10 +1,10 @@
 import { EventEmitter, QueryList } from '@angular/core';
 import { DynamicPage } from '@fundamental-ngx/core/dynamic-page';
 import { TabPanelComponent } from '@fundamental-ngx/core/tabs';
-import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
-import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
-import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-footer.component';
 import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
+import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-footer.component';
+import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
+import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 import { DynamicPageTabChangeEvent } from './dynamic-page.component';
 
 export interface PlatformDynamicPage extends DynamicPage {

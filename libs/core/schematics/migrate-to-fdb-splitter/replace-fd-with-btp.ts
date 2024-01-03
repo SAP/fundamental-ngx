@@ -44,8 +44,8 @@ export function replaceFdWithBtp({ project: projectName }: MigrateToFdpSplitterS
             const mainFile = getProjectMainFile(project);
             const projectBuildTargetName = await getProjectBuildTargetName(tree, projectName);
             const tsConfigPath = getTargetTsconfigPath(project, projectBuildTargetName);
-            const tsFilesList = (await getFileDependencies(mainFile, tsConfigPath as string)).map(
-                (p) => p.replace(process.cwd(), '.')
+            const tsFilesList = (await getFileDependencies(mainFile, tsConfigPath as string)).map((p) =>
+                p.replace(process.cwd(), '.')
             );
 
             tsFilesList.forEach((filePath: string) => {

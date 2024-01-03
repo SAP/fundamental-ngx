@@ -12,10 +12,10 @@ export * from './dynamic-page-header/subheader/dynamic-page-subheader.component'
 export * from './dynamic-page-wrapper.directive';
 export * from './dynamic-page.component';
 export * from './dynamic-page.config';
+export * from './dynamic-page.interface';
 export * from './dynamic-page.module';
 export * from './dynamic-page.service';
+export * from './dynamic-page.tokens';
 export * from './models/title-directive-context';
 export * from './patch-header-i18n-texts';
 export * from './utils';
-export * from './dynamic-page.interface';
-export * from './dynamic-page.tokens';
