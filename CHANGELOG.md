@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.25...v0.48.0-rc.26) (2024-01-03)
+
+
+### Bug Fixes
+
+* **core:** toolbar title styling ([#11144](https://github.com/SAP/fundamental-ngx/issues/11144)) ([1dca9bf](https://github.com/SAP/fundamental-ngx/commit/1dca9bf2f2afe948ba1423006f7d3aa7c39e66bd))
+
+
+
+
+
 # [0.48.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.24...v0.48.0-rc.25) (2024-01-03)
 
 
