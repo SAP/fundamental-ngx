@@ -5,7 +5,7 @@
             [ngTemplateOutletContext]="{ panes: [_defaultPane], showResizer: true }"
         ></ng-template>
     }
-    <div class="fd-splitter__split-pane">
+    <div class="fd-splitter__split-pane" [style.overflow]="'visible'">
         <div class="fd-splitter__pane-container fd-splitter__pane-container--vertical">
             <ng-template
                 [ngTemplateOutlet]="panesTemplate"

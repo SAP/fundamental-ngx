@@ -42,8 +42,11 @@ import { SplitterPaneContainer } from './splitter-pane.container';
 /** Splitter pane available types */
 export type PaneType = 'translucent' | 'solid';
 
+/** Splitter pane deprecated types */
+export type DeprecatedPaneType = 'default' | 'transparent';
+
 /** Splitter pane type input */
-export type PaneTypeInput = PaneType | 'transparent' | 'default';
+export type PaneTypeInput = PaneType | DeprecatedPaneType;
 
 /**
  * Transforms pane type input to pane type
@@ -53,7 +56,7 @@ export type PaneTypeInput = PaneType | 'transparent' | 'default';
 export function transformPaneTypeInput(paneType: PaneTypeInput): Nullable<PaneType> {
     if (paneType === 'default' || paneType === 'transparent') {
         console.warn(
-            'Pane type "default" and "transparent" are deprecated. Use "null" or "default" instead if you need to have transparent pane type.'
+            'Pane type "default" and "transparent" are deprecated. Use "null" or do not set anything at all instead if you need to have transparent pane type.'
         );
         return null;
     }
