@@ -282,7 +282,6 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
 
     /** @hidden */
     private _isEmpty(): boolean {
-        console.log('_isEmpty');
         return this.validFiles.length === 0 && this.invalidFiles.length === 0;
     }
 

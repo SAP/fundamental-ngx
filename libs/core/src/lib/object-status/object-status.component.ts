@@ -42,7 +42,7 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' 
         }
     ],
     host: {
-        '[attr.tabindex]': 'clickable ? 0 : -1'
+        '[attr.tabindex]': 'clickable ? 0 : null'
     },
     standalone: true,
     imports: [NgIf, IconComponent, NgTemplateOutlet]

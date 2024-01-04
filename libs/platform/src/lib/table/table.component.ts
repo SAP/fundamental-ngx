@@ -1860,7 +1860,6 @@ export class TableComponent<T = any>
     /** @hidden */
     private _calculateVisibleTableRows(): void {
         this._tableRowsVisible = this._tableRows.filter((row) => !row.hidden);
-        console.log({ visible: this._tableRowsVisible, total: this._tableRows });
         if (this._virtualScrollDirective?.virtualScroll) {
             this._virtualScrollDirective.calculateVirtualScrollRows();
         } else {
