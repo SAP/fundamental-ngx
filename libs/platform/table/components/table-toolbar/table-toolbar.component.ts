@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
     ToolbarComponent,
     ToolbarItemDirective,
@@ -100,6 +101,10 @@ export class TableToolbarComponent implements TableToolbarInterface {
     /** Table title. */
     @Input()
     title: string;
+
+    /** Aria label for the search field. */
+    @Input()
+    searchFieldAriaLabel: Nullable<string>;
 
     /** Toggle to show table item count. */
     @Input()

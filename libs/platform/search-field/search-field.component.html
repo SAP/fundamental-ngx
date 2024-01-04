@@ -61,7 +61,7 @@
                 [attr.id]="_inputId"
                 [attr.disabled]="disabled ? '' : null"
                 [attr.aria-label]="ariaLabel || ('platformSearchField.searchInputLabel' | fdTranslate)"
-                [attr.aria-labelledby]="ariaLabelledBy"
+                [attr.aria-labelledby]="ariaLabel ? null : ariaLabelledBy"
                 [attr.aria-controls]="_menuId"
                 [attr.aria-expanded]="
                     (_dropdownValues$ | async)?.length !== 0 ? (_showDropdown ? 'true' : 'false') : null
