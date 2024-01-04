@@ -1,17 +1,16 @@
 import { NgClass } from '@angular/common';
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
-    DestroyRef,
     EventEmitter,
     Input,
-    OnInit,
     Output,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    WritableSignal,
+    computed,
+    signal
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { InitialFocusDirective, Nullable } from '@fundamental-ngx/cdk/utils';
@@ -53,14 +52,20 @@ import { convertFormState, convertFormStateToMessagePopoverState } from './utils
         FdTranslatePipe
     ]
 })
-export class MessagePopoverComponent implements MessagePopover, OnInit {
+export class MessagePopoverComponent implements MessagePopover {
     /** @hidden */
     @ViewChild('popover')
     readonly _popover: PopoverComponent;
 
     /** Message Popover Wrapper component. */
     @Input()
-    wrapper: MessagePopoverWrapper;
+    set wrapper(value: Nullable<MessagePopoverWrapper>) {
+        value?.setMessagePopover(this);
+        this._wrapper$.set(value);
+    }
+    get wrapper(): Nullable<MessagePopoverWrapper> {
+        return this._wrapper$();
+    }
 
     /** Event emits when user clicks on error entry and item's element needs to be focused. */
     @Output()
@@ -73,60 +78,67 @@ export class MessagePopoverComponent implements MessagePopover, OnInit {
     currentEntry: Nullable<MessagePopoverEntry>;
 
     /** @hidden */
-    _currentErrorType: MessagePopoverError['group'] = 'all';
+    _currentErrorType$: WritableSignal<MessagePopoverError['group']> = signal('all');
 
     /** @hidden */
-    _errorTypes: MessagePopoverError[] = [];
+    _errorTypes$ = computed<MessagePopoverError[]>(() => {
+        const countedErrors = this._countedErrors$();
+        const errorTypes = Object.keys(countedErrors) as FormStates[];
+        return errorTypes.map((errorType) => ({
+            group: errorType,
+            count: countedErrors[errorType],
+            state: convertFormState(errorType)
+        }));
+    });
 
     /** @hidden */
-    _priorityStateItemsCount = 0;
+    _priorityStateItemsCount$ = computed(() => this._countedErrors$()[this._priorityFormState$()!] || 0);
 
     /** @hidden */
-    _priorityFormState: FormStates;
+    _priorityFormState$ = computed<FormStates>(() => {
+        const countedErrors = this._countedErrors$();
+        const errorTypes = Object.keys(countedErrors) as FormStates[];
+        return getFormState(errorTypes);
+    });
 
     /** @hidden */
-    _priorityState: MessagePopoverState;
+    _priorityState$ = computed<Nullable<MessagePopoverState>>(() =>
+        convertFormStateToMessagePopoverState(this._priorityFormState$())
+    );
 
     /** @hidden */
-    _filteredErrors: MessagePopoverErrorGroup[] = [];
+    readonly _filteredErrors$ = computed(() => {
+        const groupedErrors = this._groupedErrors$();
+        const errorType = this._currentErrorType$();
 
-    /** @hidden */
-    private _groupedErrors: MessagePopoverErrorGroup[] = [];
+        if (errorType === 'all') {
+            return groupedErrors;
+        }
 
-    /** @hidden */
-    constructor(
-        private readonly _cdr: ChangeDetectorRef,
-        private readonly _destroyRef: DestroyRef
-    ) {}
+        const filteredErrors: MessagePopoverErrorGroup[] = [];
+        groupedErrors.forEach((group) => {
+            const errors = group.errors.filter((error) => error.type === errorType);
 
-    /** @hidden */
-    ngOnInit(): void {
-        this.wrapper?.setMessagePopover(this);
-        this.wrapper?.errors.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((errors) => {
-            this._groupedErrors = errors;
-            this._errorTypes = [];
-            const countedErrors = countBy(
-                flatten(Object.values(this._groupedErrors.map((group) => group.errors))),
-                'type'
-            );
-            const errorTypes = Object.keys(countedErrors) as FormStates[];
-            errorTypes.forEach((errorType) => {
-                this._errorTypes.push({
-                    group: errorType,
-                    count: countedErrors[errorType],
-                    state: convertFormState(errorType)
-                });
+            if (errors.length === 0) {
+                return;
+            }
+
+            filteredErrors.push({
+                group: group.group,
+                errors
             });
-
-            this._priorityFormState = getFormState(errorTypes);
-            this._priorityState = convertFormStateToMessagePopoverState(this._priorityFormState);
-
-            this._priorityStateItemsCount = countedErrors[this._priorityFormState];
-            this._filterErrors();
-
-            this._cdr.detectChanges();
         });
-    }
+
+        return filteredErrors;
+    });
+
+    private readonly _groupedErrors$ = computed(() => this._wrapper$()?.errors$() || []);
+
+    private readonly _wrapper$ = signal<Nullable<MessagePopoverWrapper>>(null);
+
+    private readonly _countedErrors$ = computed(() =>
+        countBy(flatten(Object.values(this._groupedErrors$().map((group) => group.errors))), 'type')
+    );
 
     /** @hidden */
     _showList(): void {
@@ -143,26 +155,5 @@ export class MessagePopoverComponent implements MessagePopover, OnInit {
     /** @hidden */
     _closePopover(focusLast = true): void {
         this._popover.close(focusLast);
-    }
-
-    /** @hidden */
-    _filterErrors(): void {
-        if (this._currentErrorType === 'all') {
-            this._filteredErrors = this._groupedErrors;
-            return;
-        }
-        this._filteredErrors = [];
-        this._groupedErrors.forEach((group) => {
-            const errors = group.errors.filter((error) => error.type === this._currentErrorType);
-
-            if (errors.length === 0) {
-                return;
-            }
-
-            this._filteredErrors.push({
-                group: group.group,
-                errors
-            });
-        });
     }
 }

@@ -1,8 +1,8 @@
 import { DragDrop, DragRef, Point } from '@angular/cdk/drag-drop';
-import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, DestroyRef, Directive, ElementRef, Input, OnDestroy, inject } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ElementChord, IconTabBarDndItem, IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive';
 import { IconBarDndListDirective } from './icon-bar-dnd-list.directive';
@@ -64,7 +64,7 @@ export class IconBarDndItemDirective implements IconTabBarDndItem, AfterViewInit
     dragRef: DragRef;
 
     /** @hidden */
-    private readonly _onDestroy$ = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -85,8 +85,6 @@ export class IconBarDndItemDirective implements IconTabBarDndItem, AfterViewInit
         this._dndListDir.removeDragItem(this);
         this._dndContainerDir.removeDragItem(this);
         this.dragRef.dispose();
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /** @hidden */
@@ -146,11 +144,11 @@ export class IconBarDndItemDirective implements IconTabBarDndItem, AfterViewInit
         this._dndContainerDir?.registerDragItem(this);
 
         this.dragRef.moved
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((event) => this.onCdkMove(event.pointerPosition));
 
-        this.dragRef.released.pipe(takeUntil(this._onDestroy$)).subscribe(() => this.onCdkDragReleased());
+        this.dragRef.released.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this.onCdkDragReleased());
 
-        this.dragRef.started.pipe(takeUntil(this._onDestroy$)).subscribe(() => this.onCdkDragStart());
+        this.dragRef.started.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this.onCdkDragStart());
     }
 }

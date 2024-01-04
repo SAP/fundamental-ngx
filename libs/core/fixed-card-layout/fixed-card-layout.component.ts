@@ -14,6 +14,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     Directive,
     ElementRef,
     EventEmitter,
@@ -21,7 +22,6 @@ import {
     Input,
     OnChanges,
     OnDestroy,
-    OnInit,
     Optional,
     Output,
     QueryList,
@@ -29,13 +29,17 @@ import {
     TemplateRef,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed,
+    inject
 } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
-import { debounceTime, filter, skip, takeUntil } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { debounceTime, filter, skip } from 'rxjs/operators';
 
+import { Direction } from '@angular/cdk/bidi';
 import { NumberInput, coerceNumberProperty } from '@angular/cdk/coercion';
 import { NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     DragAndDropModule,
     Nullable,
@@ -119,7 +123,7 @@ type CardColumn = CardDefinitionDirective[];
         CdkDragPlaceholder
     ]
 })
-export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
+export class FixedCardLayoutComponent implements AfterViewInit, OnChanges, OnDestroy {
     /** Drag drop behavior can be disabled */
     @Input()
     disableDragDrop: boolean;
@@ -188,7 +192,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     _containerHeight = 0;
 
     /** @hidden handles rtl service */
-    _dir = 'ltr';
+    _dir$ = computed<Direction>(() => (this._rtlService?.rtlSignal() ? 'rtl' : 'ltr'));
 
     /** @hidden first number is the CardDefinition rank, i.e. id */
     _groupIndexes = new Map<number, number>();
@@ -225,8 +229,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     /** @hidden */
     private _cardsSizeChangeSubscription = new Subscription();
 
-    /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    /** @hidden  */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -235,8 +239,13 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     ) {}
 
     /** @hidden */
-    ngOnInit(): void {
-        this._subscribeToRtl();
+    @HostListener('keydown', ['$event'])
+    handleKeydown(event: KeyboardEvent): void {
+        event.stopImmediatePropagation();
+
+        if (this._keyboardEventsManager) {
+            this._keyboardEventsManager.onKeydown(event);
+        }
     }
 
     /** @hidden */
@@ -266,19 +275,6 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     ngOnDestroy(): void {
         this._cardsSizeChangeSubscription.unsubscribe();
         this._keyboardEventsManager?.destroy();
-
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
-    }
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    handleKeydown(event: KeyboardEvent): void {
-        event.stopImmediatePropagation();
-
-        if (this._keyboardEventsManager) {
-            this._keyboardEventsManager.onKeydown(event);
-        }
     }
 
     /** Distribute cards on window resize */
@@ -425,14 +421,6 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
         this._keyboardEventsManager = new FocusKeyManager(this._cardContainers).withWrap();
     }
 
-    /** @hidden Rtl change subscription */
-    private _subscribeToRtl(): void {
-        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl) => {
-            this._dir = isRtl ? 'rtl' : 'ltr';
-            this._changeDetector.markForCheck();
-        });
-    }
-
     /** @hidden Listen window resize and distribute cards on column change */
     private _listenOnResize(): void {
         resizeObservable(this._layout.nativeElement)
@@ -441,7 +429,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
                 filter(
                     (entries) => this._listenResize && !!(entries[0].contentRect.height || entries[0].contentRect.width)
                 ),
-                takeUntil(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => this.updateLayout());
     }

@@ -6,13 +6,12 @@ import {
     ElementRef,
     EventEmitter,
     Input,
-    OnDestroy,
     OnInit,
     Optional,
     Output,
-    ViewChild
+    ViewChild,
+    computed
 } from '@angular/core';
-import { Subscription } from 'rxjs';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
@@ -38,7 +37,7 @@ import { BaseComponent } from '@fundamental-ngx/platform/shared';
     standalone: true,
     imports: [ButtonComponent, MenuTriggerDirective]
 })
-export class SplitMenuButtonComponent extends BaseComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SplitMenuButtonComponent extends BaseComponent implements OnInit, AfterViewInit {
     /** Whether or not the element should keep a fixed width. The width could change if the text changes length. */
     @Input()
     fixedWidth = true;
@@ -88,16 +87,12 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
 
     /** handles rtl service
      * @hidden */
-    public dir: string;
+    readonly dir$ = computed<'ltr' | 'rtl'>(() => (this._rtlService?.rtlSignal() ? 'rtl' : 'ltr'));
 
     /** @hidden */
     primaryButtonWidth: string;
     /** Defined max width of Split menu button */
     splitButtonMaxWidth = '12rem';
-    /** handles rtl service
-     * @hidden */
-    private _rtlChangeSubscription = Subscription.EMPTY;
-
     /** @hidden */
     get typeClass(): string {
         return this.type ? `fd-button-split--${this.type}` : '';
@@ -121,12 +116,6 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
         this.secondaryId = 'secondary-' + this.id;
         // if no title provided.
         this.title = this.title || this.buttonLabel;
-        if (this._rtlService) {
-            this._rtlChangeSubscription = this._rtlService.rtl.subscribe((isRtl: boolean) => {
-                this.dir = isRtl ? 'rtl' : 'ltr';
-                this._cd.detectChanges();
-            });
-        }
     }
 
     /** @hidden */
@@ -134,11 +123,6 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
         if (this.fixedWidth) {
             this._setPrimaryButtonWidth();
         }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._rtlChangeSubscription.unsubscribe();
     }
 
     /**

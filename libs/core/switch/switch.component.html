@@ -2,7 +2,7 @@
     class="fd-switch fd-switch-no-animate"
     (click)="focus()"
     [style.cursor]="disabled ? 'auto' : 'pointer'"
-    [class.is-compact]="_contentDensityObserver.isCompact$ | async"
+    [class.is-compact]="_contentDensityObserver.isCompactSignal()"
     [class.fd-switch--semantic]="semantic"
     [class.fd-switch--text]="activeText || inactiveText"
     [class.is-disabled]="disabled"

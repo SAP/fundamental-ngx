@@ -2,21 +2,23 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     EventEmitter,
     Input,
-    OnDestroy,
     OnInit,
     Output,
     TemplateRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
-import { Subject, firstValueFrom } from 'rxjs';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { firstValueFrom } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { WizardModule, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
 import { NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { PreparedWizardGeneratorItem, WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
@@ -45,7 +47,7 @@ export interface WizardStepChange {
         NgTemplateOutlet
     ]
 })
-export class WizardBodyComponent implements OnInit, OnDestroy {
+export class WizardBodyComponent implements OnInit {
     /**
      * @description Whether or not apply responsive paddings styling.
      */
@@ -166,7 +168,7 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /**
      * @hidden
@@ -230,19 +232,11 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this._wizardGeneratorService
             .getVisibleSteps()
-            .pipe(debounceTime(50), takeUntil(this._onDestroy$))
+            .pipe(debounceTime(50), takeUntilDestroyed(this._destroyRef))
             .subscribe((visibleSteps) => {
                 this._visibleItems = visibleSteps;
                 this._cd.detectChanges();
             });
-    }
-
-    /**
-     * @hidden
-     */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /**

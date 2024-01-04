@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -47,7 +46,7 @@ let switchUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FormsModule, AsyncPipe, FdTranslatePipe, IconComponent]
+    imports: [FormsModule, FdTranslatePipe, IconComponent]
 })
 export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormItemControl {
     /** @hidden */

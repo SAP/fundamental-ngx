@@ -3,13 +3,15 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     Inject,
-    OnDestroy,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject,
+    signal
 } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, Subscription, asyncScheduler, firstValueFrom } from 'rxjs';
-import { observeOn, takeUntil } from 'rxjs/operators';
+import { Observable, Subscription, asyncScheduler, firstValueFrom } from 'rxjs';
+import { observeOn } from 'rxjs/operators';
 
 import {
     DialogBodyComponent,
@@ -35,6 +37,7 @@ import {
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     BarElementDirective,
@@ -102,7 +105,7 @@ import { SmartFilterBarOptionsDataProvider } from './data-provider';
         FdTranslatePipe
     ]
 })
-export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterViewInit, OnDestroy {
+export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterViewInit {
     /**
      * Table instance
      */
@@ -123,7 +126,7 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
     loaded = false;
 
     /** Indicates when reset command is available */
-    readonly isResetAvailable$: Observable<boolean>;
+    readonly isResetAvailable$ = signal(false);
 
     /** @hidden */
     private readonly _categoryLabelKeys: SmartFilterBarVisibilityCategoryLabels = {
@@ -144,10 +147,7 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
-    /** @hidden */
-    private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _translationResolver = new TranslationResolver();
@@ -158,7 +158,6 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
         @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>,
         private readonly _cdr: ChangeDetectorRef
     ) {
-        this.isResetAvailable$ = this._isResetAvailableSubject$.asObservable();
         this.setInitialTableState();
         this._init();
     }
@@ -175,7 +174,7 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
         this._sourceSubscription?.unsubscribe();
         this._sourceSubscription = this.source
             .open()
-            .pipe(observeOn(asyncScheduler), takeUntil(this._onDestroy$))
+            .pipe(observeOn(asyncScheduler), takeUntilDestroyed(this._destroyRef))
             .subscribe((items) => {
                 items.forEach((field, index) => {
                     if (field.visible) {
@@ -183,12 +182,6 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
                     }
                 });
             });
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /**
@@ -230,7 +223,7 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
     /** @hidden */
     _onRowSelectionChange(event: TableRowSelectionChangeEvent<FieldFilterItem>): void {
         this._selectedFilters = event.selection.map((c) => c.name);
-        this._isResetAvailableSubject$.next(true);
+        this.isResetAvailable$.set(true);
     }
 
     /** @hidden */

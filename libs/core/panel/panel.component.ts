@@ -1,19 +1,17 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChild,
     ElementRef,
     EventEmitter,
     HostBinding,
     Input,
-    OnDestroy,
-    OnInit,
-    Optional,
     Output,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed,
+    inject,
+    signal
 } from '@angular/core';
-import { Subscription } from 'rxjs';
 
 import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -39,7 +37,7 @@ let panelExpandUniqueId = 0;
     standalone: true,
     imports: [ButtonComponent]
 })
-export class PanelComponent implements OnInit, OnDestroy {
+export class PanelComponent {
     /** User's custom classes */
     @Input()
     class: string;
@@ -67,7 +65,12 @@ export class PanelComponent implements OnInit, OnDestroy {
 
     /** Whether the Panel Content is expanded */
     @Input()
-    expanded = false;
+    set expanded(value: boolean) {
+        this._expanded$.set(value);
+    }
+    get expanded(): boolean {
+        return this._expanded$();
+    }
 
     /** Output event triggered when the Expand button is clicked */
     @Output()
@@ -78,49 +81,30 @@ export class PanelComponent implements OnInit, OnDestroy {
     panelContent: Nullable<PanelContentDirective>;
 
     /** @hidden */
-    _rtl = false;
+    _buttonIcon$ = computed(() =>
+        this._expanded$() ? 'slim-arrow-down' : this._rtl$() ? 'slim-arrow-left' : 'slim-arrow-right'
+    );
 
     /** @hidden */
-    _subscription = new Subscription();
+    private readonly _expanded$ = signal(false);
+
+    /** @hidden */
+    private readonly _rtlService = inject(RtlService, {
+        optional: true
+    });
+
+    /** @hidden */
+    private readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
     constructor(
-        private _cdRef: ChangeDetectorRef,
         public readonly elementRef: ElementRef,
-        readonly _contentDensityObserver: ContentDensityObserver,
-        @Optional() private _rtlService: RtlService
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
-
-    /** @hidden */
-    ngOnInit(): void {
-        this._listenRtl();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscription.unsubscribe();
-    }
 
     /** Methods that toggles the Panel Content */
     toggleExpand(): void {
-        this.expanded = !this.expanded;
+        this._expanded$.update((expanded) => !expanded);
         this.expandedChange.emit(this.expanded);
-    }
-
-    /** @hidden */
-    _getButtonIcon(): string {
-        return this.expanded ? 'slim-arrow-down' : this._rtl ? 'slim-arrow-left' : 'slim-arrow-right';
-    }
-
-    /** @hidden */
-    private _listenRtl(): void {
-        if (this._rtlService) {
-            this._subscription.add(
-                this._rtlService.rtl.subscribe((rtl) => {
-                    this._rtl = rtl;
-                    this._cdRef.markForCheck();
-                })
-            );
-        }
     }
 }

@@ -1,16 +1,15 @@
-import { ViewportRuler } from '@angular/cdk/overlay';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     Input,
     IterableChangeRecord,
     IterableDiffer,
     IterableDiffers,
-    NgZone,
     OnChanges,
     OnDestroy,
     OnInit,
@@ -20,12 +19,13 @@ import {
     TrackByFunction,
     ViewChild,
     ViewContainerRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { resizeObservable } from '@fundamental-ngx/cdk/utils';
-import { Subject, debounceTime } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { debounceTime } from 'rxjs';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 import { TimelineNodeHeaderDirective } from './components/timeline-node-header/timeline-node-header.directive';
@@ -122,16 +122,14 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
     private _dataDifferForSecondList: IterableDiffer<T>;
 
     /** @hidden */
-    private readonly _onDestroy = new Subject<void>();
+    private readonly _onDestroy = inject(DestroyRef);
 
     /** @hidden */
     constructor(
         private _differs: IterableDiffers,
         private _cd: ChangeDetectorRef,
         private _timelinePositionControlService: TimelinePositionControlService,
-        private _viewportRuler: ViewportRuler,
-        private _elementRef: ElementRef<HTMLElement>,
-        private _ngZone: NgZone
+        private _elementRef: ElementRef<HTMLElement>
     ) {}
 
     /** @hidden */
@@ -160,7 +158,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
     /** @hidden */
     ngAfterViewInit(): void {
         resizeObservable(this._elementRef.nativeElement)
-            .pipe(debounceTime(50), takeUntil(this._onDestroy))
+            .pipe(debounceTime(50), takeUntilDestroyed(this._onDestroy))
             .subscribe(() => this._timelinePositionControlService.calculatePositions());
         this._setPositionStrategy();
         this.switchDataSource(this.dataSource);
@@ -169,8 +167,6 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
     /** @hidden */
     ngOnDestroy(): void {
         this._firstListOutlet.viewContainer.clear();
-        this._onDestroy.next();
-        this._onDestroy.complete();
     }
 
     /**

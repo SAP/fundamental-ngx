@@ -3,7 +3,9 @@ import {
     AfterContentInit,
     ChangeDetectorRef,
     ContentChildren,
+    DestroyRef,
     Directive,
+    inject,
     Input,
     OnChanges,
     OnDestroy,
@@ -11,9 +13,9 @@ import {
     QueryList,
     SimpleChanges
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RtlService } from '../../services/rtl.service';
 import { FOCUSABLE_ITEM } from './focus-key-manager.tokens';
 
@@ -48,7 +50,7 @@ export class FocusKeyManagerListDirective<TItem extends FocusableOption = Record
     private _focusKeyManager: FocusKeyManager<TItem>;
 
     /** @hidden */
-    private readonly _onDestroy$ = new Subject<void>();
+    private readonly _onDestroy$ = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -82,15 +84,13 @@ export class FocusKeyManagerListDirective<TItem extends FocusableOption = Record
         this._rtlService?.rtl
             .pipe(
                 filter(() => this.orientation === 'horizontal'),
-                takeUntil(this._onDestroy$)
+                takeUntilDestroyed(this._onDestroy$)
             )
             .subscribe(() => this._applyOrientation());
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
         this._focusKeyManager.destroy();
     }
 

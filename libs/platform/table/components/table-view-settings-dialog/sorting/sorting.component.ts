@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, forwardRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, signal, ViewEncapsulation } from '@angular/core';
 import equal from 'fast-deep-equal/es6';
-import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
@@ -95,10 +94,8 @@ export class SortingComponent implements Resettable {
     /** Table columns */
     readonly columns: SettingsSortDialogColumn[] = [];
 
-    /** @hidden */
-    readonly _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     /** Indicates when reset command is available */
-    readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
+    readonly isResetAvailable$ = signal(false);
 
     /** @hidden */
     readonly SORT_DIRECTION = SortDirection;
@@ -131,7 +128,7 @@ export class SortingComponent implements Resettable {
     reset(): void {
         this.direction = this._initialSorting.direction;
         this.field = this._initialSorting.field;
-        this._isResetAvailableSubject$.next(false);
+        this.isResetAvailable$.set(false);
     }
 
     /** Close dialog */
@@ -162,7 +159,7 @@ export class SortingComponent implements Resettable {
         // Use this coercion cause fd-radio-button triggers extra ngModelChange events on initial phase
         const isInitialDiffers =
             this.direction !== this._initialSorting.direction || this.field !== this._initialSorting.field;
-        this._isResetAvailableSubject$.next(isInitialDiffers);
+        this.isResetAvailable$.set(isInitialDiffers);
     }
 
     /**
@@ -192,6 +189,6 @@ export class SortingComponent implements Resettable {
             return;
         }
 
-        this._isResetAvailableSubject$.next(true);
+        this.isResetAvailable$.set(true);
     }
 }

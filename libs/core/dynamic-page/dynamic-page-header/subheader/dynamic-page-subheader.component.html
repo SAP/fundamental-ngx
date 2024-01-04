@@ -2,7 +2,7 @@
     <div
         class="fd-dynamic-page__collapsible-header"
         [attr.aria-label]="headerAriaLabel"
-        [attr.aria-hidden]="collapsed"
+        [attr.aria-hidden]="_dynamicPageService.collapsed()"
         [attr.id]="collapsibleHeaderId"
         role="region"
         #headerContent
@@ -19,13 +19,13 @@
                     aria-haspopup="true"
                     [ariaLabel]="_toggleButtonAriaLabel"
                     [attr.title]="_toggleButtonAriaLabel"
-                    [attr.aria-expanded]="!collapsed"
+                    [attr.aria-expanded]="!_dynamicPageService.collapsed()"
                     [attr.aria-controls]="id"
                     (click)="toggleCollapse()"
                 >
-                    <fd-icon [glyph]="collapsed ? 'slim-arrow-down' : 'slim-arrow-up'"></fd-icon>
+                    <fd-icon [glyph]="_dynamicPageService.collapsed() ? 'slim-arrow-down' : 'slim-arrow-up'"></fd-icon>
                 </button>
-                @if (pinnable && !collapsed) {
+                @if (pinnable && !_dynamicPageService.collapsed()) {
                     <button
                         fd-button
                         class="fd-dynamic-page__pin-button"

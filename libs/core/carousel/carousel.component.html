@@ -5,7 +5,7 @@
     tabindex="0"
     [style.height]="height"
     [style.width]="width"
-    [attr.dir]="dir"
+    [attr.dir]="_dir$()"
     role="region"
     #carouselContainer
     (click)="_focus()"
@@ -62,7 +62,7 @@
         </div>
     }
     @if (!numericIndicator && _showNavigationButtonInPageIndicatorContainer) {
-        <ol class="fd-carousel__page-indicators" [attr.dir]="dir">
+        <ol class="fd-carousel__page-indicators" [attr.dir]="_dir$()">
             @if (pageIndicator) {
                 @for (item of pageIndicatorsCountArray; track item; let i = $index) {
                     <li

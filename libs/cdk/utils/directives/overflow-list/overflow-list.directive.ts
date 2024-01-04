@@ -1,25 +1,26 @@
-import { ViewportRuler } from '@angular/cdk/overlay';
 import {
     AfterViewInit,
     ContentChildren,
+    DestroyRef,
     Directive,
     ElementRef,
     EventEmitter,
     Input,
     NgZone,
-    OnDestroy,
     Output,
-    QueryList
+    QueryList,
+    inject
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { debounceTime } from 'rxjs/operators';
+import { resizeObservable } from '../../functions';
 import { OverflowListItemDirective } from './overflow-list-item.directive';
 
 @Directive({
     selector: '[fdkOverflowList]',
     standalone: true
 })
-export class OverflowListDirective implements AfterViewInit, OnDestroy {
+export class OverflowListDirective implements AfterViewInit {
     /**
      * @description Offset to calculate correct position
      */
@@ -51,30 +52,22 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
     overflowItems: QueryList<OverflowListItemDirective>;
 
     /** @hidden */
-    private _onDestroy$ = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
         private _el: ElementRef,
-        private _viewportRuler: ViewportRuler,
         private _ngZone: NgZone
     ) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._viewportRuler
-            .change(50)
-            .pipe(takeUntil(this._onDestroy$))
-            // ViewportRuler invoked out of zone, that is why I need to invoke function in zone
-            .subscribe(() => this._ngZone.run(() => this._calculateAmountOfOverflowedItems()));
-
+        this._ngZone.runOutsideAngular(() => {
+            resizeObservable(this._el.nativeElement)
+                .pipe(debounceTime(10), takeUntilDestroyed(this._destroyRef))
+                .subscribe(() => this._ngZone.run(() => this._calculateAmountOfOverflowedItems()));
+        });
         this._calculateAmountOfOverflowedItems();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /**
@@ -88,6 +81,11 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
                 parseFloat(computed.paddingLeft || '0') -
                 parseFloat(computed.paddingRight || '0')
         );
+
+        if (contentWidth <= 0) {
+            return 0;
+        }
+
         return this._checkWidthWithOffset(elements, contentWidth);
     }
 

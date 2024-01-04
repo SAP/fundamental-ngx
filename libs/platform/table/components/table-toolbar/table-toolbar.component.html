@@ -1,15 +1,17 @@
 <ng-template
+    fdpTableToolbarTemplate
     let-counter="counter"
     let-sortable="sortable"
     let-filterable="filterable"
     let-groupable="groupable"
     let-columns="columns"
+    let-hasAnyActions="hasAnyActions"
 >
     <fd-toolbar
         fdType="transparent"
         [clearBorder]="true"
         [titleId]="tableToolbarTitleId"
-        [title]="title && !hideItemCount ? title + ' (' + (counter | async) + ')' : title"
+        [title]="title && !hideItemCount ? title + ' (' + counter() + ')' : title"
         [shouldOverflow]="shouldOverflow"
     >
         @if (_tableToolbarLeftActionsComponent) {
@@ -60,13 +62,7 @@
                     buttonType="transparent"
                 ></fdp-button>
             }
-            @if (
-                tableToolbarActionsComponent ||
-                (sortable | async) ||
-                (filterable | async) ||
-                (groupable | async) ||
-                (columns | async)
-            ) {
+            @if (tableToolbarActionsComponent || hasAnyActions()) {
                 <fd-toolbar-separator fd-toolbar-item fdOverflowPriority="never"></fd-toolbar-separator>
             }
         }
@@ -75,13 +71,7 @@
                 <ng-template [ngTemplateOutlet]="tableToolbarActionsComponent.contentTemplateRef"></ng-template>
             </span>
         }
-        @if (
-            showExpandCollapseButtons ||
-            (sortable | async) ||
-            (filterable | async) ||
-            (groupable | async) ||
-            (columns | async)
-        ) {
+        @if (showExpandCollapseButtons || hasAnyActions()) {
             @if (tableToolbarActionsComponent) {
                 <fd-toolbar-separator fd-toolbar-item fdOverflowPriority="never"></fd-toolbar-separator>
             }
@@ -105,7 +95,7 @@
                     buttonType="transparent"
                 ></fdp-button>
             }
-            @if (sortable | async) {
+            @if (sortable()) {
                 <fdp-button
                     fd-toolbar-item
                     fdOverflowPriority="never"
@@ -117,7 +107,7 @@
                     (click)="openSorting()"
                 ></fdp-button>
             }
-            @if (filterable | async) {
+            @if (filterable()) {
                 <fdp-button
                     fd-toolbar-item
                     fdOverflowPriority="never"
@@ -129,7 +119,7 @@
                     (click)="openFiltering()"
                 ></fdp-button>
             }
-            @if (groupable | async) {
+            @if (groupable()) {
                 <fdp-button
                     fd-toolbar-item
                     fdOverflowPriority="never"
@@ -141,7 +131,7 @@
                     (click)="openGrouping()"
                 ></fdp-button>
             }
-            @if (columns | async) {
+            @if (columns()) {
                 <fdp-button
                     fd-toolbar-item
                     fdOverflowPriority="never"

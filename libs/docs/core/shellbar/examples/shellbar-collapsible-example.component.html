@@ -12,14 +12,16 @@
         <fd-product-menu [control]="productMenuControl" [closePopoverOnSelect]="true" [items]="productMenuItems">
         </fd-product-menu>
         <fd-shellbar-subtitle> Subtitle </fd-shellbar-subtitle>
-        <fdp-search-field
-            placeholder="Search"
-            fdCozy
-            [suggestions]="suggestions"
-            [categories]="categories"
-            (searchSubmit)="onSearchSubmit($event)"
-            (inputChange)="onInputChange($event)"
-        ></fdp-search-field>
+        @if (showSearch) {
+            <fdp-search-field
+                placeholder="Search"
+                fdCozy
+                [suggestions]="suggestions"
+                [categories]="categories"
+                (searchSubmit)="onSearchSubmit($event)"
+                (inputChange)="onInputChange($event)"
+            ></fdp-search-field>
+        }
         <fd-shellbar-actions [user]="user" [userMenu]="userMenu">
             @for (action of actions; track action) {
                 <fd-shellbar-action
@@ -37,3 +39,5 @@
         </fd-shellbar-actions>
     </fd-shellbar>
 </div>
+<p>&nbsp;</p>
+<button fd-button (click)="showSearch = !showSearch">Toggle search</button>

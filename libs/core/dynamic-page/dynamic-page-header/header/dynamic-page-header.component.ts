@@ -9,11 +9,11 @@ import {
     OnDestroy,
     OnInit,
     Renderer2,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed
 } from '@angular/core';
 
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 import { BreadcrumbComponent, FD_BREADCRUMB_COMPONENT } from '@fundamental-ngx/core/breadcrumb';
 import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
@@ -97,10 +97,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     _contentToolbar: DynamicPageTitleContentComponent;
 
     /** @hidden */
-    _collapsed = false;
-
-    /** @hidden */
-    _actionsSquashed = false;
+    _actionsSquashed$ = computed(() => this._dynamicPageService.pixelsSizeChanged() < ActionSquashBreakpointPx);
 
     /** @hidden */
     _size: DynamicPageResponsiveSize;
@@ -112,24 +109,18 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
         private _renderer: Renderer2,
-        private _dynamicPageService: DynamicPageService,
+        readonly _dynamicPageService: DynamicPageService,
         private _changeDetRef: ChangeDetectorRef
     ) {}
 
     /** @hidden */
     ngOnInit(): void {
         this._addClassNameToHostElement(DYNAMIC_PAGE_CLASS_NAME.dynamicPageTitleArea);
-        this._listenToPageChanges();
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
         this._addCustomClassToBreadcrumb();
-
-        this._dynamicPageService.collapsed.pipe(takeUntil(this._onDestroy$)).subscribe((collapsed) => {
-            this._collapsed = collapsed;
-            this._changeDetRef.markForCheck();
-        });
     }
 
     /** @hidden */
@@ -184,16 +175,5 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
                 DYNAMIC_PAGE_CLASS_NAME.dynamicPageBreadcrumb
             );
         }
-    }
-
-    /** @hidden */
-    private _listenToPageChanges(): void {
-        this._dynamicPageService.pixelsSizeChanged.pipe(takeUntil(this._onDestroy$)).subscribe((pixels) => {
-            const actionsSquashed: boolean = pixels < ActionSquashBreakpointPx;
-            if (actionsSquashed !== this._actionsSquashed) {
-                this._actionsSquashed = actionsSquashed;
-                this._changeDetRef.detectChanges();
-            }
-        });
     }
 }

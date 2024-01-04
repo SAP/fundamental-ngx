@@ -21,12 +21,12 @@
                     @if (_totalTab?.counter) {
                         <span class="fd-icon-tab-bar__filter-counter">{{ _totalTab?.counter }}</span>
                     }
-                    <span class="fd-icon-tab-bar__filter-label">{{ _totalTab?.label }}</span>
+                    <span class="fd-icon-tab-bar__filter-label">{{ _totalTab?.label | fdkAsyncOrSync }}</span>
                 </div>
             </a>
         </li>
     }
-    @for (item of _tabs | slice: 1; track item.uId; let idx = $index) {
+    @for (item of _tabs$() | slice: 1; track item.uId; let idx = $index) {
         <li
             [class]="item.cssClasses"
             class="fd-icon-tab-bar__item"
@@ -51,7 +51,7 @@
                         <span class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
                     }
                 </div>
-                <div class="fd-icon-tab-bar__label">{{ item.label }}</div>
+                <div class="fd-icon-tab-bar__label">{{ item.label | fdkAsyncOrSync }}</div>
                 @if (item.color) {
                     <div class="screenreader-only">
                         {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
@@ -72,11 +72,11 @@
             }
         </li>
     }
-    @if (_extraTabs.length) {
+    @if (_extraItems$()) {
         <li role="presentation" class="fd-icon-tab-bar__item fd-icon-tab-bar__item--overflow">
             <fdp-icon-tab-bar-popover
                 [isRtl]="isRtl"
-                [extraTabs]="_extraTabs"
+                [extraTabs]="_extraTabs$()"
                 [colorAssociations]="colorAssociations"
                 (selectedExtraItem)="_selectExtraItem($event)"
                 (focusFirstVisibleItem)="_focusItem(0)"

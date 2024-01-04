@@ -1,15 +1,13 @@
-import { Directive, HostListener, OnDestroy } from '@angular/core';
-import { Subject, fromEvent, interval, timer } from 'rxjs';
+import { DestroyRef, Directive, HostListener, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { fromEvent, interval, timer } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 
 /**
  * This is a base step input directive to be used for increase/decrease buttons.
  */
 @Directive()
-export abstract class StepInputActionButton implements OnDestroy {
-    /** @hidden */
-    protected _destroyed = new Subject<void>();
-
+export abstract class StepInputActionButton {
     /**
      * @hidden
      * Indicates if action can be handled
@@ -21,12 +19,8 @@ export abstract class StepInputActionButton implements OnDestroy {
      * Step input button action handler
      */
     abstract runAction(): void;
-
-    /** @hidden  */
-    ngOnDestroy(): void {
-        this._destroyed.next();
-        this._destroyed.complete();
-    }
+    /** @hidden */
+    protected _destroyed = inject(DestroyRef);
 
     /** @hidden */
     @HostListener('mousedown')
@@ -41,7 +35,7 @@ export abstract class StepInputActionButton implements OnDestroy {
                 switchMap(() => interval(40)),
                 takeUntil(fromEvent(window, 'mouseup', { capture: true, once: true }))
             )
-            .pipe(takeUntil(this._destroyed))
+            .pipe(takeUntilDestroyed(this._destroyed))
             .subscribe(() => this.runAction());
 
         this.runAction();

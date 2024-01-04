@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/no-host-metadata-property */
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -36,7 +36,7 @@ export class NavigationLinkRefDirective {
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'a[fdb-navigation-link]',
-    imports: [IconComponent, AsyncPipe, NgTemplateOutlet],
+    imports: [IconComponent, NgTemplateOutlet],
     hostDirectives: [RouterLinkActive],
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -145,7 +145,7 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
             return;
         }
 
-        const expansionKey = this._rtl?.rtl ? RIGHT_ARROW : LEFT_ARROW;
+        const expansionKey = this._rtl?.rtl.value ? RIGHT_ARROW : LEFT_ARROW;
 
         this._listItemComponent?.keyboardExpanded(KeyUtil.isKeyCode(event, expansionKey));
     }

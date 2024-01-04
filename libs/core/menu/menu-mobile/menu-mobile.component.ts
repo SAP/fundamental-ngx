@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -7,13 +7,14 @@ import {
     ElementRef,
     Inject,
     NgZone,
-    OnDestroy,
     OnInit,
     Optional,
     TemplateRef,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InitialFocusDirective, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -27,8 +28,7 @@ import {
 } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleModule } from '@fundamental-ngx/core/title';
-import { Observable, of } from 'rxjs';
-import { map, startWith, take, takeUntil } from 'rxjs/operators';
+import { startWith, take } from 'rxjs/operators';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MENU_COMPONENT, MenuInterface } from '../menu.interface';
 import { MenuService } from '../services/menu.service';
@@ -49,11 +49,10 @@ import { MenuService } from '../services/menu.service';
         CdkScrollable,
         ScrollbarDirective,
         NgTemplateOutlet,
-        InitialFocusDirective,
-        AsyncPipe
+        InitialFocusDirective
     ]
 })
-export class MenuMobileComponent extends MobileModeBase<MenuInterface> implements OnInit, OnDestroy {
+export class MenuMobileComponent extends MobileModeBase<MenuInterface> implements OnInit {
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
@@ -70,7 +69,9 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     view: TemplateRef<any> | undefined;
 
     /** @hidden Navigation icon name based on RTL */
-    navigationIcon$: Observable<string>;
+    navigationIcon$ = computed(() =>
+        this._rtlService?.rtlSignal() ? 'navigation-right-arrow' : 'navigation-left-arrow'
+    );
 
     /** @hidden */
     @ViewChild(DialogBodyComponent)
@@ -98,12 +99,6 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     ngOnInit(): void {
         this._listenOnActivePathChange();
         this._listenOnMenuOpenChange();
-        this._listenOnTextDirection();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        super.onDestroy();
     }
 
     /** Closes the Dialog and Menu component */
@@ -139,7 +134,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
             .map((node) => node.item)
             .filter((v): v is MenuItemComponent => !!v);
         this._component.activePath
-            .pipe(takeUntil(this._onDestroy$), startWith(initialItemPath))
+            .pipe(startWith(initialItemPath), takeUntilDestroyed(this._destroyRef))
             .subscribe((items) => this._setMenuView(items));
     }
 
@@ -170,15 +165,8 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     /** @hidden Opens/closes the Dialog based on Menu isOpenChange events */
     private _listenOnMenuOpenChange(): void {
         this._component.isOpenChange
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((isOpen) => (isOpen ? this._openDialog() : this.dialogRef.close()));
-    }
-
-    /** @hidden Sets navigation arrow depending on text direction */
-    private _listenOnTextDirection(): void {
-        this.navigationIcon$ = this._rtlService
-            ? this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow')))
-            : of('navigation-left-arrow');
     }
 
     /** @hidden Returns dialog title */

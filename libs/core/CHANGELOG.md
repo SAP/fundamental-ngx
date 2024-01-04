@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.26...v0.48.0-rc.27) (2024-01-03)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.48.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.25...v0.48.0-rc.26) (2024-01-03)
+
+
+### Bug Fixes
+
+* **core:** toolbar title styling ([#11144](https://github.com/SAP/fundamental-ngx/issues/11144)) ([1dca9bf](https://github.com/SAP/fundamental-ngx/commit/1dca9bf2f2afe948ba1423006f7d3aa7c39e66bd))
+
+
+
+
+
+# [0.48.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.24...v0.48.0-rc.25) (2024-01-03)
+
+
+### Bug Fixes
+
+* **core:** dynamically render search field ([#11143](https://github.com/SAP/fundamental-ngx/issues/11143)) ([0acb1aa](https://github.com/SAP/fundamental-ngx/commit/0acb1aaa423c21473e8502206810f45d834006ba))
+
+
+
+
+
+# [0.48.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.23...v0.48.0-rc.24) (2024-01-02)
+
+
+### Bug Fixes
+
+* **core:** hover tooltip for multi input ([#11121](https://github.com/SAP/fundamental-ngx/issues/11121)) ([e31808a](https://github.com/SAP/fundamental-ngx/commit/e31808a170abb98d25df09d3cd0b105625027d19))
+
+
+
+
+
+# [0.48.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.22...v0.48.0-rc.23) (2023-12-30)
+
+
+### Features
+
+* **core,platform,cx:** partial signals migration ([#11142](https://github.com/SAP/fundamental-ngx/issues/11142)) ([4a7ba11](https://github.com/SAP/fundamental-ngx/commit/4a7ba11b96913403dc29198e33f6c81238860008))
+
+
+
+
+
 # [0.48.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.21...v0.48.0-rc.22) (2023-12-28)
 
 
