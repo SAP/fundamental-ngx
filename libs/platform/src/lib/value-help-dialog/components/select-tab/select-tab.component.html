@@ -35,7 +35,7 @@
             <tr fd-table-row *ngIf="displayedData.length && _tableFilters">
                 <th fd-table-cell [fitContent]="mobile">
                     <fd-checkbox
-                        *ngIf="isMultiSelection"
+                        *ngIf="isMultiSelection && allowSelectAll"
                         [name]="uid + '-row-all'"
                         [tristate]="true"
                         [tristateSelectable]="false"

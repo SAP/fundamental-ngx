@@ -1,18 +1,9 @@
-import {
-    ContentChildren,
-    Directive,
-    HostListener,
-    Inject,
-    inject,
-    Input,
-    NgModule,
-    QueryList
-} from '@angular/core';
+import { ContentChildren, Directive, HostListener, Inject, inject, Input, NgModule, QueryList } from '@angular/core';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { firstValueFrom, Observable } from 'rxjs';
-import { TokenComponent } from "@fundamental-ngx/core/token";
+import { TokenComponent } from '@fundamental-ngx/core/token';
 
 @Directive({
     selector: '[fdMultiAnnouncer]',
