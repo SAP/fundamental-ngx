@@ -66,7 +66,7 @@ export abstract class CollectionBaseInput extends BaseInput {
     /** @hidden */
     public lookupValue(item: any): string {
         if (isSelectItem(item)) {
-            return this.lookupKey && item ? item.value[this.lookupKey] : item.value;
+            return this.lookupKey && item && item.value ? item.value[this.lookupKey] : item.value;
         } else {
             return this.lookupKey && item ? item[this.lookupKey] : item;
         }
