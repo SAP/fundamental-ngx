@@ -15,8 +15,8 @@ import { IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 
 export type LabelType = 'numeric' | 'icon';
 const labelColorRange = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
-export type LabelColor = (typeof labelColorRange)[number];
-export type LabelColorInput = LabelColor | `${LabelColor}`;
+export type InfoLabelColor = (typeof labelColorRange)[number];
+export type InfoLabelColorInput = InfoLabelColor | `${InfoLabelColor}`;
 
 @Component({
     selector: 'fd-info-label',
@@ -54,7 +54,7 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder, H
 
     /** Define the colour of the info label starting form 1 to 10 */
     @Input()
-    color: LabelColorInput = 7;
+    color: Nullable<InfoLabelColorInput> = 7;
 
     /** Define the text content of the info label */
     @Input()

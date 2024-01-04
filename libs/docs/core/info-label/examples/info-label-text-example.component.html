@@ -1,5 +1,5 @@
-@for (item of ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']; track item) {
+@for (color of infoLabelColors; track color) {
     <div style="margin-top: 10px">
-        <fd-info-label label="Info Label" [color]="item" title="Info Label"></fd-info-label>
+        <fd-info-label label="Info Label" [color]="color" title="Info Label"></fd-info-label>
     </div>
 }
