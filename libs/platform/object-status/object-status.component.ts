@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 
 import { ColorAccent, KeyUtil, Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
 import { ObjectStatusComponent as CoreObjectStatusComponent, ObjectStatus } from '@fundamental-ngx/core/object-status';
 
 @Directive({
@@ -59,6 +60,10 @@ export class ObjectStatusComponent {
      */
     @Input()
     glyph: Nullable<string>;
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /**
      * A number representing the indication color.

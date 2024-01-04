@@ -2,7 +2,7 @@
     class="fd-switch fd-switch-no-animate"
     (click)="focus()"
     [style.cursor]="disabled ? 'auto' : 'pointer'"
-    [class.is-compact]="_contentDensityObserver.isCompact$ | async"
+    [class.is-compact]="_contentDensityObserver.isCompactSignal()"
     [class.fd-switch--semantic]="semantic"
     [class.fd-switch--text]="activeText || inactiveText"
     [class.is-disabled]="disabled"
@@ -30,7 +30,7 @@
                         {{ activeText }}
                     </span>
                 } @else {
-                    <i role="presentation" class="fd-switch__icon fd-switch__icon--on sap-icon--accept"></i>
+                    <fd-icon role="presentation" class="fd-switch__icon fd-switch__icon--on" glyph="accept"></fd-icon>
                 }
                 <span class="fd-switch__handle" role="presentation"></span>
                 @if (inactiveText) {
@@ -38,12 +38,11 @@
                         {{ inactiveText }}
                     </span>
                 } @else {
-                    <i
+                    <fd-icon
                         role="presentation"
                         class="fd-switch__icon--off fd-switch__icon"
-                        [class.sap-icon--decline]="semantic"
-                        [class.sap-icon--less]="!semantic"
-                    ></i>
+                        [glyph]="semantic ? 'decline' : 'less'"
+                    ></fd-icon>
                 }
             </div>
             @if (semantic) {

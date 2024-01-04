@@ -1,18 +1,18 @@
-<div class="fd-table__text--no-wrap" [class.fd-table__inner]="hasSorting || hasFilter">
+<div class="fd-table__text--no-wrap" [class.fd-table__inner]="hasSorting$() || hasFilter$()">
     <ng-template
         [ngTemplateOutlet]="tableHeaderCellContentTemplate"
         [ngTemplateOutletContext]="{ column: column }"
     ></ng-template>
-    @if (hasSorting || hasFilter) {
+    @if (hasSorting$() || hasFilter$()) {
         <div class="fd-table__column-header-icons">
-            @if (hasFilter) {
+            @if (hasFilter$()) {
                 <fd-icon fd-table-icon glyph="filter"></fd-icon>
             }
-            @if (hasSorting) {
+            @if (hasSorting$()) {
                 <fd-icon
                     fd-table-icon
                     [ariaHidden]="true"
-                    [glyph]="sorting?.direction === SORT_DIRECTION.ASC ? 'sort-ascending' : 'sort-descending'"
+                    [glyph]="sorting$()?.direction === SORT_DIRECTION.ASC ? 'sort-ascending' : 'sort-descending'"
                 ></fd-icon>
             }
         </div>

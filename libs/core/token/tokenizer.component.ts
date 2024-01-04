@@ -9,7 +9,7 @@ import {
     SPACE,
     UP_ARROW
 } from '@angular/cdk/keycodes';
-import { AsyncPipe, DOCUMENT, NgTemplateOutlet } from '@angular/common';
+import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -17,6 +17,7 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     HostListener,
@@ -33,8 +34,10 @@ import {
     ViewChildren,
     ViewContainerRef,
     ViewEncapsulation,
-    forwardRef
+    forwardRef,
+    inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     CssClassBuilder,
     KeyUtil,
@@ -46,12 +49,13 @@ import {
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { BehaviorSubject, Observable, Subject, Subscription, fromEvent, merge, startWith } from 'rxjs';
-import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, Subscription, fromEvent, merge, startWith } from 'rxjs';
+import { debounceTime, filter, map } from 'rxjs/operators';
 import { TokenComponent } from './token.component';
 
 @Component({
@@ -70,7 +74,6 @@ import { TokenComponent } from './token.component';
         PopoverControlComponent,
         PopoverBodyComponent,
         ListModule,
-        AsyncPipe,
         FdTranslatePipe
     ]
 })
@@ -113,22 +116,6 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         return this.tokenList.filter((token) => token.elementRef.nativeElement.style.display === 'none');
     }
 
-    /**
-     * @hidden
-     * Observable state of the compact mode.
-     */
-    get _compact$(): Observable<boolean> {
-        return this._contentDensityObserver.isCompact$;
-    }
-
-    /**
-     * @hidden
-     * Component is in compact mode, determined by the consumer
-     */
-    get _compact(): boolean {
-        return this._contentDensityObserver.isCompact;
-    }
-
     /** @hidden */
     inputGroupAddonEl: ElementRef;
 
@@ -147,6 +134,10 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     /** Icon of the button on the right of the input field. */
     @Input()
     glyph: string;
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** Word to use for when there are extra tokens. */
     @Input()
@@ -214,7 +205,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     private _directionShiftIsRight: boolean | null = null;
 
     /** An RxJS Subject that will kill the data stream upon destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _eventListeners: (() => void)[] = [];
@@ -276,7 +267,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             });
         });
 
-        if (!this._compact && !this.compactCollapse) {
+        if (!this._contentDensityObserver.isCompact && !this.compactCollapse) {
             this._handleCozyTokenCount();
         }
         this._listenElementEvents();
@@ -288,8 +279,6 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     ngOnDestroy(): void {
         this.tokenListChangesSubscription?.unsubscribe();
         this._tokenElementFocusedSub?.unsubscribe();
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
         this._eventListeners.forEach((e) => e());
         this._unsubscribeClicks();
     }
@@ -392,7 +381,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             const elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
             this._resetTokens();
             this.previousElementWidth = elementWidth;
-            if (!this._compact && !this.compactCollapse) {
+            if (!this._contentDensityObserver.isCompact && !this.compactCollapse) {
                 this._handleCozyTokenCount();
             }
         }
@@ -401,7 +390,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     /** @hidden */
     handleKeyDown(event: KeyboardEvent, fromIndex: number): void {
         let newIndex: number | undefined;
-        const rtl = this._rtlService && this._rtlService.rtl ? this._rtlService.rtl.getValue() : false;
+        const rtl = !!this._rtlService?.rtlSignal();
         if (KeyUtil.isKeyCode(event, SPACE) && !this._isInputFocused()) {
             const token = this.tokenList.find((_, index) => index === fromIndex);
             this.tokenList.forEach((shadowedToken) => {
@@ -572,7 +561,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         if (this._forceAllTokensToDisplay) {
             return;
         }
-        if (!this._compact && !this.compactCollapse) {
+        if (!this._contentDensityObserver.isCompact && !this.compactCollapse) {
             this._getHiddenCozyTokenCount();
             return;
         }
@@ -636,7 +625,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     private _resetTokens(): void {
         this.moreTokensLeft = [];
         this.moreTokensRight = [];
-        if (this._compact || this.compactCollapse || this._forceAllTokensToDisplay) {
+        if (this._contentDensityObserver.isCompact || this.compactCollapse || this._forceAllTokensToDisplay) {
             this.tokenList.forEach((token) => {
                 this._makeElementVisible(token.elementRef);
             });
@@ -841,7 +830,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             .pipe(
                 // debounceTime is needed in order to filter subsequent focus-blur events, that happen simultaneously
                 debounceTime(10),
-                takeUntil(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((focused) => {
                 this._tokenizerHasFocus = focused;
@@ -853,7 +842,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     private _listenOnResize(): void {
         this.onResize();
         resizeObservable(this.elementRef.nativeElement)
-            .pipe(debounceTime(30), takeUntil(this._onDestroy$))
+            .pipe(debounceTime(30), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this.onResize());
     }
 

@@ -38,7 +38,7 @@ import {
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { TitleToken } from '@fundamental-ngx/core/title';
+import { TitleComponent, TitleToken } from '@fundamental-ngx/core/title';
 import { BehaviorSubject, combineLatest, map, Observable, startWith } from 'rxjs';
 import { ToolbarItem } from './abstract-toolbar-item.class';
 import { ToolbarSeparatorComponent } from './toolbar-separator.component';
@@ -70,7 +70,14 @@ export const enum OverflowPriorityEnum {
         })
     ],
     standalone: true,
-    imports: [ToolbarSpacerDirective, ToolbarSeparatorComponent, PopoverModule, ButtonComponent, DynamicPortalComponent]
+    imports: [
+        ToolbarSpacerDirective,
+        ToolbarSeparatorComponent,
+        PopoverModule,
+        ButtonComponent,
+        DynamicPortalComponent,
+        TitleComponent
+    ]
 })
 export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssClassBuilder, AfterContentInit {
     /**
@@ -139,7 +146,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     ariaLabelledBy: string;
 
     /** @hidden */
-    @ViewChild('titleElement')
+    @ViewChild('titleElement', { read: ElementRef })
     titleElement: ElementRef<HTMLHeadElement>;
 
     /** @hidden */

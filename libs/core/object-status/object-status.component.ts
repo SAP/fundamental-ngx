@@ -10,7 +10,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ColorAccent, CssClassBuilder, Nullable, NullableObject, applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 import { FD_OBJECT_STATUS_COMPONENT } from './tokens';
 
 export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' | 'neutral';
@@ -23,6 +23,7 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' 
             <fd-icon
                 class="fd-object-status__icon"
                 [glyph]="glyph"
+                [font]="glyphFont"
                 [attr.role]="glyphAriaLabel ? 'presentation' : ''"
                 [ariaLabel]="glyphAriaLabel"
             >
@@ -47,7 +48,7 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' 
         }
     ],
     host: {
-        '[attr.tabindex]': 'clickable ? 0 : -1'
+        '[attr.tabindex]': 'clickable ? 0 : null'
     },
     standalone: true,
     imports: [IconComponent, NgTemplateOutlet]
@@ -70,6 +71,10 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
      */
     @Input()
     glyph: Nullable<string>;
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** Define the text content of the Object Status */
     @Input()

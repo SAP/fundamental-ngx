@@ -1,13 +1,13 @@
-import { BehaviorSubject } from 'rxjs';
+import { signal } from '@angular/core';
 
 export class TableService {
     /** @hidden */
-    propagateKeys$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+    propagateKeys$ = signal<string[]>([]);
 
     /** @hidden */
     changeKeys(keys: string[]): void {
         if (keys && keys.length > 0) {
-            this.propagateKeys$.next([...keys]);
+            this.propagateKeys$.set([...keys]);
         }
     }
 }

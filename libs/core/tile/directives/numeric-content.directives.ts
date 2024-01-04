@@ -1,5 +1,6 @@
-import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit, inject } from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont, fdBuildIconClass } from '@fundamental-ngx/core/icon';
 
 export type NumericContentState = 'negative' | 'critical' | 'positive' | 'informative' | 'neutral';
 export type NumericContentSize = 's' | 'm' | 'l';
@@ -25,17 +26,8 @@ export class NumericContentDirective implements OnInit, OnChanges, CssClassBuild
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden
+    /**
+     * @hidden
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -48,6 +40,16 @@ export class NumericContentDirective implements OnInit, OnChanges, CssClassBuild
             this.class,
             this._isSmallTile() ? 'fd-numeric-content--small-tile' : ''
         ];
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */
@@ -89,8 +91,27 @@ export class NumericContentLaunchIconDirective implements OnInit, OnChanges, Css
     @Input()
     glyph: string;
 
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
+
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
+    readonly elementRef = inject(ElementRef);
+
+    /**
+     * @hidden
+     * CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [
+            'fd-numeric-content__launch-icon',
+            this.glyph ? fdBuildIconClass(this.glyphFont, this.glyph) : '',
+            this.class
+        ];
+    }
 
     /** @hidden */
     ngOnChanges(): void {
@@ -100,16 +121,6 @@ export class NumericContentLaunchIconDirective implements OnInit, OnChanges, Css
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-    }
-
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return ['fd-numeric-content__launch-icon', this.glyph ? 'sap-icon--' + this.glyph : '', this.class];
     }
 }
 
@@ -143,7 +154,18 @@ export class NumericContentKpiDirective implements OnInit, OnChanges, CssClassBu
     glyph: string;
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
+    readonly elementRef = inject(ElementRef);
+
+    /**
+     * @hidden
+     * CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return ['fd-numeric-content__kpi', this.state ? 'fd-numeric-content__kpi--' + this.state : '', this.class];
+    }
 
     /** @hidden */
     ngOnChanges(): void {
@@ -153,16 +175,6 @@ export class NumericContentKpiDirective implements OnInit, OnChanges, CssClassBu
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-    }
-
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return ['fd-numeric-content__kpi', this.state ? 'fd-numeric-content__kpi--' + this.state : '', this.class];
     }
 }
 
@@ -191,8 +203,26 @@ export class NumericContentScaleArrowDirective implements OnInit, OnChanges, Css
     @Input()
     glyph: string;
 
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
+
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
+    readonly elementRef = inject(ElementRef);
+
+    /** @hidden
+     * CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [
+            'fd-numeric-content__scale-arrow',
+            this.glyph ? fdBuildIconClass(this.glyphFont, this.glyph) : '',
+            this.class
+        ];
+    }
 
     /** @hidden */
     ngOnChanges(): void {
@@ -202,16 +232,6 @@ export class NumericContentScaleArrowDirective implements OnInit, OnChanges, Css
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-    }
-
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return ['fd-numeric-content__scale-arrow', this.glyph ? 'sap-icon--' + this.glyph : '', this.class];
     }
 }
 
@@ -230,7 +250,18 @@ export class NumericContentScaleDirective implements OnInit, OnChanges, CssClass
     class: string;
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
+    readonly elementRef = inject(ElementRef);
+
+    /**
+     * @hidden
+     * CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return ['fd-numeric-content__scale', this.state ? 'fd-numeric-content__scale--' + this.state : '', this.class];
+    }
 
     /** @hidden */
     ngOnChanges(): void {
@@ -240,16 +271,6 @@ export class NumericContentScaleDirective implements OnInit, OnChanges, CssClass
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-    }
-
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return ['fd-numeric-content__scale', this.state ? 'fd-numeric-content__scale--' + this.state : '', this.class];
     }
 }
 

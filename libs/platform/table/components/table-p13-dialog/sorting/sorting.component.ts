@@ -5,7 +5,8 @@ import {
     Pipe,
     PipeTransform,
     ViewEncapsulation,
-    forwardRef
+    forwardRef,
+    signal
 } from '@angular/core';
 import {
     CollectionSort,
@@ -13,7 +14,6 @@ import {
     TableDialogCommonData,
     getUniqueListValuesByKey
 } from '@fundamental-ngx/platform/table-helpers';
-import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
@@ -106,10 +106,8 @@ export class P13SortingDialogComponent implements Resettable {
     /** Table columns available for sorting */
     readonly columns: SortDialogColumn[] = [];
 
-    /** @hidden */
-    private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     /** Indicates when reset command is available */
-    readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
+    readonly isResetAvailable$ = signal(false);
 
     /** @hidden */
     readonly SORT_DIRECTION = SortDirection;
@@ -132,7 +130,7 @@ export class P13SortingDialogComponent implements Resettable {
     /** Reset changes to the initial state */
     reset(): void {
         this._initiateRules();
-        this._isResetAvailableSubject$.next(false);
+        this.isResetAvailable$.set(false);
     }
 
     /** Close dialog */
@@ -180,7 +178,7 @@ export class P13SortingDialogComponent implements Resettable {
     /** @hidden */
     _recalculateResetAvailability(): void {
         const hasOnlyOneEmptyRule = this.rules.length === 1 && !this.rules[0].isValid;
-        this._isResetAvailableSubject$.next(!hasOnlyOneEmptyRule);
+        this.isResetAvailable$.set(!hasOnlyOneEmptyRule);
     }
 
     /** @hidden */

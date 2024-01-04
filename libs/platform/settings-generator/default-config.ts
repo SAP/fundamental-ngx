@@ -4,6 +4,6 @@ export const FDP_SETTINGS_GENERATOR_DEFAULT_CONFIG: SidebarSettingsGeneratorConf
     defaultLayout: 'sidebar',
     sidebar: {
         mobileBreakpoint: 700,
-        width: '25%'
+        width: '20rem'
     }
 };

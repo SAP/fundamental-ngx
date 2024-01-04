@@ -286,9 +286,7 @@ export class MenuComponent
     ngOnDestroy(): void {
         this._destroyMobileComponent();
         this._destroyEventListeners();
-        this._menuService.onDestroy();
         this._subscriptions.unsubscribe();
-        this._popoverService.onDestroy();
     }
 
     /** @hidden */

@@ -22,8 +22,8 @@ import {
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
 import {
     ContentDensityService,
@@ -32,6 +32,7 @@ import {
     TemplateDirective,
     warnOnce
 } from '@fundamental-ngx/cdk/utils';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
 import { ListComponent } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
@@ -97,6 +98,10 @@ export abstract class BaseSelect
     /** Glyph to add icon in the select component. */
     @Input()
     glyph = 'slim-arrow-down';
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** The element to which the popover should be appended. */
     @Input()
@@ -397,7 +402,7 @@ export abstract class BaseSelect
         }
 
         fromEvent(window, 'resize')
-            .pipe(takeUntil(this._destroyed))
+            .pipe(takeUntilDestroyed(this._destroyed))
             .subscribe(() => this._getOptionsListWidth());
     }
 

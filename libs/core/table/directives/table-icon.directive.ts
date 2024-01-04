@@ -1,5 +1,6 @@
-import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit, inject } from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont, fdBuildIconClass } from '@fundamental-ngx/core/icon';
 
 @Directive({
     selector: '[fdTableIcon], [fd-table-icon]',
@@ -13,21 +14,41 @@ export class TableIconDirective implements OnChanges, CssClassBuilder, OnInit {
     /** The property allows user to pass additional css classes
      */
     @Input()
-    public class = '';
+    class = '';
 
     /** The icon to include in the button. See the icon page for the list of icons.
      * Setter is used to control when css class have to be rebuilded.
      * Default value is set to ''.
      */
     @Input()
-    public glyph = '';
+    glyph = '';
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** Whether or no icon is used as navigation  */
     @Input()
     navigation = false;
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
+    readonly elementRef = inject(ElementRef);
+
+    /**
+     * @hidden
+     * CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [
+            'fd-table__icon',
+            this.glyph ? fdBuildIconClass(this.glyphFont, this.glyph) : '',
+            this.navigation ? 'fd-table__icon--navigation' : '',
+            this.class
+        ];
+    }
 
     /** Function runs when component is initialized
      * function should build component css class
@@ -40,19 +61,5 @@ export class TableIconDirective implements OnChanges, CssClassBuilder, OnInit {
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-    }
-
-    /** @hidden CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            'fd-table__icon',
-            this.glyph ? `sap-icon--${this.glyph}` : '',
-            this.navigation ? 'fd-table__icon--navigation' : '',
-            this.class
-        ];
     }
 }

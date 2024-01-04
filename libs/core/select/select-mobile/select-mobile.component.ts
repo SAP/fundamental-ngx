@@ -42,26 +42,19 @@ import { SELECT_COMPONENT, SelectInterface } from '../select.interface';
     imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, NgTemplateOutlet, ButtonBarComponent]
 })
 export class SelectMobileComponent extends MobileModeBase<SelectInterface> implements OnInit, AfterViewInit, OnDestroy {
-    /** @hidden
+    /** @hidden */
+    @ViewChild('dialogTemplate')
+    _dialogTemplate: TemplateRef<any>;
+
+    /**
+     * @hidden
      * from mobile class can not prefix _,
      * to avoid build issues
      */
     childContent: TemplateRef<any> | null = null;
 
     /** @hidden */
-    @ViewChild('dialogTemplate')
-    _dialogTemplate: TemplateRef<any>;
-
-    /** @hidden */
     private _subscriptions = new Subscription();
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    onItemKeydown(event: KeyboardEvent): void {
-        if (event && KeyUtil.isKeyCode(event, [ESCAPE])) {
-            this._component.close(true);
-        }
-    }
 
     /** @hidden */
     constructor(
@@ -71,6 +64,14 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
         @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
     ) {
         super(_elementRef, _dialogService, _selectComponent, MobileModeControl.SELECT, mobileModes);
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    onItemKeydown(event: KeyboardEvent): void {
+        if (event && KeyUtil.isKeyCode(event, [ESCAPE])) {
+            this._component.close(true);
+        }
     }
 
     /** @hidden */
@@ -87,7 +88,6 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
     /** @hidden */
     ngOnDestroy(): void {
         this.dialogRef.close();
-        super.onDestroy();
         this._subscriptions.unsubscribe();
     }
 

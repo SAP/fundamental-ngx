@@ -18,6 +18,7 @@ import {
     SimpleChanges,
     ViewChildren,
     ViewEncapsulation,
+    computed,
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -35,6 +36,7 @@ import {
 } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import {
     TableCellDirective,
     TableIconDirective,
@@ -100,7 +102,8 @@ import { TableEditableCellComponent } from '../table-editable-cell/table-editabl
         FdTranslatePipe,
         SelectionCellStylesPipe,
         TableCellStylesPipe,
-        ColumnResizableSidePipe
+        ColumnResizableSidePipe,
+        IconComponent
     ]
 })
 export class TableRowComponent<T> extends TableRowDirective implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -172,10 +175,10 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     }
 
     /** @hidden */
-    _hasRowHeaderColumn = false;
+    _hasRowHeaderColumn$ = computed(() => this._fdpTableService.visibleColumns$().some((c) => c.role === 'rowheader'));
 
     /** @hidden */
-    _rtl = false;
+    readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
     _rowSelectionHelperTextId = `rowSelectionHelper-${uuidv4()}`;
@@ -226,10 +229,6 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     /** @hidden */
     constructor() {
         super();
-        this._rtlService?.rtl.pipe(takeUntilDestroyed()).subscribe((rtl) => {
-            this._rtl = rtl;
-        });
-
         this._tableColumnResizeService.resizeInProgress$
             .pipe(
                 switchMap(() => this._tableColumnResizeService.markForCheck),
@@ -254,10 +253,6 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
-        this._fdpTableService.visibleColumns$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((columns) => {
-            this._hasRowHeaderColumn = columns.some((c) => c.role === 'rowheader');
-            this._cdr.markForCheck();
-        });
     }
 
     /** @hidden */

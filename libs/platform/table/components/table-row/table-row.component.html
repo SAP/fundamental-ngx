@@ -1,4 +1,4 @@
-@if (_fdpTableService._semanticHighlighting$ | async; as semanticHighlighting) {
+@if (_fdpTableService._semanticHighlighting$(); as semanticHighlighting) {
     <td
         fd-table-cell
         fd-table-status-indicator
@@ -31,14 +31,13 @@
         <td
             class="fd-table__cell--checkbox"
             [class.fd-table__cell--fixed]="fixed"
-            [attr.role]="_hasRowHeaderColumn ? 'rowheader' : 'gridcell'"
+            [attr.role]="_hasRowHeaderColumn$() ? 'rowheader' : 'gridcell'"
             fd-table-cell
             fd-table-cell-selectable
             [focusable]="true"
             [style]="
-                _contentDensityObserver
-                    | async
-                    | selectionCellStyles: _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
+                _contentDensityObserver.contentDensity$()
+                    | selectionCellStyles: _rtl$() : _fdpTableService._semanticHighlightingColumnWidth$()
             "
             [attr.aria-selected]="row.checked"
             [attr.aria-labelledby]="_rowSelectionHelperTextId"
@@ -71,9 +70,8 @@
             [attr.aria-labelledby]="_rowSelectionHelperTextId"
             [attr.aria-selected]="row.checked"
             [style]="
-                _contentDensityObserver
-                    | async
-                    | selectionCellStyles: _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
+                _contentDensityObserver.contentDensity$()
+                    | selectionCellStyles: _rtl$() : _fdpTableService._semanticHighlightingColumnWidth$()
             "
         >
             <ng-template [ngTemplateOutlet]="selectionScreenReaderText"></ng-template>
@@ -97,14 +95,14 @@
         ></td>
     }
 }
-@for (column of _fdpTableService.visibleColumns$ | async; track column.name) {
+@for (column of _fdpTableService.visibleColumns$(); track column.name) {
     <td
         #tableCellElement
         [fdpTableCellResizable]="
             $index
                 | columnResizableSide
-                    : _fdpTableService.visibleColumnsLength
-                    : (_fdpTableService._isShownNavigationColumn$ | async) === true
+                    : _fdpTableService.visibleColumnsLength()
+                    : _fdpTableService._isShownNavigationColumn$()
         "
         [columnName]="column.name"
         [focusable]="true"
@@ -117,13 +115,13 @@
             column._endFreezed ? 'fd-table__cell--fixed-end' : '',
             column.name === freezeEndColumnsTo ? 'fd-table__cell--fixed-end-last' : '',
             row.isTree && $index === 0 ? 'fd-table__cell--expand' : '',
-            $last && (_fdpTableService._isShownNavigationColumn$ | async) === false ? 'is-last-child' : ''
+            $last && !_fdpTableService._isShownNavigationColumn$() ? 'is-last-child' : ''
         ]"
         [ngStyle]="
             column
                 | tableCellStyles
-                    : _rtl
-                    : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
+                    : _rtl$()
+                    : _fdpTableService._semanticHighlightingColumnWidth$()
                     : selectionColumnWidth
                     : column._freezed
                     : column._endFreezed
@@ -190,22 +188,22 @@
     </td>
 }
 <ng-content></ng-content>
-@if (_fdpTableService._isShownNavigationColumn$ | async) {
+@if (_fdpTableService._isShownNavigationColumn$()) {
     <td fd-table-cell class="fdp-table__cell--navigation is-last-child" fdkDisabled [addDisabledClass]="false">
         @if (row.navigatable) {
-            <i
+            <fd-icon
                 fd-table-icon
                 [navigation]="true"
-                [class]="_rtl ? 'sap-icon--slim-arrow-left' : 'sap-icon--slim-arrow-right'"
+                [glyph]="_rtl$() ? 'slim-arrow-left' : 'slim-arrow-right'"
                 class="fdp-table__navigation-indicator"
-            ></i>
+            ></fd-icon>
         }
     </td>
 }
 <td
     aria-hidden="true"
     class="fd-table__cell fd-table__cell--mock"
-    [class.fd-table__cell--mock-borderless]="(_tableColumnResizeService.cellMockVisible$ | async) !== true"
+    [class.fd-table__cell--mock-borderless]="!_tableColumnResizeService.cellMockVisible$()"
     fdkDisabled
     [addDisabledClass]="false"
 ></td>

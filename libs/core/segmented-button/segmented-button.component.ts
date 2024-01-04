@@ -17,6 +17,7 @@ import {
     QueryList,
     SimpleChanges,
     ViewEncapsulation,
+    effect,
     forwardRef
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -100,11 +101,9 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         @Optional() private _rtlService: RtlService
     ) {
         this._focusableList.navigationDirection = this.vertical ? 'vertical' : 'horizontal';
-        if (this._rtlService) {
-            this._rtlService.rtl.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isRtl: boolean) => {
-                this._focusableList.contentDirection = isRtl ? 'rtl' : 'ltr';
-            });
-        }
+        effect(() => {
+            this._focusableList.contentDirection = this._rtlService?.rtlSignal() ? 'rtl' : 'ltr';
+        });
     }
 
     /** @hidden */

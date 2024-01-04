@@ -11,6 +11,7 @@ import {
 
 import { ModuleDeprecation, Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ButtonType, ButtonComponent as CoreButtonComponent, GlyphPosition } from '@fundamental-ngx/core/button';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
 /**
@@ -41,6 +42,10 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
      */
     @Input()
     glyph: string;
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** The buttonType of the button. Types includes
      'standard','positive', 'negative', 'attention', 'ghost',

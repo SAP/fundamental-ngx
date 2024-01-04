@@ -4,18 +4,20 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     ElementRef,
     Input,
     OnChanges,
-    OnDestroy,
     OnInit,
     SimpleChanges,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { Subject } from 'rxjs';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 
 export type ProgressIndicatorState = 'informative' | 'positive' | 'critical' | 'negative';
 
@@ -26,9 +28,9 @@ export type ProgressIndicatorState = 'informative' | 'positive' | 'critical' | '
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgTemplateOutlet, PopoverComponent, PopoverControlComponent, PopoverBodyComponent]
+    imports: [NgTemplateOutlet, PopoverComponent, PopoverControlComponent, PopoverBodyComponent, IconComponent]
 })
-export class ProgressIndicatorComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
+export class ProgressIndicatorComponent implements OnInit, OnChanges, AfterViewInit {
     /** The text to display if you would like to override the default percentage text. */
     @Input()
     valueText: string;
@@ -64,7 +66,7 @@ export class ProgressIndicatorComponent implements OnInit, OnDestroy, OnChanges,
     _progressBarWidth = 0;
 
     /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -86,16 +88,10 @@ export class ProgressIndicatorComponent implements OnInit, OnDestroy, OnChanges,
     /** @hidden */
     ngOnInit(): void {
         resizeObservable(this._elementRef.nativeElement)
-            .pipe(debounceTime(20), takeUntil(this._onDestroy$))
+            .pipe(debounceTime(20), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 this._handleTruncation();
             });
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /** @hidden */

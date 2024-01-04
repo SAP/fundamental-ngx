@@ -267,7 +267,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
               );
 
         this.showList(true);
-        this.selectedShown$.next(true);
+        this.selectedShown$.set(true);
         this._cd.markForCheck();
     }
 
@@ -345,7 +345,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         this._selectedSuggestions = [...backup];
         this.inputText = '';
         this.showList(false);
-        this.selectedShown$.next(false);
+        this.selectedShown$.set(false);
     }
 
     /** @hidden Handle dialog approval, closes popover and propagates data changes. */

@@ -27,6 +27,7 @@ import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
 import { MenuTriggerDirective } from '@fundamental-ngx/core/menu';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { MainAction } from './main-action';
@@ -70,6 +71,10 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     /** The icon to include in the button. See the icon page for the list of icons. */
     @Input()
     glyph = 'slim-arrow-down';
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** The icon to include in the button. See the icon page for the list of icons. */
     @Input()

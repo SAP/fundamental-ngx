@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class DynamicPageService {
     /** @hidden */
-    collapsed = new BehaviorSubject<boolean>(false);
+    collapsed = signal(false);
 
     /** @hidden */
-    pinned = new BehaviorSubject<boolean>(false);
+    pinned = signal(false);
 
     /** @hidden */
-    pixelsSizeChanged = new BehaviorSubject<number>(0);
+    pixelsSizeChanged = signal(0);
 
     /** @hidden */
     subheaderVisibilityChange = new Subject<void>();
@@ -20,6 +20,6 @@ export class DynamicPageService {
 
     /** @hidden */
     toggleCollapsed(): void {
-        this.collapsed.next(!this.collapsed.value);
+        this.collapsed.update((collapsed) => !collapsed);
     }
 }

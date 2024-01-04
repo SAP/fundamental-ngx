@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/no-host-metadata-property */
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -18,7 +18,7 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk';
-import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 import { of, startWith } from 'rxjs';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
@@ -36,7 +36,7 @@ export class NavigationLinkRefDirective {
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'a[fdb-navigation-link]',
-    imports: [IconComponent, AsyncPipe, NgTemplateOutlet],
+    imports: [IconComponent, NgTemplateOutlet],
     hostDirectives: [RouterLinkActive],
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -58,9 +58,13 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
     @Input()
     class: Nullable<string>;
 
-    /** @hidden */
+    /** Link glyph */
     @Input()
     glyph: Nullable<string>;
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** Whether the link is for the external resource. */
     @Input()
@@ -141,7 +145,7 @@ export class NavigationLinkComponent extends FdbNavigationItemLink implements On
             return;
         }
 
-        const expansionKey = this._rtl?.rtl ? RIGHT_ARROW : LEFT_ARROW;
+        const expansionKey = this._rtl?.rtl.value ? RIGHT_ARROW : LEFT_ARROW;
 
         this._listItemComponent?.keyboardExpanded(KeyUtil.isKeyCode(event, expansionKey));
     }

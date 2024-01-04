@@ -5,13 +5,13 @@ import {
     Component,
     ElementRef,
     Inject,
-    OnDestroy,
     OnInit,
     Optional,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarElementDirective, BarMiddleDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import {
@@ -29,7 +29,6 @@ import {
     MobileModeControl
 } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { takeUntil } from 'rxjs/operators';
 import {
     SEARCH_FIELD_COMPONENT,
     SearchFieldChildContent,
@@ -57,15 +56,11 @@ import {
         ButtonBarComponent
     ]
 })
-export class SearchFieldMobileComponent
-    extends MobileModeBase<SearchFieldMobileInterface>
-    implements OnInit, OnDestroy
-{
-    /** @hidden */
-    childContent: SearchFieldChildContent | null = null;
-
+export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobileInterface> implements OnInit {
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
+    /** @hidden */
+    childContent: SearchFieldChildContent | null = null;
 
     /** @hidden */
     constructor(
@@ -83,13 +78,8 @@ export class SearchFieldMobileComponent
     }
 
     /** @hidden */
-    ngOnDestroy(): void {
-        super.onDestroy();
-    }
-
-    /** @hidden */
     listenChanges(): void {
-        this._component.isOpenChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => {
+        this._component.isOpenChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isOpen) => {
             if (!isOpen) {
                 this._handleDismiss();
 

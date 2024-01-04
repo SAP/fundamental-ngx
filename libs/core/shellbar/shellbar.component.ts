@@ -127,8 +127,10 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
      */
     @ContentChild(FD_SHELLBAR_SEARCH_COMPONENT, { descendants: true, static: false })
     set searchComponent(component: Nullable<SearchComponent>) {
+        const shouldAttach = !this._searchComponent && !!component;
         this._searchComponent = component;
         if (!component) {
+            this._searchPortal?.detach();
             return;
         }
 
@@ -164,6 +166,10 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
                     this._cd.detectChanges();
                 }
             });
+
+        if (shouldAttach) {
+            this._placeSearch();
+        }
 
         this._cd.detectChanges();
     }
@@ -245,34 +251,6 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     }
 
     /** @hidden */
-    private _setSearchComponentListeners(): void {
-        this._actions?.searchOpen.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((showSearch) => {
-            this._showMobileSearch = showSearch;
-            this._cd.detectChanges();
-            if (this._currentSize !== 's') {
-                return;
-            }
-
-            if (showSearch) {
-                this._attachSearch(true);
-            } else {
-                this._detachSearch();
-            }
-        });
-        this._currentSize$.pipe(distinctUntilChanged(), takeUntilDestroyed(this._destroyRef)).subscribe((size) => {
-            if (!this._searchPortal) {
-                return;
-            }
-
-            if (size === 'xl' || (size === 's' && this._showMobileSearch)) {
-                this._attachSearch();
-            } else {
-                this._detachSearch();
-            }
-        });
-    }
-
-    /** @hidden */
     applyShellbarModeToCombobox(): void {
         if (this.comboboxComponent) {
             this.comboboxComponent.inShellbar = true;
@@ -302,6 +280,40 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         }
 
         return retVal;
+    }
+
+    /** @hidden */
+    private _setSearchComponentListeners(): void {
+        this._actions?.searchOpen.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((showSearch) => {
+            this._showMobileSearch = showSearch;
+            this._cd.detectChanges();
+            if (this._currentSize !== 's') {
+                return;
+            }
+
+            if (showSearch) {
+                this._attachSearch(true);
+            } else {
+                this._detachSearch();
+            }
+        });
+        this._currentSize$.pipe(distinctUntilChanged(), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            if (!this._searchPortal) {
+                return;
+            }
+
+            this._placeSearch();
+        });
+    }
+
+    private _placeSearch(): void {
+        const size = this._currentSize$.value;
+
+        if (size === 'xl' || (size === 's' && this._showMobileSearch)) {
+            this._attachSearch();
+        } else {
+            this._detachSearch();
+        }
     }
 
     /** @hidden */

@@ -5,11 +5,13 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
-    OnDestroy,
+    DestroyRef,
     QueryList,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
-import { Subject, map, startWith, tap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { map, startWith, tap } from 'rxjs';
 import { CardFooterActionItemDirective } from './card-footer-action-item.directive';
 
 @Component({
@@ -23,7 +25,7 @@ import { CardFooterActionItemDirective } from './card-footer-action-item.directi
     standalone: true,
     imports: [NgTemplateOutlet]
 })
-export class CardFooterComponent implements AfterViewInit, OnDestroy {
+export class CardFooterComponent implements AfterViewInit {
     /** @hidden */
     @ContentChildren(CardFooterActionItemDirective) cardActionItems: QueryList<CardFooterActionItemDirective>;
 
@@ -31,7 +33,7 @@ export class CardFooterComponent implements AfterViewInit, OnDestroy {
     actionItems: CardFooterActionItemDirective[];
 
     /** @hidden */
-    private _destroyed$ = new Subject<void>();
+    private _destroyed$ = inject(DestroyRef);
 
     /** @hidden */
     constructor(private _changeDetectorRef: ChangeDetectorRef) {}
@@ -43,14 +45,9 @@ export class CardFooterComponent implements AfterViewInit, OnDestroy {
                 startWith(this.cardActionItems),
                 map(() => this.cardActionItems.toArray()),
                 tap((items) => (this.actionItems = items)),
-                tap(() => this._changeDetectorRef.detectChanges())
+                tap(() => this._changeDetectorRef.detectChanges()),
+                takeUntilDestroyed(this._destroyed$)
             )
             .subscribe();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._destroyed$.next();
-        this._destroyed$.complete();
     }
 }

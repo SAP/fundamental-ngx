@@ -1,8 +1,17 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
-import { Directive, HostBinding, HostListener, Inject, Input, OnDestroy, Optional } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
+import {
+    Directive,
+    HostBinding,
+    HostListener,
+    Inject,
+    Input,
+    OnDestroy,
+    Optional,
+    computed,
+    effect
+} from '@angular/core';
+import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { OverflowContainer } from '../interfaces/overflow-container.interface';
 import { OverflowLayoutFocusableItem } from '../interfaces/overflow-focusable-item.interface';
 import { OverflowItemRef } from '../interfaces/overflow-item-ref.interface';
@@ -33,7 +42,7 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
                     .map((item) => item.overflowItem.focusableItem)
             )
                 .withWrap()
-                .withHorizontalOrientation(this._dir);
+                .withHorizontalOrientation(this._dir$());
         });
     }
 
@@ -42,13 +51,13 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
     private readonly _initialClass = 'fd-overflow-layout__popover-container';
 
     /** @hidden */
-    private _keyboardEventsManager: FocusKeyManager<OverflowLayoutFocusableItem>;
+    private _keyboardEventsManager: Nullable<FocusKeyManager<OverflowLayoutFocusableItem>>;
 
     /** @hidden */
     private _items: OverflowItemRef[];
 
     /** @hidden */
-    private _dir: 'ltr' | 'rtl' = 'ltr';
+    private readonly _dir$ = computed<'ltr' | 'rtl'>(() => (this._rtl?.rtlSignal() ? 'rtl' : 'ltr'));
 
     /** @hidden */
     constructor(
@@ -57,11 +66,8 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
     ) {
         this._overflowContainer?.registerPopoverContent(this);
 
-        this._rtl?.rtl.pipe(takeUntilDestroyed()).subscribe((rtl) => {
-            this._dir = rtl ? 'rtl' : 'ltr';
-            if (this._keyboardEventsManager) {
-                this._keyboardEventsManager = this._keyboardEventsManager.withHorizontalOrientation(this._dir);
-            }
+        effect(() => {
+            this._keyboardEventsManager = this._keyboardEventsManager?.withHorizontalOrientation(this._dir$());
         });
     }
 
@@ -71,7 +77,7 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
         if (KeyUtil.isKeyCode(event, TAB)) {
             const index = this._items.findIndex((item) => item.overflowItem.elmRef.nativeElement === event.target);
             if (index !== -1) {
-                this._keyboardEventsManager.setActiveItem(index);
+                this._keyboardEventsManager?.setActiveItem(index);
             }
         }
 
@@ -79,7 +85,7 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
             event.preventDefault();
 
             // passing the event to key manager, so we get a change fired
-            this._keyboardEventsManager.onKeydown(event);
+            this._keyboardEventsManager?.onKeydown(event);
         }
     }
 
@@ -87,7 +93,7 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
      * Focuses on the first tabbable element inside directive's element.
      */
     focusFirstTabbableElement(): void {
-        this._keyboardEventsManager.setActiveItem(0);
+        this._keyboardEventsManager?.setActiveItem(0);
     }
 
     /** @hidden */

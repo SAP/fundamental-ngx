@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, inject, Input, OnDestroy, Output } from '@angular/core';
+import { Directive, EventEmitter, inject, Input, OnDestroy, Output, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DataSourceDirective, FD_DATA_SOURCE_TRANSFORMER, isDataSource } from '@fundamental-ngx/cdk/data-source';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
@@ -48,7 +48,7 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
     readonly onDataReceived = new EventEmitter<void>();
 
     /** Total items count stream. */
-    totalItems$ = new BehaviorSubject<number>(0);
+    totalItems$ = signal<number>(0);
 
     /** Items stream. */
     items$ = new BehaviorSubject<T[]>([]);
@@ -76,11 +76,11 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
 
     /** @hidden */
     set totalItems(value: number) {
-        this.totalItems$.next(value);
+        this.totalItems$.set(value);
     }
 
     get totalItems(): number {
-        return this.totalItems$.value;
+        return this.totalItems$();
     }
 
     /** @hidden for data source handling */
@@ -181,7 +181,7 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
 
         this._tableDsSubscription.add(
             this.dataChanged$.subscribe((items) => {
-                this.totalItems$.next(dataSourceStream.dataProvider.totalItems);
+                this.totalItems$.set(dataSourceStream.dataProvider.totalItems);
                 this.items$.next(items);
             })
         );

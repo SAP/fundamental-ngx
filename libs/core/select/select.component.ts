@@ -9,6 +9,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     HostListener,
@@ -26,22 +27,32 @@ import {
     ViewChild,
     ViewContainerRef,
     ViewEncapsulation,
+    computed,
+    inject,
     isDevMode
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { Observable, Subject, Subscription, defer, merge } from 'rxjs';
+import { Observable, Subscription, defer, merge } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 
-import { DynamicComponentService, KeyUtil, ModuleDeprecation, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
+import {
+    DynamicComponentService,
+    KeyUtil,
+    ModuleDeprecation,
+    Nullable,
+    RtlService,
+    destroyObservable
+} from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 import { ENTER, ESCAPE, SPACE } from '@angular/cdk/keycodes';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormFieldAdvancedStateMessage, FormStates, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 import { ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -180,6 +191,10 @@ export class SelectComponent<T = any>
     @Input()
     glyph = 'slim-arrow-down';
 
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
+
     /** Whether close the popover on outside click. */
     @Input()
     closeOnOutsideClick = true;
@@ -314,7 +329,7 @@ export class SelectComponent<T = any>
      * @hidden
      * Triggers when component is destroyed
      */
-    readonly _destroy = new Subject<void>();
+    readonly _destroy = inject(DestroyRef);
 
     /** @hidden */
     get _selectControlClass(): string {
@@ -444,9 +459,15 @@ export class SelectComponent<T = any>
     }
 
     /** @hidden */
+    readonly rtl$ = computed(() => !!this._rtlService?.rtlSignal());
+
+    private readonly _rtlService = inject(RtlService, {
+        optional: true
+    });
+
+    /** @hidden */
     constructor(
         @Attribute('tabindex') _tabIndex: string,
-        @Optional() private readonly _rtlService: RtlService,
         private readonly _keyManagerService: SelectKeyManagerService,
         private readonly _changeDetectorRef: ChangeDetectorRef,
         private readonly _viewContainerRef: ViewContainerRef,
@@ -459,6 +480,25 @@ export class SelectComponent<T = any>
             this.ngControl.valueAccessor = this;
         }
         this._tabIndex = parseInt(_tabIndex, 10) || 0;
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    _handleKeydown(event: KeyboardEvent): void {
+        if (!this.disabled && !this.readonly) {
+            this._isOpen
+                ? this._keyManagerService._handleOpenKeydown(event)
+                : this._keyManagerService._handleClosedKeydown(event);
+        }
+        if (KeyUtil.isKeyCode(event, [ESCAPE, ENTER, SPACE])) {
+            this._controlElementRef.nativeElement.focus();
+        }
+    }
+
+    /** Toggles the open state of the select. */
+    @HostListener('click')
+    toggle(): void {
+        this._isOpen ? this.close() : this.open();
     }
 
     /** @hidden */
@@ -489,7 +529,6 @@ export class SelectComponent<T = any>
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-        this._cleanupCommonBehavior();
     }
 
     /** @hidden */
@@ -497,12 +536,6 @@ export class SelectComponent<T = any>
 
     /** @hidden */
     onTouched = (): void => {};
-
-    /** Toggles the open state of the select. */
-    @HostListener('click')
-    toggle(): void {
-        this._isOpen ? this.close() : this.open();
-    }
 
     /** Opens the select popover body. */
     open(): void {
@@ -532,7 +565,7 @@ export class SelectComponent<T = any>
                 this._keyManagerService._keyManager.activeItem?._selectViaInteraction();
             }
             this._isOpen = false;
-            this._keyManagerService._keyManager.withHorizontalOrientation(this._isRtl() ? 'rtl' : 'ltr');
+            this._keyManagerService._keyManager.withHorizontalOrientation(this.rtl$() ? 'rtl' : 'ltr');
             this._changeDetectorRef.markForCheck();
             this.onTouched();
 
@@ -635,12 +668,6 @@ export class SelectComponent<T = any>
     }
 
     /** @hidden */
-    _cleanupCommonBehavior(): void {
-        this._destroy.next();
-        this._destroy.complete();
-    }
-
-    /** @hidden */
     _initializeSelection(): void {
         // Defer setting the value in order to avoid the "Expression
         // has changed after it was checked" errors from Angular.
@@ -687,41 +714,16 @@ export class SelectComponent<T = any>
     }
 
     /** @hidden */
-    _isRtl(): boolean {
-        if (this._rtlService) {
-            this._subscriptions.add(
-                this._rtlService.rtl.subscribe((rtl) => {
-                    this._rtl = rtl;
-                })
-            );
-        }
-        return this._rtl === true ? true : false;
-    }
-
-    /** @hidden */
     _registerEventsAfterContentInit(): void {
-        this._selectionModel.changed.pipe(takeUntil(this._destroy)).subscribe((event) => {
+        this._selectionModel.changed.pipe(takeUntilDestroyed(this._destroy)).subscribe((event) => {
             event.added.forEach((option) => option._select());
             event.removed.forEach((option) => option._deselect());
         });
 
-        this._options.changes.pipe(startWith(null), takeUntil(this._destroy)).subscribe(() => {
+        this._options.changes.pipe(startWith(null), takeUntilDestroyed(this._destroy)).subscribe(() => {
             this._resetOptions();
             this._initializeSelection();
         });
-    }
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    _handleKeydown(event: KeyboardEvent): void {
-        if (!this.disabled && !this.readonly) {
-            this._isOpen
-                ? this._keyManagerService._handleOpenKeydown(event)
-                : this._keyManagerService._handleClosedKeydown(event);
-        }
-        if (KeyUtil.isKeyCode(event, [ESCAPE, ENTER, SPACE])) {
-            this._controlElementRef.nativeElement.focus();
-        }
     }
 
     /** @hidden */
@@ -755,7 +757,7 @@ export class SelectComponent<T = any>
 
     /** @hidden */
     private _resetOptions(): void {
-        const changedOrDestroyed = merge(this._options.changes, this._destroy);
+        const changedOrDestroyed = merge(this._options.changes, destroyObservable(this._destroy));
 
         this._optionSelectionChanges.pipe(takeUntil(changedOrDestroyed)).subscribe((event) => {
             this._onSelect(event.source, event.isUserInput);

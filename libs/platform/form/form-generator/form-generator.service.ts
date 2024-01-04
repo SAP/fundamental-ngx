@@ -1,11 +1,11 @@
-import { Inject, Injectable, OnDestroy, Optional, SkipSelf, Type } from '@angular/core';
+import { DestroyRef, Inject, Injectable, Optional, SkipSelf, Type, inject } from '@angular/core';
 import { AsyncValidatorFn, FormBuilder, Validators } from '@angular/forms';
 import { isFunction, selectStrategy } from '@fundamental-ngx/cdk/utils';
 import { cloneDeep, merge } from 'lodash-es';
 
-import { Subject } from 'rxjs';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { BaseDynamicFormGeneratorControl } from './base-dynamic-form-generator-control';
 import { DEFAULT_VALIDATION_ERRORS } from './config/default-validation-errors';
@@ -29,7 +29,7 @@ import { FORM_GENERATOR_CONFIG, FORM_GENERATOR_ITEM_CONFIG, defaultFormGenerator
  * @description Form generator service
  */
 @Injectable()
-export class FormGeneratorService implements OnDestroy {
+export class FormGeneratorService {
     /**
      * Map of generated forms to access later.
      */
@@ -47,7 +47,7 @@ export class FormGeneratorService implements OnDestroy {
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -63,14 +63,6 @@ export class FormGeneratorService implements OnDestroy {
         private _providedConfig: Partial<FormGeneratorConfig>
     ) {
         this._config = merge(cloneDeep(this._config), cloneDeep(this._providedConfig));
-    }
-
-    /**
-     * @hidden
-     */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /**
@@ -405,11 +397,13 @@ export class FormGeneratorService implements OnDestroy {
         });
 
         if (isFunction(formItem.onchange)) {
-            formControl.valueChanges.pipe(debounceTime(50), takeUntil(this._onDestroy$)).subscribe(async (value) => {
-                const obj = formItem.onchange!(value, this.forms, formControl);
+            formControl.valueChanges
+                .pipe(debounceTime(50), takeUntilDestroyed(this._destroyRef))
+                .subscribe(async (value) => {
+                    const obj = formItem.onchange!(value, this.forms, formControl);
 
-                await this._getFunctionValue(obj);
-            });
+                    await this._getFunctionValue(obj);
+                });
         }
 
         formControl.updateValueAndValidity({ emitEvent: false });

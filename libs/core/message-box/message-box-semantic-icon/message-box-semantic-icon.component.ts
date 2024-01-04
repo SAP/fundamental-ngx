@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, Optional } from '@angular/core';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.class';
 
 /**
@@ -10,14 +11,19 @@ import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.cl
  */
 @Component({
     selector: 'fd-message-box-semantic-icon',
-    template: `<i [class]="'sap-icon--' + _getIcon" role="presentation"></i>`,
+    template: `<fd-icon [glyph]="_getIcon" [font]="glyphFont" role="presentation"></fd-icon>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [IconComponent],
     standalone: true
 })
 export class MessageBoxSemanticIconComponent {
     /** Custom semantic icon */
     @Input()
     glyph: string;
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** @hidden */
     get messageBoxConfig(): MessageBoxConfig {

@@ -4,11 +4,11 @@ import {
     ChangeDetectorRef,
     Component,
     forwardRef,
+    signal,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import equal from 'fast-deep-equal/es6';
-import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
@@ -105,10 +105,8 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     /** Table column key associated with the currently selected filter  */
     activeFilterColumnKey: Nullable<string> = null;
 
-    /** @hidden */
-    private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     /** Indicates when reset command is available */
-    readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
+    readonly isResetAvailable$ = signal(false);
 
     /** @hidden */
     private _initialFilters: CollectionFilter[] = [];
@@ -194,7 +192,7 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     /** Reset changes to the initial state */
     reset(): void {
         this.filterBy = this._initialFilters;
-        this._isResetAvailableSubject$.next(false);
+        this.isResetAvailable$.set(false);
         this._cd.detectChanges();
     }
 
@@ -220,6 +218,6 @@ export class FiltersComponent implements Resettable, AfterViewInit {
             return;
         }
 
-        this._isResetAvailableSubject$.next(true);
+        this.isResetAvailable$.set(true);
     }
 }

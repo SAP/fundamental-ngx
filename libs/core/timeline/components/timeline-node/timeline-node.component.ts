@@ -8,7 +8,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 import { TimelinePositionControlService } from '../../services/timeline-position-control.service';
 import { TimelineNodeComponentInterface } from './timeline-node-component.interface';
 
@@ -28,6 +28,10 @@ export class TimelineNodeComponent implements TimelineNodeComponentInterface, On
     /** Glyph of the current timeline node.*/
     @Input()
     glyph: string;
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** Aria label for the current timeline node. */
     @Input()

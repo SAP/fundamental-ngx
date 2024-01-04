@@ -25,14 +25,13 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
-    Inject,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     Provider,
     QueryList,
@@ -40,13 +39,15 @@ import {
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
-    forwardRef
+    forwardRef,
+    inject
 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup, FormsModule, NgForm } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
-import { AsyncPipe, KeyValuePipe, NgTemplateOutlet } from '@angular/common';
+import { KeyValuePipe, NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormField } from '@fundamental-ngx/cdk/forms';
 import { Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import {
@@ -181,7 +182,6 @@ let formGroupUniqueId = 0;
         LinkComponent,
         IconComponent,
         InlineHelpDirective,
-        AsyncPipe,
         KeyValuePipe,
         FieldGroupRowValuePipe,
         ContentDensityModule
@@ -228,12 +228,6 @@ export class FormGroupComponent
     get inlineColumnLayout(): ColumnLayout {
         return this._inlineColumnLayout;
     }
-
-    /** @hidden */
-    _inlineColumnLayoutClass: string;
-
-    /** @hidden */
-    private _inlineColumnLayout = DefaultVerticalFieldLayout;
 
     /**
      * Defines label's column layout.
@@ -323,10 +317,6 @@ export class FormGroupComponent
     @ContentChild('i18n', { static: true })
     i18Template: TemplateRef<any>;
 
-    /** @hidden */
-    @ContentChildren(FormFieldErrorDirective)
-    private _errorDirectives: QueryList<FormFieldErrorDirective>;
-
     /**
      * @hidden
      *
@@ -348,17 +338,9 @@ export class FormGroupComponent
     @ContentChildren(FORM_GROUP_CHILD_FIELD_TOKEN as any, { descendants: true })
     protected formGroupChildren: QueryList<FormGroupField>;
 
-    /**
-     * @hidden
-     *
-     * List of direct FdpFormGroup's children.
-     *
-     * Since "formGroupChildren" uses "{ descendants: true }" option that means
-     * "formGroupChildren" will keep track of nested FdpFormGroup fields as well.
-     * This list relies on the injection mechanism so nested FdpFormGroup's fields/fieldGroups
-     * will be omitted
-     */
-    private _formGroupDirectChildren: Array<FormGroupField> = [];
+    /** @hidden */
+    @ContentChildren(FormFieldErrorDirective)
+    private _errorDirectives: QueryList<FormFieldErrorDirective>;
 
     /** @hidden */
     xlColumnsNumber: number;
@@ -383,23 +365,47 @@ export class FormGroupComponent
     _hintOptions: Nullable<HintOptions>;
 
     /** @hidden */
+    readonly contentDensityObserver = inject(ContentDensityObserver);
+
+    /** @hidden */
+    _inlineColumnLayoutClass: string;
+
+    /** @hidden */
+    protected _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    private _inlineColumnLayout = DefaultVerticalFieldLayout;
+
+    /** @hidden */
     private _useForm = false;
 
-    /** @hidden */
-    protected _destroyed = new Subject<void>();
+    /**
+     * @hidden
+     *
+     * List of direct FdpFormGroup's children.
+     *
+     * Since "formGroupChildren" uses "{ descendants: true }" option that means
+     * "formGroupChildren" will keep track of nested FdpFormGroup fields as well.
+     * This list relies on the injection mechanism so nested FdpFormGroup's fields/fieldGroups
+     * will be omitted
+     */
+    private _formGroupDirectChildren: Array<FormGroupField> = [];
 
     /** @hidden */
-    private _subscriptions = new Subscription();
+    private readonly _subscriptions = new Subscription();
 
     /** @hidden */
-    constructor(
-        private _cd: ChangeDetectorRef,
-        private elementRef: ElementRef,
-        @Optional() private formContainer: ControlContainer,
-        readonly contentDensityObserver: ContentDensityObserver,
-        @Inject(FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT) private _defaultHintOptions: FieldHintOptions
-    ) {
-        this.formGroup = <FormGroup>(this.formContainer ? this.formContainer.control : new FormGroup({}));
+    private readonly _cd = inject(ChangeDetectorRef);
+    /** @hidden */
+    private readonly _elementRef = inject(ElementRef);
+    /** @hidden */
+    private readonly _formContainer = inject(ControlContainer, { optional: true });
+    /** @hidden */
+    private readonly _defaultHintOptions = inject<FieldHintOptions>(FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT);
+
+    /** @hidden */
+    constructor() {
+        this.formGroup = <FormGroup>(this._formContainer ? this._formContainer.control : new FormGroup({}));
     }
 
     /** @hidden */
@@ -458,8 +464,6 @@ export class FormGroupComponent
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._destroyed.next();
-        this._destroyed.complete();
         this._subscriptions.unsubscribe();
     }
 
@@ -532,7 +536,7 @@ export class FormGroupComponent
     private _listenFormFieldColumnChange(): void {
         this.formGroupChildren.forEach(
             (field: FormGroupField) =>
-                (<FormFieldComponent>field).onColumnChange?.pipe(takeUntil(this._destroyed)).subscribe(() => {
+                (<FormFieldComponent>field).onColumnChange?.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
                     this._updateFieldByColumn();
                     this._cd.markForCheck();
                 })
@@ -711,7 +715,7 @@ export class FormGroupComponent
      */
     private _trackFormGroupResize(): void {
         this._subscriptions.add(
-            resizeObservable(this.elementRef.nativeElement)
+            resizeObservable(this._elementRef.nativeElement)
                 .pipe(debounceTime(20))
                 .subscribe(() => this._cd.markForCheck())
         );

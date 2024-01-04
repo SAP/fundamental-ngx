@@ -8,12 +8,13 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-object-marker]',
     template: `@if (glyph) {
-            <i class="fd-object-marker__icon" [class]="' sap-icon--' + glyph"></i>
+            <fd-icon [glyph]="glyph" [font]="glyphFont" class="fd-object-marker__icon"></fd-icon>
         }
         @if (label) {
             <span class="fd-object-marker__text">{{ label }}</span>
@@ -27,7 +28,7 @@ import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
         '[attr.role]': 'clickable ? "link" :""'
     },
     standalone: true,
-    imports: []
+    imports: [IconComponent]
 })
 export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
@@ -37,6 +38,10 @@ export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder
     /** Glyph (icon) of the Object Status.*/
     @Input()
     glyph: string;
+
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** Whether the Object Status is clickable. */
     @Input()

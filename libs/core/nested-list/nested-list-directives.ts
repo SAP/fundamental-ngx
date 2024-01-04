@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -9,12 +8,11 @@ import {
     HostListener,
     Input,
     Optional,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed
 } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { NestedItemService } from './nested-item/nested-item.service';
 
 let uniqueId = 0;
@@ -82,7 +80,7 @@ export class NestedListTitleDirective {
     selector: '[fdNestedListExpandIcon], [fd-nested-list-expand-icon]',
     template: `
         <ng-content></ng-content>
-        <fd-icon [glyph]="expanded ? 'navigation-down-arrow' : (sideArrowIcon$ | async)"></fd-icon>
+        <fd-icon [glyph]="expanded ? 'navigation-down-arrow' : sideArrowIcon$()"></fd-icon>
     `,
     host: {
         'aria-haspopup': 'true',
@@ -91,7 +89,7 @@ export class NestedListTitleDirective {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [IconComponent, AsyncPipe]
+    imports: [IconComponent]
 })
 export class NestedListExpandIconComponent {
     /** @hidden */
@@ -115,16 +113,16 @@ export class NestedListExpandIconComponent {
     ariaHidden = true;
 
     /** @hidden */
-    sideArrowIcon$: Observable<string>;
+    sideArrowIcon$ = computed(() =>
+        this._rtlService?.rtlSignal() ? 'navigation-left-arrow' : 'navigation-right-arrow'
+    );
 
     /** @hidden */
     constructor(
         private _itemService: NestedItemService,
         private _changeDetRef: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService
-    ) {
-        this._listenOnTextDirection();
-    }
+    ) {}
 
     /** Mouse event handler */
     @HostListener('click', ['$event'])
@@ -144,12 +142,5 @@ export class NestedListExpandIconComponent {
     changeExpandedState(expanded: boolean): void {
         this.expanded = expanded;
         this._changeDetRef.detectChanges();
-    }
-
-    /** @hidden Sets expand arrow depending on text direction */
-    private _listenOnTextDirection(): void {
-        this.sideArrowIcon$ = this._rtlService
-            ? this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'navigation-left-arrow' : 'navigation-right-arrow')))
-            : of('navigation-right-arrow');
     }
 }

@@ -1,5 +1,6 @@
 import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
 import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont, fdBuildIconClass } from '@fundamental-ngx/core/icon';
 
 @Directive({
     selector: '[fdTileContent], [fd-tile-content]',
@@ -135,6 +136,10 @@ export class TileRefreshDirective implements OnInit, OnChanges, CssClassBuilder 
     @Input()
     glyph: string;
 
+    /** Glyph font family */
+    @Input()
+    glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
+
     /** Apply user custom styles */
     @Input()
     class: string;
@@ -164,7 +169,7 @@ export class TileRefreshDirective implements OnInit, OnChanges, CssClassBuilder 
      */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return ['fd-tile__refresh', this.glyph ? 'sap-icon--' + this.glyph : '', this.class];
+        return ['fd-tile__refresh', this.glyph ? fdBuildIconClass(this.glyphFont, this.glyph) : '', this.class];
     }
 }
 

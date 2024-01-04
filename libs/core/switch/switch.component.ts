@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -16,6 +15,7 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { Subscription } from 'rxjs';
 
@@ -46,7 +46,7 @@ let switchUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FormsModule, AsyncPipe, FdTranslatePipe]
+    imports: [FormsModule, FdTranslatePipe, IconComponent]
 })
 export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormItemControl {
     /** @hidden */

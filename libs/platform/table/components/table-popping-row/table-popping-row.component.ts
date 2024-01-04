@@ -1,4 +1,4 @@
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -44,7 +44,6 @@ import {
         TableTextDirective,
         FormLabelComponent,
         NgTemplateOutlet,
-        AsyncPipe,
         ValueByPathPipe
     ]
 })

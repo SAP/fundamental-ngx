@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import {
     FormBuilder,
     FormGroup,
@@ -13,7 +13,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PlatformMessagePopoverModule } from '../../platform-message-popover.module';
 
 import { MessagePopoverFormWrapperComponent } from './message-popover-form-wrapper.component';
-import { MessagePopoverErrorGroup } from '../../models/message-popover-entry.interface';
 
 @Component({
     template: ` <fdp-message-popover-form-wrapper>
@@ -74,12 +73,6 @@ describe('MessagePopoverFormWrapperComponent reactive form', () => {
     });
 
     it('should collect errors on form submit', fakeAsync(() => {
-        let groupedErrors: MessagePopoverErrorGroup[] = [];
-
-        component.wrapper.errors.subscribe((errors) => {
-            groupedErrors = errors;
-        });
-
         component.formGroup.get('max')?.setValue(11);
         component.formGroup.get('min')?.setValue(9);
         component.formGroup.get('true')?.setValue(false);
@@ -94,7 +87,7 @@ describe('MessagePopoverFormWrapperComponent reactive form', () => {
 
         fixture.detectChanges();
 
-        expect(groupedErrors[0].errors.length).toEqual(
+        expect(component.wrapper.errors$()[0].errors.length).toEqual(
             Object.values(component.formGroup.controls).filter((control) => !!control.errors).length
         );
     }));
@@ -172,12 +165,6 @@ describe('MessagePopoverFormWrapperComponent template form', () => {
     it('should collect errors on form submit', fakeAsync(async () => {
         tick(1000);
 
-        let groupedErrors: MessagePopoverErrorGroup[] = [];
-
-        component.wrapper.errors.subscribe((errors) => {
-            groupedErrors = errors;
-        });
-
         component.formGroup.max = 11;
         component.formGroup.min = 9;
         component.formGroup.true = false;
@@ -196,7 +183,7 @@ describe('MessagePopoverFormWrapperComponent template form', () => {
 
         tick(500);
 
-        expect(groupedErrors[0].errors.length).toEqual(
+        expect(component.wrapper.errors$()[0].errors.length).toEqual(
             Object.values(component.form.form.controls).filter((control) => !!control.errors).length
         );
     }));

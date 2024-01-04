@@ -9,7 +9,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 
 /**
  * Directive used to identify the template which will populate the tab header.
@@ -51,7 +51,7 @@ export class TabCountDirective {
     selector: '[fd-tab-icon]',
     template: `
         @if (icon) {
-            <fd-icon role="presentation" [glyph]="icon"></fd-icon>
+            <fd-icon role="presentation" [glyph]="icon" [font]="iconFont"></fd-icon>
         }
         <ng-content></ng-content>
     `,
@@ -71,6 +71,10 @@ export class TabIconComponent implements CssClassBuilder, OnChanges {
      */
     @Input()
     icon: string;
+
+    /** Icon font family */
+    @Input()
+    iconFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}

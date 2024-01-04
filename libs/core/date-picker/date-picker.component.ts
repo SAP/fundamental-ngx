@@ -6,11 +6,13 @@ import {
     ChangeDetectorRef,
     Component,
     ComponentRef,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     Inject,
     Injector,
     Input,
+    OnChanges,
     OnDestroy,
     OnInit,
     Optional,
@@ -24,6 +26,7 @@ import {
     forwardRef,
     inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { DynamicComponentService, FocusTrapService, Nullable } from '@fundamental-ngx/cdk/utils';
@@ -50,8 +53,8 @@ import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { FdLanguageKeyIdentifier, FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { Subject, Subscription } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 import { DatePickerMobileComponent } from './date-picker-mobile/date-picker-mobile.component';
 import { DatePicker } from './date-picker.model';
 import { createMissingDateImplementationError } from './errors';
@@ -114,7 +117,15 @@ let datePickerCounter = 0;
     ]
 })
 export class DatePickerComponent<D>
-    implements DatePicker<D>, OnInit, OnDestroy, AfterViewInit, ControlValueAccessor, Validator, FormItemControl
+    implements
+        DatePicker<D>,
+        OnInit,
+        OnDestroy,
+        OnChanges,
+        AfterViewInit,
+        ControlValueAccessor,
+        Validator,
+        FormItemControl
 {
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
@@ -417,7 +428,7 @@ export class DatePickerComponent<D>
     private _calendarPendingDate: Nullable<D>;
 
     /** @hidden */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -513,7 +524,7 @@ export class DatePickerComponent<D>
 
     /** @hidden */
     ngOnInit(): void {
-        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this.formatInputDate(this.selectedDate);
             this._changeDetectionRef.detectChanges();
         });
@@ -531,7 +542,7 @@ export class DatePickerComponent<D>
     ngAfterViewInit(): void {
         this._InitialiseVariablesInMessageService();
 
-        this._calendars.changes.pipe(startWith(null), takeUntil(this._onDestroy$)).subscribe(() => {
+        this._calendars.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             const calendar = this._calendars.first;
             this._calendarComponent = calendar;
             setTimeout(() => {
@@ -553,8 +564,6 @@ export class DatePickerComponent<D>
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
         this._mobileComponentRef?.destroy();
     }
 

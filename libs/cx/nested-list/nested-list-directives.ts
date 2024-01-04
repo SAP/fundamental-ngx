@@ -9,13 +9,9 @@ import {
     HostBinding,
     HostListener,
     Input,
-    Optional,
     ViewEncapsulation
 } from '@angular/core';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { RtlService } from '@fundamental-ngx/core/utils';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { NestedItemService } from './nested-item/nested-item.service';
 
 let uniqueId = 0;
@@ -116,17 +112,10 @@ export class NestedListExpandIconComponent {
     ariaHidden = true;
 
     /** @hidden */
-    rtl$: Observable<boolean>;
-
-    /** @hidden */
     constructor(
         private _itemService: NestedItemService,
-        private _changeDetRef: ChangeDetectorRef,
-        private _elementRef: ElementRef,
-        @Optional() private _rtlService: RtlService
-    ) {
-        this._listenOnTextDirection();
-    }
+        private _changeDetRef: ChangeDetectorRef
+    ) {}
 
     /** Mouse event handler */
     @HostListener('click', ['$event'])
@@ -146,11 +135,6 @@ export class NestedListExpandIconComponent {
     changeExpandedState(expanded: boolean): void {
         this.expanded = expanded;
         this._changeDetRef.detectChanges();
-    }
-
-    /** @hidden Sets expand arrow depending on text direction */
-    private _listenOnTextDirection(): void {
-        this.rtl$ = this._rtlService ? this._rtlService.rtl.pipe(map((isRtl) => isRtl)) : of(false);
     }
 }
 

@@ -18,7 +18,7 @@ export class MessageBoxPo extends CoreBaseComponentPo {
     okButton = 'fd-button-bar:nth-child(1)';
     cancelButton = 'fd-button-bar:nth-child(2)';
     resultTxt = 'p';
-    messageIcon = this.messageBoxExample + 'fd-message-box-semantic-icon > i';
+    messageIcon = this.messageBoxExample + 'fd-message-box-semantic-icon > fd-icon';
 
     async open(): Promise<void> {
         await super.open(this.url);

@@ -34,7 +34,7 @@
             [attr.aria-labelledby]="ariaLabelledBy"
             [attr.aria-describedby]="description ? id + '__description' : ''"
             [attr.aria-required]="required"
-            [style.textAlign]="_align"
+            [style.textAlign]="_textAlign$()"
             fdpStepInputControl
             type="text"
             inputmode="numeric"

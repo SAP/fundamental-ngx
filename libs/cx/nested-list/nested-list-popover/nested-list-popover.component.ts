@@ -6,15 +6,13 @@ import {
     OnInit,
     Optional,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed
 } from '@angular/core';
-import { Observable, of } from 'rxjs';
 
 import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { Placement } from '@fundamental-ngx/core/shared';
 import { RtlService } from '@fundamental-ngx/core/utils';
-import { map } from 'rxjs/operators';
 import { NestedItemInterface } from '../nested-item/nested-item.interface';
 import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedLinkComponent } from '../nested-link/nested-link.component';
@@ -48,7 +46,7 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, O
     parentItemElement: NestedItemInterface;
 
     /** @hidden */
-    placement$: Observable<Placement>;
+    placement$ = computed(() => (this._rtlService?.rtlSignal() ? 'left-start' : 'right-start'));
 
     /** @hidden */
     open = false;
@@ -64,7 +62,6 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, O
         private _overlay: Overlay
     ) {
         this._listenOnKeyboardRefresh();
-        this._createRtlObservable();
         if (this._itemService) {
             this._itemService.popover = this;
         }
@@ -97,12 +94,5 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, O
                 this.popoverComponent.refreshPosition();
             }
         });
-    }
-
-    /** @hidden */
-    private _createRtlObservable(): void {
-        this.placement$ = this._rtlService
-            ? this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'left-start' : 'right-start')))
-            : of('right-start');
     }
 }
