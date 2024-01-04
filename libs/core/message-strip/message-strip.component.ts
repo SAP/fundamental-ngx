@@ -1,5 +1,7 @@
+import { BooleanInput } from '@angular/cdk/coercion';
 import { NgTemplateOutlet } from '@angular/common';
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     ContentChild,
@@ -12,7 +14,7 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass, CssClassBuilder, Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -57,9 +59,9 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
      * The other types (warning, success, information and error) have icons by default.
      * To remove the icon set the property to true.
      */
-    @Input()
+    @Input({ transform: booleanAttribute })
     @HostBinding('class.fd-message-strip--no-icon')
-    noIcon = false;
+    noIcon: BooleanInput = false;
 
     /** The type of the message strip.
      * Can be one of *warning*, *success*, *information*, *error* or null.
