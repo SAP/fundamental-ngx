@@ -88,20 +88,20 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder, H
 
     /** @hidden */
     ngOnInit(): void {
-        this.validateColorInput();
+        this._validateColorInput();
         this.buildComponentCssClass();
     }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.color) {
-            this.validateColorInput();
+            this._validateColorInput();
         }
         this.buildComponentCssClass();
     }
 
     /** @hidden */
-    private validateColorInput(): void {
+    private _validateColorInput(): void {
         const matchingColor = labelColorRange.find((color) => color === Number(this.color));
         if (!matchingColor) {
             if (isDevMode()) {
