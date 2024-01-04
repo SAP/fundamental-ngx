@@ -4,15 +4,18 @@ import {
     ElementRef,
     inject,
     Input,
+    isDevMode,
     OnChanges,
     OnInit,
+    SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder, HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 import { IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 
 export type LabelType = 'numeric' | 'icon';
-export type LabelColor = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+const labelColorRange = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
+export type LabelColor = (typeof labelColorRange)[number];
 export type LabelColorInput = LabelColor | `${LabelColor}`;
 
 @Component({
@@ -85,11 +88,26 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder, H
 
     /** @hidden */
     ngOnInit(): void {
+        this.validateColorInput();
         this.buildComponentCssClass();
     }
 
     /** @hidden */
-    ngOnChanges(): void {
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.color) {
+            this.validateColorInput();
+        }
         this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    private validateColorInput(): void {
+        const matchingColor = labelColorRange.find((color) => color === Number(this.color));
+        if (!matchingColor) {
+            if (isDevMode()) {
+                console.warn(`Invalid color input: ${this.color}. Please provide a number between 1 and 10`);
+            }
+            this.color = 7;
+        }
     }
 }
