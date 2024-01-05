@@ -410,8 +410,6 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         this._assignCustomTemplates();
 
         this._initWindowResize();
-
-        this._tokenizer._showOverflowPopover = false;
     }
 
     /** @hidden */

@@ -247,6 +247,7 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
      */
     private async _transformVisibilityLabels(): Promise<void> {
         const lang = await firstValueFrom(this._language$);
+        console.log(lang);
         const labels = { ...this._categoryLabelKeys };
         for (const strategyItem in labels) {
             if (Object.prototype.hasOwnProperty.call(labels, strategyItem)) {

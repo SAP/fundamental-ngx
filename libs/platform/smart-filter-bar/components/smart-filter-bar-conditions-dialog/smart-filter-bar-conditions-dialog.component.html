@@ -25,16 +25,17 @@
                                 ></fdp-form-generator>
                             </div>
                             <div class="fdp-smart-filter-bar__actions-column" colGrow fdLayoutGridCol>
-                                <fdp-button
+                                <button
+                                    fd-button
                                     (click)="removeCondition(i)"
-                                    buttonType="transparent"
+                                    fdType="transparent"
                                     glyph="decline"
                                     [title]="
                                         'platformSmartFilterBar.defineConditionsRemoveConditionButtonTitle'
                                             | fdTranslate
                                     "
                                     type="button"
-                                ></fdp-button>
+                                ></button>
                             </div>
                         </div>
                     </fd-layout-grid>
@@ -43,10 +44,11 @@
                     <div fdLayoutGridRow>
                         <div colGrow fdLayoutGridCol>&nbsp;</div>
                         <div class="fdp-smart-filter-bar__actions-column" fdLayoutGridCol>
-                            <fdp-button
+                            <button
+                                fd-button
                                 (click)="addCondition()"
                                 [label]="'platformSmartFilterBar.defineConditionsAddConditionButtonLabel' | fdTranslate"
-                            ></fdp-button>
+                            ></button>
                         </div>
                     </div>
                 </fd-layout-grid>

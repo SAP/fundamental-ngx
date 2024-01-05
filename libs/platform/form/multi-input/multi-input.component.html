@@ -38,63 +38,62 @@
         <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fdp-multi-input__invisible-text"
             >Contains {{ selected.length || 'no' }} token</span
         >
-        @if (selected) {
-            <fd-tokenizer
-                [tokenizerFocusable]="false"
-                [compactCollapse]="true"
-                #tokenizer
-                class="fd-multi-input-tokenizer-custom"
-                (moreClickedEvent)="moreClicked()"
-                tabindex="-1"
-                role="listbox"
-                fdMultiAnnouncer
-                [multiAnnouncerOptions]="isOpen ? _suggestions : []"
-            >
-                @for (token of selected; track token; let i = $index) {
-                    <fd-token
-                        [readOnly]="disabled"
-                        (onCloseClick)="removeToken(token)"
-                        [attr.aria-posinset]="i"
-                        [attr.aria-setsize]="selected.length"
-                    >
-                        <span>{{ token.label | displayFnPipe: displayFn }}</span>
-                    </fd-token>
-                }
-                <input
-                    #searchInputElement
-                    type="text"
-                    class="fd-input fd-multi-input-tokenizer-input fd-tokenizer__input"
-                    fdp-auto-complete
-                    autocomplete="off"
-                    (onComplete)="_onAutoComplete($event)"
-                    (keydown.enter)="_onKeydownEnter($event)"
-                    (keydown)="onInputKeydownHandler($event)"
-                    [inputText]="inputText"
-                    [options]="_suggestions"
-                    fd-input-group-input
-                    fd-form-control
-                    [attr.id]="id"
-                    [disabled]="disabled"
-                    [(ngModel)]="inputText"
-                    (ngModelChange)="searchTermChanged()"
-                    [ngModelOptions]="{ standalone: true }"
-                    [placeholder]="placeholder"
-                    (focus)="onTouched(); tokenizer._showAllTokens()"
-                    (blur)="tokenizer._hideTokens()"
-                    [attr.aria-expanded]="isOpen && _suggestions.length > 0"
-                    [readonly]="readonly"
-                    aria-haspopup="listbox"
-                    [attr.aria-readonly]="readonly"
-                    [ariaLabel]="ariaLabel || ('coreMultiInput.multiInputAriaLabel' | fdTranslate)"
-                    [ariaLabelledBy]="ariaLabelledBy"
-                    [attr.aria-required]="required"
-                    [attr.aria-describedby]="tokenHiddenId"
-                    aria-roledescription="Multi Value Input"
-                    fdkInitialFocus
-                    [enabled]="autofocus"
-                />
-            </fd-tokenizer>
-        }
+        <fd-tokenizer
+            [tokenizerFocusable]="false"
+            [compactCollapse]="true"
+            [showOverflowPopover]="false"
+            #tokenizer
+            class="fd-multi-input-tokenizer-custom"
+            (moreClickedEvent)="moreClicked()"
+            tabindex="-1"
+            role="listbox"
+            fdMultiAnnouncer
+            [multiAnnouncerOptions]="isOpen ? _suggestions : []"
+        >
+            @for (token of selected; track token; let i = $index) {
+                <fd-token
+                    [readOnly]="disabled"
+                    (onCloseClick)="removeToken(token)"
+                    [attr.aria-posinset]="i"
+                    [attr.aria-setsize]="selected.length"
+                >
+                    <span>{{ token.label | displayFnPipe: displayFn }}</span>
+                </fd-token>
+            }
+            <input
+                #searchInputElement
+                type="text"
+                class="fd-input fd-multi-input-tokenizer-input fd-tokenizer__input fd-input-group__input"
+                fdp-auto-complete
+                autocomplete="off"
+                (onComplete)="_onAutoComplete($event)"
+                (keydown.enter)="_onKeydownEnter($event)"
+                (keydown)="onInputKeydownHandler($event)"
+                [inputText]="inputText"
+                [options]="_suggestions"
+                fd-input-group-input
+                fd-form-control
+                [attr.id]="id"
+                [disabled]="disabled"
+                [(ngModel)]="inputText"
+                (ngModelChange)="searchTermChanged()"
+                [ngModelOptions]="{ standalone: true }"
+                [placeholder]="placeholder"
+                (focus)="onTouched(); tokenizer._showAllTokens()"
+                (blur)="tokenizer._hideTokens()"
+                [attr.aria-expanded]="isOpen && _suggestions.length > 0"
+                [readonly]="readonly"
+                aria-haspopup="listbox"
+                [attr.aria-readonly]="readonly"
+                [ariaLabel]="ariaLabel || ('coreMultiInput.multiInputAriaLabel' | fdTranslate)"
+                [ariaLabelledBy]="ariaLabelledBy"
+                [attr.aria-required]="required"
+                [attr.aria-describedby]="tokenHiddenId"
+                aria-roledescription="Multi Value Input"
+                fdkInitialFocus
+                [enabled]="autofocus"
+            />
+        </fd-tokenizer>
     </fd-input-group>
 </ng-template>
 <ng-template #listTemplate>
