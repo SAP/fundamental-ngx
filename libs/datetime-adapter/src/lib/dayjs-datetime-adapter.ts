@@ -1,15 +1,15 @@
 import { Inject, Injectable, InjectionToken, LOCALE_ID, Optional } from '@angular/core';
 import dayjs, { ConfigType, Dayjs } from 'dayjs';
-import localeData from 'dayjs/plugin/localeData';
-import weekOfYear from 'dayjs/plugin/weekOfYear';
-import utc from 'dayjs/plugin/utc';
-import isBetween from 'dayjs/plugin/isBetween';
-import objectSupport from 'dayjs/plugin/objectSupport';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import isBetween from 'dayjs/plugin/isBetween';
+import localeData from 'dayjs/plugin/localeData';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import objectSupport from 'dayjs/plugin/objectSupport';
+import utc from 'dayjs/plugin/utc';
+import weekOfYear from 'dayjs/plugin/weekOfYear';
 
-import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
     return Array.from(new Array(length)).map((_, index) => mapFn(index));
@@ -270,8 +270,12 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     }
 
     /** Create date object from values */
-    createDate(year: number, month: number, date: number): Dayjs {
-        const result = this._createDayjsDate(new Date(year, month - 1, date));
+    createDate(year: number, month?: number, date?: number): Dayjs {
+        const result = this._createDayjsDate(
+            typeof month === 'number' && typeof date === 'number' ? new Date(year, month - 1, date) : `${year}`,
+            undefined,
+            true
+        );
 
         if (!result.isValid()) {
             throw Error(`Invalid date "${date}" for month with index "${month}" and year "${year}".`);
@@ -324,7 +328,8 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
             return false;
         }
 
-        return date1.isSame(date2, 'day');
+        // Since date may come from `createDate` method which uses `local` time, we need to convert both dates to the same timezone.
+        return date1.local().isSame(date2.local(), 'day');
     }
 
     /** Compare if dates and time are equal */
@@ -403,10 +408,10 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     }
 
     /** @hidden */
-    _createDayjsDate(date?: ConfigType, format?: string): Dayjs {
+    _createDayjsDate(date?: ConfigType, format?: string, ignoreUtc = false): Dayjs {
         const { strict, useUtc }: DayjsDatetimeAdapterOptions = this._options || {};
 
-        const method = useUtc ? dayjs.utc : dayjs;
+        const method = useUtc && !ignoreUtc ? dayjs.utc : dayjs;
         let parsed = method(date, format, strict);
         // dayjs strictly follows the provided format
         // so partial strings will not be resolved. in this case attempt to resolve without formatting
