@@ -50,6 +50,7 @@
             [glyphFont]="glyphFont"
             [addonButtonAriaHidden]="!!title"
             (addOnButtonClicked)="_addOnButtonClicked($event)"
+            [iconTitle]="addonIconTitle"
         >
             <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fd-multi-input__invisible-text">{{
                 'coreMultiInput.tokensCountText' | fdTranslate: { length: selected.length }
