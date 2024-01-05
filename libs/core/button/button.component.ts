@@ -135,7 +135,7 @@ export class ButtonComponent
             'fd-button',
             this.fdType ? `fd-button--${this.fdType}` : '',
             this.fdMenu ? 'fd-button--menu' : '',
-            this._disabled || this._ariaDisabled ? 'is-disabled' : '',
+            this.disabled || this.ariaDisabled ? 'is-disabled' : '',
             this.toggled ? `fd-button--toggled` : '',
             this.class
         ];

@@ -7,7 +7,7 @@
         >
             <ng-content select="fd-token"></ng-content>
         </div>
-        @if (_showOverflowPopover && (_contentDensityObserver.isCompactSignal() || compactCollapse)) {
+        @if (showOverflowPopover && (_contentDensityObserver.isCompactSignal() || compactCollapse)) {
             <ng-template [ngTemplateOutlet]="tokensOverflow"></ng-template>
         } @else {
             @if (_showMoreElement && _hiddenTokens.length > 0) {

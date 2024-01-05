@@ -1,5 +1,5 @@
 /* eslint-disable @angular-eslint/no-input-rename */
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput } from '@angular/cdk/coercion';
 import { PortalModule } from '@angular/cdk/portal';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
@@ -16,6 +16,7 @@ import {
     Output,
     QueryList,
     ViewEncapsulation,
+    booleanAttribute,
     inject
 } from '@angular/core';
 import { ToolHeaderButtonDirective } from '@fundamental-ngx/btp/button';
@@ -144,7 +145,7 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
     /**
      * Whether to show the menu button
      */
-    @Input({ transform: coerceBooleanProperty })
+    @Input({ transform: booleanAttribute })
     showMenuButton: BooleanInput;
 
     /**
@@ -152,7 +153,7 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
      * the right side of the tool header, when the mode is mobile
      * and the search input is expanded
      */
-    @Input({ transform: coerceBooleanProperty })
+    @Input({ transform: booleanAttribute })
     showVoiceInputAction: BooleanInput = true;
 
     /**

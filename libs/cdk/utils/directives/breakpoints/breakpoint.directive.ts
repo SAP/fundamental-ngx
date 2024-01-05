@@ -1,5 +1,5 @@
 /* eslint-disable @angular-eslint/no-input-rename */
-import { BooleanInput, coerceBooleanProperty, coerceElement } from '@angular/cdk/coercion';
+import { coerceElement } from '@angular/cdk/coercion';
 import {
     AfterViewInit,
     DestroyRef,
@@ -11,6 +11,7 @@ import {
     OnChanges,
     TemplateRef,
     ViewContainerRef,
+    booleanAttribute,
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -46,36 +47,28 @@ export class BreakpointDirective implements OnChanges, AfterViewInit {
      * Show element on S breakpoint.
      * S - 0 - 599px
      * */
-    @Input('fdkBreakpointS')
-    set showOnS(value: BooleanInput) {
-        this._showOnS = coerceBooleanProperty(value);
-    }
+    @Input({ alias: 'fdkBreakpointS', transform: booleanAttribute })
+    showOnS = false;
 
     /**
      * Show element on M breakpoint.
      * M - 0 - 1023px
      * */
-    @Input('fdkBreakpointM')
-    set showOnM(value: BooleanInput) {
-        this._showOnM = coerceBooleanProperty(value);
-    }
+    @Input({ alias: 'fdkBreakpointM', transform: booleanAttribute })
+    showOnM = false;
 
     /**
      * Show element on L breakpoint.
      * L - 0 - 1439px
      * */
-    @Input('fdkBreakpointL')
-    set showOnL(value: BooleanInput) {
-        this._showOnL = coerceBooleanProperty(value);
-    }
+    @Input({ alias: 'fdkBreakpointL', transform: booleanAttribute })
+    showOnL = false;
 
     /**
      * Show element on XL breakpoint.
      *  */
-    @Input('fdkBreakpointXL')
-    set showOnXL(value: BooleanInput) {
-        this._showOnXL = coerceBooleanProperty(value);
-    }
+    @Input({ alias: 'fdkBreakpointXL', transform: booleanAttribute })
+    showOnXL = false;
 
     /**
      * Show element on breakpoint less than provided value.
@@ -117,15 +110,6 @@ export class BreakpointDirective implements OnChanges, AfterViewInit {
     _sizeObservable$: BehaviorSubject<Observable<number>> = new BehaviorSubject<Observable<number>>(
         inject(ViewportSizeObservable)
     );
-    /** @hidden */
-    private _showOnS = false;
-    /** @hidden */
-    private _showOnM = false;
-    /** @hidden */
-    private _showOnL = false;
-
-    /** @hidden */
-    private _showOnXL = false;
 
     /** @hidden */
     private viewportSize$ = inject(ViewportSizeObservable);
@@ -177,10 +161,10 @@ export class BreakpointDirective implements OnChanges, AfterViewInit {
     /** @hidden */
     private _shouldShow(width: number, currentBreakpoint: BreakpointName): boolean {
         const shouldShowOnBreakpoints = [
-            this._showOnS && 'S',
-            this._showOnM && 'M',
-            this._showOnL && 'L',
-            this._showOnXL && 'XL'
+            this.showOnS && 'S',
+            this.showOnM && 'M',
+            this.showOnL && 'L',
+            this.showOnXL && 'XL'
         ].filter(Boolean);
         const shouldShow = shouldShowOnBreakpoints.includes(currentBreakpoint);
         if (this.fdkBreakpointLt) {

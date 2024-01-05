@@ -1,5 +1,5 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Directive, ElementRef, Input, inject } from '@angular/core';
+import { BooleanInput } from '@angular/cdk/coercion';
+import { Directive, ElementRef, Input, booleanAttribute, inject } from '@angular/core';
 import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
@@ -13,11 +13,11 @@ import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 })
 export class ToolHeaderGroupDirective implements HasElementRef {
     /** @hidden */
-    @Input({ transform: coerceBooleanProperty })
+    @Input({ transform: booleanAttribute })
     center: BooleanInput;
 
     /** @hidden */
-    @Input({ transform: coerceBooleanProperty })
+    @Input({ transform: booleanAttribute })
     actions: BooleanInput;
 
     /** @hidden */
