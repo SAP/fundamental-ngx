@@ -21,13 +21,14 @@
                 <div fd-bar-right>
                     @if (!isFirstStep) {
                         <ng-template #defaultGoBackButtonTemplate>
-                            <fdp-button
+                            <button
+                                fd-button
                                 class="fd-bar__element"
                                 [fdContentDensity]="_navigationButtonLabels.goBack.contentDensity"
-                                [buttonType]="_navigationButtonLabels.goBack.type"
+                                [fdType]="_navigationButtonLabels.goBack.type"
                                 [label]="_navigationButtonLabels.goBack.label"
                                 (click)="goBack()"
-                            ></fdp-button>
+                            ></button>
                         </ng-template>
                         <ng-template
                             [ngTemplateOutlet]="goBackButtonTemplate || defaultGoBackButtonTemplate"
@@ -36,22 +37,24 @@
                     }
                     @if (!isLastStep) {
                         <ng-template #defaultGoNextButtonTemplate>
-                            <fdp-button
+                            <button
+                                fd-button
                                 class="fd-bar__element"
                                 [fdContentDensity]="_navigationButtonLabels.goNext.contentDensity"
-                                [buttonType]="_navigationButtonLabels.goNext.type"
+                                [fdType]="_navigationButtonLabels.goNext.type"
                                 [label]="_navigationButtonLabels.goNext.label"
                                 (click)="goNext()"
-                            ></fdp-button>
+                            ></button>
                         </ng-template>
                         <ng-template #defaultReviewButtonTemplate>
-                            <fdp-button
+                            <button
+                                fd-button
                                 class="fd-bar__element"
                                 [fdContentDensity]="_navigationButtonLabels.review.contentDensity"
-                                [buttonType]="_navigationButtonLabels.review.type"
+                                [fdType]="_navigationButtonLabels.review.type"
                                 [label]="_navigationButtonLabels.review.label"
                                 (click)="goNext()"
-                            ></fdp-button>
+                            ></button>
                         </ng-template>
                         @if (
                             (isBranchingStep && (!isCurrentStepCompleted || _stepsOrderChanged)) || !isNextStepSummary
@@ -69,13 +72,14 @@
                     }
                     @if (isLastStep) {
                         <ng-template #defaultFinishButtonTemplate>
-                            <fdp-button
+                            <button
+                                fd-button
                                 class="fd-bar__element"
                                 [fdContentDensity]="_navigationButtonLabels.finish.contentDensity"
-                                [buttonType]="_navigationButtonLabels.finish.type"
+                                [fdType]="_navigationButtonLabels.finish.type"
                                 [label]="_navigationButtonLabels.finish.label"
                                 (click)="finish()"
-                            ></fdp-button>
+                            ></button>
                         </ng-template>
                         <ng-template
                             [ngTemplateOutlet]="finishButtonTemplate || defaultFinishButtonTemplate"
@@ -83,13 +87,14 @@
                         ></ng-template>
                     }
                     <ng-template #defaultCancelButtonTemplate>
-                        <fdp-button
+                        <button
+                            fd-button
                             class="fd-bar__element"
                             [fdContentDensity]="_navigationButtonLabels.cancel.contentDensity"
-                            [buttonType]="_navigationButtonLabels.cancel.type"
+                            [fdType]="_navigationButtonLabels.cancel.type"
                             [label]="_navigationButtonLabels.cancel.label"
                             (click)="cancel()"
-                        ></fdp-button>
+                        ></button>
                     </ng-template>
                     <ng-template
                         [ngTemplateOutlet]="cancelButtonTemplate || defaultCancelButtonTemplate"

@@ -22,13 +22,13 @@
         [(ngModel)]="value"
         (ngModelChange)="onChange()"
     ></textarea>
-    <fdp-button
+    <button
+        fd-button
         class="fd-feed-input__submit-button"
         glyph="feeder-arrow"
         title="Send"
         ariaLabel="Send"
         [disabled]="!value || disabled"
         (click)="onSubmit()"
-    >
-    </fdp-button>
+    ></button>
 </div>
