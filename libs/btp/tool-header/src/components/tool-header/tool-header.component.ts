@@ -128,16 +128,16 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
     /** Mode */
     @Input('mode')
     set _mode(mode: FdbViewMode) {
-        if (mode !== this.mode()) {
-            this.mode.set(mode);
+        if (mode !== this._mode$()) {
+            this._mode$.set(mode);
         }
     }
 
     /** @hidden */
     @Input('orientation')
     set _orientation(orientation: 'landscape' | 'portrait') {
-        if (orientation !== this.orientation()) {
-            this.orientation.set(orientation);
+        if (orientation !== this._orientation$()) {
+            this._orientation$.set(orientation);
         }
     }
 
@@ -200,7 +200,7 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
     /** @hidden */
     @ContentChild(SearchFieldComponent)
     set _searchField(searchField: SearchFieldComponent) {
-        this.searchField.set(searchField);
+        this._searchField$.set(searchField);
     }
 
     /** @hidden */
@@ -233,15 +233,15 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
      **/
     @HostListener('document:click', ['$event'])
     _onClick(event: MouseEvent): void {
-        if (this.searchFieldExpanded()) {
+        if (this._searchFieldExpanded$()) {
             if (
-                this.mode() === 'tablet' &&
-                this.orientation() === 'portrait' &&
-                this.searchField() &&
+                this._mode$() === 'tablet' &&
+                this._orientation$() === 'portrait' &&
+                this._searchField$() &&
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                !event.composedPath().includes(this.searchField()!.elementRef.nativeElement)
+                !event.composedPath().includes(this._searchField$()!.elementRef.nativeElement)
             ) {
-                this.searchFieldExpanded.set(false);
+                this._searchFieldExpanded$.set(false);
             }
         }
     }
@@ -254,9 +254,9 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
     @HostListener('document:keydown.control.k', ['$event'])
     @HostListener('document:keydown.meta.k', ['$event'])
     _onKeyDown(): void {
-        if (this.mode() === 'tablet' && this.orientation() === 'portrait' && this.searchField()) {
-            this.searchFieldExpanded.set(true);
-            this.searchField()?.focus();
+        if (this._mode$() === 'tablet' && this._orientation$() === 'portrait' && this._searchField$()) {
+            this._searchFieldExpanded$.set(true);
+            this._searchField$()?.focus();
         }
     }
 
@@ -271,9 +271,9 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
      * Expand the search field
      **/
     expandSearchField(): void {
-        this.searchFieldExpanded.set(true);
+        this._searchFieldExpanded$.set(true);
         this._ngZone.onStable.pipe(first()).subscribe(() => {
-            this.searchField()?.focus();
+            this._searchField$()?.focus();
         });
     }
 

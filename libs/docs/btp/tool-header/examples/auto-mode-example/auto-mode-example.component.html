@@ -71,6 +71,6 @@
     </fdb-tool-header-product-switch>
 </fdb-tool-header>
 <div [style.margin-top.rem]="2">
-    <div>Current mode: {{ toolHeaderComponent.mode() }}</div>
-    <div>Current orientation: {{ toolHeaderComponent.orientation() }}</div>
+    <div>Current mode: {{ toolHeaderComponent.mode$() }}</div>
+    <div>Current orientation: {{ toolHeaderComponent.orientation$() }}</div>
 </div>
