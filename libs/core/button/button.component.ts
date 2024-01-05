@@ -38,7 +38,7 @@ import { FD_BUTTON_COMPONENT } from './tokens';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[attr.type]': 'type',
-        '[attr.disabled]': '_disabled || null',
+        '[attr.disabled]': 'disabled || null',
         '[attr.aria-label]': 'buttonArialabel',
         '[attr.aria-description]': 'buttonAriaDescription'
     },

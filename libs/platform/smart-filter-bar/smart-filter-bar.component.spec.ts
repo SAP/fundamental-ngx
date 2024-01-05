@@ -351,11 +351,11 @@ describe('SmartFilterBarComponent', () => {
     });
 
     it('should toggle filter bar', async () => {
-        smartFilterBar._toggleFilterBar();
+        smartFilterBar.toggleFilterBar();
         fixture.detectChanges();
         await whenStable(fixture);
 
-        expect(smartFilterBar._showFilterBar).toBe(false);
+        expect(smartFilterBar.showFilterBar$()).toBe(false);
         expect(
             fixture.nativeElement.querySelector('.fdp-smart-filter-bar__filters').getAttribute('hidden')
         ).not.toBeNull();
