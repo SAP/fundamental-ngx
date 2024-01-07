@@ -115,7 +115,7 @@
         "@wdio/spec-reporter": "7.7.3",
         "ajv-formats": "2.1.1",
         "autoprefixer": "10.4.16",
-        "axe-core": "4.5.2",
+        "axe-core": "4.8.3",
         "axe-html-reporter": "2.2.3",
         "axios": "1.2.0",
         "babel-loader": "9.1.0",
