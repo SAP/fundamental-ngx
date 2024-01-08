@@ -6,7 +6,8 @@ import {
     Inject,
     OnInit,
     Optional,
-    QueryList
+    QueryList,
+    inject
 } from '@angular/core';
 import { ObjectMarkerComponent } from '@fundamental-ngx/core/object-marker';
 import { FD_OBJECT_STATUS_COMPONENT, ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
@@ -27,7 +28,7 @@ export class UploadCollectionThumbnailDirective {}
 })
 export class UploadCollectionTitleDirective {
     /** @hidden */
-    constructor(public elRef: ElementRef) {}
+    readonly elRef = inject(ElementRef);
 }
 
 @Directive({

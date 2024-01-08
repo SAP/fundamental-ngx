@@ -1,12 +1,11 @@
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChild,
     ElementRef,
-    Renderer2,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
@@ -28,13 +27,7 @@ export class DynamicPageGlobalActionsComponent extends DynamicPageBaseActions im
     _toolbarComponent: ToolbarComponent;
 
     /** @hidden */
-    constructor(
-        private _elementRef: ElementRef,
-        private _renderer: Renderer2,
-        private _changeDetRef: ChangeDetectorRef
-    ) {
-        super();
-    }
+    private readonly _elementRef = inject(ElementRef);
 
     /** @hidden */
     ngAfterContentInit(): void {

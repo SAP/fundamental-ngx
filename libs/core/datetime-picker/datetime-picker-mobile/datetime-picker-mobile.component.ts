@@ -1,25 +1,11 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    Inject,
-    Optional,
-    TemplateRef,
-    ViewChild,
-    ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InitialFocusDirective, Nullable } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import {
-    MOBILE_MODE_CONFIG,
-    MobileModeBase,
-    MobileModeConfigToken,
-    MobileModeControl
-} from '@fundamental-ngx/core/mobile-mode';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleModule } from '@fundamental-ngx/core/title';
 import { DateTimePicker } from '../datetime-picker.model';
@@ -50,14 +36,11 @@ export class DatetimePickerMobileComponent<D> extends MobileModeBase<DateTimePic
 
     /** @hidden */
     constructor(
-        elementRef: ElementRef,
-        dialogService: DialogService,
         @Inject(FD_DATETIME_PICKER_MOBILE_CONFIG)
         public dateTimePickerConfig: { pickerTemplate: TemplateRef<any> },
-        @Inject(FD_DATETIME_PICKER_COMPONENT) datePickerComponent: DateTimePicker<D>,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
+        @Inject(FD_DATETIME_PICKER_COMPONENT) datePickerComponent: DateTimePicker<D>
     ) {
-        super(elementRef, dialogService, datePickerComponent, MobileModeControl.DATETIME_PICKER, mobileModes);
+        super(datePickerComponent, MobileModeControl.DATETIME_PICKER);
 
         this._component.isOpenChange.subscribe((isOpen) => {
             this._toggleDialog(isOpen);

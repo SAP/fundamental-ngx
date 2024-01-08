@@ -16,7 +16,6 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ListSecondaryDirective } from '@fundamental-ngx/core/list';
 import { SelectComponent as CoreSelect, SelectModule } from '@fundamental-ngx/core/select';
 import { BaseSelect } from '../commons/base-select';
-import { SelectConfig } from '../select.config';
 
 @Component({
     selector: 'fdp-select',
@@ -48,11 +47,6 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
     /** @hidden */
     @ViewChild(CoreSelect, { static: true })
     select: CoreSelect;
-
-    /** @hidden */
-    constructor(_selectConfig: SelectConfig) {
-        super(_selectConfig);
-    }
 
     /** @hidden */
     ngAfterViewInit(): void {

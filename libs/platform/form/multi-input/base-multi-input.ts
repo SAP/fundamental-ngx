@@ -17,10 +17,10 @@ import {
     Directive,
     ElementRef,
     EventEmitter,
+    inject,
     Input,
     OnChanges,
     OnDestroy,
-    Optional,
     Output,
     QueryList,
     SimpleChanges,
@@ -197,6 +197,9 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     searchInputElement: ElementRef;
 
     /** @hidden */
+    protected readonly multiInputConfig = inject(MultiInputConfig);
+
+    /** @hidden */
     _contentDensity: ContentDensity = this.multiInputConfig.contentDensity;
 
     /** @hidden */
@@ -271,12 +274,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     ];
 
     /** @hidden */
-    protected constructor(
-        @Optional() readonly dialogConfig: DialogConfig,
-        protected multiInputConfig: MultiInputConfig
-    ) {
-        super();
-    }
+    protected readonly dialogConfig = inject(DialogConfig, { optional: true });
 
     /** @hidden */
     ngAfterViewInit(): void {

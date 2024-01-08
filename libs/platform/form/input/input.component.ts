@@ -81,11 +81,6 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
     }
 
     /** @hidden */
-    constructor() {
-        super();
-    }
-
-    /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
         if (!this.type || VALID_INPUT_TYPES.indexOf(this.type) === -1) {

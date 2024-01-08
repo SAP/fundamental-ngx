@@ -17,12 +17,11 @@ import {
     Directive,
     ElementRef,
     EventEmitter,
-    Inject,
+    inject,
     InjectionToken,
     Input,
     OnChanges,
     OnDestroy,
-    Optional,
     Output,
     QueryList,
     signal,
@@ -244,6 +243,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     selectedItemTemplate: TemplateRef<any>;
 
     /** @hidden */
+    protected readonly multiComboboxConfig = inject(MultiComboboxConfig);
+
+    /** @hidden */
     _contentDensity: ContentDensity = this.multiComboboxConfig.contentDensity;
 
     /** @hidden */
@@ -365,13 +367,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     protected readonly _rangeSelector = new RangeSelector();
 
     /** @hidden */
-    protected constructor(
-        @Optional() readonly dialogConfig: DialogConfig,
-        protected multiComboboxConfig: MultiComboboxConfig,
-        @Inject(MAP_LIMIT) private _mapLimit: number
-    ) {
-        super();
-    }
+    protected readonly dialogConfig = inject(DialogConfig, { optional: true });
+
+    /** @hidden */
+    private readonly _mapLimit = inject(MAP_LIMIT);
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {

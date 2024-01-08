@@ -98,7 +98,7 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
     }
 
     /** @hidden */
-    constructor(@Optional() private _rtlService: RtlService) {
+    constructor(@Optional() private readonly _rtlService: RtlService) {
         super();
     }
 

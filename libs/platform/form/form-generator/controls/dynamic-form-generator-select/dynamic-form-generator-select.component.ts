@@ -15,9 +15,4 @@ import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../p
     standalone: true,
     imports: [FormsModule, ReactiveFormsModule, SelectComponent]
 })
-export class DynamicFormGeneratorSelectComponent extends BaseDynamicFormGeneratorControl<SelectDynamicFormFieldItem> {
-    /** @hidden */
-    constructor() {
-        super();
-    }
-}
+export class DynamicFormGeneratorSelectComponent extends BaseDynamicFormGeneratorControl<SelectDynamicFormFieldItem> {}

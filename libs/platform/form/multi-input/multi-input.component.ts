@@ -23,7 +23,6 @@ import { FormsModule } from '@angular/forms';
 import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { DisplayFnPipe, DynamicComponentService, InitialFocusDirective, KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
 import {
     BaseListItem,
@@ -58,7 +57,6 @@ import { AutoCompleteDirective, AutoCompleteEvent } from '../auto-complete/auto-
 import { InputType } from '../input/input.component';
 import { BaseMultiInput } from './base-multi-input';
 import { PlatformMultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
-import { MultiInputConfig } from './multi-input.config';
 import { MULTIINPUT_COMPONENT } from './multi-input.interface';
 
 let uniqueHiddenLabel = 0;
@@ -228,8 +226,6 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     /** @hidden */
     constructor(
         /** @hidden */
-        @Optional() _dialogConfig: DialogConfig,
-        /** @hidden */
         readonly _dynamicComponentService: DynamicComponentService,
         /** @hidden */
         private readonly _viewContainerRef: ViewContainerRef,
@@ -237,11 +233,9 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         private readonly _injector: Injector,
         /** @hidden */
         @Optional() @Inject(DATA_PROVIDERS) private _providers: Map<string, DataProvider<any>>,
-        /** @hidden */
-        _multiInputConfig: MultiInputConfig,
         readonly contentDensityObserver: ContentDensityObserver
     ) {
-        super(_dialogConfig, _multiInputConfig);
+        super();
     }
 
     /** Display function. Accepts an object of the same type as the

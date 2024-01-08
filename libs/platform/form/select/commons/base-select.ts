@@ -6,6 +6,7 @@ import {
     Directive,
     ElementRef,
     EventEmitter,
+    inject,
     Input,
     OnDestroy,
     Output,
@@ -252,6 +253,9 @@ export abstract class BaseSelect
     _subscriptions = new Subscription();
 
     /** @hidden */
+    protected readonly selectConfig = inject(SelectConfig);
+
+    /** @hidden */
     private _searchInputElement: ElementRef;
 
     /** Whether the select is opened. */
@@ -275,11 +279,6 @@ export abstract class BaseSelect
 
     /** @hidden */
     private _secondColumnRatio: number;
-
-    /** @hidden */
-    protected constructor(protected selectConfig: SelectConfig) {
-        super();
-    }
 
     /** @hidden */
     ngAfterViewInit(): void {

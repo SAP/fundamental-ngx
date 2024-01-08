@@ -102,14 +102,14 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _injector: Injector,
         @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
-        readonly _comboboxConfig: ComboboxConfig
+        _comboboxConfig: ComboboxConfig
     ) {
         super(_dialogConfig, _comboboxConfig);
     }
     /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
-        const providers = this.providers?.size === 0 ? this._comboboxConfig.providers : this.providers;
+        const providers = this.providers?.size === 0 ? this.comboboxConfig.providers : this.providers;
         // if we have both prefer dataSource
         if (!this.dataSource && this.entityClass && providers?.has(this.entityClass)) {
             this.dataSource = new ComboBoxDataSource(providers.get(this.entityClass)!);

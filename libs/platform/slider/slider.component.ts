@@ -90,11 +90,6 @@ export class SliderComponent extends BaseInput {
     @Output()
     readonly sliderChange = new EventEmitter<SliderChangeEvent>();
 
-    /** @hidden */
-    constructor() {
-        super();
-    }
-
     /** value for slider control */
     @Input()
     set value(selectValue: any) {

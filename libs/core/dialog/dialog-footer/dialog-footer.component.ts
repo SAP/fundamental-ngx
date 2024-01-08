@@ -3,8 +3,8 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
-    Optional,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 
 import { NgTemplateOutlet } from '@angular/common';
@@ -37,10 +37,7 @@ export const DialogButtonClass = 'fd-dialog__decisive-button';
 })
 export class DialogFooterComponent extends DialogFooterBase implements AfterContentInit, AfterViewInit {
     /** @hidden */
-    constructor(@Optional() public dialogConfig: DialogConfig) {
-        super();
-        this.dialogConfig = this.dialogConfig || {};
-    }
+    dialogConfig = inject(DialogConfig, { optional: true }) || {};
 
     /** @hidden */
     ngAfterContentInit(): void {

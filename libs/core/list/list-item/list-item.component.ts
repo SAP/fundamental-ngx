@@ -1,6 +1,5 @@
 import {
     AfterContentInit,
-    Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -13,9 +12,7 @@ import {
     HostBinding,
     HostListener,
     inject,
-    Inject,
     Input,
-    Optional,
     Output,
     QueryList,
     ViewEncapsulation
@@ -34,7 +31,6 @@ import { Subject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { ListLinkDirective } from '../directives/list-link.directive';
 import { ListFocusItem } from '../list-focus-item.model';
-import { ListUnreadIndicator } from '../list-unread-indicator.interface';
 import { FD_LIST_LINK_DIRECTIVE, FD_LIST_UNREAD_INDICATOR } from '../tokens';
 
 let listItemUniqueId = 0;
@@ -193,9 +189,7 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     /** @hidden */
     constructor(
         public readonly elementRef: ElementRef,
-        private readonly _changeDetectorRef: ChangeDetectorRef,
-        @Attribute('role') private readonly _defaultRole: string | null,
-        @Optional() @Inject(FD_LIST_UNREAD_INDICATOR) private readonly _unreadIndicator?: ListUnreadIndicator
+        private readonly _changeDetectorRef: ChangeDetectorRef
     ) {
         super(elementRef);
     }

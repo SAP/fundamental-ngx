@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, OnInit, inject } from '@angular/core';
 
 /*
  This abstract class allows the user to set their own custom styles on a Fundamental Library for Angular directive, in addition to the
@@ -11,10 +11,10 @@ import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
 @Directive()
 export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
     /** @hidden */
-    private _elementRef: ElementRef;
+    @Input() class: string; // user's custom classes
 
     /** @hidden */
-    @Input() class: string; // user's custom classes
+    readonly elementRef = inject(ElementRef);
 
     /*
      each directive that extends this class will implement this function and populate it with one or more calls to
@@ -25,33 +25,32 @@ export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
 
     /** @hidden */
     _setClassToElement(className: string): void {
-        (this._elementRef.nativeElement as HTMLElement).classList.value = `${className} ${this.class}`;
+        (this.elementRef.nativeElement as HTMLElement).classList.value = `${className} ${this.class}`;
     }
 
     /** @hidden */
     _clearElementClass(): void {
-        (this._elementRef.nativeElement as HTMLElement).classList.value = '';
+        (this.elementRef.nativeElement as HTMLElement).classList.value = '';
     }
 
     /** @hidden */
     _addClassToElement(className: string): void {
-        (this._elementRef.nativeElement as HTMLElement).classList.add(...className.split(' '));
+        (this.elementRef.nativeElement as HTMLElement).classList.add(...className.split(' '));
     }
 
     /** @hidden */
     _addStyleToElement(attribute, value): void {
-        (this._elementRef.nativeElement as HTMLElement).style[attribute] = value;
+        (this.elementRef.nativeElement as HTMLElement).style[attribute] = value;
     }
 
     /** @hidden */
-    protected constructor(elementRef: ElementRef) {
-        this._elementRef = elementRef;
+    constructor() {
         this._setProperties();
     }
 
     /** @hidden */
     ngOnChanges(): void {
-        const classList = (this._elementRef.nativeElement as HTMLElement).classList;
+        const classList = (this.elementRef.nativeElement as HTMLElement).classList;
         while (classList.length > 0) {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             classList.remove(classList.item(0)!);

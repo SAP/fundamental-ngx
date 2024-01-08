@@ -1,12 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    TemplateRef,
-    ViewChild,
-    ViewEncapsulation,
-    inject
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild, ViewEncapsulation, inject } from '@angular/core';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 import { filter } from 'rxjs/operators';
 
@@ -107,13 +99,8 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
     private readonly _messageBoxService = inject(MessageBoxService);
 
     /** @hidden */
-    constructor(
-        _wizardGeneratorService: WizardGeneratorService,
-        _cd: ChangeDetectorRef,
-        private _dialogRef: DialogRef<WizardDialogData>
-    ) {
-        super(_wizardGeneratorService, _cd);
-
+    constructor(private _dialogRef: DialogRef<WizardDialogData>) {
+        super();
         this.items = this._dialogRef.data.items;
         this.title = this._dialogRef.data.title;
         this.appendToWizard = this._dialogRef.data.appendToWizard;

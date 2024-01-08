@@ -2,12 +2,10 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
     HostListener,
     Inject,
     OnDestroy,
     OnInit,
-    Optional,
     TemplateRef,
     ViewChild
 } from '@angular/core';
@@ -18,13 +16,8 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
-import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import {
-    MOBILE_MODE_CONFIG,
-    MobileModeBase,
-    MobileModeConfigToken,
-    MobileModeControl
-} from '@fundamental-ngx/core/mobile-mode';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { SELECT_COMPONENT, SelectInterface } from '../select.interface';
@@ -57,13 +50,8 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    constructor(
-        _elementRef: ElementRef,
-        _dialogService: DialogService,
-        @Inject(SELECT_COMPONENT) _selectComponent: SelectInterface,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
-    ) {
-        super(_elementRef, _dialogService, _selectComponent, MobileModeControl.SELECT, mobileModes);
+    constructor(@Inject(SELECT_COMPONENT) _selectComponent: SelectInterface) {
+        super(_selectComponent, MobileModeControl.SELECT);
     }
 
     /** @hidden */

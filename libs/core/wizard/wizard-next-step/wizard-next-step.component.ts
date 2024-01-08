@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, inject } from '@angular/core';
 
 @Component({
     selector: 'fd-wizard-next-step',
@@ -33,7 +33,7 @@ export class WizardNextStepComponent {
     private _canHide = true;
 
     /** @hidden */
-    constructor(private _elRef: ElementRef) {}
+    private readonly _elRef = inject(ElementRef);
 
     /** @hidden */
     _getElRef(): ElementRef {

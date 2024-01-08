@@ -18,7 +18,6 @@ import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import equal from 'fast-deep-equal';
 
 import { DynamicComponentService, KeyUtil, SearchHighlightPipe, warnOnce } from '@fundamental-ngx/cdk/utils';
-import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import {
     DATA_PROVIDERS,
     DataProvider,
@@ -42,9 +41,8 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
 import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { AutoCompleteDirective, AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
-import { BaseMultiCombobox, MAP_LIMIT } from '../commons/base-multi-combobox';
+import { BaseMultiCombobox } from '../commons/base-multi-combobox';
 import { MultiComboboxMobileComponent } from '../multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component';
-import { MultiComboboxConfig } from '../multi-combobox.config';
 import { MULTICOMBOBOX_COMPONENT } from '../multi-combobox.interface';
 
 let deprecationWarningShown = false;
@@ -117,16 +115,13 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
     /** @hidden */
     constructor(
-        @Optional() _dialogConfig: DialogConfig,
         readonly _dynamicComponentService: DynamicComponentService,
         @Optional() @Inject(DATA_PROVIDERS) private _providers: Map<string, DataProvider<any>>,
-        _multiComboboxConfig: MultiComboboxConfig,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _injector: Injector,
-        @Inject(MAP_LIMIT) _mapLimit: number,
         readonly contentDensityObserver: ContentDensityObserver
     ) {
-        super(_dialogConfig, _multiComboboxConfig, _mapLimit);
+        super();
 
         if (!deprecationWarningShown && isDevMode()) {
             warnOnce(
