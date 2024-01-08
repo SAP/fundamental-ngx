@@ -89,6 +89,7 @@
                 [disabled]="!(column | isColumnHasHeaderMenu)"
                 [columnFrozen]="column._freezed || column._endFreezed"
                 [column]="column"
+                [columnIndex]="$index"
                 [popoverTemplate]="(column | isColumnHasHeaderMenu) ? column.headerCellPopoverTemplate : null"
                 [filteringFromHeaderDisabled]="_fdpTableService._isFilteringFromHeaderDisabled$()"
             ></fdp-table-cell-header-popover>

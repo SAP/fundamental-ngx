@@ -138,6 +138,10 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     @Input()
     glyphAriaLabel: string;
 
+    /** Title text for the add-on icon button. */
+    @Input()
+    addonIconTitle: string;
+
     /** @hidden */
     @ViewChild(ListComponent)
     listTemplateDD: ListComponent<MultiInputOption>;

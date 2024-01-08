@@ -130,7 +130,7 @@ import {
 import equal from 'fast-deep-equal';
 import { fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, take, tap } from 'rxjs/operators';
-import { TABLE_TOOLBAR, TableToolbarInterface, ToolbarContext } from './components';
+import { NoDataWrapperComponent, TABLE_TOOLBAR, TableToolbarInterface, ToolbarContext } from './components';
 import { PlatformTableColumnResizerComponent } from './components/table-column-resizer/table-column-resizer.component';
 import { TableGroupRowComponent } from './components/table-group-row/table-group-row.component';
 import { TableHeaderRowComponent } from './components/table-header-row/table-header-row.component';
@@ -527,6 +527,9 @@ export class TableComponent<T = any>
     /** @hidden */
     @ContentChild(TABLE_TOOLBAR)
     readonly tableToolbar: TableToolbarInterface;
+    /** @hidden */
+    @ContentChild(NoDataWrapperComponent)
+    readonly _noDataWrapper: Nullable<NoDataWrapperComponent>;
     /** @hidden */
     get initialSortBy(): CollectionSort[] {
         return this.initialState?.initialSortBy ?? [];
