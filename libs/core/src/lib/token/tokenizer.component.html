@@ -4,6 +4,7 @@
             role="listbox"
             [attr.aria-label]="'coreTokenizer.tokenizerLabel' | fdTranslate"
             [style.width]="_tokensContainerWidth"
+            [attr.aria-hidden]="tokenList.length === 0"
         >
             <ng-content select="fd-token"></ng-content>
         </div>
