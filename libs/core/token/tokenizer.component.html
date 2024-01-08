@@ -1,6 +1,7 @@
 <div class="fd-tokenizer fd-tokenizer--scrollable" [class.is-focus]="_tokenizerHasFocus">
     <div class="fd-tokenizer__inner" #tokenizerInner>
         <div
+            [attr.aria-hidden]="tokenList.length === 0"
             role="listbox"
             [attr.aria-label]="'coreTokenizer.tokenizerLabel' | fdTranslate"
             [style.width]="_tokensContainerWidth"
