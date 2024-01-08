@@ -573,6 +573,8 @@ export interface FdLanguage {
         headerMenuFreeze: FdLanguageKey;
         headerMenuEndFreeze: FdLanguageKey;
         headerMenuUnfreeze: FdLanguageKey;
+        headerMenuFreezePlural: FdLanguageKey;
+        headerMenuUnfreezePlural: FdLanguageKey;
         headerMenuFilter: FdLanguageKey;
         defaultEmptyMessage: FdLanguageKey;
         emptyCell: FdLanguageKey;

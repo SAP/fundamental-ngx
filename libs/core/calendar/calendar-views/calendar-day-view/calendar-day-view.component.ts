@@ -601,13 +601,13 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         const amountOfDaysInCurrentMonth: number = this._dateTimeAdapter.getNumDaysInMonth(
             this._dateTimeAdapter.createDate(year, month, 1)
         );
-        const today = this._dateTimeAdapter.today();
+        const now = this._dateTimeAdapter.now();
         for (let dayNumber = 1; dayNumber <= amountOfDaysInCurrentMonth; dayNumber++) {
             const date: D = this._dateTimeAdapter.createDate(year, month, dayNumber);
             calendarDays.push({
                 ...this._getDay(date),
                 monthStatus: 'current',
-                current: this._dateTimeAdapter.datesEqual(today, date)
+                current: this._dateTimeAdapter.datesEqual(now, date)
             });
         }
         const cell = this._getActiveCell(calendarDays);

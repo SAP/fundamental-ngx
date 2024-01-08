@@ -56,7 +56,6 @@
             (click)="_setColumnHeaderGroupBy(column.key)"
             (keydown.enter)="_setColumnHeaderGroupBy(column.key)"
         >
-            <span fd-list-icon></span>
             <span fd-list-title>{{ 'platformTable.headerMenuGroup' | fdTranslate }}</span>
         </a>
     </ng-template>
@@ -65,16 +64,21 @@
     <ng-template fdkTemplate="freezePopoverItem" let-popover="popover">
         @if (!columnFrozen) {
             <a fd-list-link [focusable]="true" (click)="_freeze()" (keyup.enter)="_freeze()">
-                <span></span>
                 <span fd-list-title>{{
-                    (!column.endFreezable ? 'platformTable.headerMenuFreeze' : 'platformTable.headerMenuEndFreeze')
-                        | fdTranslate
+                    (!column.endFreezable
+                        ? columnIndex > 0
+                            ? 'platformTable.headerMenuFreezePlural'
+                            : 'platformTable.headerMenuFreeze'
+                        : 'platformTable.headerMenuEndFreeze'
+                    ) | fdTranslate
                 }}</span>
             </a>
         } @else {
             <a fd-list-link [focusable]="true" (click)="_unFreeze()" (keyup.enter)="_unFreeze()">
-                <span></span>
-                <span fd-list-title>{{ 'platformTable.headerMenuUnfreeze' | fdTranslate }}</span>
+                <span fd-list-title>{{
+                    (columnIndex > 0 ? 'platformTable.headerMenuUnfreezePlural' : 'platformTable.headerMenuUnfreeze')
+                        | fdTranslate
+                }}</span>
             </a>
         }
     </ng-template>

@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.30...v0.48.0-rc.31) (2024-01-08)
+
+
+### Bug Fixes
+
+* **platform:** corrected translations ([#11197](https://github.com/SAP/fundamental-ngx/issues/11197)) ([9df8fb9](https://github.com/SAP/fundamental-ngx/commit/9df8fb999b9c7bbc53854d884ba87f4e6abd4976))
+
+
+
+
+
+# [0.48.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.29...v0.48.0-rc.30) (2024-01-08)
+
+
+### Bug Fixes
+
+* add addonIconTitle input to multi input ([#11184](https://github.com/SAP/fundamental-ngx/issues/11184)) ([ffcc99b](https://github.com/SAP/fundamental-ngx/commit/ffcc99bc4e6fcdaa2ba50e3062c31b976ab407e5))
+* **core:** dayjs utc offset fix ([#11182](https://github.com/SAP/fundamental-ngx/issues/11182)) ([1a6df1e](https://github.com/SAP/fundamental-ngx/commit/1a6df1ea17e79c15411ffa85d0b5d5b69400a28a))
+
+
+
+
+
 # [0.48.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.28...v0.48.0-rc.29) (2024-01-04)
 
 
