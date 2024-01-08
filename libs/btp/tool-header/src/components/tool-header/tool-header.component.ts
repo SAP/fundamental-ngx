@@ -1,5 +1,4 @@
 /* eslint-disable @angular-eslint/no-input-rename */
-import { BooleanInput } from '@angular/cdk/coercion';
 import { PortalModule } from '@angular/cdk/portal';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
@@ -146,7 +145,7 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
      * Whether to show the menu button
      */
     @Input({ transform: booleanAttribute })
-    showMenuButton: BooleanInput;
+    showMenuButton = false;
 
     /**
      * Whether to show the voice input action button on
@@ -154,7 +153,7 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
      * and the search input is expanded
      */
     @Input({ transform: booleanAttribute })
-    showVoiceInputAction: BooleanInput = true;
+    showVoiceInputAction = true;
 
     /**
      * Event emitted when the menu button is clicked

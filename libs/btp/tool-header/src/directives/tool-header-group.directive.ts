@@ -1,4 +1,3 @@
-import { BooleanInput } from '@angular/cdk/coercion';
 import { Directive, ElementRef, Input, booleanAttribute, inject } from '@angular/core';
 import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 
@@ -14,11 +13,11 @@ import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 export class ToolHeaderGroupDirective implements HasElementRef {
     /** @hidden */
     @Input({ transform: booleanAttribute })
-    center: BooleanInput;
+    center = false;
 
     /** @hidden */
     @Input({ transform: booleanAttribute })
-    actions: BooleanInput;
+    actions = false;
 
     /** @hidden */
     elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
