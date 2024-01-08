@@ -137,10 +137,6 @@ export class ListItemDef implements ItemDef {
  */
 @Directive()
 export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
-    /** define label for screen reader */
-    @Input()
-    ariaLabelledBy: string;
-
     /** define level of item for screen reader */
     @Input()
     ariaLevel: number;

@@ -147,14 +147,6 @@ export abstract class BaseSelect
     @Input()
     controlTemplate: TemplateRef<any> | undefined;
 
-    /** Binds to control aria-labelledBy attribute */
-    @Input()
-    ariaLabelledBy = null;
-
-    /** Sets control aria-label attribute value */
-    @Input()
-    ariaLabel = null;
-
     /** Select Input Mobile Configuration */
     @Input()
     mobileConfig: MobileModeConfig = { hasCloseButton: true };

@@ -22,7 +22,6 @@ import {
 import { startWith } from 'rxjs/operators';
 
 import { NgTemplateOutlet } from '@angular/common';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
 import {
     DynamicPageComponent as CoreDynamicPageComponent,
@@ -106,10 +105,6 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     @Input()
     @HostBinding('attr.role')
     role = 'region';
-
-    /** aria label for the page */
-    @Input()
-    ariaLabel: Nullable<string>;
 
     /** Whether or not tabs should be stacked. */
     @Input()

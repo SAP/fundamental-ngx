@@ -45,7 +45,6 @@ import {
     destroyObservable,
     DynamicComponentService,
     KeyUtil,
-    Nullable,
     RtlService,
     SearchHighlightPipe
 } from '@fundamental-ngx/cdk/utils';
@@ -237,20 +236,6 @@ export class SearchFieldComponent
     /** Toggle "loading" mode. */
     @Input()
     isLoading = false;
-
-    /**
-     * ARIA label to specify what the search field is
-     * Not shown in the UI, only visible by the screen-readers.
-     */
-    @Input()
-    ariaLabel: Nullable<string>;
-
-    /**
-     * Id of elements (separated by space) for setting aria-labelledby for search input
-     * Not shown in the UI, only visible by the screen-readers.
-     */
-    @Input()
-    ariaLabelledby: string;
 
     /** Whether to always show search button. */
     @Input()

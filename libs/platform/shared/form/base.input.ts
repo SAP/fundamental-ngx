@@ -131,14 +131,6 @@ export abstract class BaseInput
     @Input()
     readonly: boolean;
 
-    /** Binds to control aria-labelledBy attribute */
-    @Input()
-    ariaLabelledBy: Nullable<string>;
-
-    /** Sets control aria-label attribute value */
-    @Input()
-    ariaLabel: Nullable<string>;
-
     /**
      * Tell the component if we are in editing mode.
      */

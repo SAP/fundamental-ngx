@@ -36,10 +36,6 @@ export class SwitchChangeEvent {
     imports: [CoreSwitchComponent, FdTranslatePipe]
 })
 export class SwitchComponent extends BaseInput {
-    /** aria-labelledby attribute of the inner input element. */
-    @Input()
-    ariaLabelledby: string | null = null;
-
     /** Whether the switch is semantic */
     @Input()
     semantic = false;
