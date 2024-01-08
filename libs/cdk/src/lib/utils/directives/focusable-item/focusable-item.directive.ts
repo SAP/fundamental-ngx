@@ -139,7 +139,6 @@ export class FocusableItemDirective implements HasElementRef {
 
     /** Set tabbable state */
     setTabbable(state: boolean): void {
-        return;
         this._zone.runOutsideAngular(() => {
             this._tabbable = state;
             this._renderer2.setAttribute(this.elementRef.nativeElement, 'tabindex', this._tabbable ? '0' : '-1');
