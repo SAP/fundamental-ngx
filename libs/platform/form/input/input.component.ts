@@ -19,24 +19,18 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
-    Host,
-    Inject,
     Input,
     OnInit,
-    Optional,
-    Output,
-    Self,
-    SkipSelf
+    Output
 } from '@angular/core';
-import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { FormsModule } from '@angular/forms';
+import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { FormControlComponent } from '@fundamental-ngx/core/form';
-import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput } from '@fundamental-ngx/platform/shared';
 
 const VALID_INPUT_TYPES = ['text', 'number', 'email', 'password'];
 
@@ -87,16 +81,8 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
     }
 
     /** @hidden */
-    constructor(
-        cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        @Optional() @Self() ngControl: NgControl,
-        @Optional() @SkipSelf() controlContainer: ControlContainer,
-        @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
-    ) {
-        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+    constructor() {
+        super();
     }
 
     /** @hidden */

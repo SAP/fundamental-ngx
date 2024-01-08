@@ -13,32 +13,25 @@ import {
 } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
-    ChangeDetectorRef,
     ContentChildren,
     Directive,
     ElementRef,
     EventEmitter,
-    Host,
-    Inject,
     Input,
     OnChanges,
     OnDestroy,
     Optional,
     Output,
     QueryList,
-    Self,
     SimpleChanges,
-    SkipSelf,
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import { combineLatest, fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -55,9 +48,7 @@ import {
     MatchingStrategy,
     MultiInputDataSource,
     MultiInputOption,
-    ObservableMultiInputDataSource,
-    PlatformFormField,
-    PlatformFormFieldControl
+    ObservableMultiInputDataSource
 } from '@fundamental-ngx/platform/shared';
 import { TextAlignment } from '../combobox';
 import { MultiInputConfig } from './multi-input.config';
@@ -280,34 +271,11 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     ];
 
     /** @hidden */
-    private _displayFn = (value: any): string => this.displayValue(value);
-
-    /** @hidden */
-    private _secondaryFn = (value: any): string => {
-        if (isOptionItem(value)) {
-            return value.secondaryText ?? '';
-        } else if (isJsObject(value) && this.description) {
-            const currentItem = this.objectGet(value, this.description);
-
-            return isFunction(currentItem) ? currentItem() : currentItem;
-        } else {
-            return value;
-        }
-    };
-
-    /** @hidden */
     protected constructor(
-        readonly cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        @Optional() @Self() readonly ngControl: NgControl,
-        @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
-        @Optional() @Self() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
-        protected multiInputConfig: MultiInputConfig,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
+        protected multiInputConfig: MultiInputConfig
     ) {
-        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+        super();
     }
 
     /** @hidden */
@@ -379,7 +347,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         this.isOpen = true;
         this.isOpenChange.emit(this.isOpen);
         this.openChange.next(this.isOpen);
-        this._cd.markForCheck();
+        this.markForCheck();
         setTimeout(() => {
             this._markListItemsAsSelected();
             if (this.inputText) {
@@ -397,7 +365,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         }
         this.isOpenChange.emit(false);
         this.openChange.next(false);
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /** @hidden */
@@ -417,7 +385,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
         this.searchTermChange.emit(text);
 
-        this.cd.detectChanges();
+        this.detectChanges();
     }
 
     /** @hidden */
@@ -496,6 +464,22 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     }
 
     /** @hidden */
+    private _displayFn = (value: any): string => this.displayValue(value);
+
+    /** @hidden */
+    private _secondaryFn = (value: any): string => {
+        if (isOptionItem(value)) {
+            return value.secondaryText ?? '';
+        } else if (isJsObject(value) && this.description) {
+            const currentItem = this.objectGet(value, this.description);
+
+            return isFunction(currentItem) ? currentItem() : currentItem;
+        } else {
+            return value;
+        }
+    };
+
+    /** @hidden */
     protected get ds(): MultiInputDataSource<any> {
         return this.dataSource as MultiInputDataSource<any>;
     }
@@ -545,7 +529,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
                 this._suggestions = this._convertToOptionItems(data);
                 this.stateChanges.next('initDataSource.open().');
 
-                this.cd.markForCheck();
+                this.markForCheck();
             });
         this._dsSubscription.add(dsSub);
 

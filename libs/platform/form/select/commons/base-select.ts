@@ -2,29 +2,22 @@ import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { ENTER } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
-    ChangeDetectorRef,
     ContentChildren,
     Directive,
     ElementRef,
     EventEmitter,
-    Host,
-    Inject,
     Input,
     OnDestroy,
-    Optional,
     Output,
     QueryList,
-    Self,
-    SkipSelf,
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
+import { SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
 import {
     ContentDensityService,
     FocusEscapeDirection,
@@ -36,14 +29,7 @@ import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/ico
 import { ListComponent } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
-import {
-    CollectionBaseInput,
-    isJsObject,
-    isOptionItem,
-    isString,
-    PlatformFormField,
-    PlatformFormFieldControl
-} from '@fundamental-ngx/platform/shared';
+import { CollectionBaseInput, isJsObject, isOptionItem, isString } from '@fundamental-ngx/platform/shared';
 import { TextAlignment } from '../../combobox';
 import { SelectOptionItem } from '../models/select.models';
 import { SelectConfig } from '../select.config';
@@ -291,17 +277,8 @@ export abstract class BaseSelect
     private _secondColumnRatio: number;
 
     /** @hidden */
-    protected constructor(
-        readonly cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        @Optional() @Self() readonly ngControl: NgControl,
-        @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
-        @Optional() @Self() readonly ngForm: NgForm,
-        protected selectConfig: SelectConfig,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
-    ) {
-        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+    protected constructor(protected selectConfig: SelectConfig) {
+        super();
     }
 
     /** @hidden */
@@ -327,19 +304,6 @@ export abstract class BaseSelect
         return this.value.trim().length === 0;
     }
 
-    /** @hidden */
-    protected setValue(newValue: any, emitOnChange = true): void {
-        if (newValue !== this._value) {
-            this.writeValue(newValue);
-            if (emitOnChange) {
-                this.onChange(this.value);
-                this.onTouched();
-                this.selectionChange.emit({ payload: this.value });
-            }
-            this.cd.markForCheck();
-        }
-    }
-
     /** @hidden
      * Close list * */
     close(event: MouseEvent | null = null, forceClose: boolean = false): void {
@@ -353,7 +317,7 @@ export abstract class BaseSelect
         if (this._isOpen && (forceClose || this.canClose)) {
             this._isOpen = false;
             this._openChange.next(this._isOpen);
-            this.cd.markForCheck();
+            this.markForCheck();
             this.onTouched();
         }
     }
@@ -366,7 +330,7 @@ export abstract class BaseSelect
             this._openChange.next(isOpen);
         }
 
-        this.cd.detectChanges();
+        this.detectChanges();
     }
 
     /** @hidden */
@@ -382,6 +346,19 @@ export abstract class BaseSelect
     handleListFocusEscape(direction: FocusEscapeDirection): void {
         if (direction === 'up') {
             this._searchInputElement.nativeElement.focus();
+        }
+    }
+
+    /** @hidden */
+    protected setValue(newValue: any, emitOnChange = true): void {
+        if (newValue !== this._value) {
+            this.writeValue(newValue);
+            if (emitOnChange) {
+                this.onChange(this.value);
+                this.onTouched();
+                this.selectionChange.emit({ payload: this.value });
+            }
+            this.markForCheck();
         }
     }
 

@@ -1,12 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    EventEmitter,
-    HostBinding,
-    Input,
-    Output
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
 import { warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
@@ -52,8 +44,8 @@ export class MenuButtonComponent extends BaseComponent {
     buttonClicked: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
 
     /** @hidden */
-    constructor(_cd: ChangeDetectorRef) {
-        super(_cd);
+    constructor() {
+        super();
         warnOnce(
             'MenuButtonComponent is deprecated. Use `fd-button` from `@fundamental-ngx/core/button` with `@fundamental-ngx/core/menu` instead.'
         );

@@ -1,22 +1,8 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    EventEmitter,
-    Host,
-    Inject,
-    Input,
-    Optional,
-    Output,
-    Self,
-    SkipSelf
-} from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { SwitchComponent as CoreSwitchComponent } from '@fundamental-ngx/core/switch';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput } from '@fundamental-ngx/platform/shared';
 import { SwitchConfig } from './switch.config';
 
 /** Switch change event instance */
@@ -61,17 +47,8 @@ export class SwitchComponent extends BaseInput {
     switchCurrentValue = false;
 
     /** @hidden */
-    constructor(
-        cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        @Optional() @Self() ngControl: NgControl,
-        @Optional() @SkipSelf() controlContainer: ControlContainer,
-        @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
-        protected _switchConfig: SwitchConfig
-    ) {
-        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+    constructor(protected _switchConfig: SwitchConfig) {
+        super();
     }
 
     /** update controller on switch state change */

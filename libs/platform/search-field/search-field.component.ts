@@ -7,7 +7,6 @@ import { AsyncPipe, DOCUMENT, NgClass, NgTemplateOutlet } from '@angular/common'
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     computed,
     DestroyRef,
@@ -149,7 +148,7 @@ export class SearchFieldComponent
         }
 
         this._appearance = value;
-        this._cd.detectChanges();
+        this.detectChanges();
     }
 
     get appearance(): Appearance {
@@ -387,14 +386,13 @@ export class SearchFieldComponent
         private readonly _overlay: Overlay,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _injector: Injector,
-        protected readonly _cd: ChangeDetectorRef,
         @Optional() private readonly _rtl: RtlService,
         @Inject(DOCUMENT) private readonly _document: Document,
         private readonly _liveAnnouncer: LiveAnnouncer,
         readonly _dynamicComponentService: DynamicComponentService,
         readonly contentDensityObserver: ContentDensityObserver
     ) {
-        super(_cd);
+        super();
     }
 
     /** @hidden */
@@ -443,7 +441,7 @@ export class SearchFieldComponent
      */
     focus(): void {
         this.inputField.nativeElement.focus();
-        this._cd.detectChanges();
+        this.detectChanges();
     }
 
     /** Capturing onKeydown of input element */
@@ -511,7 +509,7 @@ export class SearchFieldComponent
             this.showDialog(false);
         }
         this._isSearchDone = true;
-        this._cd.detectChanges();
+        this.detectChanges();
     }
 
     /**
@@ -632,7 +630,7 @@ export class SearchFieldComponent
     /** @hidden */
     clearTextInput(): void {
         this.inputText = '';
-        this._cd.detectChanges();
+        this.detectChanges();
         this.inputChange.emit(this.searchFieldValue);
         this.cancelSearch.emit(this.searchFieldValue);
 

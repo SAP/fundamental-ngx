@@ -2,24 +2,19 @@ import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, UP_ARROW } from '@angular/cdk/keyc
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
-    ElementRef,
-    Host,
     Inject,
     Injector,
     OnInit,
     Optional,
-    Self,
-    SkipSelf,
     TemplateRef,
     ViewChild,
     ViewContainerRef,
     ViewEncapsulation,
     isDevMode
 } from '@angular/core';
-import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { FormsModule } from '@angular/forms';
+import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import equal from 'fast-deep-equal';
 
 import { DynamicComponentService, KeyUtil, SearchHighlightPipe, warnOnce } from '@fundamental-ngx/cdk/utils';
@@ -29,8 +24,6 @@ import {
     DataProvider,
     MultiComboBoxDataSource,
     OptionItem,
-    PlatformFormField,
-    PlatformFormFieldControl,
     SelectableOptionItem
 } from '@fundamental-ngx/platform/shared';
 
@@ -124,34 +117,16 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
     /** @hidden */
     constructor(
-        cd: ChangeDetectorRef,
-        readonly elementRef: ElementRef,
-        @Optional() @Self() readonly ngControl: NgControl,
-        @Optional() @SkipSelf() controlContainer: ControlContainer,
-        @Optional() @SkipSelf() readonly ngForm: NgForm,
-        @Optional() readonly dialogConfig: DialogConfig,
+        @Optional() _dialogConfig: DialogConfig,
         readonly _dynamicComponentService: DynamicComponentService,
         @Optional() @Inject(DATA_PROVIDERS) private _providers: Map<string, DataProvider<any>>,
-        readonly _multiComboboxConfig: MultiComboboxConfig,
+        _multiComboboxConfig: MultiComboboxConfig,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _injector: Injector,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
         @Inject(MAP_LIMIT) _mapLimit: number,
         readonly contentDensityObserver: ContentDensityObserver
     ) {
-        super(
-            cd,
-            elementRef,
-            ngControl,
-            controlContainer,
-            ngForm,
-            dialogConfig,
-            _multiComboboxConfig,
-            formField,
-            formControl,
-            _mapLimit
-        );
+        super(_dialogConfig, _multiComboboxConfig, _mapLimit);
 
         if (!deprecationWarningShown && isDevMode()) {
             warnOnce(
@@ -165,7 +140,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     ngOnInit(): void {
         super.ngOnInit();
 
-        const providers = this._providers?.size === 0 ? this._multiComboboxConfig.providers : this._providers;
+        const providers = this._providers?.size === 0 ? this.multiComboboxConfig.providers : this._providers;
         // if we have both prefer dataSource
         if (!this.dataSource && this.entityClass && providers?.has(this.entityClass)) {
             this.dataSource = new MultiComboBoxDataSource(providers.get(this.entityClass)!);
@@ -203,7 +178,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
             this._focusToSearchField();
         }
 
-        this._cd.detectChanges();
+        this.detectChanges();
     }
 
     /** @hidden */
@@ -268,7 +243,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
         this.showList(true);
         this.selectedShown$.set(true);
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /** @hidden */

@@ -1,21 +1,16 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
-    Host,
-    Inject,
     Input,
-    Optional,
     Output,
-    Self,
-    SkipSelf,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
-import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
+import { FormsModule } from '@angular/forms';
+import { FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { CalendarType, CalendarYearGrid, DateRange, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
@@ -23,7 +18,7 @@ import { DatePickerComponent, DatePickerComponent as FdDatePickerComponent } fro
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput } from '@fundamental-ngx/platform/shared';
 
 /**
  * The Platform date picker component is a wrapper around fd-date-picker using platform form.
@@ -251,18 +246,18 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     private _datePickerValid = true;
 
     /** @hidden */
-    constructor(
-        protected _changeDetectorRef: ChangeDetectorRef,
-        elementRef: ElementRef,
-        @Optional() @Self() public ngControl: NgControl,
-        @Optional() @SkipSelf() controlContainer: ControlContainer,
-        @Optional() @Self() public ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
-        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
-        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
-    ) {
-        super(_changeDetectorRef, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+    private readonly _dateTimeAdapter = inject<DatetimeAdapter<D>>(DatetimeAdapter, {
+        optional: true
+    });
+
+    /** @hidden */
+    private readonly _dateTimeFormats = inject<DateTimeFormats>(DATE_TIME_FORMATS, {
+        optional: true
+    });
+
+    /** @hidden */
+    constructor() {
+        super();
 
         if (!this._dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -295,7 +290,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     /** @hidden */
     writeValue(value: D | DateRange<D> | null): void {
         super.writeValue(value);
-        this._changeDetectorRef.detectChanges();
+        this.detectChanges();
     }
 
     /**
@@ -321,7 +316,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
         } else if (this.type === 'range') {
             this.handleSelectedRangeDateChange(this.selectedRangeDate);
         }
-        this._changeDetectorRef.markForCheck();
+        this.markForCheck();
     }
 
     /**

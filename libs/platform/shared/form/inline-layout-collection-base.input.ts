@@ -1,24 +1,8 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import {
-    ChangeDetectorRef,
-    Directive,
-    ElementRef,
-    Host,
-    Inject,
-    Injectable,
-    InjectionToken,
-    Input,
-    OnInit,
-    Optional,
-    Self,
-    SkipSelf
-} from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { Directive, Injectable, InjectionToken, Input, OnInit, inject } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { CollectionBaseInput } from './collection-base.input';
-import { PlatformFormField, PlatformFormFieldControl } from './form-field';
 
 export interface InlineLayout {
     XL?: boolean;
@@ -150,7 +134,13 @@ export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInpu
     protected _inlineCurrentValue$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
-    protected _responsiveBreakPointConfig: ResponsiveBreakPointConfig;
+    protected readonly _responsiveBreakpointsService = inject(ResponsiveBreakpointsService);
+
+    /** @hidden */
+    protected readonly _responsiveBreakPointConfig =
+        inject(RESPONSIVE_BREAKPOINTS_CONFIG, {
+            optional: true
+        }) || new ResponsiveBreakPointConfig();
 
     /** @hidden */
     private _inlineLayout: InlineLayout;
@@ -169,25 +159,6 @@ export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInpu
 
     /** @hidden */
     private _isInLineLayoutEnabled = false;
-
-    /** @hidden */
-    protected constructor(
-        cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
-        @Optional() @Self() readonly ngControl: NgControl,
-        @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
-        @Optional() @SkipSelf() readonly ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
-        @Optional()
-        @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
-        readonly _defaultResponsiveBreakPointConfig?: ResponsiveBreakPointConfig
-    ) {
-        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
-
-        this._responsiveBreakPointConfig = _defaultResponsiveBreakPointConfig || new ResponsiveBreakPointConfig();
-    }
 
     /** @hidden */
     ngOnInit(): void {

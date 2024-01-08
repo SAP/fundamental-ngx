@@ -3,11 +3,8 @@ import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
-    ElementRef,
     EventEmitter,
-    Host,
     Inject,
     Injector,
     Input,
@@ -15,8 +12,6 @@ import {
     Optional,
     Output,
     QueryList,
-    Self,
-    SkipSelf,
     TemplateRef,
     ViewChild,
     ViewChildren,
@@ -24,8 +19,8 @@ import {
     ViewEncapsulation,
     forwardRef
 } from '@angular/core';
-import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { FormsModule } from '@angular/forms';
+import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { DisplayFnPipe, DynamicComponentService, InitialFocusDirective, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
@@ -43,8 +38,6 @@ import {
     DataProvider,
     MultiInputDataSource,
     MultiInputOption,
-    PlatformFormField,
-    PlatformFormFieldControl,
     isFunction
 } from '@fundamental-ngx/platform/shared';
 
@@ -235,16 +228,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     /** @hidden */
     constructor(
         /** @hidden */
-        readonly cd: ChangeDetectorRef,
-        /** @hidden */
-        readonly elementRef: ElementRef,
-        /** @hidden */
-        @Optional() @Self() readonly ngControl: NgControl,
-        @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
-        /** @hidden */
-        @Optional() @Self() readonly ngForm: NgForm,
-        /** @hidden */
-        @Optional() readonly dialogConfig: DialogConfig,
+        @Optional() _dialogConfig: DialogConfig,
         /** @hidden */
         readonly _dynamicComponentService: DynamicComponentService,
         /** @hidden */
@@ -254,24 +238,10 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         /** @hidden */
         @Optional() @Inject(DATA_PROVIDERS) private _providers: Map<string, DataProvider<any>>,
         /** @hidden */
-        readonly _multiInputConfig: MultiInputConfig,
-        /** @hidden */
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        /** @hidden */
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
+        _multiInputConfig: MultiInputConfig,
         readonly contentDensityObserver: ContentDensityObserver
     ) {
-        super(
-            cd,
-            elementRef,
-            ngControl,
-            controlContainer,
-            ngForm,
-            dialogConfig,
-            _multiInputConfig,
-            formField,
-            formControl
-        );
+        super(_dialogConfig, _multiInputConfig);
     }
 
     /** Display function. Accepts an object of the same type as the
@@ -285,7 +255,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     ngOnInit(): void {
         super.ngOnInit();
 
-        const providers = this._providers?.size === 0 ? this._multiInputConfig.providers : this._providers;
+        const providers = this._providers?.size === 0 ? this.multiInputConfig.providers : this._providers;
         // if we have both prefer dataSource
         if (!this.dataSource && this.entityClass && providers?.has(this.entityClass)) {
             this.dataSource = new MultiInputDataSource(providers.get(this.entityClass)!);
@@ -338,7 +308,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
             this.searchInputElement.nativeElement.focus();
         }
         this.emitChangeEvent(value ? this.selected : null);
-        this._cd.detectChanges();
+        this.detectChanges();
     }
 
     /** @hidden */
@@ -369,7 +339,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     moreClicked(): void {
         this.open();
         this._suggestions = this.selected;
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /** @hidden */
@@ -384,7 +354,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         this._updateModel(this.selected);
         this.searchInputElement.nativeElement.focus();
         this.close();
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /** @hidden */
@@ -396,7 +366,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
             this._selected = [];
         }
         this._updateModel(this.selected);
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /** @hidden */
@@ -413,7 +383,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         if (KeyUtil.isKeyCode(event, [ESCAPE])) {
             this.showList(false);
         }
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /** @hidden Define is selected item selected */
@@ -429,7 +399,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         if (this.mobile) {
             this.selectedValue = item;
             this.inputText = item.label;
-            this.cd.detectChanges();
+            this.detectChanges();
 
             return;
         }

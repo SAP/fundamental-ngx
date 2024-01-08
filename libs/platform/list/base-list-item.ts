@@ -2,7 +2,6 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewChecked,
     AfterViewInit,
-    ChangeDetectorRef,
     Directive,
     ElementRef,
     EventEmitter,
@@ -387,12 +386,11 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
 
     /** @hidden */
     constructor(
-        _changeDetectorRef: ChangeDetectorRef,
         public itemEl: ElementRef<HTMLElement>,
         protected _listConfig: ListConfig,
         @Optional() @Inject(FD_LIST_UNREAD_INDICATOR) private readonly _list: ListUnreadIndicator
     ) {
-        super(_changeDetectorRef);
+        super();
     }
 
     /** Selection value */
@@ -422,7 +420,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
         event.source = this;
         this._focused = !this._focused;
         this.itemSelected.emit(event);
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /** @hidden */
@@ -445,7 +443,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
         const $event = new ModifyItemEvent();
         $event.source = this;
         this.itemSelected.emit($event);
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /**
@@ -464,7 +462,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
             this.radioButtonComponent?.valueChange(event);
         }
 
-        this._cd.markForCheck();
+        this.markForCheck();
         const $event = new ModifyItemEvent();
         $event.source = this;
         this.itemSelected.emit($event);
@@ -518,7 +516,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
             parentNode.removeAttribute('title');
             parentNode.removeAttribute('aria-label');
         }
-        this._cd.detectChanges();
+        this.detectChanges();
     }
 
     /**
@@ -541,7 +539,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
         const event = new ModifyItemEvent();
         event.source = this;
         this._selected = selected;
-        this._cd.detectChanges();
+        this.detectChanges();
     }
 
     /**
@@ -602,7 +600,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
         this.checkboxComponent?.nextValue();
         this.radioButtonComponent?.valueChange(event);
 
-        this._cd.markForCheck();
+        this.markForCheck();
         const $event = new ModifyItemEvent();
         $event.source = this;
         this.itemSelected.emit($event);
@@ -614,6 +612,6 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
             this.rowSelection || this.selectionMode === 'single' || this.selectionMode === 'multi'
                 ? 'option'
                 : 'listitem';
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 }

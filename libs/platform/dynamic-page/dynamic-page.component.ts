@@ -2,7 +2,6 @@ import {
     AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChild,
     ContentChildren,
@@ -197,11 +196,8 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     _tabs: DynamicPageContentComponent[] = [];
 
     /** @hidden */
-    constructor(
-        protected _cd: ChangeDetectorRef,
-        public readonly elementRef: ElementRef<HTMLElement>
-    ) {
-        super(_cd);
+    constructor(public readonly elementRef: ElementRef<HTMLElement>) {
+        super();
     }
 
     /** @hidden */
@@ -211,7 +207,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._cd.detectChanges();
+        this.detectChanges();
 
         this._tabListComponent?.headerContainer.nativeElement.classList.add('fd-dynamic-page__tabs');
     }
@@ -221,7 +217,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         /** Used to detect changes in projected components that displayed using templates,
          * https://github.com/angular/angular/issues/44112
          */
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /**

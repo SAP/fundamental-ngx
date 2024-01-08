@@ -4,42 +4,26 @@ import {
     AfterContentChecked,
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChildren,
     DestroyRef,
-    ElementRef,
     EventEmitter,
-    Host,
     HostListener,
-    Inject,
     Input,
     OnDestroy,
-    Optional,
     Output,
     QueryList,
-    Self,
-    SkipSelf,
     ViewChildren,
     ViewEncapsulation,
     forwardRef,
     inject
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { merge } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import {
-    InLineLayoutCollectionBaseInput,
-    PlatformFormField,
-    PlatformFormFieldControl,
-    RESPONSIVE_BREAKPOINTS_CONFIG,
-    ResponsiveBreakPointConfig,
-    ResponsiveBreakpointsService,
-    SelectItem
-} from '@fundamental-ngx/platform/shared';
+import { InLineLayoutCollectionBaseInput, SelectItem } from '@fundamental-ngx/platform/shared';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -121,30 +105,8 @@ export class RadioGroupComponent
     private _keyboardEventsManager: FocusKeyManager<RadioButtonComponent>;
 
     /** @hidden */
-    constructor(
-        protected _cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
-        @Optional() @Self() ngControl: NgControl,
-        @Optional() @SkipSelf() controlContainer: ControlContainer,
-        @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
-        @Optional()
-        @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
-        readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig
-    ) {
-        super(
-            _cd,
-            elementRef,
-            _responsiveBreakpointsService,
-            ngControl,
-            controlContainer,
-            ngForm,
-            formField,
-            formControl,
-            _defaultResponsiveBreakPointConfig
-        );
+    constructor() {
+        super();
         this.id = `radio-group-${nextUniqueId++}`;
     }
 
@@ -193,7 +155,7 @@ export class RadioGroupComponent
             throw new Error('fdp-radio-button-group must contain a fdp-radio-button');
         }
         this.contentRadioButtons.forEach((button) => (button.state = this.state));
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /**

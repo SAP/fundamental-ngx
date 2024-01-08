@@ -1,28 +1,21 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
-    ElementRef,
     EventEmitter,
-    Host,
-    Inject,
     Input,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
-    Self,
-    SkipSelf,
     ViewChild
 } from '@angular/core';
-import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
+import { FormsModule } from '@angular/forms';
+import { FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 
 import { warnOnce } from '@fundamental-ngx/cdk/utils';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { TimePickerComponent } from '@fundamental-ngx/core/time-picker';
-import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-time-picker',
@@ -183,16 +176,8 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
     private _meridian: boolean;
 
     /** @hidden */
-    constructor(
-        cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        @Optional() @Self() ngControl: NgControl,
-        @Optional() @SkipSelf() controlContainer: ControlContainer,
-        @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
-    ) {
-        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+    constructor() {
+        super();
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
         }

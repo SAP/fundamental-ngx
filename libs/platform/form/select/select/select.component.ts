@@ -2,27 +2,19 @@ import {
     AfterViewChecked,
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
-    ElementRef,
-    Host,
-    Inject,
     Input,
-    Optional,
-    Self,
-    SkipSelf,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { FormsModule } from '@angular/forms';
+import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ListSecondaryDirective } from '@fundamental-ngx/core/list';
 import { SelectComponent as CoreSelect, SelectModule } from '@fundamental-ngx/core/select';
-import { PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
 import { BaseSelect } from '../commons/base-select';
 import { SelectConfig } from '../select.config';
 
@@ -58,18 +50,8 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
     select: CoreSelect;
 
     /** @hidden */
-    constructor(
-        readonly cd: ChangeDetectorRef,
-        readonly elementRef: ElementRef,
-        @Optional() @Self() readonly ngControl: NgControl,
-        @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
-        @Optional() @Self() readonly ngForm: NgForm,
-        readonly _dynamicComponentService: DynamicComponentService,
-        readonly _selectConfig: SelectConfig,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
-    ) {
-        super(cd, elementRef, ngControl, controlContainer, ngForm, _selectConfig, formField, formControl);
+    constructor(_selectConfig: SelectConfig) {
+        super(_selectConfig);
     }
 
     /** @hidden */
@@ -110,7 +92,7 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
 
     /** @hidden */
     ngAfterViewChecked(): void {
-        this._cd.detectChanges();
+        this.detectChanges();
     }
 
     /**
