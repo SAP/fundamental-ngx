@@ -109,6 +109,7 @@ jobs:
                   projectId: fundamental-ngx-gh
                   target: fundamental-ngx-gh
                   expires: 3d
+                  firebaseToolsVersion: 12.9.1
             - name: Test affected on firebase
               if: ${{ steps.firebase_hosting_preview.outputs.details_url }}
               run: |
