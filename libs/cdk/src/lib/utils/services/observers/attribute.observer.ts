@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { MutationObserverFactory } from '@angular/cdk/observers';
 import { Observable, Observer, Subject } from 'rxjs';
-import { ElementRef, Injectable, OnDestroy } from '@angular/core';
+import { ElementRef, Injectable, NgZone, OnDestroy } from '@angular/core';
 import { HasElementRef } from '../../interfaces/has-element-ref.interface';
 import { getNativeElement } from '../../helpers/get-native-element';
 
@@ -20,7 +20,7 @@ export class AttributeObserver implements OnDestroy {
     >();
 
     /** @hidden */
-    constructor(private _mutationObserverFactory: MutationObserverFactory) {}
+    constructor(private readonly _zone: NgZone, private readonly _mutationObserverFactory: MutationObserverFactory) {}
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -30,15 +30,18 @@ export class AttributeObserver implements OnDestroy {
     /** @Hidden */
     observe(elementOrRef: Element | ElementRef<Element> | HasElementRef<Element>): Observable<MutationRecord[]> {
         const element = getNativeElement(elementOrRef);
-        return new Observable((observer: Observer<MutationRecord[]>) => {
-            const stream = this._observeElement(element);
-            const subscription = stream.subscribe(observer);
+        return this._zone.runOutsideAngular(
+            () =>
+                new Observable((observer: Observer<MutationRecord[]>) => {
+                    const stream = this._observeElement(element);
+                    const subscription = stream.subscribe(observer);
 
-            return () => {
-                subscription.unsubscribe();
-                this._unobserveElement(element);
-            };
-        });
+                    return () => {
+                        subscription.unsubscribe();
+                        this._unobserveElement(element);
+                    };
+                })
+        );
     }
 
     /** @Hidden */
@@ -48,19 +51,21 @@ export class AttributeObserver implements OnDestroy {
 
     /** @hidden */
     private _observeElement(element: Element): Subject<MutationRecord[]> {
-        if (!this._observedElements.has(element)) {
-            const stream = new Subject<MutationRecord[]>();
-            const observer = this._mutationObserverFactory.create((mutations) => stream.next(mutations));
-            if (observer) {
-                observer.observe(element, {
-                    attributes: true
-                });
+        return this._zone.runOutsideAngular(() => {
+            if (!this._observedElements.has(element)) {
+                const stream = new Subject<MutationRecord[]>();
+                const observer = this._mutationObserverFactory.create((mutations) => stream.next(mutations));
+                if (observer) {
+                    observer.observe(element, {
+                        attributes: true
+                    });
+                }
+                this._observedElements.set(element, { observer, stream, count: 1 });
+            } else {
+                this._observedElements.get(element)!.count++;
             }
-            this._observedElements.set(element, { observer, stream, count: 1 });
-        } else {
-            this._observedElements.get(element)!.count++;
-        }
-        return this._observedElements.get(element)!.stream;
+            return this._observedElements.get(element)!.stream;
+        });
     }
 
     /** @Hidden */
