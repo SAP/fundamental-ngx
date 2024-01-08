@@ -22,13 +22,14 @@ import { Nullable, destroyObservable } from '@fundamental-ngx/cdk/utils';
 import {
     ColumnLayout,
     FDP_DO_CHECK,
+    FDP_FORM_SUBMIT,
     FieldHintOptions,
     HintInput,
     HintOptions,
     PlatformFormFieldControl
 } from '@fundamental-ngx/platform/shared';
 import { BehaviorSubject, Observable, Subject, Subscription, isObservable, merge, of } from 'rxjs';
-import { debounceTime, filter, startWith, switchMap, take, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { FormGeneratorFieldComponent } from '../form-generator-field/form-generator-field.component';
 
 import { NgTemplateOutlet } from '@angular/common';
@@ -88,6 +89,11 @@ export interface SubmitFormEventResult {
         {
             provide: FDP_DO_CHECK,
             useFactory: (formGenerator: FormGeneratorComponent) => formGenerator.doCheck$,
+            deps: [FormGeneratorComponent]
+        },
+        {
+            provide: FDP_FORM_SUBMIT,
+            useFactory: (formGenerator: FormGeneratorComponent) => formGenerator.ngSubmit$,
             deps: [FormGeneratorComponent]
         }
     ],
@@ -226,6 +232,9 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
 
     /** @hidden */
     doCheck$ = new Subject<void>();
+
+    /** @hidden */
+    ngSubmit$ = new Subject<void>();
 
     /** Array of form field controls. */
     get formFields(): PlatformFormFieldControl[] {
@@ -505,6 +514,9 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
         this._ngSubmitSubscription?.unsubscribe();
         this._ngSubmitSubscription = this.formGroup.ngSubmit
             .pipe(
+                tap(() => {
+                    this.ngSubmit$.next();
+                }),
                 switchMap(() =>
                     this.formGroup.statusChanges!.pipe(
                         startWith(this.formGroup.status),

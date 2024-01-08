@@ -116,9 +116,6 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         return this.tokenList.filter((token) => token.elementRef.nativeElement.style.display === 'none');
     }
 
-    /** @hidden */
-    inputGroupAddonEl: ElementRef;
-
     /** Whether to use cozy visuals but compact collapsing behavior. */
     @Input()
     compactCollapse = false;
@@ -147,9 +144,16 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     @Input()
     open: boolean;
 
+    /** @Hidden */
+    @Input()
+    showOverflowPopover = true;
+
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
     readonly moreClickedEvent: EventEmitter<any> = new EventEmitter<any>();
+
+    /** @hidden */
+    inputGroupAddonEl: ElementRef;
 
     /** @hidden */
     previousElementWidth: number;
@@ -174,9 +178,6 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
 
     /** @hidden Used to add focus to tokenizer element */
     _tokenizerHasFocus = false;
-
-    /** @hidden */
-    _showOverflowPopover = true;
 
     /** @hidden */
     _showMoreElement = false;
@@ -613,7 +614,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         }
 
         this._cdRef.detectChanges();
-        if (this._showOverflowPopover) {
+        if (this.showOverflowPopover) {
             this._hiddenTokens.forEach((hiddenToken, index) => {
                 hiddenToken._viewContainer.clear();
                 this._viewContainer.get(index)?.createEmbeddedView(hiddenToken._content);

@@ -1,4 +1,3 @@
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -12,7 +11,8 @@ import {
     Output,
     Renderer2,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    booleanAttribute
 } from '@angular/core';
 
 import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
@@ -66,13 +66,8 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     /**
      * sets inverted property.
      */
-    @Input()
-    set inverted(value: boolean) {
-        this._inverted = coerceBooleanProperty(value);
-    }
-    get inverted(): boolean {
-        return this._inverted;
-    }
+    @Input({ transform: booleanAttribute })
+    inverted = false;
 
     /**
      * Tooltip text to show when focused for more than  timeout value
@@ -129,8 +124,6 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     emphasized = false;
     /** @hidden */
     subtle = false;
-    /** @hidden */
-    private _inverted = false;
 
     /** @hidden */
     constructor(

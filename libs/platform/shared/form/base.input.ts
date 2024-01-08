@@ -1,4 +1,4 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput } from '@angular/cdk/coercion';
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -17,6 +17,7 @@ import {
     SkipSelf,
     TemplateRef,
     ViewChild,
+    booleanAttribute,
     inject,
     isDevMode
 } from '@angular/core';
@@ -38,6 +39,7 @@ import { BaseComponent } from '../base';
 import { PlatformFormField, PlatformFormFieldControl } from './form-field';
 
 export const FDP_DO_CHECK = new InjectionToken<Observable<void>>('FdpInputDoCheckTrigger');
+export const FDP_FORM_SUBMIT = new InjectionToken<Observable<void>>('FdpFormSubmitTrigger');
 
 let randomId = 0;
 
@@ -142,18 +144,22 @@ export abstract class BaseInput
     /**
      * Tell the component if we are in editing mode.
      */
-    @Input()
-    set editable(value: BooleanInput) {
-        const newVal = coerceBooleanProperty(value);
-        if (this._editable !== newVal) {
-            this._editable = newVal;
-            this._cd.markForCheck();
-            this.stateChanges.next('editable');
+    @Input({ transform: booleanAttribute })
+    set editable(value: boolean) {
+        if (this._editable === value) {
+            return;
         }
+        this._editable = value;
+        this._cd.markForCheck();
+        this.stateChanges.next('editable');
     }
     get editable(): boolean {
         return this._editable;
     }
+
+    /** Form control validation event strategy. */
+    @Input()
+    validationStrategy: ('touched' | 'dirty' | 'submitted')[] = ['touched', 'dirty', 'submitted'];
 
     /**
      * Reference to internal Input element
@@ -203,6 +209,12 @@ export abstract class BaseInput
 
     /** @hidden */
     readonly _doCheck$ = inject(FDP_DO_CHECK, { optional: true });
+
+    /** @hidden */
+    private readonly _externalSubmit = inject(FDP_FORM_SUBMIT, { optional: true });
+
+    /** @hidden */
+    private _externalFormSubmitted = false;
 
     /**
      * @hidden
@@ -254,6 +266,9 @@ export abstract class BaseInput
 
         this._doCheck$?.pipe(takeUntilDestroyed(this._destroyed)).subscribe(() => {
             this.ngDoCheck();
+        });
+        this._externalSubmit?.pipe(takeUntilDestroyed(this._destroyed)).subscribe(() => {
+            this._externalFormSubmitted = true;
         });
     }
 
@@ -340,7 +355,7 @@ export abstract class BaseInput
 
     /** @hidden */
     setDisabledState(isDisabled: BooleanInput): void {
-        const newState = coerceBooleanProperty(isDisabled);
+        const newState = booleanAttribute(isDisabled);
         this._cd.markForCheck();
         if (newState !== this._disabled) {
             this._disabled = newState;
@@ -407,7 +422,11 @@ export abstract class BaseInput
         const control = this.ngControl ? (this.ngControl.control as FormControl) : null;
         const newStatusIsError = !!(
             control?.invalid &&
-            (control.dirty || control.touched || parent?.submitted || (parentControlContainer as any)?.submitted)
+            ((this.validationStrategy.includes('dirty') && control.dirty) ||
+                (this.validationStrategy.includes('touched') && control.touched) ||
+                (this.validationStrategy.includes('submitted') && parent?.submitted) ||
+                (parentControlContainer as any)?.submitted ||
+                this._externalFormSubmitted)
         );
 
         if (newStatusIsError !== this.controlInvalid) {

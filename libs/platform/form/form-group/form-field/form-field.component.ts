@@ -1,4 +1,4 @@
-import { BooleanInput, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -26,6 +26,7 @@ import {
     TemplateRef,
     ViewChild,
     ViewChildren,
+    booleanAttribute,
     forwardRef,
     inject
 } from '@angular/core';
@@ -233,25 +234,19 @@ export class FormFieldComponent
     i18Strings: TemplateRef<any>;
 
     /** Set when form field is a mandatory one. */
-    @Input()
-    set required(value: BooleanInput) {
-        this._required = coerceBooleanProperty(value);
-    }
-
-    get required(): boolean {
-        return this._required;
-    }
+    @Input({ transform: booleanAttribute })
+    required = false;
 
     /**
      * Indicates if field is editable
      */
-    @Input()
-    set editable(value: BooleanInput) {
-        const newVal = coerceBooleanProperty(value);
-        if (this._editable !== newVal) {
-            this._editable = newVal;
-            this._updateControlProperties();
+    @Input({ transform: booleanAttribute })
+    set editable(value: boolean) {
+        if (this._editable === value) {
+            return;
         }
+        this._editable = value;
+        this._updateControlProperties();
     }
 
     get editable(): boolean {
@@ -388,9 +383,6 @@ export class FormFieldComponent
 
     /** @hidden */
     protected _formGroup: FormGroup;
-
-    /** @hidden */
-    protected _required = false;
 
     /** @hidden */
     private _isColumnLayoutEnabled = false;

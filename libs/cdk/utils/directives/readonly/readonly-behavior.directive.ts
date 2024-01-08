@@ -1,5 +1,4 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { AfterViewInit, DestroyRef, Directive, ElementRef, Input } from '@angular/core';
+import { AfterViewInit, DestroyRef, Directive, ElementRef, Input, booleanAttribute } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -19,9 +18,9 @@ import { setReadonlyState } from './set-readonly-state';
 })
 export class ReadonlyBehaviorDirective extends ReplaySubject<boolean> implements ReadonlyBehavior, AfterViewInit {
     /** @Hidden */
-    @Input()
-    set fdkReadonly(value: BooleanInput) {
-        this._readonlyInput$.next(coerceBooleanProperty(value));
+    @Input({ transform: booleanAttribute })
+    set fdkReadonly(value: boolean) {
+        this._readonlyInput$.next(value);
     }
 
     get fdkReadonly(): boolean {

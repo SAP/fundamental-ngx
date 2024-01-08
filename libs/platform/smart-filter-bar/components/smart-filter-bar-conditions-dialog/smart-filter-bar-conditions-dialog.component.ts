@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarElementDirective, BarLeftDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     DialogBodyComponent,
     DialogComponent,
@@ -24,7 +25,6 @@ import { LayoutGridColDirective, LayoutGridComponent, LayoutGridRowDirective } f
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe, resolveTranslationSyncFn } from '@fundamental-ngx/i18n';
-import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { DynamicFormControl, DynamicFormItem, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { FILTER_STRATEGY, FilterAllStrategy } from '@fundamental-ngx/platform/table';
