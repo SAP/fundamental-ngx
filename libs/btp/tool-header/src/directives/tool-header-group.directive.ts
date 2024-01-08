@@ -21,5 +21,5 @@ export class ToolHeaderGroupDirective implements HasElementRef {
     actions: BooleanInput;
 
     /** @hidden */
-    elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+    readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 }

@@ -11,6 +11,7 @@ import {
     Output,
     inject
 } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { LINK_CLASS_NAME } from '@fundamental-ngx/core/link';
 import { Subscription } from 'rxjs';
 import { UploadCollectionButtonGroupComponent } from './upload-collection-button-group/upload-collection-button-group.component';
@@ -26,7 +27,7 @@ import {
     host: { class: 'fd-upload-collection__item' },
     standalone: true
 })
-export class UploadCollectionItemDirective implements AfterContentInit, OnDestroy, AfterViewInit {
+export class UploadCollectionItemDirective implements AfterContentInit, OnDestroy, AfterViewInit, HasElementRef {
     /** The name of the file, not including the type extension. */
     @Input()
     fileName: string;

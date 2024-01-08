@@ -16,11 +16,13 @@ import {
     QueryList,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { startWith } from 'rxjs/operators';
 
 import { NgTemplateOutlet } from '@angular/common';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
 import {
     DynamicPageComponent as CoreDynamicPageComponent,
@@ -96,7 +98,10 @@ export class DynamicPageTabChangeEvent {
         CoreDynamicPageContentComponent
     ]
 })
-export class DynamicPageComponent extends BaseComponent implements AfterContentInit, AfterViewInit, DoCheck, OnDestroy {
+export class DynamicPageComponent
+    extends BaseComponent
+    implements AfterContentInit, AfterViewInit, DoCheck, OnDestroy, HasElementRef
+{
     /** Whether DynamicPage should snap on scroll */
     @Input()
     disableSnapOnScroll = false;
@@ -196,9 +201,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     _tabs: DynamicPageContentComponent[] = [];
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef<HTMLElement>) {
-        super();
-    }
+    readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
     /** @hidden */
     ngAfterContentInit(): void {

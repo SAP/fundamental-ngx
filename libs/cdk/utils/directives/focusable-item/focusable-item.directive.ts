@@ -16,6 +16,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject, fromEvent } from 'rxjs';
 import { KeyUtil } from '../../functions';
+import { HasElementRef } from '../../interfaces/has-element-ref.interface';
 import { Nullable } from '../../models/nullable';
 import { TabbableElementService } from '../../services';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable-item.tokens';
@@ -41,7 +42,7 @@ export interface FocusableItemPosition {
         }
     ]
 })
-export class FocusableItemDirective implements FocusableItem {
+export class FocusableItemDirective implements FocusableItem, HasElementRef {
     /** Whether the item is focusable. Default is true. */
     @Input()
     set fdkFocusableItem(val: BooleanInput) {

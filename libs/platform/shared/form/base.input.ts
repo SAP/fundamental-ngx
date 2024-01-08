@@ -15,7 +15,7 @@ import {
     isDevMode
 } from '@angular/core';
 import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 import { Observable, Subject, filter } from 'rxjs';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -49,7 +49,7 @@ let randomId = 0;
 @Directive()
 export abstract class BaseInput
     extends BaseComponent
-    implements PlatformFormFieldControl, ControlValueAccessor, OnInit, DoCheck, AfterViewInit, OnDestroy
+    implements PlatformFormFieldControl, ControlValueAccessor, OnInit, DoCheck, AfterViewInit, OnDestroy, HasElementRef
 {
     /** Input placeholder */
     @Input()

@@ -1,4 +1,5 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit, inject } from '@angular/core';
+import { HasElementRef } from './interfaces/has-element-ref.interface';
 
 /*
  This abstract class allows the user to set their own custom styles on a Fundamental Library for Angular directive, in addition to the
@@ -9,7 +10,7 @@ import { Directive, ElementRef, Input, OnChanges, OnInit, inject } from '@angula
 
 /** @hidden */
 @Directive()
-export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
+export abstract class AbstractFdNgxClass implements HasElementRef, OnInit, OnChanges {
     /** @hidden */
     @Input() class: string; // user's custom classes
 

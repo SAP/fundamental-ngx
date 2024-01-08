@@ -1,6 +1,7 @@
 import { DomPortal } from '@angular/cdk/portal';
 import { AfterViewInit, Directive, ElementRef, HostListener, inject, Input, NgZone, Renderer2 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, combineLatest, delayWhen, Observable, Subject, tap } from 'rxjs';
 import { MenuItemComponent } from '../../menu-item/menu-item.component';
 import { FD_MENU_ITEM_COMPONENT } from '../../menu.tokens';
@@ -9,7 +10,7 @@ import { FD_MENU_ITEM_COMPONENT } from '../../menu.tokens';
     selector: 'li[fd-menu-item][fdMenuSegmentedButtonOption]',
     standalone: true
 })
-export class SegmentedButtonOptionDirective<T> implements AfterViewInit {
+export class SegmentedButtonOptionDirective<T> implements AfterViewInit, HasElementRef {
     /** @hidden */
     @Input() value: T;
 

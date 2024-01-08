@@ -25,7 +25,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NestedButtonDirective } from '@fundamental-ngx/btp/button';
-import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef, KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
@@ -47,7 +47,7 @@ import { NavigationListComponent } from '../navigation-list/navigation-list.comp
     selector: '[fdbNavigationListItemMarker]',
     standalone: true
 })
-export class NavigationListItemMarkerDirective {
+export class NavigationListItemMarkerDirective implements HasElementRef {
     /** Element reference. */
     readonly elementRef = inject(ElementRef);
     /** @hidden */

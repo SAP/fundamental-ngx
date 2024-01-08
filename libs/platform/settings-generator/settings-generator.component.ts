@@ -17,7 +17,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 import { BehaviorSubject, filter, Observable, Subscription } from 'rxjs';
 import { ThemeSelectorListComponent } from './controls/theme-selector-list/theme-selector-list.component';
@@ -45,7 +45,7 @@ import { FDP_SETTINGS_GENERATOR, FDP_SETTINGS_GENERATOR_CONFIG } from './tokens'
     ],
     standalone: true
 })
-export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewInit, OnDestroy {
+export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewInit, OnDestroy, HasElementRef {
     /** @hidden */
     @HostBinding('class')
     private readonly _initialClass = 'fdp-settings-generator';
@@ -56,7 +56,7 @@ export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewI
     /**
      * Settings Generator Element Ref.
      */
-    elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+    readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
     /**
      * Settings configuration.

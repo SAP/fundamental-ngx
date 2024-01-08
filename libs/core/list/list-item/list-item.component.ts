@@ -6,7 +6,6 @@ import {
     ContentChild,
     ContentChildren,
     DestroyRef,
-    ElementRef,
     EventEmitter,
     forwardRef,
     HostBinding,
@@ -187,11 +186,8 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     });
 
     /** @hidden */
-    constructor(
-        public readonly elementRef: ElementRef,
-        private readonly _changeDetectorRef: ChangeDetectorRef
-    ) {
-        super(elementRef);
+    constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {
+        super();
     }
 
     /** @hidden */
