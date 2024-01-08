@@ -10,7 +10,7 @@
     (click)="cellClicked.emit({ index: 0, row })"
     (keydown.enter)="_isTreeRowFirstCell(0, row, $event) && toggleGroupRow.emit(row)"
 >
-    @for (poppingColumn of _fdpTableService.poppingColumns$ | async; track poppingColumn.name) {
+    @for (poppingColumn of _fdpTableService.poppingColumns$(); track poppingColumn.name) {
         <div fd-table-text>
             <label fd-form-label>{{ poppingColumn.label }}:</label>
 

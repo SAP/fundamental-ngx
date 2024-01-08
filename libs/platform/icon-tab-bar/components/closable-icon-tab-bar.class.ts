@@ -24,7 +24,7 @@ export abstract class ClosableIconTabBar extends IconTabBarBase {
             1
         );
 
-        this._tabs = this._updateTabs(this._tabs);
+        this._tabs$.set(this._updateTabs(this._tabs$()));
 
         this._triggerRecalculationVisibleItems();
         this.closeTab.emit(tab.tab);
@@ -61,7 +61,7 @@ export abstract class ClosableIconTabBar extends IconTabBarBase {
      */
     protected _getTabInfoFromMainList(
         uid: string,
-        arr: any[] = this._tabs
+        arr: any[] = this._tabs$()
     ): { parent: IconTabBarItem[]; tab: IconTabBarItem } | undefined {
         let result: { parent: IconTabBarItem[]; tab: IconTabBarItem } | undefined;
         for (let i = 0; i < arr.length; i++) {

@@ -22,8 +22,8 @@ import {
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
 import {
     ContentDensityService,
@@ -402,7 +402,7 @@ export abstract class BaseSelect
         }
 
         fromEvent(window, 'resize')
-            .pipe(takeUntil(this._destroyed))
+            .pipe(takeUntilDestroyed(this._destroyed))
             .subscribe(() => this._getOptionsListWidth());
     }
 

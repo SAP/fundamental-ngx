@@ -5,13 +5,13 @@ import {
     Component,
     ElementRef,
     Inject,
-    OnDestroy,
     OnInit,
     Optional,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -24,7 +24,6 @@ import {
 } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { takeUntil } from 'rxjs/operators';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.interface';
 
 @Component({
@@ -45,7 +44,7 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.inter
         ScrollbarDirective
     ]
 })
-export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterface> implements OnInit, OnDestroy {
+export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterface> implements OnInit {
     /** @hidden */
     allItemsSelected: boolean;
 
@@ -80,11 +79,6 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
         this._listenOnMultiInputOpenChange();
     }
 
-    /** @hidden */
-    ngOnDestroy(): void {
-        super.onDestroy();
-    }
-
     /** Throw select all event, it's handled by multi input component */
     selectAll(selectAll: boolean): void {
         this._component.selectAllItems(!selectAll);
@@ -116,9 +110,11 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
 
     /** @hidden */
     private _listenOnMultiInputOpenChange(): void {
-        this._component.openChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => this._toggleDialog(isOpen));
+        this._component.openChange
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe((isOpen) => this._toggleDialog(isOpen));
         this._component.allItemsSelectedChange
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((allItemsSelected) => (this.allItemsSelected = allItemsSelected));
     }
 

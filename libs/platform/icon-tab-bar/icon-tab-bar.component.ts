@@ -3,18 +3,20 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     EventEmitter,
     Input,
-    OnDestroy,
     OnInit,
     Optional,
     Output,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed,
+    inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ContentDensityService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { IconFont } from '@fundamental-ngx/core/icon';
-import { Subject } from 'rxjs';
-import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
 import { IconTabBarFilterTypeComponent } from './components/icon-tab-bar-filter-type/icon-tab-bar-filter-type.component';
 import { IconTabBarIconTypeComponent } from './components/icon-tab-bar-icon-type/icon-tab-bar-icon-type.component';
 import { IconTabBarProcessTypeComponent } from './components/icon-tab-bar-process-type/icon-tab-bar-process-type.component';
@@ -39,7 +41,7 @@ import { IconTabBarBackground, IconTabBarSize, TabDestinyMode, TabType } from '.
         IconTabBarTextTypeComponent
     ]
 })
-export class IconTabBarComponent implements OnInit, OnDestroy {
+export class IconTabBarComponent implements OnInit {
     /**
      * @description Type of tab bar view.
      */
@@ -121,10 +123,10 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
     _cssClassForContainer: string[];
 
     /** @hidden */
-    _isRtl = false;
+    readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
-    private _onDestroy$ = new Subject<void>();
+    private _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -139,7 +141,7 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
 
         if (this.densityMode === 'inherit') {
             this._contentDensityService?._contentDensityListener
-                .pipe(distinctUntilChanged(), takeUntil(this._onDestroy$))
+                .pipe(distinctUntilChanged(), takeUntilDestroyed(this._destroyRef))
                 .subscribe((density) => {
                     this.densityMode = density;
                     if (density !== 'compact') {
@@ -152,19 +154,6 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
                     this._cd.detectChanges();
                 });
         }
-
-        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
-            if (isRtl !== this._isRtl) {
-                this._isRtl = isRtl;
-                this._cd.detectChanges();
-            }
-        });
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /**

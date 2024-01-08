@@ -8,7 +8,7 @@ import {
     Injector,
     Renderer2
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, distinctUntilChanged, map } from 'rxjs';
 import { ContentDensityObserverSettings } from '../classes/content-density-observer.settings';
 import { ContentDensityObserverTarget } from '../content-density.types';
@@ -70,6 +70,8 @@ const initialContentDensity = (
 @Injectable()
 export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> {
     /** @hidden */
+    readonly contentDensity$ = toSignal(this);
+    /** @hidden */
     readonly config: ContentDensityObserverSettings;
     /** @hidden */
     private readonly _isCompact$ = new BehaviorSubject<boolean>(false);
@@ -86,6 +88,16 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
     /** @hidden */
     // eslint-disable-next-line @typescript-eslint/member-ordering
     readonly isCondensed$ = this._isCondensed$.asObservable();
+
+    /** @hidden */
+    readonly isCompactSignal = toSignal(this.isCompact$);
+
+    /** @hidden */
+    readonly isCozySignal = toSignal(this.isCozy$);
+
+    /** @hidden */
+    readonly isCondensedSignal = toSignal(this.isCondensed$);
+
     /** @hidden */
     get isCompact(): boolean {
         return this._isCompact$.value;

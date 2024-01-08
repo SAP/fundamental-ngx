@@ -5,14 +5,18 @@ import { ConnectedPosition, Overlay, OverlayConfig, OverlayRef } from '@angular/
 import { TemplatePortal } from '@angular/cdk/portal';
 import { AsyncPipe, DOCUMENT, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    computed,
+    DestroyRef,
     Directive,
     ElementRef,
     EventEmitter,
     forwardRef,
     HostListener,
+    inject,
     Inject,
     Injector,
     Input,
@@ -35,8 +39,10 @@ import {
 import { fromEvent, isObservable, merge, Observable, of, Subject } from 'rxjs';
 import { filter, map, take, takeUntil } from 'rxjs/operators';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import {
+    destroyObservable,
     DynamicComponentService,
     KeyUtil,
     Nullable,
@@ -58,7 +64,6 @@ import {
     SEARCH_FIELD_COMPONENT,
     SearchFieldMobileInterface
 } from './search-field-mobile/search-field-mobile.interface';
-import { PlatformSearchFieldMobileModule } from './search-field-mobile/search-field-mobile.module';
 import { SearchFieldMobileComponent } from './search-field-mobile/search-field/search-field-mobile.component';
 
 export interface SearchInput {
@@ -131,7 +136,7 @@ type Appearance = SearchComponent['appearance'] | undefined;
 })
 export class SearchFieldComponent
     extends BaseComponent
-    implements OnInit, OnChanges, OnDestroy, SearchFieldMobileInterface, SearchComponent
+    implements OnInit, OnChanges, OnDestroy, SearchFieldMobileInterface, SearchComponent, AfterViewInit
 {
     /** Type of component used to render the categories dropdown. */
     @Input()
@@ -347,7 +352,7 @@ export class SearchFieldComponent
     _clearId = '';
 
     /** @hidden */
-    _dir: Direction = 'ltr';
+    readonly _dir$ = computed<Direction>(() => (this._rtl?.rtlSignal() ? 'rtl' : 'ltr'));
 
     /** @hidden */
     isOpen = false;
@@ -383,7 +388,7 @@ export class SearchFieldComponent
     private resolveTranslation = resolveTranslationSyncFn();
 
     /** @hidden */
-    private readonly _onDestroy$ = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _dataSourceChanged$ = new Subject<void>();
@@ -423,14 +428,10 @@ export class SearchFieldComponent
         this._menuId = `${baseId}-menu-${searchFieldIdCount++}`;
 
         this._isRefresh = true;
+    }
 
-        if (this._rtl) {
-            this._rtl.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
-                this._dir = isRtl ? 'rtl' : 'ltr';
-                this._cd.detectChanges();
-            });
-        }
-
+    /** @hidden */
+    ngAfterViewInit(): void {
         if (this.mobile) {
             this._setUpMobileMode();
         }
@@ -450,8 +451,6 @@ export class SearchFieldComponent
             this._suggestionOverlayRef = null;
         }
         this._suggestionkeyManager?.destroy();
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /**
@@ -598,7 +597,7 @@ export class SearchFieldComponent
                     );
                 }),
                 take(1),
-                takeUntil(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((event) => {
                 const target = event.target as HTMLElement;
@@ -694,7 +693,7 @@ export class SearchFieldComponent
         this._dataSourceChanged$.next();
         dataSource
             .open()
-            .pipe(takeUntil(merge(this._onDestroy$, this._dataSourceChanged$)))
+            .pipe(takeUntil(merge(destroyObservable(this._destroyRef), this._dataSourceChanged$)))
             .subscribe((data) => {
                 this._dropdownValues$ = of(data);
             });
@@ -707,7 +706,7 @@ export class SearchFieldComponent
      */
     private _getSuggestionsLength(): number {
         let count = 0;
-        this._dropdownValues$.pipe(takeUntil(this._onDestroy$)).subscribe((suggestions) => {
+        this._dropdownValues$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((suggestions) => {
             suggestions?.forEach((suggestion) => {
                 if (this.inputText && suggestion?.toLowerCase().indexOf(this.inputText?.trim()?.toLowerCase()) > -1) {
                     count++;
@@ -736,18 +735,21 @@ export class SearchFieldComponent
     }
 
     /** @hidden */
-    private async _setUpMobileMode(): Promise<void> {
+    private _setUpMobileMode(): void {
         const injector = Injector.create({
             providers: [{ provide: SEARCH_FIELD_COMPONENT, useValue: this }],
             parent: this._injector
         });
 
-        await this._dynamicComponentService.createDynamicModule(
+        this._dynamicComponentService.createDynamicComponent(
             { inputFieldTemplate: this.inputFieldTemplate, suggestionMenuTemplate: this.suggestionMenuTemplate },
-            PlatformSearchFieldMobileModule,
             SearchFieldMobileComponent,
-            this._viewContainerRef,
-            injector
+            {
+                containerRef: this._viewContainerRef
+            },
+            {
+                injector
+            }
         );
     }
 }

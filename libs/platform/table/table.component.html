@@ -35,7 +35,7 @@
             [attr.role]="isTreeTable ? 'treegrid' : 'grid'"
             class="fdp-table__body-table"
             [allCellsFocusable]="true"
-            [popIn]="_poppingColumns.length > 0"
+            [popIn]="_tableService.poppingColumns$().length > 0"
             [class.fd-table--no-outer-border]="noOuterBorders"
             [attr.aria-labelledby]="_ariaLabelledBy"
         >
@@ -56,7 +56,7 @@
                     [disableSelectionCheckbox]="_dataSourceTableRows.length === 0"
                 ></tr>
             </thead>
-            @if (!!_tableRowsVisible.length && _tableService.visibleColumnsLength > 0) {
+            @if (!!_tableRowsVisible.length && _tableService.visibleColumnsLength() > 0) {
                 <tbody
                     fd-table-body
                     fdkDndList
@@ -123,7 +123,7 @@
                                     ></tr>
                                 }
                             }
-                            @if (row.type === 'item' && _poppingColumns.length > 0) {
+                            @if (row.type === 'item' && _tableService.poppingColumns$().length > 0) {
                                 <tr
                                     fdp-table-popping-row
                                     [secondary]="true"
@@ -188,17 +188,16 @@
                         <tr fd-table-row>
                             <td fd-table-cell class="fd-table__cell--no-data" [attr.colspan]="_tableColumnsLength">
                                 <div class="fdp-table__empty-table-message">
-                                    <div #noDataWrapper>
+                                    <div>
                                         <ng-content select="fdp-table-no-data-wrapper"></ng-content>
                                     </div>
-                                    @if (!noDataWrapper.hasChildNodes() && _tableService.visibleColumnsLength > 0) {
+                                    @if (!_noDataWrapper && _tableService.visibleColumnsLength() > 0) {
                                         <div>
                                             {{
                                                 emptyTableMessage || ('platformTable.defaultEmptyMessage' | fdTranslate)
                                             }}
                                         </div>
-                                    }
-                                    @if (_tableService.visibleColumnsLength === 0) {
+                                    } @else if (_tableService.visibleColumnsLength() === 0) {
                                         <div>
                                             {{
                                                 noVisibleColumnsMessage ||

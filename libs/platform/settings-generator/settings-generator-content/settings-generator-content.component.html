@@ -1,4 +1,4 @@
-<h2 fd-title class="fdp-settings-generator__title">
+<h3 fd-title class="fdp-settings-generator__title">
     @if (mobile) {
         <button fd-button glyph="menu2" fdType="transparent" (click)="goBack.emit()"></button>
     }
@@ -7,20 +7,23 @@
     } @else {
         <fd-skeleton height="40px" type="rectangle" width="40%" textLines="1" [style.margin]="'auto 0'"></fd-skeleton>
     }
-</h2>
+</h3>
 <ng-template #tabbedLayout>
-    <fd-tab-list size="s">
-        @for (group of _groups; track group) {
-            <fd-tab [title]="group.title | fdkAsyncOrSync">
-                <fdp-settings-generator-section
-                    [groupName]="$any(settings).id"
-                    [items]="group"
-                ></fdp-settings-generator-section>
-            </fd-tab>
-        }
-    </fd-tab-list>
+    <fdp-icon-tab-bar
+        class="fdp-settings-generator__tabs-container"
+        [tabsConfig]="_tabs$()"
+        (iconTabSelected)="changeTab($event)"
+    ></fdp-icon-tab-bar>
+    @for (group of _groups$(); track group) {
+        <div [attr.hidden]="$index === _activeTab$() ? null : true">
+            <fdp-settings-generator-section
+                [groupName]="$any(settings).id"
+                [items]="group"
+            ></fdp-settings-generator-section>
+        </div>
+    }
 </ng-template>
 <ng-template #formLayout>
     <fdp-settings-generator-section [items]="settings!"></fdp-settings-generator-section>
 </ng-template>
-<ng-template [ngTemplateOutlet]="_contentLayout === 'tabs' ? tabbedLayout : formLayout"></ng-template>
+<ng-template [ngTemplateOutlet]="_contentLayout$() === 'tabs' ? tabbedLayout : formLayout"></ng-template>

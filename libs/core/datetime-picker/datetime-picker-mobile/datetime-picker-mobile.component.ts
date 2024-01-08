@@ -3,7 +3,6 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
-    DestroyRef,
     ElementRef,
     Inject,
     Optional,
@@ -53,7 +52,6 @@ export class DatetimePickerMobileComponent<D> extends MobileModeBase<DateTimePic
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,
-        private readonly _destroyRef: DestroyRef,
         @Inject(FD_DATETIME_PICKER_MOBILE_CONFIG)
         public dateTimePickerConfig: { pickerTemplate: TemplateRef<any> },
         @Inject(FD_DATETIME_PICKER_COMPONENT) datePickerComponent: DateTimePicker<D>,

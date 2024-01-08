@@ -10,7 +10,8 @@ import {
     ViewChild,
     ViewChildren,
     ViewEncapsulation,
-    inject
+    inject,
+    signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
@@ -29,7 +30,6 @@ import {
     TableColumn,
     TableService
 } from '@fundamental-ngx/platform/table-helpers';
-import { BehaviorSubject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 
 @Component({
@@ -76,6 +76,10 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     @Input()
     filteringFromHeaderDisabled: Nullable<boolean> = false;
 
+    /** Column index */
+    @Input()
+    columnIndex: number;
+
     /** @hidden */
     @ViewChild(PopoverComponent, { static: false })
     popover: Nullable<PopoverComponent>;
@@ -85,7 +89,7 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     _popoverItems: QueryList<TemplateDirective>;
 
     /** @hidden */
-    _popoverItems$ = new BehaviorSubject<TemplateRef<any>[]>([]);
+    _popoverItems$ = signal<TemplateRef<any>[]>([]);
 
     /** @hidden */
     _headerPopoverTriggers: TriggerConfig[] = [
@@ -124,7 +128,7 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     /** @hidden */
     ngAfterViewInit(): void {
         this._popoverItems.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this._popoverItems$.next(this._popoverItems.map((t) => t.templateRef));
+            this._popoverItems$.set(this._popoverItems.map((t) => t.templateRef));
         });
     }
 

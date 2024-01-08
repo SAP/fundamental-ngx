@@ -6,6 +6,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    computed,
     ContentChild,
     ContentChildren,
     ElementRef,
@@ -22,6 +23,7 @@ import {
     Optional,
     Output,
     QueryList,
+    signal,
     SimpleChanges,
     TrackByFunction,
     ViewChild,
@@ -126,22 +128,14 @@ import {
     TableVirtualScroll
 } from '@fundamental-ngx/platform/table-helpers';
 import equal from 'fast-deep-equal';
-import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
+import { fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, take, tap } from 'rxjs/operators';
-import { TABLE_TOOLBAR, TableToolbarInterface } from './components';
+import { NoDataWrapperComponent, TABLE_TOOLBAR, TableToolbarInterface, ToolbarContext } from './components';
 import { PlatformTableColumnResizerComponent } from './components/table-column-resizer/table-column-resizer.component';
 import { TableGroupRowComponent } from './components/table-group-row/table-group-row.component';
 import { TableHeaderRowComponent } from './components/table-header-row/table-header-row.component';
 import { TablePoppingRowComponent } from './components/table-popping-row/table-popping-row.component';
 import { TableRowComponent } from './components/table-row/table-row.component';
-
-interface ToolbarContext {
-    counter: Observable<number>;
-    sortable: Observable<boolean>;
-    filterable: Observable<boolean>;
-    groupable: Observable<boolean>;
-    columns: Observable<boolean>;
-}
 
 let tableUniqueId = 0;
 
@@ -218,7 +212,8 @@ let tableUniqueId = 0;
     host: {
         class: 'fdp-table',
         '[class.fd-table--no-horizontal-borders]': 'noHorizontalBorders || noBorders',
-        '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders'
+        '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders',
+        '[class.fd-table--group]': '_isGroupTable$()'
     },
     standalone: true,
     imports: [
@@ -533,6 +528,9 @@ export class TableComponent<T = any>
     @ContentChild(TABLE_TOOLBAR)
     readonly tableToolbar: TableToolbarInterface;
     /** @hidden */
+    @ContentChild(NoDataWrapperComponent)
+    readonly _noDataWrapper: Nullable<NoDataWrapperComponent>;
+    /** @hidden */
     get initialSortBy(): CollectionSort[] {
         return this.initialState?.initialSortBy ?? [];
     }
@@ -542,15 +540,7 @@ export class TableComponent<T = any>
      * Columns to be rendered in the template
      */
     get _visibleColumns(): TableColumn[] {
-        return this._tableService.visibleColumns$.value;
-    }
-
-    /**
-     * @hidden
-     * Columns to be rendered as a pop-in columns.
-     */
-    get _poppingColumns(): TableColumn[] {
-        return this._tableService.poppingColumns$.value;
+        return this._tableService.visibleColumns$();
     }
 
     /** @hidden */
@@ -602,7 +592,7 @@ export class TableComponent<T = any>
         return (
             this._isSelectionColumnShown &&
             !!this._tableRowsVisible.length &&
-            this._tableService.visibleColumnsLength > 0
+            this._tableService.visibleColumnsLength() > 0
         );
     }
 
@@ -659,7 +649,11 @@ export class TableComponent<T = any>
     _checkedState: boolean | null = false;
     /** @hidden */
     @HostBinding('class.fd-table--group')
-    _isGroupTable = false;
+    _isGroupTable$ = computed(() => {
+        const groupRules = this._tableService.groupRules$();
+
+        return groupRules ? groupRules.size > 0 : (this.initialState?.initialGroupBy?.length ?? 0) > 0;
+    });
     /**
      * @hidden
      * Used to create a row component placeholder and set data in it rather than re-create the row component when data changes.
@@ -707,13 +701,13 @@ export class TableComponent<T = any>
     /** @hidden */
     private _forceSemanticHighlighting = false;
     /** @hidden */
-    private readonly _isShownSortSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
+    private readonly _isShownSortSettingsInToolbar$ = signal(false);
     /** @hidden */
-    private readonly _isShownFilterSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
+    private readonly _isShownFilterSettingsInToolbar$ = signal(false);
     /** @hidden */
-    private readonly _isShownGroupSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
+    private readonly _isShownGroupSettingsInToolbar$ = signal(false);
     /** @hidden */
-    private readonly _isShownColumnSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
+    private readonly _isShownColumnSettingsInToolbar$ = signal(false);
     /**
      * @hidden
      * Indicates when all items are checked
@@ -764,7 +758,6 @@ export class TableComponent<T = any>
         readonly _tableService: TableService,
         private readonly _tableScrollDispatcher: TableScrollDispatcherService,
         public readonly _tableColumnResizeService: TableColumnResizeService,
-        private readonly _elRef: ElementRef,
         @Optional() private readonly _rtlService: RtlService,
         readonly contentDensityObserver: ContentDensityObserver,
         readonly injector: Injector,
@@ -782,19 +775,17 @@ export class TableComponent<T = any>
             sortable: this._isShownSortSettingsInToolbar$,
             filterable: this._isShownFilterSettingsInToolbar$,
             groupable: this._isShownGroupSettingsInToolbar$,
-            columns: this._isShownColumnSettingsInToolbar$
+            columns: this._isShownColumnSettingsInToolbar$,
+            hasAnyActions: computed(
+                () =>
+                    this._isShownSortSettingsInToolbar$() ||
+                    this._isShownFilterSettingsInToolbar$() ||
+                    this._isShownGroupSettingsInToolbar$() ||
+                    this._isShownColumnSettingsInToolbar$()
+            )
         };
 
         this.tableColumnsStream = this._tableService.tableColumns$.asObservable();
-
-        if (this._rtlService) {
-            this._subscriptions.add(
-                this._rtlService.rtl.subscribe((isRtl) => {
-                    this._rtl = isRtl;
-                    this._cdr.markForCheck();
-                })
-            );
-        }
 
         this._subscriptions.add(
             this._tableRowService.cellFocused$.subscribe((event) => {
@@ -864,8 +855,6 @@ export class TableComponent<T = any>
     /** @hidden */
     ngOnInit(): void {
         this._tableColumnResizeService.setTableRef(this);
-
-        this._isGroupTable = (this.initialState?.initialGroupBy?.length ?? 0) > 0;
     }
 
     /** @hidden */
@@ -1091,27 +1080,27 @@ export class TableComponent<T = any>
 
     /** Toolbar Sort Settings button visibility */
     showSortSettingsInToolbar(showSortSettings: boolean): void {
-        this._isShownSortSettingsInToolbar$.next(showSortSettings);
+        this._isShownSortSettingsInToolbar$.set(showSortSettings);
     }
 
     /** Toolbar Filter Settings button visibility */
     showFilterSettingsInToolbar(showFilterSettings: boolean): void {
-        this._isShownFilterSettingsInToolbar$.next(showFilterSettings);
+        this._isShownFilterSettingsInToolbar$.set(showFilterSettings);
     }
 
     /** Toolbar Group Settings button visibility */
     showGroupSettingsInToolbar(showGroupSettings: boolean): void {
-        this._isShownGroupSettingsInToolbar$.next(showGroupSettings);
+        this._isShownGroupSettingsInToolbar$.set(showGroupSettings);
     }
 
     /** Toolbar Columns Settings button visibility */
     showColumnSettingsInToolbar(showColumnSettings: boolean): void {
-        this._isShownColumnSettingsInToolbar$.next(showColumnSettings);
+        this._isShownColumnSettingsInToolbar$.set(showColumnSettings);
     }
 
     /** Disable filter from column heder menu */
     setHeaderColumnFilteringDisabled(disabled: boolean): void {
-        this._tableService._isFilteringFromHeaderDisabled$.next(disabled);
+        this._tableService._isFilteringFromHeaderDisabled$.set(disabled);
     }
 
     /** Set the row navigation */
@@ -1356,7 +1345,7 @@ export class TableComponent<T = any>
     /** @hidden */
     _scrollToOverlappedCell(): void {
         this.tableScrollable.scrollToOverlappedCell(
-            this._rtl,
+            !!this._rtlService?.rtlSignal(),
             this._freezableColumns.size,
             this._freezableEndColumns.size
         );
@@ -1588,7 +1577,7 @@ export class TableComponent<T = any>
         const {
             page: { currentPage, pageSize }
         } = this.getTableState();
-        const totalItems = this._dataSourceDirective.totalItems$.value;
+        const totalItems = this._dataSourceDirective.totalItems$();
         const lastPage = Math.ceil(totalItems / (pageSize || totalItems));
         if (currentPage >= lastPage) {
             return;
@@ -1614,7 +1603,7 @@ export class TableComponent<T = any>
                     switchMap((rows: TableRow[]) =>
                         this.isTreeTable
                             ? of(rows)
-                            : this._tableService.groupRules$.pipe(
+                            : this._tableService.groupRulesSubject.pipe(
                                   map((groupRules) =>
                                       this._tableRowService.groupTableRows(rows, groupRules.values(), groupRules)
                                   )
@@ -1678,12 +1667,6 @@ export class TableComponent<T = any>
                 .subscribe((state) => {
                     this._dataSourceDirective._tableDataSource.fetch(state);
                 })
-        );
-
-        this._subscriptions.add(
-            this._tableService.groupRules$.subscribe((rules) => {
-                this._isGroupTable = rules.size > 0;
-            })
         );
 
         this._subscriptions.add(
@@ -1961,7 +1944,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _calculateIsShownNavigationColumn(): void {
-        this._tableService._isShownNavigationColumn$.next(this._tableRows.some((tableRow) => tableRow.navigatable));
+        this._tableService._isShownNavigationColumn$.set(this._tableRows.some((tableRow) => tableRow.navigatable));
     }
 
     /** @hidden */
@@ -2145,8 +2128,8 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _setSemanticHighlighting(): void {
-        this._tableService._semanticHighlighting$.next(this.semanticHighlighting);
-        this._tableService._semanticHighlightingColumnWidth$.next(this._semanticHighlightingColumnWidth);
+        this._tableService._semanticHighlighting$.set(this.semanticHighlighting);
+        this._tableService._semanticHighlightingColumnWidth$.set(this._semanticHighlightingColumnWidth);
     }
 
     /** @hidden */
@@ -2158,7 +2141,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _checkCellMock(): void {
-        this._tableColumnResizeService.cellMockVisible$.next(
+        this._tableColumnResizeService.cellMockVisible$.set(
             this._tableColumnResizeService.fixedWidth &&
                 (this.tableContainer?.nativeElement?.scrollWidth ?? 0) > (this.table?.nativeElement?.scrollWidth ?? 0)
         );

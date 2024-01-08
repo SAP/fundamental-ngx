@@ -8,24 +8,6 @@ import { Observable, Subject } from 'rxjs';
  *
  */
 export abstract class DatetimeAdapter<D> {
-    /** current locale */
-    protected locale: string;
-
-    /** @hidden */
-    private _localeChanges: Subject<void> = new Subject();
-
-    /** locale changes stream */
-    readonly localeChanges: Observable<void> = this._localeChanges.asObservable();
-
-    /**
-     * Sets the locale used for all dates.
-     * @param locale The new locale.
-     */
-    setLocale(locale: string): void {
-        this.locale = locale;
-        this._localeChanges.next();
-    }
-
     /**
      * Gets the year component of the given date.
      * @param date The date to extract the year from.
@@ -95,18 +77,6 @@ export abstract class DatetimeAdapter<D> {
      * @returns The new date instance.
      */
     abstract setSeconds(date: D, seconds: number): D;
-
-    /**
-     * Set hours, minutes and seconds at once.
-     * @param date The date to set time to.
-     * @returns The new date instance.
-     */
-    setTime(date: D, hours: number, minutes: number, seconds: number): D {
-        date = this.setHours(date, hours);
-        date = this.setMinutes(date, minutes);
-        date = this.setSeconds(date, seconds);
-        return date;
-    }
 
     /**
      * Gets week number of the given date
@@ -210,7 +180,7 @@ export abstract class DatetimeAdapter<D> {
      * @param date The month date. Must be an integer 1 - length of the given month.
      * @returns The new date, or null if invalid.
      */
-    abstract createDate(year: number, month: number, date: number): D;
+    abstract createDate(year: number, month?: number, date?: number): D;
 
     /**
      * Gets today's date where time value is set to 0
@@ -334,6 +304,36 @@ export abstract class DatetimeAdapter<D> {
      * @returns String representing how much time has passed since the date param.
      */
     abstract fromNow?(date: D): string;
+
+    /** current locale */
+    protected locale: string;
+
+    /** @hidden */
+    private _localeChanges: Subject<void> = new Subject();
+
+    /** locale changes stream */
+    readonly localeChanges: Observable<void> = this._localeChanges.asObservable();
+
+    /**
+     * Sets the locale used for all dates.
+     * @param locale The new locale.
+     */
+    setLocale(locale: string): void {
+        this.locale = locale;
+        this._localeChanges.next();
+    }
+
+    /**
+     * Set hours, minutes and seconds at once.
+     * @param date The date to set time to.
+     * @returns The new date instance.
+     */
+    setTime(date: D, hours: number, minutes: number, seconds: number): D {
+        date = this.setHours(date, hours);
+        date = this.setMinutes(date, minutes);
+        date = this.setSeconds(date, seconds);
+        return date;
+    }
 
     /**
      * Get Amount of weeks in given month/year

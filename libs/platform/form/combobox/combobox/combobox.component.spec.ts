@@ -41,6 +41,7 @@ import { CommonModule } from '@angular/common';
                     [fdContentDensity]="contentDensity"
                     [dataSource]="dataSource"
                     [maxHeight]="maxHeight"
+                    [lookupKey]="lookupKey"
                     (selectionChange)="onSelect($event)"
                 ></fdp-combobox>
             </fdp-form-field>
@@ -51,14 +52,15 @@ class ComboboxStandardComponent {
     @ViewChild(ComboboxComponent)
     combobox: ComboboxComponent;
     dataSource = [
-        { name: 'Apple', type: 'Fruits' },
-        { name: 'Banana', type: 'Fruits' },
-        { name: 'Pineapple', type: 'Fruits' },
-        { name: 'Strawberry', type: 'Fruits' },
-        { name: 'Broccoli', type: 'Vegetables' },
-        { name: 'Carrot', type: 'Vegetables' },
-        { name: 'Jalapeño', type: 'Vegetables' },
-        { name: 'Spinach', type: 'Vegetables' }
+        { name: 'Apple', type: 'Fruits', id: 1 },
+        { name: 'Banana', type: 'Fruits', id: 2 },
+        { name: 'Pineapple', type: 'Fruits', id: 3 },
+        { name: 'Strawberry', type: 'Fruits', id: 4 },
+        { name: 'Broccoli', type: 'Vegetables', id: 5 },
+        { name: 'Carrot', type: 'Vegetables', id: 6 },
+        { name: 'Jalapeño', type: 'Vegetables', id: 7 },
+        { name: 'Spinach', type: 'Vegetables', id: 8 },
+        { name: 'Apple', type: 'Fruits2', id: 9 }
     ];
     selectedItem: ComboboxSelectionChangeEvent | null = null;
     maxHeight: string;
@@ -68,6 +70,7 @@ class ComboboxStandardComponent {
     groupKey = 'type';
     showSecondaryText = false;
     secondaryKey = 'type';
+    lookupKey: 'id';
 
     onSelect(item: ComboboxSelectionChangeEvent): void {
         this.selectedItem = item;
@@ -189,7 +192,7 @@ describe('ComboboxComponent default values', () => {
         discardPeriodicTasks();
 
         const group = overlayContainerEl.querySelectorAll('.fd-list__group-header');
-        expect(group.length).toBe(2);
+        expect(group.length).toBe(3);
 
         flush();
     }));
@@ -205,5 +208,11 @@ describe('ComboboxComponent default values', () => {
 
         const secondaryColumns = overlayContainerEl.querySelectorAll('.fd-list__secondary');
         expect(secondaryColumns.length).toBe(combobox._suggestions.length);
+    });
+
+    it('should select the proper item when there are 2 with matching names but different lookup keys', () => {
+        combobox.selectOptionItem(combobox._suggestions[8]);
+
+        expect(combobox.value.id).toBe(component.dataSource[8].id);
     });
 });

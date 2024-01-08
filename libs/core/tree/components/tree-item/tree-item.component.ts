@@ -39,7 +39,7 @@ import { FdTreeAcceptableDataSource, FdTreeDataSource } from '../../data-source/
 import { TreeItemDirective } from '../../directives/tree-item.directive';
 import { BaseTreeItem } from '../../models/base-tree-item.class';
 import { TreeItem, TreeItemState } from '../../models/tree-item';
-import { SelectionModeModel, TreeService } from '../../tree.service';
+import { TreeService } from '../../tree.service';
 
 @Component({
     selector: 'fd-tree-item',
@@ -201,12 +201,6 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
 
     /**
      * @hidden
-     * Whether the tree item should have a navigation indicator.
-     */
-    _navigationIndicator = false;
-
-    /**
-     * @hidden
      * Selection state.
      */
     _selectionState = false;
@@ -216,9 +210,6 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
 
     /** @hidden */
     childrenLoaded = false;
-
-    /** @hidden */
-    _selectionModel: Nullable<SelectionModeModel>;
 
     /** @Hidden */
     _containerTabIndex = 0;
@@ -281,7 +272,7 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
     });
 
     /** @hidden */
-    private readonly _treeService = inject(TreeService);
+    readonly _treeService = inject(TreeService);
 
     /** @hidden */
     private readonly _dataSourceDirective = inject<DataSourceDirective<T, FdTreeDataSource<T>>>(DataSourceDirective);
@@ -306,16 +297,6 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
 
     /** @hidden */
     ngOnInit(): void {
-        this._treeService.selectionMode.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((model) => {
-            this._selectionModel = model;
-            this._cdr.detectChanges();
-        });
-
-        this._treeService.navigationIndicator.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
-            this._navigationIndicator = value;
-            this._cdr.detectChanges();
-        });
-
         this._dataSourceDirective.dataSource = this.childNodes as DataSource<T, FdTreeDataSource<T>>;
         this._treeService.addExpandableItem(this.id, this.level, this.expanded);
 

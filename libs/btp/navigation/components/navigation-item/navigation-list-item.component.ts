@@ -23,14 +23,14 @@ import {
     inject,
     signal
 } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NestedButtonDirective } from '@fundamental-ngx/btp/button';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { Observable, asyncScheduler, filter, observeOn, of, startWith, take } from 'rxjs';
+import { Observable, asyncScheduler, filter, observeOn, startWith, take } from 'rxjs';
 import { NavigationListItemDirective } from '../../directives/navigation-list-item-ref.directive';
 import { FdbNavigationContentContainer } from '../../models/navigation-content-container.class';
 import { FdbNavigationItemLink } from '../../models/navigation-item-link.class';
@@ -289,12 +289,12 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     /** @hidden */
     private readonly _zone = inject(NgZone);
 
+    private readonly _rtlService = inject(RtlService, {
+        optional: true
+    });
+
     /** @hidden */
-    private readonly _rtl$ = toSignal(
-        inject(RtlService, {
-            optional: true
-        })?.rtl || of(false)
-    );
+    private readonly _rtl$ = computed<boolean>(() => !!this._rtlService?.rtlSignal());
 
     /**
      * @hidden

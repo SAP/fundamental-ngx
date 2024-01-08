@@ -57,9 +57,6 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     private _listMode: boolean;
 
     /** @hidden */
-    private _isRtl = false;
-
-    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
@@ -71,7 +68,6 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     ngOnInit(): void {
-        this._subscriptions.add(this._rtlService?.rtl.subscribe((isRtl) => (this._isRtl = isRtl)));
         this._subscriptions.add(
             this._viewportRuler.change().subscribe((event) => {
                 const { innerWidth } = <Window>event.target;
@@ -150,7 +146,8 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
 
         if (
             i === this.products.length - 1 &&
-            (KeyUtil.isKeyCode(event, RIGHT_ARROW) || (KeyUtil.isKeyCode(event, LEFT_ARROW) && this._isRtl))
+            (KeyUtil.isKeyCode(event, RIGHT_ARROW) ||
+                (KeyUtil.isKeyCode(event, LEFT_ARROW) && this._rtlService?.rtlSignal()))
         ) {
             while (<HTMLElement>target.previousElementSibling) {
                 target = <HTMLElement>target.previousElementSibling;
@@ -159,9 +156,9 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
         }
 
         if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
-            this._isRtl ? nextElementSibling?.focus() : previousElementSibling?.focus();
+            this._rtlService?.rtlSignal() ? nextElementSibling?.focus() : previousElementSibling?.focus();
         } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
-            this._isRtl ? previousElementSibling?.focus() : nextElementSibling?.focus();
+            this._rtlService?.rtlSignal() ? previousElementSibling?.focus() : nextElementSibling?.focus();
         } else if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
             if (this.products.length >= 7) {
                 this._handleNoListMoreThanSeven(event, target, i);

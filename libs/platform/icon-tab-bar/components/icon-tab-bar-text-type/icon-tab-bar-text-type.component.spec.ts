@@ -27,17 +27,17 @@ describe('IconTabBarTextTypeComponent', () => {
     });
 
     it('should _selectExtraItem move selected tab to last visible position', () => {
-        const hiddenItem = component._tabs[component._tabs.length - 1];
+        const hiddenItem = component._tabs$()[component._tabs$().length - 1];
 
         component._selectExtraItem(hiddenItem);
-        const lastVisibleItemAfterSelect = component._tabs[component._lastVisibleTabIndex];
+        const lastVisibleItemAfterSelect = component._tabs$()[component._lastVisibleTabIndex];
 
         expect(hiddenItem.label).toEqual(lastVisibleItemAfterSelect.label);
     });
 
     it('should insert tab to another tab as child', () => {
-        const draggableItem = component._tabs[0];
-        const targetItem = component._tabs[1];
+        const draggableItem = component._tabs$()[0];
+        const targetItem = component._tabs$()[1];
         component._onDropped({
             draggableItem,
             targetItem,
@@ -48,8 +48,8 @@ describe('IconTabBarTextTypeComponent', () => {
     });
 
     it('should replace tab', () => {
-        const draggableItem = component._tabs[0];
-        const targetItem = component._tabs[1];
+        const draggableItem = component._tabs$()[0];
+        const targetItem = component._tabs$()[1];
         const dragItemPreviousUid = draggableItem.uId;
         const targetItemPreviousUid = targetItem.uId;
 
@@ -65,12 +65,12 @@ describe('IconTabBarTextTypeComponent', () => {
     });
 
     it('should change number of visible/hidden tabs', () => {
-        const tabsLength = component._tabs.length;
+        const tabsLength = component._tabs$().length;
         const extraTabs = 5;
         component._recalculateVisibleItems(extraTabs);
-        const visibleTabsLength = component._tabs.filter((tab) => !tab.hidden).length;
+        const visibleTabsLength = component._tabs$().filter((tab) => !tab.hidden).length;
 
-        expect(component._extraTabs.length).toBe(extraTabs);
+        expect(component._extraTabs$().length).toBe(extraTabs);
         expect(visibleTabsLength).toBe(tabsLength - extraTabs);
     });
 });

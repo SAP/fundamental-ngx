@@ -1,4 +1,5 @@
 import { ConfigurableFocusTrapFactory, FocusTrap } from '@angular/cdk/a11y';
+import { Direction } from '@angular/cdk/bidi';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
@@ -7,26 +8,29 @@ import {
     Component,
     ComponentFactoryResolver,
     ComponentRef,
+    DestroyRef,
     ElementRef,
     EmbeddedViewRef,
     HostBinding,
     HostListener,
     Inject,
     Input,
-    OnDestroy,
     OnInit,
     Optional,
     TemplateRef,
     Type,
     ViewChild,
     ViewContainerRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed,
+    inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationStart, Router } from '@angular/router';
 import { AbstractFdNgxClass, KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { FD_POPOVER_COMPONENT, PopoverComponent } from '@fundamental-ngx/core/popover';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { filter, take, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { filter, take } from 'rxjs/operators';
 import { NotificationConfig } from '../notification-utils/notification-config';
 import { NotificationRef } from '../notification-utils/notification-ref';
 
@@ -41,22 +45,17 @@ import { NotificationRef } from '../notification-utils/notification-ref';
     host: {
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
-        '[attr.dir]': '_dir',
+        '[attr.dir]': '_dir$()',
         role: 'alertdialog',
         '[attr.id]': 'id'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
-export class NotificationComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit, OnDestroy {
+export class NotificationComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit {
     /** @hidden */
     @ViewChild('vc', { read: ViewContainerRef })
     containerRef: ViewContainerRef;
-
-    /**
-     * @hidden
-     */
-    _dir: string;
 
     /** User defined width for the notification */
     @HostBinding('style.width')
@@ -65,6 +64,11 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
 
     /** Whether the notificatioon is in mobile mode */
     @Input() mobile: boolean;
+
+    /**
+     * @hidden
+     */
+    _dir$ = computed<Direction>(() => (this._rtlService?.rtlSignal() ? 'rtl' : 'ltr'));
 
     /** ID of the notification */
     id: string;
@@ -91,7 +95,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     public componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
     /** @hidden */
-    private readonly _onDestroy$ = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _afterViewInit$ = new BehaviorSubject(false);
@@ -122,13 +126,16 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         this._setNotificationConfig(this._notificationConfig);
     }
 
+    /** @hidden Listen and close notification on Escape key */
+    @HostListener('window:keyup', ['$event'])
+    _closeNotificationEsc(event: KeyboardEvent): void {
+        if (this.escKeyCloseable && KeyUtil.isKeyCode(event, ESCAPE) && this._notificationRef) {
+            this._notificationRef.dismiss('escape');
+        }
+    }
+
     /** @hidden */
     ngOnInit(): void {
-        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl) => {
-            this._dir = isRtl ? 'rtl' : 'ltr';
-            this._cdRef.markForCheck();
-        });
-
         this._listenAndCloseOnNavigation();
         this._setProperties();
     }
@@ -155,24 +162,11 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
      */
     async trapFocus(): Promise<boolean> {
         // waiting for afterViewInit hook to fire
-        await this._afterViewInit$.pipe(filter(Boolean), take(1), takeUntil(this._onDestroy$)).toPromise();
+        await this._afterViewInit$.pipe(filter(Boolean), take(1), takeUntilDestroyed(this._destroyRef)).toPromise();
         if (!this._focusTrap) {
             this._focusTrap = this._focusTrapFactory.create(this._elRef.nativeElement);
         }
         return this._focusTrap.focusFirstTabbableElementWhenReady();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-    }
-
-    /** @hidden Listen and close notification on Escape key */
-    @HostListener('window:keyup', ['$event'])
-    _closeNotificationEsc(event: KeyboardEvent): void {
-        if (this.escKeyCloseable && KeyUtil.isKeyCode(event, ESCAPE) && this._notificationRef) {
-            this._notificationRef.dismiss('escape');
-        }
     }
 
     /** @hidden Listen on NavigationStart event and dismiss the dialog */
@@ -181,7 +175,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
             this._router.events
                 .pipe(
                     filter((event) => event instanceof NavigationStart && this.closeOnNavigation),
-                    takeUntil(this._onDestroy$)
+                    takeUntilDestroyed(this._destroyRef)
                 )
                 .subscribe(() => this._notificationRef.dismiss());
         }

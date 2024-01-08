@@ -74,6 +74,22 @@ export class ExampleUserService {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [ExampleUserService],
     standalone: true,
+    styles: [
+        `
+            .fd-dialog__body fdp-message-popover-form-wrapper {
+                min-height: 100%;
+                display: flex;
+                align-items: stretch;
+            }
+            .fd-dialog__body .fdp-settings-generator {
+                display: block;
+                width: 100%;
+            }
+            .fd-dialog__body .fdp-settings-generator__sidebar-layout {
+                min-height: 100%;
+            }
+        `
+    ],
     imports: [
         TitleComponent,
         DialogModule,
@@ -113,10 +129,13 @@ export class SettingsGeneratorDialogExampleComponent {
 
     openDialog(dialog: TemplateRef<any>): void {
         const dialogRef = this._dialogService.open(dialog, {
-            responsivePadding: true,
-            minWidth: '50vw',
-            maxWidth: '900px',
-            maxHeight: '80vh',
+            responsivePadding: false,
+            minWidth: '55rem',
+            width: '80vw',
+            maxWidth: '75rem',
+            minHeight: '40rem',
+            height: '80vh',
+            maxHeight: '60rem',
             ariaLabelledBy: 'fd-dialog-header-10',
             ariaDescribedBy: 'fd-dialog-body-10',
             focusTrapped: true,

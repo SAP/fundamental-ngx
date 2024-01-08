@@ -3,6 +3,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     Input,
@@ -14,13 +15,16 @@ import {
     SimpleChanges,
     TemplateRef,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed,
+    inject
 } from '@angular/core';
 import { Observable, Subject, Subscription, isObservable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
+import { Direction } from '@angular/cdk/bidi';
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgForOf, NgTemplateOutlet, SlicePipe } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { DisplayFnPipe, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
@@ -306,10 +310,10 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
 
     /** handles rtl service
      * @hidden */
-    _dir = 'ltr';
+    _dir$ = computed<Direction>(() => (this._rtlService?.rtlSignal() ? 'rtl' : 'ltr'));
 
     /** @hidden */
-    private _destroyed = new Subject<void>();
+    private _destroyed = inject(DestroyRef);
 
     /** @hidden */
     private _dataSource: FdpValueHelpDialogDataSource<any> | undefined;
@@ -659,7 +663,7 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
             );
 
             const dsSub = this.openDataStream()
-                .pipe(takeUntil(this._destroyed))
+                .pipe(takeUntilDestroyed(this._destroyed))
                 .subscribe((data) => {
                     this._displayedData = data.slice();
                     this._changeDetectorRef.markForCheck();
@@ -696,7 +700,7 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
         if (!this.activeDialog) {
             return;
         }
-        this.activeDialog.afterClosed.pipe(takeUntil(this._destroyed)).subscribe((value) => {
+        this.activeDialog.afterClosed.pipe(takeUntilDestroyed(this._destroyed)).subscribe((value) => {
             if (value) {
                 this.value = value;
                 this.valueChange.emit(value);
@@ -704,22 +708,13 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
 
             this._resetState();
         });
-        this.filters.changes.pipe(takeUntil(this._destroyed)).subscribe(() => {
+        this.filters.changes.pipe(takeUntilDestroyed(this._destroyed)).subscribe(() => {
             this._updateFilters();
         });
-
-        if (this._rtlService) {
-            this._dir = this._rtlService.rtl.getValue() ? 'rtl' : 'ltr';
-            this._rtlService.rtl.pipe(takeUntil(this._destroyed)).subscribe((isRtl: boolean) => {
-                this._dir = isRtl ? 'rtl' : 'ltr';
-            });
-        }
     }
 
     /** @hidden */
     private _resetState(): void {
-        this._destroyed.next();
-        this._destroyed.complete();
         this._resetSourceStream();
         this.activeDialog = undefined;
     }

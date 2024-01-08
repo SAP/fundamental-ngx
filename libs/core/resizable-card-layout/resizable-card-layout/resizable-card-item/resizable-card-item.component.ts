@@ -270,9 +270,6 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     private _rank: number;
 
     /** @hidden */
-    private _rtl = false;
-
-    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
@@ -280,11 +277,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
         private readonly _cd: ChangeDetectorRef,
         public readonly elementRef: ElementRef,
         @Optional() private readonly _rtlService: RtlService
-    ) {
-        if (this._rtlService) {
-            this._subscriptions.add(this._rtlService.rtl.subscribe((value) => (this._rtl = value)));
-        }
-    }
+    ) {}
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -584,12 +577,12 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
      */
     private _horizontalResizing(xPosition: number): void {
         const difference = this._prevX - xPosition;
-        this.cardWidth = this._rtl ? this.cardWidth + difference : this.cardWidth - difference;
+        this.cardWidth = this._rtlService?.rtlSignal() ? this.cardWidth + difference : this.cardWidth - difference;
 
         const totalIndentation = (this._maxColumn - 1) * gap;
         const maxCardWidtWithoutIndentation = this._maxColumn * horizontalResizeStep;
 
-        const maxCardWidth = this._rtl
+        const maxCardWidth = this._rtlService?.rtlSignal()
             ? maxCardWidtWithoutIndentation - totalIndentation
             : maxCardWidtWithoutIndentation + totalIndentation;
 

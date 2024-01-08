@@ -14,6 +14,7 @@ import {
     Optional,
     QueryList,
     Renderer2,
+    computed,
     effect,
     forwardRef,
     inject,
@@ -113,7 +114,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     _isItemVisible = true;
 
     /** @hidden handles rtl service */
-    private _dir: 'ltr' | 'rtl' | null = 'ltr';
+    private readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
     private readonly _renderer2 = inject(Renderer2);
@@ -144,11 +145,11 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     keyDownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [RIGHT_ARROW])) {
             event.preventDefault();
-            this._handleExpandedChanges(this._dir === 'ltr');
+            this._handleExpandedChanges(!this._rtl$());
         }
         if (KeyUtil.isKeyCode(event, [LEFT_ARROW])) {
             event.preventDefault();
-            this._handleExpandedChanges(this._dir !== 'ltr');
+            this._handleExpandedChanges(this._rtl$());
         }
         if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             event.preventDefault();
@@ -184,7 +185,6 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._subscribeToRtl();
         if (this._isExpandable) {
             this._expanded = false;
         }
@@ -246,16 +246,5 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
                 });
             }
         }
-    }
-
-    /** @hidden Rtl change subscription */
-    private _subscribeToRtl(): void {
-        if (!this._rtlService) {
-            return;
-        }
-
-        this._rtlService.rtl.subscribe((isRtl) => {
-            this._dir = isRtl ? 'rtl' : 'ltr';
-        });
     }
 }

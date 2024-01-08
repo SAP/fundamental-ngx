@@ -8,7 +8,8 @@ import {
     Input,
     OnDestroy,
     QueryList,
-    ViewEncapsulation
+    ViewEncapsulation,
+    signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, ControlContainer, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
@@ -19,7 +20,7 @@ import {
     PlatformFormField,
     PlatformFormFieldControl
 } from '@fundamental-ngx/platform/shared';
-import { BehaviorSubject, Subject, Subscription, filter, startWith, switchMap, zip } from 'rxjs';
+import { Subject, Subscription, filter, startWith, switchMap, zip } from 'rxjs';
 import { FDP_MESSAGE_POPOVER_CONFIG, MessagePopoverConfig, MessagePopoverErrorConfig } from '../../default-config';
 import { MessagePopoverFormItemDirective } from '../../directives/message-popover-form-item.directive';
 import {
@@ -83,14 +84,10 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
         return this._formFields;
     }
 
-    /** @hidden */
-    private readonly _errors$ = new BehaviorSubject<MessagePopoverErrorGroup[]>([]);
-
     /**
-     * Error models Observable. Emitted when form submitted and contains invalid fields.
+     * Error models Signal. Emitted when form submitted and contains invalid fields.
      */
-    // eslint-disable-next-line @typescript-eslint/member-ordering
-    errors = this._errors$.asObservable();
+    readonly errors$ = signal<MessagePopoverErrorGroup[]>([]);
 
     /** @hidden */
     private _formFields: PlatformFormFieldControl[] = [];
@@ -166,7 +163,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
             return;
         }
         this._formErrorsSubscription?.unsubscribe();
-        this._errors$.next([]);
+        this.errors$.set([]);
 
         const formSubmitEvents = this._ngForms.map((form) =>
             form.ngSubmit.pipe(
@@ -186,7 +183,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
                 const errors =
                     this._directiveItems.length > 0 ? this._collectPlainFormData() : this._collectAdvancedFormData();
 
-                this._errors$.next(errors);
+                this.errors$.set(errors);
             });
 
         this._listenToFormFieldErrors(this._projectedFormFieldControls.toArray());
@@ -212,7 +209,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
                         this._directiveItems.length > 0
                             ? this._collectPlainFormData()
                             : this._collectAdvancedFormData();
-                    this._errors$.next(errors);
+                    this.errors$.set(errors);
                 })
             );
         });
