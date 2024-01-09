@@ -10,9 +10,9 @@ import {
     Output,
     ViewChild,
     ViewEncapsulation,
+    booleanAttribute,
     effect,
-    inject,
-    booleanAttribute
+    inject
 } from '@angular/core';
 import { FilterStringsPipe, Nullable } from '@fundamental-ngx/cdk/utils';
 import {
@@ -37,7 +37,6 @@ import {
 import { HeaderSizes, TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { FDP_DYNAMIC_PAGE } from '@fundamental-ngx/platform/dynamic-page';
-import { MenuButtonComponent } from '@fundamental-ngx/platform/menu-button';
 import { SearchFieldComponent, SearchInput } from '@fundamental-ngx/platform/search-field';
 import equal from 'fast-deep-equal';
 import { BehaviorSubject } from 'rxjs';
