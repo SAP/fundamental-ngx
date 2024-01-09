@@ -1,11 +1,12 @@
-import { AfterViewInit, ContentChildren, Directive, OnDestroy, QueryList, Renderer2 } from '@angular/core';
-import { Observable, Subject, merge } from 'rxjs';
-import { debounceTime, filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { AfterViewInit, ContentChildren, DestroyRef, Directive, QueryList, Renderer2, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Observable, merge } from 'rxjs';
+import { debounceTime, filter, startWith, switchMap } from 'rxjs/operators';
 import { NotificationActionsComponent } from '../notification-actions/notification-actions.component';
 import { NotificationHeaderComponent } from '../notification-header/notification-header.component';
 
 @Directive()
-export abstract class NotificationGroupBaseDirective implements AfterViewInit, OnDestroy {
+export abstract class NotificationGroupBaseDirective implements AfterViewInit {
     /** @hidden */
     @ContentChildren(NotificationHeaderComponent, { descendants: true })
     notificationHeader: QueryList<NotificationHeaderComponent>;
@@ -15,10 +16,10 @@ export abstract class NotificationGroupBaseDirective implements AfterViewInit, O
     notificationActions: QueryList<NotificationActionsComponent>;
 
     /** @hidden */
-    private readonly onDestroy$ = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    constructor(private renderer: Renderer2) {}
+    private readonly _renderer = inject(Renderer2);
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -39,7 +40,7 @@ export abstract class NotificationGroupBaseDirective implements AfterViewInit, O
             .pipe(
                 debounceTime(10), // omitting extra emissions
                 filter(() => this.notificationHeader.length > 0 && this.notificationActions.length > 0),
-                takeUntil(this.onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
                 // using only the first header for "aria-describedby" of associated buttons
@@ -52,14 +53,9 @@ export abstract class NotificationGroupBaseDirective implements AfterViewInit, O
                         .filter((b) => !b.hasAttribute('aria-describedby'))
                         .forEach((b) => {
                             // setting aria-describedby on each button with an id of related header
-                            this.renderer.setAttribute(b, 'aria-describedby', firstHeader.uniqueId);
+                            this._renderer.setAttribute(b, 'aria-describedby', firstHeader.uniqueId);
                         });
                 });
             });
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this.onDestroy$.next();
     }
 }

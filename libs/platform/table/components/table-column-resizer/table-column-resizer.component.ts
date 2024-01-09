@@ -1,8 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
+    computed,
     DestroyRef,
     ElementRef,
     inject,
@@ -40,13 +40,10 @@ export class PlatformTableColumnResizerComponent implements OnInit {
     private _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    private get _rtl(): boolean {
-        return this._rtlService?.rtl.getValue();
-    }
+    private readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
     constructor(
-        private readonly _cd: ChangeDetectorRef,
         private readonly _ngZone: NgZone,
         private readonly _tableColumnResizeService: TableColumnResizeService,
         private readonly _renderer: Renderer2,
@@ -73,8 +70,16 @@ export class PlatformTableColumnResizerComponent implements OnInit {
                     if (!position) {
                         return;
                     }
-                    this._renderer.setStyle(this._elmRef.nativeElement, 'left', this._rtl ? 'auto' : `${position}px`);
-                    this._renderer.setStyle(this._elmRef.nativeElement, 'right', !this._rtl ? 'auto' : `${position}px`);
+                    this._renderer.setStyle(
+                        this._elmRef.nativeElement,
+                        'left',
+                        this._rtl$() ? 'auto' : `${position}px`
+                    );
+                    this._renderer.setStyle(
+                        this._elmRef.nativeElement,
+                        'right',
+                        !this._rtl$() ? 'auto' : `${position}px`
+                    );
                 });
 
             this._tableColumnResizeService.resizeInProgress$

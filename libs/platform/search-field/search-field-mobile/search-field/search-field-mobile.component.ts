@@ -3,15 +3,13 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
     Inject,
-    OnDestroy,
     OnInit,
-    Optional,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarElementDirective, BarMiddleDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import {
@@ -19,17 +17,10 @@ import {
     DialogCloseButtonComponent,
     DialogComponent,
     DialogFooterComponent,
-    DialogHeaderComponent,
-    DialogService
+    DialogHeaderComponent
 } from '@fundamental-ngx/core/dialog';
-import {
-    MOBILE_MODE_CONFIG,
-    MobileModeBase,
-    MobileModeConfigToken,
-    MobileModeControl
-} from '@fundamental-ngx/core/mobile-mode';
+import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { takeUntil } from 'rxjs/operators';
 import {
     SEARCH_FIELD_COMPONENT,
     SearchFieldChildContent,
@@ -57,24 +48,15 @@ import {
         ButtonBarComponent
     ]
 })
-export class SearchFieldMobileComponent
-    extends MobileModeBase<SearchFieldMobileInterface>
-    implements OnInit, OnDestroy
-{
+export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobileInterface> implements OnInit {
+    /** @hidden */
+    @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
     /** @hidden */
     childContent: SearchFieldChildContent | null = null;
 
     /** @hidden */
-    @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
-
-    /** @hidden */
-    constructor(
-        elementRef: ElementRef,
-        dialogService: DialogService,
-        @Inject(SEARCH_FIELD_COMPONENT) searchFieldComponent: SearchFieldMobileInterface,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
-    ) {
-        super(elementRef, dialogService, searchFieldComponent, MobileModeControl.SEARCH_FIELD, mobileModes);
+    constructor(@Inject(SEARCH_FIELD_COMPONENT) searchFieldComponent: SearchFieldMobileInterface) {
+        super(searchFieldComponent, MobileModeControl.SEARCH_FIELD);
     }
 
     /** @hidden */
@@ -83,13 +65,8 @@ export class SearchFieldMobileComponent
     }
 
     /** @hidden */
-    ngOnDestroy(): void {
-        super.onDestroy();
-    }
-
-    /** @hidden */
     listenChanges(): void {
-        this._component.isOpenChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => {
+        this._component.isOpenChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isOpen) => {
             if (!isOpen) {
                 this._handleDismiss();
 

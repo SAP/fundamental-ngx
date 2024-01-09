@@ -1,13 +1,13 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Validators } from '@angular/forms';
 
 import { PlatformFormGeneratorModule } from '@fundamental-ngx/platform/form';
-import { BaseWizardGenerator } from './base-wizard-generator';
-import { WizardGeneratorService } from './wizard-generator.service';
-import { PlatformWizardGeneratorModule } from './wizard-generator.module';
-import { WizardGeneratorItem } from './interfaces/wizard-generator-item.interface';
 import { first } from 'rxjs/operators';
+import { BaseWizardGenerator } from './base-wizard-generator';
+import { WizardGeneratorItem } from './interfaces/wizard-generator-item.interface';
+import { PlatformWizardGeneratorModule } from './wizard-generator.module';
+import { WizardGeneratorService } from './wizard-generator.service';
 
 let shouldShow = false;
 
@@ -89,28 +89,24 @@ const TEST_ITEMS: WizardGeneratorItem[] = [
 
 @Component({
     template: `
-@if (wizardCreated) {
-  <fdp-wizard-body
-    [navigationButtonLabels]="navigationButtonLabels"
-    [hidden]="!wizardCreated"
-    [appendToWizard]="appendToWizard"
-    [contentHeight]="contentHeight"
-    [isFirstStep]="isFirstStep"
-    [isLastStep]="isLastStep"
-    [isSummaryStep]="isSummaryStep"
-    (statusChange)="stepStatusChanged($event.id, $event.status)"
-    (goNext)="goNext()"
-    (finish)="finish()"
-  ></fdp-wizard-body>
-}
-`,
+        @if (wizardCreated) {
+            <fdp-wizard-body
+                [navigationButtonLabels]="navigationButtonLabels"
+                [hidden]="!wizardCreated"
+                [appendToWizard]="appendToWizard"
+                [contentHeight]="contentHeight"
+                [isFirstStep]="isFirstStep"
+                [isLastStep]="isLastStep"
+                [isSummaryStep]="isSummaryStep"
+                (statusChange)="stepStatusChanged($event.id, $event.status)"
+                (goNext)="goNext()"
+                (finish)="finish()"
+            ></fdp-wizard-body>
+        }
+    `,
     providers: [WizardGeneratorService]
 })
-class WizardGeneratorTestComponent extends BaseWizardGenerator {
-    constructor(public wizardGeneratorService: WizardGeneratorService, _cd: ChangeDetectorRef) {
-        super(wizardGeneratorService, _cd);
-    }
-}
+class WizardGeneratorTestComponent extends BaseWizardGenerator {}
 
 describe('WizardGeneratorService', () => {
     let service: WizardGeneratorService;
@@ -126,7 +122,7 @@ describe('WizardGeneratorService', () => {
         fixture = TestBed.createComponent(WizardGeneratorTestComponent);
         componentInstance = fixture.componentInstance;
 
-        service = componentInstance.wizardGeneratorService;
+        service = (componentInstance as any)._wizardGeneratorService;
         fixture.detectChanges();
     });
 

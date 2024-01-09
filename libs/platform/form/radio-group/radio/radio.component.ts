@@ -2,26 +2,18 @@ import { FocusableOption } from '@angular/cdk/a11y';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
-    ElementRef,
     EventEmitter,
-    Host,
-    Inject,
     Input,
-    Optional,
     Output,
-    Self,
-    SkipSelf,
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { NgTemplateOutlet } from '@angular/common';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { RadioButtonComponent as CoreRadioButtonComponent } from '@fundamental-ngx/core/radio';
-import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput } from '@fundamental-ngx/platform/shared';
 
 let uniqueId = 0;
 
@@ -75,16 +67,8 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     private coreRadioButton: CoreRadioButtonComponent;
 
     /** @hidden */
-    constructor(
-        cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        @Optional() @Self() ngControl: NgControl,
-        @Optional() @SkipSelf() controlContainer: ControlContainer,
-        @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
-    ) {
-        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+    constructor() {
+        super();
 
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
@@ -117,7 +101,7 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
             this.checked.emit(this);
         }
         this.tabIndex = this._isChecked ? 0 : -1;
-        this._cd.detectChanges();
+        this.detectChanges();
         if (emitEvent) {
             this.onChange(value);
             this.onTouched();
@@ -142,6 +126,6 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     /** Setting tabIndex for radio accessibility */
     setTabIndex(index: 0 | -1): void {
         this.tabIndex = index;
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 }

@@ -1,5 +1,4 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { BooleanInput } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { NgTemplateOutlet } from '@angular/common';
 import {
@@ -21,6 +20,7 @@ import {
     SimpleChanges,
     ViewChildren,
     ViewEncapsulation,
+    effect,
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -41,7 +41,7 @@ import {
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { Subscription, distinctUntilChanged, filter, fromEvent, startWith, switchMap } from 'rxjs';
+import { Subscription, filter, fromEvent, startWith, switchMap } from 'rxjs';
 import { FdTreeAcceptableDataSource, FdTreeDataSource, FdTreeItemType } from './data-source/tree-data-source';
 import { TreeDataSourceParser } from './data-source/tree-data-source-parser';
 import { TreeItemDefDirective } from './directives/tree-item-def.directive';
@@ -137,9 +137,6 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         return this._navigationIndicator;
     }
 
-    /** @hidden */
-    private _navigationIndicator = false;
-
     /** Event emitted when data loading is started. */
     @Output()
     dataRequested = new EventEmitter<boolean>();
@@ -151,9 +148,6 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     /** Event emitted when selected state changed. */
     @Output()
     selectedChange = new EventEmitter<any>();
-
-    /** @hidden */
-    _items: TreeItem<TreeItemGeneric<T>>[] = [];
 
     /** Tree item template definition. */
     @ContentChild(TreeItemDefDirective)
@@ -169,12 +163,23 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     }
 
     /** @hidden */
-    get multiple(): BooleanInput {
+    @ViewChildren(TreeItemDirective)
+    _treeItemDirectives: QueryList<TreeItemDirective<TreeItem, any>>;
+
+    /** @hidden */
+    @ContentChildren(BaseTreeItem, { descendants: true })
+    readonly _projectedTreeItems: QueryList<BaseTreeItem>;
+
+    /** @hidden */
+    _items: TreeItem<TreeItemGeneric<T>>[] = [];
+
+    /** @hidden */
+    get multiple(): boolean {
         return this.selection === 'multiple';
     }
 
     /** @hidden */
-    get toggle(): BooleanInput {
+    get toggle(): boolean {
         return true;
     }
 
@@ -185,12 +190,13 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     _initialDataLoaded = false;
 
     /** @hidden */
-    @ViewChildren(TreeItemDirective)
-    _treeItemDirectives: QueryList<TreeItemDirective<TreeItem, any>>;
+    readonly elementRef = inject(ElementRef);
 
     /** @hidden */
-    @ContentChildren(BaseTreeItem, { descendants: true })
-    readonly _projectedTreeItems: QueryList<BaseTreeItem>;
+    readonly _treeService = inject(TreeService);
+
+    /** @hidden */
+    private _navigationIndicator = false;
 
     /** @hidden */
     private _treeItemDef: Nullable<TreeItemDefDirective>;
@@ -203,12 +209,6 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
-
-    /** @hidden */
-    public readonly elementRef = inject(ElementRef);
-
-    /** @hidden */
-    private readonly _treeService = inject(TreeService);
 
     /** @hidden */
     private readonly _selectionService = inject(SelectionService);
@@ -255,20 +255,46 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     constructor() {
         this._selectionService.registerRootComponent(this);
         this._contentDensityObserver.subscribe();
+
+        effect(() => {
+            this._expandedLevel = this._treeService.expandedLevel();
+            this.buildComponentCssClass();
+        });
+    }
+
+    /** @hidden */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [
+            this.class,
+            this._expandedLevel ? `expanded-level-${this._expandedLevel}` : '',
+            this.noBorder ? 'fd-tree--no-border' : '',
+            this._items.length === 0 && this._initialDataLoaded ? 'fd-tree--no-data' : '',
+            this.independentSections ? 'fd-tree--independent-multi-selection' : '',
+            'fd-tree'
+        ];
+    }
+
+    /**
+     * @hidden
+     * Keyboard navigation
+     * @param event Keyboard event.
+     */
+    @HostListener('keydown', ['$event'])
+    private _onKeyUp(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
+            if (event.defaultPrevented) {
+                return;
+            }
+            event.preventDefault();
+            this._focusKeyManager?.onKeydown(event);
+        }
     }
 
     /** @hidden */
     ngOnInit(): void {
         this._openDataStream();
         this.buildComponentCssClass();
-
-        this._treeService.expandedLevel
-            .pipe(distinctUntilChanged(), takeUntilDestroyed(this._destroyRef))
-            .subscribe((level) => {
-                this._expandedLevel = level;
-                this.buildComponentCssClass();
-                this._cdr.detectChanges();
-            });
 
         this._treeService.detectChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._cdr.detectChanges();
@@ -307,71 +333,6 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     }
 
     /** @hidden */
-    private _setSelectionListener(): void {
-        this._selectionSub?.unsubscribe();
-        if (this.selection !== 'none') {
-            this._selectionService.setValue(this._cvaDirective.value);
-
-            this._selectionSub = this._cvaDirective.ngControl?.valueChanges
-                ?.pipe(takeUntilDestroyed(this._destroyRef))
-                .subscribe(() => {
-                    this._selectionService.setValue(this._cvaDirective.value);
-                });
-        }
-    }
-
-    /** @hidden */
-    private _listenToTreeItemDirectiveChanges(): void {
-        this._treeItemDirectives.changes
-            .pipe(
-                startWith(null),
-                filter(() => this.treeItemDef !== undefined),
-                takeUntilDestroyed(this._destroyRef)
-            )
-            .subscribe(() => {
-                this._allItems = this._treeItemDirectives.toArray().map((item) => item.treeItem!);
-                const flattenedItems = this._sortTreeItems(this._allItems);
-                this._setFlattenedItems(flattenedItems);
-            });
-    }
-
-    /** @hidden */
-    private _listenToTreeItemsChanges(): void {
-        this._projectedTreeItems.changes
-            .pipe(
-                startWith(null),
-                filter(() => !this.treeItemDef),
-                takeUntilDestroyed(this._destroyRef)
-            )
-            .subscribe(() => {
-                this._allItems = this._projectedTreeItems.toArray();
-                const flattenedItems = this._sortTreeItems(this._allItems);
-                this._setFlattenedItems(flattenedItems);
-            });
-    }
-
-    /** @hidden */
-    private _setFlattenedItems(items: BaseTreeItem[]): void {
-        this._sortedTreeItems = items;
-
-        const activeItem = this._focusKeyManager?.activeItem;
-        const newActiveItemIndex = items.findIndex((item) => item === activeItem);
-        this._focusKeyManager?.destroy();
-
-        this._focusKeyManager = new FocusKeyManager(items)
-            .withVerticalOrientation(true)
-            .skipPredicate((item) => !item.keyboardAccessible);
-
-        if (newActiveItemIndex > -1) {
-            this._focusKeyManager.setActiveItem(newActiveItemIndex);
-        }
-
-        this._selectionService.initialize(this._sortedTreeItems.map((item) => item.selectableListItem));
-
-        this._setupEventListeners();
-    }
-
-    /** @hidden */
     _onItemFocused(treeItem: BaseTreeItem): void {
         let focusedIndex = -1;
         this._sortedTreeItems.forEach((item, index) => {
@@ -390,92 +351,12 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     }
 
     /** @hidden */
-    private _setupEventListeners(): void {
-        this._eventSub?.unsubscribe();
-        this._eventSub = new Subscription();
-
-        this._sortedTreeItems.forEach((item) => {
-            this._eventSub.add(
-                fromEvent<KeyboardEvent>(item.elementRef.nativeElement, 'keydown').subscribe((event) => {
-                    this._onItemKeyDown(event, item);
-                })
-            );
-            this._eventSub.add(
-                fromEvent(item.itemContainer?.nativeElement, 'focus').subscribe(() => {
-                    this._onItemFocused(item);
-                })
-            );
-        });
-    }
-
-    /** @hidden */
-    private _sortTreeItems(items: BaseTreeItem[]): BaseTreeItem[] {
-        const components: BaseTreeItem[] = [];
-        const rootItems = items.filter((item) => item.level === 1);
-
-        rootItems.forEach((treeItem, index) => {
-            treeItem.setPosition(rootItems.length, index + 1);
-        });
-
-        items.forEach((item) => {
-            if (!item || components.includes(item)) {
-                return;
-            }
-
-            components.push(item);
-
-            if (item.children.length === 0) {
-                return;
-            }
-
-            const childItems = this._sortTreeItems(this._allItems.filter((i) => i.parentId === item.id));
-
-            childItems.forEach((treeItem, index) => {
-                treeItem.setPosition(childItems.length, index + 1);
-            });
-
-            components.push(...childItems);
-        });
-
-        return components;
-    }
-
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            this.class,
-            this._expandedLevel ? `expanded-level-${this._expandedLevel}` : '',
-            this.noBorder ? 'fd-tree--no-border' : '',
-            this._items.length === 0 && this._initialDataLoaded ? 'fd-tree--no-data' : '',
-            this.independentSections ? 'fd-tree--independent-multi-selection' : '',
-            'fd-tree'
-        ];
-    }
-
-    /**
-     * @hidden
-     * Keyboard navigation
-     * @param event Keyboard event.
-     */
-    @HostListener('keydown', ['$event'])
-    private _onKeyUp(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
-            if (event.defaultPrevented) {
-                return;
-            }
-            event.preventDefault();
-            this._focusKeyManager?.onKeydown(event);
-        }
-    }
-
-    /** @hidden */
     _onItemKeyDown(event: KeyboardEvent, treeItem: Nullable<BaseTreeItem>): void {
         if (!treeItem) {
             return;
         }
 
-        const isRtl = !!this._rtl?.rtl.value;
+        const isRtl = !!this._rtl?.rtlSignal();
         const expandKey = isRtl ? LEFT_ARROW : RIGHT_ARROW;
         const collapseKey = isRtl ? RIGHT_ARROW : LEFT_ARROW;
 
@@ -573,5 +454,121 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         );
 
         this._dataSourceDirective.dataSourceProvider?.match();
+    }
+
+    /** @hidden */
+    private _setupEventListeners(): void {
+        this._eventSub?.unsubscribe();
+        this._eventSub = new Subscription();
+
+        this._sortedTreeItems.forEach((item) => {
+            this._eventSub.add(
+                fromEvent<KeyboardEvent>(item.elementRef.nativeElement, 'keydown').subscribe((event) => {
+                    this._onItemKeyDown(event, item);
+                })
+            );
+            this._eventSub.add(
+                fromEvent(item.itemContainer?.nativeElement, 'focus').subscribe(() => {
+                    this._onItemFocused(item);
+                })
+            );
+        });
+    }
+
+    /** @hidden */
+    private _sortTreeItems(items: BaseTreeItem[]): BaseTreeItem[] {
+        const components: BaseTreeItem[] = [];
+        const rootItems = items.filter((item) => item.level === 1);
+
+        rootItems.forEach((treeItem, index) => {
+            treeItem.setPosition(rootItems.length, index + 1);
+        });
+
+        items.forEach((item) => {
+            if (!item || components.includes(item)) {
+                return;
+            }
+
+            components.push(item);
+
+            if (item.children.length === 0) {
+                return;
+            }
+
+            const childItems = this._sortTreeItems(this._allItems.filter((i) => i.parentId === item.id));
+
+            childItems.forEach((treeItem, index) => {
+                treeItem.setPosition(childItems.length, index + 1);
+            });
+
+            components.push(...childItems);
+        });
+
+        return components;
+    }
+
+    /** @hidden */
+    private _setSelectionListener(): void {
+        this._selectionSub?.unsubscribe();
+        if (this.selection !== 'none') {
+            this._selectionService.setValue(this._cvaDirective.value);
+
+            this._selectionSub = this._cvaDirective.ngControl?.valueChanges
+                ?.pipe(takeUntilDestroyed(this._destroyRef))
+                .subscribe(() => {
+                    this._selectionService.setValue(this._cvaDirective.value);
+                });
+        }
+    }
+
+    /** @hidden */
+    private _listenToTreeItemDirectiveChanges(): void {
+        this._treeItemDirectives.changes
+            .pipe(
+                startWith(null),
+                filter(() => this.treeItemDef !== undefined),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe(() => {
+                this._allItems = this._treeItemDirectives.toArray().map((item) => item.treeItem!);
+                const flattenedItems = this._sortTreeItems(this._allItems);
+                this._setFlattenedItems(flattenedItems);
+            });
+    }
+
+    /** @hidden */
+    private _listenToTreeItemsChanges(): void {
+        this._projectedTreeItems.changes
+            .pipe(
+                startWith(null),
+                filter(() => !this.treeItemDef),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe(() => {
+                this._allItems = this._projectedTreeItems.toArray();
+                const flattenedItems = this._sortTreeItems(this._allItems);
+                this._setFlattenedItems(flattenedItems);
+            });
+    }
+
+    /** @hidden */
+    private _setFlattenedItems(items: BaseTreeItem[]): void {
+        this._sortedTreeItems = items;
+
+        const activeItem = this._focusKeyManager?.activeItem;
+        const newActiveItemIndex = items.findIndex((item) => item === activeItem);
+        this._focusKeyManager?.destroy();
+
+        this._focusKeyManager = new FocusKeyManager(items)
+            .withVerticalOrientation(true)
+            .skipPredicate((item) => !item.keyboardAccessible);
+
+        if (newActiveItemIndex > -1) {
+            this._focusKeyManager.setActiveItem(newActiveItemIndex);
+        }
+
+        this._selectionService.initialize(this._sortedTreeItems.map((item) => item.selectableListItem));
+
+        this._setupEventListeners();
     }
 }

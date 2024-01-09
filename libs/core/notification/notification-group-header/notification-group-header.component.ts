@@ -1,16 +1,14 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     EventEmitter,
     HostBinding,
     Input,
-    OnDestroy,
-    OnInit,
-    Optional,
     Output,
-    Renderer2,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed,
+    inject,
+    signal
 } from '@angular/core';
 import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -20,7 +18,6 @@ import {
     LocalContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { Subscription } from 'rxjs';
 import { NotificationGroupBaseDirective } from '../notification-utils/notification-group-base';
 
 @Component({
@@ -37,7 +34,7 @@ import { NotificationGroupBaseDirective } from '../notification-utils/notificati
             [attr.aria-labelledby]="expandAriaLabelledBy"
             (click)="toggleExpand()"
         >
-            <fd-icon [glyph]="_getButtonIcon()"></fd-icon>
+            <fd-icon [glyph]="_buttonIcon$()"></fd-icon>
         </button>
         <div class="fd-notification__content">
             <ng-content select="fd-notification-header"></ng-content>
@@ -50,21 +47,10 @@ import { NotificationGroupBaseDirective } from '../notification-utils/notificati
     standalone: true,
     imports: [ButtonComponent, ContentDensityDirective, IconComponent]
 })
-export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirective implements OnInit, OnDestroy {
+export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirective {
     /** @hidden */
     @HostBinding('class.fd-notification__group-header')
     fdNotificationGroupHeaderClass = true;
-
-    /** @hidden */
-    get expandDescribedBy(): string {
-        return this.notificationHeader?.first?.uniqueId;
-    }
-
-    /** @hidden */
-    _rtl = false;
-
-    /** @hidden */
-    _subscriptions = new Subscription();
 
     /** Whether the expand button is in compact mode */
     @Input()
@@ -80,11 +66,30 @@ export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirec
 
     /** Whether the button is in expanded state */
     @Input()
-    expanded = true;
+    set expanded(value: boolean) {
+        this._expanded$.set(value);
+    }
+
+    get expanded(): boolean {
+        return this._expanded$();
+    }
 
     /** Output event triggered when the Expand button is clicked */
     @Output()
     expandedChange = new EventEmitter<boolean>();
+
+    /** @hidden */
+    get expandDescribedBy(): string {
+        return this.notificationHeader?.first?.uniqueId;
+    }
+
+    /** @hidden */
+    readonly _buttonIcon$ = computed(() =>
+        this._expanded$() ? 'slim-arrow-down' : this._rtlService?.rtlSignal() ? 'slim-arrow-left' : 'slim-arrow-right'
+    );
+
+    /** @hidden */
+    readonly _expanded$ = signal(true);
 
     /** @hidden */
     get _expandButtonContentDensity(): LocalContentDensityMode {
@@ -92,44 +97,11 @@ export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirec
     }
 
     /** @hidden */
-    constructor(
-        private _cdRef: ChangeDetectorRef,
-        @Optional() private _rtlService: RtlService,
-        renderer: Renderer2
-    ) {
-        super(renderer);
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this._listenRtl();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
-    }
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** Method that toggles the Notification list content */
     toggleExpand(): void {
-        this.expanded = !this.expanded;
+        this._expanded$.update((expanded) => !expanded);
         this.expandedChange.emit(this.expanded);
-    }
-
-    /** @hidden */
-    _getButtonIcon(): string {
-        return this.expanded ? 'slim-arrow-down' : this._rtl ? 'slim-arrow-left' : 'slim-arrow-right';
-    }
-
-    /** @hidden */
-    private _listenRtl(): void {
-        if (this._rtlService) {
-            this._subscriptions.add(
-                this._rtlService.rtl.subscribe((rtl) => {
-                    this._rtl = rtl;
-                    this._cdRef.markForCheck();
-                })
-            );
-        }
     }
 }

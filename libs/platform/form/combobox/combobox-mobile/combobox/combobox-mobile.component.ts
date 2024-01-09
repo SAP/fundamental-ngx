@@ -1,28 +1,20 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
     Inject,
-    OnDestroy,
     OnInit,
-    Optional,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import {
-    MOBILE_MODE_CONFIG,
-    MobileModeBase,
-    MobileModeConfigToken,
-    MobileModeControl
-} from '@fundamental-ngx/core/mobile-mode';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../../combobox.interface';
@@ -43,7 +35,7 @@ import { COMBOBOX_COMPONENT, ComboboxInterface } from '../../combobox.interface'
         ScrollbarDirective
     ]
 })
-export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> implements OnInit, OnDestroy {
+export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> implements OnInit {
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
@@ -61,23 +53,13 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
     private _selectedBackup: string;
 
     /** @hidden */
-    constructor(
-        elementRef: ElementRef,
-        dialogService: DialogService,
-        @Inject(COMBOBOX_COMPONENT) comboboxComponent: ComboboxInterface,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
-    ) {
-        super(elementRef, dialogService, comboboxComponent, MobileModeControl.COMBOBOX, mobileModes);
+    constructor(@Inject(COMBOBOX_COMPONENT) comboboxComponent: ComboboxInterface) {
+        super(comboboxComponent, MobileModeControl.COMBOBOX);
     }
 
     /** @hidden */
     ngOnInit(): void {
         this._listenOnMultiInputOpenChange();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        super.onDestroy();
     }
 
     /** @hidden */
@@ -106,7 +88,9 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
 
     /** @hidden */
     private _listenOnMultiInputOpenChange(): void {
-        this._component.openChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => this._toggleDialog(isOpen));
+        this._component.openChange
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 
     /** @hidden */
@@ -120,7 +104,7 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
         });
 
         // Have to fire "detectChanges" to fix "ExpressionChangedAfterItHasBeenCheckedError"
-        this.dialogRef.afterLoaded.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        this.dialogRef.afterLoaded.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._component.detectChanges();
         });
 

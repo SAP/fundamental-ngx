@@ -8,13 +8,24 @@ import {
     ViewportRuler
 } from '@angular/cdk/overlay';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
-import { ElementRef, Injectable, Injector, Optional, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+    DestroyRef,
+    ElementRef,
+    Injectable,
+    Injector,
+    Optional,
+    Renderer2,
+    TemplateRef,
+    ViewContainerRef,
+    inject
+} from '@angular/core';
 import { Observable, Subject, merge } from 'rxjs';
 import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
 
-import { Nullable, RtlService, isOdd } from '@fundamental-ngx/cdk/utils';
+import { Nullable, RtlService, destroyObservable, isOdd } from '@fundamental-ngx/cdk/utils';
 import { GetDefaultPosition, PopoverPosition } from '@fundamental-ngx/core/shared';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BasePopoverClass, TriggerConfig } from '../base/base-popover.class';
 import { PopoverBodyComponent } from '../popover-body/popover-body.component';
 import { PopoverContainerDirective } from '../popover-container/popover-container.directive';
@@ -75,7 +86,7 @@ export class PopoverService extends BasePopoverClass {
     private _ignoreTriggers = false;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private get _triggerHtmlElement(): HTMLElement {
@@ -94,7 +105,15 @@ export class PopoverService extends BasePopoverClass {
         super();
 
         /** Merge observables - close or destroy */
-        this._refresh$ = merge(this.isOpenChange, this._onDestroy$);
+        this._refresh$ = merge(this.isOpenChange, destroyObservable(this._destroyRef));
+
+        this._destroyRef.onDestroy(() => {
+            this._removeTriggerListeners();
+            if (this._overlayRef) {
+                this._overlayRef.detach();
+                this._overlayRef.dispose();
+            }
+        });
     }
 
     /**
@@ -237,17 +256,6 @@ export class PopoverService extends BasePopoverClass {
     /** Temporary sets the ignoring of the event triggers. */
     setIgnoreTriggers(ignore: boolean): void {
         this._ignoreTriggers = ignore;
-    }
-
-    /** Equivalent for ngOnDestroy method, whether component is destroyed, this method should be called */
-    onDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
-        this._removeTriggerListeners();
-        if (this._overlayRef) {
-            this._overlayRef.detach();
-            this._overlayRef.dispose();
-        }
     }
 
     /**
@@ -415,10 +423,10 @@ export class PopoverService extends BasePopoverClass {
         this._placementRefresh$.next();
         positionChange
             .pipe(
-                takeUntil(this._placementRefresh$),
-                takeUntil(this._onDestroy$),
                 filter(() => !this.noArrow && !!this._getPopoverBody()),
-                distinctUntilChanged((previous, current) => previous.connectionPair === current.connectionPair)
+                distinctUntilChanged((previous, current) => previous.connectionPair === current.connectionPair),
+                takeUntil(this._placementRefresh$),
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((event) => this._getPopoverBody()._setArrowStyles(event.connectionPair, this._getDirection()));
     }

@@ -6,7 +6,6 @@ import {
     Inject,
     Input,
     OnChanges,
-    OnDestroy,
     OnInit,
     Optional,
     Renderer2,
@@ -38,7 +37,7 @@ let inlineHelpId = 0;
     },
     standalone: true
 })
-export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnChanges, OnDestroy {
+export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnChanges {
     /** The trigger events that will open/close the inline help component.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
     @Input()
@@ -106,11 +105,6 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         this._bodyId = this._describedBy;
         this._applyAdditionalInlineHelpClass();
         this._popoverService.initialise(this._elementRef, this);
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._popoverService.onDestroy();
     }
 
     /** @hidden */

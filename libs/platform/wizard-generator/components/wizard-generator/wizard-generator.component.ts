@@ -1,11 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ContentChild,
-    TemplateRef,
-    ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 
 import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
@@ -52,9 +45,4 @@ export class WizardGeneratorComponent extends BaseWizardGenerator {
      */
     @ContentChild(WizardGeneratorReviewButtonDirective, { read: TemplateRef })
     reviewButtonTemplate: TemplateRef<HTMLElement>;
-
-    /** @hidden */
-    constructor(_wizardGeneratorService: WizardGeneratorService, _cd: ChangeDetectorRef) {
-        super(_wizardGeneratorService, _cd);
-    }
 }

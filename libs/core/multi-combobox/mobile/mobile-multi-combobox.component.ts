@@ -1,21 +1,16 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { Component, ElementRef, Inject, OnDestroy, OnInit, Optional, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarElementDirective, BarMiddleDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import {
-    MOBILE_MODE_CONFIG,
-    MobileModeBase,
-    MobileModeConfigToken,
-    MobileModeControl
-} from '@fundamental-ngx/core/mobile-mode';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { takeUntil } from 'rxjs/operators';
 import { MobileMultiComboboxInterface } from '../models/multi-combobox.interface';
 import { MULTI_COMBOBOX_COMPONENT } from '../multi-combobox.token';
 
@@ -35,14 +30,11 @@ import { MULTI_COMBOBOX_COMPONENT } from '../multi-combobox.token';
         CdkScrollable,
         ScrollbarDirective,
         ButtonBarComponent,
-        AsyncPipe,
-        FdTranslatePipe
+        FdTranslatePipe,
+        AsyncPipe
     ]
 })
-export class MobileMultiComboboxComponent
-    extends MobileModeBase<MobileMultiComboboxInterface>
-    implements OnInit, OnDestroy
-{
+export class MobileMultiComboboxComponent extends MobileModeBase<MobileMultiComboboxInterface> implements OnInit {
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
@@ -63,23 +55,13 @@ export class MobileMultiComboboxComponent
     private _selectedBackup: SelectableOptionItem[];
 
     /** @hidden */
-    constructor(
-        elementRef: ElementRef,
-        dialogService: DialogService,
-        @Inject(MULTI_COMBOBOX_COMPONENT) multiComboboxComponent: MobileMultiComboboxInterface,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
-    ) {
-        super(elementRef, dialogService, multiComboboxComponent, MobileModeControl.MULTI_COMBOBOX, mobileModes);
+    constructor(@Inject(MULTI_COMBOBOX_COMPONENT) multiComboboxComponent: MobileMultiComboboxInterface) {
+        super(multiComboboxComponent, MobileModeControl.MULTI_COMBOBOX);
     }
 
     /** @hidden */
     ngOnInit(): void {
         this._listenOnMultiComboboxOpenChange();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        super.onDestroy();
     }
 
     /** @hidden */
@@ -123,7 +105,9 @@ export class MobileMultiComboboxComponent
 
     /** @hidden */
     private _listenOnMultiComboboxOpenChange(): void {
-        this._component.openChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => this._toggleDialog(isOpen));
+        this._component.openChange
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 
     /** @hidden */

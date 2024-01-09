@@ -50,6 +50,7 @@
             [glyphFont]="glyphFont"
             [addonButtonAriaHidden]="!!title"
             (addOnButtonClicked)="_addOnButtonClicked($event)"
+            [iconTitle]="addonIconTitle"
         >
             <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fd-multi-input__invisible-text">{{
                 'coreMultiInput.tokensCountText' | fdTranslate: { length: selected.length }
@@ -57,6 +58,7 @@
             <fd-tokenizer
                 #tokenizer
                 [compactCollapse]="compactCollapse"
+                [showOverflowPopover]="false"
                 [open]="open"
                 [tokenizerFocusable]="false"
                 (moreClickedEvent)="_moreClicked()"
@@ -70,6 +72,7 @@
                         [disabled]="disabled"
                         (onCloseClick)="_onTokenClick(option, false, $event)"
                         (onRemove)="_onTokenClick(option, false)"
+                        [title]="option.label"
                     >
                         <span [innerHtml]="option.label"></span>
                     </fd-token>
@@ -123,6 +126,7 @@
                         (click)="_onCheckboxClick(option, $event, idx, true)"
                         (keyup)="_onCheckboxKeyup(option, $event, idx, true)"
                         [selected]="!!option.isSelected"
+                        [title]="option.label"
                     >
                         <fd-checkbox (click)="_onCheckboxClick(option, $event, idx)" [value]="option.isSelected">
                             <!-- TODO -->

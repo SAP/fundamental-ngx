@@ -167,6 +167,10 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     @Input()
     openDropdownOnAddOnClicked = true;
 
+    /** Title text for the add-on icon button. */
+    @Input()
+    addonIconTitle: string;
+
     /** Search term, or more specifically the value of the inner input field. */
     @Input()
     set searchTerm(value: string) {
@@ -542,7 +546,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         if (this.mobile) {
             this._setUpMobileMode();
         }
-        this.tokenizer._showOverflowPopover = false;
     }
 
     /** @hidden */

@@ -1,19 +1,8 @@
-import {
-    ChangeDetectorRef,
-    Directive,
-    ElementRef,
-    EventEmitter,
-    Input,
-    OnInit,
-    Output,
-    Renderer2
-} from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
-import { BehaviorSubject, of } from 'rxjs';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
+import { Directive, EventEmitter, Input, OnInit, Output, Renderer2, computed, inject, signal } from '@angular/core';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ContentDensity, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
-import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput } from '@fundamental-ngx/platform/shared';
 import { StepInputConfig } from './step-input.config';
 import { addAndCutFloatingNumberDistortion, getNumberDecimalLength } from './step-input.util';
 
@@ -50,6 +39,8 @@ const ALIGN_INPUT_OPTIONS_LIST = [StepInputAlign.Left, StepInputAlign.Center, St
  */
 @Directive()
 export abstract class StepInputComponent extends BaseInput implements OnInit {
+    /** @hidden */
+    readonly config = inject(StepInputConfig);
     /** Sets input value */
     @Input()
     set value(value: Nullable<number>) {
@@ -120,8 +111,11 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
     /** Horizontally aligns value inside input */
     @Input()
-    set align(align: StepInputAlign) {
-        this._align$.next(align);
+    set align(align: StepInputAlign | null) {
+        this._align$.set(align);
+    }
+    get align(): StepInputAlign | null {
+        return this._align$();
     }
 
     /**
@@ -163,7 +157,25 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     _contentDensity: ContentDensity = this.config.contentDensity;
 
     /** @hidden */
-    _align: StepInputAlign | null;
+    readonly _align$ = signal<StepInputAlign | null>(null);
+
+    /** @hidden */
+    readonly _textAlign$ = computed(() => {
+        const align = this._align$();
+
+        const isRtl = !!this._rtlService?.rtlSignal();
+
+        if (!ALIGN_INPUT_OPTIONS_LIST.includes(align!)) {
+            return null;
+        }
+        if (isRtl && align === StepInputAlign.Left) {
+            return StepInputAlign.Right;
+        }
+        if (isRtl && align === StepInputAlign.Right) {
+            return StepInputAlign.Left;
+        }
+        return align;
+    });
 
     /** @hidden */
     private _max: number = Number.MAX_VALUE;
@@ -179,9 +191,6 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
     /** @hidden */
     private _precision: number;
-
-    /** @hidden */
-    private _align$ = new BehaviorSubject<StepInputAlign | null>(null);
 
     /** @hidden */
     private _pendingEnteredValue: number | Error | null = null;
@@ -202,20 +211,9 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     }
 
     /** @hidden */
-    protected constructor(
-        cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        ngControl: NgControl,
-        controlContainer: ControlContainer,
-        ngForm: NgForm,
-        formField: PlatformFormField,
-        formControl: PlatformFormFieldControl,
-        protected config: StepInputConfig,
-        private _renderer: Renderer2,
-        private _rtlService: RtlService
-    ) {
-        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
-    }
+    private readonly _renderer = inject(Renderer2);
+    /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
     ngOnInit(): void {
@@ -228,8 +226,6 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         this.lastEmittedValue = this._value;
 
         this._listenToFormErrorState();
-
-        this._listenToAlign();
     }
 
     /** @hidden
@@ -350,46 +346,13 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     private _listenToFormErrorState(): void {
         this.stateChanges
             .asObservable()
-            .pipe(takeUntil(this._destroyed))
+            .pipe(takeUntilDestroyed(this._destroyed))
             .subscribe(() => {
                 const oldValue = this.isErrorState;
                 this.isErrorState = this.state === 'error';
                 if (this.isErrorState !== oldValue) {
-                    this._cd.markForCheck();
+                    this.markForCheck();
                 }
-            });
-    }
-
-    /** @hidden */
-    private _listenToAlign(): void {
-        this._align$
-            .asObservable()
-            .pipe(
-                switchMap((align) => {
-                    if (!this._rtlService) {
-                        return of(align);
-                    }
-
-                    return this._rtlService.rtl.pipe(
-                        map((isRtl): StepInputAlign | null => {
-                            if (!ALIGN_INPUT_OPTIONS_LIST.includes(align!)) {
-                                return null;
-                            }
-                            if (isRtl && align === StepInputAlign.Left) {
-                                return StepInputAlign.Right;
-                            }
-                            if (isRtl && align === StepInputAlign.Right) {
-                                return StepInputAlign.Left;
-                            }
-                            return align;
-                        })
-                    );
-                }),
-                takeUntil(this._destroyed)
-            )
-            .subscribe((align) => {
-                this._align = align;
-                this._cd.markForCheck();
             });
     }
 

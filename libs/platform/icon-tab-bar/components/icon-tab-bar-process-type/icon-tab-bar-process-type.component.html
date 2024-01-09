@@ -21,7 +21,7 @@
             ></fdp-icon-tab-bar-popover>
         </li>
     }
-    @for (item of _tabs; track item.uId; let idx = $index) {
+    @for (item of _tabs$(); track item.uId; let idx = $index) {
         <li
             [class]="item.cssClasses"
             class="fd-icon-tab-bar__item"
@@ -49,10 +49,10 @@
                     </div>
                     <div class="fd-icon-tab-bar__details">
                         <span class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
-                        <span class="fd-icon-tab-bar__label">{{ item.label }}</span>
+                        <span class="fd-icon-tab-bar__label">{{ item.label | fdkAsyncOrSync }}</span>
                     </div>
                 } @else {
-                    <span class="fd-icon-tab-bar__tag">{{ item.label }}</span>
+                    <span class="fd-icon-tab-bar__tag">{{ item.label | fdkAsyncOrSync }}</span>
                     @if (item.badge) {
                         <span class="fd-icon-tab-bar__badge"></span>
                     }

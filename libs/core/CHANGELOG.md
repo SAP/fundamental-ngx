@@ -3,6 +3,132 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.32...v0.48.0-rc.33) (2024-01-09)
+
+
+### Bug Fixes
+
+* **platform:** simplify class inheritance ([#11198](https://github.com/SAP/fundamental-ngx/issues/11198)) ([81757f2](https://github.com/SAP/fundamental-ngx/commit/81757f2a238e936326e9c4b50749b7f7d0edbd88))
+
+
+### BREAKING CHANGES
+
+* **platform:** Platform Switch component now uses `ariaLabelledBy` instead of `ariaLabelledby`
+
+
+
+
+
+# [0.48.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.31...v0.48.0-rc.32) (2024-01-08)
+
+
+### Bug Fixes
+
+* **core:** aria-hidden tokenizer if tokenList length is 0 ([#11199](https://github.com/SAP/fundamental-ngx/issues/11199)) ([f0eb833](https://github.com/SAP/fundamental-ngx/commit/f0eb833cce1e492cdd4f8eb85c32f11373dff3fd))
+
+
+
+
+
+# [0.48.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.30...v0.48.0-rc.31) (2024-01-08)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.48.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.29...v0.48.0-rc.30) (2024-01-08)
+
+
+### Bug Fixes
+
+* add addonIconTitle input to multi input ([#11184](https://github.com/SAP/fundamental-ngx/issues/11184)) ([ffcc99b](https://github.com/SAP/fundamental-ngx/commit/ffcc99bc4e6fcdaa2ba50e3062c31b976ab407e5))
+* **core:** dayjs utc offset fix ([#11182](https://github.com/SAP/fundamental-ngx/issues/11182)) ([1a6df1e](https://github.com/SAP/fundamental-ngx/commit/1a6df1ea17e79c15411ffa85d0b5d5b69400a28a))
+
+
+
+
+
+# [0.48.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.28...v0.48.0-rc.29) (2024-01-04)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.48.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.27...v0.48.0-rc.28) (2024-01-04)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.48.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.26...v0.48.0-rc.27) (2024-01-03)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.48.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.25...v0.48.0-rc.26) (2024-01-03)
+
+
+### Bug Fixes
+
+* **core:** toolbar title styling ([#11144](https://github.com/SAP/fundamental-ngx/issues/11144)) ([1dca9bf](https://github.com/SAP/fundamental-ngx/commit/1dca9bf2f2afe948ba1423006f7d3aa7c39e66bd))
+
+
+
+
+
+# [0.48.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.24...v0.48.0-rc.25) (2024-01-03)
+
+
+### Bug Fixes
+
+* **core:** dynamically render search field ([#11143](https://github.com/SAP/fundamental-ngx/issues/11143)) ([0acb1aa](https://github.com/SAP/fundamental-ngx/commit/0acb1aaa423c21473e8502206810f45d834006ba))
+
+
+
+
+
+# [0.48.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.23...v0.48.0-rc.24) (2024-01-02)
+
+
+### Bug Fixes
+
+* **core:** hover tooltip for multi input ([#11121](https://github.com/SAP/fundamental-ngx/issues/11121)) ([e31808a](https://github.com/SAP/fundamental-ngx/commit/e31808a170abb98d25df09d3cd0b105625027d19))
+
+
+
+
+
+# [0.48.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.22...v0.48.0-rc.23) (2023-12-30)
+
+
+### Features
+
+* **core,platform,cx:** partial signals migration ([#11142](https://github.com/SAP/fundamental-ngx/issues/11142)) ([4a7ba11](https://github.com/SAP/fundamental-ngx/commit/4a7ba11b96913403dc29198e33f6c81238860008))
+
+
+
+
+
+# [0.48.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.21...v0.48.0-rc.22) (2023-12-28)
+
+
+### Bug Fixes
+
+* **core:** non-focusable object status ([3eacc6d](https://github.com/SAP/fundamental-ngx/commit/3eacc6d2960a5bbc0ab5f75f4074c54fb7ddfe27))
+
+
+
+
+
 # [0.48.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.20...v0.48.0-rc.21) (2023-12-25)
 
 

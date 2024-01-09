@@ -2,29 +2,23 @@ import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { ENTER } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
-    ChangeDetectorRef,
     ContentChildren,
     Directive,
     ElementRef,
     EventEmitter,
-    Host,
-    Inject,
+    inject,
     Input,
     OnDestroy,
-    Optional,
     Output,
     QueryList,
-    Self,
-    SkipSelf,
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
 import {
     ContentDensityService,
     FocusEscapeDirection,
@@ -36,14 +30,7 @@ import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/ico
 import { ListComponent } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
-import {
-    CollectionBaseInput,
-    isJsObject,
-    isOptionItem,
-    isString,
-    PlatformFormField,
-    PlatformFormFieldControl
-} from '@fundamental-ngx/platform/shared';
+import { CollectionBaseInput, isJsObject, isOptionItem, isString } from '@fundamental-ngx/platform/shared';
 import { TextAlignment } from '../../combobox';
 import { SelectOptionItem } from '../models/select.models';
 import { SelectConfig } from '../select.config';
@@ -146,14 +133,6 @@ export abstract class BaseSelect
     /** Custom template used to build control body. */
     @Input()
     controlTemplate: TemplateRef<any> | undefined;
-
-    /** Binds to control aria-labelledBy attribute */
-    @Input()
-    ariaLabelledBy = null;
-
-    /** Sets control aria-label attribute value */
-    @Input()
-    ariaLabel = null;
 
     /** Select Input Mobile Configuration */
     @Input()
@@ -274,6 +253,9 @@ export abstract class BaseSelect
     _subscriptions = new Subscription();
 
     /** @hidden */
+    protected readonly selectConfig = inject(SelectConfig);
+
+    /** @hidden */
     private _searchInputElement: ElementRef;
 
     /** Whether the select is opened. */
@@ -299,20 +281,6 @@ export abstract class BaseSelect
     private _secondColumnRatio: number;
 
     /** @hidden */
-    protected constructor(
-        readonly cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        @Optional() @Self() readonly ngControl: NgControl,
-        @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
-        @Optional() @Self() readonly ngForm: NgForm,
-        protected selectConfig: SelectConfig,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
-    ) {
-        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
-    }
-
-    /** @hidden */
     ngAfterViewInit(): void {
         this._initWindowResize();
         this._assignCustomTemplates();
@@ -335,19 +303,6 @@ export abstract class BaseSelect
         return this.value.trim().length === 0;
     }
 
-    /** @hidden */
-    protected setValue(newValue: any, emitOnChange = true): void {
-        if (newValue !== this._value) {
-            this.writeValue(newValue);
-            if (emitOnChange) {
-                this.onChange(this.value);
-                this.onTouched();
-                this.selectionChange.emit({ payload: this.value });
-            }
-            this.cd.markForCheck();
-        }
-    }
-
     /** @hidden
      * Close list * */
     close(event: MouseEvent | null = null, forceClose: boolean = false): void {
@@ -361,7 +316,7 @@ export abstract class BaseSelect
         if (this._isOpen && (forceClose || this.canClose)) {
             this._isOpen = false;
             this._openChange.next(this._isOpen);
-            this.cd.markForCheck();
+            this.markForCheck();
             this.onTouched();
         }
     }
@@ -374,7 +329,7 @@ export abstract class BaseSelect
             this._openChange.next(isOpen);
         }
 
-        this.cd.detectChanges();
+        this.detectChanges();
     }
 
     /** @hidden */
@@ -394,6 +349,19 @@ export abstract class BaseSelect
     }
 
     /** @hidden */
+    protected setValue(newValue: any, emitOnChange = true): void {
+        if (newValue !== this._value) {
+            this.writeValue(newValue);
+            if (emitOnChange) {
+                this.onChange(this.value);
+                this.onTouched();
+                this.selectionChange.emit({ payload: this.value });
+            }
+            this.markForCheck();
+        }
+    }
+
+    /** @hidden */
     private _initWindowResize(): void {
         this._getOptionsListWidth();
 
@@ -402,7 +370,7 @@ export abstract class BaseSelect
         }
 
         fromEvent(window, 'resize')
-            .pipe(takeUntil(this._destroyed))
+            .pipe(takeUntilDestroyed(this._destroyed))
             .subscribe(() => this._getOptionsListWidth());
     }
 

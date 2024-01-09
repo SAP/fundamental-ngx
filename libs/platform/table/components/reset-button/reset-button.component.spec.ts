@@ -1,12 +1,11 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { BehaviorSubject } from 'rxjs';
 
+import { signal } from '@angular/core';
 import { RESETTABLE_TOKEN, ResetButtonComponent, Resettable } from './reset-button.component';
 
 class ResettableMock implements Resettable {
-    readonly isResetAvailableSubject$ = new BehaviorSubject<boolean>(false);
-    readonly isResetAvailable$ = this.isResetAvailableSubject$.asObservable();
+    readonly isResetAvailable$ = signal(false);
     reset(): void {}
 }
 
@@ -45,7 +44,7 @@ describe('PlatformTableResetButtonComponent', () => {
 
         expect(button.disabled).toBeTruthy();
 
-        resettable.isResetAvailableSubject$.next(true);
+        resettable.isResetAvailable$.set(true);
         fixture.detectChanges();
 
         expect(button.disabled).toBeFalsy();
@@ -54,7 +53,7 @@ describe('PlatformTableResetButtonComponent', () => {
     it('should disable button if isResetAvailableSubject$ = false', () => {
         const button = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
 
-        resettable.isResetAvailableSubject$.next(false);
+        resettable.isResetAvailable$.set(false);
         fixture.detectChanges();
 
         expect(button.disabled).toBeTruthy();
@@ -64,7 +63,7 @@ describe('PlatformTableResetButtonComponent', () => {
         const resetSpy = jest.spyOn(resettable, 'reset');
         const button = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
 
-        resettable.isResetAvailableSubject$.next(true);
+        resettable.isResetAvailable$.set(true);
         fixture.detectChanges();
         button.click();
         fixture.detectChanges();

@@ -1,28 +1,21 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
     Inject,
-    OnDestroy,
     OnInit,
-    Optional,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import {
-    MOBILE_MODE_CONFIG,
-    MobileModeBase,
-    MobileModeConfigToken,
-    MobileModeControl
-} from '@fundamental-ngx/core/mobile-mode';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { MULTIINPUT_COMPONENT, PlatformMultiInputInterface } from '../multi-input.interface';
 
@@ -35,10 +28,7 @@ import { MULTIINPUT_COMPONENT, PlatformMultiInputInterface } from '../multi-inpu
     standalone: true,
     imports: [DialogModule, TemplateDirective, BarModule, NgTemplateOutlet, CdkScrollable, ScrollbarDirective]
 })
-export class PlatformMultiInputMobileComponent
-    extends MobileModeBase<PlatformMultiInputInterface>
-    implements OnInit, OnDestroy
-{
+export class PlatformMultiInputMobileComponent extends MobileModeBase<PlatformMultiInputInterface> implements OnInit {
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
@@ -56,23 +46,13 @@ export class PlatformMultiInputMobileComponent
     private _selectedBackup: any[];
 
     /** @hidden */
-    constructor(
-        elementRef: ElementRef,
-        dialogService: DialogService,
-        @Inject(MULTIINPUT_COMPONENT) multiInputComponent: PlatformMultiInputInterface,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
-    ) {
-        super(elementRef, dialogService, multiInputComponent, MobileModeControl.MULTI_INPUT, mobileModes);
+    constructor(@Inject(MULTIINPUT_COMPONENT) multiInputComponent: PlatformMultiInputInterface) {
+        super(multiInputComponent, MobileModeControl.MULTI_INPUT);
     }
 
     /** @hidden */
     ngOnInit(): void {
         this._listenOnMultiInputOpenChange();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        super.onDestroy();
     }
 
     /** @hidden */
@@ -90,7 +70,7 @@ export class PlatformMultiInputMobileComponent
     /** @hidden */
     private _listenOnMultiInputOpenChange(): void {
         this._component.openChange
-            .pipe(distinctUntilChanged(), takeUntil(this._onDestroy$))
+            .pipe(distinctUntilChanged(), takeUntilDestroyed(this._destroyRef))
             .subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 

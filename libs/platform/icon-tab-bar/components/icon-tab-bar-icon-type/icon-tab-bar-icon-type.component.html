@@ -6,7 +6,7 @@
     [overflowOffset]="100"
     (overflowChanged)="_recalculateVisibleItems($event)"
 >
-    @for (item of _tabs; track item.uId; let idx = $index) {
+    @for (item of _tabs$(); track item.uId; let idx = $index) {
         <li
             [ngClass]="item.cssClasses"
             [class.fd-icon-tab-bar__item--closable]="item.closable"
@@ -58,12 +58,12 @@
             }
         </li>
     }
-    @if (_extraTabs.length) {
+    @if (_extraItems$()) {
         <li role="presentation" class="fd-icon-tab-bar__item fd-icon-tab-bar__item--overflow">
             <fdp-icon-tab-bar-popover
                 [showItemLabel]="showLabel"
                 [isRtl]="isRtl"
-                [extraTabs]="_extraTabs"
+                [extraTabs]="_extraTabs$()"
                 [colorAssociations]="colorAssociations"
                 (selectedExtraItem)="_selectExtraItem($event)"
                 (focusFirstVisibleItem)="_focusItem(0)"

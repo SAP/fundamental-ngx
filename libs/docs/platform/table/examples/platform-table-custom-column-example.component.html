@@ -34,7 +34,7 @@
                                 <span fd-list-title> Link List item 3</span>
                             </a>
                         </fdp-free-content-list-item>
-                        @for (item of items | async; track item) {
+                        @for (item of items(); track item) {
                             <fdp-free-content-list-item>
                                 <ng-template
                                     [ngTemplateOutlet]="item"

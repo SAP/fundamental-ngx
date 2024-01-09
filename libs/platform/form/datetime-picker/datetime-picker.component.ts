@@ -1,28 +1,23 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
-    Host,
-    Inject,
     Input,
-    Optional,
     Output,
-    Self,
-    SkipSelf,
-    ViewChild
+    ViewChild,
+    inject
 } from '@angular/core';
-import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
+import { FormsModule, NgControl } from '@angular/forms';
+import { FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 
 import { CalendarYearGrid, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput } from '@fundamental-ngx/platform/shared';
 import { createMissingDateImplementationError } from './errors';
 
 @Component({
@@ -251,19 +246,18 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     }
 
     /** @hidden */
-    constructor(
-        protected _cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        @Optional() @Self() readonly ngControl: NgControl,
-        @Optional() @SkipSelf() controlContainer: ControlContainer,
-        @Optional() @Self() readonly ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
-        // Use here @Optional to avoid angular injection error message and throw our own which is more precise one
-        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
-        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
-    ) {
-        super(_cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+    private readonly _dateTimeAdapter = inject<DatetimeAdapter<D>>(DatetimeAdapter, {
+        optional: true
+    });
+
+    /** @hidden */
+    private readonly _dateTimeFormats = inject<DateTimeFormats>(DATE_TIME_FORMATS, {
+        optional: true
+    });
+
+    /** @hidden */
+    constructor() {
+        super();
 
         if (!this._dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -273,7 +267,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
         }
 
         // default model value
-        this.value = _dateTimeAdapter.now();
+        this.value = this._dateTimeAdapter.now();
     }
 
     /**
@@ -296,7 +290,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     /** @hidden */
     writeValue(value: D): void {
         super.writeValue(value);
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /**
@@ -316,7 +310,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     handleDatetimeInputChange(datetime: D): void {
         if (this.dateTimePickerComponent) {
             if (this.dateTimePickerComponent._isInvalidDateInput) {
-                if (this.ngControl.control && this._control.value) {
+                if (this.ngControl?.control && this._control.value) {
                     this.ngControl.control.setErrors(this._control.errors);
                 }
                 this.state = 'error';

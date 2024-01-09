@@ -72,10 +72,10 @@ export class DialogContainerComponent
         public ref: DialogRef,
         private _destroyRef: DestroyRef,
         elementRef: ElementRef,
-        changeDetectorRef: ChangeDetectorRef,
+        protected readonly _cdr: ChangeDetectorRef,
         injector: Injector
     ) {
-        super(elementRef, injector, changeDetectorRef);
+        super(elementRef, injector);
     }
 
     /** @hidden */

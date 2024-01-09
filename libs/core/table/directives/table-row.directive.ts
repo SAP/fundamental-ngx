@@ -1,20 +1,19 @@
 import {
     AfterViewInit,
+    booleanAttribute,
     ChangeDetectorRef,
     ContentChildren,
     Directive,
+    effect,
     ElementRef,
     HostBinding,
     inject,
     Input,
-    OnDestroy,
     OnInit,
     QueryList
 } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
 import { TableService } from '../table.service';
 import { TableCellDirective } from './table-cell.directive';
@@ -34,7 +33,7 @@ export const HIDDEN_CLASS_NAME = 'fd-table--hidden';
     },
     standalone: true
 })
-export class TableRowDirective extends FocusableListDirective implements AfterViewInit, OnDestroy, OnInit {
+export class TableRowDirective extends FocusableListDirective implements AfterViewInit, OnInit {
     /** @hidden */
     @ContentChildren(TableCellDirective)
     cells: QueryList<TableCellDirective>;
@@ -60,9 +59,9 @@ export class TableRowDirective extends FocusableListDirective implements AfterVi
 
     /** Whether the table row is focusable */
     @HostBinding('class.fd-table__row--focusable')
-    @Input()
-    set focusable(value: BooleanInput) {
-        this._focusable = coerceBooleanProperty(value);
+    @Input({ transform: booleanAttribute })
+    set focusable(value: boolean) {
+        this._focusable = value;
 
         this.setTabbable(this._focusable);
     }
@@ -89,32 +88,29 @@ export class TableRowDirective extends FocusableListDirective implements AfterVi
     elementRef: ElementRef<HTMLTableRowElement> = inject(ElementRef);
 
     /** @hidden */
-    private _propagateKeysSubscription: Subscription;
-    /** @hidden */
     private readonly _changeDetRef = inject(ChangeDetectorRef);
     /** @hidden */
     private _tableService = inject(TableService);
 
     /** @hidden */
+    constructor() {
+        super();
+        effect(() => {
+            this._resetCells(this._tableService.propagateKeys$());
+        });
+    }
+
+    /** @hidden */
     ngOnInit(): void {
         this.navigationDirection = 'grid';
         this._updateNavigationDirection();
-        this._propagateKeysSubscription = this._tableService.propagateKeys$.subscribe((keys: string[]) =>
-            this._resetCells(keys)
-        );
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
-        this._resetCells(this._tableService.propagateKeys$.getValue());
+        this._resetCells(this._tableService.propagateKeys$());
         this._setupCellsSubscription();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        super.ngOnDestroy();
-        this._propagateKeysSubscription.unsubscribe();
     }
 
     /** @hidden */

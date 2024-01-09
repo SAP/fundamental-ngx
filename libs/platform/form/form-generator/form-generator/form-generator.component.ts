@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     EventEmitter,
     Inject,
     Input,
@@ -13,23 +14,26 @@ import {
     TemplateRef,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { FormControlStatus, FormGroupDirective, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, destroyObservable } from '@fundamental-ngx/cdk/utils';
 import {
     ColumnLayout,
     FDP_DO_CHECK,
+    FDP_FORM_SUBMIT,
     FieldHintOptions,
     HintInput,
     HintOptions,
     PlatformFormFieldControl
 } from '@fundamental-ngx/platform/shared';
 import { BehaviorSubject, Observable, Subject, Subscription, isObservable, merge, of } from 'rxjs';
-import { debounceTime, filter, startWith, switchMap, take, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { FormGeneratorFieldComponent } from '../form-generator-field/form-generator-field.component';
 
 import { NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 import { DefaultGapLayout, DefaultVerticalFieldLayout, DefaultVerticalLabelLayout } from '../../form-group/constants';
@@ -85,6 +89,11 @@ export interface SubmitFormEventResult {
         {
             provide: FDP_DO_CHECK,
             useFactory: (formGenerator: FormGeneratorComponent) => formGenerator.doCheck$,
+            deps: [FormGeneratorComponent]
+        },
+        {
+            provide: FDP_FORM_SUBMIT,
+            useFactory: (formGenerator: FormGeneratorComponent) => formGenerator.ngSubmit$,
             deps: [FormGeneratorComponent]
         }
     ],
@@ -224,6 +233,9 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     /** @hidden */
     doCheck$ = new Subject<void>();
 
+    /** @hidden */
+    ngSubmit$ = new Subject<void>();
+
     /** Array of form field controls. */
     get formFields(): PlatformFormFieldControl[] {
         return this.fields
@@ -297,7 +309,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _defaultHintOptions: FieldHintOptions;
@@ -343,8 +355,6 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      * @hidden
      */
     ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
         this._ngSubmitSubscription?.unsubscribe();
     }
 
@@ -455,7 +465,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
         this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
 
         this._formValueSubscription = this.form.valueChanges
-            .pipe(debounceTime(50), takeUntil(this._onDestroy$))
+            .pipe(debounceTime(50), takeUntilDestroyed(this._destroyRef))
             .subscribe(async () => {
                 this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
                 this._cd.markForCheck();
@@ -504,12 +514,15 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
         this._ngSubmitSubscription?.unsubscribe();
         this._ngSubmitSubscription = this.formGroup.ngSubmit
             .pipe(
+                tap(() => {
+                    this.ngSubmit$.next();
+                }),
                 switchMap(() =>
                     this.formGroup.statusChanges!.pipe(
                         startWith(this.formGroup.status),
                         filter((status: FormControlStatus) => status !== 'PENDING'),
                         take(1),
-                        takeUntil(this._onDestroy$)
+                        takeUntilDestroyed(this._destroyRef)
                     )
                 )
             )
@@ -526,7 +539,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
 
         this._refresh$ = new Subject();
 
-        items.pipe(takeUntil(merge(this._refresh$, this._onDestroy$))).subscribe((formItems) => {
+        items.pipe(takeUntil(merge(this._refresh$, destroyObservable(this._destroyRef)))).subscribe((formItems) => {
             this._mappedFormitems = mapFormItems(formItems);
             this._generateForm();
         });

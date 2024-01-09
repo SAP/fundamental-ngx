@@ -1,8 +1,8 @@
 import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
-import { Inject, Injectable } from '@angular/core';
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { DestroyRef, Inject, Injectable, inject } from '@angular/core';
+import { KeyUtil, destroyObservable } from '@fundamental-ngx/cdk/utils';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { Subject } from 'rxjs';
+import { Subject, merge } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NestedItemInterface } from './nested-item/nested-item.interface';
 import { NestedListInterface } from './nested-list/nested-list.interface';
@@ -20,6 +20,9 @@ export class NestedListKeyboardService {
     readonly refresh$: Subject<void> = new Subject<void>();
 
     /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
     constructor(@Inject(MenuKeyboardService) private keyboardService: MenuKeyboardService) {}
 
     /**
@@ -34,7 +37,7 @@ export class NestedListKeyboardService {
         /** Putting the keyboard support function to each of the items */
         items.forEach((item, index) => {
             item.keyboardTriggered
-                .pipe(takeUntil(this.refresh$))
+                .pipe(takeUntil(merge(this.refresh$, destroyObservable(this._destroyRef))))
                 .subscribe((keyboardEvent: KeyboardEvent) => this._handleKeyDown(keyboardEvent, index, items));
         });
     }

@@ -32,7 +32,7 @@ export class WizardGeneratorPO extends PlatformBaseComponentPo {
     checkboxLabel = '.fd-checkbox__label';
     checkbox = '.fd-checkbox';
     dialog = '.fd-dialog ';
-    dialogBarButton = this.dialog + '.fd-bar__element ' + this.button;
+    dialogBarButton = this.dialog + '.fd-bar ' + this.button;
 
     async open(): Promise<void> {
         await super.open(this.url);

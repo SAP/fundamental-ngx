@@ -23,26 +23,20 @@ import {
 } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
-    ChangeDetectorRef,
     ContentChildren,
     Directive,
     ElementRef,
     EventEmitter,
-    Host,
-    Inject,
     Input,
     OnDestroy,
     Optional,
     Output,
     QueryList,
-    Self,
-    SkipSelf,
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { Observable, Subject, Subscription, combineLatest, fromEvent, isObservable } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
@@ -57,8 +51,6 @@ import {
     MatchingStrategy,
     ObservableComboBoxDataSource,
     OptionItem,
-    PlatformFormField,
-    PlatformFormFieldControl,
     coerceArraySafe,
     isDataSource,
     isFunction,
@@ -67,7 +59,8 @@ import {
     isString
 } from '@fundamental-ngx/platform/shared';
 
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
 import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { ComboboxConfig } from '../combobox.config';
 import { FDP_COMBOBOX_ITEM_DEF, FdpComboboxItemDef } from '../directives/combobox-item.directive';
@@ -330,17 +323,10 @@ export abstract class BaseCombobox
 
     /** @hidden */
     protected constructor(
-        readonly cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        @Optional() @Self() readonly ngControl: NgControl,
-        @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
-        @Optional() @Self() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
-        protected comboboxConfig: ComboboxConfig,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
+        protected comboboxConfig: ComboboxConfig
     ) {
-        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+        super();
     }
 
     /** @hidden */
@@ -400,7 +386,7 @@ export abstract class BaseCombobox
         this.openChange.next(isOpen);
         this._onOpenChange(this.isOpen);
 
-        this.cd.detectChanges();
+        this.detectChanges();
     }
 
     /** @hidden */
@@ -551,7 +537,7 @@ export abstract class BaseCombobox
         this.inputText = this.value ? this.inputText : '';
         this.searchInputElement.nativeElement.focus();
         this.isOpenChangeHandle(false);
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /** @hidden */
@@ -640,14 +626,14 @@ export abstract class BaseCombobox
          */
         const dsSub = initDataSource
             .open()
-            .pipe(takeUntil(this._destroyed))
+            .pipe(takeUntilDestroyed(this._destroyed))
             .subscribe((data) => {
                 this._suggestions = this._convertToOptionItems(data);
                 this._flatSuggestions = this.isGroup ? this._flatGroups(this._suggestions) : this._suggestions;
 
                 this.stateChanges.next('initDataSource.open().');
 
-                this.cd.markForCheck();
+                this.markForCheck();
             });
         this._dsSubscription.add(dsSub);
 
@@ -698,7 +684,7 @@ export abstract class BaseCombobox
         this._getOptionsListWidth();
 
         fromEvent(window, 'resize')
-            .pipe(takeUntil(this._destroyed))
+            .pipe(takeUntilDestroyed(this._destroyed))
             .subscribe(() => this._getOptionsListWidth());
     }
 
@@ -712,7 +698,7 @@ export abstract class BaseCombobox
         this.maxWidth = this.autoResize ? window.innerWidth - scrollBarWidth - left - gap : this.minWidth;
         this.minWidth = width - 2;
 
-        this._cd.detectChanges();
+        this.detectChanges();
     }
 
     /**
@@ -854,7 +840,7 @@ export abstract class BaseCombobox
                 map(() =>
                     this._customItemDef.length > 0 ? this._customItemDef.toArray() : this._customTemplates.toArray()
                 ),
-                takeUntil(this._destroyed)
+                takeUntilDestroyed(this._destroyed)
             )
             .subscribe((data) => {
                 data.forEach((template: FdpComboboxItemDef | TemplateDirective) => {

@@ -1,5 +1,5 @@
-import { BooleanInput, NumberInput, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
-import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
+import { NumberInput, coerceNumberProperty } from '@angular/cdk/coercion';
+import { Directive, ElementRef, Input, OnChanges, OnInit, booleanAttribute } from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { CSS_CLASS_NAME, GRID_COLUMNS_NUMBER } from '../constants';
 
@@ -13,15 +13,8 @@ export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChange
     fdLayoutGridCol: NumberInput;
 
     /** Weather the column should take all available width */
-    @Input()
-    set colGrow(value: BooleanInput) {
-        this._colGrow = coerceBooleanProperty(value);
-    }
-
-    /** @hidden */
-    get colGrow(): boolean {
-        return this._colGrow;
-    }
+    @Input({ transform: booleanAttribute })
+    colGrow = false;
 
     /** Defines the width of the element on the layout grid for middle-size screen devices. */
     @Input()
@@ -54,9 +47,6 @@ export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChange
     /** @hidden */
     @Input()
     class: string;
-
-    /** @hidden */
-    private _colGrow: boolean;
 
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}

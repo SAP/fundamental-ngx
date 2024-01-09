@@ -4,33 +4,26 @@ import { DOWN_ARROW, ENTER, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChild,
     ContentChildren,
     ElementRef,
     EventEmitter,
-    Host,
     HostListener,
     Inject,
     Input,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     QueryList,
-    Self,
-    SkipSelf,
     ViewChild,
     ViewEncapsulation,
     forwardRef
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import {
     BehaviorSubject,
     Observable,
-    Subject,
     Subscription,
     asyncScheduler,
     filter,
@@ -42,9 +35,10 @@ import {
     startWith,
     switchMap
 } from 'rxjs';
-import { delay, takeUntil, tap } from 'rxjs/operators';
+import { delay, tap } from 'rxjs/operators';
 
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { InfiniteScrollDirective } from '@fundamental-ngx/core/infinite-scroll';
@@ -61,15 +55,12 @@ import {
     CollectionBaseInput,
     ListDataSource,
     ObservableListDataSource,
-    PlatformFormField,
-    PlatformFormFieldControl,
     isBlank,
     isDataSource,
     isPresent
 } from '@fundamental-ngx/platform/shared';
 import { BaseListItem, LIST_ITEM_TYPE, ListItemDef } from './base-list-item';
 import { FdpListComponent } from './fdpListComponent.token';
-import { ListConfig } from './list.config';
 import { LoadMoreContentContext, LoadMoreContentDirective } from './load-more-content.directive';
 import { FdpList, FdpListDataSource, ListType, SelectionType } from './models/list';
 
@@ -335,9 +326,6 @@ export class ListComponent<T>
     _items: T[] = [];
 
     /** @hidden */
-    _destroyed = new Subject<void>();
-
-    /** @hidden */
     _ariaSetSize: Observable<number> = new Observable();
 
     /** @hidden */
@@ -428,18 +416,10 @@ export class ListComponent<T>
 
     /** @hidden */
     constructor(
-        protected _changeDetectorRef: ChangeDetectorRef,
-        elementRef: ElementRef,
-        private _liveAnnouncer: LiveAnnouncer,
-        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>,
-        @Optional() @Self() public ngControl: NgControl,
-        @Optional() @Self() public controlContainer: ControlContainer,
-        @Optional() @Self() public ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
-        protected _listConfig?: ListConfig
+        private readonly _liveAnnouncer: LiveAnnouncer,
+        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>
     ) {
-        super(_changeDetectorRef, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+        super();
         this._init();
     }
 
@@ -533,7 +513,7 @@ export class ListComponent<T>
 
         this._selectionModel = new SelectionModel<BaseListItem>(this._multiSelect, this.selectedItems);
 
-        this._selectionModel.changed.pipe(takeUntil(this._destroyed)).subscribe(() => {
+        this._selectionModel.changed.pipe(takeUntilDestroyed(this._destroyed)).subscribe(() => {
             this.selectedItems = this._selectionModel.selected;
             const event = new SelectionChangeEvent();
             event.selectedItems = this.selectedItems;
@@ -649,7 +629,7 @@ export class ListComponent<T>
                     await this._liveAnnouncer.announce(this.loadingLabel, 'assertive');
                 }),
                 delay(this.delayTime),
-                takeUntil(this._destroyed)
+                takeUntilDestroyed(this._destroyed)
             )
             .subscribe((result) => {
                 if (isPresent(result)) {
@@ -659,7 +639,7 @@ export class ListComponent<T>
                 }
                 this._loading = false;
                 this.stateChanges.next(this._items);
-                this._changeDetectorRef.markForCheck();
+                this.markForCheck();
             });
     }
 
@@ -752,7 +732,7 @@ export class ListComponent<T>
             .pipe(
                 // Set new items when component is fully initiated and all child components are available.
                 this._waitForViewInit(),
-                takeUntil(this._destroyed)
+                takeUntilDestroyed(this._destroyed)
             )
             .subscribe((data) => {
                 this._dsItems = data || [];
@@ -760,7 +740,7 @@ export class ListComponent<T>
                 this._setItems();
                 // Trigger change detection when queue is empty.
                 setTimeout(() => {
-                    this._cd.detectChanges();
+                    this.detectChanges();
                 });
             });
 
@@ -957,7 +937,7 @@ export class ListComponent<T>
             }
         });
 
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /** @hidden */

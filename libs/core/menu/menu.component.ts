@@ -1,6 +1,7 @@
 import {
     AfterContentInit,
     AfterViewInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -29,7 +30,6 @@ import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { BasePopoverClass, PopoverService } from '@fundamental-ngx/core/popover';
 
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { SegmentedButtonHeaderDirective } from './directives/segmented-button/segmented-button-header.directive';
 import { SegmentedButtonOptionDirective } from './directives/segmented-button/segmented-button-option.directive';
@@ -67,9 +67,9 @@ export class MenuComponent
     implements MenuInterface, AfterContentInit, AfterViewInit, OnDestroy, OnInit
 {
     /** Set menu in mobile mode */
-    @Input()
-    set mobile(value: BooleanInput) {
-        this._mobile = coerceBooleanProperty(value);
+    @Input({ transform: booleanAttribute })
+    set mobile(value: boolean) {
+        this._mobile = value;
         this._menuService.setMenuMode(this.mobile);
     }
 
@@ -286,9 +286,7 @@ export class MenuComponent
     ngOnDestroy(): void {
         this._destroyMobileComponent();
         this._destroyEventListeners();
-        this._menuService.onDestroy();
         this._subscriptions.unsubscribe();
-        this._popoverService.onDestroy();
     }
 
     /** @hidden */

@@ -1,6 +1,6 @@
 import { CdkPortalOutlet, ComponentPortal, PortalModule } from '@angular/cdk/portal';
 import { Component, ContentChild, ElementRef, HostBinding, HostListener, ViewChild, inject } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 import { MenuAddonDirective } from './directives/menu-addon.directive';
 import { MenuItemInputDirective } from './directives/menu-item-input.directive';
 
@@ -17,7 +17,7 @@ import { MenuItemInputDirective } from './directives/menu-item-input.directive';
     imports: [PortalModule],
     standalone: true
 })
-export class MenuInteractiveComponent {
+export class MenuInteractiveComponent implements HasElementRef {
     /** @hidden */
     @ViewChild(CdkPortalOutlet)
     addonPortalOutlet: CdkPortalOutlet;
@@ -66,7 +66,7 @@ export class MenuInteractiveComponent {
     _fromSplitButton = false;
 
     /** @hidden */
-    public elementRef: ElementRef = inject(ElementRef);
+    readonly elementRef: ElementRef = inject(ElementRef);
 
     /** @hidden */
     private _startAddonInstance: MenuAddonDirective;

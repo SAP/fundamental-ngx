@@ -1,16 +1,5 @@
-import {
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    EventEmitter,
-    Input,
-    NgZone,
-    Output,
-    QueryList,
-    ViewChild,
-    ViewChildren
-} from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AsyncOrSyncPipe, Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { NgClass } from '@angular/common';
 import { OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
@@ -47,7 +36,8 @@ type TabItem = ElementRef<HTMLElement> | TextTypePopoverComponent;
         NgClass,
         TextTypePopoverComponent,
         ButtonComponent,
-        IconComponent
+        IconComponent,
+        AsyncOrSyncPipe
     ]
 })
 export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
@@ -75,11 +65,6 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
     @Output()
     reordered = new EventEmitter<IconTabBarItem[]>();
 
-    /** @hidden */
-    constructor(_cd: ChangeDetectorRef, _ngZone: NgZone) {
-        super(_cd, _ngZone);
-    }
-
     /**
      * @hidden
      * @param selectedItem
@@ -89,7 +74,7 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
         // Then to find root tab, and pass it to the parent method.
         if (selectedItem?.uId.includes(UNIQUE_KEY_SEPARATOR)) {
             const rootTabUid = selectedItem.uId.split(UNIQUE_KEY_SEPARATOR)[0];
-            selectedItem = this._tabs.find((tab) => tab.uId === rootTabUid);
+            selectedItem = this._tabs$().find((tab) => tab.uId === rootTabUid);
         }
         if (!selectedItem) {
             return;
@@ -135,7 +120,7 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
 
         event.action === 'replace' ? this._replaceAsSibling(dataForAction) : this._insertItemAsChild(dataForAction);
 
-        this.reordered.emit(this._tabs);
+        this.reordered.emit(this._tabs$());
     }
 
     /** @hidden */
@@ -170,7 +155,7 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
         }
         // Add tab to subitem of the target tab
         replacedItemInfo.item.subItems.push(draggableItemInfo.item);
-        this._tabs = this._updateTabs(this._tabs);
+        this._tabs$.set(this._updateTabs(this._tabs$()));
         this._triggerRecalculationVisibleItems();
     }
 
@@ -187,7 +172,7 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
         draggableItemInfo.arr.splice(draggableItemInfo.item.index, 1);
         const newIndex = replacedItemInfo?.item?.index || 0;
         replacedItemInfo.arr.splice(newIndex, 0, draggableItemInfo.item);
-        this._tabs = this._updateTabs(this._tabs);
+        this._tabs$.set(this._updateTabs(this._tabs$()));
         this._triggerRecalculationVisibleItems();
     }
 

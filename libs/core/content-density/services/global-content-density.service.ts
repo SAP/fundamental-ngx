@@ -1,7 +1,6 @@
 import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ContentDensityStorage } from '../classes/abstract-content-density-storage';
-import { DEFAULT_CONTENT_DENSITY } from '../tokens/default-content-density.token';
 import { ContentDensityMode } from '../types/content-density.mode';
 
 /**
@@ -18,10 +17,7 @@ export class GlobalContentDensityService implements OnDestroy {
     private _subscription = new Subscription();
 
     /** @hidden */
-    constructor(
-        @Inject(ContentDensityStorage) private _storage: ContentDensityStorage,
-        @Inject(DEFAULT_CONTENT_DENSITY) private _defaultContentDensity: ContentDensityMode
-    ) {
+    constructor(@Inject(ContentDensityStorage) private _storage: ContentDensityStorage) {
         this._subscription.add(
             this.contentDensityListener().subscribe((density) => {
                 this.currentContentDensity = density;

@@ -1,39 +1,23 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChildren,
-    ElementRef,
     EventEmitter,
     forwardRef,
-    Host,
-    Inject,
     Input,
-    Optional,
     Output,
     QueryList,
-    Self,
-    SkipSelf,
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { FormsModule } from '@angular/forms';
+import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { RangeSelector } from '@fundamental-ngx/cdk/utils';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { FormGroupComponent } from '@fundamental-ngx/core/form';
-import {
-    coerceArraySafe,
-    InLineLayoutCollectionBaseInput,
-    PlatformFormField,
-    PlatformFormFieldControl,
-    RESPONSIVE_BREAKPOINTS_CONFIG,
-    ResponsiveBreakPointConfig,
-    ResponsiveBreakpointsService,
-    SelectItem
-} from '@fundamental-ngx/platform/shared';
+import { coerceArraySafe, InLineLayoutCollectionBaseInput, SelectItem } from '@fundamental-ngx/platform/shared';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 
 /**
@@ -91,38 +75,6 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
 
     /** @hidden */
     private readonly _rangeSelector = new RangeSelector();
-
-    /** @hidden */
-    constructor(
-        cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
-        @Optional() @Self() ngControl: NgControl,
-        @Optional() @SkipSelf() controlContainer: ControlContainer,
-        @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional()
-        @SkipSelf()
-        @Host()
-        @Inject(FD_FORM_FIELD_CONTROL)
-        @Inject(FD_FORM_FIELD_CONTROL)
-        formControl: PlatformFormFieldControl,
-        @Optional()
-        @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
-        readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig
-    ) {
-        super(
-            cd,
-            elementRef,
-            _responsiveBreakpointsService,
-            ngControl,
-            controlContainer,
-            ngForm,
-            formField,
-            formControl,
-            _defaultResponsiveBreakPointConfig
-        );
-    }
 
     /**
      * @hidden
@@ -204,13 +156,13 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
     /** @hidden */
     private _setValueBySelectionModel(): void {
         super.setValue(this._selectionModel.selected);
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /** @hidden */
     private _updateSelectionModelByValue(): void {
         this._selectionModel.clear();
         this.value.forEach((v) => this._selectionModel.select(v));
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 }

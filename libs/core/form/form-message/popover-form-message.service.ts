@@ -1,9 +1,9 @@
-import { ElementRef, Injectable, OnDestroy, TemplateRef } from '@angular/core';
+import { ElementRef, Injectable, TemplateRef } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { PopoverService } from '@fundamental-ngx/core/popover';
 
 @Injectable()
-export class PopoverFormMessageService implements OnDestroy {
+export class PopoverFormMessageService {
     /** @hidden */
     private _message: Nullable<string | TemplateRef<any>>;
 
@@ -40,11 +40,6 @@ export class PopoverFormMessageService implements OnDestroy {
     show(): void {
         this._hidden = false;
         this._updatePopover();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._popoverService.onDestroy();
     }
 
     /** @hidden */

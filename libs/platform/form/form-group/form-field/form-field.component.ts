@@ -1,4 +1,4 @@
-import { BooleanInput, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -7,6 +7,7 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     Inject,
@@ -19,20 +20,24 @@ import {
     Provider,
     QueryList,
     Self,
+    Signal,
     SimpleChanges,
     SkipSelf,
     TemplateRef,
     ViewChild,
     ViewChildren,
-    forwardRef
+    booleanAttribute,
+    forwardRef,
+    inject
 } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { FD_FORM_FIELD, FormFieldControl, FormStates } from '@fundamental-ngx/cdk/forms';
 import { uniqBy } from 'lodash-es';
 import { BehaviorSubject, Observable, Subject, Subscription, combineLatest, filter, tap } from 'rxjs';
-import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { map, startWith, switchMap } from 'rxjs/operators';
 
-import { AsyncPipe, CommonModule, NgTemplateOutlet } from '@angular/common';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormItemComponent, FormLabelComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -48,7 +53,6 @@ import {
     FormFieldGroup,
     FormGroupContainer,
     HintContent,
-    LabelLayout,
     PlatformFormField,
     PlatformFormFieldControl,
     RESPONSIVE_BREAKPOINTS_CONFIG,
@@ -104,8 +108,7 @@ const formGroupChildProvider: Provider = {
         FormLabelComponent,
         LinkComponent,
         IconComponent,
-        InlineHelpDirective,
-        AsyncPipe
+        InlineHelpDirective
     ]
 })
 export class FormFieldComponent
@@ -230,25 +233,19 @@ export class FormFieldComponent
     i18Strings: TemplateRef<any>;
 
     /** Set when form field is a mandatory one. */
-    @Input()
-    set required(value: BooleanInput) {
-        this._required = coerceBooleanProperty(value);
-    }
-
-    get required(): boolean {
-        return this._required;
-    }
+    @Input({ transform: booleanAttribute })
+    required = false;
 
     /**
      * Indicates if field is editable
      */
-    @Input()
-    set editable(value: BooleanInput) {
-        const newVal = coerceBooleanProperty(value);
-        if (this._editable !== newVal) {
-            this._editable = newVal;
-            this._updateControlProperties();
+    @Input({ transform: booleanAttribute })
+    set editable(value: boolean) {
+        if (this._editable === value) {
+            return;
         }
+        this._editable = value;
+        this._updateControlProperties();
     }
 
     get editable(): boolean {
@@ -330,7 +327,7 @@ export class FormFieldComponent
     }
 
     /** @hidden */
-    isHorizontal$: Observable<boolean>;
+    isHorizontal$: Signal<boolean | undefined>;
 
     /**
      * Child FormFieldControl
@@ -364,7 +361,18 @@ export class FormFieldComponent
      * @hidden
      * Optional FormControl
      */
-    public formControl: FormControl;
+    formControl: FormControl;
+
+    /** @hidden */
+    get _groupHost(): FormGroupContainer | FormFieldGroup {
+        return this.formFieldGroup ? this.formFieldGroup : this.formGroupContainer;
+    }
+
+    /**
+     * Will be updated during onChanges and resize, resulting correct placement of the
+     * hint respecting passed configs and given breakpoint of screen.
+     */
+    hintTarget?: string;
 
     /** @hidden */
     protected _columns: Column = 6;
@@ -374,12 +382,6 @@ export class FormFieldComponent
 
     /** @hidden */
     protected _formGroup: FormGroup;
-
-    /** @hidden */
-    protected _required = false;
-
-    /** @hidden */
-    protected _destroyed$ = new Subject<void>();
 
     /** @hidden */
     private _isColumnLayoutEnabled = false;
@@ -401,9 +403,6 @@ export class FormFieldComponent
 
     /** @hidden */
     private readonly _responsiveBreakPointConfig: ResponsiveBreakPointConfig;
-
-    /** @hidden */
-    private _labelLayout: LabelLayout;
 
     /** @hidden */
     private _labelColumnLayout: ColumnLayout;
@@ -458,23 +457,15 @@ export class FormFieldComponent
     private _needsInlineHelpPlaceSubscription?: Subscription;
 
     /** @hidden */
-    get _groupHost(): FormGroupContainer | FormFieldGroup {
-        return this.formFieldGroup ? this.formFieldGroup : this.formGroupContainer;
-    }
-
-    /**
-     * Will be updated during onChanges and resize, resulting correct placement of the
-     * hint respecting passed configs and given breakpoint of screen.
-     */
-    hintTarget?: string;
-
-    /** @hidden */
     private _breakPointObserver: Observable<any>;
 
     /** @hidden */
     private _formFieldLayoutService: FormFieldLayoutService;
     /** @hidden */
     private readonly _defaultHintOptions: FieldHintOptions;
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -509,6 +500,23 @@ export class FormFieldComponent
         this._breakPointObserver = this._responsiveBreakpointsService.observeBreakpointByConfig(
             this._responsiveBreakPointConfig
         );
+
+        this.isHorizontal$ = toSignal(
+            combineLatest([
+                this._labelColumnLayout$.pipe(filter(Boolean), map(normalizeColumnLayout)),
+                this._fieldColumnLayout$.pipe(filter(Boolean), map(normalizeColumnLayout)),
+                this._gapColumnLayout$.pipe(map((g) => normalizeColumnLayout(g || { S: 0 })))
+            ]).pipe(
+                switchMap(([label, field, gap]) =>
+                    this._breakPointObserver.pipe(
+                        map(
+                            (breakpointName) =>
+                                label[breakpointName] + field[breakpointName] + gap[breakpointName] <= 12
+                        )
+                    )
+                )
+            )
+        );
     }
 
     /**
@@ -537,7 +545,7 @@ export class FormFieldComponent
             .pipe(
                 map(() => this._formFieldLayoutService.getFixedLayouts(getSource())),
                 tap(setLayouts),
-                takeUntil(this._destroyed$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe();
     }
@@ -555,23 +563,12 @@ export class FormFieldComponent
 
         if (this._isColumnLayoutEnabled) {
             this._breakPointObserver
-                .pipe(takeUntil(this._destroyed$))
+                .pipe(takeUntilDestroyed(this._destroyRef))
                 .subscribe((breakPointName) => this._updateLayout(breakPointName));
         }
 
         this._addToFormGroup();
 
-        this.isHorizontal$ = combineLatest([
-            this._labelColumnLayout$.pipe(filter(Boolean), map(normalizeColumnLayout)),
-            this._fieldColumnLayout$.pipe(filter(Boolean), map(normalizeColumnLayout)),
-            this._gapColumnLayout$.pipe(map((g) => normalizeColumnLayout(g || { S: 0 })))
-        ]).pipe(
-            switchMap(([label, field, gap]) =>
-                this._breakPointObserver.pipe(
-                    map((breakpointName) => label[breakpointName] + field[breakpointName] + gap[breakpointName] <= 12)
-                )
-            )
-        );
         this.listenToInlineHelpPlaceRequirementChanges(() => this);
     }
 
@@ -596,7 +593,7 @@ export class FormFieldComponent
                             this.hintTarget = this.hintOptions.target;
                         }
                     }),
-                    takeUntil(this._destroyed$)
+                    takeUntilDestroyed(this._destroyRef)
                 )
                 .subscribe();
         }
@@ -611,7 +608,7 @@ export class FormFieldComponent
     ngAfterViewInit(): void {
         this._assignErrorDirectives();
 
-        this._errorDirectiveQuery.changes.pipe(takeUntil(this._destroyed$)).subscribe(() => {
+        this._errorDirectiveQuery.changes.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._assignErrorDirectives();
         });
         this._updateControlProperties();
@@ -624,8 +621,6 @@ export class FormFieldComponent
     ngOnDestroy(): void {
         this._formFieldLayoutService.removeEntry(this);
         this._removeFromFormGroup();
-        this._destroyed$.next();
-        this._destroyed$.complete();
         this._errorDirectivesCdr?.unsubscribe();
         this._formGroupErrorDirectivesSubscription?.unsubscribe();
     }
@@ -646,7 +641,7 @@ export class FormFieldComponent
 
         this.control = formFieldControl as PlatformFormFieldControl;
 
-        formFieldControl.stateChanges.pipe(startWith(null), takeUntil(this._destroyed$)).subscribe(() => {
+        formFieldControl.stateChanges.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._updateControlProperties();
             // need to call explicitly detectChanges() instead of markForCheck before the
             // modified validation state of the control passes over checked phase
@@ -657,7 +652,7 @@ export class FormFieldComponent
 
         // Refresh UI when value changes
         if (formFieldControl?.ngControl?.valueChanges) {
-            formFieldControl.ngControl.valueChanges.pipe(takeUntil(this._destroyed$)).subscribe(() => {
+            formFieldControl.ngControl.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
                 this.onChange.emit('valueChanges');
                 this.groupErrors();
                 this._cd.markForCheck();
@@ -768,7 +763,7 @@ export class FormFieldComponent
         this._formGroupErrorDirectives = directives.toArray();
 
         this._formGroupErrorDirectivesSubscription = directives.changes
-            .pipe(takeUntil(this._destroyed$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 this._formGroupErrorDirectives = directives.toArray();
             });
@@ -791,7 +786,7 @@ export class FormFieldComponent
             .pipe(
                 startWith(null),
                 map(() => this._inputMessageGroupCmp.first),
-                takeUntil(this._destroyed$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((component) => {
                 if (!this.control) {

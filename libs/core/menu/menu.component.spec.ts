@@ -139,7 +139,6 @@ describe('MenuComponent', () => {
     it('should destroy all references', () => {
         const destroyEventsSpy = jest.spyOn(menu as any, '_destroyEventListeners');
         const destroyMobileSpy = jest.spyOn(menu as any, '_destroyMobileComponent');
-        const menuServiceDestroySpy = jest.spyOn(menu['_menuService'] as any, 'onDestroy');
 
         menu.ngOnDestroy();
 
@@ -147,7 +146,6 @@ describe('MenuComponent', () => {
 
         expect(destroyEventsSpy).toHaveBeenCalled();
         expect(destroyMobileSpy).toHaveBeenCalled();
-        expect(menuServiceDestroySpy).toHaveBeenCalled();
     });
 
     it('disableScrollbar should be false by default, but it should allow the developer to disable the scrollbar when there is no submenu', () => {

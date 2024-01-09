@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 import {
     CollectionGroup,
     SortDirection,
     TableDialogCommonData,
     getUniqueListValuesByKey
 } from '@fundamental-ngx/platform/table-helpers';
-import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
@@ -94,11 +93,8 @@ class GroupRule {
 export class P13GroupingDialogComponent implements Resettable {
     /** Table columns available for grouping */
     readonly columns: GroupDialogColumn[] = [];
-
-    /** @hidden */
-    private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     /** Indicates when reset command is available */
-    readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
+    readonly isResetAvailable$ = signal(false);
 
     /** Group rules to render */
     rules: GroupRule[] = [];
@@ -115,7 +111,7 @@ export class P13GroupingDialogComponent implements Resettable {
     /** Reset changes to the initial state */
     reset(): void {
         this._initiateRules();
-        this._isResetAvailableSubject$.next(false);
+        this.isResetAvailable$.set(false);
     }
 
     /** Close dialog */
@@ -133,7 +129,7 @@ export class P13GroupingDialogComponent implements Resettable {
     /** @hidden */
     _recalculateResetAvailability(): void {
         const hasOnlyOneEmptyRule = this.rules.length === 1 && !this.rules[0].isValid;
-        this._isResetAvailableSubject$.next(!hasOnlyOneEmptyRule);
+        this.isResetAvailable$.set(!hasOnlyOneEmptyRule);
     }
 
     /** @hidden */

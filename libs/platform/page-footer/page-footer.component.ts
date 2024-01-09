@@ -1,13 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import {
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    HostListener,
-    Input,
-    TemplateRef,
-    ViewEncapsulation
-} from '@angular/core';
+import { Component, HostListener, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { warnOnce } from '@fundamental-ngx/core/utils';
 
 export type footerSize = 'sm' | 'md' | 'lg' | 'xl';
@@ -41,10 +33,7 @@ export class PlatformFooterComponent {
     public screenHeight: any;
 
     /** @hidden */
-    constructor(
-        private _elRef: ElementRef,
-        private readonly _cdRef: ChangeDetectorRef
-    ) {
+    constructor() {
         warnOnce('PlatformFooterComponent component is deprecated since version 0.40.0');
     }
 

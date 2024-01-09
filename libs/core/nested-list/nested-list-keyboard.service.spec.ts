@@ -1,3 +1,4 @@
+import { TestBed } from '@angular/core/testing';
 import { NestedListKeyboardService } from './nested-list-keyboard.service';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { Subject } from 'rxjs';
@@ -44,7 +45,8 @@ describe('NestedListKeyboardSupportService', () => {
         object = {
             nestedItems: toArray()
         };
-        service = new NestedListKeyboardService(new MenuKeyboardService());
+        TestBed.configureTestingModule({ providers: [NestedListKeyboardService, MenuKeyboardService] });
+        service = TestBed.inject(NestedListKeyboardService);
     });
 
     it('Should return all of the items', () => {

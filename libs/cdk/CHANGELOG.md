@@ -3,6 +3,116 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.32...v0.48.0-rc.33) (2024-01-09)
+
+
+### Bug Fixes
+
+* **platform:** simplify class inheritance ([#11198](https://github.com/SAP/fundamental-ngx/issues/11198)) ([81757f2](https://github.com/SAP/fundamental-ngx/commit/81757f2a238e936326e9c4b50749b7f7d0edbd88))
+
+
+### BREAKING CHANGES
+
+* **platform:** Platform Switch component now uses `ariaLabelledBy` instead of `ariaLabelledby`
+
+
+
+
+
+# [0.48.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.31...v0.48.0-rc.32) (2024-01-08)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.48.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.30...v0.48.0-rc.31) (2024-01-08)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.48.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.29...v0.48.0-rc.30) (2024-01-08)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.48.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.28...v0.48.0-rc.29) (2024-01-04)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.48.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.27...v0.48.0-rc.28) (2024-01-04)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.48.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.26...v0.48.0-rc.27) (2024-01-03)
+
+
+### Bug Fixes
+
+* **platform:** settings generator style update ([#11122](https://github.com/SAP/fundamental-ngx/issues/11122)) ([ec98449](https://github.com/SAP/fundamental-ngx/commit/ec9844928de516192b0ac283b0ed194527431e82))
+
+
+
+
+
+# [0.48.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.25...v0.48.0-rc.26) (2024-01-03)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.48.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.24...v0.48.0-rc.25) (2024-01-03)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.48.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.23...v0.48.0-rc.24) (2024-01-02)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.48.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.22...v0.48.0-rc.23) (2023-12-30)
+
+
+### Features
+
+* **core,platform,cx:** partial signals migration ([#11142](https://github.com/SAP/fundamental-ngx/issues/11142)) ([4a7ba11](https://github.com/SAP/fundamental-ngx/commit/4a7ba11b96913403dc29198e33f6c81238860008))
+
+
+
+
+
+# [0.48.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.21...v0.48.0-rc.22) (2023-12-28)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
 # [0.48.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.20...v0.48.0-rc.21) (2023-12-25)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk

@@ -20,8 +20,7 @@ import {
     Nullable
 } from '@fundamental-ngx/cdk/utils';
 import { TableCellDirective, TableRowDirective } from '@fundamental-ngx/core/table';
-import { CollectionGroup, TableColumn, TableRow, TableService } from '@fundamental-ngx/platform/table-helpers';
-import { Observable } from 'rxjs';
+import { TableColumn, TableRow, TableService } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -87,12 +86,7 @@ export class TableGroupRowComponent<T> extends TableRowDirective implements OnCh
     }
 
     /** @hidden */
-    private readonly _fdpTableService = inject(TableService);
-
-    /** @hidden */
-    get _groupRulesMap(): Observable<Map<string, CollectionGroup>> {
-        return this._fdpTableService.groupRules$;
-    }
+    readonly _fdpTableService = inject(TableService);
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {

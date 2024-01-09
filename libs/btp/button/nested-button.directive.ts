@@ -1,5 +1,4 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Directive, Input, OnChanges } from '@angular/core';
+import { Directive, Input, OnChanges, booleanAttribute } from '@angular/core';
 import { ButtonTypeGuard } from './button-type-guard';
 
 @Directive({
@@ -12,8 +11,8 @@ export class NestedButtonDirective extends ButtonTypeGuard implements OnChanges 
     fdType: 'nested' | 'nested-square' = 'nested' as const;
 
     /** Whether the button should have squared form */
-    @Input({ transform: coerceBooleanProperty })
-    square: BooleanInput;
+    @Input({ transform: booleanAttribute })
+    square = false;
 
     /** @hidden */
     ngOnChanges(): void {

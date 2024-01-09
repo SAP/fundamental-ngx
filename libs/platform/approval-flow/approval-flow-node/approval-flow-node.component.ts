@@ -34,7 +34,7 @@ import {
     MenuTitleDirective,
     MenuTriggerDirective
 } from '@fundamental-ngx/core/menu';
-import { FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { ObjectStatusComponent, PlatformObjectStatusTextDirective } from '@fundamental-ngx/platform/object-status';
 import { ApprovalFlowNodeTarget } from '../approval-flow-add-node/approval-flow-add-node.component';
 import { isNodeApproved, isNodeStarted } from '../helpers';
@@ -265,9 +265,6 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     private _subscriptions = new Subscription();
-
-    /** @hidden */
-    private _translationResolver = new TranslationResolver();
 
     /** @hidden */
     constructor(

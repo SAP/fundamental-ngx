@@ -1,28 +1,13 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    OnInit,
-    Optional,
-    TemplateRef,
-    ViewChild
-} from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import {
-    MOBILE_MODE_CONFIG,
-    MobileModeBase,
-    MobileModeConfigToken,
-    MobileModeControl
-} from '@fundamental-ngx/core/mobile-mode';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -43,11 +28,10 @@ import { MULTICOMBOBOX_COMPONENT, MultiComboboxInterface } from '../../multi-com
         ButtonComponent,
         CdkScrollable,
         ScrollbarDirective,
-        AsyncPipe,
         FdTranslatePipe
     ]
 })
-export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxInterface> implements OnInit, OnDestroy {
+export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxInterface> implements OnInit {
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
@@ -68,13 +52,8 @@ export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxIn
     private _selectedBackup: SelectableOptionItem[];
 
     /** @hidden */
-    constructor(
-        elementRef: ElementRef,
-        dialogService: DialogService,
-        @Inject(MULTICOMBOBOX_COMPONENT) multiComboboxComponent: MultiComboboxInterface,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
-    ) {
-        super(elementRef, dialogService, multiComboboxComponent, MobileModeControl.MULTI_COMBOBOX, mobileModes);
+    constructor(@Inject(MULTICOMBOBOX_COMPONENT) multiComboboxComponent: MultiComboboxInterface) {
+        super(multiComboboxComponent, MobileModeControl.MULTI_COMBOBOX);
     }
 
     /** @hidden */
@@ -83,17 +62,12 @@ export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxIn
     }
 
     /** @hidden */
-    ngOnDestroy(): void {
-        super.onDestroy();
-    }
-
-    /** @hidden */
     showSelected(): void {
-        const isSelectedShown = this.selectedShown$.getValue();
+        const isSelectedShown = this.selectedShown$();
 
         if (isSelectedShown) {
             this._component.searchTermChanged();
-            this.selectedShown$.next(false);
+            this.selectedShown$.set(false);
             return;
         }
 
@@ -128,7 +102,9 @@ export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxIn
 
     /** @hidden */
     private _listenOnMultiComboboxOpenChange(): void {
-        this._component.openChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => this._toggleDialog(isOpen));
+        this._component.openChange
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 
     /** @hidden */

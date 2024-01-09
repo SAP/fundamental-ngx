@@ -4,10 +4,11 @@ import {
     Component,
     OnDestroy,
     OnInit,
-    ViewEncapsulation
+    ViewEncapsulation,
+    signal
 } from '@angular/core';
 import { TableDialogCommonData } from '@fundamental-ngx/platform/table-helpers';
-import { BehaviorSubject, Observable, Subscription, combineLatest } from 'rxjs';
+import { BehaviorSubject, Subscription, combineLatest } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
@@ -105,10 +106,8 @@ const INITIAL_SHOW_ALL_ITEMS = true;
     ]
 })
 export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy {
-    /** @hidden */
-    private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     /** Indicates when reset command is available */
-    readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
+    readonly isResetAvailable$ = signal(false);
 
     /** Table columns available for grouping */
     readonly availableColumns: DialogTableColumn[] = [];
@@ -170,7 +169,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     /** Reset to the initial state */
     reset(): void {
         this._initiateColumns(this.availableColumns.map((c) => c.key));
-        this._isResetAvailableSubject$.next(false);
+        this.isResetAvailable$.set(false);
     }
 
     /** Close dialog */
@@ -212,7 +211,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
                 }
             }
         }
-        this._isResetAvailableSubject$.next(resettable);
+        this.isResetAvailable$.set(resettable);
     }
 
     /** @hidden */

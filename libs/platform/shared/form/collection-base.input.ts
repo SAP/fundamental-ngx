@@ -1,11 +1,8 @@
-import { ChangeDetectorRef, Directive, ElementRef, Host, Inject, Input, Optional, Self, SkipSelf } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { Directive, Input } from '@angular/core';
 
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { SelectItem, isSelectItem } from '../domain/data-model';
 import { isFunction, isJsObject, isString } from '../utils/lang';
 import { BaseInput } from './base.input';
-import { PlatformFormField, PlatformFormFieldControl } from './form-field';
 
 /**
  * Defines specific behavior for Input controls which deals with list of values including:
@@ -51,22 +48,9 @@ export abstract class CollectionBaseInput extends BaseInput {
     displayKey: string;
 
     /** @hidden */
-    protected constructor(
-        cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        @Optional() @Self() readonly ngControl: NgControl,
-        @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
-        @Optional() @SkipSelf() readonly ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
-    ) {
-        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
-    }
-
-    /** @hidden */
     public lookupValue(item: any): string {
         if (isSelectItem(item)) {
-            return this.lookupKey && item ? item.value[this.lookupKey] : item.value;
+            return this.lookupKey && item && item.value ? item.value[this.lookupKey] : item.value;
         } else {
             return this.lookupKey && item ? item[this.lookupKey] : item;
         }

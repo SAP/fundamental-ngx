@@ -45,6 +45,8 @@ import {
 export class ShellbarCollapsibleExampleComponent {
     currentSize: ShellbarSizes = 'xl';
 
+    showSearch = true;
+
     sizesWidth = {
         s: 320,
         m: 720,

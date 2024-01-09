@@ -1,6 +1,13 @@
-import { BooleanInput } from '@angular/cdk/coercion';
-import { AfterViewInit, ContentChildren, Directive, EventEmitter, Input, Output, QueryList } from '@angular/core';
-import { coerceBoolean } from '../../decorators/coerce-boolean';
+import {
+    AfterViewInit,
+    ContentChildren,
+    Directive,
+    EventEmitter,
+    Input,
+    Output,
+    QueryList,
+    booleanAttribute
+} from '@angular/core';
 import { SelectComponentRootToken, SelectableListValueType } from './select-component-root.token';
 import { SelectableItemToken } from './selectable-item.token';
 import { SelectionService } from './selection.service';
@@ -25,14 +32,12 @@ export class SelectableListDirective<T extends Element = HTMLElement, V = any>
     selectedChange = new EventEmitter<SelectableListValueType<T>>();
 
     /** @hidden */
-    @Input()
-    @coerceBoolean
-    toggle: BooleanInput = false;
+    @Input({ transform: booleanAttribute })
+    toggle = false;
 
     /** @hidden */
-    @Input()
-    @coerceBoolean
-    multiple: BooleanInput = false;
+    @Input({ transform: booleanAttribute })
+    multiple = false;
 
     /** @hidden */
     @Input()

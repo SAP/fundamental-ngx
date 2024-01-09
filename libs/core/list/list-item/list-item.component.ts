@@ -1,21 +1,17 @@
 import {
     AfterContentInit,
-    Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChild,
     ContentChildren,
-    ElementRef,
+    DestroyRef,
     EventEmitter,
     forwardRef,
     HostBinding,
     HostListener,
     inject,
-    Inject,
     Input,
-    OnDestroy,
-    Optional,
     Output,
     QueryList,
     ViewEncapsulation
@@ -23,6 +19,7 @@ import {
 
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { DecimalPipe } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, LIST_ITEM_COMPONENT, ListItemInterface, Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
@@ -30,10 +27,9 @@ import { FormItemComponent } from '@fundamental-ngx/core/form';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FD_RADIO_BUTTON_COMPONENT, RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { Subject } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { startWith } from 'rxjs/operators';
 import { ListLinkDirective } from '../directives/list-link.directive';
 import { ListFocusItem } from '../list-focus-item.model';
-import { ListUnreadIndicator } from '../list-unread-indicator.interface';
 import { FD_LIST_LINK_DIRECTIVE, FD_LIST_UNREAD_INDICATOR } from '../tokens';
 
 let listItemUniqueId = 0;
@@ -64,10 +60,7 @@ let listItemUniqueId = 0;
     standalone: true,
     imports: [FormItemComponent, DecimalPipe, IconComponent]
 })
-export class ListItemComponent<T = any>
-    extends ListFocusItem<T>
-    implements AfterContentInit, OnDestroy, ListItemInterface
-{
+export class ListItemComponent<T = any> extends ListFocusItem<T> implements AfterContentInit, ListItemInterface {
     /** Whether list item is selected */
     @Input()
     @HostBinding('class.is-selected')
@@ -161,7 +154,7 @@ export class ListItemComponent<T = any>
     buttons: QueryList<ButtonComponent>;
 
     /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _onLinkListChanged$ = new Subject<void>();
@@ -193,25 +186,8 @@ export class ListItemComponent<T = any>
     });
 
     /** @hidden */
-    constructor(
-        public readonly elementRef: ElementRef,
-        private readonly _changeDetectorRef: ChangeDetectorRef,
-        @Attribute('role') private readonly _defaultRole: string | null,
-        @Optional() @Inject(FD_LIST_UNREAD_INDICATOR) private readonly _unreadIndicator?: ListUnreadIndicator
-    ) {
-        super(elementRef);
-    }
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-        this._listenOnLinkQueryChange();
-        this._listenOnButtonQueryChange();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
+    constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {
+        super();
     }
 
     /** @hidden */
@@ -272,17 +248,25 @@ export class ListItemComponent<T = any>
     }
 
     /** @hidden */
+    ngAfterContentInit(): void {
+        this._listenOnLinkQueryChange();
+        this._listenOnButtonQueryChange();
+    }
+
+    /** @hidden */
     private _listenOnLinkQueryChange(): void {
-        this.linkDirectives.changes.pipe(startWith(this.linkDirectives), takeUntil(this._onDestroy$)).subscribe(() => {
-            this._onLinkListChanged$.next();
-            this.link = this.linkDirectives.length > 0;
-            this._changeDetectorRef.detectChanges();
-        });
+        this.linkDirectives.changes
+            .pipe(startWith(this.linkDirectives), takeUntilDestroyed(this._destroyRef))
+            .subscribe(() => {
+                this._onLinkListChanged$.next();
+                this.link = this.linkDirectives.length > 0;
+                this._changeDetectorRef.detectChanges();
+            });
     }
 
     /** @hidden */
     private _listenOnButtonQueryChange(): void {
-        this.buttons.changes.pipe(startWith(0), takeUntil(this._onDestroy$)).subscribe(() => {
+        this.buttons.changes.pipe(startWith(0), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this.buttons.forEach(this._addClassToButtons);
         });
     }

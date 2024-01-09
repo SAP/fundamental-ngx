@@ -1,25 +1,18 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    TemplateRef,
-    ViewChild,
-    ViewEncapsulation,
-    inject
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild, ViewEncapsulation, inject } from '@angular/core';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogModule, DialogRef } from '@fundamental-ngx/core/dialog';
 import { MessageBoxModule, MessageBoxService } from '@fundamental-ngx/core/message-box';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { BaseWizardGenerator } from '../../base-wizard-generator';
 import { WizardDialogData } from '../../interfaces/wizard-dialog-data.interface';
 import { WizardTitle } from '../../interfaces/wizard-title.interface';
@@ -106,13 +99,8 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
     private readonly _messageBoxService = inject(MessageBoxService);
 
     /** @hidden */
-    constructor(
-        _wizardGeneratorService: WizardGeneratorService,
-        _cd: ChangeDetectorRef,
-        private _dialogRef: DialogRef<WizardDialogData>
-    ) {
-        super(_wizardGeneratorService, _cd);
-
+    constructor(private _dialogRef: DialogRef<WizardDialogData>) {
+        super();
         this.items = this._dialogRef.data.items;
         this.title = this._dialogRef.data.title;
         this.appendToWizard = this._dialogRef.data.appendToWizard;
@@ -166,7 +154,7 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
         messageBoxRef.afterClosed
             .pipe(
                 filter((result) => result),
-                takeUntil(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
                 this._dialogRef.dismiss();
@@ -185,7 +173,7 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
 
         const currentStepId = this._wizardGeneratorService.getCurrentStepId();
         this.submitStepForms(currentStepId)
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(async (result) => {
                 if (result && Object.values(result).some((r) => !r.success)) {
                     return;

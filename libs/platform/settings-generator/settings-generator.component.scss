@@ -3,6 +3,7 @@ $block: fdp-settings-generator;
 .#{$block} {
     display: block;
     .#{$block}__title {
+        background: var(--sapObjectHeader_Background);
         padding: 1.5rem 1rem 1rem;
     }
 
@@ -12,7 +13,7 @@ $block: fdp-settings-generator;
     }
 
     &__content {
-        background: var(--sapBaseColor);
+        background: var(--sapBackgroundColor);
         flex-grow: 1;
 
         &-section {
@@ -44,6 +45,13 @@ $block: fdp-settings-generator;
                     }
                 }
             }
+        }
+    }
+
+    &__tabs-container {
+        display: block;
+        .fd-icon-tab-bar__header {
+            padding: 0 1rem;
         }
     }
 }

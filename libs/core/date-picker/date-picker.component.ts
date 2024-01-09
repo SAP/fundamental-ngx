@@ -1,4 +1,3 @@
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
@@ -6,11 +5,13 @@ import {
     ChangeDetectorRef,
     Component,
     ComponentRef,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     Inject,
     Injector,
     Input,
+    OnChanges,
     OnDestroy,
     OnInit,
     Optional,
@@ -21,9 +22,11 @@ import {
     ViewChild,
     ViewChildren,
     ViewEncapsulation,
+    booleanAttribute,
     forwardRef,
     inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { DynamicComponentService, FocusTrapService, Nullable } from '@fundamental-ngx/cdk/utils';
@@ -50,8 +53,8 @@ import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { FdLanguageKeyIdentifier, FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { Subject, Subscription } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 import { DatePickerMobileComponent } from './date-picker-mobile/date-picker-mobile.component';
 import { DatePicker } from './date-picker.model';
 import { createMissingDateImplementationError } from './errors';
@@ -114,7 +117,15 @@ let datePickerCounter = 0;
     ]
 })
 export class DatePickerComponent<D>
-    implements DatePicker<D>, OnInit, OnDestroy, AfterViewInit, ControlValueAccessor, Validator, FormItemControl
+    implements
+        DatePicker<D>,
+        OnInit,
+        OnDestroy,
+        OnChanges,
+        AfterViewInit,
+        ControlValueAccessor,
+        Validator,
+        FormItemControl
 {
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
@@ -298,9 +309,6 @@ export class DatePickerComponent<D>
         return this._isOpen;
     }
 
-    /** @hidden */
-    private _isOpen = false;
-
     /** Should date picker be inlined. */
     @Input()
     inline = true;
@@ -314,14 +322,8 @@ export class DatePickerComponent<D>
      * By default, updates the value as user types.
      * @default false
      */
-    @Input()
-    set processInputOnBlur(v: boolean) {
-        this._processInputOnBlur = coerceBooleanProperty(v);
-    }
-
-    get processInputOnBlur(): boolean {
-        return this._processInputOnBlur;
-    }
+    @Input({ transform: booleanAttribute })
+    processInputOnBlur = false;
 
     /**
      * Whether to prevent page scrolling when focusing date picker input field after calendar has been closed.
@@ -361,13 +363,6 @@ export class DatePickerComponent<D>
     @Output()
     readonly activeViewChange = new EventEmitter<FdCalendarView>();
 
-    /** @hideen */
-    @ViewChildren(CalendarComponent)
-    private readonly _calendars: QueryList<CalendarComponent<D>>;
-
-    /** @hidden */
-    _calendarComponent: CalendarComponent<D>;
-
     /** @hidden */
     @ViewChild('inputGroupComponent', {
         read: ElementRef
@@ -392,11 +387,15 @@ export class DatePickerComponent<D>
     @ViewChild('popoverMessageTemplate')
     private readonly _messagePopoverTemplate: TemplateRef<any>;
 
-    /** @hidden */
-    _message: string | null = null;
+    /** @hideen */
+    @ViewChildren(CalendarComponent)
+    private readonly _calendars: QueryList<CalendarComponent<D>>;
 
     /** @hidden */
-    _processInputOnBlur = false;
+    _calendarComponent: CalendarComponent<D>;
+
+    /** @hidden */
+    _message: string | null = null;
 
     /** @hidden */
     _messageTriggers: string[] = ['focusin', 'focusout'];
@@ -414,10 +413,13 @@ export class DatePickerComponent<D>
     readonly _formValueStateMessageId = `fd-date-picker-form-message-${datePickerCounter++}`;
 
     /** @hidden */
+    private _isOpen = false;
+
+    /** @hidden */
     private _calendarPendingDate: Nullable<D>;
 
     /** @hidden */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -513,7 +515,7 @@ export class DatePickerComponent<D>
 
     /** @hidden */
     ngOnInit(): void {
-        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this.formatInputDate(this.selectedDate);
             this._changeDetectionRef.detectChanges();
         });
@@ -531,7 +533,7 @@ export class DatePickerComponent<D>
     ngAfterViewInit(): void {
         this._InitialiseVariablesInMessageService();
 
-        this._calendars.changes.pipe(startWith(null), takeUntil(this._onDestroy$)).subscribe(() => {
+        this._calendars.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             const calendar = this._calendars.first;
             this._calendarComponent = calendar;
             setTimeout(() => {
@@ -553,8 +555,6 @@ export class DatePickerComponent<D>
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
         this._mobileComponentRef?.destroy();
     }
 

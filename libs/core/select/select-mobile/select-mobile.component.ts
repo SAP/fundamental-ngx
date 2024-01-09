@@ -2,12 +2,10 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
     HostListener,
     Inject,
     OnDestroy,
     OnInit,
-    Optional,
     TemplateRef,
     ViewChild
 } from '@angular/core';
@@ -18,13 +16,8 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
-import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import {
-    MOBILE_MODE_CONFIG,
-    MobileModeBase,
-    MobileModeConfigToken,
-    MobileModeControl
-} from '@fundamental-ngx/core/mobile-mode';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { SELECT_COMPONENT, SelectInterface } from '../select.interface';
@@ -42,18 +35,24 @@ import { SELECT_COMPONENT, SelectInterface } from '../select.interface';
     imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, NgTemplateOutlet, ButtonBarComponent]
 })
 export class SelectMobileComponent extends MobileModeBase<SelectInterface> implements OnInit, AfterViewInit, OnDestroy {
-    /** @hidden
+    /** @hidden */
+    @ViewChild('dialogTemplate')
+    _dialogTemplate: TemplateRef<any>;
+
+    /**
+     * @hidden
      * from mobile class can not prefix _,
      * to avoid build issues
      */
     childContent: TemplateRef<any> | null = null;
 
     /** @hidden */
-    @ViewChild('dialogTemplate')
-    _dialogTemplate: TemplateRef<any>;
+    private _subscriptions = new Subscription();
 
     /** @hidden */
-    private _subscriptions = new Subscription();
+    constructor(@Inject(SELECT_COMPONENT) _selectComponent: SelectInterface) {
+        super(_selectComponent, MobileModeControl.SELECT);
+    }
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
@@ -61,16 +60,6 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
         if (event && KeyUtil.isKeyCode(event, [ESCAPE])) {
             this._component.close(true);
         }
-    }
-
-    /** @hidden */
-    constructor(
-        _elementRef: ElementRef,
-        _dialogService: DialogService,
-        @Inject(SELECT_COMPONENT) _selectComponent: SelectInterface,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
-    ) {
-        super(_elementRef, _dialogService, _selectComponent, MobileModeControl.SELECT, mobileModes);
     }
 
     /** @hidden */
@@ -87,7 +76,6 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
     /** @hidden */
     ngOnDestroy(): void {
         this.dialogRef.close();
-        super.onDestroy();
         this._subscriptions.unsubscribe();
     }
 

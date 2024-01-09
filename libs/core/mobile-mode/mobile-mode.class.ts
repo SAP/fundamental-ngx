@@ -1,7 +1,6 @@
-import { ElementRef, InjectionToken } from '@angular/core';
+import { DestroyRef, Directive, ElementRef, InjectionToken, inject } from '@angular/core';
 import { MOBILE_CONFIG_ERROR } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { Subject } from 'rxjs';
 import { MobileMode } from './mobile-control.interface';
 import { MobileModeConfig } from './mobile-mode-config';
 
@@ -26,6 +25,7 @@ export enum MobileModeControl {
     DATETIME_PICKER = 'DATETIME_PICKER'
 }
 
+@Directive()
 export abstract class MobileModeBase<T extends MobileMode> {
     /** @hidden */
     dialogRef: DialogRef;
@@ -37,25 +37,23 @@ export abstract class MobileModeBase<T extends MobileMode> {
     mobileConfig: MobileModeConfig;
 
     /** @hidden */
-    protected readonly _onDestroy$: Subject<void> = new Subject<void>();
+    protected readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    protected readonly _elementRef = inject(ElementRef);
+
+    /** @hidden */
+    protected readonly _dialogService = inject(DialogService);
+
+    private readonly _mobileModes = inject<MobileModeConfigToken[]>(MOBILE_MODE_CONFIG, { optional: true }) || [];
 
     /** @hidden */
     constructor(
-        protected _elementRef: ElementRef,
-        protected _dialogService: DialogService,
         protected _component: T,
-        protected readonly target: MobileModeControl,
-        private readonly _mobileModes: MobileModeConfigToken[]
+        protected readonly target: MobileModeControl
     ) {
-        this._mobileModes = this._mobileModes || [];
         this.mobileConfig = this._getMobileModeConfig();
         this.dialogConfig = this.mobileConfig.dialogConfig;
-    }
-
-    /** @hidden */
-    onDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /** @hidden */

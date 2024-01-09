@@ -1,23 +1,8 @@
 import { formatNumber } from '@angular/common';
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Host,
-    Inject,
-    Input,
-    LOCALE_ID,
-    Optional,
-    Renderer2,
-    Self,
-    SkipSelf,
-    ViewEncapsulation
-} from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { ChangeDetectionStrategy, Component, Inject, Input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
+import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
-import { OnlyDigitsDirective, RtlService } from '@fundamental-ngx/cdk/utils';
+import { OnlyDigitsDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     ContentDensityModule,
@@ -25,12 +10,10 @@ import {
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { FormInputMessageGroupComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
-import { PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
 import { StepInputChangeEvent, StepInputComponent } from '../base.step-input';
 import { StepInputControlDirective } from '../step-input-control.directive';
 import { StepInputDecrementDirective } from '../step-input-decrement.directive';
 import { StepInputIncrementDirective } from '../step-input-increment.directive';
-import { StepInputConfig } from '../step-input.config';
 
 /**
  * Fundamental number-step-input component
@@ -74,31 +57,10 @@ export class NumberStepInputComponent extends StepInputComponent {
 
     /** @hidden */
     constructor(
-        cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        @Optional() @Self() ngControl: NgControl,
-        @Optional() @SkipSelf() controlContainer: ControlContainer,
-        @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
-        config: StepInputConfig,
-        renderer: Renderer2,
-        @Optional() rtlService: RtlService,
         @Inject(LOCALE_ID) readonly localeId: string,
         readonly contentDensityObserver: ContentDensityObserver
     ) {
-        super(
-            cd,
-            elementRef,
-            ngControl,
-            controlContainer,
-            ngForm,
-            formField,
-            formControl,
-            config,
-            renderer,
-            rtlService
-        );
+        super();
     }
 
     /** @hidden

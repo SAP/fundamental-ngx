@@ -1,4 +1,3 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
@@ -17,6 +16,8 @@ import {
     QueryList,
     SimpleChanges,
     ViewEncapsulation,
+    booleanAttribute,
+    effect,
     forwardRef
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -64,15 +65,15 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
 })
 export class SegmentedButtonComponent implements AfterViewInit, ControlValueAccessor, OnDestroy, OnChanges {
     /** Whether segmented button is on toggle mode, which allows to toggle more than 1 button */
-    @Input({ transform: coerceBooleanProperty })
-    toggle: BooleanInput;
+    @Input({ transform: booleanAttribute })
+    toggle = false;
 
     /**
      * Whether segmented button is on vertical mode,
      * which allows to display buttons vertically
      **/
-    @Input({ transform: coerceBooleanProperty })
-    vertical: BooleanInput;
+    @Input({ transform: booleanAttribute })
+    vertical = false;
 
     /** @hidden */
     @ContentChildren(FD_BUTTON_COMPONENT)
@@ -100,11 +101,9 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         @Optional() private _rtlService: RtlService
     ) {
         this._focusableList.navigationDirection = this.vertical ? 'vertical' : 'horizontal';
-        if (this._rtlService) {
-            this._rtlService.rtl.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isRtl: boolean) => {
-                this._focusableList.contentDirection = isRtl ? 'rtl' : 'ltr';
-            });
-        }
+        effect(() => {
+            this._focusableList.contentDirection = this._rtlService?.rtlSignal() ? 'rtl' : 'ltr';
+        });
     }
 
     /** @hidden */
@@ -278,7 +277,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
 
     /** @hidden */
     private _isButtonDisabled(buttonComponent: ButtonComponent): boolean {
-        return buttonComponent._disabled || buttonComponent.ariaDisabled;
+        return buttonComponent.disabled || buttonComponent.ariaDisabled;
     }
 
     /** @hidden */

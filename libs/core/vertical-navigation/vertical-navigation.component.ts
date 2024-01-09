@@ -4,14 +4,18 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChildren,
+    DestroyRef,
     HostListener,
     Input,
     OnDestroy,
     QueryList,
     ViewEncapsulation,
     effect,
+    inject,
     signal
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { destroyObservable } from '@fundamental-ngx/cdk/utils';
 import { ListComponent, ListNavigationItemComponent } from '@fundamental-ngx/core/list';
 import { Subject, delay, map, merge, startWith, takeUntil } from 'rxjs';
 import { VerticalNavigationMainNavigationComponent } from './vertical-navigation-main-navigation.component';
@@ -52,7 +56,7 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
     private _keyManager: FocusKeyManager<ListNavigationItemComponent>;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$ = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$ = new Subject<void>();
@@ -100,6 +104,8 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
     /** @hidden */
     ngOnDestroy(): void {
         this._keyManager?.destroy();
+        this._onRefresh$.next();
+        this._onRefresh$.complete();
     }
 
     /** Set fake focus on element with passed index */
@@ -113,15 +119,17 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
 
     /** @hidden */
     private _listenOnQueryChange(): void {
-        this._navigationItems.changes.pipe(delay(0), startWith(0), takeUntil(this._onDestroy$)).subscribe(() => {
-            this._listenOnItemsClick();
-            setTimeout(() => {
-                // using setTimeout to avoid ExpressionChangedAfterItHasBeenCheckedError
-                this._navigationItems.forEach((navItem, index) => {
-                    index !== 0 && (navItem._tabIndex = -1);
+        this._navigationItems.changes
+            .pipe(delay(0), startWith(0), takeUntilDestroyed(this._destroyRef))
+            .subscribe(() => {
+                this._listenOnItemsClick();
+                setTimeout(() => {
+                    // using setTimeout to avoid ExpressionChangedAfterItHasBeenCheckedError
+                    this._navigationItems.forEach((navItem, index) => {
+                        index !== 0 && (navItem._tabIndex = -1);
+                    });
                 });
             });
-        });
     }
 
     /** @hidden */
@@ -130,7 +138,7 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
         this._onRefresh$.next();
 
         /** Merge refresh/destroy observables */
-        const completion$ = merge(this._onRefresh$, this._onDestroy$);
+        const completion$ = merge(this._onRefresh$, destroyObservable(this._destroyRef));
         const interactionChangesIndexes = this._navigationItems.map((item, index) =>
             merge(
                 item._clicked$.pipe(map(() => ({ index, updateOnly: false }))),

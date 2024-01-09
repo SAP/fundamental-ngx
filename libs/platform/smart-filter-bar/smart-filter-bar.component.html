@@ -1,4 +1,4 @@
-<div>
+@if (!hideToolbar) {
     <fd-toolbar fdType="transparent">
         @if (_toolbarItems) {
             @for (template of _toolbarItems; track template) {
@@ -7,58 +7,64 @@
             }
         }
         <fdp-search-field
-            (inputChange)="_onSearchInputChange($event)"
+            (inputChange)="onSearchInputChange($event)"
             (searchSubmit)="submitForm()"
-            (cancelSearch)="_cancelSearch()"
-            [disabled]="_loading"
+            (cancelSearch)="cancelSearch()"
+            [disabled]="loading"
             [disableRefresh]="true"
             [placeholder]="'platformSmartFilterBar.searchPlaceholder' | fdTranslate"
         ></fdp-search-field>
         <fd-toolbar-spacer></fd-toolbar-spacer>
         @if (!liveUpdate) {
-            <fdp-button
+            <button
+                fd-button
                 (click)="submitForm()"
-                buttonType="emphasized"
+                fdType="emphasized"
                 fd-toolbar-item
-                [disabled]="_loading"
+                [disabled]="loading"
                 [label]="'platformSmartFilterBar.submitButtonLabel' | fdTranslate"
-            ></fdp-button>
+            ></button>
         }
-        <fdp-button
+        <button
+            fd-button
             (click)="submitForm()"
             fd-toolbar-item
             glyph="synchronize"
-            [disabled]="_loading"
+            [disabled]="loading"
             [ariaLabel]="'platformSmartFilterBar.refreshButtonAriaLabel' | fdTranslate"
-        ></fdp-button>
-        <fdp-button
+        ></button>
+        <button
+            fd-button
             (click)="showFilteringSettings()"
             [label]="
-                'platformSmartFilterBar.filtersButtonLabel' | fdTranslate: { filtersCount: _selectedFilters.length }
+                'platformSmartFilterBar.filtersButtonLabel' | fdTranslate: { filtersCount: selectedFiltersCount$() }
             "
             fd-toolbar-item
-            [disabled]="_loading"
-        ></fdp-button>
-        <fdp-button
-            (click)="_toggleFilterBar()"
+            [disabled]="loading"
+        ></button>
+        <button
+            fd-button
+            (click)="toggleFilterBar()"
             [label]="
-                (_showFilterBar
+                (showFilterBar$()
                     ? 'platformSmartFilterBar.hideFiltersButtonLabel'
                     : 'platformSmartFilterBar.showFiltersButtonLabel'
                 ) | fdTranslate
             "
-            buttonType="transparent"
+            fdType="transparent"
             fd-toolbar-item
-            [disabled]="_loading"
-        ></fdp-button>
+            [disabled]="loading"
+        ></button>
     </fd-toolbar>
-</div>
-<div class="fdp-smart-filter-bar__filters" [hidden]="!_showFilterBar">
-    <fdp-form-generator
-        (formCreated)="_onFormCreated()"
-        (formSubmitted)="_onFormSubmitted($event)"
-        [noAdditionalContent]="true"
-        [formItems]="_formItems"
-        [columnLayout]="filtersColumnLayout"
-    ></fdp-form-generator>
-</div>
+}
+@if (_formItems(); as formItems) {
+    <div class="fdp-smart-filter-bar__filters" [hidden]="!showFilterBar$()">
+        <fdp-form-generator
+            (formCreated)="_onFormCreated()"
+            (formSubmitted)="_onFormSubmitted($event)"
+            [noAdditionalContent]="true"
+            [formItems]="formItems"
+            [columnLayout]="filtersColumnLayout"
+        ></fdp-form-generator>
+    </div>
+}

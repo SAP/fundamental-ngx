@@ -1,27 +1,12 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    DestroyRef,
-    ElementRef,
-    Inject,
-    Optional,
-    TemplateRef,
-    ViewChild,
-    ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { DateRange } from '@fundamental-ngx/core/calendar';
-import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import {
-    MOBILE_MODE_CONFIG,
-    MobileModeBase,
-    MobileModeConfigToken,
-    MobileModeControl
-} from '@fundamental-ngx/core/mobile-mode';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleModule } from '@fundamental-ngx/core/title';
 import { DatePicker } from '../date-picker.model';
@@ -52,15 +37,11 @@ export class DatePickerMobileComponent<D> extends MobileModeBase<DatePicker<D>> 
 
     /** @hidden */
     constructor(
-        elementRef: ElementRef,
-        dialogService: DialogService,
-        private readonly _destroyRef: DestroyRef,
         @Inject(FD_DATE_PICKER_MOBILE_CONFIG)
         public datePickerConfig: { calendarTemplate: TemplateRef<any>; controlTemplate: TemplateRef<any> },
-        @Inject(FD_DATE_PICKER_COMPONENT) datePickerComponent: DatePicker<D>,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
+        @Inject(FD_DATE_PICKER_COMPONENT) datePickerComponent: DatePicker<D>
     ) {
-        super(elementRef, dialogService, datePickerComponent, MobileModeControl.DATE_PICKER, mobileModes);
+        super(datePickerComponent, MobileModeControl.DATE_PICKER);
 
         this._component.isOpenChange.subscribe((isOpen) => {
             this._toggleDialog(isOpen);

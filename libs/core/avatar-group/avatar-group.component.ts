@@ -1,5 +1,6 @@
+import { Direction } from '@angular/cdk/bidi';
 import { DialogModule } from '@angular/cdk/dialog';
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -10,6 +11,7 @@ import {
     QueryList,
     ViewChildren,
     ViewEncapsulation,
+    computed,
     inject
 } from '@angular/core';
 import {
@@ -20,7 +22,6 @@ import {
     RtlService
 } from '@fundamental-ngx/cdk/utils';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { Observable, map, of } from 'rxjs';
 import { AvatarGroupHostComponent } from './components/avatar-group-host.component';
 import { AvatarGroupOverflowButtonComponent } from './components/avatar-group-overflow-button.component';
 import { DefaultAvatarGroupOverflowBodyComponent } from './components/default-avatar-group-overflow-body/default-avatar-group-overflow-body.component';
@@ -52,7 +53,6 @@ import { AvatarGroupHostConfig } from './types';
         FocusableItemDirective,
         DynamicPortalComponent,
         FocusableListDirective,
-        AsyncPipe,
         DialogModule,
         AvatarGroupItemRendererDirective,
         AvatarGroupOverflowButtonComponent,
@@ -113,12 +113,13 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     _avatarGroupPopoverBody: AvatarGroupOverflowBodyDirective;
 
     /** @hidden */
-    _contentDirection$: Observable<'rtl' | 'ltr'> = (inject(RtlService, { optional: true })?.rtl || of(false)).pipe(
-        map((isRtl) => (isRtl ? 'rtl' : 'ltr'))
-    );
+    _contentDirection$ = computed<Direction>(() => (this._rtlService?.rtlSignal() ? 'rtl' : 'ltr'));
 
     /** @hidden */
-    private _cdr = inject(ChangeDetectorRef);
+    private readonly _cdr = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
     _detectChanges(): void {

@@ -1,17 +1,21 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChild,
+    DestroyRef,
+    Directive,
     Input,
-    OnDestroy,
+    Signal,
     TemplateRef,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     ToolbarComponent,
     ToolbarItemDirective,
@@ -19,17 +23,41 @@ import {
     ToolbarSpacerDirective
 } from '@fundamental-ngx/core/toolbar';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { SearchFieldComponent, SearchInput, SuggestionItem } from '@fundamental-ngx/platform/search-field';
 import { Table, TableService } from '@fundamental-ngx/platform/table-helpers';
-import { takeUntil } from 'rxjs/operators';
 import { TABLE_TOOLBAR, TableToolbarInterface } from './table-toolbar';
 import { TableToolbarActionsComponent } from './table-toolbar-actions.component';
 import { TableToolbarLeftActionsComponent } from './table-toolbar-left-actions.component';
 
+export interface ToolbarContext {
+    counter: Signal<number>;
+    sortable: Signal<boolean>;
+    filterable: Signal<boolean>;
+    groupable: Signal<boolean>;
+    columns: Signal<boolean>;
+    hasAnyActions: Signal<boolean>;
+}
+
 export type EditMode = 'none' | 'inline';
 
 let tableToolbarTitleUniqueId = 0;
+
+@Directive({
+    selector: '[fdpTableToolbarTemplate]',
+    standalone: true
+})
+export class TableToolbarTemplateDirective {
+    /** @hidden */
+    readonly templateRef = inject<TemplateRef<ToolbarContext>>(TemplateRef);
+
+    /** @hidden */
+    static ngTemplateContextGuard(
+        _directive: TableToolbarTemplateDirective,
+        context: unknown
+    ): context is ToolbarContext {
+        return true;
+    }
+}
 
 /**
  * The component that represents a table toolbar.
@@ -58,10 +86,11 @@ let tableToolbarTitleUniqueId = 0;
         SearchFieldComponent,
         ButtonComponent,
         AsyncPipe,
-        FdTranslatePipe
+        FdTranslatePipe,
+        TableToolbarTemplateDirective
     ]
 })
-export class TableToolbarComponent implements TableToolbarInterface, OnDestroy {
+export class TableToolbarComponent implements TableToolbarInterface {
     /**
      * Whether the toolbar should hide elements in popover when they overflow.
      * */
@@ -116,21 +145,14 @@ export class TableToolbarComponent implements TableToolbarInterface, OnDestroy {
     readonly tableLoading$: Observable<boolean> = this._tableService.tableLoading$;
 
     /** @hidden */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
-        private readonly _cd: ChangeDetectorRef,
         private readonly _table: Table,
         private readonly _tableService: TableService
     ) {
         this._listenToTableEvents();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /** @hidden */
@@ -175,19 +197,19 @@ export class TableToolbarComponent implements TableToolbarInterface, OnDestroy {
 
     /** @hidden */
     private _listenToTableEvents(): void {
-        this._table.emptyRowAdded.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        this._table.emptyRowAdded.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._showSaveButton = true;
         });
 
-        this._table.save.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        this._table.save.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._showSaveButton = false;
         });
 
-        this._table.cancel.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        this._table.cancel.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._showSaveButton = false;
         });
 
-        this._table.presetChanged.pipe(takeUntil(this._onDestroy$)).subscribe((state) => {
+        this._table.presetChanged.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((state) => {
             this._searchInputText = state.searchInput?.text ?? '';
         });
     }

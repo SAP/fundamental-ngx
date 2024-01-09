@@ -124,9 +124,9 @@ export class SettingsGeneratorMessagePopoverExampleComponent implements AfterVie
         this.schema = {
             appearance: 'sidebar',
             sidebarWidth: {
-                minWidth: '300px',
-                width: '30%',
-                maxWidth: '400px'
+                minWidth: '20rem',
+                width: '20rem',
+                maxWidth: '20rem'
             },
             items: [
                 {

@@ -1,4 +1,4 @@
-@if (_errorTypes.length > 0) {
+@if (_errorTypes$().length > 0) {
     <fd-popover
         #popover
         placement="top-start"
@@ -11,9 +11,9 @@
                 fd-button
                 type="button"
                 class="fd-message-popover__trigger fd-message-popover__trigger"
-                [ngClass]="'fd-message-popover__trigger--' + _priorityState"
-                [glyph]="'message-' + _priorityFormState"
-                [label]="_priorityStateItemsCount.toString()"
+                [ngClass]="'fd-message-popover__trigger--' + _priorityState$()"
+                [glyph]="'message-' + _priorityFormState$()"
+                [label]="_priorityStateItemsCount$().toString()"
             ></button>
         </fd-popover-control>
         <div>
@@ -21,13 +21,16 @@
                 <div fd-bar barDesign="header" class="fd-bar--growing">
                     <div fd-bar-left>
                         @if (currentScreen === 'list') {
-                            <fd-segmented-button [(ngModel)]="_currentErrorType" (ngModelChange)="_filterErrors()">
+                            <fd-segmented-button
+                                [ngModel]="_currentErrorType$()"
+                                (ngModelChange)="_currentErrorType$.set($event)"
+                            >
                                 <button
                                     fd-button
                                     [label]="'platformMessagePopover.allErrors' | fdTranslate"
                                     value="all"
                                 ></button>
-                                @for (type of _errorTypes; track type) {
+                                @for (type of _errorTypes$(); track type) {
                                     <button fd-button [value]="type.group">
                                         <span
                                             fd-object-status
@@ -57,7 +60,7 @@
             </div>
             <fdp-message-view
                 [currentScreen]="currentScreen"
-                [filteredErrors]="_filteredErrors"
+                [filteredErrors]="_filteredErrors$()"
                 [currentEntry]="currentEntry"
                 (openDetails)="_showDetails($event)"
                 (closePopover)="_closePopover($event)"

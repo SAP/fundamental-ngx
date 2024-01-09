@@ -1,5 +1,4 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { NgTemplateOutlet } from '@angular/common';
 import {
@@ -16,6 +15,7 @@ import {
     Output,
     SimpleChanges,
     ViewEncapsulation,
+    booleanAttribute,
     inject,
     signal
 } from '@angular/core';
@@ -58,21 +58,21 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
 
     /** Whether the list is for parent items. */
     @HostBinding('class.fd-navigation__list--parent-items')
-    @Input({ transform: coerceBooleanProperty })
+    @Input({ transform: booleanAttribute })
     parentItems = false;
 
     /** Whether the list is for child items. */
     @HostBinding('class.fd-navigation__list--child-items')
-    @Input({ transform: coerceBooleanProperty })
+    @Input({ transform: booleanAttribute })
     childItems = false;
 
     /** Whether the list should not grow in height. */
     @HostBinding('class.fd-navigation__list--no-grow')
-    @Input({ transform: coerceBooleanProperty })
+    @Input({ transform: booleanAttribute })
     noGrow = false;
 
     /** Whether the list should handle keyboard navigation. */
-    @Input({ transform: coerceBooleanProperty })
+    @Input({ transform: booleanAttribute })
     withKeyboardNavigation = false;
 
     /** Event emitted when user tries to navigate to the item before the list itself. */

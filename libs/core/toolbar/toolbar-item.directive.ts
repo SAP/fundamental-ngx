@@ -1,4 +1,4 @@
-import { Directive, ElementRef, forwardRef, Input } from '@angular/core';
+import { Directive, ElementRef, forwardRef, inject, Input } from '@angular/core';
 import { OverflowPriority } from '@fundamental-ngx/cdk/utils';
 import { ToolbarItem } from './abstract-toolbar-item.class';
 import { OverflowPriorityEnum } from './toolbar.component';
@@ -9,8 +9,6 @@ import { OverflowPriorityEnum } from './toolbar.component';
     standalone: true
 })
 export class ToolbarItemDirective implements ToolbarItem {
-    /** @hidden */
-    private lastWidth = 0;
     /** The priority of the item. */
     @Input()
     fdOverflowPriority: OverflowPriority = OverflowPriorityEnum.HIGH;
@@ -30,7 +28,7 @@ export class ToolbarItemDirective implements ToolbarItem {
 
     /** @hidden */
     get element(): HTMLElement {
-        return this.elementRef.nativeElement;
+        return this._elementRef.nativeElement;
     }
 
     /** @hidden */
@@ -48,5 +46,8 @@ export class ToolbarItemDirective implements ToolbarItem {
     }
 
     /** @hidden */
-    constructor(public elementRef: ElementRef) {}
+    private lastWidth = 0;
+
+    /** @hidden */
+    private readonly _elementRef = inject(ElementRef);
 }

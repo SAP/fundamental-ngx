@@ -22,12 +22,12 @@ describe('IconTabBarProcessTypeComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(IconTabBarProcessTypeComponent);
         component = fixture.componentInstance;
-        component['_ngZone'] = fakeNgZone as any;
-        component['_cd'] = fakeCdr as any;
+        (component as any)['_ngZone'] = fakeNgZone as any;
+        (component as any)['_cd'] = fakeCdr as any;
 
         component.tabsConfig = generateTestConfig(100);
         fixture.detectChanges();
-        component._selectItem(component._tabs[50]); // Select random item
+        component._selectItem(component._tabs$()[50]); // Select random item
         component._lastVisibleTabIndex = 60; // Random big number
         component.overflowDirective = fakeOverflowDirective as OverflowListDirective;
         component._recalculateVisibleItems(AMOUNT_OF_EXTRA_TABS);
