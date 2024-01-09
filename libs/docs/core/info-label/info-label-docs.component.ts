@@ -9,10 +9,10 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import {
-    InfoLableDefaultExampleComponent,
-    InfoLableNumericIconExampleComponent,
-    InfoLableTextExampleComponent,
-    InfoLableTextIconExampleComponent
+    InfoLabelDefaultExampleComponent,
+    InfoLabelNumericIconExampleComponent,
+    InfoLabelTextExampleComponent,
+    InfoLabelTextIconExampleComponent
 } from './examples/info-label-examples.component';
 
 const InfoLableDefaultExample = 'info-label-default-example.component.html';
@@ -27,13 +27,13 @@ const InfoLableNumericIconExample = 'info-label-icon-numeric-example.component.h
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,
-        InfoLableDefaultExampleComponent,
+        InfoLabelDefaultExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
         DescriptionComponent,
-        InfoLableTextExampleComponent,
-        InfoLableTextIconExampleComponent,
-        InfoLableNumericIconExampleComponent
+        InfoLabelTextExampleComponent,
+        InfoLabelTextIconExampleComponent,
+        InfoLabelNumericIconExampleComponent
     ]
 })
 export class InfoLabelDocsComponent {

@@ -77,7 +77,6 @@ export * from '@fundamental-ngx/core/side-navigation';
 export * from '@fundamental-ngx/core/skeleton';
 export * from '@fundamental-ngx/core/slider';
 export * from '@fundamental-ngx/core/split-button';
-export * from '@fundamental-ngx/core/splitter';
 export * from '@fundamental-ngx/core/status-indicator';
 export * from '@fundamental-ngx/core/step-input';
 export * from '@fundamental-ngx/core/switch';

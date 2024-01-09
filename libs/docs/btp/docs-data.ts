@@ -10,6 +10,7 @@ export const components: SectionInterfaceContent[] = [
     { url: 'btp/button', name: 'Button' },
     { url: 'btp/navigation', name: 'Navigation' },
     { url: 'btp/tool-header', name: 'Tool Header' },
+    { url: 'btp/splitter', name: 'Splitter/Responsive Splitter' },
     { url: 'btp/tool-layout', name: 'Tool Layout' },
     { url: 'btp/search-field', name: 'Search Field' }
 ];

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FdDate } from '@fundamental-ngx/core/datetime';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 import { PlatformSmartFilterBarModule, SmartFilterBarManagedPreset } from '@fundamental-ngx/platform/smart-filter-bar';
 import {
     FilterType,
@@ -30,7 +31,8 @@ export interface CombinedVariantManagementPreset {
         TableDataSourceDirective,
         TableHeaderResizerDirective,
         PlatformTableModule,
-        TableInitialStateDirective
+        TableInitialStateDirective,
+        TitleComponent
     ]
 })
 export class VariantManagementDefaultExampleComponent {

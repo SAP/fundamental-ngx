@@ -2,7 +2,11 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 
 import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { IconFont } from '@fundamental-ngx/core/icon';
-import { InfoLabelComponent as CoreInfoLabelComponent, LabelType } from '@fundamental-ngx/core/info-label';
+import {
+    InfoLabelComponent as CoreInfoLabelComponent,
+    InfoLabelColorInput,
+    LabelType
+} from '@fundamental-ngx/core/info-label';
 
 /**
  * @deprecated Use `InfoLabelComponent` from `@fundamental-ngx/core` instead.
@@ -41,7 +45,7 @@ export class InfoLabelComponent {
 
     /** define the colour of the info label starting form 1 to 10 */
     @Input()
-    color: string;
+    color: Nullable<InfoLabelColorInput> = 7;
 
     /** Sets control aria-label attribute value */
     @Input()

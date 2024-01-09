@@ -2,15 +2,21 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    inject,
     Input,
+    isDevMode,
     OnChanges,
     OnInit,
+    SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
-import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass, CssClassBuilder, HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 import { IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 
 export type LabelType = 'numeric' | 'icon';
+const labelColorRange = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
+export type InfoLabelColor = (typeof labelColorRange)[number];
+export type InfoLabelColorInput = InfoLabelColor | `${InfoLabelColor}`;
 
 @Component({
     selector: 'fd-info-label',
@@ -21,7 +27,7 @@ export type LabelType = 'numeric' | 'icon';
     standalone: true,
     imports: [IconComponent]
 })
-export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
+export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder, HasElementRef {
     /** User's custom classes */
     @Input()
     class = '';
@@ -48,7 +54,7 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
 
     /** Define the colour of the info label starting form 1 to 10 */
     @Input()
-    color: string;
+    color: Nullable<InfoLabelColorInput> = 7;
 
     /** Define the text content of the info label */
     @Input()
@@ -67,17 +73,7 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     ariaLabelledBy: Nullable<string>;
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
+    elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
     /** @hidden */
     @applyCssClass
@@ -88,5 +84,30 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
             this.color ? `fd-info-label--accent-color-${this.color}` : '',
             this.class
         ];
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._validateColorInput();
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.color) {
+            this._validateColorInput();
+        }
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    private _validateColorInput(): void {
+        const matchingColor = labelColorRange.find((color) => color === Number(this.color));
+        if (!matchingColor) {
+            if (isDevMode()) {
+                console.warn(`Invalid color input: ${this.color}. Please provide a number between 1 and 10`);
+            }
+            this.color = 7;
+        }
     }
 }

@@ -6,10 +6,7 @@
     "prefix": "fd",
     "targets": {
         "lint": {
-            "executor": "@nx/eslint:lint",
-            "options": {
-                "lintFilePatterns": ["libs/core/token/**/*.ts", "libs/core/token/**/*.html"]
-            }
+            "executor": "@nx/eslint:lint"
         },
         "test": {
             "executor": "@nx/jest:jest",

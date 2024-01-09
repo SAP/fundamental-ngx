@@ -345,10 +345,6 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('@fundamental-ngx/docs/core/split-button').then(configureCoreRoutes)
             },
             {
-                path: 'splitter',
-                loadChildren: () => import('@fundamental-ngx/docs/core/splitter').then(configureCoreRoutes)
-            },
-            {
                 path: 'status-indicator',
                 loadChildren: () => import('@fundamental-ngx/docs/core/status-indicator').then(configureCoreRoutes)
             },

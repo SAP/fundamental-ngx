@@ -10,7 +10,15 @@
     >
         <fd-popover-control>
             <div class="fd-variant-management__header">
-                <h4 fd-title class="fd-variant-management__title" [headerSize]="headerSize">
+                <h4
+                    fd-title
+                    [ngClass]="{
+                        'fd-variant-management__title': true,
+                        'fd-variant-management__title--dynamic-page': _dynamicPage,
+                        'fd-variant-management__title--dynamic-page--collapsed': _dynamicPageCollapsed$ | async
+                    }"
+                    [headerSize]="headerSize"
+                >
                     {{ activeVariant.name }}
                 </h4>
                 @if (_variantChanged && !readonly) {

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
+import { InfoLabelColorInput, InfoLabelModule } from '@fundamental-ngx/core/info-label';
+
+const infoLabelColors: InfoLabelColorInput[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
 @Component({
     selector: 'fd-info-label-default-example',
@@ -7,7 +9,7 @@ import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
     standalone: true,
     imports: [InfoLabelModule]
 })
-export class InfoLableDefaultExampleComponent {}
+export class InfoLabelDefaultExampleComponent {}
 
 @Component({
     selector: 'fd-info-label-text-example',
@@ -15,7 +17,9 @@ export class InfoLableDefaultExampleComponent {}
     standalone: true,
     imports: [InfoLabelModule]
 })
-export class InfoLableTextExampleComponent {}
+export class InfoLabelTextExampleComponent {
+    infoLabelColors = infoLabelColors;
+}
 
 @Component({
     selector: 'fd-info-label-text-icon-example',
@@ -23,7 +27,9 @@ export class InfoLableTextExampleComponent {}
     standalone: true,
     imports: [InfoLabelModule]
 })
-export class InfoLableTextIconExampleComponent {}
+export class InfoLabelTextIconExampleComponent {
+    infoLabelColors = infoLabelColors;
+}
 
 @Component({
     selector: 'fd-info-label-numeric-icon-example',
@@ -31,4 +37,4 @@ export class InfoLableTextIconExampleComponent {}
     standalone: true,
     imports: [InfoLabelModule]
 })
-export class InfoLableNumericIconExampleComponent {}
+export class InfoLabelNumericIconExampleComponent {}

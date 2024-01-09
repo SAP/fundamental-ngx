@@ -1,0 +1,19 @@
+<div style="height: 300px">
+    <fdb-splitter defaultPaneId="one">
+        <fdb-splitter-pane-container (resize)="onResize($event)">
+            <fdb-splitter-split-pane id="one" size="300px"> Split pane One </fdb-splitter-split-pane>
+
+            <fdb-splitter-split-pane size="300px"> Split pane Two </fdb-splitter-split-pane>
+
+            <fdb-splitter-split-pane>
+                <fdb-splitter-pane-container orientation="horizontal" (resize)="onResize($event)">
+                    <fdb-splitter-split-pane size="150px"> Split pane One, nested </fdb-splitter-split-pane>
+
+                    <fdb-splitter-split-pane size="75px"> Split pane Two, nested </fdb-splitter-split-pane>
+
+                    <fdb-splitter-split-pane> Split pane Three, nested </fdb-splitter-split-pane>
+                </fdb-splitter-pane-container>
+            </fdb-splitter-split-pane>
+        </fdb-splitter-pane-container>
+    </fdb-splitter>
+</div>
