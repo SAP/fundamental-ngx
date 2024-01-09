@@ -24,6 +24,7 @@ import { DataSource, DataSourceDirective } from '@fundamental-ngx/cdk/data-sourc
 import {
     ClickedDirective,
     FDK_SELECTABLE_ITEM_PROVIDER,
+    HasElementRef,
     Nullable,
     SelectableItemDirective,
     SelectableItemToken,
@@ -77,7 +78,7 @@ import { TreeService } from '../../tree.service';
 })
 export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
     extends BaseTreeItem<T, P>
-    implements Partial<SelectableItemToken<HTMLElement, P>>, OnInit, AfterViewInit, OnDestroy
+    implements Partial<SelectableItemToken<HTMLElement, P>>, OnInit, AfterViewInit, OnDestroy, HasElementRef
 {
     /**
      * Tree item value.

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.32...v0.48.0-rc.33) (2024-01-09)
+
+
+### Bug Fixes
+
+* **platform:** simplify class inheritance ([#11198](https://github.com/SAP/fundamental-ngx/issues/11198)) ([81757f2](https://github.com/SAP/fundamental-ngx/commit/81757f2a238e936326e9c4b50749b7f7d0edbd88))
+
+
+### BREAKING CHANGES
+
+* **platform:** Platform Switch component now uses `ariaLabelledBy` instead of `ariaLabelledby`
+
+
+
+
+
 # [0.48.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.31...v0.48.0-rc.32) (2024-01-08)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk

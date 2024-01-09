@@ -1,7 +1,6 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -99,11 +98,8 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
     }
 
     /** @hidden */
-    constructor(
-        protected _cd: ChangeDetectorRef,
-        @Optional() private _rtlService: RtlService
-    ) {
-        super(_cd);
+    constructor(@Optional() private readonly _rtlService: RtlService) {
+        super();
     }
 
     /** Tabindex for button. */

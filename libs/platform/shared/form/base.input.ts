@@ -1,20 +1,14 @@
 import { BooleanInput } from '@angular/cdk/coercion';
 import {
     AfterViewInit,
-    ChangeDetectorRef,
     DestroyRef,
     Directive,
     DoCheck,
     ElementRef,
-    Host,
-    Inject,
     InjectionToken,
     Input,
     OnDestroy,
     OnInit,
-    Optional,
-    Self,
-    SkipSelf,
     TemplateRef,
     ViewChild,
     booleanAttribute,
@@ -22,7 +16,7 @@ import {
     isDevMode
 } from '@angular/core';
 import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 import { Observable, Subject, filter } from 'rxjs';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -57,7 +51,7 @@ let randomId = 0;
 @Directive()
 export abstract class BaseInput
     extends BaseComponent
-    implements PlatformFormFieldControl, ControlValueAccessor, OnInit, DoCheck, AfterViewInit, OnDestroy
+    implements PlatformFormFieldControl, ControlValueAccessor, OnInit, DoCheck, AfterViewInit, OnDestroy, HasElementRef
 {
     /** Input placeholder */
     @Input()
@@ -133,14 +127,6 @@ export abstract class BaseInput
     @Input()
     readonly: boolean;
 
-    /** Binds to control aria-labelledBy attribute */
-    @Input()
-    ariaLabelledBy: Nullable<string>;
-
-    /** Sets control aria-label attribute value */
-    @Input()
-    ariaLabel: Nullable<string>;
-
     /**
      * Tell the component if we are in editing mode.
      */
@@ -150,7 +136,7 @@ export abstract class BaseInput
             return;
         }
         this._editable = value;
-        this._cd.markForCheck();
+        this.markForCheck();
         this.stateChanges.next('editable');
     }
     get editable(): boolean {
@@ -210,6 +196,27 @@ export abstract class BaseInput
     /** @hidden */
     readonly _doCheck$ = inject(FDP_DO_CHECK, { optional: true });
 
+    /** Element reference. */
+    readonly elementRef = inject(ElementRef);
+
+    /** NgControl reference. */
+    readonly ngControl = inject(NgControl, {
+        optional: true,
+        self: true
+    });
+
+    /** Control container reference. */
+    readonly controlContainer = inject(ControlContainer, {
+        optional: true,
+        skipSelf: true
+    });
+
+    /** Form reference. */
+    readonly ngForm = inject(NgForm, {
+        optional: true,
+        skipSelf: true
+    });
+
     /** @hidden */
     private readonly _externalSubmit = inject(FDP_FORM_SUBMIT, { optional: true });
 
@@ -240,26 +247,30 @@ export abstract class BaseInput
     private _controlInvalid = false;
 
     /** @hidden */
-    protected constructor(
-        cd: ChangeDetectorRef,
-        readonly elementRef: ElementRef,
-        @Optional() @Self() readonly ngControl: NgControl,
-        @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
-        @Optional() @SkipSelf() readonly ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
-    ) {
+    constructor() {
         /**
          * We do not use Injector.get() approach here because there is a bug
          * with this signature https://github.com/angular/angular/issues/31776
          * where "get()" method doesn't take into account "flag" option"
          *
          */
-        super(cd);
+        super();
 
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
         }
+
+        const formField = inject<PlatformFormField>(FD_FORM_FIELD, {
+            optional: true,
+            skipSelf: true,
+            host: true
+        });
+
+        const formControl = inject<PlatformFormFieldControl>(FD_FORM_FIELD_CONTROL, {
+            optional: true,
+            skipSelf: true,
+            host: true
+        });
 
         // We have to ignore "formField" if there is "formControl" wrapper
         this.formField = formField && !formControl ? formField : null;
@@ -328,10 +339,10 @@ export abstract class BaseInput
                     template: this.formField!.innerErrorRenderers,
                     hasErrors: this.formField!.hasErrors()
                 };
-                this._cd.detectChanges();
+                this.detectChanges();
             });
 
-        this._cd.detectChanges();
+        this.detectChanges();
     }
 
     /** @hidden */
@@ -356,7 +367,7 @@ export abstract class BaseInput
     /** @hidden */
     setDisabledState(isDisabled: BooleanInput): void {
         const newState = booleanAttribute(isDisabled);
-        this._cd.markForCheck();
+        this.markForCheck();
         if (newState !== this._disabled) {
             this._disabled = newState;
             this.stateChanges.next('setDisabledState');
@@ -369,7 +380,7 @@ export abstract class BaseInput
     writeValue(value: any): void {
         this._value = value;
         this.stateChanges.next('writeValue');
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /**
@@ -432,7 +443,7 @@ export abstract class BaseInput
         if (newStatusIsError !== this.controlInvalid) {
             this._controlInvalid = newStatusIsError;
             this.stateChanges.next('updateErrorState');
-            this._cd.markForCheck();
+            this.markForCheck();
         }
     }
 
@@ -448,7 +459,7 @@ export abstract class BaseInput
             if (emitOnChange) {
                 this.onChange(value);
             }
-            this._cd.markForCheck();
+            this.markForCheck();
         }
     }
 

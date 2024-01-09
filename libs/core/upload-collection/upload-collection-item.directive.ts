@@ -8,8 +8,10 @@ import {
     HostListener,
     Input,
     OnDestroy,
-    Output
+    Output,
+    inject
 } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { LINK_CLASS_NAME } from '@fundamental-ngx/core/link';
 import { Subscription } from 'rxjs';
 import { UploadCollectionButtonGroupComponent } from './upload-collection-button-group/upload-collection-button-group.component';
@@ -25,7 +27,7 @@ import {
     host: { class: 'fd-upload-collection__item' },
     standalone: true
 })
-export class UploadCollectionItemDirective implements AfterContentInit, OnDestroy, AfterViewInit {
+export class UploadCollectionItemDirective implements AfterContentInit, OnDestroy, AfterViewInit, HasElementRef {
     /** The name of the file, not including the type extension. */
     @Input()
     fileName: string;
@@ -74,30 +76,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
     containerWidth: number;
 
     /** @hidden */
-    ngAfterContentInit(): void {
-        this.fileNameFull = this.fileName + '.' + this.extension;
-        this._titleDirective.elRef.nativeElement.tabIndex = '0';
-        this._titleDirective.elRef.nativeElement.innerHTML =
-            '<span class="' + LINK_CLASS_NAME.linkContent + '">' + this.fileNameFull + '</span>';
-        this._handleDeleteClickedSubscription();
-        this._handleOkClickedSubscription();
-        this._handleEditClickedSubscription();
-        this._handleFormItemInputChangedSubscription();
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        // Process resize after all the children views is initialized
-        setTimeout(() => this.onResize());
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
-    }
-
-    /** @hidden */
-    constructor(public elementRef: ElementRef) {}
+    readonly elementRef = inject(ElementRef);
 
     /** @hidden */
     @HostListener('window:resize', [])
@@ -122,6 +101,29 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         }
 
         this.previousContainerWidth = this.containerWidth;
+    }
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        this.fileNameFull = this.fileName + '.' + this.extension;
+        this._titleDirective.elRef.nativeElement.tabIndex = '0';
+        this._titleDirective.elRef.nativeElement.innerHTML =
+            '<span class="' + LINK_CLASS_NAME.linkContent + '">' + this.fileNameFull + '</span>';
+        this._handleDeleteClickedSubscription();
+        this._handleOkClickedSubscription();
+        this._handleEditClickedSubscription();
+        this._handleFormItemInputChangedSubscription();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        // Process resize after all the children views is initialized
+        setTimeout(() => this.onResize());
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
     }
 
     /** @hidden */

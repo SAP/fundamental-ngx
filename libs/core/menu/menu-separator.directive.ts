@@ -1,4 +1,5 @@
 import { Directive, ElementRef, inject } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 
 /**
  * @deprecated
@@ -12,7 +13,7 @@ import { Directive, ElementRef, inject } from '@angular/core';
     },
     standalone: true
 })
-export class MenuSeparatorDirective {
+export class MenuSeparatorDirective implements HasElementRef {
     /** @hidden */
     readonly elementRef = inject(ElementRef);
 

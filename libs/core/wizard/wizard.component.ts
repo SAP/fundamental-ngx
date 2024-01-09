@@ -505,7 +505,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                     }
                     step.stepIndicator.setStackedItems(this.stackedStepsLeft);
                 } else {
-                    step.stepIndicator.stackedItems = [];
+                    step.stepIndicator.stackedItems$.set([]);
                 }
             }
         });

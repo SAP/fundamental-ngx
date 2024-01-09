@@ -1,24 +1,10 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    EventEmitter,
-    Host,
-    Inject,
-    Input,
-    Optional,
-    Output,
-    Self,
-    SkipSelf,
-    ViewEncapsulation
-} from '@angular/core';
-import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { SliderComponent as CoreSliderComponent, SliderTickMark } from '@fundamental-ngx/core/slider';
-import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput } from '@fundamental-ngx/platform/shared';
 
 export type SliderCustomValue = Omit<SliderTickMark, 'position'>;
 
@@ -103,19 +89,6 @@ export class SliderComponent extends BaseInput {
      */
     @Output()
     readonly sliderChange = new EventEmitter<SliderChangeEvent>();
-
-    /** @hidden */
-    constructor(
-        cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        @Optional() @Self() ngControl: NgControl,
-        @Optional() @SkipSelf() controlContainer: ControlContainer,
-        @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
-    ) {
-        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
-    }
 
     /** value for slider control */
     @Input()

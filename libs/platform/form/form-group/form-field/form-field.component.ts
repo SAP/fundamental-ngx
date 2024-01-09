@@ -53,7 +53,6 @@ import {
     FormFieldGroup,
     FormGroupContainer,
     HintContent,
-    LabelLayout,
     PlatformFormField,
     PlatformFormFieldControl,
     RESPONSIVE_BREAKPOINTS_CONFIG,
@@ -404,9 +403,6 @@ export class FormFieldComponent
 
     /** @hidden */
     private readonly _responsiveBreakPointConfig: ResponsiveBreakPointConfig;
-
-    /** @hidden */
-    private _labelLayout: LabelLayout;
 
     /** @hidden */
     private _labelColumnLayout: ColumnLayout;

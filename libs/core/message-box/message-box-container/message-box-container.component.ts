@@ -61,10 +61,10 @@ export class MessageBoxContainerComponent
         public ref: MessageBoxRef,
         private _destroyRef: DestroyRef,
         elementRef: ElementRef,
-        changeDetectorRef: ChangeDetectorRef,
+        private readonly _cdr: ChangeDetectorRef,
         injector: Injector
     ) {
-        super(elementRef, injector, changeDetectorRef);
+        super(elementRef, injector);
     }
 
     /** @hidden */

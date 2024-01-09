@@ -14,7 +14,7 @@ import {
     isDevMode
 } from '@angular/core';
 import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 import { Subject, Subscription } from 'rxjs';
 import { isValidControlState } from '../helpers/state';
 import { BaseCVA } from '../models/cva';
@@ -29,7 +29,15 @@ let randomId = 0;
     standalone: true
 })
 export class CvaDirective<T = any>
-    implements BaseCVA, FormFieldControl, OnInit, DoCheck, AfterViewInit, OnDestroy, ControlValueAccessor
+    implements
+        HasElementRef,
+        BaseCVA,
+        FormFieldControl,
+        OnInit,
+        DoCheck,
+        AfterViewInit,
+        OnDestroy,
+        ControlValueAccessor
 {
     /**
      * NgControl instance.
@@ -376,10 +384,5 @@ export class CvaDirective<T = any>
     /** @hidden */
     private _markForCheck(): void {
         this.markForCheck.emit();
-    }
-
-    /** @hidden */
-    private _detectChanges(): void {
-        this.detectChanges.emit();
     }
 }

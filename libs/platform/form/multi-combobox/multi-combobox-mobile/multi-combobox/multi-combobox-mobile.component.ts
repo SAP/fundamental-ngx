@@ -1,13 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    Inject,
-    OnInit,
-    Optional,
-    TemplateRef,
-    ViewChild
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
@@ -15,13 +6,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import {
-    MOBILE_MODE_CONFIG,
-    MobileModeBase,
-    MobileModeConfigToken,
-    MobileModeControl
-} from '@fundamental-ngx/core/mobile-mode';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -66,13 +52,8 @@ export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxIn
     private _selectedBackup: SelectableOptionItem[];
 
     /** @hidden */
-    constructor(
-        elementRef: ElementRef,
-        dialogService: DialogService,
-        @Inject(MULTICOMBOBOX_COMPONENT) multiComboboxComponent: MultiComboboxInterface,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
-    ) {
-        super(elementRef, dialogService, multiComboboxComponent, MobileModeControl.MULTI_COMBOBOX, mobileModes);
+    constructor(@Inject(MULTICOMBOBOX_COMPONENT) multiComboboxComponent: MultiComboboxInterface) {
+        super(multiComboboxComponent, MobileModeControl.MULTI_COMBOBOX);
     }
 
     /** @hidden */

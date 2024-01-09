@@ -40,14 +40,18 @@ export abstract class MobileModeBase<T extends MobileMode> {
     protected readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
+    protected readonly _elementRef = inject(ElementRef);
+
+    /** @hidden */
+    protected readonly _dialogService = inject(DialogService);
+
+    private readonly _mobileModes = inject<MobileModeConfigToken[]>(MOBILE_MODE_CONFIG, { optional: true }) || [];
+
+    /** @hidden */
     constructor(
-        protected _elementRef: ElementRef,
-        protected _dialogService: DialogService,
         protected _component: T,
-        protected readonly target: MobileModeControl,
-        private readonly _mobileModes: MobileModeConfigToken[]
+        protected readonly target: MobileModeControl
     ) {
-        this._mobileModes = this._mobileModes || [];
         this.mobileConfig = this._getMobileModeConfig();
         this.dialogConfig = this.mobileConfig.dialogConfig;
     }

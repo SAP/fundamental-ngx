@@ -66,11 +66,6 @@ export class PlatformTableCellResizableDirective
     });
 
     /** @hidden */
-    constructor() {
-        super();
-    }
-
-    /** @hidden */
     ngOnInit(): void {
         this._zone.runOutsideAngular(() => {
             fromEvent<MouseEvent>(this.elementRef.nativeElement, 'mousemove')
