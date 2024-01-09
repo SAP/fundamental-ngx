@@ -215,4 +215,11 @@ describe('ComboboxComponent default values', () => {
 
         expect(combobox.value.id).toBe(component.dataSource[8].id);
     });
+
+    it('should focus the combobox input on close', () => {
+        jest.spyOn(combobox.searchInputElement.nativeElement, 'focus');
+        combobox.isOpen = true;
+        combobox.isOpenChangeHandle(false);
+        expect(combobox.searchInputElement.nativeElement.focus).toHaveBeenCalledWith({ preventScroll: true });
+    });
 });
