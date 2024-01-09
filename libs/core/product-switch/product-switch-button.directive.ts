@@ -1,4 +1,4 @@
-import { Directive, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
     selector: '[fdProductSwitchButton]',
@@ -6,8 +6,5 @@ import { Directive, TemplateRef, ViewContainerRef } from '@angular/core';
 })
 export class ProductSwitchButtonDirective {
     /** @hidden */
-    constructor(
-        readonly templateRef: TemplateRef<any>,
-        private _viewContainerRef: ViewContainerRef
-    ) {}
+    constructor(readonly templateRef: TemplateRef<any>) {}
 }

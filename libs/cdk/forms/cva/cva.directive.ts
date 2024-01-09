@@ -385,9 +385,4 @@ export class CvaDirective<T = any>
     private _markForCheck(): void {
         this.markForCheck.emit();
     }
-
-    /** @hidden */
-    private _detectChanges(): void {
-        this.detectChanges.emit();
-    }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Inject, Optional, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Optional, ViewEncapsulation } from '@angular/core';
 import { FD_DIALOG_BODY_COMPONENT } from '../tokens';
 
 import { AsyncPipe } from '@angular/common';
@@ -44,7 +44,6 @@ export class DialogBodyComponent {
     constructor(
         public readonly elementRef: ElementRef,
         @Optional() public dialogConfig: DialogConfig,
-        @Optional() public dialogRef: DialogRef,
-        @Inject(ScrollbarDirective) private _scrollbarDirective: ScrollbarDirective
+        @Optional() public dialogRef: DialogRef
     ) {}
 }
