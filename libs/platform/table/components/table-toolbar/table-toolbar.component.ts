@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     ToolbarComponent,
     ToolbarItemDirective,
@@ -22,7 +23,6 @@ import {
     ToolbarSpacerDirective
 } from '@fundamental-ngx/core/toolbar';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { SearchFieldComponent, SearchInput, SuggestionItem } from '@fundamental-ngx/platform/search-field';
 import { Table, TableService } from '@fundamental-ngx/platform/table-helpers';
 import { TABLE_TOOLBAR, TableToolbarInterface } from './table-toolbar';

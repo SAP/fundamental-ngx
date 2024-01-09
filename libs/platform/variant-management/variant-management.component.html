@@ -21,7 +21,7 @@
                 >
                     {{ activeVariant.name }}
                 </h4>
-                @if (_variantChanged) {
+                @if (_variantChanged && !readonly) {
                     <span
                         class="fd-variant-management__dirty-indicator"
                         [class.fd-variant-management__dirty-indicator--custom]="!!dirtyLabel"
@@ -32,7 +32,7 @@
                         ></ng-template>
                     </span>
                 }
-                <fdp-menu-button type="transparent"> </fdp-menu-button>
+                <button fd-button [fdMenu]="true" fdType="transparent" [attr.aria-haspopup]="true"></button>
             </div>
         </fd-popover-control>
         <fd-popover-body>
@@ -71,29 +71,31 @@
                     </li>
                 }
             </ul>
-            <div fd-popover-body-footer>
-                <div fd-bar barDesign="footer">
-                    <div fd-bar-right>
-                        @if (!activeVariant.readonly && _variantChanged) {
+            @if (!readonly) {
+                <div fd-popover-body-footer>
+                    <div fd-bar barDesign="footer">
+                        <div fd-bar-right>
+                            @if (!activeVariant.readonly && _variantChanged) {
+                                <fd-button-bar
+                                    fdType="emphasized"
+                                    [label]="'platformVariantManagement.save' | fdTranslate"
+                                    (click)="saveCurrentVariant()"
+                                >
+                                </fd-button-bar>
+                            }
                             <fd-button-bar
-                                fdType="emphasized"
-                                [label]="'platformVariantManagement.save' | fdTranslate"
-                                (click)="saveCurrentVariant()"
-                            >
-                            </fd-button-bar>
-                        }
-                        <fd-button-bar
-                            [fdType]="activeVariant.readonly || !_variantChanged ? 'emphasized' : 'transparent'"
-                            [label]="'platformVariantManagement.saveAs' | fdTranslate"
-                            (click)="_openSaveDialog()"
-                        ></fd-button-bar>
-                        <fd-button-bar
-                            [label]="'platformVariantManagement.manage' | fdTranslate"
-                            (click)="_openManageDialog()"
-                        ></fd-button-bar>
+                                [fdType]="activeVariant.readonly || !_variantChanged ? 'emphasized' : 'transparent'"
+                                [label]="'platformVariantManagement.saveAs' | fdTranslate"
+                                (click)="_openSaveDialog()"
+                            ></fd-button-bar>
+                            <fd-button-bar
+                                [label]="'platformVariantManagement.manage' | fdTranslate"
+                                (click)="_openManageDialog()"
+                            ></fd-button-bar>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         </fd-popover-body>
     </fd-popover>
 }

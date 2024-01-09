@@ -11,7 +11,8 @@ import {
     ViewChild,
     ViewEncapsulation,
     effect,
-    inject
+    inject,
+    booleanAttribute
 } from '@angular/core';
 import { FilterStringsPipe, Nullable } from '@fundamental-ngx/cdk/utils';
 import {
@@ -21,6 +22,7 @@ import {
     BarRightDirective,
     ButtonBarComponent
 } from '@fundamental-ngx/core/bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { DynamicPage, FD_DYNAMIC_PAGE } from '@fundamental-ngx/core/dynamic-page';
 import { ListComponent, ListItemComponent, ListLinkDirective, ListTitleDirective } from '@fundamental-ngx/core/list';
@@ -66,7 +68,6 @@ import { VariantItem } from './variant-item.class';
         PopoverControlComponent,
         TitleComponent,
         NgTemplateOutlet,
-        MenuButtonComponent,
         PopoverBodyComponent,
         PopoverBodyHeaderDirective,
         BarComponent,
@@ -83,7 +84,8 @@ import { VariantItem } from './variant-item.class';
         FdTranslatePipe,
         FilterStringsPipe,
         AsyncPipe,
-        NgClass
+        NgClass,
+        ButtonComponent
     ]
 })
 export class VariantManagementComponent<T = any> implements VariantManagement<T> {
@@ -113,8 +115,12 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
     userName: string;
 
     /** Whether to display search field for variants list. */
-    @Input()
+    @Input({ transform: booleanAttribute })
     displaySearch = false;
+
+    /** Whether the variant management component is in readonly mode. */
+    @Input({ transform: booleanAttribute })
+    readonly = false;
 
     /** Event emitted when variants data has been updated. */
     @Output()
@@ -208,6 +214,9 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
      * Saves current variant with its configuration.
      */
     saveCurrentVariant(): void {
+        if (this.readonly) {
+            return;
+        }
         const currentVariantIndex = this._variants.findIndex((variant) => variant.id === this.activeVariant.id);
         this._variants[currentVariantIndex] = this.activeVariant;
         this._originalActiveVariant = this.activeVariant.clone({}, false);
@@ -217,6 +226,9 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
 
     /** @hidden */
     _openSaveDialog(): void {
+        if (this.readonly) {
+            return;
+        }
         this._popover?.close(false);
         const dialogRef = this._dialogService.open<SaveDialogContext>(ManageVariantItemComponent, {
             data: {
@@ -251,6 +263,9 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
 
     /** @hidden */
     _openManageDialog(): void {
+        if (this.readonly) {
+            return;
+        }
         this._popover?.close(false);
         const dialogRef = this._dialogService.open<VariantItem[]>(ManageVariantsDialogComponent, {
             data: this._variants

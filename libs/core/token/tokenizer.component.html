@@ -1,13 +1,14 @@
 <div class="fd-tokenizer fd-tokenizer--scrollable" [class.is-focus]="_tokenizerHasFocus">
     <div class="fd-tokenizer__inner" #tokenizerInner>
         <div
+            [attr.aria-hidden]="tokenList.length === 0"
             role="listbox"
             [attr.aria-label]="'coreTokenizer.tokenizerLabel' | fdTranslate"
             [style.width]="_tokensContainerWidth"
         >
             <ng-content select="fd-token"></ng-content>
         </div>
-        @if (_showOverflowPopover && (_contentDensityObserver.isCompactSignal() || compactCollapse)) {
+        @if (showOverflowPopover && (_contentDensityObserver.isCompactSignal() || compactCollapse)) {
             <ng-template [ngTemplateOutlet]="tokensOverflow"></ng-template>
         } @else {
             @if (_showMoreElement && _hiddenTokens.length > 0) {

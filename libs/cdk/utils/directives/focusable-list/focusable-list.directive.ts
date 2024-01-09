@@ -1,5 +1,4 @@
 import { FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
 import { DOCUMENT } from '@angular/common';
 import {
@@ -17,6 +16,7 @@ import {
     Output,
     Renderer2,
     SimpleChanges,
+    booleanAttribute,
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -76,9 +76,9 @@ export interface ItemsQueryList<T> extends Iterable<T> {
 })
 export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestroy {
     /** Whether the whole list should be focusable, handy in grids. */
-    @Input()
-    set focusable(value: BooleanInput) {
-        this._focusable = coerceBooleanProperty(value);
+    @Input({ transform: booleanAttribute })
+    set focusable(value: boolean) {
+        this._focusable = value;
 
         this.setTabbable(this._focusable);
     }
@@ -98,8 +98,8 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     /**
      * Configures wrapping mode which determines whether the active item will wrap to the other end of list when there are no more items in the given direction.
      */
-    @Input({ transform: coerceBooleanProperty })
-    wrap: BooleanInput = false;
+    @Input({ transform: booleanAttribute })
+    wrap = false;
 
     /** Function, which returns a string to be announced by screen-reader whenever an row which is in grid receives focus. */
     @Input()

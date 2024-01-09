@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    booleanAttribute,
     ChangeDetectorRef,
     ContentChildren,
     Directive,
@@ -13,7 +14,6 @@ import {
 } from '@angular/core';
 import { startWith } from 'rxjs/operators';
 
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
 import { TableService } from '../table.service';
 import { TableCellDirective } from './table-cell.directive';
@@ -59,9 +59,9 @@ export class TableRowDirective extends FocusableListDirective implements AfterVi
 
     /** Whether the table row is focusable */
     @HostBinding('class.fd-table__row--focusable')
-    @Input()
-    set focusable(value: BooleanInput) {
-        this._focusable = coerceBooleanProperty(value);
+    @Input({ transform: booleanAttribute })
+    set focusable(value: boolean) {
+        this._focusable = value;
 
         this.setTabbable(this._focusable);
     }

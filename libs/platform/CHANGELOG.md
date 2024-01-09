@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.31...v0.48.0-rc.32) (2024-01-08)
+
+
+### Bug Fixes
+
+* **platform:** table p13 selection a11y fixes ([#11150](https://github.com/SAP/fundamental-ngx/issues/11150)) ([dc6d1a1](https://github.com/SAP/fundamental-ngx/commit/dc6d1a118c6b2bdac687dfbfccc6ec78f0e0d1bb))
+
+
+
+
+
 # [0.48.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.30...v0.48.0-rc.31) (2024-01-08)
 
 

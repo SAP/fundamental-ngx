@@ -19,8 +19,8 @@ import { WizardModule, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { PreparedWizardGeneratorItem, WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
 import { WizardNavigationButtons } from '../../interfaces/wizard-navigation-buttons.interface';
 import { WizardGeneratorService } from '../../wizard-generator.service';

@@ -1,5 +1,5 @@
 import { FocusableOption, LiveAnnouncer } from '@angular/cdk/a11y';
-import { BooleanInput, coerceArray, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import { coerceArray, coerceNumberProperty } from '@angular/cdk/coercion';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -18,7 +18,8 @@ import {
     TemplateRef,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    booleanAttribute
 } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { Observable, Subscription, firstValueFrom } from 'rxjs';
@@ -106,13 +107,8 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     id: string = 'fd-pagination-' + paginationUniqueId++;
 
     /** Whether component should be shown in the mobile mode. */
-    @Input()
-    set mobile(value: BooleanInput) {
-        this._mobile = coerceBooleanProperty(value);
-    }
-    get mobile(): boolean {
-        return this._mobile;
-    }
+    @Input({ transform: booleanAttribute })
+    mobile = false;
 
     /** Represents the total number of items. */
     @Input()
@@ -244,9 +240,6 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
     /** @hidden */
     private _itemsPerPage: number = DEFAULT_ITEMS_PER_PAGE;
-
-    /** @hidden */
-    private _mobile = false;
 
     /** @hidden */
     private _itemsPerPageOptions: number[] = [];

@@ -1,5 +1,4 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { BooleanInput } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { NgTemplateOutlet } from '@angular/common';
 import {
@@ -175,12 +174,12 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     _items: TreeItem<TreeItemGeneric<T>>[] = [];
 
     /** @hidden */
-    get multiple(): BooleanInput {
+    get multiple(): boolean {
         return this.selection === 'multiple';
     }
 
     /** @hidden */
-    get toggle(): BooleanInput {
+    get toggle(): boolean {
         return true;
     }
 

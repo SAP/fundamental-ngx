@@ -3,11 +3,11 @@
         <fdp-multi-input
             [id]="id"
             [addOnButtonClickFn]="openConditionsDialog"
-            [autofocus]="true"
             [dataSource]="formItem.choices || []"
             [formControlName]="name"
             [name]="name"
             [placeholder]="formItem.placeholder || formItem.message"
+            [validationStrategy]="['submitted']"
             displayKey="displayValue"
             [glyphAriaLabel]="'platformSmartFilterBar.manageFieldConditions' | fdTranslate"
         >

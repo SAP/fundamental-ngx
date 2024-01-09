@@ -13,9 +13,9 @@ import {
 import { FormsModule } from '@angular/forms';
 import { warnOnce } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { ButtonComponent } from '@fundamental-ngx/platform/button';
 
 /**
  * @deprecated

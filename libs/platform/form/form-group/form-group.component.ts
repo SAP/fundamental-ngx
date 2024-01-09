@@ -16,7 +16,6 @@
  *
  *
  */
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -39,6 +38,7 @@ import {
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
+    booleanAttribute,
     forwardRef,
     inject
 } from '@angular/core';
@@ -281,13 +281,8 @@ export class FormGroupComponent
     i18Strings: TemplateRef<any>;
 
     /** Whether to wrap all the provided content in a `<form>` */
-    @Input()
-    set useForm(value: BooleanInput) {
-        this._useForm = coerceBooleanProperty(value);
-    }
-    get useForm(): boolean {
-        return this._useForm;
-    }
+    @Input({ transform: booleanAttribute })
+    useForm = false;
 
     /**
      * Specify the column layout in the format `XLn-Ln-Mn-Sn` where n is the number of columns and can be different for each size.
@@ -375,9 +370,6 @@ export class FormGroupComponent
 
     /** @hidden */
     private _inlineColumnLayout = DefaultVerticalFieldLayout;
-
-    /** @hidden */
-    private _useForm = false;
 
     /**
      * @hidden

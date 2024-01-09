@@ -1,8 +1,19 @@
 //Cutomization based on the width of the input used
 
+@mixin fd-compact() {
+    @at-root {
+        [class*='--compact'] &:not([class*='--cozy']):not([class*='--condensed']),
+        .is-compact &:not(.is-cozy):not(.is-condensed),
+        &[class*='--compact'],
+        &.is-compact {
+            @content;
+        }
+    }
+}
+
 .fd-multi-input-tokenizer-custom {
     width: calc(100% - 2.25rem);
-    &--compact {
+    @include fd-compact() {
         width: calc(100% - 2rem);
     }
 }

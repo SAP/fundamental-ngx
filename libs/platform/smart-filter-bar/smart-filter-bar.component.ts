@@ -1,8 +1,9 @@
 import {
     AfterViewInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
+    computed,
     ContentChildren,
     DestroyRef,
     EventEmitter,
@@ -13,14 +14,15 @@ import {
     Output,
     Provider,
     QueryList,
+    signal,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { BehaviorSubject, debounceTime, filter, firstValueFrom, Observable, Subscription } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { BehaviorSubject, debounceTime, filter, firstValueFrom, Observable, Subject, Subscription } from 'rxjs';
+import { map, startWith, take, takeUntil } from 'rxjs/operators';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
@@ -35,9 +37,9 @@ import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import { FDP_PRESET_MANAGED_COMPONENT, SelectItem } from '@fundamental-ngx/platform/shared';
 import { CollectionFilterGroup, FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
 
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     ToolbarComponent,
     ToolbarItemDirective,
@@ -45,7 +47,6 @@ import {
     ToolbarSpacerDirective
 } from '@fundamental-ngx/core/toolbar';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { SearchFieldComponent } from '@fundamental-ngx/platform/search-field';
 import { SmartFilterBarConditionFieldComponent } from './components/smart-filter-bar-condition-field/smart-filter-bar-condition-field.component';
 import { SmartFilterBarSettingsDialogComponent } from './components/smart-filter-bar-settings-dialog/smart-filter-bar-settings-dialog.component';
@@ -81,7 +82,7 @@ const dialogConfig: DialogConfig = {
     verticalPadding: true,
     minWidth: '30rem',
     /** 88px it's the header + footer height */
-    bodyMinHeight: 'calc(50vh - 88px)'
+    bodyMinHeight: 'calc(50vh - 5.5rem)'
 };
 
 const smartFilterBarProvider: Provider = {
@@ -142,14 +143,8 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     /**
      * Whether smart filter bar background should be transparent.
      */
-    @Input()
-    set transparent(value: BooleanInput) {
-        this._transparent = coerceBooleanProperty(value);
-    }
-
-    get transparent(): boolean {
-        return this._transparent;
-    }
+    @Input({ transform: booleanAttribute })
+    transparent = false;
 
     /**
      * Columns layout.
@@ -160,8 +155,14 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     /**
      * Whether to update filters when they are selected. Otherwise, filters will be applied only by pressing "Go" button.
      */
-    @Input()
+    @Input({ transform: booleanAttribute })
     liveUpdate = false;
+
+    /**
+     * Whether to hide Toolbar.
+     */
+    @Input({ transform: booleanAttribute })
+    hideToolbar = false;
 
     /**
      * Event emitted when the selected filters have been changed.
@@ -189,6 +190,9 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      */
     filterBy: CollectionFilterGroup[] = [];
 
+    /** Whether the filters section should be shown. */
+    showFilterBar$ = signal(true);
+
     /**
      * Search field value to apply for the subject's data source.
      */
@@ -196,14 +200,15 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     /** @Hidden */
     _toolbarItems: TemplateRef<any>[] = [];
     /** @hidden */
-    _formItems: DynamicFormItem[];
-    /** @hidden */
-    _selectedFilters: string[] = [];
-    /** @hidden */
-    _showFilterBar = true;
+    _formItems = signal<DynamicFormItem[] | null>(null);
+    /** Selected filters. */
+    selectedFilters$ = signal<string[]>([]);
 
-    /** @hidden */
-    get _loading(): boolean {
+    /** Selected filters count. */
+    selectedFiltersCount$ = computed(() => this.selectedFilters$().length);
+
+    /** Loading state. */
+    get loading(): boolean {
         return this._subject?.getDataSource() ? this._subject.getDataSource().isDataLoading : true;
     }
 
@@ -212,9 +217,6 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
 
     /** @hidden */
     private _subjectSubscriptions = new Subscription();
-
-    /** @hidden */
-    private _transparent = false;
 
     /** @hidden */
     private readonly _formGeneratorReady = new BehaviorSubject<boolean>(false);
@@ -226,9 +228,11 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     private _subject!: SmartFilterBarSubjectDirective;
 
     /** @hidden */
+    private _refresh$ = new Subject<void>();
+
+    /** @hidden */
     constructor(
         private _dialogService: DialogService,
-        private _cdr: ChangeDetectorRef,
         private _smartFilterBarService: SmartFilterBarService,
         private _fgService: FormGeneratorService,
         private _injector: Injector,
@@ -240,17 +244,19 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._toolbarItems = this._toolbarItemRefs.toArray().map((ref) => ref.templateRef);
-
-        this._toolbarItemRefs.changes.subscribe(() => {
-            this._toolbarItems = this._toolbarItemRefs.toArray().map((ref) => ref.templateRef);
-        });
+        this._subscriptions.add(
+            this._toolbarItemRefs.changes.pipe(startWith(null)).subscribe(() => {
+                this._toolbarItems = this._toolbarItemRefs.toArray().map((ref) => ref.templateRef);
+            })
+        );
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._unsubscribeFromSubject();
+        this._refresh$.next();
+        this._refresh$.complete();
     }
 
     /**
@@ -268,7 +274,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
         const dialogData: SmartFilterSettingsDialogConfig = {
             fields: columns,
             filterBy: this.filterBy,
-            selectedFilters: this._selectedFilters
+            selectedFilters: this.selectedFilters$()
         };
 
         const dialogRef = this._dialogService.open(
@@ -282,19 +288,22 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
             this._injector
         );
 
-        dialogRef.afterClosed.pipe(take(1)).subscribe((selectedFilters: string[]) => {
-            this._setSelectedFilters(selectedFilters);
+        dialogRef.afterClosed.pipe(take(1)).subscribe({
+            next: (selectedFilters: string[]) => {
+                this._setSelectedFilters(selectedFilters);
+            },
+            error: () => {}
         });
     }
 
-    /** @hidden */
-    _onSearchInputChange(event: SearchInput): void {
+    /** Callback function when search query changed. */
+    onSearchInputChange(event: SearchInput): void {
         this.search = event;
         this.searchInputChanged.emit(event);
     }
 
-    /** @hidden */
-    _cancelSearch(): void {
+    /** Clear search query. */
+    cancelSearch(): void {
         this.search = undefined;
 
         if (this.liveUpdate) {
@@ -316,35 +325,44 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
         this.filterBy = data.filterBy;
         this.search = data.search;
 
-        this._formGeneratorReady.pipe(filter((value) => value)).subscribe(async () => {
-            // Reset form
-            this._fgService.resetForm(this._formGenerator.form);
+        this._refresh$.next();
+        this._refresh$.complete();
+        this._refresh$ = new Subject<void>();
 
-            // Set new data
-            for (const filterBy of this.filterBy) {
-                const control = this._fgService.getFormControl(this._formGenerator.form, filterBy.field);
+        this._formGeneratorReady
+            .pipe(
+                filter((value) => value),
+                takeUntil(this._refresh$)
+            )
+            .subscribe(async () => {
+                // Reset form
+                this._fgService.resetForm(this._formGenerator.form);
 
-                if (!control) {
-                    continue;
+                // Set new data
+                for (const filterBy of this.filterBy) {
+                    const control = this._fgService.getFormControl(this._formGenerator.form, filterBy.field);
+
+                    if (!control) {
+                        continue;
+                    }
+
+                    const formItem = control.formItem as PreparedDynamicFormFieldItem;
+
+                    const condition = this._smartFilterBarService.transformCollectionFilter(filterBy);
+
+                    const selectedConditions = await this._smartFilterBarService.getConditionFieldSelectedVariants(
+                        formItem,
+                        condition
+                    );
+                    control?.setValue(selectedConditions);
                 }
 
-                const formItem = control.formItem as PreparedDynamicFormFieldItem;
+                this._setSelectedFilters(this.filterBy.map((filterBy) => filterBy.field));
 
-                const condition = this._smartFilterBarService.transformCollectionFilter(filterBy);
-
-                const selectedConditions = await this._smartFilterBarService.getConditionFieldSelectedVariants(
-                    formItem,
-                    condition
-                );
-                control?.setValue(selectedConditions);
-            }
-
-            this._setSelectedFilters(this.filterBy.map((filterBy) => filterBy.field));
-
-            const source = this.subject.getDataSource();
-            source.dataProvider.setFilters(this.filterBy, this.search);
-            this.subject.getSubject().fetch();
-        });
+                const source = this.subject.getDataSource();
+                source.dataProvider.setFilters(this.filterBy, this.search);
+                this.subject.getSubject().fetch();
+            });
     }
 
     /** Returns current preset configuration. */
@@ -371,7 +389,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      */
     _onFormCreated(): void {
         if (this.subject) {
-            this._setSelectedFilters([...this.subject.getDefaultFields(), ...this._selectedFilters]);
+            this._setSelectedFilters([...this.subject.getDefaultFields(), ...this.selectedFilters$()]);
         }
 
         this._formGenerator.form.valueChanges
@@ -390,11 +408,10 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     }
 
     /**
-     * @hidden
+     * Toggles Smart Filter Bar filters section.
      */
-    _toggleFilterBar(): void {
-        this._showFilterBar = !this._showFilterBar;
-        this._cdr.markForCheck();
+    toggleFilterBar(): void {
+        this.showFilterBar$.update((show) => !show);
     }
 
     /**
@@ -456,15 +473,15 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
         if (!this._subject) {
             return;
         }
+        this._subjectSubscriptions.unsubscribe();
     }
 
     /** @hidden */
     private _listenToSubjectColumns(): void {
+        this._subjectSubscriptions = new Subscription();
         this._subjectSubscriptions.add(
             this._subject.fieldsStream.subscribe(async (columns: SmartFilterBarFieldDefinition[]) => {
-                setTimeout(async () => {
-                    await this._generateForm(columns.filter((c) => c.filterable));
-                });
+                await this._generateForm(columns.filter((c) => c.filterable));
             })
         );
     }
@@ -487,7 +504,10 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
             let item: SmartFilterBarDynamicFormFieldItem = this._generateBaseFieldItem(column);
 
             if (column.required) {
-                this._selectedFilters.push(column.name);
+                this.selectedFilters$.update((filters) => {
+                    filters.push(column.name);
+                    return filters;
+                });
             }
 
             switch (column.filterType) {
@@ -518,9 +538,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
             items.push(item);
         });
 
-        this._formItems = items;
-
-        this._cdr.detectChanges();
+        this._formItems.set(items);
     }
 
     /** @hidden */
@@ -598,7 +616,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
                     choices: column.hasOptions ? this._getFilterAvailableOptions(column.key) : undefined
                 }
             },
-            when: () => this._selectedFilters.includes(column.name)
+            when: () => this.selectedFilters$().includes(column.name)
         } as SmartFilterBarDynamicFormFieldItem;
     }
 
@@ -675,7 +693,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
 
     /** @hidden */
     private _setSelectedFilters(filters: string[]): void {
-        this._selectedFilters = filters.filter((f: string, i: number) => filters.indexOf(f) === i);
+        this.selectedFilters$.set(filters.filter((f: string, i: number) => filters.indexOf(f) === i));
         this._formGenerator.refreshStepsVisibility();
     }
 }

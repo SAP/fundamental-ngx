@@ -1,5 +1,12 @@
-import { BooleanInput } from '@angular/cdk/coercion';
-import { AfterContentInit, ContentChildren, Directive, HostBinding, Input, QueryList } from '@angular/core';
+import {
+    AfterContentInit,
+    ContentChildren,
+    Directive,
+    HostBinding,
+    Input,
+    QueryList,
+    booleanAttribute
+} from '@angular/core';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
 
@@ -31,8 +38,8 @@ export class TableCellDirective extends FocusableItemDirective implements AfterC
 
     /** @hidden */
     @HostBinding('class.fd-table__cell--focusable')
-    @Input()
-    set focusable(value: BooleanInput) {
+    @Input({ transform: booleanAttribute })
+    set focusable(value: boolean) {
         this.fdkFocusableItem = value;
     }
     get focusable(): boolean {
