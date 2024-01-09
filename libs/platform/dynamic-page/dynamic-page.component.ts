@@ -112,32 +112,37 @@ export class DynamicPageComponent
     implements AfterContentInit, AfterViewInit, DoCheck, OnDestroy, PlatformDynamicPage, HasElementRef
 {
     /** Whether DynamicPage should snap on scroll */
-    @Input() disableSnapOnScroll = false;
+    @Input()
+    disableSnapOnScroll = false;
     /** Page role  */
     @Input()
     @HostBinding('attr.role')
     role = 'region';
 
     /** Whether or not tabs should be stacked. */
-    @Input() stackContent = false;
+    @Input()
+    stackContent = false;
 
     /**
      * sets background for content to `list`, `transparent`, or `solid` background color.
      * Default is `solid`.
      */
-    @Input() background: DynamicPageBackgroundType = 'solid';
+    @Input()
+    background: DynamicPageBackgroundType = 'solid';
 
     /**
      * sets size which in turn adds corresponding padding for the size type.
      * size can be `small`, `medium`, `large`, or `extra-large`.
      */
-    @Input() size: DynamicPageResponsiveSize = 'extra-large';
+    @Input()
+    size: DynamicPageResponsiveSize = 'extra-large';
 
     /**
      * provided offset in px
      * Should be added, when there is something else at the bottom and dynamic page is not expanded to bottom's corners
      */
-    @Input() offset = 0;
+    @Input()
+    offset = 0;
 
     /** Whether DynamicPage should have responsive sides spacing changing with Page window width.
      * max-width: 599px                         - small
@@ -145,29 +150,36 @@ export class DynamicPageComponent
      * min-width: 1024px and max-width: 1439px  - large
      * min-width: 1440px                        - extra large
      */
-    @Input() autoResponsive = true;
+    @Input()
+    autoResponsive = true;
 
     /**
      * Whether dynamic page should be expanded in whole page.
      */
-    @Input() expandContent = true;
+    @Input()
+    expandContent = true;
 
     /**
      * Tab Change event
      */
-    @Output() tabChange = new EventEmitter<DynamicPageTabChangeEvent>();
+    @Output()
+    tabChange = new EventEmitter<DynamicPageTabChangeEvent>();
 
     /** reference to title component  */
-    @ContentChild(DynamicPageTitleComponent) titleComponent: DynamicPageTitleComponent;
+    @ContentChild(DynamicPageTitleComponent)
+    titleComponent: DynamicPageTitleComponent;
 
     /** reference to header component  */
-    @ContentChild(DynamicPageHeaderComponent) headerComponent: DynamicPageHeaderComponent;
+    @ContentChild(DynamicPageHeaderComponent)
+    headerComponent: DynamicPageHeaderComponent;
 
     /** reference to footer component  */
-    @ContentChild(DynamicPageFooterComponent) footerComponent: DynamicPageFooterComponent;
+    @ContentChild(DynamicPageFooterComponent)
+    footerComponent: DynamicPageFooterComponent;
 
     /** reference to content component  */
-    @ContentChild(DynamicPageContentComponent) contentComponent: DynamicPageContentComponent;
+    @ContentChild(DynamicPageContentComponent)
+    contentComponent: DynamicPageContentComponent;
 
     /** reference to content components list */
     @ContentChildren(DynamicPageContentComponent, { descendants: true })
@@ -182,7 +194,8 @@ export class DynamicPageComponent
     _tabListComponent: TabListComponent;
 
     /** Reference to tab items components */
-    @ViewChildren(TabPanelComponent) dynamicPageTabs: QueryList<TabPanelComponent>;
+    @ViewChildren(TabPanelComponent)
+    dynamicPageTabs: QueryList<TabPanelComponent>;
 
     /** @hidden */
     @ViewChildren(DynamicPageContentHostComponent)
@@ -204,10 +217,10 @@ export class DynamicPageComponent
     _tabs: DynamicPageContentComponent[] = [];
 
     /** @hidden */
-    protected _destroyRef = inject(DestroyRef);
+    readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
     /** @hidden */
-    readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+    protected _destroyRef = inject(DestroyRef);
 
     /** toggle the visibility of the header on click of title area. */
     toggleCollapse(): void {
