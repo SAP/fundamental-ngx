@@ -13,13 +13,13 @@ import {
     Output,
     Renderer2,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    booleanAttribute
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
 
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -109,17 +109,8 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     disableToolbarClick = false;
 
     /** Allows an item to be selected programmatically */
-    @Input()
-    set selected(value: Nullable<boolean>) {
-        this._selected = coerceBooleanProperty(value);
-    }
-
-    get selected(): boolean {
-        return this._selected;
-    }
-
-    /** @hidden */
-    private _selected = false;
+    @Input({ transform: booleanAttribute })
+    selected = false;
 
     /** Remove the padding from the Item body */
     @Input()

@@ -66,8 +66,6 @@ export class SettingsGeneratorSectionComponent {
     /** @hidden */
     @ViewChild(FormGeneratorComponent)
     private set _formGeneratorCmp(component: FormGeneratorComponent | undefined) {
-        this._formGenerator = component;
-
         if (!this.items) {
             return;
         }
@@ -82,9 +80,6 @@ export class SettingsGeneratorSectionComponent {
             this._settingsGeneratorService._removeFormGenerator(path);
         }
     }
-
-    /** @hidden */
-    private _formGenerator: FormGeneratorComponent | undefined;
 
     /** @hidden */
     _renderer: 'form' | 'template' = 'form';

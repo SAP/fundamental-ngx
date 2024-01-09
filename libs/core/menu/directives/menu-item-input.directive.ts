@@ -11,7 +11,7 @@ import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 })
 export class MenuItemInputDirective implements HasElementRef {
     /** @hidden */
-    elementRef = inject(ElementRef);
+    readonly elementRef = inject(ElementRef);
 
     /**
      * This is needed to prevent the click event from bubbling up to the menu item

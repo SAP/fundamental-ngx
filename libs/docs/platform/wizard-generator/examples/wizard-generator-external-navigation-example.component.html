@@ -8,31 +8,13 @@
     <div fd-bar>
         <div fd-bar-right>
             @if (!isFirstStep) {
-                <fdp-button
-                    class="fd-bar__element"
-                    buttonType="ghost"
-                    fdCondensed
-                    label="Previous step"
-                    (click)="goBack()"
-                ></fdp-button>
+                <fdp-button buttonType="ghost" fdCondensed label="Previous step" (click)="goBack()"></fdp-button>
             }
             @if (!isLastStep) {
-                <fdp-button
-                    class="fd-bar__element"
-                    buttonType="emphasized"
-                    fdCondensed
-                    label="Next step"
-                    (click)="goNext()"
-                ></fdp-button>
+                <fdp-button buttonType="emphasized" fdCondensed label="Next step" (click)="goNext()"></fdp-button>
             }
             @if (isLastStep) {
-                <fdp-button
-                    class="fd-bar__element"
-                    buttonType="emphasized"
-                    fdCondensed
-                    label="Finish"
-                    (click)="finish()"
-                ></fdp-button>
+                <fdp-button buttonType="emphasized" fdCondensed label="Finish" (click)="finish()"></fdp-button>
             }
         </div>
     </div>

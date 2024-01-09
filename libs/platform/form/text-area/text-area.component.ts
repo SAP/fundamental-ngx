@@ -3,27 +3,21 @@ import {
     AfterViewChecked,
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ElementRef,
-    Host,
     HostListener,
-    Inject,
     Input,
     OnInit,
-    Optional,
-    Self,
-    SkipSelf,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
+import { FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput } from '@fundamental-ngx/platform/shared';
 import { TextAreaConfig } from './text-area.config';
 
 const VALID_WRAP_TYPES = ['hard', 'soft', 'off'];
@@ -165,17 +159,8 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     }
 
     /** @hidden */
-    constructor(
-        cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        @Optional() @Self() ngControl: NgControl,
-        @Optional() @SkipSelf() controlContainer: ControlContainer,
-        @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
-        protected _textAreaConfig: TextAreaConfig
-    ) {
-        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+    constructor(protected _textAreaConfig: TextAreaConfig) {
+        super();
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
         }

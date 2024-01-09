@@ -14,9 +14,4 @@ import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../p
     standalone: true,
     imports: [FormsModule, ReactiveFormsModule, SwitchComponent]
 })
-export class DynamicFormGeneratorSwitchComponent extends BaseDynamicFormGeneratorControl {
-    /** @hidden */
-    constructor() {
-        super();
-    }
-}
+export class DynamicFormGeneratorSwitchComponent extends BaseDynamicFormGeneratorControl {}

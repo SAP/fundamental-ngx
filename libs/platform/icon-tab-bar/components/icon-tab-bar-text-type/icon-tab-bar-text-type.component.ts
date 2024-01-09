@@ -1,15 +1,4 @@
-import {
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    EventEmitter,
-    Input,
-    NgZone,
-    Output,
-    QueryList,
-    ViewChild,
-    ViewChildren
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { AsyncOrSyncPipe, Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { NgClass } from '@angular/common';
@@ -75,11 +64,6 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
      */
     @Output()
     reordered = new EventEmitter<IconTabBarItem[]>();
-
-    /** @hidden */
-    constructor(_cd: ChangeDetectorRef, _ngZone: NgZone) {
-        super(_cd, _ngZone);
-    }
 
     /**
      * @hidden

@@ -215,9 +215,14 @@ export class BaseWizardGenerator {
 
     /**
      * @hidden
-     * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
     protected readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    protected readonly _wizardGeneratorService = inject(WizardGeneratorService);
+
+    /** @hidden */
+    protected readonly _cd = inject(ChangeDetectorRef);
 
     /**
      * @hidden
@@ -225,10 +230,7 @@ export class BaseWizardGenerator {
     _navigationButtonLabels: Required<WizardNavigationButtons> = DEFAULT_WIZARD_NAVIGATION_BUTTONS;
 
     /** @hidden */
-    constructor(
-        protected _wizardGeneratorService: WizardGeneratorService,
-        private _cd: ChangeDetectorRef
-    ) {
+    constructor() {
         this._wizardGeneratorService
             .getVisibleSteps()
             .pipe(debounceTime(10), takeUntilDestroyed(this._destroyRef))

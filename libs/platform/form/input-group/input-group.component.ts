@@ -2,28 +2,21 @@ import {
     AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChild,
     ContentChildren,
     ElementRef,
     forwardRef,
-    Host,
-    Inject,
     Input,
     OnInit,
-    Optional,
     QueryList,
     Renderer2,
-    Self,
-    SkipSelf,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput } from '@fundamental-ngx/platform/shared';
 import { startWith } from 'rxjs/operators';
 import { InputComponent } from '../input/input.component';
 
@@ -97,18 +90,11 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
 
     /** @hidden */
     constructor(
-        cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        @Optional() @Self() ngControl: NgControl,
-        @Optional() @SkipSelf() controlContainer: ControlContainer,
-        @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
         private _renderer: Renderer2,
         protected _hostElementRef: ElementRef<HTMLElement>,
         protected _inputGroupConfig: InputGroupConfig
     ) {
-        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+        super();
     }
 
     /** @hidden */

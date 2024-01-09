@@ -1,4 +1,3 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
@@ -11,6 +10,7 @@ import {
     OnDestroy,
     PLATFORM_ID,
     Renderer2,
+    booleanAttribute,
     inject
 } from '@angular/core';
 import { HasElementRef } from '@fundamental-ngx/cdk/utils';
@@ -43,34 +43,16 @@ let styleSheet: HTMLStyleElement | null = null;
 })
 export class ScrollbarDirective implements OnDestroy, HasElementRef {
     /** Whether overflow horizontal content should be hidden. */
-    @Input()
-    set noHorizontalScroll(value: BooleanInput) {
-        this._noHorizontalScroll = coerceBooleanProperty(value);
-    }
-
-    get noHorizontalScroll(): boolean {
-        return this._noHorizontalScroll;
-    }
+    @Input({ transform: booleanAttribute })
+    noHorizontalScroll = false;
 
     /** Whether overflow vertical content should be hidden. */
-    @Input()
-    set noVerticalScroll(value: BooleanInput) {
-        this._noVerticalScroll = coerceBooleanProperty(value);
-    }
-
-    get noVerticalScroll(): boolean {
-        return this._noVerticalScroll;
-    }
+    @Input({ transform: booleanAttribute })
+    noVerticalScroll = false;
 
     /** Whether scrollbars should be visible even if content fits. */
-    @Input()
-    set alwaysVisible(value: BooleanInput) {
-        this._alwaysVisible = coerceBooleanProperty(value);
-    }
-
-    get alwaysVisible(): boolean {
-        return this._alwaysVisible;
-    }
+    @Input({ transform: booleanAttribute })
+    alwaysVisible = false;
 
     /** @hidden */
     @HostBinding('style.overflow-x')
@@ -105,15 +87,6 @@ export class ScrollbarDirective implements OnDestroy, HasElementRef {
     private readonly _csp_nonce = inject(CSP_NONCE, {
         optional: true
     });
-
-    /** @hidden */
-    private _noHorizontalScroll = false;
-
-    /** @hidden */
-    private _noVerticalScroll = false;
-
-    /** @hidden */
-    private _alwaysVisible = false;
 
     /**
      * @hidden

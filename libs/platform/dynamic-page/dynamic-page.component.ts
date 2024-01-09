@@ -2,7 +2,6 @@ import {
     AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChild,
     ContentChildren,
@@ -17,12 +16,13 @@ import {
     QueryList,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { startWith } from 'rxjs/operators';
 
 import { NgTemplateOutlet } from '@angular/common';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
 import {
     DynamicPageComponent as CoreDynamicPageComponent,
@@ -98,7 +98,10 @@ export class DynamicPageTabChangeEvent {
         CoreDynamicPageContentComponent
     ]
 })
-export class DynamicPageComponent extends BaseComponent implements AfterContentInit, AfterViewInit, DoCheck, OnDestroy {
+export class DynamicPageComponent
+    extends BaseComponent
+    implements AfterContentInit, AfterViewInit, DoCheck, OnDestroy, HasElementRef
+{
     /** Whether DynamicPage should snap on scroll */
     @Input()
     disableSnapOnScroll = false;
@@ -106,10 +109,6 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     @Input()
     @HostBinding('attr.role')
     role = 'region';
-
-    /** aria label for the page */
-    @Input()
-    ariaLabel: Nullable<string>;
 
     /** Whether or not tabs should be stacked. */
     @Input()
@@ -202,12 +201,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     _tabs: DynamicPageContentComponent[] = [];
 
     /** @hidden */
-    constructor(
-        protected _cd: ChangeDetectorRef,
-        public readonly elementRef: ElementRef<HTMLElement>
-    ) {
-        super(_cd);
-    }
+    readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -216,7 +210,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._cd.detectChanges();
+        this.detectChanges();
 
         this._tabListComponent?.headerContainer.nativeElement.classList.add('fd-dynamic-page__tabs');
     }
@@ -226,7 +220,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         /** Used to detect changes in projected components that displayed using templates,
          * https://github.com/angular/angular/issues/44112
          */
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /**

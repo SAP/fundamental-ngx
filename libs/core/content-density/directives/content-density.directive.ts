@@ -1,5 +1,4 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Directive, Input, OnDestroy, forwardRef, isDevMode } from '@angular/core';
+import { Directive, Input, OnDestroy, booleanAttribute, forwardRef, isDevMode } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ContentDensityGlobalKeyword, LocalContentDensityMode } from '../content-density.types';
 import { isContentDensityMode } from '../helpers/density-type-checkers';
@@ -47,39 +46,27 @@ export class ContentDensityDirective extends BehaviorSubject<LocalContentDensity
      * This input is basically syntax sugar, for not writing fdContentDensity="compact",
      * instead you can just write fdCompact="true" or [fdCompact]
      */
-    @Input()
-    set fdCompact(val: BooleanInput) {
-        if (coerceBooleanProperty(val)) {
-            this.next(ContentDensityMode.COMPACT);
-        } else {
-            this.next(ContentDensityGlobalKeyword);
-        }
+    @Input({ transform: booleanAttribute })
+    set fdCompact(val: boolean) {
+        this.next(val ? ContentDensityMode.COMPACT : ContentDensityGlobalKeyword);
     }
 
     /**
      * This input is basically syntax sugar, for not writing fdContentDensity="condensed",
      * instead you can just write fdCondensed="true" or [fdCondensed]
      */
-    @Input()
-    set fdCondensed(val: BooleanInput) {
-        if (coerceBooleanProperty(val)) {
-            this.next(ContentDensityMode.CONDENSED);
-        } else {
-            this.next(ContentDensityGlobalKeyword);
-        }
+    @Input({ transform: booleanAttribute })
+    set fdCondensed(val: boolean) {
+        this.next(val ? ContentDensityMode.CONDENSED : ContentDensityGlobalKeyword);
     }
 
     /**
      * This input is basically syntax sugar, for not writing fdContentDensity="cozy",
      * instead you can just write fdCozy="true" or [fdCozy]
      */
-    @Input()
-    set fdCozy(val: BooleanInput) {
-        if (coerceBooleanProperty(val)) {
-            this.next(ContentDensityMode.COZY);
-        } else {
-            this.next(ContentDensityGlobalKeyword);
-        }
+    @Input({ transform: booleanAttribute })
+    set fdCozy(val: boolean) {
+        this.next(val ? ContentDensityMode.COZY : ContentDensityGlobalKeyword);
     }
 
     /** @hidden */

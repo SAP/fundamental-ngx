@@ -1,20 +1,8 @@
-import {
-    ChangeDetectorRef,
-    Directive,
-    ElementRef,
-    EventEmitter,
-    Input,
-    OnInit,
-    Output,
-    Renderer2,
-    computed,
-    signal
-} from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { Directive, EventEmitter, Input, OnInit, Output, Renderer2, computed, inject, signal } from '@angular/core';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ContentDensity, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
-import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput } from '@fundamental-ngx/platform/shared';
 import { StepInputConfig } from './step-input.config';
 import { addAndCutFloatingNumberDistortion, getNumberDecimalLength } from './step-input.util';
 
@@ -51,6 +39,8 @@ const ALIGN_INPUT_OPTIONS_LIST = [StepInputAlign.Left, StepInputAlign.Center, St
  */
 @Directive()
 export abstract class StepInputComponent extends BaseInput implements OnInit {
+    /** @hidden */
+    readonly config = inject(StepInputConfig);
     /** Sets input value */
     @Input()
     set value(value: Nullable<number>) {
@@ -221,20 +211,9 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     }
 
     /** @hidden */
-    protected constructor(
-        cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        ngControl: NgControl,
-        controlContainer: ControlContainer,
-        ngForm: NgForm,
-        formField: PlatformFormField,
-        formControl: PlatformFormFieldControl,
-        protected config: StepInputConfig,
-        private _renderer: Renderer2,
-        private _rtlService: RtlService
-    ) {
-        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
-    }
+    private readonly _renderer = inject(Renderer2);
+    /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
     ngOnInit(): void {
@@ -372,7 +351,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
                 const oldValue = this.isErrorState;
                 this.isErrorState = this.state === 'error';
                 if (this.isErrorState !== oldValue) {
-                    this._cd.markForCheck();
+                    this.markForCheck();
                 }
             });
     }

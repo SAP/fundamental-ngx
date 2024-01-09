@@ -14,9 +14,4 @@ import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../p
     standalone: true,
     imports: [FormsModule, ReactiveFormsModule, PlatformDatePickerComponent]
 })
-export class DynamicFormGeneratorDatepickerComponent extends BaseDynamicFormGeneratorControl {
-    /** @hidden */
-    constructor() {
-        super();
-    }
-}
+export class DynamicFormGeneratorDatepickerComponent extends BaseDynamicFormGeneratorControl {}

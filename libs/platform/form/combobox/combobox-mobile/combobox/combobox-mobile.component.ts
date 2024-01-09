@@ -1,10 +1,8 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
     Inject,
     OnInit,
-    Optional,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
@@ -15,13 +13,8 @@ import { NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import {
-    MOBILE_MODE_CONFIG,
-    MobileModeBase,
-    MobileModeConfigToken,
-    MobileModeControl
-} from '@fundamental-ngx/core/mobile-mode';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../../combobox.interface';
@@ -60,13 +53,8 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
     private _selectedBackup: string;
 
     /** @hidden */
-    constructor(
-        elementRef: ElementRef,
-        dialogService: DialogService,
-        @Inject(COMBOBOX_COMPONENT) comboboxComponent: ComboboxInterface,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
-    ) {
-        super(elementRef, dialogService, comboboxComponent, MobileModeControl.COMBOBOX, mobileModes);
+    constructor(@Inject(COMBOBOX_COMPONENT) comboboxComponent: ComboboxInterface) {
+        super(comboboxComponent, MobileModeControl.COMBOBOX);
     }
 
     /** @hidden */

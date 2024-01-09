@@ -29,9 +29,6 @@ export class KeyboardSupportService<T> implements OnDestroy {
         return this._keyManager;
     }
 
-    /** @hidden */
-    private _itemList: QueryList<KeyboardSupportItemInterface & T>;
-
     /** @hidden
      * allow tab key navigation. default is true.
      */
@@ -44,7 +41,6 @@ export class KeyboardSupportService<T> implements OnDestroy {
         tabKeyNavigation = true
     ): void {
         this._keyManager?.destroy();
-        this._itemList = queryList;
         this._tabKeyNavigation = tabKeyNavigation;
         this._keyManager = new FocusKeyManager(queryList).withWrap(wrap).withHomeAndEnd();
         queryList.changes

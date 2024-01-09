@@ -1,5 +1,4 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { NgTemplateOutlet } from '@angular/common';
 import {
@@ -21,7 +20,8 @@ import {
     QueryList,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    booleanAttribute
 } from '@angular/core';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -96,8 +96,8 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
     showMorePosition: 'left' | 'right' = 'right';
 
     /** Whether the show more button should be rendered */
-    @Input({ transform: coerceBooleanProperty })
-    renderShowMoreButton: BooleanInput = true;
+    @Input({ transform: booleanAttribute })
+    renderShowMoreButton = true;
 
     /** Whether to render hidden items in reverse order. */
     @Input()

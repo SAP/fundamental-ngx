@@ -20,7 +20,7 @@ export class PanelPo extends PlatformBaseComponentPo {
     fixedHeightPanelContent = this.fixedHeightPanelRoot + ' fdp-panel-content';
 
     actionPanelRoot = '#panel-actions-id';
-    actionPanelBtn = this.actionPanelRoot + ' button.fd-ellipsis';
+    actionPanelBtn = this.actionPanelRoot + ' fdp-panel-actions button.fd-button';
 
     async open(): Promise<void> {
         await super.open(this.url);

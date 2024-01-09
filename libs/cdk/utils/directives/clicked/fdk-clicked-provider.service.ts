@@ -15,9 +15,9 @@ export class FdkClickedProvider extends Subject<MouseEvent | KeyboardEvent> impl
 
     /** @hidden */
     constructor(
-        private _elementRef: ElementRef<Element>,
-        private _renderer: Renderer2,
-        @Inject(EVENT_MANAGER_PLUGINS) private eventManagerPlugins: any[]
+        private readonly _elementRef: ElementRef<Element>,
+        private readonly _renderer: Renderer2,
+        @Inject(EVENT_MANAGER_PLUGINS) eventManagerPlugins: any[]
     ) {
         super();
         this._fdkClickedEventManagerPluginLoaded = eventManagerPlugins.some((em) => em instanceof ClickedEventPlugin);

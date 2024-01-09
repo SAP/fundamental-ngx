@@ -83,7 +83,7 @@ export class AvatarGroupHostComponent
     _resizeEmitter: Observable<ResizeObserverEntry[]> = inject(ResizeObserverDirective).resized;
 
     /** The reference to the host element */
-    elementRef = inject(ElementRef);
+    readonly elementRef = inject(ElementRef);
 
     /** @hidden */
     _hiddenItems = signal<AvatarGroupItemRendererDirective[]>([]);

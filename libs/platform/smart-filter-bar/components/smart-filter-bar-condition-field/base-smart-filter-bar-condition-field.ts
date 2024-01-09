@@ -1,4 +1,4 @@
-import { Directive, Injector } from '@angular/core';
+import { Directive, Injector, inject } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { BaseDynamicFormGeneratorControl, DynamicFormControl } from '@fundamental-ngx/platform/form';
 import { take } from 'rxjs/operators';
@@ -8,15 +8,9 @@ import { SmartFilterBarConditionsDialogComponent } from '../smart-filter-bar-con
 
 @Directive()
 export abstract class BaseSmartFilterBarConditionField extends BaseDynamicFormGeneratorControl {
-    /** @hidden */
-    protected constructor(
-        protected _dialogService: DialogService,
-        protected _smartFilterBarService: SmartFilterBarService,
-        protected _injector: Injector
-    ) {
-        super();
-    }
-
+    protected readonly _dialogService = inject(DialogService);
+    protected readonly _smartFilterBarService = inject(SmartFilterBarService);
+    protected readonly _injector = inject(Injector);
     /**
      * Method for opening conditions configuration dialog.
      */
