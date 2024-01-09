@@ -80,7 +80,7 @@ export class ButtonBarComponent extends BaseButton {
     /** @hidden */
     @HostBinding('style.pointer-events')
     get pointerEvents(): string {
-        return this._disabled ? 'none' : 'auto';
+        return this.disabled ? 'none' : 'auto';
     }
 
     /** @hidden */

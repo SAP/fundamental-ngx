@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
 import { ModuleDeprecation, Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ButtonType, ButtonComponent as CoreButtonComponent, GlyphPosition } from '@fundamental-ngx/core/button';
@@ -16,7 +16,7 @@ import { BaseComponent } from '@fundamental-ngx/platform/shared';
     standalone: true,
     imports: [CoreButtonComponent]
 })
-export class ButtonComponent extends BaseComponent implements AfterViewInit {
+export class ButtonComponent extends BaseComponent {
     /** Position of glyph related to text */
     @Input()
     glyphPosition: GlyphPosition = 'before';
@@ -137,11 +137,6 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
         warnOnce(
             "Platform's ButtonComponent is deprecated and will be removed in the next major release. Consider using Core's ButtonComponent instead."
         );
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this._elementRef.nativeElement.childNodes[0].classList.add('fd-ellipsis');
     }
 
     /**

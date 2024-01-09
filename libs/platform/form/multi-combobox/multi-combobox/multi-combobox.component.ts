@@ -151,8 +151,6 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         }
 
         this._setSelectedSuggestions();
-
-        this._tokenizer._showOverflowPopover = false;
     }
 
     /** @hidden */

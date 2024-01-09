@@ -1,10 +1,9 @@
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Directive, Input, TemplateRef } from '@angular/core';
+import { Directive, Input, TemplateRef, booleanAttribute } from '@angular/core';
 
 @Directive()
 export class ToolHeaderActionClass<ActionTemplateContext = any> {
     /** Whether the element is forced to be visible. */
-    @Input({ transform: coerceBooleanProperty })
+    @Input({ transform: booleanAttribute })
     forceVisibility: boolean;
 
     /** Template of the action section */

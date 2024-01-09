@@ -1,5 +1,4 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
 import { DOCUMENT } from '@angular/common';
 import {
@@ -11,6 +10,7 @@ import {
     NgZone,
     Output,
     Renderer2,
+    booleanAttribute,
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -44,9 +44,9 @@ export interface FocusableItemPosition {
 })
 export class FocusableItemDirective implements FocusableItem, HasElementRef {
     /** Whether the item is focusable. Default is true. */
-    @Input()
-    set fdkFocusableItem(val: BooleanInput) {
-        this._focusable = coerceBooleanProperty(val);
+    @Input({ transform: booleanAttribute })
+    set fdkFocusableItem(val: boolean) {
+        this._focusable = val;
         this.setTabbable(this._focusable);
     }
 

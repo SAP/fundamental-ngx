@@ -1,84 +1,68 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, ViewChild } from '@angular/core';
-
-import { SmartFilterBarComponent } from './smart-filter-bar.component';
-import { whenStable } from '@fundamental-ngx/core/tests';
-import { FdDate } from '@fundamental-ngx/core/datetime';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { ToolbarComponent, ToolbarSpacerDirective } from '@fundamental-ngx/core/toolbar';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { SearchFieldComponent } from '@fundamental-ngx/platform/search-field';
+import {
+    SmartFilterBar,
+    SmartFilterBarComponent,
+    SmartFilterBarFieldDefinitionDirective,
+    SmartFilterBarSubjectDirective,
+    SmartFilterChangeObject
+} from '@fundamental-ngx/platform/smart-filter-bar';
+import { FilterType, FilterableColumnDataType, PlatformTableModule } from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
-    selector: 'fdp-smart-filter-bar-test',
-    template: ` <fdp-smart-filter-bar [subject]="subject"></fdp-smart-filter-bar>
-
-        <fdp-table
-            fdp-smart-filter-bar-subject
-            #subject="fdp-smart-filter-bar-subject"
-            [dataSource]="source"
-            [trackBy]="trackBy"
-        >
-            <fdp-column fdp-smart-filter-bar-field-definition name="name" key="name" label="Name" align="start">
-            </fdp-column>
-
-            <fdp-column fdp-smart-filter-bar-field-definition name="description" key="description" label="Description">
-            </fdp-column>
-
-            <fdp-column
-                fdp-smart-filter-bar-field-definition
-                dataType="number"
-                name="price"
-                key="price.value"
-                label="Price"
-                align="end"
-            >
-            </fdp-column>
-
-            <fdp-column
-                fdp-smart-filter-bar-field-definition
-                filterType="multi-select"
-                name="status"
-                key="status"
-                label="Status"
-                align="center"
-            >
-            </fdp-column>
-
-            <fdp-column
-                fdp-smart-filter-bar-field-definition
-                filterType="single-select"
-                name="statusColor"
-                key="statusColor"
-                label="Status color"
-                align="center"
-            >
-            </fdp-column>
-
-            <fdp-column
-                fdp-smart-filter-bar-field-definition
-                dataType="date"
-                name="date"
-                key="date"
-                label="Date"
-            ></fdp-column>
-
-            <fdp-column
-                fdp-smart-filter-bar-field-definition
-                filterType="single-select"
-                dataType="boolean"
-                name="verified"
-                key="verified"
-                label="Verified"
-            ></fdp-column>
-        </fdp-table>`
+    selector: 'fdp-smart-filter-bar-custom-toolbar-example',
+    standalone: true,
+    imports: [
+        ButtonComponent,
+        SmartFilterBarComponent,
+        SmartFilterBarFieldDefinitionDirective,
+        SmartFilterBarSubjectDirective,
+        ContentDensityDirective,
+        TitleComponent,
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        FdDatetimeModule,
+        ToolbarComponent,
+        ToolbarSpacerDirective,
+        FdTranslatePipe,
+        SearchFieldComponent
+    ],
+    templateUrl: './smart-filter-bar-custom-toolbar-example.component.html',
+    styles: ``,
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-class TestComponent {
-    source: ExampleItem[] = ITEMS;
+export class SmartFilterBarCustomToolbarExampleComponent {
+    readonly dataTypeEnum = FilterableColumnDataType;
+    readonly filterTypeEnum = FilterType;
 
-    @ViewChild(SmartFilterBarComponent) smartFilterBar: SmartFilterBarComponent;
+    source: ExampleItem[] = ITEMS;
 
     trackBy(_: number, item: ExampleItem): number {
         return item.id;
+    }
+
+    filtersChanged(filters: SmartFilterChangeObject, type: string): void {
+        console.log(`Filters has been ${type}. Current value: `, filters);
+    }
+
+    async logFilters(filterBar: SmartFilterBar): Promise<void> {
+        const conditions = await filterBar.getFormattedConditions();
+        const search = filterBar.search;
+        console.log({ search, conditions });
     }
 }
 
@@ -303,61 +287,3 @@ const ITEMS: ExampleItem[] = [
         verified: false
     }
 ];
-
-describe('SmartFilterBarComponent', () => {
-    let component: TestComponent;
-    let smartFilterBar: SmartFilterBarComponent;
-    let fixture: ComponentFixture<TestComponent>;
-
-    beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            imports: [PlatformTableModule, PlatformSmartFilterBarModule, NoopAnimationsModule],
-            declarations: [TestComponent]
-        }).compileComponents();
-    });
-
-    beforeEach(async () => {
-        fixture = TestBed.createComponent(TestComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-        await whenStable(fixture);
-        smartFilterBar = component.smartFilterBar;
-    });
-
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
-
-    it('should open filters dialog', async () => {
-        await whenStable(fixture);
-
-        const dialogSpy = jest.spyOn((smartFilterBar as any)._dialogService, 'open');
-
-        smartFilterBar.showFilteringSettings();
-
-        expect(dialogSpy).toHaveBeenCalled();
-    });
-
-    it('should submit form', async () => {
-        await whenStable(fixture);
-
-        const fgSpy = jest.spyOn(component.smartFilterBar, '_onFormSubmitted');
-
-        smartFilterBar.submitForm();
-
-        await new Promise((resolve) => setTimeout(() => resolve(null), 200));
-
-        expect(fgSpy).toHaveBeenCalled();
-    });
-
-    it('should toggle filter bar', async () => {
-        smartFilterBar.toggleFilterBar();
-        fixture.detectChanges();
-        await whenStable(fixture);
-
-        expect(smartFilterBar.showFilterBar$()).toBe(false);
-        expect(
-            fixture.nativeElement.querySelector('.fdp-smart-filter-bar__filters').getAttribute('hidden')
-        ).not.toBeNull();
-    });
-});

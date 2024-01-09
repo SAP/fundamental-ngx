@@ -64,7 +64,12 @@ $fd-block: fdp-smart-filter-bar;
 
         .fd-container.fd-form-layout-grid-container,
         .fd-container.fd-form-layout-grid-container .fd-row .fd-form-group {
-            padding: 0 !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
         }
+    }
+
+    .fd-toolbar {
+        --fdToolbar_Border: none;
     }
 }

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.31...v0.48.0-rc.32) (2024-01-08)
+
+
+### Bug Fixes
+
+* **core:** aria-hidden tokenizer if tokenList length is 0 ([#11199](https://github.com/SAP/fundamental-ngx/issues/11199)) ([f0eb833](https://github.com/SAP/fundamental-ngx/commit/f0eb833cce1e492cdd4f8eb85c32f11373dff3fd))
+* **platform:** table p13 selection a11y fixes ([#11150](https://github.com/SAP/fundamental-ngx/issues/11150)) ([dc6d1a1](https://github.com/SAP/fundamental-ngx/commit/dc6d1a118c6b2bdac687dfbfccc6ec78f0e0d1bb))
+
+
+
+
+
 # [0.48.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.30...v0.48.0-rc.31) (2024-01-08)
 
 
