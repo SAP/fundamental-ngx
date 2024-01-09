@@ -20,5 +20,5 @@ export class ToolHeaderGroupDirective implements HasElementRef {
     actions = false;
 
     /** @hidden */
-    elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+    readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 }

@@ -1,7 +1,6 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChild,
     ElementRef,
@@ -126,11 +125,8 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     subtle = false;
 
     /** @hidden */
-    constructor(
-        protected _cd: ChangeDetectorRef,
-        private renderer2: Renderer2
-    ) {
-        super(_cd);
+    constructor(private renderer2: Renderer2) {
+        super();
         warnOnce(`LinkComponent is deprecated. Use 'fd-link' from '@fundamental-ngx/core/link' instead.`);
     }
 

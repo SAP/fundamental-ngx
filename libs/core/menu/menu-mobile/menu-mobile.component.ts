@@ -2,9 +2,7 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
-    ElementRef,
     Inject,
     NgZone,
     OnInit,
@@ -12,20 +10,16 @@ import {
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
-    computed
+    computed,
+    signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InitialFocusDirective, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { DialogBodyComponent, DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import {
-    MOBILE_MODE_CONFIG,
-    MobileModeBase,
-    MobileModeConfigToken,
-    MobileModeControl
-} from '@fundamental-ngx/core/mobile-mode';
+import { DialogBodyComponent, DialogModule } from '@fundamental-ngx/core/dialog';
+import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleModule } from '@fundamental-ngx/core/title';
 import { startWith, take } from 'rxjs/operators';
@@ -57,16 +51,16 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
     /** Current menu title */
-    title: string;
+    title$ = signal('');
 
     /** Whether current menu level is submenu */
-    isSubmenu: boolean;
+    isSubmenu$ = signal(false);
 
     /** @hidden External content */
-    childContent: TemplateRef<any> | undefined = undefined;
+    childContent: TemplateRef<any> | null = null;
 
     /** @hidden Currently rendered menu view */
-    view: TemplateRef<any> | undefined;
+    view$ = signal<TemplateRef<any> | null>(null);
 
     /** @hidden Navigation icon name based on RTL */
     navigationIcon$ = computed(() =>
@@ -83,16 +77,12 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
 
     /** @hidden */
     constructor(
-        elementRef: ElementRef,
-        dialogService: DialogService,
         private _menuService: MenuService,
-        private _changeDetectorRef: ChangeDetectorRef,
         private _ngZone: NgZone,
         @Optional() private _rtlService: RtlService,
-        @Inject(MENU_COMPONENT) menuComponent: MenuInterface,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
+        @Inject(MENU_COMPONENT) menuComponent: MenuInterface
     ) {
-        super(elementRef, dialogService, menuComponent, MobileModeControl.MENU, mobileModes);
+        super(menuComponent, MobileModeControl.MENU);
     }
 
     /** @hidden */
@@ -153,10 +143,9 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     /** @hidden Sets menu view, title and isSubmenu flag */
     private _setMenuView(items: MenuItemComponent[]): void {
         const lastItem: MenuItemComponent = items[items.length - 1];
-        this.isSubmenu = !!items.length;
-        this.title = this._getDialogTitle(lastItem);
-        this.view = this._getMenuView(lastItem);
-        this._changeDetectorRef.markForCheck();
+        this.isSubmenu$.set(!!items.length);
+        this.title$.set(this._getDialogTitle(lastItem));
+        this.view$.set(this._getMenuView(lastItem));
         this._executeOnStable(() => {
             this._menuService.focusedNode?.item?.focus();
         });
@@ -171,7 +160,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
 
     /** @hidden Returns dialog title */
     private _getDialogTitle(menuItem: MenuItemComponent): string {
-        if (this.isSubmenu) {
+        if (this.isSubmenu$()) {
             return menuItem.menuItemTitle ? menuItem.menuItemTitle.title : '';
         }
 
@@ -179,9 +168,9 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     }
 
     /** @hidden Returns dialog content view */
-    private _getMenuView(menuItem: MenuItemComponent): TemplateRef<any> | undefined {
-        if (this.isSubmenu) {
-            return menuItem.submenu ? menuItem.submenu.templateRef : this.view;
+    private _getMenuView(menuItem: MenuItemComponent): TemplateRef<any> | null {
+        if (this.isSubmenu$()) {
+            return menuItem.submenu ? menuItem.submenu.templateRef : this.view$();
         }
         return this.childContent;
     }

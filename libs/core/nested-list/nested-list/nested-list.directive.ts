@@ -124,7 +124,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
         private _changeDetectionRef: ChangeDetectorRef,
         private readonly _nestedListStateService: NestedListStateService,
         @Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>,
-        private _contentDensityObserver: ContentDensityObserver
+        _contentDensityObserver: ContentDensityObserver
     ) {
         if (this._nestedItemService) {
             this._nestedItemService.list = this;

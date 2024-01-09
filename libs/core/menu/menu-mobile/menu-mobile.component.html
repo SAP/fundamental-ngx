@@ -3,21 +3,21 @@
         <fd-dialog-header>
             <ng-template fdkTemplate="header">
                 <div fd-bar-left>
-                    @if (isSubmenu) {
+                    @if (isSubmenu$()) {
                         <fd-bar-element>
                             <button
                                 fd-button
                                 fdType="transparent"
                                 id="menu-mobile-navigate-back"
                                 fdCozy
-                                [attr.aria-label]="'Go to previous menu level: ' + title"
+                                [attr.aria-label]="'Go to previous menu level: ' + title$()"
                                 [glyph]="navigationIcon$()"
                                 (click)="backToParentLevel()"
                             ></button>
                         </fd-bar-element>
                     }
                     <fd-bar-element>
-                        <h1 fd-title>{{ title }}</h1>
+                        <h1 fd-title>{{ title$() }}</h1>
                     </fd-bar-element>
                 </div>
                 <div fd-bar-right>
@@ -30,7 +30,7 @@
             </ng-template>
         </fd-dialog-header>
         <fd-dialog-body>
-            <ng-template [ngTemplateOutlet]="(isSubmenu ? subMenuTemplate : view) || null"> </ng-template>
+            <ng-template [ngTemplateOutlet]="(isSubmenu$() ? subMenuTemplate : view$()) || null"> </ng-template>
         </fd-dialog-body>
         @if (mobileConfig.approveButtonText || mobileConfig.cancelButtonText) {
             <fd-dialog-footer>
@@ -49,7 +49,7 @@
 <ng-template #subMenuTemplate>
     <nav class="fd-menu fd-menu--mobile">
         <ul class="fd-menu__sublist">
-            <ng-template [ngTemplateOutlet]="view || null"></ng-template>
+            <ng-template [ngTemplateOutlet]="view$()"></ng-template>
         </ul>
     </nav>
 </ng-template>

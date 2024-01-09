@@ -5,7 +5,8 @@ import {
     ContentChildren,
     Directive,
     QueryList,
-    TemplateRef
+    TemplateRef,
+    inject
 } from '@angular/core';
 
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
@@ -33,7 +34,7 @@ export abstract class DialogHeaderBase implements AfterContentInit {
     customTemplates: QueryList<TemplateDirective>;
 
     /** @hidden */
-    constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+    private readonly _changeDetectorRef = inject(ChangeDetectorRef);
 
     /** @hidden */
     ngAfterContentInit(): void {

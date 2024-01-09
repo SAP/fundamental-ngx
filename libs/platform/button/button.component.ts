@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
 import { ModuleDeprecation, Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ButtonType, ButtonComponent as CoreButtonComponent, GlyphPosition } from '@fundamental-ngx/core/button';
@@ -132,11 +132,8 @@ export class ButtonComponent extends BaseComponent {
     private _ariaPressed: Nullable<boolean>;
 
     /** @hidden */
-    constructor(
-        protected _changeDetector: ChangeDetectorRef,
-        private _elementRef: ElementRef
-    ) {
-        super(_changeDetector);
+    constructor() {
+        super();
         warnOnce(
             "Platform's ButtonComponent is deprecated and will be removed in the next major release. Consider using Core's ButtonComponent instead."
         );

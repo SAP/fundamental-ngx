@@ -14,9 +14,4 @@ import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../p
     standalone: true,
     imports: [FormsModule, ReactiveFormsModule, PlatformMultiInputComponent]
 })
-export class DynamicFormGeneratorMultiInputComponent extends BaseDynamicFormGeneratorControl {
-    /** @hidden */
-    constructor() {
-        super();
-    }
-}
+export class DynamicFormGeneratorMultiInputComponent extends BaseDynamicFormGeneratorControl {}

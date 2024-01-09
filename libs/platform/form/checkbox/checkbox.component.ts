@@ -2,23 +2,16 @@ import {
     AfterViewInit,
     Attribute,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
-    ElementRef,
     EventEmitter,
     forwardRef,
-    Host,
-    Inject,
     Input,
-    Optional,
     Output,
-    Self,
-    SkipSelf,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { FormsModule } from '@angular/forms';
+import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import {
     CheckboxComponent as CoreCheckboxComponent,
@@ -26,7 +19,7 @@ import {
     FdCheckboxValues
 } from '@fundamental-ngx/core/checkbox';
 import { FormItemComponent } from '@fundamental-ngx/core/form';
-import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput } from '@fundamental-ngx/platform/shared';
 
 /** Change event object emitted by Platform Checkbox. */
 export class PlatformCheckboxChange {
@@ -109,17 +102,8 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     coreCheckbox: FdCheckboxComponent;
 
     /** @hidden */
-    constructor(
-        elementRef: ElementRef,
-        @Optional() @Self() ngControl: NgControl,
-        @Optional() @SkipSelf() controlContainer: ControlContainer,
-        @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
-        protected _changeDetector: ChangeDetectorRef,
-        @Attribute('tabIndexValue') public tabIndexValue: number = 0
-    ) {
-        super(_changeDetector, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+    constructor(@Attribute('tabIndexValue') public tabIndexValue: number = 0) {
+        super();
         // necessary to fulfill baseInput check.
         // case: fdp-checkbox passed in declarative fdp-checkbox-group without id and name.
         this.name = `fdp-checkbox-${nextUniqueId++}`;

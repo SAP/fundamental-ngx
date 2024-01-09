@@ -22,8 +22,8 @@ describe('IconTabBarProcessTypeComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(IconTabBarProcessTypeComponent);
         component = fixture.componentInstance;
-        component['_ngZone'] = fakeNgZone as any;
-        component['_cd'] = fakeCdr as any;
+        (component as any)['_ngZone'] = fakeNgZone as any;
+        (component as any)['_cd'] = fakeCdr as any;
 
         component.tabsConfig = generateTestConfig(100);
         fixture.detectChanges();

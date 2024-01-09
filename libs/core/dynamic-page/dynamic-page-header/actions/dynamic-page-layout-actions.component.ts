@@ -1,15 +1,13 @@
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChild,
     ElementRef,
-    Renderer2,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
-import { Subject } from 'rxjs';
 import { DYNAMIC_PAGE_CLASS_NAME } from '../../constants';
 import { DynamicPageBaseActions } from './dynamic-page-base-actions';
 
@@ -29,20 +27,11 @@ export class DynamicPageLayoutActionsComponent extends DynamicPageBaseActions im
     toolbarComponent: ToolbarComponent;
 
     /** @hidden */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
-    /** @hidden */
-    constructor(
-        public readonly elementRef: ElementRef,
-        private _renderer: Renderer2,
-        private _changeDetRef: ChangeDetectorRef
-    ) {
-        super();
-    }
+    private readonly _elementRef = inject(ElementRef);
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageLayoutActionsToolbar, this.elementRef);
-        this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageToolbar, this.elementRef);
+        this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageLayoutActionsToolbar, this._elementRef);
+        this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageToolbar, this._elementRef);
     }
 }

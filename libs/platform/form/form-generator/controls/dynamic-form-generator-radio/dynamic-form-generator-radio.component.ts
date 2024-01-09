@@ -14,9 +14,4 @@ import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../p
     standalone: true,
     imports: [FormsModule, ReactiveFormsModule, PlatformRadioGroupModule]
 })
-export class DynamicFormGeneratorRadioComponent extends BaseDynamicFormGeneratorControl {
-    /** @hidden */
-    constructor() {
-        super();
-    }
-}
+export class DynamicFormGeneratorRadioComponent extends BaseDynamicFormGeneratorControl {}

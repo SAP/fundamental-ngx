@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Directive, Input, OnDestroy, inject } from '@angular/core';
 // eslint-disable-next-line
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -26,6 +26,15 @@ export abstract class BaseComponent implements OnDestroy {
     /** Sets the `aria-labelledby` attribute to the element. */
     @Input()
     ariaLabelledBy: Nullable<string>;
+
+    /**
+     * @deprecated
+     * Use `ariaLabelledBy` instead.
+     */
+    @Input()
+    set ariaLabelledby(value: Nullable<string>) {
+        this.ariaDescribedBy = value;
+    }
 
     /** Sets the `aria-describedby` attribute to the element. */
     @Input()
@@ -58,8 +67,11 @@ export abstract class BaseComponent implements OnDestroy {
         return this._disabled;
     }
 
-    /** @hidden */
-    constructor(protected _cd: ChangeDetectorRef) {}
+    /**
+     * @hidden
+     * Change detector ref.
+     */
+    protected readonly _cdr = inject(ChangeDetectorRef);
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -75,7 +87,7 @@ export abstract class BaseComponent implements OnDestroy {
      *
      */
     markForCheck(): void {
-        this._cd.markForCheck();
+        this._cdr.markForCheck();
     }
 
     /**
@@ -87,6 +99,6 @@ export abstract class BaseComponent implements OnDestroy {
      *
      */
     detectChanges(): void {
-        this._cd.detectChanges();
+        this._cdr.detectChanges();
     }
 }

@@ -1,5 +1,5 @@
 import { coerceNumberProperty } from '@angular/cdk/coercion';
-import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, inject } from '@angular/core';
 import { KeyboardSupportItemInterface } from '@fundamental-ngx/cdk/utils';
 import { Subject } from 'rxjs';
 
@@ -25,6 +25,12 @@ export abstract class ListFocusItem<T = any> implements KeyboardSupportItemInter
     @Input()
     value: T;
 
+    /** @hidden Implementation of KeyboardSupportItemInterface */
+    keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
+
+    /** @hidden */
+    readonly elementRef: ElementRef = inject(ElementRef);
+
     /** @hidden */
     readonly _focused$ = new Subject<{ focusedWithin: boolean }>();
 
@@ -37,9 +43,6 @@ export abstract class ListFocusItem<T = any> implements KeyboardSupportItemInter
     /** @hidden */
     protected _tabIndex: number | undefined;
 
-    /** @hidden Implementation of KeyboardSupportItemInterface */
-    keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
-
     /** @hidden */
     @HostListener('focusin', ['$event'])
     protected onFocus(event: FocusEvent): void {
@@ -47,9 +50,6 @@ export abstract class ListFocusItem<T = any> implements KeyboardSupportItemInter
             focusedWithin: event.target !== this.elementRef?.nativeElement
         });
     }
-
-    /** @hidden */
-    constructor(readonly elementRef: ElementRef) {}
 
     /** @hidden */
     click(): void {

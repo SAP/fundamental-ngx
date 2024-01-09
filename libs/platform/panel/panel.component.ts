@@ -1,6 +1,5 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChild,
     EventEmitter,
@@ -126,11 +125,10 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
 
     /** @hidden */
     constructor(
-        protected _cd: ChangeDetectorRef,
         protected _panelConfig: PanelConfig,
         readonly contentDensityObserver: ContentDensityObserver
     ) {
-        super(_cd);
+        super();
     }
 
     /** @hidden */

@@ -1,6 +1,5 @@
 import {
     AfterViewInit,
-    ChangeDetectorRef,
     Component,
     ElementRef,
     Input,
@@ -11,9 +10,8 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Router } from '@angular/router';
 
-import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { DialogBase } from '@fundamental-ngx/core/dialog';
 
 import { CSS_CLASS_NAME } from './utils/const';
@@ -77,14 +75,9 @@ export class MessageBoxComponent
     /** @hidden */
     constructor(
         @Optional() public _messageBoxConfig: MessageBoxConfig,
-        @Optional() private _messageBoxRef: MessageBoxRef,
-        @Optional() router: Router,
-        @Optional() rtlService: RtlService,
-        focusTrapService: FocusTrapService,
-        changeDetectorRef: ChangeDetectorRef,
-        elementRef: ElementRef
+        @Optional() private _messageBoxRef: MessageBoxRef
     ) {
-        super(router, elementRef, changeDetectorRef, rtlService, focusTrapService);
+        super();
     }
 
     /** @hidden */

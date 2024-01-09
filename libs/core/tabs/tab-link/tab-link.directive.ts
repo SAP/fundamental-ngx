@@ -1,6 +1,6 @@
 import { FocusableOption } from '@angular/cdk/a11y';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
+import { Directive, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 import { AbstractFdNgxClass, KeyUtil } from '@fundamental-ngx/cdk/utils';
 
 /**
@@ -51,11 +51,6 @@ export class TabLinkDirective extends AbstractFdNgxClass implements FocusableOpt
         if (this.active) {
             this._addClassToElement('is-selected');
         }
-    }
-
-    /** @hidden */
-    constructor(public elementRef: ElementRef) {
-        super(elementRef);
     }
 
     /** @hidden */

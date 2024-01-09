@@ -1,5 +1,5 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, Inject, Input, Optional, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Inject, Input, Optional, Output } from '@angular/core';
 import { Observable, merge } from 'rxjs';
 import { FdkClickedProvider } from '../clicked';
 import { FdkDisabledProvider } from '../disabled';
@@ -82,7 +82,6 @@ export class SelectableItemDirective<ElementType extends Element = HTMLElement, 
         private readonly$: FdkReadonlyProvider,
         private selectionService: SelectionService<ElementType, ValueType>,
         public readonly elementRef: ElementRef<ElementType>,
-        private _cd: ChangeDetectorRef,
         _clicked: FdkClickedProvider
     ) {
         this.clicked = this.provider?.clicked || _clicked.asObservable();

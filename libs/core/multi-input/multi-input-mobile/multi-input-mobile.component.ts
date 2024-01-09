@@ -3,10 +3,8 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
     Inject,
     OnInit,
-    Optional,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
@@ -15,13 +13,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import {
-    MOBILE_MODE_CONFIG,
-    MobileModeBase,
-    MobileModeConfigToken,
-    MobileModeControl
-} from '@fundamental-ngx/core/mobile-mode';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.interface';
@@ -65,13 +58,8 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
     private _selectedBackup: any[];
 
     /** @hidden */
-    constructor(
-        elementRef: ElementRef,
-        dialogService: DialogService,
-        @Inject(MULTI_INPUT_COMPONENT) multiInputComponent: MultiInputInterface,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
-    ) {
-        super(elementRef, dialogService, multiInputComponent, MobileModeControl.MULTI_INPUT, mobileModes);
+    constructor(@Inject(MULTI_INPUT_COMPONENT) multiInputComponent: MultiInputInterface) {
+        super(multiInputComponent, MobileModeControl.MULTI_INPUT);
     }
 
     /** @hidden */
