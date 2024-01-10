@@ -1,7 +1,8 @@
-import { AfterViewInit, ContentChildren, Directive, QueryList } from '@angular/core';
+import { AfterViewInit, ContentChildren, DestroyRef, Directive, QueryList, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { Table, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, startWith } from 'rxjs';
 import { SmartFilterBarFieldDefinition } from '../interfaces/smart-filter-bar-field-definition';
 import { SmartFilterBarFieldDefinitionDirective } from './smart-filter-bar-field-definition.directive';
 
@@ -24,13 +25,15 @@ export class SmartFilterBarSubjectDirective implements AfterViewInit {
     readonly fieldsStream = this._fieldDefinitionsSubject.asObservable();
 
     /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
     constructor(private _subject: Table) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._fieldDefinitionsSubject.next(this._fieldDefinitions.toArray().map((d) => this._transformSubjectField(d)));
-        this._fieldDefinitions.changes.subscribe((definitions: SmartFilterBarFieldDefinitionDirective[]) => {
-            this._fieldDefinitionsSubject.next(definitions.map((d) => this._transformSubjectField(d)));
+        this._fieldDefinitions.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            this._fieldDefinitionsSubject.next(this._fieldDefinitions.map((d) => this._transformSubjectField(d)));
         });
     }
 
@@ -58,7 +61,7 @@ export class SmartFilterBarSubjectDirective implements AfterViewInit {
     /** @hidden */
     getDefaultFields(): string[] {
         return this.getSubjectFields()
-            ?.filter((f) => f.defaultSelected)
+            ?.filter((f) => f.filterable && f.defaultSelected)
             .map((f) => f.name);
     }
 

@@ -34,7 +34,7 @@ export class InputGroupAddonBodyComponent implements OnInit {
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
         private _renderer: Renderer2,
-        private contentDensityObserver: ContentDensityObserver
+        contentDensityObserver: ContentDensityObserver
     ) {
         contentDensityObserver.subscribe();
     }

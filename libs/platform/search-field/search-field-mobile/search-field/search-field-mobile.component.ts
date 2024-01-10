@@ -3,10 +3,8 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
     Inject,
     OnInit,
-    Optional,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
@@ -19,15 +17,9 @@ import {
     DialogCloseButtonComponent,
     DialogComponent,
     DialogFooterComponent,
-    DialogHeaderComponent,
-    DialogService
+    DialogHeaderComponent
 } from '@fundamental-ngx/core/dialog';
-import {
-    MOBILE_MODE_CONFIG,
-    MobileModeBase,
-    MobileModeConfigToken,
-    MobileModeControl
-} from '@fundamental-ngx/core/mobile-mode';
+import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import {
     SEARCH_FIELD_COMPONENT,
@@ -63,13 +55,8 @@ export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobile
     childContent: SearchFieldChildContent | null = null;
 
     /** @hidden */
-    constructor(
-        elementRef: ElementRef,
-        dialogService: DialogService,
-        @Inject(SEARCH_FIELD_COMPONENT) searchFieldComponent: SearchFieldMobileInterface,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
-    ) {
-        super(elementRef, dialogService, searchFieldComponent, MobileModeControl.SEARCH_FIELD, mobileModes);
+    constructor(@Inject(SEARCH_FIELD_COMPONENT) searchFieldComponent: SearchFieldMobileInterface) {
+        super(searchFieldComponent, MobileModeControl.SEARCH_FIELD);
     }
 
     /** @hidden */

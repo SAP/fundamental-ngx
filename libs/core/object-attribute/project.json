@@ -6,10 +6,7 @@
     "prefix": "fdp",
     "targets": {
         "lint": {
-            "executor": "@nx/eslint:lint",
-            "options": {
-                "lintFilePatterns": ["libs/core/object-attribute/**/*.ts", "libs/core/object-attribute/**/*.html"]
-            }
+            "executor": "@nx/eslint:lint"
         },
         "test": {
             "executor": "@nx/jest:jest",

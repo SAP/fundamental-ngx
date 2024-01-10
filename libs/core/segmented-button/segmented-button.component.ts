@@ -1,4 +1,3 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
@@ -17,6 +16,7 @@ import {
     QueryList,
     SimpleChanges,
     ViewEncapsulation,
+    booleanAttribute,
     effect,
     forwardRef
 } from '@angular/core';
@@ -65,15 +65,15 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
 })
 export class SegmentedButtonComponent implements AfterViewInit, ControlValueAccessor, OnDestroy, OnChanges {
     /** Whether segmented button is on toggle mode, which allows to toggle more than 1 button */
-    @Input({ transform: coerceBooleanProperty })
-    toggle: BooleanInput;
+    @Input({ transform: booleanAttribute })
+    toggle = false;
 
     /**
      * Whether segmented button is on vertical mode,
      * which allows to display buttons vertically
      **/
-    @Input({ transform: coerceBooleanProperty })
-    vertical: BooleanInput;
+    @Input({ transform: booleanAttribute })
+    vertical = false;
 
     /** @hidden */
     @ContentChildren(FD_BUTTON_COMPONENT)
@@ -277,7 +277,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
 
     /** @hidden */
     private _isButtonDisabled(buttonComponent: ButtonComponent): boolean {
-        return buttonComponent._disabled || buttonComponent.ariaDisabled;
+        return buttonComponent.disabled || buttonComponent.ariaDisabled;
     }
 
     /** @hidden */

@@ -4,11 +4,10 @@ import {
     EventEmitter,
     HostBinding,
     Input,
-    Optional,
     Output,
-    Renderer2,
     ViewEncapsulation,
     computed,
+    inject,
     signal
 } from '@angular/core';
 import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -98,12 +97,7 @@ export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirec
     }
 
     /** @hidden */
-    constructor(
-        @Optional() private _rtlService: RtlService,
-        renderer: Renderer2
-    ) {
-        super(renderer);
-    }
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** Method that toggles the Notification list content */
     toggleExpand(): void {

@@ -1,5 +1,4 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { CommonModule, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
@@ -18,6 +17,7 @@ import {
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
+    booleanAttribute,
     computed,
     effect,
     inject,
@@ -25,7 +25,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NestedButtonDirective } from '@fundamental-ngx/btp/button';
-import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef, KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
@@ -47,7 +47,7 @@ import { NavigationListComponent } from '../navigation-list/navigation-list.comp
     selector: '[fdbNavigationListItemMarker]',
     standalone: true
 })
-export class NavigationListItemMarkerDirective {
+export class NavigationListItemMarkerDirective implements HasElementRef {
     /** Element reference. */
     readonly elementRef = inject(ElementRef);
     /** @hidden */
@@ -100,7 +100,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     }
 
     /** Whether the list item represents "Home" item. */
-    @Input({ transform: coerceBooleanProperty })
+    @Input({ transform: booleanAttribute })
     set home(value: boolean) {
         this._home$.set(value);
     }
@@ -110,7 +110,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     }
 
     /** Whether the list item should be rendered as a separator */
-    @Input({ transform: coerceBooleanProperty })
+    @Input({ transform: booleanAttribute })
     set separator(value: boolean) {
         this._separator$.set(value);
     }
@@ -119,7 +119,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     }
 
     /** Whether the list item should be rendered as a spacer */
-    @Input({ transform: coerceBooleanProperty })
+    @Input({ transform: booleanAttribute })
     set spacer(value: boolean) {
         this._spacer$.set(value);
     }
@@ -128,7 +128,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     }
 
     /** Whether the list item should be rendered as a group. */
-    @Input({ transform: coerceBooleanProperty })
+    @Input({ transform: booleanAttribute })
     set group(group: boolean) {
         this.isGroup$.set(group);
     }
@@ -138,7 +138,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     }
 
     /** Whether the list item is expanded. */
-    @Input({ transform: coerceBooleanProperty })
+    @Input({ transform: booleanAttribute })
     set expanded(expanded: boolean) {
         this.expanded$.set(expanded);
     }
@@ -148,7 +148,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
     }
 
     /** Whether the item should be marked as selected. */
-    @Input({ transform: coerceBooleanProperty })
+    @Input({ transform: booleanAttribute })
     set selected(selected: boolean) {
         this.selected$.set(selected);
     }

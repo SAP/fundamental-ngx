@@ -15,7 +15,7 @@ import {
     inject,
     signal
 } from '@angular/core';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef, RtlService } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import {
@@ -84,7 +84,7 @@ import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens'
         FdTranslatePipe
     ]
 })
-export class BreadcrumbComponent implements AfterViewInit {
+export class BreadcrumbComponent implements AfterViewInit, HasElementRef {
     /** Whether to append items to the overflow dropdown in reverse order. Default is true. */
     @Input()
     reverse = false;

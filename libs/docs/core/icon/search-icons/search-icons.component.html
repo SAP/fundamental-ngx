@@ -38,7 +38,7 @@
             @if (icon.searchMatches && icon.searchMatches['tags']) {
                 @for (tag of icon.tags; track tag; let index = $index) {
                     <fd-info-label
-                        [color]="$any(icon.searchMatches['tags'][index])?.length > 0 ? '6' : '0'"
+                        [color]="$any(icon.searchMatches['tags'][index])?.length > 0 ? 6 : null"
                         [innerHTML]="
                             highlightedInfoLabelHTML(tag | highlight: $any(icon.searchMatches['tags'][index]) : true)
                         "

@@ -2,11 +2,9 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ElementRef,
     Inject,
     OnDestroy,
     OnInit,
-    Optional,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
@@ -17,13 +15,8 @@ import { Subscription } from 'rxjs';
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import {
-    MOBILE_MODE_CONFIG,
-    MobileModeBase,
-    MobileModeConfigToken,
-    MobileModeControl
-} from '@fundamental-ngx/core/mobile-mode';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { PopoverChildContent } from '../popover-child-content.interface';
@@ -71,13 +64,10 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
 
     /** @hidden */
     constructor(
-        elementRef: ElementRef,
-        dialogService: DialogService,
         private _changeDetectorref: ChangeDetectorRef,
-        @Inject(POPOVER_COMPONENT) _popoverComponent: PopoverInterface,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
+        @Inject(POPOVER_COMPONENT) _popoverComponent: PopoverInterface
     ) {
-        super(elementRef, dialogService, _popoverComponent, MobileModeControl.POPOVER, mobileModes);
+        super(_popoverComponent, MobileModeControl.POPOVER);
     }
 
     /** @hidden */

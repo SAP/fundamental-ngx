@@ -1,7 +1,6 @@
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import {
     AfterViewInit,
-    ChangeDetectorRef,
     DestroyRef,
     Directive,
     ElementRef,
@@ -109,8 +108,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit {
     /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef,
-        private readonly _renderer: Renderer2,
-        private readonly _cdRef: ChangeDetectorRef
+        private readonly _renderer: Renderer2
     ) {}
 
     /** @hidden */

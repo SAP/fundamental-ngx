@@ -6,8 +6,8 @@ import {
     Component,
     ContentChild,
     ElementRef,
-    Optional,
-    ViewChild
+    ViewChild,
+    inject
 } from '@angular/core';
 import { BarComponent, BarElementDirective, BarLeftDirective } from '@fundamental-ngx/core/bar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -56,16 +56,14 @@ export class MessageBoxHeaderComponent extends DialogHeaderBase implements After
 
     /** @hidden */
     get messageBoxConfig(): MessageBoxConfig {
-        return this.messageBox?._messageBoxConfig || {};
+        return this._messageBox?._messageBoxConfig || {};
     }
 
     /** @hidden */
-    constructor(
-        private _cdr: ChangeDetectorRef,
-        @Optional() private messageBox?: MessageBoxHost
-    ) {
-        super(_cdr);
-    }
+    private readonly _cdr = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    private readonly _messageBox = inject(MessageBoxHost, { optional: true });
 
     /** @hidden */
     get _showSemanticIcon(): boolean {

@@ -31,7 +31,7 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
     /** @hidden */
     constructor(
         public readonly elementRef: ElementRef,
-        private readonly _contentDensityObserver: ContentDensityObserver
+        _contentDensityObserver: ContentDensityObserver
     ) {
         _contentDensityObserver.subscribe();
     }
@@ -113,8 +113,8 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
     /** @hidden */
     constructor(
         public readonly elementRef: ElementRef,
-        private renderer: Renderer2,
-        private _contentDensityObserver: ContentDensityObserver
+        private readonly renderer: Renderer2,
+        _contentDensityObserver: ContentDensityObserver
     ) {
         _contentDensityObserver.subscribe();
     }

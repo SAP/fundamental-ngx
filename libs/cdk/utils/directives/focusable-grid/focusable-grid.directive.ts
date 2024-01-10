@@ -1,4 +1,3 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
@@ -9,6 +8,7 @@ import {
     Input,
     Output,
     QueryList,
+    booleanAttribute,
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -42,14 +42,8 @@ export class FocusableGridDirective implements AfterViewInit {
     contentDirection: 'ltr' | 'rtl' | null = 'ltr';
 
     /** Whether the item in the previous/next row should be selected when going out of the first/last cell in the row. Default is false. */
-    @Input()
-    set wrapHorizontally(value: BooleanInput) {
-        this._wrapHorizontally = coerceBooleanProperty(value);
-    }
-
-    get wrapHorizontally(): boolean {
-        return this._wrapHorizontally;
-    }
+    @Input({ transform: booleanAttribute })
+    wrapHorizontally = false;
 
     /** Specify which item to select in prev/next row if its length smaller than current index. Nullish value means do not select. Default is null. */
     @Input()
@@ -66,9 +60,6 @@ export class FocusableGridDirective implements AfterViewInit {
     /** @hidden */
     @ContentChildren(FDK_FOCUSABLE_LIST_DIRECTIVE, { descendants: true })
     private readonly _focusableLists: QueryList<FocusableListDirective>;
-
-    /** @hidden */
-    private _wrapHorizontally = false;
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);

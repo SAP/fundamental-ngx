@@ -1,4 +1,4 @@
-import { Directive, SkipSelf } from '@angular/core';
+import { Directive, inject } from '@angular/core';
 
 import { StepInputComponent } from './base.step-input';
 import { StepInputActionButton } from './step-input-action-button';
@@ -11,10 +11,7 @@ import { StepInputActionButton } from './step-input-action-button';
     standalone: true
 })
 export class StepInputDecrementDirective extends StepInputActionButton {
-    /** @hidden */
-    constructor(@SkipSelf() private stepInput: StepInputComponent) {
-        super();
-    }
+    private readonly stepInput = inject(StepInputComponent, { skipSelf: true });
 
     /** @hidden */
     canHandleAction(): boolean {

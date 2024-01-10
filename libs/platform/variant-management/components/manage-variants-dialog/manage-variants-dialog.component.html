@@ -75,12 +75,13 @@
             <fdp-column name="actions">
                 <fdp-table-cell *fdpCellDef="let item; as: _variantModel">
                     @if (!item.readonly) {
-                        <fdp-button
-                            buttonType="transparent"
+                        <button
+                            fd-button
+                            fdType="transparent"
                             glyph="decline"
                             [title]="'platformVariantManagement.removeVariant' | fdTranslate"
                             (click)="_removeVariant(item)"
-                        ></fdp-button>
+                        ></button>
                     }
                 </fdp-table-cell>
             </fdp-column>

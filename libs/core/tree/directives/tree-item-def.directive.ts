@@ -1,4 +1,4 @@
-import { Directive, Input, TemplateRef } from '@angular/core';
+import { Directive, Input, TemplateRef, inject } from '@angular/core';
 import { TreeItem } from '../models/tree-item';
 import { TreeItemDefContext } from '../models/tree-item-def-context';
 
@@ -13,11 +13,10 @@ export class TreeItemDefDirective<T extends TreeItem = TreeItem> {
      */
     @Input()
     fdTreeItemDefAs: T;
+    /** Template reference. */
+    readonly templateRef = inject<TemplateRef<TreeItemDefContext<T>>>(TemplateRef);
     /** @hidden */
     static ngTemplateContextGuard(dir: TreeItemDefDirective, ctx: TreeItemDefContext): ctx is TreeItemDefContext {
         return true;
     }
-
-    /** @hidden */
-    constructor(public templateRef: TemplateRef<TreeItemDefContext<T>>) {}
 }

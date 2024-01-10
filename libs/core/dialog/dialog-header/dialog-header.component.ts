@@ -1,11 +1,4 @@
-import {
-    AfterContentInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    Optional,
-    ViewEncapsulation
-} from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { BarModule } from '@fundamental-ngx/core/bar';
@@ -33,16 +26,5 @@ import { DialogConfig } from '../utils/dialog-config.class';
 })
 export class DialogHeaderComponent extends DialogHeaderBase implements AfterContentInit {
     /** @hidden */
-    constructor(
-        @Optional() public dialogConfig: DialogConfig,
-        changeDetectorRef: ChangeDetectorRef
-    ) {
-        super(changeDetectorRef);
-        this.dialogConfig = this.dialogConfig || {};
-    }
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-        super.ngAfterContentInit();
-    }
+    dialogConfig = inject(DialogConfig, { optional: true }) || {};
 }

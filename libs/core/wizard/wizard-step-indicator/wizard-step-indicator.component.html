@@ -1,4 +1,4 @@
-@if (stackedItems && stackedItems.length > 1) {
+@if (stackedItems$() && stackedItems$().length > 1) {
     <fd-action-sheet [style.pointer-events]="'all'">
         <fd-action-sheet-control>
             <span class="fd-wizard__step-indicator">
@@ -6,7 +6,7 @@
             </span>
         </fd-action-sheet-control>
         <fd-action-sheet-body>
-            @for (step of stackedItems; track step) {
+            @for (step of stackedItems$(); track step) {
                 <li
                     fd-action-sheet-item
                     [label]="step.label"
@@ -21,7 +21,7 @@
 } @else {
     <span
         class="fd-wizard__step-indicator"
-        (click)="stepItemClicked(stackedItems.length ? stackedItems[0] : undefined, $event)"
+        (click)="stepItemClicked(stackedItems$().length ? stackedItems$()[0] : undefined, $event)"
     >
         <ng-template [ngTemplateOutlet]="stepIndicatorContent"></ng-template>
     </span>

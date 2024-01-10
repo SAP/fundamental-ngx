@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.34...v0.48.0-rc.35) (2024-01-10)
+
+**Note:** Version bump only for package @fundamental-ngx/btp
+
+
+
+
+
+# [0.48.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.33...v0.48.0-rc.34) (2024-01-09)
+
+
+### Features
+
+* **core,platform,btp:** adopted fundamental-styles changes and updated dependencies ([#11169](https://github.com/SAP/fundamental-ngx/issues/11169)) ([1185da3](https://github.com/SAP/fundamental-ngx/commit/1185da3e957c793a976f75ae245a4e4beb3551fd))
+
+
+### BREAKING CHANGES
+
+* **core,platform,btp:** - `DynamicPageService` from `platform` no longer exists, use `core`
+- moved fd-splitter to fdb-splitter. This can be automatically adopted via `ng g @fundamental-ngx/core:migrate-to-fdb-splitter --project={applicationName}` schematic
+
+
+
+
+
+# [0.48.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.32...v0.48.0-rc.33) (2024-01-09)
+
+
+### Bug Fixes
+
+* **platform:** simplify class inheritance ([#11198](https://github.com/SAP/fundamental-ngx/issues/11198)) ([81757f2](https://github.com/SAP/fundamental-ngx/commit/81757f2a238e936326e9c4b50749b7f7d0edbd88))
+
+
+### BREAKING CHANGES
+
+* **platform:** Platform Switch component now uses `ariaLabelledBy` instead of `ariaLabelledby`
+
+
+
+
+
+# [0.48.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.31...v0.48.0-rc.32) (2024-01-08)
+
+**Note:** Version bump only for package @fundamental-ngx/btp
+
+
+
+
+
 # [0.48.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.30...v0.48.0-rc.31) (2024-01-08)
 
 **Note:** Version bump only for package @fundamental-ngx/btp

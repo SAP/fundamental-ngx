@@ -41,20 +41,22 @@
                                 <fd-wizard-next-step [canHide]="appendToWizard">
                                     @if (!isLastStep) {
                                         <ng-template #defaultGoNextButtonTemplate>
-                                            <fdp-button
+                                            <button
+                                                fd-button
                                                 [fdContentDensity]="navigationButtonLabels.goNext.contentDensity"
-                                                [buttonType]="navigationButtonLabels.goNext.type"
+                                                [fdType]="navigationButtonLabels.goNext.type"
                                                 [label]="navigationButtonLabels.goNext.label"
                                                 (click)="goNext.emit()"
-                                            ></fdp-button>
+                                            ></button>
                                         </ng-template>
                                         <ng-template #defaultReviewButtonTemplate>
-                                            <fdp-button
+                                            <button
+                                                fd-button
                                                 [fdContentDensity]="navigationButtonLabels.review.contentDensity"
-                                                [buttonType]="navigationButtonLabels.review.type"
+                                                [fdType]="navigationButtonLabels.review.type"
                                                 [label]="navigationButtonLabels.review.label"
                                                 (click)="goNext.emit()"
-                                            ></fdp-button>
+                                            ></button>
                                         </ng-template>
                                         @if (
                                             (isBranchingStep && (!isCurrentStepCompleted || stepsOrderChanged)) ||
@@ -72,12 +74,13 @@
                                         }
                                     } @else {
                                         <ng-template #defaultFinishButtonTemplate>
-                                            <fdp-button
+                                            <button
+                                                fd-button
                                                 [fdContentDensity]="navigationButtonLabels.finish.contentDensity"
-                                                [buttonType]="navigationButtonLabels.finish.type"
+                                                [fdType]="navigationButtonLabels.finish.type"
                                                 [label]="navigationButtonLabels.finish.label"
                                                 (click)="finish.emit()"
-                                            ></fdp-button>
+                                            ></button>
                                         </ng-template>
                                         <ng-template
                                             [ngTemplateOutlet]="finishButtonTemplate || defaultFinishButtonTemplate"

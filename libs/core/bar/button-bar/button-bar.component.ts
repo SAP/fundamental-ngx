@@ -1,7 +1,6 @@
-import { ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, ViewChild } from '@angular/core';
+import { Component, HostBinding, Input, ViewChild } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BaseButton, ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
-import { Subscription } from 'rxjs';
 import { FD_BUTTON_BAR_COMPONENT } from '../tokens';
 
 let randomButtonBarId = 0;
@@ -34,7 +33,7 @@ let randomButtonBarId = 0;
     standalone: true,
     imports: [ButtonComponent]
 })
-export class ButtonBarComponent extends BaseButton implements OnDestroy {
+export class ButtonBarComponent extends BaseButton {
     /** Whether the element should take the whole width of the container. */
     @Input()
     @HostBinding('class.fd-bar__element--full-width')
@@ -81,23 +80,10 @@ export class ButtonBarComponent extends BaseButton implements OnDestroy {
     /** @hidden */
     @HostBinding('style.pointer-events')
     get pointerEvents(): string {
-        return this._disabled ? 'none' : 'auto';
+        return this.disabled ? 'none' : 'auto';
     }
 
     /** @hidden */
     @ViewChild(ButtonComponent)
     _buttonComponent: ButtonComponent;
-
-    /** @hidden */
-    private _subscriptions = new Subscription();
-
-    /** @hidden */
-    constructor(private _cdRef: ChangeDetectorRef) {
-        super();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
-    }
 }

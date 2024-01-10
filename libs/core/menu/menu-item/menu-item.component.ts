@@ -1,5 +1,6 @@
 import {
     AfterContentInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -26,9 +27,8 @@ import {
 import { defer, fromEvent, Observable, Subject, Subscription, timer } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 
-import { BooleanInput } from '@angular/cdk/coercion';
 import { NgTemplateOutlet } from '@angular/common';
-import { coerceBoolean, Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DefaultMenuItem } from '../default-menu-item.class';
 import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { MenuInteractiveComponent } from '../menu-interactive.component';
@@ -91,10 +91,9 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
     parentSubmenu: BaseSubmenu | undefined;
 
     /** Whether the menu item has a separator */
-    @Input()
+    @Input({ transform: booleanAttribute })
     @HostBinding('class.has-separator')
-    @coerceBoolean
-    hasSeparator: BooleanInput;
+    hasSeparator = false;
 
     /** Emitted when the menu item is selected. */
     @Output()

@@ -1,4 +1,3 @@
-
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -11,7 +10,6 @@ import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
 import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 import { DynamicPageComponent } from './dynamic-page.component';
-import { DynamicPageService } from './dynamic-page.service';
 import { PlatformDynamicPageModule } from './dynamic-page.module';
 import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import { CommonModule } from '@angular/common';
@@ -58,18 +56,12 @@ class TestComponent {
 describe('DynamicPageComponent default values', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
-    let dynamicPageServiceSpy: Partial<DynamicPageService>;
 
     beforeEach(waitForAsync(() => {
-        dynamicPageServiceSpy = {
-            expandHeader: jest.fn(),
-            collapseHeader: jest.fn()
-        };
-
         TestBed.configureTestingModule({
             imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ButtonModule],
             declarations: [TestComponent],
-            providers: [{ provide: DynamicPageService, useValue: dynamicPageServiceSpy }]
+            providers: []
         }).compileComponents();
     }));
 
@@ -173,8 +165,7 @@ describe('DynamicPageComponent tabbed values', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, PlatformDynamicPageModule, TabsModule],
-            declarations: [TestTabbedComponent],
-            providers: [{ provide: DynamicPageService }]
+            declarations: [TestTabbedComponent]
         }).compileComponents();
     }));
     beforeEach(() => {
@@ -230,8 +221,7 @@ describe('DynamicPageComponent with collapsible set to false', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, PlatformDynamicPageModule, TabsModule],
-            declarations: [TestNonCollapsibleComponent],
-            providers: [{ provide: DynamicPageService }]
+            declarations: [TestNonCollapsibleComponent]
         }).compileComponents();
     }));
     beforeEach(() => {
@@ -316,8 +306,7 @@ describe('DynamicPageComponent Content Projection', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ButtonModule],
-            declarations: [HostTestComponent],
-            providers: [DynamicPageService]
+            declarations: [HostTestComponent]
         }).compileComponents();
     }));
 

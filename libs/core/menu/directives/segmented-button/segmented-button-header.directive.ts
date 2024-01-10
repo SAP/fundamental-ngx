@@ -1,6 +1,7 @@
 import { AfterViewInit, DestroyRef, Directive, ElementRef, inject, Input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CvaControl, CvaDirective, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, combineLatest, map, merge, of, switchMap, tap } from 'rxjs';
 import { MenuItemComponent } from '../../menu-item/menu-item.component';
 import { FD_MENU_ITEM_COMPONENT } from '../../menu.tokens';
@@ -23,7 +24,7 @@ const strictEquals = (a: unknown, b: unknown): boolean => a === b;
         { provide: FD_FORM_FIELD_CONTROL, useExisting: SegmentedButtonHeaderDirective, multi: true }
     ]
 })
-export class SegmentedButtonHeaderDirective<T> implements AfterViewInit {
+export class SegmentedButtonHeaderDirective<T> implements AfterViewInit, HasElementRef {
     /** @hidden */
     @Input()
     valueComparator: (a: T, b: T) => boolean = strictEquals;

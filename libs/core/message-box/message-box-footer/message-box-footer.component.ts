@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { AfterContentInit, AfterViewInit, Component, Optional } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, inject } from '@angular/core';
 import { BarComponent, BarRightDirective } from '@fundamental-ngx/core/bar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogFooterBase } from '@fundamental-ngx/core/dialog';
@@ -31,15 +31,7 @@ export class MessageBoxFooterComponent extends DialogFooterBase implements After
         return this.messageBox?._messageBoxConfig || {};
     }
 
-    /** @hidden */
-    constructor(@Optional() private messageBox?: MessageBoxHost) {
-        super();
-    }
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-        super.ngAfterContentInit();
-    }
+    private readonly messageBox = inject(MessageBoxHost, { optional: true });
 
     /** @hidden */
     ngAfterViewInit(): void {

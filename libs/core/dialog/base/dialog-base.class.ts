@@ -15,7 +15,7 @@ import { NavigationStart, Router } from '@angular/router';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
 
-import { FocusTrapService, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
+import { FocusTrapService, HasElementRef, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 
 import { FD_DIALOG_FOCUS_TRAP_ERROR } from '../tokens';
 import { DialogSize, dialogWidthToSize } from '../utils/dialog-width-to-size';
@@ -28,7 +28,7 @@ function coerceMetricValue(value: string | number | undefined): string | undefin
 
 @Directive()
 export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRefBase<T>>
-    implements OnInit, AfterViewInit, OnDestroy
+    implements OnInit, AfterViewInit, OnDestroy, HasElementRef
 {
     /**
      * @hidden
@@ -41,6 +41,19 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
 
     /** @hidden Dialog padding sizes */
     dialogPaddingSize: DialogSize;
+
+    /** @hidden */
+    readonly _focusTrapService = inject(FocusTrapService);
+    /** @hidden */
+    readonly _changeDetectorRef = inject(ChangeDetectorRef);
+    /** @hidden */
+    readonly elementRef = inject(ElementRef);
+
+    /** @hidden */
+    protected readonly _router = inject(Router);
+
+    /** @hidden */
+    protected readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
     protected _focusTrapId: string;
@@ -77,15 +90,6 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
             this._ref.dismiss('backdrop');
         }
     }
-
-    /** @hidden */
-    constructor(
-        protected _router: Router,
-        public readonly elementRef: ElementRef,
-        protected _changeDetectorRef: ChangeDetectorRef,
-        protected _rtlService: RtlService,
-        protected _focusTrapService: FocusTrapService
-    ) {}
 
     /** @hidden */
     ngOnInit(): void {

@@ -9,7 +9,6 @@ import {
     ComponentFactoryResolver,
     ComponentRef,
     DestroyRef,
-    ElementRef,
     EmbeddedViewRef,
     HostBinding,
     HostListener,
@@ -111,7 +110,6 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
 
     /** @hidden */
     constructor(
-        private _elRef: ElementRef,
         private _componentFactoryResolver: ComponentFactoryResolver,
         private _cdRef: ChangeDetectorRef,
         private _router: Router,
@@ -121,7 +119,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         @Optional() private _rtlService: RtlService,
         @Optional() @Inject(FD_POPOVER_COMPONENT) private _popover: PopoverComponent
     ) {
-        super(_elRef);
+        super();
 
         this._setNotificationConfig(this._notificationConfig);
     }
@@ -164,7 +162,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         // waiting for afterViewInit hook to fire
         await this._afterViewInit$.pipe(filter(Boolean), take(1), takeUntilDestroyed(this._destroyRef)).toPromise();
         if (!this._focusTrap) {
-            this._focusTrap = this._focusTrapFactory.create(this._elRef.nativeElement);
+            this._focusTrap = this._focusTrapFactory.create(this.elementRef.nativeElement);
         }
         return this._focusTrap.focusFirstTabbableElementWhenReady();
     }
