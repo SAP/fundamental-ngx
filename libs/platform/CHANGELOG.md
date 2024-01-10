@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.35...v0.48.0-rc.36) (2024-01-10)
+
+
+### Features
+
+* **platform:** added ariaLabel priority over the ariaLabelledBy ([#11172](https://github.com/SAP/fundamental-ngx/issues/11172)) ([ceb680d](https://github.com/SAP/fundamental-ngx/commit/ceb680db1ff8aff59012f33a1cc4e4549af566d7))
+
+
+
+
+
 # [0.48.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.34...v0.48.0-rc.35) (2024-01-10)
 
 
