@@ -37,10 +37,7 @@
             "defaultConfiguration": "production"
         },
         "lint": {
-            "executor": "@nx/eslint:lint",
-            "options": {
-                "lintFilePatterns": ["libs/cx/src/lib/**/*.ts", "libs/cx/src/lib/**/*.html"]
-            }
+            "executor": "@nx/eslint:lint"
         }
     },
     "tags": ["type:lib", "scope:cx"]

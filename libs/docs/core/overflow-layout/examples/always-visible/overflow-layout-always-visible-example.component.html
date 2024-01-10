@@ -7,7 +7,7 @@
             [forceVisibility]="item.forcedVisibility"
             (click)="hidden ? toggleForcedVisibility(i) : null"
             [focusable]="true"
-            [color]="(i % 10).toString()"
+            [color]="infoLabelColorForIndex(i)"
             [label]="'Info label ' + i + (hidden ? ' hidden' : ' visible')"
         >
         </fd-info-label>

@@ -1,53 +1,43 @@
-import { Rule, SchematicContext, Tree, chain, SchematicsException } from '@angular-devkit/schematics';
+import { Rule, SchematicContext, SchematicsException, Tree, chain } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-import { getPackageVersionFromPackageJson, hasPackage } from '../utils/package-utils';
-import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
-import { hasModuleImport } from '../utils/ng-module-utils';
+import {
+    NodeDependency,
+    addPackageJsonDependency,
+    getPackageJsonDependency
+} from '@schematics/angular/utility/dependencies';
 import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
+import { hasModuleImport } from '../utils/ng-module-utils';
 
-import { defaultFontStyle } from './styles';
 import { addModuleImportToModule, findModuleFromOptions } from '@angular/cdk/schematics';
+import { defaultFontStyle } from './styles';
 
 const browserAnimationsModuleName = 'BrowserAnimationsModule';
 const noopAnimationsModuleName = 'NoopAnimationsModule';
 const fdStylesIconPath = 'node_modules/fundamental-styles/dist/icon.css';
 
+/** Installs cx package and dependencies. */
 export function ngAdd(options: any): Rule {
-    return chain([
-        addDependencies(),
-        endInstallTask(),
-        addAnimations(options),
-        addStylePathToConfig(options),
-        addFontsToStyles(options)
-    ]);
-}
-
-// Runs npm install. Called as the last rule.
-function endInstallTask(): Rule {
-    return (tree: Tree, context: SchematicContext) => {
-        context.addTask(new NodePackageInstallTask());
-        return tree;
-    };
+    return chain([addDependencies(), addAnimations(options), addStylePathToConfig(options), addFontsToStyles(options)]);
 }
 
 // Adds missing dependencies to the project.
 function addDependencies(): Rule {
-    return (tree: Tree) => {
-        const ngCoreVersionTag = getPackageVersionFromPackageJson(tree, '@angular/core');
+    return (tree: Tree, context: SchematicContext) => {
+        const ngCoreVersionTag = getPackageJsonDependency(tree, '@angular/core');
         const dependencies: NodeDependency[] = [];
 
-        if (!hasPackage(tree, '@angular/forms')) {
+        const formsDependency = getPackageJsonDependency(tree, '@angular/forms');
+        if (!formsDependency) {
             dependencies.push({
-                type: NodeDependencyType.Default,
-                version: `${ngCoreVersionTag}`,
+                ...ngCoreVersionTag,
                 name: '@angular/forms'
             });
         }
 
-        if (!hasPackage(tree, '@angular/animations')) {
+        const animationsDependency = getPackageJsonDependency(tree, '@angular/animations');
+        if (!animationsDependency) {
             dependencies.push({
-                type: NodeDependencyType.Default,
-                version: `${ngCoreVersionTag}`,
+                ...ngCoreVersionTag,
                 name: '@angular/animations'
             });
         }
@@ -56,6 +46,8 @@ function addDependencies(): Rule {
             addPackageJsonDependency(tree, dependency);
             console.log(`✅️ Added ${dependency.name} to ${dependency.type}.`);
         });
+
+        context.addTask(new NodePackageInstallTask());
 
         return tree;
     };
@@ -134,7 +126,8 @@ function addFontsToStyles(options: any): Rule {
         if (options.styleFonts) {
             if (!stylesFileContent) {
                 console.warn(
-                    `Unable to find styles.scss. Please manually configure your styles. For more info, visit https://fundamental-styles.netlify.com/getting-started.html`
+                    // eslint-disable-next-line max-len
+                    `Unable to find styles.scss. Please manually configure your styles. For more info, visit https://fundamental-styles.netlify.app/?path=/docs/docs-introduction--docs#getting-started`
                 );
                 return tree;
             }
@@ -151,7 +144,8 @@ function addFontsToStyles(options: any): Rule {
                 }
             } catch (e) {
                 console.warn(
-                    `Unable to find styles.scss. Please manually configure your styles. For more info, visit https://fundamental-styles.netlify.com/getting-started.html`
+                    // eslint-disable-next-line max-len
+                    `Unable to find styles.scss. Please manually configure your styles. For more info, visit https://fundamental-styles.netlify.app/?path=/docs/docs-introduction--docs#getting-started`
                 );
                 return tree;
             }

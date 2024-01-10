@@ -1,4 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -10,7 +10,9 @@ import {
     Output,
     ViewChild,
     ViewEncapsulation,
-    booleanAttribute
+    booleanAttribute,
+    effect,
+    inject
 } from '@angular/core';
 import { FilterStringsPipe, Nullable } from '@fundamental-ngx/cdk/utils';
 import {
@@ -22,6 +24,7 @@ import {
 } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogService } from '@fundamental-ngx/core/dialog';
+import { DynamicPage, FD_DYNAMIC_PAGE } from '@fundamental-ngx/core/dynamic-page';
 import { ListComponent, ListItemComponent, ListLinkDirective, ListTitleDirective } from '@fundamental-ngx/core/list';
 import {
     PopoverBodyComponent,
@@ -33,6 +36,7 @@ import {
 } from '@fundamental-ngx/core/popover';
 import { HeaderSizes, TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FDP_DYNAMIC_PAGE } from '@fundamental-ngx/platform/dynamic-page';
 import { SearchFieldComponent, SearchInput } from '@fundamental-ngx/platform/search-field';
 import equal from 'fast-deep-equal';
 import { BehaviorSubject } from 'rxjs';
@@ -78,6 +82,8 @@ import { VariantItem } from './variant-item.class';
         ButtonBarComponent,
         FdTranslatePipe,
         FilterStringsPipe,
+        AsyncPipe,
+        NgClass,
         ButtonComponent
     ]
 })
@@ -124,11 +130,6 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
     activeVariantChange = new EventEmitter<Variant<T>>();
 
     /**
-     * Used internally for communicating with wrapper component.
-     */
-    activeVariantChangeSubject = new BehaviorSubject<Variant<T> | null>(null);
-
-    /**
      * Custom dirty label directive.
      */
     @ContentChild(VariantManagementDirtyLabelDirective)
@@ -137,6 +138,15 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
     /** @hidden */
     @ViewChild('popover')
     _popover: PopoverComponent;
+
+    /** @hidden */
+    @HostBinding('class')
+    private readonly _initialClass = 'fd-variant-management';
+
+    /**
+     * Used internally for communicating with wrapper component.
+     */
+    activeVariantChangeSubject = new BehaviorSubject<Variant<T> | null>(null);
 
     /** @hidden */
     _variantChanged = false;
@@ -151,9 +161,17 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
     _filterPhrase: Nullable<string> = null;
 
     /** @hidden */
-    @HostBinding('class')
-    private readonly _initialClass = 'fd-variant-management';
+    get _dynamicPage(): DynamicPage | null {
+        return this._coreDynamicPage || this._platformDynamicPage;
+    }
 
+    /** @hidden */
+    protected _dynamicPageCollapsed$ = new BehaviorSubject(false);
+
+    /** @hidden */
+    protected _coreDynamicPage = inject(FD_DYNAMIC_PAGE, { optional: true });
+    /** @hidden */
+    protected _platformDynamicPage = inject(FDP_DYNAMIC_PAGE, { optional: true });
     /** @Hidden */
     private _originalActiveVariant: VariantItem<T>;
 
@@ -161,7 +179,13 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
     constructor(
         private readonly _dialogService: DialogService,
         private readonly _cdr: ChangeDetectorRef
-    ) {}
+    ) {
+        if (this._dynamicPage) {
+            effect(() => {
+                this._dynamicPageCollapsed$.next(this._dynamicPage!.collapsed());
+            });
+        }
+    }
 
     /**
      * Manually select variant.

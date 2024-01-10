@@ -74,7 +74,6 @@ import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { SliderModule } from '@fundamental-ngx/core/slider';
 import { SplitButtonModule } from '@fundamental-ngx/core/split-button';
-import { SplitterModule } from '@fundamental-ngx/core/splitter';
 import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
 import { StepInputModule } from '@fundamental-ngx/core/step-input';
 import { SwitchModule } from '@fundamental-ngx/core/switch';
@@ -174,7 +173,6 @@ import { WizardModule } from '@fundamental-ngx/core/wizard';
         MessageToastModule,
         DynamicSideContentModule,
         SliderModule,
-        SplitterModule,
         IllustratedMessageModule,
         StatusIndicatorModule,
         GridListModule,

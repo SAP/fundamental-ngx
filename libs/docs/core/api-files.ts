@@ -350,7 +350,6 @@ export const API_FILES = {
     switch: ['SwitchComponent'],
     stepInput: ['StepInputComponent'],
     slider: ['SliderComponent'],
-    splitter: ['SplitterComponent', 'SplitterPaneContainerComponent', 'SplitterSplitPaneComponent'],
     token: ['TokenComponent', 'TokenizerComponent'],
     toolbar: [
         'ToolbarComponent',

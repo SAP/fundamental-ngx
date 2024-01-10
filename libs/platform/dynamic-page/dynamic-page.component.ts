@@ -5,19 +5,22 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    DestroyRef,
     DoCheck,
     ElementRef,
     EventEmitter,
     HostBinding,
+    inject,
     Input,
     OnDestroy,
     Optional,
     Output,
     QueryList,
+    Signal,
+    signal,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation,
-    inject
+    ViewEncapsulation
 } from '@angular/core';
 import { startWith } from 'rxjs/operators';
 
@@ -29,12 +32,14 @@ import {
     DynamicPageContentComponent as CoreDynamicPageContentComponent,
     DynamicPageFooterComponent as CoreDynamicPageFooterComponent,
     DynamicPageHeaderComponent as CoreDynamicPageHeaderComponent,
+    DynamicPage,
     DynamicPageGlobalActionsComponent,
     DynamicPageHeaderSubtitleDirective,
     DynamicPageHeaderTitleDirective,
     DynamicPageLayoutActionsComponent,
     DynamicPageSubheaderComponent,
     DynamicPageTitleContentComponent,
+    FD_DYNAMIC_PAGE,
     patchHeaderI18nTexts
 } from '@fundamental-ngx/core/dynamic-page';
 import { FacetComponent } from '@fundamental-ngx/core/facets';
@@ -48,7 +53,8 @@ import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-f
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
 import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 import { DynamicPageConfig } from './dynamic-page.config';
-import { DynamicPageService } from './dynamic-page.service';
+import { FDP_DYNAMIC_PAGE } from './dynamic-page.tokens';
+import { PlatformDynamicPage } from './platform-dynamic-page.interface';
 
 /** Dynamic Page tab change event */
 export class DynamicPageTabChangeEvent {
@@ -70,11 +76,14 @@ export class DynamicPageTabChangeEvent {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [
-        DynamicPageService,
         {
             provide: FD_LANGUAGE,
             useFactory: patchHeaderI18nTexts,
             deps: [[new Optional(), DynamicPageConfig]]
+        },
+        {
+            provide: FDP_DYNAMIC_PAGE,
+            useExisting: DynamicPageComponent
         }
     ],
     standalone: true,
@@ -100,7 +109,7 @@ export class DynamicPageTabChangeEvent {
 })
 export class DynamicPageComponent
     extends BaseComponent
-    implements AfterContentInit, AfterViewInit, DoCheck, OnDestroy, HasElementRef
+    implements AfterContentInit, AfterViewInit, DoCheck, OnDestroy, PlatformDynamicPage, HasElementRef
 {
     /** Whether DynamicPage should snap on scroll */
     @Input()
@@ -177,6 +186,10 @@ export class DynamicPageComponent
     contentComponents: QueryList<DynamicPageContentComponent>;
 
     /** @hidden */
+    @ViewChild(FD_DYNAMIC_PAGE)
+    _dynamicPageComponent: DynamicPage;
+
+    /** @hidden */
     @ViewChild(TabListComponent)
     _tabListComponent: TabListComponent;
 
@@ -187,6 +200,9 @@ export class DynamicPageComponent
     /** @hidden */
     @ViewChildren(DynamicPageContentHostComponent)
     _contentHostComponents: QueryList<DynamicPageContentHostComponent>;
+
+    /** Whether Dynamic page is collapsed */
+    collapsed: Signal<boolean> = signal(false);
 
     /**
      * @hidden
@@ -204,6 +220,19 @@ export class DynamicPageComponent
     readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
     /** @hidden */
+    protected _destroyRef = inject(DestroyRef);
+
+    /** toggle the visibility of the header on click of title area. */
+    toggleCollapse(): void {
+        this._dynamicPageComponent.toggleCollapse();
+    }
+
+    /** Triggers recheck for spacing and sizing of elements inside DynamicPage. */
+    refreshSize(): void {
+        this._dynamicPageComponent.refreshSize();
+    }
+
+    /** @hidden */
     ngAfterContentInit(): void {
         this._listenToContentComponentsListChanges();
     }
@@ -213,6 +242,7 @@ export class DynamicPageComponent
         this.detectChanges();
 
         this._tabListComponent?.headerContainer.nativeElement.classList.add('fd-dynamic-page__tabs');
+        this.collapsed = this._dynamicPageComponent.collapsed;
     }
 
     /** @hidden */

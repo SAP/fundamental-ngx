@@ -1,4 +1,3 @@
-
 import { AfterViewInit, ChangeDetectorRef, Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -8,10 +7,13 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { DynamicPageHeaderComponent } from '@fundamental-ngx/core/dynamic-page';
 import { DynamicPageTitleComponent } from '../../dynamic-page-header/title/dynamic-page-title.component';
-import { DynamicPageService } from '../../dynamic-page.service';
 import { DynamicPageKeyInfoComponent } from '../../dynamic-page-header/key-info/dynamic-page-key-info.component';
-import { DynamicPageGlobalActionsComponent } from '../../dynamic-page-header/actions/global-actions/dynamic-page-global-actions.component';
-import { DynamicPageLayoutActionsComponent } from '../../dynamic-page-header/actions/layout-actions/dynamic-page-layout-actions.component';
+import {
+    DynamicPageGlobalActionsComponent
+} from '../../dynamic-page-header/actions/global-actions/dynamic-page-global-actions.component';
+import {
+    DynamicPageLayoutActionsComponent
+} from '../../dynamic-page-header/actions/layout-actions/dynamic-page-layout-actions.component';
 
 import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
 import { PlatformDynamicPageModule } from '../../dynamic-page.module';
@@ -88,8 +90,7 @@ describe('DynamicPageTitleComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, PlatformDynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
-            declarations: [TestComponent],
-            providers: [DynamicPageService]
+            declarations: [TestComponent]
         }).compileComponents();
     }));
 

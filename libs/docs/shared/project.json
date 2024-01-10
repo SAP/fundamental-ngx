@@ -6,10 +6,7 @@
     "prefix": "fundamental-ngx",
     "targets": {
         "lint": {
-            "executor": "@nx/eslint:lint",
-            "options": {
-                "lintFilePatterns": ["libs/docs/shared/**/*.ts", "libs/docs/shared/**/*.html"]
-            }
+            "executor": "@nx/eslint:lint"
         }
     },
     "tags": ["type:lib", "scope:docs"]
