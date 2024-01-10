@@ -47,10 +47,7 @@
             "dependsOn": ["transform-translations", "^build"]
         },
         "lint": {
-            "executor": "@nx/eslint:lint",
-            "options": {
-                "lintFilePatterns": ["libs/i18n/src/**/*.ts", "libs/i18n/src/**/*.html"]
-            }
+            "executor": "@nx/eslint:lint"
         },
         "test": {
             "executor": "@nx/jest:jest",

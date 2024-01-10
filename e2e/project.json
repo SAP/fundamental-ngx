@@ -11,10 +11,7 @@
             }
         },
         "lint": {
-            "executor": "@nx/eslint:lint",
-            "options": {
-                "lintFilePatterns": ["e2e/**/*.ts"]
-            }
+            "executor": "@nx/eslint:lint"
         }
     },
     "tags": ["type:e2e", "scope:components-e2e"]

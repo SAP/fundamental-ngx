@@ -6,10 +6,7 @@
     "prefix": "fdk",
     "targets": {
         "lint": {
-            "executor": "@nx/eslint:lint",
-            "options": {
-                "lintFilePatterns": ["libs/cdk/data-source/**/*.ts", "libs/cdk/data-source/**/*.html"]
-            }
+            "executor": "@nx/eslint:lint"
         },
         "test": {
             "executor": "@nx/jest:jest",

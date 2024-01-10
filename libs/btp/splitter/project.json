@@ -1,0 +1,8 @@
+{
+    "name": "btp-splitter",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/btp/splitter",
+    "prefix": "fdb",
+    "tags": ["type:lib", "scope:fdb"]
+}

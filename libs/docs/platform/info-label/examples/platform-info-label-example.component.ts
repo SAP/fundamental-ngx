@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { InfoLabelColor } from '@fundamental-ngx/core/info-label';
 import { PlatformInfoLabelModule } from '@fundamental-ngx/platform/info-label';
+
+const infoLabelColors: InfoLabelColor[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 @Component({
     selector: 'fdp-platform-info-label-example',
@@ -15,7 +18,9 @@ export class PlatformInfoLabelExampleComponent {}
     standalone: true,
     imports: [PlatformInfoLabelModule]
 })
-export class PlatformInfoLableTextExampleComponent {}
+export class PlatformInfoLableTextExampleComponent {
+    protected readonly infoLabelColors = infoLabelColors;
+}
 
 @Component({
     selector: 'fdp-platform-info-label-text-icon-example',
@@ -23,7 +28,9 @@ export class PlatformInfoLableTextExampleComponent {}
     standalone: true,
     imports: [PlatformInfoLabelModule]
 })
-export class PlatformInfoLableTextIconExampleComponent {}
+export class PlatformInfoLableTextIconExampleComponent {
+    protected readonly infoLabelColors = infoLabelColors;
+}
 
 @Component({
     selector: 'fdp-platform-info-label-numeric-icon-example',

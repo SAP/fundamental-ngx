@@ -38,10 +38,7 @@
             "defaultConfiguration": "production"
         },
         "lint": {
-            "executor": "@nx/eslint:lint",
-            "options": {
-                "lintFilePatterns": ["libs/datetime-adapter/src/**/*.ts", "libs/datetime-adapter/src/**/*.html"]
-            }
+            "executor": "@nx/eslint:lint"
         },
         "test": {
             "executor": "@nx/jest:jest",

@@ -35,6 +35,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('@fundamental-ngx/docs/btp/button').then(configureBtpRoutes)
             },
             {
+                path: 'splitter',
+                loadChildren: () => import('@fundamental-ngx/docs/btp/splitter').then(configureBtpRoutes)
+            },
+            {
                 path: 'navigation',
                 loadChildren: () => import('@fundamental-ngx/docs/btp/navigation').then(configureBtpRoutes)
             },

@@ -386,6 +386,10 @@ export abstract class BaseCombobox
         this.openChange.next(isOpen);
         this._onOpenChange(this.isOpen);
 
+        if (!this.isOpen && !this.mobile) {
+            this.searchInputElement.nativeElement.focus({ preventScroll: true });
+        }
+
         this.detectChanges();
     }
 

@@ -90,7 +90,6 @@ export const components: SectionInterfaceContent[] = [
     { url: 'core/grid-list', name: 'Grid List' },
     { url: 'core/slider', name: 'Slider' },
     { url: 'core/timeline', name: 'Timeline' },
-    { url: 'core/splitter', name: 'Splitter/Responsive Splitter' },
     { url: 'core/progress-indicator', name: 'Progress Indicator' },
     { url: 'core/scrollbar', name: 'Scrollbar' },
     { url: 'core/skeleton', name: 'Skeleton' },

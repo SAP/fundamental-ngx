@@ -1,4 +1,5 @@
-import { DestroyRef, Directive, ElementRef, inject, Input, isDevMode } from '@angular/core';
+import { BooleanInput } from '@angular/cdk/coercion';
+import { booleanAttribute, DestroyRef, Directive, ElementRef, inject, Input, isDevMode } from '@angular/core';
 import { destroyObservable } from '@fundamental-ngx/cdk/utils';
 import { fromEvent, map, merge, Observable, of, startWith, takeUntil } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -15,16 +16,19 @@ import { MessageStripComponent } from './message-strip.component';
 })
 export class AutoDismissMessageStripDirective {
     /** Whether the message strip is dismissible */
-    @Input() dismissible = true;
+    @Input({ transform: booleanAttribute })
+    dismissible: BooleanInput = true;
 
     /** Whether the alert should be automatically dismissed. */
-    @Input() autoDismiss = true;
+    @Input({ transform: booleanAttribute })
+    autoDismiss: BooleanInput = true;
 
     /** Duration of time *in milliseconds* that the alert will be visible. Set to -1 for indefinite. */
     @Input() duration = 10000;
 
     /** Whether the alert should stay open if the mouse is hovering over it. */
-    @Input() mousePersist = false;
+    @Input({ transform: booleanAttribute })
+    mousePersist: BooleanInput = false;
 
     /** Whether the message strip is currently opened. */
     opened = false;

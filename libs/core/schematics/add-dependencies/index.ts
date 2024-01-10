@@ -1,13 +1,9 @@
 import { chain, Rule, SchematicContext, SchematicsException, Tree } from '@angular-devkit/schematics';
-import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
+import { getPackageJsonDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
+import { compare } from 'compare-versions';
 import { coerce, major, SemVer, valid } from 'semver';
 import { Schema } from '../models/schema';
-import {
-    checkPackageVersion,
-    getPackageVersionFromPackageJson,
-    hasPackage,
-    installDependencies
-} from '../utils/package-utils';
+import { addPackageDependency, installDependencies } from '../utils/package-utils';
 
 const desiredVersions = {
     'fundamental-styles': process.env.FD_ENV_FDSTYLES_VER_PLACEHOLDER || 'FDSTYLES_VER_PLACEHOLDER',
@@ -26,106 +22,122 @@ export function addDependencies(options: Schema): Rule {
 
 function addExternalLibraries(options: Schema): Rule {
     return (tree: Tree, context: SchematicContext) => {
-        const ngCoreVersionTag = getPackageVersionFromPackageJson(tree, '@angular/core');
+        const ngCoreVersionTag = getPackageJsonDependency(tree, '@angular/core');
         if (!ngCoreVersionTag) {
             throw new SchematicsException('Could not find @angular/core in package.json');
         }
-        const angularVersion = valid(coerce(ngCoreVersionTag) as SemVer)
-            ? `^${major(coerce(ngCoreVersionTag) as SemVer)}.0.0`
+        const angularVersion = valid(coerce(ngCoreVersionTag.version) as SemVer)
+            ? `^${major(coerce(ngCoreVersionTag.version) as SemVer)}.0.0`
             : null;
         if (!angularVersion) {
             throw new SchematicsException(
                 `Could not determine Angular version, ${ngCoreVersionTag} is not valid semver`
             );
         }
-        const dependencies: NodeDependency[] = [];
-
-        if (!hasPackage(tree, '@angular/forms')) {
-            dependencies.push({
-                type: NodeDependencyType.Default,
-                version: angularVersion,
-                name: '@angular/forms'
-            });
-        }
-
-        if (options.animations && !hasPackage(tree, '@angular/animations')) {
-            dependencies.push({
-                type: NodeDependencyType.Default,
-                version: angularVersion,
-                name: '@angular/animations'
-            });
-        }
-
-        if (!hasPackage(tree, '@angular/cdk')) {
-            dependencies.push({
-                type: NodeDependencyType.Default,
-                version: angularVersion,
-                name: '@angular/cdk'
-            });
-        }
-
-        if (
-            !hasPackage(tree, 'fundamental-styles') ||
-            checkPackageVersion(tree, 'fundamental-styles', desiredVersions['fundamental-styles'], '<')
-        ) {
-            dependencies.push({
-                type: NodeDependencyType.Default,
-                // Will be replaced with the real version during sync-version script run
-                version: desiredVersions['fundamental-styles'],
-                name: 'fundamental-styles',
-                overwrite: true
-            });
-        }
-
-        if (
-            !hasPackage(tree, '@sap-theming/theming-base-content') ||
-            checkPackageVersion(
+        const formsDependency = getPackageJsonDependency(tree, '@angular/forms');
+        if (!formsDependency) {
+            addPackageDependency(
                 tree,
-                '@sap-theming/theming-base-content',
-                desiredVersions['@sap-theming/theming-base-content'],
-                '<'
-            )
-        ) {
-            dependencies.push({
-                type: NodeDependencyType.Default,
-                // Will be replaced with the real version during sync-version script run
-                version: desiredVersions['@sap-theming/theming-base-content'],
-                name: '@sap-theming/theming-base-content',
-                overwrite: true
-            });
+                {
+                    type: NodeDependencyType.Default,
+                    version: angularVersion,
+                    name: '@angular/forms'
+                },
+                context
+            );
         }
 
+        const animationsDependency = getPackageJsonDependency(tree, '@angular/animations');
+        if (options.animations && !animationsDependency) {
+            addPackageDependency(
+                tree,
+                {
+                    type: NodeDependencyType.Default,
+                    version: angularVersion,
+                    name: '@angular/animations'
+                },
+                context
+            );
+        }
+
+        const cdKDependency = getPackageJsonDependency(tree, '@angular/cdk');
+        if (!cdKDependency) {
+            addPackageDependency(
+                tree,
+                {
+                    type: NodeDependencyType.Default,
+                    version: angularVersion,
+                    name: '@angular/cdk'
+                },
+                context
+            );
+        }
+
+        const fundamentalStylesDependency = getPackageJsonDependency(tree, 'fundamental-styles');
         if (
-            !hasPackage(tree, '@fundamental-ngx/i18n') ||
-            checkPackageVersion(tree, '@fundamental-ngx/i18n', desiredVersions['@fundamental-ngx/i18n'], '<')
+            !fundamentalStylesDependency ||
+            compare(fundamentalStylesDependency.version, desiredVersions['fundamental-styles'], '<')
         ) {
-            dependencies.push({
-                type: NodeDependencyType.Default,
-                // Will be replaced with the real version during sync-version script run
-                version: desiredVersions['@fundamental-ngx/i18n'],
-                name: '@fundamental-ngx/i18n',
-                overwrite: true
-            });
+            addPackageDependency(
+                tree,
+                {
+                    type: NodeDependencyType.Default,
+                    // Will be replaced with the real version during sync-version script run
+                    version: desiredVersions['fundamental-styles'],
+                    name: 'fundamental-styles',
+                    overwrite: true
+                },
+                context
+            );
         }
 
+        const themingBaseContentDependency = getPackageJsonDependency(tree, '@sap-theming/theming-base-content');
         if (
-            !hasPackage(tree, '@fundamental-ngx/cdk') ||
-            checkPackageVersion(tree, '@fundamental-ngx/cdk', desiredVersions['@fundamental-ngx/cdk'], '<')
+            !themingBaseContentDependency ||
+            compare(themingBaseContentDependency.version, desiredVersions['@sap-theming/theming-base-content'], '<')
         ) {
-            dependencies.push({
-                type: NodeDependencyType.Default,
-                // Will be replaced with the real version during sync-version script run
-                version: desiredVersions['@fundamental-ngx/cdk'],
-                name: '@fundamental-ngx/cdk',
-                overwrite: true
-            });
+            addPackageDependency(
+                tree,
+                {
+                    type: NodeDependencyType.Default,
+                    // Will be replaced with the real version during sync-version script run
+                    version: desiredVersions['@sap-theming/theming-base-content'],
+                    name: '@sap-theming/theming-base-content',
+                    overwrite: true
+                },
+                context
+            );
         }
 
-        dependencies.forEach((dependency) => {
-            addPackageJsonDependency(tree, dependency);
+        const i18nDependency = getPackageJsonDependency(tree, '@fundamental-ngx/i18n');
+        if (!i18nDependency || compare(i18nDependency.version, desiredVersions['@fundamental-ngx/i18n'], '<')) {
+            addPackageDependency(
+                tree,
+                {
+                    type: NodeDependencyType.Default,
+                    // Will be replaced with the real version during sync-version script run
+                    version: desiredVersions['@fundamental-ngx/i18n'],
+                    name: '@fundamental-ngx/i18n',
+                    overwrite: true
+                },
+                context
+            );
+        }
 
-            context.logger.info(`✅️ Added ${dependency.name} to ${dependency.type}.`);
-        });
+        const fdCdkDependency = getPackageJsonDependency(tree, '@fundamental-ngx/cdk');
+        if (!fdCdkDependency || compare(fdCdkDependency.version, desiredVersions['@fundamental-ngx/cdk'], '<')) {
+            addPackageDependency(
+                tree,
+                {
+                    type: NodeDependencyType.Default,
+                    // Will be replaced with the real version during sync-version script run
+                    version: desiredVersions['@fundamental-ngx/cdk'],
+                    name: '@fundamental-ngx/cdk',
+                    overwrite: true
+                },
+                context
+            );
+        }
 
         return tree;
     };
