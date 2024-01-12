@@ -11,11 +11,32 @@
     @if (iconTabType === 'process') {
         <ng-template [ngTemplateOutlet]="processType"></ng-template>
     }
+    <div
+        class="fd-icon-tab-bar__content"
+        fd-scrollbar
+        (spyChange)="highlightActiveTab($event.id)"
+        [scrollSpyDisabled]="!stackContent || _disableScrollSpy"
+        fdScrollSpy
+        [trackedTags]="['fdp-icon-tab-bar-tab-content']"
+        [style.max-height]="maxContentHeight"
+    >
+        @if (stackContent) {
+            @for (tab of _flatTabs$(); track tab) {
+                <fdp-icon-tab-bar-tab-content [id]="tab.id" [uId]="tab.uId" class="fd-icon-tab-bar__tab-content">
+                    <ng-template [ngTemplateOutlet]="tab.renderer || null"></ng-template>
+                </fdp-icon-tab-bar-tab-content>
+            }
+        } @else {
+            <ng-template [ngTemplateOutlet]="_tabRenderer$()"></ng-template>
+        }
+    </div>
 </div>
 <ng-template #processType>
     <fdp-icon-tab-bar-process-type
-        [tabsConfig]="tabsConfig"
+        [tabs]="_tabs$()"
         [isRtl]="_rtl$()"
+        [selectedUid]="_selectedUid()"
+        (selectedUidChange)="_selectedUid.set($event)"
         [densityMode]="densityMode"
         [colorAssociations]="colorAssociations"
         (selected)="_selectItem($event)"
@@ -23,9 +44,11 @@
 </ng-template>
 <ng-template #filterType>
     <fdp-icon-tab-bar-filter-type
-        [tabsConfig]="tabsConfig"
+        [tabs]="_tabs$()"
         [showTotalTab]="showTotalTab"
         [isRtl]="_rtl$()"
+        [selectedUid]="_selectedUid()"
+        (selectedUidChange)="_selectedUid.set($event)"
         [densityMode]="densityMode"
         [colorAssociations]="colorAssociations"
         (selected)="_selectItem($event)"
@@ -34,8 +57,10 @@
 <ng-template #iconType>
     <fdp-icon-tab-bar-icon-type
         [showLabel]="iconTabType === 'icon'"
-        [tabsConfig]="tabsConfig"
+        [tabs]="_tabs$()"
         [isRtl]="_rtl$()"
+        [selectedUid]="_selectedUid()"
+        (selectedUidChange)="_selectedUid.set($event)"
         [densityMode]="densityMode"
         [colorAssociations]="colorAssociations"
         (selected)="_selectItem($event)"
@@ -44,9 +69,11 @@
 </ng-template>
 <ng-template #textType>
     <fdp-icon-tab-bar-text-type
-        [tabsConfig]="tabsConfig"
+        [tabs]="_tabs$()"
         [layoutMode]="layoutMode"
         [isRtl]="_rtl$()"
+        [selectedUid]="_selectedUid()"
+        (selectedUidChange)="_selectedUid.set($event)"
         [densityMode]="densityMode"
         [enableTabReordering]="enableTabReordering"
         [colorAssociations]="colorAssociations"

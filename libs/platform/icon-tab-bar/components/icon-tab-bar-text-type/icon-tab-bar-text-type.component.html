@@ -2,6 +2,7 @@
     <ul
         class="fd-icon-tab-bar__header"
         role="tablist"
+        #tablist
         fdkOverflowList
         [isRtl]="isRtl"
         [overflowOffset]="100"
@@ -9,7 +10,7 @@
         dndOrientation="horizontal"
         (overflowChanged)="_recalculateVisibleItems($event)"
     >
-        @for (item of _tabs$(); track item.uId; let idx = $index) {
+        @for (item of tabs; track item.uId; let idx = $index) {
             <li
                 [ngClass]="item.cssClasses"
                 fdkOverflowListItem
@@ -29,13 +30,13 @@
                         [attr.tabindex]="idx === 0 ? 0 : -1"
                         (click)="_selectItem(item, $event)"
                         (keydown)="_keyDownHandler($event, item, idx)"
-                        [attr.aria-selected]="item.uId === _selectedUid"
+                        [attr.aria-selected]="item.uId === selectedUid"
                     >
                         @if (layoutMode === 'row') {
                             <span class="fd-icon-tab-bar__tag">
                                 {{ item.label | fdkAsyncOrSync }}
-                                @if (item.counter) {
-                                    ({{ item.counter }})
+                                @if (item.counter | fdkAsyncOrSync; as itemCounter) {
+                                    ({{ itemCounter }})
                                 }
                             </span>
                         } @else {
@@ -45,9 +46,9 @@
                         @if (item.badge) {
                             <span class="fd-icon-tab-bar__badge"></span>
                         }
-                        @if (item.color) {
+                        @if (item.color | fdkAsyncOrSync; as itemColor) {
                             <div class="screenreader-only">
-                                {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
+                                {{ (colorAssociations && colorAssociations[itemColor]) || itemColor }}
                             </div>
                         }
                     </a>
@@ -56,7 +57,7 @@
                         #tabItem
                         [tabindex]="idx === 0 ? 0 : -1"
                         [parentTab]="item"
-                        [selectedSubItemUid]="_selectedUid"
+                        [selectedSubItemUid]="selectedUid"
                         [colorAssociations]="colorAssociations"
                         (selectedSubItem)="_selectItem($event)"
                         (keydown)="_keyDownHandler($event, item, idx)"

@@ -8,12 +8,19 @@ import { cloneDeep } from 'lodash-es';
 import { ICON_TAB_HIDDEN_CLASS_NAME } from '../../constants';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { ClosableIconTabBar } from '../closable-icon-tab-bar.class';
+import { IconTabBarBase } from '../icon-tab-bar-base.class';
 import { IconTabBarPopoverComponent } from '../popovers/icon-tab-bar-popover/icon-tab-bar-popover.component';
 
 @Component({
     selector: 'fdp-icon-tab-bar-process-type',
     templateUrl: './icon-tab-bar-process-type.component.html',
     standalone: true,
+    providers: [
+        {
+            provide: IconTabBarBase,
+            useExisting: IconTabBarProcessTypeComponent
+        }
+    ],
     imports: [
         OverflowListDirective,
         IconTabBarPopoverComponent,
@@ -120,7 +127,7 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
     private _clearExtraList(): void {
         this._nextSteps = [];
         this._prevSteps = [];
-        this._tabs$().forEach((item) => {
+        this.tabs.forEach((item) => {
             item.hidden = false;
             item.cssClasses = item.cssClasses.filter((cssClass) => cssClass !== ICON_TAB_HIDDEN_CLASS_NAME);
         });
@@ -138,7 +145,7 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
         if (!extraItems) {
             return;
         }
-        const tabs = this._tabs$();
+        const tabs = [...this.tabs];
         const visibleAmountOfItems = tabs.length - extraItems;
         for (let i = tabs.length - amountOfNextSteps; i < tabs.length; i++) {
             this._nextSteps.push(cloneDeep(tabs[i]));
@@ -185,7 +192,7 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
         if (!extraItems) {
             return;
         }
-        const tabs = this._tabs$();
+        const tabs = [...this.tabs];
         const visibleAmountOfItems = tabs.length - extraItems;
         for (let i = amountOfPreviousSteps - 1; i >= 0; i--) {
             this._prevSteps.push(cloneDeep(tabs[i]));

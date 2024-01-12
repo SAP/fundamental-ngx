@@ -5,12 +5,19 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { ClosableIconTabBar } from '../closable-icon-tab-bar.class';
+import { IconTabBarBase } from '../icon-tab-bar-base.class';
 import { IconTabBarPopoverComponent } from '../popovers/icon-tab-bar-popover/icon-tab-bar-popover.component';
 
 @Component({
     selector: 'fdp-icon-tab-bar-filter-type',
     templateUrl: './icon-tab-bar-filter-type.component.html',
     standalone: true,
+    providers: [
+        {
+            provide: IconTabBarBase,
+            useExisting: IconTabBarFilterTypeComponent
+        }
+    ],
     imports: [
         OverflowListDirective,
         OverflowListItemDirective,
@@ -43,6 +50,6 @@ export class IconTabBarFilterTypeComponent extends ClosableIconTabBar {
      */
     protected _initTabs(): void {
         super._initTabs();
-        this._totalTab = this.showTotalTab ? this._tabs$()[0] : undefined;
+        this._totalTab = this.showTotalTab ? this.tabs[0] : undefined;
     }
 }

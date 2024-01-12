@@ -3,6 +3,7 @@
     role="tablist"
     fdkOverflowList
     [isRtl]="isRtl"
+    #tablist
     [overflowOffset]="100"
     (overflowChanged)="_recalculateVisibleItems($event)"
 >
@@ -11,7 +12,7 @@
             <a
                 (click)="_totalTab && _selectItem(_totalTab)"
                 (keydown)="_keyDownHandler($event, _totalTab, 0)"
-                [attr.aria-selected]="_totalTab?.uId === _selectedUid"
+                [attr.aria-selected]="_totalTab?.uId === selectedUid"
                 class="fd-icon-tab-bar__tab"
                 tabindex="0"
                 #tabItem
@@ -26,7 +27,7 @@
             </a>
         </li>
     }
-    @for (item of _tabs$() | slice: 1; track item.uId; let idx = $index) {
+    @for (item of tabs | slice: 1; track item.uId; let idx = $index) {
         <li
             [class]="item.cssClasses"
             class="fd-icon-tab-bar__item"
@@ -36,7 +37,7 @@
         >
             <a
                 (click)="_selectItem(item)"
-                [attr.aria-selected]="item.uId === _selectedUid"
+                [attr.aria-selected]="item.uId === selectedUid"
                 class="fd-icon-tab-bar__tab"
                 #tabItem
                 [attr.tabindex]="showTotalTab ? -1 : idx > 0 ? -1 : 0"
@@ -52,9 +53,9 @@
                     }
                 </div>
                 <div class="fd-icon-tab-bar__label">{{ item.label | fdkAsyncOrSync }}</div>
-                @if (item.color) {
+                @if (item.color | fdkAsyncOrSync; as itemColor) {
                     <div class="screenreader-only">
-                        {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
+                        {{ (colorAssociations && colorAssociations[itemColor]) || itemColor }}
                     </div>
                 }
             </a>

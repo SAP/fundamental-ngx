@@ -1,4 +1,5 @@
 export * from './components';
+export * from './components/icon-tab-bar-tab/icon-tab-bar-tab.component';
 export * from './constants';
 export * from './directives/dnd/icon-bar-dnd-container.directive';
 export * from './directives/dnd/icon-bar-dnd-item.directive';

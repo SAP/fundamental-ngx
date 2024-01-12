@@ -13,6 +13,9 @@
 $block: fd-icon-tab-bar;
 
 .#{$block} {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     & &__item--hidden {
         display: none;
     }
