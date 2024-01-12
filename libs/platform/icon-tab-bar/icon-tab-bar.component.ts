@@ -8,6 +8,7 @@ import {
     DestroyRef,
     ElementRef,
     EventEmitter,
+    HostBinding,
     Input,
     OnInit,
     Optional,
@@ -24,6 +25,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ContentDensityService, Nullable, RtlService, scrollTop } from '@fundamental-ngx/cdk/utils';
+import { FD_DYNAMIC_PAGE } from '@fundamental-ngx/core/dynamic-page';
 import { IconFont } from '@fundamental-ngx/core/icon';
 import { ScrollSpyDirective } from '@fundamental-ngx/core/scroll-spy';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
@@ -183,6 +185,11 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
     @ViewChildren(IconTabBarTabContentDirective)
     tabDirectives: QueryList<IconTabBarTabContentDirective>;
 
+    @HostBinding('class.fd-tabs-custom')
+    private get _customTabs(): boolean {
+        return this._inDynamicPahe;
+    }
+
     @ViewChild(IconTabBarBase)
     private readonly _iconTabBarCmp: Nullable<IconTabBarBase>;
 
@@ -227,7 +234,9 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
     readonly _tabsConfig$ = signal<TabConfig[]>([]);
 
     /** @hidden */
-    private _destroyRef = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
+
+    private readonly _inDynamicPahe = !!inject(FD_DYNAMIC_PAGE, { optional: true });
 
     /** @hidden */
     constructor(

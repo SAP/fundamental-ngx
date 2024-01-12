@@ -14,7 +14,7 @@ export class DynamicPagePo extends PlatformBaseComponentPo {
     dynamicPageContentStart = 'fdp-dynamic-page-content-host br';
     dynamicPageContentEnd = 'fdp-dynamic-page-content-host .footer-spacer';
     dynamicPageTitle = '.fd-dynamic-page__title-container';
-    dynamicPageTabs = '.fd-dynamic-page .fd-tabs__item';
+    dynamicPageTabs = '.fd-dynamic-page .fd-icon-tab-bar__item';
     dynamicPageTabsContent = '.fd-dynamic-page__content';
     dynamicPageToolBarAccept = this.dynamicPage + ' .fd-button--positive';
     dynamicPageToolBarReject = this.dynamicPage + ' .fd-button--negative';

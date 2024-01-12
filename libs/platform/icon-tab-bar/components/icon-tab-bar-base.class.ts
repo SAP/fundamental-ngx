@@ -23,6 +23,7 @@ import { take } from 'rxjs/operators';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, OverflowListDirective } from '@fundamental-ngx/cdk/utils';
+import { FD_DYNAMIC_PAGE } from '@fundamental-ngx/core/dynamic-page';
 import { cloneDeep } from 'lodash-es';
 import { ICON_TAB_HIDDEN_CLASS_NAME } from '../constants';
 import { IconTabBarItem } from '../interfaces/icon-tab-bar-item.interface';
@@ -103,6 +104,9 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
 
     /** @hidden */
     _extraItems$ = signal(false);
+
+    /** @hidden */
+    readonly _inDynamicPage = !!inject(FD_DYNAMIC_PAGE, { optional: true });
 
     /** @hidden */
     protected readonly _cd = inject(ChangeDetectorRef);
