@@ -23,7 +23,6 @@ import {
     FD_FLEXIBLE_COLUMN_LAYOUT_COMPONENT,
     FlexibleColumnLayoutComponent
 } from '@fundamental-ngx/core/flexible-column-layout';
-import { TabListComponent } from '@fundamental-ngx/core/tabs';
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
 import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-footer.component';
@@ -37,6 +36,7 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { FD_TABLIST, TabList } from '@fundamental-ngx/core/shared';
 import { asyncScheduler, fromEvent, Observable, startWith } from 'rxjs';
 import { debounceTime, map, observeOn } from 'rxjs/operators';
 import { DynamicPage } from './dynamic-page.interface';
@@ -125,8 +125,8 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
     _footerComponent: DynamicPageContentComponent;
 
     /** @hidden reference to tab component */
-    @ContentChild(TabListComponent)
-    _tabComponent: TabListComponent;
+    @ContentChild(FD_TABLIST)
+    _tabComponent: TabList;
 
     /** @hidden */
     @ViewChild('dynamicPageElement')
@@ -197,7 +197,7 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
 
     /** @hidden */
     _getScrollElement(): HTMLElement | null {
-        return this._tabComponent?._scrollbar.elementRef.nativeElement || this._scrollbar?.elementRef.nativeElement;
+        return this._tabComponent?.scrollableElement?.nativeElement || this._scrollbar?.elementRef.nativeElement;
     }
 
     /** Set the positions of the tabs and content with respect to the window */
