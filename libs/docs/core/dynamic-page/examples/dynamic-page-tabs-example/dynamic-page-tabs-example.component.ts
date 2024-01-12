@@ -8,8 +8,8 @@ import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
-import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fd-dynamic-page-tabs-example',
@@ -40,7 +40,7 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
         ToolbarItemDirective,
         ContentDensityDirective,
         ToolbarSeparatorComponent,
-        TabsModule,
+        FDP_ICON_TAB_BAR,
         CdkScrollable,
         BarModule,
         MessageToastModule

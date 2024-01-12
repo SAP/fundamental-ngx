@@ -158,9 +158,9 @@
                             Open Column 3
                         </button>
                     </div>
-                    <fd-tab-list>
+                    <fdp-icon-tab-bar iconTabSize="responsive-paddings">
                         @for (tab of [1, 2, 3, 4]; track tab) {
-                            <fd-tab [title]="'Tab ' + tab">
+                            <fdp-icon-tab-bar-tab [label]="'Tab ' + tab">
                                 <div class="fd-dynamic-page-section-example">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                     incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -169,9 +169,9 @@
                                     pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
                                     deserunt mollit anim id est laborum.
                                 </div>
-                            </fd-tab>
+                            </fdp-icon-tab-bar-tab>
                         }
-                    </fd-tab-list>
+                    </fdp-icon-tab-bar>
                 </div>
             </ng-template>
             <ng-template #endColumn>
