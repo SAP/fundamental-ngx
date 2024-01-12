@@ -308,6 +308,11 @@ export class TabListComponent
     }
 
     /** @hidden */
+    selectTab(id: Nullable<string>): void {
+        this.highlightActiveTab(id);
+    }
+
+    /** @hidden */
     highlightActiveTab(id: Nullable<string>): void {
         const tab = this._tabArray.find((_tab) => _tab.panel._panelId === id);
         if (tab) {

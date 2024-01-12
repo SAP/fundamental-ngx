@@ -45,7 +45,7 @@ import {
 import { FacetComponent } from '@fundamental-ngx/core/facets';
 import { FD_TABLIST, TabList } from '@fundamental-ngx/core/shared';
 import { FD_LANGUAGE } from '@fundamental-ngx/i18n';
-import { FDP_ICON_TAB_BAR, IconTabBarItem, IconTabBarTabComponent } from '@fundamental-ngx/platform/icon-tab-bar';
+import { IconTabBarComponent, IconTabBarItem, IconTabBarTabComponent } from '@fundamental-ngx/platform/icon-tab-bar';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import { DynamicPageContentHostComponent } from './dynamic-page-content/dynamic-page-content-host.component';
@@ -100,7 +100,8 @@ export class DynamicPageTabChangeEvent {
         DynamicPageGlobalActionsComponent,
         DynamicPageLayoutActionsComponent,
         DynamicPageSubheaderComponent,
-        FDP_ICON_TAB_BAR,
+        IconTabBarComponent,
+        IconTabBarTabComponent,
         DynamicPageContentComponent,
         DynamicPageFooterComponent,
         CoreDynamicPageFooterComponent,
@@ -257,7 +258,7 @@ export class DynamicPageComponent
      * marks the dynamic page tab as selected when the id of the tab is passed
      */
     setSelectedTab(id: string): void {
-        this._tabListComponent.highlightActiveTab(id, true);
+        this._tabListComponent.selectTab(id);
     }
 
     /** @hidden */

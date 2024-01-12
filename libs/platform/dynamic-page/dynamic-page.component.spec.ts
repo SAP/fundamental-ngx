@@ -1,18 +1,19 @@
 import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { TabPanelComponent, TabsModule } from '@fundamental-ngx/core/tabs';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 
+import { CommonModule } from '@angular/common';
+import { IconTabBarTabContentDirective } from '@fundamental-ngx/platform/icon-tab-bar';
+import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
 import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 import { DynamicPageComponent } from './dynamic-page.component';
 import { PlatformDynamicPageModule } from './dynamic-page.module';
-import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
-import { CommonModule } from '@angular/common';
 
 @Component({
     template: `
@@ -181,16 +182,16 @@ describe('DynamicPageComponent tabbed values', () => {
 
     it('should render proper components', async () => {
         fixture.detectChanges();
-        const tabsContainer = fixture.debugElement.query(By.css('.fd-tabs__content'));
-        const tabEl = fixture.debugElement.query(By.directive(TabPanelComponent));
+        const tabsContainer = fixture.debugElement.query(By.css('.fd-icon-tab-bar__content'));
+        const tabEl = fixture.debugElement.query(By.directive(IconTabBarTabContentDirective));
         expect(tabsContainer).toBeTruthy();
         expect(tabEl).toBeTruthy();
     });
 
     it('should set default tab size', async () => {
-        const tabsContainer = fixture.debugElement.query(By.css('.fd-tabs'));
+        const tabsContainer = fixture.debugElement.query(By.css('.fd-icon-tab-bar'));
         fixture.detectChanges();
-        expect(tabsContainer.nativeElement.classList.contains('fd-tabs--m')).toBeTruthy();
+        expect(tabsContainer).toBeTruthy();
     });
 
     it('should switch tabs', async () => {
@@ -256,42 +257,42 @@ describe('DynamicPageComponent with collapsible set to false', () => {
         <fdp-dynamic-page [size]="size" [background]="background">
             <!-- Wrapper -->
             <fdp-dynamic-page-title>
-                    <fdp-dynamic-page-global-actions>
-                        <fd-toolbar fdType="transparent" [clearBorder]="true">
-                            <button
-                                fd-toolbar-item
-                                fd-button
-                                fdCompact
-                                fdType="positive"
-                                (click)="$event.stopPropagation()"
-                                id="global-action-button"
-                            >
-                                Accept
-                            </button>
-                        </fd-toolbar>
-                    </fdp-dynamic-page-global-actions>
-                    <fdp-dynamic-page-layout-actions>
-                        <!-- layout actions -->
-                        <fd-toolbar fdType="transparent" [clearBorder]="true">
-                            <button fd-button fdType="transparent" aria-label="Resize" id="layout-action-button">
-                                <i class="sap-icon--resize"></i>
-                            </button>
-                        </fd-toolbar>
-                    </fdp-dynamic-page-layout-actions>
-                </fdp-dynamic-page-title>
+                <fdp-dynamic-page-global-actions>
+                    <fd-toolbar fdType="transparent" [clearBorder]="true">
+                        <button
+                            fd-toolbar-item
+                            fd-button
+                            fdCompact
+                            fdType="positive"
+                            (click)="$event.stopPropagation()"
+                            id="global-action-button"
+                        >
+                            Accept
+                        </button>
+                    </fd-toolbar>
+                </fdp-dynamic-page-global-actions>
+                <fdp-dynamic-page-layout-actions>
+                    <!-- layout actions -->
+                    <fd-toolbar fdType="transparent" [clearBorder]="true">
+                        <button fd-button fdType="transparent" aria-label="Resize" id="layout-action-button">
+                            <i class="sap-icon--resize"></i>
+                        </button>
+                    </fd-toolbar>
+                </fdp-dynamic-page-layout-actions>
+            </fdp-dynamic-page-title>
             <!-- Wrapper -->
             <fdp-dynamic-page-header>
-                    <div id="test-header">Header</div>
-                </fdp-dynamic-page-header>
+                <div id="test-header">Header</div>
+            </fdp-dynamic-page-header>
             <!-- Wrapper -->
             <fdp-dynamic-page-content>
-                    <div id="test-content">DynamicPage Content Text</div>
-                </fdp-dynamic-page-content>
+                <div id="test-content">DynamicPage Content Text</div>
+            </fdp-dynamic-page-content>
 
             <!-- Wrapper -->
             <fdp-dynamic-page-footer>
-                    <div id="test-footer">DynamicPage Footer</div>
-                </fdp-dynamic-page-footer>
+                <div id="test-footer">DynamicPage Footer</div>
+            </fdp-dynamic-page-footer>
         </fdp-dynamic-page>
     `
 })

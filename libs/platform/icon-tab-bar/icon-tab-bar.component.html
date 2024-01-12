@@ -27,7 +27,15 @@
                 </fdp-icon-tab-bar-tab-content>
             }
         } @else {
-            <ng-template [ngTemplateOutlet]="_tabRenderer$()"></ng-template>
+            @if (_tabRenderer$(); as tabRenderer) {
+                <fdp-icon-tab-bar-tab-content
+                    [id]="tabRenderer.id"
+                    [uId]="tabRenderer.uId"
+                    class="fd-icon-tab-bar__tab-content"
+                >
+                    <ng-template [ngTemplateOutlet]="tabRenderer.renderer || null"></ng-template>
+                </fdp-icon-tab-bar-tab-content>
+            }
         }
     </div>
 </div>

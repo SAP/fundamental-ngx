@@ -26,7 +26,7 @@ const components = [
     IconTabBarTabComponent
 ];
 
-export const FDP_ICON_TAB_BAR = [...components] as const;
+export const FDP_ICON_TAB_BAR = [IconTabBarComponent, IconTabBarTabComponent] as const;
 
 /**
  * @deprecated

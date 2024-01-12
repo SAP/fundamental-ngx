@@ -215,7 +215,7 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
     readonly _flatTabs$ = computed(() => this._generateFlatTabs(this._tabs$()));
 
     /** @hidden */
-    readonly _tabRenderer$ = signal<TemplateRef<any> | null>(null);
+    readonly _tabRenderer$ = signal<IconTabBarItem | null>(null);
 
     /** @hidden */
     readonly _tabRenderers$ = signal<{ renderer: TemplateRef<any>; id: string }[]>([]);
@@ -293,7 +293,7 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
      * @param selectedItem
      */
     _selectItem(selectedItem: IconTabBarItem): void {
-        this._tabRenderer$.set(selectedItem?.renderer || null);
+        this._tabRenderer$.set(selectedItem);
         this.iconTabSelected.emit(selectedItem);
 
         if (this.stackContent) {
@@ -304,6 +304,16 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
     /** @hidden */
     _closeTab(item: IconTabBarItem): void {
         this.closeTab.emit(item);
+    }
+
+    /** Programmatically select tab. */
+    selectTab(id: Nullable<string>): void {
+        const selectedItem = this._flatTabs$().find((t) => t.id === id);
+        if (!selectedItem) {
+            return;
+        }
+        this._selectedUid.set(selectedItem.uId);
+        this._selectItem(selectedItem);
     }
 
     /** @hidden */
@@ -369,7 +379,6 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
 
         if (!(currentScrollPosition === maximumScrollTop && distanceToScroll > maximumScrollTop)) {
             this._disableScrollSpy = true;
-            console.log(this._disableScrollSpy);
             fromEvent(containerElement, 'scroll')
                 .pipe(debounceTime(100), first(), takeUntilDestroyed(this._destroyRef))
                 .subscribe(() => (this._disableScrollSpy = false));
