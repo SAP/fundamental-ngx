@@ -1,6 +1,6 @@
 import { EventEmitter, QueryList } from '@angular/core';
 import { DynamicPage } from '@fundamental-ngx/core/dynamic-page';
-import { TabPanelComponent } from '@fundamental-ngx/core/tabs';
+import { IconTabBarTabComponent } from '@fundamental-ngx/platform/icon-tab-bar';
 import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
 import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-footer.component';
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
@@ -15,7 +15,7 @@ export interface PlatformDynamicPage extends DynamicPage {
     footerComponent: DynamicPageFooterComponent;
     contentComponent: DynamicPageContentComponent;
     contentComponents: QueryList<DynamicPageContentComponent>;
-    dynamicPageTabs: QueryList<TabPanelComponent>;
+    dynamicPageTabs: QueryList<IconTabBarTabComponent>;
 
     /**
      * marks the dynamic page tab as selected when the id of the tab is passed
