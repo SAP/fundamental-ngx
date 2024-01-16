@@ -189,7 +189,7 @@
                     <li
                         fd-list-item
                         role="option"
-                        (click)="!mobile && close()"
+                        (click)="!mobile && onOptionClicked($event, $index)"
                         (keyDown)="onItemKeyDownHandler($event)"
                         [selected]="!!optionItem.selected"
                     >

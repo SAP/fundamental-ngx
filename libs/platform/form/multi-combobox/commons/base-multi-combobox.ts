@@ -432,6 +432,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     popoverOpenChangeHandle(isOpen: boolean): void {
         this.isOpen = isOpen;
         this._rangeSelector.reset();
+        if (!isOpen) {
+            this.onTouched();
+        }
         this._onOpenChange(this.isOpen);
     }
 
