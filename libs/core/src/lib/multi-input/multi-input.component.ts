@@ -173,6 +173,10 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         return this._selectionModel.selected.map((c) => c.value);
     }
 
+    /** Title text for the add-on icon button. */
+    @Input()
+    addonIconTitle: string;
+
     /** user's custom classes */
     @Input()
     class: string;
