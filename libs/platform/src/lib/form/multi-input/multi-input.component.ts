@@ -169,6 +169,10 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     @Input()
     closeOnOutsideClick = true;
 
+    /** Title text for the add-on icon button. */
+    @Input()
+    addonIconTitle: string;
+
     /** Callback function when add-on button clicked. */
     @Input()
     addOnButtonClickFn: () => void;
