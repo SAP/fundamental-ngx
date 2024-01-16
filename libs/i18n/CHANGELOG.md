@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.37...v0.48.0-rc.38) (2024-01-16)
+
+
+### Features
+
+* **docs,platform,core:** icon tab bar update ([#11210](https://github.com/SAP/fundamental-ngx/issues/11210)) ([c7acc43](https://github.com/SAP/fundamental-ngx/commit/c7acc43d7301f6ba64ab064e6d5f302213df1baf))
+
+
+### BREAKING CHANGES
+
+* **docs,platform,core:** Platform: Platform Dynamic page `DynamicPageTabChangeEvent` now uses `IconTabBarItem` as a payload instead of `TabPanelComponent`
+
+
+
+
+
 # [0.48.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.36...v0.48.0-rc.37) (2024-01-16)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
