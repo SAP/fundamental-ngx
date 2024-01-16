@@ -1,45 +1,57 @@
-import { computed, inject, signal } from '@angular/core';
+import { computed, inject, Signal, signal } from '@angular/core';
 import { SearchFieldComponent } from '@fundamental-ngx/btp/search-field';
 import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { FdbToolHeaderState } from './tool-header-state.type';
 
 export abstract class ToolHeaderComponentClass {
-    /** Mode signal */
-    mode = signal<FdbViewMode>('');
+    /** @hidden */
+    mode$: Signal<FdbViewMode>;
 
     /** @hidden */
-    orientation = signal<'landscape' | 'portrait'>('landscape');
+    orientation$: Signal<'landscape' | 'portrait'>;
+
+    /** @hidden */
+    searchField$: Signal<SearchFieldComponent | null>;
+
+    /** @hidden */
+    searchFieldExpanded$: Signal<boolean>;
+
+    /** Mode signal */
+    protected _mode$ = signal<FdbViewMode>('');
+
+    /** @hidden */
+    protected _orientation$ = signal<'landscape' | 'portrait'>('landscape');
 
     /** @hidden */
     protected fdbToolHeaderState = computed<FdbToolHeaderState>(() => {
-        if (this.mode() === 'phone') {
+        if (this._mode$() === 'phone') {
             return {
-                backButtonVisible: this.searchFieldExpanded(),
-                menuButtonVisible: !this.searchFieldExpanded(),
-                logoVisible: !this.searchFieldExpanded(),
+                backButtonVisible: this._searchFieldExpanded$(),
+                menuButtonVisible: !this._searchFieldExpanded$(),
+                logoVisible: !this._searchFieldExpanded$(),
                 productNameVisible: false,
                 secondTitleVisible: false,
-                searchFieldVisible: this.searchFieldExpanded(),
-                searchFieldToggleActionVisible: !!this.searchField() && !this.searchFieldExpanded(),
-                providedActionsVisible: !this.searchFieldExpanded(),
-                userAvatarVisible: !this.searchFieldExpanded(),
-                productSwitchVisible: !this.searchFieldExpanded(),
-                voiceInputVisible: this.searchFieldExpanded(),
+                searchFieldVisible: this._searchFieldExpanded$(),
+                searchFieldToggleActionVisible: !!this._searchField$() && !this._searchFieldExpanded$(),
+                providedActionsVisible: !this._searchFieldExpanded$(),
+                userAvatarVisible: !this._searchFieldExpanded$(),
+                productSwitchVisible: !this._searchFieldExpanded$(),
+                voiceInputVisible: this._searchFieldExpanded$(),
                 separatorsBetweenActionsVisible: false
             };
         }
-        if (this.mode() === 'tablet') {
-            const isPortrait = this.orientation() === 'portrait';
+        if (this._mode$() === 'tablet') {
+            const isPortrait = this._orientation$() === 'portrait';
             const isLandscape = !isPortrait;
-            const searchFieldVisible = this.searchFieldExpanded() || isLandscape;
-            const searchFieldToggleActionVisible = !searchFieldVisible && !!this.searchField();
+            const searchFieldVisible = this._searchFieldExpanded$() || isLandscape;
+            const searchFieldToggleActionVisible = !searchFieldVisible && !!this._searchField$();
 
             return {
                 backButtonVisible: false,
                 menuButtonVisible: true,
                 logoVisible: true,
-                productNameVisible: isPortrait ? !this.searchFieldExpanded() : true,
+                productNameVisible: isPortrait ? !this._searchFieldExpanded$() : true,
                 secondTitleVisible: false,
                 searchFieldVisible,
                 searchFieldToggleActionVisible,
@@ -47,7 +59,7 @@ export abstract class ToolHeaderComponentClass {
                 userAvatarVisible: true,
                 productSwitchVisible: true,
                 voiceInputVisible: false,
-                separatorsBetweenActionsVisible: this.orientation() === 'landscape'
+                separatorsBetweenActionsVisible: this._orientation$() === 'landscape'
             };
         }
         return {
@@ -67,10 +79,10 @@ export abstract class ToolHeaderComponentClass {
     });
 
     /** Search field signal */
-    protected searchField = signal<SearchFieldComponent | null>(null);
+    protected _searchField$ = signal<SearchFieldComponent | null>(null);
 
     /** @hidden */
-    protected searchFieldExpanded = signal<boolean>(false);
+    protected _searchFieldExpanded$ = signal<boolean>(false);
 
     /**
      * RTL signal
@@ -80,4 +92,12 @@ export abstract class ToolHeaderComponentClass {
 
     /** @hidden */
     private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    constructor() {
+        this.mode$ = this._mode$.asReadonly();
+        this.orientation$ = this._orientation$.asReadonly();
+        this.searchField$ = this._searchField$.asReadonly();
+        this.searchFieldExpanded$ = this._searchFieldExpanded$.asReadonly();
+    }
 }
