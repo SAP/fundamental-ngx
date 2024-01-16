@@ -230,6 +230,10 @@ fdk-dynamic-portal {
             .fd-replace-indicator {
                 top: auto;
             }
+
+            .#{$fd-block}__text {
+                white-space: nowrap;
+            }
         }
 
         &.fd-table--condensed,
