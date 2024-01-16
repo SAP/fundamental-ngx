@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.38...v0.48.0-rc.39) (2024-01-16)
+
+
+### Bug Fixes
+
+* **btp:** added state and interaction unit tests for tool-header ([#11204](https://github.com/SAP/fundamental-ngx/issues/11204)) ([f587eb7](https://github.com/SAP/fundamental-ngx/commit/f587eb7ba6bec82ffd755764851296362a02174d))
+
+
+
+
+
 # [0.48.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.37...v0.48.0-rc.38) (2024-01-16)
 
 
