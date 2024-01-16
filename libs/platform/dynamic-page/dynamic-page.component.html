@@ -77,19 +77,22 @@
         </fd-dynamic-page-subheader>
     }
     @if (_isTabbed) {
-        <fd-tab-list
+        <fdp-icon-tab-bar
+            class="fd-tabs-custom"
             [stackContent]="stackContent"
             maxContentHeight="auto"
-            (selectedTabChange)="_onSelectedTabChange($event)"
+            (iconTabSelected)="_onSelectedTabChange($event)"
         >
             @for (tab of _tabs; track tab) {
-                <fd-tab [title]="tab.tabLabel" [id]="tab.id">
+                <fdp-icon-tab-bar-tab [label]="tab.tabLabel" [id]="tab.id">
                     <fd-dynamic-page-content>
-                        <ng-template [ngTemplateOutlet]="tab.contentTemplateRef"></ng-template>
-                    </fd-dynamic-page-content>
-                </fd-tab>
+                        <ng-template
+                            [ngTemplateOutlet]="tab.contentTemplateRef"
+                        ></ng-template> </fd-dynamic-page-content
+                ></fdp-icon-tab-bar-tab>
             }
-        </fd-tab-list>
+            <fdp-icon-tab-bar-tab></fdp-icon-tab-bar-tab>
+        </fdp-icon-tab-bar>
     }
     @if (!_isTabbed && contentComponent) {
         <fd-dynamic-page-content>

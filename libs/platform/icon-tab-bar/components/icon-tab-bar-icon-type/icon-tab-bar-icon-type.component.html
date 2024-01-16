@@ -1,12 +1,14 @@
 <ul
     class="fd-icon-tab-bar__header"
+    [class.fd-dynamic-page__tabs]="_inDynamicPage"
     role="tablist"
     fdkOverflowList
     [isRtl]="isRtl"
+    #tablist
     [overflowOffset]="100"
     (overflowChanged)="_recalculateVisibleItems($event)"
 >
-    @for (item of _tabs$(); track item.uId; let idx = $index) {
+    @for (item of tabs; track item.uId; let idx = $index) {
         <li
             [ngClass]="item.cssClasses"
             [class.fd-icon-tab-bar__item--closable]="item.closable"
@@ -20,13 +22,13 @@
                 #tabItem
                 role="tab"
                 [attr.tabindex]="idx === 0 ? 0 : -1"
-                [attr.aria-selected]="item.uId === _selectedUid"
+                [attr.aria-selected]="item.uId === selectedUid"
                 (click)="_selectItem(item)"
                 (keydown)="_keyDownHandler($event, item, idx)"
             >
                 <div class="fd-icon-tab-bar__container">
                     <span class="fd-icon-tab-bar__icon">
-                        <fd-icon [glyph]="item.icon"></fd-icon>
+                        <fd-icon [glyph]="item.icon" [font]="item.iconFont || _defaultFontFamily"></fd-icon>
                     </span>
                     @if (item.counter && (!item.label || !showLabel)) {
                         <span class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
@@ -38,9 +40,9 @@
                         <span class="fd-icon-tab-bar__label">{{ item.label }}</span>
                     </div>
                 }
-                @if (item.color) {
+                @if (item.color | fdkAsyncOrSync; as itemColor) {
                     <div class="screenreader-only">
-                        {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
+                        {{ (colorAssociations && colorAssociations[itemColor]) || itemColor }}
                     </div>
                 }
             </a>

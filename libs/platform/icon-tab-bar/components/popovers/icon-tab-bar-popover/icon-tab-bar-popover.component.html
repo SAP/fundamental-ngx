@@ -30,23 +30,25 @@
                     >
                         <span class="fd-icon-tab-bar__list-item-icon-container">
                             <span class="fd-list__icon fd-icon-tab-bar__list-item-icon">
-                                <fd-icon [glyph]="item.icon"></fd-icon>
+                                <fd-icon [glyph]="item.icon | fdkAsyncOrSync"></fd-icon>
                             </span>
                         </span>
-                        @if (showItemLabel && item.label) {
-                            <span class="fd-list__title fd-icon-tab-bar__list-item-title">{{ item.label }}</span>
+                        @if (showItemLabel && (item.label | fdkAsyncOrSync)) {
+                            <span class="fd-list__title fd-icon-tab-bar__list-item-title">{{
+                                item.label | fdkAsyncOrSync
+                            }}</span>
                         }
                         @if (item.badge) {
                             <span class="fd-icon-tab-bar__badge"></span>
                         }
-                        @if (item.counter) {
+                        @if (item.counter | fdkAsyncOrSync; as itemCounter) {
                             <span class="fd-list__counter fd-icon-tab-bar__list-item-counter"
-                                >({{ item.counter }})
+                                >({{ itemCounter }})
                             </span>
                         }
-                        @if (item.color) {
+                        @if (item.color | fdkAsyncOrSync; as itemColor) {
                             <div class="screenreader-only">
-                                {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
+                                {{ (colorAssociations && colorAssociations[itemColor]) || itemColor }}
                             </div>
                         }
                     </a>

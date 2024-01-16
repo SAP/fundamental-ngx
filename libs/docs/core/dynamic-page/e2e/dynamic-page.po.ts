@@ -24,8 +24,8 @@ export class DynamicPagePo extends CoreBaseComponentPo {
     collapsibleHeader = '.fd-dynamic-page__collapsible-header';
     collapseButton = '.fd-dynamic-page__collapse-button';
     pinButton = '.fd-dynamic-page__pin-button';
-    tab = '.fd-dynamic-page .fd-tabs__link';
-    tabsContent = '.fd-tabs__panel ' + this.dynamicPageContent + 'div:first-of-type';
+    tab = '.fd-dynamic-page .fd-icon-tab-bar__tab';
+    tabsContent = '.fd-icon-tab-bar__tab-content ' + this.dynamicPageContent + 'div:first-of-type';
     flexibleColumn = '.fd-flexible-column-layout__column ';
     article = '.fd-dynamic-page-section-example';
     breadcrumbLink = '.fd-dynamic-page__breadcrumb-wrapper a';

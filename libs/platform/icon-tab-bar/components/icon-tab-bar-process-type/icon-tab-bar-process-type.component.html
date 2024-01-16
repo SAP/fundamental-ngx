@@ -1,6 +1,8 @@
 <ul
     class="fd-icon-tab-bar__header"
+    [class.fd-dynamic-page__tabs]="_inDynamicPage"
     role="tablist"
+    #tablist
     [class.fd-icon-tab-bar__header--left-offset]="_showLeftBtn"
     fdkOverflowList
     [isRtl]="isRtl"
@@ -21,7 +23,7 @@
             ></fdp-icon-tab-bar-popover>
         </li>
     }
-    @for (item of _tabs$(); track item.uId; let idx = $index) {
+    @for (item of tabs; track item.uId; let idx = $index) {
         <li
             [class]="item.cssClasses"
             class="fd-icon-tab-bar__item"
@@ -32,7 +34,7 @@
             <a
                 (click)="_selectItem(item)"
                 (keydown)="_keyDownHandler($event, item, idx)"
-                [attr.aria-selected]="item.uId === _selectedUid"
+                [attr.aria-selected]="item.uId === selectedUid"
                 class="fd-icon-tab-bar__tab"
                 #tabItem
                 [attr.tabindex]="idx === 0 ? 0 : -1"
@@ -57,9 +59,9 @@
                         <span class="fd-icon-tab-bar__badge"></span>
                     }
                 }
-                @if (item.color) {
+                @if (item.color | fdkAsyncOrSync; as itemColor) {
                     <div class="screenreader-only">
-                        {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
+                        {{ (colorAssociations && colorAssociations[itemColor]) || itemColor }}
                     </div>
                 }
             </a>
