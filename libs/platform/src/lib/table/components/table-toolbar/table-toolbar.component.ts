@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SearchInput, SuggestionItem } from '@fundamental-ngx/platform/search-field';
 import { Table, TableService } from '@fundamental-ngx/platform/table-helpers';
 import { takeUntil } from 'rxjs/operators';
@@ -50,6 +51,10 @@ export class TableToolbarComponent implements TableToolbarInterface, OnDestroy {
     /** Table title. */
     @Input()
     title: string;
+
+    /** Aria label for the search field. */
+    @Input()
+    searchFieldAriaLabel: Nullable<string>;
 
     /** Toggle to show table item count. */
     @Input()
