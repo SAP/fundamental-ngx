@@ -3,7 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { SplitterComponent, SplitterSplitPaneComponent } from '@fundamental-ngx/core/splitter';
 
 @Component({
-    selector: 'fd-slider-api-example',
+    selector: 'fd-splitter-api-example',
     templateUrl: './splitter-api-example.component.html'
 })
 export class SplitterApiExampleComponent {
