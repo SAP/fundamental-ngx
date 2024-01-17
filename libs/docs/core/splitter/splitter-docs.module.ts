@@ -22,7 +22,7 @@ const routes: Routes = [
         component: SplitterHeaderComponent,
         children: [
             { path: '', component: SplitterDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.slider } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.splitter } }
         ]
     }
 ];
