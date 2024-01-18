@@ -6,22 +6,26 @@
         freezeEndColumnsTo="verified"
         [pageScrolling]="true"
         [pageSize]="10"
+        [nonFrozenColumnsMinWidth]="300"
         bodyHeight="20rem"
         (columnFreeze)="onColumnFreezeChange($event)"
     >
         <fdp-table-toolbar title="Order Line Items" [hideItemCount]="true"> </fdp-table-toolbar>
 
-        <fdp-column name="name" key="name" label="Name" align="start" width="200px"> </fdp-column>
+        <fdp-column name="name" [freezable]="true" key="name" label="Name" align="start" width="200px"> </fdp-column>
 
-        <fdp-column name="description" key="description" label="Description" width="200px"> </fdp-column>
+        <fdp-column name="description" [freezable]="true" key="description" label="Description" width="200px">
+        </fdp-column>
 
         <fdp-column name="price" [freezable]="true" key="price.value" label="Price" align="end" width="100px">
         </fdp-column>
 
-        <fdp-column name="status" key="status" label="Status" align="center" width="200px"> </fdp-column>
+        <fdp-column name="status" [freezable]="true" key="status" label="Status" align="center" width="200px">
+        </fdp-column>
 
-        <fdp-column name="date" key="date.year" label="Date" align="end" width="100px"> </fdp-column>
+        <fdp-column name="date" [freezable]="true" key="date.year" label="Date" align="end" width="100px"> </fdp-column>
 
-        <fdp-column name="verified" key="verified" label="Verified" align="end" width="100px"> </fdp-column>
+        <fdp-column name="verified" [freezable]="true" key="verified" label="Verified" align="end" width="100px">
+        </fdp-column>
     </fdp-table>
 </div>
