@@ -18,6 +18,8 @@ export const TABLE_RESIZER_BORDER_WIDTH = 3;
  */
 @Injectable()
 export class TableColumnResizeService implements OnDestroy {
+    /** Subject that emits new map of fixed columns and their respective width. */
+    readonly fixedColumsWidthChange = new BehaviorSubject<Map<string, string>>(new Map());
     /** @hidden */
     private _fixedColumnsWidthMap = new Map<string, string>();
 
@@ -221,6 +223,7 @@ export class TableColumnResizeService implements OnDestroy {
     /** Register the value of column width that changed from  input */
     setCustomWidth(columnName: string, value: string): void {
         this._fixedColumnsWidthMap.set(columnName, value);
+        this.fixedColumsWidthChange.next(this._fixedColumnsWidthMap);
     }
 
     /** Set the appropriate column resizer position. */
@@ -310,6 +313,8 @@ export class TableColumnResizeService implements OnDestroy {
             }
         }
 
+        this.fixedColumsWidthChange.next(this._fixedColumnsWidthMap);
+
         /**
          * In case "_resizedColumn" is freezable, make sure the overall width of freezable columns does not exceed the width of the table.
          * If it does, columns will be made unfrozen.
@@ -334,6 +339,7 @@ export class TableColumnResizeService implements OnDestroy {
 
         const updatedWidth = columnWidth + diffX;
         this._fixedColumnsWidthMap.set(this._resizedColumn, updatedWidth + 'px');
+        this.fixedColumsWidthChange.next(this._fixedColumnsWidthMap);
         this.updateFrozenColumnsWidthAfterResize(this._resizedColumn, diffX);
 
         const computed = window.getComputedStyle(resizedElement);
