@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.40...v0.48.0-rc.41) (2024-01-18)
+
+
+### Features
+
+* **platform:** unfrozen columns min width area ([#11235](https://github.com/SAP/fundamental-ngx/issues/11235)) ([af51eb2](https://github.com/SAP/fundamental-ngx/commit/af51eb2881fc1abf58b56f6eb3c1085cd71f47d4))
+
+
+
+
+
 # [0.48.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.39...v0.48.0-rc.40) (2024-01-18)
 
 
