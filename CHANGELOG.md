@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.39...v0.48.0-rc.40) (2024-01-18)
+
+
+### Bug Fixes
+
+* **platform:** vhd content min height ([#11233](https://github.com/SAP/fundamental-ngx/issues/11233)) ([9a1d398](https://github.com/SAP/fundamental-ngx/commit/9a1d398b722d66171fe0a1ae8bedbbbccfb8b557))
+
+
+
+
+
 # [0.48.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.38...v0.48.0-rc.39) (2024-01-16)
 
 
