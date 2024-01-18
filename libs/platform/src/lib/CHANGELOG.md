@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.25](https://github.com/SAP/fundamental-ngx/compare/v0.43.23...v0.43.25) (2024-01-18)
+
+
+### Bug Fixes
+
+* add addonIconTitle input to multi input ([#11185](https://github.com/SAP/fundamental-ngx/issues/11185)) ([63ecd38](https://github.com/SAP/fundamental-ngx/commit/63ecd38cde32149cce310854d2a21357e9476f96))
+* **cdk:** tabbable observer out of the zone ([#11196](https://github.com/SAP/fundamental-ngx/issues/11196)) ([6503cc1](https://github.com/SAP/fundamental-ngx/commit/6503cc19ab3ddddaf32b63ea95cf67b0c95cef02))
+* **platform:** combobox selection issue ([#11115](https://github.com/SAP/fundamental-ngx/issues/11115)) ([fb8bd0e](https://github.com/SAP/fundamental-ngx/commit/fb8bd0e56470c28ca0b29c05f12e44ff6c1fdb84))
+* **platform:** corrected translations ([#11205](https://github.com/SAP/fundamental-ngx/issues/11205)) ([ad977a2](https://github.com/SAP/fundamental-ngx/commit/ad977a2435e8d7a072f85e795e4c0eb82a7ef8ed))
+* **platform:** p13 a11y fixes ([#11149](https://github.com/SAP/fundamental-ngx/issues/11149)) ([00a5238](https://github.com/SAP/fundamental-ngx/commit/00a5238da4d7c402ff275bcc454e64278ebb0311))
+* **platform:** tree table text overflow ([#11231](https://github.com/SAP/fundamental-ngx/issues/11231)) ([e992a96](https://github.com/SAP/fundamental-ngx/commit/e992a962544984f791b0bf8a6ebd4c7644e09597))
+* **platform:** unfrozen area min width ([#11236](https://github.com/SAP/fundamental-ngx/issues/11236)) ([499ba98](https://github.com/SAP/fundamental-ngx/commit/499ba9897c8b42d5e17ebcd9e814c9be4209b309))
+
+
+### Features
+
+* **platform:** added ariaLabel priority over the ariaLabelledBy ([#11172](https://github.com/SAP/fundamental-ngx/issues/11172)) ([#11203](https://github.com/SAP/fundamental-ngx/issues/11203)) ([6e82b18](https://github.com/SAP/fundamental-ngx/commit/6e82b18905a2c7684a46fa619a3de9051235fe00))
+
+
+
+
+
 ## [0.43.24](https://github.com/SAP/fundamental-ngx/compare/v0.43.23...v0.43.24) (2023-12-28)
 
 **Note:** Version bump only for package @fundamental-ngx/platform

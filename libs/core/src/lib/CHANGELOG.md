@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.25](https://github.com/SAP/fundamental-ngx/compare/v0.43.23...v0.43.25) (2024-01-18)
+
+
+### Bug Fixes
+
+* add addonIconTitle input to multi input ([#11185](https://github.com/SAP/fundamental-ngx/issues/11185)) ([63ecd38](https://github.com/SAP/fundamental-ngx/commit/63ecd38cde32149cce310854d2a21357e9476f96))
+* **core:** aria-hidden tokenizer if tokenList length is 0 ([#11200](https://github.com/SAP/fundamental-ngx/issues/11200)) ([c10f520](https://github.com/SAP/fundamental-ngx/commit/c10f520c5a2d79b4a7d3975d087af52c6f900c50))
+* **core:** scroll spy emit issue ([#11111](https://github.com/SAP/fundamental-ngx/issues/11111)) ([43fb966](https://github.com/SAP/fundamental-ngx/commit/43fb9666d960524355a452cb234e0e86e0479295))
+* splitter docs for ng15 ([#11113](https://github.com/SAP/fundamental-ngx/issues/11113)) ([173790d](https://github.com/SAP/fundamental-ngx/commit/173790dd8dccdb8173caa9d51bfe2f170f233257))
+
+
+
+
+
 ## [0.43.24](https://github.com/SAP/fundamental-ngx/compare/v0.43.23...v0.43.24) (2023-12-28)
 
 

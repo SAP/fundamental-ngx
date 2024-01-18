@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.25](https://github.com/SAP/fundamental-ngx/compare/v0.43.23...v0.43.25) (2024-01-18)
+
+
+### Bug Fixes
+
+* **cdk:** tabbable observer out of the zone ([#11196](https://github.com/SAP/fundamental-ngx/issues/11196)) ([6503cc1](https://github.com/SAP/fundamental-ngx/commit/6503cc19ab3ddddaf32b63ea95cf67b0c95cef02))
+
+
+
+
+
 ## [0.43.24](https://github.com/SAP/fundamental-ngx/compare/v0.43.23...v0.43.24) (2023-12-28)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk
