@@ -67,7 +67,7 @@ export class TableInitialStateDirective extends TableInitialState {
         const page = prevState.page;
         const visibleColumns =
             this.initialVisibleColumns ||
-            (prevState.columns.length ? prevState.columns : columns.map(({ name }) => name));
+            (prevState.columns.length ? prevState.columns : columns.filter((c) => c.visible).map(({ name }) => name));
 
         const directiveInitialPage = this.initialPage ?? 1;
 
