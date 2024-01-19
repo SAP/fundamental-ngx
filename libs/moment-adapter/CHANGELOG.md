@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.41...v0.48.0-rc.42) (2024-01-19)
+
+**Note:** Version bump only for package @fundamental-ngx/moment-adapter
+
+
+
+
+
 # [0.48.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.40...v0.48.0-rc.41) (2024-01-18)
 
 **Note:** Version bump only for package @fundamental-ngx/moment-adapter

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.41...v0.48.0-rc.42) (2024-01-19)
+
+
+### Bug Fixes
+
+* **platform:** initial visible columns ([#11237](https://github.com/SAP/fundamental-ngx/issues/11237)) ([e1a24b3](https://github.com/SAP/fundamental-ngx/commit/e1a24b396b1f2b80a9701779ad92f0a561e1e4ba))
+
+
+
+
+
 # [0.48.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.40...v0.48.0-rc.41) (2024-01-18)
 
 
