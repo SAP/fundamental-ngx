@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.42...v0.48.0-rc.43) (2024-01-19)
+
+
+### Features
+
+* **core,docs:** dynamic page tabbed routing ([#11239](https://github.com/SAP/fundamental-ngx/issues/11239)) ([78982f8](https://github.com/SAP/fundamental-ngx/commit/78982f8b90964c8d8746e888848f95455910dcf4))
+
+
+
+
+
 # [0.48.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.41...v0.48.0-rc.42) (2024-01-19)
 
 
