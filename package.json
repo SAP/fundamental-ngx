@@ -141,7 +141,7 @@
     "jsonc-eslint-parser": "^2.1.0",
     "lerna": "7.4.2",
     "lint-staged": "15.1.0",
-    "ng-packagr": "17.0.3",
+    "ng-packagr": "17.1.0",
     "ngx-cva-test-suite": "2.0.0",
     "nx": "17.2.8",
     "postcss-preset-env": "9.3.0",
