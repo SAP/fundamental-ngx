@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.44...v0.48.0-rc.45) (2024-01-22)
+
+
+### Bug Fixes
+
+* **platform:** selection header column width bug ([#11175](https://github.com/SAP/fundamental-ngx/issues/11175)) ([d04de0d](https://github.com/SAP/fundamental-ngx/commit/d04de0d6d6c01f5c6a82aa49431e8cdc5bb73d7e))
+
+
+
+
+
 # [0.48.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.43...v0.48.0-rc.44) (2024-01-22)
 
 
