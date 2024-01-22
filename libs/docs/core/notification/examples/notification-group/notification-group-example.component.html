@@ -5,8 +5,8 @@
         </fd-popover-control>
         <fd-popover-body>
             <fd-notification-group width="40rem">
-                <fd-tab-list size="s">
-                    <fd-tab title="By Date">
+                <fdp-icon-tab-bar iconTabSize="sm">
+                    <fdp-icon-tab-bar-tab label="By Date">
                         <fd-notification-group-list>
                             <fd-notification-group-header [(expanded)]="expandedByDate">
                                 <fd-notification-header>
@@ -33,8 +33,8 @@
                                 </p>
                             </fd-notification-limit>
                         </fd-notification-group-list>
-                    </fd-tab>
-                    <fd-tab title="By Type">
+                    </fdp-icon-tab-bar-tab>
+                    <fdp-icon-tab-bar-tab label="By Type">
                         <fd-notification-group-list>
                             <fd-notification-group-header [(expanded)]="expandedByType1">
                                 <fd-notification-header>
@@ -77,8 +77,8 @@
                             </fd-notification-group-header>
                             <ng-container *ngTemplateOutlet="warningNotifications"></ng-container>
                         </fd-notification-group-list>
-                    </fd-tab>
-                    <fd-tab title="By Priority">
+                    </fdp-icon-tab-bar-tab>
+                    <fdp-icon-tab-bar-tab label="By Priority">
                         <fd-notification-group-list>
                             <fd-notification-group-header [(expanded)]="expandedByPriority">
                                 <fd-notification-header>
@@ -96,8 +96,8 @@
                             </fd-notification-group-header>
                             <ng-container *ngTemplateOutlet="successNotifications"></ng-container>
                         </fd-notification-group-list>
-                    </fd-tab>
-                </fd-tab-list>
+                    </fdp-icon-tab-bar-tab>
+                </fdp-icon-tab-bar>
             </fd-notification-group>
         </fd-popover-body>
     </fd-popover>

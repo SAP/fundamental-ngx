@@ -46,13 +46,13 @@
                     </fd-message-strip>
                 }
                 @if (examples.state === states.success) {
-                    <fd-tab-list>
+                    <fdp-icon-tab-bar (iconTabSelected)="activeIndex = $event.index" iconTabSize="responsive-paddings">
                         @for (file of examples.exampleFiles; track file; let i = $index) {
-                            <fd-tab [title]="file.name || file.language | titlecase" (opened)="activeIndex = i">
+                            <fdp-icon-tab-bar-tab [label]="file.name || file.language | titlecase">
                                 <fd-code-snippet [file]="file"></fd-code-snippet>
-                            </fd-tab>
+                            </fdp-icon-tab-bar-tab>
                         }
-                    </fd-tab-list>
+                    </fdp-icon-tab-bar>
                 }
             }
         </div>

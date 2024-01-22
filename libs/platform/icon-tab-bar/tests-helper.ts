@@ -25,6 +25,38 @@ export function generateTestConfig(length: number, subTabs: boolean = false): Ta
     return items;
 }
 
+/** @hidden helper object that is used in tab generation functions to calculate their indexes not depending on level of nesting */
+interface FlatIndex {
+    value: number;
+}
+
+/** @hidden */
+export function _generateTabBarItems(
+    config: TabConfig[],
+    indexPrefix = '',
+    flatIndexRef?: FlatIndex,
+    parentUId?: string
+): IconTabBarItem[] {
+    flatIndexRef = flatIndexRef || { value: 0 };
+    return config.map((item, index) => {
+        const uId = `${indexPrefix}${index}`;
+        const result: IconTabBarItem = {
+            ...item,
+            index,
+            cssClasses: [],
+            uId,
+            hidden: false,
+            parentUId,
+            flatIndex: flatIndexRef!.value++,
+            subItems: _generateTabBarItems(item.subItems || [], `${uId}${UNIQUE_KEY_SEPARATOR}`, flatIndexRef, uId)
+        };
+        if (item.color) {
+            result.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
+        }
+        return result;
+    });
+}
+
 /** @hidden */
 export function generateTabBarItems(config: TabConfig[], flatIndexRef = { value: 0 }): IconTabBarItem[] {
     return config.map((item, index) => {

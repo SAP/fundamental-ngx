@@ -5,7 +5,7 @@ import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IndicatorStates, NotificationModule } from '@fundamental-ngx/core/notification';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform';
 
 export type Notification = {
     avatar: string;
@@ -29,7 +29,7 @@ export type Notification = {
         ButtonComponent,
         PopoverBodyComponent,
         NotificationModule,
-        TabsModule,
+        FDP_ICON_TAB_BAR,
         NgTemplateOutlet,
         AvatarComponent
     ]

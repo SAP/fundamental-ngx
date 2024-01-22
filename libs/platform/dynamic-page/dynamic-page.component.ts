@@ -43,8 +43,9 @@ import {
     patchHeaderI18nTexts
 } from '@fundamental-ngx/core/dynamic-page';
 import { FacetComponent } from '@fundamental-ngx/core/facets';
-import { TabListComponent, TabPanelComponent } from '@fundamental-ngx/core/tabs';
+import { FD_TABLIST, TabList } from '@fundamental-ngx/core/shared';
 import { FD_LANGUAGE } from '@fundamental-ngx/i18n';
+import { IconTabBarComponent, IconTabBarItem, IconTabBarTabComponent } from '@fundamental-ngx/platform/icon-tab-bar';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import { DynamicPageContentHostComponent } from './dynamic-page-content/dynamic-page-content-host.component';
@@ -65,7 +66,7 @@ export class DynamicPageTabChangeEvent {
      */
     constructor(
         public source: DynamicPageContentComponent,
-        public payload: TabPanelComponent
+        public payload: IconTabBarItem
     ) {}
 }
 
@@ -99,8 +100,8 @@ export class DynamicPageTabChangeEvent {
         DynamicPageGlobalActionsComponent,
         DynamicPageLayoutActionsComponent,
         DynamicPageSubheaderComponent,
-        TabListComponent,
-        TabPanelComponent,
+        IconTabBarComponent,
+        IconTabBarTabComponent,
         DynamicPageContentComponent,
         DynamicPageFooterComponent,
         CoreDynamicPageFooterComponent,
@@ -190,12 +191,12 @@ export class DynamicPageComponent
     _dynamicPageComponent: DynamicPage;
 
     /** @hidden */
-    @ViewChild(TabListComponent)
-    _tabListComponent: TabListComponent;
+    @ViewChild(FD_TABLIST)
+    _tabListComponent: TabList;
 
     /** Reference to tab items components */
-    @ViewChildren(TabPanelComponent)
-    dynamicPageTabs: QueryList<TabPanelComponent>;
+    @ViewChildren(IconTabBarTabComponent)
+    dynamicPageTabs: QueryList<IconTabBarTabComponent>;
 
     /** @hidden */
     @ViewChildren(DynamicPageContentHostComponent)
@@ -241,7 +242,7 @@ export class DynamicPageComponent
     ngAfterViewInit(): void {
         this.detectChanges();
 
-        this._tabListComponent?.headerContainer.nativeElement.classList.add('fd-dynamic-page__tabs');
+        this._tabListComponent?.headerContainer?.nativeElement.classList.add('fd-dynamic-page__tabs');
         this.collapsed = this._dynamicPageComponent.collapsed;
     }
 
@@ -257,19 +258,11 @@ export class DynamicPageComponent
      * marks the dynamic page tab as selected when the id of the tab is passed
      */
     setSelectedTab(id: string): void {
-        if (!(id && this.dynamicPageTabs)) {
-            return;
-        }
-
-        this.dynamicPageTabs.forEach((element) => {
-            if (element.id === id) {
-                element.open(true);
-            }
-        });
+        this._tabListComponent.selectTab(id);
     }
 
     /** @hidden */
-    _onSelectedTabChange(event: TabPanelComponent): void {
+    _onSelectedTabChange(event: IconTabBarItem): void {
         const content = this.contentComponents.find((contentComponent) => contentComponent.id === event.id);
 
         content && this.tabChange.emit(new DynamicPageTabChangeEvent(content, event));

@@ -3,6 +3,107 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.43...v0.48.0-rc.44) (2024-01-22)
+
+
+### Features
+
+* **platform:** vhd validator ([#11298](https://github.com/SAP/fundamental-ngx/issues/11298)) ([afd6551](https://github.com/SAP/fundamental-ngx/commit/afd6551ec2b6ad5e1a6b3e63e82a9d89b3e2bb17))
+
+
+
+
+
+# [0.48.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.42...v0.48.0-rc.43) (2024-01-19)
+
+
+### Features
+
+* **core,docs:** dynamic page tabbed routing ([#11239](https://github.com/SAP/fundamental-ngx/issues/11239)) ([78982f8](https://github.com/SAP/fundamental-ngx/commit/78982f8b90964c8d8746e888848f95455910dcf4))
+
+
+
+
+
+# [0.48.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.41...v0.48.0-rc.42) (2024-01-19)
+
+
+### Bug Fixes
+
+* **platform:** initial visible columns ([#11237](https://github.com/SAP/fundamental-ngx/issues/11237)) ([e1a24b3](https://github.com/SAP/fundamental-ngx/commit/e1a24b396b1f2b80a9701779ad92f0a561e1e4ba))
+
+
+
+
+
+# [0.48.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.40...v0.48.0-rc.41) (2024-01-18)
+
+
+### Features
+
+* **platform:** unfrozen columns min width area ([#11235](https://github.com/SAP/fundamental-ngx/issues/11235)) ([af51eb2](https://github.com/SAP/fundamental-ngx/commit/af51eb2881fc1abf58b56f6eb3c1085cd71f47d4))
+
+
+
+
+
+# [0.48.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.39...v0.48.0-rc.40) (2024-01-18)
+
+
+### Bug Fixes
+
+* **platform:** vhd content min height ([#11233](https://github.com/SAP/fundamental-ngx/issues/11233)) ([9a1d398](https://github.com/SAP/fundamental-ngx/commit/9a1d398b722d66171fe0a1ae8bedbbbccfb8b557))
+
+
+
+
+
+# [0.48.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.38...v0.48.0-rc.39) (2024-01-16)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.48.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.37...v0.48.0-rc.38) (2024-01-16)
+
+
+### Features
+
+* **docs,platform,core:** icon tab bar update ([#11210](https://github.com/SAP/fundamental-ngx/issues/11210)) ([c7acc43](https://github.com/SAP/fundamental-ngx/commit/c7acc43d7301f6ba64ab064e6d5f302213df1baf))
+
+
+### BREAKING CHANGES
+
+* **docs,platform,core:** Platform: Platform Dynamic page `DynamicPageTabChangeEvent` now uses `IconTabBarItem` as a payload instead of `TabPanelComponent`
+
+
+
+
+
+# [0.48.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.36...v0.48.0-rc.37) (2024-01-16)
+
+
+### Bug Fixes
+
+* **platform:** tree table text overflow ([#11228](https://github.com/SAP/fundamental-ngx/issues/11228)) ([42a8f33](https://github.com/SAP/fundamental-ngx/commit/42a8f33874a5973342d25a7a362b73d4405b587f))
+
+
+
+
+
+# [0.48.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.35...v0.48.0-rc.36) (2024-01-10)
+
+
+### Features
+
+* **platform:** added ariaLabel priority over the ariaLabelledBy ([#11172](https://github.com/SAP/fundamental-ngx/issues/11172)) ([ceb680d](https://github.com/SAP/fundamental-ngx/commit/ceb680db1ff8aff59012f33a1cc4e4549af566d7))
+
+
+
+
+
 # [0.48.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.34...v0.48.0-rc.35) (2024-01-10)
 
 

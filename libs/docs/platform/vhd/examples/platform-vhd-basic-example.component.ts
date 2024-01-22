@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
+import { MessageBoxModule, MessageBoxService } from '@fundamental-ngx/core/message-box';
 import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
 import {
     PlatformValueHelpDialogModule,
@@ -18,8 +19,8 @@ import {
     VhdValue,
     VhdValueChangeEvent
 } from '@fundamental-ngx/platform/value-help-dialog';
-import { Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
 
 interface ExampleTestModel {
     id: number;
@@ -79,7 +80,8 @@ const data = exampleDataSource();
         ComboboxComponent,
         ValueHelpFilterDefDirective,
         FormsModule,
-        FormControlComponent
+        FormControlComponent,
+        MessageBoxModule
     ]
 })
 export class PlatformVhdBasicExampleComponent {
@@ -89,6 +91,30 @@ export class PlatformVhdBasicExampleComponent {
     actualValue: Partial<VhdValue<ExampleTestModel>> = {};
 
     booleanDropdownValues = ['Yes', 'No'];
+
+    readonly messageBoxService = inject(MessageBoxService);
+
+    validator = (value: VhdValueChangeEvent) =>
+        of(value.selected.length <= 10).pipe(
+            delay(5000),
+            tap((result) => {
+                if (result) {
+                    return;
+                }
+
+                const content = {
+                    title: 'Wrong number of selected items',
+                    approveButton: 'Ok',
+                    cancelButton: 'Cancel',
+                    approveButtonCallback: () => messageBoxRef.close('Approved'),
+                    cancelButtonCallback: () => messageBoxRef.close('Canceled'),
+                    closeButtonCallback: () => messageBoxRef.dismiss('Dismissed'),
+                    content: 'You must select less than 10 items'
+                };
+
+                const messageBoxRef = this.messageBoxService.open(content, { type: 'error' });
+            })
+        );
 
     actualItems: string[] = [];
     formatTokenFn = (value: VhdValueChangeEvent<ExampleTestModel>): void => {
@@ -133,6 +159,7 @@ export class PlatformVhdBasicExampleComponent {
     };
 
     valueChange($event: VhdValueChangeEvent<ExampleTestModel>): void {
+        console.log($event);
         this.actualValue = { ...$event };
     }
 }

@@ -76,9 +76,9 @@
                     impedit repellendus esse, facere autem optio consequatur nobis?</span
                 >
             </fd-dynamic-page-subheader>
-            <fd-tab-list [stackContent]="stackedTabs" maxContentHeight="auto" ariaRoledescription="Tab Bar">
+            <fdp-icon-tab-bar [stackContent]="stackedTabs" maxContentHeight="auto" ariaRoledescription="Tab Bar">
                 @for (tab of ['Tab 1', 'Tab 2', 'Tab 3']; track tab) {
-                    <fd-tab [title]="tab">
+                    <fdp-icon-tab-bar-tab [label]="tab">
                         <fd-dynamic-page-content [id]="tab" cdkScrollable>
                             <div class="fd-dynamic-page-section-example">{{ tab }} content.</div>
                             <div class="fd-dynamic-page-section-example">
@@ -130,9 +130,9 @@
                                 mollit anim id est laborum.
                             </div>
                         </fd-dynamic-page-content>
-                    </fd-tab>
+                    </fdp-icon-tab-bar-tab>
                 }
-            </fd-tab-list>
+            </fdp-icon-tab-bar>
             <fd-dynamic-page-footer>
                 <!-- page footer content goes here -->
                 <div fd-bar barDesign="floating-footer">

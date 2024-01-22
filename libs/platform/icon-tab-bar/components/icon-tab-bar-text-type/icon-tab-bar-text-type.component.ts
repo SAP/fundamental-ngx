@@ -11,6 +11,7 @@ import { IconBarDndItemDirective } from '../../directives/dnd/icon-bar-dnd-item.
 import { IconBarDndListDirective } from '../../directives/dnd/icon-bar-dnd-list.directive';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { ClosableIconTabBar } from '../closable-icon-tab-bar.class';
+import { IconTabBarBase } from '../icon-tab-bar-base.class';
 import { TextTypePopoverComponent } from '../popovers/text-type-popover/text-type-popover.component';
 
 /** @hidden */
@@ -27,6 +28,12 @@ type TabItem = ElementRef<HTMLElement> | TextTypePopoverComponent;
     selector: 'fdp-icon-tab-bar-text-type',
     templateUrl: './icon-tab-bar-text-type.component.html',
     standalone: true,
+    providers: [
+        {
+            provide: IconTabBarBase,
+            useExisting: IconTabBarTextTypeComponent
+        }
+    ],
     imports: [
         IconBarDndContainerDirective,
         OverflowListDirective,
@@ -74,7 +81,7 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
         // Then to find root tab, and pass it to the parent method.
         if (selectedItem?.uId.includes(UNIQUE_KEY_SEPARATOR)) {
             const rootTabUid = selectedItem.uId.split(UNIQUE_KEY_SEPARATOR)[0];
-            selectedItem = this._tabs$().find((tab) => tab.uId === rootTabUid);
+            selectedItem = this.tabs.find((tab) => tab.uId === rootTabUid);
         }
         if (!selectedItem) {
             return;
@@ -120,7 +127,7 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
 
         event.action === 'replace' ? this._replaceAsSibling(dataForAction) : this._insertItemAsChild(dataForAction);
 
-        this.reordered.emit(this._tabs$());
+        this.reordered.emit(this.tabs);
     }
 
     /** @hidden */
@@ -155,7 +162,7 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
         }
         // Add tab to subitem of the target tab
         replacedItemInfo.item.subItems.push(draggableItemInfo.item);
-        this._tabs$.set(this._updateTabs(this._tabs$()));
+        this.tabs = this._updateTabs(this.tabs);
         this._triggerRecalculationVisibleItems();
     }
 
@@ -172,7 +179,7 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
         draggableItemInfo.arr.splice(draggableItemInfo.item.index, 1);
         const newIndex = replacedItemInfo?.item?.index || 0;
         replacedItemInfo.arr.splice(newIndex, 0, draggableItemInfo.item);
-        this._tabs$.set(this._updateTabs(this._tabs$()));
+        this.tabs = this._updateTabs(this.tabs);
         this._triggerRecalculationVisibleItems();
     }
 
