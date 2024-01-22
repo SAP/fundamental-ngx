@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.43...v0.48.0-rc.44) (2024-01-22)
+
+
+### Features
+
+* **platform:** vhd validator ([#11298](https://github.com/SAP/fundamental-ngx/issues/11298)) ([afd6551](https://github.com/SAP/fundamental-ngx/commit/afd6551ec2b6ad5e1a6b3e63e82a9d89b3e2bb17))
+
+
+
+
+
 # [0.48.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.42...v0.48.0-rc.43) (2024-01-19)
 
 
