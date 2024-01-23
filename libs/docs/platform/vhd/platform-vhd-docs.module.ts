@@ -34,6 +34,7 @@ import { PlatformVhdInitialLoadingExampleComponent } from './examples/initial-lo
 import { PlatformVhdColumnTemplateExampleComponent } from './examples/column-template/platform-vhd-column-template-example.component';
 import { ComboboxModule } from '@fundamental-ngx/core/combobox';
 import { SelectModule } from '@fundamental-ngx/core/select';
+import { MessageBoxModule } from '@fundamental-ngx/core/message-box';
 
 const routes: Routes = [
     {
@@ -60,7 +61,8 @@ const routes: Routes = [
         PlatformValueHelpDialogModule,
         CheckboxModule,
         ComboboxModule,
-        SelectModule
+        SelectModule,
+        MessageBoxModule
     ],
     exports: [RouterModule],
     declarations: [

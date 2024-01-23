@@ -17,8 +17,8 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { isObservable, Observable, Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { isObservable, Observable, of, Subject, Subscription } from 'rxjs';
+import { filter, take, takeUntil, tap } from 'rxjs/operators';
 
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
@@ -133,6 +133,10 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
     /** Tokenizer function for condition's token render */
     @Input()
     conditionDisplayFn = defaultConditionDisplayFn;
+
+    /** Validator function. Called when user submits VHD dialog. */
+    @Input()
+    tokenValidator: ((value: VhdValueChangeEvent<any>) => Observable<boolean> | boolean) | undefined;
 
     /**
      * @deprecated use i18n capabilities instead
@@ -490,17 +494,32 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
      * Close dialog with value;
      */
     success(): void {
-        if (this.activeDialog) {
-            const value: VhdValueChangeEvent = {
-                selected: this.selectedItems,
-                conditions: this.validConditions
-            };
-            if (typeof this.formatToken === 'function') {
-                this.formatToken(value);
-                return this.activeDialog.close(value);
-            }
-            this.activeDialog.close(value);
+        if (!this.activeDialog) {
+            return;
         }
+        const value: VhdValueChangeEvent = {
+            selected: this.selectedItems,
+            conditions: this.validConditions
+        };
+
+        this._internalLoadingState = true;
+        this._changeDetectorRef.detectChanges();
+        this._getValidatorFunction(value)
+            .pipe(
+                tap(() => {
+                    this._internalLoadingState = false;
+                    this._changeDetectorRef.detectChanges();
+                }),
+                filter((r) => r),
+                take(1),
+                takeUntil(this._destroyed)
+            )
+            .subscribe(() => {
+                if (typeof this.formatToken === 'function') {
+                    this.formatToken(value);
+                }
+                this.activeDialog?.close(value);
+            });
     }
 
     /**
@@ -721,5 +740,12 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
             );
         }
         return true;
+    }
+
+    /** @hidden */
+    private _getValidatorFunction(value: VhdValueChangeEvent): Observable<boolean> {
+        const validator = typeof this.tokenValidator === 'function' ? this.tokenValidator(value) : of(true);
+
+        return isObservable(validator) ? validator : of(validator);
     }
 }
