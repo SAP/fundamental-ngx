@@ -96,6 +96,7 @@
                     <button
                         fd-button
                         data-succes
+                        [disabled]="loadingState"
                         [label]="'platformVHD.successButtonLabel' | fdTranslate"
                         fdType="emphasized"
                         *ngIf="selectedTab !== _tabTypes.advancedSearch"

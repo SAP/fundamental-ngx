@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { MessageBoxService } from '@fundamental-ngx/core/message-box';
 
 import {
     VhdDataProvider,
@@ -10,8 +11,8 @@ import {
     VhdDefineIncludeStrategy,
     VhdDefineExcludeStrategy
 } from '@fundamental-ngx/platform/value-help-dialog';
-import { Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
 
 interface ExampleTestModel {
     id: number;
@@ -110,6 +111,30 @@ export class PlatformVhdBasicExampleComponent {
 
         return value;
     };
+
+    validator = (value: VhdValueChangeEvent) =>
+        of(value.selected.length <= 10).pipe(
+            delay(5000),
+            tap((result) => {
+                if (result) {
+                    return;
+                }
+
+                const content = {
+                    title: 'Wrong number of selected items',
+                    approveButton: 'Ok',
+                    cancelButton: 'Cancel',
+                    approveButtonCallback: () => messageBoxRef.close('Approved'),
+                    cancelButtonCallback: () => messageBoxRef.close('Canceled'),
+                    closeButtonCallback: () => messageBoxRef.dismiss('Dismissed'),
+                    content: 'You must select less than 10 items'
+                };
+
+                const messageBoxRef = this.messageBoxService.open(content, { type: 'error' });
+            })
+        );
+
+    readonly messageBoxService = inject(MessageBoxService);
 
     valueChange($event: VhdValueChangeEvent<ExampleTestModel>): void {
         this.actualValue = { ...$event };
