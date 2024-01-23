@@ -6,6 +6,7 @@
 #    that is where we will look for package.json/.nvmrc/etc not repo root!
 
 [build]
+  cache = false
   ignore = 'sh ./ignore.sh'
   environment = { NODE_VERSION = "16.15.1", PYTHON_VERSION="3.8", YARN_FLAGS="--frozen-lockfile" }
   publish = "dist/apps/docs"
