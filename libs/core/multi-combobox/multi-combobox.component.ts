@@ -510,6 +510,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
             this._showList(false);
             this.inputText = '';
         }
+        this._cva.onTouched();
     }
 
     /** @hidden */
@@ -564,6 +565,9 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     _popoverOpenChangeHandle(isOpen: boolean): void {
         this.isOpen = isOpen;
         this._rangeSelector.reset();
+        if (!isOpen) {
+            this._cva.onTouched();
+        }
     }
 
     /** Opens the select popover body. */
@@ -582,6 +586,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
         this.isOpen = false;
         this.isOpenChange.emit(this.isOpen);
+        this._cva.onTouched();
         this._cd.markForCheck();
     }
 
