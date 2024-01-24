@@ -171,6 +171,7 @@ export class PopoverService extends BasePopoverClass {
     /** Opens the popover. */
     open(): void {
         if ((!this._overlayRef || !this._overlayRef.hasAttached()) && !this.disabled && this._triggerElement) {
+            this.beforeOpen.emit();
             const position = this._getPositionStrategy();
             this._overlayRef = this._overlay.create(this._getOverlayConfig(position));
 

@@ -10,6 +10,9 @@ import {
     ViewContainerRef,
     inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigationStart, Router } from '@angular/router';
+import { filter } from 'rxjs';
 import { AutoDismissMessageStripDirective } from '../../auto-dismiss-message-strip.directive';
 import { MessageStripComponent } from '../../message-strip.component';
 import { MessageStripAlertRef } from '../message-strip-alert.ref';
@@ -67,6 +70,14 @@ export class MessageStripAlertComponent<ComponentType = unknown>
     constructor() {
         this.messageStripConfig = this.data.messageStripConfig;
         this.contentPortal = this.getPortal(this.data.content);
+        if (this.data.closeOnNavigation) {
+            inject(Router, { optional: true })
+                ?.events.pipe(
+                    filter((event) => event instanceof NavigationStart),
+                    takeUntilDestroyed()
+                )
+                .subscribe(() => this.onDismissHandler());
+        }
     }
 
     /**

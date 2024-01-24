@@ -894,6 +894,15 @@ export class DatePickerComponent<D>
         }
     }
 
+    /**
+     * Renders the calendar right before the popover is opened.
+     * Used for correct calculations of overlay position and size.
+     */
+    _beforePopoverOpen(): void {
+        this._showPopoverContents = true;
+        this._changeDetectionRef.detectChanges();
+    }
+
     /** @hidden */
     _onBlur(event: FocusEvent): void {
         this.onTouched();

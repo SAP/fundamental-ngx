@@ -9,6 +9,7 @@
 <ng-template #desktopTemplate>
     <fd-popover
         [(isOpen)]="isOpen"
+        (beforeOpen)="_beforePopoverOpen()"
         (isOpenChange)="_onOpenStateChanged($event)"
         [triggers]="[]"
         [placement]="placement"

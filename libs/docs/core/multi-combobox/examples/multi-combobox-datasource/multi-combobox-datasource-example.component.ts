@@ -1,5 +1,6 @@
 import { JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import { CvaDirective } from '@fundamental-ngx/cdk/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -23,7 +24,8 @@ import { of } from 'rxjs';
         DataSourceDirective,
         MultiComboboxComponent,
         ButtonComponent,
-        JsonPipe
+        JsonPipe,
+        ReactiveFormsModule
     ]
 })
 export class MultiComboboxDatasourceExampleComponent {
@@ -77,6 +79,16 @@ export class MultiComboboxDatasourceExampleComponent {
         this.dataSourceStrings[4]
     ];
     selectedItems6 = [];
+
+    fb = inject(FormBuilder);
+
+    formGroup = this.fb.group({ multiGroupComboBox: [[]] }, { updateOn: 'blur' });
+
+    ngOnInit(): void {
+        this.formGroup.get('multiGroupComboBox')?.valueChanges.subscribe(() => {
+            console.log('value change event is triggered now -> ', this.formGroup.get('multiGroupComboBox')?.value);
+        });
+    }
 
     onSelect1(item: MultiComboboxSelectionChangeEvent): void {
         this.selectedItems1 = item.selectedItems;

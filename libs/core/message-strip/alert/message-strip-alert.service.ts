@@ -63,7 +63,6 @@ export class MessageStripAlertService {
 
     /** @hidden */
     footerComponents$ = this._messageStripAlertContainerFooters$.asObservable();
-
     /** @hidden */
     constructor() {
         if (this._messageStripAlertService) {
@@ -107,6 +106,7 @@ export class MessageStripAlertService {
                             provide: MessageStripAlertComponentData,
                             useValue: {
                                 content: config.content,
+                                closeOnNavigation: config.closeOnNavigation,
                                 messageStripConfig: {
                                     ...config.messageStrip,
                                     onDismiss: () => {

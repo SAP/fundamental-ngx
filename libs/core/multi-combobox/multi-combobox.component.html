@@ -79,7 +79,7 @@
                     [(ngModel)]="inputText"
                     (ngModelChange)="_searchTermChanged()"
                     [placeholder]="_cva.placeholder"
-                    (focus)="_cva.onTouched(); tokenizer._showAllTokens()"
+                    (focus)="tokenizer._showAllTokens()"
                     (blur)="!mobile && _onBlur($event); tokenizer._hideTokens()"
                     [attr.aria-expanded]="isOpen"
                     [readonly]="_cva.readonly"
@@ -185,7 +185,7 @@
                         fd-list-item
                         role="option"
                         [tabindex]="0"
-                        (click)="!mobile && close()"
+                        (click)="!mobile && _onOptionClicked($event, i)"
                         (keydown)="_onItemKeyDownHandler($event)"
                         [selected]="!!optionItem.selected"
                     >

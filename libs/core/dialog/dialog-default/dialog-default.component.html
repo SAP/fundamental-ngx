@@ -6,7 +6,7 @@
                 fd-dialog-full-screen-toggler-button
                 #fullScreenTogglerButton
                 [title]="
-                    (fullScreenTogglerButton._fullscreen
+                    (fullScreenTogglerButton._fullscreen$()
                         ? _defaultDialogContent?.fullScreenMinifyButtonText
                         : _defaultDialogContent?.fullScreenExpandButtonText) || ''
                 "

@@ -14,4 +14,8 @@ fd-checkbox {
             margin: 0;
         }
     }
+
+    .fd-checkbox.is-display:disabled + .fd-checkbox__label {
+        opacity: 1;
+    }
 }
