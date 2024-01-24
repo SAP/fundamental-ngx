@@ -80,6 +80,10 @@ export class DialogComponent
         this._dialogRef = value;
     }
 
+    get embeddedDialogRef(): DialogRef {
+        return this._dialogRef;
+    }
+
     /** DialogConfig - should be used for Template based Dialog implementation */
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('dialogConfig')

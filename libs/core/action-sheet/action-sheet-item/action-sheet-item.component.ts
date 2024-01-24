@@ -7,11 +7,13 @@ import {
     Input,
     Output,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    signal
 } from '@angular/core';
 import { KeyboardSupportItemInterface } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
+import { Subject } from 'rxjs';
 
 export interface ActionSheetClickEvent {
     shouldClose: boolean;
@@ -77,7 +79,13 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     keyDown = new EventEmitter<KeyboardEvent>();
 
     /** @hidden */
-    clicked = new EventEmitter<ActionSheetClickEvent>();
+    readonly clicked = new Subject<ActionSheetClickEvent>();
+
+    /** @hidden */
+    readonly focused = new Subject<ActionSheetItemComponent>();
+
+    /** @hidden */
+    readonly _tabIndex$ = signal<number | null>(null);
 
     /** @hidden */
     constructor(private readonly _elementRef: ElementRef) {}
@@ -88,10 +96,16 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
         this.keyDown.emit(event);
     }
 
+    /** @hidden */
+    @HostListener('focusin')
+    focusHandler(): void {
+        this.focused.next(this);
+    }
+
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
     onClick(): void {
-        this.clicked.emit({
+        this.clicked.next({
             shouldClose: this.isCloseButton
         });
     }

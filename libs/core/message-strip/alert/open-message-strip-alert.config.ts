@@ -19,4 +19,6 @@ export interface OpenMessageStripAlertConfig<ComponentType = unknown> {
     content: string | TemplateRef<{ $implicit: MessageStripAlertRef }> | Type<ComponentType>;
     /** Configuration for the message strip component */
     messageStrip?: Partial<MessageStripConfiguration>;
+    /** Whether to close message strip when navigation changes. */
+    closeOnNavigation?: boolean;
 }
