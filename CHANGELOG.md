@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.26](https://github.com/SAP/fundamental-ngx/compare/v0.43.25...v0.43.26) (2024-01-23)
+
+
+### Bug Fixes
+
+* **platform:** initial visible columns ([#11238](https://github.com/SAP/fundamental-ngx/issues/11238)) ([b13ef33](https://github.com/SAP/fundamental-ngx/commit/b13ef333e794fc460db7113fc696f45d76c0de8a))
+* **platform:** table selection column bug ([#11174](https://github.com/SAP/fundamental-ngx/issues/11174)) ([d70e2ec](https://github.com/SAP/fundamental-ngx/commit/d70e2ec32854c7dbab8dc8cfb39ddbd6af5c5d81))
+
+
+### Features
+
+* **platform:** vhd validator ([#11303](https://github.com/SAP/fundamental-ngx/issues/11303)) ([1d95356](https://github.com/SAP/fundamental-ngx/commit/1d9535618f9d73f2a2caa183622bc21aa4120457))
+
+
+
+
+
 ## [0.43.25](https://github.com/SAP/fundamental-ngx/compare/v0.43.23...v0.43.25) (2024-01-18)
 
 
