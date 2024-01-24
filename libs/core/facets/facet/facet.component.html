@@ -2,7 +2,7 @@
     <ng-template [ngTemplateOutlet]="customContentTemplate"></ng-template>
 } @else {
     @if (facetTitle) {
-        <h1 fd-title [headerSize]="5" class="fd-margin-bottom--sm" [id]="titleId">{{ facetTitle }}</h1>
+        <span fd-title [headerSize]="5" class="fd-margin-bottom--sm" [id]="titleId">{{ facetTitle }}</span>
     }
     @if (type === 'form') {
         <ng-template [ngTemplateOutlet]="contentTemplate"></ng-template>
