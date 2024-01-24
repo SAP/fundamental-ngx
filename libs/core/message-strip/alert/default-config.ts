@@ -2,7 +2,8 @@ import { OpenMessageStripAlertConfig } from './open-message-strip-alert.config';
 
 const defaultConfig: Required<Omit<OpenMessageStripAlertConfig, 'content'>> = {
     position: 'top-middle',
-    messageStrip: {}
+    messageStrip: {},
+    closeOnNavigation: false
 };
 
 /**
