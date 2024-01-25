@@ -10,3 +10,7 @@
         border-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
     }
 }
+
+.fd-date-picker__bar {
+    overflow: hidden;
+}
