@@ -92,7 +92,7 @@
         (closeCalendar)="closeFromCalendar()"
     ></fd-calendar>
     @if (showTodayButton) {
-        <div fd-bar barDesign="footer">
+        <div fd-bar barDesign="footer" class="fd-date-picker__bar">
             <div fd-bar-right>
                 <fd-bar-element>
                     <button fd-button [label]="todayButtonLabel" (click)="onTodayButtonClick()"></button>

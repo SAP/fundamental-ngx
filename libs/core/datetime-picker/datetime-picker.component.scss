@@ -3,6 +3,10 @@ $block: fd-datetime;
 .#{$block} {
     display: block;
 
+    &__bar {
+        overflow: hidden;
+    }
+
     &__wrapper {
         max-height: 80vh;
         max-width: 80vw;
@@ -22,9 +26,6 @@ $block: fd-datetime;
             > *:not(.#{$block}__mobile-display) {
                 display: none !important;
             }
-            // .#{$block}__mobile-display {
-            //     display: block !important;
-            // }
         }
     }
 
