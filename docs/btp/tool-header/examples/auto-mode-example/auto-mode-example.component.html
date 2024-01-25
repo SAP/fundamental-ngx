@@ -1,6 +1,5 @@
 <fdb-tool-header productName="Fundamental-ngx" secondTitle="Angular" fdbToolHeaderAutoMode #toolHeaderComponent>
     <fdb-search-field [ngModel]="searchValue" (ngModelChange)="valueUpdate($event)"></fdb-search-field>
-
     <ng-template fdbToolHeaderAction [forceVisibility]="true">
         <fd-popover [noArrow]="false">
             <fd-popover-control>
@@ -24,29 +23,32 @@
             </div>
         </fd-popover>
     </ng-template>
-    <ng-container *ngFor="let action of actions; let index = index">
+    @for (action of actions; track action; let index = $index) {
         <ng-template fdbToolHeaderAction [forceVisibility]="action.forceVisibility" let-isInNavigationMenu="hidden">
-            <button
-                *ngIf="!isInNavigationMenu; else hiddenTemplate"
-                fd-button
-                fdbToolHeaderActionButton
-                [glyph]="action.glyph"
-                [label]="action.label"
-                (click)="action.clickCallback()"
-            >
-                <fd-button-badge *ngIf="action.hasBadge" />
-            </button>
-            <ng-template #hiddenTemplate>
+            @if (!isInNavigationMenu) {
+                <button
+                    fd-button
+                    fdbToolHeaderActionButton
+                    [glyph]="action.glyph"
+                    [label]="action.label"
+                    (click)="action.clickCallback()"
+                >
+                    @if (action.hasBadge) {
+                        <fd-button-badge />
+                    }
+                </button>
+            } @else {
                 <fdb-navigation-menu-item
                     (fdkClicked)="action.clickCallback()"
                     [glyph]="action.glyph"
                     [label]="action.label"
                 />
-            </ng-template>
+            }
         </ng-template>
-        <fdb-tool-header-action-separator *ngIf="index % 3 === 0" />
-    </ng-container>
-
+        @if (index % 3 === 0) {
+            <fdb-tool-header-action-separator />
+        }
+    }
     <fd-avatar
         fdbToolHeaderUser
         [fdMenuTrigger]="userMenu"
@@ -64,13 +66,11 @@
             </a>
         </li>
     </fd-menu>
-
     <fdb-tool-header-product-switch>
         <fd-product-switch-body [products]="productSwitcher"></fd-product-switch-body>
     </fdb-tool-header-product-switch>
 </fdb-tool-header>
-
 <div [style.margin-top.rem]="2">
-    <div>Current mode: {{ toolHeaderComponent.mode() }}</div>
-    <div>Current orientation: {{ toolHeaderComponent.orientation() }}</div>
+    <div>Current mode: {{ toolHeaderComponent.mode$() }}</div>
+    <div>Current orientation: {{ toolHeaderComponent.orientation$() }}</div>
 </div>

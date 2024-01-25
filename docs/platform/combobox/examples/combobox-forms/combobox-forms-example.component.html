@@ -15,6 +15,8 @@
         </fdp-form-field-extras>
     </fdp-form-field>
     <ng-template #i18n let-errors>
-        <span *ngIf="errors.required">Field is required</span>
+        @if (errors.required) {
+            <span>Field is required</span>
+        }
     </ng-template>
 </fdp-form-group>

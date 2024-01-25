@@ -1,38 +1,24 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import {
-    FdbNavigationState,
-    NavigationComponent,
-    NavigationContentEndComponent,
-    NavigationContentStartComponent,
-    NavigationHomeDirective,
-    NavigationItemSpacerDirective,
-    NavigationLinkComponent,
-    NavigationListComponent,
-    NavigationListItemComponent
-} from '@fundamental-ngx/btp/navigation';
+import { FDB_NAVIGATION, FdbNavigationState } from '@fundamental-ngx/btp/navigation';
 import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 
+export interface ExampleNavigationItem {
+    icon?: string;
+    title: string;
+    expanded?: boolean;
+    group?: boolean;
+}
+
 @Component({
     selector: 'fdb-navigation-basic-example',
     templateUrl: './navigation-basic-example.component.html',
-    imports: [
-        NavigationComponent,
-        NavigationListComponent,
-        NavigationListItemComponent,
-        NavigationLinkComponent,
-        RouterLink,
-        NavigationHomeDirective,
-        NavigationContentStartComponent,
-        NavigationContentEndComponent,
-        FormsModule,
-        ButtonComponent,
-        SegmentedButtonComponent,
-        NavigationItemSpacerDirective
-    ],
+    imports: [RouterLink, FormsModule, ButtonComponent, SegmentedButtonComponent, FDB_NAVIGATION],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     standalone: true
 })
 export class NavigationBasicExampleComponent {

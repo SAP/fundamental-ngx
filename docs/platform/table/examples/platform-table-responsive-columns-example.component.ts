@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -50,7 +49,6 @@ import { Observable, of } from 'rxjs';
         PlatformTableColumnResponsiveDirective,
         FdpCellDef,
         FdpTableCell,
-        NgIf,
         ObjectStatusComponent,
         FdDatetimeModule
     ]
@@ -65,7 +63,10 @@ export class PlatformTableResponsiveColumnsExampleComponent implements AfterView
 
     currentTableWidth = 0;
 
-    constructor(private _destroyRef: DestroyRef, private _cdr: ChangeDetectorRef) {
+    constructor(
+        private _destroyRef: DestroyRef,
+        private _cdr: ChangeDetectorRef
+    ) {
         this.source = new TableDataSource(new TableDataProviderExample());
     }
 

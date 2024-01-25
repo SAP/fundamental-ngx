@@ -4,34 +4,21 @@
     [items]="stepItems"
     (wizardFinished)="wizardFinished($event)"
 ></fdp-wizard-generator>
-
-<div fd-bar *ngIf="stepItems.length > 0 && wizardGenerator?.wizardCreated">
-    <div fd-bar-right>
-        <fdp-button
-            class="fd-bar__element"
-            buttonType="ghost"
-            *ngIf="!isFirstStep"
-            fdCondensed
-            label="Previous step"
-            (click)="goBack()"
-        ></fdp-button>
-        <fdp-button
-            class="fd-bar__element"
-            buttonType="emphasized"
-            fdCondensed
-            *ngIf="!isLastStep"
-            label="Next step"
-            (click)="goNext()"
-        ></fdp-button>
-        <fdp-button
-            class="fd-bar__element"
-            buttonType="emphasized"
-            fdCondensed
-            *ngIf="isLastStep"
-            label="Finish"
-            (click)="finish()"
-        ></fdp-button>
+@if (stepItems.length > 0 && wizardGenerator?.wizardCreated) {
+    <div fd-bar>
+        <div fd-bar-right>
+            @if (!isFirstStep) {
+                <fdp-button buttonType="ghost" fdCondensed label="Previous step" (click)="goBack()"></fdp-button>
+            }
+            @if (!isLastStep) {
+                <fdp-button buttonType="emphasized" fdCondensed label="Next step" (click)="goNext()"></fdp-button>
+            }
+            @if (isLastStep) {
+                <fdp-button buttonType="emphasized" fdCondensed label="Finish" (click)="finish()"></fdp-button>
+            }
+        </div>
     </div>
-</div>
-
-<p *ngIf="wizardValue">Wizard value: {{ wizardValue | json }}</p>
+}
+@if (wizardValue) {
+    <p>Wizard value: {{ wizardValue | json }}</p>
+}

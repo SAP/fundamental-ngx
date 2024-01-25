@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
     FocusableGridDirective,
@@ -43,7 +42,7 @@ import {
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FocusableGridDirective, NgFor, FocusableListDirective, FocusableItemDirective, NgIf]
+    imports: [FocusableGridDirective, FocusableListDirective, FocusableItemDirective]
 })
 export class DefaultExampleComponent {
     constructor() {}

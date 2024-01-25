@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { NgFor, NgIf } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
@@ -8,8 +8,8 @@ import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
-import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fd-dynamic-page-tabs-example',
@@ -33,7 +33,6 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
     standalone: true,
     imports: [
         ButtonComponent,
-        NgIf,
         DynamicPageModule,
         BreadcrumbModule,
         LinkComponent,
@@ -41,8 +40,7 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
         ToolbarItemDirective,
         ContentDensityDirective,
         ToolbarSeparatorComponent,
-        TabsModule,
-        NgFor,
+        FDP_ICON_TAB_BAR,
         CdkScrollable,
         BarModule,
         MessageToastModule

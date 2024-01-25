@@ -1,4 +1,4 @@
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { DynamicFormGroup, FormGeneratorService } from '@fundamental-ngx/platform/form';
@@ -14,7 +14,7 @@ import {
     // Provide local form generator service here to ignore other example forms on the page.
     providers: [FormGeneratorService],
     standalone: true,
-    imports: [PlatformWizardGeneratorModule, NgIf, JsonPipe]
+    imports: [PlatformWizardGeneratorModule, JsonPipe]
 })
 export class WizardGeneratorOnchangeExampleComponent {
     wizardValue: WizardGeneratorFormsValue;

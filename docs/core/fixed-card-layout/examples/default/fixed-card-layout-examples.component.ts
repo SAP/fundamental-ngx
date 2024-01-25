@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf } from '@angular/common';
+
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
@@ -27,7 +27,6 @@ import { TableModule } from '@fundamental-ngx/core/table';
         CdkScrollable,
         ScrollbarDirective,
         FixedCardLayoutModule,
-        NgIf,
         CardModule,
         FormItemComponent,
         ObjectStatusComponent,

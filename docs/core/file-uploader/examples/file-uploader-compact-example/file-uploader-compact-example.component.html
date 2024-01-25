@@ -10,10 +10,11 @@
     fdCompact
 >
 </fd-file-uploader>
-
 <br /><br />
 Files Selected:
 <br />
-<span *ngFor="let file of files">
-    <span class="green">{{ file.name }} </span><br />
-</span>
+@for (file of files; track file) {
+    <span>
+        <span class="green">{{ file.name }} </span><br />
+    </span>
+}

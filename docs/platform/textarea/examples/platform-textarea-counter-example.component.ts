@@ -1,4 +1,4 @@
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
@@ -10,7 +10,6 @@ import { FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/pla
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        NgIf,
         FdpFormGroupModule,
         FormsModule,
         ReactiveFormsModule,

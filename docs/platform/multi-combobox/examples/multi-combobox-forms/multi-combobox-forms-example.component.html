@@ -11,5 +11,8 @@
         ></fdp-multi-combobox>
         <p>Selected Item: {{ selectedItems | json }}</p>
         <p>Form Selected Item: {{ customForm.getRawValue() | json }}</p>
+        <p>Dirty: {{ customForm.controls.field.dirty }}</p>
+        <p>Touched: {{ customForm.controls.field.touched }}</p>
+        <p>Pristine: {{ customForm.controls.field.pristine }}</p>
     </fdp-form-field>
 </fdp-form-group>

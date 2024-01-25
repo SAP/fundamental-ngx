@@ -11,7 +11,6 @@
                     <fd-button-bar label="Clear" ariaLabel="Clear" (click)="clear()"></fd-button-bar>
                 </div>
             </ng-template>
-
             <ng-template fdkTemplate="subheader">
                 <div fd-bar-middle>
                     <fd-bar-element [fullWidth]="true">
@@ -29,21 +28,18 @@
                 </div>
             </ng-template>
         </fd-dialog-header>
-
         <fd-dialog-body>
-            <ul *ngIf="(dialogRef.onLoading | async) === false" fd-list>
-                <li
-                    *ngFor="let fruit of filterFruits(fruitCollection, searchedPhrase)"
-                    fd-list-item
-                    [selected]="isSelected(fruit.id)"
-                    (click)="selectFruit(fruit)"
-                >
-                    <span fd-list-title>{{ fruit.name }}</span>
-                    <span fd-list-secondary>{{ fruit.price }} €</span>
-                </li>
-            </ul>
+            @if ((dialogRef.onLoading | async) === false) {
+                <ul fd-list>
+                    @for (fruit of filterFruits(fruitCollection, searchedPhrase); track fruit) {
+                        <li fd-list-item [selected]="isSelected(fruit.id)" (click)="selectFruit(fruit)">
+                            <span fd-list-title>{{ fruit.name }}</span>
+                            <span fd-list-secondary>{{ fruit.price }} €</span>
+                        </li>
+                    }
+                </ul>
+            }
         </fd-dialog-body>
-
         <fd-dialog-footer>
             <ng-template fdkTemplate="footer">
                 <div fd-bar-left>
@@ -63,5 +59,4 @@
         </fd-dialog-footer>
     </fd-dialog>
 </ng-template>
-
 <button fd-button label="Open with custom configuration" (click)="openDialog(dialogTemplate)"></button>

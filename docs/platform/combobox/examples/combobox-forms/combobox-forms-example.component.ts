@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import {
     ComboboxSelectionChangeEvent,
     FdpFormGroupModule,
@@ -15,7 +15,7 @@ import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
     standalone: true,
-    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformComboboxModule, NgIf, JsonPipe]
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformComboboxModule, JsonPipe]
 })
 export class ComboboxFormsExampleComponent {
     dataSource = [

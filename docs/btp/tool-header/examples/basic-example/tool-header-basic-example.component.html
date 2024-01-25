@@ -3,7 +3,6 @@
     <button fd-button value="tablet">Tablet</button>
     <button fd-button [value]="''">Desktop</button>
 </fd-segmented-button>
-
 <fdb-tool-header
     [fdContentDensity]="viewMode === '' ? 'compact' : 'cozy'"
     productName="Fundamental-ngx"
@@ -12,7 +11,6 @@
     id="basic"
 >
     <fdb-search-field [ngModel]="searchValue" (ngModelChange)="valueUpdate($event)"></fdb-search-field>
-
     <ng-template fdbToolHeaderAction forceVisibility>
         <fd-popover [noArrow]="false">
             <fd-popover-control>
@@ -36,8 +34,7 @@
             </div>
         </fd-popover>
     </ng-template>
-
-    <ng-container *ngFor="let action of actions; let index = index">
+    @for (action of actions; track action; let index = $index) {
         <ng-template fdbToolHeaderAction>
             <button
                 fd-button
@@ -46,11 +43,12 @@
                 [label]="action.label"
                 (click)="action.clickCallback()"
             >
-                <fd-button-badge *ngIf="action.hasBadge" />
+                @if (action.hasBadge) {
+                    <fd-button-badge />
+                }
             </button>
         </ng-template>
-    </ng-container>
-
+    }
     <fd-avatar
         fdbToolHeaderUser
         [fdMenuTrigger]="userMenu"

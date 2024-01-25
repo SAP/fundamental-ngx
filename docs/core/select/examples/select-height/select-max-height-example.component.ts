@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { SelectModule } from '@fundamental-ngx/core/select';
 
@@ -6,7 +5,7 @@ import { SelectModule } from '@fundamental-ngx/core/select';
     selector: 'fd-select-max-height-example',
     templateUrl: './select-max-height-example.component.html',
     standalone: true,
-    imports: [SelectModule, NgFor]
+    imports: [SelectModule]
 })
 export class SelectMaxHeightExampleComponent {
     selectedValue: string;

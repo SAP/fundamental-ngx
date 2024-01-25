@@ -1,5 +1,5 @@
 import { A11yModule } from '@angular/cdk/a11y';
-import { NgFor, NgIf } from '@angular/common';
+
 import {
     ChangeDetectionStrategy,
     Component,
@@ -37,9 +37,7 @@ export type WizardStep = {
     imports: [
         ButtonComponent,
         A11yModule,
-        NgIf,
         WizardModule,
-        NgFor,
         TitleComponent,
         MessageStripComponent,
         ContentDensityDirective,

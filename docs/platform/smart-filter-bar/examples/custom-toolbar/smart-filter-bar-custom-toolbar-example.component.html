@@ -1,0 +1,143 @@
+<button fd-button (click)="logFilters(smartFilterBar)">Log current set of filters</button>
+<br />
+<br />
+<fd-toolbar fdType="solid">
+    <fdp-search-field
+        (inputChange)="smartFilterBar.onSearchInputChange($event)"
+        (searchSubmit)="smartFilterBar.submitForm()"
+        (cancelSearch)="smartFilterBar.cancelSearch()"
+        [disabled]="smartFilterBar.loading"
+        [disableRefresh]="true"
+        [placeholder]="'platformSmartFilterBar.searchPlaceholder' | fdTranslate"
+    ></fdp-search-field>
+    <fd-toolbar-spacer></fd-toolbar-spacer>
+    @if (!smartFilterBar.liveUpdate) {
+        <button
+            fd-button
+            (click)="smartFilterBar.submitForm()"
+            fdType="emphasized"
+            fd-toolbar-item
+            [disabled]="smartFilterBar.loading"
+            [label]="'platformSmartFilterBar.submitButtonLabel' | fdTranslate"
+        ></button>
+    }
+    <button
+        fd-button
+        (click)="smartFilterBar.submitForm()"
+        fd-toolbar-item
+        glyph="synchronize"
+        [disabled]="smartFilterBar.loading"
+        [ariaLabel]="'platformSmartFilterBar.refreshButtonAriaLabel' | fdTranslate"
+    ></button>
+    <button
+        fd-button
+        (click)="smartFilterBar.showFilteringSettings()"
+        [label]="
+            'platformSmartFilterBar.filtersButtonLabel'
+                | fdTranslate: { filtersCount: smartFilterBar.selectedFiltersCount$() }
+        "
+        fd-toolbar-item
+        [disabled]="smartFilterBar.loading"
+    ></button>
+    <button
+        fd-button
+        (click)="smartFilterBar.toggleFilterBar()"
+        [label]="
+            (smartFilterBar.showFilterBar$()
+                ? 'platformSmartFilterBar.hideFiltersButtonLabel'
+                : 'platformSmartFilterBar.showFiltersButtonLabel'
+            ) | fdTranslate
+        "
+        fdType="transparent"
+        fd-toolbar-item
+        [disabled]="smartFilterBar.loading"
+    ></button>
+</fd-toolbar>
+<fdp-smart-filter-bar
+    #smartFilterBar
+    (smartFiltersApplied)="filtersChanged($event, 'applied')"
+    (smartFiltersChanged)="filtersChanged($event, 'changed')"
+    hideToolbar
+    [subject]="subject"
+></fdp-smart-filter-bar>
+<br />
+<h4 fd-title>Line Items</h4>
+<br />
+<fdp-table
+    fdp-smart-filter-bar-subject
+    #subject="fdp-smart-filter-bar-subject"
+    [dataSource]="source"
+    [trackBy]="trackBy"
+    emptyTableMessage="No data found"
+>
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        [smartFilterBarFilterable]="false"
+        name="name"
+        key="name"
+        label="Name"
+        defaultSelected="true"
+        align="start"
+    >
+    </fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        name="description"
+        key="description"
+        defaultSelected="true"
+        label="Description"
+    >
+    </fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        [dataType]="dataTypeEnum.NUMBER"
+        name="price"
+        key="price.value"
+        label="Price"
+        align="end"
+    >
+    </fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        [filterType]="filterTypeEnum.MULTI"
+        name="status"
+        key="status"
+        label="Status"
+        required="true"
+        align="center"
+        hasOptions="true"
+    >
+    </fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        [filterType]="filterTypeEnum.SINGLE"
+        name="statusColor"
+        key="statusColor"
+        label="Status color"
+        align="center"
+        hasOptions="true"
+    >
+    </fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        [dataType]="dataTypeEnum.DATE"
+        name="date"
+        key="date"
+        label="Date"
+    ></fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        [filterType]="filterTypeEnum.SINGLE"
+        [dataType]="dataTypeEnum.BOOLEAN"
+        name="verified"
+        key="verified"
+        label="Verified"
+        hasOptions="true"
+    ></fdp-column>
+</fdp-table>

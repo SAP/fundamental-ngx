@@ -1,4 +1,4 @@
-import { NgClass, NgFor } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { CardModule } from '@fundamental-ngx/core/card';
@@ -25,7 +25,6 @@ interface Casts {
         ObjectStatusComponent,
         SelectModule,
         ContentDensityDirective,
-        NgFor,
         AvatarComponent
     ]
 })

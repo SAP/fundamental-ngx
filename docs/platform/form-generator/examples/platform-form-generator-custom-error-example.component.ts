@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { NgIf } from '@angular/common';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
     DynamicFormItem,
@@ -14,7 +13,7 @@ import {
     selector: 'fdp-platform-form-generator-custom-error-example',
     templateUrl: './platform-form-generator-custom-error-example.component.html',
     standalone: true,
-    imports: [PlatformFormGeneratorModule, NgIf, PlatformButtonModule]
+    imports: [PlatformFormGeneratorModule, PlatformButtonModule]
 })
 export class PlatformFormGeneratorCustomErrorExampleComponent {
     formCreated = false;

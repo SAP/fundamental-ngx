@@ -36,19 +36,19 @@
         ariaLabel="Pagination with custom items"
         #pagination
     ></fd-pagination>
-
     <ng-template #itemsPerPageCustom let-onSelect="onSelect" let-pageOptions="pageOptions">
         <fd-segmented-button
             [ngModel]="customItemsPerPage"
             (ngModelChange)="onSelect($event); customItemsPerPage = $event"
         >
-            <button
-                fd-button
-                [label]="count + ''"
-                [attr.aria-label]="'Show ' + count + ' items per page'"
-                [attr.value]="count"
-                *ngFor="let count of pageOptions"
-            ></button>
+            @for (count of pageOptions; track count) {
+                <button
+                    fd-button
+                    [label]="count + ''"
+                    [attr.aria-label]="'Show ' + count + ' items per page'"
+                    [attr.value]="count"
+                ></button>
+            }
         </fd-segmented-button>
     </ng-template>
 </div>

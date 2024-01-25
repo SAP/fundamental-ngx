@@ -7,7 +7,6 @@
     (click)="vhd.open()"
     label="Open value help dialog"
 ></button>
-
 <fdp-value-help-dialog
     #vhd
     dialogTitle="Custom token function"
@@ -18,11 +17,12 @@
     (valueChange)="valueChange($event)"
     headerId="fdp-vhd-header-3"
 >
-    <fdp-value-help-dialog-filter
-        *ngFor="let filter of filters; index as i"
-        [main]="i < 2"
-        [key]="filter.key"
-        [label]="filter.label"
-        [advanced]="filter.advanced || hasAdvanced"
-    ></fdp-value-help-dialog-filter>
+    @for (filter of filters; track filter; let i = $index) {
+        <fdp-value-help-dialog-filter
+            [main]="i < 2"
+            [key]="filter.key"
+            [label]="filter.label"
+            [advanced]="filter.advanced || hasAdvanced"
+        ></fdp-value-help-dialog-filter>
+    }
 </fdp-value-help-dialog>

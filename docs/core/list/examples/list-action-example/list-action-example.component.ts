@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
@@ -11,7 +10,7 @@ import { delay } from 'rxjs/operators';
     templateUrl: './list-action-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [ListModule, NgFor, BusyIndicatorComponent]
+    imports: [ListModule, BusyIndicatorComponent]
 })
 export class ListActionExampleComponent {
     readonly ITEMS_AMOUNT_ON_LOAD = 5;

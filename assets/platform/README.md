@@ -81,30 +81,6 @@ For an existing Angular CLI application,
 
     To include an individual Angular Fundamental component in your application, you only need to import the relevant module.
 
-    For example, to use Switchs, add the following import to your main application module.
-
-    ```typescript
-    import { PlatformActionBarModule } from '@fundamental-ngx/platform/action-bar';
-    ```
-
-    Version 0.31.0 brings new way of importing individual modules, which is prefered way.
-
-    ```typescript
-    import { PlatformActionBarModule } from '@fundamental-ngx/platform/action-bar';
-    ```
-
-    For models prior to 0.10 use `fundamental-ngx`
-
-    ```typescript
-    import { PlatformActionBarModule } from 'fundamental-ngx';
-
-    @NgModule({
-        ...
-        imports: [PlatformActionBarModule],
-    })
-    export class DemoModule { }
-    ```
-
 1. **Provide the RtlService.**
    In your main application module, add `RtlService` to the list of providers. This service is needed to ensure proper right-to-left functionality for
    users with their browser set to an RTL language.
@@ -113,10 +89,6 @@ For an existing Angular CLI application,
    you application from a single point.
 
 1. **Add the component to your HTML.**
-
-    ```html
-    <fdp-action-bar title="Fundamental Ngx Platform Action Bar"></fdp-action-bar>
-    ```
 
 ## <a name="5"></a>5. Known Issues
 

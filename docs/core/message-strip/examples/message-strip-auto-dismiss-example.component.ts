@@ -7,10 +7,10 @@ import { AutoDismissMessageStripDirective, MessageStripComponent } from '@fundam
     template: `
         <fd-message-strip
             #messageStripComponent="fdAutoDismissMessageStrip"
+            mousePersist
+            autoDismiss
+            dismissible
             [duration]="5000"
-            [mousePersist]="true"
-            [dismissible]="true"
-            [autoDismiss]="true"
         >
             Will be auto dismissed in 5 seconds, if mouse will not be over the message strip. If it's over it, then it
             will be dismissed in 5 seconds after mouse leaves.

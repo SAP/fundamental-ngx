@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { NgFor, NgIf } from '@angular/common';
 import {
     GridListItemOutputEvent,
     GridListItemType,
@@ -24,7 +23,7 @@ interface GridListItem {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [GridListModule, NgFor, NgIf]
+    imports: [GridListModule]
 })
 export class GridListSingleSelectExampleComponent {
     list: GridListItem[] = [

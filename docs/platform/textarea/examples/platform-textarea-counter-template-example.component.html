@@ -1,34 +1,37 @@
 <main class="fd-page">
-    <div *ngIf="true" class="fd-page__content fd-has-background-color-neutral-2">
-        <fdp-form-group #fg3>
-            <fdp-form-field
-                #ff3
-                id="templateExample"
-                label="Detailed description"
-                placeholder="Start entering detailed description"
-                [hint]="{ content: 'This is tooltip help', placement: 'left' }"
-                [rank]="10"
-                [validators]="textareaValidator"
-            >
-                <fdp-textarea
-                    name="templateExample"
-                    [growingMaxLines]="3"
-                    [cols]="10"
-                    [growing]="true"
-                    [maxLength]="10"
-                    [showExceededText]="true"
-                    wrapType="hard"
-                    [(ngModel)]="tValue"
+    @if (true) {
+        <div class="fd-page__content fd-has-background-color-neutral-2">
+            <fdp-form-group #fg3>
+                <fdp-form-field
+                    #ff3
+                    id="templateExample"
+                    label="Detailed description"
+                    placeholder="Start entering detailed description"
+                    [hint]="{ content: 'This is tooltip help', placement: 'left' }"
+                    [rank]="10"
+                    [validators]="textareaValidator"
                 >
-                </fdp-textarea>
-            </fdp-form-field>
-
-            <ng-template #i18n let-errors>
-                <span role="alert" aria-atomic="true" *ngIf="errors.required"> Value is required </span>
-                <span role="alert" aria-atomic="true" *ngIf="errors.maxlength">
-                    Please get your character count under limit.
-                </span>
-            </ng-template>
-        </fdp-form-group>
-    </div>
+                    <fdp-textarea
+                        name="templateExample"
+                        [growingMaxLines]="3"
+                        [cols]="10"
+                        [growing]="true"
+                        [maxLength]="10"
+                        [showExceededText]="true"
+                        wrapType="hard"
+                        [(ngModel)]="tValue"
+                    >
+                    </fdp-textarea>
+                </fdp-form-field>
+                <ng-template #i18n let-errors>
+                    @if (errors.required) {
+                        <span role="alert" aria-atomic="true"> Value is required </span>
+                    }
+                    @if (errors.maxlength) {
+                        <span role="alert" aria-atomic="true"> Please get your character count under limit. </span>
+                    }
+                </ng-template>
+            </fdp-form-group>
+        </div>
+    }
 </main>

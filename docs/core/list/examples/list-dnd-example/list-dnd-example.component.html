@@ -1,17 +1,16 @@
 <h3>Drag and drop</h3>
-
 <ul fd-list fd-dnd-list [(items)]="values">
-    <ng-container>
-        <li fd-list-item fd-dnd-item *ngFor="let value of values; trackBy: trackByFn">
+    @for (value of values; track $index) {
+        <li fd-list-item fd-dnd-item>
             <span fd-list-title> List item {{ value }} </span>
         </li>
-    </ng-container>
+    }
 </ul>
-
 <h3>Drag and drop with replacement indicator</h3>
-
 <ul fd-list fd-dnd-list dropMode="group" [(items)]="secondValues">
-    <li fd-list-item fd-dnd-item *ngFor="let value of secondValues; trackBy: trackByFn">
-        <span fd-list-title> List item {{ value }} </span>
-    </li>
+    @for (value of secondValues; track $index) {
+        <li fd-list-item fd-dnd-item>
+            <span fd-list-title> List item {{ value }} </span>
+        </li>
+    }
 </ul>

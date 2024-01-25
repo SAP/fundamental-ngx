@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -49,7 +48,6 @@ import { delay, map, merge, Observable, of, Subject, switchMap, takeUntil } from
     standalone: true,
     imports: [
         ButtonComponent,
-        NgIf,
         TableDataSourceDirective,
         TableHeaderResizerDirective,
         PlatformTableModule,
@@ -205,7 +203,10 @@ export class ExampleTableDataSource extends TableDataSource<ExampleItem> {
 }
 
 export class ExampleTableProvider extends TableDataProvider<ExampleItem> {
-    constructor(items, public dateTimeAdapter: DatetimeAdapter<FdDate>) {
+    constructor(
+        items,
+        public dateTimeAdapter: DatetimeAdapter<FdDate>
+    ) {
         super();
         this.items = items;
         this.totalItems = this.items.length;

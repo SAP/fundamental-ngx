@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
@@ -11,9 +10,9 @@ import {
     ShellbarUser,
     ShellbarUserMenu
 } from '@fundamental-ngx/core/shellbar';
+import { CxNestedListModule } from '@fundamental-ngx/cx/nested-list';
+import { CxSideNavigationModule } from '@fundamental-ngx/cx/side-navigation';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
-import { CxNestedListModule } from '../../../../cx/src/lib/nested-list/nested-list.module';
-import { CxSideNavigationModule } from '../../../../cx/src/lib/side-navigation/side-navigation.module';
 
 @Component({
     selector: 'fundamental-ngx-side-navigation-shellbar-example',
@@ -28,7 +27,6 @@ import { CxSideNavigationModule } from '../../../../cx/src/lib/side-navigation/s
         ShellbarSubtitleComponent,
         PlatformSearchFieldModule,
         ShellbarActionsComponent,
-        NgFor,
         ShellbarActionComponent,
         CxSideNavigationModule,
         CxNestedListModule

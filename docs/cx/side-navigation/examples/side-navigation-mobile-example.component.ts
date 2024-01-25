@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CxNestedListModule } from '../../../../cx/src/lib/nested-list/nested-list.module';
-import { CxSideNavigationModule } from '../../../../cx/src/lib/side-navigation/side-navigation.module';
+import { CxNestedListModule } from '@fundamental-ngx/cx/nested-list';
+import { CxSideNavigationModule } from '@fundamental-ngx/cx/side-navigation';
 
 @Component({
     selector: 'fundamental-ngx-side-navigation-mobile-example',

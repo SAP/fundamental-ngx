@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FocusableGridDirective, RangeSelector } from '@fundamental-ngx/cdk/utils';
@@ -18,7 +17,6 @@ import { TableModule } from '@fundamental-ngx/core/table';
         ContentDensityDirective,
         CheckboxComponent,
         FormsModule,
-        NgFor,
         LinkComponent,
         IconComponent
     ]

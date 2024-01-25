@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -15,7 +14,6 @@ import { TableModule } from '@fundamental-ngx/core/table';
     imports: [
         FocusableGridDirective,
         TableModule,
-        NgFor,
         LinkComponent,
         StepInputModule,
         IconComponent,

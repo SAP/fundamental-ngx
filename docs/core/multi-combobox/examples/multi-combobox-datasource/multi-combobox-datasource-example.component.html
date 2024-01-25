@@ -1,16 +1,19 @@
-<div fd-form-item>
-    <label fd-form-label for="array-of-strings">Array of Strings:</label>
-    <fd-multi-combobox
-        [showSelectAll]="true"
-        [autoResize]="true"
-        name="array-of-strings"
-        inputId="array-of-strings"
-        placeholder="Type some text..."
-        [dataSource]="dataSourceStrings"
-        [selectedItems]="selectedItems1"
-        (selectionChange)="onSelect1($event)"
-    ></fd-multi-combobox>
-</div>
+<form [formGroup]="formGroup">
+    <div fd-form-item>
+        <label fd-form-label for="array-of-strings">Array of Strings:</label>
+        <fd-multi-combobox
+            [showSelectAll]="true"
+            [autoResize]="true"
+            name="array-of-strings"
+            inputId="array-of-strings"
+            placeholder="Type some text..."
+            [dataSource]="dataSourceStrings"
+            [selectedItems]="selectedItems1"
+            (selectionChange)="onSelect1($event)"
+            formControlName="multiGroupComboBox"
+        ></fd-multi-combobox>
+    </div>
+</form>
 
 <p>Selected: {{ selectedItems1 }}</p>
 

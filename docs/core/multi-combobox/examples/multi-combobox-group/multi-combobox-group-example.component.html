@@ -1,18 +1,21 @@
-<div fd-form-item>
-    <label fd-form-label for="group-with-key">Group with Key:</label>
-    <fd-multi-combobox
-        name="group"
-        inputId="group-with-key"
-        placeholder="Type some text..."
-        [dataSource]="dataSource"
-        displayKey="name"
-        [group]="true"
-        groupKey="type"
-        (selectionChange)="onSelect($event)"
-        [selectedItems]="selectedItems"
-    ></fd-multi-combobox>
-</div>
-<p>Selected: {{ selectedItems | json }}</p>
+<form [formGroup]="formGroup">
+    <div fd-form-item>
+        <label fd-form-label for="group-with-key">Group with Key:</label>
+        <fd-multi-combobox
+            name="group"
+            inputId="group-with-key"
+            placeholder="Type some text..."
+            [dataSource]="dataSource"
+            displayKey="name"
+            [group]="true"
+            groupKey="type"
+            (selectionChange)="onSelect($event)"
+            [selectedItems]="selectedItems"
+            formControlName="multiGroupComboBox"
+        ></fd-multi-combobox>
+    </div>
+    <p>Selected: {{ selectedItems | json }}</p>
+</form>
 
 <div fd-form-item>
     <label fd-form-label for="group-without-key">Group without Key:</label>

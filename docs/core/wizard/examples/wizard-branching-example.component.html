@@ -1,12 +1,10 @@
 <button fd-button (click)="enterFullscreenExample()">Click to open full screen</button>
-
 <div cdkScrollable cdkTrapFocus class="docs-wizard-example-overlay" #overlay>
-    <ng-container *ngIf="fullscreen">
+    @if (fullscreen) {
         <div class="docs-wizard-example-overlay-content">
             <div class="docs-wizard-example-button">
                 <button fd-button (click)="exitFullscreenExample($event)">Exit Example</button>
             </div>
-
             <!-- The Wizard -->
             <fd-wizard>
                 <fd-wizard-navigation>
@@ -95,28 +93,29 @@
                                 </fd-wizard-next-step>
                             </fd-wizard-content>
                         </li>
-                        <li
-                            *ngIf="step2status === 'completed'"
-                            fd-wizard-step
-                            [status]="step3status"
-                            (statusChange)="statusChanged(3, $event)"
-                            [label]="
-                                paymentSelection === 'bank' ? 'Step 3: Bank Details' : 'Step 3: Credit Card Details'
-                            "
-                            ariaLabel="Step 3: Bank Details"
-                            (keydown)="handleFocus($event, 2)"
-                        >
-                            <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
-                            <fd-wizard-content size="xl">
-                                <div fd-form-item>
-                                    <label fd-form-label for="payment"
-                                        >Enter your
-                                        {{ paymentSelection === 'bank' ? 'bank' : 'credit card' }} details:</label
-                                    >
-                                    <input fd-form-control type="text" id="payment" />
-                                </div>
-                            </fd-wizard-content>
-                        </li>
+                        @if (step2status === 'completed') {
+                            <li
+                                fd-wizard-step
+                                [status]="step3status"
+                                (statusChange)="statusChanged(3, $event)"
+                                [label]="
+                                    paymentSelection === 'bank' ? 'Step 3: Bank Details' : 'Step 3: Credit Card Details'
+                                "
+                                ariaLabel="Step 3: Bank Details"
+                                (keydown)="handleFocus($event, 2)"
+                            >
+                                <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
+                                <fd-wizard-content size="xl">
+                                    <div fd-form-item>
+                                        <label fd-form-label for="payment"
+                                            >Enter your
+                                            {{ paymentSelection === 'bank' ? 'bank' : 'credit card' }} details:</label
+                                        >
+                                        <input fd-form-control type="text" id="payment" />
+                                    </div>
+                                </fd-wizard-content>
+                            </li>
+                        }
                     </ul>
                 </fd-wizard-navigation>
                 <div fd-bar barDesign="footer">
@@ -127,19 +126,16 @@
                 </div>
             </fd-wizard>
         </div>
-    </ng-container>
+    }
 </div>
-
 <ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #confirmationDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
             <button fd-dialog-close-button (click)="dialog.dismiss()"></button>
         </fd-dialog-header>
-
         <fd-dialog-body>
             Are you sure you want to change the payment type ? This will discard your progress.
         </fd-dialog-body>
-
         <fd-dialog-footer>
             <fd-button-bar fdType="emphasized" label="Continue" type="submit" (click)="dialog.close('Continue')">
             </fd-button-bar>

@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
     WizardDialogGeneratorService,
@@ -16,7 +16,7 @@ import {
     selector: 'fdp-wizard-generator-dialog-example',
     templateUrl: './wizard-generator-dialog-example.component.html',
     standalone: true,
-    imports: [PlatformButtonModule, NgIf, JsonPipe]
+    imports: [PlatformButtonModule, JsonPipe]
 })
 export class WizardGeneratorDialogExampleComponent implements OnDestroy {
     wizardValue: WizardGeneratorFormsValue | undefined;

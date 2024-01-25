@@ -5,10 +5,9 @@
 >
     Trigger
 </div>
-
 <div>
     Emitted event type is <code>{{ fnClickEvent?.type | json }}</code>
-    <ng-container *ngIf="fnClickEvent?.code">
+    @if (fnClickEvent?.code) {
         , Key is <code>{{ fnClickEvent?.code | json }}</code>
-    </ng-container>
+    }
 </div>

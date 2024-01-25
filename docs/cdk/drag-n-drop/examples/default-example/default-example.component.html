@@ -10,7 +10,6 @@
     [ngTemplateOutlet]="listRenderer"
     [ngTemplateOutletContext]="{ $implicit: values2, dropMode: 'group', property: 'values2' }"
 ></ng-template>
-
 <p>
     <code>[dropMode]="'auto'"</code>
 </p>
@@ -18,7 +17,6 @@
     [ngTemplateOutlet]="listRenderer"
     [ngTemplateOutletContext]="{ $implicit: values3, dropMode: 'auto', property: 'values3' }"
 ></ng-template>
-
 <ng-template let-items let-dropMode="dropMode" let-property="property" #listRenderer>
     <div
         class="fdk-sortable-list"
@@ -27,7 +25,7 @@
         [items]="items"
         (itemDropped)="onItemDropped($event, property)"
     >
-        <ng-container *ngFor="let item of items">
+        @for (item of items; track item) {
             <div
                 class="fdk-sortable-list__item"
                 fdkDndItem
@@ -36,6 +34,6 @@
             >
                 List item {{ item.name }}
             </div>
-        </ng-container>
+        }
     </div>
 </ng-template>

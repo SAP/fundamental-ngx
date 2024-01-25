@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { PlatformListModule } from '@fundamental-ngx/platform/list';
@@ -11,7 +10,7 @@ import { Observable, of } from 'rxjs';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [PlatformListModule, ListModule, NgIf]
+    imports: [PlatformListModule, ListModule]
 })
 export class PlatformListFreeContentExampleComponent {
     _dataSource = new ListDataSource<ListItem>(new ListDataProvider());

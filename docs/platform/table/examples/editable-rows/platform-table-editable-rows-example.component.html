@@ -6,7 +6,6 @@
     [editableRowSkeleton]="editableRowSkeleton"
 >
     <fdp-table-toolbar title="Order Items" [editMode]="'inline'"></fdp-table-toolbar>
-
     <fdp-column name="name" key="name" label="Name" [sortable]="true">
         <fdp-table-cell *fdpEditableCellDef="let item">
             <form fdpEditableCellForm>
@@ -20,9 +19,7 @@
             </form>
         </fdp-table-cell>
     </fdp-column>
-
     <fdp-column name="description" key="description" label="Description" [sortable]="true"> </fdp-column>
-
     <fdp-column
         width="100px"
         name="price"
@@ -32,20 +29,19 @@
         [sortable]="true"
     >
     </fdp-column>
-
     <fdp-column name="verified" key="verified" [dataType]="dataTypeEnum.BOOLEAN" label="Verified" [sortable]="true">
     </fdp-column>
-
     <fdp-column name="status" key="status" label="Status" [sortable]="true">
         <fdp-table-cell *fdpEditableCellDef="let item">
             <form fdpEditableCellForm>
                 <fd-select placeholder="Select an option" [(value)]="item.status">
-                    <li fd-option *ngFor="let option of statusOptions" [value]="option">{{ option }}</li>
+                    @for (option of statusOptions; track option) {
+                        <li fd-option [value]="option">{{ option }}</li>
+                    }
                 </fd-select>
             </form>
         </fdp-table-cell>
     </fdp-column>
-
     <fdp-column name="date" key="date" [dataType]="dataTypeEnum.DATE" label="Date" [sortable]="true">
         <fdp-table-cell *fdpCellDef="let item">
             {{ item.date?.toDateString() }}

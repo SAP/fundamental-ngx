@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
-import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
@@ -56,7 +55,7 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
     selector: 'fdp-platform-vhd-multi-input-example',
     templateUrl: './platform-vhd-multi-input-example.component.html',
     standalone: true,
-    imports: [MultiInputComponent, FormsModule, ButtonComponent, PlatformValueHelpDialogModule, NgFor]
+    imports: [MultiInputComponent, FormsModule, ButtonComponent, PlatformValueHelpDialogModule]
 })
 export class PlatformVhdMultiInputExampleComponent implements OnInit {
     filters: FilterData[];

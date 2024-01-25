@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { NgFor, NgIf } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
@@ -38,9 +38,7 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
     standalone: true,
     imports: [
         ButtonComponent,
-        NgIf,
         DynamicPageModule,
-        NgFor,
         BreadcrumbModule,
         LinkComponent,
         ToolbarComponent,

@@ -5,8 +5,9 @@
     [ngModel]="actualLocale"
     (ngModelChange)="setLocale($event)"
 >
-    <button fd-button [label]="o.label" [value]="o.value" *ngFor="let o of localeOptions"></button>
+    @for (o of localeOptions; track o) {
+        <button fd-button [label]="o.label" [value]="o.value"></button>
+    }
 </fd-segmented-button>
-
 <br />
 <fd-date-picker [(ngModel)]="date"> </fd-date-picker>

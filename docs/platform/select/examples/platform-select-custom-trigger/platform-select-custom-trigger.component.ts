@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { NgIf } from '@angular/common';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FdpSelectionChangeEvent, PlatformSelectModule } from '@fundamental-ngx/platform/form';
 
@@ -11,7 +10,7 @@ import { FdpSelectionChangeEvent, PlatformSelectModule } from '@fundamental-ngx/
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [PlatformSelectModule, IconComponent, NgIf]
+    imports: [PlatformSelectModule, IconComponent]
 })
 export class PlatformSelectCustomTriggerComponent {
     selectedValue: string;

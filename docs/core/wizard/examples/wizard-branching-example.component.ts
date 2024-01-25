@@ -1,6 +1,6 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf } from '@angular/common';
+
 import {
     ChangeDetectionStrategy,
     Component,
@@ -42,7 +42,6 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
     imports: [
         ButtonComponent,
         A11yModule,
-        NgIf,
         WizardModule,
         FormItemComponent,
         FormLabelComponent,
@@ -94,7 +93,10 @@ export class WizardBranchingExampleComponent {
 
     init = false;
 
-    constructor(private _dialogService: DialogService, private _wizardService: WizardService) {}
+    constructor(
+        private _dialogService: DialogService,
+        private _wizardService: WizardService
+    ) {}
 
     statusChanged(stepNumber: number, event: WizardStepStatus): void {
         if (event === 'current') {

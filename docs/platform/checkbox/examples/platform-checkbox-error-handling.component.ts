@@ -1,4 +1,4 @@
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LinkComponent } from '@fundamental-ngx/core/link';
@@ -16,7 +16,6 @@ import { CheckboxComponent, FdpFormGroupModule } from '@fundamental-ngx/platform
         CheckboxComponent,
         LinkComponent,
         PlatformButtonModule,
-        NgIf,
         JsonPipe
     ]
 })
@@ -34,5 +33,8 @@ export class PlatformChekboxStyleComponent {
 }
 
 class SomeObject {
-    constructor(public presence: boolean, public aggrement: boolean) {}
+    constructor(
+        public presence: boolean,
+        public aggrement: boolean
+    ) {}
 }

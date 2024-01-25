@@ -35,7 +35,7 @@
         (itemDropped)="onItemDropped($event)"
         (dropPredicateCalculating)="onPredicateCalculating($event)"
     >
-        <ng-container *ngFor="let item of values">
+        @for (item of values; track item) {
             <div
                 class="fdk-sortable-list__item"
                 fdkDndItem
@@ -44,6 +44,6 @@
             >
                 List item {{ item.name }}
             </div>
-        </ng-container>
+        }
     </div>
 </fd-busy-indicator>

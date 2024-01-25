@@ -9,7 +9,6 @@
             [formControl]="paris.formControl"
         ></fdp-checkbox>
     </fdp-form-field>
-
     <fdp-form-field #doha id="doha" label="Doha" [column]="1" [rank]="3">
         <fdp-checkbox
             name="doha-cb"
@@ -20,7 +19,6 @@
         >
         </fdp-checkbox>
     </fdp-form-field>
-
     <fdp-form-field #amsterdam id="amsterdam" label="Amsterdam" [column]="1" [rank]="5">
         <fdp-checkbox
             name="amsterdam-cb"
@@ -31,7 +29,6 @@
         >
         </fdp-checkbox>
     </fdp-form-field>
-
     <fdp-form-field #venice id="venice" label="Venice" [column]="2" [rank]="2">
         <fdp-checkbox
             name="venice-cb"
@@ -40,7 +37,6 @@
             [formControl]="venice.formControl"
         ></fdp-checkbox>
     </fdp-form-field>
-
     <fdp-form-field #kyoto id="kyoto" label="Kyoto" [column]="2" [rank]="4">
         <fdp-checkbox
             name="kyoto-cb"
@@ -49,7 +45,6 @@
             [formControl]="kyoto.formControl"
         ></fdp-checkbox>
     </fdp-form-field>
-
     <fdp-form-field #barcelona id="barcelona" label="Barcelona" [column]="2" [rank]="6">
         <fdp-checkbox
             name="barcelona-cb"
@@ -58,7 +53,6 @@
             [formControl]="barcelona.formControl"
         ></fdp-checkbox>
     </fdp-form-field>
-
     <fdp-form-field #athens id="athens" label="athens: tristateSelectable false" [column]="1" [rank]="7">
         <fdp-checkbox
             name="athens-cb"
@@ -68,7 +62,6 @@
             [formControl]="athens.formControl"
         ></fdp-checkbox>
     </fdp-form-field>
-
     <fdp-form-field #sydney id="sydney" label="Sydney: tristateSelectable false" [column]="2" [rank]="8">
         <fdp-checkbox
             name="sydney-cb"
@@ -92,7 +85,6 @@
             [(ngModel)]="havana"
         ></fdp-checkbox>
     </fdp-form-field>
-
     <fdp-form-field id="beirut" label="Beirut" [column]="1" [rank]="3">
         <fdp-checkbox
             name="beirut-cb"
@@ -102,7 +94,6 @@
             [(ngModel)]="beirut"
         ></fdp-checkbox>
     </fdp-form-field>
-
     <fdp-form-field id="budapest" label="Budapest" [column]="1" [rank]="5">
         <fdp-checkbox
             name="budapest-cb"
@@ -112,12 +103,10 @@
             [(ngModel)]="budapest"
         ></fdp-checkbox>
     </fdp-form-field>
-
     <fdp-form-field id="lisbon" label="Lisbon" [column]="2" [rank]="2">
         <fdp-checkbox name="lisbon-cb" [tristate]="true" [tristateSelectable]="true" [(ngModel)]="lisbon">
         </fdp-checkbox>
     </fdp-form-field>
-
     <fdp-form-field id="istanbul" label="Istanbul" [column]="2" [rank]="4">
         <fdp-checkbox
             name="istanbul-cb"
@@ -126,11 +115,9 @@
             [(ngModel)]="istanbul"
         ></fdp-checkbox>
     </fdp-form-field>
-
     <fdp-form-field id="busan" label="Busan" [column]="2" [rank]="6">
         <fdp-checkbox name="busan-cb" [tristate]="true" [tristateSelectable]="true" [(ngModel)]="busan"></fdp-checkbox>
     </fdp-form-field>
-
     <fdp-form-field id="dubrovnik" label="Dubrovnik: tristateSelectable false" [column]="1" [rank]="7">
         <fdp-checkbox
             name="dubrovnik-cb"
@@ -140,19 +127,16 @@
             [(ngModel)]="dubrovnik"
         ></fdp-checkbox>
     </fdp-form-field>
-
     <fdp-form-field id="jaipur" label="Jaipur: tristateSelectable false" [column]="2" [rank]="7">
         <fdp-checkbox name="jaipur-cb" [tristate]="true" [tristateSelectable]="false" [(ngModel)]="jaipur">
         </fdp-checkbox>
     </fdp-form-field>
-
     <fdp-form-field [column]="1">
         <div>Havana: {{ havana }}</div>
         <div>Beirut: {{ beirut }}</div>
         <div>Budapest: {{ budapest }}</div>
         <div>Dubrovnik: {{ dubrovnik }}</div>
     </fdp-form-field>
-
     <fdp-form-field [column]="2">
         <div>Lisbon: {{ lisbon }}</div>
         <div>Istanbul: {{ istanbul }}</div>
@@ -160,7 +144,6 @@
         <div>Jaipur: {{ jaipur }}</div>
     </fdp-form-field>
 </fdp-form-group>
-
 <h3>TriState Checkbox Used with Multiple checkboxes</h3>
 <form #form="ngForm" [formGroup]="registrationForm">
     <fdp-form-group #fgtristate [formGroup]="registrationForm">
@@ -179,17 +162,16 @@
             <fdp-form-field #ffr2 id="termsAndConditions" label="I accept Terms and Conditions" [rank]="3">
                 <fdp-checkbox name="termsAndConditions-cb" [formControl]="ffr2.formControl"> </fdp-checkbox>
             </fdp-form-field>
-
             <fdp-form-field #ffr3 id="marketing" label="I want to receive Marketing Materials" [rank]="3">
                 <fdp-checkbox name="marketing-cb" [formControl]="ffr3.formControl"></fdp-checkbox>
             </fdp-form-field>
-
             <fdp-form-field #ffr4 id="newsletter" label="I want to sign for a Newsletter" [rank]="4">
                 <fdp-checkbox name="newsletter-cb" [formControl]="ffr4.formControl"> </fdp-checkbox>
             </fdp-form-field>
-
             <ng-template #i18n let-errors>
-                <ng-container *ngIf="errors.required"> value is required </ng-container>
+                @if (errors.required) {
+                    value is required
+                }
             </ng-template>
         </fdp-form-group>
     </div>

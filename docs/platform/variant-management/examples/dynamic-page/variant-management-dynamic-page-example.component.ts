@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -46,7 +45,6 @@ export interface CombinedVariantManagementPreset {
     standalone: true,
     imports: [
         ButtonComponent,
-        NgIf,
         VariantManagementModule,
         PlatformDynamicPageModule,
         ToolbarComponent,

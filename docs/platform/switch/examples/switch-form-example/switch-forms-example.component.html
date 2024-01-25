@@ -17,7 +17,6 @@
         >
         </fdp-switch>
     </fdp-form-field>
-
     <fdp-form-field id="switch2" label="Form Switch 2" [rank]="4">
         <fdp-switch
             name="switch-2"
@@ -29,7 +28,6 @@
         >
         </fdp-switch>
     </fdp-form-field>
-
     <fdp-form-field id="switch3" label="Form Switch 3" [rank]="4">
         <fdp-switch
             name="switch-3"
@@ -42,9 +40,9 @@
         </fdp-switch>
     </fdp-form-field>
 </fdp-form-group>
-
 <ng-template #switchOneErrors let-errors>
-    <span *ngIf="errors.required" role="alert" aria-atomic="true"> Selection is required </span>
+    @if (errors.required) {
+        <span role="alert" aria-atomic="true"> Selection is required </span>
+    }
 </ng-template>
-
 <div style="padding-left: 2rem">form value: {{ customForm.getRawValue() | json }}</div>

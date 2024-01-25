@@ -1,4 +1,4 @@
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import {
@@ -11,7 +11,7 @@ import {
     selector: 'fdp-wizard-generator-visible-summary-example',
     templateUrl: './wizard-generator-visible-summary-example.component.html',
     standalone: true,
-    imports: [PlatformWizardGeneratorModule, NgIf, JsonPipe]
+    imports: [PlatformWizardGeneratorModule, JsonPipe]
 })
 export class WizardGeneratorVisibleSummaryExampleComponent {
     wizardValue: WizardGeneratorFormsValue;

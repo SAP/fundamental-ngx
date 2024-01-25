@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -17,7 +16,6 @@ import { FdpFormGroupModule, PlatformRadioGroupModule } from '@fundamental-ngx/p
         PlatformRadioGroupModule,
         ContentDensityDirective,
         PlatformButtonModule,
-        NgIf,
         MessageToastModule
     ]
 })

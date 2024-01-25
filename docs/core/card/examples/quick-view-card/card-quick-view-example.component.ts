@@ -1,4 +1,3 @@
-import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -12,18 +11,7 @@ import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
     templateUrl: 'card-quick-view-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [
-        CardModule,
-        QuickViewModule,
-        AvatarComponent,
-        NgFor,
-        NgSwitch,
-        NgSwitchCase,
-        LinkComponent,
-        NgSwitchDefault,
-        ButtonComponent,
-        ContentDensityDirective
-    ]
+    imports: [CardModule, QuickViewModule, AvatarComponent, LinkComponent, ButtonComponent, ContentDensityDirective]
 })
 export class CardQuickViewExampleComponent {
     data = {

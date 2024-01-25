@@ -18,12 +18,17 @@
             </fdp-input>
         </fdp-form-field>
         <ng-template #i18n let-errors>
-            <span id="input-required" *ngIf="errors.required">Value required</span>
-            <span id="input-valueMinError" *ngIf="errors.minlength"> Value must be more than {{ MIN_VALUE }} </span>
-            <span id="input-valueMaxError" *ngIf="errors.maxlength"> Value must be less than {{ MAX_VALUE }} </span>
+            @if (errors.required) {
+                <span id="input-required">Value required</span>
+            }
+            @if (errors.minlength) {
+                <span id="input-valueMinError"> Value must be more than {{ MIN_VALUE }} </span>
+            }
+            @if (errors.maxlength) {
+                <span id="input-valueMaxError"> Value must be less than {{ MAX_VALUE }} </span>
+            }
         </ng-template>
     </fdp-form-group>
-
     <pre>Form result: {{ fg.formGroup.value | json }}</pre>
     <pre>Form result: {{ fg.formGroup.status }}</pre>
 </form>

@@ -10,19 +10,20 @@
     (selectedFilesChanged)="handleFileSelection($event)"
     (selectedInvalidFiles)="handleInvalidFiles($event)"
 ></fd-file-uploader>
-
 <br />
 <br />
 Files Selected:
 <br />
-<span *ngFor="let file of files">
-    <span class="green">{{ file.name }} </span><br
-/></span>
-
+@for (file of files; track file) {
+    <span>
+        <span class="green">{{ file.name }} </span><br
+    /></span>
+}
 <br />
-
 Invalid Files:
 <br />
-<span *ngFor="let file of invalidFiles">
-    <span class="red">{{ file.name }} </span><br
-/></span>
+@for (file of invalidFiles; track file) {
+    <span>
+        <span class="red">{{ file.name }} </span><br
+    /></span>
+}

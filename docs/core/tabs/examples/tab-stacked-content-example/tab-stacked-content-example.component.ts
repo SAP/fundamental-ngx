@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
@@ -7,7 +6,7 @@ import { TabsModule } from '@fundamental-ngx/core/tabs';
     selector: 'fd-stacked-content-example',
     templateUrl: './tab-stacked-content-example.component.html',
     standalone: true,
-    imports: [TabsModule, NgFor, NgIf, ButtonComponent]
+    imports: [TabsModule, ButtonComponent]
 })
 export class TabStackedContentExampleComponent {
     tabs: { title: string; content: string }[] = [];

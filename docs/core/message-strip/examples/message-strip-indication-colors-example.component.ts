@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import {
@@ -10,10 +9,12 @@ import {
 @Component({
     selector: 'fd-message-strip-indication-colors-example',
     template: `
-        <fd-message-strip [indicationColor]="indicationColor" *ngFor="let indicationColor of indicationColors">
-            <fd-icon *fdMessageStripIcon glyph="sys-enter-2"></fd-icon>
-            This is the message strip with indication color "{{ indicationColor }}"
-        </fd-message-strip>
+        @for (indicationColor of indicationColors; track indicationColor) {
+            <fd-message-strip [indicationColor]="indicationColor">
+                <fd-icon *fdMessageStripIcon glyph="sys-enter-2"></fd-icon>
+                This is the message strip with indication color "{{ indicationColor }}"
+            </fd-message-strip>
+        }
     `,
     styles: [
         `
@@ -25,7 +26,7 @@ import {
         `
     ],
     standalone: true,
-    imports: [NgFor, MessageStripComponent, MessageStripIconDirective, IconComponent]
+    imports: [MessageStripComponent, MessageStripIconDirective, IconComponent]
 })
 export class MessageStripIndicationColorsExampleComponent {
     indicationColors = _messageStripIndicationColors;

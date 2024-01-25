@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import { NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FocusableGridDirective, RtlService } from '@fundamental-ngx/cdk/utils';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
@@ -32,16 +31,7 @@ interface TableMobileItem {
     selector: 'fd-table-navigatable-row-example',
     templateUrl: './table-navigatable-row-example.component.html',
     standalone: true,
-    imports: [
-        FocusableGridDirective,
-        TableModule,
-        NgFor,
-        LinkComponent,
-        NgIf,
-        RouterLink,
-        FormLabelComponent,
-        ObjectStatusComponent
-    ]
+    imports: [FocusableGridDirective, TableModule, LinkComponent, RouterLink, FormLabelComponent, ObjectStatusComponent]
 })
 export class TableNavigatableRowExampleComponent {
     navigatableRows: TableIem[] = [

@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -31,8 +30,7 @@ import {
         CheckboxGroupComponent,
         PlatformInputGroupModule,
         PlatformButtonModule,
-        PlatformRadioGroupModule,
-        NgIf
+        PlatformRadioGroupModule
     ]
 })
 export class PlatformFormContainerComplexExampleComponent {

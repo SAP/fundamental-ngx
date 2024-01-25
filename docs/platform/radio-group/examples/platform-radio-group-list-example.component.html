@@ -16,16 +16,14 @@
             </ng-container>
         </fdp-form-field>
         <ng-template #i18n let-errors>
-            <ng-container *ngIf="errors.required">
+            @if (errors.required) {
                 <span>Value is required.</span>
-            </ng-container>
+            }
         </ng-template>
     </fdp-form-group>
 </form>
-
 <p style="margin-left: 2rem">Selected value: {{ form1.controls.radiol1.value }}</p>
 <br />
-
 <p>Platform radio button with None (No selection) value created as an Option</p>
 <fdp-form-group [formGroup]="form2" [object]="form2Data">
     <fdp-form-field #fl2 id="radiol2" [rank]="1">
@@ -43,7 +41,6 @@
 </fdp-form-group>
 <p style="margin-left: 2rem">Selected value: {{ form2.controls.radiol2.value }}</p>
 <br />
-
 <p>Radio group using FormGroup and FormControl</p>
 <fdp-form-group [formGroup]="form3">
     <fdp-form-field id="radiol3" [rank]="1">
@@ -51,10 +48,8 @@
     </fdp-form-field>
 </fdp-form-group>
 <p style="margin-left: 2rem">Selected value: {{ form3.controls.month.value }}</p>
-
 <hr />
 <h3>Use With Template Driven Form</h3>
-
 <p>Creating platform radio button with list of string values also pre-selection based on control value</p>
 <fdp-form-group>
     <fdp-form-field id="radiol4" [rank]="1">
@@ -63,7 +58,6 @@
     </fdp-form-field>
 </fdp-form-group>
 <p style="margin-left: 2rem">Selected value: {{ favoriteOption }}</p>
-
 <p>Creating platform radio button with given list of string values</p>
 <fdp-form-group>
     <fdp-form-field id="radiol5" [rank]="1">

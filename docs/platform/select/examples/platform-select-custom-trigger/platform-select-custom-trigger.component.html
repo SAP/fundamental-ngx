@@ -9,6 +9,8 @@
     <div class="custom-select-trigger-styling">
         <fd-icon glyph="action-settings"></fd-icon>
         {{ textValue }}
-        <span *ngIf="selected">{{ selected.id }}</span>
+        @if (selected) {
+            <span>{{ selected.id }}</span>
+        }
     </div>
 </ng-template>

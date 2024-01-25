@@ -7,11 +7,15 @@
     label="Open value help dialog"
 ></button>
 <br />
-<div fd-form-item *ngIf="actualItems.length">
-    <fd-tokenizer fdCompact>
-        <fd-token *ngFor="let token of actualItems" [readOnly]="true">{{ token }}</fd-token>
-    </fd-tokenizer>
-</div>
+@if (actualItems.length) {
+    <div fd-form-item>
+        <fd-tokenizer fdCompact>
+            @for (token of actualItems; track token) {
+                <fd-token [readOnly]="true">{{ token }}</fd-token>
+            }
+        </fd-tokenizer>
+    </div>
+}
 <fdp-value-help-dialog
     #vhd
     dialogTitle="Custom strategy labels"
@@ -20,11 +24,12 @@
     (valueChange)="valueChange($event)"
     headerId="fdp-vhd-header-2"
 >
-    <fdp-value-help-dialog-filter
-        *ngFor="let filter of filters; index as i"
-        [main]="i < 2"
-        [key]="filter.key"
-        [label]="filter.label"
-        [advanced]="i !== 0"
-    ></fdp-value-help-dialog-filter>
+    @for (filter of filters; track filter; let i = $index) {
+        <fdp-value-help-dialog-filter
+            [main]="i < 2"
+            [key]="filter.key"
+            [label]="filter.label"
+            [advanced]="i !== 0"
+        ></fdp-value-help-dialog-filter>
+    }
 </fdp-value-help-dialog>

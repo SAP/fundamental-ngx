@@ -1,4 +1,4 @@
-import { Component, Injector } from '@angular/core';
+import { Component } from '@angular/core';
 import { DatetimeAdapter, FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { isSelectItem, SelectItem } from '@fundamental-ngx/platform/shared';
 import {
@@ -26,7 +26,6 @@ import {
 } from '@fundamental-ngx/platform/form';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DialogService } from '@fundamental-ngx/core/dialog';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
 import { SliderComponent } from '@fundamental-ngx/platform/slider';
@@ -92,11 +91,7 @@ export class PlatformSmartFilterBarSliderComponent extends BaseDynamicFormGenera
     standalone: true,
     imports: [FormsModule, ReactiveFormsModule, PlatformDatePickerComponent]
 })
-export class PlatformSmartFilterBarDateRendererComponent extends BaseSmartFilterBarConditionField {
-    constructor(dialogService: DialogService, smartFilterBarService: SmartFilterBarService, injector: Injector) {
-        super(dialogService, smartFilterBarService, injector);
-    }
-}
+export class PlatformSmartFilterBarDateRendererComponent extends BaseSmartFilterBarConditionField {}
 
 @Component({
     selector: 'fdp-platform-smart-filter-bar-custom-filter-example',
@@ -118,7 +113,10 @@ export class PlatformSmartFilterBarCustomFilterExampleComponent {
 
     source: TableDataSource<ExampleItem>;
 
-    constructor(datetimeAdapter: DatetimeAdapter<FdDate>, private _smartFilterBarService: SmartFilterBarService) {
+    constructor(
+        datetimeAdapter: DatetimeAdapter<FdDate>,
+        private _smartFilterBarService: SmartFilterBarService
+    ) {
         const sliderConfig: SmartFilterBarCustomFilterConfig = {
             conditionComponent: PlatformSmartFilterBarSliderComponent,
             types: ['price-slider'],

@@ -12,9 +12,9 @@
             <fdp-input name="input9" [formControl]="ffl1.formControl" type="text" ariaLabelledBy="label"> </fdp-input>
         </fdp-form-field>
         <ng-template #i18n let-errors>
-            <span role="alert" *ngIf="errors.required">
-                Pellentesque metus lacus commodo eget justo ut rutrum varius nunc</span
-            >
+            @if (errors.required) {
+                <span role="alert"> Pellentesque metus lacus commodo eget justo ut rutrum varius nunc</span>
+            }
         </ng-template>
     </fdp-form-group>
     <fdp-button type="submit" (click)="onSubmit()" label="Submit"></fdp-button>

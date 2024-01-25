@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf } from '@angular/common';
+
 import {
     ChangeDetectionStrategy,
     Component,
@@ -43,7 +43,6 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
         LinkComponent,
         RouterLink,
         BarModule,
-        NgIf,
         ButtonComponent
     ]
 })
@@ -64,7 +63,10 @@ export class WizardVisibleSummaryExampleComponent {
     @ViewChildren(WizardStepComponent)
     wizardStepComponents: QueryList<WizardStepComponent>;
 
-    constructor(private _dialogService: DialogService, private _wizardService: WizardService) {}
+    constructor(
+        private _dialogService: DialogService,
+        private _wizardService: WizardService
+    ) {}
 
     statusChanged(stepNumber: number, event: WizardStepStatus): void {
         if (event === 'current') {

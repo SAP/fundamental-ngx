@@ -13,16 +13,17 @@
     >
     </fdp-form-generator>
 </fdp-message-popover-form-wrapper>
-
 <div fd-bar barDesign="footer">
     <div fd-bar-left>
         <fdp-message-popover [wrapper]="formGeneratorWrapper"></fdp-message-popover>
     </div>
     <div fd-bar-right>
-        <fdp-button *ngIf="formCreated" (click)="submitForm()" type="submit" label="Submit form"></fdp-button>
+        @if (formCreated) {
+            <fdp-button (click)="submitForm()" type="submit" label="Submit form"></fdp-button>
+        }
     </div>
 </div>
-
 <p>Form created: {{ formCreated }}</p>
-
-<p *ngIf="formValue">Form value: {{ formValue | json }}</p>
+@if (formValue) {
+    <p>Form value: {{ formValue | json }}</p>
+}

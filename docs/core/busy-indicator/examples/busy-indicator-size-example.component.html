@@ -1,3 +1,5 @@
-<div style="text-align: center" *ngFor="let size of sizes">
-    <fd-busy-indicator [loading]="true" [size]="size" [title]="size + ' ' + 'size loading'"></fd-busy-indicator>
-</div>
+@for (size of sizes; track size) {
+    <div style="text-align: center">
+        <fd-busy-indicator [loading]="true" [size]="size" [title]="size + ' ' + 'size loading'"></fd-busy-indicator>
+    </div>
+}

@@ -16,9 +16,10 @@
                     [(ngModel)]="qty"
                 ></fdp-number-step-input>
             </fdp-form-field>
-
             <ng-template #i18n let-errors>
-                <span *ngIf="errors.required"> Value is required </span>
+                @if (errors.required) {
+                    <span> Value is required </span>
+                }
             </ng-template>
         </fdp-form-group>
     </div>

@@ -82,7 +82,7 @@ export class SettingsGeneratorCustomControlExampleComponent {
         this._formGeneratorService.addComponent(PlatformFormGeneratorCustomSliderElementComponent, ['slider']);
         this.schema = {
             appearance: 'sidebar',
-            sidebarWidth: '30%',
+            sidebarWidth: '20rem',
             items: [
                 {
                     title: 'First list item',

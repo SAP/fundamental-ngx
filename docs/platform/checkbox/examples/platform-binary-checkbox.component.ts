@@ -31,5 +31,9 @@ export class PlatformCompactChekboxExampleComponent {
 }
 
 class DataObject {
-    constructor(public red: boolean, public blue: boolean, public green?: boolean) {}
+    constructor(
+        public red: boolean,
+        public blue: boolean,
+        public green?: boolean
+    ) {}
 }

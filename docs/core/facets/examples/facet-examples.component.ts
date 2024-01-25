@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -90,7 +89,6 @@ export class RatingIndicatorFacetExampleComponent {}
     standalone: true,
     imports: [
         ButtonComponent,
-        NgIf,
         FacetModule,
         FormLabelComponent,
         TextComponent,

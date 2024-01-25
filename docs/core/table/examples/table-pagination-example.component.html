@@ -7,16 +7,18 @@
         </tr>
     </thead>
     <tbody fd-table-body>
-        <tr *ngFor="let row of displayedRows; let i = index" fd-table-row>
-            <td fd-table-cell>
-                <a fd-link href="#">{{ row.column1 }}</a>
-            </td>
-            <td fd-table-cell>{{ row.date }}</td>
-            <td fd-table-cell>
-                <fd-icon [glyph]="row.type"></fd-icon>
-                {{ row.column1 }}
-            </td>
-        </tr>
+        @for (row of displayedRows; track row; let i = $index) {
+            <tr fd-table-row>
+                <td fd-table-cell>
+                    <a fd-link href="#">{{ row.column1 }}</a>
+                </td>
+                <td fd-table-cell>{{ row.date }}</td>
+                <td fd-table-cell>
+                    <fd-icon [glyph]="row.type"></fd-icon>
+                    {{ row.column1 }}
+                </td>
+            </tr>
+        }
     </tbody>
     <br />
     <tfoot fd-table-footer>

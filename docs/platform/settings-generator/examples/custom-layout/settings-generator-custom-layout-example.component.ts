@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -15,7 +14,8 @@ import {
 import { Validators } from '@angular/forms';
 import { AsyncOrSyncPipe } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { TabPanelComponent, TabsModule } from '@fundamental-ngx/core/tabs';
+import { TabPanelComponent } from '@fundamental-ngx/core/tabs';
+import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform';
 import { AnyDynamicFormFieldItem } from '@fundamental-ngx/platform/form';
 import { MessagePopoverComponent, MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
 import {
@@ -31,14 +31,18 @@ import { take } from 'rxjs/operators';
 @Component({
     selector: 'fdp-settings-generator-tabs-layout',
     template: `
-        <fd-tab-list *ngIf="settings">
-            <fd-tab *ngFor="let tab of settings.items" [title]="tab.title | fdkAsyncOrSync">
-                <fdp-settings-generator-content [settings]="tab"></fdp-settings-generator-content>
-            </fd-tab>
-        </fd-tab-list>
+        @if (settings) {
+            <fdp-icon-tab-bar iconTabSize="responsive-paddings">
+                @for (tab of settings.items; track tab) {
+                    <fdp-icon-tab-bar-tab [label]="tab.title | fdkAsyncOrSync">
+                        <fdp-settings-generator-content [settings]="tab"></fdp-settings-generator-content>
+                    </fdp-icon-tab-bar-tab>
+                }
+            </fdp-icon-tab-bar>
+        }
     `,
     standalone: true,
-    imports: [NgIf, TabsModule, NgFor, SettingsGeneratorModule, AsyncOrSyncPipe]
+    imports: [FDP_ICON_TAB_BAR, SettingsGeneratorModule, AsyncOrSyncPipe]
 })
 export class SettingsGeneratorTabsLayoutComponent extends BaseSettingsGeneratorLayout {
     protected _destroyRef = inject(DestroyRef);

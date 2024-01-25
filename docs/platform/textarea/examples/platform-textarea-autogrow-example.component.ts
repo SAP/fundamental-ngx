@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
@@ -8,7 +7,7 @@ import { FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/pla
     templateUrl: './platform-textarea-autogrow-example.component.html',
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [NgIf, FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformTextAreaModule]
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformTextAreaModule]
 })
 export class PlatformTextareaAutogrowExampleComponent {
     form: FormGroup;

@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 
-import { NgFor, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FormControlComponent } from '@fundamental-ngx/core/form';
+import { MessageBoxModule, MessageBoxService } from '@fundamental-ngx/core/message-box';
 import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
 import {
     PlatformValueHelpDialogModule,
     ValueHelpDialogDataSource,
+    ValueHelpFilterDefDirective,
     VhdDataProvider,
     VhdDefineExcludeStrategy,
     VhdDefineIncludeStrategy,
@@ -15,8 +19,8 @@ import {
     VhdValue,
     VhdValueChangeEvent
 } from '@fundamental-ngx/platform/value-help-dialog';
-import { Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
 
 interface ExampleTestModel {
     id: number;
@@ -26,6 +30,7 @@ interface ExampleTestModel {
     zipcode: string;
     address: string;
     nickname: string;
+    verified: string;
 }
 
 interface FilterData {
@@ -45,7 +50,8 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
             city: `City ${Math.floor(Math.random() * index)}`,
             zipcode: `zipcode ${Math.floor(Math.random() * index)}`,
             address: `Address ${Math.floor(Math.random() * index)}`,
-            nickname: `Nickname ${Math.floor(Math.random() * index)}`
+            nickname: `Nickname ${Math.floor(Math.random() * index)}`,
+            verified: Math.random() < 0.5 ? 'Yes' : 'No'
         }));
     return {
         dataSource,
@@ -66,13 +72,16 @@ const data = exampleDataSource();
     standalone: true,
     imports: [
         ButtonComponent,
-        NgIf,
         TokenComponent,
         TokenizerComponent,
         TokenizerInputDirective,
         ContentDensityDirective,
-        NgFor,
-        PlatformValueHelpDialogModule
+        PlatformValueHelpDialogModule,
+        ComboboxComponent,
+        ValueHelpFilterDefDirective,
+        FormsModule,
+        FormControlComponent,
+        MessageBoxModule
     ]
 })
 export class PlatformVhdBasicExampleComponent {
@@ -80,6 +89,32 @@ export class PlatformVhdBasicExampleComponent {
     dataSource = new ValueHelpDialogDataSource(new DelayedVhdDataProvider(data.dataSource));
 
     actualValue: Partial<VhdValue<ExampleTestModel>> = {};
+
+    booleanDropdownValues = ['Yes', 'No'];
+
+    readonly messageBoxService = inject(MessageBoxService);
+
+    validator = (value: VhdValueChangeEvent) =>
+        of(value.selected.length <= 10).pipe(
+            delay(5000),
+            tap((result) => {
+                if (result) {
+                    return;
+                }
+
+                const content = {
+                    title: 'Wrong number of selected items',
+                    approveButton: 'Ok',
+                    cancelButton: 'Cancel',
+                    approveButtonCallback: () => messageBoxRef.close('Approved'),
+                    cancelButtonCallback: () => messageBoxRef.close('Canceled'),
+                    closeButtonCallback: () => messageBoxRef.dismiss('Dismissed'),
+                    content: 'You must select less than 10 items'
+                };
+
+                const messageBoxRef = this.messageBoxService.open(content, { type: 'error' });
+            })
+        );
 
     actualItems: string[] = [];
     formatTokenFn = (value: VhdValueChangeEvent<ExampleTestModel>): void => {
@@ -124,6 +159,7 @@ export class PlatformVhdBasicExampleComponent {
     };
 
     valueChange($event: VhdValueChangeEvent<ExampleTestModel>): void {
+        console.log($event);
         this.actualValue = { ...$event };
     }
 }

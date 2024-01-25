@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { SelectModule } from '@fundamental-ngx/core/select';
@@ -7,7 +6,7 @@ import { SelectModule } from '@fundamental-ngx/core/select';
     selector: 'fd-select-mobile-example',
     templateUrl: './select-mobile-example.component.html',
     standalone: true,
-    imports: [SelectModule, NgFor]
+    imports: [SelectModule]
 })
 export class SelectMobileExampleComponent {
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];

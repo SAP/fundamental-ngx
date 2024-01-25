@@ -1,15 +1,14 @@
 <fd-overflow-layout [maxVisibleItems]="3">
-    <ng-container *ngFor="let item of itemsToRender; let i = index">
+    @for (item of itemsToRender; track item; let i = $index) {
         <fd-info-label
             *fdOverflowItemRef="let hidden"
             fdOverflowLayoutItem
             [focusable]="true"
-            [color]="(i % 10).toString()"
+            [color]="infoLabelColorForIndex(i)"
             [label]="'Info label ' + i + (hidden ? ' hidden' : ' visible')"
         >
         </fd-info-label>
-    </ng-container>
+    }
 </fd-overflow-layout>
-
 <button fd-button label="Add new item" (click)="addItem()"></button>
 <button fd-button label="Remove item" (click)="removeItem()"></button>

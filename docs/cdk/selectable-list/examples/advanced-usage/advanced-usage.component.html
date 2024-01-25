@@ -1,3 +1,5 @@
 <ul fdkSelectableList [selected]="1">
-    <li *ngFor="let i of items" fdkSelectableItem fdCustomItem [value]="i">item #{{ i }}</li>
+    @for (i of items; track i) {
+        <li fdkSelectableItem fdCustomItem [value]="i">item #{{ i }}</li>
+    }
 </ul>

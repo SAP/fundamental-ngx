@@ -12,11 +12,11 @@
     (selectedFilesChanged)="handleFileSelection($event)"
 >
 </fd-file-uploader>
-
 <br /><br />
 Files Selected:
 <br />
-
-<span *ngFor="let file of filesDisabled">
-    <span class="green">{{ file.name }} </span><br />
-</span>
+@for (file of filesDisabled; track file) {
+    <span>
+        <span class="green">{{ file.name }} </span><br />
+    </span>
+}

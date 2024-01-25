@@ -9,20 +9,24 @@
         </tr>
     </thead>
     <tbody fd-table-body>
-        <tr *ngFor="let row of tableRows" fd-table-row [activable]="row.activable" [hoverable]="row.hoverable">
-            <td fd-table-cell [activable]="row.column1.activable" [hoverable]="row.column1.hoverable">
-                <a fd-link href="#">{{ row.column1.text }}</a>
-            </td>
-            <td fd-table-cell [activable]="row.column2.activable" [hoverable]="row.column2.hoverable">
-                {{ row.column2.text }}
-            </td>
-            <td fd-table-cell [activable]="row.column3.activable" [hoverable]="row.column3.hoverable">
-                {{ row.column3.text }}
-            </td>
-            <td fd-table-cell [activable]="row.column4.activable" [hoverable]="row.column4.hoverable">
-                {{ row.column4.text }}
-            </td>
-            <td fd-table-cell [activable]="row.date.activable" [hoverable]="row.date.hoverable">{{ row.date.text }}</td>
-        </tr>
+        @for (row of tableRows; track row) {
+            <tr fd-table-row [activable]="row.activable" [hoverable]="row.hoverable">
+                <td fd-table-cell [activable]="row.column1.activable" [hoverable]="row.column1.hoverable">
+                    <a fd-link href="#">{{ row.column1.text }}</a>
+                </td>
+                <td fd-table-cell [activable]="row.column2.activable" [hoverable]="row.column2.hoverable">
+                    {{ row.column2.text }}
+                </td>
+                <td fd-table-cell [activable]="row.column3.activable" [hoverable]="row.column3.hoverable">
+                    {{ row.column3.text }}
+                </td>
+                <td fd-table-cell [activable]="row.column4.activable" [hoverable]="row.column4.hoverable">
+                    {{ row.column4.text }}
+                </td>
+                <td fd-table-cell [activable]="row.date.activable" [hoverable]="row.date.hoverable">
+                    {{ row.date.text }}
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

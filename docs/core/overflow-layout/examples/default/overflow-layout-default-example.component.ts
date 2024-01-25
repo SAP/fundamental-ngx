@@ -1,7 +1,6 @@
-import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
+import { InfoLabelColor, InfoLabelComponent } from '@fundamental-ngx/core/info-label';
 import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
 
 @Component({
@@ -20,7 +19,7 @@ import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [OverflowLayoutModule, NgFor, InfoLabelModule, ButtonComponent]
+    imports: [OverflowLayoutModule, InfoLabelComponent, ButtonComponent]
 })
 export class OverflowLayoutDefaultExampleComponent {
     itemsToRender = new Array(10).fill(null);
@@ -31,5 +30,9 @@ export class OverflowLayoutDefaultExampleComponent {
 
     removeItem(): void {
         this.itemsToRender.pop();
+    }
+
+    infoLabelColorForIndex(i: number): InfoLabelColor {
+        return (i % 10) as InfoLabelColor;
     }
 }

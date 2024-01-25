@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild, inject } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { PaginationComponent, PaginationModule } from '@fundamental-ngx/core/pagination';
@@ -16,13 +15,13 @@ import { delay, tap } from 'rxjs/operators';
             [currentPage]="currentPage"
             ariaLabel="Basic pagination example"
         ></fd-pagination>
-
         <button fd-button label="Go to page 1" (click)="goToPage(1)"></button>
-
-        <div *ngIf="notification">{{ notification }}</div>
+        @if (notification) {
+            <div>{{ notification }}</div>
+        }
     `,
     standalone: true,
-    imports: [PaginationModule, ButtonComponent, NgIf]
+    imports: [PaginationModule, ButtonComponent]
 })
 export class PaginationExampleComponent {
     totalItems = 50;

@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, TemplateRef, inject } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -25,13 +25,13 @@ class ExampleStripAlertComponent implements OnDestroy {
 
 @Component({
     template: `
-        <ng-container *ngIf="alertRefs$ | async as alertRefs">
-            <ng-container *ngIf="alertRefs.length > 0">
+        @if (alertRefs$ | async; as alertRefs) {
+            @if (alertRefs.length > 0) {
                 <button fd-link fdCompact (click)="dismissAll(alertRefs)">Dismiss all ({{ alertRefs.length }})</button>
-            </ng-container>
-        </ng-container>
+            }
+        }
     `,
-    imports: [NgIf, AsyncPipe, ButtonComponent, ContentDensityDirective, LinkModule],
+    imports: [AsyncPipe, ButtonComponent, ContentDensityDirective, LinkModule],
     styles: [
         `
             :host {
@@ -102,6 +102,7 @@ export class MessageStripAlertExampleComponent {
         this.messageStripAlertService.open({
             content: 'This will be automatically dismissed in 5 seconds and if mouse is hovered dismiss time is reset',
             position: `${vPosition}-start`,
+            closeOnNavigation: true,
             messageStrip: {
                 duration: 5000,
                 mousePersist: true,
@@ -117,6 +118,7 @@ export class MessageStripAlertExampleComponent {
     openTemplate(content: TemplateRef<{ $implicit: MessageStripAlertRef }>, vPosition: 'top' | 'bottom' = 'top') {
         this.messageStripAlertService.open({
             position: `${vPosition}-middle`,
+            closeOnNavigation: true,
             content,
             messageStrip: {
                 noIcon: true,
@@ -130,6 +132,7 @@ export class MessageStripAlertExampleComponent {
         this.messageStripAlertService.open({
             content: ExampleStripAlertComponent,
             position: `${vPosition}-end`,
+            closeOnNavigation: true,
             messageStrip: {
                 dismissible: true,
                 type: 'success'

@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { NgFor } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
@@ -75,7 +75,6 @@ interface ExampleRow {
         ButtonComponent,
         FocusableGridDirective,
         TableModule,
-        NgFor,
         LinkComponent,
         IconComponent,
         PopoverComponent,

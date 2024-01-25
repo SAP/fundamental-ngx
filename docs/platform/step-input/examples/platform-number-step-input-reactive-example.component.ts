@@ -1,4 +1,4 @@
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { FdpFormGroupModule, PlatformStepInputModule } from '@fundamental-ngx/platform/form';
@@ -11,7 +11,7 @@ const MIN_VALUE = 10;
     templateUrl: './platform-number-step-input-reactive-example.component.html',
     styleUrls: ['./platform-number-step-input-reactive-example.component.scss'],
     standalone: true,
-    imports: [FdpFormGroupModule, PlatformStepInputModule, FormsModule, ReactiveFormsModule, NgIf, JsonPipe]
+    imports: [FdpFormGroupModule, PlatformStepInputModule, FormsModule, ReactiveFormsModule, JsonPipe]
 })
 export class PlatformNumberStepInputFormExampleComponent implements AfterViewInit {
     MIN_VALUE = MIN_VALUE;

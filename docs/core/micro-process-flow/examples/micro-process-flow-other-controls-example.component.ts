@@ -1,7 +1,6 @@
-import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
+import { InfoLabelColor, InfoLabelModule } from '@fundamental-ngx/core/info-label';
 import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
 import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
 
@@ -10,7 +9,7 @@ import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
     templateUrl: './micro-process-flow-other-controls-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [MicroProcessFlowModule, StatusIndicatorModule, AvatarComponent, NgFor, InfoLabelModule]
+    imports: [MicroProcessFlowModule, StatusIndicatorModule, AvatarComponent, InfoLabelModule]
 })
 export class MicroProcessFlowOtherControlsExampleComponent {
     /* eslint-disable max-len */
@@ -38,4 +37,5 @@ export class MicroProcessFlowOtherControlsExampleComponent {
         'M8.8,24.5C8.8,24.5,8.8,24.5,8.8,24.5c-0.1,0-0.2-0.1-0.2-0.1l-2.9-4.9l-0.2-0.2l-4.8-2.9c-0.1,0-0.1-0.1-0.1-0.2c0-0.1,0-0.1,0.1-0.2c0-0.1,0.9-1.2,1-1.4c0,0,0,0,0,0c0.1-0.1,0.2-0.1,0.2-0.1l4.7,1.6l5.5-6.7L2.3,2.8C2.2,2.7,2.2,2.6,2.2,2.5l0.6-1.1C2.9,1.3,3,1.2,3.1,1.3l12.4,4.8l3.5-3.4c0.9-0.8,1.8-1.4,2.7-1.8c0.2-0.1,0.4-0.1,0.5-0.2c0,0,1.1-0.4,1.8,0.3c0.7,0.7,0.3,1.7,0.3,1.8c-0.1,0.2-0.1,0.4-0.2,0.5c-0.4,0.9-1,1.8-1.8,2.7l-3.4,3.5l4.8,12.4c0,0.1,0,0.2-0.1,0.3l-1.1,0.6c-0.1,0.1-0.2,0-0.3-0.1l-6.7-9.8l-6.7,5.5l1.6,4.7c0,0.1,0,0.2-0.1,0.2c0,0,0,0,0,0c-0.1,0.1-1.3,1-1.4,1C8.9,24.5,8.8,24.5,8.8,24.5z'
     ];
     /* eslint-enable max-len */
+    infoLabelColors: InfoLabelColor[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 }

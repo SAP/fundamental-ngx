@@ -34,5 +34,8 @@ export class PlatformCozyChekboxExampleComponent {
     public changeFunction(): void {}
 }
 class Form1data {
-    constructor(public einstein: string[], public newton: string[]) {}
+    constructor(
+        public einstein: string[],
+        public newton: string[]
+    ) {}
 }

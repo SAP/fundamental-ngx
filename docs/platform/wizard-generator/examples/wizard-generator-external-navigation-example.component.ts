@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
@@ -17,11 +18,11 @@ import {
     templateUrl: './wizard-generator-external-navigation-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [PlatformWizardGeneratorModule, NgIf, BarModule, PlatformButtonModule, ContentDensityDirective, JsonPipe]
+    imports: [PlatformWizardGeneratorModule, BarModule, PlatformButtonModule, ContentDensityDirective, JsonPipe]
 })
 export class WizardGeneratorExternalNavigationExampleComponent {
     @ViewChild(WizardGeneratorComponent)
-    wizardGenerator: WizardGeneratorComponent;
+    wizardGenerator: Nullable<WizardGeneratorComponent>;
 
     get isFirstStep(): boolean {
         return this.wizardGenerator?.isFirstStep || false;

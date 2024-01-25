@@ -1,4 +1,4 @@
-import { DatePipe, NgIf } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
@@ -10,7 +10,7 @@ import { TimePickerModule } from '@fundamental-ngx/core/time-picker';
     templateUrl: './time-picker-example.component.html',
     providers: [provideDateTimeFormats()],
     standalone: true,
-    imports: [FormLabelComponent, TimePickerModule, FormsModule, NgIf, DatePipe]
+    imports: [FormLabelComponent, TimePickerModule, FormsModule, DatePipe]
 })
 export class TimePickerExampleComponent {
     timeObject = new FdDate().setTime(12, 0, 0);

@@ -1,8 +1,8 @@
-<ng-container *ngFor="let item of indicators">
+@for (item of indicators; track item) {
     <span
         fd-object-status
         [indicationColor]="item"
         label="Indication Color"
         aria-label="Object status Indication Color"
     ></span>
-</ng-container>
+}
