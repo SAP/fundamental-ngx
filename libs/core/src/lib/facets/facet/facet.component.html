@@ -3,9 +3,17 @@
 </ng-container>
 
 <ng-container *ngIf="type !== 'image'">
-    <span *ngIf="facetTitle" fd-title [headerSize]="5" class="fd-margin-bottom--sm" [id]="titleId">{{
-        facetTitle
-    }}</span>
+    <span
+        *ngIf="facetTitle"
+        style="display: block"
+        [attr.role]="!!headingLevel ? 'heading' : null"
+        [attr.aria-level]="headingLevel"
+        fd-title
+        [headerSize]="5"
+        class="fd-margin-bottom--sm"
+        [id]="titleId"
+        >{{ facetTitle }}</span
+    >
     <ng-container *ngIf="type === 'form'">
         <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
     </ng-container>
