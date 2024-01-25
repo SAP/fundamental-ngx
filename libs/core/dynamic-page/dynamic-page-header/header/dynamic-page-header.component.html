@@ -13,7 +13,7 @@
                 <ng-content select="fd-facet"></ng-content>
             }
             <div class="fd-dynamic-page__title-subtitle-container">
-                <div class="fd-dynamic-page__title-container" role="heading" aria-level="2">
+                <h2 class="fd-dynamic-page__title-container">
                     <span
                         class="fd-dynamic-page__title"
                         [class.fd-dynamic-page__title--wrap]="titleWrap"
@@ -28,7 +28,7 @@
                             <ng-template [ngTemplateOutlet]="dynamicPageLayoutActionsRef"></ng-template>
                         }
                     </div>
-                </div>
+                </h2>
                 @if (_dynamicPageService.collapsed() && (subtitle || _subtitleTemplate)) {
                     <div
                         class="fd-dynamic-page__subtitle"
