@@ -14,7 +14,7 @@
             </ng-container>
 
             <div class="fd-dynamic-page__title-subtitle-container">
-                <div class="fd-dynamic-page__title-container">
+                <h2 class="fd-dynamic-page__title-container">
                     <span
                         class="fd-dynamic-page__title"
                         [class.fd-dynamic-page__title--wrap]="titleWrap"
@@ -29,7 +29,7 @@
                             <ng-container *ngTemplateOutlet="dynamicPageLayoutActionsRef"></ng-container>
                         </ng-container>
                     </div>
-                </div>
+                </h2>
                 <div
                     *ngIf="_collapsed && (subtitle || _subtitleTemplate)"
                     class="fd-dynamic-page__subtitle"

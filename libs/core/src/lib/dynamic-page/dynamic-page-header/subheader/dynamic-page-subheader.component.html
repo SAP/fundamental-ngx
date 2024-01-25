@@ -23,8 +23,7 @@
                     [attr.aria-controls]="id"
                     (click)="toggleCollapse()"
                 >
-                    <i *ngIf="!collapsed" class="sap-icon--slim-arrow-up"></i>
-                    <i *ngIf="collapsed" class="sap-icon--slim-arrow-down"></i>
+                    <i [style.transform]="collapsed ? '' : 'rotate(180deg)'" class="sap-icon--slim-arrow-down"></i>
                 </button>
                 <button
                     fd-button

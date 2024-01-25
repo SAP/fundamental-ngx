@@ -8,6 +8,7 @@ import {
     AfterViewInit,
     HostBinding
 } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FacetType, FACET_CLASS_NAME } from '../constants';
 import { addClassNameToFacetElement } from '../utils';
 
@@ -52,6 +53,12 @@ export class FacetComponent implements AfterViewInit {
      */
     @Input()
     alignEnd = false;
+
+    /**
+     * Heading level (i.e. <h1>, <h2>, etc.) of the facet title.
+     */
+    @Input()
+    headingLevel: Nullable<1 | 2 | 3 | 4 | 5 | 6>;
 
     /** @hidden
      * the appropriate role for each facet type
