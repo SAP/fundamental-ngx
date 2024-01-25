@@ -31,6 +31,8 @@ export class MultiInputPo extends CoreBaseComponentPo {
     selectAllItemsBtn = '.fd-button[glyph="multiselect-all"]';
     dialogListItem = '.fd-dialog .fd-list__item';
     compactInput = '.fd-multi-input.is-compact .fd-input';
+    compactMultiInputs = '.fd-multi-input.is-compact fd-input-group';
+    cozyMultiInputs = '.fd-multi-input-field fd-input-group:not(.is-disabled)';
 
     async open(): Promise<void> {
         await super.open(this.url);

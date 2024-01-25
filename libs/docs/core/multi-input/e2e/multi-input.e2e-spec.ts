@@ -57,7 +57,9 @@ describe('Multi input test suite', () => {
         dialogCheckbox,
         selectAllItemsBtn,
         dialogListItem,
-        compactInput
+        compactInput,
+        cozyMultiInputs,
+        compactMultiInputs
     } = multiInputPage;
 
     beforeAll(async () => {
@@ -386,8 +388,8 @@ describe('Multi input test suite', () => {
     });
 
     it('should check compact input be smaller than basic input', async () => {
-        const basicInputS = await getElementSize(activeInputs);
-        const compactInputS = await getElementSize(compactInput);
+        const basicInputS = await getElementSize(cozyMultiInputs);
+        const compactInputS = await getElementSize(compactMultiInputs);
 
         await expect(basicInputS.height).toBeGreaterThan(compactInputS.height);
     });
