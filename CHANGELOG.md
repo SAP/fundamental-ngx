@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.49...v0.48.0-rc.50) (2024-01-25)
+
+
+### Features
+
+* **core:** add full width modifier for Step Input ([#11311](https://github.com/SAP/fundamental-ngx/issues/11311)) ([41418a9](https://github.com/SAP/fundamental-ngx/commit/41418a97138ddd337d73ed9875b0d95376622519))
+
+
+
+
+
 # [0.48.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.48...v0.48.0-rc.49) (2024-01-25)
 
 
