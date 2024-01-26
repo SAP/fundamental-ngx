@@ -5,6 +5,7 @@
     fdkDisabled
     [addDisabledClass]="false"
     [status]="row.value[semanticHighlighting]"
+    [cellFocusedEventAnnouncer]="_itemFocusedEventAnnouncer.bind(this)"
 ></td>
 
 <!-- hidden text for screenreader -->
@@ -37,6 +38,7 @@
             fd-table-cell
             fd-table-cell-selectable
             [focusable]="true"
+            [cellFocusedEventAnnouncer]="_itemFocusedEventAnnouncer.bind(this)"
             [style]="
                 _contentDensityObserver
                     | async
@@ -60,6 +62,7 @@
             role="cell"
             fd-table-cell
             [focusable]="true"
+            [cellFocusedEventAnnouncer]="_itemFocusedEventAnnouncer.bind(this)"
             (keydown.enter)="_toggleMultiSelectRow(row, $event)"
             (keydown.space)="_toggleMultiSelectRow(row, $event)"
             [attr.aria-selected]="row.checked"
@@ -91,6 +94,7 @@
         fdkDisabled
         [addDisabledClass]="false"
         [class.fd-table__cell--fixed]="fixed"
+        [cellFocusedEventAnnouncer]="_itemFocusedEventAnnouncer.bind(this)"
     ></td>
 </ng-template>
 
@@ -110,6 +114,7 @@
     "
     [columnName]="column.name"
     [focusable]="true"
+    [cellFocusedEventAnnouncer]="_itemFocusedEventAnnouncer.bind(this)"
     [attr.role]="column.role"
     [headers]="rowId + '__' + column.name"
     [ngClass]="[
@@ -204,6 +209,7 @@
     class="fdp-table__cell--navigation is-last-child"
     fdkDisabled
     [addDisabledClass]="false"
+    [cellFocusedEventAnnouncer]="_itemFocusedEventAnnouncer.bind(this)"
 >
     <i
         *ngIf="row.navigatable"
