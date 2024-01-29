@@ -27,7 +27,7 @@ function loadJson(source: Partial<Record<string, string>>): Record<string, any> 
     return result;
 }
 
-export function loadProperties(propertiesFileContent: string): Record<string, any> {
+export function parseProperties(propertiesFileContent: string): Record<string, string> {
     const newFileContent = {};
     const items = propertiesFileContent.match(/(.*)=(.*)/g);
     (items || []).forEach((item: string) => {
@@ -35,5 +35,9 @@ export function loadProperties(propertiesFileContent: string): Record<string, an
         const [key, value] = [item.slice(0, firstEqualSignIndex), item.slice(firstEqualSignIndex + 1)];
         newFileContent[key.trim()] = value.trim().replace(/\\#/g, '#');
     });
-    return loadJson(newFileContent);
+    return newFileContent;
+}
+
+export function loadProperties(propertiesFileContent: string): Record<string, any> {
+    return loadJson(parseProperties(propertiesFileContent));
 }

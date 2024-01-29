@@ -2,7 +2,8 @@ import { ChangeDetectorRef, DestroyRef, Pipe, PipeTransform } from '@angular/cor
 import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, skip, switchMap } from 'rxjs';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FdLanguageKeyArgs, FdLanguageKeyIdentifier } from '../models/lang';
+import { FdLanguageKeyIdentifier } from '../models';
+import { FdLanguageKeyArgs } from '../models/fd-language-key';
 import { resolveTranslationObservableFn } from '../utils';
 
 @Pipe({
@@ -24,7 +25,10 @@ export class FdTranslatePipe implements PipeTransform {
     private _value: string | undefined;
 
     /** @hidden */
-    constructor(private readonly _destroyRef: DestroyRef, private _cdr: ChangeDetectorRef) {
+    constructor(
+        private readonly _destroyRef: DestroyRef,
+        private _cdr: ChangeDetectorRef
+    ) {
         this._instantiateSubscription();
     }
 
