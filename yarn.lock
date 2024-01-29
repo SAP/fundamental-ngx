@@ -43,6 +43,14 @@
     "@angular-devkit/core" "17.0.8"
     rxjs "7.8.1"
 
+"@angular-devkit/architect@0.1701.1":
+  version "0.1701.1"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.1701.1.tgz#80e2bc94763e21c273ef6d9f905390f1d935df60"
+  integrity sha512-vT3ZRAIfNyIg0vJWT6umPbCKiKFCukNkxLe9kgOU0tinZKNr/LgWYaBZ92Rxxi6C3NrAnmAYjsih8x4zdyoRXw==
+  dependencies:
+    "@angular-devkit/core" "17.1.1"
+    rxjs "7.8.1"
+
 "@angular-devkit/build-angular@17.0.8":
   version "17.0.8"
   resolved "https://registry.yarnpkg.com/@angular-devkit/build-angular/-/build-angular-17.0.8.tgz#c6ae0b4518a148a9b60b5e1f680b8e089b3b9cbb"
@@ -136,12 +144,35 @@
     rxjs "7.8.1"
     source-map "0.7.4"
 
+"@angular-devkit/core@17.1.1":
+  version "17.1.1"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-17.1.1.tgz#c140e6fcd158cea87e15d0d09f3879fc23a52637"
+  integrity sha512-b1wd1caegc1p18nTrfPhfHQAZW1GnWWKGldq5MZ8C/nkgJbjjN8SKb1Vw7GONkOnH6KxWDAXS4i93/wdQcz4Bg==
+  dependencies:
+    ajv "8.12.0"
+    ajv-formats "2.1.1"
+    jsonc-parser "3.2.0"
+    picomatch "3.0.1"
+    rxjs "7.8.1"
+    source-map "0.7.4"
+
 "@angular-devkit/schematics@17.0.8":
   version "17.0.8"
   resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-17.0.8.tgz#a118c54ea208ad1f4d83b5317f8ae30ee3cffbfb"
   integrity sha512-syo814SVWfJvne448IijjZvpWbuqJsEutdNqHWLTewTfX2U3KrIAr/XRVcXQMuyMvLCDiuxjMgEJxOIP7mcIPw==
   dependencies:
     "@angular-devkit/core" "17.0.8"
+    jsonc-parser "3.2.0"
+    magic-string "0.30.5"
+    ora "5.4.1"
+    rxjs "7.8.1"
+
+"@angular-devkit/schematics@17.1.1":
+  version "17.1.1"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-17.1.1.tgz#caaaeff64519d691121a92c92dbfd53581ff0bc4"
+  integrity sha512-3AtEO7k0Znzg11o51ZqebkW8063QkZ7Y7BC96Oye+wSdpT3ow57P0w0UtOpUNesNKzj1iMuPWqqm4i+YqitjCw==
+  dependencies:
+    "@angular-devkit/core" "17.1.1"
     jsonc-parser "3.2.0"
     magic-string "0.30.5"
     ora "5.4.1"
@@ -204,25 +235,25 @@
   optionalDependencies:
     parse5 "^7.1.2"
 
-"@angular/cli@17.0.8":
-  version "17.0.8"
-  resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-17.0.8.tgz#6832b503988818e8fb16da25e906ce0a70c55d0a"
-  integrity sha512-yZXYNLAFv9u2qypsVqtS+rRCsnjsIPYXr6TcI/r5buzOtC7UQ2lleYsWJqX47SsyGMk/o3gaYg5Bj2I5mmRDLA==
+"@angular/cli@17.1.1":
+  version "17.1.1"
+  resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-17.1.1.tgz#3aadcee37b8fd5b4ecb6c7ae8057dfb26973cc73"
+  integrity sha512-JG/Vf+PScR3PC6u7B+jFF4s5eBByzCpOfCfRFw98nlCqDAOxYOig7wi2Sbp5fnvILQH8vbc/NG8MzdgONrG6Hg==
   dependencies:
-    "@angular-devkit/architect" "0.1700.8"
-    "@angular-devkit/core" "17.0.8"
-    "@angular-devkit/schematics" "17.0.8"
-    "@schematics/angular" "17.0.8"
+    "@angular-devkit/architect" "0.1701.1"
+    "@angular-devkit/core" "17.1.1"
+    "@angular-devkit/schematics" "17.1.1"
+    "@schematics/angular" "17.1.1"
     "@yarnpkg/lockfile" "1.1.0"
     ansi-colors "4.1.3"
     ini "4.1.1"
-    inquirer "9.2.11"
+    inquirer "9.2.12"
     jsonc-parser "3.2.0"
     npm-package-arg "11.0.1"
     npm-pick-manifest "9.0.0"
     open "8.4.2"
     ora "5.4.1"
-    pacote "17.0.4"
+    pacote "17.0.5"
     resolve "1.22.8"
     semver "7.5.4"
     symbol-observable "4.0.0"
@@ -3370,6 +3401,13 @@
     yargs "16.2.0"
     yargs-parser "20.2.4"
 
+"@ljharb/through@^2.3.11":
+  version "2.3.12"
+  resolved "https://registry.yarnpkg.com/@ljharb/through/-/through-2.3.12.tgz#c418c43060eee193adce48b15c2206096a28e9ea"
+  integrity sha512-ajo/heTlG3QgC8EGP6APIejksVAYt4ayz4tqoP3MolFELzcH1x1fzwEYRJTPO0IELutZ5HQ0c26/GqAYy79u3g==
+  dependencies:
+    call-bind "^1.0.5"
+
 "@ljharb/through@^2.3.9":
   version "2.3.11"
   resolved "https://registry.yarnpkg.com/@ljharb/through/-/through-2.3.11.tgz#783600ff12c06f21a76cc26e33abd0b1595092f9"
@@ -4193,6 +4231,15 @@
   dependencies:
     "@angular-devkit/core" "17.0.8"
     "@angular-devkit/schematics" "17.0.8"
+    jsonc-parser "3.2.0"
+
+"@schematics/angular@17.1.1":
+  version "17.1.1"
+  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-17.1.1.tgz#5ac8f09a66e7dff86cbf664b9388a0dde4a97de3"
+  integrity sha512-1Wqefy1W9Y63g48Fp7BscL95V4U1seDGgZawH6DcJnytJVW89hazao7YREzLYfdoediuw7lU+OHJksWYe4VQww==
+  dependencies:
+    "@angular-devkit/core" "17.1.1"
+    "@angular-devkit/schematics" "17.1.1"
     jsonc-parser "3.2.0"
 
 "@sideway/address@^4.1.3":
@@ -6749,6 +6796,15 @@ call-bind@^1.0.0, call-bind@^1.0.2:
     function-bind "^1.1.1"
     get-intrinsic "^1.0.2"
 
+call-bind@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/call-bind/-/call-bind-1.0.5.tgz#6fa2b7845ce0ea49bf4d8b9ef64727a2c2e2e513"
+  integrity sha512-C3nQxfFZxFRVoJoGKKI8y3MOEo129NQ+FgQ08iye+Mk4zNZZGdjfs06bVTr+DBSlA66Q2VEcMki/cUCP4SercQ==
+  dependencies:
+    function-bind "^1.1.2"
+    get-intrinsic "^1.2.1"
+    set-function-length "^1.1.1"
+
 callsites@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/callsites/-/callsites-3.1.0.tgz#b3630abd8943432f54b3f0519238e33cd7df2f73"
@@ -8541,6 +8597,15 @@ defer-to-connect@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/defer-to-connect/-/defer-to-connect-2.0.1.tgz#8016bdb4143e4632b77a3449c6236277de520587"
   integrity sha512-4tvttepXG1VaYGrRibk5EwJd1t4udunSOVMdLSAL6mId1ix438oPwPZMALY41FCijukO1L0twNcGsdzS7dHgDg==
+
+define-data-property@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/define-data-property/-/define-data-property-1.1.1.tgz#c35f7cd0ab09883480d12ac5cb213715587800b3"
+  integrity sha512-E7uGkTzkk1d0ByLeSc6ZsFS79Axg+m1P/VsgYsxHgiuc3tFSj+MjMIwe90FC4lOAZzNBdY7kkO2P2wKdsQ1vgQ==
+  dependencies:
+    get-intrinsic "^1.2.1"
+    gopd "^1.0.1"
+    has-property-descriptors "^1.0.0"
 
 define-lazy-prop@^2.0.0:
   version "2.0.0"
@@ -10371,6 +10436,16 @@ get-intrinsic@^1.0.2, get-intrinsic@^1.1.1, get-intrinsic@^1.1.3, get-intrinsic@
     has-proto "^1.0.1"
     has-symbols "^1.0.3"
 
+get-intrinsic@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/get-intrinsic/-/get-intrinsic-1.2.2.tgz#281b7622971123e1ef4b3c90fd7539306da93f3b"
+  integrity sha512-0gSo4ml/0j98Y3lngkFEot/zhiCeWsbYIlZ+uZOVgzLyLaUw7wxUL+nCTP0XJvJg1AXulJRI3UJi8GsbDuxdGA==
+  dependencies:
+    function-bind "^1.1.2"
+    has-proto "^1.0.1"
+    has-symbols "^1.0.3"
+    hasown "^2.0.0"
+
 get-own-enumerable-property-symbols@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/get-own-enumerable-property-symbols/-/get-own-enumerable-property-symbols-3.0.2.tgz#b5fde77f22cbe35f390b4e089922c50bce6ef664"
@@ -10798,6 +10873,13 @@ has-property-descriptors@^1.0.0:
   integrity sha512-62DVLZGoiEBDHQyqG4w9xCuZ7eJEwNmJRWw2VY84Oedb7WFcA27fiEVe8oUQx9hAUJ4ekurquucTGwsyO1XGdQ==
   dependencies:
     get-intrinsic "^1.1.1"
+
+has-property-descriptors@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/has-property-descriptors/-/has-property-descriptors-1.0.1.tgz#52ba30b6c5ec87fd89fa574bc1c39125c6f65340"
+  integrity sha512-VsX8eaIewvas0xnvinAe9bw4WfIeODpGYikiWYLH+dma0Jw6KHYqWiWfhQlgOVK8D6PvjubK5Uc4P0iIhIcNVg==
+  dependencies:
+    get-intrinsic "^1.2.2"
 
 has-proto@^1.0.1:
   version "1.0.1"
@@ -11274,6 +11356,27 @@ inquirer@9.2.11:
   integrity sha512-B2LafrnnhbRzCWfAdOXisUzL89Kg8cVJlYmhqoi3flSiV/TveO+nsXwgKr9h9PIo+J1hz7nBSk6gegRIMBBf7g==
   dependencies:
     "@ljharb/through" "^2.3.9"
+    ansi-escapes "^4.3.2"
+    chalk "^5.3.0"
+    cli-cursor "^3.1.0"
+    cli-width "^4.1.0"
+    external-editor "^3.1.0"
+    figures "^5.0.0"
+    lodash "^4.17.21"
+    mute-stream "1.0.0"
+    ora "^5.4.1"
+    run-async "^3.0.0"
+    rxjs "^7.8.1"
+    string-width "^4.2.3"
+    strip-ansi "^6.0.1"
+    wrap-ansi "^6.2.0"
+
+inquirer@9.2.12:
+  version "9.2.12"
+  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-9.2.12.tgz#0348e9311765b7c93fce143bb1c0ef1ae879b1d7"
+  integrity sha512-mg3Fh9g2zfuVWJn6lhST0O7x4n03k7G8Tx5nvikJkbq8/CK47WDVm+UznF0G6s5Zi0KcyUisr6DU8T67N5U+1Q==
+  dependencies:
+    "@ljharb/through" "^2.3.11"
     ansi-escapes "^4.3.2"
     chalk "^5.3.0"
     cli-cursor "^3.1.0"
@@ -15066,10 +15169,10 @@ p-waterfall@2.1.1:
   dependencies:
     p-reduce "^2.0.0"
 
-pacote@17.0.4:
-  version "17.0.4"
-  resolved "https://registry.yarnpkg.com/pacote/-/pacote-17.0.4.tgz#4bac6c0745967bde96985ec12fbbfc8dea7140e8"
-  integrity sha512-eGdLHrV/g5b5MtD5cTPyss+JxOlaOloSMG3UwPMAvL8ywaLJ6beONPF40K4KKl/UI6q5hTKCJq5rCu8tkF+7Dg==
+pacote@17.0.5:
+  version "17.0.5"
+  resolved "https://registry.yarnpkg.com/pacote/-/pacote-17.0.5.tgz#e9854edee7a073635cdd36b0c07cd4f2ab1757b6"
+  integrity sha512-TAE0m20zSDMnchPja9vtQjri19X3pZIyRpm2TJVeI+yU42leJBBDTRYhOcWFsPhaMxf+3iwQkFiKz16G9AEeeA==
   dependencies:
     "@npmcli/git" "^5.0.0"
     "@npmcli/installed-package-contents" "^2.0.1"
@@ -16636,21 +16739,12 @@ resolve.exports@^2.0.0:
   resolved "https://registry.yarnpkg.com/resolve.exports/-/resolve.exports-2.0.2.tgz#f8c934b8e6a13f539e38b7098e2e36134f01e800"
   integrity sha512-X2UW6Nw3n/aMgDVy+0rSqgHlv39WZAlZrXCdnbyEiKm17DSqHX4MmQMaST3FbeWR5FTuRcUwYAziZajji0Y7mg==
 
-resolve@1.22.8, resolve@^1.22.3:
+resolve@1.22.8, resolve@^1.1.7, resolve@^1.10.0, resolve@^1.12.0, resolve@^1.14.2, resolve@^1.20.0, resolve@^1.22.0, resolve@^1.22.1, resolve@^1.22.3:
   version "1.22.8"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.22.8.tgz#b6c87a9f2aa06dfab52e3d70ac8cde321fa5a48d"
   integrity sha512-oKWePCxqpd6FlLvGV1VU0x7bkPmmCNolxzjMf4NczoDnQcIWrAF+cPtZn5i6n+RfD2d9i0tzpKnG6Yk168yIyw==
   dependencies:
     is-core-module "^2.13.0"
-    path-parse "^1.0.7"
-    supports-preserve-symlinks-flag "^1.0.0"
-
-resolve@^1.1.7, resolve@^1.10.0, resolve@^1.12.0, resolve@^1.14.2, resolve@^1.20.0, resolve@^1.22.0, resolve@^1.22.1:
-  version "1.22.2"
-  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.22.2.tgz#0ed0943d4e301867955766c9f3e1ae6d01c6845f"
-  integrity sha512-Sb+mjNHOULsBv818T40qSPeRiuWLyaGMa5ewydRLFimneixmVy2zdivRl+AF6jaYPC8ERxGDmFSiqui6SfPd+g==
-  dependencies:
-    is-core-module "^2.11.0"
     path-parse "^1.0.7"
     supports-preserve-symlinks-flag "^1.0.0"
 
@@ -17083,6 +17177,17 @@ set-blocking@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
   integrity sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==
+
+set-function-length@^1.1.1:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/set-function-length/-/set-function-length-1.2.0.tgz#2f81dc6c16c7059bda5ab7c82c11f03a515ed8e1"
+  integrity sha512-4DBHDoyHlM1IRPGYcoxexgh67y4ueR53FKV1yyxwFMY7aCqcN/38M1+SwZ/qJQ8iLv7+ck385ot4CcisOAPT9w==
+  dependencies:
+    define-data-property "^1.1.1"
+    function-bind "^1.1.2"
+    get-intrinsic "^1.2.2"
+    gopd "^1.0.1"
+    has-property-descriptors "^1.0.1"
 
 setprototypeof@1.1.0:
   version "1.1.0"
