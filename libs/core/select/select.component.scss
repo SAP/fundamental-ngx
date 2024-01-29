@@ -1,6 +1,17 @@
 @use '@angular/cdk';
 @import 'fundamental-styles/dist/select';
 
+@mixin fd-compact() {
+    @at-root {
+        [class*='--compact'] &:not([class*='--cozy']):not([class*='--condensed']),
+        .is-compact &:not(.is-cozy):not(.is-condensed),
+        &[class*='--compact'],
+        &.is-compact {
+            @content;
+        }
+    }
+}
+
 $block: fd-select;
 
 @include cdk.a11y-visually-hidden();
@@ -35,6 +46,16 @@ $block: fd-select;
                 font-weight: normal;
                 color: var(--sapField_PlaceholderTextColor);
             }
+        }
+    }
+}
+
+.fd-popover__body {
+    .#{$block}__form-message {
+        // Compensate form field margin.
+        margin-top: -0.25rem;
+        @include fd-compact() {
+            margin-top: -0.1875rem;
         }
     }
 }
