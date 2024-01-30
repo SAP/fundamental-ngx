@@ -13,6 +13,7 @@ import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { ClosableIconTabBar } from '../closable-icon-tab-bar.class';
 import { IconTabBarBase } from '../icon-tab-bar-base.class';
 import { TextTypePopoverComponent } from '../popovers/text-type-popover/text-type-popover.component';
+import { IconTabBarTextTypeTabItemComponent } from '../text-type-tab-item/icon-tab-bar-text-type-tab-item.component';
 
 /** @hidden */
 interface DataForReordering {
@@ -44,7 +45,8 @@ type TabItem = ElementRef<HTMLElement> | TextTypePopoverComponent;
         TextTypePopoverComponent,
         ButtonComponent,
         IconComponent,
-        AsyncOrSyncPipe
+        AsyncOrSyncPipe,
+        IconTabBarTextTypeTabItemComponent
     ]
 })
 export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
@@ -65,6 +67,10 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
      */
     @Input()
     layoutMode: 'row' | 'column';
+
+    /** Whether to render icon tab item as multi-click variant. */
+    @Input()
+    multiClick = false;
 
     /**
      * @description Emits when user drops the tab.

@@ -34,6 +34,13 @@ $block: fd-icon-tab-bar;
             padding-right: 0.25rem;
         }
     }
+
+    &__popover {
+        height: 100%;
+        .fd-popover__control {
+            height: 100%;
+        }
+    }
 }
 
 .cdk-drag-placeholder {
