@@ -18,5 +18,5 @@ outputs:
         description: Whether the main branch needs to be synced with the release branch
 
 runs:
-    using: node16
+    using: node20
     main: ./index.js
