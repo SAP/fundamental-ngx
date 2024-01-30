@@ -151,11 +151,8 @@ jobs:
             - name: Setup Node.js and Cache
               uses: ./.github/actions/nodejs
 
-            - name: log commits
-              run: git --no-pager log --oneline -n 5
-
             - name: Run build prod
-              run: npx nx run docs:compile:production
+              run: npx nx run docs:compile:production --skip-nx-cache
 
             - name: Publish to gh-pages
               uses: JamesIves/github-pages-deploy-action@v4
