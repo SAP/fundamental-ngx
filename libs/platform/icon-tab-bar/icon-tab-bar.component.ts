@@ -114,6 +114,10 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
     @Input()
     showTotalTab = true;
 
+    /** Whether to render icon tab item as multi-click variant. */
+    @Input()
+    multiClick = false;
+
     /**
      * @description Layout type for tab (supported by text type only)
      */

@@ -1,4 +1,4 @@
-import { FdLanguage } from '../models/lang';
+import { FdLanguage } from '../models';
 import { loadJson } from './load-json';
 
 /**

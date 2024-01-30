@@ -3,6 +3,84 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.48.3](https://github.com/SAP/fundamental-ngx/compare/v0.48.3-rc.0...v0.48.3) (2024-01-30)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.48.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.48.2...v0.48.3-rc.0) (2024-01-30)
+
+
+### Bug Fixes
+
+* **core:** reactive tabindex property ([#11333](https://github.com/SAP/fundamental-ngx/issues/11333)) ([fbc9939](https://github.com/SAP/fundamental-ngx/commit/fbc993961fc69a9e60a7d81d6ecd3c04fd3a2a19))
+
+
+
+
+
+## [0.48.2](https://github.com/SAP/fundamental-ngx/compare/v0.48.2-rc.0...v0.48.2) (2024-01-30)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.48.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.48.1...v0.48.2-rc.0) (2024-01-30)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.48.1](https://github.com/SAP/fundamental-ngx/compare/v0.48.1-rc.4...v0.48.1) (2024-01-30)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.48.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.48.1-rc.3...v0.48.1-rc.4) (2024-01-30)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.48.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.48.1-rc.2...v0.48.1-rc.3) (2024-01-30)
+
+
+### Features
+
+* **platform:** icon tab bar multi-click tab ([#11331](https://github.com/SAP/fundamental-ngx/issues/11331)) ([571018d](https://github.com/SAP/fundamental-ngx/commit/571018d941d09744ed39ac5a49f3e8ab1121edd4))
+
+
+
+
+
+## [0.48.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.48.1-rc.1...v0.48.1-rc.2) (2024-01-30)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.48.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.48.1-rc.0...v0.48.1-rc.1) (2024-01-30)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 ## [0.48.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.48.0...v0.48.1-rc.0) (2024-01-29)
 
 
