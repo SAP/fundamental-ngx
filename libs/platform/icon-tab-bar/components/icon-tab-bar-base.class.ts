@@ -30,6 +30,7 @@ import { IconTabBarItem } from '../interfaces/icon-tab-bar-item.interface';
 import { TabColorAssociations } from '../interfaces/tab-color-associations.interface';
 import { TabDestinyMode } from '../types';
 import { IconTabBarPopoverBase } from './popovers/icon-tab-bar-popover-base.class';
+import { TextTypePopoverComponent } from './popovers/text-type-popover/text-type-popover.component';
 
 @Directive()
 export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit, OnDestroy {
@@ -164,12 +165,21 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     }
 
     /** @hidden */
-    _keyDownHandler(event: KeyboardEvent, tab: IconTabBarItem | undefined, currentIndex: number): void {
+    _keyDownHandler(
+        event: KeyboardEvent,
+        tab: IconTabBarItem | undefined,
+        currentIndex: number,
+        popover?: TextTypePopoverComponent
+    ): void {
         if (tab && KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             event.preventDefault();
             this._selectItem(tab);
         } else if (KeyUtil.isKeyCode(event, [RIGHT_ARROW, DOWN_ARROW])) {
             event.preventDefault();
+            if (KeyUtil.isKeyCode(event, DOWN_ARROW) && tab?.subItems?.length) {
+                popover?._openPopover();
+                return;
+            }
             this.isRtl ? this._focusPreviousItem(currentIndex) : this._focusNextItem(currentIndex);
         } else if (KeyUtil.isKeyCode(event, [LEFT_ARROW, UP_ARROW])) {
             event.preventDefault();
