@@ -1,5 +1,5 @@
 import { coerceNumberProperty } from '@angular/cdk/coercion';
-import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, inject } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, computed, inject, signal } from '@angular/core';
 import { KeyboardSupportItemInterface } from '@fundamental-ngx/cdk/utils';
 import { Subject } from 'rxjs';
 
@@ -7,15 +7,11 @@ import { Subject } from 'rxjs';
 export abstract class ListFocusItem<T = any> implements KeyboardSupportItemInterface {
     /** tab index attribute */
     @Input()
-    @HostBinding('attr.tabindex')
     set tabindex(value: number) {
-        this._tabIndex = coerceNumberProperty(value, -1);
+        this._tabIndex$.set(coerceNumberProperty(value, -1));
     }
     get tabindex(): number {
-        if (this._isFirstItem && isNaN(this._tabIndex as number)) {
-            return 0;
-        }
-        return this._tabIndex ?? -1;
+        return this._normalizedTabIndex$();
     }
 
     /**
@@ -38,10 +34,18 @@ export abstract class ListFocusItem<T = any> implements KeyboardSupportItemInter
     readonly _clicked$ = new Subject<MouseEvent>();
 
     /** @hidden */
-    protected _isFirstItem = false;
+    protected _isFirstItem$ = signal(false);
 
     /** @hidden */
-    protected _tabIndex: number | undefined;
+    protected _tabIndex$ = signal<number | undefined>(undefined);
+
+    /** @hidden */
+    protected _normalizedTabIndex$ = computed(() => {
+        if (this._isFirstItem$() && isNaN(this._tabIndex$() as number)) {
+            return 0;
+        }
+        return this._tabIndex$() ?? -1;
+    });
 
     /** @hidden */
     @HostListener('focusin', ['$event'])
@@ -63,6 +67,6 @@ export abstract class ListFocusItem<T = any> implements KeyboardSupportItemInter
 
     /** @hidden */
     setIsFirst(value: boolean): void {
-        this._isFirstItem = value;
+        this._isFirstItem$.set(value);
     }
 }
