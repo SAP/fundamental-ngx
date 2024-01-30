@@ -322,7 +322,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     }
 
     /** @hidden */
-    _itemFocusedEventAnnouncer(position: FocusableItemPosition): string {
+    _itemFocusedEventAnnouncer = (position: FocusableItemPosition): string => {
         let retVal = `Column ${position.colIndex + 1} of ${position.totalCols}, `;
         let column;
         if (this._fdpTableService?.visibleColumns$) {
@@ -336,7 +336,6 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
             retVal = retVal + 'fixed, ';
         }
         retVal = retVal + `row: ${position.rowIndex + 1} of ${position.totalRows}`;
-        console.log(retVal);
         return retVal;
-    }
+    };
 }
