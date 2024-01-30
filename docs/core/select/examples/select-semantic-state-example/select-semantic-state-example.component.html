@@ -39,3 +39,22 @@
     </fd-select>
     <fd-form-message [static]="true" type="information">Information message</fd-form-message>
 </div>
+
+<h4>Form message with event triggers:</h4>
+<div fd-form-item>
+    <fd-form-input-message-group style="width: 100%" [triggers]="['mouseover', 'mouseleave']">
+        <fd-select
+            style="width: 100%"
+            placeholder="Select value"
+            stateMessage="Success message"
+            [(value)]="selectedValue1"
+            state="success"
+        >
+            @for (option of options; track option) {
+                <li fd-option [value]="option">{{ option }}</li>
+            }
+        </fd-select>
+        <!-- .fd-select__form-message class is necessary for non-static form message that is placed inside a popover. -->
+        <fd-form-message class="fd-select__form-message" type="success">Success message</fd-form-message>
+    </fd-form-input-message-group>
+</div>
