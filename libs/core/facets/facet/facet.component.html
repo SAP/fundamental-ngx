@@ -2,9 +2,16 @@
     <ng-template [ngTemplateOutlet]="customContentTemplate"></ng-template>
 } @else {
     @if (facetTitle) {
-        <span style="display: block" fd-title [headerSize]="5" class="fd-margin-bottom--sm" [id]="titleId">{{
-            facetTitle
-        }}</span>
+        <span
+            [attr.role]="!!headingLevel ? 'heading' : null"
+            [attr.aria-level]="headingLevel"
+            style="display: block"
+            fd-title
+            [headerSize]="5"
+            class="fd-margin-bottom--sm"
+            [id]="titleId"
+            >{{ facetTitle }}</span
+        >
     }
     @if (type === 'form') {
         <ng-template [ngTemplateOutlet]="contentTemplate"></ng-template>

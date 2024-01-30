@@ -9,6 +9,7 @@ import {
     Renderer2,
     ViewEncapsulation
 } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FACET_CLASS_NAME, FacetType } from '../constants';
@@ -44,6 +45,12 @@ export class FacetComponent implements AfterViewInit {
     /** An optional subtitle to display in the rating-indicator facet */
     @Input()
     subtitle: string;
+
+    /**
+     * Heading level (i.e. <h1>, <h2>, etc.) of the facet title.
+     */
+    @Input()
+    headingLevel: Nullable<1 | 2 | 3 | 4 | 5 | 6>;
 
     /**
      * id for the facet
