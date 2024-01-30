@@ -1,28 +1,4 @@
-import { NestedKeyOf, Nullable, ObjectPathType } from '@fundamental-ngx/cdk/utils';
-
-export type FdLanguageKeyArgs = Nullable<Record<string, string | number | boolean>>;
-
-export type FdLanguageKeyFunction<T> = T extends undefined ? () => string : (args: T) => string;
-
-export type FdLanguageKey<T = undefined> = string | FdLanguageKeyFunction<T>;
-
-type _FdLanguageKeyIdentifierUnion = `${NestedKeyOf<FdLanguage>}`;
-
-export type FdLanguageKeyIdentifier = {
-    [Key in _FdLanguageKeyIdentifierUnion]: ObjectPathType<FdLanguage, Key> extends FdLanguageKey<any> | undefined
-        ? Key
-        : never;
-}[_FdLanguageKeyIdentifierUnion];
-
-export type FdLanguageKeyCtx<T extends FdLanguageKeyIdentifier> = ObjectPathType<FdLanguage, T> extends FdLanguageKey<
-    infer Args
->
-    ? Args
-    : undefined;
-
-export type FlatFdLanguage = {
-    [Key in FdLanguageKeyIdentifier]: FdLanguageKey<FdLanguageKeyCtx<Key>>;
-};
+import { FdLanguageKey } from './fd-language-key';
 
 /**
  * Representation of the dictionary per UI component

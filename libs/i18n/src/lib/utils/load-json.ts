@@ -1,4 +1,4 @@
-import { FdLanguage, FdLanguageKeyIdentifier, FlatFdLanguage } from '../models/lang';
+import { FdLanguage, FdLanguageKeyIdentifier, FlatFdLanguage } from '../models';
 
 interface RecursiveRecord<V = string> {
     [key: string]: V | RecursiveRecord<V>;
