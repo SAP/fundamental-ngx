@@ -64,6 +64,7 @@
                 <div class="fd-icon-tab-bar__button-container">
                     <button
                         fd-button
+                        tabindex="-1"
                         class="fd-icon-tab-bar__button"
                         fdType="transparent"
                         (click)="_closeTab(item.uId)"
@@ -83,6 +84,7 @@
                 (selectedExtraItem)="_selectExtraItem($event)"
                 (focusFirstVisibleItem)="_focusItem(0)"
                 (focusLastVisibleItem)="_focusItem(_lastVisibleTabIndex)"
+                (closeTab)="_closeTab($event, true)"
             ></fdp-icon-tab-bar-popover>
         </li>
     }
