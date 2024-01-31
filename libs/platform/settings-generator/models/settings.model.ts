@@ -1,6 +1,10 @@
 import { TemplateRef } from '@angular/core';
 import { FdkAsyncProperty } from '@fundamental-ngx/cdk/utils';
-import { AnyDynamicFormFieldItem, BaseDynamicFormFieldItem, DynamicFormItem } from '@fundamental-ngx/platform/form';
+import type {
+    AnyDynamicFormFieldItem,
+    BaseDynamicFormFieldItem,
+    DynamicFormItem
+} from '@fundamental-ngx/platform/form';
 import { ListAvatarConfig, ListIconConfig } from '@fundamental-ngx/platform/list';
 import { Observable } from 'rxjs';
 
