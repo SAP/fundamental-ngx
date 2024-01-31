@@ -11,3 +11,5 @@ export * from './interfaces/icon-tab-bar-item.interface';
 export * from './interfaces/tab-color-associations.interface';
 export * from './interfaces/tab-config.interface';
 export * from './types';
+
+export * from './components/text-type-tab-item/icon-tab-bar-text-type-tab-item.component';

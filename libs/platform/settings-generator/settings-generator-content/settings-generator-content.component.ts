@@ -7,6 +7,7 @@ import {
     Input,
     Output,
     QueryList,
+    Signal,
     ViewChildren,
     ViewEncapsulation,
     computed,
@@ -81,13 +82,13 @@ export class SettingsGeneratorContentComponent {
     _contentLayout$ = computed<'form' | 'tabs'>(() => (this.isGroupedSettings(this._settings$()) ? 'tabs' : 'form'));
 
     /** @hidden */
-    _groups$ = computed<(SettingsTemplateTab | SettingsFormTab)[]>(() => {
+    _groups$: Signal<(SettingsTemplateTab | SettingsFormTab)[]> = computed(() => {
         const settings = this._settings$();
         return this.isGroupedSettings(settings) ? settings.groups : [];
     });
 
     /** @hidden */
-    _tabs$ = computed<TabConfig[]>(() =>
+    _tabs$: Signal<TabConfig[]> = computed(() =>
         this._groups$().map<TabConfig>((group, index) => ({
             label: group.title,
             active: index === this._activeTab$()

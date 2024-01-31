@@ -3,6 +3,124 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.48.4](https://github.com/SAP/fundamental-ngx/compare/v0.48.4-rc.1...v0.48.4) (2024-01-31)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.48.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.48.4-rc.0...v0.48.4-rc.1) (2024-01-31)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.48.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.48.3...v0.48.4-rc.0) (2024-01-30)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.48.3](https://github.com/SAP/fundamental-ngx/compare/v0.48.3-rc.0...v0.48.3) (2024-01-30)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.48.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.48.2...v0.48.3-rc.0) (2024-01-30)
+
+
+### Bug Fixes
+
+* **core:** reactive tabindex property ([#11333](https://github.com/SAP/fundamental-ngx/issues/11333)) ([fbc9939](https://github.com/SAP/fundamental-ngx/commit/fbc993961fc69a9e60a7d81d6ecd3c04fd3a2a19))
+
+
+
+
+
+## [0.48.2](https://github.com/SAP/fundamental-ngx/compare/v0.48.2-rc.0...v0.48.2) (2024-01-30)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.48.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.48.1...v0.48.2-rc.0) (2024-01-30)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.48.1](https://github.com/SAP/fundamental-ngx/compare/v0.48.1-rc.4...v0.48.1) (2024-01-30)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.48.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.48.1-rc.3...v0.48.1-rc.4) (2024-01-30)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.48.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.48.1-rc.2...v0.48.1-rc.3) (2024-01-30)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.48.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.48.1-rc.1...v0.48.1-rc.2) (2024-01-30)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.48.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.48.1-rc.0...v0.48.1-rc.1) (2024-01-30)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.48.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.48.0...v0.48.1-rc.0) (2024-01-29)
+
+
+### Features
+
+* **docs:** core select form message with triggers ([#11326](https://github.com/SAP/fundamental-ngx/issues/11326)) ([b4623ea](https://github.com/SAP/fundamental-ngx/commit/b4623ea9dd4b75a064985adc7ea7842becd7f460))
+
+
+
+
+
+# [0.48.0](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.51...v0.48.0) (2024-01-25)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 # [0.48.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.48.0-rc.50...v0.48.0-rc.51) (2024-01-25)
 
 **Note:** Version bump only for package @fundamental-ngx/core

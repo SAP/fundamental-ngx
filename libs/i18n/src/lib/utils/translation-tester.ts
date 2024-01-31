@@ -1,5 +1,5 @@
 import { MessageFormatElement, TYPE, parse } from '@formatjs/icu-messageformat-parser';
-import { FdLanguage } from '../models/lang';
+import { FdLanguage } from '../models';
 import { flattenTranslations } from './flatten-translations';
 import { resolveTranslationSync } from './resolve-helpers/resolve-translations-sync';
 

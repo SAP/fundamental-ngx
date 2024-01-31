@@ -43,7 +43,8 @@ let listItemUniqueId = 0;
     selector: '[fdListItem] ,[fd-list-item]',
     templateUrl: './list-item.component.html',
     host: {
-        class: 'fd-list__item'
+        class: 'fd-list__item',
+        '[attr.tabindex]': '_normalizedTabIndex$()'
     },
     providers: [
         {
