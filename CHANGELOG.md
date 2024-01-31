@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.48.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.48.4-rc.0...v0.48.4-rc.1) (2024-01-31)
+
+
+### Bug Fixes
+
+* **platform:** signal type import fix ([#11340](https://github.com/SAP/fundamental-ngx/issues/11340)) ([209e1d7](https://github.com/SAP/fundamental-ngx/commit/209e1d7c3903ca2e0a7184544157a2c93b7d3e64))
+
+
+
+
+
 ## [0.48.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.48.3...v0.48.4-rc.0) (2024-01-30)
 
 **Note:** Version bump only for package fundamental-ngx
