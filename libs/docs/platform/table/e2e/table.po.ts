@@ -62,7 +62,7 @@ export class TablePo extends PlatformBaseComponentPo {
     tableCellStatus = ' [headers*="__status"]:not([headers*="__statusColor"])';
     dialogCompactInput = 'fd-dialog-body .fd-input';
     dialogItem = '.fd-list__item.ng-star-inserted';
-    dialogItemText = '.fd-select-item--active  .fd-list__title';
+    dialogItemText = '.fd-select-item--selected  .fd-list__title';
     dialogMoveToBottom = '[title="Move to Bottom"]';
     footerButtonOk = 'fd-button-bar button';
     columnHeader = '[role="columnheader"] fdp-table-header-cell-content > div';
