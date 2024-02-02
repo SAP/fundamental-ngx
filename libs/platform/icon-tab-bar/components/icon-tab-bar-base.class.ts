@@ -134,6 +134,13 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         if (changes.isRtl && !changes.isRtl.firstChange) {
             this._triggerRecalculationVisibleItems();
         }
+
+        if (changes.selectedUid && !changes.selectedUid.firstChange) {
+            const isExtraTab = this._extraTabs$().find((tab) => tab.uId === this.selectedUid);
+            if (isExtraTab) {
+                this._selectExtraItem(isExtraTab);
+            }
+        }
     }
 
     /** @hidden */
