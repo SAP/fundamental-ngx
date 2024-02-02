@@ -91,7 +91,7 @@
                     [inputText]="_searchTermCtrl.value || ''"
                     [options]="dropdownValues"
                     [enable]="!includes && autoComplete && !mobile"
-                    [placeholder]="placeholder"
+                    [attr.placeholder]="viewModel.selectedOptions.length ? null : placeholder"
                     [formControl]="_searchTermCtrl"
                     [attr.aria-required]="required"
                     [ariaLabel]="ariaLabel || ('coreMultiInput.multiInputAriaLabel' | fdTranslate)"

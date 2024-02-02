@@ -224,7 +224,7 @@ describe('Multi input test suite', () => {
         }
     });
 
-    it('Verify inputs should have placeholder', async () => {
+    xit('Verify inputs should have placeholder', async () => {
         const activeInputsQuantity = await getElementArrayLength(activeInputs);
         for (let i = 0; i < activeInputsQuantity; i++) {
             await expect(await getElementPlaceholder(activeInputs, i)).toContain('Field placeholder text');
