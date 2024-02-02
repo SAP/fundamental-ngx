@@ -4174,7 +4174,12 @@
   optionalDependencies:
     fsevents "~2.3.2"
 
-"@sap-theming/theming-base-content@11.9.0", "@sap-theming/theming-base-content@^11.9.0":
+"@sap-theming/theming-base-content@11.11.0":
+  version "11.11.0"
+  resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.11.0.tgz#6f58845dbe1730d603fb49f8a64b60ce93eee4e7"
+  integrity sha512-MYWsC5krTbb9I5FQtzDQpUKoakicYwkJtD8D8LwaCu/CQH0i1SD8hfy2U++/qhz/E7MxGAF2WZoKBF0lbapeNg==
+
+"@sap-theming/theming-base-content@^11.9.0":
   version "11.9.0"
   resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.9.0.tgz#bd46458c7ed58cfb23e4e0ec620c9780a5711a5b"
   integrity sha512-EOAYDx13SU9Wd18qgAR+FYTrywC5dk+IU3oM5NGAz0GxJLpiGQkSONYnAMJK/Gqk9QhU7uqWQsjrcnOcOl0fxA==
