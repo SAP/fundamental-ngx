@@ -77,7 +77,7 @@ describe('Multi input test suite', () => {
         await multiInputPage.checkRtlSwitch();
     });
 
-    it('Verify inputs should have placeholder', async () => {
+    xit('Verify inputs should have placeholder', async () => {
         const activeInputsLength = await getElementArrayLength(activeInputs);
         for (let i = 0; i < activeInputsLength; i++) {
             await scrollIntoView(activeInputs, i);

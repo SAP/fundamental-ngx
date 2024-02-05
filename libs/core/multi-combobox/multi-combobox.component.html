@@ -78,7 +78,7 @@
                     [disabled]="_cva.disabled"
                     [(ngModel)]="inputText"
                     (ngModelChange)="_searchTermChanged()"
-                    [placeholder]="_cva.placeholder"
+                    [attr.placeholder]="_selectedSuggestions.length ? null : _cva.placeholder"
                     (focus)="tokenizer._showAllTokens()"
                     (blur)="!mobile && _onBlur($event); tokenizer._hideTokens()"
                     [attr.aria-expanded]="isOpen"

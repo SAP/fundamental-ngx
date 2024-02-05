@@ -79,7 +79,7 @@
                     [disabled]="disabled"
                     [(ngModel)]="inputText"
                     (ngModelChange)="searchTermChanged()"
-                    [placeholder]="placeholder"
+                    [attr.placeholder]="_selectedSuggestions.length ? null : placeholder"
                     (focus)="onTouched(); tokenizer._showAllTokens()"
                     (blur)="!mobile && onBlur($event); tokenizer._hideTokens()"
                     [attr.aria-expanded]="isOpen"
