@@ -1,6 +1,6 @@
 <fd-popover placement="bottom-end" [focusAutoCapture]="true" [focusTrapped]="true" #popover>
     <fd-popover-control>
-        <button class="fd-icon-tab-bar__overflow">
+        <button class="fd-icon-tab-bar__overflow" tabindex="-1">
             <span class="fd-icon-tab-bar__overflow-text">{{ label }}</span>
             <fd-icon glyph="slim-arrow-down" role="presentation"></fd-icon>
         </button>
@@ -56,6 +56,7 @@
                         <div class="fd-icon-tab-bar__button-container">
                             <button
                                 fd-button
+                                tabindex="-1"
                                 class="fd-icon-tab-bar__button"
                                 fdType="transparent"
                                 (click)="closeTab.emit(item.uId)"

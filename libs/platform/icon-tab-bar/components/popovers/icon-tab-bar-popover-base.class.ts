@@ -1,4 +1,4 @@
-import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import { BACKSPACE, DELETE, DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     ChangeDetectorRef,
     Directive,
@@ -88,21 +88,6 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
 
     /**
      * @hidden
-     * @description Generate styles for subItems
-     */
-    protected _setStyles(items: IconTabBarItem[]): void {
-        items.forEach((item) => {
-            if (item.color) {
-                item.cssClasses = [`fd-icon-tab-bar__list-item--${item.color}`];
-            }
-            if (Array.isArray(item.subItems)) {
-                this._setStyles(item.subItems);
-            }
-        });
-    }
-
-    /**
-     * @hidden
      * @param focusLast whether to focus first or last item in the popover
      */
     _openPopover(focusLast = false): void {
@@ -120,8 +105,7 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
             this.popover.close();
             this.focusLastVisibleItem.emit();
         } else {
-            const ordered = this._getOrderedTabExtraUIElements();
-            ordered[currentIndex - 1].focus();
+            this._focusPopoverItem(currentIndex - 1);
         }
     }
 
@@ -131,21 +115,14 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
             this.popover.close();
             this.focusFirstVisibleItem.emit();
         } else {
-            const ordered = this._getOrderedTabExtraUIElements();
-            ordered[currentIndex + 1].focus();
+            this._focusPopoverItem(currentIndex + 1);
         }
     }
 
     /** @hidden */
-    private _getOrderedTabExtraUIElements(): HTMLElement[] {
-        return this._tabExtraUIElements
-            .toArray()
-            .map((e) => ({
-                flatIndex: parseInt(e.nativeElement.getAttribute('data-flatIndex')!, 10),
-                nativeElement: e.nativeElement
-            }))
-            .sort(({ flatIndex: aFlatIndex }, { flatIndex: bFlatIndex }) => aFlatIndex - bFlatIndex)
-            .map(({ nativeElement }) => nativeElement);
+    _focusPopoverItem(index: number): void {
+        const ordered = this._getOrderedTabExtraUIElements();
+        ordered[index]?.focus();
     }
 
     /**
@@ -159,7 +136,11 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
 
     /** @hidden */
     _keyDownHandler(event: KeyboardEvent, tab: IconTabBarItem, currentIndex: number): void {
-        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+        if (tab?.closable && KeyUtil.isKeyCode(event, [BACKSPACE, DELETE])) {
+            event.preventDefault();
+            this.closeTab.emit(tab.uId);
+            this._focusPopoverItem(currentIndex);
+        } else if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             event.preventDefault();
             this._selectItem(tab);
         } else if (KeyUtil.isKeyCode(event, [RIGHT_ARROW, DOWN_ARROW])) {
@@ -169,5 +150,32 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
             event.preventDefault();
             this.isRtl ? this._focusNextPopoverItem(currentIndex) : this._focusPreviousPopoverItem(currentIndex);
         }
+    }
+
+    /**
+     * @hidden
+     * @description Generate styles for subItems
+     */
+    protected _setStyles(items: IconTabBarItem[]): void {
+        items.forEach((item) => {
+            if (item.color) {
+                item.cssClasses = [`fd-icon-tab-bar__list-item--${item.color}`];
+            }
+            if (Array.isArray(item.subItems)) {
+                this._setStyles(item.subItems);
+            }
+        });
+    }
+
+    /** @hidden */
+    private _getOrderedTabExtraUIElements(): HTMLElement[] {
+        return this._tabExtraUIElements
+            .toArray()
+            .map((e) => ({
+                flatIndex: parseInt(e.nativeElement.getAttribute('data-flatIndex')!, 10),
+                nativeElement: e.nativeElement
+            }))
+            .sort(({ flatIndex: aFlatIndex }, { flatIndex: bFlatIndex }) => aFlatIndex - bFlatIndex)
+            .map(({ nativeElement }) => nativeElement);
     }
 }
