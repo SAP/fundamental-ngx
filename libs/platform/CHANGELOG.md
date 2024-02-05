@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.48.5-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.48.5-rc.2...v0.48.5-rc.3) (2024-02-05)
+
+
+### Features
+
+* **docs,core:** icon tab bar navigation improvements ([#11338](https://github.com/SAP/fundamental-ngx/issues/11338)) ([7cc9e5c](https://github.com/SAP/fundamental-ngx/commit/7cc9e5c80cbcd74b08179d513fcfc4ee15968666))
+
+
+
+
+
 ## [0.48.5-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.48.5-rc.1...v0.48.5-rc.2) (2024-02-02)
 
 
