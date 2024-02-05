@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.48.5-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.48.5-rc.3...v0.48.5-rc.4) (2024-02-05)
+
+
+### Bug Fixes
+
+* **core,platform:** multi input and combobox placeholder behavior ([#11347](https://github.com/SAP/fundamental-ngx/issues/11347)) ([e76e69c](https://github.com/SAP/fundamental-ngx/commit/e76e69c59cc5b7dcbecd4249b451d837181f3cd4))
+
+
+
+
+
 ## [0.48.5-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.48.5-rc.2...v0.48.5-rc.3) (2024-02-05)
 
 **Note:** Version bump only for package @fundamental-ngx/core
