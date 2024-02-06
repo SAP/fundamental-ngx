@@ -1,31 +1,39 @@
-<div class="fd-input-group" [class.is-disabled]="disabled" [class]="_controlStateClass" [class.is-focus]="focused">
+<fd-input-group
+    [disabled]="!!_cvaControl.cvaDirective?.disabled"
+    [(ngModel)]="value"
+    [state]="_cvaControl?.cvaDirective?.normalizedState$() || 'default'"
+    [stateMessage]="_cvaControl.cvaDirective?.stateMessage"
+>
     <!-- Before input addons area -->
     @for (addon of _beforeInputAddons; track addon) {
-        <fdp-input-group-addon-body>
+        <span fd-input-group-addon [button]="!!addon.button">
             <ng-template [ngTemplateOutlet]="addon.contentTemplateRef"></ng-template>
-        </fdp-input-group-addon-body>
+        </span>
     }
-    <!-- Input -->
     @if (_input) {
-        <fdp-input
-            [name]="name"
-            [id]="id"
-            [placeholder]="placeholder"
+        <input
+            [attr.name]="_cvaControl.cvaDirective?.name"
+            [attr.id]="_cvaControl.cvaDirective?.id"
+            [attr.placeholder]="_cvaControl.cvaDirective?.placeholder"
             [type]="_input.type"
-            [disabled]="disabled"
-            [value]="value"
-            [ariaLabel]="ariaLabel"
-            [ariaLabelledBy]="ariaLabelledBy"
-            [required]="required"
+            [attr.disabled]="!!_cvaControl.cvaDirective?.disabled"
+            [class.is-disabled]="!!_cvaControl.cvaDirective?.disabled"
+            [(ngModel)]="value"
+            [ariaLabel]="_cvaControl.cvaDirective?.ariaLabel"
+            [ariaLabelledBy]="_cvaControl.cvaDirective?.ariaLabelledBy"
+            [attr.required]="_cvaControl.cvaDirective?.required"
             (input)="_onChangeInputValue($any($event.target)?.value)"
-            (focusChange)="_onFocusChanged($event)"
+            (focus)="_cvaControl.cvaDirective?._onFocusChanged(true)"
+            (blur)="_cvaControl.cvaDirective?._onFocusChanged(false)"
             (keypress)="_onKeyPress($event)"
-        ></fdp-input>
+            fd-input-group-input
+            fd-form-control
+        />
     }
-    <!-- After input addons area -->
+    <!-- Before input addons area -->
     @for (addon of _afterInputAddons; track addon) {
-        <fdp-input-group-addon-body [hasButton]="!!addon.button">
+        <span fd-input-group-addon [button]="!!addon.button">
             <ng-template [ngTemplateOutlet]="addon.contentTemplateRef"></ng-template>
-        </fdp-input-group-addon-body>
+        </span>
     }
-</div>
+</fd-input-group>

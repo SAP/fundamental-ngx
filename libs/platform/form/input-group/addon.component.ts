@@ -11,8 +11,10 @@ import {
     forwardRef
 } from '@angular/core';
 
-import { ButtonComponent } from '@fundamental-ngx/platform/button';
+import { ButtonComponent, ButtonModel, FDP_BUTTON } from '@fundamental-ngx/platform/button';
 
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { BaseButton, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { CSS_CLASS_NAME, INPUT_GROUP_CHILD_TOKEN } from './constants';
 
 export const inputGroupAddonChildProvider: Provider = {
@@ -62,13 +64,22 @@ export class InputGroupAddonComponent implements AfterContentInit {
     contentTemplateRef: TemplateRef<any>;
 
     /** @hidden */
-    @ContentChild(ButtonComponent)
-    button: ButtonComponent;
+    @ContentChild(FDP_BUTTON)
+    platformButton: Nullable<ButtonModel>;
+
+    /** @hidden */
+    @ContentChild(FD_BUTTON_COMPONENT)
+    coreButton: Nullable<BaseButton>;
 
     /** @hidden */
     @ContentChild(ButtonComponent, { read: ElementRef })
     set buttonElementRef(buttonComponentElementRef: ElementRef<HTMLElement>) {
         this._setButtonElementClass(buttonComponentElementRef?.nativeElement);
+    }
+
+    /** @hidden */
+    get button(): Nullable<ButtonModel> {
+        return this.platformButton || this.coreButton;
     }
 
     /** @hidden */
@@ -84,12 +95,13 @@ export class InputGroupAddonComponent implements AfterContentInit {
 
     /** @hidden */
     private _setButtonControlOptions(): void {
-        const button = this.button;
+        const button = this.platformButton || this.coreButton;
 
         if (!button) {
             return;
         }
 
+        button.fdType = 'transparent';
         button.disabled = this._disabled;
 
         button.markForCheck();
