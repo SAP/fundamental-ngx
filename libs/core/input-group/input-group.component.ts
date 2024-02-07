@@ -7,14 +7,15 @@ import {
     DestroyRef,
     ElementRef,
     EventEmitter,
-    forwardRef,
+    HostListener,
     inject,
     Input,
+    OnInit,
     Output,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { debounceTime, filter, fromEvent, map, merge, Observable } from 'rxjs';
 
@@ -23,7 +24,7 @@ import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/
 
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { CvaControl, CvaDirective, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 import {
@@ -50,20 +51,20 @@ let addOnInputRandomId = 0;
     selector: 'fd-input-group',
     templateUrl: './input-group.component.html',
     styleUrl: './input-group.component.scss',
-    providers: [
+    hostDirectives: [
         {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => InputGroupComponent),
-            multi: true
-        },
+            directive: CvaDirective,
+            inputs: ['placeholder', 'disabled', 'readonly', 'state', 'name', 'stateMessage']
+        }
+    ],
+    providers: [
+        CvaControl,
+        { provide: FD_FORM_FIELD_CONTROL, useExisting: InputGroupComponent, multi: true },
         contentDensityObserverProviders(),
         registerFormItemControl(InputGroupComponent)
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    host: {
-        '(focusout)': '_focusOut($event)'
-    },
     standalone: true,
     imports: [
         NgTemplateOutlet,
@@ -76,7 +77,7 @@ let addOnInputRandomId = 0;
         IconComponent
     ]
 })
-export class InputGroupComponent implements ControlValueAccessor, AfterViewInit, FormItemControl {
+export class InputGroupComponent implements AfterViewInit, FormItemControl, OnInit {
     /**
      * The placement of the add-on.
      * Options include *before* and *after*
@@ -91,10 +92,6 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     /** Whether the input group is inline. */
     @Input()
     inline = false;
-
-    /** Placeholder for the input group. */
-    @Input()
-    placeholder: string;
 
     /** The text for the add-on. */
     @Input()
@@ -119,21 +116,6 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     /** Whether the icon add-on or the text add-on is a button. */
     @Input()
     button: boolean;
-
-    /** Whether the input group is disabled. */
-    @Input()
-    disabled: boolean;
-
-    /** Whether the input group is readonly. */
-    @Input()
-    readonly: boolean;
-
-    /**
-     *  The state of the form control - applies css classes.
-     *  Can be `success`, `error`, `warning`, `information` or blank for default.
-     */
-    @Input()
-    state: Nullable<FormStates>;
 
     /**
      * Whether the input group is a popover control
@@ -224,13 +206,12 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
 
     /** Value of the text input. */
     set inputText(value) {
-        this._inputTextValue = value;
-
-        this.onChange(value);
+        this._cva.setValue(value, true);
+        this._cva.onTouched();
     }
 
     get inputText(): string {
-        return this._inputTextValue;
+        return this._cva.value;
     }
     /** @hidden
      *  Calculate the correct ids for input aria-labelledby
@@ -247,23 +228,26 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
 
     /** @hidden */
     constructor(
-        private readonly _elementRef: ElementRef,
+        readonly _cvaControl: CvaControl<string | number>,
+        readonly elementRef: ElementRef,
         private readonly _changeDetectorRef: ChangeDetectorRef,
-        private _contentDensityObserver: ContentDensityObserver
+        private _contentDensityObserver: ContentDensityObserver,
+        private readonly _cva: CvaDirective
     ) {
         this._contentDensityObserver.subscribe();
     }
 
     /** @hidden */
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    onChange = (value: string): void => {};
+    @HostListener('focusout', ['$event'])
+    private _focusOut(event: FocusEvent): void {
+        if (!this.elementRef.nativeElement.contains(event.relatedTarget)) {
+            this._cva.onTouched();
+        }
+    }
 
     /** @hidden */
-    onTouched = (): void => {};
-
-    /** @hidden */
-    get elementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
+    ngOnInit(): void {
+        this._cvaControl.listenToChanges();
     }
 
     /** @hidden */
@@ -272,25 +256,8 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     }
 
     /** @hidden */
-    writeValue(value: string): void {
-        this._inputTextValue = value;
-
-        this._changeDetectorRef.markForCheck();
-    }
-
-    /** @hidden */
-    registerOnChange(fn): void {
-        this.onChange = fn;
-    }
-
-    /** @hidden */
-    registerOnTouched(fn): void {
-        this.onTouched = fn;
-    }
-
-    /** @hidden */
     setDisabledState(isDisabled: boolean): void {
-        this.disabled = isDisabled;
+        this._cva.disabled = isDisabled;
 
         this._changeDetectorRef.detectChanges();
     }
@@ -347,12 +314,5 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
         );
 
         this._changeDetectorRef.markForCheck();
-    }
-
-    /** @hidden */
-    private _focusOut(event: FocusEvent): void {
-        if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
-            this.onTouched();
-        }
     }
 }

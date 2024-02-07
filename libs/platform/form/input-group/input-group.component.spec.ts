@@ -1,14 +1,14 @@
 
-import { Component, ViewChild } from '@angular/core';
+import { Component, Type, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ControlValueAccessor, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { FormFieldComponent } from '../form-group/form-field/form-field.component';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { PlatformInputGroupModule } from './input-group.module';
 import { InputGroupComponent } from './input-group.component';
-import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { CVATestSteps, runValueAccessorTests } from 'ngx-cva-test-suite';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { CommonModule } from '@angular/common';
 
@@ -49,11 +49,12 @@ describe('InputGroup component', () => {
         }).compileComponents();
     }));
 
-    beforeEach(() => {
+    beforeEach(async () => {
         fixture = TestBed.createComponent(InputGroupHostComponent);
         host = fixture.componentInstance;
         fixture.detectChanges();
         inputGroupComponent = host.inputGroupComponent;
+        await fixture.whenRenderingDone();
     });
 
     it('Should render input group', () => {
@@ -62,10 +63,10 @@ describe('InputGroup component', () => {
 
     it('Should render children in the order that they are placed', () => {
         const hostElement = fixture.debugElement.nativeElement as HTMLElement;
-        const addons = hostElement.querySelectorAll('fdp-input-group-addon-body');
-        const input = hostElement.querySelector('fdp-input');
+        const addons = hostElement.querySelectorAll('.fd-input-group__addon');
+        const input = hostElement.querySelector('.fd-input-group__input');
 
-        expect(addons.length === 3).toBe(true);
+        expect(addons.length).toEqual(3);
 
         expect(addons[0].textContent?.includes('$')).toBeTruthy();
         expect(addons[1].textContent?.includes('0.00')).toBeTruthy();
@@ -159,7 +160,7 @@ describe('Input group within platform form', () => {
 
     it('should inherit placeholder from form field', async () => {
         await wait(fixture);
-        expect(host.inputGroupComponent.placeholder).toBe(host.formField.placeholder);
+        expect(host.inputGroupComponent._cvaControl?.cvaDirective?.placeholder).toBe(host.formField.placeholder);
     });
 
     it('should have initial value from formGroup', async () => {
@@ -197,7 +198,7 @@ describe('Input group within platform form', () => {
 
     it('should mark form field as touched when gets blurred', async () => {
         const formControl = host.form.get('qty') as FormControl;
-        const inputEl = fixture.debugElement.query(By.css('fdp-input input[id="qty"]'));
+        const inputEl = fixture.debugElement.query(By.css('.fd-input-group__input[id="qty"]'));
 
         expect(formControl.touched).not.toBe(true);
 
@@ -215,21 +216,38 @@ describe('Input group within platform form', () => {
     });
 });
 
-runValueAccessorTests<InputGroupComponent, InputGroupHostComponent>({
-    component: InputGroupComponent,
-    name: 'Input Group',
-    testModuleMetadata: {
-        imports: [CommonModule, PlatformButtonModule, PlatformInputGroupModule],
-        declarations: [InputGroupHostComponent]
-    },
-    hostTemplate: {
-        hostComponent: InputGroupHostComponent,
-        getTestingComponent: (fixture) => fixture.componentInstance.inputGroupComponent
-    },
-    supportsOnBlur: true,
-    nativeControlSelector: `input[id="${INPUT_GROUP_IDENTIFIER}"]`,
-    internalValueChangeSetter: (fixture, value) => {
-        fixture.componentInstance.inputGroupComponent.value = value;
-    },
-    getComponentValue: (fixture) => fixture.componentInstance.inputGroupComponent.value
+describe('InputGroup component CVA', () => {
+    runValueAccessorTests({
+        /** Component, that is being tested */
+        component: InputGroupComponent as unknown as Type<Required<ControlValueAccessor>>,
+        /**
+         * All the metadata required for this test to run.
+         * Under the hood calls TestBed.configureTestingModule with provided config.
+         */
+        testModuleMetadata: {
+            imports: [InputGroupComponent]
+        },
+        hostTemplate: {
+            hostComponent: InputGroupComponent,
+            getTestingComponent: (fixture) => fixture.componentInstance._cvaControl.cvaDirective!
+        },
+        /** Whether component is able to track "onBlur" events separately */
+        supportsOnBlur: false,
+        /**
+         * CSS selector for the element, that should dispatch `blur` event.
+         * Required and used only if `supportsOnBlur` is set to true.
+         */
+        nativeControlSelector: 'fd-input-group input',
+        /**
+         * Tests the correctness of an approach that is used to set value in the component,
+         * when the change is internal. It's optional and can be omitted by passing "null"
+         */
+        internalValueChangeSetter: (fixture, value) => {
+            fixture.componentInstance._cvaControl.cvaDirective?.setValue(value, true);
+        },
+        /** Function to get the value of a component in a runtime. */
+        getComponentValue: (fixture: ComponentFixture<InputGroupComponent>) => fixture.componentInstance.value,
+
+        excludeSteps: [CVATestSteps.ValueChangedInternally],
+    });
 });
