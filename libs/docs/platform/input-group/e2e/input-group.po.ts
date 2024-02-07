@@ -8,19 +8,17 @@ export class InputGroupPo extends PlatformBaseComponentPo {
     standartInputArr = 'fdp-input-group-standard-example input';
 
     leftAlignedTextInput = 'fdp-input-group-standard-example [name="leftTextAddon"] input';
-    leftAlignedTextInputTextAddon =
-        'fdp-input-group-standard-example [name="leftTextAddon"] fdp-input-group-addon-body';
+    leftAlignedTextInputTextAddon = 'fdp-input-group-standard-example [name="leftTextAddon"] .fd-input-group__addon';
 
     rightAlignedTextInput = 'fdp-input-group-standard-example [name="rightTextAddon"] input';
-    rightAlignedTextInputTextAddon =
-        'fdp-input-group-standard-example [name="rightTextAddon"] fdp-input-group-addon-body';
+    rightAlignedTextInputTextAddon = 'fdp-input-group-standard-example [name="rightTextAddon"] .fd-input-group__addon';
 
     leftAndRightAlignedTextInput = 'fdp-input-group-standard-example [name="leftAndRightAddonsExample"] input';
     rightLeftAlignedTextInputTextAddon =
-        'fdp-input-group-standard-example [name="leftAndRightAddonsExample"] fdp-input-group-addon-body';
+        'fdp-input-group-standard-example [name="leftAndRightAddonsExample"] .fd-input-group__addon';
 
     buttonInput = 'fdp-input-group-standard-example [name="donation"] input';
-    buttonInputLeftAndRightTextAddon = 'fdp-input-group-standard-example [name="donation"] fdp-input-group-addon-body';
+    buttonInputLeftAndRightTextAddon = 'fdp-input-group-standard-example [name="donation"] .fd-input-group__addon';
     buttonInputSubmitButton = 'fdp-input-group-standard-example [name="donation"] button';
 
     iconInput = 'fdp-input-group-standard-example [name="employee"] input';
@@ -28,14 +26,14 @@ export class InputGroupPo extends PlatformBaseComponentPo {
 
     compactGroupInput = 'fdp-input-group-compact-example fdp-input-group input';
     compactGroupButtonAddon = 'fdp-input-group-compact-example [name="example"] button';
-    compactGroupLeftTextAddon = 'fdp-input-group-compact-example [name="example"] fdp-input-group-addon-body';
+    compactGroupLeftTextAddon = 'fdp-input-group-compact-example [name="example"] .fd-input-group__addon';
 
     disabledInput = 'fdp-input-group-disabled-example fdp-input-group input';
     disabledInputButton = 'fdp-input-group-disabled-example fdp-input-group button';
 
     withFormInput = 'fdp-input-group-form-example input';
-    withFormInputTextAddon = 'fdp-input-group-form-example fdp-input-group-addon-body';
-    withFormInputButtonAddon = 'fdp-input-group-form-example fdp-input-group-addon-body button';
+    withFormInputTextAddon = 'fdp-input-group-form-example .fd-input-group__addon';
+    withFormInputButtonAddon = 'fdp-input-group-form-example .fd-input-group__addon button';
     withFormInputLabel = 'fdp-input-group-form-example label > span';
     withFormInputQuestionMark = 'fdp-input-group-form-example .sap-icon--hint';
     withFormInputAsterixMark = 'fdp-input-group-form-example label span';

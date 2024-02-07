@@ -1,6 +1,5 @@
 import {
     AfterContentInit,
-    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     ContentChild,
@@ -14,13 +13,16 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { CvaControl, CvaDirective, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { BaseInput } from '@fundamental-ngx/platform/shared';
 import { startWith } from 'rxjs/operators';
 import { InputComponent } from '../input/input.component';
 
 import { NgTemplateOutlet } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
+import { FormControlComponent } from '@fundamental-ngx/core/form';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { InputGroupAddonBodyComponent } from './addon-body.component';
 import { InputGroupAddonComponent } from './addon.component';
 import { CSS_CLASS_NAME, INPUT_GROUP_CHILD_TOKEN } from './constants';
@@ -45,21 +47,35 @@ import { InputGroupInputComponent } from './input.component';
     styleUrl: './input-group.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    hostDirectives: [
+        {
+            directive: CvaDirective,
+            inputs: ['placeholder', 'disabled', 'readonly', 'state', 'name', 'stateMessage']
+        }
+    ],
     providers: [
+        CvaControl,
         { provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => InputGroupComponent), multi: true },
         contentDensityObserverProviders()
     ],
     standalone: true,
-    imports: [InputGroupAddonBodyComponent, NgTemplateOutlet, InputComponent]
+    imports: [
+        InputGroupAddonBodyComponent,
+        NgTemplateOutlet,
+        InputComponent,
+        InputGroupModule,
+        FormControlComponent,
+        FormsModule
+    ]
 })
-export class InputGroupComponent extends BaseInput implements OnInit, AfterContentInit, AfterViewInit {
+export class InputGroupComponent implements OnInit, AfterContentInit {
     /** Input value */
     @Input()
     set value(value: any) {
-        super.setValue(value);
+        this._cvaControl.cvaDirective?.setValue(value);
     }
     get value(): any {
-        return super.getValue();
+        return this._cvaControl.cvaDirective?.value;
     }
 
     /** @hidden */
@@ -83,23 +99,21 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
     _afterInputAddons: InputGroupAddonComponent[] = [];
 
     /** @hidden */
-    get _controlStateClass(): string | null {
-        const state = this.state;
-        return state ? `is-${state}` : null;
-    }
-
-    /** @hidden */
     constructor(
+        readonly _cvaControl: CvaControl<string | number>,
         private _renderer: Renderer2,
         protected _hostElementRef: ElementRef<HTMLElement>,
         protected _inputGroupConfig: InputGroupConfig
     ) {
-        super();
+        warnOnce(
+            `[Deprecated] Platform Input Group Component is deprecated and will be removed in the next major version.
+             Please use Core implementation of Input Group Component instead.`
+        );
     }
 
     /** @hidden */
     ngOnInit(): void {
-        super.ngOnInit();
+        this._cvaControl.listenToChanges();
         /**
          * Assign predefined className to host element
          * to make css selector stronger
@@ -117,7 +131,7 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
      * override base functionality to catch new disabled state
      */
     setDisabledState(disabled: boolean): void {
-        super.setDisabledState(disabled);
+        this._cvaControl.cvaDirective?.setDisabledState(disabled);
         this._setAddonsOptions();
     }
 
@@ -191,7 +205,7 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         const before = this._beforeInputAddons || [];
         const after = this._afterInputAddons || [];
         [...before, ...after].forEach((addon) => {
-            addon.disabled = this.disabled;
+            addon.disabled = this._cvaControl.cvaDirective?.disabled === true;
         });
     }
 
