@@ -76,7 +76,8 @@
         [class.fd-shellbar__input-group-input]="inShellbar"
         fd-input-group-input
         [type]="type"
-        [attr.disabled]="_cvaControl.cvaDirective?.disabled"
+        [class.is-disabled]="!!_cvaControl.cvaDirective?.disabled"
+        [disabled]="!!_cvaControl.cvaDirective?.disabled"
         [readonly]="_cvaControl.cvaDirective?.readonly"
         [attr.placeholder]="_cvaControl.cvaDirective?.placeholder || null"
         [attr.aria-required]="required"
