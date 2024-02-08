@@ -19,8 +19,12 @@
             | async
             | selectionCellStyles : _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
     "
-    (keydown.enter)="_tableRowService.toggleAllSelectableRows(!checkedState)"
-    (keydown.space)="_tableRowService.toggleAllSelectableRows(!checkedState)"
+    (keydown.enter)="
+        selectionMode === SELECTION_MODE.MULTIPLE && _tableRowService.toggleAllSelectableRows(!checkedState)
+    "
+    (keydown.space)="
+        selectionMode === SELECTION_MODE.MULTIPLE && _tableRowService.toggleAllSelectableRows(!checkedState)
+    "
     (cellFocused)="_tableRowService.cellFocused($event)"
     [attr.aria-description]="
         !checkedState
