@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.0...v0.49.0-rc.1) (2024-02-08)
+
+
+### Bug Fixes
+
+* **core:** dialog dismiss reason ([#11367](https://github.com/SAP/fundamental-ngx/issues/11367)) ([9fd331e](https://github.com/SAP/fundamental-ngx/commit/9fd331e6050df2608e4e12ee77bf5d6bb69c6975))
+
+
+
+
+
 # [0.49.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.48.5-rc.4...v0.49.0-rc.0) (2024-02-07)
 
 
