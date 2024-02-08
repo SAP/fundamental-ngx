@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.2...v0.49.0-rc.3) (2024-02-08)
+
+
+### Features
+
+* **core,docs:** multi input combobox byline example ([#11381](https://github.com/SAP/fundamental-ngx/issues/11381)) ([6102ab0](https://github.com/SAP/fundamental-ngx/commit/6102ab036f782b15736700f831656600cc1320f7))
+
+
+
+
+
 # [0.49.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.1...v0.49.0-rc.2) (2024-02-08)
 
 **Note:** Version bump only for package @fundamental-ngx/core
