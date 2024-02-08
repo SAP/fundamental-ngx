@@ -161,6 +161,32 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     @Input()
     autoComplete = true;
 
+    /** Whether list item options should be rendered as byline. */
+    @Input()
+    byline = false;
+
+    /**
+     * Max width of multi combobox dropdown body.
+     * `none` will not limit width of the dropdown.
+     * `container` will limit width of the dropdown to the width of the multi-input itself.
+     * `number` will limit width of the dropdown by provided number in pixels.
+     */
+    @Input()
+    bodyMaxWidth: 'none' | 'container' | number = 'none';
+
+    /** @hidden */
+    get _popoverMaxWidth(): Nullable<number> {
+        if (this.bodyMaxWidth === 'none') {
+            return null;
+        }
+
+        if (typeof this.bodyMaxWidth === 'number') {
+            return this.bodyMaxWidth;
+        }
+
+        return this._elementRef.nativeElement.getBoundingClientRect().width;
+    }
+
     /**
      * TODO: Name of the entity for which DataProvider will be loaded. You can either pass list of
      * items or use this entityClass and internally we should be able to do lookup to some registry
@@ -386,6 +412,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
     /** @hidden */
     constructor(
+        private readonly _elementRef: ElementRef,
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _dynamicComponentService: DynamicComponentService

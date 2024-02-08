@@ -23,8 +23,9 @@ Selected: {{ selected | json }}
 <label fd-label for="dropdownExampleInput2">Strict Multi Input dropdown width</label>
 <fd-multi-input
     inputId="dropdownExampleInput2"
+    [byline]="true"
     [dropdownValues]="[
-        'SomeLongTextToShowThatWidthWillGrowWithTheContent',
+        'Some long option to show title wrapping',
         'Banana',
         'Pineapple',
         'Tomato',
@@ -33,11 +34,21 @@ Selected: {{ selected | json }}
         'Blueberry',
         'Orange'
     ]"
+    [itemTemplate]="template"
     placeholder="Search here..."
-    [bodyMaxWidth]="200"
-    [(ngModel)]="selected"
-    style="width: 200px"
-></fd-multi-input>
+    [bodyMaxWidth]="300"
+    [(ngModel)]="selected2"
+    style="width: 300px"
+>
+</fd-multi-input>
+
+<!-- Note that in this case you are responsible for highlighting. -->
+<ng-template #template let-item>
+    <div fd-list-content>
+        <span fd-list-title [wrap]="true">{{ item }}</span>
+        <span fd-list-byline>Some description</span>
+    </div>
+</ng-template>
 
 Selected: {{ selected | json }}
 
