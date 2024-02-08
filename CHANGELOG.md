@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.1...v0.49.0-rc.2) (2024-02-08)
+
+
+### Bug Fixes
+
+* **platform:** disallow select all for single select ([#11378](https://github.com/SAP/fundamental-ngx/issues/11378)) ([ac6b5c9](https://github.com/SAP/fundamental-ngx/commit/ac6b5c94bedd3f32d371f54a276a42554dc1eb1e))
+
+
+
+
+
 # [0.49.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.0...v0.49.0-rc.1) (2024-02-08)
 
 
