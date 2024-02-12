@@ -4,6 +4,7 @@
         placeholder="Search here"
         [displayFn]="displayFunc"
         [allowNewTokens]="true"
+        [valueFn]="valueFn"
         [newTokenParseFn]="parseFunc"
         [(ngModel)]="selected"
         (selectedChange)="multiSelectChange()"
