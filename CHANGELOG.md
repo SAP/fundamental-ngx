@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.4...v0.49.0-rc.5) (2024-02-12)
+
+
+### Bug Fixes
+
+* **docs:** vhd value comparator fix ([#11383](https://github.com/SAP/fundamental-ngx/issues/11383)) ([0d026fb](https://github.com/SAP/fundamental-ngx/commit/0d026fb43d5b2e8d530cda9af5e6b473daa61860))
+
+
+
+
+
 # [0.49.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.3...v0.49.0-rc.4) (2024-02-09)
 
 **Note:** Version bump only for package fundamental-ngx
