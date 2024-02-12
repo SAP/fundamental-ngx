@@ -6,6 +6,7 @@
         [allowNewTokens]="true"
         [newTokenParseFn]="parseFunc"
         [(ngModel)]="selected"
+        [valueFn]="valueFn"
         (selectedChange)="multiSelectChange()"
     >
     </fd-multi-input>
