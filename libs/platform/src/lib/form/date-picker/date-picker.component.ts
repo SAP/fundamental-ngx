@@ -320,7 +320,6 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     /** @hidden */
     writeValue(value: D | DateRange<D> | null): void {
         super.writeValue(value);
-        this._changeDetectorRef.detectChanges();
     }
 
     /**

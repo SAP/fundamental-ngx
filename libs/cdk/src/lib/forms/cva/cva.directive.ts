@@ -294,7 +294,7 @@ export class CvaDirective<T = any>
     writeValue(value: T): void {
         this.value = value;
         this.stateChanges.next('writeValue');
-        this._markForCheck();
+        this._detectChanges();
     }
 
     /**
@@ -369,7 +369,7 @@ export class CvaDirective<T = any>
             if (emitOnChange) {
                 this.onChange(value);
             }
-            this._markForCheck();
+            this._detectChanges();
         }
     }
 

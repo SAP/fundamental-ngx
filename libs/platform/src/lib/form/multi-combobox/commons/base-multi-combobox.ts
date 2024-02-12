@@ -457,6 +457,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         super.writeValue(this.selectedItems);
         this._setSelectedSuggestions();
         this._emitChangeEvent();
+        this._cd.detectChanges();
     }
 
     /** @hidden */

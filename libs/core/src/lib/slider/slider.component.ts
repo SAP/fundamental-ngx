@@ -603,7 +603,7 @@ export class SliderComponent
         if (emitEvent) {
             this.onChange(value);
         }
-        this._cdr.markForCheck();
+        this._cdr.detectChanges();
     }
 
     /** @hidden */

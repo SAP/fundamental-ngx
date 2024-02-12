@@ -551,7 +551,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     writeValue(selected: ValueType[]): void {
         this.selected = selected;
 
-        this._changeDetRef.markForCheck();
+        this._changeDetRef.detectChanges();
     }
 
     /** Method passed to list component */

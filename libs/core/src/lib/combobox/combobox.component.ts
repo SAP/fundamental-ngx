@@ -551,7 +551,7 @@ export class ComboboxComponent
     writeValue(value: any): void {
         this.inputTextValue = this.displayFn(value);
         this.setValue(value);
-        this._cdRef.markForCheck();
+        this._cdRef.detectChanges();
     }
 
     /** @hidden */

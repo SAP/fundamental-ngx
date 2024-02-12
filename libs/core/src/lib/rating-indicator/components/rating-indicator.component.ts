@@ -246,7 +246,7 @@ export class RatingIndicatorComponent
     /** @hidden */
     writeValue(value: number): void {
         this._value = this._parseValue(value);
-        this._changeDetectorRef.markForCheck();
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */

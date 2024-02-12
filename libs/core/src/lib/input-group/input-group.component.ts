@@ -288,7 +288,7 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     writeValue(value: any): void {
         this._inputTextValue = value;
 
-        this._changeDetectorRef.markForCheck();
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
