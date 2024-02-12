@@ -280,6 +280,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {
         super(_cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+        this._viewInited = false;
 
         if (!this._dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -296,6 +297,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      * @hidden
      */
     ngAfterViewInit(): void {
+        this._viewInited = true;
         // if used with platform forms, adjust width of datetimepicker to take 100% container space
         if (this.formField) {
             this._adjustPickerWidth();
@@ -305,7 +307,6 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     /** @hidden */
     writeValue(value: D): void {
         super.writeValue(value);
-        this._cd.markForCheck();
     }
 
     /**
@@ -347,6 +348,8 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
         this.datetimeChange.emit(datetime);
 
         this.onTouched();
+
+        this._cd.detectChanges();
     }
 
     /**

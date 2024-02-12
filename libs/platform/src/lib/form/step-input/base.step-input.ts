@@ -240,6 +240,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         super.writeValue(value);
         this._updateViewValue();
         this._resetPendingEnteredValue();
+        this._cd.detectChanges();
     }
 
     /** Increase value */

@@ -90,7 +90,7 @@
     </ng-container>
 </ng-template>
 <ng-template #elseBlock>
-    <ng-container *ngIf="!listItems.length && !_firstLoadingDone">
+    <ng-container *ngIf="!listItems?.length && !_firstLoadingDone">
         <ng-container *ngIf="!hasByLine; else bylineLoading">
             <li fd-list-item *fdkRepeat="3">
                 <fd-skeleton style="margin: auto 0" type="text" textLines="1" width="40%"></fd-skeleton>

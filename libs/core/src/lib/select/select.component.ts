@@ -552,7 +552,7 @@ export class SelectComponent<T = any>
             this._keyManagerService._keyManager.setActiveItem(-1);
         }
 
-        this._changeDetectorRef.markForCheck();
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
