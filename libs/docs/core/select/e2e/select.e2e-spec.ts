@@ -5,6 +5,7 @@ import {
     getElementArrayLength,
     getElementClass,
     getText,
+    pause,
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,
@@ -128,8 +129,10 @@ fdescribe('Select component:', () => {
         it('should be able to select the option', async () => {
             const textBefore = await getText(mobileModeExample + displayedText);
             await click(mobileModeExample + selectControl);
-            await waitForElDisplayed(option);
+            await pause(600);
+            await waitForElDisplayed(option, 0, 3000);
             await click(option);
+            await pause(600);
             const textAfter = await getText(mobileModeExample + displayedText);
             await expect(textBefore).not.toEqual(textAfter);
         });
