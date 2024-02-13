@@ -25,6 +25,7 @@ import {
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
     FDK_FOCUSABLE_LIST_DIRECTIVE,
     FocusableItemDirective,
+    FocusableItemPosition,
     KeyUtil,
     RtlService,
     uuidv4
@@ -319,4 +320,22 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     _columnTrackBy(index: number, column: TableColumn): string {
         return column.name;
     }
+
+    /** @hidden */
+    _itemFocusedEventAnnouncer = (position: FocusableItemPosition): string => {
+        let retVal = `Column ${position.colIndex + 1} of ${position.totalCols}, `;
+        let column;
+        if (this._fdpTableService?.visibleColumns$) {
+            let colIndex = position.colIndex;
+            if (this.selectionMode === 'single' || this.selectionMode === 'multiple') {
+                colIndex--;
+            }
+            column = this._fdpTableService.visibleColumns$.getValue()[colIndex];
+        }
+        if (column && (column._freezed || column._endFreezed)) {
+            retVal = retVal + 'fixed, ';
+        }
+        retVal = retVal + `row: ${position.rowIndex + 1} of ${position.totalRows}`;
+        return retVal;
+    };
 }
