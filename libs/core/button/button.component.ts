@@ -1,6 +1,5 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ElementRef,
     HostListener,
@@ -107,7 +106,6 @@ export class ButtonComponent
     /** @hidden */
     constructor(
         public readonly elementRef: ElementRef,
-        private _changeDetectorRef: ChangeDetectorRef,
         _contentDensityObserver: ContentDensityObserver
     ) {
         super();
@@ -157,10 +155,5 @@ export class ButtonComponent
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-    }
-
-    /** @hidden */
-    detectChanges(): void {
-        this._changeDetectorRef.detectChanges();
     }
 }

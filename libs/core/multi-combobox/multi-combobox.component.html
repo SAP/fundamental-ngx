@@ -8,6 +8,7 @@
             [isOpen]="isOpen"
             [triggers]="[]"
             [disabled]="_cva.disabled"
+            [maxWidth]="_popoverMaxWidth"
             [fillControlMode]="fillControlMode"
         >
             <fd-popover-control>
@@ -78,7 +79,7 @@
                     [disabled]="_cva.disabled"
                     [(ngModel)]="inputText"
                     (ngModelChange)="_searchTermChanged()"
-                    [placeholder]="_cva.placeholder"
+                    [attr.placeholder]="_selectedSuggestions.length ? null : _cva.placeholder"
                     (focus)="tokenizer._showAllTokens()"
                     (blur)="!mobile && _onBlur($event); tokenizer._hideTokens()"
                     [attr.aria-expanded]="isOpen"
@@ -143,8 +144,9 @@
 <ng-template #listTemplate>
     <ul
         fd-list
+        [byline]="byline"
+        [selection]="true"
         (focusEscapeList)="_handleListFocusEscape($event)"
-        [dropdownMode]="true"
         class="fd-multi-combobox__list fd-list--multi-input"
         [id]="_cva.id + '-result'"
         role="listbox"

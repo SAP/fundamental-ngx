@@ -1,0 +1,23 @@
+<div fd-form-item>
+    <label fd-form-label for="array-of-objects">Array of Objects:</label>
+    <fd-multi-combobox
+        [autoResize]="true"
+        name="array-of-objects"
+        inputId="array-of-objects"
+        placeholder="Type some text..."
+        [byline]="true"
+        [dataSource]="dataSource"
+        style="max-width: 300px"
+        [bodyMaxWidth]="300"
+        displayKey="name"
+        lookupKey="id"
+        [selectedItems]="selectedItems2"
+    >
+        <ng-template fdkTemplate="optionItemTemplate" let-item>
+            <div fd-list-content>
+                <span fd-list-title [wrap]="true">{{ item.name }}</span>
+                <span fd-list-byline>{{ item.type }}</span>
+            </div>
+        </ng-template>
+    </fd-multi-combobox>
+</div>

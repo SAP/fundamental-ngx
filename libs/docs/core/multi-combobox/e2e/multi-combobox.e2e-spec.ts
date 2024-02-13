@@ -116,7 +116,8 @@ describe('multi-combobox test suite', () => {
         });
 
         it('should be able to search by typing and get relevant results', async () => {
-            const inputCount = await getElementArrayLength(inputField);
+            // Skip last example since it has different view than the others.
+            const inputCount = (await getElementArrayLength(inputField)) - 1;
 
             for (let i = 0; i < inputCount; i++) {
                 if (i !== mobileExample && i !== tokenizerExample) {

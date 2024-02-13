@@ -1,5 +1,11 @@
 import { Observable, Subject } from 'rxjs';
 
+export enum FD_DIALOG_DISMISS_REASON {
+    ESCAPE = 'escape',
+    BACKDROP = 'backdrop',
+    NAVIGATION_CHANGE = 'navigation change'
+}
+
 export class DialogRefBase<T, P = any> {
     /** @hidden */
     protected readonly _afterClosed = new Subject<P | undefined>();
@@ -35,7 +41,7 @@ export class DialogRefBase<T, P = any> {
      * Dismisses the dialog and passes the argument to the afterClosed observable as an error.
      * @param reason Value passed back to the observable as an error.
      */
-    dismiss(reason?: any): void {
+    dismiss(reason?: FD_DIALOG_DISMISS_REASON | any): void {
         this._afterClosed.error(reason);
     }
 

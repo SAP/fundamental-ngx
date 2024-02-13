@@ -3,6 +3,138 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.5...v0.49.0-rc.6) (2024-02-13)
+
+
+### Bug Fixes
+
+* **platform:** p13 dialog active issue ([#11342](https://github.com/SAP/fundamental-ngx/issues/11342)) ([e356290](https://github.com/SAP/fundamental-ngx/commit/e35629014f7a893713bc4e0bc976b6e351b200cc))
+
+
+
+
+
+# [0.49.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.4...v0.49.0-rc.5) (2024-02-12)
+
+
+### Bug Fixes
+
+* **docs:** vhd value comparator fix ([#11383](https://github.com/SAP/fundamental-ngx/issues/11383)) ([0d026fb](https://github.com/SAP/fundamental-ngx/commit/0d026fb43d5b2e8d530cda9af5e6b473daa61860))
+
+
+
+
+
+# [0.49.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.3...v0.49.0-rc.4) (2024-02-09)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.49.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.2...v0.49.0-rc.3) (2024-02-08)
+
+
+### Features
+
+* **core,docs:** multi input combobox byline example ([#11381](https://github.com/SAP/fundamental-ngx/issues/11381)) ([6102ab0](https://github.com/SAP/fundamental-ngx/commit/6102ab036f782b15736700f831656600cc1320f7))
+
+
+
+
+
+# [0.49.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.1...v0.49.0-rc.2) (2024-02-08)
+
+
+### Bug Fixes
+
+* **platform:** disallow select all for single select ([#11378](https://github.com/SAP/fundamental-ngx/issues/11378)) ([ac6b5c9](https://github.com/SAP/fundamental-ngx/commit/ac6b5c94bedd3f32d371f54a276a42554dc1eb1e))
+
+
+
+
+
+# [0.49.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.0...v0.49.0-rc.1) (2024-02-08)
+
+
+### Bug Fixes
+
+* **core:** dialog dismiss reason ([#11367](https://github.com/SAP/fundamental-ngx/issues/11367)) ([9fd331e](https://github.com/SAP/fundamental-ngx/commit/9fd331e6050df2608e4e12ee77bf5d6bb69c6975))
+
+
+
+
+
+# [0.49.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.48.5-rc.4...v0.49.0-rc.0) (2024-02-07)
+
+
+### Features
+
+* **core,platform:** input group migration ([#11372](https://github.com/SAP/fundamental-ngx/issues/11372)) ([61ebb29](https://github.com/SAP/fundamental-ngx/commit/61ebb29785ca63e107d2356b809ec675f1b47397))
+
+
+### BREAKING CHANGES
+
+* **core,platform:** `fd-input-group` now relies on `CVADirective` usage;
+`fdp-input-group` now relies on `fd-input-group` component implementation. Inner markup of the `fdp-input-group` has changed to reflect core's implementation.
+
+
+
+
+
+## [0.48.5-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.48.5-rc.3...v0.48.5-rc.4) (2024-02-05)
+
+
+### Bug Fixes
+
+* **core,platform:** multi input and combobox placeholder behavior ([#11347](https://github.com/SAP/fundamental-ngx/issues/11347)) ([e76e69c](https://github.com/SAP/fundamental-ngx/commit/e76e69c59cc5b7dcbecd4249b451d837181f3cd4))
+
+
+
+
+
+## [0.48.5-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.48.5-rc.2...v0.48.5-rc.3) (2024-02-05)
+
+
+### Features
+
+* **docs,core:** icon tab bar navigation improvements ([#11338](https://github.com/SAP/fundamental-ngx/issues/11338)) ([7cc9e5c](https://github.com/SAP/fundamental-ngx/commit/7cc9e5c80cbcd74b08179d513fcfc4ee15968666))
+
+
+
+
+
+## [0.48.5-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.48.5-rc.1...v0.48.5-rc.2) (2024-02-02)
+
+
+### Bug Fixes
+
+* **core,platform:** tabs programmatic overflow item open ([#11349](https://github.com/SAP/fundamental-ngx/issues/11349)) ([50d934c](https://github.com/SAP/fundamental-ngx/commit/50d934c93aef2bb7c8105664a81ae3a996533fcc))
+
+
+
+
+
+## [0.48.5-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.48.5-rc.0...v0.48.5-rc.1) (2024-02-02)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.48.5-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.48.4...v0.48.5-rc.0) (2024-02-02)
+
+
+### Bug Fixes
+
+* **btp:** fix splitter style import ([#11344](https://github.com/SAP/fundamental-ngx/issues/11344)) ([89a4d5f](https://github.com/SAP/fundamental-ngx/commit/89a4d5f01533e8f39e1489382fe41610f9c6a1cb))
+
+
+
+
+
 ## [0.48.4](https://github.com/SAP/fundamental-ngx/compare/v0.48.4-rc.1...v0.48.4) (2024-01-31)
 
 **Note:** Version bump only for package fundamental-ngx

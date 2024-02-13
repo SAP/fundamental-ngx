@@ -4,6 +4,8 @@ import { ModuleDeprecation, Nullable, warnOnce } from '@fundamental-ngx/cdk/util
 import { ButtonType, ButtonComponent as CoreButtonComponent, GlyphPosition } from '@fundamental-ngx/core/button';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
+import { ButtonModel } from './button.model';
+import { FDP_BUTTON } from './tokens';
 
 /**
  * @deprecated
@@ -14,9 +16,15 @@ import { BaseComponent } from '@fundamental-ngx/platform/shared';
     templateUrl: './button.component.html',
     styleUrl: './button.component.scss',
     standalone: true,
+    providers: [
+        {
+            provide: FDP_BUTTON,
+            useExisting: ButtonComponent
+        }
+    ],
     imports: [CoreButtonComponent]
 })
-export class ButtonComponent extends BaseComponent {
+export class ButtonComponent extends BaseComponent implements ButtonModel {
     /** Position of glyph related to text */
     @Input()
     glyphPosition: GlyphPosition = 'before';
@@ -38,12 +46,29 @@ export class ButtonComponent extends BaseComponent {
     @Input()
     glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
-    /** The buttonType of the button. Types includes
+    /**
+     * @deprecated
+     * Use `fdType` property.
+     * The buttonType of the button. Types includes
      'standard','positive', 'negative', 'attention', 'ghost',
      'transparent', 'emphasized','menu'.
      *Leave empty for default (standard button).'*/
     @Input()
-    buttonType: ButtonType = 'standard';
+    set buttonType(value: ButtonType) {
+        this.fdType = value;
+    }
+
+    get buttonType(): ButtonType {
+        return this.fdType;
+    }
+
+    /** The type of the button. Types include:
+     * 'standard' | 'positive' | 'negative' | 'attention' | 'half' | 'ghost' | 'transparent' | 'emphasized' | 'menu'.
+     * Leave empty for default (Standard button).'
+     * Default value is set to 'standard'
+     */
+    @Input()
+    fdType: ButtonType = 'standard';
 
     /** Whether button is in toggled state. */
     @Input()
