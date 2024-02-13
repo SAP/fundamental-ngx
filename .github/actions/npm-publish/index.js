@@ -2,45 +2,52 @@ const { getInput, info } = require('@actions/core');
 const { npmPublish } = require('@jsdevtools/npm-publish');
 const { resolve } = require('path');
 
-async function publish({ currentTryNumber = 1, packageJsonPath, tag, token, access, retryCount }) {
-    try {
-        const result = await npmPublish({
-            package: packageJsonPath,
-            token,
-            tag,
-            access
-        });
-        info(`Published ${result.name}@${result.version}`);
-    } catch (e) {
-        if (currentTryNumber < retryCount) {
-            await publish({
-                currentTryNumber: currentTryNumber + 1,
-                packageJsonPath,
-                tag,
-                token,
-                access
-            });
-        } else {
-            throw e;
-        }
-    }
-}
+const publishPackage = async ({ packageJsonPath, tag, token, access }) => {
+    return await npmPublish({
+        package: packageJsonPath,
+        token,
+        tag,
+        access
+    });
+};
 
-const run = async () => {
+const handleError = async (error, retryData) => {
+    const { currentTryNumber, retryCount, ...rest } = retryData;
+    if (currentTryNumber < retryCount) {
+        await publishWithRetry({
+            ...rest,
+            currentTryNumber: currentTryNumber + 1
+        });
+    } else {
+        throw error;
+    }
+};
+
+const publishWithRetry = async (publishData) => {
+    try {
+        const result = await publishPackage(publishData);
+        info(`Published ${result.name}@${result.version} with tag ${result.tag}`);
+    } catch (error) {
+        await handleError(error, publishData);
+    }
+};
+
+const publishAllProjects = async () => {
     const projectNames = JSON.parse(getInput('projects'));
     const projects = projectNames.map((projectName) => resolve(`dist/libs/${projectName}/package.json`));
     const tag = getInput('releaseTag');
     const npmToken = getInput('token');
     const retryCount = 3;
     for (const packageJsonPath of projects) {
-        await publish({
+        await publishWithRetry({
             packageJsonPath,
             tag,
             token: npmToken,
             access: 'public',
-            retryCount
+            retryCount,
+            currentTryNumber: 1
         });
     }
 };
 
-run();
+publishAllProjects();

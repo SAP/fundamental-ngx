@@ -13,7 +13,7 @@ runs:
           run: chmod +x ./.github/actions/parallel-commands/run-commands-in-parallel.sh
           shell: bash
         - name: Process parallel commands configuration
-          uses: actions/github-script@v6
+          uses: actions/github-script@v7.0.1
           id: commands
           env:
               PARALLEL_COMMANDS: ${{ inputs.parallel-commands }}

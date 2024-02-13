@@ -101,6 +101,8 @@
 </component-example>
 <code-example [exampleFiles]="multiComboboxLoadingExample"></code-example>
 
+<separator></separator>
+
 <fd-docs-section-title id="tokenizer-behaviour" componentName="multi-combobox">Reviewing tokens</fd-docs-section-title>
 <description>
     <p>
@@ -124,3 +126,16 @@
 <code-example [exampleFiles]="multiComboboxTokenizerExample"></code-example>
 
 <separator></separator>
+
+<fd-docs-section-title id="custom-template" componentName="multi-combobox">Custom Item Template</fd-docs-section-title>
+<description>
+    <p>
+        The way the items are rendered in the popover list can be customized by providing
+        <code>&lt;ng-template fdkTemplate=&quot;optionItemTemplate&quot; let-item&gt;</code> to the component. The
+        template should align with the contents of an fd-list-item directive.
+    </p>
+</description>
+<component-example>
+    <fd-multi-combobox-byline-example></fd-multi-combobox-byline-example>
+</component-example>
+<code-example [exampleFiles]="multiComboboxBylineExample"></code-example>
