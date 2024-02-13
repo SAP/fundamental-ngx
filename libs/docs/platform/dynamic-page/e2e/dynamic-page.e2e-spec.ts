@@ -129,7 +129,7 @@ describe('Dynamic Page Layout test suite:', () => {
             await click(tabbesExampleButton);
             await waitForElDisplayed(dynamicPage);
             await waitForElDisplayed(dynamicPageTabs);
-            const tabLinks = dynamicPageTabs + ' ' + '.fd-tabs__link';
+            const tabLinks = dynamicPageTabs + ' ' + '.fd-icon-tab-bar__tab';
             const firstTabSelected = await getAttributeByName(tabLinks, 'aria-selected');
             const secondTabSelected = await getAttributeByName(tabLinks, 'aria-selected', 1);
             await expect(firstTabSelected).toBe('true');
@@ -141,7 +141,7 @@ describe('Dynamic Page Layout test suite:', () => {
             await click(tabbesExampleButton);
             await waitForElDisplayed(dynamicPage);
             await waitForElDisplayed(dynamicPageTabs);
-            const tabLinks = dynamicPageTabs + ' ' + '.fd-tabs__link';
+            const tabLinks = dynamicPageTabs + ' ' + '.fd-icon-tab-bar__tab';
             await click(dynamicPageTabs, 1);
             const firstTabSelected = await getAttributeByName(tabLinks, 'aria-selected');
             const secondTabSelected = await getAttributeByName(tabLinks, 'aria-selected', 1);

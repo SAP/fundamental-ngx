@@ -40,56 +40,55 @@
             (click)="mobile && !isOpen && onPrimaryButtonClick(false)"
             (keydown)="navigateByTokens($event)"
         >
-            @if (_selectedSuggestions) {
-                <fd-tokenizer
-                    #tokenizer
-                    [compactCollapse]="true"
-                    [tokenizerFocusable]="false"
-                    class="fdp-multi-combobox-tokenizer-custom"
-                    (moreClickedEvent)="moreClicked()"
-                    fdMultiAnnouncer
-                    [multiAnnouncerOptions]="_suggestions"
-                >
-                    @for (token of _selectedSuggestions; track token) {
-                        <fd-token [readOnly]="disabled" (onCloseClick)="removeToken(token, $event)">
-                            {{ token.label }}
-                        </fd-token>
-                    }
-                    <input
-                        #searchInputElement
-                        fdp-auto-complete
-                        (onComplete)="onCompleteTerm($event)"
-                        [options]="_suggestions"
-                        [inputText]="inputText"
-                        [mobile]="mobile"
-                        type="text"
-                        role="combobox"
-                        autocomplete="off"
-                        [ariaLabel]="ariaLabel || ('coreMultiComboBox.multiComboBoxAriaLabel' | fdTranslate)"
-                        [attr.aria-labelledby]="ariaLabelledBy"
-                        [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
-                        [attr.aria-owns]="autoComplete && !mobile ? id + '-result' : null"
-                        [attr.aria-haspopup]="autoComplete && !mobile"
-                        fd-form-control
-                        fd-input-group-input
-                        tabindex="0"
-                        [id]="id"
-                        [name]="name"
-                        (keydown)="onInputKeydownHandler($event)"
-                        [disabled]="disabled"
-                        [(ngModel)]="inputText"
-                        (ngModelChange)="searchTermChanged()"
-                        [placeholder]="placeholder"
-                        (focus)="onTouched(); tokenizer._showAllTokens()"
-                        (blur)="!mobile && onBlur($event); tokenizer._hideTokens()"
-                        [attr.aria-expanded]="isOpen"
-                        [readonly]="readonly"
-                        [attr.aria-readonly]="readonly"
-                        [attr.aria-required]="required"
-                        class="fd-tokenizer__input"
-                    />
-                </fd-tokenizer>
-            }
+            <fd-tokenizer
+                #tokenizer
+                [compactCollapse]="true"
+                [tokenizerFocusable]="false"
+                [showOverflowPopover]="false"
+                class="fdp-multi-combobox-tokenizer-custom"
+                (moreClickedEvent)="moreClicked()"
+                fdMultiAnnouncer
+                [multiAnnouncerOptions]="_suggestions"
+            >
+                @for (token of _selectedSuggestions; track token) {
+                    <fd-token [readOnly]="disabled" (onCloseClick)="removeToken(token, $event)">
+                        {{ token.label }}
+                    </fd-token>
+                }
+                <input
+                    #searchInputElement
+                    fdp-auto-complete
+                    (onComplete)="onCompleteTerm($event)"
+                    [options]="_suggestions"
+                    [inputText]="inputText"
+                    [mobile]="mobile"
+                    type="text"
+                    role="combobox"
+                    autocomplete="off"
+                    [ariaLabel]="ariaLabel || ('coreMultiComboBox.multiComboBoxAriaLabel' | fdTranslate)"
+                    [attr.aria-labelledby]="ariaLabelledBy"
+                    [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
+                    [attr.aria-owns]="autoComplete && !mobile ? id + '-result' : null"
+                    [attr.aria-haspopup]="autoComplete && !mobile"
+                    fd-form-control
+                    fd-input-group-input
+                    tabindex="0"
+                    [id]="id"
+                    [name]="name"
+                    (keydown)="onInputKeydownHandler($event)"
+                    [disabled]="disabled"
+                    [(ngModel)]="inputText"
+                    (ngModelChange)="searchTermChanged()"
+                    [attr.placeholder]="_selectedSuggestions.length ? null : placeholder"
+                    (focus)="onTouched(); tokenizer._showAllTokens()"
+                    (blur)="!mobile && onBlur($event); tokenizer._hideTokens()"
+                    [attr.aria-expanded]="isOpen"
+                    [readonly]="readonly"
+                    [attr.aria-readonly]="readonly"
+                    [attr.aria-required]="required"
+                    class="fd-tokenizer__input fd-input-group__input"
+                />
+            </fd-tokenizer>
         </fd-input-group>
         @if (mobile && isOpen ? false : !!stateMessage) {
             <fd-form-message [type]="state" [innerHtml]="stateMessage"></fd-form-message>
@@ -190,7 +189,7 @@
                     <li
                         fd-list-item
                         role="option"
-                        (click)="!mobile && close()"
+                        (click)="!mobile && onOptionClicked($event, $index)"
                         (keyDown)="onItemKeyDownHandler($event)"
                         [selected]="!!optionItem.selected"
                     >

@@ -1,8 +1,8 @@
 import { Inject, Injectable, InjectionToken, isDevMode, LOCALE_ID, Optional } from '@angular/core';
 import moment, { Locale, LongDateFormatSpec, Moment, MomentFormatSpecification, MomentInput } from 'moment';
 
-import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
     return Array.from(new Array(length)).map((_, index) => mapFn(index));
@@ -222,20 +222,24 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
         return date.format(displayFormat);
     }
 
-    createDate(year: number, month: number, date: number): Moment {
-        if (month < 0 || month > 12) {
+    createDate(year: number, month?: number, date?: number): Moment {
+        if (typeof month === 'number' && (month < 0 || month > 12)) {
             throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
         }
 
-        if (date < 1) {
+        if (typeof date === 'number' && date < 1) {
             throw Error(`Invalid date "${date}". Date has to be greater than 0.`);
         }
 
-        const result = this._createMomentDate({
-            year,
-            month: month !== 0 ? month - 1 : month,
-            date
-        }).locale(this.locale);
+        const result = this._createMomentDate(
+            typeof month === 'number' && typeof date === 'number'
+                ? {
+                      year,
+                      month: month !== 0 ? month - 1 : month,
+                      date
+                  }
+                : `${year}`
+        ).locale(this.locale);
 
         if (!result.isValid()) {
             throw Error(`Invalid date "${date}" for month with index "${month}".`);

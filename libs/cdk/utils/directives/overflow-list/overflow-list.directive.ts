@@ -1,4 +1,3 @@
-import { ViewportRuler } from '@angular/cdk/overlay';
 import {
     AfterViewInit,
     ContentChildren,
@@ -13,6 +12,8 @@ import {
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { debounceTime } from 'rxjs/operators';
+import { resizeObservable } from '../../functions';
 import { OverflowListItemDirective } from './overflow-list-item.directive';
 
 @Directive({
@@ -51,23 +52,21 @@ export class OverflowListDirective implements AfterViewInit {
     overflowItems: QueryList<OverflowListItemDirective>;
 
     /** @hidden */
-    private _destroyRef = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
         private _el: ElementRef,
-        private _viewportRuler: ViewportRuler,
         private _ngZone: NgZone
     ) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._viewportRuler
-            .change(50)
-            .pipe(takeUntilDestroyed(this._destroyRef))
-            // ViewportRuler invoked out of zone, that is why I need to invoke function in zone
-            .subscribe(() => this._ngZone.run(() => this._calculateAmountOfOverflowedItems()));
-
+        this._ngZone.runOutsideAngular(() => {
+            resizeObservable(this._el.nativeElement)
+                .pipe(debounceTime(10), takeUntilDestroyed(this._destroyRef))
+                .subscribe(() => this._ngZone.run(() => this._calculateAmountOfOverflowedItems()));
+        });
         this._calculateAmountOfOverflowedItems();
     }
 
@@ -82,6 +81,11 @@ export class OverflowListDirective implements AfterViewInit {
                 parseFloat(computed.paddingLeft || '0') -
                 parseFloat(computed.paddingRight || '0')
         );
+
+        if (contentWidth <= 0) {
+            return 0;
+        }
+
         return this._checkWidthWithOffset(elements, contentWidth);
     }
 

@@ -1,7 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     computed,
     DestroyRef,
@@ -45,7 +44,6 @@ export class PlatformTableColumnResizerComponent implements OnInit {
 
     /** @hidden */
     constructor(
-        private readonly _cd: ChangeDetectorRef,
         private readonly _ngZone: NgZone,
         private readonly _tableColumnResizeService: TableColumnResizeService,
         private readonly _renderer: Renderer2,

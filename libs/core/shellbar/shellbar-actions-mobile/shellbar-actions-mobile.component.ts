@@ -50,7 +50,7 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
     ngAfterContentChecked(): void {
         this.totalNotifications = 0;
 
-        this.shellbarActions.forEach((action) => {
+        this.shellbarActions?.forEach((action) => {
             if (action.notificationCount && typeof action.notificationCount === 'number') {
                 this.totalNotifications = this.totalNotifications + action.notificationCount;
             }

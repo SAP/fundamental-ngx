@@ -1,6 +1,8 @@
 <ul
     class="fd-icon-tab-bar__header"
+    [class.fd-dynamic-page__tabs]="_inDynamicPage"
     role="tablist"
+    #tablist
     [class.fd-icon-tab-bar__header--left-offset]="_showLeftBtn"
     fdkOverflowList
     [isRtl]="isRtl"
@@ -21,7 +23,7 @@
             ></fdp-icon-tab-bar-popover>
         </li>
     }
-    @for (item of _tabs; track item.uId; let idx = $index) {
+    @for (item of tabs; track item.uId; let idx = $index) {
         <li
             [class]="item.cssClasses"
             class="fd-icon-tab-bar__item"
@@ -32,7 +34,7 @@
             <a
                 (click)="_selectItem(item)"
                 (keydown)="_keyDownHandler($event, item, idx)"
-                [attr.aria-selected]="item.uId === _selectedUid"
+                [attr.aria-selected]="item.uId === selectedUid"
                 class="fd-icon-tab-bar__tab"
                 #tabItem
                 [attr.tabindex]="idx === 0 ? 0 : -1"
@@ -49,17 +51,17 @@
                     </div>
                     <div class="fd-icon-tab-bar__details">
                         <span class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
-                        <span class="fd-icon-tab-bar__label">{{ item.label }}</span>
+                        <span class="fd-icon-tab-bar__label">{{ item.label | fdkAsyncOrSync }}</span>
                     </div>
                 } @else {
-                    <span class="fd-icon-tab-bar__tag">{{ item.label }}</span>
+                    <span class="fd-icon-tab-bar__tag">{{ item.label | fdkAsyncOrSync }}</span>
                     @if (item.badge) {
                         <span class="fd-icon-tab-bar__badge"></span>
                     }
                 }
-                @if (item.color) {
+                @if (item.color | fdkAsyncOrSync; as itemColor) {
                     <div class="screenreader-only">
-                        {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
+                        {{ (colorAssociations && colorAssociations[itemColor]) || itemColor }}
                     </div>
                 }
             </a>
@@ -67,6 +69,7 @@
                 <div class="fd-icon-tab-bar__button-container">
                     <button
                         fd-button
+                        tabindex="-1"
                         class="fd-icon-tab-bar__button"
                         fdType="transparent"
                         (click)="_closeTab(item.uId)"
@@ -93,6 +96,7 @@
                 (selectedExtraItem)="_selectExtraItem($event)"
                 (focusFirstVisibleItem)="_focusItem(0)"
                 (focusLastVisibleItem)="_focusItem(_lastVisibleTabIndex)"
+                (closeTab)="_closeTab($event, true)"
             >
             </fdp-icon-tab-bar-popover>
         </li>

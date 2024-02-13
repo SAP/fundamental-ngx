@@ -1,14 +1,15 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     DestroyRef,
     Input,
     OnInit,
     ViewEncapsulation,
-    inject
+    inject,
+    signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { DialogRef } from '../utils/dialog-ref.class';
 
@@ -17,7 +18,7 @@ import { DialogRef } from '../utils/dialog-ref.class';
     selector: '[fd-dialog-full-screen-toggler-button]',
     standalone: true,
     imports: [IconComponent],
-    template: `<fd-icon [glyph]="_fullscreen ? 'exitfullscreen' : 'full-screen'"></fd-icon>`,
+    template: `<fd-icon [glyph]="_fullscreen$() ? 'exitfullscreen' : 'full-screen'"></fd-icon>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
@@ -32,12 +33,16 @@ export class DialogFullScreenTogglerButtonComponent implements OnInit {
     @Input()
     mobile = false;
 
+    /** DialogRef direct reference. Used with template-based dialogs. */
+    @Input()
+    dialogRef: Nullable<DialogRef>;
+
     /** add title dynamically to add a tooltip */
     @Input()
     title: string;
 
     /** @hidden */
-    _fullscreen = false;
+    _fullscreen$ = signal(false);
 
     /** @hidden */
     private readonly _ref = inject(DialogRef, {
@@ -48,13 +53,10 @@ export class DialogFullScreenTogglerButtonComponent implements OnInit {
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    private readonly _cdr = inject(ChangeDetectorRef);
-
-    /** @hidden */
     ngOnInit(): void {
-        this._ref?.fullScreen.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isFullScreen) => {
-            this._fullscreen = isFullScreen;
-            this._cdr.detectChanges();
+        const ref = this._ref || this.dialogRef;
+        ref?.fullScreen.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isFullScreen) => {
+            this._fullscreen$.set(isFullScreen);
         });
     }
 }

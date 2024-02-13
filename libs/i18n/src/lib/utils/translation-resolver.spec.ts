@@ -1,4 +1,4 @@
-import { FdLanguageKeyArgs } from '../models/lang';
+import { FdLanguageKeyArgs } from '../models';
 import { TranslationResolver } from './translation-resolver';
 
 describe('TranslationResolver', () => {

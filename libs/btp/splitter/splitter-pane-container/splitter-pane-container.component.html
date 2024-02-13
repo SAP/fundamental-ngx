@@ -1,0 +1,50 @@
+@if (_isRootContainer) {
+    @if (_defaultPane && _defaultPane?.isOnCanvas && _activePanes.length > 1) {
+        <ng-template
+            [ngTemplateOutlet]="panesTemplate"
+            [ngTemplateOutletContext]="{ panes: [_defaultPane], showResizer: true }"
+        ></ng-template>
+    }
+    <div class="fd-splitter__split-pane" [style.overflow]="'visible'">
+        <div class="fd-splitter__pane-container fd-splitter__pane-container--vertical">
+            <ng-template
+                [ngTemplateOutlet]="panesTemplate"
+                [ngTemplateOutletContext]="{
+                    panes: _activePanes | noDefaultPane: _defaultPane?.isOnCanvas && _activePanes.length > 1
+                }"
+            ></ng-template>
+        </div>
+        @if (_pages.length) {
+            <fdb-splitter-pagination
+                [pages]="_pages"
+                [currentPage]="_currentPage"
+                (onPageChange)="_onPageChange($event)"
+            ></fdb-splitter-pagination>
+        }
+    </div>
+} @else {
+    <ng-template [ngTemplateOutlet]="panesTemplate" [ngTemplateOutletContext]="{ panes: _panesOnCanvas }"></ng-template>
+}
+<ng-template #panesTemplate let-panes="panes" let-showResizer="showResizer">
+    @for (pane of _SplitterSplitPaneComponent(panes); track pane.id; let last = $last) {
+        <section
+            [id]="pane.id"
+            class="fd-splitter__split-pane"
+            [class.fd-splitter__split-pane--solid]="paneType === 'solid'"
+            [class.fd-splitter__split-pane--translucent]="paneType === 'translucent'"
+            [style]="_getPaneStyles(pane)"
+        >
+            <ng-template [cdkPortalOutlet]="pane._content"></ng-template>
+        </section>
+        @if (!last || showResizer) {
+            <fdb-splitter-resizer
+                [orientation]="orientation"
+                (startResize)="_startResize()"
+                (endResize)="_endResize()"
+                (resize)="_onResize(pane.id, $event)"
+                [class.fd-splitter__resizer--translucent]="resizerType === 'translucent'"
+                [class.fd-splitter__resizer--solid]="resizerType === 'solid'"
+            ></fdb-splitter-resizer>
+        }
+    }
+</ng-template>

@@ -1,7 +1,6 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChild,
     ElementRef,
@@ -13,11 +12,10 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Router } from '@angular/router';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Subscription } from 'rxjs';
 
-import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 
 import { A11yModule } from '@angular/cdk/a11y';
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
@@ -80,6 +78,10 @@ export class DialogComponent
     @Input('dialogRef')
     set embeddedDialogRef(value: DialogRef) {
         this._dialogRef = value;
+    }
+
+    get embeddedDialogRef(): DialogRef {
+        return this._dialogRef;
     }
 
     /** DialogConfig - should be used for Template based Dialog implementation */
@@ -150,14 +152,9 @@ export class DialogComponent
     /** @hidden */
     constructor(
         @Optional() public dialogConfig: DialogConfig,
-        @Optional() private _dialogRef: DialogRef,
-        @Optional() router: Router,
-        @Optional() rtlService: RtlService,
-        focusTrapService: FocusTrapService,
-        changeDetectorRef: ChangeDetectorRef,
-        elementRef: ElementRef
+        @Optional() private _dialogRef: DialogRef
     ) {
-        super(router, elementRef, changeDetectorRef, rtlService, focusTrapService);
+        super();
     }
 
     /** @hidden */
@@ -168,6 +165,18 @@ export class DialogComponent
     /** @hidden */
     get _ref(): DialogRef {
         return this._dialogRef;
+    }
+
+    /** @hidden */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [
+            this.dialogConfig.hasBackdrop ? 'fd-dialog' : 'fd-dialog--no-backdrop',
+            this.dialogConfig.container !== 'body' || this.dialogConfig.position ? 'fd-dialog--targeted' : '',
+            this.showDialogWindow ? 'fd-dialog--active' : '',
+            this._class,
+            this.dialogConfig.backdropClass ? this.dialogConfig.backdropClass : ''
+        ];
     }
 
     /** @hidden */
@@ -193,18 +202,6 @@ export class DialogComponent
     ngOnDestroy(): void {
         super.ngOnDestroy();
         this._onHidden.unsubscribe();
-    }
-
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            this.dialogConfig.hasBackdrop ? 'fd-dialog' : 'fd-dialog--no-backdrop',
-            this.dialogConfig.container !== 'body' || this.dialogConfig.position ? 'fd-dialog--targeted' : '',
-            this.showDialogWindow ? 'fd-dialog--active' : '',
-            this._class,
-            this.dialogConfig.backdropClass ? this.dialogConfig.backdropClass : ''
-        ];
     }
 
     /** @hidden */

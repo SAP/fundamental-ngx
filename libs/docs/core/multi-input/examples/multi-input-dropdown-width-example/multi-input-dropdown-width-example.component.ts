@@ -1,6 +1,12 @@
 import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {
+    ListBylineDirective,
+    ListContentDirective,
+    ListIconDirective,
+    ListTitleDirective
+} from '@fundamental-ngx/core/list';
 import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
 
 @Component({
@@ -9,7 +15,15 @@ import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [MultiInputComponent, FormsModule, JsonPipe]
+    imports: [
+        MultiInputComponent,
+        FormsModule,
+        JsonPipe,
+        ListIconDirective,
+        ListTitleDirective,
+        ListBylineDirective,
+        ListContentDirective
+    ]
 })
 export class MultiInputDropdownWidthExampleComponent {
     selected = [
@@ -21,4 +35,6 @@ export class MultiInputDropdownWidthExampleComponent {
         'Strawberry',
         'Blueberry'
     ];
+
+    selected2 = ['Some long option to show title wrapping', 'Banana', 'Pineapple', 'Tomato', 'Kiwi'];
 }

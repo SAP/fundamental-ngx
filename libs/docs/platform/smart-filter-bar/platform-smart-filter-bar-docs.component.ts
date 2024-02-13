@@ -8,6 +8,7 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
+import { SmartFilterBarCustomToolbarExampleComponent } from './examples/custom-toolbar/smart-filter-bar-custom-toolbar-example.component';
 import { PlatformSmartFilterBarLoadingExampleComponent } from './examples/loading/platform-smart-filter-bar-loading-example.component';
 import { PlatformSmartFilterBarBasicExampleComponent } from './examples/platform-smart-filter-bar-basic-example.component';
 import { PlatformSmartFilterBarCustomFilterExampleComponent } from './examples/platform-smart-filter-bar-custom-filter-example.component';
@@ -33,6 +34,9 @@ const platformSfbDynamicPageTsCode = 'platform-smart-filter-bar-dynamic-page-exa
 const platformLoadingSfbSrc = 'loading/platform-smart-filter-bar-loading-example.component.html';
 const platformLoadingSfbTsCode = 'loading/platform-smart-filter-bar-loading-example.component.ts';
 
+const platformCustomToolbarSfbSrc = 'custom-toolbar/smart-filter-bar-custom-toolbar-example.component.html';
+const platformCustomToolbarSfbTsCode = 'custom-toolbar/smart-filter-bar-custom-toolbar-example.component.ts';
+
 @Component({
     selector: 'app-smart-filter-bar',
     templateUrl: './platform-smart-filter-bar-docs.component.html',
@@ -48,7 +52,8 @@ const platformLoadingSfbTsCode = 'loading/platform-smart-filter-bar-loading-exam
         PlatformSmartFilterBarCustomFilterExampleComponent,
         PlatformSmartFilterBarCustomLabelsExampleComponent,
         PlatformSmartFilterBarDynamicPageExampleComponent,
-        PlatformSmartFilterBarLoadingExampleComponent
+        PlatformSmartFilterBarLoadingExampleComponent,
+        SmartFilterBarCustomToolbarExampleComponent
     ]
 })
 export class PlatformSmartFilterBarDocsComponent {
@@ -133,6 +138,20 @@ export class PlatformSmartFilterBarDocsComponent {
             code: getAssetFromModuleAssets(platformLoadingSfbTsCode),
             fileName: 'platform-smart-filter-bar-loading-example',
             component: 'PlatformSmartFilterBarLoadingExampleComponent'
+        }
+    ];
+
+    sfbCustomToolbar: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(platformCustomToolbarSfbSrc),
+            fileName: 'smart-filter-bar-custom-toolbar-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(platformCustomToolbarSfbTsCode),
+            fileName: 'smart-filter-bar-custom-toolbar-example',
+            component: 'SmartFilterBarCustomToolbarExampleComponent'
         }
     ];
 }

@@ -1,5 +1,3 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -10,7 +8,8 @@ import {
     OnChanges,
     Output,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    booleanAttribute
 } from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
@@ -48,14 +47,8 @@ export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges 
     action = false;
 
     /** Whether tile is focusable & clickable, (tileClick) event will be emitted on click. */
-    @Input()
-    set clickable(value: BooleanInput) {
-        this._clickable = coerceBooleanProperty(value);
-    }
-
-    get clickable(): boolean {
-        return this._clickable;
-    }
+    @Input({ transform: booleanAttribute })
+    clickable = false;
 
     /** Whether tile gets clicked or space/enter pressed. */
     @Output()

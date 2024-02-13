@@ -17,10 +17,16 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import {
+    PopoverBodyComponent,
+    PopoverComponent,
+    PopoverControlComponent,
+    TriggerConfig
+} from '@fundamental-ngx/core/popover';
 import { IconBarDndItemDirective } from '../../../directives/dnd/icon-bar-dnd-item.directive';
 import { IconBarDndListDirective } from '../../../directives/dnd/icon-bar-dnd-list.directive';
 import { IconTabBarItem } from '../../../interfaces/icon-tab-bar-item.interface';
+import { IconTabBarTextTypeTabItemComponent } from '../../text-type-tab-item/icon-tab-bar-text-type-tab-item.component';
 import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
 
 @Component({
@@ -37,14 +43,25 @@ import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
         IconBarDndItemDirective,
         NgClass,
         ButtonComponent,
-        IconComponent
+        IconComponent,
+        IconTabBarTextTypeTabItemComponent
     ]
 })
 export class TextTypePopoverComponent extends IconTabBarPopoverBase implements OnChanges {
     /** @hidden reference for html element, that opens dropdown and can receive focus */
-    @ViewChild('dropdownTrigger') _dropdownTrigger: ElementRef<HTMLElement>;
+    @ViewChild('dropdownTrigger', { read: ElementRef }) _dropdownTrigger: ElementRef<HTMLElement>;
     /** @hidden list of tab html elements, that can receive focus */
-    @ViewChildren('tabItem') _tabExtraUIElements: QueryList<ElementRef<HTMLElement>>;
+    @ViewChildren('tabItem', { read: ElementRef }) _tabExtraUIElements: QueryList<ElementRef<HTMLElement>>;
+
+    /** Whether to render item as a multi-click variant. */
+    @Input()
+    multiClick = false;
+
+    /**
+     * @description Layout type for tab.
+     */
+    @Input()
+    layoutMode: 'row' | 'column';
 
     /**
      * @description Is extra items mode or subitems mode
@@ -68,7 +85,7 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
      * @description tabIndex of the particular item. Aplicable only for subitems mode
      */
     @Input()
-    tabindex = 0;
+    tabindex = -1;
 
     /**
      * @description Emits when some subTab is selected and isExtraItemsMode is disabled
@@ -76,8 +93,17 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
     @Output()
     selectedSubItem: EventEmitter<any> = new EventEmitter<any>();
 
+    /** Emits when root item is being selected. Applicable for multi-click variant only. */
+    @Output()
+    selectedItem = new EventEmitter<void>();
+
     /** @hidden */
     _containsSelected = false;
+
+    /** @hidden */
+    _popoverTriggers: TriggerConfig[] = [
+        { trigger: 'click', openAction: true, closeAction: true, stopPropagation: true }
+    ];
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -110,8 +136,9 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
     /** @hidden */
     private _calculateIfContainsSelected(): void {
         this._containsSelected =
-            !!this.parentTab.subItems &&
-            this._getChildren(this.parentTab.subItems).some(({ uId }) => uId === this.selectedSubItemUid);
+            (this.multiClick && this.parentTab.uId === this.selectedSubItemUid) ||
+            (!!this.parentTab.subItems &&
+                this._getChildren(this.parentTab.subItems).some(({ uId }) => uId === this.selectedSubItemUid));
     }
 
     /** @hidden */

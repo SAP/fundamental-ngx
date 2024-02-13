@@ -13,6 +13,9 @@
 $block: fd-icon-tab-bar;
 
 .#{$block} {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     & &__item--hidden {
         display: none;
     }
@@ -29,6 +32,13 @@ $block: fd-icon-tab-bar;
         .fd-icon-tab-bar__list-item-counter {
             padding-left: 0;
             padding-right: 0.25rem;
+        }
+    }
+
+    &__popover {
+        height: 100%;
+        .fd-popover__control {
+            height: 100%;
         }
     }
 }

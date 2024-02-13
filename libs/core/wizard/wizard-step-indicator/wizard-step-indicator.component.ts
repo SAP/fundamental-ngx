@@ -1,13 +1,13 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     EventEmitter,
     Input,
     OnDestroy,
     Output,
-    ViewChild
+    ViewChild,
+    signal
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
@@ -64,13 +64,10 @@ export class WizardStepIndicatorComponent implements WizardStepIndicator, OnDest
     actionSheet: ActionSheetComponent;
 
     /** @hidden */
-    stackedItems: WizardStepComponent[] = [];
+    stackedItems$ = signal<WizardStepComponent[]>([]);
 
     /** @hidden */
     private _subscriptions = new Subscription();
-
-    /** @hidden */
-    constructor(private _cdRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -90,7 +87,6 @@ export class WizardStepIndicatorComponent implements WizardStepIndicator, OnDest
 
     /** @hidden */
     setStackedItems(items: WizardStepComponent[]): void {
-        this.stackedItems = items || [];
-        this._cdRef.detectChanges();
+        this.stackedItems$.set(items || []);
     }
 }

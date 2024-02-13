@@ -23,5 +23,6 @@ export const MessageStripAlertContainerAlertRefs = new InjectionToken<Observable
 
 export const MessageStripAlertComponentData = new InjectionToken<{
     content: string | TemplateRef<any> | Type<any>;
+    closeOnNavigation: boolean;
     messageStripConfig: MessageStripConfiguration;
 }>('MessageStripAlertComponentData');

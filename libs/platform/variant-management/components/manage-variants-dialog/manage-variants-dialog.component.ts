@@ -3,6 +3,7 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     DialogBodyComponent,
     DialogComponent,
@@ -15,7 +16,6 @@ import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { CheckboxComponent, InputComponent } from '@fundamental-ngx/platform/form';
 import { TableColumnComponent, TableComponent, TableDataSource } from '@fundamental-ngx/platform/table';
 import {

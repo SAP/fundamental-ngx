@@ -35,12 +35,6 @@
                 }
             },
             "defaultConfiguration": "production"
-        },
-        "lint": {
-            "executor": "@nx/eslint:lint",
-            "options": {
-                "lintFilePatterns": ["libs/platform/src/lib/**/*.ts", "libs/platform/src/lib/**/*.html"]
-            }
         }
     },
     "tags": ["type:lib", "scope:fdp"]

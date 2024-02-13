@@ -81,6 +81,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     @Input()
     locale: string;
 
+    /** Sets the Step Input to take the full width of the container element */
+    @Input()
+    isFullWidth = false;
+
     /** Specifies algorithm used to match locale. Check Intl.NumberFormat documentation for more information */
     @Input()
     localeMatcher: Nullable<string>;

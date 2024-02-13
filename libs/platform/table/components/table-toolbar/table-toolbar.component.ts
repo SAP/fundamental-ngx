@@ -15,6 +15,8 @@ import { Observable } from 'rxjs';
 
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     ToolbarComponent,
     ToolbarItemDirective,
@@ -22,7 +24,6 @@ import {
     ToolbarSpacerDirective
 } from '@fundamental-ngx/core/toolbar';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { SearchFieldComponent, SearchInput, SuggestionItem } from '@fundamental-ngx/platform/search-field';
 import { Table, TableService } from '@fundamental-ngx/platform/table-helpers';
 import { TABLE_TOOLBAR, TableToolbarInterface } from './table-toolbar';
@@ -100,6 +101,10 @@ export class TableToolbarComponent implements TableToolbarInterface {
     /** Table title. */
     @Input()
     title: string;
+
+    /** Aria label for the search field. */
+    @Input()
+    searchFieldAriaLabel: Nullable<string>;
 
     /** Toggle to show table item count. */
     @Input()

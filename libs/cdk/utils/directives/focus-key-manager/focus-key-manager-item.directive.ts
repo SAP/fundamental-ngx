@@ -1,6 +1,5 @@
 import { FocusableOption, FocusKeyManager } from '@angular/cdk/a11y';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Directive, ElementRef, forwardRef, HostBinding, HostListener, Input } from '@angular/core';
+import { booleanAttribute, Directive, ElementRef, forwardRef, HostBinding, HostListener, Input } from '@angular/core';
 import { FocusKeyManagerListDirective } from './focus-key-manager-list.directive';
 import { FOCUSABLE_ITEM } from './focus-key-manager.tokens';
 
@@ -14,24 +13,15 @@ import { FOCUSABLE_ITEM } from './focus-key-manager.tokens';
 })
 export class FocusKeyManagerItemDirective implements FocusableOption {
     /** Whether item should be initially focused */
-    @Input()
-    set initialFocus(value: BooleanInput) {
-        this._initialFocus = coerceBooleanProperty(value);
-    }
+    @Input({ transform: booleanAttribute })
+    initialFocus = false;
 
     /** @hidden */
     @Input()
     @HostBinding('attr.tabindex')
     get _tabindex(): number {
-        if (this._initialFocus) {
-            return 0;
-        }
-
-        return this.nativeElement?.tabIndex ?? -1;
+        return this.initialFocus ? 0 : this.nativeElement?.tabIndex ?? -1;
     }
-
-    /** @hidden */
-    private _initialFocus = false;
 
     /** Native element of the item */
     get nativeElement(): any {

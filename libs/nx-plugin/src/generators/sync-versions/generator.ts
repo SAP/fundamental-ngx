@@ -2,7 +2,7 @@ import { readProjectConfiguration, TargetConfiguration, Tree, workspaceRoot } fr
 import { Builders } from '@schematics/angular/utility/workspace-models';
 import { prompt } from 'enquirer';
 import { sync as fastGlobSync } from 'fast-glob';
-import { existsSync, readFileSync, stat, writeFileSync } from 'fs-extra';
+import { existsSync, readFileSync, statSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { SyncVersionsGeneratorSchema } from './schema';
 import { replaceInFile } from './utils';
@@ -49,7 +49,7 @@ export async function syncVersionsGenerator(tree: Tree, options: SyncVersionsGen
         }
 
         if (
-            (!existsSync(normalizedFileName) || (await stat(normalizedFileName)).isDirectory()) &&
+            (!existsSync(normalizedFileName) || statSync(normalizedFileName).isDirectory()) &&
             !normalizedFileName.includes('*')
         ) {
             normalizedFileName = join(normalizedFileName, '**/*');

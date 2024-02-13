@@ -2,19 +2,22 @@ import {
     AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChild,
     ContentChildren,
+    DestroyRef,
     DoCheck,
     ElementRef,
     EventEmitter,
     HostBinding,
+    inject,
     Input,
     OnDestroy,
     Optional,
     Output,
     QueryList,
+    Signal,
+    signal,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
@@ -22,24 +25,27 @@ import {
 import { startWith } from 'rxjs/operators';
 
 import { NgTemplateOutlet } from '@angular/common';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
 import {
     DynamicPageComponent as CoreDynamicPageComponent,
     DynamicPageContentComponent as CoreDynamicPageContentComponent,
     DynamicPageFooterComponent as CoreDynamicPageFooterComponent,
     DynamicPageHeaderComponent as CoreDynamicPageHeaderComponent,
+    DynamicPage,
     DynamicPageGlobalActionsComponent,
     DynamicPageHeaderSubtitleDirective,
     DynamicPageHeaderTitleDirective,
     DynamicPageLayoutActionsComponent,
     DynamicPageSubheaderComponent,
     DynamicPageTitleContentComponent,
+    FD_DYNAMIC_PAGE,
     patchHeaderI18nTexts
 } from '@fundamental-ngx/core/dynamic-page';
 import { FacetComponent } from '@fundamental-ngx/core/facets';
-import { TabListComponent, TabPanelComponent } from '@fundamental-ngx/core/tabs';
+import { FD_TABLIST, TabList } from '@fundamental-ngx/core/shared';
 import { FD_LANGUAGE } from '@fundamental-ngx/i18n';
+import { IconTabBarComponent, IconTabBarItem, IconTabBarTabComponent } from '@fundamental-ngx/platform/icon-tab-bar';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import { DynamicPageContentHostComponent } from './dynamic-page-content/dynamic-page-content-host.component';
@@ -48,7 +54,8 @@ import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-f
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
 import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 import { DynamicPageConfig } from './dynamic-page.config';
-import { DynamicPageService } from './dynamic-page.service';
+import { FDP_DYNAMIC_PAGE } from './dynamic-page.tokens';
+import { PlatformDynamicPage } from './platform-dynamic-page.interface';
 
 /** Dynamic Page tab change event */
 export class DynamicPageTabChangeEvent {
@@ -59,7 +66,7 @@ export class DynamicPageTabChangeEvent {
      */
     constructor(
         public source: DynamicPageContentComponent,
-        public payload: TabPanelComponent
+        public payload: IconTabBarItem
     ) {}
 }
 
@@ -70,11 +77,14 @@ export class DynamicPageTabChangeEvent {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [
-        DynamicPageService,
         {
             provide: FD_LANGUAGE,
             useFactory: patchHeaderI18nTexts,
             deps: [[new Optional(), DynamicPageConfig]]
+        },
+        {
+            provide: FDP_DYNAMIC_PAGE,
+            useExisting: DynamicPageComponent
         }
     ],
     standalone: true,
@@ -90,15 +100,18 @@ export class DynamicPageTabChangeEvent {
         DynamicPageGlobalActionsComponent,
         DynamicPageLayoutActionsComponent,
         DynamicPageSubheaderComponent,
-        TabListComponent,
-        TabPanelComponent,
+        IconTabBarComponent,
+        IconTabBarTabComponent,
         DynamicPageContentComponent,
         DynamicPageFooterComponent,
         CoreDynamicPageFooterComponent,
         CoreDynamicPageContentComponent
     ]
 })
-export class DynamicPageComponent extends BaseComponent implements AfterContentInit, AfterViewInit, DoCheck, OnDestroy {
+export class DynamicPageComponent
+    extends BaseComponent
+    implements AfterContentInit, AfterViewInit, DoCheck, OnDestroy, PlatformDynamicPage, HasElementRef
+{
     /** Whether DynamicPage should snap on scroll */
     @Input()
     disableSnapOnScroll = false;
@@ -106,10 +119,6 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     @Input()
     @HostBinding('attr.role')
     role = 'region';
-
-    /** aria label for the page */
-    @Input()
-    ariaLabel: Nullable<string>;
 
     /** Whether or not tabs should be stacked. */
     @Input()
@@ -178,16 +187,23 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     contentComponents: QueryList<DynamicPageContentComponent>;
 
     /** @hidden */
-    @ViewChild(TabListComponent)
-    _tabListComponent: TabListComponent;
+    @ViewChild(FD_DYNAMIC_PAGE)
+    _dynamicPageComponent: DynamicPage;
+
+    /** @hidden */
+    @ViewChild(FD_TABLIST)
+    _tabListComponent: TabList;
 
     /** Reference to tab items components */
-    @ViewChildren(TabPanelComponent)
-    dynamicPageTabs: QueryList<TabPanelComponent>;
+    @ViewChildren(IconTabBarTabComponent)
+    dynamicPageTabs: QueryList<IconTabBarTabComponent>;
 
     /** @hidden */
     @ViewChildren(DynamicPageContentHostComponent)
     _contentHostComponents: QueryList<DynamicPageContentHostComponent>;
+
+    /** Whether Dynamic page is collapsed */
+    collapsed: Signal<boolean> = signal(false);
 
     /**
      * @hidden
@@ -202,11 +218,19 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     _tabs: DynamicPageContentComponent[] = [];
 
     /** @hidden */
-    constructor(
-        protected _cd: ChangeDetectorRef,
-        public readonly elementRef: ElementRef<HTMLElement>
-    ) {
-        super(_cd);
+    readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
+    /** @hidden */
+    protected _destroyRef = inject(DestroyRef);
+
+    /** toggle the visibility of the header on click of title area. */
+    toggleCollapse(): void {
+        this._dynamicPageComponent.toggleCollapse();
+    }
+
+    /** Triggers recheck for spacing and sizing of elements inside DynamicPage. */
+    refreshSize(): void {
+        this._dynamicPageComponent.refreshSize();
     }
 
     /** @hidden */
@@ -216,9 +240,10 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._cd.detectChanges();
+        this.detectChanges();
 
-        this._tabListComponent?.headerContainer.nativeElement.classList.add('fd-dynamic-page__tabs');
+        this._tabListComponent?.headerContainer?.nativeElement.classList.add('fd-dynamic-page__tabs');
+        this.collapsed = this._dynamicPageComponent.collapsed;
     }
 
     /** @hidden */
@@ -226,26 +251,18 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         /** Used to detect changes in projected components that displayed using templates,
          * https://github.com/angular/angular/issues/44112
          */
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /**
      * marks the dynamic page tab as selected when the id of the tab is passed
      */
     setSelectedTab(id: string): void {
-        if (!(id && this.dynamicPageTabs)) {
-            return;
-        }
-
-        this.dynamicPageTabs.forEach((element) => {
-            if (element.id === id) {
-                element.open(true);
-            }
-        });
+        this._tabListComponent.selectTab(id);
     }
 
     /** @hidden */
-    _onSelectedTabChange(event: TabPanelComponent): void {
+    _onSelectedTabChange(event: IconTabBarItem): void {
         const content = this.contentComponents.find((contentComponent) => contentComponent.id === event.id);
 
         content && this.tabChange.emit(new DynamicPageTabChangeEvent(content, event));

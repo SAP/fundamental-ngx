@@ -4,7 +4,7 @@
     class="fd-checkbox"
     [id]="inputId"
     [name]="name"
-    [disabled]="disabled"
+    [disabled]="disabled || displayOnly"
     [indeterminate]="isIndeterminate"
     [checked]="isChecked"
     [attr.tabindex]="tabIndexValue"

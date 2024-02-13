@@ -1,4 +1,3 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -10,7 +9,8 @@ import {
     Input,
     NgZone,
     QueryList,
-    ViewEncapsulation
+    ViewEncapsulation,
+    booleanAttribute
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
@@ -86,9 +86,9 @@ export class TableComponent implements AfterContentInit, AfterViewInit {
     keys: string[];
 
     /** Applies `focusable` to all cells within this table */
-    @Input()
-    set allCellsFocusable(value: BooleanInput) {
-        this._allCellsFocusable = coerceBooleanProperty(value);
+    @Input({ transform: booleanAttribute })
+    set allCellsFocusable(value: boolean) {
+        this._allCellsFocusable = value;
         this._updateCells();
     }
     get allCellsFocusable(): boolean {

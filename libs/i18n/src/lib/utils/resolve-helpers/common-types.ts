@@ -1,4 +1,4 @@
-import { FdLanguageKeyCtx, FdLanguageKeyIdentifier } from '../../models/lang';
+import { FdLanguageKeyCtx, FdLanguageKeyIdentifier } from '../../models';
 
 export type ResolveFnArgs<K extends FdLanguageKeyIdentifier> = FdLanguageKeyCtx<K> extends undefined
     ? [K]

@@ -1,11 +1,13 @@
+import { formatFiles } from '@nx/devkit';
 import { execSync } from 'child_process';
 import { sync as fastGlobSync } from 'fast-glob';
 import { FsTree, flushChanges, printChanges } from 'nx/src/generators/tree';
 import { workspaceRoot } from 'nx/src/utils/app-root';
 import { parse } from 'path';
 import { format, resolveConfig } from 'prettier';
-import { loadProperties } from './duplicates';
+import { loadProperties, parseProperties } from './duplicates';
 import { TransformPropertiesExecutorSchema } from './schema';
+import { updateTypings } from './update-typings';
 
 /**
  * Runs the transform-translations executor
@@ -42,20 +44,22 @@ export default async function runExecutor(options: TransformPropertiesExecutorSc
                 `
                 import translations from './${parsedPropertiesFilePath.name}';
                 import { translationTester } from "../utils/translation-tester";
-                import { FdLanguage } from "../models/lang";
+                import { FdLanguage } from "../models";
 
                 describe("${newFileSpecPath}", () => translationTester(translations as unknown as FdLanguage));
                 `,
                 { ...prettierConfig, parser: 'typescript' }
             )
         );
-        const changes = host.listChanges();
-        printChanges(changes);
-        flushChanges(host.root, changes);
         execSync(`git add ${newFilePath}`);
         execSync(`git add ${newFileSpecPath}`);
     }
-
+    updateTypings(host, Object.keys(parseProperties(host.read(propertiesFiles[0], 'utf-8') as string)));
+    execSync(`git add libs/i18n/src/lib/models/fd-language-key-identifier.ts`);
+    await formatFiles(host);
+    const changes = host.listChanges();
+    printChanges(changes);
+    flushChanges(host.root, changes);
     return {
         success: true
     };

@@ -55,7 +55,7 @@ let fileUploaderInputUniqueId = 0;
 export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, FormItemControl {
     /** @hidden */
     @ViewChild('fileInput')
-    inputRef: ElementRef;
+    inputRef: ElementRef<HTMLInputElement>;
 
     /** @hidden */
     @ViewChild('textInput')
@@ -277,6 +277,8 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
     public clear(): void {
         this.validFiles = [];
         this.invalidFiles = [];
+        // Clears selection in file uploader input.
+        this.inputRef.nativeElement.value = '';
         this._propagateFiles();
     }
 

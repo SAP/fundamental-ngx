@@ -1,6 +1,5 @@
 import { CdkPortalOutlet, ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import {
-    ChangeDetectorRef,
     ComponentRef,
     ElementRef,
     EmbeddedViewRef,
@@ -28,8 +27,7 @@ export abstract class DynamicComponentContainer<T = TemplateRef<any> | Type<any>
     /** @hidden */
     protected constructor(
         public elementRef: ElementRef,
-        protected _injector: Injector,
-        protected _cdr: ChangeDetectorRef
+        protected _injector: Injector
     ) {}
 
     /** @hidden Load received content */

@@ -157,6 +157,11 @@ export class BasePopoverClass {
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+    /** Event emitted right before the popover is being opened.
+     * Useful for cases when component inside popover body needs to be initialized right BEFORE the opening of the popover. */
+    @Output()
+    beforeOpen = new EventEmitter();
+
     /** @hidden Aria role for the popover body. */
     _bodyRole: string | null = null;
 

@@ -308,6 +308,6 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
 
     /** @hidden */
     private _getYearName(year: number): string {
-        return this._dateTimeAdapter.getYearName(this._dateTimeAdapter.createDate(year, 1, 1));
+        return this._dateTimeAdapter.getYearName(this._dateTimeAdapter.createDate(year));
     }
 }

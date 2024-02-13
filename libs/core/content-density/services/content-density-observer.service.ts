@@ -149,10 +149,7 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
     };
 
     /** @hidden */
-    constructor(
-        private _injector: Injector,
-        private _providedConfig?: ContentDensityObserverSettings
-    ) {
+    constructor(_injector: Injector, _providedConfig?: ContentDensityObserverSettings) {
         super(initialContentDensity(_injector, _providedConfig));
 
         this._destroyRef.onDestroy(() => {

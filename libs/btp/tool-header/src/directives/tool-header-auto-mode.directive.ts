@@ -56,7 +56,7 @@ export class ToolHeaderAutoModeDirective implements HasElementRef {
     /**
      * Reference to the element on which the directive is applied.
      */
-    elementRef: ElementRef = inject(ElementRef);
+    readonly elementRef: ElementRef = inject(ElementRef);
 
     /**
      * Current configuration of the directive.

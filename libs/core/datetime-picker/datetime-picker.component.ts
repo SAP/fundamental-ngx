@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -31,7 +32,6 @@ import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { DynamicComponentService, FocusTrapService, Nullable } from '@fundamental-ngx/cdk/utils';
@@ -299,14 +299,8 @@ export class DatetimePickerComponent<D>
      * By default, updates the value as user types.
      * @default false
      */
-    @Input()
-    set processInputOnBlur(v: boolean) {
-        this._processInputOnBlur = coerceBooleanProperty(v);
-    }
-
-    get processInputOnBlur(): boolean {
-        return this._processInputOnBlur;
-    }
+    @Input({ transform: booleanAttribute })
+    processInputOnBlur = false;
 
     /**
      * Whether to prevent page scrolling when focusing date picker input field after calendar has been closed.
@@ -402,9 +396,6 @@ export class DatetimePickerComponent<D>
 
     /** @hidden */
     _messageTriggers: string[] = ['focusin', 'focusout'];
-
-    /** @hidden */
-    _processInputOnBlur = false;
 
     /**
      * @hidden

@@ -10,8 +10,8 @@ import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { FlexibleColumnLayout, FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fd-dynamic-page-column-layout-example',
@@ -46,7 +46,7 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
         ToolbarSeparatorComponent,
         CdkScrollable,
         BarModule,
-        TabsModule,
+        FDP_ICON_TAB_BAR,
         MessageToastModule
     ]
 })

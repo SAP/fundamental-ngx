@@ -13,28 +13,22 @@ import {
 } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
-    ChangeDetectorRef,
     ContentChildren,
     Directive,
     ElementRef,
     EventEmitter,
-    Host,
-    Inject,
+    inject,
     InjectionToken,
     Input,
     OnChanges,
     OnDestroy,
-    Optional,
     Output,
     QueryList,
-    Self,
     signal,
     SimpleChanges,
-    SkipSelf,
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import equal from 'fast-deep-equal';
 import { fromEvent, isObservable, Observable, Subject, Subscription, timer } from 'rxjs';
@@ -67,13 +61,10 @@ import {
     MatchingStrategy,
     MultiComboBoxDataSource,
     ObservableMultiComboBoxDataSource,
-    PlatformFormField,
-    PlatformFormFieldControl,
     SelectableOptionItem
 } from '@fundamental-ngx/platform/shared';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { TextAlignment } from '../../combobox';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 
@@ -252,6 +243,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     selectedItemTemplate: TemplateRef<any>;
 
     /** @hidden */
+    protected readonly multiComboboxConfig = inject(MultiComboboxConfig);
+
+    /** @hidden */
     _contentDensity: ContentDensity = this.multiComboboxConfig.contentDensity;
 
     /** @hidden */
@@ -373,36 +367,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     protected readonly _rangeSelector = new RangeSelector();
 
     /** @hidden */
-    private _displayFn = (value: any): string => this.displayValue(value);
+    protected readonly dialogConfig = inject(DialogConfig, { optional: true });
 
     /** @hidden */
-    private _secondaryFn = (value: any): string => {
-        if (isOptionItem(value)) {
-            return value.secondaryText ?? '';
-        } else if (isJsObject(value) && this.secondaryKey) {
-            const currentItem = this.objectGet(value, this.secondaryKey);
-
-            return isFunction(currentItem) ? currentItem() : currentItem;
-        } else {
-            return value;
-        }
-    };
-
-    /** @hidden */
-    protected constructor(
-        protected readonly _cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        @Optional() @Self() readonly ngControl: NgControl,
-        @Optional() @SkipSelf() controlContainer: ControlContainer,
-        @Optional() @SkipSelf() readonly ngForm: NgForm,
-        @Optional() readonly dialogConfig: DialogConfig,
-        protected multiComboboxConfig: MultiComboboxConfig,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
-        @Inject(MAP_LIMIT) private _mapLimit: number
-    ) {
-        super(_cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
-    }
+    private readonly _mapLimit = inject(MAP_LIMIT);
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -464,6 +432,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     popoverOpenChangeHandle(isOpen: boolean): void {
         this.isOpen = isOpen;
         this._rangeSelector.reset();
+        if (!isOpen) {
+            this.onTouched();
+        }
         this._onOpenChange(this.isOpen);
     }
 
@@ -479,7 +450,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     open(): void {
         this.isOpen = true;
         this.isOpenChange.emit(this.isOpen);
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /** Closes the select popover body. */
@@ -491,7 +462,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
         this.isOpen = false;
         this.isOpenChange.emit(this.isOpen);
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /** @hidden */
@@ -506,7 +477,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
             this.searchTermChanged('');
         }
 
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /** @hidden */
@@ -524,7 +495,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
         this.ds.match(map);
 
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /**
@@ -654,7 +625,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
             }
         }
 
-        this._cd.detectChanges();
+        this.detectChanges();
     }
 
     /** @hidden */
@@ -666,6 +637,22 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     protected _focusToSearchField(): void {
         this.searchInputElement?.nativeElement.focus();
     }
+
+    /** @hidden */
+    private _displayFn = (value: any): string => this.displayValue(value);
+
+    /** @hidden */
+    private _secondaryFn = (value: any): string => {
+        if (isOptionItem(value)) {
+            return value.secondaryText ?? '';
+        } else if (isJsObject(value) && this.secondaryKey) {
+            const currentItem = this.objectGet(value, this.secondaryKey);
+
+            return isFunction(currentItem) ? currentItem() : currentItem;
+        } else {
+            return value;
+        }
+    };
 
     /** @hidden
      * Method that picks other value moved from current one by offset, called only when Multi Combobox is closed */
@@ -778,7 +765,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
                 this.stateChanges.next('initDataSource.open().');
 
-                this._cd.markForCheck();
+                this.markForCheck();
             });
         this._dsSubscription.add(dsSub);
 
@@ -812,7 +799,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
     /** @hidden */
     private _processingEmptyData(): void {
-        this._cd.detectChanges();
+        this.detectChanges();
 
         this.inputText = this._previousInputText;
 
@@ -837,7 +824,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         this._previousStateMessage = this.stateMessage;
         this.stateMessage = this.invalidEntryMessage;
 
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /** @hidden */
@@ -848,7 +835,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         this.stateMessage = this._previousStateMessage;
         this._previousStateMessage = undefined;
 
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /** @hidden */
@@ -888,7 +875,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         const scrollBarWidth = body.offsetWidth - body.clientWidth;
         this.maxWidth = this.autoResize ? window.innerWidth - scrollBarWidth - rect.left : this.minWidth;
         this.minWidth = rect.width - 2;
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /**

@@ -15,12 +15,12 @@ import { NavigationStart, Router } from '@angular/router';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
 
-import { FocusTrapService, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
+import { FocusTrapService, HasElementRef, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 
 import { FD_DIALOG_FOCUS_TRAP_ERROR } from '../tokens';
 import { DialogSize, dialogWidthToSize } from '../utils/dialog-width-to-size';
 import { DialogConfigBase } from './dialog-config-base.class';
-import { DialogRefBase } from './dialog-ref-base.class';
+import { DialogRefBase, FD_DIALOG_DISMISS_REASON } from './dialog-ref-base.class';
 
 function coerceMetricValue(value: string | number | undefined): string | undefined {
     return typeof value === 'number' ? `${value}px` : value;
@@ -28,7 +28,7 @@ function coerceMetricValue(value: string | number | undefined): string | undefin
 
 @Directive()
 export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRefBase<T>>
-    implements OnInit, AfterViewInit, OnDestroy
+    implements OnInit, AfterViewInit, OnDestroy, HasElementRef
 {
     /**
      * @hidden
@@ -41,6 +41,19 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
 
     /** @hidden Dialog padding sizes */
     dialogPaddingSize: DialogSize;
+
+    /** @hidden */
+    readonly _focusTrapService = inject(FocusTrapService);
+    /** @hidden */
+    readonly _changeDetectorRef = inject(ChangeDetectorRef);
+    /** @hidden */
+    readonly elementRef = inject(ElementRef);
+
+    /** @hidden */
+    protected readonly _router = inject(Router);
+
+    /** @hidden */
+    protected readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
     protected _focusTrapId: string;
@@ -66,7 +79,7 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
     @HostListener('keydown', ['$event'])
     closeDialogEsc(event: KeyboardEvent): void {
         if (this._config.escKeyCloseable && KeyUtil.isKeyCode(event, ESCAPE)) {
-            this._ref.dismiss('escape');
+            this._ref.dismiss(FD_DIALOG_DISMISS_REASON.ESCAPE);
         }
     }
 
@@ -74,18 +87,9 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
     @HostListener('mousedown', ['$event.target'])
     closeDialog(target: ElementRef): void {
         if (this._config.backdropClickCloseable && target === this.elementRef.nativeElement) {
-            this._ref.dismiss('backdrop');
+            this._ref.dismiss(FD_DIALOG_DISMISS_REASON.BACKDROP);
         }
     }
-
-    /** @hidden */
-    constructor(
-        protected _router: Router,
-        public readonly elementRef: ElementRef,
-        protected _changeDetectorRef: ChangeDetectorRef,
-        protected _rtlService: RtlService,
-        protected _focusTrapService: FocusTrapService
-    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -129,7 +133,7 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
             this._subscriptions.add(
                 this._router.events
                     .pipe(filter((event) => event instanceof NavigationStart && !!this._config.closeOnNavigation))
-                    .subscribe(() => this._ref.dismiss())
+                    .subscribe(() => this._ref.dismiss(FD_DIALOG_DISMISS_REASON.NAVIGATION_CHANGE))
             );
         }
     }

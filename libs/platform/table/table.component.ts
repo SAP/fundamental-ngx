@@ -128,9 +128,20 @@ import {
     TableVirtualScroll
 } from '@fundamental-ngx/platform/table-helpers';
 import equal from 'fast-deep-equal';
-import { fromEvent, Observable, of, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, take, tap } from 'rxjs/operators';
-import { TABLE_TOOLBAR, TableToolbarInterface, ToolbarContext } from './components';
+import { uniq } from 'lodash-es';
+import { fromEvent, Observable, of, Subject, Subscription } from 'rxjs';
+import {
+    debounceTime,
+    distinctUntilChanged,
+    filter,
+    map,
+    startWith,
+    switchMap,
+    take,
+    takeUntil,
+    tap
+} from 'rxjs/operators';
+import { NoDataWrapperComponent, TABLE_TOOLBAR, TableToolbarInterface, ToolbarContext } from './components';
 import { PlatformTableColumnResizerComponent } from './components/table-column-resizer/table-column-resizer.component';
 import { TableGroupRowComponent } from './components/table-group-row/table-group-row.component';
 import { TableHeaderRowComponent } from './components/table-header-row/table-header-row.component';
@@ -438,8 +449,28 @@ export class TableComponent<T = any>
     @Input()
     ariaLabelledBy: string;
 
+    /**
+     * Specifies minimal width of the non-frozen columns.
+     * Useful when table has large amount of freezable columns and table still should have some free space available.
+     */
+    @Input()
+    set nonFrozenColumnsMinWidth(value: number) {
+        this._listenToFixedColumnsWidth();
+        this._nonFrozenColumnsMinWidth = value;
+    }
+
+    get nonFrozenColumnsMinWidth(): number {
+        return this._nonFrozenColumnsMinWidth;
+    }
+
+    /** @hidden */
+    private _nonFrozenColumnsMinWidth = 0;
+
     /** @hidden */
     private _shouldCheckNewRows = false;
+
+    /** @hidden */
+    private _calculateFrozenColumnRefresh$ = new Subject<void>();
 
     /** Event emitted when current preset configuration has been changed. */
     @Output()
@@ -527,6 +558,9 @@ export class TableComponent<T = any>
     /** @hidden */
     @ContentChild(TABLE_TOOLBAR)
     readonly tableToolbar: TableToolbarInterface;
+    /** @hidden */
+    @ContentChild(NoDataWrapperComponent)
+    readonly _noDataWrapper: Nullable<NoDataWrapperComponent>;
     /** @hidden */
     get initialSortBy(): CollectionSort[] {
         return this.initialState?.initialSortBy ?? [];
@@ -736,6 +770,8 @@ export class TableComponent<T = any>
     /** @hidden */
     private _shouldEmitRowsChange = false;
     /** @hidden */
+    private _lastFreezableColumnCalculation = false;
+    /** @hidden */
     private readonly _tableHeaderResizer = inject(TableHeaderResizerDirective);
 
     /**
@@ -888,6 +924,8 @@ export class TableComponent<T = any>
 
         this._initScrollPosition();
 
+        this._listenToFixedColumnsWidth();
+
         if (this.expandOnInit) {
             this.expandAll();
         }
@@ -921,6 +959,8 @@ export class TableComponent<T = any>
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
+        this._calculateFrozenColumnRefresh$.next();
+        this._calculateFrozenColumnRefresh$.complete();
     }
 
     /** Get current state/settings of the Table. */
@@ -1016,6 +1056,7 @@ export class TableComponent<T = any>
 
         this._tableService.freezeTo(columnName, end);
         this.recalculateTableColumnWidth();
+        this._calculateLastFreezableColumn();
     }
 
     /** Unfreeze column */
@@ -1679,7 +1720,9 @@ export class TableComponent<T = any>
                         this.filterChange.emit(new TableFilterChangeEvent(this, state.current, state.previous));
                         break;
                     case 'freeze':
-                        this.columnFreeze.emit(new TableColumnFreezeEvent(this, state.current, state.previous));
+                        if (!this._lastFreezableColumnCalculation) {
+                            this.columnFreeze.emit(new TableColumnFreezeEvent(this, state.current, state.previous));
+                        }
                         this.fixed = !!this.fixed || !!this._freezableColumns.size || !!this._freezableEndColumns.size;
                         break;
                     case 'search':
@@ -2131,7 +2174,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _setSelectionColumnWidth(): void {
-        this._selectionColumnWidth = this._isSelectionColumnShown
+        this._selectionColumnWidth = this.isSelectionColumnShown
             ? SELECTION_COLUMN_WIDTH.get(this.contentDensityObserver.value) ?? 0
             : 0;
     }
@@ -2142,5 +2185,72 @@ export class TableComponent<T = any>
             this._tableColumnResizeService.fixedWidth &&
                 (this.tableContainer?.nativeElement?.scrollWidth ?? 0) > (this.table?.nativeElement?.scrollWidth ?? 0)
         );
+    }
+
+    /**
+     * @hidden
+     * Listens to fixed column width subject and calculates last applicable frozen column based on `nonFrozenColumnsMinWidth` vaue.
+     */
+    private _listenToFixedColumnsWidth(): void {
+        this._calculateFrozenColumnRefresh$.next();
+        this._calculateFrozenColumnRefresh$.complete();
+
+        this._calculateFrozenColumnRefresh$ = new Subject();
+
+        this._tableColumnResizeService.fixedColumsWidthChange
+            .pipe(takeUntil(this._calculateFrozenColumnRefresh$))
+            .subscribe(() => this._calculateLastFreezableColumn());
+    }
+
+    private _calculateLastFreezableColumn(): void {
+        if (!this.tableScrollable || this._lastFreezableColumnCalculation) {
+            return;
+        }
+        this._lastFreezableColumnCalculation = true;
+        const allColumns = this._tableColumnResizeService.fixedColumsWidthChange.value;
+        const allFrozenColumns = uniq([
+            ...this._freezableColumns.keys(),
+            this.freezeColumnsTo,
+            ...this._freezableEndColumns.keys()
+        ]);
+        const columnSize = {
+            frozen: new Map<string, number>(),
+            unFrozen: new Map<string, number>()
+        };
+        allColumns.forEach((size, column) => {
+            columnSize[allFrozenColumns.includes(column) ? 'frozen' : 'unFrozen'].set(column, parseInt(size, 10));
+        });
+
+        const frozenColumnSizes = [...columnSize.frozen.values()];
+
+        if (frozenColumnSizes.length === 0) {
+            this._lastFreezableColumnCalculation = false;
+            return;
+        }
+
+        const totalFrozenSize = [...columnSize.frozen.values()].reduce((sum, size) => sum + size);
+
+        let diff = this.tableScrollable.elementRef.nativeElement.getBoundingClientRect().width - totalFrozenSize;
+        const freezedColumns = [...this._freezableColumns.keys()];
+
+        if (diff >= this.nonFrozenColumnsMinWidth) {
+            this._lastFreezableColumnCalculation = false;
+            return;
+        }
+
+        let lastColumn: string;
+
+        while (diff < this.nonFrozenColumnsMinWidth) {
+            if (freezedColumns.length === 0) {
+                break;
+            }
+
+            lastColumn = freezedColumns.pop()!;
+            diff += columnSize.frozen.get(lastColumn)!;
+        }
+
+        this._lastFreezableColumnCalculation = false;
+
+        this.freezeToColumn(freezedColumns[freezedColumns.length - 1]);
     }
 }

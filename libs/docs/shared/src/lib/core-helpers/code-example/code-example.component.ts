@@ -13,7 +13,7 @@ import {
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MessageStripAlertService, MessageStripComponent } from '@fundamental-ngx/core/message-strip';
-import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform';
 import { Observable, ReplaySubject, isObservable, of, shareReplay, switchMap, tap, zip } from 'rxjs';
 import { catchError, map, startWith } from 'rxjs/operators';
 import { CopyService } from '../../services/copy.service';
@@ -45,7 +45,7 @@ interface ExamplesEntity {
         ButtonComponent,
         BusyIndicatorComponent,
         MessageStripComponent,
-        TabsModule,
+        FDP_ICON_TAB_BAR,
         CodeSnippetComponent,
         AsyncPipe,
         TitleCasePipe
@@ -76,7 +76,6 @@ export class CodeExampleComponent implements OnInit {
     activeIndex = 0;
 
     constructor(
-        private element: ElementRef,
         private copyService: CopyService,
         private messageStripAlertService: MessageStripAlertService,
         private stackBlitzService: StackblitzService
@@ -154,30 +153,4 @@ export class CodeExampleComponent implements OnInit {
     onResize(): void {
         this.smallScreen = window.innerWidth <= 768;
     }
-
-    // toggleCodeVisibility(): void {
-    //     (async () => {
-    //         const exampleFiles: ExampleFile<string>[] = [];
-    //         for (const file of this._displayedFiles) {
-    //             if (typeof file.code !== 'string') {
-    //                 file.code = await file.code;
-    //             }
-    //             exampleFiles.push(file as ExampleFile<string>);
-    //         }
-    //         this._exampleFiles = exampleFiles;
-    //         const scssExamples: ExampleFile<string>[] = [];
-    //         for (const file of this._exampleFiles) {
-    //             if (file.scssFileCode) {
-    //                 scssExamples.push({
-    //                     code: typeof file.scssFileCode === 'string' ? file.scssFileCode : await file.scssFileCode,
-    //                     language: 'scss',
-    //                     name: 'Scss'
-    //                 });
-    //             }
-    //         }
-    //
-    //         this._displayedFiles = this._exampleFiles.concat(scssExamples);
-    //         this.isOpen = !this.isOpen;
-    //     })();
-    // }
 }

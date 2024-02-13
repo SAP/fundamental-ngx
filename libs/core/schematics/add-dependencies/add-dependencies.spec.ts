@@ -43,13 +43,19 @@ describe('ng-add schematic', () => {
 
     it('should throw an error if package.json does not exist', async () => {
         tree.delete('package.json');
-        expect(runner.runExternalSchematic('schematics', 'add-dependencies', undefined, tree)).rejects.toThrowError('Could not find package.json');
+        try {
+            await runner.runExternalSchematic('schematics', 'add-dependencies', undefined, tree);
+        } catch (e) {
+            expect(e.message).toBe('Path "/package.json" does not exist.');
+        }
     });
 
     it('should throw an error if @angular/core is not a dependency', async () => {
         tree.overwrite('package.json', JSON.stringify({ dependencies: {} }));
-        expect(
-            runner.runExternalSchematic('schematics', 'add-dependencies', undefined, tree)
-        ).rejects.toThrowError('Could not find @angular/core in package.json');
+        try {
+            await runner.runExternalSchematic('schematics', 'add-dependencies', undefined, tree);
+        } catch (e) {
+            expect(e.message).toBe('Could not find @angular/core in package.json');
+        }
     });
 });

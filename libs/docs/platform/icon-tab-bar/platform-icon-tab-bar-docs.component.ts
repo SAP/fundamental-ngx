@@ -18,6 +18,8 @@ import { PlatformIconTabBarIconOnlyTypeExampleComponent } from './examples/platf
 import { PlatformIconTabBarIconTypeExampleComponent } from './examples/platform-icon-tab-bar-icon-type-example/platform-icon-tab-bar-icon-type-example.component';
 import { PlatformIconTabBarProcessTypeExampleComponent } from './examples/platform-icon-tab-bar-process-type-example/platform-icon-tab-bar-process-type-example.component';
 import { PlatformIconTabBarTextTypeExampleComponent } from './examples/platform-icon-tab-bar-text-type-example/platform-icon-tab-bar-text-type-example.component';
+import { IconTabBarTabsContentExampleComponent } from './examples/tabs-content/icon-tab-bar-tabs-content-example.component';
+import { IconTabBarTwoClickAreaExampleComponent } from './examples/two-click-area/icon-tab-bar-two-click-area-example.component';
 
 const iconTabBarTextTypeHtml =
     'platform-icon-tab-bar-text-type-example/platform-icon-tab-bar-text-type-example.component.html';
@@ -52,6 +54,12 @@ const iconTabBarConfigurablePaddingsTs =
 const iconTabBarClosableHtml = 'closable-tabs/icon-tab-bar-closable-tabs-example.component.html';
 const iconTabBarClosableTs = 'closable-tabs/icon-tab-bar-closable-tabs-example.component.ts';
 
+const iconTabBarProjectedHtml = 'tabs-content/icon-tab-bar-tabs-content-example.component.html';
+const iconTabBarProjectedTs = 'tabs-content/icon-tab-bar-tabs-content-example.component.ts';
+
+const iconTabBarTwoClickHtml = 'two-click-area/icon-tab-bar-two-click-area-example.component.html';
+const iconTabBarTwoClickTs = 'two-click-area/icon-tab-bar-two-click-area-example.component.ts';
+
 const iconTypeConfigs = 'config-for-examples/icon-type-config.ts';
 
 const textTypeConfigs = 'config-for-examples/text-type.config.ts';
@@ -84,7 +92,9 @@ export interface IconTabBarItem extends TabConfig {
         PlatformIconTabBarProcessTypeExampleComponent,
         MessageStripComponent,
         PlatformIconTabBarConfigurablePaddingsExampleComponent,
-        IconTabBarClosableTabsExampleComponent
+        IconTabBarClosableTabsExampleComponent,
+        IconTabBarTabsContentExampleComponent,
+        IconTabBarTwoClickAreaExampleComponent
     ]
 })
 export class PlatformIconTabBarDocsComponent {
@@ -244,6 +254,45 @@ export class PlatformIconTabBarDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(iconTypeConfigs),
             fileName: 'icon-type-config',
+            path: 'config-for-examples',
+            pure: true
+        }
+    ];
+
+    iconTabBarProjectedTabsFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(iconTabBarProjectedHtml),
+            fileName: 'icon-tab-bar-tabs-content-example',
+            path: 'example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(iconTabBarProjectedTs),
+            fileName: 'icon-tab-bar-tabs-content-example',
+            component: 'IconTabBarTabsContentExampleComponent',
+            path: 'example'
+        }
+    ];
+
+    iconTabBarTwoClickFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(iconTabBarTwoClickHtml),
+            fileName: 'icon-tab-bar-two-click-area-example',
+            path: 'example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(iconTabBarTwoClickTs),
+            fileName: 'icon-tab-bar-two-click-area-example',
+            component: 'IconTabBarTwoClickAreaExampleComponent',
+            path: 'example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(textTypeConfigs),
+            fileName: 'text-type.config',
             path: 'config-for-examples',
             pure: true
         }

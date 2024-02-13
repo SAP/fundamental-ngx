@@ -1,7 +1,7 @@
 import { computed, inject, isSignal, signal, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { FdLanguage, FdLanguageKeyCtx, FdLanguageKeyIdentifier } from '../../models/lang';
+import { FdLanguage, FdLanguageKeyCtx, FdLanguageKeyIdentifier } from '../../models';
 import { FD_LANGUAGE, FD_LOCALE } from '../tokens';
 import { TranslationResolver } from '../translation-resolver';
 

@@ -1,37 +1,26 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
-    Host,
     Inject,
     Injector,
     OnInit,
     Optional,
     Output,
-    Self,
-    SkipSelf,
     TemplateRef,
     ViewChild,
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { FormsModule } from '@angular/forms';
+import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityModule, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
-import {
-    ComboBoxDataSource,
-    DATA_PROVIDERS,
-    DataProvider,
-    OptionItem,
-    PlatformFormField,
-    PlatformFormFieldControl
-} from '@fundamental-ngx/platform/shared';
+import { ComboBoxDataSource, DATA_PROVIDERS, DataProvider, OptionItem } from '@fundamental-ngx/platform/shared';
 
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { SearchHighlightPipe } from '@fundamental-ngx/cdk/utils';
@@ -108,36 +97,19 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
 
     /** @hidden */
     constructor(
-        readonly cd: ChangeDetectorRef,
-        readonly elementRef: ElementRef,
-        @Optional() @Self() readonly ngControl: NgControl,
-        @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
-        @Optional() @Self() readonly ngForm: NgForm,
-        @Optional() readonly dialogConfig: DialogConfig,
+        @Optional() _dialogConfig: DialogConfig,
         readonly _dynamicComponentService: DynamicComponentService,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _injector: Injector,
         @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
-        readonly _comboboxConfig: ComboboxConfig,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
+        _comboboxConfig: ComboboxConfig
     ) {
-        super(
-            cd,
-            elementRef,
-            ngControl,
-            controlContainer,
-            ngForm,
-            dialogConfig,
-            _comboboxConfig,
-            formField,
-            formControl
-        );
+        super(_dialogConfig, _comboboxConfig);
     }
     /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
-        const providers = this.providers?.size === 0 ? this._comboboxConfig.providers : this.providers;
+        const providers = this.providers?.size === 0 ? this.comboboxConfig.providers : this.providers;
         // if we have both prefer dataSource
         if (!this.dataSource && this.entityClass && providers?.has(this.entityClass)) {
             this.dataSource = new ComboBoxDataSource(providers.get(this.entityClass)!);
@@ -189,7 +161,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         if (this.mobile) {
             this._selectedElement = item;
             this.inputText = item.label;
-            this.cd.detectChanges();
+            this.detectChanges();
 
             return;
         }
@@ -258,9 +230,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
             return;
         }
 
-        const optionItem = this._getSelectedOptionItem(this.inputText);
-
-        this._updateModel(optionItem ? optionItem.value : this.inputText);
+        this._updateModel(modelValue.value);
     }
 
     /** @hidden Update model */

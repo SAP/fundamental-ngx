@@ -23,6 +23,7 @@
             <h1 id="fd-dialog-header-10" fd-title>The History of Pineapple</h1>
             <button
                 fd-dialog-full-screen-toggler-button
+                [dialogRef]="dialog"
                 [title]="(dialog.fullScreen | async) === true ? 'Exit full-screen mode' : 'Enter full-screen mode'"
                 (click)="dialog.toggleFullScreen()"
             ></button>

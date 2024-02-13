@@ -1,4 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -9,7 +9,10 @@ import {
     Input,
     Output,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    booleanAttribute,
+    effect,
+    inject
 } from '@angular/core';
 import { FilterStringsPipe, Nullable } from '@fundamental-ngx/cdk/utils';
 import {
@@ -19,7 +22,9 @@ import {
     BarRightDirective,
     ButtonBarComponent
 } from '@fundamental-ngx/core/bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogService } from '@fundamental-ngx/core/dialog';
+import { DynamicPage, FD_DYNAMIC_PAGE } from '@fundamental-ngx/core/dynamic-page';
 import { ListComponent, ListItemComponent, ListLinkDirective, ListTitleDirective } from '@fundamental-ngx/core/list';
 import {
     PopoverBodyComponent,
@@ -31,7 +36,7 @@ import {
 } from '@fundamental-ngx/core/popover';
 import { HeaderSizes, TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { MenuButtonComponent } from '@fundamental-ngx/platform/menu-button';
+import { FDP_DYNAMIC_PAGE } from '@fundamental-ngx/platform/dynamic-page';
 import { SearchFieldComponent, SearchInput } from '@fundamental-ngx/platform/search-field';
 import equal from 'fast-deep-equal';
 import { BehaviorSubject } from 'rxjs';
@@ -62,7 +67,6 @@ import { VariantItem } from './variant-item.class';
         PopoverControlComponent,
         TitleComponent,
         NgTemplateOutlet,
-        MenuButtonComponent,
         PopoverBodyComponent,
         PopoverBodyHeaderDirective,
         BarComponent,
@@ -77,7 +81,10 @@ import { VariantItem } from './variant-item.class';
         BarRightDirective,
         ButtonBarComponent,
         FdTranslatePipe,
-        FilterStringsPipe
+        FilterStringsPipe,
+        AsyncPipe,
+        NgClass,
+        ButtonComponent
     ]
 })
 export class VariantManagementComponent<T = any> implements VariantManagement<T> {
@@ -107,8 +114,12 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
     userName: string;
 
     /** Whether to display search field for variants list. */
-    @Input()
+    @Input({ transform: booleanAttribute })
     displaySearch = false;
+
+    /** Whether the variant management component is in readonly mode. */
+    @Input({ transform: booleanAttribute })
+    readonly = false;
 
     /** Event emitted when variants data has been updated. */
     @Output()
@@ -119,11 +130,6 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
     activeVariantChange = new EventEmitter<Variant<T>>();
 
     /**
-     * Used internally for communicating with wrapper component.
-     */
-    activeVariantChangeSubject = new BehaviorSubject<Variant<T> | null>(null);
-
-    /**
      * Custom dirty label directive.
      */
     @ContentChild(VariantManagementDirtyLabelDirective)
@@ -132,6 +138,15 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
     /** @hidden */
     @ViewChild('popover')
     _popover: PopoverComponent;
+
+    /** @hidden */
+    @HostBinding('class')
+    private readonly _initialClass = 'fd-variant-management';
+
+    /**
+     * Used internally for communicating with wrapper component.
+     */
+    activeVariantChangeSubject = new BehaviorSubject<Variant<T> | null>(null);
 
     /** @hidden */
     _variantChanged = false;
@@ -146,9 +161,17 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
     _filterPhrase: Nullable<string> = null;
 
     /** @hidden */
-    @HostBinding('class')
-    private readonly _initialClass = 'fd-variant-management';
+    get _dynamicPage(): DynamicPage | null {
+        return this._coreDynamicPage || this._platformDynamicPage;
+    }
 
+    /** @hidden */
+    protected _dynamicPageCollapsed$ = new BehaviorSubject(false);
+
+    /** @hidden */
+    protected _coreDynamicPage = inject(FD_DYNAMIC_PAGE, { optional: true });
+    /** @hidden */
+    protected _platformDynamicPage = inject(FDP_DYNAMIC_PAGE, { optional: true });
     /** @Hidden */
     private _originalActiveVariant: VariantItem<T>;
 
@@ -156,7 +179,13 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
     constructor(
         private readonly _dialogService: DialogService,
         private readonly _cdr: ChangeDetectorRef
-    ) {}
+    ) {
+        if (this._dynamicPage) {
+            effect(() => {
+                this._dynamicPageCollapsed$.next(this._dynamicPage!.collapsed());
+            });
+        }
+    }
 
     /**
      * Manually select variant.
@@ -184,6 +213,9 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
      * Saves current variant with its configuration.
      */
     saveCurrentVariant(): void {
+        if (this.readonly) {
+            return;
+        }
         const currentVariantIndex = this._variants.findIndex((variant) => variant.id === this.activeVariant.id);
         this._variants[currentVariantIndex] = this.activeVariant;
         this._originalActiveVariant = this.activeVariant.clone({}, false);
@@ -193,6 +225,9 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
 
     /** @hidden */
     _openSaveDialog(): void {
+        if (this.readonly) {
+            return;
+        }
         this._popover?.close(false);
         const dialogRef = this._dialogService.open<SaveDialogContext>(ManageVariantItemComponent, {
             data: {
@@ -227,6 +262,9 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
 
     /** @hidden */
     _openManageDialog(): void {
+        if (this.readonly) {
+            return;
+        }
         this._popover?.close(false);
         const dialogRef = this._dialogService.open<VariantItem[]>(ManageVariantsDialogComponent, {
             data: this._variants

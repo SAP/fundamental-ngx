@@ -1,9 +1,9 @@
 import { TemplateRef } from '@angular/core';
-import {
+import { FdkAsyncProperty } from '@fundamental-ngx/cdk/utils';
+import type {
     AnyDynamicFormFieldItem,
     BaseDynamicFormFieldItem,
-    DynamicFormItem,
-    FdpFormGeneratorAsyncProperty
+    DynamicFormItem
 } from '@fundamental-ngx/platform/form';
 import { ListAvatarConfig, ListIconConfig } from '@fundamental-ngx/platform/list';
 import { Observable } from 'rxjs';
@@ -43,7 +43,7 @@ export interface SidebarSettingsModel<TAdditionalControlTypes extends BaseDynami
 
 export interface SettingsFormTab<TAdditionalControlTypes extends BaseDynamicFormFieldItem = AnyDynamicFormFieldItem> {
     /** Title of the tab. */
-    title: FdpFormGeneratorAsyncProperty<string>;
+    title: FdkAsyncProperty<string>;
     /** @hidden */
     template?: never;
     /** ID of the tab. Will be used as a key in resulting form object. */
@@ -54,7 +54,7 @@ export interface SettingsFormTab<TAdditionalControlTypes extends BaseDynamicForm
 
 export interface SettingsTemplateTab {
     /** Title of the tab. */
-    title: FdpFormGeneratorAsyncProperty<string>;
+    title: FdkAsyncProperty<string>;
     /** @hidden */
     items?: never;
     /** @hidden */
@@ -65,13 +65,13 @@ export interface SettingsTemplateTab {
 
 export interface BaseSettingsItem {
     /** Settings item title. */
-    title: FdpFormGeneratorAsyncProperty<string>;
+    title: FdkAsyncProperty<string>;
     /** Settings item icon. */
     thumbnail?: ThumbnailSettingsItem;
     /** Settings item description. */
-    description?: FdpFormGeneratorAsyncProperty<string>;
+    description?: FdkAsyncProperty<string>;
     /** Settings section title. */
-    sectionTitle?: FdpFormGeneratorAsyncProperty<string>;
+    sectionTitle?: FdkAsyncProperty<string>;
 }
 
 export interface IconBaseSettingsItem {

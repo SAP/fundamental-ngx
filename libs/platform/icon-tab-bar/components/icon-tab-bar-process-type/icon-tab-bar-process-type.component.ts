@@ -1,25 +1,33 @@
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { take } from 'rxjs/operators';
 
-import { OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
+import { AsyncOrSyncPipe, OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { cloneDeep } from 'lodash-es';
 import { ICON_TAB_HIDDEN_CLASS_NAME } from '../../constants';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { ClosableIconTabBar } from '../closable-icon-tab-bar.class';
+import { IconTabBarBase } from '../icon-tab-bar-base.class';
 import { IconTabBarPopoverComponent } from '../popovers/icon-tab-bar-popover/icon-tab-bar-popover.component';
 
 @Component({
     selector: 'fdp-icon-tab-bar-process-type',
     templateUrl: './icon-tab-bar-process-type.component.html',
     standalone: true,
+    providers: [
+        {
+            provide: IconTabBarBase,
+            useExisting: IconTabBarProcessTypeComponent
+        }
+    ],
     imports: [
         OverflowListDirective,
         IconTabBarPopoverComponent,
         OverflowListItemDirective,
         IconComponent,
-        ButtonComponent
+        ButtonComponent,
+        AsyncOrSyncPipe
     ]
 })
 export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
@@ -119,7 +127,7 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
     private _clearExtraList(): void {
         this._nextSteps = [];
         this._prevSteps = [];
-        this._tabs.forEach((item) => {
+        this.tabs.forEach((item) => {
             item.hidden = false;
             item.cssClasses = item.cssClasses.filter((cssClass) => cssClass !== ICON_TAB_HIDDEN_CLASS_NAME);
         });
@@ -137,16 +145,17 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
         if (!extraItems) {
             return;
         }
-        const visibleAmountOfItems = this._tabs.length - extraItems;
-        for (let i = this._tabs.length - amountOfNextSteps; i < this._tabs.length; i++) {
-            this._nextSteps.push(cloneDeep(this._tabs[i]));
-            this._tabs[i].hidden = true;
-            this._tabs[i].cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
+        const tabs = [...this.tabs];
+        const visibleAmountOfItems = tabs.length - extraItems;
+        for (let i = tabs.length - amountOfNextSteps; i < tabs.length; i++) {
+            this._nextSteps.push(cloneDeep(tabs[i]));
+            tabs[i].hidden = true;
+            tabs[i].cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
         }
 
         this._showRightBtn = !!this._nextSteps.length;
-        this._firstVisibleTabIndex = this._tabs.length - visibleAmountOfItems - this._nextSteps.length;
-        this._lastVisibleTabIndex = this._tabs.length - amountOfNextSteps - 1;
+        this._firstVisibleTabIndex = tabs.length - visibleAmountOfItems - this._nextSteps.length;
+        this._lastVisibleTabIndex = tabs.length - amountOfNextSteps - 1;
 
         if (this._nextSteps.length === extraItems) {
             return;
@@ -155,9 +164,9 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
         let amountOfPrevSteps = extraItems - this._nextSteps.length;
         let nextIndex = this._firstVisibleTabIndex - 1;
         while (amountOfPrevSteps > 0) {
-            this._prevSteps.push(cloneDeep(this._tabs[nextIndex]));
-            this._tabs[nextIndex].hidden = true;
-            this._tabs[nextIndex].cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
+            this._prevSteps.push(cloneDeep(tabs[nextIndex]));
+            tabs[nextIndex].hidden = true;
+            tabs[nextIndex].cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
 
             --nextIndex;
             --amountOfPrevSteps;
@@ -183,11 +192,12 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
         if (!extraItems) {
             return;
         }
-        const visibleAmountOfItems = this._tabs.length - extraItems;
+        const tabs = [...this.tabs];
+        const visibleAmountOfItems = tabs.length - extraItems;
         for (let i = amountOfPreviousSteps - 1; i >= 0; i--) {
-            this._prevSteps.push(cloneDeep(this._tabs[i]));
-            this._tabs[i].hidden = true;
-            this._tabs[i].cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
+            this._prevSteps.push(cloneDeep(tabs[i]));
+            tabs[i].hidden = true;
+            tabs[i].cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
         }
 
         this._firstVisibleTabIndex = this._prevSteps.length;
@@ -202,9 +212,9 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
         let amountOfNextSteps = extraItems - this._prevSteps.length;
         let nextIndex = this._prevSteps.length ? this._prevSteps.length + visibleAmountOfItems : visibleAmountOfItems;
         while (amountOfNextSteps > 0) {
-            this._nextSteps.push(cloneDeep(this._tabs[nextIndex]));
-            this._tabs[nextIndex].hidden = true;
-            this._tabs[nextIndex].cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
+            this._nextSteps.push(cloneDeep(tabs[nextIndex]));
+            tabs[nextIndex].hidden = true;
+            tabs[nextIndex].cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
 
             ++nextIndex;
             --amountOfNextSteps;

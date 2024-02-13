@@ -174,3 +174,39 @@
     <fdp-icon-tab-bar-closable-tabs-example></fdp-icon-tab-bar-closable-tabs-example>
 </component-example>
 <code-example [exampleFiles]="iconTabBarClosableTabsFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="tabs-content" componentName="icon-tab-bar"> Tabs content </fd-docs-section-title>
+<description>
+    <p>
+        In addition to data-driven approach, Icon Tab Bar can render content tabs with projected
+        <code>fdp-icon-tab-bar-tab</code> components.
+    </p>
+</description>
+<component-example>
+    <fdp-icon-tab-bar-tabs-content-example></fdp-icon-tab-bar-tabs-content-example>
+</component-example>
+<code-example [exampleFiles]="iconTabBarProjectedTabsFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="two-click-area" componentName="icon-tab-bar"> Multi Click Area </fd-docs-section-title>
+<description>
+    <p>
+        In case of two click areas for tabs with sub-tabs, the behaviour for regular tabs (without sub-items) remains
+        unchanged, like described above the tabs get selected immediately.
+    </p>
+    <p>
+        Tabs with two click areas behave differently: when the main part of the tab is clicked, it is highlighted and
+        then selected immediately.
+    </p>
+    <p>
+        Clicking the second area opens a menu (Popover) containing the sub-items. Once a sub-item is clicked, the main
+        tab is highlighted as selected.
+    </p>
+</description>
+<component-example>
+    <fdp-icon-tab-bar-two-click-area-example></fdp-icon-tab-bar-two-click-area-example>
+</component-example>
+<code-example [exampleFiles]="iconTabBarTwoClickFiles"></code-example>

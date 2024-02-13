@@ -1,0 +1,33 @@
+<div style="height: 300px">
+    <fdb-splitter defaultPaneId="one">
+        <fdb-splitter-pane-container paneType="solid">
+            <fdb-splitter-split-pane id="one" size="300px">
+                Split pane One
+
+                <br />
+
+                <span> Won't go off-canvas </span>
+            </fdb-splitter-split-pane>
+
+            <fdb-splitter-split-pane size="300px" [requiredParentWidth]="1000">
+                Split pane Two
+
+                <br />
+
+                <span>
+                    Will go off-canvas on browser window's width < 1000px, will be present on the pagination bar
+                </span>
+            </fdb-splitter-split-pane>
+
+            <fdb-splitter-split-pane [requiredParentWidth]="1100" [demandPane]="false">
+                Split pane Three
+
+                <br />
+
+                <span>
+                    Will go off-canvas on browser window's width < 1100px, won't be present on the pagination bar
+                </span>
+            </fdb-splitter-split-pane>
+        </fdb-splitter-pane-container>
+    </fdb-splitter>
+</div>

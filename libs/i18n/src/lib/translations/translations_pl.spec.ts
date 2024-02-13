@@ -1,4 +1,4 @@
-import { FdLanguage } from '../models/lang';
+import { FdLanguage } from '../models';
 import { translationTester } from '../utils/translation-tester';
 import translations from './translations_pl';
 

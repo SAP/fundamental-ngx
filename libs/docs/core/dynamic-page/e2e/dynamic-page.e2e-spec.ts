@@ -273,12 +273,18 @@ describe('dynamic side content test suite', () => {
             await openPage(tabsExample, 1);
             await scrollIntoView(tabsContent, 1);
             await pause(1500);
-            await expect(await getElementClass(tab, 1)).toContain(
-                'is-selected',
+            await expect(await getAttributeByName(tab, 'aria-selected', 1)).toContain(
+                'true',
                 'tab is not highlited as selected after scroll to content'
             );
-            await expect(await getElementClass(tab, 0)).not.toContain('is-selected', 'tab is selected, but should not');
-            await expect(await getElementClass(tab, 2)).not.toContain('is-selected', 'tab is selected, but should not');
+            await expect(await getAttributeByName(tab, 'aria-selected', 0)).not.toContain(
+                'true',
+                'tab is selected, but should not'
+            );
+            await expect(await getAttributeByName(tab, 'aria-selected', 2)).not.toContain(
+                'true',
+                'tab is selected, but should not'
+            );
         });
 
         it('should check links clickable', async () => {

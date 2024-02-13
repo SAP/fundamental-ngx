@@ -1,16 +1,5 @@
-import {
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    EventEmitter,
-    Input,
-    NgZone,
-    Output,
-    QueryList,
-    ViewChild,
-    ViewChildren
-} from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AsyncOrSyncPipe, Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { NgClass } from '@angular/common';
 import { OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
@@ -22,7 +11,9 @@ import { IconBarDndItemDirective } from '../../directives/dnd/icon-bar-dnd-item.
 import { IconBarDndListDirective } from '../../directives/dnd/icon-bar-dnd-list.directive';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { ClosableIconTabBar } from '../closable-icon-tab-bar.class';
+import { IconTabBarBase } from '../icon-tab-bar-base.class';
 import { TextTypePopoverComponent } from '../popovers/text-type-popover/text-type-popover.component';
+import { IconTabBarTextTypeTabItemComponent } from '../text-type-tab-item/icon-tab-bar-text-type-tab-item.component';
 
 /** @hidden */
 interface DataForReordering {
@@ -38,6 +29,12 @@ type TabItem = ElementRef<HTMLElement> | TextTypePopoverComponent;
     selector: 'fdp-icon-tab-bar-text-type',
     templateUrl: './icon-tab-bar-text-type.component.html',
     standalone: true,
+    providers: [
+        {
+            provide: IconTabBarBase,
+            useExisting: IconTabBarTextTypeComponent
+        }
+    ],
     imports: [
         IconBarDndContainerDirective,
         OverflowListDirective,
@@ -47,7 +44,9 @@ type TabItem = ElementRef<HTMLElement> | TextTypePopoverComponent;
         NgClass,
         TextTypePopoverComponent,
         ButtonComponent,
-        IconComponent
+        IconComponent,
+        AsyncOrSyncPipe,
+        IconTabBarTextTypeTabItemComponent
     ]
 })
 export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
@@ -69,16 +68,15 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
     @Input()
     layoutMode: 'row' | 'column';
 
+    /** Whether to render icon tab item as multi-click variant. */
+    @Input()
+    multiClick = false;
+
     /**
      * @description Emits when user drops the tab.
      */
     @Output()
     reordered = new EventEmitter<IconTabBarItem[]>();
-
-    /** @hidden */
-    constructor(_cd: ChangeDetectorRef, _ngZone: NgZone) {
-        super(_cd, _ngZone);
-    }
 
     /**
      * @hidden
@@ -89,7 +87,7 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
         // Then to find root tab, and pass it to the parent method.
         if (selectedItem?.uId.includes(UNIQUE_KEY_SEPARATOR)) {
             const rootTabUid = selectedItem.uId.split(UNIQUE_KEY_SEPARATOR)[0];
-            selectedItem = this._tabs.find((tab) => tab.uId === rootTabUid);
+            selectedItem = this.tabs.find((tab) => tab.uId === rootTabUid);
         }
         if (!selectedItem) {
             return;
@@ -135,7 +133,18 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
 
         event.action === 'replace' ? this._replaceAsSibling(dataForAction) : this._insertItemAsChild(dataForAction);
 
-        this.reordered.emit(this._tabs);
+        this.reordered.emit(this.tabs);
+    }
+
+    /** @hidden */
+    protected _getTabUIElementFocusable(tabUIElement: Nullable<TabItem>): Nullable<HTMLElement> {
+        if (!tabUIElement) {
+            return tabUIElement;
+        }
+        if (typeof tabUIElement === 'object' && 'nativeElement' in tabUIElement) {
+            return tabUIElement.nativeElement;
+        }
+        return tabUIElement._dropdownTrigger.nativeElement;
     }
 
     /** @hidden */
@@ -170,7 +179,7 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
         }
         // Add tab to subitem of the target tab
         replacedItemInfo.item.subItems.push(draggableItemInfo.item);
-        this._tabs = this._updateTabs(this._tabs);
+        this.tabs = this._updateTabs(this.tabs);
         this._triggerRecalculationVisibleItems();
     }
 
@@ -187,15 +196,7 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
         draggableItemInfo.arr.splice(draggableItemInfo.item.index, 1);
         const newIndex = replacedItemInfo?.item?.index || 0;
         replacedItemInfo.arr.splice(newIndex, 0, draggableItemInfo.item);
-        this._tabs = this._updateTabs(this._tabs);
+        this.tabs = this._updateTabs(this.tabs);
         this._triggerRecalculationVisibleItems();
-    }
-
-    /** @hidden */
-    protected _getTabUIElementFocusable(tabUIElement: TabItem): HTMLElement {
-        if (typeof tabUIElement === 'object' && 'nativeElement' in tabUIElement) {
-            return tabUIElement.nativeElement;
-        }
-        return tabUIElement._dropdownTrigger.nativeElement;
     }
 }

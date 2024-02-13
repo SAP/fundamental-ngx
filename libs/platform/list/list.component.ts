@@ -4,29 +4,23 @@ import { DOWN_ARROW, ENTER, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChild,
     ContentChildren,
     ElementRef,
     EventEmitter,
-    Host,
     HostListener,
     Inject,
     Input,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     QueryList,
-    Self,
-    SkipSelf,
     ViewChild,
     ViewEncapsulation,
     forwardRef
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import {
     BehaviorSubject,
     Observable,
@@ -61,15 +55,12 @@ import {
     CollectionBaseInput,
     ListDataSource,
     ObservableListDataSource,
-    PlatformFormField,
-    PlatformFormFieldControl,
     isBlank,
     isDataSource,
     isPresent
 } from '@fundamental-ngx/platform/shared';
 import { BaseListItem, LIST_ITEM_TYPE, ListItemDef } from './base-list-item';
 import { FdpListComponent } from './fdpListComponent.token';
-import { ListConfig } from './list.config';
 import { LoadMoreContentContext, LoadMoreContentDirective } from './load-more-content.directive';
 import { FdpList, FdpListDataSource, ListType, SelectionType } from './models/list';
 
@@ -425,18 +416,10 @@ export class ListComponent<T>
 
     /** @hidden */
     constructor(
-        protected _changeDetectorRef: ChangeDetectorRef,
-        elementRef: ElementRef,
-        private _liveAnnouncer: LiveAnnouncer,
-        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>,
-        @Optional() @Self() public ngControl: NgControl,
-        @Optional() @Self() public controlContainer: ControlContainer,
-        @Optional() @Self() public ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
-        protected _listConfig?: ListConfig
+        private readonly _liveAnnouncer: LiveAnnouncer,
+        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>
     ) {
-        super(_changeDetectorRef, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+        super();
         this._init();
     }
 
@@ -656,7 +639,7 @@ export class ListComponent<T>
                 }
                 this._loading = false;
                 this.stateChanges.next(this._items);
-                this._changeDetectorRef.markForCheck();
+                this.markForCheck();
             });
     }
 
@@ -757,7 +740,7 @@ export class ListComponent<T>
                 this._setItems();
                 // Trigger change detection when queue is empty.
                 setTimeout(() => {
-                    this._cd.detectChanges();
+                    this.detectChanges();
                 });
             });
 
@@ -954,7 +937,7 @@ export class ListComponent<T>
             }
         });
 
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /** @hidden */

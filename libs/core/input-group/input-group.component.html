@@ -1,12 +1,12 @@
 <div
     class="fd-input-group"
     [class.fd-input-group--inline]="inline"
-    [class.is-disabled]="disabled"
-    [class.is-readonly]="readonly"
+    [class.is-disabled]="_cvaControl.cvaDirective?.disabled"
+    [class.is-readonly]="_cvaControl.cvaDirective?.readonly"
     [class.fd-shellbar__input-group]="inShellbar"
     [class.fd-input-group--control]="isControl"
     [class.is-focus]="_inputFocused$ | async"
-    [class]="state ? 'is-' + state : ' '"
+    [class]="_cvaControl.cvaDirective?.state ? 'is-' + _cvaControl.cvaDirective?.state : ' '"
 >
     @if (placement === 'after' && !inputElement) {
         <ng-template [ngTemplateOutlet]="input"></ng-template>
@@ -37,7 +37,7 @@
                     [attr.aria-expanded]="inShellbar ? isExpanded : null"
                     [ariaLabel]="glyphAriaLabel || glyph || addOnText"
                     [attr.aria-controls]="_inputId"
-                    [disabled]="disabled"
+                    [disabled]="_cvaControl.cvaDirective?.disabled"
                     (mousedown)="_preventFocus($event)"
                     (keydown.enter)="$event.preventDefault()"
                     (keyup.enter)="_buttonClicked($event)"
@@ -76,9 +76,10 @@
         [class.fd-shellbar__input-group-input]="inShellbar"
         fd-input-group-input
         [type]="type"
-        [disabled]="disabled"
-        [readonly]="readonly"
-        [attr.placeholder]="placeholder"
+        [class.is-disabled]="!!_cvaControl.cvaDirective?.disabled"
+        [disabled]="!!_cvaControl.cvaDirective?.disabled"
+        [readonly]="_cvaControl.cvaDirective?.readonly"
+        [attr.placeholder]="_cvaControl.cvaDirective?.placeholder || null"
         [attr.aria-required]="required"
         (search)="_onSearchEvent($event)"
     />

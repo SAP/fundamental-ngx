@@ -1,4 +1,3 @@
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
@@ -23,6 +22,7 @@ import {
     ViewChild,
     ViewChildren,
     ViewEncapsulation,
+    booleanAttribute,
     forwardRef,
     inject
 } from '@angular/core';
@@ -309,9 +309,6 @@ export class DatePickerComponent<D>
         return this._isOpen;
     }
 
-    /** @hidden */
-    private _isOpen = false;
-
     /** Should date picker be inlined. */
     @Input()
     inline = true;
@@ -325,14 +322,8 @@ export class DatePickerComponent<D>
      * By default, updates the value as user types.
      * @default false
      */
-    @Input()
-    set processInputOnBlur(v: boolean) {
-        this._processInputOnBlur = coerceBooleanProperty(v);
-    }
-
-    get processInputOnBlur(): boolean {
-        return this._processInputOnBlur;
-    }
+    @Input({ transform: booleanAttribute })
+    processInputOnBlur = false;
 
     /**
      * Whether to prevent page scrolling when focusing date picker input field after calendar has been closed.
@@ -372,13 +363,6 @@ export class DatePickerComponent<D>
     @Output()
     readonly activeViewChange = new EventEmitter<FdCalendarView>();
 
-    /** @hideen */
-    @ViewChildren(CalendarComponent)
-    private readonly _calendars: QueryList<CalendarComponent<D>>;
-
-    /** @hidden */
-    _calendarComponent: CalendarComponent<D>;
-
     /** @hidden */
     @ViewChild('inputGroupComponent', {
         read: ElementRef
@@ -403,11 +387,15 @@ export class DatePickerComponent<D>
     @ViewChild('popoverMessageTemplate')
     private readonly _messagePopoverTemplate: TemplateRef<any>;
 
-    /** @hidden */
-    _message: string | null = null;
+    /** @hideen */
+    @ViewChildren(CalendarComponent)
+    private readonly _calendars: QueryList<CalendarComponent<D>>;
 
     /** @hidden */
-    _processInputOnBlur = false;
+    _calendarComponent: CalendarComponent<D>;
+
+    /** @hidden */
+    _message: string | null = null;
 
     /** @hidden */
     _messageTriggers: string[] = ['focusin', 'focusout'];
@@ -423,6 +411,9 @@ export class DatePickerComponent<D>
 
     /** @hidden */
     readonly _formValueStateMessageId = `fd-date-picker-form-message-${datePickerCounter++}`;
+
+    /** @hidden */
+    private _isOpen = false;
 
     /** @hidden */
     private _calendarPendingDate: Nullable<D>;
@@ -901,6 +892,15 @@ export class DatePickerComponent<D>
                 preventScroll: this.preventScrollOnFocus
             });
         }
+    }
+
+    /**
+     * Renders the calendar right before the popover is opened.
+     * Used for correct calculations of overlay position and size.
+     */
+    _beforePopoverOpen(): void {
+        this._showPopoverContents = true;
+        this._changeDetectionRef.detectChanges();
     }
 
     /** @hidden */

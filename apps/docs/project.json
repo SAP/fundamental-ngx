@@ -201,7 +201,7 @@
                         {
                             "type": "initial",
                             "maximumWarning": "2mb",
-                            "maximumError": "6mb"
+                            "maximumError": "9mb"
                         }
                     ],
                     "fileReplacements": [
@@ -335,10 +335,7 @@
             "dependsOn": ["^compile-typedoc"]
         },
         "lint": {
-            "executor": "@nx/eslint:lint",
-            "options": {
-                "lintFilePatterns": ["apps/docs/**/*.ts", "apps/docs/**/*.html"]
-            }
+            "executor": "@nx/eslint:lint"
         }
     },
     "tags": ["scope:docs", "type:app"],

@@ -76,6 +76,10 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     @Input()
     filteringFromHeaderDisabled: Nullable<boolean> = false;
 
+    /** Column index */
+    @Input()
+    columnIndex: number;
+
     /** @hidden */
     @ViewChild(PopoverComponent, { static: false })
     popover: Nullable<PopoverComponent>;

@@ -166,11 +166,6 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
     private readonly _cdr = inject(ChangeDetectorRef);
 
     /** @hidden */
-    constructor() {
-        super();
-    }
-
-    /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
         this._tableColumnResizeService.markForCheck.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {

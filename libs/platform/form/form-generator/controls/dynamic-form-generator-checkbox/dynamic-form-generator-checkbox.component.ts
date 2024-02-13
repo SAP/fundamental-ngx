@@ -14,9 +14,4 @@ import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../p
     standalone: true,
     imports: [FormsModule, ReactiveFormsModule, PlatformCheckboxGroupModule]
 })
-export class DynamicFormGeneratorCheckboxComponent extends BaseDynamicFormGeneratorControl {
-    /** @hidden */
-    constructor() {
-        super();
-    }
-}
+export class DynamicFormGeneratorCheckboxComponent extends BaseDynamicFormGeneratorControl {}

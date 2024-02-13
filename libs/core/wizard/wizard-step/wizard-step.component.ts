@@ -192,7 +192,9 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
         if (
             this.visited &&
             (!event || KeyUtil.isKeyCode(event, [SPACE, ENTER])) &&
-            (!this.stepIndicator || !this.stepIndicator.stackedItems || !this.stepIndicator.stackedItems.length) &&
+            (!this.stepIndicator ||
+                !this.stepIndicator.stackedItems$() ||
+                !this.stepIndicator.stackedItems$().length) &&
             (this.stepClickValidator === undefined ||
                 (await this.stepClickValidator(this.visited, this.completed)) === true)
         ) {

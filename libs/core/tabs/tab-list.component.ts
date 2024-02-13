@@ -41,6 +41,7 @@ import {
 } from '@fundamental-ngx/core/overflow-layout';
 import { ScrollSpyDirective } from '@fundamental-ngx/core/scroll-spy';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { FD_TABLIST, TabList } from '@fundamental-ngx/core/shared';
 import { Observable, Subject, Subscription, fromEvent, merge } from 'rxjs';
 import { debounceTime, delay, filter, first, map, startWith, switchMap, tap } from 'rxjs/operators';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
@@ -84,7 +85,11 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
         contentDensityObserverProviders(),
         {
             provide: LIST_COMPONENT,
-            useExisting: forwardRef(() => TabListComponent)
+            useExisting: TabListComponent
+        },
+        {
+            provide: FD_TABLIST,
+            useExisting: TabListComponent
         }
     ],
     standalone: true,
@@ -117,7 +122,9 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
         MenuTitleDirective
     ]
 })
-export class TabListComponent implements TabListComponentInterface, AfterContentInit, AfterViewInit, OnDestroy {
+export class TabListComponent
+    implements TabListComponentInterface, AfterContentInit, AfterViewInit, OnDestroy, TabList
+{
     /** Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl' */
     @Input()
     size: TabSizes = 'm';
@@ -228,6 +235,11 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     /** @hidden */
     _init = true;
 
+    /** Scrollable element reference. */
+    get scrollableElement(): Nullable<ElementRef> {
+        return this._scrollbar?.elementRef;
+    }
+
     /** Event is thrown always when tab is selected by keyboard actions */
     readonly tabSelected: Subject<number> = new Subject<number>();
 
@@ -296,7 +308,12 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     }
 
     /** @hidden */
-    _highlightActiveTab({ id }: HTMLElement): void {
+    selectTab(id: Nullable<string>): void {
+        this.highlightActiveTab(id);
+    }
+
+    /** @hidden */
+    highlightActiveTab(id: Nullable<string>): void {
         const tab = this._tabArray.find((_tab) => _tab.panel._panelId === id);
         if (tab) {
             const _tabWasActive = tab.active;
@@ -373,7 +390,13 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
                 switchMap((tabPanels) => merge(...tabPanels)),
                 takeUntilDestroyed(this._destroyRef)
             )
-            .subscribe((event) => this._expandTab(event.target, event.state));
+            .subscribe((event) => {
+                this._tabArray.forEach((tab) => {
+                    tab.panel._forcedVisibility = tab.panel === event.target;
+                });
+                this._expandTab(event.target, event.state);
+                this._overflowLayout.triggerRecalculation();
+            });
     }
 
     /** @hidden */

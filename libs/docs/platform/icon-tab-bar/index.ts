@@ -19,3 +19,5 @@ export const ROUTES: Routes = [
 ];
 export const LIBRARY_NAME = 'icon-tab-bar';
 export const API_FILE_KEY = 'iconTabBar';
+
+export * from './examples/tabs-content/icon-tab-bar-tabs-content-example.component';

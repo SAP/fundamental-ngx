@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { RouterLink } from '@angular/router';
 import {
     CodeExampleComponent,
     ComponentExampleComponent,
@@ -14,6 +15,7 @@ import { DynamicPageDynamicContainerHeightExampleComponent } from './examples/dy
 import { DynamicPageExampleComponent } from './examples/dynamic-page-example.component';
 import { DynamicPageFacetsExampleComponent } from './examples/dynamic-page-facets-example/dynamic-page-facets-example.component';
 import { DynamicPageResponsiveExampleComponent } from './examples/dynamic-page-responsive-example/dynamic-page-responsive-example.component';
+import { DynamicPageRoutingExampleComponent } from './examples/dynamic-page-routing/dynamic-page-routing-example.component';
 import { DynamicPageTabsExampleComponent } from './examples/dynamic-page-tabs-example/dynamic-page-tabs-example.component';
 
 const dynamicPageBasicExample = 'dynamic-page-example.component.html';
@@ -31,6 +33,9 @@ const dynamicPageResponsiveExampleHtmlCode =
 const dynamicPageFacetsExampleHtmlCode = 'dynamic-page-facets-example/dynamic-page-facets-example.component.html';
 const dynamicPageFacetsExampleTsCode = 'dynamic-page-facets-example/dynamic-page-facets-example.component.ts';
 
+const dynamicPageRoutingHtmlCode = 'dynamic-page-routing/dynamic-page-routing-example.component.html';
+const dynamicPageRoutingTsCode = 'dynamic-page-routing/dynamic-page-routing-example.component.ts';
+
 @Component({
     selector: 'app-dynamic-page',
     templateUrl: './dynamic-page-docs.component.html',
@@ -46,7 +51,9 @@ const dynamicPageFacetsExampleTsCode = 'dynamic-page-facets-example/dynamic-page
         DynamicPageColumnLayoutExampleComponent,
         DynamicPageResponsiveExampleComponent,
         DynamicPageFacetsExampleComponent,
-        DynamicPageDynamicContainerHeightExampleComponent
+        DynamicPageDynamicContainerHeightExampleComponent,
+        DynamicPageRoutingExampleComponent,
+        RouterLink
     ]
 })
 export class DynamicPageDocsComponent {
@@ -117,6 +124,20 @@ export class DynamicPageDocsComponent {
             code: getAssetFromModuleAssets(dynamicPageFacetsExampleTsCode),
             fileName: 'dynamic-page-facets-example',
             component: 'DynamicPageFacetsExampleComponent'
+        }
+    ];
+
+    dynamicPageRouting: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(dynamicPageRoutingHtmlCode),
+            fileName: 'dynamic-page-routing-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(dynamicPageRoutingTsCode),
+            fileName: 'dynamic-page-routing-example',
+            component: 'DynamicPageRoutingExampleComponent'
         }
     ];
 }

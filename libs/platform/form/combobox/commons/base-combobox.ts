@@ -23,24 +23,18 @@ import {
 } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
-    ChangeDetectorRef,
     ContentChildren,
     Directive,
     ElementRef,
     EventEmitter,
-    Host,
-    Inject,
     Input,
     OnDestroy,
     Optional,
     Output,
     QueryList,
-    Self,
-    SkipSelf,
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { Observable, Subject, Subscription, combineLatest, fromEvent, isObservable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
@@ -57,8 +51,6 @@ import {
     MatchingStrategy,
     ObservableComboBoxDataSource,
     OptionItem,
-    PlatformFormField,
-    PlatformFormFieldControl,
     coerceArraySafe,
     isDataSource,
     isFunction,
@@ -68,7 +60,7 @@ import {
 } from '@fundamental-ngx/platform/shared';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
+import { SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
 import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { ComboboxConfig } from '../combobox.config';
 import { FDP_COMBOBOX_ITEM_DEF, FdpComboboxItemDef } from '../directives/combobox-item.directive';
@@ -331,17 +323,10 @@ export abstract class BaseCombobox
 
     /** @hidden */
     protected constructor(
-        readonly cd: ChangeDetectorRef,
-        elementRef: ElementRef,
-        @Optional() @Self() readonly ngControl: NgControl,
-        @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
-        @Optional() @Self() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
-        protected comboboxConfig: ComboboxConfig,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
+        protected comboboxConfig: ComboboxConfig
     ) {
-        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+        super();
     }
 
     /** @hidden */
@@ -401,7 +386,11 @@ export abstract class BaseCombobox
         this.openChange.next(isOpen);
         this._onOpenChange(this.isOpen);
 
-        this.cd.detectChanges();
+        if (!this.isOpen && !this.mobile) {
+            this.searchInputElement.nativeElement.focus({ preventScroll: true });
+        }
+
+        this.detectChanges();
     }
 
     /** @hidden */
@@ -552,7 +541,7 @@ export abstract class BaseCombobox
         this.inputText = this.value ? this.inputText : '';
         this.searchInputElement.nativeElement.focus();
         this.isOpenChangeHandle(false);
-        this._cd.markForCheck();
+        this.markForCheck();
     }
 
     /** @hidden */
@@ -648,7 +637,7 @@ export abstract class BaseCombobox
 
                 this.stateChanges.next('initDataSource.open().');
 
-                this.cd.markForCheck();
+                this.markForCheck();
             });
         this._dsSubscription.add(dsSub);
 
@@ -713,7 +702,7 @@ export abstract class BaseCombobox
         this.maxWidth = this.autoResize ? window.innerWidth - scrollBarWidth - left - gap : this.minWidth;
         this.minWidth = width - 2;
 
-        this._cd.detectChanges();
+        this.detectChanges();
     }
 
     /**

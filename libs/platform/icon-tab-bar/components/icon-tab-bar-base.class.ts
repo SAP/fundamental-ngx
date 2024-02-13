@@ -14,6 +14,7 @@ import {
     OnInit,
     Output,
     QueryList,
+    signal,
     SimpleChanges,
     ViewChild
 } from '@angular/core';
@@ -21,14 +22,15 @@ import { take } from 'rxjs/operators';
 
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { KeyUtil, OverflowListDirective } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Nullable, OverflowListDirective } from '@fundamental-ngx/cdk/utils';
+import { FD_DYNAMIC_PAGE } from '@fundamental-ngx/core/dynamic-page';
 import { cloneDeep } from 'lodash-es';
-import { ICON_TAB_HIDDEN_CLASS_NAME, UNIQUE_KEY_SEPARATOR } from '../constants';
+import { ICON_TAB_HIDDEN_CLASS_NAME } from '../constants';
 import { IconTabBarItem } from '../interfaces/icon-tab-bar-item.interface';
 import { TabColorAssociations } from '../interfaces/tab-color-associations.interface';
-import { TabConfig } from '../interfaces/tab-config.interface';
 import { TabDestinyMode } from '../types';
 import { IconTabBarPopoverBase } from './popovers/icon-tab-bar-popover-base.class';
+import { TextTypePopoverComponent } from './popovers/text-type-popover/text-type-popover.component';
 
 @Directive()
 export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit, OnDestroy {
@@ -44,7 +46,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @description A tab bar configuration that stores the state of each tab. Based on this configuration, a tab bar is representing.
      */
     @Input()
-    tabsConfig: TabConfig[] = [];
+    tabs: IconTabBarItem[] = [];
 
     /**
      * @description Flag representing rtl mode
@@ -71,11 +73,19 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         this._densityMode = value;
     }
 
+    /** Currently selected tab Unique ID. */
+    @Input()
+    selectedUid: string | undefined;
+
     /**
      * @description Emits when some tab is selected.
      */
     @Output()
     selected: EventEmitter<IconTabBarItem> = new EventEmitter<IconTabBarItem>();
+
+    /** Emits when selected tab Unique ID changes. */
+    @Output()
+    selectedUidChange = new EventEmitter<string | undefined>();
 
     /**
      * @description Reference to OverflowListDirective
@@ -83,17 +93,27 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     @ViewChild(OverflowListDirective)
     overflowDirective: OverflowListDirective;
 
-    /** @hidden */
-    _selectedUid?: string;
+    /** Header element reference. */
+    @ViewChild('tablist', { read: ElementRef })
+    headerElement: ElementRef<HTMLElement>;
 
     /** @hidden */
-    _extraTabs: IconTabBarItem[] = [];
+    _extraTabs$ = signal<IconTabBarItem[]>([]);
 
     /** @hidden */
     _lastVisibleTabIndex: number;
 
     /** @hidden */
-    _tabs: IconTabBarItem[] = [];
+    _extraItems$ = signal(false);
+
+    /** @hidden */
+    readonly _inDynamicPage = !!inject(FD_DYNAMIC_PAGE, { optional: true });
+
+    /** @hidden */
+    protected readonly _cd = inject(ChangeDetectorRef);
+
+    /** @Hidden */
+    protected readonly _ngZone = inject(NgZone);
 
     /** @hidden */
     private _densityMode: TabDestinyMode;
@@ -105,20 +125,21 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     private _destroyed = false;
 
     /** @hidden */
-    constructor(
-        protected _cd: ChangeDetectorRef,
-        protected _ngZone: NgZone
-    ) {}
-
-    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes.tabsConfig && !changes.tabsConfig.firstChange) {
+        if (changes.tabs && !changes.tabs.firstChange) {
             this._initTabs();
             this._triggerRecalculationVisibleItems();
             return;
         }
         if (changes.isRtl && !changes.isRtl.firstChange) {
             this._triggerRecalculationVisibleItems();
+        }
+
+        if (changes.selectedUid && !changes.selectedUid.firstChange) {
+            const isExtraTab = this._extraTabs$().find((tab) => tab.uId === this.selectedUid);
+            if (isExtraTab) {
+                this._selectExtraItem(isExtraTab);
+            }
         }
     }
 
@@ -144,18 +165,28 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      */
     _selectItem(selectedItem: IconTabBarItem, event?: Event): void {
         event?.stopPropagation();
-        this._selectedUid = selectedItem.uId;
+        this.selectedUid = selectedItem.uId;
+        this.selectedUidChange.emit(this.selectedUid);
         selectedItem.badge = false;
         this.selected.emit(selectedItem);
     }
 
     /** @hidden */
-    _keyDownHandler(event: KeyboardEvent, tab: IconTabBarItem | undefined, currentIndex: number): void {
+    _keyDownHandler(
+        event: KeyboardEvent,
+        tab: IconTabBarItem | undefined,
+        currentIndex: number,
+        popover?: TextTypePopoverComponent
+    ): void {
         if (tab && KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             event.preventDefault();
             this._selectItem(tab);
         } else if (KeyUtil.isKeyCode(event, [RIGHT_ARROW, DOWN_ARROW])) {
             event.preventDefault();
+            if (KeyUtil.isKeyCode(event, DOWN_ARROW) && tab?.subItems?.length) {
+                popover?._openPopover();
+                return;
+            }
             this.isRtl ? this._focusPreviousItem(currentIndex) : this._focusNextItem(currentIndex);
         } else if (KeyUtil.isKeyCode(event, [LEFT_ARROW, UP_ARROW])) {
             event.preventDefault();
@@ -165,7 +196,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
 
     /** @hidden focuses next tab */
     _focusNextItem(currentIndex: number): void {
-        const nextIndex = currentIndex === this._tabs.length - 1 ? 0 : currentIndex + 1;
+        const nextIndex = currentIndex === this.tabs.length - 1 ? 0 : currentIndex + 1;
         this._focusItem(nextIndex);
     }
 
@@ -173,7 +204,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     _focusPreviousItem(currentIndex: number): void {
         if (currentIndex === 0) {
             // if current focused element is first, focus the last one. If tabs are overflowed, focus the last tab in the popover
-            this._focusItem(this._tabs.length - 1, true);
+            this._focusItem(this.tabs.length - 1, true);
         } else {
             this._focusItem(currentIndex - 1);
         }
@@ -188,7 +219,8 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         if (tabIndex > this._lastVisibleTabIndex) {
             this._tabBarPopover._openPopover(focusLast);
         } else {
-            this._getTabUIElementFocusable(this._tabUIElements.get(tabIndex))?.focus();
+            const itemToFocus = this._getTabUIElementFocusable(this._tabUIElements.get(tabIndex));
+            itemToFocus?.focus();
         }
     }
 
@@ -198,8 +230,11 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @description select extra item inside popover
      */
     _selectExtraItem(selectedItem: IconTabBarItem): void {
-        const deletedItem = this._tabs.splice(this._lastVisibleTabIndex, 1, selectedItem)[0] as IconTabBarItem;
-        this._tabs.splice(selectedItem.index, 1, deletedItem);
+        const tabs = [...this.tabs];
+        const deletedItem = tabs.splice(this._lastVisibleTabIndex, 1, selectedItem)[0] as IconTabBarItem;
+        tabs.splice(selectedItem.index, 1, deletedItem);
+        this.tabs = tabs;
+        const extraTabs = [...this._extraTabs$()];
 
         deletedItem.index = selectedItem.index;
         deletedItem.uId = `${deletedItem.index}`;
@@ -208,7 +243,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         deletedItem.cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
 
         let indexInExtraItems;
-        this._extraTabs.forEach((item, index) => {
+        this._extraTabs$().forEach((item, index) => {
             if (item.index === selectedItem.index) {
                 indexInExtraItems = index;
             }
@@ -220,8 +255,8 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         if (selectedItem.color) {
             selectedItem.cssClasses = [`fd-icon-tab-bar__item--${selectedItem.color}`];
         }
-        this._extraTabs.splice(indexInExtraItems, 1, itemToPopover);
-        this._extraTabs = [...this._extraTabs];
+        extraTabs.splice(indexInExtraItems, 1, itemToPopover);
+        this._extraTabs$.set(extraTabs);
 
         this._selectItem(selectedItem);
         this._triggerRecalculationVisibleItems();
@@ -234,27 +269,31 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @description recalculate _nextSteps and _prevSteps array if we have extra items
      */
     _recalculateVisibleItems(extraItems: number): void {
-        this._lastVisibleTabIndex = this._tabs.length - 1 - extraItems;
-        this._tabs.forEach((item) => {
+        this._extraItems$.set(extraItems > 0);
+        this._cd.detectChanges();
+        const tabs = [...this.tabs];
+        const extraTabs: IconTabBarItem[] = [];
+        this._lastVisibleTabIndex = tabs.length - 1 - extraItems;
+        tabs.forEach((item) => {
             item.hidden = false;
             item.cssClasses = item.cssClasses.filter((cssClass) => cssClass !== ICON_TAB_HIDDEN_CLASS_NAME);
         });
-        this._extraTabs = [];
 
-        for (let i = this._lastVisibleTabIndex + 1; i < this._tabs.length; i++) {
-            const tab = this._tabs[i];
-            this._extraTabs.push(cloneDeep(tab));
+        for (let i = this._lastVisibleTabIndex + 1; i < tabs.length; i++) {
+            const tab = tabs[i];
+            extraTabs.push(cloneDeep(tab));
             tab.hidden = true;
             tab.cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
         }
-        this._cd.markForCheck();
+        this._extraTabs$.set(extraTabs);
+        this._cd.detectChanges();
     }
 
     /**
      * @hidden
      * Mapping function to resolve UI tab element to it's focusable part/descendant
      */
-    protected _getTabUIElementFocusable(tabUIElement: unknown): HTMLElement | null {
+    protected _getTabUIElementFocusable(tabUIElement: unknown): Nullable<HTMLElement> {
         if (tabUIElement && typeof tabUIElement === 'object' && 'nativeElement' in tabUIElement) {
             if ((<ElementRef>tabUIElement).nativeElement instanceof HTMLElement) {
                 return (<ElementRef<HTMLElement>>tabUIElement).nativeElement;
@@ -285,63 +324,29 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @description initialize state of tabs
      */
     protected _initTabs(): void {
-        this._tabs = this._generateTabBarItems(this.tabsConfig);
-        const selectedItem = this._tabs.find((item) => item.active);
-        this._selectedUid = selectedItem?.uId;
-        this._lastVisibleTabIndex = this._tabs.length - 1;
+        const selectedItem = this._findActiveTabId(this.tabs) || this.tabs[0];
+        this.selectedUid = selectedItem?.uId;
+        this._lastVisibleTabIndex = this.tabs.length - 1;
+        if (selectedItem) {
+            this.selectedUidChange.emit(this.selectedUid);
+            this.selected.emit(selectedItem);
+        }
     }
 
-    /**
-     * @hidden
-     * @description generate IconTabItems from TabConfig array
-     */
-    private _generateTabBarItems(config: TabConfig[]): IconTabBarItem[] {
-        const flatIndexRef: FlatIndex = { value: 0 };
-        return config.map((item, index) => {
-            const result: IconTabBarItem = {
-                ...item,
-                index,
-                cssClasses: [],
-                uId: index.toString(),
-                hidden: false,
-                subItems: undefined,
-                flatIndex: flatIndexRef.value++
-            };
-            if (item.color) {
-                result.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
+    private _findActiveTabId(tabs: IconTabBarItem[]): IconTabBarItem | undefined {
+        let activeTab: IconTabBarItem | undefined;
+        for (const tab of tabs) {
+            if (tab.active) {
+                activeTab = tab;
+                break;
+            } else if (tab.subItems) {
+                activeTab = this._findActiveTabId(tab.subItems);
+                if (activeTab) {
+                    break;
+                }
             }
-            result.subItems = item.subItems?.length
-                ? this._generateSubItems(item.subItems, result, flatIndexRef)
-                : undefined;
-            return result;
-        });
-    }
+        }
 
-    /** @hidden */
-    private _generateSubItems(
-        subItems: TabConfig[],
-        parent: IconTabBarItem,
-        flatIndexRef: FlatIndex
-    ): IconTabBarItem[] {
-        return subItems?.map((item, index) => {
-            const result: IconTabBarItem = {
-                ...item,
-                index,
-                uId: `${parent.uId}${UNIQUE_KEY_SEPARATOR}${index}`,
-                cssClasses: [],
-                subItems: undefined,
-                flatIndex: flatIndexRef.value++,
-                parentUId: parent.uId
-            };
-            if (Array.isArray(item.subItems) && item.subItems.length) {
-                result.subItems = this._generateSubItems(item.subItems, result, flatIndexRef);
-            }
-            return result;
-        });
+        return activeTab;
     }
-}
-
-/** @hidden helper object that is used in tab generation functions to calculate their indexes not depending on level of nesting */
-interface FlatIndex {
-    value: number;
 }

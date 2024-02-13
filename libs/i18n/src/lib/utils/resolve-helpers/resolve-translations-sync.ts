@@ -3,7 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { FdLanguage, FdLanguageKeyCtx, FdLanguageKeyIdentifier } from '../../models/lang';
+import { FdLanguage, FdLanguageKeyCtx, FdLanguageKeyIdentifier } from '../../models';
 import { FD_LANGUAGE, FD_LOCALE } from '../tokens';
 import { TranslationResolver } from '../translation-resolver';
 import { ResolveFnArgs, ResolveTranslationFn } from './common-types';

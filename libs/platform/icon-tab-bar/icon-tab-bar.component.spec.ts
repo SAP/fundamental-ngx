@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Component } from '@angular/core';
+import { Component, ViewChild, signal } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FdDnDEvent } from './directives/dnd/icon-bar-dnd-container.directive';
 import { IconBarDndItemDirective } from './directives/dnd/icon-bar-dnd-item.directive';
 import { IconTabBarComponent } from './icon-tab-bar.component';
+import { FDP_ICON_TAB_BAR } from './icon-tab-bar.module';
 import { TabConfig } from './interfaces/tab-config.interface';
 import { generateTestConfig } from './tests-helper';
 import { TabType } from './types';
@@ -32,10 +33,25 @@ class HostComponent {
     reordered(): void {}
 }
 
-let component: HostComponent;
-let fixture: ComponentFixture<HostComponent>;
+@Component({
+    template: ` <fdp-icon-tab-bar [stackContent]="stackContent$()">
+        <fdp-icon-tab-bar-tab label="Tab 1"><span class="tab-content">1</span></fdp-icon-tab-bar-tab>
+        <fdp-icon-tab-bar-tab label="Tab 2"><span class="tab-content">2</span></fdp-icon-tab-bar-tab>
+        <fdp-icon-tab-bar-tab label="Tab 3"><span class="tab-content">3</span></fdp-icon-tab-bar-tab>
+        <fdp-icon-tab-bar-tab label="Tab 4"><span class="tab-content">4</span></fdp-icon-tab-bar-tab>
+    </fdp-icon-tab-bar> `,
+    standalone: true,
+    imports: [FDP_ICON_TAB_BAR]
+})
+export class ProjectedTestComponent {
+    @ViewChild(IconTabBarComponent)
+    tabBar: IconTabBarComponent;
+    stackContent$ = signal(false);
+}
 
 describe('IconTabBarComponent', () => {
+    let component: HostComponent;
+    let fixture: ComponentFixture<HostComponent>;
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [HostComponent]
@@ -143,5 +159,63 @@ describe('IconTabBarComponent', () => {
         fixture.detectChanges();
 
         expect(component.reordered).toHaveBeenCalled();
+    });
+});
+
+describe('IconTabBarComponent with projected tabs', () => {
+    let component: ProjectedTestComponent;
+    let fixture: ComponentFixture<ProjectedTestComponent>;
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [ProjectedTestComponent]
+        }).compileComponents();
+    });
+
+    beforeEach(async () => {
+        fixture = TestBed.createComponent(ProjectedTestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        await fixture.whenStable();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
+
+    it('should convert projected tabs into tab config', async () => {
+        await fixture.whenRenderingDone();
+
+        const tabs = component.tabBar._tabsConfig$();
+
+        expect(tabs.length).toBeGreaterThan(0);
+
+        expect(tabs[0].label).toEqual('Tab 1');
+    });
+
+    it('should render selected tab content', async () => {
+        await fixture.whenRenderingDone();
+
+        let renderedTabContent = fixture.nativeElement.querySelector('.tab-content').innerHTML;
+
+        expect(renderedTabContent).toEqual('1');
+
+        const thirdTabId = component.tabBar._tabs$()[2];
+
+        component.tabBar._selectItem(thirdTabId);
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        renderedTabContent = fixture.nativeElement.querySelector('.tab-content').innerHTML;
+
+        expect(renderedTabContent).toEqual('3');
+    });
+
+    it('should render stacked tabs', async () => {
+        component.stackContent$.set(true);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(fixture.nativeElement.querySelectorAll('.tab-content').length).toEqual(4);
     });
 });

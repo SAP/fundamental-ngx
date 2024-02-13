@@ -7,7 +7,7 @@ import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/m
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { IndicatorStates, NotificationModule } from '@fundamental-ngx/core/notification';
 import { PopoverComponent, PopoverTriggerDirective } from '@fundamental-ngx/core/popover';
-import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform';
 
 export type Notification = {
     avatar: string;
@@ -31,7 +31,7 @@ export type Notification = {
         PopoverComponent,
         NotificationModule,
         ActionSheetModule,
-        TabsModule,
+        FDP_ICON_TAB_BAR,
         NgTemplateOutlet,
         AvatarComponent,
         MessageToastModule
