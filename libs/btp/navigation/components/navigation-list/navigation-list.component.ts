@@ -20,7 +20,7 @@ import {
     signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk';
+import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { FdbNavigation } from '../../models/navigation.class';
 import { NavigationService } from '../../services/navigation.service';
