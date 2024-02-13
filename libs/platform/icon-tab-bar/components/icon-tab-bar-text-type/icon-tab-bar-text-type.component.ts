@@ -137,6 +137,17 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
     }
 
     /** @hidden */
+    protected _getTabUIElementFocusable(tabUIElement: Nullable<TabItem>): Nullable<HTMLElement> {
+        if (!tabUIElement) {
+            return tabUIElement;
+        }
+        if (typeof tabUIElement === 'object' && 'nativeElement' in tabUIElement) {
+            return tabUIElement.nativeElement;
+        }
+        return tabUIElement._dropdownTrigger.nativeElement;
+    }
+
+    /** @hidden */
     private _canDrop(event: FdDnDEvent): boolean {
         let parentUId: Nullable<string> =
             event.action === 'replace' ? event.targetItem.parentUId : event.targetItem.uId;
@@ -187,13 +198,5 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
         replacedItemInfo.arr.splice(newIndex, 0, draggableItemInfo.item);
         this.tabs = this._updateTabs(this.tabs);
         this._triggerRecalculationVisibleItems();
-    }
-
-    /** @hidden */
-    protected _getTabUIElementFocusable(tabUIElement: TabItem): HTMLElement {
-        if (typeof tabUIElement === 'object' && 'nativeElement' in tabUIElement) {
-            return tabUIElement.nativeElement;
-        }
-        return tabUIElement._dropdownTrigger.nativeElement;
     }
 }

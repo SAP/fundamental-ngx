@@ -22,7 +22,7 @@ import { take } from 'rxjs/operators';
 
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { KeyUtil, OverflowListDirective } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Nullable, OverflowListDirective } from '@fundamental-ngx/cdk/utils';
 import { FD_DYNAMIC_PAGE } from '@fundamental-ngx/core/dynamic-page';
 import { cloneDeep } from 'lodash-es';
 import { ICON_TAB_HIDDEN_CLASS_NAME } from '../constants';
@@ -134,6 +134,13 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         if (changes.isRtl && !changes.isRtl.firstChange) {
             this._triggerRecalculationVisibleItems();
         }
+
+        if (changes.selectedUid && !changes.selectedUid.firstChange) {
+            const isExtraTab = this._extraTabs$().find((tab) => tab.uId === this.selectedUid);
+            if (isExtraTab) {
+                this._selectExtraItem(isExtraTab);
+            }
+        }
     }
 
     /** @hidden */
@@ -212,7 +219,8 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         if (tabIndex > this._lastVisibleTabIndex) {
             this._tabBarPopover._openPopover(focusLast);
         } else {
-            this._getTabUIElementFocusable(this._tabUIElements.get(tabIndex))?.focus();
+            const itemToFocus = this._getTabUIElementFocusable(this._tabUIElements.get(tabIndex));
+            itemToFocus?.focus();
         }
     }
 
@@ -285,7 +293,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @hidden
      * Mapping function to resolve UI tab element to it's focusable part/descendant
      */
-    protected _getTabUIElementFocusable(tabUIElement: unknown): HTMLElement | null {
+    protected _getTabUIElementFocusable(tabUIElement: unknown): Nullable<HTMLElement> {
         if (tabUIElement && typeof tabUIElement === 'object' && 'nativeElement' in tabUIElement) {
             if ((<ElementRef>tabUIElement).nativeElement instanceof HTMLElement) {
                 return (<ElementRef<HTMLElement>>tabUIElement).nativeElement;

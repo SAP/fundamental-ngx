@@ -47,6 +47,7 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
     state: FormStates | null = null;
 
     /** Type of the form control. */
+    @HostBinding('attr.type')
     @Input()
     type: string;
 

@@ -1,7 +1,7 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Directive, HostBinding, Input, booleanAttribute } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, HostBinding, Input, booleanAttribute, inject } from '@angular/core';
 
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
 
 export type GlyphPosition = 'before' | 'after';
@@ -19,7 +19,7 @@ export type ButtonType =
     | 'menu';
 
 @Directive()
-export class BaseButton {
+export class BaseButton implements HasElementRef {
     /** @hidden */
     @HostBinding('class.fd-button--toggled')
     @HostBinding('attr.aria-pressed')
@@ -96,4 +96,20 @@ export class BaseButton {
      */
     @Input({ alias: 'aria-disabled', transform: booleanAttribute })
     ariaDisabled = false;
+
+    /** @hidden */
+    readonly elementRef = inject(ElementRef);
+
+    /** @hidden */
+    protected readonly _cdr = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    detectChanges(): void {
+        this._cdr.detectChanges();
+    }
+
+    /** @hidden */
+    markForCheck(): void {
+        this._cdr.markForCheck();
+    }
 }

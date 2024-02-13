@@ -327,6 +327,7 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
         }
         this._selectedUid.set(selectedItem.uId);
         this._selectItem(selectedItem);
+        this._cd.detectChanges();
     }
 
     /** @hidden */

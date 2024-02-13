@@ -3275,12 +3275,12 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@jsdevtools/npm-publish@2.2.2":
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/@jsdevtools/npm-publish/-/npm-publish-2.2.2.tgz#862091d1e1a3bedd05cd41512e09aecf72a2954d"
-  integrity sha512-qqQYmNgC3oL7dKoKewVQGRddnsCSRyJbQCH5Gf2yiqH1EQtb0PCPrpfpsIy7AFQjxZaYlvEQfinymyFguRAKKw==
+"@jsdevtools/npm-publish@3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@jsdevtools/npm-publish/-/npm-publish-3.0.1.tgz#48416ecc9e7daad78e8fe481cc82f2592f6cdc9b"
+  integrity sha512-8DFoYKMkVJxxfz/PM5/DdvUlYS2vC41pTYc/7Mws9yDaoT7j2pjKc0zgsf8IHtwPxWeCC+GOkLj4hyXFC5GjLQ==
   dependencies:
-    "@types/semver" "^7.5.1"
+    "@types/semver" "^7.5.2"
     command-line-args "^5.2.1"
     semver "7.5.4"
     tar "6.2.0"
@@ -4174,7 +4174,12 @@
   optionalDependencies:
     fsevents "~2.3.2"
 
-"@sap-theming/theming-base-content@11.9.0", "@sap-theming/theming-base-content@^11.9.0":
+"@sap-theming/theming-base-content@11.11.0":
+  version "11.11.0"
+  resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.11.0.tgz#6f58845dbe1730d603fb49f8a64b60ce93eee4e7"
+  integrity sha512-MYWsC5krTbb9I5FQtzDQpUKoakicYwkJtD8D8LwaCu/CQH0i1SD8hfy2U++/qhz/E7MxGAF2WZoKBF0lbapeNg==
+
+"@sap-theming/theming-base-content@^11.9.0":
   version "11.9.0"
   resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.9.0.tgz#bd46458c7ed58cfb23e4e0ec620c9780a5711a5b"
   integrity sha512-EOAYDx13SU9Wd18qgAR+FYTrywC5dk+IU3oM5NGAz0GxJLpiGQkSONYnAMJK/Gqk9QhU7uqWQsjrcnOcOl0fxA==
@@ -4928,7 +4933,7 @@
   resolved "https://registry.yarnpkg.com/@types/retry/-/retry-0.12.0.tgz#2b35eccfcee7d38cd72ad99232fbd58bffb3c84d"
   integrity sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA==
 
-"@types/semver@^7.5.0", "@types/semver@^7.5.1":
+"@types/semver@^7.5.0", "@types/semver@^7.5.2":
   version "7.5.6"
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.5.6.tgz#c65b2bfce1bec346582c07724e3f8c1017a20339"
   integrity sha512-dn1l8LaMea/IjDoHNd9J52uBbInB796CDffS6VdIxvqYCPSG0V0DzHp76GpaWnlhg88uYyPbXCDIowa86ybd5A==

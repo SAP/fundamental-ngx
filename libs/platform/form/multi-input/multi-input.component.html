@@ -79,7 +79,7 @@
                 [(ngModel)]="inputText"
                 (ngModelChange)="searchTermChanged()"
                 [ngModelOptions]="{ standalone: true }"
-                [placeholder]="placeholder"
+                [attr.placeholder]="selected.length ? null : placeholder"
                 (focus)="onTouched(); tokenizer._showAllTokens()"
                 (blur)="tokenizer._hideTokens()"
                 [attr.aria-expanded]="isOpen && _suggestions.length > 0"

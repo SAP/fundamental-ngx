@@ -390,7 +390,13 @@ export class TabListComponent
                 switchMap((tabPanels) => merge(...tabPanels)),
                 takeUntilDestroyed(this._destroyRef)
             )
-            .subscribe((event) => this._expandTab(event.target, event.state));
+            .subscribe((event) => {
+                this._tabArray.forEach((tab) => {
+                    tab.panel._forcedVisibility = tab.panel === event.target;
+                });
+                this._expandTab(event.target, event.state);
+                this._overflowLayout.triggerRecalculation();
+            });
     }
 
     /** @hidden */
