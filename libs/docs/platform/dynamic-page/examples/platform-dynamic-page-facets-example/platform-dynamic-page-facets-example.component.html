@@ -94,7 +94,7 @@
                 (collapsedChange)="onCollapseChange()"
             >
                 <fd-facet-group ariaLabel="Facet Group">
-                    <fd-facet type="form" headingLevel="3" facetTitle="Technical Data" id="facet1">
+                    <fd-facet type="form" [headingLevel]="3" facetTitle="Technical Data" id="facet1">
                         <fd-facet-content>
                             <label fd-form-label [colon]="true" for="form-value-10">Base unit</label>
                             <fd-text text="Each" id="form-value-10"></fd-text>
@@ -114,7 +114,7 @@
                     </fd-facet>
                     <fd-facet
                         type="rating-indicator"
-                        headingLevel="3"
+                        [headingLevel]="3"
                         facetTitle="Rating Indicator"
                         subtitle="6 reviews"
                         id="facet2"
@@ -130,7 +130,7 @@
                     <fd-facet type="image" id="facet3">
                         <fd-avatar title="Nature" image="http://picsum.photos/id/1018/400" size="l"></fd-avatar>
                     </fd-facet>
-                    <fd-facet type="key-value" headingLevel="3" facetTitle="Status" id="facet4">
+                    <fd-facet type="key-value" [headingLevel]="3" facetTitle="Status" id="facet4">
                         <span
                             fd-object-status
                             status="positive"
@@ -140,7 +140,7 @@
                             aria-label="Delivery"
                         ></span>
                     </fd-facet>
-                    <fd-facet type="key-value" headingLevel="3" facetTitle="Delivery Time" id="facet5">
+                    <fd-facet type="key-value" [headingLevel]="3" facetTitle="Delivery Time" id="facet5">
                         <span
                             fd-object-status
                             status="critical"
@@ -151,7 +151,7 @@
                             aria-label="12 days"
                         ></span>
                     </fd-facet>
-                    <fd-facet type="key-value" headingLevel="3" facetTitle="Assembly Option" id="facet6">
+                    <fd-facet type="key-value" [headingLevel]="3" facetTitle="Assembly Option" id="facet6">
                         <span
                             fd-object-status
                             status="negative"
@@ -161,7 +161,7 @@
                             aria-label="To be selected"
                         ></span>
                     </fd-facet>
-                    <fd-facet type="key-value" headingLevel="3" facetTitle="Pricing" id="facet7">
+                    <fd-facet type="key-value" [headingLevel]="3" facetTitle="Pricing" id="facet7">
                         <fd-object-number
                             [number]="100.88"
                             [large]="true"
