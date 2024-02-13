@@ -54,7 +54,7 @@
                 fd-toolbar-item
                 fd-button
                 fdType="transparent"
-                glyph="slim-arrow-up"
+                glyph="navigation-arrow-up"
                 [disabled]="_moveUpDisabled"
                 [attr.aria-label]="'platformTable.P13ColumnsDialogMoveUpBtn' | fdTranslate"
                 [title]="'platformTable.P13ColumnsDialogMoveUpBtn' | fdTranslate"
@@ -65,7 +65,7 @@
                 fd-toolbar-item
                 fd-button
                 fdType="transparent"
-                glyph="slim-arrow-down"
+                glyph="navigation-arrow-down"
                 [disabled]="_moveDownDisabled"
                 [attr.aria-label]="'platformTable.P13ColumnsDialogMoveDownBtn' | fdTranslate"
                 [title]="'platformTable.P13ColumnsDialogMoveDownBtn' | fdTranslate"
@@ -85,7 +85,11 @@
         </fd-toolbar>
 
         <ul fd-list [selection]="true" aria-multiselectable="true">
-            <li fd-list-item [selected]="_selectedColumnsCount === _selectableColumns.length">
+            <li
+                (focus)="_setActiveColumn(null)"
+                fd-list-item
+                [selected]="_selectedColumnsCount === _selectableColumns.length"
+            >
                 <fd-checkbox
                     [ngModel]="_selectedColumnsCount === _selectableColumns.length"
                     (ngModelChange)="_toggleSelectAll($event)"
@@ -106,9 +110,9 @@
                 fd-list-item
                 *ngFor="let item of _filteredColumns; trackBy: _filterByColumnKy"
                 [class.fd-select-item--selected]="item.selected"
-                [class.fd-select-item--active]="item.active"
+                [class.is-focus]="item.active"
                 [selected]="item.selected"
-                (click)="_setActiveColumn(item)"
+                (focus)="_setActiveColumn(item)"
             >
                 <fd-checkbox [(ngModel)]="item.selected" (ngModelChange)="_onToggleColumn()"></fd-checkbox>
                 <span fd-list-title>
