@@ -552,7 +552,7 @@ export class TimePickerComponent<D>
             this._inputTimeValue = this._getFormattedTime(time);
             this._isInvalidTimeInput = !this._dateTimeAdapter.isValid(time);
         }
-        this._changeDetectorRef.markForCheck();
+        this._changeDetectorRef.detectChanges();
     }
 
     // #endregion ControlValueAccessor

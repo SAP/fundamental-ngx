@@ -413,6 +413,9 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     private _defaultRole = 'listitem';
 
     /** @hidden */
+    private _viewInited = false;
+
+    /** @hidden */
     private _listComponent = inject<FdpList>(FdpListComponent);
 
     /** @hidden */
@@ -542,6 +545,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._viewInited = true;
         this._listComponent._setupListItem(this);
     }
 
@@ -658,6 +662,11 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
             this.rowSelection || this.selectionMode === 'single' || this.selectionMode === 'multi'
                 ? 'option'
                 : 'listitem';
-        this._cd.detectChanges();
+
+        if (this._viewInited) {
+            this._cd.detectChanges();
+        } else {
+            this._cd.markForCheck();
+        }
     }
 }

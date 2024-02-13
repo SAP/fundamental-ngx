@@ -21,7 +21,8 @@ import {
     setValue,
     waitForElDisplayed,
     waitForPresent,
-    checkElArrIsClickable
+    checkElArrIsClickable,
+    pause
 } from '../../../../../e2e';
 import { alertText, componentExampleArr, dateTestText, tableCellArr, tableCellArr2, testText } from './table-content';
 
@@ -142,12 +143,15 @@ describe('Table test suite', () => {
         it('should check that table sort work correctly', async () => {
             await scrollIntoView(tableCustomColumnsExample);
             await click(tableCustomColumnsExample + button);
+            await pause(600);
             await click(dialogContent + button, 1);
             await click(dialogContent + button, 2);
+            await pause(600);
             const rowsDesc: string[] = await getTextArr(tableCustomColumnsExample + ' thead .fd-table__cell');
             await expect(await checkSortDirection(rowsDesc, 'desc')).toBe(true);
 
             await click(tableCustomColumnsExample + button);
+            await pause(600);
             await click(dialogContent + button);
             await click(dialogContent + button, 2);
             const rowsAsc: string[] = await getTextArr(tableCustomColumnsExample + ' thead .fd-table__cell');
@@ -157,6 +161,7 @@ describe('Table test suite', () => {
         it('should check search work correctly', async () => {
             await scrollIntoView(tableCustomColumnsExample);
             await click(tableCustomColumnsExample + button);
+            await pause(600);
             await setValue(dialogContent + inputGroup, dateTestText);
             await expect(await getText(dialogValue)).toBe(dateTestText);
         });
@@ -164,6 +169,7 @@ describe('Table test suite', () => {
         it('should check clickability cancel button', async () => {
             await scrollIntoView(tableCustomColumnsExample);
             await click(tableCustomColumnsExample + button);
+            await pause(600);
             await waitForElDisplayed(dialogContent);
             await expect(await isElementClickable(dialogContent + button, 3)).toBe(true, 'cancel button not clickable');
         });

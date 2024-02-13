@@ -168,6 +168,13 @@ export abstract class BaseInput
 
     /**
      * @hidden
+     * Used as a flag for change detector.
+     * If false, cdr will call markForCheck, detectChanges otherwhise.
+     */
+    protected _viewInited = false;
+
+    /**
+     * @hidden
      */
     private _controlInvalid = false;
     /**
@@ -232,6 +239,7 @@ export abstract class BaseInput
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._viewInited = true;
         if (this.ngControl) {
             this._subscriptions.add(
                 this.ngControl.statusChanges?.subscribe(() => {
@@ -290,7 +298,11 @@ export abstract class BaseInput
     writeValue(value: any): void {
         this._value = value;
         this.stateChanges.next('writeValue');
-        this._cd.markForCheck();
+        if (this._viewInited) {
+            this._cd.detectChanges();
+        } else {
+            this._cd.markForCheck();
+        }
     }
 
     /**
@@ -365,7 +377,6 @@ export abstract class BaseInput
             if (emitOnChange) {
                 this.onChange(value);
             }
-            this._cd.markForCheck();
         }
     }
 
