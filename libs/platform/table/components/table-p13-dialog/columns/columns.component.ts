@@ -226,7 +226,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     }
 
     /** @hidden */
-    _setActiveColumn(column: SelectableColumn): void {
+    _setActiveColumn(column: SelectableColumn | null): void {
         this._selectableColumns.map((_column) => {
             _column.active = _column === column;
         });
