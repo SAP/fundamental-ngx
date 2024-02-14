@@ -79,7 +79,9 @@ export class PlatformVhdMultiInputExampleComponent implements OnInit {
     }
 
     multiSelectChange(): void {
-        this.currentValue.selected = this.originalData.filter((i) => this.selected.includes(i.id));
+        this.currentValue = {
+            selected: [...this.originalData.filter((i) => this.selected.includes(i.id))]
+        };
         this._changeDetectorRef.detectChanges();
     }
 
