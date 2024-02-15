@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.8...v0.49.0-rc.9) (2024-02-15)
+
+
+### Bug Fixes
+
+* **core:** add fix for broken list height in Multi Combobox ([#11407](https://github.com/SAP/fundamental-ngx/issues/11407)) ([c8ff43d](https://github.com/SAP/fundamental-ngx/commit/c8ff43d4710f531e4576b1f124142b93c950f152))
+
+
+
+
+
+# [0.49.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.7...v0.49.0-rc.8) (2024-02-14)
+
+
+### Bug Fixes
+
+* **docs:** use direct object assignment to trigger correct detection ([#11403](https://github.com/SAP/fundamental-ngx/issues/11403)) ([03c9c5d](https://github.com/SAP/fundamental-ngx/commit/03c9c5d2b7cb56ec3298066c47e5f69671bb5af0))
+
+
+
+
+
 # [0.49.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.6...v0.49.0-rc.7) (2024-02-13)
 
 
