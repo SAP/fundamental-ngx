@@ -322,7 +322,7 @@ export class TableService {
         }
     }
 
-    /** Set page */
+    /** Set page. */
     setCurrentPage(currentPage: number): void {
         const prevState = this.getTableState();
         const prevPageState = prevState.page;
@@ -332,6 +332,29 @@ export class TableService {
         }
 
         const state: TableState = setCurrentPageToState(prevState, currentPage);
+
+        this.setTableState(state);
+        const evt = { current: state.page, previous: prevPageState };
+
+        this.needFetch$.next();
+        this.stateChange$.next({ type: 'page', state: evt });
+        this.pageChange$.next(evt);
+    }
+
+    /** Set items per page. */
+    setItemsPerPage(itemsPerPage: number, resetPageNumber = true): void {
+        const prevState = this.getTableState();
+        const prevPageState = prevState.page;
+
+        if (prevPageState.pageSize === itemsPerPage) {
+            return;
+        }
+
+        let state: TableState = setPageSizeToState(prevState, itemsPerPage);
+
+        if (resetPageNumber) {
+            state = setCurrentPageToState(state, 1);
+        }
 
         this.setTableState(state);
         const evt = { current: state.page, previous: prevPageState };
@@ -425,7 +448,14 @@ export class TableService {
     }
 }
 
+/** @hidden */
 function setCurrentPageToState(state: TableState, currentPage: number): TableState {
     const newPageState: CollectionPage = { ...state.page, currentPage };
+    return { ...state, page: newPageState };
+}
+
+/** @hidden */
+function setPageSizeToState(state: TableState, pageSize: number): TableState {
+    const newPageState: CollectionPage = { ...state.page, pageSize };
     return { ...state, page: newPageState };
 }

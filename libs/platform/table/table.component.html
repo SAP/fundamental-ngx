@@ -17,6 +17,9 @@
             <fdp-table-column-resizer class="fdp-table__column-resizer"></fdp-table-column-resizer>
         }
     </div>
+    @if (showGrowingButton) {
+        <fdp-table-growing-button [showItemsCount]="showItemsCount" [showItemsCount]="true"></fdp-table-growing-button>
+    }
 </fd-busy-indicator>
 <!-- Table Template -->
 <ng-template #tableTemplate>

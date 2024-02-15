@@ -38,6 +38,7 @@ import { TableEditableCellComponent } from './components/table-editable-cell/tab
 import { TableToolbarLeftActionsComponent } from './components/table-toolbar/table-toolbar-left-actions.component';
 
 import { TableCellHeaderPopoverComponent, TableHeaderCellContentComponent } from './components';
+import { TableGrowingButtonComponent } from './components/growing-button/table-growing-button.component';
 import { TableGroupRowComponent } from './components/table-group-row/table-group-row.component';
 import {
     IsColumnHasHeaderMenuPipe,
@@ -83,7 +84,8 @@ const EXPORTABLE_DECLARATIONS = [
     TableGroupRowComponent,
     TablePoppingRowComponent,
     TableHeaderRowComponent,
-    IsColumnHasHeaderMenuPipe
+    IsColumnHasHeaderMenuPipe,
+    TableGrowingButtonComponent
 ];
 
 @NgModule({

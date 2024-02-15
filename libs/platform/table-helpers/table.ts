@@ -1,4 +1,4 @@
-import { ElementRef, EventEmitter, Injector } from '@angular/core';
+import { ElementRef, EventEmitter, Injector, Signal } from '@angular/core';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import { PresetManagedComponent } from '@fundamental-ngx/platform/shared';
 import { Observable } from 'rxjs';
@@ -61,6 +61,8 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     abstract _tableRowsVisible: TableRow<T>[];
 
     abstract _tableRows: TableRow<T>[];
+
+    abstract loadedRows$: Signal<number>;
 
     abstract _tableRowsInViewPortPlaceholder: number[];
 
