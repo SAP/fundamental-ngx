@@ -5,6 +5,7 @@
         fdkDisabled
         [addDisabledClass]="false"
         [status]="row.value[semanticHighlighting]"
+        [cellFocusedEventAnnouncer]="_itemFocusedEventAnnouncer"
     ></td>
 }
 <!-- hidden text for screenreader -->
@@ -44,6 +45,7 @@
             (click)="_toggleSingleSelectableRow()"
             (keydown.enter)="_toggleSingleSelectableRow()"
             (keydown.space)="_toggleSingleSelectableRow()"
+            [cellFocusedEventAnnouncer]="_itemFocusedEventAnnouncer"
         >
             <ng-template [ngTemplateOutlet]="selectionScreenReaderText"></ng-template>
         </td>
@@ -55,6 +57,7 @@
             fdkDisabled
             [addDisabledClass]="false"
             [class.fd-table__cell--fixed]="fixed"
+            [cellFocusedEventAnnouncer]="_itemFocusedEventAnnouncer"
         ></td>
     }
 } @else if (selectionMode === SELECTION_MODE.MULTIPLE) {
@@ -62,6 +65,7 @@
         <td
             class="fd-table__cell--checkbox"
             [class.fd-table__cell--fixed]="fixed"
+            [cellFocusedEventAnnouncer]="_itemFocusedEventAnnouncer"
             role="cell"
             fd-table-cell
             [focusable]="true"
@@ -92,6 +96,7 @@
             fdkDisabled
             [addDisabledClass]="false"
             [class.fd-table__cell--fixed]="fixed"
+            [cellFocusedEventAnnouncer]="_itemFocusedEventAnnouncer"
         ></td>
     }
 }
@@ -108,6 +113,7 @@
         [focusable]="true"
         [attr.role]="column.role"
         [headers]="rowId + '__' + column.name"
+        [cellFocusedEventAnnouncer]="_itemFocusedEventAnnouncer"
         [ngClass]="[
             'fdp-table__col--' + column.name,
             column._freezed ? 'fd-table__cell--fixed' : '',
