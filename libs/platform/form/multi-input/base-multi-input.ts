@@ -219,7 +219,8 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         return !(this.mobile && this.mobileConfig.approveButtonText);
     }
 
-    /** @hidden
+    /**
+     * @hidden
      * List of matched suggestions
      * */
     _suggestions: MultiInputOption[];
@@ -274,6 +275,9 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     ];
 
     /** @hidden */
+    private _originalSuggestions: any[] = [];
+
+    /** @hidden */
     protected readonly dialogConfig = inject(DialogConfig, { optional: true });
 
     /** @hidden */
@@ -287,6 +291,9 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     ngOnChanges(changes: SimpleChanges): void {
         if ('group' in changes || 'groupKey' in changes) {
             this._updateDataSourceValues$.next();
+        }
+        if ('avatarSrc' in changes || 'description' in changes || 'title' in changes || 'value' in changes) {
+            this._suggestions = this._convertToOptionItems(this._originalSuggestions);
         }
     }
 
@@ -524,10 +531,11 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         const dsSub = combineLatest([initDataSource.open(), this._updateDataSourceValues$.pipe(startWith(null))])
             .pipe(takeUntilDestroyed(this._destroyed))
             .subscribe(([data]) => {
+                this._originalSuggestions = data;
                 this._suggestions = this._convertToOptionItems(data);
                 this.stateChanges.next('initDataSource.open().');
 
-                this.markForCheck();
+                this.detectChanges();
             });
         this._dsSubscription.add(dsSub);
 
