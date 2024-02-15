@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.9...v0.49.0-rc.10) (2024-02-15)
+
+
+### Bug Fixes
+
+* **platform:** incorrect example docs for example ([#11414](https://github.com/SAP/fundamental-ngx/issues/11414)) ([fbcb30e](https://github.com/SAP/fundamental-ngx/commit/fbcb30edd15dede4f35fdee03e3ba2626d481233))
+
+
+
+
+
 # [0.49.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.8...v0.49.0-rc.9) (2024-02-15)
 
 
