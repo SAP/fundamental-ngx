@@ -3,13 +3,14 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
+    Inject,
     Input,
     OnDestroy,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { firstValueFrom, Observable, Subject } from 'rxjs';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SearchInput, SuggestionItem } from '@fundamental-ngx/platform/search-field';
@@ -18,6 +19,8 @@ import { takeUntil } from 'rxjs/operators';
 import { TABLE_TOOLBAR, TableToolbarInterface } from './table-toolbar';
 import { TableToolbarActionsComponent } from './table-toolbar-actions.component';
 import { TableToolbarLeftActionsComponent } from './table-toolbar-left-actions.component';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 
 export type EditMode = 'none' | 'inline';
 
@@ -103,12 +106,26 @@ export class TableToolbarComponent implements TableToolbarInterface, OnDestroy {
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
+    private _translationResolver = new TranslationResolver();
+
+    /** @hidden */
+    private _language: FdLanguage;
+
+    /** @hidden */
     constructor(
         private readonly _cd: ChangeDetectorRef,
         private readonly _table: Table,
-        private readonly _tableService: TableService
+        private readonly _tableService: TableService,
+        private readonly _liveAnnouncer: LiveAnnouncer,
+        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>
     ) {
         this._listenToTableEvents();
+        this._init();
+    }
+
+    /** @hidden */
+    private async _init(): Promise<void> {
+        this._language = await firstValueFrom(this._language$);
     }
 
     /** @hidden */
@@ -179,10 +196,16 @@ export class TableToolbarComponent implements TableToolbarInterface, OnDestroy {
     /** @hidden */
     _expandAll(): void {
         this._table.expandAll();
+        this._liveAnnouncer.announce(
+            this._translationResolver.resolve(this._language, 'platformTable.toolbarActionExpandAllButtonClicked')
+        );
     }
 
     /** @hidden */
     _collapseAll(): void {
         this._table.collapseAll();
+        this._liveAnnouncer.announce(
+            this._translationResolver.resolve(this._language, 'platformTable.toolbarActionCollapseAllButtonClicked')
+        );
     }
 }

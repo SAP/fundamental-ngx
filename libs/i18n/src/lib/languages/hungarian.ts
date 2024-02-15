@@ -438,6 +438,8 @@ export const FD_LANGUAGE_HUNGARIAN: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Oszlopok',
         toolbarActionExpandAllButtonTitle: 'Összes kibontása',
         toolbarActionCollapseAllButtonTitle: 'Összes visszazárása',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Nincs szűrve)',
         filterDialogFilterByLabel: 'Szűrés alapja: {{filterLabel}}',
         filterDialogFilterTitle: 'Szűrő',

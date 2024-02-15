@@ -438,6 +438,8 @@ export const FD_LANGUAGE_CROATIAN: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Stupci',
         toolbarActionExpandAllButtonTitle: 'Proširi sve',
         toolbarActionCollapseAllButtonTitle: 'Sažmi sve',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Nije filtrirano)',
         filterDialogFilterByLabel: 'Filtriraj po: {{filterLabel}}',
         filterDialogFilterTitle: 'Filtar',

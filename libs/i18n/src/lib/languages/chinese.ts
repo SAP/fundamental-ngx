@@ -419,6 +419,8 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         toolbarActionColumnsButtonTitle: '列',
         toolbarActionExpandAllButtonTitle: '全部展开',
         toolbarActionCollapseAllButtonTitle: '全部折叠',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '（未筛选）',
         filterDialogFilterByLabel: '筛选条件：{{filterLabel}}',
         filterDialogFilterTitle: '筛选器',

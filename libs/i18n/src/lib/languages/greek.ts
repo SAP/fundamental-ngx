@@ -435,6 +435,8 @@ export const FD_LANGUAGE_GREEK: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Στήλες',
         toolbarActionExpandAllButtonTitle: 'Επέκταση όλων',
         toolbarActionCollapseAllButtonTitle: 'Σύμπτηξη όλων',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Μη Φιλτραρισμένο)',
         filterDialogFilterByLabel: 'Φιλτράρισμα βάσει: {{filterLabel}}',
         filterDialogFilterTitle: 'Φίλτρο',

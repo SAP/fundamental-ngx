@@ -426,6 +426,8 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'कॉलम',
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(फ़िल्टर नहीं किया गया)',
         filterDialogFilterByLabel: 'के द्वारा छनित: {{filterLabel}}',
         filterDialogFilterTitle: 'फ़िल्टर',

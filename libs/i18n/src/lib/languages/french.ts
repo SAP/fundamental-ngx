@@ -441,6 +441,8 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Colonnes',
         toolbarActionExpandAllButtonTitle: 'Tout développer',
         toolbarActionCollapseAllButtonTitle: 'Tout réduire',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Non filtré)',
         filterDialogFilterByLabel: 'Filtrer par : {{filterLabel}}',
         filterDialogFilterTitle: 'Filtrer',

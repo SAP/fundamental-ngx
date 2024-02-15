@@ -435,6 +435,8 @@ export const FD_LANGUAGE_ROMANIAN: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Coloane',
         toolbarActionExpandAllButtonTitle: 'Extindere tot',
         toolbarActionCollapseAllButtonTitle: 'Restrângere tot',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Nefiltrat)',
         filterDialogFilterByLabel: 'Filtrare după: {{filterLabel}}',
         filterDialogFilterTitle: 'Filtru',

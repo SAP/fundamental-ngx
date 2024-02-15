@@ -430,6 +430,8 @@ export const FD_LANGUAGE_NORWEGIAN: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Kolonner',
         toolbarActionExpandAllButtonTitle: 'Utvid alle',
         toolbarActionCollapseAllButtonTitle: 'Skjul alle',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Ikke filtrert)',
         filterDialogFilterByLabel: 'Filtrer etter: {{filterLabel}}',
         filterDialogFilterTitle: 'Filter',

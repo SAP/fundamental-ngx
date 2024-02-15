@@ -434,6 +434,8 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Kolumny',
         toolbarActionExpandAllButtonTitle: 'Rozwiń wszystko',
         toolbarActionCollapseAllButtonTitle: 'Zwiń wszystko',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Nieprzefiltrowane)',
         filterDialogFilterByLabel: 'Filtruj wg: {{filterLabel}}',
         filterDialogFilterTitle: 'Filtr',

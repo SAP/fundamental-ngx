@@ -434,6 +434,8 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Sloupce',
         toolbarActionExpandAllButtonTitle: 'Rozbalit vše',
         toolbarActionCollapseAllButtonTitle: 'Sbalit vše',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Nefiltrováno)',
         filterDialogFilterByLabel: 'Filtrovat podle: {{filterLabel}}',
         filterDialogFilterTitle: 'Filtr',

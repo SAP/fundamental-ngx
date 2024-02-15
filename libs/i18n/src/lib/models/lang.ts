@@ -621,6 +621,8 @@ export interface FdLanguage {
         toolbarActionColumnsButtonTitle: FdLanguageKey;
         toolbarActionExpandAllButtonTitle: FdLanguageKey;
         toolbarActionCollapseAllButtonTitle: FdLanguageKey;
+        toolbarActionExpandAllButtonClicked: FdLanguageKey;
+        toolbarActionCollapseAllButtonClicked: FdLanguageKey;
         filterDialogNotFilteredLabel: FdLanguageKey;
         /** @param filterLabel */
         filterDialogFilterByLabel: FdLanguageKey;

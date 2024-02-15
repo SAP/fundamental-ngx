@@ -431,6 +431,8 @@ export const FD_LANGUAGE_THAI: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'คอลัมน์',
         toolbarActionExpandAllButtonTitle: 'ขยายทั้งหมด',
         toolbarActionCollapseAllButtonTitle: 'ยุบรวมทั้งหมด',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(ไม่ได้กรอง)',
         filterDialogFilterByLabel: 'กรองตาม: {{filterLabel}}',
         filterDialogFilterTitle: 'ตัวกรอง',

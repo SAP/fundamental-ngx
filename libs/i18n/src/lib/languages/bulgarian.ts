@@ -439,6 +439,8 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Колони',
         toolbarActionExpandAllButtonTitle: 'Разгръщане на всички',
         toolbarActionCollapseAllButtonTitle: 'Свиване на всички',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Без филтриране)',
         filterDialogFilterByLabel: 'Филтриране по: {{filterLabel}}',
         filterDialogFilterTitle: 'Филтър',

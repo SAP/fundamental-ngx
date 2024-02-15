@@ -433,6 +433,8 @@ export const FD_LANGUAGE_MALAY: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Lajur',
         toolbarActionExpandAllButtonTitle: 'Kembangkan semua',
         toolbarActionCollapseAllButtonTitle: 'Runtuhkan semua',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Tidak Ditapis)',
         filterDialogFilterByLabel: 'Tapis mengikut: {{filterLabel}}',
         filterDialogFilterTitle: 'Penapis',

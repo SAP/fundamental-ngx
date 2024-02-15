@@ -423,6 +423,8 @@ export const FD_LANGUAGE_KOREAN: FdLanguage = {
         toolbarActionColumnsButtonTitle: '열',
         toolbarActionExpandAllButtonTitle: '모두 펼치기',
         toolbarActionCollapseAllButtonTitle: '모두 접기',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(필터링 안 함)',
         filterDialogFilterByLabel: '필터링 기준: {{filterLabel}}',
         filterDialogFilterTitle: '필터',

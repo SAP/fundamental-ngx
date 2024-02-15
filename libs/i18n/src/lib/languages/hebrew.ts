@@ -423,6 +423,8 @@ export const FD_LANGUAGE_HEBREW: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'עמודות',
         toolbarActionExpandAllButtonTitle: 'הרחב הכול',
         toolbarActionCollapseAllButtonTitle: 'צמצם הכול',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(לא מסונן)',
         filterDialogFilterByLabel: 'סנן לפי: {{filterLabel}}',
         filterDialogFilterTitle: 'מסנן',

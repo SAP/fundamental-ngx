@@ -610,6 +610,8 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Столбцы',
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Не отфильтровано)',
         filterDialogFilterByLabel: 'Фильтр: {{filterLabel}}',
         filterDialogFilterTitle: 'Фильтр',

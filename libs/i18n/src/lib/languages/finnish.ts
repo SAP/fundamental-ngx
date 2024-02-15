@@ -432,6 +432,8 @@ export const FD_LANGUAGE_FINNISH: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Sarakkeet',
         toolbarActionExpandAllButtonTitle: 'Laajenna kaikki',
         toolbarActionCollapseAllButtonTitle: 'Tiivistä kaikki',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Ei suodatettu)',
         filterDialogFilterByLabel: 'Suodatusperuste: {{filterLabel}}',
         filterDialogFilterTitle: 'Suodatin',

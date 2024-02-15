@@ -456,6 +456,8 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Columns',
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Not Filtered)',
         filterDialogFilterByLabel: 'Filtro sipas: {{filterLabel}}',
         filterDialogFilterTitle: 'Filtro',

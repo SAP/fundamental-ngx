@@ -428,6 +428,8 @@ export const FD_LANGUAGE_JAPANESE: FdLanguage = {
         toolbarActionColumnsButtonTitle: '列',
         toolbarActionExpandAllButtonTitle: 'すべて展開',
         toolbarActionCollapseAllButtonTitle: 'すべて圧縮',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(フィルタなし)',
         filterDialogFilterByLabel: 'フィルタ基準: {{filterLabel}}',
         filterDialogFilterTitle: 'フィルタ',

@@ -434,6 +434,8 @@ export const FD_LANGUAGE_SLOVENIAN: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Stolpci',
         toolbarActionExpandAllButtonTitle: 'Razširi vse',
         toolbarActionCollapseAllButtonTitle: 'Skrči vse',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Brez filtriranja)',
         filterDialogFilterByLabel: 'Filtriraj po: {{filterLabel}}',
         filterDialogFilterTitle: 'Filtriraj',

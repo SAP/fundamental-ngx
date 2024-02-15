@@ -431,6 +431,8 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'სვეტები',
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(გაუფილტრავი)',
         filterDialogFilterByLabel: 'გაფილტრე: {{filterLabel}}',
         filterDialogFilterTitle: 'ფილტრი',

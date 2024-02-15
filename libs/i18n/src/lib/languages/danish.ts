@@ -429,6 +429,8 @@ export const FD_LANGUAGE_DANISH: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Kolonner',
         toolbarActionExpandAllButtonTitle: 'Udvid alle',
         toolbarActionCollapseAllButtonTitle: 'Minimer alle',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Ikke filtreret)',
         filterDialogFilterByLabel: 'Filtrér efter: {{filterLabel}}',
         filterDialogFilterTitle: 'Filtrér',

@@ -435,6 +435,8 @@ export const FD_LANGUAGE_GERMAN: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Spalten',
         toolbarActionExpandAllButtonTitle: 'Alle erweitern',
         toolbarActionCollapseAllButtonTitle: 'Alle komprimieren',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Nicht gefiltert)',
         filterDialogFilterByLabel: 'Filtern nach: {{filterLabel}}',
         filterDialogFilterTitle: 'Filtern',

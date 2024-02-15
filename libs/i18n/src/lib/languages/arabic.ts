@@ -431,6 +431,8 @@ export const FD_LANGUAGE_ARABIC: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'الأعمدة',
         toolbarActionExpandAllButtonTitle: 'توسيع الكل',
         toolbarActionCollapseAllButtonTitle: 'طي الكل',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(لم تتم تصفيته)',
         filterDialogFilterByLabel: 'تصفية حسب: {{filterLabel}}',
         filterDialogFilterTitle: 'تصفية',

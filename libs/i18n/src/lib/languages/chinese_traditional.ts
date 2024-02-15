@@ -422,6 +422,8 @@ export const FD_LANGUAGE_CHINESE_TRADITIONAL: FdLanguage = {
         toolbarActionColumnsButtonTitle: '欄',
         toolbarActionExpandAllButtonTitle: '全部展開',
         toolbarActionCollapseAllButtonTitle: '全部摺疊',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(未篩選)',
         filterDialogFilterByLabel: '篩選依據：{{filterLabel}}',
         filterDialogFilterTitle: '篩選器',

@@ -432,6 +432,8 @@ export const FD_LANGUAGE_SWEDISH: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Kolumner',
         toolbarActionExpandAllButtonTitle: 'Expandera alla',
         toolbarActionCollapseAllButtonTitle: 'Komprimera alla',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Ej filtrerat)',
         filterDialogFilterByLabel: 'Filtrera efter: {{filterLabel}}',
         filterDialogFilterTitle: 'Filtrera',

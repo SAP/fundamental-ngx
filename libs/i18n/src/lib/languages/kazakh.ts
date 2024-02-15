@@ -434,6 +434,8 @@ export const FD_LANGUAGE_KAZAKH: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Бағандар',
         toolbarActionExpandAllButtonTitle: 'Барлығын жаю',
         toolbarActionCollapseAllButtonTitle: 'Барлығын жию',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Сүзгіленбеген)',
         filterDialogFilterByLabel: 'Сүзгілеу шарты: {{filterLabel}}',
         filterDialogFilterTitle: 'Сүзгілеу',

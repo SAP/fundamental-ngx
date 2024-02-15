@@ -434,6 +434,8 @@ export const FD_LANGUAGE_SERBIAN: FdLanguage = {
         toolbarActionColumnsButtonTitle: 'Kolone',
         toolbarActionExpandAllButtonTitle: 'Proširi sve',
         toolbarActionCollapseAllButtonTitle: 'Sažmi sve',
+        toolbarActionExpandAllButtonClicked: 'Expand all button clicked',
+        toolbarActionCollapseAllButtonClicked: 'Collapse all button clicked',
         filterDialogNotFilteredLabel: '(Nije filtrirano)',
         filterDialogFilterByLabel: 'Filtriraj po: {{filterLabel}}',
         filterDialogFilterTitle: 'Filtriraj',
