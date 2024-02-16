@@ -92,7 +92,7 @@
     "@nx/js": "17.2.8",
     "@nx/plugin": "17.2.8",
     "@nx/workspace": "17.2.8",
-    "@sap-ui/common-css": "0.33.1",
+    "@sap-ui/common-css": "0.33.2",
     "@schematics/angular": "17.0.8",
     "@swc-node/register": "1.6.8",
     "@swc/cli": "0.1.62",
