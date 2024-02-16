@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.12...v0.49.0-rc.13) (2024-02-16)
+
+
+### Bug Fixes
+
+* **core:** facet display ([#11329](https://github.com/SAP/fundamental-ngx/issues/11329)) ([3a06692](https://github.com/SAP/fundamental-ngx/commit/3a0669267d21e9419130beb711d44fcec4196605))
+
+
+
+
+
 # [0.49.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.11...v0.49.0-rc.12) (2024-02-16)
 
 
