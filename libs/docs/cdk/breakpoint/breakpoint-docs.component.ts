@@ -6,6 +6,7 @@ import {
     ComponentExampleComponent,
     DescriptionComponent,
     DocsSectionTitleComponent,
+    ExampleFile,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { AliasNamesExampleComponent } from './examples/alias-names-example/alias-names-example.component';
@@ -36,30 +37,31 @@ const differentSourceExampleTs = 'different-observe-target-example.component.ts'
 export class BreakpointDocsComponent {
     breakpointSizes = ResponsiveBreakpoints;
 
-    basicExample = [
+    basicExample: ExampleFile[] = [
         {
             code: getAssetFromModuleAssets(defaultExampleHtml),
             language: 'html',
-            fileName: 'basic-example',
-            component: 'BasicExampleComponent'
+            fileName: 'basic-example'
         },
         {
             code: getAssetFromModuleAssets(defaultExampleTs),
             language: 'typescript',
             fileName: 'basic-example',
+            selector: 'breakpoint-basic-example',
             component: 'BasicExampleComponent'
         }
     ];
-    aliasExample = [
+    aliasExample: ExampleFile[] = [
         {
             code: getAssetFromModuleAssets(aliasNamesExampleTs),
             language: 'typescript',
             fileName: 'alias-names-example',
+            selector: 'breakpoint-alias-names-example',
             component: 'AliasNamesExampleComponent'
         }
     ];
 
-    differentSourceExample = [
+    differentSourceExample: ExampleFile[] = [
         {
             code: getAssetFromModuleAssets(differentSourceExampleTs),
             language: 'typescript',

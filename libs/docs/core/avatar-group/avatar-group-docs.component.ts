@@ -40,18 +40,28 @@ const service = () => ({
 export class AvatarGroupDocsComponent {
     avatarGroupDefaultExample: ExampleFile[] = [
         getExampleFile('default/avatar-group-default-example.component.html'),
-        getExampleFile('default/avatar-group-default-example.component.ts'),
+        getExampleFile('default/avatar-group-default-example.component.ts', {
+            component: 'AvatarGroupDefaultExampleComponent',
+            fileName: 'avatar-group-default-example',
+            path: 'default'
+        }),
         service()
     ];
     avatarGroupGroupExample: ExampleFile[] = [
         getExampleFile('group-type/group-type-example.component.html'),
-        getExampleFile('group-type/group-type-example.component.ts', { component: 'GroupTypeExampleComponent' }),
+        getExampleFile('group-type/group-type-example.component.ts', {
+            component: 'GroupTypeExampleComponent',
+            fileName: 'avatar-group-group-type-example',
+            path: 'group-type'
+        }),
         service()
     ];
     verticalAvatarGroupExample: ExampleFile[] = [
         getExampleFile('vertical/avatar-group-vertical-example.component.html'),
         getExampleFile('vertical/avatar-group-vertical-example.component.ts', {
-            component: 'AvatarGroupVerticalExampleComponent'
+            component: 'AvatarGroupVerticalExampleComponent',
+            fileName: 'avatar-group-vertical-example',
+            path: 'vertical'
         }),
         service()
     ];

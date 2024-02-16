@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulatio
 import { DragAndDropModule, FdDndDropEventMode, FdDropEvent } from '@fundamental-ngx/cdk/utils';
 
 @Component({
-    selector: 'fundamental-ngx-cdk-disabled-example',
+    selector: 'fdk-dnd-default-example',
     templateUrl: './default-example.component.html',
     styleUrls: ['../../../../../cdk/utils/drag-and-drop/drag-and-drop.scss'],
     styles: [

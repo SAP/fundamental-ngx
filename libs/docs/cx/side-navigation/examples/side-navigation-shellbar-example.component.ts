@@ -15,7 +15,7 @@ import { CxSideNavigationModule } from '@fundamental-ngx/cx/side-navigation';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 
 @Component({
-    selector: 'fundamental-ngx-side-navigation-shellbar-example',
+    selector: 'fdx-side-navigation-shellbar-example',
     templateUrl: './side-navigation-shellbar-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

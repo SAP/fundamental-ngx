@@ -3,7 +3,7 @@ import { DisabledBehaviorDirective, TabbableElementService } from '@fundamental-
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 @Component({
-    selector: 'fundamental-ngx-tabbable-default-example',
+    selector: 'fdk-tabbable-default-example',
     templateUrl: './tabbable-default-example.component.html',
     standalone: true,
     imports: [ButtonComponent, DisabledBehaviorDirective]
@@ -17,8 +17,7 @@ export class TabbableDefaultExampleComponent {
     tabbableElementService = inject(TabbableElementService);
 
     ngAfterViewInit(): void {
-        this.tabbableElementClass = this.tabbableElementService.getTabbableElement(
-            this.section.nativeElement
-        )?.className;
+        this.tabbableElementClass = this.tabbableElementService.getTabbableElement(this.section.nativeElement)
+            ?.className;
     }
 }

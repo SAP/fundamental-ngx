@@ -69,25 +69,29 @@ export class ContentDensityDocsComponent {
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(directiveUsageExampleComponentSrc),
-            fileName: 'directive-usage',
+            fileName: 'directive-usage-example',
+            path: 'directive-usage',
             component: 'DirectiveUsageExampleComponent'
         },
         {
             language: 'html',
             code: getAssetFromModuleAssets(directiveUsageExampleComponentSrcHTMLSrc),
-            fileName: 'directive-usage',
+            fileName: 'directive-usage-example',
+            path: 'directive-usage',
             component: 'DirectiveUsageExampleComponent'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(contentDensityUserComponentSrc),
             fileName: 'content-density-user',
+            path: 'content-density-user',
             component: 'ContentDensityUserComponent'
         },
         {
             language: 'scss',
             code: getAssetFromModuleAssets(contentDensityUserComponentScssSrc),
             fileName: 'content-density-user',
+            path: 'content-density-user',
             component: 'ContentDensityUserComponent'
         }
     ];

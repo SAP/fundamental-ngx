@@ -9,7 +9,7 @@ import { TimelineAxis, TimelineModule, TimelineSidePosition } from '@fundamental
 import { TIMELINE_EXAMPLE_DATA } from './timeline-basic-example/timeline-example-data';
 
 @Component({
-    selector: 'fd-timeline-horizontal-double-side',
+    selector: 'fd-timeline-horizontal-double-side-example',
     templateUrl: './timeline-template-example.component.html',
     standalone: true,
     imports: [

@@ -36,34 +36,34 @@ export class DisabledDocsComponent {
         {
             code: getAssetFromModuleAssets(defaultExampleHtml),
             language: 'html',
-            fileName: 'disabled-default-example',
-            component: 'DisabledDefaultExampleComponent'
+            fileName: 'default-example'
         },
         {
             code: getAssetFromModuleAssets(defaultExampleTs),
             language: 'typescript',
-            fileName: 'disabled-default-example',
-            component: 'DisabledDefaultExampleComponent'
+            fileName: 'default-example',
+            selector: 'disabled-default-example',
+            component: 'DefaultExampleComponent'
         }
     ];
     diExample: ExampleFile[] = [
         {
             code: getAssetFromModuleAssets(diExampleHtml),
             language: 'html',
-            fileName: 'disabled-di-example',
-            component: 'DisabledDIExampleComponent'
+            fileName: 'di-example'
         },
         {
             code: getAssetFromModuleAssets(diExampleTs),
             language: 'typescript',
-            fileName: 'disabled-di-example',
-            component: 'DisabledDIExampleComponent'
+            fileName: 'di-example',
+            selector: 'disabled-di-example',
+            component: 'DiExampleComponent'
         },
         {
             code: getAssetFromModuleAssets(diRecipientExampleTs),
             language: 'typescript',
-            fileName: 'disabled-recipient.directive',
-            component: 'DisabledRecipientDirective'
+            fileName: 'disabled-recipient',
+            directive: true
         }
     ];
 

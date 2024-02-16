@@ -33,12 +33,14 @@ import { ToolHeaderExampleComponent } from './examples/tool-header-example.compo
 export class ButtonDocsComponent {
     toolHeaderExample: ExampleFile[] = [
         getExampleFile('tool-header-example.component.ts', {
-            component: 'ToolHeaderExampleComponent'
+            component: 'ToolHeaderExampleComponent',
+            selector: 'button-tool-header-example'
         })
     ];
     nestedExample: ExampleFile[] = [
         getExampleFile('nested-example.component.ts', {
-            component: 'NestedExampleComponent'
+            component: 'NestedExampleComponent',
+            selector: 'button-nested-example'
         })
     ];
 }

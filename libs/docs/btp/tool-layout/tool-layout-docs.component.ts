@@ -31,6 +31,7 @@ import { ToolLayoutTabletExampleComponent } from './examples/tablet-example/tool
 export class ToolLayoutDocsComponent {
     basicExample: ExampleFile[] = [
         getExampleFile('basic-example/tool-layout-basic-example.component.ts', {
+            selector: 'tool-layout-basic-example',
             component: 'ToolLayoutBasicExampleComponent'
         }),
         getExampleFile('basic-example/tool-layout-basic-example.component.html')
@@ -38,6 +39,7 @@ export class ToolLayoutDocsComponent {
 
     tabletExample: ExampleFile[] = [
         getExampleFile('tablet-example/tool-layout-tablet-example.component.ts', {
+            selector: 'tool-layout-tablet-example',
             component: 'ToolLayoutTabletExampleComponent'
         }),
         getExampleFile('tablet-example/tool-layout-tablet-example.component.html')
@@ -45,6 +47,7 @@ export class ToolLayoutDocsComponent {
 
     phoneExample: ExampleFile[] = [
         getExampleFile('phone-example/tool-layout-phone-example.component.ts', {
+            selector: 'tool-layout-phone-example',
             component: 'ToolLayoutPhoneExampleComponent'
         }),
         getExampleFile('phone-example/tool-layout-phone-example.component.html')

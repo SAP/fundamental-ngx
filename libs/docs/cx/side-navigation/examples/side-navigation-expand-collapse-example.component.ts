@@ -3,7 +3,7 @@ import { CxNestedListModule } from '@fundamental-ngx/cx/nested-list';
 import { CxSideNavigationModule } from '@fundamental-ngx/cx/side-navigation';
 
 @Component({
-    selector: 'fundamental-ngx-side-navigation-collapse-example',
+    selector: 'fdx-side-navigation-collapse-example',
     templateUrl: './side-navigation-expand-collapse-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

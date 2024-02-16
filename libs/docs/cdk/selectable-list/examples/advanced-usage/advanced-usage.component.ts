@@ -3,7 +3,7 @@ import { SelectableItemDirective, SelectableListDirective } from '@fundamental-n
 import { CustomSelectableItemDirective } from './custom-selectable-item.directive';
 
 @Component({
-    selector: 'fundamental-ngx-selectable-list-advanced-usage',
+    selector: 'fdk-selectable-list-advanced-usage',
     templateUrl: './advanced-usage.component.html',
     styles: [
         `

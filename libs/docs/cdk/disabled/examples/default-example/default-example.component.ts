@@ -4,7 +4,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 
 @Component({
-    selector: 'fundamental-ngx-cdk-disabled-example',
+    selector: 'fdk-disabled-default-example',
     templateUrl: './default-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

@@ -31,28 +31,32 @@ import { NavigationSelectionExampleComponent } from './examples/selection-exampl
 export class NavigationDocsComponent {
     basicExample: ExampleFile[] = [
         getExampleFile('basic-example/navigation-basic-example.component.ts', {
-            component: 'NavigationBasicExampleComponent'
+            component: 'NavigationBasicExampleComponent',
+            selector: 'navigation-basic-example'
         }),
         getExampleFile('basic-example/navigation-basic-example.component.html')
     ];
 
     dataSourceExample: ExampleFile[] = [
         getExampleFile('data-source/navigation-data-source-example.component.ts', {
-            component: 'NavigationDataSourceExampleComponent'
+            component: 'NavigationDataSourceExampleComponent',
+            selector: 'navigation-data-source-example'
         }),
-        getExampleFile('basic-example/navigation-data-source-example.component.html')
+        getExampleFile('data-source/navigation-data-source-example.component.html')
     ];
 
     selectionExample: ExampleFile[] = [
         getExampleFile('selection-example/navigation-selection-example.component.ts', {
-            component: 'NavigationSelectionExampleComponent'
+            component: 'NavigationSelectionExampleComponent',
+            selector: 'navigation-selection-example'
         }),
         getExampleFile('selection-example/navigation-selection-example.component.html')
     ];
 
     parentItemLinkExample: ExampleFile[] = [
         getExampleFile('parent-item-link/navigation-parent-item-link.component.ts', {
-            component: 'NavigationParentItemLinkComponent'
+            component: 'NavigationParentItemLinkComponent',
+            selector: 'navigation-parent-item-link'
         }),
         getExampleFile('parent-item-link/navigation-parent-item-link.component.html')
     ];

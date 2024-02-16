@@ -6,7 +6,7 @@ import {
 } from '@fundamental-ngx/cdk/utils';
 
 @Component({
-    selector: 'fundamental-ngx-focusable-list-default-example',
+    selector: 'fdk-focusable-list-default-example',
     templateUrl: './default-example.component.html',
     styles: [
         `

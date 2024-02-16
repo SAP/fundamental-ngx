@@ -36,14 +36,14 @@ export class SelectableListDocsComponent {
         {
             code: getAssetFromModuleAssets(defaultExampleHtml),
             language: 'html',
-            fileName: 'selectable-list-default-example',
-            component: 'SelectableListDefaultExample'
+            fileName: 'default-example'
         },
         {
             code: getAssetFromModuleAssets(defaultExampleTs),
             language: 'typescript',
-            fileName: 'selectable-list-default-example',
-            component: 'SelectableListDefaultExample'
+            fileName: 'default-example',
+            selector: 'selectable-list-default-example',
+            component: 'DefaultExampleComponent'
         }
     ];
 
@@ -51,20 +51,20 @@ export class SelectableListDocsComponent {
         {
             code: getAssetFromModuleAssets(advancedExampleHtml),
             language: 'html',
-            fileName: 'selectable-list-advanced-example',
-            component: 'SelectableListAdvancedExample'
+            fileName: 'advanced-usage'
         },
         {
             code: getAssetFromModuleAssets(advancedExampleTs),
             language: 'typescript',
-            fileName: 'selectable-list-advanced-example',
+            fileName: 'advanced-usage',
+            selector: 'selectable-list-advanced-usage',
             component: 'SelectableListAdvancedExample'
         },
         {
             code: getAssetFromModuleAssets(advancedExampleCustomDirTs),
             language: 'typescript',
-            fileName: 'selectable-list-advanced-example-custom-item',
-            component: 'SelectableListAdvancedExampleCustomItem'
+            fileName: 'custom-selectable-item',
+            directive: true
         }
     ];
 

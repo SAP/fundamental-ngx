@@ -50,13 +50,14 @@ export class SideNavigationDocsComponent {
     sideNavigationDefaultExample = [
         getExampleFile('side-navigation-cozy-wide-text-only-1-level-example.component.html'),
         getExampleFile('side-navigation-cozy-wide-text-only-1-level-example.component.ts', {
-            component: 'SideNavigationDefaultExampleComponent'
+            selector: 'side-navigation-default-example',
+            component: 'SideNavigationCozyWideTextOnly1LevelExampleComponent'
         })
     ];
     sideNavigationCozyWideIcon1LevelExample = [
         getExampleFile('side-navigation-wide-icon-1-level-example.component.html'),
         getExampleFile('side-navigation-wide-icon-1-level-example.component.ts', {
-            component: 'SideNavigationCozyWideIcon1LevelExampleComponent'
+            component: 'SideNavigationWideIcon1LevelExampleComponent'
         })
     ];
     sideNavigationCozyWideIcon3LevelExample = [
@@ -74,7 +75,8 @@ export class SideNavigationDocsComponent {
     sideNavigationExpandCollapseExample = [
         getExampleFile('side-navigation-expand-collapse-example.component.html'),
         getExampleFile('side-navigation-expand-collapse-example.component.ts', {
-            component: 'SideNavigationExpandCollapseExampleComponent'
+            selector: 'side-navigation-collapse-example',
+            component: 'SideNavigationCollapseExampleComponent'
         })
     ];
     sideNavigationNarrowExample = [
