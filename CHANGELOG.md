@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.11...v0.49.0-rc.12) (2024-02-16)
+
+
+### Bug Fixes
+
+* dynamic page a11y improvements ([#11312](https://github.com/SAP/fundamental-ngx/issues/11312)) ([9ef66b9](https://github.com/SAP/fundamental-ngx/commit/9ef66b963095377dc0713b86d1a51a9cb5853ddf))
+
+
+
+
+
 # [0.49.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.10...v0.49.0-rc.11) (2024-02-16)
 
 **Note:** Version bump only for package fundamental-ngx
