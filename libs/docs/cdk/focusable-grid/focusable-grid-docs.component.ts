@@ -35,13 +35,13 @@ export class FocusableGridDocsComponent {
         {
             code: getAssetFromModuleAssets(defaultExampleHtml),
             language: 'html',
-            fileName: 'focusable-grid-default-example',
-            component: 'DefaultExampleComponent'
+            fileName: 'default-example'
         },
         {
             code: getAssetFromModuleAssets(defaultExampleTs),
             language: 'typescript',
-            fileName: 'focusable-grid-default-example',
+            selector: 'focusable-grid-default-example',
+            fileName: 'default-example',
             component: 'DefaultExampleComponent'
         }
     ];
@@ -50,12 +50,12 @@ export class FocusableGridDocsComponent {
         {
             code: getAssetFromModuleAssets(shortRowsExampleHtml),
             language: 'html',
-            fileName: 'short-rows-example',
-            component: 'ShortRowsExampleComponent'
+            fileName: 'short-rows-example'
         },
         {
             code: getAssetFromModuleAssets(shortRowsExampleTs),
             language: 'typescript',
+            selector: 'focusable-grid-short-rows-default-example',
             fileName: 'short-rows-example',
             component: 'ShortRowsExampleComponent'
         }

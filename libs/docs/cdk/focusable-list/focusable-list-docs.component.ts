@@ -23,16 +23,14 @@ export class FocusableListDocsComponent {
         {
             code: getAssetFromModuleAssets(defaultExampleHtml),
             language: 'html',
-            fileName: 'focusable-list-default-example',
-            component: 'FocusableListDefaultExample'
+            fileName: 'default-example'
         },
         {
             code: getAssetFromModuleAssets(defaultExampleTs),
             language: 'typescript',
-            fileName: 'focusable-list-default-example',
-            component: 'FocusableListDefaultExample'
+            fileName: 'default-example',
+            selector: 'focusable-list-default-example',
+            component: 'DefaultExampleComponent'
         }
     ];
-
-    constructor() {}
 }

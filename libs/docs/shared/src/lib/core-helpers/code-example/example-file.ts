@@ -10,8 +10,10 @@ export interface ExampleFile<
     scssFileName?: string;
     standalone?: boolean;
     pure?: boolean;
+    directive?: boolean;
     language: string;
     fileName?: string;
+    selector?: string;
     entryComponent?: boolean;
     component?: string;
     main?: boolean;

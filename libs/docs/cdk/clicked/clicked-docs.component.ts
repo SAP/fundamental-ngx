@@ -4,6 +4,7 @@ import {
     ComponentExampleComponent,
     DescriptionComponent,
     DocsSectionTitleComponent,
+    ExampleFile,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { BasicExampleComponent } from './examples/basic-example/basic-example.component';
@@ -29,7 +30,7 @@ const providerExampleDirectiveTs = 'provider-example/usage-with-provider.directi
     ]
 })
 export class ClickedDocsComponent {
-    basicExample = [
+    basicExample: ExampleFile[] = [
         {
             code: getAssetFromModuleAssets(defaultExampleHtml),
             language: 'html',
@@ -43,24 +44,24 @@ export class ClickedDocsComponent {
             component: 'ClickedBasicExample'
         }
     ];
-    providerExample = [
+    providerExample: ExampleFile[] = [
         {
             code: getAssetFromModuleAssets(providerExampleHtml),
             language: 'html',
-            fileName: 'clicked-provider-example',
-            component: 'ClickedProviderExample'
+            fileName: 'provider-example'
         },
         {
             code: getAssetFromModuleAssets(providerExampleTs),
             language: 'typescript',
-            fileName: 'clicked-provider-example',
-            component: 'ClickedProviderExample'
+            fileName: 'provider-example',
+            selector: 'clicked-provider-example',
+            component: 'ProviderExampleComponent'
         },
         {
             code: getAssetFromModuleAssets(providerExampleDirectiveTs),
             language: 'typescript',
-            fileName: 'clicked-provider-directive-example',
-            component: 'ClickedProviderDirectiveExample'
+            directive: true,
+            fileName: 'usage-with-provider'
         }
     ];
 }

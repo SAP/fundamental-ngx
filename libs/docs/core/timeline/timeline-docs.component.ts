@@ -15,6 +15,7 @@ import { TimelineVerticalDoubleSideExampleComponent } from './examples/timeline-
 
 const timelineBasicDataExampleTs = 'timeline-basic-example/timeline-example-data.ts';
 const timelineBasicExampleTs = 'timeline-basic-example/timeline-basic-example.component.ts';
+const timelineBasicExampleScss = 'timeline-basic-example/timeline-basic-example.component.scss';
 const timelineBasicExampleHtml = 'timeline-basic-example/timeline-basic-example.component.html';
 const timelineTemplateExampleHtml = 'timeline-template-example.component.html';
 const timelineHorizontalAxisExampleTs = 'timeline-horizontal-axis-example.component.ts';
@@ -44,17 +45,25 @@ export class TimelineDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(timelineBasicExampleHtml),
-            name: 'timeline-basic-example.html'
+            fileName: 'timeline-basic-example'
+        },
+        {
+            language: 'scss',
+            code: getAssetFromModuleAssets(timelineBasicExampleScss),
+            fileName: 'timeline-basic-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(timelineBasicExampleTs),
-            name: 'timeline-basic-example.ts'
+            main: true,
+            component: 'TimelineBasicExampleComponent',
+            fileName: 'timeline-basic-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(timelineBasicDataExampleTs),
-            name: 'timeline-basic-data-example.ts'
+            pure: true,
+            fileName: 'timeline-example-data'
         }
     ];
 
@@ -62,17 +71,22 @@ export class TimelineDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(timelineTemplateExampleHtml),
-            name: 'timeline-template-example.component.html'
+            fileName: 'timeline-template-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(timelineHorizontalAxisExampleTs),
-            name: 'timeline-template-example.component.ts'
+            main: true,
+            selector: 'timeline-horizontal-axis',
+            component: 'TimelineHorizontalAxisExampleComponent',
+            fileName: 'timeline-template-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(timelineBasicDataExampleTs),
-            name: 'timeline-horizontal-axis-example.component.ts'
+            pure: true,
+            path: 'timeline-basic-example',
+            fileName: 'timeline-example-data'
         }
     ];
 
@@ -80,17 +94,21 @@ export class TimelineDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(timelineTemplateExampleHtml),
-            name: 'timeline-template-example.component.html'
+            fileName: 'timeline-template-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(timelineHorizontalDoubleExampleTs),
-            name: 'timeline-horizontal-double-side-example.component.ts'
+            component: 'TimelineHorizontalDoubleSideExampleComponent',
+            selector: 'timeline-vertical-double-side',
+            fileName: 'timeline-horizontal-double-side-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(timelineBasicDataExampleTs),
-            name: 'timeline-horizontal-axis-example.component.ts'
+            pure: true,
+            path: 'timeline-basic-example',
+            fileName: 'timeline-example-data'
         }
     ];
 
@@ -98,17 +116,22 @@ export class TimelineDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(timelineTemplateExampleHtml),
-            name: 'timeline-template-example.component.html'
+            fileName: 'timeline-template-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(timelineVerticalAxisExampleTs),
-            name: 'timeline-vertical-double-side-example.component.ts'
+            main: true,
+            selector: 'timeline-vertical-double-side',
+            component: 'TimelineVerticalDoubleSideExampleComponent',
+            fileName: 'timeline-vertical-double-side-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(timelineBasicDataExampleTs),
-            name: 'timeline-horizontal-axis-example.component.ts'
+            pure: true,
+            path: 'timeline-basic-example',
+            fileName: 'timeline-example-data'
         }
     ];
 
@@ -116,12 +139,14 @@ export class TimelineDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(timelineLoadingExampleHtml),
-            name: 'timeline-loading-example.html'
+            fileName: 'timeline-loading-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(timelineLoadingExampleTs),
-            name: 'timeline-loading-example.ts'
+            main: true,
+            component: 'TimelineLoadingExampleComponent',
+            fileName: 'timeline-loading-example'
         }
     ];
 }

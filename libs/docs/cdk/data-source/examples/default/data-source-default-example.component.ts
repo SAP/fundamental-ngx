@@ -56,7 +56,7 @@ export class ExampleDataSourceParser<T> implements DataSourceParser<T, ExampleDa
 }
 
 @Component({
-    selector: 'fundamental-ngx-data-source-default-example',
+    selector: 'fdk-data-source-default-example',
     templateUrl: './data-source-default-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     hostDirectives: [

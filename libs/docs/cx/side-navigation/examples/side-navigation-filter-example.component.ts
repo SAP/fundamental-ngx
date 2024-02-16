@@ -6,7 +6,7 @@ import { CxNestedListModule } from '@fundamental-ngx/cx/nested-list';
 import { CxSideNavigationModule } from '@fundamental-ngx/cx/side-navigation';
 
 @Component({
-    selector: 'fundamental-ngx-side-navigation-filter-example',
+    selector: 'fdx-side-navigation-filter-example',
     templateUrl: './side-navigation-filter-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

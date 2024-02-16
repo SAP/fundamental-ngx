@@ -3,7 +3,9 @@ export class StackblitzDependencies {
         '@fundamental-ngx/cdk',
         '@fundamental-ngx/platform',
         '@fundamental-ngx/core',
-        '@fundamental-ngx/i18n'
+        '@fundamental-ngx/i18n',
+        '@fundamental-ngx/cx',
+        '@fundamental-ngx/btp'
     ];
 
     private static _ngDependencies: string[] = [
@@ -33,7 +35,8 @@ export class StackblitzDependencies {
         'typescript',
         'fast-deep-equal',
         'lodash-es',
-        'zone.js'
+        'zone.js',
+        '@types/google.visualization'
     ];
 
     static getDependencies(packageInfo: Record<string, any>, lernaInfo: Record<string, any>): Record<string, any> {

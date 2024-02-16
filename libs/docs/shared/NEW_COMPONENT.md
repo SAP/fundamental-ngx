@@ -155,7 +155,7 @@ And to achieve the functionaliy that we want we will use the following code:
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-    selector: 'fundamental-ngx-my-component-double-button-example',
+    selector: 'fd-my-component-double-button-example',
     template: `<fd-my-component></fd-my-component>
         <br />
         <fd-my-component></fd-my-component>`,
@@ -164,7 +164,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 export class MyComponentDoubleButtonExampleComponent {}
 ```
 
-Notice that just like the file, the "selector" should have the same, prefixed with `fundamental-ngx`. Similarly the class declaration should have the same name as the file in `Pascal Case`, suffixed by Component.
+Notice that just like the file, the "selector" should have the same, prefixed with the tag related to the particular library you adding example to. Similarly the class declaration should have the same name as the file in `Pascal Case`, suffixed by Component.
 
 However, to see our example we need to declare it first and to add it to our html file. For the declaration, it is recommended that you add it directly to the module file : `my-component-docs.module.ts`.
 
@@ -221,7 +221,7 @@ The last thing we need is to add the following code in the html file:
 -   "Example Name" should be short and descriptive, telling the user what the following example is.
 -   "Description" is used to describe the example in more detail and/or add more detail.
 -   `<[example selector></[example selector]>`, is an instance of our example component, it should be replaced with
-    `<fundamental-ngx-my-component-double-button-example></fundamental-ngx-my-component-double-button-example>` in our case.
+    `<fd-my-component-double-button-example></fd-my-component-double-button-example>` in our case.
     Generally, there should be only one such instance for each example.
 -   "[exampleFiles]="raw code array name" should be replaced with the class variable that contains all the raw code that should be showed. For our example component that would be `myComponentDoubleButtonExample`.
 
@@ -235,7 +235,7 @@ In our case this code should look something like this:
 </fd-docs-section-title>
 <description> Adds a second button </description>
 <component-example>
-    <fundamental-ngx-my-component-double-button-example></fundamental-ngx-my-component-double-button-example>
+    <fd-my-component-double-button-example></fd-my-component-double-button-example>
 </component-example>
 <code-example [exampleFiles]="myComponentDoubleButtonExample"></code-example>
 ```
