@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SelectableItemDirective, SelectableListDirective } from '@fundamental-ngx/cdk/utils';
 
 @Component({
-    selector: 'fundamental-ngx-selectable-list-default-example',
+    selector: 'fdk-selectable-list-default-example',
     templateUrl: './default-example.component.html',
     styles: [
         `

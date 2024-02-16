@@ -26,6 +26,9 @@ import { DataSourceDefaultExampleComponent } from './examples/default/data-sourc
 export class DataSourceDocsComponent {
     dataSourceDefaultExample: ExampleFile[] = [
         getExampleFile('default/data-source-default-example.component.html'),
-        getExampleFile('default/data-source-default-example.component.ts')
+        getExampleFile('default/data-source-default-example.component.ts', {
+            component: 'DataSourceDefaultExampleComponent',
+            selector: 'data-source-default-example'
+        })
     ];
 }

@@ -8,7 +8,7 @@ import {
 } from '@fundamental-ngx/cdk/utils';
 
 @Component({
-    selector: 'fundamental-ngx-focusable-grid-default-example',
+    selector: 'fdk-focusable-grid-default-example',
     templateUrl: './default-example.component.html',
     styles: [
         `

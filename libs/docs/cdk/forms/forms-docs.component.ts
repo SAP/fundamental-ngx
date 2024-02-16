@@ -24,6 +24,9 @@ import { FormsDefaultExampleComponent } from './examples/default/forms-default-e
 export class FormsDocsComponent {
     formsDefaultExample: ExampleFile[] = [
         getExampleFile('default/forms-default-example.component.html'),
-        getExampleFile('default/forms-default-example.component.ts')
+        getExampleFile('default/forms-default-example.component.ts', {
+            selector: 'forms-default-example',
+            component: 'FormsDefaultExampleComponent'
+        })
     ];
 }

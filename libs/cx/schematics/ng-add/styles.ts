@@ -37,14 +37,14 @@ export const defaultFontStyle = `
 
 @font-face {
     font-family: '72Black';
-    src: url('@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/72-Black.woff') format('woff');
+    src: url('~@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/72-Black.woff') format('woff');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
     font-family: '72';
-    src: url('@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/72-Black.woff') format('woff');
+    src: url('~@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/72-Black.woff') format('woff');
     font-weight: 900;
     font-style: normal;
 }

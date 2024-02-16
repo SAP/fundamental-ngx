@@ -15,6 +15,7 @@ import { FixedCardLayoutDisabledDragExampleComponent } from './examples/disabled
 import { FixedCardLayoutMaxColumnsExampleComponent } from './examples/max-columns/fixed-card-layout-max-columns-example.component';
 import { FixedCardLayoutMobileExampleComponent } from './examples/mobile/fixed-card-layout-mobile-examples.component';
 
+const fixedCardLayoutTs = 'default/fixed-card-layout-examples.component.ts';
 const fixedCardLayoutH = 'default/fixed-card-layout-examples.component.html';
 const disabledDragFixedCardLayoutH = 'disabled-drag-drop/fixed-card-layout-disabled-drag.component.html';
 const disabledDragFixedCardLayoutTs = 'disabled-drag-drop/fixed-card-layout-disabled-drag.component.ts';
@@ -48,6 +49,12 @@ export class FixedCardLayoutDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(fixedCardLayoutH),
+            fileName: 'fixed-card-layout-examples'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(fixedCardLayoutTs),
+            component: 'FixedCardLayoutExampleComponent',
             fileName: 'fixed-card-layout-examples'
         }
     ];

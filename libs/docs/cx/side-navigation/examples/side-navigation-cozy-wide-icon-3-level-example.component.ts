@@ -3,7 +3,7 @@ import { CxNestedListModule } from '@fundamental-ngx/cx/nested-list';
 import { CxSideNavigationModule } from '@fundamental-ngx/cx/side-navigation';
 
 @Component({
-    selector: 'fundamental-ngx-side-navigation-cozy-wide-icon-3-level-example',
+    selector: 'fdx-side-navigation-cozy-wide-icon-3-level-example',
     templateUrl: './side-navigation-cozy-wide-icon-3-level-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

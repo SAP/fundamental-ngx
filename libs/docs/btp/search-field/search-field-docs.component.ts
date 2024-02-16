@@ -27,7 +27,8 @@ import { SearchFieldBasicExampleComponent } from './examples/basic-example/searc
 export class SearchFieldDocsComponent {
     basicExample: ExampleFile[] = [
         getExampleFile('basic-example/search-field-basic-example.component.ts', {
-            component: 'SearchFieldBasicExampleComponent'
+            component: 'SearchFieldBasicExampleComponent',
+            selector: 'search-field-basic-example'
         }),
         getExampleFile('basic-example/search-field-basic-example.component.html')
     ];

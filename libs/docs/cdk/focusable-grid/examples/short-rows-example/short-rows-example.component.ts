@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FocusableGridDirective, FocusableItemDirective, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
 
 @Component({
-    selector: 'fundamental-ngx-focusable-grid-short-rows-default-example',
+    selector: 'fdk-focusable-grid-short-rows-default-example',
     templateUrl: './short-rows-example.component.html',
     styles: [
         `

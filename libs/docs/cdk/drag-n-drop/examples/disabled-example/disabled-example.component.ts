@@ -16,7 +16,7 @@ import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { delay, of } from 'rxjs';
 
 @Component({
-    selector: 'fd-dnd-disabled-example',
+    selector: 'fdk-dnd-disabled-example',
     templateUrl: './disabled-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

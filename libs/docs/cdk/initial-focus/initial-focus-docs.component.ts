@@ -28,11 +28,17 @@ import { NestedElementsExampleComponent } from './examples/nested-elements-examp
 export class InitialFocusDocsComponent {
     initialFocusDefaultExample: ExampleFile[] = [
         getExampleFile('default/initial-focus-default-example.component.html'),
-        getExampleFile('default/initial-focus-default-example.component.ts')
+        getExampleFile('default/initial-focus-default-example.component.ts', {
+            component: 'InitialFocusDefaultExampleComponent',
+            selector: 'initial-focus-default-example'
+        })
     ];
 
     initialFocusNestedElementExample: ExampleFile[] = [
         getExampleFile('nested-elements-example/nested-elements-example.component.html'),
-        getExampleFile('nested-elements-example/nested-elements-example.component.ts')
+        getExampleFile('nested-elements-example/nested-elements-example.component.ts', {
+            component: 'NestedElementsExampleComponent',
+            selector: 'initial-focus-nested-elements-example'
+        })
     ];
 }
