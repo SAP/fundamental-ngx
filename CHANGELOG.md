@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.27](https://github.com/SAP/fundamental-ngx/compare/v0.43.26...v0.43.27) (2024-02-16)
+
+
+### Bug Fixes
+
+* **core,platform:** detect changes when control value being updated ([#11397](https://github.com/SAP/fundamental-ngx/issues/11397)) ([411e14a](https://github.com/SAP/fundamental-ngx/commit/411e14a2e34ca9d96ee295681e2e89824e16741e))
+* **core:** dynamic page accessibility bugs ([#11304](https://github.com/SAP/fundamental-ngx/issues/11304)) ([57ff7cf](https://github.com/SAP/fundamental-ngx/commit/57ff7cf001a29981e5a0565350a30d9b4d9ab38b))
+* **docs:** use direct object assignment to trigger correct detection ([#11402](https://github.com/SAP/fundamental-ngx/issues/11402)) ([753c2bb](https://github.com/SAP/fundamental-ngx/commit/753c2bb20cee81dfa681c1b6d3a27f076060977f))
+* **docs:** vhd value comparator fix ([#11384](https://github.com/SAP/fundamental-ngx/issues/11384)) ([e796e1d](https://github.com/SAP/fundamental-ngx/commit/e796e1df26065eaaf914bac386db0d6ad0b7cbbf))
+* **platform:** disallow select all for single select ([#11379](https://github.com/SAP/fundamental-ngx/issues/11379)) ([d708041](https://github.com/SAP/fundamental-ngx/commit/d708041d21edfdba6fae23a2c636dc9588fb5b43))
+* **platform:** incorrect example docs for example ([#11413](https://github.com/SAP/fundamental-ngx/issues/11413)) ([8e8def6](https://github.com/SAP/fundamental-ngx/commit/8e8def61321de49bd10ec9bddca00a25f6c3641d))
+* **platform:** live announcer should say whether column is fixed ([#11314](https://github.com/SAP/fundamental-ngx/issues/11314)) ([fdef7db](https://github.com/SAP/fundamental-ngx/commit/fdef7db105e12688e0da3b18417755eee0c6e995))
+* **platform:** p13 dialog active issue ([#11341](https://github.com/SAP/fundamental-ngx/issues/11341)) ([0cb0c28](https://github.com/SAP/fundamental-ngx/commit/0cb0c28be3a3b9d75762b6f4e90b4f0f538aa113))
+
+
+
+
+
 ## [0.43.26](https://github.com/SAP/fundamental-ngx/compare/v0.43.25...v0.43.26) (2024-01-23)
 
 

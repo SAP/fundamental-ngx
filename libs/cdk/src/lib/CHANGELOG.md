@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.27](https://github.com/SAP/fundamental-ngx/compare/v0.43.26...v0.43.27) (2024-02-16)
+
+
+### Bug Fixes
+
+* **core,platform:** detect changes when control value being updated ([#11397](https://github.com/SAP/fundamental-ngx/issues/11397)) ([411e14a](https://github.com/SAP/fundamental-ngx/commit/411e14a2e34ca9d96ee295681e2e89824e16741e))
+
+
+
+
+
 ## [0.43.26](https://github.com/SAP/fundamental-ngx/compare/v0.43.25...v0.43.26) (2024-01-23)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk

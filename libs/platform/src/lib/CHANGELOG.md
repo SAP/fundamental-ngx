@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.27](https://github.com/SAP/fundamental-ngx/compare/v0.43.26...v0.43.27) (2024-02-16)
+
+
+### Bug Fixes
+
+* **core,platform:** detect changes when control value being updated ([#11397](https://github.com/SAP/fundamental-ngx/issues/11397)) ([411e14a](https://github.com/SAP/fundamental-ngx/commit/411e14a2e34ca9d96ee295681e2e89824e16741e))
+* **platform:** disallow select all for single select ([#11379](https://github.com/SAP/fundamental-ngx/issues/11379)) ([d708041](https://github.com/SAP/fundamental-ngx/commit/d708041d21edfdba6fae23a2c636dc9588fb5b43))
+* **platform:** live announcer should say whether column is fixed ([#11314](https://github.com/SAP/fundamental-ngx/issues/11314)) ([fdef7db](https://github.com/SAP/fundamental-ngx/commit/fdef7db105e12688e0da3b18417755eee0c6e995))
+* **platform:** p13 dialog active issue ([#11341](https://github.com/SAP/fundamental-ngx/issues/11341)) ([0cb0c28](https://github.com/SAP/fundamental-ngx/commit/0cb0c28be3a3b9d75762b6f4e90b4f0f538aa113))
+
+
+
+
+
 ## [0.43.26](https://github.com/SAP/fundamental-ngx/compare/v0.43.25...v0.43.26) (2024-01-23)
 
 
