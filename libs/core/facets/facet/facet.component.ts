@@ -47,6 +47,12 @@ export class FacetComponent implements AfterViewInit {
     subtitle: string;
 
     /**
+     * Heading level (i.e. <h1>, <h2>, etc.) of the facet title.
+     */
+    @Input()
+    headingLevel: Nullable<1 | 2 | 3 | 4 | 5 | 6>;
+
+    /**
      * id for the facet
      */
     @Input()
@@ -58,12 +64,6 @@ export class FacetComponent implements AfterViewInit {
      */
     @Input()
     alignEnd = false;
-
-    /**
-     * Heading level (i.e. <h1>, <h2>, etc.) of the facet title.
-     */
-    @Input()
-    headingLevel: Nullable<1 | 2 | 3 | 4 | 5 | 6>;
 
     /** @hidden
      * the appropriate role for each facet type

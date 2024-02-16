@@ -3,13 +3,13 @@
 } @else {
     @if (facetTitle) {
         <span
+            [attr.role]="!!headingLevel ? 'heading' : null"
+            [attr.aria-level]="headingLevel"
+            style="display: block"
             fd-title
             [headerSize]="5"
             class="fd-margin-bottom--sm"
             [id]="titleId"
-            style="display: block"
-            [attr.role]="!!headingLevel ? 'heading' : null"
-            [attr.aria-level]="headingLevel"
             >{{ facetTitle }}</span
         >
     }
