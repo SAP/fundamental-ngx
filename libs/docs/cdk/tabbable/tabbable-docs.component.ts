@@ -24,6 +24,9 @@ import { TabbableDefaultExampleComponent } from './examples/default/tabbable-def
 export class TabbableDocsComponent {
     tabbableDefaultExample: ExampleFile[] = [
         getExampleFile('default/tabbable-default-example.component.html'),
-        getExampleFile('default/tabbable-default-example.component.ts')
+        getExampleFile('default/tabbable-default-example.component.ts', {
+            component: 'TabbableDefaultExampleComponent',
+            selector: 'tabbable-default-example'
+        })
     ];
 }

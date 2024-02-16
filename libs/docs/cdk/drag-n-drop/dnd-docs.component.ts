@@ -37,14 +37,14 @@ export class DndDocsComponent {
         {
             code: getAssetFromModuleAssets(defaultExampleHtml),
             language: 'html',
-            fileName: 'disabled-default-example',
-            component: 'DisabledDefaultExampleComponent'
+            fileName: 'default-example'
         },
         {
             code: getAssetFromModuleAssets(defaultExampleTs),
             language: 'typescript',
-            fileName: 'disabled-default-example',
-            component: 'DisabledDefaultExampleComponent'
+            fileName: 'default-example',
+            selector: 'dnd-default-example',
+            component: 'DefaultExampleComponent'
         }
     ];
 
@@ -52,12 +52,12 @@ export class DndDocsComponent {
         {
             code: getAssetFromModuleAssets(disabledExampleHtml),
             language: 'html',
-            fileName: 'disabled-example',
-            component: 'DisabledExampleComponent'
+            fileName: 'disabled-example'
         },
         {
             code: getAssetFromModuleAssets(disabledExampleTs),
             language: 'typescript',
+            selector: 'dnd-disabled-example',
             fileName: 'disabled-example',
             component: 'DisabledExampleComponent'
         }

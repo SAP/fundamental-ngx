@@ -198,10 +198,19 @@ export class ${componentName} {}`;
     }
 
     private getLibraryPrefix(): string {
-        if (this._currentLib === 'platform') {
-            return 'fdp-';
-        } else {
-            return 'fd-';
+        switch (this._currentLib) {
+            case 'core':
+                return 'fd-';
+            case 'platform':
+                return 'fdp-';
+            case 'cdk':
+                return 'fdk-';
+            case 'cx':
+                return 'fdx-';
+            case 'btp':
+                return 'fdb-';
+            default:
+                return 'fd-';
         }
     }
 
@@ -225,6 +234,8 @@ export class ${componentName} {}`;
             fileBasis = file.fileName + '.pipe';
         } else if (file.pure) {
             fileBasis = file.fileName + '';
+        } else if (file.directive) {
+            fileBasis = file.fileName + '.directive';
         } else {
             fileBasis = file.fileName + '.component';
         }
@@ -251,7 +262,7 @@ export class ${componentName} {}`;
             path,
             componentName,
             basis: this.getFileBasis(example),
-            selector: this.getLibraryPrefix() + example.fileName,
+            selector: this.getLibraryPrefix() + (example.selector || example.fileName),
             entryComponent: !!example.entryComponent,
             main: mainComponent,
             service: !!example.service

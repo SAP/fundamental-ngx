@@ -37,7 +37,7 @@ const calendarGridSrc = 'calendar-grid-example/calendar-grid-example.component.t
 const calendarDisabledNavigationsSrc =
     'calendar-disabled-navigation-buttons-example/calendar-disabled-navigation-buttons-example.component.ts';
 const calendarDisabledNavigationsHtml =
-    'calendar-disabled-navigation-buttons-example/calendar-disabled-navigation-buttons-example.html';
+    'calendar-disabled-navigation-buttons-example/calendar-disabled-navigation-buttons-example.component.html';
 const calendarGridHtml = 'calendar-grid-example/calendar-grid-example.component.html';
 const calendarSingleSrc = 'calendar-single-example.component.ts';
 const calendarMondayStartSrc = 'calendar-monday-start-example.component.ts';

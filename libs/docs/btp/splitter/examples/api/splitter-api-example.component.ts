@@ -4,7 +4,7 @@ import { SplitterComponent, SplitterModule, SplitterSplitPaneComponent } from '@
 import { BarModule } from '@fundamental-ngx/core/bar';
 
 @Component({
-    selector: 'fd-splitter-api-example',
+    selector: 'fdb-splitter-api-example',
     templateUrl: './splitter-api-example.component.html',
     standalone: true,
     imports: [BarModule, SplitterModule]

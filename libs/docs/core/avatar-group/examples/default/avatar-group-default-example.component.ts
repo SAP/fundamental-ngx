@@ -7,7 +7,7 @@ import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
 import { AvatarGroupDataExampleService } from '../avatar-group-data-example.service';
 
 @Component({
-    selector: 'fundamental-ngx-avatar-group-default-example',
+    selector: 'fd-avatar-group-default-example',
     templateUrl: './avatar-group-default-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [AvatarGroupComponent, AvatarComponent, QuickViewModule, LinkComponent, AvatarGroupItemDirective],

@@ -4,7 +4,7 @@ import { FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 import { UsageWithProviderDirective } from './usage-with-provider.directive';
 
 @Component({
-    selector: 'fd-clicked-provider-example',
+    selector: 'fdk-clicked-provider-example',
     templateUrl: './provider-example.component.html',
     standalone: true,
     imports: [UsageWithProviderDirective, FocusableItemDirective, JsonPipe]
