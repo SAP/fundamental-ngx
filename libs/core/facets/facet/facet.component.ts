@@ -9,6 +9,7 @@ import {
     Renderer2,
     ViewEncapsulation
 } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FACET_CLASS_NAME, FacetType } from '../constants';
@@ -57,6 +58,12 @@ export class FacetComponent implements AfterViewInit {
      */
     @Input()
     alignEnd = false;
+
+    /**
+     * Heading level (i.e. <h1>, <h2>, etc.) of the facet title.
+     */
+    @Input()
+    headingLevel: Nullable<1 | 2 | 3 | 4 | 5 | 6>;
 
     /** @hidden
      * the appropriate role for each facet type
