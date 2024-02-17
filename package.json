@@ -49,7 +49,7 @@
     "@angular/router": "17.0.8",
     "@fundamental-styles/cx": "0.33.2",
     "@nx/angular": "17.2.8",
-    "@sap-theming/theming-base-content": "11.11.0",
+    "@sap-theming/theming-base-content": "11.12.0",
     "@stackblitz/sdk": "1.9.0",
     "@swc/helpers": "0.5.2",
     "compare-versions": "6.1.0",
