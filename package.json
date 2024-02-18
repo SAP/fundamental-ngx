@@ -81,7 +81,7 @@
     "@angular-eslint/template-parser": "17.1.0",
     "@angular/cli": "17.0.8",
     "@angular/compiler-cli": "17.0.8",
-    "@angular/language-service": "17.0.8",
+    "@angular/language-service": "17.2.1",
     "@commitlint/cli": "17.7.1",
     "@commitlint/config-conventional": "17.7.0",
     "@jsdevtools/npm-publish": "3.0.1",
