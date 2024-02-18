@@ -77,7 +77,7 @@
     "@angular-devkit/core": "17.0.8",
     "@angular-devkit/schematics": "17.0.8",
     "@angular-eslint/eslint-plugin": "17.1.0",
-    "@angular-eslint/eslint-plugin-template": "17.1.0",
+    "@angular-eslint/eslint-plugin-template": "17.2.1",
     "@angular-eslint/template-parser": "17.1.0",
     "@angular/cli": "17.0.8",
     "@angular/compiler-cli": "17.0.8",
