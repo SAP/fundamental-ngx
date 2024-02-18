@@ -4668,10 +4668,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/google.visualization@0.0.71":
-  version "0.0.71"
-  resolved "https://registry.yarnpkg.com/@types/google.visualization/-/google.visualization-0.0.71.tgz#78d0052e304233052aecf9fdfc28811842704e3b"
-  integrity sha512-apYzR43VwcuoWVGS1cDEK9T1+6BmDEVnwS+I6/NYHhikFY7e4E8eFRNCEC2kqXEDG69vAlQZn5AmyooCBcqZyA==
+"@types/google.visualization@0.0.74":
+  version "0.0.74"
+  resolved "https://registry.yarnpkg.com/@types/google.visualization/-/google.visualization-0.0.74.tgz#1d742545d0f030019f4aa67339641fd98674a953"
+  integrity sha512-vcBDi9AF7bPGf7v+WvTUUyuF7KT/kdnOg0qyI8UsQtEuW8dYQcQTG3atejfy8Vwb9bzpa42IE80d9571QXy8jg==
 
 "@types/graceful-fs@^4.1.3":
   version "4.1.6"
