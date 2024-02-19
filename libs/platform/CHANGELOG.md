@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.14...v0.49.0-rc.15) (2024-02-19)
+
+
+### Bug Fixes
+
+* **platform:** search field simplification ([#11429](https://github.com/SAP/fundamental-ngx/issues/11429)) ([3ad657a](https://github.com/SAP/fundamental-ngx/commit/3ad657ab4a9a8a179bef43ad721ca9a02d6ea92b))
+
+
+
+
+
 # [0.49.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.13...v0.49.0-rc.14) (2024-02-17)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
