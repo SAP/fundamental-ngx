@@ -40,7 +40,8 @@ export const components: SectionInterfaceContent[] = [
             { url: 'platform/table/scrolling', name: 'Scrolling options' },
             { url: 'platform/table/clickable-rows', name: 'Clickable rows' },
             { url: 'platform/table/preserved-state', name: 'Preserved state' },
-            { url: 'platform/table/advanced', name: 'Advanced techniques' }
+            { url: 'platform/table/advanced', name: 'Advanced techniques' },
+            { url: 'platform/table/pagination', name: 'Pagination' }
         ]
     },
     { url: 'platform/textarea', name: 'Textarea' },

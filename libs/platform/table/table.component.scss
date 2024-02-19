@@ -522,6 +522,31 @@ fdk-dynamic-portal {
             }
         }
     }
+
+    &__growing-button {
+        height: auto;
+        &__title {
+            font-weight: 700;
+            margin: 0.813rem 0;
+        }
+        &__subtitle {
+            padding-bottom: 0.875rem;
+        }
+    }
+
+    &__growing-button-content {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        &--byline {
+            > * {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+        }
+    }
 }
 
 .#{$block} {

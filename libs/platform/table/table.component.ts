@@ -37,7 +37,6 @@ import {
     FDK_FOCUSABLE_GRID_DIRECTIVE,
     FocusableCellPosition,
     FocusableGridDirective,
-    FocusableGridDirective as FocusableGridDirective_1,
     IntersectionSpyDirective,
     KeyUtil,
     Nullable,
@@ -142,6 +141,7 @@ import {
     tap
 } from 'rxjs/operators';
 import { NoDataWrapperComponent, TABLE_TOOLBAR, TableToolbarInterface, ToolbarContext } from './components';
+import { TableGrowingButtonComponent } from './components/growing-button/table-growing-button.component';
 import { PlatformTableColumnResizerComponent } from './components/table-column-resizer/table-column-resizer.component';
 import { TableGroupRowComponent } from './components/table-group-row/table-group-row.component';
 import { TableHeaderRowComponent } from './components/table-header-row/table-header-row.component';
@@ -232,7 +232,7 @@ let tableUniqueId = 0;
         BusyIndicatorComponent,
         PlatformTableColumnResizerComponent,
         TableScrollableDirective,
-        FocusableGridDirective_1,
+        FocusableGridDirective,
         CoreTableComponent,
         TableHeaderDirective,
         TableHeaderRowComponent,
@@ -248,7 +248,8 @@ let tableUniqueId = 0;
         IntersectionSpyDirective,
         AsyncPipe,
         FdTranslatePipe,
-        RowClassesPipe
+        RowClassesPipe,
+        TableGrowingButtonComponent
     ]
 })
 export class TableComponent<T = any>
@@ -286,6 +287,14 @@ export class TableComponent<T = any>
     /** Toggle for page scrolling feature. */
     @Input()
     pageScrolling = false;
+    /** Whether the table should render growing button at the bottom. */
+    @Input()
+    showGrowingButton = false;
+    /**
+     * Whether to show total items amount in growing button text content.
+     */
+    @Input()
+    showItemsCount = false;
     /** Number of items per page. */
     @Input()
     pageSize: Nullable<number>;
@@ -561,6 +570,10 @@ export class TableComponent<T = any>
     /** @hidden */
     @ContentChild(NoDataWrapperComponent)
     readonly _noDataWrapper: Nullable<NoDataWrapperComponent>;
+
+    /** Total loaded items. */
+    loadedRows$ = signal(0);
+
     /** @hidden */
     get initialSortBy(): CollectionSort[] {
         return this.initialState?.initialSortBy ?? [];
@@ -1110,10 +1123,15 @@ export class TableComponent<T = any>
         this._cdr.markForCheck();
     }
 
-    /** Search in table */
+    /** Set current page number in table */
     setCurrentPage(currentPage: number): void {
         this._tableService.setCurrentPage(currentPage);
         this._cdr.markForCheck();
+    }
+
+    /** Set items per page number in table  */
+    setPageSize(pageSize: number, resetPageNumber = true): void {
+        this._tableService.setItemsPerPage(pageSize, resetPageNumber);
     }
 
     /** Toolbar Sort Settings button visibility */
@@ -1370,6 +1388,7 @@ export class TableComponent<T = any>
      */
     clearTableRows(): void {
         this._tableRows = [];
+        this.loadedRows$.set(0);
         this._tableRowsVisible = [];
         this._tableRowsInViewPortPlaceholder = [];
         this._newTableRows = [];
@@ -1650,7 +1669,7 @@ export class TableComponent<T = any>
                 )
                 .subscribe((rows) => {
                     rows =
-                        this.pageScrolling && this.getTableState().page.currentPage > 1
+                        (this.pageScrolling || this.showGrowingButton) && this.getTableState().page.currentPage > 1
                             ? [...this._tableRows, ...rows]
                             : rows;
                     this._setTableRows(rows);
@@ -1865,6 +1884,7 @@ export class TableComponent<T = any>
     private _setTableRows(rows = this._dataSourceTableRows): void {
         this._dataSourceTableRows = rows;
         this._tableRows = [...this._newTableRows, ...this._dataSourceTableRows];
+        this.loadedRows$.set(this._tableRows.length);
         this._reIndexTableRows();
         this.onTableRowsChanged();
         this._calculateIsShownNavigationColumn();

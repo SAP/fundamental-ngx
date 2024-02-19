@@ -421,6 +421,7 @@ export type FdLanguageKeyIdentifier =
     | 'platformTable.deselectAllCheckboxLabel'
     | 'platformTable.deselectSingleRow'
     | 'platformTable.selectSingleRow'
+    | 'platformTable.loadMore'
     | 'platformWizardGenerator.summarySectionEditStep'
     | 'platformMessagePopover.allErrors'
     | 'platformMessagePopover.defaultErrors.email'
