@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.16...v0.49.0-rc.17) (2024-02-19)
+
+
+### Features
+
+* **platform,docs:** table growing button ([#11411](https://github.com/SAP/fundamental-ngx/issues/11411)) ([f06d18a](https://github.com/SAP/fundamental-ngx/commit/f06d18ac9aedd409f09aaa9ea9252fc8711c7231))
+
+
+
+
+
 # [0.49.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.15...v0.49.0-rc.16) (2024-02-19)
 
 
