@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.15...v0.49.0-rc.16) (2024-02-19)
+
+
+### Bug Fixes
+
+* **platform:** update suggestions model when keys are being changed ([#11412](https://github.com/SAP/fundamental-ngx/issues/11412)) ([1f56945](https://github.com/SAP/fundamental-ngx/commit/1f56945dc3860b31becc1da3c31a5f864d081955))
+
+
+
+
+
 # [0.49.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.14...v0.49.0-rc.15) (2024-02-19)
 
 
