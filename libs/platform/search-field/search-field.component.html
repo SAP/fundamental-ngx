@@ -1,10 +1,20 @@
-<ng-template [ngTemplateOutlet]="mobile ? mobileTemplate : inputFieldTemplate"></ng-template>
+<ng-template [ngTemplateOutlet]="mobile ? mobileTemplate : desktopTemplate"></ng-template>
+<ng-template #desktopTemplate>
+    <fd-popover [isOpen]="_isOpen$()" (isOpenChange)="_isOpen$.set($event)" [triggers]="[]">
+        <fd-popover-control>
+            <ng-template [ngTemplateOutlet]="inputFieldTemplate"></ng-template>
+        </fd-popover-control>
+        <fd-popover-body>
+            <ng-template [ngTemplateOutlet]="suggestionMenuTemplate"></ng-template>
+        </fd-popover-body>
+    </fd-popover>
+</ng-template>
 <ng-template #mobileTemplate>
     <ng-template [ngTemplateOutlet]="inputFieldTemplate"></ng-template>
 </ng-template>
 <ng-template #searchCategoryMenu>
     <button
-        class="fdp-search-field__category-button fd-input-group__button fd-button fd-button--menu {{
+        class="fdp-search-field__category-button fd-input-group__button fd-button fd-button--transparent fd-button--menu {{
             appearance?.categoryButtonClass
         }}"
         [fdpMenuTriggerFor]="categoryMenu"
@@ -63,9 +73,7 @@
                 [attr.aria-label]="ariaLabel || ('platformSearchField.searchInputLabel' | fdTranslate)"
                 [attr.aria-labelledby]="ariaLabel ? null : ariaLabelledBy"
                 [attr.aria-controls]="_menuId"
-                [attr.aria-expanded]="
-                    (_dropdownValues$ | async)?.length !== 0 ? (_showDropdown ? 'true' : 'false') : null
-                "
+                [attr.aria-expanded]="(_dropdownValues$ | async)?.length !== 0 ? (_isOpen$() ? 'true' : 'false') : null"
                 [attr.aria-haspopup]="(_dropdownValues$ | async)?.length !== 0"
                 autocomplete="off"
                 (keydown)="onKeydown($event)"
@@ -140,7 +148,7 @@
     </div>
 </ng-template>
 <ng-template #suggestionMenuTemplate>
-    @if (_dropdownValues$ | async | suggestionMatches: inputText : mobile; as suggestions) {
+    @if (_dropdownValues$ | async | suggestionMatches: inputText; as suggestions) {
         @if (suggestions?.length) {
             <div class="fdp-search-field__suggestion-dropdown" [attr.dir]="_dir$()">
                 <nav

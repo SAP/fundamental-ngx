@@ -35,11 +35,6 @@
 
 .fdp-search-field__suggestion-dropdown {
     .fd-menu--overflow {
-        top: 0;
-        max-width: none;
-        min-height: 10rem;
-        max-height: 100%;
-        position: absolute;
         background-color: var(--sapList_Background);
     }
 
@@ -49,5 +44,12 @@
 
     .fd-menu__item {
         max-width: none;
+    }
+}
+
+fdp-search-field {
+    display: block;
+    .fd-popover-custom {
+        display: block;
     }
 }

@@ -359,7 +359,7 @@ describe('SearchFieldComponent', () => {
 
         menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(1);
-        expect(component._showDropdown).toBeTruthy();
+        expect(component._isOpen$()).toBeTruthy();
     });
 
     it('should not create multiple overlays with subsequent keyboard entries', () => {
@@ -381,7 +381,7 @@ describe('SearchFieldComponent', () => {
 
         menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(1);
-        expect(component._showDropdown).toBeTruthy();
+        expect(component._isOpen$()).toBeTruthy();
 
         textInput.nativeElement.value = 'ap';
         textInput.nativeElement.dispatchEvent(new Event('input'));
@@ -390,7 +390,7 @@ describe('SearchFieldComponent', () => {
 
         menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(1);
-        expect(component._showDropdown).toBeTruthy();
+        expect(component._isOpen$()).toBeTruthy();
     });
 
     it('should set input text and close dropdown on select of item', () => {
@@ -422,7 +422,7 @@ describe('SearchFieldComponent', () => {
         // check to see if dropdown is open
         menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(0);
-        expect(component._showDropdown).toBeFalsy();
+        expect(component._isOpen$()).toBeFalsy();
 
         // check input text
         expect(component.inputText).toBe('Apple');
@@ -541,7 +541,7 @@ describe('SearchFieldComponent', () => {
 
         const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(0);
-        expect(component._showDropdown).toBeFalsy();
+        expect(component._isOpen$()).toBeFalsy();
     });
 
     it('should be able to be put into "isLoading" state', () => {
@@ -629,7 +629,7 @@ describe('SearchFieldComponent', () => {
         // check dropdown
         const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(0);
-        expect(component._showDropdown).toBeFalsy();
+        expect(component._isOpen$()).toBeFalsy();
 
         expect(host.inputValue).toEqual({ text: '', category: null });
     });
@@ -661,7 +661,7 @@ describe('SearchFieldComponent', () => {
         // check dropdown
         const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(0);
-        expect(component._showDropdown).toBeFalsy();
+        expect(component._isOpen$()).toBeFalsy();
     });
 
     // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
@@ -708,7 +708,7 @@ describe('SearchFieldComponent', () => {
         // check dropdown
         let menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(1);
-        expect(component._showDropdown).toBeTruthy();
+        expect(component._isOpen$()).toBeTruthy();
 
         /// click outside
         host.outsideButton.nativeElement.click();
@@ -716,7 +716,7 @@ describe('SearchFieldComponent', () => {
         // check dropdown
         menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(0);
-        expect(component._showDropdown).toBeFalsy();
+        expect(component._isOpen$()).toBeFalsy();
     });
 });
 
@@ -817,7 +817,7 @@ describe('SearchFieldComponent with DataSource', () => {
         // check dropdown
         let menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(1);
-        expect(component._showDropdown).toBeTruthy();
+        expect(component._isOpen$()).toBeTruthy();
         let items = getDropdownItems(menuEls[0]);
         expect(items.length).toBe(1);
         expect(items[0].textContent).toBe('Apple');
@@ -830,7 +830,7 @@ describe('SearchFieldComponent with DataSource', () => {
         // check dropdown
         menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(1);
-        expect(component._showDropdown).toBeTruthy();
+        expect(component._isOpen$()).toBeTruthy();
         items = getDropdownItems(menuEls[0]);
         expect(items.length).toBe(2);
         expect(items[0].textContent).toBe('Banana');
@@ -852,7 +852,7 @@ describe('SearchFieldComponent with DataSource', () => {
         // check dropdown
         const menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEls.length).toBe(1);
-        expect(component._showDropdown).toBeTruthy();
+        expect(component._isOpen$()).toBeTruthy();
         const items = getDropdownItems(menuEls[0]);
         expect(items.length).toBe(2);
         expect(items[0].textContent).toBe('Almond');

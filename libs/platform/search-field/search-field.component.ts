@@ -1,8 +1,6 @@
 import { FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { Direction } from '@angular/cdk/bidi';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
-import { ConnectedPosition, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
 import { AsyncPipe, DOCUMENT, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
@@ -27,6 +25,7 @@ import {
     Pipe,
     PipeTransform,
     QueryList,
+    signal,
     SimpleChanges,
     TemplateRef,
     ViewChild,
@@ -35,8 +34,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { fromEvent, isObservable, merge, Observable, of, Subject } from 'rxjs';
-import { filter, map, take, takeUntil } from 'rxjs/operators';
+import { isObservable, merge, Observable, of, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -50,7 +49,7 @@ import {
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
 import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { FD_SHELLBAR_SEARCH_COMPONENT } from '@fundamental-ngx/core/shellbar';
@@ -129,6 +128,7 @@ type Appearance = SearchComponent['appearance'] | undefined;
         AsyncPipe,
         SearchHighlightPipe,
         FdTranslatePipe,
+        PopoverModule,
         forwardRef(() => SuggestionMatchesPipe)
     ]
 })
@@ -309,12 +309,6 @@ export class SearchFieldComponent
     _currentCategory?: ValueLabelItem;
 
     /**
-     * Whether or not to show typeahead dropdown.
-     * @hidden
-     */
-    _showDropdown = false;
-
-    /**
      * Whether or not to show category dropdown. This is dependent on length of `categoryValues` property.
      * @hidden
      */
@@ -348,6 +342,9 @@ export class SearchFieldComponent
     _isSearchDone = false;
 
     /** @hidden */
+    _isOpen$ = signal(false);
+
+    /** @hidden */
     private _suggestions: SuggestionItem[] | Observable<SuggestionItem[]>;
 
     /** @hidden */
@@ -358,12 +355,6 @@ export class SearchFieldComponent
 
     /** @hidden */
     private _currentSearchSuggestionAnnouncementMessage = '';
-
-    /** @hidden */
-    private _suggestionOverlayRef: OverlayRef | null;
-
-    /** @hidden */
-    private _suggestionPortal: TemplatePortal;
 
     /** @hidden */
     private _suggestionkeyManager: FocusKeyManager<SearchFieldSuggestionDirective>;
@@ -383,7 +374,6 @@ export class SearchFieldComponent
     /** @hidden */
     constructor(
         public elementRef: ElementRef<HTMLElement>,
-        private readonly _overlay: Overlay,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _injector: Injector,
         @Optional() private readonly _rtl: RtlService,
@@ -429,10 +419,6 @@ export class SearchFieldComponent
 
     /** @hidden */
     ngOnDestroy(): void {
-        if (this._suggestionOverlayRef) {
-            this._suggestionOverlayRef.dispose();
-            this._suggestionOverlayRef = null;
-        }
         this._suggestionkeyManager?.destroy();
     }
 
@@ -553,42 +539,14 @@ export class SearchFieldComponent
      * Open suggestion menu
      */
     openSuggestionMenu(): void {
-        this.closeSuggestionMenu();
+        this._isOpen$.set(true);
         this._suggestionkeyManager?.destroy();
         this._suggestionkeyManager = new FocusKeyManager(this.suggestionItems);
-        if (this._showDropdown) {
+        if (this._isOpen$()) {
             return;
         }
 
-        // create overlay
-        const overlayConfig = this._createSuggetionOverlayConfig();
-        this._suggestionOverlayRef = this._overlay.create(overlayConfig);
-
-        // get portal to attach to overlay
-        this._suggestionPortal = new TemplatePortal(this.suggestionMenuTemplate, this._viewContainerRef);
-        this._suggestionOverlayRef.attach(this._suggestionPortal);
-
-        // add subscription to capture outside clicks
-        fromEvent<MouseEvent>(document, 'click')
-            .pipe(
-                filter((event) => {
-                    const target = event.target as HTMLElement;
-                    return (
-                        !!this._suggestionOverlayRef &&
-                        !this._suggestionOverlayRef.overlayElement.contains(target) &&
-                        this._showDropdown
-                    );
-                }),
-                take(1),
-                takeUntilDestroyed(this._destroyRef)
-            )
-            .subscribe((event) => {
-                const target = event.target as HTMLElement;
-                const focus = !(target.tagName === 'INPUT' && this._inputId !== target.id);
-                this.closeSuggestionMenu(focus);
-            });
-
-        this._showDropdown = true;
+        this._isOpen$.set(true);
     }
 
     /** @hidden */
@@ -617,14 +575,10 @@ export class SearchFieldComponent
 
     /** @hidden */
     closeSuggestionMenu(focus = true): void {
-        if (!this._suggestionOverlayRef) {
-            return;
-        }
-        this._suggestionOverlayRef.detach();
         if (focus) {
             this.focus();
         }
-        this._showDropdown = false;
+        this._isOpen$.set(false);
     }
 
     /** @hidden */
@@ -639,36 +593,6 @@ export class SearchFieldComponent
 
         this.closeSuggestionMenu(false);
         this.focus();
-    }
-
-    /** @hidden */
-    _createSuggetionOverlayConfig(): OverlayConfig {
-        const positions: ConnectedPosition[] = [
-            {
-                originX: 'start',
-                originY: 'bottom',
-                overlayX: 'start',
-                overlayY: 'top'
-            },
-            {
-                originX: 'start',
-                originY: 'top',
-                overlayX: 'start',
-                overlayY: 'bottom'
-            }
-        ];
-        const positionStrategy = this._overlay
-            .position()
-            .flexibleConnectedTo(this.inputGroup)
-            .withLockedPosition()
-            .withPositions(positions);
-        const scrollStrategy = this._overlay.scrollStrategies.reposition();
-        return new OverlayConfig({
-            positionStrategy,
-            scrollStrategy,
-            backdropClass: 'cdk-overlay-transparent-backdrop',
-            width: this.inputGroup.nativeElement.offsetWidth
-        });
     }
 
     /** @hidden */
@@ -743,11 +667,11 @@ export class SearchFieldComponent
 })
 export class SuggestionMatchesPipe implements PipeTransform {
     /** @hidden */
-    transform(values: string[] | null, match: string, mobile = false): string[] {
+    transform(values: string[] | null, match: string): string[] {
         if (!values) {
             values = [];
         }
-        if (mobile && !match) {
+        if (!match) {
             return values;
         }
         const processedMatch = match.trim().toLowerCase();
