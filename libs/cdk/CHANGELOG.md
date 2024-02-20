@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.18...v0.49.0-rc.19) (2024-02-20)
+
+
+### Bug Fixes
+
+* **cdk:** data source package tsconfig ([#11434](https://github.com/SAP/fundamental-ngx/issues/11434)) ([e069d9d](https://github.com/SAP/fundamental-ngx/commit/e069d9d8fcbc6e7e1244990fce261b34c71a0cac))
+
+
+
+
+
 # [0.49.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.17...v0.49.0-rc.18) (2024-02-20)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk
