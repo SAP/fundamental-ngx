@@ -5,7 +5,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { TokenModule } from '@fundamental-ngx/core/token';
-import { AutoCompleteModule, DynamicComponentService, PipeModule } from '@fundamental-ngx/cdk/utils';
+import { AutoCompleteModule, DynamicComponentService, PipeModule, TruncateModule } from '@fundamental-ngx/cdk/utils';
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
@@ -30,7 +30,8 @@ import { MultiAnnouncerModule } from './multi-announcer/multi-announcer.directiv
         AutoCompleteModule,
         ContentDensityModule,
         ToolbarModule,
-        MultiAnnouncerModule
+        MultiAnnouncerModule,
+        TruncateModule
     ],
     declarations: [MultiComboboxComponent, SelectAllTogglerComponent],
     exports: [MultiComboboxComponent],
