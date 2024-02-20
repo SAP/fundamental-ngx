@@ -396,7 +396,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
                 calendarRow = [];
             }
             return totalCalendarRows.concat(calendarRow);
-        });
+        }, []);
     }
 
     /**
@@ -553,7 +553,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
             return;
         }
 
-        if (!this.currentlyDisplayed) {
+        if (!this.currentlyDisplayed || this._isInvalidDate()) {
             if (this.selectedDate) {
                 this._currentlyDisplayed = {
                     month: this._dateTimeAdapter.getMonth(this.selectedDate),
@@ -579,6 +579,11 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
 
         this._dayViewGrid = dayViewGrid;
         this._weeks = this._refreshWeekCount();
+    }
+
+    /** @hidden */
+    private _isInvalidDate(): boolean {
+        return isNaN(this.currentlyDisplayed.year) || isNaN(this.currentlyDisplayed.month);
     }
 
     /**
