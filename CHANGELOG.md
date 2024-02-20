@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.17...v0.49.0-rc.18) (2024-02-20)
+
+
+### Bug Fixes
+
+* **core:** fix locale import and invalid date calendar ([#11433](https://github.com/SAP/fundamental-ngx/issues/11433)) ([1db6d64](https://github.com/SAP/fundamental-ngx/commit/1db6d64bf080b3c6740342e027d630f02558a9af))
+
+
+
+
+
 # [0.49.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.16...v0.49.0-rc.17) (2024-02-19)
 
 
