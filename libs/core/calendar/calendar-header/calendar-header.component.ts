@@ -286,18 +286,18 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
 
     /** @hidden */
     private _calculateSelectMonthLabel(): void {
-        this.selectMonthLabel = this._monthNames[this.currentlyDisplayed.month - 1];
+        this.selectMonthLabel = this._monthNames[this._getNormalizedDate().month - 1];
     }
 
     /** @hidden */
     private _calculateSelectYearLabel(): void {
-        this.selectYearLabel = this._getYearName(this.currentlyDisplayed.year);
+        this.selectYearLabel = this._getYearName(this._getNormalizedDate().year);
     }
 
     /** @hidden */
     private _calculateSelectAggregatedYearLabel(): void {
-        this.selectAggregatedYearLabel = `${this._getYearName(this.currentlyDisplayed.year)}-${this._getYearName(
-            this.currentlyDisplayed.year + this._amountOfYearsPerPeriod
+        this.selectAggregatedYearLabel = `${this._getYearName(this._getNormalizedDate().year)}-${this._getYearName(
+            this._getNormalizedDate().year + this._amountOfYearsPerPeriod
         )}`;
     }
 
@@ -309,5 +309,17 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
     /** @hidden */
     private _getYearName(year: number): string {
         return this._dateTimeAdapter.getYearName(this._dateTimeAdapter.createDate(year));
+    }
+
+    /** @hidden */
+    private _getNormalizedDate(): CalendarCurrent {
+        return {
+            year: isNaN(this.currentlyDisplayed.year)
+                ? this._dateTimeAdapter.getYear(this._dateTimeAdapter.now())
+                : this.currentlyDisplayed.year,
+            month: isNaN(this.currentlyDisplayed.month)
+                ? this._dateTimeAdapter.getMonth(this._dateTimeAdapter.now())
+                : this.currentlyDisplayed.month
+        };
     }
 }
