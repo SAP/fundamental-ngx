@@ -40,7 +40,7 @@ $block: fd-select;
             font-weight: normal;
             padding: 0 0.625rem;
             color: var(--sapField_PlaceholderTextColor);
-            white-space: normal !important; /* or pre-wrap */
+            white-space: normal !important;
 
             [class*='sap-icon'] {
                 font-style: italic;
