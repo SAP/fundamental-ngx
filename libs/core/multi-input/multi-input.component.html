@@ -156,7 +156,11 @@
     </ng-template>
     <ng-template let-option="option" #itemSource>
         @if (!itemTemplate) {
-            <span fd-list-title [innerHtml]="option.label | highlight: _searchTermCtrl.value || '' : highlight"></span>
+            <span
+                fd-list-title
+                fdTruncateTitle
+                [innerHtml]="option.label | highlight: _searchTermCtrl.value || '' : highlight"
+            ></span>
         } @else {
             <ng-template
                 [ngTemplateOutlet]="itemTemplate"

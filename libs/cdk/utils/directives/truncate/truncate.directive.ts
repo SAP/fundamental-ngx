@@ -1,5 +1,5 @@
 import { coerceNumberProperty } from '@angular/cdk/coercion';
-import { AfterViewInit, Directive, ElementRef, Input, OnChanges } from '@angular/core';
+import { AfterContentChecked, AfterViewInit, Directive, ElementRef, Input, OnChanges } from '@angular/core';
 import { Nullable } from '../../models/nullable';
 
 @Directive({
@@ -81,5 +81,22 @@ export class TruncateDirective implements OnChanges, AfterViewInit {
         this.setDefaultStyle();
         this._truncationStyle = `${this._defaultStyle} max-width: ${this._customWidthCount}px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;`;
         this._truncateTarget.style.cssText = this.fdkTruncateState ? this._truncationStyle : this._defaultStyle;
+    }
+}
+
+@Directive({
+    selector: '[fdkTruncateTitle], [fdTruncateTitle], [fd-truncate-title]',
+    standalone: true
+})
+export class TruncateTitleDirective implements AfterContentChecked {
+    /** @hidden */
+    constructor(private _elRef: ElementRef) {}
+
+    /** @hidden */
+    ngAfterContentChecked(): void {
+        const el = this._elRef.nativeElement;
+        if (el.scrollWidth > el.offsetWidth) {
+            el.title = el.innerText;
+        }
     }
 }
