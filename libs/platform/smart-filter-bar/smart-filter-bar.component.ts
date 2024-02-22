@@ -8,6 +8,7 @@ import {
     DestroyRef,
     EventEmitter,
     forwardRef,
+    inject,
     Injector,
     Input,
     OnDestroy,
@@ -230,10 +231,17 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     /** @hidden */
     private _refresh$ = new Subject<void>();
 
+    /**
+     * @hidden
+     * Smart filter bar service may be provided by parent component that adds custom configuration, so we need to check if it's provided.
+     */
+    private readonly _smartFilterBarService =
+        inject(SmartFilterBarService, { optional: true, skipSelf: true }) ??
+        inject(SmartFilterBarService, { self: true });
+
     /** @hidden */
     constructor(
         private _dialogService: DialogService,
-        private _smartFilterBarService: SmartFilterBarService,
         private _fgService: FormGeneratorService,
         private _injector: Injector,
         private readonly _destroyRef: DestroyRef
