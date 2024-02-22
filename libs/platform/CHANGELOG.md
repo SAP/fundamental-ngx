@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.19...v0.49.0-rc.20) (2024-02-22)
+
+
+### Bug Fixes
+
+* **platform:** smart filter bar service scope fix ([#11441](https://github.com/SAP/fundamental-ngx/issues/11441)) ([b785346](https://github.com/SAP/fundamental-ngx/commit/b785346986380bf4230ae64a996a5504ceb18a3a))
+
+
+
+
+
 # [0.49.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.18...v0.49.0-rc.19) (2024-02-20)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
