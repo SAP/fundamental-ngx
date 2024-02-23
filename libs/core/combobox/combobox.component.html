@@ -26,7 +26,7 @@
     @if (!_customRenderer) {
         <span
             fd-list-title
-            fdTruncateTitle
+            fdTruncatedTitle
             [innerHTML]="term | displayFnPipe: displayFn | highlight: inputText : highlighting && filterHighlight"
         >
         </span>

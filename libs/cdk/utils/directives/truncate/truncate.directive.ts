@@ -85,10 +85,10 @@ export class TruncateDirective implements OnChanges, AfterViewInit {
 }
 
 @Directive({
-    selector: '[fdkTruncateTitle], [fdTruncateTitle], [fd-truncate-title]',
+    selector: '[fdkTruncatedTitle], [fdTruncatedTitle], [fd-truncate-title]',
     standalone: true
 })
-export class TruncateTitleDirective implements AfterContentChecked {
+export class TruncatedTitleDirective implements AfterContentChecked {
     /** @hidden */
     constructor(private _elRef: ElementRef) {}
 

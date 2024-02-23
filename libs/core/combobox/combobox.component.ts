@@ -43,7 +43,7 @@ import {
     FocusEscapeDirection,
     KeyUtil,
     Nullable,
-    TruncateTitleDirective
+    TruncatedTitleDirective
 } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
@@ -132,7 +132,7 @@ let comboboxUniqueId = 0;
         SearchHighlightPipe,
         FdTranslatePipe,
         ListGroupPipe,
-        TruncateTitleDirective
+        TruncatedTitleDirective
     ]
 })
 export class ComboboxComponent<T = any>

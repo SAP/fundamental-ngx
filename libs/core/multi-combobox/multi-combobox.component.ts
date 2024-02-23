@@ -29,7 +29,7 @@ import {
     Nullable,
     SearchHighlightPipe,
     TemplateDirective,
-    TruncateTitleDirective,
+    TruncatedTitleDirective,
     coerceArraySafe,
     resizeObservable
 } from '@fundamental-ngx/cdk/utils';
@@ -130,7 +130,7 @@ export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory
         FdTranslatePipe,
         SearchHighlightPipe,
         MultiAnnouncerDirective,
-        TruncateTitleDirective
+        TruncatedTitleDirective
     ]
 })
 export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implements AfterViewInit, OnInit {

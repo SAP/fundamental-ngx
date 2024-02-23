@@ -158,7 +158,7 @@
         @if (!itemTemplate) {
             <span
                 fd-list-title
-                fdTruncateTitle
+                fdTruncatedTitle
                 [innerHtml]="option.label | highlight: _searchTermCtrl.value || '' : highlight"
             ></span>
         } @else {
