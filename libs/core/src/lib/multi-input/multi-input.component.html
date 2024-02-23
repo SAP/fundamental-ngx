@@ -154,7 +154,7 @@
             *ngIf="!itemTemplate"
             fd-list-title
             [innerHtml]="option.label | highlight : _searchTermCtrl.value || '' : highlight"
-            fdkTruncateTitle
+            fdkTruncatedTitle
         ></span>
 
         <ng-container *ngIf="itemTemplate">
