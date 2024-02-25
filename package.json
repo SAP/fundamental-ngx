@@ -111,7 +111,7 @@
     "@wdio/local-runner": "7.16.15",
     "@wdio/sauce-service": "7.16.16",
     "@wdio/spec-reporter": "7.7.3",
-    "axe-core": "4.5.2",
+    "axe-core": "4.8.4",
     "axe-html-reporter": "2.2.3",
     "axios": "1.6.0",
     "chromedriver": "99.0.0",
