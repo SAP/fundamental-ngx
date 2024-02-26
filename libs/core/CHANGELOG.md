@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.20...v0.49.0-rc.21) (2024-02-26)
+
+
+### Features
+
+* **core:** migrate switch to use cva directive ([#11460](https://github.com/SAP/fundamental-ngx/issues/11460)) ([d6f5220](https://github.com/SAP/fundamental-ngx/commit/d6f522099a0628b03afaf2d3812ac013aa26403a))
+
+
+
+
+
 # [0.49.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.19...v0.49.0-rc.20) (2024-02-22)
 
 **Note:** Version bump only for package @fundamental-ngx/core
