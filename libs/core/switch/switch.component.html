@@ -1,12 +1,12 @@
 <label
     class="fd-switch fd-switch-no-animate"
     (click)="focus()"
-    [style.cursor]="disabled ? 'auto' : 'pointer'"
+    [style.cursor]="_cva.disabled ? 'auto' : 'pointer'"
     [class.is-compact]="_contentDensityObserver.isCompactSignal()"
     [class.fd-switch--semantic]="semantic"
     [class.fd-switch--text]="activeText || inactiveText"
-    [class.is-disabled]="disabled"
-    [attr.aria-label]="ariaLabel"
+    [class.is-disabled]="_cva.disabled"
+    [attr.aria-label]="_cva.ariaLabel"
     #switchEl
 >
     <span class="fd-switch__control">
@@ -16,11 +16,11 @@
             type="checkbox"
             role="switch"
             [id]="innerInputId"
-            [name]="name"
-            [disabled]="disabled"
-            [attr.aria-required]="required"
-            [attr.aria-checked]="checked"
-            [attr.aria-labelledby]="ariaLabelledBy + ' ' + (semantic ? _semanticLabelId : '')"
+            [name]="_cva.name"
+            [disabled]="_cva.disabled"
+            [attr.aria-required]="_cva.required"
+            [attr.aria-checked]="_cva.value"
+            [attr.aria-labelledby]="_cva.ariaLabelledBy + ' ' + (semantic ? _semanticLabelId : '')"
             [(ngModel)]="isChecked"
         />
         <div class="fd-switch__slider">
@@ -48,7 +48,7 @@
             @if (semantic) {
                 <span [id]="_semanticLabelId" aria-hidden="true" class="fd-switch__invisible-text">
                     {{
-                        checked
+                        _cva.value
                             ? ('coreSwitch.semanticAcceptLabel' | fdTranslate)
                             : ('coreSwitch.semanticDeclineLabel' | fdTranslate)
                     }}

@@ -1,17 +1,18 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
     Input,
     OnDestroy,
+    OnInit,
     Output,
     ViewChild,
     ViewEncapsulation,
-    forwardRef
+    inject
 } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { CvaControl, CvaDirective, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
@@ -30,25 +31,28 @@ let switchUniqueId = 0;
     templateUrl: './switch.component.html',
     styleUrl: './switch.component.scss',
     providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => SwitchComponent),
-            multi: true
-        },
+        CvaControl,
+        { provide: FD_FORM_FIELD_CONTROL, useExisting: SwitchComponent, multi: true },
         registerFormItemControl(SwitchComponent),
         contentDensityObserverProviders()
     ],
     host: {
         class: 'fd-form__item fd-form__item--check fd-switch-custom',
         '[attr.id]': 'id',
-        '(focusout)': 'onTouched()'
+        '(focusout)': '_cva.onTouched()'
     },
+    hostDirectives: [
+        {
+            directive: CvaDirective,
+            inputs: ['state', 'stateMessage', 'disabled', 'name', 'readonly', 'ariaLabelledBy', 'ariaLabel']
+        }
+    ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [FormsModule, FdTranslatePipe, IconComponent]
 })
-export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormItemControl {
+export class SwitchComponent implements OnInit, OnDestroy, FormItemControl {
     /** @hidden */
     @ViewChild('switchInput')
     inputElement: ElementRef<HTMLInputElement>;
@@ -61,17 +65,9 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     @Input()
     inactiveText = '';
 
-    /** Whether the switch is disabled. */
-    @Input()
-    disabled = false;
-
     /** Id for the switch component. If omitted, a unique one is generated. */
     @Input()
     id = `fd-switch-${switchUniqueId++}`;
-
-    /** Sets input name attribute. */
-    @Input()
-    name: string;
 
     /** If it is mandatory field */
     @Input()
@@ -79,7 +75,12 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
 
     /** Whether the switch is checked. */
     @Input()
-    checked = false;
+    set checked(value: boolean) {
+        this._cva.value = value;
+    }
+    get checked(): boolean {
+        return this._cva.value;
+    }
 
     /** Whether the switch is semantic */
     @Input()
@@ -105,19 +106,24 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     _switchLabelWrapperEl: ElementRef;
 
     /** @hidden */
+    readonly _cva = inject<CvaDirective<boolean>>(CvaDirective);
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    constructor(
-        private readonly _changeDetectorRef: ChangeDetectorRef,
-        readonly _contentDensityObserver: ContentDensityObserver
-    ) {}
+    private readonly _cvaControl = inject(CvaControl);
 
     /** @hidden */
-    onChange: (value: boolean) => void = () => {};
+    constructor(readonly _contentDensityObserver: ContentDensityObserver) {
+        // Set initial value.
+        this._cva.value = false;
+    }
 
     /** @hidden */
-    onTouched = (): void => {};
+    ngOnInit(): void {
+        this._cvaControl.listenToChanges();
+    }
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -142,7 +148,7 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     /** Checked property of the switch. */
     set isChecked(value) {
         this._switchLabelWrapperEl.nativeElement.classList.remove('fd-switch-no-animate');
-        this.writeValue(value);
+        this._cva.setValue(value);
         this.checkedChange.emit(value);
         setTimeout(() => {
             // add the no-animate class after the transition duration, 100ms
@@ -150,41 +156,6 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
         }, 100);
     }
     get isChecked(): boolean {
-        return this.checked;
-    }
-
-    /**
-     * @hidden
-     * @param value Sets the value of the *checked* property of the switch.
-     */
-    writeValue(value: boolean): void {
-        this.checked = value;
-        this.onChange(value);
-        this._changeDetectorRef.detectChanges();
-    }
-
-    /**
-     * @hidden
-     * @param fn User defined function that handles the *onChange* event of the switch.
-     */
-    registerOnChange(fn: (value: boolean) => void): void {
-        this.onChange = fn;
-    }
-
-    /**
-     * @hidden
-     * @param fn User defined function that handles the *onTouch* event of the switch.
-     */
-    registerOnTouched(fn: () => void): void {
-        this.onTouched = fn;
-    }
-
-    /**
-     * @hidden
-     * @param isDisabled Sets the value of the *disabled* property of the switch.
-     */
-    setDisabledState(isDisabled: boolean): void {
-        this.disabled = isDisabled;
-        this._changeDetectorRef.detectChanges();
+        return this._cva.value;
     }
 }
