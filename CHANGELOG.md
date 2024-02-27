@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.22...v0.49.0-rc.23) (2024-02-27)
+
+
+### Bug Fixes
+
+* **cdk:** add truncate title directive to fd-combobox ([#11439](https://github.com/SAP/fundamental-ngx/issues/11439)) ([6a689c2](https://github.com/SAP/fundamental-ngx/commit/6a689c25afe1231c666205537ae81cc1191cc617))
+
+
+
+
+
 # [0.49.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.21...v0.49.0-rc.22) (2024-02-26)
 
 **Note:** Version bump only for package fundamental-ngx
