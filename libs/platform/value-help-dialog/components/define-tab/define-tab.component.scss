@@ -1,24 +1,6 @@
 $block: fdp-value-help-dialog;
 
 .#{$block} {
-    .fd-row {
-        min-width: 100% !important;
-        margin: 0 !important;
-    }
-
-    .condition-row {
-        & > .fd-col {
-            padding: 0 0.5rem 0.5rem 0;
-            &:last-child {
-                padding-right: 0;
-            }
-        }
-
-        .fd-input {
-            margin: 0;
-        }
-    }
-
     fdp-define-tab {
         height: 100%;
         overflow: auto;
@@ -26,8 +8,12 @@ $block: fdp-value-help-dialog;
             padding: 0.625rem 0 0;
         }
 
-        .fd-container--no-gap {
-            margin: 0 !important;
+        .condition-row {
+            padding: 0;
+            .fd-col {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
         }
     }
 
@@ -45,13 +31,11 @@ $block: fdp-value-help-dialog;
             flex: 1 1 auto;
         }
         .action-col {
+            display: flex;
+            align-items: center;
             min-width: auto;
             flex: 0 0 auto;
         }
-        .fd-input {
-            margin-top: 0;
-        }
-
         &.new-condition-row {
             padding-top: 0.5rem;
             .fd-button {

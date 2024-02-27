@@ -2,9 +2,9 @@
     {{ 'platformVHD.defineConditionTitle' | fdTranslate }}
 </h5>
 @for (item of _conditions; track _trackByKeyAndType(i, item); let i = $index) {
-    <fd-layout-grid class="condition-row" [noGap]="true">
+    <fd-layout-grid class="condition-row">
         <div fdLayoutGridRow>
-            <div [fdLayoutGridCol]="5">
+            <div [fdLayoutGridCol]="4">
                 <label id="CONDITIONPANEL_OPERATOR_LABEL" fd-form-label class="fdp-value-help-dialog__hidden_label">
                     CONDITIONPANEL_OPERATOR_LABEL
                 </label>
@@ -27,6 +27,7 @@
                     role="combobox"
                     aria-roledescription="select"
                     aria-haspopup="listbox"
+                    [inline]="false"
                     [ariaLabelledBy]="titleId + ' ' + 'CONDITIONPANEL_OPERATOR_LABEL' + ' ' + selectedId"
                 >
                     @if (_includeStrategy.length) {
