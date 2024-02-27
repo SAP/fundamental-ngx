@@ -8,6 +8,7 @@ import {
     HostBinding,
     Input,
     Output,
+    booleanAttribute,
     forwardRef,
     inject
 } from '@angular/core';
@@ -47,6 +48,11 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
     get expanded(): boolean {
         return this._expanded;
     }
+
+    /** @hidden */
+    @HostBinding('class.fdx-nested-list__item--group')
+    @Input({ transform: booleanAttribute })
+    group = false;
 
     /** Event thrown, when expanded state is changed */
     @Output()

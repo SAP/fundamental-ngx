@@ -11,6 +11,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { NestedListComponent } from '@fundamental-ngx/cx/nested-list';
 
 @Component({
@@ -18,6 +19,7 @@ import { NestedListComponent } from '@fundamental-ngx/cx/nested-list';
     selector: 'fdx-side-nav-main, div[fdx-side-nav-main]',
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
+    hostDirectives: [ScrollbarDirective],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SideNavigationMainComponent implements AfterContentInit {
