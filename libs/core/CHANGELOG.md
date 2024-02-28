@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.23...v0.49.0-rc.24) (2024-02-28)
+
+
+### Bug Fixes
+
+* **core:** update displayed calendar date ([#11477](https://github.com/SAP/fundamental-ngx/issues/11477)) ([2a79c6c](https://github.com/SAP/fundamental-ngx/commit/2a79c6c986225b48e9d89c610cd48fb1f99a242f))
+
+
+
+
+
 # [0.49.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.22...v0.49.0-rc.23) (2024-02-27)
 
 
