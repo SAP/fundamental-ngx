@@ -14,7 +14,9 @@ import {
     SimpleChanges,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject,
+    signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
@@ -58,6 +60,10 @@ export class SideNavigationComponent
         return this._condensed;
     }
 
+    /** Whether the sidenav is used with shellbar. */
+    @Input()
+    inShellbar = false;
+
     /**
      * Side navigation configuration, to pass whole model object, instead of creating HTML from scratch
      */
@@ -91,7 +97,7 @@ export class SideNavigationComponent
     /** Whether clicking on elements should change selected state of items */
     @Input()
     set selectable(selectable: boolean) {
-        this.nestedListState.selectable = selectable;
+        this._nestedListState.selectable = selectable;
     }
 
     /** @hidden */
@@ -120,24 +126,35 @@ export class SideNavigationComponent
     additionalShellbarCssClass = 'fd-shellbar--cx-side-nav';
 
     /** @hidden */
+    _narrowAnimatedItems$ = signal(false);
+
+    private _timeout: ReturnType<typeof setTimeout> | undefined;
+
+    /** @hidden */
     private _condensed = false;
 
     /** @hidden */
-    constructor(
-        private keyboardService: NestedListKeyboardService,
-        private nestedListState: NestedListStateService,
-        private _cdRef: ChangeDetectorRef
-    ) {
-        this.keyboardService.refresh$.pipe(takeUntilDestroyed()).subscribe(() => {
+    private readonly _keyboardService = inject(NestedListKeyboardService);
+    /** @hidden */
+    private readonly _nestedListState = inject(NestedListStateService);
+    /** @hidden */
+    private readonly _cdRef = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    private readonly _elementRef = inject(ElementRef);
+
+    /** @hidden */
+    constructor() {
+        this._keyboardService.refresh$.pipe(takeUntilDestroyed()).subscribe(() => {
             /** Refresh list of elements, that are being supported by keyboard */
-            this.keyboardService.refreshItems(this.getLists());
+            this._keyboardService.refreshItems(this.getLists());
         });
     }
 
     /** @hidden */
     ngOnInit(): void {
         /** Set up condensed state */
-        this.nestedListState.condensed =
+        this._nestedListState.condensed =
             this._condensed || !!(this.sideNavigationConfiguration && this.sideNavigationConfiguration.condensed);
 
         if (this.collapseWidth) {
@@ -148,7 +165,7 @@ export class SideNavigationComponent
     /** @hidden */
     ngAfterContentInit(): void {
         if (!this.sideNavigationConfiguration) {
-            this.keyboardService.refreshItems(this.getLists());
+            this._keyboardService.refreshItems(this.getLists());
         }
         this._setupScrollButtons();
     }
@@ -157,13 +174,14 @@ export class SideNavigationComponent
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.narrow) {
             this._setupScrollButtons();
+            this._animateNarrowState();
         }
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.sideNavigationConfiguration) {
-            this.keyboardService.refreshItems(this.getLists());
+            this._keyboardService.refreshItems(this.getLists());
         }
     }
 
@@ -185,14 +203,12 @@ export class SideNavigationComponent
                 this.narrow &&
                 this.showScrollButtons
             ) {
-                this.sideNavMain.elementRef.nativeElement.style.overflowY = 'hidden';
                 this._showScrollUpButton = true;
                 this._showScrollDownButton = true;
                 this.sideNavMain.list.nestedItems.forEach((item) => {
                     item._narrow = true;
                 });
             } else {
-                this.sideNavMain.elementRef.nativeElement.style.overflowY = 'scroll';
                 this._showScrollUpButton = false;
                 this._showScrollDownButton = false;
                 this.sideNavMain.list.nestedItems.forEach((item) => {
@@ -230,5 +246,15 @@ export class SideNavigationComponent
         }
 
         return lists;
+    }
+
+    private _animateNarrowState(): void {
+        clearTimeout(this._timeout);
+        this._timeout = setTimeout(
+            () => {
+                this._narrowAnimatedItems$.set(this.narrow);
+            },
+            !this.narrow ? 200 : 0
+        );
     }
 }

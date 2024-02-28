@@ -111,7 +111,7 @@ describe('SideNavigationComponent', () => {
         component.sideNav.ngAfterContentInit();
         fixture.detectChanges();
         const anyComponent: any = component.sideNav;
-        expect(anyComponent.keyboardService._getAllListItems(anyComponent.getLists()[0]).length).toBe(7);
+        expect(anyComponent._keyboardService._getAllListItems(anyComponent.getLists()[0]).length).toBe(7);
     });
 
     it('should have expanded items in list', async () => {
@@ -120,6 +120,6 @@ describe('SideNavigationComponent', () => {
         component.sideNav.ngAfterContentInit();
         fixture.detectChanges();
         const anyComponent: any = component.sideNav;
-        expect(anyComponent.keyboardService._getAllListItems(anyComponent.getLists()[0]).length).toBe(11);
+        expect(anyComponent._keyboardService._getAllListItems(anyComponent.getLists()[0]).length).toBe(11);
     });
 });

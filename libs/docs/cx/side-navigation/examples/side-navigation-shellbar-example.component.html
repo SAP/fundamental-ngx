@@ -24,9 +24,12 @@
     </fd-shellbar-actions>
 </fd-shellbar>
 <div style="height: 480px">
-    <fdx-side-nav [narrow]="condensed" [showScrollButtons]="false" #cxSideNav>
+    <fdx-side-nav [narrow]="condensed" [inShellbar]="true" [showScrollButtons]="false" #cxSideNav>
         <div fdx-side-nav-main>
             <ul fdx-nested-list>
+                <li fdx-nested-list-item group>
+                    <span fdx-nested-list-title>Side nav group 1</span>
+                </li>
                 <li fdx-nested-list-item>
                     <a fdx-nested-list-link>
                         <i fdx-nested-list-icon glyph="home"></i>
@@ -82,6 +85,9 @@
                             </li>
                         </ul>
                     </fdx-nested-list-popover>
+                </li>
+                <li fdx-nested-list-item group>
+                    <span fdx-nested-list-title>Side nav group 2</span>
                 </li>
                 <li fdx-nested-list-item>
                     <a fdx-nested-list-link>

@@ -1,10 +1,11 @@
 <nav
     class="fdx-side-nav"
     [class.fdx-side-nav--dynamic-width]="dynamicWidth"
+    [class.fdx-side-nav--shellbar]="inShellbar"
     [class.fdx-side-nav--narrow]="narrow"
+    [class.fdx-side-nav--narrow-animated-items]="_narrowAnimatedItems$()"
     [class.fdx-side-nav--condensed]="condensed || sideNavigationConfiguration?.condensed"
     [class.fdx-side-nav--mobile]="mobile"
-    fd-scrollbar
     [attr.aria-label]="'coreNavigation.mainNavigation' | fdTranslate"
 >
     @if (!sideNavigationConfiguration) {
