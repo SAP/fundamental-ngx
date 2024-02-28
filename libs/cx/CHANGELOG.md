@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.24...v0.49.0-rc.25) (2024-02-28)
+
+
+### Features
+
+* **cx:** side nav update ([#11473](https://github.com/SAP/fundamental-ngx/issues/11473)) ([a5d7f08](https://github.com/SAP/fundamental-ngx/commit/a5d7f08b53274b39da462255a64983134b41987e))
+
+
+
+
+
 # [0.49.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.23...v0.49.0-rc.24) (2024-02-28)
 
 **Note:** Version bump only for package @fundamental-ngx/cx
