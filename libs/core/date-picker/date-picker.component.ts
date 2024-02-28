@@ -614,6 +614,7 @@ export class DatePickerComponent<D>
         this.selectedDate = date;
         this.selectedDateChange.emit(date);
         this.onChange(date);
+        this._refreshCurrentlyDisplayedCalendarDate(date);
         this.formatInputDate(date);
         this._isInvalidDateInput = !this.isModelValid();
         if (this.closeOnDateChoose && this.type === 'single') {
@@ -649,6 +650,7 @@ export class DatePickerComponent<D>
                 };
                 this.selectedRangeDateChange.emit(this.selectedRangeDate);
                 this.onChange(this.selectedRangeDate);
+                this._refreshCurrentlyDisplayedCalendarDate(dates.start);
                 this._isInvalidDateInput = !this.isModelValid();
             }
             if (shouldClose) {
