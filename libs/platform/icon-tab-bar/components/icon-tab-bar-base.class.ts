@@ -24,7 +24,6 @@ import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@an
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, OverflowListDirective } from '@fundamental-ngx/cdk/utils';
 import { FD_DYNAMIC_PAGE } from '@fundamental-ngx/core/dynamic-page';
-import { cloneDeep } from 'lodash-es';
 import { ICON_TAB_HIDDEN_CLASS_NAME } from '../constants';
 import { IconTabBarItem } from '../interfaces/icon-tab-bar-item.interface';
 import { TabColorAssociations } from '../interfaces/tab-color-associations.interface';
@@ -238,7 +237,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
 
         deletedItem.index = selectedItem.index;
         deletedItem.uId = `${deletedItem.index}`;
-        const itemToPopover = cloneDeep(deletedItem);
+        const itemToPopover = { ...deletedItem };
         deletedItem.hidden = true;
         deletedItem.cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
 
@@ -281,7 +280,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
 
         for (let i = this._lastVisibleTabIndex + 1; i < tabs.length; i++) {
             const tab = tabs[i];
-            extraTabs.push(cloneDeep(tab));
+            extraTabs.push({ ...tab });
             tab.hidden = true;
             tab.cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
         }

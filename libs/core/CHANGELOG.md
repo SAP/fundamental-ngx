@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.25...v0.49.0-rc.26) (2024-02-29)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.49.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.24...v0.49.0-rc.25) (2024-02-28)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.49.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.23...v0.49.0-rc.24) (2024-02-28)
+
+
+### Bug Fixes
+
+* **core:** update displayed calendar date ([#11477](https://github.com/SAP/fundamental-ngx/issues/11477)) ([2a79c6c](https://github.com/SAP/fundamental-ngx/commit/2a79c6c986225b48e9d89c610cd48fb1f99a242f))
+
+
+
+
+
+# [0.49.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.22...v0.49.0-rc.23) (2024-02-27)
+
+
+### Bug Fixes
+
+* **cdk:** add truncate title directive to fd-combobox ([#11439](https://github.com/SAP/fundamental-ngx/issues/11439)) ([6a689c2](https://github.com/SAP/fundamental-ngx/commit/6a689c25afe1231c666205537ae81cc1191cc617))
+
+
+
+
+
 # [0.49.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.21...v0.49.0-rc.22) (2024-02-26)
 
 **Note:** Version bump only for package @fundamental-ngx/core

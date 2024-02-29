@@ -2787,10 +2787,10 @@
   dependencies:
     tslib "^2.4.0"
 
-"@fundamental-styles/cx@0.33.2":
-  version "0.33.2"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.33.2.tgz#8dce21885bd920e18d4efad93463871200ef867a"
-  integrity sha512-hTLIVThPV9aDB6yP8ROy3Tl9PBJ3Uqo6ZSErpL5SxwLHUGzKJd9vXcgsvRA13hKry+DotxOYJdnhTRKz+6BpaQ==
+"@fundamental-styles/cx@0.33.3-rc.19":
+  version "0.33.3-rc.19"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.33.3-rc.19.tgz#b2e79bf49388b2aa7955fef2d468fa826b3f9548"
+  integrity sha512-1Vj59sX4q63nItaLLf3V/J+7Wx0js94wz7OT+KFk73UhrATEzjk6xm6zrC3JjJpW3JT9awV/wIA951+9n0zVfQ==
 
 "@hapi/hoek@^9.0.0":
   version "9.3.0"
@@ -10317,10 +10317,10 @@ functions-have-names@^1.2.2, functions-have-names@^1.2.3:
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.3.tgz#0404fe4ee2ba2f607f0e0ec3c80bae994133b834"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
-fundamental-styles@0.33.2:
-  version "0.33.2"
-  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.33.2.tgz#5d74b5e057e69172d23f6306b503f8238f81f38b"
-  integrity sha512-yvI8eIqLtCzF6a8u8rLB0MfSX8yXBd1SSMaihfyEBv1B/YNwAREBrW25anLq/xSFX4uQ3tLeiCH5YZdcgfjnqg==
+fundamental-styles@0.33.3-rc.19:
+  version "0.33.3-rc.19"
+  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.33.3-rc.19.tgz#b3b688d865070d0652254387502c365715901a68"
+  integrity sha512-oUL33PWJdDecxZ6p2jtf5olvFVxOV6DR0EuMU42WtUy/rffmItC1LIW8CVnpJo14Ac++RpO1pV7ajd1Jb9hvOA==
 
 fuse.js@7.0.0:
   version "7.0.0"

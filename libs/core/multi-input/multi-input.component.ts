@@ -41,6 +41,7 @@ import {
     RangeSelector,
     RtlService,
     SearchHighlightPipe,
+    TruncatedTitleDirective,
     uuidv4
 } from '@fundamental-ngx/cdk/utils';
 import { FormControlComponent, FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
@@ -117,7 +118,8 @@ let uniqueHiddenLabel = 0;
         AsyncPipe,
         SearchHighlightPipe,
         FdTranslatePipe,
-        MultiAnnouncerDirective
+        MultiAnnouncerDirective,
+        TruncatedTitleDirective
     ]
 })
 export class MultiInputComponent<ItemType = any, ValueType = any>
