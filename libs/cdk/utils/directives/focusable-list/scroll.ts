@@ -4,7 +4,7 @@ export type ScrollPosition = 'top' | 'bottom' | undefined;
 
 /** Helper function to scroll to focusable list or its item relatively to the container. */
 export function scrollIntoView(element: Nullable<HTMLElement>, position: Nullable<ScrollPosition>): void {
-    if (!position || !element) {
+    if (!element) {
         return;
     }
 
@@ -12,6 +12,17 @@ export function scrollIntoView(element: Nullable<HTMLElement>, position: Nullabl
 
     if (scrollableParent) {
         const itemOffsetTop = element.offsetTop - scrollableParent.offsetTop;
+        if (!position) {
+            /**
+             * check if top of focused element is fully visible, and if not, adjust scroll.
+             * this is triggered when a sticky table header overlaps the focused cell.
+             */
+            const elRect = element.getBoundingClientRect();
+            const topEl = document.elementFromPoint(elRect.left, elRect.top);
+            if (!element.isSameNode(topEl) && topEl) {
+                scrollableParent.scrollBy({ top: elRect.top - topEl.getBoundingClientRect().bottom });
+            }
+        }
         switch (position) {
             case 'top':
                 scrollableParent.scrollTop = itemOffsetTop;
