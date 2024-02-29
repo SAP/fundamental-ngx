@@ -10,7 +10,8 @@ export abstract class TitleToken {
 
 @Component({
     // eslint-disable-next-line
-    selector: 'h1[fd-title], h2[fd-title], h3[fd-title], h4[fd-title], h5[fd-title], h6[fd-title], span[fd-title]',
+    selector: '[fd-title], [fdTitle]',
+    // eslint-disable-next-line
     exportAs: 'fd-title',
     template: '<ng-content></ng-content>',
     host: {
