@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.25...v0.49.0-rc.26) (2024-02-29)
+
+
+### Bug Fixes
+
+* **platform:** optimize icon tab bar ([#11487](https://github.com/SAP/fundamental-ngx/issues/11487)) ([d2b39c0](https://github.com/SAP/fundamental-ngx/commit/d2b39c007762b97fc52e13dd2df033a80cb4b2eb))
+
+
+
+
+
 # [0.49.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.24...v0.49.0-rc.25) (2024-02-28)
 
 
