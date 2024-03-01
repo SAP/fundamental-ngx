@@ -77,9 +77,7 @@ export class BaseButton implements HasElementRef {
     /** Whether button is in toggled state. */
     @Input()
     set toggled(value: BooleanInput) {
-        if (value !== undefined && value !== null) {
-            this._toggled = coerceBooleanProperty(value);
-        }
+        this._toggled = coerceBooleanProperty(value);
     }
     get toggled(): Nullable<boolean> {
         return this._toggled;
