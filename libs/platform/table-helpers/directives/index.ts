@@ -1,7 +1,6 @@
 export * from './platform-table-column-responsive.directive';
 export * from './table-cell-header-popover.directive';
 export * from './table-cell-resizable.directive';
-export * from './table-cell-selectable.directive';
 export * from './table-cell.directive';
 export * from './table-data-source.directive';
 export * from './table-draggable.directive';

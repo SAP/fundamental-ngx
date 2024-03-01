@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import {
     FdpCellDef,
-    FdpCellSelectableDirective,
     FdpEditableCellDef,
     FdpEditableCellFormDirective,
     FdpHeaderCellDef,
@@ -28,7 +27,6 @@ const importExports = [
     FdpTableCell,
     TableCellHeaderPopoverDirective,
     PlatformTableCellResizableDirective,
-    FdpCellSelectableDirective,
     TableDataSourceDirective,
     TableDraggableDirective,
     FdpTableHeader,
