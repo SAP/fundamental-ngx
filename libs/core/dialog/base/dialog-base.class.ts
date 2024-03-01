@@ -8,12 +8,13 @@ import {
     HostListener,
     inject,
     isDevMode,
+    NgZone,
     OnDestroy,
     OnInit
 } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
-import { fromEvent, Subscription } from 'rxjs';
-import { debounceTime, filter } from 'rxjs/operators';
+import { asyncScheduler, fromEvent, Observable, of, Subscription } from 'rxjs';
+import { debounceTime, filter, observeOn, take } from 'rxjs/operators';
 
 import { FocusTrapService, HasElementRef, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 
@@ -74,6 +75,9 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
     private readonly _focusTrapError = inject(FD_DIALOG_FOCUS_TRAP_ERROR, {
         optional: true
     });
+
+    /** @hidden */
+    private readonly _zone = inject(NgZone);
 
     /** @hidden Listen and close dialog on Escape key */
     @HostListener('keydown', ['$event'])
@@ -141,16 +145,20 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
     /** @hidden Trap focus inside dialog window */
     private _trapFocus(): void {
         if (this._config.focusTrapped) {
-            try {
-                this._focusTrapId = this._focusTrapService.createFocusTrap(this.dialogWindow.nativeElement, {
-                    clickOutsideDeactivates: this._config.backdropClickCloseable && this._config.hasBackdrop,
-                    escapeDeactivates: false,
-                    fallbackFocus: this.dialogWindow.nativeElement,
-                    allowOutsideClick: () => true
-                });
-            } catch (e) {
-                isDevMode() && this._focusTrapError !== true && console.error(e);
-            }
+            this._subscriptions.add(
+                this._onMicrotaskEmpty().subscribe(() => {
+                    try {
+                        this._focusTrapId = this._focusTrapService.createFocusTrap(this.dialogWindow.nativeElement, {
+                            clickOutsideDeactivates: this._config.backdropClickCloseable && this._config.hasBackdrop,
+                            escapeDeactivates: false,
+                            fallbackFocus: this.dialogWindow.nativeElement,
+                            allowOutsideClick: () => true
+                        });
+                    } catch (e) {
+                        isDevMode() && this._focusTrapError !== true && console.error(e);
+                    }
+                })
+            );
         }
     }
 
@@ -190,5 +198,12 @@ export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRef
                     .subscribe(() => this.adjustResponsivePadding())
             );
         }
+    }
+
+    /** @hidden */
+    private _onMicrotaskEmpty(): Observable<null> {
+        return this._zone.hasPendingMicrotasks
+            ? this._zone.onMicrotaskEmpty.pipe(observeOn(asyncScheduler), take(1))
+            : of(null);
     }
 }
