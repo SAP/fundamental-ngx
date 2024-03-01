@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.27...v0.49.0-rc.28) (2024-03-01)
+
+
+### Bug Fixes
+
+* **core:** use div for facet title ([#11492](https://github.com/SAP/fundamental-ngx/issues/11492)) ([c99c15f](https://github.com/SAP/fundamental-ngx/commit/c99c15ffc7f05a73c02b35eafdf97db937bb6014))
+
+
+
+
+
 # [0.49.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.26...v0.49.0-rc.27) (2024-03-01)
 
 
