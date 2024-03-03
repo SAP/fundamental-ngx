@@ -79,7 +79,7 @@
     "@angular-eslint/eslint-plugin": "17.1.0",
     "@angular-eslint/eslint-plugin-template": "17.1.0",
     "@angular-eslint/template-parser": "17.1.0",
-    "@angular/cli": "17.0.8",
+    "@angular/cli": "17.2.2",
     "@angular/compiler-cli": "17.0.8",
     "@angular/language-service": "17.0.8",
     "@commitlint/cli": "17.7.1",
