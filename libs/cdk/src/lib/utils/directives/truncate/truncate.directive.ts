@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnChanges } from '@angular/core';
+import { AfterContentChecked, AfterViewInit, Directive, ElementRef, Input, OnChanges } from '@angular/core';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { Nullable } from '../../models/nullable';
 import {
@@ -19,6 +19,23 @@ import {
     ]
 })
 export class DeprecatedTruncateSelectorDirective extends DeprecatedSelector {}
+
+@Directive({
+    selector: '[fdkTruncatedTitle], [fdTruncatedTitle], [fd-truncate-title]',
+    standalone: true
+})
+export class TruncatedTitleDirective implements AfterContentChecked {
+    /** @hidden */
+    constructor(private _elRef: ElementRef) {}
+
+    /** @hidden */
+    ngAfterContentChecked(): void {
+        const el = this._elRef.nativeElement;
+        if (el.scrollWidth > el.offsetWidth) {
+            el.title = el.innerText;
+        }
+    }
+}
 
 @Directive({
     selector: '[fdkTruncate], [fdTruncate], [fd-truncate]',

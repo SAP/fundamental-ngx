@@ -29,6 +29,7 @@
         fd-list-title
         *ngIf="!itemTemplate; else customRendererTemplate"
         [innerHTML]="term | displayFnPipe : displayFn | highlight : inputText : highlighting && filterHighlight"
+        fdTruncatedTitle
     >
     </span>
     <ng-template #customRendererTemplate>
