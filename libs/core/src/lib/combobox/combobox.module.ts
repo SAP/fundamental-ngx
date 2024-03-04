@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { FormsModule } from '@angular/forms';
 import { MenuModule } from '@fundamental-ngx/core/menu';
-import { PipeModule } from '@fundamental-ngx/cdk/utils';
+import { PipeModule, TruncateModule } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule } from '@fundamental-ngx/core/list';
@@ -31,7 +31,8 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         IconModule,
         AutoCompleteModule,
         ContentDensityModule,
-        I18nModule
+        I18nModule,
+        TruncateModule
     ],
     exports: [ComboboxComponent, ListGroupPipe, DeprecatedComboboxContentDensityDirective, ContentDensityModule]
 })
