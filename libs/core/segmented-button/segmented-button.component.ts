@@ -272,7 +272,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
 
     /** @hidden */
     private _isButtonSelected(buttonComponent: ButtonComponent): Nullable<boolean> {
-        return buttonComponent.toggled;
+        return !!buttonComponent.toggled;
     }
 
     /** @hidden */

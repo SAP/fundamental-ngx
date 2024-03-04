@@ -58,6 +58,7 @@ export class ButtonDocsComponent {
 
     data: any = {
         properties: {
+            toggled: false,
             label: 'click here',
             fdType: 'default',
             fdMenu: false,

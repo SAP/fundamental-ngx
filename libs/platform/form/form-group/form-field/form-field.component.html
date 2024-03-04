@@ -34,23 +34,25 @@
         @if (hasErrors() && groupedErrors.length > 0) {
             @for (error of groupedErrors; track error) {
                 <fd-form-message [type]="error.directive.type">
-                    @if (error.directive._headingTemplateRef) {
-                        <ng-template
-                            [ngTemplateOutlet]="error.directive._headingTemplateRef"
-                            [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
-                        >
-                        </ng-template>
-                    }
-                    @if (error.directive._headingTemplateRef && error.directive._descriptionTemplateRef) {
-                        <br />
-                    }
-                    @if (error.directive._descriptionTemplateRef) {
-                        <ng-template
-                            [ngTemplateOutlet]="error.directive._descriptionTemplateRef"
-                            [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
-                        >
-                        </ng-template>
-                    }
+                    <div>
+                        @if (error.directive._headingTemplateRef) {
+                            <ng-template
+                                [ngTemplateOutlet]="error.directive._headingTemplateRef"
+                                [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
+                            >
+                            </ng-template>
+                        }
+                        @if (error.directive._headingTemplateRef && error.directive._descriptionTemplateRef) {
+                            <br />
+                        }
+                        @if (error.directive._descriptionTemplateRef) {
+                            <ng-template
+                                [ngTemplateOutlet]="error.directive._descriptionTemplateRef"
+                                [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
+                            >
+                            </ng-template>
+                        }
+                    </div>
                 </fd-form-message>
             }
         }
@@ -70,23 +72,25 @@
 <ng-template #innerErrorRenderers>
     @if (hasErrors() && groupedErrors.length > 0) {
         @for (error of groupedErrors; track error) {
-            @if (error.directive._headingTemplateRef) {
-                <ng-template
-                    [ngTemplateOutlet]="error.directive._headingTemplateRef"
-                    [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
-                >
-                </ng-template>
-            }
-            @if (error.directive._headingTemplateRef && error.directive._descriptionTemplateRef) {
-                <br />
-            }
-            @if (error.directive._descriptionTemplateRef) {
-                <ng-template
-                    [ngTemplateOutlet]="error.directive._descriptionTemplateRef"
-                    [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
-                >
-                </ng-template>
-            }
+            <div>
+                @if (error.directive._headingTemplateRef) {
+                    <ng-template
+                        [ngTemplateOutlet]="error.directive._headingTemplateRef"
+                        [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
+                    >
+                    </ng-template>
+                }
+                @if (error.directive._headingTemplateRef && error.directive._descriptionTemplateRef) {
+                    <br />
+                }
+                @if (error.directive._descriptionTemplateRef) {
+                    <ng-template
+                        [ngTemplateOutlet]="error.directive._descriptionTemplateRef"
+                        [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
+                    >
+                    </ng-template>
+                }
+            </div>
         }
     }
 

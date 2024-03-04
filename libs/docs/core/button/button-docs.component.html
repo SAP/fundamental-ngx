@@ -91,6 +91,7 @@
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <button
         fd-button
+        [toggled]="data.properties.toggled"
         [fdType]="data.properties.fdType"
         [fdMenu]="data.properties.fdMenu"
         [fdCompact]="data.properties.compact"

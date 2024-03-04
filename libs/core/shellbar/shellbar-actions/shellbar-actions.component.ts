@@ -102,7 +102,7 @@ export class ShellbarActionsComponent implements OnDestroy {
 
     /** @hidden */
     @ViewChild(CdkPortalOutlet)
-    _portalOutlet: CdkPortalOutlet;
+    _portalOutlet: Nullable<CdkPortalOutlet>;
 
     /** @hidden */
     _addSearchIcon = false;
@@ -205,10 +205,10 @@ export class ShellbarActionsComponent implements OnDestroy {
     /** @hidden */
     private _toggleSearchPortal(visible: boolean, focusSearch = false): void {
         if (visible) {
-            this._portalOutlet.detach();
-            this._portalOutlet.attach(this._searchPortal);
+            this._portalOutlet?.detach();
+            this._portalOutlet?.attach(this._searchPortal);
         } else {
-            this._portalOutlet.detach();
+            this._portalOutlet?.detach();
         }
         this._cd.detectChanges();
         if (focusSearch) {

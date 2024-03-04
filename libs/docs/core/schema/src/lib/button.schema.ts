@@ -29,6 +29,9 @@ export const buttonSchema = {
                 compact: {
                     type: 'boolean'
                 },
+                toggled: {
+                    type: 'boolean'
+                },
                 icon: {
                     type: 'string',
                     enum: Icons
