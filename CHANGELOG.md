@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.27...v0.49.0-rc.28) (2024-03-01)
+
+
+### Bug Fixes
+
+* **core:** use div for facet title ([#11492](https://github.com/SAP/fundamental-ngx/issues/11492)) ([c99c15f](https://github.com/SAP/fundamental-ngx/commit/c99c15ffc7f05a73c02b35eafdf97db937bb6014))
+
+
+
+
+
+# [0.49.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.26...v0.49.0-rc.27) (2024-03-01)
+
+
+### Bug Fixes
+
+* **platform:** prevent space key scrolling ([#11488](https://github.com/SAP/fundamental-ngx/issues/11488)) ([ce1fd07](https://github.com/SAP/fundamental-ngx/commit/ce1fd07e8f5215b31eab89f8a4a9c4837b77bdc5))
+
+
+
+
+
+# [0.49.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.25...v0.49.0-rc.26) (2024-02-29)
+
+
+### Bug Fixes
+
+* **platform:** optimize icon tab bar ([#11487](https://github.com/SAP/fundamental-ngx/issues/11487)) ([d2b39c0](https://github.com/SAP/fundamental-ngx/commit/d2b39c007762b97fc52e13dd2df033a80cb4b2eb))
+
+
+
+
+
 # [0.49.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.24...v0.49.0-rc.25) (2024-02-28)
 
 

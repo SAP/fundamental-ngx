@@ -34,7 +34,6 @@
             [class.fd-table__cell--fixed]="fixed"
             [attr.role]="_hasRowHeaderColumn$() ? 'rowheader' : 'gridcell'"
             fd-table-cell
-            fd-table-cell-selectable
             [focusable]="true"
             [style]="
                 _contentDensityObserver.contentDensity$()
@@ -43,8 +42,8 @@
             [attr.aria-selected]="row.checked"
             [attr.aria-labelledby]="_rowSelectionHelperTextId"
             (click)="_toggleSingleSelectableRow()"
-            (keydown.enter)="_toggleSingleSelectableRow()"
-            (keydown.space)="_toggleSingleSelectableRow()"
+            (keydown.enter)="_toggleSingleSelectableRow($event)"
+            (keydown.space)="_toggleSingleSelectableRow($event)"
             [cellFocusedEventAnnouncer]="_itemFocusedEventAnnouncer"
         >
             <ng-template [ngTemplateOutlet]="selectionScreenReaderText"></ng-template>

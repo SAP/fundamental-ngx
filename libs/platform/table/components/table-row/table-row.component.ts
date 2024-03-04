@@ -48,7 +48,6 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import {
     ColumnResizableSidePipe,
     EditableTableCell,
-    FdpCellSelectableDirective,
     PlatformTableCellResizableDirective,
     SelectionCellStylesPipe,
     SelectionMode,
@@ -90,7 +89,6 @@ import { TableEditableCellComponent } from '../table-editable-cell/table-editabl
         TableStatusIndicatorDirective,
         DisabledBehaviorDirective,
         NgStyle,
-        FdpCellSelectableDirective,
         NgTemplateOutlet,
         CheckboxComponent,
         FormsModule,
@@ -291,12 +289,14 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     }
 
     /** @hidden */
-    _toggleSingleSelectableRow(): void {
+    _toggleSingleSelectableRow(event?: Event): void {
+        event?.preventDefault();
         this._tableRowService.toggleRow({ type: 'toggleSingleSelectableRow', row: this.row });
     }
 
     /** @hidden */
     _toggleMultiSelectRow(row: TableRow<T>, event?: Event): void {
+        event?.preventDefault();
         this._tableRowService.toggleRow({ ...{ row, event }, ...{ type: 'toggleMultiSelectRow' } });
     }
 
