@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.28...v0.49.0-rc.29) (2024-03-04)
+
+
+### Bug Fixes
+
+* **platform:** idea for handling scroll when the table header overlapping focused cell ([#11493](https://github.com/SAP/fundamental-ngx/issues/11493)) ([6702d23](https://github.com/SAP/fundamental-ngx/commit/6702d23645be26d13d77e422cca960757ecf8f18))
+
+
+
+
+
 # [0.49.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.27...v0.49.0-rc.28) (2024-03-01)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk
