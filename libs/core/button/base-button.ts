@@ -1,4 +1,4 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput } from '@angular/cdk/coercion';
 import { ChangeDetectorRef, Directive, ElementRef, HostBinding, Input, booleanAttribute, inject } from '@angular/core';
 
 import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
@@ -20,10 +20,11 @@ export type ButtonType =
 
 @Directive()
 export class BaseButton implements HasElementRef {
-    /** @hidden */
+    /** Whether button is in toggled state. */
     @HostBinding('class.fd-button--toggled')
     @HostBinding('attr.aria-pressed')
-    _toggled: Nullable<boolean>;
+    @Input({ transform: booleanAttribute })
+    toggled: BooleanInput;
 
     /**
      * Native type of button element
@@ -73,15 +74,6 @@ export class BaseButton implements HasElementRef {
     /** adding native aria-description to the componenet */
     @Input()
     ariaDescription: Nullable<string>;
-
-    /** Whether button is in toggled state. */
-    @Input()
-    set toggled(value: BooleanInput) {
-        this._toggled = coerceBooleanProperty(value);
-    }
-    get toggled(): Nullable<boolean> {
-        return this._toggled;
-    }
 
     /**
      * Native disabled attribute of button element
