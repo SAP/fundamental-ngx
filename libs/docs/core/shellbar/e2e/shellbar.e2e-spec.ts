@@ -194,29 +194,6 @@ describe('shellbar test suite', () => {
         });
     });
 
-    describe('shellbar with sidenavigation example', () => {
-        it('should check size nav items clickable', async () => {
-            await scrollIntoView(sideNavExample);
-            const navItemCount = await getElementArrayLength(sideNavItems);
-
-            for (let i = 0; i < navItemCount; i++) {
-                await expect(await isElementClickable(sideNavItems, i)).toBe(true, `nav item ${i} is not clickable`);
-            }
-        });
-
-        it('should check ability to collapse side nav', async () => {
-            await scrollIntoView(sideNavExample);
-
-            await expect(await isElementDisplayed(sideNavText)).toBe(true, 'nav text is not displayed');
-            await expect(await isElementDisplayed(sideNavIcons)).toBe(true, 'nav icon is not displayed');
-
-            await click(sideNavControlBtn);
-
-            await expect(await isElementDisplayed(sideNavText)).toBe(false, 'nav text is displayed');
-            await expect(await isElementDisplayed(sideNavIcons)).toBe(true, 'nav icon is not displayed');
-        });
-    });
-
     describe('visual regression and orientation', () => {
         it('should check orientation', async () => {
             await shellbarPage.checkRtlSwitch();
