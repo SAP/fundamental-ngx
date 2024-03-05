@@ -13,22 +13,13 @@ import { ShellbarBasicExampleComponent } from './examples/shellbar-basic-example
 import { ShellbarCollapsibleExampleComponent } from './examples/shellbar-collapsible-example.component';
 import { ShellbarGrowingGroupExampleComponent } from './examples/shellbar-growing-group-example/shellbar-growing-group-example.component';
 import { ShellbarResponsiveExampleComponent } from './examples/shellbar-responsive-example/shellbar-responsive-example.component';
-import { ShellbarSideNavResponsiveExampleComponent } from './examples/shellbar-side-nav-responsive/shellbar-side-nav-responsive-example.component';
-import { ShellbarSideNavExampleComponent } from './examples/shellbar-side-nav/shellbar-side-nav-example.component';
-
-const sideNavShellbarScss = 'shellbar-side-nav/shellbar-side-nav-example.component.scss';
-const sideNavResponsiveShellbarScss =
-    'shellbar-side-nav-responsive/shellbar-side-nav-responsive-example.component.scss';
 
 const shellbarBasicHTMLSrc = 'shellbar-basic-example.component.html';
 const shellbarBasicTSSrc = 'shellbar-basic-example.component.ts';
 const shellbarCollapsibleHTMLSrc = 'shellbar-collapsible-example.component.html';
 const shellbarCollapsibleTSSrc = 'shellbar-collapsible-example.component.ts';
-const sideNavShellbarHtml = 'shellbar-side-nav/shellbar-side-nav-example.component.html';
-const sideNavShellbarTs = 'shellbar-side-nav/shellbar-side-nav-example.component.ts';
-const sideNavResponsiveShellbarTs = 'shellbar-side-nav-responsive/shellbar-side-nav-responsive-example.component.ts';
-const sideNavResponsiveShellbarHtml =
-    'shellbar-side-nav-responsive/shellbar-side-nav-responsive-example.component.html';
+const shellbarResponsiveTSSrc = 'shellbar-responsive-example.component.ts';
+const shellbarResponsiveHTMLSrc = 'shellbar-responsive-example.component.html';
 
 @Component({
     selector: 'app-shellbar',
@@ -43,8 +34,6 @@ const sideNavResponsiveShellbarHtml =
         CodeExampleComponent,
         ShellbarCollapsibleExampleComponent,
         ShellbarResponsiveExampleComponent,
-        ShellbarSideNavExampleComponent,
-        ShellbarSideNavResponsiveExampleComponent,
         ShellbarGrowingGroupExampleComponent
     ]
 })
@@ -77,47 +66,17 @@ export class ShellbarDocsComponent {
         }
     ];
 
-    shellbarSideNav: ExampleFile[] = [
+    shellbarResponsive: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(sideNavShellbarHtml),
-            fileName: 'shellbar-side-nav-example'
+            code: getAssetFromModuleAssets(shellbarResponsiveHTMLSrc),
+            fileName: 'shellbar-responsive-example.component'
         },
         {
             language: 'typescript',
-            component: 'ShellbarSideNavExampleComponent',
-            code: getAssetFromModuleAssets(sideNavShellbarTs),
-            fileName: 'shellbar-side-nav-example',
-            scssFileCode: getAssetFromModuleAssets(sideNavShellbarScss)
-        },
-        {
-            language: 'scss',
-            code: getAssetFromModuleAssets(sideNavShellbarScss),
-            fileName: 'shellbar-side-nav-example',
-            component: 'ShellbarSideNavExampleComponent',
-            scssFileCode: getAssetFromModuleAssets(sideNavShellbarScss)
-        }
-    ];
-
-    shellbarSideNavResponsive: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(sideNavResponsiveShellbarHtml),
-            fileName: 'shellbar-side-nav-responsive-example'
-        },
-        {
-            language: 'typescript',
-            component: 'ShellbarSideNavResponsiveExampleComponent',
-            code: getAssetFromModuleAssets(sideNavResponsiveShellbarTs),
-            fileName: 'shellbar-side-nav-responsive-example',
-            scssFileCode: getAssetFromModuleAssets(sideNavResponsiveShellbarScss)
-        },
-        {
-            language: 'scss',
-            code: getAssetFromModuleAssets(sideNavResponsiveShellbarScss),
-            fileName: 'shellbar-side-nav-responsive-example',
-            component: 'ShellbarSideNavResponsiveExampleComponent',
-            scssFileCode: getAssetFromModuleAssets(sideNavResponsiveShellbarScss)
+            component: 'ShellbarResponsiveExampleComponent',
+            code: getAssetFromModuleAssets(shellbarResponsiveTSSrc),
+            fileName: 'shellbar-responsive-example.component'
         }
     ];
 }
