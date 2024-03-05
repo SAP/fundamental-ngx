@@ -3,6 +3,7 @@ import { SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewChecked,
     AfterViewInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -222,6 +223,7 @@ let tableUniqueId = 0;
     ],
     host: {
         class: 'fdp-table',
+        '[class.fdp-table--outer-scroll]': 'outerScroll',
         '[class.fd-table--no-horizontal-borders]': 'noHorizontalBorders || noBorders',
         '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders',
         '[class.fd-table--group]': '_isGroupTable$()'
@@ -313,6 +315,9 @@ export class TableComponent<T = any>
     /** Table without horizontal borders. */
     @Input()
     noHorizontalBorders = false;
+    /** If the table scrolling should happen outside and stick the toolbar and thead */
+    @Input({ transform: booleanAttribute })
+    outerScroll = false;
     /** Table without vertical borders. */
     @Input()
     noVerticalBorders = false;

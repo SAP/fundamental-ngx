@@ -1,5 +1,6 @@
 export * from './abstract-toolbar-item.class';
 export * from './deprecated-toolbar-size.directive';
+export * from './tokens';
 export * from './toolbar-form-label.directive';
 export * from './toolbar-item.directive';
 export * from './toolbar-label.directive';

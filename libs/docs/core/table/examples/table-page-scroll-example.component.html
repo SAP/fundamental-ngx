@@ -1,0 +1,59 @@
+<div style="max-height: 500px; overflow-y: scroll; position: relative">
+    <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi aut fugiat veritatis harum doloribus?
+        Doloremque quo animi, illum ut officiis repellendus, dolorem, architecto quisquam placeat vel nihil ratione
+        temporibus! Voluptas. Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi aut fugiat veritatis
+        harum doloribus? Doloremque quo animi, illum ut officiis repellendus, dolorem, architecto quisquam placeat vel
+        nihil ratione temporibus! Voluptas. Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi aut fugiat
+        veritatis harum doloribus? Doloremque quo animi, illum ut officiis repellendus, dolorem, architecto quisquam
+        placeat vel nihil ratione temporibus! Voluptas. Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
+        aut fugiat veritatis harum doloribus? Doloremque quo animi, illum ut officiis repellendus, dolorem, architecto
+        quisquam placeat vel nihil ratione temporibus! Voluptas. <br /><br /><br />
+    </div>
+    <div fd-table-container outerScroll>
+        <fd-toolbar aria-label="With Toolbar" fdType="solid" [clearBorder]="true">
+            <label fd-toolbar-label>Table Toolbar Label ({{ tableRows.length }} rows)</label>
+        </fd-toolbar>
+        <table fd-table aria-label="Default">
+            <thead fd-table-header>
+                <tr fd-table-row>
+                    <th fd-table-cell>Column Header</th>
+                    <th fd-table-cell>Column Header</th>
+                    <th fd-table-cell>Column Header</th>
+                    <th fd-table-cell>Column Header</th>
+                    <th fd-table-cell>Column Header</th>
+                </tr>
+            </thead>
+            <tbody fd-table-body>
+                @for (row of tableRows; track row) {
+                    <tr fd-table-row>
+                        <td fd-table-cell>
+                            <a fd-link href="#">{{ row.column1 }}</a>
+                        </td>
+                        <td fd-table-cell>
+                            <p fd-table-text maxWidth="250px" [noWrap]="true">
+                                {{ row.column2 }}
+                            </p>
+                        </td>
+                        <td fd-table-cell>
+                            <p fd-table-text maxWidth="250px">
+                                {{ row.column3 }}
+                            </p>
+                        </td>
+                        <td fd-table-cell>{{ row.date }}</td>
+                        <td fd-table-cell><fd-icon [glyph]="row.type"></fd-icon></td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot fd-table-footer>
+                <tr fd-table-row>
+                    <td fd-table-cell></td>
+                    <td fd-table-cell></td>
+                    <td fd-table-cell></td>
+                    <td fd-table-cell></td>
+                    <td fd-table-cell>Footer Cell</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

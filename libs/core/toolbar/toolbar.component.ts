@@ -41,6 +41,7 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { TitleComponent, TitleToken } from '@fundamental-ngx/core/title';
 import { BehaviorSubject, combineLatest, map, Observable, startWith } from 'rxjs';
 import { ToolbarItem } from './abstract-toolbar-item.class';
+import { FD_TOOLBAR } from './tokens';
 import { ToolbarSeparatorComponent } from './toolbar-separator.component';
 import { ToolbarSpacerDirective } from './toolbar-spacer.directive';
 
@@ -67,7 +68,11 @@ export const enum OverflowPriorityEnum {
     providers: [
         contentDensityObserverProviders({
             defaultContentDensity: ContentDensityMode.COMPACT
-        })
+        }),
+        {
+            provide: FD_TOOLBAR,
+            useExisting: ToolbarComponent
+        }
     ],
     standalone: true,
     imports: [

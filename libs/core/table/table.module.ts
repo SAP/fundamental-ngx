@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { TableBodyDirective } from './directives/table-body.directive';
 import { TableCellDirective } from './directives/table-cell.directive';
+import { TableContainerDirective } from './directives/table-container.directive';
 import { TableFixedDirective } from './directives/table-fixed.directive';
 import { TableFooterDirective } from './directives/table-footer.directive';
 import { TableHeaderDirective } from './directives/table-header.directive';
@@ -30,7 +31,8 @@ const components = [
     TableInnerDirective,
     TableTextDirective,
     TableIconDirective,
-    TableFixedDirective
+    TableFixedDirective,
+    TableContainerDirective
 ];
 
 @NgModule({
