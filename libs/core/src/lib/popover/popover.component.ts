@@ -21,7 +21,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { DOWN_ARROW, ENTER, SPACE } from '@angular/cdk/keycodes';
+import { DOWN_ARROW } from '@angular/cdk/keycodes';
 import { CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 
 import { NgIf, NgTemplateOutlet } from '@angular/common';
@@ -113,6 +113,12 @@ export class PopoverComponent
     @Input()
     mobileConfig: MobileModeConfig = { hasCloseButton: true };
 
+    /**
+     * Whether the popover should prevent page scrolling when space key is pressed.
+     **/
+    @Input()
+    preventSpaceKeyScroll = true;
+
     /** @hidden */
     @ViewChild('templateRef', { read: TemplateRef })
     templateRef: TemplateRef<any>;
@@ -197,9 +203,13 @@ export class PopoverComponent
     }
 
     /** @hidden */
-    @HostListener('keydown', ['$event'])
+    @HostListener('keydown.enter', ['$event'])
+    @HostListener('keydown.space', ['$event'])
     onKeyDown(event: KeyboardEvent): void {
         const activeElement = document.activeElement;
+        if (!this.preventSpaceKeyScroll) {
+            return;
+        }
         if (
             // popoverControl will be undefined when popover is used from "fdPopoverTrigger"
             this.popoverControl?.elRef.nativeElement.children[0] === activeElement &&
@@ -207,11 +217,9 @@ export class PopoverComponent
             activeElement?.tagName !== 'TEXTAREA' &&
             !activeElement?.classList.contains(SELECT_CLASS_NAMES.selectControl)
         ) {
-            if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
-                // prevent page scrolling on Space keydown
-                event.preventDefault();
-                this._popoverService.toggle();
-            }
+            // prevent page scrolling on Space keydown
+            event.preventDefault();
+            this._popoverService.toggle();
         }
     }
 
