@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.33...v0.49.0-rc.34) (2024-03-06)
+
+
+### Bug Fixes
+
+* **core:** update total tokens text ([#11516](https://github.com/SAP/fundamental-ngx/issues/11516)) ([5dd0af2](https://github.com/SAP/fundamental-ngx/commit/5dd0af2c93d48779818069cd3f53b91d5700b344))
+
+
+
+
+
 # [0.49.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.32...v0.49.0-rc.33) (2024-03-06)
 
 
