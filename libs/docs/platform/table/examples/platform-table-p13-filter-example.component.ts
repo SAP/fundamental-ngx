@@ -1,11 +1,13 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 
 import { DatetimeAdapter, FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
+import { MessageBoxModule, MessageBoxService } from '@fundamental-ngx/core/message-box';
 import {
     CollectionBooleanFilter,
     CollectionDateFilter,
+    CollectionFilter,
     CollectionNumberFilter,
     CollectionStringFilter,
     FilterableColumnDataType,
@@ -37,17 +39,55 @@ import {
         TableInitialStateDirective,
         FdpCellDef,
         FdpTableCell,
-        FdDatetimeModule
+        FdDatetimeModule,
+        MessageBoxModule
     ]
 })
 export class PlatformTableP13FilterExampleComponent {
     source: TableDataSource<ExampleItem>;
+
+    readonly messageBoxService = inject(MessageBoxService);
 
     readonly dataTypeEnum = FilterableColumnDataType;
 
     constructor(datetimeAdapter: DatetimeAdapter<FdDate>) {
         this.source = new TableDataSource(new TableDataProviderExample(datetimeAdapter));
     }
+
+    validator = (rules: CollectionFilter[]) => {
+        let retVal = true;
+        let foundMatch = false;
+        const excludedRules = [...rules.filter((rule) => rule.exclude === true)];
+        const includedRules = [...rules.filter((rule) => rule.exclude === false)];
+        includedRules.forEach((includedRule) => {
+            excludedRules.forEach((excludedRule) => {
+                if (
+                    excludedRule.strategy === includedRule.strategy &&
+                    excludedRule.field === includedRule.field &&
+                    includedRule.value === excludedRule.value
+                ) {
+                    foundMatch = true;
+                }
+            });
+        });
+        if (foundMatch) {
+            const content = {
+                title: 'Contradictory filtering rules',
+                approveButton: 'Ok',
+                approveButtonCallback: () => messageBoxRef.close('Approved'),
+                cancelButtonCallback: () => messageBoxRef.close('Canceled'),
+                closeButtonCallback: () => messageBoxRef.dismiss('Dismissed'),
+                content:
+                    'The provided "include" and "exclude" rules are contradictory and will not return any results. No filtering will be applied.'
+            };
+
+            const messageBoxRef = this.messageBoxService.open(content, { type: 'error' });
+
+            retVal = false;
+        }
+
+        return retVal;
+    };
 }
 
 export interface ExampleItem {

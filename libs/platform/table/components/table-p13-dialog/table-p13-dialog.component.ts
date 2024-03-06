@@ -163,7 +163,23 @@ export class TableP13DialogComponent implements OnDestroy {
         this._subscriptions.add(
             dialogRef.afterClosed
                 .pipe(filter((result) => !!result))
-                .subscribe(({ collectionFilter }: FilterDialogResultData) => this._applyFiltering(collectionFilter))
+                .subscribe(({ collectionFilter }: FilterDialogResultData) => {
+                    if (collectionFilter && !!this.filter) {
+                        if (typeof this.filter.validator === 'undefined') {
+                            this._applyFiltering(collectionFilter);
+                        } else if (typeof this.filter.validator === 'function') {
+                            /**
+                             * Need to deep copy the filter so the application developer does not manipulate the object
+                             * before the _applyFiltering function is called
+                             */
+                            const copiedFilter = structuredClone(collectionFilter);
+                            const valid = this.filter.validator(copiedFilter);
+                            if (!!valid || (this.filter && !this.filter.validator)) {
+                                this._applyFiltering(collectionFilter);
+                            }
+                        }
+                    }
+                })
         );
     }
 
