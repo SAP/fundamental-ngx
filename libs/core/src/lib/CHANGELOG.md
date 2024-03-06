@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.29](https://github.com/SAP/fundamental-ngx/compare/v0.43.28...v0.43.29) (2024-03-06)
+
+
+### Bug Fixes
+
+* **cdk:** add directive for adding title attribute to truncated text ([#11435](https://github.com/SAP/fundamental-ngx/issues/11435)) ([c2370da](https://github.com/SAP/fundamental-ngx/commit/c2370da45a434a7ccd3cd8e095047a71511533b2))
+* **core:** disable form message group prevent defaults ([#11513](https://github.com/SAP/fundamental-ngx/issues/11513)) ([9647b16](https://github.com/SAP/fundamental-ngx/commit/9647b169529601bf99eeb7500b19b904579ed356))
+
+
+
+
+
 ## [0.43.28](https://github.com/SAP/fundamental-ngx/compare/v0.43.27...v0.43.28) (2024-02-23)
 
 **Note:** Version bump only for package @fundamental-ngx/core

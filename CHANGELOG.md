@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.29](https://github.com/SAP/fundamental-ngx/compare/v0.43.28...v0.43.29) (2024-03-06)
+
+
+### Bug Fixes
+
+* **cdk:** add directive for adding title attribute to truncated text ([#11435](https://github.com/SAP/fundamental-ngx/issues/11435)) ([c2370da](https://github.com/SAP/fundamental-ngx/commit/c2370da45a434a7ccd3cd8e095047a71511533b2))
+* **core:** disable form message group prevent defaults ([#11513](https://github.com/SAP/fundamental-ngx/issues/11513)) ([9647b16](https://github.com/SAP/fundamental-ngx/commit/9647b169529601bf99eeb7500b19b904579ed356))
+* issue with icon itself ([#11448](https://github.com/SAP/fundamental-ngx/issues/11448)) ([cd78138](https://github.com/SAP/fundamental-ngx/commit/cd7813803a13c4bc9c5364aaffa1a64d2372bad3))
+* **platform:** idea for handling scroll when the table header overlapping focused cell ([#11485](https://github.com/SAP/fundamental-ngx/issues/11485)) ([636b0ea](https://github.com/SAP/fundamental-ngx/commit/636b0ea8d2e67114c0ef564c3fe8fcd07215b2f9))
+* **platform:** prevent space key scrolling ([#11489](https://github.com/SAP/fundamental-ngx/issues/11489)) ([c924b37](https://github.com/SAP/fundamental-ngx/commit/c924b37568edfb45f1b3d3e66f30a954f15a4e6e))
+
+
+
+
+
 ## [0.43.28](https://github.com/SAP/fundamental-ngx/compare/v0.43.27...v0.43.28) (2024-02-23)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.29](https://github.com/SAP/fundamental-ngx/compare/v0.43.28...v0.43.29) (2024-03-06)
+
+
+### Bug Fixes
+
+* **cdk:** add directive for adding title attribute to truncated text ([#11435](https://github.com/SAP/fundamental-ngx/issues/11435)) ([c2370da](https://github.com/SAP/fundamental-ngx/commit/c2370da45a434a7ccd3cd8e095047a71511533b2))
+* **platform:** idea for handling scroll when the table header overlapping focused cell ([#11485](https://github.com/SAP/fundamental-ngx/issues/11485)) ([636b0ea](https://github.com/SAP/fundamental-ngx/commit/636b0ea8d2e67114c0ef564c3fe8fcd07215b2f9))
+
+
+
+
+
 ## [0.43.28](https://github.com/SAP/fundamental-ngx/compare/v0.43.27...v0.43.28) (2024-02-23)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk
