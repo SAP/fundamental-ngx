@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.32...v0.49.0-rc.33) (2024-03-06)
+
+
+### Bug Fixes
+
+* translation delivery: commit by LX Lab ([#11515](https://github.com/SAP/fundamental-ngx/issues/11515)) ([5413868](https://github.com/SAP/fundamental-ngx/commit/5413868121ded9e662940add9b22face369f1c83))
+
+
+
+
+
 # [0.49.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.31...v0.49.0-rc.32) (2024-03-05)
 
 **Note:** Version bump only for package fundamental-ngx
