@@ -67,6 +67,12 @@ export class FormInputMessageGroupComponent {
     @Input()
     isOpen = false;
 
+    /**
+     * Whether the popover should prevent page scrolling when space key is pressed.
+     **/
+    @Input()
+    preventSpaceKeyScroll = true;
+
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
