@@ -359,7 +359,7 @@ describe('Table component test suite', () => {
         });
     });
 
-    describe('Check Custom component to render "No data" message', () => {
+    describe('Check Table to render "No data" message', () => {
         it('should check alert messages', async () => {
             await tablePage.checkAlertMessages(tableNoItemsTemplateExample);
         });
