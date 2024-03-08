@@ -32,4 +32,8 @@ export class DialogCloseButtonComponent {
     /** add title dynamically to add a tooltip */
     @Input()
     title: string;
+
+    /** add aria label dynamically to add to the button */
+    @Input()
+    ariaLabel: string;
 }

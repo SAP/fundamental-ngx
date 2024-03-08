@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.36...v0.49.0-rc.37) (2024-03-08)
+
+
+### Bug Fixes
+
+* **core:** pass closeButtonAriaLabel to close btn ariaLabel ([#11522](https://github.com/SAP/fundamental-ngx/issues/11522)) ([d916aa5](https://github.com/SAP/fundamental-ngx/commit/d916aa55f2902f3a29cfe565747c1ec808319b64))
+
+
+
+
+
 # [0.49.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.35...v0.49.0-rc.36) (2024-03-08)
 
 **Note:** Version bump only for package @fundamental-ngx/core
