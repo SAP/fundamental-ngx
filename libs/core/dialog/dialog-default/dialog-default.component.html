@@ -17,6 +17,7 @@
             <button
                 fd-dialog-close-button
                 [title]="_defaultDialogContent?.closeButtonTitle || ''"
+                [ariaLabel]="_defaultDialogContent?.closeButtonAriaLabel || ''"
                 (click)="_closeButtonClicked()"
             ></button>
         }
