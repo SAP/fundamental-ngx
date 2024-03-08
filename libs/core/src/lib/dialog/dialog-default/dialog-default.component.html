@@ -5,6 +5,7 @@
             fd-dialog-close-button
             *ngIf="_defaultDialogContent?.closeButtonCallback"
             [title]="_defaultDialogContent?.closeButtonTitle || ''"
+            [ariaLabel]="_defaultDialogContent?.closeButtonAriaLabel || ''"
             (click)="_closeButtonClicked()"
         ></button>
         <ng-container *ngIf="_defaultDialogContent?.subHeader">

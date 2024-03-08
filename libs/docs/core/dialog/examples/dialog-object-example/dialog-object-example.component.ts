@@ -30,7 +30,8 @@ export class DialogObjectExampleComponent {
             cancelButton: 'Cancel',
             cancelButtonCallback: () => this._dialogReference.close('Canceled'),
             closeButtonCallback: () => this._dialogReference.dismiss('Dismissed'),
-            closeButtonTitle: 'close'
+            closeButtonTitle: 'close',
+            closeButtonAriaLabel: 'dismiss'
         };
 
         this._dialogReference = this._dialogService.open(object, {

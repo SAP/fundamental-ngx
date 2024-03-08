@@ -11,7 +11,7 @@ import { Component, Input } from '@angular/core';
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-dialog-close-button]',
     host: {
-        '[attr.aria-label]': '"close"',
+        '[attr.aria-label]': 'ariaLabel',
         '[class.fd-button]': 'true',
         '[class.is-compact]': '!mobile',
         '[class.fd-button--transparent]': 'true',
@@ -27,4 +27,8 @@ export class DialogCloseButtonComponent {
     /** add title dynamically to add a tooltip */
     @Input()
     title: string;
+
+    /** add aria label dynamically to add to the button */
+    @Input()
+    ariaLabel: string;
 }

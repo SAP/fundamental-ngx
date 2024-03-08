@@ -127,7 +127,7 @@
                 <div fdLayoutGridRow>
                     <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="mobile ? 12 : 6" [colXl]="mobile ? 12 : 6">
                         <fdp-search-field
-                            [placeholder]="'platformVHD.searchButtonLabel' | fdTranslate"
+                            [placeholder]="'platformVHD.searchPlaceholder' | fdTranslate"
                             (searchSubmit)="search()"
                             (inputChange)="_mainSearch = $event.text"
                         ></fdp-search-field>
