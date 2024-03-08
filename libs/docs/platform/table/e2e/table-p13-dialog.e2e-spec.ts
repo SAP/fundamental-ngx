@@ -175,7 +175,7 @@ describe('Table component test suite', () => {
             await click(tableP13FilterExample + toolbarButton);
             await setValue(dialogInput, 'x');
             await click(slimArrowRight);
-            await setValue(dialogInput[1], 'x');
+            await setValue(dialogInput, 'x', 1);
             await click(dialogDecisiveButton);
             await expect(await doesItExist(messageBoxHeader)).toBe(true);
         });

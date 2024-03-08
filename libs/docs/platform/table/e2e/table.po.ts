@@ -102,8 +102,8 @@ export class TablePo extends PlatformBaseComponentPo {
     synchronizeButton = '.fdp-search-field__loading';
     arrowButton = '.fd-table__cell--expand';
     slimArrowRight = 'fd-dialog-body .sap-icon--slim-arrow-right';
-    dialogDecisiveButton = 'fd-dialog-body .fd-dialog__decisive-button';
-    messageBoxHeader = 'fd-dialog-body fd-message-box-header';
+    dialogDecisiveButton = 'fd-dialog-footer .fd-dialog__decisive-button';
+    messageBoxHeader = 'fd-message-box-header';
 
     constructor(public readonly url: string) {
         super();
