@@ -50,7 +50,7 @@ describe('Table component test suite', () => {
         sortableIcon,
         sortableOption,
         sortablePopover,
-        ellipsisButton,
+        toolbarButton,
         buttonFilter
     } = tablePage;
 
@@ -76,7 +76,7 @@ describe('Table component test suite', () => {
 
         it('should check ascending sorting by name, description and price', async () => {
             await scrollIntoView(tableSortableExample);
-            await tablePage.chooseSortOptionBy(tableSortableExample, ellipsisButton, 2);
+            await tablePage.chooseSortOptionBy(tableSortableExample, toolbarButton, 2);
             await expect((await getText(tableSortableExample + tableCellDescription)).trim()).toBe(
                 descriptionStartTestText
             );
@@ -84,18 +84,18 @@ describe('Table component test suite', () => {
                 descriptionEndTestText
             );
 
-            await tablePage.chooseSortOptionBy(tableSortableExample, ellipsisButton, 3);
+            await tablePage.chooseSortOptionBy(tableSortableExample, toolbarButton, 3);
             await expect((await getText(tableSortableExample + tableCellPrice)).trim()).toBe(priceStartTestText);
             await expect((await getText(tableSortableExample + tableCellPrice, 15)).trim()).toBe(priceEndTestText);
 
-            await tablePage.chooseSortOptionBy(tableSortableExample, ellipsisButton, 1);
+            await tablePage.chooseSortOptionBy(tableSortableExample, toolbarButton, 1);
             await expect((await getText(tableSortableExample + tableCellName)).trim()).toBe(nameStartTestText);
             await expect((await getText(tableSortableExample + tableCellName, 15)).trim()).toBe(nameEndTestText);
         });
 
         it('should check descending sorting by name, description and price', async () => {
             await scrollIntoView(tableSortableExample);
-            await click(tableSortableExample + ellipsisButton);
+            await click(tableSortableExample + toolbarButton);
             await click(buttonSortedOrder, 1);
             await click(buttonSortedBy, 2);
             await click(barButton);
@@ -106,11 +106,11 @@ describe('Table component test suite', () => {
                 descriptionStartTestText
             );
 
-            await tablePage.chooseSortOptionBy(tableSortableExample, ellipsisButton, 3);
+            await tablePage.chooseSortOptionBy(tableSortableExample, toolbarButton, 3);
             await expect((await getText(tableSortableExample + tableCellPrice)).trim()).toBe(priceEndTestText);
             await expect((await getText(tableSortableExample + tableCellPrice, 15)).trim()).toBe(priceStartTestText);
 
-            await tablePage.chooseSortOptionBy(tableSortableExample, ellipsisButton, 1);
+            await tablePage.chooseSortOptionBy(tableSortableExample, toolbarButton, 1);
             await expect((await getText(tableSortableExample + tableCellName)).trim()).toBe(nameEndTestText);
             await expect((await getText(tableSortableExample + tableCellName, 15)).trim()).toBe(nameStartTestText);
         });
@@ -184,31 +184,31 @@ describe('Table component test suite', () => {
 
         it('should check ascending sorting by name and status', async () => {
             await scrollIntoView(tableGroupableExample);
-            await tablePage.chooseSortOptionBy(tableGroupableExample, ellipsisButton, 0);
+            await tablePage.chooseSortOptionBy(tableGroupableExample, toolbarButton, 0);
             await expect((await getText(tableGroupableExample + tableCellDescription)).trim()).toBe(tableCellArr[1]);
             await expect((await getText(tableGroupableExample + tableCellDescription, 15)).trim()).toBe(
                 pharetraTestText
             );
 
-            await tablePage.chooseSortOptionBy(tableGroupableExample, ellipsisButton, 1);
+            await tablePage.chooseSortOptionBy(tableGroupableExample, toolbarButton, 1);
             await expect((await getText(tableGroupableExample + tableCellDescription)).trim()).toBe(nuncTestText);
             await expect((await getText(tableGroupableExample + tableCellDescription, 15)).trim()).toBe(massaTestText);
         });
 
         it('should check descending sorting by name and status', async () => {
             await scrollIntoView(tableGroupableExample);
-            await click(tableGroupableExample + ellipsisButton);
+            await click(tableGroupableExample + toolbarButton);
             await click(buttonSortedOrder, 1);
             await click(buttonSortedBy, 1);
             await click(barButton);
             await pause(500);
-            await tablePage.chooseSortOptionBy(tableGroupableExample, ellipsisButton, 0);
+            await tablePage.chooseSortOptionBy(tableGroupableExample, toolbarButton, 0);
             await expect((await getText(tableGroupableExample + tableCellDescription)).trim()).toBe(pharetraTestText);
             await expect((await getText(tableGroupableExample + tableCellDescription, 15)).trim()).toBe(
                 tableCellArr[1]
             );
 
-            await tablePage.chooseSortOptionBy(tableGroupableExample, ellipsisButton, 1);
+            await tablePage.chooseSortOptionBy(tableGroupableExample, toolbarButton, 1);
             await expect((await getText(tableGroupableExample + tableCellDescription)).trim()).toBe(tableCellArr[1]);
             await expect((await getText(tableGroupableExample + tableCellDescription, 15)).trim()).toBe(
                 'integer ac leo pellentesque'

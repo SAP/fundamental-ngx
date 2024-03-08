@@ -1,6 +1,7 @@
 import {
     browserIsSafari,
     click,
+    doesItExist,
     getAttributeByName,
     getElementArrayLength,
     getText,
@@ -48,9 +49,12 @@ describe('Table component test suite', () => {
         dropdownOption,
         dialogButton,
         allInputFields,
-        ellipsisButton,
+        toolbarButton,
         expandedOption,
-        buttonFilter
+        buttonFilter,
+        slimArrowRight,
+        dialogDecisiveButton,
+        messageBoxHeader
     } = tablePage;
 
     beforeAll(async () => {
@@ -79,7 +83,7 @@ describe('Table component test suite', () => {
         });
 
         it('should check sorting of columns', async () => {
-            await tablePage.checkSortingColumns(tableP13ColumnsExample, ellipsisButton);
+            await tablePage.checkSortingColumns(tableP13ColumnsExample, toolbarButton);
         });
     });
 
@@ -90,7 +94,7 @@ describe('Table component test suite', () => {
 
         it('should check sorting ascending and descending by name', async () => {
             await scrollIntoView(tableP13SortExample);
-            await click(tableP13SortExample + ellipsisButton);
+            await click(tableP13SortExample + toolbarButton);
             await click(popoverDropdownButton);
             await click(buttonSortedBy);
             await click(footerButtonOk);
@@ -105,7 +109,7 @@ describe('Table component test suite', () => {
 
         it('should check sorting ascending and descending by price', async () => {
             await scrollIntoView(tableP13SortExample);
-            await click(tableP13SortExample + ellipsisButton);
+            await click(tableP13SortExample + toolbarButton);
             await click(buttonAdd);
             await click(buttonRemove);
             await click(popoverDropdownButton);
@@ -126,7 +130,7 @@ describe('Table component test suite', () => {
         });
 
         it('should check sorting of columns', async () => {
-            await tablePage.checkSortingColumns(tableP13SortExample, ellipsisButton, 1);
+            await tablePage.checkSortingColumns(tableP13SortExample, toolbarButton, 1);
         });
     });
 
@@ -137,7 +141,7 @@ describe('Table component test suite', () => {
 
         it('should check filtering with include and exclude', async () => {
             await scrollIntoView(tableP13FilterExample);
-            await click(tableP13FilterExample + ellipsisButton);
+            await click(tableP13FilterExample + toolbarButton);
             await setValue(dialogInput, astroTestText);
             await click(expandedButton, 1);
             await click(popoverDropdownButton, 2);
@@ -157,13 +161,23 @@ describe('Table component test suite', () => {
         });
 
         it('should check sorting of columns', async () => {
-            await tablePage.checkSortingColumns(tableP13FilterExample, ellipsisButton, 1);
+            await tablePage.checkSortingColumns(tableP13FilterExample, toolbarButton, 1);
         });
         // skipped due to https://github.com/SAP/fundamental-ngx/issues/7005
         xit('should check Exclude section in dialog always open', async () => {
             await scrollIntoView(tableP13FilterExample);
             await click(tableP13FilterExample + buttonFilter);
             await expect(await getAttributeByName(expandedOption, 'aria-expanded')).toBe('false');
+        });
+
+        it('should throw warning when the user attempts to include/exclude the same rule', async () => {
+            await scrollIntoView(tableP13FilterExample);
+            await click(tableP13FilterExample + toolbarButton);
+            await setValue(dialogInput, 'x');
+            await click(slimArrowRight);
+            await setValue(dialogInput[1], 'x');
+            await click(dialogDecisiveButton);
+            await expect(await doesItExist(messageBoxHeader)).toBe(true);
         });
     });
 
@@ -178,7 +192,7 @@ describe('Table component test suite', () => {
         });
 
         it('should check sorting of columns', async () => {
-            await tablePage.checkSortingColumns(tableP13GroupExample, ellipsisButton, 1);
+            await tablePage.checkSortingColumns(tableP13GroupExample, toolbarButton, 1);
         });
     });
 
