@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.35...v0.49.0-rc.36) (2024-03-08)
+
+
+### Bug Fixes
+
+* **platform:** upadte vhd search field placeholder ([#11518](https://github.com/SAP/fundamental-ngx/issues/11518)) ([1b48fed](https://github.com/SAP/fundamental-ngx/commit/1b48fedba22d7e12e140c1a5b335515b4afcc3c7))
+
+
+
+
+
 # [0.49.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.34...v0.49.0-rc.35) (2024-03-06)
 
 **Note:** Version bump only for package fundamental-ngx
