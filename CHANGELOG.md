@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.40...v0.49.0-rc.41) (2024-03-11)
+
+
+### Bug Fixes
+
+* **core:** fixed form input message group popover preventing space keydown ([#11514](https://github.com/SAP/fundamental-ngx/issues/11514)) ([89bee3c](https://github.com/SAP/fundamental-ngx/commit/89bee3cf462ad236f006ff7470f4276cba6a7f66))
+
+
+
+
+
 # [0.49.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.39...v0.49.0-rc.40) (2024-03-11)
 
 **Note:** Version bump only for package fundamental-ngx
