@@ -23,7 +23,6 @@
                 [inputText]="(_searchQuerySubject | async) || ''"
                 [suggestions]="[]"
                 (inputChange)="_searchInputChange($event)"
-                fdkInitialFocus
             ></fdp-search-field>
 
             <fd-toolbar-spacer></fd-toolbar-spacer>
@@ -111,7 +110,7 @@
                 fd-list-item
                 *ngFor="let item of _filteredColumns; trackBy: _filterByColumnKy"
                 [class.fd-select-item--selected]="item.selected"
-                [class.is-focus]="item.active"
+                [class.fd-select-item--active]="item.active"
                 [selected]="item.selected"
                 (focus)="_setActiveColumn(item)"
             >
