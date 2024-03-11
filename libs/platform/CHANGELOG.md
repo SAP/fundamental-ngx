@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.39...v0.49.0-rc.40) (2024-03-11)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.38...v0.49.0-rc.39) (2024-03-11)
+
+
+### Bug Fixes
+
+* **platform:** p13n remove fdkInitialFocus from wrong elements; remove selected item ([#11523](https://github.com/SAP/fundamental-ngx/issues/11523)) ([0bfd196](https://github.com/SAP/fundamental-ngx/commit/0bfd19624cb37f0804eb14abe340f860534ecbec))
+
+
+
+
+
+# [0.49.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.37...v0.49.0-rc.38) (2024-03-09)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
 # [0.49.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.36...v0.49.0-rc.37) (2024-03-08)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
