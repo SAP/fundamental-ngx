@@ -13,7 +13,10 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
     imports: [ButtonComponent, BarModule, InputGroupModule, InitialFocusDirective]
 })
 export class DialogObjectExampleComponent {
-    constructor(private _dialogService: DialogService, private _cdr: ChangeDetectorRef) {}
+    constructor(
+        private _dialogService: DialogService,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     @ViewChild('dialogContent', { read: TemplateRef })
     dialogContent: TemplateRef<any>;
@@ -37,7 +40,8 @@ export class DialogObjectExampleComponent {
             cancelButton: 'Cancel',
             cancelButtonCallback: () => this._dialogReference.close('Canceled'),
             closeButtonCallback: () => this._dialogReference.dismiss('Dismissed'),
-            closeButtonTitle: 'close'
+            closeButtonTitle: 'close',
+            closeButtonAriaLabel: 'dismiss'
         };
 
         this._dialogReference = this._dialogService.open(object, {
