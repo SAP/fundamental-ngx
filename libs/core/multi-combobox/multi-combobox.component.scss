@@ -60,7 +60,7 @@ $block: fd-multi-combobox;
 
 .fd-dialog__body {
     fd-form-message {
-        display: block;
         max-width: 100%;
+        border-radius: 0 !important;
     }
 }
