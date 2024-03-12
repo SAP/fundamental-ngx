@@ -1,5 +1,6 @@
 export * from './directives/table-body.directive';
 export * from './directives/table-cell.directive';
+export * from './directives/table-container.directive';
 export * from './directives/table-fixed.directive';
 export * from './directives/table-footer.directive';
 export * from './directives/table-header.directive';
