@@ -3,6 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.42...v0.49.0-rc.43) (2024-03-12)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.49.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.41...v0.49.0-rc.42) (2024-03-12)
+
+
+### Features
+
+* **core,platform:** add page scroll to Table component ([#11510](https://github.com/SAP/fundamental-ngx/issues/11510)) ([691426a](https://github.com/SAP/fundamental-ngx/commit/691426a66e0cb8e1f50ef4850cbafb1e987dc38b))
+
+
+
+
+
+# [0.49.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.40...v0.49.0-rc.41) (2024-03-11)
+
+
+### Bug Fixes
+
+* **core:** fixed form input message group popover preventing space keydown ([#11514](https://github.com/SAP/fundamental-ngx/issues/11514)) ([89bee3c](https://github.com/SAP/fundamental-ngx/commit/89bee3cf462ad236f006ff7470f4276cba6a7f66))
+
+
+
+
+
+# [0.49.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.39...v0.49.0-rc.40) (2024-03-11)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.49.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.38...v0.49.0-rc.39) (2024-03-11)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.49.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.37...v0.49.0-rc.38) (2024-03-09)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 # [0.49.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.36...v0.49.0-rc.37) (2024-03-08)
 
 
