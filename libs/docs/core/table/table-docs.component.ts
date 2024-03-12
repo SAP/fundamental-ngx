@@ -22,6 +22,7 @@ import { TableFixedExampleComponent } from './examples/table-fixed-example.compo
 import { TableFocusableExampleComponent } from './examples/table-focusable-example/table-focusable-example.component';
 import { TableFooterExampleComponent } from './examples/table-footer-example.component';
 import { TableNavigatableRowExampleComponent } from './examples/table-navigatable-row-example.component';
+import { TablePageScrollExampleComponent } from './examples/table-page-scroll-example.component';
 import { TablePaginationExampleComponent } from './examples/table-pagination-example.component';
 import { TablePopinExampleComponent } from './examples/table-popin-example/table-popin-example.component';
 import { TableResponsiveExampleComponent } from './examples/table-responsive-example.component';
@@ -65,6 +66,8 @@ const tableNavigatableRowHtml = 'table-navigatable-row-example.component.html';
 const tableNavigatableRowTs = 'table-navigatable-row-example.component.ts';
 const tableLoadingHtmlSrc = 'loading/table-loading-example.component.html';
 const tableFixedHtmlSrc = 'loading/table-fixed-example.component.html';
+const tablePageScrollHtml = 'table-page-scroll-example.component.html';
+const tablePageScrollTs = 'table-page-scroll-example.component.ts';
 
 @Component({
     selector: 'app-table',
@@ -94,7 +97,8 @@ const tableFixedHtmlSrc = 'loading/table-fixed-example.component.html';
         TableFixedExampleComponent,
         TableResponsiveExampleComponent,
         RouterLink,
-        TableLoadingExampleComponent
+        TableLoadingExampleComponent,
+        TablePageScrollExampleComponent
     ]
 })
 export class TableDocsComponent {
@@ -355,6 +359,20 @@ export class TableDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(tableFixedHtmlSrc),
             fileName: 'table-fixed-example'
+        }
+    ];
+
+    tablePageScroll: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(tablePageScrollHtml),
+            fileName: 'table-page-scroll-example'
+        },
+        {
+            language: 'typescript',
+            component: 'TablePageScrollExampleComponent',
+            code: getAssetFromModuleAssets(tablePageScrollTs),
+            fileName: 'table-page-scroll-example'
         }
     ];
 
