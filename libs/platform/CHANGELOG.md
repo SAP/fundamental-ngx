@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.41...v0.49.0-rc.42) (2024-03-12)
+
+
+### Features
+
+* **core,platform:** add page scroll to Table component ([#11510](https://github.com/SAP/fundamental-ngx/issues/11510)) ([691426a](https://github.com/SAP/fundamental-ngx/commit/691426a66e0cb8e1f50ef4850cbafb1e987dc38b))
+
+
+
+
+
 # [0.49.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.40...v0.49.0-rc.41) (2024-03-11)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
