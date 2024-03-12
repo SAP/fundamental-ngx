@@ -547,6 +547,48 @@ fdk-dynamic-portal {
             }
         }
     }
+
+    &.fdp-table--outer-scroll {
+        .fd-toolbar {
+            position: sticky;
+            z-index: 10;
+            top: 0;
+        }
+
+        .fdp-table__body.fd-scrollbar {
+            overflow: visible;
+        }
+
+        .fdp-table__container {
+            overflow: visible;
+        }
+
+        thead {
+            position: sticky;
+            top: 0;
+        }
+
+        &:has(.fd-toolbar) {
+            thead {
+                position: sticky;
+                top: 2.75rem;
+            }
+
+            &:has(.is-compact) {
+                thead {
+                    position: sticky;
+                    top: 2rem;
+                }
+            }
+        }
+
+        &:has(.fd-toolbar):has(.fd-toolbar--title) {
+            thead {
+                position: sticky;
+                top: 2.75rem;
+            }
+        }
+    }
 }
 
 .#{$block} {

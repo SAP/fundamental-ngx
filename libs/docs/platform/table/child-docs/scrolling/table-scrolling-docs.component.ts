@@ -11,6 +11,7 @@ import {
     getAssetFromModuleAssets,
     SeparatorComponent
 } from '@fundamental-ngx/docs/shared';
+import { PlatformTableOuterScrollExampleComponent } from '../../examples/platform-table-outer-scroll-example.component';
 import { PlatformTablePageScrollingExampleComponent } from '../../examples/platform-table-page-scrolling-example.component';
 import { PlatformTableVirtualScrollExampleComponent } from '../../examples/virtual-scroll/platform-table-virtual-scroll-example.component';
 
@@ -18,6 +19,10 @@ const platformTablePageScrollingSrc = 'platform-table-page-scrolling-example.com
 const platformTablePageScrollingTsSrc = 'platform-table-page-scrolling-example.component.ts';
 const platformVirtualScrollTableDefaultSrc = 'virtual-scroll/platform-table-virtual-scroll-example.component.html';
 const platformVirtualScrollTableDefaultTsSrc = 'virtual-scroll/platform-table-virtual-scroll-example.component.ts';
+
+const platformTableOuterScrollSrc = 'platform-table-outer-scroll-example.component.html';
+const platformTableOuterScrollTsSrc = 'platform-table-outer-scroll-example.component.ts';
+
 @Component({
     selector: 'fd-table-scrolling-docs',
     templateUrl: './table-scrolling-docs.component.html',
@@ -32,6 +37,7 @@ const platformVirtualScrollTableDefaultTsSrc = 'virtual-scroll/platform-table-vi
         CodeExampleComponent,
         SeparatorComponent,
         PlatformTableVirtualScrollExampleComponent,
+        PlatformTableOuterScrollExampleComponent,
         FdDatetimeModule
     ]
 })
@@ -69,6 +75,23 @@ export class TableScrollingDocsComponent {
             name: 'platform-table-virtual-scroll-example.component.ts'
         }
     ];
+
+    outsideScrollTableFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(platformTableOuterScrollSrc),
+            fileName: 'platform-table-ouside-scroll-example',
+            name: 'platform-table-outer-scroll-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(platformTableOuterScrollTsSrc),
+            fileName: 'platform-table-ouside-scroll-example',
+            component: 'PlatformTablePageScrollingExampleComponent',
+            name: 'platform-table-outer-scroll-example.component.ts'
+        }
+    ];
+
     constructor() {
         this.childService.setLink(this.route.snapshot.routeConfig?.path);
     }
