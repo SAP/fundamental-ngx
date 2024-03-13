@@ -93,13 +93,13 @@ export class TableP13DialogComponent implements OnDestroy {
     columns: TableP13ColumnsComponent;
 
     /** @hidden */
+    _table: Table;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
     private _tableSubscriptions = new Subscription();
-
-    /** @hidden */
-    _table: Table;
 
     /** @hidden */
     constructor(private readonly _dialogService: DialogService) {}
@@ -145,7 +145,8 @@ export class TableP13DialogComponent implements OnDestroy {
         const filterBy = state?.filterBy;
         const dialogData: FilterDialogData = {
             columns: columns.map(({ label, key, dataType, filterable }) => ({ label, key, dataType, filterable })),
-            collectionFilter: filterBy
+            collectionFilter: filterBy,
+            validator: this.filter.validator
         };
 
         const dialogRef = this._dialogService.open(
@@ -163,21 +164,7 @@ export class TableP13DialogComponent implements OnDestroy {
             dialogRef.afterClosed
                 .pipe(filter((result) => !!result))
                 .subscribe(({ collectionFilter }: FilterDialogResultData) => {
-                    if (collectionFilter && !!this.filter) {
-                        if (typeof this.filter.validator === 'undefined') {
-                            this._applyFiltering(collectionFilter);
-                        } else if (typeof this.filter.validator === 'function') {
-                            /**
-                             * Need to deep copy the filter so the application developer does not manipulate the object
-                             * before the _applyFiltering function is called
-                             */
-                            const copiedFilter = structuredClone(collectionFilter);
-                            const valid = this.filter.validator(copiedFilter);
-                            if (!!valid || (this.filter && !this.filter.validator)) {
-                                this._applyFiltering(collectionFilter);
-                            }
-                        }
-                    }
+                    this._applyFiltering(collectionFilter);
                 })
         );
     }
