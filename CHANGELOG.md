@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.45...v0.49.0-rc.46) (2024-03-13)
+
+
+### Bug Fixes
+
+* **core:** css tweaks from old DH ([#11539](https://github.com/SAP/fundamental-ngx/issues/11539)) ([2c6c05c](https://github.com/SAP/fundamental-ngx/commit/2c6c05ccf6b13b7e202d2d975bed12f06f7b1236))
+
+
+
+
+
+# [0.49.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.44...v0.49.0-rc.45) (2024-03-13)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 # [0.49.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.43...v0.49.0-rc.44) (2024-03-12)
 
 **Note:** Version bump only for package fundamental-ngx
