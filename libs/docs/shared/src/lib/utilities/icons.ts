@@ -692,5 +692,7 @@ export const Icons = [
     'accessibility',
     'high-priority',
     'da',
-    'da-2'
+    'da-2',
+    'ai',
+    'in-progress-2'
 ];
