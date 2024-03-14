@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.46...v0.49.0-rc.47) (2024-03-14)
+
+
+### Features
+
+* **core:** add auto height option for Grid List items ([#11544](https://github.com/SAP/fundamental-ngx/issues/11544)) ([fb21aed](https://github.com/SAP/fundamental-ngx/commit/fb21aed52538fd09d133f8fea788e632aab43e0c))
+
+
+
+
+
 # [0.49.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.45...v0.49.0-rc.46) (2024-03-13)
 
 
