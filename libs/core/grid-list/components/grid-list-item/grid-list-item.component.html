@@ -13,6 +13,7 @@
     [class.fd-grid-list__item--locked]="state === 'locked'"
     [class.fd-grid-list__item--draft]="state === 'draft'"
     [class.fd-grid-list__item--error]="state === 'error'"
+    [class.fd-grid-list__item--height-auto]="autoHeight"
     (keydown)="_onKeyDown($event)"
     (click)="selectionMode === 'singleSelect' && _singleSelect($event); _onClick($event)"
     [attr.aria-label]="ariaLabel"
