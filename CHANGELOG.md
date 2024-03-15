@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.51...v0.49.0-rc.52) (2024-03-15)
+
+
+### Bug Fixes
+
+* **core:** add a11y fixes for Select control ([#11558](https://github.com/SAP/fundamental-ngx/issues/11558)) ([a18db7d](https://github.com/SAP/fundamental-ngx/commit/a18db7deaf00de387a38612d706361e96f84ed07))
+
+
+
+
+
 # [0.49.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.50...v0.49.0-rc.51) (2024-03-15)
 
 **Note:** Version bump only for package fundamental-ngx
