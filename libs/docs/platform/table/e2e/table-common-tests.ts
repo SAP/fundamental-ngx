@@ -48,11 +48,4 @@ export const runCommonTests = (allInputFields: string, tablePage: TablePo) => {
             }
         });
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await tablePage.saveExampleBaselineScreenshot();
-            await expect(await tablePage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 };

@@ -664,35 +664,6 @@ describe('SearchFieldComponent', () => {
         expect(component._isOpen$()).toBeFalsy();
     });
 
-    // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
-    xit('should return focus to the input field after suggestion item is selected', () => {
-        // set up component
-        host.placeholder = 'Search';
-        host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
-        fixture.detectChanges();
-
-        // simulate input entry
-        const textInput = fixture.debugElement.query(By.css('input.fd-input'));
-        textInput.nativeElement.value = 'a';
-        textInput.nativeElement.dispatchEvent(new Event('input'));
-        fixture.detectChanges();
-
-        // simulate keyboard navigation
-        let keyboardEvent = createKeyboardEvent('keydown', DOWN_ARROW, 'ArrowDown');
-        textInput.nativeElement.dispatchEvent(keyboardEvent);
-
-        // simulate keyboard enter
-        keyboardEvent = createKeyboardEvent('keydown', ENTER, 'Enter');
-        const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
-        items[0].dispatchEvent(keyboardEvent);
-
-        // check input text
-        expect(component.inputText).toBe('Apple');
-
-        // check focus
-        expect(document.activeElement).toBe(textInput.nativeElement);
-    });
-
     it('should close the suggestion dropdown on outside click', () => {
         // set up component
         host.placeholder = 'Search';

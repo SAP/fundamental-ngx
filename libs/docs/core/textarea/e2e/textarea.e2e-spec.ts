@@ -136,11 +136,6 @@ describe('Textarea component test', () => {
         }
     });
 
-    xit('should check visual regression for all examples', async () => {
-        await textareaPage.saveExampleBaselineScreenshot();
-        await expect(await textareaPage.compareWithBaseline()).toBeLessThan(5);
-    });
-
     async function checkPlaceholderIsCorrect(section: string): Promise<void> {
         const areaLength = await getElementArrayLength(section + textarea);
         for (let i = 0; i < areaLength; i++) {

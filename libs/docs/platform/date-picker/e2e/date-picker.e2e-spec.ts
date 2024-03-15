@@ -284,11 +284,4 @@ describe('Date picker suite', () => {
         await click(dayInCalendarButtonByValue('2'));
         await expect(await getValue(inputDatePicker)).toEqual(date9);
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await datePickerPage.saveExampleBaselineScreenshot();
-            await expect(await datePickerPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

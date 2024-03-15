@@ -248,40 +248,6 @@ describe('Datetime picker suite', () => {
             }
         }
     });
-
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/7112
-    xit('should check that date-time picker does not have error if it contains valid value', async () => {
-        await scrollIntoView(inputGroup, 8);
-        let validDate;
-        const currDate = new Date();
-        const currMonth = currDate.getMonth() + 1;
-        const currDay = currDate.getDate();
-        const currYear = currDate.getFullYear();
-        let currMinute = currDate.getMinutes().toString();
-        if (currMinute === '0') {
-            currMinute = '00';
-            // eslint-disable-next-line radix
-        } else if (parseInt(currMinute) < 10) {
-            currMinute = '0' + currMinute;
-        }
-        const currentHour = currDate.toLocaleString('en-US', { timeZone: 'UTC', hour: 'numeric', hour12: true });
-
-        if (currentHour[1] === ' ') {
-            validDate = `${currMonth}/${currDay}/${currYear}, ${currentHour[0]}:${currMinute} ${currentHour.slice(
-                2,
-                4
-            )}`;
-        }
-        if (currentHour[1] !== ' ') {
-            validDate = `${currMonth}/${currDay}/${currYear}, ${currentHour.slice(
-                0,
-                2
-            )}:${currMinute} ${currentHour.slice(3, 5)}`;
-        }
-
-        await expect(await getValue(datePickerInput, 8)).toBe(validDate);
-        await expect(await getElementClass(inputGroup, 8)).not.toContain('error');
-    });
 });
 
 async function selectHoursAndMinutes(hour: number = 1, minute: number = 1): Promise<void> {

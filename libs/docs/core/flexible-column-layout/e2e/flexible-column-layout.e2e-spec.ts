@@ -96,14 +96,6 @@ describe('Flexible column layout component test', () => {
     it('should check separator for dynamic example', async () => {
         await checkSeparator(dynamicExample);
     });
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6518
-    xit('should check missed separator for default example', async () => {
-        await checkExistSeparator(defaultExample);
-    });
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6519
-    xit('should check missed separator for default example', async () => {
-        await checkExistSeparator(dynamicExample);
-    });
 
     it('should check orientation', async () => {
         await flexibleColumnLayoutPage.checkRtlSwitch();

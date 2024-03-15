@@ -89,12 +89,6 @@ describe('CardComponent', () => {
         expect(cardEl.textContent?.includes(host.contentText)).toBeTruthy();
     });
 
-    /** TODO: Card footer issue #6246 */
-    xit('should render footer', () => {
-        const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardComponent)).nativeElement;
-        expect(cardEl.textContent?.includes(host.footerText)).toBeTruthy();
-    });
-
     describe('loader', () => {
         it('should has binding', () => {
             expect(card.isLoading).toBe(host.isLoading);

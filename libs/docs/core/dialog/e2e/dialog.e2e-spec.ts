@@ -3,8 +3,6 @@ import { DialogPo } from './dialog.po';
 import {
     browserIsFirefox,
     browserIsSafari,
-    checkElementScreenshot,
-    clearValue,
     click,
     clickAndDragElement,
     clickWithOption,
@@ -14,18 +12,15 @@ import {
     getElementClass,
     getElementLocation,
     getElementSize,
-    getImageTagBrowserPlatform,
     getText,
     isElementDisplayed,
     pause,
     refreshPage,
-    saveElementScreenshot,
     scrollIntoView,
     sendKeys,
     setValue,
     waitForElDisappear,
     waitForElDisplayed,
-    waitForNotDisplayed,
     waitForNotPresent
 } from '../../../../../e2e';
 import { papayaFruit } from './dialog';
@@ -544,15 +539,6 @@ describe('dialog test suite', () => {
             await checkDialogDismissals(formDialog, button, cancelBtn, canceledStatus);
         });
 
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7195
-        xit('should check required fields validation', async () => {
-            await openDialog(formDialog);
-            for (let i = 1; i < 4; i++) {
-                await clearValue(dialogInput, i);
-                await expect(await getElementClass(dialogInput, i)).toContain('is-error');
-            }
-        });
-
         it('should check close dialog via escape', async () => {
             await checkCloseDialogWithEscapeKey(formDialog, button);
         });
@@ -561,139 +547,6 @@ describe('dialog test suite', () => {
             await click(formDialog + checkboxes, 1);
             await openDialog(formDialog);
             await expect(await getElementClass(dialogBody)).not.toContain('no-vertical-padding');
-        });
-    });
-
-    xdescribe('visual regression', () => {
-        const complexExample = 12;
-        const stackedExample = 13;
-
-        beforeEach(async () => {
-            await refreshPage();
-        }, 1);
-
-        it('should check examples visual regression', async () => {
-            await dialogPage.saveExampleBaselineScreenshot();
-            await expect(await dialogPage.compareWithBaseline()).toBeLessThan(5);
-        });
-
-        it('should check each dialog', async () => {
-            const dialogCount = await getElementArrayLength(dialogExamples + button);
-
-            for (let i = 0; i < dialogCount; i++) {
-                if (i === 3 || i === 4 || i === 5 || i === 6) {
-                    // skip due to dynamic content
-                    continue;
-                }
-                if (i === complexExample) {
-                    await openDialog(dialogExamples, i);
-                    await waitForNotDisplayed(busyIndicator);
-                    await waitForElDisplayed(dialogItems);
-                    await saveElementScreenshot(
-                        dialogContainer2,
-                        `dialog-${i}-${await getImageTagBrowserPlatform()}-`,
-                        await dialogPage.getScreenshotFolder()
-                    );
-                    await expect(
-                        await checkElementScreenshot(
-                            dialogContainer2,
-                            `dialog-${i}-${await getImageTagBrowserPlatform()}-`,
-                            await dialogPage.getScreenshotFolder()
-                        )
-                    ).toBeLessThan(5, `dialog ${i} screenshot doesn't match baseline`);
-                    await click(dialog + button, 2);
-                    continue;
-                }
-                if (i === stackedExample) {
-                    await openDialog(dialogExamples, i);
-                    await saveElementScreenshot(
-                        dialogContainer2,
-                        `dialog-${i}a-${await getImageTagBrowserPlatform()}-`,
-                        await dialogPage.getScreenshotFolder()
-                    );
-                    await expect(
-                        await checkElementScreenshot(
-                            dialogContainer2,
-                            `dialog-${i}a-${await getImageTagBrowserPlatform()}-`,
-                            await dialogPage.getScreenshotFolder()
-                        )
-                    ).toBeLessThan(5, `dialog ${i}a screenshot doesn't match baseline`);
-                    await click(dialog + button, 1);
-                    await waitForElDisplayed(dialog, 1);
-                    await saveElementScreenshot(
-                        dialogContainer2,
-                        `dialog-${i}b-${await getImageTagBrowserPlatform()}-`,
-                        await dialogPage.getScreenshotFolder(),
-                        1
-                    );
-                    await expect(
-                        await checkElementScreenshot(
-                            dialogContainer2,
-                            `dialog-${i}b-${await getImageTagBrowserPlatform()}-`,
-                            await dialogPage.getScreenshotFolder(),
-                            1
-                        )
-                    ).toBeLessThan(5, `dialog ${i}b screenshot doesn't match baseline`);
-                    await click(dialog + button, 3);
-                    await closeDialog();
-                    continue;
-                }
-                await openDialog(dialogExamples, i);
-                await saveElementScreenshot(
-                    dialogContainer2,
-                    `dialog-${i}-${await getImageTagBrowserPlatform()}-`,
-                    await dialogPage.getScreenshotFolder()
-                );
-                await expect(
-                    await checkElementScreenshot(
-                        dialogContainer2,
-                        `dialog-${i}-${await getImageTagBrowserPlatform()}-`,
-                        await dialogPage.getScreenshotFolder()
-                    )
-                ).toBeLessThan(5, `dialog ${i} screenshot doesn't match baseline`);
-                if ((await waitForElDisappear(dialog)) === true) {
-                    continue;
-                }
-                await click(dialog + button);
-            }
-        });
-
-        it('should check custom backdrop example', async () => {
-            await openDialog(customDialog);
-
-            await saveElementScreenshot(
-                dialog,
-                `dialog-with-custom-backdrop-${await getImageTagBrowserPlatform()}-`,
-                await dialogPage.getScreenshotFolder()
-            );
-            await expect(
-                await checkElementScreenshot(
-                    dialog,
-                    `dialog-dialog-with-custom-backdrop-${await getImageTagBrowserPlatform()}-`,
-                    await dialogPage.getScreenshotFolder()
-                )
-            ).toBeLessThan(25, `dialog with custom backdrop screenshot doesn't match baseline`);
-
-            await closeDialog();
-        });
-
-        it('should check playground dialog hasBackdrop option', async () => {
-            await openDialog(playgroundDialog);
-
-            await saveElementScreenshot(
-                dialog,
-                `dialog-with-hasBackdrop-${await getImageTagBrowserPlatform()}-`,
-                await dialogPage.getScreenshotFolder()
-            );
-            await expect(
-                await checkElementScreenshot(
-                    dialog,
-                    `dialog-dialog-with-hasBackdrop-${await getImageTagBrowserPlatform()}-`,
-                    await dialogPage.getScreenshotFolder()
-                )
-            ).toBeLessThan(25, `dialog with hasBackdrop screenshot doesn't match baseline`);
-
-            await closeDialog();
         });
     });
 

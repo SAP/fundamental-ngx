@@ -1,5 +1,5 @@
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { getElementArrayLength, getElementClass, getText, isElementDisplayed } from '../../../../../e2e';
+import { getElementArrayLength, getElementClass, isElementDisplayed } from '../../../../../e2e';
 import { AvatarPo } from './avatar.po';
 
 describe('Avatar test suite', () => {
@@ -59,30 +59,6 @@ describe('Avatar test suite', () => {
         for (let i = 0; i < (await getElementArrayLength(circleAvatar)); i++) {
             await expect(await getElementClass(circleAvatar, i)).toContain('circle');
         }
-    });
-
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/7025
-    xit('should check that avatar with 1 char as initial is present', async () => {
-        let j, k, n;
-        for (let i = 0; i < (await getElementArrayLength(avatarInitials)); i++) {
-            if ((await getText(avatarInitials, i)).length === 1) {
-                j = 1;
-            }
-            if ((await getText(avatarInitials, i)).length === 2) {
-                k = 2;
-            }
-            if ((await getText(avatarInitials, i)).length === 3) {
-                n = 3;
-            }
-        }
-        await expect(j).toBe(1);
-        await expect(k).toBe(2);
-        await expect(n).toBe(3);
-    });
-
-    xit('should check visual regression for all examples', async () => {
-        await avatarPage.saveExampleBaselineScreenshot();
-        await expect(await avatarPage.compareWithBaseline()).toBeLessThan(5);
     });
 
     it('should check orientation', async () => {

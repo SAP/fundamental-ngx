@@ -133,12 +133,6 @@ describe('Verify Switch component', () => {
         await expect(alternativeTextSemanticSwitch).toBe(semantic_switch_alternative_text);
         await expect(alternativeTextSemanticCompactFormDisabledSwitch).toBe(semantic_compact_switch_alternative_text);
     });
-    /*
-    xit('test accessibility', async ()=> {
-        const testResult = await runAxeTest('Test Switch component', $$('.docs-tile__content.docs-tile-content-example')
-        .get(0).locator().value); // switchPage.root.locator().value
-        expect(testResult.violations.length).toBe(0);
-    });*/
 
     it('should have RTL orientation', async () => {
         await switchPage.checkRtlSwitch();
@@ -186,20 +180,5 @@ describe('Verify Switch component', () => {
             await expect(onIconStateAfter.value).toBe('hidden');
             await expect(offIconStateAfter.value).toBe('visible');
         });
-
-        // No example given to verify
-        /*        xit('should be able to display 2-3 letters', async () => {
-        });*/
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await switchPage.saveExampleBaselineScreenshot();
-            await expect(await switchPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
-
-    /* xdescribe('has correct page content', () => {
-         // TODO: add page content checks
-    });*/
 });

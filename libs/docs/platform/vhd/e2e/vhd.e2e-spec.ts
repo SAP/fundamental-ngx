@@ -1,14 +1,12 @@
 import {
     browserIsFirefox,
     browserIsSafari,
-    clearValue,
     click,
     doesItExist,
     getAttributeByName,
     getElementArrayLength,
     getElementClass,
     getText,
-    isElementDisplayed,
     pause,
     refreshPage,
     scrollIntoView,
@@ -19,7 +17,7 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 import { searchValues, valueOne, valueZero } from './vhd';
-import { conditionsValues, customLabels, inputIDs } from './vhd-contents';
+import { conditionsValues, customLabels } from './vhd-contents';
 import { VhdPo } from './vhd.po';
 
 describe('Value help dialog test suite', () => {
@@ -107,33 +105,6 @@ describe('Value help dialog test suite', () => {
             await checkResults(tableRows, searchValues[0]);
         });
 
-        xit('should check advanced search results', async () => {
-            await click(openDialogBtn);
-            await waitForPresent(dialogContainer);
-            await click(advSearchToggle);
-            await waitForPresent(showAllBtn);
-            await click(showAllBtn);
-            const advSearchFieldCount = 6;
-            const searchResultsColumnsArr = [
-                productNameColumn,
-                productCodeColumn,
-                productCityColumn,
-                productZipcodeColumn,
-                productAddressColumn,
-                productNicknameColumn
-            ];
-
-            for (let i = 0; advSearchFieldCount > i; i++) {
-                await click(formInputField(inputIDs[i]));
-                await setValue(formInputField(inputIDs[i]), searchValues[i]);
-                await click(goBtn);
-                await pause(300);
-                await checkResults(searchResultsColumnsArr[i], searchValues[i]);
-                await click(formInputField(inputIDs[i]));
-                await clearValue(formInputField(inputIDs[i]));
-            }
-        });
-
         it('should check the selection appears as a token', async () => {
             await click(openDialogBtn);
             await pause(300);
@@ -171,21 +142,6 @@ describe('Value help dialog test suite', () => {
             await waitForPresent(dialogContainer);
             await click(footerBtns, 1);
             await waitForPresent(openDialogBtn);
-        });
-
-        xit('should check advanced search options appear for table columns', async () => {
-            await click(openDialogBtn);
-            await waitForElDisplayed(toolbarButtons);
-            await click(toolbarButtons);
-            await waitForPresent(showAllBtn);
-            await click(showAllBtn);
-            const columnCount = await getElementArrayLength(tableColumn);
-
-            for (let i = 0; columnCount - 1 > i; i++) {
-                await expect((await getText(advSearchLabels, i)).trim()).toContain(
-                    (await getText(tableColumn, i + 1)).trim()
-                );
-            }
         });
 
         it('should check advanced search toggle', async () => {
@@ -235,16 +191,6 @@ describe('Value help dialog test suite', () => {
                 await expect((await getText(selectedTokens)).trim()).toEqual(conditionsValues[i]);
                 await click(conditionsButton);
             }
-        });
-
-        // skipp due to https://github.com/SAP/fundamental-ngx/issues/7458
-        xit('should check that we can add condition by press Enter', async () => {
-            await click(openDialogBtn, 1);
-            await waitForPresent(dialogContainer);
-            await click(conditionsInputField, 1);
-            await sendKeys(valueZero);
-            await sendKeys('Enter');
-            await expect(await isElementDisplayed(token)).toBe(true);
         });
     });
 

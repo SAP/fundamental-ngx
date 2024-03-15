@@ -147,15 +147,6 @@ describe('Message-box test suits', () => {
         await messageBoxPage.checkRtlSwitch();
     });
 
-    xdescribe('visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await refreshPage();
-            await waitForElDisplayed(messageBoxPage.title);
-            await messageBoxPage.saveExampleBaselineScreenshot();
-            await expect(await messageBoxPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
-
     async function checkClosingMessageBoxByPressEscape(section: string): Promise<void> {
         await scrollIntoView(section);
         await click(section + button);

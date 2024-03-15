@@ -12,7 +12,6 @@ import {
     ONE_COLUMN_MID_FULL_SCREEN,
     ONE_COLUMN_START_FULL_SCREEN,
     THREE_COLUMNS_END_EXPANDED,
-    THREE_COLUMNS_END_MINIMIZED,
     THREE_COLUMNS_MID_EXPANDED,
     THREE_COLUMNS_START_MINIMIZED,
     TWO_COLUMNS_END_EXPANDED,
@@ -254,25 +253,6 @@ describe('FlexibleColumnLayoutComponent', () => {
             .nativeElement;
         expect(midColumn.style.width).toBe('67%');
         expect(endColumn.style.width).toBe('33%');
-
-        // checks the number of separators
-        const separators = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__separator'));
-        expect(separators.length).toBe(2);
-    });
-
-    xit('THREE_COLUMNS_END_MINIMIZED should render 3 columns, start open, mid expanded, end minimized', async () => {
-        await whenStable(fixture);
-
-        testComponent.layout = THREE_COLUMNS_END_MINIMIZED;
-        fixture.detectChanges();
-
-        // checks the columns width
-        const startColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[0]
-            .nativeElement;
-        const midColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[1]
-            .nativeElement;
-        expect(startColumn.style.width).toBe('33%');
-        expect(midColumn.style.width).toBe('67%');
 
         // checks the number of separators
         const separators = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__separator'));

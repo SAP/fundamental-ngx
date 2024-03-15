@@ -97,13 +97,6 @@ describe('Object Status test suite', () => {
             await objectStatusPage.checkRtlSwitch();
         });
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await objectStatusPage.saveExampleBaselineScreenshot();
-            await expect(await objectStatusPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });
 
 async function checkObjectValues(selector, dataArr): Promise<void> {

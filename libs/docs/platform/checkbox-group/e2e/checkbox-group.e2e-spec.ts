@@ -471,13 +471,6 @@ describe('Checkbox group test suite', () => {
             await checkboxGroupPage.checkRtlSwitch();
         });
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await checkboxGroupPage.saveExampleBaselineScreenshot();
-            await expect(await checkboxGroupPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });
 
 async function checkCheckboxSelecting(

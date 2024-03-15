@@ -25,7 +25,6 @@ import {
     invalidInputLabelText,
     labelsArray,
     stateClassesArr,
-    testText,
     validInputLabelText,
     warningInputLabelText
 } from './input-page-contents';
@@ -178,18 +177,6 @@ describe('Input should ', () => {
         }
     });
 
-    // Does not make sense since clicking on label will shift the focus on the input, and inline help has focusout trigger to hide the popover.
-    xit('should check displayed popover by clicking and check text', async () => {
-        await scrollIntoView(questionMark);
-        await click(questionMark);
-        await expect(await isElementDisplayed(popoverHelp)).toBe(true, 'popover not displayed');
-        await expect((await getText(popoverHelp)).trim()).toBe(testText);
-
-        await click(questionMark, 1);
-        await expect(await isElementDisplayed(popoverHelp)).toBe(true, 'popover not displayed');
-        await expect((await getText(popoverHelp)).trim()).toBe(testText);
-    });
-
     it('should check displayed popover by hover question mark', async () => {
         // skipped due to hoverElement does not work in Safari
         if (await browserIsSafari()) {
@@ -214,12 +201,5 @@ describe('Input should ', () => {
 
     it('should check RTL', async () => {
         await inputPage.checkRtlSwitch();
-    });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await inputPage.saveExampleBaselineScreenshot();
-            await expect(await inputPage.compareWithBaseline()).toBeLessThan(5);
-        });
     });
 });

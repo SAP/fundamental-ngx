@@ -14,7 +14,6 @@ import {
     isElementDisplayed,
     refreshPage,
     scrollIntoView,
-    sendKeys,
     waitForElDisplayed
 } from '../../../../../e2e';
 import { ShellbarPo } from './shellbar.po';
@@ -116,24 +115,6 @@ describe('shellbar test suite', () => {
             await expect(await isElementClickable(popoverMenuItem)).toBe(true, 'popover items not clickable');
         });
 
-        xit('should check the searchbar dropdown', async () => {
-            await scrollIntoView(collapsableExample);
-            await click(searchbarButton);
-            await waitForElDisplayed(popover);
-
-            await expect(await isElementDisplayed(popover)).toBe(true, 'search popover is not displayed');
-            await expect(await isElementClickable(searchMenuItem)).toBe(true, 'popover items not clickable');
-        });
-
-        xit('should check search with text', async () => {
-            await scrollIntoView(collapsableExample);
-            await click(collapsableExample + searchField);
-            await sendKeys('App');
-
-            await expect(await isElementDisplayed(suggestionsDropdown)).toBe(true, 'search popover is not displayed');
-            await expect(await isElementClickable(searchMenuItem)).toBe(true, 'popover items not clickable');
-        });
-
         it('should check actions', async () => {
             await scrollIntoView(collapsableExample);
             await click(actionButton);
@@ -197,11 +178,6 @@ describe('shellbar test suite', () => {
     describe('visual regression and orientation', () => {
         it('should check orientation', async () => {
             await shellbarPage.checkRtlSwitch();
-        });
-
-        xit('should check example block visual regression', async () => {
-            await shellbarPage.saveExampleBaselineScreenshot();
-            await expect(await shellbarPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 

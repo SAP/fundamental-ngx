@@ -73,17 +73,6 @@ describe('FeedInputComponent', () => {
         expect(parseInt(textareaEl.nativeElement.style.height, 10)).toBeGreaterThan(defaultHeight);
     });
 
-    // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
-    xit('should set max height', () => {
-        component.maxHeight = 7;
-        component.ngAfterViewInit();
-
-        fixture.detectChanges();
-
-        component.resize();
-        expect(textareaEl.nativeElement.style.maxHeight).toEqual('133px');
-    });
-
     it('should call onChange when textarea value changing', () => {
         jest.spyOn(component, 'onChange');
         textareaEl.nativeElement.value = 'test';

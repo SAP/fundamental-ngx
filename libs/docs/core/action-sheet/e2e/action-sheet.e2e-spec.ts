@@ -3,15 +3,11 @@ import { ActionSheetPo } from './action-sheet.po';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import {
     checkElArrIsClickable,
-    checkElementScreenshot,
     click,
     getElementArrayLength,
     getElementClass,
-    getImageTagBrowserPlatform,
     getText,
     refreshPage,
-    saveElementScreenshot,
-    scrollIntoView,
     waitForElDisplayed,
     waitForNotDisplayed
 } from '../../../../../e2e';
@@ -77,34 +73,6 @@ describe('Action sheet test suite', () => {
     describe('Check orientation', () => {
         it('should check orientation', async () => {
             await actionSheetPage.checkRtlSwitch();
-        });
-    });
-
-    xdescribe('Check visual regression', () => {
-        it('should check basic visual regression', async () => {
-            await actionSheetPage.saveExampleBaselineScreenshot();
-            await expect(await actionSheetPage.compareWithBaseline()).toBeLessThan(5);
-        });
-
-        it('should check action sheet items visual regression', async () => {
-            const actionSheetCount = await getElementArrayLength(actionSheetMenuButton);
-
-            for (let i = 0; actionSheetCount > i; i++) {
-                await click(actionSheetMenuButton, i);
-                await scrollIntoView(actionSheetList);
-                await saveElementScreenshot(
-                    actionSheetList,
-                    `action-sheet-items-example-${i}-core-${await getImageTagBrowserPlatform()}`,
-                    await actionSheetPage.getScreenshotFolder()
-                );
-                await expect(
-                    await checkElementScreenshot(
-                        actionSheetList,
-                        `action-sheet-items-example-${i}-core-${await getImageTagBrowserPlatform()}`,
-                        await actionSheetPage.getScreenshotFolder()
-                    )
-                ).toBeLessThan(5);
-            }
         });
     });
 

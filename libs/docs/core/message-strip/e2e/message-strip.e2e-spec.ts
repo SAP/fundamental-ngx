@@ -75,11 +75,6 @@ describe('Message-strip test suite', () => {
         await messageStripPage.checkRtlSwitch();
     });
 
-    xit('should check examples visual regression', async () => {
-        await messageStripPage.saveExampleBaselineScreenshot();
-        await expect(await messageStripPage.compareWithBaseline()).toBeLessThan(5);
-    });
-
     describe('playground constructor test', () => {
         it('should check choosing states of message-strip', async () => {
             for (let i = 0; i < playgroundStates.length; i++) {

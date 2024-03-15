@@ -248,23 +248,6 @@ describe('Approval flow', () => {
             await expect(watchersCountBefore).toBe(watchersCountAfter - 1);
         });
 
-        // Constantly causes issues on CI, although it works
-        xit('should be able to remove watchers', async () => {
-            const watchersCountBefore = await getElementArrayLength(watchersAvatar);
-            await click(editExampleButton);
-            await waitForElDisplayed(addWhatchersInput);
-            await click(addWhatchersInput);
-            await sendKeys('Julie');
-
-            await pause(1000);
-            // re triggering e2e
-            await click(selectItem);
-            await click(bottomMenuItems);
-            const watchersCountAfter = await getElementArrayLength(watchersAvatar);
-
-            await expect(watchersCountBefore).toBe(watchersCountAfter + 1);
-        });
-
         it('should be able to add node in parallel', async () => {
             await scrollIntoView(afDefaultExample);
             const approvalFlowNodeCountBefore = await getElementArrayLength(afDefaultExample + approvalFlowNode);
@@ -308,28 +291,6 @@ describe('Approval flow', () => {
             const approvalFlowNodeCountAfter = await getElementArrayLength(afDefaultExample + approvalFlowNode);
 
             await expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfter - 1);
-        });
-
-        xit('should be able to add node in serial using top bar action menu', async () => {
-            await scrollIntoView(afDefaultExample);
-            const approvalFlowNodeCountBefore = await getElementArrayLength(afDefaultExample + approvalFlowNode);
-            await click(afDefaultExample + editExampleButton);
-            await waitForElDisplayed(addNode);
-            await waitForElDisplayed(approvalFlowNodeCheckbox);
-            await click(approvalFlowNodeCheckbox, 3);
-            await waitForElDisplayed(topActionButtons);
-            await click(topActionButtons);
-            await waitForElDisplayed(detailsDialogUserTeamButton);
-            await click(detailsDialogUserTeamButton);
-            await pause(500);
-            await waitForElDisplayed(detailsDialogTeamMemberCheckBox);
-            await click(detailsDialogTeamMemberCheckBox, 4);
-            await click(detailsDialogSendReminderBtn);
-            await waitForElDisplayed(detailsDialogSendReminderBtn);
-            await click(detailsDialogSendReminderBtn);
-            const approvalFlowNodeCountAfterAdding = await getElementArrayLength(afDefaultExample + approvalFlowNode);
-
-            await expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfterAdding - 1);
         });
 
         it('should be able to add node in serial using node action menu', async () => {
@@ -418,24 +379,6 @@ describe('Approval flow', () => {
                     '4 members\n' + 'Accounting team'
                 );
             }
-        });
-
-        xit('should be able to remove node by button', async () => {
-            await scrollIntoView(afDefaultExample);
-            await waitForElDisplayed(afDefaultExample + approvalFlowNode);
-            const approvalFlowNodeCountBefore = await getElementArrayLength(afDefaultExample + approvalFlowNode);
-
-            await waitForElDisplayed(afDefaultExample + editExampleButton);
-            await click(afDefaultExample + editExampleButton);
-            await waitForElDisplayed(afDefaultExample + approvalFlowNodeCheckbox);
-            (await browserIsFirefox())
-                ? await click(afDefaultExample + approvalFlowNodeCheckboxAlt, 3)
-                : await click(afDefaultExample + approvalFlowNodeCheckbox, 1);
-            await waitForElDisplayed(afDefaultExample + topActionButtons, 2);
-            await click(afDefaultExample + topActionButtons, 2);
-            const approvalFlowNodeCountAfterRemove = await getElementArrayLength(afDefaultExample + approvalFlowNode);
-
-            await expect(approvalFlowNodeCountBefore).toEqual(approvalFlowNodeCountAfterRemove + 1);
         });
 
         it('should be able to remove node by node action menu', async () => {
@@ -680,13 +623,6 @@ describe('Approval flow', () => {
     describe('check example orientation', () => {
         it('should check RTL orientation', async () => {
             await approvalFlowPage.checkRtlSwitch();
-        });
-    });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await approvalFlowPage.saveExampleBaselineScreenshot();
-            await expect(await approvalFlowPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 

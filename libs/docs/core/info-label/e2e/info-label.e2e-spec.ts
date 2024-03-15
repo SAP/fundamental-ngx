@@ -48,9 +48,4 @@ describe('Info Label component test suite', () => {
     it('should check LTR and RTL orientation', async () => {
         await infoLabelPage.checkRtlSwitch();
     });
-
-    xit('should check examples basic visual regression', async () => {
-        await infoLabelPage.saveExampleBaselineScreenshot();
-        await expect(await infoLabelPage.compareWithBaseline()).toBeLessThan(5);
-    });
 });

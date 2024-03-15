@@ -1,18 +1,15 @@
 import {
-    getAlertText,
     getAttributeByName,
     getElementArrayLength,
     getElementSize,
-    getText,
     isElementClickable,
     refreshPage,
     scrollIntoView,
-    uploadFile,
     waitForElDisplayed
 } from '../../../../../e2e';
 import { FileUploaderPo } from './file-uploader.po';
 
-import { imagePath, placeholderTestTextArr, titleValue } from './file-uploader-contents';
+import { placeholderTestTextArr } from './file-uploader-contents';
 
 describe('File uploader component test', () => {
     const fileUploaderPage = new FileUploaderPo();
@@ -71,33 +68,7 @@ describe('File uploader component test', () => {
         await expect(compactInput.width).toBeLessThan(basicInput.width);
     });
 
-    // skipped due to issue with file uploader - browser is stuck after uploading file
-    xit('verify file upload', async () => {
-        const arrLength = await getElementArrayLength(browseButton);
-        for (let i = 0; i < arrLength; i++) {
-            await uploadFile(fileUploaderInputFile, imagePath, i);
-            await expect(imagePath).toContain(await getText(fileSelectedText, i));
-            await expect(imagePath).toContain((await getAttributeByName(fileUploaderInput, 'title', i)).slice(1));
-        }
-    });
-
-    // skipped due to issue with file uploader - browser is stuck after uploading file
-    xit('verify file uploaded message', async () => {
-        const arrLength = await getElementArrayLength(browseButton);
-        for (let i = 0; i < arrLength; i++) {
-            await uploadFile(fileUploaderInputFile, imagePath, i);
-            await expect(titleValue).toContain(await getAlertText());
-        }
-    });
-
     it('should check RTL and LTR orientation', async () => {
         await fileUploaderPage.checkRtlSwitch();
-    });
-
-    xdescribe('Should check visual regression', () => {
-        it('should check visual regression for all examples', async () => {
-            await fileUploaderPage.saveExampleBaselineScreenshot();
-            await expect(await fileUploaderPage.compareWithBaseline()).toBeLessThan(5);
-        });
     });
 });

@@ -6,11 +6,8 @@ import {
     getText,
     pause,
     refreshPage,
-    scrollIntoView,
-    waitForClickable,
     waitForElDisplayed,
-    waitForNotDisplayed,
-    waitForPresent
+    waitForNotDisplayed
 } from '../../../../../e2e';
 import { main_button_title } from './dynamic-page-contents';
 import { DynamicPagePo } from './dynamic-page.po';
@@ -89,22 +86,6 @@ describe('Dynamic Page Layout test suite:', () => {
             await waitForElDisplayed(dynamicPageCollapsibleHeader);
             await click(dynamicPageToolBarReject);
             await expect(await doesItExist(dynamicPage)).toBe(false);
-        });
-    });
-
-    // TODO: Needs to be implemented
-    xdescribe('Dynamic Page that snaps on scrolling', () => {
-        it('is snaps on scrolling', async () => {
-            await click(snapsExampleButton);
-            await waitForElDisplayed(dynamicPage);
-            await waitForElDisplayed(dynamicPageCollapsibleHeader);
-
-            await expect(await elementDisplayed(dynamicPageCollapsibleHeader)).toBe(false);
-            await scrollIntoView(dynamicPageContentStart);
-            await expect(await elementDisplayed(dynamicPageCollapsibleHeader)).toBe(true);
-            await waitForPresent(dynamicPageContentEnd);
-            await scrollIntoView(dynamicPageContentEnd);
-            await expect(await elementDisplayed(dynamicPageCollapsibleHeader)).toBe(false);
         });
     });
 
@@ -187,19 +168,6 @@ describe('Dynamic Page Layout test suite:', () => {
             await click(dynamicPageCollapseIcon);
             await pause(500);
             await expect(await waitForNotDisplayed(dynamicPageCollapsibleHeader)).toBe(true);
-        });
-
-        // Temporarily disabled. Passes if being run alone, otherwise fails.
-        xit('should verify dynamic page is collapsible by click on header', async () => {
-            await click(flexibleColumnExampleButton);
-            await waitForElDisplayed(openColumnButton);
-            await click(openColumnButton);
-            await waitForElDisplayed(columnSectionHeader);
-            await waitForElDisplayed(dynamicPageTitle);
-            await waitForClickable(dynamicPageTitle);
-            await waitForElDisplayed(dynamicPageCollapsibleHeader);
-            await click(dynamicPageTitle);
-            await expect(await elementDisplayed(dynamicPageCollapsibleHeader)).toBe(false);
         });
     });
 

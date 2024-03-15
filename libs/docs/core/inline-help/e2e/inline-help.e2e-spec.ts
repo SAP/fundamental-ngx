@@ -4,7 +4,6 @@ import {
     getAttributeByName,
     getElementArrayLength,
     getText,
-    isElementDisplayed,
     mouseHoverElement,
     refreshPage,
     scrollIntoView,
@@ -82,27 +81,6 @@ describe('Inline help test suite', () => {
         await mouseHoverElement(inlineHelpTemplateExample);
         await waitForPresent(popover);
         await expect(await getText(popover)).toBe(customMessage);
-    });
-
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6398
-    xit('should check that inline help by hover does not work in other way after clicking button', async () => {
-        // skipped due to hoverElement does not work in Safari
-        if (await browserIsSafari()) {
-            return;
-        }
-        await scrollIntoView(inlineHelpIcons, 2);
-        await mouseHoverElement(inlineHelpIcons, 2);
-        await expect(await isElementDisplayed(inlineHelp)).toBe(true);
-        await click(inlineHelpIcons, 2);
-        await mouseHoverElement(inlineHelpIcons, 2);
-        await expect(await isElementDisplayed(inlineHelp)).toBe(true);
-    });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await inlineHelpPage.saveExampleBaselineScreenshot();
-            await expect(await inlineHelpPage.compareWithBaseline()).toBeLessThan(5);
-        });
     });
 
     describe('Check orientation', () => {

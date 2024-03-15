@@ -12,17 +12,9 @@ import {
     refreshPage,
     scrollIntoView,
     setValue,
-    uploadFile,
     waitForElDisplayed
 } from '../../../../../e2e';
-import {
-    acceptAlertText,
-    declineAlertText,
-    formatArr,
-    imagePath,
-    imageText,
-    testText
-} from './upload-collection-contents';
+import { acceptAlertText, declineAlertText, formatArr, testText } from './upload-collection-contents';
 import { UploadCollectionPo } from './upload-collection.po';
 
 describe('File uploader component test', () => {
@@ -125,18 +117,6 @@ describe('File uploader component test', () => {
             await checkItemDecline(uploadCollectionComplexExample);
         });
 
-        xit('should check upload files', async () => {
-            // not working correctly on test runner
-            if (await browserIsSafari()) {
-                return;
-            }
-            await scrollIntoView(uploadCollectionComplexExample);
-            await uploadFile(fileUploaderInputFile, imagePath);
-            const afterUploadItems = await getElementArrayLength(uploadCollectionComplexExample + item);
-            await expect(afterUploadItems).toEqual(4);
-            await expect((await getText(uploadCollectionComplexExample + link, 3)).trim()).toBe(imageText);
-        });
-
         it('should check if file download button is active', async () => {
             await scrollIntoView(uploadCollectionComplexExample);
             await click(uploadCollectionComplexExample + checkbox);
@@ -161,13 +141,6 @@ describe('File uploader component test', () => {
             return;
         }
         await uploadCollectionPage.checkRtlSwitch();
-    });
-
-    xdescribe('Should check visual regression', () => {
-        it('should check visual regression for all examples', async () => {
-            await uploadCollectionPage.saveExampleBaselineScreenshot();
-            await expect(await uploadCollectionPage.compareWithBaseline()).toBeLessThan(5);
-        });
     });
 
     async function checkFileNameChange(example: string): Promise<void> {

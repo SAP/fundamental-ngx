@@ -188,11 +188,4 @@ describe('Input Group should', () => {
     it('should check RTL', async () => {
         await inputGroupPage.checkRtlSwitch();
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await inputGroupPage.saveExampleBaselineScreenshot();
-            await expect(await inputGroupPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

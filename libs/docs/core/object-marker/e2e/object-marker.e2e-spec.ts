@@ -54,11 +54,4 @@ describe('Object marker test suite', () => {
             await objectMarkerPage.checkRtlSwitch();
         });
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await objectMarkerPage.saveExampleBaselineScreenshot();
-            await expect(await objectMarkerPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });
