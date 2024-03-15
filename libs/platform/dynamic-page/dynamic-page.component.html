@@ -7,6 +7,7 @@
     [offset]="offset"
     [ariaLabel]="ariaLabel"
 >
+    <p>Deno TEST 3</p>
     @if (titleComponent) {
         <fd-dynamic-page-header
             [title]="titleComponent.title"
@@ -17,6 +18,7 @@
             <fd-breadcrumb>
                 <ng-template [ngTemplateOutlet]="titleComponent.breadcrumbTemplate"></ng-template>
             </fd-breadcrumb>
+            <p>Deno TEST 2</p>
             @if (titleComponent._subtitleDirective) {
                 <ng-container
                     *fdDynamicPageHeaderSubtitle="let hidden"
@@ -104,4 +106,5 @@
             <ng-template [ngTemplateOutlet]="footerComponent.contentTemplateRef"></ng-template>
         </fd-dynamic-page-footer>
     }
+    <p>Deno TEST 1</p>
 </fd-dynamic-page>

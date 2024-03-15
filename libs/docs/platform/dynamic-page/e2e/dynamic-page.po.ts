@@ -18,7 +18,8 @@ export class DynamicPagePo extends PlatformBaseComponentPo {
     dynamicPageTabsContent = '.fd-dynamic-page__content';
     dynamicPageToolBarAccept = this.dynamicPage + ' .fd-button--positive';
     dynamicPageToolBarReject = this.dynamicPage + ' .fd-button--negative';
-    dynamicPageCollapsibleHeader = this.dynamicPage + ' .fd-dynamic-page__collapsible-header-container [role="region"]';
+    dynamicPageCollapsibleHeader =
+        this.dynamicPage + ' .fd-dynamic-page__collapsible-header-container .fd-dynamic-page__collapsible-header';
 
     columnSection = 'section';
     openColumnButton = '.docs-fcl-example-section button';
