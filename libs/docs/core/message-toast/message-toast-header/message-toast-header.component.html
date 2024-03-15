@@ -30,6 +30,11 @@
             <li>You want to interrupt users while they are performing an action.</li>
             <li>You want to make sure that users read the message before they leave the page.</li>
         </ul>
+        <fd-message-strip [dismissible]="false" type="information">
+            <b>IMPORTANT</b> Message Toasts are using
+            <a href="https://material.angular.io/cdk/overlay/overview">Angular CDK Overlay</a>, for that reason you
+            would need to import its styling <code>&#64;angular/cdk/overlay-prebuilt.css</code>
+        </fd-message-strip>
     </description>
     <import module="MessageToastModule" subPackage="message-toast"></import>
 
