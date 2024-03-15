@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.53...v0.49.0-rc.54) (2024-03-15)
+
+
+### Bug Fixes
+
+* **core:** remove role region from Dynamic Page component ([#11555](https://github.com/SAP/fundamental-ngx/issues/11555)) ([fca781c](https://github.com/SAP/fundamental-ngx/commit/fca781c4c5cea5c7f491220a03ecb897851b86bf))
+
+
+
+
+
 # [0.49.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.52...v0.49.0-rc.53) (2024-03-15)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
