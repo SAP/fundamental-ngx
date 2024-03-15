@@ -18,11 +18,12 @@ export class DynamicPagePo extends PlatformBaseComponentPo {
     dynamicPageTabsContent = '.fd-dynamic-page__content';
     dynamicPageToolBarAccept = this.dynamicPage + ' .fd-button--positive';
     dynamicPageToolBarReject = this.dynamicPage + ' .fd-button--negative';
-    dynamicPageCollapsibleHeader = this.dynamicPage + ' .fd-dynamic-page__collapsible-header-container';
+    dynamicPageCollapsibleHeader =
+        this.dynamicPage + ' .fd-dynamic-page__collapsible-header-container .fd-dynamic-page__collapsible-header';
 
     columnSection = 'section';
     openColumnButton = '.docs-fcl-example-section button';
-    columnSectionHeader = 'section header';
+    columnSectionHeader = 'article header';
     columnSectionExpandIcon = '.fd-flexible-column-layout__button';
 
     async open(): Promise<void> {
