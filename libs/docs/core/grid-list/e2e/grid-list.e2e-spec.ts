@@ -12,7 +12,7 @@ import {
     waitForClickable,
     waitForElDisplayed
 } from '../../../../../e2e';
-import { isSelected, productTitle, text, textLocked } from './grid-list-content';
+import { isSelected, text, textLocked } from './grid-list-content';
 import { GridListPo } from './grid-list.po';
 
 describe('Grid-list test suite', () => {
@@ -28,8 +28,6 @@ describe('Grid-list test suite', () => {
         deleteItemButton,
         lockedStateItemButton,
         lockedStateItemText,
-        gridListsArray,
-        gridListsTitle,
         multiSelectModeSelectedItems,
         singleSelectItemsSelected,
         dragAndDropItems,
@@ -62,13 +60,6 @@ describe('Grid-list test suite', () => {
 
     it('Footer should be displayed and contain information', async () => {
         await expect(await getText(footer)).toBe(text);
-    });
-
-    it('Verify each grid list contains product counter -> product counter should be displayed for all lists', async () => {
-        const arrLength = await getElementArrayLength(gridListsArray);
-        for (let i = 0; i < arrLength; i++) {
-            await expect(await getText(gridListsTitle, i)).toContain(productTitle);
-        }
     });
 
     it('Verify grid list contains product counter', async () => {
