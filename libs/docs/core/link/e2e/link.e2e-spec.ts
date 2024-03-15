@@ -62,11 +62,4 @@ describe('Link test suite', () => {
             await linkPage.checkRtlSwitch();
         });
     });
-
-    xdescribe('visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await linkPage.saveExampleBaselineScreenshot();
-            await expect(await linkPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

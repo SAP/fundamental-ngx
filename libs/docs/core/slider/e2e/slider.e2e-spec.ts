@@ -272,15 +272,6 @@ describe('slider test suite', () => {
         });
     });
 
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await refreshPage();
-            await waitForElDisplayed(basicExamples);
-            await sliderPage.saveExampleBaselineScreenshot();
-            await expect(await sliderPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
-
     async function clickTooltipInput(): Promise<void> {
         return (await browserIsFirefox()) ? await click(sliderTooltipInputFF) : await click(sliderTooltipInput);
     }

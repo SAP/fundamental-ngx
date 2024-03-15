@@ -5,7 +5,6 @@ import {
     click,
     currentPlatformName,
     executeScriptAfterTagAttr,
-    executeScriptBeforeTagAttr,
     getElementArrayLength,
     getElementPlaceholder,
     getElementSize,
@@ -14,13 +13,11 @@ import {
     isElementDisplayed,
     isEnabled,
     mouseHoverElement,
-    pause,
     refreshPage,
     scrollIntoView,
     sendKeys,
     setValue,
-    waitForElDisplayed,
-    waitTextToBePresentInValue
+    waitForElDisplayed
 } from '../../../../../e2e';
 import {
     fifty_character_string,
@@ -31,7 +28,6 @@ import {
 import {
     basicTextareaPlaceholderArr,
     basic_text_area_label,
-    basic_text_area_popover,
     compact_text_area_label,
     counterTextareaPlaceholderArr,
     disabled_text_area_label,
@@ -102,34 +98,10 @@ describe('Verify Textarea component', () => {
             await expect(compactTextareaLabel).toBe(compact_text_area_label);
             await expect(noPlatformsFormAreaLabelText).toBe(no_platforms_form_text_area_label);
         });
-        // No example or no restriction
-        /*        xit('should be able enter maximum characters (50)', async () => {
-
-         });*/
 
         it('should not be able enter text in the disabled textarea', async () => {
             // Is not fully valid
             await expect(await isEnabled(disabledTextArea)).toBe(false);
-        });
-
-        // No example
-        /*        xit('should indicate entered invalid character with red border', async () => {
-        });*/
-
-        xit('should be able to copy paste the content into textarea', async () => {
-            await setValue(basicTextArea, fifty_character_string);
-            // await textareaPage.basicTextArea.sendKeys(testData.fifty_character_string);
-            await waitTextToBePresentInValue(basicTextArea, fifty_character_string);
-            await sendKeys([copyPasteBtn, 'a']);
-            await sendKeys([copyPasteBtn, 'c']);
-            await sendKeys('DELETE');
-            await waitTextToBePresentInValue(basicTextArea);
-            const textareaTextBefore = await getValue(basicTextArea);
-            await sendKeys([copyPasteBtn, 'v']);
-            const textareaText = await getValue(basicTextArea);
-
-            await expect(textareaTextBefore).toBe('');
-            await expect(textareaText).toBe(fifty_character_string);
         });
 
         it('should allow alphabets, numerical, special characters or combination of these (maybe postponed)', async () => {
@@ -138,8 +110,6 @@ describe('Verify Textarea component', () => {
 
             await expect(textareaText).toBe(fifty_character_string);
         });
-        // No example
-        /*        xit('should not accept restricted characters (maybe postponed)', async () => {});*/
 
         it('should check all placeholders', async () => {
             await checkPlaceholder(textareaBasicExample, basicTextareaPlaceholderArr);
@@ -149,28 +119,6 @@ describe('Verify Textarea component', () => {
                 counterTextareaPlaceholderArr[0]
             );
         });
-
-        describe('if textarea is enabled', () => {
-            xit('should be able to perform cut', async () => {
-                await setValue(basicTextArea, fifty_character_string);
-                await sendKeys([copyPasteBtn, 'a']);
-                await pause();
-                await sendKeys([copyPasteBtn, 'x']);
-                await pause();
-                const textareaTextBefore = await getValue(basicTextArea);
-                await click(basicTextArea);
-                await sendKeys([copyPasteBtn, 'v']);
-                await pause();
-                const textareaText = await getValue(basicTextArea);
-
-                await expect(textareaTextBefore).toBe('');
-                await expect(textareaText).toBe(fifty_character_string);
-            });
-        });
-
-        /*      xit('should, if disabled, be able to perform copy action ??? ', async () => {
-                });
-        */
 
         it('should have * if textarea is mandatory', async () => {
             const labelAsterisk = await executeScriptAfterTagAttr(detailedTextAreaLabel, 'content');
@@ -231,18 +179,6 @@ describe('Verify Textarea component', () => {
             await expect(textareaSizeBefore.height).toBe(textareaSizeAfter.height);
         });
 
-        xit('should grow if growing option is enabled (growing up to 5 lines)', async () => {
-            await clearValue(growingMaxLinesTextarea);
-            const textareaSize1 = await getElementSize(growingMaxLinesTextarea);
-            await setValue(growingMaxLinesTextarea, multiple_lines_text);
-            const textareaSize2 = await getElementSize(growingMaxLinesTextarea);
-            await addValue(growingMaxLinesTextarea, multiple_lines_text);
-            const textareaSize3 = await getElementSize(growingMaxLinesTextarea);
-
-            await expect(textareaSize1.height).toBeLessThan(textareaSize2.height);
-            await expect(textareaSize2.height).toEqual(textareaSize3.height);
-        });
-
         it('should grow if growing option is enabled (growing up to 80px)', async () => {
             if (await browserIsSafari()) {
                 return;
@@ -291,28 +227,6 @@ describe('Verify Textarea component', () => {
 
         it('should check over limit message for counter template textarea', async () => {
             await checkOverLimitMessage(textareaCounterTemplateExample, 10);
-        });
-
-        // Disabled due to changes in inline help - now there is an icon instead of text
-        xdescribe('have a visual cue ', () => {
-            it('should have ? mark by default', async () => {
-                const popoverIconContent = await executeScriptBeforeTagAttr(basicTextAreaPopoverIcon, 'content');
-                await expect(popoverIconContent).toBe('"?"');
-            });
-
-            it('should have popover with text', async () => {
-                await mouseHoverElement(basicTextAreaPopoverIcon);
-                await waitForElDisplayed(basicTextAreaPopoverBody);
-                const popoverText = await getText(basicTextAreaPopoverBody);
-                await expect(popoverText).toContain(basic_text_area_popover);
-            });
-        });
-
-        xdescribe('Check visual regression', () => {
-            it('should check examples visual regression', async () => {
-                await textareaPage.saveExampleBaselineScreenshot();
-                await expect(await textareaPage.compareWithBaseline()).toBeLessThan(5);
-            });
         });
     });
 

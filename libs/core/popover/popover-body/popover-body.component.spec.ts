@@ -2,10 +2,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PopoverBodyComponent } from './popover-body.component';
 import { ESCAPE } from '@angular/cdk/keycodes';
-import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
 import { PopoverModule } from '../popover.module';
 import { A11yModule } from '@angular/cdk/a11y';
-import { DefaultPositions } from '@fundamental-ngx/core/shared';
 
 describe('PopoverBodyComponent', () => {
     let component: PopoverBodyComponent;
@@ -33,29 +31,5 @@ describe('PopoverBodyComponent', () => {
         component._closeOnEscapeKey = true;
         component.bodyKeyupHandler(keyboardEvent);
         expect(component.onClose.next).toHaveBeenCalled();
-    });
-
-    xit('should change arrow classes', () => {
-        jest.spyOn(<any>component, '_addMarginStyle');
-
-        const firstPosition: ConnectedPosition = DefaultPositions[0];
-
-        component._setArrowStyles(firstPosition, 'ltr');
-
-        expect(component._arrowClasses).toEqual(
-            `fd-popover__body--above fd-popover__body--arrow-bottom fd-popover__body--arrow-x-start`
-        );
-    });
-
-    xit('should change arrow classes 2', () => {
-        jest.spyOn(<any>component, '_addMarginStyle');
-
-        const firstPosition: ConnectedPosition = DefaultPositions[5];
-
-        component._setArrowStyles(firstPosition, 'ltr');
-
-        expect(component._arrowClasses).toEqual(
-            `fd-popover__body--above fd-popover__body--arrow-bottom fd-popover__body--arrow-x-end`
-        );
     });
 });

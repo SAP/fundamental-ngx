@@ -223,11 +223,6 @@ describe('Wizard component test', () => {
         await wizardPage.checkRtlSwitch();
     });
 
-    xit('should check examples visual regression', async () => {
-        await wizardPage.saveExampleBaselineScreenshot();
-        await expect(await wizardPage.compareWithBaseline()).toBeLessThan(5);
-    });
-
     async function checkReOpen(section: string, block: string): Promise<void> {
         await click(section + button);
         if (section === dialogExample) {

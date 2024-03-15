@@ -66,9 +66,4 @@ describe('List byline test suite', () => {
     it('should check RTL and LTR orientation', async () => {
         await listBylinePage.checkRtlSwitch();
     });
-
-    xit('should check visual regression for all examples', async () => {
-        await listBylinePage.saveExampleBaselineScreenshot();
-        await expect(await listBylinePage.compareWithBaseline()).toBeLessThan(5);
-    });
 });

@@ -1,14 +1,12 @@
 import {
     browserIsSafari,
     click,
-    elementDisplayed,
     getElementArrayLength,
     getElementLocation,
     getText,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForInvisibilityOf
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { FixedCardLayoutPo } from './fixed-card-layout.po';
 
@@ -88,57 +86,6 @@ describe('Fixed card layout test suite', () => {
             await expect(newSwapCardText).not.toBe(originalSwapCardText);
         });
 
-        // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/7342
-        xit('should check placeholder exists on drag', async () => {
-            await scrollIntoView(cardDivArr);
-            const clickElement = cardContentArr;
-            const locationElement = cardDivArr;
-
-            const clickXLocation = Math.floor(await getElementLocation(clickElement, 0, 'x'));
-            const clickYLocation = Math.floor(await getElementLocation(clickElement, 0, 'y'));
-            const startXLocation = Math.floor(await getElementLocation(locationElement, 0, 'x'));
-            const startYLocation = Math.floor(await getElementLocation(locationElement, 0, 'y'));
-            const endXLocation = Math.floor(await getElementLocation(locationElement, 4, 'x'));
-            const endYLocation = Math.floor(await getElementLocation(locationElement, 4, 'y'));
-
-            await browser.performActions([
-                {
-                    type: 'pointer',
-                    id: 'pointer1',
-                    parameters: { pointerType: 'mouse' },
-                    actions: [
-                        { type: 'pointerMove', duration: 0, x: clickXLocation, y: clickYLocation },
-                        { type: 'pointerDown', button: 0 },
-                        { type: 'pause', duration: 1000 },
-                        { type: 'pointerMove', duration: 600, x: startXLocation, y: startYLocation },
-                        { type: 'pointerMove', duration: 1000, x: endXLocation + 30, y: endYLocation + 30 }
-                    ]
-                }
-            ]);
-
-            await expect(await elementDisplayed(placeholderCard)).toBe(true);
-        });
-
-        // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/3910
-        xit('should check columns are reactive', async () => {
-            const originalCardColumnsCount = await getElementArrayLength(cardColumnArr);
-
-            await click(navigationMenuBtn);
-            await waitForInvisibilityOf(pageSidebar);
-            const newCardColumnsCount = await getElementArrayLength(cardColumnArr);
-            await expect(originalCardColumnsCount).not.toEqual(newCardColumnsCount);
-        });
-
-        // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/3910
-        xit('should check cards are reactive to columns', async () => {
-            const originalLastCardText = await getText(cardDivArr, 8);
-
-            await click(navigationMenuBtn, 0);
-            await waitForInvisibilityOf(pageSidebar);
-            const newLastCardText = await getText(cardDivArr, 8);
-            await expect(originalLastCardText).not.toEqual(newLastCardText);
-        });
-
         it('should check drag and drop is disabled', async () => {
             const originalFirstCardText = await getText(disabledCardDiv);
 
@@ -154,13 +101,6 @@ describe('Fixed card layout test suite', () => {
         describe('Check orientation', () => {
             it('should check LTR and RTL orientation', async () => {
                 await fxdCardLayoutPage.checkRtlSwitch();
-            });
-        });
-
-        xdescribe('Check visual regression', () => {
-            it('should check examples visual regression', async () => {
-                await fxdCardLayoutPage.saveExampleBaselineScreenshot();
-                await expect(await fxdCardLayoutPage.compareWithBaseline()).toBeLessThan(5);
             });
         });
     });

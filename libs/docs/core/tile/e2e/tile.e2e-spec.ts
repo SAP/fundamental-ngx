@@ -85,11 +85,6 @@ describe('Tile component test', () => {
         await expect(await getElementClass(columnsTileFooter)).toContain('2-col');
     });
 
-    xit('should check visual regression for all examples', async () => {
-        await tilePage.saveExampleBaselineScreenshot();
-        await expect(await tilePage.compareWithBaseline()).toBeLessThan(5);
-    });
-
     it('should check RTL and LTR orientation', async () => {
         await tilePage.checkRtlSwitch();
     });

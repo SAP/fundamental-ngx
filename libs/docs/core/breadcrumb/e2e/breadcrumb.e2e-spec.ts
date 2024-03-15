@@ -36,11 +36,4 @@ describe('Breadcrumb test suite:', () => {
             await waitForElDisplayed(disabledLinks, i);
         }
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await breadcrumbPage.saveExampleBaselineScreenshot();
-            await expect(await breadcrumbPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

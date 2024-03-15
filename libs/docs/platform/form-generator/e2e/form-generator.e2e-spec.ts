@@ -1,7 +1,5 @@
 import {
-    browserIsSafari,
     click,
-    clickAndMoveElement,
     doesItExist,
     getElementArrayLength,
     getElementClass,
@@ -150,28 +148,6 @@ describe('Form generator test suite', () => {
         it('should check password validation', async () => {
             await checkPasswordValidation(programmaticExample);
         });
-    });
-
-    xit('should check custom controls example', async () => {
-        await scrollIntoView(sliderPoint);
-        await clickAndMoveElement(sliderPoint, -400, 0);
-        await expect(await doesItExist(formValue)).toBe(false, 'form value row exists');
-        await click(customExample + submitButton);
-        if (!(await browserIsSafari())) {
-            await expect(await getText(formValue)).toEqual(
-                'Form value: { "some_slider": { "value": 10, "label": "Ten" } }'
-            );
-        }
-        if (await browserIsSafari()) {
-            await expect(await getText(formValue)).toEqual(
-                'Form value: {\n' +
-                    '  "some_slider": {\n' +
-                    '    "value": 10,\n' +
-                    '    "label": "Ten"\n' +
-                    '  }\n' +
-                    '}'
-            );
-        }
     });
 
     it('should check custom error example', async () => {

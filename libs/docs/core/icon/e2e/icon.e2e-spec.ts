@@ -7,11 +7,6 @@ describe('Icon test suite', () => {
         await iconPage.open();
     }, 1);
 
-    xit('should check visual regression for all examples', async () => {
-        await iconPage.saveExampleBaselineScreenshot();
-        await expect(await iconPage.compareWithBaseline()).toBeLessThan(5);
-    });
-
     it('should check orientation', async () => {
         await iconPage.checkRtlSwitch();
     });

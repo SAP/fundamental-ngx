@@ -34,11 +34,4 @@ describe('Object identifier test suite', () => {
             await objectIdentifierPage.checkRtlSwitch();
         });
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await objectIdentifierPage.saveExampleBaselineScreenshot();
-            await expect(await objectIdentifierPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

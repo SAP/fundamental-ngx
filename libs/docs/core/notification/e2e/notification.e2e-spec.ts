@@ -1,6 +1,5 @@
 import {
     click,
-    doesItExist,
     getElementClass,
     getText,
     isElementDisplayed,
@@ -98,34 +97,6 @@ describe('Notification component test', () => {
         await click(openTemplateExample + button);
         await click(notificationContainer + closeButton);
         await expect(await getText(openTemplateExample + result)).toContain('Close Button Click');
-    });
-
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6533
-    xit('should check group example', async () => {
-        await click(groupExample + button);
-        await expect(await isElementDisplayed(cdkOverlay + notification)).toBe(true, `notifications is not opened`);
-        for (let i = 0; i < 3; i++) {
-            await click(cdkOverlay + tabsItem, i);
-            await expect(await isElementDisplayed(cdkOverlay + tabPanel, i)).toBe(true);
-        }
-    });
-
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6533
-    xit('should check collapsibing in group example', async () => {
-        await click(groupExample + button);
-        for (let i = 0; i < 3; i++) {
-            await scrollIntoView(cdkOverlay + tabsItem, i);
-            await click(cdkOverlay + tabsItem, i);
-            if (i === 3) {
-                await scrollIntoView(cdkOverlay + notificationHeader + button);
-                await click(cdkOverlay + notificationHeader + button);
-                await click(cdkOverlay + notificationHeader + button, 3);
-            }
-            if (i !== 3) {
-                await click(cdkOverlay + notificationHeader + button);
-            }
-            await expect(await doesItExist(cdkOverlay + notificationBody)).toBe(false);
-        }
     });
 
     it('should check approve actions with notification', async () => {

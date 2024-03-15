@@ -1,22 +1,18 @@
 import {
-    checkElementScreenshot,
     click,
     doesItExist,
     getElementArrayLength,
     getElementPlaceholder,
-    getImageTagBrowserPlatform,
     getText,
     getValue,
     isEnabled,
     refreshPage,
-    saveElementScreenshot,
     scrollIntoView,
     sendKeys,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
-import { altValidTime, defaultValidTime, text, time } from './time-picker';
+import { altValidTime, defaultValidTime, text } from './time-picker';
 import { TimePickerPO } from './time-picker.po';
 
 describe('Time picker suite', () => {
@@ -101,22 +97,6 @@ describe('Time picker suite', () => {
         }
     });
 
-    // skipped due to infinity cycle on saucelabs
-    xit('Verify user is able to set time', async () => {
-        const activeButtonsLength = await getElementArrayLength(activeTimePickerButton);
-        for (let i = 0; i < activeButtonsLength; i++) {
-            if (i === 3 || i === 8 || i === 13) {
-                continue;
-            }
-            await scrollIntoView(activeTimePickerButton, i);
-            await click(activeTimePickerButton, i);
-            await selectHoursAndMinutes(11);
-            await sendKeys(['Escape']);
-            await expect(await doesItExist(timerExpanded)).toBe(false);
-            await expect(await getValue(activeTimePickerInput, i)).toBe(time);
-        }
-    });
-
     it('Verify null validity for basic time picker ', async () => {
         await scrollIntoView(activeTimePickerButton, 5);
         await expect(await doesItExist(errorBorder)).toBe(false);
@@ -173,36 +153,6 @@ describe('Time picker suite', () => {
 
     it('Verify LTR / RTL switcher', async () => {
         await timePickerPage.checkRtlSwitch();
-    });
-
-    xdescribe('Check visual regression', () => {
-        beforeEach(async () => {
-            await refreshPage();
-            await waitForPresent(timePickerInput);
-        }, 1);
-
-        it('should check examples visual regression', async () => {
-            await timePickerPage.saveExampleBaselineScreenshot();
-            await expect(await timePickerPage.compareWithBaseline()).toBeLessThan(5);
-        });
-
-        it('should check time picker visual regression', async () => {
-            await scrollIntoView(activeTimePickerButton);
-            await click(activeTimePickerButton);
-            await waitForElDisplayed(timerExpanded);
-            await saveElementScreenshot(
-                timerExpanded,
-                `time-picker-expanded-example-platform-${await getImageTagBrowserPlatform()}`,
-                await timePickerPage.getScreenshotFolder()
-            );
-            await expect(
-                await checkElementScreenshot(
-                    timerExpanded,
-                    `time-picker-expanded-example-platform-${await getImageTagBrowserPlatform()}`,
-                    await timePickerPage.getScreenshotFolder()
-                )
-            ).toBeLessThan(5);
-        });
     });
 
     async function selectHoursAndMinutes(

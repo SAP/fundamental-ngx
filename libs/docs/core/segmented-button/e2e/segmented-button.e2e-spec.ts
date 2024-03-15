@@ -133,29 +133,9 @@ describe('Select component:', () => {
             }
         });
 
-        // TODO: https://github.com/SAP/fundamental-ngx/issues/8791
-        xit('should check touched status in Form Example', async () => {
-            await expect(
-                (await getText(formExample + firstFormButtonsSection + chosenValue + ':nth-child(8)')).trim()
-            ).toEqual('Touched: false');
-            await expect(await getElementClass(firstFormSegment)).toContain('ng-untouched');
-            await click(firstFormSegment + button);
-            await expect(await getElementClass(firstFormSegment)).not.toContain('ng-untouched');
-            await expect(
-                (await getText(formExample + firstFormButtonsSection + chosenValue + ':nth-child(8)')).trim()
-            ).toEqual('Touched: true');
-        });
-
         describe('check orientation', () => {
             it('should check RTL and LTR orientation', async () => {
                 await segmentedButtonPage.checkRtlSwitch();
-            });
-        });
-
-        xdescribe('Check visual regression', () => {
-            it('should check examples visual regression', async () => {
-                await segmentedButtonPage.saveExampleBaselineScreenshot();
-                await expect(await segmentedButtonPage.compareWithBaseline()).toBeLessThan(5);
             });
         });
     });

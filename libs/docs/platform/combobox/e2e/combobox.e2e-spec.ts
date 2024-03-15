@@ -175,20 +175,4 @@ describe('Combobox test suite', () => {
             await expect(textArr.sort()).toEqual(textArr);
         }
     });
-
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/7111
-    xit('should check that value is not present in the input until you click Save', async () => {
-        const defaultValue = await getValue(mobileComboBoxInput);
-        await scrollIntoView(mobileComboBoxInput);
-        await click(mobileComboBoxInput);
-        await click(optionsArray);
-        await expect(await getValue(mobileComboBoxInput)).toBe(defaultValue);
-    });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await comboBoxPage.saveExampleBaselineScreenshot();
-            await expect(await comboBoxPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

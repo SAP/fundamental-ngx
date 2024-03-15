@@ -24,17 +24,4 @@ describe('Page Footer test suite:', () => {
     it('should check page footer text', async () => {
         await checkElementTextValue(pageFooterText, footerTextArr);
     });
-
-    xdescribe('Check visual regression basic', () => {
-        it('should check examples visual regression', async () => {
-            await pageFooterPage.saveExampleBaselineScreenshot();
-            await expect(await pageFooterPage.compareWithBaseline()).toBeLessThan(5);
-        });
-
-        describe('Check orientation', () => {
-            it('Verify RTL and LTR orientation', async () => {
-                await pageFooterPage.checkRtlSwitch();
-            });
-        });
-    });
 });

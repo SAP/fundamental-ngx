@@ -1,4 +1,4 @@
-import { B, DOWN_ARROW, END, ENTER, ESCAPE, HOME, SPACE, TAB, X } from '@angular/cdk/keycodes';
+import { B, DOWN_ARROW, END, ENTER, ESCAPE, HOME, SPACE, X } from '@angular/cdk/keycodes';
 import { ModifierKeys } from '@angular/cdk/testing';
 import { ChangeDetectionStrategy, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
@@ -285,14 +285,6 @@ describe('SelectComponent', () => {
     });
 
     describe('keyboard navigation', () => {
-        xit('should focus select when we TABin to it', async () => {
-            document.body.focus();
-
-            jest.spyOn(component, 'focus');
-            triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', TAB));
-            await wait(fixture);
-            expect(component.focus).toHaveBeenCalled();
-        });
 
         it('should navigate to second item, when pressing ArrowDown and FirstItem is focused', async () => {
             component.value = 'value-1';
