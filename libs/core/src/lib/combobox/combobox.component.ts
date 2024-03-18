@@ -438,46 +438,50 @@ export class ComboboxComponent
     }
 
     /** @hidden */
-    onInputKeydownHandler(event: KeyboardEvent): void {
+    onInputKeydownHandler(event: KeyboardEvent | ClipboardEvent): void {
         if (this.readOnly) {
             return;
         }
 
-        if (KeyUtil.isKeyCode(event, TAB) && this.open) {
-            this._close();
-            return;
-        }
-
-        if (KeyUtil.isKeyCode(event, ENTER)) {
-            if (this.searchFn) {
-                this.searchFn();
-            }
-        } else if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
-            if (event.altKey) {
-                this._resetDisplayedValues();
-                this.isOpenChangeHandle(true);
-            }
-            if (this.open && this.listComponent) {
-                this.listComponent.setItemActive(0);
-            } else if (!this.open) {
-                this._chooseOtherItem(1);
-            }
-            event.preventDefault();
-        } else if (KeyUtil.isKeyCode(event, UP_ARROW)) {
-            this._chooseOtherItem(-1);
-            event.preventDefault();
-        } else if (KeyUtil.isKeyCode(event, this.closingKeys)) {
-            this.isOpenChangeHandle(false);
-            event.stopPropagation();
-        } else if (
-            this.openOnKeyboardEvent &&
-            !event.ctrlKey &&
-            !event.altKey &&
-            !KeyUtil.isKeyCode(event, this.nonOpeningKeys)
-        ) {
+        if (event instanceof ClipboardEvent) {
             this.isOpenChangeHandle(true);
-            if (this.isEmptyValue && KeyUtil.isKeyType(event, 'control') && !KeyUtil.isKeyCode(event, BACKSPACE)) {
-                this.listComponent.setItemActive(0);
+        } else {
+            if (KeyUtil.isKeyCode(event, TAB) && this.open) {
+                this._close();
+                return;
+            }
+
+            if (KeyUtil.isKeyCode(event, ENTER)) {
+                if (this.searchFn) {
+                    this.searchFn();
+                }
+            } else if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
+                if (event.altKey) {
+                    this._resetDisplayedValues();
+                    this.isOpenChangeHandle(true);
+                }
+                if (this.open && this.listComponent) {
+                    this.listComponent.setItemActive(0);
+                } else if (!this.open) {
+                    this._chooseOtherItem(1);
+                }
+                event.preventDefault();
+            } else if (KeyUtil.isKeyCode(event, UP_ARROW)) {
+                this._chooseOtherItem(-1);
+                event.preventDefault();
+            } else if (KeyUtil.isKeyCode(event, this.closingKeys)) {
+                this.isOpenChangeHandle(false);
+                event.stopPropagation();
+            } else if (
+                this.openOnKeyboardEvent &&
+                !event.ctrlKey &&
+                !event.altKey &&
+                !KeyUtil.isKeyCode(event, this.nonOpeningKeys)
+            ) {
+                this.isOpenChangeHandle(true);
+                if (this.isEmptyValue && KeyUtil.isKeyType(event, 'control') && !KeyUtil.isKeyCode(event, BACKSPACE)) {
+                    this.listComponent.setItemActive(0);
+                }
             }
         }
     }
