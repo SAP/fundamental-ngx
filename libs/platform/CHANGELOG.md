@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.55...v0.49.0-rc.56) (2024-03-18)
+
+
+### Bug Fixes
+
+* **platform:** add input to remove space node from ApprovalFlow graph ([#11545](https://github.com/SAP/fundamental-ngx/issues/11545)) ([5a32a9e](https://github.com/SAP/fundamental-ngx/commit/5a32a9e0a672a2d555269e0384f2b058afd29446))
+
+
+
+
+
 # [0.49.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.54...v0.49.0-rc.55) (2024-03-18)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
