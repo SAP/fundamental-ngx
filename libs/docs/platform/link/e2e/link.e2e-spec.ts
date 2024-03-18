@@ -132,13 +132,6 @@ describe('Link component test suite', () => {
     it('should check orientation', async () => {
         await linkPage.checkRtlSwitch();
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await linkPage.saveExampleBaselineScreenshot();
-            await expect(await linkPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });
 
 async function checkLinkData(element, index: number = 0): Promise<void> {

@@ -3,6 +3,70 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.53...v0.49.0-rc.54) (2024-03-15)
+
+**Note:** Version bump only for package @fundamental-ngx/datetime-adapter
+
+
+
+
+
+# [0.49.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.52...v0.49.0-rc.53) (2024-03-15)
+
+**Note:** Version bump only for package @fundamental-ngx/datetime-adapter
+
+
+
+
+
+# [0.49.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.51...v0.49.0-rc.52) (2024-03-15)
+
+**Note:** Version bump only for package @fundamental-ngx/datetime-adapter
+
+
+
+
+
+# [0.49.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.50...v0.49.0-rc.51) (2024-03-15)
+
+**Note:** Version bump only for package @fundamental-ngx/datetime-adapter
+
+
+
+
+
+# [0.49.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.49...v0.49.0-rc.50) (2024-03-15)
+
+**Note:** Version bump only for package @fundamental-ngx/datetime-adapter
+
+
+
+
+
+# [0.49.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.48...v0.49.0-rc.49) (2024-03-14)
+
+**Note:** Version bump only for package @fundamental-ngx/datetime-adapter
+
+
+
+
+
+# [0.49.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.47...v0.49.0-rc.48) (2024-03-14)
+
+**Note:** Version bump only for package @fundamental-ngx/datetime-adapter
+
+
+
+
+
+# [0.49.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.46...v0.49.0-rc.47) (2024-03-14)
+
+**Note:** Version bump only for package @fundamental-ngx/datetime-adapter
+
+
+
+
+
 # [0.49.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.45...v0.49.0-rc.46) (2024-03-13)
 
 **Note:** Version bump only for package @fundamental-ngx/datetime-adapter

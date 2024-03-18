@@ -170,14 +170,6 @@ describe('List test suite:', () => {
             await checkElementText(singleListItems);
             await checkElArrIsClickable(singleListItems);
         });
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7245
-        xit('should check selection', async () => {
-            const radioBtnLength = await getElementArrayLength(singleRadioBtn);
-            for (let i = 0; i < radioBtnLength; i++) {
-                await click(singleRadioBtnInput, i);
-                await expect(await getAttributeByName(singleRadioBtn, 'aria-selected')).toBe('true');
-            }
-        });
     });
 
     describe('Navigation Indication examples:', () => {
@@ -296,15 +288,6 @@ describe('List test suite:', () => {
     describe('check orientation', () => {
         it('should check RTL and LTR orientation', async () => {
             await listPage.checkRtlSwitch();
-        });
-    });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await refreshPage();
-            await waitForElDisplayed(listPage.title);
-            await listPage.saveExampleBaselineScreenshot();
-            await expect(await listPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

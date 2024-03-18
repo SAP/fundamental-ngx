@@ -5,7 +5,6 @@ import {
     getText,
     getValue,
     isElementClickable,
-    isElementDisplayed,
     mouseHoverElement,
     refreshPage,
     scrollIntoView,
@@ -77,22 +76,5 @@ describe('Form Message test suite:', () => {
         await setValue(messageWithTextArea, testMultilineText);
         await expect(await getValue(messageWithTextArea)).toBe(testMultilineText);
         await expect((await getText(messageInformation)).trim()).toBe(eventMessageTextArea);
-    });
-
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6982
-    xit('should check that messaging by hover does not work in other way after clicking button', async () => {
-        await scrollIntoView(messageWithInputGroup, 2);
-        await mouseHoverElement(messageWithInputGroup, 2);
-        await expect(await isElementDisplayed(messageInformation)).toBe(true);
-        await click(buttons, 2);
-        await mouseHoverElement(messageWithInputGroup, 2);
-        await expect(await isElementDisplayed(messageInformation)).toBe(true);
-    });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await formMessagePage.saveExampleBaselineScreenshot();
-            await expect(await formMessagePage.compareWithBaseline()).toBeLessThan(5);
-        });
     });
 });

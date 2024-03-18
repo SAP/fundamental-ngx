@@ -75,11 +75,6 @@ describe('Split-button test suite', () => {
         await splitButtonPage.checkRtlSwitch();
     });
 
-    xit('should check examples visual regression', async () => {
-        await splitButtonPage.saveExampleBaselineScreenshot();
-        await expect(await splitButtonPage.compareWithBaseline()).toBeLessThan(5);
-    });
-
     async function checkMenuOpens(section: string): Promise<void> {
         await scrollIntoView(section);
         const itemsLength = await getElementArrayLength(section + arrowDownBtn);

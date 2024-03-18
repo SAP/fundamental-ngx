@@ -1,11 +1,8 @@
 import {
-    checkElementScreenshot,
     getElementArrayLength,
-    getImageTagBrowserPlatform,
     isElementClickable,
     isElementDisplayed,
     refreshPage,
-    saveElementScreenshot,
     scrollIntoView,
     waitForElDisplayed
 } from '../../../../../e2e';
@@ -69,31 +66,5 @@ describe('Bar test suite:', () => {
             await scrollIntoView(saveCancelButtons, i);
             await expect(await isElementClickable(saveCancelButtons, i)).toBe(true);
         }
-    });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            const exampleCount = await getElementArrayLength(barPage.exampleAreaContainersArr);
-            for (let i = 0; i < exampleCount; i++) {
-                // not working for floating footer example (index 5)
-                if (i !== 5) {
-                    await scrollIntoView(barPage.exampleAreaContainersArr, i);
-                    await saveElementScreenshot(
-                        barPage.exampleAreaContainersArr,
-                        `bar-example-${i}-core-${await getImageTagBrowserPlatform()}`,
-                        await barPage.getScreenshotFolder(),
-                        i
-                    );
-                    await expect(
-                        await checkElementScreenshot(
-                            barPage.exampleAreaContainersArr,
-                            `bar-example-${i}-core-${await getImageTagBrowserPlatform()}`,
-                            await barPage.getScreenshotFolder(),
-                            i
-                        )
-                    ).toBeLessThan(5);
-                }
-            }
-        });
     });
 });

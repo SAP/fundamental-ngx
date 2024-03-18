@@ -6,7 +6,6 @@ import {
     clickAndDragElement,
     getAttributeByName,
     getElementArrayLength,
-    getElementClass,
     getElementLocation,
     getText,
     isElementDisplayed,
@@ -15,7 +14,7 @@ import {
     scrollIntoView,
     waitForElDisplayed
 } from '../../../../../e2e';
-import { active, imgSource, loadErrorMsg, numberedPages } from './carousel-contents';
+import { imgSource, loadErrorMsg, numberedPages } from './carousel-contents';
 
 describe('Carousel test suite', () => {
     const carouselPage = new CarouselPo();
@@ -56,17 +55,6 @@ describe('Carousel test suite', () => {
 
             await clickAndDragElement(imgLocationX + 10, imgLocationY + 10, imgLocationX - 200, imgLocationY);
             await expect(await getAttributeByName(displayedImg, imgSource)).not.toBe(firstImg);
-        });
-
-        // skip due to cannot reproduce failing, needs deeper investigation
-        xit('should check page indicator dots', async () => {
-            await click(navBtns, 1);
-            await expect(await getElementClass(pageIndicators, 1)).toContain(active);
-            await expect(await getElementClass(pageIndicators, 2)).not.toContain(active);
-            await expect(await getElementClass(pageIndicators)).not.toContain(active);
-            await click(navBtns, 1);
-            await expect(await getElementClass(pageIndicators, 2)).toContain(active);
-            await expect(await getElementClass(pageIndicators, 3)).not.toContain(active);
         });
     });
 

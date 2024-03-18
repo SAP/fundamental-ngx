@@ -167,11 +167,6 @@ describe('Wizard generator test suite', () => {
             it('should check navigation by steps', async () => {
                 await checkNavigationBySteps(defaultExample);
             });
-
-            // TODO: https://github.com/SAP/fundamental-ngx/issues/8802
-            xit('should check navigation by scrolling', async () => {
-                await checkNavigationByScrolling(defaultExample);
-            });
         });
     });
 
@@ -228,11 +223,6 @@ describe('Wizard generator test suite', () => {
 
             it('should check navigation by steps', async () => {
                 await checkNavigationBySteps(responsiveExample);
-            });
-
-            // TODO: https://github.com/SAP/fundamental-ngx/issues/8802
-            xit('should check navigation by scrolling', async () => {
-                await checkNavigationByScrolling(responsiveExample);
             });
         });
     });
@@ -293,11 +283,6 @@ describe('Wizard generator test suite', () => {
 
             it('should check navigation by steps', async () => {
                 await checkNavigationBySteps(visibleSummaryExample);
-            });
-
-            xit('should check navigation by scrolling', async () => {
-                // skipped due to https://github.com/SAP/fundamental-ngx/issues/7046
-                await checkNavigationByScrolling(visibleSummaryExample);
             });
         });
     });
@@ -471,11 +456,6 @@ describe('Wizard generator test suite', () => {
             it('should check navigation by steps', async () => {
                 await checkNavigationBySteps(summaryObjectsExample);
             });
-
-            xit('should check navigation by scrolling', async () => {
-                // skipped due to https://github.com/SAP/fundamental-ngx/issues/7046
-                await checkNavigationByScrolling(summaryObjectsExample);
-            });
         });
     });
 
@@ -545,11 +525,6 @@ describe('Wizard generator test suite', () => {
 
         it('should check navigation by steps', async () => {
             await checkNavigationBySteps(onChangeExample);
-        });
-
-        // TODO: https://github.com/SAP/fundamental-ngx/issues/8802
-        xit('should check navigation by scrolling', async () => {
-            await checkNavigationByScrolling(onChangeExample);
         });
     });
 
@@ -779,35 +754,6 @@ describe('Wizard generator test suite', () => {
             });
         });
         describe('Other cases', () => {
-            // TODO: https://github.com/SAP/fundamental-ngx/issues/9461
-            xit('should check required fields validation', async () => {
-                await openDialog(branchingExample, 1500);
-                await click(dialog + nextStepBtn2);
-                await expect(await getElementClass(dialog + selectControl)).toContain('error', 'error is not appeared');
-                await click(dialog + select);
-                await pause(await getPauseTime());
-                await click(listItem);
-                await click(dialog + nextStepBtn2);
-                await click(dialog + nextStepBtn2);
-                await pause(await getPauseTime());
-                await expect(await getElementClass(dialog + input)).toContain('error', 'error is not appeared');
-                await pause(await getPauseTime());
-                await setValue(dialog + input, name);
-                await setValue(dialog + input, firstAdress, 1);
-                await click(dialog + nextStepBtn2);
-                await click(dialog + nextStepBtn2);
-                await pause(await getPauseTime());
-                await expect(await getElementClass(dialog + selectControl)).toContain('error', 'error is not appeared');
-                await click(dialog + select);
-                await pause(await getPauseTime());
-                await click(listItem);
-                await pause(await getPauseTime());
-                await click(dialog + nextStepBtn2);
-                await click(dialog + nextStepBtn2);
-                await pause(await getPauseTime());
-                await expect(await getElementClass(dialog + input)).toContain('error', 'error is not appeared');
-            });
-
             it('should check navigation by steps', async () => {
                 await openDialog(branchingExample);
                 await checkNavigationBySteps(dialog);

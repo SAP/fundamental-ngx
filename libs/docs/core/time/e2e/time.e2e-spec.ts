@@ -1,20 +1,15 @@
 import {
     browserIsFirefox,
-    checkElementScreenshot,
     click,
     clickAndMoveElement,
     clickNextElement,
     clickPreviousElement,
     doesItExist,
-    getElementArrayLength,
     getElementClass,
-    getImageTagBrowserPlatform,
     getNextElementText,
     getPreviousElementText,
     getText,
     refreshPage,
-    saveElementScreenshot,
-    scrollIntoView,
     waitForElDisplayed
 } from '../../../../../e2e';
 import { sections } from './time-contents';
@@ -126,29 +121,6 @@ describe('Time component test', () => {
 
     it('should check orientation', async () => {
         await timePage.checkRtlSwitch();
-    });
-
-    xdescribe('Visual regression', () => {
-        it('should check examples except dinamyc changes example', async () => {
-            const actionSheetCount = await getElementArrayLength(exampleAreaContainersArr);
-            for (let i = 0; actionSheetCount > i; i++) {
-                if (i !== 3) {
-                    await scrollIntoView(exampleAreaContainersArr, i);
-                    await saveElementScreenshot(
-                        exampleAreaContainersArr,
-                        `time-example-${i}-core-${await getImageTagBrowserPlatform()}`,
-                        await timePage.getScreenshotFolder()
-                    );
-                    await expect(
-                        await checkElementScreenshot(
-                            exampleAreaContainersArr,
-                            `time-example-${i}-core-${await getImageTagBrowserPlatform()}`,
-                            await timePage.getScreenshotFolder()
-                        )
-                    ).toBeLessThan(5);
-                }
-            }
-        });
     });
 
     async function checkClockMoving(section: string, action: 'arrowClick' | 'buttonClick'): Promise<void> {

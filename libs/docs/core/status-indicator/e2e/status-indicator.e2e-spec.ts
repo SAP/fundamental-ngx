@@ -24,11 +24,4 @@ describe('Status indicator component test', () => {
     it('should check RTL and LTR orientation', async () => {
         await statusIndicatorPage.checkRtlSwitch();
     });
-
-    xdescribe('Should check visual regression', () => {
-        it('should check visual regression for all examples', async () => {
-            await statusIndicatorPage.saveExampleBaselineScreenshot();
-            await expect(await statusIndicatorPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

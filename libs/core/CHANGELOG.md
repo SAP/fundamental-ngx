@@ -3,6 +3,79 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.53...v0.49.0-rc.54) (2024-03-15)
+
+
+### Bug Fixes
+
+* **core:** remove role region from Dynamic Page component ([#11555](https://github.com/SAP/fundamental-ngx/issues/11555)) ([fca781c](https://github.com/SAP/fundamental-ngx/commit/fca781c4c5cea5c7f491220a03ecb897851b86bf))
+
+
+
+
+
+# [0.49.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.52...v0.49.0-rc.53) (2024-03-15)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.49.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.51...v0.49.0-rc.52) (2024-03-15)
+
+
+### Bug Fixes
+
+* **core:** add a11y fixes for Select control ([#11558](https://github.com/SAP/fundamental-ngx/issues/11558)) ([a18db7d](https://github.com/SAP/fundamental-ngx/commit/a18db7deaf00de387a38612d706361e96f84ed07))
+
+
+
+
+
+# [0.49.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.50...v0.49.0-rc.51) (2024-03-15)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.49.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.49...v0.49.0-rc.50) (2024-03-15)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.49.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.48...v0.49.0-rc.49) (2024-03-14)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.49.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.47...v0.49.0-rc.48) (2024-03-14)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.49.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.46...v0.49.0-rc.47) (2024-03-14)
+
+
+### Features
+
+* **core:** add auto height option for Grid List items ([#11544](https://github.com/SAP/fundamental-ngx/issues/11544)) ([fb21aed](https://github.com/SAP/fundamental-ngx/commit/fb21aed52538fd09d133f8fea788e632aab43e0c))
+
+
+
+
+
 # [0.49.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.45...v0.49.0-rc.46) (2024-03-13)
 
 

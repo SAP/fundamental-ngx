@@ -1,15 +1,11 @@
 import {
     click,
-    clickAndMoveElement,
     doesItExist,
     getAttributeByName,
     getElementArrayLength,
     getElementClass,
-    getText,
-    getTextArr,
     isElementDisplayed,
     refreshPage,
-    scrollIntoView,
     waitForElDisplayed
 } from '../../../../../e2e';
 import { IconTabBarPO } from './icon-tab-bar.po';
@@ -89,22 +85,10 @@ describe('Icon Tab Bar component test suite', () => {
     });
 
     describe('Process example', () => {
-        xit('should check selecting tabs in process example', async () => {
-            await checkSelectingTabs(processExample);
-        });
-
         it('should check process example', async () => {
             await expect(await isElementDisplayed(processExample + processIcon)).toBe(
                 true,
                 'process icon is not displayed'
-            );
-        });
-
-        xit('should check quantity of communicators in process example', async () => {
-            const itemsQuantity = await getElementArrayLength(processExample + tabBarItem);
-            await expect(await getElementArrayLength(processExample + processIcon)).toBe(
-                itemsQuantity - 1,
-                'wrong quantity of process icons and tabs'
             );
         });
     });
@@ -139,24 +123,6 @@ describe('Icon Tab Bar component test suite', () => {
     describe('Reordering example', () => {
         it('should check selecting tabs in columns example', async () => {
             await checkSelectingTabs(reorderingExample);
-        });
-
-        // test runner drag and drop methods not working, need to investigate further
-        xit('should check drag and drop tabs ', async () => {
-            await scrollIntoView(reorderingExample);
-            const originalTab = await getText(reorderingExample + tabBarTab + span);
-            await click(reorderingExample + tabBarTab);
-            await clickAndMoveElement(reorderingExample + tabBarTab + ' span', 50, 0);
-            await expect(await getText(reorderingExample + tabBarTab + span)).not.toBe(originalTab);
-        });
-
-        // test runner drag and drop methods not working, need to investigate further
-        xit('should check drag and drop tabs into tab', async () => {
-            await scrollIntoView(reorderingExample);
-            await clickAndMoveElement(reorderingExample + tabBarTab, 75, 0);
-            await click(reorderingExample + tabBarTab);
-            const textArr = ['Item 0', '(55)'];
-            await expect(await getTextArr(popoverTab)).toEqual(textArr);
         });
     });
 

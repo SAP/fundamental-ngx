@@ -3,7 +3,6 @@ import {
     doesItExist,
     getAttributeByNameArr,
     getElementArrayLength,
-    getElementPlaceholder,
     getText,
     isElementDisplayed,
     pause,
@@ -224,13 +223,6 @@ describe('Multi input test suite', () => {
         }
     });
 
-    xit('Verify inputs should have placeholder', async () => {
-        const activeInputsQuantity = await getElementArrayLength(activeInputs);
-        for (let i = 0; i < activeInputsQuantity; i++) {
-            await expect(await getElementPlaceholder(activeInputs, i)).toContain('Field placeholder text');
-        }
-    });
-
     it('should check validation on empty required field', async () => {
         await scrollIntoView(activeInputs, 7);
         await click(activeInputs, 7);
@@ -241,16 +233,6 @@ describe('Multi input test suite', () => {
 
         await expect(await waitForElDisplayed(validationPopover)).toBe(true);
         await expect((await getText(validationPopover)).trim()).toBe('Value is required');
-    });
-
-    // skip due to https://github.com/SAP/fundamental-ngx/issues/6969
-    xit('should check validation on invalid entry', async () => {
-        await scrollIntoView(activeInputs, 7);
-        await click(activeInputs, 7);
-        await sendKeys(['aaaaa']);
-
-        await expect(await waitForElDisplayed(validationPopover)).toBe(true);
-        await expect((await getText(validationPopover)).trim()).toBe('Invalid entry');
     });
 
     it('should verify user cannot add the same item twice', async () => {
@@ -291,12 +273,5 @@ describe('Multi input test suite', () => {
         await click(activeDropdownButtons, 4);
 
         await expect(await doesItExist(listitems + declineButton)).toBe(false);
-    });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await multiInputPage.saveExampleBaselineScreenshot();
-            await expect(await multiInputPage.compareWithBaseline()).toBeLessThan(5);
-        });
     });
 });

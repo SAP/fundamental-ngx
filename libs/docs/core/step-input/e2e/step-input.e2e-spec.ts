@@ -58,13 +58,6 @@ describe('Step input component test suit', () => {
         }
     });
 
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6963
-    xit('should check increase/dicrease value by plus-minus buttons', async () => {
-        for (let i = 0; i < sections.length; i++) {
-            await checkClickByRightMouseBth(sections[i]);
-        }
-    });
-
     it('should check that minimum - maximum value for step input is from -10 to 10', async () => {
         await scrollIntoView(configExample + input, 5);
         (await browserIsFirefox()) || (await browserIsSafari())
@@ -153,11 +146,6 @@ describe('Step input component test suit', () => {
 
     it('should check RTL orientation', async () => {
         await stepInputPage.checkRtlSwitch();
-    });
-
-    xit('should check examples visual regression', async () => {
-        await stepInputPage.saveExampleBaselineScreenshot();
-        await expect(await stepInputPage.compareWithBaseline()).toBeLessThan(5);
     });
 
     async function checkClickByRightMouseBth(section: string): Promise<void> {

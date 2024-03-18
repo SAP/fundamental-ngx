@@ -10,7 +10,7 @@ import {
     refreshPage,
     waitForElDisplayed
 } from '../../../../../e2e';
-import { linkAttr, secondaryAttr, secondaryTypes, toolbarTextValue } from './standard-list-item-contents';
+import { secondaryAttr, secondaryTypes, toolbarTextValue } from './standard-list-item-contents';
 import { StandardListItemPo } from './standard-list-item.po';
 
 describe('Standard List Item test suite:', () => {
@@ -93,15 +93,6 @@ describe('Standard List Item test suite:', () => {
     });
 
     describe('Standard List Item- Interactive state examples:', () => {
-        // missed attribute "href"
-        // https://github.com/SAP/fundamental-ngx/issues/7343
-        xit('should check links', async () => {
-            const linkCount = await getElementArrayLength(sInteractiveLink);
-            for (let i = 0; linkCount > i; i++) {
-                await expect(await getAttributeByName(sInteractiveLink, linkAttr, i)).not.toBe('');
-            }
-        });
-
         it('should check content and interactions', async () => {
             await checkElementDisplayed(sInteractiveList);
             await checkElementDisplayed(sInteractiveLink);

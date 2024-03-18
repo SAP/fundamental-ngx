@@ -182,13 +182,6 @@ describe('Checkbox test suite', () => {
             await checkboxPage.checkRtlSwitch();
         });
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await checkboxPage.saveExampleBaselineScreenshot();
-            await expect(await checkboxPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });
 
 async function checkIfDisabled(element, attribute: string, value: string, index: number = 0): Promise<void> {

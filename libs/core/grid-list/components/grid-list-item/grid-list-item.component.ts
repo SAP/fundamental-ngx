@@ -167,6 +167,10 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     @Input()
     description: string;
 
+    /** When set to true the grid list item's height will be set to auto */
+    @Input()
+    autoHeight = false;
+
     /**
      * Event is thrown, when type is active
      * and item is pressed

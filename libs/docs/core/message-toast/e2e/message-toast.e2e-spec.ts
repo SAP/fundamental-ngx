@@ -71,9 +71,4 @@ describe('Textarea component test', () => {
     it('should check orientation', async () => {
         await messageToastPage.checkRtlSwitch();
     });
-
-    xit('should check visual regression for all examples', async () => {
-        await messageToastPage.saveExampleBaselineScreenshot();
-        await expect(await messageToastPage.compareWithBaseline()).toBeLessThan(5);
-    });
 });

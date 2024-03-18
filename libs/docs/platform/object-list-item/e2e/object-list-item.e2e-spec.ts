@@ -110,17 +110,6 @@ describe('Object list item suite:', () => {
     });
 
     describe('Object List Item With Row Selection And Navigation examples:', () => {
-        // missed attribute "href"
-        // https://github.com/SAP/fundamental-ngx/issues/7343
-        xit('should check content', async () => {
-            const linkCount = await getElementArrayLength(objRowNavLink);
-            for (let i = 0; linkCount > i; i++) {
-                await expect(await getAttributeByName(objRowNavLink, 'href')).not.toBe('');
-            }
-            await elementDisplayed(objRowNavAttributes, 2);
-            await elementDisplayed(objRowNavStatuses, 3);
-        });
-
         it('should check selection', async () => {
             await expect(await getText(objRowNavToolbar)).toContain(': is selected');
             await click(objRowNavList, 0);
@@ -139,13 +128,6 @@ describe('Object list item suite:', () => {
     describe('check orientation', () => {
         it('should check RTL and LTR orientation', async () => {
             await objListPage.checkRtlSwitch();
-        });
-    });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await objListPage.saveExampleBaselineScreenshot();
-            await expect(await objListPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

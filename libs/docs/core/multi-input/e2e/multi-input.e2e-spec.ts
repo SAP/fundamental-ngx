@@ -1,5 +1,4 @@
 import {
-    browserIsSafari,
     click,
     doesItExist,
     getAttributeByName,
@@ -11,7 +10,6 @@ import {
     refreshPage,
     scrollIntoView,
     sendKeys,
-    setValue,
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
@@ -20,7 +18,6 @@ import { MultiInputPo } from './multi-input.po';
 
 import {
     testOptionsArray1,
-    testOptionsArray2,
     testOptionsArray3,
     testOptionsArray4,
     testOptionsArray5,
@@ -77,23 +74,6 @@ describe('Multi input test suite', () => {
         await multiInputPage.checkRtlSwitch();
     });
 
-    xit('Verify inputs should have placeholder', async () => {
-        const activeInputsLength = await getElementArrayLength(activeInputs);
-        for (let i = 0; i < activeInputsLength; i++) {
-            await scrollIntoView(activeInputs, i);
-            if (i === 10 || i === 11) {
-                await expect(await getAttributeByName(activeInputs, 'placeholder', i)).toBe('Search Here...');
-            } else if (i === 12) {
-                // skip due to for some reason it returns 'true' in Safari
-                if (!(await browserIsSafari())) {
-                    await expect(await getAttributeByName(activeInputs, 'placeholder', i)).toBe('');
-                }
-            } else {
-                await expect(await getAttributeByName(activeInputs, 'placeholder', i)).toBe('Search here...');
-            }
-        }
-    });
-
     it('verify disabled multi inputs', async () => {
         const disableInputsLength = await getElementArrayLength(disableInputs);
         for (let i = 0; i < disableInputsLength; i++) {
@@ -127,29 +107,6 @@ describe('Multi input test suite', () => {
         await expect(await doesItExist(popover)).toBe(false, 'popover still displayed');
     });
 
-    // TODO: https://github.com/SAP/fundamental-ngx/issues/8790
-    xit('should narrow down the selection to a single item and select it', async () => {
-        await scrollIntoView(activeInputs, 1);
-        await click(activeInputs, 1);
-        await sendKeys('apple');
-        await waitForElDisplayed(listItem);
-        await click(listItem);
-        await expect(await getElementArrayLength(simpleHiddenAddonExampleTokens)).toBe(2);
-        await expect(await getText(simpleHiddenAddonExampleTokens, 0)).toBe('Kiwi');
-        await expect(await getText(simpleHiddenAddonExampleTokens, 1)).toBe('Apple');
-    });
-
-    // TODO: https://github.com/SAP/fundamental-ngx/issues/8790
-    xit('should be able to select all tokens and delete with delete key', async () => {
-        await scrollIntoView(compactExampleTokens);
-        await click(activeInputs, 4);
-        await sendKeys(['Control', 'a']);
-        await sendKeys(['Delete']);
-        const newTokenCount = await getElementArrayLength(compactExampleTokens);
-
-        await expect(newTokenCount).toEqual(0);
-    });
-
     describe('Check Mobile Mode Multi Input', () => {
         it('verify Simple Multi Input by select each option', async () => {
             await scrollIntoView(activeDropdownButtons);
@@ -161,30 +118,6 @@ describe('Multi input test suite', () => {
             for (let i = 0; i < inputOptionsLength; i++) {
                 await scrollIntoView(multiInputOptions, i);
                 await expect(await getText(multiInputOptions, i)).toBe(testOptionsArray1[i]);
-            }
-        });
-    });
-
-    describe('Check Hidden Addon Button', () => {
-        // TODO: https://github.com/SAP/fundamental-ngx/issues/8790
-        xit('verify Hidden Addon Button by select each option', async () => {
-            await scrollIntoView(activeInputs, 1);
-            await setValue(activeInputs, 'to', 1);
-            await scrollIntoView(buttonShowAll);
-            await click(buttonShowAll);
-            await expect(await waitForElDisplayed(expandedDropdown, 1)).toBe(true);
-            await expect(await getText(hiddenAddonButtonInputOptions, 0)).toBe(testOptionsArray2[0]);
-            const optionsLength = await getElementArrayLength(checkboxInput);
-            for (let i = 0; i < optionsLength; i++) {
-                // deselecting first, selecting other
-                await scrollIntoView(checkboxInput, i);
-                await click(checkboxInput, i);
-            }
-            const inputOptionsLength = await getElementArrayLength(hiddenAddonButtonInputOptions);
-            for (let i = 0; i < inputOptionsLength; i++) {
-                await scrollIntoView(hiddenAddonButtonInputOptions, i);
-                // expecting first element to be not selected, others to be selected
-                await expect(await getText(hiddenAddonButtonInputOptions, i)).toBe(testOptionsArray2[i + 1]);
             }
         });
     });
@@ -247,18 +180,6 @@ describe('Multi input test suite', () => {
             await click(selectAllItemsBtn);
             for (let i = 0; i < optionsLength; i++) {
                 await expect(await getElementClass(dialogListItem, i)).toContain('is-selected');
-            }
-        });
-
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7203
-        xit('should check unselecting all items after selecting by Select All button', async () => {
-            await scrollIntoView(activeDropdownButtons, 3);
-            await click(activeDropdownButtons, 3);
-            const optionsLength = await getElementArrayLength(dialogCheckbox);
-            await click(selectAllItemsBtn);
-            await click(selectAllItemsBtn);
-            for (let i = 0; i < optionsLength; i++) {
-                await expect(await getElementClass(dialogListItem, i)).not.toContain('is-selected');
             }
         });
     });
@@ -392,12 +313,5 @@ describe('Multi input test suite', () => {
         const compactInputS = await getElementSize(compactMultiInputs);
 
         await expect(basicInputS.height).toBeGreaterThan(compactInputS.height);
-    });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await multiInputPage.saveExampleBaselineScreenshot();
-            await expect(await multiInputPage.compareWithBaseline()).toBeLessThan(5);
-        });
     });
 });

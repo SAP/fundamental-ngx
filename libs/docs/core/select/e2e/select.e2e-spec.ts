@@ -230,11 +230,4 @@ fdescribe('Select component:', () => {
             await selectPage.checkRtlSwitch();
         });
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await selectPage.saveExampleBaselineScreenshot();
-            await expect(await selectPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

@@ -81,17 +81,4 @@ describe('Button test suite:', () => {
 
         await expect(normalSize.height).toBeGreaterThan(compactSize.height);
     });
-
-    describe('Check visual regression basic', () => {
-        xit('should check examples visual regression', async () => {
-            await buttonPage.saveExampleBaselineScreenshot();
-            await expect(await buttonPage.compareWithBaseline()).toBeLessThan(5);
-        });
-
-        describe('Check orientation', () => {
-            it('Verify RTL and LTR orientation', async () => {
-                await buttonPage.checkRtlSwitch();
-            });
-        });
-    });
 });

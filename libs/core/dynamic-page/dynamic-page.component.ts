@@ -8,7 +8,6 @@ import {
     ContentChildren,
     DestroyRef,
     ElementRef,
-    HostBinding,
     inject,
     Inject,
     Input,
@@ -61,11 +60,6 @@ import { FD_DYNAMIC_PAGE } from './dynamic-page.tokens';
 export class DynamicPageComponent implements AfterViewInit, DynamicPage {
     /** Whether DynamicPage should snap on scroll */
     @Input() disableSnapOnScroll = false;
-
-    /** Page role  */
-    @Input()
-    @HostBinding('attr.role')
-    role = 'region';
 
     /** aria label for the page */
     @Input() ariaLabel: Nullable<string>;

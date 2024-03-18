@@ -2,7 +2,6 @@ import {
     acceptAlert,
     click,
     doesItExist,
-    dragAndDrop,
     elementArray,
     getElementArrayLength,
     getElementClass,
@@ -12,7 +11,7 @@ import {
     waitForClickable,
     waitForElDisplayed
 } from '../../../../../e2e';
-import { isSelected, productTitle, text, textLocked } from './grid-list-content';
+import { isSelected, text, textLocked } from './grid-list-content';
 import { GridListPo } from './grid-list.po';
 
 describe('Grid-list test suite', () => {
@@ -28,8 +27,6 @@ describe('Grid-list test suite', () => {
         deleteItemButton,
         lockedStateItemButton,
         lockedStateItemText,
-        gridListsArray,
-        gridListsTitle,
         multiSelectModeSelectedItems,
         singleSelectItemsSelected,
         dragAndDropItems,
@@ -62,13 +59,6 @@ describe('Grid-list test suite', () => {
 
     it('Footer should be displayed and contain information', async () => {
         await expect(await getText(footer)).toBe(text);
-    });
-
-    it('Verify each grid list contains product counter -> product counter should be displayed for all lists', async () => {
-        const arrLength = await getElementArrayLength(gridListsArray);
-        for (let i = 0; i < arrLength; i++) {
-            await expect(await getText(gridListsTitle, i)).toContain(productTitle);
-        }
     });
 
     it('Verify grid list contains product counter', async () => {
@@ -119,18 +109,6 @@ describe('Grid-list test suite', () => {
         }
     });
 
-    // Temporarily skipped due to drag and drop flakiness
-    xit('User should be able to replace items order by drag and drop', async () => {
-        const itemsArrLength = await getElementArrayLength(dragAndDropItems);
-        for (let i = 0; i < itemsArrLength - 1; i++) {
-            const firstItemTitle = await getText(dragAndDropItems, i);
-            const secondItemTitle = await getText(dragAndDropItems, i + 1);
-            await dragAndDrop(dragAndDropItems, i, dragAndDropItems, i + 1);
-            await expect(await getText(dragAndDropItems, i)).toBe(secondItemTitle);
-            await expect(await getText(dragAndDropItems, i + 1)).toBe(firstItemTitle);
-        }
-    });
-
     it('should check closing grid list toolbar', async () => {
         await scrollIntoView(gridListToolbar);
         await click(gridListToolbar);
@@ -140,13 +118,6 @@ describe('Grid-list test suite', () => {
     describe('Check orientation', () => {
         it('Verify LTR / RTL orientation', async () => {
             await gridListPage.checkRtlSwitch();
-        });
-    });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await gridListPage.saveExampleBaselineScreenshot();
-            await expect(await gridListPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

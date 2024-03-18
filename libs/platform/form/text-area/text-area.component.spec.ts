@@ -144,17 +144,6 @@ describe('Basic Textarea', () => {
 
         expect(host.result).toEqual({ basicTextarea: 'this is a random note' });
     });
-
-    // TODO: this test fails sometimes, skipping in temporarily
-    xit('should focus if click on button', async () => {
-        const buttonElement = fixture.debugElement.query(By.css('.focus-button'));
-        buttonElement.nativeElement.click();
-
-        await wait(fixture);
-
-        const textareaElement = fixture.debugElement.query(By.css('textarea'));
-        expect(textareaElement.nativeElement).toBe(document.activeElement);
-    });
 });
 
 describe('Advanced Textarea', () => {
@@ -246,91 +235,6 @@ describe('Advanced Textarea', () => {
         await fixture.whenStable();
 
         expect(host.form.get('basicTextarea')?.value).toBe('abcde');
-    });
-
-    // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
-    xit('should handle call autogrow for any other keypress', async () => {
-        const textareaComponent = host.textareaComponent;
-        host.contentDensity = ContentDensityMode.COZY;
-        textareaComponent.height = undefined;
-        expect(textareaComponent.growingMaxLines).toBe(3);
-        textareaComponent._targetElement.focus();
-
-        textareaComponent.value = '1';
-        textareaComponent.value += '\n';
-        textareaComponent.value += '1';
-        textareaComponent.value += '\n';
-        textareaComponent.value += '1';
-        textareaComponent.value += '\n';
-        await wait(fixture);
-        await wait(fixture);
-        await wait(fixture);
-        textareaComponent.value += '1';
-        textareaComponent.value += '\n';
-        textareaComponent.value += '1';
-        // since we are simulating newline-containing value to be custom set, we need to call ngAfterViewInit
-        // for the max-height setting logic to take place
-        textareaComponent.ngAfterViewInit();
-        textareaComponent.handleBackPress(new KeyboardEvent('keyup', { key: '\n' }));
-
-        expect(textareaComponent._targetElement.style.height).toBe('57px');
-    });
-
-    // TODO: Unskip after fix
-    xit('should handle grow indefinitely if max height is not specified', async () => {
-        const textareaComponent = host.textareaComponent;
-        host.contentDensity = ContentDensityMode.COZY;
-        // textareaComponent.growing = true;
-        textareaComponent.height = undefined;
-        textareaComponent.growingMaxLines = undefined;
-        textareaComponent._targetElement.style.maxHeight = 'inherit';
-        textareaComponent._targetElement.focus();
-        textareaComponent.value = '1';
-        textareaComponent.value += '\n';
-        textareaComponent.value += '2';
-        textareaComponent.value += '\n';
-        textareaComponent.value += '3';
-        textareaComponent.value += '\n';
-        await wait(fixture);
-        await wait(fixture);
-        await wait(fixture);
-        textareaComponent.value += '4';
-        textareaComponent.value += '\n';
-        textareaComponent.value += '5';
-        textareaComponent.value += '\n';
-        textareaComponent.value += '6';
-        textareaComponent.value += '\n';
-        await wait(fixture);
-        textareaComponent.ngAfterViewInit();
-
-        textareaComponent.handleBackPress(new KeyboardEvent('keyup', { key: '\n' }));
-        await wait(fixture);
-
-        expect(textareaComponent._targetElement.scrollHeight).toBe(153);
-    });
-
-    xit('should handle height given preference', async () => {
-        const textareaComponent = host.textareaComponent;
-        host.contentDensity = ContentDensityMode.COZY;
-        await wait(fixture);
-
-        textareaComponent._targetElement.focus();
-        textareaComponent.value = '1';
-        textareaComponent.value += '\n';
-        textareaComponent.value += '2';
-        textareaComponent.value += '\n';
-        textareaComponent.value += '3';
-        textareaComponent.value += '\n';
-        await wait(fixture);
-        textareaComponent.value += '4';
-        textareaComponent.value += '\n';
-        textareaComponent.value += '5';
-        textareaComponent.value += '\n';
-        textareaComponent.handleBackPress(new KeyboardEvent('keyup', { key: '\n' }));
-
-        await wait(fixture);
-
-        expect(textareaComponent._targetElement.style.height).toBe('80px'); // without border
     });
 
     it('should call autogrow method', async () => {

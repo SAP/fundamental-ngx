@@ -2,7 +2,6 @@ import {
     click,
     doesItExist,
     getElementArrayLength,
-    getElementClass,
     getText,
     getTextArr,
     refreshPage,
@@ -195,33 +194,9 @@ describe('multi-combobox test suite', () => {
         });
     });
 
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6978
-    xit('should check that items not added if you did not click Save button', async () => {
-        await scrollIntoView(mobileModeExamples);
-        await click(mobileExpandButton);
-        await click(dialogListItem);
-        await click(showSelectedItemsBtn);
-        await expect(await doesItExist(mobileModeExamples + token)).toBe(false);
-    });
-
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/7082
-    xit('should check that Show selected Items - Show all items works correct', async () => {
-        await scrollIntoView(mobileModeExamples);
-        await click(mobileExpandButton);
-        await click(dialogListItem);
-        await click(showSelectedItemsBtn);
-        await click(showSelectedItemsBtn);
-        await expect(await getElementClass(dialogListItem)).toContain('is-selected');
-    });
-
     describe('orientation and visual regression checks', () => {
         it('should check orientation', async () => {
             await multiComboboxPage.checkRtlSwitch();
-        });
-
-        xit('should check examples visual regression', async () => {
-            await multiComboboxPage.saveExampleBaselineScreenshot();
-            await expect(await multiComboboxPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 

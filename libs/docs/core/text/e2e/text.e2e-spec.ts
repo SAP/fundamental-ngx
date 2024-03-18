@@ -1,12 +1,9 @@
 import {
-    checkElementScreenshot,
     click,
     getElementArrayLength,
     getElementSize,
-    getImageTagBrowserPlatform,
     getText,
     refreshPage,
-    saveElementScreenshot,
     scrollIntoView,
     waitForElDisplayed
 } from '../../../../../e2e';
@@ -62,73 +59,6 @@ describe('Text component test', () => {
     describe('Check orientation', () => {
         it('should check RTL and LTR orientation', async () => {
             await textPage.checkRtlSwitch();
-        });
-    });
-
-    xdescribe('Should check visual regression', () => {
-        it('should check visual regression for all examples', async () => {
-            await textPage.saveExampleBaselineScreenshot();
-            await expect(await textPage.compareWithBaseline()).toBeLessThan(5);
-        });
-
-        it('verify paragraph example after click "MORE" link', async () => {
-            const paragraphTag = 'paragraph-0-';
-            await scrollIntoView(textParagraph, 10);
-            await click(linksExpandable);
-            await saveElementScreenshot(
-                textParagraph,
-                paragraphTag + (await getImageTagBrowserPlatform()),
-                await textPage.getScreenshotFolder(),
-                10
-            );
-            await expect(
-                await checkElementScreenshot(
-                    textParagraph,
-                    'paragraph-0-' + (await getImageTagBrowserPlatform()),
-                    await textPage.getScreenshotFolder(),
-                    10
-                )
-            ).toBeLessThan(5, `element item state mismatch`);
-        });
-
-        it('verify paragraph example after you click "LESS" link', async () => {
-            const paragraphTag = 'paragraph-1-';
-            await scrollIntoView(textParagraph, 11);
-            await click(linksExpandable, 1);
-            await saveElementScreenshot(
-                textParagraph,
-                paragraphTag + (await getImageTagBrowserPlatform()),
-                await textPage.getScreenshotFolder(),
-                11
-            );
-            await expect(
-                await checkElementScreenshot(
-                    textParagraph,
-                    'paragraph-1-' + (await getImageTagBrowserPlatform()),
-                    await textPage.getScreenshotFolder(),
-                    11
-                )
-            ).toBeLessThan(5, `element item state mismatch`);
-        });
-
-        it('verify paragraph example after click "MORE LABEL" link', async () => {
-            const paragraphTag = 'paragraph-2-';
-            await scrollIntoView(textParagraph, 12);
-            await click(linksExpandable, 2);
-            await saveElementScreenshot(
-                textParagraph,
-                paragraphTag + (await getImageTagBrowserPlatform()),
-                await textPage.getScreenshotFolder(),
-                12
-            );
-            await expect(
-                await checkElementScreenshot(
-                    textParagraph,
-                    'paragraph-2-' + (await getImageTagBrowserPlatform()),
-                    await textPage.getScreenshotFolder(),
-                    12
-                )
-            ).toBeLessThan(5, `element item state mismatch`);
         });
     });
 });

@@ -9,7 +9,6 @@ import {
     getElementClass,
     getText,
     mouseHoverElement,
-    refreshPage,
     scrollIntoView,
     sendKeys,
     setValue,
@@ -250,17 +249,6 @@ describe('slider test suite', () => {
     describe('orientation check', () => {
         it('should check RTL/LTR orientations', async () => {
             await sliderPage.checkRtlSwitch();
-        });
-    });
-
-    xdescribe('visual regression', () => {
-        beforeEach(async () => {
-            await refreshPage();
-        }, 1);
-
-        it('should check examples visual regression', async () => {
-            await sliderPage.saveExampleBaselineScreenshot();
-            await expect(await sliderPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 
