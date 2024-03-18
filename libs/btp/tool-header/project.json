@@ -1,7 +1,7 @@
 {
-    "sourceRoot": "libs/btp/tool-header/src",
-    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
     "name": "btp-tool-header",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/btp/tool-header/src",
     "projectType": "library",
     "tags": ["scope:fdb", "type:lib"],
     "targets": {}

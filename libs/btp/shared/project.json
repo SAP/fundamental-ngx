@@ -1,7 +1,7 @@
 {
-    "sourceRoot": "libs/btp/shared/src",
-    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
     "name": "btp-shared",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/btp/shared/src",
     "projectType": "library",
     "tags": ["scope:fdb", "type:lib"],
     "targets": {}
