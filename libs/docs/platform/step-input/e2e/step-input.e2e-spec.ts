@@ -6,7 +6,6 @@ import {
     checkValueChanged,
     clearValue,
     click,
-    clickRightMouseBtn,
     doubleClick,
     getElementArrayLength,
     getText,
@@ -175,33 +174,7 @@ describe('Step input test suite', () => {
         }
     });
 
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6963
-    xit('Verify increment and decrement buttons', async () => {
-        const arr = await getElementArrayLength(activeInput);
-        for (let i = 0; i < arr; i++) {
-            await scrollIntoView(activeInput, i);
-            const defaultValue = await getValue(activeInput, i);
-            await clickRightMouseBtn(activeButtonIncrement, i);
-            await expect(await getValue(activeInput, i)).toEqual(
-                defaultValue,
-                'value changed by clickin on right mouse button'
-            );
-            await clickRightMouseBtn(activeButtonDecrement, i);
-            await expect(await getValue(activeInput, i)).toEqual(
-                defaultValue,
-                'value changed by clickin on right mouse button'
-            );
-        }
-    });
-
     it('Check LTR/RTL orientation', async () => {
         await stepInputPage.checkRtlSwitch();
-    });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await stepInputPage.saveExampleBaselineScreenshot();
-            await expect(await stepInputPage.compareWithBaseline()).toBeLessThan(5);
-        });
     });
 });

@@ -122,13 +122,6 @@ describe('Feed list item test suite:', () => {
         await feedListItemPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', () => {
-        it('should check basic visual regression', async () => {
-            await feedListItemPage.saveExampleBaselineScreenshot();
-            await expect(await feedListItemPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
-
     async function checkClickableLinks(example: string): Promise<void> {
         await scrollIntoView(example);
         const linksLength = await getElementArrayLength(example + links);

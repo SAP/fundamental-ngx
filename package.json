@@ -49,7 +49,7 @@
     "@angular/router": "17.0.8",
     "@fundamental-styles/cx": "0.33.3-rc.19",
     "@nx/angular": "17.2.8",
-    "@sap-theming/theming-base-content": "11.12.2",
+    "@sap-theming/theming-base-content": "11.13.0",
     "@stackblitz/sdk": "1.9.0",
     "@swc/helpers": "0.5.2",
     "compare-versions": "6.1.0",
@@ -69,7 +69,7 @@
     "ngx-markdown": "17.1.1",
     "rxjs": "7.8.1",
     "tslib": "^2.3.0",
-    "zone.js": "0.14.2"
+    "zone.js": "0.14.4"
   },
   "devDependencies": {
     "@actions/core": "1.10.1",
@@ -82,8 +82,8 @@
     "@angular/cli": "17.0.8",
     "@angular/compiler-cli": "17.0.8",
     "@angular/language-service": "17.0.8",
-    "@commitlint/cli": "17.7.1",
-    "@commitlint/config-conventional": "17.7.0",
+    "@commitlint/cli": "18.6.1",
+    "@commitlint/config-conventional": "18.6.1",
     "@jsdevtools/npm-publish": "3.0.1",
     "@nx/devkit": "17.2.8",
     "@nx/eslint": "17.2.8",

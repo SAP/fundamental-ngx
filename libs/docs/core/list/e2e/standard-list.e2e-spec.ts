@@ -189,15 +189,6 @@ describe('Standard List test suite', () => {
         });
     });
 
-    xdescribe('example block visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await refreshPage();
-            await waitForElDisplayed(standardListPage.title);
-            await standardListPage.saveExampleBaselineScreenshot();
-            await expect(await standardListPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
-
     describe('orientation check', () => {
         it('should check orientations', async () => {
             await standardListPage.checkRtlSwitch();

@@ -477,11 +477,4 @@ describe('Popover test suite', () => {
     it('should check orientation', async () => {
         await popoverPage.checkRtlSwitch();
     });
-
-    xdescribe('visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await popoverPage.saveExampleBaselineScreenshot();
-            await expect(await popoverPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

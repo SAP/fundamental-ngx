@@ -282,13 +282,6 @@ describe('Pagination test suite:', () => {
         await paginationPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await paginationPage.saveExampleBaselineScreenshot();
-            await expect(await paginationPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
-
     async function checkArrowButtons(example: string, index: number = 0): Promise<void> {
         await scrollIntoView(example);
 

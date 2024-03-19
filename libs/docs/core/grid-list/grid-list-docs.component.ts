@@ -8,6 +8,7 @@ import {
     ExampleFile,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
+import { GridListAutoHeightExampleComponent } from './examples/auto-height/grid-list-auto-height-example.component';
 import { GridListDefaultExampleComponent } from './examples/default/grid-list-example.component';
 import { GridListDeleteExampleComponent } from './examples/delete/grid-list-delete-example.component';
 import { GridListDndExampleComponent } from './examples/dnd/grid-list-dnd-example.component';
@@ -37,6 +38,7 @@ const gridListFooterTs = 'footer/grid-list-footer-example.component.ts';
 const gridListDndTs = 'dnd/grid-list-dnd-example.component.ts';
 const gridListLayoutTs = 'layout/grid-list-layout-example.component.ts';
 const gridListFocusingTs = 'focusing/grid-list-focusing-example.component.ts';
+const gridListAutoHeightTs = 'auto-height/grid-list-auto-height-example.component.ts';
 
 const scssFileCode = 'grid-list.component.scss';
 
@@ -54,6 +56,7 @@ const gridListFooterHtml = 'footer/grid-list-footer-example.component.html';
 const gridListDndHtml = 'dnd/grid-list-dnd-example.component.html';
 const gridListLayoutHtml = 'layout/grid-list-layout-example.component.html';
 const gridListFocusingHtml = 'focusing/grid-list-focusing-example.component.html';
+const gridListAutoHeightHtml = 'auto-height/grid-list-auto-height-example.component.html';
 
 @Component({
     selector: 'app-grid-list',
@@ -77,7 +80,8 @@ const gridListFocusingHtml = 'focusing/grid-list-focusing-example.component.html
         GridListFooterExampleComponent,
         GridListDndExampleComponent,
         GridListLayoutExampleComponent,
-        GridListFocusingItemExampleComponent
+        GridListFocusingItemExampleComponent,
+        GridListAutoHeightExampleComponent
     ]
 })
 export class GridListDocsComponent {
@@ -290,6 +294,21 @@ export class GridListDocsComponent {
             code: getAssetFromModuleAssets(gridListFocusingTs),
             fileName: 'grid-list-focusing-example',
             component: 'GridListFocusingItemExampleComponent'
+        }
+    ];
+
+    gridListAutoHeightExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(gridListAutoHeightHtml),
+            scssFileCode: this._scssFileCode,
+            fileName: 'grid-list-auto-height-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(gridListAutoHeightTs),
+            fileName: 'grid-list-auto-height-example',
+            component: 'GridListAutoHeightExampleComponent'
         }
     ];
 }

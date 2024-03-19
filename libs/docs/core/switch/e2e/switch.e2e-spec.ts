@@ -88,11 +88,6 @@ describe('Switch test suite', () => {
         await switchPage.checkRtlSwitch();
     });
 
-    xit('should check examples visual regression', async () => {
-        await switchPage.saveExampleBaselineScreenshot();
-        await expect(await switchPage.compareWithBaseline()).toBeLessThan(5);
-    });
-
     async function checkSwitchingWork(
         section: string,
         length: number | undefined = undefined,

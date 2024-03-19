@@ -151,22 +151,6 @@ describe('PlatformSliderComponent', () => {
         expect(handle.nativeElement.style.left).toEqual('50%');
     });
 
-    xit('should emit value: "-1"', () => {
-        const sliderWidth = fixture.debugElement.query(By.css('.example-1 .fd-slider__inner')).nativeElement
-            .clientWidth;
-        const handle = fixture.debugElement.query(By.css('.example-1 .fd-slider__handle'));
-
-        const event = new MouseEvent('mousedown');
-        handle.nativeElement.dispatchEvent(event);
-
-        const mousemove = new MouseEvent('mousemove', { clientX: getPixelsByPercentage(sliderWidth, 10) });
-        fixture.nativeElement.ownerDocument.dispatchEvent(mousemove);
-
-        fixture.detectChanges();
-
-        expect(component.value1).toEqual(-0.2);
-    });
-
     it('should emit value "-1" if cursor outside left side of slider', () => {
         const handle = fixture.debugElement.query(By.css('.example-1 .fd-slider__handle'));
 
@@ -260,40 +244,11 @@ describe('PlatformSliderComponent', () => {
         expect(slider.nativeElement.classList).toContain('fd-slider--vertical');
     });
 
-    // TODO investigate and fix - ticket #4893
-    xit('range slider second handle should have the ability to be less than the first handle', async () => {
-        const sliderWidth = fixture.debugElement.query(By.css('.example-4 .fd-slider__inner')).nativeElement
-            .offsetWidth;
-        const handles = fixture.debugElement.queryAll(By.css('.example-4 .fd-slider__handle'));
-
-        const event = new MouseEvent('mousedown');
-        handles[1].nativeElement.dispatchEvent(event);
-
-        const mousemove = new MouseEvent('mousemove', { clientX: getPixelsByPercentage(sliderWidth, 10) });
-        fixture.nativeElement.ownerDocument.dispatchEvent(mousemove);
-
-        await whenStable(fixture);
-        expect(component.value4).toEqual([10, 20]);
-    });
-
-    xit('should contain is-disabled class', () => {
-        const isDisabled = fixture.debugElement.query(By.css('.example-5.is-disabled'));
-
-        expect(isDisabled).toBeTruthy();
-    });
-
     it('should contain fd-slider__handle--lg class', () => {
         const isCozy = fixture.debugElement.query(By.css('.example-6 .fd-slider__handle--lg'));
 
         expect(isCozy).toBeTruthy();
     });
-
-    function getPixelsByPercentage(sliderWidth: number, percentage: number): number {
-        const bodyMargin = 20;
-        const space = bodyClientWidth - sliderWidth - bodyMargin;
-
-        return space + (sliderWidth * percentage) / 100;
-    }
 });
 
 export async function whenStable(fixture: ComponentFixture<TestSliderComponent>): Promise<void> {

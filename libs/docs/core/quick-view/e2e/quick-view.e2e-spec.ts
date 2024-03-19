@@ -67,13 +67,6 @@ describe('Quick view  test suite:', () => {
             await quickViewPage.checkRtlSwitch();
         });
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await quickViewPage.saveExampleBaselineScreenshot();
-            await expect(await quickViewPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });
 
 async function checkPopoverInfo(): Promise<void> {

@@ -3,7 +3,6 @@ import {
     currentPlatformName,
     doesItExist,
     getElementArrayLength,
-    getText,
     getValue,
     isElementClickable,
     mouseHoverElement,
@@ -126,26 +125,9 @@ describe('Rating indicator test suite', () => {
             await sendKeys('ArrowDown');
             await expect(await getValue(touchedInputsDynamicChanges)).toBe('1');
         });
-
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7268
-        xit('should check selecting rating indicator stars and that text is correct in label', async () => {
-            await scrollIntoView(starsRatingDisplayMode);
-            const starsLength = await getElementArrayLength(starsRatingDisplayMode);
-            for (let i = 0; i < starsLength; i++) {
-                await click(starsRatingDisplayMode, i);
-                await expect(await getText(textDisplayMode)).toBe(`(${i + 1} of ${starsLength})`);
-            }
-        });
     });
 
     it('should check RTL and LTR orientation', async () => {
         await ratingIndicatorPage.checkRtlSwitch();
-    });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await ratingIndicatorPage.saveExampleBaselineScreenshot();
-            await expect(await ratingIndicatorPage.compareWithBaseline()).toBeLessThan(5);
-        });
     });
 });

@@ -172,11 +172,4 @@ describe('Input group component test', () => {
             await inputGroupPage.checkRtlSwitch();
         });
     });
-
-    xdescribe('Should check visual regression', () => {
-        it('should check visual regression for all examples', async () => {
-            await inputGroupPage.saveExampleBaselineScreenshot();
-            await expect(await inputGroupPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

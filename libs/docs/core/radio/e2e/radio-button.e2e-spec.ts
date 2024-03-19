@@ -53,11 +53,4 @@ describe('Radio button component test', () => {
     it('should check RTL and LTR orientation', async () => {
         await radioButtonPage.checkRtlSwitch();
     });
-
-    xdescribe('Should check visual regression', () => {
-        it('should check visual regression for all examples', async () => {
-            await radioButtonPage.saveExampleBaselineScreenshot();
-            await expect(await radioButtonPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

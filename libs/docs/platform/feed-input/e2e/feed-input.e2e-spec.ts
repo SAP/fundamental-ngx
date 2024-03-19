@@ -1,6 +1,5 @@
 import {
     addValue,
-    browserIsSafari,
     clearValue,
     doesItExist,
     elementDisplayed,
@@ -130,24 +129,6 @@ describe('Verify Feed Input component', () => {
         }
     });
 
-    xit('should stop growing after maxHeight option value was reached', async () => {
-        if (await browserIsSafari()) {
-            // correct value not returned on Safari
-            return;
-        }
-
-        await waitForPresent(feedInputTextArea, 4);
-        await scrollIntoView(feedInputTextArea, 4);
-
-        await clearValue(feedInputTextArea, 4);
-        const feedInputSize1 = await (await getElementSize(feedInputTextArea, 4)).height;
-        await setValue(feedInputTextArea, eight_lines_text, 4);
-        const feedInputSize2 = await (await getElementSize(feedInputTextArea, 4)).height;
-
-        await expect(feedInputSize1).toBeLessThanOrEqual(feedInputSize2);
-        await expect(feedInputSize2).toEqual(95);
-    });
-
     it('should avatar and Send button has correct tooltip', async () => {
         await expect(await getAttributeByNameArr(feedInputButton, 'title')).toEqual(send_button_tooltip);
         await expect(await getAttributeByNameArr(feedInputAvatar, 'title')).toEqual(avatar_tooltip);
@@ -172,12 +153,5 @@ describe('Verify Feed Input component', () => {
 
     it('should check RTL', async () => {
         await feedInputPage.checkRtlSwitch();
-    });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await feedInputPage.saveExampleBaselineScreenshot();
-            await expect(await feedInputPage.compareWithBaseline()).toBeLessThan(5);
-        });
     });
 });

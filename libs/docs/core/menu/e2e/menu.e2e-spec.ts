@@ -1,13 +1,10 @@
 import {
-    browserIsSafari,
     click,
     doesItExist,
     elementDisplayed,
     getElementArrayLength,
     getText,
-    getTextArr,
     isElementClickable,
-    mouseHoverElement,
     refreshPage,
     waitForElDisplayed,
     waitForNotPresent
@@ -82,24 +79,6 @@ describe('Menu test suite', () => {
         }
     });
 
-    // TODO: https://github.com/SAP/fundamental-ngx/issues/8792
-    xit('should show active path on the "menu with submenu"', async () => {
-        // skip due to hoverElemenet does not work in Safari
-        if (await browserIsSafari()) {
-            return;
-        }
-        await click(btnWithSubmenu);
-        let menuItemsArrLength = await getElementArrayLength(submenuItems);
-        for (let i = 0; i < menuItemsArrLength; i++) {
-            await mouseHoverElement(submenuItems, i);
-            const textItem = await getText(submenuItems, i);
-            const activePath = await getTextArr(submenuActivePath);
-            const booleanExp = activePath.some((el) => el.trim() === textItem);
-            menuItemsArrLength = await getElementArrayLength(submenuItems);
-            await expect(booleanExp).toBe(true, `Active path mismatch with ${textItem} with index ${i}`);
-        }
-    });
-
     describe('check dialog popup Mobile Menu example', () => {
         it('should open and close dialog popup Mobile Menu', async () => {
             await click(btnMobileMenu);
@@ -119,11 +98,6 @@ describe('Menu test suite', () => {
                 dialogMenuItemsArrLength
             );
         });
-    });
-
-    xit('should check visual regression for all examples', async () => {
-        await menuPage.saveExampleBaselineScreenshot();
-        await expect(await menuPage.compareWithBaseline()).toBeLessThan(5);
     });
 
     it('should check RTL and LTR orientation', async () => {

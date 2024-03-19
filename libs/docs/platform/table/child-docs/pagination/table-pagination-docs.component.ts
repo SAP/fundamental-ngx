@@ -13,10 +13,16 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { TableCustomPaginationExampleComponent } from '../../examples/custom-pagination/table-custom-pagination-example.component';
+import { TableCustomPaginationOuterScrollExampleComponent } from '../../examples/custom-pagination/table-custom-pagination-outer-scroll-example.component';
 import { PlatformTableStandardPaginationComponent } from '../../examples/standard-pagination/platform-table-standard-pagination-example.component';
 
 const platformTableBuiltInPaginationSrc = 'custom-pagination/table-custom-pagination-example.component.html';
 const platformTableBuiltInPaginationTsSrc = 'custom-pagination/table-custom-pagination-example.component.ts';
+
+const platformTableBuiltInPaginationOuterScrollSrc =
+    'custom-pagination/table-custom-pagination-outer-scroll-example.component.html';
+const platformTableBuiltInPaginationOuterScrollTsSrc =
+    'custom-pagination/table-custom-pagination-outer-scroll-example.component.ts';
 
 const platformTableCorePaginationSrc = 'standard-pagination/platform-table-standard-pagination-example.component.html';
 const platformTableCorePaginationTsSrc = 'standard-pagination/platform-table-standard-pagination-example.component.ts';
@@ -33,7 +39,8 @@ const platformTableCorePaginationTsSrc = 'standard-pagination/platform-table-sta
         CodeExampleComponent,
         SeparatorComponent,
         FdDatetimeModule,
-        TableCustomPaginationExampleComponent
+        TableCustomPaginationExampleComponent,
+        TableCustomPaginationOuterScrollExampleComponent
     ],
     templateUrl: './table-pagination-docs.component.html',
     encapsulation: ViewEncapsulation.None,
@@ -55,6 +62,21 @@ export class TablePaginationDocsComponent {
             fileName: 'table-custom-pagination-example',
             component: 'TableCustomPaginationExampleComponent',
             name: 'table-custom-pagination-example.component.ts'
+        }
+    ];
+    builtInPaginationOuterScroll: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(platformTableBuiltInPaginationOuterScrollSrc),
+            fileName: 'table-custom-pagination-outer-scroll-example',
+            name: 'table-custom-pagination-outer-scroll-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(platformTableBuiltInPaginationOuterScrollTsSrc),
+            fileName: 'table-custom-pagination-outer-scroll-example',
+            component: 'TableCustomPaginationExampleComponent',
+            name: 'table-custom-pagination-outer-scroll-example.component.ts'
         }
     ];
     corePagination: ExampleFile[] = [

@@ -71,11 +71,4 @@ describe('Panel test suite', () => {
             await expect(await getText(panelTitle, i)).toBe(testTitleText);
         }
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await panelPage.saveExampleBaselineScreenshot();
-            await expect(await panelPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

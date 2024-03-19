@@ -1,7 +1,6 @@
 import { ButtonPo } from './button.po';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import {
-    checkElementScreenshot,
     click,
     getAttributeByName,
     getElementArrayLength,
@@ -10,13 +9,11 @@ import {
     getText,
     isElementClickable,
     refreshPage,
-    saveElementScreenshot,
     scrollIntoView,
     setValue,
     waitForElDisplayed
 } from '../../../../../e2e';
 import { fdTypeOptions, iconOptions, testText } from './button-contents';
-import { buttonPlaygroundTag } from './button-tags';
 
 describe('Button test suite:', () => {
     const buttonPage = new ButtonPo();
@@ -157,77 +154,6 @@ describe('Button test suite:', () => {
                 await expect(await getElementClass(playgroundButtonIcon)).toContain(iconOptions[i]);
                 await click(dropDownMenu, 1);
             }
-        });
-
-        xit('verify menu checkbox visual regression', async () => {
-            await scrollIntoView(checkboxMenu);
-            await click(checkboxMenu);
-            await expect(await getAttributeByName(playgroundButton, 'ng-reflect-fd-menu')).toEqual('true');
-            await saveElementScreenshot(
-                playgroundButton,
-                buttonPlaygroundTag + 'menu',
-                await buttonPage.getScreenshotFolder()
-            );
-            await expect(
-                await checkElementScreenshot(
-                    playgroundButton,
-                    buttonPlaygroundTag + 'menu',
-                    await buttonPage.getScreenshotFolder()
-                )
-            ).toBeLessThan(5, `Playground button mismatch`);
-            await click(checkboxMenu);
-            await expect(await getAttributeByName(playgroundButton, 'ng-reflect-fd-menu')).toEqual('false');
-            await saveElementScreenshot(
-                playgroundButton,
-                buttonPlaygroundTag + 'not-menu',
-                await buttonPage.getScreenshotFolder()
-            );
-            await expect(
-                await checkElementScreenshot(
-                    playgroundButton,
-                    buttonPlaygroundTag + 'not-menu',
-                    await buttonPage.getScreenshotFolder()
-                )
-            ).toBeLessThan(5, `Playground button mismatch`);
-        });
-
-        xit('verify compact checkbox visual regression', async () => {
-            await scrollIntoView(checkboxCompact);
-            await click(checkboxCompact);
-            await expect(await getAttributeByName(playgroundButton, 'ng-reflect-compact')).toEqual('true');
-            await saveElementScreenshot(
-                playgroundButton,
-                buttonPlaygroundTag + 'compact',
-                await buttonPage.getScreenshotFolder()
-            );
-            await expect(
-                await checkElementScreenshot(
-                    playgroundButton,
-                    buttonPlaygroundTag + 'compact',
-                    await buttonPage.getScreenshotFolder()
-                )
-            ).toBeLessThan(5, `Playground button mismatch`);
-            await click(checkboxCompact);
-            await expect(await getAttributeByName(playgroundButton, 'ng-reflect-compact')).toEqual('false');
-            await saveElementScreenshot(
-                playgroundButton,
-                buttonPlaygroundTag + 'not-compact',
-                await buttonPage.getScreenshotFolder()
-            );
-            await expect(
-                await checkElementScreenshot(
-                    playgroundButton,
-                    buttonPlaygroundTag + 'not-compact',
-                    await buttonPage.getScreenshotFolder()
-                )
-            ).toBeLessThan(5, `Playground button mismatch`);
-        });
-    });
-
-    xdescribe('Check visual regression basic', () => {
-        it('should check examples visual regression', async () => {
-            await buttonPage.saveExampleBaselineScreenshot();
-            await expect(await buttonPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

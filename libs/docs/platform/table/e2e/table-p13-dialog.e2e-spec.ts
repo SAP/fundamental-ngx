@@ -2,7 +2,6 @@ import {
     browserIsSafari,
     click,
     doesItExist,
-    getAttributeByName,
     getElementArrayLength,
     getText,
     refreshPage,
@@ -163,13 +162,6 @@ describe('Table component test suite', () => {
         it('should check sorting of columns', async () => {
             await tablePage.checkSortingColumns(tableP13FilterExample, toolbarButton, 1);
         });
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7005
-        xit('should check Exclude section in dialog always open', async () => {
-            await scrollIntoView(tableP13FilterExample);
-            await click(tableP13FilterExample + buttonFilter);
-            await expect(await getAttributeByName(expandedOption, 'aria-expanded')).toBe('false');
-        });
-
         it('should throw warning when the user attempts to include/exclude the same rule', async () => {
             await scrollIntoView(tableP13FilterExample);
             await click(tableP13FilterExample + toolbarButton);

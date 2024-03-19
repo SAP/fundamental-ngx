@@ -5,7 +5,6 @@ import {
     browserIsSafariorFF,
     checkElArrIsClickable,
     click,
-    clickAndMoveElement,
     getAlertText,
     getAttributeByName,
     getCurrentUrl,
@@ -125,16 +124,6 @@ describe('Table test suite', () => {
             for (let i = 0; i < cellLength; i++) {
                 await expect(await getText(tableToolbarExample + tableRow + tableCell, i)).toBe(tableCellArr[i]);
             }
-        });
-
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7096
-        xit('should check that we can not do anything while table is loading', async () => {
-            await scrollIntoView(tableToolbarExample);
-            await click(tableToolbarExample + button, 1);
-            await expect(await isElementDisplayed(busyIndicator)).toBe(true, 'busy indicator not displayed');
-            await expect(await getElementClass(tableToolbarExample + inputField)).toContain('disabled');
-            await expect(await getElementClass(tableToolbarExample + button, 2)).toContain('disabled');
-            await expect(await getElementClass(tableToolbarExample + button)).toContain('disabled');
         });
     });
 
@@ -266,14 +255,6 @@ describe('Table test suite', () => {
     });
 
     describe('Check Table with Angular CDK example', () => {
-        xit('should check drag and drop table row', async () => {
-            // test runner drag and drop not working correctly
-            await scrollIntoView(tableCDKExample + tableRow, 3);
-            const originalTableCell = await getText(tableCDKExample + tableCellWOHeader);
-            await clickAndMoveElement(tableCDKExample + tableRow, 0, 50);
-            await expect(await getText(tableCDKExample + tableCellWOHeader)).not.toBe(originalTableCell);
-        });
-
         it('should check clickable links', async () => {
             await scrollIntoView(tableCDKExample);
             await checkElArrIsClickable(tableCDKExample + link);
@@ -375,26 +356,10 @@ describe('Table test suite', () => {
             await click(linkPrevious);
             await expect(await getText(tablePaginationExample + activePaginationLink)).toBe('3');
         });
-
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7148
-        xit('should check that current page not changing after changing items per page', async () => {
-            await scrollIntoView(tablePaginationExample);
-            await click(tablePaginationExample + ' .fd-select__control');
-            const defaultSelectedPage = await getText(selectedPage);
-            await click(menuItem);
-            await expect(await getText(selectedPage)).toBe(defaultSelectedPage);
-        });
     });
 
     it('should check RTL/LTR orientations', async () => {
         await tablePage.checkRtlSwitch();
-    });
-
-    xdescribe('visual regression', () => {
-        it('should check example blocks visual regression', async () => {
-            await tablePage.saveExampleBaselineScreenshot();
-            await expect(await tablePage.compareWithBaseline()).toBeLessThan(5);
-        });
     });
 
     async function checkIsLinkClickable(selector: string): Promise<void> {

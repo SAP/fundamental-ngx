@@ -6,9 +6,7 @@ import {
     getElementArrayLength,
     getElementClass,
     getText,
-    refreshPage,
-    scrollIntoView,
-    waitForPresent
+    scrollIntoView
 } from '../../../../../e2e';
 import { defaultStatusText, indicationColorText, semanticStatusText } from './object-status-contents';
 import { ObjectStatusPo } from './object-status.po';
@@ -76,17 +74,6 @@ describe('object status test suite', () => {
         });
     });
 
-    describe('inverted object status example', () => {
-        // TODO: write appropriate e2e
-        xit('should check status is inverted', async () => {
-            const statusCount = await getElementArrayLength(invertedExamples + status);
-
-            for (let i = 0; i < statusCount; i++) {
-                await scrollIntoView(invertedExamples + status);
-            }
-        });
-    });
-
     describe('inverted object status with generic indication colors example', () => {
         it('should check status is inverted', async () => {
             const statusCount = await getElementArrayLength(invertedIndicationColorExamples + status);
@@ -100,29 +87,9 @@ describe('object status test suite', () => {
         });
     });
 
-    describe('object status large design example', () => {
-        // TODO: write appropriate e2e
-        xit('should check large status', async () => {
-            const statusCount = await getElementArrayLength(largeExamples + status);
-
-            for (let i = 0; i < statusCount; i++) {
-                await scrollIntoView(largeExamples + status);
-            }
-        });
-    });
-
     describe('Orientation check', () => {
         it('should check RTL/LTR', async () => {
             await objectStatusPage.checkRtlSwitch();
-        });
-    });
-
-    xdescribe('Visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await refreshPage();
-            await waitForPresent(defaultExamples + status);
-            await objectStatusPage.saveExampleBaselineScreenshot();
-            await expect(await objectStatusPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

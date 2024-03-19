@@ -55,10 +55,5 @@ describe('product switch test suite', () => {
         it('should check orientation', async () => {
             await productSwitchPage.checkRtlSwitch();
         });
-
-        xit('should check examples visual regression', async () => {
-            await productSwitchPage.saveExampleBaselineScreenshot();
-            await expect(await productSwitchPage.compareWithBaseline()).toBeLessThan(5);
-        });
     });
 });

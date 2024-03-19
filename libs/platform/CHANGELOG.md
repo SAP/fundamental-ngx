@@ -3,6 +3,146 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.55...v0.49.0-rc.56) (2024-03-18)
+
+
+### Bug Fixes
+
+* **platform:** add input to remove space node from ApprovalFlow graph ([#11545](https://github.com/SAP/fundamental-ngx/issues/11545)) ([5a32a9e](https://github.com/SAP/fundamental-ngx/commit/5a32a9e0a672a2d555269e0384f2b058afd29446))
+
+
+
+
+
+# [0.49.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.54...v0.49.0-rc.55) (2024-03-18)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.53...v0.49.0-rc.54) (2024-03-15)
+
+
+### Bug Fixes
+
+* **core:** remove role region from Dynamic Page component ([#11555](https://github.com/SAP/fundamental-ngx/issues/11555)) ([fca781c](https://github.com/SAP/fundamental-ngx/commit/fca781c4c5cea5c7f491220a03ecb897851b86bf))
+
+
+
+
+
+# [0.49.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.52...v0.49.0-rc.53) (2024-03-15)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.51...v0.49.0-rc.52) (2024-03-15)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.50...v0.49.0-rc.51) (2024-03-15)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.49...v0.49.0-rc.50) (2024-03-15)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.48...v0.49.0-rc.49) (2024-03-14)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.47...v0.49.0-rc.48) (2024-03-14)
+
+
+### Bug Fixes
+
+* **platform:** add proper z-index to Table toolbar so checkboxes don't go over it ([#11552](https://github.com/SAP/fundamental-ngx/issues/11552)) ([014bbbf](https://github.com/SAP/fundamental-ngx/commit/014bbbf63bf81a92ffb602d7f9716d7b1d3d5772))
+
+
+
+
+
+# [0.49.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.46...v0.49.0-rc.47) (2024-03-14)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.45...v0.49.0-rc.46) (2024-03-13)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.44...v0.49.0-rc.45) (2024-03-13)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.43...v0.49.0-rc.44) (2024-03-12)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.42...v0.49.0-rc.43) (2024-03-12)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.41...v0.49.0-rc.42) (2024-03-12)
+
+
+### Features
+
+* **core,platform:** add page scroll to Table component ([#11510](https://github.com/SAP/fundamental-ngx/issues/11510)) ([691426a](https://github.com/SAP/fundamental-ngx/commit/691426a66e0cb8e1f50ef4850cbafb1e987dc38b))
+
+
+
+
+
+# [0.49.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.40...v0.49.0-rc.41) (2024-03-11)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
 # [0.49.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.39...v0.49.0-rc.40) (2024-03-11)
 
 **Note:** Version bump only for package @fundamental-ngx/platform

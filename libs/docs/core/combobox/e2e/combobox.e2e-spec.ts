@@ -323,11 +323,4 @@ describe('Combobox component test suit', () => {
             await comboboxPage.checkRtlSwitch();
         });
     });
-
-    xdescribe('Should check visual regression', () => {
-        it('should check visual regression for all examples', async () => {
-            await comboboxPage.saveExampleBaselineScreenshot();
-            await expect(await comboboxPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });
