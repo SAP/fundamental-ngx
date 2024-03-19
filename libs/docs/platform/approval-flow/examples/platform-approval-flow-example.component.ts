@@ -72,6 +72,8 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
     /** @hidden */
     private newNodes = new Map<ApprovalNode['id'], ApprovalNode>();
 
+    isRemoveSpaceNode = false;
+
     constructor(private readonly _messageToastService: MessageToastService) {}
 
     ngOnDestroy(): void {

@@ -64,6 +64,7 @@ import {
 } from './approval-flow-select-type/approval-flow-select-type.component';
 import {
     ApprovalFlowGraph,
+    ApprovalGraphColumn,
     ApprovalGraphMetadata,
     generateApprovalFlowGraph,
     generateApprovalFlowGraphMetadata
@@ -164,6 +165,11 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
      * and retrieve the best matching DataProvider that is set on application level
      */
     @Input() watchersDataProviderEntityKey?: string;
+
+    /**
+     * Should remove the space node from the graph
+     */
+    @Input() removeSpaceNode?: boolean = false;
 
     /** Event emitted on approval flow node click. */
     @Output() nodeClick = new EventEmitter<ApprovalNode>();
@@ -838,6 +844,10 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         this._approvalProcess = approvalProcess;
         this._graph = generateApprovalFlowGraph(this._approvalProcess.nodes);
 
+        if (this.removeSpaceNode) {
+            this._graph.columns = this.removeSpaceNodesFromColumns(this._graph.columns);
+        }
+
         if (this._graph.errors) {
             this._showMessage('error');
             return;
@@ -1105,6 +1115,23 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
                 }
             });
         this._subscriptions.add(sub);
+    }
+
+    /** @hidden */
+    private removeSpaceNodesFromColumns(columns: ApprovalGraphColumn[]): ApprovalGraphColumn[] {
+        const filteredColumns: ApprovalGraphColumn[] = [];
+
+        columns.forEach((column) => {
+            const filteredNodes = column.nodes.filter((node) => !node.space);
+            const updatedColumn = {
+                ...column, // Preserve other properties of the column
+                nodes: filteredNodes // Use the filtered list of nodes
+            };
+
+            filteredColumns.push(updatedColumn);
+        });
+
+        return filteredColumns;
     }
 }
 
