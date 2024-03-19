@@ -5,5 +5,5 @@
         "types": ["jest", "node"],
         "target": "ES2016"
     },
-    "include": ["**/*.spec.ts", "**/*.d.ts"]
+    "include": ["**/*.spec.ts"]
 }

@@ -1,7 +1,4 @@
 {
-    "affected": {
-        "defaultBase": "main"
-    },
     "tasksRunnerOptions": {
         "default": {
             "options": {
@@ -53,10 +50,6 @@
         "prepare": {
             "dependsOn": ["build"]
         },
-        "lint": {
-            "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
-            "cache": true
-        },
         "transform-translations": {
             "inputs": ["{projectRoot}/**/*.properties", "default"],
             "cache": true
@@ -82,6 +75,10 @@
                     "codeCoverage": true
                 }
             }
+        },
+        "@nx/eslint:lint": {
+            "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
+            "cache": true
         }
     },
     "namedInputs": {
@@ -103,5 +100,7 @@
             "!{projectRoot}/src/test-setup.[jt]s"
         ]
     },
-    "nxCloudAccessToken": "MzFiYWRhMTItYTAxYi00MGZjLWJmNDEtOTllMzEwZjI5ODNkfHJlYWQ="
+    "nxCloudAccessToken": "MzFiYWRhMTItYTAxYi00MGZjLWJmNDEtOTllMzEwZjI5ODNkfHJlYWQ=",
+    "useInferencePlugins": false,
+    "defaultBase": "main"
 }

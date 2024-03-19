@@ -4,6 +4,7 @@ import { PopoverBodyComponent } from './popover-body.component';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { PopoverModule } from '../popover.module';
 import { A11yModule } from '@angular/cdk/a11y';
+import { OverlayModule } from "@angular/cdk/overlay";
 
 describe('PopoverBodyComponent', () => {
     let component: PopoverBodyComponent;
