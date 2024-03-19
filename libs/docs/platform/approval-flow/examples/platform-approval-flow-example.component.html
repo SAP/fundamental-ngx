@@ -10,6 +10,7 @@
     [isEditAvailable]="editModeEnabled"
     [disableSaveButton]="disableSaveButton"
     [disableExitButton]="disableExitButton"
+    [removeSpaceNode]="isRemoveSpaceNode"
     (nodeClick)="nodeClick($event)"
     (afterNodeAdd)="afterNodeAdd($event)"
     (afterNodeEdit)="afterNodeEdit($event)"
@@ -181,3 +182,4 @@
 </div>
 <p>Disable "Save" button: <input type="checkbox" [(ngModel)]="disableSaveButton" /></p>
 <p>Disable "Exit" button: <input type="checkbox" [(ngModel)]="disableExitButton" /></p>
+<p>Remove space node: <input type="checkbox" [(ngModel)]="isRemoveSpaceNode" /></p>
