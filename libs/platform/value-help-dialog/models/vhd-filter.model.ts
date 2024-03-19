@@ -1,6 +1,13 @@
+import { TemplateRef } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { ValueHelpFilterDefDirective } from '../directives/value-help-filter-def.directive';
 
+export interface ValueHelpFilterDefContext {
+    $implicit: VhdFilter;
+}
+
+export interface ValueHelpFilterDef {
+    templateRef: TemplateRef<ValueHelpFilterDefContext>;
+}
 export interface VhdFilter {
     key: string;
     label: string;
@@ -9,5 +16,5 @@ export interface VhdFilter {
     advanced?: boolean;
     include?: boolean;
     exclude?: boolean;
-    filterDef: Nullable<ValueHelpFilterDefDirective>;
+    filterDef: Nullable<ValueHelpFilterDef>;
 }

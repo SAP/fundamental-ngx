@@ -69,7 +69,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     private _keyboardEventsManager: FocusKeyManager<TabLinkDirective>;
 
     /** @hidden */
-    private _dir: 'ltr' | 'rtl' = this._rtlService?.rtl.value ? 'rtl' : 'ltr';
+    private _dir: 'ltr' | 'rtl';
 
     /** @hidden */
     constructor(
@@ -77,6 +77,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
         private readonly _contentDensityObserver: ContentDensityObserver,
         @Optional() private readonly _rtlService: RtlService
     ) {
+        this._dir = this._rtlService?.rtl.value ? 'rtl' : 'ltr';
         this._contentDensityObserver.subscribe();
     }
 

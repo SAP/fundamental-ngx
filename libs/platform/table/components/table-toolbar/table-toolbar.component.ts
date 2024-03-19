@@ -147,16 +147,13 @@ export class TableToolbarComponent implements TableToolbarInterface {
     _searchInputText = '';
 
     /** @hidden */
-    readonly tableLoading$: Observable<boolean> = this._tableService.tableLoading$;
+    readonly tableLoading$: Observable<boolean> = inject(TableService).tableLoading$;
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    constructor(
-        private readonly _table: Table,
-        private readonly _tableService: TableService
-    ) {
+    constructor(private readonly _table: Table) {
         this._listenToTableEvents();
     }
 

@@ -2,8 +2,8 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "../../dist/out-tsc",
-        "types": ["jasmine", "node"]
+        "types": ["jest", "node"],
+        "target": "ES2016"
     },
-    "files": ["./test.ts"],
     "include": ["**/*.spec.ts", "**/*.d.ts"]
 }

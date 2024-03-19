@@ -1,6 +1,7 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
+        "rootDir": ".",
         "outDir": "../../dist/out-tsc",
         "target": "ES2022",
         "declaration": true,
@@ -14,7 +15,6 @@
         "strictMetadataEmit": true,
         "enableResourceInlining": true
     },
-    "files": ["./src/lib/index.ts"],
-    "exclude": ["test.ts", "**/*.spec.ts"],
-    "include": ["**/*.ts"]
+    "exclude": ["**/*.spec.ts", "../../dist/out-tsc"],
+    "include": ["./**/*.ts"]
 }

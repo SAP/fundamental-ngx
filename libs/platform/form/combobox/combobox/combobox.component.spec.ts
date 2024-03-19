@@ -4,7 +4,6 @@ import { Component, ViewChild } from '@angular/core';
 import {
     ComponentFixture,
     TestBed,
-    discardPeriodicTasks,
     fakeAsync,
     flush,
     flushMicrotasks,
@@ -178,24 +177,21 @@ describe('ComboboxComponent default values', () => {
         expect(component.selectedItem?.payload).toEqual(component.dataSource[2]);
     });
 
-    it('should be able to see Group', fakeAsync(() => {
+    it('should be able to see Group', async () => {
         component.group = true;
 
         component.dataSource = [...component.dataSource];
         fixture.detectChanges();
-        flushMicrotasks();
 
         combobox.onPrimaryButtonClick();
         fixture.detectChanges();
-        flushMicrotasks();
 
-        discardPeriodicTasks();
+        await fixture.whenRenderingDone();
 
         const group = overlayContainerEl.querySelectorAll('.fd-list__group-header');
-        expect(group.length).toBe(3);
 
-        flush();
-    }));
+        expect(group.length).toBe(3);
+    });
 
     it('should be able to see Secondary Columns', () => {
         component.showSecondaryText = true;

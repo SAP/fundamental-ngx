@@ -324,7 +324,7 @@
             "@fundamental-ngx/i18n": ["libs/i18n/src/index.ts"],
             "@fundamental-ngx/moment-adapter": ["libs/moment-adapter/src/index.ts"],
             "@fundamental-ngx/nx-plugin": ["libs/nx-plugin/src/index.ts"],
-            "@fundamental-ngx/platform": ["libs/platform/src/lib/index.ts"],
+            "@fundamental-ngx/platform": ["libs/platform/index.ts"],
             "@fundamental-ngx/platform/approval-flow": ["libs/platform/approval-flow/index.ts"],
             "@fundamental-ngx/platform/button": ["libs/platform/button/index.ts"],
             "@fundamental-ngx/platform/dynamic-page": ["libs/platform/dynamic-page/index.ts"],

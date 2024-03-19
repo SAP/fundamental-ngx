@@ -13,7 +13,7 @@ import {
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MessageStripAlertService, MessageStripComponent } from '@fundamental-ngx/core/message-strip';
-import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform';
+import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform/icon-tab-bar';
 import { Observable, ReplaySubject, isObservable, of, shareReplay, switchMap, tap, zip } from 'rxjs';
 import { catchError, map, startWith } from 'rxjs/operators';
 import { CopyService } from '../../services/copy.service';
