@@ -67,6 +67,7 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
     };
     allStatuses = ['in progress', 'not started', 'approved', 'rejected'];
     sendReminderStatuses: ApprovalStatus[] = ['in progress', 'not started'];
+    isRemoveSpaceNode = false;
 
     /** @hidden */
     disableSaveButton = false;

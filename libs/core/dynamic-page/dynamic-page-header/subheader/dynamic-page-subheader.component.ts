@@ -75,11 +75,6 @@ export class DynamicPageSubheaderComponent {
     @Input()
     collapseLabel: string;
 
-    /** Header role  */
-    @Input()
-    @HostBinding('attr.role')
-    role = 'region';
-
     /**
      * id for header
      */
