@@ -2,7 +2,6 @@
     "name": "cx",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
-    "sourceRoot": "libs/cx",
     "prefix": "cx",
     "targets": {
         "prepare": {
@@ -11,7 +10,7 @@
                 "commands": [
                     "npx nx run cx-schematics:build",
                     "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=cx --verbose",
-                    "yarn pack --cwd dist/libs/cx"
+                    "yarn pack --cwd dist/{projectRoot}"
                 ]
             }
         },
@@ -24,20 +23,27 @@
         },
         "build": {
             "executor": "@nx/angular:package",
-            "outputs": ["{workspaceRoot}/dist/libs/cx"],
+            "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
             "options": {
-                "tsConfig": "libs/cx/tsconfig.lib.json",
-                "project": "libs/cx/ng-package.json"
+                "tsConfig": "{projectRoot}/tsconfig.lib.json",
+                "project": "{projectRoot}/ng-package.json"
             },
             "configurations": {
                 "production": {
-                    "tsConfig": "libs/cx/tsconfig.lib.prod.json"
+                    "tsConfig": "{projectRoot}/tsconfig.lib.prod.json"
                 }
             },
             "defaultConfiguration": "production"
         },
         "lint": {
             "executor": "@nx/eslint:lint"
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "{projectRoot}/jest.config.ts"
+            }
         }
     },
     "tags": ["type:lib", "scope:cx"]

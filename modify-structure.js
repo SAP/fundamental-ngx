@@ -1,4 +1,4 @@
-const libPath = 'libs/cdk';
+const libPath = 'libs/cx';
 
 const ngPackageFiles = require('fast-glob').sync(`${libPath}/*/ng-package.json`);
 const jestConfigFiles = require('fast-glob').sync(`${libPath}/*/jest.config.ts`);

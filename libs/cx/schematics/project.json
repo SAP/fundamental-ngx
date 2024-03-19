@@ -1,20 +1,6 @@
 {
     "$schema": "../../../node_modules/nx/schemas/project-schema.json",
     "name": "cx-schematics",
-    "targets": {
-        "build": {
-            "executor": "@nx/js:tsc",
-            "options": {
-                "outputPath": "dist/libs/cx/schematics",
-                "tsConfig": "libs/cx/schematics/tsconfig.json",
-                "main": "libs/cx/schematics/ng-add/index.ts",
-                "assets": [
-                    "libs/cx/schematics/**/*/schema.json",
-                    "libs/cx/schematics/collection.json",
-                    "libs/cx/schematics/migrations.json"
-                ]
-            }
-        }
-    },
+    "targets": {},
     "implicitDependencies": ["cx"]
 }
