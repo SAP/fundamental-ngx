@@ -37,6 +37,13 @@
         },
         "lint": {
             "executor": "@nx/eslint:lint"
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "{projectRoot}/jest.config.ts"
+            }
         }
     },
     "tags": ["type:lib", "scope:cdk"]
