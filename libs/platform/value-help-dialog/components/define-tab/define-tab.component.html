@@ -32,7 +32,9 @@
                 >
                     @if (_includeStrategy.length) {
                         <li fd-list-group-header>
-                            {{ 'platformVHD.defineConditionConditionsGroupHeaderInclude' | fdTranslate }}
+                            <span fd-list-title>{{
+                                'platformVHD.defineConditionConditionsGroupHeaderInclude' | fdTranslate
+                            }}</span>
                         </li>
                         @for (strategy of _includeStrategy; track strategy) {
                             <li fd-option [value]="strategy.key">
@@ -45,7 +47,9 @@
                     }
                     @if (_excludeStrategy.length) {
                         <li fd-list-group-header>
-                            {{ 'platformVHD.defineConditionConditionsGroupHeaderExclude' | fdTranslate }}
+                            <span fd-list-title>{{
+                                'platformVHD.defineConditionConditionsGroupHeaderExclude' | fdTranslate
+                            }}</span>
                         </li>
                         @for (strategy of _excludeStrategy; track strategy) {
                             <li fd-option [value]="strategy.key">
