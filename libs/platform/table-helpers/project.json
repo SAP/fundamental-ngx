@@ -5,6 +5,5 @@
     "sourceRoot": "libs/platform/table-helpers",
     "prefix": "fdp",
     "targets": {},
-    "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": []
+    "tags": ["type:lib", "scope:fdp"]
 }

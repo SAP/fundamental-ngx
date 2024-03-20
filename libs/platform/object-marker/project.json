@@ -5,6 +5,5 @@
     "sourceRoot": "libs/platform/object-marker",
     "prefix": "fdp",
     "targets": {},
-    "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": []
+    "tags": ["type:lib", "scope:fdp"]
 }

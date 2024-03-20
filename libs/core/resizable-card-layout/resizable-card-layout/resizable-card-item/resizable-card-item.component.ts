@@ -381,9 +381,8 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
 
     /**
      * when resizing of card stops
-     * @param event {MouseEvent}
      */
-    @HostListener('document: mouseup', ['$event'])
+    @HostListener('document:mouseup', ['$event'])
     onMouseUp(): void {
         if (!this.resizable) {
             return;

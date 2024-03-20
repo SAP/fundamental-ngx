@@ -1,6 +1,19 @@
 {
     "$schema": "../../../node_modules/nx/schemas/project-schema.json",
     "name": "cx-schematics",
-    "targets": {},
-    "implicitDependencies": ["cx"]
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "options": {
+                "outputPath": "dist/{projectRoot}",
+                "tsConfig": "{projectRoot}/tsconfig.json",
+                "main": "{projectRoot}/ng-add/index.ts",
+                "assets": [
+                    "{projectRoot}/**/*/schema.json",
+                    "{projectRoot}/collection.json",
+                    "{projectRoot}/migrations.json"
+                ]
+            }
+        }
+    }
 }

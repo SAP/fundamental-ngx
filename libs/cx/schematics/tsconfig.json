@@ -12,7 +12,7 @@
         "noImplicitThis": true,
         "noUnusedParameters": true,
         "noUnusedLocals": true,
-        "outDir": "../../dist/libs/moment-adapter/schematics",
+        "outDir": "../../dist/libs/cx/schematics",
         "skipDefaultLibCheck": true,
         "skipLibCheck": true,
         "sourceMap": true,
