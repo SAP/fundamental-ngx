@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'בוחר טווח שנים'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'תיבה משולבת עם ערכים מרובים',
         selectAllLabel: 'בחר הכול ({selectedItems} מתוך {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'בטל'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'הרחב כותרת',
+        collapseLabel: 'צמצם כותרת',
+        pinLabel: 'הצמד כותרת',
+        unpinLabel: 'בטל הצמדת כותרת'
     },
     coreFeedListItem: {
         moreLabel: '{count} נוספים',
@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'נווט בבחירות עם החצים למעלה ולמטה.',
         escapeNavigateTokens:
             'הקש על Escape כדי לצאת משדה הקלט והשתמש במקשי החצים שמאלה וימינה כדי לנווט בין האפשרויות שנבחרו.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'מכיל {length, plural, =0 {ללא אסימון} =1 {אסימון אחד} other {# אסימונים} }.'
     },
     coreNavigation: {
         mainNavigation: 'ניווט ראשי',
@@ -406,9 +406,11 @@ export default {
         headerMenuSortAsc: 'מיין בסדר עולה',
         headerMenuSortDesc: 'מיין בסדר יורד',
         headerMenuGroup: 'קבוצה',
-        headerMenuFreeze: 'הקפא',
+        headerMenuFreeze: 'הקפא עמודה',
         headerMenuEndFreeze: 'הקפא לסוף',
-        headerMenuUnfreeze: 'בטל הקפאה',
+        headerMenuUnfreeze: 'בטל הקפאת עמודה',
+        headerMenuFreezePlural: 'הקפא עמודות',
+        headerMenuUnfreezePlural: 'בטל הקפאת עמודות',
         headerMenuFilter: 'מסנן',
         defaultEmptyMessage: 'לא נמצאו נתונים',
         emptyCell: 'ריק',
@@ -505,7 +507,8 @@ export default {
         selectAllCheckboxLabel: 'בחר הכול',
         deselectAllCheckboxLabel: 'בטל בחירה של הכול',
         deselectSingleRow: 'על מנת לבטל בחירת שורה, הקש על מקש הרווח',
-        selectSingleRow: 'על מנת לבחור שורה, הקש על מקש הרווח'
+        selectSingleRow: 'על מנת לבחור שורה, הקש על מקש הרווח',
+        loadMore: 'טען עוד'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'ערוך'

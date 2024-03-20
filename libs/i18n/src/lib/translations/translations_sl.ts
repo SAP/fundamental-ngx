@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Izbirnik števila let'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Kombinirani seznam z več vrednostmi',
         selectAllLabel: 'Izbira vseh ({selectedItems} od {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Prekliči'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Razširitev glave',
+        collapseLabel: 'Skrčitev glave',
+        pinLabel: 'Pripenjanje glave',
+        unpinLabel: 'Odpenjanje glave'
     },
     coreFeedListItem: {
         moreLabel: 'Še {count}',
@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Krmarjenje po izbirah s puščičnima tipkama navzgor in navzdol.',
         escapeNavigateTokens:
             'Pritisnite Esc, da zapustite vnosno polje, in se s puščičnima tipkama levo in desno pomikate po izbranih možnostih.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Vsebuje {length, plural, =0 {nič žetonov} =1 {1 žeton} other {# žetonov} }.'
     },
     coreNavigation: {
         mainNavigation: 'Glavno krmarjenje',
@@ -407,9 +407,11 @@ export default {
         headerMenuSortAsc: 'Naraščajoče razvrščanje',
         headerMenuSortDesc: 'Padajoče razvrščanje',
         headerMenuGroup: 'Uskupinjanje',
-        headerMenuFreeze: 'Zamrzni',
+        headerMenuFreeze: 'Zamrznitev stolpca',
         headerMenuEndFreeze: 'Zamrzni do konca',
-        headerMenuUnfreeze: 'Razveljavitev zamrznitve',
+        headerMenuUnfreeze: 'Odmrznitev stolpca',
+        headerMenuFreezePlural: 'Zamrznitev stolpcev',
+        headerMenuUnfreezePlural: 'Odmrznitev stolpcev',
         headerMenuFilter: 'Filter',
         defaultEmptyMessage: 'Podatki niso najdeni',
         emptyCell: 'Prazno',
@@ -507,7 +509,8 @@ export default {
         selectAllCheckboxLabel: 'Izberi vse',
         deselectAllCheckboxLabel: 'Preklic izbire vseh',
         deselectSingleRow: 'Za preklic izbire pritisnite preslednico',
-        selectSingleRow: 'Za izbiro vrstice pritisnite preslednico'
+        selectSingleRow: 'Za izbiro vrstice pritisnite preslednico',
+        loadMore: 'Naloži več'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Uredi'

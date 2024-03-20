@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Évtartomány-választó'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Többértékes kombinált lista',
         selectAllLabel: 'Összes kiválasztása ({selectedItems} / {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Mégse'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Fejléc kibontása',
+        collapseLabel: 'Fejléc visszazárása',
+        pinLabel: 'Fejléc rögzítése',
+        unpinLabel: 'Fejléc feloldása'
     },
     coreFeedListItem: {
         moreLabel: 'További {count}',
@@ -407,9 +407,11 @@ export default {
         headerMenuSortAsc: 'Rendezés növekvő sorrendben',
         headerMenuSortDesc: 'Rendezés csökkenő sorrendben',
         headerMenuGroup: 'Csoport',
-        headerMenuFreeze: 'Rögzítés',
+        headerMenuFreeze: 'Oszlop rögzítése',
         headerMenuEndFreeze: 'Rögzítés a végéig',
-        headerMenuUnfreeze: 'Rögzítés feloldása',
+        headerMenuUnfreeze: 'Oszlop rögzítésének feloldása',
+        headerMenuFreezePlural: 'Oszlopok rögzítése',
+        headerMenuUnfreezePlural: 'Oszlop rögzítésének feloldása',
         headerMenuFilter: 'Szűrő',
         defaultEmptyMessage: 'Nem található adat',
         emptyCell: 'Üres',
@@ -507,7 +509,8 @@ export default {
         selectAllCheckboxLabel: 'Összes kiválasztása',
         deselectAllCheckboxLabel: 'Összes kijelölésének megszüntetése',
         deselectSingleRow: 'A sor kijelölésének megszüntetéséhez nyomja meg a „szóköz” billentyűt',
-        selectSingleRow: 'A sor kijelöléséhez nyomja meg a „szóköz” billentyűt'
+        selectSingleRow: 'A sor kijelöléséhez nyomja meg a „szóköz” billentyűt',
+        loadMore: 'Továbbiak betöltése'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Szerkesztés'

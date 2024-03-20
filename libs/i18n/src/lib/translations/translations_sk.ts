@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Výber rozsahu rokov'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Výklopný zoznam s viacerými hodnotami',
         selectAllLabel: 'Vybrať všetko ({selectedItems} z {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Zrušiť'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Rozbaliť hlavičku',
+        collapseLabel: 'Zbaliť hlavičku',
+        pinLabel: 'Pripnúť hlavičku',
+        unpinLabel: 'Zrušiť pripnutie hlavičky'
     },
     coreFeedListItem: {
         moreLabel: '{count} viac',
@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Prechádzajte výbermi pomocou šípok nahor a nadol.',
         escapeNavigateTokens:
             'Stlačením klávesu Esc opustíte vstupné pole a pomocou klávesov so šípkou doľava a doprava môžete prechádzať vybranými možnosťami.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Obsahuje celkový počet tokenov: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Hlavná navigácia',
@@ -407,9 +407,11 @@ export default {
         headerMenuSortAsc: 'Triediť vzostupne',
         headerMenuSortDesc: 'Triediť zostupne',
         headerMenuGroup: 'Skupina',
-        headerMenuFreeze: 'Fixovať',
+        headerMenuFreeze: 'Fixovať stĺpec',
         headerMenuEndFreeze: 'Fixovať a ukončiť',
-        headerMenuUnfreeze: 'Zrušiť fixáciu',
+        headerMenuUnfreeze: 'Zrušiť fixovanie stĺpca',
+        headerMenuFreezePlural: 'Fixovať stĺpce',
+        headerMenuUnfreezePlural: 'Zrušiť fixovanie stĺpcov',
         headerMenuFilter: 'Filter',
         defaultEmptyMessage: 'Nenašli sa žiadne údaje',
         emptyCell: 'Prázdne',
@@ -507,7 +509,8 @@ export default {
         selectAllCheckboxLabel: 'Vybrať všetko',
         deselectAllCheckboxLabel: 'Zrušiť výber všetkého',
         deselectSingleRow: 'Pre zrušenie výberu stlačte MEDZERNÍK',
-        selectSingleRow: 'Ak chcete vybrať riadok, stlačte MEDZERNÍK'
+        selectSingleRow: 'Ak chcete vybrať riadok, stlačte MEDZERNÍK',
+        loadMore: 'Načítať ďalšie'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Upraviť'
