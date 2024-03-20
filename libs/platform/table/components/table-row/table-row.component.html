@@ -152,7 +152,7 @@
                 ></span>
             }
             @if (row.state === 'readonly') {
-                @if ((row.value | valueByPath: column.key) === '' || (row.value | valueByPath: column.key) === null) {
+                @if (!(row.value | valueByPath: column.key)) {
                     <span
                         [ngStyle]="{
                             position: 'absolute !important',
