@@ -7,10 +7,7 @@
         "prepare": {
             "executor": "nx:run-commands",
             "options": {
-                "commands": [
-                    "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=cdk --verbose",
-                    "yarn pack --cwd dist/libs/cdk"
-                ]
+                "commands": ["npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=cdk --verbose"]
             }
         },
         "compile-typedoc": {

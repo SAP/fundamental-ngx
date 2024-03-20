@@ -8,10 +8,7 @@
         "prepare": {
             "executor": "nx:run-commands",
             "options": {
-                "commands": [
-                    "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=datetime-adapter --verbose",
-                    "yarn pack --cwd dist/libs/datetime-adapter"
-                ]
+                "commands": ["npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=datetime-adapter --verbose"]
             }
         },
         "compile-typedoc": {

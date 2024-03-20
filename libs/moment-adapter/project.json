@@ -8,10 +8,7 @@
         "prepare": {
             "executor": "nx:run-commands",
             "options": {
-                "commands": [
-                    "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=moment-adapter --verbose",
-                    "yarn pack --cwd dist/libs/moment-adapter"
-                ]
+                "commands": ["npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=moment-adapter --verbose"]
             }
         },
         "compile-typedoc": {

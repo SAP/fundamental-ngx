@@ -9,8 +9,7 @@
             "options": {
                 "commands": [
                     "npx nx run platform-schematics:build",
-                    "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=platform --verbose",
-                    "yarn pack --cwd dist/libs/platform"
+                    "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=platform --verbose"
                 ]
             }
         },
