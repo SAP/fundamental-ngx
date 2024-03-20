@@ -146,7 +146,7 @@
     (keydown.arrowRight)="_tableRowService.scrollToOverlappedCell()"
     (keydown.space)="_handleCellSpaceKey(colIdx, tableCellElement, $event)"
 >
-    <div [class.fd-table__text]="column.applyText" [class.fd-table__text--no-wrap]="column.noWrap">
+    <div [class.fd-table__text]="column.applyText" [class.fd-table__text--no-wrap]="column.noWrap" #tableTextContainer>
         <span
             *ngIf="_isTreeRowFirstCell(colIdx, row)"
             class="fd-table__expand"
@@ -156,7 +156,7 @@
 
         <ng-container *ngIf="row.state === 'readonly'; else editModeCell">
             <span
-                *ngIf="(row.value | valueByPath : column.key) === '' || (row.value | valueByPath : column.key) === null"
+                *ngIf="tableTextContainer.innerText.trim() === ''"
                 style="
                     position: absolute !important;
                     height: 1px;
