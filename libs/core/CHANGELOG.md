@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.56...v0.49.0-rc.57) (2024-03-20)
+
+
+### Bug Fixes
+
+* **core:** add aria-labelledby for Card component ([#11566](https://github.com/SAP/fundamental-ngx/issues/11566)) ([6dd154f](https://github.com/SAP/fundamental-ngx/commit/6dd154f9a187070bfb989ae45de2e41450cb3be2))
+
+
+
+
+
 # [0.49.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.55...v0.49.0-rc.56) (2024-03-18)
 
 **Note:** Version bump only for package @fundamental-ngx/core
