@@ -3,7 +3,7 @@
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/moment-adapter/src",
     "projectType": "library",
-    "prefix": "fd",
+    "prefix": "datetime-adapter",
     "targets": {
         "prepare": {
             "executor": "nx:run-commands",

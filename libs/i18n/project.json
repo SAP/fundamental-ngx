@@ -3,7 +3,7 @@
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/i18n/src",
-    "prefix": "fundamental-ngx",
+    "prefix": "i18n",
     "targets": {
         "prepare": {
             "executor": "nx:run-commands",

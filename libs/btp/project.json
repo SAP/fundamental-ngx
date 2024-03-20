@@ -1,8 +1,7 @@
 {
     "name": "btp",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/btp",
-    "prefix": "fundamental-ngx",
+    "prefix": "fdb",
     "tags": ["type:lib", "scope:fdb"],
     "projectType": "library",
     "targets": {

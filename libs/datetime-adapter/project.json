@@ -3,7 +3,7 @@
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/datetime-adapter/src",
-    "prefix": "fundamental-ngx",
+    "prefix": "datetime-adapter",
     "targets": {
         "prepare": {
             "executor": "nx:run-commands",
