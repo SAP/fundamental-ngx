@@ -156,7 +156,7 @@
 
         <ng-container *ngIf="row.state === 'readonly'; else editModeCell">
             <span
-                *ngIf="(row.value | valueByPath : column.key) === '' || (row.value | valueByPath : column.key) === null"
+                *ngIf="!(row.value | valueByPath : column.key)"
                 style="
                     position: absolute !important;
                     height: 1px;
