@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Jarenbereikkiezer'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Keuzelijst met invoerveld met meerdere waarden',
         selectAllLabel: 'Alle ({selectedItems} van {totalItems}) selecteren'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Annuleren'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Kop uitvouwen',
+        collapseLabel: 'Kop samenvouwen',
+        pinLabel: 'Kop vastpinnen',
+        unpinLabel: 'Kop losmaken'
     },
     coreFeedListItem: {
         moreLabel: 'nog {count}',
@@ -408,9 +408,11 @@ export default {
         headerMenuSortAsc: 'Oplopend sorteren',
         headerMenuSortDesc: 'Aflopend sorteren',
         headerMenuGroup: 'Groeperen',
-        headerMenuFreeze: 'Fixeren',
+        headerMenuFreeze: 'Kolom fixeren',
         headerMenuEndFreeze: 'Fixeren tot eind',
-        headerMenuUnfreeze: 'Fixering opheffen',
+        headerMenuUnfreeze: 'Fixering van kolom opheffen',
+        headerMenuFreezePlural: 'Kolommen fixeren',
+        headerMenuUnfreezePlural: 'Fixering van kolommen opheffen',
         headerMenuFilter: 'Filteren',
         defaultEmptyMessage: 'Geen gegevens gevonden',
         emptyCell: 'Leeg',
@@ -508,7 +510,8 @@ export default {
         selectAllCheckboxLabel: 'Alles selecteren',
         deselectAllCheckboxLabel: 'Alle selecties opheffen',
         deselectSingleRow: 'Druk op de spatiebalk om de selectie van de rij op te heffen',
-        selectSingleRow: 'Druk op de spatiebalk om de rij te selecteren'
+        selectSingleRow: 'Druk op de spatiebalk om de rij te selecteren',
+        loadMore: 'Meer laden'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Bewerken'

@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Selector interval de ani'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Casetă combinată cu valori multiple',
         selectAllLabel: 'Selectare toate ({selectedItems} din {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Anulare'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Extindere antet',
+        collapseLabel: 'Restrângere antet',
+        pinLabel: 'Fixare antet',
+        unpinLabel: 'Anulare fixare antet'
     },
     coreFeedListItem: {
         moreLabel: 'Încă {count}',
@@ -408,9 +408,11 @@ export default {
         headerMenuSortAsc: 'Sortare în ordine crescătoare',
         headerMenuSortDesc: 'Sortare în ordine descrescătoare',
         headerMenuGroup: 'Grupare',
-        headerMenuFreeze: 'Înghețare',
+        headerMenuFreeze: 'Înghețare coloană',
         headerMenuEndFreeze: 'Înghețare până la sfârșit',
-        headerMenuUnfreeze: 'Anulare înghețare',
+        headerMenuUnfreeze: 'Anulare înghețare coloană',
+        headerMenuFreezePlural: 'Înghețare coloane',
+        headerMenuUnfreezePlural: 'Anulare înghețare coloane',
         headerMenuFilter: 'Filtrare',
         defaultEmptyMessage: 'Nu s-au găsit date',
         emptyCell: 'Goală',
@@ -508,7 +510,8 @@ export default {
         selectAllCheckboxLabel: 'Selectare toate',
         deselectAllCheckboxLabel: 'Deselectare toate',
         deselectSingleRow: 'Pentru a deselecta linia, apăsați pe BARA DE SPAȚIU',
-        selectSingleRow: 'Pentru a selecta linia, apăsați pe BARA DE SPAȚIU'
+        selectSingleRow: 'Pentru a selecta linia, apăsați pe BARA DE SPAȚIU',
+        loadMore: 'Încărcare mai multe'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Modificare'
