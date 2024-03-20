@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Επιλογέας εύρους ετών'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Σύνθετο Πλαίσιο Πολλών Τιμών',
         selectAllLabel: 'Επιλογή όλων ({selectedItems} of {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Ακύρωση'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Επέκταση Κεφαλίδας',
+        collapseLabel: 'Σύμπτηξη Κεφαλίδας',
+        pinLabel: 'Καρφίτσωμα Κεφαλίδας',
+        unpinLabel: 'Ξεκαρφίτσωμα Κεφαλίδας'
     },
     coreFeedListItem: {
         moreLabel: '{count} περισσότερα',
@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Πλοήγηση επιλογών με τα βέλη πάνω και κάτω.',
         escapeNavigateTokens:
             'Πατήστε το πλήκτρο διαφυγής (escape) για να κλείσετε το πεδίο και χρησιμοποιήστε τα βέλη δεξιά και αριστερά για να πλοηγηθείτε μέσω των επιλεγμένων δυνατοτήτων.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Περιέχει {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
         mainNavigation: 'Κύρια Πλοήγηση',
@@ -408,9 +408,11 @@ export default {
         headerMenuSortAsc: 'Αύξουσα Ταξινόμηση',
         headerMenuSortDesc: 'Φθίνουσα Ταξινόμηση',
         headerMenuGroup: 'Ομάδα',
-        headerMenuFreeze: 'Δέσμευση',
+        headerMenuFreeze: 'Δέσμευση Στήλης',
         headerMenuEndFreeze: 'Δέσμευση για Λήξη',
-        headerMenuUnfreeze: 'Αποδέσμευση',
+        headerMenuUnfreeze: 'Αποδέσμευση Στήλης',
+        headerMenuFreezePlural: 'Δέσμευση Στηλών',
+        headerMenuUnfreezePlural: 'Αποδέσμευση στηλών',
         headerMenuFilter: 'Φίλτρο',
         defaultEmptyMessage: 'Δεν βρέθηκαν δεδομένα',
         emptyCell: 'Κενό',
@@ -508,7 +510,8 @@ export default {
         selectAllCheckboxLabel: 'Επιλογή όλων',
         deselectAllCheckboxLabel: 'Κατάργηση επιλογής όλων',
         deselectSingleRow: 'Για να αποεπιλέξετε σειρά, πατήστε το ΚΕΝΟ ΔΙΑΣΤΗΜΑ',
-        selectSingleRow: 'Για να αποεπιλέξετε σειρά, πατήστε το ΚΕΝΟ ΔΙΑΣΤΗΜΑ'
+        selectSingleRow: 'Για να αποεπιλέξετε σειρά, πατήστε το ΚΕΝΟ ΔΙΑΣΤΗΜΑ',
+        loadMore: 'Φόρτωση περισσότερων'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Επεξεργασία'

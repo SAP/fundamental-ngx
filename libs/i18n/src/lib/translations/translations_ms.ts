@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Pemilih julat tahun'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Kotak Kombo Nilai Berbilang',
         selectAllLabel: 'Pilih semua ({selectedItems} daripada {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Batal'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Kembangkan Pengepala',
+        collapseLabel: 'Runtuhkan Pengepala',
+        pinLabel: 'Pinkan Pengepala',
+        unpinLabel: 'Nyahpin Pengepala'
     },
     coreFeedListItem: {
         moreLabel: '{count} selanjutnya',
@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Navigasi pemilihan dengan anak panah atas dan bawah.',
         escapeNavigateTokens:
             'Tekan kekunci keluar untuk keluar daripada medan input dan gunakan kekunci anak panah kiri dan kanan untuk navigasi melalui pilihan yang dipilih.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Mengandungi {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
         mainNavigation: 'Navigasi Utama',
@@ -406,9 +406,11 @@ export default {
         headerMenuSortAsc: 'Isih Menaik',
         headerMenuSortDesc: 'Isih Menurun',
         headerMenuGroup: 'Kumpulan',
-        headerMenuFreeze: 'Beku',
+        headerMenuFreeze: 'Bekukan lajur',
         headerMenuEndFreeze: 'Beku sehingga Akhir',
-        headerMenuUnfreeze: 'Nyahbeku',
+        headerMenuUnfreeze: 'Nyahbekukan lajur',
+        headerMenuFreezePlural: 'Bekukan lajur',
+        headerMenuUnfreezePlural: 'Nyahbekukan lajur',
         headerMenuFilter: 'Penapis',
         defaultEmptyMessage: 'Tiada data ditemui',
         emptyCell: 'Kosong',
@@ -506,7 +508,8 @@ export default {
         selectAllCheckboxLabel: 'Pilih semua',
         deselectAllCheckboxLabel: 'Nyahpilih semua',
         deselectSingleRow: 'Untuk nyahpilih baris, tekan BAR RUANG',
-        selectSingleRow: 'Untuk pilih baris, tekan BAR RUANG'
+        selectSingleRow: 'Untuk pilih baris, tekan BAR RUANG',
+        loadMore: 'Muatkan lebih lagi'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edit'
