@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.58...v0.49.0-rc.59) (2024-03-20)
+
+
+### Bug Fixes
+
+* **i18n:** fixed incorrect translation syntax and improved test reports ([#11601](https://github.com/SAP/fundamental-ngx/issues/11601)) ([fd5b299](https://github.com/SAP/fundamental-ngx/commit/fd5b299c2c404658dbc15b793e40a7e1c4c297a1))
+
+
+
+
+
 # [0.49.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.57...v0.49.0-rc.58) (2024-03-20)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
