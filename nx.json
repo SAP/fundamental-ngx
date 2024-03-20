@@ -48,7 +48,7 @@
             "cache": true
         },
         "prepare": {
-            "dependsOn": ["build"]
+            "dependsOn": ["^prepare", "build"]
         },
         "transform-translations": {
             "inputs": ["{projectRoot}/**/*.properties", "default"],

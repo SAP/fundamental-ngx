@@ -5,13 +5,8 @@
     "prefix": "fd",
     "targets": {
         "prepare": {
-            "executor": "nx:run-commands",
-            "options": {
-                "commands": [
-                    "npx nx run core-schematics:build",
-                    "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=core --verbose"
-                ]
-            }
+            "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=core --verbose",
+            "dependsOn": ["core-schematics:build", "^prepare"]
         },
         "compile-typedoc": {
             "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",

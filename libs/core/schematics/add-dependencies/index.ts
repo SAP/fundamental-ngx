@@ -4,12 +4,19 @@ import { compare } from 'compare-versions';
 import { coerce, major, SemVer, valid } from 'semver';
 import { Schema } from '../models/schema';
 import { addPackageDependency, installDependencies } from '../utils/package-utils';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const libraryPackageJson = require('@fundamental-ngx/core/package.json');
 
 const desiredVersions = {
-    'fundamental-styles': process.env.FD_ENV_FDSTYLES_VER_PLACEHOLDER || 'FDSTYLES_VER_PLACEHOLDER',
-    '@sap-theming/theming-base-content': process.env.FD_ENV_THEMING_VER_PLACEHOLDER || 'THEMING_VER_PLACEHOLDER',
-    '@fundamental-ngx/i18n': process.env.FD_ENV_VERSION_PLACEHOLDER || 'VERSION_PLACEHOLDER',
-    '@fundamental-ngx/cdk': process.env.FD_ENV_VERSION_PLACEHOLDER || 'VERSION_PLACEHOLDER'
+    'fundamental-styles':
+        process.env.FD_ENV_FDSTYLES_VER_PLACEHOLDER || libraryPackageJson.peerDependencies['fundamental-styles'],
+    '@sap-theming/theming-base-content':
+        process.env.FD_ENV_THEMING_VER_PLACEHOLDER ||
+        libraryPackageJson.peerDependencies['@sap-theming/theming-base-content'],
+    '@fundamental-ngx/i18n':
+        process.env.FD_ENV_VERSION_PLACEHOLDER || libraryPackageJson.peerDependencies['@fundamental-ngx/i18n'],
+    '@fundamental-ngx/cdk':
+        process.env.FD_ENV_VERSION_PLACEHOLDER || libraryPackageJson.peerDependencies['@fundamental-ngx/cdk']
 };
 
 /**

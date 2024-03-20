@@ -5,13 +5,8 @@
     "prefix": "cx",
     "targets": {
         "prepare": {
-            "executor": "nx:run-commands",
-            "options": {
-                "commands": [
-                    "npx nx run cx-schematics:build",
-                    "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=cx --verbose"
-                ]
-            }
+            "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=cx --verbose",
+            "dependsOn": ["cx-schematics:build", "^prepare"]
         },
         "compile-typedoc": {
             "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
