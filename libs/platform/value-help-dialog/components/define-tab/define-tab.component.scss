@@ -44,3 +44,7 @@ $block: fdp-value-help-dialog;
         }
     }
 }
+
+.fd-list--dropdown .fd-list__item.fd-list__group-header {
+    border-bottom: var(--sapList_BorderWidth) solid var(--sapList_GroupHeaderBorderColor);
+}
