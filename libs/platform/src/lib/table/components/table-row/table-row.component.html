@@ -156,7 +156,7 @@
 
         <ng-container *ngIf="row.state === 'readonly'; else editModeCell">
             <span
-                *ngIf="tableTextContainer.innerText.trim() === ''"
+                *ngIf="tableTextContainer?.innerText?.trim() === ''"
                 style="
                     position: absolute !important;
                     height: 1px;
