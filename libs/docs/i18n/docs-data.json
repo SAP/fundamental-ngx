@@ -1,0 +1,30 @@
+{
+    "guides": [
+        {
+            "name": "Home",
+            "url": "i18n/home"
+        },
+        {
+            "name": "Writing translations",
+            "url": "i18n/writing-translations"
+        }
+    ],
+    "utilities": [
+        {
+            "name": "Loading translations",
+            "url": "i18n/loading-translations"
+        },
+        {
+            "name": "Changing translations",
+            "url": "i18n/changing-translations"
+        },
+        {
+            "name": "Resolving translations",
+            "url": "i18n/resolver"
+        },
+        {
+            "name": "Patch translations",
+            "url": "i18n/patch"
+        }
+    ]
+}

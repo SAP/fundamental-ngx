@@ -5,4 +5,5 @@
 <component-example>
     <fundamental-ngx-<%= name %>-default-example></fundamental-ngx-<%= name %>-default-example>
 </component-example>
-<code-example [exampleFiles]="<%= propertyName %>DefaultExample"></code-example>
+<code-example [exampleFiles]="<%= propertyName %>DefaultExample" />
+<separator />

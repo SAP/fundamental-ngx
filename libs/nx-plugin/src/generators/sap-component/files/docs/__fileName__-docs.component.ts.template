@@ -1,9 +1,28 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getExampleFile } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getExampleFile
+} from '@fundamental-ngx/docs/shared';
+
+import { examples } from './examples';
 
 @Component({
     selector: 'app-<%= fileName %>',
-    templateUrl: './<%= fileName %>-docs.component.html'
+    templateUrl: './<%= fileName %>-docs.component.html',
+    standalone: true,
+    imports: [
+        CodeExampleComponent,
+        ComponentExampleComponent,
+        DescriptionComponent,
+        DocsSectionTitleComponent,
+        SeparatorComponent,
+        ...examples
+    ]
 })
 export class <%= className %>DocsComponent {
     <%= propertyName %>DefaultExample: ExampleFile[] = [

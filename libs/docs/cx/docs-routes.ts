@@ -12,17 +12,33 @@ import {
     StackblitzService
 } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from './api-files';
-import { sections } from './docs-data';
+import { components, guides } from './docs-data.json';
 
-const configureCxRoutes = configureRoutes(API_FILES);
+const configureLibRoutes = configureRoutes(API_FILES);
 
 // BEING UPDATED WITH THE SAP-COMPONENT SCHEMATIC; DO NOT MODIFY THE STRUCTURE!
+const componentRoutes = [
+    {
+        path: 'side-navigation',
+        loadChildren: () => import('@fundamental-ngx/docs/cx/side-navigation').then(configureLibRoutes)
+    }
+];
+
 export const ROUTES: Routes = [
     {
         path: '',
         loadComponent: () => import('@fundamental-ngx/docs/shared-pages').then((m) => m.LibraryDocShellPageComponent),
         data: {
-            sections
+            sections: [
+                {
+                    header: 'Guides',
+                    content: guides
+                },
+                {
+                    header: 'Components',
+                    content: components
+                }
+            ]
         },
         providers: [
             // @todo needs schema module
@@ -47,10 +63,7 @@ export const ROUTES: Routes = [
                 loadComponent: () =>
                     import('@fundamental-ngx/docs/shared-pages').then((m) => m.NewComponentPageComponent)
             },
-            {
-                path: 'side-navigation',
-                loadChildren: () => import('@fundamental-ngx/docs/cx/side-navigation').then(configureCxRoutes)
-            }
+            ...componentRoutes
         ]
     }
 ];
