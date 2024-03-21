@@ -94,13 +94,13 @@ export class TableP13DialogComponent implements OnDestroy {
     columns: TableP13ColumnsComponent;
 
     /** @hidden */
+    _table: Table;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
     private _tableSubscriptions = new Subscription();
-
-    /** @hidden */
-    _table: Table;
 
     /** @hidden */
     constructor(private readonly _dialogService: DialogService) {}
@@ -146,7 +146,8 @@ export class TableP13DialogComponent implements OnDestroy {
         const filterBy = state?.filterBy;
         const dialogData: FilterDialogData = {
             columns: columns.map(({ label, key, dataType, filterable }) => ({ label, key, dataType, filterable })),
-            collectionFilter: filterBy
+            collectionFilter: filterBy,
+            validator: this.filter.validator
         };
 
         const dialogRef = this._dialogService.open(
@@ -163,7 +164,9 @@ export class TableP13DialogComponent implements OnDestroy {
         this._subscriptions.add(
             dialogRef.afterClosed
                 .pipe(filter((result) => !!result))
-                .subscribe(({ collectionFilter }: FilterDialogResultData) => this._applyFiltering(collectionFilter))
+                .subscribe(({ collectionFilter }: FilterDialogResultData) => {
+                    this._applyFiltering(collectionFilter);
+                })
         );
     }
 
