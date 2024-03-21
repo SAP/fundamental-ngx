@@ -438,13 +438,15 @@ export class ComboboxComponent
     }
 
     /** @hidden */
-    onInputKeydownHandler(event: KeyboardEvent | ClipboardEvent): void {
+    onInputKeydownHandler(event: KeyboardEvent | string): void {
         if (this.readOnly) {
             return;
         }
 
-        if (event instanceof ClipboardEvent) {
-            this.isOpenChangeHandle(true);
+        if (event instanceof String) {
+            if (event === 'pasteEvent') {
+                this.isOpenChangeHandle(true);
+            }
         } else {
             if (KeyUtil.isKeyCode(event, TAB) && this.open) {
                 this._close();

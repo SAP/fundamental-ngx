@@ -85,7 +85,7 @@
             [(ngModel)]="inputText"
             (onComplete)="handleAutoComplete($event)"
             (keydown)="onInputKeydownHandler($event)"
-            (paste)="onInputKeydownHandler($event)"
+            (paste)="onInputKeydownHandler('pasteEvent')"
             (ngModelChange)="handleSearchTermChange()"
             (blur)="handleBlur()"
         />
