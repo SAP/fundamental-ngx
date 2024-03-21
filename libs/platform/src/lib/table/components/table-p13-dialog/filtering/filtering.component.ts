@@ -92,10 +92,14 @@ export class P13FilteringDialogComponent implements Resettable {
     confirm(): void {
         const includeFilters = this._getCollectionFiltersFromIncludeRules();
         const excludeFilters = this._getCollectionFiltersFromExcludeRules();
+        const validator = this.dialogRef.data.validator;
+        const combinedFilters = [...includeFilters, ...excludeFilters];
 
-        const result: FilterDialogResultData = { collectionFilter: [...includeFilters, ...excludeFilters] };
+        if (!validator || validator(combinedFilters)) {
+            const result: FilterDialogResultData = { collectionFilter: combinedFilters };
 
-        this.dialogRef.close(result);
+            this.dialogRef.close(result);
+        }
     }
 
     /** @hidden */

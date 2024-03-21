@@ -73,6 +73,7 @@ import { PreservedStateDocsComponent } from './child-docs/preserving-state/prese
 import { PlatformTablePreservedStateExampleComponent } from './examples/preserved-state/platform-table-preserved-state-example.component';
 import { AdvancedExamplesDocsComponent } from './child-docs/advanced/advanced-examples-docs.component';
 import { AdvancedScrollingExampleComponent } from './examples/advanced-scrolling/advanced-scrolling-example.component';
+import { MessageBoxModule } from '@fundamental-ngx/core/message-box';
 
 const routes: Routes = [
     {
@@ -116,7 +117,8 @@ const routes: Routes = [
         PlatformMenuModule,
         PopoverModule,
         PlatformListModule,
-        ListModule
+        ListModule,
+        MessageBoxModule
     ],
     exports: [RouterModule, AdvancedExamplesDocsComponent, AdvancedScrollingExampleComponent],
     declarations: [
