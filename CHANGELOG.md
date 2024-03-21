@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.65...v0.49.0-rc.66) (2024-03-21)
+
+
+### Bug Fixes
+
+* **core:** redundant aria-label on select component ([#11594](https://github.com/SAP/fundamental-ngx/issues/11594)) ([cffe21b](https://github.com/SAP/fundamental-ngx/commit/cffe21bc60c9104b6acc5d3986c9200c082d58bc))
+
+
+
+
+
+# [0.49.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.64...v0.49.0-rc.65) (2024-03-21)
+
+
+### Bug Fixes
+
+* **platform:** table empty cell screenreader text ([#11607](https://github.com/SAP/fundamental-ngx/issues/11607)) ([5df8215](https://github.com/SAP/fundamental-ngx/commit/5df8215274f7be3e3d8847f7401d8c0050601965))
+
+
+
+
+
 # [0.49.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.63...v0.49.0-rc.64) (2024-03-21)
 
 
