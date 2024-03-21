@@ -245,25 +245,25 @@ export class TimePickerComponent<D>
      * Value state "success" aria message.
      */
     @Input()
-    valueStateSuccessMessage: string = this._valueStateAriaMessagesService.success;
+    valueStateSuccessMessage: string = inject(ValueStateAriaMessageService).success;
 
     /**
      * Value state "information" aria message.
      */
     @Input()
-    valueStateInformationMessage: string = this._valueStateAriaMessagesService.information;
+    valueStateInformationMessage: string = inject(ValueStateAriaMessageService).information;
 
     /**
      * Value state "warning" aria message.
      */
     @Input()
-    valueStateWarningMessage: string = this._valueStateAriaMessagesService.warning;
+    valueStateWarningMessage: string = inject(ValueStateAriaMessageService).warning;
 
     /**
      * Value state "error" aria message.
      */
     @Input()
-    valueStateErrorMessage: string = this._valueStateAriaMessagesService.error;
+    valueStateErrorMessage: string = inject(ValueStateAriaMessageService).error;
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
@@ -348,8 +348,7 @@ export class TimePickerComponent<D>
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
-        private _popoverFormMessage: PopoverFormMessageService,
-        private _valueStateAriaMessagesService: ValueStateAriaMessageService
+        private _popoverFormMessage: PopoverFormMessageService
     ) {
         if (!this._dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');

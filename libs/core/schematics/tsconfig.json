@@ -23,7 +23,8 @@
         "sourceMap": true,
         "strictNullChecks": false,
         "target": "es6",
-        "types": ["node"]
+        "types": ["node"],
+        "resolveJsonModule": true
     },
     "include": ["**/*.ts"],
     "exclude": ["**/*.spec.ts", "testing-utils/**/*.ts", "jest.config.ts"]

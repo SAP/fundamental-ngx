@@ -286,8 +286,8 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
 
     /**
      * When resize handler is pressed and resizing may start.
-     * @param event: MouseEvent
-     * @param resizeDirection: which handler is pressed to resize
+     * @param event {MouseEvent}
+     * @param resizeDirection which handler is pressed to resize
      */
     onMouseDown(event: MouseEvent, resizeDirection: ResizeDirection): void {
         event.preventDefault();
@@ -307,7 +307,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     /**
      * @hidden When mouse moves to resize the card.
      * using window:mousemove so, resize will happen smoothly
-     * @param event: MouseEvent
+     * @param event {MouseEvent}
      */
     @HostListener('window:mousemove', ['$event'])
     onMouseMove(event: MouseEvent): void {
@@ -381,9 +381,8 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
 
     /**
      * when resizing of card stops
-     * @param event: MouseEvent
      */
-    @HostListener('document: mouseup', ['$event'])
+    @HostListener('document:mouseup', ['$event'])
     onMouseUp(): void {
         if (!this.resizable) {
             return;
@@ -521,8 +520,8 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
                 this.cardWidth = this._prevCardWidth;
             } else {
                 // check value of cardSpanFraction, including gaps in cards
-                let isCardSpanFractionCrossingOffset = false;
-                isCardSpanFractionCrossingOffset = cardSpanFraction - (cardSpan - 1) * gap > horizontalResizeOffset;
+                const isCardSpanFractionCrossingOffset =
+                    cardSpanFraction - (cardSpan - 1) * gap > horizontalResizeOffset;
                 this.cardWidth = isCardSpanFractionCrossingOffset
                     ? (cardSpan + 1) * horizontalResizeStep
                     : cardSpan * horizontalResizeStep;
@@ -534,8 +533,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
                 this.cardWidth = this._prevCardWidth;
             } else {
                 // check value of cardSpanFraction, including gaps in cards
-                let isCardSpanFractionCrossingOffset = false;
-                isCardSpanFractionCrossingOffset = cardSpanFraction - cardSpan * gap > horizontalResizeOffset;
+                const isCardSpanFractionCrossingOffset = cardSpanFraction - cardSpan * gap > horizontalResizeOffset;
                 this.cardWidth = isCardSpanFractionCrossingOffset
                     ? (cardSpan + 1) * horizontalResizeStep
                     : cardSpan * horizontalResizeStep;
@@ -573,7 +571,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
 
     /**
      * @hidden Resize card horizontally by checking boundary condition
-     * @param xPosition: current x-position of cursor
+     * @param xPosition current x-position of cursor
      */
     private _horizontalResizing(xPosition: number): void {
         const difference = this._prevX - xPosition;
@@ -596,7 +594,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     /**
      * @hidden Resize card vertically.
      * takes care of mini-header height and mini-content height
-     * @param yPosition: current y-position of cursor
+     * @param yPosition current y-position of cursor
      */
     private _verticalResizing(yPosition: number): void {
         let reachingMiniHeader = false;

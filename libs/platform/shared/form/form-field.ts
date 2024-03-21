@@ -1,6 +1,6 @@
 import { ElementRef, QueryList, TemplateRef } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, NgControl } from '@angular/forms';
-import { FormField, FormFieldControl, FormStates } from '@fundamental-ngx/cdk/forms';
+import { FormField, FormFieldControl } from '@fundamental-ngx/cdk/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Observable, Subject } from 'rxjs';
 
@@ -84,20 +84,6 @@ export abstract class PlatformFormField extends FormField {
 
     /** @hidden */
     innerErrorRenderers?: TemplateRef<any>;
-
-    /**
-     * Set default columns layout
-     */
-    setDefaultColumnLayout: () => void;
-
-    /** Gets field error priority state. */
-    getPriorityState: () => FormStates;
-
-    /** Groups errors. */
-    groupErrors: () => void;
-
-    /** Sets error directives from parent container */
-    setErrorDirectives: (directives: QueryList<FormError>) => void;
 
     /** Whether form field has validation errors. */
     hasErrors: () => boolean;

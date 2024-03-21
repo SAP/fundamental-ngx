@@ -1,9 +1,8 @@
 import { CdkPortalOutlet, ComponentPortal, DomPortal, Portal, TemplatePortal } from '@angular/cdk/portal';
 import { ComponentRef, DestroyRef, Directive, EmbeddedViewRef, Input, OnDestroy, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Observable, Subject, combineLatest, first, map, of, shareReplay, tap } from 'rxjs';
-import { fromPromise } from 'rxjs/internal/observable/innerFrom';
-import { switchMap } from 'rxjs/operators';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { Observable, Subject, combineLatest, first, map, tap } from 'rxjs';
 import { MenuComponent } from '../menu.component';
 import { FD_MENU_COMPONENT, TOGGLE_MENU_ITEM } from '../menu.tokens';
 
@@ -25,11 +24,6 @@ export class GlyphMenuAddonDirective implements OnDestroy {
      * */
     isInToggleButton = !!inject(TOGGLE_MENU_ITEM, { optional: true });
 
-    /** IconComponent loader */
-    private _iconComponent$ = fromPromise(
-        import('@fundamental-ngx/core/icon').then(({ IconComponent }) => IconComponent)
-    ).pipe(shareReplay(1));
-
     /** @hidden */
     private _menuComponent = inject<MenuComponent>(FD_MENU_COMPONENT, { optional: true });
 
@@ -49,22 +43,18 @@ export class GlyphMenuAddonDirective implements OnDestroy {
                 tap(([, glyphName]) => {
                     glyphName || this.isInToggleButton ? this._addGlyphAddonToMenu() : this._removeGlyphAddonFromMenu();
                 }),
-                switchMap(([outlet, glyphName]) => {
+                tap(([outlet, glyphName]) => {
                     if (!glyphName) {
                         outlet.detach();
-                        return of(null);
+                        return;
                     }
-                    return this._iconComponent$.pipe(
-                        tap((IconComponent) => {
-                            const componentRef = outlet.attachComponentPortal(new ComponentPortal(IconComponent));
-                            componentRef.instance.glyph = glyphName;
-                            componentRef.instance.elementRef.nativeElement.setAttribute('role', 'presentation');
-                            if (this.isInToggleButton) {
-                                componentRef.instance.elementRef.nativeElement.classList.add('fd-menu__checkmark');
-                            }
-                            componentRef.changeDetectorRef.detectChanges();
-                        })
-                    );
+                    const componentRef = outlet.attachComponentPortal(new ComponentPortal(IconComponent));
+                    componentRef.instance.glyph = glyphName;
+                    componentRef.instance.elementRef.nativeElement.setAttribute('role', 'presentation');
+                    if (this.isInToggleButton) {
+                        componentRef.instance.elementRef.nativeElement.classList.add('fd-menu__checkmark');
+                    }
+                    componentRef.changeDetectorRef.detectChanges();
                 }),
                 takeUntilDestroyed(this._destroyRef)
             )

@@ -1,17 +1,13 @@
-import { Directive, TemplateRef, inject } from '@angular/core';
-import { VhdFilter } from '../models/vhd-filter.model';
-
-interface ValueHelpFilterDefContext {
-    $implicit: VhdFilter;
-}
+import { Directive, inject, TemplateRef } from '@angular/core';
+import { ValueHelpFilterDef, ValueHelpFilterDefContext } from '../models/vhd-filter.model';
 
 @Directive({
     selector: '[fdpValueHelpFilterDef]',
     standalone: true
 })
-export class ValueHelpFilterDefDirective {
+export class ValueHelpFilterDefDirective implements ValueHelpFilterDef {
     /** Template reference */
-    readonly templateRef = inject(TemplateRef<ValueHelpFilterDefContext>);
+    readonly templateRef = inject<TemplateRef<ValueHelpFilterDefContext>>(TemplateRef);
 
     /** @hidden */
     static ngTemplateContextGuard(dir: ValueHelpFilterDefDirective, ctx: unknown): ctx is ValueHelpFilterDefContext {

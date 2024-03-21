@@ -3,5 +3,6 @@
     "$schema": "../../../node_modules/nx/schemas/project-schema.json",
     "name": "btp-search-field",
     "projectType": "library",
-    "tags": ["scope:fdb", "type:lib"]
+    "tags": ["scope:fdb", "type:lib"],
+    "targets": {}
 }

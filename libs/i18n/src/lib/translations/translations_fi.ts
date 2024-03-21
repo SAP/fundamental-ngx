@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Vuosialuevalitsin'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Moninkertaisen arvon yhdistelmäruutu',
         selectAllLabel: 'Valitse kaikki ({selectedItems} / {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Peruuta'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Laajenna otsikko',
+        collapseLabel: 'Tiivistä otsikko',
+        pinLabel: 'Kiinnitä otsikko',
+        unpinLabel: 'Irrota otsikko'
     },
     coreFeedListItem: {
         moreLabel: '{count} enemmän',
@@ -407,9 +407,11 @@ export default {
         headerMenuSortAsc: 'Lajittele nousevasti',
         headerMenuSortDesc: 'Lajittele laskevasti',
         headerMenuGroup: 'Ryhmä',
-        headerMenuFreeze: 'Jäädytä',
+        headerMenuFreeze: 'Jäädytä sarake',
         headerMenuEndFreeze: 'Jäädytä loppuun',
-        headerMenuUnfreeze: 'Poista jäädytys',
+        headerMenuUnfreeze: 'Poista sarakkeen jäädytys',
+        headerMenuFreezePlural: 'Jäädytä sarakkeet',
+        headerMenuUnfreezePlural: 'Poista sarakkeiden jäädytys',
         headerMenuFilter: 'Suodatin',
         defaultEmptyMessage: 'Tietoja ei löydy',
         emptyCell: 'Tyhjä',
@@ -507,7 +509,8 @@ export default {
         selectAllCheckboxLabel: 'Valitse kaikki',
         deselectAllCheckboxLabel: 'Poista kaikki valinnat',
         deselectSingleRow: 'Poista rivin valinta painamalla välilyöntinäppäintä',
-        selectSingleRow: 'Valitse rivi painamalla välilyöntinäppäintä'
+        selectSingleRow: 'Valitse rivi painamalla välilyöntinäppäintä',
+        loadMore: 'Lataa enemmän'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Muokkaa'

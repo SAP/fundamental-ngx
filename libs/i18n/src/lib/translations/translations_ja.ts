@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: '年範囲選択'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: '複数値コンボボックス',
         selectAllLabel: 'すべて選択 ({selectedItems}/{totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'キャンセル'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'ヘッダーを展開',
+        collapseLabel: 'ヘッダーを圧縮',
+        pinLabel: 'ヘッダーを固定',
+        unpinLabel: 'ヘッダーの固定を解除'
     },
     coreFeedListItem: {
         moreLabel: 'ほか{count}件',
@@ -407,9 +407,11 @@ export default {
         headerMenuSortAsc: '昇順で並べ替え',
         headerMenuSortDesc: '降順で並べ替え',
         headerMenuGroup: 'グループ',
-        headerMenuFreeze: '固定',
+        headerMenuFreeze: '列を固定',
         headerMenuEndFreeze: '末尾に固定',
-        headerMenuUnfreeze: '固定解除',
+        headerMenuUnfreeze: '列の固定を解除',
+        headerMenuFreezePlural: '列を固定',
+        headerMenuUnfreezePlural: '列の固定を解除',
         headerMenuFilter: 'フィルタ',
         defaultEmptyMessage: 'データが見つかりません。',
         emptyCell: '空白',
@@ -506,7 +508,8 @@ export default {
         selectAllCheckboxLabel: 'すべて選択',
         deselectAllCheckboxLabel: 'すべて選択解除',
         deselectSingleRow: '行を選択解除するにはスペースキーを押します。',
-        selectSingleRow: '行を選択するにはスペースキーを押します。'
+        selectSingleRow: '行を選択するにはスペースキーを押します。',
+        loadMore: 'さらにロード'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '編集'

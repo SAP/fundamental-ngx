@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'ตัวเลือกช่วงปี'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'คอมโบบ็อกซ์แบบหลายค่า',
         selectAllLabel: 'เลือกทั้งหมด ({selectedItems} จาก {totalItems}) รายการ'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'ยกเลิก'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'ขยายส่วนหัว',
+        collapseLabel: 'ยุบรวมส่วนหัว',
+        pinLabel: 'ปักหมุดส่วนหัว',
+        unpinLabel: 'ยกเลิกการปักหมุดส่วนหัว'
     },
     coreFeedListItem: {
         moreLabel: 'อีก {count} รายการ',
@@ -407,9 +407,11 @@ export default {
         headerMenuSortAsc: 'จัดเรียงจากน้อยไปหามาก',
         headerMenuSortDesc: 'จัดเรียงจากมากไปหาน้อย',
         headerMenuGroup: 'กลุ่ม',
-        headerMenuFreeze: 'ตรึง',
+        headerMenuFreeze: 'ตรึงคอลัมน์',
         headerMenuEndFreeze: 'ตรึงจนท้ายรายการ',
-        headerMenuUnfreeze: 'ยกเลิกการตรึง',
+        headerMenuUnfreeze: 'ยกเลิกการตรึงคอลัมน์',
+        headerMenuFreezePlural: 'ตรึงคอลัมน์',
+        headerMenuUnfreezePlural: 'ยกเลิกการตรึงคอลัมน์',
         headerMenuFilter: 'ตัวกรอง',
         defaultEmptyMessage: 'ไม่พบข้อมูล',
         emptyCell: 'ว่าง',
@@ -507,7 +509,8 @@ export default {
         selectAllCheckboxLabel: 'เลือกทั้งหมด',
         deselectAllCheckboxLabel: 'ยกเลิกการเลือกทั้งหมด',
         deselectSingleRow: 'เมื่อต้องการยกเลิกการเลือกแถว ให้กด SPACEBAR',
-        selectSingleRow: 'เมื่อต้องการเลือกแถว ให้กด SPACEBAR'
+        selectSingleRow: 'เมื่อต้องการเลือกแถว ให้กด SPACEBAR',
+        loadMore: 'โหลดเพิ่มเติม'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'แก้ไข'

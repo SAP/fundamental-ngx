@@ -106,12 +106,6 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
     @Output()
     panelExpandChange: EventEmitter<PanelExpandChangeEvent> = new EventEmitter<PanelExpandChangeEvent>();
 
-    /**
-     * @hidden
-     * Button label based on the current state
-     */
-    _expandAriaLabel: string;
-
     /** @hidden */
     @ContentChild(PanelContentComponent)
     _panelContentComponent: Nullable<PanelContentComponent>;
@@ -119,6 +113,12 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
     /** @hidden */
     @ViewChild(PanelTitleDirective)
     _panelTitleDirective: Nullable<PanelTitleDirective>;
+
+    /**
+     * @hidden
+     * Button label based on the current state
+     */
+    _expandAriaLabel: string;
 
     /** @hidden id of the title element */
     _titleId: string = 'fdp-panel-title-' + platformPanelTitleUniqueId++;

@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Selettore intervallo di anni'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Casella combinata multivalore',
         selectAllLabel: 'Seleziona tutti ({selectedItems} di {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Annulla'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Esplodi testata',
+        collapseLabel: 'Comprimi testata',
+        pinLabel: 'Blocca testata',
+        unpinLabel: 'Sblocca testata'
     },
     coreFeedListItem: {
         moreLabel: 'Altri {count}',
@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Navigare tra le selezioni con le frecce su e giù',
         escapeNavigateTokens:
             'Premere Esc per chiudere il campo di immissione e utilizzare le frecce destra e sinistra per navigare tra le opzioni selezionate.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Contiene {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
         mainNavigation: 'Navigazione principale',
@@ -408,9 +408,11 @@ export default {
         headerMenuSortAsc: 'Ordina in ordine crescente',
         headerMenuSortDesc: 'Ordina in ordine decrescente',
         headerMenuGroup: 'Raggruppa',
-        headerMenuFreeze: 'Blocca',
+        headerMenuFreeze: 'Blocca colonna',
         headerMenuEndFreeze: 'Blocca fino alla fine',
-        headerMenuUnfreeze: 'Sblocca',
+        headerMenuUnfreeze: 'Sblocca colonna',
+        headerMenuFreezePlural: 'Blocca colonne',
+        headerMenuUnfreezePlural: 'Sblocca colonne',
         headerMenuFilter: 'Filtra',
         defaultEmptyMessage: 'Non sono stati trovati dati',
         emptyCell: 'Vuoto',
@@ -508,7 +510,8 @@ export default {
         selectAllCheckboxLabel: 'Seleziona tutto',
         deselectAllCheckboxLabel: 'Deseleziona tutto',
         deselectSingleRow: 'Per deselezionare la riga, premere la BARRA SPAZIATRICE',
-        selectSingleRow: 'Per selezionare la riga, premere la BARRA SPAZIATRICE'
+        selectSingleRow: 'Per selezionare la riga, premere la BARRA SPAZIATRICE',
+        loadMore: 'Carica di più'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Modifica'

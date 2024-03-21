@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Средство за избор на диапазона от години'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Комбинирано поле с множество стойности',
         selectAllLabel: 'Избор на всички ({selectedItems} от {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Отказ'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Разширяване на заглавна област',
+        collapseLabel: 'Свиване на заглавна област',
+        pinLabel: 'Закачване на заглавна област',
+        unpinLabel: 'Откачване на заглавна област'
     },
     coreFeedListItem: {
         moreLabel: 'още {count}',
@@ -407,9 +407,11 @@ export default {
         headerMenuSortAsc: 'Сортиране във възходящ ред',
         headerMenuSortDesc: 'Сортиране в низходящ ред',
         headerMenuGroup: 'Група',
-        headerMenuFreeze: 'Фиксиране',
+        headerMenuFreeze: 'Фиксиране на колоната',
         headerMenuEndFreeze: 'Фиксиране до края',
-        headerMenuUnfreeze: 'Отмяна на фиксирането',
+        headerMenuUnfreeze: 'Отмяна на фиксирането на колоната',
+        headerMenuFreezePlural: 'Фиксиране на колоните',
+        headerMenuUnfreezePlural: 'Отмяна на фиксирането на колоните',
         headerMenuFilter: 'Филтър',
         defaultEmptyMessage: 'Не са намерени данни',
         emptyCell: 'Празно',
@@ -507,7 +509,8 @@ export default {
         selectAllCheckboxLabel: 'Избиране на всички',
         deselectAllCheckboxLabel: 'Отмяна на избора на всички',
         deselectSingleRow: 'За премахване на ред от избраните, натиснете ИНТЕРВАЛ',
-        selectSingleRow: 'За избор на ред, натиснете ИНТЕРВАЛ'
+        selectSingleRow: 'За избор на ред, натиснете ИНТЕРВАЛ',
+        loadMore: 'Зареждане на повече'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Редактиране'

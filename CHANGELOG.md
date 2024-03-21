@@ -3,6 +3,66 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.61...v0.49.0-rc.62) (2024-03-21)
+
+
+### Bug Fixes
+
+* **core:** add css fix for missing error in combobox ([#11586](https://github.com/SAP/fundamental-ngx/issues/11586)) ([88e666d](https://github.com/SAP/fundamental-ngx/commit/88e666d7a4a84652e5d8ea5a5f18e3b534b0b0bb))
+
+
+
+
+
+# [0.49.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.60...v0.49.0-rc.61) (2024-03-21)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.49.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.59...v0.49.0-rc.60) (2024-03-20)
+
+
+### Bug Fixes
+
+* **platform:** add visual fixes for option list in VHD ([#11610](https://github.com/SAP/fundamental-ngx/issues/11610)) ([ab9e08f](https://github.com/SAP/fundamental-ngx/commit/ab9e08fbdfddb41d5f8862ecbf8f49e0634d4644))
+
+
+
+
+
+# [0.49.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.58...v0.49.0-rc.59) (2024-03-20)
+
+
+### Bug Fixes
+
+* **i18n:** fixed incorrect translation syntax and improved test reports ([#11601](https://github.com/SAP/fundamental-ngx/issues/11601)) ([fd5b299](https://github.com/SAP/fundamental-ngx/commit/fd5b299c2c404658dbc15b793e40a7e1c4c297a1))
+
+
+
+
+
+# [0.49.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.57...v0.49.0-rc.58) (2024-03-20)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.49.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.56...v0.49.0-rc.57) (2024-03-20)
+
+
+### Bug Fixes
+
+* **core:** add aria-labelledby for Card component ([#11566](https://github.com/SAP/fundamental-ngx/issues/11566)) ([6dd154f](https://github.com/SAP/fundamental-ngx/commit/6dd154f9a187070bfb989ae45de2e41450cb3be2))
+
+
+
+
+
 # [0.49.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.55...v0.49.0-rc.56) (2024-03-18)
 
 
