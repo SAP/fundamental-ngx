@@ -33,6 +33,10 @@ export class MultiInputNewTokensExampleComponent {
     validateFunc(value: string): boolean {
         return value?.length >= 3;
     }
+
+    valueFn(obj: Item): string {
+        return obj.name;
+    }
 }
 
 interface Item {

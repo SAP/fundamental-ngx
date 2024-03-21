@@ -62,7 +62,9 @@ export class PlatformVhdMultiInputExampleComponent implements OnInit {
     originalData: ExampleTestModel[];
     dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
     currentValue: Partial<VhdValue> = {};
-    selected: ExampleTestModel[] = [];
+    selected: ExampleTestModel['id'][] = [];
+
+    valueFn = (item: ExampleTestModel) => item.id;
 
     constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {}
 
@@ -74,7 +76,7 @@ export class PlatformVhdMultiInputExampleComponent implements OnInit {
     }
 
     valueChange($event: VhdValueChangeEvent<ExampleTestModel>): void {
-        this.selected = [...$event.selected];
+        this.selected = [...$event.selected.map((i) => i.id)];
         this._changeDetectorRef.detectChanges();
     }
 
@@ -83,7 +85,9 @@ export class PlatformVhdMultiInputExampleComponent implements OnInit {
     }
 
     multiSelectChange(): void {
-        this.currentValue.selected = this.selected;
+        this.currentValue = {
+            selected: [...this.originalData.filter((i) => this.selected.includes(i.id))]
+        };
         this._changeDetectorRef.detectChanges();
     }
 

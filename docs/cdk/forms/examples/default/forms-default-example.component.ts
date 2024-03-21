@@ -19,7 +19,7 @@ import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 import { cloneDeep } from 'lodash-es';
 
 @Component({
-    selector: 'fundamental-ngx-forms-default-example',
+    selector: 'fdk-forms-default-example',
     templateUrl: './forms-default-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

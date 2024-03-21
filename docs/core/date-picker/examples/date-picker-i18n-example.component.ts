@@ -7,6 +7,9 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { DAYJS_DATETIME_FORMATS, DayjsDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';
 import { patchLanguage } from '@fundamental-ngx/i18n';
+import 'dayjs/locale/bg';
+import 'dayjs/locale/de';
+import 'dayjs/locale/fr';
 
 // using custom date format to better demonstrate i18n capabilities
 const CUSTOM_DATETIME_FORMATS = {

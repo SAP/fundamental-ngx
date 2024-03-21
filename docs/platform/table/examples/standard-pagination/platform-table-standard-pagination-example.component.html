@@ -1,0 +1,33 @@
+<fdp-table
+    [dataSource]="source"
+    selectionMode="multiple"
+    relationKey="children"
+    emptyTableMessage="No data found"
+    bodyHeight="300px"
+    [pageSize]="pageSize"
+    (pageChange)="pageChanged($event.current.currentPage)"
+    [state]="state"
+    #table
+>
+    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false" [hideSearchInput]="true"> </fdp-table-toolbar>
+
+    <fdp-column name="name" key="name" label="Name" align="start"> </fdp-column>
+
+    <fdp-column name="description" key="description" label="Description"> </fdp-column>
+
+    <fdp-column name="price" key="price.value" label="Price" align="end"> </fdp-column>
+
+    <fdp-column name="status" key="status" label="Status" align="center"> </fdp-column>
+</fdp-table>
+
+<fd-pagination
+    style="padding-top: 1rem"
+    fd-toolbar-item
+    [totalItems]="source.dataProvider.totalItems"
+    [itemsPerPage]="pageSize"
+    [itemsPerPageOptions]="[10, 50, 100]"
+    [currentPage]="currentPage"
+    (pageChangeStart)="pageChanged($event)"
+    (itemsPerPageChange)="itemsPerPageChanged($event)"
+    ariaLabel="Pagination with itemsPerPageOptions property"
+></fd-pagination>

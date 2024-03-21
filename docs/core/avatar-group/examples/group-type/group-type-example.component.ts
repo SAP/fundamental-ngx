@@ -1,6 +1,6 @@
 import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { KeyUtil, RtlService, Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { AvatarGroupComponent, AvatarGroupItemDirective } from '@fundamental-ngx/core/avatar-group';
@@ -17,6 +17,7 @@ import { AvatarGroupDataExampleService } from '../avatar-group-data-example.serv
 })
 export class GroupTypeExampleComponent {
     size: Size = 'l';
+    readonly avatarGroupDataExampleService = inject(AvatarGroupDataExampleService);
     people = this.avatarGroupDataExampleService.generate();
     personDetails: any = null;
     overflowPopoverStage: 'main' | 'detail' = 'main';
@@ -35,10 +36,7 @@ export class GroupTypeExampleComponent {
         );
     }
 
-    constructor(
-        private readonly avatarGroupDataExampleService: AvatarGroupDataExampleService,
-        private _rtlService: RtlService
-    ) {}
+    constructor(private _rtlService: RtlService) {}
 
     get isRtl(): boolean {
         return this._rtlService.rtl.getValue();

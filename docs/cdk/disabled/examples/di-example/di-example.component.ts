@@ -4,7 +4,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DisabledRecipientDirective } from './disabled-recipient.directive';
 
 @Component({
-    selector: 'fundamental-ngx-cdk-disabled-di-example',
+    selector: 'fdk-disabled-di-example',
     templateUrl: './di-example.component.html',
     styles: [
         `

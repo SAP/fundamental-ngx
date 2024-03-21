@@ -1,22 +1,12 @@
 /**
-* Copyright (c) 2012-2023 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
+* Copyright (c) 2012-2024 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
-* Theming Engine 1.23061.0
-* data:{"Path": "Base.baseLib.sap_horizon_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "1.23061.0"}, "Version": { "Build": "11.9.0.20231102110441", "Source": "11.9.0"}}
+* Theming Engine 9.3.0
+* data:{"Path": "Base.baseLib.sap_horizon_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "9.3.0"}, "Version": { "Build": "11.13.0.20240308101608", "Source": "11.13.0"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_horizon_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "1.23061.0"}, "Version": { "Build": "11.9.0.20231102110441", "Source": "11.9.0"}}');}
-:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_horizon_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "1.23061.0"}, "Version": { "Build": "11.9.0.20231102110441", "Source": "11.9.0"}};}
-
-/**
-* Base.baseLib.baseTheme.base (Version 11.9.0)
-*/
-
-
-/**
-* Base.baseLib.baseTheme.css_variables (Version 11.9.0)
-*/
-
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_horizon_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "9.3.0"}, "Version": { "Build": "11.13.0.20240308101608", "Source": "11.13.0"}}');}
+:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_horizon_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "9.3.0"}, "Version": { "Build": "11.13.0.20240308101608", "Source": "11.13.0"}};}
 :root {
   --sapBrandColor: #795100;
   --sapHighlightColor: #795100;
@@ -203,6 +193,7 @@
   --sapShell_PositiveColor: #99cc99;
   --sapShell_InformativeColor: #fff;
   --sapShell_NeutralColor: #fff;
+  --sapShell_Assistant_ForegroundColor: #fff;
   --sapShell_Category_1_Background: #000;
   --sapShell_Category_1_BorderColor: #6bd3ff;
   --sapShell_Category_1_TextColor: #fff;
@@ -267,6 +258,24 @@
   --sapShell_Category_16_BorderColor: #b2e484;
   --sapShell_Category_16_TextColor: #fff;
   --sapShell_Category_16_TextShadow: none;
+  --sapAssistant_Color1: #fff;
+  --sapAssistant_Color2: #fff;
+  --sapAssistant_BackgroundGradient: linear-gradient(#000, #000);
+  --sapAssistant_Background: #000;
+  --sapAssistant_BorderColor: #fff;
+  --sapAssistant_TextColor: #fff;
+  --sapAssistant_Hover_Background: #795100;
+  --sapAssistant_Hover_BorderColor: #fff;
+  --sapAssistant_Hover_TextColor: #fff;
+  --sapAssistant_Active_Background: #795100;
+  --sapAssistant_Active_BorderColor: #fff;
+  --sapAssistant_Active_TextColor: #fff;
+  --sapAssistant_Question_Background: #000;
+  --sapAssistant_Question_BorderColor: #fff;
+  --sapAssistant_Question_TextColor: #fff;
+  --sapAssistant_Answer_Background: #585858;
+  --sapAssistant_Answer_BorderColor: #fff;
+  --sapAssistant_Answer_TextColor: #fff;
   --sapAvatar_1_Background: #000;
   --sapAvatar_1_BorderColor: #fff;
   --sapAvatar_1_TextColor: #fff;
@@ -934,23 +943,3 @@
 .background-image--sapShell_BackgroundImage {
   background-image: var(--sapShell_BackgroundImage);
 }
-
-/**
-* Base.baseLib.sap_horizon.base (Version 11.9.0)
-*/
-
-
-/**
-* Base.baseLib.sap_horizon.css_variables (Version 11.9.0)
-*/
-
-
-/**
-* Base.baseLib.sap_horizon_hcb.base (Version 11.9.0)
-*/
-
-
-/**
-* Base.baseLib.sap_horizon_hcb.css_variables (Version 11.9.0)
-*/
-
