@@ -1,7 +1,7 @@
 import { logger } from '@nx/devkit';
 import { readFileSync } from 'fs';
 import * as process from 'process';
-import { major, minor, parse } from 'semver';
+import { major, parse } from 'semver';
 
 const packageJson = JSON.parse(readFileSync(`./package.json`, 'utf8'));
 const lernaJson = JSON.parse(readFileSync(`./lerna.json`, 'utf8'));
@@ -19,8 +19,7 @@ const angularVersion =
 const versions = {
     VERSION_PLACEHOLDER: process.env.FD_ENV_VERSION_PLACEHOLDER || lernaJson.version,
     // As Angular version listed as peerDependency it should be ^X.0.0 to support any minor version
-    ANGULAR_VER_PLACEHOLDER:
-        process.env.FD_ENV_ANGULAR_VER_PLACEHOLDER || `^${major(angularVersion)}.${minor(angularVersion)}.0`,
+    ANGULAR_VER_PLACEHOLDER: process.env.FD_ENV_ANGULAR_VER_PLACEHOLDER || `^${major(angularVersion)}.0.0`,
     RXJS_VER_PLACEHOLDER: process.env.FD_ENV_RXJS_VER_PLACEHOLDER || aboveMinorVersion(packageJson.dependencies.rxjs),
     FAST_DEEP_EQUAL_VER_PLACEHOLDER:
         process.env.FD_ENV_FAST_DEEP_EQUAL_VER_PLACEHOLDER || packageJson.dependencies['fast-deep-equal'],

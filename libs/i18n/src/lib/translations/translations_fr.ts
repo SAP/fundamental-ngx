@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: "Sélecteur de plage d'années"
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Zone combinée multiple',
         selectAllLabel: 'Tout sélectionner ({selectedItems} sur {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Annuler'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: "Développer l'en-tête",
+        collapseLabel: "Réduire l'en-tête",
+        pinLabel: "Épingler l'en-tête",
+        unpinLabel: "Détacher l'en-tête"
     },
     coreFeedListItem: {
         moreLabel: '{count} de plus',
@@ -409,9 +409,11 @@ export default {
         headerMenuSortAsc: 'Trier par ordre croissant',
         headerMenuSortDesc: 'Trier par ordre décroissant',
         headerMenuGroup: 'Groupe',
-        headerMenuFreeze: 'Figer',
+        headerMenuFreeze: 'Bloquer la colonne',
         headerMenuEndFreeze: "Figer jusqu'à la fin",
-        headerMenuUnfreeze: 'Libérer',
+        headerMenuUnfreeze: 'Débloquer la colonne',
+        headerMenuFreezePlural: 'Bloquer les colonnes',
+        headerMenuUnfreezePlural: 'Débloquer les colonnes',
         headerMenuFilter: 'Filtre',
         defaultEmptyMessage: 'Aucune donnée trouvée',
         emptyCell: 'Vide',
@@ -509,7 +511,8 @@ export default {
         selectAllCheckboxLabel: 'Sélectionner tout',
         deselectAllCheckboxLabel: 'Tout désélectionner',
         deselectSingleRow: "Pour désélectionner la ligne, appuyer sur la BARRE D'ESPACEMENT",
-        selectSingleRow: "Pour sélectionner la ligne, appuyer sur la BARRE D'ESPACEMENT"
+        selectSingleRow: "Pour sélectionner la ligne, appuyer sur la BARRE D'ESPACEMENT",
+        loadMore: 'Charger plus'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Modifier'

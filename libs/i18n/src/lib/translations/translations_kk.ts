@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Жылдар ауқымын таңдау құралы'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Бірнеше мәннің құрама ұясы',
         selectAllLabel: 'Барлық ({selectedItems}/{totalItems}) таңдаңыз'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Болдырмау'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Тақырыпты жаю',
+        collapseLabel: 'Тақырыпты жию',
+        pinLabel: 'Тақырыпты бекіту',
+        unpinLabel: 'Тақырыпты босату'
     },
     coreFeedListItem: {
         moreLabel: 'тағы {count}',
@@ -407,9 +407,11 @@ export default {
         headerMenuSortAsc: 'Өсу ретімен сұрыптау',
         headerMenuSortDesc: 'Кему ретімен сұрыптау',
         headerMenuGroup: 'Топтау',
-        headerMenuFreeze: 'Тоқтату',
-        headerMenuEndFreeze: 'Соңына дейін тоқтату',
-        headerMenuUnfreeze: 'Босату',
+        headerMenuFreeze: 'Бағанды қатыру',
+        headerMenuEndFreeze: 'Соңына дейін қатыру',
+        headerMenuUnfreeze: 'Бағанды босату',
+        headerMenuFreezePlural: 'Бағандарды қатыру',
+        headerMenuUnfreezePlural: 'Бағандарды босату',
         headerMenuFilter: 'Сүзгілеу',
         defaultEmptyMessage: 'Дерек табылмады',
         emptyCell: 'Бос',
@@ -507,7 +509,8 @@ export default {
         selectAllCheckboxLabel: 'Барлығын таңдау',
         deselectAllCheckboxLabel: 'Барлығының таңдауын алу',
         deselectSingleRow: 'Қатардың таңадауын алу үшін бос жол пернесін басыңыз',
-        selectSingleRow: 'Қатарды таңадау үшін бос жол пернесін басыңыз'
+        selectSingleRow: 'Қатарды таңадау үшін бос жол пернесін басыңыз',
+        loadMore: 'Көбірек жүктеу'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Өңдеу'

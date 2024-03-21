@@ -156,7 +156,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
 
     /**
      * Puts underline on Icon
-     * @param event: MouseEvent
+     * @param event {MouseEvent}
      */
     onMouseEnter(event: MouseEvent): void {
         event.stopPropagation();
@@ -167,7 +167,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
 
     /**
      * Removes underline on Icon
-     * @param event: MouseEvent
+     * @param event {MouseEvent}
      */
     onMouseLeave(event: MouseEvent): void {
         event.stopPropagation();

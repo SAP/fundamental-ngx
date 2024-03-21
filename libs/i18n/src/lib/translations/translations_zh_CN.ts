@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: '年度范围选取器'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: '多值组合框',
         selectAllLabel: '全选（已选 {selectedItems} 个，共 {totalItems} 个）'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: '取消'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: '展开标题',
+        collapseLabel: '折叠标题',
+        pinLabel: '固定标题',
+        unpinLabel: '取消固定标题'
     },
     coreFeedListItem: {
         moreLabel: '另外 {count} 个',
@@ -77,7 +77,7 @@ export default {
         noResults: '无结果。',
         navigateSelectionsWithArrows: '使用向上和向下箭头导航选择。',
         escapeNavigateTokens: '按 escape 退出输入字段并使用向左和向右箭头键浏览所选选项。',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: '包含总令牌：{length}。'
     },
     coreNavigation: {
         mainNavigation: '主导航',
@@ -405,9 +405,11 @@ export default {
         headerMenuSortAsc: '按升序排序',
         headerMenuSortDesc: '按降序排序',
         headerMenuGroup: '分组',
-        headerMenuFreeze: '冻结',
+        headerMenuFreeze: '冻结列',
         headerMenuEndFreeze: '冻结至结束',
-        headerMenuUnfreeze: '取消冻结',
+        headerMenuUnfreeze: '取消冻结列',
+        headerMenuFreezePlural: '冻结列',
+        headerMenuUnfreezePlural: '取消冻结列',
         headerMenuFilter: '筛选器',
         defaultEmptyMessage: '找不到数据',
         emptyCell: '空',
@@ -504,7 +506,8 @@ export default {
         selectAllCheckboxLabel: '全选',
         deselectAllCheckboxLabel: '取消全选',
         deselectSingleRow: '要取消选择行，请按空格键',
-        selectSingleRow: '要选择行，请按空格键'
+        selectSingleRow: '要选择行，请按空格键',
+        loadMore: '加载更多'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '编辑'

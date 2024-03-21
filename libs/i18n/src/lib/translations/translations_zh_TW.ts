@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: '年份範圍選擇器'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: '多重值下拉式清單方塊',
         selectAllLabel: '全選 ({selectedItems}/{totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: '取消'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: '展開表頭',
+        collapseLabel: '摺疊表頭',
+        pinLabel: '釘選表頭',
+        unpinLabel: '取消釘選表頭'
     },
     coreFeedListItem: {
         moreLabel: '還有 {count} 個',
@@ -405,9 +405,11 @@ export default {
         headerMenuSortAsc: '升冪排序',
         headerMenuSortDesc: '降冪排序',
         headerMenuGroup: '群組',
-        headerMenuFreeze: '凍結',
+        headerMenuFreeze: '凍結欄',
         headerMenuEndFreeze: '凍結至結束',
-        headerMenuUnfreeze: '取消凍結',
+        headerMenuUnfreeze: '取消凍結欄',
+        headerMenuFreezePlural: '凍結欄',
+        headerMenuUnfreezePlural: '取消凍結欄',
         headerMenuFilter: '篩選器',
         defaultEmptyMessage: '找不到資料',
         emptyCell: '空白',
@@ -504,7 +506,8 @@ export default {
         selectAllCheckboxLabel: '全選',
         deselectAllCheckboxLabel: '取消全選',
         deselectSingleRow: '若要取消選擇列，請按空白鍵',
-        selectSingleRow: '若要選擇列，請按空白鍵'
+        selectSingleRow: '若要選擇列，請按空白鍵',
+        loadMore: '載入更多'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '編輯'

@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Birač raspona godina'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Combo box višestruke vrednosti',
         selectAllLabel: 'Odaberi svih ({selectedItems} od {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Otkaži'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Proširi zaglavlje',
+        collapseLabel: 'Sažmi zaglavlje',
+        pinLabel: 'Fiksiraj zaglavlje',
+        unpinLabel: 'Poništi fiksiranje zaglavlja'
     },
     coreFeedListItem: {
         moreLabel: '{count} više',
@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Usmeravajte odabire strelicama gore i dole.',
         escapeNavigateTokens:
             'Pritisnite Escape da napustite polje unosa i koristite strelice levo i desno da usmeravate kroz odabrane opcije.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Sadrži {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
         mainNavigation: 'Glavno usmeravanje',
@@ -407,9 +407,11 @@ export default {
         headerMenuSortAsc: 'Sortiraj po rastućem redosledu',
         headerMenuSortDesc: 'Sortiraj po opadajućem redosledu',
         headerMenuGroup: 'Grupiši',
-        headerMenuFreeze: 'Zamrzni',
+        headerMenuFreeze: 'Zamrzni kolonu',
         headerMenuEndFreeze: 'Zamrzni do kraja',
-        headerMenuUnfreeze: 'Odmrzni',
+        headerMenuUnfreeze: 'Odmrzni kolonu',
+        headerMenuFreezePlural: 'Zamrzni kolone',
+        headerMenuUnfreezePlural: 'Odmrzni kolone',
         headerMenuFilter: 'Filtriraj',
         defaultEmptyMessage: 'Podaci nisu nađeni',
         emptyCell: 'Prazno',
@@ -507,7 +509,8 @@ export default {
         selectAllCheckboxLabel: 'Odaberi sve',
         deselectAllCheckboxLabel: 'Poništi odabir za sve',
         deselectSingleRow: 'Da poništite odabir reda, pritisnite SPACEBAR',
-        selectSingleRow: 'Da odaberete red, pritisnite SPACEBAR'
+        selectSingleRow: 'Da odaberete red, pritisnite SPACEBAR',
+        loadMore: 'Učitaj još'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Uredi'

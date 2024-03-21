@@ -18,3 +18,5 @@ export { CardKpiHeaderComponent } from './kpi/card-kpi-header.component';
 export { CardKpiScaleIconDirective } from './kpi/card-kpi-scale-icon.directive';
 export { CardKpiScaleTextDirective } from './kpi/card-kpi-scale-text.directive';
 export { CardKpiValueDirective } from './kpi/card-kpi-value.directive';
+
+export * from './token';

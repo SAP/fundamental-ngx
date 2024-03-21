@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: '연도 범위 선택 도구'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: '다중 값 콤보 박스',
         selectAllLabel: '모두 선택({totalItems}개 중 {selectedItems}개)'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: '취소'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: '헤더 펼치기',
+        collapseLabel: '헤더 접기',
+        pinLabel: '헤더 고정',
+        unpinLabel: '헤더 고정 취소'
     },
     coreFeedListItem: {
         moreLabel: '{count}자 더 보기',
@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: '위쪽 및 아래쪽 화살표를 사용하여 선택항목을 탐색합니다.',
         escapeNavigateTokens:
             '입력 필드를 종료하려면 Esc 키를 누르고 왼쪽 및 오른쪽 화살표 키를 사용하여 선택한 옵션을 탐색합니다.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: '{length, plural, =0 {0개의 토큰} =1 {1개의 토큰} other {#개의 토큰} } 포함.'
     },
     coreNavigation: {
         mainNavigation: '기본 탐색',
@@ -406,9 +406,11 @@ export default {
         headerMenuSortAsc: '오름차순 정렬',
         headerMenuSortDesc: '내림차순 정렬',
         headerMenuGroup: '그룹',
-        headerMenuFreeze: '고정',
+        headerMenuFreeze: '열 고정',
         headerMenuEndFreeze: '고정에서 종료까지',
-        headerMenuUnfreeze: '고정 해제',
+        headerMenuUnfreeze: '열 고정 해제',
+        headerMenuFreezePlural: '열 고정',
+        headerMenuUnfreezePlural: '열 고정 해제',
         headerMenuFilter: '필터',
         defaultEmptyMessage: '데이터를 찾을 수 없음',
         emptyCell: '비어 있음',
@@ -505,7 +507,8 @@ export default {
         selectAllCheckboxLabel: '모두 선택',
         deselectAllCheckboxLabel: '모두 선택 취소',
         deselectSingleRow: '행 선택을 취소하려면 스페이스바를 누르십시오.',
-        selectSingleRow: '행을 선택하려면 스페이스바를 누르십시오.'
+        selectSingleRow: '행을 선택하려면 스페이스바를 누르십시오.',
+        loadMore: '추가 로드'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '편집'

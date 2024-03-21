@@ -21,7 +21,7 @@ import {
     FormMessageComponent
 } from '@fundamental-ngx/core/form';
 import { LayoutGridColDirective, LayoutGridComponent, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
-import { ListGroupHeaderDirective } from '@fundamental-ngx/core/list';
+import { ListGroupHeaderDirective, ListTitleDirective } from '@fundamental-ngx/core/list';
 import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -67,6 +67,7 @@ let titleUniqueId = 0;
         SelectComponent,
         FormsModule,
         ListGroupHeaderDirective,
+        ListTitleDirective,
         OptionComponent,
         NgTemplateOutlet,
         FormInputMessageGroupComponent,
