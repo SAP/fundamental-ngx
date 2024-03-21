@@ -22,8 +22,11 @@ export class MenuInteractiveDirective {
 
     /** @hidden */
     @HostBinding('class.is-selected')
-    @HostBinding('attr.aria-expanded')
     selected = false;
+
+    /** @hidden */
+    @HostBinding('attr.aria-expanded')
+    ariaExpanded: Nullable<boolean>;
 
     /** @hidden */
     @HostBinding('attr.aria-haspopup')
@@ -42,6 +45,9 @@ export class MenuInteractiveDirective {
     /** @hidden */
     setSelected(isSelected: boolean): void {
         this.selected = isSelected && (this.ariaHaspopup || this._fromSplitButton);
+        if (this.ariaHaspopup || this._fromSplitButton) {
+            this.ariaExpanded = isSelected;
+        }
     }
 
     /** @hidden */
