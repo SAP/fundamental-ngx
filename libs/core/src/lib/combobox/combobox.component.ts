@@ -443,7 +443,7 @@ export class ComboboxComponent
             return;
         }
 
-        if (event instanceof String) {
+        if (typeof event === 'string') {
             if (event === 'pasteEvent') {
                 this.isOpenChangeHandle(true);
             }
