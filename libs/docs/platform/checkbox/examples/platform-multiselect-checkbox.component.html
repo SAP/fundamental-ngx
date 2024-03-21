@@ -1,17 +1,24 @@
 <h3>Template Driven Form</h3>
 <p>Checkbox can be pre-selected if value of checkbox matches any value in ngModel directive.</p>
 <fdp-form-group columnLayout="XL2-L2-M1-S1">
-    <fdp-form-field id="sirius" label="Sirius" [column]="1" [rank]="1">
+    <fdp-form-field id="sirius" [column]="1" [rank]="1">
         <fdp-checkbox
             name="sirius-cb"
             [values]="{ trueValue: 'sirius' }"
             title="Sirius"
             [(ngModel)]="field1"
+            label="Sirius"
         ></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field id="vega" label="Vega" [column]="2" [rank]="1">
-        <fdp-checkbox name="vega-cb" [values]="{ trueValue: 'vega' }" title="Vega" [(ngModel)]="field2"></fdp-checkbox>
+    <fdp-form-field id="vega" [column]="2" [rank]="1">
+        <fdp-checkbox
+            name="vega-cb"
+            [values]="{ trueValue: 'vega' }"
+            title="Vega"
+            [(ngModel)]="field2"
+            label="Vega"
+        ></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>
 <div style="padding-left: 2rem">field1: {{ field1 }}</div>
@@ -23,22 +30,24 @@
 <h3>Reactive/Model Driven Form</h3>
 <p>Checkbox can be pre-selected if value of checkbox matches any value in form-control array.</p>
 <fdp-form-group #rmsfg [formGroup]="form1" [object]="form1Data" columnLayout="XL2-L2-M1-S1">
-    <fdp-form-field #rfield1 id="einstein" label="Einstein" [column]="1" [rank]="1">
+    <fdp-form-field #rfield1 id="einstein" [column]="1" [rank]="1">
         <fdp-checkbox
             name="einstein-cb"
             [values]="{ trueValue: 'einstein' }"
             fdCompact
             title="Albert Einstein"
+            label="Einstein"
             [formControl]="rfield1.formControl"
         ></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field #rfield2 id="newton" label="Newton" [column]="2" [rank]="1">
+    <fdp-form-field #rfield2 id="newton" [column]="2" [rank]="1">
         <fdp-checkbox
             name="newton-cb"
             [values]="{ trueValue: 'newton' }"
             fdCompact
             title="Issac Newton"
+            label="Newton"
             [formControl]="rfield2.formControl"
         ></fdp-checkbox>
     </fdp-form-field>

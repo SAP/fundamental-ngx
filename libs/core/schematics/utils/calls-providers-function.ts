@@ -10,11 +10,13 @@ import {
 import * as ts from 'typescript';
 import { getMainTsFilePath } from './main-ts-file-path';
 
-export async function callsProvidersFunction(tree: Tree, projectName: string, functionName: string) {
+// eslint-disable-next-line jsdoc/require-jsdoc
+export async function callsProvidersFunction(tree: Tree, projectName: string, functionName: string): Promise<boolean> {
     const mainPath = await getMainTsFilePath(tree, projectName);
     const isStandalone = isStandaloneApp(tree, mainPath);
     if (isStandalone) {
         const bootstrapCall = findBootstrapApplicationCall(tree, mainPath);
+        // @ts-expect-error Angular internally uses a different version of the ts library
         return callsProvidersFunctionStandalone(tree, bootstrapCall, mainPath, functionName);
     }
     return callsProvidersFunctionNgModule(tree, mainPath, functionName);
@@ -37,6 +39,7 @@ export function callsProvidersFunctionStandalone(
     const providersLiteral = appConfig ? findProvidersLiteral(appConfig.node) : null;
 
     return !!providersLiteral?.elements.some(
+        // @ts-expect-error Angular internally uses a different version of the ts library
         (el) => ts.isCallExpression(el) && ts.isIdentifier(el.expression) && el.expression.text === functionName
     );
 }
@@ -51,6 +54,7 @@ function callsProvidersFunctionNgModule(tree: Tree, mainPath: string, functionNa
     }
     const providersLiteral = findProvidersLiteral(ngModuleDecorator[0] as any);
     return !!providersLiteral?.elements.some(
+        // @ts-expect-error Angular internally uses a different version of the ts library
         (el) => ts.isCallExpression(el) && ts.isIdentifier(el.expression) && el.expression.text === functionName
     );
 }

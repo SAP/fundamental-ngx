@@ -1,5 +1,4 @@
-import { OverlayContainer } from '@angular/cdk/overlay';
-import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, Input, NO_ERRORS_SCHEMA, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
@@ -112,7 +111,7 @@ describe('Menu Button Disabled test and Type, size test', () => {
             [disabled]="disabled"
             [type]="type"
             [fdpMenuTriggerFor]="basicMenu"
-            (click)="clicked($event)"
+            (click)="clicked()"
         >
             Standard Button with long text
         </fdp-menu-button>
@@ -165,10 +164,6 @@ describe('Menu Button click on Item select', () => {
             declarations: [TestMenuButtonComponent],
             providers: [RtlService]
         }).compileComponents();
-
-        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-            overlayContainerEl = overlayContainer.getContainerElement();
-        })();
     }));
 
     beforeEach(() => {

@@ -3,6 +3,149 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.49.0...v0.49.1-rc.0) (2024-03-21)
+
+
+### Bug Fixes
+
+* **platform:** vhd keyboard improvements ([#11562](https://github.com/SAP/fundamental-ngx/issues/11562)) ([09a73e7](https://github.com/SAP/fundamental-ngx/commit/09a73e74f965fa0a3d1cde80a90f1cd5b3b83eb2))
+
+
+
+
+
+# [0.49.0](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.68...v0.49.0) (2024-03-21)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.67...v0.49.0-rc.68) (2024-03-21)
+
+
+### Bug Fixes
+
+* **platform:** add validator input for p13 filter component ([#11520](https://github.com/SAP/fundamental-ngx/issues/11520)) ([a3b23ff](https://github.com/SAP/fundamental-ngx/commit/a3b23ffd495c4fb1afbc75938f5988d457406e7c))
+
+
+
+
+
+# [0.49.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.66...v0.49.0-rc.67) (2024-03-21)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.65...v0.49.0-rc.66) (2024-03-21)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.64...v0.49.0-rc.65) (2024-03-21)
+
+
+### Bug Fixes
+
+* **platform:** table empty cell screenreader text ([#11607](https://github.com/SAP/fundamental-ngx/issues/11607)) ([5df8215](https://github.com/SAP/fundamental-ngx/commit/5df8215274f7be3e3d8847f7401d8c0050601965))
+
+
+
+
+
+# [0.49.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.63...v0.49.0-rc.64) (2024-03-21)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.62...v0.49.0-rc.63) (2024-03-21)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.61...v0.49.0-rc.62) (2024-03-21)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.60...v0.49.0-rc.61) (2024-03-21)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.59...v0.49.0-rc.60) (2024-03-20)
+
+
+### Bug Fixes
+
+* **platform:** add visual fixes for option list in VHD ([#11610](https://github.com/SAP/fundamental-ngx/issues/11610)) ([ab9e08f](https://github.com/SAP/fundamental-ngx/commit/ab9e08fbdfddb41d5f8862ecbf8f49e0634d4644))
+
+
+
+
+
+# [0.49.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.58...v0.49.0-rc.59) (2024-03-20)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.57...v0.49.0-rc.58) (2024-03-20)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.56...v0.49.0-rc.57) (2024-03-20)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.49.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.55...v0.49.0-rc.56) (2024-03-18)
+
+
+### Bug Fixes
+
+* **platform:** add input to remove space node from ApprovalFlow graph ([#11545](https://github.com/SAP/fundamental-ngx/issues/11545)) ([5a32a9e](https://github.com/SAP/fundamental-ngx/commit/5a32a9e0a672a2d555269e0384f2b058afd29446))
+
+
+
+
+
+# [0.49.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.54...v0.49.0-rc.55) (2024-03-18)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
 # [0.49.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.53...v0.49.0-rc.54) (2024-03-15)
 
 

@@ -23,8 +23,8 @@ export default {
         calendarYearsRangeViewDescription: 'Odabir raspona godina'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
-        selectAllLabel: 'Odaberi sve ({selectedItems} of {totalItems})'
+        multiComboBoxAriaLabel: 'Kombinirani okvir s više vrijednosti',
+        selectAllLabel: 'Odaberi sve ({selectedItems} od {totalItems})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Idi na prethodnu stavku',
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Otkaži'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Proširi zaglavlje',
+        collapseLabel: 'Sažmi zaglavlje',
+        pinLabel: 'Zakvači zaglavlje',
+        unpinLabel: 'Otkvači zaglavlje'
     },
     coreFeedListItem: {
         moreLabel: '{count} više',
@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Odabirima navigirajte strelicama Gore i Dolje.',
         escapeNavigateTokens:
             'Za izlaz iz polja unosa pritisnite gumb Escape i upotrijebite gumbe sa strelicama Lijevo i Desno za navigiranje kroz odabrane mogućnosti.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Sadrži ukupno tokena: {length}'
     },
     coreNavigation: {
         mainNavigation: 'Glavna navigacija',
@@ -290,7 +290,7 @@ export default {
         searchHideAllAdvancedSearchLabel: 'Sakrij sve filtre',
         selectTabDisplayCountLabel: 'Broj stavki: ({count})',
         selectTabMoreBtnLabel: 'Više',
-        selectTabCountHiddenA11yLabel: 'sadrži {rowCount} redaka i {colCount} stupaca',
+        selectTabCountHiddenA11yLabel: 'sadržava {rowCount} redaka i {colCount} stupaca',
         selectMobileTabBackBtnTitle: 'Natrag',
         selectMobileTabBtnOpenDialogLabel: 'Otvori dijalog',
         selectMobileTabTitle: 'Kartica {title}',
@@ -407,9 +407,11 @@ export default {
         headerMenuSortAsc: 'Sortiraj uzlazno',
         headerMenuSortDesc: 'Sortiraj silazno',
         headerMenuGroup: 'Grupa',
-        headerMenuFreeze: 'Zamrzni',
+        headerMenuFreeze: 'Zamrzni stupac',
         headerMenuEndFreeze: 'Zamrzni do završetka',
-        headerMenuUnfreeze: 'Odmrzni',
+        headerMenuUnfreeze: 'Odmrzni stupac',
+        headerMenuFreezePlural: 'Zamrzni stupce',
+        headerMenuUnfreezePlural: 'Odmrzni stupce',
         headerMenuFilter: 'Filtar',
         defaultEmptyMessage: 'Nisu pronađeni podaci',
         emptyCell: 'Prazno',
@@ -507,7 +509,8 @@ export default {
         selectAllCheckboxLabel: 'Odaberi sve',
         deselectAllCheckboxLabel: 'Poništi sve odabire',
         deselectSingleRow: 'Za poništenje odabira retka pritisnite RAZMAKNICU',
-        selectSingleRow: 'Za odabir retka pritisnite RAZMAKNICU'
+        selectSingleRow: 'Za odabir retka pritisnite RAZMAKNICU',
+        loadMore: 'Učitaj više'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Uredi'

@@ -22,5 +22,6 @@
                 "jestConfig": "libs/core/schematics/jest.config.ts"
             }
         }
-    }
+    },
+    "implicitDependencies": ["core"]
 }

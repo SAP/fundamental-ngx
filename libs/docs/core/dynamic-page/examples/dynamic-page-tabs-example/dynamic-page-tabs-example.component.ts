@@ -9,7 +9,7 @@ import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
-import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform';
+import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform/icon-tab-bar';
 
 @Component({
     selector: 'fd-dynamic-page-tabs-example',

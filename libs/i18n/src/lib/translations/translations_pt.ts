@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Selecionador de intervalo de anos'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Combobox de valores múltiplos',
         selectAllLabel: 'Selecionar todos os ({selectedItems} de {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Cancelar'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Expandir cabeçalho',
+        collapseLabel: 'Recolher cabeçalho',
+        pinLabel: 'Fixar cabeçalho',
+        unpinLabel: 'Desafixar cabeçalho'
     },
     coreFeedListItem: {
         moreLabel: 'Mais {count}',
@@ -407,9 +407,11 @@ export default {
         headerMenuSortAsc: 'Classificar em ordem crescente',
         headerMenuSortDesc: 'Classificar em ordem decrescente',
         headerMenuGroup: 'Agrupar',
-        headerMenuFreeze: 'Congelar',
+        headerMenuFreeze: 'Congelar coluna',
         headerMenuEndFreeze: 'Congelar até o fim',
-        headerMenuUnfreeze: 'Descongelar',
+        headerMenuUnfreeze: 'Descongelar coluna',
+        headerMenuFreezePlural: 'Congelar colunas',
+        headerMenuUnfreezePlural: 'Descongelar colunas',
         headerMenuFilter: 'Filtrar',
         defaultEmptyMessage: 'Nenhum dado encontrado',
         emptyCell: 'Vazio',
@@ -507,7 +509,8 @@ export default {
         selectAllCheckboxLabel: 'Selecionar tudo',
         deselectAllCheckboxLabel: 'Desmarcar tudo',
         deselectSingleRow: 'Pressione a BARRA DE ESPAÇOS para desmarcar a linha',
-        selectSingleRow: 'Pressione a BARRA DE ESPAÇOS para selecionar a linha'
+        selectSingleRow: 'Pressione a BARRA DE ESPAÇOS para selecionar a linha',
+        loadMore: 'Carregar mais'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Editar'

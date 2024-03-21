@@ -124,11 +124,6 @@ export class ButtonComponent extends BaseComponent implements ButtonModel {
         return this._ariaPressed;
     }
 
-    /** Specifies a name to
-     *  the native HTML button */
-    @Input()
-    name: string;
-
     /** Specifies the type to
      *  the native HTML button */
     @Input()

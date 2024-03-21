@@ -143,7 +143,11 @@
         (keydown.arrowRight)="_tableRowService.scrollToOverlappedCell()"
         (keydown.space)="_handleCellSpaceKey($index, tableCellElement, $event)"
     >
-        <div [class.fd-table__text]="column.applyText" [class.fd-table__text--no-wrap]="column.noWrap">
+        <div
+            [class.fd-table__text]="column.applyText"
+            [class.fd-table__text--no-wrap]="column.noWrap"
+            #tableTextContainer
+        >
             @if (_isTreeRowFirstCell($index, row)) {
                 <span
                     class="fd-table__expand"
@@ -152,7 +156,7 @@
                 ></span>
             }
             @if (row.state === 'readonly') {
-                @if ((row.value | valueByPath: column.key) === '' || (row.value | valueByPath: column.key) === null) {
+                @if (tableTextContainer.innerText.trim() === '') {
                     <span
                         [ngStyle]="{
                             position: 'absolute !important',

@@ -3,6 +3,167 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.49.0...v0.49.1-rc.0) (2024-03-21)
+
+
+### Bug Fixes
+
+* **platform:** vhd keyboard improvements ([#11562](https://github.com/SAP/fundamental-ngx/issues/11562)) ([09a73e7](https://github.com/SAP/fundamental-ngx/commit/09a73e74f965fa0a3d1cde80a90f1cd5b3b83eb2))
+
+
+
+
+
+# [0.49.0](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.68...v0.49.0) (2024-03-21)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.49.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.67...v0.49.0-rc.68) (2024-03-21)
+
+
+### Bug Fixes
+
+* **platform:** add validator input for p13 filter component ([#11520](https://github.com/SAP/fundamental-ngx/issues/11520)) ([a3b23ff](https://github.com/SAP/fundamental-ngx/commit/a3b23ffd495c4fb1afbc75938f5988d457406e7c))
+
+
+
+
+
+# [0.49.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.66...v0.49.0-rc.67) (2024-03-21)
+
+
+### Bug Fixes
+
+* do not set tabindex="-1" in setTabbable ([#11561](https://github.com/SAP/fundamental-ngx/issues/11561)) ([02c5b10](https://github.com/SAP/fundamental-ngx/commit/02c5b10b7968fc944ff181c6d7c3f6af2b480b42))
+
+
+
+
+
+# [0.49.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.65...v0.49.0-rc.66) (2024-03-21)
+
+
+### Bug Fixes
+
+* **core:** redundant aria-label on select component ([#11594](https://github.com/SAP/fundamental-ngx/issues/11594)) ([cffe21b](https://github.com/SAP/fundamental-ngx/commit/cffe21bc60c9104b6acc5d3986c9200c082d58bc))
+
+
+
+
+
+# [0.49.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.64...v0.49.0-rc.65) (2024-03-21)
+
+
+### Bug Fixes
+
+* **platform:** table empty cell screenreader text ([#11607](https://github.com/SAP/fundamental-ngx/issues/11607)) ([5df8215](https://github.com/SAP/fundamental-ngx/commit/5df8215274f7be3e3d8847f7401d8c0050601965))
+
+
+
+
+
+# [0.49.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.63...v0.49.0-rc.64) (2024-03-21)
+
+
+### Bug Fixes
+
+* **core:** redundant aria-label on select component ([#11589](https://github.com/SAP/fundamental-ngx/issues/11589)) ([1956352](https://github.com/SAP/fundamental-ngx/commit/1956352dd8cdcbfc5f2a423f1a7409da1232dcfa))
+
+
+
+
+
+# [0.49.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.62...v0.49.0-rc.63) (2024-03-21)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.49.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.61...v0.49.0-rc.62) (2024-03-21)
+
+
+### Bug Fixes
+
+* **core:** add css fix for missing error in combobox ([#11586](https://github.com/SAP/fundamental-ngx/issues/11586)) ([88e666d](https://github.com/SAP/fundamental-ngx/commit/88e666d7a4a84652e5d8ea5a5f18e3b534b0b0bb))
+
+
+
+
+
+# [0.49.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.60...v0.49.0-rc.61) (2024-03-21)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.49.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.59...v0.49.0-rc.60) (2024-03-20)
+
+
+### Bug Fixes
+
+* **platform:** add visual fixes for option list in VHD ([#11610](https://github.com/SAP/fundamental-ngx/issues/11610)) ([ab9e08f](https://github.com/SAP/fundamental-ngx/commit/ab9e08fbdfddb41d5f8862ecbf8f49e0634d4644))
+
+
+
+
+
+# [0.49.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.58...v0.49.0-rc.59) (2024-03-20)
+
+
+### Bug Fixes
+
+* **i18n:** fixed incorrect translation syntax and improved test reports ([#11601](https://github.com/SAP/fundamental-ngx/issues/11601)) ([fd5b299](https://github.com/SAP/fundamental-ngx/commit/fd5b299c2c404658dbc15b793e40a7e1c4c297a1))
+
+
+
+
+
+# [0.49.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.57...v0.49.0-rc.58) (2024-03-20)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.49.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.56...v0.49.0-rc.57) (2024-03-20)
+
+
+### Bug Fixes
+
+* **core:** add aria-labelledby for Card component ([#11566](https://github.com/SAP/fundamental-ngx/issues/11566)) ([6dd154f](https://github.com/SAP/fundamental-ngx/commit/6dd154f9a187070bfb989ae45de2e41450cb3be2))
+
+
+
+
+
+# [0.49.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.55...v0.49.0-rc.56) (2024-03-18)
+
+
+### Bug Fixes
+
+* **platform:** add input to remove space node from ApprovalFlow graph ([#11545](https://github.com/SAP/fundamental-ngx/issues/11545)) ([5a32a9e](https://github.com/SAP/fundamental-ngx/commit/5a32a9e0a672a2d555269e0384f2b058afd29446))
+
+
+
+
+
+# [0.49.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.54...v0.49.0-rc.55) (2024-03-18)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 # [0.49.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.53...v0.49.0-rc.54) (2024-03-15)
 
 
