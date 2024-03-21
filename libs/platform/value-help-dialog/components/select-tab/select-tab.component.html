@@ -21,6 +21,7 @@
         role="grid"
         aria-multiselectable="true"
         [attr.aria-labelledby]="selectTabTitleId + ' ' + selectTabCountId"
+        [allCellsFocusable]="true"
     >
         <label [id]="selectTabCountId" fd-form-label class="fdp-value-help-dialog__hidden_label">
             {{
