@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.63...v0.49.0-rc.64) (2024-03-21)
+
+
+### Bug Fixes
+
+* **core:** redundant aria-label on select component ([#11589](https://github.com/SAP/fundamental-ngx/issues/11589)) ([1956352](https://github.com/SAP/fundamental-ngx/commit/1956352dd8cdcbfc5f2a423f1a7409da1232dcfa))
+
+
+
+
+
 # [0.49.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.62...v0.49.0-rc.63) (2024-03-21)
 
 **Note:** Version bump only for package fundamental-ngx
