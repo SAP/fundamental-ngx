@@ -71,12 +71,6 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     @Input()
     wrapType: WrapType = 'soft';
 
-    /**
-     * Whether the textarea is readonly
-     */
-    @Input()
-    readonly: boolean;
-
     /** The maximum number of characters allowed to enter.
      * If `showExceededText` is false, `maxLength` has native textarea's behavior of disallowing typing beyond `maxLength`.
      * If `showExceededText` is true, user is allowed to type beyond `maxLength`, but error states and counter messages showing

@@ -6,9 +6,7 @@ fd-input-group {
         max-height: 100%;
         height: 100%;
     }
-    .fd-button.fd-button--transparent {
-        background: transparent;
-    }
+
     .fd-input-group__addon:not(:first-child) .fd-input-group__button {
         &:focus {
             border: none;
