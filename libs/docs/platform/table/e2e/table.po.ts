@@ -99,9 +99,12 @@ export class TablePo extends PlatformBaseComponentPo {
     sortablePopover = 'fd-popover-body';
     buttonActionOne = '[label="Action One"] button';
     buttonActionTwo = '[label="Action Two"] button';
-    ellipsisButton = '.fd-ellipsis';
+    toolbarButton = '.fd-ellipsis';
     synchronizeButton = '.fdp-search-field__loading';
     arrowButton = '.fd-table__cell--expand';
+    slimArrowRight = 'fd-dialog-body .sap-icon--slim-arrow-right';
+    dialogDecisiveButton = 'fd-dialog-footer .fd-dialog__decisive-button';
+    messageBoxHeader = 'fd-message-box-header';
 
     constructor(public readonly url: string) {
         super();
@@ -167,7 +170,7 @@ export class TablePo extends PlatformBaseComponentPo {
 
     async chooseFilter(indexFilter: number, indexBy): Promise<void> {
         await scrollIntoView(this.tableFilterableExample);
-        await click(this.tableFilterableExample + this.ellipsisButton);
+        await click(this.tableFilterableExample + this.toolbarButton);
         await click(this.filterItem, indexFilter);
         await click(this.filterByColorItem, indexBy);
         await click(this.barButton);

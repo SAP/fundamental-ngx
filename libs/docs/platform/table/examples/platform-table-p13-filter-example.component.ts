@@ -11,9 +11,11 @@ import {
     CollectionStringFilter,
     SortDirection,
     TableDataProvider,
-    TableState
+    TableState,
+    CollectionFilter
 } from '@fundamental-ngx/platform/table';
 import { FilterableColumnDataType } from '@fundamental-ngx/platform/table';
+import { MessageBoxService } from '@fundamental-ngx/core/message-box';
 
 @Component({
     selector: 'fdp-platform-table-p13-filter-example',
@@ -32,9 +34,45 @@ export class PlatformTableP13FilterExampleComponent {
 
     readonly dataTypeEnum = FilterableColumnDataType;
 
-    constructor(datetimeAdapter: DatetimeAdapter<FdDate>) {
+    constructor(datetimeAdapter: DatetimeAdapter<FdDate>, private _messageBoxService: MessageBoxService) {
         this.source = new TableDataSource(new TableDataProviderExample(datetimeAdapter));
     }
+
+    validator = (rules: CollectionFilter[]) => {
+        console.log('in the user validator function');
+        let retVal = true;
+        let foundMatch = false;
+        const excludedRules = [...rules.filter((rule) => rule.exclude === true)];
+        const includedRules = [...rules.filter((rule) => rule.exclude === false)];
+        includedRules.forEach((includedRule) => {
+            excludedRules.forEach((excludedRule) => {
+                if (
+                    excludedRule.strategy === includedRule.strategy &&
+                    excludedRule.field === includedRule.field &&
+                    includedRule.value === excludedRule.value
+                ) {
+                    foundMatch = true;
+                }
+            });
+        });
+        if (foundMatch) {
+            const content = {
+                title: 'Contradictory filtering rules',
+                approveButton: 'Ok',
+                approveButtonCallback: () => messageBoxRef.close('Approved'),
+                cancelButtonCallback: () => messageBoxRef.close('Canceled'),
+                closeButtonCallback: () => messageBoxRef.dismiss('Dismissed'),
+                content:
+                    'The provided "include" and "exclude" rules are contradictory and will not return any results. No filtering will be applied.'
+            };
+
+            const messageBoxRef = this._messageBoxService.open(content, { type: 'error' });
+
+            retVal = false;
+        }
+
+        return retVal;
+    };
 }
 
 export interface ExampleItem {

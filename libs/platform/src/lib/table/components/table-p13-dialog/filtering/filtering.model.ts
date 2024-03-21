@@ -16,6 +16,7 @@ export interface FilterableColumn {
 export interface FilterDialogData extends TableDialogCommonData {
     collectionFilter: CollectionFilter[];
     columns: FilterableColumn[];
+    validator?: ((rules: CollectionFilter[]) => boolean) | undefined;
 }
 
 export interface FilterDialogResultData {
