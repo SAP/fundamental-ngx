@@ -3,7 +3,6 @@ import {
     getElementAriaLabel,
     getElementArrayLength,
     getElementTitle,
-    refreshPage,
     waitForPresent
 } from '../../../../../e2e';
 import { iconStatusesList } from './object-marker-contents';
@@ -32,12 +31,5 @@ describe('Object marker test suite', () => {
 
     it('Verify RTL and LTR orientation', async () => {
         await objectMarkerPage.checkRtlSwitch();
-    });
-
-    xit('should check examples visual regression', async () => {
-        await refreshPage();
-        await waitForPresent(marker);
-        await objectMarkerPage.saveExampleBaselineScreenshot();
-        await expect(await objectMarkerPage.compareWithBaseline()).toBeLessThan(5);
     });
 });

@@ -38,11 +38,11 @@
         [attr.aria-active]="_isOpen"
         aria-live="polite"
         role="combobox"
+        aria-haspopup="listbox"
         aria-roledescription="listbox"
         [attr.aria-expanded]="_isOpen"
         [attr.aria-disabled]="disabled"
         [attr.aria-controls]="controlId + '-list-box'"
-        [attr.aria-haspopup]="!(this.readonly || this.disabled)"
         [attr.aria-required]="required"
         [attr.title]="triggerValue"
         [attr.aria-label]="ariaLabel || ('platformSelect.selectOptionLabel' | fdTranslate)"
@@ -51,7 +51,7 @@
         (focus)="_onFocus()"
         (blur)="_onBlur()"
     >
-        <div role="listitem" class="fd-select__text-content" [attr.aria-label]="triggerValue">
+        <div class="fd-select__text-content" [attr.aria-label]="triggerValue">
             <ng-template
                 [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
                 [ngTemplateOutletContext]="{ $implicit: triggerValue, selected: selected }"

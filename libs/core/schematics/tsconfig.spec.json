@@ -3,7 +3,10 @@
     "compilerOptions": {
         "outDir": "../../../dist/out-tsc",
         "module": "commonjs",
-        "types": ["jest", "node"]
+        "types": ["jest", "node"],
+        "paths": {
+            "@fundamental-ngx/core/package.json": ["../package.json"]
+        }
     },
     "include": ["jest.config.ts", "**/*.test.ts", "**/*.spec.ts", "**/*.d.ts", "testing-utils/**/*.ts"]
 }

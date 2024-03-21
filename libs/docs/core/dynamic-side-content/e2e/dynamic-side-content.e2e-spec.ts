@@ -19,11 +19,4 @@ describe('dynamic side content test suite', () => {
             await dynamicSideContentPage.checkRtlSwitch();
         });
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await dynamicSideContentPage.saveExampleBaselineScreenshot();
-            await expect(await dynamicSideContentPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

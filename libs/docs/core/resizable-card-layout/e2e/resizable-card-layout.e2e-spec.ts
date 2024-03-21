@@ -96,11 +96,6 @@ describe('Resizable card layout component:', () => {
         await resizableCardLayoutPage.checkRtlSwitch();
     });
 
-    xit('should check visual regression for all examples', async () => {
-        await resizableCardLayoutPage.saveExampleBaselineScreenshot();
-        await expect(await resizableCardLayoutPage.compareWithBaseline()).toBeLessThan(5);
-    });
-
     async function checkChanginPositionOfCardAround(section: string): Promise<void> {
         await click(section + button);
         const defaultPosition = await getAttributeByName(card, 'style', 1);

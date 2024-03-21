@@ -193,11 +193,6 @@ describe('Tabs test suite', () => {
         await tabsPage.checkRtlSwitch();
     });
 
-    xit('should check examples visual regression', async () => {
-        await tabsPage.saveExampleBaselineScreenshot();
-        expect(await tabsPage.compareWithBaseline()).toBeLessThan(5);
-    });
-
     async function checkTabsSelect(section: string): Promise<boolean> {
         let length: number = 0;
         if (section === collapsibleOverflowExample) {

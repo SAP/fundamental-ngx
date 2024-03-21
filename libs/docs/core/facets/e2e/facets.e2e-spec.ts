@@ -44,13 +44,6 @@ describe('dynamic side content test suite', () => {
         });
     });
 
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await facetsPage.saveExampleBaselineScreenshot();
-            await expect(await facetsPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
-
     async function CheckRaitingIndicator(section: string): Promise<void> {
         const lengthRI = await getElementArrayLength(section + raitingIndicator);
         for (let i = 1; i < lengthRI; i++) {

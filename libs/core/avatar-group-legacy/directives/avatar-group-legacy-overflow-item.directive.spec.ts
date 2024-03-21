@@ -31,9 +31,4 @@ describe('AvatarGroupLegacyOverflowItemDirective', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-
-    /** TODO: #6316 */
-    xit('should assign class', () => {
-        expect(component.ref.nativeElement.classList).toContain('fd-avatar-group-legacy__item');
-    });
 });

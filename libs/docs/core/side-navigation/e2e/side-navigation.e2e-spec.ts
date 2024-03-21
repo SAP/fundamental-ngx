@@ -103,11 +103,6 @@ describe('Side-navigation test suite', () => {
         await sideNavigationPage.checkRtlSwitch();
     });
 
-    xit('should check examples visual regression', async () => {
-        await sideNavigationPage.saveExampleBaselineScreenshot();
-        await expect(await sideNavigationPage.compareWithBaseline()).toBeLessThan(5);
-    });
-
     async function checkIsSelected(
         section: string,
         i: number = 0,

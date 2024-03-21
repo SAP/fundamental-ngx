@@ -23,8 +23,8 @@ export default {
         calendarYearsRangeViewDescription: 'Jahresbereichsauswahl'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
-        selectAllLabel: 'Alles auswählen ({selectedItems} von {totalItems})'
+        multiComboBoxAriaLabel: 'Mehrwert-Combobox',
+        selectAllLabel: 'Alle ({selectedItems} von {totalItems}) auswählen'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Zum vorherigen Element wechseln',
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Abbrechen'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Kopfbereich expandieren',
+        collapseLabel: 'Kopfbereich komprimieren',
+        pinLabel: 'Kopfbereich anheften',
+        unpinLabel: 'Kopfbereich lösen'
     },
     coreFeedListItem: {
         moreLabel: '{count} mehr',
@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Navigieren Sie mit den Pfeilen nach oben und unten in der Auswahl.',
         escapeNavigateTokens:
             'Drücken Sie die Escape-Taste, um das Eingabefeld zu schließen, und verwenden Sie die Pfeile nach links und rechts, um zwischen den ausgewählten Optionen zu navigieren.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Enthält {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
         mainNavigation: 'Hauptnavigation',
@@ -408,9 +408,11 @@ export default {
         headerMenuSortAsc: 'Aufsteigend sortieren',
         headerMenuSortDesc: 'Absteigend sortieren',
         headerMenuGroup: 'Gruppieren',
-        headerMenuFreeze: 'Fixieren',
+        headerMenuFreeze: 'Spalte fixieren',
         headerMenuEndFreeze: 'Bis Ende fixieren',
-        headerMenuUnfreeze: 'Fixierung aufheben',
+        headerMenuUnfreeze: 'Fixierung der Spalte aufheben',
+        headerMenuFreezePlural: 'Spalten fixieren',
+        headerMenuUnfreezePlural: 'Fixierung der Spalten aufheben',
         headerMenuFilter: 'Filtern',
         defaultEmptyMessage: 'Keine Daten gefunden',
         emptyCell: 'Leer',
@@ -508,7 +510,8 @@ export default {
         selectAllCheckboxLabel: 'Alle auswählen',
         deselectAllCheckboxLabel: 'Alle abwählen',
         deselectSingleRow: 'Um Zeilenauswahl aufzuheben, Leertaste drücken',
-        selectSingleRow: 'Um Zeile auszuwählen, Leertaste drücken'
+        selectSingleRow: 'Um Zeile auszuwählen, Leertaste drücken',
+        loadMore: 'Weitere laden'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Bearbeiten'

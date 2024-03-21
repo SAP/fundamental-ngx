@@ -1,12 +1,9 @@
-import { OverlayContainer } from '@angular/cdk/overlay';
-import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, Input, NO_ERRORS_SCHEMA, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { ENTER } from '@angular/cdk/keycodes';
 
 import { ButtonType } from '@fundamental-ngx/core/button';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { createKeyboardEvent } from '@fundamental-ngx/platform/shared';
 import { MenuItemComponent, PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { MenuButtonComponent } from './menu-button.component';
 import { PlatformMenuButtonModule } from './menu-button.module';
@@ -114,7 +111,7 @@ describe('Menu Button Disabled test and Type, size test', () => {
             [disabled]="disabled"
             [type]="type"
             [fdpMenuTriggerFor]="basicMenu"
-            (click)="clicked($event)"
+            (click)="clicked()"
         >
             Standard Button with long text
         </fdp-menu-button>
@@ -160,7 +157,6 @@ class TestMenuButtonComponent {
 describe('Menu Button click on Item select', () => {
     let host: TestMenuButtonComponent;
     let fixture: ComponentFixture<TestMenuButtonComponent>;
-    let overlayContainerEl: HTMLElement;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -168,10 +164,6 @@ describe('Menu Button click on Item select', () => {
             declarations: [TestMenuButtonComponent],
             providers: [RtlService]
         }).compileComponents();
-
-        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-            overlayContainerEl = overlayContainer.getContainerElement();
-        })();
     }));
 
     beforeEach(() => {
@@ -196,25 +188,4 @@ describe('Menu Button click on Item select', () => {
         fixture.detectChanges();
         expect(host.menuButtonClicked).toBeTruthy();
     });
-
-    // Skip this test for now, because it is not working
-    xit('select item on click', fakeAsync(() => {
-        /**
-         * FIRST-CLICK (OPEN MENU)
-         */
-        const menubutton = fixture.debugElement.query(By.css('fdp-menu-button'));
-        mouseClickOnElement(menubutton.nativeElement);
-        tick(1);
-        fixture.detectChanges();
-
-        const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
-
-        /**
-         * KEYPRESS ENTER
-         */
-        const keyboardEvent = createKeyboardEvent('keydown', ENTER, 'Enter');
-        items[0].dispatchEvent(keyboardEvent);
-        fixture.detectChanges();
-        expect(host.currentSelectedItem).toBe('First Item');
-    }));
 });

@@ -112,13 +112,6 @@ describe('Menu component test suite', () => {
     it('should check RTL/LTR orientation', async () => {
         await menuPage.checkRtlSwitch();
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await menuPage.saveExampleBaselineScreenshot();
-            await expect(await menuPage.compareWithBaseline()).toBeLessThan(3);
-        });
-    });
 });
 
 async function checkCascadingMenu(itemsArr, itemsArr2): Promise<void> {

@@ -93,16 +93,6 @@ describe('FeedInputComponent', () => {
         expect(textareaDirective.valueChange.emit).toHaveBeenCalledWith(event.target.value);
     });
 
-    xit('should textarea grow by default', () => {
-        // in jsdom it will not grow
-        const defaultHeight = textareaEl.nativeElement.style.height;
-        textareaEl.nativeElement.value = '1 \n 2 \n 3 \n 4 \n';
-        textareaDirective.resize();
-        fixture.detectChanges();
-
-        expect(parseInt(textareaEl.nativeElement.style.height, 10)).toBeGreaterThan(defaultHeight);
-    });
-
     it('should set textarea max height', () => {
         component.maxRows = 10;
         textareaEl.nativeElement.style.lineHeight = '19px';

@@ -331,15 +331,4 @@ describe('checkbox test suite', () => {
             await checkboxPage.checkRtlSwitch();
         });
     });
-
-    xdescribe('visual regression', () => {
-        beforeAll(async () => {
-            await refreshPage();
-        }, 1);
-
-        it('should check example blocks', async () => {
-            await checkboxPage.saveExampleBaselineScreenshot();
-            await expect(await checkboxPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

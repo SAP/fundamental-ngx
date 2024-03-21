@@ -147,11 +147,4 @@ describe('Menu button test suite', () => {
             await menuBtnPage.checkRtlSwitch();
         });
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await menuBtnPage.saveExampleBaselineScreenshot();
-            await expect(await menuBtnPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

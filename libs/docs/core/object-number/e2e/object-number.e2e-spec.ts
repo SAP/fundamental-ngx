@@ -7,7 +7,6 @@ import {
     waitForElDisplayed
 } from '../../../../../e2e';
 import {
-    basicExamplesText,
     objDecimalExamplesText,
     objStatusExamplesText,
     objTruncationText,
@@ -44,12 +43,6 @@ describe('object number test suite', () => {
                 await expect(await waitForElDisplayed(allExamples, i)).toBe(true);
                 await expect([null, '']).not.toContain(await getAttributeByName(allExamples, unitAttr, i));
             }
-        });
-    });
-
-    describe('basic object number examples', () => {
-        xit('should check values', async () => {
-            await checkObjectValues(basicExamples, basicExamplesText);
         });
     });
 
@@ -109,13 +102,6 @@ describe('object number test suite', () => {
     describe('check orientation', () => {
         it('should check RTL and LTR', async () => {
             await objectNumberPage.checkRtlSwitch();
-        });
-    });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await objectNumberPage.saveExampleBaselineScreenshot();
-            await expect(await objectNumberPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

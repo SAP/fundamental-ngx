@@ -22,6 +22,7 @@ const replacements = [
     [['fdTruncate', 'fd-truncate'], 'fdkTruncate']
 ];
 
+// eslint-disable-next-line jsdoc/require-jsdoc
 export default function mySchematic(): Rule {
     return (tree: Tree, context: SchematicContext) => {
         const files = getFilesWithExtension(tree, '/', 'html');

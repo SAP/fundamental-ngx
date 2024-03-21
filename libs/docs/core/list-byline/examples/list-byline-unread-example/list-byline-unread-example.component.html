@@ -1,6 +1,6 @@
 <h4>Standard Size</h4>
 <ul fd-list [byline]="true" [unreadIndicator]="true">
-    <li fd-list-item [unread]="true">
+    <li fd-list-item [unread]="true" aria-description="unread">
         <span fd-list-thumbnail><fd-icon glyph="activate"></fd-icon></span>
         <!-- for byline, fd-list-content is mandatory -->
         <div fd-list-content>
@@ -14,7 +14,7 @@
             <div fd-list-title>List item with no byline</div>
         </div>
     </li>
-    <li fd-list-item [unread]="true">
+    <li fd-list-item [unread]="true" aria-description="unread">
         <span fd-list-thumbnail><fd-icon glyph="calendar"></fd-icon></span>
         <div fd-list-content>
             <div fd-list-title>List Item With Two-Column Byline</div>
@@ -41,7 +41,7 @@
             <div fd-list-byline>Byline Text</div>
         </div>
     </li>
-    <li fd-list-item [unread]="true">
+    <li fd-list-item [unread]="true" aria-description="unread">
         <span fd-list-thumbnail><fd-icon glyph="employee"></fd-icon></span>
         <div fd-list-content>
             <div fd-list-title>List item with no byline</div>
@@ -57,7 +57,7 @@
             </div>
         </div>
     </li>
-    <li fd-list-item [unread]="true">
+    <li fd-list-item [unread]="true" aria-description="unread">
         <div fd-list-content>
             <div fd-list-title>Text-Only List Item</div>
             <div fd-list-byline>Byline Text (description)</div>

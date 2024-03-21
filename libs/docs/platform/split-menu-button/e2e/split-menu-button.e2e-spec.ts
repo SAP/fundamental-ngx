@@ -165,11 +165,4 @@ describe('Split menu button test suite', () => {
         await click(menuItemArr);
         await expect(await (await getElementSize(iconBtnAttrArr, 2)).width).toBeLessThan(menuWidthAfterSelection);
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await spMenuBtnPage.saveExampleBaselineScreenshot();
-            await expect(await spMenuBtnPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

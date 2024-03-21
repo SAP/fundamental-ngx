@@ -109,19 +109,6 @@ describe('MenuComponent', () => {
         expect(keyboardSupportSpy).toHaveBeenCalled();
     });
 
-    xit('should focus first element on open', async () => {
-        // does not work in Jest
-        const firstElementFocusIn = jest.fn();
-        const firstElementFocusOut = jest.fn();
-        menu._menuItems.first.elementRef.nativeElement.addEventListener('focusin', firstElementFocusIn);
-        menu._menuItems.first.elementRef.nativeElement.addEventListener('focusout', firstElementFocusOut);
-        menu.open();
-        fixture.detectChanges();
-        await fixture.whenStable();
-        expect(firstElementFocusIn).toHaveBeenCalled();
-        expect(firstElementFocusOut).not.toHaveBeenCalled();
-    });
-
     it('should open after clicking on trigger on mobiles', () => {
         menu.mobile = true;
         (<any>menu)._listenOnTriggerRefClicks();

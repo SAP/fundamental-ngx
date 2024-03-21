@@ -178,13 +178,6 @@ describe('Select test suite', () => {
         });
     });
 
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await selectPage.saveExampleBaselineScreenshot();
-            await expect(await selectPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
-
     async function checkOptions(selector: string, itemIndex: number, index = 0): Promise<void> {
         const textBefore = await getText(selector + displayText, index);
         click(selector + inputControl, index);

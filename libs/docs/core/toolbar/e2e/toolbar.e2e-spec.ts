@@ -1,17 +1,14 @@
 import {
     browserIsSafari,
-    checkElementScreenshot,
     click,
     getAttributeByName,
     getElementArrayLength,
     getElementPlaceholder,
-    getImageTagBrowserPlatform,
     getText,
     getValue,
     isElementClickable,
     isElementDisplayed,
     refreshPage,
-    saveElementScreenshot,
     scrollIntoView,
     setValue,
     waitForElDisplayed,
@@ -75,38 +72,6 @@ describe('Toolbar test suite', () => {
             await checkClickableButton(overflowButton);
         });
 
-        xit('verify checkbox', async () => {
-            const checkboxSquareTag = 'checkbox-square-';
-            const checkboxTickTag = 'checkbox-tick-';
-            await scrollIntoView(checkbox);
-            await click(checkbox);
-            await saveElementScreenshot(
-                checkbox,
-                checkboxSquareTag + (await getImageTagBrowserPlatform()),
-                await toolbarPage.getScreenshotFolder()
-            );
-            await expect(
-                await checkElementScreenshot(
-                    checkbox,
-                    checkboxSquareTag + (await getImageTagBrowserPlatform()),
-                    await toolbarPage.getScreenshotFolder()
-                )
-            ).toBeLessThan(5, `element item state mismatch`);
-            await click(checkbox);
-            await saveElementScreenshot(
-                checkbox,
-                checkboxTickTag + (await getImageTagBrowserPlatform()),
-                await toolbarPage.getScreenshotFolder()
-            );
-            await expect(
-                await checkElementScreenshot(
-                    checkbox,
-                    checkboxTickTag + (await getImageTagBrowserPlatform()),
-                    await toolbarPage.getScreenshotFolder()
-                )
-            ).toBeLessThan(5, `element item state mismatch`);
-        });
-
         it('verify dropdown menu', async () => {
             await scrollIntoView(dropdownMenu);
             await click(dropdownMenu);
@@ -131,15 +96,6 @@ describe('Toolbar test suite', () => {
             await selectHoursMinutesAndPeriod();
             await click(okButton);
             await expect(await getValue(dateTimeInput)).toEqual(date);
-        });
-
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7234
-        xit('verify popover split button', async () => {
-            await scrollIntoView(toolbarOverflowExample + moreButton);
-            await click(toolbarOverflowExample + moreButton);
-            await expect(await getAttributeByName(popoverDropDown, 'aria-expanded')).toBe('false');
-            await click(popoverSplitButton);
-            await expect(await getAttributeByName(popoverDropDown, 'aria-expanded')).toBe('true');
         });
 
         it('verify popover input has placeholder', async () => {
@@ -206,13 +162,6 @@ describe('Toolbar test suite', () => {
     describe('Check orientation', () => {
         it('should check RTL and LTR orientation', async () => {
             await toolbarPage.checkRtlSwitch();
-        });
-    });
-
-    xdescribe('Should check visual regression', () => {
-        it('should check visual regression for all examples', async () => {
-            await toolbarPage.saveExampleBaselineScreenshot();
-            await expect(await toolbarPage.compareWithBaseline()).toBeLessThan(7);
         });
     });
 

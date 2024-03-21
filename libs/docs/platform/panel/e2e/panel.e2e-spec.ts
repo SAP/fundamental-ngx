@@ -67,11 +67,4 @@ describe('Verify Panel', () => {
             await panelPage.checkRtlSwitch();
         });
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await panelPage.saveExampleBaselineScreenshot();
-            await expect(await panelPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

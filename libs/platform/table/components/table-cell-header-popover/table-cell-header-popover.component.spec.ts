@@ -63,11 +63,11 @@ describe('TableCellHeaderPopoverComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should render items based on conditions', fakeAsync(async () => {
+    it('should render items based on conditions', fakeAsync(() => {
         component.column = new MockTableColumn() as TableColumn;
         component.columnFrozen = false;
         component.filteringFromHeaderDisabled = false;
-        await fixture.detectChanges();
+        fixture.detectChanges();
         tick(1000);
 
         const renderedPopoverItems = component._popoverItems.toArray().map((item) => item.name);

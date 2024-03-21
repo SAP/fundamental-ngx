@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Vælger af årsinterval'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Multiværdikombinationsboks',
         selectAllLabel: 'Vælg alle ({selectedItems} ud af {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Annuller'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Udvid overskrift',
+        collapseLabel: 'Skjul overskrift',
+        pinLabel: 'Fastgør overskrift',
+        unpinLabel: 'Frigør overskrift'
     },
     coreFeedListItem: {
         moreLabel: '{count} mere',
@@ -407,9 +407,11 @@ export default {
         headerMenuSortAsc: 'Sortér stigende',
         headerMenuSortDesc: 'Sortér faldende',
         headerMenuGroup: 'Gruppér',
-        headerMenuFreeze: 'Frys',
+        headerMenuFreeze: 'Frys kolonne',
         headerMenuEndFreeze: 'Frys til slut',
-        headerMenuUnfreeze: 'Frigør',
+        headerMenuUnfreeze: 'Frigør kolonne',
+        headerMenuFreezePlural: 'Frys kolonner',
+        headerMenuUnfreezePlural: 'Frigør kolonner',
         headerMenuFilter: 'Filter',
         defaultEmptyMessage: 'Ingen data fundet',
         emptyCell: 'Tom',
@@ -507,7 +509,8 @@ export default {
         selectAllCheckboxLabel: 'Vælg alle',
         deselectAllCheckboxLabel: 'Fravælg alle',
         deselectSingleRow: 'Tryk på mellemrumstasten for at slette markering af række',
-        selectSingleRow: 'Tryk på mellemrumstasten for at vælge række'
+        selectSingleRow: 'Tryk på mellemrumstasten for at vælge række',
+        loadMore: 'Indlæs mere'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Rediger'

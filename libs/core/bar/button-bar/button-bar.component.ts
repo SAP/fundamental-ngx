@@ -1,5 +1,4 @@
 import { Component, HostBinding, Input, ViewChild } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BaseButton, ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
 import { FD_BUTTON_BAR_COMPONENT } from '../tokens';
 
@@ -49,10 +48,6 @@ export class ButtonBarComponent extends BaseButton {
     /** adding title to the button */
     @Input()
     title: string;
-
-    /** Aria label attribute value. */
-    @Input()
-    ariaLabel: Nullable<string | null>;
 
     /** the aria-labelledby ids to be associated with this element */
     @Input()

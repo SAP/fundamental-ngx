@@ -185,11 +185,4 @@ describe('Search field', () => {
     it('should check rtl switch', async () => {
         await searchPage.checkRtlSwitch();
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await searchPage.saveExampleBaselineScreenshot();
-            await expect(await searchPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

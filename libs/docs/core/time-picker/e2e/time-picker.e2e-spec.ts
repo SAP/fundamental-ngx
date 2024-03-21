@@ -166,11 +166,6 @@ describe('Time-picker component test', () => {
         await timePickerPage.checkRtlSwitch();
     });
 
-    xit('should check visual regression for all examples', async () => {
-        await timePickerPage.saveExampleBaselineScreenshot();
-        await expect(await timePickerPage.compareWithBaseline()).toBeLessThan(5);
-    });
-
     async function checkCountryFormat(
         format: string,
         inputValue: string,

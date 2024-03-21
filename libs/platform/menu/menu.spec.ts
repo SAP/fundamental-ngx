@@ -1,6 +1,6 @@
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { DOWN_ARROW, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
+import { ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW, TAB } from '@angular/cdk/keycodes';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { of } from 'rxjs';
 
@@ -222,76 +222,6 @@ describe('Simple Menu', () => {
         // check menu element is not shown
         menuEl = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEl.length).toBe(0);
-    }));
-
-    // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
-    xit('should allow keyboard navigation of items after opening of menu', fakeAsync(() => {
-        /**
-         * FIRST-CLICK (OPEN MENU)
-         */
-        mouseClickOnElement(button.nativeElement);
-        tick(1);
-        fixture.detectChanges();
-
-        const menuEl = overlayContainerEl.querySelector('.fd-menu') as Element;
-
-        // check to see if first item is focused
-        const items = overlayContainerEl.querySelectorAll('.fd-menu__link');
-        expect(items[0]).toBe(document.activeElement as Element);
-
-        /**
-         * KEYPRESS ARROWDOWN
-         */
-        let keyboardEvent = createKeyboardEvent('keydown', DOWN_ARROW, 'ArrowDown');
-        menuEl.dispatchEvent(keyboardEvent);
-        fixture.detectChanges();
-
-        expect(items[1]).toBe(document.activeElement as Element);
-
-        /**
-         * KEYPRESS ARROWDOWN
-         */
-        keyboardEvent = createKeyboardEvent('keydown', DOWN_ARROW, 'ArrowDown');
-        menuEl.dispatchEvent(keyboardEvent);
-        fixture.detectChanges();
-
-        expect(items[2]).toBe(document.activeElement as Element);
-
-        /**
-         * KEYPRESS ARROWUP
-         */
-        keyboardEvent = createKeyboardEvent('keydown', UP_ARROW, 'ArrowUp');
-        menuEl.dispatchEvent(keyboardEvent);
-        fixture.detectChanges();
-
-        expect(items[1]).toBe(document.activeElement as Element);
-    }));
-
-    // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
-    xit('should restore focus to the originating trigger after menu close', fakeAsync(() => {
-        /**
-         * FIRST-CLICK (OPEN MENU)
-         */
-        mouseClickOnElement(button.nativeElement);
-        tick(1);
-        fixture.detectChanges();
-
-        // check menu element is shown
-        const menuEl = overlayContainerEl.querySelectorAll('.fd-menu');
-        expect(menuEl.length).toBe(1);
-
-        // check to see if first item is focused
-        const items = overlayContainerEl.querySelectorAll('.fd-menu__link');
-        expect(items[0]).toBe(document.activeElement as Element);
-
-        /**
-         * KEYPRESS ESC TO CLOSE MENU
-         */
-        const keyboardEvent = createKeyboardEvent('keydown', ESCAPE, 'Escape');
-        menuEl[0].dispatchEvent(keyboardEvent);
-        fixture.detectChanges();
-
-        expect(button.nativeElement).toBe(document.activeElement as HTMLElement);
     }));
 
     it('should allow item selection to be captured as events', fakeAsync(() => {
@@ -612,40 +542,6 @@ describe('Cascading Menu', () => {
          */
         const keyboardEscEvent = createKeyboardEvent('keydown', ESCAPE, 'Escape');
         menuEls[1].dispatchEvent(keyboardEscEvent);
-        fixture.detectChanges();
-
-        // check menu element are not shown
-        menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
-        expect(menuEls.length).toBe(0);
-    }));
-
-    // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
-    xit('should hide all menus when when the user TABs off of menu', fakeAsync(() => {
-        /**
-         * FIRST-CLICK (OPEN MENU)
-         */
-        mouseClickOnElement(button.nativeElement);
-        tick(1);
-        fixture.detectChanges();
-
-        const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
-
-        /**
-         * KEYPRESS ENTER
-         */
-        const keyboardEvent = createKeyboardEvent('keydown', ENTER, 'Enter');
-        items[0].dispatchEvent(keyboardEvent);
-        fixture.detectChanges();
-
-        // check menu element are shown
-        let menuEls = overlayContainerEl.querySelectorAll('.fd-menu');
-        expect(menuEls.length).toBe(2);
-
-        /**
-         * KEYPRESS TAB
-         */
-        const keyboardTabEvent = createKeyboardEvent('keydown', TAB, 'Tab');
-        menuEls[1].dispatchEvent(keyboardTabEvent);
         fixture.detectChanges();
 
         // check menu element are not shown

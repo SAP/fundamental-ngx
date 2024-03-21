@@ -65,11 +65,4 @@ describe('Display List Item test suite:', () => {
             await displayListPage.checkRtlSwitch();
         });
     });
-
-    xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await displayListPage.saveExampleBaselineScreenshot();
-            await expect(await displayListPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

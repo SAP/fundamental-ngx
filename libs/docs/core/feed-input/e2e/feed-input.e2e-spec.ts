@@ -93,11 +93,4 @@ describe('Verify Feed Input component', () => {
     it('should check RTL', async () => {
         await feedInputPage.checkRtlSwitch();
     });
-
-    xdescribe('Should check visual regression', () => {
-        it('should check examples visual regression', async () => {
-            await feedInputPage.saveExampleBaselineScreenshot();
-            await expect(await feedInputPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
 });

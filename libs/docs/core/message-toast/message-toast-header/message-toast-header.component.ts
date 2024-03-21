@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import {
     DescriptionComponent,
     DocPageComponent,
@@ -11,6 +12,13 @@ import {
     selector: 'fd-message-toast-header',
     templateUrl: './message-toast-header.component.html',
     standalone: true,
-    imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
+    imports: [
+        DocPageComponent,
+        HeaderComponent,
+        DescriptionComponent,
+        ImportComponent,
+        HeaderTabsComponent,
+        MessageStripComponent
+    ]
 })
 export class MessageToastHeaderComponent {}

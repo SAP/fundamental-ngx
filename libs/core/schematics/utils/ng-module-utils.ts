@@ -1,9 +1,9 @@
-import { Tree, SchematicsException } from '@angular-devkit/schematics';
+import { SchematicsException, Tree } from '@angular-devkit/schematics';
 
-import * as ts from 'typescript';
 import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
+import * as ts from 'typescript';
 
-// Checks if an import is included in the module.
+/** Checks if an import is included in the module. */
 export function hasModuleImport(tree: Tree, modulePath: string, className: string): boolean {
     const moduleFileContent = tree.read(modulePath);
 
@@ -35,7 +35,7 @@ export function hasModuleImport(tree: Tree, modulePath: string, className: strin
     return false;
 }
 
-// Borrowed from the Angular CDK
+/** Borrowed from Angular CDK */
 function findNgModuleMetadata(rootNode: ts.Node): ts.ObjectLiteralExpression | null {
     // Add immediate child nodes of the root node to the queue.
     const nodeQueue: ts.Node[] = [...rootNode.getChildren()];
@@ -53,7 +53,7 @@ function findNgModuleMetadata(rootNode: ts.Node): ts.ObjectLiteralExpression | n
     return null;
 }
 
-// Borrowed from the Angular CDK
+/** Borrowed from Angular CDK */
 function resolveIdentifierOfExpression(expression: ts.Expression): ts.Identifier | null {
     if (ts.isIdentifier(expression)) {
         return expression;
@@ -63,7 +63,7 @@ function resolveIdentifierOfExpression(expression: ts.Expression): ts.Identifier
     return null;
 }
 
-// Borrowed from the Angular CDK
+/** Borrowed from Angular CDK */
 function isNgModuleCallExpression(callExpression: ts.CallExpression): boolean {
     if (!callExpression.arguments.length || !ts.isObjectLiteralExpression(callExpression.arguments[0])) {
         return false;
@@ -73,7 +73,7 @@ function isNgModuleCallExpression(callExpression: ts.CallExpression): boolean {
     return decoratorIdentifier ? decoratorIdentifier.text === 'NgModule' : false;
 }
 
-// Borrowed from the Angular CDK
+/** Borrowed from Angular CDK */
 export function getProjectFromWorkspace(workspace: WorkspaceSchema, projectName: string): WorkspaceProject {
     const project = workspace.projects[projectName];
 

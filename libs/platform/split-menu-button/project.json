@@ -4,18 +4,6 @@
     "projectType": "library",
     "sourceRoot": "libs/platform/split-menu-button",
     "prefix": "fdp",
-    "targets": {
-        "lint": {
-            "executor": "@nx/eslint:lint"
-        },
-        "test": {
-            "executor": "@nx/jest:jest",
-            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-            "options": {
-                "jestConfig": "libs/platform/split-menu-button/jest.config.ts"
-            }
-        }
-    },
-    "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": []
+    "targets": {},
+    "tags": ["type:lib", "scope:fdp"]
 }
