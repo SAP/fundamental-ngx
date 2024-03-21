@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.67...v0.49.0-rc.68) (2024-03-21)
+
+
+### Bug Fixes
+
+* **platform:** add validator input for p13 filter component ([#11520](https://github.com/SAP/fundamental-ngx/issues/11520)) ([a3b23ff](https://github.com/SAP/fundamental-ngx/commit/a3b23ffd495c4fb1afbc75938f5988d457406e7c))
+
+
+
+
+
 # [0.49.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.66...v0.49.0-rc.67) (2024-03-21)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
