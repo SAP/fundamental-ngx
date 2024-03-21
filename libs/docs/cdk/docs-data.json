@@ -1,0 +1,60 @@
+{
+    "guides": [
+        {
+            "url": "cdk/home",
+            "name": "Home"
+        },
+        {
+            "url": "cdk/new-component",
+            "name": "New Component"
+        }
+    ],
+    "directives": [
+        {
+            "url": "cdk/control-value-accessor",
+            "name": "Control Value Accessor"
+        },
+        {
+            "url": "cdk/data-source",
+            "name": "Data Source"
+        },
+        {
+            "url": "cdk/drag-n-drop",
+            "name": "Drag&Drop"
+        },
+        {
+            "url": "cdk/focusable-list",
+            "name": "Focusable List"
+        },
+        {
+            "url": "cdk/focusable-grid",
+            "name": "Focusable Grid"
+        },
+        {
+            "url": "cdk/selectable-list",
+            "name": "Selectable List"
+        },
+        {
+            "url": "cdk/disabled",
+            "name": "Disabled Behaviour"
+        },
+        {
+            "url": "cdk/clicked",
+            "name": "Clicked Behaviour"
+        },
+        {
+            "url": "cdk/initial-focus",
+            "name": "Initial Focus"
+        },
+        {
+            "url": "cdk/breakpoint",
+            "name": "Breakpoint"
+        }
+    ],
+    "utilities": [
+        {
+            "url": "cdk/tabbable",
+            "name": "Tabbable element"
+        }
+    ]
+}

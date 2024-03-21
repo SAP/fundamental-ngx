@@ -12,17 +12,81 @@ import {
     StackblitzService
 } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from './api-files';
-import { sections } from './docs-data';
+import { directives, guides, utilities } from './docs-data.json';
 
-const configureCdkRoutes = configureRoutes(API_FILES);
+const configureLibRoutes = configureRoutes(API_FILES);
 
 // BEING UPDATED WITH THE SAP-COMPONENT SCHEMATIC; DO NOT MODIFY THE STRUCTURE!
+const componentRoutes = [
+    {
+        path: 'control-value-accessor',
+        loadChildren: () => import('@fundamental-ngx/docs/cdk/forms').then(configureLibRoutes)
+    },
+    {
+        path: 'data-source',
+        loadChildren: () => import('@fundamental-ngx/docs/cdk/data-source').then(configureLibRoutes)
+    },
+    {
+        path: 'drag-n-drop',
+        loadChildren: () => import('@fundamental-ngx/docs/cdk/drag-n-drop').then(configureLibRoutes)
+    },
+    {
+        path: 'focusable-item',
+        loadChildren: () => import('@fundamental-ngx/docs/cdk/focusable-item').then(configureLibRoutes)
+    },
+    {
+        path: 'selectable-list',
+        loadChildren: () => import('@fundamental-ngx/docs/cdk/selectable-list').then(configureLibRoutes)
+    },
+    {
+        path: 'focusable-list',
+        loadChildren: () => import('@fundamental-ngx/docs/cdk/focusable-list').then(configureLibRoutes)
+    },
+    {
+        path: 'focusable-grid',
+        loadChildren: () => import('@fundamental-ngx/docs/cdk/focusable-grid').then(configureLibRoutes)
+    },
+    {
+        path: 'disabled',
+        loadChildren: () => import('@fundamental-ngx/docs/cdk/disabled').then(configureLibRoutes)
+    },
+    {
+        path: 'clicked',
+        loadChildren: () => import('@fundamental-ngx/docs/cdk/clicked').then(configureLibRoutes)
+    },
+    {
+        path: 'tabbable',
+        loadChildren: () => import('@fundamental-ngx/docs/cdk/tabbable').then(configureLibRoutes)
+    },
+    {
+        path: 'initial-focus',
+        loadChildren: () => import('@fundamental-ngx/docs/cdk/initial-focus').then(configureLibRoutes)
+    },
+    {
+        path: 'breakpoint',
+        loadChildren: () => import('@fundamental-ngx/docs/cdk/breakpoint').then(configureLibRoutes)
+    }
+];
+
 export const ROUTES: Routes = [
     {
         path: '',
         loadComponent: () => import('@fundamental-ngx/docs/shared-pages').then((m) => m.LibraryDocShellPageComponent),
         data: {
-            sections
+            sections: [
+                {
+                    header: 'Guides',
+                    content: guides
+                },
+                {
+                    header: 'Directives',
+                    content: directives
+                },
+                {
+                    header: 'Utilities',
+                    content: utilities
+                }
+            ]
         },
         providers: [
             // @todo Needs schema module!
@@ -47,54 +111,7 @@ export const ROUTES: Routes = [
                 loadComponent: () =>
                     import('@fundamental-ngx/docs/shared-pages').then((m) => m.NewComponentPageComponent)
             },
-            {
-                path: 'control-value-accessor',
-                loadChildren: () => import('@fundamental-ngx/docs/cdk/forms').then(configureCdkRoutes)
-            },
-            {
-                path: 'data-source',
-                loadChildren: () => import('@fundamental-ngx/docs/cdk/data-source').then(configureCdkRoutes)
-            },
-            {
-                path: 'drag-n-drop',
-                loadChildren: () => import('@fundamental-ngx/docs/cdk/drag-n-drop').then(configureCdkRoutes)
-            },
-            {
-                path: 'focusable-item',
-                loadChildren: () => import('@fundamental-ngx/docs/cdk/focusable-item').then(configureCdkRoutes)
-            },
-            {
-                path: 'selectable-list',
-                loadChildren: () => import('@fundamental-ngx/docs/cdk/selectable-list').then(configureCdkRoutes)
-            },
-            {
-                path: 'focusable-list',
-                loadChildren: () => import('@fundamental-ngx/docs/cdk/focusable-list').then(configureCdkRoutes)
-            },
-            {
-                path: 'focusable-grid',
-                loadChildren: () => import('@fundamental-ngx/docs/cdk/focusable-grid').then(configureCdkRoutes)
-            },
-            {
-                path: 'disabled',
-                loadChildren: () => import('@fundamental-ngx/docs/cdk/disabled').then(configureCdkRoutes)
-            },
-            {
-                path: 'clicked',
-                loadChildren: () => import('@fundamental-ngx/docs/cdk/clicked').then(configureCdkRoutes)
-            },
-            {
-                path: 'tabbable',
-                loadChildren: () => import('@fundamental-ngx/docs/cdk/tabbable').then(configureCdkRoutes)
-            },
-            {
-                path: 'initial-focus',
-                loadChildren: () => import('@fundamental-ngx/docs/cdk/initial-focus').then(configureCdkRoutes)
-            },
-            {
-                path: 'breakpoint',
-                loadChildren: () => import('@fundamental-ngx/docs/cdk/breakpoint').then(configureCdkRoutes)
-            }
+            ...componentRoutes
         ]
     }
 ];

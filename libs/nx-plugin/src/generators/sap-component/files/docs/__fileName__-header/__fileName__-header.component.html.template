@@ -5,7 +5,7 @@
         <!-- TODO: description -->
     </description>
 
-    <import module="<%= moduleName %>Module" subPackage="<%= name %>"></import>
+    <import module="<%= className %>Component" subPackage="<%= name %>"></import>
 
     <fd-header-tabs></fd-header-tabs>
 </fd-doc-page>
