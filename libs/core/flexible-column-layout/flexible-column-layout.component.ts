@@ -5,7 +5,7 @@ import {
     Component,
     ContentChild,
     EventEmitter,
-    Inject,
+    inject,
     Input,
     OnChanges,
     OnDestroy,
@@ -18,21 +18,20 @@ import {
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { Subscription, fromEvent } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import {
     ColumnSeparatorValue,
     FD_FLEXIBLE_LAYOUT_CONFIG,
     FlexibleColumnLayout,
     FlexibleColumnLayoutDefinition,
-    FlexibleLayoutConfig,
     LG_SCREEN_SIZE,
     MD_SCREEN_SIZE,
     ONE_COLUMN_END_FULL_SCREEN,
     ONE_COLUMN_MID_FULL_SCREEN,
     ONE_COLUMN_START_FULL_SCREEN,
-    SM_SCREEN_SIZE,
     ScreenSize,
+    SM_SCREEN_SIZE,
     THREE_COLUMNS_END_EXPANDED,
     THREE_COLUMNS_END_MINIMIZED,
     THREE_COLUMNS_MID_EXPANDED,
@@ -99,7 +98,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
      * Mapping of the layout name and the column layout in %
      */
     @Input()
-    layoutDefinitions: FlexibleColumnLayoutDefinition = this._config.layouts;
+    layoutDefinitions: FlexibleColumnLayoutDefinition = inject(FD_FLEXIBLE_LAYOUT_CONFIG).layouts;
 
     /**
      * The event emitted on layout value change.
@@ -159,6 +158,13 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
 
     /**
      * @hidden
+     * the column layout representing the distribution of the width
+     * between the first (start), the middle and the last(end) column
+     */
+    _columnLayout: { start: number; mid: number; end: number } = this.layoutDefinitions[this.layout];
+
+    /**
+     * @hidden
      * allows to keep track of the previos layout
      * so we can go back to it on window resize
      */
@@ -172,21 +178,11 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
 
     /**
      * @hidden
-     * the column layout representing the distribution of the width
-     * between the first (start), the middle and the last(end) column
-     */
-    _columnLayout: { start: number; mid: number; end: number } = this.layoutDefinitions[this.layout];
-
-    /**
-     * @hidden
      * set to 'true' if the layout is changed to fullscreen on window resize
      * this will allow the layout to switch to previous mode on SM->MD transition
      * if a layout is set by the user to fullscreen, it should persist on window resize
      */
     private _responsiveFullscreenLayout = false;
-
-    /** @hidden */
-    constructor(@Inject(FD_FLEXIBLE_LAYOUT_CONFIG) private readonly _config: FlexibleLayoutConfig) {}
 
     /**
      * @hidden
@@ -236,6 +232,36 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
                 this._updateCurrentLayout(TWO_COLUMNS_END_EXPANDED);
                 break;
         }
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._updateColumnLayoutParameters();
+        this._previousLayout = this.layout;
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._screenSize = this._getScreenSize(window.innerWidth);
+        this._listenOnWindowResize();
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        this._updateColumnLayoutParameters();
+
+        if (changes && changes.layout.previousValue) {
+            this._previousLayout = changes.layout.previousValue;
+        }
+
+        if (changes && changes.layout) {
+            this._responsiveLayoutChangeHandler();
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
     }
 
     /**
@@ -426,35 +452,5 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
         setTimeout(() => {
             this.layoutChange.emit(this.layout);
         });
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this._updateColumnLayoutParameters();
-        this._previousLayout = this.layout;
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this._screenSize = this._getScreenSize(window.innerWidth);
-        this._listenOnWindowResize();
-    }
-
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        this._updateColumnLayoutParameters();
-
-        if (changes && changes.layout.previousValue) {
-            this._previousLayout = changes.layout.previousValue;
-        }
-
-        if (changes && changes.layout) {
-            this._responsiveLayoutChangeHandler();
-        }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
     }
 }

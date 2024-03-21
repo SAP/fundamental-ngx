@@ -3,16 +3,10 @@
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/datetime-adapter/src",
-    "prefix": "fundamental-ngx",
+    "prefix": "datetime-adapter",
     "targets": {
         "prepare": {
-            "executor": "nx:run-commands",
-            "options": {
-                "commands": [
-                    "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=datetime-adapter --verbose",
-                    "yarn pack --cwd dist/libs/datetime-adapter"
-                ]
-            }
+            "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=datetime-adapter --verbose"
         },
         "compile-typedoc": {
             "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
@@ -23,16 +17,16 @@
         },
         "build": {
             "executor": "@nx/angular:package",
-            "outputs": ["{workspaceRoot}/dist/libs/datetime-adapter"],
+            "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
             "options": {
-                "project": "libs/datetime-adapter/ng-package.json"
+                "project": "{projectRoot}/ng-package.json"
             },
             "configurations": {
                 "production": {
-                    "tsConfig": "libs/datetime-adapter/tsconfig.lib.prod.json"
+                    "tsConfig": "{projectRoot}/tsconfig.lib.prod.json"
                 },
                 "development": {
-                    "tsConfig": "libs/datetime-adapter/tsconfig.lib.json"
+                    "tsConfig": "{projectRoot}/tsconfig.lib.json"
                 }
             },
             "defaultConfiguration": "production"
@@ -44,7 +38,7 @@
             "executor": "@nx/jest:jest",
             "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
             "options": {
-                "jestConfig": "libs/datetime-adapter/jest.config.ts"
+                "jestConfig": "{projectRoot}/jest.config.ts"
             }
         }
     },

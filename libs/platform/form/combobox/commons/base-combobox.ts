@@ -38,7 +38,7 @@ import {
 import { Observable, Subject, Subscription, combineLatest, fromEvent, isObservable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
-import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { ListComponent } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -230,9 +230,6 @@ export abstract class BaseCombobox
     /** @hidden */
     searchInputElement: ElementRef<HTMLInputElement>;
 
-    /** @hidden */
-    _contentDensity: ContentDensity = this.comboboxConfig.contentDensity;
-
     /** Input text of the input. */
     set inputText(value: string) {
         this._inputTextValue = value;
@@ -284,7 +281,7 @@ export abstract class BaseCombobox
     private _inputTextValue: string;
 
     /** @hidden */
-    private _matchingStrategy: MatchingStrategy = this.comboboxConfig.matchingStrategy;
+    private readonly _matchingStrategy: MatchingStrategy;
 
     /** @hidden */
     private _dsSubscription?: Subscription;
@@ -327,6 +324,7 @@ export abstract class BaseCombobox
         protected comboboxConfig: ComboboxConfig
     ) {
         super();
+        this._matchingStrategy = this.comboboxConfig.matchingStrategy;
     }
 
     /** @hidden */

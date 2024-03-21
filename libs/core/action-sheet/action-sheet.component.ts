@@ -9,6 +9,7 @@ import {
     ContentChildren,
     DestroyRef,
     EventEmitter,
+    inject,
     Input,
     OnDestroy,
     Optional,
@@ -17,24 +18,22 @@ import {
     TemplateRef,
     ViewChild,
     ViewContainerRef,
-    ViewEncapsulation,
-    inject
+    ViewEncapsulation
 } from '@angular/core';
-import { Subject, Subscription, merge } from 'rxjs';
+import { merge, Subject, Subscription } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 
 import {
+    destroyObservable,
     DynamicComponentService,
     FocusEscapeDirection,
-    KeyboardSupportService,
-    destroyObservable
+    KeyboardSupportService
 } from '@fundamental-ngx/cdk/utils';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { PopoverBodyComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.component';
 import { ActionSheetControlComponent } from './action-sheet-control/action-sheet-control.component';
 import { ActionSheetClickEvent, ActionSheetItemComponent } from './action-sheet-item/action-sheet-item.component';

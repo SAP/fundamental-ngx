@@ -2,18 +2,11 @@
     "name": "platform",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
-    "sourceRoot": "libs/platform/src",
     "prefix": "fdp",
     "targets": {
         "prepare": {
-            "executor": "nx:run-commands",
-            "options": {
-                "commands": [
-                    "npx nx run platform-schematics:build",
-                    "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=platform --verbose",
-                    "yarn pack --cwd dist/libs/platform"
-                ]
-            }
+            "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=platform --verbose",
+            "dependsOn": ["platform-schematics:build", "^prepare"]
         },
         "compile-typedoc": {
             "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
@@ -24,17 +17,27 @@
         },
         "build": {
             "executor": "@nx/angular:package",
-            "outputs": ["{workspaceRoot}/dist/libs/platform"],
+            "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
             "options": {
-                "tsConfig": "libs/platform/tsconfig.lib.json",
-                "project": "libs/platform/ng-package.json"
+                "tsConfig": "{projectRoot}/tsconfig.lib.json",
+                "project": "{projectRoot}/ng-package.json"
             },
             "configurations": {
                 "production": {
-                    "tsConfig": "libs/platform/tsconfig.lib.prod.json"
+                    "tsConfig": "{projectRoot}/tsconfig.lib.prod.json"
                 }
             },
             "defaultConfiguration": "production"
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint"
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "{projectRoot}/jest.config.ts"
+            }
         }
     },
     "tags": ["type:lib", "scope:fdp"]
