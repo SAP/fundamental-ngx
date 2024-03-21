@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Yıl aralığı seçici'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Çoklu Değer Açılan Kutusu',
         selectAllLabel: 'Tümünü seç ({selectedItems}/{totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'İptal'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Üst Bilgiyi Genişlet',
+        collapseLabel: 'Üst Bilgiyi Daralt',
+        pinLabel: 'Üst Bilgiyi Sabitle',
+        unpinLabel: 'Üst Bilgi İçin Sabitlemeyi Kaldır'
     },
     coreFeedListItem: {
         moreLabel: '{count} tane daha',
@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Aşağı ve yukarı okları kullanarak seçimler arasında gezinin.',
         escapeNavigateTokens:
             'Giriş alanından çıkmak için escape tuşuna basın ve belirlenen seçenekler arasında gezinmek için sol ve sağ ok tuşlarını kullanın.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: '{length, plural, =0 {0 belirteç} =1 {1 belirteç} other {# belirteç} } içerir.'
     },
     coreNavigation: {
         mainNavigation: 'Ana Gezinme Düzeni',
@@ -408,9 +408,11 @@ export default {
         headerMenuSortAsc: 'Artan Şekilde Sırala',
         headerMenuSortDesc: 'Azalan Şekilde Sırala',
         headerMenuGroup: 'Grupla',
-        headerMenuFreeze: 'Dondur',
+        headerMenuFreeze: 'Sütunu dondur',
         headerMenuEndFreeze: 'Sona Kadar Dondur',
-        headerMenuUnfreeze: 'Serbest bırak',
+        headerMenuUnfreeze: 'Sütunu serbest bırak',
+        headerMenuFreezePlural: 'Sütunları dondur',
+        headerMenuUnfreezePlural: 'Sütunları serbest bırak',
         headerMenuFilter: 'Filtrele',
         defaultEmptyMessage: 'Veri bulunamadı',
         emptyCell: 'Boş',
@@ -508,7 +510,8 @@ export default {
         selectAllCheckboxLabel: 'Tümünü seç',
         deselectAllCheckboxLabel: 'Tümünün seçimini kaldır',
         deselectSingleRow: 'Satırın seçimi kaldırmak için boşluk tuşuna basın',
-        selectSingleRow: 'Satırı seçmek için boşluk tuşuna basın'
+        selectSingleRow: 'Satırı seçmek için boşluk tuşuna basın',
+        loadMore: 'Daha fazla yükle'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Düzenle'

@@ -1,4 +1,4 @@
-import { Inject, Injectable, OnDestroy } from '@angular/core';
+import { inject, Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, skip, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { isCompact } from '../helpers/density-type-checkers';
@@ -12,13 +12,11 @@ import { GlobalContentDensityService } from './global-content-density.service';
 @Injectable()
 export class DeprecatedContentDensityService implements OnDestroy {
     /** Content Density BehaviourSubject */
-    readonly contentDensity = new BehaviorSubject<ContentDensityMode>(this._defaultContentDensity);
+    readonly contentDensity: BehaviorSubject<ContentDensityMode>;
 
     /** @hidden */
-    constructor(
-        private _contentDensityController: GlobalContentDensityService,
-        @Inject(DEFAULT_CONTENT_DENSITY) private _defaultContentDensity: ContentDensityMode
-    ) {
+    constructor(private _contentDensityController: GlobalContentDensityService) {
+        this.contentDensity = new BehaviorSubject(inject(DEFAULT_CONTENT_DENSITY));
         this.contentDensity
             .pipe(
                 skip(1),

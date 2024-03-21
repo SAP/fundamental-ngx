@@ -15,8 +15,8 @@ import { Validators } from '@angular/forms';
 import { AsyncOrSyncPipe } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { TabPanelComponent } from '@fundamental-ngx/core/tabs';
-import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform';
 import { AnyDynamicFormFieldItem } from '@fundamental-ngx/platform/form';
+import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform/icon-tab-bar';
 import { MessagePopoverComponent, MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
 import {
     BaseSettingsGeneratorLayout,

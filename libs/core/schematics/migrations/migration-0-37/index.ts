@@ -4,6 +4,7 @@ import { updateWorkspace } from '@schematics/angular/utility/workspace';
 
 import { findStylesheetFiles } from '../../utils/file-utils';
 
+// eslint-disable-next-line jsdoc/require-jsdoc
 export default function (): Rule {
     return chain([removeStylesFromConfig(), removeIconFonts(), removeFontStyles(), noticeAddSchematics()]);
 }
@@ -103,7 +104,7 @@ function removeFontStyles(): Rule {
             const FONT_FACE_REGEX = /(@font-face)[\w\s]?{[s\S\W\w]+?(?=\s}\s)?\s?}[\n\s]*/gi;
 
             styleSheets.forEach((styleSheet) => {
-                let buffer = tree.read(styleSheet);
+                const buffer = tree.read(styleSheet);
                 if (!buffer) {
                     return;
                 }

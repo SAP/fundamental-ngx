@@ -180,7 +180,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
 
     /**
      * Arranges cards in layout based on rank, width and height of card
-     * @param cards: Array of ResizableCardItemComponent
+     * @param cards Array of ResizableCardItemComponent
      */
     arrangeCards(cards: Array<ResizableCardItemComponent>): void {
         this._columnsHeight = new Array(this._columns);
@@ -200,7 +200,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
 
     /**
      * Handles shifting of cards with animation, while card is still resizing.
-     * @param event: ResizedEvent
+     * @param event {ResizedEvent}
      */
     cardResizing(event: ResizedEvent): void {
         this.resizing.emit(event);
@@ -210,7 +210,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
 
     /**
      * Handles arrangement of cards in layout
-     * @param event: ResizedEvent
+     * @param event {ResizedEvent}
      */
     cardResizeComplete(event: ResizedEvent): void {
         this._layoutShifted = false;
@@ -318,7 +318,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
 
     /**
      * @hidden Sets number of column in layout, based on LayoutSize passed
-     * @param layoutSize: Available options are 'sm' | 'md' | 'lg' | 'xl'
+     * @param layoutSize {'sm' | 'md' | 'lg' | 'xl'}
      */
     private _setLayoutColumns(layoutSize: LayoutSize): void {
         let layoutWidthDefault: number;
@@ -358,7 +358,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
 
     /**
      * @hidden Method to handle card vertical resize and trigger the layout change
-     * @param event: ResizedEvent
+     * @param event {ResizedEvent}
      */
     private _handleVerticalResize(event: ResizedEvent): void {
         if (event.card.cardHeightRowSpan !== event.card.previousCardHeightRowSpan) {
@@ -370,7 +370,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
 
     /**
      * @hidden Method to handle card horizontal resize and trigger the layout change
-     * @param event : ResizedEvent
+     * @param event {ResizedEvent}
      */
     private _handleHorizontalResize(event: ResizedEvent): void {
         // when increasing width hit the offset, show extended border and start pushing down border cards
@@ -435,7 +435,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
     /**
      * @hidden Method to move card down, when another card width is increasing
      * Method to loop till this._columns -1 positions and exchange the rank
-     * @param currentCardIndex: Index of current card
+     * @param currentCardIndex Index of current card
      */
     private _moveCardDown(currentCardIndex: number): void {
         // taking width of adjacent card col-span into account
@@ -467,7 +467,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
 
     /**
      * @hidden updates array with new column heights
-     * @param card: ResizableCardItemComponent
+     * @param card {ResizableCardItemComponent}
      */
     private _updateColumnsHeight(card: ResizableCardItemComponent): void {
         const directionPosition = this._directionPosition$();
@@ -496,8 +496,8 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
 
     /**
      * @hidden Try to set card at available heights
-     * @param card : ResizableCardItemComponent
-     * @param index : index value of card in array of ResizableCardItemComponent
+     * @param card ResizableCardItemComponent
+     * @param index value of card in array of ResizableCardItemComponent
      */
     private _setCardPositionValues(card: ResizableCardItemComponent, index: number): void {
         const directionPosition = this._directionPosition$();
@@ -518,8 +518,8 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
 
     /**
      * @hidden try to set card at given height.
-     * @param height : height at which card is getting positioned.
-     * @param card : ResizableCardItemComponent
+     * @param height height at which card is getting positioned.
+     * @param card ResizableCardItemComponent
      * @returns It returns true when card position id found otherwise it returns false.
      */
     private _isPositionSetSuccess(height: number, card: ResizableCardItemComponent): boolean {
@@ -552,10 +552,10 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
 
     /**
      * @hidden Try to start card position from left most fit position.
-     * @param card : ResizableCardItemComponent
-     * @param columnPositions : Array of available positions for cards.
-     * @param height : height at which fixing the card
-     * @returns : returns starting column position where card will fit.
+     * @param card ResizableCardItemComponent
+     * @param columnPositions {Array<number>} Array of available positions for cards.
+     * @param height {number} height at which fixing the card
+     * @returns {number} returns starting column position where card will fit.
      */
     private _fitCardColumnPosition(
         card: ResizableCardItemComponent,
@@ -619,8 +619,8 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
 
     /**
      * @hidden Comparator to sort card based on rank.
-     * @param firstCard : ResizableCardItemComponent
-     * @param secondCard : ResizableCardItemComponent
+     * @param firstCard ResizableCardItemComponent
+     * @param secondCard ResizableCardItemComponent
      * @returns : returns difference between first card rank and other card rank.
      */
     private _sortCards(firstCard: ResizableCardItemComponent, secondCard: ResizableCardItemComponent): number {

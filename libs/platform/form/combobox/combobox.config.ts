@@ -23,6 +23,11 @@ export class ComboboxConfig {
      */
     providers: Map<string, DataProvider<any>> | null = new Map();
 
+    /** @hidden */
+    constructor(platformConfig: PlatformConfig) {
+        this.contentDensity = platformConfig.contentDensity;
+    }
+
     /**
      * Create Provider factory function
      */
@@ -30,10 +35,5 @@ export class ComboboxConfig {
         const useFactory = (platformConfig: PlatformConfig): ComboboxConfig =>
             Object.assign(new ComboboxConfig(platformConfig), obj);
         return useFactory;
-    }
-
-    /** @hidden */
-    constructor(platformConfig: PlatformConfig) {
-        this.contentDensity = platformConfig.contentDensity;
     }
 }

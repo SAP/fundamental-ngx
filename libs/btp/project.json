@@ -1,18 +1,14 @@
 {
     "name": "btp",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/btp",
-    "prefix": "fundamental-ngx",
+    "prefix": "fdb",
     "tags": ["type:lib", "scope:fdb"],
     "projectType": "library",
     "targets": {
         "prepare": {
             "executor": "nx:run-commands",
             "options": {
-                "commands": [
-                    "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=btp --verbose",
-                    "yarn pack --cwd dist/libs/btp"
-                ]
+                "commands": ["npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=btp --verbose"]
             }
         },
         "compile-typedoc": {

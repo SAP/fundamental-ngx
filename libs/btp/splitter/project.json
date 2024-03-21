@@ -4,5 +4,6 @@
     "projectType": "library",
     "sourceRoot": "libs/btp/splitter",
     "prefix": "fdb",
-    "tags": ["type:lib", "scope:fdb"]
+    "tags": ["type:lib", "scope:fdb"],
+    "targets": {}
 }

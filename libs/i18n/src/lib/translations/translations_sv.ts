@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Årsintervallväljare'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Kombinationsruta med flera värden',
         selectAllLabel: 'Välj alla ({selectedItems} av {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Avbryt'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Expandera huvud',
+        collapseLabel: 'Komprimera huvud',
+        pinLabel: 'Fäst huvud',
+        unpinLabel: 'Lossa huvud'
     },
     coreFeedListItem: {
         moreLabel: '{count} mer',
@@ -407,9 +407,11 @@ export default {
         headerMenuSortAsc: 'Sortera stigande',
         headerMenuSortDesc: 'Sortera fallande',
         headerMenuGroup: 'Grupp',
-        headerMenuFreeze: 'Frys',
+        headerMenuFreeze: 'Frys kolumn',
         headerMenuEndFreeze: 'Frys till slut',
-        headerMenuUnfreeze: 'Häv frysning',
+        headerMenuUnfreeze: 'Häv frysning av kolumn',
+        headerMenuFreezePlural: 'Frys kolumner',
+        headerMenuUnfreezePlural: 'Häv frysning av kolumner',
         headerMenuFilter: 'Filtrera',
         defaultEmptyMessage: 'Inga data hittades',
         emptyCell: 'Tom',
@@ -507,7 +509,8 @@ export default {
         selectAllCheckboxLabel: 'Välj alla',
         deselectAllCheckboxLabel: 'Avmarkera alla',
         deselectSingleRow: 'Tryck på BLANKSTEG för att avmarkera rad',
-        selectSingleRow: 'Tryck på BLANKSTEG för att välja rad'
+        selectSingleRow: 'Tryck på BLANKSTEG för att välja rad',
+        loadMore: 'Läs in fler'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Redigera'

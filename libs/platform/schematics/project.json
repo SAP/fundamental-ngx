@@ -5,15 +5,16 @@
         "build": {
             "executor": "@nx/js:tsc",
             "options": {
-                "outputPath": "dist/libs/platform/schematics",
-                "tsConfig": "libs/platform/schematics/tsconfig.json",
-                "main": "libs/platform/schematics/ng-add/index.ts",
+                "outputPath": "dist/{projectRoot}",
+                "tsConfig": "{projectRoot}/tsconfig.json",
+                "main": "{projectRoot}/ng-add/index.ts",
                 "assets": [
-                    "libs/platform/schematics/**/*/schema.json",
-                    "libs/platform/schematics/collection.json",
-                    "libs/platform/schematics/migrations.json"
+                    "{projectRoot}/**/*/schema.json",
+                    "{projectRoot}/collection.json",
+                    "{projectRoot}/migrations.json"
                 ]
             }
         }
-    }
+    },
+    "implicitDependencies": ["platform"]
 }

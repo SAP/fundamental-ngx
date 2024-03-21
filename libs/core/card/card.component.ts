@@ -1,6 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    ContentChild,
     ElementRef,
     HostBinding,
     Input,
@@ -10,11 +11,13 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass, CssClassBuilder, Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Subscription } from 'rxjs';
+import { CardTitleDirective } from './card-title.directive';
 import { CardType, CLASS_NAME } from './constants';
+import { FD_CARD_TITLE } from './token';
 import { getCardModifierClassNameByCardType } from './utils';
 
 let cardId = 0;
@@ -54,6 +57,14 @@ export class CardComponent implements OnChanges, OnInit, CssClassBuilder, OnDest
     @HostBinding('attr.role')
     role = 'region';
 
+    /** Card aria-labelledby  */
+    @HostBinding('attr.aria-labelledby')
+    cardTitleId: Nullable<string>;
+
+    /** @hidden */
+    @ContentChild(FD_CARD_TITLE, { static: true })
+    cardTitle: CardTitleDirective;
+
     /** @hidden */
     class: string;
 
@@ -76,6 +87,10 @@ export class CardComponent implements OnChanges, OnInit, CssClassBuilder, OnDest
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
+
+        if (this.cardTitle) {
+            this.cardTitleId = this.cardTitle.id;
+        }
     }
 
     /** @hidden */

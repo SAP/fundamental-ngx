@@ -82,7 +82,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
     selectionChange = new EventEmitter<ComboboxSelectionChangeEvent>();
     /** @hidden */
     @ViewChild('searchInputElement')
-    searchInputElement: ElementRef<HTMLInputElement>;
+    declare searchInputElement: ElementRef<HTMLInputElement>;
 
     /** @hidden */
     @ViewChild('controlTemplate')
