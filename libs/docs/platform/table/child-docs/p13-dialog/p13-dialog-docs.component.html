@@ -66,6 +66,10 @@
     </ul>
     Please note once the <code>fdp-table-p13n-filter</code> is connected to a table the filter option is not available
     from column header dialog menu.
+    <br />
+    Validation for the filtering can be provided by passing a function to the `[validator]` input. This function must
+    return a boolean. See the example code below, which demonstrates how to prevent the user from including and
+    excluding the same property.
 </description>
 <component-example>
     <fdp-platform-table-p13-filter-example></fdp-platform-table-p13-filter-example>
