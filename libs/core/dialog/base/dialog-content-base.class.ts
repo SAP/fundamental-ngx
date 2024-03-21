@@ -1,6 +1,6 @@
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
-export class DialogContentBase {
+export class DialogContentBase<ContentType = unknown> {
     /** Dialog Title id */
     titleId?: string;
 
@@ -8,7 +8,7 @@ export class DialogContentBase {
     title?: string;
 
     /** Dialog Body */
-    content?: unknown;
+    content?: ContentType;
 
     /** Aria Modal for the dialog component element */
     ariaModal?: boolean;

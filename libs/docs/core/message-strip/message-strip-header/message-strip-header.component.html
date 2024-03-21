@@ -3,6 +3,11 @@
     <description>
         Message Strips provide inline messages within the application that are color-coded to emphasize the level of
         urgency.
+        <fd-message-strip [dismissible]="false" type="information">
+            <b>IMPORTANT</b> Message Strip Alerts are using
+            <a href="https://material.angular.io/cdk/overlay/overview">Angular CDK Overlay</a>, for that reason you
+            would need to import its styling <code>&#64;angular/cdk/overlay-prebuilt.css</code>
+        </fd-message-strip>
     </description>
     <import module="MessageStripModule" subPackage="message-strip"></import>
 

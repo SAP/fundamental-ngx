@@ -11,7 +11,7 @@ describe('PopoverBodyComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PopoverModule, OverlayModule, A11yModule]
+            imports: [PopoverModule, A11yModule]
         }).compileComponents();
     }));
 

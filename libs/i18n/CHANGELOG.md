@@ -3,6 +3,137 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.49.0](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.68...v0.49.0) (2024-03-21)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.49.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.67...v0.49.0-rc.68) (2024-03-21)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.49.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.66...v0.49.0-rc.67) (2024-03-21)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.49.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.65...v0.49.0-rc.66) (2024-03-21)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.49.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.64...v0.49.0-rc.65) (2024-03-21)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.49.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.63...v0.49.0-rc.64) (2024-03-21)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.49.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.62...v0.49.0-rc.63) (2024-03-21)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.49.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.61...v0.49.0-rc.62) (2024-03-21)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.49.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.60...v0.49.0-rc.61) (2024-03-21)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.49.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.59...v0.49.0-rc.60) (2024-03-20)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.49.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.58...v0.49.0-rc.59) (2024-03-20)
+
+
+### Bug Fixes
+
+* **i18n:** fixed incorrect translation syntax and improved test reports ([#11601](https://github.com/SAP/fundamental-ngx/issues/11601)) ([fd5b299](https://github.com/SAP/fundamental-ngx/commit/fd5b299c2c404658dbc15b793e40a7e1c4c297a1))
+
+
+
+
+
+# [0.49.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.57...v0.49.0-rc.58) (2024-03-20)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.49.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.56...v0.49.0-rc.57) (2024-03-20)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.49.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.55...v0.49.0-rc.56) (2024-03-18)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.49.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.54...v0.49.0-rc.55) (2024-03-18)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.49.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.53...v0.49.0-rc.54) (2024-03-15)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
 # [0.49.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.49.0-rc.52...v0.49.0-rc.53) (2024-03-15)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n

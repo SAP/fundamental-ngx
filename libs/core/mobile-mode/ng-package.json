@@ -1,6 +1,5 @@
 {
     "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
-    "dest": "../../../dist/libs/core/mobile-mode",
     "lib": {
         "entryFile": "./index.ts"
     }

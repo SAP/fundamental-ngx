@@ -232,8 +232,7 @@ export abstract class BaseInput
 
     /** @hidden */
     protected defaultId = `fdp-input-id-${randomId++}`;
-    /** @hidden */
-    protected _disabled: boolean;
+
     /** @hidden */
     protected _value: any;
     /** @hidden */

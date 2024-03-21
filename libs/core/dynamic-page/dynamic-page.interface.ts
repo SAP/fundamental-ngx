@@ -4,7 +4,6 @@ import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constant
 
 export interface DynamicPage {
     disableSnapOnScroll: boolean;
-    role: string;
     ariaLabel: Nullable<string>;
     background: DynamicPageBackgroundType;
     autoResponsive: boolean;

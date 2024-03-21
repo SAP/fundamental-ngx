@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Velger av årsintervall'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Kombinasjonsboks for flere verdier',
         selectAllLabel: 'Merk alle ({selectedItems} av {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Avbryt'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Utvid overskrift',
+        collapseLabel: 'Komprimer overskrift',
+        pinLabel: 'Fest overskrift',
+        unpinLabel: 'Løsne overskrift'
     },
     coreFeedListItem: {
         moreLabel: '{count} mer',
@@ -408,9 +408,11 @@ export default {
         headerMenuSortAsc: 'Sorter stigende',
         headerMenuSortDesc: 'Sorter synkende',
         headerMenuGroup: 'Gruppe',
-        headerMenuFreeze: 'Frys',
+        headerMenuFreeze: 'Frys kolonne',
         headerMenuEndFreeze: 'Frys for å avslutte',
-        headerMenuUnfreeze: 'Opphev frysing',
+        headerMenuUnfreeze: 'Opphev frysing av kolonne',
+        headerMenuFreezePlural: 'Frys kolonner',
+        headerMenuUnfreezePlural: 'Opphev frysing av kolonner',
         headerMenuFilter: 'Filter',
         defaultEmptyMessage: 'Finner ingen data',
         emptyCell: 'Tom',
@@ -508,7 +510,8 @@ export default {
         selectAllCheckboxLabel: 'Merk alle',
         deselectAllCheckboxLabel: 'Opphev merking av alle',
         deselectSingleRow: 'Trykk på mellomromstast for å oppheve merkingen',
-        selectSingleRow: 'Trykk på mellomromstast for å merke rad'
+        selectSingleRow: 'Trykk på mellomromstast for å merke rad',
+        loadMore: 'Last inn mer'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Rediger'

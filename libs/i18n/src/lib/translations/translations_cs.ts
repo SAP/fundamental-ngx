@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Výběr rozsahu let'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Vícehodnotový výklopný seznam',
         selectAllLabel: 'Vybrat vše ({selectedItems} z {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Zrušit'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Rozbalit hlavičku',
+        collapseLabel: 'Sbalit hlavičku',
+        pinLabel: 'Připnout hlavičku',
+        unpinLabel: 'Odepnout hlavičku'
     },
     coreFeedListItem: {
         moreLabel: 'další(ch) {count}',
@@ -407,9 +407,11 @@ export default {
         headerMenuSortAsc: 'Seřadit vzestupně',
         headerMenuSortDesc: 'Seřadit sestupně',
         headerMenuGroup: 'Skupina',
-        headerMenuFreeze: 'Fixovat',
+        headerMenuFreeze: 'Fixovat sloupec',
         headerMenuEndFreeze: 'Fixovat do konce',
-        headerMenuUnfreeze: 'Zrušit fixaci',
+        headerMenuUnfreeze: 'Uvolnit sloupec',
+        headerMenuFreezePlural: 'Fixovat sloupce',
+        headerMenuUnfreezePlural: 'Uvolnit sloupce',
         headerMenuFilter: 'Filtr',
         defaultEmptyMessage: 'Nebyla nalezena data',
         emptyCell: 'Prázdné',
@@ -507,7 +509,8 @@ export default {
         selectAllCheckboxLabel: 'Vybrat vše',
         deselectAllCheckboxLabel: 'Zrušit celý výběr',
         deselectSingleRow: 'Výběr řádky zrušíte stisknutím mezerníku',
-        selectSingleRow: 'Řádku vyberete stisknutím mezerníku'
+        selectSingleRow: 'Řádku vyberete stisknutím mezerníku',
+        loadMore: 'Načíst další'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Upravit'

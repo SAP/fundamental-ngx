@@ -90,10 +90,10 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
     displayHours: boolean;
 
     /** @Input Default time picker placeholder which is set dependant on the hours, minutes and seconds.
-     * Otherwise It can be set to a default value
+     * Otherwise, It can be set to a default value
      */
     @Input()
-    placeholder: string;
+    declare placeholder: string;
 
     /** Aria label for the time picker input. */
     @Input()

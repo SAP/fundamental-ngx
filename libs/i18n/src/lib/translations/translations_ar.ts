@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'أداة انتقاء نطاق السنوات'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'مربع تحرير وسرد متعدد القيم',
         selectAllLabel: 'تحديد الكل ({selectedItems} من {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'إلغاء'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'توسيع المقدمة',
+        collapseLabel: 'طي المقدمة',
+        pinLabel: 'تثبيت المقدمة',
+        unpinLabel: 'إلغاء تثبيت المقدمة'
     },
     coreFeedListItem: {
         moreLabel: '{count} إضافية',
@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'يمكنك التنقل بين التحديدات بالسهم المتجه لأعلى والسهم المتجه لأسفل.',
         escapeNavigateTokens:
             'يمكنك ضغط ’تجاهل‘ للخروج من حقل الإدخال، واستخدام مفتاح السهم لأعلى ومفتاح السهم لأسفل للتنقل بين الخيارات المحددة.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'يحتوي على إجمالي الرموز: {length}'
     },
     coreNavigation: {
         mainNavigation: 'التنقل الرئيسي',
@@ -406,9 +406,11 @@ export default {
         headerMenuSortAsc: 'ترتيب تصاعدي',
         headerMenuSortDesc: 'ترتيب تنازلي',
         headerMenuGroup: 'تجميع',
-        headerMenuFreeze: 'تجميد',
+        headerMenuFreeze: 'تجميد العمود',
         headerMenuEndFreeze: 'تجميد حتى النهاية',
-        headerMenuUnfreeze: 'إلغاء التجميد',
+        headerMenuUnfreeze: 'إلغاء تجميد العمود',
+        headerMenuFreezePlural: 'تجميد الأعمدة',
+        headerMenuUnfreezePlural: 'إلغاء تجميد الأعمدة',
         headerMenuFilter: 'تصفية',
         defaultEmptyMessage: 'لم يتم العثور على بيانات',
         emptyCell: 'فارغ',
@@ -506,7 +508,8 @@ export default {
         selectAllCheckboxLabel: 'تحديد الكل',
         deselectAllCheckboxLabel: 'إلغاء تحديد الكل',
         deselectSingleRow: 'لإلغاء تحديد الصف، اضغط مفتاح المسافة',
-        selectSingleRow: 'لتحديد الصف، اضغط مفتاح المسافة'
+        selectSingleRow: 'لتحديد الصف، اضغط مفتاح المسافة',
+        loadMore: 'تحميل المزيد'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'تحرير'

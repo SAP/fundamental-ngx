@@ -25,12 +25,7 @@ export function toIso8601(fdDate: {
 }
 
 /**
- * @param year e.g. 2020
- * @param month 1 = January, 12 = December
- * @param day 1 - 31
- * @param hour 0 - 23
- * @param minute 0 - 59
- * @param second 0 - 59
+ * @param params e.g. { year: 2020, month: 1, day: 1, hour: 0, minute: 0, second: 0 }
  */
 export function isValidByParams(params: {
     year: number;

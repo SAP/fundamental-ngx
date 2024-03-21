@@ -115,7 +115,7 @@ export abstract class BaseSelect
      * Max width of list container
      * */
     @Input()
-    width: string;
+    declare width: string;
 
     /** Whether the select component is readonly. */
     @Input()
@@ -124,7 +124,7 @@ export abstract class BaseSelect
     /** Placeholder for the select. Appears in the
      * triggerbox if no option is selected. */
     @Input()
-    placeholder: string;
+    declare placeholder: string;
 
     /** Whether close the popover on outside click. */
     @Input()

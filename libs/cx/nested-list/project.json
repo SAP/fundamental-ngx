@@ -4,17 +4,6 @@
     "projectType": "library",
     "sourceRoot": "libs/cx/nested-list",
     "prefix": "cx",
-    "targets": {
-        "lint": {
-            "executor": "@nx/eslint:lint"
-        },
-        "test": {
-            "executor": "@nx/jest:jest",
-            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-            "options": {
-                "jestConfig": "libs/cx/nested-list/jest.config.ts"
-            }
-        }
-    },
+    "targets": {},
     "tags": ["type:lib", "scope:cx"]
 }

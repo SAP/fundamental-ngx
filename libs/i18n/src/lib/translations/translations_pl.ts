@@ -23,7 +23,7 @@ export default {
         calendarYearsRangeViewDescription: 'Selektor zakresu lat'
     },
     coreMultiComboBox: {
-        multiComboBoxAriaLabel: 'Multi Value Combo Box',
+        multiComboBoxAriaLabel: 'Pole wielokrotnego wyboru',
         selectAllLabel: 'Wybierz wszystkie ({selectedItems} z {totalItems})'
     },
     coreCarousel: {
@@ -48,10 +48,10 @@ export default {
         datetimeCancelLabel: 'Anuluj'
     },
     coreDynamicPage: {
-        expandLabel: 'Expand Header',
-        collapseLabel: 'Collapse Header',
-        pinLabel: 'Pin Header',
-        unpinLabel: 'Unpin Header'
+        expandLabel: 'Rozwiń nagłówek',
+        collapseLabel: 'Zwiń nagłówek',
+        pinLabel: 'Przypnij nagłówek',
+        unpinLabel: 'Odepnij nagłówek'
     },
     coreFeedListItem: {
         moreLabel: '{count} więcej',
@@ -407,9 +407,11 @@ export default {
         headerMenuSortAsc: 'Sortuj rosnąco',
         headerMenuSortDesc: 'Sortuj malejąco',
         headerMenuGroup: 'Grupa',
-        headerMenuFreeze: 'Zamroź',
+        headerMenuFreeze: 'Zamroź kolumnę',
         headerMenuEndFreeze: 'Zamroź do końca',
-        headerMenuUnfreeze: 'Cofnij zamrażanie',
+        headerMenuUnfreeze: 'Odmroź kolumnę',
+        headerMenuFreezePlural: 'Zamroź kolumny',
+        headerMenuUnfreezePlural: 'Odmroź kolumny',
         headerMenuFilter: 'Filtr',
         defaultEmptyMessage: 'Nie znaleziono danych',
         emptyCell: 'Puste',
@@ -507,7 +509,8 @@ export default {
         selectAllCheckboxLabel: 'Zaznacz wszystko',
         deselectAllCheckboxLabel: 'Odznacz wszystko',
         deselectSingleRow: 'Aby odznaczyć linię, naciśnij SPACJĘ',
-        selectSingleRow: 'Aby zaznaczyć linię, naciśnij SPACJĘ'
+        selectSingleRow: 'Aby zaznaczyć linię, naciśnij SPACJĘ',
+        loadMore: 'Załaduj więcej'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edytuj'
