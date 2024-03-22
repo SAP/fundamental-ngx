@@ -182,7 +182,7 @@ export class DialogDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(stateDialogTs),
             fileName: 'dialog-state-example',
-            component: 'DialogStateExample'
+            component: 'DialogStateExampleComponent'
         },
         {
             language: 'scss',
@@ -211,7 +211,7 @@ export class DialogDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(autoLabelHtml),
-            fileName: 'dialog-object-example'
+            fileName: 'auto-label-dialog-example'
         },
         {
             language: 'typescript',
@@ -250,7 +250,7 @@ export class DialogDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(customConfigurationDialogTs),
             fileName: 'dialog-configuration-example',
-            component: 'DialogConfigurationExample'
+            component: 'DialogConfigurationExampleComponent'
         },
         {
             language: 'scss',

@@ -100,5 +100,6 @@ export class RatingIndicatorFacetExampleComponent {}
     ]
 })
 export class FacetLoadingExampleComponent {
-    loading = true;
+    loading: boolean = true;
+    constructor() {}
 }

@@ -29,14 +29,18 @@ const DATE = new FdDate(2022, 1, 10);
     imports: [FormsModule, ReactiveFormsModule, DatePickerComponent, FdDatetimeModule]
 })
 export class DatePickerRangeDisabledExampleComponent {
-    customForm = new FormGroup({
-        dates: new FormControl({
-            start: DATE,
-            end: this.datetimeAdapter.addCalendarDays(DATE, 1)
-        })
-    });
+    customForm: FormGroup;
+    datetimeAdapter: DatetimeAdapter<FdDate>;
 
-    constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
+    constructor(datetimeAdapter: DatetimeAdapter<FdDate>) {
+        this.datetimeAdapter = datetimeAdapter;
+        this.customForm = new FormGroup({
+            dates: new FormControl({
+                start: DATE,
+                end: this.datetimeAdapter.addCalendarDays(DATE, 1)
+            })
+        });
+    }
 
     isValid(): boolean {
         return !!this.customForm.get('dates')?.valid;

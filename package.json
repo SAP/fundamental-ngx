@@ -47,6 +47,7 @@
     "@angular/platform-browser": "17.0.8",
     "@angular/platform-browser-dynamic": "17.0.8",
     "@angular/router": "17.0.8",
+    "@fundamental-ngx/datetime-adapter": "0.49.0",
     "@fundamental-styles/cx": "0.33.3-rc.19",
     "@nx/angular": "17.2.8",
     "@sap-theming/theming-base-content": "11.13.0",
