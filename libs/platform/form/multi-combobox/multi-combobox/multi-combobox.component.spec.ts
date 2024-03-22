@@ -4,6 +4,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, inject, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { By } from '@angular/platform-browser';
 import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityMode, ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { FormModule } from '@fundamental-ngx/core/form';
@@ -12,7 +13,6 @@ import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { MultiComboboxSelectionChangeEvent } from '../commons/base-multi-combobox';
 import { PlatformMultiComboboxModule } from '../multi-combobox.module';
 import { MultiComboboxComponent } from './multi-combobox.component';
-import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'fdp-multi-combobox-test',
@@ -222,7 +222,11 @@ describe('MultiComboboxComponent default values', () => {
         multiCombobox.searchTermChanged(multiCombobox.inputText);
         fixture.detectChanges();
         await fixture.whenStable();
-        multiCombobox.onBlur(new FocusEvent('blur', { relatedTarget: fixture.debugElement.query(By.css('.fd-tokenizer__input')).nativeElement }));
+        multiCombobox.onBlur(
+            new FocusEvent('blur', {
+                relatedTarget: fixture.debugElement.query(By.css('.fd-tokenizer__input')).nativeElement
+            })
+        );
         expect(multiCombobox._selectedSuggestions.length).toEqual(1);
         expect(multiCombobox._selectedSuggestions[0].label).toEqual(component.dataSource[2].name);
     });

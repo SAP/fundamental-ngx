@@ -1,4 +1,4 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { CalendarService } from '../calendar.service';

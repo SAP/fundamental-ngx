@@ -1,8 +1,8 @@
 import { ExecutorContext, logger, readTargetOptions } from '@nx/devkit';
-import { startDevServer } from '../../e2e-utils/start-dev-server';
-import { runWdio } from '../../e2e-utils/run-wdio';
 import { TestAppOptions } from '../../e2e-utils/options.type';
+import { runWdio } from '../../e2e-utils/run-wdio';
 import { specFiles } from '../../e2e-utils/spec-files';
+import { startDevServer } from '../../e2e-utils/start-dev-server';
 
 export default async function (options: TestAppOptions, context: ExecutorContext) {
     const combinedOptions: TestAppOptions = {

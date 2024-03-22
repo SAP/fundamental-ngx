@@ -1,4 +1,4 @@
-import { DeclarationReflection, DefaultThemeRenderContext, JSX, JSX as React, SignatureReflection } from 'typedoc';
+import { DeclarationReflection, DefaultThemeRenderContext, JSX, SignatureReflection } from 'typedoc';
 
 export function memberSources(context: DefaultThemeRenderContext, props: DeclarationReflection | SignatureReflection) {
     const sources: JSX.Element[] = [];

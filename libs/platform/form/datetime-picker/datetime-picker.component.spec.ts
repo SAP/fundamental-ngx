@@ -5,39 +5,39 @@ import { By } from '@angular/platform-browser';
 
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { PlatformDatetimePickerModule } from './datetime-picker.module';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { FormFieldComponent } from '../form-group/form-field/form-field.component';
 import { PlatformDatetimePickerComponent } from './datetime-picker.component';
-import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { PlatformDatetimePickerModule } from './datetime-picker.module';
 
 @Component({
     selector: 'fdp-test-datetime-picker',
     template: `
-<form [formGroup]="datetimePickerForm" (ngSubmit)="onSubmit()">
-  <fdp-form-group #ffg [formGroup]="datetimePickerForm" [object]="datetimePickerFormData">
-    <fdp-form-field
-      #ffl1
-      id="datetimePicker"
-      zone="zLeft"
-      rank="1"
-      required="true"
-      hint="This is a hint"
-      placeholder="Enter a date"
-      label="Date:"
-      >
-      <fdp-datetime-picker name="datetimePicker" allowNull="false" formControlName="datetimePicker">
-      </fdp-datetime-picker>
-    </fdp-form-field>
-    <ng-template #i18n let-errors>
-      @if (errors.required) {
-        <span>Value is required</span>
-      }
-    </ng-template>
-  </fdp-form-group>
-  <button type="submit" #submitButton>Submit</button>
-</form>
-`,
+        <form [formGroup]="datetimePickerForm" (ngSubmit)="onSubmit()">
+            <fdp-form-group #ffg [formGroup]="datetimePickerForm" [object]="datetimePickerFormData">
+                <fdp-form-field
+                    #ffl1
+                    id="datetimePicker"
+                    zone="zLeft"
+                    rank="1"
+                    required="true"
+                    hint="This is a hint"
+                    placeholder="Enter a date"
+                    label="Date:"
+                >
+                    <fdp-datetime-picker name="datetimePicker" allowNull="false" formControlName="datetimePicker">
+                    </fdp-datetime-picker>
+                </fdp-form-field>
+                <ng-template #i18n let-errors>
+                    @if (errors.required) {
+                        <span>Value is required</span>
+                    }
+                </ng-template>
+            </fdp-form-group>
+            <button type="submit" #submitButton>Submit</button>
+        </form>
+    `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 class TestDatetimePickerComponent {

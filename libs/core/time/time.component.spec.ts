@@ -2,9 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
+import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 import { Meridian } from './models';

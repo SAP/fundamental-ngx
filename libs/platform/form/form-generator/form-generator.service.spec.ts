@@ -2,19 +2,19 @@ import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PlatformSliderModule } from '@fundamental-ngx/platform/slider';
+import { BaseDynamicFormGeneratorControl } from './base-dynamic-form-generator-control';
+import { PlatformFormGeneratorModule } from './fdp-form-generator.module';
 import { FormGeneratorComponentsAccessorService } from './form-generator-components-accessor.service';
 import { FormGeneratorService } from './form-generator.service';
+import { mapFormItems } from './helpers';
 import { DynamicFormItemMap } from './interfaces/dynamic-form-item';
 import {
     defaultFormGeneratorItemConfigProvider,
     dynamicFormFieldProvider,
     dynamicFormGroupChildProvider
 } from './providers/providers';
-import { BaseDynamicFormGeneratorControl } from './base-dynamic-form-generator-control';
-import { mapFormItems } from './helpers';
-import { PlatformFormGeneratorModule } from './fdp-form-generator.module';
-import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 export const dummyFormItemsWithWhenCondition: Map<string, DynamicFormItemMap> = mapFormItems([
     {

@@ -16,7 +16,10 @@ import { NotificationExampleContentComponent } from './notification-content.comp
 export class NotificationComponentAsContentExampleComponent {
     public closeReason: string;
 
-    constructor(private notificationService: NotificationService, private _cdr: ChangeDetectorRef) {}
+    constructor(
+        private notificationService: NotificationService,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     open(): void {
         const notificationService = this.notificationService.open(NotificationExampleContentComponent, {

@@ -1,48 +1,48 @@
+import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { PlatformDatePickerModule } from './date-picker.module';
-import { PlatformDatePickerComponent } from './date-picker.component';
-import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { FormModule } from '@fundamental-ngx/core/form';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
+import { PlatformDatePickerComponent } from './date-picker.component';
+import { PlatformDatePickerModule } from './date-picker.module';
 
 @Component({
     selector: 'fdp-test-date-picker',
     template: `
-<fdp-form-group #ffg [formGroup]="datePickerForm" [object]="datePickerFormData">
-  <fdp-form-field
-    #ffl1
-    id="birthday"
-    zone="zLeft"
-    rank="1"
-    required="true"
-    placeholder="Enter your birthday"
-    label="Birth Date:"
-    >
-    <fdp-date-picker name="birthday" type="single" [allowNull]="false" [formControl]="ffl1.formControl">
-    </fdp-date-picker>
-  </fdp-form-field>
-  <fdp-form-field #ffl2 id="journeydate" zone="zRight" rank="3" label="Journey Date:" required="true">
-    <fdp-date-picker
-      name="journeydate"
-      type="range"
-      [allowNull]="false"
-      fdCompact
-      placeholder="When are you travelling?"
-      formControlName="journeydate"
-      >
-    </fdp-date-picker>
-  </fdp-form-field>
-  <ng-template #i18n let-errors>
-    @if (errors.required) {
-      <span>Value is required</span>
-    }
-  </ng-template>
-</fdp-form-group>
-`
+        <fdp-form-group #ffg [formGroup]="datePickerForm" [object]="datePickerFormData">
+            <fdp-form-field
+                #ffl1
+                id="birthday"
+                zone="zLeft"
+                rank="1"
+                required="true"
+                placeholder="Enter your birthday"
+                label="Birth Date:"
+            >
+                <fdp-date-picker name="birthday" type="single" [allowNull]="false" [formControl]="ffl1.formControl">
+                </fdp-date-picker>
+            </fdp-form-field>
+            <fdp-form-field #ffl2 id="journeydate" zone="zRight" rank="3" label="Journey Date:" required="true">
+                <fdp-date-picker
+                    name="journeydate"
+                    type="range"
+                    [allowNull]="false"
+                    fdCompact
+                    placeholder="When are you travelling?"
+                    formControlName="journeydate"
+                >
+                </fdp-date-picker>
+            </fdp-form-field>
+            <ng-template #i18n let-errors>
+                @if (errors.required) {
+                    <span>Value is required</span>
+                }
+            </ng-template>
+        </fdp-form-group>
+    `
 })
 class TestDatePickerComponent {
     @ViewChildren(PlatformDatePickerComponent)

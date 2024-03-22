@@ -1,15 +1,18 @@
-import { Tree } from "@angular-devkit/schematics";
-import { SchematicTestRunner } from "@angular-devkit/schematics/testing";
-import * as path from "path";
-import { addRootProvider } from "@schematics/angular/utility";
-import { firstValueFrom } from "rxjs";
-import { addModuleImportToRootModule } from "@angular/cdk/schematics";
-import { getProjectDefinition } from "../utils/workspace";
-import { createCleanApplication, createCleanWorkspace } from "../testing-utils/create-clean-application";
+import { Tree } from '@angular-devkit/schematics';
+import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
+import { addModuleImportToRootModule } from '@angular/cdk/schematics';
+import { addRootProvider } from '@schematics/angular/utility';
+import * as path from 'path';
+import { firstValueFrom } from 'rxjs';
+import { createCleanApplication, createCleanWorkspace } from '../testing-utils/create-clean-application';
+import { getProjectDefinition } from '../utils/workspace';
 
 describe('add-animations schematic', () => {
     let tree: Tree;
-    const runner: SchematicTestRunner = new SchematicTestRunner('schematics', path.join(__dirname, '../collection.json'));
+    const runner: SchematicTestRunner = new SchematicTestRunner(
+        'schematics',
+        path.join(__dirname, '../collection.json')
+    );
 
     beforeEach(() => {
         tree = Tree.empty();
@@ -32,12 +35,12 @@ describe('add-animations schematic', () => {
         it('should not add animations if noop animations already present', async () => {
             tree = await firstValueFrom(
                 runner.callRule(
-                    () => addRootProvider(
-                        'test',
-                        ({
-                             code,
-                             external
-                         }) => code`${external('provideNoopAnimations', '@angular/platform-browser/animations')}()`),
+                    () =>
+                        addRootProvider(
+                            'test',
+                            ({ code, external }) =>
+                                code`${external('provideNoopAnimations', '@angular/platform-browser/animations')}()`
+                        ),
                     tree
                 )
             );
@@ -64,12 +67,7 @@ describe('add-animations schematic', () => {
         });
         it('should not add animations if noop animations already present', async () => {
             const project = await getProjectDefinition(tree, 'test');
-            addModuleImportToRootModule(
-                tree,
-                'NoopAnimationsModule',
-                '@angular/platform-browser/animations',
-                project
-            );
+            addModuleImportToRootModule(tree, 'NoopAnimationsModule', '@angular/platform-browser/animations', project);
             tree = await runner.runSchematic('add-animations', { project: 'test' }, tree);
             const content = tree.readText('./test/src/app/app.module.ts');
             expect(content.indexOf('BrowserAnimationsModule')).toBe(-1);

@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { SliderComponent, SliderCustomValue } from '@fundamental-ngx/core/slider';
 import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 import { PlatformSliderModule } from './slider.module';
-import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fdp-test-slider',

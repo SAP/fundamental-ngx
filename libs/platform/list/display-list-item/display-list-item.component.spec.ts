@@ -123,16 +123,16 @@ describe('DisplayListItemComponent', () => {
 @Component({
     selector: 'fdp-test-display-list-item',
     template: `
-<fdp-list partialNavigation="true">
-  @for (item of items; track item) {
-    <fdp-display-list-item
-      [title]="item.title"
-      [secondary]="item.secondary"
-      [navigationIndicator]="item.navigationIndicator"
-    ></fdp-display-list-item>
-  }
-</fdp-list>
-`
+        <fdp-list partialNavigation="true">
+            @for (item of items; track item) {
+                <fdp-display-list-item
+                    [title]="item.title"
+                    [secondary]="item.secondary"
+                    [navigationIndicator]="item.navigationIndicator"
+                ></fdp-display-list-item>
+            }
+        </fdp-list>
+    `
 })
 class TestComponentContentComponent {
     items: Name[] = [

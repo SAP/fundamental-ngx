@@ -10,21 +10,21 @@ import { OverflowLayoutService } from './overflow-layout.service';
 @Component({
     selector: 'fd-test-component',
     template: `
-<fd-overflow-layout [maxVisibleItems]="maxItems" [style.width.px]="containerWidth">
-  @for (item of itemsToRender; track item; let i = $index) {
-    <div
-      *fdOverflowItemRef="let hidden; index as i"
-      fdOverflowLayoutItem
-      [focusable]="true"
-      [style.width.px]="elementsWidth"
-      [style.height.px]="20"
-      >
-      {{ i }}
-    </div>
-  }
-  <div *fdOverflowExpand></div>
-</fd-overflow-layout>
-`
+        <fd-overflow-layout [maxVisibleItems]="maxItems" [style.width.px]="containerWidth">
+            @for (item of itemsToRender; track item; let i = $index) {
+                <div
+                    *fdOverflowItemRef="let hidden; index as i"
+                    fdOverflowLayoutItem
+                    [focusable]="true"
+                    [style.width.px]="elementsWidth"
+                    [style.height.px]="20"
+                >
+                    {{ i }}
+                </div>
+            }
+            <div *fdOverflowExpand></div>
+        </fd-overflow-layout>
+    `
 })
 export class TestComponent {
     elementsWidth = 200;

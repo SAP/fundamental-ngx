@@ -1,18 +1,18 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ListModule } from '../list.module';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ListModule } from '../list.module';
 
 @Component({
     template: `
-<li #directiveElement fd-list-item [noData]="noData" [action]="action" [selected]="selected">
-  @if (link) {
-    <a #linkElement fd-list-link>link</a>
-  }
-  <button fd-button #button></button>
-  List Item Test Text
-</li>
-`
+        <li #directiveElement fd-list-item [noData]="noData" [action]="action" [selected]="selected">
+            @if (link) {
+                <a #linkElement fd-list-link>link</a>
+            }
+            <button fd-button #button></button>
+            List Item Test Text
+        </li>
+    `
 })
 class TestComponent {
     @ViewChild('directiveElement', { read: ElementRef })

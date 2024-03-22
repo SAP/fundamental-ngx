@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { FdTranslatePipe } from './pipes';
 import { FdPatchLanguageDirective } from './directives';
+import { FdTranslatePipe } from './pipes';
 
 @NgModule({
     imports: [FdTranslatePipe, FdPatchLanguageDirective],

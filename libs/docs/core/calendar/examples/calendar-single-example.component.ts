@@ -17,7 +17,7 @@ import {
     template: `
         <fd-calendar calType="single" [(ngModel)]="date" [disableFunction]="myDisableFunction"></fd-calendar>
         <br />
-        <div>Selected Date: {{ date.toDate() | date : 'shortDate' }}</div>
+        <div>Selected Date: {{ date.toDate() | date: 'shortDate' }}</div>
         <button fd-button label="Disable Wednesday" (click)="disableWednesday()"></button>
     `,
     styles: [

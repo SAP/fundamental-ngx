@@ -3,9 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { NestedItemService } from './nested-item/nested-item.service';
 import {
+    NestedListExpandIconComponent,
     NestedListIconComponent,
-    NestedListTitleDirective,
-    NestedListExpandIconComponent
+    NestedListTitleDirective
 } from './nested-list-directives';
 import { CxNestedListModule } from './nested-list.module';
 

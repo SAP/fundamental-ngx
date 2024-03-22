@@ -2,8 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+import { ContentDensityMode, ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { InputGroupAddonBodyComponent } from './addon-body.component';
-import { ContentDensityModule, ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
     template: `<fdp-input-group-addon-body [fdContentDensity]="contentDensity" [hasButton]="hasButton"

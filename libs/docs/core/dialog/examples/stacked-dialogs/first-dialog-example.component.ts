@@ -38,7 +38,10 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
     imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, BarModule, InitialFocusDirective]
 })
 export class FirstDialogExampleComponent {
-    constructor(public dialogRef: DialogRef, public _dialogService: DialogService) {}
+    constructor(
+        public dialogRef: DialogRef,
+        public _dialogService: DialogService
+    ) {}
 
     openDialog(): void {
         this._dialogService.open(SecondDialogExampleComponent, {

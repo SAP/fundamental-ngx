@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { NestedLinkComponent } from './nested-link.component';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { CxNestedListModule } from '../nested-list.module';
-import { NestedListStateService } from '../nested-list-state.service';
 import { NestedItemService } from '../nested-item/nested-item.service';
+import { NestedListStateService } from '../nested-list-state.service';
+import { CxNestedListModule } from '../nested-list.module';
+import { NestedLinkComponent } from './nested-link.component';
 
 @Component({
     template: `

@@ -1,4 +1,4 @@
-import { DeclarationHierarchy, JSX as React, JSX, DefaultThemeRenderContext } from 'typedoc';
+import { DeclarationHierarchy, DefaultThemeRenderContext, JSX } from 'typedoc';
 import { hierarchyList } from '../utils';
 
 export function hierarchy(context: DefaultThemeRenderContext, props: DeclarationHierarchy | undefined) {

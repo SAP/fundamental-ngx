@@ -1,10 +1,10 @@
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { SortDirection, Table } from '@fundamental-ngx/platform/table-helpers';
 
-import { SettingsSortDialogData, SortingComponent } from './sorting.component';
 import { PlatformTableModule } from '../../../table.module';
+import { SettingsSortDialogData, SortingComponent } from './sorting.component';
 
 describe('PlatformTableSortDialogComponent', () => {
     let component: SortingComponent;

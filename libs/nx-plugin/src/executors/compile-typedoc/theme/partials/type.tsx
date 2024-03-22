@@ -1,10 +1,10 @@
+import { ok } from 'assert';
 import {
     DeclarationReflection,
     DefaultThemeRenderContext,
     JSX,
     LiteralType,
     ProjectReflection,
-    JSX as React,
     ReferenceType,
     Reflection,
     ReflectionKind,
@@ -13,7 +13,6 @@ import {
     TypeKindMap
 } from 'typedoc';
 import { getKindClass, join, stringify } from '../utils';
-import { ok } from 'assert';
 const EXPORTABLE: ReflectionKind =
     ReflectionKind.Class |
     ReflectionKind.Interface |

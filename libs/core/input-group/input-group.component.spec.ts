@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
+import { Type } from '@angular/core';
 import { ControlValueAccessor, FormsModule } from '@angular/forms';
+import { CVATestSteps, runValueAccessorTests } from 'ngx-cva-test-suite';
 import { first } from 'rxjs/operators';
 import {
     InputGroupAddOnDirective,
@@ -8,8 +10,6 @@ import {
     InputGroupTextareaDirective
 } from './input-group-directives';
 import { InputGroupComponent } from './input-group.component';
-import { CVATestSteps, runValueAccessorTests } from 'ngx-cva-test-suite';
-import { Type } from '@angular/core';
 
 describe('InputGroupComponent', () => {
     let component: InputGroupComponent;
@@ -78,6 +78,6 @@ describe('InputGroup component CVA', () => {
         /** Function to get the value of a component in a runtime. */
         getComponentValue: (fixture: ComponentFixture<InputGroupComponent>) => fixture.componentInstance.inputText,
 
-        excludeSteps: [CVATestSteps.ValueChangedInternally],
+        excludeSteps: [CVATestSteps.ValueChangedInternally]
     });
 });

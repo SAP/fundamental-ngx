@@ -1,15 +1,15 @@
-import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { OverlayContainer } from '@angular/cdk/overlay';
-import { By } from '@angular/platform-browser';
 import { DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { Observable, of } from 'rxjs';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { createKeyboardEvent, DataProvider, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
-import { PlatformSearchFieldModule } from './search-field.module';
-import { SearchFieldComponent, SearchInput, SuggestionItem, ValueLabelItem } from './search-field.component';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
+import { createKeyboardEvent, DataProvider, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
+import { SearchFieldComponent, SearchInput, SuggestionItem, ValueLabelItem } from './search-field.component';
+import { PlatformSearchFieldModule } from './search-field.module';
 
 const CATEGORIES: ValueLabelItem[] = [
     { value: 'Fruits', label: 'Fruits' },

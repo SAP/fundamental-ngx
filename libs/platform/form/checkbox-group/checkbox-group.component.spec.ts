@@ -745,11 +745,18 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
 });
 
 class Country implements SelectItem {
-    constructor(public label: string, public value: string) {}
+    constructor(
+        public label: string,
+        public value: string
+    ) {}
 }
 
 class LanguageKnown implements SelectItem {
-    constructor(public label: string, public value: string, public disabled: boolean) {}
+    constructor(
+        public label: string,
+        public value: string,
+        public disabled: boolean
+    ) {}
 }
 
 class Item {

@@ -9,19 +9,19 @@ import { TabNavComponent } from './tab-nav.component';
 @Component({
     selector: 'fd-test-tabs',
     template: `
-<nav fd-tab-nav [fdCompact]="compact">
-  <div fd-tab-item>
-    <a fd-tab-link [active]="true"> Link </a>
-  </div>
-  <div fd-tab-item>
-    <a fd-tab-link #fdTabLink [active]="false"> Link </a>
-  </div>
-  <a fd-tab-link [active]="false"> Link </a>
-  @if (showLastTab) {
-    <a fd-tab-link [active]="false"> Link </a>
-  }
-</nav>
-`
+        <nav fd-tab-nav [fdCompact]="compact">
+            <div fd-tab-item>
+                <a fd-tab-link [active]="true"> Link </a>
+            </div>
+            <div fd-tab-item>
+                <a fd-tab-link #fdTabLink [active]="false"> Link </a>
+            </div>
+            <a fd-tab-link [active]="false"> Link </a>
+            @if (showLastTab) {
+                <a fd-tab-link [active]="false"> Link </a>
+            }
+        </nav>
+    `
 })
 class TestNavWrapperComponent {
     @ViewChild(TabNavComponent)

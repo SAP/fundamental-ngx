@@ -1,6 +1,6 @@
 import { DeclarationReflection, DefaultThemeRenderContext } from 'typedoc';
 
-import { JSX as React, JSX } from 'typedoc';
+import { JSX } from 'typedoc';
 import { classNames } from '../utils';
 export function memberSignatures(context: DefaultThemeRenderContext, props: DeclarationReflection) {
     const content = props.signatures?.map((item) => (

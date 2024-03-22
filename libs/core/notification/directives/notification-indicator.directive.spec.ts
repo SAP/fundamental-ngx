@@ -1,8 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NotificationModule } from '../notification.module';
-import { IndicatorStates } from './notification-indicator.directive';
-import { NotificationIndicatorDirective } from './notification-indicator.directive';
+import { IndicatorStates, NotificationIndicatorDirective } from './notification-indicator.directive';
 
 @Component({
     template: `<div fd-notification-indicator [type]="type"></div> `

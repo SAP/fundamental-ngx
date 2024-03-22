@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, of } from 'rxjs';
 
 import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
 import { ListComponent } from './list.component';
 import { PlatformListModule } from './list.module';
-import { StandardListItemModule } from './standard-list-item/standard-list-item.module';
 import { StandardListItemComponent } from './standard-list-item/standard-list-item.component';
+import { StandardListItemModule } from './standard-list-item/standard-list-item.module';
 
 const LIST_ELEMENTS: Address[] = [{ name: 'Name1' }, { name: 'Name2' }, { name: 'Name3' }, { name: 'Name4' }];
 

@@ -1,9 +1,9 @@
+import { Component, Input, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, ViewChild, Input } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { PlatformLinkModule } from './link.module';
 import { LinkComponent } from './link.component';
+import { PlatformLinkModule } from './link.module';
 
 /** Standard link functionality tests */
 @Component({

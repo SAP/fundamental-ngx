@@ -18,11 +18,11 @@ import { FormModule } from '@fundamental-ngx/core/form';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { DATA_PROVIDERS, DataProvider, isOptionItem } from '@fundamental-ngx/platform/shared';
 
+import { CommonModule } from '@angular/common';
 import { ContentDensityMode, ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { PlatformComboboxModule } from '../combobox.module';
 import { ComboboxComponent, ComboboxSelectionChangeEvent } from './combobox.component';
-import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'fdp-combobox-test',

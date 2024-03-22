@@ -16,7 +16,10 @@ import { DialogExampleComponent } from './dialog-example.component';
 export class ComponentBasedDialogExampleComponent {
     closeReason: string;
 
-    constructor(private _dialogService: DialogService, private _cdr: ChangeDetectorRef) {}
+    constructor(
+        private _dialogService: DialogService,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     open(): void {
         const dialogRef = this._dialogService.open(DialogExampleComponent, {

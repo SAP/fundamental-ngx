@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, QueryList, ViewChildren } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { SwitchChangeEvent, SwitchComponent } from './switch.component';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { PlatformSwitchModule } from '../switch.module';
-import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { SwitchChangeEvent, SwitchComponent } from './switch.component';
 
 @Component({
     selector: 'fdp-test-switch',

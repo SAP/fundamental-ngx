@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     Component,
@@ -10,12 +10,12 @@ import {
     QueryList,
     ViewChildren
 } from '@angular/core';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs';
 
+import { SelectComponentRootToken } from './select-component-root.token';
 import { SelectableItemToken } from './selectable-item.token';
 import { SelectionService } from './selection.service';
-import { SelectComponentRootToken } from './select-component-root.token';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector

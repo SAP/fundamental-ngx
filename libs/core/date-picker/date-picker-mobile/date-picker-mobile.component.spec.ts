@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { DatePickerMobileComponent } from './date-picker-mobile.component';
-import { DatePicker } from '../date-picker.model';
 import { EventEmitter } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DateRange } from '@fundamental-ngx/core/calendar';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { FD_DATE_PICKER_COMPONENT, FD_DATE_PICKER_MOBILE_CONFIG } from '../tokens';
 import { FdDate } from '@fundamental-ngx/core/datetime';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { DatePicker } from '../date-picker.model';
+import { FD_DATE_PICKER_COMPONENT, FD_DATE_PICKER_MOBILE_CONFIG } from '../tokens';
+import { DatePickerMobileComponent } from './date-picker-mobile.component';
 
 class MockDatePickerComponent<D> implements DatePicker<D> {
     selectedDate: Nullable<D>;

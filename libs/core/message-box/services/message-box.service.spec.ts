@@ -1,11 +1,10 @@
-
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
-import { MessageBoxService } from './message-box.service';
-import { MessageBoxModule } from '../message-box.module';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MessageBoxModule } from '../message-box.module';
+import { MessageBoxService } from './message-box.service';
 
 @Component({
     template: ``

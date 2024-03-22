@@ -4,12 +4,12 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 
-import { PanelComponent, PanelExpandChangeEvent } from './panel.component';
-import { PanelContentComponent } from './panel-content/panel-content.component';
-import { PanelActionsComponent } from './panel-actions.component';
-import { PlatformPanelModule } from './panel.module';
-import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { CommonModule } from '@angular/common';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
+import { PanelActionsComponent } from './panel-actions.component';
+import { PanelContentComponent } from './panel-content/panel-content.component';
+import { PanelComponent, PanelExpandChangeEvent } from './panel.component';
+import { PlatformPanelModule } from './panel.module';
 
 @Component({
     template: ` <fdp-panel title="Panel Title">

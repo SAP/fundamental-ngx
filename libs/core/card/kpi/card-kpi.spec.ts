@@ -1,19 +1,18 @@
-
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+import { CardModule } from '../card.module';
 import { CardKpiAnalyticsContentDirective } from './card-kpi-analytics-content.directive';
-import { CardKpiAnalyticsDirective } from './card-kpi-analytics.directive';
 import { CardKpiAnalyticsLabelDirective } from './card-kpi-analytics-label.directive';
+import { CardKpiAnalyticsDirective } from './card-kpi-analytics.directive';
 import { CardKpiHeaderComponent } from './card-kpi-header.component';
 import { CardKpiScaleIconDirective } from './card-kpi-scale-icon.directive';
 import { CardKpiScaleTextDirective } from './card-kpi-scale-text.directive';
 import { CardKpiValueDirective } from './card-kpi-value.directive';
-import { CardModule } from '../card.module';
 
-import { CLASS_NAME } from '../constants';
 import { CommonModule } from '@angular/common';
+import { CLASS_NAME } from '../constants';
 
 @Component({
     template: `

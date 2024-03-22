@@ -16,7 +16,10 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
 export class TemplateBasedDialogExampleComponent {
     confirmationReason: string;
 
-    constructor(private _dialogService: DialogService, private _cdr: ChangeDetectorRef) {}
+    constructor(
+        private _dialogService: DialogService,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     openDialog(dialog: TemplateRef<any>): void {
         const dialogRef = this._dialogService.open(dialog, {

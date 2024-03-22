@@ -1,10 +1,14 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { InlineHelpModule } from './inline-help.module';
 
 @Component({
-    template: ` @if (visible) {<div #directiveElement fd-inline-help="123"></div>} `
+    template: `
+        @if (visible) {
+            <div #directiveElement fd-inline-help="123"></div>
+        }
+    `
 })
 class TestComponent {
     @ViewChild('directiveElement', { static: false, read: ElementRef })

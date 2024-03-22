@@ -2,8 +2,8 @@ import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angul
 import { CVATestSteps, runValueAccessorTests } from 'ngx-cva-test-suite';
 
 import { ChangeDetectorRef, Type } from '@angular/core';
-import { SwitchComponent } from './switch.component';
 import { ControlValueAccessor } from '@angular/forms';
+import { SwitchComponent } from './switch.component';
 
 describe('SwitchComponent', () => {
     let component: SwitchComponent;
@@ -132,6 +132,6 @@ describe('SwitchComponent component CVA', () => {
         /** Function to get the value of a component in a runtime. */
         getComponentValue: (fixture: ComponentFixture<SwitchComponent>) => fixture.componentInstance.isChecked,
 
-        excludeSteps: [CVATestSteps.ValueChangedInternally],
+        excludeSteps: [CVATestSteps.ValueChangedInternally]
     });
 });

@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PopoverService, PopoverTemplate } from './popover.service';
 import { Component, ElementRef, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
-import { PopoverBodyComponent } from '../popover-body/popover-body.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BasePopoverClass } from '../base/base-popover.class';
+import { PopoverBodyComponent } from '../popover-body/popover-body.component';
 import { PopoverModule } from '../popover.module';
+import { PopoverService, PopoverTemplate } from './popover.service';
 
 @Component({
     template: `

@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NavigationLinkComponent } from './navigation-link.component';
-import { FdbNavigation } from '../../models/navigation.class';
-import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
 import { signal } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { Subject } from 'rxjs';
+import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
+import { FdbNavigation } from '../../models/navigation.class';
+import { NavigationLinkComponent } from './navigation-link.component';
 
 class NavigationComponentMock extends FdbNavigation {
     classList$ = signal([]);

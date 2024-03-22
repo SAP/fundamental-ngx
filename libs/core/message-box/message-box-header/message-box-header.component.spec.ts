@@ -1,11 +1,11 @@
 import { Component, Type, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, flushMicrotasks, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, flushMicrotasks, waitForAsync } from '@angular/core/testing';
 
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { MessageBoxHeaderComponent } from './message-box-header.component';
 import { MessageBoxModule } from '../message-box.module';
 import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.class';
+import { MessageBoxHeaderComponent } from './message-box-header.component';
 
 @Component({
     template: `
@@ -33,13 +33,13 @@ class CustomHeaderTestComponent {
 
 @Component({
     template: `
-<fd-message-box-header>
-  @if (showProjectedIcon) {
-    <fd-message-box-semantic-icon glyph="account"></fd-message-box-semantic-icon>
-  }
-  <h1 fd-title>Default Title</h1>
-</fd-message-box-header>
-`
+        <fd-message-box-header>
+            @if (showProjectedIcon) {
+                <fd-message-box-semantic-icon glyph="account"></fd-message-box-semantic-icon>
+            }
+            <h1 fd-title>Default Title</h1>
+        </fd-message-box-header>
+    `
 })
 class HeaderWithProjectedIconTestComponent {
     @ViewChild(MessageBoxHeaderComponent) messageBoxHeader: MessageBoxHeaderComponent;

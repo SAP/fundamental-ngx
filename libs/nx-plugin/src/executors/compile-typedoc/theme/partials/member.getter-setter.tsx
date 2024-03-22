@@ -1,4 +1,4 @@
-import { DeclarationReflection, DefaultThemeRenderContext, JSX as React, JSX } from 'typedoc';
+import { DeclarationReflection, DefaultThemeRenderContext, JSX } from 'typedoc';
 import { classNames } from '../utils';
 
 export function memberGetterSetter(context: DefaultThemeRenderContext, props: DeclarationReflection) {

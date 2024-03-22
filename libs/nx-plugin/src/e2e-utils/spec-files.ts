@@ -1,6 +1,6 @@
 import { ExecutorContext, logger, ProjectGraph, readTargetOptions } from '@nx/devkit';
-import { TestAppOptions } from './options.type';
 import { getProjects } from './get-projects';
+import { TestAppOptions } from './options.type';
 
 export async function specFiles(options: TestAppOptions, context: ExecutorContext): Promise<string[]> {
     const projects = await getProjects(

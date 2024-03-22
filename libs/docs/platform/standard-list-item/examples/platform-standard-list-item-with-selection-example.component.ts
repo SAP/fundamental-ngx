@@ -73,7 +73,10 @@ export class PlatformStandardListItemWithSelectionExampleComponent implements Af
 
     ariaLabel = `0 Items selected ${this.selectionModeLabel}`;
 
-    constructor(private _render: Renderer2, private _elementRef: ElementRef) {}
+    constructor(
+        private _render: Renderer2,
+        private _elementRef: ElementRef
+    ) {}
 
     ngAfterViewInit(): void {
         const toolbar = this._elementRef.nativeElement.querySelector('fd-toolbar');
