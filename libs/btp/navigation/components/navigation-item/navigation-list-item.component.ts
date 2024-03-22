@@ -316,7 +316,8 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
         super();
         effect(() => {
             if (this.popoverOpen$()) {
-                this._keyManager = new FocusKeyManager(this.listItems$())
+                const listItems = this.listItems$().filter(Boolean) as FdbNavigationListItem[];
+                this._keyManager = new FocusKeyManager(listItems)
                     .withVerticalOrientation()
                     .skipPredicate((item) => item.skipNavigation);
             } else {
@@ -332,7 +333,7 @@ export class NavigationListItemComponent extends FdbNavigationListItem implement
                 }
 
                 const children = this._parentNavigationListItemDirective.childDirectives();
-                const mappedItems = Array.from(children).map((child) => child._item!);
+                const mappedItems = Array.from(children).map((child) => child._item);
 
                 this.listItems$.set(mappedItems);
             },

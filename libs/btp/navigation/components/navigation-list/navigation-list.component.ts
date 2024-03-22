@@ -41,13 +41,13 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
     /** @hidden */
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('listItems')
-    set _listItems(value: FdbNavigationListItem[]) {
+    set _listItems(value: Nullable<FdbNavigationListItem>[]) {
         this._listItemsArray = value;
         this.listItems$.set(value);
         this._setupKeyManager();
     }
 
-    get _listItems(): FdbNavigationListItem[] {
+    get _listItems(): Nullable<FdbNavigationListItem>[] {
         return this._listItemsArray;
     }
 
@@ -84,10 +84,10 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
     focusAfter = new EventEmitter<void>();
 
     /** List items. */
-    readonly listItems$ = signal<FdbNavigationListItem[]>([]);
+    readonly listItems$ = signal<Nullable<FdbNavigationListItem>[]>([]);
 
     /** @hidden */
-    private _listItemsArray: FdbNavigationListItem[] = [];
+    private _listItemsArray: Nullable<FdbNavigationListItem>[] = [];
 
     /** @hidden */
     private _keyManager: Nullable<FocusKeyManager<FdbNavigationListItem>>;
@@ -196,7 +196,7 @@ export class NavigationListComponent implements OnChanges, AfterViewInit, OnDest
             return;
         }
 
-        this._keyManager = new FocusKeyManager(this._listItemsArray)
+        this._keyManager = new FocusKeyManager(this._listItemsArray as FdbNavigationListItem[])
             .withVerticalOrientation()
             .skipPredicate((item) => item.skipNavigation);
     }

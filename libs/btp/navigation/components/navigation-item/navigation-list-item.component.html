@@ -105,9 +105,9 @@
         }
         <ul
             fdb-navigation-list
-            [listItems]="listItems$()"
+            [listItems]="listItems$() || []"
             [childItems]="normalizedLevel$() > 2"
-            (keydown)="false && _innerListKeydown($event)"
+            (keydown)="(false)"
             (focusBefore)="_focusBeforeList()"
             [withKeyboardNavigation]="keyboardNavigation"
         ></ul>
