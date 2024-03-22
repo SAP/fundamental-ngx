@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.30](https://github.com/SAP/fundamental-ngx/compare/v0.43.29...v0.43.30) (2024-03-22)
+
+
+### Bug Fixes
+
+* **core:** pass aria-label to the close button ([c66bd10](https://github.com/SAP/fundamental-ngx/commit/c66bd1087b9cde9c59b4de0d0997f1fda5a202e2))
+* **core:** redundant aria-label on select component ([#11590](https://github.com/SAP/fundamental-ngx/issues/11590)) ([3807f49](https://github.com/SAP/fundamental-ngx/commit/3807f49ead324ec309c27ace8410c450e59d7793))
+* **core:** redundant aria-label on select component ([#11593](https://github.com/SAP/fundamental-ngx/issues/11593)) ([9abb782](https://github.com/SAP/fundamental-ngx/commit/9abb78281c1e45463686a3fe6a26e9c76fd90fbb))
+
+
+
+
+
 ## [0.43.29](https://github.com/SAP/fundamental-ngx/compare/v0.43.28...v0.43.29) (2024-03-06)
 
 
