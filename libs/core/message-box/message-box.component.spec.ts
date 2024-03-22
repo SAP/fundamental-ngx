@@ -1,18 +1,18 @@
 import { Component, NgModule, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NavigationStart, Router, RouterEvent, RouterModule } from '@angular/router';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserModule } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NavigationStart, Router, RouterEvent, RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { Subject } from 'rxjs';
 
-import { MessageBoxConfig } from './utils/message-box-config.class';
-import { MessageBoxComponent } from './message-box.component';
-import { MessageBoxRef } from './utils/message-box-ref.class';
-import { MessageBoxModule } from './message-box.module';
-import { FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
 import { CommonModule } from '@angular/common';
+import { FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
+import { MessageBoxComponent } from './message-box.component';
+import { MessageBoxModule } from './message-box.module';
+import { MessageBoxConfig } from './utils/message-box-config.class';
+import { MessageBoxRef } from './utils/message-box-ref.class';
 
 @Component({
     template: `

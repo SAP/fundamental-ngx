@@ -1,17 +1,17 @@
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { Component, ViewChild } from '@angular/core';
 
-import { CalendarType, DateRange } from '@fundamental-ngx/core/calendar';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { CalendarType, DateRange } from '@fundamental-ngx/core/calendar';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 import { By } from '@angular/platform-browser';
-import { DatePickerComponent } from './date-picker.component';
-import { DatePickerModule } from './date-picker.module';
 import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
 import { of } from 'rxjs';
+import { DatePickerComponent } from './date-picker.component';
+import { DatePickerModule } from './date-picker.module';
 
 describe('DatePickerComponent', () => {
     let component: DatePickerComponent<FdDate>;

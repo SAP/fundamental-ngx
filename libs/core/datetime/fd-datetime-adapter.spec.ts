@@ -1,8 +1,8 @@
 import { Platform } from '@angular/cdk/platform';
 import { LOCALE_ID } from '@angular/core';
-import { waitForAsync, inject, TestBed } from '@angular/core/testing';
+import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 
-import { DatetimeAdapter, FdDatetimeAdapter, FdDatetimeAdapterModule, FdDate } from './index';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeAdapterModule } from './index';
 
 describe('FdDatetimeAdapter', () => {
     let platform: Platform;

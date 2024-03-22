@@ -1,59 +1,59 @@
-import { FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { By } from '@angular/platform-browser';
 import { DELETE } from '@angular/cdk/keycodes';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
+import { ContentDensityMode, ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { createKeyboardEvent, FieldHintOptions } from '@fundamental-ngx/platform/shared';
-import { TextAreaComponent } from './text-area.component';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { FormFieldComponent } from '../form-group/form-field/form-field.component';
+import { TextAreaComponent } from './text-area.component';
 import { PlatformTextAreaModule } from './text-area.module';
-import { ContentDensityMode, ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fdp-test-textarea',
     template: `
-<form [formGroup]="form" (ngSubmit)="onSubmit()" [fdContentDensity]="contentDensity">
-  <fdp-form-group #fg1 [formGroup]="form">
-    <fdp-form-field
-      #basicTextareaField
-      [id]="'basicTextarea'"
-      label="Basic Textarea with Platform Forms"
-      [placeholder]="'Start entering detailed description'"
-      [hint]="{ content: 'This is tooltip help', placement: 'left' }"
-      zone="zLeft"
-      rank="10"
-      [validators]="textareaValidator"
-      >
-      <fdp-textarea
-        #testFocus
-        formControlName="basicTextarea"
-        name="'basicTextarea'"
-        [growingMaxLines]="3"
-        [growing]="true"
-        fdCompact
-        [maxLength]="10"
-        [cols]="10"
-        [state]="'error'"
-        [showExceededText]="true"
-        [height]="'80px'"
-        [wrapType]="'hard'"
-      ></fdp-textarea>
-      <button class="focus-button" type="button" (click)="testFocus.focus()">Click</button>
-    </fdp-form-field>
-    <ng-template #i18n let-errors>
-      @if (errors && errors.required) {
-        <span class="error">This field is required.</span>
-      }
-      @if (errors && errors.maxlength) {
-        <span> Please get your character count under limit. </span>
-      }
-    </ng-template>
-  </fdp-form-group>
-  <button type="submit" #submitButton>Submit</button>
-</form>
-`
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" [fdContentDensity]="contentDensity">
+            <fdp-form-group #fg1 [formGroup]="form">
+                <fdp-form-field
+                    #basicTextareaField
+                    [id]="'basicTextarea'"
+                    label="Basic Textarea with Platform Forms"
+                    [placeholder]="'Start entering detailed description'"
+                    [hint]="{ content: 'This is tooltip help', placement: 'left' }"
+                    zone="zLeft"
+                    rank="10"
+                    [validators]="textareaValidator"
+                >
+                    <fdp-textarea
+                        #testFocus
+                        formControlName="basicTextarea"
+                        name="'basicTextarea'"
+                        [growingMaxLines]="3"
+                        [growing]="true"
+                        fdCompact
+                        [maxLength]="10"
+                        [cols]="10"
+                        [state]="'error'"
+                        [showExceededText]="true"
+                        [height]="'80px'"
+                        [wrapType]="'hard'"
+                    ></fdp-textarea>
+                    <button class="focus-button" type="button" (click)="testFocus.focus()">Click</button>
+                </fdp-form-field>
+                <ng-template #i18n let-errors>
+                    @if (errors && errors.required) {
+                        <span class="error">This field is required.</span>
+                    }
+                    @if (errors && errors.maxlength) {
+                        <span> Please get your character count under limit. </span>
+                    }
+                </ng-template>
+            </fdp-form-group>
+            <button type="submit" #submitButton>Submit</button>
+        </form>
+    `
 })
 class BasicTextareaTestWrapperComponent {
     @ViewChild(TextAreaComponent)

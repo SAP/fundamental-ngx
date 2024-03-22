@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { PreparedNestedListComponent } from './prepared-nested-list.component';
 import { CxNestedListModule } from '../nested-list.module';
+import { PreparedNestedListComponent } from './prepared-nested-list.component';
 
 describe('NestedListPopoverComponent', () => {
     let component: PreparedNestedListComponent;

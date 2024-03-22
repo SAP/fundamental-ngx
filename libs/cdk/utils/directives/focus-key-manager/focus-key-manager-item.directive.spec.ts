@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { FocusKeyManagerListDirective } from './focus-key-manager-list.directive';
 import { FocusKeyManagerItemDirective } from './focus-key-manager-item.directive';
+import { FocusKeyManagerListDirective } from './focus-key-manager-list.directive';
 
 @Component({
     template: `

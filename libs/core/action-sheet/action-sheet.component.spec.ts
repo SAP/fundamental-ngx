@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ActionSheetModule } from './action-sheet.module';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ActionSheetModule } from './action-sheet.module';
 
 @Component({
     template: ` <div #componentElement fd-action-sheet>Action Sheet Parent Test Text</div> `

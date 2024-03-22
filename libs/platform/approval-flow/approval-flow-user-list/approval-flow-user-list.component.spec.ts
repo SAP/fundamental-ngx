@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectionChangeEvent } from '@fundamental-ngx/platform/list';
-import { ApprovalUser } from '../interfaces';
-import { PlatformApprovalFlowModule } from '../approval-flow.module';
-import { ApprovalFlowUserListComponent } from './approval-flow-user-list.component';
 import { SimpleChanges } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SelectionChangeEvent } from '@fundamental-ngx/platform/list';
+import { PlatformApprovalFlowModule } from '../approval-flow.module';
+import { ApprovalUser } from '../interfaces';
+import { ApprovalFlowUserListComponent } from './approval-flow-user-list.component';
 
 describe('ApprovalFlowUserListComponent', () => {
     let component: ApprovalFlowUserListComponent;

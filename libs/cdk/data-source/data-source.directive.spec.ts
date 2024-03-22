@@ -1,11 +1,11 @@
+import { Component, inject } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { isObservable, Observable, of } from 'rxjs';
+import { Observable, isObservable, of } from 'rxjs';
 import { AbstractDataProvider } from './base/abstract-data-provider.class';
 import { BaseDataSource } from './base/base-data-source.class';
 import { DataSourceDirective } from './data-source.directive';
 import { isDataSource } from './helpers/is-datasource';
 import { DataSource, DataSourceParser, DataSourceProvider } from './models';
-import { Component, inject } from '@angular/core';
 import { FD_DATA_SOURCE_TRANSFORMER } from './tokens';
 
 export const dataProviderData = [1, 2, 3, 4, 5];

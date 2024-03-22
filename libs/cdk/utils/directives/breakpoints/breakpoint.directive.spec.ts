@@ -1,8 +1,8 @@
-import { BreakpointDirective } from './breakpoint.directive';
 import { Component } from '@angular/core';
-import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BehaviorSubject } from 'rxjs';
 import { ViewportSizeObservable } from '../../tokens/viewport-size.observable';
+import { BreakpointDirective } from './breakpoint.directive';
 
 @Component({
     template: `

@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NavigationMoreButtonComponent } from './navigation-more-button.component';
-import { FdbNavigation } from '../../models/navigation.class';
 import { signal } from '@angular/core';
-import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs';
+import { FdbNavigationListItem } from '../../models/navigation-list-item.class';
+import { FdbNavigation } from '../../models/navigation.class';
+import { NavigationMoreButtonComponent } from './navigation-more-button.component';
 
 class NavigationComponentMock extends FdbNavigation {
     classList$ = signal([]);

@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ApprovalProcess, ApprovalUser } from '../interfaces';
 
 import { generateApprovalFlowGraph, generateApprovalFlowGraphMetadata } from '../approval-flow-graph';
-import { ApprovalFlowToolbarActionsComponent } from './approval-flow-toolbar-actions.component';
 import { PlatformApprovalFlowModule } from '../approval-flow.module';
+import { ApprovalFlowToolbarActionsComponent } from './approval-flow-toolbar-actions.component';
 
 const DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
 const users: ApprovalUser[] = [

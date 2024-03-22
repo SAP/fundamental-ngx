@@ -1,13 +1,13 @@
 import { RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 
-import { DialogService } from '@fundamental-ngx/core/dialog';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { PlatformApprovalFlowModule } from '../approval-flow/approval-flow.module';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 import { ApprovalFlowComponent } from '../approval-flow/approval-flow.component';
+import { PlatformApprovalFlowModule } from '../approval-flow/approval-flow.module';
 
 import {
     ApprovalFlowTeamDataSource,
@@ -15,12 +15,12 @@ import {
     createKeyboardEvent
 } from '@fundamental-ngx/platform/shared';
 import {
-    AddNodeDialogRefData,
-    APPROVAL_FLOW_NODE_TYPES
+    APPROVAL_FLOW_NODE_TYPES,
+    AddNodeDialogRefData
 } from './approval-flow-add-node/approval-flow-add-node.component';
+import { ApprovalGraphNode } from './interfaces';
 import { simpleGraph, users } from './tests/data';
 import { TeamDataProvider, UserDataProvider } from './tests/providers';
-import { ApprovalGraphNode } from './interfaces';
 
 const TEST_APPROVAL_FLOW_TITLE = 'Test title';
 

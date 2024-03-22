@@ -1,42 +1,42 @@
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { FormFieldComponent } from '../form-group/form-field/form-field.component';
-import { FdpFormGroupModule } from '../form-group/fdp-form.module';
-import { PlatformTimePickerModule } from './time-picker.module';
-import { PlatformTimePickerComponent } from './time-picker.component';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { FdpFormGroupModule } from '../form-group/fdp-form.module';
+import { FormFieldComponent } from '../form-group/form-field/form-field.component';
+import { PlatformTimePickerComponent } from './time-picker.component';
+import { PlatformTimePickerModule } from './time-picker.module';
 
 @Component({
     selector: 'fdp-test-time-picker',
     template: `
-<form [formGroup]="timePickerForm" (ngSubmit)="onSubmit()">
-  <fdp-form-group #ffg [formGroup]="timePickerForm">
-    <fdp-form-field
-      #ffl1
-      id="timePicker"
-      zone="zLeft"
-      rank="1"
-      required="true"
-      hint="This is a hint"
-      placeholder="Enter a time"
-      label="Time:"
-      >
-      <fdp-time-picker name="timePicker" allowNull="false" formControlName="timePicker">
-      </fdp-time-picker>
-    </fdp-form-field>
-    <ng-template #i18n let-errors>
-      @if (errors.required) {
-        <span>Value is required</span>
-      }
-    </ng-template>
-  </fdp-form-group>
-  <button type="submit" #submitButton>Submit</button>
-</form>
-`,
+        <form [formGroup]="timePickerForm" (ngSubmit)="onSubmit()">
+            <fdp-form-group #ffg [formGroup]="timePickerForm">
+                <fdp-form-field
+                    #ffl1
+                    id="timePicker"
+                    zone="zLeft"
+                    rank="1"
+                    required="true"
+                    hint="This is a hint"
+                    placeholder="Enter a time"
+                    label="Time:"
+                >
+                    <fdp-time-picker name="timePicker" allowNull="false" formControlName="timePicker">
+                    </fdp-time-picker>
+                </fdp-form-field>
+                <ng-template #i18n let-errors>
+                    @if (errors.required) {
+                        <span>Value is required</span>
+                    }
+                </ng-template>
+            </fdp-form-group>
+            <button type="submit" #submitButton>Submit</button>
+        </form>
+    `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 class TestTimePickerComponent {

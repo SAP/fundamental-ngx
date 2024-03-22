@@ -1,6 +1,6 @@
-import { KeyUtil } from './key-util';
-import { isDevMode } from '@angular/core';
 import { A, B, CONTROL, DOWN_ARROW, SHIFT, TAB, UP_ARROW, Z } from '@angular/cdk/keycodes';
+import { isDevMode } from '@angular/core';
+import { KeyUtil } from './key-util';
 
 describe('KeyUtil', () => {
     describe('isKeyCode', () => {

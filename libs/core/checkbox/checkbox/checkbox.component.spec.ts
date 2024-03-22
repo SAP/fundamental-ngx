@@ -1,10 +1,10 @@
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { Component, ViewChild } from '@angular/core';
 
-import { CheckboxComponent } from './checkbox.component';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { CheckboxModule } from '../checkbox.module';
+import { CheckboxComponent } from './checkbox.component';
 
 function getCheckboxInput(fixture: ComponentFixture<any>): HTMLInputElement {
     return fixture.nativeElement.querySelector('input');

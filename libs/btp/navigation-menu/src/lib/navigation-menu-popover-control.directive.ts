@@ -6,5 +6,8 @@ import { Directive, TemplateRef, ViewContainerRef } from '@angular/core';
 })
 export class NavigationMenuPopoverControlDirective {
     /** @hidden */
-    constructor(readonly templateRef: TemplateRef<void>, private viewContainerRef: ViewContainerRef) {}
+    constructor(
+        readonly templateRef: TemplateRef<void>,
+        private viewContainerRef: ViewContainerRef
+    ) {}
 }

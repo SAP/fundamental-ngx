@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SettingsGeneratorService } from '../../settings-generator.service';
 
-import { SettingsGeneratorSectionComponent } from './settings-generator-section.component';
 import { PlatformFormGeneratorModule } from '@fundamental-ngx/platform/form';
+import { SettingsGeneratorSectionComponent } from './settings-generator-section.component';
 
 class SettingsGeneratorServiceStub {
     _addFormGenerator(): void {}

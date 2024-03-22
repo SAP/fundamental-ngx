@@ -1,13 +1,13 @@
-import { NestedItemComponent } from './nested-item.component';
 import { Component, ViewChild } from '@angular/core';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { NestedLinkComponent } from '../nested-link/nested-link.component';
 import { NestedListExpandIconComponent } from '../nested-list-directives';
-import { CxNestedListModule } from '../nested-list.module';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListStateService } from '../nested-list-state.service';
+import { CxNestedListModule } from '../nested-list.module';
+import { NestedItemComponent } from './nested-item.component';
 import { NestedItemService } from './nested-item.service';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { CxSideNavigationModule } from '@fundamental-ngx/cx/side-navigation';

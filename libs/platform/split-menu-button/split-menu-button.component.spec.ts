@@ -1,11 +1,11 @@
-import { OverlayContainer } from '@angular/cdk/overlay';
-import { By } from '@angular/platform-browser';
-import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
-import { createKeyboardEvent } from '@fundamental-ngx/core/tests';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { createKeyboardEvent } from '@fundamental-ngx/core/tests';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { SplitMenuButtonComponent } from './split-menu-button.component';
 import { PlatformSplitMenuButtonModule } from './split-menu-button.module';

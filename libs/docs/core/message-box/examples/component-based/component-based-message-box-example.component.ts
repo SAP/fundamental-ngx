@@ -28,7 +28,10 @@ export interface TextData {
 export class ComponentBasedMessageBoxExampleComponent {
     closeReason: string;
 
-    constructor(private _messageBoxService: MessageBoxService, private _cdr: ChangeDetectorRef) {}
+    constructor(
+        private _messageBoxService: MessageBoxService,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     open(): void {
         const messageBoxRef = this._messageBoxService.open<TextData>(MessageBoxExampleComponent, {

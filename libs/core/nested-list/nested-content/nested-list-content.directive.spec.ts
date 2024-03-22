@@ -1,10 +1,10 @@
-import { NestedListContentDirective } from './nested-list-content.directive';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NestedListModule } from '../nested-list.module';
-import { NestedListStateService } from '../nested-list-state.service';
-import { NestedListExpandIconComponent } from '../nested-list-directives';
 import { NestedItemService } from '../nested-item/nested-item.service';
+import { NestedListExpandIconComponent } from '../nested-list-directives';
+import { NestedListStateService } from '../nested-list-state.service';
+import { NestedListModule } from '../nested-list.module';
+import { NestedListContentDirective } from './nested-list-content.directive';
 
 @Component({
     template: `

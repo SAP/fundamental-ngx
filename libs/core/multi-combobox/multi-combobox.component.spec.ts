@@ -7,9 +7,9 @@ import { isSelectableOptionItem } from '@fundamental-ngx/cdk/forms';
 import { ContentDensityMode, mockedLocalContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { CVATestSteps, runValueAccessorTests } from 'ngx-cva-test-suite';
 
+import { By } from '@angular/platform-browser';
 import { MultiComboboxComponent } from './multi-combobox.component';
 import { MultiComboboxModule } from './multi-combobox.module';
-import { By } from '@angular/platform-browser';
 
 const { contentDensityDirectiveProvider, setContentDensity } = mockedLocalContentDensityDirective(
     ContentDensityMode.COMPACT
@@ -158,7 +158,11 @@ describe('MultiComboBox component', () => {
         component._searchTermChanged(component.inputText);
         fixture.detectChanges();
         await fixture.whenStable();
-        component._onBlur(new FocusEvent('blur', { relatedTarget: fixture.debugElement.query(By.css('.fd-tokenizer__input')).nativeElement }));
+        component._onBlur(
+            new FocusEvent('blur', {
+                relatedTarget: fixture.debugElement.query(By.css('.fd-tokenizer__input')).nativeElement
+            })
+        );
         expect(component._selectedSuggestions.length).toEqual(1);
     });
 });

@@ -2,8 +2,8 @@ import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angu
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Subject } from 'rxjs';
 
-import { whenStable } from '@fundamental-ngx/core/tests';
 import { OverflowPriority, ResizeObserverService } from '@fundamental-ngx/cdk/utils';
+import { whenStable } from '@fundamental-ngx/core/tests';
 
 import { ToolbarItemDirective } from './toolbar-item.directive';
 import { ToolbarComponent } from './toolbar.component';

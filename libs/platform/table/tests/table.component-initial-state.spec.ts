@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { TableComponent } from '../table.component';
 import {
     CollectionFilter,
     CollectionGroup,
@@ -11,8 +10,9 @@ import {
     SortDirection,
     TableDataSource
 } from '@fundamental-ngx/platform/table-helpers';
-import { SourceItem, TableDataProviderMock } from './helpers';
+import { TableComponent } from '../table.component';
 import { PlatformTableModule } from '../table.module';
+import { SourceItem, TableDataProviderMock } from './helpers';
 @Component({
     template: `
         <fdp-table

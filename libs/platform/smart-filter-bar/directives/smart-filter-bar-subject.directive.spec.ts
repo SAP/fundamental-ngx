@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { PlatformSmartFilterBarModule } from '../smart-filter-bar.module';
 import { ArrayTableDataProvider, PlatformTableModule, TableDataSource } from '@fundamental-ngx/platform/table';
-import { SmartFilterBarSubjectDirective } from './smart-filter-bar-subject.directive';
 import { firstValueFrom } from 'rxjs';
+import { PlatformSmartFilterBarModule } from '../smart-filter-bar.module';
+import { SmartFilterBarSubjectDirective } from './smart-filter-bar-subject.directive';
 
 interface SourceItem {
     id: string;

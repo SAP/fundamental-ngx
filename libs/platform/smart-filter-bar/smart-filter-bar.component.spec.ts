@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SmartFilterBarComponent } from './smart-filter-bar.component';
-import { whenStable } from '@fundamental-ngx/core/tests';
-import { FdDate } from '@fundamental-ngx/core/datetime';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { FdDate } from '@fundamental-ngx/core/datetime';
+import { whenStable } from '@fundamental-ngx/core/tests';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { SmartFilterBarComponent } from './smart-filter-bar.component';
+import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
 
 @Component({
     selector: 'fdp-smart-filter-bar-test',

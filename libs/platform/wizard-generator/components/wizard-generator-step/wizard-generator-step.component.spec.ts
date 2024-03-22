@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { PlatformWizardGeneratorModule } from '../../wizard-generator.module';
-import { WizardGeneratorService } from '../../wizard-generator.service';
-import { WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
 import { firstValueFrom } from 'rxjs';
 import { WizardStepForms } from '../../interfaces/wizard-generator-forms.interface';
+import { WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
+import { PlatformWizardGeneratorModule } from '../../wizard-generator.module';
+import { WizardGeneratorService } from '../../wizard-generator.service';
 
 const items = [
     {
@@ -30,13 +30,10 @@ const items = [
 
 @Component({
     template: `
-@if (step !== undefined) {
-  <fdp-wizard-generator-step
-    (formsCreated)="formsCreated($event)"
-    [item]="step"
-  ></fdp-wizard-generator-step>
-}
-`,
+        @if (step !== undefined) {
+            <fdp-wizard-generator-step (formsCreated)="formsCreated($event)" [item]="step"></fdp-wizard-generator-step>
+        }
+    `,
     providers: [WizardGeneratorService]
 })
 export class TestComponent {

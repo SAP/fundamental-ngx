@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { DndItemDirective } from './dnd-item.directive';
-import { Component, ViewChild } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { Component, ViewChild } from '@angular/core';
+import { DndItemDirective } from './dnd-item.directive';
 
 @Component({
     template: `

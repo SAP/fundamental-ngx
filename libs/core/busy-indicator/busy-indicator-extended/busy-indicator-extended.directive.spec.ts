@@ -1,7 +1,7 @@
 import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { BusyIndicatorExtendedDirective } from './busy-indicator-extended.directive';
 import { BusyIndicatorComponent } from '../busy-indicator.component';
+import { BusyIndicatorExtendedDirective } from './busy-indicator-extended.directive';
 
 @Component({
     template: ` <div class="fd-message-toast" #container>

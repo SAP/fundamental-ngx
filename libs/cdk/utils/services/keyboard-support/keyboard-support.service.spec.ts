@@ -1,9 +1,9 @@
-import { KeyboardSupportService } from './keyboard-support.service';
-import { KeyboardSupportItemInterface } from '../../interfaces/keyboard-support-item.interface';
 import { EventEmitter } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { TestBed } from '@angular/core/testing';
+import { KeyboardSupportItemInterface } from '../../interfaces/keyboard-support-item.interface';
+import { KeyboardSupportService } from './keyboard-support.service';
 
 class MockKeyboardListElement implements KeyboardSupportItemInterface {
     keyDown = new EventEmitter<KeyboardEvent>();

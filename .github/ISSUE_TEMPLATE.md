@@ -14,7 +14,7 @@
 
 #### Please provide stackblitz example(s).
 
-#### In case this is Accessibility related topic, did you consult with an accessibility expert? If not, please do so and share their recommendations. 
+#### In case this is Accessibility related topic, did you consult with an accessibility expert? If not, please do so and share their recommendations.
 
 #### Did you check the documentation and the API?
 

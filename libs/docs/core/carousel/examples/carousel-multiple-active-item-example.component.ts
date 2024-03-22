@@ -35,7 +35,10 @@ export class CarouselMultipleActiveItemExampleComponent implements OnInit, After
     card2Visibility = true;
     card3Visibility = true;
 
-    constructor(private _changeDetectorRef: ChangeDetectorRef, private readonly _destroyRef: DestroyRef) {}
+    constructor(
+        private _changeDetectorRef: ChangeDetectorRef,
+        private readonly _destroyRef: DestroyRef
+    ) {}
 
     ngOnInit(): void {
         fromEvent(window, 'resize')

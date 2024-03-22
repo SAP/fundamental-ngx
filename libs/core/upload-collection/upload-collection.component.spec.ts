@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { UploadCollectionComponent } from './upload-collection.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { UploadCollectionComponent } from './upload-collection.component';
 
 describe('UploadCollectionComponent', () => {
     let component: UploadCollectionComponent;

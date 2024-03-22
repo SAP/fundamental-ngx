@@ -1,16 +1,15 @@
-
+import { CommonModule } from '@angular/common';
 import { Component, Type, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ControlValueAccessor, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { FormFieldComponent } from '../form-group/form-field/form-field.component';
-import { FdpFormGroupModule } from '../form-group/fdp-form.module';
-import { PlatformInputGroupModule } from './input-group.module';
-import { InputGroupComponent } from './input-group.component';
-import { CVATestSteps, runValueAccessorTests } from 'ngx-cva-test-suite';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
-import { CommonModule } from '@angular/common';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { CVATestSteps, runValueAccessorTests } from 'ngx-cva-test-suite';
+import { FdpFormGroupModule } from '../form-group/fdp-form.module';
+import { FormFieldComponent } from '../form-group/form-field/form-field.component';
+import { InputGroupComponent } from './input-group.component';
+import { PlatformInputGroupModule } from './input-group.module';
 
 const INPUT_GROUP_IDENTIFIER = 'platform-input-group-unit-test';
 
@@ -94,32 +93,32 @@ describe('InputGroup component', () => {
 /** Usage with form */
 @Component({
     template: `
-<fdp-form-group #fg [formGroup]="form" [object]="initialFormModel">
-  <fdp-form-field
-    #ff
-    id="qty"
-    placeholder="Placeholder"
-    [hint]="{ content: 'This is tooltip help', placement: 'left' }"
-    zone="zLeft"
-    rank="1"
-    [required]="true"
-    >
-    <fdp-input-group name="qty" [formControl]="ff.formControl">
-      <fdp-input-group-addon>$</fdp-input-group-addon>
-      <fdp-input-group-input></fdp-input-group-input>
-      <fdp-input-group-addon>0.00</fdp-input-group-addon>
-      <fdp-input-group-addon>
-        <fdp-button label="Button"></fdp-button>
-      </fdp-input-group-addon>
-    </fdp-input-group>
-  </fdp-form-field>
-  <ng-template #i18n let-errors>
-    @if (errors?.required) {
-      <span class="error">This field is required.</span>
-    }
-  </ng-template>
-</fdp-form-group>
-`
+        <fdp-form-group #fg [formGroup]="form" [object]="initialFormModel">
+            <fdp-form-field
+                #ff
+                id="qty"
+                placeholder="Placeholder"
+                [hint]="{ content: 'This is tooltip help', placement: 'left' }"
+                zone="zLeft"
+                rank="1"
+                [required]="true"
+            >
+                <fdp-input-group name="qty" [formControl]="ff.formControl">
+                    <fdp-input-group-addon>$</fdp-input-group-addon>
+                    <fdp-input-group-input></fdp-input-group-input>
+                    <fdp-input-group-addon>0.00</fdp-input-group-addon>
+                    <fdp-input-group-addon>
+                        <fdp-button label="Button"></fdp-button>
+                    </fdp-input-group-addon>
+                </fdp-input-group>
+            </fdp-form-field>
+            <ng-template #i18n let-errors>
+                @if (errors?.required) {
+                    <span class="error">This field is required.</span>
+                }
+            </ng-template>
+        </fdp-form-group>
+    `
 })
 class InputGroupFormTestWrapperComponent {
     @ViewChild(InputGroupComponent)
@@ -248,6 +247,6 @@ describe('InputGroup component CVA', () => {
         /** Function to get the value of a component in a runtime. */
         getComponentValue: (fixture: ComponentFixture<InputGroupComponent>) => fixture.componentInstance.value,
 
-        excludeSteps: [CVATestSteps.ValueChangedInternally],
+        excludeSteps: [CVATestSteps.ValueChangedInternally]
     });
 });

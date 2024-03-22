@@ -1,15 +1,15 @@
-import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW, TAB } from '@angular/cdk/keycodes';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { ComponentFixture, TestBed, fakeAsync, inject, tick, waitForAsync } from '@angular/core/testing';
 import { of } from 'rxjs';
 
-import { MenuComponent } from './menu.component';
-import { MenuItemComponent } from './menu-item.component';
-import { MenuTriggerDirective } from './menu-trigger.directive';
-import { PlatformMenuModule } from './menu.module';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { createKeyboardEvent, createMouseEvent } from '@fundamental-ngx/platform/shared';
+import { MenuItemComponent } from './menu-item.component';
+import { MenuTriggerDirective } from './menu-trigger.directive';
+import { MenuComponent } from './menu.component';
+import { PlatformMenuModule } from './menu.module';
 
 function mouseClickOnElement(el: Element): void {
     const event: MouseEvent = new MouseEvent('click', {

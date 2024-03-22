@@ -1,9 +1,9 @@
+import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { NgModule, TemplateRef, Component, ViewChild } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 import { NotificationService } from '../notification-service/notification.service';
 import { NotificationRef } from '../notification-utils/notification-ref';
 import { NotificationModule } from '../notification.module';
-import { RouterTestingModule } from '@angular/router/testing';
 
 @Component({
     template: `

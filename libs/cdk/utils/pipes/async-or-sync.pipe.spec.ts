@@ -1,6 +1,6 @@
 import { ChangeDetectorRef } from '@angular/core';
-import { isSubscribable } from '../typecheck';
 import { of } from 'rxjs';
+import { isSubscribable } from '../typecheck';
 import { AsyncOrSyncPipe } from './async-or-sync.pipe';
 
 class CdrStub {

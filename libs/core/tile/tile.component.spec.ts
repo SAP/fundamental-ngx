@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { TileComponent } from './tile.component';
 import { TileModule } from '../tile/tile.module';
+import { TileComponent } from './tile.component';
 
 describe('TileComponent', () => {
     let component: TileComponent;

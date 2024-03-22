@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { I18nModule } from '@fundamental-ngx/i18n';
 
-import { SideNavigationComponent } from './side-navigation.component';
 import { Component, ViewChild } from '@angular/core';
-import { CxNestedListModule } from '@fundamental-ngx/cx/nested-list';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
+import { CxNestedListModule } from '@fundamental-ngx/cx/nested-list';
 import { SideNavigationMainComponent } from './side-navigation-main.component';
+import { SideNavigationComponent } from './side-navigation.component';
 
 @Component({
     template: `

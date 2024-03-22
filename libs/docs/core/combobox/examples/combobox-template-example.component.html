@@ -8,7 +8,7 @@
     <ng-container *fdComboboxItem="let item; use: model; inputText as search">
         <!-- Note that in this case you are responsible for highlighting. -->
         <i fd-list-icon [glyph]="item.icon"></i>
-        <span fd-list-title [innerHTML]="item.name | highlight : search"></span>
+        <span fd-list-title [innerHTML]="item.name | highlight: search"></span>
     </ng-container>
 </fd-combobox>
 

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
-import { By } from '@angular/platform-browser';
 import { FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
-import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
-import { PlatformStepInputModule } from '../step-input.module';
-import { NumberStepInputComponent } from './number-step-input.component';
-import { runValueAccessorTests } from 'ngx-cva-test-suite';
-import { StepInputChangeEvent } from '../base.step-input';
 import { ContentDensityMode, ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { FieldHintOptions } from '@fundamental-ngx/platform/shared';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
+import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
+import { StepInputChangeEvent } from '../base.step-input';
+import { PlatformStepInputModule } from '../step-input.module';
+import { NumberStepInputComponent } from './number-step-input.component';
 
 @Component({
     template: `<fdp-number-step-input name="number"></fdp-number-step-input>`,
@@ -399,29 +399,29 @@ describe('NumberStepInputComponent main functionality', () => {
 /** Usage with form */
 @Component({
     template: `
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <fdp-form-group #fg1 [formGroup]="form" [object]="initialFormModel">
-    <fdp-form-field
-      #ff
-      id="qty"
-      label="Basic Number Step-Input with Platform Forms"
-      placeholder="Start entering qty"
-      [hint]="{ content: 'This is tooltip help', placement: 'left' }"
-      zone="zLeft"
-      rank="10"
-      [validators]="stepInputValidators"
-      >
-      <fdp-number-step-input name="qty" [formControl]="ff.formControl"></fdp-number-step-input>
-    </fdp-form-field>
-    <ng-template #i18n let-errors>
-      @if (errors && errors.required) {
-        <span class="error">This field is required.</span>
-      }
-    </ng-template>
-  </fdp-form-group>
-  <button type="submit" #submitButton>Submit</button>
-</form>
-`,
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <fdp-form-group #fg1 [formGroup]="form" [object]="initialFormModel">
+                <fdp-form-field
+                    #ff
+                    id="qty"
+                    label="Basic Number Step-Input with Platform Forms"
+                    placeholder="Start entering qty"
+                    [hint]="{ content: 'This is tooltip help', placement: 'left' }"
+                    zone="zLeft"
+                    rank="10"
+                    [validators]="stepInputValidators"
+                >
+                    <fdp-number-step-input name="qty" [formControl]="ff.formControl"></fdp-number-step-input>
+                </fdp-form-field>
+                <ng-template #i18n let-errors>
+                    @if (errors && errors.required) {
+                        <span class="error">This field is required.</span>
+                    }
+                </ng-template>
+            </fdp-form-group>
+            <button type="submit" #submitButton>Submit</button>
+        </form>
+    `,
     standalone: true,
     imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformStepInputModule],
     providers: [RtlService]

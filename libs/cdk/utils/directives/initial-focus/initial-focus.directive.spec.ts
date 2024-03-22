@@ -1,6 +1,6 @@
-import { InitialFocusDirective } from './initial-focus.directive';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
+import { InitialFocusDirective } from './initial-focus.directive';
 
 @Component({
     template: `

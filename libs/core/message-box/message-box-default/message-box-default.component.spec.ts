@@ -1,8 +1,8 @@
 import { ChangeDetectorRef } from '@angular/core';
 
-import { MessageBoxDefaultComponent } from './message-box-default.component';
-import { MessageBoxContent } from '../utils/message-box-content.class';
 import { MessageBoxConfig } from '../utils/message-box-config.class';
+import { MessageBoxContent } from '../utils/message-box-content.class';
+import { MessageBoxDefaultComponent } from './message-box-default.component';
 
 describe('MessageBoxDefaultComponent', () => {
     let component: MessageBoxDefaultComponent;

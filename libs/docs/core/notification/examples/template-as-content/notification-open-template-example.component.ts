@@ -15,7 +15,10 @@ export class NotificationOpenTemplateExampleComponent {
     @ViewChild('notificationTemplate') notificationTemplate: TemplateRef<unknown>;
     public closeReason: string;
 
-    constructor(private notificationService: NotificationService, private _cdr: ChangeDetectorRef) {}
+    constructor(
+        private notificationService: NotificationService,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     open(): void {
         const notificationRef = this.notificationService.open(this.notificationTemplate);

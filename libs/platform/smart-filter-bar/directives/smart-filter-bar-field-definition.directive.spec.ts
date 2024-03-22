@@ -1,6 +1,6 @@
-import { whenStable } from '@fundamental-ngx/core/tests';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { whenStable } from '@fundamental-ngx/core/tests';
 import { PlatformSmartFilterBarModule } from '../smart-filter-bar.module';
 import { SmartFilterBarFieldDefinitionDirective } from './smart-filter-bar-field-definition.directive';
 

@@ -1,4 +1,4 @@
-import { Reflection, DefaultThemeRenderContext, JSX, JSX as React, ReflectionKind } from 'typedoc';
+import { DefaultThemeRenderContext, JSX, Reflection, ReflectionKind } from 'typedoc';
 import { camelToTitleCase, fixedMarkdown } from '../utils';
 
 export function commentTags({ markdown }: DefaultThemeRenderContext, props: Reflection) {

@@ -1,4 +1,4 @@
-import { JSX as React, JSX, ReflectionType, DefaultThemeRenderContext, DeclarationReflection } from 'typedoc';
+import { DeclarationReflection, DefaultThemeRenderContext, JSX, ReflectionType } from 'typedoc';
 import { getKindClass, hasTypeParameters, renderTypeParametersSignature, wbr } from '../utils';
 
 export function memberDeclaration(context: DefaultThemeRenderContext, props: DeclarationReflection) {

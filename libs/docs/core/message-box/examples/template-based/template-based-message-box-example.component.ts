@@ -16,7 +16,10 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
 export class TemplateBasedMessageBoxExampleComponent {
     confirmationReason: string;
 
-    constructor(private _messageBoxService: MessageBoxService, private _cdr: ChangeDetectorRef) {}
+    constructor(
+        private _messageBoxService: MessageBoxService,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     open(messageBox: TemplateRef<any>): void {
         const messageBoxRef = this._messageBoxService.open(messageBox, {

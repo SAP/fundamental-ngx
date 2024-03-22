@@ -1,8 +1,8 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
-import { TextComponent } from './text.component';
 import { ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
 import { patchLanguage } from '@fundamental-ngx/i18n';
+import { TextComponent } from './text.component';
 
 const moreLabel = 'label more'.toLowerCase();
 const lessLabel = 'label less'.toLowerCase();

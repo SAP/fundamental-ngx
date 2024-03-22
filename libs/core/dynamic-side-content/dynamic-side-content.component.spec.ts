@@ -1,32 +1,27 @@
-
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+import { CommonModule } from '@angular/common';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { DynamicSideContentPosition, DynamicSideContentSize, DYNAMIC_SIDE_CONTENT_CLASS_NAME } from './constants';
+import { DYNAMIC_SIDE_CONTENT_CLASS_NAME, DynamicSideContentPosition, DynamicSideContentSize } from './constants';
 import { DynamicSideContentMainComponent } from './dynamic-side-content-main.component';
 import { DynamicSideContentSideComponent } from './dynamic-side-content-side.component';
 import { DynamicSideContentComponent } from './dynamic-side-content.component';
 import { DynamicSideContentModule } from './dynamic-side-content.module';
-import { CommonModule } from '@angular/common';
 
 @Component({
     template: `
-<fd-dynamic-side-content [size]="size" [position]="position">
-  @if (renderSideFromLeft) {
-    <fd-dynamic-side-content-side>{{
-      sideTextContent
-    }}</fd-dynamic-side-content-side>
-  }
-  <fd-dynamic-side-content-main>{{ mainTextContent }}</fd-dynamic-side-content-main>
-  @if (!renderSideFromLeft) {
-    <fd-dynamic-side-content-side>{{
-      sideTextContent
-    }}</fd-dynamic-side-content-side>
-  }
-</fd-dynamic-side-content>
-`
+        <fd-dynamic-side-content [size]="size" [position]="position">
+            @if (renderSideFromLeft) {
+                <fd-dynamic-side-content-side>{{ sideTextContent }}</fd-dynamic-side-content-side>
+            }
+            <fd-dynamic-side-content-main>{{ mainTextContent }}</fd-dynamic-side-content-main>
+            @if (!renderSideFromLeft) {
+                <fd-dynamic-side-content-side>{{ sideTextContent }}</fd-dynamic-side-content-side>
+            }
+        </fd-dynamic-side-content>
+    `
 })
 class TestHostComponent {
     @ViewChild(DynamicSideContentComponent) dynamicSideContent: DynamicSideContentComponent;

@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TimelineModule } from './';
 import { TimelinePositionControlService } from './services/timeline-position-control.service';

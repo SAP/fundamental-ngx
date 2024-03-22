@@ -1,13 +1,13 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, Input, NO_ERRORS_SCHEMA, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { ButtonType } from '@fundamental-ngx/core/button';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { ButtonType } from '@fundamental-ngx/core/button';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { MenuItemComponent, PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { MenuButtonComponent } from './menu-button.component';
 import { PlatformMenuButtonModule } from './menu-button.module';
-import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 function mouseClickOnElement(el: Element): void {
     const event: MouseEvent = new MouseEvent('click', {
