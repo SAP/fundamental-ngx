@@ -15,6 +15,9 @@ export abstract class DynamicComponentContainer<T = TemplateRef<any> | Type<any>
     /** @hidden */
     abstract portalOutlet: CdkPortalOutlet;
 
+    /** @hidden Load received content */
+    protected abstract _loadContent(): void;
+
     /** @hidden */
     childContent: Nullable<T> = undefined;
 
@@ -29,9 +32,6 @@ export abstract class DynamicComponentContainer<T = TemplateRef<any> | Type<any>
         public elementRef: ElementRef,
         protected _injector: Injector
     ) {}
-
-    /** @hidden Load received content */
-    protected abstract _loadContent(): void;
 
     /** @hidden Load received content as component */
     protected _createFromComponent(content: Type<any>): void {

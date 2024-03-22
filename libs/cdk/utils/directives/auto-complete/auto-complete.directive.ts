@@ -30,10 +30,6 @@ export class AutoCompleteDirective {
     @Input()
     enable = true;
 
-    /** Matcher function for testing the str for a search term */
-    @Input()
-    matcher = (str: string, searchTerm: string): boolean => str.startsWith(searchTerm);
-
     /** Display function. Accepts an object of the same type as the
      * items passed to dropdownValues as argument, and outputs a string.
      * An arrow function can be used to access the *this* keyword in the calling component.
@@ -90,6 +86,10 @@ export class AutoCompleteDirective {
         });
     }
 
+    /** Matcher function for testing the str for a search term */
+    @Input()
+    matcher = (str: string, searchTerm: string): boolean => str.startsWith(searchTerm);
+
     /** @hidden */
     _handleKeyboardEvent(event: KeyboardEvent): void {
         if (this.enable) {
@@ -139,15 +139,11 @@ export class AutoCompleteDirective {
 
     /** @hidden */
     private _triggerTypeAhead(): boolean {
-        if (
+        return !(
             this.lastKeyUpEvent &&
             KeyUtil.isKeyCode(this.lastKeyUpEvent, CONTROL) &&
             this.inputText === this.oldValue
-        ) {
-            return false;
-        } else {
-            return true;
-        }
+        );
     }
 
     /** @hidden */

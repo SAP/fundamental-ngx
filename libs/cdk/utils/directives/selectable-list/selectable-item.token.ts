@@ -10,9 +10,9 @@ export abstract class SelectableItemToken<ElementType extends Element = HTMLElem
 
     abstract readonly elementRef: ElementRef<ElementType>;
 
+    abstract clicked: Observable<MouseEvent | KeyboardEvent>;
+
     abstract setSelected(isSelected: boolean): void;
 
     abstract getSelected(): boolean;
-
-    abstract clicked: Observable<MouseEvent | KeyboardEvent>;
 }

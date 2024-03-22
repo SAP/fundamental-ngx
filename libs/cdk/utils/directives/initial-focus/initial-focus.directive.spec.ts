@@ -12,11 +12,11 @@ import { InitialFocusDirective } from './initial-focus.directive';
     `
 })
 class TestComponent {
-    enabled = false;
     @ViewChild('elementToFocus') elementToFocus: ElementRef;
     @ViewChild('nestedElementToFocus') nestedElementToFocus: ElementRef;
     @ViewChild(InitialFocusDirective) initialFocusDir: InitialFocusDirective;
 
+    enabled = false;
     rootElementTabIndex = 0;
 }
 

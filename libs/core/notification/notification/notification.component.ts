@@ -167,6 +167,15 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         return this._focusTrap.focusFirstTabbableElementWhenReady();
     }
 
+    /** @hidden */
+    _setProperties(): void {
+        this._addClassToElement('fd-notification');
+        this._addClassToElement('fd-notification-custom-block');
+        if (this.mobile) {
+            this._addClassToElement('fd-notification--mobile');
+        }
+    }
+
     /** @hidden Listen on NavigationStart event and dismiss the dialog */
     private _listenAndCloseOnNavigation(): void {
         if (this._router && this._notificationRef) {
@@ -193,15 +202,6 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
             $implicit: this._notificationRef
         };
         this.componentRef = this.containerRef.createEmbeddedView(content, context);
-    }
-
-    /** @hidden */
-    _setProperties(): void {
-        this._addClassToElement('fd-notification');
-        this._addClassToElement('fd-notification-custom-block');
-        if (this.mobile) {
-            this._addClassToElement('fd-notification--mobile');
-        }
     }
 
     /** @hidden */

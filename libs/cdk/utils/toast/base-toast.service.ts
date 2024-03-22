@@ -45,39 +45,6 @@ export abstract class BaseToastService<
     protected abstract defaultConfig: P;
 
     /**
-     * @hidden
-     * Array of all current toasts.
-     */
-    protected _toasts: BaseToastRef[] = [];
-
-    /**
-     * @hidden
-     */
-    protected _toastsMap = new Map<BaseToastPosition, BaseToastRef[]>();
-
-    /** @hidden */
-    private _destroyRef = inject(DestroyRef);
-
-    /** @hidden */
-    protected constructor(
-        public overlay: Overlay,
-        public injector: Injector
-    ) {}
-
-    /**
-     * Gets Toast Container providers.
-     * @param config Toast Config.
-     */
-    protected abstract getContainerComponentProviders(config: P): StaticProvider[];
-
-    /**
-     * Gets Toast Content providers.
-     * @param config Toast Config.
-     * @param toastRef Toast Reference.
-     */
-    protected abstract getContentComponentProviders<T>(config: P, toastRef: BaseToastRef<T>): StaticProvider[];
-
-    /**
      * Opens a Toast with the provided configuration.
      * @param toast accepts string, Component or TemplateRef.
      */
@@ -102,6 +69,51 @@ export abstract class BaseToastService<
      * @returns Toast reference.
      */
     abstract openFromTemplate(template: TemplateRef<any>, config: P): BaseToastRef<EmbeddedViewRef<any>>;
+
+    /**
+     * Gets Toast Container providers.
+     * @param config Toast Config.
+     */
+    protected abstract getContainerComponentProviders(config: P): StaticProvider[];
+
+    /**
+     * Gets Toast Content providers.
+     * @param config Toast Config.
+     * @param toastRef Toast Reference.
+     */
+    protected abstract getContentComponentProviders<T>(config: P, toastRef: BaseToastRef<T>): StaticProvider[];
+
+    /**
+     * Creates Toast Reference for provided container and overlay.
+     * @param containerRef Container reference.
+     * @param overlayRef Overlay Reference.
+     * @param positionStrategy Position Strategy
+     */
+    protected abstract getToastRef<T>(
+        containerRef: C,
+        overlayRef: OverlayRef,
+        positionStrategy: BaseToastPosition
+    ): BaseToastRef<T | EmbeddedViewRef<any>, P>;
+
+    /**
+     * @hidden
+     * Array of all current toasts.
+     */
+    protected _toasts: BaseToastRef[] = [];
+
+    /**
+     * @hidden
+     */
+    protected _toastsMap = new Map<BaseToastPosition, BaseToastRef[]>();
+
+    /** @hidden */
+    private _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    protected constructor(
+        public overlay: Overlay,
+        public injector: Injector
+    ) {}
 
     /**
      * Dismisses all Toasts.
@@ -130,18 +142,6 @@ export abstract class BaseToastService<
 
         this._refreshOverlayPositions();
     }
-
-    /**
-     * Creates Toast Reference for provided container and overlay.
-     * @param containerRef Container reference.
-     * @param overlayRef Overlay Reference.
-     * @param positionStrategy Position Strategy
-     */
-    protected abstract getToastRef<T>(
-        containerRef: C,
-        overlayRef: OverlayRef,
-        positionStrategy: BaseToastPosition
-    ): BaseToastRef<T | EmbeddedViewRef<any>, P>;
 
     /**
      * @hidden
