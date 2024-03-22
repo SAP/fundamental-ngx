@@ -10,11 +10,11 @@ import { NavigationListItemComponent } from './navigation-list-item.component';
 
 class NavigationComponentMock extends FdbNavigation {
     closeAllPopups = new Subject<void>();
-    closePopups(): void {}
     classList$ = signal([]);
     isSnapped$ = signal(false);
     showMoreButton$ = signal(null);
     _navigationItemRenderer = signal(null);
+    closePopups(): void {}
     setActiveItem(): void {}
     getActiveItem(): FdbNavigationListItem | null {
         return null;

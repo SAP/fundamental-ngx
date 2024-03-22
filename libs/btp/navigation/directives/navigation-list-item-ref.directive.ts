@@ -61,14 +61,14 @@ export class NavigationListItemDirective implements OnDestroy {
      */
     registerItem(item: FdbNavigationListItem): void {
         this._item = item;
-        this._contentContainer?.registerItem(this._item!);
+        this._contentContainer?.registerItem(this._item);
     }
 
     /**
      * Removes child list item.
      */
     unregisterItem(): void {
-        this._contentContainer?.unregisterItem(this._item!);
+        this._item && this._contentContainer?.unregisterItem(this._item);
         this._item = null;
     }
 
@@ -81,7 +81,7 @@ export class NavigationListItemDirective implements OnDestroy {
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._contentContainer?.unregisterItem(this._item!);
+        this._item && this._contentContainer?.unregisterItem(this._item);
         this._item = null;
         this.childDirectives().clear();
     }

@@ -139,13 +139,13 @@ export class NavigationComponent
     readonly dataSourceItems: Signal<GroupedDataSourceItems | undefined>;
 
     /** @hidden */
-    private readonly _viewInited$ = signal(false);
-
-    /** @hidden */
     readonly _navigationItemRenderer = signal<NavigationListItemRefDirective | null>(null);
 
     /** Stream notifies to close all popups in child list items. */
     readonly closeAllPopups = new Subject<void>();
+
+    /** @hidden */
+    private readonly _viewInitiated$ = signal(false);
 
     /**
      * @hidden
@@ -180,7 +180,7 @@ export class NavigationComponent
         );
         // When show more button is shown, reset items list with added "More button".
         effect(() => {
-            if (this._viewInited$()) {
+            if (this._viewInitiated$()) {
                 this._resetItemsList(this.showMoreButton$());
             }
         });
@@ -232,7 +232,7 @@ export class NavigationComponent
             .withVerticalOrientation()
             .skipPredicate((item) => !item.isVisible$() || item.skipNavigation);
         this._keyManager.setActiveItem(0);
-        this._viewInited$.set(true);
+        this._viewInitiated$.set(true);
     }
 
     /** @hidden */
