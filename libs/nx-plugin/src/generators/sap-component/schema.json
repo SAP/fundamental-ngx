@@ -13,7 +13,7 @@
         },
         "project": {
             "type": "string",
-            "enum": ["core", "platform", "cx", "cdk"]
+            "enum": ["core", "platform", "cx", "cdk", "btp"]
         }
     },
     "required": ["name", "project"]

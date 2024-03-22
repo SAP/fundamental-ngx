@@ -1,1 +1,21 @@
-export * from './<%= fileName %>-docs.module';
+import { Routes } from '@angular/router';
+import { <%= className %>HeaderComponent } from './<%= fileName %>-header/<%= fileName %>-header.component';
+import { <%= className %>DocsComponent } from './<%= fileName %>-docs.component';
+
+export const ROUTES: Routes = [
+    {
+        path: '',
+        component: <%= className %>HeaderComponent,
+        children: [
+            {
+                path: '',
+                component: <%= className %>DocsComponent
+            }
+        ],
+        data: {
+            primary: true
+        }
+    }
+];
+export const LIBRARY_NAME = '<%= fileName %>';
+export const API_FILE_KEY = '<%= propertyName %>';

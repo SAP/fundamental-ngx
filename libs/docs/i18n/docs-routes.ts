@@ -1,15 +1,24 @@
 import { Routes } from '@angular/router';
 import { configureRoutes, CURRENT_LIB, StackblitzService } from '@fundamental-ngx/docs/shared';
-import { sections } from './docs-data';
+import { guides, utilities } from './docs-data.json';
 
-const configureI18nRoutes = configureRoutes({});
+const configureLibRoutes = configureRoutes({});
 
 export const ROUTES: Routes = [
     {
         path: '',
         loadComponent: () => import('@fundamental-ngx/docs/shared-pages').then((m) => m.LibraryDocShellPageComponent),
         data: {
-            sections
+            sections: [
+                {
+                    header: 'Guides',
+                    content: guides
+                },
+                {
+                    header: 'Utilities',
+                    content: utilities
+                }
+            ]
         },
         providers: [StackblitzService, { provide: CURRENT_LIB, useValue: 'i18n' }],
         children: [
@@ -26,19 +35,19 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'loading-translations',
-                loadChildren: () => import('./loading-translations').then(configureI18nRoutes)
+                loadChildren: () => import('./loading-translations').then(configureLibRoutes)
             },
             {
                 path: 'changing-translations',
-                loadChildren: () => import('./changing-translations').then(configureI18nRoutes)
+                loadChildren: () => import('./changing-translations').then(configureLibRoutes)
             },
             {
                 path: 'resolver',
-                loadChildren: () => import('./translation-resolver').then(configureI18nRoutes)
+                loadChildren: () => import('./translation-resolver').then(configureLibRoutes)
             },
             {
                 path: 'patch',
-                loadChildren: () => import('./patching-translations').then(configureI18nRoutes)
+                loadChildren: () => import('./patching-translations').then(configureLibRoutes)
             }
         ]
     }

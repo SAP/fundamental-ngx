@@ -1,0 +1,18 @@
+{
+    "guides": [
+        {
+            "url": "cx/home",
+            "name": "Home"
+        },
+        {
+            "url": "cx/new-component",
+            "name": "New Component"
+        }
+    ],
+    "components": [
+        {
+            "url": "cx/side-navigation",
+            "name": "Side Navigation"
+        }
+    ]
+}
