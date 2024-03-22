@@ -32,21 +32,6 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
         this._animationsDisabled = !config.animated;
     }
 
-    /** Begin animation of Message Toast entrance into view. */
-    enter(): void {
-        this._animationState = 'visible';
-    }
-
-    /** Begin animation of Message Toast removal. */
-    exit(): void {
-        this._animationState = 'hidden';
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._completeExit();
-    }
-
     /**
      * @hidden
      * Handle end of animations, updating the state of the Message Toast.
@@ -69,6 +54,21 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
                 onEnter.complete();
             });
         }
+    }
+
+    /** Begin animation of Message Toast entrance into view. */
+    enter(): void {
+        this._animationState = 'visible';
+    }
+
+    /** Begin animation of Message Toast removal. */
+    exit(): void {
+        this._animationState = 'hidden';
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._completeExit();
     }
 
     /**

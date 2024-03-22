@@ -58,12 +58,12 @@ class TestDirective implements SelectableItemToken<HTMLElement, string> {
     providers: [SelectionService]
 })
 class HostComponent implements SelectComponentRootToken<string>, AfterViewInit {
+    @ViewChildren(TestDirective) items!: QueryList<TestDirective>;
     value: string | string[] = '3';
     disabled!: boolean;
     multiple = true;
     toggle = false;
     selectedChange = new Subject<string | string[]>();
-    @ViewChildren(TestDirective) items!: QueryList<TestDirective>;
 
     constructor(public readonly selectionService: SelectionService<HTMLElement, string>) {
         selectionService.registerRootComponent(this);
