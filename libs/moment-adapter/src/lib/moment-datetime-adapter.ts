@@ -46,8 +46,6 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     /** @hidden */
     private _localeData: DateLocale;
 
-    fromNow: undefined;
-
     constructor(
         @Optional() @Inject(LOCALE_ID) localeId: string,
         @Optional() @Inject(MOMENT_DATE_TIME_ADAPTER_OPTIONS) private _options?: MomentDatetimeAdapterOptions
@@ -63,6 +61,8 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
             );
         }
     }
+
+    fromNow?(date: Moment): string;
 
     setLocale(locale: string): void {
         this._momentLocaleData = moment.localeData(locale);
