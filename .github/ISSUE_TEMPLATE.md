@@ -22,4 +22,4 @@
 
 #### Is there anything else we should know?
 
-***IMPORTANT: Please refrain from providing links or screenshots of SAP's internal information, as this project is open-source, and its contents are accessible to anyone.***
+**_IMPORTANT: Please refrain from providing links or screenshots of SAP's internal information, as this project is open-source, and its contents are accessible to anyone._**
