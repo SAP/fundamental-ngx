@@ -78,12 +78,6 @@ export class NestedListContentDirective implements AfterContentInit {
         private _itemService: NestedItemService
     ) {}
 
-    /** @hidden */
-    ngAfterContentInit(): void {
-        this._makeLinkUnFocusable();
-        this._setFocusSubscription();
-    }
-
     /** Keyboard Event Handler */
     @HostListener('keydown', ['$event'])
     onKeyDown(event: KeyboardEvent): void {
@@ -95,6 +89,12 @@ export class NestedListContentDirective implements AfterContentInit {
     @HostListener('click', ['$event'])
     onClick(): void {
         this._itemService.click.next();
+    }
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        this._makeLinkUnFocusable();
+        this._setFocusSubscription();
     }
 
     /** Method to trigger selected state change */

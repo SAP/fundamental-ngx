@@ -112,14 +112,8 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
     _display = 'block';
 
     /** @hidden */
-    _narrow = false;
-
-    /** @hidden */
     @HostBinding('attr.role')
     private _role: string;
-
-    /** @hidden */
-    private _expanded = false;
 
     /** @hidden */
     @HostBinding('attr.aria-expanded')
@@ -140,6 +134,12 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
     /** @hidden */
     @HostBinding('attr.aria-hidden')
     private _ariaHidden = true;
+
+    /** @hidden */
+    _narrow = false;
+
+    /** @hidden */
+    private _expanded = false;
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
