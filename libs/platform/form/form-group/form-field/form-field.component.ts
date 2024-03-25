@@ -37,7 +37,7 @@ import { map, startWith, switchMap } from 'rxjs/operators';
 
 import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { Nullable, numberAttribute } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormItemComponent, FormLabelComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InlineHelpDirective } from '@fundamental-ngx/core/inline-help';
@@ -84,7 +84,13 @@ const formGroupChildProvider: Provider = {
     useExisting: forwardRef(() => FormFieldComponent)
 };
 
-type ColumnsInputType = Column | `${Column}`;
+function columnTransformer(v: Column | `${Column}`): Column {
+    return parseInt(v + '', 10) as Column;
+}
+
+function rankTransformer(v: string | number): number {
+    return parseInt(v + '', 10);
+}
 
 /**
  * Form Field represent actual row and aggregates common behavior for the input field such as
@@ -145,7 +151,7 @@ export class FormFieldComponent
      * Rank is used for ordering.
      * First lower number, then - higher
      */
-    @Input({ transform: numberAttribute<string | number> })
+    @Input({ transform: rankTransformer })
     rank: number;
 
     /**
@@ -256,7 +262,7 @@ export class FormFieldComponent
     /**
      * Form field custom width in columns must be between 1 - 12
      */
-    @Input({ transform: numberAttribute<ColumnsInputType, Column> })
+    @Input({ transform: columnTransformer })
     columns: Column = 6;
 
     /**
