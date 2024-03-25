@@ -1,6 +1,6 @@
 {
-    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
     "name": "platform-schematics",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
     "targets": {
         "build": {
             "executor": "@nx/js:tsc",

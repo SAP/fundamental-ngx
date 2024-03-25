@@ -4,6 +4,7 @@
     "sourceRoot": "libs/docs/platform/schema",
     "projectType": "library",
     "prefix": "fdp-doc",
-    "targets": {},
-    "tags": ["type:lib", "scope:docs"]
+    "tags": ["type:lib", "scope:docs"],
+    "// targets": "to see all targets run: nx show project docs-platform-schema --web",
+    "targets": {}
 }
