@@ -51,9 +51,6 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     private _localeData: DateLocale;
 
     /** @hidden */
-    fromNow: undefined;
-
-    /** @hidden */
     constructor(
         @Optional() @Inject(LOCALE_ID) localeId: string,
         @Optional() @Inject(DAYJS_DATE_TIME_ADAPTER_OPTIONS) private _options?: DayjsDatetimeAdapterOptions
@@ -70,6 +67,9 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
 
         this.setLocale(localeId || dayjs.locale());
     }
+
+    /** @hiden */
+    fromNow?(date: dayjs.Dayjs): string;
 
     /** Set locale */
     setLocale(locale: string): void {
