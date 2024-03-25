@@ -46,14 +46,6 @@ export class TabLinkDirective extends AbstractFdNgxClass implements FocusableOpt
     readonly focused = new EventEmitter<void>();
 
     /** @hidden */
-    _setProperties(): void {
-        this._addClassToElement('fd-tabs__link');
-        if (this.active) {
-            this._addClassToElement('is-selected');
-        }
-    }
-
-    /** @hidden */
     @HostListener('focus')
     private _onFocus(): void {
         this.focused.emit();
@@ -64,6 +56,14 @@ export class TabLinkDirective extends AbstractFdNgxClass implements FocusableOpt
     private _onKeyUp(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             this.focused.emit();
+        }
+    }
+
+    /** @hidden */
+    _setProperties(): void {
+        this._addClassToElement('fd-tabs__link');
+        if (this.active) {
+            this._addClassToElement('is-selected');
         }
     }
 

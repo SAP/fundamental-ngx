@@ -61,9 +61,6 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
     readonly deleteClicked = new EventEmitter<any>();
 
     /** @hidden */
-    private _subscriptions = new Subscription();
-
-    /** @hidden */
     fileNameFull: string;
 
     /** @hidden */
@@ -77,6 +74,9 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
 
     /** @hidden */
     readonly elementRef = inject(ElementRef);
+
+    /** @hidden */
+    private _subscriptions = new Subscription();
 
     /** @hidden */
     @HostListener('window:resize', [])

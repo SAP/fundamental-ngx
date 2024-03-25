@@ -45,8 +45,6 @@ import { NestedListDirective } from './nested-list.directive';
     `
 })
 class TestNestedContainerComponent {
-    contentDensity: LocalContentDensityMode = ContentDensityGlobalKeyword;
-
     @ViewChild('level4List', { static: true, read: NestedListDirective })
     level4List: NestedListDirective;
 
@@ -55,6 +53,8 @@ class TestNestedContainerComponent {
 
     @ViewChild('level1List', { static: true, read: NestedListDirective })
     level1List: NestedListDirective;
+
+    contentDensity: LocalContentDensityMode = ContentDensityGlobalKeyword;
 }
 
 describe('NestedListDirective', () => {

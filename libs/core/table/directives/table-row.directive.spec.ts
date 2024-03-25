@@ -13,10 +13,10 @@ import { HIDDEN_CLASS_NAME, TableRowDirective } from './table-row.directive';
     `
 })
 class TestComponent {
-    keys: string[] = ['key1', 'key2', 'key3', 'key4'];
-
     @ViewChild(TableRowDirective)
     tableRow: TableRowDirective;
+
+    keys: string[] = ['key1', 'key2', 'key3', 'key4'];
 
     getElements(): HTMLCollection {
         return (document.getElementById('row') as HTMLElement).children;

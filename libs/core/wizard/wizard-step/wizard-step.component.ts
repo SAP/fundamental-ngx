@@ -73,9 +73,6 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     @Input()
     label: string;
 
-    /** @hidden */
-    glyph: string;
-
     /**
      * The smaller text for labeling the step as optional.
      */
@@ -129,19 +126,22 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     progressBarLink: ElementRef;
 
     /** @hidden */
+    glyph: string;
+
+    /** @hidden */
     visited = false;
 
     /** @hidden */
     completed = false;
 
     /** @hidden */
-    private _subscriptions: Subscription = new Subscription();
-
-    /** @hidden */
     _stepId: number;
 
     /** @hidden */
     _finalStep = false;
+
+    /** @hidden */
+    private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
     constructor(

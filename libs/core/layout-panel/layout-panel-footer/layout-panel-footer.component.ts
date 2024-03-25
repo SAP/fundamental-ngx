@@ -33,16 +33,6 @@ export class LayoutPanelFooterComponent implements OnInit, OnChanges, CssClassBu
     constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
@@ -50,5 +40,15 @@ export class LayoutPanelFooterComponent implements OnInit, OnChanges, CssClassBu
             this.position ? `fd-layout-panel__footer--${this.position}` : '',
             this.class
         ];
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
     }
 }

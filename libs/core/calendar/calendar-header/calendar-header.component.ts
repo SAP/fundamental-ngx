@@ -87,6 +87,10 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
     @Output()
     readonly nextClicked: EventEmitter<void> = new EventEmitter<void>();
 
+    /** @hidden */
+    @ViewChild('prevButton', { read: ElementRef })
+    _prevButtonComponent: ElementRef;
+
     /** Aria label for the previous button. Depends on the active view. */
     get previousAriaLabel(): 'coreCalendar.previousMonthLabel' | 'coreCalendar.previousYearLabel' {
         return this.isOnDayView ? 'coreCalendar.previousMonthLabel' : 'coreCalendar.previousYearLabel';
@@ -208,10 +212,6 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
     get _selectYearsRangeButtonAriaLabelId(): string {
         return this.viewId + '-select-years-range-aria-label';
     }
-
-    /** @hidden */
-    @ViewChild('prevButton', { read: ElementRef })
-    _prevButtonComponent: ElementRef;
 
     /** @hidden  */
     private readonly _destroyRef = inject(DestroyRef);

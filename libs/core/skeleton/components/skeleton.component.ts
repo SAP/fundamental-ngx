@@ -64,9 +64,6 @@ export class SkeletonComponent implements OnChanges {
     }
 
     /** @hidden */
-    _id = `fd-skeleton-${skeletonUniqueId++}`;
-
-    /** @hidden */
     @HostBinding('class.fd-skeleton')
     readonly _skeletonClass = true;
 
@@ -77,6 +74,9 @@ export class SkeletonComponent implements OnChanges {
     /** @hidden */
     @HostBinding('style.height')
     _height: string;
+
+    /** @hidden */
+    _id = `fd-skeleton-${skeletonUniqueId++}`;
 
     /** @hidden */
     private _textLines = 3;

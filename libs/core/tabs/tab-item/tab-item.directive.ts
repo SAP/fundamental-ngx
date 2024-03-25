@@ -51,16 +51,6 @@ export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
     constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
@@ -69,5 +59,15 @@ export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
             this.tabItemState ? `fd-tabs__item--${this.tabItemState}` : '',
             this.class
         ];
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 }

@@ -6,10 +6,11 @@ import {
     Injectable,
     InjectFlags,
     Injector,
-    Renderer2
+    Renderer2,
+    Signal
 } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, distinctUntilChanged, map } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, map, Observable } from 'rxjs';
 import { ContentDensityObserverSettings } from '../classes/content-density-observer.settings';
 import { ContentDensityObserverTarget } from '../content-density.types';
 import { getChangesSource$ } from '../helpers/get-changes-source.provider';
@@ -74,29 +75,19 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
     /** @hidden */
     readonly config: ContentDensityObserverSettings;
     /** @hidden */
-    private readonly _isCompact$ = new BehaviorSubject<boolean>(false);
+    readonly isCompact$: Observable<boolean>;
     /** @hidden */
-    private readonly _isCozy$ = new BehaviorSubject<boolean>(false);
+    readonly isCozy$: Observable<boolean>;
     /** @hidden */
-    private readonly _isCondensed$ = new BehaviorSubject<boolean>(false);
+    readonly isCondensed$: Observable<boolean>;
     /** @hidden */
-    // eslint-disable-next-line @typescript-eslint/member-ordering
-    readonly isCompact$ = this._isCompact$.asObservable();
-    /** @hidden */
-    // eslint-disable-next-line @typescript-eslint/member-ordering
-    readonly isCozy$ = this._isCozy$.asObservable();
-    /** @hidden */
-    // eslint-disable-next-line @typescript-eslint/member-ordering
-    readonly isCondensed$ = this._isCondensed$.asObservable();
+    readonly isCompactSignal: Signal<boolean>;
 
     /** @hidden */
-    readonly isCompactSignal = toSignal(this.isCompact$);
+    readonly isCozySignal: Signal<boolean>;
 
     /** @hidden */
-    readonly isCozySignal = toSignal(this.isCozy$);
-
-    /** @hidden */
-    readonly isCondensedSignal = toSignal(this.isCondensed$);
+    readonly isCondensedSignal: Signal<boolean>;
 
     /** @hidden */
     get isCompact(): boolean {
@@ -110,6 +101,13 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
     get isCondensed(): boolean {
         return this._isCondensed$.value;
     }
+    /** @hidden */
+    private readonly _isCompact$ = new BehaviorSubject<boolean>(false);
+    /** @hidden */
+    private readonly _isCozy$ = new BehaviorSubject<boolean>(false);
+
+    /** @hidden */
+    private readonly _isCondensed$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
     private _globalContentDensityService = inject(GlobalContentDensityService, {
@@ -151,6 +149,12 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
     /** @hidden */
     constructor(_injector: Injector, _providedConfig?: ContentDensityObserverSettings) {
         super(initialContentDensity(_injector, _providedConfig));
+        this.isCompact$ = this._isCompact$.asObservable();
+        this.isCozy$ = this._isCozy$.asObservable();
+        this.isCondensed$ = this._isCondensed$.asObservable();
+        this.isCompactSignal = toSignal(this.isCompact$, { initialValue: this._isCompact$.value });
+        this.isCozySignal = toSignal(this.isCozy$, { initialValue: this._isCozy$.value });
+        this.isCondensedSignal = toSignal(this.isCondensed$, { initialValue: this._isCondensed$.value });
 
         this._destroyRef.onDestroy(() => {
             this.complete();

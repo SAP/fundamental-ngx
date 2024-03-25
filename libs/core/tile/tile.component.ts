@@ -58,19 +58,6 @@ export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges 
     @ViewChild('container')
     ref: ElementRef;
 
-    /** @hidden */
-    private _clickable = false;
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this.buildComponentCssClass();
-    }
-
     /** @hidden
      * CssClassBuilder interface implementation
      * function must return single string
@@ -86,6 +73,16 @@ export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges 
             this.action ? 'fd-tile--action' : '',
             this.class
         ];
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */

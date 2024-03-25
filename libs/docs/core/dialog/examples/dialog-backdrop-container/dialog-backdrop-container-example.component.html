@@ -4,7 +4,7 @@
 
 <button fd-button (click)="openStaticDialog(dialogTemplate, customContainer)" label="Static Dialog"></button>
 
-<div #customContainer style="margin-top: 0.5rem"></div>
+<div #customContainer [style.margin-top.rem]="0.5"></div>
 
 <ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
     <fd-dialog [dialogRef]="dialog" [dialogConfig]="dialogConfig">

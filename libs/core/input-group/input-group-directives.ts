@@ -36,6 +36,16 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
         _contentDensityObserver.subscribe();
     }
 
+    /** @hidden
+     * CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return ['fd-input', 'fd-input-group__input'];
+    }
+
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
@@ -49,16 +59,6 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-    }
-
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return ['fd-input', 'fd-input-group__input'];
     }
 }
 
@@ -119,6 +119,21 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
         _contentDensityObserver.subscribe();
     }
 
+    /** @hidden
+     * CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [
+            'fd-input-group__addon',
+            this.button ? 'fd-input-group__addon--button' : '',
+            this.type ? 'fd-input-group__addon--' + this.type : '',
+            this.state ? 'is-' + this.state : ''
+        ];
+    }
+
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
@@ -141,21 +156,6 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-    }
-
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            'fd-input-group__addon',
-            this.button ? 'fd-input-group__addon--button' : '',
-            this.type ? 'fd-input-group__addon--' + this.type : '',
-            this.state ? 'is-' + this.state : ''
-        ];
     }
 }
 

@@ -15,7 +15,6 @@ const strictEquals = (a: unknown, b: unknown): boolean => a === b;
     hostDirectives: [
         {
             directive: CvaDirective,
-            // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
             inputs: ['id:inputId', 'stateMessage', 'disabled', 'readonly', 'name']
         }
     ],

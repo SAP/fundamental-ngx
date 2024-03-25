@@ -91,6 +91,13 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
     }
 
     /** @hidden */
+    @HostListener('keydown', ['$event'])
+    keyDownHandler(event: KeyboardEvent): void {
+        this._keyManager.onKeydown(event);
+        event.stopPropagation();
+    }
+
+    /** @hidden */
     ngAfterContentInit(): void {
         this._contentInited.set(true);
 
@@ -148,12 +155,5 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
         merge(...interactionChangesIndexes)
             .pipe(takeUntil(completion$))
             .subscribe(({ index, updateOnly }) => this.setItemActive(index, updateOnly));
-    }
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    keyDownHandler(event: KeyboardEvent): void {
-        this._keyManager.onKeydown(event);
-        event.stopPropagation();
     }
 }

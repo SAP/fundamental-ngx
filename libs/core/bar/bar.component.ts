@@ -74,21 +74,6 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
         this._contentDensityObserver.subscribe();
     }
 
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
     /** @hidden
      * CssClassBuilder interface implementation
      * function must return single string
@@ -106,5 +91,20 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
             this.inHomePage && this.size ? `fd-bar--home-page-${this.size}` : '',
             this.class
         ];
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
     }
 }

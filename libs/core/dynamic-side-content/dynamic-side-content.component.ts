@@ -62,6 +62,10 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
     @HostBinding('attr.id')
     id = 'fd-dynamic-side-content-id-' + componentId++;
 
+    /** @hidden */
+    @ContentChildren(DYNAMIC_SIDE_CONTENT_CHILD_TOKEN as any)
+    private _children: QueryList<DynamicSideContentMainComponent | DynamicSideContentSideComponent>;
+
     /**
      * @hidden
      * required by CssClassBuilder
@@ -73,10 +77,6 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
      * Indicates when side content should be rendered before or after main content
      */
     _isSideBefore = true;
-
-    /** @hidden */
-    @ContentChildren(DYNAMIC_SIDE_CONTENT_CHILD_TOKEN as any)
-    private _children: QueryList<DynamicSideContentMainComponent | DynamicSideContentSideComponent>;
 
     /** @hidden */
     private _isSideProjectedAsFirst = false;
@@ -91,6 +91,16 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
     ) {}
 
     /** @hidden */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [
+            DYNAMIC_SIDE_CONTENT_CLASS_NAME.container,
+            getSizeClassName(this.size),
+            getPositionClassName(this.position)
+        ].filter((v): v is string => !!v);
+    }
+
+    /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
@@ -103,16 +113,6 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
     /** @hidden */
     ngAfterContentInit(): void {
         this._listenToChildrenOrder();
-    }
-
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            DYNAMIC_SIDE_CONTENT_CLASS_NAME.container,
-            getSizeClassName(this.size),
-            getPositionClassName(this.position)
-        ].filter((v): v is string => !!v);
     }
 
     /** @hidden */

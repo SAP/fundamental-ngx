@@ -8,25 +8,31 @@ export enum FD_DIALOG_DISMISS_REASON {
 
 export class DialogRefBase<T, P = any> {
     /** @hidden */
-    protected readonly _afterClosed = new Subject<P | undefined>();
-
-    /** @hidden */
-    protected readonly _afterLoaded = new Subject<boolean>();
-
-    /** @hidden */
     public _endClose$ = new Subject<void>();
 
     /**
      * Observable that is triggered when the dialog is closed.
      * On close a *result* is passed back. On dismiss, an *error* is returned instead.
      */
-    public afterClosed: Observable<P | undefined> = this._afterClosed.asObservable();
+    public afterClosed: Observable<P | undefined>;
 
     /** Observable that is triggered when the modal view is initialised. */
-    public afterLoaded: Observable<boolean> = this._afterLoaded.asObservable();
+    public afterLoaded: Observable<boolean>;
 
     /** Data passed from the calling component to the content.*/
     public data: T;
+
+    /** @hidden */
+    protected readonly _afterClosed = new Subject<P | undefined>();
+
+    /** @hidden */
+    protected readonly _afterLoaded = new Subject<boolean>();
+
+    /** @hidden */
+    constructor() {
+        this.afterClosed = this._afterClosed.asObservable();
+        this.afterLoaded = this._afterLoaded.asObservable();
+    }
 
     /**
      * Closes the dialog and passes the argument to the afterClosed observable.

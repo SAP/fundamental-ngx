@@ -254,34 +254,6 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
     }
 
     /** @hidden */
-    ngOnInit(): void {
-        this._subscriptions.add(this._elementsAtOnce$.pipe(tap(() => this._setUpCarouselConfiguration())).subscribe());
-        this._setUpQuerySubscription();
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this._subscriptions.add(
-            resizeObservable(this._elmRef.nativeElement).subscribe(() => {
-                this._resize$.next(true);
-            })
-        );
-        this._viewInit$.next(true);
-    }
-
-    /** @hidde */
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.columnTranslationsPreset) {
-            this._updateInternalTranslationConfig();
-        }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
-    }
-
-    /** @hidden */
     @HostListener('click')
     onItemClick(): void {
         this.activeStateChange.emit();
@@ -310,6 +282,34 @@ export class TimeColumnComponent<K extends number, T extends SelectableViewItem<
         if (this._active) {
             event.deltaY > 0 ? this.scrollDown() : this.scrollUp();
         }
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._subscriptions.add(this._elementsAtOnce$.pipe(tap(() => this._setUpCarouselConfiguration())).subscribe());
+        this._setUpQuerySubscription();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._subscriptions.add(
+            resizeObservable(this._elmRef.nativeElement).subscribe(() => {
+                this._resize$.next(true);
+            })
+        );
+        this._viewInit$.next(true);
+    }
+
+    /** @hidde */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.columnTranslationsPreset) {
+            this._updateInternalTranslationConfig();
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
     }
 
     /** @hidden */

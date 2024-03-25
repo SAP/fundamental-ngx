@@ -39,9 +39,9 @@ import { FacetComponent } from './facet.component';
     `
 })
 class TestComponent {
-    title = 'Some title ';
     @ViewChild(FacetComponent) facetComponent: FacetComponent;
     @ViewChild(FacetContentComponent) facetContentComponent: FacetContentComponent;
+    title = 'Some title ';
 }
 
 describe('FormFacetComponent', () => {

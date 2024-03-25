@@ -8,7 +8,6 @@ export interface SearchComponent {
     forceSearchButton: boolean;
     searchSubmit: EventEmitter<{ text: string; category: string | null }>;
     elementRef: ElementRef<HTMLElement>;
-    focus(): void;
     appearance?: {
         searchClass: string;
         searchFieldClass: string;
@@ -21,4 +20,5 @@ export interface SearchComponent {
         removeGroupButtonClass: boolean;
         helperClass?: string;
     };
+    focus(): void;
 }

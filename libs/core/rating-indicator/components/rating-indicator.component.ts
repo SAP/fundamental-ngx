@@ -189,20 +189,6 @@ export class RatingIndicatorComponent
     _ratingItems: RatingViewItem[] = [];
 
     /** @hidden */
-    private _ratingUID = ratingUID++;
-    /** @hidden */
-    private _indicatorCapacity = INDICATOR_DEFAULT_CAPACITY;
-    /** @hidden */
-    private _value = 0;
-    /** @hidden */
-    private _hideDynamicText = false;
-
-    /** @hidden */
-    constructor(
-        public readonly elementRef: ElementRef,
-        private readonly _changeDetectorRef: ChangeDetectorRef
-    ) {}
-    /** @hidden */
     get viewRatingUID(): number {
         return this._ratingUID;
     }
@@ -213,6 +199,40 @@ export class RatingIndicatorComponent
     /** @hidden */
     get viewValue(): number {
         return this._value;
+    }
+
+    /** @hidden */
+    private _ratingUID = ratingUID++;
+    /** @hidden */
+    private _indicatorCapacity = INDICATOR_DEFAULT_CAPACITY;
+    /** @hidden */
+    private _value = 0;
+
+    /** @hidden */
+    private _hideDynamicText = false;
+    /** @hidden */
+    constructor(
+        public readonly elementRef: ElementRef,
+        private readonly _changeDetectorRef: ChangeDetectorRef
+    ) {}
+
+    /** @hidden
+     * CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        this.sizeClass = this._getSizeClass(this.size);
+
+        return [
+            INDICATOR_PREFIX,
+            this.sizeClass,
+            this.allowHalves ? INDICATOR_CLASSES.halves : '',
+            !!this.ratedIcon && !!this.unratedIcon ? INDICATOR_CLASSES.icon : '',
+            this._hideDynamicText || !this._value ? INDICATOR_CLASSES.hideDynamicText : '',
+            this.class
+        ];
     }
 
     /** @hidden */
@@ -266,11 +286,11 @@ export class RatingIndicatorComponent
     registerOnChange(fn: (value: number) => void): void {
         this.onChange = fn;
     }
-
     /** @hidden */
     registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
+
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
@@ -282,25 +302,6 @@ export class RatingIndicatorComponent
         this.onChange(value);
         this.onTouched();
         this.ratingChanged.emit(value);
-    }
-
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        this.sizeClass = this._getSizeClass(this.size);
-
-        return [
-            INDICATOR_PREFIX,
-            this.sizeClass,
-            this.allowHalves ? INDICATOR_CLASSES.halves : '',
-            !!this.ratedIcon && !!this.unratedIcon ? INDICATOR_CLASSES.icon : '',
-            this._hideDynamicText || !this._value ? INDICATOR_CLASSES.hideDynamicText : '',
-            this.class
-        ];
     }
 
     /**

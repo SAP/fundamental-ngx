@@ -101,26 +101,12 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     }
 
     /** @hidden */
-    private _groupFlex: Nullable<ShellbarGroupFlexOptions>;
-
-    /** @hidden */
     @ContentChild(FD_COMBOBOX_COMPONENT, { static: false })
     comboboxComponent: ComboboxInterface;
 
     /** @hidden */
     @ContentChildren(FD_BUTTON_COMPONENT, { read: ElementRef })
     buttons: QueryList<ElementRef>;
-
-    /** @hidden */
-    @ContentChild(ShellbarActionsComponent)
-    private _actions: ShellbarActionsComponent;
-
-    /** @hidden */
-    private _searchPortal: DomPortal;
-
-    /** @hidden */
-    @ViewChild('searchPortalOutlet', { static: false, read: CdkPortalOutlet })
-    private readonly _searchPortalOutlet: CdkPortalOutlet;
 
     /**
      * Search component placed inside the shellbar
@@ -179,7 +165,12 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     }
 
     /** @hidden */
-    private _searchComponent: Nullable<SearchComponent>;
+    @ContentChild(ShellbarActionsComponent)
+    private _actions: ShellbarActionsComponent;
+
+    /** @hidden */
+    @ViewChild('searchPortalOutlet', { static: false, read: CdkPortalOutlet })
+    private readonly _searchPortalOutlet: CdkPortalOutlet;
 
     /** @hidden */
     @ViewChild('shellbar')
@@ -201,10 +192,19 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     }
 
     /** @hidden */
-    private readonly _currentSize$ = new BehaviorSubject<ShellbarSizes>(this._currentSize);
+    _showMobileSearch = false;
 
     /** @hidden */
-    _showMobileSearch = false;
+    private _groupFlex: Nullable<ShellbarGroupFlexOptions>;
+
+    /** @hidden */
+    private _searchPortal: DomPortal;
+
+    /** @hidden */
+    private _searchComponent: Nullable<SearchComponent>;
+
+    /** @hidden */
+    private readonly _currentSize$ = new BehaviorSubject<ShellbarSizes>(this._currentSize);
 
     /** @hidden */
     private _size: ShellbarSizes | undefined;

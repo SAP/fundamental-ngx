@@ -58,16 +58,6 @@ export class LayoutGridComponent implements OnInit, OnChanges, CssClassBuilder {
     constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
@@ -77,5 +67,15 @@ export class LayoutGridComponent implements OnInit, OnChanges, CssClassBuilder {
             this.noGap ? CSS_CLASS_NAME.layoutGridNoGap : '',
             this._class
         ];
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
     }
 }

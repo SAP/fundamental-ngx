@@ -68,12 +68,6 @@ export class AvatarGroupLegacyComponent
     @Input()
     ariaLabel: Nullable<string>;
 
-    /** Counter for all avatars. */
-    allItemsCount = 0;
-
-    /** Counter for visible in overflow popover avatars. */
-    overflowItemsCount = 0;
-
     /** @hidden Avatar Group items. */
     @ContentChildren(AvatarGroupLegacyItemDirective, { descendants: true })
     mainItems: QueryList<AvatarGroupLegacyItemDirective>;
@@ -81,6 +75,12 @@ export class AvatarGroupLegacyComponent
     /** @hidden */
     @ViewChild('avatarGroupContainer')
     avatarGroupContainer: ElementRef<HTMLDivElement>;
+
+    /** Counter for all avatars. */
+    allItemsCount = 0;
+
+    /** Counter for visible in overflow popover avatars. */
+    overflowItemsCount = 0;
 
     /** @hidden */
     rootClassNames: Record<string, boolean | undefined | null>;
@@ -129,6 +129,24 @@ export class AvatarGroupLegacyComponent
     ) {}
 
     /** @hidden */
+    @HostListener('keyup', ['$event'])
+    keyUpHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, TAB)) {
+            const index = this.mainItems.toArray().findIndex((item) => item._element === event.target);
+            if (index !== -1) {
+                this._keyboardEventsManager.setActiveItem(index);
+            }
+        }
+
+        if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
+            event.preventDefault();
+
+            // passing the event to key manager so we get a change fired
+            this._keyboardEventsManager.onKeydown(event);
+        }
+    }
+
+    /** @hidden */
     ngOnInit(): void {
         this._subscription.add(this._viewportRuler.change().subscribe(() => this._onResize()));
     }
@@ -157,24 +175,6 @@ export class AvatarGroupLegacyComponent
     ngOnDestroy(): void {
         this._subscription.unsubscribe();
         this._keyboardEventsManager.destroy();
-    }
-
-    /** @hidden */
-    @HostListener('keyup', ['$event'])
-    keyUpHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, TAB)) {
-            const index = this.mainItems.toArray().findIndex((item) => item._element === event.target);
-            if (index !== -1) {
-                this._keyboardEventsManager.setActiveItem(index);
-            }
-        }
-
-        if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
-            event.preventDefault();
-
-            // passing the event to key manager so we get a change fired
-            this._keyboardEventsManager.onKeydown(event);
-        }
     }
 
     /** @hidden */

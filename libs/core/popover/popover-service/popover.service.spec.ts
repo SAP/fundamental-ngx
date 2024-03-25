@@ -23,16 +23,16 @@ class PopoverTestComponent extends BasePopoverClass {
     @ViewChild('templateRef') template: TemplateRef<any>;
     @ViewChild('triggerElement', { read: ElementRef }) triggerRef: ElementRef;
 
+    constructor(public popoverService: PopoverService) {
+        super();
+    }
+
     getPopoverTemplateData(): PopoverTemplate {
         return {
             template: this.template,
             container: this.container,
             popoverBody: this.popoverBody
         };
-    }
-
-    constructor(public popoverService: PopoverService) {
-        super();
     }
 }
 

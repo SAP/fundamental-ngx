@@ -81,6 +81,24 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
         this._contentDensityObserver.subscribe();
     }
 
+    /** @hidden
+     * CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [`fd-tabs`, this.mode ? 'fd-tabs--' + this.mode : '', `fd-tabs--${this.size}`, this.class];
+    }
+
+    /** @hidden */
+    @HostListener('keyup', ['$event'])
+    private _keyUpHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
+            this._keyboardEventsManager.onKeydown(event);
+        }
+    }
+
     /** @hidden */
     ngAfterContentInit(): void {
         this._setupKeyManager();
@@ -102,16 +120,6 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._keyboardEventsManager?.destroy();
-    }
-
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [`fd-tabs`, this.mode ? 'fd-tabs--' + this.mode : '', `fd-tabs--${this.size}`, this.class];
     }
 
     /** Function that gives possibility to get all the link directives, with and without nav__item wrapper */
@@ -176,13 +184,5 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
         this._rtlService?.rtl.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isRtl) => {
             this._keyboardEventsManager.withHorizontalOrientation(isRtl ? 'rtl' : 'ltr');
         });
-    }
-
-    /** @hidden */
-    @HostListener('keyup', ['$event'])
-    private _keyUpHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
-            this._keyboardEventsManager.onKeydown(event);
-        }
     }
 }

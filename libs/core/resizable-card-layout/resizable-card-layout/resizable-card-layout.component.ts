@@ -131,6 +131,12 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
     }
 
     /** @hidden */
+    @HostListener('window:resize')
+    onResize(): void {
+        this._createLayout();
+    }
+
+    /** @hidden */
     ngOnInit(): void {
         this._columnsHeight = new Array(this._columns);
         this._columnsHeight.fill(0);
@@ -162,12 +168,6 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
     /** @hidden */
     ngOnDestroy(): void {
         this._keyboardEventsManager?.destroy();
-    }
-
-    /** @hidden */
-    @HostListener('window:resize')
-    onResize(): void {
-        this._createLayout();
     }
 
     /** Layout size. Available options are 'sm', 'md', 'lg' and 'xl' */
@@ -502,7 +502,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
     private _setCardPositionValues(card: ResizableCardItemComponent, index: number): void {
         const directionPosition = this._directionPosition$();
         if (index === 0) {
-            card[directionPosition] = 0 + this._paddingLeft;
+            card[directionPosition] = Number(this._paddingLeft);
             card.top = 0;
             card.startingColumnPosition = 0;
             return;
@@ -534,10 +534,9 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
         }
         // check for each card position, starting from leftmost
         let isFitting = false;
-        let startingColumnPosition = -1;
-
         // try to fit as left (or right if Rtl) as possible from the column position
-        startingColumnPosition = this._fitCardColumnPosition(card, columnPositions, height);
+        const startingColumnPosition = this._fitCardColumnPosition(card, columnPositions, height);
+
         if (startingColumnPosition !== -1) {
             isFitting = true;
             card[directionPosition] =

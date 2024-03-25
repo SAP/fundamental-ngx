@@ -3,7 +3,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, Injectable, Injector, Type, inject } from '@angular/core';
 import { ResponsiveBreakpoints, ViewportSizeObservable } from '@fundamental-ngx/cdk/utils';
 import { patchLanguage } from '@fundamental-ngx/i18n';
-import { BehaviorSubject, Subject, combineLatest, map, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, combineLatest, map, tap } from 'rxjs';
 import { applyDefaultConfig } from './default-config';
 import { MessageStripAlertContainerComponent } from './message-strip-alert-container/message-strip-alert-container.component';
 import { MessageStripAlertPosition } from './message-strip-alert.position';
@@ -24,6 +24,9 @@ import { MessageStripAlertComponentData, MessageStripAlertContainerPosition } fr
     providedIn: 'root'
 })
 export class MessageStripAlertService {
+    /** @hidden */
+    footerComponents$: Observable<Partial<Record<MessageStripAlertPosition, Type<any>>>>;
+
     /** @hidden */
     private injector = inject(Injector);
 
@@ -60,14 +63,12 @@ export class MessageStripAlertService {
     private _messageStripAlertContainerFooters$ = new BehaviorSubject<
         Partial<Record<MessageStripAlertPosition, Type<any>>>
     >({});
-
-    /** @hidden */
-    footerComponents$ = this._messageStripAlertContainerFooters$.asObservable();
     /** @hidden */
     constructor() {
         if (this._messageStripAlertService) {
             throw new Error('MessageStripAlertService is already provided');
         }
+        this.footerComponents$ = this._messageStripAlertContainerFooters$.asObservable();
         this.listenToItemsChanges();
     }
 

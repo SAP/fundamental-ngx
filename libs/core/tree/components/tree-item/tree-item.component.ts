@@ -35,7 +35,7 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { Subject, distinctUntilChanged, filter, startWith, switchMap } from 'rxjs';
+import { Observable, Subject, distinctUntilChanged, filter, startWith, switchMap } from 'rxjs';
 import { FdTreeAcceptableDataSource, FdTreeDataSource } from '../../data-source/tree-data-source';
 import { TreeItemDirective } from '../../directives/tree-item.directive';
 import { BaseTreeItem } from '../../models/base-tree-item.class';
@@ -223,17 +223,14 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
     /** @hidden */
     _totalChildrenLoaded = false;
 
+    /** Clicked behavior implementation. */
+    clicked: Observable<MouseEvent | KeyboardEvent>;
+
     /** @hidden */
     readonly elementRef = inject(ElementRef);
 
     /** @hidden */
-    private _parentId: Nullable<string>;
-
-    /** @hidden */
-    private _level: number;
-
-    /** @hidden */
-    private _expanded = false;
+    readonly _treeService = inject(TreeService);
 
     /** Whether the tree item has any type of child nodes. */
     get hasChildren(): boolean {
@@ -249,7 +246,6 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
     get hasDsChildren(): boolean {
         return this._dsChildrenNumber > 0;
     }
-
     /** Whether the item is accessible via keyboard. */
     get keyboardAccessible(): boolean {
         return this._parentTreeItem === null
@@ -258,22 +254,23 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
     }
 
     /** @hidden */
+    private _parentId: Nullable<string>;
+
+    /** @hidden */
+    private _level: number;
+
+    /** @hidden */
+    private _expanded = false;
+    /** @hidden */
     private _dsChildrenNumber = 0;
 
     /** @hidden */
     private readonly _clicked$ = new Subject<MouseEvent | KeyboardEvent>();
 
-    /** Clicked behavior implementation. */
-    // eslint-disable-next-line @typescript-eslint/member-ordering
-    clicked = this._clicked$.asObservable();
-
     /** @hidden */
     private readonly _treeItemDir = inject<TreeItemDirective<T, P>>(TreeItemDirective, {
         optional: true
     });
-
-    /** @hidden */
-    readonly _treeService = inject(TreeService);
 
     /** @hidden */
     private readonly _dataSourceDirective = inject<DataSourceDirective<T, FdTreeDataSource<T>>>(DataSourceDirective);
@@ -294,6 +291,7 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
     constructor() {
         super();
         this._treeItemDir?.setTreeItem(this);
+        this.clicked = this._clicked$.asObservable();
     }
 
     /** @hidden */

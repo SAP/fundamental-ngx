@@ -27,14 +27,14 @@ import { OverflowLayoutService } from './overflow-layout.service';
     `
 })
 export class TestComponent {
+    @ViewChild(OverflowLayoutComponent)
+    overflowLayout: OverflowLayoutComponent;
+
     elementsWidth = 200;
     containerWidth = 1000;
     maxItems = 3;
 
     itemsToRender = new Array(10).fill(null);
-
-    @ViewChild(OverflowLayoutComponent)
-    overflowLayout: OverflowLayoutComponent;
 
     addItem(): void {
         this.itemsToRender.push(null);

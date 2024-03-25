@@ -14,7 +14,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Nullable, RangeSelector } from '@fundamental-ngx/cdk/utils';
-import { BehaviorSubject, Subscription, filter } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, filter } from 'rxjs';
 import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';
 import {
     GridListSelectionActions,
@@ -84,6 +84,9 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
     }
 
     /** @hidden */
+    readonly _selectedItems$: Observable<GridListSelectionEvent<T>>;
+
+    /** @hidden */
     private _gridListItems: QueryList<GridListItemComponent<T>>;
 
     /** @hidden */
@@ -101,14 +104,12 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
     private readonly _selectedItemsSubject$ = new BehaviorSubject<GridListSelectionEvent<T>>(this._selectedItems);
 
     /** @hidden */
-    readonly _selectedItems$ = this._selectedItemsSubject$.asObservable();
-
-    /** @hidden */
     private readonly subscription = new Subscription();
 
     /** @hidden */
     constructor(private readonly _cd: ChangeDetectorRef) {
         super();
+        this._selectedItems$ = this._selectedItemsSubject$.asObservable();
         const selectedItemsSub = this._selectedItems$
             .pipe(filter(() => !!this._gridListItems))
             .subscribe(this.selectionChange);

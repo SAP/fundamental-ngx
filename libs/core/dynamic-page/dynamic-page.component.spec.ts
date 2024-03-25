@@ -29,10 +29,10 @@ import { DynamicPageModule } from './dynamic-page.module';
     </fd-dynamic-page>`
 })
 class TestComponent {
-    tabs = false;
-
     @ViewChild(DynamicPageComponent)
     dynamicPage: DynamicPageComponent;
+
+    tabs = false;
 }
 describe('DynamicPageComponent default values', () => {
     let component: TestComponent;

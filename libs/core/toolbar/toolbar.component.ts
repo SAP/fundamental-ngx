@@ -169,6 +169,10 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     }
 
     /** @hidden */
+    @HostBinding('attr.role')
+    private readonly _role = 'toolbar';
+
+    /** @hidden */
     overflowItems$: Observable<ToolbarItem[]>;
 
     /** @hidden */
@@ -176,10 +180,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
 
     /** HTML Element Reference. */
     readonly elementRef = inject(ElementRef);
-
-    /** @hidden */
-    @HostBinding('attr.role')
-    private readonly _role = 'toolbar';
 
     /** @hidden */
     private _titleComponent$: BehaviorSubject<TitleToken | null> = new BehaviorSubject<TitleToken | null>(null);
@@ -397,8 +397,11 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
 
         return groups.reduce((acc, itemGroup) => {
             const sortedPriorities = groupedCollection![itemGroup]
-                .map((i) => i.priority)
-                .filter((prio) => prio !== OverflowPriorityEnum.ALWAYS && prio !== OverflowPriorityEnum.NEVER)
+                .map((i: ToolbarItem) => i.priority)
+                .filter(
+                    (prio: OverflowPriority) =>
+                        prio !== OverflowPriorityEnum.ALWAYS && prio !== OverflowPriorityEnum.NEVER
+                )
                 .sort(this._sortPriorities);
 
             acc[itemGroup] = sortedPriorities[0];

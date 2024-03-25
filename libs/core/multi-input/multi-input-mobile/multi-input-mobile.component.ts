@@ -39,10 +39,10 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.inter
 })
 export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterface> implements OnInit {
     /** @hidden */
-    allItemsSelected: boolean;
+    @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
     /** @hidden */
-    @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
+    allItemsSelected: boolean;
 
     /** @hidden
      * For internal usage
