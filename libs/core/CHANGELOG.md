@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.49.1-rc.2...v0.49.1-rc.3) (2024-03-25)
+
+
+### Bug Fixes
+
+* **core:** open combobox on paste event ([#11582](https://github.com/SAP/fundamental-ngx/issues/11582)) ([efcecff](https://github.com/SAP/fundamental-ngx/commit/efcecffbaeaf31659d237a545b43988b04ab3f41))
+
+
+
+
+
 ## [0.49.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.49.1-rc.1...v0.49.1-rc.2) (2024-03-25)
 
 **Note:** Version bump only for package @fundamental-ngx/core
