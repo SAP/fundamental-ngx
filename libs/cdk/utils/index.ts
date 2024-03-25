@@ -14,7 +14,6 @@ export * from './drag-and-drop';
 export * from './dynamic-component';
 export * from './functions';
 export * from './helpers';
-export * from './input-transformers/number-attribute';
 export * from './interfaces';
 export * from './list-item/list-item-utils';
 export * from './models/nullable';
