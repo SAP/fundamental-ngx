@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.30](https://github.com/SAP/fundamental-ngx/compare/v0.43.29...v0.43.30) (2024-03-22)
+
+
+### Bug Fixes
+
+* do not set tabindex="-1" in setTabbable ([#11557](https://github.com/SAP/fundamental-ngx/issues/11557)) ([01ba384](https://github.com/SAP/fundamental-ngx/commit/01ba384b95e0365852d7af0d5ce4984bef1b7335))
+
+
+
+
+
 ## [0.43.29](https://github.com/SAP/fundamental-ngx/compare/v0.43.28...v0.43.29) (2024-03-06)
 
 

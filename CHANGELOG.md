@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.30](https://github.com/SAP/fundamental-ngx/compare/v0.43.29...v0.43.30) (2024-03-22)
+
+
+### Bug Fixes
+
+* **core:** pass aria-label to the close button ([c66bd10](https://github.com/SAP/fundamental-ngx/commit/c66bd1087b9cde9c59b4de0d0997f1fda5a202e2))
+* **core:** redundant aria-label on select component ([#11590](https://github.com/SAP/fundamental-ngx/issues/11590)) ([3807f49](https://github.com/SAP/fundamental-ngx/commit/3807f49ead324ec309c27ace8410c450e59d7793))
+* **core:** redundant aria-label on select component ([#11593](https://github.com/SAP/fundamental-ngx/issues/11593)) ([9abb782](https://github.com/SAP/fundamental-ngx/commit/9abb78281c1e45463686a3fe6a26e9c76fd90fbb))
+* do not set tabindex="-1" in setTabbable ([#11557](https://github.com/SAP/fundamental-ngx/issues/11557)) ([01ba384](https://github.com/SAP/fundamental-ngx/commit/01ba384b95e0365852d7af0d5ce4984bef1b7335))
+* **platform:** (ng-15-downport) add input to remove space node from ApprovalFlow graph ([#11584](https://github.com/SAP/fundamental-ngx/issues/11584)) ([ff013c9](https://github.com/SAP/fundamental-ngx/commit/ff013c91a4b9cecf5501084246f37fc4951b9d96))
+* **platform:** add proper z-index to Table toolbar so checkboxes don't go over it ([#11553](https://github.com/SAP/fundamental-ngx/issues/11553)) ([8221867](https://github.com/SAP/fundamental-ngx/commit/8221867d3e59f380d64ccebf4d5f6ce1efff7996))
+* **platform:** add validator input for p13 filter component ([#11535](https://github.com/SAP/fundamental-ngx/issues/11535)) ([c306581](https://github.com/SAP/fundamental-ngx/commit/c30658189f391b64b94a0f8448c0d8db25e22e7d))
+* **platform:** fix p13 dialog focus ([#11519](https://github.com/SAP/fundamental-ngx/issues/11519)) ([beeef66](https://github.com/SAP/fundamental-ngx/commit/beeef66157f961d52e941f9320ec0526483fb29a))
+
+
+
+
+
 ## [0.43.29](https://github.com/SAP/fundamental-ngx/compare/v0.43.28...v0.43.29) (2024-03-06)
 
 
