@@ -141,14 +141,19 @@ export class SideNavigationComponent
     private readonly _cdRef = inject(ChangeDetectorRef);
 
     /** @hidden */
-    private readonly _elementRef = inject(ElementRef);
-
-    /** @hidden */
     constructor() {
         this._keyboardService.refresh$.pipe(takeUntilDestroyed()).subscribe(() => {
             /** Refresh list of elements, that are being supported by keyboard */
             this._keyboardService.refreshItems(this.getLists());
         });
+    }
+
+    /** @hidden */
+    @HostListener('window:resize')
+    onResize(): void {
+        if (this.collapseWidth) {
+            this._condensed = window.innerWidth <= this.collapseWidth;
+        }
     }
 
     /** @hidden */
@@ -182,14 +187,6 @@ export class SideNavigationComponent
     ngAfterViewInit(): void {
         if (this.sideNavigationConfiguration) {
             this._keyboardService.refreshItems(this.getLists());
-        }
-    }
-
-    /** @hidden */
-    @HostListener('window:resize')
-    onResize(): void {
-        if (this.collapseWidth) {
-            this._condensed = window.innerWidth <= this.collapseWidth;
         }
     }
 

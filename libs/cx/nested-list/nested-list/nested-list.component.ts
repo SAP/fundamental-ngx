@@ -11,7 +11,8 @@ import {
     OnDestroy,
     Optional,
     QueryList,
-    forwardRef
+    forwardRef,
+    inject
 } from '@angular/core';
 import { Observable, Subscription, combineLatest, startWith } from 'rxjs';
 
@@ -74,9 +75,6 @@ export class NestedListComponent implements AfterContentInit, NestedListInterfac
     private _nestedLists: QueryList<NestedListComponent>;
 
     /** @hidden */
-    private _nestedItemsChangesSubscription = new Subscription();
-
-    /** @hidden */
     @HostBinding('attr.role')
     private _role = 'tree';
 
@@ -93,6 +91,9 @@ export class NestedListComponent implements AfterContentInit, NestedListInterfac
     private _tabindex = '-1';
 
     /** @hidden */
+    private _nestedItemsChangesSubscription = new Subscription();
+
+    /** @hidden */
     private readonly _translationResolver = new TranslationResolver();
 
     /** @hidden */
@@ -102,13 +103,12 @@ export class NestedListComponent implements AfterContentInit, NestedListInterfac
         private _nestedListKeyboardService: NestedListKeyboardService,
         private _elementRef: ElementRef,
         private _changeDetectionRef: ChangeDetectorRef,
-        @Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>,
-        private _contentDensityObserver: ContentDensityObserver
+        @Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>
     ) {
         if (this._nestedItemService) {
             this._nestedItemService.list = this;
         }
-        _contentDensityObserver.subscribe();
+        inject(ContentDensityObserver).subscribe();
     }
 
     /** @hidden */
