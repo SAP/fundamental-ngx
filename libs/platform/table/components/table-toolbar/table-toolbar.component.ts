@@ -198,6 +198,16 @@ export class TableToolbarComponent implements TableToolbarInterface {
     }
 
     /** @hidden */
+    _expandAll(): void {
+        this._table.expandAll();
+    }
+
+    /** @hidden */
+    _collapseAll(): void {
+        this._table.collapseAll();
+    }
+
+    /** @hidden */
     private _listenToTableEvents(): void {
         this._table.emptyRowAdded.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._showSaveButton = true;
@@ -214,15 +224,5 @@ export class TableToolbarComponent implements TableToolbarInterface {
         this._table.presetChanged.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((state) => {
             this._searchInputText = state.searchInput?.text ?? '';
         });
-    }
-
-    /** @hidden */
-    _expandAll(): void {
-        this._table.expandAll();
-    }
-
-    /** @hidden */
-    _collapseAll(): void {
-        this._table.collapseAll();
     }
 }

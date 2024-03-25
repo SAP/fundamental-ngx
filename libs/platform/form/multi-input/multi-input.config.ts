@@ -23,6 +23,11 @@ export class MultiInputConfig {
      */
     providers: Map<string, DataProvider<any>> | null = new Map();
 
+    /** @hidden */
+    constructor(platformConfig: PlatformConfig) {
+        this.contentDensity = platformConfig.contentDensity;
+    }
+
     /**
      * Create Provider factory function
      */
@@ -30,10 +35,5 @@ export class MultiInputConfig {
         const useFactory = (platformConfig: PlatformConfig): MultiInputConfig =>
             Object.assign(new MultiInputConfig(platformConfig), obj);
         return useFactory;
-    }
-
-    /** @hidden */
-    constructor(platformConfig: PlatformConfig) {
-        this.contentDensity = platformConfig.contentDensity;
     }
 }

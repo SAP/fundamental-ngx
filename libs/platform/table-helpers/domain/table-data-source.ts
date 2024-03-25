@@ -8,10 +8,17 @@ import { TableRow } from '../models';
 import { TableChildrenDataProvider, TableDataProvider } from './table-data-provider';
 
 export abstract class BaseTableDataSource<T, P = T[], L = boolean> implements DataSource<T, P, L> {
+    /**
+     * Method for retrieving the data of the provided data source.
+     * @param tableState @see TableState Set of table parameters.
+     * @param parentRows
+     */
+    abstract fetch(tableState: TableState, parentRows?: TableRow<T>[]): void;
     /** @hidden */
     protected readonly _dataChanges$ = new BehaviorSubject<P>([] as any);
     /** @hidden */
     protected readonly _onDataRequested$ = new Subject<boolean>();
+
     /** @hidden */
     protected readonly _onDataReceived$ = new Subject<boolean>();
 
@@ -25,7 +32,7 @@ export abstract class BaseTableDataSource<T, P = T[], L = boolean> implements Da
     protected readonly _destroy$ = new Subject<void>();
 
     /** @hidden */
-    constructor() {
+    protected constructor() {
         this._dataLoading$ = new BehaviorSubject(this._dataLoading);
     }
 
@@ -70,12 +77,6 @@ export abstract class BaseTableDataSource<T, P = T[], L = boolean> implements Da
     get data(): P {
         return this._dataChanges$.value;
     }
-
-    /**
-     * Method for retrieving the data of the provided data source.
-     * @param tableState @see TableState Set of table parameters.
-     */
-    abstract fetch(tableState: TableState, parentRows?: TableRow<T>[]): void;
 
     /** @hidden */
     open(): Observable<P> {

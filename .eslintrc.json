@@ -119,7 +119,7 @@
                     }
                 ],
                 "@typescript-eslint/member-ordering": [
-                    "warn",
+                    "error",
                     {
                         "default": [
                             "signature",

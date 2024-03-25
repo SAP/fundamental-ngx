@@ -72,6 +72,9 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
     }
 
     /** @hidden */
+    dragDropInProgress = false;
+
+    /** @hidden */
     private _table: Table;
 
     /** @hidden */
@@ -81,9 +84,6 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
     private readonly _cdr = inject(ChangeDetectorRef, {
         host: true
     });
-
-    /** @hidden */
-    dragDropInProgress = false;
 
     /** Sets table reference. */
     setTable(table: Table): void {

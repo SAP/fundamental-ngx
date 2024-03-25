@@ -49,13 +49,16 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
     @Output()
     itemSelect: EventEmitter<void> = new EventEmitter<void>();
 
-    /** Track when menu item is hovered over */
-    hovered: Subject<MenuItemComponent> = new Subject<MenuItemComponent>();
-
     /** Sets whether this item is a trigger for sub-menu. */
     @HostBinding('class.trigger')
     isTrigger = false;
 
+    /** @hidden */
+    @ContentChild(MenuInteractiveComponent)
+    _fdMenuInteractiveChild: MenuInteractiveComponent;
+
+    /** Track when menu item is hovered over */
+    hovered: Subject<MenuItemComponent> = new Subject<MenuItemComponent>();
     /** @hidden */
     _isSelected = false;
     /**
@@ -68,31 +71,17 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
             this._cdr.markForCheck();
         }
     }
+
     /** @hidden */
     get isSelected(): boolean {
         return this._isSelected;
     }
 
     /** @hidden */
-    @ContentChild(MenuInteractiveComponent)
-    _fdMenuInteractiveChild: MenuInteractiveComponent;
-
-    /** @hidden */
     constructor(
         private _elementRef: ElementRef,
         private _cdr: ChangeDetectorRef
     ) {}
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this.hovered.complete();
-    }
-
-    /** Focus on option */
-    focus(): void {
-        const interactive = this._elementRef.nativeElement?.firstElementChild as HTMLElement;
-        interactive?.focus();
-    }
 
     /**
      * @hidden
@@ -127,5 +116,15 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
     @HostListener('mouseenter')
     private _onMouseEnter(): void {
         this.hovered.next(this);
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this.hovered.complete();
+    }
+    /** Focus on option */
+    focus(): void {
+        const interactive = this._elementRef.nativeElement?.firstElementChild as HTMLElement;
+        interactive?.focus();
     }
 }

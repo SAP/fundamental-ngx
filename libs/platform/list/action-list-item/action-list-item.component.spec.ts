@@ -164,10 +164,10 @@ describe('ActionListItemComponent', () => {
     imports: [ListComponent, ActionListItemComponent]
 })
 class TestComponentContentComponent {
-    items: Action[] = [{ title: 'Action 1' }, { title: 'Action 2' }, { title: 'Action 3' }, { title: 'Action 4' }];
-
     @ViewChild(ActionListItemComponent)
     actionListItem: ActionListItemComponent;
+
+    items: Action[] = [{ title: 'Action 1' }, { title: 'Action 2' }, { title: 'Action 3' }, { title: 'Action 4' }];
 }
 
 describe('ActionListItemComponent Imperative', () => {

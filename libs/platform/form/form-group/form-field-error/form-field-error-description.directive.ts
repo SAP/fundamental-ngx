@@ -12,18 +12,18 @@ export class FormFieldErrorDescriptionDirective<T = any> implements FormErrorDes
     fdpFormFieldErrorDescriptionAs: T;
 
     /** @hidden */
-    static ngTemplateContextGuard(
-        dir: FormFieldErrorDescriptionDirective,
-        ctx: FormFieldErrorContext<any>
-    ): ctx is FormFieldErrorContext<any> {
-        return true;
-    }
-
-    /** @hidden */
     constructor(
         public templateRef: TemplateRef<FormFieldErrorContext<T>>,
         @Optional() @Inject(FDP_FORM_ERROR_DIRECTIVE) private _formFieldErrorDirective: FormError
     ) {
         this._formFieldErrorDirective?.registerDescription(this);
+    }
+
+    /** @hidden */
+    static ngTemplateContextGuard(
+        dir: FormFieldErrorDescriptionDirective,
+        ctx: FormFieldErrorContext<any>
+    ): ctx is FormFieldErrorContext<any> {
+        return true;
     }
 }

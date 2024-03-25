@@ -2,6 +2,9 @@ import { ElementRef, Injectable, InjectionToken, OnDestroy } from '@angular/core
 import { Observable, Subject, Subscription } from 'rxjs';
 
 export interface TableScrollable {
+    /** Get scrollable ElementRef of. */
+    elementRef: ElementRef<HTMLElement>;
+
     /** Returns observable that emits when a scroll event is fired on the host element. */
     getScrollStream(): Observable<Event>;
 
@@ -22,9 +25,6 @@ export interface TableScrollable {
 
     /** Set scrollLeft position of the host element. */
     setScrollLeft(scrollLeft: number, emitEvent: boolean): void;
-
-    /** Get scrollable ElementRef of. */
-    elementRef: ElementRef<HTMLElement>;
 
     /** Scrolls to overlapped cell. */
     scrollToOverlappedCell(rtl: boolean, freezableColumnsSize: number, freezableEndColumnSize: number): void;

@@ -32,7 +32,7 @@ import { combineLatest, fromEvent, isObservable, Observable, Subject, Subscripti
 import { startWith } from 'rxjs/operators';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { FdpListComponent, ListComponent } from '@fundamental-ngx/platform/list';
@@ -57,6 +57,36 @@ export type FdpMultiInputDataSource<T> = MultiInputDataSource<T> | Observable<T[
 
 @Directive()
 export abstract class BaseMultiInput extends CollectionBaseInput implements AfterViewInit, OnChanges, OnDestroy {
+    /** @hidden */
+    abstract controlTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    abstract listTemplate: TemplateRef<any>;
+
+    /**
+     * @hidden
+     * Define is this item selected
+     */
+    abstract isSelectedOptionItem(selectedItem: MultiInputOption): boolean;
+
+    /**
+     * @hidden
+     * Emit select OptionItem
+     * */
+    abstract selectOptionItem(item: MultiInputOption): void;
+
+    /**
+     * @hidden
+     * Define value as selected
+     * */
+    abstract setAsSelected(item: MultiInputOption[]): void;
+
+    /**
+     * @hidden
+     * Mathod for marking list option as selected.
+     */
+    abstract _markListItemsAsSelected(): void;
+
     /** Provides maximum height for the optionPanel */
     @Input()
     maxHeight = '250px';
@@ -68,6 +98,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             this._initializeDataSource(value);
         }
     }
+
     get dataSource(): FdpMultiInputDataSource<any> {
         return this._dataSource;
     }
@@ -126,7 +157,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /** Turns on/off Adjustable Width feature */
     @Input()
     autoResize = false;
-
     /** Whether to open the dropdown when the addon button is clicked. */
     @Input()
     openDropdownOnAddOnClicked = true;
@@ -138,6 +168,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         this.setAsSelected(this._convertToOptionItems(selectedItems));
         super.setValue(value);
     }
+
     get value(): any {
         return super.getValue();
     }
@@ -172,6 +203,10 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     @ContentChildren(TemplateDirective)
     customTemplates: QueryList<TemplateDirective>;
 
+    /** @hidden */
+    @ViewChild('searchInputElement', { read: ElementRef })
+    searchInputElement: ElementRef;
+
     /** @hidden
      * Custom Option item Template
      * */
@@ -191,22 +226,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
      * Custom Selected option item Template
      * */
     selectedItemTemplate: TemplateRef<any>;
-
-    /** @hidden */
-    @ViewChild('searchInputElement', { read: ElementRef })
-    searchInputElement: ElementRef;
-
-    /** @hidden */
-    protected readonly multiInputConfig = inject(MultiInputConfig);
-
-    /** @hidden */
-    _contentDensity: ContentDensity = this.multiInputConfig.contentDensity;
-
-    /** @hidden */
-    abstract controlTemplate: TemplateRef<any>;
-
-    /** @hidden */
-    abstract listTemplate: TemplateRef<any>;
 
     /** input text of the input. */
     inputText: string;
@@ -247,18 +266,24 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
      */
     openChange = new Subject<boolean>();
 
-    /** @hidden emits whenever there're changes to the inputs, that affect the data creation from data source */
-    private readonly _updateDataSourceValues$ = new Subject<void>();
+    /** @hidden */
+    protected readonly multiInputConfig = inject(MultiInputConfig);
 
     /** @hidden */
     protected _dataSource: FdpMultiInputDataSource<any>;
 
     /** @hidden */
+    protected readonly dialogConfig = inject(DialogConfig, { optional: true });
+    /** @hidden emits whenever there're changes to the inputs, that affect the data creation from data source */
+    private readonly _updateDataSourceValues$ = new Subject<void>();
+    /** @hidden */
     private _matchingStrategy: MatchingStrategy = this.multiInputConfig.matchingStrategy;
     /** @hidden */
     private _dsSubscription?: Subscription;
+
     /** @hidden */
     private _element: HTMLElement = this.elementRef.nativeElement;
+
     /** Keys, that won't trigger the popover's open state, when dispatched on search input */
     private readonly _nonOpeningKeys: number[] = [
         ESCAPE,
@@ -278,9 +303,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     private _originalSuggestions: any[] = [];
 
     /** @hidden */
-    protected readonly dialogConfig = inject(DialogConfig, { optional: true });
-
-    /** @hidden */
     ngAfterViewInit(): void {
         this._initWindowResize();
         this._assignCustomTemplates();
@@ -296,7 +318,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             this._suggestions = this._convertToOptionItems(this._originalSuggestions);
         }
     }
-
     /** @hidden */
     ngOnDestroy(): void {
         super.ngOnDestroy();
@@ -309,29 +330,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             this._dsSubscription.unsubscribe();
         }
     }
-    /**
-     * @hidden
-     * Define is this item selected
-     */
-    abstract isSelectedOptionItem(selectedItem: MultiInputOption): boolean;
-
-    /**
-     * @hidden
-     * Emit select OptionItem
-     * */
-    abstract selectOptionItem(item: MultiInputOption): void;
-
-    /**
-     * @hidden
-     * Define value as selected
-     * */
-    abstract setAsSelected(item: MultiInputOption[]): void;
-
-    /**
-     * @hidden
-     * Mathod for marking list option as selected.
-     */
-    abstract _markListItemsAsSelected(): void;
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {

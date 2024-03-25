@@ -16,16 +16,16 @@ import { SwitchComponent } from '@fundamental-ngx/core/switch';
     imports: [FormLabelComponent, SwitchComponent, FormsModule]
 })
 export class DirectionalityComponent implements OnInit {
-    id: string;
-    isChecked = false;
     @Input()
     label: string;
-
     @Input()
     element: string;
 
     @Input()
     className: string;
+
+    id: string;
+    isChecked = false;
 
     constructor(private rtlService: RtlService) {}
 

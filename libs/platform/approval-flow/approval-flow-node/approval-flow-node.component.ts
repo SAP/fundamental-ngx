@@ -216,15 +216,6 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
         return !!this.node.selected;
     }
 
-    /** @hidden */
-    _objectStatus: ObjectStatus;
-
-    /** @hidden */
-    _showDueDateWarning = false;
-
-    /** @hidden */
-    _dueIn = 0;
-
     /** Event emitted on add node button clicked, value is the placement for the new node */
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
@@ -259,6 +250,15 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     /** @hidden */
     @ContentChild(GridListItemComponent)
     _gridListItem: GridListItemComponent<ApprovalGraphNode>;
+
+    /** @hidden */
+    _objectStatus: ObjectStatus;
+
+    /** @hidden */
+    _showDueDateWarning = false;
+
+    /** @hidden */
+    _dueIn = 0;
 
     /** @hidden */
     readonly approvalFlowNodeId = 'fdp-approval-flow-node-' + defaultId++;

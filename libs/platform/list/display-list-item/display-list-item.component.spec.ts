@@ -135,15 +135,15 @@ describe('DisplayListItemComponent', () => {
     `
 })
 class TestComponentContentComponent {
+    @ViewChild(DisplayListItemComponent)
+    displayListItem: DisplayListItemComponent;
+
     items: Name[] = [
         { title: 'title 1', secondary: 'secondary 1', navigationIndicator: 'true' },
         { title: 'title 2', secondary: 'secondary 2' },
         { title: 'title 3', secondary: 'secondary 3' },
         { title: 'title 4', secondary: 'secondary 4', navigationIndicator: 'true' }
     ];
-
-    @ViewChild(DisplayListItemComponent)
-    displayListItem: DisplayListItemComponent;
 }
 
 describe('DisplayListItemComponent Imperative', () => {

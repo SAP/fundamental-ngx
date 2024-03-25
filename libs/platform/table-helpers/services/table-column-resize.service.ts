@@ -21,6 +21,35 @@ export const TABLE_RESIZER_BORDER_WIDTH = 3;
 export class TableColumnResizeService implements OnDestroy {
     /** Subject that emits new map of fixed columns and their respective width. */
     readonly fixedColumsWidthChange = new BehaviorSubject<Map<string, string>>(new Map());
+    /** Indicate if resizing process in progress. */
+    get resizeInProgress(): boolean {
+        return this._resizeInProgress;
+    }
+
+    /** Resize progress stream. */
+    readonly resizeInProgress$ = new BehaviorSubject<boolean>(false);
+
+    /** Whether cell mock should be visible. */
+    readonly cellMockVisible$ = signal(false);
+
+    /** Current column resizer position. */
+    get resizerPosition(): number {
+        return this._resizerPosition ?? 0;
+    }
+
+    /** Resizer position stream. */
+    readonly resizerPosition$ = new BehaviorSubject<number>(0);
+
+    /** Observable to notify to run CD */
+    get markForCheck(): Observable<void> {
+        return this._markForCheck.asObservable();
+    }
+
+    /** table has fixed width if all of it's columns are fixed */
+    get fixedWidth(): boolean {
+        return this._fixedColumnsWidthMap.size === this._visibleColumnNames.length;
+    }
+
     /** @hidden */
     private _fixedColumnsWidthMap = new Map<string, string>();
 
@@ -49,7 +78,7 @@ export class TableColumnResizeService implements OnDestroy {
     private _clientStartX: number | null = null;
 
     /** @hidden */
-    private _resizeInProgress = false;
+    private _resizeInProgress = this.resizeInProgress$.value;
 
     /** @hidden */
     private _resizedColumn: string;
@@ -71,35 +100,6 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** @hidden */
     private _tableRef: Table;
-
-    /** Indicate if resizing process in progress. */
-    get resizeInProgress(): boolean {
-        return this._resizeInProgress;
-    }
-
-    /** Resize progress stream. */
-    readonly resizeInProgress$ = new BehaviorSubject<boolean>(this._resizeInProgress);
-
-    /** Whether cell mock should be visible. */
-    readonly cellMockVisible$ = signal(false);
-
-    /** Current column resizer position. */
-    get resizerPosition(): number {
-        return this._resizerPosition ?? 0;
-    }
-
-    /** Resizer position stream. */
-    readonly resizerPosition$ = new BehaviorSubject<number>(0);
-
-    /** Observable to notify to run CD */
-    get markForCheck(): Observable<void> {
-        return this._markForCheck.asObservable();
-    }
-
-    /** table has fixed width if all of it's columns are fixed */
-    get fixedWidth(): boolean {
-        return this._fixedColumnsWidthMap.size === this._visibleColumnNames.length;
-    }
 
     /** @hidden */
     private readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());

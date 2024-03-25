@@ -42,11 +42,11 @@ import { RadioButtonComponent } from './radio.component';
     `
 })
 class TestRadioButtonComponent {
-    selectedValue = 1;
-
     @ViewChild('radio1') radioButton1: RadioButtonComponent;
     @ViewChild('radio2') radioButton2: RadioButtonComponent;
     @ViewChild('radio3') radioButton3: RadioButtonComponent;
+
+    selectedValue = 1;
 }
 describe('RadioButtonComponent', () => {
     let component: TestRadioButtonComponent;

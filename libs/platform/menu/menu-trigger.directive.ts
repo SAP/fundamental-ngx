@@ -42,6 +42,10 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         return this._menu;
     }
 
+    /** Flag to determine if associated menu is open. */
+    get isMenuOpen(): boolean {
+        return this._isMenuOpen;
+    }
     /** @hidden */
     private _menu: MenuComponent;
     /** @hidden */
@@ -56,6 +60,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
     private _menuCloseSubscription: Subscription = Subscription.EMPTY;
     /** @hidden */
     private _parentMenuCloseSubscription: Subscription = Subscription.EMPTY;
+
     /** @hidden */
     private _menuItemHoverChangeSubscription: Subscription = Subscription.EMPTY;
 
@@ -67,44 +72,6 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         @Optional() @Self() private _menuItem: MenuItemComponent,
         @Optional() private _parentMenu: MenuComponent
     ) {}
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-        if (this._isMenuItem()) {
-            // mark menu item as trigger
-            this._menuItem.isTrigger = true;
-
-            // subscribe to changes of menu item hover state
-            this._menuItemHoverChangeSubscription = this._parentMenu._menuItemHoverChange().subscribe((item) => {
-                if (item === this._menuItem) {
-                    if (!this.isMenuOpen) {
-                        this._menuItem.isSelected = true;
-                        this.openMenu();
-                    }
-                } else {
-                    this._menuItem.isSelected = false;
-                    this.closeMenu();
-                }
-            });
-        }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        if (this._overlayRef) {
-            this._overlayRef.dispose();
-            this._overlayRef = null;
-        }
-        this._outsideClickSubscription.unsubscribe();
-        this._menuCloseSubscription.unsubscribe();
-        this._parentMenuCloseSubscription.unsubscribe();
-        this._menuItemHoverChangeSubscription.unsubscribe();
-    }
-
-    /** Flag to determine if associated menu is open. */
-    get isMenuOpen(): boolean {
-        return this._isMenuOpen;
-    }
 
     /**
      * @hidden
@@ -159,6 +126,39 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
                 this.openMenu();
             }
         }
+    }
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        if (this._isMenuItem()) {
+            // mark menu item as trigger
+            this._menuItem.isTrigger = true;
+
+            // subscribe to changes of menu item hover state
+            this._menuItemHoverChangeSubscription = this._parentMenu._menuItemHoverChange().subscribe((item) => {
+                if (item === this._menuItem) {
+                    if (!this.isMenuOpen) {
+                        this._menuItem.isSelected = true;
+                        this.openMenu();
+                    }
+                } else {
+                    this._menuItem.isSelected = false;
+                    this.closeMenu();
+                }
+            });
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        if (this._overlayRef) {
+            this._overlayRef.dispose();
+            this._overlayRef = null;
+        }
+        this._outsideClickSubscription.unsubscribe();
+        this._menuCloseSubscription.unsubscribe();
+        this._parentMenuCloseSubscription.unsubscribe();
+        this._menuItemHoverChangeSubscription.unsubscribe();
     }
 
     /**
@@ -278,17 +278,16 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
 
         const scrollStrategy = this._overlay.scrollStrategies.reposition();
 
-        const overlayConfig = new OverlayConfig({
+        return new OverlayConfig({
             positionStrategy,
             scrollStrategy,
             backdropClass: 'cdk-overlay-transparent-backdrop'
         });
-        return overlayConfig;
     }
 
     /** @hidden */
     private _getPositions(): ConnectedPosition[] {
-        let positions: ConnectedPosition[] = [];
+        let positions: ConnectedPosition[];
         const offsetYPosition = 0;
         const offsetXPosition = 0;
         const subMenuXPadding = 4; // horizontal padding of 0.25rem(4px) is needed for sub-menu

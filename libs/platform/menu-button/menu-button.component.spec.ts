@@ -133,17 +133,15 @@ class TestMenuButtonComponent {
     @Input()
     type: ButtonType = 'standard';
 
-    currentSelectedItem = '';
-
     @ViewChild(MenuButtonComponent, { static: true })
     component: MenuButtonComponent;
 
     @ViewChildren(MenuItemComponent)
     menuItems: QueryList<MenuItemComponent>;
 
-    public menuButtonClicked = false;
+    currentSelectedItem = '';
 
-    constructor() {}
+    menuButtonClicked = false;
 
     clicked(): void {
         this.menuButtonClicked = true;

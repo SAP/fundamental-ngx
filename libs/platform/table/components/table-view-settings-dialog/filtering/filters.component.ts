@@ -84,6 +84,21 @@ export enum ACTIVE_STEP {
     ]
 })
 export class FiltersComponent implements Resettable, AfterViewInit {
+    /**
+     * Current FiltersViewStep component to render.
+     * The fd-dialog component relies on named projected content.
+     * It means we must define all projected dialog options in the same view withing fd-dialog.
+     * In order to keep filters steps as separate components
+     * and do not break dialog content we are using this ViewChild hook
+     * keeping reference to the conditionally rendered active step.
+     * Each "FilterStepView" has template refs for dialog.title and dialog.body template
+     * */
+    @ViewChild(FILTERS_VIEW_STEP_TOKEN)
+    set setActiveFilterStepView(view: FiltersViewStep) {
+        this.activeFilterStepView = view;
+        this._cd.detectChanges();
+    }
+
     /** Reference to the available steps */
     readonly ACTIVE_STEP = ACTIVE_STEP;
 
@@ -108,26 +123,11 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     /** Indicates when reset command is available */
     readonly isResetAvailable$ = signal(false);
 
-    /** @hidden */
-    private _initialFilters: CollectionFilter[] = [];
-
-    /**
-     * Current FiltersViewStep component to render.
-     * The fd-dialog component relies on named projected content.
-     * It means we must define all projected dialog options in the same view withing fd-dialog.
-     * In order to keep filters steps as separate components
-     * and do not break dialog content we are using this ViewChild hook
-     * keeping reference to the conditionally rendered active step.
-     * Each "FilterStepView" has template refs for dialog.title and dialog.body template
-     * */
-    @ViewChild(FILTERS_VIEW_STEP_TOKEN)
-    set setActiveFilterStepView(view: FiltersViewStep) {
-        this.activeFilterStepView = view;
-        this._cd.detectChanges();
-    }
-
     /** Current step component to render */
     activeFilterStepView: FiltersViewStep;
+
+    /** @hidden */
+    private _initialFilters: CollectionFilter[] = [];
 
     /** @hidden */
     constructor(
