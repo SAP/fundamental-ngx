@@ -127,7 +127,7 @@ const ITEMS: ExampleItem[] = [
     {
         id: 4,
         name: 'Beam Breaker B-1',
-        description: 'fermentum donec ut',
+        description: '',
         price: {
             value: 36.56,
             currency: 'NZD'
