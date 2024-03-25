@@ -40,12 +40,6 @@ export class CardHeaderComponent implements OnInit, OnChanges, CssClassBuilder, 
     }
 
     /** @hidden */
-    private _tabindex = '0';
-
-    /** @hidden */
-    class: string;
-
-    /** @hidden */
     @ContentChild(FD_AVATAR_COMPONENT)
     _avatar: AvatarComponent;
 
@@ -54,10 +48,22 @@ export class CardHeaderComponent implements OnInit, OnChanges, CssClassBuilder, 
     _subtitle: CardSubtitleDirective;
 
     /** @hidden */
+    class: string;
+
+    /** @hidden */
+    private _tabindex = '0';
+
+    /** @hidden */
     constructor(
         public readonly elementRef: ElementRef<HTMLElement>,
         private renderer: Renderer2
     ) {}
+
+    /** @hidden */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [CLASS_NAME.cardHeader, !this.interactive ? CLASS_NAME.cardHeaderNonInteractive : ''];
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -76,11 +82,5 @@ export class CardHeaderComponent implements OnInit, OnChanges, CssClassBuilder, 
     /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [CLASS_NAME.cardHeader, !this.interactive ? CLASS_NAME.cardHeaderNonInteractive : ''];
     }
 }

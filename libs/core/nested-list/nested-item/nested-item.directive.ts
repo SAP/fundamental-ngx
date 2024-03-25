@@ -83,9 +83,6 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     private _role: string;
 
     /** @hidden */
-    private _expanded = false;
-
-    /** @hidden */
     @HostBinding('attr.aria-expanded')
     private _ariaExpanded: Nullable<boolean> = null;
 
@@ -104,6 +101,9 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     /** @hidden */
     @HostBinding('attr.aria-hidden')
     private _ariaHidden = true;
+
+    /** @hidden */
+    private _expanded = false;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _destroyRef = inject(DestroyRef);

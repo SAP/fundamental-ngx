@@ -102,15 +102,15 @@ export class TabPanelComponent implements OnChanges {
     @ContentChild(TabTitleDirective, { read: TemplateRef })
     titleTemplate: TemplateRef<any>;
 
+    /** @hidden */
+    @HostBinding('class.is-expanded')
+    _expandedClass = false;
+
     /** @hidden Event that is emitted when the tab panel . */
     _expandedStateChange = new Subject<TabPanelStateChange>();
 
     /** @hidden */
     _forcedVisibility = false;
-
-    /** @hidden */
-    @HostBinding('class.is-expanded')
-    _expandedClass = false;
 
     /** @hidden Whether to display tab panel content */
     private _expanded = false;

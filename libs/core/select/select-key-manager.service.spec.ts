@@ -27,11 +27,11 @@ class SelectTestComponent {
 
     isOpen: boolean;
 
+    constructor(public keyService: SelectKeyManagerService) {}
+
     onOpen(isOpen: boolean): void {
         this.isOpen = isOpen;
     }
-
-    constructor(public keyService: SelectKeyManagerService) {}
 }
 
 describe('SelectKeyManagerService', () => {

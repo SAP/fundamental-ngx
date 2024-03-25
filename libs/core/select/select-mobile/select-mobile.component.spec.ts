@@ -26,11 +26,11 @@ const MOBILE_CONFIG: MobileModeConfig = { title: 'TITLE', hasCloseButton: true }
     `
 })
 class TestWrapperComponent {
-    options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
-    selectedValue: string;
-
     @ViewChild(SelectComponent, { static: true })
     selectComponent: SelectComponent;
+
+    options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
+    selectedValue: string;
 
     constructor(@Inject(MOBILE_CONFIG_TEST_TOKEN) public mobileConfig: MobileModeConfig) {}
 }

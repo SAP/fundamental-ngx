@@ -79,15 +79,6 @@ export class TabIconComponent implements CssClassBuilder, OnChanges {
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden
-     * Function runs when component is initialized
-     * function should build component css class
-     * function should build css style
-     */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
     /** @hidden CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
@@ -95,6 +86,15 @@ export class TabIconComponent implements CssClassBuilder, OnChanges {
     @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-tabs__icon', this.class];
+    }
+
+    /** @hidden
+     * Function runs when component is initialized
+     * function should build component css class
+     * function should build css style
+     */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
     }
 }
 

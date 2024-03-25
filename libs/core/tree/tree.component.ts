@@ -59,14 +59,11 @@ import { TreeService } from './tree.service';
     hostDirectives: [
         {
             directive: DataSourceDirective,
-            // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
             inputs: ['dataSource'],
-            // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
             outputs: ['dataChanged']
         },
         {
             directive: CvaDirective,
-            // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
             inputs: ['name', 'id', 'state', 'stateMessage', 'disabled', 'readonly']
         }
     ],

@@ -11,10 +11,10 @@ import { DatetimePickerMobileComponent } from './datetime-picker-mobile.componen
 class MockDateTimePickerComponent<D> implements DateTimePicker<D> {
     date: Nullable<D>;
     isOpenChange = new EventEmitter<boolean>();
-    dialogApprove(): void {}
-    dialogDismiss(): void {}
     mobile: boolean;
     mobileConfig = testDatePickerConfigObject;
+    dialogApprove(): void {}
+    dialogDismiss(): void {}
 }
 
 const testDatePickerConfigObject: MobileModeConfig = {

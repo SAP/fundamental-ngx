@@ -12,15 +12,16 @@ class MockNestedItem {
     linkItem: MockNestedLink;
     keyboardTriggered = new Subject<KeyboardEvent>();
     hasChildren: boolean;
-    triggerOpen = (): void => {};
-    triggerClose = (): void => {};
-    focus = (): void => {};
-    click = (): void => {};
 
     constructor(
         readonly allChildrenItems: MockNestedItem[] = [],
         public expanded: boolean = true
     ) {}
+
+    triggerOpen = (): void => {};
+    triggerClose = (): void => {};
+    focus = (): void => {};
+    click = (): void => {};
 }
 
 interface MockNestedList {

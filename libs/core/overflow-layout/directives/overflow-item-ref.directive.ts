@@ -18,15 +18,18 @@ import { FD_OVERFLOW_ITEM_REF } from '../tokens/overflow-item-ref.token';
     standalone: true
 })
 export class OverflowItemRefDirective<T = any> implements OverflowItemRef<T>, HasElementRef {
+    /** Item instance. Used for correct autocomplete. */
+    @Input('fdOverflowItemRef')
+    item: T;
     /**
      * Element ref of the `fdOverflowLayoutItem` directive.
      */
     elementRef: ElementRef<HTMLElement>;
+
     /**
      * `fdOverflowLayoutItem` directive.
      */
     overflowItem: OverflowItem;
-
     /**
      * Whether the item is hidden.
      */
@@ -34,6 +37,7 @@ export class OverflowItemRefDirective<T = any> implements OverflowItemRef<T>, Ha
         this._hidden = value;
         this.overflowItem.hiddenChange.emit(value);
     }
+
     get hidden(): boolean {
         return this._hidden;
     }
@@ -57,10 +61,6 @@ export class OverflowItemRefDirective<T = any> implements OverflowItemRef<T>, Ha
 
     /** Whether the item is softly hidden. */
     softHidden = true;
-
-    /** Item instance. Used for correct autocomplete. */
-    @Input('fdOverflowItemRef')
-    item: T;
 
     /** @hidden */
     readonly injector = inject(INJECTOR);

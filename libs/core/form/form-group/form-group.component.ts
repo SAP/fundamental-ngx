@@ -47,6 +47,15 @@ export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
     /** @hidden */
     constructor(public elementRef: ElementRef) {}
 
+    /** This method is responsible for building a css class based on current state
+     *  It is implementation of CssClassBuilder interface and
+     *  should be used with @applyCssClass decorator
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [this.isInline ? 'fd-form-group--inline' : ''];
+    }
+
     /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
@@ -55,14 +64,5 @@ export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-    }
-
-    /** This method is responsible for building a css class based on current state
-     *  It is implementation of CssClassBuilder interface and
-     *  should be used with @applyCssClass decorator
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [this.isInline ? 'fd-form-group--inline' : ''];
     }
 }

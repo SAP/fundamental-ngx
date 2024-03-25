@@ -67,30 +67,6 @@ export class FeedListComponent implements OnInit, AfterContentChecked, OnDestroy
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
-    ngAfterContentChecked(): void {
-        this._refreshItems();
-        this._listenOnFeedItems();
-    }
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if ('mobile' in changes || 'borderLess' in changes) {
-            this.buildComponentCssClass();
-            this._refreshItems();
-        }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        if (this.$feedItemChanges) {
-            this.$feedItemChanges.unsubscribe();
-        }
-    }
-
     /** @hidden
      * CssClassBuilder interface implementation
      * function must return single string
@@ -105,6 +81,30 @@ export class FeedListComponent implements OnInit, AfterContentChecked, OnDestroy
             this.isGroup ? `${CSS_CLASS_NAME.list}--group` : '',
             this.mobile ? `${CSS_CLASS_NAME.list}--s` : ''
         ];
+    }
+    /** @hidden */
+    ngAfterContentChecked(): void {
+        this._refreshItems();
+        this._listenOnFeedItems();
+    }
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if ('mobile' in changes || 'borderLess' in changes) {
+            this.buildComponentCssClass();
+            this._refreshItems();
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        if (this.$feedItemChanges) {
+            this.$feedItemChanges.unsubscribe();
+        }
     }
 
     /** @hidden */

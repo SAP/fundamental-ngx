@@ -44,11 +44,6 @@ export class NotificationGroupComponent implements OnChanges, OnInit, CssClassBu
         }
     }
 
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
     /** @hidden CssClassBuilder interface implementation
      * function is responsible for order which css classes are applied
      */
@@ -59,6 +54,11 @@ export class NotificationGroupComponent implements OnChanges, OnInit, CssClassBu
             this.mobile ? 'fd-notification--mobile' : '',
             this.class
         ];
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */

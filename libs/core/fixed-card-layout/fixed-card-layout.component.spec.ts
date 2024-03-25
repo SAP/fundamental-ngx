@@ -28,10 +28,10 @@ import { FixedCardLayoutModule } from './fixed-card-layout.module';
     `
 })
 class TestFixedCardLayoutComponent {
-    maxColumns = 10;
-
     @ViewChild(FixedCardLayoutComponent)
     fixedCardLayout: FixedCardLayoutComponent;
+
+    maxColumns = 10;
 }
 
 describe('FixedCardLayoutComponent', () => {

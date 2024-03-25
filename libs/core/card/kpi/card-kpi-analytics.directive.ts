@@ -16,13 +16,13 @@ export class CardKpiAnalyticsDirective implements OnInit, CssClassBuilder {
     constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [CLASS_NAME.cardAnalytics];
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 }

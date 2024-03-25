@@ -74,11 +74,6 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
     /** @hidden
      * CssClassBuilder interface implementation
      * function is responsible for order which css classes are applied
@@ -86,6 +81,11 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
     @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-message-page', this.class];
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */

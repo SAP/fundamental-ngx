@@ -25,24 +25,24 @@ export abstract class TitleToken {
     standalone: true
 })
 export class TitleComponent extends TitleToken implements OnInit {
-    /** The size of the header */
-    _headerSize: Nullable<HeaderSizes> = null;
-
     /** Header size of the title. */
     @Input()
     set headerSize(value: Nullable<HeaderSizes>) {
         this._headerSize = value;
-        if (this._appliedHeaderSize !== this.headerSize) {
+        if (this._appliedHeaderSize !== this._headerSize) {
             this._setHeaderSize();
         }
     }
+
     get headerSize(): Nullable<HeaderSizes> {
         return this._headerSize;
     }
-
     /** Whether or not the title should wrap (truncates by default) */
     @Input()
     wrap = false;
+
+    /** The size of the header */
+    _headerSize: Nullable<HeaderSizes> = null;
 
     /** @hidden */
     private _appliedHeaderSize: number;

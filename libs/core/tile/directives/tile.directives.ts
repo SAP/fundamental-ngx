@@ -152,16 +152,6 @@ export class TileRefreshDirective implements OnInit, OnChanges, CssClassBuilder 
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
     /** @hidden
      * CssClassBuilder interface implementation
      * function must return single string
@@ -170,6 +160,16 @@ export class TileRefreshDirective implements OnInit, OnChanges, CssClassBuilder 
     @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-tile__refresh', this.glyph ? fdBuildIconClass(this.glyphFont, this.glyph) : '', this.class];
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 }
 
@@ -315,6 +315,16 @@ export class TileActionCloseDirective implements OnInit, OnChanges, CssClassBuil
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}
 
+    /** @hidden
+     * CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return ['fd-tile__action-close', this.class];
+    }
+
     /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
@@ -324,16 +334,6 @@ export class TileActionCloseDirective implements OnInit, OnChanges, CssClassBuil
     ngOnInit(): void {
         this.buildComponentCssClass();
         this._addCloseIcon();
-    }
-
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return ['fd-tile__action-close', this.class];
     }
 
     /** @hidden */
@@ -355,6 +355,16 @@ export class TileActionIndicatorDirective implements OnInit, OnChanges, CssClass
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}
 
+    /** @hidden
+     * CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return ['fd-tile__action-indicator', this.class];
+    }
+
     /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
@@ -364,16 +374,6 @@ export class TileActionIndicatorDirective implements OnInit, OnChanges, CssClass
     ngOnInit(): void {
         this.buildComponentCssClass();
         this._addIndicatorIcon();
-    }
-
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return ['fd-tile__action-indicator', this.class];
     }
 
     /** @hidden */

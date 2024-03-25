@@ -98,6 +98,17 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
         private _sanitizer: DomSanitizer
     ) {}
 
+    /**
+     * @hidden
+     * CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return ['fd-illustrated-message', this.type ? `fd-illustrated-message--${this.type}` : '', this.class];
+    }
+
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         this.buildComponentCssClass();
@@ -124,20 +135,9 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
         this._subscriptions.unsubscribe();
     }
 
-    /**
-     * @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return ['fd-illustrated-message', this.type ? `fd-illustrated-message--${this.type}` : '', this.class];
-    }
-
     /** @hidden */
     private _constructHref(): void {
-        let inlineSvg;
+        let inlineSvg: string | undefined;
         this._inlineSvg = undefined;
         if (this.svgConfig) {
             switch (this.type) {

@@ -10,7 +10,7 @@ import { Directive, EventEmitter, HostBinding, HostListener, Input, Output } fro
 export class FileUploaderSelectDirective {
     /** Whether the input should accept multiple file selections. */
     @Input()
-    private multiple = true;
+    multiple = true;
 
     /** Event emitted when files are selected. */
     @Output()

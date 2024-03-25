@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgStyle } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -29,10 +29,17 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
             ></button>
         </fd-dialog-header>
         <fd-dialog-body>
-            <p id="fd-dialog-body-1" role="dialog" style="text-align: justify; margin: 0">
+            <p
+                id="fd-dialog-body-1"
+                role="dialog"
+                [ngStyle]="{
+                    'text-align': 'justify',
+                    margin: 0
+                }"
+            >
                 {{ dialogRef.data.pinnapleDescription }}
             </p>
-            <ul style="margin-bottom: 0">
+            <ul [style.margin-bottom]="0">
                 @for (fact of dialogRef.data.pineappleFunFacts; track fact) {
                     <li>
                         {{ fact }}
@@ -54,7 +61,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     </fd-dialog>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, BarModule, AsyncPipe]
+    imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, BarModule, AsyncPipe, NgStyle]
 })
 export class DialogFullScreenInnerExampleComponent {
     constructor(public dialogRef: DialogRef) {}

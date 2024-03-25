@@ -171,30 +171,13 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
     pointsArray: string[] = [];
 
     /** @hidden */
+    class: string;
+
+    /** @hidden */
     constructor(
         public readonly elementRef: ElementRef<HTMLElement>,
         private _cd: ChangeDetectorRef
     ) {}
-
-    /** @hidden */
-    class: string;
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this._angleCalculation();
-        this._cd.detectChanges();
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this._calculateFilling();
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    public ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
 
     /** @hidden
      * CssClassBuilder interface implementation
@@ -213,6 +196,23 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
                 : '',
             this.class
         ];
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._angleCalculation();
+        this._cd.detectChanges();
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this._calculateFilling();
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    public ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */

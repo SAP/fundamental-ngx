@@ -80,14 +80,11 @@ export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory
     hostDirectives: [
         {
             directive: CvaDirective,
-            // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
             inputs: ['id:inputId', 'placeholder', 'state', 'stateMessage', 'disabled', 'readonly', 'name']
         },
         {
             directive: DataSourceDirective,
-            // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
             inputs: ['dataSource'],
-            // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
             outputs: ['dataChanged']
         }
     ],

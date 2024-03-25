@@ -82,9 +82,6 @@ export class RadioButtonComponent<T = any>
         return this._tabIndex;
     }
 
-    /** @hidden */
-    private _tabIndex: number;
-
     /** The field to set state of radio button using:
      * 'success' | 'error' | 'warning' | 'default' | 'information'
      * by default value is set to 'default'
@@ -150,6 +147,9 @@ export class RadioButtonComponent<T = any>
     currentValue: T;
 
     /** @hidden */
+    private _tabIndex: number;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
@@ -157,6 +157,15 @@ export class RadioButtonComponent<T = any>
         private changeDetectionRef: ChangeDetectorRef,
         readonly _contentDensityObserver: ContentDensityObserver
     ) {}
+
+    /** This method is responsible for building a css class based on current state
+     *  It is implementation of CssClassBuilder interface and
+     *  should be used with @applyCssClass decorator
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return ['fd-radio', this.state !== 'default' ? `is-${this.state}` : ''];
+    }
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -175,7 +184,6 @@ export class RadioButtonComponent<T = any>
         this._checkMandatoryFields();
     }
 
-    // ControlValueAccessor implementation
     /** @hidden */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onChange = (value: T): void => {};
@@ -205,15 +213,6 @@ export class RadioButtonComponent<T = any>
     }
 
     // End implementation
-
-    /** This method is responsible for building a css class based on current state
-     *  It is implementation of CssClassBuilder interface and
-     *  should be used with @applyCssClass decorator
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return ['fd-radio', this.state !== 'default' ? `is-${this.state}` : ''];
-    }
 
     /** @hidden */
     get elementRef(): ElementRef {

@@ -2,6 +2,9 @@ import { TimelineNodeComponentInterface } from '../../components/timeline-node/t
 import { TimelineAxis } from '../../types';
 
 export abstract class BaseStrategy {
+    /** Calculate styles for timeline nodes */
+    abstract calculateStyles(nodes: TimelineNodeComponentInterface[]): any;
+
     /** Offset between nodes lines */
     private readonly SMALL_OFFSET = 14;
 
@@ -10,9 +13,6 @@ export abstract class BaseStrategy {
 
     /** Offset for second list in within vertical axis */
     private readonly VERTICAL_TOP_LIST_OFFSET = 24;
-
-    /** Calculate styles for timeline nodes */
-    abstract calculateStyles(nodes: TimelineNodeComponentInterface[]): any;
 
     /** @hidden */
     protected _getOffset(node: TimelineNodeComponentInterface): number {

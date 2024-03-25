@@ -15,21 +15,6 @@ export class MicroProcessFlowFocusableItemDirective implements OnInit {
         @Optional() @Inject(MICRO_PROCESS_FLOW) private _microProcessFlow: MicroProcessFlowComponentInterface
     ) {}
 
-    /** @hidden */
-    ngOnInit(): void {
-        this.setFocusable();
-    }
-
-    /** Sets ability to focus on the element or not. */
-    setFocusable(focusable = false): void {
-        this.elRef.nativeElement.setAttribute('tabindex', focusable ? '0' : '-1');
-    }
-
-    /** Focuses on the element without scrolling it to the viewport */
-    focus(options: FocusOptions): void {
-        this.elRef.nativeElement.focus(options);
-    }
-
     /**
      * @hidden
      * Handler for focus events
@@ -44,5 +29,20 @@ export class MicroProcessFlowFocusableItemDirective implements OnInit {
     @HostListener('blur')
     onBlur(): void {
         this._microProcessFlow?.canItemsReceiveFocus.next(true);
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.setFocusable();
+    }
+
+    /** Sets ability to focus on the element or not. */
+    setFocusable(focusable = false): void {
+        this.elRef.nativeElement.setAttribute('tabindex', focusable ? '0' : '-1');
+    }
+
+    /** Focuses on the element without scrolling it to the viewport */
+    focus(options: FocusOptions): void {
+        this.elRef.nativeElement.focus(options);
     }
 }

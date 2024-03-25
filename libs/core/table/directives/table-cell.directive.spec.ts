@@ -14,10 +14,10 @@ import { TableCellDirective } from './table-cell.directive';
     `
 })
 class TestComponent {
-    key = 'key1';
-
     @ViewChild(TableCellDirective)
     cell: TableCellDirective;
+
+    key = 'key1';
 }
 
 describe('TableCellDirective', () => {

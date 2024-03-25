@@ -8,6 +8,7 @@ import {
     ContentChildren,
     ElementRef,
     HostListener,
+    inject,
     Input,
     OnDestroy,
     OnInit,
@@ -65,6 +66,18 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
     @ContentChildren(MicroProcessFlowFocusableItemDirective, { descendants: true })
     focusableItems: QueryList<MicroProcessFlowFocusableItemDirective>;
 
+    /** @hidden */
+    @ViewChild('wrapperContainer')
+    private _wrapperContainer: ElementRef<HTMLElement>;
+
+    /** @hidden */
+    @ViewChild('container')
+    private _container: ElementRef<HTMLElement>;
+
+    /** @hidden */
+    @ViewChild('goNextButton')
+    private _goNextButton: ElementRef<HTMLElement>;
+
     /**
      * Previous items outside the viewport.
      */
@@ -89,18 +102,6 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
     }
 
     /** @hidden */
-    @ViewChild('wrapperContainer')
-    private _wrapperContainer: ElementRef<HTMLElement>;
-
-    /** @hidden */
-    @ViewChild('container')
-    private _container: ElementRef<HTMLElement>;
-
-    /** @hidden */
-    @ViewChild('goNextButton')
-    private _goNextButton: ElementRef<HTMLElement>;
-
-    /** @hidden */
     private _isRtl = false;
 
     /** @hidden */
@@ -123,10 +124,35 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
     /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef,
-        @Optional() private _rtl: RtlService,
-        private _contentDensityObserver: ContentDensityObserver
+        @Optional() private _rtl: RtlService
     ) {
-        _contentDensityObserver.subscribe();
+        inject(ContentDensityObserver).subscribe();
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    handleKeyboardEvent(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, this._navigationKeys)) {
+            const isRightKey = KeyUtil.isKeyCode(event, RIGHT_ARROW);
+            const direction = isRightKey ? 1 : -1;
+            event.stopImmediatePropagation();
+
+            const elementIndexToScroll = this._getPreviousItemsCount() + direction;
+            const elementExists = this.items.get(elementIndexToScroll);
+
+            if (!elementExists) {
+                return;
+            }
+
+            this.previousItemsCount = 0;
+
+            this._paginate(elementIndexToScroll);
+
+            // Force browset not to scroll to the element since it's done with pagination function.
+            this.items.get(this._getPreviousItemsCount())?.focusableElement?.focus({
+                preventScroll: true
+            });
+        }
     }
 
     /** @hidden */
@@ -165,32 +191,6 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    handleKeyboardEvent(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, this._navigationKeys)) {
-            const isRightKey = KeyUtil.isKeyCode(event, RIGHT_ARROW);
-            const direction = isRightKey ? 1 : -1;
-            event.stopImmediatePropagation();
-
-            const elementIndexToScroll = this._getPreviousItemsCount() + direction;
-            const elementExists = this.items.get(elementIndexToScroll);
-
-            if (!elementExists) {
-                return;
-            }
-
-            this.previousItemsCount = 0;
-
-            this._paginate(elementIndexToScroll);
-
-            // Force browset not to scroll to the element since it's done with pagination function.
-            this.items.get(this._getPreviousItemsCount())?.focusableElement?.focus({
-                preventScroll: true
-            });
-        }
-    }
-
     /** Listens on items change and checks if navigation buttons should be visible. */
     listenOnItemsChange(): void {
         this._subscriptions.add(
@@ -214,6 +214,26 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
     /** Scrolls to the previous item. */
     goBack(): void {
         this._paginate(-1);
+    }
+
+    /**
+     * Sets last focused element index.
+     * @param elm Focused HTML element.
+     */
+    setFocusedElementIndex(elm: HTMLElement): void {
+        this._focusedElementIndex = this.focusableItems.toArray().findIndex((item) => item.elRef.nativeElement === elm);
+    }
+
+    /**
+     * Navigates to a specific page when the user presses 'Space' or 'Enter' key.
+     * @param offset How much items needs to be scrolled relatively to the hidden previous items.
+     * @param event The keyboard event.
+     */
+    onKeypressHandler(offset: number, event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, this._actionKeys)) {
+            event.preventDefault();
+            this._paginate(offset);
+        }
     }
 
     /**
@@ -252,26 +272,6 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
 
         this._setNextItemsCount(itemsToDisplay, containerWidth);
         this._cd.detectChanges();
-    }
-
-    /**
-     * Sets last focused element index.
-     * @param elm Focused HTML element.
-     */
-    setFocusedElementIndex(elm: HTMLElement): void {
-        this._focusedElementIndex = this.focusableItems.toArray().findIndex((item) => item.elRef.nativeElement === elm);
-    }
-
-    /**
-     * Navigates to a specific page when the user presses 'Space' or 'Enter' key.
-     * @param offset How much items needs to be scrolled relatively to the hidden previous items.
-     * @param event The keyboard event.
-     */
-    onKeypressHandler(offset: number, event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, this._actionKeys)) {
-            event.preventDefault();
-            this._paginate(offset);
-        }
     }
 
     /**

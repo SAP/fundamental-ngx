@@ -58,21 +58,6 @@ export class AvatarGroupLegacyOverflowBodyDirective implements AfterViewInit, On
     constructor(@Optional() private _rtlService: RtlService) {}
 
     /** @hidden */
-    ngAfterViewInit(): void {
-        this._listenForItemChanges();
-
-        this._setKeyboardEventsManager();
-
-        this._subscribeToRtl();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscription.unsubscribe();
-        this._keyboardEventsManager?.destroy();
-    }
-
-    /** @hidden */
     @HostListener('keyup', ['$event'])
     keyUpHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, TAB)) {
@@ -88,6 +73,21 @@ export class AvatarGroupLegacyOverflowBodyDirective implements AfterViewInit, On
             // passing the event to key manager so we get a change fired
             this._keyboardEventsManager.onKeydown(event);
         }
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._listenForItemChanges();
+
+        this._setKeyboardEventsManager();
+
+        this._subscribeToRtl();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscription.unsubscribe();
+        this._keyboardEventsManager?.destroy();
     }
 
     /** @hidden */

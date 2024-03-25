@@ -6,7 +6,7 @@ import { SwitchComponent } from '@fundamental-ngx/core/switch';
     selector: 'background-switch',
     template: `
         <label fd-form-label> Switch background </label>
-        <fd-switch style="margin-bottom: 18px" (checkedChange)="onChange()"></fd-switch>
+        <fd-switch [style.margin-bottom.px]="18" (checkedChange)="onChange()"></fd-switch>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

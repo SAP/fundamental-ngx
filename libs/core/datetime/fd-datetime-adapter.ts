@@ -24,9 +24,6 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     private readonly _fixYearsRangeIssue: boolean;
 
     /** @hidden */
-    fromNow: undefined;
-
-    /** @hidden */
     constructor(@Optional() @Inject(LOCALE_ID) localeId: string, platform: Platform) {
         super();
 
@@ -34,6 +31,9 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
         this._fixYearsRangeIssue = platform.TRIDENT || platform.EDGE;
     }
+
+    /** @hidden */
+    fromNow?(date: FdDate): string;
 
     /** Get year */
     getYear(date: FdDate): number {

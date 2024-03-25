@@ -26,11 +26,11 @@ import { ActionSquashBreakpointPx, DynamicPageHeaderComponent } from './dynamic-
     providers: [DynamicPageService]
 })
 class TestComponent {
-    title = 'Some title ';
-    subtitle: string;
-
     @ViewChild(DynamicPageHeaderComponent)
     header: DynamicPageHeaderComponent;
+
+    title = 'Some title ';
+    subtitle: string;
 
     constructor(public dynamicPageService: DynamicPageService) {}
 }
