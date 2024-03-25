@@ -23,6 +23,11 @@ export class MultiComboboxConfig {
      */
     providers: Map<string, DataProvider<any>> | null = new Map();
 
+    /** @hidden */
+    constructor(platformConfig: PlatformConfig) {
+        this.contentDensity = platformConfig.contentDensity;
+    }
+
     /**
      * Create Provider factory function
      */
@@ -32,10 +37,5 @@ export class MultiComboboxConfig {
         const useFactory = (platformConfig: PlatformConfig): MultiComboboxConfig =>
             Object.assign(new MultiComboboxConfig(platformConfig), obj);
         return useFactory;
-    }
-
-    /** @hidden */
-    constructor(platformConfig: PlatformConfig) {
-        this.contentDensity = platformConfig.contentDensity;
     }
 }

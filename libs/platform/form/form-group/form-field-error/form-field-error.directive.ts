@@ -60,19 +60,19 @@ export class FormFieldErrorDirective<T = any> implements FormError<T>, OnInit {
     }
 
     /** @hidden */
+    constructor(
+        public templateRef: TemplateRef<FormFieldErrorContext<T>>,
+        private _viewContainer: ViewContainerRef,
+        private _cdr: ChangeDetectorRef
+    ) {}
+
+    /** @hidden */
     static ngTemplateContextGuard(
         dir: FormFieldErrorDirective,
         ctx: FormFieldErrorContext<any>
     ): ctx is FormFieldErrorContext<any> {
         return true;
     }
-
-    /** @hidden */
-    constructor(
-        public templateRef: TemplateRef<FormFieldErrorContext<T>>,
-        private _viewContainer: ViewContainerRef,
-        private _cdr: ChangeDetectorRef
-    ) {}
 
     /** @hidden */
     ngOnInit(): void {

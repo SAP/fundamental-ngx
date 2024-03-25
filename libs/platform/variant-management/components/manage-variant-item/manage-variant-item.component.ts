@@ -56,12 +56,12 @@ import { SaveDialogContext } from '../../models/save-dialog.model';
     ]
 })
 export class ManageVariantItemComponent {
-    /** @Hidden */
-    _form: FormGroup;
-
     /** @hidden */
     @ViewChild('formContainer', { read: FormGroupDirective })
     private readonly _formContainer: FormGroupDirective;
+
+    /** @Hidden */
+    _form: FormGroup;
     /** @hidden */
     _nameValidator: ValidatorFn[];
 

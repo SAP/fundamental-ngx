@@ -217,12 +217,6 @@ export abstract class BaseInput
         skipSelf: true
     });
 
-    /** @hidden */
-    private readonly _externalSubmit = inject(FDP_FORM_SUBMIT, { optional: true });
-
-    /** @hidden */
-    private _externalFormSubmitted = false;
-
     /**
      * @hidden
      * The state of the form control - applies css classes.
@@ -239,6 +233,12 @@ export abstract class BaseInput
     protected _editable = true;
     /** @hidden */
     protected _destroyed = inject(DestroyRef);
+
+    /** @hidden */
+    private readonly _externalSubmit = inject(FDP_FORM_SUBMIT, { optional: true });
+
+    /** @hidden */
+    private _externalFormSubmitted = false;
 
     /**
      * @hidden

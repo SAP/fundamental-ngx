@@ -73,9 +73,9 @@ import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
         </fdp-table>`
 })
 class TestComponent {
-    source: ExampleItem[] = ITEMS;
-
     @ViewChild(SmartFilterBarComponent) smartFilterBar: SmartFilterBarComponent;
+
+    source: ExampleItem[] = ITEMS;
 
     trackBy(_: number, item: ExampleItem): number {
         return item.id;

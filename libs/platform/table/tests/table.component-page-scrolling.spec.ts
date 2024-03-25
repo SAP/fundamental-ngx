@@ -11,10 +11,10 @@ import { PlatformTableModule } from '../table.module';
 import { SourceItem, generateItems } from './helpers';
 
 class TableDataProviderWithPaging extends TableDataProvider<SourceItem> {
-    private readonly ALL_ITEMS = generateItems(200);
-
     items: SourceItem[] = [];
     totalItems = 0;
+
+    private readonly ALL_ITEMS = generateItems(200);
 
     fetch(state: TableState): Observable<SourceItem[]> {
         const { currentPage, pageSize } = state.page;

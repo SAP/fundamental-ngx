@@ -331,6 +331,12 @@ export class ListComponent<T>
     /** @hidden */
     protected _dataSource: ListDataSource<T>;
 
+    /**
+     * @hidden
+     * Verfies partial navigation enabled
+     */
+    protected _partialNavigation = false;
+
     /** @hidden */
     private _translationResolver = new TranslationResolver();
 
@@ -360,12 +366,6 @@ export class ListComponent<T>
      * Whether object present in list item
      */
     private _hasObject: boolean;
-
-    /**
-     * @hidden
-     * Verfies partial navigation enabled
-     */
-    protected _partialNavigation = false;
 
     /**
      * @hidden

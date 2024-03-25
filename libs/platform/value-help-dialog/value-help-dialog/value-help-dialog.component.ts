@@ -219,7 +219,7 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
 
     /** Validator function. Called when user submits VHD dialog. */
     @Input()
-    tokenValidator: ((value: VhdValueChangeEvent<any>) => Observable<boolean> | boolean) | undefined;
+    tokenValidator: ((value: VhdValueChangeEvent) => Observable<boolean> | boolean) | undefined;
 
     /** Selection mode for search table */
     @Input()
@@ -301,9 +301,6 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
     _hasAdvanced = true;
 
     /** @hidden */
-    _hasDefineFilters = true;
-
-    /** @hidden */
     _displayedFilters: VhdFilter[] = [];
 
     /** @hidden */
@@ -315,6 +312,22 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
     /** handles rtl service
      * @hidden */
     _dir$ = computed<Direction>(() => (this._rtlService?.rtlSignal() ? 'rtl' : 'ltr'));
+
+    /** @hidden */
+    selectedTab: VhdTab | null = null;
+
+    /** @hidden */
+    shownFilterCount = Infinity;
+
+    /** @hidden */
+    get loadingState(): boolean {
+        return this.loading ?? this._internalLoadingState;
+    }
+
+    /** @hidden
+     * To differentiate between first loading when skeletons be shown and subsequent loadings when busy indicator be shown
+     */
+    _firstLoadingDone = false;
 
     /** @hidden */
     private _destroyed = inject(DestroyRef);
@@ -335,22 +348,6 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
         selected: [],
         conditions: []
     };
-
-    /** @hidden */
-    selectedTab: VhdTab | null = null;
-
-    /** @hidden */
-    shownFilterCount = Infinity;
-
-    /** @hidden */
-    get loadingState(): boolean {
-        return this.loading ?? this._internalLoadingState;
-    }
-
-    /** @hidden
-     * To differentiate between first loading when skeletons be shown and subsequent loadings when busy indicator be shown
-     */
-    _firstLoadingDone = false;
 
     /** @hidden */
     private _internalLoadingState = false;

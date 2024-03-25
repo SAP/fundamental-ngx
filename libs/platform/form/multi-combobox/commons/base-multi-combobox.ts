@@ -86,6 +86,24 @@ export class MultiComboboxSelectionChangeEvent {
 
 @Directive()
 export abstract class BaseMultiCombobox extends CollectionBaseInput implements OnChanges, AfterViewInit, OnDestroy {
+    /**
+     * @hidden
+     * Method to set input text as item label.
+     */
+    abstract setInputTextFromOptionItem(item: SelectableOptionItem): void;
+
+    /**
+     * @hidden
+     * Toggle item selection.
+     */
+    abstract toggleSelection(item: SelectableOptionItem): void;
+
+    /**
+     * @hidden
+     * Toggle item selection by input text value.
+     */
+    abstract toggleSelectionByInputText(): void;
+
     /** Provides selected items. */
     @Input()
     selectedItems: any[] = [];
@@ -100,10 +118,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
      */
     @Input()
     buttonFocusable = false;
-
     /** Datasource for suggestion list. */
     @Input()
     set dataSource(value: FdpMultiComboboxDataSource<any>) {}
+
     get dataSource(): FdpMultiComboboxDataSource<any> {
         return this._dataSource;
     }
@@ -151,12 +169,12 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     /** Turns on/off Adjustable Width feature. */
     @Input()
     autoResize = false;
-
     /** Value of the multi combobox */
     @Input()
     set value(value: any) {
         super.setValue(value, true);
     }
+
     get value(): any {
         return super.getValue();
     }
@@ -243,10 +261,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     selectedItemTemplate: TemplateRef<any>;
 
     /** @hidden */
-    protected readonly multiComboboxConfig = inject(MultiComboboxConfig);
-
-    /** @hidden */
-    _contentDensity: ContentDensity = this.multiComboboxConfig.contentDensity;
+    _contentDensity: ContentDensity;
 
     /** @hidden */
     listTemplate: TemplateRef<any>;
@@ -319,6 +334,15 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     selectedShown$ = signal(false);
 
     /** @hidden */
+    protected readonly multiComboboxConfig = inject(MultiComboboxConfig);
+
+    /** @hidden */
+    protected readonly _rangeSelector = new RangeSelector();
+
+    /** @hidden */
+    protected readonly dialogConfig = inject(DialogConfig, { optional: true });
+
+    /** @hidden */
     protected _dataSource: FdpMultiComboboxDataSource<any>;
 
     /** @hidden */
@@ -364,13 +388,13 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     private _previousStateMessage: Nullable<string>;
 
     /** @hidden */
-    protected readonly _rangeSelector = new RangeSelector();
-
-    /** @hidden */
-    protected readonly dialogConfig = inject(DialogConfig, { optional: true });
-
-    /** @hidden */
     private readonly _mapLimit = inject(MAP_LIMIT);
+
+    /** @hidden */
+    protected constructor() {
+        super();
+        this._contentDensity = this.multiComboboxConfig.contentDensity;
+    }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -401,24 +425,6 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
             this._dsSubscription.unsubscribe();
         }
     }
-
-    /**
-     * @hidden
-     * Method to set input text as item label.
-     */
-    abstract setInputTextFromOptionItem(item: SelectableOptionItem): void;
-
-    /**
-     * @hidden
-     * Toggle item selection.
-     */
-    abstract toggleSelection(item: SelectableOptionItem): void;
-
-    /**
-     * @hidden
-     * Toggle item selection by input text value.
-     */
-    abstract toggleSelectionByInputText(): void;
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
@@ -639,6 +645,57 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     }
 
     /** @hidden */
+    protected _getSelectItemByInputValue(displayValue: string): SelectableOptionItem | undefined {
+        return this._flatSuggestions.find((value) => value.label === displayValue);
+    }
+
+    /** @hidden
+     *  Map grouped values to array. */
+    protected _flattenGroups(items: SelectableOptionItem[]): SelectableOptionItem[] {
+        return items.reduce((result, item) => result.concat(item.children ?? []), <SelectableOptionItem[]>[]);
+    }
+
+    /**
+     * Convert object[] data to Group OptionItems Interface
+     * @hidden
+     */
+    protected _convertObjectsToGroupOptionItems<K>(items: K[]): SelectableOptionItem[] {
+        const group: { [key: string]: K[] } = {};
+
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+            const keyValue = item[this.groupKey];
+            if (!keyValue) {
+                continue;
+            }
+
+            if (!group[keyValue]) {
+                group[keyValue] = [];
+            }
+
+            group[keyValue].push(item);
+        }
+
+        return Object.keys(group).map((key) => {
+            const selectItem: SelectableOptionItem = {
+                label: key,
+                value: null,
+                isGroup: true
+            };
+
+            const currentGroup = group[key];
+
+            if (this.showSecondaryText && this.secondaryKey) {
+                selectItem.children = this._convertObjectsToSecondaryOptionItems(currentGroup);
+            } else {
+                selectItem.children = this._convertObjectsToDefaultOptionItems(currentGroup);
+            }
+
+            return selectItem;
+        });
+    }
+
+    /** @hidden */
     private _displayFn = (value: any): string => this.displayValue(value);
 
     /** @hidden */
@@ -675,17 +732,6 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         if (selectedIndex !== -1) {
             this._chooseOtherItem(offset);
         }
-    }
-
-    /** @hidden */
-    protected _getSelectItemByInputValue(displayValue: string): SelectableOptionItem | undefined {
-        return this._flatSuggestions.find((value) => value.label === displayValue);
-    }
-
-    /** @hidden
-     *  Map grouped values to array. */
-    protected _flattenGroups(items: SelectableOptionItem[]): SelectableOptionItem[] {
-        return items.reduce((result, item) => result.concat(item.children ?? []), <SelectableOptionItem[]>[]);
     }
 
     /** @hidden */
@@ -915,46 +961,6 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         } else {
             return this._convertObjectsToDefaultOptionItems(items);
         }
-    }
-
-    /**
-     * Convert object[] data to Group OptionItems Interface
-     * @hidden
-     */
-    protected _convertObjectsToGroupOptionItems<K>(items: K[]): SelectableOptionItem[] {
-        const group: { [key: string]: K[] } = {};
-
-        for (let i = 0; i < items.length; i++) {
-            const item = items[i];
-            const keyValue = item[this.groupKey];
-            if (!keyValue) {
-                continue;
-            }
-
-            if (!group[keyValue]) {
-                group[keyValue] = [];
-            }
-
-            group[keyValue].push(item);
-        }
-
-        return Object.keys(group).map((key) => {
-            const selectItem: SelectableOptionItem = {
-                label: key,
-                value: null,
-                isGroup: true
-            };
-
-            const currentGroup = group[key];
-
-            if (this.showSecondaryText && this.secondaryKey) {
-                selectItem.children = this._convertObjectsToSecondaryOptionItems(currentGroup);
-            } else {
-                selectItem.children = this._convertObjectsToDefaultOptionItems(currentGroup);
-            }
-
-            return selectItem;
-        });
     }
 
     /**

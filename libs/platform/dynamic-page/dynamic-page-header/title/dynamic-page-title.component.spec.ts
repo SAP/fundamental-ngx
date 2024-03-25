@@ -57,11 +57,6 @@ import { PlatformDynamicPageModule } from '../../dynamic-page.module';
     `
 })
 class TestComponent implements AfterViewInit {
-    title = 'Some title ';
-    subtitle: string;
-    size: DynamicPageResponsiveSize = 'medium';
-    background: DynamicPageBackgroundType;
-
     @ViewChild(DynamicPageTitleComponent) dynamicPageTitleComponent: DynamicPageTitleComponent;
     @ViewChild(DynamicPageKeyInfoComponent) dynamicPageKeyInfoComponent: DynamicPageKeyInfoComponent;
     @ViewChild(DynamicPageGlobalActionsComponent) dynamicPageGlobalActionsComponent: DynamicPageGlobalActionsComponent;
@@ -69,6 +64,11 @@ class TestComponent implements AfterViewInit {
 
     @ViewChild('outlet')
     outlet: ElementRef<HTMLElement>;
+    title = 'Some title ';
+    subtitle: string;
+    size: DynamicPageResponsiveSize = 'medium';
+
+    background: DynamicPageBackgroundType;
 
     constructor(private cd: ChangeDetectorRef) {}
 

@@ -62,6 +62,12 @@ import { SmartFilterBarService } from '../../smart-filter-bar.service';
     ]
 })
 export class SmartFilterBarConditionsDialogComponent {
+    /**
+     * Generated condition forms.
+     */
+    @ViewChildren(FormGeneratorComponent)
+    formGenerators!: QueryList<FormGeneratorComponent>;
+
     /** Condition builder config. */
     config: SmartFilterBarConditionBuilder;
 
@@ -70,12 +76,6 @@ export class SmartFilterBarConditionsDialogComponent {
 
     /** @hidden */
     _formItems: DynamicFormItem[][] = [];
-
-    /**
-     * Generated condition forms.
-     */
-    @ViewChildren(FormGeneratorComponent)
-    formGenerators!: QueryList<FormGeneratorComponent>;
 
     /** @hidden */
     loaded = false;
@@ -110,22 +110,6 @@ export class SmartFilterBarConditionsDialogComponent {
         private _smartFilterBarService: SmartFilterBarService
     ) {
         this._init();
-    }
-
-    /** @hidden */
-    private _init(): void {
-        this.config = this._dialogRef.data;
-
-        this.conditionOperatorOptions = this._getApplicableConditionOperators();
-
-        this._addExistingConditions(getSelectItemValue(this.config.conditions));
-
-        if (this.config.conditions.length === 0) {
-            // Add first empty condition
-            this.addCondition();
-        }
-        this.loaded = true;
-        this._cdr.markForCheck();
     }
 
     /**
@@ -182,6 +166,22 @@ export class SmartFilterBarConditionsDialogComponent {
     /** @hidden */
     _cancel(): void {
         this._dialogRef.dismiss();
+    }
+
+    /** @hidden */
+    private _init(): void {
+        this.config = this._dialogRef.data;
+
+        this.conditionOperatorOptions = this._getApplicableConditionOperators();
+
+        this._addExistingConditions(getSelectItemValue(this.config.conditions));
+
+        if (this.config.conditions.length === 0) {
+            // Add first empty condition
+            this.addCondition();
+        }
+        this.loaded = true;
+        this._cdr.markForCheck();
     }
 
     /**

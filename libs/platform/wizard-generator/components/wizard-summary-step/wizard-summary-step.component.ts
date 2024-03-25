@@ -30,16 +30,6 @@ import { WizardSummarySectionComponent } from './wizard-summary-section/wizard-s
 })
 export class WizardSummaryStepComponent {
     /**
-     * Formatted wizard value with steps and their forms.
-     */
-    formattedWizardValue: WizardGeneratorSummaryItem[] = [];
-
-    /**
-     * @hidden
-     */
-    _submittedForms: WizardGeneratorFormsValue;
-
-    /**
      * @description Summary step status.
      */
     @Input()
@@ -72,6 +62,16 @@ export class WizardSummaryStepComponent {
     customSummaryStepTemplate: Nullable<TemplateRef<HTMLElement>>;
 
     /**
+     * Formatted wizard value with steps and their forms.
+     */
+    formattedWizardValue: WizardGeneratorSummaryItem[] = [];
+
+    /**
+     * @hidden
+     */
+    _submittedForms: WizardGeneratorFormsValue;
+
+    /**
      * @hidden
      */
     _shouldRender = false;
@@ -96,12 +96,8 @@ export class WizardSummaryStepComponent {
         this._wizardGeneratorService.editStep(stepId);
     }
 
-    /**
-     * @hidden
-     * @param index
-     * @returns step index
-     */
-    _trackFn(_: number, step): number {
+    /** @hidden */
+    _trackFn(_: number, step: WizardGeneratorSummaryItem): string {
         return step.id;
     }
 

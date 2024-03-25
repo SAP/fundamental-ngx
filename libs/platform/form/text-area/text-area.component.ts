@@ -160,6 +160,29 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         }
     }
 
+    /** when backpress or delete key is pressed when showExceededText field is not set, simply remove excess characters,
+     /* else handle autogrow case
+     */
+    @HostListener('keyup', ['$event'])
+    handleBackPress(event: KeyboardEvent): void {
+        // if not showing exceeded text message/interactions or growing, and custom value set
+        if (this.growing) {
+            this.autoGrowTextArea();
+            this.isValueCustomSet = false; // set it to false first time it comes here
+        }
+        if (this._shouldTrackTextLimit && KeyUtil.isKeyCode(event, [DELETE, BACKSPACE])) {
+            // for the custom value set and showExceededText=false case, on any key press, remove excess characters
+            if (this.value) {
+                this._textAreaCharCount = this.value.length;
+                if (this._textAreaCharCount > this.maxLength) {
+                    // remove excess characters
+                    this.value = this.value.substring(0, this.maxLength);
+                    this.isValueCustomSet = false; // since value is now changed, it is no longer custom set
+                }
+            }
+        }
+    }
+
     /** @hidden */
     ngOnInit(): void {
         if (!this.wrapType || VALID_WRAP_TYPES.indexOf(this.wrapType) === -1) {
@@ -278,29 +301,6 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         return 20; // default line height if nothing is defined
     }
 
-    /** when backpress or delete key is pressed when showExceededText field is not set, simply remove excess characters,
-    /* else handle autogrow case
-    */
-    @HostListener('keyup', ['$event'])
-    handleBackPress(event: KeyboardEvent): void {
-        // if not showing exceeded text message/interactions or growing, and custom value set
-        if (this.growing) {
-            this.autoGrowTextArea();
-            this.isValueCustomSet = false; // set it to false first time it comes here
-        }
-        if (this._shouldTrackTextLimit && KeyUtil.isKeyCode(event, [DELETE, BACKSPACE])) {
-            // for the custom value set and showExceededText=false case, on any key press, remove excess characters
-            if (this.value) {
-                this._textAreaCharCount = this.value.length;
-                if (this._textAreaCharCount > this.maxLength) {
-                    // remove excess characters
-                    this.value = this.value.substring(0, this.maxLength);
-                    this.isValueCustomSet = false; // since value is now changed, it is no longer custom set
-                }
-            }
-        }
-    }
-
     /**
      * get the updated state when character count breaches `maxLength`
      */
@@ -339,12 +339,11 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         // Get the computed styles for the element
         const computed = window.getComputedStyle(this._targetElement);
         // Calculate the height
-        const height =
+        return (
             parseInt(computed.getPropertyValue('border-top-width'), 10) +
             this._targetElement.scrollHeight +
-            parseInt(computed.getPropertyValue('border-bottom-width'), 10);
-
-        return height;
+            parseInt(computed.getPropertyValue('border-bottom-width'), 10)
+        );
     }
 
     /** @hidden set initial max height **/

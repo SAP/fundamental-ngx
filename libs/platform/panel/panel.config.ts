@@ -23,6 +23,11 @@ export class PanelConfig {
      */
     contentDensity: ContentDensity;
 
+    /** @hidden */
+    constructor(platformConfig: PlatformConfig) {
+        this.contentDensity = platformConfig.contentDensity;
+    }
+
     /**
      * Create Provider factory function
      */
@@ -30,10 +35,5 @@ export class PanelConfig {
         const useFactory = (platformConfig: PlatformConfig): PanelConfig =>
             Object.assign(new PanelConfig(platformConfig), obj);
         return useFactory;
-    }
-
-    /** @hidden */
-    constructor(platformConfig: PlatformConfig) {
-        this.contentDensity = platformConfig.contentDensity;
     }
 }

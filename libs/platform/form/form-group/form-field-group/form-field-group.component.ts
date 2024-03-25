@@ -3,10 +3,10 @@ import {
     Component,
     ContentChildren,
     forwardRef,
+    inject,
     Input,
     OnDestroy,
     OnInit,
-    Optional,
     Provider,
     QueryList,
     ViewEncapsulation
@@ -57,7 +57,7 @@ export class FormFieldGroupComponent implements FormFieldGroup, OnInit, OnDestro
      * This will override default value injected by constructor
      */
     @Input()
-    formGroupContainer: FormGroupContainer;
+    formGroupContainer: FormGroupContainer | null = inject(FormGroupContainer, { optional: true });
 
     /**
      * Defines label's column layout.
@@ -71,9 +71,6 @@ export class FormFieldGroupComponent implements FormFieldGroup, OnInit, OnDestro
     get labelColumnLayout(): ColumnLayout {
         return this._labelColumnLayout;
     }
-    /** @hidden */
-    private _labelColumnLayout: ColumnLayout;
-
     /**
      * Defines field's column layout.
      */
@@ -83,12 +80,10 @@ export class FormFieldGroupComponent implements FormFieldGroup, OnInit, OnDestro
             this._fieldColumnLayout = value;
         }
     }
+
     get fieldColumnLayout(): ColumnLayout {
         return this._fieldColumnLayout;
     }
-    /** @hidden */
-    private _fieldColumnLayout: ColumnLayout;
-
     /**
      * Defines gap column layout.
      */
@@ -101,15 +96,11 @@ export class FormFieldGroupComponent implements FormFieldGroup, OnInit, OnDestro
     get gapColumnLayout(): ColumnLayout {
         return this._gapColumnLayout;
     }
-    /** @hidden */
-    private _gapColumnLayout: ColumnLayout;
-
     /**
      * Describes hint options for group header
      */
     @Input()
     hintOptions?: HintOptions;
-
     /**
      * Get form fields wrapped into form field group
      */
@@ -117,9 +108,13 @@ export class FormFieldGroupComponent implements FormFieldGroup, OnInit, OnDestro
     fields: QueryList<PlatformFormField>;
 
     /** @hidden */
-    constructor(@Optional() formGroupContainer: FormGroupContainer) {
-        this.formGroupContainer = formGroupContainer;
-    }
+    private _labelColumnLayout: ColumnLayout;
+
+    /** @hidden */
+    private _fieldColumnLayout: ColumnLayout;
+
+    /** @hidden */
+    private _gapColumnLayout: ColumnLayout;
 
     /** @hidden */
     ngOnInit(): void {

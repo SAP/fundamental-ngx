@@ -13,6 +13,11 @@ export class InputGroupConfig {
      */
     contentDensity: ContentDensity;
 
+    /** @hidden */
+    constructor(platformConfig: PlatformConfig) {
+        this.contentDensity = platformConfig.contentDensity;
+    }
+
     /**
      * Create Provider factory function
      */
@@ -20,10 +25,5 @@ export class InputGroupConfig {
         const useFactory = (platformConfig: PlatformConfig): InputGroupConfig =>
             Object.assign(new InputGroupConfig(platformConfig), obj);
         return useFactory;
-    }
-
-    /** @hidden */
-    constructor(platformConfig: PlatformConfig) {
-        this.contentDensity = platformConfig.contentDensity;
     }
 }

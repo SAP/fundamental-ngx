@@ -52,12 +52,6 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     @ViewChild('renderer')
     renderer: TemplateRef<any>;
 
-    /** @hidden */
-    _currentValue: any;
-
-    /** @hidden Radio checked status */
-    _isChecked = false;
-
     /** click event to emit */
     @Output()
     readonly checked: EventEmitter<RadioButtonComponent> = new EventEmitter();
@@ -65,6 +59,12 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     /** Access radio button child element passed as content of radio button group */
     @ViewChild(CoreRadioButtonComponent, { static: false })
     private coreRadioButton: CoreRadioButtonComponent;
+
+    /** @hidden */
+    _currentValue: any;
+
+    /** @hidden Radio checked status */
+    _isChecked = false;
 
     /** @hidden */
     constructor() {

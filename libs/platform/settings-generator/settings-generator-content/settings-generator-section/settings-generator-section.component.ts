@@ -58,6 +58,15 @@ export class SettingsGeneratorSectionComponent {
     }
 
     /** @hidden */
+    _renderer: 'form' | 'template' = 'form';
+
+    /** @hidden */
+    _templateRef: TemplateRef<any> | null = null;
+
+    /** @hidden */
+    _formItems: DynamicFormItem[] = [];
+
+    /** @hidden */
     private readonly _settingsGeneratorService = inject(SettingsGeneratorService);
 
     /** @hidden */
@@ -80,15 +89,6 @@ export class SettingsGeneratorSectionComponent {
             this._settingsGeneratorService._removeFormGenerator(path);
         }
     }
-
-    /** @hidden */
-    _renderer: 'form' | 'template' = 'form';
-
-    /** @hidden */
-    _templateRef: TemplateRef<any> | null = null;
-
-    /** @hidden */
-    _formItems: DynamicFormItem[] = [];
 
     /** @hidden */
     _isTemplateLayout(settings: any): settings is TemplateSettingsItem {

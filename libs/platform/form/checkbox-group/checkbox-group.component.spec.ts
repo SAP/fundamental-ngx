@@ -16,7 +16,7 @@ import { PlatformCheckboxGroupModule } from './checkbox-group.module';
     selector: 'fdp-cbg-reactive-test',
     template: `
         <fdp-form-group [formGroup]="form1" [object]="formData">
-            <fdp-form-field #fl1 [id]="'phones'" [label]="'Phones interested in:'" zone="zLeft" rank="1">
+            <fdp-form-field #fl1 [id]="'phones'" [label]="'Phones interested in:'" rank="1">
                 <fdp-checkbox-group
                     [list]="phoneslist"
                     [name]="'brands'"
@@ -24,7 +24,7 @@ import { PlatformCheckboxGroupModule } from './checkbox-group.module';
                 ></fdp-checkbox-group>
             </fdp-form-field>
 
-            <fdp-form-field #fl2 [id]="'visited'" [label]="'Country visited: '" zone="zLeft" rank="1">
+            <fdp-form-field #fl2 [id]="'visited'" [label]="'Country visited: '" rank="1">
                 <fdp-checkbox-group
                     [list]="countryVisited"
                     [name]="'visited'"
@@ -32,7 +32,7 @@ import { PlatformCheckboxGroupModule } from './checkbox-group.module';
                 ></fdp-checkbox-group>
             </fdp-form-field>
 
-            <fdp-form-field #fl3 [id]="'hobbies'" [label]="'My Hobbies:'" zone="zLeft" rank="1">
+            <fdp-form-field #fl3 [id]="'hobbies'" [label]="'My Hobbies:'" rank="1">
                 <fdp-checkbox-group [name]="'hobby'" [formControl]="fl3.formControl">
                     <fdp-checkbox [values]="{ trueValue: 'cooking' }" [label]="'Cooking'"></fdp-checkbox>
                     <fdp-checkbox [values]="{ trueValue: 'painting' }" [label]="'Painting'"></fdp-checkbox>
@@ -41,7 +41,7 @@ import { PlatformCheckboxGroupModule } from './checkbox-group.module';
                 </fdp-checkbox-group>
             </fdp-form-field>
 
-            <fdp-form-field #fl4 [id]="'language'" [label]="'Languages Known: '" zone="zLeft" rank="1">
+            <fdp-form-field #fl4 [id]="'language'" [label]="'Languages Known: '" rank="1">
                 <fdp-checkbox-group
                     [list]="languages"
                     [name]="'language'"
@@ -49,7 +49,7 @@ import { PlatformCheckboxGroupModule } from './checkbox-group.module';
                 ></fdp-checkbox-group>
             </fdp-form-field>
 
-            <fdp-form-field #fl5 [id]="'fruits'" [label]="'Fruits:'" zone="zLeft" rank="1">
+            <fdp-form-field #fl5 [id]="'fruits'" [label]="'Fruits:'" rank="1">
                 <fdp-checkbox-group [name]="'fruits'" [formControl]="fl5.formControl">
                     <fdp-checkbox [values]="{ trueValue: 'apple' }" [label]="'Apple'" [disabled]="true"></fdp-checkbox>
                     <fdp-checkbox [values]="{ trueValue: 'banana' }" [label]="'Banana'"></fdp-checkbox>
@@ -58,7 +58,7 @@ import { PlatformCheckboxGroupModule } from './checkbox-group.module';
                 </fdp-checkbox-group>
             </fdp-form-field>
 
-            <fdp-form-field #fl6 [id]="'items'" [label]="'Purchased Items: '" zone="zLeft" rank="1">
+            <fdp-form-field #fl6 [id]="'items'" [label]="'Purchased Items: '" rank="1">
                 <fdp-checkbox-group
                     [list]="invoiceItems"
                     [name]="'items'"
@@ -71,7 +71,10 @@ import { PlatformCheckboxGroupModule } from './checkbox-group.module';
     `
 })
 class TestReactiveCheckboxGroupComponent {
+    @ViewChildren(CheckboxComponent)
+    checkboxGroups: QueryList<CheckboxGroupComponent>;
     phoneslist: string[] = ['Samsung', 'Apple', 'OnePlus', 'Redmi'];
+
     countryVisited = [new Country('Australia', 'Australia'), new Country('India', 'India'), new Country('USA', 'USA')];
 
     languages = [
@@ -86,17 +89,14 @@ class TestReactiveCheckboxGroupComponent {
         new Item('2', 'pen', 'Pen', 200, 5),
         new Item('3', 'chair', 'Office chair', 50, 5530)
     ];
-
     form1 = new FormGroup({
         items: new FormControl(),
         phones: new FormControl(),
         visited: new FormControl(),
         hobbies: new FormControl()
     });
-    formData = { phones: ['Samsung', 'OnePlus'], visited: ['India', 'USA'], hobbies: ['coding', 'gardening'] };
 
-    @ViewChildren(CheckboxComponent)
-    checkboxGroups: QueryList<CheckboxGroupComponent>;
+    formData = { phones: ['Samsung', 'OnePlus'], visited: ['India', 'USA'], hobbies: ['coding', 'gardening'] };
 }
 
 describe('CheckboxGroup component Reactive Form Test', () => {
@@ -224,10 +224,10 @@ describe('CheckboxGroup component Reactive Form Test', () => {
         fixture.detectChanges();
 
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('fdp-checkbox'));
-        const input11: HTMLInputElement = fdpCheckboxElem[11].nativeElement.querySelector('input[type="checkbox"');
-        const input12: HTMLInputElement = fdpCheckboxElem[12].nativeElement.querySelector('input[type="checkbox"');
-        const input13: HTMLInputElement = fdpCheckboxElem[13].nativeElement.querySelector('input[type="checkbox"');
-        const input14: HTMLInputElement = fdpCheckboxElem[14].nativeElement.querySelector('input[type="checkbox"');
+        const input11: HTMLInputElement = fdpCheckboxElem[11].nativeElement.querySelector('input[type="checkbox"]');
+        const input12: HTMLInputElement = fdpCheckboxElem[12].nativeElement.querySelector('input[type="checkbox"]');
+        const input13: HTMLInputElement = fdpCheckboxElem[13].nativeElement.querySelector('input[type="checkbox"]');
+        const input14: HTMLInputElement = fdpCheckboxElem[14].nativeElement.querySelector('input[type="checkbox"]');
         expect(input11.hasAttribute('disabled')).toBe(false);
         expect(input12.hasAttribute('disabled')).toBe(true);
         expect(input13.hasAttribute('disabled')).toBe(false);
@@ -239,10 +239,10 @@ describe('CheckboxGroup component Reactive Form Test', () => {
         fixture.detectChanges();
 
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('fdp-checkbox'));
-        const input15: HTMLInputElement = fdpCheckboxElem[15].nativeElement.querySelector('input[type="checkbox"');
-        const input16: HTMLInputElement = fdpCheckboxElem[16].nativeElement.querySelector('input[type="checkbox"');
-        const input17: HTMLInputElement = fdpCheckboxElem[17].nativeElement.querySelector('input[type="checkbox"');
-        const input18: HTMLInputElement = fdpCheckboxElem[18].nativeElement.querySelector('input[type="checkbox"');
+        const input15: HTMLInputElement = fdpCheckboxElem[15].nativeElement.querySelector('input[type="checkbox"]');
+        const input16: HTMLInputElement = fdpCheckboxElem[16].nativeElement.querySelector('input[type="checkbox"]');
+        const input17: HTMLInputElement = fdpCheckboxElem[17].nativeElement.querySelector('input[type="checkbox"]');
+        const input18: HTMLInputElement = fdpCheckboxElem[18].nativeElement.querySelector('input[type="checkbox"]');
         expect(input15.hasAttribute('disabled')).toBe(true);
         expect(input16.hasAttribute('disabled')).toBe(false);
         expect(input17.hasAttribute('disabled')).toBe(true);
@@ -277,11 +277,11 @@ describe('CheckboxGroup component Reactive Form Test', () => {
     selector: 'fdp-cbg-template-driven-test',
     template: `
         <fdp-form-group>
-            <fdp-form-field [id]="'phonest'" [label]="'Phones interested in:'" zone="zLeft" rank="1">
+            <fdp-form-field [id]="'phonest'" [label]="'Phones interested in:'" rank="1">
                 <fdp-checkbox-group [list]="phoneslist" [name]="'brands'" [(ngModel)]="phones"></fdp-checkbox-group>
             </fdp-form-field>
 
-            <fdp-form-field [id]="'visitedt'" [label]="'Country visited: '" zone="zLeft" rank="1">
+            <fdp-form-field [id]="'visitedt'" [label]="'Country visited: '" rank="1">
                 <fdp-checkbox-group
                     [list]="countryVisited"
                     [name]="'visited'"
@@ -289,7 +289,7 @@ describe('CheckboxGroup component Reactive Form Test', () => {
                 ></fdp-checkbox-group>
             </fdp-form-field>
 
-            <fdp-form-field [id]="'hobbiest'" [label]="'My Hobbies:'" zone="zLeft" rank="1">
+            <fdp-form-field [id]="'hobbiest'" [label]="'My Hobbies:'" rank="1">
                 <fdp-checkbox-group [name]="'hobby'" [(ngModel)]="hobbies">
                     <fdp-checkbox [values]="{ trueValue: 'cooking' }" [label]="'Cooking'"></fdp-checkbox>
                     <fdp-checkbox [values]="{ trueValue: 'painting' }" [label]="'Painting'"></fdp-checkbox>
@@ -298,11 +298,11 @@ describe('CheckboxGroup component Reactive Form Test', () => {
                 </fdp-checkbox-group>
             </fdp-form-field>
 
-            <fdp-form-field [id]="'languaget'" [label]="'Languages Known: '" zone="zLeft" rank="1">
+            <fdp-form-field [id]="'languaget'" [label]="'Languages Known: '" rank="1">
                 <fdp-checkbox-group [list]="languages" [name]="'language'" [(ngModel)]="language"></fdp-checkbox-group>
             </fdp-form-field>
 
-            <fdp-form-field [id]="'fruitst'" [label]="'Fruits:'" zone="zLeft" rank="1">
+            <fdp-form-field [id]="'fruitst'" [label]="'Fruits:'" rank="1">
                 <fdp-checkbox-group [name]="'fruits'" [(ngModel)]="fruits">
                     <fdp-checkbox [values]="{ trueValue: 'apple' }" [label]="'Apple'" [disabled]="true"></fdp-checkbox>
                     <fdp-checkbox [values]="{ trueValue: 'banana' }" [label]="'Banana'"></fdp-checkbox>
@@ -311,7 +311,7 @@ describe('CheckboxGroup component Reactive Form Test', () => {
                 </fdp-checkbox-group>
             </fdp-form-field>
 
-            <fdp-form-field [id]="'itemst'" [label]="'Purchased Items: '" zone="zLeft" rank="1">
+            <fdp-form-field [id]="'itemst'" [label]="'Purchased Items: '" rank="1">
                 <fdp-checkbox-group
                     [list]="invoiceItems"
                     [name]="'items'"
@@ -472,10 +472,10 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
         fixture.detectChanges();
 
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('fdp-checkbox'));
-        const input11: HTMLInputElement = fdpCheckboxElem[11].nativeElement.querySelector('input[type="checkbox"');
-        const input12: HTMLInputElement = fdpCheckboxElem[12].nativeElement.querySelector('input[type="checkbox"');
-        const input13: HTMLInputElement = fdpCheckboxElem[13].nativeElement.querySelector('input[type="checkbox"');
-        const input14: HTMLInputElement = fdpCheckboxElem[14].nativeElement.querySelector('input[type="checkbox"');
+        const input11: HTMLInputElement = fdpCheckboxElem[11].nativeElement.querySelector('input[type="checkbox"]');
+        const input12: HTMLInputElement = fdpCheckboxElem[12].nativeElement.querySelector('input[type="checkbox"]');
+        const input13: HTMLInputElement = fdpCheckboxElem[13].nativeElement.querySelector('input[type="checkbox"]');
+        const input14: HTMLInputElement = fdpCheckboxElem[14].nativeElement.querySelector('input[type="checkbox"]');
         expect(input11.hasAttribute('disabled')).toBe(false);
         expect(input12.hasAttribute('disabled')).toBe(true);
         expect(input13.hasAttribute('disabled')).toBe(false);
@@ -487,10 +487,10 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
         fixture.detectChanges();
 
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('fdp-checkbox'));
-        const input15: HTMLInputElement = fdpCheckboxElem[15].nativeElement.querySelector('input[type="checkbox"');
-        const input16: HTMLInputElement = fdpCheckboxElem[16].nativeElement.querySelector('input[type="checkbox"');
-        const input17: HTMLInputElement = fdpCheckboxElem[17].nativeElement.querySelector('input[type="checkbox"');
-        const input18: HTMLInputElement = fdpCheckboxElem[18].nativeElement.querySelector('input[type="checkbox"');
+        const input15: HTMLInputElement = fdpCheckboxElem[15].nativeElement.querySelector('input[type="checkbox"]');
+        const input16: HTMLInputElement = fdpCheckboxElem[16].nativeElement.querySelector('input[type="checkbox"]');
+        const input17: HTMLInputElement = fdpCheckboxElem[17].nativeElement.querySelector('input[type="checkbox"]');
+        const input18: HTMLInputElement = fdpCheckboxElem[18].nativeElement.querySelector('input[type="checkbox"]');
         expect(input15.hasAttribute('disabled')).toBe(true);
         expect(input16.hasAttribute('disabled')).toBe(false);
         expect(input17.hasAttribute('disabled')).toBe(true);
@@ -528,11 +528,11 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
     selector: 'fdp-cbg-reactive-formgroup-data',
     template: `
         <fdp-form-group [formGroup]="form2">
-            <fdp-form-field #fl1 [id]="'phones'" [label]="'Phones interested in:'" zone="zLeft" rank="1">
+            <fdp-form-field #fl1 [id]="'phones'" [label]="'Phones interested in:'" rank="1">
                 <fdp-checkbox-group [list]="phoneslist" [name]="'brands'" formControlName="phones"></fdp-checkbox-group>
             </fdp-form-field>
 
-            <fdp-form-field #fl2 [id]="'visited'" [label]="'Country visited: '" zone="zLeft" rank="1">
+            <fdp-form-field #fl2 [id]="'visited'" [label]="'Country visited: '" rank="1">
                 <fdp-checkbox-group
                     [list]="countryVisited"
                     [name]="'visited'"
@@ -540,7 +540,7 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
                 ></fdp-checkbox-group>
             </fdp-form-field>
 
-            <fdp-form-field #fl3 [id]="'hobbies'" [label]="'My Hobbies:'" zone="zLeft" rank="1">
+            <fdp-form-field #fl3 [id]="'hobbies'" [label]="'My Hobbies:'" rank="1">
                 <fdp-checkbox-group [name]="'hobby'" formControlName="hobbies">
                     <fdp-checkbox [values]="{ trueValue: 'cooking' }" [label]="'Cooking'"></fdp-checkbox>
                     <fdp-checkbox [values]="{ trueValue: 'painting' }" [label]="'Painting'"></fdp-checkbox>
@@ -549,7 +549,7 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
                 </fdp-checkbox-group>
             </fdp-form-field>
 
-            <fdp-form-field #fl4 [id]="'language'" [label]="'Languages Known: '" zone="zLeft" rank="1">
+            <fdp-form-field #fl4 [id]="'language'" [label]="'Languages Known: '" rank="1">
                 <fdp-checkbox-group
                     [list]="languages"
                     [name]="'language'"
@@ -557,7 +557,7 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
                 ></fdp-checkbox-group>
             </fdp-form-field>
 
-            <fdp-form-field #fl5 [id]="'fruits'" [label]="'Fruits:'" zone="zLeft" rank="1">
+            <fdp-form-field #fl5 [id]="'fruits'" [label]="'Fruits:'" rank="1">
                 <fdp-checkbox-group [name]="'fruits'" formControlName="fruits">
                     <fdp-checkbox [values]="{ trueValue: 'apple' }" [label]="'Apple'" [disabled]="true"></fdp-checkbox>
                     <fdp-checkbox [values]="{ trueValue: 'banana' }" [label]="'Banana'"></fdp-checkbox>
@@ -569,7 +569,10 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
     `
 })
 class TestReactiveCheckboxGroupWithDataComponent {
+    @ViewChildren(CheckboxComponent)
+    checkboxGroups: QueryList<CheckboxGroupComponent>;
     phoneslist: string[] = ['Samsung', 'Apple', 'OnePlus', 'Redmi'];
+
     countryVisited = [new Country('Australia', 'Australia'), new Country('India', 'India'), new Country('USA', 'USA')];
 
     languages = [
@@ -586,9 +589,6 @@ class TestReactiveCheckboxGroupWithDataComponent {
         languages: new FormControl<string[]>(['python']),
         fruits: new FormControl<string[]>(['banana', 'guava'])
     });
-
-    @ViewChildren(CheckboxComponent)
-    checkboxGroups: QueryList<CheckboxGroupComponent>;
 }
 
 describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () => {
@@ -718,10 +718,10 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
         fixture.detectChanges();
 
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('fdp-checkbox'));
-        const input11: HTMLInputElement = fdpCheckboxElem[11].nativeElement.querySelector('input[type="checkbox"');
-        const input12: HTMLInputElement = fdpCheckboxElem[12].nativeElement.querySelector('input[type="checkbox"');
-        const input13: HTMLInputElement = fdpCheckboxElem[13].nativeElement.querySelector('input[type="checkbox"');
-        const input14: HTMLInputElement = fdpCheckboxElem[14].nativeElement.querySelector('input[type="checkbox"');
+        const input11: HTMLInputElement = fdpCheckboxElem[11].nativeElement.querySelector('input[type="checkbox"]');
+        const input12: HTMLInputElement = fdpCheckboxElem[12].nativeElement.querySelector('input[type="checkbox"]');
+        const input13: HTMLInputElement = fdpCheckboxElem[13].nativeElement.querySelector('input[type="checkbox"]');
+        const input14: HTMLInputElement = fdpCheckboxElem[14].nativeElement.querySelector('input[type="checkbox"]');
         expect(input11.hasAttribute('disabled')).toBe(false);
         expect(input12.hasAttribute('disabled')).toBe(true);
         expect(input13.hasAttribute('disabled')).toBe(false);
@@ -733,10 +733,10 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
         fixture.detectChanges();
 
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('fdp-checkbox'));
-        const input15: HTMLInputElement = fdpCheckboxElem[15].nativeElement.querySelector('input[type="checkbox"');
-        const input16: HTMLInputElement = fdpCheckboxElem[16].nativeElement.querySelector('input[type="checkbox"');
-        const input17: HTMLInputElement = fdpCheckboxElem[17].nativeElement.querySelector('input[type="checkbox"');
-        const input18: HTMLInputElement = fdpCheckboxElem[18].nativeElement.querySelector('input[type="checkbox"');
+        const input15: HTMLInputElement = fdpCheckboxElem[15].nativeElement.querySelector('input[type="checkbox"]');
+        const input16: HTMLInputElement = fdpCheckboxElem[16].nativeElement.querySelector('input[type="checkbox"]');
+        const input17: HTMLInputElement = fdpCheckboxElem[17].nativeElement.querySelector('input[type="checkbox"]');
+        const input18: HTMLInputElement = fdpCheckboxElem[18].nativeElement.querySelector('input[type="checkbox"]');
         expect(input15.hasAttribute('disabled')).toBe(true);
         expect(input16.hasAttribute('disabled')).toBe(false);
         expect(input17.hasAttribute('disabled')).toBe(true);
