@@ -21,7 +21,7 @@
 </fdp-table>
 
 <fd-pagination
-    style="padding-top: 1rem"
+    [style.padding-top.rem]="1"
     fd-toolbar-item
     [totalItems]="source.dataProvider.totalItems"
     [itemsPerPage]="pageSize"

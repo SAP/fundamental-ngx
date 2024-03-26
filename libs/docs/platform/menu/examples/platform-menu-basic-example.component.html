@@ -3,7 +3,7 @@
     <button fd-button [fdpMenuTriggerFor]="basicMenu" label="Menu Button example" fdType="menu"></button>
     <button fd-button [fdpMenuTriggerFor]="basicMenu" title="Overflow Icon title example" glyph="overflow"></button>
     <fd-avatar
-        style="margin-right: 10px"
+        [style.margin-right.px]="10"
         size="m"
         image="https://picsum.photos/id/1018/400"
         [fdpMenuTriggerFor]="basicMenu"
@@ -17,5 +17,5 @@
         <fdp-menu-item (itemSelect)="onItemSelect('Third Item')">Third Item</fdp-menu-item>
     </fdp-menu>
 
-    <div style="margin-top: 1rem"><label>Item Selected:</label> {{ item }}</div>
+    <div [style.margin-top.rem]="1"><label>Item Selected:</label> {{ item }}</div>
 </div>

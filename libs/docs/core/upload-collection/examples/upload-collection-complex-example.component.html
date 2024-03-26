@@ -81,7 +81,7 @@
     }
 </fd-upload-collection>
 @if (!files.length) {
-    <fd-message-page glyph="attachment" style="margin-top: 30px">
+    <fd-message-page glyph="attachment" [style.margin-top.px]="30">
         <fd-message-page-title>No files found. </fd-message-page-title>
         <fd-message-page-subtitle> Use the "Upload" button to upload files. </fd-message-page-subtitle>
     </fd-message-page>

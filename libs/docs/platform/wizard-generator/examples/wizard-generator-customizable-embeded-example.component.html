@@ -18,7 +18,7 @@
             <h4 fd-title [headerSize]="4">{{ step.name }} step</h4>
             @for (group of step.forms; track group) {
                 <h4 fd-title [headerSize]="6">{{ group.title }} form</h4>
-                <fd-layout-grid style="margin-bottom: 2rem">
+                <fd-layout-grid [style.margin-bottom.rem]="2">
                     <div fdLayoutGridRow>
                         <div [fdLayoutGridCol]="4" [colMd]="4" [colLg]="4" [colXl]="4">
                             @for (item of group.items; track item) {

@@ -1,5 +1,5 @@
 @for (item of infoLabelColors; track item) {
-    <div style="margin-top: 10px">
+    <div [style.margin-top.px]="10">
         <fdp-info-label
             type="icon"
             [color]="item"

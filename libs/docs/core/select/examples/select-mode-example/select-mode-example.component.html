@@ -4,25 +4,25 @@
         <li fd-option [value]="option">{{ option }}</li>
     }
 </fd-select>
-<small style="display: block">Selected value: {{ selectedValue1 }}</small>
+<small [style.display]="'block'">Selected value: {{ selectedValue1 }}</small>
 <h4>Compact select</h4>
 <fd-select placeholder="Select an option" fdCompact [(value)]="selectedValue2">
     @for (option of options; track option) {
         <li fd-option [value]="option">{{ option }}</li>
     }
 </fd-select>
-<small style="display: block">Selected value: {{ selectedValue2 }}</small>
+<small [style.display]="'block'">Selected value: {{ selectedValue2 }}</small>
 <h4>Select in disabled mode</h4>
 <fd-select placeholder="Select an option" [disabled]="true" [(value)]="selectedValue4">
     @for (option of options; track option) {
         <li fd-option [value]="option">{{ option }}</li>
     }
 </fd-select>
-<small style="display: block">Selected value: {{ selectedValue4 }}</small>
+<small [style.display]="'block'">Selected value: {{ selectedValue4 }}</small>
 <h4>Select in read-only mode</h4>
 <fd-select placeholder="Select an option" [readonly]="true" [(value)]="selectedValue5">
     @for (option of options; track option) {
         <li fd-option [value]="option">{{ option }}</li>
     }
 </fd-select>
-<small style="display: block">Selected value: {{ selectedValue5 }}</small>
+<small [style.display]="'block'">Selected value: {{ selectedValue5 }}</small>

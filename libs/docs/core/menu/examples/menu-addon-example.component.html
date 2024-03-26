@@ -1,4 +1,4 @@
-<div style="width: 50%; display: inline-block">
+<div [style.width.%]="50" [style.display]="'inline-block'">
     <button fd-button label="Menu with icons" [fdMenu]="true" [fdMenuTrigger]="menuIcons"></button>
 
     <fd-menu #menuIcons>
@@ -26,7 +26,7 @@
     </fd-menu>
 </div>
 
-<div style="width: 50%; display: inline-block">
+<div [style.width.%]="50" [style.display]="'inline-block'">
     <button fd-button label="Menu with shortcuts" [fdMenu]="true" [fdMenuTrigger]="menuShortcut"></button>
 
     <fd-menu #menuShortcut>

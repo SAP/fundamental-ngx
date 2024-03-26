@@ -63,7 +63,7 @@ describe('TimelineNodeBodyComponent', () => {
 
 @Component({
     template: `
-        <div style="width: 300px;">
+        <div [style.width.px]="300">
             <fd-timeline-node-body [maxLines]="maxLines" [content]="content"></fd-timeline-node-body>
         </div>
     `,

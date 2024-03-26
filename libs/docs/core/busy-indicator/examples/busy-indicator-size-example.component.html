@@ -1,5 +1,5 @@
 @for (size of sizes; track size) {
-    <div style="text-align: center">
+    <div [style.text-align]="'center'">
         <fd-busy-indicator [loading]="true" [size]="size" [title]="size + ' ' + 'size loading'"></fd-busy-indicator>
     </div>
 }

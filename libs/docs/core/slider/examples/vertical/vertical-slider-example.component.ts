@@ -1,4 +1,4 @@
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, NgStyle } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SliderComponent, SliderCustomValue } from '@fundamental-ngx/core/slider';
@@ -9,7 +9,7 @@ import { SliderComponent, SliderCustomValue } from '@fundamental-ngx/core/slider
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [SliderComponent, FormsModule, JsonPipe]
+    imports: [SliderComponent, FormsModule, JsonPipe, NgStyle]
 })
 export class VerticalSliderExampleComponent {
     value = [20, 70];

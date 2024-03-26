@@ -1,4 +1,4 @@
-<fd-segmented-button style="margin-bottom: 1rem" [toggle]="true" [(ngModel)]="cardsHidden" (ngModelChange)="update()">
+<fd-segmented-button [style.margin-bottom.rem]="1" [toggle]="true" [(ngModel)]="cardsHidden" (ngModelChange)="update()">
     <button fd-button value="card1">
         {{ !isHidden('card1') ? 'Hide Card1' : 'Show Card1' }}
     </button>
@@ -9,7 +9,7 @@
         {{ !isHidden('card3') ? 'Hide Card3' : 'Show Card3' }}
     </button>
 </fd-segmented-button>
-<div fd-scrollbar style="padding: 1rem; overflow: auto">
+<div fd-scrollbar [style.padding.rem]="1" [style.overflow]="'auto'">
     <fd-fixed-card-layout (cardDraggedDropped)="cardDraggedDropped($event)">
         @if (!isHidden('card1')) {
             <fd-card cardType="list" *fdCardDef="1">
@@ -18,7 +18,7 @@
                 </fd-card-header>
                 <fd-card-content>
                     <div fd-form-item>
-                        <textarea style="width: 100%; resize: vertical">
+                        <textarea [style.width.%]="100" [style.resize]="'vertical'">
               You can resize this textarea and see how card grows</textarea
                         >
                     </div>

@@ -20,7 +20,7 @@ const MOBILE_CONFIG: MobileModeConfig = { title: 'Test popover title' };
             #popoverMobile
             [mobile]="true"
             [mobileConfig]="{ title: 'Mobile Popover Test', hasCloseButton: true }"
-            style="display: block"
+            [style.display]="'block'"
         >
             <ng-template #popoverBodyContent> Dummy Content </ng-template>
             <ng-template #popoverFooterContent>

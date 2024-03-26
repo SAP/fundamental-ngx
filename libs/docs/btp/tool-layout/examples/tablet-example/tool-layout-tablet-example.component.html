@@ -1,36 +1,36 @@
 <h4>With Vertical Navigation</h4>
-<div style="width: 800px">
+<div [style.width.px]="800">
     <div fdbToolLayout mode="tablet">
         <div fdbToolLayoutContainer>
             <div fdbToolLayoutHeaderContainer>
-                <div style="width: 100%; height: 3rem; background: #00677f"></div>
+                <div [style.width.%]="100" [style.height.rem]="3" [style.background-color]="'#00677f'"></div>
             </div>
         </div>
         <div fdbToolLayoutContainer>
             <div fdbToolLayoutNavigationContainer>
-                <div style="width: 5rem; height: 20rem; background: #00677f"></div>
+                <div [style.width.rem]="5" [style.height.rem]="20" [style.background-color]="'#00677f'"></div>
             </div>
             <div fdbToolLayoutContentContainer>
-                <div style="width: 100%; height: 20rem; background: #00677f"></div>
+                <div [style.width.%]="100" [style.height.rem]="20" [style.background-color]="'#00677f'"></div>
             </div>
         </div>
     </div>
 </div>
 <br /><br />
 <h4>With Horizontal Navigation</h4>
-<div style="width: 800px">
+<div [style.width.px]="800">
     <div fdbToolLayout mode="tablet">
         <div fdbToolLayoutContainer>
             <div fdbToolLayoutHeaderContainer>
-                <div style="width: 100%; height: 3rem; background: #00677f"></div>
+                <div [style.width.%]="100" [style.height.rem]="3" [style.background-color]="'#00677f'"></div>
             </div>
         </div>
         <div fdbToolLayoutContainer>
             <div fdbToolLayoutNavigationContainer [horizontal]="true">
-                <div style="width: 100%; height: 3rem; background: #00677f"></div>
+                <div [style.width.%]="100" [style.height.rem]="3" [style.background-color]="'#00677f'"></div>
             </div>
             <div fdbToolLayoutContentContainer>
-                <div style="width: 100%; height: 20rem; background: #00677f"></div>
+                <div [style.width.%]="100" [style.height.rem]="20" [style.background-color]="'#00677f'"></div>
             </div>
         </div>
     </div>

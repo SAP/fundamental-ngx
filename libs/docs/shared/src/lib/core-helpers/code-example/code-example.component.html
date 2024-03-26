@@ -12,7 +12,7 @@
                 glyph="copy"
                 title="Copy example to clipboard"
                 label="Copy"
-                style="margin-right: 1rem"
+                [style.margin-right.rem]="1"
                 (click)="copyText()"
             ></button>
             <button
@@ -30,7 +30,7 @@
         <div class="docs-code-example-content">
             @if (exampleFilesNetworkEntity$ | async; as examples) {
                 @if (examples.state === states.loading) {
-                    <div style="text-align: center; padding: 1rem">
+                    <div [style.text-align]="'center'" [style.padding.rem]="1">
                         <fd-busy-indicator
                             [loading]="true"
                             ariaLabel="loading example files"

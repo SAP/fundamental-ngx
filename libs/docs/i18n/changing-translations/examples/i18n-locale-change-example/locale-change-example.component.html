@@ -1,4 +1,9 @@
-<div style="display: flex; flex-direction: row; justify-content: space-around; align-items: center">
+<div
+    [style.display]="'flex'"
+    [style.flex-direction]="'row'"
+    [style.justify-content]="'space-around'"
+    [style.align-items]="'center'"
+>
     <fd-segmented-button [ngModel]="locale$ | async" (ngModelChange)="changeLocale($event)">
         <button fd-button [label]="initialLocaleValue" [value]="initialLocaleValue"></button>
         <button fd-button label="uk-UA" value="uk-UA"></button>

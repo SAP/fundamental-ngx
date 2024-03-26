@@ -30,7 +30,7 @@ import { WizardModule } from './wizard.module';
                     <li
                         fd-wizard-step
                         status="current"
-                        style="width: 150px;"
+                        [style.width.px]="150"
                         label="Step 3: One line truncates"
                         optionalText="(Optional)"
                         #step3

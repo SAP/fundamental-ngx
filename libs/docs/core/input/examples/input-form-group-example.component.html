@@ -26,7 +26,7 @@
     </div>
     @for (a of arr.controls; track a; let i = $index) {
         <div formArrayName="arr">
-            <div [formGroupName]="i" style="margin-bottom: 10px">
+            <div [formGroupName]="i" [style.margin-bottom.px]="10">
                 <div fd-form-set>
                     <div fd-form-item>
                         <label fd-form-label for="form-input-3">Primary Input in Form Array</label>
@@ -55,7 +55,7 @@
         </div>
     }
     <br />
-    <button fd-button type="button" label="Add" (click)="addItem()" style="margin-right: 5px"></button>
+    <button fd-button type="button" label="Add" (click)="addItem()" [style.margin-right.px]="5"></button>
     <button fd-button type="submit" label="Submit"></button>
 </form>
 <br />

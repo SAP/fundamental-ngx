@@ -2,7 +2,7 @@
     <fd-select
         [ngModel]="_contentDensityService.contentDensityListener() | async"
         (ngModelChange)="onChange($event)"
-        style="margin-right: 8px"
+        [style.margin-right.px]="8"
     >
         <li fd-option value="cozy">Cozy</li>
         <li fd-option value="condensed">Condensed</li>

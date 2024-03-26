@@ -28,7 +28,7 @@
     Values returned by checkbox can be customized using <code>[values]</code> property.
     <br />
     <ul>
-        <li style="margin-bottom: 0.5rem">
+        <li [style.margin-bottom.rem]="0.5">
             Type: <code>{{ '{ trueValue?: any, falseValue?: any, thirdStateValue?: any }' }}</code>
         </li>
         <li>
@@ -89,11 +89,11 @@
 <description>
     Checkbox can be but in various states by modifying following properties:
     <ul>
-        <li style="margin-bottom: 0.5rem">
+        <li [style.margin-bottom.rem]="0.5">
             Modifies visual appearance of checkbox <br />
             <code>[state] = 'success' | 'error' | 'information' | 'warning'</code>
         </li>
-        <li style="margin-bottom: 0.5rem">
+        <li [style.margin-bottom.rem]="0.5">
             Disables control <br />
             <code>[disable] = true | false</code>
         </li>

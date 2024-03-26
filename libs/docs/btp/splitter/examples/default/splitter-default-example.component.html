@@ -1,4 +1,4 @@
-<div style="height: 300px">
+<div [style.height.px]="300">
     <fdb-splitter defaultPaneId="one">
         <fdb-splitter-pane-container (resize)="onResize($event)">
             <fdb-splitter-split-pane id="one" size="300px"> Split pane One </fdb-splitter-split-pane>

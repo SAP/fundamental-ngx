@@ -9,13 +9,13 @@ import { CarouselConfig, CarouselService } from './carousel.service';
 @Component({
     template: `
         <div fdCarousel [config]="configuration">
-            <div fdCarouselItem value="1" style="height: 30px"></div>
-            <div fdCarouselItem value="2" style="height: 30px"></div>
-            <div fdCarouselItem value="3" style="height: 30px"></div>
-            <div fdCarouselItem value="4" style="height: 30px"></div>
-            <div fdCarouselItem value="5" style="height: 30px"></div>
-            <div fdCarouselItem value="6" style="height: 30px"></div>
-            <div fdCarouselItem value="7" style="height: 30px"></div>
+            <div fdCarouselItem value="1" [style.height.px]="30"></div>
+            <div fdCarouselItem value="2" [style.height.px]="30"></div>
+            <div fdCarouselItem value="3" [style.height.px]="30"></div>
+            <div fdCarouselItem value="4" [style.height.px]="30"></div>
+            <div fdCarouselItem value="5" [style.height.px]="30"></div>
+            <div fdCarouselItem value="6" [style.height.px]="30"></div>
+            <div fdCarouselItem value="7" [style.height.px]="30"></div>
         </div>
     `
 })

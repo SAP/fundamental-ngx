@@ -50,7 +50,7 @@
 </fd-notification>
 
 <h4>Notification with message strip, unread title and custom width</h4>
-<div style="max-width: 100%; overflow: auto">
+<div [style.max-width.%]="100" [style.overflow]="'auto'">
     <fd-notification width="30rem">
         <fd-message-strip type="warning" marginBottom="1rem"> A dismissible warning message strip. </fd-message-strip>
         <fd-notification-body>
@@ -99,7 +99,7 @@
 </div>
 
 <h4>Notification in mobile mode</h4>
-<div style="max-width: 400px">
+<div [style.max-width.px]="400">
     <fd-notification [mobile]="true">
         <fd-notification-body>
             <fd-notification-content>

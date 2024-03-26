@@ -189,7 +189,7 @@
             ></fdp-checkbox>
         </fdp-form-field>
     </fdp-form-group>
-    <div style="padding-left: 2rem; border: black solid">
+    <div [style.padding-left.rem]="2" [style.border-style]="'solid'" [style.border-color]="'black'">
         <fdp-form-group class="padding-top:0%;" #checkboxes [formGroup]="agreementsFormGroup" [object]="choices">
             <fdp-form-field #ffr2 id="termsAndConditions" [rank]="3">
                 <fdp-checkbox
