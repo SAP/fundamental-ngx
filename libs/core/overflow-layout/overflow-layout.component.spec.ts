@@ -95,7 +95,7 @@ describe('OverflowLayoutComponent', () => {
         fixture.detectChanges();
         await fixture.whenStable();
 
-        expect(visibleItemsCountSpy).toHaveBeenLastCalledWith(expectedAmount);
+        expect(visibleItemsCountSpy).toHaveBeenCalledWith(expectedAmount);
         expect(fixture.debugElement.queryAll(By.directive(OverflowLayoutItemDirective)).length).toEqual(expectedAmount);
     });
 
