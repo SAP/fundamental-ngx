@@ -50,8 +50,13 @@ export class MessageStripAlertComponent<ComponentType = unknown>
     /** Portal, which is responsible for correctly rendering user provided content. It can be any type of the portal */
     contentPortal: Portal<unknown>;
 
+    /**
+     * Reference to the message strip alert, which is used to close it from the outside, or access the data and/or the component instance
+     *  */
+    readonly alertRef = inject(MessageStripAlertRef);
     /** @hidden */
     private viewContainerRef = inject(ViewContainerRef);
+
     /** @hidden */
     private renderer2 = inject(Renderer2);
 
@@ -60,11 +65,6 @@ export class MessageStripAlertComponent<ComponentType = unknown>
      * It should be properly cleared on component destroy.
      */
     private autoDismissTimeout: ReturnType<typeof setTimeout>;
-
-    /**
-     * Reference to the message strip alert, which is used to close it from the outside, or access the data and/or the component instance
-     *  */
-    readonly alertRef = inject(MessageStripAlertRef);
 
     /** @hidden */
     constructor() {

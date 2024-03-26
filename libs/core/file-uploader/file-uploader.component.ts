@@ -132,12 +132,6 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
     @Input()
     width: string;
 
-    /** * It stores the valid files  */
-    validFiles: File[] = [];
-
-    /** * It stores the invalid files  */
-    invalidFiles: File[] = [];
-
     /** Event fired when files are selected. Passed object is the array of files selected. */
     @Output()
     readonly selectedFilesChanged = new EventEmitter<File[]>();
@@ -155,6 +149,12 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onDragLeave = new EventEmitter<void>();
+
+    /** * It stores the valid files  */
+    validFiles: File[] = [];
+
+    /** * It stores the invalid files  */
+    invalidFiles: File[] = [];
 
     /** @hidden */
     private _subscriptions = new Subscription();

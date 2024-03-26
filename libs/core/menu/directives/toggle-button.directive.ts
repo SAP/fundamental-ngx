@@ -11,7 +11,6 @@ import { TOGGLE_MENU_ITEM } from '../menu.tokens';
     hostDirectives: [
         {
             directive: CvaDirective,
-            // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
             inputs: ['id:inputId', 'stateMessage', 'disabled', 'readonly', 'name']
         }
     ],

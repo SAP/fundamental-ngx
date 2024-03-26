@@ -7,14 +7,14 @@ import { MicroProcessFlowComponent } from './micro-process-flow.component';
     selector: 'fd-test-micro-process-flow',
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-<fd-micro-process-flow #microProcessFlow>
-  @for (item of items; track item) {
-    <fd-micro-process-flow-item>
-      <fd-micro-process-flow-icon glyph="product"></fd-micro-process-flow-icon>
-    </fd-micro-process-flow-item>
-  }
-</fd-micro-process-flow>
-`
+        <fd-micro-process-flow #microProcessFlow>
+            @for (item of items; track item) {
+                <fd-micro-process-flow-item>
+                    <fd-micro-process-flow-icon glyph="product"></fd-micro-process-flow-icon>
+                </fd-micro-process-flow-item>
+            }
+        </fd-micro-process-flow>
+    `
 })
 class TestWrapperComponent {
     @ViewChild('microProcessFlow') microProcessFlow: MicroProcessFlowComponent;

@@ -70,6 +70,16 @@ export class MessageBoxComponent
     dialogWindow: ElementRef;
 
     /** @hidden */
+    get _config(): MessageBoxConfig {
+        return this._messageBoxConfig;
+    }
+
+    /** @hidden */
+    get _ref(): MessageBoxRef {
+        return this._messageBoxRef;
+    }
+
+    /** @hidden */
     private _class = '';
 
     /** @hidden */
@@ -81,13 +91,15 @@ export class MessageBoxComponent
     }
 
     /** @hidden */
-    get _config(): MessageBoxConfig {
-        return this._messageBoxConfig;
-    }
-
-    /** @hidden */
-    get _ref(): MessageBoxRef {
-        return this._messageBoxRef;
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [
+            CSS_CLASS_NAME.messageBoxActive,
+            this._messageBoxTypeClass,
+            this._messageBoxConfig.hasBackdrop ? CSS_CLASS_NAME.messageBox : '',
+            this._messageBoxConfig.backdropClass ? this._messageBoxConfig.backdropClass : '',
+            this._class
+        ];
     }
 
     /** @hidden */
@@ -109,18 +121,6 @@ export class MessageBoxComponent
     /** @hidden */
     ngOnDestroy(): void {
         super.ngOnDestroy();
-    }
-
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            CSS_CLASS_NAME.messageBoxActive,
-            this._messageBoxTypeClass,
-            this._messageBoxConfig.hasBackdrop ? CSS_CLASS_NAME.messageBox : '',
-            this._messageBoxConfig.backdropClass ? this._messageBoxConfig.backdropClass : '',
-            this._class
-        ];
     }
 
     /** @hidden */

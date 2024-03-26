@@ -30,13 +30,13 @@ import { SplitButtonComponent, splitButtonTextClass } from './split-button.compo
     `,
     standalone: true,
     imports: [
-    SplitButtonComponent,
-    MenuComponent,
-    MenuItemComponent,
-    MenuInteractiveDirective,
-    MenuTitleDirective,
-    ContentDensityModule
-]
+        SplitButtonComponent,
+        MenuComponent,
+        MenuItemComponent,
+        MenuInteractiveDirective,
+        MenuTitleDirective,
+        ContentDensityModule
+    ]
 })
 export class TestComponent {
     moreBtnTitle: string;

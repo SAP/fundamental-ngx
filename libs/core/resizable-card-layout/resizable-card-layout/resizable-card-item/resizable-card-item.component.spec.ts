@@ -14,6 +14,9 @@ import { ResizableCardItemComponent } from './resizable-card-item.component';
     imports: [ResizableCardItemComponent]
 })
 class TestResizableCardItemComponent {
+    @ViewChildren(ResizableCardItemComponent)
+    items: QueryList<ResizableCardItemComponent>;
+
     config = {
         title: 'card1',
         rank: 1,
@@ -23,9 +26,6 @@ class TestResizableCardItemComponent {
         cardMiniContentRowSpan: 10,
         resizable: true
     };
-
-    @ViewChildren(ResizableCardItemComponent)
-    items: QueryList<ResizableCardItemComponent>;
 }
 
 describe('ResizableCardItemComponent', () => {

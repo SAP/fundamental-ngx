@@ -203,15 +203,7 @@ export class BaseWizardGenerator {
     /**
      * @hidden
      */
-    private _items: PreparedWizardGeneratorItem[] = [];
-
-    /** @hidden */
-    private _appendToWizard = false;
-
-    /**
-     * @hidden
-     */
-    private _formPending = false;
+    _navigationButtonLabels: Required<WizardNavigationButtons> = DEFAULT_WIZARD_NAVIGATION_BUTTONS;
 
     /**
      * @hidden
@@ -227,7 +219,15 @@ export class BaseWizardGenerator {
     /**
      * @hidden
      */
-    _navigationButtonLabels: Required<WizardNavigationButtons> = DEFAULT_WIZARD_NAVIGATION_BUTTONS;
+    private _items: PreparedWizardGeneratorItem[] = [];
+
+    /** @hidden */
+    private _appendToWizard = false;
+
+    /**
+     * @hidden
+     */
+    private _formPending = false;
 
     /** @hidden */
     constructor() {
@@ -375,7 +375,7 @@ export class BaseWizardGenerator {
 
     /**
      * @description Callback function to update steps status.
-     * @param stepNumber Step ID to be updated.
+     * @param stepId Step ID to be updated.
      * @param status New step status.
      */
     async stepStatusChanged(stepId: string, status: WizardStepStatus): Promise<void> {

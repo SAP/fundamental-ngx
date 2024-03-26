@@ -52,16 +52,6 @@ export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChange
     constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
@@ -77,6 +67,16 @@ export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChange
             this.getCssClassWithColWidth(CSS_CLASS_NAME.xlColOffsetPrefix, this.colOffsetXl),
             this.class
         ].filter((v): v is string => !!v);
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */

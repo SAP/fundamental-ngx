@@ -1,4 +1,4 @@
-<fd-segmented-button style="margin-bottom: 1rem" [toggle]="true" [(ngModel)]="cardsHidden" (ngModelChange)="update()">
+<fd-segmented-button [style.margin-bottom.rem]="1" [toggle]="true" [(ngModel)]="cardsHidden" (ngModelChange)="update()">
     <button fd-button value="card1">
         {{ !isHidden('card1') ? 'Hide Card1' : 'Show Card1' }}
     </button>
@@ -9,7 +9,7 @@
         {{ !isHidden('card3') ? 'Hide Card3' : 'Show Card3' }}
     </button>
 </fd-segmented-button>
-<div #carousel style="display: flex; justify-content: center">
+<div #carousel [style.display]="'flex'" [style.justify-content]="'center'">
     <fd-carousel [visibleSlidesCount]="visibleSlidesCount" [width]="width">
         @if (!isHidden('card1')) {
             <fd-carousel-item>

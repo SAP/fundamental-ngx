@@ -1,15 +1,15 @@
-import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { OverlayContainer } from '@angular/cdk/overlay';
-import { By } from '@angular/platform-browser';
 import { DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { Observable, of } from 'rxjs';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { createKeyboardEvent, DataProvider, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
-import { PlatformSearchFieldModule } from './search-field.module';
-import { SearchFieldComponent, SearchInput, SuggestionItem, ValueLabelItem } from './search-field.component';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
+import { createKeyboardEvent, DataProvider, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
+import { SearchFieldComponent, SearchInput, SuggestionItem, ValueLabelItem } from './search-field.component';
+import { PlatformSearchFieldModule } from './search-field.module';
 
 const CATEGORIES: ValueLabelItem[] = [
     { value: 'Fruits', label: 'Fruits' },
@@ -82,6 +82,7 @@ function mouseClickOnElement(el: Element): void {
 })
 class TestComponent {
     @ViewChild(SearchFieldComponent, { static: true }) component: SearchFieldComponent;
+    @ViewChild('outsideButton') outsideButton: ElementRef<HTMLElement>;
     placeholder: string;
     suggestions: SuggestionItem[] | Observable<SuggestionItem[]>;
     categories: ValueLabelItem[];
@@ -89,13 +90,12 @@ class TestComponent {
     hideCategoryLabel = false;
     contentDensity: ContentDensityMode = ContentDensityMode.COZY;
     isLoading = false;
-    disabled = false;
 
+    disabled = false;
     inputValue: SearchInput | null;
     submitValue: SearchInput | null;
-    isSearchCanceled = false;
 
-    @ViewChild('outsideButton') outsideButton: ElementRef<HTMLElement>;
+    isSearchCanceled = false;
 
     onInputChange($event): void {
         this.inputValue = $event;
@@ -714,6 +714,7 @@ describe('SearchFieldComponent', () => {
 })
 class DataSourceTestComponent implements OnInit {
     @ViewChild(SearchFieldComponent, { static: true }) component: SearchFieldComponent;
+    @ViewChild('outsideButton') outsideButton: ElementRef<HTMLElement>;
     placeholder: string;
     categories: ValueLabelItem[];
     categoryLabel: string;
@@ -721,13 +722,12 @@ class DataSourceTestComponent implements OnInit {
     contentDensity: ContentDensityMode = ContentDensityMode.COZY;
     isLoading = false;
     disabled = false;
-    dataSource: SearchFieldDataSource<any>;
 
+    dataSource: SearchFieldDataSource<any>;
     inputValue: SearchInput | null;
     submitValue: SearchInput | null;
-    isSearchCanceled = false;
 
-    @ViewChild('outsideButton') outsideButton: ElementRef<HTMLElement>;
+    isSearchCanceled = false;
 
     constructor() {}
 

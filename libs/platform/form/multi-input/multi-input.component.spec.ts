@@ -4,13 +4,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
-import { DATA_PROVIDERS, DataProvider } from '@fundamental-ngx/platform/shared';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { StandardListItemModule } from '@fundamental-ngx/platform/list';
+import { DATA_PROVIDERS, DataProvider } from '@fundamental-ngx/platform/shared';
+import { CVATestSteps, runValueAccessorTests } from 'ngx-cva-test-suite';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { PlatformMultiInputComponent } from './multi-input.component';
 import { PlatformMultiInputModule } from './multi-input.module';
-import { CVATestSteps, runValueAccessorTests } from 'ngx-cva-test-suite';
-import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fdp-mulit-input-test',

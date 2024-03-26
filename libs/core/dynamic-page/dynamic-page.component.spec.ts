@@ -1,39 +1,38 @@
-
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
+import { CommonModule } from '@angular/common';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { DynamicPageComponent } from './dynamic-page.component';
 import { DynamicPageModule } from './dynamic-page.module';
-import { CommonModule } from '@angular/common';
 
 @Component({
     template: `<fd-dynamic-page>
-  <fd-dynamic-page-header>Test Test</fd-dynamic-page-header>
-  <fd-dynamic-page-subheader></fd-dynamic-page-subheader>
-  @if (tabs) {
-    <fd-tab-list [stackContent]="true" maxContentHeight="auto">
-      @for (tab of ['Tab 1', 'Tab 2', 'Tab 3']; track tab) {
-        <fd-tab [title]="tab">
-          <fd-dynamic-page-content>
-            <div style="height: 150vh"></div>
-          </fd-dynamic-page-content>
-        </fd-tab>
-      }
-    </fd-tab-list>
-  }
-  @if (!tabs) {
-    <fd-dynamic-page-content>
-      <div style="height: 150vh"></div>
-    </fd-dynamic-page-content>
-  }
-</fd-dynamic-page>`
+        <fd-dynamic-page-header>Test Test</fd-dynamic-page-header>
+        <fd-dynamic-page-subheader></fd-dynamic-page-subheader>
+        @if (tabs) {
+            <fd-tab-list [stackContent]="true" maxContentHeight="auto">
+                @for (tab of ['Tab 1', 'Tab 2', 'Tab 3']; track tab) {
+                    <fd-tab [title]="tab">
+                        <fd-dynamic-page-content>
+                            <div [style.height.vh]="150"></div>
+                        </fd-dynamic-page-content>
+                    </fd-tab>
+                }
+            </fd-tab-list>
+        }
+        @if (!tabs) {
+            <fd-dynamic-page-content>
+                <div [style.height.vh]="150"></div>
+            </fd-dynamic-page-content>
+        }
+    </fd-dynamic-page>`
 })
 class TestComponent {
-    tabs = false;
-
     @ViewChild(DynamicPageComponent)
     dynamicPage: DynamicPageComponent;
+
+    tabs = false;
 }
 describe('DynamicPageComponent default values', () => {
     let component: TestComponent;

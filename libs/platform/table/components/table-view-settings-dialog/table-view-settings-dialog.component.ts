@@ -82,13 +82,13 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
     filters: QueryList<TableViewSettingsFilterComponent>;
 
     /** @hidden */
+    _table: Table;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
     private _tableSubscriptions = new Subscription();
-
-    /** @hidden */
-    _table: Table;
 
     /** @hidden */
     constructor(private readonly _dialogService: DialogService) {}

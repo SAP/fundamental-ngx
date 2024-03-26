@@ -1,6 +1,6 @@
 <div fdPopoverContainer>
     @if (showOverflowContainer) {
-        <div style="height: 200px"></div>
+        <div [style.height.px]="200"></div>
     }
     <button fd-button (click)="resetOverflowContainer()">Change height in 2 seconds</button>
     <div class="fd-docs-flex-display-helper">
@@ -14,7 +14,7 @@
                 ></fd-avatar>
             </fd-popover-control>
             <fd-popover-body>
-                <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+                <fd-avatar [circle]="true" [style.margin.rem]="1" size="xl" glyph="group"></fd-avatar>
             </fd-popover-body>
         </fd-popover>
     </div>

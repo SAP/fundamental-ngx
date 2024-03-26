@@ -20,24 +20,24 @@ import { TableRow } from '../models';
 import { isCollectionFilter } from '../utils';
 
 export abstract class BaseTableDataProvider<T, P = T[]> {
+    abstract fetch(state?: TableState, parentRows?: TableRow<T>[]): Observable<P>;
+
+    abstract fetchData(state: TableState, parentRows?: TableRow<T>[]): Observable<P>;
     /** Total items count. */
     totalItems: number;
     /** Array of items. */
     items: P;
+
     /** Date time adapter for date field filtering. */
     dateTimeAdapter?: DatetimeAdapter<any>;
-
     /** Additional set of filters provided by outside component. */
     protected filterBy: CollectionFilterAndGroup[];
+
     /** Additional search query provided by outside component. */
     protected searchInput?: SearchInput;
 
     /** @hidden */
     protected _destroy$ = new Subject<void>();
-
-    abstract fetch(state?: TableState, parentRows?: TableRow<T>[]): Observable<P>;
-
-    abstract fetchData(state: TableState, parentRows?: TableRow<T>[]): Observable<P>;
 
     /**
      * Method for setting external filtering conditions.
@@ -390,11 +390,13 @@ export abstract class TableChildrenDataProvider<T> extends BaseTableDataProvider
     /**
      * Method for retrieving the amount of child itemf or a defined row.
      * @param row
+     * @param state
      */
     abstract rowChildrenCount(row: TableRow<T>, state: TableState): Observable<number>;
     /**
      * Method for retrieving the data.
      * @param tableState @see TableState Set of table parameters.
+     * @param parentRows
      * @returns Observable with data.
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -405,6 +407,7 @@ export abstract class TableChildrenDataProvider<T> extends BaseTableDataProvider
     /**
      * Method for applying filtering and retrieving the data.
      * @param state @see TableState Set of table parameters.
+     * @param tableRows
      * @returns Observable with filtered data.
      */
     fetchData(state: TableState, tableRows?: TableRow<T>[]): Observable<Map<TableRow<T>, T[]>> {

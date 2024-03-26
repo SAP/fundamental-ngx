@@ -2,7 +2,7 @@
 <button fd-button label="Open Dialog From Object" (click)="openDialog()"></button>
 
 <ng-template #dialogContent>
-    <div style="padding: 0 1rem" role="dialog">You can also create dialog without building whole template.</div>
+    <div [style.padding]="'0 1rem'" role="dialog">You can also create dialog without building whole template.</div>
 </ng-template>
 
 <ng-template #dialogSubHeader>

@@ -1,8 +1,8 @@
 import * as axe from 'axe-core';
 import { createHtmlReport } from 'axe-html-reporter';
 import { execute, open, waitForPresent } from '../driver/wdio';
-import { appURLs } from './app-url';
 import { PlatformBaseComponentPo } from '../platform-base-component.po';
+import { appURLs } from './app-url';
 
 describe('Accessibility test', () => {
     it('Should check for accessibility issues using Axe', () => {

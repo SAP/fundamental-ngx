@@ -1,7 +1,7 @@
-import { TableIconDirective } from './table-icon.directive';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TableModule } from '../table.module';
+import { TableIconDirective } from './table-icon.directive';
 
 @Component({
     template: ` <span fd-table-icon [glyph]="'glyph'" [navigation]="true"></span> `

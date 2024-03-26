@@ -1,4 +1,4 @@
-<div style="display: flex; justify-content: space-between">
+<div [style.display]="'flex'" [style.justify-content]="'space-between'">
     <button fd-button label="Confirmation type" (click)="open('confirmation')"></button>
     <button fd-button fdType="emphasized" label="Information type" (click)="open('information')"></button>
     <button fd-button fdType="negative" label="Error type" (click)="open('error')"></button>
@@ -13,6 +13,6 @@
     <button fd-button fdType="positive" label="Success type & no icon" (click)="open('success', false)"></button>
 </div>
 
-<span aria-hidden="true" style="display: none" id="fd-message-box-semantic-types-header">{{ title }}</span>
-<span aria-hidden="true" style="display: none" id="fd-message-box-semantic-types-body">{{ content }}</span>
-<span aria-hidden="true" style="display: none" id="fd-message-box-semantic-types-types">{{ types }}</span>
+<span aria-hidden="true" [style.display]="'none'" id="fd-message-box-semantic-types-header">{{ title }}</span>
+<span aria-hidden="true" [style.display]="'none'" id="fd-message-box-semantic-types-body">{{ content }}</span>
+<span aria-hidden="true" [style.display]="'none'" id="fd-message-box-semantic-types-types">{{ types }}</span>

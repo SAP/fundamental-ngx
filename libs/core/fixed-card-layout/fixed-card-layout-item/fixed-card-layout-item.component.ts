@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
     template: `<ng-content></ng-content>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        style: 'display: block'
+        '[style.display]': '"block"'
     },
     standalone: true
 })

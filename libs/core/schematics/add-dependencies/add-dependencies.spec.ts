@@ -1,6 +1,6 @@
-import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import { Tree } from '@angular-devkit/schematics';
-import * as path from "path";
+import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
+import * as path from 'path';
 
 const collectionPath = path.join(__dirname, '../collection.json');
 
@@ -16,14 +16,17 @@ describe('ng-add schematic', () => {
         process.env = {
             FD_ENV_FDSTYLES_VER_PLACEHOLDER: '1',
             FD_ENV_THEMING_VER_PLACEHOLDER: '2',
-            FD_ENV_VERSION_PLACEHOLDER: '3',
+            FD_ENV_VERSION_PLACEHOLDER: '3'
         };
         tree = Tree.empty();
-        tree.create('package.json', JSON.stringify({
-            dependencies: {
-                '@angular/core': '^17.0.4'
-            }
-        }));
+        tree.create(
+            'package.json',
+            JSON.stringify({
+                dependencies: {
+                    '@angular/core': '^17.0.4'
+                }
+            })
+        );
         runner = new SchematicTestRunner('schematics', collectionPath);
     });
     it('should add needed packages', async () => {
@@ -31,13 +34,13 @@ describe('ng-add schematic', () => {
         const { dependencies } = tree.readJson('package.json') as { dependencies: Record<string, string> };
 
         toStrictEqual(dependencies, {
-            "@angular/cdk": "^17.0.0",
-            "@angular/core": "^17.0.4",
-            "@angular/forms": "^17.0.0",
-            "@fundamental-ngx/cdk": "3",
-            "@fundamental-ngx/i18n": "3",
-            "@sap-theming/theming-base-content": "2",
-            "fundamental-styles": "1"
+            '@angular/cdk': '^17.0.0',
+            '@angular/core': '^17.0.4',
+            '@angular/forms': '^17.0.0',
+            '@fundamental-ngx/cdk': '3',
+            '@fundamental-ngx/i18n': '3',
+            '@sap-theming/theming-base-content': '2',
+            'fundamental-styles': '1'
         });
     });
 

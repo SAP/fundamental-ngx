@@ -1,17 +1,16 @@
 import {
+    CommentDisplayPart,
     DeclarationHierarchy,
     DeclarationReflection,
     DefaultThemeRenderContext,
-    ProjectReflection,
-    JSX as React,
     JSX,
-    Reflection,
-    ReflectionKind,
-    ReflectionCategory,
+    ProjectReflection,
     ReferenceReflection,
-    TypeParameterReflection,
+    Reflection,
+    ReflectionCategory,
+    ReflectionKind,
     SignatureReflection,
-    CommentDisplayPart
+    TypeParameterReflection
 } from 'typedoc';
 
 export function anchorIcon(context: DefaultThemeRenderContext, anchor: string | undefined) {

@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { PopoverBodyComponent } from './popover-body.component';
+import { A11yModule } from '@angular/cdk/a11y';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { PopoverModule } from '../popover.module';
-import { A11yModule } from '@angular/cdk/a11y';
+import { PopoverBodyComponent } from './popover-body.component';
 
 describe('PopoverBodyComponent', () => {
     let component: PopoverBodyComponent;

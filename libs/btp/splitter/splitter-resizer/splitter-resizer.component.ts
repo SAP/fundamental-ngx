@@ -12,7 +12,6 @@ import {
     Input,
     NgZone,
     OnDestroy,
-    Optional,
     Output,
     ViewEncapsulation
 } from '@angular/core';
@@ -100,7 +99,7 @@ export class SplitterResizerComponent implements OnDestroy {
         private readonly _elementRef: ElementRef<Element>,
         private readonly _cdr: ChangeDetectorRef,
         private readonly _ngZone: NgZone,
-        @Optional() @Inject(DOCUMENT) private readonly _document: Document | null
+        @Inject(DOCUMENT) private readonly _document: Document
     ) {}
 
     /** @hidden */
@@ -187,7 +186,7 @@ export class SplitterResizerComponent implements OnDestroy {
         }
 
         this._ngZone.runOutsideAngular(() => {
-            fromEvent<MouseEvent>(this._document!, 'mousemove')
+            fromEvent<MouseEvent>(this._document, 'mousemove')
                 .pipe(throttleTime(10), takeUntil(this._pointerMoveListener))
                 .subscribe((event) => {
                     this._ngZone.run(() => {
@@ -198,7 +197,7 @@ export class SplitterResizerComponent implements OnDestroy {
                     });
                 });
 
-            fromEvent(this._document!, 'mouseup')
+            fromEvent(this._document, 'mouseup')
                 .pipe(take(1), takeUntil(this._pointerMoveListener))
                 .subscribe(() => {
                     this._ngZone.run(() => {

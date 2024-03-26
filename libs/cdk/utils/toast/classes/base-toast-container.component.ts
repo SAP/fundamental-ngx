@@ -14,21 +14,18 @@ export abstract class BaseToastContainerComponent<P extends BaseToastConfig = Ba
     extends BasePortalOutlet
     implements ToastContainerComponent<P>
 {
+    /** Method, which is triggered when the Toast component is ready to be shown. Used to trigger animations. */
+    abstract enter(): void;
+
+    /** Method, which is triggered when the Toast component is ready to be removed. Used to trigger animations. */
+    abstract exit(): void;
+
     /**
      * @hidden
      * The portal outlet inside this container into which the Toast content will be loaded.
      */
     @ViewChild(CdkPortalOutlet, { static: true })
     _portalOutlet!: CdkPortalOutlet;
-
-    /** Subject for notifying that the Toast has finished exiting from view. */
-    readonly onExit$: Subject<void> = new Subject();
-
-    /** Subject for notifying that the Toast has finished entering the view. */
-    readonly onEnter$: Subject<void> = new Subject();
-
-    /** Overlay reference */
-    overlayRef!: OverlayRef;
 
     /** Min width of the toast component. */
     @coerceCssPixel
@@ -53,6 +50,15 @@ export abstract class BaseToastContainerComponent<P extends BaseToastConfig = Ba
     /** Height of the toast component. */
     @coerceCssPixel
     height?: string | number | null;
+
+    /** Subject for notifying that the Toast has finished exiting from view. */
+    readonly onExit$: Subject<void> = new Subject();
+
+    /** Subject for notifying that the Toast has finished entering the view. */
+    readonly onEnter$: Subject<void> = new Subject();
+
+    /** Overlay reference */
+    overlayRef!: OverlayRef;
 
     /** Aria label. */
     ariaLabel: Nullable<string>;
@@ -87,10 +93,4 @@ export abstract class BaseToastContainerComponent<P extends BaseToastConfig = Ba
     attachTemplatePortal<T>(portal: TemplatePortal<T>): EmbeddedViewRef<T> {
         return this._portalOutlet.attachTemplatePortal(portal);
     }
-
-    /** Method, which is triggered when the Toast component is ready to be shown. Used to trigger animations. */
-    abstract enter(): void;
-
-    /** Method, which is triggered when the Toast component is ready to be removed. Used to trigger animations. */
-    abstract exit(): void;
 }

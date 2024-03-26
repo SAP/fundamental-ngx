@@ -1,20 +1,20 @@
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table-helpers';
 import { Observable, of } from 'rxjs';
-import { SourceItem, generateItems } from './helpers';
 import { TableComponent } from '../table.component';
 import { PlatformTableModule } from '../table.module';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { SourceItem, generateItems } from './helpers';
 
 class TableDataProviderWithPaging extends TableDataProvider<SourceItem> {
-    private readonly ALL_ITEMS = generateItems(200);
-
     items: SourceItem[] = [];
     totalItems = 0;
+
+    private readonly ALL_ITEMS = generateItems(200);
 
     fetch(state: TableState): Observable<SourceItem[]> {
         const { currentPage, pageSize } = state.page;

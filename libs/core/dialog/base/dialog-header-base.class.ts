@@ -15,12 +15,6 @@ import { TitleComponent, TitleToken } from '@fundamental-ngx/core/title';
 @Directive()
 export abstract class DialogHeaderBase implements AfterContentInit {
     /** @hidden */
-    headerTemplate: TemplateRef<any>;
-
-    /** @hidden */
-    subHeaderTemplate: TemplateRef<any>;
-
-    /** @hidden */
     @ContentChild(TitleToken)
     set defaultTitleSize(title: TitleComponent) {
         if (title && !title.headerSize) {
@@ -32,6 +26,12 @@ export abstract class DialogHeaderBase implements AfterContentInit {
     /** @hidden */
     @ContentChildren(TemplateDirective)
     customTemplates: QueryList<TemplateDirective>;
+
+    /** @hidden */
+    headerTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    subHeaderTemplate: TemplateRef<any>;
 
     /** @hidden */
     private readonly _changeDetectorRef = inject(ChangeDetectorRef);

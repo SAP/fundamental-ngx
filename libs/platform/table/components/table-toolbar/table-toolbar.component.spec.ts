@@ -2,10 +2,10 @@ import { EventEmitter } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 
-import { PlatformTableModule } from '../../table.module';
 import { Table, TableService } from '@fundamental-ngx/platform/table-helpers';
-import { TableToolbarComponent } from './table-toolbar.component';
 import { Subject } from 'rxjs';
+import { PlatformTableModule } from '../../table.module';
+import { TableToolbarComponent } from './table-toolbar.component';
 
 class TableComponentMock
     implements

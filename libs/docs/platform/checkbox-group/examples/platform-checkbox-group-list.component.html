@@ -12,7 +12,7 @@
         ></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
-<span style="margin-left: 2rem">Seasons: {{ form1.controls.seasons.value }}</span>
+<span [style.margin-left.rem]="2">Seasons: {{ form1.controls.seasons.value }}</span>
 <br />
 <br />
 <p>Pre-selection based on value passed</p>
@@ -26,7 +26,7 @@
         ></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
-<span style="margin-left: 2rem">Available brands: {{ form2.controls.phones.value }}</span>
+<span [style.margin-left.rem]="2">Available brands: {{ form2.controls.phones.value }}</span>
 <br />
 <br />
 <p>Pre-selection based on value passed from formGroup</p>
@@ -36,7 +36,7 @@
         </fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
-<span style="margin-left: 2rem">Sports: {{ form3.controls.sports.value }}</span>
+<span [style.margin-left.rem]="2">Sports: {{ form3.controls.sports.value }}</span>
 <br />
 <br />
 <p>Disabled checkbox group</p>
@@ -69,7 +69,7 @@
         </ng-template>
     </fdp-form-group>
 </form>
-<span style="margin-left: 2rem">Favorites: {{ form4.controls.frameworks.value }}</span>
+<span [style.margin-left.rem]="2">Favorites: {{ form4.controls.frameworks.value }}</span>
 <br />
 <br />
 <hr />
@@ -87,7 +87,7 @@
         ></fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
-<span style="margin-left: 2rem">Weather: {{ countrySeason }}</span>
+<span [style.margin-left.rem]="2">Weather: {{ countrySeason }}</span>
 <br />
 <br />
 <p>Pre-selection based on value passed</p>
@@ -97,7 +97,7 @@
         </fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
-<span style="margin-left: 2rem">Sports: {{ selectedSports }}</span>
+<span [style.margin-left.rem]="2">Sports: {{ selectedSports }}</span>
 <br />
 <br />
 <p>Disabled checkbox group</p>
@@ -115,4 +115,4 @@
     ariaLabel="My favorite dishes"
     [(value)]="selectedDishes"
 ></fdp-checkbox-group>
-<span style="margin-left: 2rem">Selected dishes: {{ selectedDishes }}</span>
+<span [style.margin-left.rem]="2">Selected dishes: {{ selectedDishes }}</span>

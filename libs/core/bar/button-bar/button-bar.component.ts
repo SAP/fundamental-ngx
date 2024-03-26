@@ -53,20 +53,15 @@ export class ButtonBarComponent extends BaseButton {
     @Input()
     ariaLabelledby: string;
 
-    /** @hidden */
-    private readonly _defaultId = `fd-button-bar-id-${randomButtonBarId++}`;
-
     /** id for this element */
     @Input()
     set id(value: string | null | undefined) {
         this._id = value;
     }
+
     get id(): string {
         return this._id || this._defaultId;
     }
-
-    /** @hidden */
-    _id: string | null | undefined;
 
     /** @hidden */
     @HostBinding('class.fd-bar__element')
@@ -81,4 +76,9 @@ export class ButtonBarComponent extends BaseButton {
     /** @hidden */
     @ViewChild(ButtonComponent)
     _buttonComponent: ButtonComponent;
+    /** @hidden */
+    _id: string | null | undefined;
+
+    /** @hidden */
+    private readonly _defaultId = `fd-button-bar-id-${randomButtonBarId++}`;
 }

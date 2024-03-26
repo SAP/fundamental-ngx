@@ -36,17 +36,17 @@ export class OverflowLayoutFocusableItemDirective implements OverflowLayoutFocus
     }
 
     /** @hidden */
-    @HostListener('focus')
-    private _onFocus(): void {
-        this._overflowContainer.setFocusedElement(this);
-    }
-
-    /** @hidden */
     constructor(
         private readonly _overflowContainer: OverflowLayoutComponent,
         @Inject(FD_OVERFLOW_ITEM) @Optional() private readonly _overflowItem: OverflowItem,
         public readonly elementRef: ElementRef<HTMLElement>
     ) {}
+
+    /** @hidden */
+    @HostListener('focus')
+    private _onFocus(): void {
+        this._overflowContainer.setFocusedElement(this);
+    }
 
     /** @hidden */
     ngOnInit(): void {

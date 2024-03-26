@@ -12,17 +12,22 @@ import { HasElementRef } from './interfaces/has-element-ref.interface';
 @Directive()
 export abstract class AbstractFdNgxClass implements HasElementRef, OnInit, OnChanges {
     /** @hidden */
+    abstract _setProperties(): void;
+
+    /** @hidden */
     @Input() class: string; // user's custom classes
 
     /** @hidden */
     readonly elementRef = inject(ElementRef);
+    /** @hidden */
+    constructor() {
+        this._setProperties();
+    }
 
     /*
      each directive that extends this class will implement this function and populate it with one or more calls to
      the '_addClassToElement' function, passing the style names to be added with each call
      */
-    /** @hidden */
-    abstract _setProperties(): void;
 
     /** @hidden */
     _setClassToElement(className: string): void {
@@ -42,11 +47,6 @@ export abstract class AbstractFdNgxClass implements HasElementRef, OnInit, OnCha
     /** @hidden */
     _addStyleToElement(attribute, value): void {
         (this.elementRef.nativeElement as HTMLElement).style[attribute] = value;
-    }
-
-    /** @hidden */
-    constructor() {
-        this._setProperties();
     }
 
     /** @hidden */

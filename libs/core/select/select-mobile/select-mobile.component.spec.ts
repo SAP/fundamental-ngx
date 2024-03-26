@@ -13,24 +13,24 @@ const MOBILE_CONFIG: MobileModeConfig = { title: 'TITLE', hasCloseButton: true }
 
 @Component({
     template: `
-<fd-select
-  placeholder="Select an option"
-  [(value)]="selectedValue"
-  [mobile]="true"
-  [mobileConfig]="mobileConfig"
-  >
-  @for (option of options; track option) {
-    <li fd-option [value]="option">{{ option }}</li>
-  }
-</fd-select>
-`
+        <fd-select
+            placeholder="Select an option"
+            [(value)]="selectedValue"
+            [mobile]="true"
+            [mobileConfig]="mobileConfig"
+        >
+            @for (option of options; track option) {
+                <li fd-option [value]="option">{{ option }}</li>
+            }
+        </fd-select>
+    `
 })
 class TestWrapperComponent {
-    options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
-    selectedValue: string;
-
     @ViewChild(SelectComponent, { static: true })
     selectComponent: SelectComponent;
+
+    options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
+    selectedValue: string;
 
     constructor(@Inject(MOBILE_CONFIG_TEST_TOKEN) public mobileConfig: MobileModeConfig) {}
 }

@@ -1,4 +1,4 @@
-<button fd-button (click)="loading = !loading" style="margin-bottom: 1rem">Toggle loading</button>
+<button fd-button (click)="loading = !loading" [style.margin-bottom.rem]="1">Toggle loading</button>
 @if (!loading) {
     <fd-facet-group ariaLabel="Facet Group">
         <fd-facet type="form" facetTitle="Technical Data" id="facet1">

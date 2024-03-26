@@ -9,7 +9,6 @@ import {
     Inject,
     Input,
     OnDestroy,
-    OnInit,
     Optional,
     Output,
     TemplateRef,
@@ -135,7 +134,11 @@ export class ListItemDef implements ItemDef {
  * this can be extended to reduce the code duplication across list Item components.
  */
 @Directive()
-export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
+export class BaseListItem extends BaseComponent implements AfterViewInit, AfterViewChecked, OnDestroy {
+    /** ID of the list item */
+    @Input()
+    id = `fdp-list-item-${nextListItemId++}`;
+
     /** define level of item for screen reader */
     @Input()
     ariaLevel: number;
@@ -477,14 +480,6 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
         if (isPresent(this.anchor) && !KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             this.anchor.nativeElement.classList.remove(IS_ACTIVE_CLASS);
         }
-    }
-
-    /**
-     * @hidden
-     * Show navigation for single list
-     */
-    ngOnInit(): void {
-        this.id = `fdp-list-item-${nextListItemId++}`;
     }
 
     /** @hidden */

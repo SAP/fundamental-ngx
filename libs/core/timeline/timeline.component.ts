@@ -87,15 +87,19 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
 
     /* First outlet within the timeline template where the dataNodes will be inserted. */
     /** @hidden */
+    @ViewChild('loadingTemplate')
+    _loadingTemplate: TemplateRef<any>;
+
+    /** @hidden */
     @ViewChild(TimelineFirstListOutletDirective, { static: true })
     private _firstListOutlet: TimelineFirstListOutletDirective;
-
     /* Second outlet within the timeline template where the dataNodes will be inserted. */
+
     /** @hidden */
     @ViewChild(TimelineSecondListOutletDirective, { static: true })
     private _secondListOutlet: TimelineSecondListOutletDirective;
-
     /** The timeline node template for the timeline */
+
     /** @hidden */
     @ContentChildren(TimelineNodeDefDirective, { descendants: true })
     private _nodeDefs: QueryList<TimelineNodeDefDirective<T>>;
@@ -108,10 +112,6 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
 
     /** @hidden */
     _loading = true;
-
-    /** @hidden */
-    @ViewChild('loadingTemplate')
-    _loadingTemplate: TemplateRef<any>;
 
     /** @hidden
      * Differ used to find the changes in the data provided by the data source.

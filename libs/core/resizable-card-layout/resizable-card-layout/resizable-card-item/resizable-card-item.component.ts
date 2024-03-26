@@ -279,31 +279,6 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
         @Optional() private readonly _rtlService: RtlService
     ) {}
 
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
-    }
-
-    /**
-     * When resize handler is pressed and resizing may start.
-     * @param event {MouseEvent}
-     * @param resizeDirection which handler is pressed to resize
-     */
-    onMouseDown(event: MouseEvent, resizeDirection: ResizeDirection): void {
-        event.preventDefault();
-        if (!this.resizable) {
-            return;
-        }
-
-        this.showingResizeIcon = true;
-        this._resize = true;
-        this._prevX = event.clientX;
-        this._prevY = event.clientY;
-        this._prevCardWidth = this.cardWidth;
-        this._prevCardHeight = this.cardHeight;
-        this._resizeDirection = resizeDirection;
-    }
-
     /**
      * @hidden When mouse moves to resize the card.
      * using window:mousemove so, resize will happen smoothly
@@ -404,6 +379,31 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
 
         this._stopResizing();
         this._cd.markForCheck();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+    }
+
+    /**
+     * When resize handler is pressed and resizing may start.
+     * @param event {MouseEvent}
+     * @param resizeDirection which handler is pressed to resize
+     */
+    onMouseDown(event: MouseEvent, resizeDirection: ResizeDirection): void {
+        event.preventDefault();
+        if (!this.resizable) {
+            return;
+        }
+
+        this.showingResizeIcon = true;
+        this._resize = true;
+        this._prevX = event.clientX;
+        this._prevY = event.clientY;
+        this._prevCardWidth = this.cardWidth;
+        this._prevCardHeight = this.cardHeight;
+        this._resizeDirection = resizeDirection;
     }
 
     /** Sets focus on the element */

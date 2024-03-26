@@ -8,7 +8,7 @@ import { NotificationExampleContentComponent } from './notification-content.comp
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <button fd-button label="Open from Component" (click)="open()"></button>
-        <span style="margin-left: 24px;">{{ closeReason }}</span>
+        <span [style.margin-left.px]="24">{{ closeReason }}</span>
     `,
     standalone: true,
     imports: [ButtonComponent]
@@ -16,7 +16,10 @@ import { NotificationExampleContentComponent } from './notification-content.comp
 export class NotificationComponentAsContentExampleComponent {
     public closeReason: string;
 
-    constructor(private notificationService: NotificationService, private _cdr: ChangeDetectorRef) {}
+    constructor(
+        private notificationService: NotificationService,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     open(): void {
         const notificationService = this.notificationService.open(NotificationExampleContentComponent, {

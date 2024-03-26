@@ -351,37 +351,6 @@ export class SelectComponent<T = any>
         );
     });
 
-    /** @hidden */
-    private _extendedBodyTemplate = false;
-
-    /** @hidden */
-    private _controlElemFontSize = 0;
-
-    /** @hidden */
-    private _focused = false;
-
-    /**
-     * @hidden
-     * Stored calculated maxHeight from Option Panel
-     */
-    private _maxHeight: number;
-
-    /** @hidden */
-    private _subscriptions: Subscription = new Subscription();
-
-    /** @hidden */
-    @HostListener('window:resize')
-    _resizeScrollHandler(): void {
-        this._updateCalculatedHeight();
-    }
-
-    /** @hidden */
-    setDisabledState(isDisabled: boolean): void {
-        this.disabled = isDisabled;
-        this._tabIndex = this.disabled ? -1 : 0;
-        this._changeDetectorRef.markForCheck();
-    }
-
     /** Selected option. */
     get selected(): OptionComponent {
         return this._selectionModel.selected[0];
@@ -429,9 +398,6 @@ export class SelectComponent<T = any>
         );
     }
 
-    /** @hidden */
-    _compareWith = (o1: any, o2: any): boolean => o1 === o2;
-
     /** Function to compare the option values with the selected values. */
     @Input()
     set compareWith(fn: (o1: any, o2: any) => boolean) {
@@ -444,6 +410,7 @@ export class SelectComponent<T = any>
             this._initializeSelection();
         }
     }
+
     get compareWith(): (o1: any, o2: any) => boolean {
         return this._compareWith;
     }
@@ -457,13 +424,30 @@ export class SelectComponent<T = any>
     get calculatedMaxHeight(): number {
         return this._maxHeight || this._calculatedMaxHeight;
     }
-
     /** @hidden */
     readonly rtl$ = computed(() => !!this._rtlService?.rtlSignal());
 
     private readonly _rtlService = inject(RtlService, {
         optional: true
     });
+
+    /** @hidden */
+    private _extendedBodyTemplate = false;
+
+    /** @hidden */
+    private _controlElemFontSize = 0;
+
+    /** @hidden */
+    private _focused = false;
+
+    /**
+     * @hidden
+     * Stored calculated maxHeight from Option Panel
+     */
+    private _maxHeight: number;
+
+    /** @hidden */
+    private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
     constructor(
@@ -480,6 +464,12 @@ export class SelectComponent<T = any>
             this.ngControl.valueAccessor = this;
         }
         this._tabIndex = parseInt(_tabIndex, 10) || 0;
+    }
+
+    /** @hidden */
+    @HostListener('window:resize')
+    _resizeScrollHandler(): void {
+        this._updateCalculatedHeight();
     }
 
     /** @hidden */
@@ -500,6 +490,16 @@ export class SelectComponent<T = any>
     toggle(): void {
         this._isOpen ? this.close() : this.open();
     }
+
+    /** @hidden */
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+        this._tabIndex = this.disabled ? -1 : 0;
+        this._changeDetectorRef.markForCheck();
+    }
+
+    /** @hidden */
+    _compareWith = (o1: any, o2: any): boolean => o1 === o2;
 
     /** @hidden */
     ngOnInit(): void {

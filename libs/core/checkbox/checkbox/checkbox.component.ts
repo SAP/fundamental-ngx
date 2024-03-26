@@ -1,4 +1,4 @@
-import { CdkPortalOutlet, DomPortal, Portal, PortalModule } from '@angular/cdk/portal';
+import { CdkPortalOutlet, DomPortal, PortalModule } from '@angular/cdk/portal';
 import { NgClass } from '@angular/common';
 import {
     AfterViewInit,
@@ -173,9 +173,6 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
     @ViewChild(CdkPortalOutlet, { static: false })
     private readonly _portalOutlet: CdkPortalOutlet;
 
-    /** @hidden */
-    _projectedDomPortal: Portal<any>;
-
     /** Stores current checkbox value. */
     checkboxValue: T;
     /** Stores current checkbox state. */
@@ -195,13 +192,13 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
     }
 
     /** @hidden */
+    _domPortal: DomPortal<HTMLElement>;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden values returned by control. */
     private _values: FdCheckboxValues = { ...FD_CHECKBOX_VALUES_DEFAULT };
-
-    /** @hidden */
-    _domPortal: DomPortal<HTMLElement>;
 
     /** @hidden */
     constructor(

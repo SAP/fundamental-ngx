@@ -19,16 +19,6 @@ export class NotificationIndicatorDirective implements OnChanges, OnInit, CssCla
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
     /** @hidden
      * CssClassBuilder interface implementation
      * function must return single string
@@ -37,5 +27,15 @@ export class NotificationIndicatorDirective implements OnChanges, OnInit, CssCla
     @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-notification__indicator', this.type ? 'fd-notification__indicator--' + this.type : '', this.class];
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 }

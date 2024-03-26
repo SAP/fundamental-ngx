@@ -1,6 +1,4 @@
 import { ChangeDetectorRef, Directive, Input, OnDestroy, inject } from '@angular/core';
-// eslint-disable-next-line
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
@@ -14,11 +12,6 @@ let randomId = 0;
  */
 @Directive()
 export abstract class BaseComponent implements OnDestroy {
-    /** @hidden */
-    protected defaultId = `fdp-id-${randomId++}`;
-    /** @hidden */
-    protected _disabled = false;
-
     /** Sets the `aria-label` attribute to the element. */
     @Input()
     ariaLabel: Nullable<string>;
@@ -42,17 +35,11 @@ export abstract class BaseComponent implements OnDestroy {
 
     /** id for the Element */
     @Input()
-    id: string = this.defaultId;
+    id = `fdp-id-${randomId++}`;
 
     /** name for the element */
     @Input()
     name: string;
-
-    /** @hidden */
-    protected _subscriptions = new Subscription();
-
-    /** @hidden */
-    protected _router: Router;
 
     /** width of the element */
     @Input()
@@ -66,6 +53,12 @@ export abstract class BaseComponent implements OnDestroy {
     get disabled(): boolean {
         return this._disabled;
     }
+
+    /** @hidden */
+    protected _disabled = false;
+
+    /** @hidden */
+    protected _subscriptions = new Subscription();
 
     /**
      * @hidden

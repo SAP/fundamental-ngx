@@ -26,6 +26,12 @@ export class DndKeyboardGroupDirective {
     /** @hidden */
     _onDndItemFocus$ = new Subject<[number, number]>();
 
+    /** @hidden */
+    constructor(
+        private readonly _cdr: ChangeDetectorRef,
+        @Optional() private readonly _rtlService: RtlService
+    ) {}
+
     /** Custom function to call when moving item inside the group */
     @Input()
     customMoveFn = (group: any[], fromIndex: number, toIndex: number): void =>
@@ -35,12 +41,6 @@ export class DndKeyboardGroupDirective {
     @Input()
     customTransferFn = (group: any[], nextGroup: any[], fromIndex: number, toIndex: number): void =>
         transferArrayItem(group, nextGroup, fromIndex, toIndex);
-
-    /** @hidden */
-    constructor(
-        private readonly _cdr: ChangeDetectorRef,
-        @Optional() private readonly _rtlService: RtlService
-    ) {}
 
     /** Process drag & drop */
     processDragDrop(event: KeyboardEvent, itemIndex: number, groupIndex: number): void {

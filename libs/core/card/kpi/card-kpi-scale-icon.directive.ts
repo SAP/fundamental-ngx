@@ -16,13 +16,13 @@ export class CardKpiScaleIconDirective implements OnInit, CssClassBuilder {
     constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [CLASS_NAME.cardAnalyticsScaleIcon];
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 }

@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
-import { ListModule } from './list.module';
-import { ListMessageDirective } from './list-message.directive';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { ListMessageDirective } from './list-message.directive';
+import { ListModule } from './list.module';
 
 @Component({
     template: ` <li #directiveElement fd-list-message [type]="type">List Item Test Text</li> `

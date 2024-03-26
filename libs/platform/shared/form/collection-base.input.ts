@@ -28,9 +28,6 @@ export abstract class CollectionBaseInput extends BaseInput {
         return this._list;
     }
 
-    /** @hidden */
-    private _list: Array<SelectItem | string | object>;
-
     /**
      * Used in filters and any kind of comparators when we work with objects and this identify
      * unique field name based on which we are going to do the job
@@ -46,6 +43,9 @@ export abstract class CollectionBaseInput extends BaseInput {
      */
     @Input()
     displayKey: string;
+
+    /** @hidden */
+    private _list: Array<SelectItem | string | object>;
 
     /** @hidden */
     public lookupValue(item: any): string {

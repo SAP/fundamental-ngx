@@ -156,7 +156,7 @@
                 ></span>
             }
             @if (row.state === 'readonly') {
-                @if (tableTextContainer.innerText.trim() === '') {
+                @if (tableTextContainer.innerText?.trim() === '') {
                     <span
                         [ngStyle]="{
                             position: 'absolute !important',

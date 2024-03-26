@@ -4,21 +4,17 @@ import { By } from '@angular/platform-browser';
 
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { DynamicPageHeaderComponent } from '@fundamental-ngx/core/dynamic-page';
-import { DynamicPageTitleComponent } from '../../dynamic-page-header/title/dynamic-page-title.component';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { DynamicPageGlobalActionsComponent } from '../../dynamic-page-header/actions/global-actions/dynamic-page-global-actions.component';
+import { DynamicPageLayoutActionsComponent } from '../../dynamic-page-header/actions/layout-actions/dynamic-page-layout-actions.component';
 import { DynamicPageKeyInfoComponent } from '../../dynamic-page-header/key-info/dynamic-page-key-info.component';
-import {
-    DynamicPageGlobalActionsComponent
-} from '../../dynamic-page-header/actions/global-actions/dynamic-page-global-actions.component';
-import {
-    DynamicPageLayoutActionsComponent
-} from '../../dynamic-page-header/actions/layout-actions/dynamic-page-layout-actions.component';
+import { DynamicPageTitleComponent } from '../../dynamic-page-header/title/dynamic-page-title.component';
 
-import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
-import { PlatformDynamicPageModule } from '../../dynamic-page.module';
-import { DynamicPageComponent } from '../../dynamic-page.component';
 import { CommonModule } from '@angular/common';
+import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
+import { DynamicPageComponent } from '../../dynamic-page.component';
+import { PlatformDynamicPageModule } from '../../dynamic-page.module';
 
 @Component({
     template: `
@@ -61,11 +57,6 @@ import { CommonModule } from '@angular/common';
     `
 })
 class TestComponent implements AfterViewInit {
-    title = 'Some title ';
-    subtitle: string;
-    size: DynamicPageResponsiveSize = 'medium';
-    background: DynamicPageBackgroundType;
-
     @ViewChild(DynamicPageTitleComponent) dynamicPageTitleComponent: DynamicPageTitleComponent;
     @ViewChild(DynamicPageKeyInfoComponent) dynamicPageKeyInfoComponent: DynamicPageKeyInfoComponent;
     @ViewChild(DynamicPageGlobalActionsComponent) dynamicPageGlobalActionsComponent: DynamicPageGlobalActionsComponent;
@@ -73,6 +64,11 @@ class TestComponent implements AfterViewInit {
 
     @ViewChild('outlet')
     outlet: ElementRef<HTMLElement>;
+    title = 'Some title ';
+    subtitle: string;
+    size: DynamicPageResponsiveSize = 'medium';
+
+    background: DynamicPageBackgroundType;
 
     constructor(private cd: ChangeDetectorRef) {}
 

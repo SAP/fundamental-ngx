@@ -1,3 +1,4 @@
+import { NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
@@ -38,7 +39,7 @@ export class PlatformLinkIconExampleComponent {}
     selector: 'fdp-platform-link-inverted-example',
     templateUrl: './platform-link-inverted-example.component.html',
     standalone: true,
-    imports: [PlatformLinkModule]
+    imports: [PlatformLinkModule, NgStyle]
 })
 export class PlatformLinkInvertedExampleComponent {}
 

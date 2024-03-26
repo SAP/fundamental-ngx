@@ -1,6 +1,6 @@
-import { InitialFocusDirective } from './initial-focus.directive';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
+import { InitialFocusDirective } from './initial-focus.directive';
 
 @Component({
     template: `
@@ -12,11 +12,11 @@ import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angul
     `
 })
 class TestComponent {
-    enabled = false;
     @ViewChild('elementToFocus') elementToFocus: ElementRef;
     @ViewChild('nestedElementToFocus') nestedElementToFocus: ElementRef;
     @ViewChild(InitialFocusDirective) initialFocusDir: InitialFocusDirective;
 
+    enabled = false;
     rootElementTabIndex = 0;
 }
 

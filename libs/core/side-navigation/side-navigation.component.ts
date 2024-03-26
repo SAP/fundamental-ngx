@@ -94,6 +94,14 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
     }
 
     /** @hidden */
+    @HostListener('window:resize')
+    onResize(): void {
+        if (this.collapseWidth) {
+            this.condensed = window.innerWidth <= this.collapseWidth;
+        }
+    }
+
+    /** @hidden */
     ngOnInit(): void {
         /** Set up condensed state */
         this.nestedListState.condensed =
@@ -115,14 +123,6 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
     ngAfterViewInit(): void {
         if (this.sideNavigationConfiguration) {
             this.keyboardService.refreshItems(this.getLists());
-        }
-    }
-
-    /** @hidden */
-    @HostListener('window:resize')
-    onResize(): void {
-        if (this.collapseWidth) {
-            this.condensed = window.innerWidth <= this.collapseWidth;
         }
     }
 

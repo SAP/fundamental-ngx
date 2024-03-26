@@ -1,6 +1,6 @@
 import { Platform } from '@angular/cdk/platform';
 import { LOCALE_ID } from '@angular/core';
-import { waitForAsync, inject, TestBed } from '@angular/core/testing';
+import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 import dayjs from 'dayjs';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
@@ -9,9 +9,9 @@ import { DayjsDatetimeAdapter } from './dayjs-datetime-adapter';
 import { DayjsDatetimeAdapterModule } from './dayjs-datetime-adapter.module';
 
 // preload locales that are used in tests
-import 'dayjs/locale/ja';
-import 'dayjs/locale/da';
 import 'dayjs/locale/ar-ma';
+import 'dayjs/locale/da';
+import 'dayjs/locale/ja';
 
 export const JAN = 0,
     FEB = 1,

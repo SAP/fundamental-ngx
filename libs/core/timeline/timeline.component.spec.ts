@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TimelineModule } from './';
 import { TimelinePositionControlService } from './services/timeline-position-control.service';
@@ -118,7 +118,7 @@ describe('TimelineComponentWithTrackBy', () => {
 
 @Component({
     template: `
-        <div style="width: 300px;">
+        <div [style.width.px]="300">
             <fd-timeline [dataSource]="data" [axis]="axis" [layout]="layout">
                 <fd-timeline-node *fdTimelineNodeDef="let node">
                     {{ node.title }}
@@ -136,7 +136,7 @@ class TimelineTestComponent {
 
 @Component({
     template: `
-        <div style="width: 300px;">
+        <div [style.width.px]="300">
             <fd-timeline [dataSource]="data" [trackBy]="trackBy">
                 <fd-timeline-node *fdTimelineNodeDef="let node">
                     {{ node.title }}

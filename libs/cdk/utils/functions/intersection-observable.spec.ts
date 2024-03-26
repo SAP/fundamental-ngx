@@ -33,7 +33,7 @@ class MockIntersectionObserver implements IntersectionObserver {
                         boundingClientRect: {
                             width: 100
                         }
-                    } as IntersectionObserverEntry)
+                    }) as IntersectionObserverEntry
             ),
             this
         );

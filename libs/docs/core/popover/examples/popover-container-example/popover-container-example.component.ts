@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FocusableItemDirective } from '@fundamental-ngx/cdk';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 
@@ -6,6 +7,6 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
     selector: 'fd-popover-container-example',
     templateUrl: './popover-container-example.component.html',
     standalone: true,
-    imports: [PopoverComponent, PopoverControlComponent, ButtonComponent, PopoverBodyComponent]
+    imports: [PopoverComponent, PopoverControlComponent, ButtonComponent, PopoverBodyComponent, FocusableItemDirective]
 })
 export class PopoverContainerExampleComponent {}

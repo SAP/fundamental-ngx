@@ -11,13 +11,13 @@ export interface FdpViewSettingsFilterCustomDefContext {
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class FdpViewSettingsFilterCustomDef {
     /** @hidden */
+    constructor(public templateRef: TemplateRef<FdpViewSettingsFilterCustomDefContext>) {}
+
+    /** @hidden */
     static ngTemplateContextGuard(
         dir: FdpViewSettingsFilterCustomDef,
         ctx: FdpViewSettingsFilterCustomDefContext
     ): ctx is FdpViewSettingsFilterCustomDefContext {
         return true;
     }
-
-    /** @hidden */
-    constructor(public templateRef: TemplateRef<FdpViewSettingsFilterCustomDefContext>) {}
 }

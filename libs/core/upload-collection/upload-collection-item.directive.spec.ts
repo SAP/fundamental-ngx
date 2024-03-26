@@ -50,19 +50,19 @@ import {
     `,
     standalone: true,
     imports: [
-    UploadCollectionThumbnailDirective,
-    UploadCollectionItemDirective,
-    ListModule,
-    UploadCollectionTitleDirective,
-    IconModule,
-    LinkModule,
-    UploadCollectionFormItemComponent,
-    UploadCollectionDescriptionDirective,
-    UploadCollectionTextSeparatorDirective,
-    UploadCollectionStatusGroupDirective,
-    ObjectStatusComponent,
-    UploadCollectionButtonGroupComponent
-]
+        UploadCollectionThumbnailDirective,
+        UploadCollectionItemDirective,
+        ListModule,
+        UploadCollectionTitleDirective,
+        IconModule,
+        LinkModule,
+        UploadCollectionFormItemComponent,
+        UploadCollectionDescriptionDirective,
+        UploadCollectionTextSeparatorDirective,
+        UploadCollectionStatusGroupDirective,
+        ObjectStatusComponent,
+        UploadCollectionButtonGroupComponent
+    ]
 })
 class TestComponent {
     @ViewChild(UploadCollectionItemDirective)

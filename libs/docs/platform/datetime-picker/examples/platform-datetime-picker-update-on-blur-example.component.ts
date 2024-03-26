@@ -15,7 +15,7 @@ import { PlatformDatetimePickerComponent } from '@fundamental-ngx/platform/form'
             [processInputOnBlur]="true"
         ></fdp-datetime-picker>
         <br />
-        <div>Selected Date: {{ date.toDate() | date : 'MM/dd/YYYY, hh:mm aa' }}</div> `,
+        <div>Selected Date: {{ date.toDate() | date: 'MM/dd/YYYY, hh:mm aa' }}</div> `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         // Note that this is usually provided in the root of your application.

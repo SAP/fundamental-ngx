@@ -22,9 +22,9 @@ import {
         >
         </fd-calendar>
         <br />
-        <div>Selected First Date: {{ selected.start?.toDate() | date : 'shortDate' }}</div>
+        <div>Selected First Date: {{ selected.start?.toDate() | date: 'shortDate' }}</div>
         <br />
-        <div>Selected Last Date: {{ selected.end?.toDate() | date : 'shortDate' }}</div>`,
+        <div>Selected Last Date: {{ selected.end?.toDate() | date: 'shortDate' }}</div>`,
     providers: [
         {
             provide: DatetimeAdapter,

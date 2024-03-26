@@ -1,14 +1,13 @@
-
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async, fakeAsync, tick } from '@angular/core/testing';
 
+import { CommonModule } from '@angular/common';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { DynamicPageModule } from '../../dynamic-page.module';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { ActionSquashBreakpointPx, DynamicPageHeaderComponent } from './dynamic-page-header.component';
-import { CommonModule } from '@angular/common';
 
 @Component({
     template: ` <fd-dynamic-page-header [title]="title" [subtitle]="subtitle">
@@ -27,11 +26,11 @@ import { CommonModule } from '@angular/common';
     providers: [DynamicPageService]
 })
 class TestComponent {
-    title = 'Some title ';
-    subtitle: string;
-
     @ViewChild(DynamicPageHeaderComponent)
     header: DynamicPageHeaderComponent;
+
+    title = 'Some title ';
+    subtitle: string;
 
     constructor(public dynamicPageService: DynamicPageService) {}
 }

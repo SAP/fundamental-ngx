@@ -1,12 +1,15 @@
-import { Tree } from "@angular-devkit/schematics";
-import { SchematicTestRunner } from "@angular-devkit/schematics/testing";
-import * as path from "path";
-import { createCleanApplication, createCleanWorkspace } from "../testing-utils/create-clean-application";
-import { clearWorkspaceCache } from "../utils/workspace";
+import { Tree } from '@angular-devkit/schematics';
+import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
+import * as path from 'path';
+import { createCleanApplication, createCleanWorkspace } from '../testing-utils/create-clean-application';
+import { clearWorkspaceCache } from '../utils/workspace';
 
 describe('add-styles schematic', () => {
     let tree: Tree;
-    const runner: SchematicTestRunner = new SchematicTestRunner('schematics', path.join(__dirname, '../collection.json'));
+    const runner: SchematicTestRunner = new SchematicTestRunner(
+        'schematics',
+        path.join(__dirname, '../collection.json')
+    );
 
     beforeEach(async () => {
         tree = await createCleanApplication({}, await createCleanWorkspace());
@@ -32,18 +35,18 @@ describe('add-styles schematic', () => {
         it('should add assets', () => {
             const expectedAssets = [
                 JSON.stringify({
-                    "glob": "**/css_variables.css",
-                    "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/",
-                    "output": "./assets/theming-base/"
+                    glob: '**/css_variables.css',
+                    input: './node_modules/@sap-theming/theming-base-content/content/Base/baseLib/',
+                    output: './assets/theming-base/'
                 }),
                 JSON.stringify({
-                    "glob": "**/*",
-                    "input": "./node_modules/fundamental-styles/dist/theming/",
-                    "output": "./assets/fundamental-styles-theming/"
+                    glob: '**/*',
+                    input: './node_modules/fundamental-styles/dist/theming/',
+                    output: './assets/fundamental-styles-theming/'
                 })
             ];
             const factualAssets = JSON.stringify(assets);
-            expectedAssets.forEach(expectedAsset => {
+            expectedAssets.forEach((expectedAsset) => {
                 expect(factualAssets).toContain(expectedAsset);
             });
         });

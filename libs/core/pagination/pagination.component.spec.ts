@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { PaginationModule } from './pagination.module';
 import { SelectComponent } from '@fundamental-ngx/core/select';
+import { PaginationModule } from './pagination.module';
 
-import { PaginationComponent } from './pagination.component';
 import { NgModel } from '@angular/forms';
+import { PaginationComponent } from './pagination.component';
 
 const TOTAL_ITEMS = 3;
 const CURRENT_PAGE = 1;

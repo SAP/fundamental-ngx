@@ -29,15 +29,15 @@ export interface ElementPosition {
 export interface DndItem<T = any> {
     elementRef: ElementRef;
     item: Nullable<T>;
+    moved: Observable<ElementPosition>;
+    released: Observable<void>;
+    started: Observable<void>;
+    listDraggable: boolean;
     getElementCoordinates(isBefore: boolean, gridMode: boolean): ElementChord;
     removeLine(): void;
     removeReplaceIndicator(): void;
     createLine(linkPosition: LinkPosition, gridMode: boolean): void;
     createReplaceIndicator(): void;
-    moved: Observable<ElementPosition>;
-    released: Observable<void>;
-    started: Observable<void>;
-    listDraggable: boolean;
     changeCDKDragState(): void;
     setDisabledState(state: boolean): void;
 }

@@ -22,7 +22,7 @@ import 'moment/locale/zh-cn';
     template: ` <label fd-form-label for="language">Select language:</label>
         <fd-segmented-button
             id="language"
-            style="margin-bottom:20px"
+            [style.margin-bottom.px]="20"
             [ngModel]="locale"
             (ngModelChange)="setLocale($event)"
         >

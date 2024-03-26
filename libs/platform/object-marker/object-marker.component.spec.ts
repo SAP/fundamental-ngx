@@ -2,8 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { PlatformObjectMarkerComponent } from './object-marker.component';
 import { IconComponent } from '@fundamental-ngx/core/icon';
+import { PlatformObjectMarkerComponent } from './object-marker.component';
 
 @Component({
     selector: 'fdp-test-object-marker',

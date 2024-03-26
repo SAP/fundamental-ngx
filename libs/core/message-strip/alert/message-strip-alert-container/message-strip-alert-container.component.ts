@@ -30,6 +30,14 @@ import { MessageStripAlert } from '../message-strip-alert/message-strip-alert.in
     imports: [PortalModule, ScrollbarDirective, MessageStripAlertContainerFooterComponent, AsyncPipe]
 })
 export class MessageStripAlertContainerComponent implements AfterViewInit {
+    /** @hidden */
+    @ViewChildren(CdkPortalOutlet)
+    portalOutlets: QueryList<CdkPortalOutlet>;
+
+    /** @hidden */
+    @ViewChildren(MessageStripAlertComponent)
+    alerts: QueryList<MessageStripAlert>;
+
     /**
      * The list of the elements that are attached to the container.
      */
@@ -40,14 +48,6 @@ export class MessageStripAlertContainerComponent implements AfterViewInit {
      * user-provided footer component portal. This way, user has full control over the container alerts.
      */
     alertRefs$!: Observable<MessageStripAlertRef[]>;
-
-    /** @hidden */
-    @ViewChildren(CdkPortalOutlet)
-    portalOutlets: QueryList<CdkPortalOutlet>;
-
-    /** @hidden */
-    @ViewChildren(MessageStripAlertComponent)
-    alerts: QueryList<MessageStripAlert>;
 
     /** @hidden */
     ngAfterViewInit(): void {

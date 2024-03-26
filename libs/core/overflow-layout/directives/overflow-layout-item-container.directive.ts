@@ -6,10 +6,6 @@ import { OverflowItemContainerRefDirective } from './overflow-item-container-ref
     standalone: true
 })
 export class OverflowLayoutItemContainerDirective {
-    /** @hidden */
-    @HostBinding('class')
-    private readonly _initialClass = 'fd-overflow-layout__item';
-
     /**
      * Whether this item is the first one in the array.
      */
@@ -36,6 +32,10 @@ export class OverflowLayoutItemContainerDirective {
      */
     @ContentChild(OverflowItemContainerRefDirective)
     containerRef: OverflowItemContainerRefDirective;
+
+    /** @hidden */
+    @HostBinding('class')
+    private readonly _initialClass = 'fd-overflow-layout__item';
 
     /** @hidden */
     constructor(public elementRef: ElementRef) {}

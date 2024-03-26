@@ -100,6 +100,23 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}
 
+    /** @hidden
+     * CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [
+            'fd-message-strip',
+            this.type ? `fd-message-strip--${this.type}` : '',
+            this.dismissible ? 'fd-message-strip--dismissible' : '',
+            this.noIcon ? 'fd-message-strip--no-icon' : '',
+            this.indicationColor ? `fd-message-strip--indication-color-${this.indicationColor}` : '',
+            this.class
+        ];
+    }
+
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
@@ -141,22 +158,5 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
         this.elementRef.nativeElement.classList.add('fd-has-display-none');
         this.elementRef.nativeElement.classList.remove('fd-has-display-block');
         this.onDismiss.emit();
-    }
-
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            'fd-message-strip',
-            this.type ? `fd-message-strip--${this.type}` : '',
-            this.dismissible ? 'fd-message-strip--dismissible' : '',
-            this.noIcon ? 'fd-message-strip--no-icon' : '',
-            this.indicationColor ? `fd-message-strip--indication-color-${this.indicationColor}` : '',
-            this.class
-        ];
     }
 }

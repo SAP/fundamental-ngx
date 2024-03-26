@@ -5,10 +5,9 @@ import {
     JSX,
     PageEvent,
     ReflectionKind,
-    ReflectionType,
-    JSX as React
+    ReflectionType
 } from 'typedoc';
-import { hasTypeParameters, classNames, fixedMarkdown } from '../utils';
+import { classNames, fixedMarkdown, hasTypeParameters } from '../utils';
 
 export function reflectionTemplate(context: DefaultThemeRenderContext, props: PageEvent<ContainerReflection>) {
     if (

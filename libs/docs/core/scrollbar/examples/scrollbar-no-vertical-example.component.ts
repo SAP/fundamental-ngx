@@ -5,8 +5,8 @@ import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 @Component({
     selector: 'fd-scrollbar-no-vertical-example',
     template: `
-        <div fd-scrollbar noVerticalScroll style="height: 200px;">
-            <div style="width: 9000px; height: 9000px;"></div>
+        <div fd-scrollbar noVerticalScroll [style.height.px]="200">
+            <div [style.width.px]="9000" [style.height.px]="9000"></div>
         </div>
     `,
     standalone: true,

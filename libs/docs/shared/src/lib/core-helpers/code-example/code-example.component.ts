@@ -75,6 +75,10 @@ export class CodeExampleComponent implements OnInit {
 
     activeIndex = 0;
 
+    get expandIcon(): string {
+        return this.isOpen ? 'navigation-up-arrow' : 'navigation-down-arrow';
+    }
+
     constructor(
         private copyService: CopyService,
         private messageStripAlertService: MessageStripAlertService,
@@ -129,12 +133,13 @@ export class CodeExampleComponent implements OnInit {
         );
     }
 
-    openStackBlitz(): void {
-        this.stackBlitzService.openCode(this._exampleFiles);
+    @HostListener('window:resize', ['$event'])
+    onResize(): void {
+        this.smallScreen = window.innerWidth <= 768;
     }
 
-    get expandIcon(): string {
-        return this.isOpen ? 'navigation-up-arrow' : 'navigation-down-arrow';
+    openStackBlitz(): void {
+        this.stackBlitzService.openCode(this._exampleFiles);
     }
 
     copyText(): void {
@@ -146,11 +151,6 @@ export class CodeExampleComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.smallScreen = window.innerWidth <= 768;
-    }
-
-    @HostListener('window:resize', ['$event'])
-    onResize(): void {
         this.smallScreen = window.innerWidth <= 768;
     }
 }

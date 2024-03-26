@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { NestedListKeyboardService } from './nested-list-keyboard.service';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { Subject } from 'rxjs';
+import { NestedListKeyboardService } from './nested-list-keyboard.service';
 
 class MockNestedLink {
     selected?: boolean;
@@ -12,12 +12,16 @@ class MockNestedItem {
     linkItem: MockNestedLink;
     keyboardTriggered = new Subject<KeyboardEvent>();
     hasChildren: boolean;
+
+    constructor(
+        readonly allChildrenItems: MockNestedItem[] = [],
+        public expanded: boolean = true
+    ) {}
+
     triggerOpen = (): void => {};
     triggerClose = (): void => {};
     focus = (): void => {};
     click = (): void => {};
-
-    constructor(readonly allChildrenItems: MockNestedItem[] = [], public expanded: boolean = true) {}
 }
 
 interface MockNestedList {

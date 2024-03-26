@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
+import { TabbableElementService } from '@fundamental-ngx/cdk/utils';
 import { WizardComponent } from './wizard.component';
 import { WizardModule } from './wizard.module';
-import { TabbableElementService } from "@fundamental-ngx/cdk/utils";
 
 @Component({
     template: `
@@ -30,7 +30,7 @@ import { TabbableElementService } from "@fundamental-ngx/cdk/utils";
                     <li
                         fd-wizard-step
                         status="current"
-                        style="width: 150px;"
+                        [style.width.px]="150"
                         label="Step 3: One line truncates"
                         optionalText="(Optional)"
                         #step3
@@ -147,8 +147,10 @@ describe('WizardComponent', () => {
 
         const contentContainer = (component as any)._elRef.nativeElement.querySelectorAll('.fd-wizard__content')[2];
         expect(contentContainer).toBeTruthy();
-        const tabbableEl = (contentContainer?.querySelector('button, input, select, [tabindex]') as HTMLElement);
-        const viewServiceSpy = jest.spyOn(TestBed.inject(TabbableElementService), 'getTabbableElement').mockReturnValue(tabbableEl);
+        const tabbableEl = contentContainer?.querySelector('button, input, select, [tabindex]') as HTMLElement;
+        const viewServiceSpy = jest
+            .spyOn(TestBed.inject(TabbableElementService), 'getTabbableElement')
+            .mockReturnValue(tabbableEl);
 
         component.ngAfterViewInit();
         tick(500);

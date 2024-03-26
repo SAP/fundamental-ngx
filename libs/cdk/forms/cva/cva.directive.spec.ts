@@ -31,7 +31,10 @@ export class TestComponent implements ControlValueAccessor, AfterViewInit {
         return this._directive.value;
     }
 
-    constructor(private readonly _directive: CvaDirective, private readonly _renderer: Renderer2) {}
+    constructor(
+        private readonly _directive: CvaDirective,
+        private readonly _renderer: Renderer2
+    ) {}
 
     onInput(event: Event): void {
         this.setValue((<HTMLInputElement>event.target).value ?? '', true);

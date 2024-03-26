@@ -64,7 +64,11 @@
                         <fd-dynamic-page-content cdkScrollable>
                             <div
                                 class="fd-dynamic-page-section-example"
-                                style="display: flex; align-items: center; justify-content: center"
+                                [ngStyle]="{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }"
                             >
                                 <button class="fd-button" (click)="changeLayout('ThreeColumnsMidExpanded')">
                                     Open Column 3

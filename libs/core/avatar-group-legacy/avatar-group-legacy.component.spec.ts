@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-
 import { Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
@@ -17,57 +16,53 @@ const NUMBER_OF_ITEMS = 20;
 
 @Component({
     template: `
-<div style="width: 500px">
-  <fd-avatar-group-legacy #avatarGroup [type]="type" [size]="size">
-    <div>
-      @for (item of items; track item) {
-        <div fd-avatar-group-legacy-item>
-          <fd-avatar [circle]="true" [border]="true" [size]="size" [label]="item"></fd-avatar>
+        <div [style.width.px]="500">
+            <fd-avatar-group-legacy #avatarGroup [type]="type" [size]="size">
+                <div>
+                    @for (item of items; track item) {
+                        <div fd-avatar-group-legacy-item>
+                            <fd-avatar [circle]="true" [border]="true" [size]="size" [label]="item"></fd-avatar>
+                        </div>
+                    }
+                </div>
+                <fd-popover [noArrow]="false" placement="bottom">
+                    <fd-popover-control>
+                        @if (avatarGroup.overflowItemsCount > 0) {
+                            <button fd-button fd-avatar-group-legacy-overflow-button [size]="size">
+                                <bdi fd-avatar-group-legacy-overflow-button-text>
+                                    +{{ avatarGroup.overflowItemsCount }}
+                                </bdi>
+                            </button>
+                        }
+                    </fd-popover-control>
+                    <fd-popover-body>
+                        <div class="fd-popover__wrapper">
+                            <div fd-avatar-group-legacy-overflow-body>
+                                @for (item of items; track item; let idx = $index) {
+                                    <div fd-avatar-group-legacy-overflow-item>
+                                        <fd-avatar [circle]="true" [border]="true" size="s" [label]="item"></fd-avatar>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </fd-popover-body>
+                </fd-popover>
+            </fd-avatar-group-legacy>
         </div>
-      }
-    </div>
-    <fd-popover [noArrow]="false" placement="bottom">
-      <fd-popover-control>
-        @if (avatarGroup.overflowItemsCount > 0) {
-          <button
-            fd-button
-            fd-avatar-group-legacy-overflow-button
-            [size]="size"
-            >
-            <bdi fd-avatar-group-legacy-overflow-button-text>
-              +{{ avatarGroup.overflowItemsCount }}
-            </bdi>
-          </button>
-        }
-      </fd-popover-control>
-      <fd-popover-body>
-        <div class="fd-popover__wrapper">
-          <div fd-avatar-group-legacy-overflow-body>
-            @for (item of items; track item; let idx = $index) {
-              <div fd-avatar-group-legacy-overflow-item>
-                <fd-avatar [circle]="true" [border]="true" size="s" [label]="item"></fd-avatar>
-              </div>
-            }
-          </div>
-        </div>
-      </fd-popover-body>
-    </fd-popover>
-  </fd-avatar-group-legacy>
-</div>
-`,
+    `,
     standalone: true,
     imports: [
-    AvatarGroupLegacyComponent,
-    PopoverModule,
-    AvatarComponent,
-    ButtonModule,
-    AvatarGroupLegacyTestComponent,
-    AvatarGroupLegacyItemDirective,
-    AvatarGroupLegacyOverflowButtonDirective,
-    AvatarGroupLegacyOverflowButtonTextDirective,
-    AvatarGroupLegacyOverflowBodyDirective,
-    AvatarGroupLegacyOverflowItemDirective
-]
+        AvatarGroupLegacyComponent,
+        PopoverModule,
+        AvatarComponent,
+        ButtonModule,
+        AvatarGroupLegacyTestComponent,
+        AvatarGroupLegacyItemDirective,
+        AvatarGroupLegacyOverflowButtonDirective,
+        AvatarGroupLegacyOverflowButtonTextDirective,
+        AvatarGroupLegacyOverflowBodyDirective,
+        AvatarGroupLegacyOverflowItemDirective
+    ]
 })
 class AvatarGroupLegacyTestComponent {
     @ViewChild('avatarGroup')

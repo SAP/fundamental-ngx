@@ -5,10 +5,10 @@ import { By } from '@angular/platform-browser';
 
 import { FormModule } from '@fundamental-ngx/core/form';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
-import { RadioGroupComponent } from './radio-group.component';
-import { FdpFormGroupModule } from '../form-group/fdp-form.module';
-import { PlatformRadioGroupModule } from './radio-group.module';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { FdpFormGroupModule } from '../form-group/fdp-form.module';
+import { RadioGroupComponent } from './radio-group.component';
+import { PlatformRadioGroupModule } from './radio-group.module';
 
 @Component({
     selector: 'fdp-test-reative-fdp-form-group',
@@ -481,11 +481,18 @@ describe('Radio Group Test with Template Driven fdp-form-group', () => {
 });
 
 class DeliveryMethod implements SelectItem {
-    constructor(public label: string, public value: string, public disabled: boolean) {}
+    constructor(
+        public label: string,
+        public value: string,
+        public disabled: boolean
+    ) {}
 }
 
 class Payment {
-    constructor(public paymentMethod: string, public bank: string) {}
+    constructor(
+        public paymentMethod: string,
+        public bank: string
+    ) {}
 }
 
 const RADIO_GROUP_IDENTIFIER = 'platform-radio-group-unit-test';

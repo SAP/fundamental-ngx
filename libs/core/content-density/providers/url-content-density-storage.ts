@@ -21,6 +21,18 @@ export class UrlContentDensityStorage implements ContentDensityStorage {
         this._initialize();
     }
 
+    /** Content density observable */
+    getContentDensity(): Observable<ContentDensityMode> {
+        return this._current$.asObservable().pipe(distinctUntilChanged());
+    }
+
+    /** Change content density */
+    setContentDensity(density: ContentDensityMode): Observable<void> {
+        this._current$.next(density);
+        this._setUrlQueryParam(density);
+        return of(undefined);
+    }
+
     /** @hidden */
     private _initialize(): void {
         this._current$ = new BehaviorSubject<ContentDensityMode>(this._defaultContentDensity);
@@ -41,17 +53,5 @@ export class UrlContentDensityStorage implements ContentDensityStorage {
         url.searchParams.forEach((value, key) => (queryParams[key] = value));
 
         this._router.navigateByUrl(url.pathname + '?' + url.searchParams.toString());
-    }
-
-    /** Content density observable */
-    getContentDensity(): Observable<ContentDensityMode> {
-        return this._current$.asObservable().pipe(distinctUntilChanged());
-    }
-
-    /** Change content density */
-    setContentDensity(density: ContentDensityMode): Observable<void> {
-        this._current$.next(density);
-        this._setUrlQueryParam(density);
-        return of(undefined);
     }
 }

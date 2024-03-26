@@ -1,8 +1,8 @@
 import { ExecutorContext, logger, readTargetOptions } from '@nx/devkit';
-import { WdioExecutorOptions } from './schema.type';
-import { startDevServer } from '../../e2e-utils/start-dev-server';
-import { runWdio } from '../../e2e-utils/run-wdio';
 import glob from 'glob';
+import { runWdio } from '../../e2e-utils/run-wdio';
+import { startDevServer } from '../../e2e-utils/start-dev-server';
+import { WdioExecutorOptions } from './schema.type';
 
 export default async function (_options: WdioExecutorOptions, context: ExecutorContext): Promise<{ success: boolean }> {
     const combinedOptions: WdioExecutorOptions = {

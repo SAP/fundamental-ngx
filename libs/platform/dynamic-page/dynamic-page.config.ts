@@ -28,6 +28,12 @@ export class DynamicPageConfig extends PlatformConfig {
      */
     unpinLabel = 'Unpin Header';
 
+    /** @hidden */
+    constructor(platformConfig: PlatformConfig) {
+        super();
+        this.contentDensity = platformConfig.contentDensity;
+    }
+
     /**
      * Create Provider factory function
      */
@@ -37,11 +43,5 @@ export class DynamicPageConfig extends PlatformConfig {
         const useFactory = (platformConfig: PlatformConfig): DynamicPageConfig =>
             Object.assign(new DynamicPageConfig(platformConfig), obj);
         return useFactory;
-    }
-
-    /** @hidden */
-    constructor(platformConfig: PlatformConfig) {
-        super();
-        this.contentDensity = platformConfig.contentDensity;
     }
 }

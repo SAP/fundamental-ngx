@@ -84,8 +84,9 @@ export class CheckboxReactiveFormsExampleComponent implements OnInit {
                 }),
                 takeUntilDestroyed(this._destroyRef)
             )
-            .subscribe((acceptAllValue) =>
-                this.registrationForm.get('acceptAll')?.setValue(acceptAllValue, { emitEvent: false })
+            .subscribe(
+                (acceptAllValue) =>
+                    this.registrationForm.get('acceptAll')?.setValue(acceptAllValue, { emitEvent: false })
             );
     }
 

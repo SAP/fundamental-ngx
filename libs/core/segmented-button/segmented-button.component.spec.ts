@@ -4,9 +4,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ButtonComponent, ButtonModule } from '@fundamental-ngx/core/button';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { SegmentedButtonComponent } from './segmented-button.component';
 import { SegmentedButtonModule } from './segmented-button.module';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
 
 const isSelectedClass = 'fd-button--toggled';
 

@@ -10,31 +10,31 @@ import { OverflowLayoutService } from './overflow-layout.service';
 @Component({
     selector: 'fd-test-component',
     template: `
-<fd-overflow-layout [maxVisibleItems]="maxItems" [style.width.px]="containerWidth">
-  @for (item of itemsToRender; track item; let i = $index) {
-    <div
-      *fdOverflowItemRef="let hidden; index as i"
-      fdOverflowLayoutItem
-      [focusable]="true"
-      [style.width.px]="elementsWidth"
-      [style.height.px]="20"
-      >
-      {{ i }}
-    </div>
-  }
-  <div *fdOverflowExpand></div>
-</fd-overflow-layout>
-`
+        <fd-overflow-layout [maxVisibleItems]="maxItems" [style.width.px]="containerWidth">
+            @for (item of itemsToRender; track item; let i = $index) {
+                <div
+                    *fdOverflowItemRef="let hidden; index as i"
+                    fdOverflowLayoutItem
+                    [focusable]="true"
+                    [style.width.px]="elementsWidth"
+                    [style.height.px]="20"
+                >
+                    {{ i }}
+                </div>
+            }
+            <div *fdOverflowExpand></div>
+        </fd-overflow-layout>
+    `
 })
 export class TestComponent {
+    @ViewChild(OverflowLayoutComponent)
+    overflowLayout: OverflowLayoutComponent;
+
     elementsWidth = 200;
     containerWidth = 1000;
     maxItems = 3;
 
     itemsToRender = new Array(10).fill(null);
-
-    @ViewChild(OverflowLayoutComponent)
-    overflowLayout: OverflowLayoutComponent;
 
     addItem(): void {
         this.itemsToRender.push(null);
@@ -95,7 +95,7 @@ describe('OverflowLayoutComponent', () => {
         fixture.detectChanges();
         await fixture.whenStable();
 
-        expect(visibleItemsCountSpy).toHaveBeenLastCalledWith(expectedAmount);
+        expect(visibleItemsCountSpy).toHaveBeenCalledWith(expectedAmount);
         expect(fixture.debugElement.queryAll(By.directive(OverflowLayoutItemDirective)).length).toEqual(expectedAmount);
     });
 

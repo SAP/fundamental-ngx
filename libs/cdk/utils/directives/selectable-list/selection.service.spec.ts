@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     Component,
@@ -10,12 +10,12 @@ import {
     QueryList,
     ViewChildren
 } from '@angular/core';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs';
 
+import { SelectComponentRootToken } from './select-component-root.token';
 import { SelectableItemToken } from './selectable-item.token';
 import { SelectionService } from './selection.service';
-import { SelectComponentRootToken } from './select-component-root.token';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -58,12 +58,12 @@ class TestDirective implements SelectableItemToken<HTMLElement, string> {
     providers: [SelectionService]
 })
 class HostComponent implements SelectComponentRootToken<string>, AfterViewInit {
+    @ViewChildren(TestDirective) items!: QueryList<TestDirective>;
     value: string | string[] = '3';
     disabled!: boolean;
     multiple = true;
     toggle = false;
     selectedChange = new Subject<string | string[]>();
-    @ViewChildren(TestDirective) items!: QueryList<TestDirective>;
 
     constructor(public readonly selectionService: SelectionService<HTMLElement, string>) {
         selectionService.registerRootComponent(this);

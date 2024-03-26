@@ -123,27 +123,27 @@ describe('DisplayListItemComponent', () => {
 @Component({
     selector: 'fdp-test-display-list-item',
     template: `
-<fdp-list partialNavigation="true">
-  @for (item of items; track item) {
-    <fdp-display-list-item
-      [title]="item.title"
-      [secondary]="item.secondary"
-      [navigationIndicator]="item.navigationIndicator"
-    ></fdp-display-list-item>
-  }
-</fdp-list>
-`
+        <fdp-list partialNavigation="true">
+            @for (item of items; track item) {
+                <fdp-display-list-item
+                    [title]="item.title"
+                    [secondary]="item.secondary"
+                    [navigationIndicator]="item.navigationIndicator"
+                ></fdp-display-list-item>
+            }
+        </fdp-list>
+    `
 })
 class TestComponentContentComponent {
+    @ViewChild(DisplayListItemComponent)
+    displayListItem: DisplayListItemComponent;
+
     items: Name[] = [
         { title: 'title 1', secondary: 'secondary 1', navigationIndicator: 'true' },
         { title: 'title 2', secondary: 'secondary 2' },
         { title: 'title 3', secondary: 'secondary 3' },
         { title: 'title 4', secondary: 'secondary 4', navigationIndicator: 'true' }
     ];
-
-    @ViewChild(DisplayListItemComponent)
-    displayListItem: DisplayListItemComponent;
 }
 
 describe('DisplayListItemComponent Imperative', () => {

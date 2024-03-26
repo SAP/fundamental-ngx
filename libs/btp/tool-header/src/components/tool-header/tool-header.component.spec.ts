@@ -1,8 +1,8 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SearchFieldComponent } from '@fundamental-ngx/btp/search-field';
+import { FdbToolHeaderState } from '../../tool-header-state.type';
 import { ToolHeaderComponent } from './tool-header.component';
-import { FdbToolHeaderState } from "../../tool-header-state.type";
-import { Component } from "@angular/core";
-import { SearchFieldComponent } from "@fundamental-ngx/btp/search-field";
 
 @Component({
     template: ``,
@@ -25,9 +25,8 @@ describe('ToolHeaderComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ ToolHeaderComponent, MockSearchFieldComponent ]
-        })
-            .compileComponents();
+            imports: [ToolHeaderComponent, MockSearchFieldComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -157,7 +156,6 @@ describe('ToolHeaderComponent', () => {
         expect(fixture.componentInstance.searchFieldExpanded$()).toBe(true);
         expect(searchFieldComponentFocusSpy).toHaveBeenCalled();
     });
-
 });
 
 function fdbToolHeaderState(component: any): FdbToolHeaderState {

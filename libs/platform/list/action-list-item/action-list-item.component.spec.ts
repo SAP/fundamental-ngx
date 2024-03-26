@@ -4,10 +4,9 @@ import { By } from '@angular/platform-browser';
 
 import { ActionListItemComponent } from './action-list-item.component';
 
-
+import { BaseListItem } from '../base-list-item';
 import { ListComponent } from '../list.component';
 import { SelectionType } from '../models/list';
-import { BaseListItem } from '../base-list-item';
 
 export interface Action {
     title: string;
@@ -155,20 +154,20 @@ describe('ActionListItemComponent', () => {
 @Component({
     selector: 'fdp-test-action-list-item',
     template: `
-<fdp-list>
-  @for (item of items; track item) {
-    <fdp-action-list-item [title]="item.title"></fdp-action-list-item>
-  }
-</fdp-list>
-`,
+        <fdp-list>
+            @for (item of items; track item) {
+                <fdp-action-list-item [title]="item.title"></fdp-action-list-item>
+            }
+        </fdp-list>
+    `,
     standalone: true,
     imports: [ListComponent, ActionListItemComponent]
 })
 class TestComponentContentComponent {
-    items: Action[] = [{ title: 'Action 1' }, { title: 'Action 2' }, { title: 'Action 3' }, { title: 'Action 4' }];
-
     @ViewChild(ActionListItemComponent)
     actionListItem: ActionListItemComponent;
+
+    items: Action[] = [{ title: 'Action 1' }, { title: 'Action 2' }, { title: 'Action 3' }, { title: 'Action 4' }];
 }
 
 describe('ActionListItemComponent Imperative', () => {

@@ -6,17 +6,22 @@ import { Observable, Subject } from 'rxjs';
  * For a template, it is declared as part of the implicit context, see examples.
  */
 export class NotificationRef<T = any, P = any> {
-    /** @hidden */
-    protected readonly _afterClosed = new Subject<P | undefined>();
-
     /**
      * Observable that is triggered when the notification is closed.
      * On close a *result* is passed back. On dismiss, an *error* is returned instead.
      */
-    public afterClosed: Observable<any> = this._afterClosed.asObservable();
+    afterClosed: Observable<P | undefined>;
 
     /** Data passed from the calling component to the content.*/
-    public data: T;
+    data: T;
+
+    /** @hidden */
+    protected readonly _afterClosed = new Subject<P | undefined>();
+
+    /** @hidden */
+    constructor() {
+        this.afterClosed = this._afterClosed.asObservable();
+    }
 
     /**
      * Closes the notification and passes the argument to the afterClosed observable.

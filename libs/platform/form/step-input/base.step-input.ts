@@ -1,7 +1,7 @@
-import { Directive, EventEmitter, Input, OnInit, Output, Renderer2, computed, inject, signal } from '@angular/core';
+import { computed, Directive, EventEmitter, inject, Input, OnInit, Output, Renderer2, signal } from '@angular/core';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ContentDensity, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
+import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { BaseInput } from '@fundamental-ngx/platform/shared';
 import { StepInputConfig } from './step-input.config';
 import { addAndCutFloatingNumberDistortion, getNumberDecimalLength } from './step-input.util';
@@ -39,8 +39,17 @@ const ALIGN_INPUT_OPTIONS_LIST = [StepInputAlign.Left, StepInputAlign.Center, St
  */
 @Directive()
 export abstract class StepInputComponent extends BaseInput implements OnInit {
-    /** @hidden */
-    readonly config = inject(StepInputConfig);
+    /** Create valueChange event */
+    abstract createChangeEvent(value: number): StepInputChangeEvent;
+
+    /** Format value for view presentation */
+    abstract formatValue(value: number | null): string;
+
+    /** Format value for "in focus" mode */
+    abstract formatValueInFocusMode(value: number): string;
+
+    /** Parse value entered "in focus" mode */
+    abstract parseValueInFocusMode(value: string): number | null;
     /** Sets input value */
     @Input()
     set value(value: Nullable<number>) {
@@ -122,13 +131,13 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
      * ARIA label for increment button
      */
     @Input()
-    incrementLabel: string = this.config.incrementLabel;
+    incrementLabel: string = inject(StepInputConfig).incrementLabel;
 
     /**
      * ARIA label for decrement button
      */
     @Input()
-    decrementLabel: string = this.config.decrementLabel;
+    decrementLabel: string = inject(StepInputConfig).decrementLabel;
 
     /** Emits new value when control value has changed */
     @Output()
@@ -152,9 +161,6 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     get canChangeValue(): boolean {
         return !(this.disabled || !this.editable);
     }
-
-    /** @hidden */
-    _contentDensity: ContentDensity = this.config.contentDensity;
 
     /** @hidden */
     readonly _align$ = signal<StepInputAlign | null>(null);
@@ -209,9 +215,9 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
         return pendingValue;
     }
-
     /** @hidden */
     private readonly _renderer = inject(Renderer2);
+
     /** @hidden */
     private readonly _rtlService = inject(RtlService, { optional: true });
 
@@ -273,8 +279,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
      * catch value during entering from view.
      */
     onEnterValue(value: string): void {
-        const parsedValue = this.parseValueInFocusMode(value);
-        let pendingValue = parsedValue;
+        let pendingValue = this.parseValueInFocusMode(value);
 
         if (pendingValue !== null) {
             pendingValue = this._validateValueByLimits(pendingValue);
@@ -330,18 +335,6 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         this._updateViewValue();
     }
 
-    /** Create valueChange event */
-    abstract createChangeEvent(value: number): StepInputChangeEvent;
-
-    /** Format value for view presentation */
-    abstract formatValue(value: number | null): string;
-
-    /** Format value for "in focus" mode */
-    abstract formatValueInFocusMode(value: number): string;
-
-    /** Parse value entered "in focus" mode */
-    abstract parseValueInFocusMode(value: string): number | null;
-
     /** @hidden */
     private _listenToFormErrorState(): void {
         this.stateChanges
@@ -379,8 +372,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     private _getStepValue(action: StepInputStepFunctionAction): number {
         // steFn has precedence
         if (typeof this._stepFn === 'function') {
-            const calculatedStep = this._stepFn(this._currentValue ?? this.min, action);
-            return calculatedStep;
+            return this._stepFn(this._currentValue ?? this.min, action);
         }
         return this.step;
     }

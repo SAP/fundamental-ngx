@@ -17,14 +17,14 @@ import { RadioButtonComponent } from './radio-button.component';
         ></fd-radio-button>
     `,
     standalone: true,
-    imports: [FormsModule, RadioButtonComponent, TestRadioButtonComponent]
+    imports: [FormsModule, RadioButtonComponent]
 })
 class TestRadioButtonComponent {
-    selectedValue = 1;
-
     @ViewChild('radio1') radioButton1: RadioButtonComponent;
     @ViewChild('radio2') radioButton2: RadioButtonComponent;
     @ViewChild('radio3') radioButton3: RadioButtonComponent;
+
+    selectedValue = 1;
 }
 
 describe('RadioButtonComponent', () => {

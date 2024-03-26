@@ -1,4 +1,3 @@
-import { coerceNumberProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -30,7 +29,7 @@ import {
     forwardRef,
     inject
 } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, ValidatorFn, Validators } from '@angular/forms';
 import { FD_FORM_FIELD, FormFieldControl, FormStates } from '@fundamental-ngx/cdk/forms';
 import { uniqBy } from 'lodash-es';
 import { BehaviorSubject, Observable, Subject, Subscription, combineLatest, filter, tap } from 'rxjs';
@@ -84,6 +83,14 @@ const formGroupChildProvider: Provider = {
     provide: FORM_GROUP_CHILD_FIELD_TOKEN,
     useExisting: forwardRef(() => FormFieldComponent)
 };
+
+function columnTransformer(v: Column | `${Column}`): Column {
+    return parseInt(v + '', 10) as Column;
+}
+
+function rankTransformer(v: string | number): number {
+    return parseInt(v + '', 10);
+}
 
 /**
  * Form Field represent actual row and aggregates common behavior for the input field such as
@@ -144,7 +151,7 @@ export class FormFieldComponent
      * Rank is used for ordering.
      * First lower number, then - higher
      */
-    @Input()
+    @Input({ transform: rankTransformer })
     rank: number;
 
     /**
@@ -255,14 +262,8 @@ export class FormFieldComponent
     /**
      * Form field custom width in columns must be between 1 - 12
      */
-    @Input()
-    set columns(value: Column) {
-        this._columns = <Column>coerceNumberProperty(value);
-    }
-
-    get columns(): Column {
-        return this._columns;
-    }
+    @Input({ transform: columnTransformer })
+    columns: Column = 6;
 
     /**
      * marks field as disabled. used in reactive form approach.
@@ -375,13 +376,7 @@ export class FormFieldComponent
     hintTarget?: string;
 
     /** @hidden */
-    protected _columns: Column = 6;
-
-    /** @hidden */
     protected _editable = true;
-
-    /** @hidden */
-    protected _formGroup: FormGroup;
 
     /** @hidden */
     private _isColumnLayoutEnabled = false;

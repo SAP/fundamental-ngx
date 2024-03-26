@@ -3,7 +3,7 @@
         <form [formGroup]="customForm">
             <fd-date-picker
                 type="range"
-                style="width: 300px"
+                [style.width.px]="300"
                 formControlName="dates"
                 [state]="isValid() ? 'success' : 'error'"
                 [message]="!isValid() ? 'Format is not valid' : ''"

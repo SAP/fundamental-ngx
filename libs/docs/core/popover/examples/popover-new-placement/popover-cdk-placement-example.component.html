@@ -1,7 +1,8 @@
 <div>
     <label fd-form-label>Origin X</label>
     <fd-segmented-button
-        style="margin-right: 10px; margin-left: 10px"
+        [style.margin-right.px]="10"
+        [style.margin-left.px]="10"
         [ngModel]="originX"
         (ngModelChange)="originX = $event; refresh()"
     >
@@ -12,7 +13,8 @@
     <br />
     <label fd-form-label>Origin Y</label>
     <fd-segmented-button
-        style="margin-right: 10px; margin-left: 10px"
+        [style.margin-right.px]="10"
+        [style.margin-left.px]="10"
         [ngModel]="originY"
         (ngModelChange)="originY = $event; refresh()"
     >
@@ -23,7 +25,8 @@
     <br />
     <label fd-form-label>Overlay X</label>
     <fd-segmented-button
-        style="margin-right: 10px; margin-left: 10px"
+        [style.margin-right.px]="10"
+        [style.margin-left.px]="10"
         [ngModel]="overlayX"
         (ngModelChange)="overlayX = $event; refresh()"
     >
@@ -34,7 +37,8 @@
     <br />
     <label fd-form-label>Overlay Y</label>
     <fd-segmented-button
-        style="margin-right: 10px; margin-left: 10px"
+        [style.margin-right.px]="10"
+        [style.margin-left.px]="10"
         [ngModel]="overlayY"
         (ngModelChange)="overlayY = $event; refresh()"
     >
@@ -44,7 +48,13 @@
     </fd-segmented-button>
 </div>
 <br /><br />
-<div style="width: 300px; height: 300px; display: flex; align-items: center; justify-content: center">
+<div
+    [style.width.px]="300"
+    [style.height.px]="300"
+    [style.display]="'flex'"
+    [style.align-items]="'center'"
+    [style.justify-content]="'center'"
+>
     <fd-popover
         [cdkPositions]="cdkPosition"
         [noArrow]="false"
@@ -57,7 +67,7 @@
             <button fd-button glyph="navigation-up-arrow"></button>
         </fd-popover-control>
         <fd-popover-body>
-            <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+            <fd-avatar [circle]="true" [style.margin.rem]="1" size="xl" glyph="group"></fd-avatar>
         </fd-popover-body>
     </fd-popover>
 </div>

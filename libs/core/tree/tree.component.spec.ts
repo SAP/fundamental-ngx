@@ -62,13 +62,13 @@ interface TreeItemData {
     `,
     standalone: true,
     imports: [
-    TreeComponent,
-    FormsModule,
-    IconComponent,
-    TreeItemComponent,
-    TreeItemTextDirective,
-    TreeItemIconDirective
-]
+        TreeComponent,
+        FormsModule,
+        IconComponent,
+        TreeItemComponent,
+        TreeItemTextDirective,
+        TreeItemIconDirective
+    ]
 })
 export class ProjectedTreeItemsComponent {
     @ViewChild(TreeComponent)
@@ -109,6 +109,12 @@ export class ProjectedTreeItemsComponent {
     imports: [TreeComponent, TreeItemComponent, TreeItemDefDirective, TreeItemTextDirective]
 })
 export class DataSourceTreeComponent {
+    @ViewChild(TreeComponent)
+    tree: TreeComponent<any>;
+
+    @ViewChild(TreeComponent, { read: ElementRef })
+    treeElement: ElementRef<HTMLElement>;
+
     dataSource: Observable<Partial<TreeItem<TreeItemData>>[]> = of([
         {
             navigatable: true,
@@ -163,12 +169,6 @@ export class DataSourceTreeComponent {
             }
         }
     ]);
-
-    @ViewChild(TreeComponent)
-    tree: TreeComponent<any>;
-
-    @ViewChild(TreeComponent, { read: ElementRef })
-    treeElement: ElementRef<HTMLElement>;
 }
 
 describe('Tree component with projected nodes', () => {

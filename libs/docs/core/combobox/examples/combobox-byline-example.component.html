@@ -12,8 +12,8 @@
             [byline]="true"
         ></fd-combobox>
 
-        <small style="display: block">Search Term: {{ searchTerm }}</small>
-        <small style="display: block">Returned from itemClicked Event: {{ selected | json }}</small>
+        <small [style.display]="'block'">Search Term: {{ searchTerm }}</small>
+        <small [style.display]="'block'">Returned from itemClicked Event: {{ selected | json }}</small>
     </div>
 
     <div fd-form-item>
@@ -29,7 +29,7 @@
             [mobileConfig]="mobileConfig"
         ></fd-combobox>
 
-        <small style="display: block">Search Term: {{ searchTerm2 }}</small>
+        <small [style.display]="'block'">Search Term: {{ searchTerm2 }}</small>
     </div>
 
     <!-- Note that in this case you are responsible for highlighting. -->

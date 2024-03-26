@@ -36,7 +36,7 @@ export abstract class FdbNavigationListItem implements FocusableOption {
     marker: Nullable<NavigationListItemMarkerDirective>;
 
     /** @hidden */
-    readonly listItems$ = signal<FdbNavigationListItem[]>([]);
+    readonly listItems$ = signal<Nullable<FdbNavigationListItem>[]>([]);
 
     /** Whether item has child items. */
     readonly hasChildren$ = computed(() => this.listItems$().length > 0);
@@ -89,7 +89,7 @@ export abstract class FdbNavigationListItem implements FocusableOption {
         () =>
             this.selected$() ||
             this.link$()?.isActive$() ||
-            (this.navigation.isSnapped$() && this.listItems$().some((item) => item.isActiveAttr$()))
+            (this.navigation.isSnapped$() && this.listItems$().some((item) => item?.isActiveAttr$()))
     );
 
     /**

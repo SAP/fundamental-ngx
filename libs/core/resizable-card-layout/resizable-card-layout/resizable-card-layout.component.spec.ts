@@ -106,15 +106,15 @@ import { ResizableCardLayoutComponent } from './resizable-card-layout.component'
     `,
     standalone: true,
     imports: [
-    ResizableCardLayoutComponent,
-    ResizableCardItemComponent,
-    ListComponent,
-    ListItemComponent,
-    CardComponent,
-    CardHeaderComponent,
-    CardTitleDirective,
-    CardContentComponent
-]
+        ResizableCardLayoutComponent,
+        ResizableCardItemComponent,
+        ListComponent,
+        ListItemComponent,
+        CardComponent,
+        CardHeaderComponent,
+        CardTitleDirective,
+        CardContentComponent
+    ]
 })
 class TestResizableCardLayoutComponent {
     @ViewChild(ResizableCardLayoutComponent)

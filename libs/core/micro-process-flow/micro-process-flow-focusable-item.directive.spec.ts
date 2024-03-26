@@ -2,8 +2,8 @@ import { MicroProcessFlowFocusableItemDirective } from './micro-process-flow-foc
 
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { MicroProcessFlowModule } from './micro-process-flow.module';
 import { MicroProcessFlowComponent } from './components/micro-process-flow/micro-process-flow.component';
+import { MicroProcessFlowModule } from './micro-process-flow.module';
 
 @Component({
     template: `

@@ -287,22 +287,10 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     _usersForWatchersList: ApprovalUser[] = [];
 
     /** @hidden */
-    private _selectedWatchers: ApprovalUser[] = [];
-
-    /** @hidden */
     _selectedWatcherIds: ApprovalUser['id'][] = [];
 
     /** @hidden */
     _messages: ApprovalFlowMessage[] = [];
-
-    /** @hidden */
-    _displayUserFn = displayUserFn;
-
-    /** @hidden */
-    _userValueFn = userValueFn;
-
-    /** @hidden */
-    _trackByFn = trackByFn;
 
     /** @hidden */
     _emptyApprovalFlowSpotConfig = {
@@ -318,8 +306,35 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     /** @hidden */
     _dragDropInProgress = false;
 
+    /** Returns snapshot of the current and initial states of approval process */
+    get approvalProcess(): ApprovalProcess {
+        return cloneDeep(this._approvalProcess);
+    }
+
+    /** @hidden */
+    get _rtl(): boolean {
+        return this._rtlService?.rtl.getValue();
+    }
+
+    /** @hidden */
+    get _selectedNodes(): ApprovalGraphNode[] {
+        return getGraphNodes(this._graph).filter((node) => node.selected);
+    }
+
+    /** @hidden */
+    _displayUserFn = displayUserFn;
+
+    /** @hidden */
+    _userValueFn = userValueFn;
+
+    /** @hidden */
+    _trackByFn = trackByFn;
+
     /** @hidden */
     readonly approvalFlowUniqueId = `fdp-approval-flow-${++defaultId}`;
+
+    /** @hidden */
+    private _selectedWatchers: ApprovalUser[] = [];
 
     /** @hidden */
     private _editModeInitSub: Subscription;
@@ -339,21 +354,6 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         @Optional() private readonly _rtlService: RtlService
     ) {
         console.log('ApprovalFlowComponent is deprecated and will be removed in next release.');
-    }
-
-    /** Returns snapshot of the current and initial states of approval process */
-    get approvalProcess(): ApprovalProcess {
-        return cloneDeep(this._approvalProcess);
-    }
-
-    /** @hidden */
-    get _rtl(): boolean {
-        return this._rtlService?.rtl.getValue();
-    }
-
-    /** @hidden */
-    get _selectedNodes(): ApprovalGraphNode[] {
-        return getGraphNodes(this._graph).filter((node) => node.selected);
     }
 
     /** @hidden */
@@ -486,7 +486,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     nextSlide(dir = 1): void {
         const threshold = 1;
 
-        let pos = 0;
+        let pos: number;
 
         if (dir === 1) {
             const lastStep = this._carouselStepsRight === 1;
@@ -510,29 +510,6 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
             left: pos,
             behavior: 'smooth'
         });
-    }
-
-    /** @hidden */
-    private _moveColInView(colIndex: number): any {
-        const node = this._graphEl.nativeElement.children[colIndex].firstElementChild;
-        if (!node) {
-            return;
-        }
-
-        const { x: nodeX, width } = node.getBoundingClientRect();
-
-        const delta = this._graphContainerEl.nativeElement.getBoundingClientRect().x;
-
-        const left = nodeX - delta;
-        const right = left + width;
-
-        if (left < 0) {
-            this._setScrollPosition(this._graphContainerEl.nativeElement.scrollLeft + left);
-        } else if (right > this._graphEl.nativeElement.clientWidth) {
-            this._setScrollPosition(
-                this._graphContainerEl.nativeElement.scrollLeft + right - this._graphEl.nativeElement.clientWidth
-            );
-        }
     }
 
     /** @hidden Handle node keydown and focus other node based on which key is pressed */
@@ -795,6 +772,17 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         });
     }
 
+    /** @hidden */
+    _focusNode(node: ApprovalGraphNode): void {
+        const nodeToFocus = this._nodeComponents.find((comp) => comp.node === node);
+
+        if (!nodeToFocus) {
+            return;
+        }
+        this._moveColInView(node.colIndex ?? 0);
+        nodeToFocus._focus({ preventScroll: true });
+    }
+
     /** @hidden Node drop handler */
     _onNodeDrop(nodeToDrop: ApprovalGraphNode, drag: CdkDrag): void {
         drag.reset();
@@ -881,6 +869,29 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     /** @hidden */
+    private _moveColInView(colIndex: number): any {
+        const node = this._graphEl.nativeElement.children[colIndex].firstElementChild;
+        if (!node) {
+            return;
+        }
+
+        const { x: nodeX, width } = node.getBoundingClientRect();
+
+        const delta = this._graphContainerEl.nativeElement.getBoundingClientRect().x;
+
+        const left = nodeX - delta;
+        const right = left + width;
+
+        if (left < 0) {
+            this._setScrollPosition(this._graphContainerEl.nativeElement.scrollLeft + left);
+        } else if (right > this._graphEl.nativeElement.clientWidth) {
+            this._setScrollPosition(
+                this._graphContainerEl.nativeElement.scrollLeft + right - this._graphEl.nativeElement.clientWidth
+            );
+        }
+    }
+
+    /** @hidden */
     private _finishDragDropProcess(nodeToDrop: ApprovalGraphNode): void {
         this._approvalProcess.nodes.push(nodeToDrop);
         this._buildView(this._approvalProcess);
@@ -935,17 +946,6 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
                     this._cdr.detectChanges();
                 })
         );
-    }
-
-    /** @hidden */
-    _focusNode(node: ApprovalGraphNode): void {
-        const nodeToFocus = this._nodeComponents.find((comp) => comp.node === node);
-
-        if (!nodeToFocus) {
-            return;
-        }
-        this._moveColInView(node.colIndex ?? 0);
-        nodeToFocus._focus({ preventScroll: true });
     }
 
     /** @hidden Update node object in local approval process data structure */

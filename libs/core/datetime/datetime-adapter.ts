@@ -60,6 +60,7 @@ export abstract class DatetimeAdapter<D> {
     /**
      * Set hours.
      * @param date The date to set hours to.
+     * @param hours
      * @returns The new date instance.
      */
     abstract setHours(date: D, hours: number): D;
@@ -67,6 +68,7 @@ export abstract class DatetimeAdapter<D> {
     /**
      * Set minutes.
      * @param date The date to set minutes to.
+     * @param minutes
      * @returns The new date instance.
      */
     abstract setMinutes(date: D, minutes: number): D;
@@ -74,6 +76,7 @@ export abstract class DatetimeAdapter<D> {
     /**
      * Set seconds.
      * @param date The date to set seconds to.
+     * @param seconds
      * @returns The new date instance.
      */
     abstract setSeconds(date: D, seconds: number): D;
@@ -305,15 +308,18 @@ export abstract class DatetimeAdapter<D> {
      */
     abstract fromNow?(date: D): string;
 
+    /** locale changes stream */
+    readonly localeChanges: Observable<void>;
+
     /** current locale */
     protected locale: string;
 
     /** @hidden */
     private _localeChanges: Subject<void> = new Subject();
 
-    /** locale changes stream */
-    readonly localeChanges: Observable<void> = this._localeChanges.asObservable();
-
+    protected constructor() {
+        this.localeChanges = this._localeChanges.asObservable();
+    }
     /**
      * Sets the locale used for all dates.
      * @param locale The new locale.
@@ -326,6 +332,9 @@ export abstract class DatetimeAdapter<D> {
     /**
      * Set hours, minutes and seconds at once.
      * @param date The date to set time to.
+     * @param hours
+     * @param minutes
+     * @param seconds
      * @returns The new date instance.
      */
     setTime(date: D, hours: number, minutes: number, seconds: number): D {

@@ -15,7 +15,7 @@ const lang: FdLanguage = {
 };
 
 @Component({
-    template: `{{ testKey | fdTranslate : testArgs }}`,
+    template: `{{ testKey | fdTranslate: testArgs }}`,
     standalone: true,
     imports: [FdTranslatePipe],
     changeDetection: ChangeDetectionStrategy.OnPush

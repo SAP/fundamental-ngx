@@ -1,4 +1,4 @@
-import { Reflection, JSX as React, JSX, DefaultThemeRenderContext } from 'typedoc';
+import { DefaultThemeRenderContext, JSX, Reflection } from 'typedoc';
 import { fixedMarkdown } from '../utils';
 
 export function commentSummary(context: DefaultThemeRenderContext, props: Reflection) {

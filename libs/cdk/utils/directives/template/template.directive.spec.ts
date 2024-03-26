@@ -1,6 +1,6 @@
-import { TemplateDirective } from './template.directive';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { TemplateDirective } from './template.directive';
 
 @Component({
     template: '<ng-template fdkTemplate="Header">Template content</ng-template>'

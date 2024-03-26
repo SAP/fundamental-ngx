@@ -34,12 +34,14 @@ class HostComponent {
 }
 
 @Component({
-    template: ` <fdp-icon-tab-bar [stackContent]="stackContent$()">
-        <fdp-icon-tab-bar-tab label="Tab 1"><span class="tab-content">1</span></fdp-icon-tab-bar-tab>
-        <fdp-icon-tab-bar-tab label="Tab 2"><span class="tab-content">2</span></fdp-icon-tab-bar-tab>
-        <fdp-icon-tab-bar-tab label="Tab 3"><span class="tab-content">3</span></fdp-icon-tab-bar-tab>
-        <fdp-icon-tab-bar-tab label="Tab 4"><span class="tab-content">4</span></fdp-icon-tab-bar-tab>
-    </fdp-icon-tab-bar> `,
+    template: `
+        <fdp-icon-tab-bar [stackContent]="stackContent$()">
+            <fdp-icon-tab-bar-tab label="Tab 1"><span class="tab-content">1</span></fdp-icon-tab-bar-tab>
+            <fdp-icon-tab-bar-tab label="Tab 2"><span class="tab-content">2</span></fdp-icon-tab-bar-tab>
+            <fdp-icon-tab-bar-tab label="Tab 3"><span class="tab-content">3</span></fdp-icon-tab-bar-tab>
+            <fdp-icon-tab-bar-tab label="Tab 4"><span class="tab-content">4</span></fdp-icon-tab-bar-tab>
+        </fdp-icon-tab-bar>
+    `,
     standalone: true,
     imports: [FDP_ICON_TAB_BAR]
 })

@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { TableComponent } from '../table.component';
-import { SelectionMode, TableDataSource, TableRowType, TableService } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '../table.module';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { SelectionMode, TableDataSource, TableRowType, TableService } from '@fundamental-ngx/platform/table-helpers';
+import { TableComponent } from '../table.component';
+import { PlatformTableModule } from '../table.module';
 import { TableDataProviderMock } from './helpers';
 
 describe('TableComponent internal', () => {

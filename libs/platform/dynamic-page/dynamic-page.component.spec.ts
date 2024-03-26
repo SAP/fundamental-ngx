@@ -47,12 +47,12 @@ import { PlatformDynamicPageModule } from './dynamic-page.module';
     `
 })
 class TestComponent {
-    size: DynamicPageResponsiveSize = 'medium';
-    background: DynamicPageBackgroundType = 'solid';
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
     @ViewChild(DynamicPageTitleComponent) dynamicPageTitleComponent: DynamicPageTitleComponent;
     @ViewChild(DynamicPageHeaderComponent) dynamicPageHeaderComponent: DynamicPageHeaderComponent;
     @ViewChild(DynamicPageContentComponent) dynamicPageContentComponent: DynamicPageContentComponent;
+    size: DynamicPageResponsiveSize = 'medium';
+    background: DynamicPageBackgroundType = 'solid';
 }
 describe('DynamicPageComponent default values', () => {
     let component: TestComponent;
@@ -152,11 +152,11 @@ describe('DynamicPageComponent default values', () => {
     `
 })
 class TestTabbedComponent {
+    @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
     size: DynamicPageResponsiveSize = 'medium';
     background: DynamicPageBackgroundType = 'solid';
     tabLabel1 = 'Tab 1';
     tabLabel2 = 'Tab 2';
-    @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
 }
 describe('DynamicPageComponent tabbed values', () => {
     let component: TestTabbedComponent;
@@ -212,9 +212,9 @@ describe('DynamicPageComponent tabbed values', () => {
     `
 })
 class TestNonCollapsibleComponent {
+    @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
     size: DynamicPageResponsiveSize = 'medium';
     background: DynamicPageBackgroundType = 'solid';
-    @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
 }
 describe('DynamicPageComponent with collapsible set to false', () => {
     let fixture: ComponentFixture<TestNonCollapsibleComponent>;
@@ -297,9 +297,9 @@ describe('DynamicPageComponent with collapsible set to false', () => {
     `
 })
 class HostTestComponent {
+    @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
     size: DynamicPageResponsiveSize = 'medium';
     background: DynamicPageBackgroundType = 'solid';
-    @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
 }
 describe('DynamicPageComponent Content Projection', () => {
     let fixture: ComponentFixture<HostTestComponent>;

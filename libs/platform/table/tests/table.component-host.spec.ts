@@ -1,11 +1,10 @@
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { TableComponent } from '../table.component';
 import {
     CollectionFilter,
     CollectionGroup,
@@ -17,31 +16,32 @@ import {
     TableRowSelectionChangeEvent,
     TableState
 } from '@fundamental-ngx/platform/table-helpers';
-import { SourceItem, TableDataProviderMock } from './helpers';
+import { TableComponent } from '../table.component';
 import { PlatformTableModule } from '../table.module';
+import { SourceItem, TableDataProviderMock } from './helpers';
 
 @Component({
     template: `
-<fdp-table
-  [dataSource]="source"
-  fdCompact
-  emptyTableMessage="No data found"
-  [selectionMode]="selection"
-  [rowsClass]="rowsClass"
-  >
-  <fdp-table-toolbar title="Order Items" [hideItemCount]="false"></fdp-table-toolbar>
-  @if (showIdColumn) {
-    <fdp-column name="id" key="id" label="ID"></fdp-column>
-  }
-  <fdp-column name="name" key="name" label="Name" [width]="customColumnWidth + 'px'"></fdp-column>
-  <fdp-column name="price" key="price.value">
-    <fdp-table-header *fdpHeaderCellDef>Price Header</fdp-table-header>
-    <fdp-table-cell *fdpCellDef="let item">{{ item.price.value }} {{ item.price.currency }}</fdp-table-cell>
-  </fdp-column>
-  <fdp-column name="status" key="status" label="Status"></fdp-column>
-  <fdp-column name="verified" key="isVerified" label="Client Verified"></fdp-column>
-</fdp-table>
-`
+        <fdp-table
+            [dataSource]="source"
+            fdCompact
+            emptyTableMessage="No data found"
+            [selectionMode]="selection"
+            [rowsClass]="rowsClass"
+        >
+            <fdp-table-toolbar title="Order Items" [hideItemCount]="false"></fdp-table-toolbar>
+            @if (showIdColumn) {
+                <fdp-column name="id" key="id" label="ID"></fdp-column>
+            }
+            <fdp-column name="name" key="name" label="Name" [width]="customColumnWidth + 'px'"></fdp-column>
+            <fdp-column name="price" key="price.value">
+                <fdp-table-header *fdpHeaderCellDef>Price Header</fdp-table-header>
+                <fdp-table-cell *fdpCellDef="let item">{{ item.price.value }} {{ item.price.currency }}</fdp-table-cell>
+            </fdp-column>
+            <fdp-column name="status" key="status" label="Status"></fdp-column>
+            <fdp-column name="verified" key="isVerified" label="Client Verified"></fdp-column>
+        </fdp-table>
+    `
 })
 class TableHostComponent {
     @ViewChild(TableComponent) table: TableComponent;

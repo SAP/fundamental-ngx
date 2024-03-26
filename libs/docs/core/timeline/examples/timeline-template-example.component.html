@@ -1,4 +1,4 @@
-<div fd-scrollbar style="height: 500px">
+<div fd-scrollbar [style.height.px]="500">
     <fd-timeline [dataSource]="data" [axis]="axis" [layout]="layout">
         <fd-timeline-node *fdTimelineNodeDef="let node" [glyph]="node.glyph">
             <fd-timeline-node-header>

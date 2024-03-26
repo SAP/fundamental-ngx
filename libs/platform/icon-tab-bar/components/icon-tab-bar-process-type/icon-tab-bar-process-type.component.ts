@@ -59,13 +59,13 @@ export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
     _showRightBtn = false;
 
     /** @hidden */
+    _anchorIndexForExtraBtnDirective: number;
+
+    /** @hidden */
     private _firstVisibleTabIndex = 0;
 
     /** @hidden */
     private _currentStepIndex = 0;
-
-    /** @hidden */
-    _anchorIndexForExtraBtnDirective: number;
 
     /**
      * @hidden

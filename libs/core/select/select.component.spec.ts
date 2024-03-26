@@ -76,12 +76,12 @@ class TestFilteringWrapperComponent {
 type CarType = { id: string; name: string };
 @Component({
     template: `
-<fd-select [value]="selectedCarType" (valueChange)="setCarTypeByCopy($event)" [compareWith]="comparator">
-  @for (carType of carTypes; track carType) {
-    <fd-option [value]="carType">{{ carType.name }}</fd-option>
-  }
-</fd-select>
-`
+        <fd-select [value]="selectedCarType" (valueChange)="setCarTypeByCopy($event)" [compareWith]="comparator">
+            @for (carType of carTypes; track carType) {
+                <fd-option [value]="carType">{{ carType.name }}</fd-option>
+            }
+        </fd-select>
+    `
 })
 class ValueCompareWithSelectComponent {
     @ViewChild(SelectComponent)
@@ -285,7 +285,6 @@ describe('SelectComponent', () => {
     });
 
     describe('keyboard navigation', () => {
-
         it('should navigate to second item, when pressing ArrowDown and FirstItem is focused', async () => {
             component.value = 'value-1';
             await wait(fixture);

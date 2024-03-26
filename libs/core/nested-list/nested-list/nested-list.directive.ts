@@ -95,9 +95,6 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     private _nestedListHeader: NestedListHeaderDirective;
 
     /** @hidden */
-    private _subscriptions = new Subscription();
-
-    /** @hidden */
     @HostBinding('attr.role')
     private _role = 'tree';
 
@@ -112,6 +109,9 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     /** @hidden */
     @HostBinding('attr.tabindex')
     private _tabindex = '-1';
+
+    /** @hidden */
+    private _subscriptions = new Subscription();
 
     /** @hidden */
     private readonly _translationResolver = new TranslationResolver();

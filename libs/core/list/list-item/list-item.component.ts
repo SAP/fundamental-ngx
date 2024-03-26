@@ -44,7 +44,8 @@ let listItemUniqueId = 0;
     templateUrl: './list-item.component.html',
     host: {
         class: 'fd-list__item',
-        '[attr.tabindex]': '_normalizedTabIndex$()'
+        '[attr.tabindex]': '_normalizedTabIndex$()',
+        '[attr.id]': 'id'
     },
     providers: [
         {
@@ -104,6 +105,14 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     @HostBinding('class.fd-list__item--byline')
     byline = false;
 
+    /** Aria-role attribute. */
+    @Input()
+    ariaRole: Nullable<string>;
+
+    /** The ID of the list item element */
+    @Input()
+    id = 'fd-list-item-' + ++listItemUniqueId;
+
     /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
@@ -111,10 +120,6 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     /** Whether list item contains link */
     @HostBinding('class.fd-list__item--link')
     link = false;
-
-    /** Aria-role attribute. */
-    @Input()
-    ariaRole: Nullable<string>;
 
     /** @hidden */
     @ContentChild(FD_RADIO_BUTTON_COMPONENT)
@@ -154,6 +159,17 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     @ContentChildren(FD_BUTTON_COMPONENT, { descendants: true })
     buttons: QueryList<ButtonComponent>;
 
+    /** @hidden group header id, that is being set by parent list component */
+    _relatedGroupHeaderId: string | null;
+
+    /** @hidden */
+    readonly _list = inject(FD_LIST_UNREAD_INDICATOR, {
+        optional: true
+    });
+
+    /** @hidden */
+    private _role = 'listitem'; // default for li elements
+
     /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _destroyRef = inject(DestroyRef);
 
@@ -166,29 +182,15 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     /** @hidden */
     private _checkbox: CheckboxComponent;
 
-    /** @hidden group header id, that is being set by parent list component */
-    _relatedGroupHeaderId: string | null;
+    /** @hidden */
+    constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {
+        super();
+    }
 
     /** @hidden */
     @HostBinding('attr.role')
     private get roleAttr(): string {
         return this.ariaRole || this._role;
-    }
-
-    /** @hidden */
-    private _role = 'listitem'; // default for li elements
-
-    /** @hidden */
-    readonly _uniqueId = 'fd-list-item-' + ++listItemUniqueId;
-
-    /** @hidden */
-    readonly _list = inject(FD_LIST_UNREAD_INDICATOR, {
-        optional: true
-    });
-
-    /** @hidden */
-    constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {
-        super();
     }
 
     /** @hidden */

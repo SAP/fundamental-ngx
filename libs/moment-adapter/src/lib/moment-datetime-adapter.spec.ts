@@ -1,6 +1,6 @@
 import { Platform } from '@angular/cdk/platform';
 import { LOCALE_ID } from '@angular/core';
-import { waitForAsync, inject, TestBed } from '@angular/core/testing';
+import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 import moment from 'moment';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';

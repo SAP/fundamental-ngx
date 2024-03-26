@@ -11,20 +11,15 @@ export type KpiStatus = 'positive' | 'negative' | 'critical' | 'informative';
     standalone: true
 })
 export class CardKpiValueDirective implements OnInit, CssClassBuilder {
-    /** @hidden */
-    class: string;
-
     /** Set type of KPI value. eg: 'positive', 'negative', 'critical', 'informative' */
     @Input()
     status: KpiStatus;
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
+    class: string;
 
     /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
+    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
     @applyCssClass
@@ -33,5 +28,10 @@ export class CardKpiValueDirective implements OnInit, CssClassBuilder {
             CLASS_NAME.cardAnalyticsKpiValue,
             this.status ? `${CLASS_NAME.cardAnalyticsKpiValue}--${this.status}` : ''
         ];
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 }

@@ -74,9 +74,15 @@ export class CardComponent implements OnChanges, OnInit, CssClassBuilder, OnDest
     /** @hidden */
     constructor(
         public readonly elementRef: ElementRef<HTMLElement>,
-        private readonly _contentDensityObserver: ContentDensityObserver
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {
         _contentDensityObserver.subscribe();
+    }
+
+    /** @hidden */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [CLASS_NAME.card, this.cardType ? getCardModifierClassNameByCardType(this.cardType) : ''];
     }
 
     /** @hidden */
@@ -96,11 +102,5 @@ export class CardComponent implements OnChanges, OnInit, CssClassBuilder, OnDest
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-    }
-
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [CLASS_NAME.card, this.cardType ? getCardModifierClassNameByCardType(this.cardType) : ''];
     }
 }

@@ -1,9 +1,9 @@
-<fd-popover style="display: block" [triggers]="['mouseenter', 'mouseleave']" fillControlMode="equal">
+<fd-popover [style.display]="'block'" [triggers]="['mouseenter', 'mouseleave']" fillControlMode="equal">
     <fd-popover-control>
-        <div style="border: 1px dashed black; padding: 24px">Control Element - Hover over me!</div>
+        <div [style.border]="'1px dashed black'" [style.padding.px]="24">Control Element - Hover over me!</div>
     </fd-popover-control>
     <fd-popover-body>
-        <div style="padding: 12px">
+        <div [style.padding.px]="12">
             <p>This is a large popover!</p>
             <br />
             <p>It will try to match the width of the control element.</p>

@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { first } from 'rxjs/operators';
 
-import { RatingIndicatorComponent } from './rating-indicator.component';
 import { RatingIndicatorModule } from '../rating-indicator.module';
+import { RatingIndicatorComponent } from './rating-indicator.component';
 
 const prefix = 'fd-rating-indicator';
 

@@ -29,16 +29,6 @@ export class AvatarGroupLegacyOverflowButtonDirective implements OnInit, OnChang
     constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
@@ -48,6 +38,16 @@ export class AvatarGroupLegacyOverflowButtonDirective implements OnInit, OnChang
             this.size ? `fd-avatar-group-legacy__more-button--${this.size}` : '',
             this.class
         ];
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */

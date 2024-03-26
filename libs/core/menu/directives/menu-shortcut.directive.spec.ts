@@ -11,7 +11,7 @@ describe('MenuShortcutDirective', () => {
                     return subject.asObservable();
                 }
             }
-        } as MenuItemComponent);
+        }) as MenuItemComponent;
 
     const elementRefMock = {
         nativeElement: {

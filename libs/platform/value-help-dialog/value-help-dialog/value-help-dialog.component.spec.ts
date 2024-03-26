@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { PlatformValueHelpDialogComponent } from './value-help-dialog.component';
-import { PlatformValueHelpDialogModule } from '../value-help-dialog.module';
 import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
 import { of } from 'rxjs';
+import { PlatformValueHelpDialogModule } from '../value-help-dialog.module';
+import { PlatformValueHelpDialogComponent } from './value-help-dialog.component';
 
 @Component({
     template: `
@@ -56,12 +56,12 @@ import { of } from 'rxjs';
     ]
 })
 class TestWrapperComponent {
+    @ViewChild(PlatformValueHelpDialogComponent, { static: true })
+    vhdComponent: PlatformValueHelpDialogComponent<any>;
+
     data = Array(10)
         .fill(null)
         .map((_, i) => ({ name: `Name ${i}`, type: `Type ${i}`, code: `${i}` }));
-
-    @ViewChild(PlatformValueHelpDialogComponent, { static: true })
-    vhdComponent: PlatformValueHelpDialogComponent<any>;
 }
 
 describe('PlatformValueHelpDialogComponent', () => {

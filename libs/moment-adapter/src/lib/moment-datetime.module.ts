@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 import { MomentDatetimeAdapter } from './moment-datetime-adapter';
 import { MOMENT_DATETIME_FORMATS } from './moment-datetime-formats';
-import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 /**
  * @deprecated Use `DatetimeAdapterRawModule` from `@fundamental-ngx/datetime-adapter` package instead.

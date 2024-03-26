@@ -30,13 +30,13 @@ import { MessagePopoverFormWrapperComponent } from './message-popover-form-wrapp
     </fdp-message-popover-form-wrapper>`
 })
 export class ReactiveFormTestComponent {
-    formGroup: FormGroup;
-
     @ViewChild('form', { read: FormGroupDirective })
     form: FormGroupDirective;
 
     @ViewChild(MessagePopoverFormWrapperComponent)
     wrapper: MessagePopoverFormWrapperComponent;
+
+    formGroup: FormGroup;
 
     constructor(private _formBuilder: FormBuilder) {
         this.formGroup = this._formBuilder.group({
@@ -100,7 +100,7 @@ describe('MessagePopoverFormWrapperComponent reactive form', () => {
             <input fdpMessagePopoverFormItem="optional" [(ngModel)]="formGroup.optional" name="optional" />
             <input fdpMessagePopoverFormItem="max" type="number" [(ngModel)]="formGroup.max" [max]="10" name="max" />
             <input fdpMessagePopoverFormItem="min" type="number" [(ngModel)]="formGroup.min" [min]="10" name="min" />
-            <input fdpMessagePopoverFormItem="true" [(ngModel)]="formGroup.true" requiredTrue name="true" />
+            <input fdpMessagePopoverFormItem="true" [(ngModel)]="formGroup['true']" [required]="true" name="true" />
             <input
                 fdpMessagePopoverFormItem="minLength"
                 [(ngModel)]="formGroup.minLength"
@@ -124,6 +124,12 @@ describe('MessagePopoverFormWrapperComponent reactive form', () => {
     </fdp-message-popover-form-wrapper>`
 })
 export class TemplateFormTestComponent {
+    @ViewChild(NgForm)
+    form: NgForm;
+
+    @ViewChild(MessagePopoverFormWrapperComponent)
+    wrapper: MessagePopoverFormWrapperComponent;
+
     formGroup: Record<string, any> = {
         required: '',
         optional: '',
@@ -135,12 +141,6 @@ export class TemplateFormTestComponent {
         pattern: '',
         email: ''
     };
-
-    @ViewChild(NgForm)
-    form: NgForm;
-
-    @ViewChild(MessagePopoverFormWrapperComponent)
-    wrapper: MessagePopoverFormWrapperComponent;
 }
 
 describe('MessagePopoverFormWrapperComponent template form', () => {

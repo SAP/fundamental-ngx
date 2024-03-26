@@ -243,6 +243,46 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         );
     }
 
+    /** @hidden
+     * CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [this.class];
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    keyDown(keyboardEvent: KeyboardEvent): void {
+        if (
+            KeyUtil.isKeyCode(keyboardEvent, [DELETE, BACKSPACE]) &&
+            (!this._isInputFocused() || this._tokensSelected()) &&
+            !this.disableKeyboardDeletion
+        ) {
+            const selectedElements = this._getActiveTokens();
+            const focusedTokenIndex = this._getFocusedTokenIndex();
+            selectedElements.forEach((element) => element.onCloseClick.emit());
+            if (selectedElements.length > 0) {
+                if (KeyUtil.isKeyCode(keyboardEvent, DELETE)) {
+                    this._focusInput();
+                } else {
+                    this.focusTokenElement(focusedTokenIndex - 1);
+                }
+            }
+        }
+
+        if (
+            KeyUtil.isKeyCode(keyboardEvent, BACKSPACE) &&
+            this._isInputFocused() &&
+            !this._getInputValue() &&
+            !this.disableKeyboardDeletion
+        ) {
+            this.focusTokenElement(this.tokenList.length - 1);
+        }
+    }
+
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.input?.nativeElement) {
@@ -294,16 +334,6 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         this.buildComponentCssClass();
     }
 
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [this.class];
-    }
-
     /** @hidden */
     handleTokenClickSubscriptions(): void {
         this._unsubscribeClicks();
@@ -344,36 +374,6 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         }
 
         return elementToFocus;
-    }
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    keyDown(keyboardEvent: KeyboardEvent): void {
-        if (
-            KeyUtil.isKeyCode(keyboardEvent, [DELETE, BACKSPACE]) &&
-            (!this._isInputFocused() || this._tokensSelected()) &&
-            !this.disableKeyboardDeletion
-        ) {
-            const selectedElements = this._getActiveTokens();
-            const focusedTokenIndex = this._getFocusedTokenIndex();
-            selectedElements.forEach((element) => element.onCloseClick.emit());
-            if (selectedElements.length > 0) {
-                if (KeyUtil.isKeyCode(keyboardEvent, DELETE)) {
-                    this._focusInput();
-                } else {
-                    this.focusTokenElement(focusedTokenIndex - 1);
-                }
-            }
-        }
-
-        if (
-            KeyUtil.isKeyCode(keyboardEvent, BACKSPACE) &&
-            this._isInputFocused() &&
-            !this._getInputValue() &&
-            !this.disableKeyboardDeletion
-        ) {
-            this.focusTokenElement(this.tokenList.length - 1);
-        }
     }
 
     /** @hidden */
@@ -435,6 +435,48 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         return totalTokenWidth;
     }
 
+    /** @hidden */
+    moreClicked(): void {
+        this.moreClickedEvent.emit();
+    }
+
+    /** Removes all selected tokens */
+    removeSelectedTokens(): void {
+        const selectedElements = this._getActiveTokens();
+        selectedElements.forEach((element) => element.onRemove.emit());
+    }
+
+    /** @hidden */
+    _showAllTokens(): void {
+        this._forceAllTokensToDisplay = true;
+        this._inputElementFocused = true;
+        this.tokenList.forEach((token) => {
+            this._makeElementVisible(token.elementRef);
+            token._viewContainer.createEmbeddedView(token._content);
+        });
+        this._tokensContainerWidth = 'auto';
+        this._showMoreElement = false;
+        this._cdRef.detectChanges();
+        this.tokenizerInnerEl.nativeElement.scrollLeft = this.tokenizerInnerEl.nativeElement.scrollWidth;
+    }
+
+    /** @hidden */
+    _hideTokens(): void {
+        setTimeout(() => {
+            this._inputElementFocused = false;
+            const tokenFocused = this._getFocusedTokenIndex() > -1;
+
+            if (tokenFocused) {
+                this._waitForFocusToDisappear();
+                return;
+            }
+            this._forceAllTokensToDisplay = false;
+            this._resetTokens();
+            this._cdRef.detectChanges();
+            this.tokenizerInnerEl.nativeElement.scrollLeft = this.tokenizerInnerEl.nativeElement.scrollWidth;
+        });
+    }
+
     /**
      * @hidden
      * Check whether user intends to go back to the previous token
@@ -473,17 +515,6 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     }
 
     /** @hidden */
-    moreClicked(): void {
-        this.moreClickedEvent.emit();
-    }
-
-    /** Removes all selected tokens */
-    removeSelectedTokens(): void {
-        const selectedElements = this._getActiveTokens();
-        selectedElements.forEach((element) => element.onRemove.emit());
-    }
-
-    /** @hidden */
     private _handleArrowLeft(fromIndex: number): void {
         // if the leftmost visible token is selected, and there are moreTokensLeft, need to display a moreTokenLeft
         if (fromIndex === this.moreTokensLeft.length) {
@@ -496,37 +527,6 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
 
             this._cdRef.detectChanges();
         }
-    }
-
-    /** @hidden */
-    _showAllTokens(): void {
-        this._forceAllTokensToDisplay = true;
-        this._inputElementFocused = true;
-        this.tokenList.forEach((token) => {
-            this._makeElementVisible(token.elementRef);
-            token._viewContainer.createEmbeddedView(token._content);
-        });
-        this._tokensContainerWidth = 'auto';
-        this._showMoreElement = false;
-        this._cdRef.detectChanges();
-        this.tokenizerInnerEl.nativeElement.scrollLeft = this.tokenizerInnerEl.nativeElement.scrollWidth;
-    }
-
-    /** @hidden */
-    _hideTokens(): void {
-        setTimeout(() => {
-            this._inputElementFocused = false;
-            const tokenFocused = this._getFocusedTokenIndex() > -1;
-
-            if (tokenFocused) {
-                this._waitForFocusToDisappear();
-                return;
-            }
-            this._forceAllTokensToDisplay = false;
-            this._resetTokens();
-            this._cdRef.detectChanges();
-            this.tokenizerInnerEl.nativeElement.scrollLeft = this.tokenizerInnerEl.nativeElement.scrollWidth;
-        });
     }
 
     /** @hidden */
@@ -694,7 +694,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     }
 
     /** @hidden Method which handles what happens to token when it is clicked and no key is being held down.*/
-    private _basicSelected(token, index): void {
+    private _basicSelected(token: TokenComponent, index: number): void {
         this.tokenList.forEach((shadowedToken) => {
             if (shadowedToken !== token) {
                 shadowedToken.selected = false;
@@ -716,7 +716,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     }
 
     /** @hidden Method which handles what happens to token when it is clicked and the shift key is being held down.*/
-    private _shiftSelected(index): void {
+    private _shiftSelected(index: number): void {
         if (!this._firstElementInSelection && !this._lastElementInSelection) {
             this._firstElementInSelection = index;
             this._lastElementInSelection = index;
@@ -753,7 +753,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     }
 
     /** @hidden Method which handles what happens to token when it is clicked and the control or meta key is being held down.*/
-    private _ctrlSelected(token, index): void {
+    private _ctrlSelected(token: TokenComponent, index: number): void {
         this._firstElementInSelection = null;
         this._lastElementInSelection = null;
         const selected = token.selected;

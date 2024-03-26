@@ -92,7 +92,10 @@ export class NotificationService {
             refSub.unsubscribe();
         };
 
-        const refSub = notificationService.afterClosed.subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose);
+        const refSub = notificationService.afterClosed.subscribe({
+            next: defaultBehaviourOnClose,
+            error: defaultBehaviourOnClose
+        });
 
         return notificationService;
     }

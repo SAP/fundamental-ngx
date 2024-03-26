@@ -1,10 +1,10 @@
-<div style="margin-bottom: 1rem">
+<div [style.margin-bottom.rem]="1">
     <button class="disable-dnd" fd-button (click)="changeDragBehaviour()">
         {{ dragDisabled ? 'Enable' : 'Disable' }} Drag
     </button>
 </div>
 
-<div fd-scrollbar style="padding: 1rem">
+<div fd-scrollbar [style.padding.rem]="1">
     <fd-fixed-card-layout [disableDragDrop]="dragDisabled">
         <fd-card cardType="list" *fdCardDef>
             <fd-card-header>

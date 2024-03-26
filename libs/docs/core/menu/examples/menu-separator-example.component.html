@@ -1,4 +1,4 @@
-<div style="display: inline-block; width: 50%">
+<div [style.display]="'inline-block'" [style.width.%]="50">
     <button fd-button label="Menu" [fdMenu]="true" [fdMenuTrigger]="menu"></button>
 
     <fd-menu #menu>

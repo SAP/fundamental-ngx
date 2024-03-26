@@ -1,4 +1,5 @@
 import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { TableDataSource } from '../domain';
 import { TableRowType } from '../enums';
 
@@ -111,10 +112,7 @@ export class TableRowImpl<T> implements TableRow<T> {
         return this._checkedSubject.value;
     }
     /** @hidden */
-    private readonly _checkedSubject = new BehaviorSubject<boolean | null>(false);
-    /** @hidden */
-    readonly checked$ = this._checkedSubject.asObservable();
-
+    readonly checked$: Observable<boolean>;
     /** @hidden */
     readonly childItems$: Observable<T[]>;
 
@@ -129,6 +127,7 @@ export class TableRowImpl<T> implements TableRow<T> {
 
     /** @hidden */
     children: TableRow<T>[];
+
     /** @hidden */
     expandable: boolean;
     /** @hidden */
@@ -142,12 +141,10 @@ export class TableRowImpl<T> implements TableRow<T> {
         return this._expandedSubject.value;
     }
     /** @hidden */
-    private readonly _expandedSubject = new BehaviorSubject<boolean>(false);
-    /** @hidden */
-    readonly expanded$ = this._expandedSubject.asObservable();
-
+    readonly expanded$: Observable<boolean>;
     /** @hidden */
     hidden: boolean;
+
     /** @hidden */
     index: number;
     /** @hidden */
@@ -162,7 +159,6 @@ export class TableRowImpl<T> implements TableRow<T> {
     type: TableRowType;
     /** @hidden */
     readonly value: T;
-
     /** @hidden */
     childDataSource: TableDataSource<T> | undefined;
 
@@ -173,7 +169,14 @@ export class TableRowImpl<T> implements TableRow<T> {
     lastChild?: TableRow<T>;
 
     /** @hidden */
+    private readonly _expandedSubject = new BehaviorSubject<boolean>(false);
+    /** @hidden */
+    private readonly _checkedSubject = new BehaviorSubject<boolean | null>(false);
+
+    /** @hidden */
     constructor(row: Partial<TableRow>) {
+        this.checked$ = this._checkedSubject.asObservable().pipe(map(Boolean));
+        this.expanded$ = this._expandedSubject.asObservable().pipe(map(Boolean));
         this.checked = row.checked || false;
         this.children = row.children || [];
         this.expandable = row.expandable || false;

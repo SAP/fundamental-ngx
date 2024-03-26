@@ -72,16 +72,6 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
-    ngOnChanges(): void {
-        this._onChanges();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this._onChanges();
-    }
-
     /** @hidden
      * CssClassBuilder interface implementation
      * function must return single string
@@ -95,6 +85,16 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
             this.status ? `fd-object-number--${this.status}` : '',
             this.class
         ];
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this._onChanges();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._onChanges();
     }
 
     /** @hidden */

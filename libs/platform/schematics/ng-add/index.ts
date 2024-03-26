@@ -1,6 +1,6 @@
 import { chain, noop, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
-import { addPackageJsonDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
 import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
+import { addPackageJsonDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
 import { hasPackage } from '../utils/package-utils';
 
 import { Schema } from './schema';

@@ -13,6 +13,11 @@ export class SelectConfig {
      */
     contentDensity: ContentDensity;
 
+    /** @hidden */
+    constructor(platformConfig: PlatformConfig) {
+        this.contentDensity = platformConfig.contentDensity;
+    }
+
     /**
      * Create Provider factory function
      */
@@ -20,10 +25,5 @@ export class SelectConfig {
         const useFactory = (platformConfig: PlatformConfig): SelectConfig =>
             Object.assign(new SelectConfig(platformConfig), obj);
         return useFactory;
-    }
-
-    /** @hidden */
-    constructor(platformConfig: PlatformConfig) {
-        this.contentDensity = platformConfig.contentDensity;
     }
 }

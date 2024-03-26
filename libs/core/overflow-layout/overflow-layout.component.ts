@@ -175,6 +175,10 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
     _showMoreContainer: ElementRef<HTMLDivElement>;
 
     /** @hidden */
+    @HostBinding('class')
+    readonly _initialClass = 'fd-overflow-layout';
+
+    /** @hidden */
     _allItems: OverflowItemRef[] = [];
 
     /** @hidden */
@@ -182,10 +186,6 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
 
     /** @hidden */
     _showMore = false;
-
-    /** @hidden */
-    @HostBinding('class')
-    readonly _initialClass = 'fd-overflow-layout';
 
     /** @hidden */
     private readonly _subscription = new Subscription();
@@ -208,6 +208,22 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
     /** @hidden */
     private _keyboardEventsManager: Nullable<FocusKeyManager<OverflowLayoutFocusableItem>>;
 
+    /** @hidden */
+    constructor(
+        private readonly _elementRef: ElementRef<HTMLElement>,
+        private readonly _ngZone: NgZone,
+        protected _cdr: ChangeDetectorRef,
+        protected _overflowLayoutService: OverflowLayoutService,
+        @Optional() private readonly _rtl: RtlService
+    ) {
+        this._subscription.add(
+            this._fillTrigger$.pipe(debounceTime(30)).subscribe(() => {
+                this._overflowLayoutService.setConfig(this._config);
+                this._overflowLayoutService.fitVisibleItems();
+            })
+        );
+    }
+
     /** Overflow Layout more button text */
     @Input()
     moreItemsButtonText: (hiddenItemsCount: number) => string = (count) => `${count} more`;
@@ -226,22 +242,6 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
             enableKeyboardNavigation: this.enableKeyboardNavigation,
             reverseHiddenItems: this.reverseHiddenItems
         };
-    }
-
-    /** @hidden */
-    constructor(
-        private readonly _elementRef: ElementRef<HTMLElement>,
-        private readonly _ngZone: NgZone,
-        protected _cdr: ChangeDetectorRef,
-        protected _overflowLayoutService: OverflowLayoutService,
-        @Optional() private readonly _rtl: RtlService
-    ) {
-        this._subscription.add(
-            this._fillTrigger$.pipe(debounceTime(30)).subscribe(() => {
-                this._overflowLayoutService.setConfig(this._config);
-                this._overflowLayoutService.fitVisibleItems();
-            })
-        );
     }
 
     /** @hidden */

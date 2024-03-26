@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { GridListModule } from '../../grid-list.module';
 import { GridListSelectionMode } from '../../models/grid-list-selection.models';
-import { GridListComponent } from './grid-list.component';
 import { GridListItemType } from '../grid-list-item/grid-list-item.component';
+import { GridListComponent } from './grid-list.component';
 
 @Component({
     selector: 'fd-test-grid-list',

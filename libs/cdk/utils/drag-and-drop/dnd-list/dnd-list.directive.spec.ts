@@ -1,20 +1,20 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { DndListDirective } from './dnd-list.directive';
-import { Component, ViewChild } from '@angular/core';
-import { DndItemDirective } from '../dnd-item/dnd-item.directive';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { DndItemDirective } from '../dnd-item/dnd-item.directive';
 import { ElementChord } from '../dnd.interfaces';
+import { DndListDirective } from './dnd-list.directive';
 
 @Component({
     template: `
-<div #directiveElement fd-dnd-list>
-  @for (item of list; track item) {
-    <div fd-dnd-item>
-      <div>{{ item }}</div>
-    </div>
-  }
-</div>
-`
+        <div #directiveElement fd-dnd-list>
+            @for (item of list; track item) {
+                <div fd-dnd-item>
+                    <div>{{ item }}</div>
+                </div>
+            }
+        </div>
+    `
 })
 class TestDndListComponent {
     @ViewChild('directiveElement', { static: true, read: DndListDirective })

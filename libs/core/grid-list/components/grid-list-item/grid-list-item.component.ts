@@ -142,9 +142,6 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         return this._type;
     }
 
-    /** @hidden */
-    private _type: GridListItemType = 'inactive';
-
     /**
      * Sets the state of Grid List Item
      * (States: unread | error | locked | draft)
@@ -217,6 +214,17 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     @ViewChild('gridListItem')
     _gridListItem: ElementRef<HTMLDivElement>;
 
+    /** @hidden */
+    @ContentChild(GridListItemFooterBarComponent)
+    footerBarComponent: Nullable<GridListItemFooterBarComponent>;
+    /** @hidden */
+    @ContentChild(GridListItemToolbarComponent)
+    itemToolbarComponent: Nullable<GridListItemToolbarComponent>;
+
+    /** @hidden */
+    @ContentChild(GridListItemBodyDirective)
+    body: Nullable<GridListItemBodyDirective>;
+
     /** @hidden
      * The active state of the list item.
      * If set to true, the whole card has active state. Becomes false only when the Edit button is clicked.
@@ -229,21 +237,10 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         this._gridLayoutClasses = value;
         this._addClassesNames(this._gridLayoutClasses);
     }
+
     get gridLayoutClasses(): string[] {
         return this._gridLayoutClasses;
     }
-
-    /** @hidden */
-    @ContentChild(GridListItemFooterBarComponent)
-    footerBarComponent: Nullable<GridListItemFooterBarComponent>;
-
-    /** @hidden */
-    @ContentChild(GridListItemToolbarComponent)
-    itemToolbarComponent: Nullable<GridListItemToolbarComponent>;
-
-    /** @hidden */
-    @ContentChild(GridListItemBodyDirective)
-    body: Nullable<GridListItemBodyDirective>;
 
     /** @hidden */
     _selectedItem?: T;
@@ -264,12 +261,15 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
 
         this._cd.detectChanges();
     }
+
     get selectionMode(): GridListSelectionMode | undefined {
         return this._selectionMode;
     }
-
     /** @hidden */
     _index?: number;
+
+    /** @hidden */
+    private _type: GridListItemType = 'inactive';
 
     /** @hidden */
     private _selectionMode?: GridListSelectionMode;

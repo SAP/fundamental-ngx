@@ -9,12 +9,12 @@ export type SmartFilterBarDynamicFormFieldItem = DynamicFormFieldItem<{
 
 export interface SmartFilterBarDynamicFormFieldGuiOptions extends DynamicFormItemGuiOptions {
     additionalData: {
+        /** Additional config properties. */
+        [key: string]: any;
         type: string;
         dataType: FilterableColumnDataType;
         filterType: FilterType;
         controlType: InputType;
         choices?: () => Observable<SelectItem[]> | SelectItem[];
-        /** Additional config properties. */
-        [key: string]: any;
     };
 }

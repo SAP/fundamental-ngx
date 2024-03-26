@@ -88,7 +88,7 @@ export class DialogInnerPopoverComponent {
                         placeholder="Search here..."
                         [displayFn]="displayFunction"
                         [(ngModel)]="selected"
-                        style="margin-bottom: 1rem"
+                        [style.margin-bottom.rem]="1"
                     ></fd-multi-input>
 
                     <label for="second-list">The second list of options:</label>

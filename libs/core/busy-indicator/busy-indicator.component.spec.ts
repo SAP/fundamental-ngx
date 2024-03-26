@@ -5,12 +5,12 @@ import { BusyIndicatorComponent } from './busy-indicator.component';
 
 @Component({
     template: `
-<fd-busy-indicator [loading]="loading" [size]="size" [block]="block">
-  @if (hasContent) {
-    <button>Button</button>
-  }
-</fd-busy-indicator>
-`,
+        <fd-busy-indicator [loading]="loading" [size]="size" [block]="block">
+            @if (hasContent) {
+                <button>Button</button>
+            }
+        </fd-busy-indicator>
+    `,
     standalone: true,
     imports: [BusyIndicatorComponent]
 })

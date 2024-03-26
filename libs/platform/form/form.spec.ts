@@ -4,8 +4,8 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { FdpFormGroupModule } from './form-group/fdp-form.module';
-import { FormGroupComponent } from './form-group/form-group.component';
 import { FormFieldComponent } from './form-group/form-field/form-field.component';
+import { FormGroupComponent } from './form-group/form-group.component';
 import { PlatformInputModule } from './input/fdp-input.module';
 
 interface TestUser {
@@ -22,48 +22,48 @@ interface TestUser {
 describe('Platform Form', () => {
     @Component({
         template: `
-<form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
-  <fdp-form-group #userForm [object]="user" [formGroup]="userFormGroup" [i18Strings]="i18n">
-    @if (showFirstNameControl) {
-      <fdp-form-field
-        #firstName
-        id="firstName"
-        label="First Name"
-        hint="Enter your first name."
-        zone="zTop"
-        required="true"
-        >
-        <fdp-input name="firstName" [formControl]="firstName.formControl"></fdp-input>
-      </fdp-form-field>
-    }
-    <fdp-form-field
-      #lastName
-      id="lastName"
-      label="Last Name"
-      hint="Enter your last name."
-      zone="zTop"
-      required="true"
-      >
-      <fdp-input name="lastName" [formControl]="lastName.formControl"></fdp-input>
-    </fdp-form-field>
-    <fdp-form-field
-      #favoriteColor
-      id="favoriteColor"
-      label="Favorite Color"
-      hint="What is your favorite color?"
-      zone="zBottom"
-      >
-      <fdp-input name="favoriteColor" [formControl]="favoriteColor.formControl"></fdp-input>
-    </fdp-form-field>
-    <ng-template #i18n let-errors>
-      @if (errors && errors.required) {
-        <span class="error">This field is required.</span>
-      }
-    </ng-template>
-  </fdp-form-group>
-  <button type="submit" #submitButton>Submit</button>
-</form>
-`
+            <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
+                <fdp-form-group #userForm [object]="user" [formGroup]="userFormGroup" [i18Strings]="i18n">
+                    @if (showFirstNameControl) {
+                        <fdp-form-field
+                            #firstName
+                            id="firstName"
+                            label="First Name"
+                            hint="Enter your first name."
+                            zone="zTop"
+                            required="true"
+                        >
+                            <fdp-input name="firstName" [formControl]="firstName.formControl"></fdp-input>
+                        </fdp-form-field>
+                    }
+                    <fdp-form-field
+                        #lastName
+                        id="lastName"
+                        label="Last Name"
+                        hint="Enter your last name."
+                        zone="zTop"
+                        required="true"
+                    >
+                        <fdp-input name="lastName" [formControl]="lastName.formControl"></fdp-input>
+                    </fdp-form-field>
+                    <fdp-form-field
+                        #favoriteColor
+                        id="favoriteColor"
+                        label="Favorite Color"
+                        hint="What is your favorite color?"
+                        zone="zBottom"
+                    >
+                        <fdp-input name="favoriteColor" [formControl]="favoriteColor.formControl"></fdp-input>
+                    </fdp-form-field>
+                    <ng-template #i18n let-errors>
+                        @if (errors && errors.required) {
+                            <span class="error">This field is required.</span>
+                        }
+                    </ng-template>
+                </fdp-form-group>
+                <button type="submit" #submitButton>Submit</button>
+            </form>
+        `
     })
     class SimpleFormTestComponent {
         @ViewChild('userForm') userFormGroupCmp: FormGroupComponent;
@@ -346,30 +346,30 @@ describe('Nested Form Groups', () => {
 describe('fdp-form-field out of fdp-form-group', () => {
     @Component({
         template: `
-<form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
-  <fdp-form-group #fdpUserFormGroup [object]="user" [formGroup]="userFormGroup" [i18Strings]="i18n">
-    <ng-container
-      *ngTemplateOutlet="formFieldTemplateRef; context: { fdpFormGroup: fdpUserFormGroup }"
-    ></ng-container>
-    <ng-template #i18n let-errors>
-      @if (errors && errors.required) {
-        <span class="error">This field is required.</span>
-      }
-    </ng-template>
-  </fdp-form-group>
-</form>
-<ng-template #formFieldTemplateRef let-fdpFormGroup="fdpFormGroup">
-  <fdp-form-field
-    #formFieldFirstName
-    id="firstName"
-    label="First Name"
-    required="true"
-    [formGroupContainer]="fdpFormGroup"
-    >
-    <fdp-input name="firstName" [formControl]="formFieldFirstName.formControl"></fdp-input>
-  </fdp-form-field>
-</ng-template>
-`
+            <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
+                <fdp-form-group #fdpUserFormGroup [object]="user" [formGroup]="userFormGroup" [i18Strings]="i18n">
+                    <ng-container
+                        *ngTemplateOutlet="formFieldTemplateRef; context: { fdpFormGroup: fdpUserFormGroup }"
+                    ></ng-container>
+                    <ng-template #i18n let-errors>
+                        @if (errors && errors.required) {
+                            <span class="error">This field is required.</span>
+                        }
+                    </ng-template>
+                </fdp-form-group>
+            </form>
+            <ng-template #formFieldTemplateRef let-fdpFormGroup="fdpFormGroup">
+                <fdp-form-field
+                    #formFieldFirstName
+                    id="firstName"
+                    label="First Name"
+                    required="true"
+                    [formGroupContainer]="fdpFormGroup"
+                >
+                    <fdp-input name="firstName" [formControl]="formFieldFirstName.formControl"></fdp-input>
+                </fdp-form-field>
+            </ng-template>
+        `
     })
     class HostFormComponent {
         @ViewChild('fdpUserFormGroup') fdpFormGroupUser: FormGroupComponent;

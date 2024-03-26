@@ -1,4 +1,4 @@
-import { Reflection, JSX as React, JSX } from 'typedoc';
+import { JSX, Reflection } from 'typedoc';
 
 export function comment(props: Reflection) {
     return (

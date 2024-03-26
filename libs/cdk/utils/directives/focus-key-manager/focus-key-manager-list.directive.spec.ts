@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, waitForAsync } from '@angular/core/testing';
 
-import { FocusKeyManagerListDirective } from './focus-key-manager-list.directive';
-import { FocusKeyManagerItemDirective } from './focus-key-manager-item.directive';
 import { RtlService } from '../../services/rtl.service';
+import { FocusKeyManagerItemDirective } from './focus-key-manager-item.directive';
+import { FocusKeyManagerListDirective } from './focus-key-manager-list.directive';
 
 @Component({
     template: `

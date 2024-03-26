@@ -14,7 +14,7 @@
 
 #### Please provide stackblitz example(s).
 
-#### In case this is Accessibility related topic, did you consult with an accessibility expert? If not, please do so and share their recommendations. 
+#### In case this is Accessibility related topic, did you consult with an accessibility expert? If not, please do so and share their recommendations.
 
 #### Did you check the documentation and the API?
 
@@ -22,4 +22,4 @@
 
 #### Is there anything else we should know?
 
-***IMPORTANT: Please refrain from providing links or screenshots of SAP's internal information, as this project is open-source, and its contents are accessible to anyone.***
+**_IMPORTANT: Please refrain from providing links or screenshots of SAP's internal information, as this project is open-source, and its contents are accessible to anyone._**

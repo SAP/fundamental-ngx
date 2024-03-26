@@ -41,18 +41,18 @@ export class SchemaGroupComponent implements OnInit {
      */
     @Input() resettable = false;
 
+    /**
+     * Emits when playground needs to be resetted.
+     */
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+    @Output() onReset: EventEmitter<void> = new EventEmitter<void>();
+
     controls: Array<{
         key: string;
         control: AbstractControl;
         type: string;
         enum: any[] | undefined;
     }> = [];
-
-    /**
-     * Emits when playground needs to be resetted.
-     */
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    @Output() onReset: EventEmitter<void> = new EventEmitter<void>();
 
     ngOnInit(): void {
         const controls = this.schemaGroup.controls;

@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DialogContainerComponent } from '../dialog-container/dialog-container.component';
 import { DialogConfig } from '../utils/dialog-config.class';
-import { DialogRef } from '../utils/dialog-ref.class';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
+import { DialogRef } from '../utils/dialog-ref.class';
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { whenStable } from '@fundamental-ngx/core/tests';
 import { PortalModule } from '@angular/cdk/portal';
+import { whenStable } from '@fundamental-ngx/core/tests';
 import { DialogModule } from '../dialog.module';
 
 const TEXT_CONTENT = 'Hello there';

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FocusableItemPosition } from '@fundamental-ngx/cdk/utils';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { convertTreeLikeToFlatList, createGroupedTableRowsTree, sortTreeLikeGroupedRows } from '../helpers';
 import { CollectionGroup } from '../interfaces';
 import { TableRow } from '../models';
@@ -28,6 +28,30 @@ export interface CellClickedModel {
 
 @Injectable()
 export class TableRowService<T = any> {
+    /** Stream that emits when toggling all selectable rows is needed. */
+    readonly toggleAllSelectableRows$: Observable<boolean>;
+
+    /** Stream that emits when table cell being clicked. */
+    readonly cellClicked$: Observable<CellClickedModel>;
+
+    /** Stream that emits when scrolling to overlapped cell is needed. */
+    readonly scrollToOverlappedCell$: Observable<void>;
+
+    /** Stream that emits when the table cell being focused. */
+    readonly cellFocused$: Observable<FocusableItemPosition>;
+
+    /** Toggle row stream. */
+    readonly toggleRow$: Observable<ToggleRowModel>;
+
+    /** Editable cells map. */
+    readonly editableCells = new Map<TableRow<any>, EditableTableCell[]>();
+
+    /** @hidden */
+    readonly childRowsAdded$ = new Subject<{ row: TableRow; rowIndex: number; items: T[] }>();
+
+    /** Stream to load child items for a particular rows. */
+    readonly loadChildRows$ = new Subject<TableRow<T>[]>();
+
     /** @hidden */
     private readonly _toggleRowSubject = new Subject<ToggleRowModel>();
 
@@ -43,29 +67,14 @@ export class TableRowService<T = any> {
     /** @hidden */
     private readonly _toggleAllSelectableRowsSubject = new Subject<boolean>();
 
-    /** Stream that emits when toggling all selectable rows is needed. */
-    readonly toggleAllSelectableRows$ = this._toggleAllSelectableRowsSubject.asObservable();
-
-    /** Stream that emits when table cell being clicked. */
-    readonly cellClicked$ = this._cellClickedSubject.asObservable();
-
-    /** Stream that emits when scrolling to overlapped cell is needed. */
-    readonly scrollToOverlappedCell$ = this._scrollToOverlappedCellSubject.asObservable();
-
-    /** Stream that emits when the table cell being focused. */
-    readonly cellFocused$ = this._cellFocusedSubject.asObservable();
-
-    /** Toggle row stream. */
-    readonly toggleRow$ = this._toggleRowSubject.asObservable();
-
-    /** Editable cells map. */
-    readonly editableCells = new Map<TableRow<any>, EditableTableCell[]>();
-
     /** @hidden */
-    readonly childRowsAdded$ = new Subject<{ row: TableRow; rowIndex: number; items: T[] }>();
-
-    /** Stream to load child items for a particular rows. */
-    readonly loadChildRows$ = new Subject<TableRow<T>[]>();
+    constructor() {
+        this.toggleAllSelectableRows$ = this._toggleAllSelectableRowsSubject.asObservable();
+        this.cellClicked$ = this._cellClickedSubject.asObservable();
+        this.scrollToOverlappedCell$ = this._scrollToOverlappedCellSubject.asObservable();
+        this.cellFocused$ = this._cellFocusedSubject.asObservable();
+        this.toggleRow$ = this._toggleRowSubject.asObservable();
+    }
 
     /** `toggleRow$` stream trigger. */
     toggleRow(evt: ToggleRowModel): void {

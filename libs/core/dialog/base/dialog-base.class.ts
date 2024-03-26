@@ -31,14 +31,14 @@ function coerceMetricValue(value: string | number | undefined): string | undefin
 export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRefBase<T>>
     implements OnInit, AfterViewInit, OnDestroy, HasElementRef
 {
+    /** @hidden Reference to dialog window element*/
+    abstract dialogWindow: ElementRef;
+
     /**
      * @hidden
      */
     @HostBinding('attr.dir')
     _dir: string;
-
-    /** @hidden Reference to dialog window element*/
-    abstract dialogWindow: ElementRef;
 
     /** @hidden Dialog padding sizes */
     dialogPaddingSize: DialogSize;

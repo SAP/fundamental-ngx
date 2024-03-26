@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild, inject } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
+import { BehaviorSubject, filter, Observable } from 'rxjs';
+import { PlatformFormGeneratorModule } from '../fdp-form-generator.module';
+import { FormGeneratorService } from '../form-generator.service';
+import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
 import { DynamicFormFieldItem } from '../interfaces/dynamic-form-item';
 import { FormGeneratorComponent } from './form-generator.component';
-import { FormGeneratorService } from '../form-generator.service';
-import { PlatformFormGeneratorModule } from '../fdp-form-generator.module';
-import { BehaviorSubject, filter } from 'rxjs';
-import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
 
 @Component({
     template: `
@@ -33,9 +33,7 @@ export class HostComponent {
 
     formTitle = 'Test form title';
 
-    private _formCreatedSubj = new BehaviorSubject<boolean>(false);
-
-    formCreated$ = this._formCreatedSubj.pipe(filter((value) => value));
+    formCreated$: Observable<boolean>;
 
     service = inject(FormGeneratorService);
 
@@ -47,6 +45,12 @@ export class HostComponent {
             validate: (value) => (value === 25 ? null : 'Should be 25')
         }
     ];
+
+    private _formCreatedSubj = new BehaviorSubject<boolean>(false);
+
+    constructor() {
+        this.formCreated$ = this._formCreatedSubj.pipe(filter((value) => value));
+    }
 
     onFormCreated(form: DynamicFormGroup): void {
         this.formCreated = true;

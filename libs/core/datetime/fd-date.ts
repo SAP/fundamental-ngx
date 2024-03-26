@@ -46,6 +46,53 @@ export class FdDate {
     private _isValid: boolean;
 
     /**
+     * Create FdDate
+     * @param year e.g. 2020
+     * @param month 1 = January, 12 = December
+     * @param day 1 - 31
+     * @param hour 0 - 23
+     * @param minute 0 - 59
+     * @param second 0 - 59
+     */
+    constructor(
+        year?: number,
+        month: number = 1,
+        day: number = 1,
+        hour: number = 0,
+        minute: number = 0,
+        second: number = 0
+    ) {
+        if (year === undefined) {
+            return FdDate.getNow();
+        }
+
+        year = Number.parseInt(year + '', 10);
+        month = Number.parseInt(month + '', 10);
+        day = Number.parseInt(day + '', 10);
+        hour = Number.parseInt(hour + '', 10);
+        minute = Number.parseInt(minute + '', 10);
+        second = Number.parseInt(second + '', 10);
+
+        this._isValid = isValidByParams({
+            year,
+            month,
+            day,
+            hour,
+            minute,
+            second
+        });
+
+        this.year = this._isValid ? year : NaN;
+        this.month = this._isValid ? month : NaN;
+        this.day = this._isValid ? day : NaN;
+        this.hour = this._isValid ? hour : NaN;
+        this.minute = this._isValid ? minute : NaN;
+        this.second = this._isValid ? second : NaN;
+
+        return this;
+    }
+
+    /**
      * Create FdDate instance of the current moment
      */
     static getNow(): FdDate {
@@ -71,56 +118,6 @@ export class FdDate {
             date.getMinutes(),
             date.getSeconds()
         );
-    }
-
-    /**
-     * Create FdDate instance of the current moment
-     */
-    constructor();
-    /**
-     * Create FdDate
-     * @param year e.g. 2020
-     * @param month 1 = January, 12 = December
-     * @param day 1 - 31
-     * @param hour 0 - 23
-     * @param minute 0 - 59
-     * @param second 0 - 59
-     */
-    // eslint-disable-next-line @typescript-eslint/unified-signatures
-    constructor(year: number, month?: number, day?: number, hour?: number, minute?: number, second?: number);
-
-    /** Create a date object */
-    constructor(...args: any[]) {
-        if (args.length === 0) {
-            return FdDate.getNow();
-        }
-
-        let [year, month = 1, day = 1, hour = 0, minute = 0, second = 0] = args;
-
-        year = Number.parseInt(year, 10);
-        month = Number.parseInt(month, 10);
-        day = Number.parseInt(day, 10);
-        hour = Number.parseInt(hour, 10);
-        minute = Number.parseInt(minute, 10);
-        second = Number.parseInt(second, 10);
-
-        this._isValid = isValidByParams({
-            year,
-            month,
-            day,
-            hour,
-            minute,
-            second
-        });
-
-        this.year = this._isValid ? year : NaN;
-        this.month = this._isValid ? month : NaN;
-        this.day = this._isValid ? day : NaN;
-        this.hour = this._isValid ? hour : NaN;
-        this.minute = this._isValid ? minute : NaN;
-        this.second = this._isValid ? second : NaN;
-
-        return this;
     }
 
     /**

@@ -50,16 +50,6 @@ export class FormMessageComponent implements CssClassBuilder, OnInit, OnChanges 
     constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
@@ -69,5 +59,15 @@ export class FormMessageComponent implements CssClassBuilder, OnInit, OnChanges 
             getTypeClassName(this.type),
             this.class
         ].filter((v): v is string => !!v);
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 }

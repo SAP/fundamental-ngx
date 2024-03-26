@@ -1,9 +1,9 @@
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
 
+import { SimpleChanges } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PopoverService } from './popover-service/popover.service';
 import { PopoverComponent } from './popover.component';
-import { SimpleChanges } from '@angular/core';
 
 describe('PopoverComponent', () => {
     let component: PopoverComponent;

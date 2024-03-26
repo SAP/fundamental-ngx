@@ -1,15 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { CxNestedListModule } from '../nested-list.module';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NestedListKeyboardService } from '../nested-list-keyboard.service';
-import { NestedListStateService } from '../nested-list-state.service';
-import { NestedListComponent } from './nested-list.component';
 import {
     ContentDensityGlobalKeyword,
     ContentDensityMode,
     LocalContentDensityMode
 } from '@fundamental-ngx/core/content-density';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
+import { NestedListKeyboardService } from '../nested-list-keyboard.service';
+import { NestedListStateService } from '../nested-list-state.service';
+import { CxNestedListModule } from '../nested-list.module';
+import { NestedListComponent } from './nested-list.component';
 
 @Component({
     template: `
@@ -44,8 +44,6 @@ import {
     `
 })
 class TestNestedContainerComponent {
-    contentDensity: LocalContentDensityMode = ContentDensityGlobalKeyword;
-
     @ViewChild('level4List', { static: true, read: NestedListComponent })
     level4List: NestedListComponent;
 
@@ -54,6 +52,8 @@ class TestNestedContainerComponent {
 
     @ViewChild('level1List', { static: true, read: NestedListComponent })
     level1List: NestedListComponent;
+
+    contentDensity: LocalContentDensityMode = ContentDensityGlobalKeyword;
 }
 
 describe('NestedListDirective', () => {

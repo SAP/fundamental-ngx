@@ -4,7 +4,7 @@
     <button fd-button value="l">L</button>
     <button fd-button value="xl">XL</button>
 </fd-segmented-button>
-<div style="margin-top: 60px" [style.maxWidth]="sizesWidth[currentSize] + 'px'">
+<div [style.margin-top.px]="60" [style.maxWidth]="sizesWidth[currentSize] + 'px'">
     <fd-shellbar>
         <fd-shellbar-logo>
             <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>

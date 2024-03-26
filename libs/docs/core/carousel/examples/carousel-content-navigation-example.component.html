@@ -4,7 +4,7 @@
 <ng-container *ngTemplateOutlet="renderer; context: { $implicit: true }"></ng-container>
 
 <ng-template #renderer let-direction>
-    <div style="display: flex; justify-content: center">
+    <div [style.display]="'flex'" [style.justify-content]="'center'">
         <fd-carousel
             [navigatorInPageIndicator]="false"
             carouselIndicatorsOrientation="top"

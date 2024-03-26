@@ -25,16 +25,6 @@ export class ListMessageDirective implements OnChanges, OnInit, CssClassBuilder 
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}
 
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
     /** @hidden
      * CssClassBuilder interface implementation
      * function must return single string
@@ -43,5 +33,15 @@ export class ListMessageDirective implements OnChanges, OnInit, CssClassBuilder 
     @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-list__message', this.type ? 'fd-list__message--' + this.type : '', this.class];
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 }

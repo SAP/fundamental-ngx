@@ -1,5 +1,5 @@
-import { ViewChild, Component, ElementRef } from '@angular/core';
-import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SelectKeyManagerService } from './select-key-manager.service';
 import { SelectComponent } from './select.component';
@@ -27,11 +27,11 @@ class SelectTestComponent {
 
     isOpen: boolean;
 
+    constructor(public keyService: SelectKeyManagerService) {}
+
     onOpen(isOpen: boolean): void {
         this.isOpen = isOpen;
     }
-
-    constructor(public keyService: SelectKeyManagerService) {}
 }
 
 describe('SelectKeyManagerService', () => {

@@ -83,6 +83,11 @@ export class WizardGeneratorStepComponent implements WizardGeneratorStep, OnInit
     /**
      * @hidden
      */
+    _visibleFormGroupIds: Record<string, boolean>;
+
+    /**
+     * @hidden
+     */
     private _submittedForms: WizardStepSubmittedForms = {};
 
     /**
@@ -99,11 +104,6 @@ export class WizardGeneratorStepComponent implements WizardGeneratorStep, OnInit
      * @hidden
      */
     private _trackedFields: DependencySteps;
-
-    /**
-     * @hidden
-     */
-    _visibleFormGroupIds: Record<string, boolean>;
 
     /**
      * @hidden
@@ -128,8 +128,8 @@ export class WizardGeneratorStepComponent implements WizardGeneratorStep, OnInit
     /**
      * @hidden
      */
-    ngOnInit(): void {
-        this.refreshFormsVisibility();
+    async ngOnInit(): Promise<void> {
+        await this.refreshFormsVisibility();
     }
 
     /**
@@ -229,42 +229,6 @@ export class WizardGeneratorStepComponent implements WizardGeneratorStep, OnInit
     }
 
     /**
-     * @hidden
-     * @description Keeps track on dependency fields for other steps and refreshes the view when they changed.
-     * @param form
-     * @param key
-     */
-    private _trackDependencyFieldsChanges(form: DynamicFormGroup, key: string): void {
-        this._trackedFields = this._wizardGeneratorService.getStepDependencyFields(this.item.id);
-
-        if (this._trackedFields && this._trackedFields[key]) {
-            Object.entries(this._trackedFields[key]).forEach(([fieldId, strategies]) => {
-                const control = this._formGeneratorService.getFormControl(form, fieldId);
-
-                const refreshSteps = strategies[WizardGeneratorRefreshStrategy.REFRESH_STEP_VISIBILITY] !== undefined;
-                const revalidateForms = strategies[WizardGeneratorRefreshStrategy.REVALIDATE_STEP_FORMS];
-                const refreshFormVisibility = strategies[WizardGeneratorRefreshStrategy.REFRESH_FORM_VISIBILITY];
-
-                control?.valueChanges
-                    .pipe(debounceTime(50), takeUntilDestroyed(this._destroyRef))
-                    .subscribe(async () => {
-                        if (refreshSteps) {
-                            await this._wizardGeneratorService.refreshStepVisibility();
-                        }
-
-                        if (revalidateForms?.length) {
-                            this._wizardGeneratorService.notifyStepsToRevalidateForms(revalidateForms);
-                        }
-
-                        if (refreshFormVisibility?.length) {
-                            await this._wizardGeneratorService.refreshFormsVisibility(refreshFormVisibility);
-                        }
-                    });
-            });
-        }
-    }
-
-    /**
      * Triggers form value revalidation and checks if field in form should be visible.
      */
     async updateFormsState(): Promise<void> {
@@ -300,6 +264,42 @@ export class WizardGeneratorStepComponent implements WizardGeneratorStep, OnInit
             }
 
             this._visibleFormGroupIds[formGroup.id] = result;
+        }
+    }
+
+    /**
+     * @hidden
+     * @description Keeps track on dependency fields for other steps and refreshes the view when they changed.
+     * @param form
+     * @param key
+     */
+    private _trackDependencyFieldsChanges(form: DynamicFormGroup, key: string): void {
+        this._trackedFields = this._wizardGeneratorService.getStepDependencyFields(this.item.id);
+
+        if (this._trackedFields && this._trackedFields[key]) {
+            Object.entries(this._trackedFields[key]).forEach(([fieldId, strategies]) => {
+                const control = this._formGeneratorService.getFormControl(form, fieldId);
+
+                const refreshSteps = strategies[WizardGeneratorRefreshStrategy.REFRESH_STEP_VISIBILITY] !== undefined;
+                const revalidateForms = strategies[WizardGeneratorRefreshStrategy.REVALIDATE_STEP_FORMS];
+                const refreshFormVisibility = strategies[WizardGeneratorRefreshStrategy.REFRESH_FORM_VISIBILITY];
+
+                control?.valueChanges
+                    .pipe(debounceTime(50), takeUntilDestroyed(this._destroyRef))
+                    .subscribe(async () => {
+                        if (refreshSteps) {
+                            await this._wizardGeneratorService.refreshStepVisibility();
+                        }
+
+                        if (revalidateForms?.length) {
+                            this._wizardGeneratorService.notifyStepsToRevalidateForms(revalidateForms);
+                        }
+
+                        if (refreshFormVisibility?.length) {
+                            await this._wizardGeneratorService.refreshFormsVisibility(refreshFormVisibility);
+                        }
+                    });
+            });
         }
     }
 }
