@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     ElementRef,
@@ -9,7 +10,7 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
-import { ColorAccent, CssClassBuilder, Nullable, NullableObject, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass, ColorAccent, CssClassBuilder, Nullable, NullableObject } from '@fundamental-ngx/cdk/utils';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 import { FD_OBJECT_STATUS_COMPONENT } from './tokens';
 
@@ -99,7 +100,7 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     clickable = false;
 
     /** Whether the Object Status is inverted. */
-    @Input()
+    @Input({ transform: booleanAttribute })
     inverted = false;
 
     /** Whether the Object Status is in Large Design. */

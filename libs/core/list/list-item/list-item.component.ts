@@ -45,7 +45,7 @@ let listItemUniqueId = 0;
     host: {
         class: 'fd-list__item',
         '[attr.tabindex]': '_normalizedTabIndex$()',
-        '[attr.id]': '_uniqueId'
+        '[attr.id]': 'id'
     },
     providers: [
         {
@@ -105,6 +105,14 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     @HostBinding('class.fd-list__item--byline')
     byline = false;
 
+    /** Aria-role attribute. */
+    @Input()
+    ariaRole: Nullable<string>;
+
+    /** The ID of the list item element */
+    @Input()
+    id = 'fd-list-item-' + ++listItemUniqueId;
+
     /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
@@ -112,10 +120,6 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     /** Whether list item contains link */
     @HostBinding('class.fd-list__item--link')
     link = false;
-
-    /** Aria-role attribute. */
-    @Input()
-    ariaRole: Nullable<string>;
 
     /** @hidden */
     @ContentChild(FD_RADIO_BUTTON_COMPONENT)
@@ -157,9 +161,6 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
 
     /** @hidden group header id, that is being set by parent list component */
     _relatedGroupHeaderId: string | null;
-
-    /** @hidden */
-    readonly _uniqueId = 'fd-list-item-' + ++listItemUniqueId;
 
     /** @hidden */
     readonly _list = inject(FD_LIST_UNREAD_INDICATOR, {

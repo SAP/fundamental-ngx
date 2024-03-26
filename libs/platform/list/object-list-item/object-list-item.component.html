@@ -3,7 +3,7 @@
     <div
         #listItem
         fd-list-item
-        [attr.id]="id"
+        [id]="id"
         [selected]="_selected"
         [tabindex]="-1"
         (click)="_onItemClick()"
@@ -15,7 +15,6 @@
         [attr.aria-level]="ariaLevel"
         [attr.aria-posinset]="ariaPosinset"
         [attr.aria-setsize]="ariaSetSize | async"
-        [attr.aria-selected]="_selected"
         [ariaRole]="_listItemRole"
         [attr.aria-selected]="_selectedAttr"
     >
@@ -39,7 +38,7 @@
     <div
         #listItem
         fd-list-item
-        [attr.id]="id"
+        [id]="id"
         [selected]="_selected"
         (keydown)="_onKeyDown($event)"
         [tabindex]="-1"
@@ -62,7 +61,7 @@
     <div
         #listItem
         fd-list-item
-        [attr.id]="id"
+        [id]="id"
         [tabindex]="0"
         [attr.aria-label]="ariaLabel"
         class="fd-object-list__item"
