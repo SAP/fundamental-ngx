@@ -7,7 +7,7 @@
 ></a>
 
 <ng-template #templateRef>
-    <div style="display: flex; align-items: center">
-        <fd-icon glyph="alert" size="l" style="margin-right: 0.25rem"></fd-icon> There can be placed everything.
+    <div [style.display]="'flex'" [style.align-items]="'center'">
+        <fd-icon glyph="alert" size="l" [style.margin-right.rem]="0.25"></fd-icon> There can be placed everything.
     </div>
 </ng-template>

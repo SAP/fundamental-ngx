@@ -42,9 +42,9 @@
 
 <h4>Form message with event triggers:</h4>
 <div fd-form-item>
-    <fd-form-input-message-group style="width: 100%" [triggers]="['mouseover', 'mouseleave']">
+    <fd-form-input-message-group [style.width.%]="100" [triggers]="['mouseover', 'mouseleave']">
         <fd-select
-            style="width: 100%"
+            [style.width.%]="100"
             placeholder="Select value"
             stateMessage="Success message"
             [(value)]="selectedValue1"

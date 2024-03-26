@@ -13,7 +13,7 @@
     ]"
     placeholder="Search here..."
     [(ngModel)]="selected"
-    style="width: 200px"
+    [style.width.px]="200"
 ></fd-multi-input>
 
 Selected: {{ selected | json }}
@@ -38,7 +38,7 @@ Selected: {{ selected | json }}
     placeholder="Search here..."
     [bodyMaxWidth]="300"
     [(ngModel)]="selected2"
-    style="width: 300px"
+    [style.width.px]="300"
 >
 </fd-multi-input>
 
@@ -70,7 +70,7 @@ Selected: {{ selected | json }}
     placeholder="Search here..."
     [bodyMaxWidth]="'container'"
     [(ngModel)]="selected"
-    style="width: 250px"
+    [style.width.px]="250"
 ></fd-multi-input>
 
 Selected: {{ selected | json }}

@@ -12,7 +12,7 @@ import { TruncateDirective } from './truncate.directive';
         <span fdkTruncate [fdkTruncateState]="false" [fdkTruncateWidth]="pixLength">
             This element should not be truncated as fdkTruncateState is false
         </span>
-        <span style="color:red;" fdkTruncate [fdkTruncateState]="true">
+        <span [style.color]="'red'" fdkTruncate [fdkTruncateState]="true">
             This element should not be truncated as fdkTruncateState is false
         </span>
     `

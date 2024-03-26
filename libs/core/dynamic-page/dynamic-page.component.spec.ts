@@ -15,7 +15,7 @@ import { DynamicPageModule } from './dynamic-page.module';
                 @for (tab of ['Tab 1', 'Tab 2', 'Tab 3']; track tab) {
                     <fd-tab [title]="tab">
                         <fd-dynamic-page-content>
-                            <div style="height: 150vh"></div>
+                            <div [style.height.vh]="150"></div>
                         </fd-dynamic-page-content>
                     </fd-tab>
                 }
@@ -23,7 +23,7 @@ import { DynamicPageModule } from './dynamic-page.module';
         }
         @if (!tabs) {
             <fd-dynamic-page-content>
-                <div style="height: 150vh"></div>
+                <div [style.height.vh]="150"></div>
             </fd-dynamic-page-content>
         }
     </fd-dynamic-page>`

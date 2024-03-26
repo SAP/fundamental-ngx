@@ -16,7 +16,7 @@ const NUMBER_OF_ITEMS = 20;
 
 @Component({
     template: `
-        <div style="width: 500px">
+        <div [style.width.px]="500">
             <fd-avatar-group-legacy #avatarGroup [type]="type" [size]="size">
                 <div>
                     @for (item of items; track item) {

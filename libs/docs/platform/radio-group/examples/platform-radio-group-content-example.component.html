@@ -10,7 +10,7 @@
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem">Selected value: {{ form1.controls.radioc1.value }}</p>
+<p [style.margin-left.rem]="2">Selected value: {{ form1.controls.radioc1.value }}</p>
 <br />
 <p>Inline cozy radio group</p>
 <fdp-form-group [formGroup]="form2">
@@ -23,7 +23,7 @@
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem">Selected value: {{ form2.controls.radioc2.value }}</p>
+<p [style.margin-left.rem]="2">Selected value: {{ form2.controls.radioc2.value }}</p>
 <br />
 <p>Radio group with default property values</p>
 <fdp-form-group [formGroup]="form3" [object]="form3Data">
@@ -36,7 +36,7 @@
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem">Selected value: {{ form3.controls.radioc3.value }}</p>
+<p [style.margin-left.rem]="2">Selected value: {{ form3.controls.radioc3.value }}</p>
 <br />
 <p>Radio group with disabled button and validation error</p>
 <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
@@ -58,7 +58,7 @@
             <fdp-button
                 fdCompact
                 type="reset"
-                style="margin: 2rem 2rem 0 2rem"
+                [style.margin]="'2rem 2rem 0 2rem'"
                 label="Reset"
                 (click)="onReset()"
             ></fdp-button>
@@ -70,7 +70,7 @@
         </ng-template>
     </fdp-form-group>
 </form>
-<p style="margin-left: 2rem">Selected value: {{ form4.controls.radioc4.value }}</p>
+<p [style.margin-left.rem]="2">Selected value: {{ form4.controls.radioc4.value }}</p>
 <br />
 <p>Radio group using FormGroup and FormControl</p>
 <fdp-form-group [formGroup]="form5">
@@ -83,7 +83,7 @@
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem">Selected value: {{ form5.controls.month.value }}</p>
+<p [style.margin-left.rem]="2">Selected value: {{ form5.controls.month.value }}</p>
 <hr />
 <h3>Use With Template Driven Form</h3>
 <p>Inline compact radio group with default selection</p>
@@ -97,7 +97,7 @@
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem">Selected Value: {{ favoriteSeason }}</p>
+<p [style.margin-left.rem]="2">Selected Value: {{ favoriteSeason }}</p>
 <p>Inline compact radio group</p>
 <fdp-form-group>
     <fdp-form-field id="radioc7" [rank]="1">
@@ -109,7 +109,7 @@
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem">Selected Value: {{ favoriteSeason2 }}</p>
+<p [style.margin-left.rem]="2">Selected Value: {{ favoriteSeason2 }}</p>
 <p>Radio group with disabled item</p>
 <fdp-form-group>
     <fdp-form-field id="radioc8" [rank]="1">
@@ -121,4 +121,4 @@
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem">Selected Value: {{ favoriteMonth }}</p>
+<p [style.margin-left.rem]="2">Selected Value: {{ favoriteMonth }}</p>

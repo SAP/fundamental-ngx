@@ -1,7 +1,7 @@
 <button fd-button (click)="setConfig()">Expand first column</button>
-<button style="margin: 0 1rem" fd-button (click)="resetConfig()">Reset</button>
+<button [style.margin]="'0 1rem'" fd-button (click)="resetConfig()">Reset</button>
 
-<div fd-scrollbar style="padding: 1rem">
+<div fd-scrollbar [style.padding.rem]="1">
     <fd-fixed-card-layout [columnsWidthConfig]="config">
         <fd-card cardType="list" *fdCardDef="1">
             <fd-card-header>

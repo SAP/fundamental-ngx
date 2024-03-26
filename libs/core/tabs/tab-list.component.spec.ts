@@ -106,7 +106,7 @@ const NUMBER_OF_TABS = 10;
 @Component({
     template: `
         <fd-tab-list
-            style="width: 200px"
+            [style.width.px]="200"
             [collapsibleTabs]="true"
             [collapseOverflow]="true"
             [maxVisibleTabs]="maxVisibleTabs"

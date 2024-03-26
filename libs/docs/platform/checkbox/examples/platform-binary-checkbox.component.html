@@ -12,7 +12,7 @@
         <fdp-checkbox name="violet-cb" title="Violet" [(ngModel)]="violet" label="Violet"></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>
-<div style="padding-left: 2rem">
+<div [style.padding-left.rem]="2">
     <div>Yellow: {{ yellow }}</div>
     <div>White: {{ white }}</div>
     <div>Violet: {{ violet }}</div>
@@ -35,7 +35,7 @@
     </fdp-form-field>
 </fdp-form-group>
 
-<div style="padding-left: 2rem">form value: {{ customForm.getRawValue() | json }}</div>
+<div [style.padding-left.rem]="2">form value: {{ customForm.getRawValue() | json }}</div>
 
 <h3>Disabled Checkbox</h3>
 <fdp-form-group fdCompact>

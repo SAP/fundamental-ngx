@@ -1,9 +1,9 @@
-<fd-segmented-button style="margin-bottom: 1rem" [(ngModel)]="cardMinimumWidth">
+<fd-segmented-button [style.margin-bottom.rem]="1" [(ngModel)]="cardMinimumWidth">
     <button fd-button [value]="320">Set default minimum card width</button>
     <button fd-button [value]="480">Set custom minimum card width</button>
 </fd-segmented-button>
 
-<div fd-scrollbar style="padding: 1rem; overflow: auto">
+<div fd-scrollbar [style.padding.rem]="1" [style.overflow]="'auto'">
     <fd-fixed-card-layout [cardMinimumWidth]="cardMinimumWidth">
         <fd-card cardType="list" *fdCardDef="1">
             <fd-card-header>

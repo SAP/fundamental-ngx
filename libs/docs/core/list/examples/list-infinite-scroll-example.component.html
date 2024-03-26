@@ -2,7 +2,8 @@
     <ul
         fd-list
         fdInfiniteScroll
-        style="overflow-y: scroll; max-height: 250px"
+        [style.overflow-y]="'scroll'"
+        [style.max-height.px]="250"
         [scrollOffset]="40"
         (onScrollAction)="scrollHandler()"
     >

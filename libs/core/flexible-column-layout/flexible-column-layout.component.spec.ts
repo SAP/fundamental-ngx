@@ -30,17 +30,17 @@ function setViewport(width: number): void {
     template: `
         <fd-flexible-column-layout [(layout)]="layout" [backgroundDesign]="backgroundDesign">
             <ng-template #startColumn>
-                <div style="height: 800px;">
+                <div [style.height.px]="800">
                     <h2>Start Column</h2>
                 </div>
             </ng-template>
             <ng-template #midColumn>
-                <div style="height: 800px;">
+                <div [style.height.px]="800">
                     <h2>Mid Column</h2>
                 </div>
             </ng-template>
             <ng-template #endColumn>
-                <div style="height: 800px;">
+                <div [style.height.px]="800">
                     <h2>End Column</h2>
                 </div>
             </ng-template>

@@ -33,6 +33,6 @@
     <pre>Form result: {{ fg.formGroup.value | json }}</pre>
     <pre>Form Status: {{ fg.formGroup.status }}</pre>
 </main>
-<span aria-hidden="true" style="display: none" id="input-group-form-label">Quantity</span>
-<span aria-hidden="true" style="display: none" id="input-group-form-left-addon-aria-label-dollar">Currency: $</span>
-<span aria-hidden="true" style="display: none" id="input-group-form-right-addon-aria-label">Format: USD</span>
+<span aria-hidden="true" [style.display]="'none'" id="input-group-form-label">Quantity</span>
+<span aria-hidden="true" [style.display]="'none'" id="input-group-form-left-addon-aria-label-dollar">Currency: $</span>
+<span aria-hidden="true" [style.display]="'none'" id="input-group-form-right-addon-aria-label">Format: USD</span>

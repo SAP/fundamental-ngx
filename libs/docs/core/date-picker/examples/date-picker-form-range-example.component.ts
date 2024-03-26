@@ -16,7 +16,7 @@ import {
         @if (customForm) {
             <div>
                 <form [formGroup]="customForm">
-                    <fd-date-picker type="range" formControlName="dates" style="width: 300px"></fd-date-picker>
+                    <fd-date-picker type="range" formControlName="dates" [style.width.px]="300"></fd-date-picker>
                 </form>
                 <small>
                     Touched: {{ customForm.controls.dates.touched }}<br />

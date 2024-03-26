@@ -90,7 +90,9 @@
             <fd-dynamic-page-content cdkScrollable>
                 <div
                     class="fd-dynamic-page-section-example"
-                    style="display: flex; align-items: center; justify-content: center"
+                    [style.display]="'flex'"
+                    [style.align-items]="'center'"
+                    [style.justify-content]="'center'"
                 >
                     <button
                         fd-button

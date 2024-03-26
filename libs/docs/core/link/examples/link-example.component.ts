@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgStyle } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
@@ -11,7 +11,7 @@ import { BehaviorSubject, of } from 'rxjs';
     selector: 'fd-link-example',
     templateUrl: './link-example.component.html',
     standalone: true,
-    imports: [LinkComponent, RouterLink, IconComponent, AsyncPipe]
+    imports: [LinkComponent, RouterLink, IconComponent, AsyncPipe, NgStyle]
 })
 export class LinkExampleComponent {
     arrowRight$: BehaviorSubject<string> = new BehaviorSubject<string>('slim-arrow-right');

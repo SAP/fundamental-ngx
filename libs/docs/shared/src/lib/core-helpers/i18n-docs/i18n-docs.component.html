@@ -1,8 +1,8 @@
 @if ({ value: data$ | async }; as data) {
-    <div style="margin-top: 2rem">
+    <div [style.margin-top.rem]="2">
         @switch (status) {
             @case (loadStatus.Loading) {
-                <div style="text-align: center">
+                <div [style.text-align]="'center'">
                     <fd-busy-indicator [loading]="true" title="Please Wait"></fd-busy-indicator>
                 </div>
             }
@@ -39,11 +39,11 @@
                         </tbody>
                     </table>
                 } @else {
-                    <h3 style="text-align: center">There's no translation keys for this component.</h3>
+                    <h3 [style.text-align]="'center'">There's no translation keys for this component.</h3>
                 }
             }
             @case (loadStatus.Error) {
-                <h3 style="text-align: center">Failed to load data..</h3>
+                <h3 [style.text-align]="'center'">Failed to load data..</h3>
             }
         }
     </div>

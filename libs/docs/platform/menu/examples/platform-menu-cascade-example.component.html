@@ -1,6 +1,6 @@
 <div class="fdp-menu-example">
     <button fd-button [fdpMenuTriggerFor]="cascadeMenu" label="Grocery" fdType="menu"></button>
-    <div style="margin-top: 1rem"><label>Item Selected:</label> {{ item }}</div>
+    <div [style.margin-top.rem]="1"><label>Item Selected:</label> {{ item }}</div>
 
     <fdp-menu #cascadeMenu id="cascade-menu">
         <fdp-menu-item [fdpMenuTriggerFor]="fruitMenu">Fruits</fdp-menu-item>

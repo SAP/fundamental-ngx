@@ -3,7 +3,8 @@
     wrapHorizontally
     (itemFocused)="itemFocused($event)"
     (rowFocused)="rowFocused($event)"
-    style="max-height: 200px; overflow: auto"
+    [style.max-height.px]="200"
+    [style.overflow]="'auto'"
 >
     @for (list of [].constructor(40); track list; let rowIndex = $index) {
         <div fdkFocusableList focusable navigationDirection="grid">

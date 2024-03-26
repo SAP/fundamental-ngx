@@ -1,6 +1,6 @@
 <div class="api-main-container">
     <h2 class="api-main-header">{{ activeFile }}</h2>
-    <span style="display: flex; flex-grow: 1"></span>
+    <span [style.display]="'flex'" [style.flex-grow]="'1'"></span>
     @if (files.length > 1) {
         <button
             fd-button

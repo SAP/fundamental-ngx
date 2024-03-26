@@ -16,6 +16,6 @@
 
 <a fd-link [subtle]="true" aria-label="Standard">Subtle Link</a> <br /><br />
 
-<div style="background-color: var(--sapShellColor); padding: 10px">
+<div [ngStyle]="{ 'background-color': 'var(--sapShellColor)', padding: '10px' }">
     <a fd-link [routerLink]="['./']" fragment="inverted" aria-label="Inverted" [inverted]="true">Inverted Link</a>
 </div>

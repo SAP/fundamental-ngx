@@ -10,9 +10,9 @@
         <button fd-button glyph="add"></button>
     </fd-popover-control>
     <fd-popover-body>
-        <button style="margin: 1rem" fd-button (click)="updatePopover()">Click me to show the avatar</button>
+        <button [style.margin.rem]="1" fd-button (click)="updatePopover()">Click me to show the avatar</button>
         @if (showAvatar) {
-            <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+            <fd-avatar [circle]="true" [style.margin.rem]="1" size="xl" glyph="group"></fd-avatar>
         }
     </fd-popover-body>
 </fd-popover>

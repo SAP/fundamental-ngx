@@ -9,7 +9,7 @@
             <fdp-button
                 fdCompact
                 type="reset"
-                style="margin: 2rem 2rem 0 2rem"
+                [style.margin]="'2rem 2rem 0 2rem'"
                 label="Reset"
                 (click)="onReset(form1)"
             ></fdp-button>
@@ -21,7 +21,7 @@
         </ng-template>
     </fdp-form-group>
 </form>
-<p style="margin-left: 2rem">Selected value: {{ form1.controls.example1.value }}</p>
+<p [style.margin-left.rem]="2">Selected value: {{ form1.controls.example1.value }}</p>
 <br />
 <div>Vertical radio group</div>
 <form #listform2="ngForm" (ngSubmit)="onSubmit(listform2)">
@@ -33,7 +33,7 @@
             <fdp-button
                 fdCompact
                 type="reset"
-                style="margin: 2rem 2rem 0 2rem"
+                [style.margin]="'2rem 2rem 0 2rem'"
                 label="Reset"
                 (click)="onReset(form5)"
             ></fdp-button>
@@ -78,7 +78,7 @@
             <fdp-button
                 fdCompact
                 type="reset"
-                style="margin: 2rem 2rem 0 2rem"
+                [style.margin]="'2rem 2rem 0 2rem'"
                 label="Reset"
                 (click)="onReset(form6)"
             ></fdp-button>
@@ -117,7 +117,7 @@
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem">Selected value: {{ form2.controls.example2.value }}</p>
+<p [style.margin-left.rem]="2">Selected value: {{ form2.controls.example2.value }}</p>
 <br />
 <p>Platform radio button creation and pre-selection based on object data passed.</p>
 <fdp-form-group [formGroup]="form3" [object]="form3Data">
@@ -126,7 +126,7 @@
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem">Selected value: {{ form3.controls.radiolo3.value }}</p>
+<p [style.margin-left.rem]="2">Selected value: {{ form3.controls.radiolo3.value }}</p>
 <br />
 <p>Platform radio button created from Invoice objects. Using LookupKey and DisplayKey.</p>
 <fdp-form-group [formGroup]="form4" [object]="form4Data">
@@ -142,7 +142,7 @@
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem">Preferred Brand: {{ form4.controls.radiolo4.value }}</p>
+<p [style.margin-left.rem]="2">Preferred Brand: {{ form4.controls.radiolo4.value }}</p>
 <hr />
 <h3>Use With Template Driven Form</h3>
 <p>Platform radio buttons created with given list of SelectItem objects also pre-selection based on control value</p>
@@ -152,7 +152,7 @@
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem">Selected value: {{ favoriteOption }}</p>
+<p [style.margin-left.rem]="2">Selected value: {{ favoriteOption }}</p>
 <p>Platform radio button created with given list of SelectItem objects</p>
 <fdp-form-group>
     <fdp-form-field id="radiolo6" [rank]="1">
@@ -160,7 +160,7 @@
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem">Selected value: {{ favoriteOption2 }}</p>
+<p [style.margin-left.rem]="2">Selected value: {{ favoriteOption2 }}</p>
 <p>Platform Radio Button created from Invoice objects. Using LookupKey and DisplayKey.</p>
 <fdp-form-group>
     <fdp-form-field id="radiotlo7" [rank]="1">
@@ -175,4 +175,4 @@
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem">Preferred Brand: {{ favBrand }}</p>
+<p [style.margin-left.rem]="2">Preferred Brand: {{ favBrand }}</p>
