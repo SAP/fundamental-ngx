@@ -78,6 +78,8 @@ import {
 } from '../models';
 import { VhdComponent } from '../models/vhd-component.model';
 
+let vhdHeaderUniqueId = 0;
+
 export type FdpValueHelpDialogDataSource<T> =
     | ValueHelpDialogDataSource<T>
     | ArrayValueHelpDialogDataSource<T>
@@ -193,7 +195,7 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
 
     /** Id attribute for dialog title */
     @Input()
-    headerId: string | null = null;
+    headerId = `fd-vhd-header-unique-id-${vhdHeaderUniqueId++}`;
 
     /** Field name for default render from data.
      * Required field if tokenizerFn is not exist. */
@@ -454,6 +456,9 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
         this._updateFilters();
         this._initializeDS();
         this._initializeTab();
+        if (!this.dialogConfig.ariaLabelledBy) {
+            this.dialogConfig.ariaLabelledBy = this.headerId;
+        }
         this.activeDialog = this._dialogService.open(this.dialogContainer, {
             backdropClickCloseable: false,
             hasBackdrop: true,
