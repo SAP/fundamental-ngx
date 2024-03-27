@@ -148,7 +148,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
             .subscribe((state) => {
                 if (!state.text) {
                     this._showMobileSearch = false;
-                    this._actions._setSearchVisibility(false);
+                    this._actions?._setSearchVisibility(false);
                     this._cd.detectChanges();
                 }
             });
@@ -166,7 +166,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     @ContentChild(ShellbarActionsComponent)
-    private _actions: ShellbarActionsComponent;
+    private _actions?: ShellbarActionsComponent;
 
     /** @hidden */
     @ViewChild('searchPortalOutlet', { static: false, read: CdkPortalOutlet })
@@ -267,7 +267,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     /** @hidden */
     _closeMobileSearch(): void {
         this._showMobileSearch = false;
-        this._actions._setSearchVisibility(false);
+        this._actions?._setSearchVisibility(false);
         this._cd.detectChanges();
     }
 
@@ -355,7 +355,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
             return;
         }
 
-        this._actions._detachSearch();
+        this._actions?._detachSearch();
         this._searchPortalOutlet?.attach(this._searchPortal);
 
         if (shouldFocus) {
@@ -366,12 +366,12 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     /** @hidden */
     private _detachSearch(): void {
         if (!this._searchPortalOutlet?.hasAttached()) {
-            this._actions._attachSearch(this._searchPortal, this._searchComponent, this._currentSize);
+            this._actions?._attachSearch(this._searchPortal, this._searchComponent, this._currentSize);
             return;
         }
 
         this._searchPortalOutlet.detach();
 
-        this._actions._attachSearch(this._searchPortal, this._searchComponent, this._currentSize);
+        this._actions?._attachSearch(this._searchPortal, this._searchComponent, this._currentSize);
     }
 }

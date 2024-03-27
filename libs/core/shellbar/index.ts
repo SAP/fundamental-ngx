@@ -14,4 +14,5 @@ export * from './shellbar-title/shellbar-title.component';
 export * from './shellbar.component';
 export * from './shellbar.module';
 export * from './tokens';
+export * from './user-menu/shellbar-user-menu-button.directive';
 export * from './user-menu/shellbar-user-menu.component';
