@@ -19,7 +19,7 @@
     <fd-shellbar-action glyph="search" [callback]="_toggleSearch"></fd-shellbar-action>
 }
 <ng-content select="fd-shellbar-action"></ng-content>
-@if (userItem) {
+@if (userComponent || userItem) {
     @if (!userComponent) {
         <fd-shellbar-user-menu
             placement="bottom-end"
@@ -27,8 +27,7 @@
             [userMenu]="userMenu"
             (itemClicked)="_triggerItems()"
         ></fd-shellbar-user-menu>
-    }
-    @if (userComponent) {
+    } @else {
         <ng-content select="fd-shellbar-user-menu"></ng-content>
     }
 }

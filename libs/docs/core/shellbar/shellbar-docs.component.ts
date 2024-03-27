@@ -7,8 +7,10 @@ import {
     DocsSectionTitleComponent,
     ExampleFile,
     SeparatorComponent,
-    getAssetFromModuleAssets
+    getAssetFromModuleAssets,
+    getExampleFile
 } from '@fundamental-ngx/docs/shared';
+import { CustomUserMenuExampleComponent } from './examples/custom-user-menu-example.component';
 import { ShellbarBasicExampleComponent } from './examples/shellbar-basic-example.component';
 import { ShellbarCollapsibleExampleComponent } from './examples/shellbar-collapsible-example.component';
 import { ShellbarGrowingGroupExampleComponent } from './examples/shellbar-growing-group-example/shellbar-growing-group-example.component';
@@ -18,8 +20,6 @@ const shellbarBasicHTMLSrc = 'shellbar-basic-example.component.html';
 const shellbarBasicTSSrc = 'shellbar-basic-example.component.ts';
 const shellbarCollapsibleHTMLSrc = 'shellbar-collapsible-example.component.html';
 const shellbarCollapsibleTSSrc = 'shellbar-collapsible-example.component.ts';
-const shellbarResponsiveTSSrc = 'shellbar-responsive-example.component.ts';
-const shellbarResponsiveHTMLSrc = 'shellbar-responsive-example.component.html';
 
 @Component({
     selector: 'app-shellbar',
@@ -34,7 +34,8 @@ const shellbarResponsiveHTMLSrc = 'shellbar-responsive-example.component.html';
         CodeExampleComponent,
         ShellbarCollapsibleExampleComponent,
         ShellbarResponsiveExampleComponent,
-        ShellbarGrowingGroupExampleComponent
+        ShellbarGrowingGroupExampleComponent,
+        CustomUserMenuExampleComponent
     ]
 })
 export class ShellbarDocsComponent {
@@ -69,14 +70,32 @@ export class ShellbarDocsComponent {
     shellbarResponsive: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(shellbarResponsiveHTMLSrc),
+            code: getAssetFromModuleAssets('shellbar-responsive-example/shellbar-responsive-example.component.html'),
             fileName: 'shellbar-responsive-example.component'
         },
         {
             language: 'typescript',
             component: 'ShellbarResponsiveExampleComponent',
-            code: getAssetFromModuleAssets(shellbarResponsiveTSSrc),
+            code: getAssetFromModuleAssets('shellbar-responsive-example/shellbar-responsive-example.component.ts'),
             fileName: 'shellbar-responsive-example.component'
         }
+    ];
+
+    shellbarGrowingGroupExampleFiles: ExampleFile[] = [
+        getExampleFile('shellbar-growing-group-example/shellbar-growing-group-example.component.ts', {
+            selector: 'fd-shellbar-growing-group-example',
+            component: 'ShellbarGrowingGroupExampleComponent',
+            name: 'shellbar-growing-group-example.ts'
+        }),
+        getExampleFile('shellbar-growing-group-example/shellbar-growing-group-example.component.html', {
+            name: 'shellbar-growing-group-example.html'
+        })
+    ];
+
+    shellbarCustomUserMenuExample: ExampleFile[] = [
+        getExampleFile('custom-user-menu-example.component.ts', {
+            selector: 'fd-shellbar-custom-user-menu-example',
+            component: 'CustomUserMenuExampleComponent'
+        })
     ];
 }
