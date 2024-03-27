@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.32](https://github.com/SAP/fundamental-ngx/compare/v0.43.31...v0.43.32) (2024-03-26)
+
+
+### Bug Fixes
+
+* roll back tabindex change ([#11641](https://github.com/SAP/fundamental-ngx/issues/11641)) ([926caa3](https://github.com/SAP/fundamental-ngx/commit/926caa3942fe76b67fcb86515eacd781a323f166))
+
+
+
+
+
 ## [0.43.31](https://github.com/SAP/fundamental-ngx/compare/v0.43.30...v0.43.31) (2024-03-25)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk
