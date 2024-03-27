@@ -1,19 +1,19 @@
-import { Component, signal } from '@angular/core';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { IconComponent } from '@fundamental-ngx/core/icon';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { VerticalNavigationModule } from '@fundamental-ngx/core/vertical-navigation';
+
+import { Component } from '@angular/core';
+import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fd-vertical-navigation-condensed-example',
     templateUrl: './vertical-navigation-condensed-example.component.html',
+    styleUrls: ['./vertical-navigation-condensed-example.component.scss'],
     standalone: true,
-    imports: [VerticalNavigationModule, ListModule, IconComponent, ButtonComponent]
+    imports: [FundamentalNgxCoreModule, FundamentalNgxPlatformModule]
 })
-export class VerticalNavigationCondensedExampleComponent {
-    condensed = signal(true);
+export class VerticalNavigationCondensedExample {
+    condensed: boolean = false;
 
-    toggleCondensed() {
-        this.condensed.update((condensed) => !condensed);
+    toggleCondensed(): void {
+        this.condensed = !this.condensed;
     }
 }
