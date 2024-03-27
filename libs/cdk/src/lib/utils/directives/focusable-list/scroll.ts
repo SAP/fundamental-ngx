@@ -18,8 +18,12 @@ export function scrollIntoView(element: Nullable<HTMLElement>, position: Nullabl
              * this is triggered when a sticky table header overlaps the focused cell.
              */
             const elRect = element.getBoundingClientRect();
-            const topEl = document.elementFromPoint(elRect.left, elRect.top);
-            if (!element.isSameNode(topEl) && topEl) {
+            const topEl = document.elementFromPoint(elRect.left, elRect.top) as HTMLElement;
+            if (
+                !element.isSameNode(topEl) &&
+                topEl &&
+                element.getBoundingClientRect().top !== topEl.getBoundingClientRect().top
+            ) {
                 scrollableParent.scrollBy({ top: elRect.top - topEl.getBoundingClientRect().bottom });
             }
         }
