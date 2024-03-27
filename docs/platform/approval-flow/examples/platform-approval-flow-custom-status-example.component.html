@@ -42,31 +42,31 @@
     }
 </ng-template>
 <ng-template #userDetailsTemplate let-data="data">
-    <h4 style="margin-bottom: 1rem">Contact info</h4>
+    <h4 [style.margin-bottom.rem]="1">Contact info</h4>
     @if (data?.phone) {
-        <p style="display: flex; flex-direction: column">
+        <p [style.display]="'flex'" [style.flex-direction]="'column'">
             <span>Mobile</span>
             <a [href]="'tel:' + data.phone">{{ data.phone }}</a>
         </p>
     }
     @if (data?.phone) {
-        <p style="display: flex; flex-direction: column">
+        <p [style.display]="'flex'" [style.flex-direction]="'column'">
             <span>Phone</span>
             <a [href]="'tel:' + data.phone">{{ data.phone }}</a>
         </p>
     }
     @if (data?.email) {
-        <p style="display: flex; flex-direction: column">
+        <p [style.display]="'flex'" [style.flex-direction]="'column'">
             <span>E-mail</span>
             <a [href]="'mailto:' + data.email">{{ data.email }}</a>
         </p>
     }
-    <h4 style="margin-top: 1.5rem; margin-bottom: 1rem">Company</h4>
-    <p style="display: flex; flex-direction: column">
+    <h4 [style.margin-top.rem]="1.5" [style.margin-bottom.rem]="1">Company</h4>
+    <p [style.display]="'flex'" [style.flex-direction]="'column'">
         <span>Name</span>
         <span>Company A{{ data?.email }}</span>
     </p>
-    <p style="display: flex; flex-direction: column">
+    <p [style.display]="'flex'" [style.flex-direction]="'column'">
         <span>Address</span>
         <span>481 West Street, Anytown OH, 83749, USA</span>
     </p>
@@ -151,10 +151,10 @@
         <label for="disableRemovingNode">Disable removing</label>
     </p>
 </div>
-<p style="display: flex; align-items: center; flex-wrap: wrap">
+<p [style.display]="'flex'" [style.align-items]="'center'" [style.flex-wrap]="'wrap'">
     Allow sending reminders to approvers with statuses:
     <fd-multi-input
-        style="margin-left: 0.5rem"
+        [style.margin-left.rem]="0.5"
         fdCompact
         [dropdownValues]="allStatuses"
         [(ngModel)]="sendReminderStatuses"

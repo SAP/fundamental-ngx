@@ -18,7 +18,7 @@
         }
     </ng-template>
 </fdp-form-group>
-<span style="margin-left: 2rem">Favorites: {{ form1.controls.fruitsEx.value }}</span>
+<span [style.margin-left.rem]="2">Favorites: {{ form1.controls.fruitsEx.value }}</span>
 <h3>Checkbox group created from list of values and value is required</h3>
 <fdp-form-group [formGroup]="form2">
     <fdp-form-field #fl2 id="fruits1" label="My favorite fruits:" [required]="true" [rank]="1">
@@ -36,7 +36,7 @@
         }
     </ng-template>
 </fdp-form-group>
-<span style="margin-left: 2rem">Favorites: {{ form2.controls.fruits1.value }}</span>
+<span [style.margin-left.rem]="2">Favorites: {{ form2.controls.fruits1.value }}</span>
 <h3>Checkboxes with different context</h3>
 <div>Qualification form</div>
 <fdp-form-group #fg [formGroup]="form1">
@@ -96,7 +96,7 @@
         }
     </ng-template>
 </fdp-form-group>
-<span style="margin-left: 2rem">Languages Known: {{ form3.controls.language.value }}</span>
+<span [style.margin-left.rem]="2">Languages Known: {{ form3.controls.language.value }}</span>
 <h3>Checkbox with same context</h3>
 <fdp-form-group #fg [formGroup]="form4">
     <fdp-form-field id="apple" [rank]="1" [validators]="validators" [i18Strings]="apple">
@@ -129,4 +129,4 @@
         }
     </ng-template>
 </fdp-form-group>
-<span style="margin-left: 2rem">Favorites: {{ form4.getRawValue() | json }}</span>
+<span [style.margin-left.rem]="2">Favorites: {{ form4.getRawValue() | json }}</span>

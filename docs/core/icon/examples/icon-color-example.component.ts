@@ -13,9 +13,9 @@ import { IconColor, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
                     @for (color of colors; track color) {
                         <div class="fd-docs-icons">
                             <fd-icon [font]="font" [glyph]="icons[font]" [color]="color"></fd-icon>
-                            <span style="white-space: nowrap; font-size: var(--sapFontSmallSize);"
-                                >Color: <b>{{ color }}</b></span
-                            >
+                            <span [style.white-space]="'nowrap'" [style.font-size]="'var(--sapFontSmallSize)'">
+                                Color: <b>{{ color }}</b>
+                            </span>
                         </div>
                     }
                 </div>
@@ -28,9 +28,9 @@ import { IconColor, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
                                 color="contrast"
                                 [background]="color"
                             ></fd-icon>
-                            <span style="white-space: nowrap; font-size: var(--sapFontSmallSize);"
-                                >Background: <b>{{ color }}</b></span
-                            >
+                            <span [style.white-space]="'nowrap'" [style.font-size]="'var(--sapFontSmallSize)'">
+                                Background: <b>{{ color }}</b>
+                            </span>
                         </div>
                     }
                 </div>

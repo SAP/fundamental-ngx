@@ -1,4 +1,4 @@
-<div style="max-width: 450px; padding-bottom: 50px">
+<div [style.max-width.px]="450" [style.padding-bottom.px]="50">
     <h4 class="table-example-popin-title">Mobile Mode</h4>
     <table
         fd-table
@@ -51,7 +51,7 @@
         </tbody>
     </table>
 </div>
-<div style="max-width: 768px; padding-bottom: 50px">
+<div [style.max-width.px]="768" [style.padding-bottom.px]="50">
     <h4 class="table-example-popin-title">Tablet Mode</h4>
     <table
         fd-table
@@ -104,7 +104,7 @@
         </tbody>
     </table>
 </div>
-<div style="max-width: 1200px; padding-bottom: 50px">
+<div [style.max-width.px]="1200" [style.padding-bottom.px]="50">
     <h4 class="table-example-popin-title">Desktop Mode</h4>
     <table fd-table [noBorderX]="true" [responsive]="true" aria-label="Pop In Mode on Responsive Table Tablet Mode">
         <thead fd-table-header>
@@ -149,7 +149,7 @@
         </tbody>
     </table>
 </div>
-<div style="max-width: 450px; padding-bottom: 50px">
+<div [style.max-width.px]="450" [style.padding-bottom.px]="50">
     <h4 class="table-example-popin-title">Popin Mobile Mode with Checkboxes</h4>
     <table
         fd-table

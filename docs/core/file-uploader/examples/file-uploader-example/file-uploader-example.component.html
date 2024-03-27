@@ -24,7 +24,7 @@ Files Selected:
     fd-button
     (click)="fileUploaderComponentRef.clear()"
     label="Reset File Selection via clear() function"
-    style="margin-top: 0.5rem"
+    [style.margin-top.rem]="0.5"
 ></button>
 <br />
-<button fd-button (click)="resetFiles()" label="Reset File Selection via ngModel" style="margin-top: 0.5rem"></button>
+<button fd-button (click)="resetFiles()" label="Reset File Selection via ngModel" [style.margin-top.rem]="0.5"></button>

@@ -29,7 +29,7 @@
 <button
     fd-button
     label="Open Calendar in landscape mobile mode"
-    style="margin-right: 10px"
+    [style.margin-right.px]="10"
     (click)="openLandScapeDialog(landScapeDialog)"
 ></button>
 
@@ -64,10 +64,10 @@
 <button
     fd-button
     label="Open Calendar in portrait mobile mode"
-    style="margin-right: 10px"
+    [style.margin-right.px]="10"
     (click)="openPortraitDialog(portraitDialog)"
 ></button>
 
 <br /><br />
 
-<div>Selected Date: {{ datePicked.toDate() | date : 'shortDate' }}</div>
+<div>Selected Date: {{ datePicked.toDate() | date: 'shortDate' }}</div>

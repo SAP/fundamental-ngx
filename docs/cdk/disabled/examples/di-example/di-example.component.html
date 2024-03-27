@@ -4,9 +4,9 @@
     <li fdDisabledRecipient>child 3</li>
 </ul>
 
-<div style="margin-top: 20px">
+<div [style.margin-top.px]="20">
     <button
-        style="margin-bottom: 0.5rem"
+        [style.margin-bottom.rem]="0.5"
         fd-button
         (fdkClicked)="rootElementDisabled = !rootElementDisabled"
         [label]="rootElementDisabled ? 'Enable root element' : 'Disable root element'"

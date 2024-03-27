@@ -1,7 +1,12 @@
 <button fd-button (click)="openMobile(dialogTemplate)">Open in mobile mode</button>
 
 <ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
-    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog" style="padding-bottom: 1rem; margin-top: 1rem">
+    <fd-dialog
+        [dialogConfig]="dialogConfig"
+        [dialogRef]="dialog"
+        [style.padding-bottom.rem]="1"
+        [style.margin-top.rem]="1"
+    >
         <fd-dialog-header>
             <h1 fd-title>Fixed card layout in mobile display</h1>
             <button fd-dialog-close-button (click)="dialog.dismiss('Close button')"></button>

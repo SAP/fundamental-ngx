@@ -1,4 +1,4 @@
-<div fd-bar style="margin-bottom: 10px">
+<div fd-bar [style.margin-bottom.px]="10">
     <div fd-bar-left>Is the second pane on the canvas: {{ paneTwo?.isOnCanvas }} (pane API)</div>
 
     <div fd-bar-right>
@@ -8,7 +8,7 @@
     </div>
 </div>
 
-<div style="height: 300px">
+<div [style.height.px]="300">
     <fdb-splitter defaultPaneId="one">
         <fdb-splitter-pane-container>
             <fdb-splitter-split-pane id="one" size="300px"> Split pane One </fdb-splitter-split-pane>

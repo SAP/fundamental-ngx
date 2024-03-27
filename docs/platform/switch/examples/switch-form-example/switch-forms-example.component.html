@@ -45,4 +45,4 @@
         <span role="alert" aria-atomic="true"> Selection is required </span>
     }
 </ng-template>
-<div style="padding-left: 2rem">form value: {{ customForm.getRawValue() | json }}</div>
+<div [style.padding-left.rem]="2">form value: {{ customForm.getRawValue() | json }}</div>

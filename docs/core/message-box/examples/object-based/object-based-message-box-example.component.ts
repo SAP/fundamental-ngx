@@ -20,7 +20,10 @@ export class ObjectBasedMessageBoxExampleComponent {
     content = 'Strawberries have more vitamin C than oranges.';
     closeReason = '';
 
-    constructor(private _messageBoxService: MessageBoxService, private _cdr: ChangeDetectorRef) {}
+    constructor(
+        private _messageBoxService: MessageBoxService,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     open(): void {
         const content: MessageBoxContent = {

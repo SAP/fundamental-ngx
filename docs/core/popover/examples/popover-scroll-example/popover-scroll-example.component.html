@@ -8,7 +8,7 @@
         ></button
     ></fd-popover-control>
     <fd-popover-body>
-        <div style="padding: 12px">Start scrolling to see behaviour</div>
+        <div [style.padding.px]="12">Start scrolling to see behaviour</div>
     </fd-popover-body>
 </fd-popover>
 
@@ -24,7 +24,7 @@
         ></button
     ></fd-popover-control>
     <fd-popover-body>
-        <div style="padding: 12px">Start scrolling to see behaviour</div>
+        <div [style.padding.px]="12">Start scrolling to see behaviour</div>
     </fd-popover-body>
 </fd-popover>
 
@@ -40,13 +40,13 @@
         ></button
     ></fd-popover-control>
     <fd-popover-body>
-        <div style="padding: 12px">Start scrolling to see behaviour</div>
+        <div [style.padding.px]="12">Start scrolling to see behaviour</div>
     </fd-popover-body>
 </fd-popover>
 
 <br /><br /><br />
 
-<label fd-form-label style="display: inline-block">Reposition Scroll strategy</label>
+<label fd-form-label [style.display]="'inline-block'">Reposition Scroll strategy</label>
 <fd-checkbox [(ngModel)]="autoClose" (ngModelChange)="refreshRepositionScrollStrategy()">
     Close the overlay once the user has scrolled away completely?
 </fd-checkbox>
@@ -59,6 +59,6 @@
         ></button
     ></fd-popover-control>
     <fd-popover-body>
-        <div style="padding: 12px">Start scrolling to see behaviour</div>
+        <div [style.padding.px]="12">Start scrolling to see behaviour</div>
     </fd-popover-body>
 </fd-popover>

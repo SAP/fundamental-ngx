@@ -1,16 +1,16 @@
 <p>Drop predicate logic:</p>
-<div style="margin-bottom: 1rem">
+<div [style.margin-bottom.rem]="1">
     <fd-segmented-button [(ngModel)]="dropMode">
         <button fd-button value="all">Enable D&D for all items</button>
         <button fd-button value="none">Disable D&D for all items</button>
         <button fd-button value="odd">Enable D&D for odd items in the list</button>
     </fd-segmented-button>
 </div>
-<div style="margin-bottom: 1rem">
+<div [style.margin-bottom.rem]="1">
     <fd-checkbox [(ngModel)]="simulateDelay" label="Simulate delay"></fd-checkbox>
 </div>
 <p>Dragover predicate logic:</p>
-<div style="margin-bottom: 1rem">
+<div [style.margin-bottom.rem]="1">
     <fd-segmented-button [(ngModel)]="dragMode">
         <button fd-button value="all">All items can be dragged over another items</button>
         <button fd-button value="none">Items cannot be dragged over each other</button>
@@ -18,7 +18,7 @@
     </fd-segmented-button>
 </div>
 <fd-busy-indicator
-    style="width: 20rem"
+    [style.width.rem]="20"
     [loading]="loading"
     [block]="true"
     aria-labelledby="fd-busy-indicator-label-1"
@@ -27,7 +27,7 @@
     <div
         class="fdk-sortable-list"
         fdkDndList
-        style="width: 20rem"
+        [style.width.rem]="20"
         [dropPredicate]="predicate"
         [dropMode]="'shift'"
         [items]="values"

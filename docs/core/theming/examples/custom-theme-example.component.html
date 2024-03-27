@@ -1,5 +1,5 @@
 @for (theme of themes; track theme) {
-    <span style="padding: 10px; display: inline-block">
+    <span [style.padding.px]="10" [style.display]="'inline-block'">
         <button fd-button (click)="selectTheme(theme.id)" [label]="theme.name"></button>
     </span>
 }

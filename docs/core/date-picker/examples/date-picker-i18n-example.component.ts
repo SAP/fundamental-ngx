@@ -28,7 +28,7 @@ const CUSTOM_DATETIME_FORMATS = {
     selector: 'fd-datepicker-i18n-example',
     template: `
         <label fd-form-label for="language">Select language:</label>
-        <fd-segmented-button id="language" style="margin-bottom:20px">
+        <fd-segmented-button id="language" [style.margin-bottom.px]="20">
             <button fd-button label="French" (click)="setLocale('fr')" [class.is-selected]="'fr' === locale"></button>
             <button fd-button label="German" (click)="setLocale('de')" [class.is-selected]="'de' === locale"></button>
             <button

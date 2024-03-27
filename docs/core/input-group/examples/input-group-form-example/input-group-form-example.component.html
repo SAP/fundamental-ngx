@@ -13,7 +13,7 @@
             </fd-input-group>
         </div>
         <small>Disabled Input Value: {{ customForm.controls.disabledInput.value }}</small>
-        <div fd-form-item style="margin-top: 1rem">
+        <div fd-form-item [style.margin-top.rem]="1">
             <label fd-form-label for="fd-input-group-form-2" id="fd-input-group-form-label-2">Enabled Input</label>
             <fd-input-group formControlName="enabledInput" ariaLabelledBy="fd-input-group-form-label-2">
             </fd-input-group>

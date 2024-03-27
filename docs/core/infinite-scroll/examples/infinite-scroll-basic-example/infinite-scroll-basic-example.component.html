@@ -2,10 +2,14 @@
     fdInfiniteScroll
     (onScrollAction)="loadMoreElements()"
     [scrollPercent]="80"
-    style="max-height: 120px; overflow-y: scroll; border: 1px solid black"
+    [style.max-height.px]="120"
+    [style.overflow-y]="'scroll'"
+    [style.border-width.px]="1"
+    [style.border-style]="'solid'"
+    [style.border-color]="'black'"
 >
     @for (element of displayedElements; track element) {
-        <div style="height: 30px">
+        <div [style.height.px]="30">
             {{ element.label }}
         </div>
     }
