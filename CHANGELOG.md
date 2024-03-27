@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.32](https://github.com/SAP/fundamental-ngx/compare/v0.43.31...v0.43.32) (2024-03-26)
+
+
+### Bug Fixes
+
+* roll back tabindex change ([#11641](https://github.com/SAP/fundamental-ngx/issues/11641)) ([926caa3](https://github.com/SAP/fundamental-ngx/commit/926caa3942fe76b67fcb86515eacd781a323f166))
+
+
+
+
+
+## [0.43.31](https://github.com/SAP/fundamental-ngx/compare/v0.43.30...v0.43.31) (2024-03-25)
+
+
+### Bug Fixes
+
+* **platform:** table empty cell screenreader text ([#11608](https://github.com/SAP/fundamental-ngx/issues/11608)) ([dbdaa51](https://github.com/SAP/fundamental-ngx/commit/dbdaa510084e94eff2500ca6522064862d1acf99))
+* use paste event to open popover in fd-combobox ([#11565](https://github.com/SAP/fundamental-ngx/issues/11565)) ([3511002](https://github.com/SAP/fundamental-ngx/commit/351100212744fe4565b13126230494a4656598e3))
+
+
+
+
+
 ## [0.43.30](https://github.com/SAP/fundamental-ngx/compare/v0.43.29...v0.43.30) (2024-03-22)
 
 

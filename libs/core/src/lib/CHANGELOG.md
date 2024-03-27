@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.32](https://github.com/SAP/fundamental-ngx/compare/v0.43.31...v0.43.32) (2024-03-26)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.43.31](https://github.com/SAP/fundamental-ngx/compare/v0.43.30...v0.43.31) (2024-03-25)
+
+
+### Bug Fixes
+
+* use paste event to open popover in fd-combobox ([#11565](https://github.com/SAP/fundamental-ngx/issues/11565)) ([3511002](https://github.com/SAP/fundamental-ngx/commit/351100212744fe4565b13126230494a4656598e3))
+
+
+
+
+
 ## [0.43.30](https://github.com/SAP/fundamental-ngx/compare/v0.43.29...v0.43.30) (2024-03-22)
 
 
