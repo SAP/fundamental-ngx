@@ -24,7 +24,7 @@ import {
 import { ListInfiniteScrollExampleComponent } from './examples/list-infinite-scroll-example.component';
 import { ListInteractiveExampleComponent } from './examples/list-interactive-example/list-interactive-example.component';
 import { ListKeyboardExampleComponent } from './examples/list-keyboard-example/list-keyboard-example.component';
-import { ListLoadingExampleComponent } from './examples/list-loading-example/list-loading-examples.component';
+import { ListLoadingExampleComponent } from './examples/list-loading-example/list-loading-example.component';
 import { ListNavIndicatorExampleComponent } from './examples/list-nav-indicator-example/list-nav-indicator-example.component';
 import { ListNavigationExampleComponent } from './examples/list-navigation-example/list-navigation-example.component';
 import { ListSelectionExampleComponent } from './examples/list-selection-example/list-selection-example.component';
@@ -51,6 +51,7 @@ const infiniteScrollSrcHtml = 'list-infinite-scroll-example.component.html';
 const infiniteScrollSrcTs = 'list-infinite-scroll-example.component.ts';
 const listInteractiveHtml = 'list-interactive-example/list-interactive-example.component.html';
 const listLoadingHtml = 'list-loading-example/list-loading-example.component.html';
+const listLoadingTs = 'list-loading-example/list-loading-example.component.ts';
 
 @Component({
     selector: 'app-list',
@@ -242,6 +243,12 @@ export class ListDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(listLoadingHtml),
             fileName: 'list-loading-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(listLoadingTs),
+            fileName: 'list-loading-example',
+            component: 'ListLoadingExampleComponent'
         }
     ];
     readonly _secondaryListItemTypes = _secondaryListItemTypes;
