@@ -1,4 +1,4 @@
-const { getInput, info } = require('@actions/core');
+const { getInput, info, error } = require('@actions/core');
 const { npmPublish } = require('@jsdevtools/npm-publish');
 const { resolve } = require('path');
 
@@ -11,7 +11,7 @@ const publishPackage = async ({ packageJsonPath, tag, token, access }) => {
     });
 };
 
-const handleError = async (error, retryData) => {
+const handleError = async (exception, retryData) => {
     const { currentTryNumber, retryCount, ...rest } = retryData;
     if (currentTryNumber < retryCount) {
         await publishWithRetry({
@@ -19,7 +19,9 @@ const handleError = async (error, retryData) => {
             currentTryNumber: currentTryNumber + 1
         });
     } else {
-        throw error;
+        error(`Failed to publish package after ${retryCount} attempts`);
+        error(exception);
+        throw exception;
     }
 };
 
