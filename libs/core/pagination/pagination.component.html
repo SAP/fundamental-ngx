@@ -97,7 +97,7 @@
                 class="fd-pagination__input"
                 #currentPageModel="ngModel"
                 [ngModel]="currentPage"
-                [attr.aria-label]="
+                [ariaLabel]="
                     'corePagination.inputAriaLabel' | fdTranslate: { pageNumber: currentPage, totalCount: _totalPages }
                 "
                 (keydown.enter)="goToPage(currentPageModel.value)"
