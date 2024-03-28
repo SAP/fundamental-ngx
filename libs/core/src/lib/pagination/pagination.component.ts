@@ -377,6 +377,11 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     /** @hidden */
+    ngAfterViewInit(): void {
+        this._focusKeyManagerList?.focusKeyManager?.withVerticalOrientation(false);
+    }
+
+    /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }

@@ -97,6 +97,7 @@
         </label>
 
         <input
+            [attr.id]="id + '-input'"
             #pageInputElement
             fdkFocusKeyManagerItem
             fd-form-control
@@ -110,7 +111,7 @@
             class="fd-pagination__input"
             #currentPageModel="ngModel"
             [ngModel]="currentPage"
-            [attr.aria-label]="
+            [ariaLabel]="
                 inputAriaLabel
                     ? inputAriaLabel(currentPage, _totalPages)
                     : ('corePagination.inputAriaLabel'
