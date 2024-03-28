@@ -13,7 +13,7 @@ import {
 import { ListBylineBorderlessExampleComponent } from './examples/list-byline-borderless-example/list-byline-borderless-example.component';
 import { ListBylineButtonExampleComponent } from './examples/list-byline-button-example/list-byline-button-example.component';
 import { ListBylineInteractiveExampleComponent } from './examples/list-byline-interactive-example/list-byline-interactive-example.component';
-import { ListBylineLoadingExampleComponent } from './examples/list-byline-loading-example/list-byline-loading-examples.component';
+import { ListBylineLoadingExampleComponent } from './examples/list-byline-loading-example/list-byline-loading-example.component';
 import { ListBylineNavigationExampleComponent } from './examples/list-byline-navigation-example/list-byline-navigation-example.component';
 import { ListBylineSelectionExampleComponent } from './examples/list-byline-selection-example/list-byline-selection-example.component';
 import { ListBylineStandardExampleComponent } from './examples/list-byline-standard-example/list-byline-standard-example.component';
@@ -32,6 +32,7 @@ const bylineInteractiveHtml = 'list-byline-interactive-example/list-byline-inter
 const bylineWrapTs = 'list-byline-wrap-example/list-byline-wrap-example.component.ts';
 const bylineWrapHtml = 'list-byline-wrap-example/list-byline-wrap-example.component.html';
 const bylineLoadingSrcHtml = 'list-byline-loading-example/list-byline-loading-example.component.html';
+const bylineLoadingSrcTs = 'list-byline-loading-example/list-byline-loading-example.component.ts';
 const bylineUnreadSrcHtml = 'list-byline-unread-example/list-byline-unread-example.component.html';
 
 @Component({
@@ -150,6 +151,12 @@ export class ListBylineDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(bylineLoadingSrcHtml),
             fileName: 'list-byline-loading-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(bylineLoadingSrcTs),
+            fileName: 'list-byline-loading-example',
+            component: 'ListBylineLoadingExampleComponent'
         }
     ];
 }
