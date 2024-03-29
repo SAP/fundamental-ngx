@@ -261,6 +261,10 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
             this._menuItem.focus();
         } else {
             this._element.nativeElement.focus();
+            // TODO: remove with fdp-menu-button deprecation
+            if (this._element.nativeElement.tagName.toLowerCase() === 'fdp-menu-button') {
+                (this._element.nativeElement.firstChild as HTMLElement).focus();
+            }
         }
         this._overlayRef.detach();
         this._isMenuOpen = false;
