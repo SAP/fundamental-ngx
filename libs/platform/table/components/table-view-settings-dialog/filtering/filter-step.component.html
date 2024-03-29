@@ -1,5 +1,12 @@
 <ng-template #titleTemplate>
-    <button fd-button fdType="transparent" glyph="navigation-left-arrow" (click)="back.emit()"></button>
+    <button
+        fd-button
+        fdType="transparent"
+        glyph="navigation-left-arrow"
+        [title]="'platformTable.filterDialogBackToColumns' | fdTranslate"
+        [attr.aria-label]="'platformTable.filterDialogBackToColumns' | fdTranslate"
+        (click)="back.emit()"
+    ></button>
     <h4 fd-title [headerSize]="4">
         {{ 'platformTable.filterDialogFilterByLabel' | fdTranslate: { filterLabel: filter.label } }}
     </h4>
