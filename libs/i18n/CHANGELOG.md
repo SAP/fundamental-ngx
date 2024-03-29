@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.1...v0.49.3-rc.2) (2024-03-29)
+
+
+### Bug Fixes
+
+* **platform:** added title to filter navigate back button ([#11658](https://github.com/SAP/fundamental-ngx/issues/11658)) ([165a23c](https://github.com/SAP/fundamental-ngx/commit/165a23c1c4189b80e90dd6f72a576a35a83a7558))
+
+
+
+
+
 ## [0.49.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.49.1-rc.7...v0.49.3-rc.1) (2024-03-28)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
