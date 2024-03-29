@@ -1,6 +1,7 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { BooleanInput, coerceArray, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -67,7 +68,7 @@ let paginationUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     preserveWhitespaces: true
 })
-export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
+export class PaginationComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy {
     /** Id for the pagination component. If omitted, a unique one is generated. */
     @Input()
     id: string = 'fd-pagination-' + paginationUniqueId++;
