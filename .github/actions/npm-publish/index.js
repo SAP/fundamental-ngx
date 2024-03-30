@@ -1,4 +1,4 @@
-const { getInput, info, error } = require('@actions/core');
+const { info, error } = require('@actions/core');
 const { npmPublish } = require('@jsdevtools/npm-publish');
 const { resolve } = require('path');
 
@@ -7,6 +7,7 @@ const publishPackage = async ({ packageJsonPath, tag, token, access }) => {
         package: packageJsonPath,
         token,
         tag,
+        strategy: 'upgrade',
         access
     });
 };
@@ -35,10 +36,12 @@ const publishWithRetry = async (publishData) => {
 };
 
 const publishAllProjects = async () => {
-    const projectNames = JSON.parse(getInput('projects'));
-    const projects = projectNames.map((projectName) => resolve(`dist/libs/${projectName}/package.json`));
-    const tag = getInput('releaseTag');
-    const npmToken = getInput('token');
+    const projectNames = require('fs').readdirSync('dist/libs');
+    const projects = projectNames
+        .map((projectName) => resolve(`dist/libs/${projectName}/package.json`))
+        .filter((path) => require('fs').existsSync(path));
+    const tag = 'prerelease';
+    const npmToken = '---------npm-token-------';
     const retryCount = 3;
     for (const packageJsonPath of projects) {
         await publishWithRetry({
