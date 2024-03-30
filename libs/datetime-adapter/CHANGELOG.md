@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.4...v0.49.3-rc.5) (2024-03-30)
+
+
+### Bug Fixes
+
+* allow synthetic default import ([#11664](https://github.com/SAP/fundamental-ngx/issues/11664)) ([bf60479](https://github.com/SAP/fundamental-ngx/commit/bf604796d0fc9a6507d8f686d5822b46b96d8ed5))
+
+
+
+
+
 ## [0.49.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.3...v0.49.3-rc.4) (2024-03-30)
 
 **Note:** Version bump only for package @fundamental-ngx/datetime-adapter
