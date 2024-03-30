@@ -17,7 +17,8 @@
         "forceConsistentCasingInFileNames": true,
         "noPropertyAccessFromIndexSignature": true,
         "noImplicitReturns": false,
-        "target": "es2022"
+        "target": "es2022",
+        "allowSyntheticDefaultImports": true
     },
     "angularCompilerOptions": {
         "strictInjectionParameters": true,

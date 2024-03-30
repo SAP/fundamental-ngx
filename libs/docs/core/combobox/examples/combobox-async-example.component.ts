@@ -1,9 +1,8 @@
 import { AsyncPipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Component({
     selector: 'fd-combobox-async-example',
@@ -13,12 +12,23 @@ import { Observable } from 'rxjs';
 })
 export class ComboboxAsyncExampleComponent implements OnInit {
     searchTerm = '';
+    data = [
+        'Apple',
+        'Pineapple',
+        'Tomato',
+        'Grapes',
+        'Pumpkin',
+        'Banana',
+        'Kiwi',
+        'Raspberries',
+        'Watermelons',
+        'Nectarines',
+        'Oranges'
+    ];
 
     dropdownValues: Observable<string[]>;
 
-    constructor(private http: HttpClient) {}
-
     ngOnInit(): void {
-        this.dropdownValues = this.http.get<any[]>('./assets/search-input-values.json');
+        this.dropdownValues = of(this.data);
     }
 }
