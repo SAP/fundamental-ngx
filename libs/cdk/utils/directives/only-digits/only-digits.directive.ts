@@ -4,6 +4,7 @@ import {
     C,
     DASH,
     DELETE,
+    DOWN_ARROW,
     END,
     ENTER,
     ESCAPE,
@@ -12,6 +13,7 @@ import {
     NUMPAD_MINUS,
     RIGHT_ARROW,
     TAB,
+    UP_ARROW,
     V,
     X
 } from '@angular/cdk/keycodes';
@@ -44,8 +46,20 @@ export class OnlyDigitsDirective {
     @HostListener('keydown', ['$event'])
     onKeyDown(e: KeyboardEvent): void {
         if (
-            // Allow: Delete, Backspace, Tab, Escape, Enter, End, Home, Arrow Left, Arrow Right
-            KeyUtil.isKeyCode(e, [DELETE, BACKSPACE, TAB, ESCAPE, ENTER, END, HOME, LEFT_ARROW, RIGHT_ARROW]) ||
+            // Allow: Delete, Backspace, Tab, Escape, Enter, End, Home, Arrow Left, Arrow Right, Arrow Up, Arrow Down
+            KeyUtil.isKeyCode(e, [
+                DELETE,
+                BACKSPACE,
+                TAB,
+                ESCAPE,
+                ENTER,
+                END,
+                HOME,
+                LEFT_ARROW,
+                RIGHT_ARROW,
+                UP_ARROW,
+                DOWN_ARROW
+            ]) ||
             // Allow: Ctrl+(A/C/V/X) and Cmd+(A/C/V/X) (Mac)
             (KeyUtil.isKeyCode(e, [A, C, V, X]) && (e.ctrlKey || e.metaKey))
         ) {
