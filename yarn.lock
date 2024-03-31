@@ -142,12 +142,35 @@
     rxjs "7.8.1"
     source-map "0.7.4"
 
+"@angular-devkit/core@17.3.2":
+  version "17.3.2"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-17.3.2.tgz#877c9443a4042c794a84857f4193b309459e3bea"
+  integrity sha512-1vxKo9+pdSwTOwqPDSYQh84gZYmCJo6OgR5+AZoGLGMZSeqvi9RG5RiUcOMLQYOnuYv0arlhlWxz0ZjyR8ApKw==
+  dependencies:
+    ajv "8.12.0"
+    ajv-formats "2.1.1"
+    jsonc-parser "3.2.1"
+    picomatch "4.0.1"
+    rxjs "7.8.1"
+    source-map "0.7.4"
+
 "@angular-devkit/schematics@17.3.0":
   version "17.3.0"
   resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-17.3.0.tgz#35e47c5c6aff8192643746d16e777c7c2400ded0"
   integrity sha512-EW4Y8W/KTlvvT2fw3bh9hY7quDF2b9EaF+KftEqoDRWYbw0tlF8hWIdlfA6JxQC12d6uefh3kDNj5am0Il2oNQ==
   dependencies:
     "@angular-devkit/core" "17.3.0"
+    jsonc-parser "3.2.1"
+    magic-string "0.30.8"
+    ora "5.4.1"
+    rxjs "7.8.1"
+
+"@angular-devkit/schematics@17.3.2":
+  version "17.3.2"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-17.3.2.tgz#52250e936034f5292e3da85a9eb5304edf716fb8"
+  integrity sha512-AYO6oc6QpFGigc1KiDzEVT1CeLnwvnIedU5Q/U3JDZ/Yqmvgc09D64g9XXER2kg6tV7iEgLxiYnonIAQOHq7eA==
+  dependencies:
+    "@angular-devkit/core" "17.3.2"
     jsonc-parser "3.2.1"
     magic-string "0.30.8"
     ora "5.4.1"
@@ -4782,6 +4805,15 @@
   dependencies:
     "@angular-devkit/core" "17.3.0"
     "@angular-devkit/schematics" "17.3.0"
+    jsonc-parser "3.2.1"
+
+"@schematics/angular@17.3.2":
+  version "17.3.2"
+  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-17.3.2.tgz#7e8227ef7c04bbc7b876c22a6f7d0146c0de2d2d"
+  integrity sha512-zPINvow0Qo6ionnDl25ZzSSLDyDxBjqRPEJWGHU70expbjXK4A2caQT9P/8ImhapbJAXJCfxg4GF9z1d/sWe4w==
+  dependencies:
+    "@angular-devkit/core" "17.3.2"
+    "@angular-devkit/schematics" "17.3.2"
     jsonc-parser "3.2.1"
 
 "@sideway/address@^4.1.3":
@@ -13400,12 +13432,12 @@ jsonc-eslint-parser@^2.1.0:
     espree "^9.0.0"
     semver "^7.3.5"
 
-jsonc-parser@3.2.0, jsonc-parser@^3.0.0, jsonc-parser@^3.2.0:
+jsonc-parser@3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/jsonc-parser/-/jsonc-parser-3.2.0.tgz#31ff3f4c2b9793f89c67212627c51c6394f88e76"
   integrity sha512-gfFQZrcTc8CnKXp6Y4/CBT3fTc0OVuDofpre4aEeEpSBPV5X5v4+Vmx+8snU7RLPrNHPKSgLxGo9YuQzz20o+w==
 
-jsonc-parser@3.2.1:
+jsonc-parser@3.2.1, jsonc-parser@^3.0.0, jsonc-parser@^3.2.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/jsonc-parser/-/jsonc-parser-3.2.1.tgz#031904571ccf929d7670ee8c547545081cb37f1a"
   integrity sha512-AilxAyFOAcK5wA1+LeaySVBrHsGQvUFCDWXKpZjzaL0PqW+xfBOttn8GNtWKFWqneyMZj41MWF9Kl6iPWLwgOA==
