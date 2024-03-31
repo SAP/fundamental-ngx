@@ -51,7 +51,7 @@
         "@nx/angular": "18.1.2",
         "@sap-theming/theming-base-content": "11.13.0",
         "@stackblitz/sdk": "1.9.0",
-        "@swc/helpers": "0.5.2",
+        "@swc/helpers": "0.5.8",
         "compare-versions": "6.1.0",
         "core-js": "3.26.1",
         "dayjs": "1.11.10",
