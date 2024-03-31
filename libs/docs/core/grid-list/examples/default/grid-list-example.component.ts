@@ -16,7 +16,7 @@ interface GridListItem {
 }
 
 @Component({
-    selector: 'fd-grid-list-default-example',
+    selector: 'fd-grid-list-example',
     templateUrl: './grid-list-example.component.html',
     styleUrls: ['./grid-list-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
