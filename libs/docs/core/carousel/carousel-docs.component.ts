@@ -45,6 +45,8 @@ const carouselLoadingContentTs = 'carousel-loading-content-example.component.ts'
 const carouselLoadingContentHtml = 'carousel-loading-content-example.component.html';
 const carouselAutoSlidesTs = 'carousel-auto-slides-example.component.ts';
 const carouselAutoSlidesHtml = 'carousel-auto-slides-example.component.html';
+const carouselBackgroundTs = 'carousel-background-example.component.ts';
+const carouselBackgroundHtml = 'carousel-background-example.component.html';
 
 @Component({
     selector: 'app-input',
@@ -76,7 +78,8 @@ export class CarouselDocsComponent {
             language: 'html',
             fileName: 'carousel-one-active-item-example',
             component: 'CarouselOneActiveItemExampleComponent',
-            code: getAssetFromModuleAssets(carouselOneActiveItemHtml)
+            code: getAssetFromModuleAssets(carouselOneActiveItemHtml),
+            scssFileCode: getAssetFromModuleAssets(carouselExampleScss)
         },
         {
             language: 'typescript',
@@ -91,7 +94,8 @@ export class CarouselDocsComponent {
             language: 'html',
             fileName: 'carousel-vertical-direction-example',
             component: 'CarouselVerticalDirectionExampleComponent',
-            code: getAssetFromModuleAssets(carouselVerticalHtml)
+            code: getAssetFromModuleAssets(carouselVerticalHtml),
+            scssFileCode: getAssetFromModuleAssets(carouselExampleScss)
         },
         {
             language: 'typescript',
@@ -106,7 +110,8 @@ export class CarouselDocsComponent {
             language: 'typescript',
             fileName: 'carousel-multiple-active-item-example',
             component: 'CarouselMultipleActiveItemExampleComponent',
-            code: getAssetFromModuleAssets(carouselMultipleActiveItemTs)
+            code: getAssetFromModuleAssets(carouselMultipleActiveItemTs),
+            scssFileCode: getAssetFromModuleAssets(carouselExampleScss)
         },
         {
             language: 'html',
@@ -144,7 +149,8 @@ export class CarouselDocsComponent {
             language: 'html',
             fileName: 'carousel-no-page-indicator-example',
             component: 'CarouselNoPageIndicatorExampleComponent',
-            code: getAssetFromModuleAssets(carouselNoIndicatorHtml)
+            code: getAssetFromModuleAssets(carouselNoIndicatorHtml),
+            scssFileCode: getAssetFromModuleAssets(carouselExampleScss)
         }
     ];
 
@@ -159,7 +165,8 @@ export class CarouselDocsComponent {
             language: 'html',
             fileName: 'carousel-hidden-navigation-example',
             component: 'CarouselHiddenNavigationExampleComponent',
-            code: getAssetFromModuleAssets(carouselHiddenNavigationHtml)
+            code: getAssetFromModuleAssets(carouselHiddenNavigationHtml),
+            scssFileCode: getAssetFromModuleAssets(carouselExampleScss)
         }
     ];
 
@@ -174,7 +181,8 @@ export class CarouselDocsComponent {
             language: 'html',
             fileName: 'carousel-content-navigation-example',
             component: 'CarouselContentNavigationExampleComponent',
-            code: getAssetFromModuleAssets(carouselContentNavigatorHtml)
+            code: getAssetFromModuleAssets(carouselContentNavigatorHtml),
+            scssFileCode: getAssetFromModuleAssets(carouselExampleScss)
         }
     ];
 
@@ -189,7 +197,8 @@ export class CarouselDocsComponent {
             language: 'html',
             fileName: 'carousel-looped-navigation-example',
             component: 'CarouselLoopedNavigationExampleComponent',
-            code: getAssetFromModuleAssets(carouselLoopedNavigationHtml)
+            code: getAssetFromModuleAssets(carouselLoopedNavigationHtml),
+            scssFileCode: getAssetFromModuleAssets(carouselExampleScss)
         }
     ];
 
@@ -204,7 +213,8 @@ export class CarouselDocsComponent {
             language: 'html',
             fileName: 'carousel-error-message-example',
             component: 'CarouselErrorMessageExampleComponent',
-            code: getAssetFromModuleAssets(carouselErrorMessageHtml)
+            code: getAssetFromModuleAssets(carouselErrorMessageHtml),
+            scssFileCode: getAssetFromModuleAssets(carouselExampleScss)
         }
     ];
 
@@ -219,7 +229,8 @@ export class CarouselDocsComponent {
             language: 'html',
             fileName: 'carousel-loading-content-example',
             component: 'CarouselLoadingContentExampleComponent',
-            code: getAssetFromModuleAssets(carouselLoadingContentHtml)
+            code: getAssetFromModuleAssets(carouselLoadingContentHtml),
+            scssFileCode: getAssetFromModuleAssets(carouselExampleScss)
         }
     ];
 
@@ -234,7 +245,24 @@ export class CarouselDocsComponent {
             language: 'html',
             fileName: 'carousel-auto-slides-example',
             component: 'CarouselAutoSlidesExampleComponent',
-            code: getAssetFromModuleAssets(carouselAutoSlidesHtml)
+            code: getAssetFromModuleAssets(carouselAutoSlidesHtml),
+            scssFileCode: getAssetFromModuleAssets(carouselExampleScss)
+        }
+    ];
+
+    backgroundExample: ExampleFile[] = [
+        {
+            language: 'typescript',
+            fileName: 'carousel-background-example',
+            component: 'CarouselBackgroundExampleComponent',
+            code: getAssetFromModuleAssets(carouselBackgroundTs)
+        },
+        {
+            language: 'html',
+            fileName: 'carousel-background-example',
+            component: 'CarouselBackgroundExampleComponent',
+            code: getAssetFromModuleAssets(carouselBackgroundHtml),
+            scssFileCode: getAssetFromModuleAssets(carouselExampleScss)
         }
     ];
 }

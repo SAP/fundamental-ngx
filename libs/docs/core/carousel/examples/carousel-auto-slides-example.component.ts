@@ -14,7 +14,7 @@ import {
 @Component({
     selector: 'fd-carousel-auto-slides-example',
     templateUrl: './carousel-auto-slides-example.component.html',
-    styleUrls: ['./carousel-example.component.scss'],
+    styleUrls: ['./carousel-auto-slides-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [

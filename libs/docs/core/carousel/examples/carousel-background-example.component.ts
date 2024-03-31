@@ -5,6 +5,7 @@ import { CarouselComponent, CarouselItemComponent } from '@fundamental-ngx/core/
 @Component({
     selector: 'fd-carousel-background-example',
     templateUrl: './carousel-background-example.component.html',
+    styleUrls: ['./carousel-background-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

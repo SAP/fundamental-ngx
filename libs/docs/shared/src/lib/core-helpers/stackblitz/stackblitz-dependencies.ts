@@ -6,7 +6,7 @@ export class StackblitzDependencies {
         '@fundamental-ngx/i18n',
         '@fundamental-ngx/cx',
         '@fundamental-ngx/btp',
-        '@fundamental-ngx/moment-adapter'
+        '@fundamental-ngx/datetime-adapter'
     ];
 
     private static _ngDependencies: string[] = [

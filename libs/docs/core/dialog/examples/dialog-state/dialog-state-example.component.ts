@@ -10,7 +10,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
 @Component({
     selector: 'fd-dialog-state-example',
     templateUrl: './dialog-state-example.component.html',
-    styleUrls: ['../dialog-examples.component.scss'],
+    styleUrls: ['./dialog-state-example.component.scss'],
     standalone: true,
     imports: [
         DialogModule,
