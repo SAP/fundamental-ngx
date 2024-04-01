@@ -483,6 +483,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Columns',
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
+        filterDialogBackToColumns: 'Navigate back',
         filterDialogNotFilteredLabel: '(Not Filtered)',
         filterDialogFilterByLabel: 'Filter by: {filterLabel}',
         filterDialogFilterTitle: 'Filter',

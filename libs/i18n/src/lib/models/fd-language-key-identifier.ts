@@ -395,6 +395,7 @@ export type FdLanguageKeyIdentifier =
     | 'platformTable.toolbarActionColumnsButtonTitle'
     | 'platformTable.toolbarActionExpandAllButtonTitle'
     | 'platformTable.toolbarActionCollapseAllButtonTitle'
+    | 'platformTable.filterDialogBackToColumns'
     | 'platformTable.filterDialogNotFilteredLabel'
     | 'platformTable.filterDialogFilterByLabel'
     | 'platformTable.filterDialogFilterTitle'

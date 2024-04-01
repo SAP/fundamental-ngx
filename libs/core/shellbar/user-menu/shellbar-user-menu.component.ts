@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ContentChild,
+    EventEmitter,
+    Input,
+    Output,
+    ViewChild
+} from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -6,6 +14,7 @@ import { MenuComponent, MenuModule } from '@fundamental-ngx/core/menu';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
+import { ShellbarUserMenuButtonDirective } from './shellbar-user-menu-button.directive';
 
 /**
  * This Component extends popover component and passes all the options and events from outside to popover component
@@ -16,7 +25,7 @@ import { ShellbarUserMenu } from '../model/shellbar-user-menu';
     templateUrl: './shellbar-user-menu.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [ButtonComponent, MenuModule, AvatarComponent]
+    imports: [ButtonComponent, MenuModule, AvatarComponent, ShellbarUserMenuButtonDirective]
 })
 export class ShellbarUserMenuComponent {
     /** The user data. */
@@ -66,9 +75,22 @@ export class ShellbarUserMenuComponent {
     @Output()
     itemClicked: EventEmitter<void> = new EventEmitter<void>();
 
-    /** Reference to Menu Component */
+    /** @hidden */
     @ViewChild(MenuComponent)
-    menu: MenuComponent;
+    _menu: MenuComponent;
+
+    /** @hidden */
+    @ContentChild(MenuComponent)
+    _contentPassedMenu: MenuComponent;
+
+    /** @hidden */
+    @ContentChild(ShellbarUserMenuButtonDirective)
+    _shellbarUserMenuButton: ShellbarUserMenuButtonDirective;
+
+    /** Reference to Menu Component */
+    get menu(): MenuComponent {
+        return this._contentPassedMenu || this._menu;
+    }
 
     /**
      * @hidden

@@ -18,6 +18,8 @@ export type ButtonType =
     | 'emphasized'
     | 'menu';
 
+export const defaultButtonType = 'standard' as ButtonType;
+
 @Directive()
 export class BaseButton implements HasElementRef {
     /** Whether button is in toggled state. */
@@ -53,7 +55,7 @@ export class BaseButton implements HasElementRef {
      * Default value is set to 'standard'
      */
     @Input()
-    fdType: ButtonType = 'standard';
+    fdType: ButtonType = defaultButtonType;
 
     /**
      * Text rendered inside button component

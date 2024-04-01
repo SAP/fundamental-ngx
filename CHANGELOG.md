@@ -3,6 +3,66 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.4...v0.49.3-rc.5) (2024-03-30)
+
+
+### Bug Fixes
+
+* allow synthetic default import ([#11664](https://github.com/SAP/fundamental-ngx/issues/11664)) ([bf60479](https://github.com/SAP/fundamental-ngx/commit/bf604796d0fc9a6507d8f686d5822b46b96d8ed5))
+
+
+
+
+
+## [0.49.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.3...v0.49.3-rc.4) (2024-03-30)
+
+
+### Bug Fixes
+
+* **core:** pagination accessibility improvements ([#11657](https://github.com/SAP/fundamental-ngx/issues/11657)) ([80a3ecf](https://github.com/SAP/fundamental-ngx/commit/80a3ecfe6c7c0486fed4921741d218e88394580f))
+
+
+
+
+
+## [0.49.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.2...v0.49.3-rc.3) (2024-03-30)
+
+
+### Bug Fixes
+
+* **core, datetime-adapter:** fix few stackblitz examples ([#11663](https://github.com/SAP/fundamental-ngx/issues/11663)) ([c76ad4f](https://github.com/SAP/fundamental-ngx/commit/c76ad4f93f9d74795af0916febf3bd75c33e3658))
+
+
+
+
+
+## [0.49.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.1...v0.49.3-rc.2) (2024-03-29)
+
+
+### Bug Fixes
+
+* **platform:** added title to filter navigate back button ([#11658](https://github.com/SAP/fundamental-ngx/issues/11658)) ([165a23c](https://github.com/SAP/fundamental-ngx/commit/165a23c1c4189b80e90dd6f72a576a35a83a7558))
+
+
+
+
+
+## [0.49.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.49.1-rc.7...v0.49.3-rc.1) (2024-03-28)
+
+
+### Bug Fixes
+
+* **core:** hiding action sheet in shellbar if not needed ([#11653](https://github.com/SAP/fundamental-ngx/issues/11653)) ([f964dbe](https://github.com/SAP/fundamental-ngx/commit/f964dbe2d5e3e191074c64b0f25febee014fe3ba))
+
+
+### Features
+
+* **core:** added ability to render fully custom user menu in shellbar ([40c4669](https://github.com/SAP/fundamental-ngx/commit/40c4669ebf315e63e954fc4e21a79548f6ded73a))
+
+
+
+
+
 ## [0.49.2](https://github.com/SAP/fundamental-ngx/compare/v0.49.1-rc.7...v0.49.2) (2024-03-27)
 
 **Note:** Version bump only for package fundamental-ngx

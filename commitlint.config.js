@@ -18,7 +18,8 @@ const Configuration = {
                 'btp',
                 'cdk',
                 'shared',
-                'i18n'
+                'i18n',
+                'datetime-adapter'
             ]
         ],
         'body-max-line-length': [2, 'always', 400],
