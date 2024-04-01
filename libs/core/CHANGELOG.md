@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.4...v0.49.3-rc.5) (2024-03-30)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.49.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.3...v0.49.3-rc.4) (2024-03-30)
+
+
+### Bug Fixes
+
+* **core:** pagination accessibility improvements ([#11657](https://github.com/SAP/fundamental-ngx/issues/11657)) ([80a3ecf](https://github.com/SAP/fundamental-ngx/commit/80a3ecfe6c7c0486fed4921741d218e88394580f))
+
+
+
+
+
+## [0.49.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.2...v0.49.3-rc.3) (2024-03-30)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 ## [0.49.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.1...v0.49.3-rc.2) (2024-03-29)
 
 **Note:** Version bump only for package @fundamental-ngx/core
