@@ -10,12 +10,14 @@ import {
     OnDestroy,
     Optional,
     Self,
-    ViewContainerRef
+    ViewContainerRef,
+    inject
 } from '@angular/core';
 import { Subscription, fromEvent } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { MenuButtonComponent } from '@fundamental-ngx/platform/menu-button';
 import { MenuItemComponent } from './menu-item.component';
 import { MenuCloseMethod, MenuComponent } from './menu.component';
 
@@ -63,6 +65,8 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
 
     /** @hidden */
     private _menuItemHoverChangeSubscription: Subscription = Subscription.EMPTY;
+
+    private _menuButton = inject(MenuButtonComponent, { host: true, optional: true });
 
     /** @hidden */
     constructor(
@@ -262,6 +266,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
             this._menuItem.focus();
         } else {
             this._element.nativeElement.focus();
+            this._menuButton?._elementRef.nativeElement.children[0].focus();
         }
         this._overlayRef.detach();
         this._isMenuOpen = false;
