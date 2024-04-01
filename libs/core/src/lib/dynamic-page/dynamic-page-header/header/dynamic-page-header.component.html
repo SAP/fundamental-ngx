@@ -1,7 +1,12 @@
 <div class="fd-dynamic-page__main-container">
     <div class="fd-dynamic-page__breadcrumb-title-container">
-        <div class="fd-dynamic-page__breadcrumb-container">
-            <nav aria-label="Breadcrumbs" class="fd-dynamic-page__breadcrumb-wrapper" (click)="stopPropagation($event)">
+        <div class="fd-dynamic-page__breadcrumb-container" *ngIf="_breadcrumbComponentVisible || _actionsSquashed">
+            <nav
+                *ngIf="_breadcrumbComponentVisible"
+                aria-label="Breadcrumbs"
+                class="fd-dynamic-page__breadcrumb-wrapper"
+                (click)="stopPropagation($event)"
+            >
                 <ng-content select="fd-breadcrumb"></ng-content>
             </nav>
             <ng-container *ngIf="_actionsSquashed">

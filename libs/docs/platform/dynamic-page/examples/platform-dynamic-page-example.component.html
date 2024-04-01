@@ -4,7 +4,7 @@
         <fdp-dynamic-page ariaLabel="Example Dynamic Page">
             <fdp-dynamic-page-title [title]="pageTitle" subtitle="Oversized multimaterial sneakers with quilted effect">
                 <!-- breadcrumb content -->
-                <fd-breadcrumb>
+                <ng-template #breadcrumbTemplate>
                     <fd-breadcrumb-item>
                         <a fd-link href="#">Men</a>
                     </fd-breadcrumb-item>
@@ -17,7 +17,7 @@
                     <fd-breadcrumb-item>
                         <span>Jogging</span>
                     </fd-breadcrumb-item>
-                </fd-breadcrumb>
+                </ng-template>
 
                 <fdp-dynamic-page-key-info>
                     <!-- key information content -->

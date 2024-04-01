@@ -69,7 +69,7 @@ export class DynamicPageTitleComponent implements DynamicPageHeader {
     size: DynamicPageResponsiveSize;
 
     /** template of BreadsCrumbs */
-    @ViewChild('breadCrumbTemplate')
+    @ContentChild('breadcrumbTemplate')
     breadcrumbTemplate: TemplateRef<any>;
 
     /** reference to global actions component */

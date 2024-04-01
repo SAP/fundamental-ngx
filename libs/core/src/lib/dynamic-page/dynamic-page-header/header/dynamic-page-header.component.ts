@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    AfterViewChecked,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -46,7 +47,9 @@ export const ActionSquashBreakpointPx = 1280;
         }
     ]
 })
-export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDestroy, DynamicPageHeader {
+export class DynamicPageHeaderComponent
+    implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy, DynamicPageHeader
+{
     /** @hidden */
     _collapsed = false;
 
@@ -100,6 +103,9 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     _actionsSquashed = false;
 
     /** @hidden */
+    _breadcrumbComponentVisible = false;
+
+    /** @hidden */
     _size: DynamicPageResponsiveSize;
 
     /** @hidden **/
@@ -127,6 +133,15 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
             this._collapsed = collapsed;
             this._changeDetRef.markForCheck();
         });
+
+        if (this._breadcrumbComponent) {
+            this._breadcrumbComponentVisible = true;
+        }
+    }
+
+    /** @hidden */
+    ngAfterViewChecked(): void {
+        this._changeDetRef.detectChanges();
     }
 
     /** @hidden */
