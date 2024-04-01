@@ -12,7 +12,7 @@
                     {{ collapsed ? 'collapsed' : 'not collapsed' }} header
                 </ng-container>
                 <!-- breadcrumb content -->
-                <fd-breadcrumb>
+                <ng-template #breadcrumbTemplate>
                     <fd-breadcrumb-item>
                         <a fd-link href="#">Men</a>
                     </fd-breadcrumb-item>
@@ -25,7 +25,7 @@
                     <fd-breadcrumb-item>
                         <span>Jogging</span>
                     </fd-breadcrumb-item>
-                </fd-breadcrumb>
+                </ng-template>
                 <fdp-dynamic-page-key-info> LAST DAY OF SALE </fdp-dynamic-page-key-info>
                 <fdp-dynamic-page-title-image>
                     <fd-avatar image="https://picsum.photos/id/1018/400" size="s"></fd-avatar>
