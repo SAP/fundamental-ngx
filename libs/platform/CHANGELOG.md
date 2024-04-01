@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.3-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.5...v0.49.3-rc.6) (2024-04-01)
+
+
+### Bug Fixes
+
+* **platform:** dialog aria-labelledBy for vhd ([#11650](https://github.com/SAP/fundamental-ngx/issues/11650)) ([cb10cbf](https://github.com/SAP/fundamental-ngx/commit/cb10cbf7e49daabfa2b308d8c642bcc4bdf3b691))
+
+
+
+
+
 ## [0.49.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.4...v0.49.3-rc.5) (2024-03-30)
 
 **Note:** Version bump only for package @fundamental-ngx/platform

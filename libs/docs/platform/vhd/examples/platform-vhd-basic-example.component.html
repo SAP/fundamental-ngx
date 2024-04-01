@@ -26,7 +26,6 @@
     [dataSource]="dataSource"
     [tokenValidator]="validator"
     (valueChange)="valueChange($event)"
-    headerId="fdp-vhd-header-1"
 >
     @for (filter of filters; track filter; let i = $index) {
         @if (filter.key === 'verified') {
