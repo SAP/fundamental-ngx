@@ -102,6 +102,12 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
      */
     @Input() expandContent = true;
 
+    /**
+     * Whether dynamic page has position relative.
+     * This is needed in cases where Dynamic Page is used in Flexible Column Layout and has a floating footer
+     */
+    @Input() positionRelative = false;
+
     /** @hidden reference to header component  */
     @ContentChild(DynamicPageSubheaderComponent)
     _pageSubheaderComponent: DynamicPageSubheaderComponent;
