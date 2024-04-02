@@ -33,6 +33,7 @@ import {
     DynamicPageFooterComponent as CoreDynamicPageFooterComponent,
     DynamicPageHeaderComponent as CoreDynamicPageHeaderComponent,
     DynamicPage,
+    DynamicPageBreadcrumbComponent,
     DynamicPageGlobalActionsComponent,
     DynamicPageHeaderSubtitleDirective,
     DynamicPageHeaderTitleDirective,
@@ -105,7 +106,8 @@ export class DynamicPageTabChangeEvent {
         DynamicPageContentComponent,
         DynamicPageFooterComponent,
         CoreDynamicPageFooterComponent,
-        CoreDynamicPageContentComponent
+        CoreDynamicPageContentComponent,
+        DynamicPageBreadcrumbComponent
     ]
 })
 export class DynamicPageComponent

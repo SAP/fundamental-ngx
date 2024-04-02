@@ -4,20 +4,22 @@
         <fdp-dynamic-page size="medium" ariaLabel="Example Dynamic Page">
             <fdp-dynamic-page-title [title]="pageTitle" subtitle="Oversized multimaterial sneakers with quilted effect">
                 <!-- breadcrumb content -->
-                <ng-template #breadcrumbTemplate>
-                    <fd-breadcrumb-item>
-                        <a fd-link href="#">Men</a>
-                    </fd-breadcrumb-item>
-                    <fd-breadcrumb-item>
-                        <a fd-link href="#">Shoes</a>
-                    </fd-breadcrumb-item>
-                    <fd-breadcrumb-item>
-                        <a fd-link href="#">Running Shoes</a>
-                    </fd-breadcrumb-item>
-                    <fd-breadcrumb-item>
-                        <span>Jogging</span>
-                    </fd-breadcrumb-item>
-                </ng-template>
+                <fdp-dynamic-page-breadcrumb>
+                    <fd-breadcrumb>
+                        <fd-breadcrumb-item>
+                            <a fd-link href="#">Men</a>
+                        </fd-breadcrumb-item>
+                        <fd-breadcrumb-item>
+                            <a fd-link href="#">Shoes</a>
+                        </fd-breadcrumb-item>
+                        <fd-breadcrumb-item>
+                            <a fd-link href="#">Running Shoes</a>
+                        </fd-breadcrumb-item>
+                        <fd-breadcrumb-item>
+                            <span>Jogging</span>
+                        </fd-breadcrumb-item>
+                    </fd-breadcrumb>
+                </fdp-dynamic-page-breadcrumb>
                 <fdp-dynamic-page-key-info>
                     <!-- key information content -->
                     LAST DAY OF SALE

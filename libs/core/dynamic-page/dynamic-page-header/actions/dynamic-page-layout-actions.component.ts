@@ -17,7 +17,8 @@ import { DynamicPageBaseActions } from './dynamic-page-base-actions';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
-        role: 'toolbar'
+        role: 'toolbar',
+        '[style.margin-inline-start]': '"auto"'
     },
     standalone: true
 })

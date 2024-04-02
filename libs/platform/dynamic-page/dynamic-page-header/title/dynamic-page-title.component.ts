@@ -14,6 +14,7 @@ import { DynamicPageHeaderSubtitleDirective } from '../../directives/dynamic-pag
 import { DynamicPageHeaderTitleDirective } from '../../directives/dynamic-page-header-title.directive';
 import { DynamicPageGlobalActionsComponent } from '../actions/global-actions/dynamic-page-global-actions.component';
 import { DynamicPageLayoutActionsComponent } from '../actions/layout-actions/dynamic-page-layout-actions.component';
+import { DynamicPageBreadcrumbComponent } from '../breadcrumb/dynamic-page-breadcrumb.component';
 import { DynamicPageKeyInfoComponent } from '../key-info/dynamic-page-key-info.component';
 import { DynamicPageTitleImageComponent } from './dynamic-page-title-image.component';
 
@@ -69,9 +70,9 @@ export class DynamicPageTitleComponent implements DynamicPageHeader {
     @Input()
     size: DynamicPageResponsiveSize;
 
-    /** template of BreadsCrumbs */
-    @ContentChild('breadcrumbTemplate')
-    breadcrumbTemplate: TemplateRef<any>;
+    /** reference to breadcrumb component */
+    @ContentChild(DynamicPageBreadcrumbComponent)
+    breadcrumbComponent: DynamicPageBreadcrumbComponent;
 
     /** reference to global actions component */
     @ContentChild(DynamicPageGlobalActionsComponent)

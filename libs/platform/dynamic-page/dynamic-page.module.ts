@@ -6,6 +6,7 @@ import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page
 import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-footer.component';
 import { DynamicPageGlobalActionsComponent } from './dynamic-page-header/actions/global-actions/dynamic-page-global-actions.component';
 import { DynamicPageLayoutActionsComponent } from './dynamic-page-header/actions/layout-actions/dynamic-page-layout-actions.component';
+import { DynamicPageBreadcrumbComponent } from './dynamic-page-header/breadcrumb/dynamic-page-breadcrumb.component';
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
 import { DynamicPageKeyInfoComponent } from './dynamic-page-header/key-info/dynamic-page-key-info.component';
 import { DynamicPageTitleImageComponent } from './dynamic-page-header/title/dynamic-page-title-image.component';
@@ -16,6 +17,7 @@ const components = [
     DynamicPageComponent,
     DynamicPageTitleComponent,
     DynamicPageKeyInfoComponent,
+    DynamicPageBreadcrumbComponent,
     DynamicPageGlobalActionsComponent,
     DynamicPageLayoutActionsComponent,
     DynamicPageHeaderComponent,
