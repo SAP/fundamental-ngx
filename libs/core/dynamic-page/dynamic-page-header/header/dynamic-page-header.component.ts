@@ -10,7 +10,8 @@ import {
     OnInit,
     Renderer2,
     ViewEncapsulation,
-    computed
+    computed,
+    signal
 } from '@angular/core';
 
 import { Subject } from 'rxjs';
@@ -38,7 +39,7 @@ export const ActionSquashBreakpointPx = 1280;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
-        '[attr.tabindex]': '0'
+        '[class.is-focus]': 'headingFocused$()'
     },
     providers: [
         {
@@ -101,6 +102,9 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
 
     /** @hidden */
     _size: DynamicPageResponsiveSize;
+
+    /** @hidden */
+    protected headingFocused$ = signal(false);
 
     /** @hidden **/
     private readonly _onDestroy$: Subject<void> = new Subject<void>();

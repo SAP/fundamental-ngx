@@ -13,10 +13,15 @@
                 <ng-content select="fd-facet"></ng-content>
             }
             <div class="fd-dynamic-page__title-subtitle-container">
-                <h2 class="fd-dynamic-page__title-container">
+                <div class="fd-dynamic-page__title-container">
                     <span
+                        tabindex="0"
+                        role="heading"
+                        aria-level="2"
                         class="fd-dynamic-page__title"
                         [class.fd-dynamic-page__title--wrap]="titleWrap"
+                        (focus)="headingFocused$.set(true)"
+                        (blur)="headingFocused$.set(false)"
                         fdkIgnoreClickOnSelection
                     >
                         <ng-template [ngTemplateOutlet]="_titleTemplate ? titleRef : defaultTitle"></ng-template>
@@ -28,7 +33,7 @@
                             <ng-template [ngTemplateOutlet]="dynamicPageLayoutActionsRef"></ng-template>
                         }
                     </div>
-                </h2>
+                </div>
                 @if (_dynamicPageService.collapsed() && (subtitle || _subtitleTemplate)) {
                     <div
                         class="fd-dynamic-page__subtitle"
