@@ -19,6 +19,7 @@ import { ShellbarMenuItem } from '../model/shellbar-menu-item';
 @Component({
     selector: 'fd-product-menu',
     templateUrl: './product-menu.component.html',
+    styleUrl: './product-menu.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
