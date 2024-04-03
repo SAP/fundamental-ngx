@@ -112,7 +112,7 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
 
     /** Id attribute for dialog title */
     @Input()
-    headerId = `fd-vhd-header-unique-id-${vhdHeaderUniqueId++}`;
+    headerId = `fd-vhd-header-id-${vhdHeaderUniqueId++}`;
 
     /** Field name for default render from data.
      * Required field if tokenizerFn is not exist. */
