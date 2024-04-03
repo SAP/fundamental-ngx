@@ -91,7 +91,8 @@ export class MessageStripDocsComponent {
         {
             language: 'typescript',
             fileName: 'message-strip-custom-icon-example',
-            code: getAssetFromModuleAssets('message-strip-custom-icon-example.component.ts')
+            code: getAssetFromModuleAssets('message-strip-custom-icon-example.component.ts'),
+            component: 'MessageStripCustomIconExampleComponent'
         }
     ];
 
@@ -99,6 +100,7 @@ export class MessageStripDocsComponent {
         {
             language: 'typescript',
             fileName: 'message-strip-indication-colors-example',
+            component: 'MessageStripIndicationColorsExampleComponent',
             code: getAssetFromModuleAssets('message-strip-indication-colors-example.component.ts')
         }
     ];
@@ -107,7 +109,8 @@ export class MessageStripDocsComponent {
         {
             language: 'typescript',
             fileName: 'message-strip-alert-example',
-            code: getAssetFromModuleAssets('message-strip-alert-example.component.ts')
+            code: getAssetFromModuleAssets('message-strip-alert-example.component.ts'),
+            component: 'MessageStripAlertExampleComponent'
         }
     ];
 
@@ -115,7 +118,8 @@ export class MessageStripDocsComponent {
         {
             language: 'typescript',
             fileName: 'message-strip-auto-dismiss-example',
-            code: getAssetFromModuleAssets('message-strip-auto-dismiss-example.component.ts')
+            code: getAssetFromModuleAssets('message-strip-auto-dismiss-example.component.ts'),
+            component: 'MessageStripAutoDismissExampleComponent'
         }
     ];
 

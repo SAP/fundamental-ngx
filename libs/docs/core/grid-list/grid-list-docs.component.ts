@@ -182,7 +182,7 @@ export class GridListDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(gridListGroupHtml),
             scssFileCode: this._scssFileCode,
-            fileName: 'grid-list-delete-example'
+            fileName: 'grid-list-group-example'
         },
         {
             language: 'typescript',

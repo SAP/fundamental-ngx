@@ -1,5 +1,3 @@
-@for (color of infoLabelColors; track color) {
-    <div style="margin-top: 10px">
-        <fd-info-label label="Info Label" [color]="color" title="Info Label"></fd-info-label>
-    </div>
-}
+<div *ngFor="let color of infoLabelColors; trackBy: trackColor" style="margin-top: 10px">
+    <fd-info-label label="Info Label" [color]="color" title="Info Label"></fd-info-label>
+</div>

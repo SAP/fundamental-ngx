@@ -68,7 +68,7 @@ export class IconDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(iconColorExampleTs),
             fileName: 'icon-example',
-            component: 'IconBusinessSuiteInAppSymbolsExampleComponent'
+            component: 'IconColorExampleComponent'
         },
         {
             language: 'scss',

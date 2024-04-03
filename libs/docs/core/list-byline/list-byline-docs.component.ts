@@ -149,7 +149,8 @@ export class ListBylineDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(bylineLoadingSrcHtml),
-            fileName: 'list-byline-loading-example'
+            fileName: 'list-byline-loading-example',
+            component: 'ListBylineLoadingExampleComponent'
         }
     ];
 }

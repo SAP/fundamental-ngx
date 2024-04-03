@@ -77,7 +77,8 @@ export class MenuDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(menuScrollbarHtml),
-            fileName: 'menu-scrollbar-example'
+            fileName: 'menu-scrollbar-example',
+            component: 'MenuScrollbarExampleComponent'
         }
     ];
 
