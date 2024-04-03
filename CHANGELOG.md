@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.3-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.7...v0.49.3-rc.8) (2024-04-03)
+
+
+### Bug Fixes
+
+* **core:** a11y fix for Shellbar component ([#11681](https://github.com/SAP/fundamental-ngx/issues/11681)) ([8814d21](https://github.com/SAP/fundamental-ngx/commit/8814d216645914ac78b38d6d9bcdab542bd006e2))
+
+
+
+
+
 ## [0.49.3-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.6...v0.49.3-rc.7) (2024-04-01)
 
 
