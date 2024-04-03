@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.3-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.8...v0.49.3-rc.9) (2024-04-03)
+
+
+### Bug Fixes
+
+* **core:** relative position prop for Dynamic Page ([#11678](https://github.com/SAP/fundamental-ngx/issues/11678)) ([ea5631d](https://github.com/SAP/fundamental-ngx/commit/ea5631dcb4d78166e77b8697d6d40f7b441070b6))
+
+
+
+
+
 ## [0.49.3-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.7...v0.49.3-rc.8) (2024-04-03)
 
 
