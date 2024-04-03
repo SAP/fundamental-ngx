@@ -48,6 +48,8 @@ export type FdpValueHelpDialogDataSource<T> =
     | ObservableValueHelpDialogDataSource<T>;
 
 let vhiUniqueId = 0;
+let vhdHeaderUniqueId = 0;
+
 @Component({
     selector: 'fdp-value-help-dialog',
     templateUrl: './value-help-dialog.component.html',
@@ -110,7 +112,7 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
 
     /** Id attribute for dialog title */
     @Input()
-    headerId: string | null = null;
+    headerId = `fd-vhd-header-id-${vhdHeaderUniqueId++}`;
 
     /** Field name for default render from data.
      * Required field if tokenizerFn is not exist. */
@@ -395,6 +397,9 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
         this._updateFilters();
         this._initializeDS();
         this._initializeTab();
+        if (!this.dialogConfig.ariaLabelledBy) {
+            this.dialogConfig.ariaLabelledBy = this.headerId;
+        }
         this.activeDialog = this._dialogService.open(this.dialogContainer, {
             backdropClickCloseable: false,
             hasBackdrop: true,
