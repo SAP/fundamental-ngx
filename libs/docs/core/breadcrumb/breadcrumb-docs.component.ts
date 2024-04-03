@@ -13,9 +13,14 @@ import {
     BreadcrumbHrefExampleComponent,
     BreadcrumbRouterLinkExampleComponent
 } from './examples/breadcrumb-examples.component';
+import { BreadcrumbClickProxyExampleComponent } from './examples/breadcrumb-click-proxy-example.component';
 
 const breadcrumbHrefExample = 'breadcrumb-href-example.component.html';
 const breadcrumbRouterLinkExample = 'breadcrumb-routerLink-example.component.html';
+const breadcrumbClickProxyExample = 'breadcrumb-click-proxy-example.component.html';
+const breadcrumbClickProxyExampleTs = 'breadcrumb-click-proxy-example.component.ts';
+
+
 
 @Component({
     selector: 'app-breadcrumb',
@@ -28,7 +33,8 @@ const breadcrumbRouterLinkExample = 'breadcrumb-routerLink-example.component.htm
         BreadcrumbRouterLinkExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
-        BreadcrumbHrefExampleComponent
+        BreadcrumbHrefExampleComponent,
+        BreadcrumbClickProxyExampleComponent
     ]
 })
 export class BreadcrumbDocsComponent {
@@ -45,6 +51,20 @@ export class BreadcrumbDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(breadcrumbHrefExample),
             fileName: 'fd-breadcrumb-href-example'
+        }
+    ];
+
+    breadcrumbClickProxyHtml: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(breadcrumbClickProxyExample),
+            fileName: 'fd-breadcrumb-click-proxy-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(breadcrumbClickProxyExampleTs),
+            fileName: 'fd-breadcrumb-click-proxy-example',
+            component: 'BreadcrumbClickProxyExampleComponent'
         }
     ];
 }

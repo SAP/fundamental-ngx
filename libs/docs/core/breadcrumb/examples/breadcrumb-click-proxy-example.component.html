@@ -1,0 +1,17 @@
+<fd-breadcrumb>
+    <fd-breadcrumb-item [needsClickProxy]="true">
+        <a fd-link href="/#/core/breadcrumb">Breadcrumb Level 1</a>
+    </fd-breadcrumb-item>
+    <fd-breadcrumb-item [needsClickProxy]="true">
+        <a fd-link (click)="onBreadCrumbClick('2')">Breadcrumb Level 2</a>
+    </fd-breadcrumb-item>
+    <fd-breadcrumb-item [needsClickProxy]="true">
+        <a fd-link (click)="onBreadCrumbClick('3')">Breadcrumb Level 3</a>
+    </fd-breadcrumb-item>
+    <fd-breadcrumb-item [needsClickProxy]="true">
+        <span fd-link (click)="onBreadCrumbClick('4')">Breadcrumb Level 4</span>
+    </fd-breadcrumb-item>
+    <fd-breadcrumb-item [needsClickProxy]="true">
+        <span fd-link (click)="onBreadCrumbClick('5')">Breadcrumb Level 5</span>
+    </fd-breadcrumb-item>
+</fd-breadcrumb>

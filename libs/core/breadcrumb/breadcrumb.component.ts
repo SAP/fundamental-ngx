@@ -144,7 +144,7 @@ export class BreadcrumbComponent implements AfterViewInit, HasElementRef {
 
     /**
      * We catch interactions with item, Enter, Space, Mouse click and Touch click,
-     * if original element had router link we are proxying click to that element
+     * if original element had router link or needClickProxy is true, we are proxying click to that element
      * */
     itemClicked(breadcrumbItem: BreadcrumbItemComponent, $event: Event): void {
         if (breadcrumbItem._needsClickProxy) {

@@ -4,7 +4,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChild,
-    ElementRef,
+    ElementRef, Input,
     ViewEncapsulation
 } from '@angular/core';
 import { FD_LINK_COMPONENT, LinkComponent } from '@fundamental-ngx/core/link';
@@ -36,6 +36,10 @@ import { FD_BREADCRUMB_ITEM_COMPONENT } from './tokens';
     standalone: true
 })
 export class BreadcrumbItemComponent implements AfterViewInit {
+    /** If true, we will proxy the click to the original element. */
+    @Input()
+    needsClickProxy = false;
+
     /** @hidden */
     @ContentChild(FD_LINK_COMPONENT)
     breadcrumbLink: LinkComponent;
@@ -59,7 +63,7 @@ export class BreadcrumbItemComponent implements AfterViewInit {
 
     /** @hidden */
     get _needsClickProxy(): boolean {
-        return !!this.breadcrumbLink?.elementRef.nativeElement.getAttribute('href') || !!this.breadcrumbLink.routerLink;
+        return this.needsClickProxy || !!this.breadcrumbLink?.elementRef.nativeElement.getAttribute('href') || !!this.breadcrumbLink.routerLink;
     }
 
     /** @hidden */

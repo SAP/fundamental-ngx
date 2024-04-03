@@ -20,3 +20,15 @@
     <fd-breadcrumb-href-example></fd-breadcrumb-href-example>
 </component-example>
 <code-example [exampleFiles]="breadcrumbHrefHtml"></code-example>
+
+
+<fd-docs-section-title id="proxy-link" componentName="breadcrumb"> An example using <code>needsClickProxy</code> input </fd-docs-section-title>
+<description>
+    Menu item click event will be proxy if there is a <code>href</code> attribute or <code>routerLink</code> directive or explicitly set <code>[needsClickProxy]</code> to true
+</description>
+<component-example>
+    <div style="max-width: 200px;">
+        <fd-breadcrumb-click-proxy-example></fd-breadcrumb-click-proxy-example>
+    </div>
+</component-example>
+<code-example [exampleFiles]="breadcrumbClickProxyHtml"></code-example>
