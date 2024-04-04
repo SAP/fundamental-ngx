@@ -8,6 +8,7 @@
     [class.fd-dynamic-page--transparent-bg]="background === 'transparent'"
     [class.fd-dynamic-page--list-bg]="background === 'list'"
     [attr.aria-label]="ariaLabel"
+    [style.position]="positionRelative ? 'relative' : null"
 >
     <header class="fd-dynamic-page__header" [class.fd-dynamic-page__header--not-collapsible]="!_headerCollapsible">
         <div>

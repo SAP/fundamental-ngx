@@ -19,8 +19,12 @@
 <separator></separator>
 
 <fd-docs-section-title id="layout" componentName="dynamic-page">
-    Dynamic Page inside Column Layout
+    Dynamic Page inside Flexible Column Layout
 </fd-docs-section-title>
+<description>
+    If Dynamic Page has a floating footer you need to add <code>[positionRelative]="true"</code> so that the footer only
+    occupies the width of the column within the Flexible Column Layout.
+</description>
 <component-example>
     <fd-dynamic-page-column-layout-example></fd-dynamic-page-column-layout-example>
 </component-example>

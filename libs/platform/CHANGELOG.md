@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.3-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.8...v0.49.3-rc.9) (2024-04-03)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.49.3-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.7...v0.49.3-rc.8) (2024-04-03)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.49.3-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.6...v0.49.3-rc.7) (2024-04-01)
+
+
+### Bug Fixes
+
+* pr comment ([#11662](https://github.com/SAP/fundamental-ngx/issues/11662)) ([5c0deaa](https://github.com/SAP/fundamental-ngx/commit/5c0deaa8b828cd82f435e1bc99dcd1f43b126734))
+
+
+
+
+
+## [0.49.3-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.5...v0.49.3-rc.6) (2024-04-01)
+
+
+### Bug Fixes
+
+* **platform:** dialog aria-labelledBy for vhd ([#11650](https://github.com/SAP/fundamental-ngx/issues/11650)) ([cb10cbf](https://github.com/SAP/fundamental-ngx/commit/cb10cbf7e49daabfa2b308d8c642bcc4bdf3b691))
+
+
+
+
+
 ## [0.49.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.4...v0.49.3-rc.5) (2024-03-30)
 
 **Note:** Version bump only for package @fundamental-ngx/platform

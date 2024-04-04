@@ -1,4 +1,5 @@
 @if (items && items.length > 0) {
+    <h1 class="fd-sr-only">{{ control }}</h1>
     <button
         fd-button
         fdType="transparent"
@@ -35,7 +36,7 @@
         }
     </fd-menu>
 } @else {
-    <span class="fd-shellbar__title fd-product-menu__title">
+    <h1 class="fd-shellbar__title fd-product-menu__title">
         {{ control }}
-    </span>
+    </h1>
 }
