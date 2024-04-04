@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.9...v0.50.0-rc.0) (2024-04-04)
+
+
+### Bug Fixes
+
+* **core, platform:** add fix for breadcrumb template not being rendered in Dynamic Page component ([#11676](https://github.com/SAP/fundamental-ngx/issues/11676)) ([d84bf1d](https://github.com/SAP/fundamental-ngx/commit/d84bf1d61ab7fe49dec884caa25267aa7d9a7f11))
+
+
+### BREAKING CHANGES
+
+* **core, platform:** Core: introduced a wrapping element for the Breadcrumb (DynamicPageBreadcrumbComponent)
+Platform: introduced a wrapping element for the Breadcrumb (DynamicPageBreadcrumbComponent)
+
+
+
+
+
 ## [0.49.3-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.8...v0.49.3-rc.9) (2024-04-03)
 
 
