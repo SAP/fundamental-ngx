@@ -11,6 +11,8 @@
     [attr.aria-posinset]="_currentPosition"
     role="treeitem"
     [attr.aria-level]="level"
+    [style.background-color]="backgroundColor()"
+    [ngStyle]="customStyles()"
     #itemContainer
     [ngClass]="[
         state ? 'has-highlight-indicator has-highlight-indicator--' + state : '',

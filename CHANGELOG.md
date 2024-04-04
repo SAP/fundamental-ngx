@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.1...v0.50.0-rc.2) (2024-04-04)
+
+
+### Features
+
+* **core:** add possibility to apply custom background and CSS to Tree item ([#11689](https://github.com/SAP/fundamental-ngx/issues/11689)) ([3dd8d48](https://github.com/SAP/fundamental-ngx/commit/3dd8d48c09859a68081ca7a70b17c1aa3bf84745))
+
+
+
+
+
 # [0.50.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.0...v0.50.0-rc.1) (2024-04-04)
 
 
