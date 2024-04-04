@@ -1,4 +1,12 @@
-import { AfterContentInit, Directive, HostBinding, Input, QueryList, ContentChildren } from '@angular/core';
+import {
+    AfterContentInit,
+    Directive,
+    HostBinding,
+    Input,
+    QueryList,
+    ContentChildren,
+    HostListener
+} from '@angular/core';
 import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
 import { DestroyedService, FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 import { BooleanInput } from '@angular/cdk/coercion';
@@ -74,6 +82,26 @@ export class TableCellDirective extends FocusableItemDirective implements AfterC
     /** @hidden */
     @HostBinding('class.fd-table__cell')
     _fdTableCellClass = true;
+
+    /** @hidden */
+    private _parentPreviousTabIndex: number | undefined;
+
+    /** @hidden */
+    @HostListener('focusin')
+    private _focusIn(): void {
+        const parentEl = this.elementRef.nativeElement.parentElement;
+        this._parentPreviousTabIndex = parentEl?.tabIndex;
+        parentEl?.removeAttribute('tabindex');
+    }
+
+    /** @hidden */
+    @HostListener('focusout')
+    private _focusOut(): void {
+        const parentEl = this.elementRef.nativeElement.parentElement;
+        if (this._parentPreviousTabIndex) {
+            parentEl?.setAttribute('tabindex', this._parentPreviousTabIndex.toString());
+        }
+    }
 
     /** @hidden */
     constructor() {
