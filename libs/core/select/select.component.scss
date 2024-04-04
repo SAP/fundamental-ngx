@@ -1,5 +1,6 @@
 @use '@angular/cdk';
 @import 'fundamental-styles/dist/select';
+@import 'fundamental-styles/dist/button';
 
 @mixin fd-compact() {
     @at-root {
