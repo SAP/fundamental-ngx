@@ -13,6 +13,7 @@ export * from './directives/dynamic-page-header-subtitle.directive';
 export * from './directives/dynamic-page-header-title.directive';
 export * from './dynamic-page-header/actions/global-actions/dynamic-page-global-actions.component';
 export * from './dynamic-page-header/actions/layout-actions/dynamic-page-layout-actions.component';
+export * from './dynamic-page-header/breadcrumb/dynamic-page-breadcrumb.component';
 export * from './dynamic-page-header/header/dynamic-page-header.component';
 export * from './dynamic-page-header/key-info/dynamic-page-key-info.component';
 export * from './dynamic-page-header/title/dynamic-page-title-image.component';

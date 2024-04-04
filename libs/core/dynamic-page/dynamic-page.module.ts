@@ -7,6 +7,7 @@ import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-f
 import { DynamicPageGlobalActionsComponent } from './dynamic-page-header/actions/dynamic-page-global-actions.component';
 import { DynamicPageLayoutActionsComponent } from './dynamic-page-header/actions/dynamic-page-layout-actions.component';
 import { DynamicPageTitleContentComponent } from './dynamic-page-header/actions/dynamic-page-title-content.component';
+import { DynamicPageBreadcrumbComponent } from './dynamic-page-header/breadcrumb/dynamic-page-breadcrumb.component';
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
 import { DynamicPageSubheaderComponent } from './dynamic-page-header/subheader/dynamic-page-subheader.component';
 import { DynamicPageWrapperDirective } from './dynamic-page-wrapper.directive';
@@ -23,7 +24,8 @@ const components = [
     DynamicPageTitleContentComponent,
     DynamicPageWrapperDirective,
     DynamicPageHeaderSubtitleDirective,
-    DynamicPageHeaderTitleDirective
+    DynamicPageHeaderTitleDirective,
+    DynamicPageBreadcrumbComponent
 ];
 
 @NgModule({

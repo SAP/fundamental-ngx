@@ -6,20 +6,23 @@
                 title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
                 subtitle="sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
             >
-                <fd-breadcrumb>
-                    <fd-breadcrumb-item>
-                        <a fd-link href="#">Men</a>
-                    </fd-breadcrumb-item>
-                    <fd-breadcrumb-item>
-                        <a fd-link href="#">Shoes</a>
-                    </fd-breadcrumb-item>
-                    <fd-breadcrumb-item>
-                        <a fd-link href="#">Running Shoes</a>
-                    </fd-breadcrumb-item>
-                    <fd-breadcrumb-item>
-                        <span>Jogging</span>
-                    </fd-breadcrumb-item>
-                </fd-breadcrumb>
+                <!-- breadcrumb content -->
+                <fd-dynamic-page-breadcrumb>
+                    <fd-breadcrumb>
+                        <fd-breadcrumb-item>
+                            <a fd-link href="#">Men</a>
+                        </fd-breadcrumb-item>
+                        <fd-breadcrumb-item>
+                            <a fd-link href="#">Shoes</a>
+                        </fd-breadcrumb-item>
+                        <fd-breadcrumb-item>
+                            <a fd-link href="#">Running Shoes</a>
+                        </fd-breadcrumb-item>
+                        <fd-breadcrumb-item>
+                            <span>Jogging</span>
+                        </fd-breadcrumb-item>
+                    </fd-breadcrumb>
+                </fd-dynamic-page-breadcrumb>
                 <fd-dynamic-page-global-actions>
                     <!-- global actions -->
                     <fd-toolbar fdType="transparent" [clearBorder]="true">

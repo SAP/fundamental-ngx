@@ -24,10 +24,12 @@ import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../consta
 import { DynamicPageHeaderSubtitleDirective } from '../../directives/dynamic-page-header-subtitle.directive';
 import { DynamicPageHeaderTitleDirective } from '../../directives/dynamic-page-header-title.directive';
 import { DynamicPageService } from '../../dynamic-page.service';
+import { FD_DYNAMIC_PAGE_BREADCRUMB_COMPONENT } from '../../tokens';
 import { addClassNameToElement } from '../../utils';
 import { DynamicPageGlobalActionsComponent } from '../actions/dynamic-page-global-actions.component';
 import { DynamicPageLayoutActionsComponent } from '../actions/dynamic-page-layout-actions.component';
 import { DynamicPageTitleContentComponent } from '../actions/dynamic-page-title-content.component';
+import { DynamicPageBreadcrumbComponent } from '../breadcrumb/dynamic-page-breadcrumb.component';
 
 export const ActionSquashBreakpointPx = 1280;
 
@@ -79,6 +81,10 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
      */
     @ContentChild(DynamicPageHeaderTitleDirective)
     _titleTemplate: Nullable<DynamicPageHeaderSubtitleDirective>;
+
+    /** @hidden */
+    @ContentChild(FD_DYNAMIC_PAGE_BREADCRUMB_COMPONENT)
+    _dynamicPageBreadcrumbComponent: DynamicPageBreadcrumbComponent;
 
     /** @hidden */
     @ContentChild(FD_BREADCRUMB_COMPONENT)

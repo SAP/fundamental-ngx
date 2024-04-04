@@ -21,6 +21,7 @@ export const API_FILES = {
         'DynamicPageComponent',
         'DynamicPageTitleComponent',
         'DynamicPageKeyInfoComponent',
+        'DynamicPageBreadcrumbComponent',
         'DynamicPageHeaderComponent',
         'DynamicPageContentComponent'
     ],

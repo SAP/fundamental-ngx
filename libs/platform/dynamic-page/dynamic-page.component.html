@@ -14,9 +14,13 @@
             [subtitle]="titleComponent.subtitle"
             [subtitleWrap]="titleComponent.subtitleWrap"
         >
-            <fd-breadcrumb>
-                <ng-template [ngTemplateOutlet]="titleComponent.breadcrumbTemplate"></ng-template>
-            </fd-breadcrumb>
+            @if (titleComponent.breadcrumbComponent) {
+                <fd-dynamic-page-breadcrumb>
+                    <ng-template
+                        [ngTemplateOutlet]="titleComponent.breadcrumbComponent.contentTemplateRef"
+                    ></ng-template>
+                </fd-dynamic-page-breadcrumb>
+            }
             @if (titleComponent._subtitleDirective) {
                 <ng-container
                     *fdDynamicPageHeaderSubtitle="let hidden"

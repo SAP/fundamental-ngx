@@ -1,13 +1,22 @@
 <div class="fd-dynamic-page__main-container">
     <div class="fd-dynamic-page__breadcrumb-title-container">
-        <div class="fd-dynamic-page__breadcrumb-container">
-            <nav aria-label="Breadcrumbs" class="fd-dynamic-page__breadcrumb-wrapper" (click)="stopPropagation($event)">
-                <ng-content select="fd-breadcrumb"></ng-content>
-            </nav>
-            @if (_actionsSquashed$()) {
-                <ng-template [ngTemplateOutlet]="dynamicPageLayoutActionsRef"></ng-template>
-            }
-        </div>
+        @if (_dynamicPageBreadcrumbComponent || _actionsSquashed$()) {
+            <div class="fd-dynamic-page__breadcrumb-container">
+                @if (_dynamicPageBreadcrumbComponent) {
+                    <nav
+                        aria-label="Breadcrumbs"
+                        class="fd-dynamic-page__breadcrumb-wrapper"
+                        (click)="stopPropagation($event)"
+                    >
+                        <ng-content select="fd-dynamic-page-breadcrumb"></ng-content>
+                    </nav>
+                }
+
+                @if (_actionsSquashed$()) {
+                    <ng-template [ngTemplateOutlet]="dynamicPageLayoutActionsRef"></ng-template>
+                }
+            </div>
+        }
         <div class="fd-dynamic-page__title-container">
             @if (_dynamicPageService.collapsed()) {
                 <ng-content select="fd-facet"></ng-content>
