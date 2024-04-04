@@ -19,6 +19,20 @@ import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from
     template: `
         <fdp-dynamic-page [size]="size" [background]="background">
             <fdp-dynamic-page-title>
+                <ng-template #breadcrumbTemplate>
+                    <fd-breadcrumb-item>
+                        <a fd-link href="#">Men</a>
+                    </fd-breadcrumb-item>
+                    <fd-breadcrumb-item>
+                        <a fd-link href="#">Shoes</a>
+                    </fd-breadcrumb-item>
+                    <fd-breadcrumb-item>
+                        <a fd-link href="#">Running Shoes</a>
+                    </fd-breadcrumb-item>
+                    <fd-breadcrumb-item>
+                        <span>Jogging</span>
+                    </fd-breadcrumb-item>
+                </ng-template>
                 <fdp-dynamic-page-global-actions>
                     <fd-toolbar fdType="transparent" [clearBorder]="true">
                         <button
