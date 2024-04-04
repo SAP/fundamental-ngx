@@ -19,7 +19,8 @@ import { Subject } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
-        role: 'toolbar'
+        role: 'toolbar',
+        '[style.margin-inline-start]': '"auto"'
     }
 })
 export class DynamicPageLayoutActionsComponent extends DynamicPageBaseActions implements AfterContentInit {

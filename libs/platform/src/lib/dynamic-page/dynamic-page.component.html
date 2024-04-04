@@ -14,7 +14,7 @@
         [subtitle]="titleComponent.subtitle"
         [subtitleWrap]="titleComponent.subtitleWrap"
     >
-        <fd-breadcrumb>
+        <fd-breadcrumb *ngIf="titleComponent.breadcrumbTemplate">
             <ng-container [ngTemplateOutlet]="titleComponent.breadcrumbTemplate"></ng-container>
         </fd-breadcrumb>
 
