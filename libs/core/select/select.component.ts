@@ -51,6 +51,7 @@ import { ENTER, ESCAPE, SPACE } from '@angular/cdk/keycodes';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormFieldAdvancedStateMessage, FormStates, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 import { ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
@@ -107,7 +108,8 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
         IconComponent,
         ListComponent,
         ListMessageDirective,
-        FdTranslatePipe
+        FdTranslatePipe,
+        ButtonComponent
     ]
 })
 export class SelectComponent<T = any>
