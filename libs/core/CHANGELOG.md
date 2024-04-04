@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.0...v0.50.0-rc.1) (2024-04-04)
+
+
+### Bug Fixes
+
+* **core:** import Button css to Select component ([#11688](https://github.com/SAP/fundamental-ngx/issues/11688)) ([c2d0bf6](https://github.com/SAP/fundamental-ngx/commit/c2d0bf60f387194a51343fec9172f619367c2a97))
+
+
+
+
+
 # [0.50.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.49.3-rc.9...v0.50.0-rc.0) (2024-04-04)
 
 
