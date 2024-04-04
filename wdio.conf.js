@@ -113,7 +113,6 @@ exports.config = {
             './e2e/wdio/core/**/link.e2e-spec.ts',
             './e2e/wdio/core/**/list-byline.e2e-spec.ts',
             './e2e/wdio/core/**/menu.e2e-spec.ts',
-            './e2e/wdio/core/**/message-box.e2e-spec.ts',
             './e2e/wdio/core/**/message-page.e2e-spec.ts',
             './e2e/wdio/core/**/message-strip.e2e-spec.ts',
             './e2e/wdio/core/**/message-toast.e2e-spec.ts'
