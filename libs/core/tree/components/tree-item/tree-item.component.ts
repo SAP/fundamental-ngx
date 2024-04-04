@@ -1,4 +1,4 @@
-import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -16,7 +16,8 @@ import {
     QueryList,
     ViewChild,
     ViewEncapsulation,
-    inject
+    inject,
+    input
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -66,6 +67,7 @@ import { TreeService } from '../../tree.service';
     imports: [
         SelectableItemDirective,
         NgClass,
+        NgStyle,
         ClickedDirective,
         NgTemplateOutlet,
         IconComponent,
@@ -252,6 +254,16 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
             ? true
             : this._parentTreeItem.keyboardAccessible && this._parentTreeItem.expanded;
     }
+
+    /**
+     * Custom background color
+     */
+    backgroundColor = input<string>();
+
+    /**
+     * Custom styles
+     */
+    customStyles = input<object>();
 
     /** @hidden */
     private _parentId: Nullable<string>;
