@@ -29,7 +29,7 @@ import { FD_BUTTON_COMPONENT } from './tokens';
  */
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
-    selector: 'button[fd-button], a[fd-button]',
+    selector: 'button[fd-button], a[fd-button], span[fd-button]',
     exportAs: 'fd-button',
     templateUrl: './button.component.html',
     styleUrl: './button.component.scss',

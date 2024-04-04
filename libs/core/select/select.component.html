@@ -63,7 +63,9 @@
         </div>
         @if (!readonly) {
             <span
-                class="fd-button fd-button--transparent fd-select__button"
+                fd-button
+                fdType="transparent"
+                class="fd-select__button"
                 [ngClass]="selectDropdownButtonClass"
                 [class.is-disabled]="disabled"
             >
