@@ -322,6 +322,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
