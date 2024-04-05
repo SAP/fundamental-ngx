@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.3...v0.50.0-rc.4) (2024-04-05)
+
+
+### Bug Fixes
+
+* add fundamental packages for stackblitz and update common-css ([#11699](https://github.com/SAP/fundamental-ngx/issues/11699)) ([3a4eb7f](https://github.com/SAP/fundamental-ngx/commit/3a4eb7f6a84744c20ebee5a52e6ae030546d5a84))
+
+
+
+
+
 # [0.50.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.2...v0.50.0-rc.3) (2024-04-04)
 
 
