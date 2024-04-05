@@ -61,6 +61,7 @@ import { StepInputModule } from '@fundamental-ngx/core/step-input';
                         <td>{{ stepInputFormControl2.status }}</td>
                     </tr>
                 </table>
+                <button fd-button (click)="toggleDisabledState()">Toggle disabled state</button>
             </div>
 
             <div class="step-input-example">
@@ -78,4 +79,8 @@ export class StepInputFormExampleComponent {
     stepInputFormControl2 = new FormControl({ disabled: true, value: 100 });
     value1: number | null = 100;
     value2: number | null = 100;
+
+    toggleDisabledState(): void {
+        this.stepInputFormControl2.enabled ? this.stepInputFormControl2.disable() : this.stepInputFormControl2.enable();
+    }
 }
