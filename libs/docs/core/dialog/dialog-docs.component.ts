@@ -182,13 +182,7 @@ export class DialogDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(stateDialogTs),
             fileName: 'dialog-state-example',
-            component: 'DialogStateExample'
-        },
-        {
-            language: 'scss',
-            code: dialogExamplesScss,
-            fileName: 'dialog-state-example',
-            component: 'DialogStateExample',
+            component: 'DialogStateExampleComponent',
             scssFileCode: getAssetFromModuleAssets(dialogExamplesScss)
         }
     ];
@@ -211,7 +205,7 @@ export class DialogDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(autoLabelHtml),
-            fileName: 'dialog-object-example'
+            fileName: 'auto-label-dialog-example'
         },
         {
             language: 'typescript',
@@ -250,13 +244,7 @@ export class DialogDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(customConfigurationDialogTs),
             fileName: 'dialog-configuration-example',
-            component: 'DialogConfigurationExample'
-        },
-        {
-            language: 'scss',
-            code: getAssetFromModuleAssets(dialogExamplesScss),
-            fileName: 'dialog-configuration-example',
-            component: 'DialogConfigurationExample',
+            component: 'DialogConfigurationExampleComponent',
             scssFileCode: getAssetFromModuleAssets(dialogExamplesScss)
         }
     ];
@@ -368,7 +356,7 @@ export class DialogDocsComponent {
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(popoverDialogTs),
-            fileName: 'dialog-inner-popover',
+            fileName: 'dialog-inner-popover-example',
             component: 'DialogInnerPopoverComponent'
         }
     ];

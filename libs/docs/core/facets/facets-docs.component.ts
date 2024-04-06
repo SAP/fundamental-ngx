@@ -10,27 +10,21 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { CustomFacetExampleComponent } from './examples/custom-facet-example.component';
-import {
-    FacetGroupExampleComponent,
-    FacetLoadingExampleComponent,
-    FormFacetExampleComponent,
-    FormLinkFacetExampleComponent,
-    ImageFacetExampleComponent,
-    KeyValueFacetAlignmentExampleComponent,
-    KeyValueFacetExampleComponent,
-    RatingIndicatorFacetExampleComponent
-} from './examples/facet-examples.component';
+import { FacetAlignmentExampleComponent } from './examples/facet-alignment-example.component';
+import { FacetGroupExampleComponent } from './examples/facet-group-example.component';
+import { FacetLoadingExampleComponent } from './examples/facet-loading-example.component';
+import { FormFacetExampleComponent } from './examples/form-facet-example.component';
 
 const FacetGroupExample = 'facet-group-example.component.html';
+const FacetGroupExampleTs = 'facet-group-example.component.ts';
 const FormFacetExample = 'form-facet-example.component.html';
-const FormLinkFacetExample = 'form-link-facet-example.component.html';
-const KeyValueFacetExample = 'key-value-facet-example.component.html';
-const KeyValueFacetAlignmentExample = 'key-value-facet-alignment-example.component.html';
-const ImageFacetExample = 'image-facet-example.component.html';
-const RatingIndicatorFacetExample = 'rating-indicator-facet-example.component.html';
+const FormFacetExampleTs = 'form-facet-example.component.ts';
+const KeyValueFacetAlignmentExample = 'facet-alignment-example.component.html';
+const KeyValueFacetAlignmentExampleTs = 'facet-alignment-example.component.ts';
 const CustomFacetExample = 'custom-facet-example.component.html';
 const CustomFacetExampleTsCode = 'custom-facet-example.component.ts';
 const FacetLoadingExample = 'facet-loading-example.component.html';
+const FacetLoadingExampleTs = 'facet-loading-example.component.ts';
 
 @Component({
     selector: 'app-facet',
@@ -43,11 +37,7 @@ const FacetLoadingExample = 'facet-loading-example.component.html';
         FacetGroupExampleComponent,
         CodeExampleComponent,
         FormFacetExampleComponent,
-        FormLinkFacetExampleComponent,
-        KeyValueFacetExampleComponent,
-        KeyValueFacetAlignmentExampleComponent,
-        ImageFacetExampleComponent,
-        RatingIndicatorFacetExampleComponent,
+        FacetAlignmentExampleComponent,
         CustomFacetExampleComponent,
         RouterLink,
         FacetLoadingExampleComponent
@@ -59,6 +49,12 @@ export class FacetsDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(FacetGroupExample),
             fileName: 'facet-group-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(FacetGroupExampleTs),
+            fileName: 'facet-group-example',
+            component: 'FacetGroupExampleComponent'
         }
     ];
     formFacet: ExampleFile[] = [
@@ -66,20 +62,12 @@ export class FacetsDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(FormFacetExample),
             fileName: 'form-facet-example'
-        }
-    ];
-    formLinkFacet: ExampleFile[] = [
+        },
         {
-            language: 'html',
-            code: getAssetFromModuleAssets(FormLinkFacetExample),
-            fileName: 'form-link-facet-example'
-        }
-    ];
-    keyValueFacet: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(KeyValueFacetExample),
-            fileName: 'key-value-facet-example'
+            language: 'typescript',
+            code: getAssetFromModuleAssets(FormFacetExampleTs),
+            fileName: 'form-facet-example',
+            component: 'FormFacetExampleComponent'
         }
     ];
 
@@ -87,23 +75,13 @@ export class FacetsDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(KeyValueFacetAlignmentExample),
-            fileName: 'key-value-facet-alignment-example'
-        }
-    ];
-
-    imageFacet: ExampleFile[] = [
+            fileName: 'facet-alignment-example'
+        },
         {
-            language: 'html',
-            code: getAssetFromModuleAssets(ImageFacetExample),
-            fileName: 'image-facet-example'
-        }
-    ];
-
-    ratingIndicatorFacet: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(RatingIndicatorFacetExample),
-            fileName: 'rating-indicator-facet-example'
+            language: 'typescript',
+            code: getAssetFromModuleAssets(KeyValueFacetAlignmentExampleTs),
+            fileName: 'facet-alignment-example',
+            component: 'FacetAlignmentExampleComponent'
         }
     ];
 
@@ -126,6 +104,12 @@ export class FacetsDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(FacetLoadingExample),
             fileName: 'facet-loading-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(FacetLoadingExampleTs),
+            fileName: 'facet-loading-example',
+            component: 'FacetLoadingExampleComponent'
         }
     ];
 }
