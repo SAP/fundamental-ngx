@@ -14,8 +14,11 @@ import { IconExampleComponent } from './examples/icon-example.component';
 import { IconTNTExampleComponent } from './examples/icon-tnt-example.component';
 
 const iconSrc = 'icon-example.component.html';
+const iconSrcTs = 'icon-example.component.ts';
 const iconTNTSrc = 'icon-tnt-example.component.html';
+const iconTNTSrcTs = 'icon-tnt-example.component.ts';
 const iconBusinessSuiteInAppSymbolsSrc = 'icon-businessSuiteInAppSymbols-example.component.html';
+const iconBusinessSuiteInAppSymbolsTs = 'icon-businessSuiteInAppSymbols-example.component.ts';
 const iconColorExampleTs = 'icon-color-example.component.ts';
 const iconColorExampleScss = 'icon-example.component.scss';
 
@@ -42,6 +45,13 @@ export class IconDocsComponent {
             code: getAssetFromModuleAssets(iconSrc),
             fileName: 'icon-example',
             component: 'IconExampleComponent'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(iconSrcTs),
+            fileName: 'icon-example',
+            component: 'IconExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(iconColorExampleScss)
         }
     ];
 
@@ -49,8 +59,15 @@ export class IconDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(iconTNTSrc),
-            fileName: 'icon-example',
+            fileName: 'icon-tnt-example',
             component: 'IconTNTExampleComponent'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(iconTNTSrcTs),
+            fileName: 'icon-tnt-example',
+            component: 'IconTNTExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(iconColorExampleScss)
         }
     ];
 
@@ -58,8 +75,15 @@ export class IconDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(iconBusinessSuiteInAppSymbolsSrc),
-            fileName: 'icon-example',
+            fileName: 'icon-businessSuiteInAppSymbols-example',
             component: 'IconBusinessSuiteInAppSymbolsExampleComponent'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(iconBusinessSuiteInAppSymbolsTs),
+            fileName: 'icon-businessSuiteInAppSymbols-example',
+            component: 'IconBusinessSuiteInAppSymbolsExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(iconColorExampleScss)
         }
     ];
 
@@ -67,13 +91,13 @@ export class IconDocsComponent {
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(iconColorExampleTs),
-            fileName: 'icon-example',
-            component: 'IconBusinessSuiteInAppSymbolsExampleComponent'
+            fileName: 'icon-color-example',
+            component: 'IconColorExampleComponent'
         },
         {
             language: 'scss',
             code: getAssetFromModuleAssets(iconColorExampleScss),
-            fileName: 'icon-example'
+            fileName: 'icon-color-example'
         }
     ];
 }
