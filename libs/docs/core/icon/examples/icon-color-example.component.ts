@@ -38,7 +38,7 @@ import { IconColor, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
         }
         <fd-icon></fd-icon>
     `,
-    styleUrls: ['icon-example.component.scss'],
+    styleUrls: ['icon-color-example.component.scss'],
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [IconComponent]
@@ -59,8 +59,8 @@ export class IconColorExampleComponent {
     fontFamilies: IconFont[] = ['SAP-icons', 'BusinessSuiteInAppSymbols', 'SAP-icons-TNT'];
 
     icons: Record<IconFont, string> = {
-        'SAP-icons': 'picture',
-        BusinessSuiteInAppSymbols: 'component',
-        'SAP-icons-TNT': 'technicalinstance'
+        'SAP-icons': 'ai',
+        BusinessSuiteInAppSymbols: 'face-happy',
+        'SAP-icons-TNT': 'ai-1'
     };
 }
