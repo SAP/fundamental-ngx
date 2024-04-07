@@ -108,6 +108,12 @@ export class InputGroupDocsComponent {
             fileName: 'input-group-search-example',
             typescriptFileCode: inputGroupSearchSrcTs,
             component: 'InputGroupSearchExampleComponent'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(inputGroupSearchSrcTs),
+            fileName: 'input-group-search-example',
+            component: 'InputGroupSearchExampleComponent'
         }
     ];
 
