@@ -8,9 +8,7 @@ updates:
           time: '10:00'
           timezone: Etc/UCT
       reviewers:
-          - N1XUS
           - InnaAtanasova
-          - g-cheishvili
           - mikerodonnell89
           - droshev
       ignore:
