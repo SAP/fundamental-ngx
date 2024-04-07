@@ -1,0 +1,11 @@
+.fddoc-flex {
+    display: flex;
+
+    &__item {
+        margin: 1rem;
+
+        > div {
+            margin-bottom: 1rem;
+        }
+    }
+}
