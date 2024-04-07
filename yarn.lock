@@ -3811,14 +3811,14 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@jsdevtools/npm-publish@3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@jsdevtools/npm-publish/-/npm-publish-3.0.1.tgz#48416ecc9e7daad78e8fe481cc82f2592f6cdc9b"
-  integrity sha512-8DFoYKMkVJxxfz/PM5/DdvUlYS2vC41pTYc/7Mws9yDaoT7j2pjKc0zgsf8IHtwPxWeCC+GOkLj4hyXFC5GjLQ==
+"@jsdevtools/npm-publish@3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@jsdevtools/npm-publish/-/npm-publish-3.1.1.tgz#053750ecbf156a2297f4a51408b8f4c4bb8566b5"
+  integrity sha512-SZsa0zAZ3OnzkTillL9hbs1HK7FILSgeEZftueGsdwip4hI6rqXncRgDjZTV+1brBE+ro5IKXaKNg6aI7dBhfg==
   dependencies:
     "@types/semver" "^7.5.2"
-    command-line-args "^5.2.1"
-    semver "7.5.4"
+    command-line-args "5.2.1"
+    semver "7.6.0"
     tar "6.2.0"
 
 "@leichtgewicht/ip-codec@^2.0.1":
@@ -7742,7 +7742,7 @@ combined-stream@^1.0.6, combined-stream@^1.0.8, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
-command-line-args@^5.2.1:
+command-line-args@5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/command-line-args/-/command-line-args-5.2.1.tgz#c44c32e437a57d7c51157696893c5909e9cec42e"
   integrity sha512-H4UfQhZyakIjC74I9d34fGYDwk3XpSr17QhEd0Q3I9Xq1CETHo4Hcuo87WyWHpAF1aSLjLRf5lD9ZGX2qStUvg==
@@ -17560,14 +17560,7 @@ semver@7.5.3:
   dependencies:
     lru-cache "^6.0.0"
 
-semver@7.5.4, semver@7.x, semver@^7.0.0, semver@^7.1.1, semver@^7.3.4, semver@^7.3.5, semver@^7.3.7, semver@^7.3.8, semver@^7.5.3, semver@^7.5.4:
-  version "7.5.4"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-7.5.4.tgz#483986ec4ed38e1c6c48c34894a9182dbff68a6e"
-  integrity sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==
-  dependencies:
-    lru-cache "^6.0.0"
-
-semver@7.6.0:
+semver@7.6.0, semver@7.x, semver@^7.0.0, semver@^7.1.1, semver@^7.3.4, semver@^7.3.5, semver@^7.3.7, semver@^7.3.8, semver@^7.5.3, semver@^7.5.4:
   version "7.6.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.6.0.tgz#1a46a4db4bffcccd97b743b5005c8325f23d4e2d"
   integrity sha512-EnwXhrlwXMk9gKu5/flx5sv/an57AkRplG3hTK68W7FRDN+k+OWBj65M7719OkA82XLBxrcX0KSHj+X5COhOVg==
