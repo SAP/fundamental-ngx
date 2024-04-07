@@ -8,17 +8,9 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import {
-    InfoLabelDefaultExampleComponent,
-    InfoLabelNumericIconExampleComponent,
-    InfoLabelTextExampleComponent,
-    InfoLabelTextIconExampleComponent
-} from './examples/info-label-examples.component';
+import { InfoLabelExampleComponent } from './examples/info-label-example.component';
 
-const InfoLableDefaultExample = 'info-label-default-example.component.html';
-const InfoLableTextExample = 'info-label-text-example.component.html';
-const InfoLabelIconTextExample = 'info-label-text-icon-example.component.html';
-const InfoLableNumericIconExample = 'info-label-icon-numeric-example.component.html';
+const InfoLableExample = 'info-label-example.component.html';
 
 @Component({
     selector: 'app-info-label',
@@ -27,45 +19,31 @@ const InfoLableNumericIconExample = 'info-label-icon-numeric-example.component.h
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,
-        InfoLabelDefaultExampleComponent,
+        InfoLabelExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
-        DescriptionComponent,
-        InfoLabelTextExampleComponent,
-        InfoLabelTextIconExampleComponent,
-        InfoLabelNumericIconExampleComponent
+        DescriptionComponent
     ]
 })
 export class InfoLabelDocsComponent {
     defaultInfoLabelHtmlType: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(InfoLableDefaultExample),
-            fileName: 'Info-label-default-example'
-        }
-    ];
-
-    InfoLabelTextExample: ExampleFile[] = [
+            code: getAssetFromModuleAssets(InfoLableExample),
+            fileName: 'info-label-example',
+            component: 'InfoLabelExampleComponent'
+        },
         {
-            language: 'html',
-            code: getAssetFromModuleAssets(InfoLableTextExample),
-            fileName: 'info-label-text-example'
-        }
-    ];
-
-    InfoLabelTextIconExample: ExampleFile[] = [
+            language: 'typescript',
+            code: getAssetFromModuleAssets('info-label-example.component.ts'),
+            fileName: 'info-label-example',
+            component: 'InfoLabelExampleComponent'
+        },
         {
-            language: 'html',
-            code: getAssetFromModuleAssets(InfoLabelIconTextExample),
-            fileName: 'info-label-text-icon-example'
-        }
-    ];
-
-    InfoLableNumericIconExample: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(InfoLableNumericIconExample),
-            fileName: 'info-label-icon-numeric-example'
+            language: 'scss',
+            code: getAssetFromModuleAssets('info-label-example.component.scss'),
+            fileName: 'info-label-example',
+            component: 'InfoLabelExampleComponent'
         }
     ];
 }
