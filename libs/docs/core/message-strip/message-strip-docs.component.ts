@@ -65,7 +65,14 @@ export class MessageStripDocsComponent {
             language: 'html',
             scssFileCode: getAssetFromModuleAssets(messageStripExampleScs),
             fileName: 'message-strip-example',
-            code: getAssetFromModuleAssets(messageStripExampleHtml)
+            code: getAssetFromModuleAssets(messageStripExampleHtml),
+            component: 'MessageStripExampleComponent'
+        },
+        {
+            language: 'typescript',
+            fileName: 'message-strip-example',
+            code: getAssetFromModuleAssets('message-strip-example.component.ts'),
+            component: 'MessageStripExampleComponent'
         }
     ];
 
@@ -74,7 +81,14 @@ export class MessageStripDocsComponent {
             language: 'html',
             scssFileCode: getAssetFromModuleAssets(messageStripExampleScs),
             fileName: 'message-strip-noicon-example',
-            code: getAssetFromModuleAssets(messageStripNoIconExampleHtml)
+            code: getAssetFromModuleAssets(messageStripNoIconExampleHtml),
+            component: 'MessageStripNoIconExampleComponent'
+        },
+        {
+            language: 'typescript',
+            fileName: 'message-strip-noicon-example',
+            code: getAssetFromModuleAssets('message-strip-noicon-example.component.ts'),
+            component: 'MessageStripNoIconExampleComponent'
         }
     ];
 
@@ -83,7 +97,14 @@ export class MessageStripDocsComponent {
             language: 'html',
             scssFileCode: getAssetFromModuleAssets(messageStripExampleScs),
             fileName: 'message-strip-width-example',
-            code: getAssetFromModuleAssets(messageStripWidthExampleHtml)
+            code: getAssetFromModuleAssets(messageStripWidthExampleHtml),
+            component: 'MessageStripWidthExampleComponent'
+        },
+        {
+            language: 'typescript',
+            fileName: 'message-strip-width-example',
+            code: getAssetFromModuleAssets('message-strip-width-example.component.ts'),
+            component: 'MessageStripWidthExampleComponent'
         }
     ];
 
@@ -91,7 +112,8 @@ export class MessageStripDocsComponent {
         {
             language: 'typescript',
             fileName: 'message-strip-custom-icon-example',
-            code: getAssetFromModuleAssets('message-strip-custom-icon-example.component.ts')
+            code: getAssetFromModuleAssets('message-strip-custom-icon-example.component.ts'),
+            component: 'MessageStripCustomIconExampleComponent'
         }
     ];
 
@@ -99,7 +121,8 @@ export class MessageStripDocsComponent {
         {
             language: 'typescript',
             fileName: 'message-strip-indication-colors-example',
-            code: getAssetFromModuleAssets('message-strip-indication-colors-example.component.ts')
+            code: getAssetFromModuleAssets('message-strip-indication-colors-example.component.ts'),
+            component: 'MessageStripIndicationColorsExampleComponent'
         }
     ];
 
@@ -107,7 +130,8 @@ export class MessageStripDocsComponent {
         {
             language: 'typescript',
             fileName: 'message-strip-alert-example',
-            code: getAssetFromModuleAssets('message-strip-alert-example.component.ts')
+            code: getAssetFromModuleAssets('message-strip-alert-example.component.ts'),
+            component: 'MessageStripAlertExampleComponent'
         }
     ];
 
@@ -115,7 +139,8 @@ export class MessageStripDocsComponent {
         {
             language: 'typescript',
             fileName: 'message-strip-auto-dismiss-example',
-            code: getAssetFromModuleAssets('message-strip-auto-dismiss-example.component.ts')
+            code: getAssetFromModuleAssets('message-strip-auto-dismiss-example.component.ts'),
+            component: 'MessageStripAutoDismissExampleComponent'
         }
     ];
 

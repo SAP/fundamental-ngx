@@ -57,7 +57,7 @@ class ExampleStripAlertFooterComponent {
 }
 
 @Component({
-    selector: 'message-strip-alert-example',
+    selector: 'fd-message-strip-alert-example',
     template: `
         <div class="example-row">
             <button fd-button (click)="openText()">Open Text top-left</button>
