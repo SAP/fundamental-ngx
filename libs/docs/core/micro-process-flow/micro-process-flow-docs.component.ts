@@ -90,7 +90,8 @@ export class MicroProcessFlowDocsComponent {
         {
             language: 'html',
             fileName: 'micro-process-flow-other-controls-example',
-            code: microProcessFlowOtherControlsExampleHtml
+            code: getAssetFromModuleAssets(microProcessFlowOtherControlsExampleHtml),
+            component: 'MicroProcessFlowOtherControlsExampleComponent'
         },
         {
             language: 'typescript',
