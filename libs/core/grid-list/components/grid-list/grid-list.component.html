@@ -8,6 +8,7 @@
     [class.fd-grid-list--mode-single-select-left]="selectionMode === 'singleSelectLeft'"
     [class.fd-grid-list--mode-single-select-right]="selectionMode === 'singleSelectRight'"
     [class.fd-grid-list--mode-multi-select]="selectionMode === 'multiSelect'"
+    (keydown)="handleKeydown($event)"
 >
     <div class="fd-container" role="listbox">
         <div class="fd-row">

@@ -1,3 +1,4 @@
+import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -11,9 +12,11 @@ import {
     Output,
     QueryList,
     SimpleChanges,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed,
+    inject
 } from '@angular/core';
-import { Nullable, RangeSelector } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Nullable, RangeSelector, RtlService } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, Observable, Subscription, filter } from 'rxjs';
 import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';
 import {
@@ -105,6 +108,13 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
 
     /** @hidden */
     private readonly subscription = new Subscription();
+
+    private readonly _rtlService = inject(RtlService, {
+        optional: true
+    });
+
+    /** @hidden */
+    private readonly _rtl$ = computed<boolean>(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
     constructor(private readonly _cd: ChangeDetectorRef) {
@@ -212,6 +222,42 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
         }
 
         this._selectedItemsSubject$.next(this._selectedItems);
+    }
+
+    /** @hidden */
+    handleKeydown(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
+            this._handleArrowKeydown(event);
+        }
+    }
+
+    /** @hidden */
+    private _handleArrowKeydown(event: KeyboardEvent): void {
+        event.preventDefault();
+        let indexToFocus = -1;
+        for (let index = 0; index < this._gridListItems.length; index++) {
+            if (document.activeElement === this._gridListItems.toArray()[index]._gridListItem.nativeElement) {
+                indexToFocus = index;
+                let itemToFocus;
+                if (
+                    KeyUtil.isKeyCode(event, UP_ARROW) ||
+                    KeyUtil.isKeyCode(event, LEFT_ARROW) ||
+                    (this._rtl$() && KeyUtil.isKeyCode(event, [RIGHT_ARROW]))
+                ) {
+                    itemToFocus = this.gridListItems.toArray()[indexToFocus - 1];
+                } else if (
+                    KeyUtil.isKeyCode(event, DOWN_ARROW) ||
+                    KeyUtil.isKeyCode(event, RIGHT_ARROW) ||
+                    (this._rtl$() && KeyUtil.isKeyCode(event, [LEFT_ARROW]))
+                ) {
+                    itemToFocus = this.gridListItems.toArray()[indexToFocus + 1];
+                }
+                if (itemToFocus && itemToFocus._gridListItem) {
+                    itemToFocus._gridListItem.nativeElement.focus();
+                }
+                break;
+            }
+        }
     }
 
     /** @hidden */
