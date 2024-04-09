@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.15...v0.50.0-rc.16) (2024-04-09)
+
+
+### Bug Fixes
+
+* **core, platform:** step input disabled state ([#11724](https://github.com/SAP/fundamental-ngx/issues/11724)) ([7ca5ab5](https://github.com/SAP/fundamental-ngx/commit/7ca5ab55cb7f59a78e9765b7c03e6684b57a5bc5))
+
+
+
+
+
 # [0.50.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.14...v0.50.0-rc.15) (2024-04-09)
 
 **Note:** Version bump only for package @fundamental-ngx/core
