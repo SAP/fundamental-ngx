@@ -1,5 +1,4 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
@@ -20,15 +19,11 @@ export class MultiInputAsyncExampleComponent {
     displayFn = (v: OptionItem): string => v.label;
     valueFn = (v: OptionItem): string => v.value;
 
-    constructor(private http: HttpClient) {
+    constructor() {
         this.dropdownValues$ = this.searchValue$.pipe(
             startWith(''),
             switchMap((searchQuery) => this.serverRequest(searchQuery))
         );
-    }
-
-    getDropdownValues(): Observable<string[]> {
-        return this.http.get<string[]>('./assets/multi-input-values.json');
     }
 
     /**
