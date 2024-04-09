@@ -236,7 +236,8 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
         event.preventDefault();
         let indexToFocus = -1;
         for (let index = 0; index < this._gridListItems.length; index++) {
-            if (document.activeElement === this._gridListItems.toArray()[index]._gridListItem.nativeElement) {
+            const currentItem = this._gridListItems.toArray()[index];
+            if (document.activeElement === currentItem._gridListItem.nativeElement) {
                 indexToFocus = index;
                 let itemToFocus;
                 if (
@@ -244,15 +245,24 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
                     KeyUtil.isKeyCode(event, LEFT_ARROW) ||
                     (this._rtl$() && KeyUtil.isKeyCode(event, [RIGHT_ARROW]))
                 ) {
-                    itemToFocus = this.gridListItems.toArray()[indexToFocus - 1];
+                    indexToFocus = indexToFocus - 1;
+                    itemToFocus = this.gridListItems.toArray()[indexToFocus];
                 } else if (
                     KeyUtil.isKeyCode(event, DOWN_ARROW) ||
                     KeyUtil.isKeyCode(event, RIGHT_ARROW) ||
                     (this._rtl$() && KeyUtil.isKeyCode(event, [LEFT_ARROW]))
                 ) {
-                    itemToFocus = this.gridListItems.toArray()[indexToFocus + 1];
+                    indexToFocus = indexToFocus + 1;
+                    itemToFocus = this.gridListItems.toArray()[indexToFocus];
                 }
                 if (itemToFocus && itemToFocus._gridListItem) {
+                    if (this.selectionMode === 'multiSelect' && event.shiftKey) {
+                        this.setSelectedItem(
+                            itemToFocus,
+                            indexToFocus,
+                            currentItem._selectedItem ? GridListSelectionActions.ADD : GridListSelectionActions.REMOVE
+                        );
+                    }
                     itemToFocus._gridListItem.nativeElement.focus();
                 }
                 break;
