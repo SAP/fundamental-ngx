@@ -42,7 +42,8 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         ButtonComponent,
         TitleComponent,
         ContentDensityDirective,
-        PopoverBodyFooterDirective
+        PopoverBodyFooterDirective,
+        IconComponent
     ]
 })
 export class PopoverExampleComponent {}
