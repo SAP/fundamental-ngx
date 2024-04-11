@@ -9,27 +9,17 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { ObjectStatusDefaultExampleComponent } from './examples/object-status-default-example.component';
-import {
-    ObjectStatusClickableAndIconExampleComponent,
-    ObjectStatusGenericExampleComponent,
-    ObjectStatusInvertedGenericTextExampleComponent,
-    ObjectStatusInvertedTextExampleComponent,
-    ObjectStatusLargeExampleComponent,
-    ObjectStatusTextExampleComponent,
-    ObjectStatusTextIconExampleComponent
-} from './examples/object-status-examples.component';
+import { ObjectStatusInvertedExampleComponent } from './examples/object-status-inverted-example.component';
+import { ObjectStatusLargeExampleComponent } from './examples/object-status-large-example.component';
 
 const objectStatusExamplesScss = 'object-status-examples.component.scss';
 
 const objectStatusDefaultTs = 'object-status-default-example.component.ts';
 const objectStatusDefaultHtml = 'object-status-default-example.component.html';
-const ObjectStatusTextExample = 'object-status-text-example.component.html';
-const ObjectStatusGenericTextExample = 'object-status-generic-text-example.component.html';
-const ObjectStatusTextIconExample = 'object-status-icon-text-example.component.html';
-const ObjectStatusClickableAndIConExample = 'object-status-clickable-and-icon-example.component.html';
-const ObjectStatusInvertedTextExample = 'object-status-inverted-example.component.html';
-const ObjectStatusInvertedGenericExample = 'object-status-inverted-generic-text-example.component.html';
-const ObjectStatusLargeExample = 'object-status-large-example.component.html';
+const objectStatusInvertedExampleTs = 'object-status-inverted-example.component.ts';
+const objectStatusInvertedExample = 'object-status-inverted-example.component.html';
+const objectStatusLargeExample = 'object-status-large-example.component.html';
+const objectStatusLargeExampleTs = 'object-status-large-example.component.ts';
 
 @Component({
     selector: 'app-object-status',
@@ -41,13 +31,8 @@ const ObjectStatusLargeExample = 'object-status-large-example.component.html';
         ObjectStatusDefaultExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
-        ObjectStatusTextExampleComponent,
         DescriptionComponent,
-        ObjectStatusTextIconExampleComponent,
-        ObjectStatusGenericExampleComponent,
-        ObjectStatusClickableAndIconExampleComponent,
-        ObjectStatusInvertedTextExampleComponent,
-        ObjectStatusInvertedGenericTextExampleComponent,
+        ObjectStatusInvertedExampleComponent,
         ObjectStatusLargeExampleComponent
     ]
 })
@@ -73,59 +58,45 @@ export class ObjectStatusDocsComponent {
         }
     ];
 
-    ObjectStatusTextExample: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(ObjectStatusTextExample),
-            fileName: 'object-status-text-example'
-        }
-    ];
-
-    ObjectStatusTextIconExample: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(ObjectStatusGenericTextExample),
-            fileName: 'object-status-generic-text-example'
-        }
-    ];
-
-    ObjectStatusNumericIconExample: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(ObjectStatusTextIconExample),
-            fileName: 'object-status-icon-text-example'
-        }
-    ];
-
-    ObjectStatusclickableAndIconExample: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(ObjectStatusClickableAndIConExample),
-            fileName: 'object-status-clickable-and-icon-example'
-        }
-    ];
-
     ObjectStatusInvertedExample: ExampleFile[] = [
         {
-            language: 'html',
-            code: getAssetFromModuleAssets(ObjectStatusInvertedTextExample),
-            fileName: 'object-status-inverted-example'
-        }
-    ];
-
-    ObjectStatusInverterdGenericExample: ExampleFile[] = [
+            language: 'typescript',
+            code: getAssetFromModuleAssets(objectStatusInvertedExampleTs),
+            fileName: 'object-status-inverted-example',
+            component: 'ObjectStatusInvertedExampleComponent'
+        },
         {
             language: 'html',
-            code: getAssetFromModuleAssets(ObjectStatusInvertedGenericExample),
-            fileName: 'object-status-inverted-generic-text-example'
+            code: getAssetFromModuleAssets(objectStatusInvertedExample),
+            fileName: 'object-status-inverted-example'
+        },
+        {
+            language: 'scss',
+            code: getAssetFromModuleAssets(objectStatusExamplesScss),
+            fileName: 'object-status-examples',
+            component: 'ObjectStatusDefaultExample',
+            scssFileCode: getAssetFromModuleAssets(objectStatusExamplesScss)
         }
     ];
 
     ObjectStatusLargeExample: ExampleFile[] = [
         {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(objectStatusLargeExampleTs),
+            fileName: 'object-status-large-example',
+            component: 'ObjectStatusLargeExampleComponent'
+        },
+        {
             language: 'html',
-            code: getAssetFromModuleAssets(ObjectStatusLargeExample),
+            code: getAssetFromModuleAssets(objectStatusLargeExample),
             fileName: 'object-status-large-example'
+        },
+        {
+            language: 'scss',
+            code: getAssetFromModuleAssets(objectStatusExamplesScss),
+            fileName: 'object-status-examples',
+            component: 'ObjectStatusDefaultExample',
+            scssFileCode: getAssetFromModuleAssets(objectStatusExamplesScss)
         }
     ];
 }
