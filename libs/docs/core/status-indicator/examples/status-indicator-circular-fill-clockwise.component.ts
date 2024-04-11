@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
 
 @Component({
-    selector: 'fd-status-indicator-circular-fill-anti-clock',
-    templateUrl: './status-indicator-cirular-fill-anti-clockwise.component.html',
+    selector: 'fd-status-indicator-circular-fill-clockwise',
+    templateUrl: './status-indicator-circular-fill-clockwise.component.html',
     standalone: true,
     imports: [StatusIndicatorModule]
 })
-export class StatusIndicatorCircularFillAntiClockComponent {
+export class StatusIndicatorCircularFillClockwiseComponent {
     /* eslint-disable max-len */
     cerealImage = [
         'M14.664,29.825c-0.133,0-0.217-0.004-0.236-0.005l-0.202-0.01l-0.032-0.2c-0.021-0.137-0.515-3.368,1.238-5.323c1.754-1.954,5.02-1.814,5.158-1.806l0.202,0.01l0.032,0.2c0.021,0.137,0.516,3.368-1.238,5.323C18.082,29.69,15.467,29.825,14.664,29.825z',
