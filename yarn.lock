@@ -3283,16 +3283,22 @@
     tslib "^2.4.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@fundamental-styles/cx@0.35.1":
   version "0.35.1"
   resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.35.1.tgz#e0de2dc9c888f05f087ff69a9059a0f882027fc3"
   integrity sha512-EPIoRU5s47rqqMm7S79WCQaO5AWwjc36ILHM382j9R+Iwmfte0S00c6ewNPaKTn/wCSbY84en2/imp2ccsKhkQ==
 =======
+=======
+>>>>>>> 2f359919d0 (feat(core): update Card header to latest design)
 "@fundamental-styles/cx@0.35.0-rc.9":
   version "0.35.0-rc.9"
   resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.35.0-rc.9.tgz#44caf104a6622a9ac4b26d53f86ca447b6aa3aef"
   integrity sha512-aPfgGfWvOcj6RickkZBy5rTrEqr/AR/3OptX23RE4TlYfa6BrtFt0AMZMftZXIFdwt2O5ryvvZDG8aDKt8OHdA==
+<<<<<<< HEAD
 >>>>>>> e30bf5a87f (feat(core): update Card header to latest design)
+=======
+>>>>>>> 2f359919d0 (feat(core): update Card header to latest design)
 
 "@hapi/hoek@^9.0.0":
   version "9.3.0"
@@ -10878,16 +10884,22 @@ functions-have-names@^1.2.2, functions-have-names@^1.2.3:
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 fundamental-styles@0.35.1:
   version "0.35.1"
   resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.35.1.tgz#2a5137ece728ef212e44cc5f52eaa163a6d4e323"
   integrity sha512-0YwATAgNh2G6VehOn9VtcdNU6tt4EEGkXiwfwdU98YvzmLEP4goQ0Vpigr33TC+nnqh+cb/bW03fPkz3B4G62Q==
 =======
+=======
+>>>>>>> 2f359919d0 (feat(core): update Card header to latest design)
 fundamental-styles@0.35.0-rc.9:
   version "0.35.0-rc.9"
   resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.35.0-rc.9.tgz#316dc1ffa5d158c7b87919b548d8c51287fdfe74"
   integrity sha512-/b54nz1l7teJHGuyAesWPPqtfgMb7UTg5h2g9u69RCl/Q9QacLMELQIC3LsdscmwqHumVOmxhEwWMyPscA0RyQ==
+<<<<<<< HEAD
 >>>>>>> e30bf5a87f (feat(core): update Card header to latest design)
+=======
+>>>>>>> 2f359919d0 (feat(core): update Card header to latest design)
 
 fuse.js@7.0.0:
   version "7.0.0"

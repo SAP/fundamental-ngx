@@ -48,10 +48,14 @@
         "@angular/platform-browser-dynamic": "17.3.0",
         "@angular/router": "17.3.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
         "@fundamental-styles/cx": "0.35.1",
 =======
         "@fundamental-styles/cx": "0.35.0-rc.9",
 >>>>>>> e30bf5a87f (feat(core): update Card header to latest design)
+=======
+        "@fundamental-styles/cx": "0.35.0-rc.9",
+>>>>>>> 2f359919d0 (feat(core): update Card header to latest design)
         "@nx/angular": "18.1.2",
         "@sap-theming/theming-base-content": "11.14.0",
         "@stackblitz/sdk": "1.9.0",
@@ -63,10 +67,14 @@
         "focus-trap": "7.1.0",
         "focus-visible": "5.2.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
         "fundamental-styles": "0.35.1",
 =======
         "fundamental-styles": "0.35.0-rc.9",
 >>>>>>> e30bf5a87f (feat(core): update Card header to latest design)
+=======
+        "fundamental-styles": "0.35.0-rc.9",
+>>>>>>> 2f359919d0 (feat(core): update Card header to latest design)
         "fuse.js": "7.0.0",
         "highlight.js": "11.7.0",
         "intl": "1.2.5",
