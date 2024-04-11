@@ -12,31 +12,16 @@ import {
 import { SideNavigationCondensedExampleComponent } from './examples/side-navigation-condensed-example/side-navigation-condensed-example.component';
 import { SideNavigationCondensedObjectExampleComponent } from './examples/side-navigation-condensed-object-example/side-navigation-condensed-object-example.component';
 import {
-    SideNavigationCompactExampleComponent,
     SideNavigationExampleComponent,
-    SideNavigationIconsExampleComponent,
-    SideNavigationTitlesExampleComponent
+    SideNavigationIconsExampleComponent
 } from './examples/side-navigation-examples.component';
 import { SideNavigationMultipleSelectedExampleComponent } from './examples/side-navigation-multiple-selected-example/side-navigation-multiple-selected-example.component';
-import { SideNavigationNonSelectableExampleComponent } from './examples/side-navigation-non-selectable-example/side-navigation-non-selectable-example.component';
 import { SideNavigationObjectExampleComponent } from './examples/side-navigation-object-example/side-navigation-object-example.component';
 import { SideNavigationProgrammaticallyExampleComponent } from './examples/side-navigation-programmatically-example/side-navigation-programmatically-example.component';
-import { SideNavigationThreeLevelsExampleComponent } from './examples/side-navigation-three-levels-example/side-navigation-three-levels-example.component';
 
 const sideNavigationScssCode = 'side-navigation-examples.component.scss';
-
 const sideNavigationSrc = 'side-navigation-example.component.html';
 const sideNavigationIconsSrc = 'side-navigation-icons-example.component.html';
-const sideNavigationTitlesSrc = 'side-navigation-titles-example.component.html';
-const sideNavigationCompactSrc = 'side-navigation-compact-example.component.html';
-const sideNavigationMultiLevelSrc =
-    'side-navigation-three-levels-example/side-navigation-three-levels-example.component.html';
-
-const sideNavigationNonSelectSrc =
-    'side-navigation-non-selectable-example/side-navigation-non-selectable-example.component.html';
-
-const sideNavigationMultiLevelSrcTs =
-    'side-navigation-three-levels-example/side-navigation-three-levels-example.component.ts';
 
 const programmaticallySideNavigationSrc =
     'side-navigation-programmatically-example/side-navigation-programmatically-example.component.html';
@@ -75,10 +60,6 @@ const sideNavigationCondensedObjectSrcTs =
         SideNavigationExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
-        SideNavigationTitlesExampleComponent,
-        SideNavigationCompactExampleComponent,
-        SideNavigationNonSelectableExampleComponent,
-        SideNavigationThreeLevelsExampleComponent,
         SideNavigationMultipleSelectedExampleComponent,
         SideNavigationProgrammaticallyExampleComponent,
         SideNavigationIconsExampleComponent,
@@ -94,34 +75,6 @@ export class SideNavigationDocsComponent {
             code: getAssetFromModuleAssets(sideNavigationSrc),
             fileName: 'side-navigation-example',
             scssFileCode: getAssetFromModuleAssets(sideNavigationScssCode)
-        }
-    ];
-
-    titlesSideNav: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(sideNavigationTitlesSrc),
-            fileName: 'side-navigation-titles-example',
-            scssFileCode: getAssetFromModuleAssets(sideNavigationScssCode)
-        }
-    ];
-
-    compactSideNav: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(sideNavigationCompactSrc),
-            fileName: 'side-navigation-compact-example',
-            scssFileCode: getAssetFromModuleAssets(sideNavigationScssCode)
-        }
-    ];
-
-    multiLevelsSideNav: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(sideNavigationMultiLevelSrc),
-            fileName: 'side-navigation-three-levels-example',
-            typescriptFileCode: sideNavigationMultiLevelSrcTs,
-            component: 'SideNavigationThreeLevelsExampleComponent'
         }
     ];
 
@@ -155,14 +108,6 @@ export class SideNavigationDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(sideNavigationIconsSrc),
             fileName: 'side-navigation-icons-example'
-        }
-    ];
-
-    nonSelectableSideNav: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(sideNavigationNonSelectSrc),
-            fileName: 'side-navigation-non-selectable-example'
         }
     ];
 

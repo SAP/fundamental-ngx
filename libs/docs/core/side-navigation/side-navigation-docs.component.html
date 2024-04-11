@@ -1,8 +1,14 @@
-<fd-docs-section-title id="one-level" componentName="side-navigation">
-    Side Navigation with One Level List
-</fd-docs-section-title>
+<fd-docs-section-title id="one-level" componentName="side-navigation"> Side Navigation </fd-docs-section-title>
 <description>
-    It's mandatory to use <code>[textOnly]="true"</code> to <code>fd-nested-list</code>, when there are no icons.
+    Side Navigation is a vertical navigation component that is placed on the left side of the screen. It is used to
+    navigate between different sections of the application. you need to add <code>fd-side-nav</code> component, and
+    inside it, you need to add <code>fd-side-nav-main</code> and <code>fd-side-nav-utility</code> elements. Inside
+    <code>fd-side-nav-main</code> you need to add <code>fd-nested-list</code> element, and inside it
+    <code>fd-nested-list-item</code> elements. To have a header, use <code>fd-nested-list-header</code> element. To have
+    a link, use <code>fd-nested-list-link</code> element. To have a selected link, use <code>[selected]="true"</code> on
+    the <code>fd-nested-list-link</code> element. To have a nested list, use <code>fd-nested-list</code> element inside
+    <code>fd-nested-list-item</code> element. To have a nested list header, use
+    <code>fd-nested-list-header</code> element.
 </description>
 <component-example>
     <fd-side-navigation-example></fd-side-navigation-example>
@@ -11,57 +17,14 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="titles" componentName="side-navigation"> Side Navigation with Titles </fd-docs-section-title>
-<description>Use this to group navigation. Titles are not clickable.</description>
-<component-example>
-    <fd-side-navigation-titles-example></fd-side-navigation-titles-example>
-</component-example>
-<code-example [exampleFiles]="titlesSideNav"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="compact" componentName="side-navigation">
-    Side Navigation with Compact Mode
-</fd-docs-section-title>
-<description>Add <code>fdCompact</code> to switch to compact mode</description>
-<component-example>
-    <fd-side-navigation-compact-example></fd-side-navigation-compact-example>
-</component-example>
-<code-example [exampleFiles]="compactSideNav"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="disabled-selection" componentName="side-navigation">
-    Side Navigation with Disabled Selection
-</fd-docs-section-title>
-<description>
-    Add <code>[selectable]="false"</code> to main side navigation component, to prevent from changing selected state on
-    items on click
-</description>
-<component-example>
-    <fd-side-navigation-non-selectable-example></fd-side-navigation-non-selectable-example>
-</component-example>
-<code-example [exampleFiles]="nonSelectableSideNav"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="multiple-levels" componentName="side-navigation">
-    Side Navigation with Multiple Levels
-</fd-docs-section-title>
-<description>
-    Use this when there is more than one level of hierarchy in the left navigation. Each level can be expanded and
-    collapsed.
-</description>
-<component-example>
-    <fd-side-navigation-three-levels-example></fd-side-navigation-three-levels-example>
-</component-example>
-<code-example [exampleFiles]="multiLevelsSideNav"></code-example>
-
-<separator></separator>
-
 <fd-docs-section-title id="multiple-selected" componentName="side-navigation">
-    Side Navigation With Multiple Levels and Selected Option
+    Side Navigation With Multiple Levels and Selected Option.
 </fd-docs-section-title>
+<description>
+    To have multiple levels of hierarchy in the left navigation, use <code>fd-nested-list</code> inside the
+    <code>fd-side-nav-main</code> element. To have selected option, use <code>[selected]="true"</code> on the
+    <code>fd-nested-list-link</code> element.
+</description>
 <component-example>
     <fd-side-navigation-multiple-selected-example></fd-side-navigation-multiple-selected-example>
 </component-example>
