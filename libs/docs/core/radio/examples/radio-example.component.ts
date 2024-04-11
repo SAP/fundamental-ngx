@@ -7,7 +7,7 @@ import {
     FormItemComponent,
     FormLegendDirective
 } from '@fundamental-ngx/core/form';
-import { RadioModule } from '@fundamental-ngx/core/radio';
+import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 
 @Component({
     selector: 'fd-radio-example',
@@ -19,11 +19,11 @@ import { RadioModule } from '@fundamental-ngx/core/radio';
         FormLegendDirective,
         FormGroupComponent,
         FormItemComponent,
-        RadioModule,
+        RadioButtonComponent,
         FormsModule
     ]
 })
-export class RadioExamplesComponent {
+export class RadioExampleComponent {
     optionVariable = 'val1';
     optionTwoVariable = 'val2';
     optionThreeVariable = 'val1';
