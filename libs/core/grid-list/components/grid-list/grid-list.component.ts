@@ -109,6 +109,7 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
     /** @hidden */
     private readonly subscription = new Subscription();
 
+    /** @hidden */
     private readonly _rtlService = inject(RtlService, {
         optional: true
     });

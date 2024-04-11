@@ -289,4 +289,63 @@ describe('GridListComponent', () => {
         selectedItemEvent = { added: [], index: [5], removed: ['Title 6'], selection: ['Title 5', 'Title 2'] };
         expect(component.selectionChange).toHaveBeenCalledWith(selectedItemEvent);
     });
+
+    describe('Keyboard Grid List Tests', () => {
+        it('should handle arrow key focus changes', () => {
+            fixture.detectChanges();
+            const itemsArray = component.gridListComponent.gridListItems.toArray();
+            const firstItem = itemsArray[0]._gridListItem.nativeElement;
+            firstItem.focus();
+            fixture.detectChanges();
+            expect(document.activeElement).toBe(firstItem);
+            component.gridListComponent.handleKeydown(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+            fixture.detectChanges();
+            const secondItem = itemsArray[1]._gridListItem.nativeElement;
+            expect(document.activeElement).toBe(secondItem);
+            component.gridListComponent.handleKeydown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+            fixture.detectChanges();
+            const thirdItem = itemsArray[2]._gridListItem.nativeElement;
+            expect(document.activeElement).toBe(thirdItem);
+            component.gridListComponent.handleKeydown(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+            fixture.detectChanges();
+            expect(document.activeElement).toBe(secondItem);
+            component.gridListComponent.handleKeydown(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
+            fixture.detectChanges();
+            expect(document.activeElement).toBe(firstItem);
+        });
+
+        it('should handle selection when shift+arrow keys are pressed', () => {
+            component.setMode('multiSelect');
+            jest.spyOn(component, 'selectionChange');
+            const itemsArray = component.gridListComponent.gridListItems.toArray();
+            fixture.detectChanges();
+            const checkboxButtonOne = fixture.debugElement.queryAll(By.css('.fd-grid-list__item .fd-checkbox'))[0];
+            checkboxButtonOne.nativeElement.click();
+            itemsArray[0]._gridListItem.nativeElement.focus();
+            component.gridListComponent.handleKeydown(new KeyboardEvent('keydown', { key: 'ArrowRight', shiftKey: true }));
+            fixture.detectChanges();
+            const selectedItemEvent = {
+                added: [ 'Title 2' ],
+                index: [ 1 ],
+                removed: [],
+                selection: [ 'Title 1', 'Title 2' ]
+            };
+            expect(component.selectionChange).toHaveBeenCalledWith(selectedItemEvent);
+            expect(component.gridListComponent.gridListItems.toArray()[1]._selectedItem).toBeTruthy();
+        });
+
+        it('should handle selection when shift+end keys are pressed', () => {
+            component.setMode('multiSelect');
+            const itemsArray = component.gridListComponent.gridListItems.toArray();
+            fixture.detectChanges();
+            const checkboxButtonOne = fixture.debugElement.queryAll(By.css('.fd-grid-list__item .fd-checkbox'))[0];
+            checkboxButtonOne.nativeElement.click();
+            itemsArray[0]._gridListItem.nativeElement.focus();
+            component.gridListComponent.handleKeydown(new KeyboardEvent('keydown', { key: 'End', shiftKey: true }));
+            fixture.detectChanges();
+            component.gridListComponent.gridListItems.toArray().forEach(item => {
+                expect(item._selectedItem).toBeTruthy();
+            });
+        });
+    });
 });
