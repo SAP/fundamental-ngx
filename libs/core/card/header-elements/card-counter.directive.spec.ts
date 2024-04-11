@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 import { CardCounterDirective } from './card-counter.directive';
 
-import { CLASS_NAME } from './constants';
+import { CLASS_NAME } from '../constants';
 
 @Component({
     template: `<span fd-card-counter [status]="status">1 of 10</span>`,

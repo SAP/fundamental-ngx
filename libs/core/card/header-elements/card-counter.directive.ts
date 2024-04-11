@@ -1,21 +1,30 @@
-import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
+import { Directive, ElementRef, OnChanges, OnInit, input } from '@angular/core';
 
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { ObjectStatus, buildObjectStatusCssClasses } from '@fundamental-ngx/core/object-status';
 
-import { CLASS_NAME } from './constants';
+import { CLASS_NAME } from '../constants';
+import { FD_CARD_COUNTER } from '../token';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-card-counter]',
-    standalone: true
+    standalone: true,
+    providers: [
+        {
+            provide: FD_CARD_COUNTER,
+            useExisting: CardCounterDirective
+        }
+    ]
 })
 export class CardCounterDirective implements OnInit, OnChanges, CssClassBuilder {
     /**
-     * The status represented by the Object Status.
-     * Can be one of the following: 'negative' | 'critical' | 'positive' | 'informative'
+     * the status represented by the Object Status.
+     * can be one of the following: 'negative' | 'critical' | 'positive' | 'informative' | 'neutral'
      */
-    @Input()
+    statusInput = input<ObjectStatus>('neutral', { alias: 'status' });
+
+    /** @hidden */
     status: ObjectStatus;
 
     /** @hidden */
@@ -27,6 +36,7 @@ export class CardCounterDirective implements OnInit, OnChanges, CssClassBuilder 
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
+        this.status = this.statusInput();
         const objectStatusClasses = buildObjectStatusCssClasses(this);
         return [CLASS_NAME.cardCounter, ...objectStatusClasses];
     }

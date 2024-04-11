@@ -8,7 +8,9 @@
     <fd-fixed-card-layout [disableDragDrop]="dragDisabled">
         <fd-card cardType="list" *fdCardDef>
             <fd-card-header>
-                <h2 fd-card-title>Card Title</h2>
+                <fd-card-main-header>
+                    <h2 fd-card-title>Card Title</h2>
+                </fd-card-main-header>
             </fd-card-header>
             <fd-card-content>
                 <ul fd-list [noBorder]="true">
@@ -26,33 +28,35 @@
         </fd-card>
         <fd-card cardType="analytical" *fdCardDef>
             <fd-card-header>
-                <h2 fd-card-title>Projected revenue</h2>
-                <h3 fd-card-subtitle>Values include taxes | USD</h3>
-                <span fd-card-counter status="informative">3 of 15</span>
+                <fd-card-main-header>
+                    <h2 fd-card-title>Projected revenue</h2>
+                    <h3 fd-card-subtitle>Values include taxes | USD</h3>
+                    <span fd-card-counter status="informative">3 of 15</span>
 
-                <fd-card-kpi-header>
-                    <strong fd-card-kpi-value status="positive">21.83</strong>
-                    <span
-                        fd-card-kpi-scale-icon
-                        glyph="up"
-                        aria-label="up arrow"
-                        title="up arrow"
-                        fd-object-status
-                        status="positive"
-                    ></span>
-                    <span fd-card-kpi-scale-text fd-object-status status="positive" label="K"></span>
+                    <fd-card-kpi-header>
+                        <strong fd-card-kpi-value status="positive">21.83</strong>
+                        <span
+                            fd-card-kpi-scale-icon
+                            glyph="up"
+                            aria-label="up arrow"
+                            title="up arrow"
+                            fd-object-status
+                            status="positive"
+                        ></span>
+                        <span fd-card-kpi-scale-text fd-object-status status="positive" label="K"></span>
 
-                    <div fd-card-kpi-analytics>
-                        <label fd-card-kpi-analytics-label>Target</label>
-                        <div fd-card-kpi-analytics-content>25K</div>
-                    </div>
-                    <div fd-card-kpi-analytics>
-                        <label fd-card-kpi-analytics-label>Deviation</label>
-                        <span fd-card-kpi-analytics-content>14.52%</span>
-                    </div>
-                </fd-card-kpi-header>
+                        <div fd-card-kpi-analytics>
+                            <label fd-card-kpi-analytics-label>Target</label>
+                            <div fd-card-kpi-analytics-content>25K</div>
+                        </div>
+                        <div fd-card-kpi-analytics>
+                            <label fd-card-kpi-analytics-label>Deviation</label>
+                            <span fd-card-kpi-analytics-content>14.52%</span>
+                        </div>
+                    </fd-card-kpi-header>
 
-                <h4 fd-card-second-subtitle>Q1, 2018</h4>
+                    <h4 fd-card-second-subtitle>Q1, 2018</h4>
+                </fd-card-main-header>
             </fd-card-header>
             <fd-card-content>
                 <ul fd-list [noBorder]="true">
@@ -70,8 +74,10 @@
         </fd-card>
         <fd-card cardType="table" *fdCardDef>
             <fd-card-header>
-                <h2 fd-card-title>Table card</h2>
-                <span fd-card-counter>3 of 10</span>
+                <fd-card-main-header>
+                    <h2 fd-card-title>Table card</h2>
+                    <span fd-card-counter>3 of 10</span>
+                </fd-card-main-header>
             </fd-card-header>
             <fd-card-content tabindex="0">
                 <table fd-table [noBorderX]="true">
@@ -114,17 +120,19 @@
         </fd-card>
         <fd-card *fdCardDef badge="New" cardType="list">
             <fd-card-header>
-                <fd-avatar
-                    image="https://picsum.photos/id/1018/400"
-                    [circle]="true"
-                    size="s"
-                    ariaLabel="avatar image"
-                    title="avatar image"
-                >
-                </fd-avatar>
-                <h2 fd-card-title>Card Title</h2>
-                <h3 fd-card-subtitle>Card Subtitle</h3>
-                <span fd-card-counter status="positive">3 of 10</span>
+                <fd-card-main-header>
+                    <fd-avatar
+                        image="https://picsum.photos/id/1018/400"
+                        [circle]="true"
+                        size="s"
+                        ariaLabel="avatar image"
+                        title="avatar image"
+                    >
+                    </fd-avatar>
+                    <h2 fd-card-title>Card Title</h2>
+                    <h3 fd-card-subtitle>Card Subtitle</h3>
+                    <span fd-card-counter status="positive">3 of 10</span>
+                </fd-card-main-header>
             </fd-card-header>
             <fd-card-content>
                 <ul fd-list [noBorder]="true">
@@ -145,9 +153,11 @@
         </fd-card>
         <fd-card *fdCardDef fdCompact cardType="list">
             <fd-card-header>
-                <h2 fd-card-title>Card Title</h2>
-                <h3 fd-card-subtitle>Card Subtitle</h3>
-                <span fd-card-counter>3 of 10</span>
+                <fd-card-main-header>
+                    <h2 fd-card-title>Card Title</h2>
+                    <h3 fd-card-subtitle>Card Subtitle</h3>
+                    <span fd-card-counter>3 of 10</span>
+                </fd-card-main-header>
             </fd-card-header>
             <fd-card-content>
                 <ul fd-list [noBorder]="true" fdCompact>
@@ -171,7 +181,9 @@
         </fd-card>
         <fd-card cardType="list" *fdCardDef>
             <fd-card-header>
-                <h2 fd-card-title>Card Title</h2>
+                <fd-card-main-header>
+                    <h2 fd-card-title>Card Title</h2>
+                </fd-card-main-header>
             </fd-card-header>
             <fd-card-content>
                 <ul fd-list [noBorder]="true">
@@ -189,8 +201,10 @@
         </fd-card>
         <fd-card cardType="table" *fdCardDef>
             <fd-card-header>
-                <h2 fd-card-title>Table card</h2>
-                <span fd-card-counter>3 of 10</span>
+                <fd-card-main-header>
+                    <h2 fd-card-title>Table card</h2>
+                    <span fd-card-counter>3 of 10</span>
+                </fd-card-main-header>
             </fd-card-header>
             <fd-card-content tabindex="0">
                 <table fd-table [noBorderX]="true">
@@ -233,17 +247,19 @@
         </fd-card>
         <fd-card *fdCardDef badge="New" cardType="list">
             <fd-card-header>
-                <fd-avatar
-                    image="https://picsum.photos/id/1018/400"
-                    [circle]="true"
-                    size="s"
-                    ariaLabel="avatar image"
-                    title="avatar image"
-                >
-                </fd-avatar>
-                <h2 fd-card-title>Card Title</h2>
-                <h3 fd-card-subtitle>Card Subtitle</h3>
-                <span fd-card-counter status="positive">3 of 10</span>
+                <fd-card-main-header>
+                    <fd-avatar
+                        image="https://picsum.photos/id/1018/400"
+                        [circle]="true"
+                        size="s"
+                        ariaLabel="avatar image"
+                        title="avatar image"
+                    >
+                    </fd-avatar>
+                    <h2 fd-card-title>Card Title</h2>
+                    <h3 fd-card-subtitle>Card Subtitle</h3>
+                    <span fd-card-counter status="positive">3 of 10</span>
+                </fd-card-main-header>
             </fd-card-header>
             <fd-card-content>
                 <ul fd-list [noBorder]="true">
@@ -264,9 +280,11 @@
         </fd-card>
         <fd-card *fdCardDef fdCompact cardType="list">
             <fd-card-header>
-                <h2 fd-card-title>Card Title</h2>
-                <h3 fd-card-subtitle>Card Subtitle</h3>
-                <span fd-card-counter>3 of 10</span>
+                <fd-card-main-header>
+                    <h2 fd-card-title>Card Title</h2>
+                    <h3 fd-card-subtitle>Card Subtitle</h3>
+                    <span fd-card-counter>3 of 10</span>
+                </fd-card-main-header>
             </fd-card-header>
             <fd-card-content>
                 <ul fd-list [noBorder]="true" fdCompact>

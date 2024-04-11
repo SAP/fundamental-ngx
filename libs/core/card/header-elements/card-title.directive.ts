@@ -1,8 +1,8 @@
-import { Directive, ElementRef, HostBinding, Input, OnInit } from '@angular/core';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { Directive, ElementRef, input, OnInit } from '@angular/core';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 
-import { CLASS_NAME } from './constants';
-import { FD_CARD_TITLE } from './token';
+import { CLASS_NAME } from '../constants';
+import { FD_CARD_TITLE } from '../token';
 
 let cardTitleId = 0;
 
@@ -15,13 +15,14 @@ let cardTitleId = 0;
             provide: FD_CARD_TITLE,
             useExisting: CardTitleDirective
         }
-    ]
+    ],
+    host: {
+        '[attr.id]': 'id()'
+    }
 })
 export class CardTitleDirective implements OnInit, CssClassBuilder {
     /** Card title id, it has some default value if not set,  */
-    @Input()
-    @HostBinding('attr.id')
-    id = 'fd-card-title-id-' + cardTitleId++;
+    id = input('fd-card-title-id-' + cardTitleId++);
 
     /** @hidden */
     class: string;

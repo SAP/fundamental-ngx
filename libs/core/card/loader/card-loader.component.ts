@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
-import { CLASS_NAME } from './constants';
+import { CLASS_NAME } from '../constants';
 
 @Component({
-    selector: 'fd-card-content',
+    selector: 'fd-card-loader',
     template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
-export class CardContentComponent implements OnInit, CssClassBuilder {
+export class CardLoaderComponent implements OnInit, CssClassBuilder {
     /** @hidden */
     class: string;
 
@@ -19,7 +19,7 @@ export class CardContentComponent implements OnInit, CssClassBuilder {
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return [CLASS_NAME.cardContent];
+        return [CLASS_NAME.cardLoader];
     }
 
     /** @hidden */

@@ -2,18 +2,18 @@ import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { CardSubtitleDirective } from './card-subtitle.directive';
+import { CardTitleDirective } from './card-title.directive';
 
-import { CLASS_NAME } from './constants';
+import { CLASS_NAME } from '../constants';
 
 @Component({
-    template: `<span fd-card-subtitle>Subtitle</span>`,
+    template: `<h1 fd-card-title>Title</h1>`,
     standalone: true,
-    imports: [CardSubtitleDirective]
+    imports: [CardTitleDirective]
 })
 class TestComponent {}
 
-describe('CardSubtitleComponent', () => {
+describe('CardTitleComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
     let debugElement: DebugElement;
 
@@ -28,7 +28,7 @@ describe('CardSubtitleComponent', () => {
 
         fixture.detectChanges();
 
-        debugElement = fixture.debugElement.query(By.directive(CardSubtitleDirective));
+        debugElement = fixture.debugElement.query(By.directive(CardTitleDirective));
     });
 
     it('should create', () => {
@@ -36,6 +36,6 @@ describe('CardSubtitleComponent', () => {
     });
 
     it('should add className to host', () => {
-        expect(debugElement.nativeElement.className.includes(CLASS_NAME.cardSubtitle)).toBe(true);
+        expect(debugElement.nativeElement.className.includes(CLASS_NAME.cardTitle)).toBe(true);
     });
 });

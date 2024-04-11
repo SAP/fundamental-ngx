@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CardLoaderComponent } from './card-loader.component';
 
-import { CLASS_NAME } from './constants';
+import { CLASS_NAME } from '../constants';
 
 describe('CardLoaderComponent', () => {
     let fixture: ComponentFixture<CardLoaderComponent>;

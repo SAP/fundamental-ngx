@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CardContentComponent } from './card-content.component';
 
-import { CLASS_NAME } from './constants';
+import { CLASS_NAME } from '../constants';
 
 describe('CardContentComponent', () => {
     let fixture: ComponentFixture<CardContentComponent>;

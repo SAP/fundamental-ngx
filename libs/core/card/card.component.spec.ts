@@ -2,8 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { CardContentComponent } from './card-content.component';
-import { CardTitleDirective } from './card-title.directive';
+import { CardContentComponent } from './content/card-content.component';
+import { CardTitleDirective } from './header-elements/card-title.directive';
 import { CardComponent } from './card.component';
 import { CardModule } from './card.module';
 import { CardType } from './constants';

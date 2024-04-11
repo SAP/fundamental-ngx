@@ -1,8 +1,10 @@
 <fd-card cardType="list" class="docs-flex-item-margin">
-    <fd-card-header [interactive]="false">
-        <h2 fd-card-title>Purchase Requisition Items</h2>
-        <h3 fd-card-subtitle>By delivery date and value</h3>
-        <span fd-card-counter>3 of 10</span>
+    <fd-card-header>
+        <fd-card-main-header [interactive]="false">
+            <h2 fd-card-title>Purchase Requisition Items</h2>
+            <h3 fd-card-subtitle>By delivery date and value</h3>
+            <span fd-card-counter>3 of 10</span>
+        </fd-card-main-header>
     </fd-card-header>
     <fd-card-content>
         <ul fd-list [byline]="true">
@@ -48,9 +50,11 @@
 <h2>Variant with Select control</h2>
 <fd-card>
     <fd-card-header>
-        <h2 fd-card-title>Select a movie to see the casts.</h2>
-        <h3 fd-card-subtitle>Showing sample data</h3>
-        <span fd-card-counter>4 of {{ movies.length }}</span>
+        <fd-card-main-header [interactive]="false">
+            <h2 fd-card-title>Select a movie to see the casts.</h2>
+            <h3 fd-card-subtitle>Showing sample data</h3>
+            <span fd-card-counter>4 of {{ movies.length }}</span>
+        </fd-card-main-header>
     </fd-card-header>
     <fd-card-content>
         <ul fd-list [byline]="true">

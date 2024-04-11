@@ -1,22 +1,19 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ContentChild,
     ElementRef,
-    HostBinding,
-    Input,
     OnChanges,
     OnDestroy,
     OnInit,
-    ViewEncapsulation
+    ViewEncapsulation,
+    contentChild,
+    input
 } from '@angular/core';
 
-import { applyCssClass, CssClassBuilder, Nullable } from '@fundamental-ngx/cdk/utils';
-
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Subscription } from 'rxjs';
-import { CardTitleDirective } from './card-title.directive';
-import { CardType, CLASS_NAME } from './constants';
+import { CLASS_NAME, CardType } from './constants';
 import { FD_CARD_TITLE } from './token';
 import { getCardModifierClassNameByCardType } from './utils';
 
@@ -30,40 +27,47 @@ let cardId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders()],
     standalone: true,
-    imports: []
+    imports: [],
+    host: {
+        '[attr.id]': 'id()',
+        '[attr.role]': 'role()',
+        '[attr.aria-labelledby]': 'cardTitle()?.id()'
+    }
 })
 export class CardComponent implements OnChanges, OnInit, CssClassBuilder, OnDestroy {
-    /** Badge */
-    @Input() badge: string;
-
-    /** Indicates when card should show a loader  */
-    @Input()
-    isLoading = false;
+    /** @hidden */
+    cardTitle = contentChild(FD_CARD_TITLE);
 
     /**
-     * cardType can be 'object' | 'standard' | 'component' | 'analytical' | 'list' | 'table' | 'quickView' | 'linkList'
-     * to indicate what card's type it belongs to
+     * text for the card badge
      */
-    @Input()
-    cardType: CardType = 'standard';
+    badge = input<string>();
 
-    /** Card Id, it has some default value if not set,  */
-    @Input()
-    @HostBinding('attr.id')
-    id = 'fd-card-id-' + cardId++;
+    /**
+     * whether the card is in loading state
+     * default: false
+     */
+    isLoading = input(false);
 
-    /** Card role  */
-    @Input()
-    @HostBinding('attr.role')
-    role = 'region';
+    /**
+     * set the Caard type
+     * options: 'object' | 'standard' | 'component' | 'analytical' | 'list' | 'table' | 'quickView' | 'linkList'
+     * default: 'standard'
+     *
+     */
+    cardType = input<CardType>('standard');
 
-    /** Card aria-labelledby  */
-    @HostBinding('attr.aria-labelledby')
-    cardTitleId: Nullable<string>;
+    /**
+     * card id
+     * if not set, a default value is provided
+     */
+    id = input('fd-card-id-' + cardId++);
 
-    /** @hidden */
-    @ContentChild(FD_CARD_TITLE, { static: true })
-    cardTitle: CardTitleDirective;
+    /**
+     * card role
+     * default: 'region'
+     */
+    role = input('region');
 
     /** @hidden */
     class: string;
@@ -82,7 +86,7 @@ export class CardComponent implements OnChanges, OnInit, CssClassBuilder, OnDest
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return [CLASS_NAME.card, this.cardType ? getCardModifierClassNameByCardType(this.cardType) : ''];
+        return [CLASS_NAME.card, this.cardType() ? getCardModifierClassNameByCardType(this.cardType()) : ''];
     }
 
     /** @hidden */
@@ -93,10 +97,6 @@ export class CardComponent implements OnChanges, OnInit, CssClassBuilder, OnDest
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-
-        if (this.cardTitle) {
-            this.cardTitleId = this.cardTitle.id;
-        }
     }
 
     /** @hidden */

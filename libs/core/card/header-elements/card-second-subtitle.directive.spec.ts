@@ -2,18 +2,18 @@ import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { CardTitleDirective } from './card-title.directive';
+import { CardSecondSubtitleDirective } from './card-second-subtitle.directive';
 
-import { CLASS_NAME } from './constants';
+import { CLASS_NAME } from '../constants';
 
 @Component({
-    template: `<h1 fd-card-title>Title</h1>`,
+    template: `<span fd-card-second-subtitle>Second subtitle</span>`,
     standalone: true,
-    imports: [CardTitleDirective]
+    imports: [CardSecondSubtitleDirective]
 })
 class TestComponent {}
 
-describe('CardTitleComponent', () => {
+describe('CardSecondSubtitleComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
     let debugElement: DebugElement;
 
@@ -28,7 +28,7 @@ describe('CardTitleComponent', () => {
 
         fixture.detectChanges();
 
-        debugElement = fixture.debugElement.query(By.directive(CardTitleDirective));
+        debugElement = fixture.debugElement.query(By.directive(CardSecondSubtitleDirective));
     });
 
     it('should create', () => {
@@ -36,6 +36,6 @@ describe('CardTitleComponent', () => {
     });
 
     it('should add className to host', () => {
-        expect(debugElement.nativeElement.className.includes(CLASS_NAME.cardTitle)).toBe(true);
+        expect(debugElement.nativeElement.className.includes(CLASS_NAME.cardSecondSubtitle)).toBe(true);
     });
 });

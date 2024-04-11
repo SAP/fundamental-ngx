@@ -1,7 +1,7 @@
-@if (!isLoading) {
+@if (!isLoading()) {
     <!-- Badge -->
-    @if (badge) {
-        <div class="fd-badge" tabindex="0">{{ badge }}</div>
+    @if (badge()) {
+        <div class="fd-badge" tabindex="0">{{ badge() }}</div>
     }
     <!-- Header and Content -->
     <ng-content></ng-content>
