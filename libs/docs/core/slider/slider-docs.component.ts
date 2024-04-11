@@ -198,6 +198,20 @@ export class SliderDocsComponent {
         }
     ];
 
+    vertical: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets('vertical/vertical-slider-example.component.ts'),
+            fileName: 'vertical-slider-example',
+            component: 'VerticalSliderExampleComponent'
+        },
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets('vertical/vertical-slider-example.component.html'),
+            fileName: 'vertical-slider-example'
+        }
+    ];
+
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('slider');
     }
