@@ -1,7 +1,8 @@
 <fd-docs-section-title id="simple" componentName="tabs"> Simple Tabs </fd-docs-section-title>
 <description>
-    Simple tabs can be built by setting specified properties to <code>fd-tab</code>. There is way to define own
-    templates, or use it with <code>[routerLink]</code>. There is no <code>compact</code> mode on inline tabs.
+    Tabs component is a navigation element that helps organize content in separate views. There are different modes
+    available for tabs, such as <code>icon-only</code>, <code>process</code>, <code>filter</code>. There is way to
+    define own templates, or use it with <code>[routerLink]</code>.
 </description>
 <component-example>
     <fd-tabs-example></fd-tabs-example>
@@ -34,10 +35,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="icon-only-mode" componentName="tabs"> Icon Only Mode </fd-docs-section-title>
+<fd-docs-section-title id="icon-only-mode" componentName="tabs"> Icon-Only Mode </fd-docs-section-title>
 <description>
-    The Icon Only mode can be used, by adding <code>mode="icon-only"</code>. It requires different structure usage. Tabs
-    in Icon Only mode can be built by setting specified properties to <code>fd-tab</code>. There is way to define own
+    The Icon-Only mode can be used, by adding <code>mode="icon-only"</code>. It requires different structure usage. Tabs
+    in Icon-Only mode can be built by setting specified properties to <code>fd-tab</code>. There is way to define own
     templates, or use it with <code>[routerLink]</code>.
 </description>
 <component-example>
@@ -102,7 +103,7 @@
     <code>[expandOverflowText]</code> property.
 </description>
 <component-example>
-    <fd-collapsible-overflow-example></fd-collapsible-overflow-example>
+    <fd-tab-collapsible-overflow-example></fd-tab-collapsible-overflow-example>
 </component-example>
 <code-example [exampleFiles]="collapsibleOverflowTab"></code-example>
 
@@ -114,7 +115,7 @@
     handled using with scroll. To enable stacked content set <code>[stackContent]="true"</code>.
 </description>
 <component-example>
-    <fd-stacked-content-example></fd-stacked-content-example>
+    <fd-tab-stacked-content-example></fd-tab-stacked-content-example>
 </component-example>
 <code-example [exampleFiles]="stackedTab"></code-example>
 
