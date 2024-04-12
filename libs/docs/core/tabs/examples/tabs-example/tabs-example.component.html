@@ -1,14 +1,10 @@
-<label fd-form-label>Simple Tabs Built by Passing Title Parameter</label>
+<h3 fd-title>Tabs Built by Passing Title Parameter</h3>
 <fd-tab-list>
     <fd-tab title="Link 1"> Content for tab 1 </fd-tab>
     <fd-tab title="Link 2"> Content for tab 2 </fd-tab>
     <fd-tab title="Link 3"> Content for tab 3 </fd-tab>
 </fd-tab-list>
-
-<br />
-<br />
-
-<label fd-form-label>Semantic Tabs Built by Passing Title Parameter</label>
+<h3 fd-title>Semantic Tabs Built by Passing Title Parameter</h3>
 <fd-tab-list>
     <fd-tab title="Success" tabState="success"> Content for tab 1 </fd-tab>
     <fd-tab title="Error" tabState="error"> Content for tab 2 </fd-tab>
@@ -16,11 +12,7 @@
     <fd-tab title="Information" tabState="information"> Content for tab 4 </fd-tab>
     <fd-tab title="Neutral" tabState="neutral"> Content for tab 5 </fd-tab>
 </fd-tab-list>
-
-<br />
-<br />
-
-<label fd-form-label>Simple Tabs Built by Defining Template</label>
+<h3 fd-title>Tabs Built by Defining Template</h3>
 <fd-tab-list>
     <fd-tab>
         <ng-template fd-tab-title-template>
@@ -41,11 +33,7 @@
         Content for tab 3
     </fd-tab>
 </fd-tab-list>
-
-<br />
-<br />
-
-<label fd-form-label>Simple Tabs Built by defining own template and with routerLink</label>
+<h3 fd-title>Tabs Built by defining own template and with routerLink</h3>
 <nav fd-tab-nav>
     <div fd-tab-item>
         <a fd-tab-link [active]="rla1.isActive" [routerLink]="'tab1'" routerLinkActive #rla1="routerLinkActive">

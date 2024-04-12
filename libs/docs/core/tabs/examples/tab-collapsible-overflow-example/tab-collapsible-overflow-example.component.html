@@ -1,18 +1,16 @@
-<label fd-form-label>Collapsible overflow</label>
+<h3 fd-title>Collapsible overflow</h3>
 <fd-tab-list [collapseOverflow]="true">
     @for (tab of tabs; track tab) {
         <fd-tab [title]="tab.title">
-            {{ tab.content }}
+            <fd-text [text]="tab.content"></fd-text>
         </fd-tab>
     }
 </fd-tab-list>
-<br />
-<br />
-<label fd-form-label>Collapsible overflow with limited number of maximum visible tabs to 8</label>
+<h3 fd-title>Collapsible overflow with limited number of maximum visible tabs to 8</h3>
 <fd-tab-list [collapseOverflow]="true" [maxVisibleTabs]="8">
     @for (tab of tabs; track tab) {
         <fd-tab [title]="tab.title">
-            {{ tab.content }}
+            <fd-text [text]="tab.content"></fd-text>
         </fd-tab>
     }
 </fd-tab-list>
