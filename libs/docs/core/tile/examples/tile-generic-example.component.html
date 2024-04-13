@@ -1,29 +1,31 @@
-<fd-tile>
-    <div fd-tile-header></div>
-    <div fd-tile-content></div>
-    <div fd-tile-footer></div>
-</fd-tile>
+<div class="fddoc-container">
+    <h4 fd-title>Large Tile</h4>
+    <h4 fd-title>Small Tile</h4>
+</div>
 
-<br />
+<div class="fddoc-container">
+    <fd-tile>
+        <div fd-tile-header></div>
+        <div fd-tile-content></div>
+        <div fd-tile-footer></div>
+    </fd-tile>
+    <fd-tile size="s">
+        <div fd-tile-header></div>
+        <div fd-tile-content></div>
+        <div fd-tile-footer></div>
+    </fd-tile>
+</div>
 
-<fd-tile size="s">
-    <div fd-tile-header></div>
-    <div fd-tile-content></div>
-    <div fd-tile-footer></div>
-</fd-tile>
+<div class="fddoc-container">
+    <fd-tile [double]="true">
+        <div fd-tile-header></div>
+        <div fd-tile-content></div>
+        <div fd-tile-footer></div>
+    </fd-tile>
 
-<br />
-
-<fd-tile [double]="true">
-    <div fd-tile-header></div>
-    <div fd-tile-content></div>
-    <div fd-tile-footer></div>
-</fd-tile>
-
-<br />
-
-<fd-tile size="s" [double]="true">
-    <div fd-tile-header></div>
-    <div fd-tile-content></div>
-    <div fd-tile-footer></div>
-</fd-tile>
+    <fd-tile size="s" [double]="true">
+        <div fd-tile-header></div>
+        <div fd-tile-content></div>
+        <div fd-tile-footer></div>
+    </fd-tile>
+</div>

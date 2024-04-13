@@ -7,27 +7,23 @@ import {
     ExampleFile,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import {
-    ActionTileExampleComponent,
-    BadgeTileExampleComponent,
-    ClickableTileExampleComponent,
-    FeedTileExampleComponent,
-    KpiTileExampleComponent,
-    LaunchTileExampleComponent,
-    TileColumnsExampleComponent,
-    TileGenericExampleComponent
-} from './examples/tile-examples.component';
+
+import { KpiTileExampleComponent } from './examples/kpi-tile-example.component';
+import { LaunchTileExampleComponent } from './examples/launch-tile-example.component';
+import { MiscTileExampleComponent } from './examples/misc-tile-example.component';
+import { TileColumnsExampleComponent } from './examples/tile-columns-example.component';
+import { TileGenericExampleComponent } from './examples/tile-generic-example.component';
 
 const tileGenericSrc = 'tile-generic-example.component.html';
+const tileGenericTsSrc = 'tile-generic-example.component.ts';
 const tileColumnsSrc = 'tile-columns-example.component.html';
 const launchSrc = 'launch-tile-example.component.html';
+const launchTsSrc = 'launch-tile-example.component.ts';
+const launchScss = 'launch-tile-example.component.scss';
 const kpiSrc = 'kpi-tile-example.component.html';
-const slideSrc = 'slide-tile-example.component.html';
-const actionSrc = 'action-tile-example.component.html';
-const badgeSrc = 'badge-tile-example.component.html';
-const feedSrc = 'feed-tile-example.component.html';
-const lineSrc = 'line-tile-example.component.html';
-const clickableSrc = 'clickable-tile-example.component.html';
+const kpiTs = 'kpi-tile-example.component.ts';
+const miscSrc = 'misc-tile-example.component.html';
+const miscTs = 'misc-tile-example.component.ts';
 
 @Component({
     selector: 'app-tile',
@@ -42,10 +38,7 @@ const clickableSrc = 'clickable-tile-example.component.html';
         TileColumnsExampleComponent,
         LaunchTileExampleComponent,
         KpiTileExampleComponent,
-        ActionTileExampleComponent,
-        BadgeTileExampleComponent,
-        FeedTileExampleComponent,
-        ClickableTileExampleComponent
+        MiscTileExampleComponent
     ]
 })
 export class TileDocsComponent {
@@ -54,6 +47,12 @@ export class TileDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(tileGenericSrc),
             fileName: 'tile-generic-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(tileGenericTsSrc),
+            fileName: 'tile-generic-example',
+            component: 'TileGenericExampleComponent'
         }
     ];
 
@@ -69,7 +68,14 @@ export class TileDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(launchSrc),
-            fileName: 'launch-example'
+            fileName: 'launch-tile-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(launchTsSrc),
+            fileName: 'launch-tile-example',
+            component: 'LaunchTileExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(launchScss)
         }
     ];
 
@@ -77,55 +83,27 @@ export class TileDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(kpiSrc),
-            fileName: 'kpi-example'
+            fileName: 'kpi-tile-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(kpiTs),
+            fileName: 'kpi-tile-example',
+            component: 'KpiTileExampleComponent'
         }
     ];
 
-    slide: ExampleFile[] = [
+    misc: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(slideSrc),
-            fileName: 'slide-example'
-        }
-    ];
-
-    action: ExampleFile[] = [
+            code: getAssetFromModuleAssets(miscSrc),
+            fileName: 'misc-tile-example'
+        },
         {
-            language: 'html',
-            code: getAssetFromModuleAssets(actionSrc),
-            fileName: 'action-example'
-        }
-    ];
-
-    badge: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(badgeSrc),
-            fileName: 'badge-example'
-        }
-    ];
-
-    feed: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(feedSrc),
-            fileName: 'feed-example'
-        }
-    ];
-
-    line: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(lineSrc),
-            fileName: 'line-example'
-        }
-    ];
-
-    clickable: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(clickableSrc),
-            fileName: 'clickable-example'
+            language: 'typescript',
+            code: getAssetFromModuleAssets(miscTs),
+            fileName: 'misc-tile-example',
+            component: 'MiscTileExampleComponent'
         }
     ];
 }
