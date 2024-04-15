@@ -114,7 +114,7 @@ describe('CardComponent', () => {
             const cardDebugEl = fixture.debugElement.query(By.directive(CardComponent));
 
             const prevCardType = card.cardType;
-            const prevCardTypeModifier = getCardModifierClassNameByCardType(prevCardType);
+            const prevCardTypeModifier = getCardModifierClassNameByCardType(prevCardType());
             expect(cardDebugEl.nativeElement.className.includes(prevCardTypeModifier)).toBe(true);
 
             host.cardType = 'analytical';
