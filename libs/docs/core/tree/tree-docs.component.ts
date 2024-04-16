@@ -54,7 +54,7 @@ export class TreeDocsComponent {
             fileName: 'simple-tree-example'
         },
         {
-            language: 'TypeScript',
+            language: 'typescript',
             code: getAssetFromModuleAssets(simpleTreeExample),
             fileName: 'simple-tree-example',
             component: 'SimpleTreeExampleComponent'
@@ -68,7 +68,7 @@ export class TreeDocsComponent {
             fileName: 'navigatable-tree-example'
         },
         {
-            language: 'TypeScript',
+            language: 'typescript',
             code: getAssetFromModuleAssets(navigatableTreeExample),
             fileName: 'navigatable-tree-example',
             component: 'NavigatableTreeExampleComponent'
@@ -82,7 +82,7 @@ export class TreeDocsComponent {
             fileName: 'tree-highlight-indicators-example'
         },
         {
-            language: 'TypeScript',
+            language: 'typescript',
             code: getAssetFromModuleAssets(highlightIndicatorsTreeExample),
             fileName: 'tree-highlight-indicators-example',
             component: 'TreeHighlightIndicatorsExampleComponent'
@@ -96,7 +96,7 @@ export class TreeDocsComponent {
             fileName: 'tree-action-buttons-example'
         },
         {
-            language: 'TypeScript',
+            language: 'typescript',
             code: getAssetFromModuleAssets(buttonsTreeExample),
             fileName: 'tree-action-buttons-example',
             component: 'TreeActionButtonsExampleComponent'
@@ -110,7 +110,7 @@ export class TreeDocsComponent {
             fileName: 'tree-with-forms-example'
         },
         {
-            language: 'TypeScript',
+            language: 'typescript',
             code: getAssetFromModuleAssets(formsExample),
             fileName: 'tree-with-forms-example',
             component: 'TreeWithFormsExampleComponent'
@@ -124,9 +124,9 @@ export class TreeDocsComponent {
             fileName: 'lazily-loaded-tree-items-example'
         },
         {
-            language: 'TypeScript',
+            language: 'typescript',
             code: getAssetFromModuleAssets(lazyLoadingExampleTs),
-            fileName: 'lazily-loaded-tree-items-examplee',
+            fileName: 'lazily-loaded-tree-items-example',
             component: 'LazilyLoadedTreeItemsExampleComponent'
         }
     ];
