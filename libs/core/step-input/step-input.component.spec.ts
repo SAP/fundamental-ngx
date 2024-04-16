@@ -339,23 +339,10 @@ describe('StepInputComponent', () => {
     });
 
     it('should set disabled state [ControlValueAccessor]', () => {
-        const context = { disabled: false };
-
-        component.setDisabledState.call(context, true);
-        expect(context.disabled).toEqual(true);
-
-        component.setDisabledState.call(context, false);
-        expect(context.disabled).toEqual(false);
-    });
-
-    it('should set disabled state [ControlValueAccessor]', () => {
-        const context = { disabled: false };
-
-        component.setDisabledState.call(context, true);
-        expect(context.disabled).toEqual(true);
-
-        component.setDisabledState.call(context, false);
-        expect(context.disabled).toEqual(false);
+        component.setDisabledState(true);
+        expect(component.disabled).toEqual(true);
+        component.setDisabledState(false);
+        expect(component.disabled).toEqual(false);
     });
 
     it('should handle ArrowUp and ArrowDown keys', () => {
