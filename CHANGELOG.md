@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.26...v0.50.0-rc.27) (2024-04-16)
+
+
+### Bug Fixes
+
+* **core:** remove line and slide tiles ([#11759](https://github.com/SAP/fundamental-ngx/issues/11759)) ([028a48e](https://github.com/SAP/fundamental-ngx/commit/028a48e721181a6dc1fe46f56513893ea9a76b63))
+
+
+### BREAKING CHANGES
+
+* **core:** remove line and slide tiles
+
+
+
+
+
 # [0.50.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.25...v0.50.0-rc.26) (2024-04-16)
 
 **Note:** Version bump only for package fundamental-ngx
