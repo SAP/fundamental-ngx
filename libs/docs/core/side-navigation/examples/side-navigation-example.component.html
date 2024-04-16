@@ -1,6 +1,7 @@
-<fd-side-nav>
+<fd-side-nav [selectable]="false">
     <div fd-side-nav-main>
         <ul fd-nested-list [textOnly]="true">
+            <li fd-nested-list-header>Header 1</li>
             <li fd-nested-list-item>
                 <a fd-nested-list-link>
                     <span fd-nested-list-title>Link 1</span>
@@ -26,8 +27,9 @@
 
     <div fd-side-nav-utility>
         <ul fd-nested-list [textOnly]="true">
+            <li fd-nested-list-header>Header 2</li>
             <li fd-nested-list-item>
-                <a fd-nested-list-link>
+                <a fd-nested-list-link [selected]="true">
                     <span fd-nested-list-title>Link 1</span>
                 </a>
             </li>

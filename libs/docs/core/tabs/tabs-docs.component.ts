@@ -16,23 +16,29 @@ import { AddingTabExampleComponent } from './examples/adding-tab-example/adding-
 import { DefaultTabExampleComponent } from './examples/default-tab/default-tab-example.component';
 import { TabCollapsibleExampleComponent } from './examples/tab-collapsible-example/tab-collapsible-example.component';
 import { TabCollapsibleOverflowExampleComponent } from './examples/tab-collapsible-overflow-example/tab-collapsible-overflow-example.component';
-import { TabCounterComponent } from './examples/tab-counter-example/tab-counter.component';
+import { TabCounterComponent } from './examples/tab-counter-example/tab-counter-example.component';
 import { TabFilterExampleComponent } from './examples/tab-filter-example/tab-filter-example.component';
 import { TabFormElementExampleComponent } from './examples/tab-form-element-example/tab-form-element-example.component';
 import { TabIconOnlyExampleComponent } from './examples/tab-icon-only-example/tab-icon-only-example.component';
 import { TabProcessExampleComponent } from './examples/tab-process-example/tab-process-example.component';
 import { TabSelectionExampleComponent } from './examples/tab-selection-example/tab-selection-example.component';
 import { TabStackedContentExampleComponent } from './examples/tab-stacked-content-example/tab-stacked-content-example.component';
-import { TabsExampleComponent } from './examples/tabs-example/tabs-example-component';
+import { TabsExampleComponent } from './examples/tabs-example/tabs-example.component';
 
 const tabSrc = 'tabs-example/tabs-example.component.html';
+const tabTs = 'tabs-example/tabs-example.component.ts';
 const tabForm = 'tab-form-element-example/tab-form-element-example.component.html';
-const tabCounter = 'tab-counter-example/tab-counter.component.html';
+const tabFormTs = 'tab-form-element-example/tab-form-element-example.component.ts';
+const tabCounter = 'tab-counter-example/tab-counter-example.component.html';
+const tabCounterTs = 'tab-counter-example/tab-counter-example.component.ts';
 const tabProcess = 'tab-process-example/tab-process-example.component.html';
 const tabIcon = 'tab-icon-only-example/tab-icon-only-example.component.html';
+const tabIconTs = 'tab-icon-only-example/tab-icon-only-example.component.ts';
 const tabFilter = 'tab-filter-example/tab-filter-example.component.html';
+const tabFilterTs = 'tab-filter-example/tab-filter-example.component.ts';
 const tabSelectionSrc = 'tab-selection-example/tab-selection-example.component.html';
 const tabSelectionSrcTs = 'tab-selection-example/tab-selection-example.component.ts';
+const tabSelectionScss = 'tab-selection-example/tab-selection-example.component.scss';
 const tabAddH = 'adding-tab-example/adding-tab-example.component.html';
 const tabAddT = 'adding-tab-example/adding-tab-example.component.ts';
 const tabAddS = 'adding-tab-example/adding-tab-example.component.scss';
@@ -109,6 +115,12 @@ export class TabsDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(tabSrc),
             fileName: 'tabs-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(tabTs),
+            fileName: 'tabs-example',
+            component: 'TabsExampleComponent'
         }
     ];
 
@@ -117,6 +129,12 @@ export class TabsDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(tabForm),
             fileName: 'tab-form-element-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(tabFormTs),
+            fileName: 'tab-form-element-example',
+            component: 'TabFormElementExampleComponent'
         }
     ];
 
@@ -125,6 +143,12 @@ export class TabsDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(tabCounter),
             fileName: 'tab-counter-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(tabCounterTs),
+            fileName: 'tab-counter-example',
+            component: 'TabCounterComponent'
         }
     ];
 
@@ -140,7 +164,13 @@ export class TabsDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(tabIcon),
-            fileName: 'tab-icon-example'
+            fileName: 'tab-icon-only-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(tabIconTs),
+            fileName: 'tab-icon-only-example',
+            component: 'TabIconOnlyExampleComponent'
         }
     ];
 
@@ -149,6 +179,12 @@ export class TabsDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(tabFilter),
             fileName: 'tab-filter-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(tabFilterTs),
+            fileName: 'tab-filter-example',
+            component: 'TabFilterExampleComponent'
         }
     ];
 
@@ -206,7 +242,7 @@ export class TabsDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(collapsibleTabT),
             fileName: 'tab-collapsible-example',
-            component: 'tabCollapsibleExampleComponent'
+            component: 'TabCollapsibleExampleComponent'
         }
     ];
 
@@ -216,7 +252,8 @@ export class TabsDocsComponent {
             code: getAssetFromModuleAssets(tabSelectionSrc),
             fileName: 'tab-selection-example',
             typescriptFileCode: getAssetFromModuleAssets(tabSelectionSrcTs),
-            component: 'TabSelectionExampleComponent'
+            component: 'TabSelectionExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(tabSelectionScss)
         }
     ];
 
@@ -226,7 +263,7 @@ export class TabsDocsComponent {
             code: getAssetFromModuleAssets(defaultTabH),
             fileName: 'default-tab-example',
             typescriptFileCode: getAssetFromModuleAssets(defaultTabT),
-            component: 'TabSelectionExampleComponent'
+            component: 'DefaultTabExampleComponent'
         }
     ];
 

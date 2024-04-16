@@ -3,6 +3,78 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.24...v0.50.0-rc.25) (2024-04-12)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.50.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.23...v0.50.0-rc.24) (2024-04-11)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.50.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.22...v0.50.0-rc.23) (2024-04-11)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.50.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.19...v0.50.0-rc.22) (2024-04-11)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.50.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.19...v0.50.0-rc.21) (2024-04-11)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.50.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.18...v0.50.0-rc.19) (2024-04-11)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.50.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.17...v0.50.0-rc.18) (2024-04-11)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.50.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.16...v0.50.0-rc.17) (2024-04-11)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.50.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.15...v0.50.0-rc.16) (2024-04-09)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
 # [0.50.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.14...v0.50.0-rc.15) (2024-04-09)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n

@@ -10,8 +10,8 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { StatusIndicatorAngeledFillingComponent } from './examples/status-indicator-angled-filling.component';
-import { StatusIndicatorCircularFillAntiClockComponent } from './examples/status-indicator-cirular-fill-anti-clockwise.component';
-import { StatusIndicatorCircularFillClockComponent } from './examples/status-indicator-cirular-fill-clockwise.component';
+import { StatusIndicatorCircularFillAntiClockwiseComponent } from './examples/status-indicator-circular-fill-anti-clockwise.component';
+import { StatusIndicatorCircularFillClockwiseComponent } from './examples/status-indicator-circular-fill-clockwise.component';
 import { StatusIndicatorClickableTypeComponent } from './examples/status-indicator-clickable-type.component';
 import { StatusIndicatorDefaultComponent as StatusIndicatorDefaultComponent_1 } from './examples/status-indicator-default.component';
 import { StatusIndicatorFillTypeComponent as StatusIndicatorFillTypeComponent_1 } from './examples/status-indicator-fill-type.component';
@@ -24,16 +24,16 @@ const StatusIndicatorSizeComponent = 'status-indicator-size.component.html';
 const StatusIndicatorFillTypeComponent = 'status-indicator-fill-type.component.html';
 const StatusIndicatorLabelComponent = 'status-indicator-label.component.html';
 const StatusIndicatorAngledFillingComponent = 'status-indicator-angled-filling.component.html';
-const StatusIndicatorCircularFillingClockComponent = 'status-indicator-cirular-fill-clockwise.component.html';
-const StatusIndicatorCircularFillingAntiClockComponent = 'status-indicator-cirular-fill-anti-clockwise.component.html';
+const StatusIndicatorCircularFillingClockComponent = 'status-indicator-circular-fill-clockwise.component.html';
+const StatusIndicatorCircularFillingAntiClockComponent = 'status-indicator-circular-fill-anti-clockwise.component.html';
 const StatusIndicatorlinearFillingComponent = 'status-indicator-linear-fill-type.component.html';
 const StatusIndicatorDefaultComponentTs = 'status-indicator-default.component.ts';
 const StatusIndicatorSizeComponentTs = 'status-indicator-size.component.ts';
 const StatusIndicatorFillTypeComponentTs = 'status-indicator-fill-type.component.ts';
 const StatusIndicatorLabelComponentTs = 'status-indicator-label.component.ts';
 const StatusIndicatorAngledFillingComponentTs = 'status-indicator-angled-filling.component.ts';
-const StatusIndicatorCircularFillingClockComponentTs = 'status-indicator-cirular-fill-clockwise.component.ts';
-const StatusIndicatorCircularFillingAntiClockComponentTs = 'status-indicator-cirular-fill-anti-clockwise.component.ts';
+const StatusIndicatorCircularFillingClockComponentTs = 'status-indicator-circular-fill-clockwise.component.ts';
+const StatusIndicatorCircularFillingAntiClockComponentTs = 'status-indicator-circular-fill-anti-clockwise.component.ts';
 const StatusIndicatorlinearFillingComponentTs = 'status-indicator-linear-fill-type.component.ts';
 const StatusIndicatorClickAbleFillingComponent = 'status-indicator-clickable-type.component.html';
 const StatusIndicatorClickAbleFillingComponentTs = 'status-indicator-clickable-type.component.ts';
@@ -55,8 +55,8 @@ const StatusIndicatorClickAbleFillingComponentTs = 'status-indicator-clickable-t
         StatusIndicatorLabelComponent_1,
         StatusIndicatorLinearFillTypeComponent,
         StatusIndicatorAngeledFillingComponent,
-        StatusIndicatorCircularFillClockComponent,
-        StatusIndicatorCircularFillAntiClockComponent,
+        StatusIndicatorCircularFillClockwiseComponent,
+        StatusIndicatorCircularFillAntiClockwiseComponent,
         StatusIndicatorClickableTypeComponent
     ]
 })
@@ -117,39 +117,39 @@ export class StatusIndicatorDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(StatusIndicatorAngledFillingComponent),
-            fileName: 'status-indicator-angeled-fillling'
+            fileName: 'status-indicator-angled-filling'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(StatusIndicatorAngledFillingComponentTs),
-            fileName: 'status-indicator-angeled-fillling',
-            component: 'StatusIndicatorAngledFillingComponent'
+            fileName: 'status-indicator-angled-filling',
+            component: 'StatusIndicatorAngeledFillingComponent'
         }
     ];
     circularClockFillingStatusIndicatorHtmlType: ExampleFile[] = [
         {
             language: 'html',
             code: getAssetFromModuleAssets(StatusIndicatorCircularFillingClockComponent),
-            fileName: 'status-indicator-cirular-fill-clockwise'
+            fileName: 'status-indicator-circular-fill-clockwise'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(StatusIndicatorCircularFillingClockComponentTs),
-            fileName: 'status-indicator-cirular-fill-clockwise',
-            component: 'StatusIndicatorCircularFillingClockComponent'
+            fileName: 'status-indicator-circular-fill-clockwise',
+            component: 'StatusIndicatorCircularFillClockwiseComponent'
         }
     ];
     circularAntiClockFillingStatusIndicatorHtmlType: ExampleFile[] = [
         {
             language: 'html',
             code: getAssetFromModuleAssets(StatusIndicatorCircularFillingAntiClockComponent),
-            fileName: 'status-indicator-cirular-fill-anti-clockwise'
+            fileName: 'status-indicator-circular-fill-anti-clockwise'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(StatusIndicatorCircularFillingAntiClockComponentTs),
-            fileName: 'status-indicator-cirular-fill-anti-clockwise',
-            component: 'StatusIndicatorCircularFillingAntiClockComponent'
+            fileName: 'status-indicator-circular-fill-anti-clockwise',
+            component: 'StatusIndicatorCircularFillAntiClockwiseComponent'
         }
     ];
     linearFillingStatusIndicatorHtmlType: ExampleFile[] = [

@@ -3,18 +3,14 @@ import { ColorAccent } from '@fundamental-ngx/cdk/utils';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 
 @Component({
-    selector: 'fd-object-status-default-example',
-    templateUrl: './object-status-default-example.component.html',
+    selector: 'fd-object-status-inverted-example',
+    templateUrl: './object-status-inverted-example.component.html',
     styleUrls: ['./object-status-examples.component.scss'],
     standalone: true,
     imports: [ObjectStatusComponent]
 })
-export class ObjectStatusDefaultExampleComponent {
-    indicators: ColorAccent[] = Array.from({ length: 8 }, (_, index) => index + 1).map(
+export class ObjectStatusInvertedExampleComponent {
+    indicators: ColorAccent[] = Array.from({ length: 10 }, (_, index) => index + 1).map(
         (colorIndex) => colorIndex as ColorAccent
     );
-
-    showAlert(): void {
-        alert('you clicked the clickable ObjectStatus');
-    }
 }

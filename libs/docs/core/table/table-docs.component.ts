@@ -60,12 +60,15 @@ const tablePopInHTs = 'table-popin-example/table-popin-example.component.ts';
 const tablePopInHtml = 'table-popin-example/table-popin-example.component.html';
 const tableCustomHtml = 'table-custom-columns-example/table-custom-columns-example.component.html';
 const tableFocusableHtml = 'table-focusable-example/table-focusable-example.component.html';
+const tableFocusableTs = 'table-focusable-example/table-focusable-example.component.ts';
 const tableCustomTs = 'table-custom-columns-example/table-custom-columns-example.component.ts';
 const tableDialogCustom = 'table-custom-columns-example/table-custom-dialog.component.ts';
 const tableNavigatableRowHtml = 'table-navigatable-row-example.component.html';
 const tableNavigatableRowTs = 'table-navigatable-row-example.component.ts';
 const tableLoadingHtmlSrc = 'loading/table-loading-example.component.html';
-const tableFixedHtmlSrc = 'loading/table-fixed-example.component.html';
+const tableLoadingTs = 'loading/table-loading-example.component.ts';
+const tableFixedTs = 'table-fixed-example.component.ts';
+const tableFixedHtml = 'table-fixed-example.component.html';
 const tablePageScrollHtml = 'table-page-scroll-example.component.html';
 const tablePageScrollTs = 'table-page-scroll-example.component.ts';
 
@@ -343,6 +346,12 @@ export class TableDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(tableFocusableHtml),
             fileName: 'table-focusable-example'
+        },
+        {
+            language: 'typescript',
+            component: 'TableFocusableExampleComponent',
+            code: getAssetFromModuleAssets(tableFocusableTs),
+            fileName: 'table-focusable-example'
         }
     ];
 
@@ -351,14 +360,26 @@ export class TableDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(tableLoadingHtmlSrc),
             fileName: 'table-loading-example'
+        },
+        {
+            language: 'typescript',
+            component: 'TableLoadingExampleComponent',
+            code: getAssetFromModuleAssets(tableLoadingTs),
+            fileName: 'table-loading-example'
         }
     ];
 
     tableFixed: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(tableFixedHtmlSrc),
+            code: getAssetFromModuleAssets(tableFixedHtml),
             fileName: 'table-fixed-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(tableFixedTs),
+            fileName: 'table-fixed-example',
+            component: 'TableFixedExampleComponent'
         }
     ];
 

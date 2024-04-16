@@ -40,6 +40,7 @@ const popoverProgrammaticHtmlSrc = 'popover-programmatic/popover-programmatic-op
 const popoverProgrammaticTsSrc = 'popover-programmatic/popover-programmatic-open-example.component.ts';
 const popoverPlacementHtmlSrc = 'popover-placement/popover-placement-example.component.html';
 const popoverPlacementTsSrc = 'popover-placement/popover-placement-example.component.ts';
+const popoverPlacementScss = 'popover-placement/popover-placement-example.component.scss';
 const popoverDialogHtmlSrc = 'popover-dialog/popover-dialog-example.component.html';
 const popoverDialogTsSrc = 'popover-dialog/popover-dialog-example.component.ts';
 const popoverFillHSrc = 'popover-c-fill/popover-c-fill.component.html';
@@ -64,6 +65,7 @@ const mobilePopoverTsSrc = 'popover-mobile/popover-mobile-example.component.ts';
 
 const resizablePopoverHtmlSrc = 'popover-resizable/popover-resizable-example.component.html';
 const resizablePopoverTsSrc = 'popover-resizable/popover-resizable-example.component.ts';
+const resizablePopoverScss = 'popover-resizable/popover-resizable-example.component.scss';
 
 const dynamicContainerHeightHtmlSrc =
     'popover-dynamic-container-height/popover-dynamic-container-height-example.component.html';
@@ -218,7 +220,8 @@ export class PopoverDocsComponent {
             language: 'typescript',
             component: 'PopoverPlacementExampleComponent',
             code: getAssetFromModuleAssets(popoverPlacementTsSrc),
-            fileName: 'popover-placement-example'
+            fileName: 'popover-placement-example',
+            scssFileCode: getAssetFromModuleAssets(popoverPlacementScss)
         }
     ];
 
@@ -338,7 +341,8 @@ export class PopoverDocsComponent {
             language: 'typescript',
             component: 'PopoverResizableExampleComponent',
             code: getAssetFromModuleAssets(resizablePopoverTsSrc),
-            fileName: 'popover-resizable-example'
+            fileName: 'popover-resizable-example',
+            scssFileCode: getAssetFromModuleAssets(resizablePopoverScss)
         }
     ];
 }

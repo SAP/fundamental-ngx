@@ -3,7 +3,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 
 @Component({
-    selector: 'fd-stacked-content-example',
+    selector: 'fd-tab-stacked-content-example',
     templateUrl: './tab-stacked-content-example.component.html',
     standalone: true,
     imports: [TabsModule, ButtonComponent]
