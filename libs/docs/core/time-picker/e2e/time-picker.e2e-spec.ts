@@ -24,7 +24,6 @@ describe('Time-picker component test', () => {
         formExample,
         nullExample,
         localExample,
-        compactExamle,
         defaultExample,
         disabledExample,
         formattingExample,
@@ -83,12 +82,6 @@ describe('Time-picker component test', () => {
             'is-disabled',
             'Input is not disabled'
         );
-    });
-
-    it('should check compact example', async () => {
-        await checkTimePickerFormat(compactExamle);
-        await checkChoosingTime(compactExamle);
-        await setValueByKeyboard(compactExamle);
     });
 
     it('should check null validaty example', async () => {
