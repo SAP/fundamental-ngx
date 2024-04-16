@@ -338,6 +338,9 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
             retVal = retVal + 'fixed, ';
         }
         retVal = retVal + `row: ${position.rowIndex + 1} of ${position.totalRows}`;
+        if (this.isTreeRow || this.row.level > 0) {
+            retVal = retVal + ', level ' + (this.row.level + 1);
+        }
         return retVal;
     };
 }
