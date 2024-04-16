@@ -86,7 +86,7 @@ export class DynamicPageSubheaderComponent {
      * aria label for header
      */
     @Input()
-    headerAriaLabel: Nullable<string>;
+    headerAriaLabel: Nullable<string> = 'Collapsed Header';
 
     /**
      * aria label for pin state of pin button

@@ -1,5 +1,6 @@
 <div class="fd-dynamic-page__collapsible-header-container">
-    <div
+    <section
+        role="region"
         class="fd-dynamic-page__collapsible-header"
         [attr.aria-label]="headerAriaLabel"
         [attr.aria-hidden]="_dynamicPageService.collapsed()"
@@ -7,7 +8,7 @@
         #headerContent
     >
         <ng-content></ng-content>
-    </div>
+    </section>
     <div class="fd-dynamic-page__collapsible-header-visibility-container" #pincollapseContainer>
         @if (collapsible) {
             <div class="fd-dynamic-page__collapsible-header-visibility-container--left-gradient"></div>

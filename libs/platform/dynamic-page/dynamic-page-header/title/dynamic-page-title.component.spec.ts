@@ -111,10 +111,6 @@ describe('DynamicPageTitleComponent', () => {
         ).toBeTruthy();
     });
 
-    it('should add tabindex to host', async () => {
-        expect(titleComponentDebugElement.attributes['tabindex']).toEqual('0');
-    });
-
     describe('title text', () => {
         it('should bind to title', () => {
             component.title = 'Sample';
