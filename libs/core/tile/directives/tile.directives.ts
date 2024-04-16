@@ -16,17 +16,6 @@ export class TileContentDirective {
     @Input()
     twoColumn = false;
 }
-
-@Directive({
-    selector: '[fdTileContentByline], [fd-tile-content-byline]',
-    standalone: true
-})
-export class TileContentBylineDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__content-byline')
-    baseClass = true;
-}
-
 @Directive({
     selector: '[fdTileContentText], [fd-tile-content-text]',
     standalone: true
@@ -246,16 +235,6 @@ export class TileContainerDirective {
     @HostBinding('class.fd-tile-container--list')
     @Input()
     list = false;
-}
-
-@Directive({
-    selector: '[fdTileSlideContainer], [fd-tile-slide-container]',
-    standalone: true
-})
-export class TileSlideContainerDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__container')
-    baseClass = true;
 }
 
 @Directive({
