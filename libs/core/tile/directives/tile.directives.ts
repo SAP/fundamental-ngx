@@ -268,21 +268,6 @@ export class TilePageIndicatorDirective {
 }
 
 @Directive({
-    selector: '[fdTileDot], [fd-tile-dot]',
-    standalone: true
-})
-export class TileDotDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__dot')
-    baseClass = true;
-
-    /** Whether or not this dot is active. */
-    @HostBinding('class.fd-tile__dot--active')
-    @Input()
-    active = false;
-}
-
-@Directive({
     selector: '[fdTileActionClose], [fd-tile-action-close]',
     standalone: true
 })
