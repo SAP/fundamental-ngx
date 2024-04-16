@@ -24,10 +24,6 @@ import { TileActionCloseDirective, TileActionIndicatorDirective, TileRefreshDire
             <span fd-tile-logo></span>
             <span fd-tile-toggle></span>
         </div>
-        <div fd-tile-slide-container #slideContainer>
-            <span fd-tile-page-indicator></span>
-            <span #dot fd-tile-dot [active]="true"></span>
-        </div>
         <div #footer fd-tile-footer [twoColumn]="true">
             <div fd-tile-footer-text></div>
             <div fd-tile-section></div>
@@ -56,9 +52,6 @@ export class TestComponent {
 
     @ViewChild('container')
     container: ElementRef;
-
-    @ViewChild('slideContainer')
-    slideContainer: ElementRef;
 
     @ViewChild('dot')
     dot: ElementRef;
@@ -107,7 +100,6 @@ describe('TileDirectives', () => {
         expect(component.backgroundImg.nativeElement.style.getPropertyValue('background-image')).toContain(
             'url(https://picsum.photos/60/60)'
         );
-        expect(component.slideContainer.nativeElement.className).toContain('fd-tile__container');
         expect(component.dot.nativeElement.className).toContain('fd-tile__dot');
         expect(component.dot.nativeElement.className).toContain('fd-tile__dot--active');
         component.actionClose.buildComponentCssClass();
