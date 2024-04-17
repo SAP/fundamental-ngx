@@ -9,7 +9,7 @@ export class TabsPo extends CoreBaseComponentPo {
     FilterExample = 'fd-tab-filter-example ';
     SelectionExample = 'fd-tab-selection-example ';
     AddExample = 'fd-adding-tab-example ';
-    collapsibleOverflowExample = 'fd-collapsible-overflow-example ';
+    collapsibleOverflowExample = 'fd-tab-collapsible-overflow-example ';
     stackendContentExample = 'fd-stacked-content-example ';
     collapsibleExample = 'fd-tab-collapsible-example ';
     playGroundExample = 'playground ';
@@ -20,12 +20,12 @@ export class TabsPo extends CoreBaseComponentPo {
     tabCount = '.fd-tabs__count';
     tabTitle = '.fd-tabs__tag';
     chooseTabsBtn = this.SelectionExample + '.fd-button';
-    collapsibleTab = 'fd-tab-list:nth-child(6) div.fd-tabs__item';
-    addBtn = this.AddExample + 'button:nth-child(2)';
-    removeBtn = this.AddExample + 'button:nth-child(3)';
+    collapsibleTab = 'fd-tab-list:nth-child(4) div.fd-tabs__item';
+    addBtn = this.AddExample + 'button:nth-child(1)';
+    removeBtn = this.AddExample + 'button:nth-child(2)';
     expandedList = '.cdk-overlay-container ';
     expandedListItem = this.expandedList + '.fd-menu__title';
-    moreBtn = this.collapsibleOverflowExample + 'fd-tab-list:nth-child(6) ' + '.fd-tabs__item--overflow';
+    moreBtn = this.collapsibleOverflowExample + 'fd-tab-list:nth-child(4) ' + '.fd-tabs__item--overflow';
 
     // playground form
     modeSelect = '#playgroundmode ';
