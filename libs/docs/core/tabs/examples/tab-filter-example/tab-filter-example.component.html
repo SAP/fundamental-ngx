@@ -1,24 +1,10 @@
-<label fd-form-label>Filter Tabs Built by passing parameters</label>
+<h3 fd-title>Filter Tabs Built by passing parameters</h3>
 <fd-tab-list mode="filter">
-    <fd-tab [header]="true" count="100" title="items"> Content for tab 1 </fd-tab>
-    <fd-tab glyph="cart" count="12" title="Title 1"> Content for tab 2 </fd-tab>
-    <fd-tab glyph="menu" count="13" title="Title 2"> Content for tab 3 </fd-tab>
+    <fd-tab [header]="true" count="100" title="items"><fd-text text="Content for tab 1"></fd-text></fd-tab>
+    <fd-tab glyph="cart" count="12" title="Title 1"><fd-text text="Content for tab 2"></fd-text></fd-tab>
+    <fd-tab glyph="menu" count="13" title="Title 2"><fd-text text="Content for tab 3"></fd-text></fd-tab>
 </fd-tab-list>
-
-<br />
-<br />
-
-<label fd-form-label>Compact Filter Tabs Built by passing parameters</label>
-<fd-tab-list mode="filter" fdCompact>
-    <fd-tab [header]="true" count="100" title="items"> Content for tab 1 </fd-tab>
-    <fd-tab glyph="cart" count="12" title="Title 1"> Content for tab 2 </fd-tab>
-    <fd-tab glyph="menu" count="13" title="Title 2"> Content for tab 3 </fd-tab>
-</fd-tab-list>
-
-<br />
-<br />
-
-<label fd-form-label>Filter Tabs Built by defining own template</label>
+<h3 fd-title>Filter Tabs Built by defining own template</h3>
 <fd-tab-list mode="filter">
     <fd-tab [header]="true">
         <ng-template fd-tab-title-template>
@@ -27,7 +13,7 @@
                 <span fd-tab-label>items</span>
             </span>
         </ng-template>
-        Content for tab 1
+        <fd-text text="Content for tab 1"></fd-text>
     </fd-tab>
     <fd-tab>
         <ng-template fd-tab-title-template>
@@ -36,7 +22,7 @@
             </span>
             <span fd-tab-label>Title 1</span>
         </ng-template>
-        Content for tab 2
+        <fd-text text="Content for tab 2"></fd-text>
     </fd-tab>
     <fd-tab>
         <ng-template fd-tab-title-template>
@@ -45,14 +31,10 @@
             </span>
             <span fd-tab-label>Title 2</span>
         </ng-template>
-        Content for tab 3
+        <fd-text text="Content for tab 3"></fd-text>
     </fd-tab>
 </fd-tab-list>
-
-<br />
-<br />
-
-<label fd-form-label>Filter Tabs Built by defining own template with routerLink</label>
+<h3 fd-title>Filter Tabs Built by defining own template with routerLink</h3>
 <nav fd-tab-nav mode="filter">
     <div fd-tab-item [header]="true">
         <a fd-tab-link [active]="rla1.isActive" [routerLink]="'tab1'" routerLinkActive #rla1="routerLinkActive">

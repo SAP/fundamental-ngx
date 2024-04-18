@@ -7,8 +7,8 @@
     [attr.aria-expanded]="expanded"
     (click)="expanded = !expanded"
 ></button>
-<br /><br />
-Expanded value is: {{ expanded }} <br /><br /><br />
+
+<fd-text text="Expanded value is: {{ expanded }}"></fd-text>
 
 <fd-panel
     [(expanded)]="expanded"

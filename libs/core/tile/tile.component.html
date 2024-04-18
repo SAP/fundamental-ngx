@@ -7,7 +7,7 @@
     (keydown.space)="clickable && $event.preventDefault()"
     (keyup.space)="clickable && tileClick.emit()"
 >
-    @if (action && type !== 'line') {
+    @if (action) {
         <div class="fd-tile__overlay"></div>
     }
     <ng-content select="[fd-tile-action-close]"></ng-content>

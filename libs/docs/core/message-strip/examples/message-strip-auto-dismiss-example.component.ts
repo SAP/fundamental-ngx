@@ -3,7 +3,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { AutoDismissMessageStripDirective, MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 
 @Component({
-    selector: 'message-strip-auto-dismiss-example',
+    selector: 'fd-message-strip-auto-dismiss-example',
     template: `
         <fd-message-strip
             #messageStripComponent="fdAutoDismissMessageStrip"

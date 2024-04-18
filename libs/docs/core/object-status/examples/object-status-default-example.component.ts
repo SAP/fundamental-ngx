@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ColorAccent } from '@fundamental-ngx/cdk/utils';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 
 @Component({
@@ -8,4 +9,12 @@ import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
     standalone: true,
     imports: [ObjectStatusComponent]
 })
-export class ObjectStatusDefaultExampleComponent {}
+export class ObjectStatusDefaultExampleComponent {
+    indicators: ColorAccent[] = Array.from({ length: 8 }, (_, index) => index + 1).map(
+        (colorIndex) => colorIndex as ColorAccent
+    );
+
+    showAlert(): void {
+        alert('you clicked the clickable ObjectStatus');
+    }
+}

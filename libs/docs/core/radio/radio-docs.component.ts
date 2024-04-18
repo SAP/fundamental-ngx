@@ -9,11 +9,11 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import { RadioExamplesComponent } from './examples/radio-examples.component';
+import { RadioExampleComponent } from './examples/radio-example.component';
 import { RadioFormGroupExampleComponent } from './examples/radio-form-group-example.component';
 
 const formHtml = 'radio-example.component.html';
-const formTs = 'radio-examples.component.ts';
+const formTs = 'radio-example.component.ts';
 const formGroupInputHtml = 'radio-form-group-example.component.html';
 const formGroupInputTs = 'radio-form-group-example.component.ts';
 
@@ -24,7 +24,7 @@ const formGroupInputTs = 'radio-form-group-example.component.ts';
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,
-        RadioExamplesComponent,
+        RadioExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
         DescriptionComponent,
@@ -37,8 +37,13 @@ export class RadioDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(formHtml),
             fileName: 'radio-example',
-            typescriptFileCode: formTs,
             component: 'RadioExamplesComponent'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(formTs),
+            fileName: 'radio-example',
+            component: 'RadioExampleComponent'
         }
     ];
 

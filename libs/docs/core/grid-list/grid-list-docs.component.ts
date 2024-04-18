@@ -44,6 +44,7 @@ const scssFileCode = 'grid-list.component.scss';
 
 const gridListDefaultHtml = 'default/grid-list-example.component.html';
 const gridListSingleSelectHtml = 'single-select/grid-list-single-select-example.component.html';
+const gridListSingleSelectScss = 'single-select/grid-list-single-select-example.component.scss';
 const gridListSingleSelectLeftHtml = 'single-select-left/grid-list-single-select-left-example.component.html';
 const gridListSingleSelectRightHtml = 'single-select-right/grid-list-single-select-right-example.component.html';
 const gridListMultiSelectHtml = 'multi-select/grid-list-multi-select-example.component.html';
@@ -113,7 +114,8 @@ export class GridListDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(gridListSingleSelectTs),
             fileName: 'grid-list-single-select-example',
-            component: 'GridListSingleSelectExampleComponent'
+            component: 'GridListSingleSelectExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(scssFileCode)
         }
     ];
 
@@ -128,7 +130,8 @@ export class GridListDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(gridListSingleSelectLeftTs),
             fileName: 'grid-list-single-select-left-example',
-            component: 'GridListSingleSelectLeftExampleComponent'
+            component: 'GridListSingleSelectLeftExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(scssFileCode)
         }
     ];
 
@@ -143,7 +146,8 @@ export class GridListDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(gridListSingleSelectRightTs),
             fileName: 'grid-list-single-select-right-example',
-            component: 'GridListSingleSelectRightExampleComponent'
+            component: 'GridListSingleSelectRightExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(scssFileCode)
         }
     ];
 
@@ -158,7 +162,8 @@ export class GridListDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(gridListMultiSelectTs),
             fileName: 'grid-list-multi-select-example',
-            component: 'GridListMultiSelectExampleComponent'
+            component: 'GridListMultiSelectExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(scssFileCode)
         }
     ];
 
@@ -173,7 +178,8 @@ export class GridListDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(gridListDeleteTs),
             fileName: 'grid-list-delete-example',
-            component: 'GridListDeleteExampleComponent'
+            component: 'GridListDeleteExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(scssFileCode)
         }
     ];
 
@@ -182,13 +188,14 @@ export class GridListDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(gridListGroupHtml),
             scssFileCode: this._scssFileCode,
-            fileName: 'grid-list-delete-example'
+            fileName: 'grid-list-group-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(gridListGroupTs),
-            fileName: 'grid-list-delete-example',
-            component: 'GridListGroupExampleComponent'
+            fileName: 'grid-list-group-example',
+            component: 'GridListGroupExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(scssFileCode)
         }
     ];
 
@@ -203,7 +210,8 @@ export class GridListDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(gridListStatesTs),
             fileName: 'grid-list-states-example',
-            component: 'GridListStatesExampleComponent'
+            component: 'GridListStatesExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(scssFileCode)
         }
     ];
 
@@ -218,7 +226,8 @@ export class GridListDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(gridListStatusesTs),
             fileName: 'grid-list-statuses-example',
-            component: 'GridListStatusesExampleComponent'
+            component: 'GridListStatusesExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(scssFileCode)
         }
     ];
 
@@ -233,7 +242,8 @@ export class GridListDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(gridListMoreTs),
             fileName: 'grid-list-more-example',
-            component: 'GridListMoreExampleComponent'
+            component: 'GridListMoreExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(scssFileCode)
         }
     ];
 
@@ -248,7 +258,8 @@ export class GridListDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(gridListFooterTs),
             fileName: 'grid-list-footer-example',
-            component: 'GridListFooterExampleComponent'
+            component: 'GridListFooterExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(scssFileCode)
         }
     ];
 
@@ -263,7 +274,8 @@ export class GridListDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(gridListDndTs),
             fileName: 'grid-list-dnd-example',
-            component: 'GridListDndExampleComponent'
+            component: 'GridListDndExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(scssFileCode)
         }
     ];
 
@@ -278,7 +290,8 @@ export class GridListDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(gridListLayoutTs),
             fileName: 'grid-list-layout-example',
-            component: 'GridListLayoutExampleComponent'
+            component: 'GridListLayoutExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(scssFileCode)
         }
     ];
 
@@ -293,7 +306,8 @@ export class GridListDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(gridListFocusingTs),
             fileName: 'grid-list-focusing-example',
-            component: 'GridListFocusingItemExampleComponent'
+            component: 'GridListFocusingItemExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(scssFileCode)
         }
     ];
 
@@ -308,7 +322,8 @@ export class GridListDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(gridListAutoHeightTs),
             fileName: 'grid-list-auto-height-example',
-            component: 'GridListAutoHeightExampleComponent'
+            component: 'GridListAutoHeightExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(scssFileCode)
         }
     ];
 }

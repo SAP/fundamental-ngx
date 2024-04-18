@@ -1,3 +1,4 @@
+<h3 fd-title>Inverted Object Status with Icon and Text</h3>
 <span
     fd-object-status
     status="negative"
@@ -30,9 +31,6 @@
     title="Informative"
     aria-label="Object status Informative Inverted"
 ></span>
-
-<br /><br />
-
 <span
     fd-object-status
     status="negative"
@@ -72,51 +70,7 @@
     title="Default"
     aria-label="Object status Default Inverted"
 ></span>
-
-<br /><br />
-
-<span
-    fd-object-status
-    status="negative"
-    [inverted]="true"
-    label="5"
-    title="5"
-    aria-label="Object status Negative Numeric Inverted"
-></span>
-<span
-    fd-object-status
-    status="critical"
-    [inverted]="true"
-    label="20"
-    title="20"
-    aria-label="Object status Critical Numeric Inverted"
-></span>
-<span
-    fd-object-status
-    status="positive"
-    [inverted]="true"
-    label="2.99"
-    title="2.99"
-    aria-label="Object status Positive Numeric Inverted"
-></span>
-<span
-    fd-object-status
-    status="informative"
-    [inverted]="true"
-    label="10"
-    title="10"
-    aria-label="Object status Informative Numeric Inverted"
-></span>
-<span
-    fd-object-status
-    [inverted]="true"
-    label="99+"
-    title="99+"
-    aria-label="Object status Default Numeric Inverted"
-></span>
-
-<br /><br />
-
+<h4 fd-title>Inverted Object Status Icon and Text on a span</h4>
 <span
     fd-object-status
     status="negative"
@@ -155,9 +109,7 @@
     label="Default"
     aria-label="Object status Default Icon and Text Inverted"
 ></span>
-
-<br /><br />
-
+<h4 fd-title>Inverted Object Status Icon and Text on an anchor</h4>
 <a
     fd-object-status
     status="negative"
@@ -201,3 +153,66 @@
     label="Default"
     aria-label="Object status Default Icon and Text Clickable Inverted"
 ></a>
+<h3 fd-title>Inverted Object Status Number</h3>
+<span
+    fd-object-status
+    status="negative"
+    [inverted]="true"
+    label="5"
+    title="5"
+    aria-label="Object status Negative Numeric Inverted"
+></span>
+<span
+    fd-object-status
+    status="critical"
+    [inverted]="true"
+    label="20"
+    title="20"
+    aria-label="Object status Critical Numeric Inverted"
+></span>
+<span
+    fd-object-status
+    status="positive"
+    [inverted]="true"
+    label="2.99"
+    title="2.99"
+    aria-label="Object status Positive Numeric Inverted"
+></span>
+<span
+    fd-object-status
+    status="informative"
+    [inverted]="true"
+    label="10"
+    title="10"
+    aria-label="Object status Informative Numeric Inverted"
+></span>
+<span
+    fd-object-status
+    [inverted]="true"
+    label="99+"
+    title="99+"
+    aria-label="Object status Default Numeric Inverted"
+></span>
+<h3>Inverted Object Status with Generic Indication Colors</h3>
+@for (item of indicators; track item) {
+    <a
+        fd-object-status
+        [indicationColor]="item"
+        [clickable]="true"
+        [inverted]="true"
+        label="Indication Color"
+        aria-label="Object status Inverted with Indication Color"
+    ></a>
+}
+<h4 fd-title>Secondary Set of Inverted indication colors</h4>
+@for (item of indicators; track item) {
+    <a
+        fd-object-status
+        [indicationColor]="item"
+        [clickable]="true"
+        [secondaryIndication]="true"
+        [inverted]="true"
+        label="Indication Color"
+        aria-label="Object status Inverted with Indication Color"
+    ></a>
+}

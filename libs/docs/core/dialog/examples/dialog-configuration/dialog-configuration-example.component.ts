@@ -9,7 +9,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
 @Component({
     selector: 'fd-dialog-configuration-example',
     templateUrl: './dialog-configuration-example.component.html',
-    styleUrls: ['../dialog-examples.component.scss'],
+    styleUrls: ['./dialog-configuration-example.component.scss'],
     standalone: true,
     imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, BarModule, ButtonComponent]
 })

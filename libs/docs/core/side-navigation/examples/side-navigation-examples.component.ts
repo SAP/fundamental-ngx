@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { NestedListModule } from '@fundamental-ngx/core/nested-list';
 import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 
@@ -18,19 +17,3 @@ export class SideNavigationExampleComponent {}
     imports: [SideNavigationModule, NestedListModule]
 })
 export class SideNavigationIconsExampleComponent {}
-
-@Component({
-    selector: 'fd-side-navigation-titles-example',
-    templateUrl: './side-navigation-titles-example.component.html',
-    standalone: true,
-    imports: [SideNavigationModule, NestedListModule]
-})
-export class SideNavigationTitlesExampleComponent {}
-
-@Component({
-    selector: 'fd-side-navigation-compact-example',
-    templateUrl: './side-navigation-compact-example.component.html',
-    standalone: true,
-    imports: [SideNavigationModule, NestedListModule, ContentDensityDirective]
-})
-export class SideNavigationCompactExampleComponent {}

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { StepInputModule } from '@fundamental-ngx/core/step-input';
 
@@ -61,6 +62,7 @@ import { StepInputModule } from '@fundamental-ngx/core/step-input';
                         <td>{{ stepInputFormControl2.status }}</td>
                     </tr>
                 </table>
+                <button fd-button (click)="toggleDisabledState()" label="Toggle disabled state"></button>
             </div>
 
             <div class="step-input-example">
@@ -71,11 +73,15 @@ import { StepInputModule } from '@fundamental-ngx/core/step-input';
         </div>
     `,
     standalone: true,
-    imports: [FormLabelComponent, StepInputModule, FormsModule, ReactiveFormsModule]
+    imports: [FormLabelComponent, StepInputModule, FormsModule, ReactiveFormsModule, ButtonComponent]
 })
 export class StepInputFormExampleComponent {
     stepInputFormControl1 = new FormControl(100);
     stepInputFormControl2 = new FormControl({ disabled: true, value: 100 });
     value1: number | null = 100;
     value2: number | null = 100;
+
+    toggleDisabledState(): void {
+        this.stepInputFormControl2.enabled ? this.stepInputFormControl2.disable() : this.stepInputFormControl2.enable();
+    }
 }

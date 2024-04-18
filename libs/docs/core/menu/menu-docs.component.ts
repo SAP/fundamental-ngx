@@ -26,6 +26,7 @@ const menuMobileTs = 'menu-mobile-example.component.ts';
 const menuMobileHtml = 'menu-mobile-example.component.html';
 const menuSeparatorHtml = 'menu-separator-example.component.html';
 const menuScrollbarHtml = 'menu-scrollbar-example.component.html';
+const menuScrollbarTs = 'menu-scrollbar-example.component.ts';
 const menuWithSubmenuHtml = 'menu-with-submenu-example.component.html';
 const menuWithSubmenuTs = 'menu-with-submenu-example.component.ts';
 
@@ -77,7 +78,14 @@ export class MenuDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(menuScrollbarHtml),
-            fileName: 'menu-scrollbar-example'
+            fileName: 'menu-scrollbar-example',
+            component: 'MenuScrollbarExampleComponent'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(menuScrollbarTs),
+            fileName: 'menu-scrollbar-example',
+            component: 'MenuScrollbarExampleComponent'
         }
     ];
 
@@ -100,7 +108,12 @@ export class MenuDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(menuWithSubmenuHtml),
             fileName: 'menu-with-submenu-example',
-            typescriptFileCode: menuWithSubmenuTs,
+            component: 'MenuWithSubmenuExampleComponent'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(menuWithSubmenuTs),
+            fileName: 'menu-with-submenu-example',
             component: 'MenuWithSubmenuExampleComponent'
         }
     ];
@@ -109,7 +122,7 @@ export class MenuDocsComponent {
         {
             language: 'typescript',
             code: getAssetFromModuleAssets('extended-menu-example.component.ts'),
-            fileName: 'extended-menu-example.component',
+            fileName: 'extended-menu-example',
             component: 'ExtendedMenuExampleComponent'
         }
     ];

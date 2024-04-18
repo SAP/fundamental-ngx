@@ -22,7 +22,7 @@ import { debounceTime } from 'rxjs/operators';
 @Component({
     selector: 'fd-carousel-dynamic-items-example',
     templateUrl: './carousel-dynamic-items-example.component.html',
-    styleUrls: ['./carousel-example.component.scss'],
+    styleUrls: ['./carousel-dynamic-items-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [

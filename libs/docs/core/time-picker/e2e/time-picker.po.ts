@@ -6,7 +6,6 @@ export class TimePickerPo extends CoreBaseComponentPo {
     defaultExample = 'fd-time-picker-example ';
     formattingExample = 'fd-time-picker-format-example ';
     disabledExample = 'fd-time-picker-disabled-example ';
-    compactExamle = 'fd-time-picker-compact-example ';
     nullExample = 'fd-time-picker-allow-null-example ';
     formExample = 'fd-time-picker-form-example ';
     localExample = 'fd-time-picker-locale-example ';
