@@ -71,19 +71,19 @@ export class ShellbarDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets('shellbar-responsive-example/shellbar-responsive-example.component.html'),
-            fileName: 'shellbar-responsive-example.component'
+            fileName: 'shellbar-responsive-example'
         },
         {
             language: 'typescript',
             component: 'ShellbarResponsiveExampleComponent',
             code: getAssetFromModuleAssets('shellbar-responsive-example/shellbar-responsive-example.component.ts'),
-            fileName: 'shellbar-responsive-example.component'
+            fileName: 'shellbar-responsive-example'
         }
     ];
 
     shellbarGrowingGroupExampleFiles: ExampleFile[] = [
         getExampleFile('shellbar-growing-group-example/shellbar-growing-group-example.component.ts', {
-            selector: 'fd-shellbar-growing-group-example',
+            selector: 'shellbar-growing-group-example',
             component: 'ShellbarGrowingGroupExampleComponent',
             name: 'shellbar-growing-group-example.ts'
         }),
@@ -94,7 +94,7 @@ export class ShellbarDocsComponent {
 
     shellbarCustomUserMenuExample: ExampleFile[] = [
         getExampleFile('custom-user-menu-example.component.ts', {
-            selector: 'fd-shellbar-custom-user-menu-example',
+            selector: 'shellbar-custom-user-menu-example',
             component: 'CustomUserMenuExampleComponent'
         })
     ];
