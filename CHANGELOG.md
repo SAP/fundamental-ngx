@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.34...v0.50.0-rc.35) (2024-04-18)
+
+
+### Bug Fixes
+
+* **core:** remove parent row tabindex when cell is focused to address screenreader issue ([#11692](https://github.com/SAP/fundamental-ngx/issues/11692)) ([b96ff5c](https://github.com/SAP/fundamental-ngx/commit/b96ff5c1e036cc28442bb582e762fe2a04471326))
+
+
+
+
+
 # [0.50.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.33...v0.50.0-rc.34) (2024-04-17)
 
 **Note:** Version bump only for package fundamental-ngx
