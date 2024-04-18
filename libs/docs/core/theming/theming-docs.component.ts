@@ -47,13 +47,13 @@ export class ThemingDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(themeSwitcherSrc),
-            fileName: 'theme-switcher-example'
+            fileName: 'theming-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(themeSwitcherSrcTs),
-            fileName: 'theme-switcher-example',
-            component: 'ThemeSwitcherExampleComponent'
+            fileName: 'theming-example',
+            component: 'ThemingExampleComponent'
         }
     ];
 
@@ -61,13 +61,13 @@ export class ThemingDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(themeUrlSrc),
-            fileName: 'theme-url-example'
+            fileName: 'theming-url-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(themeUrlSrcTs),
-            fileName: 'theme-url-example',
-            component: 'ThemeUrlExampleComponent'
+            fileName: 'theming-url-example',
+            component: 'ThemingUrlExampleComponent'
         }
     ];
 
