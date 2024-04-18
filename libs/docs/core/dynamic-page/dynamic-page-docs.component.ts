@@ -61,12 +61,12 @@ export class DynamicPageDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(dynamicPageBasicExample),
-            fileName: 'dynamic-page-basic-example'
+            fileName: 'dynamic-page-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(dynamicPageBasicExampleTsCode),
-            fileName: 'dynamic-page-basic-example',
+            fileName: 'dynamic-page-example',
             component: 'DynamicPageExampleComponent'
         }
     ];

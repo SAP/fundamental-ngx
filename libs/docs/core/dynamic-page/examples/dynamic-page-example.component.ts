@@ -13,7 +13,7 @@ import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/m
 import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
 
 @Component({
-    selector: 'fd-dynamic-page-basic-example',
+    selector: 'fd-dynamic-page-example',
     templateUrl: './dynamic-page-example.component.html',
     styles: [
         `
