@@ -21,7 +21,7 @@ import { CompleteThemeDefinition, THEMING_CONFIG_TOKEN, ThemingService } from '@
     imports: [ButtonComponent, FormLabelComponent, JsonPipe]
 })
 export class ThemingUrlExampleComponent {
-    themes = this._themingService.getThemes();
+    themes: CompleteThemeDefinition[];
     themeFromUrl: CompleteThemeDefinition | null;
 
     constructor(
@@ -29,6 +29,7 @@ export class ThemingUrlExampleComponent {
         private _router: Router
     ) {
         this._themingService.init();
+        this.themes = this._themingService.getThemes();
 
         this._themingService.currentTheme.subscribe((theme) => {
             this.themeFromUrl = theme;
