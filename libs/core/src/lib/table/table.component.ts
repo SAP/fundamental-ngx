@@ -4,6 +4,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChildren,
+    ElementRef,
     HostBinding,
     Input,
     NgZone,
@@ -104,7 +105,8 @@ export class TableComponent implements AfterContentInit, AfterViewInit {
         private readonly _tableService: TableService,
         private readonly _contentDensityObserver: ContentDensityObserver,
         private readonly _destroy$: DestroyedService,
-        private readonly _ngZone: NgZone
+        private readonly _ngZone: NgZone,
+        private readonly _elRef: ElementRef
     ) {
         this._contentDensityObserver.subscribe();
     }
