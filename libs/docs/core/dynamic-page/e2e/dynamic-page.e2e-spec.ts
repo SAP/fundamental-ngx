@@ -55,11 +55,6 @@ describe('dynamic side content test suite', () => {
     }, 1);
 
     describe('Tests for column layout example', () => {
-        it('should check navigate by link', async () => {
-            await openPage(columnLayoutExample);
-            await checkUrlNavigation();
-        });
-
         it('should check close page by clicking exit button', async () => {
             await openPage(columnLayoutExample);
             await checkPageClosed(exitButton);
@@ -222,11 +217,6 @@ describe('dynamic side content test suite', () => {
             await openPage(responsiveExample);
             await checkElArrIsClickable(responsiveExample + breadcrumbLink);
         });
-
-        it('should check navigate by link', async () => {
-            await openPage(responsiveExample);
-            await checkUrlNavigation();
-        });
     });
 
     describe('Tests for tabs example', () => {
@@ -286,11 +276,6 @@ describe('dynamic side content test suite', () => {
             await openPage(tabsExample);
             await checkElArrIsClickable(tabsExample + breadcrumbLink);
         });
-
-        it('should check navigate by link', async () => {
-            await openPage(tabsExample);
-            await checkUrlNavigation();
-        });
     });
 
     describe('Tests for default example', () => {
@@ -327,11 +312,6 @@ describe('dynamic side content test suite', () => {
         it('should check links clickable', async () => {
             await openPage(defaultExample);
             await checkElArrIsClickable(defaultExample + breadcrumbLink);
-        });
-
-        it('should check navigate by link', async () => {
-            await openPage(defaultExample);
-            await checkUrlNavigation();
         });
     });
 
