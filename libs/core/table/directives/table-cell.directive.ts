@@ -3,6 +3,7 @@ import {
     ContentChildren,
     Directive,
     HostBinding,
+    HostListener,
     Input,
     QueryList,
     booleanAttribute
@@ -79,9 +80,29 @@ export class TableCellDirective extends FocusableItemDirective implements AfterC
     _fdTableCellClass = true;
 
     /** @hidden */
+    private _parentPreviousTabIndex: number | undefined;
+
+    /** @hidden */
     constructor() {
         super();
         this.fdkFocusableItem = false;
+    }
+
+    /** @hidden */
+    @HostListener('focusin')
+    private _focusIn(): void {
+        const parentEl = this.elementRef.nativeElement.parentElement;
+        this._parentPreviousTabIndex = parentEl?.tabIndex;
+        parentEl?.removeAttribute('tabindex');
+    }
+
+    /** @hidden */
+    @HostListener('focusout')
+    private _focusOut(): void {
+        const parentEl = this.elementRef.nativeElement.parentElement;
+        if (this._parentPreviousTabIndex) {
+            parentEl?.setAttribute('tabindex', this._parentPreviousTabIndex.toString());
+        }
     }
 
     /** @hidden */
