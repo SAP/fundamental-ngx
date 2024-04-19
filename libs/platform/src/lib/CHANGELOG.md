@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.33](https://github.com/SAP/fundamental-ngx/compare/v0.43.32...v0.43.33) (2024-04-19)
+
+
+### Bug Fixes
+
+* **core, platform:** add fix for breadcrumb template not being rendered in Dynamic Page component ([#11677](https://github.com/SAP/fundamental-ngx/issues/11677)) ([bf5ae72](https://github.com/SAP/fundamental-ngx/commit/bf5ae72c86f718d025b6c3de02715f3b1eb735c3))
+* **core:** remove parent row tabindex when cell is focused to address screenreader issue ([#11691](https://github.com/SAP/fundamental-ngx/issues/11691)) ([3045a41](https://github.com/SAP/fundamental-ngx/commit/3045a41080b28d96b492bc27192e9e215bb09b83))
+* **platform:** dialog aria-labelledBy for vhd ([#11651](https://github.com/SAP/fundamental-ngx/issues/11651)) ([239ec2a](https://github.com/SAP/fundamental-ngx/commit/239ec2af587df59e5838d90925a3a545ec56b41b))
+* **platform:** focus menu button trigger when closed ([#11661](https://github.com/SAP/fundamental-ngx/issues/11661)) ([9b1c106](https://github.com/SAP/fundamental-ngx/commit/9b1c106f088458a9df755099c9cf395404f30bec))
+* **platform:** vhd keyboard improvements ([#11563](https://github.com/SAP/fundamental-ngx/issues/11563)) ([8c7fd1b](https://github.com/SAP/fundamental-ngx/commit/8c7fd1b9b66e67245511a942f9d03a244653379e))
+
+
+
+
+
 ## [0.43.32](https://github.com/SAP/fundamental-ngx/compare/v0.43.31...v0.43.32) (2024-03-26)
 
 **Note:** Version bump only for package @fundamental-ngx/platform

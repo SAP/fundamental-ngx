@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.33](https://github.com/SAP/fundamental-ngx/compare/v0.43.32...v0.43.33) (2024-04-19)
+
+
+### Bug Fixes
+
+* **core:** pagination accessibility improvements ([#11656](https://github.com/SAP/fundamental-ngx/issues/11656)) ([b65c829](https://github.com/SAP/fundamental-ngx/commit/b65c8292faa6508d22a3295c79594311c81d5378))
+* issue with scrolling when topEl would be the cell instead of row ([#11644](https://github.com/SAP/fundamental-ngx/issues/11644)) ([fd91e04](https://github.com/SAP/fundamental-ngx/commit/fd91e04aafe10df991278e7c2ac5e029ceacf2bf))
+
+
+
+
+
 ## [0.43.32](https://github.com/SAP/fundamental-ngx/compare/v0.43.31...v0.43.32) (2024-03-26)
 
 
