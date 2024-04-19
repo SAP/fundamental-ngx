@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
 
 @Component({
-    selector: 'fd-status-indicator-linear-clickable-type',
+    selector: 'fd-status-indicator-clickable-type',
     templateUrl: './status-indicator-clickable-type.component.html',
     standalone: true,
     imports: [StatusIndicatorModule]
