@@ -62,8 +62,8 @@ describe('TableCellDirective', () => {
     it('should handle focus events', () => {
         const parentEl = component.cell.elementRef.nativeElement.parentElement as HTMLElement;
         expect(parentEl).toBeTruthy();
-        spyOn(parentEl, 'setAttribute');
-        spyOn(parentEl, 'removeAttribute');
+        jest.spyOn(parentEl, 'setAttribute');
+        jest.spyOn(parentEl, 'removeAttribute');
         expect(parentEl?.tabIndex).toBe(-1);
         component.cell.elementRef.nativeElement.focus();
         expect(parentEl?.removeAttribute).toHaveBeenCalled();
