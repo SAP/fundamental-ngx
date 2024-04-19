@@ -1,6 +1,7 @@
 name: Run unit and e2e tests daily at 12 AM
 
 on:
+    workflow_dispatch:
     schedule:
         - cron: '0 0 * * *' # run daily at 12 AM
 env:
