@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.45...v0.50.0-rc.46) (2024-04-19)
+
+
+### Bug Fixes
+
+* **core:** table cell test ([#11785](https://github.com/SAP/fundamental-ngx/issues/11785)) ([5df3b31](https://github.com/SAP/fundamental-ngx/commit/5df3b31caf91b39ea09ac994806abfdd60a62454))
+
+
+
+
+
+# [0.50.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.44...v0.50.0-rc.45) (2024-04-19)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 # [0.50.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.43...v0.50.0-rc.44) (2024-04-19)
 
 **Note:** Version bump only for package fundamental-ngx
