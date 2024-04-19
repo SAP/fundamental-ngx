@@ -16,6 +16,7 @@ import { VerticalNavigationNoIconsExampleComponent } from './examples/vertical-n
 const VerticalNavigationDefaultExample = 'vertical-navigation-default-example.component.html';
 const VerticalNavigationGroupingExample = 'vertical-navigation-grouping-example.component.html';
 const VerticalNavigationCondensedExample = 'vertical-navigation-condensed-example.component.html';
+const VerticalNavigationCondensedExampleTs = 'vertical-navigation-condensed-example.component.ts';
 const VerticalNavigationNoIconsExample = 'vertical-navigation-no-icons-example.component.html';
 
 @Component({
@@ -47,6 +48,12 @@ export class VerticalNavigationDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(VerticalNavigationCondensedExample),
             fileName: 'vertical-navigation-condensed-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(VerticalNavigationCondensedExampleTs),
+            fileName: 'vertical-navigation-condensed-example',
+            component: 'VerticalNavigationCondensedExampleComponent'
         }
     ];
     noIconsVerticalNavigation: ExampleFile[] = [

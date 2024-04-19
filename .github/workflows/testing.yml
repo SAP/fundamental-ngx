@@ -1,0 +1,116 @@
+name: Run unit and e2e tests daily at 12 AM
+
+on:
+    schedule:
+        - cron: '0 0 * * *' # run daily at 12 AM
+env:
+    NX_CLOUD_DISTRIBUTED_EXECUTION: true
+    NX_CLOUD_DISTRIBUTED_EXECUTION_AGENT_COUNT: 8
+    NX_BRANCH: ${{ github.event.number || github.ref_name }}
+    NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
+    NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    nx_agents:
+        name: Nx Cloud Agent ${{ matrix.agent }}
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                agent: [1, 2, 3, 4, 5, 6, 7, 8]
+        steps:
+            - uses: actions/checkout@v4.1.1
+            - uses: ./.github/actions/nodejs
+            - name: set up xvfb
+              run: |
+                  export DISPLAY=:99
+                  sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+            - name: Start Nx Cloud Agent
+              run: npx nx-cloud start-agent
+              env:
+                  NX_AGENT_NAME: ${{matrix.agent}}
+
+    build_test:
+        runs-on: ubuntu-latest
+        name: Run affected Build, Lint and test commands
+        defaults:
+            run:
+                working-directory: ${{ github.workspace }}
+                shell: bash
+        steps:
+            - uses: actions/checkout@v4.1.1
+              name: Checkout
+              with:
+                  fetch-depth: 0
+                  token: ${{ secrets.GHACTIONS }}
+
+            - uses: nrwl/nx-set-shas@v4.0.4
+              name: Derive appropriate SHAs for base and head for nx-affected commands
+              with:
+                  main-branch-name: main
+
+            - uses: ./.github/actions/nodejs
+
+            - name: Initialize the Nx Cloud distributed CI run
+              run: npx nx-cloud start-ci-run
+
+            - name: Run Build, Lint and test commands
+              uses: ./.github/actions/parallel-commands
+              with:
+                  parallel-commands: |
+                      npx nx affected --target=build --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=docs --parallel=3
+                      npx nx run-many --target=test --all --skip-nx-cache --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=nx-plugin --parallel=3
+                      npx nx affected --target=lint --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=core,platform,cx,btp --parallel=3
+
+            - name: Text workspace tags
+              run: npx nx run nx-plugin:test --skip-nx-cache
+
+    e2e_test:
+        runs-on: ubuntu-latest
+        name: Run e2e
+        defaults:
+            run:
+                working-directory: ${{ github.workspace }}
+                shell: bash
+        steps:
+            - uses: actions/checkout@v4.1.1
+              name: Checkout
+              with:
+                  fetch-depth: 0
+            - uses: ./.github/actions/nodejs
+            - run: npx nx run docs:compile:production
+            - uses: browser-actions/setup-chrome@latest
+              with:
+                  chrome-version: stable
+            - run: |
+                  export DISPLAY=:99
+                  chrome --version
+                  sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 & # optional
+              env:
+                  NX_CLOUD_DISTRIBUTED_EXECUTION: false
+            - name: Test affected
+              run: |
+                  npx nx run-many --target=e2e --all --skip-nx-cache --base=origin/main --head=HEAD --parallel=2 --baseUrl=${{ steps.firebase_hosting_preview.outputs.details_url }} --devServerTarget=""
+
+            - name: Stopping agents # They're no longer needed, so we can stop them to avoid them going on timeout
+              run: npx nx-cloud stop-all-agents
+
+            - name: Test affected on local
+              run: |
+                  NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx run docs:e2e-app
+
+    stop_agents:
+        if: ${{ always() }}
+        needs:
+            - build_test
+            - e2e_test
+        name: Nx Cloud - Stop Agents
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4.1.1
+            - uses: ./.github/actions/nodejs
+            - name: Stop all running agents for this CI run
+              run: npx nx-cloud stop-all-agents

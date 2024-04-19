@@ -3,6 +3,134 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.43...v0.50.0-rc.44) (2024-04-19)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.42...v0.50.0-rc.43) (2024-04-19)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.41...v0.50.0-rc.42) (2024-04-18)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.40...v0.50.0-rc.41) (2024-04-18)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.39...v0.50.0-rc.40) (2024-04-18)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.38...v0.50.0-rc.39) (2024-04-18)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.37...v0.50.0-rc.38) (2024-04-18)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.36...v0.50.0-rc.37) (2024-04-18)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.35...v0.50.0-rc.36) (2024-04-18)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.34...v0.50.0-rc.35) (2024-04-18)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.33...v0.50.0-rc.34) (2024-04-17)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.32...v0.50.0-rc.33) (2024-04-17)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.31...v0.50.0-rc.32) (2024-04-16)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.30...v0.50.0-rc.31) (2024-04-16)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.29...v0.50.0-rc.30) (2024-04-16)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.28...v0.50.0-rc.29) (2024-04-16)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
 # [0.50.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.27...v0.50.0-rc.28) (2024-04-16)
 
 **Note:** Version bump only for package @fundamental-ngx/nx-plugin

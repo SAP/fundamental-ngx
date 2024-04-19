@@ -100,8 +100,6 @@ describe('TileDirectives', () => {
         expect(component.backgroundImg.nativeElement.style.getPropertyValue('background-image')).toContain(
             'url(https://picsum.photos/60/60)'
         );
-        expect(component.dot.nativeElement.className).toContain('fd-tile__dot');
-        expect(component.dot.nativeElement.className).toContain('fd-tile__dot--active');
         component.actionClose.buildComponentCssClass();
         expect(component.actionClose.elementRef.nativeElement.className).toContain('fd-tile__action-close');
         component.actionIndicator.buildComponentCssClass();

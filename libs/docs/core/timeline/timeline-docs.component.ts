@@ -100,7 +100,7 @@ export class TimelineDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(timelineHorizontalDoubleExampleTs),
             component: 'TimelineHorizontalDoubleSideExampleComponent',
-            selector: 'timeline-vertical-double-side',
+            selector: 'timeline-horizontal-double-side-example',
             fileName: 'timeline-horizontal-double-side-example'
         },
         {

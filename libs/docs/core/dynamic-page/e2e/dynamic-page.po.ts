@@ -3,7 +3,7 @@ import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 export class DynamicPagePo extends CoreBaseComponentPo {
     private url = '/dynamic-page';
 
-    defaultExample = 'fd-dynamic-page-basic-example ';
+    defaultExample = 'fd-dynamic-page-example ';
     tabsExample = 'fd-dynamic-page-tabs-example ';
     columnLayoutExample = 'fd-dynamic-page-column-layout-example ';
     responsiveExample = 'fd-dynamic-page-responsive-example ';

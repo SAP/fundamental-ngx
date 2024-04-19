@@ -20,6 +20,11 @@ import { ListComponent, ListNavigationItemComponent } from '@fundamental-ngx/cor
 import { Subject, delay, map, merge, startWith, takeUntil } from 'rxjs';
 import { VerticalNavigationMainNavigationComponent } from './vertical-navigation-main-navigation.component';
 
+/**
+ * @deprecated use the (btp)vertical navigation component instead.
+ * The side-navigation is a wrapping component representing
+ * a left navigation that can always display or expand/collapse using the menu icon within the global navigation.
+ */
 @Component({
     selector: 'fd-vertical-navigation',
     templateUrl: './vertical-navigation.component.html',
