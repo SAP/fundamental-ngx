@@ -30,7 +30,7 @@ const truncateTextTs = 'truncate-text-example.component.ts';
 export class TruncateDocsComponent {
     truncate: ExampleFile[] = [
         {
-            language: 'TypeScript',
+            language: 'typescript',
             code: getAssetFromModuleAssets(truncateTs),
             fileName: 'truncate-example',
             component: 'TruncateExampleComponent'
@@ -39,7 +39,7 @@ export class TruncateDocsComponent {
 
     truncateText: ExampleFile[] = [
         {
-            language: 'TypeScript',
+            language: 'typescript',
             code: getAssetFromModuleAssets(truncateTextTs),
             fileName: 'truncate-text-example',
             component: 'TruncateTextExampleComponent'
