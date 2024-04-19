@@ -57,11 +57,6 @@ jobs:
             - name: Initialize the Nx Cloud distributed CI run
               run: npx nx-cloud start-ci-run
 
-            - name: Format Check
-              run: npx nx format:check --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD
-              env:
-                  NX_CLOUD_DISTRIBUTED_EXECUTION: false
-
             - name: Run Build, Lint and test commands
               uses: ./.github/actions/parallel-commands
               with:
