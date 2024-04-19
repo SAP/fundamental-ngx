@@ -14,6 +14,7 @@ import {
     Optional,
     QueryList,
     Renderer2,
+    viewChild,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -63,6 +64,13 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
 
     /** aria label for the page */
     @Input() ariaLabel: Nullable<string>;
+
+    /**
+     * aria roledescription for the page
+     * default: "Dynamic Page"
+     *
+     */
+    @Input() ariaRoledescription = 'Dynamic Page';
 
     /**
      * sets background for content to `list`, `transparent`, or `solid` background color.
@@ -145,6 +153,12 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
     /** @hidden */
     _headerCollapsible = true;
 
+    /** @hidden */
+    _isExpanded = computed(() => !this._dynamicPageService.collapsed());
+
+    /** @hidden */
+    private _headerButton = viewChild<ElementRef<HTMLSpanElement>>('headerButton');
+
     /** @hidden **/
     private readonly _destroyRef = inject(DestroyRef);
 
@@ -184,6 +198,7 @@ export class DynamicPageComponent implements AfterViewInit, DynamicPage {
     toggleCollapse(): void {
         if (this._headerCollapsible) {
             this._dynamicPageService.toggleCollapsed();
+            this._headerButton()?.nativeElement.focus();
         }
     }
 
