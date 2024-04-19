@@ -16,17 +16,6 @@ export class TileContentDirective {
     @Input()
     twoColumn = false;
 }
-
-@Directive({
-    selector: '[fdTileContentByline], [fd-tile-content-byline]',
-    standalone: true
-})
-export class TileContentBylineDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__content-byline')
-    baseClass = true;
-}
-
 @Directive({
     selector: '[fdTileContentText], [fd-tile-content-text]',
     standalone: true
@@ -249,16 +238,6 @@ export class TileContainerDirective {
 }
 
 @Directive({
-    selector: '[fdTileSlideContainer], [fd-tile-slide-container]',
-    standalone: true
-})
-export class TileSlideContainerDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__container')
-    baseClass = true;
-}
-
-@Directive({
     selector: '[fdTileBackgroundImg], [fd-tile-background-img]',
     standalone: true
 })
@@ -286,21 +265,6 @@ export class TilePageIndicatorDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__page-indicator')
     baseClass = true;
-}
-
-@Directive({
-    selector: '[fdTileDot], [fd-tile-dot]',
-    standalone: true
-})
-export class TileDotDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tile__dot')
-    baseClass = true;
-
-    /** Whether or not this dot is active. */
-    @HostBinding('class.fd-tile__dot--active')
-    @Input()
-    active = false;
 }
 
 @Directive({

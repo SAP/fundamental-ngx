@@ -78,14 +78,14 @@ export class FlexibleColumnLayoutDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(flexibleColumnLayoutCustomConfigHtml),
-            fileName: 'flexible-card-layout-custom-config-example',
+            fileName: 'flexible-column-layout-custom-config-example',
             scssFileCode: getAssetFromModuleAssets(flexibleColumnLayoutCustomConfigScss)
         },
         {
             language: 'typescript',
-            component: 'FlexibleColumnLayoutDynamicPageExampleComponent',
+            component: 'FlexibleColumnLayoutCustomConfigExampleComponent',
             code: getAssetFromModuleAssets(flexibleColumnLayoutCustomConfigTs),
-            fileName: 'flexible-card-layout-custom-config-example'
+            fileName: 'flexible-column-layout-custom-config-example'
         }
     ];
 

@@ -7,10 +7,12 @@ import { TableCellDirective } from './table-cell.directive';
 
 @Component({
     template: `
+    <tr tabindex="-1">
         <td fd-table-cell>
             <fd-checkbox></fd-checkbox>
         </td>
         <td fd-table-cell [key]="key">{{ key }}</td>
+    </tr>
     `
 })
 class TestComponent {
@@ -55,5 +57,17 @@ describe('TableCellDirective', () => {
         fixture.detectChanges();
 
         expect(component.cell.elementRef.nativeElement.classList.length).toBe(8);
+    });
+
+    it('should handle focus events', () => {
+        const parentEl = component.cell.elementRef.nativeElement.parentElement as HTMLElement;
+        expect(parentEl).toBeTruthy();
+        jest.spyOn(parentEl, 'setAttribute');
+        jest.spyOn(parentEl, 'removeAttribute');
+        expect(parentEl?.tabIndex).toBe(-1);
+        component.cell.elementRef.nativeElement.focus();
+        expect(parentEl?.removeAttribute).toHaveBeenCalled();
+        component.cell.elementRef.nativeElement.blur();
+        expect(parentEl?.setAttribute).toHaveBeenCalledWith('tabindex', '-1');
     });
 });

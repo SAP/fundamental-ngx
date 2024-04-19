@@ -173,9 +173,9 @@ export class StatusIndicatorDocsComponent {
         },
         {
             language: 'typescript',
-            code: StatusIndicatorClickAbleFillingComponentTs,
+            code: getAssetFromModuleAssets(StatusIndicatorClickAbleFillingComponentTs),
             fileName: 'status-indicator-clickable-type',
-            component: 'StatusIndicatorlinearFillingComponent'
+            component: 'StatusIndicatorClickableTypeComponent'
         }
     ];
 }

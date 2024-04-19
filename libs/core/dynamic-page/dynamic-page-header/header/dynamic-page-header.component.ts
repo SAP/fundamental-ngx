@@ -10,7 +10,8 @@ import {
     OnInit,
     Renderer2,
     ViewEncapsulation,
-    computed
+    computed,
+    input
 } from '@angular/core';
 
 import { Subject } from 'rxjs';
@@ -33,15 +34,16 @@ import { DynamicPageBreadcrumbComponent } from '../breadcrumb/dynamic-page-bread
 
 export const ActionSquashBreakpointPx = 1280;
 
+export type HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
+let dynamicPageTitleId = 0;
+
 @Component({
     selector: 'fd-dynamic-page-header',
     templateUrl: './dynamic-page-header.component.html',
     styleUrl: './dynamic-page-header.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    host: {
-        '[attr.tabindex]': '0'
-    },
     providers: [
         {
             provide: DYNAMIC_PAGE_HEADER_TOKEN,
@@ -107,6 +109,16 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
 
     /** @hidden */
     _size: DynamicPageResponsiveSize;
+
+    /**
+     * The level of the Dynamic Page title
+     * Possible options: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+     * Default: 'h2'
+     */
+    headingLevel = input<HeadingLevel>('h2');
+
+    /** Dynamic page title id, it has some default value if not set,  */
+    titleId = input('fd-dynamic-page-title-id-' + dynamicPageTitleId++);
 
     /** @hidden **/
     private readonly _onDestroy$: Subject<void> = new Subject<void>();

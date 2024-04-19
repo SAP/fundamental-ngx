@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
-type TileType = null | 'kpi' | 'launch' | 'feed' | 'slide' | 'line';
+type TileType = null | 'kpi' | 'launch' | 'feed';
 type TileSize = null | 's';
 
 @Component({
@@ -38,7 +38,7 @@ export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges 
     @Input()
     double = false;
 
-    /** Type of tile.  Options are 'kpi', 'launch', 'feed', 'slide', 'line', or leave null for default. */
+    /** Type of tile.  Options are 'kpi', 'launch', 'feed', or leave null for default. */
     @Input()
     type: TileType;
 

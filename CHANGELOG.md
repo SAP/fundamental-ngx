@@ -3,6 +3,226 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.48...v0.50.0-rc.49) (2024-04-19)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.47...v0.50.0-rc.48) (2024-04-19)
+
+
+### Bug Fixes
+
+* **core:** a11y improvements for Dynamic page header ([#11767](https://github.com/SAP/fundamental-ngx/issues/11767)) ([2d5ff77](https://github.com/SAP/fundamental-ngx/commit/2d5ff77a4aa10bbbd5f7d47c588f4ee392c3e1f9))
+
+
+
+
+
+# [0.50.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.46...v0.50.0-rc.47) (2024-04-19)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.45...v0.50.0-rc.46) (2024-04-19)
+
+
+### Bug Fixes
+
+* **core:** table cell test ([#11785](https://github.com/SAP/fundamental-ngx/issues/11785)) ([5df3b31](https://github.com/SAP/fundamental-ngx/commit/5df3b31caf91b39ea09ac994806abfdd60a62454))
+
+
+
+
+
+# [0.50.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.44...v0.50.0-rc.45) (2024-04-19)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.43...v0.50.0-rc.44) (2024-04-19)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.42...v0.50.0-rc.43) (2024-04-19)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.41...v0.50.0-rc.42) (2024-04-18)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.40...v0.50.0-rc.41) (2024-04-18)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.39...v0.50.0-rc.40) (2024-04-18)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.38...v0.50.0-rc.39) (2024-04-18)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.37...v0.50.0-rc.38) (2024-04-18)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.36...v0.50.0-rc.37) (2024-04-18)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.35...v0.50.0-rc.36) (2024-04-18)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.34...v0.50.0-rc.35) (2024-04-18)
+
+
+### Bug Fixes
+
+* **core:** remove parent row tabindex when cell is focused to address screenreader issue ([#11692](https://github.com/SAP/fundamental-ngx/issues/11692)) ([b96ff5c](https://github.com/SAP/fundamental-ngx/commit/b96ff5c1e036cc28442bb582e762fe2a04471326))
+
+
+
+
+
+# [0.50.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.33...v0.50.0-rc.34) (2024-04-17)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.32...v0.50.0-rc.33) (2024-04-17)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.31...v0.50.0-rc.32) (2024-04-16)
+
+
+### Bug Fixes
+
+* **core:** deprecate vertical nav + stackblitz fix ([#11766](https://github.com/SAP/fundamental-ngx/issues/11766)) ([a67b4b8](https://github.com/SAP/fundamental-ngx/commit/a67b4b81a17344f22df86182c666e34393b4571a))
+
+
+
+
+
+# [0.50.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.30...v0.50.0-rc.31) (2024-04-16)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.29...v0.50.0-rc.30) (2024-04-16)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.28...v0.50.0-rc.29) (2024-04-16)
+
+
+### Bug Fixes
+
+* **core:** remove slide tile directives ([#11761](https://github.com/SAP/fundamental-ngx/issues/11761)) ([858f60b](https://github.com/SAP/fundamental-ngx/commit/858f60b5964aa9312ebb355ec069ef89b5a9e7ac))
+
+
+### BREAKING CHANGES
+
+* **core:** remove slide tile directives
+
+
+
+
+
+# [0.50.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.27...v0.50.0-rc.28) (2024-04-16)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.26...v0.50.0-rc.27) (2024-04-16)
+
+
+### Bug Fixes
+
+* **core:** remove line and slide tiles ([#11759](https://github.com/SAP/fundamental-ngx/issues/11759)) ([028a48e](https://github.com/SAP/fundamental-ngx/commit/028a48e721181a6dc1fe46f56513893ea9a76b63))
+
+
+### BREAKING CHANGES
+
+* **core:** remove line and slide tiles
+
+
+
+
+
+# [0.50.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.25...v0.50.0-rc.26) (2024-04-16)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 # [0.50.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.24...v0.50.0-rc.25) (2024-04-12)
 
 **Note:** Version bump only for package fundamental-ngx

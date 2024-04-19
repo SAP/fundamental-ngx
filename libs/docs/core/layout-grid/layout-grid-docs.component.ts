@@ -220,7 +220,7 @@ export class LayoutGridDocsComponent {
         },
         {
             language: 'typescript',
-            component: 'LayoutGridResponsiveOffsetExample',
+            component: 'LayoutGridResponsiveOffsetExampleComponent',
             code: getAssetFromModuleAssets(layoutGridResponsiveOffsetSrcTs),
             fileName: 'layout-grid-responsive-offset-example'
         },
