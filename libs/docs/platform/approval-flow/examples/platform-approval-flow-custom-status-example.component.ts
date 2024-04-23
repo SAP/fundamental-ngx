@@ -5,7 +5,7 @@ import { delay } from 'rxjs/operators';
 import { TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 import {
@@ -28,10 +28,17 @@ import {
 import { cloneDeep } from 'lodash-es';
 
 @Component({
-    selector: 'fdp-platform-approval-flow-status-example',
+    selector: 'fdp-platform-approval-flow-custom-status-example',
     templateUrl: './platform-approval-flow-custom-status-example.component.html',
     standalone: true,
-    imports: [PlatformApprovalFlowModule, FormsModule, MultiInputComponent, ContentDensityDirective, TitleCasePipe]
+    imports: [
+        PlatformApprovalFlowModule,
+        FormsModule,
+        MultiInputComponent,
+        ContentDensityDirective,
+        TitleCasePipe,
+        MessageToastModule
+    ]
 })
 export class PlatformApprovalFlowCustomStatusExampleComponent implements OnDestroy {
     private graphs = getGraphs();
