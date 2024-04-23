@@ -9,7 +9,7 @@ import {
     Validators
 } from '@angular/forms';
 import { DateRange } from '@fundamental-ngx/core/calendar';
-import { FdDate } from '@fundamental-ngx/core/datetime';
+import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { FdpFormGroupModule, PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
 
@@ -18,6 +18,11 @@ import { FdpFormGroupModule, PlatformDatePickerComponent } from '@fundamental-ng
     templateUrl: './platform-date-picker-mobile-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        // Note that this is usually provided in the root of your application.
+        // Due to the limit of this example we must provide it on this level.
+        provideDateTimeFormats()
+    ],
     standalone: true,
     imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformDatePickerComponent]
 })
