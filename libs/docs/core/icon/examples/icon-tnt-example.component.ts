@@ -183,6 +183,9 @@ export class IconTNTExampleComponent {
         'task-done',
         'ai-1',
         'ai-2',
-        'bound-validation-rule'
+        'bound-validation-rule',
+        'business-application-studio',
+        'clone-from-gi',
+        'business-accelerator'
     ];
 }
