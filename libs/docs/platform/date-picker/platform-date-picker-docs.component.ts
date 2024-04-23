@@ -112,7 +112,7 @@ export class PlatformDatePickerDocsComponent {
     datePickerUpdateOnBlur: ExampleFile[] = [
         {
             language: 'typescript',
-            component: 'DatePickerUpdateOnBlurExampleComponent',
+            component: 'PlatformDatePickerUpdateOnBlurExampleComponent',
             code: getAssetFromModuleAssets(datePickerUpdateOnBlurSrcTs),
             fileName: 'date-picker-update-on-blur-example'
         }
