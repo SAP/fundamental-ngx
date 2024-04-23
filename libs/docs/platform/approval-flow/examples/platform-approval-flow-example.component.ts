@@ -5,7 +5,7 @@ import { delay } from 'rxjs/operators';
 import { TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
 import {
     ApprovalFlowComponent,
@@ -30,7 +30,14 @@ import { cloneDeep } from 'lodash-es';
     selector: 'fdp-platform-approval-flow-example',
     templateUrl: './platform-approval-flow-example.component.html',
     standalone: true,
-    imports: [PlatformApprovalFlowModule, FormsModule, MultiInputComponent, ContentDensityDirective, TitleCasePipe]
+    imports: [
+        PlatformApprovalFlowModule,
+        FormsModule,
+        MultiInputComponent,
+        ContentDensityDirective,
+        TitleCasePipe,
+        MessageToastModule
+    ]
 })
 export class PlatformApprovalFlowExampleComponent implements OnDestroy {
     private graphs = getGraphs();
