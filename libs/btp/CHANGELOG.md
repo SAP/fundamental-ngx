@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.53...v0.50.0-rc.54) (2024-04-23)
+
+**Note:** Version bump only for package @fundamental-ngx/btp
+
+
+
+
+
 # [0.50.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.52...v0.50.0-rc.53) (2024-04-23)
 
 **Note:** Version bump only for package @fundamental-ngx/btp
