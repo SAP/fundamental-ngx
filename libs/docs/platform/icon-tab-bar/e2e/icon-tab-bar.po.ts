@@ -3,16 +3,16 @@ import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e'
 export class IconTabBarPO extends PlatformBaseComponentPo {
     url = '/icon-tab-bar';
 
-    textExample = 'fd-icon-tab-bar-text-type-example#textExample ';
-    columnsExample = 'fd-icon-tab-bar-text-type-example#columnsExample ';
-    iconOnlyExample = 'fd-icon-tab-bar-icon-only-type-example ';
-    iconExample = 'fd-icon-tab-bar-icon-type-example#iconExample ';
-    filterExample = 'fd-icon-tab-bar-filter-type-example ';
-    processExample = 'fdp-icon-tab-bar-process-type ';
-    nestedTabsExample = 'fd-icon-tab-bar-text-type-example#nestedTabsExample ';
-    reorderingExample = 'fd-icon-tab-bar-text-type-example#reorderingExample ';
-    overflowingExample = 'fd-icon-tab-bar-icon-type-example#overflowingExample ';
-    configuratablePaddingsExample = 'fd-platform-icon-tab-bar-configurable-paddings-example ';
+    textExample = 'fdp-platform-icon-tab-bar-text-type-example#textExample ';
+    columnsExample = 'fdp-platform-icon-tab-bar-text-type-example#columnsExample ';
+    iconOnlyExample = 'fdp-platform-icon-tab-bar-icon-only-type-example ';
+    iconExample = 'fdp-platform-icon-tab-bar-icon-type-example#iconExample ';
+    filterExample = 'fdp-platform-icon-tab-bar-filter-type-example ';
+    processExample = 'fdp-platform-icon-tab-bar-process-type-example ';
+    nestedTabsExample = 'fdp-platform-icon-tab-bar-text-type-example#nestedTabsExample ';
+    reorderingExample = 'fdp-platform-icon-tab-bar-text-type-example#reorderingExample ';
+    overflowingExample = 'fdp-platform-icon-tab-bar-icon-type-example#overflowingExample ';
+    configuratablePaddingsExample = 'fdp-platform-icon-tab-bar-configurable-paddings-example ';
 
     tabBarItem = '.fd-icon-tab-bar__item';
     tabBarTab = ' .fd-icon-tab-bar__tab';
