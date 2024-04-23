@@ -120,7 +120,7 @@ export class PlatformDatetimePickerDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(datetimePickerMobileHtml),
-            fileName: 'platform-datetime-PlatformDatetimePickerMobileExampleComponent-disable-function-example'
+            fileName: 'platform-datetime-picker-mobile-example'
         },
         {
             language: 'typescript',
