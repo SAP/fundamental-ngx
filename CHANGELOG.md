@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.49...v0.50.0-rc.50) (2024-04-23)
+
+
+### Bug Fixes
+
+* **platform:** header cell popover freeze button should be keydown, not keyup ([#11802](https://github.com/SAP/fundamental-ngx/issues/11802)) ([2d62b33](https://github.com/SAP/fundamental-ngx/commit/2d62b3314c474f1b312a0445dbdaebaff89bbe65))
+
+
+
+
+
 # [0.50.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.48...v0.50.0-rc.49) (2024-04-19)
 
 **Note:** Version bump only for package fundamental-ngx
