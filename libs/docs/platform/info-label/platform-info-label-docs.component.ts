@@ -9,21 +9,11 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import {
-    PlatformInfoLabelExampleComponent,
-    PlatformInfoLableAriaLabelExampleComponent,
-    PlatformInfoLableNumericIconExampleComponent,
-    PlatformInfoLableTextExampleComponent,
-    PlatformInfoLableTextIconExampleComponent
-} from './examples/platform-info-label-example.component';
+import { PlatformInfoLabelExampleComponent } from './examples/platform-info-label-example.component';
 
-const PlatformInfoLableDefaultExample = 'platform-info-label-example.component.html';
-const PlatformInfoLableNumericExample = 'platform-info-label-numeric-example.component.html';
-const PlatformTextAndIconInfoLableExample = 'platform-info-label-text-and-icon-example.component.html';
-const PlatfromInfoLableTextExample = 'platform-info-label-text-example.component.html';
-
-const PlatfromInfoLableAriaLabelExampleScss = 'platform-info-label-example.component.scss';
-const PlatfromInfoLableAriaLabelExample = 'platform-info-label-aria-label-example.component.html';
+const platformInfoLableHtml = 'platform-info-label-example.component.html';
+const platformInfoLabelTs = 'platform-info-label-example.component.ts';
+const platformInfoLabelScss = 'platform-info-label-example.component.scss';
 
 @Component({
     selector: 'fd-platform-info-label-docs',
@@ -35,48 +25,22 @@ const PlatfromInfoLableAriaLabelExample = 'platform-info-label-aria-label-exampl
         PlatformInfoLabelExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
-        DescriptionComponent,
-        PlatformInfoLableTextExampleComponent,
-        PlatformInfoLableTextIconExampleComponent,
-        PlatformInfoLableNumericIconExampleComponent,
-        PlatformInfoLableAriaLabelExampleComponent
+        DescriptionComponent
     ]
 })
 export class PlatformInfoLabelDocsComponent {
-    platformDefaultInfoLabelHtmlType: ExampleFile[] = [
+    infoLabelExample: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(PlatformInfoLableDefaultExample),
+            code: getAssetFromModuleAssets(platformInfoLableHtml),
             fileName: 'platform-info-label-example'
-        }
-    ];
-    platformTextInfoLabelHtmlType: ExampleFile[] = [
+        },
         {
-            language: 'html',
-            code: getAssetFromModuleAssets(PlatfromInfoLableTextExample),
-            fileName: 'platform-info-label-example'
-        }
-    ];
-    platformTextAndIconInfoLabelHtmlType: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(PlatformTextAndIconInfoLableExample),
-            fileName: 'platform-info-label-example'
-        }
-    ];
-    platformNumericInfoLabelHtmlType: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(PlatformInfoLableNumericExample),
-            fileName: 'platform-info-label-numeric-example'
-        }
-    ];
-    platformAraiaLabelInfoLabelHtmlType: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(PlatfromInfoLableAriaLabelExample),
-            fileName: 'platform-info-label-aria-label-example',
-            scssFileCode: getAssetFromModuleAssets(PlatfromInfoLableAriaLabelExampleScss)
+            language: 'typescript',
+            code: getAssetFromModuleAssets(platformInfoLabelTs),
+            fileName: 'platform-info-label-example',
+            component: 'PlatformInfoLabelExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(platformInfoLabelScss)
         }
     ];
 }
