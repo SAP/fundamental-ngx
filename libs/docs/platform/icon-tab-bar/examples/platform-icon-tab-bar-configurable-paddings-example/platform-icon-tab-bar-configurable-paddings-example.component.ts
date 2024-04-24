@@ -4,7 +4,7 @@ import { cloneDeep } from 'lodash-es';
 import { textTypeConfig } from '../config-for-examples/text-type.config';
 
 @Component({
-    selector: 'fd-platform-icon-tab-bar-configurable-paddings-example',
+    selector: 'fdp-platform-icon-tab-bar-configurable-paddings-example',
     templateUrl: './platform-icon-tab-bar-configurable-paddings-example.component.html',
     styles: [
         `

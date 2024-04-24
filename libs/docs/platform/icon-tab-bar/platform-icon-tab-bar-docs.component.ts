@@ -102,20 +102,20 @@ export class PlatformIconTabBarDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(iconTabBarTextTypeHtml),
-            fileName: 'icon-tab-bar-text-type-example',
+            fileName: 'platform-icon-tab-bar-text-type-example',
             path: 'example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(iconTabBarTextTypeTs),
-            fileName: 'icon-tab-bar-text-type-example',
-            component: 'IconTabBarTextTypeExampleComponent',
+            fileName: 'platform-icon-tab-bar-text-type-example',
+            component: 'PlatformIconTabBarTextTypeExampleComponent',
             path: 'example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(textTypeConfigs),
-            fileName: 'long-icon-type-config',
+            fileName: 'text-type.config',
             path: 'config-for-examples',
             pure: true
         }
@@ -125,20 +125,20 @@ export class PlatformIconTabBarDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(iconTabBarIconOnlyTypeHtml),
-            fileName: 'icon-tab-bar-icon-only-type-example',
+            fileName: 'platform-icon-tab-bar-icon-only-type-example',
             path: 'example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(iconTabBarIconOnlyTypeTs),
-            fileName: 'icon-tab-bar-icon-only-type-example',
-            component: 'IconTabBarIconOnlyTypeExampleComponent',
+            fileName: 'platform-icon-tab-bar-icon-only-type-example',
+            component: 'PlatformIconTabBarIconOnlyTypeExampleComponent',
             path: 'example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(iconTypeConfigs),
-            fileName: 'long-icon-type-config',
+            fileName: 'icon-type-config',
             path: 'config-for-examples',
             pure: true
         }
@@ -148,20 +148,20 @@ export class PlatformIconTabBarDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(iconTabBarIconTypeHtml),
-            fileName: 'icon-tab-bar-icon-type-example',
+            fileName: 'platform-icon-tab-bar-icon-type-example',
             path: 'example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(iconTabBarIconTypeTs),
-            fileName: 'icon-tab-bar-icon-type-example',
-            component: 'IconTabBarIconTypeExampleComponent',
+            fileName: 'platform-icon-tab-bar-icon-type-example',
+            component: 'PlatformIconTabBarIconTypeExampleComponent',
             path: 'example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(iconTypeConfigs),
-            fileName: 'long-icon-type-config',
+            fileName: 'icon-type-config',
             path: 'config-for-examples',
             pure: true
         }
@@ -171,20 +171,20 @@ export class PlatformIconTabBarDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(iconTabBarFilterTypeHtml),
-            fileName: 'icon-tab-bar-filter-type-example',
+            fileName: 'platform-icon-tab-bar-filter-type-example',
             path: 'example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(iconTabBarFilterTypeTs),
-            fileName: 'icon-tab-bar-filter-type-example',
-            component: 'IconTabBarFilterTypeExampleComponent',
+            fileName: 'platform-icon-tab-bar-filter-type-example',
+            component: 'PlatformIconTabBarFilterTypeExampleComponent',
             path: 'example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(iconTypeConfigs),
-            fileName: 'long-icon-type-config',
+            fileName: 'icon-type-config',
             path: 'config-for-examples',
             pure: true
         }
@@ -194,20 +194,20 @@ export class PlatformIconTabBarDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(iconTabBarProcessTypeHtml),
-            fileName: 'icon-tab-bar-process-type-example',
+            fileName: 'platform-icon-tab-bar-process-type-example',
             path: 'example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(iconTabBarProcessTypeTs),
-            fileName: 'icon-tab-bar-process-type-example',
-            component: 'IconTabBarProcessTypeExampleComponent',
+            fileName: 'platform-icon-tab-bar-process-type-example',
+            component: 'PlatformIconTabBarProcessTypeExampleComponent',
             path: 'example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(iconTypeConfigs),
-            fileName: 'long-icon-type-config',
+            fileName: 'icon-type-config',
             path: 'config-for-examples',
             pure: true
         }
@@ -229,8 +229,8 @@ export class PlatformIconTabBarDocsComponent {
         },
         {
             language: 'typescript',
-            code: getAssetFromModuleAssets(iconTypeConfigs),
-            fileName: 'icon-type-config',
+            code: getAssetFromModuleAssets(textTypeConfigs),
+            fileName: 'text-type.config',
             path: 'config-for-examples',
             pure: true
         }

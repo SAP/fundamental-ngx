@@ -4,7 +4,7 @@ import { cloneDeep } from 'lodash-es';
 import { iconTypeConfig, longIconTypeConfig } from '../config-for-examples/icon-type-config';
 
 @Component({
-    selector: 'fd-icon-tab-bar-process-type-example',
+    selector: 'fdp-platform-icon-tab-bar-process-type-example',
     templateUrl: './platform-icon-tab-bar-process-type-example.component.html',
     standalone: true,
     imports: [IconTabBarComponent]
