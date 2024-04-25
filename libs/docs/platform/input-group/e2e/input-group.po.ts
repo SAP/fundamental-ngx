@@ -31,12 +31,12 @@ export class InputGroupPo extends PlatformBaseComponentPo {
     disabledInput = 'fdp-input-group-disabled-example fdp-input-group input';
     disabledInputButton = 'fdp-input-group-disabled-example fdp-input-group button';
 
-    withFormInput = 'fdp-input-group-form-example input';
-    withFormInputTextAddon = 'fdp-input-group-form-example .fd-input-group__addon';
-    withFormInputButtonAddon = 'fdp-input-group-form-example .fd-input-group__addon button';
-    withFormInputLabel = 'fdp-input-group-form-example label > span';
-    withFormInputQuestionMark = 'fdp-input-group-form-example .sap-icon--hint';
-    withFormInputAsterixMark = 'fdp-input-group-form-example label span';
+    withFormInput = 'fdp-platform-input-group-form-example input';
+    withFormInputTextAddon = 'fdp-platform-input-group-form-example .fd-input-group__addon';
+    withFormInputButtonAddon = 'fdp-platform-input-group-form-example .fd-input-group__addon button';
+    withFormInputLabel = 'fdp-platform-input-group-form-example label > span';
+    withFormInputQuestionMark = 'fdp-platform-input-group-form-example .sap-icon--hint';
+    withFormInputAsterixMark = 'fdp-platform-input-group-form-example label span';
     withFormInputErrorTooltip = '[type="error"] span';
     withFormInputInfoTooltip = '.fd-inline-help__content';
 
