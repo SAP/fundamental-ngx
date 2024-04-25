@@ -1,0 +1,65 @@
+<div>
+    This is an example of an icon
+    <fdp-link
+        href="http://www.google.com"
+        ariaLabel="This is an icon as a link example"
+        [title]="'Extra info as tooltip text'"
+    >
+        <fd-icon glyph="chain-link"></fd-icon>
+    </fdp-link>
+    link; a
+    <fdp-link href="http://www.google.com" [title]="'Extra info as tooltip text'">
+        <fd-icon glyph="chain-link"></fd-icon>
+        standard
+    </fdp-link>
+    link; a
+    <fdp-link href="http://www.google.com" [title]="'Extra info as tooltip text'" linkType="subtle"> subtle </fdp-link>
+    link; link to download file
+    <fdp-link
+        [id]="'start-download'"
+        href="assets/headshot-male.jpg"
+        [title]="'click link to start download'"
+        download="pagedownloaded.jpeg"
+    >
+        download image
+    </fdp-link>
+    link; image file
+    <fdp-link [id]="'img-link'" href="https://www.google.com" [title]="'On click you will get to target page'">
+        <img src="https://picsum.photos/id/1021/50/50" />
+    </fdp-link>
+    as link;
+    <fdp-link
+        [id]="'media-link'"
+        href="https://picsum.photos/id/1016/500/500"
+        [title]="'target web is printable for resolution:300dpi'"
+        media="print and (resolution:300dpi)"
+        hreflang="en"
+    >
+        media resolution
+    </fdp-link>
+    link;
+    <fdp-link href="http://www.google.com" [title]="'Extra info as tooltip text'" linkType="emphasized">
+        emphasized
+    </fdp-link>
+    link;
+    <fdp-link href="http://www.google.com" [title]="'Extra info as tooltip text'" [disabled]="true">
+        disabled
+    </fdp-link>
+    link; an
+    <span class="fddoc-example-link">
+        <fdp-link href="http://www.google.com" [inverted]="true" [title]="'Extra info as tooltip text'">
+            inverted
+        </fdp-link>
+    </span>
+    link;
+    <p class="fddoc-truncate">
+        <fdp-link
+            href="http://www.google.com"
+            [truncate]="true"
+            [title]="'this is a long text link. so getting truncated.'"
+        >
+            truncated text that very long
+        </fdp-link>
+    </p>
+    link.
+</div>
