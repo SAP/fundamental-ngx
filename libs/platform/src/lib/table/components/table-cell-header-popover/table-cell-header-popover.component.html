@@ -6,11 +6,12 @@
     [focusTrapped]="true"
     *ngIf="!popoverTemplate; else projectedPopover"
     [triggers]="_headerPopoverTriggers"
+    (isOpenChange)="_popoverOpened($event)"
 >
     <fdp-list [noBorder]="true" [navigated]="true">
-        <fdp-free-content-list-item *ngFor="let item of _popoverItems$.asObservable() | async">
+        <li fdp-free-content-list-item *ngFor="let item of _popoverItems$.asObservable() | async">
             <ng-template [ngTemplateOutlet]="item" [ngTemplateOutletContext]="{ popover: popover }"></ng-template>
-        </fdp-free-content-list-item>
+        </li>
     </fdp-list>
 </fd-popover>
 <ng-template #projectedPopover>
