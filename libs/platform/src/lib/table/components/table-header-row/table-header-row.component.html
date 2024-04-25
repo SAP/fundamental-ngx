@@ -23,7 +23,8 @@
         selectionMode === SELECTION_MODE.MULTIPLE && _tableRowService.toggleAllSelectableRows(!checkedState)
     "
     (keydown.space)="
-        selectionMode === SELECTION_MODE.MULTIPLE && _tableRowService.toggleAllSelectableRows(!checkedState)
+        selectionMode === SELECTION_MODE.MULTIPLE && _tableRowService.toggleAllSelectableRows(!checkedState);
+        $event.preventDefault()
     "
     (cellFocused)="_tableRowService.cellFocused($event)"
     [attr.aria-description]="
