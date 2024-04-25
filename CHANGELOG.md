@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.57...v0.50.0-rc.58) (2024-04-25)
+
+
+### Bug Fixes
+
+* **platform:** prevent keyboard press on checkbox header cell from scrolling page ([#11814](https://github.com/SAP/fundamental-ngx/issues/11814)) ([2914d33](https://github.com/SAP/fundamental-ngx/commit/2914d3384d8c7149cac377b3493b1afa02da214f))
+
+
+
+
+
 # [0.50.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.56...v0.50.0-rc.57) (2024-04-24)
 
 **Note:** Version bump only for package fundamental-ngx
