@@ -18,6 +18,7 @@ const inputGroupStandardExampleHtml = 'platform-input-group-standard-example.com
 const inputGroupCompactExampleHtml = 'platform-input-group-compact-example.component.html';
 const inputGroupDisabledExampleHtml = 'platform-input-group-disabled-example.component.html';
 const inputGroupFormExampleHtml = 'platform-input-group-form-example.component.html';
+const inputGroupFormExampleTs = 'platform-input-group-form-example.component.ts';
 
 @Component({
     selector: 'app-input-group',
@@ -65,6 +66,12 @@ export class PlatformInputGroupDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(inputGroupFormExampleHtml),
             fileName: 'platform-input-group-form-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(inputGroupFormExampleTs),
+            fileName: 'platform-input-group-form-example',
+            component: 'PlatformInputGroupFormExampleComponent'
         }
     ];
 }
