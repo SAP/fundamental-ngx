@@ -336,6 +336,11 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     }
 
     /** @hidden */
+    _checkboxEscape(): void {
+        this._gridListItem.nativeElement.focus();
+    }
+
+    /** @hidden */
     _selectionItem(value: boolean | number | T, event?: MouseEvent): void {
         if (!this.value || this._index == null) {
             return;

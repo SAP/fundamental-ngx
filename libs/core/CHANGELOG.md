@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.61...v0.50.0-rc.62) (2024-04-26)
+
+
+### Bug Fixes
+
+* **core:** keyboard enhancements for grid list ([#11737](https://github.com/SAP/fundamental-ngx/issues/11737)) ([d6b90b5](https://github.com/SAP/fundamental-ngx/commit/d6b90b545e8fa15ecb72bf82d592ed841ef0aba4))
+
+
+
+
+
+# [0.50.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.60...v0.50.0-rc.61) (2024-04-26)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.50.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.59...v0.50.0-rc.60) (2024-04-25)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 # [0.50.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.58...v0.50.0-rc.59) (2024-04-25)
 
 **Note:** Version bump only for package @fundamental-ngx/core

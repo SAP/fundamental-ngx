@@ -31,7 +31,7 @@
                 [inputText]="_searchInputText"
                 [disabled]="!!(tableLoading$ | async)"
                 [suggestions]="searchSuggestions"
-                [ariaLabel]="searchFieldAriaLabel || null"
+                [ariaLabel]="searchFieldAriaLabel"
                 [ariaLabelledBy]="searchFieldAriaLabel ? null : tableToolbarTitleId"
                 (searchSubmit)="submitSearch($event)"
                 (cancelSearch)="submitSearch($event)"

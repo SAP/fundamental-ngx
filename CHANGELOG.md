@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.61...v0.50.0-rc.62) (2024-04-26)
+
+
+### Bug Fixes
+
+* **core:** keyboard enhancements for grid list ([#11737](https://github.com/SAP/fundamental-ngx/issues/11737)) ([d6b90b5](https://github.com/SAP/fundamental-ngx/commit/d6b90b545e8fa15ecb72bf82d592ed841ef0aba4))
+
+
+
+
+
+# [0.50.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.60...v0.50.0-rc.61) (2024-04-26)
+
+
+### Bug Fixes
+
+* **platform:** table toolbar not passing aria label input to search field ([#11815](https://github.com/SAP/fundamental-ngx/issues/11815)) ([6088978](https://github.com/SAP/fundamental-ngx/commit/6088978e6501a71f9886991a280270691a9377f0))
+
+
+
+
+
+# [0.50.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.59...v0.50.0-rc.60) (2024-04-25)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 # [0.50.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.58...v0.50.0-rc.59) (2024-04-25)
 
 **Note:** Version bump only for package fundamental-ngx
