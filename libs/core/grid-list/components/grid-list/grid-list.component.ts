@@ -1,9 +1,11 @@
+import { DOWN_ARROW, END, HOME, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    ElementRef,
     EventEmitter,
     Input,
     OnChanges,
@@ -11,9 +13,11 @@ import {
     Output,
     QueryList,
     SimpleChanges,
-    ViewEncapsulation
+    ViewEncapsulation,
+    computed,
+    inject
 } from '@angular/core';
-import { Nullable, RangeSelector } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Nullable, RangeSelector, RtlService } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, Observable, Subscription, filter } from 'rxjs';
 import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';
 import {
@@ -107,7 +111,18 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
     private readonly subscription = new Subscription();
 
     /** @hidden */
-    constructor(private readonly _cd: ChangeDetectorRef) {
+    private readonly _rtlService = inject(RtlService, {
+        optional: true
+    });
+
+    /** @hidden */
+    private readonly _rtl$ = computed<boolean>(() => !!this._rtlService?.rtlSignal());
+
+    /** @hidden */
+    constructor(
+        private readonly _cd: ChangeDetectorRef,
+        private _elRef: ElementRef
+    ) {
         super();
         this._selectedItems$ = this._selectedItemsSubject$.asObservable();
         const selectedItemsSub = this._selectedItems$
@@ -212,6 +227,96 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
         }
 
         this._selectedItemsSubject$.next(this._selectedItems);
+    }
+
+    /** @hidden */
+    handleKeydown(event: KeyboardEvent): void {
+        if (document.activeElement?.classList.contains('fd-grid-list__item')) {
+            if (KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
+                this._handleArrowKeydown(event);
+            } else if (
+                event.shiftKey &&
+                this.selectionMode === 'multiSelect' &&
+                KeyUtil.isKeyCode(event, [HOME, END])
+            ) {
+                this._handleHomeEndKeydown(event);
+            }
+        }
+    }
+
+    /** @hidden */
+    private _handleHomeEndKeydown(event: KeyboardEvent): void {
+        event.preventDefault();
+        let shouldSelect = false;
+        let selectionAction;
+        const isEndKeydown = KeyUtil.isKeyCode(event, END);
+        const loopStartingIndex = isEndKeydown ? 0 : this._gridListItems.length - 1;
+        /**
+         * Ternary loop - if isEndKeydown is true, loop iterates from zero to the end of the grid list items.
+         * If isEndKeydown is false, loop iterates backwards
+         **/
+        for (
+            let index = loopStartingIndex;
+            isEndKeydown ? index < this._gridListItems.length : index >= 0;
+            isEndKeydown ? index++ : index--
+        ) {
+            const currentItem = this._gridListItems.toArray()[index];
+            if (document.activeElement === currentItem._gridListItem.nativeElement) {
+                shouldSelect = true;
+                selectionAction = currentItem._selectedItem
+                    ? GridListSelectionActions.ADD
+                    : GridListSelectionActions.REMOVE;
+            }
+            if (shouldSelect) {
+                this.setSelectedItem(currentItem as any, index, selectionAction);
+            }
+        }
+        const itemToFocus = isEndKeydown
+            ? this._gridListItems.last._gridListItem
+            : this._gridListItems.first._gridListItem;
+        itemToFocus.nativeElement.focus();
+    }
+
+    /** @hidden */
+    private _handleArrowKeydown(event: KeyboardEvent): void {
+        event.preventDefault();
+        for (let index = 0; index < this._gridListItems.length; index++) {
+            const currentItem = this._gridListItems.toArray()[index];
+            if (document.activeElement === currentItem._gridListItem.nativeElement) {
+                let indexToFocus;
+                if (KeyUtil.isKeyCode(event, LEFT_ARROW) || (this._rtl$() && KeyUtil.isKeyCode(event, [RIGHT_ARROW]))) {
+                    indexToFocus = index - 1;
+                } else if (
+                    KeyUtil.isKeyCode(event, RIGHT_ARROW) ||
+                    (this._rtl$() && KeyUtil.isKeyCode(event, [LEFT_ARROW]))
+                ) {
+                    indexToFocus = index + 1;
+                } else if (KeyUtil.isKeyCode(event, UP_ARROW)) {
+                    indexToFocus = index - this._getItemsPerRow(currentItem._gridListItem.nativeElement);
+                } else if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
+                    indexToFocus = index + this._getItemsPerRow(currentItem._gridListItem.nativeElement);
+                }
+                const itemToFocus = this.gridListItems.toArray()[indexToFocus];
+                if (itemToFocus && itemToFocus._gridListItem) {
+                    if (this.selectionMode === 'multiSelect' && event.shiftKey) {
+                        this.setSelectedItem(
+                            currentItem as any,
+                            indexToFocus,
+                            currentItem._selectedItem ? GridListSelectionActions.ADD : GridListSelectionActions.REMOVE
+                        );
+                    }
+                    itemToFocus._gridListItem.nativeElement.focus();
+                }
+                break;
+            }
+        }
+    }
+
+    /** @hidden */
+    private _getItemsPerRow(activeElement: HTMLDivElement): number {
+        const itemWidth = activeElement.getBoundingClientRect().width;
+        const containerWidth = this._elRef.nativeElement.getBoundingClientRect().width;
+        return Math.floor(containerWidth / itemWidth);
     }
 
     /** @hidden */
