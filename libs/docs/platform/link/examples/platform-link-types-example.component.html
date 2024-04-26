@@ -1,0 +1,21 @@
+<h4>Default Link</h4>
+<span>One option for search: </span>
+<fdp-link href="https://www.google.com" [title]="'link to google.com'"> Google Search </fdp-link>
+<br /><br />
+<h4>Emphasized Link</h4>
+<span>Another one: </span>
+<fdp-link href="https://www.bing.com/" [title]="'link to bing.com'" linkType="emphasized"> Bing Search </fdp-link>
+<br /><br />
+<h4>Subtle Link</h4>
+<span>Another one: </span>
+<fdp-link href="https://duckduckgo.com/" [title]="'link to duckduckgo.com'" linkType="subtle">
+    DuckDuckGo Search
+</fdp-link>
+<br /><br />
+<h4>Inverted link (optional on dark backgrounds)</h4>
+<span>Another one: </span>
+<div class="fddoc-example-link">
+    <fdp-link href="https://duckduckgo.com/" [inverted]="true" [title]="'Extra info as tooltip text'">
+        DuckDuckGo Search
+    </fdp-link>
+</div>
