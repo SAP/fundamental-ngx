@@ -56,14 +56,19 @@ export class PlatformMenuDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(platformBasicMenuSrc),
-            fileName: 'platform-menu-basic-example',
-            scssFileCode: getAssetFromModuleAssets(platformBaseMenuScss)
+            fileName: 'platform-menu-basic-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(platformBasicMenuTsCode),
             fileName: 'platform-menu-basic-example',
             component: 'PlatformMenuBasicExampleComponent'
+        },
+        {
+            language: 'scss',
+            code: getAssetFromModuleAssets(platformBaseMenuScss),
+            fileName: 'platform-menu-example-styles',
+            pure: true
         }
     ];
 
@@ -71,14 +76,19 @@ export class PlatformMenuDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(platformXPositionMenuSrc),
-            fileName: 'platform-menu-x-position-example',
-            scssFileCode: getAssetFromModuleAssets(platformBaseMenuScss)
+            fileName: 'platform-menu-x-position-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(platformXPositionMenuTsCode),
             fileName: 'platform-menu-x-position-example',
             component: 'PlatformMenuXPositionExampleComponent'
+        },
+        {
+            language: 'scss',
+            code: getAssetFromModuleAssets(platformBaseMenuScss),
+            fileName: 'platform-menu-example-styles',
+            pure: true
         }
     ];
 
@@ -86,14 +96,19 @@ export class PlatformMenuDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(platformCascadeMenuSrc),
-            fileName: 'platform-menu-cascade-example',
-            scssFileCode: getAssetFromModuleAssets(platformBaseMenuScss)
+            fileName: 'platform-menu-cascade-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(platformCascadeMenuTsCode),
             fileName: 'platform-menu-cascade-example',
             component: 'PlatformMenuCascadeExampleComponent'
+        },
+        {
+            language: 'scss',
+            code: getAssetFromModuleAssets(platformBaseMenuScss),
+            fileName: 'platform-menu-example-styles',
+            pure: true
         }
     ];
 
@@ -101,14 +116,19 @@ export class PlatformMenuDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(platformScrollingMenuSrc),
-            fileName: 'platform-menu-scrolling-example',
-            scssFileCode: getAssetFromModuleAssets(platformBaseMenuScss)
+            fileName: 'platform-menu-scrolling-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(platformScrollingMenuTsCode),
             fileName: 'platform-menu-scrolling-example',
             component: 'PlatformMenuScrollingExampleComponent'
+        },
+        {
+            language: 'scss',
+            code: getAssetFromModuleAssets(platformBaseMenuScss),
+            fileName: 'platform-menu-example-styles',
+            pure: true
         }
     ];
 
@@ -116,14 +136,19 @@ export class PlatformMenuDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(platformWithIconsMenuSrc),
-            fileName: 'platform-menu-with-icons-example',
-            scssFileCode: getAssetFromModuleAssets(platformBaseMenuScss)
+            fileName: 'platform-menu-with-icons-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(platformWithIconsMenuTsCode),
             fileName: 'platform-menu-with-icons-example',
             component: 'PlatformMenuWithIconsExampleComponent'
+        },
+        {
+            language: 'scss',
+            code: getAssetFromModuleAssets(platformBaseMenuScss),
+            fileName: 'platform-menu-example-styles',
+            pure: true
         }
     ];
 }
