@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.62...v0.50.0-rc.63) (2024-04-27)
+
+
+### Bug Fixes
+
+* **platform:** make platform table loading input public ([#11824](https://github.com/SAP/fundamental-ngx/issues/11824)) ([231a509](https://github.com/SAP/fundamental-ngx/commit/231a509da2a6ba97488ee1eefd1c0583554ff600))
+
+
+
+
+
 # [0.50.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.61...v0.50.0-rc.62) (2024-04-26)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
