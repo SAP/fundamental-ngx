@@ -741,10 +741,9 @@ export class TableComponent<T = any>
     readonly _dndTableDirective = inject<TableDraggable>(FDP_TABLE_DRAGGABLE_DIRECTIVE, {
         optional: true
     });
-    // keeping "loading" field private to make sure "loadingState" is used instead
     /** Loading state */
     @Input()
-    private loading: boolean | undefined;
+    loading: boolean | undefined;
     /** @hidden */
     private _semanticHighlightingKey: string;
     /** @hidden */
