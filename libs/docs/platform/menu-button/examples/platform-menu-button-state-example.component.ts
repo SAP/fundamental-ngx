@@ -4,12 +4,12 @@ import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { PlatformMenuButtonModule } from '@fundamental-ngx/platform/menu-button';
 
 @Component({
-    selector: 'fdp-platform-menu-button-cozy-example',
-    templateUrl: './platform-menu-button-cozy-example.component.html',
+    selector: 'fdp-platform-menu-button-state-example',
+    templateUrl: './platform-menu-button-state-example.component.html',
     standalone: true,
     imports: [PlatformMenuButtonModule, ContentDensityDirective, PlatformMenuModule]
 })
-export class PlatformMenuButtonCozyExampleComponent {
+export class PlatformMenuButtonStateExampleComponent {
     basicMenuData: any[];
     item: string;
 
