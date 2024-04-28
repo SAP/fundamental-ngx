@@ -10,7 +10,6 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { PlatformPanelActionsExampleComponent } from './examples/platform-panel-actions-example.component';
-import { PlatformPanelCompactExampleComponent } from './examples/platform-panel-compact-example.component';
 import { PlatformPanelConfigExampleComponent } from './examples/platform-panel-config-example.component';
 import { PlatformPanelExpandableExampleComponent } from './examples/platform-panel-expandable-example.component';
 import { PlatformPanelFixedExampleComponent } from './examples/platform-panel-fixed-example.component';
@@ -21,7 +20,6 @@ const panelExpandableTsExample = 'platform-panel-expandable-example.component.ts
 const panelActionsExample = 'platform-panel-actions-example.component.html';
 const panelFixedExample = 'platform-panel-fixed-example.component.html';
 const panelFixedHeightExample = 'platform-panel-fixed-height-example.component.html';
-const panelCompactExample = 'platform-panel-compact-example.component.html';
 const panelConfigHtmlExample = 'platform-panel-config-example.component.html';
 const panelConfigTsExample = 'platform-panel-config-example.component.ts';
 
@@ -37,7 +35,6 @@ const panelConfigTsExample = 'platform-panel-config-example.component.ts';
         CodeExampleComponent,
         SeparatorComponent,
         PlatformPanelFixedExampleComponent,
-        PlatformPanelCompactExampleComponent,
         PlatformPanelFixedHeightExampleComponent,
         PlatformPanelActionsExampleComponent,
         PlatformPanelConfigExampleComponent
@@ -79,14 +76,6 @@ export class PlatformPanelDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(panelFixedHeightExample),
             fileName: 'platform-panel-fixed-height-example'
-        }
-    ];
-
-    panelCompact: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(panelCompactExample),
-            fileName: 'platform-panel-compact-example'
         }
     ];
 
