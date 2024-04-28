@@ -11,8 +11,6 @@ export class MenuButtonPo extends PlatformBaseComponentPo {
     cozySelectedItemLabel = 'fdp-platform-menu-button-cozy-example div';
     menuItemArr = '#fdp-menu-basic-menu fdp-menu-item';
     menuItemOverlay = '.cdk-overlay-container';
-    compactBtnAttrArr = 'fdp-platform-menu-button-compact-example fdp-menu-button';
-    compactBtnArr = 'fdp-platform-menu-button-compact-example button';
     sectionTitle = 'fd-docs-section-title h2';
     menuTypeBtnAttrArr = 'fdp-platform-menu-button-example fdp-menu-button';
     menuTypeBtnArr = 'fdp-platform-menu-button-example button';

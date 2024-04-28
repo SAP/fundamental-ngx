@@ -5,14 +5,17 @@ import {
     DescriptionComponent,
     DocsSectionTitleComponent,
     ExampleFile,
+    SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import { PlatformMenuButtonCompactExampleComponent } from './examples/platform-menu-button-compact-examples.component';
-import { PlatformMenuButtonCozyExampleComponent } from './examples/platform-menu-button-cozy-examples.component';
-import { PlatformMenuButtonExampleComponent } from './examples/platform-menu-button-examples.component';
+
+import { PlatformMenuButtonExampleComponent } from './examples/platform-menu-button-example.component';
+import { PlatformMenuButtonStateExampleComponent } from './examples/platform-menu-button-state-example.component';
+
 const menuButtonSrc = 'platform-menu-button-example.component.html';
-const cozyMenuButtonSrc = 'platform-menu-button-cozy-example.component.html';
-const compactMenuButtonSrc = 'platform-menu-button-compact-example.component.html';
+const menuButtonTsCode = 'platform-menu-button-example.component.ts';
+const stateMenuButtonSrc = 'platform-menu-button-state-example.component.html';
+const stateMenuButtonTsCode = 'platform-menu-button-state-example.component.ts';
 
 @Component({
     selector: 'app-link',
@@ -22,26 +25,24 @@ const compactMenuButtonSrc = 'platform-menu-button-compact-example.component.htm
         DocsSectionTitleComponent,
         DescriptionComponent,
         ComponentExampleComponent,
-        PlatformMenuButtonCozyExampleComponent,
+        PlatformMenuButtonStateExampleComponent,
         CodeExampleComponent,
-        PlatformMenuButtonCompactExampleComponent,
-        PlatformMenuButtonExampleComponent
+        PlatformMenuButtonExampleComponent,
+        SeparatorComponent
     ]
 })
 export class PlatformMenuButtonDocsComponent {
-    cozyMenuButton: ExampleFile[] = [
+    stateMenuButton: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(cozyMenuButtonSrc),
-            fileName: 'platform-menu-button-cozy-example'
-        }
-    ];
-
-    compactMenuButton: ExampleFile[] = [
+            code: getAssetFromModuleAssets(stateMenuButtonSrc),
+            fileName: 'platform-menu-button-state-example'
+        },
         {
-            language: 'html',
-            code: getAssetFromModuleAssets(compactMenuButtonSrc),
-            fileName: 'platform-menu-button-compact-example'
+            language: 'typescript',
+            code: getAssetFromModuleAssets(stateMenuButtonTsCode),
+            fileName: 'platform-menu-button-state-example',
+            component: 'PlatformMenuButtonStateExampleComponent'
         }
     ];
 
@@ -50,6 +51,12 @@ export class PlatformMenuButtonDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(menuButtonSrc),
             fileName: 'platform-menu-button-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(menuButtonTsCode),
+            fileName: 'platform-menu-button-example',
+            component: 'PlatformMenuButtonExampleComponent'
         }
     ];
 }

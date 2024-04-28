@@ -2,7 +2,6 @@ import {
     click,
     getAttributeByName,
     getElementArrayLength,
-    getElementClass,
     getText,
     isElementDisplayed,
     refreshPage,
@@ -10,8 +9,6 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 import {
-    compactClass,
-    cozyAndCompactBtnTextArr,
     disabledState,
     selectedItem,
     tooltipAttr,
@@ -31,8 +28,6 @@ describe('Menu button test suite', () => {
         cozySelectedItemLabel,
         menuItemArr,
         menuItemOverlay,
-        compactBtnAttrArr,
-        compactBtnArr,
         sectionTitle,
         menuTypeBtnArr
     } = menuBtnPage;
@@ -84,46 +79,6 @@ describe('Menu button test suite', () => {
             await expect(await isElementDisplayed(menuItemOverlay)).toBe(true);
             await click(sectionTitle);
             await expect(await isElementDisplayed(menuItemOverlay)).toBe(false);
-        });
-    });
-
-    describe('Check cozy and compact menu button states', () => {
-        it('should check btn states', async () => {
-            const cozyBtnCount = await getElementArrayLength(cozyBtnAttrArr);
-            const compactBtnCount = await getElementArrayLength(compactBtnAttrArr);
-
-            for (let i = 0; cozyBtnCount > i; i++) {
-                await expect(await getAttributeByName(cozyBtnArr, 'aria-disabled', i)).toBe('false');
-            }
-
-            for (let j = 0; compactBtnCount > j; j++) {
-                await expect(await getAttributeByName(compactBtnArr, 'aria-disabled', j)).toBe('false');
-            }
-
-            for (let k = 0; cozyBtnCount + compactBtnCount > k; k++) {
-                await expect(await isElementDisplayed(btnWorldIconArr, k)).toBe(true);
-            }
-        });
-
-        it('should check cozy btn text', async () => {
-            const cozyBtnTextArrLength = await getElementArrayLength(cozyBtnAttrArr);
-
-            for (let i = 0; cozyBtnTextArrLength > i; i++) {
-                await expect((await getText(cozyBtnAttrArr, i)).trim()).toEqual(cozyAndCompactBtnTextArr[i]);
-            }
-        });
-
-        it('should check compact btn text', async () => {
-            const compactBtnTextArrLength = await getElementArrayLength(compactBtnAttrArr);
-            const compactBtnArrLength = await getElementArrayLength(compactBtnArr);
-
-            for (let i = 0; compactBtnTextArrLength > i; i++) {
-                await expect((await getText(compactBtnAttrArr, i)).trim()).toEqual(cozyAndCompactBtnTextArr[i]);
-            }
-
-            for (let j = 0; compactBtnArrLength > j; j++) {
-                await expect(await getElementClass(compactBtnArr, j)).toContain(compactClass);
-            }
         });
     });
 
