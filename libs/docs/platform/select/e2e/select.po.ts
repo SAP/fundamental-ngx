@@ -11,7 +11,9 @@ export class SelectPo extends PlatformBaseComponentPo {
     selectWithTwoColumnsExample = 'fdp-platform-select-columns-example';
     selectedValue_2 = 'fdp-select~p';
     selectSemanticStateExample = 'fdp-platform-select-semantic-state-example';
+
     selectSemanticStateOption = '.fd-list__item.ng-star-inserted';
+
     customControlContentExample = 'fdp-platform-select-custom-trigger';
     selectMobileExample = 'fdp-platform-select-mobile-example';
     mobileCloseButton = 'fd-bar-element button';
