@@ -17,7 +17,7 @@ export class Fruit {
 }
 
 @Component({
-    selector: 'fdp-select-max-height-example',
+    selector: 'fdp-platform-select-max-height-example',
     templateUrl: './platform-select-max-height-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

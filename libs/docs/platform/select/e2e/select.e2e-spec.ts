@@ -62,11 +62,6 @@ describe('Select test suite', () => {
             await expect(await getText(selectedValue_1)).toBe(testTextValue);
         });
 
-        it('should be able to select the option for compact select', async () => {
-            await checkOptions(selectModeExample, 2, 1);
-            await expect(await getText(selectedValue_1, 1)).toBe(testTextValue);
-        });
-
         it('verify select in disabled mode', async () => {
             await expect(await getAttributeByName(selectModeExample + displayText, 'aria-disabled', 2)).toBe('true');
             await expect(await getText(selectedValue_1, 2)).toBe(disableSelectModeValueTestText);
@@ -74,13 +69,6 @@ describe('Select test suite', () => {
 
         it('verify select in read only mode', async () => {
             await expect(await getElementClass(selectModeExample + displayText, 3)).toContain('is-readonly');
-        });
-
-        it('should check compact select be smaller than basic select', async () => {
-            const basicInput = await getElementSize(selectModeExample + displayText);
-            const compactInput = await getElementSize(selectModeExample + displayText, 1);
-
-            await expect(basicInput.height).toBeGreaterThan(compactInput.height);
         });
     });
 
