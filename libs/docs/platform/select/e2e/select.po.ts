@@ -3,7 +3,7 @@ import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e'
 export class SelectPo extends PlatformBaseComponentPo {
     url = '/select';
 
-    selectModeExample = 'fdp-select-mode-example';
+    selectModeExample = 'fdp-platform-select-mode-example';
     displayText = ' .fd-select__control';
     select = ' fd-select';
     buttons = ' button';
