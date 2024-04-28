@@ -21,17 +21,6 @@ export class PlatformObjectStatusExampleComponent {}
 export class PlatformObjectStatusTextExampleComponent {}
 
 @Component({
-    selector: 'fdp-object-status-generic-text-example',
-    templateUrl: './platform-object-status-generic-text-example.component.html',
-    styleUrls: ['./platform-object-status-example.component.scss'],
-    standalone: true,
-    imports: [ObjectStatusComponent]
-})
-export class PlatformObjectStatusGenericExampleComponent {
-    items: ColorAccent[] = new Array(8).fill(null).map((_, index) => (index + 1) as ColorAccent);
-}
-
-@Component({
     selector: 'fdp-object-status-numeric-icon-example',
     templateUrl: './platform-object-status-icon-text-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
