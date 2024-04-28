@@ -3,7 +3,12 @@ import { FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule, Valida
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { FdpFormGroupModule, PlatformInputModule, PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
-import { MessagePopoverComponent, MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
+import {
+    FDP_MESSAGE_POPOVER_CONFIG,
+    FDP_MESSAGE_POPOVER_DEFAULT_CONFIG,
+    MessagePopoverComponent,
+    MessagePopoverFormWrapperComponent
+} from '@fundamental-ngx/platform/message-popover';
 
 interface MaxErrorModel {
     max: number;
@@ -16,7 +21,7 @@ interface MaxLengthErrorModel {
 }
 
 @Component({
-    selector: 'fdp-message-popover-form-container-example',
+    selector: 'fdp-form-container-example',
     templateUrl: './form-container-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,6 +36,12 @@ interface MaxLengthErrorModel {
         BarModule,
         MessagePopoverComponent,
         PlatformButtonModule
+    ],
+    providers: [
+        {
+            provide: FDP_MESSAGE_POPOVER_CONFIG,
+            useValue: FDP_MESSAGE_POPOVER_DEFAULT_CONFIG
+        }
     ]
 })
 export class FormContainerExampleComponent {
