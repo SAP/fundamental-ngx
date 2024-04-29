@@ -11,7 +11,7 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { PlatformDynamicPageExampleComponent } from './examples/platform-dynamic-page-example.component';
-import { PlatformDynamicPageFacetsExampleComponent } from './examples/platform-dynamic-page-facets-example/platform-dynamic-page-facets-example.component';
+import { PlatformDynamicPageFacetsExampleComponent } from './examples/platform-dynamic-page-facets-example.component';
 import { PlatformDynamicPageFlexibleColumnExampleComponent } from './examples/platform-dynamic-page-flexible-column-example.component';
 import { PlatformDynamicPageNonCollapsibleExampleComponent } from './examples/platform-dynamic-page-non-collapsible-example.component';
 import { PlatformDynamicPagePageOverflowService } from './examples/platform-dynamic-page-page-overflow.service';
@@ -43,12 +43,9 @@ const dynamicPageFlexibleColumnExample = 'platform-dynamic-page-flexible-column-
 const dynamicPageFlexibleColumnExampleScss = 'platform-dynamic-page-flexible-column-example.component.scss';
 const dynamicPageFlexibleColumnExampleTsCode = 'platform-dynamic-page-flexible-column-example.component.ts';
 
-const dynamicPageFacetsExample =
-    'platform-dynamic-page-facets-example/platform-dynamic-page-facets-example.component.html';
-const dynamicPageFacetsExampleScss =
-    'platform-dynamic-page-facets-example/platform-dynamic-page-facets-example.component.scss';
-const dynamicPageFacetsExampleTsCode =
-    'platform-dynamic-page-facets-example/platform-dynamic-page-facets-example.component.ts';
+const dynamicPageFacetsExample = 'platform-dynamic-page-facets-example.component.html';
+const dynamicPageFacetsExampleScss = 'platform-dynamic-page-facets-example.component.scss';
+const dynamicPageFacetsExampleTsCode = 'platform-dynamic-page-facets-example.component.ts';
 
 const platformDynamicPagePageOverflowServiceTs = 'platform-dynamic-page-page-overflow.service.ts';
 

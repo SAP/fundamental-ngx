@@ -20,7 +20,7 @@ import {
     DynamicPageHeaderTitleDirective,
     PlatformDynamicPageModule
 } from '@fundamental-ngx/platform/dynamic-page';
-import { PlatformDynamicPagePageOverflowService } from '../platform-dynamic-page-page-overflow.service';
+import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
 
 @Component({
     selector: 'fdp-platform-dynamic-page-facets-example',
