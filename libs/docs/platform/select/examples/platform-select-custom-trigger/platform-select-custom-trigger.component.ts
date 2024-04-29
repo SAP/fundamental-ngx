@@ -4,7 +4,7 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FdpSelectionChangeEvent, PlatformSelectModule } from '@fundamental-ngx/platform/form';
 
 @Component({
-    selector: 'fdp-select-custom-trigger',
+    selector: 'fdp-platform-select-custom-trigger',
     templateUrl: './platform-select-custom-trigger.component.html',
     styleUrls: ['./platform-select-custom-trigger.component.scss'],
     encapsulation: ViewEncapsulation.None,

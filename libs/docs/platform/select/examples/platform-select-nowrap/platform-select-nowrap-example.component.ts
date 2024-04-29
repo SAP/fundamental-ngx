@@ -17,7 +17,7 @@ export class Fruit {
 }
 
 @Component({
-    selector: 'fdp-select-nowrap-example',
+    selector: 'fdp-platform-select-nowrap-example',
     templateUrl: './platform-select-nowrap-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

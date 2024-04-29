@@ -62,25 +62,13 @@ describe('Select test suite', () => {
             await expect(await getText(selectedValue_1)).toBe(testTextValue);
         });
 
-        it('should be able to select the option for compact select', async () => {
-            await checkOptions(selectModeExample, 2, 1);
-            await expect(await getText(selectedValue_1, 1)).toBe(testTextValue);
-        });
-
         it('verify select in disabled mode', async () => {
-            await expect(await getAttributeByName(selectModeExample + displayText, 'aria-disabled', 2)).toBe('true');
-            await expect(await getText(selectedValue_1, 2)).toBe(disableSelectModeValueTestText);
+            await expect(await getAttributeByName(selectModeExample + displayText, 'aria-disabled', 1)).toBe('true');
+            await expect(await getText(selectedValue_1, 1)).toBe(disableSelectModeValueTestText);
         });
 
         it('verify select in read only mode', async () => {
-            await expect(await getElementClass(selectModeExample + displayText, 3)).toContain('is-readonly');
-        });
-
-        it('should check compact select be smaller than basic select', async () => {
-            const basicInput = await getElementSize(selectModeExample + displayText);
-            const compactInput = await getElementSize(selectModeExample + displayText, 1);
-
-            await expect(basicInput.height).toBeGreaterThan(compactInput.height);
+            await expect(await getElementClass(selectModeExample + displayText, 2)).toContain('is-readonly');
         });
     });
 
@@ -146,21 +134,21 @@ describe('Select test suite', () => {
     describe('Check Select Max Height example', () => {
         it('should be able to select the option', async () => {
             await checkOptions(selectMaxHeightExample, 2);
-            await expect(await getText(selectedValue_1, 4)).toBe(maxHeightTestText);
+            await expect(await getText(selectedValue_1, 3)).toBe(maxHeightTestText);
         });
     });
 
     describe('Check No Value Select example', () => {
         it('should be able to select the option', async () => {
             await checkOptions(selectNoneExample, 3);
-            await expect(await getText(selectedValue_1, 5)).toBe(maxHeightTestText);
+            await expect(await getText(selectedValue_1, 4)).toBe(maxHeightTestText);
         });
     });
 
     describe('Check Do not Wrap the Options example', () => {
         it('should be able to select the option', async () => {
             await checkOptions(selectNowrapExample, 2);
-            await expect(await getText(selectedValue_1, 6)).toBe(maxHeightTestText);
+            await expect(await getText(selectedValue_1, 5)).toBe(maxHeightTestText);
         });
     });
 

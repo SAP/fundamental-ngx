@@ -194,13 +194,13 @@ export class PlatformSelectDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(selectSemanticStateHtml),
-            fileName: 'platform-select-max-height-example'
+            fileName: 'platform-select-semantic-state-example'
         },
         {
             language: 'typescript',
-            component: 'PlatformSelectTypesExampleComponent',
+            component: 'PlatformSelectSemanticStateExampleComponent',
             code: getAssetFromModuleAssets(selectSemanticStateTs),
-            fileName: 'platform-select-max-height-example'
+            fileName: 'platform-select-semantic-state-example'
         }
     ];
 }

@@ -17,7 +17,7 @@ export class Fruit {
 }
 
 @Component({
-    selector: 'fdp-select-none-example',
+    selector: 'fdp-platform-select-none-example',
     templateUrl: './platform-select-none-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
