@@ -6,6 +6,7 @@
 <div
     class="fdp-value-help-dialog__table-holder table-content"
     fd-scrollbar
+    [overrideTabindex]="false"
     fdInfiniteScroll
     (onScrollAction)="_showMoreElements()"
     [scrollPercent]="80"

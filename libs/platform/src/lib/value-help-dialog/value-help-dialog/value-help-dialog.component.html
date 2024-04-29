@@ -9,7 +9,7 @@
             <ng-container *ngIf="!mobile">
                 <ng-container *ngTemplateOutlet="advancedSearchContent"></ng-container>
             </ng-container>
-            <div fd-scrollbar class="fdp-value-help-dialog__content-holder">
+            <div fd-scrollbar [overrideTabindex]="false" class="fdp-value-help-dialog__content-holder">
                 <ng-container *ngIf="mobile">
                     <ng-container *ngTemplateOutlet="advancedSearchContent"></ng-container>
                 </ng-container>
@@ -280,7 +280,7 @@
 </ng-template>
 
 <ng-template #defineConditionsContent>
-    <div fd-scrollbar>
+    <div fd-scrollbar [overrideTabindex]="false">
         <fdp-define-tab
             [strategyLabels]="defineStrategyLabels"
             [conditions]="conditionItems"
