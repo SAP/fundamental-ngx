@@ -26,6 +26,11 @@ export class ListIconDirective implements OnChanges, OnInit, CssClassBuilder {
     @HostBinding('attr.role')
     role = 'presentation';
 
+    /** Aria hidden attribute for list icon */
+    @Input()
+    @HostBinding('attr.aria-hidden')
+    ariaHidden = true;
+
     /** @hidden */
     readonly elementRef = inject(ElementRef);
 

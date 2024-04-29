@@ -569,12 +569,6 @@ export class ListComponent<T>
 
         event.stopImmediatePropagation();
 
-        const activeItemIndex: Nullable<number> = this._keyManager.activeItemIndex;
-
-        if (activeItemIndex) {
-            this._setCurrentActiveItemIndex(activeItemIndex);
-        }
-
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
             return false;
         } else if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {

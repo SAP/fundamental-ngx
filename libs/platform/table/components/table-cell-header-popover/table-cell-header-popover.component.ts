@@ -89,6 +89,10 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     _popoverItems: QueryList<TemplateDirective>;
 
     /** @hidden */
+    @ViewChild(ListComponent)
+    _listComponent: ListComponent<any>;
+
+    /** @hidden */
     _popoverItems$ = signal<TemplateRef<any>[]>([]);
 
     /** @hidden */
@@ -177,5 +181,12 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     _unFreeze(): void {
         this._table.unfreeze(this.column.name, this.column.endFreezable);
         this.popover?.close();
+    }
+
+    /** @hidden */
+    _popoverOpened(isOpen: boolean): void {
+        if (isOpen) {
+            this._listComponent?._setCurrentActiveItemIndex(0);
+        }
     }
 }

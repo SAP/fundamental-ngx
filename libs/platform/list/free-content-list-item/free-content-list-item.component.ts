@@ -4,7 +4,7 @@ import { ListItemComponent } from '@fundamental-ngx/core/list';
 import { BaseListItem } from '../base-list-item';
 
 @Component({
-    selector: 'fdp-free-content-list-item',
+    selector: 'fdp-free-content-list-item, li[fdp-free-content-list-item]',
     templateUrl: './free-content-list-item.component.html',
     styleUrl: './free-content-list-item.component.scss',
     encapsulation: ViewEncapsulation.None,
@@ -12,7 +12,7 @@ import { BaseListItem } from '../base-list-item';
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => FreeContentListItemComponent) }],
     standalone: true,
     host: {
-        role: 'none'
+        role: 'listitem'
     },
     imports: [ListItemComponent, AsyncPipe]
 })

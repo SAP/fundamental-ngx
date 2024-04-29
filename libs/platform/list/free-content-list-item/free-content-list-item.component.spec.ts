@@ -6,9 +6,9 @@ import { PlatformListModule } from '../list.module';
     selector: 'fdp-standard-list-item-test',
     template: `
         <fdp-list #componentElement>
-            <fdp-free-content-list-item>
+            <li fdp-free-content-list-item>
                 <span id="projected_span">Title</span>
-            </fdp-free-content-list-item>
+            </li>
         </fdp-list>
     `
 })
