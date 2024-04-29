@@ -31,7 +31,6 @@ describe('slider test suite', () => {
         customExamples,
         rangeExamples,
         disabledExamples,
-        cozyExamples,
         playgroundExamples,
         sliderTypeMenu,
         sliderTypeOptions,
@@ -46,8 +45,7 @@ describe('slider test suite', () => {
         sliderTooltipInputFF,
         formFieldExamples,
         formValueLabels,
-        altSliderAttr,
-        sliderCozyClass
+        altSliderAttr
     } = sliderPage;
 
     beforeAll(async () => {
@@ -171,19 +169,6 @@ describe('slider test suite', () => {
         it('should check range slider is disabled', async () => {
             await scrollIntoView(disabledExamples);
             await expect(await getElementClass(disabledExamples + sliderAttr)).toContain('is-disabled');
-        });
-    });
-
-    describe('cozy examples', () => {
-        it('should check cozy property', async () => {
-            await scrollIntoView(cozyExamples);
-            await expect(await $$(`${cozyExamples + altSliderAttr} > ${sliderCozyClass}`)).toBeTruthy();
-        });
-
-        it('should check cozy slider', async () => {
-            const startValue = await getText(cozyExamples + valueLabels);
-            await clickAndMoveElement(cozyExamples + sliderHandles, -50, 0);
-            await expect(await getText(cozyExamples + valueLabels)).not.toEqual(startValue);
         });
     });
 

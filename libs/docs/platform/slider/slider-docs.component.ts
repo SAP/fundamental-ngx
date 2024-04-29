@@ -14,8 +14,6 @@ const customValuesHtml = 'custom-values/slider-custom-values-example.component.h
 const customValuesTs = 'custom-values/slider-custom-values-example.component.ts';
 const sliderTooltipHtml = 'tooltip/slider-tooltip-example.component.html';
 const sliderTooltipTs = 'tooltip/slider-tooltip-example.component.ts';
-const sliderCozyHtml = 'cozy/slider-cozy-example.component.html';
-const sliderCozyTs = 'cozy/slider-cozy-example.component.ts';
 
 import { JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -30,7 +28,6 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { SliderComponent } from '@fundamental-ngx/platform/slider';
 import { SliderBasicExampleComponent } from './examples/base/slider-basic-example.component';
-import { SliderCozyExampleComponent } from './examples/cozy/slider-cozy-example.component';
 import { SliderCustomValuesExampleComponent } from './examples/custom-values/slider-custom-values-example.component';
 import { SliderDisabledExampleComponent } from './examples/disabled/slider-disabled-example.component';
 import { SliderFormFieldExampleComponent } from './examples/form-field/slider-form-field-example.component';
@@ -53,7 +50,6 @@ import { SliderTooltipExampleComponent } from './examples/tooltip/slider-tooltip
         SliderRangeExampleComponent,
         SliderFormFieldExampleComponent,
         SliderDisabledExampleComponent,
-        SliderCozyExampleComponent,
         PlayGroundComponent,
         SliderComponent,
         FormsModule,
@@ -178,20 +174,6 @@ export class PlatformSliderDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(customValuesHtml),
             fileName: 'slider-custom-values-example'
-        }
-    ];
-
-    cozy: ExampleFile[] = [
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(sliderCozyTs),
-            fileName: 'slider-cozy-example',
-            component: 'SliderCozyExampleComponent'
-        },
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(sliderCozyHtml),
-            fileName: 'slider-cozy-example'
         }
     ];
 
