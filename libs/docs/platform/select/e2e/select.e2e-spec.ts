@@ -63,12 +63,12 @@ describe('Select test suite', () => {
         });
 
         it('verify select in disabled mode', async () => {
-            await expect(await getAttributeByName(selectModeExample + displayText, 'aria-disabled', 2)).toBe('true');
-            await expect(await getText(selectedValue_1, 2)).toBe(disableSelectModeValueTestText);
+            await expect(await getAttributeByName(selectModeExample + displayText, 'aria-disabled', 1)).toBe('true');
+            await expect(await getText(selectedValue_1, 1)).toBe(disableSelectModeValueTestText);
         });
 
         it('verify select in read only mode', async () => {
-            await expect(await getElementClass(selectModeExample + displayText, 3)).toContain('is-readonly');
+            await expect(await getElementClass(selectModeExample + displayText, 2)).toContain('is-readonly');
         });
     });
 
@@ -134,21 +134,21 @@ describe('Select test suite', () => {
     describe('Check Select Max Height example', () => {
         it('should be able to select the option', async () => {
             await checkOptions(selectMaxHeightExample, 2);
-            await expect(await getText(selectedValue_1, 4)).toBe(maxHeightTestText);
+            await expect(await getText(selectedValue_1, 3)).toBe(maxHeightTestText);
         });
     });
 
     describe('Check No Value Select example', () => {
         it('should be able to select the option', async () => {
             await checkOptions(selectNoneExample, 3);
-            await expect(await getText(selectedValue_1, 5)).toBe(maxHeightTestText);
+            await expect(await getText(selectedValue_1, 4)).toBe(maxHeightTestText);
         });
     });
 
     describe('Check Do not Wrap the Options example', () => {
         it('should be able to select the option', async () => {
             await checkOptions(selectNowrapExample, 2);
-            await expect(await getText(selectedValue_1, 6)).toBe(maxHeightTestText);
+            await expect(await getText(selectedValue_1, 5)).toBe(maxHeightTestText);
         });
     });
 
