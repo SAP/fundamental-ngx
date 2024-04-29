@@ -26,6 +26,7 @@
         <a
             fd-list-link
             [focusable]="true"
+            role="button"
             (click)="_setColumnHeaderSortBy(column.key, SORT_DIRECTION.ASC)"
             (keydown.enter)="_setColumnHeaderSortBy(column.key, SORT_DIRECTION.ASC)"
         >
@@ -37,6 +38,7 @@
         <a
             fd-list-link
             [focusable]="true"
+            role="button"
             (click)="_setColumnHeaderSortBy(column.key, SORT_DIRECTION.DESC)"
             (keydown.enter)="_setColumnHeaderSortBy(column.key, SORT_DIRECTION.DESC)"
         >
@@ -51,6 +53,7 @@
         <a
             fd-list-link
             [focusable]="true"
+            role="button"
             (click)="_setColumnHeaderGroupBy(column.key)"
             (keydown.enter)="_setColumnHeaderGroupBy(column.key)"
         >
@@ -62,7 +65,7 @@
 <ng-container *ngIf="column?.freezable || column?.endFreezable">
     <ng-template fdkTemplate="freezePopoverItem" let-popover="popover">
         <ng-container *ngIf="!columnFrozen; else unfreezeTpl">
-            <a fd-list-link [focusable]="true" (click)="_freeze()" (keydown.enter)="_freeze()">
+            <a fd-list-link [focusable]="true" (click)="_freeze()" role="button" (keydown.enter)="_freeze()">
                 <span fd-list-title>
                     {{
                         (!column.endFreezable
@@ -76,7 +79,7 @@
             </a>
         </ng-container>
         <ng-template #unfreezeTpl>
-            <a fd-list-link [focusable]="true" (click)="_unFreeze()" (keydown.enter)="_unFreeze()">
+            <a fd-list-link [focusable]="true" (click)="_unFreeze()" role="button" (keydown.enter)="_unFreeze()">
                 <span fd-list-title>{{
                     (columnIndex > 0 ? 'platformTable.headerMenuUnfreezePlural' : 'platformTable.headerMenuUnfreeze')
                         | fdTranslate
@@ -88,7 +91,7 @@
 
 <ng-container *ngIf="column?.filterable && !filteringFromHeaderDisabled">
     <ng-template fdkTemplate="filteringPopoverItem" let-popover="popover">
-        <div fd-list-link style="cursor: auto">
+        <a fd-list-link style="cursor: auto" [focusable]="true">
             <i fd-list-icon glyph="filter"></i>
             <div fd-form-item [horizontal]="true" (click)="$event.stopPropagation()">
                 <label fd-form-label [for]="'fdp-table-column-filtering-' + column.name">{{
@@ -100,6 +103,6 @@
                     (keydown.enter)="_setColumnHeaderFilterBy(column.key, $any($event.target)?.value)"
                 />
             </div>
-        </div>
+        </a>
     </ng-template>
 </ng-container>
