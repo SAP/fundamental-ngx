@@ -163,7 +163,7 @@ export class PlatformStandardListItemDocsComponent {
         },
         {
             language: 'typescript',
-            component: 'PlatformListWithSingleSelectExampleComponent',
+            component: 'PlatformStandardListItemWithSingleSelectionExampleComponent',
             code: getAssetFromModuleAssets(sliWithSingleSelectionTs),
             fileName: 'platform-standard-list-item-with-single-selection-example'
         }
