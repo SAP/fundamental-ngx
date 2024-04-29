@@ -1,6 +1,6 @@
 {
     "name": "@fundamental-ngx/nx-plugin",
-    "version": "0.50.0-rc.70",
+    "version": "0.50.0-rc.71",
     "main": "src/index.js",
     "generators": "./generators.json",
     "executors": "./executors.json",
