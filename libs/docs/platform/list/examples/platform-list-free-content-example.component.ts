@@ -5,7 +5,7 @@ import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
 import { Observable, of } from 'rxjs';
 
 @Component({
-    selector: 'fdp-doc-platform-list-free-content-example',
+    selector: 'fdp-platform-list-free-content-example',
     templateUrl: './platform-list-free-content-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
