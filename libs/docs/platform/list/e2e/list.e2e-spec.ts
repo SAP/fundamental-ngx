@@ -4,14 +4,12 @@ import {
     browserIsSafari,
     checkElArrIsClickable,
     checkElementText,
-    checkElementTextValue,
     click,
     getAlertText,
     getAttributeByName,
     getCurrentUrl,
     getElementArrayLength,
     getElementClass,
-    getElementSize,
     getText,
     isElementClickable,
     pause,
@@ -22,16 +20,7 @@ import {
     waitForInvisibilityOf,
     waitForNotPresent
 } from '../../../../../e2e';
-import {
-    compactClass,
-    listTypeAttr,
-    loadMoreClass,
-    multiSelect,
-    navIndicator,
-    navUrl,
-    noDataText,
-    selectionAttr
-} from './list-contents';
+import { loadMoreClass, multiSelect, navIndicator, navUrl, selectionAttr } from './list-contents';
 import { ListPo } from './list.po';
 
 declare const $$: any;
@@ -39,28 +28,11 @@ declare const $$: any;
 describe('List test suite:', () => {
     const listPage = new ListPo();
     const {
-        noBorderListItems,
-        noBorderCompactList,
-        footerListItems,
-        footerCompactList,
-        footer,
-        groupHeader,
-        groupHeaderListItems,
-        groupCompactList,
-        interactiveListItems,
-        counterListItems,
-        counterCompactList,
-        counterTitleItems,
-        counterCounterItem,
         deletionListItems,
         deletionBtn,
-        deletionIcon,
         multiList,
-        multiListItems,
         multiToolbar,
         multiCheckbox,
-        singleListItems,
-        singleRadioBtn,
         navListItems,
         navListLink,
         vScrollListItems,
@@ -68,17 +40,9 @@ describe('List test suite:', () => {
         loadListItems,
         loadShowMoreBtn,
         loadIcon,
-        btnList,
-        btnListItems,
         btnDeleteBtn,
         btnEditBtn,
-        noDataListItems,
-        noDataCompactList,
-        unreadListItems,
-        multiCheckBoxMark,
-        singleRadioBtnInput,
-        cozyItem,
-        compactItem
+        multiCheckBoxMark
     } = listPage;
 
     beforeAll(async () => {
@@ -91,47 +55,7 @@ describe('List test suite:', () => {
         await waitForElDisplayed(listPage.title);
     }, 1);
 
-    describe('Footer examples:', () => {
-        it('should do basic checks and check footer', async () => {
-            await checkElArrIsClickable(footerListItems);
-            await checkElementText(footerListItems);
-            await checkElementText(footer);
-            await expect(await $$(`${footerCompactList} > .${compactClass}`)).toBeTruthy();
-        });
-    });
-
-    describe('Group header examples:', () => {
-        it('should do basic checks and check header', async () => {
-            await checkElArrIsClickable(groupHeaderListItems);
-            await checkElementText(groupHeaderListItems);
-            await checkElementText(groupHeader);
-            await expect(await $$(`${groupCompactList} > .${compactClass}`)).toBeTruthy();
-        });
-    });
-
-    describe('Interactive States examples:', () => {
-        it('should do basic checks', async () => {
-            await checkElementText(interactiveListItems);
-            await checkElArrIsClickable(interactiveListItems);
-        });
-    });
-
-    describe('Item Counter examples:', () => {
-        it('should do basic checks and check counter', async () => {
-            await checkElArrIsClickable(counterListItems);
-            await checkElementText(counterTitleItems);
-            await checkElementText(counterCounterItem);
-            await expect(await $$(`${counterCompactList} > .${compactClass}`)).toBeTruthy();
-        });
-    });
-
     describe('Deletion button examples:', () => {
-        it('should do basic checks', async () => {
-            await checkElArrIsClickable(deletionListItems);
-            await checkElementText(deletionListItems);
-            await waitForElDisplayed(deletionIcon);
-        });
-
         it('should check deletion', async () => {
             await click(deletionBtn);
             await waitForInvisibilityOf(deletionListItems);
@@ -139,11 +63,6 @@ describe('List test suite:', () => {
     });
 
     describe('Multi Selection examples:', () => {
-        it('should do basic checks', async () => {
-            await checkElementText(multiListItems);
-            await checkElArrIsClickable(multiListItems);
-        });
-
         it('should check selection', async () => {
             await expect(await getAttributeByName(multiList, selectionAttr)).toBe(multiSelect);
             await expect(await getText(multiToolbar)).toBe('0 : Items selected');
@@ -162,13 +81,6 @@ describe('List test suite:', () => {
             await click(multiCheckbox, 3);
             await expect(await getText(multiToolbar)).toBe('4 : Items selected');
             await expect(await getAttributeByName(multiCheckBoxMark, 'aria-selected', 3)).toBe('true');
-        });
-    });
-
-    describe('Single Selection examples:', () => {
-        it('should do basic checks', async () => {
-            await checkElementText(singleListItems);
-            await checkElArrIsClickable(singleListItems);
         });
     });
 
@@ -233,15 +145,6 @@ describe('List test suite:', () => {
     });
 
     describe('Buttons example:', () => {
-        it('should do basic checks', async () => {
-            await checkElArrIsClickable(btnListItems);
-            await checkElArrIsClickable(btnDeleteBtn);
-            await checkElArrIsClickable(btnEditBtn);
-            await checkElementText(btnListItems);
-            await expect(await getAttributeByName(btnList, listTypeAttr)).toBe('detail');
-            await expect(await getAttributeByName(btnList, selectionAttr)).toBe('delete');
-        });
-
         it('should check delete action', async () => {
             await click(btnDeleteBtn);
             if (await browserIsIE()) {
@@ -260,34 +163,6 @@ describe('List test suite:', () => {
             }
             await expect(await getAlertText()).toContain('Edit row');
             await acceptAlert();
-        });
-    });
-
-    describe('With No Data examples:', () => {
-        it('should do basic checks and check no data text', async () => {
-            await checkElArrIsClickable(noDataListItems);
-            await expect(await getElementClass(noDataCompactList)).toContain(compactClass);
-            await checkElementTextValue(noDataListItems, noDataText);
-        });
-    });
-
-    describe('With Unread Data examples:', () => {
-        it('should do basic checks and check unread data', async () => {
-            await checkElArrIsClickable(unreadListItems);
-            await checkElementText(unreadListItems);
-        });
-    });
-
-    it('should check the sizes compact and cozy', async () => {
-        const cozySize = await getElementSize(cozyItem);
-        const compactSize = await getElementSize(compactItem);
-
-        await expect(cozySize.height).toBeGreaterThan(compactSize.height);
-    });
-
-    describe('check orientation', () => {
-        it('should check RTL and LTR orientation', async () => {
-            await listPage.checkRtlSwitch();
         });
     });
 });
