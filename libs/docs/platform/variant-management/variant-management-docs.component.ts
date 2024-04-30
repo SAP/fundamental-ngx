@@ -29,32 +29,26 @@ import { VariantManagementTableExampleComponent } from './examples/table/variant
 })
 export class VariantManagementDocsComponent {
     variantManagementDefaultExample: ExampleFile[] = [
-        getExampleFile('default/variant-management-default-example.component.html', {
-            fileName: 'variant-management-default-example'
-        }),
+        getExampleFile('default/variant-management-default-example.component.html'),
         getExampleFile('default/variant-management-default-example.component.ts', {
-            fileName: 'variant-management-default-example',
-            component: 'VariantManagementDefaultExampleComponent'
+            component: 'VariantManagementDefaultExampleComponent',
+            selector: 'doc-variant-management-default-example'
         })
     ];
 
     variantManagementTableExample: ExampleFile[] = [
-        getExampleFile('table/variant-management-table-example.component.html', {
-            fileName: 'variant-management-table-example'
-        }),
+        getExampleFile('table/variant-management-table-example.component.html'),
         getExampleFile('table/variant-management-table-example.component.ts', {
-            fileName: 'variant-management-table-example',
-            component: 'VariantManagementTableExampleComponent'
+            component: 'VariantManagementTableExampleComponent',
+            selector: 'doc-variant-management-table-example'
         })
     ];
 
     variantManagementDynamicPageExample: ExampleFile[] = [
-        getExampleFile('dynamic-page/variant-management-dynamic-page-example.component.html', {
-            fileName: 'variant-management-dynamic-page-example'
-        }),
+        getExampleFile('dynamic-page/variant-management-dynamic-page-example.component.html'),
         getExampleFile('dynamic-page/variant-management-dynamic-page-example.component.ts', {
-            fileName: 'variant-management-dynamic-page-example',
-            component: 'VariantManagementDynamicPageExampleComponent'
+            component: 'VariantManagementDynamicPageExampleComponent',
+            selector: 'doc-variant-management-dynamic-page-example'
         })
     ];
 }
