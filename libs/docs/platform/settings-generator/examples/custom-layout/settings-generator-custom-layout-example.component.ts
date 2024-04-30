@@ -17,7 +17,12 @@ import { BarModule } from '@fundamental-ngx/core/bar';
 import { TabPanelComponent } from '@fundamental-ngx/core/tabs';
 import { AnyDynamicFormFieldItem } from '@fundamental-ngx/platform/form';
 import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform/icon-tab-bar';
-import { MessagePopoverComponent, MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
+import {
+    FDP_MESSAGE_POPOVER_CONFIG,
+    FDP_MESSAGE_POPOVER_DEFAULT_CONFIG,
+    MessagePopoverComponent,
+    MessagePopoverFormWrapperComponent
+} from '@fundamental-ngx/platform/message-popover';
 import {
     BaseSettingsGeneratorLayout,
     BaseSettingsModel,
@@ -81,7 +86,13 @@ export interface FlatSettingsLayout extends BaseSettingsModel<AnyDynamicFormFiel
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [MessagePopoverFormWrapperComponent, SettingsGeneratorModule, BarModule, MessagePopoverComponent]
+    imports: [MessagePopoverFormWrapperComponent, SettingsGeneratorModule, BarModule, MessagePopoverComponent],
+    providers: [
+        {
+            provide: FDP_MESSAGE_POPOVER_CONFIG,
+            useValue: FDP_MESSAGE_POPOVER_DEFAULT_CONFIG
+        }
+    ]
 })
 export class SettingsGeneratorCustomLayoutExampleComponent {
     @ViewChild('firstTabContent')
