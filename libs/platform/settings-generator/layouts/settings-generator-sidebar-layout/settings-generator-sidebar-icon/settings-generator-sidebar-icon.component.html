@@ -4,7 +4,9 @@
     @if (_iconConfig && _iconConfig.glyph) {
         <fd-icon [glyph]="_iconConfig.glyph" [ariaLabel]="_iconConfig.ariaLabel" [font]="_iconConfig.font"></fd-icon>
     }
-    @if (_avatarConfig && (_avatarConfig.image || _avatarConfig.glyph || _avatarConfig.zoomGlyph)) {
+    @if (
+        _avatarConfig && (_avatarConfig.image || _avatarConfig.glyph || _avatarConfig.zoomGlyph || _avatarConfig.label)
+    ) {
         <fd-avatar
             [size]="_avatarConfig.size"
             [glyph]="_avatarConfig.glyph"
