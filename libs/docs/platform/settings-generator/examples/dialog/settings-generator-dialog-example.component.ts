@@ -16,7 +16,12 @@ import { DialogModule, DialogRef, DialogService } from '@fundamental-ngx/core/di
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { ThemingService } from '@fundamental-ngx/core/theming';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { MessagePopoverComponent, MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
+import {
+    FDP_MESSAGE_POPOVER_CONFIG,
+    FDP_MESSAGE_POPOVER_DEFAULT_CONFIG,
+    MessagePopoverComponent,
+    MessagePopoverFormWrapperComponent
+} from '@fundamental-ngx/platform/message-popover';
 import {
     SettingsGeneratorComponent,
     SettingsGeneratorModule,
@@ -72,7 +77,13 @@ export class ExampleUserService {
     templateUrl: './settings-generator-dialog-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [ExampleUserService],
+    providers: [
+        ExampleUserService,
+        {
+            provide: FDP_MESSAGE_POPOVER_CONFIG,
+            useValue: FDP_MESSAGE_POPOVER_DEFAULT_CONFIG
+        }
+    ],
     standalone: true,
     styles: [
         `
