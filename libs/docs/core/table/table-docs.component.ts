@@ -201,14 +201,6 @@ export class TableDocsComponent {
             fileName: 'table-custom-dialog',
             component: 'TableCustomDialogComponent',
             name: 'Dialog Component'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(tableFilterPipe, undefined, 'shared'),
-            fileName: 'filter-pipe',
-            component: 'FilterPipe',
-            pipe: true,
-            name: 'Filter Pipe'
         }
     ];
 
@@ -223,22 +215,6 @@ export class TableDocsComponent {
             component: 'TableColumnSortingExampleComponent',
             code: getAssetFromModuleAssets(tableColumnSortTsSrc),
             fileName: 'table-column-sorting-example'
-        },
-        {
-            language: 'typescript',
-            component: 'SortByPipe',
-            code: getAssetFromModuleAssets(tableColumnSortPipeTs, undefined, 'shared'),
-            pipe: true,
-            fileName: 'table-example-sorting',
-            name: 'Sort Pipe'
-        },
-        {
-            language: 'typescript',
-            component: 'FilterPipe',
-            code: getAssetFromModuleAssets(tableColumnFilterPipeTs, undefined, 'shared'),
-            pipe: true,
-            fileName: 'table-example-filter',
-            name: 'Filter Pipe'
         }
     ];
 

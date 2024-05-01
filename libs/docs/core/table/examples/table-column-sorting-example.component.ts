@@ -1,6 +1,6 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -13,7 +13,45 @@ import { ListModule } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { TableModule } from '@fundamental-ngx/core/table';
 import { ToolbarComponent, ToolbarSpacerDirective } from '@fundamental-ngx/core/toolbar';
-import { FilterPipe, SortByPipe } from '@fundamental-ngx/docs/shared';
+
+const sort = (a, b, key?: string): number => {
+    if (key) {
+        return a[key] > b[key] ? 1 : -1;
+    } else {
+        return a > b ? 1 : -1;
+    }
+};
+
+@Pipe({
+    name: 'sortBy',
+    pure: false,
+    standalone: true
+})
+export class SortByPipe implements PipeTransform {
+    transform(tableRows: any[], ascending: boolean, sortKey?: string): any[] {
+        const ascModifier: number = ascending ? 1 : -1;
+        tableRows.sort((a, b) => sort(a, b, sortKey) * ascModifier);
+        return tableRows;
+    }
+}
+
+@Pipe({
+    name: 'filter',
+    standalone: true
+})
+export class FilterPipe implements PipeTransform {
+    transform(values: any[] = [], searchTerm: string = '', key: string = ''): any[] {
+        if (!searchTerm) {
+            return values;
+        }
+        if (key) {
+            values = values.filter((item) => item[key].toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()));
+        } else {
+            values = values.filter((item) => item.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()));
+        }
+        return values;
+    }
+}
 
 const rows = [
     {
