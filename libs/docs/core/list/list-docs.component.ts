@@ -9,7 +9,8 @@ import {
     DocsSectionTitleComponent,
     ExampleFile,
     SeparatorComponent,
-    getAssetFromModuleAssets
+    getAssetFromModuleAssets,
+    getExampleFile
 } from '@fundamental-ngx/docs/shared';
 import { ListActionExampleComponent } from './examples/list-action-example/list-action-example.component';
 import { ListBorderlessExampleComponent } from './examples/list-borderless-example/list-borderless-example.component';
@@ -151,25 +152,11 @@ export class ListDocsComponent {
     ];
 
     listData: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(listFilterH),
-            fileName: 'list-data-example'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(listFilterTs),
-            fileName: 'list-data-example',
+        getExampleFile('list-data-example/list-data-example.component.html'),
+        getExampleFile('list-data-example/list-data-example.component.ts', {
+            selector: 'list-data-example',
             component: 'ListDataExampleComponent'
-        },
-        {
-            language: 'typescript',
-            component: 'SortByPipe',
-            code: getAssetFromModuleAssets(listSortPipe, undefined, 'shared'),
-            pipe: true,
-            fileName: 'sort',
-            name: 'Sort Pipe'
-        }
+        })
     ];
 
     keyboardList: ExampleFile[] = [
