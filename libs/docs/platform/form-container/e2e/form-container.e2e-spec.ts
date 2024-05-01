@@ -31,10 +31,6 @@ describe('Form Container test suite', () => {
         possibleExampleCheckboxLabel,
         possibleExampleFormGroup,
         possibleExampleHelpIcon,
-        notRecommendedExampleTextArea,
-        notRecommendedExampleCheckboxLabel,
-        notRecommendedExampleFormGroup,
-        notRecommendedExampleHelpIcon,
         complexExampleTextArea,
         complexExampleCheckboxLabel,
         complexExampleFormGroup,
@@ -107,26 +103,6 @@ describe('Form Container test suite', () => {
             await refreshPage();
             await waitForPresent(formContainerPage.title);
             await checkHelpPopover(possibleExampleHelpIcon);
-        });
-    });
-
-    describe('Not recommended form layouts example', () => {
-        it('should check the layout matches the described layout', async () => {
-            await checkLayout(notRecommendedExampleFormGroup);
-        });
-
-        it('should be able to mark checkboxes', async () => {
-            await markAllCheckboxes(notRecommendedExampleCheckboxLabel);
-        });
-
-        it('should be able to add text in the textareas', async () => {
-            await checkAddingText(notRecommendedExampleTextArea);
-        });
-
-        it('should show popover when clicking ? icon', async () => {
-            await refreshPage();
-            await waitForPresent(formContainerPage.title);
-            await checkHelpPopover(notRecommendedExampleHelpIcon);
         });
     });
 

@@ -25,12 +25,6 @@ export class FormContainerPo extends PlatformBaseComponentPo {
     possibleExampleFormGroup = this.possibleExamples + this.formGroup;
     possibleExampleHelpIcon = this.possibleExamples + this.helpIcon;
 
-    notRecommendedExample = 'fdp-platform-form-container-not-recommended-example ';
-    notRecommendedExampleTextArea = this.notRecommendedExample + this.textArea;
-    notRecommendedExampleCheckboxLabel = this.notRecommendedExample + this.checkboxLabel;
-    notRecommendedExampleFormGroup = this.notRecommendedExample + this.formGroup;
-    notRecommendedExampleHelpIcon = this.notRecommendedExample + this.helpIcon;
-
     complexExample = 'fdp-platform-form-container-complex-example ';
     complexExampleTextArea = this.complexExample + this.textArea;
     complexExampleCheckboxLabel = this.complexExample + this.checkboxLabel;
