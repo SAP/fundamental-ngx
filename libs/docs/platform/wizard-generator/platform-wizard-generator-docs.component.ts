@@ -7,7 +7,8 @@ import {
     DocsSectionTitleComponent,
     ExampleFile,
     SeparatorComponent,
-    getAssetFromModuleAssets
+    getAssetFromModuleAssets,
+    getExampleFile
 } from '@fundamental-ngx/docs/shared';
 import { WizardGeneratorLoadingExampleComponent } from './examples/loading/wizard-generator-loading-example.component';
 import { WizardGeneratorConditionExampleComponent } from './examples/wizard-generator-condition-example.component';
@@ -37,12 +38,6 @@ const customizableTsExample = 'wizard-generator-customizable-example.component.t
 const customizableEmbededHtmlExample = 'wizard-generator-customizable-embeded-example.component.html';
 const customizableEmbededTsExample = 'wizard-generator-customizable-embeded-example.component.ts';
 
-const conditionHtmlExample = 'wizard-generator-condition-example.component.html';
-const conditionTsExample = 'wizard-generator-condition-example.component.ts';
-
-const responsiveHtmlExample = 'wizard-generator-responsive-paddings-example.component.html';
-const responsiveTsExample = 'wizard-generator-responsive-paddings-example.component.ts';
-
 const responsiveDialogHtmlExample = 'wizard-generator-responsive-dialog-example.component.html';
 const responsiveDialogTsExample = 'wizard-generator-responsive-dialog-example.component.ts';
 
@@ -60,9 +55,6 @@ const summaryObjectsTsExample = 'wizard-generator-summary-objects-example.compon
 
 const interactionHtmlExample = 'wizard-generator-onchange-example.component.html';
 const interactionTsExample = 'wizard-generator-onchange-example.component.ts';
-
-const whenConditionHtmlExample = 'wizard-generator-visibility-between-steps-example.component.html';
-const whenConditionTsExample = 'wizard-generator-visibility-between-steps-example.component.ts';
 
 const specialElementsHtmlExamples = 'wizard-generator-special-elements-example.component.html';
 const specialElementsTsExamples = 'wizard-generator-special-elements-example.component.ts';
@@ -156,31 +148,19 @@ export class PlatformWizardGeneratorDocsComponent {
     ];
 
     branchingExample: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(responsiveHtmlExample),
-            fileName: 'wizard-generator-condition-example'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(conditionTsExample),
-            fileName: 'wizard-generator-condition-example',
+        getExampleFile('wizard-generator-condition-example.component.html'),
+        getExampleFile('wizard-generator-condition-example.component.ts', {
+            selector: 'wizard-generator-condition-example',
             component: 'WizardGeneratorConditionExampleComponent'
-        }
+        })
     ];
 
     responsivePaddingsExample: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(conditionHtmlExample),
-            fileName: 'wizard-generator-responsive-paddings-example'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(responsiveTsExample),
-            fileName: 'wizard-generator-responsive-paddings-example',
+        getExampleFile('wizard-generator-responsive-paddings-example.component.html'),
+        getExampleFile('wizard-generator-responsive-paddings-example.component.ts', {
+            selector: 'wizard-generator-responsive-paddings-example',
             component: 'WizardGeneratorResponsivePaddingsExampleComponent'
-        }
+        })
     ];
 
     visibleSummaryExample: ExampleFile[] = [
@@ -268,17 +248,11 @@ export class PlatformWizardGeneratorDocsComponent {
     ];
 
     fieldsVisibilityExample: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(whenConditionHtmlExample),
-            fileName: 'wizard-generator-onchange-example'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(whenConditionTsExample),
-            fileName: 'wizard-generator-visibility-between-steps-example',
+        getExampleFile('wizard-generator-visibility-between-steps-example.component.html'),
+        getExampleFile('wizard-generator-visibility-between-steps-example.component.ts', {
+            selector: 'wizard-generator-visibility-between-steps-example',
             component: 'WizardGeneratorVisibilityBetweenStepsExampleComponent'
-        }
+        })
     ];
 
     specialElementsExample: ExampleFile[] = [

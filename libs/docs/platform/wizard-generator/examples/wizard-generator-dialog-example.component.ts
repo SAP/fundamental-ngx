@@ -16,7 +16,8 @@ import {
     selector: 'fdp-wizard-generator-dialog-example',
     templateUrl: './wizard-generator-dialog-example.component.html',
     standalone: true,
-    imports: [PlatformButtonModule, JsonPipe]
+    imports: [PlatformButtonModule, JsonPipe],
+    providers: [WizardDialogGeneratorService]
 })
 export class WizardGeneratorDialogExampleComponent implements OnDestroy {
     wizardValue: WizardGeneratorFormsValue | undefined;

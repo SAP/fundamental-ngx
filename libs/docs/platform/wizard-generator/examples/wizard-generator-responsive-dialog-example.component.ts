@@ -16,7 +16,8 @@ import {
     selector: 'fdp-wizard-generator-responsive-dialog-example',
     templateUrl: './wizard-generator-responsive-dialog-example.component.html',
     standalone: true,
-    imports: [PlatformButtonModule, JsonPipe]
+    imports: [PlatformButtonModule, JsonPipe],
+    providers: [WizardDialogGeneratorService]
 })
 export class WizardGeneratorResponsiveDialogExampleComponent implements OnDestroy {
     wizardValue: WizardGeneratorFormsValue | undefined;

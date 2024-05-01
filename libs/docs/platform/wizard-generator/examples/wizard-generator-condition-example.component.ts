@@ -16,7 +16,8 @@ import {
     selector: 'fdp-wizard-generator-condition-example',
     templateUrl: './wizard-generator-condition-example.component.html',
     standalone: true,
-    imports: [PlatformButtonModule, JsonPipe]
+    imports: [PlatformButtonModule, JsonPipe],
+    providers: [WizardDialogGeneratorService]
 })
 export class WizardGeneratorConditionExampleComponent implements OnDestroy {
     wizardTitle: WizardTitle = {

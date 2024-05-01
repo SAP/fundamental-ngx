@@ -16,7 +16,8 @@ import { takeUntil } from 'rxjs/operators';
     selector: 'fdp-wizard-generator-visibility-between-steps-example',
     templateUrl: './wizard-generator-visibility-between-steps-example.component.html',
     standalone: true,
-    imports: [PlatformButtonModule, JsonPipe]
+    imports: [PlatformButtonModule, JsonPipe],
+    providers: [WizardDialogGeneratorService, FormGeneratorService]
 })
 export class WizardGeneratorVisibilityBetweenStepsExampleComponent implements OnDestroy {
     wizardTitle: WizardTitle = {
