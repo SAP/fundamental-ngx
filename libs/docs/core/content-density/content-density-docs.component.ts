@@ -54,13 +54,13 @@ export class ContentDensityDocsComponent {
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(contentDensityUserComponentSrc),
-            fileName: 'content-density-user',
+            fileName: 'content-density-user/content-density-user',
             component: 'ContentDensityUserComponent'
         },
         {
             language: 'scss',
             code: getAssetFromModuleAssets(contentDensityUserComponentScssSrc),
-            fileName: 'content-density-user',
+            fileName: 'content-density-user/content-density-user',
             component: 'ContentDensityUserComponent'
         }
     ];
