@@ -17,7 +17,8 @@ import {
     PlayGroundComponent,
     SeparatorComponent,
     getAsset,
-    getAssetFromModuleAssets
+    getAssetFromModuleAssets,
+    getExampleFile
 } from '@fundamental-ngx/docs/shared';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
@@ -213,19 +214,11 @@ export class PlatformTableDocsComponent {
     ];
 
     customWidthFiles: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(platformTableCustomWidthSrc),
-            fileName: 'platform-table-custom-width-example',
-            name: 'platform-table-example.component.html'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(platformTableCustomWidthTsSrc),
-            fileName: 'platform-table-custom-width-example',
-            component: 'PlatformTableCustomColumnExampleComponent',
-            name: 'platform-table-example.component.ts'
-        }
+        getExampleFile('platform-table-custom-width-example.component.html'),
+        getExampleFile('platform-table-custom-width-example.component.ts', {
+            selector: 'platform-table-custom-width-example',
+            component: 'PlatformTableCustomWidthExampleComponent'
+        })
     ];
 
     freezableTableFiles: ExampleFile[] = [
@@ -348,19 +341,11 @@ export class PlatformTableDocsComponent {
     ];
 
     noOuterBordersFiles: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(platformTableNoOuterBordersSrc),
-            fileName: 'platform-table-no-outer-borders-example',
-            name: 'platform-table-no-outer-borders-example.component.html'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(platformTableNoOuterBordersTsSrc),
-            fileName: 'platform-table-no-outer-borders-example',
-            component: 'PlatformTableNoOuterBordersExampleComponent',
-            name: 'platform-table-no-outer-borders-example.component.ts'
-        }
+        getExampleFile('platform-table-no-outer-borders-example.component.html'),
+        getExampleFile('platform-table-no-outer-borders-example.component.ts', {
+            selector: 'platform-table-no-outer-borders-example',
+            component: 'PlatformTableNoOuterBordersExampleComponent'
+        })
     ];
 
     textWrapFiles: ExampleFile[] = [

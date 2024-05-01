@@ -8,11 +8,9 @@ import {
     DocsSectionTitleComponent,
     ExampleChildService,
     ExampleFile,
-    getAssetFromModuleAssets
+    getExampleFile
 } from '@fundamental-ngx/docs/shared';
 import { AdvancedScrollingExampleComponent } from '../../examples/advanced-scrolling/advanced-scrolling-example.component';
-const platformTablePageScrollingSrc = 'advanced-scrolling/advanced-scrolling-example.component.html';
-const platformTablePageScrollingTsSrc = 'advanced-scrolling/advanced-scrolling-example.component.ts';
 
 @Component({
     selector: 'fdp-doc-advanced-examples-docs',
@@ -33,19 +31,11 @@ export class AdvancedExamplesDocsComponent {
     childService = inject(ExampleChildService);
     route = inject(ActivatedRoute);
     pageScrollingTableFiles: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(platformTablePageScrollingSrc),
-            fileName: 'advanced-scrolling-example',
-            name: 'advanced-scrolling-example.component.html'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(platformTablePageScrollingTsSrc),
-            fileName: 'advanced-scrolling-example',
-            component: 'AdvancedScrollingExampleComponent',
-            name: 'advanced-scrolling-example.component.ts'
-        }
+        getExampleFile('advanced-scrolling/advanced-scrolling-example.component.html'),
+        getExampleFile('advanced-scrolling/advanced-scrolling-example.component.ts', {
+            selector: 'doc-advanced-scrolling-example',
+            component: 'AdvancedScrollingExampleComponent'
+        })
     ];
     constructor() {
         this.childService.setLink(this.route.snapshot.routeConfig?.path);
