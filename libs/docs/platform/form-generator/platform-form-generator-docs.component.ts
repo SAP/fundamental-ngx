@@ -44,7 +44,8 @@ import {
     DocsSectionTitleComponent,
     ExampleFile,
     SeparatorComponent,
-    getAssetFromModuleAssets
+    getAssetFromModuleAssets,
+    getExampleFile
 } from '@fundamental-ngx/docs/shared';
 import { PlatformFormGeneratorAdvancedExampleComponent } from './examples/advanced/platform-form-generator-advanced-example.component';
 import { PlatformFormGeneratorLoadingExampleComponent } from './examples/loading/platform-form-generator-loading-example.component';
@@ -239,6 +240,14 @@ export class PlatformFormGeneratorDocsComponent {
             fileName: 'platform-form-generator-loading-example',
             component: 'PlatformFormGeneratorLoadingExampleComponent'
         }
+    ];
+
+    advancedFormGenerator: ExampleFile[] = [
+        getExampleFile('advanced/platform-form-generator-advanced-example.component.html'),
+        getExampleFile('advanced/platform-form-generator-advanced-example.component.ts', {
+            selector: 'platform-form-generator-advanced-example',
+            component: 'PlatformFormGeneratorAdvancedExampleComponent'
+        })
     ];
 
     defaultConfigExample = getAssetFromModuleAssets(defaultConfigSrc);
