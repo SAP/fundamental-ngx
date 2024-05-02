@@ -15,6 +15,7 @@ import {
     TableHeaderResizerDirective,
     TableInitialStateDirective
 } from '@fundamental-ngx/platform/table-helpers';
+import { TableCellActivateEvent } from '../../../../platform/table-helpers/models/table-cell-activate-event.model';
 
 @Component({
     selector: 'fdp-platform-table-activable-example',
@@ -43,6 +44,10 @@ export class PlatformTableActivableExampleComponent {
     }
 
     onRowActivate(event: TableRowActivateEvent<ExampleItem>): void {
+        console.log(event);
+    }
+
+    onCellActivate(event: TableCellActivateEvent<any>): void {
         console.log(event);
     }
 }

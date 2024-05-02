@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { convertTreeLikeToFlatList, createGroupedTableRowsTree, sortTreeLikeGroupedRows } from '../helpers';
 import { CollectionGroup } from '../interfaces';
 import { TableRow } from '../models';
+import { TableCellActivateEvent } from '../models/table-cell-activate-event.model';
 import { EditableTableCell } from '../table-cell.class';
 
 export type ToggleRowModel =
@@ -40,6 +41,9 @@ export class TableRowService<T = any> {
     /** Stream that emits when the table cell being focused. */
     readonly cellFocused$: Observable<FocusableItemPosition>;
 
+    /** Stream that emits when the table cell being focused. */
+    readonly cellActivate$: Observable<TableCellActivateEvent<any>>;
+
     /** Toggle row stream. */
     readonly toggleRow$: Observable<ToggleRowModel>;
 
@@ -62,6 +66,9 @@ export class TableRowService<T = any> {
     private readonly _cellClickedSubject = new Subject<CellClickedModel>();
 
     /** @hidden */
+    private readonly _cellActivateSubject = new Subject<TableCellActivateEvent<any>>();
+
+    /** @hidden */
     private readonly _cellFocusedSubject = new Subject<FocusableItemPosition>();
 
     /** @hidden */
@@ -73,6 +80,7 @@ export class TableRowService<T = any> {
         this.cellClicked$ = this._cellClickedSubject.asObservable();
         this.scrollToOverlappedCell$ = this._scrollToOverlappedCellSubject.asObservable();
         this.cellFocused$ = this._cellFocusedSubject.asObservable();
+        this.cellActivate$ = this._cellActivateSubject.asObservable();
         this.toggleRow$ = this._toggleRowSubject.asObservable();
     }
 
@@ -89,6 +97,11 @@ export class TableRowService<T = any> {
     /** `cellClicked$` stream trigger. */
     cellClicked(evt: CellClickedModel): void {
         this._cellClickedSubject.next(evt);
+    }
+
+    /** @hidden */
+    cellActivate(columnIndex: number, row: TableRow): void {
+        this._cellActivateSubject.next({ columnIndex, row: row.value });
     }
 
     /** `cellFocused$` stream trigger. */

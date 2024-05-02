@@ -3,6 +3,7 @@
     [rowsActivable]="true"
     emptyTableMessage="No data found"
     (rowActivate)="onRowActivate($event)"
+    (cellActivate)="onCellActivate($event)"
 >
     <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false">
         <fdp-table-toolbar-actions>
