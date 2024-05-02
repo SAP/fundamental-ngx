@@ -2,7 +2,13 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
-import { TableDataProvider, TableDataSource, TableRowActivateEvent, TableState } from '@fundamental-ngx/platform/table';
+import {
+    TableDataProvider,
+    TableDataSource,
+    TableRowActivateEvent,
+    TableState,
+    TableCellActivateEvent
+} from '@fundamental-ngx/platform/table';
 
 @Component({
     selector: 'fdp-platform-table-activable-example',
@@ -22,6 +28,10 @@ export class PlatformTableActivableExampleComponent {
     }
 
     onRowActivate(event: TableRowActivateEvent<ExampleItem>): void {
+        console.log(event);
+    }
+
+    onCellActivate(event: TableCellActivateEvent<any>): void {
         console.log(event);
     }
 }

@@ -80,6 +80,7 @@ import {
     SelectionModeValue,
     SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH,
     Table,
+    TableCellActivateEvent,
     TableColumn,
     TableColumnFreezeEvent,
     TableColumnResizeService,
@@ -458,7 +459,10 @@ export class TableComponent<T = any>
     /** Event fired when group/tree row collapsed/expanded. */
     @Output()
     readonly rowToggleOpenState = new EventEmitter<TableRowToggleOpenStateEvent<T>>();
-    /** Event fired when row clicked. */
+    /** Event fired when a cell is clicked or focused. */
+    @Output()
+    readonly cellActivate = new EventEmitter<TableCellActivateEvent<T>>();
+    /** Event fired when row navigated. */
     @Output()
     readonly rowActivate = new EventEmitter<TableRowActivateEvent<T>>();
     /** Event fired when row navigated. */
@@ -771,6 +775,11 @@ export class TableComponent<T = any>
         this._subscriptions.add(
             this._tableRowService.cellFocused$.subscribe((event) => {
                 this.cellFocused.emit(event);
+            })
+        );
+        this._subscriptions.add(
+            this._tableRowService.cellActivate$.subscribe((event) => {
+                this.cellActivate.emit(event);
             })
         );
     }
@@ -1495,6 +1504,11 @@ export class TableComponent<T = any>
             this._emitRowNavigate(row);
             this._emitRowActivate(row);
         }
+    }
+
+    /** @hidden */
+    _emitCellActivate(columnIndex: number, row: TableRow<T>): void {
+        this.cellActivate.emit(new TableCellActivateEvent<T>(columnIndex, row.value));
     }
 
     /** @hidden */

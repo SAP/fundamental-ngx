@@ -1,10 +1,14 @@
-<fd-docs-section-title id="actiable-rows" componentName="table"> Activable Rows</fd-docs-section-title>
+<fd-docs-section-title id="actiable-rows" componentName="table"> Activable Cells and Rows</fd-docs-section-title>
 <description>
-    <p>This example shows activable rows</p>
+    <p>This example shows activable cells and rows</p>
 
     <ul>
         <li>Use <code>[rowsActivable]="true"</code> input property on the table to make rows activable.</li>
         <li>Event <code>(rowActivate)</code> is emitted when row gets activated.</li>
+        <li>
+            The <code>(cellActivate)</code> event passes row as well as the clicked column index instead of the row
+            index. The <code>[rowsActivable]</code> input is not required for the <code>(cellActivate)</code> event.
+        </li>
     </ul>
 </description>
 <component-example>
