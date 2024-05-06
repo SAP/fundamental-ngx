@@ -145,7 +145,7 @@ export class TableP13DialogComponent implements OnDestroy {
         const filterBy = state?.filterBy;
         const dialogData: FilterDialogData = {
             columns: columns.map(({ label, key, dataType, filterable }) => ({ label, key, dataType, filterable })),
-            collectionFilter: filterBy,
+            collectionFilter: filterBy
         };
         if (this.filter && this.filter.validator) {
             dialogData.validator = this.filter.validator;
