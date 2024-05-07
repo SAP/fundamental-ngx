@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.88](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.87...v0.50.0-rc.88) (2024-05-07)
+
+
+### Bug Fixes
+
+* **platform:** setting generator allow rendering avatar if only label is passed ([#11860](https://github.com/SAP/fundamental-ngx/issues/11860)) ([3f887e5](https://github.com/SAP/fundamental-ngx/commit/3f887e55c5026d54f9e43f2b33a2b503e6220987))
+
+
+
+
+
 # [0.50.0-rc.87](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.86...v0.50.0-rc.87) (2024-05-01)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
