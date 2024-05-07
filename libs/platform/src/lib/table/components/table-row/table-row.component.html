@@ -139,7 +139,7 @@
     "
     [attr.aria-expanded]="_isTreeRowFirstCell(colIdx, row) ? row.expanded : null"
     [attr.data-nesting-level]="colIdx === 0 ? row.level + 1 : null"
-    (cellFocused)="_tableRowService.cellFocused($event)"
+    (cellFocused)="_tableRowService.cellFocused($event); _tableRowService.cellActivate(colIdx, row)"
     (click)="_tableRowService.cellClicked({ index: colIdx, row })"
     (keydown.enter)="_isTreeRowFirstCell(colIdx, row, $event) && _toggleGroupRow()"
     (keydown.arrowLeft)="_tableRowService.scrollToOverlappedCell()"

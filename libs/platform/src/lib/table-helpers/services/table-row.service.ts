@@ -5,6 +5,7 @@ import { convertTreeLikeToFlatList, createGroupedTableRowsTree, sortTreeLikeGrou
 import { CollectionGroup } from '../interfaces';
 import { TableRow } from '../models';
 import { EditableTableCell } from '../table-cell.class';
+import { TableCellActivateEvent } from '../models/table-cell-activate-event.model';
 
 export type ToggleRowModel =
     | {
@@ -39,6 +40,12 @@ export class TableRowService<T = any> {
 
     /** @hidden */
     private readonly _cellFocusedSubject = new Subject<FocusableItemPosition>();
+
+    /** @hidden */
+    private readonly _cellActivateSubject = new Subject<TableCellActivateEvent<any>>();
+
+    /** Stream that emits when the table cell being focused. */
+    readonly cellActivate$ = this._cellActivateSubject.asObservable();
 
     /** @hidden */
     private readonly _toggleAllSelectableRowsSubject = new Subject<boolean>();
@@ -80,6 +87,11 @@ export class TableRowService<T = any> {
     /** `cellClicked$` stream trigger. */
     cellClicked(evt: CellClickedModel): void {
         this._cellClickedSubject.next(evt);
+    }
+
+    /** @hidden */
+    cellActivate(columnIndex: number, row: TableRow): void {
+        this._cellActivateSubject.next({ columnIndex, row: row.value });
     }
 
     /** `cellFocused$` stream trigger. */

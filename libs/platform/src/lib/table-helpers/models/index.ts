@@ -19,3 +19,4 @@ export * from './dnd';
 export * from './table-dialog-common-data.model';
 export * from './directives';
 export * from './table-item.model';
+export * from './table-cell-activate-event.model';
