@@ -18,6 +18,7 @@ import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TextComponent } from '@fundamental-ngx/core/text';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
@@ -43,7 +44,8 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
         LinkComponent,
         RouterLink,
         BarModule,
-        ButtonComponent
+        ButtonComponent,
+        TextComponent
     ]
 })
 export class WizardDialogExampleComponent {
