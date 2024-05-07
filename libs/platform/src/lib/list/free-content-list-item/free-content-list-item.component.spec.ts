@@ -6,9 +6,9 @@ import { PlatformListModule } from '../list.module';
     selector: 'fdp-standard-list-item-test',
     template: `
         <fdp-list #componentElement>
-            <fdp-free-content-list-item>
+            <li fdp-free-content-list-item>
                 <span id="projected_span">Title</span>
-            </fdp-free-content-list-item>
+            </li>
         </fdp-list>
     `
 })
@@ -39,19 +39,19 @@ describe('FreeContentListItemComponent', () => {
 
     it('should render a list item', () => {
         fixture.detectChanges();
-        const listElement = fixture.debugElement.nativeElement.querySelector('li');
+        const listElement = fixture.debugElement.nativeElement.querySelector('.fd-list__item--link');
         expect(listElement.classList).toContain('fd-list__item');
     });
 
     it('list item should have tabindex', () => {
         fixture.detectChanges();
-        const listElement = fixture.debugElement.nativeElement.querySelector('li');
+        const listElement = fixture.debugElement.nativeElement.querySelector('.fd-list__item--link');
         expect(listElement.getAttribute('tabindex')).toEqual('0');
     });
 
     it('list item should have id', () => {
         fixture.detectChanges();
-        const listElement = fixture.debugElement.nativeElement.querySelector('li');
+        const listElement = fixture.debugElement.nativeElement.querySelector('.fd-list__item--link');
         expect(listElement.getAttribute('id')).toContain('fdp-list-item-');
     });
 

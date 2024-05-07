@@ -1,4 +1,4 @@
-<li
+<div
     #listItem
     [class.fd-list__item--unread]="unRead"
     fd-list-item
@@ -15,8 +15,7 @@
     [attr.aria-level]="ariaLevel"
     [attr.aria-posinset]="ariaPosinset"
     [attr.aria-setsize]="ariaSetSize | async"
-    [ariaRole]="_listItemRole"
     [attr.aria-selected]="_selectedAttr"
 >
     <ng-content></ng-content>
-</li>
+</div>

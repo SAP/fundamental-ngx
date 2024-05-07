@@ -18,29 +18,29 @@
                 </fd-popover-control>
                 <fd-popover-body>
                     <fdp-list [navigated]="true">
-                        <fdp-free-content-list-item>
+                        <li fdp-free-content-list-item>
                             <a fd-list-link>
                                 <i fd-list-icon glyph="history"></i>
                                 <span fd-list-title> Link List item 1 </span>
                             </a>
-                        </fdp-free-content-list-item>
-                        <fdp-free-content-list-item>
+                        </li>
+                        <li fdp-free-content-list-item>
                             <a fd-list-link>
                                 <i fd-list-icon glyph="cart"></i>
                                 <span fd-list-title> Link List item 2 </span>
                             </a>
-                        </fdp-free-content-list-item>
-                        <fdp-free-content-list-item>
+                        </li>
+                        <li fdp-free-content-list-item>
                             <a fd-list-link>
                                 <span fd-list-title> Link List item 3</span>
                             </a>
-                        </fdp-free-content-list-item>
-                        <fdp-free-content-list-item *ngFor="let item of items | async">
+                        </li>
+                        <li fdp-free-content-list-item *ngFor="let item of items | async">
                             <ng-template
                                 [ngTemplateOutlet]="item"
                                 [ngTemplateOutletContext]="{ popover: popover }"
                             ></ng-template>
-                        </fdp-free-content-list-item>
+                        </li>
                     </fdp-list>
                 </fd-popover-body>
             </fd-popover>
