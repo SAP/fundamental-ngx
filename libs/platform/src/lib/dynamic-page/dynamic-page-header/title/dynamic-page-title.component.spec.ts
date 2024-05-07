@@ -113,8 +113,8 @@ describe('DynamicPageTitleComponent', () => {
         ).toBeTruthy();
     });
 
-    it('should add tabindex to host', async () => {
-        expect(titleComponentDebugElement.attributes['tabindex']).toEqual('0');
+    it('should not add tabindex to host', async () => {
+        expect(titleComponentDebugElement.attributes['tabindex']).toBeUndefined();
     });
 
     describe('title text', () => {

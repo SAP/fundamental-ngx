@@ -37,9 +37,6 @@ export const ActionSquashBreakpointPx = 1280;
     styleUrls: ['./dynamic-page-header.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    host: {
-        '[attr.tabindex]': '0'
-    },
     providers: [
         {
             provide: DYNAMIC_PAGE_HEADER_TOKEN,
