@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.34](https://github.com/SAP/fundamental-ngx/compare/v0.43.33...v0.43.34) (2024-05-07)
+
+
+### Bug Fixes
+
+* **core:** remove tabindex from dynamic page header ([#11818](https://github.com/SAP/fundamental-ngx/issues/11818)) ([4da497a](https://github.com/SAP/fundamental-ngx/commit/4da497ada72cfe7e1435ca0a01d50798787bea89))
+* **platform:** add cellActivate event to platform table ([#11876](https://github.com/SAP/fundamental-ngx/issues/11876)) ([b25d510](https://github.com/SAP/fundamental-ngx/commit/b25d51027f987c52f8c867a82a5453ba3673cc07))
+* **platform:** check validator before open Filtering Settings Dialog ([#11878](https://github.com/SAP/fundamental-ngx/issues/11878)) ([a012cdc](https://github.com/SAP/fundamental-ngx/commit/a012cdc9dd131f1127b2f7376d093ee43f4c19c8))
+* **platform:** header cell popover freeze button should be keydown, not keyup ([#11801](https://github.com/SAP/fundamental-ngx/issues/11801)) ([33f9485](https://github.com/SAP/fundamental-ngx/commit/33f9485c7e39a557c41f0a6762d2d4f2ed06d313))
+* **platform:** prevent keyboard press on checkbox header cell from scrolling page ([#11813](https://github.com/SAP/fundamental-ngx/issues/11813)) ([727f3f5](https://github.com/SAP/fundamental-ngx/commit/727f3f58198b29f5f4c1043f1a57703e445d4bdc))
+* **platform:** remove tabindex from scrollable containers in VHD ([#11852](https://github.com/SAP/fundamental-ngx/issues/11852)) ([30e6441](https://github.com/SAP/fundamental-ngx/commit/30e64410586ee814e788ecff1ccc1876291cd322))
+* **platform:** some improvements to platform table header popover ([#11822](https://github.com/SAP/fundamental-ngx/issues/11822)) ([b4a7a5b](https://github.com/SAP/fundamental-ngx/commit/b4a7a5bc78eced485a55cf2103dfa798251ad401))
+* **platform:** table toolbar not passing aria label input to search field ([#11817](https://github.com/SAP/fundamental-ngx/issues/11817)) ([392315e](https://github.com/SAP/fundamental-ngx/commit/392315e1ac8184fe72698238a91a7bb273d7abc0))
+
+
+
+
+
 ## [0.43.33](https://github.com/SAP/fundamental-ngx/compare/v0.43.32...v0.43.33) (2024-04-19)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.34](https://github.com/SAP/fundamental-ngx/compare/v0.43.33...v0.43.34) (2024-05-07)
+
+
+### Bug Fixes
+
+* **core:** remove tabindex from dynamic page header ([#11818](https://github.com/SAP/fundamental-ngx/issues/11818)) ([4da497a](https://github.com/SAP/fundamental-ngx/commit/4da497ada72cfe7e1435ca0a01d50798787bea89))
+* **platform:** some improvements to platform table header popover ([#11822](https://github.com/SAP/fundamental-ngx/issues/11822)) ([b4a7a5b](https://github.com/SAP/fundamental-ngx/commit/b4a7a5bc78eced485a55cf2103dfa798251ad401))
+
+
+
+
+
 ## [0.43.33](https://github.com/SAP/fundamental-ngx/compare/v0.43.32...v0.43.33) (2024-04-19)
 
 
