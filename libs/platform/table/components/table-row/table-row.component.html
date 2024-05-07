@@ -136,7 +136,7 @@
         "
         [attr.aria-expanded]="_isTreeRowFirstCell($index, row) ? row.expanded : null"
         [attr.data-nesting-level]="$index === 0 ? row.level + 1 : null"
-        (cellFocused)="_tableRowService.cellFocused($event)"
+        (cellFocused)="_tableRowService.cellFocused($event); _tableRowService.cellActivate($index, row)"
         (click)="_tableRowService.cellClicked({ index: $index, row })"
         (keydown.enter)="_isTreeRowFirstCell($index, row, $event) && _toggleGroupRow()"
         (keydown.arrowLeft)="_tableRowService.scrollToOverlappedCell()"

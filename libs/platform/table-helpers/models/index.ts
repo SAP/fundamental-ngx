@@ -11,6 +11,7 @@ export * from './save-rows-event.interface';
 export * from './search-change-event.model';
 export * from './selection-change-event.model';
 export * from './sort-change-event.model';
+export * from './table-cell-activate-event.model';
 export * from './table-dialog-common-data.model';
 export * from './table-item.model';
 export * from './table-managed-preset';
