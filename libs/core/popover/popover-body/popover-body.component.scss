@@ -74,11 +74,13 @@ fd-popover-body {
             border-radius: $fd-popover-border-radius;
 
             &__item {
-                &:first-child {
+                &:first-child,
+                &:first-of-type {
                     @include set-list-border-radius(top);
                 }
 
-                &:last-child {
+                &:last-child,
+                &:last-of-type {
                     @include set-list-border-radius(bottom);
                 }
             }
