@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.89](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.88...v0.50.0-rc.89) (2024-05-07)
+
+
+### Bug Fixes
+
+* **platform:** table header popover a11y improvements ([#11851](https://github.com/SAP/fundamental-ngx/issues/11851)) ([4ee0dc4](https://github.com/SAP/fundamental-ngx/commit/4ee0dc48669ae10faaa937d7d8cbc9cb3b853fd6))
+
+
+
+
+
 # [0.50.0-rc.88](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.87...v0.50.0-rc.88) (2024-05-07)
 
 **Note:** Version bump only for package @fundamental-ngx/core
