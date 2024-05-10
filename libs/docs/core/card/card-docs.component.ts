@@ -24,6 +24,31 @@ import { CardListExampleComponent } from './examples/list-card/card-list-example
 import { CardObjectExampleComponent } from './examples/object-card/card-object-example.component';
 import { CardQuickViewExampleComponent } from './examples/quick-view-card/card-quick-view-example.component';
 
+// Non-interactive card
+import { NonInteractiveCardExampleComponent } from './examples/non-interactive-card/non-interactive-card-example.component';
+const nonInteractiveCardTs = 'non-interactive-card/non-interactive-card-example.component.ts';
+const nonInteractiveCardHtml = 'non-interactive-card/non-interactive-card-example.component.html';
+
+// Interactive card header
+import { InteractiveCardHeaderExampleComponent } from './examples/interactive-card-header/interactive-card-header-example.component';
+const interactiveCardHeaderTs = 'interactive-card-header/interactive-card-header-example.component.ts';
+const interactiveCardHeaderHtml = 'interactive-card-header/interactive-card-header-example.component.html';
+
+// Interactive card
+import { InteractiveCardExampleComponent } from './examples/interactive-card/interactive-card-example.component';
+const interactiveCardTs = 'interactive-card/interactive-card-example.component.ts';
+const interactiveCardHtml = 'interactive-card/interactive-card-example.component.html';
+
+// Media card
+import { MediaCardExampleComponent } from './examples/media-card/media-card-example.component';
+const mediaCardTs = 'media-card/media-card-example.component.ts';
+const mediaCardHtml = 'media-card/media-card-example.component.html';
+
+// Media banner card
+import { MediaBannerCardExampleComponent } from './examples/media-banner-card/media-banner-card-example.component';
+const mediaBannerCardTs = 'media-banner-card/media-banner-card-example.component.ts';
+const mediaBannerCardHtml = 'media-banner-card/media-banner-card-example.component.html';
+
 const cardExampleScss = 'card-example.component.scss';
 const cardKpiExampleScss = 'card-kpi-example.component.scss';
 const cardBarChartListExampleScss = 'bar-chart-list-card/bar-chart-list-card-example.component.scss';
@@ -76,10 +101,85 @@ const cardLinkListHtml = 'link-list-card/card-link-list-example.component.html';
         CardListExampleComponent,
         CardLinkListExampleComponent,
         RouterLink,
-        CardLoadingExampleComponent
+        CardLoadingExampleComponent,
+        NonInteractiveCardExampleComponent,
+        InteractiveCardHeaderExampleComponent,
+        InteractiveCardExampleComponent,
+        MediaCardExampleComponent,
+        MediaBannerCardExampleComponent
     ]
 })
 export class CardDocsComponent {
+    nonInteractive: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(nonInteractiveCardHtml),
+            fileName: 'non-interactive-card-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(nonInteractiveCardTs),
+            fileName: 'non-interactive-card-example',
+            component: 'NonInteractiveCardExampleComponent'
+        }
+    ];
+
+    interactiveHeader: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(interactiveCardHeaderHtml),
+            fileName: 'interactive-card-header-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(interactiveCardHeaderTs),
+            fileName: 'interactive-card-header-example',
+            component: 'InteractiveCardHeaderExampleComponent'
+        }
+    ];
+
+    interactive: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(interactiveCardHtml),
+            fileName: 'interactive-card-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(interactiveCardTs),
+            fileName: 'interactive-card-example',
+            component: 'InteractiveCardExampleComponent'
+        }
+    ];
+
+    media: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(mediaCardHtml),
+            fileName: 'media-card-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(mediaCardTs),
+            fileName: 'media-card-example',
+            component: 'MediaCardExampleComponent'
+        }
+    ];
+
+    mediaBanner: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(mediaBannerCardHtml),
+            fileName: 'media-banner-card-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(mediaBannerCardTs),
+            fileName: 'media-banner-card-example',
+            component: 'MediaBannerCardExampleComponent'
+        }
+    ];
+
     standard: ExampleFile[] = [
         {
             language: 'html',

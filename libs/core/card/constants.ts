@@ -22,4 +22,13 @@ export const CLASS_NAME = {
     cardLoader: 'fd-card__loader'
 } as const;
 
-export type CardType = 'standard' | 'component' | 'analytical' | 'list' | 'table' | 'object' | 'quickView' | 'linkList';
+export type CardType =
+    | 'standard'
+    | 'component'
+    | 'analytical'
+    | 'list'
+    | 'table'
+    | 'object'
+    | 'quickView'
+    | 'linkList'
+    | 'banner';

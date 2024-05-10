@@ -22,8 +22,22 @@
         be distinct from one card to another.
 
         <br /><br /><br /><br />
-        <b>Card anatomy</b>
+        <b>Card building blocks</b>
         <ul>
+            <li>
+                card list container <code>fd-card-list</code>: interactive cards should have
+                <code>role="listitem"</code> and be placed in a list, even when there's only one card. The
+                <code>fd-card-list</code> directive will apply the necessary role and attributes to the container and is
+                responsible for setting the <code>ariaPosinset</code> and <code>ariaSetsize</code> of each card.
+            </li>
+            <li>
+                <code>fd-card</code> is the Card container.
+                <ul>
+                    <li><code>interactive</code> when set to true adds interactive behaviour to the cards</li>
+                    <li><code>isLoading</code> set to true if the card is in loading state</li>
+                    <li><code>cardType</code> can set the Cart type, such as analytical, table, list, object, etc.</li>
+                </ul>
+            </li>
             <li>
                 header (optional) <code>fd-card-header</code>: the card header is a flexible combination of 3 block
                 areas: main header, numeric header and extended header. The header displays a mandatory title,
@@ -32,7 +46,7 @@
                 <ul>
                     <li>
                         main header <code>fd-card-main-header</code>: the main card header block shows the basic
-                        information of the card. <br />
+                        information of the card. For interactive header add <code>[interactive]="true"</code><br />
                         It can contain:
                         <ul>
                             <li>avatar (optional) <code>fd-avatar</code></li>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 
+import { CardListDirective } from './card-list/card-list.directive';
 import { CardComponent } from './card.component';
 import { CardContentComponent } from './content/card-content.component';
 import { CardFooterComponent } from './footer/card-footer.component';
@@ -29,9 +30,16 @@ import { CardKpiScaleIconDirective } from './kpi/card-kpi-scale-icon.directive';
 import { CardKpiScaleTextDirective } from './kpi/card-kpi-scale-text.directive';
 import { CardKpiValueDirective } from './kpi/card-kpi-value.directive';
 import { CardLoaderComponent } from './loader/card-loader.component';
+import { CardMediaContentContainerDirective } from './media/card-media-content-container.directive';
+import { CardMediaHeadingDirective } from './media/card-media-heading.directive';
+import { CardMediaImageContainerDirective } from './media/card-media-image-container.directive';
+import { CardMediaImageDirective } from './media/card-media-image.directive';
+import { CardMediaTextDirective } from './media/card-media-text.directive';
+import { CardMediaComponent } from './media/card-media.component';
 
 const components = [
     CardComponent,
+    CardListDirective,
     CardHeaderComponent,
     CardMainHeaderComponent,
     CardHeaderActionDirective,
@@ -57,7 +65,13 @@ const components = [
     CardKpiAnalyticsLabelDirective,
     CardKpiAnalyticsContentDirective,
     CardFooterComponent,
-    CardFooterActionItemDirective
+    CardFooterActionItemDirective,
+    CardMediaComponent,
+    CardMediaImageDirective,
+    CardMediaImageContainerDirective,
+    CardMediaContentContainerDirective,
+    CardMediaHeadingDirective,
+    CardMediaTextDirective
 ];
 
 @NgModule({

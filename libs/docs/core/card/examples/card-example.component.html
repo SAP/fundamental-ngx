@@ -1,4 +1,4 @@
-<fd-card>
+<fd-card badge="badge" badgeIcon="example" [badgeColor]="2">
     <fd-card-header>
         <fd-card-main-header>
             <h2 fd-card-title>Card Title</h2>
@@ -20,7 +20,12 @@
 <br />
 
 <h3>Card header can be at the bottom as well</h3>
-<fd-card class="fd-docs-example-card-fix-width">
+<fd-card
+    badgeIcon="example"
+    badge="badge with a very long text that should truncate on the first line"
+    badgeStatus="positive"
+    style="width: 18.5rem"
+>
     <fd-card-content>
         <img
             width="100%"
@@ -44,7 +49,7 @@
 <h3>Card header with avatar, subtitle, counter and badge</h3>
 <fd-card badge="New" cardType="list">
     <fd-card-header>
-        <fd-card-main-header>
+        <fd-card-main-header [interactive]="true">
             <fd-avatar
                 image="https://picsum.photos/id/1018/400"
                 [circle]="true"
@@ -76,9 +81,9 @@
 </fd-card>
 
 <h3>Card header with icon avatar, subtitle, counter, badge, and header action</h3>
-<fd-card badge="New" cardType="list">
+<fd-card badgeIcon="example" [badgeColor]="2" [badgeColorSecondary]="true" badgeAriaLabel="New Card" cardType="list">
     <fd-card-header>
-        <fd-card-main-header [interactive]="false">
+        <fd-card-main-header [interactive]="true">
             <fd-avatar glyph="cart" [circle]="true" size="s" ariaLabel="avatar image" title="avatar image"></fd-avatar>
             <h2 fd-card-title>Card Title</h2>
             <h3 fd-card-subtitle>Card Subtitle</h3>
@@ -286,7 +291,7 @@
 
 <fd-card style="max-width: 30%">
     <fd-card-header>
-        <fd-card-main-header [interactive]="false">
+        <fd-card-main-header>
             <fd-avatar glyph="travel-expense" size="s" ariaLabel="avatar image" title="avatar image"></fd-avatar>
             <h2 fd-card-title>Travel Request</h2>
             <h3 fd-card-subtitle>Marie Johnson</h3>

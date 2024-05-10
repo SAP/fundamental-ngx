@@ -7,6 +7,7 @@ export const getCardModifierClassNameByCardType = (cardType: CardType): string =
         case 'standard':
         case 'component':
         case 'list':
+        case 'banner':
         case 'analytical':
         case 'table':
         case 'object':
@@ -16,3 +17,8 @@ export const getCardModifierClassNameByCardType = (cardType: CardType): string =
             return '';
     }
 };
+
+/** @hidden */
+export function isTruthy<T>(value?: T | undefined | null | false | 0): value is T {
+    return !!value;
+}

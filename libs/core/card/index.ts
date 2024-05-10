@@ -10,6 +10,27 @@ export { CardType } from './constants';
 // Card
 export { CardComponent } from './card.component';
 
+// Card List
+export { CardListDirective } from './card-list/card-list.directive';
+
+// Card Media
+export { CardMediaComponent } from './media/card-media.component';
+
+// Card Media Image Container
+export { CardMediaImageContainerDirective } from './media/card-media-image-container.directive';
+
+// Card Media Image
+export { CardMediaImageDirective } from './media/card-media-image.directive';
+
+// Card Media Content Container
+export { CardMediaContentContainerDirective } from './media/card-media-content-container.directive';
+
+// Card Media Heading
+export { CardMediaHeadingDirective } from './media/card-media-heading.directive';
+
+// Card Media Text
+export { CardMediaTextDirective } from './media/card-media-text.directive';
+
 // Card Header
 export { CardExtendedHeaderComponent } from './header/card-header-extended.component';
 export { CardMainHeaderComponent } from './header/card-header-main.component';

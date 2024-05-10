@@ -1,9 +1,12 @@
-<div class="fd-card__header-main" [ngClass]="!interactive() ? 'fd-card__header-main--non-interactive' : ''">
+<div class="fd-card__header-main">
     @if (_cardAvatar() || _cardTitle() || _cardSubtitle() || _cardKpiHeader() || _cardSecondSubtitle()) {
         <div
             class="fd-card__header-main-container"
-            [attr.role]="interactive() ? 'button' : ''"
+            [attr.role]="interactive() ? 'button' : null"
             [tabindex]="interactive() ? '0' : '-1'"
+            [attr.aria-description]="interactive() ? title() : null"
+            [attr.aria-label]="interactive() ? title() : null"
+            [attr.title]="interactive() ? title() : null"
         >
             <ng-content select="fd-avatar"></ng-content>
 
