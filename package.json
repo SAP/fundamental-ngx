@@ -119,7 +119,7 @@
         "conventional-changelog": "4.0.0",
         "conventional-changelog-angular": "6.0.0",
         "conventional-changelog-cli": "3.0.0",
-        "conventional-recommended-bump": "7.0.1",
+        "conventional-recommended-bump": "10.0.0",
         "coveralls": "3.1.1",
         "dependency-tree": "10.0.9",
         "eslint": "8.48.0",
