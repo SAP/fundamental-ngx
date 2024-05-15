@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.92](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.88...v0.50.0-rc.92) (2024-05-15)
+
+
+### Bug Fixes
+
+* **platform:** add cellActivate event to platform table ([#11875](https://github.com/SAP/fundamental-ngx/issues/11875)) ([a714061](https://github.com/SAP/fundamental-ngx/commit/a714061a8d428a30f41cb04359bf808762302a6f))
+* **platform:** check validator before open Filtering Settings Dialog ([#11889](https://github.com/SAP/fundamental-ngx/issues/11889)) ([ca07d17](https://github.com/SAP/fundamental-ngx/commit/ca07d17fc5582d28578a675850c94e552ae5e416))
+* **platform:** table header popover a11y improvements ([#11851](https://github.com/SAP/fundamental-ngx/issues/11851)) ([4ee0dc4](https://github.com/SAP/fundamental-ngx/commit/4ee0dc48669ae10faaa937d7d8cbc9cb3b853fd6))
+
+
+### Features
+
+* **core:** update Card to latest design ([#11730](https://github.com/SAP/fundamental-ngx/issues/11730)) ([b733c62](https://github.com/SAP/fundamental-ngx/commit/b733c6226557ea403de8ddafdbf21f61546e9886))
+
+
+### BREAKING CHANGES
+
+* **core:** - badge can now accept an icon and a color (badgeColor and badgeColorSecondary). Can also set aria-label attribute (badgeAriaLabel)
+- card by default is non-interactive. Can be set to interactive with interactive property set to true
+- interactive Cards must be with role listitem and inside a list fd-card-list
+the Card header (main header) by default is not interactive, can be set to interactive with interactive property set to true. For example:  <fd-card-main-header [interactive]="true">
+- the elements of the Card header now need to be wrapped in <fd-card-main-header> container
+
+
+
+
+
 # [0.50.0-rc.91](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.88...v0.50.0-rc.91) (2024-05-07)
 
 

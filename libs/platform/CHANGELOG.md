@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.92](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.88...v0.50.0-rc.92) (2024-05-15)
+
+
+### Bug Fixes
+
+* **platform:** add cellActivate event to platform table ([#11875](https://github.com/SAP/fundamental-ngx/issues/11875)) ([a714061](https://github.com/SAP/fundamental-ngx/commit/a714061a8d428a30f41cb04359bf808762302a6f))
+* **platform:** check validator before open Filtering Settings Dialog ([#11889](https://github.com/SAP/fundamental-ngx/issues/11889)) ([ca07d17](https://github.com/SAP/fundamental-ngx/commit/ca07d17fc5582d28578a675850c94e552ae5e416))
+* **platform:** table header popover a11y improvements ([#11851](https://github.com/SAP/fundamental-ngx/issues/11851)) ([4ee0dc4](https://github.com/SAP/fundamental-ngx/commit/4ee0dc48669ae10faaa937d7d8cbc9cb3b853fd6))
+
+
+
+
+
 # [0.50.0-rc.91](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.88...v0.50.0-rc.91) (2024-05-07)
 
 
