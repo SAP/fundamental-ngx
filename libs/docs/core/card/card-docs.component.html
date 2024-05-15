@@ -1,7 +1,88 @@
+<fd-docs-section-title id="interactive" componentName="card">Interactive card with role listitem</fd-docs-section-title>
+<description>
+    The <code>listitem</code> is the recommended role for card. With this role, all interactive variants of the card can
+    be covered:
+
+    <ul>
+        <li>Non-interactive card</li>
+        <li>Non-interactive card with interactive elements inside</li>
+        <li>Interactive card</li>
+        <li>Interactive card with interactive elements</li>
+    </ul>
+
+    <br />
+    <b>IMPORTANT: </b>only the list item role allows nested interactions, which means: the card can be interactive
+    itself while also having interactive elements inside. It is not recommended to use interactive cards outside list
+    containers!<br />
+    The card container <b>MUST</b> be a list <code>fd-card-list</code>, even when there's only one card. The container
+    of the list should have role region and aria-label. If there's no container for the list, the label has to be placed
+    on the card container list. <br />
+</description>
+<component-example>
+    <fd-interactive-card-example></fd-interactive-card-example>
+</component-example>
+<code-example [exampleFiles]="interactive"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="nonInteractive" componentName="card">Non-interactive card</fd-docs-section-title>
+<description>
+    Non-interactive cards have <code>role="region"</code> (default). In this case the card can be placed in any
+    container. This role covers the interactive variants:
+    <ul>
+        <li>no interactivity</li>
+        <li>no interactivity with interactive elements inside (including interactive header)</li>
+    </ul>
+</description>
+<component-example>
+    <fd-non-interactive-card-example></fd-non-interactive-card-example>
+</component-example>
+<code-example [exampleFiles]="nonInteractive"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="interactiveHeader" componentName="card"
+    >Header Interaction - non-interactive Cards</fd-docs-section-title
+>
+<description>
+    The interactive header cannot be combined with the whole card being interactive. Typically the action triggered by
+    an interactive header would be identical with the action of an interactive card. Which to use when is up to the LoB
+    / product and their use cases and standards. <br /><br />
+    For interactive header set the main card header property<code>[interactive]="true"</code>. <br /><br />
+    To the value of aria-description, aria-label and title for the main header, use the <code>[title]</code> property.
+</description>
+<component-example>
+    <fd-interactive-card-header-example></fd-interactive-card-header-example>
+</component-example>
+<code-example [exampleFiles]="interactiveHeader"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="standard" componentName="card"> Standard Card</fd-docs-section-title>
 <description>
-    Use <code>fd-card</code> component with a <code>fd-card-header</code> and <code>fd-card-content</code> to create a
-    simple card
+    The Badge for Cards can contain Icon and Text, Text only or Icon only. There are no interaction states on Badge for
+    Cards. Badge on Cards consumes the Inverted Object and its color variations.
+    <ul>
+        <li>Use the <code>badge</code> property of card to set the text of the badge. Accepts a string value.</li>
+        <li>
+            The <code>badgeIcon</code> property of card is to set the icon. Accepts a string value, the glyph name of
+            the icon.
+        </li>
+        <li>To set the color of the badge add an integer from 1 to 10 for the <code>badgeColor</code> property.</li>
+        Accepts a number value.
+        <li>
+            To enable the second set of Accent colors set <code>badgeColorSecondary</code> to <code>true</code>. Accepts
+            a boolean value.
+        </li>
+        <li>
+            For status colors use the <code>badgeStatus</code> property. Available values: 'negative' | 'critical' |
+            'positive' | 'informative' | 'neutral'.
+        </li>
+        <li>
+            <code>aria-label</code> for the Card badge can be set through <code>badgeAriaLabel</code> property. Accepts
+            a string value.
+        </li>
+    </ul>
 </description>
 <component-example>
     <fd-card-example></fd-card-example>
@@ -17,19 +98,6 @@
     <fd-card-compact-example></fd-card-compact-example>
 </component-example>
 <code-example [exampleFiles]="compact"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="loader" componentName="card"> Card loader</fd-docs-section-title>
-<description>
-    Use <code>[isLoading]="true"</code> along with <code>fd-card-loader</code> component to show alternative content
-    during data loading
-</description>
-
-<component-example>
-    <fd-card-loader-example></fd-card-loader-example>
-</component-example>
-<code-example [exampleFiles]="loader"></code-example>
 
 <separator></separator>
 
@@ -78,8 +146,7 @@
 <description>
     In order to display bar chart list in a card we can use list styles along with a custom bar component. For this
     example in order to display bar chart we created a simple <code>fd-card-bar</code> component. For card with list it
-    is not recommended to keep header interactive, or navigable. Such a header can be achieved by adding
-    <code>[interactive]="false"</code> to <code>fd-card-header</code> element.
+    is not recommended to keep header interactive, or navigable.
 </description>
 
 <component-example>
@@ -142,6 +209,65 @@
     <fd-card-link-list-example></fd-card-link-list-example>
 </component-example>
 <code-example [exampleFiles]="linkListCard"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="media" componentName="card">Media card</fd-docs-section-title>
+<description>
+    The Media Block is flexible in height but fixed in width to the card size. The media can only contain an image /
+    graphic <b>OR</b> solid color plus text. The Image can fill the media container or can come with a padding of 1rem
+    (results in 16px) top, left and right. Corner radius 0.5rem (results in 8px). For this option set
+    <code>hasPadding</code> to true. <br /><br />
+    A title on Media Block is possible if using a solid colored background an <b>NO</b> image! To ensure legibility and
+    ACC standards in the Media Block / Banner, always make sure a sufficient contrast ratio is achieved. <br /><br />
+    Solid background colors can be bright Shell Category Colors or the lighter Legend Background Colors. Use the
+    <code>shellColor</code> and <code>legendColor</code> properties of <code>fd-card-media</code> component to set the
+    background. <br /><br />
+    <code>shellColor</code> can be a number from 1 to 16, <br />
+    <code>legendColor</code> can be a number from 1 to 20.
+</description>
+<component-example>
+    <fd-media-card-example></fd-media-card-example>
+</component-example>
+<code-example [exampleFiles]="media"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="mediaBanner" componentName="card">Media card</fd-docs-section-title>
+<description
+    >To highlight certain content in a crisp and highly visual way, the Media Block offers the flexibility to be
+    designed as a stand-alone banner. Add <code>cardType="banner"</code> to the <code>fd-card</code> to achieve this
+    type of Card.<br /><br />
+
+    When the Card is used as a banner, the solid background can be applied on the whole media container or on the
+    content container, in cases where it's used together with an image or as an overlay. The properties
+    <code>shellColor</code> and <code>legendColor</code> can be set on both, <code>fd-card-media</code> and
+    <code>fd-card-media-content-container</code> components. <code>shellColor</code> accepts a number from 1 to 16,
+    <code>legendColor</code> can be a number from 1 to 20.<br /><br />
+
+    The content container can be displayed as an overlay in case of using an image / a graphic behind. For this
+    functionality <code>isOverlay</code> property of <code>fd-card-media-content-container</code> should be set to
+    true.<br /><br />
+    When there's no title or heading to describe the Card, the user can use the <code>ariaLabel</code> property of
+    <code>fd-card</code> to set its aria-label.
+</description>
+<component-example>
+    <fd-media-banner-card-example></fd-media-banner-card-example>
+</component-example>
+<code-example [exampleFiles]="mediaBanner"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="loader" componentName="card"> Card loader</fd-docs-section-title>
+<description>
+    Use <code>[isLoading]="true"</code> along with <code>fd-card-loader</code> component to show alternative content
+    during data loading
+</description>
+
+<component-example>
+    <fd-card-loader-example></fd-card-loader-example>
+</component-example>
+<code-example [exampleFiles]="loader"></code-example>
 
 <separator></separator>
 

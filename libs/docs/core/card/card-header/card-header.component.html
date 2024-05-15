@@ -1,8 +1,89 @@
 <fd-doc-page>
     <header>Card</header>
     <description>
-        Cards are containers for app content, and represent an entry-level view of the most pertinent app data for a
-        given topic or issue.
+        The Card is a container that consists of a header, a content and a footer area. It takes the width of its
+        parent. The header could be placed either above or below the content and is not separated with a line. The
+        footer area is optional.
+
+        <br /><br />
+        <b id="card-types">Cards can display different types of content, such as:</b><br />
+        <ul aria-labelledby="card-types">
+            <li>informative text</li>
+            <li>a chart (Analytical Card, Bar Chart List)</li>
+            <li>a list (List card, Link List card)</li>
+            <li>a table (Table Card)</li>
+            <li>a calendar (Calendar Card)</li>
+            <li>an object or group of objects (Object card, Quick view card)</li>
+        </ul>
+
+        <br /><br />
+        Card sizes vary depending on the layout, and they are not editable. A card can focus on either a single object
+        or topic, or on a group of objects. Several cards can reference the same application, but the information should
+        be distinct from one card to another.
+
+        <br /><br /><br /><br />
+        <b>Card building blocks</b>
+        <ul>
+            <li>
+                card list container <code>fd-card-list</code>: interactive cards should have
+                <code>role="listitem"</code> and be placed in a list, even when there's only one card. The
+                <code>fd-card-list</code> directive will apply the necessary role and attributes to the container and is
+                responsible for setting the <code>ariaPosinset</code> and <code>ariaSetsize</code> of each card.
+            </li>
+            <li>
+                <code>fd-card</code> is the Card container.
+                <ul>
+                    <li><code>interactive</code> when set to true adds interactive behaviour to the cards</li>
+                    <li><code>isLoading</code> set to true if the card is in loading state</li>
+                    <li><code>cardType</code> can set the Cart type, such as analytical, table, list, object, etc.</li>
+                </ul>
+            </li>
+            <li>
+                header (optional) <code>fd-card-header</code>: the card header is a flexible combination of 3 block
+                areas: main header, numeric header and extended header. The header displays a mandatory title,
+                indicating what the card is about and functions as a navigation control that directs the user to the
+                parent app.
+                <ul>
+                    <li>
+                        main header <code>fd-card-main-header</code>: the main card header block shows the basic
+                        information of the card. For interactive header add <code>[interactive]="true"</code><br />
+                        It can contain:
+                        <ul>
+                            <li>avatar (optional) <code>fd-avatar</code></li>
+                            <li>title <code>fd-card-title</code></li>
+                            <li>subtitle(optional) <code>fd-card-subtitle</code></li>
+                            <li>counter (optional) <code>fd-card-counter</code></li>
+                            <li>button (optional) <code>fd-card-header-action</code></li>
+                            <li>KPI header (optional) <code>fd-card-kpi-header</code></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        extended header <code>fd-card-extended-header</code>: the extended header is a flexible block to
+                        hold various other components, like time stamp, rating, tags, label/value, long text, numeric
+                        values, etc. The components can be arranged in left column <code>fd-card-header-column</code> or
+                        right column <code>fd-card-header-column [align]="'right'"</code>, each column is suggested to
+                        have maximum 3 lines (rows) <code>fd-card-header-row</code> for placing the components.
+                    </li>
+
+                    <li>
+                        numeric header <code>fd-card-numeric-header</code>: the numeric header block is designed for
+                        displaying numeric information. It consumes Numeric Content (Horizon) and can show additional
+                        qualifying information and side indicators, if required. The numeric content is placed inside
+                        <code>fd-card-numeric-container</code>, and the indicators
+                        <code>fd-card-indicator-title</code> and <code>fd-card-indicator-value</code> are inside
+                        <code>fd-card-indicator</code>. An additional information, like a label, can be added in a
+                        second row <code>fd-card-header-row</code>
+                    </li>
+                </ul>
+            </li>
+            <li>content <code>fd-card-content</code>: the content area is reserved for application content.</li>
+            <li>
+                footer (optional) <code>fd-card-footer</code>: the footer displays a list of actions
+                <code>*fdCardFooterActionItem</code> that can be performed on the card. When link is too long, or there
+                is no more place for actions, overflow button should appear.
+            </li>
+        </ul>
     </description>
     <import module="CardModule" subPackage="card"></import>
 

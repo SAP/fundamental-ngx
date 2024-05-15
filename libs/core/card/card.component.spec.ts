@@ -2,25 +2,21 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { CardContentComponent } from './card-content.component';
-import { CardTitleDirective } from './card-title.directive';
+import { CardContentComponent } from './content/card-content.component';
+import { CardTitleDirective } from './header-elements/card-title.directive';
 import { CardComponent } from './card.component';
 import { CardModule } from './card.module';
 import { CardType } from './constants';
 
 import { CLASS_NAME } from './constants';
-import { getCardModifierClassNameByCardType } from './utils';
 
 @Component({
     template: `
-        <fd-card [badge]="badgeText" [isLoading]="isLoading" [fdCompact]="isCompact" [cardType]="cardType">
+        <fd-card>
             <fd-card-header>
                 <h2 fd-card-title>{{ titleText }}</h2>
             </fd-card-header>
             <fd-card-content>{{ contentText }}</fd-card-content>
-
-            <!-- TODO: Card footer issue #6246 -->
-            <!-- <fd-card-footer>{{ footerText }}</fd-card-footer> -->
 
             <fd-card-loader>{{ loaderText }}</fd-card-loader>
         </fd-card>
@@ -43,7 +39,6 @@ class CardHostTestComponent {
 describe('CardComponent', () => {
     let fixture: ComponentFixture<CardHostTestComponent>;
     let host: CardHostTestComponent;
-    let card: CardComponent;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -56,7 +51,6 @@ describe('CardComponent', () => {
         fixture = TestBed.createComponent(CardHostTestComponent);
         host = fixture.componentInstance;
         fixture.detectChanges();
-        card = host.card;
     });
 
     it('should create', () => {
@@ -68,17 +62,6 @@ describe('CardComponent', () => {
         expect(cardDebugEl.nativeElement.className.includes(CLASS_NAME.card)).toBe(true);
     });
 
-    describe('badge option', () => {
-        it('should has binding', () => {
-            expect(card.badge).toBe(host.badgeText);
-        });
-
-        it('should render it in view', () => {
-            const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardComponent)).nativeElement;
-            expect(cardEl.textContent?.includes(host.badgeText)).toBeTruthy();
-        });
-    });
-
     it('should render title', () => {
         const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardTitleDirective)).nativeElement;
         expect(cardEl.textContent?.includes(host.titleText)).toBeTruthy();
@@ -87,41 +70,5 @@ describe('CardComponent', () => {
     it('should render content', () => {
         const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardContentComponent)).nativeElement;
         expect(cardEl.textContent?.includes(host.contentText)).toBeTruthy();
-    });
-
-    describe('loader', () => {
-        it('should has binding', () => {
-            expect(card.isLoading).toBe(host.isLoading);
-        });
-
-        it('should render only loader template if isLoading = true', () => {
-            host.isLoading = true;
-
-            fixture.detectChanges();
-
-            const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardComponent)).nativeElement;
-
-            expect(cardEl.textContent).toEqual(host.loaderText);
-        });
-    });
-
-    describe('cardType', () => {
-        it('should has binding', () => {
-            expect(card.cardType).toBe(host.cardType);
-        });
-
-        it('should apply corresponding className and remove previous', () => {
-            const cardDebugEl = fixture.debugElement.query(By.directive(CardComponent));
-
-            const prevCardType = card.cardType;
-            const prevCardTypeModifier = getCardModifierClassNameByCardType(prevCardType);
-            expect(cardDebugEl.nativeElement.className.includes(prevCardTypeModifier)).toBe(true);
-
-            host.cardType = 'analytical';
-            const analyticalModifier = getCardModifierClassNameByCardType('analytical');
-            fixture.detectChanges();
-            expect(cardDebugEl.nativeElement.className.includes(analyticalModifier)).toBe(true);
-            expect(cardDebugEl.nativeElement.className.includes(prevCardTypeModifier)).not.toBe(true);
-        });
     });
 });

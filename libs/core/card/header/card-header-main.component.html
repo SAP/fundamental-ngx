@@ -1,0 +1,39 @@
+<div class="fd-card__header-main">
+    @if (_cardAvatar() || _cardTitle() || _cardSubtitle() || _cardKpiHeader() || _cardSecondSubtitle()) {
+        <div
+            class="fd-card__header-main-container"
+            [attr.role]="interactive() ? 'button' : null"
+            [tabindex]="interactive() ? '0' : '-1'"
+            [attr.aria-description]="interactive() ? title() : null"
+            [attr.aria-label]="interactive() ? title() : null"
+            [attr.title]="interactive() ? title() : null"
+        >
+            <ng-content select="fd-avatar"></ng-content>
+
+            <div class="fd-card__header-text">
+                @if (_cardTitle()) {
+                    <div class="fd-card__title-area">
+                        <ng-content select="[fd-card-title]"></ng-content>
+                    </div>
+                }
+
+                @if (_cardSubtitle()) {
+                    <div class="fd-card__subtitle-area">
+                        <ng-content select="[fd-card-subtitle]"></ng-content>
+                    </div>
+                }
+                <ng-content select="fd-card-kpi-header"></ng-content>
+                <ng-content select="[fd-card-second-subtitle]"></ng-content>
+            </div>
+        </div>
+    }
+
+    @if (_cardCounter() || _cardHeaderAction()) {
+        <div class="fd-card__header-main-actions">
+            <ng-content select="[fd-card-header-action]"></ng-content>
+            <ng-content select="[fd-card-counter]"></ng-content>
+        </div>
+    }
+
+    <ng-content></ng-content>
+</div>

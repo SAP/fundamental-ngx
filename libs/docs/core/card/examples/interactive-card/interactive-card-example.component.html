@@ -1,0 +1,90 @@
+<div fd-card-list style="display: flex; gap: 2rem; flex-wrap: wrap">
+    <fd-card [interactive]="true" role="listitem" style="max-width: 400px">
+        <fd-card-header>
+            <fd-card-main-header>
+                <fd-avatar
+                    glyph="cart"
+                    [circle]="true"
+                    size="s"
+                    ariaLabel="avatar image"
+                    title="avatar image"
+                ></fd-avatar>
+                <h2 fd-card-title>Card Title</h2>
+                <h3 fd-card-subtitle>Card Subtitle</h3>
+                <span fd-card-counter status="positive">3 of 10</span>
+                <button
+                    fd-button
+                    fd-card-header-action
+                    fdType="transparent"
+                    glyph="overflow"
+                    ariaLabel="More"
+                    title="More"
+                ></button>
+            </fd-card-main-header>
+            <fd-card-extended-header>
+                <div fd-card-header-column>
+                    <div fd-card-header-row>
+                        <span
+                            fd-object-status
+                            status="negative"
+                            glyph="error"
+                            label="Negative"
+                            aria-label="Object status Negative"
+                        ></span>
+                        <span
+                            fd-object-status
+                            status="critical"
+                            glyph="alert"
+                            label="Critical"
+                            aria-label="Object status Critical"
+                        ></span>
+                    </div>
+                </div>
+                <div fd-card-header-column [align]="'right'">
+                    <div fd-card-header-row>
+                        <fd-text text="Timestamp"></fd-text>
+                    </div>
+                </div>
+            </fd-card-extended-header>
+        </fd-card-header>
+        <fd-card-content></fd-card-content>
+    </fd-card>
+
+    <fd-card [interactive]="true" role="listitem" style="max-width: 400px">
+        <fd-card-header>
+            <fd-card-main-header>
+                <fd-avatar glyph="travel-expense" size="s" ariaLabel="avatar image" title="avatar image"></fd-avatar>
+                <h2 fd-card-title>Travel Request</h2>
+                <h3 fd-card-subtitle>Marie Johnson</h3>
+                <span fd-card-counter>2 hours ago</span>
+                <button
+                    fd-button
+                    fd-card-header-action
+                    fdType="transparent"
+                    glyph="overflow"
+                    ariaLabel="More"
+                    title="More"
+                ></button>
+            </fd-card-main-header>
+            <fd-card-extended-header [align]="'bottom'">
+                <div fd-card-header-column>
+                    <div fd-card-header-row>
+                        <fd-text text="Las Vegas, TechEd"></fd-text>
+                    </div>
+                    <div fd-card-header-row>
+                        <fd-text text="May 3rd - 5th 2024"></fd-text>
+                    </div>
+                </div>
+                <div fd-card-header-column [align]="'right'">
+                    <div fd-card-header-row>
+                        <span style="font-size: 1.4rem">956.00 EUR</span>
+                    </div>
+                </div>
+            </fd-card-extended-header>
+        </fd-card-header>
+        <fd-card-footer>
+            <button *fdCardFooterActionItem fd-button fdType="positive">Approve</button>
+            <button *fdCardFooterActionItem fd-button fdType="negative">Reject</button>
+        </fd-card-footer>
+    </fd-card>
+</div>
