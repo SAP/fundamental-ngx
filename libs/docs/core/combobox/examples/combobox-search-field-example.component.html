@@ -9,4 +9,16 @@
     >
     </fd-combobox>
 </div>
-<small>Search Term: {{ searchTerm }}</small>
+<small>Search Field Term: {{ searchTerm }}</small>
+<div fd-form-item>
+    <label fd-form-label>Combobox</label>
+    <fd-combobox
+        maxHeight="250px"
+        placeholder="Type some text..."
+        [showClearButton]="true"
+        [dropdownValues]="fruits"
+        [(ngModel)]="searchTerm2"
+    >
+    </fd-combobox>
+</div>
+<small>Combobox Term: {{ searchTerm2 }}</small>

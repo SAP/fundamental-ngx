@@ -198,10 +198,10 @@ export class ComboboxComponent<T = any>
     glyphFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /**
-     * Whether to show the clear search term button when the Combobox is a Search Field
+     * Whether to show the clear search term button
      */
     @Input()
-    showClearButton = true;
+    showClearButton = false;
 
     /**
      *  The trigger events that will open/close the options popover.
