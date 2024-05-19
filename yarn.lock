@@ -3678,10 +3678,10 @@
   resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.14.0.tgz#9049f1fb1494ced4b80055b097626c85b5a5109e"
   integrity sha512-0MpyrRWr0+ZTXZxJcuBucjRAc1WpXGqt6y1EvGtOCrAxdxDbfJKsCxHB8ZguNwfQKkQS4qOxrc+nT5DaKFPMQQ==
 
-"@sap-ui/common-css@0.35.1":
-  version "0.35.1"
-  resolved "https://registry.yarnpkg.com/@sap-ui/common-css/-/common-css-0.35.1.tgz#8a74dbdda4ab4f0f1c8491006934d1d98884ace5"
-  integrity sha512-+i7D6MjCCnEdySmxgTRzvNdGcQ615tWGmlHTzTjZd7I91TdAIbMsiq5fOG4nAqKbAEm/Lg2d/jXQcg5YWZXr4A==
+"@sap-ui/common-css@0.36.0":
+  version "0.36.0"
+  resolved "https://registry.yarnpkg.com/@sap-ui/common-css/-/common-css-0.36.0.tgz#7e1411f5d51ff6dd4d5f3e4d9cf83e3a13f4aa55"
+  integrity sha512-aTNl6LREiIUKp1WwNHGKM47khkYFNCugKZDgmpcuGMozbX48pWcwDdORPlwzg9GW4s2S8w1Lmy/gQXx0+T3qbg==
   dependencies:
     "@sap-theming/theming-base-content" "^11.14.0"
 
