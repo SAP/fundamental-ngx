@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.93](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.92...v0.50.0-rc.93) (2024-05-20)
+
+
+### Bug Fixes
+
+* **deps:** align common-css version with fundamental-styles 0.36 ([#11935](https://github.com/SAP/fundamental-ngx/issues/11935)) ([c9802c9](https://github.com/SAP/fundamental-ngx/commit/c9802c989d229b40b4eaefc92da85b420d4177fc))
+
+
+
+
+
 # [0.50.0-rc.92](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.88...v0.50.0-rc.92) (2024-05-15)
 
 
