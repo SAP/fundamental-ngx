@@ -153,6 +153,10 @@ export class InputGroupComponent implements AfterViewInit, FormItemControl, OnIn
     @Input()
     ariaLabelledBy: Nullable<string>;
 
+    /** aria-label for the input field */
+    @Input()
+    ariaLabel: Nullable<string>;
+
     /** Event emitted when the add-on button is clicked. */
     @Output()
     addOnButtonClicked = new EventEmitter<Event>();
