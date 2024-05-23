@@ -404,6 +404,14 @@ export class TableComponent<T = any>
     @Input()
     loadPagesBefore = false;
 
+    /**
+     * Whether or not the header cells should be interactive
+     * (have hover and active states)
+     * default: false
+     */
+    @Input()
+    nonInteractiveHeader = false;
+
     /** @hidden */
     _selectionMode: SelectionModeValue = SelectionMode.NONE;
 
