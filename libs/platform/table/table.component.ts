@@ -701,7 +701,6 @@ export class TableComponent<T = any>
     /** @hidden */
     _checkedState: boolean | null = false;
     /** @hidden */
-    @HostBinding('class.fd-table--group')
     _isGroupTable$ = computed(() => {
         const groupRules = this._tableService.groupRules$();
 
