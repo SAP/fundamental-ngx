@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.97](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.96...v0.50.0-rc.97) (2024-05-24)
+
+
+### Bug Fixes
+
+* **core:** add possibility to set aria-label for input-group ([#11942](https://github.com/SAP/fundamental-ngx/issues/11942)) ([f4dc379](https://github.com/SAP/fundamental-ngx/commit/f4dc379eac31bd9a69d12c7c9c3cba0a3874df05))
+
+
+
+
+
+# [0.50.0-rc.96](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.95...v0.50.0-rc.96) (2024-05-24)
+
+
+### Bug Fixes
+
+* **core:** add input for Illustrated messages aria-label ([#11941](https://github.com/SAP/fundamental-ngx/issues/11941)) ([778eb09](https://github.com/SAP/fundamental-ngx/commit/778eb09afcd4ffa4cb3d2f9dd7bb64c02a6df23b))
+
+
+
+
+
 # [0.50.0-rc.95](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.94...v0.50.0-rc.95) (2024-05-22)
 
 **Note:** Version bump only for package fundamental-ngx
