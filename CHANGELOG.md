@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.98](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.97...v0.50.0-rc.98) (2024-05-24)
+
+
+### Bug Fixes
+
+* **core:** add a11y role and aria-checked to the checkbox ([#11943](https://github.com/SAP/fundamental-ngx/issues/11943)) ([fecbf03](https://github.com/SAP/fundamental-ngx/commit/fecbf03cfe04203bb2ba398a2b7d506988f12893))
+
+
+
+
+
 # [0.50.0-rc.97](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.96...v0.50.0-rc.97) (2024-05-24)
 
 
