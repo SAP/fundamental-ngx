@@ -13,7 +13,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { CssClassBuilder, RequireOnlyOne, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, Nullable, RequireOnlyOne, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { Subscription, fromEvent } from 'rxjs';
 
 export interface SvgConfig {
@@ -59,6 +59,12 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
      */
     @Input()
     svgConfig: SvgConfig;
+
+    /**
+     * aria-label for the svg
+     */
+    @Input()
+    svgAriaLabel: Nullable<string>;
 
     /**
      * When set to true will remove the illustration from the Illustrated Message
