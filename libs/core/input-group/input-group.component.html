@@ -72,7 +72,8 @@
     <input
         [(ngModel)]="inputText"
         [id]="_inputId"
-        [attr.aria-labelledby]="_inputAriaLabelledBy"
+        [attr.aria-label]="ariaLabel"
+        [attr.aria-labelledby]="ariaLabel ? null : _inputAriaLabelledBy"
         [class.fd-shellbar__input-group-input]="inShellbar"
         fd-input-group-input
         [type]="type"
