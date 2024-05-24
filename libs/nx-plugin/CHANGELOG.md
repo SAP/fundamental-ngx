@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.99](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.98...v0.50.0-rc.99) (2024-05-24)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
 # [0.50.0-rc.98](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.97...v0.50.0-rc.98) (2024-05-24)
 
 **Note:** Version bump only for package @fundamental-ngx/nx-plugin

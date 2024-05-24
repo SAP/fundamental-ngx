@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.99](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.98...v0.50.0-rc.99) (2024-05-24)
+
+
+### Bug Fixes
+
+* **platform:** fix the padding-left of the first column in Platform Table ([#11945](https://github.com/SAP/fundamental-ngx/issues/11945)) ([f27ac6c](https://github.com/SAP/fundamental-ngx/commit/f27ac6ca1ab4d2b33f3b52395a17f8253eddf88e))
+
+
+
+
+
 # [0.50.0-rc.98](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.97...v0.50.0-rc.98) (2024-05-24)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
