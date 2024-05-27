@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.100](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.99...v0.50.0-rc.100) (2024-05-27)
+
+
+### Bug Fixes
+
+* **platform:** add fix for incorect border in Platform table ([#11947](https://github.com/SAP/fundamental-ngx/issues/11947)) ([b76a74e](https://github.com/SAP/fundamental-ngx/commit/b76a74e22abd6adbde3f6cd3f21b3b487c75ff9f))
+
+
+
+
+
 # [0.50.0-rc.99](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.98...v0.50.0-rc.99) (2024-05-24)
 
 
