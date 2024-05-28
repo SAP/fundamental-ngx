@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.101](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.100...v0.50.0-rc.101) (2024-05-28)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
 # [0.50.0-rc.100](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.99...v0.50.0-rc.100) (2024-05-27)
 
 

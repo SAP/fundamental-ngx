@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.101](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.100...v0.50.0-rc.101) (2024-05-28)
+
+
+### Bug Fixes
+
+* **core:** remove padding when subheader is empty ([#11961](https://github.com/SAP/fundamental-ngx/issues/11961)) ([eed8e1c](https://github.com/SAP/fundamental-ngx/commit/eed8e1cd56fc758fb092c4bb773b331c8b70d3cc))
+
+
+
+
+
 # [0.50.0-rc.100](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.99...v0.50.0-rc.100) (2024-05-27)
 
 **Note:** Version bump only for package @fundamental-ngx/core
