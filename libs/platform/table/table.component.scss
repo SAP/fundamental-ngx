@@ -629,3 +629,8 @@ fdk-dynamic-portal {
 .fd-table__intersection-spy {
     position: relative;
 }
+
+.fdp-table--no-outer-border.fd-table--no-vertical-borders .fd-table__cell.is-last-child,
+.fdp-table--no-outer-border.fd-table--no-vertical-borders .fd-table__cell:last-child {
+    border-left-style: none;
+}

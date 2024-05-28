@@ -84,3 +84,7 @@
         align-items: center;
     }
 }
+
+.fd-dynamic-page__collapsible-header:empty {
+    padding: 0 !important;
+}
