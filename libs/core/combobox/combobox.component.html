@@ -2,7 +2,7 @@
 <ng-template #desktopTemplate>
     <fd-popover
         additionalBodyClass="fd-popover-custom-list"
-        [class.fd-combobox-full-width]="isSearch"
+        [class.fd-combobox-full-width]="isSearch || showClearButton"
         [isOpen]="open && displayedValues && displayedValues.length > 0"
         (isOpenChange)="isOpenChangeHandle($event)"
         [fillControlMode]="fillControlMode"
