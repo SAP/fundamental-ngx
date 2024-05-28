@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.104](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.103...v0.50.0-rc.104) (2024-05-28)
+
+
+### Bug Fixes
+
+* **core:** show clear button in any combobox ([#11924](https://github.com/SAP/fundamental-ngx/issues/11924)) ([c945082](https://github.com/SAP/fundamental-ngx/commit/c94508255f772c0273a8dfcf3520f6d7afa236e8))
+
+
+### BREAKING CHANGES
+
+* **core:** showClearButton set default to false
+
+
+
+
+
 # [0.50.0-rc.103](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.102...v0.50.0-rc.103) (2024-05-28)
 
 
