@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.102](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.101...v0.50.0-rc.102) (2024-05-28)
+
+
+### Bug Fixes
+
+* **core:** add fix for Shellbar menu btn color ([#11960](https://github.com/SAP/fundamental-ngx/issues/11960)) ([c764641](https://github.com/SAP/fundamental-ngx/commit/c76464122bfa1a09aec985d9b0bfe62b26de26e2))
+
+
+
+
+
 # [0.50.0-rc.101](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.100...v0.50.0-rc.101) (2024-05-28)
 
 
