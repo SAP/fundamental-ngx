@@ -29,3 +29,7 @@ fd-shellbar-actions {
 .fd-shellbar__action.fd-shellbar__action--desktop:empty {
     display: none;
 }
+
+.fd-shellbar .fd-shellbar__group .fd-shellbar__button.fd-shellbar__button--menu {
+    --fdButtonColor: var(--sapShell_TextColor);
+}
