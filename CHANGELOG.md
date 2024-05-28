@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.103](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.102...v0.50.0-rc.103) (2024-05-28)
+
+
+### Bug Fixes
+
+* **core:** remove redundant popoverFormMessage assignments ([#11962](https://github.com/SAP/fundamental-ngx/issues/11962)) ([8f57ea0](https://github.com/SAP/fundamental-ngx/commit/8f57ea08b3eb21683bf69ab97dc3ae900553e171))
+
+
+
+
+
 # [0.50.0-rc.102](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.101...v0.50.0-rc.102) (2024-05-28)
 
 
