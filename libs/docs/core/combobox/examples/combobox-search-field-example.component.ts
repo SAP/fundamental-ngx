@@ -11,6 +11,7 @@ import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/for
 })
 export class ComboboxSearchFieldExampleComponent {
     searchTerm = '';
+    searchTerm2 = '';
     fruits = [
         'Apple',
         'Pineapple',
