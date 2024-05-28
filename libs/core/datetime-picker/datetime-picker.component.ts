@@ -162,7 +162,6 @@ export class DatetimePickerComponent<D>
     @Input()
     set message(message: string) {
         this._message = message;
-        this._popoverFormMessage.message = message;
     }
 
     /** The trigger events that will open/close the message box.
@@ -170,7 +169,6 @@ export class DatetimePickerComponent<D>
     @Input()
     set messageTriggers(triggers: string[]) {
         this._messageTriggers = triggers;
-        this._popoverFormMessage.triggers = triggers;
     }
 
     /**
