@@ -77,6 +77,13 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
     @Input()
     ariaLabel: Nullable<string>;
 
+    /**
+     * Sets the `role` attribute to the element.
+     * Default: checkbox
+     */
+    @Input()
+    role = 'checkbox';
+
     /** Current selection state of the checkbox component */
     @Input()
     set value(value: T) {

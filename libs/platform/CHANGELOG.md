@@ -3,6 +3,76 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.100](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.99...v0.50.0-rc.100) (2024-05-27)
+
+
+### Bug Fixes
+
+* **platform:** add fix for incorect border in Platform table ([#11947](https://github.com/SAP/fundamental-ngx/issues/11947)) ([b76a74e](https://github.com/SAP/fundamental-ngx/commit/b76a74e22abd6adbde3f6cd3f21b3b487c75ff9f))
+
+
+
+
+
+# [0.50.0-rc.99](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.98...v0.50.0-rc.99) (2024-05-24)
+
+
+### Bug Fixes
+
+* **platform:** fix the padding-left of the first column in Platform Table ([#11945](https://github.com/SAP/fundamental-ngx/issues/11945)) ([f27ac6c](https://github.com/SAP/fundamental-ngx/commit/f27ac6ca1ab4d2b33f3b52395a17f8253eddf88e))
+
+
+
+
+
+# [0.50.0-rc.98](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.97...v0.50.0-rc.98) (2024-05-24)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.50.0-rc.97](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.96...v0.50.0-rc.97) (2024-05-24)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.50.0-rc.96](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.95...v0.50.0-rc.96) (2024-05-24)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.50.0-rc.95](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.94...v0.50.0-rc.95) (2024-05-22)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.50.0-rc.94](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.93...v0.50.0-rc.94) (2024-05-22)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.50.0-rc.93](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.92...v0.50.0-rc.93) (2024-05-20)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
 # [0.50.0-rc.92](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.88...v0.50.0-rc.92) (2024-05-15)
 
 
