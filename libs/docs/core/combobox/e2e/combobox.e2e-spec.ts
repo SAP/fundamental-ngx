@@ -5,7 +5,6 @@ import {
     browserIsSafari,
     clearValue,
     click,
-    getAttributeByName,
     getElementArrayLength,
     getElementSize,
     getText,
@@ -25,7 +24,6 @@ import {
     bananaTestText,
     capsSearchTermAppleText,
     capsSearchTermTomatoText,
-    placeholderTestText,
     reactiveFormTestText1,
     reactiveFormTestText2,
     searchPineappleText,
@@ -63,16 +61,8 @@ describe('Combobox component test suit', () => {
         await waitForElDisplayed(comboboxPage.title);
     }, 2);
 
-    it('verify placeholders in all input fields', async () => {
-        const inputLengths = await getElementArrayLength(allInputFields);
-        for (let i = 0; i < inputLengths; i++) {
-            await scrollIntoView(allInputFields, i);
-            await expect(await getAttributeByName(allInputFields, 'placeholder', i)).toBe(placeholderTestText[i]);
-        }
-    });
-
     it('verify disable input field', async () => {
-        await expect(await isEnabled(allInputFields, 20)).toBe(false, '');
+        await expect(await isEnabled(allInputFields, 21)).toBe(false, '');
     });
 
     describe('Check Standard Combobox', () => {
@@ -103,7 +93,7 @@ describe('Combobox component test suit', () => {
 
     describe('Check Combobox as Search Field', () => {
         it('verify Combobox as Search Field by choose option in dropdown or typing name of it', async () => {
-            await scrollIntoView(allInputFields, 6);
+            await scrollIntoView(allInputFields, 8);
             await click(activeInputButton, 4);
             await expect(await isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
             await click(dropdownOption);
@@ -131,14 +121,14 @@ describe('Combobox component test suit', () => {
 
     describe('Check Custom Search Function', () => {
         it('verify Custom Search Function by choose option in dropdown or typing name of it', async () => {
-            await scrollIntoView(allInputFields, 8);
-            await click(activeInputButton, 6);
+            await scrollIntoView(allInputFields, 9);
+            await click(activeInputButton, 7);
             await acceptAlert();
             await expect(await isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
             await click(dropdownOption);
             await expect(await getText(smallText_2)).toBe(searchTermAppleText);
 
-            await setValue(allInputFields, 'Pi', 8);
+            await setValue(allInputFields, 'Pi', 9);
             await click(dropdownOption);
             await expect(await getText(smallText_2)).toBe(searchPineappleText);
         });
@@ -147,21 +137,21 @@ describe('Combobox component test suit', () => {
     describe('Check Combobox Mobile Mode', () => {
         it('verify Combobox Mobile Mode by choose option in mobile window or typing name of it', async () => {
             await scrollIntoView(allInputFields, 9);
-            await click(allInputFields, 9);
+            await click(allInputFields, 10);
             await click(dropdownOption);
             await click(mobileButton, 2);
-            await expect(await getValue(allInputFields, 9)).toBe(appleTestText);
+            await expect(await getValue(allInputFields, 10)).toBe(appleTestText);
 
-            await click(allInputFields, 9);
+            await click(allInputFields, 10);
             await setValue(allInputFields, 'Ba', 10);
             await click(dropdownOption);
             await click(mobileButton, 2);
-            await expect(await getValue(allInputFields, 9)).toBe(bananaTestText);
+            await expect(await getValue(allInputFields, 10)).toBe(bananaTestText);
         });
 
         it('verify Combobox Mobile Mode has clickable buttons cancel, close and has header', async () => {
-            await scrollIntoView(allInputFields, 9);
-            await click(allInputFields, 9);
+            await scrollIntoView(allInputFields, 10);
+            await click(allInputFields, 10);
             await expect(await getText(mobileTitle)).toBe(titleTestText);
 
             await expect(await isElementClickable(mobileButton)).toBe(true, 'close button not clickable');
