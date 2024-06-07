@@ -1,21 +1,19 @@
 import { CommonModule } from '@angular/common';
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
-    ContentChildren,
+    contentChildren,
     Directive,
     ElementRef,
-    HostBinding,
-    Input,
-    QueryList,
+    inject,
+    input,
     TemplateRef,
-    ViewChild,
-    booleanAttribute,
-    inject
+    viewChild
 } from '@angular/core';
 import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
-import { TabConfig } from '../../interfaces/tab-config.interface';
+import { ReactiveTabConfig } from '../../interfaces/tab-config.interface';
 import { SemanticColor } from '../../types';
 
 let defaultIdIndex = 0;
@@ -27,13 +25,10 @@ let defaultIdIndex = 0;
 })
 export class IconTabBarTabContentDirective implements HasElementRef {
     /** Tab ID. */
-    @HostBinding('attr.id')
-    @Input()
-    id: Nullable<string>;
+    id = input<Nullable<string>>();
 
     /** Tab Unique ID. */
-    @Input()
-    uId: Nullable<string>;
+    uId = input<Nullable<string>>();
 
     /** Element reference. */
     readonly elementRef = inject(ElementRef);
@@ -46,48 +41,37 @@ export class IconTabBarTabContentDirective implements HasElementRef {
     templateUrl: './icon-tab-bar-tab.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class IconTabBarTabComponent implements TabConfig {
+export class IconTabBarTabComponent implements ReactiveTabConfig {
     /** Tab Label. */
-    @Input()
-    label: Nullable<string>;
+    label = input<Nullable<string>>();
 
     /** Tab text color. */
-    @Input()
-    color: SemanticColor;
+    color = input<SemanticColor>();
 
     /** Tab icon. */
-    @Input()
-    icon: string;
+    icon = input<string>();
 
     /** Tab icon font family. */
-    @Input()
-    iconFont: IconFont = FD_DEFAULT_ICON_FONT_FAMILY;
+    iconFont = input<IconFont>(FD_DEFAULT_ICON_FONT_FAMILY);
 
     /** Tab counter. */
-    @Input()
-    counter: number;
+    counter = input<Nullable<number>>();
 
     /** whether the tab is selected */
-    @Input({ transform: booleanAttribute })
-    active = false;
+    active = input(booleanAttribute(false), { transform: booleanAttribute });
 
     /** if set to true, will show red circle in top-right corner of tab */
-    @Input({ transform: booleanAttribute })
-    badge = false;
+    badge = input(booleanAttribute(false), { transform: booleanAttribute });
 
     /** Whether the tab can be closed. */
-    @Input({ transform: booleanAttribute })
-    closable = false;
+    closable = input(booleanAttribute(false), { transform: booleanAttribute });
 
     /** Tab ID. */
-    @Input()
-    id = `fdp-icon-tab-bar-tab-${defaultIdIndex++}`;
+    id = input(`fdp-icon-tab-bar-tab-${defaultIdIndex++}`);
 
     /** Content renderer. */
-    @ViewChild('renderer')
-    readonly renderer: TemplateRef<any>;
+    readonly renderer = viewChild<TemplateRef<any>>('renderer');
 
     /** @hidden */
-    @ContentChildren(IconTabBarTabComponent)
-    readonly children: QueryList<IconTabBarTabComponent>;
+    readonly children = contentChildren(IconTabBarTabComponent);
 }

@@ -32,7 +32,7 @@ export class IconTabBarTextTypeTabItemComponent {
      * If any of the color associations provided, they'll be read by screenreader instead of the actual color
      */
     @Input()
-    colorAssociations: TabColorAssociations;
+    colorAssociations: TabColorAssociations | undefined;
 
     /** @hidden */
     get nativeElement(): HTMLElement {

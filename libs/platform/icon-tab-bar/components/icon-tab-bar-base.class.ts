@@ -58,7 +58,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * If any of the color associations provided, they'll be read by screenreader instead of the actual color
      */
     @Input()
-    colorAssociations: TabColorAssociations;
+    colorAssociations: TabColorAssociations | undefined;
 
     /**
      * @description densityMode setter triggers tabs to re-calculation overflowed tabs
@@ -126,7 +126,6 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.tabs && !changes.tabs.firstChange) {
-            this._initTabs();
             this._triggerRecalculationVisibleItems();
             return;
         }
