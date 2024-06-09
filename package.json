@@ -48,7 +48,7 @@
         "@angular/platform-browser-dynamic": "17.3.0",
         "@angular/router": "17.3.0",
         "@fundamental-styles/cx": "0.36.1",
-        "@nx/angular": "18.1.2",
+        "@nx/angular": "19.2.2",
         "@sap-theming/theming-base-content": "11.15.0",
         "@stackblitz/sdk": "1.9.0",
         "@swc/helpers": "0.5.2",
