@@ -6,6 +6,7 @@ import {
     ElementRef,
     EventEmitter,
     inject,
+    input,
     Input,
     isDevMode,
     NgZone,
@@ -54,13 +55,6 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     isRtl: boolean;
 
     /**
-     * @description Associations for colors of the tabs.
-     * If any of the color associations provided, they'll be read by screenreader instead of the actual color
-     */
-    @Input()
-    colorAssociations: TabColorAssociations | undefined;
-
-    /**
      * @description densityMode setter triggers tabs to re-calculation overflowed tabs
      */
     @Input()
@@ -104,6 +98,12 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
 
     /** @hidden */
     _extraItems$ = signal(false);
+
+    /**
+     * @description Associations for colors of the tabs.
+     * If any of the color associations provided, they'll be read by screenreader instead of the actual color
+     */
+    colorAssociations = input<TabColorAssociations | undefined>();
 
     /** @hidden */
     readonly _inDynamicPage = !!inject(FD_DYNAMIC_PAGE, { optional: true });

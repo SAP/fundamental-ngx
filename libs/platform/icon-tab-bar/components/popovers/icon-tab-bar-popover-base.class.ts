@@ -9,7 +9,8 @@ import {
     Output,
     QueryList,
     SimpleChanges,
-    ViewChild
+    ViewChild,
+    input
 } from '@angular/core';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
@@ -46,13 +47,6 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
     isSeparators = false;
 
     /**
-     * @description Associations for colors of the tabs.
-     * If any of the color associations provided, they'll be read by screenreader instead of the actual color
-     */
-    @Input()
-    colorAssociations: TabColorAssociations | undefined;
-
-    /**
      * @description Emits when some tab is selected.
      */
     @Output()
@@ -69,6 +63,12 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
     /** Event emits when user clicks on x button in tab. */
     @Output()
     closeTab = new EventEmitter<string>();
+
+    /**
+     * @description Associations for colors of the tabs.
+     * If any of the color associations provided, they'll be read by screenreader instead of the actual color
+     */
+    colorAssociations = input<TabColorAssociations | undefined>();
 
     /**
      * @hidden

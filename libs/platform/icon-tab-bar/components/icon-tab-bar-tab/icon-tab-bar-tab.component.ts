@@ -21,10 +21,11 @@ let defaultIdIndex = 0;
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fdp-icon-tab-bar-tab-content',
-    standalone: true
+    standalone: true,
+    host: { '[attr.id]': 'id()' }
 })
 export class IconTabBarTabContentDirective implements HasElementRef {
-    /** Tab ID. */
+    /** Tab ID */
     id = input<Nullable<string>>();
 
     /** Tab Unique ID. */
@@ -58,13 +59,13 @@ export class IconTabBarTabComponent implements ReactiveTabConfig {
     counter = input<Nullable<number>>();
 
     /** whether the tab is selected */
-    active = input(booleanAttribute(false), { transform: booleanAttribute });
+    active = input(false, { transform: booleanAttribute });
 
     /** if set to true, will show red circle in top-right corner of tab */
-    badge = input(booleanAttribute(false), { transform: booleanAttribute });
+    badge = input(false, { transform: booleanAttribute });
 
     /** Whether the tab can be closed. */
-    closable = input(booleanAttribute(false), { transform: booleanAttribute });
+    closable = input(false, { transform: booleanAttribute });
 
     /** Tab ID. */
     id = input(`fdp-icon-tab-bar-tab-${defaultIdIndex++}`);
