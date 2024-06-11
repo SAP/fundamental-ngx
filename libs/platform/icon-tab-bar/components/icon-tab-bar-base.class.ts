@@ -126,6 +126,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.tabs && !changes.tabs.firstChange) {
+            this._initTabs();
             this._triggerRecalculationVisibleItems();
             return;
         }
@@ -322,13 +323,21 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @description initialize state of tabs
      */
     protected _initTabs(): void {
+        this._lastVisibleTabIndex = this.tabs.length - 1;
+
+        if (this.selectedUid) {
+            return;
+        }
+
         const selectedItem = this._findActiveTabId(this.tabs) || this.tabs[0];
         this.selectedUid = selectedItem?.uId;
-        this._lastVisibleTabIndex = this.tabs.length - 1;
-        if (selectedItem) {
-            this.selectedUidChange.emit(this.selectedUid);
-            this.selected.emit(selectedItem);
+
+        if (!selectedItem) {
+            return;
         }
+
+        this.selectedUidChange.emit(this.selectedUid);
+        this.selected.emit(selectedItem);
     }
 
     private _findActiveTabId(tabs: IconTabBarItem[]): IconTabBarItem | undefined {
