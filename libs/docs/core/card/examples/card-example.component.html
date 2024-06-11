@@ -46,8 +46,8 @@
 <br />
 <br />
 
-<h3>Card header with avatar, subtitle, counter and badge</h3>
-<fd-card badge="New" cardType="list">
+<h3>Card header with avatar, subtitle, counter and multiple badge (max 2)</h3>
+<fd-card badge="Updated" [badgeColor]="4" secondBadgeIcon="pushpin-on" [secondBadgeColor]="4" cardType="list">
     <fd-card-header>
         <fd-card-main-header [interactive]="true">
             <fd-avatar
@@ -369,7 +369,7 @@
                 </fd-card-indicator>
             </div>
             <div fd-card-header-row>
-                <span>Total value</span>
+                <label fd-form-label>Total value</label>
             </div>
         </fd-card-numeric-header>
     </fd-card-header>
@@ -437,7 +437,7 @@
                 </fd-card-indicator>
             </div>
             <div fd-card-header-row>
-                <span>Total value</span>
+                <label fd-form-label>Total Value</label>
             </div>
         </fd-card-numeric-header>
     </fd-card-header>

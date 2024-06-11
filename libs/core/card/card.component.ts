@@ -102,6 +102,41 @@ export class CardComponent<T = any> extends CardFocusItem<T> implements OnChange
     badgeAriaLabel = input<Nullable<string>>();
 
     /**
+     * text for the card second badge
+     */
+    secondBadge = input<Nullable<string>>();
+
+    /**
+     * icon/glyph for the card second badge
+     */
+    secondBadgeIcon = input<Nullable<string>>();
+
+    /**
+     * Indication color for the card second badge
+     * Possible values: integers from 1 to 10
+     */
+    secondBadgeColor = input<Nullable<ColorAccent>>();
+
+    /**
+     * Whether to use secondary set of indication colors for the card second badge
+     * Default value: false
+     */
+    secondBadgeColorSecondary = input<boolean>(false);
+
+    /**
+     * Color status for the card second badge
+     * Possible values: 'negative' | 'critical' | 'positive' | 'informative' | 'neutral'
+     * Default value: null
+     */
+    secondBadgeStatus = input<Nullable<ObjectStatus>>();
+
+    /**
+     * aria-label for the card second badge
+     * Default value: null
+     */
+    secondBadgeAriaLabel = input<Nullable<string>>();
+
+    /**
      * whether the card is in loading state
      * default: false
      */

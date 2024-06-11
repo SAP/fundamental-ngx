@@ -1,19 +1,40 @@
 @if (!isLoading()) {
     <!-- Badge -->
-    @if (badge() || badgeIcon()) {
-        <span
-            fd-object-status
-            [inverted]="true"
-            class="fd-card__badge"
-            [glyph]="badgeIcon()"
-            [status]="badgeStatus()"
-            [indicationColor]="badgeColor()"
-            [secondaryIndication]="badgeColorSecondary()"
-            [label]="badge()"
-            [attr.aria-label]="badgeAriaLabel()"
-        >
-        </span>
+
+    @if (badge() || badgeIcon() || secondBadge() || secondBadgeIcon()) {
+        <div class="fd-card__badge-container">
+            @if (badge() || badgeIcon()) {
+                <span
+                    fd-object-status
+                    [inverted]="true"
+                    class="fd-card__badge"
+                    [glyph]="badgeIcon()"
+                    [status]="badgeStatus()"
+                    [indicationColor]="badgeColor()"
+                    [secondaryIndication]="badgeColorSecondary()"
+                    [label]="badge()"
+                    [attr.aria-label]="badgeAriaLabel()"
+                >
+                </span>
+            }
+
+            @if (secondBadge() || secondBadgeIcon()) {
+                <span
+                    fd-object-status
+                    [inverted]="true"
+                    class="fd-card__badge"
+                    [glyph]="secondBadgeIcon()"
+                    [status]="secondBadgeStatus()"
+                    [indicationColor]="secondBadgeColor()"
+                    [secondaryIndication]="secondBadgeColorSecondary()"
+                    [label]="secondBadge()"
+                    [attr.aria-label]="secondBadgeAriaLabel()"
+                >
+                </span>
+            }
+        </div>
     }
+
     <!-- Header and Content -->
     <ng-content></ng-content>
     <!-- Footer -->
