@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.107](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.106...v0.50.0-rc.107) (2024-06-11)
+
+
+### Bug Fixes
+
+* **core:** remove OverlayContainer override ([#11997](https://github.com/SAP/fundamental-ngx/issues/11997)) ([69b441e](https://github.com/SAP/fundamental-ngx/commit/69b441ea81c1e6bb58d85c4e9af4278c055a41b6))
+
+
+
+
+
 # [0.50.0-rc.106](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.105...v0.50.0-rc.106) (2024-06-11)
 
 
