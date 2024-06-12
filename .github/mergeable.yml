@@ -20,11 +20,7 @@ mergeable:
                 - required:
                       reviewers: ['droshev']
                 - required:
-                      reviewers: ['N1XUS']
-                - required:
-                      reviewers: ['g-cheishvili']
-                - required:
-                      reviewers: ['platon-rov']
+                      reviewers: ['dpavlenishvili']
                 - required:
                       reviewers: ['mikerodonnell89']
                 - min:
