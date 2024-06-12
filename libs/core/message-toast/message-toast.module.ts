@@ -1,4 +1,4 @@
-import { OverlayContainer, OverlayModule } from '@angular/cdk/overlay';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
@@ -8,16 +8,11 @@ import { MESSAGE_TOAST_CONFIG } from './constants/message-toast.token';
 import { MessageToastComponent } from './message-toast.component';
 import { MessageToastService } from './message-toast.service';
 import { provideMessageToastConfig } from './provide-config';
-import { ToastOverlayContainer } from './toast-overlay-container.class';
 
 @NgModule({
     imports: [CommonModule, PortalModule, OverlayModule, MessageToastComponent, MessageToastTextComponent],
     exports: [MessageToastComponent],
-    providers: [
-        MessageToastService,
-        { provide: OverlayContainer, useClass: ToastOverlayContainer },
-        { provide: MESSAGE_TOAST_CONFIG, useValue: new MessageToastConfig() }
-    ]
+    providers: [MessageToastService, { provide: MESSAGE_TOAST_CONFIG, useValue: new MessageToastConfig() }]
 })
 export class MessageToastModule {
     /**

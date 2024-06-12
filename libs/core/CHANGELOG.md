@@ -3,6 +3,85 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.107](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.106...v0.50.0-rc.107) (2024-06-11)
+
+
+### Bug Fixes
+
+* **core:** remove OverlayContainer override ([#11997](https://github.com/SAP/fundamental-ngx/issues/11997)) ([69b441e](https://github.com/SAP/fundamental-ngx/commit/69b441ea81c1e6bb58d85c4e9af4278c055a41b6))
+
+
+
+
+
+# [0.50.0-rc.106](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.105...v0.50.0-rc.106) (2024-06-11)
+
+
+### Bug Fixes
+
+* **core:** update Message Box status icons ([#11996](https://github.com/SAP/fundamental-ngx/issues/11996)) ([47ff78a](https://github.com/SAP/fundamental-ngx/commit/47ff78a150c0cc07ee68a1569c3167041c96736c))
+
+
+
+
+
+# [0.50.0-rc.105](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.104...v0.50.0-rc.105) (2024-06-09)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.50.0-rc.104](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.103...v0.50.0-rc.104) (2024-05-28)
+
+
+### Bug Fixes
+
+* **core:** show clear button in any combobox ([#11924](https://github.com/SAP/fundamental-ngx/issues/11924)) ([c945082](https://github.com/SAP/fundamental-ngx/commit/c94508255f772c0273a8dfcf3520f6d7afa236e8))
+
+
+### BREAKING CHANGES
+
+* **core:** showClearButton set default to false
+
+
+
+
+
+# [0.50.0-rc.103](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.102...v0.50.0-rc.103) (2024-05-28)
+
+
+### Bug Fixes
+
+* **core:** remove redundant popoverFormMessage assignments ([#11962](https://github.com/SAP/fundamental-ngx/issues/11962)) ([8f57ea0](https://github.com/SAP/fundamental-ngx/commit/8f57ea08b3eb21683bf69ab97dc3ae900553e171))
+
+
+
+
+
+# [0.50.0-rc.102](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.101...v0.50.0-rc.102) (2024-05-28)
+
+
+### Bug Fixes
+
+* **core:** add fix for Shellbar menu btn color ([#11960](https://github.com/SAP/fundamental-ngx/issues/11960)) ([c764641](https://github.com/SAP/fundamental-ngx/commit/c76464122bfa1a09aec985d9b0bfe62b26de26e2))
+
+
+
+
+
+# [0.50.0-rc.101](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.100...v0.50.0-rc.101) (2024-05-28)
+
+
+### Bug Fixes
+
+* **core:** remove padding when subheader is empty ([#11961](https://github.com/SAP/fundamental-ngx/issues/11961)) ([eed8e1c](https://github.com/SAP/fundamental-ngx/commit/eed8e1cd56fc758fb092c4bb773b331c8b70d3cc))
+
+
+
+
+
 # [0.50.0-rc.100](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.99...v0.50.0-rc.100) (2024-05-27)
 
 **Note:** Version bump only for package @fundamental-ngx/core
