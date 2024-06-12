@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewEncapsulation, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, Input, input, ViewEncapsulation } from '@angular/core';
 import { AsyncOrSyncPipe, Nullable } from '@fundamental-ngx/cdk/utils';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { TabColorAssociations } from '../../interfaces/tab-color-associations.interface';
@@ -31,8 +31,7 @@ export class IconTabBarTextTypeTabItemComponent {
      * @description Associations for colors of the tabs.
      * If any of the color associations provided, they'll be read by screenreader instead of the actual color
      */
-    @Input()
-    colorAssociations: TabColorAssociations;
+    colorAssociations = input<TabColorAssociations | undefined>();
 
     /** @hidden */
     get nativeElement(): HTMLElement {

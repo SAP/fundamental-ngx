@@ -48,7 +48,7 @@
                         }
                         @if (item.color | fdkAsyncOrSync; as itemColor) {
                             <div class="screenreader-only">
-                                {{ (colorAssociations && colorAssociations[itemColor]) || itemColor }}
+                                {{ colorAssociations()?.[itemColor] || itemColor }}
                             </div>
                         }
                     </a>
