@@ -18,4 +18,13 @@ export class TableHeaderDirective {
     @HostBinding('class.fd-table__header--no-vertical-borders')
     @Input()
     noBorderY = false;
+
+    /**
+     * Whether or not the header cells should be interactive
+     * (have hover and active states)
+     * default: false
+     */
+    @HostBinding('class.fd-table__header--non-interactive')
+    @Input()
+    nonInteractive = false;
 }

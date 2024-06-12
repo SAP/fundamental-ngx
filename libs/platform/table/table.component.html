@@ -42,7 +42,7 @@
             [class.fd-table--no-outer-border]="noOuterBorders"
             [attr.aria-labelledby]="_ariaLabelledBy"
         >
-            <thead fd-table-header class="fdp-table__header">
+            <thead fd-table-header [nonInteractive]="nonInteractiveHeader" class="fdp-table__header">
                 <tr
                     fdp-table-header-row
                     [rowId]="id"

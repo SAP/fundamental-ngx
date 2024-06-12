@@ -2410,10 +2410,10 @@
   dependencies:
     tslib "^2.4.0"
 
-"@fundamental-styles/cx@0.36.1":
-  version "0.36.1"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.36.1.tgz#3118362b64f133ee4b906f6e48c049eed807da06"
-  integrity sha512-ao04o732v8tTq5VE93ggb8B4LBlP3nlcIknh6+/7bdHk2XhaRbR45+e9oxfJm9hUqyQUKtcd8kYGnf+3VL/I9Q==
+"@fundamental-styles/cx@0.36.2":
+  version "0.36.2"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.36.2.tgz#8e9402bb5c92786a30d923fb4b9252d617b060c9"
+  integrity sha512-UnHnvivXUIDvwDisSAD461IIXhRe5Ui+ihaPxXxjx9jUUWMBLTUSE51+LEY1iXMYVD70+vlN/0jWeQpRFEIikg==
 
 "@gar/promisify@^1.1.3":
   version "1.1.3"
@@ -9616,10 +9616,10 @@ functions-have-names@^1.2.3:
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.3.tgz#0404fe4ee2ba2f607f0e0ec3c80bae994133b834"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
-fundamental-styles@0.36.1:
-  version "0.36.1"
-  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.36.1.tgz#7d076c9be9986f157cc6535f254cdd1928063f6a"
-  integrity sha512-zWFBxlZ9ipAiNv+KPi90DKaotqPmJXRqtn8ZelVXMjvihSnidpAsvTNZPty29KmYutNlEBi3G1Ak8xQVCHPvLQ==
+fundamental-styles@0.36.2:
+  version "0.36.2"
+  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.36.2.tgz#576663394620e76469db0f5711aec847276c00ce"
+  integrity sha512-m2VTkvO2pjA2wsThEoHyEw5rQhmR9dKyNl++6qLOL7YEe2lu/+fWZ1c1bt47aZ1hYDoETnoWozKUMPVTQRbdXA==
 
 fuse.js@7.0.0:
   version "7.0.0"
