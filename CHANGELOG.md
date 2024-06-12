@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.107](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.106...v0.50.0-rc.107) (2024-06-11)
+
+
+### Bug Fixes
+
+* **core:** remove OverlayContainer override ([#11997](https://github.com/SAP/fundamental-ngx/issues/11997)) ([69b441e](https://github.com/SAP/fundamental-ngx/commit/69b441ea81c1e6bb58d85c4e9af4278c055a41b6))
+
+
+
+
+
+# [0.50.0-rc.106](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.105...v0.50.0-rc.106) (2024-06-11)
+
+
+### Bug Fixes
+
+* **core:** update Message Box status icons ([#11996](https://github.com/SAP/fundamental-ngx/issues/11996)) ([47ff78a](https://github.com/SAP/fundamental-ngx/commit/47ff78a150c0cc07ee68a1569c3167041c96736c))
+
+
+
+
+
+# [0.50.0-rc.105](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.104...v0.50.0-rc.105) (2024-06-09)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 # [0.50.0-rc.104](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.103...v0.50.0-rc.104) (2024-05-28)
 
 
