@@ -3,6 +3,7 @@
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "prefix": "fdk",
+    "tags": ["type:lib", "scope:cdk"],
     "targets": {
         "prepare": {
             "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=cdk --verbose"
@@ -38,6 +39,5 @@
                 "jestConfig": "{projectRoot}/jest.config.ts"
             }
         }
-    },
-    "tags": ["type:lib", "scope:cdk"]
+    }
 }

@@ -4,6 +4,7 @@
     "projectType": "library",
     "sourceRoot": "libs/core/tile",
     "prefix": "fd",
-    "targets": {},
-    "tags": ["type:lib", "scope:fd"]
+    "tags": ["type:lib", "scope:fd"],
+    "// targets": "to see all targets run: nx show project core-tile --web",
+    "targets": {}
 }

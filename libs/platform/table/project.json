@@ -4,7 +4,8 @@
     "projectType": "library",
     "sourceRoot": "libs/platform/table",
     "prefix": "fdp",
-    "targets": {},
     "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": ["platform-table-helpers"]
+    "implicitDependencies": ["platform-table-helpers"],
+    "// targets": "to see all targets run: nx show project platform-table --web",
+    "targets": {}
 }

@@ -4,6 +4,7 @@
     "projectType": "library",
     "sourceRoot": "libs/cx/side-navigation",
     "prefix": "cx",
-    "targets": {},
-    "tags": ["type:lib", "scope:cx"]
+    "tags": ["type:lib", "scope:cx"],
+    "// targets": "to see all targets run: nx show project cx-side-navigation --web",
+    "targets": {}
 }

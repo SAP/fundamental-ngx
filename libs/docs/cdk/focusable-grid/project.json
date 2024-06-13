@@ -4,6 +4,7 @@
     "sourceRoot": "libs/docs/fn/focusable-grid",
     "projectType": "library",
     "prefix": "fdp-doc",
+    "tags": ["type:lib", "scope:docs"],
     "targets": {
         "e2e-noop": {
             "executor": "@fundamental-ngx/nx-plugin:e2e-test",
@@ -14,6 +15,5 @@
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-fn-focusable-grid"]
         }
-    },
-    "tags": ["type:lib", "scope:docs"]
+    }
 }

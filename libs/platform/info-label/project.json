@@ -4,6 +4,7 @@
     "projectType": "library",
     "sourceRoot": "libs/platform/info-label",
     "prefix": "fdp",
-    "targets": {},
-    "tags": ["type:lib", "scope:fdp"]
+    "tags": ["type:lib", "scope:fdp"],
+    "// targets": "to see all targets run: nx show project platform-info-label --web",
+    "targets": {}
 }

@@ -3,6 +3,7 @@
     "$schema": "../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "e2e",
     "projectType": "application",
+    "tags": ["type:e2e", "scope:components-e2e"],
     "targets": {
         "e2e-test-local": {
             "executor": "nx:run-commands",
@@ -13,6 +14,5 @@
         "lint": {
             "executor": "@nx/eslint:lint"
         }
-    },
-    "tags": ["type:e2e", "scope:components-e2e"]
+    }
 }

@@ -4,6 +4,7 @@
     "projectType": "library",
     "sourceRoot": "libs/platform/form",
     "prefix": "fdp",
-    "targets": {},
-    "tags": ["type:lib", "scope:fdp"]
+    "tags": ["type:lib", "scope:fdp"],
+    "// targets": "to see all targets run: nx show project platform-form --web",
+    "targets": {}
 }

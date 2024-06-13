@@ -4,6 +4,7 @@
     "sourceRoot": "libs/docs/core/inline-help",
     "projectType": "library",
     "prefix": "fundamental-ngx",
+    "tags": ["type:lib", "scope:docs"],
     "targets": {
         "e2e": {
             "executor": "@fundamental-ngx/nx-plugin:e2e-test",
@@ -13,6 +14,5 @@
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-inline-help"]
         }
-    },
-    "tags": ["type:lib", "scope:docs"]
+    }
 }
