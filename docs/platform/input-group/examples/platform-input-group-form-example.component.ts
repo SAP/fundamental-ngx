@@ -5,7 +5,7 @@ import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { FdpFormGroupModule, PlatformInputGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
-    selector: 'fdp-input-group-form-example',
+    selector: 'fdp-platform-input-group-form-example',
     templateUrl: './platform-input-group-form-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

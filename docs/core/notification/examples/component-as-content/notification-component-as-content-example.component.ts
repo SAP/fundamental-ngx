@@ -11,7 +11,8 @@ import { NotificationExampleContentComponent } from './notification-content.comp
         <span [style.margin-left.px]="24">{{ closeReason }}</span>
     `,
     standalone: true,
-    imports: [ButtonComponent]
+    imports: [ButtonComponent],
+    providers: [NotificationService]
 })
 export class NotificationComponentAsContentExampleComponent {
     public closeReason: string;

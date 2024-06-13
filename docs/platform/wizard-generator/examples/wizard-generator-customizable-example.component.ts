@@ -40,7 +40,8 @@ import {
         BarModule,
         InitialFocusDirective,
         JsonPipe
-    ]
+    ],
+    providers: [WizardDialogGeneratorService]
 })
 export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
     @ViewChild('goNextTemplate') goNextTemplate: TemplateRef<any>;

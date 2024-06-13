@@ -1,6 +1,8 @@
-<fd-card>
+<fd-card badge="badge" badgeIcon="example" [badgeColor]="2">
     <fd-card-header>
-        <h2 fd-card-title>Card Title</h2>
+        <fd-card-main-header>
+            <h2 fd-card-title>Card Title</h2>
+        </fd-card-main-header>
     </fd-card-header>
     <fd-card-content>
         <ul fd-list [noBorder]="true">
@@ -18,7 +20,12 @@
 <br />
 
 <h3>Card header can be at the bottom as well</h3>
-<fd-card class="fd-docs-example-card-fix-width">
+<fd-card
+    badgeIcon="example"
+    badge="badge with a very long text that should truncate on the first line"
+    badgeStatus="positive"
+    style="width: 18.5rem"
+>
     <fd-card-content>
         <img
             width="100%"
@@ -30,26 +37,30 @@
         />
     </fd-card-content>
     <fd-card-header>
-        <h2 fd-card-title>Card Title</h2>
+        <fd-card-main-header>
+            <h2 fd-card-title>Card Title</h2>
+        </fd-card-main-header>
     </fd-card-header>
 </fd-card>
 
 <br />
 <br />
 
-<h3>Card header with avatar, subtitle, counter and badge</h3>
-<fd-card badge="New" cardType="list">
+<h3>Card header with avatar, subtitle, counter and multiple badge (max 2)</h3>
+<fd-card badge="Updated" [badgeColor]="4" secondBadgeIcon="pushpin-on" [secondBadgeColor]="4" cardType="list">
     <fd-card-header>
-        <fd-avatar
-            image="https://picsum.photos/id/1018/400"
-            [circle]="true"
-            size="s"
-            ariaLabel="avatar image"
-            title="avatar image"
-        ></fd-avatar>
-        <h2 fd-card-title>Card Title</h2>
-        <h3 fd-card-subtitle>Card Subtitle</h3>
-        <span fd-card-counter status="positive">3 of 10</span>
+        <fd-card-main-header [interactive]="true">
+            <fd-avatar
+                image="https://picsum.photos/id/1018/400"
+                [circle]="true"
+                size="s"
+                ariaLabel="avatar image"
+                title="avatar image"
+            ></fd-avatar>
+            <h2 fd-card-title>Card Title</h2>
+            <h3 fd-card-subtitle>Card Subtitle</h3>
+            <span fd-card-counter status="positive">3 of 10</span>
+        </fd-card-main-header>
     </fd-card-header>
     <fd-card-content>
         <ul fd-list [noBorder]="true">
@@ -69,13 +80,23 @@
     </fd-card-content>
 </fd-card>
 
-<h3>Card header with icon avatar, subtitle, counter and badge</h3>
-<fd-card badge="New" cardType="list">
+<h3>Card header with icon avatar, subtitle, counter, badge, and header action</h3>
+<fd-card badgeIcon="example" [badgeColor]="2" [badgeColorSecondary]="true" badgeAriaLabel="New Card" cardType="list">
     <fd-card-header>
-        <fd-avatar glyph="cart" [circle]="true" size="s" ariaLabel="avatar image" title="avatar image"></fd-avatar>
-        <h2 fd-card-title>Card Title</h2>
-        <h3 fd-card-subtitle>Card Subtitle</h3>
-        <span fd-card-counter status="positive">3 of 10</span>
+        <fd-card-main-header [interactive]="true">
+            <fd-avatar glyph="cart" [circle]="true" size="s" ariaLabel="avatar image" title="avatar image"></fd-avatar>
+            <h2 fd-card-title>Card Title</h2>
+            <h3 fd-card-subtitle>Card Subtitle</h3>
+            <span fd-card-counter status="positive">3 of 10</span>
+            <button
+                fd-button
+                fd-card-header-action
+                fdType="transparent"
+                glyph="overflow"
+                ariaLabel="More"
+                title="More"
+            ></button>
+        </fd-card-main-header>
     </fd-card-header>
     <fd-card-content>
         <ul fd-list [noBorder]="true">
@@ -92,5 +113,335 @@
                 <span fd-list-title> item 4 </span>
             </li>
         </ul>
+    </fd-card-content>
+</fd-card>
+
+<h3>Card with main and extended header</h3>
+<fd-card style="max-width: 30%">
+    <fd-card-header>
+        <fd-card-main-header>
+            <fd-avatar glyph="cart" [circle]="true" size="s" ariaLabel="avatar image" title="avatar image"></fd-avatar>
+            <h2 fd-card-title>Card Title</h2>
+            <h3 fd-card-subtitle>Card Subtitle</h3>
+            <span fd-card-counter status="positive">3 of 10</span>
+            <button
+                fd-button
+                fd-card-header-action
+                fdType="transparent"
+                glyph="overflow"
+                ariaLabel="More"
+                title="More"
+            ></button>
+        </fd-card-main-header>
+        <fd-card-extended-header>
+            <div fd-card-header-column>
+                <div fd-card-header-row>
+                    <span
+                        fd-object-status
+                        status="negative"
+                        glyph="error"
+                        label="Negative"
+                        aria-label="Object status Negative"
+                    ></span>
+                    <span
+                        fd-object-status
+                        status="critical"
+                        glyph="alert"
+                        label="Critical"
+                        aria-label="Object status Critical"
+                    ></span>
+                </div>
+            </div>
+            <div fd-card-header-column [align]="'right'">
+                <div fd-card-header-row>
+                    <fd-text text="Timestamp"></fd-text>
+                </div>
+            </div>
+        </fd-card-extended-header>
+    </fd-card-header>
+    <fd-card-content>
+        <div style="height: 200px"></div>
+    </fd-card-content>
+</fd-card>
+
+<br /><br />
+
+<fd-card style="max-width: 30%">
+    <fd-card-header>
+        <fd-card-main-header>
+            <fd-avatar glyph="cart" [circle]="true" size="s" ariaLabel="avatar image" title="avatar image"></fd-avatar>
+            <h2 fd-card-title>Card Title</h2>
+            <h3 fd-card-subtitle>Card Subtitle</h3>
+            <span fd-card-counter status="positive">3 of 10</span>
+            <button
+                fd-button
+                fd-card-header-action
+                fdType="transparent"
+                glyph="overflow"
+                ariaLabel="More"
+                title="More"
+            ></button>
+        </fd-card-main-header>
+        <fd-card-extended-header [align]="'bottom'">
+            <div fd-card-header-column>
+                <div fd-card-header-row>
+                    <span
+                        fd-object-status
+                        status="positive"
+                        glyph="sys-enter-2"
+                        label="Approved"
+                        aria-label="Approved"
+                    ></span>
+                </div>
+                <div fd-card-header-row>
+                    <fd-text text="Travel Request"></fd-text>
+                </div>
+                <div fd-card-header-row>
+                    <fd-text text="SAP Sapphire Barcelona"></fd-text>
+                </div>
+            </div>
+            <div fd-card-header-column [align]="'right'">
+                <div fd-card-header-row>
+                    <fd-text text="Travel ID: 123456"></fd-text>
+                </div>
+                <div fd-card-header-row>
+                    <fd-text text="June 16, 2024"></fd-text>
+                </div>
+            </div>
+        </fd-card-extended-header>
+    </fd-card-header>
+    <fd-card-content>
+        <div style="height: 200px"></div>
+    </fd-card-content>
+</fd-card>
+
+<br /><br />
+
+<fd-card style="max-width: 30%">
+    <fd-card-header>
+        <fd-card-main-header>
+            <fd-avatar glyph="cart" [circle]="true" size="s" ariaLabel="avatar image" title="avatar image"></fd-avatar>
+            <h2 fd-card-title>Card Title</h2>
+            <h3 fd-card-subtitle>Card Subtitle</h3>
+            <span fd-card-counter status="positive">3 of 10</span>
+            <button
+                fd-button
+                fd-card-header-action
+                fdType="transparent"
+                glyph="overflow"
+                ariaLabel="More"
+                title="More"
+            ></button>
+        </fd-card-main-header>
+        <fd-card-extended-header>
+            <div fd-card-header-column [align]="'right'">
+                <div fd-card-header-row>
+                    <fd-rating-indicator
+                        ariaLabel="Rating indicator"
+                        [totalRatings]="205"
+                        size="sm"
+                        [value]="0.51"
+                    ></fd-rating-indicator>
+                </div>
+            </div>
+        </fd-card-extended-header>
+    </fd-card-header>
+    <fd-card-content>
+        <div style="height: 200px"></div>
+    </fd-card-content>
+</fd-card>
+
+<br /><br />
+<fd-card style="max-width: 30%">
+    <fd-card-header>
+        <fd-card-main-header>
+            <fd-avatar glyph="cart" [circle]="true" size="s" ariaLabel="avatar image" title="avatar image"></fd-avatar>
+            <h2 fd-card-title>Card Title</h2>
+            <h3 fd-card-subtitle>Card Subtitle</h3>
+            <span fd-card-counter status="positive">3 of 10</span>
+            <button
+                fd-button
+                fd-card-header-action
+                fdType="transparent"
+                glyph="overflow"
+                ariaLabel="More"
+                title="More"
+            ></button>
+        </fd-card-main-header>
+        <fd-card-extended-header>
+            <div fd-card-header-column>
+                <div fd-card-header-row>
+                    <span fd-object-status status="negative" glyph="error" label="Overdue" aria-label="Overdue"></span>
+                </div>
+                <div fd-card-header-row>
+                    <fd-text text="Invoice ID 987654321"></fd-text>
+                </div>
+                <div fd-card-header-row>
+                    <fd-text text="EUR 10,000.00, due 26/06/2024"></fd-text>
+                </div>
+            </div>
+        </fd-card-extended-header>
+    </fd-card-header>
+    <fd-card-content>
+        <div style="height: 200px"></div>
+    </fd-card-content>
+</fd-card>
+
+<br /><br />
+
+<fd-card style="max-width: 30%">
+    <fd-card-header>
+        <fd-card-main-header>
+            <fd-avatar glyph="travel-expense" size="s" ariaLabel="avatar image" title="avatar image"></fd-avatar>
+            <h2 fd-card-title>Travel Request</h2>
+            <h3 fd-card-subtitle>Marie Johnson</h3>
+            <span fd-card-counter>2 hours ago</span>
+            <button
+                fd-button
+                fd-card-header-action
+                fdType="transparent"
+                glyph="overflow"
+                ariaLabel="More"
+                title="More"
+            ></button>
+        </fd-card-main-header>
+        <fd-card-extended-header [align]="'bottom'">
+            <div fd-card-header-column>
+                <div fd-card-header-row>
+                    <fd-text text="Las Vegas, TechEd"></fd-text>
+                </div>
+                <div fd-card-header-row>
+                    <fd-text text="May 3rd - 5th 2024"></fd-text>
+                </div>
+            </div>
+            <div fd-card-header-column [align]="'right'">
+                <div fd-card-header-row>
+                    <span style="font-size: 1.4rem">956.00 EUR</span>
+                </div>
+            </div>
+        </fd-card-extended-header>
+    </fd-card-header>
+    <fd-card-footer>
+        <button *fdCardFooterActionItem fd-button fdType="positive">Approve</button>
+        <button *fdCardFooterActionItem fd-button fdType="negative">Reject</button>
+    </fd-card-footer>
+</fd-card>
+
+<br /><br />
+<h3>Card with main and numeric header</h3>
+<fd-card style="max-width: 30%">
+    <fd-card-header>
+        <fd-card-main-header>
+            <fd-avatar glyph="cart" [circle]="true" size="s" ariaLabel="avatar image" title="avatar image"></fd-avatar>
+            <h2 fd-card-title>Card Title</h2>
+            <h3 fd-card-subtitle>Card Subtitle</h3>
+            <span fd-card-counter status="positive">3 of 10</span>
+            <button
+                fd-button
+                fd-card-header-action
+                fdType="transparent"
+                glyph="overflow"
+                ariaLabel="More"
+                title="More"
+            ></button>
+        </fd-card-main-header>
+        <fd-card-numeric-header>
+            <div fd-card-header-row>
+                <fd-card-numeric-container>
+                    <strong fd-card-kpi-value status="positive">42.2</strong>
+                    <span
+                        fd-card-kpi-scale-icon
+                        glyph="up"
+                        fd-object-status
+                        status="positive"
+                        aria-label="up arrow"
+                        title="up arrow"
+                    ></span>
+                    <span fd-card-kpi-scale-text fd-object-status status="positive" label="%"></span>
+                </fd-card-numeric-container>
+                <fd-card-indicator>
+                    <div fd-card-indicator-title>Indicator 1</div>
+                    <div fd-card-indicator-value>500k</div>
+                </fd-card-indicator>
+                <fd-card-indicator>
+                    <div fd-card-indicator-title>Indicator 2</div>
+                    <div fd-card-indicator-value>500k</div>
+                </fd-card-indicator>
+            </div>
+            <div fd-card-header-row>
+                <label fd-form-label>Total value</label>
+            </div>
+        </fd-card-numeric-header>
+    </fd-card-header>
+    <fd-card-content>
+        <div style="height: 200px"></div>
+    </fd-card-content>
+</fd-card>
+
+<br /><br />
+<h3>Card with main, extended and numeric header</h3>
+<fd-card style="max-width: 30%">
+    <fd-card-header>
+        <fd-card-main-header>
+            <fd-avatar glyph="cart" [circle]="true" size="s" ariaLabel="avatar image" title="avatar image"></fd-avatar>
+            <h2 fd-card-title>Card Title</h2>
+            <h3 fd-card-subtitle>Card Subtitle</h3>
+            <span fd-card-counter status="positive">3 of 10</span>
+            <button
+                fd-button
+                fd-card-header-action
+                fdType="transparent"
+                glyph="overflow"
+                ariaLabel="More"
+                title="More"
+            ></button>
+        </fd-card-main-header>
+        <fd-card-extended-header>
+            <div fd-card-header-column>
+                <div fd-card-header-row>
+                    <span
+                        fd-object-status
+                        status="negative"
+                        glyph="error"
+                        label="Negative"
+                        aria-label="Object status Negative"
+                    ></span>
+                    <span
+                        fd-object-status
+                        status="critical"
+                        glyph="alert"
+                        label="Critical"
+                        aria-label="Object status Critical"
+                    ></span>
+                </div>
+            </div>
+            <div fd-card-header-column [align]="'right'">
+                <div fd-card-header-row>
+                    <fd-text text="Timestamp"></fd-text>
+                </div>
+            </div>
+        </fd-card-extended-header>
+        <fd-card-numeric-header>
+            <div fd-card-header-row>
+                <fd-card-numeric-container>
+                    <strong fd-card-kpi-value>65.5</strong>
+                    <span fd-card-kpi-scale-text fd-object-status label="MM"></span>
+                </fd-card-numeric-container>
+                <fd-card-indicator>
+                    <div fd-card-indicator-title>Indicator 1</div>
+                    <div fd-card-indicator-value>500k</div>
+                </fd-card-indicator>
+                <fd-card-indicator>
+                    <div fd-card-indicator-title>Indicator 2</div>
+                    <div fd-card-indicator-value>500k</div>
+                </fd-card-indicator>
+            </div>
+            <div fd-card-header-row>
+                <label fd-form-label>Total Value</label>
+            </div>
+        </fd-card-numeric-header>
+    </fd-card-header>
+    <fd-card-content>
+        <div style="height: 200px"></div>
     </fd-card-content>
 </fd-card>

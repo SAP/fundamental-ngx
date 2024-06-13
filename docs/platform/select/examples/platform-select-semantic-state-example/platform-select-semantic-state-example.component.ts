@@ -17,7 +17,7 @@ export class Fruit {
 }
 
 @Component({
-    selector: 'fdp-select-semantic-state-example',
+    selector: 'fdp-platform-select-semantic-state-example',
     templateUrl: './platform-select-semantic-state-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

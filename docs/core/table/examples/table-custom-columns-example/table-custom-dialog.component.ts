@@ -1,7 +1,7 @@
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CdkScrollable } from '@angular/cdk/overlay';
 
-import { Component } from '@angular/core';
+import { Component, Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
@@ -14,8 +14,25 @@ import { ListModule } from '@fundamental-ngx/core/list';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { FilterPipe } from '@fundamental-ngx/docs/shared';
 import { DisplayedColumn } from './table-custom-columns-example.component';
+
+@Pipe({
+    name: 'filter',
+    standalone: true
+})
+export class FilterPipe implements PipeTransform {
+    transform(values: any[] = [], searchTerm: string = '', key: string = ''): any[] {
+        if (!searchTerm) {
+            return values;
+        }
+        if (key) {
+            values = values.filter((item) => item[key].toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()));
+        } else {
+            values = values.filter((item) => item.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()));
+        }
+        return values;
+    }
+}
 
 @Component({
     template: `

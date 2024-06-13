@@ -11,7 +11,12 @@ import {
     FormGeneratorComponent,
     PlatformFormGeneratorModule
 } from '@fundamental-ngx/platform/form';
-import { MessagePopoverComponent, MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
+import {
+    FDP_MESSAGE_POPOVER_CONFIG,
+    FDP_MESSAGE_POPOVER_DEFAULT_CONFIG,
+    MessagePopoverComponent,
+    MessagePopoverFormWrapperComponent
+} from '@fundamental-ngx/platform/message-popover';
 
 export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
     new Promise<boolean>((resolve) => {
@@ -21,14 +26,18 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
     });
 
 @Component({
-    selector: 'fdp-message-popover-form-generator-example',
+    selector: 'fdp-form-generator-component-example',
     templateUrl: './form-generator-component-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [
         // Note that this is usually provided in the root of your application.
         // Due to the limit of this example we must provide it on this level.
-        provideDateTimeFormats()
+        provideDateTimeFormats(),
+        {
+            provide: FDP_MESSAGE_POPOVER_CONFIG,
+            useValue: FDP_MESSAGE_POPOVER_DEFAULT_CONFIG
+        }
     ],
     standalone: true,
     imports: [

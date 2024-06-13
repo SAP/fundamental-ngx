@@ -16,7 +16,8 @@ import {
     selector: 'fdp-wizard-generator-visible-summary-branching-example',
     templateUrl: './wizard-generator-visible-summary-branching-example.component.html',
     standalone: true,
-    imports: [PlatformButtonModule, JsonPipe]
+    imports: [PlatformButtonModule, JsonPipe],
+    providers: [WizardDialogGeneratorService]
 })
 export class WizardGeneratorVisibleSummaryBranchingExampleComponent implements OnDestroy {
     wizardTitle: WizardTitle = {

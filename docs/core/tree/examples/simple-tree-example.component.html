@@ -43,3 +43,50 @@
         <span fdTreeItemText>{{ item.data.title }}</span>
     </fd-tree-item>
 </fd-tree>
+<h3>Customization:</h3>
+<fd-tree [style.max-width.px]="500">
+    <fd-tree-item>
+        <fd-icon fdTreeItemIcon glyph="account"></fd-icon>
+        <span fdTreeItemText>Item 1 (Level 1)</span>
+    </fd-tree-item>
+    <fd-tree-item [wrapContent]="true">
+        <fd-icon fdTreeItemIcon glyph="e-care"></fd-icon>
+        <span fdTreeItemText>Item 2 with some long description that should split into multiple lines (Level 1)</span>
+        <fd-tree-item>
+            <span fdTreeItemText>Item 1 (Level 2)</span>
+            <fd-tree-item>
+                <span fdTreeItemText>Item 1 (Level 3)</span>
+                <fd-tree-item>
+                    <span fdTreeItemText>Item 1 (Level 4)</span>
+                    <fd-tree-item>
+                        <span fdTreeItemText>Item 1 (Level 5)</span>
+                    </fd-tree-item>
+                </fd-tree-item>
+            </fd-tree-item>
+        </fd-tree-item>
+        <fd-tree-item>
+            <span fdTreeItemText>Item 2 (Level 2)</span>
+        </fd-tree-item>
+    </fd-tree-item>
+    <fd-tree-item backgroundColor="var(--sapActiveColor)" [wrapContent]="true">
+        <div fdTreeItemText style="display: flex; align-items: center; gap: 1rem; padding-block: 1rem">
+            <fd-avatar [colorAccent]="1" [circle]="true" size="s" glyph="product"></fd-avatar>
+            <span
+                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias eum iste perspiciatis reprehenderit!
+                Tempora provident excepturi officiis iste! Iusto architecto libero adipisci cum quaerat sed velit,
+                voluptatibus a et recusandae.</span
+            >
+        </div>
+    </fd-tree-item>
+    <fd-tree-item [customStyles]="{ background: '#D1EFFF', paddingBlock: '1rem' }">
+        <div fdTreeItemText style="display: flex; align-items: center; gap: 1rem">
+            <fd-avatar size="s" [colorAccent]="9" glyph="product"></fd-avatar>
+            <span style="flex: 1">Product name catalog</span>
+            <button fd-button fdType="transparent" glyph="overflow" ariaLabel="more" title="more"></button>
+        </div>
+    </fd-tree-item>
+    <fd-tree-item customClass="my-custom-class">
+        <fd-icon fdTreeItemIcon glyph="phone"></fd-icon>
+        <span fdTreeItemText>Item 5 (Level 1)</span>
+    </fd-tree-item>
+</fd-tree>

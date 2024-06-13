@@ -1,8 +1,33 @@
 import { Component } from '@angular/core';
 import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
-import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
+import { ObjectStatus, ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { ObjectListItemModule, PlatformListModule } from '@fundamental-ngx/platform/list';
-import { Product } from './platform-object-list-item-with-row-selection-example.component';
+
+export interface Product {
+    title: string;
+    introductionText: string;
+    currency: string;
+    amount: number;
+    image: string;
+    gylp1: string;
+    gylp2: string;
+    attribute1: string;
+    attribute2: string;
+    attribute3: string;
+    status1?: ObjectStatus;
+    statusgyph1: string;
+    statuslabel1: string;
+    inverted1: boolean;
+    status2?: ObjectStatus;
+    statusgyph2: string;
+    statuslabel2: string;
+    inverted2: boolean;
+    decimal: number;
+    tip1: string;
+    tip2: string;
+    link?: string;
+}
+
 @Component({
     selector: 'fdp-platform-object-list-item-border-less-example',
     templateUrl: './platform-object-list-item-border-less-example.component.html',

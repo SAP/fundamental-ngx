@@ -1,4 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+    ButtonComponent,
+    FormModule,
+    ObjectStatusComponent,
+    RatingIndicatorComponent,
+    TextComponent
+} from '@fundamental-ngx/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { ListModule } from '@fundamental-ngx/core/list';
@@ -9,6 +16,15 @@ import { ListModule } from '@fundamental-ngx/core/list';
     styleUrls: ['./card-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [CardModule, ListModule, AvatarComponent]
+    imports: [
+        CardModule,
+        ListModule,
+        FormModule,
+        AvatarComponent,
+        ButtonComponent,
+        TextComponent,
+        ObjectStatusComponent,
+        RatingIndicatorComponent
+    ]
 })
 export class CardExampleComponent {}

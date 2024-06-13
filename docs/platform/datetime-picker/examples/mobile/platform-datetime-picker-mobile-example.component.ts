@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PlatformDatetimePickerComponent } from '@fundamental-ngx/platform/form';
 
@@ -8,7 +9,7 @@ import { PlatformDatetimePickerComponent } from '@fundamental-ngx/platform/form'
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [PlatformDatetimePickerComponent]
+    imports: [PlatformDatetimePickerComponent, FdDatetimeModule]
 })
 export class PlatformDatetimePickerMobileExampleComponent {
     mobileLandscapeConfig: MobileModeConfig = {

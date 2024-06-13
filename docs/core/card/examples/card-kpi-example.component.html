@@ -1,26 +1,27 @@
 <fd-card cardType="analytical" [isLoading]="isLoading" class="fd-docs-example-analytical-card">
     <fd-card-header>
-        <h2 fd-card-title>Failure Breakdown</h2>
+        <fd-card-main-header>
+            <h2 fd-card-title>Failure Breakdown</h2>
+            <fd-card-kpi-header>
+                <strong fd-card-kpi-value status="positive">42.2</strong>
+                <span
+                    fd-card-kpi-scale-icon
+                    glyph="up"
+                    fd-object-status
+                    status="positive"
+                    aria-label="up arrow"
+                    title="up arrow"
+                ></span>
+                <span fd-card-kpi-scale-text fd-object-status status="positive" label="%"></span>
 
-        <fd-card-kpi-header>
-            <strong fd-card-kpi-value status="positive">42.2</strong>
-            <span
-                fd-card-kpi-scale-icon
-                glyph="up"
-                fd-object-status
-                status="positive"
-                aria-label="up arrow"
-                title="up arrow"
-            ></span>
-            <span fd-card-kpi-scale-text fd-object-status status="positive" label="%"></span>
+                <div fd-card-kpi-analytics>
+                    <label fd-card-kpi-analytics-label>Deviation</label>
+                    <span fd-card-kpi-analytics-content>7.52%</span>
+                </div>
+            </fd-card-kpi-header>
 
-            <div fd-card-kpi-analytics>
-                <label fd-card-kpi-analytics-label>Deviation</label>
-                <span fd-card-kpi-analytics-content>7.52%</span>
-            </div>
-        </fd-card-kpi-header>
-
-        <h4 fd-card-second-subtitle>Q1, 2019</h4>
+            <h4 fd-card-second-subtitle>Q1, 2019</h4>
+        </fd-card-main-header>
     </fd-card-header>
     <fd-card-content tabindex="0">
         <div #chart class="fd-docs-example-chart-container"></div>

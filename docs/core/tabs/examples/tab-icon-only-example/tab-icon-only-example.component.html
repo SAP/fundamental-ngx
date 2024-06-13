@@ -1,24 +1,10 @@
-<label fd-form-label>Icon Only Tabs Built by passing parameters</label>
+<h3 fd-title>Icon-Only Tabs Built by passing parameters</h3>
 <fd-tab-list mode="icon-only">
-    <fd-tab glyph="menu" count="40"> Content for tab 1 </fd-tab>
+    <fd-tab glyph="menu" count="40"><fd-text text="Content for tab 1"></fd-text></fd-tab>
     <fd-tab glyph="cart" count="17"> Content for tab 2 </fd-tab>
     <fd-tab glyph="edit" count="12"> Content for tab 3 </fd-tab>
 </fd-tab-list>
-
-<br />
-<br />
-
-<label fd-form-label>Compact Icon Only Tabs Built by passing parameters</label>
-<fd-tab-list mode="icon-only" fdCompact>
-    <fd-tab glyph="menu" count="40"> Content for tab 1 </fd-tab>
-    <fd-tab glyph="cart" count="17"> Content for tab 2 </fd-tab>
-    <fd-tab glyph="edit" count="12"> Content for tab 3 </fd-tab>
-</fd-tab-list>
-
-<br />
-<br />
-
-<label fd-form-label>Icon Only Tabs Built by defining own template</label>
+<h3 fd-title>Icon-Only Tabs Built by defining own template</h3>
 <fd-tab-list mode="icon-only">
     <fd-tab>
         <ng-template fd-tab-title-template>
@@ -26,7 +12,7 @@
                 <p fd-tab-count>11</p>
             </span>
         </ng-template>
-        Content for tab 1
+        <fd-text text="Content for tab 1"></fd-text>
     </fd-tab>
     <fd-tab>
         <ng-template fd-tab-title-template>
@@ -34,7 +20,7 @@
                 <p fd-tab-count>12</p>
             </span>
         </ng-template>
-        Content for tab 2
+        <fd-text text="Content for tab 2"></fd-text>
     </fd-tab>
     <fd-tab>
         <ng-template fd-tab-title-template>
@@ -42,14 +28,10 @@
                 <p fd-tab-count>13</p>
             </span>
         </ng-template>
-        Content for tab 3
+        <fd-text text="Content for tab 3"></fd-text>
     </fd-tab>
 </fd-tab-list>
-
-<br />
-<br />
-
-<label fd-form-label>Icon Only Tabs Built by defining own template with routerLink</label>
+<h3 fd-title>Icon-Only Tabs Built by defining own template with routerLink</h3>
 <nav fd-tab-nav mode="icon-only">
     <div fd-tab-item>
         <a fd-tab-link [active]="rla1.isActive" [routerLink]="'tab1'" routerLinkActive #rla1="routerLinkActive">

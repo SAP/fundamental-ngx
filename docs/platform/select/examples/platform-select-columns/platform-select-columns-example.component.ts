@@ -4,7 +4,7 @@ import { FdpFormGroupModule, FdpSelectionChangeEvent, PlatformSelectModule } fro
 import { OptionItem } from '@fundamental-ngx/platform/shared';
 
 @Component({
-    selector: 'fdp-select-columns-example',
+    selector: 'fdp-platform-select-columns-example',
     templateUrl: './platform-select-columns-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

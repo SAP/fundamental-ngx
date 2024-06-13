@@ -15,6 +15,8 @@ import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/for
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformInputModule } from '@fundamental-ngx/platform/form';
 import {
+    FDP_MESSAGE_POPOVER_CONFIG,
+    FDP_MESSAGE_POPOVER_DEFAULT_CONFIG,
     MessagePopoverComponent,
     MessagePopoverFormItemDirective,
     MessagePopoverFormWrapperComponent
@@ -38,6 +40,12 @@ import { Observable, delay, of } from 'rxjs';
         MessagePopoverComponent,
         PlatformButtonModule,
         ReactiveFormsModule
+    ],
+    providers: [
+        {
+            provide: FDP_MESSAGE_POPOVER_CONFIG,
+            useValue: FDP_MESSAGE_POPOVER_DEFAULT_CONFIG
+        }
     ]
 })
 export class MessagePopoverDefaultExampleComponent {

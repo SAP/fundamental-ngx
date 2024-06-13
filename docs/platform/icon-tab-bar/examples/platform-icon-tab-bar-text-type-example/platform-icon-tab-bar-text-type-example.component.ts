@@ -4,7 +4,7 @@ import { cloneDeep } from 'lodash-es';
 import { longTextTypeConfig, textTypeConfig } from '../config-for-examples/text-type.config';
 
 @Component({
-    selector: 'fd-icon-tab-bar-text-type-example',
+    selector: 'fdp-platform-icon-tab-bar-text-type-example',
     templateUrl: './platform-icon-tab-bar-text-type-example.component.html',
     standalone: true,
     imports: [IconTabBarComponent]

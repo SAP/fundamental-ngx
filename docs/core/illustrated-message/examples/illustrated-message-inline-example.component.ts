@@ -1,18 +1,28 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, WritableSignal, signal } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AfterViewInit, ChangeDetectionStrategy, Component, WritableSignal, inject, signal } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IllustratedMessageModule, SvgConfig } from '@fundamental-ngx/core/illustrated-message';
-import { getAsset } from '@fundamental-ngx/docs/shared';
-import { zip } from 'rxjs';
+import { Observable, map, zip } from 'rxjs';
 
 const sceneSvg = 'assets/images/sapIllus-Scene-NoMail.svg';
 const dialogSvg = 'assets/images/sapIllus-Dialog-NoMail.svg';
+
+const getAsset = (path: string): Observable<string> =>
+    inject(HttpClient)
+        .get(path, {
+            responseType: 'text',
+            headers: {
+                accept: 'text/html'
+            }
+        })
+        .pipe(map((r) => r.trim()));
 
 @Component({
     selector: 'fd-illustrated-message-inline-example',
     templateUrl: './illustrated-message-inline-example.component.html',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [IllustratedMessageModule, ButtonComponent]
+    imports: [IllustratedMessageModule, ButtonComponent, HttpClientModule]
 })
 export class IllustratedMessageInlineExampleComponent implements AfterViewInit {
     sceneConfig: WritableSignal<SvgConfig> = signal({});

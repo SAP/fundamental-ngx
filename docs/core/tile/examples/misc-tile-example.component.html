@@ -1,0 +1,123 @@
+<div class="fddoc-container">
+    <div>
+        <h3 fd-title>Action Tile</h3>
+        <fd-tile [clickable]="true" (tileClick)="onTileClick()">
+            <div fd-tile-header></div>
+            <div fd-tile-content>I'm clickable, look for the event in the console</div>
+            <div fd-tile-footer></div>
+        </fd-tile>
+    </div>
+    <div>
+        <h3 fd-title>Launch Tile</h3>
+        <fd-tile type="launch" [action]="true">
+            <button fd-button fd-tile-action-close fdType="transparent" (click)="onTileClick()" title="close"></button>
+            <button
+                fd-button
+                fd-tile-action-indicator
+                fdType="transparent"
+                (click)="onTileClick()"
+                title="more"
+            ></button>
+            <div fd-tile-header>
+                <div fd-tile-title>Launch Tile Title Text</div>
+                <div fd-tile-subtitle>Launch Tile Subtitle</div>
+            </div>
+            <div fd-tile-content>
+                <div fd-numeric-content>
+                    <div fd-numeric-content-launch-icon-container>
+                        <i fd-numeric-content-launch-icon glyph="line-charts" role="presentation"></i>
+                    </div>
+                    <div fd-numeric-content-kpi-container>
+                        <div fd-numeric-content-kpi state="positive">1234</div>
+                    </div>
+                </div>
+            </div>
+            <div fd-tile-footer>
+                <span fd-tile-footer-text>Unit, Notification</span>
+            </div>
+        </fd-tile>
+    </div>
+</div>
+<div class="fddoc-container">
+    <div>
+        <h3 fd-title>Feed Tile</h3>
+        <fd-tile [double]="true" type="feed">
+            <div fd-tile-header>
+                <div fd-tile-title>
+                    Feed Tile Title Text sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                </div>
+                <div fd-tile-subtitle>Feed Tile Subtitle Text</div>
+            </div>
+            <div fd-tile-content [twoColumn]="true">
+                <div fd-tile-section>
+                    <div fd-tile-content-text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt magna
+                        aliqua.
+                    </div>
+                    <div fd-tile-content-byline>About 1 minute ago.</div>
+                </div>
+                <div fd-tile-section>
+                    <div fd-numeric-content>
+                        <div fd-numeric-content-kpi-container>
+                            <div fd-numeric-content-kpi>35</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div fd-tile-footer>
+                <div fd-tile-footer-text>Footer</div>
+            </div>
+        </fd-tile>
+    </div>
+    <div>
+        <h3 fd-title>Feed Tile(small)</h3>
+        <fd-tile [double]="true" type="feed" size="s">
+            <div fd-tile-header>
+                <div fd-tile-title>Feed Tile Title Text sed do eiusmod</div>
+                <div fd-tile-subtitle>Feed Tile Subtitle Text</div>
+            </div>
+            <div fd-tile-content [twoColumn]="true">
+                <div fd-tile-section>
+                    <div fd-tile-content-text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt magna
+                        aliqua.
+                    </div>
+                    <div fd-tile-content-byline>About 1 minute ago.</div>
+                </div>
+                <div fd-tile-section>
+                    <div fd-numeric-content>
+                        <div fd-numeric-content-kpi-container>
+                            <div fd-numeric-content-kpi state="negative">35</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div fd-tile-footer>
+                <div fd-tile-footer-text>Footer</div>
+            </div>
+        </fd-tile>
+    </div>
+</div>
+
+<div class="fddoc-container fd-badge-tile-example">
+    <div>
+        <h3 fd-title>Badge Tile</h3>
+        <fd-tile type="launch">
+            <div class="fd-badge">Badge</div>
+            <div fd-tile-header>
+                <div fd-tile-title>Launch Tile (Profile) Title Text</div>
+                <div fd-tile-subtitle>Launch Title Subtitle</div>
+            </div>
+            <div fd-tile-content>
+                <span
+                    fd-tile-profile-img
+                    backgroundImage="https://picsum.photos/id/1039/60/60"
+                    aria-label="Profile Image"
+                ></span>
+            </div>
+            <div fd-tile-footer>
+                <span fd-tile-footer-text>Footer Text</span>
+            </div>
+        </fd-tile>
+    </div>
+</div>

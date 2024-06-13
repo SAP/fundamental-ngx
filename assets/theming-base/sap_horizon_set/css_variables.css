@@ -1,0 +1,4 @@
+@import url("../sap_horizon/css_variables.css") only screen and (prefers-color-scheme: light) and (prefers-contrast: no-preference), screen and (prefers-color-scheme: light) and (prefers-contrast: less);
+@import url("../sap_horizon_dark/css_variables.css") only screen and (prefers-color-scheme: dark) and (prefers-contrast: no-preference), screen and (prefers-color-scheme: dark) and (prefers-contrast: less);
+@import url("../sap_horizon_hcw/css_variables.css") only screen and (prefers-color-scheme: light) and (prefers-contrast: custom), screen and (prefers-color-scheme: light) and (prefers-contrast: more);
+@import url("../sap_horizon_hcb/css_variables.css") only screen and (prefers-color-scheme: dark) and (prefers-contrast: custom), screen and (prefers-color-scheme: dark) and (prefers-contrast: more);

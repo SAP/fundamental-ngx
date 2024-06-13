@@ -16,7 +16,7 @@ export class Fruit {
 }
 
 @Component({
-    selector: 'fdp-select-mode-example',
+    selector: 'fdp-platform-select-mode-example',
     templateUrl: './platform-select-mode-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
@@ -38,15 +38,10 @@ export class PlatformSelectModeExampleComponent {
     }));
 
     selectedValue1 = null;
-    selectedValue2 = null;
     selectedValue3 = this.option[4].label;
     selectedValue4 = this.option[3].label;
 
     onSelect1(item: FdpSelectionChangeEvent): void {
         this.selectedValue1 = item.payload;
-    }
-
-    onSelect2(item: FdpSelectionChangeEvent): void {
-        this.selectedValue2 = item.payload;
     }
 }

@@ -1,12 +1,12 @@
 /**
 * Copyright (c) 2012-2024 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
-* Theming Engine 9.3.0
-* data:{"Path": "Base.baseLib.sap_belize_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3","HighContrast"], "FallbackThemeId": "sap_belize", "Engine": {"Name": "theming-engine", "Version": "9.3.0"}, "Version": { "Build": "11.13.0.20240308101608", "Source": "11.13.0"}}
+* Theming Engine 11.15.0
+* data:{"Path": "Base.baseLib.sap_belize_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3","HighContrast"], "FallbackThemeId": "sap_belize", "Engine": {"Name": "theming-engine", "Version": "11.15.0"}, "Version": { "Build": "11.15.0.20240503090154", "Source": "11.15.0"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_belize_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3","HighContrast"], "FallbackThemeId": "sap_belize", "Engine": {"Name": "theming-engine", "Version": "9.3.0"}, "Version": { "Build": "11.13.0.20240308101608", "Source": "11.13.0"}}');}
-:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_belize_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3","HighContrast"], "FallbackThemeId": "sap_belize", "Engine": {"Name": "theming-engine", "Version": "9.3.0"}, "Version": { "Build": "11.13.0.20240308101608", "Source": "11.13.0"}};}
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_belize_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3","HighContrast"], "FallbackThemeId": "sap_belize", "Engine": {"Name": "theming-engine", "Version": "11.15.0"}, "Version": { "Build": "11.15.0.20240503090154", "Source": "11.15.0"}}');}
+:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_belize_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3","HighContrast"], "FallbackThemeId": "sap_belize", "Engine": {"Name": "theming-engine", "Version": "11.15.0"}, "Version": { "Build": "11.15.0.20240503090154", "Source": "11.15.0"}};}
 :root {
   --sapBrandColor: #795100;
   --sapHighlightColor: #795100;

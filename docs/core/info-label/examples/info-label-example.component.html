@@ -1,0 +1,28 @@
+<div class="fddoc-flex">
+    <div class="fddoc-flex__item">
+        @for (color of infoLabelColors; track color) {
+            <div>
+                <fd-info-label label="Info Label" [color]="color" title="Info Label"></fd-info-label>
+            </div>
+        }
+    </div>
+    <div class="fddoc-flex__item">
+        @for (item of infoLabelColors; track item) {
+            <div>
+                <fd-info-label
+                    type="icon"
+                    glyph="component"
+                    font="BusinessSuiteInAppSymbols"
+                    label="Info label"
+                    [color]="item"
+                    title="Info Label with Icon"
+                ></fd-info-label>
+            </div>
+        }
+    </div>
+    <div class="fddoc-flex__item">
+        <div><fd-info-label type="numeric" color="1" label="6" title="Numeric Label 6"></fd-info-label></div>
+        <div><fd-info-label type="numeric" color="2" label="42k" title="Numeric Label 42k"></fd-info-label></div>
+        <div><fd-info-label type="numeric" color="3" label="14.7" title="Numeric Label 14.7"></fd-info-label></div>
+    </div>
+</div>

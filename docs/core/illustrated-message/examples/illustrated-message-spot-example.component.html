@@ -1,7 +1,9 @@
 <div [style.max-width.px]="400">
     <fd-card aria-labelledby="spot-label" aria-describedby="spot-description" role="group">
-        <fd-card-header [interactive]="false">
-            <h2 fd-card-title id="spot-label">Inbox</h2>
+        <fd-card-header>
+            <fd-card-main-header>
+                <h2 fd-card-title id="spot-label">Inbox</h2>
+            </fd-card-main-header>
         </fd-card-header>
         <fd-card-content>
             <figure fd-illustrated-message type="spot" [svgConfig]="spotConfig">

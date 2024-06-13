@@ -4,7 +4,7 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
 @Component({
     selector: 'fd-icon-tnt-example',
     templateUrl: './icon-tnt-example.component.html',
-    styleUrls: ['icon-example.component.scss'],
+    styleUrls: ['icon-tnt-example.component.scss'],
     standalone: true,
     imports: [IconComponent]
 })
@@ -183,6 +183,9 @@ export class IconTNTExampleComponent {
         'task-done',
         'ai-1',
         'ai-2',
-        'bound-validation-rule'
+        'bound-validation-rule',
+        'business-application-studio',
+        'clone-from-gi',
+        'business-accelerator'
     ];
 }

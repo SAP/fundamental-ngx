@@ -16,7 +16,7 @@ export class Fruit {
     }
 }
 @Component({
-    selector: 'fdp-select-mobile-example',
+    selector: 'fdp-platform-select-mobile-example',
     templateUrl: './platform-select-mobile-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,

@@ -6,7 +6,7 @@ import { FdpFormGroupModule, FdpSelectionChangeEvent, PlatformSelectModule } fro
 import { OptionItem } from '@fundamental-ngx/platform/shared';
 
 @Component({
-    selector: 'fdp-select-forms',
+    selector: 'fdp-platform-select-forms',
     templateUrl: './platform-select-forms.component.html',
     styleUrls: ['platform-select-forms.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,

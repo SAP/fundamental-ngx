@@ -1,7 +1,9 @@
 <div [style.max-width.px]="205">
     <fd-card aria-labelledby="dot-label" aria-describedby="dot-description" role="group">
-        <fd-card-header [interactive]="false">
-            <h2 fd-card-title id="dot-label">Inbox</h2>
+        <fd-card-header>
+            <fd-card-main-header>
+                <h2 fd-card-title id="dot-label">Inbox</h2>
+            </fd-card-main-header>
         </fd-card-header>
         <fd-card-content>
             <figure fd-illustrated-message type="dot" [svgConfig]="spotConfig">
