@@ -6,6 +6,7 @@ import {
     ElementRef,
     EventEmitter,
     inject,
+    input,
     Input,
     isDevMode,
     NgZone,
@@ -54,13 +55,6 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     isRtl: boolean;
 
     /**
-     * @description Associations for colors of the tabs.
-     * If any of the color associations provided, they'll be read by screenreader instead of the actual color
-     */
-    @Input()
-    colorAssociations: TabColorAssociations;
-
-    /**
      * @description densityMode setter triggers tabs to re-calculation overflowed tabs
      */
     @Input()
@@ -104,6 +98,12 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
 
     /** @hidden */
     _extraItems$ = signal(false);
+
+    /**
+     * @description Associations for colors of the tabs.
+     * If any of the color associations provided, they'll be read by screenreader instead of the actual color
+     */
+    colorAssociations = input<TabColorAssociations | undefined>();
 
     /** @hidden */
     readonly _inDynamicPage = !!inject(FD_DYNAMIC_PAGE, { optional: true });
@@ -323,13 +323,21 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @description initialize state of tabs
      */
     protected _initTabs(): void {
+        this._lastVisibleTabIndex = this.tabs.length - 1;
+
+        if (this.selectedUid) {
+            return;
+        }
+
         const selectedItem = this._findActiveTabId(this.tabs) || this.tabs[0];
         this.selectedUid = selectedItem?.uId;
-        this._lastVisibleTabIndex = this.tabs.length - 1;
-        if (selectedItem) {
-            this.selectedUidChange.emit(this.selectedUid);
-            this.selected.emit(selectedItem);
+
+        if (!selectedItem) {
+            return;
         }
+
+        this.selectedUidChange.emit(this.selectedUid);
+        this.selected.emit(selectedItem);
     }
 
     private _findActiveTabId(tabs: IconTabBarItem[]): IconTabBarItem | undefined {

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.110](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.109...v0.50.0-rc.110) (2024-06-12)
+
+
+### Bug Fixes
+
+* **platform:** converted inputs, queries etc. into the signals to handle reactivity ([#11984](https://github.com/SAP/fundamental-ngx/issues/11984)) ([99bfed4](https://github.com/SAP/fundamental-ngx/commit/99bfed4ce8b1655205b25f567ab43d5887ad766f))
+
+
+
+
+
 # [0.50.0-rc.109](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.108...v0.50.0-rc.109) (2024-06-12)
 
 
