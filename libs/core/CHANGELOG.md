@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.50.0-rc.111](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.110...v0.50.0-rc.111) (2024-06-13)
+
+
+### Bug Fixes
+
+* **core:** add second badge to Card, styling fixes and empty card example ([#11998](https://github.com/SAP/fundamental-ngx/issues/11998)) ([8944787](https://github.com/SAP/fundamental-ngx/commit/8944787eb323c6b9282ec628947950535b9bb12f))
+
+
+
+
+
 # [0.50.0-rc.110](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.109...v0.50.0-rc.110) (2024-06-12)
 
 **Note:** Version bump only for package @fundamental-ngx/core
