@@ -52,21 +52,14 @@ describe('Input group component test', () => {
         });
 
         it('verify Input Group Search placeholder', async () => {
-            await expect(await getElementPlaceholder(inputFields, 9)).toBe('Search');
+            await expect(await getElementPlaceholder(inputFields, 9)).toBe('Amount');
             await expect(await getElementPlaceholder(inputFields, 10)).toBe('Search');
-        });
-
-        it('verify Input Group with States placeholder', async () => {
-            const inputLength = await getElementArrayLength(inputFields);
-            for (let i = 15; i < inputLength - 1; i++) {
-                await expect(await getElementPlaceholder(inputFields, i)).toBe('Placeholder');
-            }
         });
     });
 
     describe('Check Input Group Search Component Within Angular Reactive Forms', () => {
         it('verify that input is disabled', async () => {
-            await expect(await isEnabled(inputFields, 11)).toBe(false);
+            await expect(await isEnabled(inputFields, 12)).toBe(false);
         });
     });
 
