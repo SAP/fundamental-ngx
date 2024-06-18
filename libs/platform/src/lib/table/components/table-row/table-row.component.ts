@@ -117,6 +117,10 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     @Input()
     isTreeRow: boolean;
 
+    /** Whether the row is only rendering within viewport */
+    @Input()
+    enhancedRendering: boolean;
+
     /**
      * Event emitted when keyboard drag performed.
      */

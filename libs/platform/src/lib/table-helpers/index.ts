@@ -24,6 +24,7 @@ export * from './services/table-row.service';
 export * from './services/table-column-resize.service';
 export * from './services/table-responsive.service';
 export * from './services/table-scroll-dispatcher.service';
+export * from './services/table-advanced-viewport-root.service';
 
 export * from './pipes';
 

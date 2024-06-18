@@ -8,14 +8,19 @@
     emptyTableMessage="No data found"
     bodyHeight="300px"
     [virtualScroll]="true"
+    [enhancedRendering]="enhancedRendering"
     [pageScrolling]="true"
-    [pageSize]="50"
-    [renderAhead]="50"
+    [pageSize]="20"
+    [renderAhead]="20"
     [pageScrollingThreshold]="80"
     hasChildrenKey="hasChildren"
     [expandOnInit]="true"
 >
-    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false" [hideSearchInput]="true"> </fdp-table-toolbar>
+    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false" [hideSearchInput]="true">
+        <fdp-table-toolbar-actions *ngIf="enhancedRendering">
+            <fdp-button label="Add column" (click)="addColumn()"></fdp-button>
+        </fdp-table-toolbar-actions>
+    </fdp-table-toolbar>
 
     <fdp-column
         name="name"
@@ -51,6 +56,19 @@
         [dataType]="dataTypeEnum.STRING"
     >
     </fdp-column>
+
+    <ng-container *ngIf="enhancedRendering">
+        <fdp-column
+            width="100px"
+            *ngFor="let column of columns; let i = index"
+            [name]="column.key"
+            [label]="column.label"
+        >
+            <fdp-table-cell *fdpCellDef="let node; let idx = rowIndex">
+                Some text here {{ i + 1 }} {{ idx }}</fdp-table-cell
+            >
+        </fdp-column>
+    </ng-container>
 </fdp-table>
 
 <!-- Connect P13 Dialog to the table -->

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewEncapsulation } from '@angular/core';
 import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import {
     ChildTableDataSource,
@@ -27,14 +27,27 @@ import { delay } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdvancedScrollingExampleComponent {
+    @Input() enhancedRendering: boolean = false;
+
     source: TableDataSource<ExampleItem>;
     childSource: ChildTableDataSource<ExampleItem>;
     readonly filterTypeEnum = FilterType;
     readonly dataTypeEnum = FilterableColumnDataType;
+    columns: any[] = [];
 
-    constructor() {
+    constructor(private _cd: ChangeDetectorRef) {
         this.source = new TableDataSource(new TableDataProviderExample());
         this.childSource = new ChildTableDataSource(new ChildTableProviderExample());
+    }
+
+    addColumn(): void {
+        this.columns.push({
+            key: `col_${this.columns.length + 1}`,
+            label: `col_${this.columns.length + 1}`,
+            isDataSource: false
+        });
+
+        this._cd.detectChanges();
     }
 }
 
