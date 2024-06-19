@@ -26,20 +26,15 @@
     >Handling large amount of data and columns</fd-docs-section-title
 >
 <description>
-    <p>One of the scenarios of using Platform Table component, is to render the large amount of items.</p>
-    <p>Storing this amount directly in memory may lead to a browser performance issues.</p>
+    <p>Another scenario of using Platform Table component, is to render the large amount of columns.</p>
+    <p>Virtual scroll and lazy loading only handles vertical scrolling.</p>
     <p>
-        In order to keep the performance on a normal level, Platform Table component supports lazy loading of the items
-        on scroll, and reusing rendered row components for row items.
-    </p>
-    <p>Additionally, Platform Table component supports lazy loading for a child row items.</p>
-    <p>
-        For this, developers need to pass Data source class that retrieves row's children into
-        <code>[childDataSource]</code> input property.
+        In order to keep the performance on a normal level, Platform Table component introduces ways to handle rendering
+        in viewport which reduces DOM elements and improves performance, impacting horizontal scrolling.
     </p>
     <p>
-        <strong>IMPORTANT:</strong> due to complexity of the children lazy loading logic, [childDataSource] can only
-        accept classes derived from <code>TableChildrenDataProvider</code>.
+        For this, developers need to pass boolean into
+        <code>[enhancedRendering]</code> input property.
     </p>
     <p>This example shows combination of virtual scroll and lazy loading for item on each level.</p>
 </description>

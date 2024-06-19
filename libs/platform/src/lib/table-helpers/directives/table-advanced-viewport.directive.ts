@@ -7,9 +7,10 @@ import {
     TemplateRef,
     ViewContainerRef,
     ChangeDetectorRef,
-    inject
+    inject,
+    OnDestroy
 } from '@angular/core';
-import { Observable, debounceTime, take, takeUntil } from 'rxjs';
+import { Observable, take, takeUntil, Subscriber, Subject } from 'rxjs';
 import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { ViewportRootService } from '../services/table-advanced-viewport-root.service';
 
@@ -18,7 +19,7 @@ import { ViewportRootService } from '../services/table-advanced-viewport-root.se
     standalone: true,
     providers: [DestroyedService]
 })
-export class ViewportDirective implements OnInit {
+export class ViewportDirective implements OnInit, OnDestroy {
     /** @hidden */
     @Input()
     tableViewport: TemplateRef<any>;
@@ -28,7 +29,10 @@ export class ViewportDirective implements OnInit {
     viewportFallback: TemplateRef<any>;
 
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyedService);
+    private _destroy$: Subject<void> = new Subject<void>();
+
+    /** @hidden */
+    private currentViewRef: any;
 
     /** @hidden */
     private readonly _viewportRootService = inject(ViewportRootService);
@@ -37,11 +41,8 @@ export class ViewportDirective implements OnInit {
     private currentTemplate: TemplateRef<any>;
     /** @hidden */
     constructor(
-        /** @hidden */
         private el: ElementRef,
-        /** @hidden */
         private renderer: Renderer2,
-        /** @hidden */
         private viewContainer: ViewContainerRef,
         private cdr: ChangeDetectorRef
     ) {}
@@ -63,18 +64,20 @@ export class ViewportDirective implements OnInit {
     checkViewport(): void {
         const options: IntersectionObserverInit = {
             root: this._viewportRootService.getRootNode(),
-            rootMargin: '10px 10px 10px 10px',
+            rootMargin: '50px',
             threshold: 0.0
         };
 
-        const observer = new Observable<boolean>((subscriber) => {
-            const intersectionObserver = new IntersectionObserver((entries) => {
+        const observer = new Observable<boolean>((subscriber: Subscriber<boolean>) => {
+            const intersectionObserver = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
                 const { isIntersecting } = entries[0];
                 subscriber.next(isIntersecting);
             }, options);
 
             intersectionObserver.observe(this.el.nativeElement.parentElement);
-
+            this._destroy$.subscribe(() => {
+                intersectionObserver.disconnect();
+            });
             return {
                 unsubscribe() {
                     intersectionObserver.disconnect();
@@ -82,12 +85,15 @@ export class ViewportDirective implements OnInit {
             };
         });
 
-        observer
-            .pipe(takeUntil(this._destroy$))
-            .pipe(debounceTime(50))
-            .subscribe((inViewPort) => {
-                this.updateView(inViewPort);
-            });
+        observer.pipe(takeUntil(this._destroy$)).subscribe((inViewPort) => {
+            this.updateView(inViewPort);
+        });
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._destroy$.next();
+        this._destroy$.complete();
     }
 
     /** @hidden */
@@ -102,10 +108,16 @@ export class ViewportDirective implements OnInit {
             }
         } else {
             if (inViewPort && this.currentTemplate !== this.tableViewport) {
-                this.viewContainer.clear();
-                this.viewContainer.createEmbeddedView(this.tableViewport);
+                if (this.currentViewRef) {
+                    this.viewContainer.remove(0);
+                    this.viewContainer.insert(this.currentViewRef);
+                } else {
+                    this.viewContainer.clear();
+                    this.viewContainer.createEmbeddedView(this.tableViewport);
+                }
                 this.currentTemplate = this.tableViewport;
             } else if (!inViewPort && this.currentTemplate !== this.viewportFallback) {
+                this.currentViewRef = this.viewContainer.detach(0);
                 this.viewContainer.clear();
                 this.viewContainer.createEmbeddedView(this.viewportFallback);
                 this.currentTemplate = this.viewportFallback;
