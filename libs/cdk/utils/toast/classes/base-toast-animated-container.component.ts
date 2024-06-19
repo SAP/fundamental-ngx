@@ -1,5 +1,5 @@
 import { AnimationEvent } from '@angular/animations';
-import { Directive, HostBinding, HostListener, inject, NgZone, OnDestroy } from '@angular/core';
+import { Directive, HostBinding, HostListener, inject, NgZone, OnDestroy, signal } from '@angular/core';
 import { take } from 'rxjs';
 import { BaseAnimatedToastConfig } from './base-toast-config';
 import { BaseToastContainerComponent } from './base-toast-container.component';
@@ -14,8 +14,9 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
      * The state of the Message Toast animations.
      */
     @HostBinding('@state')
-    private _animationState = 'void';
-
+    private get _animationState(): string {
+        return this._animationStateSignal();
+    }
     /**
      * @hidden
      * Whether the animations should be disabled.
@@ -25,6 +26,9 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
 
     /** @hidden */
     protected _ngZone = inject(NgZone);
+
+    /** @hidden */
+    private _animationStateSignal = signal('void');
 
     /** @hidden */
     constructor(config: P) {
@@ -58,12 +62,12 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseAnimated
 
     /** Begin animation of Message Toast entrance into view. */
     enter(): void {
-        this._animationState = 'visible';
+        this._animationStateSignal.set('visible');
     }
 
     /** Begin animation of Message Toast removal. */
     exit(): void {
-        this._animationState = 'hidden';
+        this._animationStateSignal.set('hidden');
     }
 
     /** @hidden */
