@@ -143,10 +143,10 @@ export class TablePo extends PlatformBaseComponentPo {
         await setValue(selector + this.input, testText);
         await click(selector + this.buttonSearch);
         const rowLength = await getElementArrayLength(selector + this.tableRow);
-        await expect(rowLength).toEqual(1);
+        await expect(rowLength).withContext(1);
         const cellLength = await getElementArrayLength(selector + this.tableRow + this.tableCellText);
         for (let i = 0; i < cellLength - count; i++) {
-            await expect((await getText(selector + this.tableRow + this.tableCellText, i)).trim()).toBe(arr[i]);
+            await expect((await getText(selector + this.tableRow + this.tableCellText, i)).trim()).withContext(arr[i]);
         }
     }
 
@@ -161,7 +161,7 @@ export class TablePo extends PlatformBaseComponentPo {
         await click(selector + 'fd-checkbox');
         const checkboxLength = await getElementArrayLength(selector + this.tableRow);
         for (let i = 0; i < checkboxLength; i++) {
-            await expect(await getAttributeByName(selector + this.tableRow, 'aria-selected', i)).toBe(
+            await expect(await getAttributeByName(selector + this.tableRow, 'aria-selected', i)).withContext(
                 skipFirst && i === 0 ? 'false' : 'true'
             );
         }
