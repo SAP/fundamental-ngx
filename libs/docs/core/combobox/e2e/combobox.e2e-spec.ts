@@ -21,8 +21,6 @@ import {
 import {
     appleTestText,
     bananaTestText,
-    capsSearchTermAppleText,
-    capsSearchTermTomatoText,
     reactiveFormTestText1,
     reactiveFormTestText2,
     searchPineappleText,
@@ -149,29 +147,34 @@ describe('Combobox component test suit', () => {
         it('verify Display Object Property by choose option in dropdown or typing name of it', async () => {
             await scrollIntoView(allInputFields, 10);
             await click(activeInputButton, 7);
+            await acceptAlert();
             await expect(await isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
             await click(dropdownOption);
-            await expect(await getText(smallText_2, 1)).toBe(capsSearchTermAppleText);
+            await expect(await getText(smallText_2)).toBe(searchTermAppleText);
 
             await clearValue(allInputFields, 10);
             await click(allInputFields, 10);
             await sendKeys('To');
             await click(dropdownOption);
-            await expect(await getText(smallText_2, 1)).toBe(capsSearchTermTomatoText);
+            await expect(await getText(smallText_2)).toBe(searchTermAppleText);
         });
     });
 
     describe('Check Open State Control', () => {
         it('verify Open State Control by choose option in dropdown or typing name of it', async () => {
-            await scrollIntoView(allInputFields, 12);
+            await scrollIntoView(allInputFields, 11);
             await click(activeInputButton, 9);
+            await acceptAlert();
             await expect(await isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
             await click(dropdownOption);
-            await expect(await getValue(allInputFields, 13)).toBe(appleTestText);
+            await acceptAlert();
+            await expect(await getValue(allInputFields, 12)).toBe(appleTestText);
             await click(activeInputButton, 9);
-            await setValue(allInputFields, 'Ba', 13);
+            await acceptAlert();
+            await setValue(allInputFields, 'Ba', 12);
             await click(dropdownOption);
-            await expect(await getValue(allInputFields, 13)).toBe(bananaTestText);
+            await acceptAlert();
+            await expect(await getValue(allInputFields, 12)).toBe(bananaTestText);
         });
     });
 
@@ -179,12 +182,16 @@ describe('Combobox component test suit', () => {
         it('verify Observable Async by choose option in dropdown or typing name of it', async () => {
             await scrollIntoView(allInputFields, 12);
             await click(activeInputButton, 9);
+            await acceptAlert();
             await expect(await isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
             await click(dropdownOption);
+            await acceptAlert();
             await expect(await getValue(allInputFields, 12)).toBe(appleTestText);
-
+            await click(activeInputButton, 9);
+            await acceptAlert();
             await setValue(allInputFields, 'Ba', 12);
             await click(dropdownOption);
+            await acceptAlert();
             await expect(await getValue(allInputFields, 12)).toBe(bananaTestText);
         });
     });
@@ -196,13 +203,14 @@ describe('Combobox component test suit', () => {
                 return;
             }
             await scrollIntoView(allInputFields, 13);
-            await click(activeInputButton, 10);
+            await click(activeInputButton, 11);
             await expect(await isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
             await click(dropdownOption);
             await expect(await getText(smallText_2, 2)).toBe(settingsTestText[0]);
             await expect(await getText(smallText_2, 3)).toBe(settingsTestText[1]);
 
-            await setValue(allInputFields, 'Se', 13);
+            await click(activeInputButton, 11);
+            await setValue(allInputFields, 'Se', 14);
             await click(dropdownOption);
             await expect(await getText(smallText_2, 2)).toBe(settingsTestText[2]);
             await expect(await getText(smallText_2, 3)).toBe(settingsTestText[3]);
@@ -211,13 +219,13 @@ describe('Combobox component test suit', () => {
 
     describe('Check Combobox with Two Columns', () => {
         it('verify Combobox with Two Columns by choose option in dropdown or typing name of it', async () => {
-            await scrollIntoView(allInputFields, 13);
-            await click(activeInputButton, 11);
+            await scrollIntoView(allInputFields, 14);
+            await click(activeInputButton, 12);
             await expect(await isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
             await click(dropdownOption);
             await expect(await getText(smallText_2, 4)).toBe(searchTermOneUsdTestText);
-
-            await setValue(allInputFields, 'Ba', 14);
+            await click(activeInputButton, 12);
+            await setValue(allInputFields, 'Ba', 15);
             await click(dropdownOption);
             await expect(await getText(smallText_2, 4)).toBe(searchTermHalfUsdTestText);
         });
@@ -226,13 +234,13 @@ describe('Combobox component test suit', () => {
     describe('Check Combobox with Groups', () => {
         it('verify Combobox with Groups by choose option in dropdown or typing name of it', async () => {
             await scrollIntoView(allInputFields, 15);
-            await click(activeInputButton, 12);
+            await click(activeInputButton, 13);
             await expect(await isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
 
             await click(dropdownOption);
             await expect(await getText(smallText_2, 5)).toBe(searchTermAppleText);
-
-            await setValue(allInputFields, 'Pi', 15);
+            await click(activeInputButton, 13);
+            await setValue(allInputFields, 'Pi', 16);
             await click(dropdownOption);
             await expect(await getText(smallText_2, 5)).toBe(searchPineappleText);
         });
