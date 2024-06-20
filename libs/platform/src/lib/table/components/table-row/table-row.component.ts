@@ -117,6 +117,17 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     @Input()
     isTreeRow: boolean;
 
+    /** Whether the cell is only rendering within viewport */
+    @Input()
+    onlyRenderVisibleCells: boolean;
+
+    /**
+     * Whether to use placeholder [fd-busy-indicator] for cells that are not in the viewport
+     * This option works only when `onlyRenderVisibleCells` is true
+     */
+    @Input()
+    useCellPlaceholder = false;
+
     /**
      * Event emitted when keyboard drag performed.
      */

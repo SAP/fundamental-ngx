@@ -21,3 +21,25 @@
     <fdp-doc-advanced-scrolling-example></fdp-doc-advanced-scrolling-example>
 </component-example>
 <code-example [exampleFiles]="pageScrollingTableFiles"></code-example>
+
+<fd-docs-section-title id="enhanced-page-scrolling" componentName="table"
+    >Handling large amount of data and columns</fd-docs-section-title
+>
+<description>
+    <p>Another scenario of using Platform Table component, is to render the large amount of columns.</p>
+    <p>Virtual scroll and lazy loading only handles vertical scrolling.</p>
+    <p>
+        In order to keep the performance on a normal level, Platform Table component introduces ways to handle rendering
+        in viewport which reduces DOM elements and improves performance, impacting horizontal scrolling.
+    </p>
+    <p>
+        For this, developers need to pass boolean into
+        <code>[onlyRenderVisibleCells]</code> input property. Placeholder [fd-busy-indicator] for cell can be enabled by
+        passing boolean into <code>[useCellPlaceholder]</code> input property
+    </p>
+    <p>This example shows combination of virtual scroll and lazy loading for item on each level.</p>
+</description>
+<component-example>
+    <fdp-doc-advanced-scrolling-example [onlyRenderVisibleCells]="true"></fdp-doc-advanced-scrolling-example>
+</component-example>
+<code-example [exampleFiles]="pageScrollingTableFiles"></code-example>

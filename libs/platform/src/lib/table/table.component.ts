@@ -106,7 +106,8 @@ import {
     TableService,
     TableSortChangeEvent,
     TableState,
-    TableVirtualScroll
+    TableVirtualScroll,
+    ViewportRootService
 } from '@fundamental-ngx/platform/table-helpers';
 import equal from 'fast-deep-equal';
 import { BehaviorSubject, fromEvent, Observable, of, Subject, Subscription } from 'rxjs';
@@ -177,6 +178,7 @@ let tableUniqueId = 0;
         TableScrollDispatcherService,
         TableColumnResizeService,
         TableResponsiveService,
+        ViewportRootService,
         contentDensityObserverProviders({
             supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY, ContentDensityMode.CONDENSED]
         }),
@@ -420,6 +422,23 @@ export class TableComponent<T = any>
     get nonFrozenColumnsMinWidth(): number {
         return this._nonFrozenColumnsMinWidth;
     }
+
+    /**
+     * Whether to render cells within viewport
+     */
+    @Input()
+    onlyRenderVisibleCells = false;
+
+    /**
+     * Whether to use placeholder [fd-busy-indicator] for cells that are not in the viewport
+     * This option works only when `onlyRenderVisibleCells` is true
+     */
+    @Input()
+    useCellPlaceholder = false;
+
+    /**
+     * placeholder for
+     */
 
     /** @hidden */
     private _nonFrozenColumnsMinWidth = 0;
@@ -744,7 +763,8 @@ export class TableComponent<T = any>
         @Optional() private readonly _rtlService: RtlService,
         readonly contentDensityObserver: ContentDensityObserver,
         readonly injector: Injector,
-        private readonly _tabbableService: TabbableElementService
+        private readonly _tabbableService: TabbableElementService,
+        private viewportService: ViewportRootService
     ) {
         super();
         this.initialState?.setTable(this);
@@ -864,6 +884,8 @@ export class TableComponent<T = any>
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this.viewportService.setRootNode(this.tableContainer.nativeElement);
+
         this._viewInitiated = true;
 
         this.initialState?.setInitialState();

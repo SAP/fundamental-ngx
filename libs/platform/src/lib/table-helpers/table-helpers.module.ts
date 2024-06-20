@@ -15,7 +15,8 @@ import {
     TableHeaderResizerDirective,
     TableInitialStateDirective,
     TableScrollableDirective,
-    TableVirtualScrollDirective
+    TableVirtualScrollDirective,
+    FdpRenderVisibleCellDirective
 } from './directives';
 import {
     ColumnResizableSidePipe,
@@ -49,7 +50,8 @@ const importExports = [
     TableCellStylesPipe,
     ColumnResizableSidePipe,
     RowClassesPipe,
-    TableColumnSortingDirectionPipe
+    TableColumnSortingDirectionPipe,
+    FdpRenderVisibleCellDirective
 ];
 
 @NgModule({
