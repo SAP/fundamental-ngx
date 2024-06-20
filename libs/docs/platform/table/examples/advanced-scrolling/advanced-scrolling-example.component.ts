@@ -27,13 +27,14 @@ import { delay } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdvancedScrollingExampleComponent {
-    @Input() enhancedRendering: boolean = false;
+    @Input() onlyRenderVisibleCells: boolean = false;
 
     source: TableDataSource<ExampleItem>;
     childSource: ChildTableDataSource<ExampleItem>;
     readonly filterTypeEnum = FilterType;
     readonly dataTypeEnum = FilterableColumnDataType;
     columns: any[] = [];
+    cellPlaceholder = false;
 
     constructor(private _cd: ChangeDetectorRef) {
         this.source = new TableDataSource(new TableDataProviderExample());
@@ -48,6 +49,10 @@ export class AdvancedScrollingExampleComponent {
         });
 
         this._cd.detectChanges();
+    }
+
+    toggleCellPlaceholder(): void {
+        this.cellPlaceholder = !this.cellPlaceholder;
     }
 }
 

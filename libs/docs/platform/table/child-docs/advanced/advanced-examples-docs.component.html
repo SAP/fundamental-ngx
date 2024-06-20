@@ -34,11 +34,12 @@
     </p>
     <p>
         For this, developers need to pass boolean into
-        <code>[enhancedRendering]</code> input property.
+        <code>[onlyRenderVisibleCells]</code> input property. Placeholder [fd-busy-indicator] for cell can be enabled by
+        passing boolean into <code>[useCellPlaceholder]</code> input property
     </p>
     <p>This example shows combination of virtual scroll and lazy loading for item on each level.</p>
 </description>
 <component-example>
-    <fdp-doc-advanced-scrolling-example [enhancedRendering]="true"></fdp-doc-advanced-scrolling-example>
+    <fdp-doc-advanced-scrolling-example [onlyRenderVisibleCells]="true"></fdp-doc-advanced-scrolling-example>
 </component-example>
 <code-example [exampleFiles]="pageScrollingTableFiles"></code-example>

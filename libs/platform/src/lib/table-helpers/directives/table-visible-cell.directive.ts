@@ -15,11 +15,11 @@ import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { ViewportRootService } from '../services/table-advanced-viewport-root.service';
 
 @Directive({
-    selector: '[fdpTableViewport]',
+    selector: '[fdpOnlyRenderVisibleCell]',
     standalone: true,
     providers: [DestroyedService]
 })
-export class ViewportDirective implements OnInit, OnDestroy {
+export class FdpRenderVisibleCellDirective implements OnInit, OnDestroy {
     /** @hidden */
     @Input()
     tableViewport: TemplateRef<any>;

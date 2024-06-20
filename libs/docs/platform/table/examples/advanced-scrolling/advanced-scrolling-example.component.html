@@ -8,7 +8,8 @@
     emptyTableMessage="No data found"
     bodyHeight="300px"
     [virtualScroll]="true"
-    [enhancedRendering]="enhancedRendering"
+    [onlyRenderVisibleCells]="onlyRenderVisibleCells"
+    [useCellPlaceholder]="cellPlaceholder"
     [pageScrolling]="true"
     [pageSize]="20"
     [renderAhead]="20"
@@ -17,8 +18,9 @@
     [expandOnInit]="true"
 >
     <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false" [hideSearchInput]="true">
-        <fdp-table-toolbar-actions *ngIf="enhancedRendering">
+        <fdp-table-toolbar-actions *ngIf="onlyRenderVisibleCells">
             <fdp-button label="Add column" (click)="addColumn()"></fdp-button>
+            <fdp-button label="Toggle cell placeholder" (click)="toggleCellPlaceholder()"></fdp-button>
         </fdp-table-toolbar-actions>
     </fdp-table-toolbar>
 
@@ -57,7 +59,7 @@
     >
     </fdp-column>
 
-    <ng-container *ngIf="enhancedRendering">
+    <ng-container *ngIf="onlyRenderVisibleCells">
         <fdp-column
             width="100px"
             *ngFor="let column of columns; let i = index"

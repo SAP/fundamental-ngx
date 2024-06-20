@@ -424,10 +424,21 @@ export class TableComponent<T = any>
     }
 
     /**
-     * Whether to render row within viewport
+     * Whether to render cells within viewport
      */
     @Input()
-    enhancedRendering = false;
+    onlyRenderVisibleCells = false;
+
+    /**
+     * Whether to use placeholder [fd-busy-indicator] for cells that are not in the viewport
+     * This option works only when `onlyRenderVisibleCells` is true
+     */
+    @Input()
+    useCellPlaceholder = false;
+
+    /**
+     * placeholder for
+     */
 
     /** @hidden */
     private _nonFrozenColumnsMinWidth = 0;

@@ -1,10 +1,10 @@
 <ng-template #fallbackContent>
-    <fd-busy-indicator [loading]="true" size="s" [block]="true"> </fd-busy-indicator>
+    <fd-busy-indicator *ngIf="useCellPlaceholder" [loading]="true" size="s" [block]="true"> </fd-busy-indicator>
 </ng-template>
 
 <ng-template
-    *ngIf="enhancedRendering; else tdPrimaryContent"
-    fdpTableViewport
+    *ngIf="onlyRenderVisibleCells; else tdPrimaryContent"
+    fdpOnlyRenderVisibleCell
     [tableViewport]="tdPrimaryContent"
     [viewportFallback]="fallbackContent"
 >
@@ -175,7 +175,7 @@
 
                 <ng-container *ngIf="row.state === 'readonly'; else editModeCell">
                     <span
-                        *ngIf="tableTextContainer?.innerText?.trim() === ''"
+                        *ngIf="tableTextContainer?.textContent?.trim() === ''"
                         style="
                             position: absolute !important;
                             height: 1px;
@@ -220,8 +220,8 @@
         </ng-template>
 
         <ng-template
-            *ngIf="enhancedRendering; else primaryTextContainer"
-            fdpTableViewport
+            *ngIf="onlyRenderVisibleCells; else primaryTextContainer"
+            fdpOnlyRenderVisibleCell
             [tableViewport]="primaryTextContainer"
             [viewportFallback]="fallbackContent"
         >
