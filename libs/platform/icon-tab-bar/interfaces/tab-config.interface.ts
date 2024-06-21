@@ -25,7 +25,7 @@ export type TabConfig = NullableObject<{
 export type ReactiveTabConfig = NullableObject<{
     icon?: InputSignal<string | undefined>;
     label: InputSignal<Nullable<string>>;
-    color: InputSignal<SemanticColor | undefined>;
+    color: InputSignal<SemanticColor>;
     counter: InputSignal<Nullable<number>>;
     /** whether the tab is selected */
     active: InputSignalWithTransform<boolean, unknown>;
