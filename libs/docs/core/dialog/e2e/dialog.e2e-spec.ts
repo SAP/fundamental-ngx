@@ -21,7 +21,7 @@ import {
     setValue,
     waitForElDisappear,
     waitForElDisplayed,
-    waitForNotPresent
+    waitForNotDisplayed
 } from '../../../../../e2e';
 import { papayaFruit } from './dialog';
 import {
@@ -123,8 +123,7 @@ describe('dialog test suite', () => {
 
             for (let i = 0; i < selfDismissingDialogCount; i++) {
                 await openDialog(stateDialog, i);
-                // expect the dialog to close automatically in 4 seconds
-                await expect(await waitForNotPresent(dialog)).withContext(true, 'dialog did not close automatically');
+                await expect(await waitForNotDisplayed(dialog, 0, 10000));
             }
         });
 

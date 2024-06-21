@@ -10,7 +10,7 @@ export class ComboboxPo extends CoreBaseComponentPo {
     smallText = 'div~small';
     smallText_2 = 'fd-combobox~small';
     allInputFields = this.root + ' .fd-input.fd-input-group__input';
-    mobileComboInput = '#doc-core-combobox-mobile .fd-input.fd-input-group__input';
+    mobileComboInput = '#doc-core-combobox-mobile';
     activeInputButton = 'fd-popover-control .fd-input-group__button';
     mobileButton = '.fd-dialog__content--mobile button';
     mobileTitle = 'h1.fd-title--h5';

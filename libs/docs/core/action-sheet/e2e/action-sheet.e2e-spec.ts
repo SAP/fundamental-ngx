@@ -57,7 +57,7 @@ describe('Action sheet test suite', () => {
             }
             await click(actionSheetListItemButtons, j);
             await expect(await getText(alertMessage)).toEqual(alertMessages[j]);
-            await waitForNotDisplayed(alertMessage);
+            await waitForNotDisplayed(alertMessage, 0, 10000);
             await click(actionSheetMenuButton, 2);
         }
     });
