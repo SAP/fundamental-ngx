@@ -89,7 +89,7 @@
         "@nx/eslint": "18.1.2",
         "@nx/eslint-plugin": "18.1.2",
         "@nx/jest": "18.1.2",
-        "@nx/js": "18.1.2",
+        "@nx/js": "19.3.1",
         "@nx/plugin": "18.1.2",
         "@nx/workspace": "18.1.2",
         "@sap-ui/common-css": "0.37.0",
