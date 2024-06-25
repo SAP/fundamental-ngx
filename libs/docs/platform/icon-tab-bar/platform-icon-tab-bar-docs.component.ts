@@ -11,6 +11,7 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
+import { IconTabBarAsyncTabsExampleComponent } from './examples/async-tabs/icon-tab-bar-async-tabs-example.component';
 import { IconTabBarClosableTabsExampleComponent } from './examples/closable-tabs/icon-tab-bar-closable-tabs-example.component';
 import { PlatformIconTabBarConfigurablePaddingsExampleComponent } from './examples/platform-icon-tab-bar-configurable-paddings-example/platform-icon-tab-bar-configurable-paddings-example.component';
 import { PlatformIconTabBarFilterTypeExampleComponent } from './examples/platform-icon-tab-bar-filter-type-example/platform-icon-tab-bar-filter-type-example.component';
@@ -57,6 +58,9 @@ const iconTabBarClosableTs = 'closable-tabs/icon-tab-bar-closable-tabs-example.c
 const iconTabBarProjectedHtml = 'tabs-content/icon-tab-bar-tabs-content-example.component.html';
 const iconTabBarProjectedTs = 'tabs-content/icon-tab-bar-tabs-content-example.component.ts';
 
+const iconTabBarAsyncHtml = 'async-tabs/icon-tab-bar-async-tabs-example.component.html';
+const iconTabBarAsyncTs = 'async-tabs/icon-tab-bar-async-tabs-example.component.ts';
+
 const iconTabBarTwoClickHtml = 'two-click-area/icon-tab-bar-two-click-area-example.component.html';
 const iconTabBarTwoClickTs = 'two-click-area/icon-tab-bar-two-click-area-example.component.ts';
 
@@ -94,7 +98,8 @@ export interface IconTabBarItem extends TabConfig {
         PlatformIconTabBarConfigurablePaddingsExampleComponent,
         IconTabBarClosableTabsExampleComponent,
         IconTabBarTabsContentExampleComponent,
-        IconTabBarTwoClickAreaExampleComponent
+        IconTabBarTwoClickAreaExampleComponent,
+        IconTabBarAsyncTabsExampleComponent
     ]
 })
 export class PlatformIconTabBarDocsComponent {
@@ -271,6 +276,22 @@ export class PlatformIconTabBarDocsComponent {
             code: getAssetFromModuleAssets(iconTabBarProjectedTs),
             fileName: 'icon-tab-bar-tabs-content-example',
             component: 'IconTabBarTabsContentExampleComponent',
+            path: 'example'
+        }
+    ];
+
+    iconTabBarAsyncTabsFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(iconTabBarAsyncHtml),
+            fileName: 'icon-tab-bar-async-tabs-example',
+            path: 'example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(iconTabBarAsyncTs),
+            fileName: 'icon-tab-bar-async-tabs-example',
+            component: 'IconTabBarAsyncTabsExampleComponent',
             path: 'example'
         }
     ];

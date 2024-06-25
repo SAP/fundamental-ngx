@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ButtonComponent, TextComponent } from '@fundamental-ngx/core';
+import { ButtonComponent, IllustratedMessageModule, TextComponent } from '@fundamental-ngx/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { ListModule } from '@fundamental-ngx/core/list';
@@ -9,6 +9,11 @@ import { ListModule } from '@fundamental-ngx/core/list';
     templateUrl: './non-interactive-card-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [CardModule, ListModule, AvatarComponent, ButtonComponent, TextComponent]
+    imports: [CardModule, ListModule, AvatarComponent, ButtonComponent, TextComponent, IllustratedMessageModule]
 })
-export class NonInteractiveCardExampleComponent {}
+export class NonInteractiveCardExampleComponent {
+    sceneConfig = {
+        scene: { url: 'assets/images/sapIllus-Scene-NoMail.svg', id: 'sapIllus-Scene-NoMail-1' },
+        dialog: { url: 'assets/images/sapIllus-Dialog-NoMail.svg', id: 'sapIllus-Dialog-NoMail' }
+    };
+}

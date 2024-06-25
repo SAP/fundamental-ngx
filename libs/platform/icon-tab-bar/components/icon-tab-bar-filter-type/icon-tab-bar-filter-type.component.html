@@ -56,7 +56,7 @@
                 <div class="fd-icon-tab-bar__label">{{ item.label | fdkAsyncOrSync }}</div>
                 @if (item.color | fdkAsyncOrSync; as itemColor) {
                     <div class="screenreader-only">
-                        {{ (colorAssociations && colorAssociations[itemColor]) || itemColor }}
+                        {{ colorAssociations()?.[itemColor] || itemColor }}
                     </div>
                 }
             </a>
@@ -80,7 +80,7 @@
             <fdp-icon-tab-bar-popover
                 [isRtl]="isRtl"
                 [extraTabs]="_extraTabs$()"
-                [colorAssociations]="colorAssociations"
+                [colorAssociations]="colorAssociations()"
                 (selectedExtraItem)="_selectExtraItem($event)"
                 (focusFirstVisibleItem)="_focusItem(0)"
                 (focusLastVisibleItem)="_focusItem(_lastVisibleTabIndex)"

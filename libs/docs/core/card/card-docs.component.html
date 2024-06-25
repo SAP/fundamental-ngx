@@ -62,25 +62,32 @@
 <description>
     The Badge for Cards can contain Icon and Text, Text only or Icon only. There are no interaction states on Badge for
     Cards. Badge on Cards consumes the Inverted Object and its color variations.
+    <b>There can be max 2 badges per Card.</b>
     <ul>
-        <li>Use the <code>badge</code> property of card to set the text of the badge. Accepts a string value.</li>
+        <li>
+            Use the <code>badge</code> property of card to set the text of the badge. Accepts a string value. For the
+            second badge use <code>secondBadge</code> property.
+        </li>
         <li>
             The <code>badgeIcon</code> property of card is to set the icon. Accepts a string value, the glyph name of
-            the icon.
+            the icon. For the second badge use <code>secondBadgeIcon</code> property.
         </li>
-        <li>To set the color of the badge add an integer from 1 to 10 for the <code>badgeColor</code> property.</li>
+        <li>
+            To set the color of the badge add an integer from 1 to 10 for the <code>badgeColor</code> property. For the
+            second badge use <code>secondBadgeColor</code> property.
+        </li>
         Accepts a number value.
         <li>
             To enable the second set of Accent colors set <code>badgeColorSecondary</code> to <code>true</code>. Accepts
-            a boolean value.
+            a boolean value. For the second badge use <code>secondBadgeColorSecondary</code> property.
         </li>
         <li>
             For status colors use the <code>badgeStatus</code> property. Available values: 'negative' | 'critical' |
-            'positive' | 'informative' | 'neutral'.
+            'positive' | 'informative' | 'neutral'. For the second badge use <code>secondBadgeStatus</code> property.
         </li>
         <li>
             <code>aria-label</code> for the Card badge can be set through <code>badgeAriaLabel</code> property. Accepts
-            a string value.
+            a string value. For the second badge use <code>secondBadgeAriaLabel</code> property.
         </li>
     </ul>
 </description>

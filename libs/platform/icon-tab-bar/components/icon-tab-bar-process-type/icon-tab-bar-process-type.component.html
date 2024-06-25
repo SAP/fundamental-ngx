@@ -18,7 +18,7 @@
                 [extraTabs]="_prevSteps"
                 [label]="_prevSteps.length.toString()"
                 [isSeparators]="true"
-                [colorAssociations]="colorAssociations"
+                [colorAssociations]="colorAssociations()"
                 (selectedExtraItem)="_selectExtraItem($event)"
             ></fdp-icon-tab-bar-popover>
         </li>
@@ -61,7 +61,7 @@
                 }
                 @if (item.color | fdkAsyncOrSync; as itemColor) {
                     <div class="screenreader-only">
-                        {{ (colorAssociations && colorAssociations[itemColor]) || itemColor }}
+                        {{ colorAssociations()?.[itemColor] || itemColor }}
                     </div>
                 }
             </a>
@@ -92,7 +92,7 @@
                 [extraTabs]="_nextSteps"
                 [isSeparators]="true"
                 [label]="_nextSteps.length.toString()"
-                [colorAssociations]="colorAssociations"
+                [colorAssociations]="colorAssociations()"
                 (selectedExtraItem)="_selectExtraItem($event)"
                 (focusFirstVisibleItem)="_focusItem(0)"
                 (focusLastVisibleItem)="_focusItem(_lastVisibleTabIndex)"

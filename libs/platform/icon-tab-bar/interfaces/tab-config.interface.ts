@@ -1,13 +1,13 @@
-import { Signal, TemplateRef } from '@angular/core';
-import { FdkAsyncProperty, NullableObject } from '@fundamental-ngx/cdk/utils';
+import { InputSignal, InputSignalWithTransform, Signal, TemplateRef } from '@angular/core';
+import { FdkAsyncProperty, Nullable, NullableObject } from '@fundamental-ngx/cdk/utils';
 import { IconFont } from '@fundamental-ngx/core/icon';
 import { SemanticColor } from '../types';
 
 /** This is config that user should provide to input */
 export type TabConfig = NullableObject<{
-    icon: FdkAsyncProperty<string>;
+    icon?: FdkAsyncProperty<string | undefined>;
     label: FdkAsyncProperty<string>;
-    color: FdkAsyncProperty<SemanticColor>;
+    color: FdkAsyncProperty<SemanticColor | undefined>;
     counter: FdkAsyncProperty<number>;
     /** whether the tab is selected */
     active: boolean;
@@ -19,7 +19,25 @@ export type TabConfig = NullableObject<{
     closable: boolean;
     iconFont: IconFont;
     renderer?: TemplateRef<any>;
-    id?: string;
+    id: string;
+}>;
+
+export type ReactiveTabConfig = NullableObject<{
+    icon?: InputSignal<string | undefined>;
+    label: InputSignal<Nullable<string>>;
+    color: InputSignal<SemanticColor>;
+    counter: InputSignal<Nullable<number>>;
+    /** whether the tab is selected */
+    active: InputSignalWithTransform<boolean, unknown>;
+    /** if set to true, will show red circle in top-right corner of tab */
+    badge: InputSignalWithTransform<boolean, unknown>;
+    /** config for nested tabs */
+    subItems: ReactiveTabConfig[];
+    /** Whether the tab can be closed. */
+    closable: InputSignalWithTransform<boolean, unknown>;
+    iconFont: InputSignal<IconFont>;
+    renderer?: Signal<TemplateRef<any> | undefined>;
+    id: InputSignal<string>;
 }>;
 
 export type ExtendedTabConfig = TabConfig & {

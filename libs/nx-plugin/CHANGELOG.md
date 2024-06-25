@@ -3,6 +3,102 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.2...v0.50.1-rc.3) (2024-06-25)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+## [0.50.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.1...v0.50.1-rc.2) (2024-06-25)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+## [0.50.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.0...v0.50.1-rc.1) (2024-06-25)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+## [0.50.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.50.0...v0.50.1-rc.0) (2024-06-21)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.111...v0.50.0) (2024-06-13)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.111](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.110...v0.50.0-rc.111) (2024-06-13)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.110](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.109...v0.50.0-rc.110) (2024-06-12)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.109](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.108...v0.50.0-rc.109) (2024-06-12)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.108](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.107...v0.50.0-rc.108) (2024-06-12)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.107](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.106...v0.50.0-rc.107) (2024-06-11)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.106](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.105...v0.50.0-rc.106) (2024-06-11)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.50.0-rc.105](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.104...v0.50.0-rc.105) (2024-06-09)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
 # [0.50.0-rc.104](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.103...v0.50.0-rc.104) (2024-05-28)
 
 **Note:** Version bump only for package @fundamental-ngx/nx-plugin

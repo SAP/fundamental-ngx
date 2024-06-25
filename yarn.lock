@@ -2410,10 +2410,10 @@
   dependencies:
     tslib "^2.4.0"
 
-"@fundamental-styles/cx@0.36.1":
-  version "0.36.1"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.36.1.tgz#3118362b64f133ee4b906f6e48c049eed807da06"
-  integrity sha512-ao04o732v8tTq5VE93ggb8B4LBlP3nlcIknh6+/7bdHk2XhaRbR45+e9oxfJm9hUqyQUKtcd8kYGnf+3VL/I9Q==
+"@fundamental-styles/cx@0.37.0":
+  version "0.37.0"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.37.0.tgz#51aa386c50379fe31cccee037837bc702ef2bc3d"
+  integrity sha512-/tfa3FfEosNVhlaL60ALQvHYBH5HxSluy2lbe3MktxzvNCiid6N4TpEj700oc/DqqEQP1vgEzJR8sIuxrmbHLA==
 
 "@gar/promisify@^1.1.3":
   version "1.1.3"
@@ -3678,10 +3678,10 @@
   resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.15.0.tgz#f2b830c390c146c3e900e1e00a74f4a5d96fe9a9"
   integrity sha512-Rn3m8FP3qpJ0xUts+5AXVBkp1KpZHdBAUxwN985s/jeVkjONhIlU9CU/XXw8z6f6babJyRVAReBbm5Mb1vtoZg==
 
-"@sap-ui/common-css@0.36.1":
-  version "0.36.1"
-  resolved "https://registry.yarnpkg.com/@sap-ui/common-css/-/common-css-0.36.1.tgz#1fedb0bb8038d4133523a4db46ca5c3397aadfad"
-  integrity sha512-RxJiC70AjhKOjZSCv4qy6cvbk6gXjs3YV9oIvVcwj8c9m9PE0TiIMf2mQA2MzDK9yZp7T888FhaTeHXpfAT3Zw==
+"@sap-ui/common-css@0.37.0":
+  version "0.37.0"
+  resolved "https://registry.yarnpkg.com/@sap-ui/common-css/-/common-css-0.37.0.tgz#d9d336400fd837318b7ce0ca0874fbde3dfae7ef"
+  integrity sha512-xZBDPfETVBNsLYgurrPqhqLZLlELKMg9wLU6wJeqsgvSjjYUiIJt8jTNnIR9qPY4Hc2cvjwBxlampLReoZDbAQ==
   dependencies:
     "@sap-theming/theming-base-content" "^11.15.0"
 
@@ -7809,12 +7809,7 @@ dateformat@^3.0.0, dateformat@^3.0.3:
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-3.0.3.tgz#a6e37499a4d9a9cf85ef5872044d62901c9889ae"
   integrity sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==
 
-dayjs@1.11.10:
-  version "1.11.10"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.10.tgz#68acea85317a6e164457d6d6947564029a6a16a0"
-  integrity sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==
-
-dayjs@^1.11.7:
+dayjs@1.11.11, dayjs@^1.11.7:
   version "1.11.11"
   resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.11.tgz#dfe0e9d54c5f8b68ccf8ca5f72ac603e7e5ed59e"
   integrity sha512-okzr3f11N6WuqYtZSvm+F776mB41wRZMhKP+hc34YdW+KmtYYK9iqvHSwo2k9FEH3fhGXvOPV6yz2IcSrfRUDg==
@@ -9621,10 +9616,10 @@ functions-have-names@^1.2.3:
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.3.tgz#0404fe4ee2ba2f607f0e0ec3c80bae994133b834"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
-fundamental-styles@0.36.1:
-  version "0.36.1"
-  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.36.1.tgz#7d076c9be9986f157cc6535f254cdd1928063f6a"
-  integrity sha512-zWFBxlZ9ipAiNv+KPi90DKaotqPmJXRqtn8ZelVXMjvihSnidpAsvTNZPty29KmYutNlEBi3G1Ak8xQVCHPvLQ==
+fundamental-styles@0.37.0:
+  version "0.37.0"
+  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.37.0.tgz#dc425768f7d9d99058c67dd8f6d272f089cc7b93"
+  integrity sha512-SIVlzqmkAnIFveUwsRmkISWeN5+YthbtKOdSplPjY++WdSvalpa0YD4u8ciNnPucwMxcrCG8QsOqcFNgzwctIg==
 
 fuse.js@7.0.0:
   version "7.0.0"

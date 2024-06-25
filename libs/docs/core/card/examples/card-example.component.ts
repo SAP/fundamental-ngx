@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ButtonComponent, ObjectStatusComponent, RatingIndicatorComponent, TextComponent } from '@fundamental-ngx/core';
+import {
+    ButtonComponent,
+    FormModule,
+    ObjectStatusComponent,
+    RatingIndicatorComponent,
+    TextComponent
+} from '@fundamental-ngx/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { ListModule } from '@fundamental-ngx/core/list';
@@ -13,6 +19,7 @@ import { ListModule } from '@fundamental-ngx/core/list';
     imports: [
         CardModule,
         ListModule,
+        FormModule,
         AvatarComponent,
         ButtonComponent,
         TextComponent,

@@ -1,27 +1,25 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
-    AfterViewInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ContentChildren,
+    computed,
+    contentChildren,
     DestroyRef,
     ElementRef,
-    EventEmitter,
     HostBinding,
+    inject,
     Input,
+    input,
+    model,
     OnInit,
     Optional,
-    Output,
-    QueryList,
-    TemplateRef,
-    ViewChild,
-    ViewChildren,
-    ViewEncapsulation,
-    booleanAttribute,
-    computed,
-    inject,
-    signal
+    output,
+    signal,
+    viewChild,
+    viewChildren,
+    ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ContentDensityService, Nullable, RtlService, scrollTop } from '@fundamental-ngx/cdk/utils';
@@ -31,7 +29,7 @@ import { ScrollSpyDirective } from '@fundamental-ngx/core/scroll-spy';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { FD_TABLIST, TabList } from '@fundamental-ngx/core/shared';
 import { fromEvent } from 'rxjs';
-import { debounceTime, distinctUntilChanged, first, startWith } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, first } from 'rxjs/operators';
 import { IconTabBarBase } from './components';
 import { IconTabBarFilterTypeComponent } from './components/icon-tab-bar-filter-type/icon-tab-bar-filter-type.component';
 import { IconTabBarIconTypeComponent } from './components/icon-tab-bar-icon-type/icon-tab-bar-icon-type.component';
@@ -71,78 +69,7 @@ import { IconTabBarBackground, IconTabBarSize, TabDestinyMode, TabType } from '.
         IconTabBarTabContentDirective
     ]
 })
-export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
-    /**
-     * @description Type of tab bar view.
-     */
-    @Input()
-    iconTabType: TabType = 'text';
-
-    /**
-     * @description A tab bar configuration that stores the state of each tab. Based on this configuration, a tab bar is representing.
-     */
-    @Input()
-    set tabsConfig(value: TabConfig[]) {
-        this._tabsConfig$.set(value);
-    }
-
-    get tabsConfig(): TabConfig[] {
-        return this._tabsConfig$();
-    }
-
-    /**
-     * @description Destiny mode.
-     */
-    @Input()
-    densityMode: TabDestinyMode = 'inherit';
-
-    /**
-     * @description Icon font
-     */
-    @Input()
-    iconTabFont: IconFont = 'SAP-icons';
-
-    /**
-     * @description Disable or enable reordering(drag and drop) feature. (supported by text type only)
-     */
-    @Input()
-    enableTabReordering = false;
-
-    /**
-     * @description Boolean flag indicating to show total tab.(supported by filter type only)
-     */
-    @Input()
-    showTotalTab = true;
-
-    /** Whether to render icon tab item as multi-click variant. */
-    @Input()
-    multiClick = false;
-
-    /**
-     * @description Layout type for tab (supported by text type only)
-     */
-    @Input()
-    layoutMode: 'row' | 'column' = 'row';
-
-    /**
-     * @description Icon tab bar background type.
-     */
-    @Input()
-    iconTabBackground: IconTabBarBackground = 'solid';
-
-    /**
-     * @description Icon tab bar size.
-     */
-    @Input()
-    iconTabSize: IconTabBarSize;
-
-    /**
-     * @description Associations for colors of the tabs.
-     * If any of the color associations provided, they'll be read by screenreader instead of the actual color
-     */
-    @Input()
-    colorAssociations: TabColorAssociations;
-
+export class IconTabBarComponent implements OnInit, TabList {
     /**
      * Whether to open tab content one under another without collapsing.
      * Works only for content-projected tab content.
@@ -150,56 +77,76 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
     @Input({ transform: booleanAttribute })
     stackContent = false;
 
+    /** @description Type of tab bar view. */
+    iconTabType = input<TabType>('text');
+
+    /**
+     * @description A tab bar configuration that stores the state of each tab. Based on this configuration, a tab bar is representing.
+     */
+    tabsConfig = model<TabConfig[]>();
+
+    /** @description Destiny mode. */
+    densityMode = model<TabDestinyMode>('inherit');
+
+    /** @description Icon font */
+    iconTabFont = input<IconFont>('SAP-icons');
+
+    /** @description Disable or enable reordering(drag and drop) feature. (supported by text type only) */
+    enableTabReordering = input(false);
+
+    /** @description Boolean flag indicating to show total tab.(supported by filter type only) */
+    showTotalTab = input(true);
+
+    /** Whether to render icon tab item as multi-click variant. */
+    multiClick = input(false);
+
+    /** @description Layout type for tab (supported by text type only) */
+    layoutMode = input<'row' | 'column'>('row');
+
+    /** @description Icon tab bar background type. */
+    iconTabBackground = input<IconTabBarBackground>('solid');
+
+    /** @description Icon tab bar size. */
+    iconTabSize = input<IconTabBarSize>();
+
+    /**
+     * @description Associations for colors of the tabs.
+     * If any of the color associations provided, they'll be read by screenreader instead of the actual color
+     */
+    colorAssociations = input<TabColorAssociations>();
+
     /**
      * Maximum height of the content.
      * Works only for content-projected tab content.
      */
-    @Input()
-    maxContentHeight = '100%';
+    maxContentHeight = input('100%');
 
-    /**
-     * @description Emits when some tab is selected.
-     */
-    @Output()
-    iconTabSelected = new EventEmitter<IconTabBarItem>();
+    /** @description Emits when some tab is selected. */
+    iconTabSelected = output<IconTabBarItem>();
 
-    /**
-     * @description Emits when user drop tab.
-     */
-    @Output()
-    iconTabReordered = new EventEmitter<IconTabBarItem[]>();
+    /** @description Emits when user drop tab. */
+    iconTabReordered = output<IconTabBarItem[]>();
 
     /** Event emitted when user clicks on x icon in tab. */
-    @Output()
-    closeTab = new EventEmitter<IconTabBarItem>();
+    closeTab = output<IconTabBarItem>();
 
     /** @hidden */
-    @ContentChildren(IconTabBarTabComponent, { descendants: false })
-    children: QueryList<IconTabBarTabComponent>;
+    children = contentChildren(IconTabBarTabComponent, { descendants: false });
 
     /** @hidden */
-    @ContentChildren(IconTabBarTabComponent, { descendants: true })
-    allChildren: QueryList<IconTabBarTabComponent>;
+    _scrollbar = viewChild(ScrollbarDirective);
 
     /** @hidden */
-    @ViewChild(ScrollbarDirective)
-    _scrollbar: ScrollbarDirective;
-
-    /** @hidden */
-    @ViewChildren(IconTabBarTabContentDirective)
-    tabDirectives: QueryList<IconTabBarTabContentDirective>;
+    tabDirectives = viewChildren(IconTabBarTabContentDirective);
 
     @HostBinding('class.fd-tabs-custom')
     private get _customTabs(): boolean {
-        return this._inDynamicPahe;
+        return this._inDynamicPage;
     }
-
-    @ViewChild(IconTabBarBase)
-    private readonly _iconTabBarCmp: Nullable<IconTabBarBase>;
 
     /** @hidden */
     get headerContainer(): Nullable<ElementRef> {
-        return this._iconTabBarCmp?.headerElement;
+        return this._iconTabBarCmp()?.headerElement;
     }
 
     /** @hidden */
@@ -213,7 +160,7 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
 
     /** Scrollable element reference. */
     get scrollableElement(): Nullable<ElementRef> {
-        return this._scrollbar?.elementRef;
+        return this._scrollbar()?.elementRef;
     }
 
     /** @hidden */
@@ -229,18 +176,28 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
     readonly _tabRenderer$ = signal<IconTabBarItem | null>(null);
 
     /** @hidden */
-    readonly _tabRenderers$ = signal<{ renderer: TemplateRef<any>; id: string }[]>([]);
-
-    /** @hidden */
     readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
-    readonly _tabsConfig$ = signal<TabConfig[]>([]);
+    readonly _tabsConfig$ = computed(() => {
+        const tabConfig = this.tabsConfig();
+        if (tabConfig) {
+            return this.tabsConfig() as TabConfig[];
+        }
+
+        const children = this.children();
+        if (!children) {
+            return [];
+        }
+        return children.map((t) => this._generateTabConfig(t));
+    });
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
-    private readonly _inDynamicPahe = !!inject(FD_DYNAMIC_PAGE, { optional: true });
+    private readonly _inDynamicPage = !!inject(FD_DYNAMIC_PAGE, { optional: true });
+
+    private readonly _iconTabBarCmp = viewChild<Nullable<IconTabBarBase>>(IconTabBarBase);
 
     /** @hidden */
     constructor(
@@ -253,11 +210,11 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
     ngOnInit(): void {
         this._cssClassForContainer = this._generateContainerStyles();
 
-        if (this.densityMode === 'inherit') {
+        if (this.densityMode() === 'inherit') {
             this._contentDensityService?._contentDensityListener
                 .pipe(distinctUntilChanged(), takeUntilDestroyed(this._destroyRef))
                 .subscribe((density) => {
-                    this.densityMode = density;
+                    this.densityMode.set(density);
                     if (density !== 'compact') {
                         this._cssClassForContainer = this._cssClassForContainer.filter(
                             (cssClass) => cssClass !== 'fd-icon-tab-bar--compact'
@@ -268,29 +225,6 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
                     this._cd.detectChanges();
                 });
         }
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this.children.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            const projectedTabs = this.children.toArray();
-
-            if (projectedTabs.length === 0) {
-                return;
-            }
-
-            this.tabsConfig = projectedTabs.map((t) => this._generateTabConfig(t));
-            this._cd.detectChanges();
-        });
-
-        this.allChildren.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this._tabRenderers$.set(
-                this.allChildren.map((c) => ({
-                    renderer: c.renderer,
-                    id: c.id
-                }))
-            );
-        });
     }
 
     /**
@@ -310,7 +244,7 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
         this.iconTabSelected.emit(selectedItem);
 
         if (this.stackContent) {
-            this._scrollToPanel(this.tabDirectives.find((tab) => tab.uId === selectedItem.uId)!);
+            this._scrollToPanel(this.tabDirectives().find((tab) => tab.uId() === selectedItem.uId)!);
         }
     }
 
@@ -327,7 +261,6 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
         }
         this._selectedUid.set(selectedItem.uId);
         this._selectItem(selectedItem);
-        this._cd.detectChanges();
     }
 
     /** @hidden */
@@ -335,8 +268,8 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
         if (this._disableScrollSpy) {
             return;
         }
-        const activeTab = this.tabDirectives.find((tab) => tab.id === id);
-        this._selectedUid.set(activeTab?.uId || undefined);
+        const activeTab = this.tabDirectives().find((tab) => tab.id() === id);
+        this._selectedUid.set(activeTab?.uId() || undefined);
         if (scroll && activeTab) {
             this._scrollToPanel(activeTab);
         }
@@ -347,20 +280,21 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
      * @returns array of css classes for icon-tab-bar container
      */
     private _generateContainerStyles(): string[] {
-        const styles = [`fd-icon-tab-bar--${this.iconTabType}`];
-        if (this.iconTabType === 'process' && this.tabsConfig[0].icon) {
+        const styles = [`fd-icon-tab-bar--${this.iconTabType()}`];
+        const tabsConfig = this.tabsConfig();
+        if (tabsConfig && this.iconTabType() === 'process' && tabsConfig[0].icon) {
             styles.push('fd-icon-tab-bar--icon');
         }
-        if (this.iconTabBackground !== 'solid') {
-            styles.push(`fd-icon-tab-bar--${this.iconTabBackground}`);
+        if (this.iconTabBackground() !== 'solid') {
+            styles.push(`fd-icon-tab-bar--${this.iconTabBackground()}`);
         }
-        if (this.iconTabSize) {
-            styles.push(`fd-icon-tab-bar--${this.iconTabSize}`);
+        if (this.iconTabSize()) {
+            styles.push(`fd-icon-tab-bar--${this.iconTabSize()!}`);
         }
-        if (this.densityMode === 'compact') {
+        if (this.densityMode() === 'compact') {
             styles.push('fd-icon-tab-bar--compact');
         }
-        if (this.layoutMode === 'column') {
+        if (this.layoutMode() === 'column') {
             styles.push('fd-icon-tab-bar--counters');
         }
         return styles;
@@ -368,13 +302,13 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
 
     private _generateTabConfig(tab: IconTabBarTabComponent): TabConfig {
         const tabConfig: TabConfig = {
-            label: tab.label,
-            color: tab.color,
-            active: tab.active,
-            counter: tab.counter,
-            renderer: tab.renderer,
-            id: tab.id,
-            subItems: tab.children.map((c) => this._generateTabConfig(c))
+            label: tab.label(),
+            color: tab.color(),
+            active: tab.active(),
+            counter: tab.counter(),
+            renderer: tab.renderer(),
+            id: tab.id(),
+            subItems: tab.children().map((c) => this._generateTabConfig(c))
         };
 
         return tabConfig;
@@ -385,8 +319,12 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
         if (!tabPanel) {
             return;
         }
+        const scrollbar = this._scrollbar();
+        if (!scrollbar) {
+            return;
+        }
         const panelElement = tabPanel.elementRef.nativeElement;
-        const containerElement = this._scrollbar.elementRef.nativeElement;
+        const containerElement = scrollbar.elementRef.nativeElement;
         const distanceToScroll = panelElement.offsetTop - containerElement.offsetTop;
         const maximumScrollTop = containerElement.scrollHeight - containerElement.clientHeight;
         const currentScrollPosition = Math.ceil(containerElement.scrollTop);

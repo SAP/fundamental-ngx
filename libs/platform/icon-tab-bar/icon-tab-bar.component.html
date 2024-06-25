@@ -1,14 +1,14 @@
 <div class="fd-icon-tab-bar" [class]="_cssClassForContainer">
-    @if (iconTabType === 'text') {
+    @if (iconTabType() === 'text') {
         <ng-template [ngTemplateOutlet]="textType"></ng-template>
     }
-    @if (iconTabType === 'icon' || iconTabType === 'icon-only') {
+    @if (iconTabType() === 'icon' || iconTabType() === 'icon-only') {
         <ng-template [ngTemplateOutlet]="iconType"></ng-template>
     }
-    @if (iconTabType === 'filter') {
+    @if (iconTabType() === 'filter') {
         <ng-template [ngTemplateOutlet]="filterType"></ng-template>
     }
-    @if (iconTabType === 'process') {
+    @if (iconTabType() === 'process') {
         <ng-template [ngTemplateOutlet]="processType"></ng-template>
     }
     <div
@@ -18,7 +18,7 @@
         [scrollSpyDisabled]="!stackContent || _disableScrollSpy"
         fdScrollSpy
         [trackedTags]="['fdp-icon-tab-bar-tab-content']"
-        [style.max-height]="maxContentHeight"
+        [style.max-height]="maxContentHeight()"
     >
         @if (stackContent) {
             @for (tab of _flatTabs$(); track tab) {
@@ -46,32 +46,32 @@
         [isRtl]="_rtl$()"
         [selectedUid]="_selectedUid()"
         (selectedUidChange)="_selectedUid.set($event)"
-        [densityMode]="densityMode"
-        [colorAssociations]="colorAssociations"
+        [densityMode]="densityMode()"
+        [colorAssociations]="colorAssociations()"
         (selected)="_selectItem($event)"
     ></fdp-icon-tab-bar-process-type>
 </ng-template>
 <ng-template #filterType>
     <fdp-icon-tab-bar-filter-type
         [tabs]="_tabs$()"
-        [showTotalTab]="showTotalTab"
+        [showTotalTab]="showTotalTab()"
         [isRtl]="_rtl$()"
         [selectedUid]="_selectedUid()"
         (selectedUidChange)="_selectedUid.set($event)"
-        [densityMode]="densityMode"
-        [colorAssociations]="colorAssociations"
+        [densityMode]="densityMode()"
+        [colorAssociations]="colorAssociations()"
         (selected)="_selectItem($event)"
     ></fdp-icon-tab-bar-filter-type>
 </ng-template>
 <ng-template #iconType>
     <fdp-icon-tab-bar-icon-type
-        [showLabel]="iconTabType === 'icon'"
+        [showLabel]="iconTabType() === 'icon'"
         [tabs]="_tabs$()"
         [isRtl]="_rtl$()"
         [selectedUid]="_selectedUid()"
         (selectedUidChange)="_selectedUid.set($event)"
-        [densityMode]="densityMode"
-        [colorAssociations]="colorAssociations"
+        [densityMode]="densityMode()"
+        [colorAssociations]="colorAssociations()"
         (selected)="_selectItem($event)"
         (closeTab)="_closeTab($event)"
     ></fdp-icon-tab-bar-icon-type>
@@ -79,14 +79,14 @@
 <ng-template #textType>
     <fdp-icon-tab-bar-text-type
         [tabs]="_tabs$()"
-        [multiClick]="multiClick"
-        [layoutMode]="layoutMode"
+        [multiClick]="multiClick()"
+        [layoutMode]="layoutMode()"
         [isRtl]="_rtl$()"
         [selectedUid]="_selectedUid()"
         (selectedUidChange)="_selectedUid.set($event)"
-        [densityMode]="densityMode"
-        [enableTabReordering]="enableTabReordering"
-        [colorAssociations]="colorAssociations"
+        [densityMode]="densityMode()"
+        [enableTabReordering]="enableTabReordering()"
+        [colorAssociations]="colorAssociations()"
         (reordered)="_onReorder($event)"
         (selected)="_selectItem($event)"
         (closeTab)="_closeTab($event)"
