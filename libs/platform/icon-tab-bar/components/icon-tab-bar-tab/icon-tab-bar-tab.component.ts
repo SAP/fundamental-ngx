@@ -47,7 +47,7 @@ export class IconTabBarTabComponent implements ReactiveTabConfig {
     label = input<Nullable<string>>();
 
     /** Tab text color. */
-    color = input<SemanticColor>();
+    color = input<SemanticColor>('default');
 
     /** Tab icon. */
     icon = input<string>();
