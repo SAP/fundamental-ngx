@@ -63,7 +63,41 @@
                 >
             </fd-dynamic-page-subheader>
             <fdp-icon-tab-bar [stackContent]="stackedTabs" maxContentHeight="auto" ariaRoledescription="Tab Bar">
-                @for (tab of ['Tab 1', 'Tab 2', 'Tab 3']; track tab) {
+                @for (
+                    tab of [
+                        'Tab 1',
+                        'Tab 2',
+                        'Tab 3',
+                        'Tab 4',
+                        'Tab 5',
+                        'Tab 6',
+                        'Tab 7',
+                        'Tab 8',
+                        'Tab 9',
+                        'Tab 10',
+                        'Tab 11',
+                        'Tab 12',
+                        'Tab 13',
+                        'Tab 14',
+                        'Tab 15',
+                        'Tab 16',
+                        'Tab 17',
+                        'Tab 18',
+                        'Tab 19',
+                        'Tab 20',
+                        'Tab 21',
+                        'Tab 21',
+                        'Tab 23',
+                        'Tab 24',
+                        'Tab 25',
+                        'Tab 26',
+                        'Tab 27',
+                        'Tab 28',
+                        'Tab 29',
+                        'Tab 30'
+                    ];
+                    track tab
+                ) {
                     <fdp-icon-tab-bar-tab [label]="tab">
                         <fd-dynamic-page-content [id]="tab" cdkScrollable>
                             <div class="fd-dynamic-page-section-example">{{ tab }} content.</div>
