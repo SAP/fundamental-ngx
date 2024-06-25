@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.2...v0.50.1-rc.3) (2024-06-25)
+
+
+### Bug Fixes
+
+* **platform:** add fix for incorrect font weight for column header in sorted state ([#12018](https://github.com/SAP/fundamental-ngx/issues/12018)) ([de36eaa](https://github.com/SAP/fundamental-ngx/commit/de36eaa71b54f3f5be91bbba21ba3a5eb6eed281))
+
+
+
+
+
 ## [0.50.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.1...v0.50.1-rc.2) (2024-06-25)
 
 
