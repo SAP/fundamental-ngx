@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.0...v0.50.1-rc.1) (2024-06-25)
+
+
+### Bug Fixes
+
+* **platform:** use correct markup for the list in Filter dialog for Platform table ([#12020](https://github.com/SAP/fundamental-ngx/issues/12020)) ([e21be52](https://github.com/SAP/fundamental-ngx/commit/e21be52429a3570b12e36f5f000d1e983de2b67c))
+
+
+
+
+
+## [0.50.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.50.0...v0.50.1-rc.0) (2024-06-21)
+
+
+### Bug Fixes
+
+* **platform:** add fix for overflow button not working in Icon Tab Bar ([#12023](https://github.com/SAP/fundamental-ngx/issues/12023)) ([b91c5cd](https://github.com/SAP/fundamental-ngx/commit/b91c5cdf3df51e2bebf3c6fc5ca27073b5ed070e))
+
+
+
+
+
 # [0.50.0](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.111...v0.50.0) (2024-06-13)
 
 **Note:** Version bump only for package fundamental-ngx
