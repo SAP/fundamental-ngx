@@ -9,8 +9,10 @@ import {
     ExampleChildService,
     ExampleFile,
     getAssetFromModuleAssets,
+    getExampleFile,
     SeparatorComponent
 } from '@fundamental-ngx/docs/shared';
+import { AdvancedScrollingExampleComponent } from '../../examples/advanced-scrolling/advanced-scrolling-example.component';
 import { PlatformTableOuterScrollExampleComponent } from '../../examples/platform-table-outer-scroll-example.component';
 import { PlatformTablePageScrollingExampleComponent } from '../../examples/platform-table-page-scrolling-example.component';
 import { PlatformTableVirtualScrollExampleComponent } from '../../examples/virtual-scroll/platform-table-virtual-scroll-example.component';
@@ -38,7 +40,8 @@ const platformTableOuterScrollTsSrc = 'platform-table-outer-scroll-example.compo
         SeparatorComponent,
         PlatformTableVirtualScrollExampleComponent,
         PlatformTableOuterScrollExampleComponent,
-        FdDatetimeModule
+        FdDatetimeModule,
+        AdvancedScrollingExampleComponent
     ]
 })
 export class TableScrollingDocsComponent {
@@ -58,6 +61,14 @@ export class TableScrollingDocsComponent {
             component: 'PlatformTablePageScrollingExampleComponent',
             name: 'platform-table-example.component.ts'
         }
+    ];
+
+    pageAdvancedScrollingTableFiles: ExampleFile[] = [
+        getExampleFile('advanced-scrolling/advanced-scrolling-example.component.html'),
+        getExampleFile('advanced-scrolling/advanced-scrolling-example.component.ts', {
+            selector: 'doc-advanced-scrolling-example',
+            component: 'AdvancedScrollingExampleComponent'
+        })
     ];
 
     virtualScrollTableFiles: ExampleFile[] = [

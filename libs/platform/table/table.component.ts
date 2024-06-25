@@ -304,7 +304,7 @@ export class TableComponent<T = any>
     /** Page scrolling threshold in px. */
     @Input()
     pageScrollingThreshold = 80;
-    /** Table body height. */
+    /** Table body height. Used to restrict the height of the body, adding a vertical scroll bar. */
     @Input()
     bodyHeight: string;
     /** Text displayed when table has no items. */
@@ -391,7 +391,7 @@ export class TableComponent<T = any>
     @Input()
     expandOnInit = false;
     /**
-     * Height of the row, required for the virtualScroll,
+     * Height of the row in px, required for the virtualScroll,
      * default is 44px in cozy, 32px in compact and 24px in condensed (set automatically)
      */
     @Input()
@@ -556,14 +556,17 @@ export class TableComponent<T = any>
     @ViewChild('tableContainer')
     readonly tableContainer: ElementRef<HTMLDivElement>;
     /** @hidden */
+    @ViewChild('tableScrollMockContainer')
+    readonly tableScrollMockContainer: ElementRef<HTMLDivElement>;
+    /** @hidden */
     @ViewChild(FdTableComponent, { read: ElementRef })
     readonly table: ElementRef<HTMLDivElement>;
     /** @hidden */
+    @ViewChild('tableBody', { read: ElementRef })
+    readonly tableBody: ElementRef<HTMLElement>;
+    /** @hidden */
     @ViewChild(FDK_FOCUSABLE_GRID_DIRECTIVE)
     readonly _focusableGrid: FocusableGridDirective;
-    /** @hidden */
-    @ViewChild('tableBody', { read: ElementRef })
-    private readonly _tableBody: ElementRef<HTMLElement>;
     /** @hidden */
     @ViewChild(DndListDirective)
     private readonly _dndDirective: Nullable<DndListDirective<TableRow>>;
@@ -947,21 +950,15 @@ export class TableComponent<T = any>
 
         this._listenToLoadingAndRefocusCell();
 
-        this._initScrollPosition();
+        if (!this._virtualScrollDirective || !this._virtualScrollDirective.virtualScroll) {
+            this._initScrollPosition();
+        }
 
         this._listenToFixedColumnsWidth();
 
         if (this.expandOnInit) {
             this.expandAll();
         }
-
-        this._subscriptions.add(
-            this._virtualScrollDirective?.virtualScrollTransform$
-                .pipe(filter(() => !!this._virtualScrollDirective?.virtualScroll && !!this._tableBody))
-                .subscribe((transform) => {
-                    this._tableBody.nativeElement.style.transform = `translateY(${transform}px)`;
-                })
-        );
 
         if (this._focusableGrid) {
             this._focusableGrid.shortRowFocus = 'first';
@@ -2106,7 +2103,7 @@ export class TableComponent<T = any>
 
                     this.tableScrolled.emit(scrollTop);
 
-                    // Instead of having two places to record this possition, we could just subscribe once.
+                    // Instead of having two places to record this position, we could just subscribe once.
                     this.getTableState().scrollTopPosition = scrollTop;
                 })
         );

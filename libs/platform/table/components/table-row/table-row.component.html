@@ -145,8 +145,12 @@
     >
         <div
             [class.fd-table__text]="column.applyText"
-            [class.fd-table__text--no-wrap]="column.noWrap"
+            [class.fd-table__text--no-wrap]="column.applyText"
+            [class.fd-table__cell--truncate-txt]="column.applyText"
             #tableTextContainer
+            [attr.title]="
+                tableTextContainer.offsetWidth < tableTextContainer.scrollWidth ? tableTextContainer.innerText : null
+            "
         >
             @if (_isTreeRowFirstCell($index, row)) {
                 <span

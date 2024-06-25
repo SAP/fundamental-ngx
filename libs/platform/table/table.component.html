@@ -84,6 +84,7 @@
                                         fdp-table-group-row
                                         [index]="rowIndex"
                                         [height]="rowHeight"
+                                        [style.max-height.px]="rowHeight"
                                         [draggable]="isDraggable"
                                         [row]="row"
                                         [rowId]="id"
@@ -105,6 +106,7 @@
                                         [active]="rowIndex === _navigatedRowIndex"
                                         [highlightActive]="highlightNavigatedRow"
                                         [style.height.px]="rowHeight"
+                                        [style.max-height.px]="rowHeight"
                                         [attr.aria-level]="isTreeTable ? row.level + 1 : null"
                                         (keydown.enter)="_onRowClick(row, $event)"
                                         (keydown.space)="_onRowClick(row, $event)"
@@ -219,7 +221,7 @@
             }
             @if (_virtualScrollDirective?.virtualScroll) {
                 <!-- the tbody element below is so the scrollbar renders correctly -->
-                <tbody>
+                <tbody class="fd-table__body--scroll-mock" #tableScrollMockContainer>
                     <tr>
                         <td colspan="100%" [style.height.px]="_virtualScrollDirective!.virtualScrollTotalHeight"></td>
                     </tr>

@@ -110,11 +110,11 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
         return this._width;
     }
 
-    /** Whether the text should wrap, when text is too long for 1 line */
+    /** @deprecated Whether the text should wrap, when text is too long for 1 line */
     @Input()
     noWrap = false;
 
-    /** Whether to apply fd-table-text (text-shadow) to the cell content, if disabled noWrap has no effect. */
+    /** Whether to apply fd-table-text (text-shadow) to the cell content. */
     @Input()
     applyText = true;
 

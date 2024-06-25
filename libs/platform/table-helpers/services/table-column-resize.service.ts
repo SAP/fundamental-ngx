@@ -170,10 +170,12 @@ export class TableColumnResizeService implements OnDestroy {
         }
     }
 
-    /** Retrieves custom column value or returns `unset` */
+    /** Retrieves custom column width value or sets a default value, which is the table width divided by the visible column count. */
     getColumnWidthStyle(columnName: string): string {
-        const calculatedWidth = this._fixedColumnsWidthMap.get(columnName);
-        return calculatedWidth || 'unset';
+        return (
+            this._fixedColumnsWidthMap.get(columnName) ||
+            this._tableRef._tableWidthPx / this._tableRef.getVisibleTableColumns().length + 'px'
+        );
     }
 
     /** Previous column name */

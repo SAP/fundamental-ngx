@@ -40,8 +40,6 @@ export class TableScrollDispatcherService implements OnDestroy {
     /** @hidden */
     private _scrollSubject: Subject<TableScrollable> = new Subject();
     /** @hidden */
-    private _verticalScrollSubject: Subject<TableScrollable> = new Subject();
-    /** @hidden */
     private _horizontalScrollSubject: Subject<TableScrollable> = new Subject();
     /** @hidden */
     private _scrollableSubscriptionsMap: Map<TableScrollable, Subscription> = new Map();
@@ -55,7 +53,6 @@ export class TableScrollDispatcherService implements OnDestroy {
         const sub = new Subscription();
         sub.add(scrollable.getScrollStream().subscribe(() => this._scrollSubject.next(scrollable)));
         sub.add(scrollable.getHorizontalScrollStream().subscribe(() => this._horizontalScrollSubject.next(scrollable)));
-        sub.add(scrollable.getVerticalScrollStream().subscribe(() => this._verticalScrollSubject.next(scrollable)));
 
         this._scrollableSubscriptionsMap.set(scrollable, sub);
     }
@@ -77,11 +74,6 @@ export class TableScrollDispatcherService implements OnDestroy {
     /** Horizontal scroll stream */
     horizontallyScrolled(): Observable<TableScrollable> {
         return this._horizontalScrollSubject.asObservable();
-    }
-
-    /** Vertical scroll stream */
-    verticallyScrolled(): Observable<TableScrollable> {
-        return this._verticalScrollSubject.asObservable();
     }
 
     /** @hidden */

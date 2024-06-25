@@ -3,7 +3,7 @@ import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import { PresetManagedComponent } from '@fundamental-ngx/platform/shared';
 import { Observable } from 'rxjs';
 
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FocusableGridDirective, Nullable } from '@fundamental-ngx/cdk/utils';
 import { TableDataSource } from './domain';
 import { CollectionFilter } from './interfaces/collection-filter.interface';
 import { CollectionGroup } from './interfaces/collection-group.interface';
@@ -55,6 +55,10 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     abstract readonly injector: Injector;
 
     abstract readonly tableContainer: ElementRef;
+
+    abstract readonly tableScrollMockContainer: ElementRef;
+
+    abstract readonly tableBody: ElementRef;
 
     abstract readonly tableScrollable: TableScrollable;
 
@@ -194,4 +198,7 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
 
     /** Event fired when cancel button pressed. */
     readonly cancel: EventEmitter<void>;
+
+    /** @hidden */
+    readonly _focusableGrid: FocusableGridDirective;
 }
