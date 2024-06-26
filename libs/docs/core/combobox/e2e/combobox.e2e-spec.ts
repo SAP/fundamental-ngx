@@ -35,7 +35,6 @@ describe('Combobox component test suit', () => {
     const comboboxPage = new ComboboxPo();
     const {
         allInputFields,
-        mobileComboInput,
         dropdownPopover,
         activeInputButton,
         dropdownOption,
@@ -126,20 +125,26 @@ describe('Combobox component test suit', () => {
 
     describe('Check Combobox Mobile Mode', () => {
         it('verify Combobox Mobile Mode by choose option in mobile window or typing name of it', async () => {
-            await scrollIntoView(mobileComboInput);
-            await click(mobileComboInput);
+            await scrollIntoView(allInputFields, 9);
+            await click(allInputFields, 9);
             await click(dropdownOption);
             await click(mobileButton, 2);
-            await expect(await getValue(mobileComboInput)).withContext(appleTestText);
+            await expect(await getValue(allInputFields, 9)).toBe(appleTestText);
+
+            await click(allInputFields, 9);
+            await setValue(allInputFields, 'Ba', 10);
+            await click(dropdownOption);
+            await click(mobileButton, 2);
+            await expect(await getValue(allInputFields, 9)).toBe(bananaTestText);
         });
 
         it('verify Combobox Mobile Mode has clickable buttons cancel, close and has header', async () => {
-            await scrollIntoView(allInputFields, 10);
-            await click(mobileComboInput);
-            await expect(await getText(mobileTitle)).withContext(titleTestText);
+            await scrollIntoView(allInputFields, 9);
+            await click(allInputFields, 9);
+            await expect(await getText(mobileTitle)).toBe(titleTestText);
 
-            await expect(await isElementClickable(mobileButton)).withContext(true, 'close button not clickable');
-            await expect(await isElementClickable(mobileButton, 2)).withContext(true, 'cancel button not clickable');
+            await expect(await isElementClickable(mobileButton)).toBe(true, 'close button not clickable');
+            await expect(await isElementClickable(mobileButton, 2)).toBe(true, 'cancel button not clickable');
         });
     });
 

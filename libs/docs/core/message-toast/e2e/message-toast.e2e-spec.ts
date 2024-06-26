@@ -12,6 +12,7 @@ import {
 import { MessageToastPo } from './message-toast.po';
 
 describe('Textarea component test', () => {
+    //test
     const messageToastPage = new MessageToastPo();
     const { openMessageButton, hideAllButton, messageToast } = messageToastPage;
 
@@ -26,54 +27,67 @@ describe('Textarea component test', () => {
     }, 2);
 
     it('should check opening first messageToast', async () => {
+        //test
         await click(openMessageButton);
         await expect(await isElementDisplayed(messageToast)).toBe(true, 'messageToast is not displayed');
+        // test
         await waitForNotDisplayed(messageToast, 0, 7500);
-
+        //test
         await expect(await doesItExist(messageToast)).toBe(false, 'messageToast still displayed');
     });
 
     it('should check that message toast not disappears if hover on it', async () => {
+        //test
         await click(openMessageButton);
         await mouseHoverElement(messageToast);
-
+        //test
         await waitForElDisplayed(messageToast, 0, 10000);
+        // test
     });
 
     it('should check opening second messageToast', async () => {
+        //test
         await scrollIntoView(openMessageButton, 1);
         await click(openMessageButton, 1);
         await expect(await isElementDisplayed(messageToast)).toBe(true, 'messageToast is not displayed');
-
+        //test
         await waitForNotDisplayed(messageToast, 0, 4000);
+        // test
     });
 
     it('should check opening third messageToast', async () => {
+        //test
         await click(openMessageButton, 2);
         await expect(await isElementDisplayed(messageToast)).toBe(true, 'messageToast is not displayed');
-
+        //test
         await waitForNotDisplayed(messageToast, 0, 5100);
+        // test
     });
 
     it('should check that possible to open few messageToasts in one time', async () => {
+        //test
         await click(openMessageButton);
         await click(openMessageButton, 1);
-
+        //test
         await expect(await getElementArrayLength(messageToast)).toBe(2, 'one of messageToasts did not open');
     });
 
     it('should check working of Hide All button', async () => {
+        //test
         for (let i = 2; i > 0; i--) {
             await click(openMessageButton, i);
         }
+        //test
         await expect(await getElementArrayLength(messageToast)).toBe(2, 'not all messageToasts displayed');
         await scrollIntoView(hideAllButton);
+        //test
         await click(hideAllButton);
         await expect(await getElementArrayLength(messageToast)).toBe(0, 'elements is not hidden');
         await expect(await doesItExist(messageToast)).toBe(false, 'messageToast still displayed');
     });
 
     it('should check orientation', async () => {
+        //test
         await messageToastPage.checkRtlSwitch();
     });
 });

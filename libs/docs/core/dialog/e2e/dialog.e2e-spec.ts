@@ -64,12 +64,10 @@ describe('dialog test suite', () => {
         playgroundDialog,
         checkboxes,
         inputFields,
-        dialogExamples,
         customDialog,
         dialogBody,
         dialogContainer,
-        formDialog,
-        dialogInput
+        formDialog
     } = dialogPage;
 
     beforeAll(async () => {
@@ -119,10 +117,13 @@ describe('dialog test suite', () => {
 
     describe('dialog state examples', () => {
         it('should check auto dismissal', async () => {
+            // test
             const selfDismissingDialogCount = 3;
 
             for (let i = 0; i < selfDismissingDialogCount; i++) {
+                // test
                 await openDialog(stateDialog, i);
+                // test
                 // expect the dialog to close automatically in 4 seconds
                 await expect(await waitForNotPresent(dialog)).toBe(true, 'dialog did not close automatically');
             }

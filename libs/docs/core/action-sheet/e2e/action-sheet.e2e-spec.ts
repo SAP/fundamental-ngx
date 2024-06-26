@@ -16,7 +16,6 @@ describe('Action sheet test suite', () => {
     const actionSheetPage = new ActionSheetPo();
     const {
         actionSheetMenuButton,
-        actionSheetList,
         actionSheetListItems,
         actionSheetListItemButtons,
         alertMessage,
@@ -35,7 +34,7 @@ describe('Action sheet test suite', () => {
 
     it('should check action sheet items are clickable', async () => {
         const actionSheetCount = await getElementArrayLength(actionSheetMenuButton);
-
+        //test
         for (let i = 0; actionSheetCount > i; i++) {
             await click(actionSheetMenuButton, i);
             await checkElArrIsClickable(actionSheetListItemButtons);
@@ -43,6 +42,7 @@ describe('Action sheet test suite', () => {
     });
 
     it('should check compact', async () => {
+        //test
         await click(actionSheetMenuButton, 1);
         await expect(await getElementClass(actionSheetBodyContainer)).toContain(compactValue);
     });
@@ -56,16 +56,21 @@ describe('Action sheet test suite', () => {
     });
     it('should check alert appears after selection for mobile action sheet', async () => {
         await click(actionSheetMenuButton, 2);
+        //test
         const actionSheetItemCount = await getElementArrayLength(actionSheetListItems);
         for (let j = 0; actionSheetItemCount > j; j++) {
+            // test
             if (j > 3) {
                 await click(actionSheetListItemButtons, j);
+                // test
                 await click(actionSheetMenuButton, 2);
                 continue;
             }
             await click(actionSheetListItemButtons, j);
+            // test
             await expect(await getText(alertMessage)).toEqual(alertMessages[j]);
             await waitForNotDisplayed(alertMessage);
+            // test
             await click(actionSheetMenuButton, 2);
         }
     });
