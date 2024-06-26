@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Optional, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    Optional,
+    ViewEncapsulation,
+    booleanAttribute,
+    input
+} from '@angular/core';
 import { FD_DIALOG_BODY_COMPONENT } from '../tokens';
 
 import { AsyncPipe } from '@angular/common';
@@ -25,7 +33,7 @@ import { DialogRef } from '../utils/dialog-ref.class';
         '[class.fd-dialog__body--no-vertical-padding]': '!dialogConfig.verticalPadding',
         '[class.fd-dialog__body--no-horizontal-padding]': '!dialogConfig.horizontalPadding',
         '[style.min-height]': 'dialogConfig.bodyMinHeight',
-        '[style.padding]': 'dialogConfig.disablePaddings ? 0 : "1rem"'
+        '[style.padding]': 'dialogConfig.disablePaddings || disablePaddings() ? 0 : "1rem"'
     },
     providers: [
         {
@@ -40,6 +48,12 @@ import { DialogRef } from '../utils/dialog-ref.class';
     imports: [DynamicPortalComponent, BusyIndicatorComponent, AsyncPipe]
 })
 export class DialogBodyComponent {
+    /**
+     * property to remove the horizontal and vertical paddings from the body
+     * default is set to false
+     */
+    disablePaddings = input(false, { transform: booleanAttribute });
+
     /** @hidden */
     constructor(
         public readonly elementRef: ElementRef,

@@ -24,7 +24,7 @@
         fdp-icon-tab-bar-text-type-tab-item
         [item]="parentTab"
         [attr.aria-selected]="_containsSelected"
-        [colorAssociations]="colorAssociations"
+        [colorAssociations]="colorAssociations()"
         [layoutMode]="layoutMode"
         [attr.tabindex]="tabindex"
         (click)="selectedItem.emit()"
@@ -111,7 +111,7 @@
                 }
                 @if (item.color) {
                     <div class="screenreader-only">
-                        {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
+                        {{ (colorAssociations() && colorAssociations()?.[item.color]) || item.color }}
                     </div>
                 }
             </a>

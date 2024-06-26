@@ -3,6 +3,129 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.2...v0.50.1-rc.3) (2024-06-25)
+
+
+### Bug Fixes
+
+* **platform:** add fix for incorrect font weight for column header in sorted state ([#12018](https://github.com/SAP/fundamental-ngx/issues/12018)) ([de36eaa](https://github.com/SAP/fundamental-ngx/commit/de36eaa71b54f3f5be91bbba21ba3a5eb6eed281))
+
+
+
+
+
+## [0.50.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.1...v0.50.1-rc.2) (2024-06-25)
+
+
+### Bug Fixes
+
+* **core, platform:** add option to remove additinal paddings from table settings dialogs ([#12019](https://github.com/SAP/fundamental-ngx/issues/12019)) ([3801581](https://github.com/SAP/fundamental-ngx/commit/380158163a055588a8a66c1c68ce7d64124fc85c))
+
+
+
+
+
+## [0.50.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.0...v0.50.1-rc.1) (2024-06-25)
+
+
+### Bug Fixes
+
+* **platform:** use correct markup for the list in Filter dialog for Platform table ([#12020](https://github.com/SAP/fundamental-ngx/issues/12020)) ([e21be52](https://github.com/SAP/fundamental-ngx/commit/e21be52429a3570b12e36f5f000d1e983de2b67c))
+
+
+
+
+
+## [0.50.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.50.0...v0.50.1-rc.0) (2024-06-21)
+
+
+### Bug Fixes
+
+* **platform:** add fix for overflow button not working in Icon Tab Bar ([#12023](https://github.com/SAP/fundamental-ngx/issues/12023)) ([b91c5cd](https://github.com/SAP/fundamental-ngx/commit/b91c5cdf3df51e2bebf3c6fc5ca27073b5ed070e))
+
+
+
+
+
+# [0.50.0](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.111...v0.50.0) (2024-06-13)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.111](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.110...v0.50.0-rc.111) (2024-06-13)
+
+
+### Bug Fixes
+
+* **core:** add second badge to Card, styling fixes and empty card example ([#11998](https://github.com/SAP/fundamental-ngx/issues/11998)) ([8944787](https://github.com/SAP/fundamental-ngx/commit/8944787eb323c6b9282ec628947950535b9bb12f))
+
+
+
+
+
+# [0.50.0-rc.110](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.109...v0.50.0-rc.110) (2024-06-12)
+
+
+### Bug Fixes
+
+* **platform:** converted inputs, queries etc. into the signals to handle reactivity ([#11984](https://github.com/SAP/fundamental-ngx/issues/11984)) ([99bfed4](https://github.com/SAP/fundamental-ngx/commit/99bfed4ce8b1655205b25f567ab43d5887ad766f))
+
+
+
+
+
+# [0.50.0-rc.109](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.108...v0.50.0-rc.109) (2024-06-12)
+
+
+### Bug Fixes
+
+* **core, platform:** add option to make header cells non interactive ([#11944](https://github.com/SAP/fundamental-ngx/issues/11944)) ([2bdfbb8](https://github.com/SAP/fundamental-ngx/commit/2bdfbb838b98f747a471b7231c49744ab064d68e))
+
+
+
+
+
+# [0.50.0-rc.108](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.107...v0.50.0-rc.108) (2024-06-12)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.50.0-rc.107](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.106...v0.50.0-rc.107) (2024-06-11)
+
+
+### Bug Fixes
+
+* **core:** remove OverlayContainer override ([#11997](https://github.com/SAP/fundamental-ngx/issues/11997)) ([69b441e](https://github.com/SAP/fundamental-ngx/commit/69b441ea81c1e6bb58d85c4e9af4278c055a41b6))
+
+
+
+
+
+# [0.50.0-rc.106](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.105...v0.50.0-rc.106) (2024-06-11)
+
+
+### Bug Fixes
+
+* **core:** update Message Box status icons ([#11996](https://github.com/SAP/fundamental-ngx/issues/11996)) ([47ff78a](https://github.com/SAP/fundamental-ngx/commit/47ff78a150c0cc07ee68a1569c3167041c96736c))
+
+
+
+
+
+# [0.50.0-rc.105](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.104...v0.50.0-rc.105) (2024-06-09)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 # [0.50.0-rc.104](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.103...v0.50.0-rc.104) (2024-05-28)
 
 

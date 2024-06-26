@@ -47,15 +47,15 @@ export class MessageBoxSemanticIconComponent {
     get _semanticIcon(): string {
         switch (this.messageBoxConfig.type) {
             case 'error':
-                return 'message-error';
+                return 'error';
             case 'success':
-                return 'message-success';
+                return 'sys-enter-2';
             case 'warning':
-                return 'message-warning';
+                return 'alert';
             case 'information':
-                return 'message-information';
+                return 'information';
             case 'confirmation':
-                return 'question-mark';
+                return 'sys-help-2';
             default:
                 return '';
         }

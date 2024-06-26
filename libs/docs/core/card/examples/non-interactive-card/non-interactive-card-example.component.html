@@ -46,18 +46,27 @@
 </fd-card>
 
 <br /><br />
-
+<h4>Empty State</h4>
 <fd-card style="width: 400px">
     <fd-card-header>
         <fd-card-main-header [interactive]="true">
             <fd-avatar glyph="cart" [circle]="true" size="s" ariaLabel="avatar image" title="avatar image"></fd-avatar>
             <h2 fd-card-title>Card Title</h2>
             <h3 fd-card-subtitle>Card Subtitle</h3>
-            <span fd-card-counter status="positive">3 of 10</span>
         </fd-card-main-header>
     </fd-card-header>
     <fd-card-content>
-        <div style="height: 200px"></div>
+        <figure fd-illustrated-message type="dialog" [svgConfig]="sceneConfig" svgAriaLabel="Illustration label">
+            <figcaption fd-illustrated-message-figcaption>
+                <h3 fd-illustrated-message-title>Unable to load data</h3>
+                <p fd-illustrated-message-text>
+                    Try reloading. If that still doesn't help check with your administrator.
+                </p>
+            </figcaption>
+            <fd-illustrated-message-actions>
+                <button fd-button label="Reload"></button>
+            </fd-illustrated-message-actions>
+        </figure>
     </fd-card-content>
 </fd-card>
 
