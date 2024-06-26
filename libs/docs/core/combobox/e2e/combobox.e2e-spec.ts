@@ -134,7 +134,7 @@ describe('Combobox component test suit', () => {
         });
 
         it('verify Combobox Mobile Mode has clickable buttons cancel, close and has header', async () => {
-            await scrollIntoView(mobileComboInput);
+            await scrollIntoView(allInputFields, 10);
             await click(mobileComboInput);
             await expect(await getText(mobileTitle)).withContext(titleTestText);
 
