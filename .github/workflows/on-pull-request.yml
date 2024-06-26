@@ -74,7 +74,7 @@ jobs:
                       npx nx affected --target=test --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=nx-plugin --parallel=3
                       npx nx affected --target=lint --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=core,platform,cx,btp --parallel=3
 
-            - name: Text workspace tags
+            - name: Test workspace tags
               run: npx nx run nx-plugin:test --skip-nx-cache
 
     e2e_test:
@@ -97,9 +97,14 @@ jobs:
             - run: |
                   export DISPLAY=:99
                   chrome --version
-                  sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 & # optional
+                  sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
               env:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
+            - name: Clear Firebase Cache (Optional)
+              run: |
+                  node -e "require('firebase').firestore().terminate().then(() => firebase.firestore().clearPersistence()).then(() => firebase.firestore())"
+              env:
+                  FIREBASE_SERVICE_ACCOUNT_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOKEN }}
             - uses: FirebaseExtended/action-hosting-deploy@v0
               continue-on-error: true
               id: firebase_hosting_preview
