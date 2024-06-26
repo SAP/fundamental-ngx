@@ -29,12 +29,14 @@ describe('Textarea component test', () => {
         await click(openMessageButton);
         await expect(await isElementDisplayed(messageToast)).toBe(true, 'messageToast is not displayed');
         await waitForNotDisplayed(messageToast, 0, 7500);
+
         await expect(await doesItExist(messageToast)).toBe(false, 'messageToast still displayed');
     });
 
     it('should check that message toast not disappears if hover on it', async () => {
         await click(openMessageButton);
         await mouseHoverElement(messageToast);
+
         await waitForElDisplayed(messageToast, 0, 10000);
     });
 
@@ -42,18 +44,21 @@ describe('Textarea component test', () => {
         await scrollIntoView(openMessageButton, 1);
         await click(openMessageButton, 1);
         await expect(await isElementDisplayed(messageToast)).toBe(true, 'messageToast is not displayed');
+
         await waitForNotDisplayed(messageToast, 0, 4000);
     });
 
     it('should check opening third messageToast', async () => {
         await click(openMessageButton, 2);
         await expect(await isElementDisplayed(messageToast)).toBe(true, 'messageToast is not displayed');
+
         await waitForNotDisplayed(messageToast, 0, 5100);
     });
 
     it('should check that possible to open few messageToasts in one time', async () => {
         await click(openMessageButton);
         await click(openMessageButton, 1);
+
         await expect(await getElementArrayLength(messageToast)).toBe(2, 'one of messageToasts did not open');
     });
 
