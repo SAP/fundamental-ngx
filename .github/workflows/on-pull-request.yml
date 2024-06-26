@@ -74,7 +74,7 @@ jobs:
                       npx nx affected --target=test --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=nx-plugin --parallel=3
                       npx nx affected --target=lint --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=core,platform,cx,btp --parallel=3
 
-            - name: Test workspace tags
+            - name: Text workspace tags
               run: npx nx run nx-plugin:test --skip-nx-cache
 
     e2e_test:
@@ -97,14 +97,9 @@ jobs:
             - run: |
                   export DISPLAY=:99
                   chrome --version
-                  sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+                  sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 & # optional
               env:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
-            - name: Clear Firebase Cache (Optional)
-              run: |
-                  node -e "require('firebase').firestore().terminate().then(() => firebase.firestore().clearPersistence()).then(() => firebase.firestore())"
-              env:
-                  FIREBASE_SERVICE_ACCOUNT_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOKEN }}
             - uses: FirebaseExtended/action-hosting-deploy@v0
               continue-on-error: true
               id: firebase_hosting_preview
@@ -117,7 +112,7 @@ jobs:
             - name: Test affected on firebase
               if: ${{ steps.firebase_hosting_preview.outputs.details_url }}
               run: |
-                  npx nx affected --target=e2e --base=origin/main --head=HEAD --parallel=2 --baseUrl=${{ steps.firebase_hosting_preview.outputs.details_url }} --devServerTarget="" --runInBand
+                  npx nx affected --target=e2e --base=origin/main --head=HEAD --parallel=2 --runInBand --baseUrl=${{ steps.firebase_hosting_preview.outputs.details_url }} --devServerTarget=""
 
             - name: Stopping agents # They're no longer needed, so we can stop them to avoid them going on timeout
               if: ${{ !steps.firebase_hosting_preview.outputs.details_url }}
