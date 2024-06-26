@@ -126,21 +126,21 @@ describe('Combobox component test suit', () => {
     describe('Check Combobox Mobile Mode', () => {
         it('verify Combobox Mobile Mode by choose option in mobile window or typing name of it', async () => {
             await scrollIntoView(allInputFields, 9);
-            await click(allInputFields, 9);
+            await click(allInputFields, 10);
             await click(dropdownOption);
             await click(mobileButton, 2);
-            await expect(await getValue(allInputFields, 9)).toBe(appleTestText);
+            await expect(await getValue(allInputFields, 10)).toBe(appleTestText);
 
-            await click(allInputFields, 9);
+            await click(allInputFields, 10);
             await setValue(allInputFields, 'Ba', 10);
             await click(dropdownOption);
             await click(mobileButton, 2);
-            await expect(await getValue(allInputFields, 9)).toBe(bananaTestText);
+            await expect(await getValue(allInputFields, 10)).toBe(bananaTestText);
         });
 
         it('verify Combobox Mobile Mode has clickable buttons cancel, close and has header', async () => {
-            await scrollIntoView(allInputFields, 9);
-            await click(allInputFields, 9);
+            await scrollIntoView(allInputFields, 10);
+            await click(allInputFields, 10);
             await expect(await getText(mobileTitle)).toBe(titleTestText);
 
             await expect(await isElementClickable(mobileButton)).toBe(true, 'close button not clickable');
