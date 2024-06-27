@@ -128,30 +128,36 @@ describe('Table component test suite', () => {
             await tablePage.findElementInTable(tableFilterableExample, tableCellArr, 1);
         });
 
-        it('should check filtering by status color', async () => {
+        it('should check filtering by status color positive', async () => {
+            await scrollIntoView(tableFilterableExample);
+            await click(tableFilterableExample + toolbarButton);
             await tablePage.chooseFilter(2, 1);
-            const rowLength = await getElementArrayLength(tableFilterableExample + tableRow);
-            for (let i = 0; i < rowLength; i++) {
-                await expect((await getText(tableCellStatusColor, i)).trim()).toBe('positive');
-            }
+            await expect((await getText(tableCellStatusColor, 1)).trim()).toBe('positive');
+        });
 
+        it('should check filtering by status color negative', async () => {
+            await scrollIntoView(tableFilterableExample);
+            await click(tableFilterableExample + toolbarButton);
             await tablePage.chooseFilter(2, 2);
-            const tableRowLength = await getElementArrayLength(tableFilterableExample + tableRow);
-            for (let i = 0; i < tableRowLength; i++) {
-                await expect((await getText(tableCellStatusColor, i)).trim()).toBe('negative');
-            }
+            await expect((await getText(tableCellStatusColor, 1)).trim()).toBe('negative');
+        });
 
+        it('should check no filter results', async () => {
             await tablePage.chooseFilter(2, 3);
             await expect(await doesItExist(tableFilterableExample + tableRow)).toBe(false, '');
         });
 
         it('should check filtering by status', async () => {
+            await scrollIntoView(tableFilterableExample);
+            await click(tableFilterableExample + toolbarButton);
             await tablePage.chooseFilter(1, 0);
             const rowLength = await getElementArrayLength(tableFilterableExample + tableRow);
             for (let i = 0; i < rowLength; i++) {
                 await expect((await getText(tableFilterableExample + tableCellStatus, i)).trim()).toBe('Out of stock');
             }
             await refreshPage();
+            await scrollIntoView(tableFilterableExample);
+            await click(tableFilterableExample + toolbarButton);
             await tablePage.chooseFilter(1, 1);
             const tableRowLength = await getElementArrayLength(tableFilterableExample + tableRow);
             for (let i = 0; i < tableRowLength; i++) {
