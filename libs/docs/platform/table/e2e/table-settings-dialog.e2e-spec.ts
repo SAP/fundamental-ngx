@@ -131,19 +131,24 @@ describe('Table component test suite', () => {
         it('should check filtering by status color positive', async () => {
             await scrollIntoView(tableFilterableExample);
             await click(tableFilterableExample + toolbarButton);
-            await tablePage.chooseFilter(2, 1);
+            const elem = $('#fd-list-item-69');
+            elem.click();
             await expect((await getText(tableCellStatusColor, 1)).trim()).withContext('positive');
         });
 
         it('should check filtering by status color negative', async () => {
             await scrollIntoView(tableFilterableExample);
             await click(tableFilterableExample + toolbarButton);
-            await tablePage.chooseFilter(2, 2);
-            await expect((await getText(tableCellStatusColor, 1)).trim()).withContext('negative');
+            const elem = $('#fd-list-item-69');
+            elem.click();
+            await expect((await getText(tableCellStatusColor, 2)).trim()).withContext('negative');
         });
 
         it('should check no filter results', async () => {
-            await tablePage.chooseFilter(2, 3);
+            await scrollIntoView(tableFilterableExample);
+            await click(tableFilterableExample + toolbarButton);
+            const elem = $('#fd-list-item-69');
+            elem.click();
             await expect(await doesItExist(tableFilterableExample + tableRow)).withContext(false, '');
         });
 
