@@ -56,7 +56,7 @@ export class TablePo extends PlatformBaseComponentPo {
     buttonSortedOrder = 'li.fd-list__item:not(.fd-list__group-header)';
     checkbox = '.fd-checkbox__label';
     busyIndicator = 'fd-busy-indicator .fd-busy-indicator';
-    filterItem = '.fd-list__item--link';
+    filterItem = '.fd-list__item';
     filterByColorItem = '.fd-list__item';
     tableCellStatusColor = '[headers*="statusColor"]';
     tableCellStatus = ' [headers*="__status"]:not([headers*="__statusColor"])';
