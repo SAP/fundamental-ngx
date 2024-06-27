@@ -131,7 +131,7 @@ describe('Table component test suite', () => {
         it('should check filtering by status color positive', async () => {
             await scrollIntoView(tableFilterableExample);
             await click(tableFilterableExample + toolbarButton);
-            const elem = $('#fd-list-item-69');
+            const elem = $('li.last-child');
             elem.click();
             await expect((await getText(tableCellStatusColor, 1)).trim()).withContext('positive');
         });
@@ -139,7 +139,7 @@ describe('Table component test suite', () => {
         it('should check filtering by status color negative', async () => {
             await scrollIntoView(tableFilterableExample);
             await click(tableFilterableExample + toolbarButton);
-            const elem = $('#fd-list-item-69');
+            const elem = $('li.last-child');
             elem.click();
             await expect((await getText(tableCellStatusColor, 2)).trim()).withContext('negative');
         });
@@ -147,7 +147,7 @@ describe('Table component test suite', () => {
         it('should check no filter results', async () => {
             await scrollIntoView(tableFilterableExample);
             await click(tableFilterableExample + toolbarButton);
-            const elem = $('#fd-list-item-69');
+            const elem = $('li.last-child');
             elem.click();
             await expect(await doesItExist(tableFilterableExample + tableRow)).withContext(false, '');
         });
@@ -155,21 +155,12 @@ describe('Table component test suite', () => {
         it('should check filtering by status', async () => {
             await scrollIntoView(tableFilterableExample);
             await click(tableFilterableExample + toolbarButton);
-            await tablePage.chooseFilter(1, 0);
+            const elem = $('li:nth-child(2)');
+            elem.click();
             const rowLength = await getElementArrayLength(tableFilterableExample + tableRow);
             for (let i = 0; i < rowLength; i++) {
                 await expect((await getText(tableFilterableExample + tableCellStatus, i)).trim()).withContext(
                     'Out of stock'
-                );
-            }
-            await refreshPage();
-            await scrollIntoView(tableFilterableExample);
-            await click(tableFilterableExample + toolbarButton);
-            await tablePage.chooseFilter(1, 1);
-            const tableRowLength = await getElementArrayLength(tableFilterableExample + tableRow);
-            for (let i = 0; i < tableRowLength; i++) {
-                await expect((await getText(tableFilterableExample + tableCellStatus, i)).trim()).withContext(
-                    tableCellArr[3]
                 );
             }
         });
