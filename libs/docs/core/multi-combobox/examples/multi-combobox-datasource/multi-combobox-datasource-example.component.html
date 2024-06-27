@@ -1,9 +1,10 @@
 <form [formGroup]="formGroup">
     <div fd-form-item>
-        <label fd-form-label for="array-of-strings">Array of Strings:</label>
+        <label fd-form-label for="array-of-strings">Array of Strings (Matching strategy - contains):</label>
         <fd-multi-combobox
             [showSelectAll]="true"
             [autoResize]="true"
+            [matchingStrategy]="matchingStategy"
             name="array-of-strings"
             inputId="array-of-strings"
             placeholder="Type some text..."
@@ -18,7 +19,9 @@
 <p>Selected: {{ selectedItems1 }}</p>
 
 <div fd-form-item>
-    <label fd-form-label for="array-of-objects">Array of Objects:</label>
+    <label fd-form-label for="array-of-objects"
+        >Array of Objects (Matching strategy - starts with per term (default)):</label
+    >
     <fd-multi-combobox
         [autoResize]="true"
         name="array-of-objects"

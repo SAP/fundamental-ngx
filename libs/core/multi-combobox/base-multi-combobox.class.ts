@@ -426,7 +426,7 @@ export abstract class BaseMultiCombobox<T = any> {
      * @hidden
      * Prepares the data stream and subscribes to it.
      */
-    protected _openDataStream(): void {
+    protected _openDataStream(matchingStrategy: MatchingStrategy): void {
         const dataSourceProvider = this.dataSourceDirective.dataSourceProvider;
 
         if (!dataSourceProvider) {
@@ -445,7 +445,7 @@ export abstract class BaseMultiCombobox<T = any> {
         }
 
         dataSourceProvider.dataProvider.setMatchingBy(matchingBy);
-        dataSourceProvider.dataProvider.setMatchingStrategy(this._matchingStrategy);
+        dataSourceProvider.dataProvider.setMatchingStrategy(matchingStrategy);
 
         // initial data fetch
         const map = new Map();
