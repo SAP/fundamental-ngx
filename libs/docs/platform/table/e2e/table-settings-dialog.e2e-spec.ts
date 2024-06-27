@@ -132,19 +132,19 @@ describe('Table component test suite', () => {
             await scrollIntoView(tableFilterableExample);
             await click(tableFilterableExample + toolbarButton);
             await tablePage.chooseFilter(2, 1);
-            await expect((await getText(tableCellStatusColor, 1)).trim()).toBe('positive');
+            await expect((await getText(tableCellStatusColor, 1)).trim()).withContext('positive');
         });
 
         it('should check filtering by status color negative', async () => {
             await scrollIntoView(tableFilterableExample);
             await click(tableFilterableExample + toolbarButton);
             await tablePage.chooseFilter(2, 2);
-            await expect((await getText(tableCellStatusColor, 1)).trim()).toBe('negative');
+            await expect((await getText(tableCellStatusColor, 1)).trim()).withContext('negative');
         });
 
         it('should check no filter results', async () => {
             await tablePage.chooseFilter(2, 3);
-            await expect(await doesItExist(tableFilterableExample + tableRow)).toBe(false, '');
+            await expect(await doesItExist(tableFilterableExample + tableRow)).withContext(false, '');
         });
 
         it('should check filtering by status', async () => {
@@ -153,7 +153,9 @@ describe('Table component test suite', () => {
             await tablePage.chooseFilter(1, 0);
             const rowLength = await getElementArrayLength(tableFilterableExample + tableRow);
             for (let i = 0; i < rowLength; i++) {
-                await expect((await getText(tableFilterableExample + tableCellStatus, i)).trim()).toBe('Out of stock');
+                await expect((await getText(tableFilterableExample + tableCellStatus, i)).trim()).withContext(
+                    'Out of stock'
+                );
             }
             await refreshPage();
             await scrollIntoView(tableFilterableExample);
@@ -161,7 +163,9 @@ describe('Table component test suite', () => {
             await tablePage.chooseFilter(1, 1);
             const tableRowLength = await getElementArrayLength(tableFilterableExample + tableRow);
             for (let i = 0; i < tableRowLength; i++) {
-                await expect((await getText(tableFilterableExample + tableCellStatus, i)).trim()).toBe(tableCellArr[3]);
+                await expect((await getText(tableFilterableExample + tableCellStatus, i)).trim()).withContext(
+                    tableCellArr[3]
+                );
             }
         });
 
@@ -175,7 +179,7 @@ describe('Table component test suite', () => {
             await pause(500);
             await click(tableFilterableExample + buttonFilter);
             await click(dialogFilters);
-            await expect(await isElementClickable(filterResetButton)).toBe(true, 'reset button not clickable');
+            await expect(await isElementClickable(filterResetButton)).withContext(true, 'reset button not clickable');
         });
     });
 
