@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
+import { DataSourceDirective, MatchingStrategy } from '@fundamental-ngx/cdk/data-source';
 import { CvaDirective } from '@fundamental-ngx/cdk/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
@@ -30,6 +30,7 @@ import { of } from 'rxjs';
 })
 export class MultiComboboxDatasourceExampleComponent {
     isLimitless = true;
+    matchingStategy = MatchingStrategy.CONTAINS;
 
     dataSourceStrings = ['Apple', 'Banana', 'Pineapple', 'Strawberry', 'Broccoli', 'Carrot', 'Jalapeño', 'Spinach'];
 
