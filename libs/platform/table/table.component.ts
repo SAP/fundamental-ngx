@@ -10,6 +10,7 @@ import {
     computed,
     ContentChild,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     forwardRef,
@@ -32,6 +33,7 @@ import {
 } from '@angular/core';
 
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     DndListDirective,
     DragAndDropModule,
@@ -494,6 +496,9 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _calculateFrozenColumnRefresh$ = new Subject<void>();
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** Event emitted when current preset configuration has been changed. */
     @Output()
@@ -970,6 +975,13 @@ export class TableComponent<T = any>
 
         if (this._focusableGrid) {
             this._focusableGrid.shortRowFocus = 'first';
+        }
+
+        if (this._virtualScrollDirective) {
+            this._setMockScrollbarPosition(this._rtlService?.rtlSignal());
+            this._rtlService?.rtl.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isRtl) => {
+                this._setMockScrollbarPosition(isRtl);
+            });
         }
     }
 
@@ -2294,5 +2306,13 @@ export class TableComponent<T = any>
         this._lastFreezableColumnCalculation = false;
 
         this.freezeToColumn(freezedColumns[freezedColumns.length - 1]);
+    }
+
+    /** @hidden */
+    private _setMockScrollbarPosition(isRtl: boolean | undefined): void {
+        if (this.tableScrollMockContainer) {
+            this.tableScrollMockContainer.nativeElement.style.left = isRtl ? '0' : 'auto';
+            this.tableScrollMockContainer.nativeElement.style.right = isRtl ? 'auto' : '0';
+        }
     }
 }
