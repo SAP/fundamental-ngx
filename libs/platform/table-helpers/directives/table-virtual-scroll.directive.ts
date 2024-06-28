@@ -165,16 +165,18 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
     }
 
     private _wheelScrollListenerFunction = (event: WheelEvent): void => {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        clearTimeout(this._wheelTimeout);
-        const deltaY = event.deltaY;
-        if (deltaY) {
-            this._wheelTimeout = setTimeout(() => {
-                this._table.tableScrollMockContainer.nativeElement.scrollBy({ top: deltaY });
-                this._scrollRow(deltaY > 0 ? 'down' : 'up', deltaY > 0 ? 1 : -1);
-                this._lastMockScrollPosition = this._table.tableScrollMockContainer.nativeElement.scrollTop;
-            }, 5);
+        if (Math.abs(event.deltaX) < Math.abs(event.deltaY)) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            clearTimeout(this._wheelTimeout);
+            const deltaY = event.deltaY;
+            if (deltaY) {
+                this._wheelTimeout = setTimeout(() => {
+                    this._table.tableScrollMockContainer.nativeElement.scrollBy({ top: deltaY });
+                    this._scrollRow(deltaY > 0 ? 'down' : 'up', deltaY > 0 ? 1 : -1);
+                    this._lastMockScrollPosition = this._table.tableScrollMockContainer.nativeElement.scrollTop;
+                }, 5);
+            }
         }
     };
 
