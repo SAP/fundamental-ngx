@@ -4,13 +4,13 @@ import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import { PresetManagedComponent } from '@fundamental-ngx/platform/shared';
 import { Observable } from 'rxjs';
 
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FocusableGridDirective, Nullable } from '@fundamental-ngx/cdk/utils';
 import { TableDataSource } from './domain';
 import { CollectionFilter } from './interfaces/collection-filter.interface';
 import { CollectionGroup } from './interfaces/collection-group.interface';
 import { CollectionSort } from './interfaces/collection-sort.interface';
 import { TableState } from './interfaces/table-state.interface';
-import { PlatformTableManagedPreset, SaveRowsEvent, TableInitialState, TableRow } from './models';
+import { PlatformTableManagedPreset, SaveRowsEvent, TableInitialState, TableRow, TableVirtualScroll } from './models';
 import { TableScrollable } from './services/table-scroll-dispatcher.service';
 import { TableColumn } from './table-column';
 
@@ -57,13 +57,19 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
 
     abstract readonly tableContainer: ElementRef;
 
+    abstract readonly tableScrollMockContainer: ElementRef;
+
     abstract readonly tableScrollable: TableScrollable;
+
+    abstract _virtualScrollDirective: TableVirtualScroll | null;
 
     abstract _tableRowsVisible: TableRow<T>[];
 
     abstract _tableRows: TableRow<T>[];
 
     abstract _tableRowsInViewPortPlaceholder: number[];
+
+    abstract _focusableGrid: FocusableGridDirective;
 
     /** Get table state */
     abstract getTableState(): TableState;

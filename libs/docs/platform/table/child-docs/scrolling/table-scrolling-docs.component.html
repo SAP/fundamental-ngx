@@ -47,3 +47,23 @@
     <fdp-platform-table-virtual-scroll-example></fdp-platform-table-virtual-scroll-example>
 </component-example>
 <code-example [exampleFiles]="virtualScrollTableFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="virtual-scroll-whole-rows" componentName="table/scrolling"
+    >Virtual Scroll - Scrolling Whole Rows</fd-docs-section-title
+>
+<p>
+    Virtual scrolling can be further enhanced by setting the <code>[scrollWholeRow]</code> input to true. This will
+    change the behavior of virtual scrolling both behind the scenes and for the user. This will only render to the DOM
+    the rows which will actually be visible to the user. The <code>[renderAhead]</code> property no longer applies. It
+    changes the functionality of the table by scrolling entire rows when the user performs a scroll with the mousewheel
+    or with the scrollbar to the side of the container. In order to use this feature, all rows must have a shared, fixed
+    height. This height can be customized with the <code>[rowHeight]</code> property, or it will default to the current
+    content density. The height of rows will not expand depending on their content, but any truncated text will be
+    applied to the cell's title attribute.
+</p>
+<component-example>
+    <fdp-platform-table-virtual-scroll-whole-row-example></fdp-platform-table-virtual-scroll-whole-row-example>
+</component-example>
+<code-example [exampleFiles]="virtualScrollWholeRowTableFiles"></code-example>

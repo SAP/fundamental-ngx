@@ -176,8 +176,15 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** Retrieves custom column value or returns `unset` */
     getColumnWidthStyle(columnName: string): string {
-        const calculatedWidth = this._fixedColumnsWidthMap.get(columnName);
-        return calculatedWidth || 'unset';
+        if (this._tableRef._virtualScrollDirective?.scrollWholeRows) {
+            return (
+                this._fixedColumnsWidthMap.get(columnName) ||
+                this._tableRef._tableWidthPx / this._tableRef.getVisibleTableColumns().length + 'px'
+            );
+        } else {
+            const calculatedWidth = this._fixedColumnsWidthMap.get(columnName);
+            return calculatedWidth || 'unset';
+        }
     }
 
     /** Previous column name */
