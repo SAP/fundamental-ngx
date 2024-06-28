@@ -530,6 +530,12 @@ export class TableComponent<T = any>
     @ViewChild(DndListDirective)
     private readonly _dndDirective: Nullable<DndListDirective<TableRow>>;
     /** @hidden */
+    @ViewChild('tableScrollMockContainer')
+    readonly tableScrollMockContainer: ElementRef<HTMLDivElement>;
+    /** @hidden */
+    @ViewChild('tableBody', { read: ElementRef })
+    readonly tableBody: ElementRef<HTMLElement>;
+    /** @hidden */
     @ContentChildren(TableColumn)
     readonly columns: QueryList<TableColumn>;
     /** @hidden */
@@ -685,9 +691,12 @@ export class TableComponent<T = any>
         optional: true
     });
     /** @hidden */
-    readonly _virtualScrollDirective = inject<TableVirtualScroll>(FDP_TABLE_VIRTUAL_SCROLL_DIRECTIVE, {
-        optional: true
-    });
+    readonly _virtualScrollDirective: TableVirtualScroll | null = inject<TableVirtualScroll>(
+        FDP_TABLE_VIRTUAL_SCROLL_DIRECTIVE,
+        {
+            optional: true
+        }
+    );
     /** @hidden */
     readonly _dndTableDirective = inject<TableDraggable>(FDP_TABLE_DRAGGABLE_DIRECTIVE, {
         optional: true
@@ -916,7 +925,13 @@ export class TableComponent<T = any>
 
         this._listenToLoadingAndRefocusCell();
 
-        this._initScrollPosition();
+        if (
+            !this._virtualScrollDirective?.scrollWholeRows ||
+            !this._virtualScrollDirective ||
+            !this._virtualScrollDirective?.virtualScroll
+        ) {
+            this._initScrollPosition();
+        }
 
         this._listenToFixedColumnsWidth();
 
@@ -924,16 +939,27 @@ export class TableComponent<T = any>
             this.expandAll();
         }
 
-        this._subscriptions.add(
-            this._virtualScrollDirective?.virtualScrollTransform$
-                .pipe(filter(() => !!this._virtualScrollDirective?.virtualScroll && !!this._tableBody))
-                .subscribe((transform) => {
-                    this._tableBody.nativeElement.style.transform = `translateY(${transform}px)`;
-                })
-        );
+        if (!this._virtualScrollDirective?.scrollWholeRows) {
+            this._subscriptions.add(
+                this._virtualScrollDirective?.virtualScrollTransform$
+                    .pipe(filter(() => !!this._virtualScrollDirective?.virtualScroll && !!this._tableBody))
+                    .subscribe((transform) => {
+                        this._tableBody.nativeElement.style.transform = `translateY(${transform}px)`;
+                    })
+            );
+        }
 
         if (this._focusableGrid) {
             this._focusableGrid.shortRowFocus = 'first';
+        }
+
+        if (this._virtualScrollDirective?.scrollWholeRows) {
+            this._setMockScrollbarPosition(this._rtlService?.rtl.value);
+            this._subscriptions.add(
+                this._rtlService?.rtl.subscribe((isRtl) => {
+                    this._setMockScrollbarPosition(isRtl);
+                })
+            );
         }
     }
 
@@ -2258,5 +2284,13 @@ export class TableComponent<T = any>
         this._lastFreezableColumnCalculation = false;
 
         this.freezeToColumn(freezedColumns[freezedColumns.length - 1]);
+    }
+
+    /** @hidden */
+    private _setMockScrollbarPosition(isRtl: boolean | undefined): void {
+        if (this.tableScrollMockContainer) {
+            this.tableScrollMockContainer.nativeElement.style.left = isRtl ? '0' : 'auto';
+            this.tableScrollMockContainer.nativeElement.style.right = isRtl ? 'auto' : '0';
+        }
     }
 }

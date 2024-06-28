@@ -63,6 +63,7 @@ import { PlatformTableInitialLoadingExampleComponent } from './examples/initial-
 import { PlatformTableColumnsNgforExampleComponent } from './examples/platform-table-columns-ngfor-example.component';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { PlatformTableVirtualScrollExampleComponent } from './examples/virtual-scroll/platform-table-virtual-scroll-example.component';
+import { PlatformTableVirtualScrollWholeRowExampleComponent } from './examples/virtual-scroll-whole-row/platform-table-virtual-scroll-whole-row-example.component';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { P13DialogDocsComponent } from './child-docs/p13-dialog/p13-dialog-docs.component';
 import { SettingsDialogDocsComponent } from './child-docs/settings-dialog/settings-dialog-docs.component';
@@ -154,6 +155,7 @@ const routes: Routes = [
         PlatformTableInitialLoadingExampleComponent,
         PlatformTableColumnsNgforExampleComponent,
         PlatformTableVirtualScrollExampleComponent,
+        PlatformTableVirtualScrollWholeRowExampleComponent,
         P13DialogDocsComponent,
         SettingsDialogDocsComponent,
         RowSelectionDocsComponent,
