@@ -4,6 +4,7 @@
     "sourceRoot": "libs/docs/cdk/initial-focus",
     "projectType": "library",
     "prefix": "fdk-initial-focus",
+    "tags": ["type:lib", "scope:docs"],
     "targets": {
         "e2e": {
             "executor": "@fundamental-ngx/nx-plugin:e2e-test",
@@ -13,6 +14,5 @@
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-cdk-initial-focus"]
         }
-    },
-    "tags": ["type:lib", "scope:docs"]
+    }
 }

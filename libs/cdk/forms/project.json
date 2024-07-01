@@ -4,6 +4,7 @@
     "projectType": "library",
     "sourceRoot": "libs/cdk/forms",
     "prefix": "fdk",
-    "targets": {},
-    "tags": ["type:lib", "scope:cdk"]
+    "tags": ["type:lib", "scope:cdk"],
+    "// targets": "to see all targets run: nx show project cdk-forms --web",
+    "targets": {}
 }

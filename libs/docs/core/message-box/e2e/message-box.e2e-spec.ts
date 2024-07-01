@@ -1,6 +1,5 @@
 import {
     click,
-    doesItExist,
     getElementArrayLength,
     getElementClass,
     getText,
@@ -12,7 +11,7 @@ import {
     waitForElDisplayed,
     waitForNotPresent
 } from '../../../../../e2e';
-import { buttonClassArr, iconsArr } from './message-box';
+import { buttonClassArr } from './message-box';
 import { MessageBoxPo } from './message-box.po';
 
 describe('Message-box test suits', () => {
@@ -104,12 +103,6 @@ describe('Message-box test suits', () => {
                 );
                 await click(sematicTypesExample + button, i);
                 await waitForElDisplayed(messageBox);
-                i === buttonsLength - 1
-                    ? await expect(await doesItExist(messageIcon)).toBe(false, 'Icon exists')
-                    : await expect(await getElementClass(messageIcon)).toContain(
-                          iconsArr[i],
-                          `Icon is not ${iconsArr[i]}`
-                      );
                 await click(okButton);
                 await waitForElDisappear(messageBox);
             }

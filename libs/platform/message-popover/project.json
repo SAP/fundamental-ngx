@@ -4,7 +4,8 @@
     "projectType": "library",
     "sourceRoot": "libs/platform/message-popover",
     "prefix": "fdp",
-    "targets": {},
     "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": ["cdk", "core"]
+    "implicitDependencies": ["cdk", "core"],
+    "// targets": "to see all targets run: nx show project platform-message-popover --web",
+    "targets": {}
 }

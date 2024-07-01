@@ -4,6 +4,7 @@
     "sourceRoot": "libs/docs/platform/message-popover",
     "projectType": "library",
     "prefix": "fdp-doc",
+    "tags": ["type:lib", "scope:docs"],
     "targets": {
         "e2e": {
             "executor": "@fundamental-ngx/nx-plugin:e2e-test",
@@ -13,6 +14,5 @@
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-platform-message-popover"]
         }
-    },
-    "tags": ["type:lib", "scope:docs"]
+    }
 }

@@ -23,7 +23,7 @@ export class BusyIndicatorPo extends CoreBaseComponentPo {
     middleIndicator = '.fd-busy-indicator.fd-busy-indicator--m';
     largeIndicator = '.fd-busy-indicator.fd-busy-indicator--l';
     indicatorBlockWrapper = 'fd-busy-indicator-wrapper-example  fd-busy-indicator:nth-child(2)';
-    messageToast = '.fd-message-toast-container ';
+    messageToast = '.fd-message-toast ';
 
     async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);

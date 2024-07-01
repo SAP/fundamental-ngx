@@ -4,10 +4,10 @@
     "projectType": "library",
     "sourceRoot": "libs/docs/i18n",
     "prefix": "fundamental-ngx",
+    "tags": ["type:lib", "scope:docs"],
     "targets": {
         "lint": {
             "executor": "@nx/eslint:lint"
         }
-    },
-    "tags": ["type:lib", "scope:docs"]
+    }
 }

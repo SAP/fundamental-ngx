@@ -14,7 +14,8 @@ import {
     Input,
     TemplateRef,
     Type,
-    ViewChild
+    ViewChild,
+    signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CssClassBuilder, DynamicComponentContainer, applyCssClass } from '@fundamental-ngx/cdk/utils';
@@ -46,7 +47,9 @@ export class MessageBoxContainerComponent
 
     /** The state of the Dialog animations. */
     @HostBinding('@state')
-    _animationState = 'void';
+    private get _animationState(): string {
+        return this._animationStateSignal();
+    }
 
     /** @hidden */
     @ViewChild(CdkPortalOutlet)
@@ -54,6 +57,9 @@ export class MessageBoxContainerComponent
 
     /** @hidden */
     private _class = '';
+
+    /** @hidden */
+    private _animationStateSignal = signal('void');
 
     /** @hidden */
     constructor(
@@ -110,7 +116,7 @@ export class MessageBoxContainerComponent
         } else {
             this._createFromDefaultMessageBox(this.childContent ?? null);
         }
-        this._animationState = 'visible';
+        this._animationStateSignal.set('visible');
         this._cdr.detectChanges();
     }
 
@@ -132,7 +138,7 @@ export class MessageBoxContainerComponent
      */
     private _listenOnClose(): void {
         const callback: () => void = () => {
-            this._animationState = 'hidden';
+            this._animationStateSignal.set('hidden');
             this._cdr.detectChanges();
         };
         this.ref.afterClosed.pipe(takeUntilDestroyed(this._destroyRef)).subscribe({

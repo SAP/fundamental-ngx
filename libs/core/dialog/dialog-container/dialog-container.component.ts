@@ -13,6 +13,7 @@ import {
     HostListener,
     Injector,
     Input,
+    signal,
     TemplateRef,
     Type,
     ViewChild,
@@ -61,10 +62,15 @@ export class DialogContainerComponent
 
     /** The state of the Dialog animations. */
     @HostBinding('@state')
-    _animationState = 'void';
+    private get _animationState(): string {
+        return this._animationStateSignal();
+    }
 
     /** @hidden */
     private _class = '';
+
+    /** @hidden */
+    private _animationStateSignal = signal('void');
 
     /** @hidden */
     constructor(
@@ -131,7 +137,7 @@ export class DialogContainerComponent
         } else {
             this._createFromDefaultDialog(this.childContent);
         }
-        this._animationState = 'visible';
+        this._animationStateSignal.set('visible');
         this._cdr.detectChanges();
     }
 
@@ -154,7 +160,7 @@ export class DialogContainerComponent
      */
     private _listenOnClose(): void {
         const callback: () => void = () => {
-            this._animationState = 'hidden';
+            this._animationStateSignal.set('hidden');
             this._cdr.detectChanges();
         };
         this.ref.afterClosed.pipe(takeUntilDestroyed(this._destroyRef)).subscribe({

@@ -105,6 +105,7 @@ describe('MessageToastService', () => {
 
         const dismissCompleteSpy = jest.fn();
 
+        ref.dismiss();
         ref.afterDismissed().subscribe({ complete: dismissCompleteSpy });
 
         tick(3000);

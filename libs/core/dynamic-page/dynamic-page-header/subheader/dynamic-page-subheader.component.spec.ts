@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
@@ -22,7 +22,7 @@ describe('DynamicPageHeaderComponent', () => {
     let subHeader: DynamicPageSubheaderComponent;
     let component: TestComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, DynamicPageModule],
             declarations: [TestComponent]

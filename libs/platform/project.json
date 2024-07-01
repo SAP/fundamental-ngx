@@ -3,6 +3,7 @@
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "prefix": "fdp",
+    "tags": ["type:lib", "scope:fdp"],
     "targets": {
         "prepare": {
             "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=platform --verbose",
@@ -39,6 +40,5 @@
                 "jestConfig": "{projectRoot}/jest.config.ts"
             }
         }
-    },
-    "tags": ["type:lib", "scope:fdp"]
+    }
 }

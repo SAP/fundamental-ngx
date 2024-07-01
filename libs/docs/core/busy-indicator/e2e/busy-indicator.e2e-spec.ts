@@ -52,23 +52,23 @@ describe('Busy Indicator test suite:', () => {
         const middleIndicatorLength = await getElementArrayLength(middleIndicator);
 
         for (let i = 0; i < smallIndicatorLength; i++) {
-            await expect(await isElementDisplayed(smallIndicator, i)).toBe(true);
+            await expect(await isElementDisplayed(smallIndicator, i)).withContext(true);
         }
         for (let i = 0; i < middleIndicatorLength; i++) {
-            await expect(await isElementDisplayed(middleIndicator, i)).toBe(true);
+            await expect(await isElementDisplayed(middleIndicator, i)).withContext(true);
         }
-        await expect(await isElementDisplayed(largeIndicator)).toBe(true);
+        await expect(await isElementDisplayed(largeIndicator)).withContext(true);
     });
 
     it('Verify elements are interactable after clicking on disable button', async () => {
         await scrollIntoView(enableDisableButton);
-        await expect(await isElementClickable(formName)).toBe(false);
-        await expect(await isElementClickable(formSurname)).toBe(false);
-        await expect(await isElementClickable(formPassword)).toBe(false);
+        await expect(await isElementClickable(formName)).withContext(false);
+        await expect(await isElementClickable(formSurname)).withContext(false);
+        await expect(await isElementClickable(formPassword)).withContext(false);
         await click(enableDisableButton);
-        await expect(await isElementClickable(formName)).toBe(true);
-        await expect(await isElementClickable(formSurname)).toBe(true);
-        await expect(await isElementClickable(formPassword)).toBe(true);
+        await expect(await isElementClickable(formName)).withContext(true);
+        await expect(await isElementClickable(formSurname)).withContext(true);
+        await expect(await isElementClickable(formPassword)).withContext(true);
     });
 
     it('Verify busy indicator appears after clicking on enable loading button', async () => {
@@ -81,11 +81,11 @@ describe('Busy Indicator test suite:', () => {
         await click(saveButton);
         await scrollIntoView(enableDisableButton);
         await click(enableDisableButton);
-        await expect(await isElementClickable(formName)).toBe(false);
-        await expect(await isElementClickable(formSurname)).toBe(false);
-        await expect(await isElementClickable(formPassword)).toBe(false);
-        await expect(await isElementDisplayed(saveIndicator)).toBe(true);
-        await expect(await isElementDisplayed(formIndicator)).toBe(true);
+        await expect(await isElementClickable(formName)).withContext(false);
+        await expect(await isElementClickable(formSurname)).withContext(false);
+        await expect(await isElementClickable(formPassword)).withContext(false);
+        await expect(await isElementDisplayed(saveIndicator)).withContext(true);
+        await expect(await isElementDisplayed(formIndicator)).withContext(true);
     });
 
     it('Verify busy indicator size has s', async () => {
@@ -112,12 +112,12 @@ describe('Busy Indicator test suite:', () => {
 
     it('Verify that label present in Busy Indicator Label example', async () => {
         await scrollIntoView(busyIndicatorLabelExample);
-        await expect(await isElementDisplayed(busyIndicatorLabelExample + busyIndicatorLabel)).toBe(true);
+        await expect(await isElementDisplayed(busyIndicatorLabelExample + busyIndicatorLabel)).withContext(true);
     });
 
     it('should check opening busy indicator in message toast by clicking button', async () => {
         await click(openBusyIndicatorButton);
-        await expect(await isElementDisplayed(messageToast + busyIndicator)).toBe(true);
+        await expect(await isElementDisplayed(messageToast + busyIndicator)).withContext(true);
         await click(hideBusyIndicatorButton);
     });
 
@@ -125,7 +125,7 @@ describe('Busy Indicator test suite:', () => {
         await click(openBusyIndicatorButton);
         await click(openBusyIndicatorButton);
         await click(openBusyIndicatorButton);
-        await expect(await getElementArrayLength(messageToast + busyIndicator)).toBe(3);
+        await expect(await getElementArrayLength(messageToast + busyIndicator)).withContext(3);
         await click(hideBusyIndicatorButton);
     });
 
@@ -133,7 +133,7 @@ describe('Busy Indicator test suite:', () => {
         await click(openBusyIndicatorButton);
         await click(openBusyIndicatorButton);
         await click(hideAllButton);
-        await expect(await doesItExist(messageToast + busyIndicator)).toBe(false);
+        await expect(await doesItExist(messageToast + busyIndicator)).withContext(false);
         await click(hideBusyIndicatorButton);
     });
 

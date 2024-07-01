@@ -11,11 +11,10 @@ export class ComboboxPo extends CoreBaseComponentPo {
     smallText_2 = 'fd-combobox~small';
     allInputFields = this.root + ' .fd-input.fd-input-group__input';
     activeInputButton = 'fd-popover-control .fd-input-group__button';
-    mobileButton = '.cdk-drag-disabled button';
+    mobileButton = '.fd-dialog__content--mobile button';
     mobileTitle = 'h1.fd-title--h5';
     reactiveFormButton = 'fd-combobox-forms-example button';
     reactiveFormText = 'fd-combobox-forms-example small';
-    compactInput = '.fd-combobox-input.is-compact .fd-input';
 
     async open(): Promise<void> {
         await super.open(this.url);

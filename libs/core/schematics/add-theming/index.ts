@@ -1,4 +1,4 @@
-import { StyleElement } from '@angular-devkit/build-angular/src/builders/application/schema';
+import { StyleElement } from '@angular-devkit/build-angular/src/builders/browser-esbuild/schema';
 import { chain, Rule } from '@angular-devkit/schematics';
 import {
     addModuleImportToRootModule,

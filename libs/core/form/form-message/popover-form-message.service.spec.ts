@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Component } from '@angular/core';
 import { PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
@@ -15,7 +15,7 @@ describe('PopoverFormMessageService', () => {
     let service: PopoverFormMessageService;
     let fixture: ComponentFixture<PopoverFormMessageTestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [PopoverFormMessageTestComponent],
             imports: [PopoverModule]

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { LablePosition, StatusIndicatorComponent } from './status-indicator.component';
@@ -44,7 +44,7 @@ describe('StatusIndicatorComponent', () => {
     let testComponent: TestStatusIndicatorComponent;
     let fixture: ComponentFixture<TestStatusIndicatorComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [TestStatusIndicatorComponent]
         }).compileComponents();

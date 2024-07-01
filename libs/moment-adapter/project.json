@@ -4,6 +4,12 @@
     "sourceRoot": "libs/moment-adapter/src",
     "projectType": "library",
     "prefix": "datetime-adapter",
+    "tags": ["type:lib", "scope:datetime-adapter"],
+    "generators": {
+        "@nx/angular:component": {
+            "style": "scss"
+        }
+    },
     "targets": {
         "prepare": {
             "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=moment-adapter --verbose"
@@ -39,11 +45,5 @@
                 "jestConfig": "{projectRoot}/jest.config.ts"
             }
         }
-    },
-    "generators": {
-        "@nx/angular:component": {
-            "style": "scss"
-        }
-    },
-    "tags": ["type:lib", "scope:datetime-adapter"]
+    }
 }

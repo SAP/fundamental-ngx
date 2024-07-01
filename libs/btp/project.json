@@ -2,8 +2,8 @@
     "name": "btp",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "prefix": "fdb",
-    "tags": ["type:lib", "scope:fdb"],
     "projectType": "library",
+    "tags": ["type:lib", "scope:fdb"],
     "targets": {
         "prepare": {
             "executor": "nx:run-commands",

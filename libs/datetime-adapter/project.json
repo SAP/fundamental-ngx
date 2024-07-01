@@ -4,6 +4,7 @@
     "projectType": "library",
     "sourceRoot": "libs/datetime-adapter/src",
     "prefix": "datetime-adapter",
+    "tags": ["type:lib", "scope:datetime-adapter"],
     "targets": {
         "prepare": {
             "command": "npx nx g @fundamental-ngx/nx-plugin:sync-versions --project=datetime-adapter --verbose"
@@ -41,6 +42,5 @@
                 "jestConfig": "{projectRoot}/jest.config.ts"
             }
         }
-    },
-    "tags": ["type:lib", "scope:datetime-adapter"]
+    }
 }

@@ -4,6 +4,7 @@
     "projectType": "library",
     "sourceRoot": "libs/platform/panel",
     "prefix": "fdp",
-    "targets": {},
-    "tags": ["type:lib", "scope:fdp"]
+    "tags": ["type:lib", "scope:fdp"],
+    "// targets": "to see all targets run: nx show project platform-panel --web",
+    "targets": {}
 }

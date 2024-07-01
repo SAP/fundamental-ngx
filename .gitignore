@@ -67,3 +67,4 @@ sauce_connect.log
 /**/*/typedoc
 
 .nx/cache
+.nx/workspace-data

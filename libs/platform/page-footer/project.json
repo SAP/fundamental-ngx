@@ -4,6 +4,7 @@
     "projectType": "library",
     "sourceRoot": "libs/platform/page-footer",
     "prefix": "fdp",
-    "targets": {},
-    "tags": ["type:lib", "scope:fdp"]
+    "tags": ["type:lib", "scope:fdp"],
+    "// targets": "to see all targets run: nx show project platform-page-footer --web",
+    "targets": {}
 }

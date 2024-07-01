@@ -64,12 +64,10 @@ describe('dialog test suite', () => {
         playgroundDialog,
         checkboxes,
         inputFields,
-        dialogExamples,
         customDialog,
         dialogBody,
         dialogContainer,
-        formDialog,
-        dialogInput
+        formDialog
     } = dialogPage;
 
     beforeAll(async () => {

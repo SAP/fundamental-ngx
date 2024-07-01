@@ -48,17 +48,17 @@ describe('Table component test suite', () => {
             await scrollIntoView(tablePageScrollingExample);
             await setValue(tablePageScrollingExample + input, testText2);
             await click(tablePageScrollingExample + buttonSearch);
-            await expect(await doesItExist(busyIndicator)).toBe(true, "busy indicator isn't displayed");
+            await expect(await doesItExist(busyIndicator)).withContext(true, "busy indicator isn't displayed");
             await pause(500);
-            await expect(await doesItExist(busyIndicator)).toBe(false, 'busy indicator is displayed');
+            await expect(await doesItExist(busyIndicator)).withContext(false, 'busy indicator is displayed');
             const rowLength = await getElementArrayLength(tablePageScrollingExample + tableRow);
             await expect(rowLength).toEqual(1);
             const cellLength = await getElementArrayLength(tablePageScrollingExample + tableRow + tableCellText);
             for (let i = 0; i < cellLength; i++) {
                 await scrollIntoView(tablePageScrollingExample + tableRow + tableCellText, i);
-                await expect((await getText(tablePageScrollingExample + tableRow + tableCellText, i)).trim()).toBe(
-                    tableCellArr2[i]
-                );
+                await expect(
+                    (await getText(tablePageScrollingExample + tableRow + tableCellText, i)).trim()
+                ).withContext(tableCellArr2[i]);
             }
         });
 
@@ -66,8 +66,10 @@ describe('Table component test suite', () => {
             await scrollIntoView(tablePageScrollingExample);
             await scrollIntoView(tablePageScrollingExample + tableRow, 40);
 
-            await expect((await getText(tablePageScrollingExample + tableCellName, 40)).trim()).toBe('Product name 40');
-            await expect((await getText(tablePageScrollingExample + tableCellDescription, 40)).trim()).toBe(
+            await expect((await getText(tablePageScrollingExample + tableCellName, 40)).trim()).withContext(
+                'Product name 40'
+            );
+            await expect((await getText(tablePageScrollingExample + tableCellDescription, 40)).trim()).withContext(
                 'Product description goes here 40'
             );
         });

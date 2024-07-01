@@ -69,7 +69,7 @@ export class ApprovalFlowPo extends PlatformBaseComponentPo {
     footerButtons = this.detailsDialog + ' .fd-bar__element .fd-button';
     nodeCardInfo = '.fdp-approval-flow-node__info';
     dialogCheckbox = this.detailsDialog + ' fd-checkbox';
-    reminderToaster = '.fd-message-toast-container .fd-message-toast';
+    reminderToaster = '.fd-toast-overlay .fd-message-toast';
     dueDateNode = '.fd-grid-list__item-body .fd-object-status--critical';
 
     async open(): Promise<void> {
