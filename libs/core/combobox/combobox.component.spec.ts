@@ -72,7 +72,7 @@ describe('ComboboxComponent', () => {
     it('should handle input entry on dropdown mode', () => {
         jest.spyOn(component, 'onChange');
         component.communicateByObject = true;
-        component.displayFn = (item: any): string => item.displayedValue;
+        component.displayFn = (item: any): string => item?.displayedValue;
         component.onMenuClickHandler(component.dropdownValues[1]);
         expect(component.onChange).toHaveBeenCalledWith(component.dropdownValues[1]);
     });
@@ -246,5 +246,14 @@ describe('ComboboxComponent', () => {
                 expect(button.classList.contains('fd-shellbar__button')).toBe(true);
             });
         });
+    });
+
+    it('should update (control) value as well when the user edits the input field', () => {
+        const preselected = { value: 'value', displayedValue: 'displayedValue' };
+        component.writeValue(preselected);
+        expect(component.isSelected(preselected)).toBe(true);
+        // user edits the selected value
+        component.inputText = 'value43';
+        expect(component.isSelected(preselected)).toBe(false);
     });
 });
