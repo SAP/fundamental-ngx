@@ -235,8 +235,9 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         this.tabs = tabs;
         const extraTabs = [...this._extraTabs$()];
 
-        deletedItem.index = selectedItem.index;
-        deletedItem.uId = `${deletedItem.index}`;
+        // commented to prevent wrong selection.
+        // deletedItem.index = selectedItem.index;
+        // deletedItem.uId = `${deletedItem.index}`;
         const itemToPopover = { ...deletedItem };
         deletedItem.hidden = true;
         deletedItem.cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
@@ -248,8 +249,9 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
             }
         });
 
-        selectedItem.index = this._lastVisibleTabIndex;
-        selectedItem.uId = `${selectedItem.index}`;
+        // commented to prevent wrong selection.
+        // selectedItem.index = this._lastVisibleTabIndex;
+        // selectedItem.uId = `${selectedItem.index}`;
         selectedItem.hidden = false;
         if (selectedItem.color) {
             selectedItem.cssClasses = [`fd-icon-tab-bar__item--${selectedItem.color}`];
