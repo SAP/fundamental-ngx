@@ -576,6 +576,9 @@ export class ComboboxComponent<T = any>
     /** Input text of the input. */
     set inputText(value: string) {
         this.inputTextValue = value;
+        if (!this.communicateByObject) {
+            this._value = value;
+        }
         this.inputTextChange.emit(value);
         if (!this.mobile) {
             this._propagateChange();
@@ -785,8 +788,8 @@ export class ComboboxComponent<T = any>
             this.isOpenChangeHandle(false);
         }
         if (this.fillOnSelect) {
-            this.setValue(term);
             this.inputText = this.displayFn(term);
+            this.setValue(term);
             this.searchInputElement.nativeElement.value = this.inputText;
             this._cdRef.detectChanges();
 
