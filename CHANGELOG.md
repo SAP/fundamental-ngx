@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.5...v0.50.1-rc.6) (2024-07-03)
+
+
+### Bug Fixes
+
+* **core:** fix the title font size and alignment for Grid List Item ([#12064](https://github.com/SAP/fundamental-ngx/issues/12064)) ([cdaf21b](https://github.com/SAP/fundamental-ngx/commit/cdaf21b27ad4316da7360149df818296dcdb7c93))
+
+
+
+
+
 ## [0.50.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.4...v0.50.1-rc.5) (2024-07-03)
 
 
