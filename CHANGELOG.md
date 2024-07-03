@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.4...v0.50.1-rc.5) (2024-07-03)
+
+
+### Bug Fixes
+
+* **core:** CSS fix to allow long text to wrap for Inline Help ([#12067](https://github.com/SAP/fundamental-ngx/issues/12067)) ([a1f33e7](https://github.com/SAP/fundamental-ngx/commit/a1f33e754bc1b51b47f87dfc496224e21711e7a6))
+
+
+
+
+
 ## [0.50.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.3...v0.50.1-rc.4) (2024-07-03)
 
 
