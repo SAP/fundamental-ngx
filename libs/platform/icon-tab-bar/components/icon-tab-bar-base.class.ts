@@ -42,11 +42,20 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     abstract _tabUIElements: QueryList<unknown>;
     /** @hidden */
     abstract _tabBarPopover: IconTabBarPopoverBase;
+
     /**
      * @description A tab bar configuration that stores the state of each tab. Based on this configuration, a tab bar is representing.
      */
     @Input()
-    tabs: IconTabBarItem[] = [];
+    set tabs(value: IconTabBarItem[]) {
+        this._tabs = value;
+        this.originalTabs = value;
+    }
+
+    /** @hidden */
+    get tabs(): IconTabBarItem[] {
+        return this._tabs;
+    }
 
     /**
      * @description Flag representing rtl mode
@@ -91,6 +100,9 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     headerElement: ElementRef<HTMLElement>;
 
     /** @hidden */
+    originalTabs: IconTabBarItem[] = [];
+
+    /** @hidden */
     _extraTabs$ = signal<IconTabBarItem[]>([]);
 
     /** @hidden */
@@ -113,6 +125,9 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
 
     /** @Hidden */
     protected readonly _ngZone = inject(NgZone);
+
+    /** @hidden */
+    private _tabs: IconTabBarItem[] = [];
 
     /** @hidden */
     private _densityMode: TabDestinyMode;
@@ -229,39 +244,13 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @description select extra item inside popover
      */
     _selectExtraItem(selectedItem: IconTabBarItem): void {
-        const tabs = [...this.tabs];
-        const deletedItem = tabs.splice(this._lastVisibleTabIndex, 1, selectedItem)[0] as IconTabBarItem;
-        tabs.splice(selectedItem.index, 1, deletedItem);
-        this.tabs = tabs;
-        const extraTabs = [...this._extraTabs$()];
-
-        // commented to prevent wrong selection.
-        // deletedItem.index = selectedItem.index;
-        // deletedItem.uId = `${deletedItem.index}`;
-        const itemToPopover = { ...deletedItem };
-        deletedItem.hidden = true;
-        deletedItem.cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
-
-        let indexInExtraItems;
-        this._extraTabs$().forEach((item, index) => {
-            if (item.index === selectedItem.index) {
-                indexInExtraItems = index;
-            }
-        });
-
-        // commented to prevent wrong selection.
-        // selectedItem.index = this._lastVisibleTabIndex;
-        // selectedItem.uId = `${selectedItem.index}`;
-        selectedItem.hidden = false;
         if (selectedItem.color) {
             selectedItem.cssClasses = [`fd-icon-tab-bar__item--${selectedItem.color}`];
         }
-        extraTabs.splice(indexInExtraItems, 1, itemToPopover);
-        this._extraTabs$.set(extraTabs);
 
         this._selectItem(selectedItem);
         this._triggerRecalculationVisibleItems();
-        this._focusItem(this._lastVisibleTabIndex);
+        // this._focusItem(this._lastVisibleTabIndex);
     }
 
     /**
@@ -270,11 +259,20 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @description recalculate _nextSteps and _prevSteps array if we have extra items
      */
     _recalculateVisibleItems(extraItems: number): void {
+        // debugger
         this._extraItems$.set(extraItems > 0);
         this._cd.detectChanges();
-        const tabs = [...this.tabs];
+        const tabs = [...this._tabs];
         const extraTabs: IconTabBarItem[] = [];
-        this._lastVisibleTabIndex = tabs.length - 1 - extraItems;
+
+        const selected = tabs.find((tab) => tab.uId === this.selectedUid);
+
+        if (selected && selected!.index > tabs.length - extraItems) {
+            this._lastVisibleTabIndex = tabs.length - extraItems - 2;
+        } else {
+            this._lastVisibleTabIndex = tabs.length - extraItems - 1;
+        }
+
         tabs.forEach((item) => {
             item.hidden = false;
             item.cssClasses = item.cssClasses.filter((cssClass) => cssClass !== ICON_TAB_HIDDEN_CLASS_NAME);
@@ -282,10 +280,15 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
 
         for (let i = this._lastVisibleTabIndex + 1; i < tabs.length; i++) {
             const tab = tabs[i];
-            extraTabs.push({ ...tab });
-            tab.hidden = true;
-            tab.cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
+            if (tab.uId !== this.selectedUid) {
+                extraTabs.push({ ...tab });
+                tab.hidden = true;
+                tab.cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
+            }
         }
+
+        console.log(this.tabs);
+        console.log(this._extraTabs$());
         this._extraTabs$.set(extraTabs);
         this._cd.detectChanges();
     }
@@ -311,7 +314,9 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @description trigger recalculation items, need to do it asynchronously after dom was rerendered
      */
     protected _triggerRecalculationVisibleItems(): void {
+        console.log('test');
         this._ngZone.onMicrotaskEmpty.pipe(take(1), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            console.log('test');
             if (this.overflowDirective && !this._destroyed) {
                 const extra = this.overflowDirective.getAmountOfExtraItems();
                 this._recalculateVisibleItems(extra);

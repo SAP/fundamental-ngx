@@ -82,12 +82,12 @@ export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
      * @hidden
      * @param selectedItem
      */
-    _selectExtraItem(selectedItem: IconTabBarItem | undefined): void {
+    _selectExtraItem(selectedItem?: IconTabBarItem): void {
         // Check if the selected item is subItem
         // Then to find root tab, and pass it to the parent method.
         if (selectedItem?.uId.includes(UNIQUE_KEY_SEPARATOR)) {
             const rootTabUid = selectedItem.uId.split(UNIQUE_KEY_SEPARATOR)[0];
-            selectedItem = this.tabs.find((tab) => tab.uId === rootTabUid);
+            selectedItem = this.tabs.find((tab) => tab.uId === rootTabUid) as any;
         }
         if (!selectedItem) {
             return;
