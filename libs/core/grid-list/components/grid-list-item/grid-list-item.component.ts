@@ -23,7 +23,12 @@ import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
 import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import {
+    ContentDensityModule,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
+
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -58,13 +63,14 @@ export type GridListItemStatus = 'success' | 'warning' | 'error' | 'neutral';
         NgTemplateOutlet,
         GridListTitleBarSpacerComponent,
         ButtonComponent,
-        ContentDensityDirective,
         IconComponent,
         TitleComponent,
         FormsModule,
         ObjectStatusComponent,
-        FdTranslatePipe
-    ]
+        FdTranslatePipe,
+        ContentDensityModule
+    ],
+    providers: [contentDensityObserverProviders()]
 })
 export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     /** id for the Element */
@@ -159,6 +165,14 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     /** Title of the item */
     @Input()
     title: string;
+
+    /**
+     * Aria-level of the title
+     * Available options: 1, 2, 3, 4, 5, 6
+     * Default: 4
+     */
+    @Input()
+    titleLevel: 1 | 2 | 3 | 4 | 5 | 6 = 4;
 
     /** Description of the item */
     @Input()
@@ -285,7 +299,8 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         private readonly _cd: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
         private readonly _render: Renderer2,
-        private readonly _gridList: GridList<T>
+        private readonly _gridList: GridList<T>,
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {
         const selectedItemsSub = this._gridList._selectedItems$.subscribe((items) => {
             this._selectedItem = items.selection.find((item) => item === this.value);

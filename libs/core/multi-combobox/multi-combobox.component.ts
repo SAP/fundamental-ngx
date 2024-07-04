@@ -17,7 +17,7 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { DataSourceDirective, FD_DATA_SOURCE_TRANSFORMER } from '@fundamental-ngx/cdk/data-source';
+import { DataSourceDirective, FD_DATA_SOURCE_TRANSFORMER, MatchingStrategy } from '@fundamental-ngx/cdk/data-source';
 import { CvaControl, CvaDirective, OptionItem, SelectItem, SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
 import {
     AutoCompleteDirective,
@@ -288,6 +288,13 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     @Input()
     invalidEntryDisplayTime = 3000;
 
+    /**
+     * String matching strategy for typeahead list.
+     * Available options: 'starts with per term', 'starts with', 'contains'
+     * Default: 'starts with per term' */
+    @Input()
+    matchingStrategy = MatchingStrategy.STARTS_WITH_PER_TERM;
+
     /** Event emitted when item is selected. */
     @Output()
     selectionChange = new EventEmitter<MultiComboboxSelectionChangeEvent>();
@@ -424,7 +431,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     /** @hidden */
     ngOnInit(): void {
         this.cvaControl.listenToChanges();
-        this._openDataStream();
+        this._openDataStream(this.matchingStrategy);
     }
 
     /** @hidden */
