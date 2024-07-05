@@ -49,7 +49,6 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     @Input()
     set tabs(value: IconTabBarItem[]) {
         this._tabs = value;
-        this.originalTabs = value;
     }
 
     /** @hidden */
@@ -100,9 +99,6 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     headerElement: ElementRef<HTMLElement>;
 
     /** @hidden */
-    originalTabs: IconTabBarItem[] = [];
-
-    /** @hidden */
     _extraTabs$ = signal<IconTabBarItem[]>([]);
 
     /** @hidden */
@@ -150,10 +146,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         }
 
         if (changes.selectedUid && !changes.selectedUid.firstChange) {
-            const isExtraTab = this._extraTabs$().find((tab) => tab.uId === this.selectedUid);
-            if (isExtraTab) {
-                this._selectExtraItem(isExtraTab);
-            }
+            this._handleSelectedUidChange();
         }
     }
 
@@ -250,7 +243,6 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
 
         this._selectItem(selectedItem);
         this._triggerRecalculationVisibleItems();
-        // this._focusItem(this._lastVisibleTabIndex);
     }
 
     /**
@@ -259,36 +251,16 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @description recalculate _nextSteps and _prevSteps array if we have extra items
      */
     _recalculateVisibleItems(extraItems: number): void {
-        // debugger
         this._extraItems$.set(extraItems > 0);
-        this._cd.detectChanges();
+
         const tabs = [...this._tabs];
         const extraTabs: IconTabBarItem[] = [];
-
         const selected = tabs.find((tab) => tab.uId === this.selectedUid);
 
-        if (selected && selected!.index > tabs.length - extraItems) {
-            this._lastVisibleTabIndex = tabs.length - extraItems - 2;
-        } else {
-            this._lastVisibleTabIndex = tabs.length - extraItems - 1;
-        }
+        this._lastVisibleTabIndex = this._getLastVisibleTabIndex(tabs.length, extraItems, selected);
 
-        tabs.forEach((item) => {
-            item.hidden = false;
-            item.cssClasses = item.cssClasses.filter((cssClass) => cssClass !== ICON_TAB_HIDDEN_CLASS_NAME);
-        });
+        this._resetAndHideExtraTabs(tabs, extraTabs);
 
-        for (let i = this._lastVisibleTabIndex + 1; i < tabs.length; i++) {
-            const tab = tabs[i];
-            if (tab.uId !== this.selectedUid) {
-                extraTabs.push({ ...tab });
-                tab.hidden = true;
-                tab.cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
-            }
-        }
-
-        console.log(this.tabs);
-        console.log(this._extraTabs$());
         this._extraTabs$.set(extraTabs);
         this._cd.detectChanges();
     }
@@ -314,9 +286,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @description trigger recalculation items, need to do it asynchronously after dom was rerendered
      */
     protected _triggerRecalculationVisibleItems(): void {
-        console.log('test');
         this._ngZone.onMicrotaskEmpty.pipe(take(1), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            console.log('test');
             if (this.overflowDirective && !this._destroyed) {
                 const extra = this.overflowDirective.getAmountOfExtraItems();
                 this._recalculateVisibleItems(extra);
@@ -347,6 +317,80 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         this.selected.emit(selectedItem);
     }
 
+    /**
+     * @hidden
+     * Resets and hides extra tabs.
+     * @param tabs - The list of tab items.
+     * @param extraTabs - The list of extra tab items.
+     */
+    private _resetAndHideExtraTabs(tabs: IconTabBarItem[], extraTabs: IconTabBarItem[]): void {
+        tabs.forEach((item) => this._resetTab(item));
+        this._hideExtraTabs(tabs, extraTabs);
+    }
+
+    /**
+     * @hidden
+     * Handles changes to the selected UID.
+     */
+    private _handleSelectedUidChange(): void {
+        const isExtraTab = this._extraTabs$().find((tab) => tab.uId === this.selectedUid);
+        const selected = this.tabs.find((tab) => tab.uId === this.selectedUid);
+        if (isExtraTab) {
+            this._selectExtraItem(isExtraTab);
+        } else if (selected) {
+            this._selectExtraItem(selected);
+        }
+    }
+
+    /**
+     * @hidden
+     * Calculates the index of the last visible tab item.
+     * @param totalTabs - The total number of tabs.
+     * @param extraItems - The number of extra items.
+     * @param selected - The currently selected tab item (optional).
+     * @returns The index of the last visible tab item.
+     */
+    private _getLastVisibleTabIndex(totalTabs: number, extraItems: number, selected?: IconTabBarItem): number {
+        if (selected && selected.index >= totalTabs - extraItems) {
+            return totalTabs - extraItems - 2;
+        } else {
+            return totalTabs - extraItems - 1;
+        }
+    }
+
+    /**
+     * @hidden
+     * Resets the visibility and CSS classes of a tab item.
+     * @param tab - The tab item to reset.
+     */
+    private _resetTab(tab: IconTabBarItem): void {
+        tab.hidden = false;
+        tab.cssClasses = tab.cssClasses.filter((cssClass) => cssClass !== ICON_TAB_HIDDEN_CLASS_NAME);
+    }
+
+    /**
+     * @hidden
+     * Hides extra tabs and updates the extraTabs array with the hidden tabs.
+     * @param tabs - The array of all tab items.
+     * @param extraTabs - The array to store the hidden tab items.
+     */
+    private _hideExtraTabs(tabs: IconTabBarItem[], extraTabs: IconTabBarItem[]): void {
+        for (let i = this._lastVisibleTabIndex + 1; i < tabs.length; i++) {
+            const tab = tabs[i];
+            if (tab.uId !== this.selectedUid) {
+                extraTabs.push({ ...tab });
+                tab.hidden = true;
+                tab.cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
+            }
+        }
+    }
+
+    /**
+     * @hidden
+     * Recursively finds the active tab item in a list of tabs.
+     * @param tabs - The array of tab items.
+     * @returns The active tab item, or undefined if no active tab is found.
+     */
     private _findActiveTabId(tabs: IconTabBarItem[]): IconTabBarItem | undefined {
         let activeTab: IconTabBarItem | undefined;
         for (const tab of tabs) {
