@@ -7,10 +7,6 @@
         {
             "url": "platform/new-component",
             "name": "New Component"
-        },
-        {
-            "url": "platform/i18n",
-            "name": "I18n"
         }
     ],
     "components": [
