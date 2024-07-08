@@ -1694,7 +1694,7 @@ export class TableComponent<T = any>
 
                     parentRow.children.push(...rows);
 
-                    parentRow.lastChild = parentRow.children[parentRow.children.length - 1];
+                    parentRow.lastChild = parentRow.children[expandedChildrenCount - 1];
                     this._setTableRows(this._tableRows);
                 });
             });
