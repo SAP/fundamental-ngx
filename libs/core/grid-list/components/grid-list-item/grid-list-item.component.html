@@ -101,7 +101,13 @@
         @if (title || description) {
             <div class="fd-grid-list__item-header">
                 @if (title) {
-                    <h4 fd-title>{{ title }}</h4>
+                    <div
+                        role="heading"
+                        [attr.aria-level]="titleLevel"
+                        class="fd-title fd-title--h4 fd-grid-list__item-title"
+                    >
+                        {{ title }}
+                    </div>
                 }
                 @if (description) {
                     <span class="fd-grid-list__item-subtitle">{{ description }}</span>
@@ -122,7 +128,7 @@
     <input
         [attr.tabindex]="selectionMode === 'singleSelect' ? -1 : 0"
         type="radio"
-        class="fd-radio is-compact fd-grid-list__radio-input"
+        class="fd-radio fd-grid-list__radio-input"
         [style.display]="selectionMode === 'singleSelect' ? 'none' : ''"
         [id]="id + '-radio'"
         [name]="'fd-grid-list-item-toolbar-' + selectionMode"
@@ -143,7 +149,7 @@
 <ng-template #checkbox>
     <input
         type="checkbox"
-        class="fd-checkbox is-compact fd-grid-list__checkbox-input"
+        class="fd-checkbox fd-grid-list__checkbox-input"
         [id]="id + '-checkbox'"
         [attr.aria-label]="ariaLabel"
         [attr.aria-labelledby]="ariaLabelledBy"

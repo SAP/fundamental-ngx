@@ -50,6 +50,10 @@ fd-popover-body {
             -webkit-transition: none !important;
         }
 
+        &--inline-help.fd-inline-help__content {
+            white-space: initial;
+        }
+
         &.fd-form-message {
             &::before {
                 width: auto;
