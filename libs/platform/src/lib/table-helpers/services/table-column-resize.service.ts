@@ -1,6 +1,7 @@
 import { ElementRef, Injectable, OnDestroy, Optional } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, Subscription, fromEvent } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
+import { SELECTION_COLUMN_WIDTH } from '../constants';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { TABLE_COLUMN_MIN_WIDTH } from '../constants';
@@ -177,10 +178,16 @@ export class TableColumnResizeService implements OnDestroy {
     /** Retrieves custom column value or returns `unset` */
     getColumnWidthStyle(columnName: string): string {
         if (this._tableRef._virtualScrollDirective?.scrollWholeRows) {
-            return (
-                this._fixedColumnsWidthMap.get(columnName) ||
-                this._tableRef._tableWidthPx / this._tableRef.getVisibleTableColumns().length + 'px'
-            );
+            const selectionColumnWidth = SELECTION_COLUMN_WIDTH.get(this._tableRef.contentDensityObserver.value) ?? 0;
+            let sizeDividedByColumnsCount =
+                this._tableRef._tableWidthPx / this._tableRef.getVisibleTableColumns().length -
+                selectionColumnWidth / this._tableRef.getVisibleTableColumns().length;
+            // In the event of tables with a very high number of columns, need to prevent the default behavior which
+            // would make each column not wide enough to be usable and instead use a horizontal scrollbar.
+            if (sizeDividedByColumnsCount < 176) {
+                sizeDividedByColumnsCount = 176;
+            }
+            return this._fixedColumnsWidthMap.get(columnName) || sizeDividedByColumnsCount + 'px';
         } else {
             const calculatedWidth = this._fixedColumnsWidthMap.get(columnName);
             return calculatedWidth || 'unset';

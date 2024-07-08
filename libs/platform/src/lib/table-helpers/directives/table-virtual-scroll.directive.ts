@@ -1,4 +1,4 @@
-import { Directive, HostListener, inject, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Directive, HostListener, inject, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { DestroyedService, FocusableItemPosition, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { BehaviorSubject, filter, Subscription } from 'rxjs';
@@ -8,6 +8,7 @@ import { TableVirtualScroll } from '../models';
 import { TableScrollDispatcherService } from '../services/table-scroll-dispatcher.service';
 import { Table } from '../table';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { TableRowService } from '../services/table-row.service';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -21,7 +22,7 @@ import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
         }
     ]
 })
-export class TableVirtualScrollDirective extends TableVirtualScroll implements OnChanges, OnDestroy {
+export class TableVirtualScrollDirective extends TableVirtualScroll implements OnInit, OnChanges, OnDestroy {
     /** Whether to show only visible rows in matter of performance
      * false by default, when true setting bodyHeight and rowHeight is required.
      */
@@ -67,6 +68,9 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
     private readonly _tableScrollDispatcher = inject(TableScrollDispatcherService);
 
     /** @hidden */
+    private readonly _tableRowService = inject(TableRowService);
+
+    /** @hidden */
     private readonly _destroy$ = inject(DestroyedService);
 
     /** @hidden */
@@ -101,13 +105,20 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
                     };
                     this._table._focusableGrid.focusCell(cellToFocus);
                 }
-                this._scrollRow('up', -1);
+                this._scrollRow(-1);
             } else if (
                 this._focusedCell?.rowIndex === this._getNumberOfRowsToDisplay() &&
                 KeyUtil.isKeyCode(event, DOWN_ARROW)
             ) {
-                this._scrollRow('down', 1);
+                this._scrollRow(1);
             }
+        }
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        if (this.scrollWholeRows && !this.virtualScroll) {
+            this.virtualScroll = true;
         }
     }
 
@@ -118,6 +129,9 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
         }
         if (this.virtualScroll && (changes['rowHeight'] || changes['virtualScroll'] || changes['renderAhead'])) {
             this.calculateVirtualScrollRows();
+        }
+        if (changes?.scrollWholeRows && changes.scrollWholeRows.currentValue && !this.virtualScroll) {
+            this.virtualScroll = true;
         }
     }
 
@@ -151,17 +165,15 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
                 startNodeIndex = Math.floor(scrollTop / this.rowHeight);
             }
 
-            const rowsVisible = this._table._tableRowsVisible;
-            const totalNodeCount = rowsVisible.length;
-            let visibleNodeCount =
-                Math.ceil(this._table.tableContainer.nativeElement.clientHeight / this.rowHeight) * this.renderAhead;
+            const totalNodeCount = this._table._tableRowsVisible.length;
+            let visibleNodeCount = Math.floor(this._table.tableContainer.nativeElement.clientHeight / this.rowHeight);
             visibleNodeCount = Math.min(totalNodeCount - startNodeIndex, visibleNodeCount);
             this.virtualScrollTotalHeight = totalNodeCount * this.rowHeight - visibleNodeCount * this.rowHeight;
 
             this._setRows(startNodeIndex);
-
-            this._table.tableScrollMockContainer.nativeElement.style.width = '1rem';
-            this._table.tableScrollMockContainer.nativeElement.style.maxHeight = this.bodyHeight;
+            const scrollMockContainer = this._table.tableScrollMockContainer.nativeElement;
+            scrollMockContainer.style.width = '1rem';
+            scrollMockContainer.style.maxHeight = this.bodyHeight;
         } else {
             if (!this.virtualScroll || !this.bodyHeight) {
                 return;
@@ -236,8 +248,9 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
 
     /** @hidden */
     private _getNumberOfRowsToDisplay(): number {
-        let tableHeight = this._table.tableContainer.nativeElement.clientHeight;
-        tableHeight = tableHeight - this._table.tableContainer.nativeElement.querySelector('thead').clientHeight;
+        const tableContainer = this._table.tableContainer.nativeElement;
+        let tableHeight = tableContainer.clientHeight;
+        tableHeight = tableHeight - tableContainer.querySelector('thead').clientHeight;
         return Math.floor(tableHeight / (this.rowHeight + 2));
     }
 
@@ -246,14 +259,14 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
         if (Math.abs(event.deltaX) < Math.abs(event.deltaY)) {
             event.preventDefault();
             event.stopImmediatePropagation();
-            clearTimeout(this._wheelTimeout);
+            if (this._wheelTimeout) {
+                window.cancelAnimationFrame(this._wheelTimeout);
+            }
             const deltaY = event.deltaY;
             if (deltaY) {
-                this._wheelTimeout = setTimeout(() => {
-                    this._table.tableScrollMockContainer.nativeElement.scrollBy({ top: deltaY });
-                    this._scrollRow(deltaY > 0 ? 'down' : 'up', deltaY > 0 ? 1 : -1);
-                    this._lastMockScrollPosition = this._table.tableScrollMockContainer.nativeElement.scrollTop;
-                }, 5);
+                this._wheelTimeout = window.requestAnimationFrame(() => {
+                    this._scrollRow(deltaY > 0 ? 1 : -1);
+                });
             }
         }
     };
@@ -262,38 +275,55 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
     private _mockScrollbarListenerFunction = (event: Event): void => {
         event.preventDefault();
         event.stopImmediatePropagation();
-        clearTimeout(this._scrollMockTimeout);
-        let deltaY = this._table.tableScrollMockContainer.nativeElement.scrollTop - this._lastMockScrollPosition;
+        if (this._scrollMockTimeout) {
+            window.cancelAnimationFrame(this._scrollMockTimeout);
+        }
+        const tableScrollMockContainer = this._table.tableScrollMockContainer.nativeElement;
+        let deltaY = tableScrollMockContainer.scrollTop - this._lastMockScrollPosition;
         deltaY = deltaY / this.rowHeight;
-        this._scrollMockTimeout = setTimeout(() => {
-            this._scrollRow(deltaY > 0 ? 'down' : 'up', deltaY);
-            this._lastMockScrollPosition = this._table.tableScrollMockContainer.nativeElement.scrollTop;
-            if (this._table.tableScrollMockContainer.nativeElement.scrollTop === 0) {
+        this._scrollMockTimeout = window.requestAnimationFrame(() => {
+            this._scrollRow(deltaY);
+            this._lastMockScrollPosition = tableScrollMockContainer.scrollTop;
+            if (tableScrollMockContainer.scrollTop === 0) {
                 this._setRows(0);
             }
             if (
-                this._table.tableScrollMockContainer.nativeElement.scrollTop +
-                    this._table.tableContainer.nativeElement.getBoundingClientRect().height ===
-                this._table.tableScrollMockContainer.nativeElement.scrollHeight
+                tableScrollMockContainer.scrollTop + tableScrollMockContainer.getBoundingClientRect().height ===
+                tableScrollMockContainer.scrollHeight
             ) {
-                this._setRows(this._table._tableRows.length - this._getNumberOfRowsToDisplay());
+                const startingNodeIndex = this._table._tableRowsVisible.length - this._getNumberOfRowsToDisplay();
+                this._setRows(startingNodeIndex);
             }
         });
     };
 
     /** @hidden */
-    private _scrollRow(direction: 'up' | 'down', count: number): void {
+    private _scrollRow(count: number): void {
         let startingNode = 0;
         if (this._previousStartNodeIndex !== null && this._previousStartNodeIndex >= 0) {
             startingNode = this._previousStartNodeIndex;
         }
-        if (startingNode + count + this._getNumberOfRowsToDisplay() <= this._table._tableRows.length) {
+        if (
+            startingNode + count + this._getNumberOfRowsToDisplay() <= this._table._tableRowsVisible.length ||
+            count < 0
+        ) {
             startingNode = Math.ceil(startingNode + count);
         }
         if (startingNode < 0) {
             startingNode = 0;
         }
+        if (
+            count > 0 &&
+            startingNode === this._previousStartNodeIndex &&
+            this._table.pageScrolling &&
+            this._table._tableRowsVisible.length === this._table._tableRows.length
+        ) {
+            this._table._onSpyIntersect(true);
+        }
         this._setRows(startingNode);
+        const tableScrollMockContainer = this._table.tableScrollMockContainer.nativeElement;
+        tableScrollMockContainer.scrollBy({ top: count * this.rowHeight });
+        this._lastMockScrollPosition = tableScrollMockContainer.scrollTop;
     }
 
     /** @hidden */

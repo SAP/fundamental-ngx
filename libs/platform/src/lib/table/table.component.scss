@@ -507,7 +507,6 @@ fdk-dynamic-portal {
     }
 
     &__body--virtual-scroll {
-        position: relative;
         background-color: var(--sapList_Background, #fff);
 
         .fd-table__body:not(:last-child) .fd-table__row:last-child .fd-table__cell {

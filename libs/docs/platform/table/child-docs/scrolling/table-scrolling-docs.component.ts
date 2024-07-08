@@ -7,9 +7,9 @@ const platformTablePageScrollingTsSrc = 'platform-table-page-scrolling-example.c
 const platformVirtualScrollTableDefaultSrc = 'virtual-scroll/platform-table-virtual-scroll-example.component.html';
 const platformVirtualScrollTableDefaultTsSrc = 'virtual-scroll/platform-table-virtual-scroll-example.component.ts';
 const platformVirtualScrollWholeRowTableDefaultSrc =
-    'virtual-scroll-whole-row/platform-table-whole-row-virtual-scroll-example.component.html';
+    'virtual-scroll-whole-row/platform-table-virtual-scroll-whole-row-example.component.html';
 const platformVirtualScrollWholeRowTableDefaultTsSrc =
-    'virtual-scroll-whole-row/platform-table-whole-row-virtual-scroll-example.component.ts';
+    'virtual-scroll-whole-row/platform-table-virtual-scroll-whole-row-example.component.ts';
 @Component({
     selector: 'fd-table-scrolling-docs',
     templateUrl: './table-scrolling-docs.component.html',

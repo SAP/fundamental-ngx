@@ -13,6 +13,8 @@ import { TableState } from './interfaces/table-state.interface';
 import { PlatformTableManagedPreset, SaveRowsEvent, TableInitialState, TableRow, TableVirtualScroll } from './models';
 import { TableScrollable } from './services/table-scroll-dispatcher.service';
 import { TableColumn } from './table-column';
+import { SelectionModeValue } from './enums';
+import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
 
 export abstract class Table<T = any> implements PresetManagedComponent<PlatformTableManagedPreset> {
     abstract readonly name: string;
@@ -70,6 +72,10 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     abstract _tableRowsInViewPortPlaceholder: number[];
 
     abstract _focusableGrid: FocusableGridDirective;
+
+    abstract _selectionMode: SelectionModeValue;
+
+    abstract contentDensityObserver: ContentDensityObserver;
 
     /** Get table state */
     abstract getTableState(): TableState;
@@ -178,6 +184,8 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     abstract refreshDndList(): void;
 
     abstract clearTableRows(): void;
+
+    abstract _onSpyIntersect(intersected: boolean): void;
 
     /** Toolbar Sort Settings button click event */
     readonly openTableSortSettings: EventEmitter<void> = new EventEmitter<void>();

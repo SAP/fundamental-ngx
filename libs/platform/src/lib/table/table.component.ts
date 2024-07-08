@@ -124,6 +124,7 @@ import {
 } from 'rxjs/operators';
 import { TABLE_TOOLBAR, TableToolbarInterface } from './components';
 import { uniq } from 'lodash-es';
+import { TableHeaderRowComponent } from './components/table-header-row/table-header-row.component';
 
 interface ToolbarContext {
     counter: Observable<number>;
@@ -351,6 +352,10 @@ export class TableComponent<T = any>
 
     /** @hidden */
     _selectionMode: SelectionModeValue = SelectionMode.NONE;
+
+    /** @hidden */
+    @ViewChild(TableHeaderRowComponent)
+    _header: TableHeaderRowComponent;
 
     /** Sets selection mode for the table. 'single' | 'multiple' | 'none' */
     @Input()
@@ -796,6 +801,9 @@ export class TableComponent<T = any>
             this._subscriptions.add(
                 this._rtlService.rtl.subscribe((isRtl) => {
                     this._rtl = isRtl;
+                    if (this._virtualScrollDirective?.scrollWholeRows) {
+                        this._setMockScrollbarPosition();
+                    }
                     this._cdr.markForCheck();
                 })
             );
@@ -954,12 +962,7 @@ export class TableComponent<T = any>
         }
 
         if (this._virtualScrollDirective?.scrollWholeRows) {
-            this._setMockScrollbarPosition(this._rtlService?.rtl.value);
-            this._subscriptions.add(
-                this._rtlService?.rtl.subscribe((isRtl) => {
-                    this._setMockScrollbarPosition(isRtl);
-                })
-            );
+            this._setMockScrollbarPosition();
         }
     }
 
@@ -1609,6 +1612,10 @@ export class TableComponent<T = any>
     onTableRowsChanged(): void {
         this._calculateVisibleTableRows();
         this._calculateCheckedAll();
+
+        if (this._virtualScrollDirective) {
+            this._virtualScrollDirective.calculateVirtualScrollRows();
+        }
     }
 
     /** @hidden */
@@ -2101,7 +2108,7 @@ export class TableComponent<T = any>
 
                     this.tableScrolled.emit(scrollTop);
 
-                    // Instead of having two places to record this possition, we could just subscribe once.
+                    // Instead of having two places to record this position, we could just subscribe once.
                     this.getTableState().scrollTopPosition = scrollTop;
                 })
         );
@@ -2287,10 +2294,10 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    private _setMockScrollbarPosition(isRtl: boolean | undefined): void {
+    private _setMockScrollbarPosition(): void {
         if (this.tableScrollMockContainer) {
-            this.tableScrollMockContainer.nativeElement.style.left = isRtl ? '0' : 'auto';
-            this.tableScrollMockContainer.nativeElement.style.right = isRtl ? 'auto' : '0';
+            this.tableScrollMockContainer.nativeElement.style.left = this._rtl ? '0' : 'auto';
+            this.tableScrollMockContainer.nativeElement.style.right = this._rtl ? 'auto' : '0';
         }
     }
 }

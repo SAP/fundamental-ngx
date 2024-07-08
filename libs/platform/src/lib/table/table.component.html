@@ -163,7 +163,7 @@
                 </ng-container>
                 <tr
                     aria-hidden="true"
-                    *ngIf="pageScrolling"
+                    *ngIf="pageScrolling && !_virtualScrollDirective?.scrollWholeRows"
                     class="fd-table__intersection-spy"
                     [fdkIntersectionSpy]="pageScrollingThreshold"
                     (intersected)="$event && _onSpyIntersect($event)"
@@ -174,17 +174,23 @@
             <tbody *ngIf="pageScrolling" class="fd-table__body__focus-mock"></tbody>
 
             <!-- the tbody element below is so the scrollbar renders correctly -->
-            <tbody
-                *ngIf="_virtualScrollDirective?.virtualScroll"
-                [class.fd-table__body--scroll-mock]="!!_virtualScrollDirective?.scrollWholeRows"
-                [style.left]="!!_rtl ? '0 !important' : 'auto'"
-                #tableScrollMockContainer
-            >
+            <tbody *ngIf="_virtualScrollDirective?.virtualScroll && !_virtualScrollDirective?.scrollWholeRows">
                 <tr>
                     <td colspan="100%" [style.height.px]="_virtualScrollDirective?.virtualScrollTotalHeight"></td>
                 </tr>
             </tbody>
         </table>
+
+        <!-- the tbody element below is so the scrollbar renders correctly -->
+        <tbody
+            *ngIf="_virtualScrollDirective?.virtualScroll && _virtualScrollDirective?.scrollWholeRows"
+            [class.fd-table__body--scroll-mock]="!!_virtualScrollDirective?.scrollWholeRows"
+            #tableScrollMockContainer
+        >
+            <tr>
+                <td colspan="100%" [style.height.px]="_virtualScrollDirective?.virtualScrollTotalHeight"></td>
+            </tr>
+        </tbody>
     </div>
 </ng-template>
 
