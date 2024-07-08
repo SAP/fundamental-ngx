@@ -1690,8 +1690,6 @@ export class TableComponent<T = any>
 
                     tallyExpandedChildren(parentRow);
 
-                    console.log(expandedChildrenCount);
-
                     this._tableRows.splice(parentRow.index + expandedChildrenCount + 1, 0, ...rows);
 
                     parentRow.children.push(...rows);
