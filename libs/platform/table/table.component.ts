@@ -1722,7 +1722,20 @@ export class TableComponent<T = any>
             )
             .subscribe((items) => {
                 items.forEach((rows, parentRow) => {
-                    this._tableRows.splice(parentRow.index + parentRow.children.length + 1, 0, ...rows);
+                    let expandedChildrenCount = 0;
+
+                    function tallyExpandedChildren(parent: TableRow<T>): void {
+                        if (parent.children && parent.expanded) {
+                            expandedChildrenCount = expandedChildrenCount + parent.children.length;
+                            parent.children.forEach((child) => {
+                                tallyExpandedChildren(child);
+                            });
+                        }
+                    }
+
+                    tallyExpandedChildren(parentRow);
+
+                    this._tableRows.splice(parentRow.index + expandedChildrenCount + 1, 0, ...rows);
 
                     parentRow.children.push(...rows);
 
