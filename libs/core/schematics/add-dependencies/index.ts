@@ -1,9 +1,9 @@
-import { chain, Rule, SchematicContext, SchematicsException, Tree } from '@angular-devkit/schematics';
-import { getPackageJsonDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
+import { Rule, SchematicContext, SchematicsException, Tree } from '@angular-devkit/schematics';
+import { NodeDependencyType, getPackageJsonDependency } from '@schematics/angular/utility/dependencies';
 import { compare } from 'compare-versions';
-import { coerce, major, SemVer, valid } from 'semver';
+import { SemVer, coerce, major, valid } from 'semver';
 import { Schema } from '../models/schema';
-import { addPackageDependency, installDependencies } from '../utils/package-utils';
+import { addPackageDependency } from '../utils/package-utils';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const libraryPackageJson = require('@fundamental-ngx/core/package.json');
 
@@ -24,7 +24,7 @@ const desiredVersions = {
  * @param options
  */
 export function addDependencies(options: Schema): Rule {
-    return chain([addExternalLibraries(options), installDependencies()]);
+    return addExternalLibraries(options);
 }
 
 function addExternalLibraries(options: Schema): Rule {
