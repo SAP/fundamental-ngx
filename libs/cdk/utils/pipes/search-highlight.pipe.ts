@@ -25,7 +25,7 @@ export class SearchHighlightPipe implements PipeTransform {
                 const testStr: string = escape(matches.trim().toLowerCase());
                 const startIndex = value.toLowerCase().indexOf(testStr);
                 if (startIndex !== -1) {
-                    const matchingString = value.substring(startIndex, testStr.length);
+                    const matchingString = value.substring(startIndex, startIndex + testStr.length);
                     result = value.replace(matchingString, '<strong>' + matchingString + '</strong>');
                 }
             }

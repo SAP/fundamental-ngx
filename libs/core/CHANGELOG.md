@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.7...v0.50.1-rc.8) (2024-07-08)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.50.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.6...v0.50.1-rc.7) (2024-07-05)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.50.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.5...v0.50.1-rc.6) (2024-07-03)
+
+
+### Bug Fixes
+
+* **core:** fix the title font size and alignment for Grid List Item ([#12064](https://github.com/SAP/fundamental-ngx/issues/12064)) ([cdaf21b](https://github.com/SAP/fundamental-ngx/commit/cdaf21b27ad4316da7360149df818296dcdb7c93))
+
+
+
+
+
+## [0.50.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.4...v0.50.1-rc.5) (2024-07-03)
+
+
+### Bug Fixes
+
+* **core:** CSS fix to allow long text to wrap for Inline Help ([#12067](https://github.com/SAP/fundamental-ngx/issues/12067)) ([a1f33e7](https://github.com/SAP/fundamental-ngx/commit/a1f33e754bc1b51b47f87dfc496224e21711e7a6))
+
+
+
+
+
+## [0.50.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.3...v0.50.1-rc.4) (2024-07-03)
+
+
+### Bug Fixes
+
+* **core:** add option to set the matching strategy for multi combobox ([#12065](https://github.com/SAP/fundamental-ngx/issues/12065)) ([a2452d4](https://github.com/SAP/fundamental-ngx/commit/a2452d40f7de4362b2cb512afb41e4da37cb9b43))
+
+
+
+
+
 ## [0.50.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.2...v0.50.1-rc.3) (2024-06-25)
 
 **Note:** Version bump only for package @fundamental-ngx/core
