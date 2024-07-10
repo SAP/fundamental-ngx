@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.9...v0.50.1-rc.10) (2024-07-10)
+
+
+### Bug Fixes
+
+* **core:** update schematics for ngAdd to ensure that it will run all steps appropriately. ([#12091](https://github.com/SAP/fundamental-ngx/issues/12091)) ([b296717](https://github.com/SAP/fundamental-ngx/commit/b2967172641c001deb2ade3c9c18eb9717faca75))
+
+
+
+
+
 ## [0.50.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.8...v0.50.1-rc.9) (2024-07-09)
 
 
