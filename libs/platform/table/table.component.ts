@@ -1626,6 +1626,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     onTableRowsChanged(): void {
+        this._reIndexTableRows();
         this._calculateVisibleTableRows();
         this._calculateCheckedAll();
     }
@@ -1923,7 +1924,6 @@ export class TableComponent<T = any>
         this._dataSourceTableRows = rows;
         this._tableRows = [...this._newTableRows, ...this._dataSourceTableRows];
         this.loadedRows$.set(this._tableRows.length);
-        this._reIndexTableRows();
         this.onTableRowsChanged();
         this._calculateIsShownNavigationColumn();
         this._rangeSelector.reset();
