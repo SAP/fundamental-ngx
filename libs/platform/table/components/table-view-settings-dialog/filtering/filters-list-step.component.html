@@ -3,14 +3,12 @@
 </ng-template>
 
 <ng-template #bodyTemplate>
-    <ul fd-list [navigationIndicator]="true">
+    <ul fd-list>
         <li fd-list-group-header>{{ 'platformTable.filterDialogFilterBy' | fdTranslate }}</li>
 
         @for (filter of filters; track filter) {
-            <li fd-list-item>
-                <a fd-list-link (click)="selectFilter.emit(filter)">
-                    <span fd-list-title>{{ filter.label }}</span>
-                </a>
+            <li fd-list-item [interactive]="true" (click)="selectFilter.emit(filter)">
+                <span fd-list-title>{{ filter.label }}</span>
             </li>
         }
     </ul>

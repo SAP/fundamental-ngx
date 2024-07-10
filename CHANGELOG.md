@@ -3,6 +3,135 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.10...v0.50.1-rc.11) (2024-07-10)
+
+
+### Bug Fixes
+
+* **core:** control value not updating properly on user input ([#12062](https://github.com/SAP/fundamental-ngx/issues/12062)) ([7b0924a](https://github.com/SAP/fundamental-ngx/commit/7b0924ad8f6ec81f29444b8463e1c5eff4263b63))
+
+
+
+
+
+## [0.50.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.9...v0.50.1-rc.10) (2024-07-10)
+
+
+### Bug Fixes
+
+* **core:** update schematics for ngAdd to ensure that it will run all steps appropriately. ([#12091](https://github.com/SAP/fundamental-ngx/issues/12091)) ([b296717](https://github.com/SAP/fundamental-ngx/commit/b2967172641c001deb2ade3c9c18eb9717faca75))
+
+
+
+
+
+## [0.50.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.8...v0.50.1-rc.9) (2024-07-09)
+
+
+### Bug Fixes
+
+* **core:** check if shellbar is initialized before setting input breakpoints ([#12092](https://github.com/SAP/fundamental-ngx/issues/12092)) ([21b4a2e](https://github.com/SAP/fundamental-ngx/commit/21b4a2e5a35d15bcc112a8f14916dc4868f5c735))
+
+
+
+
+
+## [0.50.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.7...v0.50.1-rc.8) (2024-07-08)
+
+
+### Bug Fixes
+
+* **platform:** commented icon-tab-bar selection method logic part to fix scroll issue ([#12063](https://github.com/SAP/fundamental-ngx/issues/12063)) ([4e09263](https://github.com/SAP/fundamental-ngx/commit/4e092635c8cd4a52fcea7d77223c3eccc8fa425f))
+
+
+
+
+
+## [0.50.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.6...v0.50.1-rc.7) (2024-07-05)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.50.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.5...v0.50.1-rc.6) (2024-07-03)
+
+
+### Bug Fixes
+
+* **core:** fix the title font size and alignment for Grid List Item ([#12064](https://github.com/SAP/fundamental-ngx/issues/12064)) ([cdaf21b](https://github.com/SAP/fundamental-ngx/commit/cdaf21b27ad4316da7360149df818296dcdb7c93))
+
+
+
+
+
+## [0.50.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.4...v0.50.1-rc.5) (2024-07-03)
+
+
+### Bug Fixes
+
+* **core:** CSS fix to allow long text to wrap for Inline Help ([#12067](https://github.com/SAP/fundamental-ngx/issues/12067)) ([a1f33e7](https://github.com/SAP/fundamental-ngx/commit/a1f33e754bc1b51b47f87dfc496224e21711e7a6))
+
+
+
+
+
+## [0.50.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.3...v0.50.1-rc.4) (2024-07-03)
+
+
+### Bug Fixes
+
+* **core:** add option to set the matching strategy for multi combobox ([#12065](https://github.com/SAP/fundamental-ngx/issues/12065)) ([a2452d4](https://github.com/SAP/fundamental-ngx/commit/a2452d40f7de4362b2cb512afb41e4da37cb9b43))
+
+
+
+
+
+## [0.50.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.2...v0.50.1-rc.3) (2024-06-25)
+
+
+### Bug Fixes
+
+* **platform:** add fix for incorrect font weight for column header in sorted state ([#12018](https://github.com/SAP/fundamental-ngx/issues/12018)) ([de36eaa](https://github.com/SAP/fundamental-ngx/commit/de36eaa71b54f3f5be91bbba21ba3a5eb6eed281))
+
+
+
+
+
+## [0.50.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.1...v0.50.1-rc.2) (2024-06-25)
+
+
+### Bug Fixes
+
+* **core, platform:** add option to remove additinal paddings from table settings dialogs ([#12019](https://github.com/SAP/fundamental-ngx/issues/12019)) ([3801581](https://github.com/SAP/fundamental-ngx/commit/380158163a055588a8a66c1c68ce7d64124fc85c))
+
+
+
+
+
+## [0.50.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.0...v0.50.1-rc.1) (2024-06-25)
+
+
+### Bug Fixes
+
+* **platform:** use correct markup for the list in Filter dialog for Platform table ([#12020](https://github.com/SAP/fundamental-ngx/issues/12020)) ([e21be52](https://github.com/SAP/fundamental-ngx/commit/e21be52429a3570b12e36f5f000d1e983de2b67c))
+
+
+
+
+
+## [0.50.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.50.0...v0.50.1-rc.0) (2024-06-21)
+
+
+### Bug Fixes
+
+* **platform:** add fix for overflow button not working in Icon Tab Bar ([#12023](https://github.com/SAP/fundamental-ngx/issues/12023)) ([b91c5cd](https://github.com/SAP/fundamental-ngx/commit/b91c5cdf3df51e2bebf3c6fc5ca27073b5ed070e))
+
+
+
+
+
 # [0.50.0](https://github.com/SAP/fundamental-ngx/compare/v0.50.0-rc.111...v0.50.0) (2024-06-13)
 
 **Note:** Version bump only for package fundamental-ngx

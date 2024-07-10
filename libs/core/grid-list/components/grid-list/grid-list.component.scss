@@ -2,3 +2,9 @@
 @import 'fundamental-styles/dist/checkbox';
 @import 'fundamental-styles/dist/layout-grid';
 @import 'fundamental-styles/dist/grid-list';
+
+.fd-grid-list--mode-multi-select {
+    .fd-toolbar.fd-grid-list__item-toolbar {
+        padding-inline: 0.5rem 1rem;
+    }
+}
