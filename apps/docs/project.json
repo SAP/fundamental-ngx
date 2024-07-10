@@ -172,6 +172,11 @@
                         "input": "apps/docs/src/theming/sap_horizon_fonts.css",
                         "inject": false,
                         "bundleName": "sap_horizon_fonts"
+                    },
+                    {
+                        "input": "apps/docs/src/theming/sap_belize_fonts.css",
+                        "inject": false,
+                        "bundleName": "sap_belize_fonts"
                     }
                 ],
                 "stylePreprocessorOptions": {
