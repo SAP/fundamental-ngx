@@ -318,17 +318,19 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     private _setCurrentBreakpoint(): void {
-        const { width } = this._shellbar.nativeElement.getBoundingClientRect();
+        if (this._shellbar) {
+            const { width } = this._shellbar.nativeElement.getBoundingClientRect();
 
-        const breakpoint = this._breakpoints.find((item) => width >= item.min && width < item.max + 1);
+            const breakpoint = this._breakpoints.find((item) => width >= item.min && width < item.max + 1);
 
-        if (!breakpoint || breakpoint.size === this._currentSize) {
-            return;
+            if (!breakpoint || breakpoint.size === this._currentSize) {
+                return;
+            }
+
+            this._breakpointSize = breakpoint.size;
+            this._currentSize$.next(this._currentSize);
+            this._cd.detectChanges();
         }
-
-        this._breakpointSize = breakpoint.size;
-        this._currentSize$.next(this._currentSize);
-        this._cd.detectChanges();
     }
 
     /** @hidden */

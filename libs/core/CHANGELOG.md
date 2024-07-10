@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.8...v0.50.1-rc.9) (2024-07-09)
+
+
+### Bug Fixes
+
+* **core:** check if shellbar is initialized before setting input breakpoints ([#12092](https://github.com/SAP/fundamental-ngx/issues/12092)) ([21b4a2e](https://github.com/SAP/fundamental-ngx/commit/21b4a2e5a35d15bcc112a8f14916dc4868f5c735))
+
+
+
+
+
 ## [0.50.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.7...v0.50.1-rc.8) (2024-07-08)
 
 **Note:** Version bump only for package @fundamental-ngx/core
