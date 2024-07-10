@@ -1723,20 +1723,20 @@ export class TableComponent<T = any>
             )
             .subscribe((items) => {
                 items.forEach((rows, parentRow) => {
-                    let expandedChildrenCount = 0;
+                    let nestedChildrenCount = 0;
 
-                    function tallyExpandedChildren(parent: TableRow<T>): void {
-                        if (parent.children && parent.expanded) {
-                            expandedChildrenCount = expandedChildrenCount + parent.children.length;
+                    function tallyNestedChildren(parent: TableRow<T>): void {
+                        if (parent.children) {
+                            nestedChildrenCount = nestedChildrenCount + parent.children.length;
                             parent.children.forEach((child) => {
-                                tallyExpandedChildren(child);
+                                tallyNestedChildren(child);
                             });
                         }
                     }
 
-                    tallyExpandedChildren(parentRow);
+                    tallyNestedChildren(parentRow);
 
-                    this._tableRows.splice(parentRow.index + expandedChildrenCount + 1, 0, ...rows);
+                    this._tableRows.splice(parentRow.index + nestedChildrenCount + 1, 0, ...rows);
 
                     parentRow.children.push(...rows);
 
@@ -1920,8 +1920,12 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    private _setTableRows(rows = this._dataSourceTableRows): void {
-        this._dataSourceTableRows = rows;
+    private _setTableRows(rows?: TableRow<T>[]): void {
+        if (!rows || !rows.length) {
+            rows = this._dataSourceTableRows;
+        } else {
+            this._dataSourceTableRows = rows;
+        }
         this._tableRows = [...this._newTableRows, ...this._dataSourceTableRows];
         this.loadedRows$.set(this._tableRows.length);
         this.onTableRowsChanged();
