@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.10...v0.50.1-rc.11) (2024-07-10)
+
+
+### Bug Fixes
+
+* **core:** control value not updating properly on user input ([#12062](https://github.com/SAP/fundamental-ngx/issues/12062)) ([7b0924a](https://github.com/SAP/fundamental-ngx/commit/7b0924ad8f6ec81f29444b8463e1c5eff4263b63))
+
+
+
+
+
 ## [0.50.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.9...v0.50.1-rc.10) (2024-07-10)
 
 
