@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.10...v0.50.1-rc.11) (2024-07-10)
+
+
+### Bug Fixes
+
+* **core:** control value not updating properly on user input ([#12062](https://github.com/SAP/fundamental-ngx/issues/12062)) ([7b0924a](https://github.com/SAP/fundamental-ngx/commit/7b0924ad8f6ec81f29444b8463e1c5eff4263b63))
+
+
+
+
+
+## [0.50.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.9...v0.50.1-rc.10) (2024-07-10)
+
+
+### Bug Fixes
+
+* **core:** update schematics for ngAdd to ensure that it will run all steps appropriately. ([#12091](https://github.com/SAP/fundamental-ngx/issues/12091)) ([b296717](https://github.com/SAP/fundamental-ngx/commit/b2967172641c001deb2ade3c9c18eb9717faca75))
+
+
+
+
+
+## [0.50.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.8...v0.50.1-rc.9) (2024-07-09)
+
+
+### Bug Fixes
+
+* **core:** check if shellbar is initialized before setting input breakpoints ([#12092](https://github.com/SAP/fundamental-ngx/issues/12092)) ([21b4a2e](https://github.com/SAP/fundamental-ngx/commit/21b4a2e5a35d15bcc112a8f14916dc4868f5c735))
+
+
+
+
+
 ## [0.50.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.7...v0.50.1-rc.8) (2024-07-08)
 
 **Note:** Version bump only for package @fundamental-ngx/core
