@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.11...v0.50.1-rc.12) (2024-07-11)
+
+
+### Bug Fixes
+
+* **platform:** when loading child datasource, need to recursively check all expanded children for insertion index ([#12088](https://github.com/SAP/fundamental-ngx/issues/12088)) ([00beb56](https://github.com/SAP/fundamental-ngx/commit/00beb5622a9c0b2d01539aa3a0003fd15f847df4))
+
+
+
+
+
 ## [0.50.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.10...v0.50.1-rc.11) (2024-07-10)
 
 
