@@ -163,6 +163,9 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
             const scrollTop = this._table.getTableState().scrollTopPosition;
             if (scrollTop !== 0) {
                 startNodeIndex = Math.floor(scrollTop / this.rowHeight);
+                if (startNodeIndex > this._table._tableRowsVisible.length) {
+                    startNodeIndex = 0;
+                }
             }
 
             const totalNodeCount = this._table._tableRowsVisible.length;
@@ -282,7 +285,7 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
         let deltaY = tableScrollMockContainer.scrollTop - this._lastMockScrollPosition;
         deltaY = deltaY / this.rowHeight;
         this._scrollMockTimeout = window.requestAnimationFrame(() => {
-            this._scrollRow(deltaY);
+            this._scrollRow(deltaY, true);
             this._lastMockScrollPosition = tableScrollMockContainer.scrollTop;
             if (tableScrollMockContainer.scrollTop === 0) {
                 this._setRows(0);
@@ -298,7 +301,7 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
     };
 
     /** @hidden */
-    private _scrollRow(count: number): void {
+    private _scrollRow(count: number, fromMockScrollbarListener = false): void {
         let startingNode = 0;
         if (this._previousStartNodeIndex !== null && this._previousStartNodeIndex >= 0) {
             startingNode = this._previousStartNodeIndex;
@@ -322,7 +325,9 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
         }
         this._setRows(startingNode);
         const tableScrollMockContainer = this._table.tableScrollMockContainer.nativeElement;
-        tableScrollMockContainer.scrollBy({ top: count * this.rowHeight });
+        if (!fromMockScrollbarListener) {
+            tableScrollMockContainer.scrollBy({ top: count * this.rowHeight });
+        }
         this._lastMockScrollPosition = tableScrollMockContainer.scrollTop;
     }
 
