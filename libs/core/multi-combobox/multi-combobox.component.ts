@@ -469,6 +469,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     _onOptionCheckboxClicked(event: MouseEvent, index: number): void {
         event.stopPropagation();
         this._onListElementClicked(event, index);
+        this.close();
     }
 
     /** @hidden */
