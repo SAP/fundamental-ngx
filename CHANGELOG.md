@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.12...v0.50.1-rc.13) (2024-07-12)
+
+
+### Bug Fixes
+
+* **core:** clear the json value if input is empty in Combobox ([#12100](https://github.com/SAP/fundamental-ngx/issues/12100)) ([f4807db](https://github.com/SAP/fundamental-ngx/commit/f4807db4234c53025a2e6dc967ad85dd59dcd15f))
+
+
+
+
+
 ## [0.50.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.11...v0.50.1-rc.12) (2024-07-11)
 
 
