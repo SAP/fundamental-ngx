@@ -99,9 +99,7 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
                 if (this._table.tableContainer.nativeElement.querySelectorAll('tr')[1].ariaRowIndex !== '0') {
                     const cellToFocus = {
                         colIndex: this._focusedCell.colIndex,
-                        rowIndex: 1,
-                        totalCols: this._focusedCell.totalCols,
-                        totalRows: this._focusedCell.totalRows
+                        rowIndex: 1
                     };
                     this._table._focusableGrid.focusCell(cellToFocus);
                 }
@@ -283,7 +281,7 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
         }
         const tableScrollMockContainer = this._table.tableScrollMockContainer.nativeElement;
         let deltaY = tableScrollMockContainer.scrollTop - this._lastMockScrollPosition;
-        deltaY = deltaY / this.rowHeight;
+        deltaY = Math.ceil(deltaY / this.rowHeight);
         this._scrollMockTimeout = window.requestAnimationFrame(() => {
             this._scrollRow(deltaY, true);
             this._lastMockScrollPosition = tableScrollMockContainer.scrollTop;
