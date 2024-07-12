@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.13...v0.50.1-rc.14) (2024-07-12)
+
+
+### Bug Fixes
+
+* **core, platform:** clear input and close options list on checkbox selection for Multi combobox ([#12104](https://github.com/SAP/fundamental-ngx/issues/12104)) ([06aeeb6](https://github.com/SAP/fundamental-ngx/commit/06aeeb6dd6f7a04f2491e06c9b8c05620a749c3c))
+
+
+
+
+
 ## [0.50.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.12...v0.50.1-rc.13) (2024-07-12)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
