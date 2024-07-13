@@ -534,7 +534,9 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
      * Show navigation for single list
      */
     ngOnInit(): void {
-        this.id = `fdp-list-item-${nextListItemId++}`;
+        if (!this.id || this.id === this.defaultId) {
+            this.id = `fdp-list-item-${nextListItemId++}`;
+        }
     }
 
     /** @hidden */

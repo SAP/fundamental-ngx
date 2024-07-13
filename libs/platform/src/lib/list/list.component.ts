@@ -68,6 +68,10 @@ import { FdpList, FdpListDataSource, ListType, SelectionType } from './models/li
 export class SelectionChangeEvent {
     /** Selected items */
     selectedItems: BaseListItem[];
+    /** Selected item */
+    added: BaseListItem;
+    /** Deselected item */
+    removed: BaseListItem;
     /** Index */
     index: number;
 }
@@ -513,10 +517,16 @@ export class ListComponent<T>
 
         this._selectionModel = new SelectionModel<BaseListItem>(this._multiSelect, this.selectedItems);
 
-        this._selectionModel.changed.pipe(takeUntil(this._destroyed)).subscribe(() => {
+        this._selectionModel.changed.pipe(takeUntil(this._destroyed)).subscribe((selection) => {
             this.selectedItems = this._selectionModel.selected;
             const event = new SelectionChangeEvent();
             event.selectedItems = this.selectedItems;
+            if (selection.added?.length) {
+                event.added = selection.added[0];
+            }
+            if (selection.removed?.length) {
+                event.removed = selection.removed[0];
+            }
             this.stateChanges.next(event);
             this.selectedItemChange.emit(event);
         });
@@ -662,6 +672,11 @@ export class ListComponent<T>
     _selectItem(item: BaseListItem): void {
         this._selectionModel.select(item);
         this.stateChanges.next(item);
+    }
+
+    /** @hidden */
+    _clearSelection(): void {
+        this._selectionModel.clear();
     }
 
     /** @hidden */

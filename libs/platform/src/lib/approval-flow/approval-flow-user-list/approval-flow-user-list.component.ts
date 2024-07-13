@@ -4,6 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     EventEmitter,
+    inject,
     Input,
     OnChanges,
     OnDestroy,
@@ -23,6 +24,8 @@ import {
 } from '@fundamental-ngx/platform/list';
 import { ApprovalUser } from '../interfaces';
 import { trackByFn } from '../helpers';
+import { takeUntil } from 'rxjs';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 const ITEMS_RENDERED_AT_ONCE = 100;
 const INTERVAL_IN_MS = 10;
@@ -39,7 +42,8 @@ const INTERVAL_IN_MS = 10;
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fdp-approval-flow-user-list'
-    }
+    },
+    providers: [DestroyedService]
 })
 export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, OnDestroy {
     /** Approval flow users */
@@ -85,7 +89,16 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
     _displayUsers: ApprovalUser[] = [];
 
     /** @hidden */
+    _allSelectedUsers: ApprovalUser[] = [];
+
+    /** @hidden */
     private _intervalID?: number;
+
+    /** @hidden */
+    private _destroyed$ = inject(DestroyedService);
+
+    /** @hidden */
+    private _dontCallSelection = false;
 
     /** @hidden */
     constructor(private _cdr: ChangeDetectorRef) {}
@@ -93,18 +106,13 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.selectedUsers.length) {
-            const selectedApproversNames = this.selectedUsers.map((approver) => approver.name);
+            this._selectItems(this.selectedUsers);
+            this._allSelectedUsers = [...this.selectedUsers];
+            this._cdr.markForCheck();
+        }
 
-            this._selectedItems = this.listItems.filter(
-                (item) => !!item.avatar?.ariaLabel && selectedApproversNames.includes(item.avatar.ariaLabel)
-            );
-
-            this._selectedItems.forEach((item) => {
-                item._selected = true;
-                this.list._selectItem(item);
-            });
-
-            this._cdr.detectChanges();
+        if (this.isSelectable) {
+            this._listenToListItemChange();
         }
     }
 
@@ -122,15 +130,28 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
 
     /** @hidden */
     _onSelect(event: SelectionChangeEvent): void {
-        this._selectedItems = event.selectedItems;
+        if (!this._dontCallSelection) {
+            this._selectedItems = event.selectedItems;
 
-        this.onSelectionChange.emit(this._getUsersFromSelectedItems(event.selectedItems));
+            if (event.removed) {
+                this._allSelectedUsers = this._allSelectedUsers.filter(
+                    (user) => `${this._idPrefix + user.id}` !== event.removed.id
+                );
+            }
+
+            if (event.added) {
+                this._allSelectedUsers.push(...this._getUsersFromSelectedItems([event.added]));
+            }
+
+            this.onSelectionChange.emit(this._allSelectedUsers);
+            this._cdr.detectChanges();
+        }
     }
 
     /** @hidden */
     private _getUsersFromSelectedItems(items: BaseListItem[]): ApprovalUser[] {
         return items
-            .map((item) => this.users.find((user) => `${this._idPrefix + user.id}` === item.itemEl.nativeElement.id))
+            .map((item) => this.users.find((user) => `${this._idPrefix + user.id}` === item.id))
             .filter((u): u is ApprovalUser => !!u);
     }
 
@@ -179,5 +200,27 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
         if (this._intervalID) {
             clearInterval(this._intervalID);
         }
+    }
+
+    /** @hidden */
+    private _listenToListItemChange(): void {
+        this.listItems.changes.pipe(takeUntil(this._destroyed$)).subscribe(() => {
+            this._selectItems(this._allSelectedUsers);
+            this._cdr.detectChanges();
+        });
+    }
+
+    /** @hidden */
+    private _selectItems(users: ApprovalUser[]): void {
+        this._dontCallSelection = true;
+        const allSelectedUserNames = users.map((user) => this._idPrefix + user.id);
+        const currentSelectedList = this.listItems.filter((item) => allSelectedUserNames.includes(item.id));
+        this.list._clearSelection();
+        this._selectedItems = [...currentSelectedList];
+        this._selectedItems.forEach((item) => {
+            item._selected = true;
+            this.list._selectItem(item);
+        });
+        this._dontCallSelection = false;
     }
 }
