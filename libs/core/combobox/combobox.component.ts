@@ -821,6 +821,8 @@ export class ComboboxComponent<T = any>
             // Do not set new value if theres multiple items that have same label.
             if (values.length === 1 && this.displayFn(values[0]) !== this.displayFn(this.getValue())) {
                 this.setValue(values[0]);
+            } else if (values.length === 0) {
+                this.setValue(null);
             }
             this.onChange(this.getValue());
         } else {
