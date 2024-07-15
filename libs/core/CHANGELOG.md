@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.14...v0.50.1-rc.15) (2024-07-15)
+
+
+### Bug Fixes
+
+* **core:** add missing Object Attribute module ([#12066](https://github.com/SAP/fundamental-ngx/issues/12066)) ([77f49a6](https://github.com/SAP/fundamental-ngx/commit/77f49a66eb0531d843add500af813e4006dad915))
+
+
+
+
+
 ## [0.50.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.13...v0.50.1-rc.14) (2024-07-12)
 
 
