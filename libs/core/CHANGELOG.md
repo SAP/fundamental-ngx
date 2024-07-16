@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.16...v0.50.1-rc.17) (2024-07-16)
+
+
+### Bug Fixes
+
+* add belize theme preview ([#12094](https://github.com/SAP/fundamental-ngx/issues/12094)) ([ae460fd](https://github.com/SAP/fundamental-ngx/commit/ae460fd654d8e3af99c4e7ca76f4afef3cdbc410))
+
+
+
+
+
 ## [0.50.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.15...v0.50.1-rc.16) (2024-07-16)
 
 **Note:** Version bump only for package @fundamental-ngx/core
