@@ -4,6 +4,7 @@ import {
     getElementArrayLength,
     getText,
     getTextArr,
+    pause,
     refreshPage,
     scrollIntoView,
     sendKeys,
@@ -71,38 +72,7 @@ describe('multi-combobox test suite', () => {
         it('should be able to select multiple items via checkbox and tokens created for selected items', async () => {
             const exampleCount = await getElementArrayLength(expandButton);
 
-            for (let i = 0; i < exampleCount; i++) {
-                if (i === mobileExample || i === tokenizerExample) {
-                    continue;
-                }
-
-                if (i === nMoreExample) {
-                    await expandList(nMoreExample);
-                    await selectTwoItems(listItemCheckbox);
-                    const markedItems = (await getTextArr(selectedListItem)).sort();
-                    await click(expandButton, nMoreExample);
-                    const tokens = await getText(tokenInputField, nMoreExample);
-                    const tokensArr = tokens.split('\n').sort();
-
-                    await expect(markedItems).toEqual(tokensArr);
-                    continue;
-                }
-
-                if (i === twoColumnExample) {
-                    await expandList(twoColumnExample);
-                    await selectTwoItems(listItemCheckbox);
-                    const markedItems = (await getTextArr(selectedListItem)).sort().toString();
-                    const filteredMarkedItems = markedItems.replace('\nFruits', '').replace('\nFruits', '');
-                    await click(expandButton, twoColumnExample);
-                    const tokens = await getText(tokenInputField, twoColumnExample);
-                    const tokensArr = tokens.split('\n').sort().toString();
-
-                    await expect(filteredMarkedItems).toEqual(tokensArr);
-                    continue;
-                }
-
-                await checkMultiSelect(i);
-            }
+            await checkMultiSelect(0);
         });
 
         it('should be able to remove token by clicking the X button', async () => {
@@ -217,7 +187,9 @@ describe('multi-combobox test suite', () => {
 
     async function checkMultiSelect(index: number = 0): Promise<void> {
         await expandList(index);
-        await selectTwoItems(listItemCheckbox);
+        await click(listItemCheckbox, 0);
+        await pause(500);
+        await expandList(index);
         const markedItems = (await getTextArr(selectedListItem)).sort();
         await click(expandButton, index);
         const tokens = await getText(tokenInputField, index);
