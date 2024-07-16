@@ -9,6 +9,7 @@ import { TableScrollDispatcherService } from '../services/table-scroll-dispatche
 import { Table } from '../table';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { TableRowService } from '../services/table-row.service';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -35,7 +36,16 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
      * A "rowHeight" must be provided when using this feature.
      */
     @Input()
-    scrollWholeRows = false;
+    set scrollWholeRows(value: boolean) {
+        this._scrollWholeRows = coerceBooleanProperty(value);
+        if (this._scrollWholeRows) {
+            this.virtualScroll = true;
+        }
+    }
+
+    get scrollWholeRows(): boolean {
+        return this._scrollWholeRows;
+    }
 
     /** Cache size for the virtualScroll, default is 40 in each direction */
     @Input()
@@ -92,6 +102,9 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
     private _previousStartNodeIndex: number | null = null;
 
     /** @hidden */
+    private _scrollWholeRows = false;
+
+    /** @hidden */
     @HostListener('keydown', ['$event'])
     _keydownHandler(event: KeyboardEvent): void {
         if (this.scrollWholeRows) {
@@ -128,9 +141,6 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
         if (this.virtualScroll && (changes['rowHeight'] || changes['virtualScroll'] || changes['renderAhead'])) {
             this.calculateVirtualScrollRows();
         }
-        if (changes?.scrollWholeRows && changes.scrollWholeRows.currentValue && !this.virtualScroll) {
-            this.virtualScroll = true;
-        }
     }
 
     /** @hidden */
@@ -144,7 +154,8 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
     }
 
     /**
-     * Calculates rows in viewport.
+     * This function determines how many rows can be displayed in the table, and sets the rows in the table based on the
+     * start node index, which may come from the table state
      */
     calculateVirtualScrollRows(): void {
         if (this.scrollWholeRows) {
@@ -173,7 +184,6 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
 
             this._setRows(startNodeIndex);
             const scrollMockContainer = this._table.tableScrollMockContainer.nativeElement;
-            scrollMockContainer.style.width = '1rem';
             scrollMockContainer.style.maxHeight = this.bodyHeight;
         } else {
             if (!this.virtualScroll || !this.bodyHeight) {
@@ -218,7 +228,8 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
     }
 
     /**
-     * Initialises scroll listener.
+     * @hidden
+     * Initialises scroll listeners.
      */
     listenOnVirtualScroll(): void {
         if (this.scrollWholeRows) {
@@ -255,7 +266,11 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
         return Math.floor(tableHeight / (this.rowHeight + 2));
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * This function is called when the user performs a wheel event. It determines whether or not the user has scrolled
+     * up or down using the event's deltaX property, and scrolls the table by one row.
+     */
     private _wheelScrollListenerFunction = (event: WheelEvent): void => {
         if (Math.abs(event.deltaX) < Math.abs(event.deltaY)) {
             event.preventDefault();
@@ -272,7 +287,11 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
         }
     };
 
-    /** @hidden */
+    /**
+     * @hidden
+     * This function is called when the mock scrollbar (when using 'scrollWholeRows') is moved. It determines if the
+     * scroll was up or down by comparing the current scroll top to the previous scroll top and scrolls rows accordingly.
+     */
     private _mockScrollbarListenerFunction = (event: Event): void => {
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -286,19 +305,27 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
             this._scrollRow(deltaY, true);
             this._lastMockScrollPosition = tableScrollMockContainer.scrollTop;
             if (tableScrollMockContainer.scrollTop === 0) {
+                // Always display the first row of the table when the user scrolls all the way to the top
                 this._setRows(0);
             }
             if (
                 tableScrollMockContainer.scrollTop + tableScrollMockContainer.getBoundingClientRect().height ===
                 tableScrollMockContainer.scrollHeight
             ) {
+                // Always display the last rows of the table when the user scrolls all the way to the bottom
                 const startingNodeIndex = this._table._tableRowsVisible.length - this._getNumberOfRowsToDisplay();
                 this._setRows(startingNodeIndex);
             }
         });
     };
 
-    /** @hidden */
+    /**
+     * @hidden
+     * This function, used only when 'scrollWholeRows' is truthy, calculates what should be the new starting node, based
+     * off the previous starting node and the provided 'count' parameter. For example if the previous start node was 10
+     * and the count parameter is -2, the new starting node will be 8. This function also programmatically moves the
+     * mock scrollbar.
+     */
     private _scrollRow(count: number, fromMockScrollbarListener = false): void {
         let startingNode = 0;
         if (this._previousStartNodeIndex !== null && this._previousStartNodeIndex >= 0) {
@@ -313,6 +340,7 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
         if (startingNode < 0) {
             startingNode = 0;
         }
+        // This next 'if' statement is for triggering new page loads when 'pageScrolling' is true
         if (
             count > 0 &&
             startingNode === this._previousStartNodeIndex &&
@@ -329,7 +357,11 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
         this._lastMockScrollPosition = tableScrollMockContainer.scrollTop;
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * This function sets rows in the table's viewport depending on the provided starting node. It also sets the table
+     * state.
+     */
     private _setRows(startingNode: number): void {
         this._table.setRowsInViewport(startingNode, this._getNumberOfRowsToDisplay());
         this._previousStartNodeIndex = startingNode;

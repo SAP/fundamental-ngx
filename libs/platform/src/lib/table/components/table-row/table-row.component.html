@@ -167,7 +167,7 @@
                 [class.fd-table__cell--truncate-txt]="column.applyText"
                 [attr.title]="
                     tableTextContainer.offsetWidth < tableTextContainer.scrollWidth
-                        ? tableTextContainer.innerText
+                        ? tableTextContainer.textContent
                         : null
                 "
                 #tableTextContainer
