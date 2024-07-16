@@ -132,18 +132,19 @@ describe('Icon Tab Bar component test suite', () => {
             await checkSelectingTabs(overflowingExample);
         });
 
-        // it('should check overflowing', async () => {
-        //     await click(overflowButton);
-        //     await expect(await isElementDisplayed(expandedList)).toBe(true, 'expanded list is not displayed');
-        //     const iconName = await getElementClass(listItem + icon);
-        //     const quantityOfDisplayedTabs = await getElementArrayLength(
-        //         overflowingExample + tabBarItem + '[aria-hidden=false]'
-        //     );
-        //     await click(listItem);
-        //     await expect(
-        //         await getElementClass(overflowingExample + tabBarItem + icon, quantityOfDisplayedTabs - 1)
-        //     ).toBe(iconName, 'tabs are not replaced');
-        // });
+        it('should check overflowing', async () => {
+            await click(overflowButton);
+            await expect(await isElementDisplayed(expandedList)).toBe(true, 'expanded list is not displayed');
+            const iconName = await getElementClass(listItem + icon);
+            const quantityOfDisplayedTabs = await getElementArrayLength(
+                overflowingExample + tabBarItem + '[aria-hidden=false]'
+            );
+            await click(listItem);
+            await expect(await getElementClass(overflowingExample + tabBarItem + icon, quantityOfDisplayedTabs)).toBe(
+                iconName,
+                'tabs are not replaced'
+            );
+        });
     });
 
     describe('Configurations paddings example', () => {
