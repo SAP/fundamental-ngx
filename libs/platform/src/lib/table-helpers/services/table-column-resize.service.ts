@@ -255,8 +255,6 @@ export class TableColumnResizeService implements OnDestroy {
             this._resizerPosition = resizerPosition - TABLE_RESIZER_BORDER_WIDTH + scrollLeftOffset;
             this.resizerPosition$.next(this.resizerPosition);
         }
-
-        this._markForCheck.next();
     }
 
     /** Hide the column resizer. */
@@ -372,8 +370,6 @@ export class TableColumnResizeService implements OnDestroy {
 
                 this._resizerPosition = (this._startX ?? 0) + diffX;
                 this.resizerPosition$.next(this.resizerPosition);
-
-                this._markForCheck.next();
             });
     }
 
