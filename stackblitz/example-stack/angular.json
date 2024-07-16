@@ -65,6 +65,11 @@
                                 "input": "src/theming/sap_horizon_fonts.css",
                                 "inject": false,
                                 "bundleName": "sap_horizon_fonts"
+                            },
+                            {
+                                "input": "src/theming/sap_belize_fonts.css",
+                                "inject": false,
+                                "bundleName": "sap_belize_fonts"
                             }
                         ],
                         "tsConfig": "tsconfig.json"
