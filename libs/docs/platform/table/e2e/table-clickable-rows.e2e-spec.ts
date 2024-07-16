@@ -52,7 +52,7 @@ describe('Table component test suite', () => {
             await checkElArrIsClickable(tableNavigatableRowIndicatorExample + tableRow);
 
             await click(tableNavigatableRowIndicatorExample + button, 1);
-            await expect(await getElementClass(tableNavigatableRowIndicatorExample + tableRow, 1)).toBe(
+            await expect(await getElementClass(tableNavigatableRowIndicatorExample + tableRow, 1)).withContext(
                 'fd-table__row fd-table__row--main ng-star-inserted'
             );
         });

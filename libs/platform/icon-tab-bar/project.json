@@ -4,6 +4,7 @@
     "projectType": "library",
     "sourceRoot": "libs/platform/icon-tab-bar",
     "prefix": "fd",
-    "targets": {},
-    "tags": ["type:lib", "scope:fdp"]
+    "tags": ["type:lib", "scope:fdp"],
+    "// targets": "to see all targets run: nx show project platform-icon-tab-bar --web",
+    "targets": {}
 }

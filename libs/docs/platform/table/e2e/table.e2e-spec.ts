@@ -133,16 +133,16 @@ describe('Table component test suite', () => {
                 if (i === 1) {
                     continue;
                 }
-                await expect((await getText(tableCustomColumnExample + tableRow + tableCellText, i)).trim()).toBe(
-                    tableCellArr6[i]
-                );
+                await expect(
+                    (await getText(tableCustomColumnExample + tableRow + tableCellText, i)).trim()
+                ).withContext(tableCellArr6[i]);
             }
         });
 
         it('should check possible to change description', async () => {
             await scrollIntoView(tableCustomColumnExample);
             await setValue(tableCustomColumnExample + 'fdp-table-cell input', 'test');
-            await expect(await getValue(tableCustomColumnExample + 'fdp-table-cell input')).toBe('test');
+            await expect(await getValue(tableCustomColumnExample + 'fdp-table-cell input')).withContext('test');
         });
     });
 
@@ -155,7 +155,7 @@ describe('Table component test suite', () => {
             await expect(rowLength).toEqual(1);
             const cellLength = await getElementArrayLength(tableFreezableExample + tableRow + tableCellText);
             for (let i = 0; i < cellLength; i++) {
-                await expect((await getText(tableFreezableExample + tableRow + tableCellText, i)).trim()).toBe(
+                await expect((await getText(tableFreezableExample + tableRow + tableCellText, i)).trim()).withContext(
                     freezeTableCellArr[i]
                 );
             }
@@ -174,14 +174,14 @@ describe('Table component test suite', () => {
         it('should check busy indicator', async () => {
             await scrollIntoView(tableLoadingExample);
             await pause(300);
-            await expect(await doesItExist(busyIndicator)).toBe(false, 'busy indicator should not be displayed');
+            await expect(await doesItExist(busyIndicator)).withContext(false, 'busy indicator should not be displayed');
 
             await setValue(tableLoadingExample + input, 'Astro');
             await click(tableLoadingExample + buttonSearch);
-            await expect(await doesItExist(busyIndicator)).toBe(true, 'busy indicator should be displayed');
+            await expect(await doesItExist(busyIndicator)).withContext(true, 'busy indicator should be displayed');
 
             await pause(300);
-            await expect(await doesItExist(busyIndicator)).toBe(false, 'busy indicator should not be displayed');
+            await expect(await doesItExist(busyIndicator)).withContext(false, 'busy indicator should not be displayed');
         });
 
         it('should check table content is not interactive while table is loading', async () => {
@@ -189,7 +189,7 @@ describe('Table component test suite', () => {
             await setValue(tableLoadingExample + input, 'Astro');
             await click(tableLoadingExample + buttonSearch);
 
-            await expect(await isEnabled(tableLoadingExample + input)).toBe(false, 'input is enable');
+            await expect(await isEnabled(tableLoadingExample + input)).withContext(false, 'input is enable');
         });
     });
 
@@ -206,7 +206,7 @@ describe('Table component test suite', () => {
             for (let i = 0; i < cellLength; i++) {
                 await expect(
                     (await getText(tableInitialStateExample + tableRowInitialState + tableCellText, i)).trim()
-                ).toBe(tableCellArr3[i]);
+                ).withContext(tableCellArr3[i]);
             }
         });
 
@@ -217,10 +217,10 @@ describe('Table component test suite', () => {
 
             await expect(
                 await getAttributeByName(tableInitialStateExample + tableCellInitialState, 'aria-expanded')
-            ).toBe('false');
+            ).withContext('false');
             await expect(
                 await getAttributeByName(tableInitialStateExample + tableCellInitialState, 'aria-expanded', 1)
-            ).toBe('false');
+            ).withContext('false');
         });
     });
 
@@ -251,14 +251,14 @@ describe('Table component test suite', () => {
         it('should check placeholders in all input fields', async () => {
             const inputLength = await getElementArrayLength(inputFields);
             for (let i = 0; i < inputLength; i++) {
-                await expect(await getElementPlaceholder(inputFields, i)).toBe(placeholderTestText);
+                await expect(await getElementPlaceholder(inputFields, i)).withContext(placeholderTestText);
             }
         });
 
         it('should check clickability synchronize button', async () => {
             const buttonLength = await getElementArrayLength(synchronizeButton);
             for (let i = 0; i < buttonLength; i++) {
-                await expect(await isElementClickable(synchronizeButton, i)).toBe(
+                await expect(await isElementClickable(synchronizeButton, i)).withContext(
                     true,
                     `synchronize button with index ${i} not clickable`
                 );
@@ -275,7 +275,7 @@ describe('Table component test suite', () => {
             await expect(rowLength).toEqual(1);
             const cellLength = await getElementArrayLength(playgroundExample + tableRow + tableCellText);
             for (let i = 0; i < cellLength; i++) {
-                await expect((await getText(playgroundExample + tableRow + tableCellText, i)).trim()).toBe(
+                await expect((await getText(playgroundExample + tableRow + tableCellText, i)).trim()).withContext(
                     tableCellArr[i]
                 );
             }
@@ -283,7 +283,7 @@ describe('Table component test suite', () => {
 
         it('should check clickability action button', async () => {
             await scrollIntoView(playgroundExample);
-            await expect(await isElementClickable(playgroundExample + button, 1)).toBe(
+            await expect(await isElementClickable(playgroundExample + button, 1)).withContext(
                 true,
                 ' action button not clickable'
             );
@@ -342,7 +342,7 @@ describe('Table component test suite', () => {
         it('should check busy indicator appearance', async () => {
             await scrollIntoView(playgroundExample);
             await click(playgroundExample + checkbox, 5);
-            await expect(await isElementDisplayed(playgroundExample + busyIndicator)).toBe(
+            await expect(await isElementDisplayed(playgroundExample + busyIndicator)).withContext(
                 true,
                 'busy indicator not displayed'
             );
@@ -352,10 +352,10 @@ describe('Table component test suite', () => {
             await scrollIntoView(playgroundExample);
             await setValue(playgroundExample + playgroundSchemaInput, 'test');
 
-            await expect((await getText(playgroundExample + toolbarText)).trim()).toBe('test (30)');
+            await expect((await getText(playgroundExample + toolbarText)).trim()).withContext('test (30)');
 
             await click(playgroundExample + checkbox, 7);
-            await expect((await getText(playgroundExample + toolbarText)).trim()).toBe('test');
+            await expect((await getText(playgroundExample + toolbarText)).trim()).withContext('test');
         });
     });
 

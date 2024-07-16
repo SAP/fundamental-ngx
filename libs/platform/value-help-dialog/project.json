@@ -4,6 +4,7 @@
     "projectType": "library",
     "sourceRoot": "libs/platform/value-help-dialog",
     "prefix": "fdp",
-    "targets": {},
-    "tags": ["type:lib", "scope:fdp"]
+    "tags": ["type:lib", "scope:fdp"],
+    "// targets": "to see all targets run: nx show project platform-value-help-dialog --web",
+    "targets": {}
 }

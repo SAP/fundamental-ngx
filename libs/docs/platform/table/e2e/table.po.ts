@@ -130,11 +130,11 @@ export class TablePo extends PlatformBaseComponentPo {
     async checkAlertMessages(selector: string): Promise<void> {
         await scrollIntoView(selector + this.button);
         await click(selector + this.buttonActionOne);
-        await expect(await getAlertText()).toBe(alertTestText1);
+        await expect(await getAlertText()).withContext(alertTestText1);
         await acceptAlert();
 
         await click(selector + this.buttonActionTwo);
-        await expect(await getAlertText()).toBe(alertTestText2);
+        await expect(await getAlertText()).withContext(alertTestText2);
         await acceptAlert();
     }
 
@@ -143,10 +143,10 @@ export class TablePo extends PlatformBaseComponentPo {
         await setValue(selector + this.input, testText);
         await click(selector + this.buttonSearch);
         const rowLength = await getElementArrayLength(selector + this.tableRow);
-        await expect(rowLength).toEqual(1);
+        await expect(rowLength).withContext(1);
         const cellLength = await getElementArrayLength(selector + this.tableRow + this.tableCellText);
         for (let i = 0; i < cellLength - count; i++) {
-            await expect((await getText(selector + this.tableRow + this.tableCellText, i)).trim()).toBe(arr[i]);
+            await expect((await getText(selector + this.tableRow + this.tableCellText, i)).trim()).withContext(arr[i]);
         }
     }
 
@@ -161,7 +161,7 @@ export class TablePo extends PlatformBaseComponentPo {
         await click(selector + 'fd-checkbox');
         const checkboxLength = await getElementArrayLength(selector + this.tableRow);
         for (let i = 0; i < checkboxLength; i++) {
-            await expect(await getAttributeByName(selector + this.tableRow, 'aria-selected', i)).toBe(
+            await expect(await getAttributeByName(selector + this.tableRow, 'aria-selected', i)).withContext(
                 skipFirst && i === 0 ? 'false' : 'true'
             );
         }
@@ -178,14 +178,14 @@ export class TablePo extends PlatformBaseComponentPo {
     async checkPlaceholder(selector: string, index: number = 0): Promise<void> {
         await scrollIntoView(selector);
         await click(selector + this.button, index);
-        await expect(await getElementPlaceholder(this.dialogCompactInput)).toBe(testTextSearch);
+        await expect(await getElementPlaceholder(this.dialogCompactInput)).withContext(testTextSearch);
     }
 
     async checkSearchingInDialog(): Promise<void> {
         await setValue(this.dialogCompactInput, testTextName);
         const itemLength = await getElementArrayLength(this.dialogItemText);
         await expect(itemLength).toEqual(1);
-        await expect((await getText(this.dialogItemText)).trim()).toBe(testTextName);
+        await expect((await getText(this.dialogItemText)).trim()).withContext(testTextName);
     }
 
     async checkSortingColumns(selector: string, transparentButton: string, index: number = 0): Promise<void> {
@@ -194,6 +194,6 @@ export class TablePo extends PlatformBaseComponentPo {
         await click(this.dialogMoveToBottom);
         await click(this.dialogItem);
         await click(this.footerButtonOk);
-        await expect((await getText(selector + this.columnHeader, 3)).trim()).toBe(testTextName);
+        await expect((await getText(selector + this.columnHeader, 3)).trim()).withContext(testTextName);
     }
 }

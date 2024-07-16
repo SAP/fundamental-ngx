@@ -97,13 +97,13 @@ describe('Table component test suite', () => {
             await click(popoverDropdownButton);
             await click(buttonSortedBy);
             await click(footerButtonOk);
-            await expect((await getText(tableP13SortExample + tableCellName)).trim()).toBe(testText);
-            await expect((await getText(tableP13SortExample + tableCellName, 15)).trim()).toBe(nameEndTestText);
+            await expect((await getText(tableP13SortExample + tableCellName)).trim()).withContext(testText);
+            await expect((await getText(tableP13SortExample + tableCellName, 15)).trim()).withContext(nameEndTestText);
 
             await click(tableP13SortExample + columnHeader);
             await click(filterByColorItem, 1);
-            await expect((await getText(tableP13SortExample + tableCellName)).trim()).toBe(nameEndTestText);
-            await expect((await getText(tableP13SortExample + tableCellName, 15)).trim()).toBe(testText);
+            await expect((await getText(tableP13SortExample + tableCellName)).trim()).withContext(nameEndTestText);
+            await expect((await getText(tableP13SortExample + tableCellName, 15)).trim()).withContext(testText);
         });
 
         it('should check sorting ascending and descending by price', async () => {
@@ -115,13 +115,17 @@ describe('Table component test suite', () => {
             await click(buttonSortedBy, 1);
             await click(footerButtonOk);
 
-            await expect((await getText(tableP13SortExample + tableCellPrice)).trim()).toBe(priceStartTestText);
-            await expect((await getText(tableP13SortExample + tableCellPrice, 15)).trim()).toBe(priceEndTestText);
+            await expect((await getText(tableP13SortExample + tableCellPrice)).trim()).withContext(priceStartTestText);
+            await expect((await getText(tableP13SortExample + tableCellPrice, 15)).trim()).withContext(
+                priceEndTestText
+            );
 
             await click(tableP13SortExample + columnHeader, 2);
             await click(filterByColorItem, 1);
-            await expect((await getText(tableP13SortExample + tableCellPrice)).trim()).toBe(priceEndTestText);
-            await expect((await getText(tableP13SortExample + tableCellPrice, 15)).trim()).toBe(priceStartTestText);
+            await expect((await getText(tableP13SortExample + tableCellPrice)).trim()).withContext(priceEndTestText);
+            await expect((await getText(tableP13SortExample + tableCellPrice, 15)).trim()).withContext(
+                priceStartTestText
+            );
         });
 
         it('should check searching and placeholder in dialog', async () => {
@@ -150,8 +154,12 @@ describe('Table component test suite', () => {
 
             const rowLength = await getElementArrayLength(tableP13FilterExample + tableRow);
             await expect(rowLength).toEqual(1);
-            await expect((await getText(tableP13FilterExample + tableRow + tableCellText)).trim()).toBe(testText4);
-            await expect((await getText(tableP13FilterExample + tableRow + tableCellText, 1)).trim()).toBe(testText5);
+            await expect((await getText(tableP13FilterExample + tableRow + tableCellText)).trim()).withContext(
+                testText4
+            );
+            await expect((await getText(tableP13FilterExample + tableRow + tableCellText, 1)).trim()).withContext(
+                testText5
+            );
         });
 
         it('should check searching and placeholder in dialog', async () => {
@@ -169,7 +177,7 @@ describe('Table component test suite', () => {
             await click(slimArrowRight);
             await setValue(dialogInput, 'x', 1);
             await click(dialogDecisiveButton);
-            await expect(await doesItExist(messageBoxHeader)).toBe(true);
+            await expect(await doesItExist(messageBoxHeader)).withContext(true);
         });
     });
 

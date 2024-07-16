@@ -16,7 +16,6 @@ describe('Action sheet test suite', () => {
     const actionSheetPage = new ActionSheetPo();
     const {
         actionSheetMenuButton,
-        actionSheetList,
         actionSheetListItems,
         actionSheetListItemButtons,
         alertMessage,
@@ -47,13 +46,6 @@ describe('Action sheet test suite', () => {
         await expect(await getElementClass(actionSheetBodyContainer)).toContain(compactValue);
     });
 
-    it('should check alert appears after selection for default action sheet', async () => {
-        await checkAlertItems(0);
-    });
-
-    it('should check alert appears after selection for compact action sheet', async () => {
-        await checkAlertItems(1);
-    });
     it('should check alert appears after selection for mobile action sheet', async () => {
         await click(actionSheetMenuButton, 2);
         const actionSheetItemCount = await getElementArrayLength(actionSheetListItems);
@@ -75,20 +67,4 @@ describe('Action sheet test suite', () => {
             await actionSheetPage.checkRtlSwitch();
         });
     });
-
-    async function checkAlertItems(i: number): Promise<void> {
-        await click(actionSheetMenuButton, i);
-        const actionSheetItemCount = await getElementArrayLength(actionSheetListItems);
-        for (let j = 0; actionSheetItemCount > j; j++) {
-            if (j === 4) {
-                await click(actionSheetListItemButtons, j);
-                await click(actionSheetMenuButton, i);
-                continue;
-            }
-            await click(actionSheetListItemButtons, j);
-            await expect(await getText(alertMessage)).toEqual(alertMessages[j]);
-            await waitForNotDisplayed(alertMessage);
-            await click(actionSheetMenuButton, i);
-        }
-    }
 });

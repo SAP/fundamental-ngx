@@ -52,6 +52,11 @@ export class ThemingHeaderComponent {
     "input": "{path to local theming folder}/sap_horizon_fonts.css",
     "inject": false,
     "bundleName": "sap_horizon_fonts"
+},
+{
+    "input": "{path to local theming folder}/sap_belize_fonts.css",
+    "inject": false,
+    "bundleName": "sap_belize_fonts"
 }
         `,
         language: 'json'

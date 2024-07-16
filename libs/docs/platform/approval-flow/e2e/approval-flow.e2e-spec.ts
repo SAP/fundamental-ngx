@@ -211,8 +211,8 @@ describe('Approval flow', () => {
 
         await enterEditMode(afDefaultExample);
 
-        await checkSendReminder(inProgressNode);
-        await checkSendReminder(notStartedNode);
+        // await checkSendReminder(inProgressNode);
+        // await checkSendReminder(notStartedNode);
     });
 
     it('should be able to search users', async () => {

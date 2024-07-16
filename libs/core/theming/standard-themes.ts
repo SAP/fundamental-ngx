@@ -54,5 +54,10 @@ export const STANDARD_THEMES: ThemeDefinition[] = [
     {
         id: 'sap_fiori_3_light_dark',
         name: 'Quartz Auto (Depending on the OS Settings)'
+    },
+    {
+        id: 'sap_belize',
+        name: 'Belize Preview',
+        description: 'Use in regular office environment'
     }
 ];

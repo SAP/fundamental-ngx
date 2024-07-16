@@ -3,6 +3,76 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.51.0](https://github.com/SAP/fundamental-ngx/compare/v0.51.0-rc.0...v0.51.0) (2024-07-16)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.51.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.50.3-rc.1...v0.51.0-rc.0) (2024-07-16)
+
+
+### Features
+
+* Angular 18 ([#12126](https://github.com/SAP/fundamental-ngx/issues/12126)) ([0ad71dc](https://github.com/SAP/fundamental-ngx/commit/0ad71dc07bf9e7f6cdc6fe6f27fa71a26885df2a))
+
+
+### BREAKING CHANGES
+
+* Angular 18 support
+
+
+
+
+
+## [0.50.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.50.3-rc.0...v0.50.3-rc.1) (2024-07-16)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.50.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.17...v0.50.3-rc.0) (2024-07-16)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.50.2](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.17...v0.50.2) (2024-07-16)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.50.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.16...v0.50.1-rc.17) (2024-07-16)
+
+
+### Bug Fixes
+
+* add belize theme preview ([#12094](https://github.com/SAP/fundamental-ngx/issues/12094)) ([ae460fd](https://github.com/SAP/fundamental-ngx/commit/ae460fd654d8e3af99c4e7ca76f4afef3cdbc410))
+
+
+
+
+
+## [0.50.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.15...v0.50.1-rc.16) (2024-07-16)
+
+
+### Bug Fixes
+
+* **platform:** commented failed e2e tests ([#12122](https://github.com/SAP/fundamental-ngx/issues/12122)) ([8beba01](https://github.com/SAP/fundamental-ngx/commit/8beba01b1778f0a2c23cf039920231240b04e3dc))
+
+
+
+
+
 ## [0.50.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.14...v0.50.1-rc.15) (2024-07-15)
 
 

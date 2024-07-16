@@ -4,6 +4,7 @@
     "sourceRoot": "libs/docs/core/scroll-spy",
     "projectType": "library",
     "prefix": "fundamental-ngx",
+    "tags": ["type:lib", "scope:docs"],
     "targets": {
         "e2e": {
             "executor": "@fundamental-ngx/nx-plugin:e2e-test",
@@ -13,6 +14,5 @@
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-scroll-spy"]
         }
-    },
-    "tags": ["type:lib", "scope:docs"]
+    }
 }
