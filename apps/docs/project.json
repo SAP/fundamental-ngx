@@ -4,6 +4,8 @@
     "sourceRoot": "apps/docs/src",
     "projectType": "application",
     "prefix": "fundamental-ngx",
+    "tags": ["scope:docs", "type:app"],
+    "implicitDependencies": ["cdk", "core", "platform", "i18n", "datetime-adapter", "moment-adapter"],
     "generators": {
         "@nx/schematics:component": {
             "style": "scss"
@@ -342,7 +344,5 @@
         "lint": {
             "executor": "@nx/eslint:lint"
         }
-    },
-    "tags": ["scope:docs", "type:app"],
-    "implicitDependencies": ["cdk", "core", "platform", "i18n", "datetime-adapter", "moment-adapter"]
+    }
 }

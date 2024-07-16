@@ -4,6 +4,7 @@
     "projectType": "library",
     "sourceRoot": "libs/cdk/utils",
     "prefix": "fdk",
-    "targets": {},
-    "tags": ["type:lib", "scope:cdk"]
+    "tags": ["type:lib", "scope:cdk"],
+    "// targets": "to see all targets run: nx show project cdk-utils --web",
+    "targets": {}
 }

@@ -4,6 +4,7 @@
     "projectType": "library",
     "sourceRoot": "libs/platform/object-marker",
     "prefix": "fdp",
-    "targets": {},
-    "tags": ["type:lib", "scope:fdp"]
+    "tags": ["type:lib", "scope:fdp"],
+    "// targets": "to see all targets run: nx show project platform-object-marker --web",
+    "targets": {}
 }

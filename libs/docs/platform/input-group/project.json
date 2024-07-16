@@ -4,6 +4,7 @@
     "sourceRoot": "libs/docs/platform/input-group",
     "projectType": "library",
     "prefix": "fdp-doc",
+    "tags": ["type:lib", "scope:docs"],
     "targets": {
         "e2e": {
             "executor": "@fundamental-ngx/nx-plugin:e2e-test",
@@ -13,6 +14,5 @@
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-platform-input-group"]
         }
-    },
-    "tags": ["type:lib", "scope:docs"]
+    }
 }

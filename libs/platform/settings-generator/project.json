@@ -4,7 +4,8 @@
     "projectType": "library",
     "sourceRoot": "libs/platform/settings-generator",
     "prefix": "fdp",
-    "targets": {},
     "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": ["cdk", "core"]
+    "implicitDependencies": ["cdk", "core"],
+    "// targets": "to see all targets run: nx show project platform-settings-generator --web",
+    "targets": {}
 }

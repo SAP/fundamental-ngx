@@ -1,6 +1,7 @@
 {
     "name": "core-schematics",
     "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "implicitDependencies": ["core"],
     "targets": {
         "build": {
             "executor": "@nx/js:tsc",
@@ -22,6 +23,5 @@
                 "jestConfig": "libs/core/schematics/jest.config.ts"
             }
         }
-    },
-    "implicitDependencies": ["core"]
+    }
 }

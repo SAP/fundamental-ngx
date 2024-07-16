@@ -1,6 +1,7 @@
 {
-    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
     "name": "cx-schematics",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "implicitDependencies": ["cx"],
     "targets": {
         "build": {
             "executor": "@nx/js:tsc",
@@ -15,6 +16,5 @@
                 ]
             }
         }
-    },
-    "implicitDependencies": ["cx"]
+    }
 }
