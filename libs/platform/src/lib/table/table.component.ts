@@ -1610,6 +1610,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     onTableRowsChanged(): void {
+        this._reIndexTableRows();
         this._calculateVisibleTableRows();
         this._calculateCheckedAll();
 
@@ -1710,7 +1711,20 @@ export class TableComponent<T = any>
             )
             .subscribe((items) => {
                 items.forEach((rows, parentRow) => {
-                    this._tableRows.splice(parentRow.index + parentRow.children.length + 1, 0, ...rows);
+                    let nestedChildrenCount = 0;
+
+                    function tallyNestedChildren(parent: TableRow<T>): void {
+                        if (parent.children) {
+                            nestedChildrenCount = nestedChildrenCount + parent.children.length;
+                            parent.children.forEach((child) => {
+                                tallyNestedChildren(child);
+                            });
+                        }
+                    }
+
+                    tallyNestedChildren(parentRow);
+
+                    this._tableRows.splice(parentRow.index + nestedChildrenCount + 1, 0, ...rows);
 
                     parentRow.children.push(...rows);
 
@@ -1903,7 +1917,6 @@ export class TableComponent<T = any>
     private _setTableRows(rows = this._dataSourceTableRows): void {
         this._dataSourceTableRows = rows;
         this._tableRows = [...this._newTableRows, ...this._dataSourceTableRows];
-        this._reIndexTableRows();
         this.onTableRowsChanged();
         this._calculateIsShownNavigationColumn();
         this._rangeSelector.reset();
