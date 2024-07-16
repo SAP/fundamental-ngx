@@ -12,9 +12,9 @@ export class MultiComboboxPo extends PlatformBaseComponentPo {
     tokenInputField = '.fdp-multi-combobox-tokenizer-custom';
     inputField = this.tokenInputField + ' .fd-input';
     list = '.fd-popover__body .fd-list';
-    listItemCheckbox = this.list + ' fd-checkbox';
+    listItemCheckbox = `${this.list} .fd-list__item .fd-list__form-item fd-checkbox`;
     listItem = this.list + ' li.fd-list__item[role="option"]';
-    selectedListItem = this.list + ' .fd-list__item.is-selected .fd-list__title';
+    selectedListItem = `${this.list} .fd-list__item.is-selected .fd-list__title`;
 
     dialog = '[role="dialog"]';
     dialogButton = this.dialog + ' .fd-button';
