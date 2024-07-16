@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.15...v0.50.1-rc.16) (2024-07-16)
+
+
+### Bug Fixes
+
+* **platform:** commented failed e2e tests ([#12122](https://github.com/SAP/fundamental-ngx/issues/12122)) ([8beba01](https://github.com/SAP/fundamental-ngx/commit/8beba01b1778f0a2c23cf039920231240b04e3dc))
+
+
+
+
+
 ## [0.50.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.14...v0.50.1-rc.15) (2024-07-15)
 
 
