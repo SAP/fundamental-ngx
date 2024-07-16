@@ -88,7 +88,7 @@ describe('ComboboxComponent', () => {
             }
         };
         component.inputText = 'otherDisplayedValue';
-        expect(component.onChange).toHaveBeenCalledWith(undefined);
+        expect(component.onChange).toHaveBeenCalledWith(null);
     });
 
     it('should handle write value from outside on dropdown mode', () => {
