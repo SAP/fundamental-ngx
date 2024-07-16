@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.15...v0.50.1-rc.16) (2024-07-16)
+
+**Note:** Version bump only for package @fundamental-ngx/btp
+
+
+
+
+
+## [0.50.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.14...v0.50.1-rc.15) (2024-07-15)
+
+**Note:** Version bump only for package @fundamental-ngx/btp
+
+
+
+
+
+## [0.50.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.13...v0.50.1-rc.14) (2024-07-12)
+
+**Note:** Version bump only for package @fundamental-ngx/btp
+
+
+
+
+
+## [0.50.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.12...v0.50.1-rc.13) (2024-07-12)
+
+**Note:** Version bump only for package @fundamental-ngx/btp
+
+
+
+
+
+## [0.50.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.11...v0.50.1-rc.12) (2024-07-11)
+
+**Note:** Version bump only for package @fundamental-ngx/btp
+
+
+
+
+
 ## [0.50.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.10...v0.50.1-rc.11) (2024-07-10)
 
 **Note:** Version bump only for package @fundamental-ngx/btp

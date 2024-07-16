@@ -51,6 +51,7 @@ import { MultiComboboxModule } from '@fundamental-ngx/core/multi-combobox';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import { NestedListModule } from '@fundamental-ngx/core/nested-list';
 import { NotificationModule } from '@fundamental-ngx/core/notification';
+import { ObjectAttributeModule } from '@fundamental-ngx/core/object-attribute';
 import { ObjectIdentifierModule } from '@fundamental-ngx/core/object-identifier';
 import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
@@ -189,7 +190,8 @@ import { WizardModule } from '@fundamental-ngx/core/wizard';
         OverflowLayoutModule,
         ContentDensityModule,
         SkeletonModule,
-        MultiComboboxModule
+        MultiComboboxModule,
+        ObjectAttributeModule
     ]
 })
 export class FundamentalNgxCoreModule {}
