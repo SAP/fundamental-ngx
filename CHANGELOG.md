@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.51.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.50.3-rc.1...v0.51.0-rc.0) (2024-07-16)
+
+
+### Features
+
+* Angular 18 ([#12126](https://github.com/SAP/fundamental-ngx/issues/12126)) ([0ad71dc](https://github.com/SAP/fundamental-ngx/commit/0ad71dc07bf9e7f6cdc6fe6f27fa71a26885df2a))
+
+
+### BREAKING CHANGES
+
+* Angular 18 support
+
+
+
+
+
 ## [0.50.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.50.3-rc.0...v0.50.3-rc.1) (2024-07-16)
 
 **Note:** Version bump only for package fundamental-ngx
