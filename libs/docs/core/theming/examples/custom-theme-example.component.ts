@@ -36,6 +36,16 @@ customThemingConfig.customThemes = [
             themePath: 'assets/fundamental-styles-theming/sap_horizon.css',
             themeFontPath: 'sap_fiori_3_fonts.css'
         }
+    },
+    {
+        id: 'horizon_belize_fonts',
+        description: 'Belize Preview theme with Fiori fonts',
+        name: 'Belize Preview theme with Fiori fonts',
+        theming: {
+            themingBasePath: 'assets/theming-base/sap_belize/css_variables.css',
+            themePath: 'assets/fundamental-styles-theming/sap_fiori_3.css',
+            themeFontPath: 'sap_belize_fonts.css'
+        }
     }
 ];
 
