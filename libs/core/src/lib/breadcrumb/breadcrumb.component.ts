@@ -135,10 +135,8 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
      * if original element had router link we are proxying click to that element
      * */
     itemClicked(breadcrumbItem: BreadcrumbItemComponent, $event: any): void {
-        if (breadcrumbItem._needsClickProxy) {
-            $event.preventDefault();
-            breadcrumbItem.breadcrumbLink.elementRef.nativeElement.click();
-        }
+        $event.preventDefault();
+        breadcrumbItem.breadcrumbLink.elementRef.nativeElement.click();
     }
 
     /** @hidden */
