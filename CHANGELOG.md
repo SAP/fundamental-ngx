@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.51.1-rc.0...v0.51.1-rc.1) (2024-07-17)
+
+
+### Bug Fixes
+
+* **core:** fix icon-tab-bar e2e tests ([#12127](https://github.com/SAP/fundamental-ngx/issues/12127)) ([bb14368](https://github.com/SAP/fundamental-ngx/commit/bb14368c4deeac64864cde2168cad8d2776a0c1e))
+
+
+
+
+
 ## [0.51.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.51.0...v0.51.1-rc.0) (2024-07-17)
 
 **Note:** Version bump only for package fundamental-ngx
