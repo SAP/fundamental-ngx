@@ -3,7 +3,13 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { DialogModule, DialogRef } from '@fundamental-ngx/core/dialog';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogRef
+} from '@fundamental-ngx/core/dialog';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 
@@ -44,7 +50,17 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         </fd-dialog>
     `,
     standalone: true,
-    imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, BarModule, NgStyle]
+    imports: [
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        BarModule,
+        NgStyle,
+        DialogFooterComponent,
+        DialogBodyComponent,
+        DialogHeaderComponent,
+        DialogComponent
+    ]
 })
 export class DialogExampleComponent {
     constructor(public dialogRef: DialogRef) {}

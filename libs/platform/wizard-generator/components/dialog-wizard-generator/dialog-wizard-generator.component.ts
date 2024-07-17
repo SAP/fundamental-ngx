@@ -9,7 +9,7 @@ import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { DialogModule, DialogRef } from '@fundamental-ngx/core/dialog';
+import { DialogBodyComponent, DialogComponent, DialogHeaderComponent, DialogRef } from '@fundamental-ngx/core/dialog';
 import { MessageBoxModule, MessageBoxService } from '@fundamental-ngx/core/message-box';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -27,7 +27,6 @@ import { WizardBodyComponent } from '../wizard-body/wizard-body.component';
     providers: [WizardGeneratorService, FormGeneratorService],
     standalone: true,
     imports: [
-        DialogModule,
         TitleComponent,
         CdkScrollable,
         ScrollbarDirective,
@@ -37,7 +36,10 @@ import { WizardBodyComponent } from '../wizard-body/wizard-body.component';
         ContentDensityDirective,
         NgTemplateOutlet,
         MessageBoxModule,
-        InitialFocusDirective
+        InitialFocusDirective,
+        DialogBodyComponent,
+        DialogHeaderComponent,
+        DialogComponent
     ]
 })
 export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
