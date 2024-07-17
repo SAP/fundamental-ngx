@@ -1,4 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, computed, inject, signal } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -24,7 +24,7 @@ import { SortDirection, TableColumn, TableService } from '@fundamental-ngx/platf
         `
     ],
     standalone: true,
-    imports: [NgTemplateOutlet, IconComponent, TableIconDirective]
+    imports: [NgTemplateOutlet, IconComponent, TableIconDirective, AsyncPipe]
 })
 export class TableHeaderCellContentComponent {
     /** Table Id */

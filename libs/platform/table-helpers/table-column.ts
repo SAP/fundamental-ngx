@@ -1,6 +1,7 @@
 import { TemplateRef } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
+import { Observable } from 'rxjs';
 import { ColumnAlignValue, FilterableColumnDataType } from './enums';
 import { FdpColumnResponsiveState } from './interfaces';
 
@@ -13,6 +14,9 @@ export abstract class TableColumn {
 
     /** Column header label. */
     abstract label: string;
+
+    /** Emits when the label value changes. */
+    abstract labelValueChanges$: Observable<Nullable<string>>;
 
     /** Cell text alignment. */
     abstract align: ColumnAlignValue;
