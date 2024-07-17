@@ -4,7 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogService
+} from '@fundamental-ngx/core/dialog';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 
@@ -14,14 +20,17 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     templateUrl: './form-dialog-example.component.html',
     standalone: true,
     imports: [
-        DialogModule,
         TitleComponent,
         CdkScrollable,
         ScrollbarDirective,
         BarModule,
         CheckboxComponent,
         FormsModule,
-        ButtonComponent
+        ButtonComponent,
+        DialogHeaderComponent,
+        DialogBodyComponent,
+        DialogFooterComponent,
+        DialogComponent
     ]
 })
 export class FormDialogExampleComponent {

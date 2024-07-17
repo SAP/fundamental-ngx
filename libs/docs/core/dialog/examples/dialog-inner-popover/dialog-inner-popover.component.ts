@@ -3,7 +3,14 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { DialogModule, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogRef,
+    DialogService
+} from '@fundamental-ngx/core/dialog';
 import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -122,13 +129,16 @@ export class DialogInnerPopoverComponent {
     `,
     standalone: true,
     imports: [
-        DialogModule,
         TitleComponent,
         CdkScrollable,
         ScrollbarDirective,
         MultiInputComponent,
         FormsModule,
-        BarModule
+        BarModule,
+        DialogFooterComponent,
+        DialogBodyComponent,
+        DialogHeaderComponent,
+        DialogComponent
     ]
 })
 export class DialogInnerPopoverExampleComponent {
