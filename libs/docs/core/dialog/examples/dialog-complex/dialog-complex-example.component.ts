@@ -5,7 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { InitialFocusDirective, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { DialogModule, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogRef,
+    DialogService
+} from '@fundamental-ngx/core/dialog';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
@@ -22,7 +29,6 @@ interface Fruit {
     templateUrl: './dialog-complex-example.component.html',
     standalone: true,
     imports: [
-        DialogModule,
         TemplateDirective,
         BarModule,
         TitleComponent,
@@ -35,7 +41,11 @@ interface Fruit {
         NgClass,
         ListSecondaryDirective,
         ButtonComponent,
-        AsyncPipe
+        AsyncPipe,
+        DialogFooterComponent,
+        DialogBodyComponent,
+        DialogHeaderComponent,
+        DialogComponent
     ]
 })
 export class DialogComplexExampleComponent {

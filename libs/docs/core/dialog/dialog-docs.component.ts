@@ -5,7 +5,17 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { DialogModule, DialogService, ExtendedDialogConfig } from '@fundamental-ngx/core/dialog';
+import {
+    DialogBodyComponent,
+    DialogCloseButtonComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogFullScreenTogglerButtonComponent,
+    DialogHeaderComponent,
+    DialogService,
+    DialogTemplateDirective,
+    ExtendedDialogConfig
+} from '@fundamental-ngx/core/dialog';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
@@ -104,14 +114,20 @@ const popoverDialogTs = 'dialog-inner-popover/dialog-inner-popover.component.ts'
         DialogInnerPopoverComponent,
         PlayGroundComponent,
         ButtonComponent,
-        DialogModule,
         TitleComponent,
         CdkScrollable,
         ScrollbarDirective,
         BarModule,
         DialogFullScreenExampleComponent,
         AsyncPipe,
-        JsonPipe
+        JsonPipe,
+        DialogFooterComponent,
+        DialogBodyComponent,
+        DialogCloseButtonComponent,
+        DialogFullScreenTogglerButtonComponent,
+        DialogHeaderComponent,
+        DialogComponent,
+        DialogTemplateDirective
     ]
 })
 export class DialogDocsComponent {

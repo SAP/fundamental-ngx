@@ -2,7 +2,15 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { DialogModule, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import {
+    DialogBodyComponent,
+    DialogCloseButtonComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogRef,
+    DialogService
+} from '@fundamental-ngx/core/dialog';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { SecondDialogExampleComponent } from './second-dialog-example.component';
@@ -35,7 +43,18 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
         </fd-dialog>
     `,
     standalone: true,
-    imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, BarModule, InitialFocusDirective]
+    imports: [
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        BarModule,
+        InitialFocusDirective,
+        DialogFooterComponent,
+        DialogBodyComponent,
+        DialogCloseButtonComponent,
+        DialogHeaderComponent,
+        DialogComponent
+    ]
 })
 export class FirstDialogExampleComponent {
     constructor(
