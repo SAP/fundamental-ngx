@@ -1231,6 +1231,7 @@ export class TableComponent<T = any>
 
     /** Manually triggers column's width recalculation */
     recalculateTableColumnWidth(): void {
+        this._tableColumnResizeService._setInitialTableWidth();
         this._tableColumnResizeService.setColumnNames(this._visibleColumns.map((column) => column.name));
         this._setFreezableInfo();
     }
