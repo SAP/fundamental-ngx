@@ -13,6 +13,7 @@ export class ProductSwitchListComponent {
             title: 'Home',
             subtitle: 'Central Home',
             icon: 'home',
+            font: 'SAP-icons-TNT',
             stickToPosition: true,
             disabledDragAndDrop: true
         },

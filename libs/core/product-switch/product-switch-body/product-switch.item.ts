@@ -1,3 +1,5 @@
+import { IconFont } from '@fundamental-ngx/core/icon';
+
 export interface ProductSwitchItem {
     /** Title of product */
     title: string;
@@ -10,6 +12,9 @@ export interface ProductSwitchItem {
 
     /** Icon of product item */
     icon?: string;
+
+    /** Icon of product item */
+    font?: IconFont;
 
     /** Whether user wants to mark this element ass selected */
     selected?: boolean;
