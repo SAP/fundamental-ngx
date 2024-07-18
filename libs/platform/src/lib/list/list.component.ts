@@ -68,12 +68,12 @@ import { FdpList, FdpListDataSource, ListType, SelectionType } from './models/li
 export class SelectionChangeEvent {
     /** Selected items */
     selectedItems: BaseListItem[];
-    /** Selected item */
-    added: BaseListItem;
-    /** Deselected item */
-    removed: BaseListItem;
     /** Index */
     index: number;
+    /** Selected item */
+    added?: BaseListItem;
+    /** Deselected item */
+    removed?: BaseListItem;
 }
 
 let nextListId = 0;

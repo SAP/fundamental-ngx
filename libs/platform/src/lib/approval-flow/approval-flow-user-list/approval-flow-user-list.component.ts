@@ -135,7 +135,7 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
 
             if (event.removed) {
                 this._allSelectedUsers = this._allSelectedUsers.filter(
-                    (user) => `${this._idPrefix + user.id}` !== event.removed.id
+                    (user) => `${this._idPrefix + user.id}` !== event.removed!.id
                 );
             }
 
