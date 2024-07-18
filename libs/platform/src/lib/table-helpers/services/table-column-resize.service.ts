@@ -1,6 +1,7 @@
 import { ElementRef, Injectable, OnDestroy, Optional } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, Subscription, fromEvent } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
+import { SELECTION_COLUMN_WIDTH } from '../constants';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { TABLE_COLUMN_MIN_WIDTH } from '../constants';
@@ -70,6 +71,9 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** @hidden */
     private _tableRef: Table;
+
+    /** @hidden */
+    private _initialTableWidth: number | null = null;
 
     /** Indicate if resizing process in progress. */
     get resizeInProgress(): boolean {
@@ -176,8 +180,24 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** Retrieves custom column value or returns `unset` */
     getColumnWidthStyle(columnName: string): string {
-        const calculatedWidth = this._fixedColumnsWidthMap.get(columnName);
-        return calculatedWidth || 'unset';
+        if (this._tableRef._virtualScrollDirective?.scrollWholeRows) {
+            if (!this._initialTableWidth) {
+                this._initialTableWidth = this._tableRef._tableWidthPx;
+            }
+            const selectionColumnWidth = SELECTION_COLUMN_WIDTH.get(this._tableRef.contentDensityObserver.value) ?? 0;
+            let sizeDividedByColumnsCount =
+                this._initialTableWidth / this._tableRef.getVisibleTableColumns().length -
+                selectionColumnWidth / this._tableRef.getVisibleTableColumns().length;
+            // In the event of tables with a very high number of columns, need to prevent the default behavior which
+            // would make each column not wide enough to be usable and instead use a horizontal scrollbar.
+            if (sizeDividedByColumnsCount < 176) {
+                sizeDividedByColumnsCount = 176;
+            }
+            return this._fixedColumnsWidthMap.get(columnName) || sizeDividedByColumnsCount + 'px';
+        } else {
+            const calculatedWidth = this._fixedColumnsWidthMap.get(columnName);
+            return calculatedWidth || 'unset';
+        }
     }
 
     /** Previous column name */
@@ -241,8 +261,6 @@ export class TableColumnResizeService implements OnDestroy {
             this._resizerPosition = resizerPosition - TABLE_RESIZER_BORDER_WIDTH + scrollLeftOffset;
             this.resizerPosition$.next(this.resizerPosition);
         }
-
-        this._markForCheck.next();
     }
 
     /** Hide the column resizer. */
@@ -348,6 +366,11 @@ export class TableColumnResizeService implements OnDestroy {
         this._markForCheck.next();
     }
 
+    /** @hidden */
+    _setInitialTableWidth(): void {
+        this._initialTableWidth = this._tableRef._tableWidthPx;
+    }
+
     /** Update column resizer position. */
     private _updateResizerPositionOnMouseMove(): void {
         this._resizerMoveSubscription = fromEvent<MouseEvent>(document, 'mousemove')
@@ -358,8 +381,6 @@ export class TableColumnResizeService implements OnDestroy {
 
                 this._resizerPosition = (this._startX ?? 0) + diffX;
                 this.resizerPosition$.next(this.resizerPosition);
-
-                this._markForCheck.next();
             });
     }
 
