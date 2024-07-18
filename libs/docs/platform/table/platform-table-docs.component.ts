@@ -54,6 +54,7 @@ import { PlatformTableRowClassExampleComponent } from './examples/platform-table
 import { PlatformTableSemanticExampleComponent } from './examples/platform-table-semantic-example.component';
 import { PlatformTableTreeExampleComponent } from './examples/platform-table-tree-example.component';
 import { PlatformTableWrapExampleComponent } from './examples/platform-table-wrap-example.component';
+import { PlatformTableVirtualScrollWholeRowExampleComponent } from './examples/virtual-scroll-whole-row/platform-table-virtual-scroll-whole-row-example.component';
 
 const platformTableDefaultSrc = 'platform-table-default-example.component.html';
 const platformTableDefaultTsSrc = 'platform-table-default-example.component.ts';
@@ -133,7 +134,8 @@ const illustrationDialogNoMail = '/assets/images/sapIllus-Dialog-NoMail.svg';
         TableInitialStateDirective,
         ContentDensityDirective,
         PlatformButtonModule,
-        FdDatetimeModule
+        FdDatetimeModule,
+        PlatformTableVirtualScrollWholeRowExampleComponent
     ]
 })
 export class PlatformTableDocsComponent {

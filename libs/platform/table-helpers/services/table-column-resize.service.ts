@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, Subject, Subscription, fromEvent } from 'r
 import { debounceTime } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { TABLE_COLUMN_MIN_WIDTH } from '../constants';
+import { SELECTION_COLUMN_WIDTH, TABLE_COLUMN_MIN_WIDTH } from '../constants';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Table } from '../table';
@@ -102,6 +102,9 @@ export class TableColumnResizeService implements OnDestroy {
     private _tableRef: Table;
 
     /** @hidden */
+    private _initialTableWidth: number | null = null;
+
+    /** @hidden */
     private readonly _rtl$ = computed(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
@@ -172,8 +175,24 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** Retrieves custom column value or returns `unset` */
     getColumnWidthStyle(columnName: string): string {
-        const calculatedWidth = this._fixedColumnsWidthMap.get(columnName);
-        return calculatedWidth || 'unset';
+        if (this._tableRef._virtualScrollDirective?.scrollWholeRows) {
+            if (!this._initialTableWidth) {
+                this._initialTableWidth = this._tableRef._tableWidthPx;
+            }
+            const selectionColumnWidth = SELECTION_COLUMN_WIDTH.get(this._tableRef.contentDensityObserver.value) ?? 0;
+            let sizeDividedByColumnsCount =
+                this._initialTableWidth / this._tableRef.getVisibleTableColumns().length -
+                selectionColumnWidth / this._tableRef.getVisibleTableColumns().length;
+            // In the event of tables with a very high number of columns, need to prevent the default behavior which
+            // would make each column not wide enough to be usable and instead use a horizontal scrollbar.
+            if (sizeDividedByColumnsCount < 176) {
+                sizeDividedByColumnsCount = 176;
+            }
+            return this._fixedColumnsWidthMap.get(columnName) || sizeDividedByColumnsCount + 'px';
+        } else {
+            const calculatedWidth = this._fixedColumnsWidthMap.get(columnName);
+            return calculatedWidth || 'unset';
+        }
     }
 
     /** Previous column name */
@@ -341,6 +360,11 @@ export class TableColumnResizeService implements OnDestroy {
         const padding = parseInt(computedStyles.paddingLeft, 10) + parseInt(computedStyles.paddingRight, 10);
         this._updateHeaderOverflowState(updatedWidth - padding);
         this._markForCheck.next();
+    }
+
+    /** @hidden */
+    _setInitialTableWidth(): void {
+        this._initialTableWidth = this._tableRef._tableWidthPx;
     }
 
     /** Update column resizer position. */

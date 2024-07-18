@@ -173,6 +173,7 @@ fdk-dynamic-portal {
             &,
             .fd-replace-indicator {
                 height: 2.75rem;
+                max-height: 2.75rem;
             }
         }
 
@@ -180,6 +181,7 @@ fdk-dynamic-portal {
             &,
             .fd-replace-indicator {
                 height: 2rem;
+                max-height: 2rem;
             }
         }
 
@@ -187,6 +189,7 @@ fdk-dynamic-portal {
             &,
             .fd-replace-indicator {
                 height: 1.563rem;
+                max-height: 1.563rem;
             }
         }
     }
@@ -504,12 +507,22 @@ fdk-dynamic-portal {
     }
 
     &__body--virtual-scroll {
-        position: relative;
-        will-change: scroll-position;
+        background-color: var(--sapList_Background, #fff);
+
+        .fd-table__body:not(:last-child) .fd-table__row:last-child .fd-table__cell {
+            border-bottom-color: var(--sapList_BorderColor) !important;
+        }
 
         .fd-table__body {
             position: static;
-            will-change: transform;
+
+            &--scroll-mock {
+                top: 0;
+                position: absolute;
+                overflow-y: auto;
+                z-index: 2;
+                width: 1rem;
+            }
         }
     }
 

@@ -3,13 +3,15 @@ import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import { PresetManagedComponent } from '@fundamental-ngx/platform/shared';
 import { Observable } from 'rxjs';
 
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FocusableGridDirective, Nullable } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
 import { TableDataSource } from './domain';
+import { SelectionModeValue } from './enums';
 import { CollectionFilter } from './interfaces/collection-filter.interface';
 import { CollectionGroup } from './interfaces/collection-group.interface';
 import { CollectionSort } from './interfaces/collection-sort.interface';
 import { TableState } from './interfaces/table-state.interface';
-import { PlatformTableManagedPreset, SaveRowsEvent, TableInitialState, TableRow } from './models';
+import { PlatformTableManagedPreset, SaveRowsEvent, TableInitialState, TableRow, TableVirtualScroll } from './models';
 import { TableScrollable } from './services/table-scroll-dispatcher.service';
 import { TableColumn } from './table-column';
 
@@ -56,7 +58,11 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
 
     abstract readonly tableContainer: ElementRef;
 
+    abstract readonly tableScrollMockContainer: ElementRef;
+
     abstract readonly tableScrollable: TableScrollable;
+
+    abstract _virtualScrollDirective: TableVirtualScroll | null;
 
     abstract _tableRowsVisible: TableRow<T>[];
 
@@ -65,6 +71,12 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     abstract loadedRows$: Signal<number>;
 
     abstract _tableRowsInViewPortPlaceholder: number[];
+
+    abstract _focusableGrid: FocusableGridDirective;
+
+    abstract _selectionMode: SelectionModeValue;
+
+    abstract contentDensityObserver: ContentDensityObserver;
 
     /** Get table state */
     abstract getTableState(): TableState;
@@ -173,6 +185,8 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     abstract refreshDndList(): void;
 
     abstract clearTableRows(): void;
+
+    abstract _onSpyIntersect(intersected: boolean): void;
 
     /** Toolbar Sort Settings button click event */
     readonly openTableSortSettings: EventEmitter<void> = new EventEmitter<void>();

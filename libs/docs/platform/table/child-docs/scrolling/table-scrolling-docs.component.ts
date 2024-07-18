@@ -13,6 +13,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { PlatformTableOuterScrollExampleComponent } from '../../examples/platform-table-outer-scroll-example.component';
 import { PlatformTablePageScrollingExampleComponent } from '../../examples/platform-table-page-scrolling-example.component';
+import { PlatformTableVirtualScrollWholeRowExampleComponent } from '../../examples/virtual-scroll-whole-row/platform-table-virtual-scroll-whole-row-example.component';
 import { PlatformTableVirtualScrollExampleComponent } from '../../examples/virtual-scroll/platform-table-virtual-scroll-example.component';
 
 const platformTablePageScrollingSrc = 'platform-table-page-scrolling-example.component.html';
@@ -22,6 +23,11 @@ const platformVirtualScrollTableDefaultTsSrc = 'virtual-scroll/platform-table-vi
 
 const platformTableOuterScrollSrc = 'platform-table-outer-scroll-example.component.html';
 const platformTableOuterScrollTsSrc = 'platform-table-outer-scroll-example.component.ts';
+
+const platformVirtualScrollWholeRowTableDefaultSrc =
+    'virtual-scroll-whole-row/platform-table-virtual-scroll-whole-row-example.component.html';
+const platformVirtualScrollWholeRowTableDefaultTsSrc =
+    'virtual-scroll-whole-row/platform-table-virtual-scroll-whole-row-example.component.ts';
 
 @Component({
     selector: 'fd-table-scrolling-docs',
@@ -38,7 +44,8 @@ const platformTableOuterScrollTsSrc = 'platform-table-outer-scroll-example.compo
         SeparatorComponent,
         PlatformTableVirtualScrollExampleComponent,
         PlatformTableOuterScrollExampleComponent,
-        FdDatetimeModule
+        FdDatetimeModule,
+        PlatformTableVirtualScrollWholeRowExampleComponent
     ]
 })
 export class TableScrollingDocsComponent {
@@ -73,6 +80,22 @@ export class TableScrollingDocsComponent {
             fileName: 'platform-table-virtual-scroll-example',
             component: 'PlatformTableVirtualScrollExampleComponent',
             name: 'platform-table-virtual-scroll-example.component.ts'
+        }
+    ];
+
+    virtualScrollWholeRowTableFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(platformVirtualScrollWholeRowTableDefaultSrc),
+            fileName: 'platform-table-virtual-scroll-example',
+            name: 'platform-table-virtual-scroll-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(platformVirtualScrollWholeRowTableDefaultTsSrc),
+            fileName: 'platform-table-virtual-scroll-whole-row-example',
+            component: 'PlatformTableVirtualScrollWholeRowExampleComponent',
+            name: 'platform-table-virtual-scroll-whole-row-example.component.ts'
         }
     ];
 

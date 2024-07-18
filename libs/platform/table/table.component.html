@@ -82,6 +82,9 @@
                                 @case ('group') {
                                     <tr
                                         fdp-table-group-row
+                                        [style.max-height.px]="
+                                            _virtualScrollDirective?.scrollWholeRows ? rowHeight : 'auto'
+                                        "
                                         [index]="rowIndex"
                                         [height]="rowHeight"
                                         [draggable]="isDraggable"
@@ -104,6 +107,9 @@
                                         [activable]="rowsActivable || !!row.navigatable"
                                         [active]="rowIndex === _navigatedRowIndex"
                                         [highlightActive]="highlightNavigatedRow"
+                                        [style.max-height.px]="
+                                            _virtualScrollDirective?.scrollWholeRows ? rowHeight : 'auto'
+                                        "
                                         [style.height.px]="rowHeight"
                                         [attr.aria-level]="isTreeTable ? row.level + 1 : null"
                                         (keydown.enter)="_onRowClick(row, $event)"
@@ -151,7 +157,11 @@
                                 </tr>
                             }
                             <!-- Last rendered child row. -->
-                            @if (row.parent?.lastChild?.index === row.index) {
+                            @if (
+                                row.parent?.lastChild?.index === row.index &&
+                                pageScrolling &&
+                                !_virtualScrollDirective?.scrollWholeRows
+                            ) {
                                 <tr
                                     aria-hidden="true"
                                     class="fd-table__intersection-spy"
@@ -217,7 +227,7 @@
             @if (pageScrolling) {
                 <tbody class="fd-table__body__focus-mock"></tbody>
             }
-            @if (_virtualScrollDirective?.virtualScroll) {
+            @if (_virtualScrollDirective?.virtualScroll && !_virtualScrollDirective?.scrollWholeRows) {
                 <!-- the tbody element below is so the scrollbar renders correctly -->
                 <tbody>
                     <tr>
@@ -226,6 +236,18 @@
                 </tbody>
             }
         </table>
+
+        <!-- the tbody element below is so the scrollbar renders correctly when using scrollWholeRows -->
+        @if (_virtualScrollDirective?.virtualScroll && _virtualScrollDirective?.scrollWholeRows) {
+            <tbody
+                [class.fd-table__body--scroll-mock]="!!_virtualScrollDirective?.scrollWholeRows"
+                #tableScrollMockContainer
+            >
+                <tr>
+                    <td colspan="100%" [style.height.px]="_virtualScrollDirective?.virtualScrollTotalHeight"></td>
+                </tr>
+            </tbody>
+        }
     </div>
 </ng-template>
 <!-- Empty Table Message -->

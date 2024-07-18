@@ -145,7 +145,11 @@
     >
         <div
             [class.fd-table__text]="column.applyText"
-            [class.fd-table__text--no-wrap]="column.noWrap"
+            [class.fd-table__text--no-wrap]="column.applyText"
+            [class.fd-table__cell--truncate-txt]="column.applyText"
+            [attr.title]="
+                tableTextContainer.offsetWidth < tableTextContainer.scrollWidth ? tableTextContainer.textContent : null
+            "
             #tableTextContainer
         >
             @if (_isTreeRowFirstCell($index, row)) {
@@ -156,7 +160,7 @@
                 ></span>
             }
             @if (row.state === 'readonly') {
-                @if (tableTextContainer.innerText?.trim() === '') {
+                @if (tableTextContainer.innerText.trim() === '') {
                     <span
                         [ngStyle]="{
                             position: 'absolute !important',
