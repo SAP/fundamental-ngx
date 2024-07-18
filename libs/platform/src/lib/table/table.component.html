@@ -80,6 +80,7 @@
                         <tr
                             *ngSwitchCase="'group'"
                             fdp-table-group-row
+                            [style.max-height.px]="_virtualScrollDirective?.scrollWholeRows ? rowHeight : 'auto'"
                             [index]="rowIndex"
                             [height]="rowHeight"
                             [draggable]="isDraggable"
@@ -102,6 +103,7 @@
                             [activable]="rowsActivable || !!row.navigatable"
                             [active]="rowIndex === _navigatedRowIndex"
                             [highlightActive]="highlightNavigatedRow"
+                            [style.max-height.px]="_virtualScrollDirective?.scrollWholeRows ? rowHeight : 'auto'"
                             [style.height.px]="rowHeight"
                             [attr.aria-level]="isTreeTable ? row.level + 1 : null"
                             (fdkClicked)="_onRowClick(row, $event)"
@@ -161,7 +163,7 @@
                 </ng-container>
                 <tr
                     aria-hidden="true"
-                    *ngIf="pageScrolling"
+                    *ngIf="pageScrolling && !_virtualScrollDirective?.scrollWholeRows"
                     class="fd-table__intersection-spy"
                     [fdkIntersectionSpy]="pageScrollingThreshold"
                     (intersected)="$event && _onSpyIntersect($event)"
@@ -172,12 +174,23 @@
             <tbody *ngIf="pageScrolling" class="fd-table__body__focus-mock"></tbody>
 
             <!-- the tbody element below is so the scrollbar renders correctly -->
-            <tbody *ngIf="_virtualScrollDirective?.virtualScroll">
+            <tbody *ngIf="_virtualScrollDirective?.virtualScroll && !_virtualScrollDirective?.scrollWholeRows">
                 <tr>
                     <td colspan="100%" [style.height.px]="_virtualScrollDirective?.virtualScrollTotalHeight"></td>
                 </tr>
             </tbody>
         </table>
+
+        <!-- the tbody element below is so the scrollbar renders correctly -->
+        <tbody
+            *ngIf="_virtualScrollDirective?.virtualScroll && _virtualScrollDirective?.scrollWholeRows"
+            [class.fd-table__body--scroll-mock]="!!_virtualScrollDirective?.scrollWholeRows"
+            #tableScrollMockContainer
+        >
+            <tr>
+                <td colspan="100%" [style.height.px]="_virtualScrollDirective?.virtualScrollTotalHeight"></td>
+            </tr>
+        </tbody>
     </div>
 </ng-template>
 

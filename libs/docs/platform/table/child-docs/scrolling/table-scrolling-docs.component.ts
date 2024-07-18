@@ -6,6 +6,10 @@ const platformTablePageScrollingSrc = 'platform-table-page-scrolling-example.com
 const platformTablePageScrollingTsSrc = 'platform-table-page-scrolling-example.component.ts';
 const platformVirtualScrollTableDefaultSrc = 'virtual-scroll/platform-table-virtual-scroll-example.component.html';
 const platformVirtualScrollTableDefaultTsSrc = 'virtual-scroll/platform-table-virtual-scroll-example.component.ts';
+const platformVirtualScrollWholeRowTableDefaultSrc =
+    'virtual-scroll-whole-row/platform-table-virtual-scroll-whole-row-example.component.html';
+const platformVirtualScrollWholeRowTableDefaultTsSrc =
+    'virtual-scroll-whole-row/platform-table-virtual-scroll-whole-row-example.component.ts';
 @Component({
     selector: 'fd-table-scrolling-docs',
     templateUrl: './table-scrolling-docs.component.html',
@@ -44,6 +48,22 @@ export class TableScrollingDocsComponent {
             fileName: 'platform-table-virtual-scroll-example',
             component: 'PlatformTableVirtualScrollExampleComponent',
             name: 'platform-table-virtual-scroll-example.component.ts'
+        }
+    ];
+
+    virtualScrollWholeRowTableFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(platformVirtualScrollWholeRowTableDefaultSrc),
+            fileName: 'platform-table-virtual-scroll-example',
+            name: 'platform-table-virtual-scroll-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(platformVirtualScrollWholeRowTableDefaultTsSrc),
+            fileName: 'platform-table-virtual-scroll-whole-row-example',
+            component: 'PlatformTableVirtualScrollWholeRowExampleComponent',
+            name: 'platform-table-virtual-scroll-whole-row-example.component.ts'
         }
     ];
     constructor() {

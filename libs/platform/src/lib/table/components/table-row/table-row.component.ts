@@ -216,6 +216,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
             )
             .subscribe(() => {
                 this._cdr.markForCheck();
+                this._cdr.detectChanges();
             });
 
         this._zone.runOutsideAngular(() => {
