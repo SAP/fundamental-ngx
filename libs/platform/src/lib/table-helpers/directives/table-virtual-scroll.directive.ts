@@ -263,7 +263,12 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
         const tableContainer = this._table.tableContainer.nativeElement;
         let tableHeight = tableContainer.clientHeight;
         tableHeight = tableHeight - tableContainer.querySelector('thead').clientHeight;
-        return Math.floor(tableHeight / (this.rowHeight + 2));
+        const numberOfRows = Math.floor(tableHeight / (this.rowHeight + 2));
+        if (this._table._tableRowsVisible.length < numberOfRows) {
+            return this._table._tableRowsVisible.length;
+        } else {
+            return numberOfRows;
+        }
     }
 
     /**
