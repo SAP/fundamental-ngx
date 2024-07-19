@@ -13,7 +13,7 @@ export interface ProductSwitchItem {
     /** Icon of product item */
     icon?: string;
 
-    /** Icon of product item */
+    /** Font of product item */
     font?: IconFont;
 
     /** Whether user wants to mark this element ass selected */
