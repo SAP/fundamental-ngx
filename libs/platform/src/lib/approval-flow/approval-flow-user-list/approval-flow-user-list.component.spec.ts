@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectionChangeEvent } from '@fundamental-ngx/platform/list';
+import { BaseListItem, SelectionChangeEvent } from '@fundamental-ngx/platform/list';
 import { ApprovalUser } from '../interfaces';
 import { PlatformApprovalFlowModule } from '../approval-flow.module';
 import { ApprovalFlowUserListComponent } from './approval-flow-user-list.component';
@@ -52,6 +52,8 @@ describe('ApprovalFlowUserListComponent', () => {
     it('should show team details', () => {
         const selectionEvent: SelectionChangeEvent = {
             selectedItems: [],
+            added: {} as BaseListItem,
+            removed: {} as BaseListItem,
             index: 0
         };
 
