@@ -26,7 +26,7 @@ import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
 import { ScrollSpyDirective } from '@fundamental-ngx/core/scroll-spy';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { Observable, Subject, Subscription, fromEvent, merge } from 'rxjs';
+import { Observable, Subject, Subscription, fromEvent, merge, take } from 'rxjs';
 import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { TabItemDirective } from './tab-item/tab-item.directive';
@@ -175,6 +175,9 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     /** @hidden */
     _init = true;
 
+    /** @hidden */
+    _currentNumberOfTabs = 0;
+
     /** Event is thrown always when tab is selected by keyboard actions */
     readonly tabSelected: Subject<number> = new Subject<number>();
 
@@ -307,7 +310,12 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
                 takeUntil(this._onDestroy$)
             )
             .subscribe(() => {
-                this.stackContent && this._scrollSpy?.onScroll(undefined, true);
+                if (this.stackContent && this._currentNumberOfTabs !== this._tabArray.length) {
+                    this._zone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
+                        this._scrollSpy?.onScroll(undefined, true);
+                        this._currentNumberOfTabs = this._tabArray.length;
+                    });
+                }
             });
     }
 
