@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.38](https://github.com/SAP/fundamental-ngx/compare/v0.43.37...v0.43.38) (2024-07-19)
+
+
+### Bug Fixes
+
+* **core:** remove redundant api calls in dynamic page ([#12125](https://github.com/SAP/fundamental-ngx/issues/12125)) ([42af287](https://github.com/SAP/fundamental-ngx/commit/42af2871291eb150ae917f8f82f2347d8912c76d))
+* **platform:** cache user selection after searching for new user list for approval flow ([#12107](https://github.com/SAP/fundamental-ngx/issues/12107)) ([4dc4af3](https://github.com/SAP/fundamental-ngx/commit/4dc4af35e6e94c832888f946b4b75bcdd4b31e8c))
+* **platform:** remove attr.title from small cells ([#12143](https://github.com/SAP/fundamental-ngx/issues/12143)) ([dde5cd8](https://github.com/SAP/fundamental-ngx/commit/dde5cd818550c959534503486d6ad3eb15d34249))
+* **platform:** trackBy function not working with scrollWholeRows ([#12146](https://github.com/SAP/fundamental-ngx/issues/12146)) ([79edeec](https://github.com/SAP/fundamental-ngx/commit/79edeeca95f2345a1745b57299655c3331f38e64))
+
+
+
+
+
 ## [0.43.37](https://github.com/SAP/fundamental-ngx/compare/v0.43.36...v0.43.37) (2024-07-18)
 
 

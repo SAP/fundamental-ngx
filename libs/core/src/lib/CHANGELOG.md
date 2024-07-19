@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.38](https://github.com/SAP/fundamental-ngx/compare/v0.43.37...v0.43.38) (2024-07-19)
+
+
+### Bug Fixes
+
+* **core:** remove redundant api calls in dynamic page ([#12125](https://github.com/SAP/fundamental-ngx/issues/12125)) ([42af287](https://github.com/SAP/fundamental-ngx/commit/42af2871291eb150ae917f8f82f2347d8912c76d))
+
+
+
+
+
 ## [0.43.37](https://github.com/SAP/fundamental-ngx/compare/v0.43.36...v0.43.37) (2024-07-18)
 
 
