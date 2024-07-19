@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.3](https://github.com/SAP/fundamental-ngx/compare/v0.50.2...v0.50.3) (2024-07-19)
+
+
+### Bug Fixes
+
+* **deps:** fix theming-base-content version and remove belize for stackblitz ([433fb1a](https://github.com/SAP/fundamental-ngx/commit/433fb1a6770be24d577e2a37f32d4b62f997dfb2))
+
+
+
+
+
 ## [0.50.2](https://github.com/SAP/fundamental-ngx/compare/v0.50.1-rc.17...v0.50.2) (2024-07-16)
 
 **Note:** Version bump only for package fundamental-ngx
