@@ -54,7 +54,7 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     readonly itemClicked: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
-    readonly FD_DEFAULT_ICON_FONT_FAMILY = FD_DEFAULT_ICON_FONT_FAMILY;
+    protected readonly FD_DEFAULT_ICON_FONT_FAMILY = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** @hidden */
     private _listMode: boolean;
