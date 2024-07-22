@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.51.1...v0.51.2-rc.0) (2024-07-22)
+
+
+### Bug Fixes
+
+* **core, platform:** combobox e2e tests ([#12161](https://github.com/SAP/fundamental-ngx/issues/12161)) ([efadf61](https://github.com/SAP/fundamental-ngx/commit/efadf610bede0d6f61e4da7d4d453f184eb6243d))
+
+
+
+
+
 ## [0.51.1](https://github.com/SAP/fundamental-ngx/compare/v0.51.1-rc.7...v0.51.1) (2024-07-19)
 
 **Note:** Version bump only for package fundamental-ngx
