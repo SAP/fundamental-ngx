@@ -3,7 +3,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { CalendarCurrent } from './models/calendar-current';
 
 /** Type of calendar */
-export type CalendarType = 'single' | 'range';
+export type CalendarType = 'single' | 'multi' | 'range';
 
 /** Type for the calendar view */
 export type FdCalendarView = 'day' | 'month' | 'year' | 'aggregatedYear';

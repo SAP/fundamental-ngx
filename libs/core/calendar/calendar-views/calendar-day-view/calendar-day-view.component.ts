@@ -93,6 +93,24 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         return this._selectedDate;
     }
 
+    /** The currently selected date model in multiple mode. */
+    @Input()
+    set selectedMultiDate(dates: Array<D>) {
+        if (dates) {
+            this._selectedMultiDate = dates;
+            if (this._dayViewGrid) {
+                const formattedDates = this._calendarDayList.filter(
+                    (day) => dates?.some((date) => this._isSameDay(day.date, date))
+                );
+                this._changeSelectedMultipleDays(formattedDates, this._calendarDayList);
+            }
+        }
+    }
+
+    get selectedMultiDate(): Nullable<Array<D>> {
+        return this._selectedMultiDate;
+    }
+
     /** The currently selected FdDates model start and end in range mode. */
     @Input()
     set selectedRangeDate(dateRange: DateRange<D>) {
@@ -145,6 +163,14 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     @Input()
     showWeekNumbers = true;
 
+    /**
+     * Whether user wants to select multiple days
+     * If showWeekNumbers is true user can click on week number, and it will mark related row
+     * User can click weekDays, and it will mark related column
+     */
+    @Input()
+    multiSelectable = false;
+
     /** Function that allows to specify which function would be called, when focus wants to escape */
     @Input()
     focusEscapeFunction: EscapeFocusFunction;
@@ -159,10 +185,6 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     @Input()
     specialDaysRules: SpecialDayRule<D>[] = [];
 
-    /** Event emitted always, when model is changed in range mode */
-    @Output()
-    readonly selectedRangeDateChange: EventEmitter<DateRange<D>> = new EventEmitter<DateRange<D>>();
-
     /** Event emitted always, when next month is selected, by focus */
     @Output()
     readonly nextMonthSelect: EventEmitter<void> = new EventEmitter<void>();
@@ -174,6 +196,14 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     /** Event emitted always, when model is changed in single mode */
     @Output()
     readonly selectedDateChange: EventEmitter<D> = new EventEmitter<D>();
+
+    /** Event emitted always, when model is changed in multiple mode */
+    @Output()
+    readonly selectedMultiDateChange: EventEmitter<Array<D>> = new EventEmitter<Array<D>>();
+
+    /** Event emitted always, when model is changed in range mode */
+    @Output()
+    readonly selectedRangeDateChange: EventEmitter<DateRange<D>> = new EventEmitter<DateRange<D>>();
 
     /**
      * @hidden
@@ -188,10 +218,13 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     _weeks: string[];
 
     /** @hidden */
-    private _selectedRangeDate: DateRange<D>;
+    private _selectedDate: Nullable<D>;
 
     /** @hidden */
-    private _selectedDate: Nullable<D>;
+    private _selectedMultiDate: Array<D> = [];
+
+    /** @hidden */
+    private _selectedRangeDate: DateRange<D>;
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
@@ -250,7 +283,12 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         /** Changes of those properties are done inside its setters */
-        if (!changes['selectedDate'] && !changes['selectedRangeDate'] && !changes['currentlyDisplayed']) {
+        if (
+            !changes['selectedDate'] &&
+            !changes['selectedMultiDate'] &&
+            !changes['selectedRangeDate'] &&
+            !changes['currentlyDisplayed']
+        ) {
             this._buildDayViewGrid();
         }
         if (changes['startingDayOfWeek']) {
@@ -278,6 +316,22 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
                 day.selected = true;
                 this._selectedDate = day.date;
                 this.selectedDateChange.emit(day.date);
+            } else if (this.calType === 'multi') {
+                const dateIndex = this._selectedMultiDate.findIndex((d) => this._isSameDay(d, day.date));
+
+                if (dateIndex > -1) {
+                    // If the date already exists in the selected dates array, remove it and mark as not selected
+                    this._selectedMultiDate.splice(dateIndex, 1);
+                    day.selected = false;
+                } else {
+                    // Otherwise, add the date to the selected dates array and mark as selected
+                    day.selected = true;
+                    this._selectedMultiDate.push(day.date);
+                }
+
+                // Emit the change and mark for check
+                this.selectedMultiDateChange.emit(this._selectedMultiDate);
+                this.changeDetRef.markForCheck();
             } else {
                 if (this._selectCounter === 0 || this._selectCounter === 2) {
                     this._selectedRangeDate = { start: day.date, end: null };
@@ -534,6 +588,13 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         if (this.calType === 'single' && this._selectedDate) {
             const _day = calendar.find((day) => this._dateTimeAdapter.datesEqual(day.date, this._selectedDate));
             this._changeSelectedSingleDay(_day, calendar);
+        }
+
+        if (this.calType === 'multi' && this._selectedMultiDate) {
+            const _days = calendar.filter(
+                (day) => this._selectedMultiDate?.some((date) => this._isSameDay(day.date, date))
+            );
+            this._changeSelectedMultipleDays(_days, calendar);
         }
 
         if (this.calType === 'range' && this._selectedRangeDate) {
@@ -843,6 +904,36 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
             day.selected = true;
         }
         this.refreshTabIndex(calendar);
+    }
+
+    /**
+     * @hidden
+     * Change selection flag on days to false, besides the selected one
+     *
+     * @param dates - An array of CalendarDay objects to be marked as selected
+     * @param calendar - The calendar array containing all CalendarDay objects
+     */
+    private _changeSelectedMultipleDays(dates: Array<CalendarDay<D>> | undefined, calendar: CalendarDay<D>[]): void {
+        calendar.forEach((day) => (day.selected = false));
+
+        if (dates) {
+            dates.forEach((date) => {
+                const matchingDay = calendar.find((day) => this._isSameDay(day.date, date.date));
+                if (matchingDay && !matchingDay.blocked && !matchingDay.disabled) {
+                    matchingDay.selected = true;
+                }
+            });
+        }
+
+        this.refreshTabIndex(calendar);
+    }
+
+    /**
+     * @hidden
+     * Check if dates are equal
+     */
+    private _isSameDay(date1: D, date2: D): boolean {
+        return this._dateTimeAdapter.datesEqual(date1, date2);
     }
 
     /**

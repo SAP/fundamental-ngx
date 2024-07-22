@@ -14,11 +14,13 @@
     @if (activeView === 'day') {
         <fd-calendar-day-view
             [selectedDate]="selectedDate"
+            [selectedMultiDate]="selectedMultiDate"
+            [selectedRangeDate]="selectedRangeDate"
+            (selectedDateChange)="selectedDateChanged($event)"
+            (selectedMultiDateChange)="selectedMultiDateChanged($event)"
+            (selectedRangeDateChange)="selectedRangeDateChanged($event)"
             [showWeekNumbers]="showWeekNumbers"
             [markWeekends]="markWeekends"
-            (selectedDateChange)="selectedDateChanged($event)"
-            [selectedRangeDate]="selectedRangeDate"
-            (selectedRangeDateChange)="selectedRangeDateChanged($event)"
             [currentlyDisplayed]="_currentlyDisplayed"
             [startingDayOfWeek]="getWeekStartDay()"
             [disableFunction]="disableFunction"

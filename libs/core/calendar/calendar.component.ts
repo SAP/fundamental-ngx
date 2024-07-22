@@ -102,6 +102,14 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     @Input()
     selectedDate: Nullable<D>;
 
+    /** The currently selected date model in multiple mode. */
+    @Input()
+    selectedMultiDate: Array<D>;
+
+    /** The currently selected FdDates model start and end in range mode. */
+    @Input()
+    selectedRangeDate: DateRange<D>;
+
     /**
      * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
      */
@@ -114,6 +122,14 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     @Input()
     showWeekNumbers = false;
 
+    /**
+     * Whether user wants to select multiple days
+     * If showWeekNumbers is true user can click on week number, and it will mark related row
+     * User can click weekDays, and it will mark related column
+     */
+    @Input()
+    multiSelectable = false;
+
     /** Whether calendar is used inside mobile in landscape mode, it also adds close button on right side */
     @Input()
     @HostBinding('class.fd-calendar--mobile-landscape')
@@ -124,10 +140,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     @HostBinding('class.fd-calendar--mobile-portrait')
     mobilePortrait = false;
 
-    /** The currently selected FdDates model start and end in range mode. */
-    @Input()
-    selectedRangeDate: DateRange<D>;
-
     /** Actually shown active view one of 'day' | 'month' | 'year' */
     @Input()
     activeView: FdCalendarView = 'day';
@@ -136,7 +148,12 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     @Input()
     startingDayOfWeek: DaysOfWeek;
 
-    /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
+    /**
+     * The type of calendar
+     * 'single' for single date selection
+     * 'multi' for multiple date selection
+     * 'range' for a range of dates.
+     */
     @Input()
     calType: CalendarType = 'single';
 
@@ -188,6 +205,10 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     /** Event thrown every time selected date in single mode is changed */
     @Output()
     readonly selectedDateChange: EventEmitter<D> = new EventEmitter<D>();
+
+    /** Event thrown every time selected date in single mode is changed */
+    @Output()
+    readonly selectedMultiDateChange: EventEmitter<Array<D>> = new EventEmitter<Array<D>>();
 
     /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
@@ -313,7 +334,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     disableRangeEndFunction: DisableDateFunction<D> = () => false;
 
     /** @hidden */
-    onChange: (_: D | DateRange<D>) => void = () => {};
+    onChange: (_: D | Array<D> | DateRange<D>) => void = () => {};
 
     /** @hidden */
     onTouched: () => void = () => {};
@@ -348,7 +369,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * @hidden
      * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms.
      */
-    writeValue(selected: DateRange<D> | D): void {
+    writeValue(selected: D | Array<D> | DateRange<D>): void {
         let valid = true;
 
         if (this.calType === 'single') {
@@ -370,6 +391,18 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
                 start: selected.start,
                 end: selected.end
             };
+        }
+
+        if (this.calType === 'multi' && selected) {
+            if (!Array.isArray(selected)) {
+                selected = <Array<D>>[selected];
+            }
+
+            selected = <Array<D>>selected;
+
+            valid = selected.every((d) => this._dateTimeAdapter.isValid(d));
+
+            this.selectedMultiDate = selected;
         }
 
         if (valid) {
@@ -441,6 +474,19 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         this._setNavigationButtonsStates();
         this.onChange(date);
         this.selectedDateChange.emit(date);
+        this.closeCalendar.emit();
+    }
+
+    /**
+     * @hidden
+     * Method that is triggered by events from day view component, when there is selected multi date changed
+     */
+    selectedMultiDateChanged(date: Array<D>): void {
+        console.log(date, 'selectedMultiDateChanged');
+        this.selectedMultiDate = date;
+        this._setNavigationButtonsStates();
+        this.onChange(date);
+        this.selectedMultiDateChange.emit(date);
         this.closeCalendar.emit();
     }
 
@@ -562,6 +608,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * which are connected to days displayed
      */
     setCurrentlyDisplayed(date: Nullable<D>): void {
+        console.log(date, 'setCurrentlyDisplayed');
         if (this._dateTimeAdapter.isValid(date)) {
             this._currentlyDisplayed = {
                 month: this._dateTimeAdapter.getMonth(date!),
@@ -641,6 +688,9 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
                 this._dateTimeAdapter.isValid(this.selectedRangeDate.end)
             );
         }
+        if (this.calType === 'multi' && this.selectedMultiDate) {
+            return this.selectedMultiDate && this.selectedMultiDate.every((d) => this._dateTimeAdapter.isValid(d));
+        }
         return false;
     }
 
@@ -664,6 +714,11 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
             this._currentlyDisplayed = {
                 year: this._dateTimeAdapter.getYear(this.selectedDate),
                 month: this._dateTimeAdapter.getMonth(this.selectedDate)
+            };
+        } else if (this.calType === 'multi' && this.selectedMultiDate?.every((d) => this._dateTimeAdapter.isValid(d))) {
+            this._currentlyDisplayed = {
+                year: this._dateTimeAdapter.getYear(this.selectedMultiDate[0]),
+                month: this._dateTimeAdapter.getMonth(this.selectedMultiDate[0])
             };
         } else if (this.selectedRangeDate && this.selectedRangeDate.start) {
             this._currentlyDisplayed = {
