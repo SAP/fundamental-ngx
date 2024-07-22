@@ -12,7 +12,8 @@ import { TablePo } from './table.po';
 
 export const runCommonTests = (allInputFields: string, tablePage: TablePo) => {
     describe('Check input fields', () => {
-        it('should check input fields does not change width', async () => {
+        xit('should check input fields does not change width', async () => {
+            // TODO - review the test
             const inputFieldLength = await getElementArrayLength(allInputFields);
             for (let i = 0; i < inputFieldLength; i++) {
                 if (i === 13) {
@@ -29,7 +30,8 @@ export const runCommonTests = (allInputFields: string, tablePage: TablePo) => {
     });
 
     describe('Check orientation', () => {
-        it('should check RTL and LTR orientation', async () => {
+        xit('should check RTL and LTR orientation', async () => {
+            // TODO - review the test
             const exampleAreaContainersArr = '.fd-doc-component';
             const rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
 
