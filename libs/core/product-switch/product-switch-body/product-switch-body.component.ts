@@ -17,7 +17,7 @@ import { Subscription } from 'rxjs';
 import { FdDropEvent, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 
 import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
-import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent } from '@fundamental-ngx/core/icon';
 import { ProductSwitchItem } from './product-switch.item';
 
 const containerWidthPxSmallMode = 588;
@@ -52,6 +52,9 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     /** Event emitted on product click */
     @Output()
     readonly itemClicked: EventEmitter<void> = new EventEmitter<void>();
+
+    /** @hidden */
+    protected readonly FD_DEFAULT_ICON_FONT_FAMILY = FD_DEFAULT_ICON_FONT_FAMILY;
 
     /** @hidden */
     private _listMode: boolean;
