@@ -23,6 +23,11 @@
     <div
         class="fdp-table__body fd-scrollbar"
         [class.fdp-table__body--virtual-scroll]="!!_virtualScrollDirective?.virtualScroll"
+        [style.position]="
+            !!_virtualScrollDirective?.virtualScroll && !_virtualScrollDirective?.scrollWholeRows
+                ? 'relative'
+                : 'static'
+        "
         fdpTableScrollable
         #tableScrollable="tableScrollable"
         [style.height]="bodyHeight"
