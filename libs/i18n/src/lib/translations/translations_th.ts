@@ -274,7 +274,6 @@ export default {
         userTitle: 'ผู้ใช้'
     },
     platformVHD: {
-        selectionBarLabel: 'ไอเท็มที่เลือกและไอเท็มเงื่อนไข',
         selectedAndConditionLabel: 'ไอเท็มและเงื่อนไขที่เลือก',
         footerClearSelectedTitle: 'เคลียร์ไอเท็มที่เลือก',
         footerClearSelectedAriaLabel: 'เคลียร์ไอเท็มที่เลือก',

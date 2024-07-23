@@ -273,7 +273,6 @@ export default {
         userTitle: 'Pengguna'
     },
     platformVHD: {
-        selectionBarLabel: 'Item syarat dan dipilih',
         selectedAndConditionLabel: 'Item dan Syarat Dipilih',
         footerClearSelectedTitle: 'kosongkan item yang dipilih',
         footerClearSelectedAriaLabel: 'kosongkan item yang dipilih',

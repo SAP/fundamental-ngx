@@ -274,7 +274,6 @@ export default {
         userTitle: 'Käyttäjä'
     },
     platformVHD: {
-        selectionBarLabel: 'Valitut kohteet ja ehdot',
         selectedAndConditionLabel: 'Valitut kohteet ja ehdot',
         footerClearSelectedTitle: 'tyhjennä valitut kohteet',
         footerClearSelectedAriaLabel: 'tyhjennä valitut kohteet',
