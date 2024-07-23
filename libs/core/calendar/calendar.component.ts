@@ -373,11 +373,25 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         let valid = true;
 
         if (this.calType === 'single') {
+            // debugger
             selected = <D>selected;
 
             valid = this._dateTimeAdapter.isValid(selected);
 
             this.selectedDate = selected;
+        }
+
+        if (this.calType === 'multi' && selected) {
+            // debugger
+            if (!Array.isArray(selected)) {
+                selected = <Array<D>>[selected];
+            }
+
+            selected = <Array<D>>selected;
+
+            valid = selected.every((d) => this._dateTimeAdapter.isValid(d));
+
+            this.selectedMultiDate = selected;
         }
 
         if (this.calType === 'range' && selected) {
@@ -391,18 +405,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
                 start: selected.start,
                 end: selected.end
             };
-        }
-
-        if (this.calType === 'multi' && selected) {
-            if (!Array.isArray(selected)) {
-                selected = <Array<D>>[selected];
-            }
-
-            selected = <Array<D>>selected;
-
-            valid = selected.every((d) => this._dateTimeAdapter.isValid(d));
-
-            this.selectedMultiDate = selected;
         }
 
         if (valid) {
@@ -482,7 +484,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * Method that is triggered by events from day view component, when there is selected multi date changed
      */
     selectedMultiDateChanged(date: Array<D>): void {
-        console.log(date, 'selectedMultiDateChanged');
         this.selectedMultiDate = date;
         this._setNavigationButtonsStates();
         this.onChange(date);
@@ -608,7 +609,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * which are connected to days displayed
      */
     setCurrentlyDisplayed(date: Nullable<D>): void {
-        console.log(date, 'setCurrentlyDisplayed');
         if (this._dateTimeAdapter.isValid(date)) {
             this._currentlyDisplayed = {
                 month: this._dateTimeAdapter.getMonth(date!),
@@ -717,8 +717,8 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
             };
         } else if (this.calType === 'multi' && this.selectedMultiDate?.every((d) => this._dateTimeAdapter.isValid(d))) {
             this._currentlyDisplayed = {
-                year: this._dateTimeAdapter.getYear(this.selectedMultiDate[0]),
-                month: this._dateTimeAdapter.getMonth(this.selectedMultiDate[0])
+                year: this._dateTimeAdapter.getYear(this.selectedMultiDate[1]),
+                month: this._dateTimeAdapter.getMonth(this.selectedMultiDate[1])
             };
         } else if (this.selectedRangeDate && this.selectedRangeDate.start) {
             this._currentlyDisplayed = {

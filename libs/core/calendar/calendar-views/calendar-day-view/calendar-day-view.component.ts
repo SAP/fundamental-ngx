@@ -6,16 +6,16 @@ import {
     ElementRef,
     EventEmitter,
     Inject,
+    inject,
     Input,
     OnChanges,
     OnInit,
     Output,
     SimpleChanges,
-    ViewEncapsulation,
-    inject
+    ViewEncapsulation
 } from '@angular/core';
 
-import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 import equal from 'fast-deep-equal';
 
@@ -362,6 +362,26 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         }
 
         this.changeDetRef.markForCheck();
+    }
+
+    /**
+     * Toggles the selection of a week on the calendar.
+     * If the provided week is already fully selected, it will deselect it.
+     * If the provided week is not fully selected, it will select the entire week and clear any previous selections.
+     * @param selectedWeek Array of CalendarDay objects representing the week to be toggled.
+     */
+    selectWeek(selectedWeek: Array<CalendarDay<D>>): void {
+        const isCurrentWeekSelected = selectedWeek.every((day) => day.selected);
+        this._calendarDayList.forEach((day) => (day.selected = false));
+
+        if (!isCurrentWeekSelected) {
+            selectedWeek.forEach((day) => (day.selected = true));
+            this._selectedMultiDate = selectedWeek.map((day) => day.date);
+        } else {
+            this._selectedMultiDate = [];
+        }
+
+        this.selectedMultiDateChange.emit(this._selectedMultiDate);
     }
 
     /**
