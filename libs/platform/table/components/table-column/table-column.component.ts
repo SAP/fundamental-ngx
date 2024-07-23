@@ -24,6 +24,7 @@ import {
     TableColumnResizeService,
     TableService
 } from '@fundamental-ngx/platform/table-helpers';
+import { BehaviorSubject } from 'rxjs';
 
 /**
  * The component that represents a table column.
@@ -64,7 +65,13 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
 
     /** Column header label. */
     @Input()
-    label: string;
+    set label(value: string) {
+        this.labelValueChanges$.next(value);
+    }
+
+    get label(): string {
+        return this.labelValueChanges$.value;
+    }
 
     /** Cell text alignment. */
     @Input() align: ColumnAlignValue = 'start';
@@ -124,6 +131,9 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
 
     /** Column cell template */
     columnCellTemplate: Nullable<TemplateRef<any>>;
+
+    /** Label change event */
+    labelValueChanges$ = new BehaviorSubject('');
 
     /** Editable column cell template. */
     editableColumnCellTemplate: Nullable<TemplateRef<any>>;

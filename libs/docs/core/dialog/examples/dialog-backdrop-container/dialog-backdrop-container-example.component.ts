@@ -2,7 +2,14 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
+import {
+    DialogBodyComponent,
+    DialogCloseButtonComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogService
+} from '@fundamental-ngx/core/dialog';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 
@@ -22,7 +29,18 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         `
     ],
     standalone: true,
-    imports: [ButtonComponent, DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, BarModule]
+    imports: [
+        ButtonComponent,
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        BarModule,
+        DialogFooterComponent,
+        DialogBodyComponent,
+        DialogCloseButtonComponent,
+        DialogHeaderComponent,
+        DialogComponent
+    ]
 })
 export class DialogBackdropContainerExampleComponent {
     constructor(private _dialogService: DialogService) {}

@@ -27,7 +27,7 @@
         ></ng-template>
     } @else {
         <span [id]="id + '-header-cell-' + column?.name" class="fd-table__cell--truncate-txt">
-            {{ column?.label }}
+            {{ column?.labelValueChanges$ | async }}
         </span>
     }
 </ng-template>

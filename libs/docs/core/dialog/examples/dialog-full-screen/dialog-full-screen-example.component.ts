@@ -11,7 +11,16 @@ import {
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { DialogDefaultContent, DialogModule, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogDefaultContent,
+    DialogFooterComponent,
+    DialogFullScreenTogglerButtonComponent,
+    DialogHeaderComponent,
+    DialogRef,
+    DialogService
+} from '@fundamental-ngx/core/dialog';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -19,7 +28,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
 @Component({
     selector: 'fd-dialog-full-screen-inner-example',
     standalone: true,
-    template: `<fd-dialog>
+    template: ` <fd-dialog>
         <fd-dialog-header>
             <h1 id="fd-dialog-header-1" fd-title>{{ dialogRef.data.title }}</h1>
             <button
@@ -61,7 +70,19 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     </fd-dialog>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, BarModule, AsyncPipe, NgStyle]
+    imports: [
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        BarModule,
+        AsyncPipe,
+        NgStyle,
+        DialogFooterComponent,
+        DialogBodyComponent,
+        DialogFullScreenTogglerButtonComponent,
+        DialogHeaderComponent,
+        DialogComponent
+    ]
 })
 export class DialogFullScreenInnerExampleComponent {
     constructor(public dialogRef: DialogRef) {}
@@ -70,7 +91,19 @@ export class DialogFullScreenInnerExampleComponent {
 @Component({
     selector: 'fd-dialog-full-screen-example',
     standalone: true,
-    imports: [ButtonComponent, BarModule, InputGroupModule, InitialFocusDirective, DialogModule, AsyncPipe],
+    imports: [
+        ButtonComponent,
+        BarModule,
+        InputGroupModule,
+        InitialFocusDirective,
+        AsyncPipe,
+        DialogFooterComponent,
+        DialogBodyComponent,
+        DialogFullScreenTogglerButtonComponent,
+        TitleComponent,
+        DialogHeaderComponent,
+        DialogComponent
+    ],
     templateUrl: './dialog-full-screen-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush

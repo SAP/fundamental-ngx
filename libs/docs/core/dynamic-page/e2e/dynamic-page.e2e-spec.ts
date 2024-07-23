@@ -259,23 +259,22 @@ describe('dynamic side content test suite', () => {
             await checkCollapsingArea();
         });
 
-        // it('should check selecting tabs', async () => {
-        //     await openPage(tabsExample, 1);
-        //     await scrollIntoView(tabsContent, 1);
-        //     await pause(1500);
-        //     await expect(await getAttributeByName(tab, 'aria-selected', 1)).toContain(
-        //         'true',
-        //         'tab is not highlited as selected after scroll to content'
-        //     );
-        //     await expect(await getAttributeByName(tab, 'aria-selected', 0)).not.toContain(
-        //         'true',
-        //         'tab is selected, but should not'
-        //     );
-        //     await expect(await getAttributeByName(tab, 'aria-selected', 2)).not.toContain(
-        //         'true',
-        //         'tab is selected, but should not'
-        //     );
-        // });
+        it('should check selecting tabs', async () => {
+            await openPage(tabsExample, 1);
+            await scrollIntoView(tabsContent, 0);
+            await expect(await getAttributeByName(tab, 'aria-selected', 0)).toContain(
+                'true',
+                'tab is not highlited as selected after scroll to content'
+            );
+            await expect(await getAttributeByName(tab, 'aria-selected', 1)).not.toContain(
+                'true',
+                'tab is selected, but should not'
+            );
+            await expect(await getAttributeByName(tab, 'aria-selected', 2)).not.toContain(
+                'true',
+                'tab is selected, but should not'
+            );
+        });
 
         it('should check links clickable', async () => {
             await openPage(tabsExample);

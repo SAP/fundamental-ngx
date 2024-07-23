@@ -2542,10 +2542,10 @@
   dependencies:
     tslib "^2.4.0"
 
-"@fundamental-styles/cx@0.37.1":
-  version "0.37.1"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.37.1.tgz#01fa8100743780a9a003911ed4362e0edac671a2"
-  integrity sha512-I7gX4J0R5/UclSpOIKc2ziixZjYuva38IIOafNyLvIFL9NWwBwjMRG8aVVUW6GydkDXdWmJaehFHTrkfOcL6pg==
+"@fundamental-styles/cx@0.37.3":
+  version "0.37.3"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.37.3.tgz#9a10640777da9b8dbc15f611c749ec4bd157c3d8"
+  integrity sha512-dgHPQCN8giZkwVT5AmbHs+FYF00W7p/DhZc+MZ7hY4oBtoYGWH5bbwXPsq/juazPFb76VLO/k6hGzr0v6uUO6A==
 
 "@gar/promisify@^1.1.3":
   version "1.1.3"
@@ -3903,22 +3903,17 @@
   optionalDependencies:
     fsevents "~2.3.2"
 
-"@sap-theming/theming-base-content@11.15.0":
-  version "11.15.0"
-  resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.15.0.tgz#f2b830c390c146c3e900e1e00a74f4a5d96fe9a9"
-  integrity sha512-Rn3m8FP3qpJ0xUts+5AXVBkp1KpZHdBAUxwN985s/jeVkjONhIlU9CU/XXw8z6f6babJyRVAReBbm5Mb1vtoZg==
+"@sap-theming/theming-base-content@11.17.1", "@sap-theming/theming-base-content@^11.17.0":
+  version "11.17.1"
+  resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.17.1.tgz#82665ba782f39e419e67993379ce3d7b9d154de6"
+  integrity sha512-C13DbCBGkLYRZtQU7d6TmDHChA+S7bs26xk+fqHL0pBJTOm4V8NP1sj1SPfI9mbkUp+f5QLcWaENwUoTF00ElA==
 
-"@sap-theming/theming-base-content@^11.16.0":
-  version "11.16.1"
-  resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.16.1.tgz#55d746f538421ed0acc8ee2a87342e2a8a09c13d"
-  integrity sha512-722ycND1eY79IgfE+GAoV2Gu6ZdF5BHLJwrSliaQ9RJ5JtEK/oNkWTHIynRKOSfQLRVDvRBW5i8dvJCuwgYqew==
-
-"@sap-ui/common-css@0.37.1":
-  version "0.37.1"
-  resolved "https://registry.yarnpkg.com/@sap-ui/common-css/-/common-css-0.37.1.tgz#82a88a362597e60c61aeccf9b9c33ac8ec20ba4a"
-  integrity sha512-fIz4i38WKlS5h3x5Fll7VH2NpEuno27Y4WUptgHNgxxnUwhS+8twCp0/Ry30hZBXB00+dsM1Txh8a/KH56o4sw==
+"@sap-ui/common-css@0.37.3":
+  version "0.37.3"
+  resolved "https://registry.yarnpkg.com/@sap-ui/common-css/-/common-css-0.37.3.tgz#5ca01cb28e5af2827be0197f80a3d17c8d985019"
+  integrity sha512-okrT3TejZlM9zHxsvPKA2hmQG5ijm1bQdgw8nreUBmog9VLwX2WT+UvrW+cacgMvQZ47rXThpuKXE1k1Tmwb5w==
   dependencies:
-    "@sap-theming/theming-base-content" "^11.16.0"
+    "@sap-theming/theming-base-content" "^11.17.0"
 
 "@schematics/angular@18.0.4":
   version "18.0.4"
@@ -9865,10 +9860,10 @@ functions-have-names@^1.2.3:
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.3.tgz#0404fe4ee2ba2f607f0e0ec3c80bae994133b834"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
-fundamental-styles@0.37.1:
-  version "0.37.1"
-  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.37.1.tgz#838f8f8f2ce268900499a912ea34722faf9898b8"
-  integrity sha512-IGgrdZJuRxbdlVnEUt3hc4l9pSjozIvQn0WaMIcNfyZ2XZ55uSsaeunk9HTsUD08BYxzKAN6moqCMcMoG3yd5A==
+fundamental-styles@0.37.3:
+  version "0.37.3"
+  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.37.3.tgz#a174e347afa4fd94abadd75c1f782934e79f09b0"
+  integrity sha512-PebzR+0gBKewmW6o+1LugqK/yWUjoX/Dze9azssJqU/AZy6i1wnuQMWWb+we7lR5KiVf/pZjYGEzhQTLIjbstw==
 
 fuse.js@7.0.0:
   version "7.0.0"
@@ -16301,15 +16296,15 @@ semver@7.6.0:
   dependencies:
     lru-cache "^6.0.0"
 
-semver@7.6.2, semver@^7.6.0:
+semver@7.6.2:
   version "7.6.2"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.6.2.tgz#1e3b34759f896e8f14d6134732ce798aeb0c6e13"
   integrity sha512-FNAIBWCx9qcRhoHcgcJ0gvU7SN1lYU2ZXuSfl04bSC5OpvDHFyJCjdNHomPXxjQlCBU67YW64PzY7/VIEH7F2w==
 
-semver@7.x, semver@^7.0.0, semver@^7.1.1, semver@^7.3.4, semver@^7.3.5, semver@^7.3.7, semver@^7.3.8, semver@^7.5.3, semver@^7.5.4:
-  version "7.6.1"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-7.6.1.tgz#60bfe090bf907a25aa8119a72b9f90ef7ca281b2"
-  integrity sha512-f/vbBsu+fOiYt+lmwZV0rVwJScl46HppnOA1ZvIuBWKOTlllpyJ3bfVax76/OrhCH38dyxoDIA8K7uB963IYgA==
+semver@7.6.3, semver@7.x, semver@^7.0.0, semver@^7.1.1, semver@^7.3.4, semver@^7.3.5, semver@^7.3.7, semver@^7.3.8, semver@^7.5.3, semver@^7.5.4, semver@^7.6.0:
+  version "7.6.3"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-7.6.3.tgz#980f7b5550bc175fb4dc09403085627f9eb33143"
+  integrity sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==
 
 semver@^6.0.0, semver@^6.3.0, semver@^6.3.1:
   version "6.3.1"
@@ -16830,7 +16825,16 @@ string-length@^4.0.1:
     char-regex "^1.0.2"
     strip-ansi "^6.0.0"
 
-"string-width-cjs@npm:string-width@^4.2.0", "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
+"string-width-cjs@npm:string-width@^4.2.0":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
+  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
+  dependencies:
+    emoji-regex "^8.0.0"
+    is-fullwidth-code-point "^3.0.0"
+    strip-ansi "^6.0.1"
+
+"string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -16904,7 +16908,7 @@ stringify-package@^1.0.1:
   resolved "https://registry.yarnpkg.com/stringify-package/-/stringify-package-1.0.1.tgz#e5aa3643e7f74d0f28628b72f3dad5cecfc3ba85"
   integrity sha512-sa4DUQsYciMP1xhKWGuFM04fB0LG/9DlluZoSVywUMRNvzid6XucHK0/90xGxRoHrAaROrcHK1aPKaijCtSrhg==
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -16917,6 +16921,13 @@ strip-ansi@^3.0.0:
   integrity sha512-VhumSSbBqDTP8p2ZLKj40UjBCV4+v8bUSEpUb4KjRgWk9pbqGF4REFj6KEagidb2f/M6AzC0EmFyDNGaw9OCzg==
   dependencies:
     ansi-regex "^2.0.0"
+
+strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
+  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
+  dependencies:
+    ansi-regex "^5.0.1"
 
 strip-ansi@^7.0.1:
   version "7.1.0"
@@ -18518,7 +18529,7 @@ wordwrap@^1.0.0:
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-1.0.0.tgz#27584810891456a4171c8d0226441ade90cbcaeb"
   integrity sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==
 
-"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
@@ -18531,6 +18542,15 @@ wrap-ansi@^6.0.1, wrap-ansi@^6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-6.2.0.tgz#e9393ba07102e6c91a3b221478f0257cd2856e53"
   integrity sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==
+  dependencies:
+    ansi-styles "^4.0.0"
+    string-width "^4.1.0"
+    strip-ansi "^6.0.0"
+
+wrap-ansi@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
+  integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
   dependencies:
     ansi-styles "^4.0.0"
     string-width "^4.1.0"

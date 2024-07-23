@@ -62,7 +62,8 @@ export class StackblitzService {
             getAsset('./stackblitz/example-stack/package.json'),
             getAsset('./stackblitz/example-stack/stackblitzrc'),
             getAsset('./stackblitz/example-stack/theming/sap_fiori_3_fonts.css'),
-            getAsset('./stackblitz/example-stack/theming/sap_horizon_fonts.css')
+            getAsset('./stackblitz/example-stack/theming/sap_horizon_fonts.css'),
+            getAsset('./stackblitz/example-stack/theming/sap_belize_fonts.css')
         )
             .pipe(
                 first(),
@@ -87,6 +88,7 @@ export class StackblitzService {
                 'src/styles.scss': this.styles,
                 'src/theming/sap_fiori_3_fonts.css': this.fioriFonts,
                 'src/theming/sap_horizon_fonts.css': this.horizonFonts,
+                'src/theming/sap_belize_fonts.css': this.horizonFonts,
                 'angular.json': this.angular,
                 'tsconfig.json': this.tsconfig,
                 'package.json': this.packageJson,

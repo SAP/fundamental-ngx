@@ -10,9 +10,10 @@ import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/pr
 export class ProductSwitchListComponent {
     list: ProductSwitchItem[] = [
         {
-            title: 'Home',
-            subtitle: 'Central Home',
-            icon: 'home',
+            title: 'Heart',
+            subtitle: 'Heart Filled',
+            icon: 'heart',
+            font: 'SAP-icons',
             stickToPosition: true,
             disabledDragAndDrop: true
         },

@@ -21,7 +21,12 @@
                 [draggable]="!product.disabledDragAndDrop && dragAndDropEnabled"
                 [stickInPlace]="!!product.stickToPosition"
             >
-                <fd-icon role="presentation" class="fd-product-switch__icon" [glyph]="product.icon"></fd-icon>
+                <fd-icon
+                    [font]="product.font || FD_DEFAULT_ICON_FONT_FAMILY"
+                    role="presentation"
+                    class="fd-product-switch__icon"
+                    [glyph]="product.icon"
+                ></fd-icon>
                 <div class="fd-product-switch__text">
                     <div class="fd-product-switch__title">{{ product.title }}</div>
                     @if (product.subtitle) {
