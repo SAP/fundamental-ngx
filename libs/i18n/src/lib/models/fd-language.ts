@@ -398,7 +398,6 @@ export interface FdLanguage {
         userTitle: FdLanguageKey;
     };
     platformVHD: {
-        selectionBarLabel: FdLanguageKey;
         selectedAndConditionLabel: FdLanguageKey;
         footerClearSelectedTitle: FdLanguageKey;
         footerClearSelectedAriaLabel: FdLanguageKey;

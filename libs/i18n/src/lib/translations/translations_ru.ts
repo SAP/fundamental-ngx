@@ -277,7 +277,6 @@ export default {
         userTitle: 'Пользователь'
     },
     platformVHD: {
-        selectionBarLabel: 'Выбранные элементы и условия',
         selectedAndConditionLabel: 'Выбранные элементы и условия',
         footerClearSelectedTitle: 'очистить выбранные элементы',
         footerClearSelectedAriaLabel: 'очистить выбранные элементы',

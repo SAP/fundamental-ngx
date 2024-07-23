@@ -275,7 +275,6 @@ export default {
         userTitle: 'Χρήστης'
     },
     platformVHD: {
-        selectionBarLabel: 'Επιλεγμένα και στοιχεία συνθήκης',
         selectedAndConditionLabel: 'Επιλεγμένα Στοιχεία ή Συνθήκες',
         footerClearSelectedTitle: 'εκκαθάριση επιλεγμένων στοιχείων',
         footerClearSelectedAriaLabel: 'εκκαθάριση επιλεγμένων στοιχείων',

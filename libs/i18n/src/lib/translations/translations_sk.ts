@@ -274,7 +274,6 @@ export default {
         userTitle: 'Používateľ'
     },
     platformVHD: {
-        selectionBarLabel: 'Vybrané a podmienené položky',
         selectedAndConditionLabel: 'Vybraté položky a podmienky',
         footerClearSelectedTitle: 'Zrušiť vybrané položky',
         footerClearSelectedAriaLabel: 'Zrušiť vybrané položky',

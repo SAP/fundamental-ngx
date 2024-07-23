@@ -208,7 +208,6 @@ export type FdLanguageKeyIdentifier =
     | 'platformApprovalFlow.statusInProgress'
     | 'platformApprovalFlow.statusNotStarted'
     | 'platformFeedInput.userTitle'
-    | 'platformVHD.selectionBarLabel'
     | 'platformVHD.selectedAndConditionLabel'
     | 'platformVHD.footerClearSelectedTitle'
     | 'platformVHD.footerClearSelectedAriaLabel'

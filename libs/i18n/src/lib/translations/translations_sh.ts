@@ -274,7 +274,6 @@ export default {
         userTitle: 'Korisnik'
     },
     platformVHD: {
-        selectionBarLabel: 'Odabrane stavke i stavke uslova',
         selectedAndConditionLabel: 'Odabrane stavke i uslovi',
         footerClearSelectedTitle: 'izbriši odabrane stavke',
         footerClearSelectedAriaLabel: 'izbriši odabrane stavke',

@@ -275,7 +275,6 @@ export default {
         userTitle: 'Kullanıcı'
     },
     platformVHD: {
-        selectionBarLabel: 'Seçilen öğeler ve koşul kalemleri öğeleri',
         selectedAndConditionLabel: 'Seçilen Öğeler ve Koşullar',
         footerClearSelectedTitle: 'seçilen öğeleri temizle',
         footerClearSelectedAriaLabel: 'seçilen öğeleri temizle',
