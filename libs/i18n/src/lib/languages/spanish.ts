@@ -238,7 +238,6 @@ export const FD_LANGUAGE_SPANISH: FdLanguage = {
     },
     platformFeedInput: { userTitle: 'Usuario' },
     platformVHD: {
-        selectionBarLabel: 'Elementos y condiciones seleccionados',
         selectedAndConditionLabel: 'Elementos seleccionados y condiciones',
         footerClearSelectedTitle: 'borrar elementos seleccionados',
         footerClearSelectedAriaLabel: 'borrar elementos seleccionados',

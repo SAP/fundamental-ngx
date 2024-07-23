@@ -232,7 +232,6 @@ export const FD_LANGUAGE_JAPANESE: FdLanguage = {
     },
     platformFeedInput: { userTitle: 'ユーザー' },
     platformVHD: {
-        selectionBarLabel: '選択済み項目および条件項目',
         selectedAndConditionLabel: '選択済み項目および条件',
         footerClearSelectedTitle: '選択済み項目をクリア',
         footerClearSelectedAriaLabel: '選択済み項目をクリア',

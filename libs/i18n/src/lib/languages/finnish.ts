@@ -235,7 +235,6 @@ export const FD_LANGUAGE_FINNISH: FdLanguage = {
     },
     platformFeedInput: { userTitle: 'Käyttäjä' },
     platformVHD: {
-        selectionBarLabel: 'Valitut kohteet ja ehdot',
         selectedAndConditionLabel: 'Valitut kohteet ja ehdot',
         footerClearSelectedTitle: 'tyhjennä valitut kohteet',
         footerClearSelectedAriaLabel: 'tyhjennä valitut kohteet',
