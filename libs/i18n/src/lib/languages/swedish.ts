@@ -235,7 +235,6 @@ export const FD_LANGUAGE_SWEDISH: FdLanguage = {
     },
     platformFeedInput: { userTitle: 'Användare' },
     platformVHD: {
-        selectionBarLabel: 'Valda artiklar och villkorsposter',
         selectedAndConditionLabel: 'Valda artiklar och villkor',
         footerClearSelectedTitle: 'rensa valda artiklar',
         footerClearSelectedAriaLabel: 'rensa valda artiklar',

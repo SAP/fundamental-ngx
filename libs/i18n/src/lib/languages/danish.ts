@@ -232,7 +232,6 @@ export const FD_LANGUAGE_DANISH: FdLanguage = {
     },
     platformFeedInput: { userTitle: 'Bruger' },
     platformVHD: {
-        selectionBarLabel: 'Valgte elementer og betingelseselementer',
         selectedAndConditionLabel: 'Valgte elementer og betingelser',
         footerClearSelectedTitle: 'slet valgte elementer',
         footerClearSelectedAriaLabel: 'slet valgte elementer',

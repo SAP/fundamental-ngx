@@ -234,7 +234,6 @@ export const FD_LANGUAGE_ARABIC: FdLanguage = {
     },
     platformFeedInput: { userTitle: 'المستخدم' },
     platformVHD: {
-        selectionBarLabel: 'بنود الشروط والبنود المحددة',
         selectedAndConditionLabel: 'الشروط والبنود المحددة',
         footerClearSelectedTitle: 'إزالة البنود المحددة',
         footerClearSelectedAriaLabel: 'إزالة البنود المحددة',
