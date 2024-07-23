@@ -38,6 +38,6 @@ export class BreadcrumbRouterLinkExampleComponent {
 })
 export class BreadcrumbHrefExampleComponent {
     onClick(value: string): void {
-        console.log(value);
+        window.alert(value);
     }
 }
