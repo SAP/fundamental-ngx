@@ -17,7 +17,10 @@ import { ModuleDeprecation } from '@fundamental-ngx/cdk/utils';
 @Component({
     selector: 'fdp-button',
     templateUrl: './button.component.html',
-    styleUrls: ['./button.component.scss']
+    styleUrls: ['./button.component.scss'],
+    host: {
+        role: 'button'
+    }
 })
 export class ButtonComponent extends BaseComponent implements AfterViewInit {
     /** Position of glyph related to text */
