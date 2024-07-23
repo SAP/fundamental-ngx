@@ -237,7 +237,6 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
     },
     platformFeedInput: { userTitle: 'Użytkownik' },
     platformVHD: {
-        selectionBarLabel: 'Wybrane pozycje i pozycje warunków',
         selectedAndConditionLabel: 'Wybrane pozycje i warunki',
         footerClearSelectedTitle: 'wyczyść wybrane pozycje',
         footerClearSelectedAriaLabel: 'wyczyść wybrane pozycje',

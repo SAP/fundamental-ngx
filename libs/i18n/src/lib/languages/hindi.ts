@@ -229,7 +229,6 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
     },
     platformFeedInput: { userTitle: 'उपयोगकर्ता' },
     platformVHD: {
-        selectionBarLabel: 'निर्वाचित और शर्त आइटम',
         selectedAndConditionLabel: 'चयनित आइटम और शर्तें',
         footerClearSelectedTitle: 'चयनित आइटम साफ़ करें',
         footerClearSelectedAriaLabel: 'चयनित आइटम साफ़ करें',

@@ -238,7 +238,6 @@ export const FD_LANGUAGE_ROMANIAN: FdLanguage = {
     },
     platformFeedInput: { userTitle: 'Utilizator' },
     platformVHD: {
-        selectionBarLabel: 'Articole și condiții selectate',
         selectedAndConditionLabel: 'Articole și condiții selectate',
         footerClearSelectedTitle: 'golire articole selectate',
         footerClearSelectedAriaLabel: 'golire articole selectate',

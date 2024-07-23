@@ -241,7 +241,6 @@ export const FD_LANGUAGE_HUNGARIAN: FdLanguage = {
     },
     platformFeedInput: { userTitle: 'Felhasználó' },
     platformVHD: {
-        selectionBarLabel: 'Kiválasztott elemek és feltételek',
         selectedAndConditionLabel: 'Kiválasztott elemek és feltételek',
         footerClearSelectedTitle: 'a kiválasztott elemek törlése',
         footerClearSelectedAriaLabel: 'a kiválasztott elemek törlése',

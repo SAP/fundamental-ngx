@@ -240,7 +240,6 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
     },
     platformFeedInput: { userTitle: 'Utente' },
     platformVHD: {
-        selectionBarLabel: 'Voci condizione e selezionate',
         selectedAndConditionLabel: 'Voci e condizioni selezionate',
         footerClearSelectedTitle: 'cancella voci selezionate',
         footerClearSelectedAriaLabel: 'cancella voci selezionate',

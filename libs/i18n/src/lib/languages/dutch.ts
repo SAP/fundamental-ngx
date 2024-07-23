@@ -237,7 +237,6 @@ export const FD_LANGUAGE_DUTCH: FdLanguage = {
     },
     platformFeedInput: { userTitle: 'Gebruiker' },
     platformVHD: {
-        selectionBarLabel: 'Geselecteerde items en conditie-items',
         selectedAndConditionLabel: 'Geselecteerde items en condities',
         footerClearSelectedTitle: 'geselecteerde items wissen',
         footerClearSelectedAriaLabel: 'geselecteerde items wissen',

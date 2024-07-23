@@ -237,7 +237,6 @@ export const FD_LANGUAGE_SLOVENIAN: FdLanguage = {
     },
     platformFeedInput: { userTitle: 'Uporabnik' },
     platformVHD: {
-        selectionBarLabel: 'Izbrani elementi in pogoji',
         selectedAndConditionLabel: 'Izbrani elementi in pogoji',
         footerClearSelectedTitle: 'počisti izbrane elemente',
         footerClearSelectedAriaLabel: 'počisti izbrane elemente',
