@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.4...v0.51.2-rc.5) (2024-07-23)
+
+
+### Bug Fixes
+
+* **core:** clean up text css ([#12169](https://github.com/SAP/fundamental-ngx/issues/12169)) ([b2da020](https://github.com/SAP/fundamental-ngx/commit/b2da0201c09eefc644e5dcf68a5b52c1300f2476))
+
+
+
+
+
 ## [0.51.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.3...v0.51.2-rc.4) (2024-07-23)
 
 
