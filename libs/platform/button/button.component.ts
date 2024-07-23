@@ -22,7 +22,10 @@ import { FDP_BUTTON } from './tokens';
             useExisting: ButtonComponent
         }
     ],
-    imports: [CoreButtonComponent]
+    imports: [CoreButtonComponent],
+    host: {
+        role: 'button'
+    }
 })
 export class ButtonComponent extends BaseComponent implements ButtonModel {
     /** Position of glyph related to text */
