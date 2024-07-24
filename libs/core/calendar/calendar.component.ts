@@ -43,7 +43,7 @@ import { CalendarYearGrid } from './models/calendar-year-grid';
 import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from './models/common';
 import { DateRange } from './models/date-range';
 import { patchDeprecatedI18nLabels } from './patch-deprecated-i18n-labels';
-import { CalendarType, DaysOfWeek, FdCalendarView, NavigationButtonDisableFunction } from './types';
+import { CalendarType, CalendarTypeEnum, DaysOfWeek, FdCalendarView, NavigationButtonDisableFunction } from './types';
 
 let calendarUniqueId = 0;
 
@@ -372,8 +372,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     writeValue(selected: D | Array<D> | DateRange<D>): void {
         let valid = true;
 
-        if (this.calType === 'single') {
-            // debugger
+        if (this.calType === CalendarTypeEnum.Single) {
             selected = <D>selected;
 
             valid = this._dateTimeAdapter.isValid(selected);
@@ -381,8 +380,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
             this.selectedDate = selected;
         }
 
-        if (this.calType === 'multi' && selected) {
-            // debugger
+        if (this.calType === CalendarTypeEnum.Multi && selected) {
             if (!Array.isArray(selected)) {
                 selected = <Array<D>>[selected];
             }
@@ -394,7 +392,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
             this.selectedMultiDate = selected;
         }
 
-        if (this.calType === 'range' && selected) {
+        if (this.calType === CalendarTypeEnum.Range && selected) {
             selected = <DateRange<D>>selected;
 
             if (!this._dateTimeAdapter.isValid(selected.start) || !this._dateTimeAdapter.isValid(selected.end)) {
@@ -678,17 +676,17 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
 
     /** Method that provides information if model selected date/dates have properly types and are valid */
     isModelValid(): boolean {
-        if (this.calType === 'single') {
+        if (this.calType === CalendarTypeEnum.Single) {
             return this._dateTimeAdapter.isValid(this.selectedDate);
         }
-        if (this.calType === 'range') {
+        if (this.calType === CalendarTypeEnum.Range) {
             return (
                 this.selectedRangeDate &&
                 this._dateTimeAdapter.isValid(this.selectedRangeDate.start) &&
                 this._dateTimeAdapter.isValid(this.selectedRangeDate.end)
             );
         }
-        if (this.calType === 'multi' && this.selectedMultiDate) {
+        if (this.calType === CalendarTypeEnum.Multi && this.selectedMultiDate) {
             return this.selectedMultiDate && this.selectedMultiDate.every((d) => this._dateTimeAdapter.isValid(d));
         }
         return false;
@@ -710,7 +708,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * Day grid is based on currently displayed month and year
      */
     private _prepareDisplayedView(): void {
-        if (this.calType === 'single' && this._dateTimeAdapter.isValid(this.selectedDate)) {
+        if (this.calType === CalendarTypeEnum.Single && this._dateTimeAdapter.isValid(this.selectedDate)) {
             this._currentlyDisplayed = {
                 year: this._dateTimeAdapter.getYear(this.selectedDate),
                 month: this._dateTimeAdapter.getMonth(this.selectedDate)

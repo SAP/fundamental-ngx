@@ -20,7 +20,7 @@ import {
 
         <div>
             Selected Dates:<br />
-            @for (date of dates; track date.day) {
+            @for (date of dates; track date.day + date.month) {
                 {{ date.toDate() | date: 'shortDate' }}<br />
             }
         </div>

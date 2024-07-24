@@ -8,6 +8,19 @@ export type CalendarType = 'single' | 'multi' | 'range';
 /** Type of date picker excluding 'multi' */
 export type DatePickerType = Exclude<CalendarType, 'multi'>;
 
+/** Enum of calendarTypes */
+export enum CalendarTypeEnum {
+    Single = 'single',
+    Multi = 'multi',
+    Range = 'range'
+}
+
+/** Enum for Date Picker Types excluding 'multi' */
+export enum DatePickerTypeEnum {
+    Single = CalendarTypeEnum.Single,
+    Range = CalendarTypeEnum.Range
+}
+
 /** Type for the calendar view */
 export type FdCalendarView = 'day' | 'month' | 'year' | 'aggregatedYear';
 

@@ -180,6 +180,22 @@
 <separator></separator>
 
 <fd-docs-section-title id="multi" componentName="calendar"> Multi Calendar </fd-docs-section-title>
+<description>
+    This example demonstrates <strong>multi-date selection</strong> functionality. <br /><br />
+    You can select multiple individual dates or ranges of dates on the calendar using multi-selection mode. This feature
+    allows you to select several non-contiguous dates or date ranges by clicking on each date across the calendar.
+    <br /><br />
+    The calendar leverages an interface called <code>CalendarDay</code>, which includes the property <code>date</code>.
+    To manage multi-date selections, you can create and modify an array of <code>CalendarDay</code> objects, each
+    representing a date you want to select. Multi selection works with reactive and template forms. <br /><br />
+    Multi-date selection works in conjunction with <code>showWeekNumbers</code> inputs. When WeekCount numbers are
+    visible user can click on it and selection logic will mark relevant week row. Also user can click on week day and
+    selection logic will mark relevant column Multi-date selection works in conjunction with
+    <code>disableFunction</code> and <code>blockFunction</code> inputs. Dates that are disabled or blocked cannot be
+    selected. Disabled dates are typically used for dates that should be inaccessible, such as holidays or non-working
+    days, while blocked dates are reserved or already booked. The calendar will dynamically update based on the changes
+    to these functions.
+</description>
 <component-example>
     <fd-calendar-multi-example></fd-calendar-multi-example>
 </component-example>

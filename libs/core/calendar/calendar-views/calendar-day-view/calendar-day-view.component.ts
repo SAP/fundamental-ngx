@@ -29,7 +29,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarService } from '../../calendar.service';
 import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
-import { CalendarType, DaysOfWeek } from '../../types';
+import { CalendarType, CalendarTypeEnum, DaysOfWeek } from '../../types';
 
 /** Component representing the day view of the calendar. */
 @Component({
@@ -315,13 +315,13 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         }
 
         switch (this.calType) {
-            case 'single':
+            case CalendarTypeEnum.Single:
                 this._selectSingleDate(day);
                 break;
-            case 'multi':
+            case CalendarTypeEnum.Multi:
                 this._toggleMultiDate(day);
                 break;
-            case 'range':
+            case CalendarTypeEnum.Range:
                 this._selectRangeDate(day);
                 break;
         }
@@ -572,19 +572,19 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
             call.index = index;
         });
 
-        if (this.calType === 'single' && this._selectedDate) {
+        if (this.calType === CalendarTypeEnum.Single && this._selectedDate) {
             const _day = calendar.find((day) => this._dateTimeAdapter.datesEqual(day.date, this._selectedDate));
             this._changeSelectedSingleDay(_day, calendar);
         }
 
-        if (this.calType === 'multi' && this._selectedMultiDate) {
+        if (this.calType === CalendarTypeEnum.Multi && this._selectedMultiDate) {
             const _days = calendar.filter(
                 (day) => this._selectedMultiDate?.some((date) => this._isSameDay(day.date, date))
             );
             this._changeSelectedMultipleDays(_days, calendar);
         }
 
-        if (this.calType === 'range' && this._selectedRangeDate) {
+        if (this.calType === CalendarTypeEnum.Range && this._selectedRangeDate) {
             this._changeSelectedRangeDays(this._selectedRangeDate, calendar);
         }
 
@@ -885,7 +885,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * @hidden
      * Change selection flag on days to false, besides the selected one
      */
-    private _changeSelectedSingleDay(day: CalendarDay<D> | undefined, calendar: CalendarDay<D>[]): void {
+    private _changeSelectedSingleDay(day: Nullable<CalendarDay<D>>, calendar: CalendarDay<D>[]): void {
         calendar.forEach((_day) => (_day.selected = false));
         if (day && !day.blocked && !day.disabled) {
             day.selected = true;
@@ -900,7 +900,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * @param dates - An array of CalendarDay objects to be marked as selected
      * @param calendar - The calendar array containing all CalendarDay objects
      */
-    private _changeSelectedMultipleDays(dates: Array<CalendarDay<D>> | undefined, calendar: CalendarDay<D>[]): void {
+    private _changeSelectedMultipleDays(dates: Nullable<Array<CalendarDay<D>>>, calendar: CalendarDay<D>[]): void {
         calendar.forEach((day) => (day.selected = false));
 
         if (dates) {
@@ -1086,7 +1086,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * @param event Optional mouse event for handling hover effect.
      */
     private _handleRangeHoverEffect(event?: MouseEvent): void {
-        if (this.calType === 'range' && this.rangeHoverEffect && this._selectCounter === 1 && event) {
+        if (this.calType === CalendarTypeEnum.Range && this.rangeHoverEffect && this._selectCounter === 1 && event) {
             this._isOnRangePick = !this._isOnRangePick;
         } else {
             this._isOnRangePick = false;
