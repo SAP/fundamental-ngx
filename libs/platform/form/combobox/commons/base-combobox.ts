@@ -66,7 +66,7 @@ import { ComboboxConfig } from '../combobox.config';
 import { FDP_COMBOBOX_ITEM_DEF, FdpComboboxItemDef } from '../directives/combobox-item.directive';
 
 export type TextAlignment = 'left' | 'right';
-export type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | Observable<T[]> | T[] | null;
+export type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | Observable<T[]> | T[];
 
 @Directive()
 export abstract class BaseCombobox
@@ -166,11 +166,8 @@ export abstract class BaseCombobox
     /** Datasource for suggestion list */
     @Input()
     set dataSource(value: FdpComboBoxDataSource<any> | null) {
-        if (value !== null) {
+        if (value) {
             this._initializeDataSource(value);
-        } else {
-            this._dataSource = null;
-            this._suggestions = [];
         }
     }
 
@@ -253,7 +250,7 @@ export abstract class BaseCombobox
     }
 
     /** @hidden List of matched suggestions */
-    _suggestions: OptionItem[];
+    _suggestions: OptionItem[] = [];
 
     /** @hidden Max width of list container */
     maxWidth?: number;
