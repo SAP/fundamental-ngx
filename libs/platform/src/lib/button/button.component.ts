@@ -17,7 +17,10 @@ import { ModuleDeprecation } from '@fundamental-ngx/cdk/utils';
 @Component({
     selector: 'fdp-button',
     templateUrl: './button.component.html',
-    styleUrls: ['./button.component.scss']
+    styleUrls: ['./button.component.scss'],
+    host: {
+        role: 'button'
+    }
 })
 export class ButtonComponent extends BaseComponent implements AfterViewInit {
     /** Position of glyph related to text */
@@ -48,8 +51,7 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
     @Input()
     toggled: Nullable<boolean>;
 
-    /** arialabel, tooltip for truncated text
-     * for acccesiblity of the element */
+    /** arialabel, tooltip for button, intended to be used when the button only contains an icon */
     @Input()
     title: Nullable<string>;
 

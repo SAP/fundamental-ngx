@@ -2,9 +2,9 @@
     #fdButton
     fd-button
     [attr.id]="id"
-    [attr.title]="title"
     [attr.name]="name"
     [ariaLabel]="ariaLabel"
+    [attr.title]="!!glyph && !label ? title : null"
     [attr.aria-controls]="ariaControlsId"
     [attr.aria-expanded]="ariaExpanded"
     [attr.aria-disabled]="ariaDisabled"

@@ -68,14 +68,6 @@ describe('Button test suite:', () => {
         await expect(await getElementClass(disableStateButtons, 1)).toContain('is-disabled', 'button is not disabled');
     });
 
-    it('should check truncated text button', async () => {
-        await expect(await getElementTitle(truncatedButton)).toContain(
-            'Looooooooooong Text Button',
-            'Text title is not matching'
-        );
-        await expect(await isElementClickable(truncatedButton)).toBe(true, 'truncated button with index disable');
-    });
-
     it('should compact be smaller than normal', async () => {
         const normalSize = await getElementSize(sizeButtons);
         const compactSize = await getElementSize(sizeButtons, 1);
