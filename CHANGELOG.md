@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.7...v0.51.2-rc.8) (2024-07-24)
+
+
+### Bug Fixes
+
+* **platform:** fdp-button role and title issues ([#12171](https://github.com/SAP/fundamental-ngx/issues/12171)) ([179f338](https://github.com/SAP/fundamental-ngx/commit/179f338d68374fcb0543374e4ea3587acab9c948))
+
+
+
+
+
 ## [0.51.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.6...v0.51.2-rc.7) (2024-07-24)
 
 
