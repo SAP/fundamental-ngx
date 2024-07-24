@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.5...v0.51.2-rc.6) (2024-07-24)
+
+
+### Bug Fixes
+
+* **core:** remove breadcrumb click proxy, allowing events on original breadcrumb item to be passed to overflow item ([#12133](https://github.com/SAP/fundamental-ngx/issues/12133)) ([d860f87](https://github.com/SAP/fundamental-ngx/commit/d860f87ae998b892924a414f3292ba1864ccfc7c))
+
+
+
+
+
 ## [0.51.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.4...v0.51.2-rc.5) (2024-07-23)
 
 
