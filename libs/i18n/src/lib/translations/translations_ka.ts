@@ -274,7 +274,6 @@ export default {
         userTitle: 'მომხმარებელი'
     },
     platformVHD: {
-        selectionBarLabel: 'არჩეული ელემენტები',
         selectedAndConditionLabel: 'არჩეული ელემენტები',
         footerClearSelectedTitle: 'არჩეული ელემენტების გასუფთავება',
         footerClearSelectedAriaLabel: 'არჩეული ელემენტების გასუფთავება',

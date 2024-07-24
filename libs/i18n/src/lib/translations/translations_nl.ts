@@ -275,7 +275,6 @@ export default {
         userTitle: 'Gebruiker'
     },
     platformVHD: {
-        selectionBarLabel: 'Geselecteerde items en conditie-items',
         selectedAndConditionLabel: 'Geselecteerde items en condities',
         footerClearSelectedTitle: 'geselecteerde items wissen',
         footerClearSelectedAriaLabel: 'geselecteerde items wissen',

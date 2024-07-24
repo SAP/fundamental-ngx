@@ -274,7 +274,6 @@ export default {
         userTitle: 'Felhasználó'
     },
     platformVHD: {
-        selectionBarLabel: 'Kiválasztott elemek és feltételek',
         selectedAndConditionLabel: 'Kiválasztott elemek és feltételek',
         footerClearSelectedTitle: 'a kiválasztott elemek törlése',
         footerClearSelectedAriaLabel: 'a kiválasztott elemek törlése',

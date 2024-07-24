@@ -72,41 +72,38 @@ describe('multi-combobox test suite', () => {
         it('should be able to select multiple items via checkbox and tokens created for selected items in nMoreExample', async () => {
             await expandList(nMoreExample);
             await click(listItemCheckbox, 0);
-            await pause(500);
-            await expandList(nMoreExample);
+            await pause(1000);
             const markedItems = (await getTextArr(selectedListItem)).sort();
             await click(expandButton, nMoreExample);
             const tokens = await getText(tokenInputField, nMoreExample);
             const tokensArr = tokens.split('\n').sort();
 
-            await expect(markedItems).toEqual(tokensArr);
+            await expect(markedItems).withContext(tokensArr);
         });
 
         it('should be able to select multiple items via checkbox and tokens created for selected items in twoColumnExample', async () => {
             await expandList(twoColumnExample);
             await click(listItemCheckbox, 0);
-            await pause(500);
-            await expandList(twoColumnExample);
+            await pause(1000);
             const markedItems = (await getTextArr(selectedListItem)).sort().toString();
             const filteredMarkedItems = markedItems.replace('\nFruits', '').replace('\nFruits', '');
             await click(expandButton, twoColumnExample);
             const tokens = await getText(tokenInputField, twoColumnExample);
             const tokensArr = tokens.split('\n').sort().toString();
 
-            await expect(filteredMarkedItems).toEqual(tokensArr);
+            await expect(filteredMarkedItems).withContext(tokensArr);
         });
 
         it('should be able to select multiple items via checkbox and tokens created for selected items in other examples', async () => {
             await expandList(0);
             await click(listItemCheckbox, 0);
-            await pause(500);
-            await expandList(0);
+            await pause(1000);
             const markedItems = (await getTextArr(selectedListItem)).sort();
             await click(expandButton, 0);
             const tokens = await getText(tokenInputField, 0);
             const tokensArr = tokens.split('\n').sort();
 
-            await expect(markedItems).toEqual(tokensArr, `example set ${0} mismatch`);
+            await expect(markedItems).withContext(tokensArr, `example set ${0} mismatch`);
         });
 
         it('should be able to remove token by clicking the X button', async () => {
@@ -115,7 +112,7 @@ describe('multi-combobox test suite', () => {
             await click(tokenCloseButton);
             const newTokenCount = await getElementArrayLength(token);
 
-            await expect(newTokenCount).toEqual(initialTokenCount - 1);
+            await expect(newTokenCount).withContext(initialTokenCount - 1);
         });
 
         it('should be able to search by typing and get relevant results', async () => {
@@ -172,7 +169,7 @@ describe('multi-combobox test suite', () => {
             await click(dialogButton, save);
             const tokens = (await getTextArr(mobileModeExamples + token)).sort();
 
-            await expect(selectedItems).toEqual(tokens);
+            await expect(selectedItems).withContext(tokens);
         });
 
         it('should be able to search by text', async () => {

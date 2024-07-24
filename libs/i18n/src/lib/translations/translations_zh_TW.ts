@@ -272,7 +272,6 @@ export default {
         userTitle: '使用者'
     },
     platformVHD: {
-        selectionBarLabel: '所選和條件項目',
         selectedAndConditionLabel: '所選項目和條件',
         footerClearSelectedTitle: '清除所選項目',
         footerClearSelectedAriaLabel: '清除所選項目',

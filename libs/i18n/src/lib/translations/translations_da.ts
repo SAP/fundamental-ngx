@@ -274,7 +274,6 @@ export default {
         userTitle: 'Bruger'
     },
     platformVHD: {
-        selectionBarLabel: 'Valgte elementer og betingelseselementer',
         selectedAndConditionLabel: 'Valgte elementer og betingelser',
         footerClearSelectedTitle: 'slet valgte elementer',
         footerClearSelectedAriaLabel: 'slet valgte elementer',

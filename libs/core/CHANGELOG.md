@@ -3,6 +3,111 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.4...v0.51.2-rc.5) (2024-07-23)
+
+
+### Bug Fixes
+
+* **core:** clean up text css ([#12169](https://github.com/SAP/fundamental-ngx/issues/12169)) ([b2da020](https://github.com/SAP/fundamental-ngx/commit/b2da0201c09eefc644e5dcf68a5b52c1300f2476))
+
+
+
+
+
+## [0.51.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.3...v0.51.2-rc.4) (2024-07-23)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.51.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.2...v0.51.2-rc.3) (2024-07-22)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.51.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.1...v0.51.2-rc.2) (2024-07-22)
+
+
+### Features
+
+* **core:** add font family support to product switch component ([#12141](https://github.com/SAP/fundamental-ngx/issues/12141)) ([1555a15](https://github.com/SAP/fundamental-ngx/commit/1555a1581dfea31426eef7d04fad6cc15abbe1a8))
+
+
+
+
+
+## [0.51.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.0...v0.51.2-rc.1) (2024-07-22)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.51.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.51.1...v0.51.2-rc.0) (2024-07-22)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.51.1](https://github.com/SAP/fundamental-ngx/compare/v0.51.1-rc.7...v0.51.1) (2024-07-19)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.51.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.51.1-rc.6...v0.51.1-rc.7) (2024-07-19)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.51.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.51.1-rc.5...v0.51.1-rc.6) (2024-07-19)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.51.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.51.1-rc.4...v0.51.1-rc.5) (2024-07-18)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.51.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.51.1-rc.3...v0.51.1-rc.4) (2024-07-18)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.51.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.51.1-rc.2...v0.51.1-rc.3) (2024-07-17)
+
+
+### Bug Fixes
+
+* reset input but do not close popover when checkbox clicked on multi combobox ([#12135](https://github.com/SAP/fundamental-ngx/issues/12135)) ([c99668b](https://github.com/SAP/fundamental-ngx/commit/c99668bee950f7a93390718bec2722bcf4e5e152))
+
+
+
+
+
 ## [0.51.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.51.1-rc.1...v0.51.1-rc.2) (2024-07-17)
 
 **Note:** Version bump only for package @fundamental-ngx/core

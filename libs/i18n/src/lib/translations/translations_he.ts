@@ -273,7 +273,6 @@ export default {
         userTitle: 'משתמש'
     },
     platformVHD: {
-        selectionBarLabel: 'פריטים ותנאים שנבחרו',
         selectedAndConditionLabel: 'פריטים ותנאים שנבחרו',
         footerClearSelectedTitle: 'נקה פריטים נבחרים',
         footerClearSelectedAriaLabel: 'נקה פריטים נבחרים',

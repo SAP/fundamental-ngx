@@ -273,7 +273,6 @@ export default {
         userTitle: '사용자'
     },
     platformVHD: {
-        selectionBarLabel: '선택 및 조건 항목',
         selectedAndConditionLabel: '선택한 항목과 조건',
         footerClearSelectedTitle: '선택한 항목 지우기',
         footerClearSelectedAriaLabel: '선택한 항목 지우기',

@@ -274,7 +274,6 @@ export default {
         userTitle: 'Użytkownik'
     },
     platformVHD: {
-        selectionBarLabel: 'Wybrane pozycje i pozycje warunków',
         selectedAndConditionLabel: 'Wybrane pozycje i warunki',
         footerClearSelectedTitle: 'wyczyść wybrane pozycje',
         footerClearSelectedAriaLabel: 'wyczyść wybrane pozycje',
