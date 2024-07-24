@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.6...v0.51.2-rc.7) (2024-07-24)
+
+
+### Bug Fixes
+
+* **platform:** Combobox with asyc dataSource ([#12162](https://github.com/SAP/fundamental-ngx/issues/12162)) ([3bdd4ce](https://github.com/SAP/fundamental-ngx/commit/3bdd4ce78a51bc71eaf2f104d76235a5f37e4c82)), closes [#12036](https://github.com/SAP/fundamental-ngx/issues/12036)
+
+
+
+
+
 ## [0.51.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.5...v0.51.2-rc.6) (2024-07-24)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
