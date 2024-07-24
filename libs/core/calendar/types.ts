@@ -5,6 +5,9 @@ import { CalendarCurrent } from './models/calendar-current';
 /** Type of calendar */
 export type CalendarType = 'single' | 'multi' | 'range';
 
+/** Type of date picker excluding 'multi' */
+export type DatePickerType = Exclude<CalendarType, 'multi'>;
+
 /** Type for the calendar view */
 export type FdCalendarView = 'day' | 'month' | 'year' | 'aggregatedYear';
 

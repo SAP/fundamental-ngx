@@ -34,8 +34,8 @@ import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     CalendarComponent,
-    CalendarType,
     CalendarYearGrid,
+    DatePickerType,
     DateRange,
     DaysOfWeek,
     FdCalendarView,
@@ -129,7 +129,7 @@ export class DatePickerComponent<D>
 {
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
-    type: CalendarType = 'single';
+    type: DatePickerType = 'single';
 
     /** Date picker input placeholder string */
     @Input()

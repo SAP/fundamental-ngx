@@ -13,7 +13,13 @@ import { FormsModule } from '@angular/forms';
 import { FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { CalendarType, CalendarYearGrid, DateRange, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
+import {
+    CalendarYearGrid,
+    DatePickerType,
+    DateRange,
+    DaysOfWeek,
+    FdCalendarView
+} from '@fundamental-ngx/core/calendar';
 import { DatePickerComponent, DatePickerComponent as FdDatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -59,7 +65,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     /** below code taken from core/date-picker */
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
-    type: CalendarType = 'single';
+    type: DatePickerType = 'single';
 
     /** The currently selected CalendarDay model */
     @Input()

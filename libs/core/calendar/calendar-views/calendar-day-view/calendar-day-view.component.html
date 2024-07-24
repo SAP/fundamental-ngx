@@ -16,8 +16,10 @@
             @for (day of shortWeekDays; track day; let i = $index) {
                 <th
                     class="fd-calendar__item fd-calendar__item--side-helper"
+                    [ngClass]="{ 'event-enabled': calType === 'multi' }"
                     role="columnheader"
                     [attr.aria-label]="longWeekDays[i]"
+                    (click)="handleWeekSelectionByIndex(i)"
                 >
                     <div class="fd-calendar__text-wrapper">
                         <span class="fd-calendar__text">{{ day }}</span>
@@ -31,7 +33,8 @@
             <tr class="fd-calendar__row" role="row">
                 @if (showWeekNumbers) {
                     <th
-                        class="fd-calendar__item fd-calendar__item--side-helper clickable-week-count"
+                        class="fd-calendar__item fd-calendar__item--side-helper"
+                        [ngClass]="{ 'event-enabled': calType === 'multi' }"
                         role="rowheader"
                         scope="row"
                         [attr.data-fd-calendar-week]="_weeks[rowIndex]"
@@ -39,7 +42,7 @@
                         [attr.aria-labelledby]="
                             _weekNumbersColumnHeaderId + ' ' + (viewId + '-week-' + _weeks[rowIndex])
                         "
-                        (click)="selectWeek(row)"
+                        (click)="handleWeekSelectionByDays(row)"
                     >
                         @if (_weeks && _weeks[rowIndex]) {
                             <div class="fd-calendar__text-wrapper">

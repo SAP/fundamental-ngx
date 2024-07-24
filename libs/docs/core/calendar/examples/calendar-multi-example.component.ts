@@ -48,18 +48,6 @@ import {
 export class CalendarMultiExampleComponent {
     dates: FdDate[] = this.generateDateArray();
 
-    myDisableFunction = (date: FdDate): boolean => {
-        const day = date.getDayOfWeek();
-        return day === 1 || day === 7;
-    };
-
-    disableWednesday = (): void => {
-        this.myDisableFunction = (date: FdDate): boolean => {
-            const day = date.getDayOfWeek();
-            return day === 4;
-        };
-    };
-
     generateDateArray(): FdDate[] {
         const dateArray: FdDate[] = [];
         const currentDate = new Date();

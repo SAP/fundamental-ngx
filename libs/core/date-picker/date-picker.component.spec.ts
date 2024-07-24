@@ -3,7 +3,7 @@ import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/t
 import { FormsModule } from '@angular/forms';
 
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { CalendarType, DateRange } from '@fundamental-ngx/core/calendar';
+import { DatePickerType, DateRange } from '@fundamental-ngx/core/calendar';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
@@ -343,7 +343,7 @@ describe('DatePickerComponent Accessibility', () => {
     class HostComponent {
         @ViewChild(DatePickerComponent) datePicker: DatePickerComponent<FdDate>;
 
-        type: CalendarType = 'single';
+        type: DatePickerType = 'single';
         message = 'This is a message';
         required = false;
         state: FormStates | null = null;

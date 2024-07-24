@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, inject, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { first } from 'rxjs/operators';
 
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
@@ -57,6 +57,38 @@ describe('CalendarDayViewComponent', () => {
         );
         const selected = calendarDays.find((cell) => cell.selected);
         expect(selected?.date.toDateString()).toBe(component.selectedDate.toDateString());
+    });
+
+    it('Should Select Proper multi Date', (done) => {
+        component.currentlyDisplayed = { month: 10, year: 2018 };
+        component.calType = 'multi';
+        component.ngOnInit();
+        const dayPicked = component._dayViewGrid[2][3];
+        component.selectedMultiDateChange.subscribe((date: FdDate[]) => {
+            expect(date).toContain(dayPicked.date);
+            done();
+        });
+        component.selectDate(dayPicked);
+    });
+
+    it('Should mark selected multi date', () => {
+        component.currentlyDisplayed = { month: 10, year: 2018 };
+        component.calType = 'multi';
+        component.selectedMultiDate = [
+            new FdDate(2018, 10, 20),
+            new FdDate(2018, 10, 21)
+        ];
+        component.ngOnInit();
+        const calendarDays: CalendarDay<FdDate>[] = component._dayViewGrid.reduce(
+            (a: CalendarDay<FdDate>[], b: CalendarDay<FdDate>[]) => {
+                if (!b) {
+                    b = [];
+                }
+                return b.concat(a);
+            }
+        );
+        const selected = calendarDays.filter((cell) => cell.selected).map(d => d.date);
+        expect(selected).toEqual(component.selectedMultiDate);
     });
 
     it('Should Select Proper First Range Date', (done) => {

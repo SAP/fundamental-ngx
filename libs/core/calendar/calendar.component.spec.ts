@@ -38,6 +38,37 @@ describe('CalendarComponent', () => {
         expect(component.closeCalendar.emit).toHaveBeenCalled();
     });
 
+    it('Should handle selected date changed in single mode', () => {
+        const date = new FdDate(2000, 10, 10);
+        jest.spyOn(component.selectedDateChange, 'emit');
+        jest.spyOn(component.closeCalendar, 'emit');
+        jest.spyOn(component, 'onChange');
+        component.selectedDateChanged(date);
+        expect(component.onChange).toHaveBeenCalledWith(date);
+        expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
+        expect(component.closeCalendar.emit).toHaveBeenCalled();
+    });
+
+    it('Should handle selected dates changed in multiple mode', () => {
+        const week = [
+            new FdDate(2023, 7, 10),
+            new FdDate(2023, 7, 11),
+            new FdDate(2023, 7, 12),
+            new FdDate(2023, 7, 13),
+            new FdDate(2023, 7, 14),
+            new FdDate(2023, 7, 15),
+            new FdDate(2023, 7, 16)
+        ];
+
+        jest.spyOn(component.selectedMultiDateChange, 'emit');
+        jest.spyOn(component.closeCalendar, 'emit');
+        jest.spyOn(component, 'onChange');
+        component.selectedMultiDateChanged(week);
+        expect(component.onChange).toHaveBeenCalledWith(week);
+        expect(component.selectedMultiDateChange.emit).toHaveBeenCalledWith(week);
+        expect(component.closeCalendar.emit).toHaveBeenCalled();
+    });
+
     it('Should handle selected date changed in range mode', () => {
         const date1 = new FdDate(2000, 10, 10);
         const date2 = new FdDate(2011, 10, 10);
@@ -78,6 +109,31 @@ describe('CalendarComponent', () => {
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
         expect(component.isModelValid()).toBe(false);
         expect(component.selectedDate).toBe(invalidDate);
+    });
+
+    it('Should handle write value for multiple mode when correct', () => {
+        jest.spyOn(component.isValidDateChange, 'emit');
+        const date = [
+            new FdDate(2000, 10, 10),
+            new FdDate(2000, 10, 11),
+            new FdDate(2000, 10, 12),
+        ];
+        component.calType = 'multi';
+        component.writeValue(date);
+        expect(component.selectedMultiDate).toEqual(date);
+        expect(component._currentlyDisplayed.month).toBe(date[0].month);
+        expect(component._currentlyDisplayed.year).toBe(date[0].year);
+        expect(component.isValidDateChange.emit).toHaveBeenCalledWith(true);
+    });
+
+    it('Should handle write value for multiple mode when not correct', () => {
+        jest.spyOn(component.isValidDateChange, 'emit');
+        const invalidDate = [{}] as any;
+        component.calType = 'multi';
+        component.writeValue(invalidDate);
+        expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
+        expect(component.isModelValid()).toBe(false);
+        expect(component.selectedMultiDate).toBe(invalidDate);
     });
 
     it('Should handle write value for range mode when correct', () => {
