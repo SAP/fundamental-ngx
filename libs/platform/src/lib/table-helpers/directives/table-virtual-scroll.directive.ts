@@ -346,12 +346,7 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
             startingNode = 0;
         }
         // This next 'if' statement is for triggering new page loads when 'pageScrolling' is true
-        if (
-            count > 0 &&
-            startingNode === this._previousStartNodeIndex &&
-            this._table.pageScrolling &&
-            this._table._tableRowsVisible.length === this._table._tableRows.length
-        ) {
+        if (count > 0 && startingNode === this._previousStartNodeIndex && this._table.pageScrolling) {
             this._table._onSpyIntersect(true);
         }
         this._setRows(startingNode);
