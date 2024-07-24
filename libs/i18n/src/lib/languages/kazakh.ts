@@ -237,7 +237,6 @@ export const FD_LANGUAGE_KAZAKH: FdLanguage = {
     },
     platformFeedInput: { userTitle: 'Пайдаланушы' },
     platformVHD: {
-        selectionBarLabel: 'Таңдалған тармақтар мен шарт тармақтары',
         selectedAndConditionLabel: 'Таңдалған тармақтар мен шарттар',
         footerClearSelectedTitle: 'таңдалған тармақтарды тазалау',
         footerClearSelectedAriaLabel: 'таңдалған тармақтарды тазалау',

@@ -238,7 +238,6 @@ export const FD_LANGUAGE_GREEK: FdLanguage = {
     },
     platformFeedInput: { userTitle: 'Χρήστης' },
     platformVHD: {
-        selectionBarLabel: 'Επιλεγμένα και στοιχεία συνθήκης',
         selectedAndConditionLabel: 'Επιλεγμένα Στοιχεία ή Συνθήκες',
         footerClearSelectedTitle: 'εκκαθάριση επιλεγμένων στοιχείων',
         footerClearSelectedAriaLabel: 'εκκαθάριση επιλεγμένων στοιχείων',

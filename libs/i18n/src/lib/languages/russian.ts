@@ -341,7 +341,6 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     },
     platformFeedInput: { userTitle: 'Пользователь' },
     platformVHD: {
-        selectionBarLabel: 'Выбранные элементы и условия',
         selectedAndConditionLabel: 'Выбранные элементы и условия',
         footerClearSelectedTitle: 'очистить выбранные элементы',
         footerClearSelectedAriaLabel: 'очистить выбранные элементы',

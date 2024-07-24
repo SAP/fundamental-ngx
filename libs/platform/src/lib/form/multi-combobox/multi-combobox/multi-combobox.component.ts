@@ -176,7 +176,8 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     onOptionCheckboxClicked(event: MouseEvent, index: number): void {
         event.stopPropagation();
         this._onListElementClicked(event, index);
-        this.close();
+        this.inputText = '';
+        this.searchTermChanged('');
     }
 
     /** @hidden */

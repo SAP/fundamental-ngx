@@ -237,7 +237,6 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
     },
     platformFeedInput: { userTitle: 'Uživatel' },
     platformVHD: {
-        selectionBarLabel: 'Vybrané a podmínkové položky',
         selectedAndConditionLabel: 'Vybrané položky a podmínky',
         footerClearSelectedTitle: 'vymazat vybrané položky',
         footerClearSelectedAriaLabel: 'vymazat vybrané položky',

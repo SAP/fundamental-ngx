@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.38](https://github.com/SAP/fundamental-ngx/compare/v0.43.37...v0.43.38) (2024-07-19)
+
+
+### Bug Fixes
+
+* **platform:** cache user selection after searching for new user list for approval flow ([#12107](https://github.com/SAP/fundamental-ngx/issues/12107)) ([4dc4af3](https://github.com/SAP/fundamental-ngx/commit/4dc4af35e6e94c832888f946b4b75bcdd4b31e8c))
+* **platform:** remove attr.title from small cells ([#12143](https://github.com/SAP/fundamental-ngx/issues/12143)) ([dde5cd8](https://github.com/SAP/fundamental-ngx/commit/dde5cd818550c959534503486d6ad3eb15d34249))
+* **platform:** trackBy function not working with scrollWholeRows ([#12146](https://github.com/SAP/fundamental-ngx/issues/12146)) ([79edeec](https://github.com/SAP/fundamental-ngx/commit/79edeeca95f2345a1745b57299655c3331f38e64))
+
+
+
+
+
+## [0.43.37](https://github.com/SAP/fundamental-ngx/compare/v0.43.36...v0.43.37) (2024-07-18)
+
+
+### Bug Fixes
+
+* **core:** clear input and close options list on checkbox selection for Multi combobox ([#12105](https://github.com/SAP/fundamental-ngx/issues/12105)) ([7d3ca52](https://github.com/SAP/fundamental-ngx/commit/7d3ca52dfbdf0fe0d30f8e4af62f47072801bbfe))
+* reset input but do not close popover when checkbox clicked on multi combobox ([#12134](https://github.com/SAP/fundamental-ngx/issues/12134)) ([a38f85c](https://github.com/SAP/fundamental-ngx/commit/a38f85c9c5f12046f6c7918f34f9144482a3c6d7))
+
+
+### Features
+
+* **platform:** virtual scroll whole rows enhancement for ng15 ([#12049](https://github.com/SAP/fundamental-ngx/issues/12049)) ([4612541](https://github.com/SAP/fundamental-ngx/commit/461254150036054e88fb1e25827e67f411eed5e1))
+
+
+
+
+
 ## [0.43.36](https://github.com/SAP/fundamental-ngx/compare/v0.43.35...v0.43.36) (2024-07-11)
 
 
