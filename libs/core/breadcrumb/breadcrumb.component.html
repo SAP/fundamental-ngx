@@ -23,12 +23,7 @@
                         breadcrumbItem.item.breadcrumbLink ? breadcrumbItem.item.breadcrumbLink.disabled : false
                     "
                 >
-                    <a
-                        fd-menu-interactive
-                        (click)="itemClicked(breadcrumbItem.item, $event)"
-                        (keydown.enter)="itemClicked(breadcrumbItem.item, $event)"
-                        (keydown.space)="itemClicked(breadcrumbItem.item, $event)"
-                    >
+                    <a fd-menu-interactive (click)="itemClicked(breadcrumbItem.item, $event)">
                         @if (breadcrumbItem?.item.breadcrumbLink) {
                             @if (breadcrumbItem.item.breadcrumbLink._prefixIconName) {
                                 <fd-menu-addon
