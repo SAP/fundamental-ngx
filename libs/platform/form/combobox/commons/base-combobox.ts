@@ -165,7 +165,7 @@ export abstract class BaseCombobox
 
     /** Datasource for suggestion list */
     @Input()
-    set dataSource(value: FdpComboBoxDataSource<any> | null) {
+    set dataSource(value: FdpComboBoxDataSource<any>) {
         if (value) {
             this._initializeDataSource(value);
         }
