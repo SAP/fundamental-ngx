@@ -51,8 +51,7 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
     @Input()
     toggled: Nullable<boolean>;
 
-    /** arialabel, tooltip for truncated text
-     * for acccesiblity of the element */
+    /** arialabel, tooltip for button, intended to be used when the button only contains an icon */
     @Input()
     title: Nullable<string>;
 
