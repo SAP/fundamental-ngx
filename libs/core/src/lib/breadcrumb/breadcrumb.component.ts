@@ -131,9 +131,8 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
     }
 
     /**
-     * We catch interactions with item, Enter, Space, Mouse click and Touch click,
-     * if original element had router link we are proxying click to that element
-     * */
+     * Function that handles click, touch, enter and space events.
+     */
     itemClicked(breadcrumbItem: BreadcrumbItemComponent, $event: any): void {
         $event.preventDefault();
         breadcrumbItem.breadcrumbLink.elementRef.nativeElement.click();
