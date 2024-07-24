@@ -6,6 +6,7 @@
 ></ng-container>
 
 <fd-busy-indicator
+    #busyIndicator
     [loading]="(_tableService.tableLoading$ | async) === true && _dataSourceDirective._firstLoadingDone"
     [block]="true"
 >

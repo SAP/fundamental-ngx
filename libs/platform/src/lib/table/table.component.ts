@@ -125,6 +125,7 @@ import {
 import { TABLE_TOOLBAR, TableToolbarInterface } from './components';
 import { uniq } from 'lodash-es';
 import { TableHeaderRowComponent } from './components/table-header-row/table-header-row.component';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 
 interface ToolbarContext {
     counter: Observable<number>;
@@ -540,6 +541,9 @@ export class TableComponent<T = any>
     /** @hidden */
     @ViewChild('tableBody', { read: ElementRef })
     readonly tableBody: ElementRef<HTMLElement>;
+    /** @hidden */
+    @ViewChild('busyIndicator')
+    readonly busyIndicator: BusyIndicatorComponent;
     /** @hidden */
     @ContentChildren(TableColumn)
     readonly columns: QueryList<TableColumn>;
@@ -2118,12 +2122,15 @@ export class TableComponent<T = any>
                 .scrolled()
                 .pipe(filter(() => this.pageScrolling))
                 .subscribe((scrollable) => {
-                    const scrollTop = scrollable.getScrollTop();
+                    // this is handled elsewhere when using scrollWholeRows
+                    if (!this._virtualScrollDirective?.scrollWholeRows) {
+                        const scrollTop = scrollable.getScrollTop();
 
-                    this.tableScrolled.emit(scrollTop);
+                        this.tableScrolled.emit(scrollTop);
 
-                    // Instead of having two places to record this position, we could just subscribe once.
-                    this.getTableState().scrollTopPosition = scrollTop;
+                        // Instead of having two places to record this position, we could just subscribe once.
+                        this.getTableState().scrollTopPosition = scrollTop;
+                    }
                 })
         );
     }
@@ -2202,7 +2209,8 @@ export class TableComponent<T = any>
     /** @hidden */
     private _listenToLoadingAndRefocusCell(): void {
         this._subscriptions.add(
-            this._tableService.tableLoading$.pipe(filter((loadingState) => !loadingState)).subscribe(() => {
+            this._tableService.tableLoading$.subscribe((loadingState) => {
+                this.busyIndicator._blockScrolling = loadingState;
                 setTimeout(() => {
                     if (this._tableHeaderResizer.focusedCellPosition && this._focusableGrid) {
                         this._focusableGrid.focusCell(this._tableHeaderResizer.focusedCellPosition);

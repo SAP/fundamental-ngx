@@ -71,6 +71,17 @@ export class BusyIndicatorComponent {
     fakeFocusElement: ElementRef;
 
     /** @hidden */
+    _blockScrolling = false;
+
+    /** @hidden */
+    @HostListener('wheel', ['$event'])
+    wheelListener(event: WheelEvent): void {
+        if (this._blockScrolling) {
+            event.preventDefault();
+        }
+    }
+
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden If focus escapes busy container focus element after wrapped content */
