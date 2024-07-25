@@ -125,6 +125,8 @@ export class P13FilteringDialogComponent implements Resettable {
     reset(): void {
         this._initiateRules();
         this.isResetAvailable$.set(false);
+        this._validIncludeRulesCount = 0;
+        this._validExcludeRulesCount = 0;
     }
 
     /** Close dialog */
