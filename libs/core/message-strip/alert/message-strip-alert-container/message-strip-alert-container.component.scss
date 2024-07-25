@@ -1,6 +1,8 @@
 .fd-message-strip-alert-overlay {
     max-width: 33.33vw;
     padding: 0.5rem;
+    position: fixed;
+    z-index: 1000;
 
     &--top {
         top: 0;
