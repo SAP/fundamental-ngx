@@ -43,7 +43,6 @@
                 fd-button
                 fdType="transparent"
                 glyph="collapse-group"
-                [disabled]="_moveUpDisabled"
                 [attr.aria-label]="'platformTable.P13ColumnsDialogMoveToTopBtn' | fdTranslate"
                 [title]="'platformTable.P13ColumnsDialogMoveToTopBtn' | fdTranslate"
                 (click)="_moveActiveToTop()"
@@ -55,7 +54,6 @@
                 fdType="transparent"
                 glyph="slim-arrow-down"
                 style="transform: rotate(180deg)"
-                [disabled]="_moveUpDisabled"
                 [attr.aria-label]="'platformTable.P13ColumnsDialogMoveUpBtn' | fdTranslate"
                 [title]="'platformTable.P13ColumnsDialogMoveUpBtn' | fdTranslate"
                 (click)="_moveActiveUp()"
@@ -66,7 +64,6 @@
                 fd-button
                 fdType="transparent"
                 glyph="slim-arrow-down"
-                [disabled]="_moveDownDisabled"
                 [attr.aria-label]="'platformTable.P13ColumnsDialogMoveDownBtn' | fdTranslate"
                 [title]="'platformTable.P13ColumnsDialogMoveDownBtn' | fdTranslate"
                 (click)="_moveActiveDown()"
@@ -77,7 +74,6 @@
                 fd-button
                 fdType="transparent"
                 glyph="expand-group"
-                [disabled]="_moveDownDisabled"
                 [attr.aria-label]="'platformTable.P13ColumnsDialogMoveToBottomBtn' | fdTranslate"
                 [title]="'platformTable.P13ColumnsDialogMoveToBottomBtn' | fdTranslate"
                 (click)="_moveActiveToBottom()"

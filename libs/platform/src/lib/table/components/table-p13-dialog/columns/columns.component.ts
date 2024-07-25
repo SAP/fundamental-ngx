@@ -75,11 +75,6 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     /** Selected columns count */
     _selectedColumnsCount = 0;
 
-    /** Flag to track disabled state for move-down move-up buttons */
-    _moveUpDisabled = true;
-    /** Flag to track disabled state for move-down move-up buttons */
-    _moveDownDisabled = true;
-
     /** @hidden */
     get _isShownAllItems(): boolean {
         return this._showAllItemsSubject.getValue();
@@ -173,11 +168,11 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
 
     /** @hidden */
     _setActiveColumn(column: SelectableColumn | null): void {
-        this._selectableColumns.map((_column) => {
-            _column.active = _column === column;
-        });
-
-        this._calculateMovementButtonsState();
+        if (column !== null) {
+            this._selectableColumns.map((_column) => {
+                _column.active = _column === column;
+            });
+        }
     }
 
     /** @hidden */
@@ -259,16 +254,9 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
                         )
                         .filter((item) => showAll || item.selected);
 
-                    this._onChangeFilteredColumnsList();
-
                     this.cdr.markForCheck();
                 })
         );
-    }
-
-    /** @hidden */
-    private _onChangeFilteredColumnsList(): void {
-        this._calculateMovementButtonsState();
     }
 
     /** @hidden */
@@ -289,8 +277,6 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
          * with respect to the original list order
          */
         this._moveColumnInSelectableList(movedItem, replacedItem);
-
-        this._calculateMovementButtonsState();
 
         this._recalculateResetAvailability();
     }
@@ -330,12 +316,5 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     /** @hidden */
     private _countSelectedColumns(): void {
         this._selectedColumnsCount = this._selectableColumns.filter(({ selected }) => selected).length;
-    }
-
-    /** @hidden */
-    private _calculateMovementButtonsState(): void {
-        const activeIndex = this._getActiveColumnIndexInFilteredList();
-        this._moveUpDisabled = activeIndex < 1;
-        this._moveDownDisabled = activeIndex < 0 || activeIndex >= this._filteredColumns.length - 1;
     }
 }
