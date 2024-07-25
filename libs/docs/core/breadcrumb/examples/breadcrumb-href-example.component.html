@@ -1,6 +1,8 @@
 <fd-breadcrumb>
     <fd-breadcrumb-item>
-        <a fd-link href="/#/core/breadcrumb">Breadcrumb Level 1</a>
+        <a fd-link (click)="onClick('Breadcrumb Level 1 clicked')">
+            Breadcrumb Level <span [style.font-weight]="'bold'">1</span>
+        </a>
     </fd-breadcrumb-item>
     <fd-breadcrumb-item>
         <a fd-link href="/#/core/breadcrumb">Breadcrumb Level 2</a>

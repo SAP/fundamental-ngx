@@ -23,12 +23,7 @@
                         breadcrumbItem.item.breadcrumbLink ? breadcrumbItem.item.breadcrumbLink.disabled : false
                     "
                 >
-                    <a
-                        fd-menu-interactive
-                        (click)="itemClicked(breadcrumbItem.item, $event)"
-                        (keydown.enter)="itemClicked(breadcrumbItem.item, $event)"
-                        (keydown.space)="itemClicked(breadcrumbItem.item, $event)"
-                    >
+                    <a fd-menu-interactive (click)="itemClicked(breadcrumbItem.item, $event)">
                         <ng-container *ngIf="breadcrumbItem?.item.breadcrumbLink; else portalContent">
                             <ng-container *ngIf="breadcrumbItem.item.breadcrumbLink._prefixIconName">
                                 <fd-menu-addon

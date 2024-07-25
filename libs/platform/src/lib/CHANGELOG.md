@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.39](https://github.com/SAP/fundamental-ngx/compare/v0.43.38...v0.43.39) (2024-07-24)
+
+
+### Bug Fixes
+
+* **platform:** fdp-button role and title issues ([#12170](https://github.com/SAP/fundamental-ngx/issues/12170)) ([7fbcefa](https://github.com/SAP/fundamental-ngx/commit/7fbcefad2ec9c23123842114982505e2d6c00d2f))
+* **platform:** pageScroll/virtualScroll lag, and bug where new page of data would not be fetched after scroll ([#12164](https://github.com/SAP/fundamental-ngx/issues/12164)) ([b289f33](https://github.com/SAP/fundamental-ngx/commit/b289f33b279b3f61debad836cf9b5a32953f21eb))
+* remove bad translation on platform VHD ([#12167](https://github.com/SAP/fundamental-ngx/issues/12167)) ([3161b81](https://github.com/SAP/fundamental-ngx/commit/3161b81376a44afbedadd2e2a5e5969eb7d69051))
+
+
+
+
+
 ## [0.43.38](https://github.com/SAP/fundamental-ngx/compare/v0.43.37...v0.43.38) (2024-07-19)
 
 
