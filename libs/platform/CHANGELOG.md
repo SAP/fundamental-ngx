@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.8...v0.51.2-rc.9) (2024-07-25)
+
+
+### Bug Fixes
+
+* **platform:** resolve filter reset related issue ([#12178](https://github.com/SAP/fundamental-ngx/issues/12178)) ([e73a89e](https://github.com/SAP/fundamental-ngx/commit/e73a89ec3102886e0b727a9c22dac7e99d5c91db))
+
+
+
+
+
 ## [0.51.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.7...v0.51.2-rc.8) (2024-07-24)
 
 
