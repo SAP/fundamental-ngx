@@ -1089,7 +1089,6 @@ export class TableComponent<T = any>
 
         this._tableService.freezeTo(columnName, end);
         this.recalculateTableColumnWidth();
-        this._calculateLastFreezableColumn();
     }
 
     /** Unfreeze column */

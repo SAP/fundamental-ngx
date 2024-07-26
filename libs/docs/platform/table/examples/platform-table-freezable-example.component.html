@@ -17,15 +17,14 @@
         <fdp-column name="description" [freezable]="true" key="description" label="Description" width="200px">
         </fdp-column>
 
-        <fdp-column name="price" [freezable]="true" key="price.value" label="Price" align="end" width="100px">
+        <fdp-column name="status" key="status" label="Status" align="center" width="200px"> </fdp-column>
+
+        <fdp-column name="price" key="price.value" label="Price" align="end" width="100px"> </fdp-column>
+
+        <fdp-column name="date" [endFreezable]="true" key="date.year" label="Date" align="end" width="100px">
         </fdp-column>
 
-        <fdp-column name="status" [freezable]="true" key="status" label="Status" align="center" width="200px">
-        </fdp-column>
-
-        <fdp-column name="date" [freezable]="true" key="date.year" label="Date" align="end" width="100px"> </fdp-column>
-
-        <fdp-column name="verified" [freezable]="true" key="verified" label="Verified" align="end" width="100px">
+        <fdp-column name="verified" [endFreezable]="true" key="verified" label="Verified" align="end" width="100px">
         </fdp-column>
     </fdp-table>
 </div>
