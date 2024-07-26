@@ -355,6 +355,9 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
             tableScrollMockContainer.scrollBy({ top: count * this.rowHeight });
         }
         this._lastMockScrollPosition = tableScrollMockContainer.scrollTop;
+        if (this._table.pageScrolling) {
+            this._table.tableScrolled.emit(this._lastMockScrollPosition);
+        }
     }
 
     /**

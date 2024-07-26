@@ -2118,12 +2118,15 @@ export class TableComponent<T = any>
                 .scrolled()
                 .pipe(filter(() => this.pageScrolling))
                 .subscribe((scrollable) => {
-                    const scrollTop = scrollable.getScrollTop();
+                    // this block is handled in the virtual scroll directive for scrollWholeRows
+                    if (!this._virtualScrollDirective?.scrollWholeRows) {
+                        const scrollTop = scrollable.getScrollTop();
 
-                    this.tableScrolled.emit(scrollTop);
+                        this.tableScrolled.emit(scrollTop);
 
-                    // Instead of having two places to record this position, we could just subscribe once.
-                    this.getTableState().scrollTopPosition = scrollTop;
+                        // Instead of having two places to record this position, we could just subscribe once.
+                        this.getTableState().scrollTopPosition = scrollTop;
+                    }
                 })
         );
     }
