@@ -84,6 +84,27 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="multi" componentName="calendar"> Multi Calendar</fd-docs-section-title>
+<description>
+    This example demonstrates <strong>multi-date selection</strong> functionality. <br /><br />
+    You can select multiple individual dates on the calendar using multi-selection mode. This feature allows you to
+    select several non-contiguous dates or dates by clicking on each date across the calendar.
+    <br /><br />
+    Multi-date selection works in conjunction with <code>showWeekNumbers</code> inputs. When WeekCount numbers are
+    visible user can click on it and selection logic will mark relevant week row. Also user can click on week day and
+    selection logic will mark relevant column. <br /><br />
+    Multi-date selection works in conjunction with <code>disableFunction</code> and <code>blockFunction</code> inputs.
+    Dates that are disabled or blocked cannot be selected. Disabled dates are typically used for dates that should be
+    inaccessible, such as holidays or non-working days, while blocked dates are reserved or already booked. The calendar
+    will dynamically update based on the changes to these functions.
+</description>
+<component-example>
+    <fd-calendar-multi-example></fd-calendar-multi-example>
+</component-example>
+<code-example [exampleFiles]="calendarMultiSource"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="range" componentName="calendar"> Range Selection Calendar </fd-docs-section-title>
 <description>
     Allows the selection of a range of dates. Only the first and last days of the range are passed back.
@@ -159,7 +180,9 @@
 <separator></separator> -->
 
 <fd-docs-section-title id="reactiveForm" componentName="calendar"> Calendar in Reactive Form </fd-docs-section-title>
-<description>The Calendar component may also be used within Angular Reactive Forms.</description>
+<description
+    >The Calendar component with every type: single, multi and range may also be used within Angular Reactive Forms.
+</description>
 <component-example>
     <fd-calendar-form-example></fd-calendar-form-example>
 </component-example>
@@ -176,27 +199,3 @@
     <fd-calendar-disabled-navigation-buttons-example></fd-calendar-disabled-navigation-buttons-example>
 </component-example>
 <code-example [exampleFiles]="calendarDisabledNavigationButtons"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="multi" componentName="calendar"> Multi Calendar </fd-docs-section-title>
-<description>
-    This example demonstrates <strong>multi-date selection</strong> functionality. <br /><br />
-    You can select multiple individual dates or ranges of dates on the calendar using multi-selection mode. This feature
-    allows you to select several non-contiguous dates or date ranges by clicking on each date across the calendar.
-    <br /><br />
-    The calendar leverages an interface called <code>CalendarDay</code>, which includes the property <code>date</code>.
-    To manage multi-date selections, you can create and modify an array of <code>CalendarDay</code> objects, each
-    representing a date you want to select. Multi selection works with reactive and template forms. <br /><br />
-    Multi-date selection works in conjunction with <code>showWeekNumbers</code> inputs. When WeekCount numbers are
-    visible user can click on it and selection logic will mark relevant week row. Also user can click on week day and
-    selection logic will mark relevant column Multi-date selection works in conjunction with
-    <code>disableFunction</code> and <code>blockFunction</code> inputs. Dates that are disabled or blocked cannot be
-    selected. Disabled dates are typically used for dates that should be inaccessible, such as holidays or non-working
-    days, while blocked dates are reserved or already booked. The calendar will dynamically update based on the changes
-    to these functions.
-</description>
-<component-example>
-    <fd-calendar-multi-example></fd-calendar-multi-example>
-</component-example>
-<code-example [exampleFiles]="calendarMultiSource"></code-example>

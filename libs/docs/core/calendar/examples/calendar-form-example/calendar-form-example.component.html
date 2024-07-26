@@ -10,6 +10,24 @@
         <button fd-button label="Set Invalid Single Date" (click)="setInvalid()"></button>
     </div>
     <div fd-form-item>
+        <fd-calendar
+            calType="multi"
+            formControlName="multiDate"
+            [startingDayOfWeek]="1"
+            [showWeekNumbers]="true"
+        ></fd-calendar>
+        <small>
+            Touched: {{ customForm.controls.multiDate.touched }}<br />
+            Dirty: {{ customForm.controls.multiDate.dirty }}<br />
+            Valid: {{ customForm.controls.multiDate.valid }}<br />
+            Selected Dates:<br />
+            @for (date of customForm.controls.multiDate.value; track date) {
+                {{ date.toDateString() || 'null' }}<br />
+            }
+        </small>
+        <button fd-button label="Set Invalid Multi Date" (click)="setMultiInvalid()"></button>
+    </div>
+    <div fd-form-item>
         <fd-calendar calType="range" formControlName="dateRange" [startingDayOfWeek]="1"></fd-calendar>
         <small>
             Touched: {{ customForm.controls.dateRange.touched }}<br />

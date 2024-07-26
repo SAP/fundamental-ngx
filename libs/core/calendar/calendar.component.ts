@@ -713,6 +713,11 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
                 year: this._dateTimeAdapter.getYear(this.selectedDate),
                 month: this._dateTimeAdapter.getMonth(this.selectedDate)
             };
+        } else if (this.selectedMultiDate?.length > 0) {
+            this._currentlyDisplayed = {
+                year: this._dateTimeAdapter.getYear(this.selectedMultiDate[0]),
+                month: this._dateTimeAdapter.getMonth(this.selectedMultiDate[0])
+            };
         } else if (this.selectedRangeDate && this.selectedRangeDate.start) {
             this._currentlyDisplayed = {
                 year: this._dateTimeAdapter.getYear(this.selectedRangeDate.start),

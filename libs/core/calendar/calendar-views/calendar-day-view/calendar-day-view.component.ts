@@ -218,6 +218,13 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      */
     _weeks: string[];
 
+    /**
+     * @hidden
+     * Array of CSS classes for each week day in calendar header, computed based on whether the calendar type is 'multi'
+     * and the date is not disabled.
+     */
+    _weekHeaderClasses: string[] = [];
+
     /** @hidden */
     private _selectedDate: Nullable<D>;
 
@@ -273,6 +280,8 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         this._refreshShortWeekDays();
 
         this._buildDayViewGrid();
+
+        this._computeWeekHeaderClasses();
 
         this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._refreshShortWeekDays();
@@ -1098,24 +1107,41 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * @param selectedWeek Array of CalendarDay objects representing the week to be toggled.
      */
     private toggleWeekSelection(selectedWeek: Array<CalendarDay<D>>): void {
-        const isCurrentWeekSelected = selectedWeek.every((day) => day.selected);
+        const selectableDays = selectedWeek.filter((day) => !day.disabled);
+        const isCurrentWeekSelected = selectableDays.every((day) => day.selected);
 
         if (!isCurrentWeekSelected) {
             selectedWeek.forEach((day) => {
-                day.selected = true;
-                if (!this._selectedMultiDate.some((selectedDate) => this._isSameDay(selectedDate, day.date))) {
-                    this._selectedMultiDate.push(day.date);
+                if (!day.disabled) {
+                    day.selected = true;
+                    if (!this._selectedMultiDate.some((selectedDate) => this._isSameDay(selectedDate, day.date))) {
+                        this._selectedMultiDate.push(day.date);
+                    }
                 }
             });
         } else {
             selectedWeek.forEach((day) => {
-                day.selected = false;
-                this._selectedMultiDate = this._selectedMultiDate.filter(
-                    (selectedDate) => !this._isSameDay(selectedDate, day.date)
-                );
+                if (!day.disabled) {
+                    day.selected = false;
+                    this._selectedMultiDate = this._selectedMultiDate.filter(
+                        (selectedDate) => !this._isSameDay(selectedDate, day.date)
+                    );
+                }
             });
         }
 
         this.selectedMultiDateChange.emit(this._selectedMultiDate);
+    }
+
+    /**
+     * @hidden
+     * Computes the CSS class for each week day in calendar header based on whether the calendar type is 'multi'
+     * and the date is not disabled.
+     * Stores the computed classes in the weekHeaderClasses array.
+     */
+    private _computeWeekHeaderClasses(): void {
+        this._weekHeaderClasses = this._calendarDayList.map((day, i) =>
+            this.calType === 'multi' && this.disableFunction && !this.disableFunction(day.date) ? 'event-enabled' : ''
+        );
     }
 }
