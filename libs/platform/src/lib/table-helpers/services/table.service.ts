@@ -282,6 +282,7 @@ export class TableService {
 
     /** Freeze table to column */
     freezeTo(columnName: string | null, end?: boolean): void {
+        console.log('freezeTo: ' + columnName + ', end: ' + end);
         const prevState = this.getTableState();
 
         if (!end) {
