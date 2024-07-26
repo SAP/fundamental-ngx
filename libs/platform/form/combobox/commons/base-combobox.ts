@@ -250,7 +250,7 @@ export abstract class BaseCombobox
     }
 
     /** @hidden List of matched suggestions */
-    _suggestions: OptionItem[];
+    _suggestions: OptionItem[] = [];
 
     /** @hidden Max width of list container */
     maxWidth?: number;

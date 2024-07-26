@@ -272,7 +272,6 @@ export default {
         userTitle: '用户'
     },
     platformVHD: {
-        selectionBarLabel: '已选和条件项目',
         selectedAndConditionLabel: '所选项目和条件',
         footerClearSelectedTitle: '清除所选项目',
         footerClearSelectedAriaLabel: '清除所选项目',

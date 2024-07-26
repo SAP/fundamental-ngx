@@ -275,7 +275,6 @@ export default {
         userTitle: 'Utente'
     },
     platformVHD: {
-        selectionBarLabel: 'Voci condizione e selezionate',
         selectedAndConditionLabel: 'Voci e condizioni selezionate',
         footerClearSelectedTitle: 'cancella voci selezionate',
         footerClearSelectedAriaLabel: 'cancella voci selezionate',

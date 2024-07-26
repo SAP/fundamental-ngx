@@ -275,7 +275,6 @@ export default {
         userTitle: 'Përdoruesi'
     },
     platformVHD: {
-        selectionBarLabel: 'Artikujt e zgjedhur dhe të gjendjes',
         selectedAndConditionLabel: 'Artikujt e zgjedhur dhe të gjendjes',
         footerClearSelectedTitle: 'pastro artikujt e zgjedhur',
         footerClearSelectedAriaLabel: 'pastro artikujt e zgjedhur',

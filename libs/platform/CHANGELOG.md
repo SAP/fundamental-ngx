@@ -3,6 +3,66 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.8...v0.51.2-rc.9) (2024-07-25)
+
+
+### Bug Fixes
+
+* **platform:** resolve filter reset related issue ([#12178](https://github.com/SAP/fundamental-ngx/issues/12178)) ([e73a89e](https://github.com/SAP/fundamental-ngx/commit/e73a89ec3102886e0b727a9c22dac7e99d5c91db))
+
+
+
+
+
+## [0.51.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.7...v0.51.2-rc.8) (2024-07-24)
+
+
+### Bug Fixes
+
+* **platform:** fdp-button role and title issues ([#12171](https://github.com/SAP/fundamental-ngx/issues/12171)) ([179f338](https://github.com/SAP/fundamental-ngx/commit/179f338d68374fcb0543374e4ea3587acab9c948))
+
+
+
+
+
+## [0.51.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.6...v0.51.2-rc.7) (2024-07-24)
+
+
+### Bug Fixes
+
+* **platform:** Combobox with asyc dataSource ([#12162](https://github.com/SAP/fundamental-ngx/issues/12162)) ([3bdd4ce](https://github.com/SAP/fundamental-ngx/commit/3bdd4ce78a51bc71eaf2f104d76235a5f37e4c82)), closes [#12036](https://github.com/SAP/fundamental-ngx/issues/12036)
+
+
+
+
+
+## [0.51.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.5...v0.51.2-rc.6) (2024-07-24)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.51.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.4...v0.51.2-rc.5) (2024-07-23)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.51.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.3...v0.51.2-rc.4) (2024-07-23)
+
+
+### Bug Fixes
+
+* remove bad translation on platform VHD ([#12168](https://github.com/SAP/fundamental-ngx/issues/12168)) ([f7c1119](https://github.com/SAP/fundamental-ngx/commit/f7c1119eec7f1adac8e706d750ea83de7542c839))
+
+
+
+
+
 ## [0.51.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.2...v0.51.2-rc.3) (2024-07-22)
 
 **Note:** Version bump only for package @fundamental-ngx/platform

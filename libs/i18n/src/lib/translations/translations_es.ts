@@ -275,7 +275,6 @@ export default {
         userTitle: 'Usuario'
     },
     platformVHD: {
-        selectionBarLabel: 'Elementos y condiciones seleccionados',
         selectedAndConditionLabel: 'Elementos seleccionados y condiciones',
         footerClearSelectedTitle: 'borrar elementos seleccionados',
         footerClearSelectedAriaLabel: 'borrar elementos seleccionados',

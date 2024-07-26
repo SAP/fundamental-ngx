@@ -43,4 +43,8 @@ export class BreadcrumbRouterLinkExampleComponent {
     standalone: true,
     imports: [BreadcrumbModule, LinkComponent]
 })
-export class BreadcrumbHrefExampleComponent {}
+export class BreadcrumbHrefExampleComponent {
+    onClick(value: string): void {
+        window.alert(value);
+    }
+}

@@ -274,7 +274,6 @@ export default {
         userTitle: 'Потребител'
     },
     platformVHD: {
-        selectionBarLabel: 'Избрани позиции и позиции на условия',
         selectedAndConditionLabel: 'Избрани позиции и условия',
         footerClearSelectedTitle: 'изчистване на избраните позиции',
         footerClearSelectedAriaLabel: 'изчистване на избраните позиции',

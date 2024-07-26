@@ -274,7 +274,6 @@ export default {
         userTitle: 'Användare'
     },
     platformVHD: {
-        selectionBarLabel: 'Valda artiklar och villkorsposter',
         selectedAndConditionLabel: 'Valda artiklar och villkor',
         footerClearSelectedTitle: 'rensa valda artiklar',
         footerClearSelectedAriaLabel: 'rensa valda artiklar',
