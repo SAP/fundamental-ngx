@@ -292,10 +292,10 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/language-service@18.0.3":
-  version "18.0.3"
-  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-18.0.3.tgz#f95567843b28facc62f0ea6125c96c186e053cdc"
-  integrity sha512-urENnMjhSO4Jia7CnbchqN236dOIU6TC3CazwsQoj1Odch9x+iSFkx9Y0jXsiR5r/suK4uqKpK5N8MJ1PxDG1g==
+"@angular/language-service@18.1.2":
+  version "18.1.2"
+  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-18.1.2.tgz#4a80219384f8da528a44d7da30781284b4dc6262"
+  integrity sha512-2siwL+SFeAtNLjumFNmiHY1JI9/N30L2NCk/Z3ytfytZwMICunXOlMrnNare3YD9l097e4pWdniM7z8v04r2Nw==
 
 "@angular/platform-browser-dynamic@18.0.3":
   version "18.0.3"
