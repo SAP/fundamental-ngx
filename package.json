@@ -94,7 +94,7 @@
     "@nx/workspace": "19.2.3",
     "@sap-ui/common-css": "0.37.3",
     "@schematics/angular": "18.0.4",
-    "@swc-node/register": "1.9.2",
+    "@swc-node/register": "1.10.9",
     "@swc/cli": "0.3.12",
     "@swc/core": "1.5.7",
     "@types/google.visualization": "0.0.71",
