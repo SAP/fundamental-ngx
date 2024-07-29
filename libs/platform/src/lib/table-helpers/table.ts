@@ -207,4 +207,7 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
 
     /** Event fired when cancel button pressed. */
     readonly cancel: EventEmitter<void>;
+
+    /** Event fired when table is scrolled while using pageScrolling. */
+    readonly tableScrolled: EventEmitter<number>;
 }
