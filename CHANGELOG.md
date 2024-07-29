@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.11...v0.51.2-rc.12) (2024-07-29)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.51.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.10...v0.51.2-rc.11) (2024-07-29)
+
+
+### Bug Fixes
+
+* **platform:** table freezing incorrect columns, and better explanation of how it works in the docs ([#12184](https://github.com/SAP/fundamental-ngx/issues/12184)) ([6ba0992](https://github.com/SAP/fundamental-ngx/commit/6ba0992839ff5072d3e0289ed8b9499400983d9f))
+
+
+
+
+
+## [0.51.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.9...v0.51.2-rc.10) (2024-07-29)
+
+
+### Bug Fixes
+
+* **core:** remove role dialog on the host el of Message Box ([#12185](https://github.com/SAP/fundamental-ngx/issues/12185)) ([d9fa1c8](https://github.com/SAP/fundamental-ngx/commit/d9fa1c8ce560358fdeaef86e03be87d111b0fa28))
+
+
+
+
+
 ## [0.51.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.8...v0.51.2-rc.9) (2024-07-25)
 
 

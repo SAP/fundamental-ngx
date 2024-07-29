@@ -34,8 +34,7 @@ import { MessageBoxRef } from './utils/message-box-ref.class';
     templateUrl: './message-box.component.html',
     styleUrl: './message-box.component.scss',
     host: {
-        tabindex: '-1',
-        role: 'dialog'
+        tabindex: '-1'
     },
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: MessageBoxHost, useExisting: MessageBoxComponent }],

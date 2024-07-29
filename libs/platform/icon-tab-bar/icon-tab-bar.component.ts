@@ -305,6 +305,7 @@ export class IconTabBarComponent implements OnInit, TabList {
             label: tab.label(),
             color: tab.color(),
             active: tab.active(),
+            badge: tab.badge(),
             counter: tab.counter(),
             renderer: tab.renderer(),
             id: tab.id(),
