@@ -1,6 +1,7 @@
 @use '@angular/cdk';
 @import 'fundamental-styles/dist/info-label';
 @import 'fundamental-styles/dist/form-layout-grid';
+@import '@angular/cdk/overlay-prebuilt';
 
 @include cdk.a11y-visually-hidden();
 
