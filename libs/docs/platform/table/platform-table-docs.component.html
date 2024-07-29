@@ -63,10 +63,22 @@
 <fd-docs-section-title id="freezable" componentName="table"> Column Freezing</fd-docs-section-title>
 <description>
     <p>Use <code>[freezeColumnsTo]="columnName"</code> to freeze columns up to and including.</p>
+    <p>Use <code>[freezeEndColumnsTo]="columnName"</code> to freeze columns from and to the end of the table.</p>
 
     <p>
-        When using this features it's very important to set the <code>width</code> for the every column as table cells
-        width won't be calculated properly.
+        Designated freezable columns with the <code>[freezable]</code> input, and end-freezable columns with the
+        <code>[endFreezable]</code> input.
+    </p>
+
+    <p>
+        When using this feature, it's very important to set the <code>width</code> for every column as table cell width
+        won't be calculated properly without it.
+    </p>
+
+    <p>
+        In the example below, "Name" and "Description" are freezable to the start of the table, and "Date" and
+        "Verified" are freezable to the end of the table. The frozen status of these columns can be set or unset by
+        clicking the header cell. The "Price" and "Status" columns cannot be frozen.
     </p>
 </description>
 <component-example>
