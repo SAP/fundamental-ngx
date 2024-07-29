@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.10...v0.51.2-rc.11) (2024-07-29)
+
+
+### Bug Fixes
+
+* **platform:** table freezing incorrect columns, and better explanation of how it works in the docs ([#12184](https://github.com/SAP/fundamental-ngx/issues/12184)) ([6ba0992](https://github.com/SAP/fundamental-ngx/commit/6ba0992839ff5072d3e0289ed8b9499400983d9f))
+
+
+
+
+
 ## [0.51.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.9...v0.51.2-rc.10) (2024-07-29)
 
 
