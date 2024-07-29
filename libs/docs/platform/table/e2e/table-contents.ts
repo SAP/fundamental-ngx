@@ -10,8 +10,8 @@ export const tableCellArr = [
 export const freezeTableCellArr = [
     '10 Portable DVD player',
     'diam neque vestibulum eget vulputate',
-    '66.04',
     'Stocked on demand',
+    '66.04',
     '2020',
     'true'
 ];
