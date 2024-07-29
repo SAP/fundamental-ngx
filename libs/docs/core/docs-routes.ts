@@ -413,6 +413,10 @@ const componentRoutes = [
     {
         path: 'avatar-group',
         loadChildren: () => import('@fundamental-ngx/docs/core/avatar-group').then(configureLibRoutes)
+    },
+    {
+        path: 'rtl-service',
+        loadChildren: () => import('@fundamental-ngx/docs/core/rtl-service').then(configureLibRoutes)
     }
 ];
 export const ROUTES: Routes = [

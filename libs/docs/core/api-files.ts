@@ -420,5 +420,6 @@ export const API_FILES = {
         'MultiComboboxDataSourceParser',
         'FdMultiComboBoxDataSource'
     ],
-    genericTag: ['GenericTagComponent']
+    genericTag: ['GenericTagComponent'],
+    rtlService: ['RtlService']
 };

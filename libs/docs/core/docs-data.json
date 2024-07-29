@@ -406,6 +406,10 @@
         {
             "url": "core/truncate",
             "name": "Truncate"
+        },
+        {
+            "url": "core/rtl-service",
+            "name": "RTL Service"
         }
     ],
     "adapters": [
