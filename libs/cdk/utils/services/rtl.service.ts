@@ -2,6 +2,7 @@ import { Inject, Injectable, InjectionToken, Optional, Signal } from '@angular/c
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
 
+/** Default RTL languages */
 const DefaultRtlLanguages = ['ar', 'arc', 'dv', 'fa', 'ha', 'he', 'khw', 'ks', 'ku', 'ps', 'ur', 'yi'];
 export const RTL_LANGUAGE = new InjectionToken<string[]>('RtlLanguage');
 

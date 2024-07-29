@@ -55,6 +55,10 @@
         {
             "url": "cdk/tabbable",
             "name": "Tabbable element"
+        },
+        {
+            "url": "cdk/rtl-service",
+            "name": "RTL Service"
         }
     ]
 }
