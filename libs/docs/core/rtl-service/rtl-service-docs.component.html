@@ -14,7 +14,6 @@
 </fd-docs-section-title>
 
 <description> The service comes with a predefined set of RTL languages. These are: </description>
-
 <ul>
     <li>Arabic (ar)</li>
     <li>Aramaic (arc)</li>
@@ -29,18 +28,10 @@
     <li>Urdu (ur)</li>
     <li>Yiddish (yi)</li>
 </ul>
-<!--<description>-->
-<!--    To use the <code>RtlService</code>, inject it into your component or service:-->
-<!--    <br>-->
-<!--    <code>-->
-<!--        constructor(private rtlService: RtlService)-->
-<!--    </code>-->
-<!--    <br>-->
-<!--    Customizing RTL Languages-->
-<!--    <br>-->
-<!--    By default, the service checks for a list of common RTL languages in the user's browser language. You can customize-->
-<!--    this list by providing a new list of languages through the RTL_LANGUAGE injection token:-->
-<!--</description>-->
+<description>
+    You can override this list by providing a custom list view the <code>RTL_LANGUAGE</code> injection token.
+</description>
+
 <component-example>
     <fd-rtl-service-basic-example />
 </component-example>

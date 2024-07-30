@@ -7,9 +7,10 @@ import {
     ExampleFile,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import { RtlServiceBasicExampleComponent } from './exmaples/rtl-service-basic-example.component';
+import { RtlServiceBasicExampleComponent } from './examples/rtl-service-basic-example/rtl-service-basic-example.component';
 
-const rtlServiceBasicExample = 'rtl-service-basic-example.component.ts';
+const rtlServiceBasicExampleTs = 'rtl-service-basic-example/rtl-service-basic-example.component.ts';
+const rtlServiceBasicExampleHtml = 'rtl-service-basic-example/rtl-service-basic-example.component.html';
 
 @Component({
     selector: 'fd-rtl-service-docs',
@@ -26,8 +27,13 @@ const rtlServiceBasicExample = 'rtl-service-basic-example.component.ts';
 export class RtlServiceDocsComponent {
     rtlService: ExampleFile[] = [
         {
+            language: 'html',
+            code: getAssetFromModuleAssets(rtlServiceBasicExampleHtml),
+            fileName: 'rtl-service-basic-example'
+        },
+        {
             language: 'typescript',
-            code: getAssetFromModuleAssets(rtlServiceBasicExample),
+            code: getAssetFromModuleAssets(rtlServiceBasicExampleTs),
             fileName: 'rtl-service-basic-example',
             component: 'RtlServiceBasicExampleComponent'
         }

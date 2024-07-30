@@ -4,45 +4,46 @@ import { ButtonComponent, FormLabelComponent, RtlService, SwitchComponent, TextC
 
 @Component({
     selector: 'fd-rtl-service-basic-example',
-    template: `<div id="exampleTextContainer">
-        <h3>Is <code>RTL</code>: {{ isRtl() }}</h3>
-        <h3>Whitespaces disabled</h3>
-        <fd-text [text]="text"></fd-text>
-
-        <h3>Whitespaces enabled</h3>
-        <fd-text id="example-text" [text]="text" [whitespaces]="true"></fd-text>
-
-        <label fd-form-label> Simulate RTL </label>
-        <fd-switch [(ngModel)]="isChecked" (ngModelChange)="onChange()"></fd-switch>
-    </div> `,
+    templateUrl: 'rtl-service-basic-example.component.html',
     imports: [TextComponent, ButtonComponent, FormLabelComponent, SwitchComponent, FormsModule],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
 export class RtlServiceBasicExampleComponent implements OnInit {
+    // Injecting the RtlService
     private rtlService = inject(RtlService);
+
+    // Signal to track RTL state
     isRtl: Signal<boolean>;
 
-    text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-aliquip ex ea commodo consequat.
+    text = `
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+    aliquip ex ea commodo consequat.
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-deserunt mollit anim id est laborum.
-`;
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+    deserunt mollit anim id est laborum.`;
 
+    // Optional properties for additional functionality
     label: string;
     className: string;
     isChecked = false;
 
     ngOnInit() {
+        // Initialize the RTL signal
         this.isRtl = this.rtlService.rtlSignal;
     }
 
+    // Method to handle changes in RTL state
     onChange(): void {
+        // Determine the direction value based on isChecked
         const dirValue = this.isChecked ? 'rtl' : 'ltr';
+
+        // Update the RTL state in the service
         this.rtlService.rtl.next(this.isChecked);
+
+        // Update the direction of the text container
         const labelElement = document.getElementById('exampleTextContainer');
         labelElement && (labelElement.dir = dirValue);
     }
