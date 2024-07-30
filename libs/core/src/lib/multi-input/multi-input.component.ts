@@ -730,8 +730,8 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         const isExist = this._selectFirstFiltered(searchTerm);
         if (!isExist && this.allowNewTokens && this.newTokenValidateFn(this._searchTermCtrl.value ?? '')) {
             const newToken = this.newTokenParseFn(this._searchTermCtrl.value ?? '');
-            this._addNewTokenToDropDownValues(newToken);
-            this._handleSelect(true, newToken);
+            const newOption = this._addNewTokenToDropDownValues(newToken);
+            this._handleSelect(true, newOption);
             this._searchTermCtrl.setValue('');
             this.open = false;
         }
@@ -792,10 +792,11 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     }
 
     /** @hidden */
-    private _addNewTokenToDropDownValues(newToken): void {
+    private _addNewTokenToDropDownValues(newToken: any): OptionItem {
         this.dropdownValues.push(newToken);
         const newOption = this._getOptionItem(newToken);
         this.optionItems$.next([...this._optionItems, newOption]);
+        return newOption;
     }
 
     /** @hidden */
