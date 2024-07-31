@@ -116,6 +116,9 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
             allowDisablingSorting: this.allowDisablingSorting
         };
 
+        // dismiss any open dialog, before opening a new one
+        this._dialogService.dismissAll();
+
         const dialogRef = this._dialogService.open(
             SortingComponent,
             {
@@ -144,6 +147,9 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
             filterBy: state?.filterBy
         };
 
+        // dismiss any open dialog, before opening a new one
+        this._dialogService.dismissAll();
+
         const dialogRef = this._dialogService.open(
             FiltersComponent,
             {
@@ -169,6 +175,9 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
             direction: state.groupBy?.[0]?.direction,
             field: state.groupBy?.[0]?.field
         };
+
+        // dismiss any open dialog, before opening a new one
+        this._dialogService.dismissAll();
 
         const dialogRef = this._dialogService.open(
             GroupingComponent,
