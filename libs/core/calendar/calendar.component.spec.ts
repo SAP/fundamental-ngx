@@ -96,7 +96,7 @@ describe('CalendarComponent', () => {
         jest.spyOn(component.isValidDateChange, 'emit');
         const date = new FdDate(2000, 10, 10);
         component.writeValue(date);
-        expect(component.selectedDate).toEqual(date);
+        expect(component.selectedDate()).toEqual(date);
         expect(component._currentlyDisplayed.month).toBe(date.month);
         expect(component._currentlyDisplayed.year).toBe(date.year);
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(true);
@@ -108,7 +108,7 @@ describe('CalendarComponent', () => {
         component.writeValue(invalidDate);
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
         expect(component.isModelValid()).toBe(false);
-        expect(component.selectedDate).toBe(invalidDate);
+        expect(component.selectedDate()).toBe(invalidDate);
     });
 
     it('Should handle write value for multiple mode when correct', () => {
@@ -118,9 +118,9 @@ describe('CalendarComponent', () => {
             new FdDate(2000, 10, 11),
             new FdDate(2000, 10, 12),
         ];
-        component.calType = 'multi';
+        component.calType.set('multi');
         component.writeValue(date);
-        expect(component.selectedMultiDate).toEqual(date);
+        expect(component.selectedMultiDate()).toEqual(date);
         expect(component._currentlyDisplayed.month).toBe(date[0].month);
         expect(component._currentlyDisplayed.year).toBe(date[0].year);
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(true);
@@ -129,20 +129,20 @@ describe('CalendarComponent', () => {
     it('Should handle write value for multiple mode when not correct', () => {
         jest.spyOn(component.isValidDateChange, 'emit');
         const invalidDate = [{}] as any;
-        component.calType = 'multi';
+        component.calType.set('multi');
         component.writeValue(invalidDate);
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
         expect(component.isModelValid()).toBe(false);
-        expect(component.selectedMultiDate).toBe(invalidDate);
+        expect(component.selectedMultiDate()).toBe(invalidDate);
     });
 
     it('Should handle write value for range mode when correct', () => {
         jest.spyOn(component.isValidDateChange, 'emit');
         const date1 = new FdDate(2000, 10, 10);
         const date2 = new FdDate(2012, 10, 10);
-        component.calType = 'range';
+        component.calType.set('range');
         component.writeValue({ start: date1, end: date2 });
-        expect(component.selectedRangeDate).toEqual({ start: date1, end: date2 });
+        expect(component.selectedRangeDate()).toEqual({ start: date1, end: date2 });
         expect(component._currentlyDisplayed.month).toBe(date1.month);
         expect(component._currentlyDisplayed.year).toBe(date1.year);
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(true);
@@ -152,72 +152,72 @@ describe('CalendarComponent', () => {
         jest.spyOn(component.isValidDateChange, 'emit');
         const validDate = new FdDate(2000, 10, 10);
         const invalidDate = {} as any;
-        component.calType = 'range';
+        component.calType.set('range');
         component.writeValue({ start: invalidDate, end: validDate });
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
-        expect(component.selectedRangeDate.start).toBe(invalidDate);
+        expect(component.selectedRangeDate()?.start).toBe(invalidDate);
     });
 
     it('Should handle write value for range mode when end date not correct', () => {
         jest.spyOn(component.isValidDateChange, 'emit');
         const validDate = new FdDate(2000, 10, 10);
         const invalidDate = {} as any;
-        component.calType = 'range';
+        component.calType.set('range');
         component.writeValue({ start: validDate, end: invalidDate });
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
-        expect(component.selectedRangeDate.end).toBe(invalidDate);
+        expect(component.selectedRangeDate()?.end).toBe(invalidDate);
     });
 
     it('Should handle write value for range mode when both dates not correct', () => {
         jest.spyOn(component.isValidDateChange, 'emit');
         const invalidDate: any = {};
         const invalidDate2: any = {};
-        component.calType = 'range';
+        component.calType.set('range');
         component.writeValue({ start: invalidDate, end: invalidDate2 });
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
         expect(component.isModelValid()).toBe(false);
-        expect(component.selectedRangeDate.start).toBe(invalidDate);
-        expect(component.selectedRangeDate.end).toBe(invalidDate2);
+        expect(component.selectedRangeDate()?.start).toBe(invalidDate);
+        expect(component.selectedRangeDate()?.end).toBe(invalidDate2);
     });
 
     it('Should change to next month, when on day view an next arrow click', () => {
         component._currentlyDisplayed = { month: 10, year: 2000 };
-        component.activeView = 'day';
+        component.activeView.set('day');
         component.handleNextArrowClick();
         expect(component._currentlyDisplayed).toEqual({ month: 11, year: 2000 });
     });
 
     it('Should change to previous month, when on day view an previous arrow click', () => {
         component._currentlyDisplayed = { month: 10, year: 2000 };
-        component.activeView = 'day';
+        component.activeView.set('day');
         component.handlePreviousArrowClick();
         expect(component._currentlyDisplayed).toEqual({ month: 9, year: 2000 });
     });
 
     it('Should change to next year, when on month view an next arrow click', () => {
         component._currentlyDisplayed = { month: 10, year: 2000 };
-        component.activeView = 'month';
+        component.activeView.set('month');
         component.handleNextArrowClick();
         expect(component._currentlyDisplayed).toEqual({ month: 10, year: 2001 });
     });
 
     it('Should change to previous month, when on month view an previous arrow click', () => {
         component._currentlyDisplayed = { month: 10, year: 2000 };
-        component.activeView = 'month';
+        component.activeView.set('month');
         component.handlePreviousArrowClick();
         expect(component._currentlyDisplayed).toEqual({ month: 10, year: 1999 });
     });
 
     it('Should call next year list function, when on year view an next arrow click', () => {
         jest.spyOn(component, 'displayNextYearList').mockImplementation(() => {});
-        component.activeView = 'year';
+        component.activeView.set('year');
         component.handleNextArrowClick();
         expect(component.displayNextYearList).toHaveBeenCalled();
     });
 
     it('Should call previous year list function, when on year view an next arrow click', () => {
         jest.spyOn(component, 'displayPreviousYearList').mockImplementation(() => {});
-        component.activeView = 'year';
+        component.activeView.set('year');
         component.handlePreviousArrowClick();
         expect(component.displayPreviousYearList).toHaveBeenCalled();
     });

@@ -607,7 +607,7 @@ export class DatePickerComponent<D>
      * @hidden
      * Method that is triggered by events from calendar component, when there is selected single date changed
      */
-    handleSingleDateChange(date: D): void {
+    handleSingleDateChange(date: Nullable<D>): void {
         if (!date) {
             return;
         }
@@ -637,7 +637,10 @@ export class DatePickerComponent<D>
      * @hidden
      * Method that is triggered by events from calendar component, when there is selected range date changed
      */
-    handleRangeDateChange(dates: DateRange<D>): void {
+    handleRangeDateChange(dates: Nullable<DateRange<D>>): void {
+        if (!dates) {
+            return;
+        }
         const startChanged = !this._dateTimeAdapter.datesEqual(dates.start, this.selectedRangeDate.start);
         const endChanged = !this._dateTimeAdapter.datesEqual(dates.end, this.selectedRangeDate.end);
         if (dates && (startChanged || endChanged)) {

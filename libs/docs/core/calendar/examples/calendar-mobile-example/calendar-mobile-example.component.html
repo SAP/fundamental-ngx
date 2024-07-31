@@ -19,7 +19,7 @@
             <fd-button-bar
                 fdType="emphasized"
                 label="Ok"
-                (click)="dialog.close('Continue'); dateChanged(landscapeCalendar.selectedDate)"
+                (click)="dialog.close('Continue'); dateChanged(landscapeCalendar.selectedDate()!)"
             >
             </fd-button-bar>
         </fd-dialog-footer>
@@ -54,7 +54,7 @@
             <fd-button-bar
                 fdType="emphasized"
                 label="Ok"
-                (click)="dialog.close('Continue'); dateChanged(portraitCalendar.selectedDate)"
+                (click)="dialog.close('Continue'); dateChanged(portraitCalendar.selectedDate()!)"
             >
             </fd-button-bar>
         </fd-dialog-footer>
