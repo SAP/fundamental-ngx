@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, Signal } from '@angular/core';
+import { Direction } from '@angular/cdk/bidi';
+import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent, FormLabelComponent, RtlService, SwitchComponent, TextComponent } from '@fundamental-ngx/core';
 
@@ -9,13 +10,11 @@ import { ButtonComponent, FormLabelComponent, RtlService, SwitchComponent, TextC
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
-export class RtlServiceBasicExampleComponent implements OnInit {
+export class RtlServiceBasicExampleComponent {
     // Injecting the RtlService
-    private rtlService = inject(RtlService);
+    private _rtlService = inject(RtlService);
 
-    // Signal to track RTL state
-    isRtl: Signal<boolean>;
-
+    // Example text
     text = `
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
     dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -25,26 +24,27 @@ export class RtlServiceBasicExampleComponent implements OnInit {
     eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
     deserunt mollit anim id est laborum.`;
 
-    // Optional properties for additional functionality
-    label: string;
-    className: string;
-    isChecked = false;
+    // Signal to track RTL state
+    rtl$ = computed(() => !!this._rtlService?.rtlSignal());
+    // Signal to track a direction
+    _dir$ = computed<Direction>(() => {
+        return this.rtl$() ? 'rtl' : 'ltr';
+    });
 
-    ngOnInit() {
-        // Initialize the RTL signal
-        this.isRtl = this.rtlService.rtlSignal;
+    constructor() {
+        effect(() => {
+            this._updateTextContainerDirection();
+        });
     }
 
-    // Method to handle changes in RTL state
-    onChange(): void {
-        // Determine the direction value based on isChecked
-        const dirValue = this.isChecked ? 'rtl' : 'ltr';
-
-        // Update the RTL state in the service
-        this.rtlService.rtl.next(this.isChecked);
-
-        // Update the direction of the text container
+    // Method to update the direction of the text container
+    private _updateTextContainerDirection() {
         const labelElement = document.getElementById('exampleTextContainer');
-        labelElement && (labelElement.dir = dirValue);
+        labelElement && (labelElement.dir = this._dir$());
+    }
+    // Method to handle changes in RTL state
+    simulateRTL(): void {
+        this._rtlService.rtl.next(!this._rtlService.rtl.value);
+        this._updateTextContainerDirection();
     }
 }

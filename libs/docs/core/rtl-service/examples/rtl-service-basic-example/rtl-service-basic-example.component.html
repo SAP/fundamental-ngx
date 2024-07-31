@@ -1,11 +1,10 @@
 <div id="exampleTextContainer">
-    <h3>Is <code>RTL</code>: {{ isRtl() }}</h3>
+    <h3>Is <code>RTL</code>: {{ rtl$() }}</h3>
     <h3>Whitespaces disabled</h3>
     <fd-text [text]="text"></fd-text>
 
     <h3>Whitespaces enabled</h3>
     <fd-text id="example-text" [text]="text" [whitespaces]="true"></fd-text>
     <br /><br />
-    <label fd-form-label> Simulate RTL </label>
-    <fd-switch [(ngModel)]="isChecked" (ngModelChange)="onChange()"></fd-switch>
+    <button fd-button (click)="simulateRTL()">Simulate {{ rtl$() ? 'LTR' : 'RTL' }}</button>
 </div>
