@@ -1,19 +1,24 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { RouterLink } from '@angular/router';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     GridListItemOutputEvent,
     GridListItemType,
     GridListModule,
     GridListSelectionEvent
 } from '@fundamental-ngx/core/grid-list';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 
 interface GridListItem {
     id: number;
-    url: string;
+    title: string;
+    description: string;
     type?: GridListItemType;
-    toolbarText?: string;
-    selected?: boolean;
     counter?: number;
+    selected?: boolean;
+    toolbarText?: string;
 }
 
 @Component({
@@ -23,47 +28,53 @@ interface GridListItem {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [GridListModule]
+    imports: [GridListModule, RouterLink, AvatarComponent, LinkComponent, ButtonComponent]
 })
 export class GridListSingleSelectExampleComponent {
     list: GridListItem[] = [
         {
             id: 1,
             type: 'detailsAndActive',
-            url: 'https://picsum.photos/id/1000/300/200',
-            toolbarText: 'Custom Text'
+            title: 'Title 1',
+            description: 'Description 1'
         },
         {
             id: 2,
+            title: 'Title 2',
+            description: 'Description 2',
             selected: true,
             toolbarText: 'Custom Text',
-            type: 'detailsAndActive',
             counter: 8,
-            url: 'https://picsum.photos/id/1001/300/200'
+            type: 'detailsAndActive'
         },
         {
             id: 3,
-            type: 'active',
-            toolbarText: 'Custom Text',
-            url: 'https://picsum.photos/id/1002/300/200'
+            title: 'Title 3',
+            description: 'Description 3',
+            type: 'active'
         },
         {
             id: 4,
-            type: 'detail',
-            toolbarText: 'Custom Text',
-            url: 'https://picsum.photos/id/1003/300/200'
+            title: 'Title 4',
+            description: 'Description 4',
+            type: 'detail'
         },
         {
             id: 5,
-            url: 'https://picsum.photos/id/1004/300/200'
+            title: 'Title 5',
+            description: 'Description 5'
         },
         {
             id: 6,
-            url: 'https://picsum.photos/id/1005/300/200'
+            title: 'Title 6',
+            description: 'Description 6',
+            type: 'navigation',
+            counter: 5
         },
         {
             id: 7,
-            url: 'https://picsum.photos/id/1006/300/200'
+            title: 'Title 7',
+            description: 'Description 7'
         }
     ];
 

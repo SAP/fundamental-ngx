@@ -8,16 +8,20 @@
             [counter]="item.counter"
             [value]="item.id"
             [selected]="item.selected"
-            [noPadding]="true"
+            [title]="item.title"
+            [description]="item.description"
             (press)="press($event)"
             (detail)="detail($event)"
             (navigate)="navigate($event)"
         >
-            @if (item.toolbarText) {
-                <fd-grid-list-item-toolbar>{{ item.toolbarText }}</fd-grid-list-item-toolbar>
-            }
+            <fd-grid-list-item-toolbar>Custom Text</fd-grid-list-item-toolbar>
+
+            <fd-avatar fd-grid-list-item-image image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
             <ng-template fd-grid-list-item-body>
-                <img [src]="item.url" alt="Image" />
+                <p>781 Main Street</p>
+                <p>Anytown, SD 57401</p>
+                <p>USA</p>
+                <a [routerLink]="['./']" fd-link tabindex="0">john_li&#64;example.com</a>
             </ng-template>
         </fd-grid-list-item>
     }

@@ -1,4 +1,5 @@
 import { GridListAutoHeightExampleComponent } from './auto-height/grid-list-auto-height-example.component';
+import { GridListComboSelectComponent } from './combo-select/grid-list-combo-select-example.component';
 import { GridListDefaultExampleComponent } from './default/grid-list-example.component';
 import { GridListDeleteExampleComponent } from './delete/grid-list-delete-example.component';
 import { GridListDndExampleComponent } from './dnd/grid-list-dnd-example.component';
@@ -29,5 +30,6 @@ export const COMPONENTS = [
     GridListDndExampleComponent,
     GridListLayoutExampleComponent,
     GridListFocusingItemExampleComponent,
-    GridListAutoHeightExampleComponent
+    GridListAutoHeightExampleComponent,
+    GridListComboSelectComponent
 ];

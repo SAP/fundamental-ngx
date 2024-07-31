@@ -9,6 +9,7 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { GridListAutoHeightExampleComponent } from './examples/auto-height/grid-list-auto-height-example.component';
+import { GridListComboSelectComponent } from './examples/combo-select/grid-list-combo-select-example.component';
 import { GridListDefaultExampleComponent } from './examples/default/grid-list-example.component';
 import { GridListDeleteExampleComponent } from './examples/delete/grid-list-delete-example.component';
 import { GridListDndExampleComponent } from './examples/dnd/grid-list-dnd-example.component';
@@ -39,6 +40,8 @@ const gridListDndTs = 'dnd/grid-list-dnd-example.component.ts';
 const gridListLayoutTs = 'layout/grid-list-layout-example.component.ts';
 const gridListFocusingTs = 'focusing/grid-list-focusing-example.component.ts';
 const gridListAutoHeightTs = 'auto-height/grid-list-auto-height-example.component.ts';
+const gridListMultiSelectModeTs = 'multiple-selection-mode/grid-list-multiple-selection-mode-example.component.ts';
+const gridListComboSelectTs = 'combo-select/grid-list-combo-select-example.component.ts';
 
 const scssFileCode = 'grid-list.component.scss';
 
@@ -58,6 +61,8 @@ const gridListDndHtml = 'dnd/grid-list-dnd-example.component.html';
 const gridListLayoutHtml = 'layout/grid-list-layout-example.component.html';
 const gridListFocusingHtml = 'focusing/grid-list-focusing-example.component.html';
 const gridListAutoHeightHtml = 'auto-height/grid-list-auto-height-example.component.html';
+const gridListMultiSelectModeHtml = 'multiple-selection-mode/grid-list-multiple-selection-mode-example.component.html';
+const gridListComboSelectHtml = 'combo-select/grid-list-combo-select-example.component.html';
 
 @Component({
     selector: 'app-grid-list',
@@ -82,11 +87,27 @@ const gridListAutoHeightHtml = 'auto-height/grid-list-auto-height-example.compon
         GridListDndExampleComponent,
         GridListLayoutExampleComponent,
         GridListFocusingItemExampleComponent,
-        GridListAutoHeightExampleComponent
+        GridListAutoHeightExampleComponent,
+        GridListComboSelectComponent
     ]
 })
 export class GridListDocsComponent {
     private _scssFileCode = getAssetFromModuleAssets(scssFileCode);
+
+    gridListComboExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(gridListComboSelectHtml),
+            scssFileCode: this._scssFileCode,
+            fileName: 'grid-list-combo-select-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(gridListComboSelectTs),
+            fileName: 'grid-list-combo-select-example',
+            component: 'GridListComboSelectComponent'
+        }
+    ];
 
     gridListDefaultExample: ExampleFile[] = [
         {
@@ -326,4 +347,18 @@ export class GridListDocsComponent {
             scssFileCode: getAssetFromModuleAssets(scssFileCode)
         }
     ];
+
+    // currentSelection(): ExampleFile[] {
+    //     return this.selectionMode == 'None'
+    //         ? this.gridListDefaultExample
+    //         : this.selectionMode == 'MultiSelect'
+    //           ? this.gridListMultiSelectExample
+    //           : this.selectionMode == 'SingleSelect'
+    //             ? this.gridListSingleSelectExample
+    //             : this.selectionMode == 'SingleSelectLeft'
+    //               ? this.gridListSingleSelectLeftExample
+    //               : this.selectionMode == 'SingleSelectRight'
+    //                 ? this.gridListSingleSelectRightExample
+    //                 : this.gridListDeleteExample;
+    // }
 }

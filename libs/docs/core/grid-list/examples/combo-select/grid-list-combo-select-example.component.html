@@ -1,0 +1,241 @@
+<div>
+    <fd-segmented-button [(ngModel)]="selectionMode">
+        <button fd-button fdkFocusableItem label="None" value="None"></button>
+        <button fd-button fdkFocusableItem label="MultiSelect" value="MultiSelect"></button>
+        <button fd-button fdkFocusableItem label="SingleSelect" value="SingleSelect"></button>
+        <button fd-button fdkFocusableItem label="SingleSelectLeft" value="SingleSelectLeft"></button>
+        <button fd-button fdkFocusableItem label="SingleSelectRight" value="SingleSelectRight"></button>
+        <button fd-button fdkFocusableItem label="Delete" value="Delete"></button>
+    </fd-segmented-button>
+    <br />
+    <br />
+    @switch (selectionMode) {
+        @case ('None') {
+            <fd-grid-list>
+                <fd-grid-list-title-bar [title]="'Products'">
+                    <span fd-grid-list-title-bar-additional-title-item>{{ '(' + list.length + ')' }}</span>
+                    <fd-grid-list-title-bar-spacer></fd-grid-list-title-bar-spacer>
+                    <button
+                        fd-button
+                        fdType="transparent"
+                        glyph="sort"
+                        aria-labelledby="grid-list-title-bar-1 grid-list-button-1"
+                        aria-label="Sort"
+                        title="Sort"
+                        fdCompact
+                        (click)="showAlert('Sort')"
+                    ></button>
+                    <button
+                        fd-button
+                        fdType="transparent"
+                        glyph="filter"
+                        aria-label="Filter"
+                        title="Filter"
+                        fdCompact
+                        (click)="showAlert('Filter')"
+                    ></button>
+                    <button
+                        fd-button
+                        fdType="transparent"
+                        glyph="group-2"
+                        aria-label="Group"
+                        title="Group"
+                        fdCompact
+                        (click)="showAlert('Group')"
+                    ></button>
+                </fd-grid-list-title-bar>
+                @for (item of list; track item) {
+                    <fd-grid-list-item
+                        [type]="item.type"
+                        [counter]="item.counter"
+                        [title]="item.title"
+                        [description]="item.description"
+                        (navigate)="navigate()"
+                    >
+                        <fd-avatar
+                            fd-grid-list-item-image
+                            image="https://picsum.photos/id/1062/300/200"
+                            size="s"
+                        ></fd-avatar>
+                        <ng-template fd-grid-list-item-body>
+                            <p>781 Main Street</p>
+                            <p>Anytown, SD 57401</p>
+                            <p>USA</p>
+                            <a [routerLink]="['./']" fd-link tabindex="0">john_li&#64;example.com</a>
+                        </ng-template>
+                    </fd-grid-list-item>
+                }
+            </fd-grid-list>
+            <span aria-hidden="true" [style.display]="'none'" id="grid-list-button-1">Sort</span>
+            <span aria-hidden="true" [style.display]="'none'" id="grid-list-title-bar-1"
+                >Products with {{ list.length }} items</span
+            >
+        }
+        @case ('MultiSelect') {
+            <fd-grid-list selectionMode="multiSelect" (selectionChange)="onSelectionChange($event)">
+                <fd-grid-list-title-bar title="Products">
+                    <span fd-grid-list-title-bar-additional-title-item>{{ '(' + list.length + ')' }}</span>
+                </fd-grid-list-title-bar>
+                @for (item of list; track item) {
+                    <fd-grid-list-item
+                        [type]="item.type"
+                        [counter]="item.counter"
+                        [value]="item.id"
+                        [selected]="item.selected"
+                        [title]="item.title"
+                        [description]="item.description"
+                        (press)="press($event)"
+                        (detail)="detail($event)"
+                        (navigate)="navigateGrid($event)"
+                    >
+                        <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
+                        <fd-avatar
+                            fd-grid-list-item-image
+                            image="https://picsum.photos/id/1062/300/200"
+                            size="s"
+                        ></fd-avatar>
+                        <ng-template fd-grid-list-item-body>
+                            <p>781 Main Street</p>
+                            <p>Anytown, SD 57401</p>
+                            <p>USA</p>
+                            <a [routerLink]="['./']" fd-link tabindex="0">john_li&#64;example.com</a>
+                        </ng-template>
+                    </fd-grid-list-item>
+                }
+            </fd-grid-list>
+            <br /><br />
+            <button (click)="clearSelection()" fd-button>Clear selection</button>
+        }
+        @case ('SingleSelect') {
+            <fd-grid-list selectionMode="singleSelect" (selectionChange)="onSelectionChange($event)">
+                <fd-grid-list-title-bar title="Products">
+                    <span fd-grid-list-title-bar-additional-title-item>{{ '(' + list.length + ')' }}</span>
+                </fd-grid-list-title-bar>
+                @for (item of list; track item) {
+                    <fd-grid-list-item
+                        [type]="item.type"
+                        [counter]="item.counter"
+                        [value]="item.id"
+                        [selected]="item.selected"
+                        [title]="item.title"
+                        [description]="item.description"
+                        (press)="press($event)"
+                        (detail)="detail($event)"
+                        (navigate)="navigateGrid($event)"
+                    >
+                        <fd-grid-list-item-toolbar>Custom Text</fd-grid-list-item-toolbar>
+
+                        <fd-avatar
+                            fd-grid-list-item-image
+                            image="https://picsum.photos/id/1062/300/200"
+                            size="s"
+                        ></fd-avatar>
+                        <ng-template fd-grid-list-item-body>
+                            <p>781 Main Street</p>
+                            <p>Anytown, SD 57401</p>
+                            <p>USA</p>
+                            <a [routerLink]="['./']" fd-link tabindex="0">john_li&#64;example.com</a>
+                        </ng-template>
+                    </fd-grid-list-item>
+                }
+            </fd-grid-list>
+        }
+        @case ('SingleSelectLeft') {
+            <fd-grid-list selectionMode="singleSelectLeft" (selectionChange)="onSelectionChange($event)">
+                <fd-grid-list-title-bar title="Products">
+                    <span fd-grid-list-title-bar-additional-title-item>{{ '(' + list.length + ')' }}</span>
+                </fd-grid-list-title-bar>
+                @for (item of list; track item) {
+                    <fd-grid-list-item
+                        [type]="item.type"
+                        [counter]="item.counter"
+                        [value]="item.id"
+                        [selected]="item.selected"
+                        [title]="item.title"
+                        [description]="item.description"
+                        (press)="press($event)"
+                        (detail)="detail($event)"
+                        (navigate)="navigateGrid($event)"
+                    >
+                        <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
+                        <fd-avatar
+                            fd-grid-list-item-image
+                            image="https://picsum.photos/id/1062/300/200"
+                            size="s"
+                        ></fd-avatar>
+                        <ng-template fd-grid-list-item-body>
+                            <p>781 Main Street</p>
+                            <p>Anytown, SD 57401</p>
+                            <p>USA</p>
+                            <a [routerLink]="['./']" fd-link tabindex="0">john_li&#64;example.com</a>
+                        </ng-template>
+                    </fd-grid-list-item>
+                }
+            </fd-grid-list>
+        }
+        @case ('SingleSelectRight') {
+            <fd-grid-list selectionMode="singleSelectRight" (selectionChange)="onSelectionChange($event)">
+                <fd-grid-list-title-bar title="Products">
+                    <span fd-grid-list-title-bar-additional-title-item>{{ '(' + list.length + ')' }}</span>
+                </fd-grid-list-title-bar>
+                @for (item of list; track item) {
+                    <fd-grid-list-item
+                        [type]="item.type"
+                        [counter]="item.counter"
+                        [value]="item.id"
+                        [selected]="item.selected"
+                        [title]="item.title"
+                        [description]="item.description"
+                        (press)="press($event)"
+                        (detail)="detail($event)"
+                        (navigate)="navigateGrid($event)"
+                    >
+                        <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
+                        <fd-avatar
+                            fd-grid-list-item-image
+                            image="https://picsum.photos/id/1062/300/200"
+                            size="s"
+                        ></fd-avatar>
+                        <ng-template fd-grid-list-item-body>
+                            <p>781 Main Street</p>
+                            <p>Anytown, SD 57401</p>
+                            <p>USA</p>
+                            <a [routerLink]="['./']" fd-link tabindex="0">john_li&#64;example.com</a>
+                        </ng-template>
+                    </fd-grid-list-item>
+                }
+            </fd-grid-list>
+        }
+        @case ('Delete') {
+            <fd-grid-list selectionMode="delete">
+                <fd-grid-list-title-bar title="Products">
+                    <span fd-grid-list-title-bar-additional-title-item>{{ '(' + list.length + ')' }}</span>
+                </fd-grid-list-title-bar>
+                @for (item of list; track item) {
+                    <fd-grid-list-item
+                        [value]="item.id"
+                        [title]="item.title"
+                        [description]="item.description"
+                        (delete)="delete($event)"
+                    >
+                        <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
+                        <fd-avatar
+                            fd-grid-list-item-image
+                            image="https://picsum.photos/id/1062/300/200"
+                            size="s"
+                        ></fd-avatar>
+                        <ng-template fd-grid-list-item-body>
+                            <p>781 Main Street</p>
+                            <p>Anytown, SD 57401</p>
+                            <p>USA</p>
+                            <a [routerLink]="['./']" fd-link tabindex="0">john_li&#64;example.com</a>
+                        </ng-template>
+                    </fd-grid-list-item>
+                }
+                @if (!list.length) {
+                    <div class="fd-col fd-col--12">No items available.</div>
+                }
+            </fd-grid-list>
+        }
+    }
+</div>
