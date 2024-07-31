@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.2-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.17...v0.51.2-rc.18) (2024-07-31)
+
+
+### Bug Fixes
+
+* **core:** multi-input new token bug ([#12203](https://github.com/SAP/fundamental-ngx/issues/12203)) ([d261af7](https://github.com/SAP/fundamental-ngx/commit/d261af7ed4ab59aa2094c05a826f106b90270ba1))
+
+
+
+
+
 ## [0.51.2-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.16...v0.51.2-rc.17) (2024-07-31)
 
 
