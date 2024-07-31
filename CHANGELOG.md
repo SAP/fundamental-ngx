@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.13...v0.51.2-rc.14) (2024-07-30)
+
+
+### Bug Fixes
+
+* **platform:** table icon label not read ([#12197](https://github.com/SAP/fundamental-ngx/issues/12197)) ([46153fd](https://github.com/SAP/fundamental-ngx/commit/46153fd67aeb41058456d207022f2ea0d683fe3c)), closes [#11276](https://github.com/SAP/fundamental-ngx/issues/11276)
+
+
+
+
+
 ## [0.51.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.12...v0.51.2-rc.13) (2024-07-29)
 
 
