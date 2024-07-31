@@ -21,8 +21,4 @@ import {
     ],
     standalone: true
 })
-export class RtlServiceHeaderComponent {
-    constructor() {
-        console.log('RtlServiceHeaderComponent initialized');
-    }
-}
+export class RtlServiceHeaderComponent {}

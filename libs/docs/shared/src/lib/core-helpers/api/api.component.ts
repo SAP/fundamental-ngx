@@ -40,7 +40,6 @@ export class ApiComponent implements OnInit {
     }
 
     getFile(file: string): void {
-        console.log(file, 'file');
         this.apiService.getComponentHtml(file).subscribe(
             (data) => {
                 this.result = data;
