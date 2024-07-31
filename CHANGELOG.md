@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.2-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.16...v0.51.2-rc.17) (2024-07-31)
+
+
+### Bug Fixes
+
+* **core:** combo box communicate by object negative case fixed(when search term is invalid) ([#12207](https://github.com/SAP/fundamental-ngx/issues/12207)) ([c36028a](https://github.com/SAP/fundamental-ngx/commit/c36028a178c26a86e1a2bf0d449ea7d11d6b7649))
+
+
+
+
+
 ## [0.51.2-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.15...v0.51.2-rc.16) (2024-07-31)
 
 
