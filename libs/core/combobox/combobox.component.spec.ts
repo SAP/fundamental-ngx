@@ -88,7 +88,7 @@ describe('ComboboxComponent', () => {
             }
         };
         component.inputText = 'otherDisplayedValue';
-        expect(component.onChange).toHaveBeenCalledWith(null);
+        expect(component.onChange).toHaveBeenCalledWith('otherDisplayedValue');
     });
 
     it('should handle write value from outside on dropdown mode', () => {
@@ -255,5 +255,140 @@ describe('ComboboxComponent', () => {
         // user edits the selected value
         component.inputText = 'value43';
         expect(component.isSelected(preselected)).toBe(false);
+    });
+
+
+    describe('communicateByObject', () => {
+        const enum Category {
+            Fruit = 'Fruit',
+            Vegetable = 'Vegetable'
+        }
+        interface Product {
+            name: string;
+            uniqueCode: string;
+            type: Category;
+        }
+
+        let allProducts: Product[] = [];
+
+        beforeEach(() => {
+            allProducts = [
+                {
+                    name: 'Apple',
+                    uniqueCode: 'apl',
+                    type: Category.Fruit
+                },
+                {
+                    name: 'Mango',
+                    uniqueCode: 'mng',
+                    type: Category.Fruit
+                },
+                {
+                    name: 'Orange',
+                    uniqueCode: 'org',
+                    type: Category.Fruit
+                },
+                {
+                    name: 'Carrot',
+                    uniqueCode: 'crt',
+                    type: Category.Vegetable
+                },
+                {
+                    name: 'Tomato',
+                    uniqueCode: 'tmt',
+                    type: Category.Vegetable
+                },
+                {
+                    name: 'Chilli',
+                    uniqueCode: 'chl',
+                    type: Category.Vegetable
+                }
+            ];
+        });
+
+        it('should set the selected value from drop down and trigger onChange event with the selected option', () => {
+            jest.spyOn(component, 'onChange');
+
+            component.displayFn = (product: Product): string => product?.name ?? '';
+
+            component.communicateByObject = true;
+
+            component.dropdownValues = allProducts;
+
+            component.groupFn = (products: Product[]) => {
+                const productTypes: Record<string, Product[]> = {
+                    [Category.Fruit]: [],
+                    [Category.Vegetable]: []
+                };
+
+                products.forEach((product) => {
+                    productTypes[product.type].push(product);
+                });
+
+                return productTypes;
+            };
+
+            component.inputText = 'Apple';
+
+            expect(component.onChange).toHaveBeenCalledWith({
+                name: 'Apple',
+                uniqueCode: 'apl',
+                type: Category.Fruit
+            });
+        });
+
+        it('should set the value as per the search term and trigger onChange event with the search term', () => {
+            jest.spyOn(component, 'onChange');
+
+            component.displayFn = (product: Product): string => product?.name ?? '';
+
+            component.communicateByObject = true;
+
+            component.dropdownValues = allProducts;
+
+            component.groupFn = (products: Product[]) => {
+                const productTypes: Record<string, Product[]> = {
+                    [Category.Fruit]: [],
+                    [Category.Vegetable]: []
+                };
+
+                products.forEach((product) => {
+                    productTypes[product.type].push(product);
+                });
+
+                return productTypes;
+            };
+
+            component.inputText = 'app';
+
+            expect(component.onChange).toHaveBeenCalledWith('app');
+        });
+
+        it('should set the value as blank when search term is empty and trigger onChange event with empty search term', () => {
+            jest.spyOn(component, 'onChange');
+
+            component.displayFn = (product: Product): string => product?.name ?? '';
+
+            component.communicateByObject = true;
+
+            component.dropdownValues = allProducts;
+
+            component.groupFn = (products: Product[]) => {
+                const productTypes: Record<string, Product[]> = {
+                    [Category.Fruit]: [],
+                    [Category.Vegetable]: []
+                };
+
+                products.forEach((product) => {
+                    productTypes[product.type].push(product);
+                });
+
+                return productTypes;
+            };
+
+            component.inputText = '';
+
+            expect(component.onChange).toHaveBeenCalledWith('');
+        });
     });
 });
