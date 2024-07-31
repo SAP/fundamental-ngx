@@ -167,7 +167,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
 
     /** @hidden */
     reset(): void {
-        if (this._lineClampTarget && this._originalText) {
+        if (this._lineClampTarget) {
             this._lineClampTarget.textContent = this._originalText;
         }
         if (this._isNativeSupport) {
