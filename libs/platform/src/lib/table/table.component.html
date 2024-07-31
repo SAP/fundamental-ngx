@@ -5,18 +5,13 @@
     [ngTemplateOutletContext]="_toolbarContext"
 ></ng-container>
 
-<fd-busy-indicator
-    [loading]="(_tableService.tableLoading$ | async) === true && _dataSourceDirective._firstLoadingDone"
-    [block]="true"
->
-    <!-- Table Container -->
-    <div class="fdp-table__container" #tableContainer>
-        <ng-container [ngTemplateOutlet]="tableTemplate"></ng-container>
+<!-- Table Container -->
+<div class="fdp-table__container" #tableContainer>
+    <ng-container [ngTemplateOutlet]="tableTemplate"></ng-container>
 
-        <!-- Table column resizer for visually representing the resizing process -->
-        <fdp-table-column-resizer *ngIf="enableDragResize" class="fdp-table__column-resizer"></fdp-table-column-resizer>
-    </div>
-</fd-busy-indicator>
+    <!-- Table column resizer for visually representing the resizing process -->
+    <fdp-table-column-resizer *ngIf="enableDragResize" class="fdp-table__column-resizer"></fdp-table-column-resizer>
+</div>
 
 <!-- Table Template -->
 <ng-template #tableTemplate>
@@ -34,6 +29,11 @@
         [class.fixed-height]="!!bodyHeight"
         [attr.role]="pageScrolling ? 'feed' : null"
         [class.fd-table--fixed]="_freezableColumns.size || fixed"
+        [style.overscroll-behavior-y]="
+            (_tableService.tableLoading$ | async) === true && _dataSourceDirective._firstLoadingDone
+                ? 'contain'
+                : 'auto'
+        "
     >
         <table
             fd-table
@@ -166,6 +166,18 @@
                         </ng-container>
                     </ng-container>
                 </ng-container>
+                <tr
+                    fd-table-row
+                    *ngIf="
+                        pageScrolling &&
+                        (_tableService.tableLoading$ | async) === true &&
+                        _dataSourceDirective._firstLoadingDone
+                    "
+                >
+                    <td fd-table-cell *fdkRepeat="_tableColumnsLength">
+                        <fd-skeleton style="margin: auto 0" type="text" textLines="1" width="60%"></fd-skeleton>
+                    </td>
+                </tr>
                 <tr
                     aria-hidden="true"
                     *ngIf="pageScrolling && !_virtualScrollDirective?.scrollWholeRows"
