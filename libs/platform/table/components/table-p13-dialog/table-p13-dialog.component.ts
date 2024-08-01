@@ -121,6 +121,9 @@ export class TableP13DialogComponent implements OnDestroy {
             collectionSort: sortBy
         };
 
+        // dismiss any open dialog, before opening a new one
+        this._dialogService.dismissAll();
+
         const dialogRef = this._dialogService.open(
             P13SortingDialogComponent,
             {
@@ -152,6 +155,9 @@ export class TableP13DialogComponent implements OnDestroy {
         if (this.filter && this.filter.validator) {
             dialogData.validator = this.filter.validator;
         }
+
+        // dismiss any open dialog, before opening a new one
+        this._dialogService.dismissAll();
 
         const dialogRef = this._dialogService.open(
             P13FilteringDialogComponent,
@@ -188,6 +194,9 @@ export class TableP13DialogComponent implements OnDestroy {
             collectionGroup: groupBy
         };
 
+        // dismiss any open dialog, before opening a new one
+        this._dialogService.dismissAll();
+
         const dialogRef = this._dialogService.open(
             P13GroupingDialogComponent,
             {
@@ -215,6 +224,9 @@ export class TableP13DialogComponent implements OnDestroy {
             availableColumns: columns.map(({ label, name }) => ({ label, key: name })),
             visibleColumns
         };
+
+        // dismiss any open dialog, before opening a new one
+        this._dialogService.dismissAll();
 
         const dialogRef = this._dialogService.open(
             P13ColumnsDialogComponent,
