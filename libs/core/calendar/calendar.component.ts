@@ -3,17 +3,18 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    EventEmitter,
     forwardRef,
+    HostBinding,
     Inject,
-    input,
-    model,
+    Input,
     OnChanges,
     OnDestroy,
     OnInit,
     Optional,
-    output,
+    Output,
     SimpleChanges,
-    viewChild,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
@@ -98,42 +99,54 @@ let calendarUniqueId = 0;
 })
 export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAccessor, Validator, OnDestroy {
     /** The currently selected date model in single mode. */
-    selectedDate = model<Nullable<D>>();
+    @Input()
+    selectedDate: Nullable<D>;
 
     /** The currently selected date model in multiple mode. */
-    selectedMultiDate = model<Array<D>>();
+    @Input()
+    selectedMultiDate: Array<D>;
 
     /** The currently selected FdDates model start and end in range mode. */
-    selectedRangeDate = model<DateRange<D>>();
+    @Input()
+    selectedRangeDate: DateRange<D>;
 
     /**
      * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
      */
-    markWeekends = input(true);
+    @Input()
+    markWeekends = true;
 
     /**
      * Whether user wants to show week numbers next to days
      */
-    showWeekNumbers = input(false);
+    @Input()
+    showWeekNumbers = false;
 
     /**
      * Whether user wants to select multiple days
      * If showWeekNumbers is true user can click on week number, and it will mark related row
      * User can click weekDays, and it will mark related column
      */
-    multiSelectable = input(false);
+    @Input()
+    multiSelectable = false;
 
     /** Whether calendar is used inside mobile in landscape mode, it also adds close button on right side */
-    mobileLandscape = input(false);
+    @Input()
+    @HostBinding('class.fd-calendar--mobile-landscape')
+    mobileLandscape = false;
 
     /** Whether calendar is used inside mobile in portrait mode */
-    mobilePortrait = input(false);
+    @Input()
+    @HostBinding('class.fd-calendar--mobile-portrait')
+    mobilePortrait = false;
 
     /** Actually shown active view one of 'day' | 'month' | 'year' */
-    activeView = model<FdCalendarView>('day');
+    @Input()
+    activeView: FdCalendarView = 'day';
 
     /** The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on. */
-    startingDayOfWeek = input<DaysOfWeek>();
+    @Input()
+    startingDayOfWeek: DaysOfWeek;
 
     /**
      * The type of calendar
@@ -141,10 +154,12 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * 'multi' for multiple date selection
      * 'range' for a range of dates.
      */
-    calType = model<CalendarType>('single');
+    @Input()
+    calType: CalendarType = 'single';
 
     /** Id of the calendar. If none is provided, one will be generated. */
-    id = input('fd-calendar-' + calendarUniqueId++);
+    @Input()
+    id = 'fd-calendar-' + calendarUniqueId++;
 
     /**
      * Special days mark, it can be used by passing array of object with
@@ -153,93 +168,83 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * Rule accepts method with D object as a parameter. ex:
      * `rule: (fdDate: D) => fdDate.getDay() === 1`, which will mark all sundays as special day.
      */
-    specialDaysRules = input<SpecialDayRule<D>[]>([]);
+    @Input()
+    specialDaysRules: SpecialDayRule<D>[] = [];
 
     /**
      * Object to customize year grid,
      * Row, Columns and method to display year can be modified
      */
-    yearGrid = input<CalendarYearGrid>({
+    @Input()
+    yearGrid: CalendarYearGrid = {
         rows: 4,
         cols: 5
-    });
+    };
 
     /**
      * Object to customize aggregated year grid,
      * Row, Columns and method to display year can be modified
      */
-    aggregatedYearGrid = input<CalendarYearGrid>({
+    @Input()
+    aggregatedYearGrid: CalendarYearGrid = {
         rows: 4,
         cols: 3
-    });
+    };
 
     /**
      * Whether user wants to mark day cells on hover.
      * Works only on range mode, when start date is selected on Day View.
      */
-    rangeHoverEffect = input(false);
-
-    /** That allows to define function that should happen, when focus should normally escape of component */
-    escapeFocusFunction = input<EscapeFocusFunction>((event?: KeyboardEvent): void => {
-        event?.preventDefault();
-        this._calendarHeaderComponent()?.focus();
-    });
-
-    /**
-     * Function used to disable certain dates in the calendar.
-     * @param date date
-     */
-    disableFunction = input<DisableDateFunction<D>>(() => false);
-
-    /**
-     * Function used to disable certain dates in the calendar for the range start selection.
-     * @param date date
-     */
-    disableRangeStartFunction = input<DisableDateFunction<D>>(() => false);
-
-    /**
-     * Function used to disable certain dates in the calendar for the range end selection.
-     * @param date date
-     */
-    disableRangeEndFunction = input<DisableDateFunction<D>>(() => false);
+    @Input()
+    rangeHoverEffect = false;
 
     /** Event thrown every time active view is changed */
-    readonly activeViewChange = output<FdCalendarView>();
+    @Output()
+    readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
 
     /** Event thrown every time selected date in single mode is changed */
-    readonly selectedDateChange = output<D>();
+    @Output()
+    readonly selectedDateChange: EventEmitter<D> = new EventEmitter<D>();
 
     /** Event thrown every time selected date in single mode is changed */
-    readonly selectedMultiDateChange = output<Array<D>>();
+    @Output()
+    readonly selectedMultiDateChange: EventEmitter<Array<D>> = new EventEmitter<Array<D>>();
 
     /** Event thrown every time selected first or last date in range mode is changed */
-    readonly selectedRangeDateChange = output<DateRange<D>>();
+    @Output()
+    readonly selectedRangeDateChange: EventEmitter<DateRange<D>> = new EventEmitter<DateRange<D>>();
 
     /** Event thrown every time when value is overwritten from outside and throw back isValid */
-    readonly isValidDateChange = output<boolean>();
+    @Output()
+    readonly isValidDateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** Event thrown every time when calendar should be closed */
-    readonly closeCalendar = output<void>();
+    @Output()
+    readonly closeCalendar: EventEmitter<void> = new EventEmitter<void>();
 
     /** Event thrown, when close button is clicked */
-    readonly closeClicked = output<void>();
+    @Output()
+    readonly closeClicked: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
-    _dayViewComponent = viewChild<CalendarDayViewComponent<D>>(CalendarDayViewComponent);
+    @ViewChild(CalendarDayViewComponent)
+    _dayViewComponent: CalendarDayViewComponent<D>;
 
     /** @hidden */
-    _monthViewComponent = viewChild<CalendarMonthViewComponent<D>>(CalendarMonthViewComponent);
+    @ViewChild(CalendarMonthViewComponent)
+    _monthViewComponent: CalendarMonthViewComponent<D>;
 
     /** @hidden */
-    _yearViewComponent = viewChild<CalendarYearViewComponent<D>>(CalendarYearViewComponent);
+    @ViewChild(CalendarYearViewComponent)
+    _yearViewComponent: CalendarYearViewComponent<D>;
 
     /** @hidden */
-    _aggregatedYearViewComponent = viewChild<CalendarAggregatedYearViewComponent<D>>(
-        CalendarAggregatedYearViewComponent
-    );
+    @ViewChild(CalendarAggregatedYearViewComponent)
+    _aggregatedYearViewComponent: CalendarAggregatedYearViewComponent<D>;
 
     /** @hidden */
-    _calendarHeaderComponent = viewChild<CalendarHeaderComponent<D>>(CalendarHeaderComponent);
+    @ViewChild(CalendarHeaderComponent)
+    _calendarHeaderComponent: CalendarHeaderComponent<D>;
 
     /**
      * Function used to disable previous button in the calendar header.
@@ -247,7 +252,8 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * @param currentlyDisplayedDate currently displayed date
      * @param activeView current view of calendar
      */
-    previousButtonDisableFunction = input<NavigationButtonDisableFunction<D>>();
+    @Input()
+    previousButtonDisableFunction: NavigationButtonDisableFunction<D>;
 
     /**
      * Function used to disable next button in the calendar header.
@@ -255,7 +261,8 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * @param currentlyDisplayedDate currently displayed date
      * @param activeView current view of calendar
      */
-    nextButtonDisableFunction = input<NavigationButtonDisableFunction<D>>();
+    @Input()
+    nextButtonDisableFunction: NavigationButtonDisableFunction<D>;
 
     /**
      * @hidden
@@ -293,10 +300,38 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         _contentDensityObserver.subscribe();
         // set default value
         this._adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
-        this.selectedDate.set(this._dateTimeAdapter.today());
+        this.selectedDate = this._dateTimeAdapter.today();
         this._changeDetectorRef.markForCheck();
         this._listenToLocaleChanges();
     }
+
+    /** That allows to define function that should happen, when focus should normally escape of component */
+    @Input()
+    escapeFocusFunction: EscapeFocusFunction = (event?: KeyboardEvent): void => {
+        event?.preventDefault();
+        this._calendarHeaderComponent?.focus();
+    };
+
+    /**
+     * Function used to disable certain dates in the calendar.
+     * @param date date
+     */
+    @Input()
+    disableFunction: DisableDateFunction<D> = () => false;
+
+    /**
+     * Function used to disable certain dates in the calendar for the range start selection.
+     * @param date date
+     */
+    @Input()
+    disableRangeStartFunction: DisableDateFunction<D> = () => false;
+
+    /**
+     * Function used to disable certain dates in the calendar for the range end selection.
+     * @param date date
+     */
+    @Input()
+    disableRangeEndFunction: DisableDateFunction<D> = () => false;
 
     /** @hidden */
     onChange: (_: D | Array<D> | DateRange<D>) => void = () => {};
@@ -322,8 +357,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
 
     /** @hidden */
     getWeekStartDay(): DaysOfWeek {
-        const startingDayOfWeek = this.startingDayOfWeek();
-        return startingDayOfWeek === undefined ? this._adapterStartingDayOfWeek : startingDayOfWeek;
+        return this.startingDayOfWeek === undefined ? this._adapterStartingDayOfWeek : this.startingDayOfWeek;
     }
 
     /** @hidden */
@@ -338,15 +372,15 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     writeValue(selected: D | Array<D> | DateRange<D>): void {
         let valid = true;
 
-        if (this.calType() === CalendarTypeEnum.Single) {
+        if (this.calType === CalendarTypeEnum.Single) {
             selected = <D>selected;
 
             valid = this._dateTimeAdapter.isValid(selected);
 
-            this.selectedDate.set(selected);
+            this.selectedDate = selected;
         }
 
-        if (this.calType() === CalendarTypeEnum.Multi && selected) {
+        if (this.calType === CalendarTypeEnum.Multi && selected) {
             if (!Array.isArray(selected)) {
                 selected = <Array<D>>[selected];
             }
@@ -355,20 +389,20 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
 
             valid = selected.every((d) => this._dateTimeAdapter.isValid(d));
 
-            this.selectedMultiDate.set(selected);
+            this.selectedMultiDate = selected;
         }
 
-        if (this.calType() === CalendarTypeEnum.Range && selected) {
+        if (this.calType === CalendarTypeEnum.Range && selected) {
             selected = <DateRange<D>>selected;
 
             if (!this._dateTimeAdapter.isValid(selected.start) || !this._dateTimeAdapter.isValid(selected.end)) {
                 valid = false;
             }
 
-            this.selectedRangeDate.set({
+            this.selectedRangeDate = {
                 start: selected.start,
                 end: selected.end
-            });
+            };
         }
 
         if (valid) {
@@ -409,28 +443,26 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      *
      * Fired by calendar header component.
      */
-    handleActiveViewChange(activeView: Nullable<FdCalendarView>): void {
-        if (activeView) {
-            if (activeView === this.activeView()) {
-                return;
-            }
-
-            this.activeView.set(activeView);
-
-            this.activeViewChange.emit(activeView);
-
-            if (activeView === 'month') {
-                this.onMonthViewSelected();
-            }
-            if (activeView === 'year') {
-                this.onYearViewSelected();
-            }
-            if (activeView === 'aggregatedYear') {
-                this.onYearsRangeViewSelected();
-            }
-
-            this._setNavigationButtonsStates();
+    handleActiveViewChange(activeView: FdCalendarView): void {
+        if (activeView === this.activeView) {
+            return;
         }
+
+        this.activeView = activeView;
+
+        this.activeViewChange.emit(activeView);
+
+        if (activeView === 'month') {
+            this.onMonthViewSelected();
+        }
+        if (activeView === 'year') {
+            this.onYearViewSelected();
+        }
+        if (activeView === 'aggregatedYear') {
+            this.onYearsRangeViewSelected();
+        }
+
+        this._setNavigationButtonsStates();
     }
 
     /**
@@ -438,7 +470,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * Method that is triggered by events from day view component, when there is selected single date changed
      */
     selectedDateChanged(date: D): void {
-        this.selectedDate.set(date);
+        this.selectedDate = date;
         this._setNavigationButtonsStates();
         this.onChange(date);
         this.selectedDateChange.emit(date);
@@ -450,7 +482,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * Method that is triggered by events from day view component, when there is selected multi date changed
      */
     selectedMultiDateChanged(date: Array<D>): void {
-        this.selectedMultiDate.set(date);
+        this.selectedMultiDate = date;
         this._setNavigationButtonsStates();
         this.onChange(date);
         this.selectedMultiDateChange.emit(date);
@@ -463,19 +495,16 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      */
     selectedRangeDateChanged(dates: DateRange<D>): void {
         if (dates) {
-            this.selectedRangeDate.set({ start: dates.start, end: dates.end });
-            const selectedRangeDate = this.selectedRangeDate();
-            if (selectedRangeDate) {
-                this.selectedRangeDateChange.emit(selectedRangeDate);
-                this.onChange(selectedRangeDate);
-                this.closeCalendar.emit();
-            }
+            this.selectedRangeDate = { start: dates.start, end: dates.end };
+            this.selectedRangeDateChange.emit(this.selectedRangeDate);
+            this.onChange(this.selectedRangeDate);
+            this.closeCalendar.emit();
         }
     }
 
     /** Function that handles next arrow icon click, depending on current view it changes month, year or list of years */
     handleNextArrowClick(): void {
-        switch (this.activeView()) {
+        switch (this.activeView) {
             case 'day':
                 this.displayNextMonth();
                 break;
@@ -494,7 +523,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
 
     /** Function that handles previous arrow icon click, depending on current view it changes month, year or list of years */
     handlePreviousArrowClick(): void {
-        switch (this.activeView()) {
+        switch (this.activeView) {
             case 'day':
                 this.displayPreviousMonth();
                 break;
@@ -547,42 +576,30 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
 
     /** Function that allows to switch actually displayed list of year to next year list*/
     displayNextYearList(): void {
-        const yearViewComponent = this._yearViewComponent();
-        if (yearViewComponent) {
-            yearViewComponent.loadNextYearList();
-            this._currentlyDisplayed = {
-                month: this._currentlyDisplayed.month,
-                year: yearViewComponent._firstYearInList
-            };
-        }
+        this._yearViewComponent.loadNextYearList();
+        this._currentlyDisplayed = {
+            month: this._currentlyDisplayed.month,
+            year: this._yearViewComponent._firstYearInList
+        };
     }
 
     /** Function that allows to switch actually displayed list of year to previous year list*/
     displayPreviousYearList(): void {
-        const yearViewComponent = this._yearViewComponent();
-        if (yearViewComponent) {
-            yearViewComponent.loadPreviousYearList();
-            this._currentlyDisplayed = {
-                month: this._currentlyDisplayed.month,
-                year: yearViewComponent._firstYearInList
-            };
-        }
+        this._yearViewComponent.loadPreviousYearList();
+        this._currentlyDisplayed = {
+            month: this._currentlyDisplayed.month,
+            year: this._yearViewComponent._firstYearInList
+        };
     }
 
     /** Function that allows to switch actually displayed list of year to next year list*/
     displayNextYearsList(): void {
-        const aggregatedYearViewComponent = this._aggregatedYearViewComponent();
-        if (aggregatedYearViewComponent) {
-            aggregatedYearViewComponent.loadNextYearsList();
-        }
+        this._aggregatedYearViewComponent.loadNextYearsList();
     }
 
     /** Function that allows to switch actually displayed list of year to previous year list*/
     displayPreviousYearsList(): void {
-        const aggregatedYearViewComponent = this._aggregatedYearViewComponent();
-        if (aggregatedYearViewComponent) {
-            aggregatedYearViewComponent.loadPreviousYearsList();
-        }
+        this._aggregatedYearViewComponent.loadPreviousYearsList();
     }
 
     /**
@@ -611,21 +628,21 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      */
     handleMonthViewChange(month: number): void {
         this._currentlyDisplayed = { month, year: this._currentlyDisplayed.year };
-        this.activeView.set('day');
+        this.activeView = 'day';
         this.onDaysViewSelected();
-        this.activeViewChange.emit(this.activeView());
+        this.activeViewChange.emit(this.activeView);
     }
 
     /** Select year */
     selectedYear(yearSelected: number): void {
-        this.activeView.set('day');
+        this.activeView = 'day';
         this._currentlyDisplayed.year = yearSelected;
         this.onDaysViewSelected();
     }
 
     /** Select year range */
     selectedYears(yearsSelected: AggregatedYear): void {
-        this.activeView.set('year');
+        this.activeView = 'year';
         this._currentlyDisplayed = {
             ...this._currentlyDisplayed,
             year: yearsSelected.startYear
@@ -636,56 +653,41 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     /** @hidden */
     onDaysViewSelected(): void {
         this._changeDetectorRef.detectChanges();
-        const dayViewComponent = this._dayViewComponent();
-        if (dayViewComponent) {
-            dayViewComponent.setFocusOnCell();
-        }
+        this._dayViewComponent?.setFocusOnCell();
     }
 
     /** @hidden */
     onMonthViewSelected(): void {
         this._changeDetectorRef.detectChanges();
-        const monthViewComponent = this._monthViewComponent();
-        if (monthViewComponent) {
-            monthViewComponent.setFocusOnCell();
-        }
+        this._monthViewComponent?.setFocusOnCell();
     }
 
     /** @hidden */
     onYearViewSelected(): void {
         this._changeDetectorRef.detectChanges();
-        const yearViewComponent = this._yearViewComponent();
-        if (yearViewComponent) {
-            yearViewComponent.setFocusOnCell();
-        }
+        this._yearViewComponent?.setFocusOnCell();
     }
 
     /** @hidden */
     onYearsRangeViewSelected(): void {
         this._changeDetectorRef.detectChanges();
-        const aggregatedYearViewComponent = this._aggregatedYearViewComponent();
-        if (aggregatedYearViewComponent) {
-            aggregatedYearViewComponent.setFocusOnCell();
-        }
+        this._aggregatedYearViewComponent?.setFocusOnCell();
     }
 
     /** Method that provides information if model selected date/dates have properly types and are valid */
     isModelValid(): boolean {
-        if (this.calType() === CalendarTypeEnum.Single) {
-            return this._dateTimeAdapter.isValid(this.selectedDate());
+        if (this.calType === CalendarTypeEnum.Single) {
+            return this._dateTimeAdapter.isValid(this.selectedDate);
         }
-        if (this.calType() === CalendarTypeEnum.Range) {
-            const selectedRangeDate = this.selectedRangeDate();
-            if (selectedRangeDate) {
-                return (
-                    this._dateTimeAdapter.isValid(selectedRangeDate.start) &&
-                    this._dateTimeAdapter.isValid(selectedRangeDate.end)
-                );
-            }
+        if (this.calType === CalendarTypeEnum.Range) {
+            return (
+                this.selectedRangeDate &&
+                this._dateTimeAdapter.isValid(this.selectedRangeDate.start) &&
+                this._dateTimeAdapter.isValid(this.selectedRangeDate.end)
+            );
         }
-        const selectedMultiDate = this.selectedMultiDate();
-        if (this.calType() === CalendarTypeEnum.Multi && selectedMultiDate) {
-            return selectedMultiDate && selectedMultiDate.every((d) => this._dateTimeAdapter.isValid(d));
+        if (this.calType === CalendarTypeEnum.Multi && this.selectedMultiDate) {
+            return this.selectedMultiDate && this.selectedMultiDate.every((d) => this._dateTimeAdapter.isValid(d));
         }
         return false;
     }
@@ -706,29 +708,25 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * Day grid is based on currently displayed month and year
      */
     private _prepareDisplayedView(): void {
-        const selectedDate = this.selectedDate();
-        const selectedMultiDate = this.selectedMultiDate();
-        const selectedRangeDate = this.selectedRangeDate();
-
-        if (this.calType() === CalendarTypeEnum.Single && this._dateTimeAdapter.isValid(selectedDate)) {
+        if (this.calType === CalendarTypeEnum.Single && this._dateTimeAdapter.isValid(this.selectedDate)) {
             this._currentlyDisplayed = {
-                year: this._dateTimeAdapter.getYear(selectedDate),
-                month: this._dateTimeAdapter.getMonth(selectedDate)
+                year: this._dateTimeAdapter.getYear(this.selectedDate),
+                month: this._dateTimeAdapter.getMonth(this.selectedDate)
             };
-        } else if (selectedMultiDate && selectedMultiDate.length > 0) {
+        } else if (this.selectedMultiDate?.length > 0) {
             this._currentlyDisplayed = {
-                year: this._dateTimeAdapter.getYear(selectedMultiDate[0]),
-                month: this._dateTimeAdapter.getMonth(selectedMultiDate[0])
+                year: this._dateTimeAdapter.getYear(this.selectedMultiDate[0]),
+                month: this._dateTimeAdapter.getMonth(this.selectedMultiDate[0])
             };
-        } else if (selectedRangeDate && selectedRangeDate.start) {
+        } else if (this.selectedRangeDate && this.selectedRangeDate.start) {
             this._currentlyDisplayed = {
-                year: this._dateTimeAdapter.getYear(selectedRangeDate.start),
-                month: this._dateTimeAdapter.getMonth(selectedRangeDate.start)
+                year: this._dateTimeAdapter.getYear(this.selectedRangeDate.start),
+                month: this._dateTimeAdapter.getMonth(this.selectedRangeDate.start)
             };
-        } else if (selectedRangeDate && selectedRangeDate.end) {
+        } else if (this.selectedRangeDate && this.selectedRangeDate.end) {
             this._currentlyDisplayed = {
-                year: this._dateTimeAdapter.getYear(selectedRangeDate.end),
-                month: this._dateTimeAdapter.getMonth(selectedRangeDate.end)
+                year: this._dateTimeAdapter.getYear(this.selectedRangeDate.end),
+                month: this._dateTimeAdapter.getMonth(this.selectedRangeDate.end)
             };
         } else {
             const today = this._dateTimeAdapter.today();
@@ -740,16 +738,16 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     }
 
     /** @hidden */
-    private _getActiveFocusableView(): Nullable<FocusableCalendarView> {
-        switch (this.activeView()) {
+    private _getActiveFocusableView(): FocusableCalendarView | null {
+        switch (this.activeView) {
             case 'day':
-                return this._dayViewComponent();
+                return this._dayViewComponent;
             case 'month':
-                return this._monthViewComponent();
+                return this._monthViewComponent;
             case 'year':
-                return this._yearViewComponent();
+                return this._yearViewComponent;
             case 'aggregatedYear':
-                return this._aggregatedYearViewComponent();
+                return this._aggregatedYearViewComponent;
             default:
                 return null;
         }
@@ -757,22 +755,12 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
 
     /** @hidden */
     private _setNavigationButtonsStates(): void {
-        const previousButtonDisableFunction = this.previousButtonDisableFunction();
-        if (previousButtonDisableFunction) {
-            this.previousButtonDisabled = previousButtonDisableFunction(
-                this.selectedDate(),
-                this._currentlyDisplayed,
-                this.activeView()
-            );
-        }
-        const nextButtonDisableFunction = this.nextButtonDisableFunction();
-        if (nextButtonDisableFunction) {
-            this.nextButtonDisabled = nextButtonDisableFunction(
-                this.selectedDate(),
-                this._currentlyDisplayed,
-                this.activeView()
-            );
-        }
+        this.previousButtonDisabled =
+            typeof this.previousButtonDisableFunction === 'function' &&
+            this.previousButtonDisableFunction(this.selectedDate, this._currentlyDisplayed, this.activeView);
+        this.nextButtonDisabled =
+            typeof this.nextButtonDisableFunction === 'function' &&
+            this.nextButtonDisableFunction(this.selectedDate, this._currentlyDisplayed, this.activeView);
         this._changeDetectorRef.markForCheck();
     }
 

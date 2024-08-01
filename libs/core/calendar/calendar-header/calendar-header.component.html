@@ -1,4 +1,4 @@
-<header class="fd-calendar__navigation" [class.fd-calendar__navigation--main]="mobileLandscape()">
+<header class="fd-calendar__navigation" [class.fd-calendar__navigation--main]="mobileLandscape">
     <div class="fd-calendar__action fd-calendar__action--arrow-left">
         <button
             #prevButton
@@ -6,7 +6,7 @@
             fdType="transparent"
             glyph="slim-arrow-left"
             [attr.id]="_prevButtonId"
-            [disabled]="previousButtonDisabled()"
+            [disabled]="previousButtonDisabled"
             [attr.title]="previousAriaLabel | fdTranslate"
             [ariaLabel]="previousAriaLabel | fdTranslate"
             type="button"
@@ -21,7 +21,7 @@
                 type="button"
                 fdType="transparent"
                 [attr.aria-labelledby]="_monthButtonLabelId + ' ' + _selectMonthButtonAriaLabelId"
-                [attr.data-fd-calendar-month]="currentlyDisplayed()?.month"
+                [attr.data-fd-calendar-month]="currentlyDisplayed.month"
                 (click)="_processViewChange('month', $event)"
             >
                 <span [attr.id]="_monthButtonLabelId">{{ selectMonthLabel }}</span>
@@ -34,7 +34,7 @@
                 type="button"
                 fdType="transparent"
                 [attr.aria-labelledby]="_yearButtonLabelId + ' ' + _selectYearButtonAriaLabelId"
-                [attr.data-fd-calendar-year]="currentlyDisplayed()?.year"
+                [attr.data-fd-calendar-year]="currentlyDisplayed.year"
                 (click)="_processViewChange('year', $event)"
             >
                 <span [attr.id]="_yearButtonLabelId">{{ selectYearLabel }}</span>
@@ -60,7 +60,7 @@
             fdType="transparent"
             glyph="slim-arrow-right"
             [attr.id]="_nextButtonId"
-            [disabled]="nextButtonDisabled()"
+            [disabled]="nextButtonDisabled"
             [attr.title]="nextAriaLabel | fdTranslate"
             [ariaLabel]="nextAriaLabel | fdTranslate"
             (click)="nextClicked.emit()"

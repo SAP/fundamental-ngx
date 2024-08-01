@@ -20,9 +20,9 @@ describe('CalendarAggregatedYearViewComponent', () => {
             CalendarAggregatedYearViewComponent
         );
         component = fixture.componentInstance;
-        component.yearSelected.set(2019);
-        component.yearViewGrid.set({ cols: 4, rows: 4, yearMapping: (year) => year.toString() });
-        component.aggregatedYearsViewGrid.set({ cols: 2, rows: 6, yearMapping: (year) => year.toString() });
+        component.yearSelected = 2019;
+        component.yearViewGrid = { cols: 4, rows: 4, yearMapping: (year) => year.toString() };
+        component.aggregatedYearsViewGrid = { cols: 2, rows: 6, yearMapping: (year) => year.toString() };
         component.ngOnInit();
         fixture.detectChanges();
     });
@@ -42,9 +42,9 @@ describe('CalendarAggregatedYearViewComponent', () => {
     });
 
     it('Should generate proper grid of aggregated years', () => {
-        component.yearSelected.set(2000);
-        component.yearViewGrid.set({ cols: 4, rows: 4, yearMapping: (year) => year.toString() });
-        component.aggregatedYearsViewGrid.set({ cols: 2, rows: 6, yearMapping: (year) => year.toString() });
+        component.yearSelected = 2000;
+        component.yearViewGrid = { cols: 4, rows: 4, yearMapping: (year) => year.toString() };
+        component.aggregatedYearsViewGrid = { cols: 2, rows: 6, yearMapping: (year) => year.toString() };
         component.ngOnInit();
 
         const yearsGrid = component._calendarYearListGrid.map((row) => row.map(({ years }) => years));

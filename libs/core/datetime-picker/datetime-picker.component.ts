@@ -647,12 +647,10 @@ export class DatetimePickerComponent<D>
      * Method that is triggered by events from calendar component, when there is selected date changed.
      * If invalid time model is detected, it takes time model data from TimeComponent.
      */
-    handleDateChange(date: Nullable<D>): void {
-        if (date) {
-            this._tempDate = date;
-            if (!this.showFooter) {
-                this.submit();
-            }
+    handleDateChange(date: D): void {
+        this._tempDate = date;
+        if (!this.showFooter) {
+            this.submit();
         }
     }
 

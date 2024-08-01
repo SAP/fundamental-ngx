@@ -4,21 +4,20 @@ import {
     Component,
     DestroyRef,
     ElementRef,
+    EventEmitter,
     Inject,
+    Input,
     OnChanges,
     OnInit,
+    Output,
     SimpleChanges,
     ViewEncapsulation,
-    inject,
-    input,
-    model,
-    output
+    inject
 } from '@angular/core';
 
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarService } from '../../calendar.service';
@@ -40,32 +39,38 @@ import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalend
 })
 export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnChanges, FocusableCalendarView {
     /** Parameter used in id of years used for help with focusing on the correct element during keyboard navigation. */
-    id = input<string>();
+    @Input()
+    id: string;
 
     /** Function that is called when the focus would escape the element. */
-    focusEscapeFunction = input<EscapeFocusFunction>();
+    @Input()
+    focusEscapeFunction: EscapeFocusFunction;
 
     /** Parameter holding the year that is currently selected. */
-    yearSelected = model<number>();
+    @Input()
+    yearSelected: number;
 
     /**
      * Object to customize aggregated year grid
      */
-    aggregatedYearsViewGrid = model<CalendarYearGrid>();
+    @Input()
+    aggregatedYearsViewGrid: CalendarYearGrid;
 
     /**
      * Object to customize year grid
      */
-    yearViewGrid = model<CalendarYearGrid>();
+    @Input()
+    yearViewGrid: CalendarYearGrid;
 
     /** Event fired when a year is selected. */
-    readonly yearsClicked = output<AggregatedYear>();
+    @Output()
+    readonly yearsClicked: EventEmitter<AggregatedYear> = new EventEmitter<AggregatedYear>();
 
     /**
      * View ID
      */
     get viewId(): string {
-        return this.id() + '-years-range-view';
+        return this.id + '-years-range-view';
     }
 
     /**
@@ -140,10 +145,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnChanges
 
         this._setupKeyboardService();
 
-        const yearSelected = this.yearSelected();
-        if (yearSelected) {
-            this._firstYearInList = yearSelected - this._yearsInOnePeriod();
-        }
+        this._firstYearInList = this.yearSelected - this._yearsInOnePeriod();
 
         this._constructYearsGrid();
 
@@ -177,20 +179,14 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnChanges
 
     /** Method used to load the previous 12 years to be displayed. */
     loadNextYearsList(): void {
-        const periodsAmount = this._periodsAmount();
-        if (periodsAmount) {
-            this._firstYearInList += periodsAmount * this._yearsInOnePeriod();
-            this._constructYearsGrid();
-        }
+        this._firstYearInList += this._periodsAmount() * this._yearsInOnePeriod();
+        this._constructYearsGrid();
     }
 
     /** Method used to load the next 12 years to be displayed. */
     loadPreviousYearsList(): void {
-        const periodsAmount = this._periodsAmount();
-        if (periodsAmount) {
-            this._firstYearInList -= periodsAmount * this._yearsInOnePeriod();
-            this._constructYearsGrid();
-        }
+        this._firstYearInList -= this._periodsAmount() * this._yearsInOnePeriod();
+        this._constructYearsGrid();
     }
 
     /**
@@ -247,54 +243,46 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnChanges
 
     /** @hidden */
     private _constructYearsGrid(): void {
-        const aggregatedYearsViewGrid = this.aggregatedYearsViewGrid();
-        if (aggregatedYearsViewGrid) {
-            const displayedYearsAmount: number = aggregatedYearsViewGrid.cols * aggregatedYearsViewGrid.rows;
-            const calendarYearList: CalendarAggregatedYear[] = [];
-            this._calendarYearListGrid = [];
+        const displayedYearsAmount: number = this.aggregatedYearsViewGrid.cols * this.aggregatedYearsViewGrid.rows;
+        const calendarYearList: CalendarAggregatedYear[] = [];
+        this._calendarYearListGrid = [];
 
-            for (let index = 0; index < displayedYearsAmount; ++index) {
-                /**
-                 * Generates object with certain period of years,
-                 * which depends on amount of years displayed in year view
-                 */
+        for (let index = 0; index < displayedYearsAmount; ++index) {
+            /**
+             * Generates object with certain period of years,
+             * which depends on amount of years displayed in year view
+             */
 
-                const years: AggregatedYear = {
-                    startYear: this._firstYearInList + this._yearsInOnePeriod() * index,
-                    endYear: this._firstYearInList + this._yearsInOnePeriod() * (index + 1) - 1
-                };
+            const years: AggregatedYear = {
+                startYear: this._firstYearInList + this._yearsInOnePeriod() * index,
+                endYear: this._firstYearInList + this._yearsInOnePeriod() * (index + 1) - 1
+            };
 
-                calendarYearList.push({
-                    years,
-                    label: this._getYearsName(years),
-                    ariaLabel: this._getAriaYearsName(years),
-                    selected: this._isBetween(years, this.yearSelected()!),
-                    current: this._isBetween(years, this._currentYear),
-                    index
-                });
-            }
-
-            /** Creating 2d grid */
-            while (calendarYearList.length) {
-                this._calendarYearListGrid.push(calendarYearList.splice(0, aggregatedYearsViewGrid.cols));
-            }
-
-            const yearSelected = this.yearSelected();
-            if (yearSelected) {
-                const yearsCellSelected = calendarYearList.find((cell) =>
-                    this._isBetween(cell.years, this.yearSelected()!)
-                );
-                this._yearsSelected = yearsCellSelected ? yearsCellSelected.years : null;
-            }
-            this._activeYear = this._getActiveYear();
-
-            this._calendarYearListGrid.forEach((row, rowIndex) => {
-                row.forEach((cell, colIndex) => {
-                    cell.id = this._getId(this._getIndex(rowIndex, colIndex));
-                    cell.tabIndex = cell.years === this._activeYear ? 0 : -1;
-                });
+            calendarYearList.push({
+                years,
+                label: this._getYearsName(years),
+                ariaLabel: this._getAriaYearsName(years),
+                selected: this._isBetween(years, this.yearSelected),
+                current: this._isBetween(years, this._currentYear),
+                index
             });
         }
+
+        /** Creating 2d grid */
+        while (calendarYearList.length) {
+            this._calendarYearListGrid.push(calendarYearList.splice(0, this.aggregatedYearsViewGrid.cols));
+        }
+
+        const yearsCellSelected = calendarYearList.find((cell) => this._isBetween(cell.years, this.yearSelected));
+        this._yearsSelected = yearsCellSelected ? yearsCellSelected.years : null;
+        this._activeYear = this._getActiveYear();
+
+        this._calendarYearListGrid.forEach((row, rowIndex) => {
+            row.forEach((cell, colIndex) => {
+                cell.id = this._getId(this._getIndex(rowIndex, colIndex));
+                cell.tabIndex = cell.years === this._activeYear ? 0 : -1;
+            });
+        });
 
         this._changeDetectorRef.detectChanges();
     }
@@ -340,9 +328,8 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnChanges
      * Returns year name taking into account yearMapping.
      */
     private _getYearString(year: number, defaultStr: string): string {
-        const aggregatedYearsViewGrid = this.aggregatedYearsViewGrid();
-        if (aggregatedYearsViewGrid && typeof aggregatedYearsViewGrid.yearMapping === 'function') {
-            return aggregatedYearsViewGrid.yearMapping(year);
+        if (typeof this.aggregatedYearsViewGrid.yearMapping === 'function') {
+            return this.aggregatedYearsViewGrid.yearMapping(year);
         }
         return defaultStr;
     }
@@ -352,8 +339,8 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnChanges
      * Amount of years displayed in year view
      */
     private _yearsInOnePeriod(): number {
-        if (this.yearViewGrid()) {
-            return this.yearViewGrid()!.cols * this.yearViewGrid()!.rows;
+        if (this.yearViewGrid) {
+            return this.yearViewGrid.cols * this.yearViewGrid.rows;
         } else {
             return 12;
         }
@@ -363,11 +350,8 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnChanges
      * @hidden
      * Amount of years displayed in aggregated year view
      */
-    private _periodsAmount(): Nullable<number> {
-        const aggregatedYearsViewGrid = this.aggregatedYearsViewGrid();
-        if (aggregatedYearsViewGrid) {
-            return aggregatedYearsViewGrid.cols * aggregatedYearsViewGrid.rows;
-        }
+    private _periodsAmount(): number {
+        return this.aggregatedYearsViewGrid.cols * this.aggregatedYearsViewGrid.rows;
     }
 
     /**
@@ -378,7 +362,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnChanges
      * if there is no current year, or selected, return first one
      */
     private _getActiveYear(): AggregatedYear {
-        const selectedYearCell = this._getYearsList().find(({ years }) => this._isBetween(years, this.yearSelected()!));
+        const selectedYearCell = this._getYearsList().find(({ years }) => this._isBetween(years, this.yearSelected));
         if (selectedYearCell) {
             return selectedYearCell.years;
         }
@@ -404,13 +388,10 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnChanges
      * Method to put configuration and listeners on calendar keyboard service
      */
     private _setupKeyboardService(): void {
-        const aggregatedYearsViewGrid = this.aggregatedYearsViewGrid();
-        if (aggregatedYearsViewGrid) {
-            this._calendarService.rowAmount = aggregatedYearsViewGrid.rows;
-            this._calendarService.colAmount = aggregatedYearsViewGrid.cols;
-        }
+        this._calendarService.rowAmount = this.aggregatedYearsViewGrid.rows;
+        this._calendarService.colAmount = this.aggregatedYearsViewGrid.cols;
 
-        this._calendarService.focusEscapeFunction = this.focusEscapeFunction();
+        this._calendarService.focusEscapeFunction = this.focusEscapeFunction;
 
         this._calendarService.onFocusIdChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
             this._focusOnCellByIndex(index);

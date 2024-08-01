@@ -4,14 +4,13 @@ import {
     Component,
     DestroyRef,
     ElementRef,
+    EventEmitter,
     Inject,
     inject,
     Input,
-    input,
-    model,
     OnChanges,
     OnInit,
-    output,
+    Output,
     SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
@@ -51,19 +50,22 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * Function used to disable certain dates in the calendar.
      * @param date date type
      */
-    disableFunction = model<DisableDateFunction<D>>();
+    @Input()
+    disableFunction: DisableDateFunction<D>;
 
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
      * @param date date representation
      */
-    disableRangeStartFunction = model<DisableDateFunction<D>>();
+    @Input()
+    disableRangeStartFunction: DisableDateFunction<D>;
 
     /**
      * Function used to disable certain dates in the calendar for the range end selection.
      * @param date date representation
      */
-    disableRangeEndFunction = model<DisableDateFunction<D>>();
+    @Input()
+    disableRangeEndFunction: DisableDateFunction<D>;
 
     /** Currently displayed month and year for days */
     @Input()
@@ -94,7 +96,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
 
     /** The currently selected date model in multiple mode. */
     @Input()
-    set selectedMultiDate(dates: Nullable<Array<D>>) {
+    set selectedMultiDate(dates: Array<D>) {
         if (dates) {
             this._selectedMultiDate = dates;
             if (this._dayViewGrid) {
@@ -112,19 +114,18 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
 
     /** The currently selected FdDates model start and end in range mode. */
     @Input()
-    set selectedRangeDate(dateRange: Nullable<DateRange<D>>) {
-        if (dateRange) {
-            if (
-                this.selectedRangeDate &&
-                this._dateTimeAdapter.datesEqual(dateRange.start, this.selectedRangeDate.start) &&
-                this._dateTimeAdapter.datesEqual(dateRange.end, this.selectedRangeDate.end)
-            ) {
-                return;
-            }
-            this._selectedRangeDate = dateRange;
-            if (this._dayViewGrid) {
-                this._changeSelectedRangeDays(dateRange, this._calendarDayList);
-            }
+    set selectedRangeDate(dateRange: DateRange<D>) {
+        if (
+            dateRange &&
+            this.selectedRangeDate &&
+            this._dateTimeAdapter.datesEqual(dateRange.start, this.selectedRangeDate.start) &&
+            this._dateTimeAdapter.datesEqual(dateRange.end, this.selectedRangeDate.end)
+        ) {
+            return;
+        }
+        this._selectedRangeDate = dateRange;
+        if (this._dayViewGrid) {
+            this._changeSelectedRangeDays(dateRange, this._calendarDayList);
         }
     }
 
@@ -133,39 +134,47 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /** The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on. */
-    startingDayOfWeek = model<DaysOfWeek>();
+    @Input()
+    startingDayOfWeek: DaysOfWeek;
 
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
-    calType = model<CalendarType>('single');
+    @Input()
+    calType: CalendarType = 'single';
 
     /** Id of the calendar. If none is provided, one will be generated. */
-    id = input<string>();
+    @Input()
+    id: string;
 
     /**
      * Whether user wants to mark day cells on hover.
      * Works only on range mode, when start date is selected.
      */
-    rangeHoverEffect = model(false);
+    @Input()
+    rangeHoverEffect = false;
 
     /**
      * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
      */
-    markWeekends = input(false);
+    @Input()
+    markWeekends = false;
 
     /**
      * Whether user wants to show week numbers next to days
      */
-    showWeekNumbers = input(true);
+    @Input()
+    showWeekNumbers = true;
 
     /**
      * Whether user wants to select multiple days
      * If showWeekNumbers is true user can click on week number, and it will mark related row
      * User can click weekDays, and it will mark related column
      */
-    multiSelectable = input(false);
+    @Input()
+    multiSelectable = false;
 
     /** Function that allows to specify which function would be called, when focus wants to escape */
-    focusEscapeFunction = input<EscapeFocusFunction>();
+    @Input()
+    focusEscapeFunction: EscapeFocusFunction;
 
     /**
      * Special days mark, it can be used by passing array of object with
@@ -174,22 +183,28 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * Rule accepts method with date object as a parameter. ex:
      * `rule: (date: D) => this.dateAdapter.getDay(date) === 1`, which will mark all sundays as special day.
      */
-    specialDaysRules = input<SpecialDayRule<D>[]>([]);
+    @Input()
+    specialDaysRules: SpecialDayRule<D>[] = [];
 
     /** Event emitted always, when next month is selected, by focus */
-    readonly nextMonthSelect = output<void>();
+    @Output()
+    readonly nextMonthSelect: EventEmitter<void> = new EventEmitter<void>();
 
     /** Event emitted always, when previous month is selected, by focus */
-    readonly previousMonthSelect = output<void>();
+    @Output()
+    readonly previousMonthSelect: EventEmitter<void> = new EventEmitter<void>();
 
     /** Event emitted always, when model is changed in single mode */
-    readonly selectedDateChange = output<D>();
+    @Output()
+    readonly selectedDateChange: EventEmitter<D> = new EventEmitter<D>();
 
     /** Event emitted always, when model is changed in multiple mode */
-    readonly selectedMultiDateChange = output<Array<D>>();
+    @Output()
+    readonly selectedMultiDateChange: EventEmitter<Array<D>> = new EventEmitter<Array<D>>();
 
     /** Event emitted always, when model is changed in range mode */
-    readonly selectedRangeDateChange = output<DateRange<D>>();
+    @Output()
+    readonly selectedRangeDateChange: EventEmitter<DateRange<D>> = new EventEmitter<DateRange<D>>();
 
     /**
      * @hidden
@@ -308,7 +323,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
             return;
         }
 
-        switch (this.calType()) {
+        switch (this.calType) {
             case CalendarTypeEnum.Single:
                 this._selectSingleDate(day);
                 break;
@@ -438,7 +453,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * View ID
      */
     get viewId(): string {
-        return this.id() + '-day-view';
+        return this.id + '-day-view';
     }
 
     /**
@@ -498,8 +513,8 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      */
     _onKeydownDayHandler(event: KeyboardEvent, cell: CalendarDay<D>, index: number): void {
         if (event.key === 'Tab' && !event.shiftKey) {
-            if (this.focusEscapeFunction()) {
-                this.focusEscapeFunction()!(event);
+            if (this.focusEscapeFunction) {
+                this.focusEscapeFunction(event);
             }
         } else {
             this.calendarService.onKeydownHandler(event, index);
@@ -566,19 +581,19 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
             call.index = index;
         });
 
-        if (this.calType() === CalendarTypeEnum.Single && this._selectedDate) {
+        if (this.calType === CalendarTypeEnum.Single && this._selectedDate) {
             const _day = calendar.find((day) => this._dateTimeAdapter.datesEqual(day.date, this._selectedDate));
             this._changeSelectedSingleDay(_day, calendar);
         }
 
-        if (this.calType() === CalendarTypeEnum.Multi && this._selectedMultiDate) {
+        if (this.calType === CalendarTypeEnum.Multi && this._selectedMultiDate) {
             const _days = calendar.filter(
                 (day) => this._selectedMultiDate?.some((date) => this._isSameDay(day.date, date))
             );
             this._changeSelectedMultipleDays(_days, calendar);
         }
 
-        if (this.calType() === CalendarTypeEnum.Range && this._selectedRangeDate) {
+        if (this.calType === CalendarTypeEnum.Range && this._selectedRangeDate) {
             this._changeSelectedRangeDays(this._selectedRangeDate, calendar);
         }
 
@@ -688,26 +703,23 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         );
         const prevMonthLastDate = this._dateTimeAdapter.createDate(year, month, amountOfDaysInCurrentMonth);
         const prevMonthLastDay = amountOfDaysInCurrentMonth;
-        const startingDayOfWeek = this.startingDayOfWeek();
-        if (startingDayOfWeek) {
-            let prevMonthLastWeekDay = this._dateTimeAdapter.getDayOfWeek(prevMonthLastDate) - startingDayOfWeek;
-            /** Checking if there are some days cut by startingDayOfWeek option
-             *  If yes, there is whole week added, to avoid hiding
-             */
-            if (prevMonthLastWeekDay < 0) {
-                prevMonthLastWeekDay = prevMonthLastWeekDay + 7;
-            }
+        let prevMonthLastWeekDay = this._dateTimeAdapter.getDayOfWeek(prevMonthLastDate) - this.startingDayOfWeek;
 
-            if (prevMonthLastWeekDay < 6) {
-                while (prevMonthLastWeekDay >= 0) {
-                    const prevMonthDay = prevMonthLastDay - prevMonthLastWeekDay;
-                    const date = this._dateTimeAdapter.createDate(year, month, prevMonthDay);
-                    calendarDays.push({ ...this._getDay(date), monthStatus: 'previous' });
-                    prevMonthLastWeekDay--;
-                }
-            }
+        /** Checking if there are some days cut by startingDayOfWeek option
+         *  If yes, there is whole week added, to avoid hiding
+         */
+        if (prevMonthLastWeekDay < 0) {
+            prevMonthLastWeekDay = prevMonthLastWeekDay + 7;
         }
 
+        if (prevMonthLastWeekDay < 6) {
+            while (prevMonthLastWeekDay >= 0) {
+                const prevMonthDay = prevMonthLastDay - prevMonthLastWeekDay;
+                const date = this._dateTimeAdapter.createDate(year, month, prevMonthDay);
+                calendarDays.push({ ...this._getDay(date), monthStatus: 'previous' });
+                prevMonthLastWeekDay--;
+            }
+        }
         return calendarDays;
     }
 
@@ -757,8 +769,8 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         };
 
         /** Apply disabled state to days marked with passed function */
-        if (this.disableFunction()) {
-            day.disabled = this.disableFunction()!(date);
+        if (this.disableFunction) {
+            day.disabled = this.disableFunction(date);
         }
 
         return day;
@@ -771,17 +783,14 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     private _refreshShortWeekDays(): void {
         const shortDayOfWeekNames = this._dateTimeAdapter.getDayOfWeekNames('short');
         const dayOfWeekNames = this._dateTimeAdapter.getDayOfWeekNames('long');
-        const startingDayOfWeek = this.startingDayOfWeek();
 
-        if (startingDayOfWeek) {
-            this._shortWeekDays = shortDayOfWeekNames
-                .slice(startingDayOfWeek - 1)
-                .concat(shortDayOfWeekNames.slice(0, startingDayOfWeek - 1));
+        this._shortWeekDays = shortDayOfWeekNames
+            .slice(this.startingDayOfWeek - 1)
+            .concat(shortDayOfWeekNames.slice(0, this.startingDayOfWeek - 1));
 
-            this._longWeekDays = dayOfWeekNames
-                .slice(startingDayOfWeek - 1)
-                .concat(dayOfWeekNames.slice(0, startingDayOfWeek - 1));
-        }
+        this._longWeekDays = dayOfWeekNames
+            .slice(this.startingDayOfWeek - 1)
+            .concat(dayOfWeekNames.slice(0, this.startingDayOfWeek - 1));
 
         this.changeDetRef.markForCheck();
     }
@@ -791,7 +800,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * Gets special day number of specified date model
      */
     private _getSpecialDay(date: D): number | null {
-        const specialDay = this.specialDaysRules().find((specialDayRule) => specialDayRule.rule(date));
+        const specialDay = this.specialDaysRules.find((specialDayRule) => specialDayRule.rule(date));
         if (specialDay) {
             return specialDay.specialDayNumber;
         }
@@ -842,7 +851,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     private _setupKeyboardService(): void {
         this.calendarService.colAmount = this._amountOfCols;
 
-        this.calendarService.focusEscapeFunction = this.focusEscapeFunction()!;
+        this.calendarService.focusEscapeFunction = this.focusEscapeFunction;
 
         this.calendarService.onFocusIdChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
             this.focusOnCellByIndex(index);
@@ -858,21 +867,15 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
              * Calculate focused cell in new grid
              */
             const originalMonth = this._getNextMonth(); // month that was before moving back
-            const startingDayOfWeek = this.startingDayOfWeek();
-
-            if (startingDayOfWeek === undefined) {
-                return;
-            }
-
             const originalAmountOfWeeks = this._dateTimeAdapter.getAmountOfWeeks(
                 originalMonth.year,
                 originalMonth.month,
-                startingDayOfWeek
+                this.startingDayOfWeek
             );
             const prevMonthAmountOfWeeks = this._dateTimeAdapter.getAmountOfWeeks(
                 this._currentlyDisplayed.year,
                 this._currentlyDisplayed.month,
-                startingDayOfWeek
+                this.startingDayOfWeek
             );
             // trigger rendering for new grid so focus can be set
             this.changeDetRef.detectChanges();
@@ -929,8 +932,6 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     private _changeSelectedRangeDays(dates: DateRange<D>, calendar: CalendarDay<D>[]): void {
         /** Pull list of calendar days */
         const calendarList = calendar;
-        const disableStartFn = this.disableRangeStartFunction();
-        const disableEndFn = this.disableRangeEndFunction();
 
         /** Reset changing properties */
         calendarList.forEach(
@@ -955,7 +956,8 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
                     startDay &&
                     !startDay.blocked &&
                     !startDay.disabled &&
-                    (!disableStartFn || !disableStartFn(startDay.date))
+                    (typeof this.disableRangeStartFunction !== 'function' ||
+                        !this.disableRangeStartFunction(startDay.date))
                 ) {
                     startDay.selected = true;
                     startDay.selectedFirst = true;
@@ -964,7 +966,12 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
             if (dates.end) {
                 /** Find end date and mark it as selected */
                 endDay = calendarList.find((_day) => this._dateTimeAdapter.datesEqual(_day.date, dates.end));
-                if (endDay && !endDay.blocked && !endDay.disabled && (!disableEndFn || !disableEndFn(endDay.date))) {
+                if (
+                    endDay &&
+                    !endDay.blocked &&
+                    !endDay.disabled &&
+                    (typeof this.disableRangeEndFunction !== 'function' || !this.disableRangeEndFunction(endDay.date))
+                ) {
                     endDay.selected = true;
                     endDay.selectedLast = true;
                 }
@@ -984,20 +991,17 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
 
         this.refreshTabIndex(calendarList);
 
-        // Apply disabled state to days marked with passed function
-        const disableFn = this.disableFunction();
-        if (disableFn) {
-            calendarList.forEach((_day) => (_day.disabled = disableFn(_day.date)));
+        /** Apply disabled state to days marked with passed function */
+        if (this.disableFunction) {
+            calendarList.forEach((_day) => (_day.disabled = this.disableFunction!(_day.date)));
         }
 
-        if (this._selectCounter === 0 || this._selectCounter === 2) {
-            if (disableStartFn) {
-                calendarList.forEach((_day) => (_day.disabled = _day.disabled || disableStartFn(_day.date)));
-            }
-        } else if (this._selectCounter === 1) {
-            if (disableEndFn) {
-                calendarList.forEach((_day) => (_day.disabled = _day.disabled || disableEndFn(_day.date)));
-            }
+        if ((this._selectCounter === 0 || this._selectCounter === 2) && this.disableRangeStartFunction) {
+            calendarList.forEach(
+                (_day) => (_day.disabled = _day.disabled || this.disableRangeStartFunction!(_day.date))
+            );
+        } else if (this._selectCounter === 1 && this.disableRangeEndFunction) {
+            calendarList.forEach((_day) => (_day.disabled = _day.disabled || this.disableRangeEndFunction!(_day.date)));
         }
     }
 
@@ -1091,12 +1095,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * @param event Optional mouse event for handling hover effect.
      */
     private _handleRangeHoverEffect(event?: MouseEvent): void {
-        if (
-            this.calType() === CalendarTypeEnum.Range &&
-            this.rangeHoverEffect() &&
-            this._selectCounter === 1 &&
-            event
-        ) {
+        if (this.calType === CalendarTypeEnum.Range && this.rangeHoverEffect && this._selectCounter === 1 && event) {
             this._isOnRangePick = !this._isOnRangePick;
         } else {
             this._isOnRangePick = false;
@@ -1141,11 +1140,8 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * Stores the computed classes in the weekHeaderClasses array.
      */
     private _computeWeekHeaderClasses(): void {
-        const disableFn = this.disableFunction();
-        if (disableFn) {
-            this._weekHeaderClasses = this._calendarDayList.map((day, i) =>
-                this.calType() === 'multi' && !disableFn(day.date) ? 'event-enabled' : ''
-            );
-        }
+        this._weekHeaderClasses = this._calendarDayList.map((day, i) =>
+            this.calType === 'multi' && this.disableFunction && !this.disableFunction(day.date) ? 'event-enabled' : ''
+        );
     }
 }

@@ -4,22 +4,20 @@ import {
     Component,
     DestroyRef,
     ElementRef,
-    inject,
+    EventEmitter,
     Input,
-    input,
-    model,
     OnChanges,
     OnInit,
-    output,
+    Output,
     SimpleChanges,
-    viewChild,
-    ViewEncapsulation
+    ViewChild,
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarService } from '../calendar.service';
@@ -45,16 +43,20 @@ import { FdCalendarView } from '../types';
 })
 export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
     /** Currently active view. Needed for a11y labels. */
-    activeView = model<FdCalendarView>();
+    @Input()
+    activeView: FdCalendarView;
 
     /** Currently displayed date on the calendar. */
-    currentlyDisplayed = model<CalendarCurrent>();
+    @Input()
+    currentlyDisplayed: CalendarCurrent;
 
     /** whether previous navigation button should be disabled in the header. */
-    previousButtonDisabled = input<boolean>();
+    @Input()
+    previousButtonDisabled: boolean;
 
     /** whether next navigation button should be disabled in the header. */
-    nextButtonDisabled = input<boolean>();
+    @Input()
+    nextButtonDisabled: boolean;
 
     /**
      * Object to customize year grid
@@ -66,22 +68,28 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
     }
 
     /** Calendar ID */
-    id = input<string>();
+    @Input()
+    id: string;
 
     /** Whether calendar should be rendered in mobile landscape mode. */
-    mobileLandscape = input(false);
+    @Input()
+    mobileLandscape = false;
 
     /** Event emitted when the active view should change. */
-    readonly activeViewChange = output<FdCalendarView>();
+    @Output()
+    readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
 
     /** Event emitted when the previous button is clicked. */
-    readonly previousClicked = output<void>();
+    @Output()
+    readonly previousClicked: EventEmitter<void> = new EventEmitter<void>();
 
     /** Event emitted when the next button is clicked. */
-    readonly nextClicked = output<void>();
+    @Output()
+    readonly nextClicked: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
-    _prevButtonComponent = viewChild('prevButton', { read: ElementRef });
+    @ViewChild('prevButton', { read: ElementRef })
+    _prevButtonComponent: ElementRef;
 
     /** Aria label for the previous button. Depends on the active view. */
     get previousAriaLabel(): 'coreCalendar.previousMonthLabel' | 'coreCalendar.previousYearLabel' {
@@ -116,29 +124,29 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
 
     /** Get information is calendar is on aggregated years view */
     get isOnAggregatedYearsView(): boolean {
-        return this.activeView() === 'aggregatedYear';
+        return this.activeView === 'aggregatedYear';
     }
 
     /** Get information is calendar is on year view */
     get isOnYearView(): boolean {
-        return this.activeView() === 'year';
+        return this.activeView === 'year';
     }
 
     /** Get information is calendar is on month view */
     get isOnMonthView(): boolean {
-        return this.activeView() === 'month';
+        return this.activeView === 'month';
     }
 
     /** Get information is calendar is on day view */
     get isOnDayView(): boolean {
-        return this.activeView() === 'day';
+        return this.activeView === 'day';
     }
 
     /**
      * Component id
      */
     get viewId(): string {
-        return this.id() + '-header';
+        return this.id + '-header';
     }
 
     /**
@@ -246,10 +254,7 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
      * Focus on focusable control within the header
      */
     focus(): void {
-        const prevButtonComponent = this._prevButtonComponent();
-        if (prevButtonComponent) {
-            prevButtonComponent.nativeElement?.focus();
-        }
+        this._prevButtonComponent.nativeElement?.focus();
     }
 
     /** @hidden */
@@ -258,11 +263,9 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
             event.stopPropagation();
         }
 
-        this.activeView.set(type === this.activeView() ? 'day' : type);
-        const activeView = this.activeView();
-        if (activeView) {
-            this.activeViewChange.emit(activeView);
-        }
+        this.activeView = type === this.activeView ? 'day' : type;
+
+        this.activeViewChange.emit(this.activeView);
     }
 
     /** @hidden */
@@ -283,28 +286,19 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
 
     /** @hidden */
     private _calculateSelectMonthLabel(): void {
-        const getNormalizedDate = this._getNormalizedDate();
-        if (getNormalizedDate) {
-            this.selectMonthLabel = this._monthNames[getNormalizedDate.month - 1];
-        }
+        this.selectMonthLabel = this._monthNames[this._getNormalizedDate().month - 1];
     }
 
     /** @hidden */
     private _calculateSelectYearLabel(): void {
-        const getNormalizedDate = this._getNormalizedDate();
-        if (getNormalizedDate) {
-            this.selectYearLabel = this._getYearName(getNormalizedDate.year);
-        }
+        this.selectYearLabel = this._getYearName(this._getNormalizedDate().year);
     }
 
     /** @hidden */
     private _calculateSelectAggregatedYearLabel(): void {
-        const getNormalizedDate = this._getNormalizedDate();
-        if (getNormalizedDate) {
-            this.selectAggregatedYearLabel = `${this._getYearName(getNormalizedDate?.year)}-${this._getYearName(
-                getNormalizedDate.year + this._amountOfYearsPerPeriod
-            )}`;
-        }
+        this.selectAggregatedYearLabel = `${this._getYearName(this._getNormalizedDate().year)}-${this._getYearName(
+            this._getNormalizedDate().year + this._amountOfYearsPerPeriod
+        )}`;
     }
 
     /** @hidden */
@@ -318,17 +312,14 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
     }
 
     /** @hidden */
-    private _getNormalizedDate(): Nullable<CalendarCurrent> {
-        const currentlyDisplayed = this.currentlyDisplayed();
-        if (currentlyDisplayed) {
-            return {
-                year: isNaN(currentlyDisplayed.year)
-                    ? this._dateTimeAdapter.getYear(this._dateTimeAdapter.now())
-                    : currentlyDisplayed.year,
-                month: isNaN(currentlyDisplayed.month)
-                    ? this._dateTimeAdapter.getMonth(this._dateTimeAdapter.now())
-                    : currentlyDisplayed.month
-            };
-        }
+    private _getNormalizedDate(): CalendarCurrent {
+        return {
+            year: isNaN(this.currentlyDisplayed.year)
+                ? this._dateTimeAdapter.getYear(this._dateTimeAdapter.now())
+                : this.currentlyDisplayed.year,
+            month: isNaN(this.currentlyDisplayed.month)
+                ? this._dateTimeAdapter.getMonth(this._dateTimeAdapter.now())
+                : this.currentlyDisplayed.month
+        };
     }
 }

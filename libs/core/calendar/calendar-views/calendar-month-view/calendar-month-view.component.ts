@@ -4,15 +4,15 @@ import {
     Component,
     DestroyRef,
     ElementRef,
+    EventEmitter,
     Inject,
+    Input,
     OnChanges,
     OnInit,
+    Output,
     SimpleChanges,
     ViewEncapsulation,
-    inject,
-    input,
-    model,
-    output
+    inject
 } from '@angular/core';
 
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
@@ -39,19 +39,24 @@ import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalend
 })
 export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, FocusableCalendarView {
     /** The id of the calendar passed from the parent component */
-    id = model<string>();
+    @Input()
+    id: string;
 
     /** A number (1-12) representing the selected month */
-    monthSelected = model<number>();
+    @Input()
+    monthSelected: number;
 
     /** A function that handles escape focus */
-    focusEscapeFunction = input<EscapeFocusFunction>();
+    @Input()
+    focusEscapeFunction: EscapeFocusFunction;
 
     /** A year the month view is referring to */
-    year = model<number>();
+    @Input()
+    year: number;
 
     /** An event fired when a new month is selected */
-    readonly monthClicked = output<number>();
+    @Output()
+    readonly monthClicked: EventEmitter<number> = new EventEmitter<number>();
 
     /**
      * @hidden
@@ -117,7 +122,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
 
     /** View ID */
     get viewId(): string {
-        return this.id() + '-month-view';
+        return this.id + '-month-view';
     }
 
     /**
@@ -141,11 +146,8 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
         if (event) {
             event.stopPropagation();
         }
-        this.monthSelected.set(monthCell.month);
-        const monthSelected = this.monthSelected();
-        if (monthSelected) {
-            this.monthClicked.emit(monthSelected);
-        }
+        this.monthSelected = monthCell.month;
+        this.monthClicked.emit(this.monthSelected);
     }
 
     /**
@@ -208,7 +210,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
      * Method that check if this is selected month
      */
     _isSelected(id: number): boolean {
-        return id + this._monthOffset === this.monthSelected();
+        return id + this._monthOffset === this.monthSelected;
     }
 
     /**
@@ -224,13 +226,13 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
                 month,
                 label: monthName,
                 ariaLabel: this._dateTimeAdapter.format(
-                    this._dateTimeAdapter.createDate(this.year()!, month, 1),
+                    this._dateTimeAdapter.createDate(this.year, month, 1),
                     this._dateTimeFormats.display.monthA11yLabel
                 ),
                 index,
-                selected: month === this.monthSelected(),
+                selected: month === this.monthSelected,
                 current: month === this.currentMonth,
-                tabIndex: month === this.monthSelected() ? 0 : -1
+                tabIndex: month === this.monthSelected ? 0 : -1
             };
         });
 
@@ -256,7 +258,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
     private _setupKeyboardService(): void {
         this._calendarService.rowAmount = this._amountOfRows;
         this._calendarService.colAmount = this._amountOfColPerRow;
-        this._calendarService.focusEscapeFunction = this.focusEscapeFunction();
+        this._calendarService.focusEscapeFunction = this.focusEscapeFunction;
 
         this._calendarService.onFocusIdChange
             .pipe(takeUntilDestroyed(this._destroyRef))

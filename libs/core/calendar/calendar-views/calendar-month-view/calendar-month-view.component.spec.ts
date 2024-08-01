@@ -21,8 +21,8 @@ describe('CalendarMonthViewComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent<CalendarMonthViewComponent<FdDate>>(CalendarMonthViewComponent);
         component = fixture.componentInstance;
-        component.id.set('test');
-        component.year.set(2020);
+        component.id = 'test';
+        component.year = 2020;
         component.ngOnInit();
         fixture.detectChanges();
     });
@@ -103,7 +103,7 @@ describe('CalendarMonthViewComponent', () => {
             preventDefault: () => {}
         } as KeyboardEvent;
         component._onKeydownMonthHandler(event, testMonth);
-        expect(component.monthSelected()).toEqual(6);
+        expect(component.monthSelected).toEqual(6);
     });
 
     it('Should select a month with Space', () => {
@@ -112,7 +112,7 @@ describe('CalendarMonthViewComponent', () => {
             preventDefault: () => {}
         } as KeyboardEvent;
         component._onKeydownMonthHandler(event, testMonth);
-        expect(component.monthSelected()).toEqual(6);
+        expect(component.monthSelected).toEqual(6);
     });
 
     it('Should generate grid', () => {

@@ -18,33 +18,33 @@ describe('Calendar2HeaderComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent<CalendarHeaderComponent<FdDate>>(CalendarHeaderComponent);
         component = fixture.componentInstance;
-        component.currentlyDisplayed.set({ month: 10, year: 2018 });
+        component.currentlyDisplayed = { month: 10, year: 2018 };
         fixture.detectChanges();
     });
 
     it('Should switch to year view, when changed to year and not no year view', () => {
         jest.spyOn(component.activeViewChange, 'emit');
-        component.activeView.set('day');
+        component.activeView = 'day';
         component._processViewChange('year');
         expect(component.activeViewChange.emit).toHaveBeenCalledWith('year');
-        expect(component.activeView()).toBe('year');
+        expect(component.activeView).toBe('year');
         expect(component.isOnYearView).toBeTruthy();
     });
 
     it('Should switch to day view, when changed to year and on year view', () => {
         jest.spyOn(component.activeViewChange, 'emit');
-        component.activeView.set('year');
+        component.activeView = 'year';
         component._processViewChange('year');
         expect(component.activeViewChange.emit).toHaveBeenCalledWith('day');
-        expect(component.activeView()).toBe('day');
+        expect(component.activeView).toBe('day');
     });
 
     it('Should switch to month view, changed to month and not no month view', () => {
         jest.spyOn(component.activeViewChange, 'emit');
-        component.activeView.set('day');
+        component.activeView = 'day';
         component._processViewChange('month');
         expect(component.activeViewChange.emit).toHaveBeenCalledWith('month');
-        expect(component.activeView()).toBe('month');
+        expect(component.activeView).toBe('month');
         expect(component.isOnMonthView).toBeTruthy();
     });
 });
