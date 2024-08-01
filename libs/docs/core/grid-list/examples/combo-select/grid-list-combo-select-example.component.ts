@@ -49,7 +49,7 @@ interface GridListItem {
     ]
 })
 export class GridListComboSelectComponent {
-    selectionMode: string = 'MultiSelect';
+    selectionMode: string = 'None';
 
     @ViewChild(GridListComponent)
     grid: GridListComponent<GridListItem>;
