@@ -4,7 +4,7 @@
     [attr.aria-roledescription]="'coreCalendar.calendarYearsRangeViewDescription' | fdTranslate"
 >
     <tbody class="fd-calendar__group" role="rowgroup">
-        @for (colYears of _calendarYearListGrid; let rowIndex = $index; track: colYears + '-' + rowIndex) {
+        @for (colYears of _calendarYearListGrid; track colYears + '-' + rowIndex; let rowIndex = $index) {
             <tr class="fd-calendar__row">
                 @for (cell of colYears; track cell.id; let colIndex = $index) {
                     <td
