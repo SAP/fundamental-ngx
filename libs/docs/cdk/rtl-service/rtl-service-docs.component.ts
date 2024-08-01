@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {
     CodeExampleComponent,
+    CodeSnippetComponent,
     ComponentExampleComponent,
     DescriptionComponent,
     DocsSectionTitleComponent,
@@ -20,7 +21,8 @@ const rtlServiceBasicExampleHtml = 'rtl-service-basic-example/rtl-service-basic-
         DescriptionComponent,
         ComponentExampleComponent,
         RtlServiceBasicExampleComponent,
-        CodeExampleComponent
+        CodeExampleComponent,
+        CodeSnippetComponent
     ],
     standalone: true
 })
@@ -38,4 +40,15 @@ export class RtlServiceDocsComponent {
             component: 'RtlServiceBasicExampleComponent'
         }
     ];
+
+    injectionTokenExample = `
+@NgModule({
+    providers: [
+        RtlService,
+        { provide: RTL_LANGUAGE, useValue: ['ar', 'he', 'fa', 'your-custom-lang'] }
+    ],
+    ...
+})
+export class AppModule { }
+`;
 }
