@@ -21,8 +21,13 @@ import { FormHeaderComponent } from '@fundamental-ngx/core/form';
             <fd-checkbox [(ngModel)]="checkboxValue6" [disabled]="true" label="Disabled label"></fd-checkbox>
         </div>
         <div>
+            <p>Read Only:</p>
+            <fd-checkbox [(ngModel)]="checkboxValue7" [readonly]="true" label="Read only label"></fd-checkbox>
+            <fd-checkbox [value]="!checkboxValue7" [readonly]="true" label="Read only & checked label"></fd-checkbox>
+        </div>
+        <div>
             <p>Compact:</p>
-            <fd-checkbox [(ngModel)]="checkboxValue7" fdCompact label="Compact label"></fd-checkbox>
+            <fd-checkbox [(ngModel)]="checkboxValue8" fdCompact label="Compact label"></fd-checkbox>
         </div>
     `,
     standalone: true,
@@ -36,4 +41,5 @@ export class CheckboxStatesExampleComponent {
     public checkboxValue5 = false;
     public checkboxValue6 = false;
     public checkboxValue7 = false;
+    public checkboxValue8 = false;
 }

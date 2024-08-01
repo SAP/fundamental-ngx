@@ -126,6 +126,10 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
     @Input()
     disabled: boolean;
 
+    /** Allows to set checkbox to readonly (visible but not editable) */
+    @Input()
+    readonly: boolean;
+
     /** Enables controls third state. */
     @Input()
     tristate = false;

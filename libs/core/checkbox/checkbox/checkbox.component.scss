@@ -18,4 +18,10 @@ fd-checkbox {
     .fd-checkbox.is-display:disabled + .fd-checkbox__label {
         opacity: 1;
     }
+
+    .fd-checkbox--readonly:disabled + .fd-checkbox__label {
+        opacity: 1;
+        pointer-events: none;
+        cursor: default;
+    }
 }
