@@ -1,5 +1,5 @@
 import { HttpClient, provideHttpClient } from '@angular/common/http';
-import { ApplicationConfig, SecurityContext, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { PreloadAllModules, provideRouter, withHashLocation, withPreloading } from '@angular/router';
 import { provideContentDensity } from '@fundamental-ngx/core/content-density';
@@ -42,6 +42,6 @@ export const appConfig: ApplicationConfig = {
             provide: Translations,
             useFactory: translations
         },
-        importProvidersFrom(MarkdownModule.forRoot({ loader: HttpClient, sanitize: SecurityContext.NONE }))
+        importProvidersFrom(MarkdownModule.forRoot({ loader: HttpClient }))
     ]
 };
