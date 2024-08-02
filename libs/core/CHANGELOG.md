@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.2-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.18...v0.51.2-rc.19) (2024-08-02)
+
+
+### Bug Fixes
+
+* **core:** users cannot customize class names on form-messages ([#12214](https://github.com/SAP/fundamental-ngx/issues/12214)) ([214ee4c](https://github.com/SAP/fundamental-ngx/commit/214ee4cceba791190a63837575c935641c28f30e))
+
+
+
+
+
 ## [0.51.2-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.17...v0.51.2-rc.18) (2024-07-31)
 
 
