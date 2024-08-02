@@ -19,9 +19,15 @@ fd-checkbox {
         opacity: 1;
     }
 
-    .fd-checkbox--readonly:disabled + .fd-checkbox__label {
-        opacity: 1;
-        pointer-events: none;
-        cursor: default;
+    .fd-checkbox.is-readonly {
+        & + .fd-checkbox__label {
+            opacity: 1;
+            pointer-events: none;
+            cursor: pointer;
+        }
+        &:focus,
+        &:hover {
+            cursor: pointer;
+        }
     }
 }

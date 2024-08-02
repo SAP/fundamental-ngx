@@ -43,3 +43,11 @@
         <fdp-checkbox name="disabled-cb" title="Red" [disabled]="true" label="Red"></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>
+
+<h3>Read only Checkbox</h3>
+<fdp-form-group>
+    <fdp-form-field #readonly id="readonly" [rank]="1">
+        <fdp-checkbox title="Yellow" [readonly]="true" label="Yellow"></fdp-checkbox>
+        <fdp-checkbox title="Violet" [readonly]="true" label="Violet" [checked]="true"></fdp-checkbox>
+    </fdp-form-field>
+</fdp-form-group>

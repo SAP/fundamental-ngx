@@ -25,7 +25,6 @@ const checkboxReactiveFormsTsCode = 'checkbox-reactive-forms-example.component.t
 const checkboxStatesTsCode = 'checkbox-states-example.component.ts';
 const checkboxCustomLabelTsCode = 'checkbox-custom-label-example.component.ts';
 const checkboxWrappingTsCode = 'checkbox-label-wrapping-example.component.ts';
-const checkboxDisplayOnlyMode = 'checkbox-display-mode-example.component.ts';
 
 @Component({
     selector: 'app-input',
@@ -108,15 +107,6 @@ export class CheckboxDocsComponent {
             fileName: 'checkbox-label-wrapping-example',
             component: 'CheckboxLabelWrappingExampleComponent',
             code: getAssetFromModuleAssets(checkboxWrappingTsCode)
-        }
-    ];
-
-    checkboxDisplayOnlyMode: ExampleFile[] = [
-        {
-            language: 'typescript',
-            fileName: 'checkbox-display-mode-example',
-            component: 'CheckboxDisplayModeExampleComponent',
-            code: getAssetFromModuleAssets(checkboxDisplayOnlyMode)
         }
     ];
 }
