@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { map, takeUntil } from 'rxjs';
 import { intersectionObservable } from '../../functions';
 import { DestroyedService } from '../../services';
@@ -8,10 +8,10 @@ import { DestroyedService } from '../../services';
     standalone: true,
     providers: [DestroyedService]
 })
-export class IntersectionSpyDirective {
+export class IntersectionSpyDirective implements OnInit {
     /** Intersection offset in px. */
     @Input('fdkIntersectionSpy')
-    offset = 20;
+    offset = 0;
     /** Intersection observer options. */
     @Input()
     viewportOptions: IntersectionObserverInit;
@@ -28,6 +28,12 @@ export class IntersectionSpyDirective {
 
     /** @hidden */
     ngOnInit(): void {
+        if (!this.viewportOptions) {
+            this.viewportOptions = {};
+        }
+        if (!this.viewportOptions.rootMargin && this.offset) {
+            this.viewportOptions.rootMargin = this.offset + 'px';
+        }
         intersectionObservable(this._elementRef.nativeElement, this.viewportOptions)
             .pipe(
                 map((entries) => entries[0]),
