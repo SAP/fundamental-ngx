@@ -3,6 +3,73 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.0...v0.51.3-rc.1) (2024-08-02)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.51.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.51.2...v0.51.3-rc.0) (2024-08-02)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.51.2](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.20...v0.51.2) (2024-08-02)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.51.2-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.19...v0.51.2-rc.20) (2024-08-02)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.51.2-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.18...v0.51.2-rc.19) (2024-08-02)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.51.2-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.17...v0.51.2-rc.18) (2024-07-31)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.51.2-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.16...v0.51.2-rc.17) (2024-07-31)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.51.2-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.15...v0.51.2-rc.16) (2024-07-31)
+
+
+### Bug Fixes
+
+* **core:** bug where line clamp directive would not set textContent when originalText is falsy ([#12201](https://github.com/SAP/fundamental-ngx/issues/12201)) ([f1099d9](https://github.com/SAP/fundamental-ngx/commit/f1099d948ae3e073a071208dabcc9dc51c4dcc4c))
+
+
+
+
+
 ## [0.51.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.14...v0.51.2-rc.15) (2024-07-31)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk

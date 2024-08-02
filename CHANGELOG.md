@@ -3,6 +3,85 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.0...v0.51.3-rc.1) (2024-08-02)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.51.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.51.2...v0.51.3-rc.0) (2024-08-02)
+
+
+### Bug Fixes
+
+* roll back 12213 ([#12215](https://github.com/SAP/fundamental-ngx/issues/12215)) ([cf3bd76](https://github.com/SAP/fundamental-ngx/commit/cf3bd764ab256249099605cd0d28bbb1bcd9d0f2))
+
+
+
+
+
+## [0.51.2](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.20...v0.51.2) (2024-08-02)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.51.2-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.19...v0.51.2-rc.20) (2024-08-02)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.51.2-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.18...v0.51.2-rc.19) (2024-08-02)
+
+
+### Bug Fixes
+
+* **core:** users cannot customize class names on form-messages ([#12214](https://github.com/SAP/fundamental-ngx/issues/12214)) ([214ee4c](https://github.com/SAP/fundamental-ngx/commit/214ee4cceba791190a63837575c935641c28f30e))
+
+
+
+
+
+## [0.51.2-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.17...v0.51.2-rc.18) (2024-07-31)
+
+
+### Bug Fixes
+
+* **core:** multi-input new token bug ([#12203](https://github.com/SAP/fundamental-ngx/issues/12203)) ([d261af7](https://github.com/SAP/fundamental-ngx/commit/d261af7ed4ab59aa2094c05a826f106b90270ba1))
+
+
+
+
+
+## [0.51.2-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.16...v0.51.2-rc.17) (2024-07-31)
+
+
+### Bug Fixes
+
+* **core:** combo box communicate by object negative case fixed(when search term is invalid) ([#12207](https://github.com/SAP/fundamental-ngx/issues/12207)) ([c36028a](https://github.com/SAP/fundamental-ngx/commit/c36028a178c26a86e1a2bf0d449ea7d11d6b7649))
+
+
+
+
+
+## [0.51.2-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.15...v0.51.2-rc.16) (2024-07-31)
+
+
+### Bug Fixes
+
+* **core:** bug where line clamp directive would not set textContent when originalText is falsy ([#12201](https://github.com/SAP/fundamental-ngx/issues/12201)) ([f1099d9](https://github.com/SAP/fundamental-ngx/commit/f1099d948ae3e073a071208dabcc9dc51c4dcc4c))
+
+
+
+
+
 ## [0.51.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.51.2-rc.14...v0.51.2-rc.15) (2024-07-31)
 
 

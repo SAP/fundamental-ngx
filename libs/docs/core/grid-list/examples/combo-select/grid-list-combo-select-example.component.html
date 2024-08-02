@@ -38,7 +38,7 @@
                         fd-button
                         fdType="transparent"
                         glyph="group-2"
-                        aria-label="Group"
+                        [attr.aria-label]="'Group with ' + list.length + ' items'"
                         title="Group"
                         fdCompact
                         (click)="showAlert('Group')"
@@ -66,10 +66,6 @@
                     </fd-grid-list-item>
                 }
             </fd-grid-list>
-            <span aria-hidden="true" [style.display]="'none'" id="grid-list-button-1">Sort</span>
-            <span aria-hidden="true" [style.display]="'none'" id="grid-list-title-bar-1"
-                >Products with {{ list.length }} items</span
-            >
         }
         @case ('MultiSelect') {
             <fd-grid-list selectionMode="multiSelect" (selectionChange)="onSelectionChange($event)">
