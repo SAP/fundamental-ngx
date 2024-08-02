@@ -45,6 +45,5 @@ export class RtlServiceBasicExampleComponent {
     // Method to handle changes in RTL state
     simulateRTL(): void {
         this._rtlService.rtl.next(!this._rtlService.rtl.value);
-        this._updateTextContainerDirection();
     }
 }
