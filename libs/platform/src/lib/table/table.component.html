@@ -163,21 +163,11 @@
                                 (intersected)="$event && _tableRowService.loadChildRows(row.parent!)"
                                 [style.top.px]="pageScrollingThreshold * -1"
                             ></tr>
+                            <ng-container [ngTemplateOutlet]="loadingSkeletonRow"></ng-container>
                         </ng-container>
                     </ng-container>
                 </ng-container>
-                <tr
-                    fd-table-row
-                    *ngIf="
-                        pageScrolling &&
-                        (_tableService.tableLoading$ | async) === true &&
-                        _dataSourceDirective._firstLoadingDone
-                    "
-                >
-                    <td fd-table-cell *fdkRepeat="_tableColumnsLength">
-                        <fd-skeleton style="margin: auto 0" type="text" textLines="1" width="60%"></fd-skeleton>
-                    </td>
-                </tr>
+                <ng-container [ngTemplateOutlet]="loadingSkeletonRow"></ng-container>
                 <tr
                     aria-hidden="true"
                     *ngIf="pageScrolling && !_virtualScrollDirective?.scrollWholeRows"
@@ -240,4 +230,18 @@
             </td>
         </tr>
     </tbody>
+</ng-template>
+
+<!-- Template for a row that is loading -->
+<ng-template #loadingSkeletonRow>
+    <tr
+        fd-table-row
+        *ngIf="
+            pageScrolling && (_tableService.tableLoading$ | async) === true && _dataSourceDirective._firstLoadingDone
+        "
+    >
+        <td fd-table-cell *fdkRepeat="_tableColumnsLength">
+            <fd-skeleton style="margin: auto 0" type="text" textLines="1" width="60%"></fd-skeleton>
+        </td>
+    </tr>
 </ng-template>
