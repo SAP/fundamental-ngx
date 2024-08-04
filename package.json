@@ -104,7 +104,7 @@
     "@types/marked": "5.0.2",
     "@types/node": "^18.16.9",
     "@typescript-eslint/eslint-plugin": "7.9.0",
-    "@typescript-eslint/parser": "7.9.0",
+    "@typescript-eslint/parser": "7.18.0",
     "@wdio/allure-reporter": "7.7.3",
     "@wdio/cli": "7.16.16",
     "@wdio/jasmine-framework": "7.0.0",
