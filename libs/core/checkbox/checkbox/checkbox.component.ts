@@ -276,6 +276,12 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
         this._detectChanges();
     }
 
+    /** @hidden Called by FormControl - used to disable editablity.*/
+    setReadOnlyState(readonly: boolean): void {
+        this.readonly = readonly;
+        this._detectChanges();
+    }
+
     /**
      * @hidden
      * Based on current control state:
