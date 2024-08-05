@@ -51,7 +51,7 @@
                 fdMultiAnnouncer
                 [multiAnnouncerOptions]="_suggestions"
             >
-                @for (token of _selectedSuggestions; track token) {
+                @for (token of _selectedSuggestions; track token.id) {
                     <fd-token [readOnly]="_cva.disabled" (onCloseClick)="_removeToken(token, $event)">
                         {{ token.label }}
                     </fd-token>
@@ -205,7 +205,7 @@
                 }
             }
         } @else {
-            @for (optionItem of _suggestions; track optionItem; let i = $index) {
+            @for (optionItem of _suggestions; track optionItem.id; let i = $index) {
                 <li
                     fd-list-item
                     role="option"

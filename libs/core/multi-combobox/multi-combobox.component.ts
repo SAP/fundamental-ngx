@@ -647,6 +647,9 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
         if (!this.limitless) {
             map.set('limit', this._mapLimit);
+        } else if (this.limitless && this.dataSourceDirective.dataSource) {
+            const length = Object.keys(this.dataSourceDirective.dataSource).length;
+            map.set('limit', new InjectionToken<number>('Map limit≥', { factory: () => length }));
         }
 
         this.dataSourceDirective.dataSourceProvider?.match(map);
