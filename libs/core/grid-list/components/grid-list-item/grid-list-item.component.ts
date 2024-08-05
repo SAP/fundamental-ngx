@@ -407,6 +407,9 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     _onClick(event: MouseEvent): void {
+        console.log({
+            target: event.target
+        });
         if (!this._isElementCanBeClicked(event)) {
             return;
         }
@@ -465,7 +468,8 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
             !classList.contains('fd-grid-list__radio-label') &&
             !classList.contains('fd-grid-list__radio-input') &&
             !classList.contains('fd-grid-list__checkbox-label') &&
-            !classList.contains('fd-grid-list__checkbox-input')
+            !classList.contains('fd-grid-list__checkbox-input') &&
+            !classList.contains('fd-checkbox__checkmark')
         );
     }
 
