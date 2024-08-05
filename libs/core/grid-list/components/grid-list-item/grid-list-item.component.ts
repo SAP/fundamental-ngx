@@ -407,9 +407,6 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     _onClick(event: MouseEvent): void {
-        console.log({
-            target: event.target
-        });
         if (!this._isElementCanBeClicked(event)) {
             return;
         }
