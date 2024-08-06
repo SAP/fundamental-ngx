@@ -72,7 +72,6 @@
                         [disabled]="disabled"
                         (onCloseClick)="_onTokenClick(option, false, $event)"
                         (onRemove)="_onTokenClick(option, false)"
-                        [title]="option.label"
                     >
                         <span [innerHtml]="option.label"></span>
                     </fd-token>
@@ -126,7 +125,6 @@
                         (click)="_onCheckboxClick(option, $event, idx, true)"
                         (keyup)="_onCheckboxKeyup(option, $event, idx, true)"
                         [selected]="!!option.isSelected"
-                        [title]="option.label"
                     >
                         <fd-checkbox (click)="_onCheckboxClick(option, $event, idx)" [value]="option.isSelected">
                             <!-- TODO -->
