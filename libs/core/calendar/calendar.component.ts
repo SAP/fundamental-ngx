@@ -104,11 +104,15 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
 
     /** The currently selected date model in multiple mode. */
     @Input()
-    selectedMultiDate: Array<D>;
+    selectedMultipleDates: Array<D>;
 
-    /** The currently selected FdDates model start and end in range mode. */
+    /** The currently selected date model with start and end in range mode. */
     @Input()
     selectedRangeDate: DateRange<D>;
+
+    /** The currently selected date model with multiple ranges. */
+    @Input()
+    selectedMultipleDateRanges: Array<DateRange<D>>;
 
     /**
      * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
@@ -123,12 +127,13 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     showWeekNumbers = false;
 
     /**
-     * Whether user wants to select multiple days
-     * If showWeekNumbers is true user can click on week number, and it will mark related row
-     * User can click weekDays, and it will mark related column
+     * Whether the user wants to select multiple days or multiple range dates.
+     * If `displayWeekNumbers` is true, the user can click on the week number to mark the related row.
+     * The user can click on week days to mark the related column.
+     * Note: Clickable selection for week row or column does not work for range selections.
      */
     @Input()
-    multiSelectable = false;
+    allowMultipleSelection = false;
 
     /** Whether calendar is used inside mobile in landscape mode, it also adds close button on right side */
     @Input()
@@ -151,7 +156,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     /**
      * The type of calendar
      * 'single' for single date selection
-     * 'multi' for multiple date selection
      * 'range' for a range of dates.
      */
     @Input()
@@ -206,13 +210,19 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     @Output()
     readonly selectedDateChange: EventEmitter<D> = new EventEmitter<D>();
 
-    /** Event thrown every time selected date in single mode is changed */
+    /** Event thrown every time the selected dates in multiple mode are changed. */
     @Output()
-    readonly selectedMultiDateChange: EventEmitter<Array<D>> = new EventEmitter<Array<D>>();
+    readonly selectedMultipleDatesChange: EventEmitter<Array<D>> = new EventEmitter<Array<D>>();
 
     /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
     readonly selectedRangeDateChange: EventEmitter<DateRange<D>> = new EventEmitter<DateRange<D>>();
+
+    /** Event thrown every time the first or last date in multiple range mode is changed. */
+    @Output()
+    readonly selectedMultipleDateRangesChange: EventEmitter<Array<DateRange<D>>> = new EventEmitter<
+        Array<DateRange<D>>
+    >();
 
     /** Event thrown every time when value is overwritten from outside and throw back isValid */
     @Output()
@@ -334,7 +344,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     disableRangeEndFunction: DisableDateFunction<D> = () => false;
 
     /** @hidden */
-    onChange: (_: D | Array<D> | DateRange<D>) => void = () => {};
+    onChange: (_: D | Array<D> | DateRange<D> | Array<DateRange<D>>) => void = () => {};
 
     /** @hidden */
     onTouched: () => void = () => {};
@@ -369,40 +379,54 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * @hidden
      * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms.
      */
-    writeValue(selected: D | Array<D> | DateRange<D>): void {
+    writeValue(selected: D | Array<D> | DateRange<D> | Array<DateRange<D>>): void {
         let valid = true;
 
-        if (this.calType === CalendarTypeEnum.Single) {
-            selected = <D>selected;
+        if (this.allowMultipleSelection) {
+            if (this.calType === CalendarTypeEnum.Single) {
+                if (!Array.isArray(selected)) {
+                    selected = <Array<D>>[selected];
+                }
 
-            valid = this._dateTimeAdapter.isValid(selected);
+                selected = <Array<D>>selected;
 
-            this.selectedDate = selected;
-        }
+                valid = selected.every((d) => this._dateTimeAdapter.isValid(d));
 
-        if (this.calType === CalendarTypeEnum.Multi && selected) {
-            if (!Array.isArray(selected)) {
-                selected = <Array<D>>[selected];
+                this.selectedMultipleDates = selected;
             }
 
-            selected = <Array<D>>selected;
+            if (this.calType === CalendarTypeEnum.Range && selected) {
+                selected = <Array<DateRange<D>>>selected;
 
-            valid = selected.every((d) => this._dateTimeAdapter.isValid(d));
+                valid = selected.every(
+                    (range) => this._dateTimeAdapter.isValid(range.start) && this._dateTimeAdapter.isValid(range.end)
+                );
 
-            this.selectedMultiDate = selected;
-        }
+                this.selectedMultipleDateRanges = selected.map((range) => ({
+                    start: range.start,
+                    end: range.end
+                }));
+            }
+        } else {
+            if (this.calType === CalendarTypeEnum.Single) {
+                selected = <D>selected;
 
-        if (this.calType === CalendarTypeEnum.Range && selected) {
-            selected = <DateRange<D>>selected;
+                valid = this._dateTimeAdapter.isValid(selected);
 
-            if (!this._dateTimeAdapter.isValid(selected.start) || !this._dateTimeAdapter.isValid(selected.end)) {
-                valid = false;
+                this.selectedDate = selected;
             }
 
-            this.selectedRangeDate = {
-                start: selected.start,
-                end: selected.end
-            };
+            if (this.calType === CalendarTypeEnum.Range && selected) {
+                selected = <DateRange<D>>selected;
+                if (!this._dateTimeAdapter.isValid(selected.start) || !this._dateTimeAdapter.isValid(selected.end)) {
+                    valid = false;
+                }
+
+                this.selectedRangeDate = {
+                    start: selected.start,
+                    end: selected.end
+                };
+            }
         }
 
         if (valid) {
@@ -481,11 +505,11 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * @hidden
      * Method that is triggered by events from day view component, when there is selected multi date changed
      */
-    selectedMultiDateChanged(date: Array<D>): void {
-        this.selectedMultiDate = date;
+    selectedMultipleDatesChanged(date: Array<D>): void {
+        this.selectedMultipleDates = date;
         this._setNavigationButtonsStates();
         this.onChange(date);
-        this.selectedMultiDateChange.emit(date);
+        this.selectedMultipleDatesChange.emit(date);
         this.closeCalendar.emit();
     }
 
@@ -498,6 +522,19 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
             this.selectedRangeDate = { start: dates.start, end: dates.end };
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
             this.onChange(this.selectedRangeDate);
+            this.closeCalendar.emit();
+        }
+    }
+
+    /**
+     * @hidden
+     * Method that is triggered by events from day view component, when there is selected range date changed
+     */
+    selectedMultipleDateRangesChanged(dates: Array<DateRange<D>>): void {
+        if (dates) {
+            // this.selectedMultipleDateRanges.push({ start: dates.start, end: dates.end });
+            this.selectedMultipleDateRangesChange.emit(this.selectedMultipleDateRanges);
+            this.onChange(this.selectedMultipleDateRanges);
             this.closeCalendar.emit();
         }
     }
@@ -676,18 +713,31 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
 
     /** Method that provides information if model selected date/dates have properly types and are valid */
     isModelValid(): boolean {
-        if (this.calType === CalendarTypeEnum.Single) {
-            return this._dateTimeAdapter.isValid(this.selectedDate);
-        }
-        if (this.calType === CalendarTypeEnum.Range) {
-            return (
-                this.selectedRangeDate &&
-                this._dateTimeAdapter.isValid(this.selectedRangeDate.start) &&
-                this._dateTimeAdapter.isValid(this.selectedRangeDate.end)
-            );
-        }
-        if (this.calType === CalendarTypeEnum.Multi && this.selectedMultiDate) {
-            return this.selectedMultiDate && this.selectedMultiDate.every((d) => this._dateTimeAdapter.isValid(d));
+        if (this.allowMultipleSelection) {
+            if (this.calType === CalendarTypeEnum.Single) {
+                return (
+                    this.selectedMultipleDates &&
+                    this.selectedMultipleDates.every((d) => this._dateTimeAdapter.isValid(d))
+                );
+            }
+            if (this.calType === CalendarTypeEnum.Range) {
+                return (
+                    this.selectedMultipleDateRanges &&
+                    this.selectedMultipleDateRanges.every((dr) => this._dateTimeAdapter.isValid(dr.start)) &&
+                    this.selectedMultipleDateRanges.every((dr) => this._dateTimeAdapter.isValid(dr.end))
+                );
+            }
+        } else {
+            if (this.calType === CalendarTypeEnum.Single) {
+                return this._dateTimeAdapter.isValid(this.selectedDate);
+            }
+            if (this.calType === CalendarTypeEnum.Range) {
+                return (
+                    this.selectedRangeDate &&
+                    this._dateTimeAdapter.isValid(this.selectedRangeDate.start) &&
+                    this._dateTimeAdapter.isValid(this.selectedRangeDate.end)
+                );
+            }
         }
         return false;
     }
@@ -708,25 +758,47 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * Day grid is based on currently displayed month and year
      */
     private _prepareDisplayedView(): void {
-        if (this.calType === CalendarTypeEnum.Single && this._dateTimeAdapter.isValid(this.selectedDate)) {
+        if (
+            this.calType === CalendarTypeEnum.Single &&
+            this._dateTimeAdapter.isValid(this.selectedDate) &&
+            !this.allowMultipleSelection
+        ) {
             this._currentlyDisplayed = {
                 year: this._dateTimeAdapter.getYear(this.selectedDate),
                 month: this._dateTimeAdapter.getMonth(this.selectedDate)
             };
-        } else if (this.selectedMultiDate?.length > 0) {
+        } else if (this.selectedMultipleDates?.length > 0 && this.allowMultipleSelection) {
             this._currentlyDisplayed = {
-                year: this._dateTimeAdapter.getYear(this.selectedMultiDate[0]),
-                month: this._dateTimeAdapter.getMonth(this.selectedMultiDate[0])
+                year: this._dateTimeAdapter.getYear(this.selectedMultipleDates[0]),
+                month: this._dateTimeAdapter.getMonth(this.selectedMultipleDates[0])
             };
-        } else if (this.selectedRangeDate && this.selectedRangeDate.start) {
+        } else if (this.selectedRangeDate && this.selectedRangeDate.start && !this.allowMultipleSelection) {
             this._currentlyDisplayed = {
                 year: this._dateTimeAdapter.getYear(this.selectedRangeDate.start),
                 month: this._dateTimeAdapter.getMonth(this.selectedRangeDate.start)
             };
-        } else if (this.selectedRangeDate && this.selectedRangeDate.end) {
+        } else if (this.selectedRangeDate && this.selectedRangeDate.end && !this.allowMultipleSelection) {
             this._currentlyDisplayed = {
                 year: this._dateTimeAdapter.getYear(this.selectedRangeDate.end),
                 month: this._dateTimeAdapter.getMonth(this.selectedRangeDate.end)
+            };
+        } else if (
+            this.selectedMultipleDateRanges?.length > 0 &&
+            this.selectedMultipleDateRanges[0].start &&
+            this.allowMultipleSelection
+        ) {
+            this._currentlyDisplayed = {
+                year: this._dateTimeAdapter.getYear(this.selectedMultipleDateRanges[0].start),
+                month: this._dateTimeAdapter.getMonth(this.selectedMultipleDateRanges[0].start)
+            };
+        } else if (
+            this.selectedMultipleDateRanges?.length > 0 &&
+            this.selectedMultipleDateRanges[0].end &&
+            this.allowMultipleSelection
+        ) {
+            this._currentlyDisplayed = {
+                year: this._dateTimeAdapter.getYear(this.selectedMultipleDateRanges[0].end),
+                month: this._dateTimeAdapter.getMonth(this.selectedMultipleDateRanges[0].end)
             };
         } else {
             const today = this._dateTimeAdapter.today();

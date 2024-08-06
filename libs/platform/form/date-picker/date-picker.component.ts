@@ -3,25 +3,27 @@ import {
     Component,
     ElementRef,
     EventEmitter,
+    inject,
     Input,
     Output,
     ViewChild,
-    ViewEncapsulation,
-    inject
+    ViewEncapsulation
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
+    CalendarComponent,
+    CalendarDayViewComponent,
+    CalendarType,
     CalendarYearGrid,
-    DatePickerType,
     DateRange,
     DaysOfWeek,
     FdCalendarView
 } from '@fundamental-ngx/core/calendar';
 import { DatePickerComponent, DatePickerComponent as FdDatePickerComponent } from '@fundamental-ngx/core/date-picker';
-import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { BaseInput } from '@fundamental-ngx/platform/shared';
@@ -48,14 +50,14 @@ import { BaseInput } from '@fundamental-ngx/platform/shared';
         '(blur)': 'onTouched()'
     },
     standalone: true,
-    imports: [DatePickerComponent, FormsModule]
+    imports: [DatePickerComponent, FormsModule, CalendarDayViewComponent, CalendarComponent]
 })
 export class PlatformDatePickerComponent<D> extends BaseInput {
     /**
      * date-picker value set as controller value
      */
     @Input()
-    set value(value: DateRange<D> | D) {
+    set value(value: D | Array<D> | DateRange<D> | Array<DateRange<D>>) {
         super.setValue(value);
     }
     get value(): DateRange<D> | D {
@@ -65,15 +67,23 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     /** below code taken from core/date-picker */
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
-    type: DatePickerType = 'single';
+    type: CalendarType = 'single';
 
-    /** The currently selected CalendarDay model */
+    /** The currently selected date model in single mode. */
     @Input()
-    selectedDate: D;
+    selectedDate: Nullable<D>;
 
-    /** The currently selected FdDates model start and end in range mode. */
+    /** The currently selected date model in multiple mode. */
     @Input()
-    selectedRangeDate: DateRange<D> = { start: null, end: null };
+    selectedMultipleDates: Array<D> = [];
+
+    /** The currently selected date model with start and end in range mode. */
+    @Input()
+    selectedRangeDate: DateRange<D>;
+
+    /** The currently selected date model with multiple ranges. */
+    @Input()
+    selectedMultipleDateRanges: Array<DateRange<D>> = [];
 
     /** The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on. */
     @Input()
@@ -188,6 +198,15 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     @Input()
     showWeekNumbers = true;
 
+    /**
+     * Whether the user wants to select multiple days or multiple range dates.
+     * If `displayWeekNumbers` is true, the user can click on the week number to mark the related row.
+     * The user can click on week days to mark the related column.
+     * Note: Clickable selection for week row or column does not work for range selections.
+     */
+    @Input()
+    allowMultipleSelection = false;
+
     /** Whether the date picker is open. Can be used through two-way binding. */
     @Input()
     isOpen = false;
@@ -230,13 +249,23 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     @Output()
     readonly isOpenChange = new EventEmitter<boolean>();
 
-    /** Fired when a new date is selected. */
+    /** Event thrown every time selected date in single mode is changed */
     @Output()
-    readonly selectedDateChange = new EventEmitter<Nullable<D>>();
+    readonly selectedDateChange: EventEmitter<Nullable<D>> = new EventEmitter<Nullable<D>>();
+
+    /** Event thrown every time the selected dates in multiple mode are changed. */
+    @Output()
+    readonly selectedMultipleDatesChange: EventEmitter<Array<D>> = new EventEmitter<Array<D>>();
 
     /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
-    readonly selectedRangeDateChange = new EventEmitter<DateRange<D>>();
+    readonly selectedRangeDateChange: EventEmitter<DateRange<D>> = new EventEmitter<DateRange<D>>();
+
+    /** Event thrown every time the first or last date in multiple range mode is changed. */
+    @Output()
+    readonly selectedMultipleDateRangesChange: EventEmitter<Array<DateRange<D>>> = new EventEmitter<
+        Array<DateRange<D>>
+    >();
 
     /** Event thrown every time calendar active view is changed */
     @Output()
@@ -294,7 +323,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     disableRangeEndFunction: (value: D) => boolean = () => false;
 
     /** @hidden */
-    writeValue(value: D | DateRange<D> | null): void {
+    writeValue(value: D | Array<D> | DateRange<D> | Array<DateRange<D>> | null): void {
         super.writeValue(value);
         this.detectChanges();
     }
@@ -303,24 +332,43 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      * validates date on date change.
      * @param value D | DateRange<D>
      */
-    handleDateChange(value: D | DateRange<D>): void {
+    handleDateChange(value: D | Array<D> | DateRange<D> | Array<DateRange<D>>): void {
         this.value = value;
 
-        if (this.type === 'single' && !this.value && !this.allowNull) {
-            this._datePickerValid = false;
-        } else if (this.type === 'range' && !this.allowNull) {
-            const dateRange = this.value as DateRange<D>;
-            this._datePickerValid = !!dateRange.start;
+        if (this.allowMultipleSelection) {
+            if (this.type === 'single' && (!this.value || !this.allowNull)) {
+                this._datePickerValid = false;
+            } else if (this.type === 'range' && !this.allowNull) {
+                const dateRanges = this.value as Array<DateRange<D>>;
+                this._datePickerValid = dateRanges.every((range) => !!range.start);
+            } else {
+                this._datePickerValid = true;
+            }
+
+            this.stateChanges.next('date picker: handleDateInputChange');
+
+            if (this.type === 'single') {
+                this.handleSelectedMultipleDatesChange(this.selectedMultipleDates);
+            } else if (this.type === 'range') {
+                this.handleSelectedMultipleDateRangesChange(this.selectedMultipleDateRanges);
+            }
         } else {
-            this._datePickerValid = true;
-        }
+            if (this.type === 'single' && !this.value && !this.allowNull) {
+                this._datePickerValid = false;
+            } else if (this.type === 'range' && !this.allowNull) {
+                const dateRange = this.value as DateRange<D>;
+                this._datePickerValid = !!dateRange.start;
+            } else {
+                this._datePickerValid = true;
+            }
 
-        this.stateChanges.next('date picker: handleDateInputChange');
+            this.stateChanges.next('date picker: handleDateInputChange');
 
-        if (this.type === 'single') {
-            this.handleSelectedDateChange(this.selectedDate);
-        } else if (this.type === 'range') {
-            this.handleSelectedRangeDateChange(this.selectedRangeDate);
+            if (this.type === 'single') {
+                this.handleSelectedDateChange(this.selectedDate);
+            } else if (this.type === 'range') {
+                this.handleSelectedRangeDateChange(this.selectedRangeDate);
+            }
         }
         this.markForCheck();
     }
@@ -338,8 +386,18 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     };
 
     /** @hidden */
+    handleSelectedMultipleDatesChange = (fdDate: Array<D>): void => {
+        this.selectedMultipleDatesChange.emit(fdDate);
+    };
+
+    /** @hidden */
     handleSelectedRangeDateChange = (fdRangeDate: DateRange<D>): void => {
         this.selectedRangeDateChange.emit(fdRangeDate);
+    };
+
+    /** @hidden */
+    handleSelectedMultipleDateRangesChange = (fdRangeDate: Array<DateRange<D>>): void => {
+        this.selectedMultipleDateRangesChange.emit(fdRangeDate);
     };
 
     /** @hidden */

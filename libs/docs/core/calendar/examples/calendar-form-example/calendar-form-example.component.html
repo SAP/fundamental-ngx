@@ -11,10 +11,11 @@
     </div>
     <div fd-form-item>
         <fd-calendar
-            calType="multi"
+            calType="single"
             formControlName="multiDate"
             [startingDayOfWeek]="1"
             [showWeekNumbers]="true"
+            [allowMultipleSelection]="true"
         ></fd-calendar>
         <small>
             Touched: {{ customForm.controls.multiDate.touched }}<br />

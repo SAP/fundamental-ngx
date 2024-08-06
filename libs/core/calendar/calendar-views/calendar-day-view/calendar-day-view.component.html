@@ -13,7 +13,7 @@
                     [attr.aria-label]="'coreCalendar.weekColumnLabel' | fdTranslate"
                 ></th>
             }
-            @for (day of shortWeekDays; track day; let i = $index) {
+            @for (day of shortWeekDays; track day + '' + i; let i = $index) {
                 <th
                     class="fd-calendar__item fd-calendar__item--side-helper"
                     [ngClass]="_weekHeaderClasses[i]"
@@ -29,12 +29,12 @@
         </tr>
     </thead>
     <tbody class="fd-calendar__group" role="rowgroup">
-        @for (row of _dayViewGrid; track row; let rowIndex = $index) {
+        @for (row of _dayViewGrid; track row + '' + rowIndex; let rowIndex = $index) {
             <tr class="fd-calendar__row" role="row">
                 @if (showWeekNumbers) {
                     <th
                         class="fd-calendar__item fd-calendar__item--side-helper"
-                        [ngClass]="{ 'event-enabled': calType === 'multi' }"
+                        [ngClass]="{ 'event-enabled': allowMultipleSelection && calType !== 'range' }"
                         role="rowheader"
                         scope="row"
                         [attr.data-fd-calendar-week]="_weeks[rowIndex]"
@@ -53,7 +53,7 @@
                         }
                     </th>
                 }
-                @for (cell of row; track cell; let cellIndex = $index) {
+                @for (cell of row; track cell + '' + cellIndex; let cellIndex = $index) {
                     <td
                         class="fd-calendar__item"
                         role="gridcell"

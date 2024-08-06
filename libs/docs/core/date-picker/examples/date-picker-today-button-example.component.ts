@@ -32,7 +32,39 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
         ></fd-date-picker>
         <div>Selected Date: {{ date?.toDateString() || 'null' }}</div>
         <br />
-        <fd-date-picker type="range" [showTodayButton]="true" [(ngModel)]="selectedRange"> </fd-date-picker>
+        <label fd-form-label for="multiDatePicker">Multi Date Picker</label>
+        <fd-date-picker
+            type="single"
+            inputId="multiDatePicker"
+            [showTodayButton]="true"
+            [allowMultipleSelection]="true"
+            [(ngModel)]="dates"
+        ></fd-date-picker>
+        <br />
+        <div>
+            Selected Dates:<br />
+            @for (date of dates; track date) {
+                {{ date.toDateString() || 'null' }}<br />
+            }
+        </div>
+        <br />
+        <label fd-form-label for="compactMultiDatePicker">Compact Multi Date Picker</label>
+        <fd-date-picker
+            type="single"
+            inputId="compactMultiDatePicker"
+            [showTodayButton]="true"
+            [allowMultipleSelection]="true"
+            [(ngModel)]="dates"
+            fdCompact
+        ></fd-date-picker>
+        <div>
+            Selected Dates:<br />
+            @for (date of dates; track date) {
+                {{ date.toDateString() || 'null' }}<br />
+            }
+        </div>
+        <br />
+        <fd-date-picker type="range" [showTodayButton]="true" [(ngModel)]="selectedRange"></fd-date-picker>
         <br />
         <div>Selected First Date: {{ this.selectedRange?.start?.toDateString() || 'null' }}</div>
         <br />
@@ -52,6 +84,12 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
 })
 export class DatePickerTodayButtonExampleComponent {
     date: Nullable<FdDate> = FdDate.getNow();
+    dates: Nullable<FdDate[]> = [
+        new FdDate(2019, 9, 1),
+        new FdDate(2019, 9, 2),
+        new FdDate(2019, 9, 3),
+        new FdDate(2019, 9, 4)
+    ];
 
     selectedRange: Nullable<DateRange<FdDate>>;
 

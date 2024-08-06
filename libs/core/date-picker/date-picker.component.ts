@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -8,7 +9,9 @@ import {
     DestroyRef,
     ElementRef,
     EventEmitter,
+    forwardRef,
     Inject,
+    inject,
     Injector,
     Input,
     OnChanges,
@@ -21,10 +24,7 @@ import {
     TemplateRef,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation,
-    booleanAttribute,
-    forwardRef,
-    inject
+    ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
@@ -34,14 +34,15 @@ import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     CalendarComponent,
+    CalendarDayViewComponent,
+    CalendarType,
     CalendarYearGrid,
-    DatePickerType,
     DateRange,
     DaysOfWeek,
     FdCalendarView,
     NavigationButtonDisableFunction
 } from '@fundamental-ngx/core/calendar';
-import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import {
     FormItemControl,
     FormMessageComponent,
@@ -113,7 +114,8 @@ let datePickerCounter = 0;
         CalendarComponent,
         BarModule,
         ButtonComponent,
-        FdTranslatePipe
+        FdTranslatePipe,
+        CalendarDayViewComponent
     ]
 })
 export class DatePickerComponent<D>
@@ -129,7 +131,7 @@ export class DatePickerComponent<D>
 {
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
-    type: DatePickerType = 'single';
+    type: CalendarType = 'single';
 
     /** Date picker input placeholder string */
     @Input()
@@ -157,13 +159,21 @@ export class DatePickerComponent<D>
         this._popoverFormMessage.triggers = triggers;
     }
 
-    /** The currently selected CalendarDay model */
+    /** The currently selected date model in single mode. */
     @Input()
     selectedDate: Nullable<D>;
 
-    /** The currently selected FdDates model start and end in range mode. */
+    /** The currently selected date model in multiple mode. */
+    @Input()
+    selectedMultipleDates: Array<D> = [];
+
+    /** The currently selected date model with start and end in range mode. */
     @Input()
     selectedRangeDate: DateRange<D> = { start: null, end: null };
+
+    /** The currently selected date model with multiple ranges. */
+    @Input()
+    selectedMultipleDateRanges: Array<DateRange<D>> = [{ start: null, end: null }];
 
     /** The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on. */
     @Input()
@@ -294,6 +304,15 @@ export class DatePickerComponent<D>
     @Input()
     showWeekNumbers = true;
 
+    /**
+     * Whether the user wants to select multiple days or multiple range dates.
+     * If `displayWeekNumbers` is true, the user can click on the week number to mark the related row.
+     * The user can click on week days to mark the related column.
+     * Note: Clickable selection for week row or column does not work for range selections.
+     */
+    @Input()
+    allowMultipleSelection = false;
+
     /** Whether the date picker is open. Can be used through two-way binding. */
     @Input()
     set isOpen(value: boolean) {
@@ -351,13 +370,23 @@ export class DatePickerComponent<D>
     @Output()
     readonly isOpenChange = new EventEmitter<boolean>();
 
-    /** Fired when a new date is selected. */
+    /** Event thrown every time selected date in single mode is changed */
     @Output()
-    readonly selectedDateChange = new EventEmitter<Nullable<D>>();
+    readonly selectedDateChange: EventEmitter<Nullable<D>> = new EventEmitter<Nullable<D>>();
+
+    /** Event thrown every time the selected dates in multiple mode are changed. */
+    @Output()
+    readonly selectedMultipleDatesChange: EventEmitter<Array<D>> = new EventEmitter<Array<D>>();
 
     /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
-    readonly selectedRangeDateChange = new EventEmitter<DateRange<D>>();
+    readonly selectedRangeDateChange: EventEmitter<DateRange<D>> = new EventEmitter<DateRange<D>>();
+
+    /** Event thrown every time the first or last date in multiple range mode is changed. */
+    @Output()
+    readonly selectedMultipleDateRangesChange: EventEmitter<Array<DateRange<D>>> = new EventEmitter<
+        Array<DateRange<D>>
+    >();
 
     /** Event thrown every time calendar active view is changed */
     @Output()
@@ -505,11 +534,21 @@ export class DatePickerComponent<D>
     dialogApprove(): void {}
 
     /** @hidden */
-    dialogDismiss(prevValue: D | DateRange<D>): void {
-        if (this._isDateRange(prevValue)) {
-            this.handleRangeDateChange(prevValue);
+    dialogDismiss(prevValue: D | Array<D> | DateRange<D> | Array<DateRange<D>>): void {
+        if (this.allowMultipleSelection) {
+            if (this._isMultipleDateRanges(prevValue)) {
+                this.handleMultipleDateRangesChange(prevValue);
+            } else {
+                const value = prevValue as Array<D>;
+                this.handleMultipleDatesChange(value);
+            }
         } else {
-            this.handleSingleDateChange(prevValue);
+            if (this._isDateRange(prevValue)) {
+                this.handleRangeDateChange(prevValue);
+            } else {
+                const value = prevValue as D;
+                this.handleSingleDateChange(value);
+            }
         }
     }
 
@@ -542,6 +581,7 @@ export class DatePickerComponent<D>
                 } else {
                     this._focusTrapService?.unpauseCurrentFocusTrap();
                 }
+
                 calendar?.setCurrentlyDisplayed(this._calendarPendingDate);
                 calendar?.initialFocus();
             });
@@ -567,7 +607,7 @@ export class DatePickerComponent<D>
 
     /** @hidden */
     closeFromCalendar(): void {
-        if (this.type === 'single' && this.closeOnDateChoose) {
+        if (this.type === 'single' && this.closeOnDateChoose && !this.allowMultipleSelection) {
             this.onTouched();
             this.closeCalendar();
         }
@@ -624,13 +664,26 @@ export class DatePickerComponent<D>
 
     /**
      * @hidden
-     * Method that is triggered date formatting in the date control
+     * Method that is triggered by events from the calendar component when the selected multiple dates change.
      */
-    formatInputDate(date: Nullable<D>): void {
-        if (!date) {
+    handleMultipleDatesChange(dates: Array<D>): void {
+        if (!dates || dates.length === 0) {
+            this.selectedMultipleDates = [];
+            this.selectedMultipleDatesChange.emit([]);
+            this.onChange([]);
+            this._refreshCurrentlyDisplayedCalendarDate(null);
+            this._inputFieldDate = null;
             return;
         }
-        this._inputFieldDate = this._formatDate(date);
+        this.selectedMultipleDates = dates;
+        this.selectedMultipleDatesChange.emit(dates);
+        this.onChange(dates);
+        /** Assuming the first date in the array is used for refresh */
+        if (this.showTodayButton) {
+            this._refreshCurrentlyDisplayedCalendarDate(dates[0]);
+        }
+        this._inputFieldDate = this.formatDateArray(dates);
+        this._isInvalidDateInput = !this.isModelValid();
     }
 
     /**
@@ -661,18 +714,77 @@ export class DatePickerComponent<D>
 
     /**
      * @hidden
+     * Method that is triggered by events from the calendar component when the selected multiple range dates change.
+     */
+    handleMultipleDateRangesChange(dates: Array<DateRange<D>>): void {
+        if (!dates || dates.length === 0) {
+            return;
+        }
+
+        const startChanged = !this._dateTimeAdapter.datesEqual(
+            dates[0].start,
+            this.selectedMultipleDateRanges[0]?.start
+        );
+        const endChanged = !this._dateTimeAdapter.datesEqual(dates[0].end, this.selectedMultipleDateRanges[0]?.end);
+
+        if (dates && (startChanged || endChanged)) {
+            const shouldClose = this.closeOnDateChoose && dates.every((range) => range.end !== null);
+            if (dates.every((range) => range.end !== null)) {
+                this._inputFieldDate = this._formatMultipleDateRanges(dates);
+                this.selectedMultipleDateRanges = dates;
+                this.selectedMultipleDateRangesChange.emit(dates);
+                this.onChange(dates);
+                this._refreshCurrentlyDisplayedCalendarDate(dates[0].start);
+                this._isInvalidDateInput = !this.isModelValid();
+            }
+
+            if (shouldClose) {
+                this.closeCalendar();
+            }
+        }
+
+        this._changeDetectionRef.detectChanges();
+    }
+
+    /**
+     * @hidden
+     * Method that is triggered date formatting in the date control
+     */
+    formatInputDate(date: Nullable<D>): void {
+        if (!date) {
+            return;
+        }
+        this._inputFieldDate = this._formatDate(date);
+    }
+
+    /**
+     * @hidden
      * Method that is triggered when Today-Selection-Button clicked, it changes selected date or date range to today's date
      */
     onTodayButtonClick(): void {
         const todayDate = this._dateTimeAdapter.today();
-        if (this.type === 'single') {
-            this.handleSingleDateChange(todayDate);
-            this.closeFromCalendar();
-        } else if (this.type === 'range') {
-            this.handleRangeDateChange({
-                start: todayDate,
-                end: todayDate
-            });
+        if (this.allowMultipleSelection) {
+            if (this.type === 'single') {
+                this.handleMultipleDatesChange([todayDate]);
+                this.closeFromCalendar();
+            } else if (this.type === 'range') {
+                this.handleMultipleDateRangesChange([
+                    {
+                        start: todayDate,
+                        end: todayDate
+                    }
+                ]);
+            }
+        } else {
+            if (this.type === 'single') {
+                this.handleSingleDateChange(todayDate);
+                this.closeFromCalendar();
+            } else if (this.type === 'range') {
+                this.handleRangeDateChange({
+                    start: todayDate,
+                    end: todayDate
+                });
+            }
         }
     }
 
@@ -729,7 +841,7 @@ export class DatePickerComponent<D>
      * @hidden
      * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms
      */
-    writeValue(selected: DateRange<D> | D | null): void {
+    writeValue(selected: D | Array<D> | DateRange<D> | Array<DateRange<D>> | null): void {
         /** If written value is not defined, null, empty string */
         if (!selected) {
             this._inputFieldDate = '';
@@ -739,36 +851,70 @@ export class DatePickerComponent<D>
                 end: null
             };
             this.selectedDate = null;
+            this.selectedMultipleDates = [];
             this._changeDetectionRef.detectChanges();
             return;
         }
-        if (this.type === 'single') {
-            /**
-             * For single mode, if the date is invalid, model is changed, it refreshes currently
-             * input field text, but it does not refresh currently displayed day
-             */
-            selected = this._parseDate(selected);
-            this.selectedDate = selected;
-            this._inputFieldDate = this._formatDate(selected);
-            this._refreshCurrentlyDisplayedCalendarDate(selected);
-        }
-        if (this.type === 'range') {
-            /**
-             * For range mode, if the date is invalid, model is changed, but it does not refresh currently
-             * displayed day view, or input field text
-             */
-            selected = selected as DateRange<D>;
-            if (selected?.start) {
-                this.selectedRangeDate = {
-                    start: this._parseDate(selected.start),
-                    end: this._parseDate(selected.end)
-                };
-                this._refreshCurrentlyDisplayedCalendarDate(selected.start);
-                this._inputFieldDate = this._formatDateRange(selected);
-            } else {
-                this._inputFieldDate = '';
+        if (this.allowMultipleSelection && Array.isArray(selected)) {
+            if (this.type === 'single') {
+                /**
+                 * For single mode, if the date is invalid, model is changed, it refreshes currently
+                 * input field text, but it does not refresh currently displayed day
+                 */
+                // selected = this._parseDate(selected)
+                selected = <Array<D>>selected;
+
+                this.selectedMultipleDates = selected;
+                this._inputFieldDate = this.formatDateArray(selected);
+                this._refreshCurrentlyDisplayedCalendarDate(selected[0]);
+            }
+            if (this.type === 'range') {
+                /**
+                 * For range mode, if the date is invalid, model is changed, but it does not refresh currently
+                 * displayed day view, or input field text
+                 */
+                selected = selected as Array<DateRange<D>>;
+                if (selected && selected.length > 0) {
+                    this.selectedMultipleDateRanges = selected.map((range) => ({
+                        start: this._parseDate(range.start),
+                        end: this._parseDate(range.end)
+                    }));
+                    this._refreshCurrentlyDisplayedCalendarDate(selected[0].start);
+                    this._inputFieldDate = this._formatMultipleDateRanges(selected);
+                } else {
+                    this._inputFieldDate = '';
+                }
+            }
+        } else {
+            if (this.type === 'single') {
+                /**
+                 * For single mode, if the date is invalid, model is changed, it refreshes currently
+                 * input field text, but it does not refresh currently displayed day
+                 */
+                selected = this._parseDate(selected) as D;
+                this.selectedDate = selected;
+                this._inputFieldDate = this._formatDate(selected);
+                this._refreshCurrentlyDisplayedCalendarDate(selected);
+            }
+            if (this.type === 'range') {
+                /**
+                 * For range mode, if the date is invalid, model is changed, but it does not refresh currently
+                 * displayed day view, or input field text
+                 */
+                selected = selected as DateRange<D>;
+                if (selected?.start) {
+                    this.selectedRangeDate = {
+                        start: this._parseDate(selected.start),
+                        end: this._parseDate(selected.end)
+                    };
+                    this._refreshCurrentlyDisplayedCalendarDate(selected.start);
+                    this._inputFieldDate = this._formatDateRange(selected);
+                } else {
+                    this._inputFieldDate = '';
+                }
             }
         }
+
         this._isInvalidDateInput = !this.isModelValid();
         this._changeDetectionRef.detectChanges();
     }
@@ -776,103 +922,47 @@ export class DatePickerComponent<D>
     /**
      * @hidden
      * Method, which is responsible for transforming string to date, depending on type or
-     * validation the results are different. It also changes to state of _isInvalidDateInput
+     * validation the results are different. It also changes the state of _isInvalidDateInput
      */
     dateStringUpdate(dateStr: string): void {
         this._inputFieldDate = dateStr;
-        /** Case when there is single mode */
-        if (this.type === 'single') {
-            if (!dateStr) {
-                this._isInvalidDateInput = !this.allowNull;
-                this.selectedDate = null;
-                this._refreshCurrentlyDisplayedCalendarDate(this.selectedDate);
-                this.onChange(this.selectedDate);
-                this.selectedDateChange.emit(this.selectedDate);
-                return;
+        if (this.allowMultipleSelection) {
+            if (this.type === 'single') {
+                this.updateMultipleDates(dateStr);
+            } else {
+                this._updateMultipleDateRanges(dateStr);
             }
-            const date = this._parseDate(dateStr);
-
-            /** Check if dates are equal, if so, there is no need to make any changes */
-            if (!this._dateTimeAdapter.datesEqual(date, this.selectedDate)) {
-                this._isInvalidDateInput = !this._isSingleModelValid(date);
-
-                /** Check if date is valid, if it's not, there is no need to refresh calendar */
-                if (!this._isInvalidDateInput) {
-                    this._refreshCurrentlyDisplayedCalendarDate(date);
-                }
-
-                /**
-                 * Date in model is changed no matter if the parsed date from string is valid or not.
-                 */
-                this.selectedDate = date;
-                this.onChange(this.selectedDate);
-                this.selectedDateChange.emit(this.selectedDate);
-            }
-
-            /** Case when there is range mode */
         } else {
-            if (!dateStr) {
-                this._isInvalidDateInput = !this.allowNull;
-                this.selectedRangeDate = {
-                    start: null,
-                    end: null
-                };
-                this._refreshCurrentlyDisplayedCalendarDate(this.selectedRangeDate.start);
-                this.onChange(this.selectedRangeDate);
-                this.selectedRangeDateChange.emit(this.selectedRangeDate);
-                return;
-            }
-            const [startDateStr, endDateStr] = dateStr.split(this._rangeDelimiter);
-            const startDate = this._parseDate(startDateStr);
-            const endDate = this._parseDate(endDateStr);
-
-            /**
-             * Check if dates are equal, if dates are the same there is no need to make any changes
-             * Date in model is changed no matter if the parsed dates from string are valid or not.
-             */
-            if (
-                !this._dateTimeAdapter.datesEqual(startDate, this.selectedRangeDate.start) ||
-                !this._dateTimeAdapter.datesEqual(endDate, this.selectedRangeDate.end)
-            ) {
-                let selectedRangeDate: DateRange<D> | null = null;
-
-                /** If the end date is before the start date, there is need to replace them  */
-                if (
-                    this._dateTimeAdapter.isValid(startDate) &&
-                    this._dateTimeAdapter.isValid(endDate) &&
-                    this._dateTimeAdapter.compareDate(startDate, endDate) > 0
-                ) {
-                    selectedRangeDate = { start: endDate, end: startDate };
-                } else {
-                    selectedRangeDate = { start: startDate, end: endDate };
-                }
-                this._isInvalidDateInput = !this._isRangeModelValid(selectedRangeDate);
-
-                /** Whole object is changed, even it's invalid */
-                this.selectedRangeDate = selectedRangeDate;
-                this.selectedRangeDateChange.emit(this.selectedRangeDate);
-                this.onChange(this.selectedRangeDate);
-
-                /** Check if start date is valid, if it's not, there is no need o refresh calendar */
-                if (this._isStartDateValid(this.selectedRangeDate.start)) {
-                    this._refreshCurrentlyDisplayedCalendarDate(this.selectedRangeDate.start);
-                }
+            if (this.type === 'single') {
+                this._updateSingleDate(dateStr);
+            } else {
+                this._updateRangeDate(dateStr);
             }
         }
     }
 
     /** Method that provides information if model selected date/dates have properly types and are valid */
     isModelValid(): boolean {
-        if (this.type === 'single') {
-            return this._isSingleModelValid(this.selectedDate);
+        if (this.allowMultipleSelection) {
+            if (this.type === 'single') {
+                return this._isMultipleModelValid(this.selectedMultipleDates);
+            } else {
+                return this._isMultipleRangesModelValid(this.selectedMultipleDateRanges);
+            }
         } else {
-            return this._isRangeModelValid(this.selectedRangeDate);
+            if (this.type === 'single') {
+                return this._isSingleModelValid(this.selectedDate);
+            } else {
+                return this._isRangeModelValid(this.selectedRangeDate);
+            }
         }
     }
 
     /** Returns current selected date. */
-    getSelectedDate(): D | DateRange<D> {
-        return this.selectedDate || this.selectedRangeDate;
+    getSelectedDate(): D | Array<D> | DateRange<D> | Array<DateRange<D>> {
+        return (
+            this.selectedDate || this.selectedMultipleDates || this.selectedRangeDate || this.selectedMultipleDateRanges
+        );
     }
 
     /** @hidden */
@@ -916,12 +1006,22 @@ export class DatePickerComponent<D>
         return (this._isDateValid(date) && !this.disableFunction(date)) || (!date && this.allowNull);
     }
 
+    /** Method that returns info if multiple date model given is valid */
+    private _isMultipleModelValid(dates: Array<Nullable<D>>): boolean {
+        return dates?.every((date) => this._isSingleModelValid(date));
+    }
+
     /** Method that returns info if range date model given is valid */
     private _isRangeModelValid(fdRangeDate: DateRange<D>): boolean {
         return (
             (fdRangeDate && this._isStartDateValid(fdRangeDate.start) && this._isEndDateValid(fdRangeDate.end)) ||
             (!fdRangeDate.start && !fdRangeDate.end && this.allowNull)
         );
+    }
+
+    /** Method that returns info if multiple range date model given is valid */
+    private _isMultipleRangesModelValid(ranges: Array<DateRange<D>>): boolean {
+        return ranges?.every((range) => this._isRangeModelValid(range));
     }
 
     /** Method that returns info if end date model given is valid */
@@ -951,8 +1051,25 @@ export class DatePickerComponent<D>
     }
 
     /** @hidden */
+    private formatDateArray(dates: Array<D>): string {
+        return dates.map((date) => this._formatDate(date)).join(', ');
+    }
+
+    /** @hidden */
     private _parseDate(date: unknown): D | null {
         return this._dateTimeAdapter.parse(date, this._dateTimeFormats.parse.dateInput);
+    }
+
+    /**
+     * Helper method to parse a date string into an array of dates.
+     * @param dateStr The date string to parse.
+     * @returns An array of dates.
+     */
+    private parseDateString(dateStr: string): D[] {
+        return dateStr
+            .split(',')
+            .map((date) => this._parseDate(date.trim()))
+            .filter((date) => date !== null) as D[];
     }
 
     /** @hidden */
@@ -960,6 +1077,11 @@ export class DatePickerComponent<D>
         const startDate = this._formatDate(dateRange.start);
         const endDate = this._formatDate(dateRange.end);
         return startDate + this._rangeDelimiter + endDate;
+    }
+
+    /** @hidden */
+    private _formatMultipleDateRanges(dateRanges: Array<DateRange<D>>): string {
+        return dateRanges.map((dateRange) => this._formatDateRange(dateRange)).join(', ');
     }
 
     /** @hidden */
@@ -1006,5 +1128,172 @@ export class DatePickerComponent<D>
     /** @hidden */
     private _isDateRange(value: any): value is DateRange<D> {
         return !!value && value.start && value.end;
+    }
+
+    /** @hidden */
+    private _isMultipleDateRanges(value: any): value is Array<DateRange<D>> {
+        return Array.isArray(value) && value.every((item) => this._isDateRange(item));
+    }
+
+    /**
+     * @hidden
+     * Updates the selected single date from a date string.
+     * @param dateStr The date string to parse and update the selected date.
+     */
+    private _updateSingleDate(dateStr: string): void {
+        if (!dateStr) {
+            this._isInvalidDateInput = !this.allowNull;
+            this.selectedDate = null;
+            this._refreshCurrentlyDisplayedCalendarDate(this.selectedDate);
+            this.onChange(this.selectedDate);
+            this.selectedDateChange.emit(this.selectedDate);
+            return;
+        }
+        const date = this._parseDate(dateStr);
+
+        if (!this._dateTimeAdapter.datesEqual(date, this.selectedDate)) {
+            this._isInvalidDateInput = !this._isSingleModelValid(date);
+
+            if (!this._isInvalidDateInput) {
+                this._refreshCurrentlyDisplayedCalendarDate(date);
+            }
+
+            this.selectedDate = date;
+            this.onChange(this.selectedDate);
+            this.selectedDateChange.emit(this.selectedDate);
+        }
+    }
+
+    /**
+     * @hidden
+     * Updates the selected range date from a date string.
+     * @param dateStr The date string to parse and update the selected range date.
+     */
+    private _updateRangeDate(dateStr: string): void {
+        if (!dateStr) {
+            this._isInvalidDateInput = !this.allowNull;
+            this.selectedRangeDate = { start: null, end: null };
+            this._refreshCurrentlyDisplayedCalendarDate(this.selectedRangeDate.start);
+            this.onChange(this.selectedRangeDate);
+            this.selectedRangeDateChange.emit(this.selectedRangeDate);
+            return;
+        }
+
+        const [startDateStr, endDateStr] = dateStr.split(this._rangeDelimiter);
+        const startDate = this._parseDate(startDateStr);
+        const endDate = this._parseDate(endDateStr);
+
+        if (
+            !this._dateTimeAdapter.datesEqual(startDate, this.selectedRangeDate.start) ||
+            !this._dateTimeAdapter.datesEqual(endDate, this.selectedRangeDate.end)
+        ) {
+            let selectedRangeDate: DateRange<D> | null = null;
+
+            if (
+                this._dateTimeAdapter.isValid(startDate) &&
+                this._dateTimeAdapter.isValid(endDate) &&
+                this._dateTimeAdapter.compareDate(startDate, endDate) > 0
+            ) {
+                selectedRangeDate = { start: endDate, end: startDate };
+            } else {
+                selectedRangeDate = { start: startDate, end: endDate };
+            }
+
+            this._isInvalidDateInput = !this._isRangeModelValid(selectedRangeDate);
+            this.selectedRangeDate = selectedRangeDate;
+            this.selectedRangeDateChange.emit(this.selectedRangeDate);
+            this.onChange(this.selectedRangeDate);
+
+            if (this._isStartDateValid(this.selectedRangeDate.start)) {
+                this._refreshCurrentlyDisplayedCalendarDate(this.selectedRangeDate.start);
+            }
+        }
+    }
+
+    /**
+     * @hidden
+     * Updates the selected multiple dates from a date string.
+     * @param dateStr The date string to parse and update the selected multiple dates.
+     */
+    private updateMultipleDates(dateStr: string): void {
+        if (!dateStr) {
+            this._isInvalidDateInput = !this.allowNull;
+            this.selectedMultipleDates = [];
+            this.onChange(this.selectedMultipleDates);
+            this.selectedMultipleDatesChange.emit(this.selectedMultipleDates);
+            return;
+        }
+
+        const parsedDates = this.parseDateString(dateStr);
+
+        // Check if the new parsed dates are different from the previously selected dates
+        const datesChanged = !this._areDatesEqual(parsedDates, this.selectedMultipleDates);
+
+        if (datesChanged) {
+            this._isInvalidDateInput = !this._isMultipleModelValid(parsedDates);
+
+            if (!this._isInvalidDateInput) {
+                this._refreshCurrentlyDisplayedCalendarDate(parsedDates[0]);
+            }
+
+            this.selectedMultipleDates = parsedDates;
+            this.onChange(this.selectedMultipleDates);
+            this.selectedMultipleDatesChange.emit(this.selectedMultipleDates);
+        }
+    }
+
+    /** Helper method to compare two arrays of dates */
+    private _areDatesEqual(dates1: D[], dates2: D[]): boolean {
+        if (dates1.length !== dates2.length) {
+            return false;
+        }
+        return dates1.every((date, index) => this._dateTimeAdapter.datesEqual(date, dates2[index]));
+    }
+
+    /**
+     * @hidden
+     * Updates the selected multiple date ranges from a date string.
+     * @param dateStr The date string to parse and update the selected multiple date ranges.
+     */
+    private _updateMultipleDateRanges(dateStr: string): void {
+        if (!dateStr) {
+            this._isInvalidDateInput = !this.allowNull;
+            this.selectedMultipleDateRanges = [];
+            this.onChange(this.selectedMultipleDateRanges);
+            this.selectedMultipleDateRangesChange.emit(this.selectedMultipleDateRanges);
+            return;
+        }
+
+        const rangeStrings = dateStr.split(';').map((range) => range.trim());
+        const parsedRanges = rangeStrings.map((rangeStr) => {
+            const [startStr, endStr] = rangeStr.split(this._rangeDelimiter).map((date) => date.trim());
+            return {
+                start: this._parseDate(startStr),
+                end: this._parseDate(endStr)
+            };
+        });
+
+        // Check if the new parsed ranges are different from the previously selected ranges
+        const rangesChanged = !this._areDateRangesEqual(parsedRanges, this.selectedMultipleDateRanges);
+
+        this._isInvalidDateInput = !this._isMultipleRangesModelValid(parsedRanges);
+
+        if (!this._isInvalidDateInput && rangesChanged) {
+            this.selectedMultipleDateRanges = parsedRanges;
+            this.onChange(this.selectedMultipleDateRanges);
+            this.selectedMultipleDateRangesChange.emit(this.selectedMultipleDateRanges);
+        }
+    }
+
+    /** Helper method to compare two arrays of date ranges */
+    private _areDateRangesEqual(ranges1: DateRange<D>[], ranges2: DateRange<D>[]): boolean {
+        if (ranges1.length !== ranges2.length) {
+            return false;
+        }
+        return ranges1.every(
+            (range, index) =>
+                this._dateTimeAdapter.datesEqual(range.start, ranges2[index].start) &&
+                this._dateTimeAdapter.datesEqual(range.end, ranges2[index].end)
+        );
     }
 }

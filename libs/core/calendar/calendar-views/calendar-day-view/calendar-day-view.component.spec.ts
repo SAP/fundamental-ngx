@@ -61,10 +61,10 @@ describe('CalendarDayViewComponent', () => {
 
     it('Should Select Proper multi Date', (done) => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
-        component.calType = 'multi';
+        component.allowMultipleSelection = true;
         component.ngOnInit();
         const dayPicked = component._dayViewGrid[2][3];
-        component.selectedMultiDateChange.subscribe((date: FdDate[]) => {
+        component.selectedMultipleDatesChange.subscribe((date: FdDate[]) => {
             expect(date).toContain(dayPicked.date);
             done();
         });
@@ -73,8 +73,8 @@ describe('CalendarDayViewComponent', () => {
 
     it('Should mark selected multi date', () => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
-        component.calType = 'multi';
-        component.selectedMultiDate = [
+        component.allowMultipleSelection = true;
+        component.selectedMultipleDates = [
             new FdDate(2018, 10, 20),
             new FdDate(2018, 10, 21)
         ];
@@ -88,7 +88,7 @@ describe('CalendarDayViewComponent', () => {
             }
         );
         const selected = calendarDays.filter((cell) => cell.selected).map(d => d.date);
-        expect(selected).toEqual(component.selectedMultiDate);
+        expect(selected).toEqual(component.selectedMultipleDates);
     });
 
     it('Should Select Proper First Range Date', (done) => {

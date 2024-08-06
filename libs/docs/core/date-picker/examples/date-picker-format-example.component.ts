@@ -39,6 +39,15 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
         <br />
         <div>Selected Date: {{ date | dateFormat }}</div>
         <br />
+        <fd-date-picker [(ngModel)]="dates" placeholder="dd-mm-yyyy"></fd-date-picker>
+        <br />
+        <div>
+            Selected Dates:<br />
+            @for (date of dates; track date) {
+                {{ date.toDateString() || 'null' }}<br />
+            }
+        </div>
+        <br />
         <fd-date-picker placeholder="mm/dd/yy to mm/dd/yy" type="range" [(ngModel)]="selectedRange"></fd-date-picker>
         <br />
         <div>Selected First Date: {{ selectedRange?.start | dateFormat }}</div>
@@ -59,6 +68,12 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
 })
 export class DatePickerFormatExampleComponent {
     date: FdDate;
+    dates: Nullable<FdDate[]> = [
+        new FdDate(2019, 9, 1),
+        new FdDate(2019, 9, 2),
+        new FdDate(2019, 9, 3),
+        new FdDate(2019, 9, 4)
+    ];
     selectedRange: Nullable<DateRange<FdDate>>;
 
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {

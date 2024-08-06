@@ -15,7 +15,12 @@ import {
 @Component({
     selector: 'fd-calendar-multi-example',
     template: `
-        <fd-calendar calType="multi" [(ngModel)]="dates" [showWeekNumbers]="true"></fd-calendar>
+        <fd-calendar
+            calType="single"
+            [(ngModel)]="dates"
+            [showWeekNumbers]="true"
+            [allowMultipleSelection]="true"
+        ></fd-calendar>
         <br />
 
         <div>

@@ -3,22 +3,12 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { CalendarCurrent } from './models/calendar-current';
 
 /** Type of calendar */
-export type CalendarType = 'single' | 'multi' | 'range';
-
-/** Type of date picker excluding 'multi' */
-export type DatePickerType = Exclude<CalendarType, 'multi'>;
+export type CalendarType = 'single' | 'range';
 
 /** Enum of calendarTypes */
 export enum CalendarTypeEnum {
     Single = 'single',
-    Multi = 'multi',
     Range = 'range'
-}
-
-/** Enum for Date Picker Types excluding 'multi' */
-export enum DatePickerTypeEnum {
-    Single = CalendarTypeEnum.Single,
-    Range = CalendarTypeEnum.Range
 }
 
 /** Type for the calendar view */
