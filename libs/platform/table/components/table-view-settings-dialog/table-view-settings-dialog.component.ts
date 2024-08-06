@@ -12,12 +12,13 @@ import {
 import { Subscription } from 'rxjs';
 import { filter, startWith } from 'rxjs/operators';
 
-import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
+import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import {
     CollectionFilter,
     SortDirection,
     Table,
     TableColumn,
+    TableDialogCommonData,
     TableState
 } from '@fundamental-ngx/platform/table-helpers';
 import { FiltersComponent, FiltersDialogData, FiltersDialogResultData } from './filtering/filters.component';
@@ -85,6 +86,9 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
     _table: Table;
 
     /** @hidden */
+    _dialogRef: DialogRef<TableDialogCommonData, any>;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
@@ -116,7 +120,12 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
             allowDisablingSorting: this.allowDisablingSorting
         };
 
-        const dialogRef = this._dialogService.open(
+        // dismiss any open dialog, before opening a new one
+        if (this._dialogRef) {
+            this._dialogRef.dismiss();
+        }
+
+        this._dialogRef = this._dialogService.open(
             SortingComponent,
             {
                 ...dialogConfig,
@@ -126,7 +135,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
         );
 
         this._subscriptions.add(
-            dialogRef.afterClosed
+            this._dialogRef.afterClosed
                 .pipe(filter((result) => !!result))
                 .subscribe(({ field, direction }: SettingsSortDialogResultData) => {
                     this._applySorting(field, direction);
@@ -144,7 +153,12 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
             filterBy: state?.filterBy
         };
 
-        const dialogRef = this._dialogService.open(
+        // dismiss any open dialog, before opening a new one
+        if (this._dialogRef) {
+            this._dialogRef.dismiss();
+        }
+
+        this._dialogRef = this._dialogService.open(
             FiltersComponent,
             {
                 ...dialogConfig,
@@ -154,7 +168,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
         );
 
         this._subscriptions.add(
-            dialogRef.afterClosed
+            this._dialogRef.afterClosed
                 .pipe(filter((result) => !!result))
                 .subscribe(({ filterBy }: FiltersDialogResultData) => this._applyFiltering(filterBy))
         );
@@ -170,7 +184,12 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
             field: state.groupBy?.[0]?.field
         };
 
-        const dialogRef = this._dialogService.open(
+        // dismiss any open dialog, before opening a new one
+        if (this._dialogRef) {
+            this._dialogRef.dismiss();
+        }
+
+        this._dialogRef = this._dialogService.open(
             GroupingComponent,
             {
                 ...dialogConfig,
@@ -180,7 +199,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
         );
 
         this._subscriptions.add(
-            dialogRef.afterClosed
+            this._dialogRef.afterClosed
                 .pipe(filter((result) => !!result))
                 .subscribe(({ field, direction }: SettingsGroupDialogResultData) => {
                     this._applyGrouping(field, direction);
