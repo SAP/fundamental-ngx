@@ -22,16 +22,6 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
         <br />
         <div>Selected Date: {{ date?.toDateString() || 'null' }}</div>
         <br />
-        <label fd-form-label for="compactDatePicker">Compact Date Picker</label>
-        <fd-date-picker
-            type="single"
-            inputId="compactDatePicker"
-            [showTodayButton]="true"
-            [(ngModel)]="date"
-            fdCompact
-        ></fd-date-picker>
-        <div>Selected Date: {{ date?.toDateString() || 'null' }}</div>
-        <br />
         <label fd-form-label for="multiDatePicker">Multi Date Picker</label>
         <fd-date-picker
             type="single"
@@ -41,22 +31,6 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
             [(ngModel)]="dates"
         ></fd-date-picker>
         <br />
-        <div>
-            Selected Dates:<br />
-            @for (date of dates; track date) {
-                {{ date.toDateString() || 'null' }}<br />
-            }
-        </div>
-        <br />
-        <label fd-form-label for="compactMultiDatePicker">Compact Multi Date Picker</label>
-        <fd-date-picker
-            type="single"
-            inputId="compactMultiDatePicker"
-            [showTodayButton]="true"
-            [allowMultipleSelection]="true"
-            [(ngModel)]="dates"
-            fdCompact
-        ></fd-date-picker>
         <div>
             Selected Dates:<br />
             @for (date of dates; track date) {
