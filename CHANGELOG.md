@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.2...v0.51.3-rc.3) (2024-08-06)
+
+
+### Bug Fixes
+
+* **platform:** dismiss existing dialogs before rendering new one ([#12230](https://github.com/SAP/fundamental-ngx/issues/12230)) ([b6a839f](https://github.com/SAP/fundamental-ngx/commit/b6a839fc0d638eaea15d42fa8a25fdac6a56c0da))
+
+
+
+
+
 ## [0.51.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.1...v0.51.3-rc.2) (2024-08-04)
 
 **Note:** Version bump only for package fundamental-ngx
