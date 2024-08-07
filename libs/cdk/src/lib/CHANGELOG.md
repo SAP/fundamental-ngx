@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.40](https://github.com/SAP/fundamental-ngx/compare/v0.43.39...v0.43.40) (2024-08-01)
+
+
+### Bug Fixes
+
+* **core:** bug where line clamp directive would not set textContent when originalText is falsy ([#12200](https://github.com/SAP/fundamental-ngx/issues/12200)) ([c79a3cf](https://github.com/SAP/fundamental-ngx/commit/c79a3cfe40d892a6cc8385f673d3289d310c544c))
+
+
+
+
+
 ## [0.43.39](https://github.com/SAP/fundamental-ngx/compare/v0.43.38...v0.43.39) (2024-07-24)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk

@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.40](https://github.com/SAP/fundamental-ngx/compare/v0.43.39...v0.43.40) (2024-08-01)
+
+
+### Bug Fixes
+
+* **core:** bug where line clamp directive would not set textContent when originalText is falsy ([#12200](https://github.com/SAP/fundamental-ngx/issues/12200)) ([c79a3cf](https://github.com/SAP/fundamental-ngx/commit/c79a3cfe40d892a6cc8385f673d3289d310c544c))
+* **core:** multi-input new token bug ([#12202](https://github.com/SAP/fundamental-ngx/issues/12202)) ([1e6c524](https://github.com/SAP/fundamental-ngx/commit/1e6c524b48ad2aa3e1fdf977920f50d48eade3cb))
+* **platform:** enable move up / move down buttons at all times for p13 columns dialog ([#12174](https://github.com/SAP/fundamental-ngx/issues/12174)) ([e49891d](https://github.com/SAP/fundamental-ngx/commit/e49891d257782d9f9b0fcf05a1960c916fbaec93))
+* **platform:** scrollWholeRows should emit tableScrolled event when using pageScrolling ([#12182](https://github.com/SAP/fundamental-ngx/issues/12182)) ([d88094f](https://github.com/SAP/fundamental-ngx/commit/d88094fe2e93cfa3e9d0304dd3204c8f89941f05))
+* **platform:** table freezing incorrect columns, and better explanation of how it works in the docs ([#12183](https://github.com/SAP/fundamental-ngx/issues/12183)) ([7f6728c](https://github.com/SAP/fundamental-ngx/commit/7f6728cedc8e9ea7e6b69b92d2c0d229ebfd03b1))
+
+
+
+
+
 ## [0.43.39](https://github.com/SAP/fundamental-ngx/compare/v0.43.38...v0.43.39) (2024-07-24)
 
 
