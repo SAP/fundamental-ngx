@@ -6,7 +6,11 @@
 ></ng-container>
 
 <fd-busy-indicator
-    [loading]="(_tableService.tableLoading$ | async) === true && _dataSourceDirective._firstLoadingDone"
+    [loading]="
+        (_tableService.tableLoading$ | async) === true &&
+        (_tableService.pageScrollLoading$ | async) === false &&
+        _dataSourceDirective._firstLoadingDone
+    "
     [block]="true"
 >
     <!-- Table Container -->
@@ -34,6 +38,11 @@
         [class.fixed-height]="!!bodyHeight"
         [attr.role]="pageScrolling ? 'feed' : null"
         [class.fd-table--fixed]="_freezableColumns.size || fixed"
+        [style.overscroll-behavior-y]="
+            (_tableService.tableLoading$ | async) === true && _dataSourceDirective._firstLoadingDone
+                ? 'contain'
+                : 'auto'
+        "
     >
         <table
             fd-table
@@ -160,12 +169,14 @@
                                 aria-hidden="true"
                                 class="fd-table__intersection-spy"
                                 [fdkIntersectionSpy]="pageScrollingThreshold"
-                                (intersected)="$event && _tableRowService.loadChildRows(row.parent!)"
+                                (intersected)="_childRowIntersected($event, row)"
                                 [style.top.px]="pageScrollingThreshold * -1"
                             ></tr>
+                            <ng-container [ngTemplateOutlet]="loadingSkeletonRow"></ng-container>
                         </ng-container>
                     </ng-container>
                 </ng-container>
+                <ng-container [ngTemplateOutlet]="loadingSkeletonRow"></ng-container>
                 <tr
                     aria-hidden="true"
                     *ngIf="pageScrolling && !_virtualScrollDirective?.scrollWholeRows"
@@ -228,4 +239,20 @@
             </td>
         </tr>
     </tbody>
+</ng-template>
+
+<!-- Template for a row that is loading -->
+<ng-template #loadingSkeletonRow>
+    <tr
+        fd-table-row
+        *ngIf="
+            pageScrolling &&
+            (_tableService.pageScrollLoading$ | async) === true &&
+            _dataSourceDirective._firstLoadingDone
+        "
+    >
+        <td fd-table-cell *fdkRepeat="_tableColumnsLength">
+            <fd-skeleton style="margin: auto 0" type="text" textLines="1" width="60%"></fd-skeleton>
+        </td>
+    </tr>
 </ng-template>

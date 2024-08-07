@@ -735,6 +735,8 @@ export class TableComponent<T = any>
     /** @hidden */
     private _subscriptions = new Subscription();
     /** @hidden */
+    private _childItemsLoadingSubscription = new Subscription();
+    /** @hidden */
     private _viewInitiated = false;
     /** @hidden */
     private _addedItems: T[] = [];
@@ -1645,6 +1647,7 @@ export class TableComponent<T = any>
         if (!intersected) {
             return;
         }
+        this._tableService.pageScrollLoading$.next(true);
         const {
             page: { currentPage, pageSize }
         } = this.getTableState();
@@ -1656,6 +1659,22 @@ export class TableComponent<T = any>
         this._ngZone.run(() => {
             this.setCurrentPage(currentPage + 1);
         });
+    }
+
+    /** @hidden */
+    _childRowIntersected(intersected: boolean, row: TableRow): void {
+        if (!intersected) {
+            return;
+        }
+        if (row.parent) {
+            if (this._childItemsLoadingSubscription) {
+                this._childItemsLoadingSubscription.unsubscribe();
+            }
+            this._childItemsLoadingSubscription = row.parent.childItemsLoading$.subscribe((event) => {
+                this._tableService.pageScrollLoading$.next(event);
+            });
+        }
+        this._tableRowService.loadChildRows(row.parent!);
     }
 
     /** Manually update index after we add new items to the main array */
