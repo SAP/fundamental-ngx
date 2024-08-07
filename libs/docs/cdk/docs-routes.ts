@@ -65,6 +65,10 @@ const componentRoutes = [
     {
         path: 'breakpoint',
         loadChildren: () => import('@fundamental-ngx/docs/cdk/breakpoint').then(configureLibRoutes)
+    },
+    {
+        path: 'rtl-service',
+        loadChildren: () => import('libs/docs/cdk/rtl-service').then(configureLibRoutes)
     }
 ];
 

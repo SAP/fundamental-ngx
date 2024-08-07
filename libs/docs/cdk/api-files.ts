@@ -19,5 +19,6 @@ export const API_FILES = {
     clicked: ['ClickedDirective'],
     focusableList: ['FocusableListDirective', 'FocusableItemDirective'],
     dnd: ['DndListDirective', 'DndItemDirective', 'DndKeyboardGroupDirective', 'DndKeyboardItemDirective'],
-    initialFocus: ['InitialFocusDirective']
+    initialFocus: ['InitialFocusDirective'],
+    rtlService: ['RtlService']
 } as const;
