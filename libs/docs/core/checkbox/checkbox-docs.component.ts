@@ -12,7 +12,6 @@ import {
 import { CheckboxCustomLabelExampleComponent } from './examples/checkbox-custom-label-example.component';
 import { CheckboxCustomValuesExampleComponent } from './examples/checkbox-custom-values-example.component';
 import { CheckboxDefaultExampleComponent } from './examples/checkbox-default-example.component';
-import { CheckboxDisplayModeExampleComponent } from './examples/checkbox-display-mode-example.component';
 import { CheckboxLabelWrappingExampleComponent } from './examples/checkbox-label-wrapping-example.component';
 import { CheckboxReactiveFormsExampleComponent } from './examples/checkbox-reactive-forms-example.component';
 import { CheckboxStatesExampleComponent } from './examples/checkbox-states-example.component';
@@ -25,7 +24,6 @@ const checkboxReactiveFormsTsCode = 'checkbox-reactive-forms-example.component.t
 const checkboxStatesTsCode = 'checkbox-states-example.component.ts';
 const checkboxCustomLabelTsCode = 'checkbox-custom-label-example.component.ts';
 const checkboxWrappingTsCode = 'checkbox-label-wrapping-example.component.ts';
-const checkboxDisplayOnlyMode = 'checkbox-display-mode-example.component.ts';
 
 @Component({
     selector: 'app-input',
@@ -43,8 +41,7 @@ const checkboxDisplayOnlyMode = 'checkbox-display-mode-example.component.ts';
         CheckboxReactiveFormsExampleComponent,
         CheckboxCustomLabelExampleComponent,
         CheckboxLabelWrappingExampleComponent,
-        CheckboxStatesExampleComponent,
-        CheckboxDisplayModeExampleComponent
+        CheckboxStatesExampleComponent
     ]
 })
 export class CheckboxDocsComponent {
@@ -108,15 +105,6 @@ export class CheckboxDocsComponent {
             fileName: 'checkbox-label-wrapping-example',
             component: 'CheckboxLabelWrappingExampleComponent',
             code: getAssetFromModuleAssets(checkboxWrappingTsCode)
-        }
-    ];
-
-    checkboxDisplayOnlyMode: ExampleFile[] = [
-        {
-            language: 'typescript',
-            fileName: 'checkbox-display-mode-example',
-            component: 'CheckboxDisplayModeExampleComponent',
-            code: getAssetFromModuleAssets(checkboxDisplayOnlyMode)
         }
     ];
 }

@@ -97,6 +97,15 @@
             Disables control <br />
             <code>[disable] = true | false</code>
         </li>
+        <li [style.margin-bottom.rem]="0.5">
+            Read only control <br />
+            <code>[readonly] = true | false</code>
+        </li>
+        <li [style.margin-bottom.rem]="0.5">
+            Control programmatically without user interaction with display-only<br />
+            <code>[displayOnly] = true | false</code>
+        </li>
+
         <li>
             Miniaturizes checkbox <br />
             <code>[fdCompact] = true | false</code>
@@ -107,17 +116,3 @@
     <fd-checkbox-states-example></fd-checkbox-states-example>
 </component-example>
 <code-example [exampleFiles]="checkboxStates"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="display-mode" componentName="checkbox">
-    Checkbox with Display-only mode
-</fd-docs-section-title>
-<description>
-    For cases when users should not interact with the Checkbox, developers can set it to 'Display-only' mode with
-    <code>[displayOnly]="true"</code> input property.
-</description>
-<component-example>
-    <fd-checkbox-display-mode-example></fd-checkbox-display-mode-example>
-</component-example>
-<code-example [exampleFiles]="checkboxDisplayOnlyMode"></code-example>

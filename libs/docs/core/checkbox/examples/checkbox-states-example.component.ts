@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FormHeaderComponent } from '@fundamental-ngx/core/form';
@@ -21,12 +22,32 @@ import { FormHeaderComponent } from '@fundamental-ngx/core/form';
             <fd-checkbox [(ngModel)]="checkboxValue6" [disabled]="true" label="Disabled label"></fd-checkbox>
         </div>
         <div>
+            <p>
+                Read only:
+                <fd-checkbox [(ngModel)]="checkboxValue7" [readonly]="true" label="Readonly label"></fd-checkbox>
+                <fd-checkbox [(ngModel)]="checkboxValue8" [readonly]="true" label="Readonly label"></fd-checkbox>
+            </p>
+        </div>
+        <div>
+            <p>
+                Display-only:
+                <fd-checkbox
+                    [(ngModel)]="displayOnlyCheckboxValue"
+                    [displayOnly]="true"
+                    label="Display-only label"
+                ></fd-checkbox>
+            </p>
+            <button fd-button (click)="toggleCheckboxValue()">
+                Change value to {{ displayOnlyCheckboxValue ? 'false' : 'true' }}
+            </button>
+        </div>
+        <div>
             <p>Compact:</p>
             <fd-checkbox [(ngModel)]="checkboxValue7" fdCompact label="Compact label"></fd-checkbox>
         </div>
     `,
     standalone: true,
-    imports: [FormHeaderComponent, CheckboxComponent, FormsModule, ContentDensityDirective]
+    imports: [FormHeaderComponent, CheckboxComponent, FormsModule, ContentDensityDirective, ButtonComponent]
 })
 export class CheckboxStatesExampleComponent {
     public checkboxValue1 = false;
@@ -36,4 +57,14 @@ export class CheckboxStatesExampleComponent {
     public checkboxValue5 = false;
     public checkboxValue6 = false;
     public checkboxValue7 = false;
+    public checkboxValue8 = true;
+    public checkboxValue9 = false;
+    public checkboxValue10 = false;
+
+    // Change state programmatically with display-only
+    displayOnlyCheckboxValue = false;
+
+    toggleCheckboxValue(): void {
+        this.displayOnlyCheckboxValue = !this.displayOnlyCheckboxValue;
+    }
 }
