@@ -248,6 +248,34 @@ describe('TestDatePickerComponent', () => {
         expect(fdDatePickerComponent.isModelValid()).toBe(false);
     });
 
+    it('Should register invalid string date and not call event for multiple dates mode', () => {
+        const fdpDatePickerComponent = host.datepicker.toArray()[0];
+        const fdDatePickerComponent = fdpDatePickerComponent.fdDatePickerComponent;
+        jest.spyOn(fdDatePickerComponent.selectedMultipleDatesChange, 'emit');
+        fdDatePickerComponent.allowMultipleSelection = true;
+        fdDatePickerComponent.type = 'single';
+
+        // Mock the parse method to return an invalid date
+        jest.spyOn(adapter, 'parse').mockImplementation((str) => {
+            if (str === 'hello') {
+                return new FdDate(NaN, NaN, NaN); // Create an invalid FdDate instance
+            }
+            return null;
+        });
+
+        fdDatePickerComponent.dateStringUpdate('hello');
+
+        const invalidDate = adapter.parse('hello');
+
+        expect(fdDatePickerComponent._isInvalidDateInput).toBe(true);
+
+        // Ensure that the array passed to the emit method contains only valid FdDate instances
+        const filteredDates = [invalidDate].filter((date): date is FdDate => date !== null);
+
+        expect(fdDatePickerComponent.selectedMultipleDatesChange.emit).toHaveBeenCalledWith(filteredDates);
+        expect(fdDatePickerComponent.isModelValid()).toBe(false);
+    });
+
     it('Should register invalid string date and not call event for range mode', () => {
         const fdpDatePickerComponent = host.datepicker.toArray()[1];
         const fdDatePickerComponent = fdpDatePickerComponent.fdDatePickerComponent;
@@ -283,6 +311,29 @@ describe('TestDatePickerComponent', () => {
         expect(datepicker.selectedDateChange.emit).toHaveBeenCalledWith(date);
     });
 
+    it('Should handle valid string date for multiple dates mode', async () => {
+        await wait(fixture);
+
+        const datepicker = host.datepicker.toArray()[0];
+        datepicker.fdDatePickerComponent.allowMultipleSelection = true;
+        jest.spyOn(datepicker.selectedMultipleDatesChange, 'emit');
+
+        datepicker.writeValue([new FdDate(2018, 10, 10)]);
+
+        await wait(fixture);
+        fixture.detectChanges();
+
+        const dates = [new FdDate(2000, 10, 10), new FdDate(2000, 10, 11)];
+        const strDates = (<any>datepicker.fdDatePickerComponent).formatDateArray(dates);
+        datepicker.fdDatePickerComponent.dateStringUpdate(strDates);
+
+        await wait(fixture);
+        fixture.detectChanges();
+
+        expect(datepicker.fdDatePickerComponent._isInvalidDateInput).toBe(false);
+        expect(datepicker.selectedMultipleDatesChange.emit).toHaveBeenCalledWith(dates);
+    });
+
     it('Should handle calendar with valid string date', async () => {
         await wait(fixture);
 
@@ -305,6 +356,29 @@ describe('TestDatePickerComponent', () => {
         expect(datepicker.fdDatePickerComponent._calendarComponent._currentlyDisplayed.year).toBe(date.year);
         expect(datepicker.selectedDateChange.emit).toHaveBeenCalledWith(date);
         expect(datepicker.onChange).toHaveBeenCalledWith(date);
+    });
+
+    it('Should handle calendar with valid string date for multiple dates mode', async () => {
+        await wait(fixture);
+
+        const datepicker = host.datepicker.toArray()[0];
+        datepicker.isOpen = true;
+        datepicker.fdDatePickerComponent._showPopoverContents = true;
+        datepicker.fdDatePickerComponent.allowMultipleSelection = true;
+        fixture.detectChanges();
+        jest.spyOn(datepicker.selectedMultipleDatesChange, 'emit');
+        jest.spyOn(datepicker, 'onChange');
+
+        const dates = [new FdDate(2000, 10, 10), new FdDate(2000, 10, 11)];
+        const strDates = (<any>datepicker.fdDatePickerComponent).formatDateArray(dates);
+
+        datepicker.fdDatePickerComponent.dateStringUpdate(strDates);
+        await wait(fixture);
+        fixture.detectChanges();
+
+        expect(datepicker.fdDatePickerComponent._isInvalidDateInput).toBe(false);
+        expect(datepicker.selectedMultipleDatesChange.emit).toHaveBeenCalledWith(dates);
+        expect(datepicker.onChange).toHaveBeenCalledWith(dates);
     });
 
     it('Should handle valid range string date', async () => {

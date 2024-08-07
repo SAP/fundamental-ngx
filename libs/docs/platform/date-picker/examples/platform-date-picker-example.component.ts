@@ -33,10 +33,13 @@ import { FdpFormGroupModule, PlatformDatePickerComponent } from '@fundamental-ng
 })
 export class PlatformDatePickerExampleComponent {
     birthday: FdDate = new FdDate(1990, 1, 2);
+    randomDays: FdDate[] = [new FdDate(1990, 1, 1), new FdDate(1990, 1, 2), new FdDate(1990, 1, 3)];
     holiday = { start: new FdDate(2020, 5, 14), end: new FdDate(2020, 5, 24) };
     datePickerForm = new FormGroup({
         birthday: new FormControl<FdDate | null>(null),
+        randomDays: new FormControl<FdDate[] | null>([]),
         examdate: new FormControl<FdDate | null>(null),
+        examdates: new FormControl<FdDate[] | null>([]),
         holiday: new FormControl<DateRange<FdDate> | null>(null),
         journeydate: new FormControl<DateRange<FdDate> | null>(null),
         disableddate: new FormControl<FdDate | null>(null)
@@ -44,17 +47,21 @@ export class PlatformDatePickerExampleComponent {
 
     formInitialData = {
         birthday: this.birthday,
+        randomDays: this.randomDays,
         holiday: this.holiday
     };
 
     requiredDateValidator: ValidatorFn[] = [Validators.required];
+    requiredMultiDatesValidator: ValidatorFn[] = [multipleDatesValidator];
     rangeDateValidator: ValidatorFn[] = [dateRangeNullValidator];
 
     // Template driven form
     disabledDate = '';
     birthdayPicker = '';
+    otherDaysPicker = '';
     holidayPicker = '';
     dateOutsideForm = '';
+    multiDateOutsideForm = '';
     rangeDateOutsideForm = '';
 
     public onSubmit(value: any): void {
@@ -68,5 +75,14 @@ export function dateRangeNullValidator(control: AbstractControl): { [key: string
         return null;
     } else {
         return { nullRangeDate: 'Range date is not valid' };
+    }
+}
+
+export function multipleDatesValidator(control: AbstractControl): { [key: string]: any } | null {
+    const dates = control.value as Array<any>;
+    if (Array.isArray(dates) && dates.length > 0) {
+        return null;
+    } else {
+        return { invalidMultipleDates: 'Multiple dates are not valid' };
     }
 }

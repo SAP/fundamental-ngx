@@ -336,7 +336,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
         this.value = value;
 
         if (this.allowMultipleSelection) {
-            if (this.type === 'single' && (!this.value || !this.allowNull)) {
+            if (this.type === 'single' && !this.value && !this.allowNull) {
                 this._datePickerValid = false;
             } else if (this.type === 'range' && !this.allowNull) {
                 const dateRanges = this.value as Array<DateRange<D>>;

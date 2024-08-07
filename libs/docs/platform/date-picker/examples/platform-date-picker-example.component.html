@@ -37,6 +37,38 @@
         </fdp-date-picker>
     </fdp-form-field>
     <fdp-form-field
+        #ffl6
+        id="randomDays"
+        [column]="1"
+        [rank]="1"
+        placeholder="Enter any random days"
+        label="Pre-populated multi type date-picker:"
+        [validators]="requiredMultiDatesValidator"
+    >
+        <fdp-date-picker
+            name="randomDays"
+            type="single"
+            [allowNull]="false"
+            [allowMultipleSelection]="true"
+            [formControl]="ffl6.formControl"
+            dateInputLabel="date input mm/dd/yyy"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
+    <fdp-form-field #ffl7 id="examdates" [column]="2" [rank]="1" label="Multi type date-picker:">
+        <fdp-date-picker
+            name="examdates"
+            type="single"
+            [allowNull]="false"
+            [allowMultipleSelection]="true"
+            placeholder="Enter your Exam dates"
+            [formControl]="ffl7.formControl"
+            dateInputLabel="date input mm/dd/yyy"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
+
+    <fdp-form-field
         #ffl3
         id="holiday"
         [column]="1"
@@ -89,6 +121,18 @@
 </fdp-form-group>
 <p>Birthday: {{ datePickerForm.controls.birthday.value?.toDateString() }}</p>
 <span>Exam Date: {{ datePickerForm.controls.examdate.value?.toDateString() }}</span>
+<p>
+    RandomDays:<br />
+    @for (date of datePickerForm.controls.randomDays.value; track date) {
+        {{ date.toDateString() || 'null' }}<br />
+    }
+</p>
+<span>
+    Exam Dates:<br />
+    @for (date of datePickerForm.controls.examdates.value; track date) {
+        {{ date.toDateString() || 'null' }}<br />
+    }
+</span>
 <p>Holiday Start Date: {{ datePickerForm.controls.holiday.value?.start?.toDateString() }}</p>
 <span>Holiday End Date: {{ datePickerForm.controls.holiday.value?.end?.toDateString() }}</span>
 <p>Journey Start Date: {{ datePickerForm.controls.journeydate.value?.start?.toDateString() }}</p>
@@ -126,6 +170,18 @@
         >
         </fdp-date-picker>
     </fdp-form-field>
+    <fdp-form-field id="otherDays" [column]="1" [rank]="3" label="Other Dates:">
+        <fdp-date-picker
+            name="otherDays"
+            placeholder="mm/dd/yyyy"
+            type="single"
+            [allowNull]="false"
+            [allowMultipleSelection]="true"
+            [(ngModel)]="otherDaysPicker"
+            dateInputLabel="date input mm/dd/yyy"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
     <fdp-form-field id="disableddate" [column]="2" [rank]="1" label="Disabled Date Picker:">
         <fdp-date-picker
             name="disabledDate"
@@ -147,6 +203,15 @@
 <!--Date picker use outside form-->
 <h3>Date Picker Use Outside Form.</h3>
 <fdp-date-picker name="dateOutsideForm" placeholder="mm/dd/yyyy" type="single" [(ngModel)]="dateOutsideForm">
+</fdp-date-picker>
+<h3>Multi Date Picker Use Outside Form.</h3>
+<fdp-date-picker
+    name="multiDateOutsideForm"
+    placeholder="mm/dd/yyyy"
+    type="single"
+    [allowMultipleSelection]="true"
+    [(ngModel)]="multiDateOutsideForm"
+>
 </fdp-date-picker>
 <h3>Range Date Picker Outside Form.</h3>
 <fdp-date-picker
