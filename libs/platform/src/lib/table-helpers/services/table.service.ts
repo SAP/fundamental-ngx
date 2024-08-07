@@ -78,6 +78,8 @@ export class TableService {
     readonly stateChange$ = new Subject<TableStateChange>();
     /** Stream that emits when loading state changes. */
     readonly tableLoading$ = new BehaviorSubject<boolean>(false);
+    /** Stream that emits when loading state changes via pageScrolling. */
+    readonly pageScrollLoading$ = new BehaviorSubject<boolean>(false);
     /** Listen for soft changes in table subcomponents (mostly table column) */
     readonly markForCheck$ = new Subject<void>();
     /** Listen for immediate changes in table subcomponents (mostly table column) */

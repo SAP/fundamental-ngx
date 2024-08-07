@@ -5,13 +5,22 @@
     [ngTemplateOutletContext]="_toolbarContext"
 ></ng-container>
 
-<!-- Table Container -->
-<div class="fdp-table__container" #tableContainer>
-    <ng-container [ngTemplateOutlet]="tableTemplate"></ng-container>
+<fd-busy-indicator
+    [loading]="
+        (_tableService.tableLoading$ | async) === true &&
+        (_tableService.pageScrollLoading$ | async) === false &&
+        _dataSourceDirective._firstLoadingDone
+    "
+    [block]="true"
+>
+    <!-- Table Container -->
+    <div class="fdp-table__container" #tableContainer>
+        <ng-container [ngTemplateOutlet]="tableTemplate"></ng-container>
 
-    <!-- Table column resizer for visually representing the resizing process -->
-    <fdp-table-column-resizer *ngIf="enableDragResize" class="fdp-table__column-resizer"></fdp-table-column-resizer>
-</div>
+        <!-- Table column resizer for visually representing the resizing process -->
+        <fdp-table-column-resizer *ngIf="enableDragResize" class="fdp-table__column-resizer"></fdp-table-column-resizer>
+    </div>
+</fd-busy-indicator>
 
 <!-- Table Template -->
 <ng-template #tableTemplate>
@@ -160,7 +169,7 @@
                                 aria-hidden="true"
                                 class="fd-table__intersection-spy"
                                 [fdkIntersectionSpy]="pageScrollingThreshold"
-                                (intersected)="$event && _tableRowService.loadChildRows(row.parent!)"
+                                (intersected)="_childRowIntersected($event, row)"
                                 [style.top.px]="pageScrollingThreshold * -1"
                             ></tr>
                             <ng-container [ngTemplateOutlet]="loadingSkeletonRow"></ng-container>
@@ -237,7 +246,9 @@
     <tr
         fd-table-row
         *ngIf="
-            pageScrolling && (_tableService.tableLoading$ | async) === true && _dataSourceDirective._firstLoadingDone
+            pageScrolling &&
+            (_tableService.pageScrollLoading$ | async) === true &&
+            _dataSourceDirective._firstLoadingDone
         "
     >
         <td fd-table-cell *fdkRepeat="_tableColumnsLength">
