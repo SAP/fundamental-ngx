@@ -12,4 +12,13 @@ fd-input-group {
             border: none;
         }
     }
+
+    .fd-input.fd-input-group__input {
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active {
+            -webkit-background-clip: text;
+        }
+    }
 }
