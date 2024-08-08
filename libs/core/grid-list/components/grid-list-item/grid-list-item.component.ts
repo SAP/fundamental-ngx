@@ -465,7 +465,8 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
             !classList.contains('fd-grid-list__radio-label') &&
             !classList.contains('fd-grid-list__radio-input') &&
             !classList.contains('fd-grid-list__checkbox-label') &&
-            !classList.contains('fd-grid-list__checkbox-input')
+            !classList.contains('fd-grid-list__checkbox-input') &&
+            !classList.contains('fd-checkbox__checkmark')
         );
     }
 
