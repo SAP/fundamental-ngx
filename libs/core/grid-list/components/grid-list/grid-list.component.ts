@@ -17,9 +17,10 @@ import {
     computed,
     inject
 } from '@angular/core';
-import { KeyUtil, Nullable, RangeSelector, RtlService } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, KeyboardSupportService, Nullable, RangeSelector, RtlService } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, Observable, Subscription, filter } from 'rxjs';
 import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';
+import { GridListFocusItem } from '../../models/grid-list-focus-item.model';
 import {
     GridListSelectionActions,
     GridListSelectionEvent,
@@ -35,7 +36,7 @@ let gridListUniqueId = 0;
     templateUrl: './grid-list.component.html',
     styleUrls: ['./grid-list.component.scss', '../../../../cdk/utils/drag-and-drop/drag-and-drop.scss'],
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: GridList, useExisting: GridListComponent }],
+    providers: [KeyboardSupportService, { provide: GridList, useExisting: GridListComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
@@ -88,6 +89,10 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
     }
 
     /** @hidden */
+    @ContentChildren(GridListFocusItem, { descendants: true })
+    _focusItems: QueryList<GridListFocusItem>;
+
+    /** @hidden */
     readonly _selectedItems$: Observable<GridListSelectionEvent<T>>;
 
     /** @hidden */
@@ -121,7 +126,8 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
     /** @hidden */
     constructor(
         private readonly _cd: ChangeDetectorRef,
-        private _elRef: ElementRef
+        private _elRef: ElementRef,
+        private _keyboardSupportService: KeyboardSupportService<GridListFocusItem>
     ) {
         super();
         this._selectedItems$ = this._selectedItemsSubject$.asObservable();
@@ -154,6 +160,8 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
 
     /** @hidden */
     ngAfterContentInit(): void {
+        console.log(this._focusItems);
+        this._keyboardSupportService.setKeyboardService(this._focusItems, false, false);
         this._cd.detectChanges();
     }
 

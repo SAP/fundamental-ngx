@@ -14,7 +14,8 @@ import {
     Renderer2,
     ViewChild,
     ViewEncapsulation,
-    booleanAttribute
+    booleanAttribute,
+    forwardRef
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -35,6 +36,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { GridListItemBodyDirective } from '../../directives/grid-list-item-body.directive';
 import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';
+import { GridListFocusItem } from '../../models/grid-list-focus-item.model';
 import { GridListSelectionActions, GridListSelectionMode } from '../../models/grid-list-selection.models';
 import { GridListItemFooterBarComponent } from '../grid-list-item-footer-bar/grid-list-item-footer-bar.component';
 import { GridListItemToolbarComponent } from '../grid-list-item-toolbar/grid-list-item-toolbar.component';
@@ -70,9 +72,15 @@ export type GridListItemStatus = 'success' | 'warning' | 'error' | 'neutral';
         FdTranslatePipe,
         ContentDensityModule
     ],
-    providers: [contentDensityObserverProviders()]
+    providers: [
+        {
+            provide: GridListFocusItem,
+            useExisting: forwardRef(() => GridListItemComponent)
+        },
+        contentDensityObserverProviders()
+    ]
 })
-export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
+export class GridListItemComponent<T> extends GridListFocusItem implements AfterViewInit, OnDestroy {
     /** id for the Element */
     @Input()
     id = `fd-grid-list-item-${gridListItemUniqueId++}`;
@@ -302,6 +310,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         private readonly _gridList: GridList<T>,
         readonly _contentDensityObserver: ContentDensityObserver
     ) {
+        super();
         const selectedItemsSub = this._gridList._selectedItems$.subscribe((items) => {
             this._selectedItem = items.selection.find((item) => item === this.value);
             this._cd.markForCheck();

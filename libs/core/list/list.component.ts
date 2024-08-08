@@ -180,6 +180,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
 
     /** @hidden */
     ngAfterContentInit(): void {
+        console.log(this._focusItems);
         this._keyboardSupportService.setKeyboardService(this._focusItems, false, false);
         this._listenOnQueryChange();
     }
