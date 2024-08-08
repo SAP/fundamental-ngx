@@ -605,10 +605,15 @@ export class TableComponent<T = any>
      */
     get isBodyHeightValid(): boolean {
         const height = this.bodyHeight;
-        return (
-            (!!height && height.endsWith('px') && this._isValidInteger(height.split('px')[0])) ||
-            (height.endsWith('%') && this._isValidInteger(height.split('%')[0]))
-        );
+
+        if (height) {
+            return (
+                (height.endsWith('px') && this._isValidInteger(height.split('px')[0])) ||
+                (height.endsWith('%') && this._isValidInteger(height.split('%')[0]))
+            );
+        } else {
+            return false;
+        }
     }
 
     /**
