@@ -33,7 +33,7 @@ export class DatePickerMobileComponent<D> extends MobileModeBase<DatePicker<D>> 
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
     /** @hidden */
-    private _selectedBackup: D | DateRange<D>;
+    private _selectedBackup: D | Array<D> | DateRange<D> | Array<DateRange<D>>;
 
     /** @hidden */
     constructor(

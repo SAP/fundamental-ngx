@@ -32,6 +32,19 @@ import { FormItemComponent } from '@fundamental-ngx/core/form';
 export class CalendarFormExamplesComponent {
     customForm = new FormGroup({
         date: new FormControl(new FdDate(2019, 9, 20)),
+        multiDate: new FormControl([
+            new FdDate(2019, 9, 1),
+            new FdDate(2019, 9, 2),
+            new FdDate(2019, 9, 3),
+            new FdDate(2019, 9, 4),
+            new FdDate(2019, 9, 5),
+            new FdDate(2019, 9, 6),
+            new FdDate(2019, 9, 7),
+            new FdDate(2019, 9, 9),
+            new FdDate(2019, 9, 16),
+            new FdDate(2019, 9, 23),
+            new FdDate(2019, 9, 30)
+        ]),
         dateRange: new FormControl({
             value: {
                 start: new FdDate(2019, 10, 11),
@@ -45,10 +58,19 @@ export class CalendarFormExamplesComponent {
         this.customForm.get('date')?.setValue(new FdDate(null as any));
     }
 
+    setMultiInvalid(): void {
+        this.customForm.get('multiDate')?.setValue([new FdDate(null as any)]);
+    }
+
     setInvalidRange(): void {
         this.customForm.get('dateRange')?.setValue({
             start: new FdDate(null as any),
             end: new FdDate(null as any)
         });
     }
+
+    myDisableFunction = (date: FdDate): boolean => {
+        const day = date.getDayOfWeek();
+        return day === 2 || day === 6;
+    };
 }

@@ -8,9 +8,11 @@
     [placeholder]="placeholder"
     [required]="required"
     [selectedDate]="selectedDate"
+    [selectedMultipleDates]="selectedMultipleDates"
+    [selectedRangeDate]="selectedRangeDate"
+    [selectedMultipleDateRanges]="selectedMultipleDateRanges"
     [showTodayButton]="showTodayButton"
     [todayButtonLabel]="todayButtonLabel"
-    [selectedRangeDate]="selectedRangeDate"
     [startingDayOfWeek]="startingDayOfWeek"
     [rangeHoverEffect]="rangeHoverEffect"
     [useValidation]="useValidation"
@@ -26,6 +28,7 @@
     [aggregatedYearGrid]="aggregatedYearGrid"
     [markWeekends]="markWeekends"
     [showWeekNumbers]="showWeekNumbers"
+    [allowMultipleSelection]="allowMultipleSelection"
     [isOpen]="isOpen"
     [disableFunction]="disableFunction"
     [disableRangeStartFunction]="disableRangeStartFunction"
@@ -42,7 +45,9 @@
     (isOpenChange)="handleOpenChange($event)"
     (activeViewChange)="handleActiveViewChange($event)"
     (selectedDateChange)="handleSelectedDateChange($event)"
+    (selectedMultipleDatesChange)="handleSelectedMultipleDatesChange($event)"
     (selectedRangeDateChange)="handleSelectedRangeDateChange($event)"
+    (selectedMultipleDateRangesChange)="handleSelectedMultipleDateRangesChange($event)"
 >
     <ng-content></ng-content>
 </fd-date-picker>

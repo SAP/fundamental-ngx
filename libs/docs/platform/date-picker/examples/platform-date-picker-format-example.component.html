@@ -12,6 +12,15 @@
         >
         </fdp-date-picker>
     </fdp-form-field>
+
+    <fdp-form-field #ffl3 id="format3" label="multi date picker with custom output format">
+        <fdp-date-picker
+            name="format3"
+            [formControl]="ffl3.formControl"
+            [allowMultipleSelection]="true"
+            placeholder="mm/dd/yyyy"
+        ></fdp-date-picker>
+    </fdp-form-field>
 </fdp-form-group>
 
 <div>Selected Date: {{ form.controls.format1.value?.toDateString() }}</div>
@@ -19,3 +28,11 @@
 <br />
 <div>Selected First Date: {{ form.controls.format2.value?.start?.toDateString() }}</div>
 <div>Selected Last Date: {{ form.controls.format2.value?.end?.toDateString() }}</div>
+<br />
+
+<div>
+    Selected Dates:<br />
+    @for (date of form.controls.format3.value; track date) {
+        {{ date.toDateString() || 'null' }}<br />
+    }
+</div>

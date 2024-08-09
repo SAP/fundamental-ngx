@@ -4,9 +4,9 @@
     [attr.aria-roledescription]="'coreCalendar.calendarMonthViewDescription' | fdTranslate"
 >
     <tbody class="fd-calendar__group" role="rowgroup">
-        @for (colMonths of _calendarMonthListGrid; track colMonths; let rowIndex = $index) {
+        @for (colMonths of _calendarMonthListGrid; track colMonths + '' + rowIndex; let rowIndex = $index) {
             <tr class="fd-calendar__row" role="row">
-                @for (monthCell of colMonths; track monthCell; let colIndex = $index) {
+                @for (monthCell of colMonths; track monthCell + '' + colIndex; let colIndex = $index) {
                     <td
                         class="fd-calendar__my-item"
                         role="gridcell"

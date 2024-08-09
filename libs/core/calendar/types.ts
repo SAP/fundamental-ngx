@@ -5,6 +5,12 @@ import { CalendarCurrent } from './models/calendar-current';
 /** Type of calendar */
 export type CalendarType = 'single' | 'range';
 
+/** Enum of calendarTypes */
+export enum CalendarTypeEnum {
+    Single = 'single',
+    Range = 'range'
+}
+
 /** Type for the calendar view */
 export type FdCalendarView = 'day' | 'month' | 'year' | 'aggregatedYear';
 

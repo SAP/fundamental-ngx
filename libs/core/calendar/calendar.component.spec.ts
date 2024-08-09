@@ -38,6 +38,26 @@ describe('CalendarComponent', () => {
         expect(component.closeCalendar.emit).toHaveBeenCalled();
     });
 
+    it('Should handle selected dates changed in multiple mode', () => {
+        const week = [
+            new FdDate(2023, 7, 10),
+            new FdDate(2023, 7, 11),
+            new FdDate(2023, 7, 12),
+            new FdDate(2023, 7, 13),
+            new FdDate(2023, 7, 14),
+            new FdDate(2023, 7, 15),
+            new FdDate(2023, 7, 16)
+        ];
+
+        jest.spyOn(component.selectedMultipleDatesChange, 'emit');
+        jest.spyOn(component.closeCalendar, 'emit');
+        jest.spyOn(component, 'onChange');
+        component.selectedMultipleDatesChanged(week);
+        expect(component.onChange).toHaveBeenCalledWith(week);
+        expect(component.selectedMultipleDatesChange.emit).toHaveBeenCalledWith(week);
+        expect(component.closeCalendar.emit).toHaveBeenCalled();
+    });
+
     it('Should handle selected date changed in range mode', () => {
         const date1 = new FdDate(2000, 10, 10);
         const date2 = new FdDate(2011, 10, 10);
@@ -78,6 +98,31 @@ describe('CalendarComponent', () => {
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
         expect(component.isModelValid()).toBe(false);
         expect(component.selectedDate).toBe(invalidDate);
+    });
+
+    it('Should handle write value for multiple mode when correct', () => {
+        jest.spyOn(component.isValidDateChange, 'emit');
+        const dates = [
+            new FdDate(2000, 10, 10),
+            new FdDate(2000, 10, 11),
+            new FdDate(2000, 10, 12),
+        ];
+        component.allowMultipleSelection = true;
+        component.writeValue(dates);
+        expect(component.selectedMultipleDates).toEqual(dates);
+        expect(component._currentlyDisplayed.month).toBe(dates[0].month);
+        expect(component._currentlyDisplayed.year).toBe(dates[0].year);
+        expect(component.isValidDateChange.emit).toHaveBeenCalledWith(true);
+    });
+
+    it('Should handle write value for multiple mode when not correct', () => {
+        jest.spyOn(component.isValidDateChange, 'emit');
+        const invalidDate = [{}] as any;
+        component.allowMultipleSelection = true;
+        component.writeValue(invalidDate);
+        expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
+        expect(component.isModelValid()).toBe(false);
+        expect(component.selectedMultipleDates).toBe(invalidDate);
     });
 
     it('Should handle write value for range mode when correct', () => {
