@@ -14,6 +14,7 @@ export class MultiInputExampleComponent {
     secondSelected = ['Pineapple'];
     thirdSelected = ['Kiwi'];
     selectedDisabledAutoComplete = ['Kiwi'];
+    filterSelected = [];
 
     objectValues = [
         { label: 'Apple', value: 'apple_value' },
@@ -31,5 +32,9 @@ export class MultiInputExampleComponent {
 
     searchTermChange(text: string): void {
         console.log(text);
+    }
+
+    customFilter(currentArray: (string | any)[], searchTerm: string): any {
+        return searchTerm === 'undefined' ? undefined : currentArray.filter((v) => v.startsWith(searchTerm));
     }
 }

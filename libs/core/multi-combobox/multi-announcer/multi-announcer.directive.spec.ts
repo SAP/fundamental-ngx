@@ -3,13 +3,11 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MultiAnnouncerDirective } from './multi-announcer.directive';
 
 @Component({
-    template: ` <input [options]="values" fdMultiAnnouncer />`
+    template: ` <input fdMultiAnnouncer />`
 })
 class TestComponent {
     @ViewChild(MultiAnnouncerDirective)
     multiAnnouncerDirective: MultiAnnouncerDirective;
-
-    values: string[] = ['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry'];
 }
 
 describe('MultiAnnouncerDirective', () => {

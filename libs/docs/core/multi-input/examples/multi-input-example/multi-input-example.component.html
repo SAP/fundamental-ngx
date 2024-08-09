@@ -62,3 +62,17 @@ Selected: {{ selectedDisabledAutoComplete | json }}
 ></fd-multi-input>
 
 Selected: {{ selectedObjectValues | json }}
+
+<br /><br />
+
+<label fd-label for="multiInputDisabledAutoComplete">With Custom Filter Fn</label>
+<fd-multi-input
+    inputId="multiInput"
+    [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange']"
+    [filterFn]="customFilter"
+    placeholder="Search here..."
+    (searchTermChange)="searchTermChange($event)"
+    [(ngModel)]="filterSelected"
+></fd-multi-input>
+
+Selected: {{ filterSelected | json }}
