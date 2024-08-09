@@ -19,7 +19,7 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
+import { FocusableItemDirective, KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -70,7 +70,8 @@ export type GridListItemStatus = 'success' | 'warning' | 'error' | 'neutral';
         FormsModule,
         ObjectStatusComponent,
         FdTranslatePipe,
-        ContentDensityModule
+        ContentDensityModule,
+        FocusableItemDirective
     ],
     providers: [
         {
@@ -165,7 +166,7 @@ export class GridListItemComponent<T> extends GridListFocusItem implements After
 
     /**
      * The navigated state of the list item.
-     * If set to true, a navigation indicator is displayed at the end of the list item.
+     * If set to true, a navigation indicator is displayed at the end of  the list item.
      */
     @Input()
     isNavigated = false;
@@ -197,6 +198,9 @@ export class GridListItemComponent<T> extends GridListFocusItem implements After
     @Output()
     press = new EventEmitter<GridListItemOutputEvent<T>>();
 
+    /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
+    @Output()
+    keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
     /**
      * Event is thrown, when type is detail or detailsAndActive
      * and Detail button was pressed

@@ -5,11 +5,13 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     Input,
     OnChanges,
     OnDestroy,
+    OnInit,
     Output,
     QueryList,
     SimpleChanges,
@@ -17,8 +19,17 @@ import {
     computed,
     inject
 } from '@angular/core';
-import { KeyUtil, KeyboardSupportService, Nullable, RangeSelector, RtlService } from '@fundamental-ngx/cdk/utils';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+    FocusableListDirective,
+    KeyUtil,
+    KeyboardSupportService,
+    Nullable,
+    RangeSelector,
+    RtlService
+} from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, Observable, Subscription, filter } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';
 import { GridListFocusItem } from '../../models/grid-list-focus-item.model';
 import {
@@ -38,9 +49,10 @@ let gridListUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     providers: [KeyboardSupportService, { provide: GridList, useExisting: GridListComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [FocusableListDirective],
     standalone: true
 })
-export class GridListComponent<T> extends GridList<T> implements OnChanges, AfterContentInit, OnDestroy {
+export class GridListComponent<T> extends GridList<T> implements OnChanges, AfterContentInit, OnDestroy, OnInit {
     /** id for the Element */
     @Input()
     id = `fd-grid-list-${gridListUniqueId++}`;
@@ -97,6 +109,9 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
 
     /** @hidden */
     private _gridListItems: QueryList<GridListItemComponent<T>>;
+
+    /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _rangeSelector = new RangeSelector();
@@ -159,9 +174,14 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
     }
 
     /** @hidden */
+    ngOnInit(): void {
+        this._listenOnListFocusEscape();
+    }
+
+    /** @hidden */
     ngAfterContentInit(): void {
-        console.log(this._focusItems);
         this._keyboardSupportService.setKeyboardService(this._focusItems, false, false);
+        this._listenOnQueryChange();
         this._cd.detectChanges();
     }
 
@@ -348,9 +368,30 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
     }
 
     /** @hidden */
+    private updateItemProperties(): void {
+        this._focusItems.forEach((item, index) => {
+            item.setIsFirst(index === 0);
+        });
+    }
+
+    /** @hidden */
+    private _listenOnQueryChange(): void {
+        this._focusItems.changes.pipe(startWith(0)).subscribe(() => {
+            setTimeout(() => {
+                // using setTimeout to avoid ExpressionChangedAfterItHasBeenCheckedError
+                this.updateItemProperties();
+            });
+        });
+    }
+
+    /** @hidden */
     private _updateGridListItemsProperty(key: string, value: string | string[]): void {
         this._gridListItems.forEach((componenet) => {
             componenet[key] = value;
         });
+    }
+    /** @hidden */
+    private _listenOnListFocusEscape(): void {
+        this._keyboardSupportService.focusEscapeList.pipe(takeUntilDestroyed(this._destroyRef)).subscribe();
     }
 }
