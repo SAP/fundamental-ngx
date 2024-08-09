@@ -16,11 +16,13 @@ import { DatePickerDisableFuncExampleComponent } from './examples/date-picker-di
 import { DatePickerDisabledExampleComponent } from './examples/date-picker-disabled-example.component';
 import { DatePickerFormExampleComponent } from './examples/date-picker-form-example.component';
 import { DatePickerFormMultiExampleComponent } from './examples/date-picker-form-multi-example.component';
+import { DatePickerFormMultiRangeExampleComponent } from './examples/date-picker-form-multi-range-example.component';
 import { DatePickerFormRangeExampleComponent } from './examples/date-picker-form-range-example.component';
 import { DatePickerFormatExampleComponent } from './examples/date-picker-format-example.component';
 import { DatePickerI18nExampleComponent } from './examples/date-picker-i18n-example.component';
 import { DatePickerMultiDisableFuncExampleComponent } from './examples/date-picker-multi-disable-func-example.component';
 import { DatePickerMultiExampleComponent } from './examples/date-picker-multi-example.component';
+import { DatePickerMultiRangeExampleComponent } from './examples/date-picker-multi-range-example.component';
 import { DatePickerPositionExampleComponent } from './examples/date-picker-position-example.component';
 import { DatePickerRangeDisabledExampleComponent } from './examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component';
 import { DatePickerRangeExampleComponent } from './examples/date-picker-range-example.component';
@@ -30,6 +32,7 @@ import { DatePickerUpdateOnBlurExampleComponent } from './examples/date-picker-u
 import { DatePickerMobileModeExampleComponent } from './examples/mobile-mode/date-picker-mobile-mode-example.component';
 
 const datePickerRangeSrc = 'date-picker-range-example.component.ts';
+const datePickerMultiRangeSrc = 'date-picker-multi-range-example.component.ts';
 const datePickerSingleSrc = 'date-picker-single-example.component.ts';
 const datePickerMultiSrc = 'date-picker-multi-example.component.ts';
 const datePickeri18nSrc = 'date-picker-i18n-example.component.ts';
@@ -39,6 +42,7 @@ const datePickerAllowNullSrc = 'date-picker-allow-null-example.component.ts';
 const datePickerFormTsSrc = 'date-picker-form-example.component.ts';
 const datePickerFormMultiTsSrc = 'date-picker-form-multi-example.component.ts';
 const datePickerRangeFormTsSrc = 'date-picker-form-range-example.component.ts';
+const datePickerMultiRangeFormTsSrc = 'date-picker-form-multi-range-example.component.ts';
 const datePickerPositionSrc = 'date-picker-position-example.component.ts';
 const datePickerComplexI18nSrcTs = 'date-picker-complex-i18n-example/date-picker-complex-i18n-example.component.ts';
 const datePickerComplexI18nSrcH = 'date-picker-complex-i18n-example/date-picker-complex-i18n-example.component.html';
@@ -81,7 +85,9 @@ const datePickerMobileH = 'mobile-mode/date-picker-mobile-mode-example.component
         DatePickerMobileModeExampleComponent,
         DatePickerMultiExampleComponent,
         DatePickerFormMultiExampleComponent,
-        DatePickerMultiDisableFuncExampleComponent
+        DatePickerMultiDisableFuncExampleComponent,
+        DatePickerMultiRangeExampleComponent,
+        DatePickerFormMultiRangeExampleComponent
     ]
 })
 export class DatePickerDocsComponent {
@@ -109,6 +115,15 @@ export class DatePickerDocsComponent {
             component: 'DatePickerRangeExampleComponent',
             code: getAssetFromModuleAssets(datePickerRangeSrc),
             fileName: 'date-picker-range-example'
+        }
+    ];
+
+    datePickerMultiRange: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'DatePickerMultiRangeExampleComponent',
+            code: getAssetFromModuleAssets(datePickerMultiRangeSrc),
+            fileName: 'date-picker-multi-range-example'
         }
     ];
 
@@ -172,6 +187,15 @@ export class DatePickerDocsComponent {
             component: 'DatePickerFormRangeExampleComponent',
             code: getAssetFromModuleAssets(datePickerRangeFormTsSrc),
             fileName: 'date-picker-form-range-example'
+        }
+    ];
+
+    datePickerMultiRangeForm: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'DatePickerFormMultiRangeExampleComponent',
+            code: getAssetFromModuleAssets(datePickerMultiRangeFormTsSrc),
+            fileName: 'date-picker-form-multi-range-example'
         }
     ];
 

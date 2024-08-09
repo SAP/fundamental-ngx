@@ -112,7 +112,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
 
     /** The currently selected date model with multiple ranges. */
     @Input()
-    selectedMultipleDateRanges: Array<DateRange<D>>;
+    selectedMultipleDateRanges: Array<DateRange<D>> = [];
 
     /**
      * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
@@ -159,7 +159,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * 'range' for a range of dates.
      */
     @Input()
-    calType: CalendarType = 'single';
+    calType: CalendarType = CalendarTypeEnum.Single;
 
     /** Id of the calendar. If none is provided, one will be generated. */
     @Input()
@@ -532,7 +532,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      */
     selectedMultipleDateRangesChanged(dates: Array<DateRange<D>>): void {
         if (dates) {
-            // this.selectedMultipleDateRanges.push({ start: dates.start, end: dates.end });
+            this.selectedMultipleDateRanges = dates;
             this.selectedMultipleDateRangesChange.emit(this.selectedMultipleDateRanges);
             this.onChange(this.selectedMultipleDateRanges);
             this.closeCalendar.emit();

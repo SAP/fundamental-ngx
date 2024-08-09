@@ -17,7 +17,8 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
 @Component({
     selector: 'fd-date-picker-today-button-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    template: ` <label fd-form-label for="datePicker">Date Picker</label>
+    template: `
+        <label fd-form-label for="datePicker">Date Picker</label>
         <fd-date-picker type="single" inputId="datePicker" [showTodayButton]="true" [(ngModel)]="date"></fd-date-picker>
         <br />
         <div>Selected Date: {{ date?.toDateString() || 'null' }}</div>
@@ -42,7 +43,23 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
         <br />
         <div>Selected First Date: {{ this.selectedRange?.start?.toDateString() || 'null' }}</div>
         <br />
-        <div>Selected Last Date: {{ this.selectedRange?.end?.toDateString() || 'null' }}</div>`,
+        <div>Selected Last Date: {{ this.selectedRange?.end?.toDateString() || 'null' }}</div>
+
+        <br />
+        <fd-date-picker
+            type="range"
+            [(ngModel)]="selectedRanges"
+            [showTodayButton]="true"
+            [allowMultipleSelection]="true"
+        ></fd-date-picker>
+        <div>
+            Selected Date Ranges: <br />
+            @for (dateRange of selectedRanges; track dateRange) {
+                {{ (dateRange?.start?.toDateString() || 'null') + ' - ' + (dateRange?.end?.toDateString() || 'null') }}
+                <br />
+            }
+        </div>
+    `,
     providers: [
         {
             provide: DatetimeAdapter,
@@ -66,9 +83,18 @@ export class DatePickerTodayButtonExampleComponent {
     ];
 
     selectedRange: Nullable<DateRange<FdDate>>;
+    selectedRanges: Nullable<Array<DateRange<FdDate>>>;
 
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {
         const today = this.datetimeAdapter.today();
+        const other1 = new FdDate(2024, 8, 1);
+        const other2 = new FdDate(2024, 8, 10);
+        const other3 = new FdDate(2024, 8, 20);
         this.selectedRange = new DateRange(today, this.datetimeAdapter.addCalendarDays(today, 1));
+        this.selectedRanges = [
+            new DateRange(other1, this.datetimeAdapter.addCalendarDays(other1, 5)),
+            new DateRange(other2, this.datetimeAdapter.addCalendarDays(other2, 5)),
+            new DateRange(other3, this.datetimeAdapter.addCalendarDays(other3, 5))
+        ];
     }
 }

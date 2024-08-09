@@ -36,6 +36,7 @@ import {
     CalendarComponent,
     CalendarDayViewComponent,
     CalendarType,
+    CalendarTypeEnum,
     CalendarYearGrid,
     DateRange,
     DaysOfWeek,
@@ -131,7 +132,7 @@ export class DatePickerComponent<D>
 {
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
-    type: CalendarType = 'single';
+    type: CalendarType = CalendarTypeEnum.Single;
 
     /** Date picker input placeholder string */
     @Input()
@@ -173,7 +174,7 @@ export class DatePickerComponent<D>
 
     /** The currently selected date model with multiple ranges. */
     @Input()
-    selectedMultipleDateRanges: Array<DateRange<D>> = [{ start: null, end: null }];
+    selectedMultipleDateRanges: Array<DateRange<D>> = [];
 
     /** The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on. */
     @Input()
@@ -481,7 +482,9 @@ export class DatePickerComponent<D>
      */
     get _dateInputArialLabelKey(): FdLanguageKeyIdentifier {
         // return either input value or a key for "fdTranslate" pipe
-        return this.type === 'range' ? 'coreDatePicker.dateRangeInputLabel' : 'coreDatePicker.dateInputLabel';
+        return this.type === CalendarTypeEnum.Range
+            ? 'coreDatePicker.dateRangeInputLabel'
+            : 'coreDatePicker.dateInputLabel';
     }
 
     /** @hidden */
@@ -607,7 +610,7 @@ export class DatePickerComponent<D>
 
     /** @hidden */
     closeFromCalendar(): void {
-        if (this.type === 'single' && this.closeOnDateChoose && !this.allowMultipleSelection) {
+        if (this.type === CalendarTypeEnum.Single && this.closeOnDateChoose && !this.allowMultipleSelection) {
             this.onTouched();
             this.closeCalendar();
         }
@@ -657,7 +660,7 @@ export class DatePickerComponent<D>
         this._refreshCurrentlyDisplayedCalendarDate(date);
         this.formatInputDate(date);
         this._isInvalidDateInput = !this.isModelValid();
-        if (this.closeOnDateChoose && this.type === 'single') {
+        if (this.closeOnDateChoose && this.type === CalendarTypeEnum.Single) {
             this.closeCalendar();
         }
     }
@@ -717,33 +720,37 @@ export class DatePickerComponent<D>
      * Method that is triggered by events from the calendar component when the selected multiple range dates change.
      */
     handleMultipleDateRangesChange(dates: Array<DateRange<D>>): void {
-        if (!dates || dates.length === 0) {
-            return;
-        }
+        let hasChanged = false;
 
-        const startChanged = !this._dateTimeAdapter.datesEqual(
-            dates[0].start,
-            this.selectedMultipleDateRanges[0]?.start
-        );
-        const endChanged = !this._dateTimeAdapter.datesEqual(dates[0].end, this.selectedMultipleDateRanges[0]?.end);
-
-        if (dates && (startChanged || endChanged)) {
-            const shouldClose = this.closeOnDateChoose && dates.every((range) => range.end !== null);
-            if (dates.every((range) => range.end !== null)) {
-                this._inputFieldDate = this._formatMultipleDateRanges(dates);
-                this.selectedMultipleDateRanges = dates;
-                this.selectedMultipleDateRangesChange.emit(dates);
-                this.onChange(dates);
-                this._refreshCurrentlyDisplayedCalendarDate(dates[0].start);
-                this._isInvalidDateInput = !this.isModelValid();
-            }
-
-            if (shouldClose) {
-                this.closeCalendar();
+        // Check for changes in the date ranges
+        if (dates.length !== this.selectedMultipleDateRanges.length) {
+            hasChanged = true;
+        } else {
+            for (let i = 0; i < dates.length; i++) {
+                if (
+                    !this._dateTimeAdapter.datesEqual(dates[i].start, this.selectedMultipleDateRanges[i].start) ||
+                    !this._dateTimeAdapter.datesEqual(dates[i].end, this.selectedMultipleDateRanges[i].end)
+                ) {
+                    hasChanged = true;
+                    break;
+                }
             }
         }
 
-        this._changeDetectionRef.detectChanges();
+        // If any date range has changed, update the internal state and emit changes
+        if (hasChanged) {
+            this.selectedMultipleDateRanges = dates;
+
+            // Update the formatted input field
+            this._inputFieldDate = this._formatMultipleDateRanges(dates);
+
+            // Emit the change event
+            this.selectedMultipleDateRangesChange.emit(this.selectedMultipleDateRanges);
+
+            // Perform any additional actions such as updating the model or refreshing the calendar
+            this.onChange(this.selectedMultipleDateRanges);
+            this._isInvalidDateInput = !this.isModelValid();
+        }
     }
 
     /**
@@ -764,10 +771,10 @@ export class DatePickerComponent<D>
     onTodayButtonClick(): void {
         const todayDate = this._dateTimeAdapter.today();
         if (this.allowMultipleSelection) {
-            if (this.type === 'single') {
+            if (this.type === CalendarTypeEnum.Single) {
                 this.handleMultipleDatesChange([todayDate]);
                 this.closeFromCalendar();
-            } else if (this.type === 'range') {
+            } else if (this.type === CalendarTypeEnum.Range) {
                 this.handleMultipleDateRangesChange([
                     {
                         start: todayDate,
@@ -776,10 +783,10 @@ export class DatePickerComponent<D>
                 ]);
             }
         } else {
-            if (this.type === 'single') {
+            if (this.type === CalendarTypeEnum.Single) {
                 this.handleSingleDateChange(todayDate);
                 this.closeFromCalendar();
-            } else if (this.type === 'range') {
+            } else if (this.type === CalendarTypeEnum.Range) {
                 this.handleRangeDateChange({
                     start: todayDate,
                     end: todayDate
@@ -856,7 +863,7 @@ export class DatePickerComponent<D>
             return;
         }
         if (this.allowMultipleSelection && Array.isArray(selected)) {
-            if (this.type === 'single') {
+            if (this.type === CalendarTypeEnum.Single) {
                 /**
                  * For single mode, if the date is invalid, model is changed, it refreshes currently
                  * input field text, but it does not refresh currently displayed day
@@ -868,25 +875,30 @@ export class DatePickerComponent<D>
                 this._inputFieldDate = this.formatDateArray(selected);
                 this._refreshCurrentlyDisplayedCalendarDate(selected[0]);
             }
-            if (this.type === 'range') {
+            if (this.type === CalendarTypeEnum.Range) {
                 /**
                  * For range mode, if the date is invalid, model is changed, but it does not refresh currently
                  * displayed day view, or input field text
                  */
                 selected = selected as Array<DateRange<D>>;
                 if (selected && selected.length > 0) {
-                    this.selectedMultipleDateRanges = selected.map((range) => ({
-                        start: this._parseDate(range.start),
-                        end: this._parseDate(range.end)
-                    }));
-                    this._refreshCurrentlyDisplayedCalendarDate(selected[0].start);
-                    this._inputFieldDate = this._formatMultipleDateRanges(selected);
+                    const filteredRanges = selected.filter((range) => range.start !== null && range.end !== null);
+                    if (filteredRanges.length > 0) {
+                        this.selectedMultipleDateRanges = filteredRanges.map((range) => ({
+                            start: this._parseDate(range.start),
+                            end: this._parseDate(range.end)
+                        }));
+                        this._refreshCurrentlyDisplayedCalendarDate(filteredRanges[0].start);
+                        this._inputFieldDate = this._formatMultipleDateRanges(filteredRanges);
+                    } else {
+                        this._inputFieldDate = '';
+                    }
                 } else {
                     this._inputFieldDate = '';
                 }
             }
         } else {
-            if (this.type === 'single') {
+            if (this.type === CalendarTypeEnum.Single) {
                 /**
                  * For single mode, if the date is invalid, model is changed, it refreshes currently
                  * input field text, but it does not refresh currently displayed day
@@ -896,7 +908,7 @@ export class DatePickerComponent<D>
                 this._inputFieldDate = this._formatDate(selected);
                 this._refreshCurrentlyDisplayedCalendarDate(selected);
             }
-            if (this.type === 'range') {
+            if (this.type === CalendarTypeEnum.Range) {
                 /**
                  * For range mode, if the date is invalid, model is changed, but it does not refresh currently
                  * displayed day view, or input field text
@@ -927,13 +939,13 @@ export class DatePickerComponent<D>
     dateStringUpdate(dateStr: string): void {
         this._inputFieldDate = dateStr;
         if (this.allowMultipleSelection) {
-            if (this.type === 'single') {
+            if (this.type === CalendarTypeEnum.Single) {
                 this.updateMultipleDates(dateStr);
             } else {
                 this._updateMultipleDateRanges(dateStr);
             }
         } else {
-            if (this.type === 'single') {
+            if (this.type === CalendarTypeEnum.Single) {
                 this._updateSingleDate(dateStr);
             } else {
                 this._updateRangeDate(dateStr);
@@ -944,13 +956,13 @@ export class DatePickerComponent<D>
     /** Method that provides information if model selected date/dates have properly types and are valid */
     isModelValid(): boolean {
         if (this.allowMultipleSelection) {
-            if (this.type === 'single') {
+            if (this.type === CalendarTypeEnum.Single) {
                 return this._isMultipleModelValid(this.selectedMultipleDates);
             } else {
                 return this._isMultipleRangesModelValid(this.selectedMultipleDateRanges);
             }
         } else {
-            if (this.type === 'single') {
+            if (this.type === CalendarTypeEnum.Single) {
                 return this._isSingleModelValid(this.selectedDate);
             } else {
                 return this._isRangeModelValid(this.selectedRangeDate);
