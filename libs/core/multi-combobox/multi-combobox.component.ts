@@ -647,6 +647,8 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
         if (!this.limitless) {
             map.set('limit', this._mapLimit);
+        } else {
+            map.set('limit', Number.MAX_SAFE_INTEGER);
         }
 
         this.dataSourceDirective.dataSourceProvider?.match(map);

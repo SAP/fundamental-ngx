@@ -497,6 +497,8 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
         if (!this.limitless) {
             map.set('limit', this._mapLimit);
+        } else {
+            map.set('limit', Number.MAX_SAFE_INTEGER);
         }
 
         this.ds.match(map);
@@ -836,6 +838,8 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
         if (!this.limitless) {
             map.set('limit', MAP_LIMIT);
+        } else {
+            map.set('limit', Number.MAX_SAFE_INTEGER);
         }
 
         initDataSource.match(map);
