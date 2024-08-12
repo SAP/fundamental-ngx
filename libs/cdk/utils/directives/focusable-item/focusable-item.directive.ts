@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
+import { ENTER, ESCAPE, F2, F7, MAC_ENTER } from '@angular/cdk/keycodes';
 import { DOCUMENT } from '@angular/common';
 import {
     DestroyRef,
@@ -195,7 +195,7 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
         }
 
         const isFocused = this._document.activeElement === this.elementRef.nativeElement;
-        const shouldFocusChild = KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER, F2]) && !event.shiftKey && isFocused;
+        const shouldFocusChild = KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER, F2, F7]) && !event.shiftKey && isFocused;
         const shouldFocusCell =
             ((KeyUtil.isKeyCode(event, F2) && event.shiftKey) || KeyUtil.isKeyCode(event, ESCAPE)) && !isFocused;
 
