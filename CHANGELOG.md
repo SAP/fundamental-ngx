@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.3-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.6...v0.51.3-rc.7) (2024-08-12)
+
+
+### Bug Fixes
+
+* **core:** ensure grid list item selection works ([#12229](https://github.com/SAP/fundamental-ngx/issues/12229)) ([09405b0](https://github.com/SAP/fundamental-ngx/commit/09405b0982fd6611707dba79e13e36ed34b23a5f)), closes [#12218](https://github.com/SAP/fundamental-ngx/issues/12218) [#12218](https://github.com/SAP/fundamental-ngx/issues/12218)
+
+
+
+
+
 ## [0.51.3-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.5...v0.51.3-rc.6) (2024-08-12)
 
 **Note:** Version bump only for package fundamental-ngx
