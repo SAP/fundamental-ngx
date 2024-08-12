@@ -749,6 +749,7 @@ export class DatePickerComponent<D>
 
             // Perform any additional actions such as updating the model or refreshing the calendar
             this.onChange(this.selectedMultipleDateRanges);
+            this._refreshCurrentlyDisplayedCalendarDate(dates[0].start);
             this._isInvalidDateInput = !this.isModelValid();
         }
     }
@@ -1033,7 +1034,10 @@ export class DatePickerComponent<D>
 
     /** Method that returns info if multiple range date model given is valid */
     private _isMultipleRangesModelValid(ranges: Array<DateRange<D>>): boolean {
-        return ranges?.every((range) => this._isRangeModelValid(range));
+        if (!ranges || ranges.length === 0) {
+            return this.allowNull;
+        }
+        return ranges.every((range) => range.start && range.end && this._isRangeModelValid(range));
     }
 
     /** Method that returns info if end date model given is valid */

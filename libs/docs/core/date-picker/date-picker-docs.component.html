@@ -18,7 +18,13 @@
 <separator></separator>
 
 <fd-docs-section-title id="multi" componentName="date-picker"> Multi Date Picker </fd-docs-section-title>
-<description> Allows the selection of a multiple dates, just pass <b>allowMultipleSelection</b> as true. </description>
+<description>
+    The multiSelection feature allows users to select multiple dates. This is useful for scenarios where multiple dates
+    need to be selected, such as booking multiple appointments or selecting multiple event dates.
+    <strong>Usage:</strong>
+    To enable multiSelection, set the <code>allowMultipleSelection</code> input property to <code>true</code>. The
+    selected dates will be emitted through the <code>selectedMultipleDatesChange</code> event.
+</description>
 <component-example>
     <fd-date-picker-multi-example></fd-date-picker-multi-example>
 </component-example>
@@ -39,7 +45,13 @@
 
 <fd-docs-section-title id="multiRange" componentName="date-picker">Multi Range Date Picker </fd-docs-section-title>
 <description>
-    Allows the selection of a multi range of dates. Only the first and last dates are passed back under ngModel.
+    The multiDateRanges feature allows users to select multiple date ranges. This is useful for scenarios where multiple
+    date ranges need to be selected, such as booking multiple periods or selecting multiple event durations.
+    <strong>Usage:</strong>
+    To enable multiDateRanges, set the <code>allowMultipleSelection</code> input property to <code>true</code> and the
+    <code>type</code> input property to <code>range</code>. The selected date ranges will be emitted through the
+    <code>selectedMultipleDateRangesChange</code>
+    event.
 </description>
 <component-example>
     <fd-date-picker-multi-range-example></fd-date-picker-multi-range-example>

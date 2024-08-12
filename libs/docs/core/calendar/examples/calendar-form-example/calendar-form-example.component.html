@@ -39,4 +39,23 @@
         </small>
         <button fd-button label="Set Invalid Range Date" (click)="setInvalidRange()"></button>
     </div>
+    <div fd-form-item>
+        <fd-calendar
+            calType="range"
+            formControlName="multiDateRange"
+            [startingDayOfWeek]="1"
+            [allowMultipleSelection]="true"
+        ></fd-calendar>
+        <small>
+            Touched: {{ customForm.controls.multiDateRange.touched }}<br />
+            Dirty: {{ customForm.controls.multiDateRange.dirty }}<br />
+            Valid: {{ customForm.controls.multiDateRange.valid }}<br />
+            Selected Date Ranges:<br />
+            @for (dateRange of customForm.controls.multiDateRange.value; track dateRange) {
+                {{ (dateRange?.start?.toDateString() || 'null') + ' - ' + (dateRange?.end?.toDateString() || 'null') }}
+                <br />
+            }
+        </small>
+        <button fd-button label="Set Invalid Multi Date Range" (click)="setInvalidMultiRange()"></button>
+    </div>
 </form>

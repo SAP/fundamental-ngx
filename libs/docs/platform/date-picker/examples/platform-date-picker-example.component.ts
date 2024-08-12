@@ -35,6 +35,10 @@ export class PlatformDatePickerExampleComponent {
     birthday: FdDate = new FdDate(1990, 1, 2);
     randomDays: FdDate[] = [new FdDate(1990, 1, 1), new FdDate(1990, 1, 2), new FdDate(1990, 1, 3)];
     holiday = { start: new FdDate(2020, 5, 14), end: new FdDate(2020, 5, 24) };
+    multiDateRanges = [
+        { start: new FdDate(2020, 5, 1), end: new FdDate(2020, 5, 10) },
+        { start: new FdDate(2020, 5, 15), end: new FdDate(2020, 5, 25) }
+    ];
     datePickerForm = new FormGroup({
         birthday: new FormControl<FdDate | null>(null),
         randomDays: new FormControl<FdDate[] | null>([]),
@@ -42,18 +46,21 @@ export class PlatformDatePickerExampleComponent {
         examdates: new FormControl<FdDate[] | null>([]),
         holiday: new FormControl<DateRange<FdDate> | null>(null),
         journeydate: new FormControl<DateRange<FdDate> | null>(null),
+        multiDateRanges: new FormControl<DateRange<FdDate>[] | null>(null),
         disableddate: new FormControl<FdDate | null>(null)
     });
 
     formInitialData = {
         birthday: this.birthday,
         randomDays: this.randomDays,
-        holiday: this.holiday
+        holiday: this.holiday,
+        multiDateRanges: this.multiDateRanges
     };
 
     requiredDateValidator: ValidatorFn[] = [Validators.required];
     requiredMultiDatesValidator: ValidatorFn[] = [multipleDatesValidator];
     rangeDateValidator: ValidatorFn[] = [dateRangeNullValidator];
+    multiRangeDateValidator: ValidatorFn[] = [multiDateRangeNullValidator];
 
     // Template driven form
     disabledDate = '';
@@ -84,5 +91,19 @@ export function multipleDatesValidator(control: AbstractControl): { [key: string
         return null;
     } else {
         return { invalidMultipleDates: 'Multiple dates are not valid' };
+    }
+}
+
+export function multiDateRangeNullValidator(control: AbstractControl): { [key: string]: any } | null {
+    const dateRanges = control.value as Array<{ start: any; end: any }>;
+    if (Array.isArray(dateRanges) && dateRanges.length > 0) {
+        for (const range of dateRanges) {
+            if (!range.start || !range.end) {
+                return { nullMultiRangeDate: 'One or more date ranges are not valid' };
+            }
+        }
+        return null;
+    } else {
+        return { nullMultiRangeDate: 'Date ranges are not valid' };
     }
 }

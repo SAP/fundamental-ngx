@@ -210,4 +210,75 @@ describe('CalendarComponent', () => {
         component.handlePreviousArrowClick();
         expect(component.displayPreviousYearList).toHaveBeenCalled();
     });
+
+    it('Should handle selected multiple date ranges changed', () => {
+        const dateRange1 = { start: new FdDate(2000, 10, 10), end: new FdDate(2000, 10, 15) };
+        const dateRange2 = { start: new FdDate(2010, 5, 5), end: new FdDate(2010, 5, 10) };
+        jest.spyOn(component.selectedMultipleDateRangesChange, 'emit');
+        jest.spyOn(component.closeCalendar, 'emit');
+        jest.spyOn(component, 'onChange');
+        component.selectedMultipleDateRangesChanged([dateRange1, dateRange2]);
+        expect(component.onChange).toHaveBeenCalledWith([dateRange1, dateRange2]);
+        expect(component.selectedMultipleDateRangesChange.emit).toHaveBeenCalledWith([dateRange1, dateRange2]);
+        expect(component.closeCalendar.emit).toHaveBeenCalled();
+    });
+
+    it('Should handle selected only one date range changed in multiple ranges mode', () => {
+        const dateRange = { start: new FdDate(2000, 10, 10), end: null };
+        jest.spyOn(component.selectedMultipleDateRangesChange, 'emit');
+        jest.spyOn(component.closeCalendar, 'emit');
+        jest.spyOn(component, 'onChange');
+        component.selectedMultipleDateRangesChanged([dateRange]);
+        expect(component.onChange).toHaveBeenCalledWith([dateRange]);
+        expect(component.selectedMultipleDateRangesChange.emit).toHaveBeenCalledWith([dateRange]);
+        expect(component.closeCalendar.emit).toHaveBeenCalled();
+    });
+
+    it('Should handle write value for multiple date ranges mode when correct', () => {
+        jest.spyOn(component.isValidDateChange, 'emit');
+        const dateRange1 = { start: new FdDate(2000, 10, 10), end: new FdDate(2000, 10, 15) };
+        const dateRange2 = { start: new FdDate(2010, 5, 5), end: new FdDate(2010, 5, 10) };
+        component.allowMultipleSelection = true;
+        component.calType = 'range';
+        component.writeValue([dateRange1, dateRange2]);
+        expect(component.selectedMultipleDateRanges).toEqual([dateRange1, dateRange2]);
+        expect(component._currentlyDisplayed.month).toBe(dateRange1.start.month);
+        expect(component._currentlyDisplayed.year).toBe(dateRange1.start.year);
+        expect(component.isValidDateChange.emit).toHaveBeenCalledWith(true);
+    });
+
+    it('Should handle write value for multiple date ranges mode when start date not correct', () => {
+        jest.spyOn(component.isValidDateChange, 'emit');
+        const validDate = new FdDate(2000, 10, 10);
+        const invalidDate = {} as any;
+        component.allowMultipleSelection = true;
+        component.calType = 'range';
+        component.writeValue([{ start: invalidDate, end: validDate }]);
+        expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
+        expect(component.selectedMultipleDateRanges[0].start).toBe(invalidDate);
+    });
+
+    it('Should handle write value for multiple date ranges mode when end date not correct', () => {
+        jest.spyOn(component.isValidDateChange, 'emit');
+        const validDate = new FdDate(2000, 10, 10);
+        const invalidDate = {} as any;
+        component.allowMultipleSelection = true;
+        component.calType = 'range';
+        component.writeValue([{ start: validDate, end: invalidDate }]);
+        expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
+        expect(component.selectedMultipleDateRanges[0].end).toBe(invalidDate);
+    });
+
+    it('Should handle write value for multiple date ranges mode when both dates not correct', () => {
+        jest.spyOn(component.isValidDateChange, 'emit');
+        const invalidDate: any = {};
+        const invalidDate2: any = {};
+        component.allowMultipleSelection = true;
+        component.calType = 'range';
+        component.writeValue([{ start: invalidDate, end: invalidDate2 }]);
+        expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
+        expect(component.isModelValid()).toBe(false);
+        expect(component.selectedMultipleDateRanges[0].start).toBe(invalidDate);
+        expect(component.selectedMultipleDateRanges[0].end).toBe(invalidDate2);
+    });
 });

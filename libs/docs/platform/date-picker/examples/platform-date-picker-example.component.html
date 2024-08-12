@@ -88,6 +88,27 @@
         >
         </fdp-date-picker>
     </fdp-form-field>
+
+    <fdp-form-field
+        #ffl8
+        id="multiDateRanges"
+        [column]="1"
+        [rank]="1"
+        [validators]="multiRangeDateValidator"
+        label="Pre-populated Multi Date Ranges:"
+    >
+        <fdp-date-picker
+            name="multiDateRanges"
+            type="range"
+            [allowNull]="false"
+            [allowMultipleSelection]="true"
+            [rangeHoverEffect]="true"
+            [formControl]="ffl8.formControl"
+            dateRangeInputLabel="date range input mm/dd/yyy"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
+
     <fdp-form-field #ffl4 id="journeydate" [column]="2" [rank]="2" label="Range type date-picker:">
         <fdp-date-picker
             name="journeydate"
@@ -137,6 +158,12 @@
 <span>Holiday End Date: {{ datePickerForm.controls.holiday.value?.end?.toDateString() }}</span>
 <p>Journey Start Date: {{ datePickerForm.controls.journeydate.value?.start?.toDateString() }}</p>
 <span>Journey End Date: {{ datePickerForm.controls.journeydate.value?.end?.toDateString() }}</span>
+<p>
+    Multi Date Ranges:<br />
+    @for (date of datePickerForm.controls.multiDateRanges.value; track date) {
+        {{ date.start?.toDateString() || 'null' }} - {{ date.end?.toDateString() || 'null' }}<br />
+    }
+</p>
 <h3>Date Picker with Template Driven Form.</h3>
 <!--Template Driven Form-->
 <fdp-form-group columnLayout="XL2-L2-M1-S1">

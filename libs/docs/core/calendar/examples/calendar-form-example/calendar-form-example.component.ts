@@ -51,7 +51,17 @@ export class CalendarFormExamplesComponent {
                 end: new FdDate(2019, 10, 19)
             },
             disabled: false
-        })
+        }),
+        multiDateRange: new FormControl([
+            {
+                start: new FdDate(2019, 10, 1),
+                end: new FdDate(2019, 10, 10)
+            },
+            {
+                start: new FdDate(2019, 10, 15),
+                end: new FdDate(2019, 10, 25)
+            }
+        ])
     });
 
     setInvalid(): void {
@@ -67,6 +77,15 @@ export class CalendarFormExamplesComponent {
             start: new FdDate(null as any),
             end: new FdDate(null as any)
         });
+    }
+
+    setInvalidMultiRange(): void {
+        this.customForm.controls.multiDateRange.setValue([
+            {
+                start: new FdDate(null as any),
+                end: new FdDate(null as any)
+            }
+        ]);
     }
 
     myDisableFunction = (date: FdDate): boolean => {

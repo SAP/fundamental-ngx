@@ -19,6 +19,7 @@ import { CalendarMarkHoverComponent } from './examples/calendar-mark-hover/calen
 import { CalendarMobileExampleComponent } from './examples/calendar-mobile-example/calendar-mobile-example.component';
 import { CalendarMondayStartExampleComponent } from './examples/calendar-monday-start-example.component';
 import { CalendarMultiExampleComponent } from './examples/calendar-multi-example.component';
+import { CalendarMultiRangeExampleComponent } from './examples/calendar-multi-range-example.component';
 import { CalendarOptionsExampleComponent } from './examples/calendar-options-example/calendar-options-example.component';
 import { CalendarProgrammaticallyChangeExampleComponent } from './examples/calendar-programmatically-change-example.component';
 import { CalendarRangeExampleComponent } from './examples/calendar-range-example.component';
@@ -28,6 +29,7 @@ import { CalendarSpecialDayExampleComponent } from './examples/calendar-special-
 const calendarFormSourceScss = 'calendar-form-example/calendar-form-example.component.scss';
 
 const calendarRangeSrc = 'calendar-range-example.component.ts';
+const calendarMultiRangeSrc = 'calendar-multi-range-example.component.ts';
 const calendarOptionHtml = 'calendar-options-example/calendar-options-example.component.html';
 const calendarOptionSrc = 'calendar-options-example/calendar-options-example.component.ts';
 const calendarMarkHoverSrc = 'calendar-mark-hover/calendar-mark-hover.component.ts';
@@ -75,7 +77,8 @@ const calendarProgrammaticallySource = 'calendar-programmatically-change-example
         CalendarI18nExampleComponent,
         CalendarFormExamplesComponent,
         CalendarDisabledNavigationButtonsExampleComponent,
-        CalendarMultiExampleComponent
+        CalendarMultiExampleComponent,
+        CalendarMultiRangeExampleComponent
     ]
 })
 export class CalendarDocsComponent {
@@ -199,6 +202,15 @@ specialDay: SpecialDayRule[] = [
             component: 'CalendarRangeExampleComponent',
             fileName: 'calendar-range-example',
             code: getAssetFromModuleAssets(calendarRangeSrc)
+        }
+    ];
+
+    calendarMultiRangeSource: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'CalendarMultiRangeExampleComponent',
+            fileName: 'calendar-multi-range-example',
+            code: getAssetFromModuleAssets(calendarMultiRangeSrc)
         }
     ];
 

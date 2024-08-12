@@ -1228,7 +1228,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * @param day The calendar day to be selected or updated in the range.
      */
     private _selectMultipleRangeDates(day: CalendarDay<D>): void {
-        let tempRanges = [...this._selectedMultipleDateRanges];
+        let tempRanges = [...(this._selectedMultipleDateRanges || [])];
         tempRanges = this._handleExistingRange(tempRanges, day);
 
         if (this._selectMultipleCounter === 0 || this._selectMultipleCounter % 2 === 0) {
@@ -1293,7 +1293,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      */
     private _isDateInRange(date: D, range: DateRange<D>): boolean {
         return (
-            this._dateTimeAdapter.compareDate(date, range.start!) >= 0 &&
+            (!range.start || this._dateTimeAdapter.compareDate(date, range.start) >= 0) &&
             (!range.end || this._dateTimeAdapter.compareDate(date, range.end) <= 0)
         );
     }
@@ -1407,7 +1407,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * Stores the computed classes in the weekHeaderClasses array.
      */
     private _computeWeekHeaderClasses(): void {
-        this._weekHeaderClasses = this._calendarDayList.map((day, i) =>
+        this._weekHeaderClasses = this._calendarDayList.map(() =>
             this.calType !== CalendarTypeEnum.Range && this.allowMultipleSelection && this.disableFunction
                 ? 'event-enabled'
                 : ''
