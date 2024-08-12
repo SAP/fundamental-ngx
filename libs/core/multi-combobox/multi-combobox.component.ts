@@ -744,6 +744,17 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
             this._onPrimaryButtonClick(this.isOpen);
         }
     }
+
+    /** @hidden */
+    _setLimitless(limitless: boolean): void {
+        this.limitless = limitless;
+    }
+
+    /** @hidden */
+    _getMapLimit(): number {
+        return this.limitless ? (this.dataSourceDirective.dataSource as any[]).length : this._mapLimit;
+    }
+
     /**
      * @hidden
      * Iterate over every item and perform callback

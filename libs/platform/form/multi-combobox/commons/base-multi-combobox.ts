@@ -576,6 +576,16 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         }
     }
 
+    /** @hidden */
+    setLimitless(limitless: boolean): void {
+        this.limitless = limitless;
+    }
+
+    /** @hidden */
+    getMapLimit(): number {
+        return this.limitless ? (this.dataSource as any[]).length : this._mapLimit;
+    }
+
     /**
      * @hidden
      * Method to emit change event

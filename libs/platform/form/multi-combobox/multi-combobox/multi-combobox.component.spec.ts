@@ -48,7 +48,19 @@ class MultiComboboxStandardComponent {
         { name: 'Broccoli', type: 'Vegetables' },
         { name: 'Carrot', type: 'Vegetables' },
         { name: 'Jalapeño', type: 'Vegetables' },
-        { name: 'Spinach', type: 'Vegetables' }
+        { name: 'Spinach', type: 'Vegetables' },
+        { name: 'Lemon', type: 'Fruits' },
+        { name: 'Grapes', type: 'Fruits' },
+        { name: 'Watermelon', type: 'Fruits' },
+        { name: 'Orange', type: 'Fruits' },
+        { name: 'Cucumber', type: 'Vegetables' },
+        { name: 'Tomato', type: 'Vegetables' },
+        { name: 'Potato', type: 'Vegetables' },
+        { name: 'Onion', type: 'Vegetables' },
+        { name: 'Mango', type: 'Fruits' },
+        { name: 'Kiwi', type: 'Fruits' },
+        { name: 'Peach', type: 'Fruits' },
+        { name: 'Cherry', type: 'Fruits' }
     ];
     selectedItems: [{ name: string; type: string }] | null = [this.dataSource[0]];
     maxHeight: string;
@@ -130,6 +142,24 @@ describe('MultiComboboxComponent default values', () => {
         expect(toggleButton.length).toBe(0);
     });
 
+    it('should list all elements when limitless is true', () => {
+        multiCombobox.setLimitless(true);
+        multiCombobox.onPrimaryButtonClick(multiCombobox.isOpen);
+        fixture.detectChanges();
+
+        expect(multiCombobox._suggestions.length).toBe(component.dataSource.length);
+
+        multiCombobox.setLimitless(false);
+        multiCombobox.onPrimaryButtonClick(multiCombobox.isOpen);
+        fixture.detectChanges();
+
+        if (component.dataSource.length > multiCombobox.getMapLimit()) {
+            expect(multiCombobox._suggestions.length).toBeLessThan(component.dataSource.length);
+        } else {
+            expect(multiCombobox._suggestions.length).toBe(component.dataSource.length);
+        }
+    });
+
     it('should be able to see Group', () => {
         component.group = true;
 
@@ -197,9 +227,14 @@ describe('MultiComboboxComponent default values', () => {
         multiCombobox.onPrimaryButtonClick(multiCombobox.isOpen);
         fixture.detectChanges();
         overlayContainerEl.querySelector('.fd-list__item')?.dispatchEvent(selectEvent);
+
         fixture.detectChanges();
 
-        expect(multiCombobox._selectedSuggestions.length).toEqual(component.dataSource.length);
+        if (multiCombobox.getMapLimit() < multiCombobox._suggestions.length) {
+            expect(multiCombobox._selectedSuggestions.length).toEqual(multiCombobox.getMapLimit());
+        } else {
+            expect(multiCombobox._selectedSuggestions.length).toEqual(multiCombobox._suggestions.length);
+        }
 
         overlayContainerEl.querySelector('.fd-list__item')?.dispatchEvent(unselectEvent);
         fixture.detectChanges();

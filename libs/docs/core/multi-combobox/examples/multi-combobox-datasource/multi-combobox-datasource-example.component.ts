@@ -134,22 +134,7 @@ export class MultiComboboxDatasourceExampleComponent {
         { id: '97', name: 'Ukraine', type: 'Countries' },
         { id: '98', name: 'Georgia', type: 'Countries' },
         { id: '99', name: 'Poland', type: 'Countries' },
-        { id: '100', name: 'Finland', type: 'Countries' },
-        { id: '101', name: 'Item 101', type: 'Other' },
-        { id: '102', name: 'Item 102', type: 'Other' },
-        { id: '103', name: 'Item 103', type: 'Other' },
-        { id: '104', name: 'Item 104', type: 'Other' },
-        { id: '105', name: 'Item 105', type: 'Other' },
-        { id: '106', name: 'Item 106', type: 'Other' },
-        { id: '107', name: 'Item 107', type: 'Other' },
-        { id: '108', name: 'Item 108', type: 'Other' },
-        { id: '109', name: 'Item 109', type: 'Other' },
-        { id: '110', name: 'Item 110', type: 'Other' },
-        { id: '111', name: 'Item 111', type: 'Other' },
-        { id: '112', name: 'Item 112', type: 'Other' },
-        { id: '113', name: 'Item 113', type: 'Other' },
-        { id: '114', name: 'Item 114', type: 'Other' },
-        { id: '115', name: 'Item 115', type: 'Other' }
+        { id: '100', name: 'Finland', type: 'Countries' }
     ];
     dataSourceOf = of(this.dataSource);
     ds = new ArrayMultiComboBoxDataSource(this.dataSource);
