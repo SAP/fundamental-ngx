@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
+import { FocusableGridDirective, FocusableItemDirective, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 
@@ -45,7 +45,9 @@ interface GridListItem {
         AvatarComponent,
         LinkComponent,
         RouterLink,
-        GridListComponent
+        GridListComponent,
+        FocusableGridDirective,
+        FocusableListDirective
     ]
 })
 export class GridListComboSelectComponent {

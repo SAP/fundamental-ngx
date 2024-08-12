@@ -120,6 +120,7 @@ export class FocusableItemDirective implements FocusableItem, HasElementRef {
             fromEvent(this.elementRef.nativeElement, 'focusout')
                 .pipe(takeUntilDestroyed())
                 .subscribe(() => {
+                    console.log('focyseout');
                     this._onFocusout();
                 });
 

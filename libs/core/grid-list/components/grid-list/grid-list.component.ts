@@ -21,6 +21,8 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
+    FocusableGridDirective,
+    FocusableItemDirective,
     FocusableListDirective,
     KeyUtil,
     KeyboardSupportService,
@@ -49,7 +51,7 @@ let gridListUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     providers: [KeyboardSupportService, { provide: GridList, useExisting: GridListComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [FocusableListDirective],
+    imports: [FocusableListDirective, FocusableGridDirective, FocusableItemDirective],
     standalone: true
 })
 export class GridListComponent<T> extends GridList<T> implements OnChanges, AfterContentInit, OnDestroy, OnInit {
