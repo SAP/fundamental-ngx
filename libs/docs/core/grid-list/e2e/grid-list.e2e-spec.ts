@@ -30,7 +30,9 @@ describe('Grid-list test suite', () => {
         multiSelectModeSelectedItems,
         singleSelectItemsSelected,
         dragAndDropItems,
-        gridListToolbar
+        gridListToolbar,
+        deleteSegmentedButton,
+        multiSelectSegmentedButton
     } = gridListPage;
 
     beforeAll(async () => {
@@ -62,6 +64,7 @@ describe('Grid-list test suite', () => {
     });
 
     it('Verify grid list contains product counter', async () => {
+        await click(deleteSegmentedButton);
         let productsQuantityFromTitle = (await getText(deleteModeTitle)).replace(/\D/g, '');
         const itemsArray = await elementArray(await gridListItemsByMode('delete'));
         const itemsArrayLength = itemsArray.length;
@@ -84,6 +87,7 @@ describe('Grid-list test suite', () => {
 
     // eslint-disable-next-line max-len
     it('Verify selecting multiple items in "Multi select mode" component -> Multiple items can be selected. Checkbox should be checked when item is selected', async () => {
+        await click(multiSelectSegmentedButton);
         const arrayLength = await getElementArrayLength(await gridListItemsByMode('multiSelect'));
         let selectedArrayLength = await getElementArrayLength(multiSelectModeSelectedItems);
         await expect(selectedArrayLength).toEqual(1);
