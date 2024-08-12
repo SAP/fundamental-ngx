@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.3-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.8...v0.51.3-rc.9) (2024-08-12)
+
+
+### Bug Fixes
+
+* **platform:** table headers are not sticky when body is overflowing ([#12235](https://github.com/SAP/fundamental-ngx/issues/12235)) ([6d9e775](https://github.com/SAP/fundamental-ngx/commit/6d9e775a3f07c529a57e499203b3261987142e40))
+
+
+
+
+
 ## [0.51.3-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.7...v0.51.3-rc.8) (2024-08-12)
 
 
