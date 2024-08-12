@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.3-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.7...v0.51.3-rc.8) (2024-08-12)
+
+
+### Bug Fixes
+
+* **core,platform:** fixed limitless in multi-combobox ([#12252](https://github.com/SAP/fundamental-ngx/issues/12252)) ([e100bb7](https://github.com/SAP/fundamental-ngx/commit/e100bb748bee399829c50cafadd854d2113604a8))
+
+
+
+
+
 ## [0.51.3-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.6...v0.51.3-rc.7) (2024-08-12)
 
 
