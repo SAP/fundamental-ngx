@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ContentChild, Input, OnDestroy } fr
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
+import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 
 import {
     CollectionFilter,
@@ -10,6 +10,7 @@ import {
     CollectionSort,
     Table,
     TableColumn,
+    TableDialogCommonData,
     TableState
 } from '@fundamental-ngx/platform/table-helpers';
 
@@ -97,6 +98,9 @@ export class TableP13DialogComponent implements OnDestroy {
     _table: Table;
 
     /** @hidden */
+    _dialogRef: DialogRef<TableDialogCommonData, any>;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
@@ -121,7 +125,12 @@ export class TableP13DialogComponent implements OnDestroy {
             collectionSort: sortBy
         };
 
-        const dialogRef = this._dialogService.open(
+        // dismiss any open dialog, before opening a new one
+        if (this._dialogRef) {
+            this._dialogRef.dismiss();
+        }
+
+        this._dialogRef = this._dialogService.open(
             P13SortingDialogComponent,
             {
                 ...dialogConfig,
@@ -131,7 +140,7 @@ export class TableP13DialogComponent implements OnDestroy {
         );
 
         this._subscriptions.add(
-            dialogRef.afterClosed
+            this._dialogRef.afterClosed
                 .pipe(filter((result) => !!result))
                 .subscribe(({ collectionSort }: SortDialogResultData) => {
                     this._applySorting(collectionSort);
@@ -153,7 +162,12 @@ export class TableP13DialogComponent implements OnDestroy {
             dialogData.validator = this.filter.validator;
         }
 
-        const dialogRef = this._dialogService.open(
+        // dismiss any open dialog, before opening a new one
+        if (this._dialogRef) {
+            this._dialogRef.dismiss();
+        }
+
+        this._dialogRef = this._dialogService.open(
             P13FilteringDialogComponent,
             {
                 ...dialogConfig,
@@ -165,7 +179,7 @@ export class TableP13DialogComponent implements OnDestroy {
         );
 
         this._subscriptions.add(
-            dialogRef.afterClosed
+            this._dialogRef.afterClosed
                 .pipe(filter((result) => !!result))
                 .subscribe(({ collectionFilter }: FilterDialogResultData) => {
                     this._applyFiltering(collectionFilter);
@@ -188,7 +202,12 @@ export class TableP13DialogComponent implements OnDestroy {
             collectionGroup: groupBy
         };
 
-        const dialogRef = this._dialogService.open(
+        // dismiss any open dialog, before opening a new one
+        if (this._dialogRef) {
+            this._dialogRef.dismiss();
+        }
+
+        this._dialogRef = this._dialogService.open(
             P13GroupingDialogComponent,
             {
                 ...dialogConfig,
@@ -198,7 +217,7 @@ export class TableP13DialogComponent implements OnDestroy {
         );
 
         this._subscriptions.add(
-            dialogRef.afterClosed
+            this._dialogRef.afterClosed
                 .pipe(filter((result) => !!result))
                 .subscribe(({ collectionGroup }: GroupDialogResultData) => {
                     this._applyGrouping(collectionGroup);
@@ -216,7 +235,12 @@ export class TableP13DialogComponent implements OnDestroy {
             visibleColumns
         };
 
-        const dialogRef = this._dialogService.open(
+        // dismiss any open dialog, before opening a new one
+        if (this._dialogRef) {
+            this._dialogRef.dismiss();
+        }
+
+        this._dialogRef = this._dialogService.open(
             P13ColumnsDialogComponent,
             {
                 ...dialogConfig,
@@ -228,7 +252,7 @@ export class TableP13DialogComponent implements OnDestroy {
         );
 
         this._subscriptions.add(
-            dialogRef.afterClosed
+            this._dialogRef.afterClosed
                 .pipe(filter((result) => !!result))
                 .subscribe(({ visibleColumns: result }: ColumnsDialogResultData) => {
                     this._applyColumns(result);

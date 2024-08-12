@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.3-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.5...v0.51.3-rc.6) (2024-08-12)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.51.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.4...v0.51.3-rc.5) (2024-08-07)
+
+
+### Bug Fixes
+
+* **core:** remove the default background for autofill input ([#12234](https://github.com/SAP/fundamental-ngx/issues/12234)) ([84d62c0](https://github.com/SAP/fundamental-ngx/commit/84d62c016da4e2704c10454e6bf29e7eb7796d7a))
+
+
+
+
+
+## [0.51.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.3...v0.51.3-rc.4) (2024-08-06)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.51.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.2...v0.51.3-rc.3) (2024-08-06)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 ## [0.51.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.1...v0.51.3-rc.2) (2024-08-04)
 
 **Note:** Version bump only for package @fundamental-ngx/core

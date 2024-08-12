@@ -1,8 +1,14 @@
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
+
 import { RouterLink } from '@angular/router';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
     GridListComponent,
     GridListItemOutputEvent,
@@ -22,15 +28,29 @@ interface GridListItem {
 }
 
 @Component({
-    selector: 'fd-grid-list-multi-select-example',
-    templateUrl: './grid-list-multi-select-example.component.html',
-    styleUrls: ['./grid-list-multi-select-example.component.scss'],
+    selector: 'fd-grid-list-combo-select-example',
+    templateUrl: './grid-list-combo-select-example.component.html',
+    styleUrls: ['./grid-list-combo-select-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [GridListModule, AvatarComponent, LinkComponent, RouterLink, ButtonComponent]
+    imports: [
+        ButtonComponent,
+        CommonModule,
+        FormsModule,
+        FocusableItemDirective,
+        SegmentedButtonComponent,
+        GridListModule,
+        ContentDensityDirective,
+        AvatarComponent,
+        LinkComponent,
+        RouterLink,
+        GridListComponent
+    ]
 })
-export class GridListMultiSelectExampleComponent {
+export class GridListComboSelectComponent {
+    selectionMode: string = 'None';
+
     @ViewChild(GridListComponent)
     grid: GridListComponent<GridListItem>;
 
@@ -50,33 +70,33 @@ export class GridListMultiSelectExampleComponent {
             id: 3,
             title: 'Title 3',
             description: 'Description 3',
-            type: 'active'
+            type: 'navigation',
+            counter: 15
         },
         {
             id: 4,
             title: 'Title 4',
-            description: 'Description 4',
-            type: 'detail'
+            description: 'Description 4'
         },
         {
             id: 5,
             title: 'Title 5',
-            description: 'Description 5',
-            type: 'detailsAndActive'
+            description: 'Description 5'
         },
         {
             id: 6,
             title: 'Title 6',
-            description: 'Description 6',
-            type: 'navigation',
-            counter: 5
-        },
-        {
-            id: 7,
-            title: 'Title 7',
-            description: 'Description 7'
+            description: 'Description 6'
         }
     ];
+
+    navigate(): void {
+        alert('Navigation event');
+    }
+
+    showAlert(message: string): void {
+        alert('Clicked on ' + message);
+    }
 
     onSelectionChange(event: GridListSelectionEvent<number>): void {
         console.log('Multi-Select: selected items', event);
@@ -90,11 +110,18 @@ export class GridListMultiSelectExampleComponent {
         console.log('Detail event', event);
     }
 
-    navigate(event: GridListItemOutputEvent<number>): void {
+    navigateGrid(event: GridListItemOutputEvent<number>): void {
         alert('Navigation event value is: ' + event.value);
     }
 
     clearSelection(): void {
         this.grid.clearSelection();
+    }
+
+    delete(event: GridListItemOutputEvent<number>): void {
+        if (event.index !== null && event.index !== undefined) {
+            this.list.splice(event.index, 1);
+            alert('Deleted item event ' + event.value);
+        }
     }
 }

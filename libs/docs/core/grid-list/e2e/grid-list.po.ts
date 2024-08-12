@@ -6,6 +6,8 @@ export class GridListPo extends CoreBaseComponentPo {
 
     layoutPattern = 'h2#layout-pattern';
     moreButton = '.fd-grid-list__more';
+    deleteSegmentedButton = 'button[label="Delete"]';
+    multiSelectSegmentedButton = 'button[label="MultiSelect"]';
     moreButtonItems = 'fd-grid-list-more-example fd-grid-list fd-grid-list-item';
     footer = '.fd-grid-list__footer';
     deleteModeTitle = '[selectionmode="delete"] [title="Products"]';
