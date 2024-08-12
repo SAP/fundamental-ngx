@@ -1,12 +1,13 @@
 import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
+import { ContentDensityDirective } from '@fundamental-ngx/core';
 import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
 
 @Component({
     selector: 'fd-list-example',
     templateUrl: './list-example.component.html',
     standalone: true,
-    imports: [ListModule]
+    imports: [ListModule, ContentDensityDirective]
 })
 export class ListExampleComponent {}
 

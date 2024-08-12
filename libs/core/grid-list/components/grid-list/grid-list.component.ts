@@ -259,16 +259,10 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
 
     /** @hidden */
     handleKeydown(event: KeyboardEvent): void {
-        if (document.activeElement?.classList.contains('fd-grid-list__item')) {
-            if (KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
-                this._handleArrowKeydown(event);
-            } else if (
-                event.shiftKey &&
-                this.selectionMode === 'multiSelect' &&
-                KeyUtil.isKeyCode(event, [HOME, END])
-            ) {
-                this._handleHomeEndKeydown(event);
-            }
+        if (KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
+            this._handleArrowKeydown(event);
+        } else if (event.shiftKey && this.selectionMode === 'multiSelect' && KeyUtil.isKeyCode(event, [HOME, END])) {
+            this._handleHomeEndKeydown(event);
         }
     }
 
@@ -307,35 +301,42 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
 
     /** @hidden */
     private _handleArrowKeydown(event: KeyboardEvent): void {
+        const activeElement = document.activeElement as HTMLElement;
+
         event.preventDefault();
-        for (let index = 0; index < this._gridListItems.length; index++) {
-            const currentItem = this._gridListItems.toArray()[index];
-            if (document.activeElement === currentItem._gridListItem.nativeElement) {
-                let indexToFocus;
-                if (KeyUtil.isKeyCode(event, LEFT_ARROW) || (this._rtl$() && KeyUtil.isKeyCode(event, [RIGHT_ARROW]))) {
-                    indexToFocus = index - 1;
-                } else if (
-                    KeyUtil.isKeyCode(event, RIGHT_ARROW) ||
-                    (this._rtl$() && KeyUtil.isKeyCode(event, [LEFT_ARROW]))
-                ) {
-                    indexToFocus = index + 1;
-                } else if (KeyUtil.isKeyCode(event, UP_ARROW)) {
-                    indexToFocus = index - this._getItemsPerRow(currentItem._gridListItem.nativeElement);
-                } else if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
-                    indexToFocus = index + this._getItemsPerRow(currentItem._gridListItem.nativeElement);
+        const currentItemIndex = this._gridListItems
+            .toArray()
+            .findIndex((item) => item._gridListItem.nativeElement.contains(activeElement));
+
+        if (currentItemIndex === -1) {
+            return;
+        }
+
+        let indexToFocus: number | undefined;
+        const itemsPerRow = this._getItemsPerRow(
+            this._gridListItems.toArray()[currentItemIndex]._gridListItem.nativeElement
+        );
+
+        if (KeyUtil.isKeyCode(event, LEFT_ARROW) || (this._rtl$() && KeyUtil.isKeyCode(event, [RIGHT_ARROW]))) {
+            indexToFocus = currentItemIndex - 1;
+        } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW) || (this._rtl$() && KeyUtil.isKeyCode(event, [LEFT_ARROW]))) {
+            indexToFocus = currentItemIndex + 1;
+        } else if (KeyUtil.isKeyCode(event, UP_ARROW)) {
+            indexToFocus = currentItemIndex - itemsPerRow;
+        } else if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
+            indexToFocus = currentItemIndex + itemsPerRow;
+        }
+
+        if (indexToFocus !== undefined && indexToFocus >= 0 && indexToFocus < this._gridListItems.length) {
+            const itemToFocus = this._gridListItems.toArray()[indexToFocus];
+            if (itemToFocus && itemToFocus._gridListItem) {
+                const elementToFocus = itemToFocus._gridListItem.nativeElement?.parentElement?.querySelector(
+                    activeElement.tagName
+                ) as HTMLElement;
+
+                if (elementToFocus) {
+                    elementToFocus.focus();
                 }
-                const itemToFocus = this.gridListItems.toArray()[indexToFocus];
-                if (itemToFocus && itemToFocus._gridListItem) {
-                    if (this.selectionMode === 'multiSelect' && event.shiftKey) {
-                        this.setSelectedItem(
-                            currentItem as any,
-                            indexToFocus,
-                            currentItem._selectedItem ? GridListSelectionActions.ADD : GridListSelectionActions.REMOVE
-                        );
-                    }
-                    itemToFocus._gridListItem.nativeElement.focus();
-                }
-                break;
             }
         }
     }
@@ -390,6 +391,7 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
             componenet[key] = value;
         });
     }
+
     /** @hidden */
     private _listenOnListFocusEscape(): void {
         this._keyboardSupportService.focusEscapeList.pipe(takeUntilDestroyed(this._destroyRef)).subscribe();

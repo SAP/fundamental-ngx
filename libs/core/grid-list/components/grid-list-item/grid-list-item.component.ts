@@ -153,6 +153,7 @@ export class GridListItemComponent<T> extends GridListFocusItem implements After
     set type(value: Nullable<GridListItemType>) {
         this._type = value ?? 'inactive';
     }
+
     get type(): GridListItemType {
         return this._type;
     }
@@ -198,7 +199,7 @@ export class GridListItemComponent<T> extends GridListFocusItem implements After
     @Output()
     press = new EventEmitter<GridListItemOutputEvent<T>>();
 
-    /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
+    /** @hidden */
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
     /**
@@ -291,6 +292,7 @@ export class GridListItemComponent<T> extends GridListFocusItem implements After
     get selectionMode(): GridListSelectionMode | undefined {
         return this._selectionMode;
     }
+
     /** @hidden */
     _index?: number;
 
@@ -334,7 +336,9 @@ export class GridListItemComponent<T> extends GridListFocusItem implements After
 
     /** Focus grid list item programmatically */
     focus(options?: FocusOptions): void {
-        this._gridListItem?.nativeElement.focus(options);
+        this._gridListItem?.nativeElement.focus({
+            preventScroll: options?.preventScroll
+        });
     }
 
     /** @hidden */
