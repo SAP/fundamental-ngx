@@ -17,7 +17,10 @@
     [attr.aria-disabled]="disabled"
     [attr.aria-readonly]="readonly"
     [attr.aria-required]="required"
-    [ngClass]="[displayOnly ? 'is-display' : readonly ? 'is-readonly' : '', state ? 'is-' + state : '']"
+    [ngClass]="[
+        displayOnly ? 'is-display' : readonly ? 'is-readonly' : disabled ? 'is-disabled' : '',
+        state ? 'is-' + state : ''
+    ]"
     (click)="_onInputClick($event)"
     (blur)="_onBlur()"
     (focus)="_onFocus()"

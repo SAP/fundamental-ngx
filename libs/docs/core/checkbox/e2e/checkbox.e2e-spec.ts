@@ -309,8 +309,9 @@ describe('checkbox test suite', () => {
 
             for (let i = 0; i < checkboxCount; i++) {
                 if (i === 5) {
-                    continue;
+                    break;
                 }
+
                 await expect(await isElementClickable(styledCheckbox + checkboxLabel, i)).toBe(
                     true,
                     `checkbox ${i} is not clickable`
@@ -319,10 +320,12 @@ describe('checkbox test suite', () => {
         });
 
         it('should check disabled checkbox is not clickable', async () => {
-            await expect(await isElementClickable(styledCheckbox + checkboxLabel, 5)).toBe(
-                false,
-                'disabled checkbox is clickable'
-            );
+            for (let i = 6; i < 9; i++) {
+                await expect(await isElementClickable(styledCheckbox + checkboxLabel, i)).toBe(
+                    false,
+                    `checkbox ${i} is clickable`
+                );
+            }
         });
     });
 

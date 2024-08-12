@@ -20,73 +20,10 @@
     </ul>
 </description>
 
-<fd-docs-section-title id="none-mode" componentName="grid-list">None mode</fd-docs-section-title>
-<description>
-    Items cannot be selected but can still use "navigation", which allows click handling on specific items.
-</description>
 <component-example>
-    <fd-grid-list-example></fd-grid-list-example>
+    <fd-grid-list-combo-select-example></fd-grid-list-combo-select-example>
 </component-example>
-<code-example [exampleFiles]="gridListDefaultExample"></code-example>
-
-<fd-docs-section-title id="single-select-mode" componentName="grid-list">Single select mode</fd-docs-section-title>
-<description>
-    One item in the grid list can be selected. Need click on an item to select it. To use the Single select mode, set
-    <code>[mode]</code> as <code>singleSelect</code>.
-
-    <p>
-        <b>Note</b>: Whole item with link is clickable. If used within single select mode - selection event will be
-        emitted first, then navigation event.
-    </p>
-</description>
-<component-example>
-    <fd-grid-list-single-select-example></fd-grid-list-single-select-example>
-</component-example>
-<code-example [exampleFiles]="gridListSingleSelectExample"></code-example>
-
-<fd-docs-section-title id="single-select-left-mode" componentName="grid-list"
-    >Single select left mode</fd-docs-section-title
->
-<description>
-    One item in the grid list can be selected. For this, the grid list provides radio buttons on the left side of each
-    item toolbar. To use the Single select left mode, set <code>[mode]</code> as <code>singleSelectLeft</code>.
-</description>
-<component-example>
-    <fd-grid-list-single-select-left-example></fd-grid-list-single-select-left-example>
-</component-example>
-<code-example [exampleFiles]="gridListSingleSelectLeftExample"></code-example>
-
-<fd-docs-section-title id="single-select-right-mode" componentName="grid-list">
-    Single select right mode
-</fd-docs-section-title>
-<description>
-    One item in the grid list can be selected. For this, the grid list provides radio buttons on the left side of each
-    item toolbar. To use the Single select right mode, set <code>[mode]</code> as <code>singleSelectRight</code>.
-</description>
-<component-example>
-    <fd-grid-list-single-select-right-example></fd-grid-list-single-select-right-example>
-</component-example>
-<code-example [exampleFiles]="gridListSingleSelectRightExample"></code-example>
-
-<fd-docs-section-title id="multi-select-mode" componentName="grid-list">Multi select mode</fd-docs-section-title>
-<description>
-    Users can select one or more items. For this, the grid list provides checkboxes on the left side of each item
-    toolbar. To use the Multi select mode, set <code>[mode]</code> as <code>multiSelect</code>.
-</description>
-<component-example>
-    <fd-grid-list-multi-select-example></fd-grid-list-multi-select-example>
-</component-example>
-<code-example [exampleFiles]="gridListMultiSelectExample"></code-example>
-
-<fd-docs-section-title id="delete-mode" componentName="grid-list">Delete mode</fd-docs-section-title>
-<description>
-    This places a Delete button on the right side of an item toolbar. To use the Delete mode, set <code>[mode]</code> as
-    <code>delete</code>.
-</description>
-<component-example>
-    <fd-grid-list-delete-example></fd-grid-list-delete-example>
-</component-example>
-<code-example [exampleFiles]="gridListDeleteExample"></code-example>
+<code-example [exampleFiles]="gridListComboExample"></code-example>
 
 <fd-docs-section-title id="group" componentName="grid-list">Group</fd-docs-section-title>
 <description>

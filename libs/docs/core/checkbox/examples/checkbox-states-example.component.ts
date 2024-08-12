@@ -24,26 +24,60 @@ import { FormHeaderComponent } from '@fundamental-ngx/core/form';
         <div>
             <p>
                 Read only:
-                <fd-checkbox [(ngModel)]="checkboxValue7" [readonly]="true" label="Readonly label"></fd-checkbox>
-                <fd-checkbox [(ngModel)]="checkboxValue8" [readonly]="true" label="Readonly label"></fd-checkbox>
+                <fd-checkbox
+                    [(ngModel)]="checkboxValue7"
+                    [readonly]="true"
+                    label="Readonly label when false"
+                ></fd-checkbox>
+                <fd-checkbox
+                    [(ngModel)]="checkboxValue8"
+                    [readonly]="true"
+                    [tristate]="true"
+                    label="Readonly label when null (in tristate)"
+                ></fd-checkbox>
+                <fd-checkbox
+                    [(ngModel)]="checkboxValue9"
+                    [readonly]="true"
+                    label="Readonly label when true"
+                ></fd-checkbox>
             </p>
         </div>
         <div>
-            <p>
-                Display-only:
+            <p>Display-only:</p>
+            <span style="display: flex;">
                 <fd-checkbox
                     [(ngModel)]="displayOnlyCheckboxValue"
                     [displayOnly]="true"
                     label="Display-only label"
                 ></fd-checkbox>
-            </p>
-            <button fd-button (click)="toggleCheckboxValue()">
-                Change value to {{ displayOnlyCheckboxValue ? 'false' : 'true' }}
-            </button>
+                <button fd-button (click)="toggleCheckboxValue()">
+                    Change value to {{ displayOnlyCheckboxValue ? 'false' : 'true' }}
+                </button>
+            </span>
+            <br />
+            <span style="display: flex;"
+                ><fd-checkbox
+                    [(ngModel)]="displayOnlyCheckboxTristateValue"
+                    [displayOnly]="true"
+                    [tristate]="true"
+                    label="Display-only tristate label"
+                >
+                </fd-checkbox>
+                <button fd-button (click)="toggleCheckboxTristateValue()">
+                    Change tristate value to
+                    {{
+                        displayOnlyCheckboxTristateValue
+                            ? 'false'
+                            : displayOnlyCheckboxTristateValue === false
+                              ? 'null'
+                              : 'true'
+                    }}
+                </button></span
+            >
         </div>
         <div>
             <p>Compact:</p>
-            <fd-checkbox [(ngModel)]="checkboxValue7" fdCompact label="Compact label"></fd-checkbox>
+            <fd-checkbox [(ngModel)]="checkboxValue10" fdCompact label="Compact label"></fd-checkbox>
         </div>
     `,
     standalone: true,
@@ -57,14 +91,24 @@ export class CheckboxStatesExampleComponent {
     public checkboxValue5 = false;
     public checkboxValue6 = false;
     public checkboxValue7 = false;
-    public checkboxValue8 = true;
-    public checkboxValue9 = false;
+    public checkboxValue8 = null;
+    public checkboxValue9 = true;
     public checkboxValue10 = false;
 
     // Change state programmatically with display-only
     displayOnlyCheckboxValue = false;
+    displayOnlyCheckboxTristateValue: boolean | null = false;
 
     toggleCheckboxValue(): void {
         this.displayOnlyCheckboxValue = !this.displayOnlyCheckboxValue;
+    }
+
+    toggleCheckboxTristateValue(): void {
+        this.displayOnlyCheckboxTristateValue =
+            this.displayOnlyCheckboxTristateValue == true
+                ? false
+                : this.displayOnlyCheckboxTristateValue == false
+                  ? null
+                  : true;
     }
 }
