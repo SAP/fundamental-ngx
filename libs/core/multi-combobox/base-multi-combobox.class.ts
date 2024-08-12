@@ -453,6 +453,8 @@ export abstract class BaseMultiCombobox<T = any> {
 
         if (!this.limitless) {
             map.set('limit', this._mapLimit);
+        } else {
+            dataSourceProvider.dataProvider['defaultLimit'] = Number.MAX_SAFE_INTEGER;
         }
 
         dataSourceProvider.match(map);
