@@ -497,6 +497,8 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
         if (!this.limitless) {
             map.set('limit', this._mapLimit);
+        } else {
+            map.set('limit', Number.MAX_SAFE_INTEGER);
         }
 
         this.ds.match(map);
@@ -572,6 +574,16 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         if (direction === 'up') {
             this.searchInputElement?.nativeElement.focus();
         }
+    }
+
+    /** @hidden */
+    setLimitless(limitless: boolean): void {
+        this.limitless = limitless;
+    }
+
+    /** @hidden */
+    getMapLimit(): number {
+        return this.limitless ? (this.dataSource as any[]).length : this._mapLimit;
     }
 
     /**
@@ -836,6 +848,8 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
         if (!this.limitless) {
             map.set('limit', MAP_LIMIT);
+        } else {
+            map.set('limit', Number.MAX_SAFE_INTEGER);
         }
 
         initDataSource.match(map);

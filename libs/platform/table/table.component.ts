@@ -495,6 +495,9 @@ export class TableComponent<T = any>
     /** @hidden */
     private _calculateFrozenColumnRefresh$ = new Subject<void>();
 
+    /** @hidden */
+    private _defaultBodyHeight = '100%';
+
     /** Event emitted when current preset configuration has been changed. */
     @Output()
     presetChanged = new EventEmitter<PlatformTableManagedPreset>();
@@ -594,6 +597,32 @@ export class TableComponent<T = any>
     /** @hidden */
     get initialSortBy(): CollectionSort[] {
         return this.initialState?.initialSortBy ?? [];
+    }
+
+    /**
+     * @hidden
+     * verify if the bodyheight provided is valid in percentage or pixels
+     */
+    get isBodyHeightValid(): boolean {
+        const height = this.bodyHeight;
+
+        if (height) {
+            return (
+                (height.endsWith('px') && this._isValidInteger(height.split('px')[0])) ||
+                (height.endsWith('%') && this._isValidInteger(height.split('%')[0]))
+            );
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @hidden
+     * if the bodyHeight is valid, then set that as value as body height for table
+     * else set default body height for table as 100%
+     */
+    get tableBodyHeight(): string {
+        return this.isBodyHeightValid ? this.bodyHeight : this._defaultBodyHeight;
     }
 
     /**
@@ -1113,15 +1142,6 @@ export class TableComponent<T = any>
         }
         this._markAsExpanded(expandableRows);
         this.allRowsExpanded.emit();
-    }
-
-    /** @hidden */
-    private _markAsExpanded(rows: TableRow<T>[]): void {
-        rows.forEach((e) => {
-            e.expanded = true;
-            e.hidden = false;
-        });
-        this.onTableRowsChanged();
     }
 
     /** collapse all rows */
@@ -1672,6 +1692,20 @@ export class TableComponent<T = any>
     /** Manually update index after we add new items to the main array */
     private _reIndexTableRows(): void {
         this._tableRows.map((row, index) => (row.index = index));
+    }
+
+    /** @hidden */
+    private _isValidInteger(value: string): boolean {
+        return Number.isInteger(parseInt(value, 10));
+    }
+
+    /** @hidden */
+    private _markAsExpanded(rows: TableRow<T>[]): void {
+        rows.forEach((e) => {
+            e.expanded = true;
+            e.hidden = false;
+        });
+        this.onTableRowsChanged();
     }
 
     /** @hidden */

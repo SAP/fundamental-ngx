@@ -42,7 +42,7 @@ export class FormMessageComponent implements CssClassBuilder, OnInit, OnChanges 
     @Input()
     embedded = false;
 
-    /** @hidden User's custom classes */
+    /** User's custom classes */
     @Input()
     class: string;
 

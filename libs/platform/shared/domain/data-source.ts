@@ -218,17 +218,17 @@ export class ComboBoxDataSource<T> implements DataSource<T> {
         this.dataProvider
             .fetch(searchParam, start, end)
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe(
-                (result: T[]) => {
+            .subscribe({
+                next: (result: T[]) => {
                     this._onDataReceived$.next();
                     this._dataLoading = false;
                     this._dataChanges.next(result);
                 },
-                () => {
+                error: () => {
                     this._onDataReceived$.next();
                     this._dataLoading = false;
                 }
-            );
+            });
     }
 
     /** @hidden */

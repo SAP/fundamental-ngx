@@ -6,16 +6,6 @@
   <img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify" />
 </a>
 
-## Content
-
--   [1. Description](#1)
--   [2. Requirements](#2)
--   [3. Known Issues](#3)
--   [4. Support](#4)
--   [5. Contributing](#5)
--   [6. License](#6)
--   [7. Similar Projects](#7)
-
 ## <a name="1"></a>1. Description
 
 The Fundamental Library for Angular is an SAP Design System Angular component library used to build modern product user experiences with the SAP look and feel.

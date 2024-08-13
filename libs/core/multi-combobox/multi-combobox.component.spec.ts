@@ -28,7 +28,19 @@ describe('MultiComboBox component', () => {
         { name: 'Broccoli', type: 'Vegetables' },
         { name: 'Carrot', type: 'Vegetables' },
         { name: 'Jalapeño', type: 'Vegetables' },
-        { name: 'Spinach', type: 'Vegetables' }
+        { name: 'Spinach', type: 'Vegetables' },
+        { name: 'Lemon', type: 'Fruits' },
+        { name: 'Grapes', type: 'Fruits' },
+        { name: 'Watermelon', type: 'Fruits' },
+        { name: 'Orange', type: 'Fruits' },
+        { name: 'Cucumber', type: 'Vegetables' },
+        { name: 'Tomato', type: 'Vegetables' },
+        { name: 'Potato', type: 'Vegetables' },
+        { name: 'Onion', type: 'Vegetables' },
+        { name: 'Mango', type: 'Fruits' },
+        { name: 'Kiwi', type: 'Fruits' },
+        { name: 'Peach', type: 'Fruits' },
+        { name: 'Cherry', type: 'Fruits' }
     ];
 
     beforeEach(waitForAsync(() => {
@@ -76,6 +88,27 @@ describe('MultiComboBox component', () => {
 
         toggleButton = overlayContainerEl.querySelectorAll('.fd-list__item');
         expect(toggleButton.length).toBe(0);
+    });
+
+    it('should list all elements when limitless is true', ()=>{
+        component._setLimitless(true);
+        component._onPrimaryButtonClick(component.isOpen);
+        fixture.detectChanges();
+
+        const dsLength = (component.dataSourceDirective.dataSource as any[]).length;
+
+        expect(component._suggestions.length).toBe(dsLength);
+
+        component._setLimitless(false);
+        component._onPrimaryButtonClick(component.isOpen);
+        fixture.detectChanges();
+
+        if (dsLength > component._getMapLimit()) {
+            expect(component._suggestions.length).toBeLessThan(dsLength);
+        } else {
+            expect(component._suggestions.length).toBe(dsLength);
+        }
+        
     });
 
     it('should be able to see Secondary Column', () => {
@@ -131,11 +164,16 @@ describe('MultiComboBox component', () => {
         component._onPrimaryButtonClick(component.isOpen);
         fixture.detectChanges();
         overlayContainerEl.querySelector('.fd-list__item')?.dispatchEvent(selectEvent);
+    
         fixture.detectChanges();
 
-        expect(component._selectedSuggestions.length).toEqual(
-            (component.dataSourceDirective.dataSource as any[]).length
-        );
+        const dsLength = (component.dataSourceDirective.dataSource as any[]).length;
+
+        if (dsLength > component._getMapLimit()) {
+            expect(component._selectedSuggestions.length).toBeLessThan(dsLength);
+        } else {
+            expect(component._selectedSuggestions.length).toBe(dsLength);
+        }
 
         overlayContainerEl.querySelector('.fd-list__item')?.dispatchEvent(unselectEvent);
         fixture.detectChanges();
