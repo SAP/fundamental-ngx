@@ -1,4 +1,4 @@
-<div>
+<div fdkFocusableGrid wrapHorizontally>
     <fd-segmented-button [(ngModel)]="selectionMode">
         <button fd-button fdkFocusableItem label="None" value="None"></button>
         <button fd-button fdkFocusableItem label="MultiSelect" value="MultiSelect"></button>
@@ -49,7 +49,8 @@
                         <div class="fd-row" fdkFocusableList [focusable]="false" navigationDirection="grid">
                             @for (item of list; track item) {
                                 <fd-grid-list-item
-                                    fdkFocusableItem
+                                    fdkFocusableList
+                                    navigationDirection="grid"
                                     [type]="item.type"
                                     [counter]="item.counter"
                                     [title]="item.title"
@@ -91,7 +92,7 @@
                         (detail)="detail($event)"
                         (navigate)="navigateGrid($event)"
                     >
-                        <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
+                        <fd-grid-list-item-toolbar> Custom Text</fd-grid-list-item-toolbar>
                         <fd-avatar
                             fd-grid-list-item-image
                             image="https://picsum.photos/id/1062/300/200"
@@ -160,7 +161,7 @@
                         (detail)="detail($event)"
                         (navigate)="navigateGrid($event)"
                     >
-                        <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
+                        <fd-grid-list-item-toolbar> Custom Text</fd-grid-list-item-toolbar>
                         <fd-avatar
                             fd-grid-list-item-image
                             image="https://picsum.photos/id/1062/300/200"
@@ -193,7 +194,7 @@
                         (detail)="detail($event)"
                         (navigate)="navigateGrid($event)"
                     >
-                        <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
+                        <fd-grid-list-item-toolbar> Custom Text</fd-grid-list-item-toolbar>
                         <fd-avatar
                             fd-grid-list-item-image
                             image="https://picsum.photos/id/1062/300/200"
@@ -221,7 +222,7 @@
                         [description]="item.description"
                         (delete)="delete($event)"
                     >
-                        <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
+                        <fd-grid-list-item-toolbar> Custom Text</fd-grid-list-item-toolbar>
                         <fd-avatar
                             fd-grid-list-item-image
                             image="https://picsum.photos/id/1062/300/200"
