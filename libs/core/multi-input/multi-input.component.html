@@ -70,8 +70,10 @@
                 @for (option of viewModel.selectedOptions; track valueFn(option.item)) {
                     <fd-token
                         [disabled]="disabled"
-                        (onCloseClick)="_onTokenClick(option, false, $event)"
-                        (onRemove)="_onTokenClick(option, false)"
+                        (onCloseClick)="_onTokenCloseClick(option, false, $event)"
+                        (onRemove)="_onTokenCloseClick(option, false)"
+                        [title]="option.label"
+                        (onTokenClick)="_tokenElementClicked($event)"
                     >
                         <span [innerHtml]="option.label"></span>
                     </fd-token>

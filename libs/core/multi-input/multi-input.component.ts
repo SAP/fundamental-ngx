@@ -675,9 +675,17 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     }
 
     /** @hidden */
-    _onTokenClick(option: _OptionItem<ItemType, ValueType>, resetSearch: boolean, event?: MouseEvent): void {
+    _onTokenCloseClick(option: _OptionItem<ItemType, ValueType>, resetSearch: boolean, event?: MouseEvent): void {
         event?.preventDefault(); // prevent this function from being called twice when checkbox updates
         this._handleSelect(false, option, resetSearch, true);
+    }
+
+    /** @hidden */
+    _tokenElementClicked(event: MouseEvent): void {
+        const textElement = (event.currentTarget as HTMLElement).querySelector('.fd-token__text') as HTMLElement;
+        if (textElement && textElement.offsetWidth < textElement.scrollWidth && this.open === false) {
+            this.openChangeHandle(true);
+        }
     }
 
     /** @hidden */
