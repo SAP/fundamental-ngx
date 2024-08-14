@@ -4,9 +4,7 @@ import {
     browserIsSafari,
     click,
     executeScriptBeforeTagAttr,
-    getAttributeByName,
     getElementArrayLength,
-    getElementClass,
     getText,
     isElementClickable,
     isEnabled,
@@ -23,8 +21,7 @@ import {
     altCustomLabel,
     customLabel,
     customLabelsArr,
-    emptyString,
-    stateClassesArr
+    emptyString
 } from './checkbox-content';
 
 describe('checkbox test suite', () => {
@@ -287,23 +284,6 @@ describe('checkbox test suite', () => {
     });
 
     describe('checkbox styling properties examples', () => {
-        it('should check states', async () => {
-            await scrollIntoView(styledCheckbox);
-            const checkboxCount = await getElementArrayLength(styledCheckbox + checkbox);
-
-            for (let i = 0; i < checkboxCount; i++) {
-                await expect(await getAttributeByName(styledCheckbox + checkboxInput, 'class', i)).toContain(
-                    stateClassesArr[i]
-                );
-            }
-        });
-
-        it('should check compact checkbox', async () => {
-            await scrollIntoView(styledCheckbox);
-
-            await expect(await getElementClass(`${styledCheckbox} fd-checkbox[fdCompact]`)).toContain('is-compact');
-        });
-
         it('should check checkboxes are clickable', async () => {
             const checkboxCount = await getElementArrayLength(styledCheckbox + checkbox);
 

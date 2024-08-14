@@ -18,16 +18,16 @@ export class AvatarIconPipe implements PipeTransform {
         }
         switch (valueState) {
             case 'positive':
-                computedIcon = 'message-success';
+                computedIcon = 'sys-enter-2';
                 break;
             case 'caution':
-                computedIcon = 'message-warning';
+                computedIcon = 'warning';
                 break;
             case 'negative':
-                computedIcon = 'message-error';
+                computedIcon = 'error';
                 break;
             case 'information':
-                computedIcon = 'message-information';
+                computedIcon = 'information';
                 break;
         }
 

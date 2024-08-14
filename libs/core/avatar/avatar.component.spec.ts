@@ -173,10 +173,10 @@ describe('AvatarComponent', () => {
 
     it('should add respective Value State Icons', () => {
         const stateIcons: Record<AvatarValueStates, string> = {
-            positive: 'message-success',
-            caution: 'message-warning',
-            negative: 'message-error',
-            information: 'message-information'
+            positive: 'sys-enter-2',
+            caution: 'warning',
+            negative: 'error',
+            information: 'information'
         };
 
         Object.keys(stateIcons).forEach((state) => {

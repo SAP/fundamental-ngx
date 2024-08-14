@@ -282,6 +282,12 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
         this._detectChanges();
     }
 
+    /** @hidden */
+    setStyleState(state: FormStates): void {
+        this.state = state;
+        this._detectChanges();
+    }
+
     /**
      * @hidden
      * Based on current control state:
