@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.3-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.11...v0.51.3-rc.12) (2024-08-15)
+
+
+### Bug Fixes
+
+* **core,platform:** added read only / non-editable state to checkboxes ([#12231](https://github.com/SAP/fundamental-ngx/issues/12231)) ([d1d28f9](https://github.com/SAP/fundamental-ngx/commit/d1d28f9ef3ffdd662892c91e0b5a5883efe845de))
+
+
+
+
+
 ## [0.51.3-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.10...v0.51.3-rc.11) (2024-08-13)
 
 
