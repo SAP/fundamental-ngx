@@ -45,6 +45,12 @@ export const FD_LANGUAGE_JAPANESE: FdLanguage = {
         datetimeOkLabel: 'OK',
         datetimeCancelLabel: 'キャンセル'
     },
+    coreDynamicPage: {
+        expandLabel: 'ヘッダーを展開',
+        collapseLabel: 'ヘッダーを圧縮',
+        pinLabel: 'ヘッダーを固定',
+        unpinLabel: 'ヘッダーの固定を解除'
+    },
     coreFeedListItem: { moreLabel: 'ほか{{count}}件', lessLabel: '表示を減らす' },
     coreGridList: {
         filterBarCancelButtonTitle: 'キャンセル',

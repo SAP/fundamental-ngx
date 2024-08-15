@@ -48,6 +48,12 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         datetimeOkLabel: 'OK',
         datetimeCancelLabel: 'Annulla'
     },
+    coreDynamicPage: {
+        expandLabel: 'Esplodi testata',
+        collapseLabel: 'Comprimi testata',
+        pinLabel: 'Blocca testata',
+        unpinLabel: 'Sblocca testata'
+    },
     coreFeedListItem: { moreLabel: 'Altri {{count}}', lessLabel: 'Meno' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Annulla',

@@ -48,6 +48,12 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         datetimeOkLabel: 'კარგი',
         datetimeCancelLabel: 'გაუქმება'
     },
+    coreDynamicPage: {
+        expandLabel: 'სათაურის გაშლა',
+        collapseLabel: 'სათაურის შეკუმშვა',
+        pinLabel: 'სათაურის მიმაგრება',
+        unpinLabel: 'სათაურის მოხსნა'
+    },
     coreFeedListItem: { moreLabel: 'მეტი', lessLabel: 'ნაკლები' },
     coreGridList: {
         filterBarCancelButtonTitle: 'გაუქმება',

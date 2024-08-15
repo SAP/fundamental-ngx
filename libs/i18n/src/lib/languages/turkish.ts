@@ -45,6 +45,12 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         datetimeOkLabel: 'Tamam',
         datetimeCancelLabel: 'İptal'
     },
+    coreDynamicPage: {
+        expandLabel: 'Üst Bilgiyi Genişlet',
+        collapseLabel: 'Üst Bilgiyi Daralt',
+        pinLabel: 'Üst Bilgiyi Sabitle',
+        unpinLabel: 'Üst Bilgi İçin Sabitlemeyi Kaldır'
+    },
     coreFeedListItem: { moreLabel: '{{count}} tane daha', lessLabel: 'Daha az' },
     coreGridList: {
         filterBarCancelButtonTitle: 'İptal',

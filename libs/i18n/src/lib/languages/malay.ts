@@ -48,6 +48,12 @@ export const FD_LANGUAGE_MALAY: FdLanguage = {
         datetimeOkLabel: 'Ok',
         datetimeCancelLabel: 'Batal'
     },
+    coreDynamicPage: {
+        expandLabel: 'Kembangkan Pengepala',
+        collapseLabel: 'Runtuhkan Pengepala',
+        pinLabel: 'Pinkan Pengepala',
+        unpinLabel: 'Nyahpin Pengepala'
+    },
     coreFeedListItem: { moreLabel: '{{count}} selanjutnya', lessLabel: 'Kurang' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Batal',

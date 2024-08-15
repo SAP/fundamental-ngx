@@ -48,6 +48,12 @@ export const FD_LANGUAGE_SPANISH: FdLanguage = {
         datetimeOkLabel: 'Aceptar',
         datetimeCancelLabel: 'Cancelar'
     },
+    coreDynamicPage: {
+        expandLabel: 'Desplegar cabecera',
+        collapseLabel: 'Contraer cabecera',
+        pinLabel: 'Anclar cabecera',
+        unpinLabel: 'Desanclar cabecera'
+    },
     coreFeedListItem: { moreLabel: '{{count}} más', lessLabel: 'Menos' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Cancelar',

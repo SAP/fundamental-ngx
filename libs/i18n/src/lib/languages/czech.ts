@@ -48,6 +48,12 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         datetimeOkLabel: 'OK',
         datetimeCancelLabel: 'Zrušit'
     },
+    coreDynamicPage: {
+        expandLabel: 'Rozbalit hlavičku',
+        collapseLabel: 'Sbalit hlavičku',
+        pinLabel: 'Připnout hlavičku',
+        unpinLabel: 'Odepnout hlavičku'
+    },
     coreFeedListItem: { moreLabel: 'další(ch) {{count}}', lessLabel: 'Méně' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Zrušit',

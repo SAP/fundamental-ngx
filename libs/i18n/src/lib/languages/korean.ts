@@ -45,6 +45,12 @@ export const FD_LANGUAGE_KOREAN: FdLanguage = {
         datetimeOkLabel: '확인',
         datetimeCancelLabel: '취소'
     },
+    coreDynamicPage: {
+        expandLabel: '헤더 펼치기',
+        collapseLabel: '헤더 접기',
+        pinLabel: '헤더 고정',
+        unpinLabel: '헤더 고정 취소'
+    },
     coreFeedListItem: { moreLabel: '{{count}}자 더 보기', lessLabel: '간단히' },
     coreGridList: {
         filterBarCancelButtonTitle: '취소',

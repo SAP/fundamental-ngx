@@ -48,6 +48,12 @@ export const FD_LANGUAGE_SLOVENIAN: FdLanguage = {
         datetimeOkLabel: 'V redu',
         datetimeCancelLabel: 'Prekliči'
     },
+    coreDynamicPage: {
+        expandLabel: 'Razširitev glave',
+        collapseLabel: 'Skrčitev glave',
+        pinLabel: 'Pripenjanje glave',
+        unpinLabel: 'Odpenjanje glave'
+    },
     coreFeedListItem: { moreLabel: 'Še {{count}}', lessLabel: 'Manj' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Prekliči',

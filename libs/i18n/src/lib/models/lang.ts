@@ -91,6 +91,12 @@ export interface FdLanguage {
         datetimeOkLabel: FdLanguageKey;
         datetimeCancelLabel: FdLanguageKey;
     };
+    coreDynamicPage: {
+        expandLabel: FdLanguageKey;
+        collapseLabel: FdLanguageKey;
+        pinLabel: FdLanguageKey;
+        unpinLabel: FdLanguageKey;
+    };
     coreFeedListItem: {
         moreLabel: FdLanguageKey;
         lessLabel: FdLanguageKey;
