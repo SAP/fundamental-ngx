@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.3-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.12...v0.51.3-rc.13) (2024-08-15)
+
+
+### Features
+
+* **platform:** add option to hide refresh and search buttons in Table toolbar search ([#12270](https://github.com/SAP/fundamental-ngx/issues/12270)) ([78b0964](https://github.com/SAP/fundamental-ngx/commit/78b09642406b611b2afebc62aab9c8d4131d8daa))
+
+
+
+
+
 ## [0.51.3-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.11...v0.51.3-rc.12) (2024-08-15)
 
 
