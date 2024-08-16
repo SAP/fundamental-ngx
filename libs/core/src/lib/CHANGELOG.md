@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.41](https://github.com/SAP/fundamental-ngx/compare/v0.43.40...v0.43.41) (2024-08-16)
+
+
+### Bug Fixes
+
+* **core:** add i18n for dynamic page ([#12269](https://github.com/SAP/fundamental-ngx/issues/12269)) ([4887ff9](https://github.com/SAP/fundamental-ngx/commit/4887ff969e25d7b31b7b14416f542a564c9005bc))
+
+
+
+
+
 ## [0.43.40](https://github.com/SAP/fundamental-ngx/compare/v0.43.39...v0.43.40) (2024-08-01)
 
 
