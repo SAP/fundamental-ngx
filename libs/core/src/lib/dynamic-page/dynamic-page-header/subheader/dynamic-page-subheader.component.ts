@@ -8,13 +8,17 @@ import {
     ViewChild,
     ViewEncapsulation,
     HostBinding,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    AfterContentInit,
+    Inject
 } from '@angular/core';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { DynamicPageConfig } from '../../dynamic-page.config';
 import { DynamicPageService } from '../../dynamic-page.service';
+import { TranslationResolver, FdLanguage, FD_LANGUAGE } from '@fundamental-ngx/i18n';
+import { firstValueFrom, Observable } from 'rxjs';
 
 let dynamicPageSubHeaderId = 0;
 @Component({
@@ -23,7 +27,7 @@ let dynamicPageSubHeaderId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class DynamicPageSubheaderComponent {
+export class DynamicPageSubheaderComponent implements AfterContentInit {
     /**
      * whether the header can be collapsed. True by default. If set to false, both pin/collapse buttons disappear
      * and the header stays visible
@@ -54,13 +58,13 @@ export class DynamicPageSubheaderComponent {
      * ARIA label for button when the header is collapsed
      */
     @Input()
-    expandLabel: string = this._dynamicPageConfig.expandLabel;
+    expandLabel: string;
 
     /**
      * ARIA label for button when the header is expanded
      */
     @Input()
-    collapseLabel: string = this._dynamicPageConfig.collapseLabel;
+    collapseLabel: string;
 
     /** Header role  */
     @Input()
@@ -116,14 +120,60 @@ export class DynamicPageSubheaderComponent {
     private _collapsed = false;
 
     /** @hidden */
+    private _translationResolver = new TranslationResolver();
+
+    /** @hidden */
+    private _language: FdLanguage;
+
+    /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef,
         protected _dynamicPageConfig: DynamicPageConfig,
-        private _dynamicPageService: DynamicPageService
+        private _dynamicPageService: DynamicPageService,
+        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>
     ) {
         this._dynamicPageService.collapsed
             .pipe(distinctUntilChanged())
             .subscribe((collapsed) => this._handleCollapsedChange(collapsed));
+    }
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        this._init();
+    }
+
+    /** @hidden */
+    private async _init(): Promise<void> {
+        this._language = await firstValueFrom(this._language$);
+        if (!this.expandLabel) {
+            if (this._dynamicPageConfig && this._dynamicPageConfig.expandLabel) {
+                this.expandLabel = this._dynamicPageConfig.expandLabel;
+            } else {
+                this.expandLabel = this._translationResolver.resolve(this._language, `coreDynamicPage.expandLabel`);
+            }
+        }
+        if (!this.collapseLabel) {
+            if (this._dynamicPageConfig && this._dynamicPageConfig.collapseLabel) {
+                this.collapseLabel = this._dynamicPageConfig.collapseLabel;
+            } else {
+                this.collapseLabel = this._translationResolver.resolve(this._language, `coreDynamicPage.collapseLabel`);
+            }
+        }
+        if (!this.pinAriaLabel) {
+            if (this._dynamicPageConfig && this._dynamicPageConfig.pinLabel) {
+                this.pinAriaLabel = this._dynamicPageConfig.pinLabel;
+            } else {
+                this.pinAriaLabel = this._translationResolver.resolve(this._language, `coreDynamicPage.pinLabel`);
+            }
+        }
+        if (!this.unpinAriaLabel) {
+            if (this._dynamicPageConfig && this._dynamicPageConfig.unpinLabel) {
+                this.unpinAriaLabel = this._dynamicPageConfig.unpinLabel;
+            } else {
+                this.unpinAriaLabel = this._translationResolver.resolve(this._language, `coreDynamicPage.unpinLabel`);
+            }
+        }
+        this._cd.detectChanges();
     }
 
     /**

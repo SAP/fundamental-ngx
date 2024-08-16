@@ -27,6 +27,12 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         multiComboBoxAriaLabel: 'Multi Value Combo Box',
         selectAllLabel: '全选（已选 {{selectedItems}} 个，共 {{totalItems}} 个）'
     },
+    coreDynamicPage: {
+        expandLabel: '展开标题',
+        collapseLabel: '折叠标题',
+        pinLabel: '固定标题',
+        unpinLabel: '取消固定标题'
+    },
     coreCarousel: { leftNavigationBtnLabel: '转到上一个项目', rightNavigationBtnLabel: '转到下一个项目' },
     coreDatePicker: {
         dateInputLabel: '日期输入',

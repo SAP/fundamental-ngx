@@ -48,6 +48,12 @@ export const FD_LANGUAGE_ARABIC: FdLanguage = {
         datetimeOkLabel: 'موافق',
         datetimeCancelLabel: 'إلغاء'
     },
+    coreDynamicPage: {
+        expandLabel: 'توسيع المقدمة',
+        collapseLabel: 'طي المقدمة',
+        pinLabel: 'تثبيت المقدمة',
+        unpinLabel: 'إلغاء تثبيت المقدمة'
+    },
     coreFeedListItem: { moreLabel: '{{count}} إضافية', lessLabel: 'أقل' },
     coreGridList: {
         filterBarCancelButtonTitle: 'إلغاء',

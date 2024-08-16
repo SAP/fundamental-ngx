@@ -45,6 +45,12 @@ export const FD_LANGUAGE_NORWEGIAN: FdLanguage = {
         datetimeOkLabel: 'OK',
         datetimeCancelLabel: 'Avbryt'
     },
+    coreDynamicPage: {
+        expandLabel: 'Utvid overskrift',
+        collapseLabel: 'Komprimer overskrift',
+        pinLabel: 'Fest overskrift',
+        unpinLabel: 'Løsne overskrift'
+    },
     coreFeedListItem: { moreLabel: '{{count}} mer', lessLabel: 'Mindre' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Avbryt',

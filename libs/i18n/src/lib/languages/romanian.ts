@@ -48,6 +48,12 @@ export const FD_LANGUAGE_ROMANIAN: FdLanguage = {
         datetimeOkLabel: 'OK',
         datetimeCancelLabel: 'Anulare'
     },
+    coreDynamicPage: {
+        expandLabel: 'Extindere antet',
+        collapseLabel: 'Restrângere antet',
+        pinLabel: 'Fixare antet',
+        unpinLabel: 'Anulare fixare antet'
+    },
     coreFeedListItem: { moreLabel: 'Încă {{count}}', lessLabel: 'Mai puțin' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Anulare',

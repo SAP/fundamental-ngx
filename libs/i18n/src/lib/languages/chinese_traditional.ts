@@ -45,6 +45,12 @@ export const FD_LANGUAGE_CHINESE_TRADITIONAL: FdLanguage = {
         datetimeOkLabel: '確定',
         datetimeCancelLabel: '取消'
     },
+    coreDynamicPage: {
+        expandLabel: '展開表頭',
+        collapseLabel: '摺疊表頭',
+        pinLabel: '釘選表頭',
+        unpinLabel: '取消釘選表頭'
+    },
     coreFeedListItem: { moreLabel: '還有 {{count}} 個', lessLabel: '較少' },
     coreGridList: {
         filterBarCancelButtonTitle: '取消',
