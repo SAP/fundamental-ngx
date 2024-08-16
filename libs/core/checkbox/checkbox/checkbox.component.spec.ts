@@ -1,10 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { CheckboxModule } from '../checkbox.module';
 import { CheckboxComponent } from './checkbox.component';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 function getCheckboxInput(fixture: ComponentFixture<any>): HTMLInputElement {
     return fixture.nativeElement.querySelector('input');
@@ -121,6 +122,20 @@ describe('CheckboxComponent', () => {
         expect(checkboxLabel.innerHTML).toContain('Option 1');
     });
 
+    it('should check states', async () => {
+        const states = ['information', 'success', 'error', 'warning'];
+        
+        for (let i = 0; i < states.length; i++) {
+            checkbox.setStyleState(states[i] as FormStates);
+            checkboxDetectChanges(checkbox);
+
+            await whenStable(fixture);
+
+            const input = getCheckboxInput(fixture);
+            expect(input.classList.contains(`is-${states[i]}`)).toBe(true);
+        }
+    });
+
     it('should be disabled', async () => {
         checkbox.setDisabledState(true);
 
@@ -135,6 +150,48 @@ describe('CheckboxComponent', () => {
         expect(input.disabled).toBe(true);
         expect(hostComponent.value).toBe(false);
         expect(checkbox.checkboxValue).toBe(false);
+    });
+
+    it('should be readonly when unchecked', async () => {
+        // For unchecked state
+
+        checkbox.setReadOnlyState(true);
+        hostComponent.value = false;
+
+        await whenStable(fixture);
+
+        const input = getCheckboxInput(fixture);
+        const checkboxLabel = getCheckboxLabel(fixture);
+
+        jest.spyOn(checkbox, 'nextValue');
+        checkboxLabel.click();
+
+        expect(input.checked).toBe(false);
+        expect(input.disabled).toBe(true);
+        expect(hostComponent.value).toBe(false);
+        expect(checkbox.checkboxValue).toBe(false);
+        expect(input.classList.contains('is-readonly')).toBe(true);
+    });
+
+    it('should be readonly when checked', async () => {
+        // For checked state
+
+        checkbox.setReadOnlyState(true);
+        hostComponent.value = true;
+
+        await whenStable(fixture);
+
+        const input = getCheckboxInput(fixture);
+        const checkboxLabel = getCheckboxLabel(fixture);
+
+        jest.spyOn(checkbox, 'nextValue');
+        checkboxLabel.click();
+
+        expect(input.checked).toBe(true);
+        expect(input.disabled).toBe(true);
+        expect(hostComponent.value).toBe(true);
+        expect(checkbox.checkboxValue).toBe(true);
+        expect(input.classList.contains('is-readonly')).toBe(true);
     });
 
     it('should use custom values', async () => {
