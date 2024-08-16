@@ -1,12 +1,18 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, ViewEncapsulation } from '@angular/core';
 import {
     CollectionGroup,
+    getUniqueListValuesByKey,
     SortDirection,
-    TableDialogCommonData,
-    getUniqueListValuesByKey
+    TableDialogCommonData
 } from '@fundamental-ngx/platform/table-helpers';
 
-import { DialogRef } from '@fundamental-ngx/core/dialog';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogRef
+} from '@fundamental-ngx/core/dialog';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 
@@ -20,17 +26,11 @@ import {
 } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import {
-    DialogBodyComponent,
-    DialogComponent,
-    DialogFooterComponent,
-    DialogHeaderComponent
-} from '@fundamental-ngx/core/dialog';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { RESETTABLE_TOKEN, ResetButtonComponent, Resettable } from '../../reset-button/reset-button.component';
+import { ResetButtonComponent, Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 
 export interface GroupDialogColumn {
     label: string;
@@ -159,6 +159,12 @@ export class P13GroupingDialogComponent implements Resettable {
     _onRuleShowAsColumnChange(rule: GroupRule, value: boolean): void {
         rule.showAsColumn = value;
         this._recalculateResetAvailability();
+    }
+
+    /** Get available columns for a rule */
+    getAvailableColumns(rule: GroupRule): GroupDialogColumn[] {
+        const selectedKeys = this.rules.map((r) => r.columnKey).filter((key) => key !== NOT_SELECTED_OPTION_VALUE);
+        return this.columns.filter((column) => !selectedKeys.includes(column.key) || column.key === rule.columnKey);
     }
 
     /** @hidden */
