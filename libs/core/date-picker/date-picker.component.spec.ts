@@ -422,7 +422,6 @@ describe('DatePickerComponent', () => {
         const dateRanges = [{ start: date, end: date }];
         component._inputFieldDate = '';
         component.onTodayButtonClick();
-        console.log(component._inputFieldDate);
         expect(component._inputFieldDate).toBe(`${dateStr}${component._rangeDelimiter}${dateStr}`);
         expect(component.onChange).toHaveBeenCalledWith(dateRanges);
         expect(component.selectedMultipleDateRangesChange.emit).toHaveBeenCalledWith(dateRanges);

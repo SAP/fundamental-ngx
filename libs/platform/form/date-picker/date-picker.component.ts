@@ -20,7 +20,8 @@ import {
     CalendarYearGrid,
     DateRange,
     DaysOfWeek,
-    FdCalendarView
+    FdCalendarView,
+    FdCalendarViewEnum
 } from '@fundamental-ngx/core/calendar';
 import { DatePickerComponent, DatePickerComponent as FdDatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
@@ -114,7 +115,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
 
     /** Actually shown active view one of 'day' | 'month' | 'year' in calendar component*/
     @Input()
-    activeView: FdCalendarView = 'day';
+    activeView: FdCalendarView = FdCalendarViewEnum.Day;
 
     /**
      *  The placement of the popover. It can be one of: top, top-start, top-end, bottom,

@@ -41,6 +41,7 @@ import {
     DateRange,
     DaysOfWeek,
     FdCalendarView,
+    FdCalendarViewEnum,
     NavigationButtonDisableFunction
 } from '@fundamental-ngx/core/calendar';
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
@@ -197,7 +198,7 @@ export class DatePickerComponent<D>
 
     /** Actually shown active view one of 'day' | 'month' | 'year' in calendar component*/
     @Input()
-    activeView: FdCalendarView = 'day';
+    activeView: FdCalendarView = FdCalendarViewEnum.Day;
 
     /**
      *  The placement of the popover. It can be one of: top, top-start, top-end, bottom,
@@ -508,21 +509,18 @@ export class DatePickerComponent<D>
 
     /**
      * Function used to disable certain dates in the calendar.
-     * @param date date representation
      */
     @Input()
     disableFunction: (value: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
-     * @param date date representation
      */
     @Input()
     disableRangeStartFunction: (value: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range end selection.
-     * @param date date representation
      */
     @Input()
     disableRangeEndFunction: (value: D) => boolean = () => false;
@@ -749,7 +747,8 @@ export class DatePickerComponent<D>
 
             // Perform any additional actions such as updating the model or refreshing the calendar
             this.onChange(this.selectedMultipleDateRanges);
-            this._refreshCurrentlyDisplayedCalendarDate(dates[0].start);
+            // if you want to refresh the calendar view, you can use the following line
+            // this._refreshCurrentlyDisplayedCalendarDate(dates[0].start);
             this._isInvalidDateInput = !this.isModelValid();
         }
     }
@@ -1274,13 +1273,14 @@ export class DatePickerComponent<D>
     private _updateMultipleDateRanges(dateStr: string): void {
         if (!dateStr) {
             this._isInvalidDateInput = !this.allowNull;
+            this._refreshCurrentlyDisplayedCalendarDate(this._dateTimeAdapter.today());
             this.selectedMultipleDateRanges = [];
             this.onChange(this.selectedMultipleDateRanges);
             this.selectedMultipleDateRangesChange.emit(this.selectedMultipleDateRanges);
             return;
         }
 
-        const rangeStrings = dateStr.split(';').map((range) => range.trim());
+        const rangeStrings = dateStr.split(',').map((range) => range.trim());
         const parsedRanges = rangeStrings.map((rangeStr) => {
             const [startStr, endStr] = rangeStr.split(this._rangeDelimiter).map((date) => date.trim());
             return {
@@ -1295,6 +1295,9 @@ export class DatePickerComponent<D>
         this._isInvalidDateInput = !this._isMultipleRangesModelValid(parsedRanges);
 
         if (!this._isInvalidDateInput && rangesChanged) {
+            if (this._isStartDateValid(this.selectedRangeDate.start)) {
+                this._refreshCurrentlyDisplayedCalendarDate(this.selectedMultipleDateRanges[0].start);
+            }
             this.selectedMultipleDateRanges = parsedRanges;
             this.onChange(this.selectedMultipleDateRanges);
             this.selectedMultipleDateRangesChange.emit(this.selectedMultipleDateRanges);
