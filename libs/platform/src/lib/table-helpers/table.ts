@@ -187,6 +187,8 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
 
     abstract _onSpyIntersect(intersected: boolean): void;
 
+    abstract minimumColumnWidth: number;
+
     /** Toolbar Sort Settings button click event */
     readonly openTableSortSettings: EventEmitter<void> = new EventEmitter<void>();
 

@@ -4,7 +4,6 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
 import { SELECTION_COLUMN_WIDTH } from '../constants';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { TABLE_COLUMN_MIN_WIDTH } from '../constants';
 
 import { Table } from '../table';
 import { TableScrollDispatcherService } from './table-scroll-dispatcher.service';
@@ -316,8 +315,8 @@ export class TableColumnResizeService implements OnDestroy {
             return;
         }
 
-        if (diffX < 0 && columnWidth + diffX < TABLE_COLUMN_MIN_WIDTH) {
-            diffX = TABLE_COLUMN_MIN_WIDTH - columnWidth;
+        if (diffX < 0 && columnWidth + diffX < this._tableRef.minimumColumnWidth) {
+            diffX = this._tableRef.minimumColumnWidth - columnWidth;
         }
 
         if (!this.fixedWidth) {
