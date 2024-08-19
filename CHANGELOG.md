@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.3-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.14...v0.51.3-rc.15) (2024-08-16)
+
+
+### Bug Fixes
+
+* **platform:** update grouping selection flow to prevent duplicate groupings ([#12271](https://github.com/SAP/fundamental-ngx/issues/12271)) ([a921273](https://github.com/SAP/fundamental-ngx/commit/a9212736f0553c3829951cd58f817256207f7faa))
+
+
+
+
+
+## [0.51.3-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.13...v0.51.3-rc.14) (2024-08-16)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 ## [0.51.3-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.12...v0.51.3-rc.13) (2024-08-15)
 
 
