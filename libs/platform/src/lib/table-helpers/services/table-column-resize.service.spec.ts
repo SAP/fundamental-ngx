@@ -35,7 +35,8 @@ describe('TableColumnResizeService', () => {
             getMaxAllowedFreezableColumnsWidth: () => 1000,
             getVisibleTableColumns: () => [visibleColumn],
             _freezableColumns: new Map([['name', 0]]),
-            _tableWidthPx: 1400
+            _tableWidthPx: 1400,
+            minimumColumnWidth: 50
         } as any);
     });
 
