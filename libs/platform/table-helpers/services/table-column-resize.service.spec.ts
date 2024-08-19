@@ -35,7 +35,8 @@ describe('TableColumnResizeService', () => {
             getMaxAllowedFreezableColumnsWidth: () => 1000,
             getVisibleTableColumns: () => [visibleColumn],
             _freezableColumns: new Map([['name', 0]]),
-            _tableWidthPx: 1400
+            _tableWidthPx: 1400,
+            minimumColumnWidth: 50
         } as any);
     });
 
@@ -120,6 +121,38 @@ describe('TableColumnResizeService', () => {
         service.finishResize({ clientX: clientEndX } as MouseEvent);
 
         expect(service.getColumnWidthStyle(tableColumn.name)).toEqual(TABLE_COLUMN_MIN_WIDTH + 'px');
+    });
+
+    it('should handle resize with a custom minimumColumnWidth', () => {
+        const clientStartX = 0;
+        const clientEndX = -80;
+        const initialColumnWidth = 100;
+        const tableColumnNames = ['name'];
+        const tableColumn = (<any>{ name: tableColumnNames[0], width: null }) as TableColumn;
+        const tableColumnCell = {
+            nativeElement: {
+                getBoundingClientRect: () => ({ width: initialColumnWidth }),
+                clientWidth: initialColumnWidth
+            }
+        } as ElementRef;
+
+        Object.defineProperty(window, 'getComputedStyle', {
+            value: () => ({
+                paddingLeft: '8px',
+                paddingRight: '8px'
+            })
+        });
+
+        service.registerColumnCell(tableColumn.name, tableColumnCell);
+        service.setColumnNames(tableColumnNames);
+        service.setInitialResizerPosition(0, tableColumn.name);
+
+        service.setTableRef({ minimumColumnWidth: 100 } as any);
+
+        service.startResize({ clientX: clientStartX } as MouseEvent);
+        service.finishResize({ clientX: clientEndX } as MouseEvent);
+
+        expect(service.getColumnWidthStyle(tableColumn.name)).toEqual('100px');
     });
 
     it('should truncate header text when column size is smaller', () => {
