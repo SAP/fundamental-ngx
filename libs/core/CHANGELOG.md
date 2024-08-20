@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.3-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.15...v0.51.3-rc.16) (2024-08-20)
+
+
+### Features
+
+* **core:** add input to customize the datetime format of specific datetime-picker component ([#12273](https://github.com/SAP/fundamental-ngx/issues/12273)) ([f45f5c3](https://github.com/SAP/fundamental-ngx/commit/f45f5c38dbe0a674c164faee66726bd42e0d36fd)), closes [#12251](https://github.com/SAP/fundamental-ngx/issues/12251)
+
+
+
+
+
 ## [0.51.3-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.14...v0.51.3-rc.15) (2024-08-16)
 
 **Note:** Version bump only for package @fundamental-ngx/core
