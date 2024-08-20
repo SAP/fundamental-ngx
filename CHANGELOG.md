@@ -3,6 +3,118 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.3-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.14...v0.51.3-rc.15) (2024-08-16)
+
+
+### Bug Fixes
+
+* **platform:** update grouping selection flow to prevent duplicate groupings ([#12271](https://github.com/SAP/fundamental-ngx/issues/12271)) ([a921273](https://github.com/SAP/fundamental-ngx/commit/a9212736f0553c3829951cd58f817256207f7faa))
+
+
+
+
+
+## [0.51.3-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.13...v0.51.3-rc.14) (2024-08-16)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.51.3-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.12...v0.51.3-rc.13) (2024-08-15)
+
+
+### Features
+
+* **platform:** add option to hide refresh and search buttons in Table toolbar search ([#12270](https://github.com/SAP/fundamental-ngx/issues/12270)) ([78b0964](https://github.com/SAP/fundamental-ngx/commit/78b09642406b611b2afebc62aab9c8d4131d8daa))
+
+
+
+
+
+## [0.51.3-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.11...v0.51.3-rc.12) (2024-08-15)
+
+
+### Bug Fixes
+
+* **core,platform:** added read only / non-editable state to checkboxes ([#12231](https://github.com/SAP/fundamental-ngx/issues/12231)) ([d1d28f9](https://github.com/SAP/fundamental-ngx/commit/d1d28f9ef3ffdd662892c91e0b5a5883efe845de))
+
+
+
+
+
+## [0.51.3-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.10...v0.51.3-rc.11) (2024-08-13)
+
+
+### Bug Fixes
+
+* **core:** update avatar state icons ([#12256](https://github.com/SAP/fundamental-ngx/issues/12256)) ([787a379](https://github.com/SAP/fundamental-ngx/commit/787a3794226ba29a400c9ae667ec157535803ea2))
+
+
+
+
+
+## [0.51.3-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.9...v0.51.3-rc.10) (2024-08-13)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.51.3-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.8...v0.51.3-rc.9) (2024-08-12)
+
+
+### Bug Fixes
+
+* **platform:** table headers are not sticky when body is overflowing ([#12235](https://github.com/SAP/fundamental-ngx/issues/12235)) ([6d9e775](https://github.com/SAP/fundamental-ngx/commit/6d9e775a3f07c529a57e499203b3261987142e40))
+
+
+
+
+
+## [0.51.3-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.7...v0.51.3-rc.8) (2024-08-12)
+
+
+### Bug Fixes
+
+* **core,platform:** fixed limitless in multi-combobox ([#12252](https://github.com/SAP/fundamental-ngx/issues/12252)) ([e100bb7](https://github.com/SAP/fundamental-ngx/commit/e100bb748bee399829c50cafadd854d2113604a8))
+
+
+
+
+
+## [0.51.3-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.6...v0.51.3-rc.7) (2024-08-12)
+
+
+### Bug Fixes
+
+* **core:** ensure grid list item selection works ([#12229](https://github.com/SAP/fundamental-ngx/issues/12229)) ([09405b0](https://github.com/SAP/fundamental-ngx/commit/09405b0982fd6611707dba79e13e36ed34b23a5f)), closes [#12218](https://github.com/SAP/fundamental-ngx/issues/12218) [#12218](https://github.com/SAP/fundamental-ngx/issues/12218)
+
+
+
+
+
+## [0.51.3-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.5...v0.51.3-rc.6) (2024-08-12)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.51.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.4...v0.51.3-rc.5) (2024-08-07)
+
+
+### Bug Fixes
+
+* **core:** remove the default background for autofill input ([#12234](https://github.com/SAP/fundamental-ngx/issues/12234)) ([84d62c0](https://github.com/SAP/fundamental-ngx/commit/84d62c016da4e2704c10454e6bf29e7eb7796d7a))
+
+
+
+
+
 ## [0.51.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.3...v0.51.3-rc.4) (2024-08-06)
 
 **Note:** Version bump only for package fundamental-ngx

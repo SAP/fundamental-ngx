@@ -1,0 +1,39 @@
+<fd-docs-section-title id="rtl-service-usage" componentName="rtl-service"> RTL Service Usage </fd-docs-section-title>
+<description>
+    The <code>RtlService</code> service can be used to manage the Right-To-Left (RTL) settings in your application.
+</description>
+
+<description>
+    It uses a <code>BehaviorSubject</code> to track the RTL status and provides a <code>Signal</code> wrapper for
+    reactive programming. The service can be configured with a custom list of RTL languages using the
+    <code>RTL_LANGUAGE</code> injection token.
+    <fd-code-snippet language="typescript" [contentBased]="true">{{ injectionTokenExample }}</fd-code-snippet>
+</description>
+
+<fd-docs-section-title id="rtl-service-default-langs" componentName="rtl-service-default-langs">
+    Default RTL Languages
+</fd-docs-section-title>
+
+<description> The service comes with a predefined set of RTL languages. These are: </description>
+<ul>
+    <li>Arabic (ar)</li>
+    <li>Aramaic (arc)</li>
+    <li>Divehi (dv)</li>
+    <li>Persian (fa)</li>
+    <li>Hausa (ha)</li>
+    <li>Hebrew (he)</li>
+    <li>Khowar (khw)</li>
+    <li>Kashmiri (ks)</li>
+    <li>Kurdish (ku)</li>
+    <li>Pashto (ps)</li>
+    <li>Urdu (ur)</li>
+    <li>Yiddish (yi)</li>
+</ul>
+<description>
+    You can override this list by providing a custom list to the <code>RTL_LANGUAGE</code> injection token.
+</description>
+
+<component-example>
+    <fd-rtl-service-basic-example />
+</component-example>
+<code-example [exampleFiles]="rtlService"></code-example>

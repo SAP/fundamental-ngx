@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
@@ -27,7 +27,10 @@ export class DirectionalityComponent implements OnInit {
     id: string;
     isChecked = false;
 
-    constructor(private rtlService: RtlService) {}
+    constructor(
+        private rtlService: RtlService,
+        private cdr: ChangeDetectorRef
+    ) {}
 
     ngOnInit(): void {
         if (this.label) {
@@ -35,6 +38,10 @@ export class DirectionalityComponent implements OnInit {
         } else {
             this.id = Date.now() + 6 + '';
         }
+        this.rtlService.rtl.subscribe((rtl) => {
+            this.isChecked = rtl;
+            this.cdr.detectChanges();
+        });
     }
 
     onChange(): void {

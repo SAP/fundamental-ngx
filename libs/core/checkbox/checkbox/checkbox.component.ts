@@ -126,6 +126,10 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
     @Input()
     disabled: boolean;
 
+    /** Disables editibility */
+    @Input()
+    readonly: boolean;
+
     /** Enables controls third state. */
     @Input()
     tristate = false;
@@ -269,6 +273,18 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
     /** @hidden Called by FormControl - used to disable / enable control.*/
     setDisabledState(disabled: boolean): void {
         this.disabled = disabled;
+        this._detectChanges();
+    }
+
+    /** @hidden Called by FormControl - used to disable editablity.*/
+    setReadOnlyState(readonly: boolean): void {
+        this.readonly = readonly;
+        this._detectChanges();
+    }
+
+    /** @hidden */
+    setStyleState(state: FormStates): void {
+        this.state = state;
         this._detectChanges();
     }
 
