@@ -1,4 +1,4 @@
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { ENTER, F2, F7, MAC_ENTER, SPACE, TAB } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -14,11 +14,12 @@ import {
     Renderer2,
     ViewChild,
     ViewEncapsulation,
-    booleanAttribute
+    booleanAttribute,
+    signal
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Nullable, TabbableElementService } from '@fundamental-ngx/cdk/utils';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -282,6 +283,9 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     /** @hidden */
     _index?: number;
 
+    /** tabIndex of the element */
+    tabIndex = signal(-1);
+
     /** @hidden */
     private _type: GridListItemType = 'inactive';
 
@@ -300,7 +304,8 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         private readonly _elementRef: ElementRef,
         private readonly _render: Renderer2,
         private readonly _gridList: GridList<T>,
-        readonly _contentDensityObserver: ContentDensityObserver
+        readonly _contentDensityObserver: ContentDensityObserver,
+        private readonly _tabbableElementService: TabbableElementService
     ) {
         const selectedItemsSub = this._gridList._selectedItems$.subscribe((items) => {
             this._selectedItem = items.selection.find((item) => item === this.value);
@@ -425,6 +430,30 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     _onKeyDown(event: KeyboardEvent): void {
+        const activeElement = document.activeElement as HTMLElement;
+        const isFocused = activeElement === this._gridListItem.nativeElement;
+        const shouldFocusChild = KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER, F2, F7]) && !event.shiftKey && isFocused;
+        if (shouldFocusChild) {
+            event.stopPropagation();
+            const tabbableElement = this._tabbableElementService.getTabbableElement(
+                this._gridListItem.nativeElement,
+                false,
+                true
+            );
+            tabbableElement?.focus();
+            return;
+        }
+
+        if (KeyUtil.isKeyCode(event, [TAB]) && event.shiftKey) {
+            const tabbableElement = this._tabbableElementService.getTabbableElement(
+                this._gridListItem.nativeElement,
+                true,
+                false
+            );
+            tabbableElement?.focus();
+            return;
+        }
+
         const target = event.target as HTMLDivElement;
 
         const isSelectionKeyDown = KeyUtil.isKeyCode(event, [ENTER, SPACE]);
