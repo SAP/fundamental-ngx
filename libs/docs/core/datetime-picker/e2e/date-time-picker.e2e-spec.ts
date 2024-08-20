@@ -293,26 +293,26 @@ describe('Datetime picker suite', () => {
             // issue with timeouts
             return;
         }
-        await scrollIntoView(datePickerButton, 5);
-        await click(datePickerButton, 5);
+        await scrollIntoView(datePickerButton, 6);
+        await click(datePickerButton, 6);
         await clickDayInCalendarButtonByValue(currentDay);
         await selectHoursMinutesAndPeriod();
         await click(okButton);
-        await expect(await getValue(datePickerInput, 5)).toEqual(date2);
+        await expect(await getValue(datePickerInput, 6)).toEqual(date2);
     });
 
     it('verify date time picker i18n example', async () => {
-        await scrollIntoView(datePickerButton, 7);
+        await scrollIntoView(datePickerButton, 8);
         for (let i = 0; i < i18n.length; i++) {
             // skipped due to https://github.com/SAP/fundamental-ngx/issues/6304
             if (!browserIsFirefox && i !== 4) {
                 await click(optionButton);
                 await click(await getOptionById(i18n[i]));
-                await click(datePickerButton, 7);
+                await click(datePickerButton, 8);
                 await waitForElDisplayed(calendarExpanded);
                 await selectHoursAndMinutes();
                 await click(okButton);
-                await expect(await getValue(datePickerInput, 7)).toContain(dates[i]);
+                await expect(await getValue(datePickerInput, 8)).toContain(dates[i]);
             }
         }
     });

@@ -125,6 +125,14 @@ export class TableToolbarComponent implements TableToolbarInterface {
     @Input()
     editMode: EditMode = 'none';
 
+    /** Whether display Refresh button in the search field */
+    @Input()
+    disableRefresh = false;
+
+    /** Whether display search button in the search field */
+    @Input()
+    disableSearch = false;
+
     /** @hidden */
     @ContentChild(TableToolbarActionsComponent)
     tableToolbarActionsComponent: TableToolbarActionsComponent;
