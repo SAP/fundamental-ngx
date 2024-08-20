@@ -19,6 +19,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 import { DynamicPageHeaderSubtitleDirective } from './directives/dynamic-page-header-subtitle.directive';
 import { DynamicPageHeaderTitleDirective } from './directives/dynamic-page-header-title.directive';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
     declarations: [
@@ -42,7 +43,8 @@ import { DynamicPageHeaderTitleDirective } from './directives/dynamic-page-heade
         ContentDensityModule,
         ScrollbarModule,
         DynamicPageHeaderSubtitleDirective,
-        DynamicPageHeaderTitleDirective
+        DynamicPageHeaderTitleDirective,
+        I18nModule
     ],
     exports: [
         DynamicPageComponent,

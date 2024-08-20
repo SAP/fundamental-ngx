@@ -48,6 +48,12 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         datetimeOkLabel: 'OK',
         datetimeCancelLabel: 'Отказ'
     },
+    coreDynamicPage: {
+        expandLabel: 'Разширяване на заглавна област',
+        collapseLabel: 'Свиване на заглавна област',
+        pinLabel: 'Закачване на заглавна област',
+        unpinLabel: 'Откачване на заглавна област'
+    },
     coreFeedListItem: { moreLabel: 'още {{count}}', lessLabel: 'По-малко' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Отказ',

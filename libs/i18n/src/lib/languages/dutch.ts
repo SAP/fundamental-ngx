@@ -45,6 +45,12 @@ export const FD_LANGUAGE_DUTCH: FdLanguage = {
         datetimeOkLabel: 'OK',
         datetimeCancelLabel: 'Annuleren'
     },
+    coreDynamicPage: {
+        expandLabel: 'Kop uitvouwen',
+        collapseLabel: 'Kop samenvouwen',
+        pinLabel: 'Kop vastpinnen',
+        unpinLabel: 'Kop losmaken'
+    },
     coreFeedListItem: { moreLabel: 'nog {{count}}', lessLabel: 'Minder' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Annuleren',

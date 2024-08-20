@@ -45,6 +45,12 @@ export const FD_LANGUAGE_THAI: FdLanguage = {
         datetimeOkLabel: 'ตกลง',
         datetimeCancelLabel: 'ยกเลิก'
     },
+    coreDynamicPage: {
+        expandLabel: 'ขยายส่วนหัว',
+        collapseLabel: 'ยุบรวมส่วนหัว',
+        pinLabel: 'ปักหมุดส่วนหัว',
+        unpinLabel: 'ยกเลิกการปักหมุดส่วนหัว'
+    },
     coreFeedListItem: { moreLabel: 'อีก {{count}} รายการ', lessLabel: 'น้อยลง' },
     coreGridList: {
         filterBarCancelButtonTitle: 'ยกเลิก',

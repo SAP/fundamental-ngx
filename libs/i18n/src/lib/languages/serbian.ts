@@ -48,6 +48,12 @@ export const FD_LANGUAGE_SERBIAN: FdLanguage = {
         datetimeOkLabel: 'Ok',
         datetimeCancelLabel: 'Otkaži'
     },
+    coreDynamicPage: {
+        expandLabel: 'Proširi zaglavlje',
+        collapseLabel: 'Sažmi zaglavlje',
+        pinLabel: 'Fiksiraj zaglavlje',
+        unpinLabel: 'Poništi fiksiranje zaglavlja'
+    },
     coreFeedListItem: { moreLabel: '{{count}} više', lessLabel: 'Manje' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Otkaži',

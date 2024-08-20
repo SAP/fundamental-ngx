@@ -45,6 +45,12 @@ export const FD_LANGUAGE_KAZAKH: FdLanguage = {
         datetimeOkLabel: 'OK',
         datetimeCancelLabel: 'Болдырмау'
     },
+    coreDynamicPage: {
+        expandLabel: 'Тақырыпты жаю',
+        collapseLabel: 'Тақырыпты жию',
+        pinLabel: 'Тақырыпты бекіту',
+        unpinLabel: 'Тақырыпты босату'
+    },
     coreFeedListItem: { moreLabel: 'тағы {{count}}', lessLabel: 'Кем' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Болдырмау',

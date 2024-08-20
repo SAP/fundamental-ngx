@@ -48,6 +48,12 @@ export const FD_LANGUAGE_FINNISH: FdLanguage = {
         datetimeOkLabel: 'Ok',
         datetimeCancelLabel: 'Peruuta'
     },
+    coreDynamicPage: {
+        expandLabel: 'Laajenna otsikko',
+        collapseLabel: 'Tiivistä otsikko',
+        pinLabel: 'Kiinnitä otsikko',
+        unpinLabel: 'Irrota otsikko'
+    },
     coreFeedListItem: { moreLabel: '{{count}} enemmän', lessLabel: 'Vähemmän' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Peruuta',

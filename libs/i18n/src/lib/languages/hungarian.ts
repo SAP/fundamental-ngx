@@ -48,6 +48,12 @@ export const FD_LANGUAGE_HUNGARIAN: FdLanguage = {
         datetimeOkLabel: 'OK',
         datetimeCancelLabel: 'Mégse'
     },
+    coreDynamicPage: {
+        expandLabel: 'Fejléc kibontása',
+        collapseLabel: 'Fejléc visszazárása',
+        pinLabel: 'Fejléc rögzítése',
+        unpinLabel: 'Fejléc feloldása'
+    },
     coreFeedListItem: { moreLabel: 'További {{count}}', lessLabel: 'Kevesebb' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Mégse',

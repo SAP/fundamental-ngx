@@ -48,6 +48,12 @@ export const FD_LANGUAGE_GREEK: FdLanguage = {
         datetimeOkLabel: 'OK',
         datetimeCancelLabel: 'Ακύρωση'
     },
+    coreDynamicPage: {
+        expandLabel: 'Επέκταση Κεφαλίδας',
+        collapseLabel: 'Σύμπτηξη Κεφαλίδας',
+        pinLabel: 'Καρφίτσωμα Κεφαλίδας',
+        unpinLabel: 'Ξεκαρφίτσωμα Κεφαλίδας'
+    },
     coreFeedListItem: { moreLabel: '{{count}} περισσότερα', lessLabel: 'Λιγότερα' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Ακύρωση',

@@ -48,6 +48,12 @@ export const FD_LANGUAGE_SWEDISH: FdLanguage = {
         datetimeOkLabel: 'OK',
         datetimeCancelLabel: 'Avbryt'
     },
+    coreDynamicPage: {
+        expandLabel: 'Expandera huvud',
+        collapseLabel: 'Komprimera huvud',
+        pinLabel: 'Fäst huvud',
+        unpinLabel: 'Lossa huvud'
+    },
     coreFeedListItem: { moreLabel: '{{count}} mer', lessLabel: 'Mindre' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Avbryt',

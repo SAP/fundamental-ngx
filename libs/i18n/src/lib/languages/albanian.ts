@@ -48,6 +48,12 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         datetimeOkLabel: 'Ok',
         datetimeCancelLabel: 'Anulo'
     },
+    coreDynamicPage: {
+        expandLabel: 'Zgjero titullin',
+        collapseLabel: 'Tkurre titullin',
+        pinLabel: 'Fikso titullin',
+        unpinLabel: 'Çlirimi i titullit'
+    },
     coreFeedListItem: { moreLabel: 'Më shumë', lessLabel: 'Më pak' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Anulo',

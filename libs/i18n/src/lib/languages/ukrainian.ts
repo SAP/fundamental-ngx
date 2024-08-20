@@ -50,6 +50,12 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         datetimeOkLabel: 'OK',
         datetimeCancelLabel: 'Відмінити'
     },
+    coreDynamicPage: {
+        expandLabel: 'Розгорнути заголовок',
+        collapseLabel: 'Згорнути заголовок',
+        pinLabel: 'Прикріпити заголовок',
+        unpinLabel: 'Відкріпити заголовок'
+    },
     coreFeedListItem: { moreLabel: 'Більше', lessLabel: 'Менше' },
     coreGridList: {
         filterBarCancelButtonTitle: 'Скасувати',

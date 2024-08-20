@@ -27,6 +27,12 @@ export const FD_LANGUAGE_HEBREW: FdLanguage = {
         multiComboBoxAriaLabel: 'Multi Value Combo Box',
         selectAllLabel: 'בחר הכול ({{selectedItems}} מתוך {{totalItems}})'
     },
+    coreDynamicPage: {
+        expandLabel: 'הרחב כותרת',
+        collapseLabel: 'צמצם כותרת',
+        pinLabel: 'הצמד כותרת',
+        unpinLabel: 'בטל הצמדת כותרת'
+    },
     coreCarousel: { leftNavigationBtnLabel: 'עבור לפריט הקודם', rightNavigationBtnLabel: 'עבור לפריט הבא' },
     coreDatePicker: {
         dateInputLabel: 'קלט של תאריך',
