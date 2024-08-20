@@ -54,9 +54,10 @@
         id="examDays"
         [column]="1"
         [rank]="3"
+        [required]="true"
         placeholder="Enter your examDays"
         label="Mobile date picker in portrait mode:"
-        [validators]="requiredMultiDatesValidator"
+        [validators]="requiredDateValidator"
     >
         <fdp-date-picker
             name="examDays"

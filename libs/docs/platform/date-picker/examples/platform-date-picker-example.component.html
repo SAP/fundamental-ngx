@@ -8,16 +8,16 @@
 >
     <fdp-form-field
         #ffl1
-        id="birthday"
+        id="singleDatePrepopulated"
         [column]="1"
         [rank]="1"
         [required]="true"
         placeholder="Enter your birthday"
-        label="Pre-populated single type date-picker:"
+        label="Pre-populated single date-picker:"
         [validators]="requiredDateValidator"
     >
         <fdp-date-picker
-            name="birthday"
+            name="singleDatePrepopulated"
             type="single"
             [allowNull]="false"
             [formControl]="ffl1.formControl"
@@ -25,44 +25,13 @@
         >
         </fdp-date-picker>
     </fdp-form-field>
-    <fdp-form-field #ffl2 id="examdate" [column]="2" [rank]="1" [required]="true" label="Single type date-picker:">
+    <fdp-form-field #ffl2 id="singleDate" [column]="2" [rank]="1" [required]="true" label="Single date-picker:">
         <fdp-date-picker
-            name="examdate"
+            name="singleDate"
             type="single"
             [allowNull]="false"
-            placeholder="Enter your Exam dates"
+            placeholder="Enter your date"
             [formControl]="ffl2.formControl"
-            dateInputLabel="date input mm/dd/yyy"
-        >
-        </fdp-date-picker>
-    </fdp-form-field>
-    <fdp-form-field
-        #ffl6
-        id="randomDays"
-        [column]="1"
-        [rank]="1"
-        placeholder="Enter any random days"
-        label="Pre-populated multi type date-picker:"
-        [validators]="requiredMultiDatesValidator"
-    >
-        <fdp-date-picker
-            name="randomDays"
-            type="single"
-            [allowNull]="false"
-            [allowMultipleSelection]="true"
-            [formControl]="ffl6.formControl"
-            dateInputLabel="date input mm/dd/yyy"
-        >
-        </fdp-date-picker>
-    </fdp-form-field>
-    <fdp-form-field #ffl7 id="examdates" [column]="2" [rank]="1" label="Multi type date-picker:">
-        <fdp-date-picker
-            name="examdates"
-            type="single"
-            [allowNull]="false"
-            [allowMultipleSelection]="true"
-            placeholder="Enter your Exam dates"
-            [formControl]="ffl7.formControl"
             dateInputLabel="date input mm/dd/yyy"
         >
         </fdp-date-picker>
@@ -70,63 +39,113 @@
 
     <fdp-form-field
         #ffl3
-        id="holiday"
+        id="multiDatePrepopulated"
         [column]="1"
-        [rank]="1"
-        [validators]="rangeDateValidator"
-        label="Pre-populated range type date-picker:"
+        [rank]="2"
+        placeholder="Enter any random days"
+        label="Pre-populated multi date-picker:"
+        [validators]="requiredMultiDatesValidator"
     >
         <fdp-date-picker
-            name="holiday"
+            name="multiDatePrepopulated"
+            type="single"
+            [allowNull]="false"
+            [allowMultipleSelection]="true"
+            [formControl]="ffl3.formControl"
+            dateInputLabel="date input mm/dd/yyy"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
+    <fdp-form-field #ffl4 id="multiDate" [column]="2" [rank]="2" label="Multi date-picker:">
+        <fdp-date-picker
+            name="multiDate"
+            type="single"
+            [allowNull]="false"
+            [allowMultipleSelection]="true"
+            placeholder="Enter your dates"
+            [formControl]="ffl4.formControl"
+            dateInputLabel="date input mm/dd/yyy"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
+
+    <fdp-form-field
+        #ffl5
+        id="rangeDatePrepopulated"
+        [column]="1"
+        [rank]="3"
+        [validators]="rangeDateValidator"
+        label="Pre-populated range date-picker:"
+    >
+        <fdp-date-picker
+            name="rangeDatePrepopulated"
             type="range"
             [allowNull]="false"
             [rangeHoverEffect]="true"
-            fdCompact
             placeholder="Holiday in between?"
-            [formControl]="ffl3.formControl"
+            [formControl]="ffl5.formControl"
+            dateRangeInputLabel="date range input mm/dd/yyy"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
+    <fdp-form-field #ffl6 id="rangeDate" [column]="2" [rank]="3" label="Range date-picker:">
+        <fdp-date-picker
+            name="rangeDate"
+            type="range"
+            placeholder="Journey dates?"
+            [formControl]="ffl6.formControl"
             dateRangeInputLabel="date range input mm/dd/yyy"
         >
         </fdp-date-picker>
     </fdp-form-field>
 
     <fdp-form-field
-        #ffl8
-        id="multiDateRanges"
+        #ffl7
+        id="multiRangeDatePrepopulated"
         [column]="1"
-        [rank]="1"
+        [rank]="4"
         [validators]="multiRangeDateValidator"
-        label="Pre-populated Multi Date Ranges:"
+        label="Pre-populated multi-range date-picker:"
     >
         <fdp-date-picker
-            name="multiDateRanges"
+            name="multiRangeDatePrepopulated"
             type="range"
+            placeholder="Enter any random multi date ranges"
             [allowNull]="false"
             [allowMultipleSelection]="true"
             [rangeHoverEffect]="true"
+            [formControl]="ffl7.formControl"
+            dateRangeInputLabel="date range input mm/dd/yyy"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
+    <fdp-form-field #ffl8 id="multiRangeDate" [column]="2" [rank]="4" label="Multi-range date-picker:">
+        <fdp-date-picker
+            name="multiRangeDate"
+            type="range"
+            placeholder="Enter your multi date ranges"
             [formControl]="ffl8.formControl"
+            [allowMultipleSelection]="true"
+            [rangeHoverEffect]="true"
             dateRangeInputLabel="date range input mm/dd/yyy"
         >
         </fdp-date-picker>
     </fdp-form-field>
 
-    <fdp-form-field #ffl4 id="journeydate" [column]="2" [rank]="2" label="Range type date-picker:">
+    <fdp-form-field
+        #ffl9
+        id="disabledDatePicker"
+        [column]="1"
+        [rank]="5"
+        label="Disabled Date Picker:"
+        [disabled]="true"
+    >
         <fdp-date-picker
-            name="journeydate"
-            type="range"
-            fdCompact
-            placeholder="Journey dates?"
-            [formControl]="ffl4.formControl"
-            dateRangeInputLabel="date range input mm/dd/yyy"
-        >
-        </fdp-date-picker>
-    </fdp-form-field>
-    <fdp-form-field #ffl5 id="disableddate" [column]="1" [rank]="2" label="Disabled Date Picker:" [disabled]="true">
-        <fdp-date-picker
-            name="disableddate"
+            name="disabledDatePicker"
             type="single"
             [allowNull]="false"
             placeholder="This is a disabled date picker"
-            [formControl]="ffl5.formControl"
+            [formControl]="ffl9.formControl"
             dateInputLabel="date input mm/dd/yyy"
         >
         </fdp-date-picker>
@@ -135,81 +154,85 @@
         @if (errors.required) {
             <span>Value is required</span>
         }
-        @if (errors.nullRangeDate) {
-            Range date is invalid.
+        @if (errors?.nullRangeDate) {
+            {{ errors.nullRangeDate }}
+        }
+        @if (errors?.invalidMultipleDates) {
+            {{ errors.invalidMultipleDates }}
+        }
+        @if (errors?.nullMultiRangeDate) {
+            {{ errors.nullMultiRangeDate }}
         }
     </ng-template>
 </fdp-form-group>
-<p>Birthday: {{ datePickerForm.controls.birthday.value?.toDateString() }}</p>
-<span>Exam Date: {{ datePickerForm.controls.examdate.value?.toDateString() }}</span>
-<p>
-    RandomDays:<br />
-    @for (date of datePickerForm.controls.randomDays.value; track date) {
-        {{ date.toDateString() || 'null' }}<br />
-    }
-</p>
-<span>
-    Exam Dates:<br />
-    @for (date of datePickerForm.controls.examdates.value; track date) {
-        {{ date.toDateString() || 'null' }}<br />
-    }
-</span>
-<p>Holiday Start Date: {{ datePickerForm.controls.holiday.value?.start?.toDateString() }}</p>
-<span>Holiday End Date: {{ datePickerForm.controls.holiday.value?.end?.toDateString() }}</span>
-<p>Journey Start Date: {{ datePickerForm.controls.journeydate.value?.start?.toDateString() }}</p>
-<span>Journey End Date: {{ datePickerForm.controls.journeydate.value?.end?.toDateString() }}</span>
-<p>
-    Multi Date Ranges:<br />
-    @for (date of datePickerForm.controls.multiDateRanges.value; track date) {
-        {{ date.start?.toDateString() || 'null' }} - {{ date.end?.toDateString() || 'null' }}<br />
-    }
-</p>
+
 <h3>Date Picker with Template Driven Form.</h3>
-<!--Template Driven Form-->
 <fdp-form-group columnLayout="XL2-L2-M1-S1">
-    <fdp-form-field id="birthday" [column]="1" [rank]="1" [required]="true" label="Birth Date:">
+    <fdp-form-field id="singleDateTdModel" [column]="1" [rank]="1" [required]="true" label="Birth Date:">
         <fdp-date-picker
-            name="birthday"
+            name="singleDateTdModel"
             placeholder="mm/dd/yyyy"
             type="single"
             [allowNull]="false"
-            [(ngModel)]="birthdayPicker"
+            [(ngModel)]="singleDateTdModel"
             dateInputLabel="date input mm/dd/yyy"
         >
         </fdp-date-picker>
     </fdp-form-field>
+
+    <fdp-form-field id="multiDateTdModel" [column]="1" [rank]="2" [required]="true" label="Other Dates:">
+        <fdp-date-picker
+            name="multiDateTdModel"
+            placeholder="mm/dd/yyyy"
+            type="single"
+            [allowNull]="false"
+            [allowMultipleSelection]="true"
+            [(ngModel)]="multiDateTdModel"
+            dateInputLabel="date input mm/dd/yyy"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
+
     <fdp-form-field
-        id="holiday"
+        id="rangeDateTdModel"
         [column]="1"
-        [rank]="2"
+        [rank]="3"
         [required]="true"
         label="Holiday:"
         [validators]="rangeDateValidator"
     >
         <fdp-date-picker
-            name="holiday"
+            name="rangeDateTdModel"
             type="range"
             [allowNull]="false"
-            fdCompact
             placeholder="When are you going to holiday?"
-            [(ngModel)]="holidayPicker"
+            [(ngModel)]="rangeDateTdModel"
             dateRangeInputLabel="date range input mm/dd/yyy"
         >
         </fdp-date-picker>
     </fdp-form-field>
-    <fdp-form-field id="otherDays" [column]="1" [rank]="3" label="Other Dates:">
+
+    <fdp-form-field
+        id="multiRangeDateTdModel"
+        [column]="1"
+        [rank]="4"
+        [required]="true"
+        label="Multiple Holidayes:"
+        [validators]="multiRangeDateValidator"
+    >
         <fdp-date-picker
-            name="otherDays"
-            placeholder="mm/dd/yyyy"
-            type="single"
+            name="multiRangeDateTdModel"
+            type="range"
             [allowNull]="false"
             [allowMultipleSelection]="true"
-            [(ngModel)]="otherDaysPicker"
-            dateInputLabel="date input mm/dd/yyy"
+            placeholder="When are you going to holidayes?"
+            [(ngModel)]="multiRangeDateTdModel"
+            dateRangeInputLabel="date range input mm/dd/yyy"
         >
         </fdp-date-picker>
     </fdp-form-field>
-    <fdp-form-field id="disableddate" [column]="2" [rank]="1" label="Disabled Date Picker:">
+
+    <fdp-form-field id="disabledDate" [column]="2" [rank]="5" label="Disabled Date Picker:">
         <fdp-date-picker
             name="disabledDate"
             type="single"
@@ -222,15 +245,27 @@
         @if (errors.required) {
             <span>Value is required</span>
         }
-        @if (errors.nullRangeDate) {
-            Range date is invalid.
+        @if (errors?.nullRangeDate) {
+            {{ errors.nullRangeDate }}
+        }
+        @if (errors?.invalidMultipleDates) {
+            {{ errors.invalidMultipleDates }}
+        }
+        @if (errors?.nullMultiRangeDate) {
+            {{ errors.nullMultiRangeDate }}
         }
     </ng-template>
 </fdp-form-group>
-<!--Date picker use outside form-->
+
 <h3>Date Picker Use Outside Form.</h3>
-<fdp-date-picker name="dateOutsideForm" placeholder="mm/dd/yyyy" type="single" [(ngModel)]="dateOutsideForm">
+<fdp-date-picker
+    name="singleDateOutsideForm"
+    placeholder="mm/dd/yyyy"
+    type="single"
+    [(ngModel)]="singleDateOutsideForm"
+>
 </fdp-date-picker>
+
 <h3>Multi Date Picker Use Outside Form.</h3>
 <fdp-date-picker
     name="multiDateOutsideForm"
@@ -240,11 +275,22 @@
     [(ngModel)]="multiDateOutsideForm"
 >
 </fdp-date-picker>
+
 <h3>Range Date Picker Outside Form.</h3>
 <fdp-date-picker
     name="rangeDateOutsideForm"
     type="range"
     placeholder="mm/dd/yyyy - mm/dd/yyyy"
     [(ngModel)]="rangeDateOutsideForm"
+>
+</fdp-date-picker>
+
+<h3>Multi Range Date Picker Outside Form.</h3>
+<fdp-date-picker
+    name="multiRangeDateOutsideForm"
+    type="range"
+    placeholder="mm/dd/yyyy - mm/dd/yyyy"
+    [allowMultipleSelection]="true"
+    [(ngModel)]="multiRangeDateOutsideForm"
 >
 </fdp-date-picker>

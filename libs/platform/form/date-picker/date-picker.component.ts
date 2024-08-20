@@ -398,7 +398,6 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
 
     /** @hidden */
     handleSelectedMultipleDateRangesChange = (fdRangeDate: Array<DateRange<D>>): void => {
-        console.log('handleSelectedMultipleDateRangesChange', fdRangeDate);
         this.selectedMultipleDateRangesChange.emit(fdRangeDate);
     };
 

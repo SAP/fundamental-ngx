@@ -39,22 +39,24 @@ export class PlatformDatePickerExampleComponent {
         { start: new FdDate(2020, 5, 1), end: new FdDate(2020, 5, 10) },
         { start: new FdDate(2020, 5, 15), end: new FdDate(2020, 5, 25) }
     ];
+
     datePickerForm = new FormGroup({
-        birthday: new FormControl<FdDate | null>(null),
-        randomDays: new FormControl<FdDate[] | null>([]),
-        examdate: new FormControl<FdDate | null>(null),
-        examdates: new FormControl<FdDate[] | null>([]),
-        holiday: new FormControl<DateRange<FdDate> | null>(null),
-        journeydate: new FormControl<DateRange<FdDate> | null>(null),
-        multiDateRanges: new FormControl<DateRange<FdDate>[] | null>(null),
-        disableddate: new FormControl<FdDate | null>(null)
+        singleDatePrepopulated: new FormControl<FdDate | null>(null),
+        singleDate: new FormControl<FdDate | null>(null),
+        multiDatePrepopulated: new FormControl<FdDate[] | null>(null),
+        multiDate: new FormControl<FdDate[] | null>(null),
+        rangeDatePrepopulated: new FormControl<DateRange<FdDate> | null>(null),
+        rangeDate: new FormControl<DateRange<FdDate> | null>(null),
+        multiRangeDatePrepopulated: new FormControl<DateRange<FdDate>[] | null>(null),
+        multiRangeDate: new FormControl<DateRange<FdDate>[] | null>(null),
+        disabledDatePicker: new FormControl<FdDate | null>(null)
     });
 
     formInitialData = {
-        birthday: this.birthday,
-        randomDays: this.randomDays,
-        holiday: this.holiday,
-        multiDateRanges: this.multiDateRanges
+        singleDatePrepopulated: this.birthday,
+        multiDatePrepopulated: this.randomDays,
+        rangeDatePrepopulated: this.holiday,
+        multiRangeDatePrepopulated: this.multiDateRanges
     };
 
     requiredDateValidator: ValidatorFn[] = [Validators.required];
@@ -62,14 +64,16 @@ export class PlatformDatePickerExampleComponent {
     rangeDateValidator: ValidatorFn[] = [dateRangeNullValidator];
     multiRangeDateValidator: ValidatorFn[] = [multiDateRangeNullValidator];
 
-    // Template driven form
     disabledDate = '';
-    birthdayPicker = '';
-    otherDaysPicker = '';
-    holidayPicker = '';
-    dateOutsideForm = '';
+    singleDateTdModel = '';
+    multiDateTdModel = '';
+    rangeDateTdModel = '';
+    multiRangeDateTdModel = '';
+
+    singleDateOutsideForm = '';
     multiDateOutsideForm = '';
     rangeDateOutsideForm = '';
+    multiRangeDateOutsideForm = '';
 
     public onSubmit(value: any): void {
         alert('Form Value: ' + value);
