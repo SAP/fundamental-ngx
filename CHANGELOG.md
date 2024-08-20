@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.3-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.16...v0.51.3-rc.17) (2024-08-20)
+
+
+### Bug Fixes
+
+* **core:** multi input tokens should not have title attr ([#12233](https://github.com/SAP/fundamental-ngx/issues/12233)) ([8c177b0](https://github.com/SAP/fundamental-ngx/commit/8c177b0ad47a853a832c22eba5bfc727a1a2c9ea))
+
+
+
+
+
 ## [0.51.3-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.15...v0.51.3-rc.16) (2024-08-20)
 
 
