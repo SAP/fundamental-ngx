@@ -49,4 +49,11 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
 })
 export class DatetimeFormatExampleComponent {
     date = FdDate.getNow();
+    specificDateTimeFormat = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    };
 }

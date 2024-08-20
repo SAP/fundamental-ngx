@@ -147,6 +147,10 @@ export class DatePickerComponent<D>
     @Input()
     required = false;
 
+    /** Define a custom datetime format. Can be a string for DayjsDatetimeAdapter or object for FdDatetimeAdapter */
+    @Input()
+    customDateTimeFormat: unknown;
+
     /** Text displayed in message */
     @Input()
     set message(message: string) {
@@ -1062,6 +1066,9 @@ export class DatePickerComponent<D>
 
     /** @hidden */
     private _formatDate(date: Nullable<D>): string {
+        if (this.customDateTimeFormat) {
+            return this._dateTimeAdapter.format(date, this.customDateTimeFormat);
+        }
         return this._dateTimeAdapter.format(date, this._dateTimeFormats.display.dateInput);
     }
 

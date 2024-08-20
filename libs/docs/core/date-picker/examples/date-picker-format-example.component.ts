@@ -39,6 +39,14 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
         <br />
         <div>Selected Date: {{ date | dateFormat }}</div>
         <br />
+        <fd-date-picker
+            [(ngModel)]="date"
+            [customDateTimeFormat]="componentSpecificDateTimeFormat"
+            placeholder="dd-mm-yyyy"
+        ></fd-date-picker>
+        <br />
+        <div>Selected Date: {{ date | dateFormat }}</div>
+        <br />
         <fd-date-picker [(ngModel)]="dates" placeholder="dd-mm-yyyy"></fd-date-picker>
         <br />
         <div>
@@ -91,6 +99,11 @@ export class DatePickerFormatExampleComponent {
     ];
     selectedRange: Nullable<DateRange<FdDate>>;
     selectedRanges: Nullable<Array<DateRange<FdDate>>>;
+    componentSpecificDateTimeFormat = {
+        year: '2-digit',
+        month: 'long',
+        day: '2-digit'
+    };
 
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {
         const today = this.datetimeAdapter.today();
