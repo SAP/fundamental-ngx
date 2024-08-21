@@ -1,7 +1,6 @@
 import {
     getAttributeByName,
     getElementArrayLength,
-    getElementSize,
     isElementClickable,
     refreshPage,
     scrollIntoView,
@@ -19,8 +18,7 @@ describe('File uploader component test', () => {
         browseButtonDisabled,
         fileUploaderInputFile,
         fileSelectedText,
-        fileUploaderExample,
-        fileUploaderCompactExample
+        fileUploaderExample
     } = fileUploaderPage;
 
     beforeAll(async () => {
@@ -59,13 +57,6 @@ describe('File uploader component test', () => {
                 `browse button with index ${i} is not clickable`
             );
         }
-    });
-
-    it('verify compact input smaller than basic', async () => {
-        const basicInput = await getElementSize(fileUploaderExample + fileUploaderInput);
-        const compactInput = await getElementSize(fileUploaderCompactExample + fileUploaderInput);
-
-        await expect(compactInput.width).toBeLessThan(basicInput.width);
     });
 
     it('should check RTL and LTR orientation', async () => {

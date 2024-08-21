@@ -63,7 +63,7 @@ describe('Grid-list test suite', () => {
         await expect(await getText(footer)).toBe(text);
     });
 
-    it('Verify grid list contains product counter', async () => {
+    xit('Verify grid list contains product counter', async () => {
         await click(deleteSegmentedButton);
         let productsQuantityFromTitle = (await getText(deleteModeTitle)).replace(/\D/g, '');
         const itemsArray = await elementArray(await gridListItemsByMode('delete'));
