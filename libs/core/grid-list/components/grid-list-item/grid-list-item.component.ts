@@ -1,4 +1,4 @@
-import { ENTER, F2, F7, MAC_ENTER, SPACE, TAB } from '@angular/cdk/keycodes';
+import { ENTER, F2, F7, MAC_ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -439,16 +439,6 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
                 this._gridListItem.nativeElement,
                 false,
                 true
-            );
-            tabbableElement?.focus();
-            return;
-        }
-
-        if (KeyUtil.isKeyCode(event, [TAB]) && event.shiftKey) {
-            const tabbableElement = this._tabbableElementService.getTabbableElement(
-                this._gridListItem.nativeElement,
-                true,
-                false
             );
             tabbableElement?.focus();
             return;

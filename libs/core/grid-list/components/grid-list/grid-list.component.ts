@@ -284,16 +284,29 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
                     const interactiveElements = item._gridListItem.nativeElement.querySelectorAll(
                         'a, button, input, select, textarea'
                     );
+
+                    // Set tabindex to -1 for all interactive elements in the grid
                     interactiveElements.forEach((element) => {
                         element.setAttribute('tabindex', '-1');
                     });
-                    if (index !== 0) {
-                        item.tabIndex.set(-1);
-                        return;
+
+                    // Set tabindex of the first item's interactive elements to 0
+                    // if (index === 0) {
+                    //     interactiveElements.forEach((element) => {
+                    //         element.setAttribute('tabindex', '-1');
+                    //     });
+                    // }
+                    if (KeyUtil.isKeyCode(event, TAB) && event.shiftKey) {
+                        if (index === 0) {
+                            interactiveElements.forEach((element) => {
+                                element.setAttribute('tabindex', '-1');
+                            });
+                        }
                     }
                 });
             }
         } else {
+            // Set tabindex of all interactive elements to 0
             this._gridListItems.forEach((item) => {
                 const interactiveElements = item._gridListItem.nativeElement.querySelectorAll(
                     'a, button, input, select, textarea'
