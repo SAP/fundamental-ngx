@@ -352,6 +352,9 @@ export class IconTabBarComponent implements OnInit, TabList {
         flatIndexRef = flatIndexRef || { value: 0 };
         return config.map((item, index) => {
             const uId = `${indexPrefix}${index}`;
+            if (!('color' in item)) {
+                item.color = 'default';
+            }
             const result: IconTabBarItem = {
                 ...item,
                 index,
