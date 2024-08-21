@@ -295,7 +295,7 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
                 });
                 return;
             } else {
-                this._gridListItems.forEach((item, i) => {
+                this._gridListItems.forEach((item) => {
                     const interactiveElements = item._gridListItem.nativeElement.querySelectorAll(
                         'a, button, input, select, textarea'
                     );
