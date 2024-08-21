@@ -275,12 +275,15 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
 
     /** @hidden */
     private _handleTabKeydown(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, TAB)) {
-            const activeElement = document.activeElement as HTMLElement;
-            const firstItem = this._gridListItems.first;
-
-            if (firstItem && firstItem._gridListItem.nativeElement.contains(activeElement)) {
-                this._gridListItems.forEach((item, index) => {
+        if (KeyUtil.isKeyCode(event, TAB) && !event.shiftKey) {
+            const isFocused = this._gridListItems
+                .toArray()
+                .some((item) => item._gridListItem.nativeElement.contains(document.activeElement));
+            const isChildFocused = this._gridListItems
+                .toArray()
+                .some((item) => item._gridListItem.nativeElement.querySelector(':focus'));
+            if (isFocused && !isChildFocused) {
+                this._gridListItems.forEach((item) => {
                     const interactiveElements = item._gridListItem.nativeElement.querySelectorAll(
                         'a, button, input, select, textarea'
                     );
@@ -289,32 +292,19 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
                     interactiveElements.forEach((element) => {
                         element.setAttribute('tabindex', '-1');
                     });
-
-                    // Set tabindex of the first item's interactive elements to 0
-                    // if (index === 0) {
-                    //     interactiveElements.forEach((element) => {
-                    //         element.setAttribute('tabindex', '-1');
-                    //     });
-                    // }
-                    if (KeyUtil.isKeyCode(event, TAB) && event.shiftKey) {
-                        if (index === 0) {
-                            interactiveElements.forEach((element) => {
-                                element.setAttribute('tabindex', '-1');
-                            });
-                        }
-                    }
                 });
+                return;
+            } else {
+                this._gridListItems.forEach((item, i) => {
+                    const interactiveElements = item._gridListItem.nativeElement.querySelectorAll(
+                        'a, button, input, select, textarea'
+                    );
+                    interactiveElements.forEach((element) => {
+                        element.setAttribute('tabindex', '0');
+                    });
+                });
+                return;
             }
-        } else {
-            // Set tabindex of all interactive elements to 0
-            this._gridListItems.forEach((item) => {
-                const interactiveElements = item._gridListItem.nativeElement.querySelectorAll(
-                    'a, button, input, select, textarea'
-                );
-                interactiveElements.forEach((element) => {
-                    element.setAttribute('tabindex', '0');
-                });
-            });
         }
     }
 
@@ -346,20 +336,28 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
             indexToFocus = currentItemIndex + itemsPerRow;
         }
 
+        this._focusGridListItem(indexToFocus, activeElement);
+    }
+
+    /** @hidden */
+    private _focusGridListItem(indexToFocus: number | undefined, activeElement: HTMLElement): void {
         if (indexToFocus !== undefined && indexToFocus >= 0 && indexToFocus < this._gridListItems.length) {
             const itemToFocus = this._gridListItems.toArray()[indexToFocus];
             if (itemToFocus && itemToFocus._gridListItem) {
-                const elementToFocus = itemToFocus._gridListItem.nativeElement?.parentElement?.querySelector(
+                // Find an element with the same tag name as the active element within the next/prev item
+                const elementToFocus = itemToFocus._gridListItem.nativeElement?.querySelector(
                     activeElement.tagName
                 ) as HTMLElement;
 
                 if (elementToFocus) {
                     elementToFocus.focus();
+                } else {
+                    // If no similar element found, fallback to focusing the whole grid item
+                    itemToFocus._gridListItem.nativeElement.focus();
                 }
             }
         }
     }
-
     /** @hidden */
     private _setFirstFocusableItem(): void {
         this._gridListItems.toArray().forEach((item, index) => {

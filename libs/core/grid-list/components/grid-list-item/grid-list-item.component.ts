@@ -145,6 +145,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     set type(value: Nullable<GridListItemType>) {
         this._type = value ?? 'inactive';
     }
+
     get type(): GridListItemType {
         return this._type;
     }
@@ -280,6 +281,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     get selectionMode(): GridListSelectionMode | undefined {
         return this._selectionMode;
     }
+
     /** @hidden */
     _index?: number;
 
@@ -435,12 +437,15 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         const shouldFocusChild = KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER, F2, F7]) && !event.shiftKey && isFocused;
         if (shouldFocusChild) {
             event.stopPropagation();
-            const tabbableElement = this._tabbableElementService.getTabbableElement(
-                this._gridListItem.nativeElement,
-                false,
-                true
+            const interactiveElements = this._gridListItem.nativeElement.querySelectorAll(
+                'a, button, input, select, textarea'
             );
-            tabbableElement?.focus();
+
+            const firstInteractiveElement = interactiveElements[0] as HTMLElement;
+            firstInteractiveElement.focus();
+            interactiveElements.forEach((element) => {
+                element.setAttribute('tabindex', '0');
+            });
             return;
         }
 
