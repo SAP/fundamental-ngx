@@ -336,13 +336,14 @@ describe('CalendarDayViewComponent', () => {
         const secondRangeDays = component._calendarDayList.slice(9, 15);
 
         firstRangeDays.forEach(day => {
-            expect(day.selectedRange).toBeTruthy();
+            expect(day.selected).toBeTruthy();
         });
 
         secondRangeDays.forEach(day => {
-            expect(day.selectedRange).toBeTruthy();
+            expect(day.selected).toBeTruthy();
         });
     });
+
     it('should apply _isOnRangePick flag for multiple ranges', () => {
         component.currentlyDisplayed.year = 2015;
         component.currentlyDisplayed.month = 6;

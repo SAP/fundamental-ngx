@@ -753,6 +753,7 @@ export class DatePickerComponent<D>
             this.onChange(this.selectedMultipleDateRanges);
             // if you want to refresh the calendar view, you can use the following line
             // this._refreshCurrentlyDisplayedCalendarDate(dates[0].start);
+            this._calendarPendingDate = dates[0].start;
             this._isInvalidDateInput = !this.isModelValid();
         }
     }
@@ -863,6 +864,7 @@ export class DatePickerComponent<D>
             };
             this.selectedDate = null;
             this.selectedMultipleDates = [];
+            this.selectedMultipleDateRanges = [];
             this._changeDetectionRef.detectChanges();
             return;
         }
@@ -1241,6 +1243,7 @@ export class DatePickerComponent<D>
         if (!dateStr) {
             this._isInvalidDateInput = !this.allowNull;
             this.selectedMultipleDates = [];
+            this._refreshCurrentlyDisplayedCalendarDate(null);
             this.onChange(this.selectedMultipleDates);
             this.selectedMultipleDatesChange.emit(this.selectedMultipleDates);
             return;
@@ -1280,8 +1283,8 @@ export class DatePickerComponent<D>
     private _updateMultipleDateRanges(dateStr: string): void {
         if (!dateStr) {
             this._isInvalidDateInput = !this.allowNull;
-            this._refreshCurrentlyDisplayedCalendarDate(this._dateTimeAdapter.today());
-            this.selectedMultipleDateRanges = [];
+            this.selectedMultipleDateRanges = [{ start: null, end: null }];
+            this._refreshCurrentlyDisplayedCalendarDate(null);
             this.onChange(this.selectedMultipleDateRanges);
             this.selectedMultipleDateRangesChange.emit(this.selectedMultipleDateRanges);
             return;
@@ -1302,7 +1305,7 @@ export class DatePickerComponent<D>
         this._isInvalidDateInput = !this._isMultipleRangesModelValid(parsedRanges);
 
         if (!this._isInvalidDateInput && rangesChanged) {
-            if (this._isStartDateValid(this.selectedRangeDate.start)) {
+            if (this._isStartDateValid(this.selectedMultipleDateRanges[0].start)) {
                 this._refreshCurrentlyDisplayedCalendarDate(this.selectedMultipleDateRanges[0].start);
             }
             this.selectedMultipleDateRanges = parsedRanges;

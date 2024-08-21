@@ -1096,31 +1096,26 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
                 if (dates.start) {
                     // Find start date and mark it as selected
                     startDay = calendar.find((_day) => this._isSameDay(_day.date, dates.start));
-                    if (startDay && !startDay.blocked && !startDay.disabled) {
+                    if (startDay) {
                         startDay.selectedFirst = true;
+                        startDay.selected = true;
                     }
                 }
                 if (dates.end) {
                     // Find end date and mark it as selected
                     endDay = calendar.find((_day) => this._isSameDay(_day.date, dates.end));
-                    if (endDay && !endDay.blocked && !endDay.disabled) {
+                    if (endDay) {
                         endDay.selectedLast = true;
+                        endDay.selected = true;
                     }
                 }
 
-                // Verify if start day and end day is valid, otherwise don't put range selection
+                // Mark all days between start and end as selected range
                 if (dates.start && dates.end) {
-                    // Mark all days, which are between start and end date
                     calendar.forEach((_day) => {
-                        if (
-                            this._dateTimeAdapter.compareDate(_day.date, dates.start!) >= 0 &&
-                            this._dateTimeAdapter.compareDate(_day.date, dates.end!) <= 0 &&
-                            !startDay?.blocked &&
-                            !endDay?.blocked &&
-                            !startDay?.disabled &&
-                            !endDay?.disabled
-                        ) {
+                        if (this._isDateInRange(_day.date, dates)) {
                             _day.selectedRange = true;
+                            _day.selected = true;
                         }
                     });
                 }
@@ -1184,15 +1179,17 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      */
     private _toggleMultiDate(day: CalendarDay<D>): void {
         const dateIndex = this._selectedMultipleDates.findIndex((d) => this._isSameDay(d, day.date));
+        let newSelectedDates: D[];
 
         if (dateIndex > -1) {
-            this._selectedMultipleDates.splice(dateIndex, 1);
+            newSelectedDates = this._selectedMultipleDates.filter((_, index) => index !== dateIndex);
             day.selected = false;
         } else {
+            newSelectedDates = [...this._selectedMultipleDates, day.date];
             day.selected = true;
-            this._selectedMultipleDates.push(day.date);
         }
 
+        this._selectedMultipleDates = newSelectedDates;
         this.selectedMultipleDatesChange.emit(this._selectedMultipleDates);
     }
 
@@ -1220,31 +1217,33 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * @param day The calendar day to be selected or updated in the range.
      */
     private _selectMultipleRangeDates(day: CalendarDay<D>): void {
-        let tempRanges = [...(this._selectedMultipleDateRanges || [])];
+        let tempRanges = this._selectedMultipleDateRanges?.filter((range) => range.start || range.end) || [];
 
-        // Check if the selected day is the start date of an existing range
+        // Handles the existing range by updating or merging it with the new day selection.
         tempRanges = this._handleExistingRange(tempRanges, day);
 
-        // Handle new range selection
         if (this._selectMultipleCounter % 2 === 0) {
             // Start a new range
             this._newRange = { start: day.date, end: null };
         } else {
             // Check for reverse selection
-            if (this._dateTimeAdapter.compareDate(this._newRange!.start!, day.date) > 0) {
-                // Swap start and end dates
-                this._newRange = { start: day.date, end: this._newRange!.start };
-            } else {
-                this._newRange!.end = day.date;
+            if (
+                this._newRange &&
+                this._newRange.start &&
+                this._dateTimeAdapter.compareDate(this._newRange.start, day.date) > 0
+            ) {
+                this._newRange = { start: day.date, end: this._newRange.start };
+            } else if (this._newRange) {
+                this._newRange.end = day.date as D;
             }
-            tempRanges.push(this._newRange!);
+            if (this._newRange) {
+                tempRanges.push(this._newRange);
+            }
             this._newRange = null;
         }
 
-        // Merge overlapping ranges
         tempRanges = this._mergeOverlappingRanges(tempRanges);
 
-        // Update the selected multiple date ranges
         this._selectedMultipleDateRanges = tempRanges;
 
         // Check if all ranges have both start and end dates filled
@@ -1322,10 +1321,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * @returns True if the date is in the range, false otherwise.
      */
     private _isDateInRange(date: D, range: DateRange<D>): boolean {
-        return (
-            (!range.start || this._dateTimeAdapter.compareDate(date, range.start) >= 0) &&
-            (!range.end || this._dateTimeAdapter.compareDate(date, range.end) <= 0)
-        );
+        return this._dateTimeAdapter.isBetween(date, range.start!, range.end!);
     }
 
     /**

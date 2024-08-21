@@ -90,12 +90,17 @@ export function dateRangeNullValidator(control: AbstractControl): { [key: string
 }
 
 export function multipleDatesValidator(control: AbstractControl): { [key: string]: any } | null {
-    const dates = control.value as Array<any>;
-    if (Array.isArray(dates) && dates.length > 0) {
-        return null;
-    } else {
-        return { invalidMultipleDates: 'Multiple dates are not valid' };
+    const dates = control.value;
+
+    if (Array.isArray(dates)) {
+        const invalidDate = dates.find((date) => !date._isValid);
+
+        if (invalidDate || dates.length === 0) {
+            return { invalidMultipleDates: 'One or more dates are invalid' };
+        }
     }
+
+    return null;
 }
 
 export function multiDateRangeNullValidator(control: AbstractControl): { [key: string]: any } | null {
