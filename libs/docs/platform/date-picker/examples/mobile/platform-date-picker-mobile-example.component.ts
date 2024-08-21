@@ -29,6 +29,7 @@ import { FdpFormGroupModule, PlatformDatePickerComponent } from '@fundamental-ng
 export class PlatformDatePickerMobileExampleComponent {
     birthday: FdDate = new FdDate(1990, 1, 2);
     holiday = { start: new FdDate(2020, 5, 14), end: new FdDate(2020, 5, 24) };
+    examDays: FdDate[] = [new FdDate(1990, 1, 1), new FdDate(1990, 1, 2), new FdDate(1990, 1, 3)];
 
     mobileLandscapeConfig: MobileModeConfig = {
         title: 'Choose date',
@@ -57,15 +58,18 @@ export class PlatformDatePickerMobileExampleComponent {
 
     datePickerForm = new FormGroup({
         birthday: new FormControl<FdDate | null>(null),
-        holiday: new FormControl<DateRange<FdDate> | null>(null)
+        holiday: new FormControl<DateRange<FdDate> | null>(null),
+        examDays: new FormControl<FdDate[] | null>(null)
     });
 
     formInitialData = {
         birthday: this.birthday,
-        holiday: this.holiday
+        holiday: this.holiday,
+        examDays: this.examDays
     };
 
     requiredDateValidator: ValidatorFn[] = [Validators.required];
+    requiredMultiDatesValidator: ValidatorFn[] = [multipleDatesValidator];
     rangeDateValidator: ValidatorFn[] = [dateRangeNullValidator];
 
     public onSubmit(value: any): void {
@@ -79,5 +83,14 @@ export function dateRangeNullValidator(control: AbstractControl): { [key: string
         return null;
     } else {
         return { nullRangeDate: 'Range date is not valid' };
+    }
+}
+
+export function multipleDatesValidator(control: AbstractControl): { [key: string]: any } | null {
+    const dates = control.value as Array<any>;
+    if (Array.isArray(dates) && dates.length > 0) {
+        return null;
+    } else {
+        return { invalidMultipleDates: 'Multiple dates are not valid' };
     }
 }

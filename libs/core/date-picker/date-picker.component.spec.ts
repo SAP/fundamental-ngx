@@ -71,6 +71,23 @@ describe('DatePickerComponent', () => {
         expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
     });
 
+    it('should handle multiple dates change and update input', () => {
+        component.allowMultipleSelection = true;
+        jest.spyOn(component, 'onChange');
+        jest.spyOn(component.selectedMultipleDatesChange, 'emit');
+        const dates = [
+            new FdDate(2000, 10, 10),
+            new FdDate(2000, 10, 11),
+            new FdDate(2000, 10, 12)
+        ];
+        const datesStr = dates.map(date => (<any>component)._formatDate(date)).join(', ');
+        component._inputFieldDate = '';
+        component.handleMultipleDatesChange(dates);
+        expect(component._inputFieldDate).toEqual(datesStr);
+        expect(component.onChange).toHaveBeenCalledWith(dates);
+        expect(component.selectedMultipleDatesChange.emit).toHaveBeenCalledWith(dates);
+    });
+
     it('should handle range date change and update input', () => {
         jest.spyOn(component, 'onChange');
         jest.spyOn(component.selectedRangeDateChange, 'emit');
@@ -119,6 +136,26 @@ describe('DatePickerComponent', () => {
         expect(component._inputFieldDate).toBe('');
     });
 
+    it('should handle correct write value for multiple dates mode', () => {
+        component.allowMultipleSelection = true;
+        const dates = [
+            new FdDate(2000, 10, 10),
+            new FdDate(2000, 10, 11),
+            new FdDate(2000, 10, 12)
+        ];
+        const datesStr = dates.map(date => (<any>component)._formatDate(date)).join(', ');
+        component.writeValue(dates);
+        expect(component.selectedMultipleDates).toEqual(dates);
+        expect(component._inputFieldDate).toBe(datesStr);
+    });
+
+    it('should handle null write value for multiple dates mode', () => {
+        component.allowMultipleSelection = true;
+        component.writeValue(null);
+        expect(component.selectedMultipleDates).toEqual([]);
+        expect(component._inputFieldDate).toBe('');
+    });
+
     it('should handle correct write value for range mode', () => {
         component.type = 'range';
         const dateStart = adapter.today();
@@ -143,6 +180,26 @@ describe('DatePickerComponent', () => {
         const date = adapter.parse('hello');
         expect(component._isInvalidDateInput).toBe(true);
         expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
+        expect(component.isModelValid()).toBe(false);
+    });
+
+    it('should register invalid string date and not call event for multiple dates mode', () => {
+        component.allowMultipleSelection = true;
+        jest.spyOn(component.selectedMultipleDatesChange, 'emit');
+        component.type = 'single';
+
+        const invalidDate = new FdDate(NaN, NaN, NaN);
+        jest.spyOn(adapter, 'parse').mockImplementation((str) => {
+            if (str === 'hello') {
+                return invalidDate;
+            }
+            return null;
+        });
+
+        component.dateStringUpdate('hello');
+        expect(component._isInvalidDateInput).toBe(true);
+        // Ensure that the array passed to the emit method contains only valid FdDate instances
+        expect(component.selectedMultipleDatesChange.emit).toHaveBeenCalledWith([invalidDate].filter(date => date instanceof FdDate));
         expect(component.isModelValid()).toBe(false);
     });
 
@@ -200,6 +257,27 @@ describe('DatePickerComponent', () => {
         expect(component._calendarComponent._currentlyDisplayed.year).toBe(todayDate.year);
         expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
         expect(component.onChange).toHaveBeenCalledWith(date);
+    });
+
+    it('should handle multiple dates blocked by disable function and set invalid', () => {
+        component.allowMultipleSelection = true;
+        jest.spyOn(component.selectedMultipleDatesChange, 'emit');
+        jest.spyOn(component, 'onChange');
+        component.disableFunction = () => true;
+        const todayDate = new FdDate();
+        const dates = [new FdDate(2000, 10, 10)];
+        const datesStr = (<any>component).formatDateArray(dates);
+        component.type = 'single';
+        jest.spyOn(adapter, 'parse').mockImplementation((str) => {
+            const [day, month, year] = str.split('/').map(Number);
+            return new FdDate(year, month, day);
+        });
+        component.dateStringUpdate(datesStr);
+        expect(component._isInvalidDateInput).toBe(true);
+        expect(component._calendarComponent._currentlyDisplayed.month).toBe(todayDate.month);
+        expect(component._calendarComponent._currentlyDisplayed.year).toBe(todayDate.year);
+        expect(component.selectedMultipleDatesChange.emit).toHaveBeenCalledWith(dates);
+        expect(component.onChange).toHaveBeenCalledWith(dates);
     });
 
     it('should handle both range dates blocked by disable function and set invalid', () => {
@@ -312,6 +390,81 @@ describe('DatePickerComponent', () => {
         nativeInput.dispatchEvent(new Event('blur'));
         expect(component._inputFieldDate).toEqual('1/25/2022');
         expect(component._isInvalidDateInput).toEqual(false);
+    });
+
+    it('should handle multiple date ranges change and update input', () => {
+        jest.spyOn(component, 'onChange');
+        jest.spyOn(component.selectedMultipleDateRangesChange, 'emit');
+        const dateStart1 = adapter.today();
+        const dateEnd1 = adapter.addCalendarDays(dateStart1, 10);
+        const dateStart2 = adapter.addCalendarDays(dateEnd1, 5);
+        const dateEnd2 = adapter.addCalendarDays(dateStart2, 10);
+        const dateRanges = [
+            { start: dateStart1, end: dateEnd1 },
+            { start: dateStart2, end: dateEnd2 }
+        ];
+        const dateStr1 = `${(<any>component)._formatDate(dateStart1)}${component._rangeDelimiter}${(<any>component)._formatDate(dateEnd1)}`;
+        const dateStr2 = `${(<any>component)._formatDate(dateStart2)}${component._rangeDelimiter}${(<any>component)._formatDate(dateEnd2)}`;
+        component._inputFieldDate = '';
+        component.handleMultipleDateRangesChange(dateRanges);
+        expect(component._inputFieldDate).toBe(`${dateStr1}, ${dateStr2}`);
+        expect(component.onChange).toHaveBeenCalledWith(dateRanges);
+        expect(component.selectedMultipleDateRangesChange.emit).toHaveBeenCalledWith(dateRanges);
+    });
+
+    it('should handle today button click and update input for multiple date ranges', () => {
+        jest.spyOn(component, 'onChange');
+        jest.spyOn(component.selectedMultipleDateRangesChange, 'emit');
+        component.type = 'range';
+        component.allowMultipleSelection = true;
+        const date = adapter.today();
+        const dateStr = (<any>component)._formatDate(date);
+        const dateRanges = [{ start: date, end: date }];
+        component._inputFieldDate = '';
+        component.onTodayButtonClick();
+        expect(component._inputFieldDate).toBe(`${dateStr}${component._rangeDelimiter}${dateStr}`);
+        expect(component.onChange).toHaveBeenCalledWith(dateRanges);
+        expect(component.selectedMultipleDateRangesChange.emit).toHaveBeenCalledWith(dateRanges);
+    });
+
+    it('should handle correct write value for multiple date ranges mode', () => {
+        component.type = 'range';
+        component.allowMultipleSelection = true;
+        const dateStart1 = adapter.today();
+        const dateEnd1 = adapter.addCalendarDays(dateStart1, 10);
+        const dateStart2 = adapter.addCalendarDays(dateEnd1, 5);
+        const dateEnd2 = adapter.addCalendarDays(dateStart2, 10);
+        const dateRanges = [
+            { start: dateStart1, end: dateEnd1 },
+            { start: dateStart2, end: dateEnd2 }
+        ];
+        component.writeValue(dateRanges);
+        expect(component.selectedMultipleDateRanges).toEqual(dateRanges);
+    });
+
+    it('should handle null write value for multiple date ranges mode', () => {
+        component.allowMultipleSelection = true;
+        component.writeValue(null);
+        expect(component.selectedMultipleDateRanges).toEqual([]);
+        expect(component._inputFieldDate).toBe('');
+    });
+
+    it('should register invalid string date and not call event for multiple date ranges mode', () => {
+        jest.spyOn(component.selectedMultipleDateRangesChange, 'emit');
+        component.type = 'range';
+        component.allowMultipleSelection = true;
+        component.dateStringUpdate('start1 - end1, start2 - end2');
+        const start1 = adapter.parse('start1');
+        const end1 = adapter.parse('end1');
+        const start2 = adapter.parse('start2');
+        const end2 = adapter.parse('end2');
+        component.selectedMultipleDateRanges = [
+            { start: start1, end: end1 },
+            { start: start2, end: end2 }
+        ];
+        expect(component._isInvalidDateInput).toBe(true);
+        expect(component.selectedMultipleDateRangesChange.emit).not.toHaveBeenCalled();
+        expect(component.isModelValid()).toBe(false);
     });
 });
 
