@@ -12,7 +12,7 @@ import {
 import { FormsModule, NgControl } from '@angular/forms';
 import { FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 
-import { CalendarYearGrid, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
+import { CalendarYearGrid, DaysOfWeek, FdCalendarView, FdCalendarViewEnum } from '@fundamental-ngx/core/calendar';
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -93,7 +93,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
 
     /** Actually shown active view one of 'day' | 'month' | 'year' in calendar component*/
     @Input()
-    activeView: FdCalendarView = 'day';
+    activeView: FdCalendarView = FdCalendarViewEnum.Day;
 
     /** Whether a null input is considered valid. */
     @Input()

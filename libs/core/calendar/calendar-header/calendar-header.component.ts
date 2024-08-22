@@ -23,7 +23,7 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarService } from '../calendar.service';
 import { CalendarCurrent } from '../models/calendar-current';
 import { CalendarYearGrid } from '../models/calendar-year-grid';
-import { FdCalendarView } from '../types';
+import { FdCalendarView, FdCalendarViewEnum } from '../types';
 
 /**
  * Internal use only.
@@ -124,22 +124,22 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
 
     /** Get information is calendar is on aggregated years view */
     get isOnAggregatedYearsView(): boolean {
-        return this.activeView === 'aggregatedYear';
+        return this.activeView === FdCalendarViewEnum.AggregatedYear;
     }
 
     /** Get information is calendar is on year view */
     get isOnYearView(): boolean {
-        return this.activeView === 'year';
+        return this.activeView === FdCalendarViewEnum.Year;
     }
 
     /** Get information is calendar is on month view */
     get isOnMonthView(): boolean {
-        return this.activeView === 'month';
+        return this.activeView === FdCalendarViewEnum.Month;
     }
 
     /** Get information is calendar is on day view */
     get isOnDayView(): boolean {
-        return this.activeView === 'day';
+        return this.activeView === FdCalendarViewEnum.Day;
     }
 
     /**
@@ -263,7 +263,7 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
             event.stopPropagation();
         }
 
-        this.activeView = type === this.activeView ? 'day' : type;
+        this.activeView = type === this.activeView ? FdCalendarViewEnum.Day : type;
 
         this.activeViewChange.emit(this.activeView);
     }

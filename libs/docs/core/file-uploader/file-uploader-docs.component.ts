@@ -9,16 +9,12 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import { FileUploaderCompactExampleComponent } from './examples/file-uploader-compact-example/file-uploader-compact-example.component';
 import { FileUploaderDisabledExampleComponent } from './examples/file-uploader-disabled-example/file-uploader-example.component';
 import { FileUploaderDragDisabledExampleComponent } from './examples/file-uploader-drag-disabled-example/file-uploader-drag-disabled-example.component';
 import { FileUploaderExampleComponent } from './examples/file-uploader-example/file-uploader-example.component';
 import { FileUploaderMaxExampleComponent } from './examples/file-uploader-max-example/file-uploader-max-example.component';
 import { FileUploaderMinExampleComponent } from './examples/file-uploader-min-example/file-uploader-min-example.component';
 import { FileUploaderTruncationExampleComponent } from './examples/file-uploader-truncation-example/file-uploader-truncation-example.component';
-
-const fileUploaderCompactH = 'file-uploader-compact-example/file-uploader-compact-example.component.html';
-const fileUploaderCompactT = 'file-uploader-compact-example/file-uploader-compact-example.component.ts';
 
 const fileUploaderTruncationH = 'file-uploader-truncation-example/file-uploader-truncation-example.component.html';
 const fileUploaderTruncationT = 'file-uploader-truncation-example/file-uploader-truncation-example.component.ts';
@@ -49,26 +45,12 @@ const fileUploaderMinH = 'file-uploader-min-example/file-uploader-min-example.co
         SeparatorComponent,
         FileUploaderDisabledExampleComponent,
         FileUploaderTruncationExampleComponent,
-        FileUploaderCompactExampleComponent,
         FileUploaderDragDisabledExampleComponent,
         FileUploaderMinExampleComponent,
         FileUploaderMaxExampleComponent
     ]
 })
 export class FileUploaderDocsComponent {
-    fileUpladerCompactExample: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(fileUploaderCompactH),
-            fileName: 'file-uploader-compact-example'
-        },
-        {
-            language: 'typescript',
-            component: 'FileUploaderCompactExampleComponent',
-            code: getAssetFromModuleAssets(fileUploaderCompactT),
-            fileName: 'file-uploader-compact-example'
-        }
-    ];
     fileUpladerExample: ExampleFile[] = [
         {
             language: 'html',

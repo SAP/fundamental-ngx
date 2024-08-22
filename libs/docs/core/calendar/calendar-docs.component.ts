@@ -18,6 +18,8 @@ import { CalendarI18nExampleComponent } from './examples/calendar-i18n-example.c
 import { CalendarMarkHoverComponent } from './examples/calendar-mark-hover/calendar-mark-hover.component';
 import { CalendarMobileExampleComponent } from './examples/calendar-mobile-example/calendar-mobile-example.component';
 import { CalendarMondayStartExampleComponent } from './examples/calendar-monday-start-example.component';
+import { CalendarMultiExampleComponent } from './examples/calendar-multi-example.component';
+import { CalendarMultiRangeExampleComponent } from './examples/calendar-multi-range-example.component';
 import { CalendarOptionsExampleComponent } from './examples/calendar-options-example/calendar-options-example.component';
 import { CalendarProgrammaticallyChangeExampleComponent } from './examples/calendar-programmatically-change-example.component';
 import { CalendarRangeExampleComponent } from './examples/calendar-range-example.component';
@@ -27,6 +29,7 @@ import { CalendarSpecialDayExampleComponent } from './examples/calendar-special-
 const calendarFormSourceScss = 'calendar-form-example/calendar-form-example.component.scss';
 
 const calendarRangeSrc = 'calendar-range-example.component.ts';
+const calendarMultiRangeSrc = 'calendar-multi-range-example.component.ts';
 const calendarOptionHtml = 'calendar-options-example/calendar-options-example.component.html';
 const calendarOptionSrc = 'calendar-options-example/calendar-options-example.component.ts';
 const calendarMarkHoverSrc = 'calendar-mark-hover/calendar-mark-hover.component.ts';
@@ -40,6 +43,7 @@ const calendarDisabledNavigationsHtml =
     'calendar-disabled-navigation-buttons-example/calendar-disabled-navigation-buttons-example.component.html';
 const calendarGridHtml = 'calendar-grid-example/calendar-grid-example.component.html';
 const calendarSingleSrc = 'calendar-single-example.component.ts';
+const calendarMultiSrc = 'calendar-multi-example.component.ts';
 const calendarMondayStartSrc = 'calendar-monday-start-example.component.ts';
 const calendarIntlSrc = 'calendar-i18n-example.component.ts';
 const calendarIntlMomentSrc = 'calendar--i18n-moment-example.component.ts';
@@ -72,7 +76,9 @@ const calendarProgrammaticallySource = 'calendar-programmatically-change-example
         CalendarMondayStartExampleComponent,
         CalendarI18nExampleComponent,
         CalendarFormExamplesComponent,
-        CalendarDisabledNavigationButtonsExampleComponent
+        CalendarDisabledNavigationButtonsExampleComponent,
+        CalendarMultiExampleComponent,
+        CalendarMultiRangeExampleComponent
     ]
 })
 export class CalendarDocsComponent {
@@ -174,12 +180,37 @@ specialDay: SpecialDayRule[] = [
         }
     ];
 
+    calendarMultiSource: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: this.exampleFunctionsHtml,
+            component: 'CalendarMultiExampleComponent',
+            fileName: 'calendar-multi-example',
+            name: 'Example Block/Disable Functions'
+        },
+        {
+            component: 'CalendarMultiExampleComponent',
+            language: 'typescript',
+            fileName: 'calendar-multi-example',
+            code: getAssetFromModuleAssets(calendarMultiSrc)
+        }
+    ];
+
     calendarRangeSource: ExampleFile[] = [
         {
             language: 'typescript',
             component: 'CalendarRangeExampleComponent',
             fileName: 'calendar-range-example',
             code: getAssetFromModuleAssets(calendarRangeSrc)
+        }
+    ];
+
+    calendarMultiRangeSource: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'CalendarMultiRangeExampleComponent',
+            fileName: 'calendar-multi-range-example',
+            code: getAssetFromModuleAssets(calendarMultiRangeSrc)
         }
     ];
 
