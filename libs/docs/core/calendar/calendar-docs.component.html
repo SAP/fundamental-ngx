@@ -84,6 +84,23 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="multi" componentName="calendar"> Multi Calendar</fd-docs-section-title>
+<description>
+    This example demonstrates <strong>multi-date selection</strong> functionality. <br /><br />
+    You can select multiple individual dates on the calendar using multi-selection mode. This feature allows you to
+    select several non-contiguous dates or dates by clicking on each date across the calendar.
+    <br /><br />
+    Multi-date selection works in conjunction with <code>showWeekNumbers</code> inputs. When WeekCount numbers are
+    visible user can click on it and selection logic will mark relevant week row. Also user can click on week day and
+    selection logic will mark relevant column. <br /><br />
+</description>
+<component-example>
+    <fd-calendar-multi-example></fd-calendar-multi-example>
+</component-example>
+<code-example [exampleFiles]="calendarMultiSource"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="range" componentName="calendar"> Range Selection Calendar </fd-docs-section-title>
 <description>
     Allows the selection of a range of dates. Only the first and last days of the range are passed back.
@@ -99,6 +116,23 @@
 <code-example [exampleFiles]="calendarRangeSource"></code-example>
 
 <separator></separator>
+
+<fd-docs-section-title id="multiRange" componentName="calendar"> Multi Range Selection Calendar</fd-docs-section-title>
+<description>
+    Allows the selection of a range of dates. Only the first and last days of the range are passed back.
+    <br /><br />
+    The <code>disableRangeStartFunction</code>, <code>disableRangeEndFunction</code>,
+    <code>blockRangeStartFunction</code> and <code>blockRangeEndFunction</code> inputs can be used in addition to the
+    <code>disableFunction</code> input to set independent rules for the start and end dates. In this example, the user
+    can only select a start date on or before August 17, 2024, and an end date on or after August 28, 2024.
+</description>
+<component-example>
+    <fd-calendar-multi-range-example></fd-calendar-multi-range-example>
+</component-example>
+<code-example [exampleFiles]="calendarMultiRangeSource"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="programmatic-date-change" componentName="calendar">
     Programmatic Date Change
 </fd-docs-section-title>
@@ -159,7 +193,9 @@
 <separator></separator> -->
 
 <fd-docs-section-title id="reactiveForm" componentName="calendar"> Calendar in Reactive Form </fd-docs-section-title>
-<description>The Calendar component may also be used within Angular Reactive Forms.</description>
+<description
+    >The Calendar component with every type: single, multi and range may also be used within Angular Reactive Forms.
+</description>
 <component-example>
     <fd-calendar-form-example></fd-calendar-form-example>
 </component-example>
