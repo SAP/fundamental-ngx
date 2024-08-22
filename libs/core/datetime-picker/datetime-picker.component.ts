@@ -25,7 +25,13 @@ import { ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Va
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import { CalendarComponent, CalendarYearGrid, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
+import {
+    CalendarComponent,
+    CalendarYearGrid,
+    DaysOfWeek,
+    FdCalendarView,
+    FdCalendarViewEnum
+} from '@fundamental-ngx/core/calendar';
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { FormItemControl, PopoverFormMessageService, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
@@ -140,6 +146,10 @@ export class DatetimePickerComponent<D>
     @Input()
     required = false;
 
+    /** Define a custom datetime format. Can be a string for DayjsDatetimeAdapter or object for FdDatetimeAdapter  */
+    @Input()
+    customDateTimeFormat: unknown;
+
     /**
      * Whether the time component should be meridian (am/pm).
      * Default value is based on the current locale format option
@@ -203,7 +213,7 @@ export class DatetimePickerComponent<D>
 
     /** Actually shown active view one of 'day' | 'month' | 'year' in calendar component*/
     @Input()
-    activeView: FdCalendarView = 'day';
+    activeView: FdCalendarView = FdCalendarViewEnum.Day;
 
     /** Whether a null input is considered valid. */
     @Input()
@@ -813,10 +823,9 @@ export class DatetimePickerComponent<D>
      * Format date time entity.
      */
     private _formatDateTime(dateTime: D): string {
-        const formattedDate: string = this._dateTimeAdapter.format(
-            dateTime,
-            this._dateTimeFormats.display.dateTimeInput
-        );
+        const formattedDate: string = this.customDateTimeFormat
+            ? this._dateTimeAdapter.format(dateTime, this.customDateTimeFormat)
+            : this._dateTimeAdapter.format(dateTime, this._dateTimeFormats.display.dateTimeInput);
         return formattedDate || '';
     }
 

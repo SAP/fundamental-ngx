@@ -49,4 +49,27 @@
         >
         </fdp-date-picker>
     </fdp-form-field>
+    <fdp-form-field
+        #ffl3
+        id="examDays"
+        [column]="1"
+        [rank]="3"
+        [required]="true"
+        placeholder="Enter your examDays"
+        label="Mobile date picker in portrait mode:"
+        [validators]="requiredDateValidator"
+    >
+        <fdp-date-picker
+            name="examDays"
+            type="single"
+            [allowNull]="false"
+            [allowMultipleSelection]="true"
+            [mobile]="true"
+            [mobilePortrait]="true"
+            [mobileConfig]="mobilePortraitConfig"
+            [formControl]="ffl3.formControl"
+            dateInputLabel="date input mm/dd/yyy"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
 </fdp-form-group>

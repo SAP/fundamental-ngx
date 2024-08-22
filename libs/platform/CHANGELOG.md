@@ -3,6 +3,68 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.3](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.21...v0.51.3) (2024-08-22)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.51.3-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.20...v0.51.3-rc.21) (2024-08-21)
+
+
+### Features
+
+* **core:** implement calendar multi selection option ([#12176](https://github.com/SAP/fundamental-ngx/issues/12176)) ([9a47c4b](https://github.com/SAP/fundamental-ngx/commit/9a47c4ba443863e294f10fae4eda144a74615739))
+
+
+
+
+
+## [0.51.3-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.19...v0.51.3-rc.20) (2024-08-21)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.51.3-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.18...v0.51.3-rc.19) (2024-08-21)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.51.3-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.17...v0.51.3-rc.18) (2024-08-21)
+
+
+### Bug Fixes
+
+* **platform:** set default color in _generateTabBarItems to prevent incorrect calculations ([#12287](https://github.com/SAP/fundamental-ngx/issues/12287)) ([4e78134](https://github.com/SAP/fundamental-ngx/commit/4e78134ff43ad07b4dad8e7296c382736741c8b7))
+
+
+
+
+
+## [0.51.3-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.16...v0.51.3-rc.17) (2024-08-20)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.51.3-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.15...v0.51.3-rc.16) (2024-08-20)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
 ## [0.51.3-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.14...v0.51.3-rc.15) (2024-08-16)
 
 
