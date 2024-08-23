@@ -66,6 +66,10 @@ export class BusyIndicatorComponent {
     @Input()
     ariaLive: Nullable<'assertive' | 'polite' | 'off'> = null;
 
+    /** Whether to stop mouse wheel events when the busy indicator is displayed via loading="true". */
+    @Input()
+    preventWheelEvents = false;
+
     /** @hidden */
     @ViewChild('fakeFocusElement')
     fakeFocusElement: ElementRef;
@@ -78,6 +82,15 @@ export class BusyIndicatorComponent {
     hostFocusChangeHandler(event: KeyboardEvent): void {
         if (this.loading && KeyUtil.isKeyCode(event, TAB) && !event.shiftKey) {
             this.fakeFocusElement.nativeElement.focus();
+        }
+    }
+
+    /** @hidden */
+    @HostListener('wheel', ['$event'])
+    wheelListener(event: WheelEvent): void {
+        if (this.preventWheelEvents && this.loading) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
         }
     }
 
