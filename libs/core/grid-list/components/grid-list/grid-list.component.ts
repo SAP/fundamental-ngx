@@ -335,29 +335,20 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
         } else if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             indexToFocus = currentItemIndex + itemsPerRow;
         }
-
-        this._focusGridListItem(indexToFocus, activeElement);
-    }
-
-    /** @hidden */
-    private _focusGridListItem(indexToFocus: number | undefined, activeElement: HTMLElement): void {
         if (indexToFocus !== undefined && indexToFocus >= 0 && indexToFocus < this._gridListItems.length) {
             const itemToFocus = this._gridListItems.toArray()[indexToFocus];
             if (itemToFocus && itemToFocus._gridListItem) {
-                // Find an element with the same tag name as the active element within the next/prev item
-                const elementToFocus = itemToFocus._gridListItem.nativeElement?.querySelector(
+                const elementToFocus = itemToFocus._gridListItem.nativeElement?.parentElement?.querySelector(
                     activeElement.tagName
                 ) as HTMLElement;
 
                 if (elementToFocus) {
                     elementToFocus.focus();
-                } else {
-                    // If no similar element found, fallback to focusing the whole grid item
-                    itemToFocus._gridListItem.nativeElement.focus();
                 }
             }
         }
     }
+
     /** @hidden */
     private _setFirstFocusableItem(): void {
         this._gridListItems.toArray().forEach((item, index) => {
