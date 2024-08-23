@@ -35,10 +35,12 @@ export class DialogRefBase<T, P = any> {
     }
 
     /**
-     * Closes the dialog and passes the argument to the afterClosed observable.
+     * Closes the dialog and emits the result to the afterClosed observable.
      * @param result Value passed back to the observable as a result.
      */
     close(result?: P): void {
+        this._endClose$.next();
+        this._endClose$.complete();
         this._afterClosed.next(result);
         this._afterClosed.complete();
     }
