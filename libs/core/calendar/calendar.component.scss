@@ -5,6 +5,10 @@
     display: block;
 }
 
+.fd-calendar {
+    padding: var(--fdCalendar_Padding);
+}
+
 .fd-calendar__text {
     max-width: calc(100% - 0.375rem);
 }
