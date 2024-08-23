@@ -18,11 +18,13 @@ import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import { ListIconDirective, ListLinkDirective, ListTitleDirective } from '@fundamental-ngx/core/list';
 import { PopoverComponent, TriggerConfig } from '@fundamental-ngx/core/popover';
+import { Placement } from '@fundamental-ngx/core/shared';
 import { TablePopoverDirective } from '@fundamental-ngx/core/table';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { FreeContentListItemComponent, ListComponent } from '@fundamental-ngx/platform/list';
 import {
     CollectionStringFilter,
+    ColumnAlignValue,
     FILTER_STRING_STRATEGY,
     FilterableColumnDataType,
     SortDirection,
@@ -187,6 +189,20 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     _popoverOpened(isOpen: boolean): void {
         if (isOpen) {
             this._listComponent?._setCurrentActiveItemIndex(0);
+        }
+    }
+
+    /** @hidden */
+    mapColumnAlignToPlacement(columnAlignValue: ColumnAlignValue): Placement {
+        switch (columnAlignValue) {
+            case 'start':
+                return 'bottom-start';
+            case 'center':
+                return 'bottom';
+            case 'end':
+                return 'bottom-end';
+            default:
+                return 'auto';
         }
     }
 }
