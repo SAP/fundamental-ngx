@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.0...v0.51.4-rc.1) (2024-08-23)
+
+
+### Features
+
+* **platform:** update naming of functions that get/set the currently rendered rows on the table ([#12259](https://github.com/SAP/fundamental-ngx/issues/12259)) ([06c3f3e](https://github.com/SAP/fundamental-ngx/commit/06c3f3ea3174df6775a9e5c305b2a4dc5efebdd5))
+
+
+
+
+
+## [0.51.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.51.3...v0.51.4-rc.0) (2024-08-23)
+
+
+### Bug Fixes
+
+* platform date picker e2e ([#12304](https://github.com/SAP/fundamental-ngx/issues/12304)) ([36ac9f7](https://github.com/SAP/fundamental-ngx/commit/36ac9f7b89fd9d05ff36b1c4579de0417377505f))
+
+
+
+
+
 ## [0.51.3](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.21...v0.51.3) (2024-08-22)
 
 **Note:** Version bump only for package fundamental-ngx

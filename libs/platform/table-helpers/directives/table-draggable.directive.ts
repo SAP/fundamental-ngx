@@ -138,8 +138,8 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
 
         this._onZoneFree(() => {
             if (this.isTreeTable && event.draggedItemIndex !== event.replacedItemIndex) {
-                event.draggedItemIndex = this._table._tableRowsInViewPortPlaceholder[event.draggedItemIndex];
-                event.replacedItemIndex = this._table._tableRowsInViewPortPlaceholder[event.replacedItemIndex];
+                event.draggedItemIndex = this._table._tableCurrentlyRenderedRowsPlaceholder[event.draggedItemIndex];
+                event.replacedItemIndex = this._table._tableCurrentlyRenderedRowsPlaceholder[event.replacedItemIndex];
                 const dragRow = this._table._tableRows.find(
                     (row) => row === this._table._tableRowsVisible[event.draggedItemIndex]
                 );
