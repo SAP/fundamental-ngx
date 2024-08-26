@@ -237,12 +237,14 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     }
 
     /** @hidden */
-    _moveActiveToTop(): void {
+    _moveActiveToTop(event: Event): void {
+        event.stopPropagation();
         this._moveColumnInFilteredListByIndex(this._getActiveColumnIndexInFilteredList(), 0);
     }
 
     /** @hidden */
-    _moveActiveToBottom(): void {
+    _moveActiveToBottom(event: Event): void {
+        event.stopPropagation();
         this._moveColumnInFilteredListByIndex(
             this._getActiveColumnIndexInFilteredList(),
             this._filteredColumns.length - 1
@@ -250,15 +252,22 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     }
 
     /** @hidden */
-    _moveActiveUp(): void {
+    _moveActiveUp(event: Event): void {
+        event.stopPropagation();
         const activeColumnIndex = this._getActiveColumnIndexInFilteredList();
         this._moveColumnInFilteredListByIndex(activeColumnIndex, activeColumnIndex - 1);
     }
 
     /** @hidden */
-    _moveActiveDown(): void {
+    _moveActiveDown(event: Event): void {
+        event.stopPropagation();
         const activeColumnIndex = this._getActiveColumnIndexInFilteredList();
         this._moveColumnInFilteredListByIndex(activeColumnIndex, activeColumnIndex + 1);
+    }
+
+    /** @hidden */
+    _isReorderColumnButtonShowable(item: SelectableColumn): boolean {
+        return item.active && item.selected;
     }
 
     /** @hidden */

@@ -77,8 +77,8 @@
                         [disabled]="_moveUpDisabled"
                         [attr.aria-label]="'platformTable.P13ColumnsDialogMoveToTopBtn' | fdTranslate"
                         [title]="'platformTable.P13ColumnsDialogMoveToTopBtn' | fdTranslate"
-                        (click)="_moveActiveToTop()"
-                        *ngIf="item.active"
+                        (click)="_moveActiveToTop($event)"
+                        *ngIf="_isReorderColumnButtonShowable(item)"
                     ></button>
                     <button
                         fd-button
@@ -87,8 +87,8 @@
                         [disabled]="_moveUpDisabled"
                         [attr.aria-label]="'platformTable.P13ColumnsDialogMoveUpBtn' | fdTranslate"
                         [title]="'platformTable.P13ColumnsDialogMoveUpBtn' | fdTranslate"
-                        (click)="_moveActiveUp()"
-                        *ngIf="item.active"
+                        (click)="_moveActiveUp($event)"
+                        *ngIf="_isReorderColumnButtonShowable(item)"
                     ></button>
                     <button
                         fd-button
@@ -97,8 +97,8 @@
                         [disabled]="_moveDownDisabled"
                         [attr.aria-label]="'platformTable.P13ColumnsDialogMoveDownBtn' | fdTranslate"
                         [title]="'platformTable.P13ColumnsDialogMoveDownBtn' | fdTranslate"
-                        (click)="_moveActiveDown()"
-                        *ngIf="item.active"
+                        (click)="_moveActiveDown($event)"
+                        *ngIf="_isReorderColumnButtonShowable(item)"
                     ></button>
                     <button
                         fd-button
@@ -107,8 +107,8 @@
                         [disabled]="_moveDownDisabled"
                         [attr.aria-label]="'platformTable.P13ColumnsDialogMoveToBottomBtn' | fdTranslate"
                         [title]="'platformTable.P13ColumnsDialogMoveToBottomBtn' | fdTranslate"
-                        (click)="_moveActiveToBottom()"
-                        *ngIf="item.active"
+                        (click)="_moveActiveToBottom($event)"
+                        *ngIf="_isReorderColumnButtonShowable(item)"
                     ></button>
                 </li>
             }
