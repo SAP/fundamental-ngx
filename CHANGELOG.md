@@ -3,6 +3,87 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.3...v0.51.4-rc.4) (2024-08-26)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.51.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.2...v0.51.4-rc.3) (2024-08-25)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.51.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.1...v0.51.4-rc.2) (2024-08-25)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.51.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.0...v0.51.4-rc.1) (2024-08-23)
+
+
+### Features
+
+* **platform:** update naming of functions that get/set the currently rendered rows on the table ([#12259](https://github.com/SAP/fundamental-ngx/issues/12259)) ([06c3f3e](https://github.com/SAP/fundamental-ngx/commit/06c3f3ea3174df6775a9e5c305b2a4dc5efebdd5))
+
+
+
+
+
+## [0.51.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.51.3...v0.51.4-rc.0) (2024-08-23)
+
+
+### Bug Fixes
+
+* platform date picker e2e ([#12304](https://github.com/SAP/fundamental-ngx/issues/12304)) ([36ac9f7](https://github.com/SAP/fundamental-ngx/commit/36ac9f7b89fd9d05ff36b1c4579de0417377505f))
+
+
+
+
+
+## [0.51.3](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.21...v0.51.3) (2024-08-22)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.51.3-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.20...v0.51.3-rc.21) (2024-08-21)
+
+
+### Features
+
+* **core:** implement calendar multi selection option ([#12176](https://github.com/SAP/fundamental-ngx/issues/12176)) ([9a47c4b](https://github.com/SAP/fundamental-ngx/commit/9a47c4ba443863e294f10fae4eda144a74615739))
+
+
+
+
+
+## [0.51.3-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.19...v0.51.3-rc.20) (2024-08-21)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.51.3-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.18...v0.51.3-rc.19) (2024-08-21)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 ## [0.51.3-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.17...v0.51.3-rc.18) (2024-08-21)
 
 

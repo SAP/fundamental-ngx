@@ -1,10 +1,11 @@
-import { ComponentFixture, TestBed, inject, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { first } from 'rxjs/operators';
 
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { CalendarService } from '../../calendar.service';
 import { CalendarDay } from '../../models/calendar-day';
+import { CalendarService } from '../../calendar.service';
 import { CalendarDayViewComponent } from './calendar-day-view.component';
+
 
 describe('CalendarDayViewComponent', () => {
     let component: CalendarDayViewComponent<FdDate>;
@@ -57,6 +58,38 @@ describe('CalendarDayViewComponent', () => {
         );
         const selected = calendarDays.find((cell) => cell.selected);
         expect(selected?.date.toDateString()).toBe(component.selectedDate.toDateString());
+    });
+
+    it('Should Select Proper multi Date', (done) => {
+        component.currentlyDisplayed = { month: 10, year: 2018 };
+        component.allowMultipleSelection = true;
+        component.ngOnInit();
+        const dayPicked = component._dayViewGrid[2][3];
+        component.selectedMultipleDatesChange.subscribe((date: FdDate[]) => {
+            expect(date).toContain(dayPicked.date);
+            done();
+        });
+        component.selectDate(dayPicked);
+    });
+
+    it('Should mark selected multi date', () => {
+        component.currentlyDisplayed = { month: 10, year: 2018 };
+        component.allowMultipleSelection = true;
+        component.selectedMultipleDates = [
+            new FdDate(2018, 10, 20),
+            new FdDate(2018, 10, 21)
+        ];
+        component.ngOnInit();
+        const calendarDays: CalendarDay<FdDate>[] = component._dayViewGrid.reduce(
+            (a: CalendarDay<FdDate>[], b: CalendarDay<FdDate>[]) => {
+                if (!b) {
+                    b = [];
+                }
+                return b.concat(a);
+            }
+        );
+        const selected = calendarDays.filter((cell) => cell.selected).map(d => d.date);
+        expect(selected).toEqual(component.selectedMultipleDates);
     });
 
     it('Should Select Proper First Range Date', (done) => {
@@ -261,5 +294,99 @@ describe('CalendarDayViewComponent', () => {
         expect(component._calendarDayList.filter((_day) => _day.disabled).length).toBe(4);
         expect(newlyChosenDate.selected).toBe(true);
         expect(secondNewlyChosenDate.selected).toBe(true);
+    });
+
+    it('should mark selected multiple date ranges', () => {
+        component.currentlyDisplayed = { month: 10, year: 2018 };
+        component.calType = 'range';
+        component.allowMultipleSelection = true;
+
+        // Initialize with specific start and end dates
+        const startDate = new FdDate(2018, 10, 20);
+        const endDate = new FdDate(2018, 10, 21);
+        component.selectedMultipleDateRanges = [
+            { start: startDate, end: endDate }
+        ];
+
+        component.ngOnInit();
+
+        const selectedRange = component.selectedMultipleDateRanges[0];
+        expect(selectedRange.start?.toDateString()).toEqual(startDate.toDateString());
+        expect(selectedRange.end?.toDateString()).toEqual(endDate.toDateString());
+    });
+
+    it('should add flags to cells when multiple ranges are picked', () => {
+        component.currentlyDisplayed = { month: 10, year: 2018 };
+        component.calType = 'range';
+        component.allowMultipleSelection = true;
+
+        const startDate1 = new FdDate(2018, 10, 1);
+        const endDate1 = new FdDate(2018, 10, 5);
+        const startDate2 = new FdDate(2018, 10, 10);
+        const endDate2 = new FdDate(2018, 10, 15);
+
+        component.selectedMultipleDateRanges = [
+            { start: startDate1, end: endDate1 },
+            { start: startDate2, end: endDate2 }
+        ];
+
+        component.ngOnInit();
+
+        const firstRangeDays = component._calendarDayList.slice(0, 5);
+        const secondRangeDays = component._calendarDayList.slice(9, 15);
+
+        firstRangeDays.forEach(day => {
+            expect(day.selected).toBeTruthy();
+        });
+
+        secondRangeDays.forEach(day => {
+            expect(day.selected).toBeTruthy();
+        });
+    });
+
+    it('should apply _isOnRangePick flag for multiple ranges', () => {
+        component.currentlyDisplayed.year = 2015;
+        component.currentlyDisplayed.month = 6;
+        component.rangeHoverEffect = true;
+        component.calType = 'range';
+        component.allowMultipleSelection = true;
+        component.ngOnInit();
+        component.selectedMultipleDateRanges = [{ start: null, end: null }];
+        component.selectDate(component._calendarDayList[10], new MouseEvent('click'));
+        expect((<any>component)._isOnRangePick).toBe(true);
+    });
+
+    it('should apply hover range flags on days for multiple ranges', () => {
+        component.currentlyDisplayed.year = 2020;
+        component.currentlyDisplayed.month = 4;
+        const date = new FdDate(2020, 4, 15);
+
+        component.rangeHoverEffect = true;
+        component.calType = 'range';
+        component.allowMultipleSelection = true;
+
+        component.ngOnInit();
+        component.selectedMultipleDateRanges = [{ start: date, end: date }];
+
+        // Simulate the first date selection
+        component.selectDate(component._calendarDayList[10]);
+
+        // Hover over a different date to simulate the range effect
+        component._refreshHoverRange(component._calendarDayList[15]);
+
+        expect(component._calendarDayList.filter((_day) => _day.hoverRange).length).toBeGreaterThan(0);
+    });
+
+
+    it('should put additional property select on single day in multiple ranges', () => {
+        component.currentlyDisplayed.year = 2020;
+        component.currentlyDisplayed.month = 4;
+        const date = new FdDate(2020, 4, 15);
+        component.selectedDate = date;
+        component.allowMultipleSelection = true;
+        component.ngOnInit();
+        component.selectDate(component._calendarDayList[15]);
+        expect(component.selectedDate).toEqual(component._calendarDayList[14].date);
+        expect(component._calendarDayList[15].selected).toBe(true);
     });
 });

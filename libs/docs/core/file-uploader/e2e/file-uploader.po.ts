@@ -4,7 +4,6 @@ export class FileUploaderPo extends CoreBaseComponentPo {
     url = '/file-uploader';
 
     fileUploaderExample = 'fd-file-uploader-example ';
-    fileUploaderCompactExample = 'fd-file-uploader-compact-example ';
 
     fileUploaderInput = '.fd-file-uploader__input';
     browseButton = 'fd-file-uploader button:not([disabled])';
