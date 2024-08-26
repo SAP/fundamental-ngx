@@ -64,7 +64,7 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
 
     abstract loadedRows$: Signal<number>;
 
-    abstract _tableRowsInViewPortPlaceholder: number[];
+    abstract _tableCurrentlyRenderedRowsPlaceholder: number[];
 
     abstract minimumColumnWidth: number;
 
@@ -164,9 +164,9 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     /** Returns current preset. */
     abstract getCurrentPreset(): PlatformTableManagedPreset;
 
-    abstract getRowsInViewport(): number[];
+    abstract getCurrentlyRenderedRows(): number[];
 
-    abstract setRowsInViewport(startIndex: number, length: number): void;
+    abstract setCurrentlyRenderedRows(startIndex: number, length: number): void;
 
     abstract toggleExpandableTableRow(row: TableRow<T>, forceFetch?: boolean);
 

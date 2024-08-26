@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.3...v0.51.4-rc.4) (2024-08-26)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.51.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.2...v0.51.4-rc.3) (2024-08-25)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.51.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.1...v0.51.4-rc.2) (2024-08-25)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.51.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.0...v0.51.4-rc.1) (2024-08-23)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.51.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.51.3...v0.51.4-rc.0) (2024-08-23)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
+## [0.51.3](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.21...v0.51.3) (2024-08-22)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
 ## [0.51.3-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.20...v0.51.3-rc.21) (2024-08-21)
 
 **Note:** Version bump only for package @fundamental-ngx/cx
