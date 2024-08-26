@@ -22,7 +22,7 @@ This repository contains 2 libraries(npm packages),
 
 ## <a name="2"></a>2. Requirements
 
-To download and use Fundamental Library for Angular, you will first need to install the [node package manager](https://www.npmjs.com/get-npm).
+To download and use Fundamental Library for Angular, you will first need to install the [node package manager](https://www.npmjs.com/get-npm) and [yarn package manager](https://yarnpkg.com/getting-started/install) (`corepack enable` and then `yarn`).
 
 Fundamental Library for Angular is intended for use with Angular 15 or newer.
 

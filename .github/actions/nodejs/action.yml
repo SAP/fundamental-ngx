@@ -19,9 +19,25 @@ runs:
           with:
               node-version: ${{ inputs.node-version }}
 
+        - name: Install Corepack
+          shell: bash
+          run: npm install -g corepack
+
+        - name: Enable Corepack for Yarn 4.4.1
+          shell: bash
+          run: |
+              corepack enable yarn && yarn
+
+        - name: Install Yarn 4.4.1 (if not available)
+          shell: bash
+          run: |
+              if ! yarn --version | grep -q "4.4.1"; then
+                npm install -g yarn@4.4.1
+              fi
+
         - name: Get yarn cache directory path
           id: yarn-cache-dir-path
-          run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+          run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
           shell: bash
 
         - name: Use the global Yarn cache if available
