@@ -748,7 +748,7 @@ export class TableComponent<T = any>
      * Used to create a row component placeholder and set data in it rather than re-create the row component when data changes.
      * Optimizes performance due to skipping initial setup of the component.
      */
-    _tableRowsInViewPortPlaceholder: number[] = [];
+    _tableCurrentlyRenderedRowsPlaceholder: number[] = [];
     /** @hidden */
     _dndTableRowsPlaceholder: TableRow[] = [];
     /** @hidden */
@@ -889,18 +889,18 @@ export class TableComponent<T = any>
         );
     }
 
-    /** Returns array of rows that are currently in viewport. */
-    getRowsInViewport(): number[] {
-        return this._tableRowsInViewPortPlaceholder;
+    /** Returns array of rows that are currently rendered in the table body. */
+    getCurrentlyRenderedRows(): number[] {
+        return this._tableCurrentlyRenderedRowsPlaceholder;
     }
 
     /**
-     * Sets an array of rows that are currently in viewport.
+     * Sets an array of rows that are currently rendered in the table body.
      * @param startIndex Start index of all rows.
-     * @param length Length of viewport rows.
+     * @param length Length of rows.
      */
-    setRowsInViewport(startIndex = 0, length: number): void {
-        this._tableRowsInViewPortPlaceholder = new Array(length).fill(null).map((_, i) => i + startIndex);
+    setCurrentlyRenderedRows(startIndex = 0, length: number): void {
+        this._tableCurrentlyRenderedRowsPlaceholder = new Array(length).fill(null).map((_, i) => i + startIndex);
         this._dndTableRowsPlaceholder = this._tableRows.slice(startIndex, length);
         this._cdr.detectChanges();
     }
@@ -1429,7 +1429,7 @@ export class TableComponent<T = any>
         this._tableRows = [];
         this.loadedRows$.set(0);
         this._tableRowsVisible = [];
-        this._tableRowsInViewPortPlaceholder = [];
+        this._tableCurrentlyRenderedRowsPlaceholder = [];
         this._newTableRows = [];
         this._dataSourceTableRows = [];
         this._setTableRows([]);
@@ -1977,7 +1977,7 @@ export class TableComponent<T = any>
         if (this._virtualScrollDirective?.virtualScroll) {
             this._virtualScrollDirective.calculateVirtualScrollRows();
         } else {
-            this.setRowsInViewport(0, this._tableRowsVisible.length);
+            this.setCurrentlyRenderedRows(0, this._tableRowsVisible.length);
         }
     }
 
