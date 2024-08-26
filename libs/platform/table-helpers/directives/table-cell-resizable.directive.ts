@@ -5,7 +5,7 @@ import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective, RtlService } from
 import { TableCellDirective } from '@fundamental-ngx/core/table';
 import equal from 'fast-deep-equal';
 import { fromEvent } from 'rxjs';
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { TableColumnResizeService } from '../services/table-column-resize.service';
 
 export type TableColumnResizableSide = 'start' | 'end' | 'both';
@@ -71,6 +71,7 @@ export class PlatformTableCellResizableDirective
             fromEvent<MouseEvent>(this.elementRef.nativeElement, 'mousemove')
                 .pipe(
                     filter(() => this._tableColumnResizeService?.resizeInProgress !== true),
+                    debounceTime(5),
                     map((event) => this._getResizer(event) || { resizerPosition: 0, resizedColumn: this.columnName }),
                     distinctUntilChanged((prev, curr) => equal(prev, curr)),
                     takeUntilDestroyed(this._destroyRef)
@@ -104,38 +105,42 @@ export class PlatformTableCellResizableDirective
     private _getResizer(event: MouseEvent): { resizerPosition: number; resizedColumn: string } | null {
         const el = this.elementRef.nativeElement;
         const elPosition = el.getBoundingClientRect();
+        // check if mouse is within 5px of cell border
+        if (event.clientX > elPosition.x + elPosition.width - 5 || event.clientX < elPosition.x + 5) {
+            let resizerPosition: number | undefined;
+            let resizedColumn: string | undefined;
 
-        let resizerPosition: number | undefined;
-        let resizedColumn: string | undefined;
+            const pointerOnLeft = this._rtl$()
+                ? elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX
+                : event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX;
 
-        const pointerOnLeft = this._rtl$()
-            ? elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX
-            : event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX;
+            if (pointerOnLeft && this._resizableSide !== 'end') {
+                resizerPosition = this._rtl$()
+                    ? el.parentElement!.offsetWidth - (el.offsetLeft + el.offsetWidth)
+                    : el.offsetLeft;
 
-        if (pointerOnLeft && this._resizableSide !== 'end') {
-            resizerPosition = this._rtl$()
-                ? el.parentElement!.offsetWidth - (el.offsetLeft + el.offsetWidth)
-                : el.offsetLeft;
+                resizedColumn = this._tableColumnResizeService.getPreviousColumnName(this.columnName);
+            }
 
-            resizedColumn = this._tableColumnResizeService.getPreviousColumnName(this.columnName);
-        }
+            const pointerOnRight = this._rtl$()
+                ? event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX
+                : elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX;
 
-        const pointerOnRight = this._rtl$()
-            ? event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX
-            : elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX;
+            if (pointerOnRight && this._resizableSide !== 'start') {
+                resizerPosition = this._rtl$()
+                    ? el.parentElement!.offsetWidth - el.offsetLeft
+                    : el.offsetLeft + el.offsetWidth;
 
-        if (pointerOnRight && this._resizableSide !== 'start') {
-            resizerPosition = this._rtl$()
-                ? el.parentElement!.offsetWidth - el.offsetLeft
-                : el.offsetLeft + el.offsetWidth;
+                resizedColumn = this.columnName;
+            }
 
-            resizedColumn = this.columnName;
-        }
+            if (!resizedColumn) {
+                return null;
+            }
 
-        if (!resizedColumn) {
+            return { resizerPosition: resizerPosition!, resizedColumn };
+        } else {
             return null;
         }
-
-        return { resizerPosition: resizerPosition!, resizedColumn };
     }
 }
