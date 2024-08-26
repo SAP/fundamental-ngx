@@ -76,7 +76,7 @@
                     (dropPredicateCalculating)="_calculatingLoading($event)"
                     (dropCancelled)="_dndTableDirective?.dropCancelled()"
                 >
-                    @for (rowIndex of _tableRowsInViewPortPlaceholder; track _rowTrackBy($index, rowIndex)) {
+                    @for (rowIndex of _tableCurrentlyRenderedRowsPlaceholder; track _rowTrackBy($index, rowIndex)) {
                         @if (_tableRowsVisible[rowIndex]; as row) {
                             @switch (row.type) {
                                 @case ('group') {
