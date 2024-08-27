@@ -1,4 +1,4 @@
-import { ENTER, ESCAPE, F2, F7, MAC_ENTER, SPACE } from '@angular/cdk/keycodes';
+import { ENTER, F2, F7, MAC_ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -301,6 +301,9 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     private readonly subscription = new Subscription();
 
     /** @hidden */
+    private _innerElementFocused = signal<boolean>(false);
+
+    /** @hidden */
     constructor(
         private readonly _cd: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
@@ -429,14 +432,11 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
 
         this.press.emit(this._outputEventValue);
     }
-
     /** @hidden */
     _onKeyDown(event: KeyboardEvent): void {
         const activeElement = document.activeElement as HTMLElement;
         const isFocused = activeElement === this._gridListItem.nativeElement;
         const shouldFocusChild = KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER, F2, F7]) && !event.shiftKey && isFocused;
-        const shouldFocusCell =
-            ((KeyUtil.isKeyCode(event, [F2, F7]) && event.shiftKey) || KeyUtil.isKeyCode(event, ESCAPE)) && !isFocused;
         if (shouldFocusChild) {
             event.stopPropagation();
             const interactiveElements = this._gridListItem.nativeElement.querySelectorAll(
@@ -448,13 +448,14 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
             interactiveElements.forEach((element) => {
                 element.setAttribute('tabindex', '0');
             });
+            this._innerElementFocused.set(true);
             return;
-        } else if (shouldFocusCell) {
+        } else if (this._innerElementFocused() && KeyUtil.isKeyCode(event, [F2, F7])) {
             event.stopPropagation();
             this._gridListItem.nativeElement.focus();
+            this._innerElementFocused.set(false);
             return;
         }
-
         const target = event.target as HTMLDivElement;
 
         const isSelectionKeyDown = KeyUtil.isKeyCode(event, [ENTER, SPACE]);
