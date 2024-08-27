@@ -163,7 +163,10 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     /** @hidden */
     _popoverOpened(isOpen: boolean): void {
         if (isOpen) {
-            this._listComponent?._setCurrentActiveItemIndex(0);
+            if (this._listComponent) {
+                this._listComponent._setSetSize = false;
+                this._listComponent._setCurrentActiveItemIndex(0);
+            }
         }
     }
 }

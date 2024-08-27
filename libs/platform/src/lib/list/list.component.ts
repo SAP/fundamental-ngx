@@ -324,6 +324,9 @@ export class ListComponent<T>
     /** @hidden */
     _ariaSetSize: Observable<number> = new Observable();
 
+    /*8 @hidden */
+    _setSetSize = true;
+
     /** @hidden */
     protected _dataSource: ListDataSource<T>;
 

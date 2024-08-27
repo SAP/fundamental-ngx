@@ -9,7 +9,11 @@ import { BaseListItem } from '../base-list-item';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => FreeContentListItemComponent) }],
     host: {
-        role: 'listitem'
+        role: 'listitem',
+        '[attr.aria-label]': 'ariaLabel',
+        '[attr.aria-describedby]': 'ariaDescribedBy',
+        '[attr.aria-level]': 'ariaLevel',
+        '[attr.aria-selected]': '_selectedAttr',
     }
 })
 export class FreeContentListItemComponent extends BaseListItem {}

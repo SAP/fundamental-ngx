@@ -192,12 +192,12 @@ export class ListItemComponent<T = any>
 
     /** @hidden */
     @HostBinding('attr.role')
-    private get roleAttr(): string {
+    private get roleAttr(): Nullable<string> {
         return this.ariaRole || this._role;
     }
 
     /** @hidden */
-    private _role = 'listitem'; // default for li elements
+    private _role: Nullable<string>; // default for li elements
 
     /** @hidden */
     readonly _uniqueId = 'fd-list-item-' + ++listItemUniqueId;
