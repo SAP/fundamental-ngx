@@ -90,7 +90,7 @@ jobs:
               with:
                   fetch-depth: 0
             - uses: ./.github/actions/nodejs
-            - run: npx nx run docs:compile:production
+            - run: npx nx run docs:compile:production --skip-nx-cache
             - uses: browser-actions/setup-chrome@latest
               with:
                   chrome-version: stable
@@ -121,7 +121,7 @@ jobs:
             - name: Test affected on local
               if: ${{ !steps.firebase_hosting_preview.outputs.details_url }}
               run: |
-                  NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx run docs:e2e-app
+                  NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx run docs:e2e-app --skip-nx-cache
 
     stop_agents:
         if: ${{ always() }}
