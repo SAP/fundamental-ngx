@@ -239,12 +239,14 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     /** @hidden */
     _moveActiveToTop(event: Event): void {
         event.stopPropagation();
+        event.preventDefault();
         this._moveColumnInFilteredListByIndex(this._getActiveColumnIndexInFilteredList(), 0);
     }
 
     /** @hidden */
     _moveActiveToBottom(event: Event): void {
         event.stopPropagation();
+        event.preventDefault();
         this._moveColumnInFilteredListByIndex(
             this._getActiveColumnIndexInFilteredList(),
             this._filteredColumns.length - 1
@@ -254,6 +256,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     /** @hidden */
     _moveActiveUp(event: Event): void {
         event.stopPropagation();
+        event.preventDefault();
         const activeColumnIndex = this._getActiveColumnIndexInFilteredList();
         this._moveColumnInFilteredListByIndex(activeColumnIndex, activeColumnIndex - 1);
     }
@@ -261,6 +264,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     /** @hidden */
     _moveActiveDown(event: Event): void {
         event.stopPropagation();
+        event.preventDefault();
         const activeColumnIndex = this._getActiveColumnIndexInFilteredList();
         this._moveColumnInFilteredListByIndex(activeColumnIndex, activeColumnIndex + 1);
     }
