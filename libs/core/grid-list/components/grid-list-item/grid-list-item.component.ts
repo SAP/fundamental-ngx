@@ -1,4 +1,4 @@
-import { ENTER, F2, F7, MAC_ENTER, SPACE } from '@angular/cdk/keycodes';
+import { ENTER, ESCAPE, F2, F7, MAC_ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -435,6 +435,8 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         const activeElement = document.activeElement as HTMLElement;
         const isFocused = activeElement === this._gridListItem.nativeElement;
         const shouldFocusChild = KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER, F2, F7]) && !event.shiftKey && isFocused;
+        const shouldFocusCell =
+            ((KeyUtil.isKeyCode(event, [F2, F7]) && event.shiftKey) || KeyUtil.isKeyCode(event, ESCAPE)) && !isFocused;
         if (shouldFocusChild) {
             event.stopPropagation();
             const interactiveElements = this._gridListItem.nativeElement.querySelectorAll(
@@ -446,6 +448,10 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
             interactiveElements.forEach((element) => {
                 element.setAttribute('tabindex', '0');
             });
+            return;
+        } else if (shouldFocusCell) {
+            event.stopPropagation();
+            this._gridListItem.nativeElement.focus();
             return;
         }
 
