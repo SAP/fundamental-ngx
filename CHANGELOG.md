@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.5...v0.51.4-rc.6) (2024-08-27)
+
+
+### Bug Fixes
+
+* **docs:** form message updates ([#12292](https://github.com/SAP/fundamental-ngx/issues/12292)) ([7210f36](https://github.com/SAP/fundamental-ngx/commit/7210f36632549f150ff57f5070ca8e5c55a8afab))
+
+
+
+
+
+## [0.51.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.4...v0.51.4-rc.5) (2024-08-26)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 ## [0.51.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.3...v0.51.4-rc.4) (2024-08-26)
 
 **Note:** Version bump only for package fundamental-ngx
