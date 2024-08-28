@@ -234,12 +234,15 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
     handleKeydown(event: KeyboardEvent): void {
         this._handleTabKeydown(event);
         if (KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
-            this._handleArrowKeydown(event);
+            if (event.shiftKey && this.selectionMode === 'multiSelect') {
+                this._handleShiftArrowKeydown(event);
+            } else {
+                this._handleArrowKeydown(event);
+            }
         } else if (event.shiftKey && this.selectionMode === 'multiSelect' && KeyUtil.isKeyCode(event, [HOME, END])) {
             this._handleHomeEndKeydown(event);
         }
     }
-
     /** @hidden */
     private _handleHomeEndKeydown(event: KeyboardEvent): void {
         event.preventDefault();
@@ -309,44 +312,81 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
     }
 
     /** @hidden */
-    private _handleArrowKeydown(event: KeyboardEvent): void {
+    private _handleShiftArrowKeydown(event: KeyboardEvent): void {
+        this._handleArrowKeydown(event, true);
+    }
+
+    /** @hidden */
+    private _handleArrowKeydown(event: KeyboardEvent, isShiftPressed = false): void {
+        event.preventDefault();
         const activeElement = document.activeElement as HTMLElement;
 
-        event.preventDefault();
-        const currentItemIndex = this._gridListItems
-            .toArray()
-            .findIndex((item) => item._gridListItem.nativeElement.contains(activeElement));
-
+        const currentItemIndex = this._getCurrentItemIndex(activeElement);
         if (currentItemIndex === -1) {
             return;
         }
 
-        let indexToFocus: number | undefined;
+        const indexToFocus = this._calculateIndexToFocus(event, currentItemIndex);
+        if (indexToFocus === undefined) {
+            return;
+        }
+
+        if (isShiftPressed) {
+            this._toggleSelection(indexToFocus);
+        }
+
+        this._focusItemAtIndex(indexToFocus, activeElement);
+    }
+
+    /** hidden */
+    private _calculateIndexToFocus(event: KeyboardEvent, currentItemIndex: number): number | undefined {
         const itemsPerRow = this._getItemsPerRow(
             this._gridListItems.toArray()[currentItemIndex]._gridListItem.nativeElement
         );
 
         if (KeyUtil.isKeyCode(event, LEFT_ARROW) || (this._rtl$() && KeyUtil.isKeyCode(event, [RIGHT_ARROW]))) {
-            indexToFocus = currentItemIndex - 1;
+            return currentItemIndex - 1;
         } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW) || (this._rtl$() && KeyUtil.isKeyCode(event, [LEFT_ARROW]))) {
-            indexToFocus = currentItemIndex + 1;
+            return currentItemIndex + 1;
         } else if (KeyUtil.isKeyCode(event, UP_ARROW)) {
-            indexToFocus = currentItemIndex - itemsPerRow;
+            return currentItemIndex - itemsPerRow;
         } else if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
-            indexToFocus = currentItemIndex + itemsPerRow;
+            return currentItemIndex + itemsPerRow;
         }
-        if (indexToFocus !== undefined && indexToFocus >= 0 && indexToFocus < this._gridListItems.length) {
+        return undefined;
+    }
+
+    /** hidden */
+    private _getCurrentItemIndex(activeElement: HTMLElement): number {
+        return this._gridListItems
+            .toArray()
+            .findIndex((item) => item._gridListItem.nativeElement.contains(activeElement));
+    }
+
+    /** hidden */
+    private _focusItemAtIndex(indexToFocus: number, activeElement: HTMLElement): void {
+        if (indexToFocus >= 0 && indexToFocus < this._gridListItems.length) {
             const itemToFocus = this._gridListItems.toArray()[indexToFocus];
             if (itemToFocus && itemToFocus._gridListItem) {
                 const elementToFocus = itemToFocus._gridListItem.nativeElement?.parentElement?.querySelector(
                     activeElement.tagName
                 ) as HTMLElement;
-
                 if (elementToFocus) {
                     elementToFocus.focus();
                 }
             }
         }
+    }
+
+    /** hidden */
+    private _toggleSelection(indexToFocus: number): void {
+        const currentItem = this._gridListItems.toArray()[indexToFocus];
+        const selectionAction = currentItem._selectedItem
+            ? GridListSelectionActions.REMOVE
+            : GridListSelectionActions.ADD;
+
+        console.log(selectionAction);
+        this.setSelectedItem(currentItem as any, indexToFocus, selectionAction);
     }
 
     /** @hidden */
