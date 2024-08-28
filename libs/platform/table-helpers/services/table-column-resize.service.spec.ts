@@ -1,6 +1,5 @@
 import { ElementRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { TABLE_COLUMN_MIN_WIDTH } from '../constants';
 import { TableColumn } from '../table-column';
 
 import { TABLE_RESIZER_BORDER_WIDTH, TableColumnResizeService } from './table-column-resize.service';
@@ -120,7 +119,7 @@ describe('TableColumnResizeService', () => {
         service.startResize({ clientX: clientStartX } as MouseEvent);
         service.finishResize({ clientX: clientEndX } as MouseEvent);
 
-        expect(service.getColumnWidthStyle(tableColumn.name)).toEqual(TABLE_COLUMN_MIN_WIDTH + 'px');
+        expect(service.getColumnWidthStyle(tableColumn.name)).toEqual('50px');
     });
 
     it('should handle resize with a custom minimumColumnWidth', () => {
@@ -147,7 +146,7 @@ describe('TableColumnResizeService', () => {
         service.setColumnNames(tableColumnNames);
         service.setInitialResizerPosition(0, tableColumn.name);
 
-        service.setTableRef({ minimumColumnWidth: 100 } as any);
+        service.setTableRef({ minimumColumnWidth: 100, getVisibleTableColumns: () => [visibleColumn] } as any);
 
         service.startResize({ clientX: clientStartX } as MouseEvent);
         service.finishResize({ clientX: clientEndX } as MouseEvent);
