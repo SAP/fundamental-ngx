@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.52.1...v0.52.2-rc.0) (2024-08-28)
+
+
+### Bug Fixes
+
+* **platform:** add input for restricting table column min width ([#12267](https://github.com/SAP/fundamental-ngx/issues/12267)) ([3375913](https://github.com/SAP/fundamental-ngx/commit/3375913bad0258176170fc4678f98efd9e72522b))
+
+
+
+
+
 ## [0.52.1](https://github.com/SAP/fundamental-ngx/compare/v0.52.1-rc.1...v0.52.1) (2024-08-27)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
