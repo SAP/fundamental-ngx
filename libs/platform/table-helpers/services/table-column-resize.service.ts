@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable, Subject, Subscription, fromEvent } from 'r
 import { debounceTime } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { TABLE_COLUMN_MIN_WIDTH } from '../constants';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Table } from '../table';
@@ -294,8 +293,8 @@ export class TableColumnResizeService implements OnDestroy {
             return;
         }
 
-        if (diffX < 0 && columnWidth + diffX < TABLE_COLUMN_MIN_WIDTH) {
-            diffX = TABLE_COLUMN_MIN_WIDTH - columnWidth;
+        if (diffX < 0 && columnWidth + diffX < this._tableRef.minimumColumnWidth) {
+            diffX = this._tableRef.minimumColumnWidth - columnWidth;
         }
 
         if (!this.fixedWidth) {
