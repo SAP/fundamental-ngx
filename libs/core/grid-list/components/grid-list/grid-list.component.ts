@@ -313,7 +313,24 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
 
     /** @hidden */
     private _handleShiftArrowKeydown(event: KeyboardEvent): void {
-        this._handleArrowKeydown(event, true);
+        event.preventDefault();
+        const activeElement = document.activeElement as HTMLElement;
+
+        const currentItemIndex = this._getCurrentItemIndex(activeElement);
+        if (currentItemIndex === -1) {
+            return;
+        }
+
+        const indexToFocus = this._calculateIndexToFocus(event, currentItemIndex);
+        if (indexToFocus === undefined) {
+            return;
+        }
+
+        // Persist the selection state from the current item to the next item
+        this._persistSelectionState(currentItemIndex, indexToFocus);
+
+        // Focus the new item
+        this._focusItemAtIndex(indexToFocus, activeElement);
     }
 
     /** @hidden */
@@ -343,7 +360,6 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
         const itemsPerRow = this._getItemsPerRow(
             this._gridListItems.toArray()[currentItemIndex]._gridListItem.nativeElement
         );
-
         if (KeyUtil.isKeyCode(event, LEFT_ARROW) || (this._rtl$() && KeyUtil.isKeyCode(event, [RIGHT_ARROW]))) {
             return currentItemIndex - 1;
         } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW) || (this._rtl$() && KeyUtil.isKeyCode(event, [LEFT_ARROW]))) {
@@ -354,6 +370,25 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
             return currentItemIndex + itemsPerRow;
         }
         return undefined;
+    }
+
+    /** hidden */
+    private _persistSelectionState(currentIndex: number, indexToFocus: number): void {
+        const currentItem = this._gridListItems.toArray()[currentIndex];
+        const nextItem = this._gridListItems.toArray()[indexToFocus];
+
+        // Persist the selection state from the current item to the next item
+        if (currentItem._selectedItem) {
+            // If the current item is selected, ensure the next item is selected as well
+            if (!nextItem._selectedItem) {
+                this.setSelectedItem(nextItem as any, indexToFocus, GridListSelectionActions.ADD);
+            }
+        } else {
+            // If the current item is not selected, ensure the next item remains not selected
+            if (nextItem._selectedItem) {
+                this.setSelectedItem(nextItem as any, indexToFocus, GridListSelectionActions.REMOVE);
+            }
+        }
     }
 
     /** hidden */
