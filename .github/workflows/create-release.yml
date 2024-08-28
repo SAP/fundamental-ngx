@@ -39,7 +39,7 @@ jobs:
             ghTag: ${{ steps.releaseTags.outputs.gh }}
         steps:
             - name: Fetch from origin repo
-              uses: actions/checkout@v4.1.1
+              uses: actions/checkout@v4.1.7
               with:
                   ref: ${{ fromJSON('["tmp_hotfix_branch", "main"]')[env.IS_HOTFIX] }}
                   fetch-depth: 0
@@ -143,7 +143,7 @@ jobs:
         if: ${{ needs.create_release.outputs.npmTag == 'latest' }}
         steps:
             - name: Checkout
-              uses: actions/checkout@v4.1.1
+              uses: actions/checkout@v4.1.7
               with:
                   ref: main # always fetch from main branch
                   token: ${{ secrets.GHACTIONS }}
@@ -155,7 +155,7 @@ jobs:
               run: npx nx run docs:compile:production --skip-nx-cache
 
             - name: Publish to gh-pages
-              uses: JamesIves/github-pages-deploy-action@v4.5.0
+              uses: JamesIves/github-pages-deploy-action@v4.6.3
               with:
                   folder: dist/apps/docs
                   token: ${{ secrets.GHACTIONS }}
@@ -168,7 +168,7 @@ jobs:
         name: Nx Cloud - Stop Agents
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4.1.1
+            - uses: actions/checkout@v4.1.7
             - uses: ./.github/actions/nodejs
             - name: Stop all running agents for this CI run
               run: npx nx-cloud stop-all-agents
