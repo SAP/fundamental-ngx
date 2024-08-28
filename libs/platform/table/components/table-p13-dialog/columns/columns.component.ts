@@ -259,6 +259,12 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
         event.preventDefault();
         const activeColumnIndex = this._getActiveColumnIndexInFilteredList();
         this._moveColumnInFilteredListByIndex(activeColumnIndex, activeColumnIndex - 1);
+
+        // keep the focus back to the move up button as it gets lost on click
+        setTimeout(() => {
+            const moveUpBtn = event.target as HTMLElement;
+            moveUpBtn.focus();
+        }, 0);
     }
 
     /** @hidden */
