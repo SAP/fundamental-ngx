@@ -420,7 +420,6 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
             ? GridListSelectionActions.REMOVE
             : GridListSelectionActions.ADD;
 
-        console.log(selectionAction);
         this.setSelectedItem(currentItem as any, indexToFocus, selectionAction);
     }
 
