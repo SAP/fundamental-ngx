@@ -17,25 +17,25 @@
                     <button fdCompact fd-button glyph="menu2"></button>
                 </fd-popover-control>
                 <fd-popover-body>
-                    <fdp-list [navigated]="true">
-                        <li fdp-free-content-list-item>
+                    <fdp-list [navigated]="true" [role]="'listbox'">
+                        <li fdp-free-content-list-item [ariaRole]="'option'">
                             <a fd-list-link>
                                 <i fd-list-icon glyph="history"></i>
                                 <span fd-list-title> Link List item 1 </span>
                             </a>
                         </li>
-                        <li fdp-free-content-list-item>
+                        <li fdp-free-content-list-item [ariaRole]="'option'">
                             <a fd-list-link>
                                 <i fd-list-icon glyph="cart"></i>
                                 <span fd-list-title> Link List item 2 </span>
                             </a>
                         </li>
-                        <li fdp-free-content-list-item>
+                        <li fdp-free-content-list-item [ariaRole]="'option'">
                             <a fd-list-link>
                                 <span fd-list-title> Link List item 3</span>
                             </a>
                         </li>
-                        <li fdp-free-content-list-item *ngFor="let item of items | async">
+                        <li fdp-free-content-list-item [ariaRole]="'option'" *ngFor="let item of items | async">
                             <ng-template
                                 [ngTemplateOutlet]="item"
                                 [ngTemplateOutletContext]="{ popover: popover }"
