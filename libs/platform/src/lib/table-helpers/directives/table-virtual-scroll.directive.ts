@@ -178,7 +178,7 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
             }
 
             const totalNodeCount = this._table._tableRowsVisible.length;
-            let visibleNodeCount = Math.floor(this._table.tableContainer.nativeElement.clientHeight / this.rowHeight);
+            let visibleNodeCount = this._getNumberOfRowsToDisplay();
             visibleNodeCount = Math.min(totalNodeCount - startNodeIndex, visibleNodeCount);
             this.virtualScrollTotalHeight = totalNodeCount * this.rowHeight - visibleNodeCount * this.rowHeight;
 
@@ -263,12 +263,14 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
         const tableContainer = this._table.tableContainer.nativeElement;
         let tableHeight = tableContainer.clientHeight;
         tableHeight = tableHeight - tableContainer.querySelector('thead').clientHeight;
-        const numberOfRows = Math.floor(tableHeight / (this.rowHeight + 2));
+        const numberOfRows = Math.floor(tableHeight / this.rowHeight);
+        let retVal: number;
         if (this._table._tableRowsVisible.length < numberOfRows) {
-            return this._table._tableRowsVisible.length;
+            retVal = this._table._tableRowsVisible.length;
         } else {
-            return numberOfRows;
+            retVal = numberOfRows;
         }
+        return retVal;
     }
 
     /**
