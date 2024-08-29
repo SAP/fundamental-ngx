@@ -36,7 +36,11 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { GridListItemBodyDirective } from '../../directives/grid-list-item-body.directive';
 import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';
-import { GridListSelectionActions, GridListSelectionMode } from '../../models/grid-list-selection.models';
+import {
+    GridListSelectionActions,
+    GridListSelectionMode,
+    GridListSelectionModeEnum
+} from '../../models/grid-list-selection.models';
 import { GridListItemFooterBarComponent } from '../grid-list-item-footer-bar/grid-list-item-footer-bar.component';
 import { GridListItemToolbarComponent } from '../grid-list-item-toolbar/grid-list-item-toolbar.component';
 import { GridListTitleBarSpacerComponent } from '../grid-list-title-bar-spacer/grid-list-title-bar-spacer.component';
@@ -265,12 +269,13 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     set selectionMode(mode: GridListSelectionMode | undefined) {
         this._selectionMode = mode;
 
-        if (mode !== 'delete' && mode !== 'none' && !this.value) {
+        if (mode !== GridListSelectionModeEnum.DELETE && mode !== GridListSelectionModeEnum.NONE && !this.value) {
             throw new Error('Grid List Item must have [value] attribute.');
         }
 
         if (this.selected && this.value && this._index != null) {
-            const action = this.selectionMode !== 'multiSelect' ? null : GridListSelectionActions.ADD;
+            const action =
+                this.selectionMode !== GridListSelectionModeEnum.MULTI_SELECT ? null : GridListSelectionActions.ADD;
 
             this._gridList.setSelectedItem(this.value, this._index, action);
         }
@@ -371,7 +376,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
             return;
         }
         const action =
-            this.selectionMode !== 'multiSelect'
+            this.selectionMode !== GridListSelectionModeEnum.MULTI_SELECT
                 ? null
                 : value || value === 0
                   ? GridListSelectionActions.ADD
@@ -460,17 +465,21 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
 
         const isSelectionKeyDown = KeyUtil.isKeyCode(event, [ENTER, SPACE]);
 
-        if (isSelectionKeyDown && this.selectionMode === 'none') {
+        if (isSelectionKeyDown && this.selectionMode === GridListSelectionModeEnum.NONE) {
             this.press.emit(this._outputEventValue);
         }
 
-        if (!isSelectionKeyDown || this.selectionMode === 'none' || !target.classList.contains('fd-grid-list__item')) {
+        if (
+            !isSelectionKeyDown ||
+            this.selectionMode === GridListSelectionModeEnum.NONE ||
+            !target.classList.contains('fd-grid-list__item')
+        ) {
             return;
         }
 
         this._preventDefault(event);
 
-        if (this.selectionMode === 'multiSelect') {
+        if (this.selectionMode === GridListSelectionModeEnum.MULTI_SELECT) {
             this._selectionItem(!this._selectedItem);
 
             return;
