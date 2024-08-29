@@ -66,6 +66,8 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
 
     abstract _tableCurrentlyRenderedRowsPlaceholder: number[];
 
+    abstract minimumColumnWidth: number;
+
     /** Get table state */
     abstract getTableState(): TableState;
 

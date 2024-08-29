@@ -3,6 +3,127 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.52.1...v0.52.2-rc.0) (2024-08-28)
+
+
+### Bug Fixes
+
+* **platform:** add input for restricting table column min width ([#12267](https://github.com/SAP/fundamental-ngx/issues/12267)) ([3375913](https://github.com/SAP/fundamental-ngx/commit/3375913bad0258176170fc4678f98efd9e72522b))
+
+
+
+
+
+## [0.52.1](https://github.com/SAP/fundamental-ngx/compare/v0.52.1-rc.1...v0.52.1) (2024-08-27)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.52.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.52.1-rc.0...v0.52.1-rc.1) (2024-08-27)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.52.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.52.0...v0.52.1-rc.0) (2024-08-27)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.52.0](https://github.com/SAP/fundamental-ngx/compare/v0.52.0-rc.0...v0.52.0) (2024-08-27)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.52.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.8...v0.52.0-rc.0) (2024-08-27)
+
+
+### Bug Fixes
+
+* **platform:** update naming of functions that get/set the currently rendered rows on the table ([#12328](https://github.com/SAP/fundamental-ngx/issues/12328)) ([0f58e03](https://github.com/SAP/fundamental-ngx/commit/0f58e0319e6f3f3a99287cd60e19304e78cca675))
+
+
+### BREAKING CHANGES
+
+* **platform:** getRowsInViewport() function renamed to getCurrentlyRenderedRows() and setRowsInViewport() function renamed to setCurrentlyRenderedRows()
+
+
+
+
+
+## [0.51.4-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.7...v0.51.4-rc.8) (2024-08-27)
+
+
+### Bug Fixes
+
+* **platform:** do not call _getResizer so often ([#12323](https://github.com/SAP/fundamental-ngx/issues/12323)) ([4e3fdf2](https://github.com/SAP/fundamental-ngx/commit/4e3fdf2888a0de23d1af98c18d218e028ec72390))
+
+
+
+
+
+## [0.51.4-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.6...v0.51.4-rc.7) (2024-08-27)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.51.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.5...v0.51.4-rc.6) (2024-08-27)
+
+
+### Bug Fixes
+
+* **docs:** form message updates ([#12292](https://github.com/SAP/fundamental-ngx/issues/12292)) ([7210f36](https://github.com/SAP/fundamental-ngx/commit/7210f36632549f150ff57f5070ca8e5c55a8afab))
+
+
+
+
+
+## [0.51.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.4...v0.51.4-rc.5) (2024-08-26)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.51.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.3...v0.51.4-rc.4) (2024-08-26)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.51.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.2...v0.51.4-rc.3) (2024-08-25)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.51.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.1...v0.51.4-rc.2) (2024-08-25)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 ## [0.51.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.0...v0.51.4-rc.1) (2024-08-23)
 
 
