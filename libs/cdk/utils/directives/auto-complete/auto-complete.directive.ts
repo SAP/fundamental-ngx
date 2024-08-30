@@ -3,7 +3,7 @@ import { Directive, ElementRef, EventEmitter, Input, NgZone, Output, inject } fr
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent, map, switchMap } from 'rxjs';
 import { first } from 'rxjs/operators';
-import { KeyUtil } from '../../functions/key-util';
+import { KeyUtil } from '../../functions';
 
 export interface AutoCompleteEvent {
     term: string;
@@ -58,6 +58,9 @@ export class AutoCompleteDirective {
     private lastKeyUpEvent: KeyboardEvent;
 
     /** @hidden */
+    private isComposing = false;
+
+    /** @hidden */
     private readonly _elementRef = inject(ElementRef);
 
     private readonly _zone = inject(NgZone);
@@ -72,6 +75,12 @@ export class AutoCompleteDirective {
          */
         this._zone.runOutsideAngular(() => {
             const keyupEvent = fromEvent<KeyboardEvent>(this._elementRef.nativeElement, 'keyup');
+            const compositionStartEvent = fromEvent<CompositionEvent>(
+                this._elementRef.nativeElement,
+                'compositionstart'
+            );
+            const compositionEndEvent = fromEvent<CompositionEvent>(this._elementRef.nativeElement, 'compositionend');
+
             keyupEvent
                 .pipe(
                     switchMap((evt) =>
@@ -83,6 +92,15 @@ export class AutoCompleteDirective {
                     takeUntilDestroyed()
                 )
                 .subscribe((evt) => this._handleKeyboardEvent(evt));
+
+            compositionStartEvent.pipe(takeUntilDestroyed()).subscribe(() => {
+                this.isComposing = true;
+            });
+
+            compositionEndEvent.pipe(takeUntilDestroyed()).subscribe(() => {
+                this.isComposing = false;
+                this.inputText = this._elementRef.nativeElement.value;
+            });
         });
     }
 
@@ -92,7 +110,7 @@ export class AutoCompleteDirective {
 
     /** @hidden */
     _handleKeyboardEvent(event: KeyboardEvent): void {
-        if (this.enable) {
+        if (this.enable && !this.isComposing) {
             if (KeyUtil.isKeyCode(event, this._stopKeys)) {
                 this._elementRef.nativeElement.value = this.inputText;
             } else if (KeyUtil.isKeyCode(event, this._completeKeys)) {
@@ -101,7 +119,6 @@ export class AutoCompleteDirective {
             } else if (KeyUtil.isKeyCode(event, this._fillKeys)) {
                 this._sendCompleteEvent(false);
             } else if (!this._isControlKey(event) && this.inputText) {
-                /** Prevention from triggering typeahead, when having crtl/cmd + keys */
                 if (!this._triggerTypeAhead()) {
                     return;
                 }
