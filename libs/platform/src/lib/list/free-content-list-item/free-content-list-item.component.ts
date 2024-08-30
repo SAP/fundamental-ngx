@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewEncapsulation } from '@angular/core';
 import { BaseListItem } from '../base-list-item';
 
 @Component({
@@ -9,7 +9,11 @@ import { BaseListItem } from '../base-list-item';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => FreeContentListItemComponent) }],
     host: {
-        role: 'listitem'
+        role: 'group'
     }
 })
-export class FreeContentListItemComponent extends BaseListItem {}
+export class FreeContentListItemComponent extends BaseListItem {
+    /** Role of the child fd-list-item element. */
+    @Input()
+    ariaRole: string;
+}
