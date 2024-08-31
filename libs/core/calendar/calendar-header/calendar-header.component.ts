@@ -75,6 +75,10 @@ export class CalendarHeaderComponent<D> implements OnInit, OnChanges {
     @Input()
     mobileLandscape = false;
 
+    /** Whether to show month or not in the header */
+    @Input()
+    showMonth = true;
+
     /** Event emitted when the active view should change. */
     @Output()
     readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();

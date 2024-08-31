@@ -19,7 +19,20 @@ import {
         <br />
         <div>Selected First Date: {{ this.selectedRange?.start?.toDateString() || 'null' }}</div>
         <br />
-        <div>Selected Last Date: {{ this.selectedRange?.end?.toDateString() || 'null' }}</div>`,
+        <div>Selected Last Date: {{ this.selectedRange?.end?.toDateString() || 'null' }}</div>
+        <br />
+        <br />
+        <fd-date-picker
+            [rangeHoverEffect]="true"
+            [showMonthYearDateRange]="true"
+            [customDateTimeFormat]="monthYearDateFormat"
+            type="range"
+            [(ngModel)]="monthYearFormatDateRange"
+        ></fd-date-picker>
+        <br />
+        <div>Selected First Date: {{ monthYearFormatDates.start || 'null' }}</div>
+        <br />
+        <div>Selected Last Date: {{ monthYearFormatDates.end || 'null' }}</div>`,
     providers: [
         {
             provide: DatetimeAdapter,
@@ -35,9 +48,17 @@ import {
 })
 export class DatePickerRangeExampleComponent {
     selectedRange: Nullable<DateRange<FdDate>>;
+    monthYearFormatDateRange: Nullable<DateRange<FdDate>>;
+    monthYearDateFormat = { year: 'numeric', month: '2-digit' };
+    monthYearFormatDates = { start: '', end: '' };
 
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {
         const today = this.datetimeAdapter.today();
-        this.selectedRange = new DateRange(today, this.datetimeAdapter.addCalendarDays(today, 1));
+        this.selectedRange = new DateRange(today, this.datetimeAdapter.addCalendarDays(today, 4));
+        this.monthYearFormatDateRange = new DateRange(today, this.datetimeAdapter.addCalendarMonths(today, 4));
+        this.monthYearFormatDates = {
+            start: datetimeAdapter.format(this.monthYearFormatDateRange.start, this.monthYearDateFormat),
+            end: datetimeAdapter.format(this.monthYearFormatDateRange.end, this.monthYearDateFormat)
+        };
     }
 }

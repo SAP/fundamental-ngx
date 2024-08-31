@@ -372,6 +372,10 @@ export class DatePickerComponent<D>
     @Input()
     mobilePortrait = false;
 
+    /** Whether to select and display the date range in MM/YYYY format */
+    @Input()
+    showMonthYearDateRange: boolean;
+
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     readonly isOpenChange = new EventEmitter<boolean>();
@@ -559,6 +563,9 @@ export class DatePickerComponent<D>
 
     /** @hidden */
     ngOnInit(): void {
+        if (this.showMonthYearDateRange) {
+            this.activeView = FdCalendarViewEnum.Month;
+        }
         this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this.formatInputDate(this.selectedDate);
             this._changeDetectionRef.detectChanges();

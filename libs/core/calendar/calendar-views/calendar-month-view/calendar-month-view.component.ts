@@ -18,11 +18,13 @@ import {
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarService } from '../../calendar.service';
 import { CalendarMonth } from '../../models/calendar-month';
 import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
+import { DateRange } from '../../models/date-range';
 
 /** Component representing the month view of the calendar. */
 @Component({
@@ -54,15 +56,30 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
     @Input()
     year: number;
 
+    /** Whether to pick the date range in month year format without picking days */
+    @Input()
+    isDateRangeMonthYearFormat: boolean;
+
     /** An event fired when a new month is selected */
     @Output()
     readonly monthClicked: EventEmitter<number> = new EventEmitter<number>();
+
+    /** Event thrown every time selected first or last date in range mode is changed */
+    @Output()
+    readonly selectedRangeDateChange: EventEmitter<DateRange<D>> = new EventEmitter<DateRange<D>>();
+
+    /**
+     * Whether user wants to mark day cells on hover.
+     * Works only on range mode, when start date is selected.
+     */
+    @Input()
+    rangeHoverEffect = false;
 
     /**
      * @hidden
      * Month grid table
      */
-    _calendarMonthListGrid: CalendarMonth[][];
+    _calendarMonthListGrid: CalendarMonth<D>[][];
 
     /**
      * @hidden
@@ -81,6 +98,11 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
 
     /** @hidden */
     private _initiated = false;
+
+    /** @hidden */
+    private _selectedRangeDate: DateRange<D>;
+
+    private _isOnRangePick = false;
 
     /** @hidden */
     constructor(
@@ -141,25 +163,52 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
         return this.viewId + '-selected-date-label';
     }
 
-    /** Method for handling the mouse click event when a month is selected  */
-    selectMonth(monthCell: CalendarMonth, event?: MouseEvent): void {
-        if (event) {
-            event.stopPropagation();
+    /** The currently selected FdDates model start and end in range mode. */
+    @Input()
+    set selectedRangeDate(dateRange: DateRange<D>) {
+        if (
+            dateRange &&
+            this.selectedRangeDate &&
+            this._isSameDate(dateRange.start, this.selectedRangeDate.start) &&
+            this._isSameDate(dateRange.end, this.selectedRangeDate.end)
+        ) {
+            return;
         }
-        this.monthSelected = monthCell.month;
-        this.monthClicked.emit(this.monthSelected);
+        this._selectedRangeDate = dateRange;
+        if (this._calendarMonthListGrid) {
+            this._changeSelectedRangeDays(dateRange, this._getMonthList());
+        }
+    }
+
+    get selectedRangeDate(): DateRange<D> {
+        return this._selectedRangeDate;
     }
 
     /**
-     * Set focus on month cell.
-     * It can be a selected cell, current month cell or first cell in the list
+     * @hidden
+     *  Amount of selected months
+     *  0, when there is no month selected, or start month is invalid,
+     *  1, when there is only valid start month, or end month is same as start month,
+     *  2, when both dates are valid
      */
-    setFocusOnCell(): void {
-        const cellToFocus = new DefaultCalendarActiveCellStrategy().getActiveCell(this._getMonthList());
-        if (!cellToFocus?.id) {
-            return;
+    get _selectCounter(): number {
+        if (!this.selectedRangeDate || !this._dateTimeAdapter.isValid(this.selectedRangeDate.start)) {
+            return 0;
         }
-        this._focusElementBySelector(`#${cellToFocus.id}`);
+        if (
+            this.selectedRangeDate.start &&
+            (!this._dateTimeAdapter.isValid(this.selectedRangeDate.end) ||
+                this._isSameDate(this.selectedRangeDate.start, this.selectedRangeDate.end))
+        ) {
+            return 1;
+        }
+        if (
+            this._dateTimeAdapter.isValid(this.selectedRangeDate.start) &&
+            this._dateTimeAdapter.isValid(this.selectedRangeDate.end)
+        ) {
+            return 2;
+        }
+        return 0;
     }
 
     /**
@@ -213,16 +262,183 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
         return id + this._monthOffset === this.monthSelected;
     }
 
+    /** Method for handling the mouse click event when a month is selected  */
+    selectMonth(monthCell: CalendarMonth<D>, event?: MouseEvent): void {
+        if (event) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
+        this.monthSelected = monthCell.month;
+        this.monthClicked.emit(this.monthSelected);
+
+        if (this.isDateRangeMonthYearFormat) {
+            this._selectRangeDate(monthCell);
+        }
+
+        this._handleRangeHoverEffect(event);
+    }
+
+    /**
+     * Set focus on month cell.
+     * It can be a selected cell, current month cell or first cell in the list
+     */
+    setFocusOnCell(): void {
+        const cellToFocus = new DefaultCalendarActiveCellStrategy().getActiveCell(this._getMonthList());
+        if (!cellToFocus?.id) {
+            return;
+        }
+        this._focusElementBySelector(`#${cellToFocus.id}`);
+    }
+
+    /**
+     * @hidden
+     * Handles hover effect for single-range selection mode.
+     * @param day The calendar day that is hovered.
+     */
+    _handleRangeHover(month: CalendarMonth<D>): void {
+        // Handle single range hover
+        const start = this.selectedRangeDate?.start;
+        if (this._isOnRangePick && start) {
+            if (this._dateTimeAdapter.compareDate(month.date, start) < 0) {
+                this._getMonthList().forEach((_month) => {
+                    _month.hoverRange =
+                        this._dateTimeAdapter.compareDate(_month.date, month.date) > 0 &&
+                        this._dateTimeAdapter.compareDate(_month.date, start) < 0;
+                });
+            } else {
+                this._getMonthList().forEach((_month) => {
+                    _month.hoverRange =
+                        this._dateTimeAdapter.compareDate(_month.date, month.date) < 0 &&
+                        this._dateTimeAdapter.compareDate(_month.date, start) > 0;
+                });
+            }
+        }
+    }
+
+    /**
+     * @hidden
+     * Handles the hover effect for range selection.
+     * Toggles the hover effect based on the selection state and event.
+     * @param event Optional mouse event for handling hover effect.
+     */
+    private _handleRangeHoverEffect(event?: MouseEvent): void {
+        if (this.isDateRangeMonthYearFormat && this.rangeHoverEffect && this._selectCounter === 1 && event) {
+            this._isOnRangePick = !this._isOnRangePick;
+        } else {
+            this._isOnRangePick = false;
+        }
+    }
+
+    /**
+     * @hidden
+     * Selects or updates the range of dates in range mode.
+     * Handles the start and end dates and updates the selected range.
+     * @param month The calendar month to be selected or updated in the range.
+     */
+    private _selectRangeDate(month: CalendarMonth<D>): void {
+        if (this._selectCounter === 0 || this._selectCounter === 2) {
+            this._selectedRangeDate = { start: month.date, end: null };
+            this.selectedRangeDateChange.emit(this.selectedRangeDate);
+        } else if (this._selectCounter === 1) {
+            this._selectedRangeDate = this._getOrderedRange(this.selectedRangeDate.start!, month.date);
+            this.selectedRangeDateChange.emit(this.selectedRangeDate);
+        }
+        this._changeSelectedRangeDays(this._selectedRangeDate, this._getMonthList());
+    }
+
+    /**
+     * @hidden
+     * Orders the start and end dates for the range selection.
+     * Ensures the start date is before or equal to the end date.
+     * @param date1 The first date.
+     * @param date2 The second date.
+     * @returns An object containing the ordered start and end dates.
+     */
+    private _getOrderedRange(date1: D, date2: D): { start: D; end: D } {
+        return this._dateTimeAdapter.compareDate(date1, date2) < 0
+            ? { start: date1, end: date2 }
+            : { start: date2, end: date1 };
+    }
+
+    /**
+     * @hidden
+     * Change properties of range months, this method is called, to not rebuild whole grid from scratch,
+     * it just changes properties of newly selected/unselected months.
+     */
+    private _changeSelectedRangeDays(dates: DateRange<D>, calendar: CalendarMonth<D>[]): void {
+        /** Pull list of calendar month */
+        const calendarList = calendar;
+
+        /** Reset changing properties */
+        calendarList.forEach(
+            (_month) =>
+                (_month.selectedFirst =
+                    _month.selectedLast =
+                    _month.selected =
+                    _month.disabled =
+                    _month.hoverRange =
+                    _month.selectedRange =
+                        false)
+        );
+
+        if (dates) {
+            let startMonth: CalendarMonth<D> | undefined;
+            let endMonth: CalendarMonth<D> | undefined;
+            if (dates.start) {
+                /** Find start month and mark it as selected */
+                startMonth = calendarList.find((_month) => this._isSameDate(_month.date, dates.start));
+                if (startMonth) {
+                    startMonth.selected = true;
+                    startMonth.selectedFirst = true;
+                }
+            }
+            if (dates.end) {
+                /** Find end month and mark it as selected */
+                endMonth = calendarList.find((_month) => this._isSameDate(_month.date, dates.end));
+                if (endMonth) {
+                    endMonth.selected = true;
+                    endMonth.selectedLast = true;
+                }
+            }
+
+            /** Verify if start month and end month is valid, otherwise don't put range selection */
+            if (dates.start && dates.end) {
+                /** Mark all months, which are between start and end date */
+                calendarList
+                    .filter(
+                        (_month) =>
+                            (_month.selectedRange = this._dateTimeAdapter.isBetween(
+                                _month.date,
+                                dates.start!,
+                                dates.end!
+                            ))
+                    )
+                    .forEach((_month) => (_month.selectedRange = true));
+            }
+        }
+    }
+
+    /**
+     * @hidden
+     * Check if dates are equal
+     */
+    private _isSameDate(date1: Nullable<D>, date2: Nullable<D>): boolean {
+        return this._dateTimeAdapter.datesEqual(date1, date2);
+    }
+
     /**
      * @hidden
      * Method that create month grid with required meta data
      */
     private _constructMonthGrid(): void {
-        const monthNames: string[] = this._dateTimeAdapter.getMonthNames('short');
+        const monthNames: string[] = this.isDateRangeMonthYearFormat
+            ? this._dateTimeAdapter.getMonthNames('long')
+            : this._dateTimeAdapter.getMonthNames('short');
 
-        const monthList: CalendarMonth[] = monthNames.map((monthName, index): CalendarMonth => {
+        const monthList: CalendarMonth<D>[] = monthNames.map((monthName, index): CalendarMonth<D> => {
             const month = index + this.monthOffset;
             return {
+                date: this._dateTimeAdapter.createDate(this.year, month),
                 month,
                 label: monthName,
                 ariaLabel: this._dateTimeAdapter.format(
@@ -235,6 +451,8 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
                 tabIndex: month === this.monthSelected ? 0 : -1
             };
         });
+
+        this._changeSelectedRangeDays(this._selectedRangeDate, monthList);
 
         this._calendarMonthListGrid = [];
         /** Creating 2d grid */
@@ -273,8 +491,8 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
      * @hidden
      * Returns transformed 1d array from 2d month grid.
      */
-    private _getMonthList(): CalendarMonth[] {
-        return (<CalendarMonth[]>[]).concat(...this._calendarMonthListGrid);
+    private _getMonthList(): CalendarMonth<D>[] {
+        return (<CalendarMonth<D>[]>[]).concat(...this._calendarMonthListGrid);
     }
 
     /** @hidden */

@@ -9,6 +9,7 @@
     [previousButtonDisabled]="previousButtonDisabled"
     [nextButtonDisabled]="nextButtonDisabled"
     (activeViewChange)="handleActiveViewChange($event)"
+    [showMonth]="!isDateRangeMonthYearFormat"
 ></fd-calendar-header>
 @if (_currentlyDisplayed) {
     @if (activeView === 'day') {
@@ -43,6 +44,10 @@
             [year]="_currentlyDisplayed.year"
             [id]="id"
             [focusEscapeFunction]="escapeFocusFunction"
+            [isDateRangeMonthYearFormat]="isDateRangeMonthYearFormat"
+            [selectedRangeDate]="selectedRangeDate"
+            [rangeHoverEffect]="rangeHoverEffect"
+            (selectedRangeDateChange)="selectedRangeDateChanged($event)"
             (monthClicked)="handleMonthViewChange($event)"
         ></fd-calendar-month-view>
     } @else if (activeView === 'year') {

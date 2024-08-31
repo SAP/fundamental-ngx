@@ -209,6 +209,10 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     @Input()
     rangeHoverEffect = false;
 
+    /** Whether to pick the date range in month year format without picking days */
+    @Input()
+    isDateRangeMonthYearFormat: boolean;
+
     /** Event thrown every time active view is changed */
     @Output()
     readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
@@ -662,16 +666,26 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      */
     handleMonthViewChange(month: number): void {
         this._currentlyDisplayed = { month, year: this._currentlyDisplayed.year };
-        this.activeView = FdCalendarViewEnum.Day;
-        this.onDaysViewSelected();
+        // if mm/yyyy format date is not enabled then only show days view
+        if (!this.isDateRangeMonthYearFormat) {
+            this.activeView = FdCalendarViewEnum.Day;
+            this.onDaysViewSelected();
+        }
+
         this.activeViewChange.emit(this.activeView);
     }
 
     /** Select year */
     selectedYear(yearSelected: number): void {
-        this.activeView = FdCalendarViewEnum.Day;
         this._currentlyDisplayed.year = yearSelected;
-        this.onDaysViewSelected();
+        // if mm/yyyy format date is enabled then on selecting year show month view else show days view
+        if (this.isDateRangeMonthYearFormat) {
+            this.activeView = FdCalendarViewEnum.Month;
+            this.onMonthViewSelected();
+        } else {
+            this.activeView = FdCalendarViewEnum.Day;
+            this.onDaysViewSelected();
+        }
     }
 
     /** Select year range */
