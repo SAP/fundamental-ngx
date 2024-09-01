@@ -271,11 +271,11 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
         this.monthSelected = monthCell.month;
         this.monthClicked.emit(this.monthSelected);
 
+        // when date range start date is selected start the hover effect between the date range
         if (this.isDateRangeMonthYearFormat) {
             this._selectRangeDate(monthCell);
+            this._handleRangeHoverEffect(event);
         }
-
-        this._handleRangeHoverEffect(event);
     }
 
     /**
@@ -452,7 +452,10 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
             };
         });
 
-        this._changeSelectedRangeDays(this._selectedRangeDate, monthList);
+        // if the date range is selected
+        if (this.isDateRangeMonthYearFormat) {
+            this._changeSelectedRangeDays(this._selectedRangeDate, monthList);
+        }
 
         this._calendarMonthListGrid = [];
         /** Creating 2d grid */
