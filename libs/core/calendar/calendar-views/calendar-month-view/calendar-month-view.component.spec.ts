@@ -33,7 +33,7 @@ describe('CalendarMonthViewComponent', () => {
 
     it('Should have 12 months', () => {
         expect(component._calendarMonthListGrid).toBeDefined();
-        const monthList = ([] as CalendarMonth[]).concat(...component._calendarMonthListGrid);
+        const monthList = ([] as CalendarMonth<FdDate>[]).concat(...component._calendarMonthListGrid);
         expect(monthList.length).toBe(12);
     });
 
