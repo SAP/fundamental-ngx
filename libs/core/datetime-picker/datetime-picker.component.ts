@@ -33,6 +33,7 @@ import {
     FdCalendarViewEnum
 } from '@fundamental-ngx/core/calendar';
 import {
+    convertToDesiredFormat,
     DATE_TIME_FORMATS,
     DatetimeAdapter,
     DateTimeFormats,
@@ -756,7 +757,7 @@ export class DatetimePickerComponent<D>
             return;
         }
 
-        inputStr = this._convertToDesiredFormat(inputStr);
+        inputStr = convertToDesiredFormat(inputStr.toString());
 
         this.date = this._parseDate(inputStr);
         this._isInvalidDateInput = !this._isModelValid(this.date);
@@ -906,34 +907,5 @@ export class DatetimePickerComponent<D>
                 injector
             }
         );
-    }
-
-    /**
-     * Converts the input string to the desired format: MM DD, Y, HH:MM
-     *
-     * @param {string} inputStr - The input string to be converted.
-     * @returns {string} - The formatted date string.
-     */
-    private _convertToDesiredFormat(inputStr: string): string {
-        const regex =
-            /(\w+ \d{1,2}, \d{4}) at ((\d{2}):(\d{2}) (AM|PM)|(morning|afternoon|evening|night) (\d{2}):(\d{2}))/;
-
-        const convertHours = (hours: number, period: string): number => {
-            if (period === 'PM' && hours !== 12) {
-                return hours + 12;
-            }
-            if (period === 'AM' && hours === 12) {
-                return 0;
-            }
-            if (['afternoon', 'evening', 'night'].includes(period) && hours < 12) {
-                return hours + 12;
-            }
-            return hours % 12 || 12;
-        };
-
-        return inputStr.replace(regex, (match, date, time, hours, minutes, ampm, period, dayHours, dayMinutes) => {
-            const formattedHours = convertHours(parseInt(hours || dayHours, 10), ampm || period);
-            return `${date}, ${formattedHours.toString().padStart(2, '0')}:${minutes || dayMinutes}`;
-        });
     }
 }

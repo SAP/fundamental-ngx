@@ -12,4 +12,6 @@ Selected: {{ date }}
 <br />
 <fd-datetime-picker [customDateTimeFormat]="dateTimeFormatWithDayPeriod" [(ngModel)]="date"></fd-datetime-picker>
 <br />
-Selected: {{ date | dayPeriodFormat: dateTimeFormatWithDayPeriod | translateDayPeriod }}
+Selected: {{ date }}
+<br />
+Selected Date and Time (Transformed): {{ date | dayPeriodFormat: dateTimeFormatWithDayPeriod | translateDayPeriod }}

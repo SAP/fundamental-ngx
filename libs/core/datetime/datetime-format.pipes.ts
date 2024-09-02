@@ -1,5 +1,5 @@
-import { DestroyRef, Inject, Optional, Pipe, PipeTransform } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Inject, Optional, Pipe, PipeTransform, Signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FD_LANGUAGE, FdLanguage, FdLanguageKeyIdentifier, TranslationResolver } from '@fundamental-ngx/i18n';
 import { Observable } from 'rxjs';
 import { DatetimeAdapter } from './datetime-adapter';
@@ -100,14 +100,13 @@ export class TranslateDayPeriodPipe implements PipeTransform {
     /** @hidden */
     private readonly _translationResolver = new TranslationResolver();
 
-    /** @hidden */
-    private _translatedValue: string | null = null;
+    /** Signal that will hold the current language */
+    private readonly _currentLanguageSignal: Signal<FdLanguage>;
 
     /** @hidden */
-    constructor(
-        @Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>,
-        private readonly _destroyRef: DestroyRef
-    ) {}
+    constructor(@Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>) {
+        this._currentLanguageSignal = toSignal(this._language$, { initialValue: {} as FdLanguage });
+    }
 
     /** Format date object for day period */
     transform(value: string | null): string | null {
@@ -119,11 +118,12 @@ export class TranslateDayPeriodPipe implements PipeTransform {
         const match = value.match(dayPeriodPattern);
 
         if (match && match[0]) {
-            this._language$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((lang) => {
-                this._translatedValue = this._translationResolver.resolve(lang, match[0] as FdLanguageKeyIdentifier);
-            });
-
-            return this._translatedValue ? value.replace(dayPeriodPattern, this._translatedValue) : value;
+            const currentLanguage = this._currentLanguageSignal();
+            const translatedValue = this._translationResolver.resolve(
+                currentLanguage,
+                match[0] as FdLanguageKeyIdentifier
+            );
+            return translatedValue ? value.replace(dayPeriodPattern, translatedValue) : value;
         }
 
         // If no day period pattern is found, return the original value
