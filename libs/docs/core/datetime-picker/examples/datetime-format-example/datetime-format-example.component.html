@@ -1,8 +1,15 @@
 <fd-datetime-picker placeholder="MMM DD, YYYY, h:mm a" [(ngModel)]="date"></fd-datetime-picker>
 <br />
 Selected: {{ date | dateTimeFormat: 'null' }}
+
 <br />
 <br />
-<fd-datetime-picker [customDateTimeFormat]="specificDateTimeFormat" [(ngModel)]="date"></fd-datetime-picker>
+<fd-datetime-picker [customDateTimeFormat]="basicDateTimeFormat" [(ngModel)]="date"></fd-datetime-picker>
 <br />
 Selected: {{ date }}
+
+<br />
+<br />
+<fd-datetime-picker [customDateTimeFormat]="dateTimeFormatWithDayPeriod" [(ngModel)]="date"></fd-datetime-picker>
+<br />
+Selected: {{ date | dayPeriodFormat: dateTimeFormatWithDayPeriod | translateDayPeriod }}

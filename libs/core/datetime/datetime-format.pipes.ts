@@ -1,4 +1,7 @@
-import { Inject, Optional, Pipe, PipeTransform } from '@angular/core';
+import { DestroyRef, Inject, Optional, Pipe, PipeTransform } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FD_LANGUAGE, FdLanguage, FdLanguageKeyIdentifier, TranslationResolver } from '@fundamental-ngx/i18n';
+import { Observable } from 'rxjs';
 import { DatetimeAdapter } from './datetime-adapter';
 import { DATE_TIME_FORMATS, DateTimeFormats } from './datetime-formats';
 
@@ -64,5 +67,66 @@ export class DateFromNowPipe<D> implements PipeTransform {
             console.warn('No fromNow function provided to the DatetimeAdapter');
             return '';
         }
+    }
+}
+
+@Pipe({
+    name: 'dayPeriodFormat',
+    standalone: true
+})
+export class DayPeriodFormatPipe<D> implements PipeTransform {
+    /** @hidden */
+    constructor(
+        private _dateTimeAdapter: DatetimeAdapter<D>,
+        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
+    ) {}
+
+    /** Format date object for day period */
+    transform(date: D, customFormat: any = {}, noDateMessage = ''): string {
+        if (!date) {
+            return noDateMessage;
+        }
+
+        return this._dateTimeAdapter.format(date, customFormat);
+    }
+}
+
+@Pipe({
+    name: 'translateDayPeriod',
+    standalone: true,
+    pure: false // required to update the value when the observable is resolved
+})
+export class TranslateDayPeriodPipe implements PipeTransform {
+    /** @hidden */
+    private readonly _translationResolver = new TranslationResolver();
+
+    /** @hidden */
+    private _translatedValue: string | null = null;
+
+    /** @hidden */
+    constructor(
+        @Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>,
+        private readonly _destroyRef: DestroyRef
+    ) {}
+
+    /** Format date object for day period */
+    transform(value: string | null): string | null {
+        if (!value) {
+            return value;
+        }
+
+        const dayPeriodPattern = /(coreTime\.\w+Label)/;
+        const match = value.match(dayPeriodPattern);
+
+        if (match && match[0]) {
+            this._language$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((lang) => {
+                this._translatedValue = this._translationResolver.resolve(lang, match[0] as FdLanguageKeyIdentifier);
+            });
+
+            return this._translatedValue ? value.replace(dayPeriodPattern, this._translatedValue) : value;
+        }
+
+        // If no day period pattern is found, return the original value
+        return value;
     }
 }

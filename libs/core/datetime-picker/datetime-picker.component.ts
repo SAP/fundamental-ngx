@@ -32,10 +32,20 @@ import {
     FdCalendarView,
     FdCalendarViewEnum
 } from '@fundamental-ngx/core/calendar';
-import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
-import { FormItemControl, PopoverFormMessageService, registerFormItemControl } from '@fundamental-ngx/core/form';
-import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
-import { PopoverService } from '@fundamental-ngx/core/popover';
+import {
+    DATE_TIME_FORMATS,
+    DatetimeAdapter,
+    DateTimeFormats,
+    TranslateDayPeriodPipe
+} from '@fundamental-ngx/core/datetime';
+import {
+    FormItemControl,
+    FormMessageComponent,
+    PopoverFormMessageService,
+    registerFormItemControl
+} from '@fundamental-ngx/core/form';
+import { InputGroupInputDirective, InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 
 import { NgClass, NgTemplateOutlet } from '@angular/common';
@@ -43,10 +53,7 @@ import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { DynamicComponentService, FocusTrapService, Nullable } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { FormMessageComponent } from '@fundamental-ngx/core/form';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import { TimeModule } from '@fundamental-ngx/core/time';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -105,7 +112,8 @@ import { FD_DATETIME_PICKER_COMPONENT, FD_DATETIME_PICKER_MOBILE_CONFIG } from '
         NgClass,
         TimeModule,
         BarModule,
-        FdTranslatePipe
+        FdTranslatePipe,
+        TranslateDayPeriodPipe
     ]
 })
 export class DatetimePickerComponent<D>
@@ -747,6 +755,9 @@ export class DatetimePickerComponent<D>
             this.onChange(null);
             return;
         }
+
+        inputStr = this._convertToDesiredFormat(inputStr);
+
         this.date = this._parseDate(inputStr);
         this._isInvalidDateInput = !this._isModelValid(this.date);
 
@@ -895,5 +906,34 @@ export class DatetimePickerComponent<D>
                 injector
             }
         );
+    }
+
+    /**
+     * Converts the input string to the desired format: MM DD, Y, HH:MM
+     *
+     * @param {string} inputStr - The input string to be converted.
+     * @returns {string} - The formatted date string.
+     */
+    private _convertToDesiredFormat(inputStr: string): string {
+        const regex =
+            /(\w+ \d{1,2}, \d{4}) at ((\d{2}):(\d{2}) (AM|PM)|(morning|afternoon|evening|night) (\d{2}):(\d{2}))/;
+
+        const convertHours = (hours: number, period: string): number => {
+            if (period === 'PM' && hours !== 12) {
+                return hours + 12;
+            }
+            if (period === 'AM' && hours === 12) {
+                return 0;
+            }
+            if (['afternoon', 'evening', 'night'].includes(period) && hours < 12) {
+                return hours + 12;
+            }
+            return hours % 12 || 12;
+        };
+
+        return inputStr.replace(regex, (match, date, time, hours, minutes, ampm, period, dayHours, dayMinutes) => {
+            const formattedHours = convertHours(parseInt(hours || dayHours, 10), ampm || period);
+            return `${date}, ${formattedHours.toString().padStart(2, '0')}:${minutes || dayMinutes}`;
+        });
     }
 }

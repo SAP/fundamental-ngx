@@ -50,7 +50,7 @@
             [attr.aria-required]="required"
             [placeholder]="placeholder"
             [disabled]="disabled"
-            [ngModel]="_inputFieldDate"
+            [ngModel]="_inputFieldDate | translateDayPeriod"
             (keyup.enter)="handleInputChange($any($event.target).value, false)"
             (ngModelChange)="handleInputChange($event, true)"
             (blur)="handleOnTouched($event)"
