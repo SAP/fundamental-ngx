@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.42](https://github.com/SAP/fundamental-ngx/compare/v0.43.41...v0.43.42) (2024-09-03)
+
+
+### Bug Fixes
+
+* **core,platform:** add preventWheelEvents input to busy indicator ([#12307](https://github.com/SAP/fundamental-ngx/issues/12307)) ([a42994e](https://github.com/SAP/fundamental-ngx/commit/a42994ee96c4857f76a5d4e3fb4bab5b21a87c61))
+* **platform:** add input for restricting table column min width ([#12266](https://github.com/SAP/fundamental-ngx/issues/12266)) ([13c3d93](https://github.com/SAP/fundamental-ngx/commit/13c3d938cc974aec99edde5208e7167ea20258e9))
+* **platform:** platform table column resizer performance improvements ([#12325](https://github.com/SAP/fundamental-ngx/issues/12325)) ([c7c9974](https://github.com/SAP/fundamental-ngx/commit/c7c99748ee53bb457e53e9eda1cc2695b88d65da))
+* **platform:** screenreader should announce posinset and setsize for table header popover ([#12335](https://github.com/SAP/fundamental-ngx/issues/12335)) ([35bf566](https://github.com/SAP/fundamental-ngx/commit/35bf566701c3c9638dae72e82d6a33ad3cadf7d1))
+
+
+
+
+
 ## [0.43.41](https://github.com/SAP/fundamental-ngx/compare/v0.43.40...v0.43.41) (2024-08-16)
 
 

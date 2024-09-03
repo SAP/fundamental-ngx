@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.42](https://github.com/SAP/fundamental-ngx/compare/v0.43.41...v0.43.42) (2024-09-03)
+
+
+### Bug Fixes
+
+* **core,platform:** add preventWheelEvents input to busy indicator ([#12307](https://github.com/SAP/fundamental-ngx/issues/12307)) ([a42994e](https://github.com/SAP/fundamental-ngx/commit/a42994ee96c4857f76a5d4e3fb4bab5b21a87c61))
+
+
+
+
+
 ## [0.43.41](https://github.com/SAP/fundamental-ngx/compare/v0.43.40...v0.43.41) (2024-08-16)
 
 
