@@ -99,6 +99,7 @@ import {
     SelectionModeValue,
     SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH,
     Table,
+    TABLE_COLUMN_MIN_WIDTH,
     TableCellActivateEvent,
     TableColumn,
     TableColumnFreezeEvent,
@@ -471,6 +472,10 @@ export class TableComponent<T = any>
      */
     @Input()
     ariaLabelledBy: string;
+
+    /** The minimum width at which the user can resize a column, in pixels. Default is 50. */
+    @Input()
+    minimumColumnWidth = TABLE_COLUMN_MIN_WIDTH;
 
     /**
      * Specifies minimal width of the non-frozen columns.
