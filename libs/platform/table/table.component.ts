@@ -2075,7 +2075,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _calculateTableColumnsLength(): void {
-        this._tableColumnsLength = this._visibleColumns.length + (this._isSelectionColumnShown ? 1 : 0);
+        this._tableColumnsLength = this.getTableColumns().length + (this._isSelectionColumnShown ? 1 : 0);
     }
 
     /** @hidden */
