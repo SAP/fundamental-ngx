@@ -11,6 +11,7 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { PopoverCFillComponent } from './examples/popover-c-fill/popover-c-fill.component';
+import { PopoverClosingExampleComponent } from './examples/popover-closing-example/popover-closing-example.component';
 import { PopoverComplexExampleComponent } from './examples/popover-complex-example/popover-complex-example.component';
 import { PopoverContainerExampleComponent } from './examples/popover-container-example/popover-container-example.component';
 import { PopoverDialogExampleComponent } from './examples/popover-dialog/popover-dialog-example.component';
@@ -34,6 +35,8 @@ const dropdownPopoverScss = 'popover-dropdown/popover-dropdown.component.scss';
 
 const popoverSrc = 'popover-simple/popover-example.component.html';
 const popoverSrcTs = 'popover-simple/popover-example.component.ts';
+const popoverClosingSrc = 'popover-closing-example/popover-closing-example.component.html';
+const popoverClosingSrcTs = 'popover-closing-example/popover-closing-example.component.ts';
 const popoverComplexSrc = 'popover-complex-example/popover-complex-example.component.html';
 const popoverComplexSrcTs = 'popover-complex-example/popover-complex-example.component.ts';
 const popoverProgrammaticHtmlSrc = 'popover-programmatic/popover-programmatic-open-example.component.html';
@@ -81,6 +84,7 @@ const dynamicContainerHeightTsSrc =
         DescriptionComponent,
         ComponentExampleComponent,
         PopoverExampleComponent,
+        PopoverClosingExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
         PopoverTriggerExampleComponent,
@@ -111,6 +115,21 @@ export class PopoverDocsComponent {
             typescriptFileCode: getAssetFromModuleAssets(popoverSrcTs),
             component: 'PopoverExampleComponent',
             scssFileCode: getAssetFromModuleAssets(popoverSrcScss)
+        }
+    ];
+
+    popoverClosingExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(popoverClosingSrc),
+            fileName: 'popover-closing-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(popoverTriggerSrcTs),
+            fileName: 'popover-closing-exampl',
+            typescriptFileCode: getAssetFromModuleAssets(popoverClosingSrcTs),
+            component: 'PopoverClosingExampleComponent'
         }
     ];
 

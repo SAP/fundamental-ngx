@@ -10,6 +10,21 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="closing" componentName="popover"> Closing Popovers </fd-docs-section-title>
+<description>
+    Popovers can be closed in a variety of ways. By default, popovers close when the user clicks outside of the popover
+    or presses the escape key. These behaviors can be controlled by setting the <code>closeOnOutsideClick</code> and
+    <code>closeOnEscapeKey</code> inputs to <code>false</code>. Popovers can also be closed when the user navigates away
+    from the page by setting the <code>closeOnNavigation</code> input to <code>true</code>. Additionally, a background
+    overlay can be applied to the popover by setting the <code>applyOverlay</code> input to <code>true</code>.
+</description>
+<component-example>
+    <fd-popover-closing-example></fd-popover-closing-example>
+</component-example>
+<code-example [exampleFiles]="popoverClosingExample"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="trigger" componentName="popover"> Simple Popover </fd-docs-section-title>
 <description>
     There is different way to build popover, it can be done, by using simplified markup, with trigger element connected
