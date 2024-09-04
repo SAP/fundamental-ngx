@@ -2,10 +2,16 @@ import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angu
 import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { TabbableElementService } from '@fundamental-ngx/cdk/utils';
 import { WizardComponent } from './wizard.component';
-import { WizardModule } from './wizard.module';
+import { WizardContentComponent } from './wizard-content/wizard-content.component';
+import { WizardNavigationComponent } from './wizard-navigation/wizard-navigation.component';
+import { WizardNextStepComponent } from './wizard-next-step/wizard-next-step.component';
+import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progress-bar.directive';
+import { WizardStepIndicatorComponent } from './wizard-step-indicator/wizard-step-indicator.component';
+import { WizardStepComponent } from './wizard-step/wizard-step.component';
 
 @Component({
     template: `
+    <fd-dialog-body class="fd-scrollbar fd-dialog__body fd-dialog__body--no-vertical-padding" style="overflow: auto; padding: 1rem;">
         <fd-wizard>
             <fd-wizard-navigation>
                 <ul fd-wizard-progress-bar>
@@ -51,6 +57,33 @@ import { WizardModule } from './wizard.module';
                 </ul>
             </fd-wizard-navigation>
         </fd-wizard>
+        <div fd-bar="" bardesign="floating-footer" class="fd-bar fd-bar--floating-footer is-compact" ng-reflect-bar-design="floating-footer">
+            <div fd-bar-right="" class="fd-bar__right">
+                <fd-button-bar label="Previous Step" ng-reflect-label="Previous Step" class="fd-bar__element ng-star-inserted" style="pointer-events: auto;">
+                    <button fd-button="" class="fd-button fd-button--transparent is-cozy" id="fd-button-bar-id-2" ng-reflect-type="button"
+                     ng-reflect-glyph-position="before" 
+                        ng-reflect-fd-type="transparent" ng-reflect-label="Previous Step" ng-reflect-fd-menu="false" ng-reflect-disabled="false" type="button">
+                    <span class="fd-button__text ng-star-inserted"> Previous Step </span>
+                    </button>
+                </fd-button-bar>
+                <fd-button-bar ng-reflect-label="Next Step" ng-reflect-disabled="true" 
+                    class="fd-bar__element ng-star-inserted" style="pointer-events: none;">
+                    <button fd-button="" class="fd-button fd-button--transparent is-disabled is-cozy" id="fd-button-bar-id-1" 
+                    ng-reflect-type="button" ng-reflect-glyph-position="before" ng-reflect-fd-type="transparent" ng-reflect-label="Next Step"
+                     ng-reflect-fd-menu="false" ng-reflect-disabled="true" type="button" disabled="true">
+                        <span class="fd-button__text ng-star-inserted"> Next Step </span>
+                    </button>
+                </fd-button-bar>
+                <fd-button-bar label="Cancel" ng-reflect-label="Cancel" class="fd-bar__element" style="pointer-events: auto;">
+                    <button fd-button="" class="fd-button fd-button--transparent is-cozy" id="fd-button-bar-id-0" ng-reflect-type="button"
+                     ng-reflect-glyph-position="before" ng-reflect-fd-type="transparent" ng-reflect-label="Cancel" ng-reflect-fd-menu="false"
+                      ng-reflect-disabled="false" type="button">
+                        <span class="fd-button__text ng-star-inserted"> Cancel </span>
+                    </button>
+                </fd-button-bar>
+            </div>
+        </div>
+    </fd-dialog-body>
     `
 })
 class TestWrapperComponent {
@@ -73,7 +106,15 @@ describe('WizardComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComponent],
-            imports: [WizardModule]
+            imports: [
+                WizardComponent,
+                WizardNavigationComponent,
+                WizardProgressBarDirective,
+                WizardStepComponent,
+                WizardStepIndicatorComponent,
+                WizardContentComponent,
+                WizardNextStepComponent
+            ]
         })
             .overrideComponent(WizardComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }
@@ -87,6 +128,7 @@ describe('WizardComponent', () => {
         component = fixture.componentInstance.wizardComponent;
         element = fixture.componentInstance.wizardElement;
         step3 = fixture.componentInstance.step3;
+
         fixture.detectChanges();
     });
 
