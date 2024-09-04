@@ -70,7 +70,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
 
     /**
      * Whether user wants to mark month cells on hover.
-     * Works only on range mode, when start date is selected.
+     * Works only on range mode, when start month is selected.
      */
     @Input()
     rangeHoverEffect = false;

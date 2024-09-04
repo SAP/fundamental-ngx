@@ -43,7 +43,7 @@
             [year]="_currentlyDisplayed.year"
             [id]="id"
             [focusEscapeFunction]="escapeFocusFunction"
-            [isDateRangeMonthYearFormat]="isDateRangeMonthYearFormat"
+            [isDateRangeMonthYearFormat]="isDateRangeMonthFormat()"
             [selectedRangeDate]="selectedRangeDate"
             [rangeHoverEffect]="rangeHoverEffect"
             (selectedRangeDateChange)="selectedRangeDateChanged($event)"
@@ -55,6 +55,10 @@
             [yearViewGrid]="yearGrid"
             [id]="id"
             [focusEscapeFunction]="escapeFocusFunction"
+            [isDateRangeYearFormat]="isDateRangeYearFormat()"
+            [selectedRangeDate]="selectedRangeDate"
+            [rangeHoverEffect]="rangeHoverEffect"
+            (selectedRangeDateChange)="selectedRangeDateChanged($event)"
             (yearClicked)="selectedYear($event)"
         >
         </fd-calendar-year-view>
