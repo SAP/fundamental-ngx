@@ -292,11 +292,11 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
 
     /**
      * @hidden
-     * Handles hover effect for single-range selection mode.
-     * @param day The calendar day that is hovered.
+     * Handles hover effect for range selection mode.
+     * @param month The calendar month that is hovered.
      */
     _handleRangeHover(month: CalendarMonth<D>): void {
-        // Handle single range hover
+        // Handle range hover
         const start = this.selectedRangeDate?.start;
         if (this._isOnRangePick && start) {
             if (this._dateTimeAdapter.compareDate(month.date, start) < 0) {
