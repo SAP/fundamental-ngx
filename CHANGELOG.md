@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.3...v0.52.2-rc.4) (2024-09-04)
+
+
+### Bug Fixes
+
+* **core:** wizard content overllaping fixed ([#12361](https://github.com/SAP/fundamental-ngx/issues/12361)) ([ab12166](https://github.com/SAP/fundamental-ngx/commit/ab1216673a9cfda8ec53b5bbcda4c1066122df54))
+
+
+
+
+
 ## [0.52.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.2...v0.52.2-rc.3) (2024-09-03)
 
 **Note:** Version bump only for package fundamental-ngx
