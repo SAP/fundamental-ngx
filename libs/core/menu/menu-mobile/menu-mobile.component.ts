@@ -93,6 +93,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
 
     /** Closes the Dialog and Menu component */
     close(): void {
+        console.log('Close menu');
         this.dialogRef.close();
         this._component.close();
     }

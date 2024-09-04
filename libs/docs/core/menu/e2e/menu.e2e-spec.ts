@@ -81,6 +81,7 @@ describe('Menu test suite', () => {
 
     describe('check dialog popup Mobile Menu example', () => {
         it('should open and close dialog popup Mobile Menu', async () => {
+            console.log('TEST TEST TEST');
             await click(btnMobileMenu);
             await waitForElDisplayed(dialogMobileMenu);
             await expect(await elementDisplayed(dialogMobileMenu)).toBe(true);
