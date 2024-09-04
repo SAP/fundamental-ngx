@@ -58,7 +58,7 @@ export class AutoCompleteDirective {
     private lastKeyUpEvent: KeyboardEvent;
 
     /** @hidden */
-    private isComposing = false;
+    private _isComposing = false;
 
     /** @hidden */
     private readonly _elementRef = inject(ElementRef);
@@ -94,11 +94,11 @@ export class AutoCompleteDirective {
                 .subscribe((evt) => this._handleKeyboardEvent(evt));
 
             compositionStartEvent.pipe(takeUntilDestroyed()).subscribe(() => {
-                this.isComposing = true;
+                this._isComposing = true;
             });
 
             compositionEndEvent.pipe(takeUntilDestroyed()).subscribe(() => {
-                this.isComposing = false;
+                this._isComposing = false;
                 this.inputText = this._elementRef.nativeElement.value;
             });
         });
@@ -110,7 +110,7 @@ export class AutoCompleteDirective {
 
     /** @hidden */
     _handleKeyboardEvent(event: KeyboardEvent): void {
-        if (this.enable && !this.isComposing) {
+        if (this.enable && !this._isComposing) {
             if (KeyUtil.isKeyCode(event, this._stopKeys)) {
                 this._elementRef.nativeElement.value = this.inputText;
             } else if (KeyUtil.isKeyCode(event, this._completeKeys)) {
