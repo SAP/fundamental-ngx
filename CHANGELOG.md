@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.3...v0.52.2-rc.4) (2024-09-04)
+
+
+### Bug Fixes
+
+* **core:** wizard content overllaping fixed ([#12361](https://github.com/SAP/fundamental-ngx/issues/12361)) ([ab12166](https://github.com/SAP/fundamental-ngx/commit/ab1216673a9cfda8ec53b5bbcda4c1066122df54))
+
+
+
+
+
+## [0.52.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.2...v0.52.2-rc.3) (2024-09-03)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.52.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.1...v0.52.2-rc.2) (2024-09-03)
+
+
+### Bug Fixes
+
+* **core:** add proper styling for Select placeholder ([#12358](https://github.com/SAP/fundamental-ngx/issues/12358)) ([10976f9](https://github.com/SAP/fundamental-ngx/commit/10976f911da3d8d2e8fd79071a5b5f39e2bb00f9))
+
+
+
+
+
+## [0.52.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.0...v0.52.2-rc.1) (2024-09-03)
+
+
+### Features
+
+* **platform:** move the column reordering button in the list item representing the column ([#12300](https://github.com/SAP/fundamental-ngx/issues/12300)) ([143647b](https://github.com/SAP/fundamental-ngx/commit/143647be3864eb7c90f90909dfbe73a6c60597e5)), closes [#12175](https://github.com/SAP/fundamental-ngx/issues/12175)
+
+
+
+
+
 ## [0.52.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.52.1...v0.52.2-rc.0) (2024-08-28)
 
 

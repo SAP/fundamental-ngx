@@ -36,9 +36,6 @@ $block: 'fd-wizard';
             &__progress-bar {
                 @include fd-wizard-responsive-paddings();
             }
-
-            .fd-bar--floating-footer {
-            }
         }
     }
 
