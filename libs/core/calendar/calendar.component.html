@@ -9,7 +9,6 @@
     [previousButtonDisabled]="previousButtonDisabled"
     [nextButtonDisabled]="nextButtonDisabled"
     (activeViewChange)="handleActiveViewChange($event)"
-    [showMonth]="!isDateRangeMonthYearFormat"
 ></fd-calendar-header>
 @if (_currentlyDisplayed) {
     @if (activeView === 'day') {

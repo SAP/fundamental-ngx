@@ -14,7 +14,7 @@
         ></button>
     </div>
     @if (isOnDayView || isOnMonthView) {
-        @if (showMonth) {
+        @if (!isOnMonthView) {
             <div class="fd-calendar__action">
                 <!-- Select month button -->
                 <button

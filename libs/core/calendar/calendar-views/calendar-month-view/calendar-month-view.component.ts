@@ -69,7 +69,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
     readonly selectedRangeDateChange: EventEmitter<DateRange<D>> = new EventEmitter<DateRange<D>>();
 
     /**
-     * Whether user wants to mark day cells on hover.
+     * Whether user wants to mark month cells on hover.
      * Works only on range mode, when start date is selected.
      */
     @Input()
@@ -176,7 +176,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
         }
         this._selectedRangeDate = dateRange;
         if (this._calendarMonthListGrid) {
-            this._changeSelectedRangeDays(dateRange, this._getMonthList());
+            this._changeSelectedRangeMonths(dateRange, this._getMonthList());
         }
     }
 
@@ -343,7 +343,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
             this._selectedRangeDate = this._getOrderedRange(this.selectedRangeDate.start!, month.date);
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
         }
-        this._changeSelectedRangeDays(this._selectedRangeDate, this._getMonthList());
+        this._changeSelectedRangeMonths(this._selectedRangeDate, this._getMonthList());
     }
 
     /**
@@ -365,7 +365,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
      * Change properties of range months, this method is called, to not rebuild whole grid from scratch,
      * it just changes properties of newly selected/unselected months.
      */
-    private _changeSelectedRangeDays(dates: DateRange<D>, calendar: CalendarMonth<D>[]): void {
+    private _changeSelectedRangeMonths(dates: DateRange<D>, calendar: CalendarMonth<D>[]): void {
         /** Pull list of calendar month */
         const calendarList = calendar;
 
@@ -454,7 +454,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
 
         // if the date range is selected
         if (this.isDateRangeMonthYearFormat) {
-            this._changeSelectedRangeDays(this._selectedRangeDate, monthList);
+            this._changeSelectedRangeMonths(this._selectedRangeDate, monthList);
         }
 
         this._calendarMonthListGrid = [];
