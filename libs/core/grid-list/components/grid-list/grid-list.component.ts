@@ -5,6 +5,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     Input,
@@ -17,8 +18,10 @@ import {
     computed,
     inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, KeyboardSupportService, Nullable, RangeSelector, RtlService } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, Observable, Subscription, filter } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';
 import {
     GridListSelectionActions,
@@ -110,6 +113,9 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
     /** @hidden */
     private readonly subscription = new Subscription();
 
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly _destroyRef = inject(DestroyRef);
+
     /** @hidden */
     private readonly _rtlService = inject(RtlService, {
         optional: true
@@ -155,6 +161,7 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
     /** @hidden */
     ngAfterContentInit(): void {
         this._setFirstFocusableItem();
+        this._listenOnQueryChange();
         this._cd.detectChanges();
     }
 
@@ -421,6 +428,15 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
             : GridListSelectionActions.ADD;
 
         this.setSelectedItem(currentItem as any, indexToFocus, selectionAction);
+    }
+
+    /** @hidden */
+    private _listenOnQueryChange(): void {
+        this._gridListItems.changes.pipe(startWith(0), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            setTimeout(() => {
+                this._setFirstFocusableItem();
+            });
+        });
     }
 
     /** @hidden */
