@@ -261,14 +261,14 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _getWizardFooterHeight(): number {
-        const wizard = this._elRef.nativeElement;
-        let retVal;
-        if (wizard.querySelector('.' + BAR_FOOTER_CLASS)) {
-            retVal = wizard.querySelector('.' + BAR_FOOTER_CLASS).offsetHeight;
-        } else if (wizard.querySelector('.' + BAR_FLOATING_FOOTER_CLASS)) {
-            retVal = wizard.querySelector('.' + BAR_FLOATING_FOOTER_CLASS).offsetHeight;
-        } else {
-            retVal = 0;
+        let retVal = 0;
+        if (this._dialogBodyComponent) {
+            const dialogBody = this._dialogBodyComponent.elementRef.nativeElement;
+            if (dialogBody.querySelector('.' + BAR_FOOTER_CLASS)) {
+                retVal = dialogBody.querySelector('.' + BAR_FOOTER_CLASS).offsetHeight;
+            } else if (dialogBody.querySelector('.' + BAR_FLOATING_FOOTER_CLASS)) {
+                retVal = dialogBody.querySelector('.' + BAR_FLOATING_FOOTER_CLASS).offsetHeight;
+            }
         }
         return retVal;
     }
@@ -278,9 +278,11 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         let retVal = 0;
         if (this._dialogBodyComponent) {
             const dialogBody = this._dialogBodyComponent.elementRef.nativeElement;
+            const dialogComponent = dialogBody.closest('fd-dialog');
+
             if (dialogBody.tagName.toLowerCase() === 'fd-dialog-body') {
                 this._dialogBodyComponent.dialogConfig.verticalPadding = false;
-                const dialogBodyTitle = dialogBody.querySelector('.fd-title--h2');
+                const dialogBodyTitle = dialogComponent.querySelector('.fd-title--h2');
                 if (dialogBodyTitle) {
                     retVal = dialogBodyTitle.offsetHeight;
                 }
@@ -530,6 +532,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             this._showSummary();
         } else {
             this.progressBar.visible = true;
+
             this._setContentTemplates();
             this._shrinkWhileAnyStepIsTooNarrow();
         }
