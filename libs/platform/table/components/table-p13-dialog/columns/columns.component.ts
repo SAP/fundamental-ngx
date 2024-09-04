@@ -15,7 +15,7 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InitialFocusDirective, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
@@ -103,7 +103,8 @@ const INITIAL_SHOW_ALL_ITEMS = true;
         ButtonBarComponent,
         AsyncPipe,
         FdTranslatePipe,
-        InitialFocusDirective
+        InitialFocusDirective,
+        CommonModule
     ]
 })
 export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy {
@@ -236,12 +237,16 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     }
 
     /** @hidden */
-    _moveActiveToTop(): void {
+    _moveActiveToTop(event: Event): void {
+        event.stopPropagation();
+        event.preventDefault();
         this._moveColumnInFilteredListByIndex(this._getActiveColumnIndexInFilteredList(), 0);
     }
 
     /** @hidden */
-    _moveActiveToBottom(): void {
+    _moveActiveToBottom(event: Event): void {
+        event.stopPropagation();
+        event.preventDefault();
         this._moveColumnInFilteredListByIndex(
             this._getActiveColumnIndexInFilteredList(),
             this._filteredColumns.length - 1
@@ -249,15 +254,30 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     }
 
     /** @hidden */
-    _moveActiveUp(): void {
+    _moveActiveUp(event: Event): void {
+        event.stopPropagation();
+        event.preventDefault();
         const activeColumnIndex = this._getActiveColumnIndexInFilteredList();
         this._moveColumnInFilteredListByIndex(activeColumnIndex, activeColumnIndex - 1);
+
+        // keep the focus back to the move up button as it gets lost on click
+        setTimeout(() => {
+            const moveUpBtn = event.target as HTMLElement;
+            moveUpBtn.focus();
+        }, 0);
     }
 
     /** @hidden */
-    _moveActiveDown(): void {
+    _moveActiveDown(event: Event): void {
+        event.stopPropagation();
+        event.preventDefault();
         const activeColumnIndex = this._getActiveColumnIndexInFilteredList();
         this._moveColumnInFilteredListByIndex(activeColumnIndex, activeColumnIndex + 1);
+    }
+
+    /** @hidden */
+    _isReorderColumnButtonShowable(item: SelectableColumn): boolean {
+        return item.active && item.selected;
     }
 
     /** @hidden */
