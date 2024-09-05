@@ -263,7 +263,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
     }
 
     /** Method for handling the mouse click event when a month is selected  */
-    selectMonth(monthCell: CalendarMonth<D>, event?: MouseEvent): void {
+    selectMonth(monthCell: CalendarMonth<D>, event?: MouseEvent | KeyboardEvent): void {
         if (event) {
             event.stopPropagation();
             event.preventDefault();
@@ -321,7 +321,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
      * Toggles the hover effect based on the selection state and event.
      * @param event Optional mouse event for handling hover effect.
      */
-    private _handleRangeHoverEffect(event?: MouseEvent): void {
+    private _handleRangeHoverEffect(event?: MouseEvent | KeyboardEvent): void {
         if (this.isDateRangeMonthYearFormat && this.rangeHoverEffect && this._selectCounter === 1 && event) {
             this._isOnRangePick = !this._isOnRangePick;
         } else {
@@ -481,13 +481,14 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, Focusab
         this._calendarService.colAmount = this._amountOfColPerRow;
         this._calendarService.focusEscapeFunction = this.focusEscapeFunction;
 
-        this._calendarService.onFocusIdChange
-            .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe((index) => this._focusOnCellByIndex(index));
+        this._calendarService.onFocusIdChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
+            this._handleRangeHover(this._getMonthList()[index]);
+            this._focusOnCellByIndex(index);
+        });
 
         this._calendarService.onKeySelect
             .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe((index) => this.selectMonth(this._getMonthList()[index]));
+            .subscribe(({ index, event }) => this.selectMonth(this._getMonthList()[index], event));
     }
 
     /**

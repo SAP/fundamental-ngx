@@ -230,7 +230,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, Focusabl
     }
 
     /** Method that sends the year to the parent component when it is clicked. */
-    selectYear(selectedYear: CalendarYear<D>, event?: MouseEvent): void {
+    selectYear(selectedYear: CalendarYear<D>, event?: MouseEvent | KeyboardEvent): void {
         if (event) {
             event.stopPropagation();
         }
@@ -384,7 +384,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, Focusabl
      * Toggles the hover effect based on the selection state and event.
      * @param event Optional mouse event for handling hover effect.
      */
-    private _handleRangeHoverEffect(event?: MouseEvent): void {
+    private _handleRangeHoverEffect(event?: MouseEvent | KeyboardEvent): void {
         if (this.isDateRangeYearFormat && this.rangeHoverEffect && this._selectCounter === 1 && event) {
             this._isOnRangePick = !this._isOnRangePick;
         } else {
@@ -546,13 +546,14 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, Focusabl
         this._calendarService.rowAmount = this.yearViewGrid.rows;
         this._calendarService.focusEscapeFunction = this.focusEscapeFunction;
 
-        this._calendarService.onFocusIdChange
-            .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe((index) => this._focusOnCellByIndex(index));
+        this._calendarService.onFocusIdChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
+            this._handleRangeHover(this._getYearList()[index]);
+            this._focusOnCellByIndex(index);
+        });
 
         this._calendarService.onKeySelect
             .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe((index) => this.selectYear(this._getYearList()[index]));
+            .subscribe(({ index, event }) => this.selectYear(this._getYearList()[index], event));
 
         this._calendarService.onListStartApproach.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
             this.loadPreviousYearList();

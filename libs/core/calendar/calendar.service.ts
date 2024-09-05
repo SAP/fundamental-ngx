@@ -13,7 +13,10 @@ export class CalendarService {
     colAmount = 4;
 
     /** Event thrown, when the element is selected by space or enter keys */
-    onKeySelect: Subject<number> = new Subject<number>();
+    onKeySelect: Subject<{ index: number; event: KeyboardEvent }> = new Subject<{
+        index: number;
+        event: KeyboardEvent;
+    }>();
 
     /** Event thrown, when the focus goes after list of elements */
     onListEndApproach: Subject<number> = new Subject<number>();
@@ -55,7 +58,7 @@ export class CalendarService {
             case 'Enter':
             case ' ': {
                 event.preventDefault();
-                this.onKeySelect.next(index);
+                this.onKeySelect.next({ index, event });
                 break;
             }
             case 'Left':
