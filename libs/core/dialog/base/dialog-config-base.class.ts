@@ -2,6 +2,7 @@
 
 import { DynamicComponentConfig, Nullable } from '@fundamental-ngx/cdk/utils';
 
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { DialogPosition } from '../utils/dialog-position.class';
 
 export class DialogConfigBase<T> implements DynamicComponentConfig {
@@ -98,4 +99,7 @@ export class DialogConfigBase<T> implements DynamicComponentConfig {
 
     /** Whether to close the dialog on router navigation start. */
     closeOnNavigation?: boolean = true;
+
+    /** Content density mode for the dialog. */
+    contentDensity?: ContentDensityMode;
 }

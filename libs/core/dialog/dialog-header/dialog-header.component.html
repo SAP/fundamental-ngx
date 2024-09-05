@@ -1,7 +1,7 @@
 <div
     fd-bar
     class="fd-dialog__header"
-    [fdCozy]="dialogConfig.mobile"
+    [fdContentDensity]="dialogConfig.contentDensity ?? ''"
     [barDesign]="subHeaderTemplate ? 'header-with-subheader' : 'header'"
 >
     <ng-template [ngTemplateOutlet]="headerTemplate ? headerTemplate : defaultTemplate"></ng-template>
@@ -20,7 +20,12 @@
     </ng-template>
 </div>
 @if (subHeaderTemplate) {
-    <div fd-bar class="fd-dialog__subheader" barDesign="subheader" [fdCozy]="dialogConfig.mobile">
+    <div
+        fd-bar
+        class="fd-dialog__subheader"
+        barDesign="subheader"
+        [fdContentDensity]="dialogConfig.contentDensity ?? ''"
+    >
         <ng-template [ngTemplateOutlet]="subHeaderTemplate"></ng-template>
     </div>
 }

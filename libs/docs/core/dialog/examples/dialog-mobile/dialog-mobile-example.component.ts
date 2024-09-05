@@ -1,5 +1,6 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
+import { ContentDensityMode } from '@fundamental-ngx/core';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
@@ -36,7 +37,8 @@ export class DialogMobileExampleComponent {
             mobile: true,
             responsivePadding: true,
             ariaLabelledBy: 'fd-dialog-header-5',
-            ariaDescribedBy: 'fd-dialog-body-5'
+            ariaDescribedBy: 'fd-dialog-body-5',
+            contentDensity: ContentDensityMode.COZY
         });
     }
 }

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ContentDensityMode } from '@fundamental-ngx/core';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
@@ -156,7 +157,8 @@ export class DialogDocsComponent {
             minWidth: '',
             maxWidth: '',
             ariaLabelledBy: 'fd-dialog-header-11',
-            ariaDescribedBy: 'fd-dialog-body-11'
+            ariaDescribedBy: 'fd-dialog-body-11',
+            contentDensity: ContentDensityMode.COZY
         }
     };
 
@@ -382,6 +384,7 @@ export class DialogDocsComponent {
         private _dialogService: DialogService
     ) {
         this.schema = this._schemaFactory.getComponent('dialog');
+        console.log(this.schema);
     }
 
     onSchemaValues(data): void {
