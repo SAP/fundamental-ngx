@@ -3,6 +3,7 @@ import {
     booleanAttribute,
     ChangeDetectionStrategy,
     Component,
+    ContentChild,
     contentChildren,
     Directive,
     ElementRef,
@@ -13,6 +14,7 @@ import {
 } from '@angular/core';
 import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
+import { TabLinkDirective } from '@fundamental-ngx/core/tabs';
 import { ReactiveTabConfig } from '../../interfaces/tab-config.interface';
 import { SemanticColor } from '../../types';
 
@@ -43,6 +45,10 @@ export class IconTabBarTabContentDirective implements HasElementRef {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IconTabBarTabComponent implements ReactiveTabConfig {
+    /** @hidden */
+    @ContentChild(TabLinkDirective)
+    linkItem: TabLinkDirective;
+
     /** Tab Label. */
     label = input<Nullable<string>>();
 
