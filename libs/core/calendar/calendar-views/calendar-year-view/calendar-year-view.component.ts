@@ -551,9 +551,10 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, Focusabl
             this._focusOnCellByIndex(index);
         });
 
-        this._calendarService.onKeySelect
-            .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe(({ index, event }) => this.selectYear(this._getYearList()[index], event));
+        this._calendarService.onKeySelect.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(({ index, event }) => {
+            this.selectYear(this._getYearList()[index], event);
+            this._focusOnCellByIndex(index);
+        });
 
         this._calendarService.onListStartApproach.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
             this.loadPreviousYearList();
