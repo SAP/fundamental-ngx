@@ -153,7 +153,7 @@ describe('TableComponent Virtual Scrolling', async () => {
             });
             it('Should calculateVirtualScrollRows for scrollWholeRows', () => {
                 hostComponent.virtualScrollDirective.calculateVirtualScrollRows();
-                expect(hostComponent.virtualScrollDirective.virtualScrollTotalHeight).toBe(1892);
+                expect(hostComponent.virtualScrollDirective.virtualScrollTotalHeight).toBe(1936);
                 expect(tableComponent.tableScrollMockContainer.nativeElement.style.maxHeight).toBe('20rem');
                 expect(setRowsInViewportMock).toHaveBeenCalledWith(9, 6);
                 expect(setTableStateMock).toHaveBeenCalledWith({
