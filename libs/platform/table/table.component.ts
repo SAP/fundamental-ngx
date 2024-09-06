@@ -143,9 +143,14 @@ import {
     takeUntil,
     tap
 } from 'rxjs/operators';
-import { NoDataWrapperComponent, TABLE_TOOLBAR, TableToolbarInterface, ToolbarContext } from './components';
+import {
+    NoDataWrapperComponent,
+    PlatformTableColumnResizerComponent,
+    TABLE_TOOLBAR,
+    TableToolbarInterface,
+    ToolbarContext
+} from './components';
 import { TableGrowingButtonComponent } from './components/growing-button/table-growing-button.component';
-import { PlatformTableColumnResizerComponent } from './components/table-column-resizer/table-column-resizer.component';
 import { TableGroupRowComponent } from './components/table-group-row/table-group-row.component';
 import { TableHeaderRowComponent } from './components/table-header-row/table-header-row.component';
 import { TablePoppingRowComponent } from './components/table-popping-row/table-popping-row.component';
@@ -2075,7 +2080,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _calculateTableColumnsLength(): void {
-        this._tableColumnsLength = this._visibleColumns.length + (this._isSelectionColumnShown ? 1 : 0);
+        this._tableColumnsLength = this.getTableColumns().length + (this._isSelectionColumnShown ? 1 : 0);
     }
 
     /** @hidden */
