@@ -262,6 +262,7 @@ export async function waitForNotPresent(
     index: number = 0,
     waitTime = defaultWaitTime()
 ): Promise<true | void> {
+    console.log('>>>>>>>>>DENO<<<<<<<<<>>>> SELECTOR: ', selector);
     return (await $$(selector))[index].waitForExist({ timeout: waitTime, reverse: true });
 }
 

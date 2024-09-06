@@ -85,6 +85,7 @@ describe('Menu test suite', () => {
             await waitForElDisplayed(dialogMobileMenu);
             await expect(await elementDisplayed(dialogMobileMenu)).toBe(true);
             await click(closeDialogMobileMenu);
+            console.log('>>DENO>>>>>> Dialog Mobile Menu: ', dialogMobileMenu);
             await expect(await waitForNotPresent(dialogMobileMenu)).toBe(true);
         });
 
