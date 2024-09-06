@@ -110,7 +110,7 @@
         [appendTo]="handle"
         [disabled]="!tooltipMode"
         class="fd-popover--slider"
-        additionalBodyClass="fd-slider--tooltip-popover"
+        additionalBodyClass="fd-slider-tooltip-popover"
         placement="top"
     >
         <ng-template
@@ -192,7 +192,7 @@
         [closeOnOutsideClick]="false"
         [appendTo]="rangeHandle1"
         [disabled]="!tooltipMode"
-        additionalBodyClass="fd-slider--tooltip-popover"
+        additionalBodyClass="fd-slider-tooltip-popover"
         class="fd-popover--slider"
         placement="top"
     >
@@ -207,7 +207,7 @@
         [closeOnOutsideClick]="false"
         [appendTo]="rangeHandle2"
         [disabled]="!tooltipMode"
-        additionalBodyClass="fd-slider--tooltip-popover"
+        additionalBodyClass="fd-slider-tooltip-popover"
         class="fd-popover--slider"
         placement="top"
     >
@@ -220,14 +220,14 @@
 <ng-template #popoverInner let-target="target" let-position="position">
     <div
         #sliderTooltipWrapper
-        class="fd-slider--tooltip-wrapper"
+        class="fd-slider-tooltip-wrapper"
         (click)="$event.stopPropagation()"
         (keydown)="$event.stopPropagation()"
         (mouseenter)="_popoverInputFieldHovered$.next(true)"
         (mouseleave)="_popoverInputFieldHovered$.next(false)"
     >
         @if ((customValues && customValues.length > 0) || tooltipMode === 'readonly') {
-            <div class="fd-slider--tooltip">
+            <div class="fd-slider-tooltip">
                 {{ customValues && customValues.length > 0 ? customValues[position].label : _popoverValueRef[target] }}
             </div>
         }
@@ -240,7 +240,7 @@
                 fdkOnlyDigits
                 [decimal]="true"
                 [style.width.ch]="('' + _popoverValueRef[target]).length + 2"
-                class="fd-input fd-slider--tooltip {{ _popoverInputFieldClass }}"
+                class="fd-input fd-slider-tooltip {{ _popoverInputFieldClass }}"
                 [(ngModel)]="_popoverValueRef[target]"
                 (blur)="_updateValueFromInput(popoverInputField.value, target)"
                 (keydown.enter)="_updateValueFromInput(popoverInputField.value, target)"
