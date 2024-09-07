@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.4...v0.52.2-rc.5) (2024-09-06)
+
+
+### Bug Fixes
+
+* **platform:** table grouping spanning  ([#12356](https://github.com/SAP/fundamental-ngx/issues/12356)) ([7f8da12](https://github.com/SAP/fundamental-ngx/commit/7f8da127bab8c7cbe99bda16fadb2da3a7a1247f)), closes [#12261](https://github.com/SAP/fundamental-ngx/issues/12261) [#12261](https://github.com/SAP/fundamental-ngx/issues/12261)
+
+
+
+
+
 ## [0.52.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.3...v0.52.2-rc.4) (2024-09-04)
 
 
