@@ -52,7 +52,7 @@
     "@sap-theming/theming-base-content": "11.18.0",
     "@stackblitz/sdk": "1.9.0",
     "@swc/helpers": "0.5.11",
-    "compare-versions": "6.1.0",
+    "compare-versions": "6.1.1",
     "core-js": "3.26.1",
     "dayjs": "1.11.11",
     "fast-deep-equal": "3.1.3",

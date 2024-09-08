@@ -9250,10 +9250,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"compare-versions@npm:6.1.0":
-  version: 6.1.0
-  resolution: "compare-versions@npm:6.1.0"
-  checksum: 10/20f349e7f8ad784704c68265f4e660e2abbe2c3d5c75793184fccb85f0c5c0263260e01fdd4488376f6b74b0f069e16c9684463f7316b075716fb1581eb36b77
+"compare-versions@npm:6.1.1":
+  version: 6.1.1
+  resolution: "compare-versions@npm:6.1.1"
+  checksum: 10/9325c0fadfba81afa0ec17e6fc2ef823ba785c693089698b8d9374e5460509f1916a88591644d4cb4045c9a58e47fafbcc0724fe8bf446d2a875a3d6eeddf165
   languageName: node
   linkType: hard
 
@@ -13502,7 +13502,7 @@ __metadata:
     axe-html-reporter: "npm:2.2.3"
     axios: "npm:1.6.0"
     chromedriver: "npm:99.0.0"
-    compare-versions: "npm:6.1.0"
+    compare-versions: "npm:6.1.1"
     conventional-changelog: "npm:4.0.0"
     conventional-changelog-angular: "npm:6.0.0"
     conventional-changelog-cli: "npm:3.0.0"
