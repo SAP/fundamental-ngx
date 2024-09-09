@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.5...v0.52.2-rc.6) (2024-09-09)
+
+
+### Bug Fixes
+
+* **core:** update the CSS for Slider Tooltip ([#12377](https://github.com/SAP/fundamental-ngx/issues/12377)) ([778c68c](https://github.com/SAP/fundamental-ngx/commit/778c68c24cf48cfbcb8ade4fa00b0757a0cd6bd7))
+
+
+
+
+
 ## [0.52.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.4...v0.52.2-rc.5) (2024-09-06)
 
 **Note:** Version bump only for package @fundamental-ngx/core
