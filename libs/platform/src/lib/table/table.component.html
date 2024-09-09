@@ -8,7 +8,7 @@
 <fd-busy-indicator
     [loading]="(_tableService.tableLoading$ | async) === true && _dataSourceDirective._firstLoadingDone"
     [block]="true"
-    [preventWheelEvents]="true"
+    [preventWheelEvents]="pageScrolling && !!_virtualScrollDirective?.scrollWholeRows"
 >
     <!-- Table Container -->
     <div class="fdp-table__container" #tableContainer>

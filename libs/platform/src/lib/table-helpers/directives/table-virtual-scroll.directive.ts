@@ -146,6 +146,16 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
     /** @hidden */
     ngOnDestroy(): void {
         this._focusableGridSubscription?.unsubscribe();
+        if (this.scrollWholeRows) {
+            this._table.tableContainer.nativeElement.removeEventListener('wheel', this._wheelScrollListenerFunction, {
+                passive: false
+            });
+            this._table.tableScrollMockContainer.nativeElement.removeEventListener(
+                'scroll',
+                this._mockScrollbarListenerFunction,
+                { passive: false }
+            );
+        }
     }
 
     /** Sets table reference. */

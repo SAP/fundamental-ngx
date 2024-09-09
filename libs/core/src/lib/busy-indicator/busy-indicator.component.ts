@@ -4,6 +4,8 @@ import {
     ElementRef,
     HostListener,
     Input,
+    OnChanges,
+    OnDestroy,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -37,7 +39,7 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
         '[class.fd-busy-indicator__container--inline]': '!block'
     }
 })
-export class BusyIndicatorComponent {
+export class BusyIndicatorComponent implements OnChanges, OnDestroy {
     /** Whether to display the loading indicator animation. */
     @Input()
     loading: boolean;
@@ -77,20 +79,27 @@ export class BusyIndicatorComponent {
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
+    /** @hidden */
+    ngOnChanges(): void {
+        if (this.preventWheelEvents) {
+            this._elementRef.nativeElement.addEventListener('wheel', this._wheelListener, {
+                passive: false
+            });
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._elementRef.nativeElement.removeEventListener('wheel', this._wheelListener, {
+            passive: false
+        });
+    }
+
     /** @hidden If focus escapes busy container focus element after wrapped content */
     @HostListener('keydown', ['$event'])
     hostFocusChangeHandler(event: KeyboardEvent): void {
         if (this.loading && KeyUtil.isKeyCode(event, TAB) && !event.shiftKey) {
             this.fakeFocusElement.nativeElement.focus();
-        }
-    }
-
-    /** @hidden */
-    @HostListener('wheel', ['$event'])
-    wheelListener(event: WheelEvent): void {
-        if (this.preventWheelEvents && this.loading) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
         }
     }
 
@@ -102,4 +111,12 @@ export class BusyIndicatorComponent {
             this._elementRef.nativeElement.focus();
         }
     }
+
+    /** @hidden */
+    private _wheelListener = (event: WheelEvent): void => {
+        if (this.preventWheelEvents && this.loading) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    };
 }
