@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.43](https://github.com/SAP/fundamental-ngx/compare/v0.43.42...v0.43.43) (2024-09-10)
+
+
+### Bug Fixes
+
+* **platform:** broken _getNumberOfRowsToDisplay() function ([#12365](https://github.com/SAP/fundamental-ngx/issues/12365)) ([a7ec69e](https://github.com/SAP/fundamental-ngx/commit/a7ec69e2db2870f6dc9c301d1407f2cd108934fe))
+* **platform:** more specific targeting of blocking wheel event when using scrollWholeRows ([#12375](https://github.com/SAP/fundamental-ngx/issues/12375)) ([6b81be6](https://github.com/SAP/fundamental-ngx/commit/6b81be6baa5f26133c334b4dad55285fefbe1a01))
+
+
+
+
+
 ## [0.43.42](https://github.com/SAP/fundamental-ngx/compare/v0.43.41...v0.43.42) (2024-09-03)
 
 
