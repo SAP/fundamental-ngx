@@ -24,49 +24,52 @@
                 [attr.aria-hidden]="item.hidden"
                 role="presentation"
             >
-                @if (!item.subItems?.length && !multiClick) {
-                    <a
-                        #tabItem
-                        fdp-icon-tab-bar-text-type-tab-item
-                        [item]="item"
-                        [layoutMode]="layoutMode"
-                        [colorAssociations]="colorAssociations()"
-                        [attr.tabindex]="idx === 0 ? 0 : -1"
-                        [attr.aria-selected]="item.uId === selectedUid"
-                        (click)="_selectItem(item, $event)"
-                        (keydown)="_keyDownHandler($event, item, idx)"
-                    >
-                    </a>
-                }
-                @if (item.subItems?.length || multiClick) {
-                    <fdp-text-type-popover
-                        #tabItem
-                        #itemPopover
-                        [tabindex]="idx === 0 ? 0 : -1"
-                        [parentTab]="item"
-                        [layoutMode]="layoutMode"
-                        [multiClick]="multiClick"
-                        [selectedSubItemUid]="selectedUid"
-                        [colorAssociations]="colorAssociations()"
-                        (selectedSubItem)="_selectItem($event)"
-                        (keydown)="_keyDownHandler($event, item, idx, itemPopover)"
-                        (closeTab)="_closeTab($event)"
-                        (selectedItem)="_selectItem(item)"
-                    >
-                    </fdp-text-type-popover>
-                }
-                @if (item.closable) {
-                    <div class="fd-icon-tab-bar__button-container">
-                        <button
-                            fd-button
-                            tabindex="-1"
-                            class="fd-icon-tab-bar__button"
-                            fdType="transparent"
-                            (click)="_closeTab(item.uId)"
+                <ng-template [ngTemplateOutlet]="item?.titleTemplate || null"></ng-template>
+                @if (!item?.titleTemplate) {
+                    @if (!item.subItems?.length && !multiClick) {
+                        <a
+                            #tabItem
+                            fdp-icon-tab-bar-text-type-tab-item
+                            [item]="item"
+                            [layoutMode]="layoutMode"
+                            [colorAssociations]="colorAssociations()"
+                            [attr.tabindex]="idx === 0 ? 0 : -1"
+                            [attr.aria-selected]="item.uId === selectedUid"
+                            (click)="_selectItem(item, $event)"
+                            (keydown)="_keyDownHandler($event, item, idx)"
                         >
-                            <fd-icon glyph="decline"></fd-icon>
-                        </button>
-                    </div>
+                        </a>
+                    }
+                    @if (item.subItems?.length || multiClick) {
+                        <fdp-text-type-popover
+                            #tabItem
+                            #itemPopover
+                            [tabindex]="idx === 0 ? 0 : -1"
+                            [parentTab]="item"
+                            [layoutMode]="layoutMode"
+                            [multiClick]="multiClick"
+                            [selectedSubItemUid]="selectedUid"
+                            [colorAssociations]="colorAssociations()"
+                            (selectedSubItem)="_selectItem($event)"
+                            (keydown)="_keyDownHandler($event, item, idx, itemPopover)"
+                            (closeTab)="_closeTab($event)"
+                            (selectedItem)="_selectItem(item)"
+                        >
+                        </fdp-text-type-popover>
+                    }
+                    @if (item.closable) {
+                        <div class="fd-icon-tab-bar__button-container">
+                            <button
+                                fd-button
+                                tabindex="-1"
+                                class="fd-icon-tab-bar__button"
+                                fdType="transparent"
+                                (click)="_closeTab(item.uId)"
+                            >
+                                <fd-icon glyph="decline"></fd-icon>
+                            </button>
+                        </div>
+                    }
                 }
             </li>
         }
