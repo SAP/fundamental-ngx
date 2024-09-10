@@ -5,7 +5,7 @@
 >
     <thead class="fd-calendar__group" role="rowgroup">
         <tr class="fd-calendar__row" role="row">
-            @if (showWeekNumbers) {
+            @if (showWeekNumbers()) {
                 <th
                     class="fd-calendar__item fd-calendar__item--side-helper"
                     role="columnheader"
@@ -31,10 +31,10 @@
     <tbody class="fd-calendar__group" role="rowgroup">
         @for (row of _dayViewGrid; track row + '' + rowIndex; let rowIndex = $index) {
             <tr class="fd-calendar__row" role="row">
-                @if (showWeekNumbers) {
+                @if (showWeekNumbers()) {
                     <th
                         class="fd-calendar__item fd-calendar__item--side-helper"
-                        [ngClass]="{ 'event-enabled': allowMultipleSelection && calType !== 'range' }"
+                        [ngClass]="{ 'event-enabled': allowMultipleSelection() && calType() !== 'range' }"
                         role="rowheader"
                         scope="row"
                         [attr.data-fd-calendar-week]="_weeks[rowIndex]"
@@ -63,7 +63,7 @@
                         "
                         [class.fd-calendar__item--today]="cell.current"
                         [class.fd-calendar__item--weekend]="
-                            cell.weekend && markWeekends && cell.monthStatus === 'current'
+                            cell.weekend && markWeekends() && cell.monthStatus === 'current'
                         "
                         [class.fd-calendar__item--other]="cell.monthStatus !== 'current'"
                         [class.is-disabled]="cell.disabled"
@@ -88,7 +88,7 @@
                                     (cell.selectedFirst ? _dateRangeStartLabelId + ' ' : '') +
                                     (cell.selectedLast ? _dateRangeEndLabelId + ' ' : '') +
                                     (cell.current ? _todayLabelId + ' ' : '') +
-                                    (cell.selected && calType === 'single' ? _selectedDateLabelId + ' ' : '') +
+                                    (cell.selected && calType() === 'single' ? _selectedDateLabelId + ' ' : '') +
                                     (cell.past ? _dateInPastLabelId : '')
                                 "
                                 >{{ cell.label }}</span
