@@ -35,7 +35,7 @@ $block: fd-select;
         }
     }
 
-    .#{$block}__control[aria-selected='false'] {
+    .#{$block}__control.is-placeholder {
         .#{$block}__text-content {
             font-style: italic;
             font-weight: normal;
