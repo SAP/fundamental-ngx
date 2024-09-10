@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.9...v0.52.2-rc.10) (2024-09-10)
+
+
+### Bug Fixes
+
+* **core:** type incorrect assumption of input always existing ([#12240](https://github.com/SAP/fundamental-ngx/issues/12240)) ([1c723ce](https://github.com/SAP/fundamental-ngx/commit/1c723cea86751d07313d0e824190bac1669fb83e))
+
+
+
+
+
 ## [0.52.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.8...v0.52.2-rc.9) (2024-09-10)
 
 
