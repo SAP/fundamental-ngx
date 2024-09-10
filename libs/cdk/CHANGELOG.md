@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.8...v0.52.2-rc.9) (2024-09-10)
+
+
+### Bug Fixes
+
+* **core:** combobox handle IME input correctly to prevent accidental deletion of characters ([#12340](https://github.com/SAP/fundamental-ngx/issues/12340)) ([ea4d028](https://github.com/SAP/fundamental-ngx/commit/ea4d028d9ee855ca5124eb0d7cd3a763facf414e)), closes [#12232](https://github.com/SAP/fundamental-ngx/issues/12232) [#12232](https://github.com/SAP/fundamental-ngx/issues/12232)
+
+
+
+
+
 ## [0.52.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.7...v0.52.2-rc.8) (2024-09-10)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk
