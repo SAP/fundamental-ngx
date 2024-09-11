@@ -3,6 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.9...v0.52.2-rc.10) (2024-09-10)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.52.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.8...v0.52.2-rc.9) (2024-09-10)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.52.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.7...v0.52.2-rc.8) (2024-09-10)
+
+
+### Bug Fixes
+
+* **platform:** update Valiant Management list item state on select event ([#12392](https://github.com/SAP/fundamental-ngx/issues/12392)) ([522641c](https://github.com/SAP/fundamental-ngx/commit/522641cf1d0b4826c908aad4addc7811083cd795))
+
+
+
+
+
+## [0.52.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.6...v0.52.2-rc.7) (2024-09-09)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.52.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.5...v0.52.2-rc.6) (2024-09-09)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.52.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.4...v0.52.2-rc.5) (2024-09-06)
+
+
+### Bug Fixes
+
+* **platform:** table grouping spanning  ([#12356](https://github.com/SAP/fundamental-ngx/issues/12356)) ([7f8da12](https://github.com/SAP/fundamental-ngx/commit/7f8da127bab8c7cbe99bda16fadb2da3a7a1247f)), closes [#12261](https://github.com/SAP/fundamental-ngx/issues/12261) [#12261](https://github.com/SAP/fundamental-ngx/issues/12261)
+
+
+
+
+
 ## [0.52.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.3...v0.52.2-rc.4) (2024-09-04)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
