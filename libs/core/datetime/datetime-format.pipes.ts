@@ -117,7 +117,7 @@ export class TranslateDayPeriodPipe implements PipeTransform {
         const dayPeriodPattern = /(coreTime\.\w+Label)/;
         const match = value.match(dayPeriodPattern);
 
-        if (match && match[0]) {
+        if (match?.[0]) {
             const currentLanguage = this._currentLanguageSignal();
             const translatedValue = this._translationResolver.resolve(
                 currentLanguage,

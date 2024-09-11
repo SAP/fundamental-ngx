@@ -28,7 +28,7 @@ import { TimePickerModule } from '@fundamental-ngx/core/time-picker';
 })
 export class TimePickerFormatExampleComponent {
     time = FdDate.getNow();
-    // FdDatetimeAdapter is based on CustomDateTimeFormatOptions.
+    // FdDatetimeAdapter is based Intl.DateTimeFormatOptions
     basicDateTimeFormat = { hour: 'numeric', minute: '2-digit', second: '2-digit', hourCycle: 'h23' };
     dateTimeFormatWithDayPeriod = {
         ...this.basicDateTimeFormat,
