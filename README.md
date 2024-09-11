@@ -22,7 +22,7 @@ This repository contains 2 libraries(npm packages),
 
 ## <a name="2"></a>2. Requirements
 
-To download and use Fundamental Library for Angular, you will first need to install the [node package manager](https://www.npmjs.com/get-npm).
+To download and use Fundamental Library for Angular, you will first need to install the [node package manager](https://www.npmjs.com/get-npm) and [yarn package manager](https://yarnpkg.com/getting-started/install) (`corepack enable` and then `yarn`).
 
 Fundamental Library for Angular is intended for use with Angular 15 or newer.
 
@@ -45,7 +45,7 @@ Angular Versions Support: Our versions offer Angular support. More information c
 
 ## <a name="5"></a>5. Contributing
 
-If you want to contribute, please check the [CONTRIBUTING.md](https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md) documentation for contribution guidelines. Please follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit).
+If you want to contribute, please check the [SAP Contribution Guidelines](https://github.com/SAP/.github/blob/main/CONTRIBUTING.md), the [CONTRIBUTING.md](https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md) documentation for contribution guidelines. Please follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit).
 
 Check out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/main/NEW_COMPONENT.md) guide on building a new component for the library and creating the necessary documentation for your new component.
 

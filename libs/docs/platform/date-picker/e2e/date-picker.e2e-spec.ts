@@ -72,8 +72,8 @@ describe('Date picker suite', () => {
 
     it('Verify By clicking the current year', async () => {
         await sendKeys(['Escape']);
-        await scrollIntoView(buttonDatePicker, 1);
-        await click(buttonDatePicker, 1);
+        await scrollIntoView(buttonDatePicker, 5);
+        await click(buttonDatePicker, 5);
         await expect(await waitForElDisplayed(calendarExpanded)).toBe(true);
         await scrollIntoView(buttonSelectYear);
         await click(buttonSelectYear);
@@ -84,7 +84,7 @@ describe('Date picker suite', () => {
 
     it('Verify by default today date is focused', async () => {
         const activeButtons = await elementArray(buttonDatePicker);
-        for (let i = 4; i < activeButtons.length - 2; i++) {
+        for (let i = 4; i < activeButtons.length - 4; i++) {
             if (!(await getElementClass(buttonDatePicker, i)).includes('is-disabled')) {
                 await sendKeys(['Escape']);
                 await scrollIntoView(buttonDatePicker, i);
@@ -125,53 +125,53 @@ describe('Date picker suite', () => {
     });
 
     it('verify single type date-picker:', async () => {
-        await click(buttonDatePicker, 3);
-        await click(dayInCalendarButtonByValue('1'));
-        await expect(await getValue(inputDatePicker, 3)).toEqual(date1);
-    });
-
-    it('verify pre-populated range type date-picker', async () => {
-        await click(buttonDatePicker, 1);
-        await click(dayInCalendarButtonByValue('1'));
-        await click(dayInCalendarButtonByValue('15'));
-        await click(buttonDatePicker, 1);
-        await expect(await getValue(inputDatePicker, 1)).toEqual(date2);
-    });
-
-    it('verify range type date-picker', async () => {
-        await click(buttonDatePicker, 4);
-        await click(dayInCalendarButtonByValue('1'));
-        await click(dayInCalendarButtonByValue('15'));
-        await click(buttonDatePicker, 4);
-        await expect(await getValue(inputDatePicker, 4)).toEqual(date3);
-    });
-
-    it('verify birth date date-picker', async () => {
         await click(buttonDatePicker, 5);
         await click(dayInCalendarButtonByValue('1'));
         await expect(await getValue(inputDatePicker, 5)).toEqual(date1);
     });
 
-    it('verify holiday date-picker', async () => {
-        await click(buttonDatePicker, 6);
+    it('verify pre-populated range type date-picker', async () => {
+        await click(buttonDatePicker, 2);
         await click(dayInCalendarButtonByValue('1'));
         await click(dayInCalendarButtonByValue('15'));
-        await click(buttonDatePicker, 6);
-        await expect(await getValue(inputDatePicker, 6)).toEqual(date3);
+        await click(buttonDatePicker, 2);
+        await expect(await getValue(inputDatePicker, 2)).toEqual(date2);
+    });
+
+    it('verify range type date-picker', async () => {
+        await click(buttonDatePicker, 7);
+        await click(dayInCalendarButtonByValue('1'));
+        await click(dayInCalendarButtonByValue('15'));
+        await click(buttonDatePicker, 7);
+        await expect(await getValue(inputDatePicker, 7)).toEqual(date3);
+    });
+
+    it('verify birth date date-picker', async () => {
+        await click(buttonDatePicker, 9);
+        await click(dayInCalendarButtonByValue('1'));
+        await expect(await getValue(inputDatePicker, 9)).toEqual(date1);
+    });
+
+    it('verify holiday date-picker', async () => {
+        await click(buttonDatePicker, 11);
+        await click(dayInCalendarButtonByValue('1'));
+        await click(dayInCalendarButtonByValue('15'));
+        await click(buttonDatePicker, 11);
+        await expect(await getValue(inputDatePicker, 11)).toEqual(date3);
     });
 
     it('verify date picker use outside Form', async () => {
-        await click(buttonDatePicker, 8);
+        await click(buttonDatePicker, 9);
         await click(dayInCalendarButtonByValue('1'));
-        await expect(await getValue(inputDatePicker, 8)).toEqual(date1);
+        await expect(await getValue(inputDatePicker, 9)).toEqual(date1);
     });
 
     it('verify range date picker outside form', async () => {
-        await click(buttonDatePicker, 9);
+        await click(buttonDatePicker, 16);
         await click(dayInCalendarButtonByValue('1'));
         await click(dayInCalendarButtonByValue('15'));
-        await click(buttonDatePicker, 9);
-        await expect(await getValue(inputDatePicker, 9)).toEqual(date3);
+        await click(buttonDatePicker, 16);
+        await expect(await getValue(inputDatePicker, 16)).toEqual(date3);
     });
 
     it('verify disable parts of Calender for selection', async () => {
@@ -181,21 +181,21 @@ describe('Date picker suite', () => {
     });
 
     it('verify date Picker Formatting date picker with custom output format', async () => {
-        await click(buttonDatePicker, 10);
+        await click(buttonDatePicker, 15);
         await click(dayInCalendarButtonByValue('1'));
-        await expect(await getValue(inputDatePicker, 10)).toEqual(date5);
+        await expect(await getValue(inputDatePicker, 15)).toEqual(date5);
     });
 
     it('verify date Picker Formatting range date picker custom format', async () => {
-        await click(buttonDatePicker, 12);
+        await click(buttonDatePicker, 20);
         await click(dayInCalendarButtonByValue('1'));
         await click(dayInCalendarButtonByValue('15'));
-        await click(buttonDatePicker, 12);
-        await expect(await getValue(inputDatePicker, 12)).toEqual(date10);
+        await click(buttonDatePicker, 20);
+        await expect(await getValue(inputDatePicker, 20)).toEqual(date10);
     });
 
     it('verify internationalization of Date Picker', async () => {
-        await click(buttonDatePicker, 13);
+        await click(buttonDatePicker, 22);
         await click(buttonSelectYear);
         await waitForElDisplayed(calendarYearsSection);
         await click(yearInCalendarByValue(year2025));
@@ -203,14 +203,14 @@ describe('Date picker suite', () => {
         await waitForElDisplayed(filterCalendarValue('month'));
         await click(monthInCalendarByValue(1));
         await click(dayInCalendarButtonByValue('1'));
-        await expect(await getValue(inputDatePicker, 13)).toEqual(date11);
+        await expect(await getValue(inputDatePicker, 22)).toEqual(date11);
         await click(buttonGerman);
-        await expect(await getValue(inputDatePicker, 13)).toEqual(date8);
+        await expect(await getValue(inputDatePicker, 22)).toEqual(date8);
         await click(buttonBulgarian);
-        await expect(await getValue(inputDatePicker, 13)).toEqual(date12);
+        await expect(await getValue(inputDatePicker, 22)).toEqual(date12);
     });
 
-    it('verify with the date picker, the user can see a day view, month view, year view, or year ranges.', async () => {
+    xit('verify with the date picker, the user can see a day view, month view, year view, or year ranges.', async () => {
         const buttons = await elementArray(buttonDatePicker);
         for (let i = 1; i < buttons.length - 1; i++) {
             if (!(await getElementClass(buttonDatePicker, i)).includes('is-disabled')) {

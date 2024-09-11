@@ -3,6 +3,209 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.9...v0.52.2-rc.10) (2024-09-10)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.52.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.8...v0.52.2-rc.9) (2024-09-10)
+
+
+### Bug Fixes
+
+* **core:** combobox handle IME input correctly to prevent accidental deletion of characters ([#12340](https://github.com/SAP/fundamental-ngx/issues/12340)) ([ea4d028](https://github.com/SAP/fundamental-ngx/commit/ea4d028d9ee855ca5124eb0d7cd3a763facf414e)), closes [#12232](https://github.com/SAP/fundamental-ngx/issues/12232) [#12232](https://github.com/SAP/fundamental-ngx/issues/12232)
+
+
+
+
+
+## [0.52.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.7...v0.52.2-rc.8) (2024-09-10)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.52.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.6...v0.52.2-rc.7) (2024-09-09)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.52.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.5...v0.52.2-rc.6) (2024-09-09)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.52.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.4...v0.52.2-rc.5) (2024-09-06)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.52.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.3...v0.52.2-rc.4) (2024-09-04)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.52.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.2...v0.52.2-rc.3) (2024-09-03)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.52.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.1...v0.52.2-rc.2) (2024-09-03)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.52.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.0...v0.52.2-rc.1) (2024-09-03)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.52.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.52.1...v0.52.2-rc.0) (2024-08-28)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.52.1](https://github.com/SAP/fundamental-ngx/compare/v0.52.1-rc.1...v0.52.1) (2024-08-27)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.52.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.52.1-rc.0...v0.52.1-rc.1) (2024-08-27)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.52.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.52.0...v0.52.1-rc.0) (2024-08-27)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.52.0](https://github.com/SAP/fundamental-ngx/compare/v0.52.0-rc.0...v0.52.0) (2024-08-27)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.52.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.8...v0.52.0-rc.0) (2024-08-27)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.51.4-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.7...v0.51.4-rc.8) (2024-08-27)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.51.4-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.6...v0.51.4-rc.7) (2024-08-27)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.51.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.5...v0.51.4-rc.6) (2024-08-27)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.51.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.4...v0.51.4-rc.5) (2024-08-26)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.51.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.3...v0.51.4-rc.4) (2024-08-26)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.51.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.2...v0.51.4-rc.3) (2024-08-25)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.51.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.1...v0.51.4-rc.2) (2024-08-25)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.51.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.51.4-rc.0...v0.51.4-rc.1) (2024-08-23)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.51.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.51.3...v0.51.4-rc.0) (2024-08-23)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
 ## [0.51.3](https://github.com/SAP/fundamental-ngx/compare/v0.51.3-rc.21...v0.51.3) (2024-08-22)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk
