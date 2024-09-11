@@ -6,8 +6,8 @@ import {
     getText,
     isElementClickable,
     refreshPage,
-    waitForElDisplayed,
-    waitForNotPresent
+    waitForElDisappear,
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { MenuPo } from './menu.po';
 
@@ -83,9 +83,14 @@ describe('Menu test suite', () => {
         it('should open and close dialog popup Mobile Menu', async () => {
             await click(btnMobileMenu);
             await waitForElDisplayed(dialogMobileMenu);
-            await expect(await elementDisplayed(dialogMobileMenu)).toBe(true);
+            await expect(await elementDisplayed(dialogMobileMenu))
+                .withContext('Dialog popup Mobile Menu is not displayed after opening')
+                .toBe(true);
+
             await click(closeDialogMobileMenu);
-            await expect(await waitForNotPresent(dialogMobileMenu)).toBe(true);
+            await expect(await waitForElDisappear(dialogMobileMenu))
+                .withContext('Dialog popup Mobile Menu is not closed after clicking the close button')
+                .toBe(true);
         });
 
         it('should check cascading menu for all dialog popup buttons', async () => {
