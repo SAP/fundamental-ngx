@@ -18,9 +18,9 @@ export class SliderPo extends PlatformBaseComponentPo {
     sliderHandles = '.fd-slider__handle';
     valueLabels = 'p:nth-of-type(2)';
     formValueLabels = 'p';
-    sliderTooltip = 'fd-popover-body .fd-slider--tooltip';
+    sliderTooltip = 'fd-popover-body .fd-slider-tooltip';
     sliderTooltipInput = 'fd-popover-body .fd-popover__body input';
-    sliderTooltipInputFF = 'fd-popover-body .fd-slider--tooltip-wrapper input';
+    sliderTooltipInputFF = 'fd-popover-body .fd-slider-tooltip-wrapper input';
     sliderAttr = 'fd-slider';
     altSliderAttr = 'fdp-slider';
     sliderLabels = '.fd-slider__labels';
