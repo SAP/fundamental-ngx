@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.10...v0.52.2-rc.11) (2024-09-12)
+
+
+### Bug Fixes
+
+* **core:** call endClose on dialog close method to handle right seque… ([#12301](https://github.com/SAP/fundamental-ngx/issues/12301)) ([656e3d9](https://github.com/SAP/fundamental-ngx/commit/656e3d9964ea8b2222f7a11a92f2ca081f1a13b4))
+
+
+
+
+
 ## [0.52.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.9...v0.52.2-rc.10) (2024-09-10)
 
 
