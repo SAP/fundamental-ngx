@@ -329,7 +329,8 @@ export default {
         inputGlyphAriaLabel: 'Valitse vaihtoehdot',
         inputIconTitle: 'Valitse vaihtoehdot',
         mobileShowAllItemsButton: 'Näytä kaikki kohteet',
-        mobileShowSelectedItemsButton: 'Näytä valitut kohteet'
+        mobileShowSelectedItemsButton: 'Näytä valitut kohteet',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 merkki yli rajan',
