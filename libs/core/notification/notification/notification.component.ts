@@ -61,9 +61,6 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     @Input()
     width: string;
 
-    /** Whether the notificatioon is in mobile mode */
-    @Input() mobile: boolean;
-
     /**
      * @hidden
      */
@@ -101,12 +98,6 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
 
     /** @hidden The class that traps and manages focus within the notification. */
     private _focusTrap: FocusTrap;
-
-    /** @hidden */
-    @HostBinding('class.fd-notification--in-dialog')
-    get _inDialog(): boolean {
-        return this._popover?.mobile;
-    }
 
     /** @hidden */
     constructor(
@@ -171,9 +162,6 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     _setProperties(): void {
         this._addClassToElement('fd-notification');
         this._addClassToElement('fd-notification-custom-block');
-        if (this.mobile) {
-            this._addClassToElement('fd-notification--mobile');
-        }
     }
 
     /** @hidden Listen on NavigationStart event and dismiss the dialog */

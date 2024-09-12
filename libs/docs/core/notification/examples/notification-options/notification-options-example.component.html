@@ -4,8 +4,8 @@
         <fd-avatar [circle]="true" size="xs" glyph="batch-payments"></fd-avatar>
         <fd-notification-content>
             <fd-notification-header>
-                <div fd-notification-indicator type="success"></div>
-                <h2 fd-notification-title [unread]="true">Your leave request has been accepted</h2>
+                <span fd-notification-indicator type="success"></span>
+                <h4 fd-notification-title [unread]="true">Your leave request has been accepted</h4>
             </fd-notification-header>
             <p fd-notification-paragraph>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
@@ -29,8 +29,8 @@
     <fd-notification-body>
         <fd-notification-content>
             <fd-notification-header>
-                <div fd-notification-indicator type="error"></div>
-                <h2 fd-notification-title>Your leave request has been accepted</h2>
+                <span fd-notification-indicator type="error"></span>
+                <h4 fd-notification-title>Your leave request has been accepted</h4>
             </fd-notification-header>
             <p fd-notification-paragraph>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
@@ -100,12 +100,12 @@
 
 <h4>Notification in mobile mode</h4>
 <div [style.max-width.px]="400">
-    <fd-notification [mobile]="true">
+    <fd-notification>
         <fd-notification-body>
             <fd-notification-content>
                 <fd-notification-header>
-                    <div fd-notification-indicator type="information"></div>
-                    <h2 fd-notification-title [unread]="true">Your leave request has been accepted</h2>
+                    <span fd-notification-indicator type="information"></span>
+                    <h4 fd-notification-title [unread]="true">Your leave request has been accepted</h4>
                 </fd-notification-header>
                 <p fd-notification-paragraph>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
