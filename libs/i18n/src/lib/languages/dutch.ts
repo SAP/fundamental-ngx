@@ -298,7 +298,8 @@ export const FD_LANGUAGE_DUTCH: FdLanguage = {
         inputGlyphAriaLabel: 'Opties selecteren',
         inputIconTitle: 'Opties selecteren',
         mobileShowAllItemsButton: 'Alle items weergeven',
-        mobileShowSelectedItemsButton: 'Geselecteerde items weergeven'
+        mobileShowSelectedItemsButton: 'Geselecteerde items weergeven',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 teken boven de limiet',

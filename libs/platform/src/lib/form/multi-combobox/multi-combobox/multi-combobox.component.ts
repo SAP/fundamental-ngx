@@ -43,6 +43,8 @@ import { PlatformMultiComboboxMobileModule } from '../multi-combobox-mobile/mult
 import { MultiComboboxMobileComponent } from '../multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 import { MULTICOMBOBOX_COMPONENT } from '../multi-combobox.interface';
+import { FD_LANGUAGE, FdLanguage } from '@fundamental-ngx/i18n';
+import { Observable } from 'rxjs';
 
 let deprecationWarningShown = false;
 
@@ -104,7 +106,8 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
         @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
         @Inject(MAP_LIMIT) _mapLimit: number,
-        readonly contentDensityObserver: ContentDensityObserver
+        readonly contentDensityObserver: ContentDensityObserver,
+        @Inject(FD_LANGUAGE) _lang$: Observable<FdLanguage>
     ) {
         super(
             cd,
@@ -116,7 +119,8 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
             _multiComboboxConfig,
             formField,
             formControl,
-            _mapLimit
+            _mapLimit,
+            _lang$
         );
 
         if (!deprecationWarningShown && isDevMode()) {

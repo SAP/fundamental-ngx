@@ -302,7 +302,8 @@ export const FD_LANGUAGE_CROATIAN: FdLanguage = {
         inputGlyphAriaLabel: 'Odaberi mogućnosti',
         inputIconTitle: 'Odaberi mogućnosti',
         mobileShowAllItemsButton: 'Prikaži sve stavke',
-        mobileShowSelectedItemsButton: 'Prikaži odabrane stavke'
+        mobileShowSelectedItemsButton: 'Prikaži odabrane stavke',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'Broj znakova više od ograničenja: 1',

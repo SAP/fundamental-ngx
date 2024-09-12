@@ -295,7 +295,8 @@ export const FD_LANGUAGE_ARABIC: FdLanguage = {
         inputGlyphAriaLabel: 'تحديد الخيارات',
         inputIconTitle: 'تحديد الخيارات',
         mobileShowAllItemsButton: 'إظهار جميع البنود',
-        mobileShowSelectedItemsButton: 'إظهار البنود المحددة'
+        mobileShowSelectedItemsButton: 'إظهار البنود المحددة',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'تم تجاوز الحد بحرف واحد',

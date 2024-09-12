@@ -441,7 +441,8 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         inputGlyphAriaLabel: 'Вибрати опції',
         inputIconTitle: 'Вибрати опції',
         mobileShowAllItemsButton: 'Показати всі елементи',
-        mobileShowSelectedItemsButton: 'Показати вибрані елементи'
+        mobileShowSelectedItemsButton: 'Показати вибрані елементи',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'Перевищено ліміт на 1 символ',

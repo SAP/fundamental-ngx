@@ -295,7 +295,8 @@ export const FD_LANGUAGE_THAI: FdLanguage = {
         inputGlyphAriaLabel: 'เลือกตัวเลือก',
         inputIconTitle: 'เลือกตัวเลือก',
         mobileShowAllItemsButton: 'แสดงไอเท็มทั้งหมด',
-        mobileShowSelectedItemsButton: 'แสดงไอเท็มที่เลือก'
+        mobileShowSelectedItemsButton: 'แสดงไอเท็มที่เลือก',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'เกินขีดจำกัด 1 อักขระ',

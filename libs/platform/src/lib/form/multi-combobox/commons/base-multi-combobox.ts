@@ -75,6 +75,7 @@ import {
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { TextAlignment } from '../../combobox';
 import { MultiComboboxConfig } from '../multi-combobox.config';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 
 export const MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory: () => 12 });
 
@@ -182,9 +183,12 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     @Input()
     addonIconTitle: string;
 
-    /** Sets invalid entry message. */
+    /**
+     * @deprecated Use the i18n module to modify the translation for this string.
+     * Sets invalid entry message.
+     * */
     @Input()
-    invalidEntryMessage = 'Invalid entry';
+    invalidEntryMessage: Nullable<string>;
 
     /** Turns limitless mode, ON or OFF */
     @Input()
@@ -372,6 +376,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     protected readonly _rangeSelector = new RangeSelector();
 
     /** @hidden */
+    private _translationResolver = new TranslationResolver();
+
+    /** @hidden */
     private _displayFn = (value: any): string => this.displayValue(value);
 
     /** @hidden */
@@ -398,9 +405,19 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         protected multiComboboxConfig: MultiComboboxConfig,
         @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
         @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
-        @Inject(MAP_LIMIT) private _mapLimit: number
+        @Inject(MAP_LIMIT) private _mapLimit: number,
+        @Inject(FD_LANGUAGE) _lang$: Observable<FdLanguage>
     ) {
         super(_cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+
+        this._subscriptions.add(
+            _lang$.subscribe((lang: FdLanguage) => {
+                this.invalidEntryMessage = this._translationResolver.resolve(
+                    lang,
+                    'platformMultiCombobox.invalidEntryError'
+                );
+            })
+        );
     }
 
     /** @hidden */

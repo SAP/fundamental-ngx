@@ -303,7 +303,8 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         inputGlyphAriaLabel: 'Избор на опции',
         inputIconTitle: 'Избор на опции',
         mobileShowAllItemsButton: 'Показване на всички позиции',
-        mobileShowSelectedItemsButton: 'Показване на избраните позиции'
+        mobileShowSelectedItemsButton: 'Показване на избраните позиции',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 символ над ограничението',

@@ -292,7 +292,8 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         inputGlyphAriaLabel: 'Select Options',
         inputIconTitle: 'Select Options',
         mobileShowAllItemsButton: 'Show all items',
-        mobileShowSelectedItemsButton: 'Show selected items'
+        mobileShowSelectedItemsButton: 'Show selected items',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 character over the limit',
