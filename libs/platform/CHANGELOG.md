@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.12...v0.52.2-rc.13) (2024-09-13)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.52.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.11...v0.52.2-rc.12) (2024-09-13)
+
+
+### Bug Fixes
+
+* **platform:** vhd should reset search after closing dialog ([#12407](https://github.com/SAP/fundamental-ngx/issues/12407)) ([8f1627a](https://github.com/SAP/fundamental-ngx/commit/8f1627aac2ca601d6396a23ea1e54a3504675973))
+
+
+
+
+
+## [0.52.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.10...v0.52.2-rc.11) (2024-09-12)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
 ## [0.52.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.9...v0.52.2-rc.10) (2024-09-10)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
