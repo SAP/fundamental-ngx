@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.13...v0.52.2-rc.14) (2024-09-13)
+
+
+### Features
+
+* **platform:** FilterBar overflow feature ([#12402](https://github.com/SAP/fundamental-ngx/issues/12402)) ([ffed17c](https://github.com/SAP/fundamental-ngx/commit/ffed17ceccc7a8a529214f122269ffbf82ac184c)), closes [#12368](https://github.com/SAP/fundamental-ngx/issues/12368)
+
+
+
+
+
 ## [0.52.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.12...v0.52.2-rc.13) (2024-09-13)
 
 **Note:** Version bump only for package fundamental-ngx
