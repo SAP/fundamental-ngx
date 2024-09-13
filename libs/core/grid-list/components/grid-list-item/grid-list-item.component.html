@@ -1,7 +1,7 @@
 <div
     #gridListItem
     [id]="id"
-    tabindex="-1"
+    [tabindex]="tabIndex()"
     class="fd-grid-list__item"
     role="option"
     [class.is-navigated]="isNavigated"
