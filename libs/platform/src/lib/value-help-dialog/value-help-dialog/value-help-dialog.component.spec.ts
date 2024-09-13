@@ -123,4 +123,13 @@ describe('PlatformValueHelpDialogComponent', () => {
         testComponent.vhdComponent.onSelect(testComponent.data.slice(0, 3));
         expect(testComponent.vhdComponent.valueChange.emit).toHaveBeenCalled();
     });
+
+    it('should handle dialog close', async () => {
+        testComponent.vhdComponent.open();
+        testComponent.vhdComponent._mainSearch = 'test';
+        if (testComponent.vhdComponent.activeDialog) {
+            testComponent.vhdComponent.activeDialog.close();
+        }
+        expect(testComponent.vhdComponent._mainSearch).toBe('');
+    });
 });
