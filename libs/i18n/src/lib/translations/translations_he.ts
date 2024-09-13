@@ -328,7 +328,8 @@ export default {
         inputGlyphAriaLabel: 'בחר אפשרויות',
         inputIconTitle: 'בחר אפשרויות',
         mobileShowAllItemsButton: 'הצג את כל הפריטים',
-        mobileShowSelectedItemsButton: 'הצג פריטים נבחרים'
+        mobileShowSelectedItemsButton: 'הצג פריטים נבחרים',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'תו אחד יותר מהמגבלה',

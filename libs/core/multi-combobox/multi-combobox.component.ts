@@ -15,7 +15,8 @@ import {
     TemplateRef,
     ViewChild,
     ViewContainerRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { DataSourceDirective, FD_DATA_SOURCE_TRANSFORMER, MatchingStrategy } from '@fundamental-ngx/cdk/data-source';
 import { CvaControl, CvaDirective, OptionItem, SelectItem, SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
@@ -63,7 +64,7 @@ import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { FormControlComponent, FormInputMessageGroupComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
 import { InputGroupComponent, InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
 import { getSelectItemByInputValue, getTokenIndexByIdlOrValue } from './helpers';
 import { MultiComboboxSelectionChangeEvent } from './models/selection-change.event';
 import { MultiAnnouncerDirective } from './multi-announcer/multi-announcer.directive';
@@ -252,9 +253,12 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     @Input()
     addonIconTitle: string;
 
-    /** Sets invalid entry message. */
+    /**
+     * @deprecated Use the i18n module to modify the translation for this string.
+     * Sets invalid entry message.
+     * */
     @Input()
-    invalidEntryMessage = 'Invalid entry';
+    invalidEntryMessage: Nullable<string>;
 
     /** Turns limitless mode, ON or OFF */
     @Input()
@@ -417,6 +421,12 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     private _selectedItems: T[] = [];
 
     /** @hidden */
+    private readonly _lang$ = inject(FD_LANGUAGE);
+
+    /** @hidden */
+    private _translationResolver = new TranslationResolver();
+
+    /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef,
         private readonly _injector: Injector,
@@ -432,6 +442,13 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     ngOnInit(): void {
         this.cvaControl.listenToChanges();
         this._openDataStream(this.matchingStrategy);
+
+        this._lang$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((lang: FdLanguage) => {
+            this.invalidEntryMessage = this._translationResolver.resolve(
+                lang,
+                'platformMultiCombobox.invalidEntryError'
+            );
+        });
     }
 
     /** @hidden */
