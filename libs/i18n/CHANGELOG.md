@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.14...v0.52.2-rc.15) (2024-09-13)
+
+
+### Bug Fixes
+
+* **core,platform:** provide translation for multi-combobox Invalid Entry message ([#12409](https://github.com/SAP/fundamental-ngx/issues/12409)) ([622c4f2](https://github.com/SAP/fundamental-ngx/commit/622c4f2f96ae85ee7a3e6a5ebda33370a8272a1d))
+
+
+
+
+
 ## [0.52.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.13...v0.52.2-rc.14) (2024-09-13)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
