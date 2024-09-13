@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.15...v0.52.2-rc.16) (2024-09-13)
+
+
+### Bug Fixes
+
+* **platform:** add border to Toolbar in all types of Platfrm table ([#12413](https://github.com/SAP/fundamental-ngx/issues/12413)) ([3c347dd](https://github.com/SAP/fundamental-ngx/commit/3c347ddb73cee4f0d4222a16d89f167e2dc2e77a))
+
+
+
+
+
 ## [0.52.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.14...v0.52.2-rc.15) (2024-09-13)
 
 
