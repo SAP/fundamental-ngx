@@ -8,8 +8,8 @@ import {
     refreshPage,
     scrollIntoView,
     sendKeys,
-    waitForElDisplayed,
-    waitForNotPresent
+    waitForElDisappear,
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { MultiComboboxPo } from './multi-combobox.po';
 
@@ -151,15 +151,15 @@ describe('multi-combobox test suite', () => {
         it('should be able to close dialog with X button, cancel button, save button', async () => {
             await openMobileList();
             await click(dialogButton, close);
-            await expect(await waitForNotPresent(dialog)).toBe(true, 'dialog is not closed by x button');
+            await expect(await waitForElDisappear(dialog)).withContext(true);
 
             await openMobileList();
             await click(dialogButton, save);
-            await expect(await waitForNotPresent(dialog)).toBe(true, 'dialog is not closed by save button');
+            await expect(await waitForElDisappear(dialog)).withContext(true);
 
             await openMobileList();
             await click(dialogButton, cancel);
-            await expect(await waitForNotPresent(dialog)).toBe(true, 'dialog is not closed by cancel button');
+            await expect(await waitForElDisappear(dialog)).withContext(true);
         });
 
         it('should be able to make multiple selections', async () => {

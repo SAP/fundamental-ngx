@@ -329,7 +329,8 @@ export default {
         inputGlyphAriaLabel: 'Kiválasztási beállítások',
         inputIconTitle: 'Kiválasztási beállítások',
         mobileShowAllItemsButton: 'Minden elem megjelenítése',
-        mobileShowSelectedItemsButton: 'A kiválasztott elemek megjelenítése'
+        mobileShowSelectedItemsButton: 'A kiválasztott elemek megjelenítése',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 karakterrel több a megengedettnél',

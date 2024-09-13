@@ -330,7 +330,8 @@ export default {
         inputGlyphAriaLabel: 'Velg alternativer',
         inputIconTitle: 'Velg alternativer',
         mobileShowAllItemsButton: 'Vis alle elementer',
-        mobileShowSelectedItemsButton: 'Vis valgte elementer'
+        mobileShowSelectedItemsButton: 'Vis valgte elementer',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 tegn over grensen',

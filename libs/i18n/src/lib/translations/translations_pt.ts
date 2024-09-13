@@ -329,7 +329,8 @@ export default {
         inputGlyphAriaLabel: 'Selecionar opções',
         inputIconTitle: 'Selecionar opções',
         mobileShowAllItemsButton: 'Mostrar todos os itens',
-        mobileShowSelectedItemsButton: 'Mostrar itens selecionados'
+        mobileShowSelectedItemsButton: 'Mostrar itens selecionados',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 caractere acima do limite',

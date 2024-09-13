@@ -327,7 +327,8 @@ export default {
         inputGlyphAriaLabel: '選擇選項',
         inputIconTitle: '選擇選項',
         mobileShowAllItemsButton: '顯示所有項目',
-        mobileShowSelectedItemsButton: '顯示所選項目'
+        mobileShowSelectedItemsButton: '顯示所選項目',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '超過上限 1 個字元',

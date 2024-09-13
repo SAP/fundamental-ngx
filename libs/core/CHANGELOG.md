@@ -3,6 +3,152 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.15...v0.52.2-rc.16) (2024-09-13)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.14...v0.52.2-rc.15) (2024-09-13)
+
+
+### Bug Fixes
+
+* **core,platform:** provide translation for multi-combobox Invalid Entry message ([#12409](https://github.com/SAP/fundamental-ngx/issues/12409)) ([622c4f2](https://github.com/SAP/fundamental-ngx/commit/622c4f2f96ae85ee7a3e6a5ebda33370a8272a1d))
+
+
+
+
+
+## [0.52.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.13...v0.52.2-rc.14) (2024-09-13)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.12...v0.52.2-rc.13) (2024-09-13)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.11...v0.52.2-rc.12) (2024-09-13)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.10...v0.52.2-rc.11) (2024-09-12)
+
+
+### Bug Fixes
+
+* **core:** call endClose on dialog close method to handle right seque… ([#12301](https://github.com/SAP/fundamental-ngx/issues/12301)) ([656e3d9](https://github.com/SAP/fundamental-ngx/commit/656e3d9964ea8b2222f7a11a92f2ca081f1a13b4))
+
+
+
+
+
+## [0.52.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.9...v0.52.2-rc.10) (2024-09-10)
+
+
+### Bug Fixes
+
+* **core:** type incorrect assumption of input always existing ([#12240](https://github.com/SAP/fundamental-ngx/issues/12240)) ([1c723ce](https://github.com/SAP/fundamental-ngx/commit/1c723cea86751d07313d0e824190bac1669fb83e))
+
+
+
+
+
+## [0.52.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.8...v0.52.2-rc.9) (2024-09-10)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.7...v0.52.2-rc.8) (2024-09-10)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.6...v0.52.2-rc.7) (2024-09-09)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.5...v0.52.2-rc.6) (2024-09-09)
+
+
+### Bug Fixes
+
+* **core:** update the CSS for Slider Tooltip ([#12377](https://github.com/SAP/fundamental-ngx/issues/12377)) ([778c68c](https://github.com/SAP/fundamental-ngx/commit/778c68c24cf48cfbcb8ade4fa00b0757a0cd6bd7))
+
+
+
+
+
+## [0.52.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.4...v0.52.2-rc.5) (2024-09-06)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.3...v0.52.2-rc.4) (2024-09-04)
+
+
+### Bug Fixes
+
+* **core:** wizard content overllaping fixed ([#12361](https://github.com/SAP/fundamental-ngx/issues/12361)) ([ab12166](https://github.com/SAP/fundamental-ngx/commit/ab1216673a9cfda8ec53b5bbcda4c1066122df54))
+
+
+
+
+
+## [0.52.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.2...v0.52.2-rc.3) (2024-09-03)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.1...v0.52.2-rc.2) (2024-09-03)
+
+
+### Bug Fixes
+
+* **core:** add proper styling for Select placeholder ([#12358](https://github.com/SAP/fundamental-ngx/issues/12358)) ([10976f9](https://github.com/SAP/fundamental-ngx/commit/10976f911da3d8d2e8fd79071a5b5f39e2bb00f9))
+
+
+
+
+
+## [0.52.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.0...v0.52.2-rc.1) (2024-09-03)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 ## [0.52.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.52.1...v0.52.2-rc.0) (2024-08-28)
 
 **Note:** Version bump only for package @fundamental-ngx/core

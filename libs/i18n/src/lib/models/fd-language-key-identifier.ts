@@ -264,6 +264,7 @@ export type FdLanguageKeyIdentifier =
     | 'platformMultiCombobox.inputIconTitle'
     | 'platformMultiCombobox.mobileShowAllItemsButton'
     | 'platformMultiCombobox.mobileShowSelectedItemsButton'
+    | 'platformMultiCombobox.invalidEntryError'
     | 'platformTextarea.counterMessageCharactersOverTheLimitSingular'
     | 'platformTextarea.counterMessageCharactersOverTheLimitPlural'
     | 'platformTextarea.counterMessageCharactersRemainingSingular'
