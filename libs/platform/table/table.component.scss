@@ -328,6 +328,10 @@ fdk-dynamic-portal {
             vertical-align: text-bottom;
             max-width: 100%;
         }
+
+        th.fd-table__cell {
+            border-block-start: none;
+        }
     }
 
     &__body {

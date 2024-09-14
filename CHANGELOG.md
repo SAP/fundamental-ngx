@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.16...v0.52.2-rc.17) (2024-09-13)
+
+
+### Bug Fixes
+
+* **core:** grid list keyboard support ([#12288](https://github.com/SAP/fundamental-ngx/issues/12288)) ([c0ee76f](https://github.com/SAP/fundamental-ngx/commit/c0ee76f48a0d48a9c35f26a144ee466910ae03e2))
+
+
+
+
+
+## [0.52.2-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.15...v0.52.2-rc.16) (2024-09-13)
+
+
+### Bug Fixes
+
+* **platform:** add border to Toolbar in all types of Platfrm table ([#12413](https://github.com/SAP/fundamental-ngx/issues/12413)) ([3c347dd](https://github.com/SAP/fundamental-ngx/commit/3c347ddb73cee4f0d4222a16d89f167e2dc2e77a))
+
+
+
+
+
+## [0.52.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.14...v0.52.2-rc.15) (2024-09-13)
+
+
+### Bug Fixes
+
+* **core,platform:** provide translation for multi-combobox Invalid Entry message ([#12409](https://github.com/SAP/fundamental-ngx/issues/12409)) ([622c4f2](https://github.com/SAP/fundamental-ngx/commit/622c4f2f96ae85ee7a3e6a5ebda33370a8272a1d))
+
+
+
+
+
+## [0.52.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.13...v0.52.2-rc.14) (2024-09-13)
+
+
+### Features
+
+* **platform:** FilterBar overflow feature ([#12402](https://github.com/SAP/fundamental-ngx/issues/12402)) ([ffed17c](https://github.com/SAP/fundamental-ngx/commit/ffed17ceccc7a8a529214f122269ffbf82ac184c)), closes [#12368](https://github.com/SAP/fundamental-ngx/issues/12368)
+
+
+
+
+
+## [0.52.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.12...v0.52.2-rc.13) (2024-09-13)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 ## [0.52.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.11...v0.52.2-rc.12) (2024-09-13)
 
 

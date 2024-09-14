@@ -11,6 +11,15 @@ export enum GridListSelectionActions {
     REMOVE = 'remove'
 }
 
+export enum GridListSelectionModeEnum {
+    NONE = 'none',
+    DELETE = 'delete',
+    SINGLE_SELECT = 'singleSelect',
+    SINGLE_SELECT_LEFT = 'singleSelectLeft',
+    SINGLE_SELECT_RIGHT = 'singleSelectRight',
+    MULTI_SELECT = 'multiSelect'
+}
+
 export interface GridListSelectionEvent<T> {
     /** currently selected items */
     selection: T[];

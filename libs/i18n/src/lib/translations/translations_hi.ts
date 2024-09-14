@@ -329,7 +329,8 @@ export default {
         inputGlyphAriaLabel: 'विकल्प चुनें',
         inputIconTitle: 'विकल्प चुनें',
         mobileShowAllItemsButton: 'सभी आइटम दिखाएं',
-        mobileShowSelectedItemsButton: 'सभी आइटम दिखाएं'
+        mobileShowSelectedItemsButton: 'सभी आइटम दिखाएं',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 सीमा से अधिक चरित्र',

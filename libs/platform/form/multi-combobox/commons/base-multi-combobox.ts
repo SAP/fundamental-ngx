@@ -65,6 +65,7 @@ import {
 } from '@fundamental-ngx/platform/shared';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 import { TextAlignment } from '../../combobox';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 
@@ -192,9 +193,12 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     @Input()
     addonIconTitle: string;
 
-    /** Sets invalid entry message. */
+    /**
+     * @deprecated Use the i18n module to modify the translation for this string.
+     * Sets invalid entry message.
+     * */
     @Input()
-    invalidEntryMessage = 'Invalid entry';
+    invalidEntryMessage: Nullable<string>;
 
     /** Turns limitless mode, ON or OFF */
     @Input()
@@ -391,6 +395,12 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     private readonly _mapLimit = inject(MAP_LIMIT);
 
     /** @hidden */
+    private readonly _lang$ = inject(FD_LANGUAGE);
+
+    /** @hidden */
+    private _translationResolver = new TranslationResolver();
+
+    /** @hidden */
     protected constructor() {
         super();
         this._contentDensity = this.multiComboboxConfig.contentDensity;
@@ -410,6 +420,14 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         this._initWindowResize();
         this._assignCustomTemplates();
         this._previousInputText = this.inputText;
+        this._subscriptions.add(
+            this._lang$.subscribe((lang: FdLanguage) => {
+                this.invalidEntryMessage = this._translationResolver.resolve(
+                    lang,
+                    'platformMultiCombobox.invalidEntryError'
+                );
+            })
+        );
         super.ngAfterViewInit();
     }
 
