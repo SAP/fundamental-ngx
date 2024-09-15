@@ -3585,10 +3585,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fundamental-styles/cx@npm:0.37.7":
-  version: 0.37.7
-  resolution: "@fundamental-styles/cx@npm:0.37.7"
-  checksum: 10/755cba4a65cb68a68bcfd9f589f2a7607e6ea736f18abcdfed7a3cc9bafbcc1248ba5f4b4c3b62dca99591c7b5c3791d546a70c122f1c303ac9ed5351aec5b29
+"@fundamental-styles/cx@npm:0.37.8":
+  version: 0.37.8
+  resolution: "@fundamental-styles/cx@npm:0.37.8"
+  checksum: 10/6afeae5648d5fd799a80dc604839415109f6afeea051dd0f6401eb82089b041eb223ac1ab6771b687ba222b7db8842e51977cb06d60597c84323cd8882c98392
   languageName: node
   linkType: hard
 
@@ -13465,7 +13465,7 @@ __metadata:
     "@angular/router": "npm:18.0.3"
     "@commitlint/cli": "npm:18.6.1"
     "@commitlint/config-conventional": "npm:18.6.1"
-    "@fundamental-styles/cx": "npm:0.37.7"
+    "@fundamental-styles/cx": "npm:0.37.8"
     "@jsdevtools/npm-publish": "npm:3.0.1"
     "@nx/angular": "npm:19.2.3"
     "@nx/devkit": "npm:19.2.3"
