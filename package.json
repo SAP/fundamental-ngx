@@ -113,7 +113,7 @@
     "@wdio/spec-reporter": "7.7.3",
     "autoprefixer": "^10.4.0",
     "axe-core": "4.5.2",
-    "axe-html-reporter": "2.2.3",
+    "axe-html-reporter": "2.2.11",
     "axios": "1.6.0",
     "chromedriver": "99.0.0",
     "conventional-changelog": "4.0.0",

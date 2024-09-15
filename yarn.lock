@@ -7998,15 +7998,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axe-html-reporter@npm:2.2.3":
-  version: 2.2.3
-  resolution: "axe-html-reporter@npm:2.2.3"
+"axe-html-reporter@npm:2.2.11":
+  version: 2.2.11
+  resolution: "axe-html-reporter@npm:2.2.11"
   dependencies:
     mustache: "npm:^4.0.1"
-    rimraf: "npm:^3.0.2"
   peerDependencies:
     axe-core: ">=3"
-  checksum: 10/10a7e4b0ecc663e004a93a1f0bfb434583eb30abd5fa3ec608d8b7d027445ec83d401b77c650184af33cafa884b107d19070bd18850e030f729773167a09e787
+  checksum: 10/489a904c62fe5c74db9490773a624e8573906b54a9c8264b831ee50b648f623ba292a011598d257bd6b8dc35eede21998fc25c799bd99eb9ca8ecf2d05ef92a1
   languageName: node
   linkType: hard
 
@@ -13499,7 +13498,7 @@ __metadata:
     "@wdio/spec-reporter": "npm:7.7.3"
     autoprefixer: "npm:^10.4.0"
     axe-core: "npm:4.5.2"
-    axe-html-reporter: "npm:2.2.3"
+    axe-html-reporter: "npm:2.2.11"
     axios: "npm:1.6.0"
     chromedriver: "npm:99.0.0"
     compare-versions: "npm:6.1.0"
