@@ -63,7 +63,9 @@ class SelectableColumn {
         /** Active */
         public active: boolean,
         /** Table Column it belongs to */
-        public column: DialogTableColumn
+        public column: DialogTableColumn,
+        /** Table column order */
+        public order: number
     ) {}
 }
 
@@ -292,25 +294,14 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
      */
     private _initiateColumns(visibleColumnKeys: string[]): void {
         const visibleColumnIndexMap = new Map(visibleColumnKeys.map((key, index) => [key, index]));
-        this._selectableColumns = this.availableColumns
-            .slice()
-            // sorting columns in accordance with the order of visible columns
-            .sort((a, b) => {
-                const aIndex = visibleColumnIndexMap.get(a.key);
-                const bIndex = visibleColumnIndexMap.get(b.key);
-                if (aIndex === undefined || bIndex === undefined) {
-                    // preserving initial order of not selected column
-                    return 0;
-                }
-                return aIndex - bIndex;
+        this._selectableColumns = this.availableColumns.slice().map(
+            (column, index: number): SelectableColumn => ({
+                column,
+                selected: visibleColumnKeys.includes(column.key),
+                active: index === 0,
+                order: visibleColumnIndexMap.get(column.key) ?? index
             })
-            .map(
-                (column, index: number): SelectableColumn => ({
-                    column,
-                    selected: visibleColumnKeys.includes(column.key),
-                    active: index === 0
-                })
-            );
+        );
 
         // keep count of selected
         this._countSelectedColumns();
@@ -329,11 +320,11 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
                 .pipe(debounceTime(20))
                 .subscribe(([showAll, searchQuery]) => {
                     this._filteredColumns = this._selectableColumns
+                        .sort((a, b) => a.order - b.order)
                         .filter((item) =>
                             item.column.label.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
                         )
                         .filter((item) => showAll || item.selected);
-
                     this._onChangeFilteredColumnsList();
 
                     this.cdr.markForCheck();
@@ -366,7 +357,6 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
         this._moveColumnInSelectableList(movedItem, replacedItem);
 
         this._calculateMovementButtonsState();
-
         this._recalculateResetAvailability();
     }
 
