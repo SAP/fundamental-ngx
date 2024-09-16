@@ -8,26 +8,30 @@
     display: block !important;
 }
 
-.fd-popover__body.fd-slider--tooltip-popover {
-    top: -7px !important;
+.fd-popover__body.fd-slider-tooltip-popover {
+    height: 1rem;
+    border: none;
+    padding-block: 0;
     overflow: hidden;
+    padding-inline: 0.5rem;
+    border-radius: 0.0625rem;
+    top: -0.4375rem !important;
+    background: var(--sapBackgroundColor);
+    box-shadow: var(--sapContent_Shadow1);
 
-    .fd-slider--tooltip {
-        padding: 0.25rem;
-        min-width: 2rem;
+    .fd-slider-tooltip {
+        line-height: 1rem;
         text-align: center;
-        height: 1.375rem;
-        line-height: 1;
-        direction: ltr;
-        box-sizing: border-box;
+        color: var(--sapTextColor);
+        font-family: var(--sapFontFamily);
+        font-size: var(--sapFontSmallSize);
+    }
 
-        margin: 0 !important;
-        border: 0;
-
-        color: #6a6d70;
-        color: var(--sapContent_LabelColor, #6a6d70);
-        font-size: 0.875rem;
-        font-size: var(--sapFontSize);
+    &:has(input) {
+        width: auto;
+        height: auto;
+        box-shadow: none;
+        padding-inline: 0;
     }
 }
 
@@ -38,6 +42,7 @@
         padding-bottom: 2rem;
     }
 
+    // Has to stay in ngx
     &__tick-wrapper {
         .fd-slider__label,
         .fd-slider__tick {
@@ -68,13 +73,6 @@
     &__labels {
         .fd-slider__label {
             white-space: nowrap;
-        }
-    }
-
-    // IE11 workaround
-    &__alternative-tick-width {
-        .fd-slider__tick {
-            width: 1px;
         }
     }
 }

@@ -64,7 +64,7 @@
                     variant of _variants | fdFilterStrings: { searchTerm: _filterPhrase, key: 'name' };
                     track variant.id
                 ) {
-                    <li fd-list-item (click)="selectVariant(variant)">
+                    <li fd-list-item [selected]="variant.name === activeVariant.name" (click)="selectVariant(variant)">
                         <span fd-list-link>
                             <span fd-list-title>{{ variant.name }}</span>
                         </span>

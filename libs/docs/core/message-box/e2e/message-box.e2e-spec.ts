@@ -155,7 +155,7 @@ describe('Message-box test suits', () => {
             await click(section + button, i);
             await expect(await waitForElDisplayed(messageBox)).toBe(true, 'Message-Box is displayed');
             await click(okButton);
-            await expect(await waitForNotPresent(messageBox)).toBe(true, 'Message-Box is not displayed');
+            await expect(await waitForElDisappear(messageBox)).withContext(false, 'Message-Box is not displayed');
         }
     }
 
@@ -174,7 +174,7 @@ describe('Message-box test suits', () => {
         await pause(500);
         await waitForElDisplayed(messageBox);
         await click(cancelButton);
-        await waitForNotPresent(messageBox);
+        await expect(await waitForElDisappear(messageBox)).withContext(true);
         section === basedObjectExample
             ? await expect(await getText(section + resultTxt)).toContain('Canceled', 'Result is not Canceled')
             : await expect(await getText(section + resultTxt)).toContain('Cancel', 'Result is not Cancel');

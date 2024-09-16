@@ -329,7 +329,8 @@ export default {
         inputGlyphAriaLabel: 'Izbira možnosti',
         inputIconTitle: 'Izbira možnosti',
         mobileShowAllItemsButton: 'Prikaz vseh elementov',
-        mobileShowSelectedItemsButton: 'Prikaz izbranih elementov'
+        mobileShowSelectedItemsButton: 'Prikaz izbranih elementov',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 znak, ki presega omejitev',

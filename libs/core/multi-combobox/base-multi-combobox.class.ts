@@ -46,7 +46,7 @@ export abstract class BaseMultiCombobox<T = any> {
     abstract secondaryKey: string;
     abstract showSecondaryText: boolean;
     abstract lookupKey: string;
-    abstract invalidEntryMessage: string;
+    abstract invalidEntryMessage: Nullable<string>;
     abstract invalidEntryDisplayTime: number;
     abstract limitless: boolean;
     abstract isGroup: boolean;

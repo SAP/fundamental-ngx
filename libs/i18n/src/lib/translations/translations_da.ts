@@ -329,7 +329,8 @@ export default {
         inputGlyphAriaLabel: 'Vælg muligheder',
         inputIconTitle: 'Vælg muligheder',
         mobileShowAllItemsButton: 'Vis alle elementer',
-        mobileShowSelectedItemsButton: 'Vis valgte elementer'
+        mobileShowSelectedItemsButton: 'Vis valgte elementer',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 tegn over grænsen',
