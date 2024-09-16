@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.17...v0.52.2-rc.18) (2024-09-16)
+
+
+### Bug Fixes
+
+* **platform:** fix fdp-table popover alignment ([#12303](https://github.com/SAP/fundamental-ngx/issues/12303)) ([fc0e314](https://github.com/SAP/fundamental-ngx/commit/fc0e31455fb73c832cfe8f7f3a1b89c0fca91f03)), closes [#11230](https://github.com/SAP/fundamental-ngx/issues/11230) [#11230](https://github.com/SAP/fundamental-ngx/issues/11230) [#11230](https://github.com/SAP/fundamental-ngx/issues/11230) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771)
+
+
+
+
+
 ## [0.52.2-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.16...v0.52.2-rc.17) (2024-09-13)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
