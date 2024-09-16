@@ -194,7 +194,7 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     }
 
     /** @hidden */
-    mapColumnAlignToPlacement(columnAlignValue: ColumnAlignValue): Placement {
+    mapColumnAlignToPlacement(columnAlignValue: Nullable<ColumnAlignValue>): Placement {
         switch (columnAlignValue) {
             case ColumnAlign.START:
                 return PopoverPlacement.BOTTOM_START;
