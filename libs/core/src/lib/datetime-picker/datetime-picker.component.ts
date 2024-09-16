@@ -782,7 +782,7 @@ export class DatetimePickerComponent<D>
 
     /** @hidden */
     private _parseDate(date: unknown): D | null {
-        return this._dateTimeAdapter.parse(date, this._dateTimeFormats.parse.dateInput);
+        return this._dateTimeAdapter.parse(date, this._dateTimeFormats.parse.dateTimeInput);
     }
 
     /** @hidden */
