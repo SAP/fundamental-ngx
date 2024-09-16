@@ -329,7 +329,8 @@ export default {
         inputGlyphAriaLabel: 'Välj alternativ',
         inputIconTitle: 'Välj alternativ',
         mobileShowAllItemsButton: 'Visa alla artiklar',
-        mobileShowSelectedItemsButton: 'Visa valda artiklar'
+        mobileShowSelectedItemsButton: 'Visa valda artiklar',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 tecken över gränsen',
