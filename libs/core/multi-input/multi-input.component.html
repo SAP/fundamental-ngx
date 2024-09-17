@@ -48,8 +48,9 @@
             [isControl]="true"
             [glyph]="showAddonButton ? glyph : ''"
             [glyphFont]="glyphFont"
-            [addonButtonAriaHidden]="!!title"
+            [addonButtonAriaHidden]="addonButtonAriaHidden"
             (addOnButtonClicked)="_addOnButtonClicked($event)"
+            [glyphAriaLabel]="addOnButtonAriaLabel"
             [iconTitle]="addonIconTitle"
         >
             <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fd-multi-input__invisible-text">{{
@@ -102,6 +103,7 @@
                     [attr.id]="inputId"
                     (focus)="tokenizer._showAllTokens()"
                     (blur)="tokenizer._hideTokens()"
+                    [attr.title]="title"
                 />
             </fd-tokenizer>
         </fd-input-group>
