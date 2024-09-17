@@ -298,7 +298,8 @@ export const FD_LANGUAGE_SLOVAK: FdLanguage = {
         inputGlyphAriaLabel: 'Výber - možnosti',
         inputIconTitle: 'Výber - možnosti',
         mobileShowAllItemsButton: 'Zobraziť všetky položky',
-        mobileShowSelectedItemsButton: 'Zobraziť vybrané položky'
+        mobileShowSelectedItemsButton: 'Zobraziť vybrané položky',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'Počet znakov nad limit',

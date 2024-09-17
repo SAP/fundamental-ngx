@@ -298,7 +298,8 @@ export const FD_LANGUAGE_KAZAKH: FdLanguage = {
         inputGlyphAriaLabel: 'Таңдау опциялары',
         inputIconTitle: 'Таңдау опциялары',
         mobileShowAllItemsButton: 'Барлық тармақтарды көрсету',
-        mobileShowSelectedItemsButton: 'Таңдалған тармақтарды көрсету'
+        mobileShowSelectedItemsButton: 'Таңдалған тармақтарды көрсету',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 таңбаға шектен асып кетті',

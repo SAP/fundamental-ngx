@@ -7,9 +7,11 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
+    Inject,
     InjectionToken,
     Injector,
     Input,
+    OnDestroy,
     OnInit,
     Output,
     QueryList,
@@ -39,7 +41,7 @@ import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
 import equal from 'fast-deep-equal';
-import { Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { OptionItem, SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
@@ -52,6 +54,7 @@ import { MultiComboboxDataSourceParser } from './data-source/multi-combobox-data
 
 import { getSelectItemByInputValue, getTokenIndexByIdlOrValue } from './helpers';
 import { MultiComboboxSelectionChangeEvent } from './models/selection-change.event';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 
 export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory: () => 12 });
 
@@ -89,7 +92,7 @@ export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory
         DestroyedService
     ]
 })
-export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implements AfterViewInit, OnInit {
+export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implements AfterViewInit, OnInit, OnDestroy {
     /**
      * Show select all checkbox
      */
@@ -188,9 +191,12 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     @Input()
     addonIconTitle: string;
 
-    /** Sets invalid entry message. */
+    /**
+     * @deprecated Use the i18n module to modify the translation for this string.
+     * Sets invalid entry message.
+     * */
     @Input()
-    invalidEntryMessage = 'Invalid entry';
+    invalidEntryMessage: Nullable<string>;
 
     /** Turns limitless mode, ON or OFF */
     @Input()
@@ -343,12 +349,26 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     openChange = new Subject<boolean>();
 
     /** @hidden */
+    private _translationResolver = new TranslationResolver();
+
+    /** @hidden */
+    private _langSubscription: Subscription;
+
+    /** @hidden */
     constructor(
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
-        private readonly _dynamicComponentService: DynamicComponentService
+        private readonly _dynamicComponentService: DynamicComponentService,
+        @Inject(FD_LANGUAGE) _lang$: Observable<FdLanguage>
     ) {
         super();
+
+        this._langSubscription = _lang$.subscribe((lang: FdLanguage) => {
+            this.invalidEntryMessage = this._translationResolver.resolve(
+                lang,
+                'platformMultiCombobox.invalidEntryError'
+            );
+        });
 
         this.contentDensityObserver.subscribe();
     }
@@ -357,6 +377,11 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     ngOnInit(): void {
         this.cvaControl.listenToChanges();
         this._openDataStream();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._langSubscription.unsubscribe();
     }
 
     /** @hidden */

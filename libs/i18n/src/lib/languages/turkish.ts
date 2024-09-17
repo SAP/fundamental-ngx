@@ -294,7 +294,8 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         inputGlyphAriaLabel: 'Seçenekleri Belirle',
         inputIconTitle: 'Seçenekleri Belirle',
         mobileShowAllItemsButton: 'Tüm öğeleri göster',
-        mobileShowSelectedItemsButton: 'Seçilen öğeleri göster'
+        mobileShowSelectedItemsButton: 'Seçilen öğeleri göster',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'Limitin 1 karakter üzerinde',

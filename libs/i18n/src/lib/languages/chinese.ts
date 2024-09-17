@@ -284,7 +284,8 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         inputGlyphAriaLabel: '选择选项',
         inputIconTitle: '选择选项',
         mobileShowAllItemsButton: '显示所有项目',
-        mobileShowSelectedItemsButton: '显示所选项目'
+        mobileShowSelectedItemsButton: '显示所选项目',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '超出限制 1 个字符',

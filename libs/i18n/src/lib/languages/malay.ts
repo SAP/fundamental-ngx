@@ -297,7 +297,8 @@ export const FD_LANGUAGE_MALAY: FdLanguage = {
         inputGlyphAriaLabel: 'Pilih Pilihan',
         inputIconTitle: 'Pilih Pilihan',
         mobileShowAllItemsButton: 'Tunjukkan semua item',
-        mobileShowSelectedItemsButton: 'Tunjukkan item dipilih'
+        mobileShowSelectedItemsButton: 'Tunjukkan item dipilih',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 aksara melebihi had',

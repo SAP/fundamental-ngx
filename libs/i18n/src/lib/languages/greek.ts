@@ -299,7 +299,8 @@ export const FD_LANGUAGE_GREEK: FdLanguage = {
         inputGlyphAriaLabel: 'Επιλογή Δυνατοτήτων',
         inputIconTitle: 'Επιλογή Δυνατοτήτων',
         mobileShowAllItemsButton: 'Εμφάνιση όλων των στοιχείων',
-        mobileShowSelectedItemsButton: 'Εμφάνιση επιλεγμένων στοιχείων'
+        mobileShowSelectedItemsButton: 'Εμφάνιση επιλεγμένων στοιχείων',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 χαρακτήρας πάνω από το όριο',

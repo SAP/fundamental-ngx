@@ -288,7 +288,8 @@ export const FD_LANGUAGE_KOREAN: FdLanguage = {
         inputGlyphAriaLabel: '옵션 선택',
         inputIconTitle: '옵션 선택',
         mobileShowAllItemsButton: '모든 항목 표시',
-        mobileShowSelectedItemsButton: '선택한 항목 표시'
+        mobileShowSelectedItemsButton: '선택한 항목 표시',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '제한 1자 초과',

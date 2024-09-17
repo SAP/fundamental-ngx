@@ -288,7 +288,8 @@ export const FD_LANGUAGE_HEBREW: FdLanguage = {
         inputGlyphAriaLabel: 'בחר אפשרויות',
         inputIconTitle: 'בחר אפשרויות',
         mobileShowAllItemsButton: 'הצג את כל הפריטים',
-        mobileShowSelectedItemsButton: 'הצג פריטים נבחרים'
+        mobileShowSelectedItemsButton: 'הצג פריטים נבחרים',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'תו אחד יותר מהמגבלה',

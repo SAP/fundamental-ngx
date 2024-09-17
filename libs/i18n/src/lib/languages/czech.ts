@@ -298,7 +298,8 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         inputGlyphAriaLabel: 'Vybrat možnosti',
         inputIconTitle: 'Vybrat možnosti',
         mobileShowAllItemsButton: 'Zobrazit všechny položky',
-        mobileShowSelectedItemsButton: 'Zobrazit vybrané položky'
+        mobileShowSelectedItemsButton: 'Zobrazit vybrané položky',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 znak nad limit',
