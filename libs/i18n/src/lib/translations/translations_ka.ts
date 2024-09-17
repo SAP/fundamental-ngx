@@ -329,7 +329,8 @@ export default {
         inputGlyphAriaLabel: 'აირჩიეთ ოფციები',
         inputIconTitle: 'აირჩიეთ ოფციები',
         mobileShowAllItemsButton: 'მაჩვენე ყველა',
-        mobileShowSelectedItemsButton: 'მაჩვენე არჩეული'
+        mobileShowSelectedItemsButton: 'მაჩვენე არჩეული',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 სიმბოლო აღემატება ლიმიტს',

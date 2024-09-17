@@ -377,7 +377,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     private _hideExtraTabs(tabs: IconTabBarItem[], extraTabs: IconTabBarItem[]): void {
         for (let i = this._lastVisibleTabIndex + 1; i < tabs.length; i++) {
             const tab = tabs[i];
-            if (tab.uId !== this.selectedUid) {
+            if (tab && tab?.uId !== this.selectedUid) {
                 extraTabs.push({ ...tab });
                 tab.hidden = true;
                 tab.cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);

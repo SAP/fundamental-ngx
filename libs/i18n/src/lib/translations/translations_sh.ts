@@ -329,7 +329,8 @@ export default {
         inputGlyphAriaLabel: 'Odaberi opcije',
         inputIconTitle: 'Odaberi opcije',
         mobileShowAllItemsButton: 'Pokaži sve stavke',
-        mobileShowSelectedItemsButton: 'Pokaži odabrane stavke'
+        mobileShowSelectedItemsButton: 'Pokaži odabrane stavke',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 znak preko ograničenja',

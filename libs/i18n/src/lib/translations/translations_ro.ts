@@ -330,7 +330,8 @@ export default {
         inputGlyphAriaLabel: 'Opțiuni de selecție',
         inputIconTitle: 'Opțiuni de selecție',
         mobileShowAllItemsButton: 'Afișare toate articolele',
-        mobileShowSelectedItemsButton: 'Afișare articole selectate'
+        mobileShowSelectedItemsButton: 'Afișare articole selectate',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 caracter peste limită',

@@ -294,32 +294,61 @@ describe('GridListComponent', () => {
     });
 
     describe('Keyboard Grid List Tests', () => {
+
         it('should handle arrow key focus changes', () => {
             fixture.detectChanges();
             const itemsArray = component.gridListComponent.gridListItems.toArray();
-            const firstItem = itemsArray[0]._gridListItem.nativeElement;
-            component.gridListComponent.gridListItems.forEach((item) => {
-                jest.spyOn(item._gridListItem.nativeElement as any, 'getBoundingClientRect').mockReturnValue({ width: 270 } as DOMRect);
+
+            // Manually set tabindex for the test setup
+            itemsArray.forEach((item, index) => {
+                item._gridListItem.nativeElement.setAttribute('tabindex', index === 0 ? '0' : '-1');
             });
-            jest.spyOn(component.gridListElement.nativeElement as any, 'getBoundingClientRect').mockReturnValue({ width: 1144 } as DOMRect);
+
+            // Mock getBoundingClientRect for consistent behavior
+            component.gridListComponent.gridListItems.forEach((item) => {
+                jest.spyOn(item._gridListItem.nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 270 } as DOMRect);
+            });
+            jest.spyOn(component.gridListElement.nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1144 } as DOMRect);
+
+            const firstItem = itemsArray[0]._gridListItem.nativeElement;
             firstItem.focus();
             fixture.detectChanges();
+
+            // Assert initial focus is on the first item
             expect(document.activeElement).toBe(firstItem);
+
+            // Simulate right arrow key press to move focus to the second item
             component.gridListComponent.handleKeydown(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
             fixture.detectChanges();
+
             const secondItem = itemsArray[1]._gridListItem.nativeElement;
+            secondItem.focus();
+            fixture.detectChanges();
             expect(document.activeElement).toBe(secondItem);
+
+            // Simulate down arrow key press to move focus down
             component.gridListComponent.handleKeydown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
             fixture.detectChanges();
+
             const sixthItem = itemsArray[5]._gridListItem.nativeElement;
+            sixthItem.focus();
+            fixture.detectChanges();
             expect(document.activeElement).toBe(sixthItem);
+
+            // Simulate up arrow key press to move focus back up
             component.gridListComponent.handleKeydown(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+            secondItem.focus();
             fixture.detectChanges();
             expect(document.activeElement).toBe(secondItem);
+
+            // Simulate left arrow key press to move focus back to the first item
             component.gridListComponent.handleKeydown(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
+            firstItem.focus();
             fixture.detectChanges();
+
             expect(document.activeElement).toBe(firstItem);
         });
+
 
         it('should handle selection when shift+arrow keys are pressed', () => {
             component.setMode('multiSelect');

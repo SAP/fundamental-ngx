@@ -737,6 +737,7 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
     /** @hidden */
     private _resetState(): void {
         this._resetSourceStream();
+        this._mainSearch = '';
         this.activeDialog = undefined;
     }
 

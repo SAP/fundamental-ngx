@@ -1,5 +1,5 @@
 @if (!hideToolbar) {
-    <fd-toolbar fdType="transparent">
+    <fd-toolbar [shouldOverflow]="true" fdType="transparent">
         @if (_toolbarItems) {
             @for (template of _toolbarItems; track template) {
                 <ng-template [ngTemplateOutlet]="template"></ng-template>
@@ -7,6 +7,7 @@
             }
         }
         <fdp-search-field
+            fd-toolbar-item
             (inputChange)="onSearchInputChange($event)"
             (searchSubmit)="submitForm()"
             (cancelSearch)="cancelSearch()"
@@ -58,7 +59,7 @@
     </fd-toolbar>
 }
 @if (_formItems(); as formItems) {
-    <div class="fdp-smart-filter-bar__filters" [hidden]="!showFilterBar$()">
+    <div class="fdp-smart-filter-bar__filters" fd-toolbar-item [hidden]="!showFilterBar$()">
         <fdp-form-generator
             (formCreated)="_onFormCreated()"
             (formSubmitted)="_onFormSubmitted($event)"
