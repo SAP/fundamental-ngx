@@ -1,4 +1,8 @@
-<div class="fd-table__text--no-wrap" [class.fd-table__inner]="hasSorting$() || hasFilter$()">
+<div
+    class="fd-table__text--no-wrap"
+    [class]="{ 'fd-table__inner': hasSorting$() || hasFilter$() }"
+    [ngStyle]="{ 'justify-content': column?.align, gap: column?.align ? '0.5rem' : '' }"
+>
     <ng-template
         [ngTemplateOutlet]="tableHeaderCellContentTemplate"
         [ngTemplateOutletContext]="{ column: column }"
