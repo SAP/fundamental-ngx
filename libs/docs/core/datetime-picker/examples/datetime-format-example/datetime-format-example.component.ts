@@ -46,7 +46,14 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
         }
     ],
     standalone: true,
-    imports: [DatetimePickerComponent, FormsModule, FdDatetimePipesModule, DatePipe]
+    imports: [DatetimePickerComponent, FormsModule, FdDatetimePipesModule, DatePipe],
+    styles: [
+        `
+            .container-md {
+                width: 50%;
+            }
+        `
+    ]
 })
 export class DatetimeFormatExampleComponent {
     date = FdDate.getNow();

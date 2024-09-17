@@ -10,7 +10,13 @@ Selected: {{ date }}
 
 <br />
 <br />
-<fd-datetime-picker [customDateTimeFormat]="dateTimeFormatWithDayPeriod" [(ngModel)]="date"></fd-datetime-picker>
+<div class="container-md">
+    <fd-datetime-picker
+        [customDateTimeFormat]="dateTimeFormatWithDayPeriod"
+        [isFullWidth]="true"
+        [(ngModel)]="date"
+    ></fd-datetime-picker>
+</div>
 <br />
 Selected: {{ date }}
 <br />

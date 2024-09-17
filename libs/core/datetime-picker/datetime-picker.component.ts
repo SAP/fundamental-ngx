@@ -341,6 +341,9 @@ export class DatetimePickerComponent<D>
     @Input()
     mobilePortrait = false;
 
+    /** To set input width 100% */
+    @Input() isFullWidth = false;
+
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     isOpenChange = new EventEmitter<boolean>();
