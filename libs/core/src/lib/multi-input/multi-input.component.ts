@@ -338,9 +338,17 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     @Input()
     open = false;
 
-    /** Whether or not to display the addon button. */
+    /** Whether to display the addon button. */
     @Input()
     displayAddonButton = true;
+
+    /** Whether to hide the addon button from the screenreader. */
+    @Input()
+    addonButtonAriaHidden = false;
+
+    /** Aria-label for the addon button. */
+    @Input()
+    addOnButtonAriaLabel: Nullable<string>;
 
     /** @hidden */
     private _tokenCountHiddenLabel = `fd-multi-input-token-count-id-${uniqueHiddenLabel++}`;
