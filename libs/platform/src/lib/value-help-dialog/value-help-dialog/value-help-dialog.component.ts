@@ -688,6 +688,7 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
         this._destroyed.next();
         this._destroyed.complete();
         this._resetSourceStream();
+        this._mainSearch = '';
         this.activeDialog = undefined;
     }
 
