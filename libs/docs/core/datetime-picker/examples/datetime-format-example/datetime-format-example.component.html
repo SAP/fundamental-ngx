@@ -4,7 +4,10 @@ Selected: {{ date | dateTimeFormat: 'null' }}
 
 <br />
 <br />
-<fd-datetime-picker [customDateTimeFormat]="basicDateTimeFormat" [(ngModel)]="date"></fd-datetime-picker>
+<div class="container-md">
+    <fd-datetime-picker [customDateTimeFormat]="basicDateTimeFormat" [isFullWidth]="true" [(ngModel)]="date">
+    </fd-datetime-picker>
+</div>
 <br />
 Selected: {{ date }}
 
