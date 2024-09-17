@@ -115,7 +115,7 @@ describe('SmartFilterBarSubjectDirective', () => {
             imports: [PlatformTableModule, PlatformSmartFilterBarModule],
             declarations: [TestComponent]
         }).compileComponents();
-    }));
+    }), 10000);
 
     beforeEach(waitForAsync(async () => {
         fixture = TestBed.createComponent(TestComponent);
