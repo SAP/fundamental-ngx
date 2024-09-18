@@ -82,9 +82,19 @@
 
     .fd-dynamic-page__title-container {
         align-items: center;
+
+        .fd-facet.fd-facet--image {
+            margin-inline-end: 1rem;
+        }
     }
 }
 
 .fd-dynamic-page__collapsible-header:empty {
     padding: 0 !important;
+}
+
+.fd-dynamic-page .fd-dynamic-page__title-container {
+    .fd-facet.fd-facet--image {
+        margin-inline-end: 1rem;
+    }
 }
