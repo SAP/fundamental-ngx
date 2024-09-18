@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.22...v0.52.2-rc.23) (2024-09-18)
+
+
+### Bug Fixes
+
+* **platform:** prevent filter input from losing focus when entering spaces ([#12367](https://github.com/SAP/fundamental-ngx/issues/12367)) ([6e3d253](https://github.com/SAP/fundamental-ngx/commit/6e3d253a6fe08e62a8992800f460a995244785bc))
+
+
+
+
+
 ## [0.52.2-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.21...v0.52.2-rc.22) (2024-09-18)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
