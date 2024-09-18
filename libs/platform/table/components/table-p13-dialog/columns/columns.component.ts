@@ -321,10 +321,13 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
                 .subscribe(([showAll, searchQuery]) => {
                     this._filteredColumns = this._selectableColumns
                         .sort((a, b) => a.order - b.order)
-                        .filter((item) =>
-                            item.column.label.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
-                        )
-                        .filter((item) => showAll || item.selected);
+                        .filter((item) => {
+                            const matchesSearchQuery = item.column.label
+                                .toLocaleLowerCase()
+                                .includes(searchQuery.toLocaleLowerCase());
+                            const matchesShowAll = showAll || item.selected;
+                            return matchesSearchQuery && matchesShowAll;
+                        });
                     this._onChangeFilteredColumnsList();
 
                     this.cdr.markForCheck();
