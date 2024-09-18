@@ -294,14 +294,18 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
      */
     private _initiateColumns(visibleColumnKeys: string[]): void {
         const visibleColumnIndexMap = new Map(visibleColumnKeys.map((key, index) => [key, index]));
-        this._selectableColumns = this.availableColumns.slice().map(
-            (column, index: number): SelectableColumn => ({
-                column,
-                selected: visibleColumnKeys.includes(column.key),
-                active: index === 0,
-                order: visibleColumnIndexMap.get(column.key) ?? index
-            })
-        );
+        console.log(this.availableColumns);
+        this._selectableColumns = this.availableColumns
+            .slice()
+            .map(
+                (column, index: number): SelectableColumn => ({
+                    column,
+                    selected: visibleColumnKeys.includes(column.key),
+                    active: index === 0,
+                    order: visibleColumnIndexMap.get(column.key) ?? index
+                })
+            )
+            .sort((a, b) => a.order - b.order);
 
         // keep count of selected
         this._countSelectedColumns();
@@ -319,15 +323,13 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
             combineLatest([this._showAllItemsSubject, this._searchQuerySubject])
                 .pipe(debounceTime(20))
                 .subscribe(([showAll, searchQuery]) => {
-                    this._filteredColumns = this._selectableColumns
-                        .sort((a, b) => a.order - b.order)
-                        .filter((item) => {
-                            const matchesSearchQuery = item.column.label
-                                .toLocaleLowerCase()
-                                .includes(searchQuery.toLocaleLowerCase());
-                            const matchesShowAll = showAll || item.selected;
-                            return matchesSearchQuery && matchesShowAll;
-                        });
+                    this._filteredColumns = this._selectableColumns.filter((item) => {
+                        const matchesSearchQuery = item.column.label
+                            .toLocaleLowerCase()
+                            .includes(searchQuery.toLocaleLowerCase());
+                        const matchesShowAll = showAll || item.selected;
+                        return matchesSearchQuery && matchesShowAll;
+                    });
                     this._onChangeFilteredColumnsList();
 
                     this.cdr.markForCheck();
