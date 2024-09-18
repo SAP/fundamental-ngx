@@ -88,7 +88,7 @@ export class TableP13DialogComponent implements OnDestroy {
 
     /** Event emitted when dialog is closed. */
     @Output()
-    closeDialog = new EventEmitter<string[]>();
+    dialogClosed = new EventEmitter<string[]>();
 
     /** @hidden */
     @ContentChild(TableP13SortComponent)
@@ -267,7 +267,7 @@ export class TableP13DialogComponent implements OnDestroy {
             this._dialogRef.afterClosed
                 .pipe(filter((result) => !!result))
                 .subscribe(({ visibleColumns: result }: ColumnsDialogResultData) => {
-                    this.closeDialog.emit(result);
+                    this.dialogClosed.emit(result);
                     this._applyColumns(result);
                 })
         );

@@ -13,4 +13,4 @@
 </fdp-table>
 
 <!-- Connect P13 Dialog to the table -->
-<fdp-table-p13-dialog (closeDialog)="handleDialogClose($event)" [table]="table"></fdp-table-p13-dialog>
+<fdp-table-p13-dialog (dialogClosed)="handleDialogClose($event)" [table]="table"></fdp-table-p13-dialog>
