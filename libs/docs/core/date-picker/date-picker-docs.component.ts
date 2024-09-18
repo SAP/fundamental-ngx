@@ -27,6 +27,7 @@ import { DatePickerPositionExampleComponent } from './examples/date-picker-posit
 import { DatePickerRangeDisabledExampleComponent } from './examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component';
 import { DatePickerRangeExampleComponent } from './examples/date-picker-range-example.component';
 import { DatePickerSingleExampleComponent } from './examples/date-picker-single-example.component';
+import { DatePickerSpecialDayExampleComponent } from './examples/date-picker-special-day-example/date-picker-special-day-example.component';
 import { DatePickerTodayButtonExampleComponent } from './examples/date-picker-today-button-example.component';
 import { DatePickerUpdateOnBlurExampleComponent } from './examples/date-picker-update-on-blur-example.component';
 import { DatePickerMobileModeExampleComponent } from './examples/mobile-mode/date-picker-mobile-mode-example.component';
@@ -53,6 +54,10 @@ const datePickerMultiDisableTs = 'date-picker-multi-disable-func-example.compone
 const datePickerSingleDisableH = 'date-picker-disable-func-example/date-picker-disable-func-example.component.html';
 const datePickerUpdateOnBlurSrcTs = 'date-picker-update-on-blur-example.component.ts';
 const datePickerDisableScrollSrcTs = 'date-picker-disable-focus-scroll-example.component.ts';
+
+const datePickerWithSpecialDaysRuleHtml =
+    'date-picker-special-day-example/date-picker-special-day-example.component.html';
+const datePickerWithSpecialDaysRuleTs = 'date-picker-special-day-example/date-picker-special-day-example.component.ts';
 
 const datePickerMobileTs = 'mobile-mode/date-picker-mobile-mode-example.component.ts';
 const datePickerMobileH = 'mobile-mode/date-picker-mobile-mode-example.component.html';
@@ -87,7 +92,8 @@ const datePickerMobileH = 'mobile-mode/date-picker-mobile-mode-example.component
         DatePickerFormMultiExampleComponent,
         DatePickerMultiDisableFuncExampleComponent,
         DatePickerMultiRangeExampleComponent,
-        DatePickerFormMultiRangeExampleComponent
+        DatePickerFormMultiRangeExampleComponent,
+        DatePickerSpecialDayExampleComponent
     ]
 })
 export class DatePickerDocsComponent {
@@ -277,6 +283,21 @@ export class DatePickerDocsComponent {
             component: 'DatePickerDisableFocusScrollExampleComponent',
             code: getAssetFromModuleAssets(datePickerDisableScrollSrcTs),
             fileName: 'date-picker-disable-focus-scroll-example'
+        }
+    ];
+
+    datePickerWithSpecialDaysRule: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'DatePickerSpecialDayExampleComponent',
+            code: getAssetFromModuleAssets(datePickerWithSpecialDaysRuleHtml),
+            fileName: 'date-picker-special-day-example'
+        },
+        {
+            language: 'html',
+            component: 'DatePickerSpecialDayExampleComponent',
+            code: getAssetFromModuleAssets(datePickerWithSpecialDaysRuleTs),
+            fileName: 'date-picker-special-day-example'
         }
     ];
 
