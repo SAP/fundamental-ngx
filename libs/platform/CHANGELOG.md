@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.20...v0.52.2-rc.21) (2024-09-17)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.52.2-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.19...v0.52.2-rc.20) (2024-09-17)
+
+
+### Bug Fixes
+
+* **platform:** icon-tab-bar check for selectedUid ([#12431](https://github.com/SAP/fundamental-ngx/issues/12431)) ([288bf4a](https://github.com/SAP/fundamental-ngx/commit/288bf4ad9f2213fdb018d74ceb1810fc119b8bb9))
+
+
+
+
+
 ## [0.52.2-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.18...v0.52.2-rc.19) (2024-09-16)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
