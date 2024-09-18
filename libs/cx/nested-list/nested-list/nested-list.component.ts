@@ -128,8 +128,6 @@ export class NestedListComponent implements AfterContentInit, NestedListInterfac
 
     /** @hidden */
     private _handleNestedLevel(): void {
-        this._nestedItemsChangesSubscription.unsubscribe();
-
         const nestedLevel: number = this._getNestedLevel();
 
         this._setAccessibilityProperties(nestedLevel);
