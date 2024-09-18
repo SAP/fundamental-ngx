@@ -99,6 +99,7 @@ export class GridListComboSelectComponent {
     }
 
     onSelectionChange(event: GridListSelectionEvent<number>): void {
+        return;
         console.log('Multi-Select: selected items', event);
     }
 

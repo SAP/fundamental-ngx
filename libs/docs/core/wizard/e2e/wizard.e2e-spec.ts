@@ -80,14 +80,12 @@ describe('Wizard component test', () => {
             if (i !== stepsLength - 1) {
                 await expect(await getElementClass(wizard + step, i + 1)).toContain('step--upcoming');
             }
+            await expect(await getElementClass(wizard + step, i)).toContain('step--current');
 
-            if (i !== 1) {
-                await expect(await getElementClass(wizard + step, i)).toContain('step--current');
-            }
             if (i === 1) {
-                await setValue(fullNameInput, fullName);
-                await setValue(firstAdressInput, firstAdress);
-                await setValue(secAdressInput, secAdress);
+                await setValueWithRetry(fullNameInput, fullName);
+                await setValueWithRetry(firstAdressInput, firstAdress);
+                await setValueWithRetry(secAdressInput, secAdress);
             }
             await click(wizard + nextStep, i);
             await pause(1000);
@@ -100,9 +98,9 @@ describe('Wizard component test', () => {
         await expect(await getText(savedSecAdress)).toEqual(secAdress);
 
         await click(editButton);
-        await setValue(fullNameInput, fullName + update);
-        await setValue(firstAdressInput, firstAdress + update);
-        await setValue(secAdressInput, secAdress + update);
+        await setValueWithRetry(fullNameInput, fullName + update);
+        await setValueWithRetry(firstAdressInput, firstAdress + update);
+        await setValueWithRetry(secAdressInput, secAdress + update);
         await click(wizard + nextStep, 3);
 
         await expect(await getText(savedName)).toEqual(fullName + update);
@@ -307,5 +305,23 @@ describe('Wizard component test', () => {
             }
         }
         await click(exitButton);
+    }
+
+    // Helper function for retries in case of interaction delays
+    async function setValueWithRetry(selector: string, value: string): Promise<void> {
+        let attempts = 0;
+        const maxAttempts = 3;
+        while (attempts < maxAttempts) {
+            try {
+                await setValue(selector, value);
+                if ((await getValue(selector)) === value) {
+                    return;
+                }
+            } catch (e) {
+                attempts++;
+                await pause(500);
+            }
+        }
+        throw new Error(`Failed to set value for ${selector} after ${maxAttempts} attempts`);
     }
 });
