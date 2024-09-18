@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.20...v0.52.2-rc.21) (2024-09-17)
+
+
+### Bug Fixes
+
+* **core:** handle invalid date inputs gracefully ([#12433](https://github.com/SAP/fundamental-ngx/issues/12433)) ([d49bb37](https://github.com/SAP/fundamental-ngx/commit/d49bb37e3a04f2c09382561e3f2a7a81f0091d6c))
+
+
+
+
+
+## [0.52.2-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.19...v0.52.2-rc.20) (2024-09-17)
+
+
+### Bug Fixes
+
+* **platform:** icon-tab-bar check for selectedUid ([#12431](https://github.com/SAP/fundamental-ngx/issues/12431)) ([288bf4a](https://github.com/SAP/fundamental-ngx/commit/288bf4ad9f2213fdb018d74ceb1810fc119b8bb9))
+
+
+
+
+
+## [0.52.2-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.18...v0.52.2-rc.19) (2024-09-16)
+
+
+### Bug Fixes
+
+* datetime adapter passing date format, not dateTime ([#12415](https://github.com/SAP/fundamental-ngx/issues/12415)) ([47b3610](https://github.com/SAP/fundamental-ngx/commit/47b3610898aa006636499bc86a5f7db93ef5dbc7))
+
+
+
+
+
+## [0.52.2-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.17...v0.52.2-rc.18) (2024-09-16)
+
+
+### Bug Fixes
+
+* **platform:** fix fdp-table popover alignment ([#12303](https://github.com/SAP/fundamental-ngx/issues/12303)) ([fc0e314](https://github.com/SAP/fundamental-ngx/commit/fc0e31455fb73c832cfe8f7f3a1b89c0fca91f03)), closes [#11230](https://github.com/SAP/fundamental-ngx/issues/11230) [#11230](https://github.com/SAP/fundamental-ngx/issues/11230) [#11230](https://github.com/SAP/fundamental-ngx/issues/11230) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771)
+
+
+
+
+
 ## [0.52.2-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.16...v0.52.2-rc.17) (2024-09-13)
 
 

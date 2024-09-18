@@ -47,6 +47,24 @@ export const GetDefaultPosition = (position: ConnectedPosition[]): ConnectedPosi
  */
 export type PopoverFillMode = 'at-least' | 'equal' | 'fit-content';
 
+export enum PopoverPlacement {
+    AUTO_START = 'auto-start',
+    AUTO = 'auto',
+    AUTO_END = 'auto-end',
+    TOP_START = 'top-start',
+    TOP = 'top',
+    TOP_END = 'top-end',
+    RIGHT_START = 'right-start',
+    RIGHT = 'right',
+    RIGHT_END = 'right-end',
+    BOTTOM_END = 'bottom-end',
+    BOTTOM = 'bottom',
+    BOTTOM_START = 'bottom-start',
+    LEFT_END = 'left-end',
+    LEFT = 'left',
+    LEFT_START = 'left-start'
+}
+
 export type Placement =
     | 'auto-start'
     | 'auto'
