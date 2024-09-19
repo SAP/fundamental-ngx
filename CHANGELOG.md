@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.24...v0.52.2-rc.25) (2024-09-19)
+
+
+### Bug Fixes
+
+* **core:** address some Dynamic Page header issues ([#12443](https://github.com/SAP/fundamental-ngx/issues/12443)) ([890eaed](https://github.com/SAP/fundamental-ngx/commit/890eaedb13ef7d6c2b33de4ded5b4b8ce0f52f05))
+
+
+
+
+
 ## [0.52.2-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.23...v0.52.2-rc.24) (2024-09-18)
 
 
