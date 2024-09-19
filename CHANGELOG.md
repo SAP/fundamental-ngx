@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.27...v0.52.2-rc.28) (2024-09-19)
+
+
+### Bug Fixes
+
+* **platform:** fdp-table  Enhance the <fdp-table-p13-dialog [table]="table"> component to emit an event with the selected column ([#12430](https://github.com/SAP/fundamental-ngx/issues/12430)) ([f00cd77](https://github.com/SAP/fundamental-ngx/commit/f00cd778c64911fb76c9dc90d9a31e31c965ee70)), closes [#12293](https://github.com/SAP/fundamental-ngx/issues/12293)
+
+
+
+
+
 ## [0.52.2-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.26...v0.52.2-rc.27) (2024-09-19)
 
 
