@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.26...v0.52.2-rc.27) (2024-09-19)
+
+
+### Features
+
+* **core:** add a feature to pick date range in month year format ([#12341](https://github.com/SAP/fundamental-ngx/issues/12341)) ([0ffe265](https://github.com/SAP/fundamental-ngx/commit/0ffe2653b2cd41368c9088b03983c967cee0f350)), closes [#12319](https://github.com/SAP/fundamental-ngx/issues/12319)
+
+
+
+
+
 ## [0.52.2-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.25...v0.52.2-rc.26) (2024-09-19)
 
 **Note:** Version bump only for package @fundamental-ngx/core
