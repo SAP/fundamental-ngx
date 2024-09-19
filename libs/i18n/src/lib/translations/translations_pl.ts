@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Nawiguj po wyborach za pomocą strzałek w górę i w dół.',
         escapeNavigateTokens:
             'Naciśnij klawisz escape, aby opuścić pole do wprowadzania i użyj klawiszy strzałek w lewo i w prawo, aby poruszać się po wybranych opcjach.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Zawiera łączną liczbę tokenów: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Nawigacja główna',
@@ -330,7 +330,7 @@ export default {
         inputIconTitle: 'Wybór opcji',
         mobileShowAllItemsButton: 'Wyświetl wszystkie pozycje',
         mobileShowSelectedItemsButton: 'Wyświetl wybrane pozycje',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Nieprawidłowy wpis'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 znak ponad limit',
@@ -484,6 +484,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Kolumny',
         toolbarActionExpandAllButtonTitle: 'Rozwiń wszystko',
         toolbarActionCollapseAllButtonTitle: 'Zwiń wszystko',
+        filterDialogBackToColumns: 'Przejdź wstecz',
         filterDialogNotFilteredLabel: '(Nieprzefiltrowane)',
         filterDialogFilterByLabel: 'Filtruj wg: {filterLabel}',
         filterDialogFilterTitle: 'Filtr',

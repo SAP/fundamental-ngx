@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Жоғары және төмен көрсеткілерді пайдаланып, бөлімдерге өтіңіз.',
         escapeNavigateTokens:
             'Енгізу өрісінен шығу үшін escape пернесін басып, таңдалған опциялар арқылы өту үшін сол және оң жақ көрсеткі пернелерін пайдаланыңыз.',
-        tokensCountText: 'Қамтиды: {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Ішіндегі жалпы маркерлер саны: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Негізгі навигация',
@@ -330,7 +330,7 @@ export default {
         inputIconTitle: 'Таңдау опциялары',
         mobileShowAllItemsButton: 'Барлық тармақтарды көрсету',
         mobileShowSelectedItemsButton: 'Таңдалған тармақтарды көрсету',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Енгізілім жарамсыз'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 таңбаға шектен асып кетті',
@@ -484,6 +484,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Бағандар',
         toolbarActionExpandAllButtonTitle: 'Барлығын жаю',
         toolbarActionCollapseAllButtonTitle: 'Барлығын жию',
+        filterDialogBackToColumns: 'Артқа өту',
         filterDialogNotFilteredLabel: '(Сүзгіленбеген)',
         filterDialogFilterByLabel: 'Сүзгілеу шарты: {filterLabel}',
         filterDialogFilterTitle: 'Сүзгілеу',

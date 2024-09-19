@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Krmarjenje po izbirah s puščičnima tipkama navzgor in navzdol.',
         escapeNavigateTokens:
             'Pritisnite Esc, da zapustite vnosno polje, in se s puščičnima tipkama levo in desno pomikate po izbranih možnostih.',
-        tokensCountText: 'Vsebuje {length, plural, =0 {nič žetonov} =1 {1 žeton} other {# žetonov} }.'
+        tokensCountText: 'Vsebuje skupno število žetonov: {dolžina}.'
     },
     coreNavigation: {
         mainNavigation: 'Glavno krmarjenje',
@@ -330,7 +330,7 @@ export default {
         inputIconTitle: 'Izbira možnosti',
         mobileShowAllItemsButton: 'Prikaz vseh elementov',
         mobileShowSelectedItemsButton: 'Prikaz izbranih elementov',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Neveljaven vnos'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 znak, ki presega omejitev',
@@ -484,6 +484,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Stolpci',
         toolbarActionExpandAllButtonTitle: 'Razširi vse',
         toolbarActionCollapseAllButtonTitle: 'Skrči vse',
+        filterDialogBackToColumns: 'Nazaj',
         filterDialogNotFilteredLabel: '(Brez filtriranja)',
         filterDialogFilterByLabel: 'Filtriraj po: {filterLabel}',
         filterDialogFilterTitle: 'Filtriraj',

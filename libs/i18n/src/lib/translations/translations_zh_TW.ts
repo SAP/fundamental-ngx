@@ -77,7 +77,7 @@ export default {
         noResults: '無結果。',
         navigateSelectionsWithArrows: '使用向上和向下箭頭瀏覽選擇。',
         escapeNavigateTokens: '請按逸出離開輸入欄位，並使用向左和向右鍵瀏覽所選選項。',
-        tokensCountText: '包含 {length, plural, =0 {no token} =1 {1 token} other {# tokens} }。'
+        tokensCountText: '包含總計權杖：{length}。'
     },
     coreNavigation: {
         mainNavigation: '主瀏覽',
@@ -328,7 +328,7 @@ export default {
         inputIconTitle: '選擇選項',
         mobileShowAllItemsButton: '顯示所有項目',
         mobileShowSelectedItemsButton: '顯示所選項目',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: '條目無效'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '超過上限 1 個字元',
@@ -481,6 +481,7 @@ export default {
         toolbarActionColumnsButtonTitle: '欄',
         toolbarActionExpandAllButtonTitle: '全部展開',
         toolbarActionCollapseAllButtonTitle: '全部摺疊',
+        filterDialogBackToColumns: '返回',
         filterDialogNotFilteredLabel: '(未篩選)',
         filterDialogFilterByLabel: '篩選依據：{filterLabel}',
         filterDialogFilterTitle: '篩選器',
