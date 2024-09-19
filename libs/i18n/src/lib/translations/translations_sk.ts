@@ -330,7 +330,7 @@ export default {
         inputIconTitle: 'Výber - možnosti',
         mobileShowAllItemsButton: 'Zobraziť všetky položky',
         mobileShowSelectedItemsButton: 'Zobraziť vybrané položky',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Neplatné zadanie'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'Počet znakov nad limit',
@@ -484,6 +484,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Stĺpce',
         toolbarActionExpandAllButtonTitle: 'Rozbaliť všetko',
         toolbarActionCollapseAllButtonTitle: 'Zbaliť všetko',
+        filterDialogBackToColumns: 'Prejsť späť',
         filterDialogNotFilteredLabel: '(nefiltrované)',
         filterDialogFilterByLabel: 'Filtrovať podľa: {filterLabel}',
         filterDialogFilterTitle: 'Filtrovať',

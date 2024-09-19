@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Naviger utvalg med oppover og nedover pilene.',
         escapeNavigateTokens:
             'Trykk på Escape for å avslutte inndatafeltet og bruk venstre og høyre piltastene til å navigere gjennom de valgte alternativene.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Totalt antall token: {length}'
     },
     coreNavigation: {
         mainNavigation: 'Hovednavigering',
@@ -331,7 +331,7 @@ export default {
         inputIconTitle: 'Velg alternativer',
         mobileShowAllItemsButton: 'Vis alle elementer',
         mobileShowSelectedItemsButton: 'Vis valgte elementer',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Ugyldige data'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 tegn over grensen',
@@ -485,6 +485,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Kolonner',
         toolbarActionExpandAllButtonTitle: 'Utvid alle',
         toolbarActionCollapseAllButtonTitle: 'Skjul alle',
+        filterDialogBackToColumns: 'Naviger tilbake',
         filterDialogNotFilteredLabel: '(Ikke filtrert)',
         filterDialogFilterByLabel: 'Filtrer etter: {filterLabel}',
         filterDialogFilterTitle: 'Filter',
