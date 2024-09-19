@@ -9,6 +9,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { LinkComponent } from '@fundamental-ngx/core/link';
+import { MessageStripModule } from '@fundamental-ngx/core/message-strip';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
 import { FDP_ICON_TAB_BAR, IconTabBarItem, TabConfig } from '@fundamental-ngx/platform/icon-tab-bar';
@@ -56,7 +57,8 @@ export class DummyComponent {
         BarModule,
         MessageToastModule,
         RouterLink,
-        RouterOutlet
+        RouterOutlet,
+        MessageStripModule
     ],
     templateUrl: './dynamic-page-routing-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush

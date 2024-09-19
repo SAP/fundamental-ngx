@@ -34,7 +34,10 @@
 
 <fd-docs-section-title id="range" componentName="date-picker"> Range Date Picker </fd-docs-section-title>
 <description>
-    Allows the selection of a range of dates. Only the first and last dates are passed back under ngModel.
+    Allows the selection of a range of dates. Only the first and last dates are passed back under ngModel. To pick the
+    date range in a MM/YYYY format or YYYY format, set the <code>dateRangeFormat</code> input property to
+    <code>month</code> or <code>year</code> Displaying the dates in a MM/YYYY format can be done using
+    <code>customDateTimeFormat</code>.
 </description>
 <component-example>
     <fd-date-picker-range-example></fd-date-picker-range-example>
@@ -259,6 +262,18 @@
 </description>
 <component-example name="ex11">
     <fd-date-picker-disable-focus-scroll-example></fd-date-picker-disable-focus-scroll-example>
+</component-example>
+<code-example [exampleFiles]="datePickerDisableScroll"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="special" componentName="date-picker">DatePicker with Special Days</fd-docs-section-title>
+<description>
+    Special coloring classes can be applied to grid days by passing an object to <code>[specialDaysRules]</code>. A list
+    of special day numbers can be found
+</description>
+<component-example name="ex13">
+    <fd-ngx-date-picker-special-day-example></fd-ngx-date-picker-special-day-example>
 </component-example>
 <code-example [exampleFiles]="datePickerDisableScroll"></code-example>
 
