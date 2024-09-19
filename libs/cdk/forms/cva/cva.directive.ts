@@ -196,7 +196,7 @@ export class CvaDirective<T = any>
             return 'default';
         }
 
-        return this.formField?.getPriorityState() || 'error';
+        return this.formField?.getPriorityState() || 'default';
     });
 
     /**
