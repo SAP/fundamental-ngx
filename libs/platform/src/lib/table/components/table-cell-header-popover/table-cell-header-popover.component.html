@@ -95,6 +95,7 @@
                     fd-form-control
                     [id]="'fdp-table-column-filtering-' + column.name"
                     (keydown.enter)="_setColumnHeaderFilterBy(column.key, $any($event.target)?.value)"
+                    (keydown)="$event.stopPropagation()"
                 />
             </div>
         </a>
