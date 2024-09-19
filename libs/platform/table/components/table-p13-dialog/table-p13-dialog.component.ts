@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ContentChild, Input, OnDestroy } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ContentChild,
+    EventEmitter,
+    Input,
+    OnDestroy,
+    Output
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -77,6 +85,10 @@ export class TableP13DialogComponent implements OnDestroy {
     get table(): Table {
         return this._table;
     }
+
+    /** Event emitted when dialog is closed. */
+    @Output()
+    dialogClosed = new EventEmitter<string[]>();
 
     /** @hidden */
     @ContentChild(TableP13SortComponent)
@@ -255,6 +267,7 @@ export class TableP13DialogComponent implements OnDestroy {
             this._dialogRef.afterClosed
                 .pipe(filter((result) => !!result))
                 .subscribe(({ visibleColumns: result }: ColumnsDialogResultData) => {
+                    this.dialogClosed.emit(result);
                     this._applyColumns(result);
                 })
         );
