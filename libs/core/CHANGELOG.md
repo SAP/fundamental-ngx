@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.23...v0.52.2-rc.24) (2024-09-18)
+
+
+### Bug Fixes
+
+* **core:** Refactor calendar day view component to use signal version of inputs. add special day rules example for DatePicker ([#12398](https://github.com/SAP/fundamental-ngx/issues/12398)) ([4a0a283](https://github.com/SAP/fundamental-ngx/commit/4a0a2834b2a50d4914c718f8a6d299995fdb4825))
+
+
+
+
+
+## [0.52.2-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.22...v0.52.2-rc.23) (2024-09-18)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.21...v0.52.2-rc.22) (2024-09-18)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 ## [0.52.2-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.20...v0.52.2-rc.21) (2024-09-17)
 
 
