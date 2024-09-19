@@ -1339,7 +1339,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * @param event Optional mouse event for handling hover effect.
      */
     private _handleRangeHoverEffect(event?: MouseEvent | KeyboardEvent): void {
-        if (this.allowMultipleSelection) {
+        if (this.allowMultipleSelection()) {
             if (
                 this.calType() === CalendarTypeEnum.Range &&
                 this.rangeHoverEffect() &&
