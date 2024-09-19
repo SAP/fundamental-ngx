@@ -29,6 +29,10 @@ export class PlatformTableP13ColumnsExampleComponent {
     constructor() {
         this.source = new TableDataSource(new TableDataProviderExample());
     }
+
+    handleDialogClose(visibleColumns: string[]) {
+        console.log(visibleColumns);
+    }
 }
 
 export interface ExampleItem {

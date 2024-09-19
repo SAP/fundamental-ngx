@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.27...v0.52.2-rc.28) (2024-09-19)
+
+
+### Bug Fixes
+
+* **platform:** fdp-table  Enhance the <fdp-table-p13-dialog [table]="table"> component to emit an event with the selected column ([#12430](https://github.com/SAP/fundamental-ngx/issues/12430)) ([f00cd77](https://github.com/SAP/fundamental-ngx/commit/f00cd778c64911fb76c9dc90d9a31e31c965ee70)), closes [#12293](https://github.com/SAP/fundamental-ngx/issues/12293)
+
+
+
+
+
+## [0.52.2-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.26...v0.52.2-rc.27) (2024-09-19)
+
+
+### Features
+
+* **core:** add a feature to pick date range in month year format ([#12341](https://github.com/SAP/fundamental-ngx/issues/12341)) ([0ffe265](https://github.com/SAP/fundamental-ngx/commit/0ffe2653b2cd41368c9088b03983c967cee0f350)), closes [#12319](https://github.com/SAP/fundamental-ngx/issues/12319)
+
+
+
+
+
+## [0.52.2-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.25...v0.52.2-rc.26) (2024-09-19)
+
+
+### Bug Fixes
+
+* **cx:** Add ariaHidden input property and set it default false ([#12445](https://github.com/SAP/fundamental-ngx/issues/12445)) ([e9562a3](https://github.com/SAP/fundamental-ngx/commit/e9562a346918ecbbd35582077462eff14b95e6d1))
+
+
+
+
+
+## [0.52.2-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.24...v0.52.2-rc.25) (2024-09-19)
+
+
+### Bug Fixes
+
+* **core:** address some Dynamic Page header issues ([#12443](https://github.com/SAP/fundamental-ngx/issues/12443)) ([890eaed](https://github.com/SAP/fundamental-ngx/commit/890eaedb13ef7d6c2b33de4ded5b4b8ce0f52f05))
+
+
+
+
+
 ## [0.52.2-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.23...v0.52.2-rc.24) (2024-09-18)
 
 

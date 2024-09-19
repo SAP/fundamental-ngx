@@ -77,6 +77,15 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
     display = false;
 
     /**
+     * @Input
+     * Applies `aria-hidden` to the element.
+     * Set to `true` for non-focusable elements without focusable children to hide them from assistive technologies.
+     */
+    @Input()
+    @HostBinding('attr.aria-hidden')
+    ariaHidden = false;
+
+    /**
      * @hidden
      * Reference to the link directive, to allow manipulating the properties of this element.
      */
@@ -130,10 +139,6 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
     /** @hidden */
     @HostBinding('attr.aria-label')
     private _ariaLabel: string;
-
-    /** @hidden */
-    @HostBinding('attr.aria-hidden')
-    private _ariaHidden = true;
 
     /** @hidden */
     _narrow = false;
