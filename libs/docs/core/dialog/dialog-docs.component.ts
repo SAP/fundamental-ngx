@@ -384,7 +384,6 @@ export class DialogDocsComponent {
         private _dialogService: DialogService
     ) {
         this.schema = this._schemaFactory.getComponent('dialog');
-        console.log(this.schema);
     }
 
     onSchemaValues(data): void {
