@@ -342,7 +342,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * @param day The calendar day to be selected.
      * @param event Optional mouse event for handling event propagation.
      */
-    selectDate(day: CalendarDay<D>, event?: MouseEvent): void {
+    selectDate(day: CalendarDay<D>, event?: MouseEvent | KeyboardEvent): void {
         if (event) {
             event.stopPropagation();
             event.preventDefault();
@@ -909,11 +909,12 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         this.calendarService.focusEscapeFunction = this.focusEscapeFunction()!;
 
         this.calendarService.onFocusIdChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
+            this._refreshHoverRange(this._calendarDayList[index]);
             this.focusOnCellByIndex(index);
         });
 
-        this.calendarService.onKeySelect.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
-            this.selectDate(this._calendarDayList[index]);
+        this.calendarService.onKeySelect.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(({ index, event }) => {
+            this.selectDate(this._calendarDayList[index], event);
         });
 
         this.calendarService.onListStartApproach.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
@@ -1337,7 +1338,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
      * Toggles the hover effect based on the selection state and event.
      * @param event Optional mouse event for handling hover effect.
      */
-    private _handleRangeHoverEffect(event?: MouseEvent): void {
+    private _handleRangeHoverEffect(event?: MouseEvent | KeyboardEvent): void {
         if (this.allowMultipleSelection()) {
             if (
                 this.calType() === CalendarTypeEnum.Range &&

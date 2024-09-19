@@ -20,14 +20,14 @@ describe('CalendarService', () => {
         jest.spyOn(service.onKeySelect, 'next');
         const keyboardEvent: any = { key: 'Enter', preventDefault: () => {} };
         service.onKeydownHandler(keyboardEvent, 10);
-        expect(service.onKeySelect.next).toHaveBeenCalledWith(10);
+        expect(service.onKeySelect.next).toHaveBeenCalledWith({ index: 10, event: keyboardEvent });
     });
 
     it('Keydown handler should handle space key', () => {
         jest.spyOn(service.onKeySelect, 'next');
         const keyboardEvent: any = { key: ' ', preventDefault: () => {} };
         service.onKeydownHandler(keyboardEvent, 10);
-        expect(service.onKeySelect.next).toHaveBeenCalledWith(10);
+        expect(service.onKeySelect.next).toHaveBeenCalledWith({ index: 10, event: keyboardEvent });
     });
 
     it('Keydown handler should call onListEndApproach, when arrow down on last row', () => {

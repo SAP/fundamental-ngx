@@ -33,7 +33,7 @@ describe('CalendarMonthViewComponent', () => {
 
     it('Should have 12 months', () => {
         expect(component._calendarMonthListGrid).toBeDefined();
-        const monthList = ([] as CalendarMonth[]).concat(...component._calendarMonthListGrid);
+        const monthList = ([] as CalendarMonth<FdDate>[]).concat(...component._calendarMonthListGrid);
         expect(monthList.length).toBe(12);
     });
 
@@ -100,7 +100,8 @@ describe('CalendarMonthViewComponent', () => {
     it('Should select a month with Enter', () => {
         const event = {
             key: 'Enter',
-            preventDefault: () => {}
+            preventDefault: () => {},
+            stopPropagation: () => {}
         } as KeyboardEvent;
         component._onKeydownMonthHandler(event, testMonth);
         expect(component.monthSelected).toEqual(6);
@@ -109,7 +110,8 @@ describe('CalendarMonthViewComponent', () => {
     it('Should select a month with Space', () => {
         const event = {
             key: ' ',
-            preventDefault: () => {}
+            preventDefault: () => {},
+            stopPropagation: () => {}
         } as KeyboardEvent;
         component._onKeydownMonthHandler(event, testMonth);
         expect(component.monthSelected).toEqual(6);

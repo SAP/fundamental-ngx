@@ -10,6 +10,14 @@
                     <td
                         class="fd-calendar__my-item"
                         role="gridcell"
+                        [class.fd-calendar__item--range]="
+                            (yearCell.selectedRange || yearCell.hoverRange) &&
+                            !yearCell.selectedFirst &&
+                            !yearCell.selectedLast
+                        "
+                        [class.fd-calendar__item--selected]="
+                            yearCell.selectedFirst || yearCell.selectedLast || yearCell.selected
+                        "
                         [class.fd-calendar__my-item--current]="yearCell.current"
                         [class.is-active]="yearCell.selected"
                         [attr.id]="yearCell.id"
@@ -18,12 +26,13 @@
                         [attr.aria-disabled]="yearCell.disabled"
                         [attr.data-fd-calendar-year]="yearCell.year"
                         (keydown)="_onKeydownYearHandler($event, yearCell.index)"
+                        (mouseenter)="_handleRangeHover(yearCell)"
                         (click)="selectYear(yearCell, $event)"
                     >
                         <button
                             fd-button
                             fdType="transparent"
-                            class="fd-calendar__item-button"
+                            class="fd-calendar__my-item-button"
                             [class.is-active]="yearCell.current"
                             tabindex="-1"
                         >
