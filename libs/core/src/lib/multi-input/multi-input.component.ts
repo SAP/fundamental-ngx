@@ -342,10 +342,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     @Input()
     displayAddonButton = true;
 
-    /** Whether to hide the addon button from the screenreader. */
-    @Input()
-    addonButtonAriaHidden = false;
-
     /** Aria-label for the addon button. */
     @Input()
     addOnButtonAriaLabel: Nullable<string>;
