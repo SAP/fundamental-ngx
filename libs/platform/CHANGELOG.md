@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.29...v0.52.2-rc.30) (2024-09-19)
+
+
+### Bug Fixes
+
+* translation delivery ([#12451](https://github.com/SAP/fundamental-ngx/issues/12451)) ([5ee60a6](https://github.com/SAP/fundamental-ngx/commit/5ee60a6c203a168edd1f1643143aa344f2a8b23e))
+
+
+
+
+
 ## [0.52.2-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.28...v0.52.2-rc.29) (2024-09-19)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
