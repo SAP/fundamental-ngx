@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.25...v0.52.2-rc.26) (2024-09-19)
+
+
+### Bug Fixes
+
+* **cx:** Add ariaHidden input property and set it default false ([#12445](https://github.com/SAP/fundamental-ngx/issues/12445)) ([e9562a3](https://github.com/SAP/fundamental-ngx/commit/e9562a346918ecbbd35582077462eff14b95e6d1))
+
+
+
+
+
 ## [0.52.2-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.24...v0.52.2-rc.25) (2024-09-19)
 
 
