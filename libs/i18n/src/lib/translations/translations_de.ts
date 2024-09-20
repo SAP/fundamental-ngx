@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Navigieren Sie mit den Pfeilen nach oben und unten in der Auswahl.',
         escapeNavigateTokens:
             'Drücken Sie die Escape-Taste, um das Eingabefeld zu schließen, und verwenden Sie die Pfeile nach links und rechts, um zwischen den ausgewählten Optionen zu navigieren.',
-        tokensCountText: 'Enthält {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Enthält folgende Tokensumme: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Hauptnavigation',
@@ -331,7 +331,7 @@ export default {
         inputIconTitle: 'Optionen auswählen',
         mobileShowAllItemsButton: 'Alle Elemente anzeigen',
         mobileShowSelectedItemsButton: 'Ausgewählte Elemente anzeigen',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Ungültiger Eintrag'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 Zeichen über dem Limit',
@@ -485,6 +485,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Spalten',
         toolbarActionExpandAllButtonTitle: 'Alle erweitern',
         toolbarActionCollapseAllButtonTitle: 'Alle komprimieren',
+        filterDialogBackToColumns: 'Zurück navigieren',
         filterDialogNotFilteredLabel: '(Nicht gefiltert)',
         filterDialogFilterByLabel: 'Filtern nach: {filterLabel}',
         filterDialogFilterTitle: 'Filtern',

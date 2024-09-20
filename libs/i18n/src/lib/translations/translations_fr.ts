@@ -79,7 +79,7 @@ export default {
             "Naviguez entre les sélections à l'aide des flèches pointant vers le haut et le bas.",
         escapeNavigateTokens:
             'Appuyez sur Échap pour quitter le champ de saisie et utilisez les touches fléchées pointant vers la gauche ou la droite pour naviguer entre les options sélectionnées.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Contient ce nombre total de jetons : {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Navigation principale',
@@ -332,7 +332,7 @@ export default {
         inputIconTitle: 'Sélectionner des options',
         mobileShowAllItemsButton: 'Afficher tous les éléments',
         mobileShowSelectedItemsButton: 'Afficher les éléments sélectionnés',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Entrée non valide'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 caractère en trop',
@@ -486,6 +486,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Colonnes',
         toolbarActionExpandAllButtonTitle: 'Tout développer',
         toolbarActionCollapseAllButtonTitle: 'Tout réduire',
+        filterDialogBackToColumns: 'Revenir à la page précédente',
         filterDialogNotFilteredLabel: '(Non filtré)',
         filterDialogFilterByLabel: 'Filtrer par : {filterLabel}',
         filterDialogFilterTitle: 'Filtrer',

@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'เนวิเกตไปยังรายการที่เลือกด้วยลูกศรขึ้นและลง',
         escapeNavigateTokens:
             'กด Escape เพื่อออกจากฟิลด์อินพุทและใช้แป้นลูกศรซ้ายและขวาเพื่อเนวิเกตไปยังตัวเลือกที่เลือก',
-        tokensCountText: 'มี {length, plural, =0 {no token} =1 {1 token} other {# tokens} }'
+        tokensCountText: 'มี Token ทั้งหมด: {length}'
     },
     coreNavigation: {
         mainNavigation: 'การเนวิเกตหลัก',
@@ -330,7 +330,7 @@ export default {
         inputIconTitle: 'เลือกตัวเลือก',
         mobileShowAllItemsButton: 'แสดงไอเท็มทั้งหมด',
         mobileShowSelectedItemsButton: 'แสดงไอเท็มที่เลือก',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'รายการไม่ถูกต้อง'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'เกินขีดจำกัด 1 อักขระ',
@@ -484,6 +484,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'คอลัมน์',
         toolbarActionExpandAllButtonTitle: 'ขยายทั้งหมด',
         toolbarActionCollapseAllButtonTitle: 'ยุบรวมทั้งหมด',
+        filterDialogBackToColumns: 'ย้อนกลับ',
         filterDialogNotFilteredLabel: '(ไม่ได้กรอง)',
         filterDialogFilterByLabel: 'กรองตาม: {filterLabel}',
         filterDialogFilterTitle: 'ตัวกรอง',
