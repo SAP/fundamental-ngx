@@ -299,7 +299,7 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         inputIconTitle: 'Wybór opcji',
         mobileShowAllItemsButton: 'Wyświetl wszystkie pozycje',
         mobileShowSelectedItemsButton: 'Wyświetl wybrane pozycje',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Nieprawidłowy wpis'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 znak ponad limit',

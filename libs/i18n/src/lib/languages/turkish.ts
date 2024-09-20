@@ -295,7 +295,7 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         inputIconTitle: 'Seçenekleri Belirle',
         mobileShowAllItemsButton: 'Tüm öğeleri göster',
         mobileShowSelectedItemsButton: 'Seçilen öğeleri göster',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Geçersiz Giriş'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'Limitin 1 karakter üzerinde',

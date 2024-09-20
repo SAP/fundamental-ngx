@@ -297,7 +297,7 @@ export const FD_LANGUAGE_SWEDISH: FdLanguage = {
         inputIconTitle: 'Välj alternativ',
         mobileShowAllItemsButton: 'Visa alla artiklar',
         mobileShowSelectedItemsButton: 'Visa valda artiklar',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Ogiltig inmatning'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 tecken över gränsen',

@@ -299,7 +299,7 @@ export const FD_LANGUAGE_KAZAKH: FdLanguage = {
         inputIconTitle: 'Таңдау опциялары',
         mobileShowAllItemsButton: 'Барлық тармақтарды көрсету',
         mobileShowSelectedItemsButton: 'Таңдалған тармақтарды көрсету',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Енгізілім жарамсыз'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 таңбаға шектен асып кетті',

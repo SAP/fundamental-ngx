@@ -289,7 +289,7 @@ export const FD_LANGUAGE_KOREAN: FdLanguage = {
         inputIconTitle: '옵션 선택',
         mobileShowAllItemsButton: '모든 항목 표시',
         mobileShowSelectedItemsButton: '선택한 항목 표시',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: '잘못된 엔트리'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '제한 1자 초과',

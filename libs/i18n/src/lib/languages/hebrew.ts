@@ -289,7 +289,7 @@ export const FD_LANGUAGE_HEBREW: FdLanguage = {
         inputIconTitle: 'בחר אפשרויות',
         mobileShowAllItemsButton: 'הצג את כל הפריטים',
         mobileShowSelectedItemsButton: 'הצג פריטים נבחרים',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'הזנה לא חוקית'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'תו אחד יותר מהמגבלה',

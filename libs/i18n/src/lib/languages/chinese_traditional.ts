@@ -288,7 +288,7 @@ export const FD_LANGUAGE_CHINESE_TRADITIONAL: FdLanguage = {
         inputIconTitle: '選擇選項',
         mobileShowAllItemsButton: '顯示所有項目',
         mobileShowSelectedItemsButton: '顯示所選項目',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: '條目無效'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '超過上限 1 個字元',
