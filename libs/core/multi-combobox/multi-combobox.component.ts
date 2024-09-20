@@ -464,6 +464,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
     /** @hidden */
     _toggleSelection(item: SelectableOptionItem, fromTokenCloseClick = false): void {
+        console.log('_toggleSelection called with:', item);
         const idx = getTokenIndexByIdlOrValue(item, this._selectedSuggestions);
         if (idx === -1) {
             this._selectedSuggestions.push(item);
