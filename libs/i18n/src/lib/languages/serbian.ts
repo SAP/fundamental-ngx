@@ -299,7 +299,7 @@ export const FD_LANGUAGE_SERBIAN: FdLanguage = {
         inputIconTitle: 'Odaberi opcije',
         mobileShowAllItemsButton: 'Pokaži sve stavke',
         mobileShowSelectedItemsButton: 'Pokaži odabrane stavke',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Intrare nevalidă'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 znak preko ograničenja',

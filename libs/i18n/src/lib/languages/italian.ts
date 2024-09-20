@@ -302,7 +302,7 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         inputIconTitle: 'Seleziona opzioni',
         mobileShowAllItemsButton: 'Mostra tutte le voci',
         mobileShowSelectedItemsButton: 'Mostra le voci selezionate',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Immissione non valida'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 carattere oltre il limite',

@@ -285,7 +285,7 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         inputIconTitle: '选择选项',
         mobileShowAllItemsButton: '显示所有项目',
         mobileShowSelectedItemsButton: '显示所选项目',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: '无效条目'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '超出限制 1 个字符',

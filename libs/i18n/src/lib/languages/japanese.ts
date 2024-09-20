@@ -294,7 +294,7 @@ export const FD_LANGUAGE_JAPANESE: FdLanguage = {
         inputIconTitle: 'オプションを選択',
         mobileShowAllItemsButton: 'すべての項目を表示',
         mobileShowSelectedItemsButton: '選択した項目を表示',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'エントリが無効です。'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '上限を1文字超えています。',

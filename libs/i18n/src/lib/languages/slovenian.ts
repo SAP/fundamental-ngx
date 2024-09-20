@@ -299,7 +299,7 @@ export const FD_LANGUAGE_SLOVENIAN: FdLanguage = {
         inputIconTitle: 'Izbira možnosti',
         mobileShowAllItemsButton: 'Prikaz vseh elementov',
         mobileShowSelectedItemsButton: 'Prikaz izbranih elementov',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Neveljaven vnos'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 znak, ki presega omejitev',

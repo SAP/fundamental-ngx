@@ -299,7 +299,7 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         inputIconTitle: 'Vybrat možnosti',
         mobileShowAllItemsButton: 'Zobrazit všechny položky',
         mobileShowSelectedItemsButton: 'Zobrazit vybrané položky',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Neplatné zadání'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 znak nad limit',

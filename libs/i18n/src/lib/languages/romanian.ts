@@ -300,7 +300,7 @@ export const FD_LANGUAGE_ROMANIAN: FdLanguage = {
         inputIconTitle: 'Opțiuni de selecție',
         mobileShowAllItemsButton: 'Afișare toate articolele',
         mobileShowSelectedItemsButton: 'Afișare articole selectate',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Intrare nevalidă'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 caracter peste limită',
