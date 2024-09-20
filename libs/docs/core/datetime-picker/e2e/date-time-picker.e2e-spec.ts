@@ -294,11 +294,11 @@ describe('Datetime picker suite', () => {
             return;
         }
         await scrollIntoView(datePickerButton, 6);
-        await click(datePickerButton, 6);
+        await click(datePickerButton, 1);
         await clickDayInCalendarButtonByValue(currentDay);
         await selectHoursMinutesAndPeriod();
         await click(okButton);
-        await expect(await getValue(datePickerInput, 6)).toEqual(date2);
+        await expect(await getValue(datePickerInput, 1)).toEqual(date2);
     });
 
     it('verify date time picker i18n example', async () => {
