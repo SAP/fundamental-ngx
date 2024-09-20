@@ -299,7 +299,7 @@ export const FD_LANGUAGE_DUTCH: FdLanguage = {
         inputIconTitle: 'Opties selecteren',
         mobileShowAllItemsButton: 'Alle items weergeven',
         mobileShowSelectedItemsButton: 'Geselecteerde items weergeven',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Ongeldig gegeven'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 teken boven de limiet',
