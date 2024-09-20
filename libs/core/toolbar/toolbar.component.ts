@@ -7,6 +7,7 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    contentChildren,
     DestroyRef,
     ElementRef,
     forwardRef,
@@ -16,6 +17,7 @@ import {
     Input,
     Optional,
     QueryList,
+    signal,
     SkipSelf,
     ViewChild,
     ViewEncapsulation
@@ -46,7 +48,8 @@ import { ToolbarSeparatorComponent } from './toolbar-separator.component';
 import { ToolbarSpacerDirective } from './toolbar-spacer.directive';
 
 const ELEMENT_MARGIN = 8;
-const OVERFLOW_SPACE = 50 + 2 * ELEMENT_MARGIN;
+const OVERFLOW_BTN_COZY = 36;
+const OVERFLOW_BTN_COMPACT = 32;
 const MAX_CONTENT_SIZE = 99999999;
 
 export type ToolbarType = 'solid' | 'transparent' | 'auto' | 'info';
@@ -178,6 +181,12 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     /** @hidden */
     overflownItems: ToolbarItem[] = [];
 
+    /** @hidden */
+    spacerUsed = signal(false);
+
+    /** @hidden */
+    spacerDirectives = contentChildren(ToolbarSpacerDirective);
+
     /** HTML Element Reference. */
     readonly elementRef = inject(ElementRef);
 
@@ -189,7 +198,8 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
 
     /** @hidden */
     private get _toolbarWidth(): number {
-        return (this.elementRef.nativeElement as HTMLElement).clientWidth - OVERFLOW_SPACE;
+        const _overflow_btn_size = this._contentDensityObserver.isCompact ? OVERFLOW_BTN_COMPACT : OVERFLOW_BTN_COZY;
+        return (this.elementRef.nativeElement as HTMLElement).clientWidth - (_overflow_btn_size + 2 * ELEMENT_MARGIN);
     }
 
     /** @hidden */
@@ -224,6 +234,8 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._updateSpacerUsed();
+
         this.overflowItems$ = combineLatest([
             this.resizeObserverService.observe(this.elementRef.nativeElement).pipe(map(() => this._toolbarWidth)),
             this.toolbarItems.changes.pipe(
@@ -247,7 +259,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
                     const overflowItems: ToolbarItem[] = [];
                     _sortedByPriorityAndGroupItems.reduce(
                         (_contentWidth, toolbarItem) => {
-                            const itemWidth = toolbarItem.width;
+                            const itemWidth = toolbarItem.width + 5;
                             const itemPriority = toolbarItem.priority;
                             const shouldItemBeRemovedByWidth = itemWidth + _contentWidth > toolbarWidth;
                             const shouldAlwaysBeInOverflow =
@@ -316,6 +328,15 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     /** Method triggering collapsible toolbar  */
     updateCollapsibleItems(): void {
         this._refreshOverflow$.next();
+    }
+
+    /** hidden */
+    private _updateSpacerUsed(): void {
+        // do not render extra spacer if there is at least one passed by the application
+        // and it is not fixed this.spacerUsed.set(this.spacer.length > 0 && this.spacer.some((spacer) => !spacer.fixed));
+        this.spacerUsed.set(
+            this.spacerDirectives().length > 0 && this.spacerDirectives().some((spacer) => !spacer.fixed)
+        );
     }
 
     /** @hidden Get group number with the lowest priority.

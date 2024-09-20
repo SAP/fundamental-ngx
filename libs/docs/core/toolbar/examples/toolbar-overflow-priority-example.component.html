@@ -1,8 +1,10 @@
 <fd-toolbar [shouldOverflow]="true" ariaLabel="Toolbar overflow priority">
     <button fd-toolbar-item fd-button label="Button First"></button>
     <button fd-toolbar-item fd-button label="Always" fdOverflowPriority="always"></button>
+    <fd-toolbar-spacer fd-toolbar-item [fixed]="true" style="width: 50px"></fd-toolbar-spacer>
     <button fd-toolbar-item fd-button label="Never" fdOverflowPriority="never"></button>
     <button fd-toolbar-item fd-button label="Low" fdOverflowPriority="low"></button>
+    <fd-toolbar-spacer></fd-toolbar-spacer>
     <button fd-toolbar-item fd-button label="High" fdOverflowPriority="high"></button>
     <button fd-toolbar-item fd-button label="Disappear" fdOverflowPriority="disappear"></button>
     <button fd-toolbar-item fd-button label="Button Last"></button>
