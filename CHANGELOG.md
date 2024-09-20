@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.45](https://github.com/SAP/fundamental-ngx/compare/v0.43.43...v0.43.45) (2024-09-20)
+
+
+### Bug Fixes
+
+* **core,platform:** provide translation for multi-combobox Invalid Entry message ([#12410](https://github.com/SAP/fundamental-ngx/issues/12410)) ([6284454](https://github.com/SAP/fundamental-ngx/commit/628445494097f4d8a214886a273dd6580a9b107f))
+* datetime adapter passing date format, not dateTime ([#12416](https://github.com/SAP/fundamental-ngx/issues/12416)) ([26fe869](https://github.com/SAP/fundamental-ngx/commit/26fe8692675173d98b09c6faf894c1ecf978a0af))
+* downport translations ([#12452](https://github.com/SAP/fundamental-ngx/issues/12452)) ([23f1967](https://github.com/SAP/fundamental-ngx/commit/23f1967898d0fb1f5e7374f8375b1a41405b9226))
+* **platform:** prevent filter input from losing focus when entering spaces ([#12449](https://github.com/SAP/fundamental-ngx/issues/12449)) ([5c8842e](https://github.com/SAP/fundamental-ngx/commit/5c8842e5e41db59d16a93389c80553cdb3625b41))
+* **platform:** vhd should reset search after closing dialog ([#12406](https://github.com/SAP/fundamental-ngx/issues/12406)) ([d419dac](https://github.com/SAP/fundamental-ngx/commit/d419dace29358fe1fefd4e80e65b4386adabe77d))
+* update lerna version manually ([#12454](https://github.com/SAP/fundamental-ngx/issues/12454)) ([9911f95](https://github.com/SAP/fundamental-ngx/commit/9911f9595def87b8b60ffbedc27b802e284f5998))
+
+
+
+
+
 ## [0.43.43](https://github.com/SAP/fundamental-ngx/compare/v0.43.42...v0.43.43) (2024-09-10)
 
 

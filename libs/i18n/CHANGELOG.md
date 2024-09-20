@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.45](https://github.com/SAP/fundamental-ngx/compare/v0.43.43...v0.43.45) (2024-09-20)
+
+
+### Bug Fixes
+
+* **core,platform:** provide translation for multi-combobox Invalid Entry message ([#12410](https://github.com/SAP/fundamental-ngx/issues/12410)) ([6284454](https://github.com/SAP/fundamental-ngx/commit/628445494097f4d8a214886a273dd6580a9b107f))
+* downport translations ([#12452](https://github.com/SAP/fundamental-ngx/issues/12452)) ([23f1967](https://github.com/SAP/fundamental-ngx/commit/23f1967898d0fb1f5e7374f8375b1a41405b9226))
+
+
+
+
+
 ## [0.43.43](https://github.com/SAP/fundamental-ngx/compare/v0.43.42...v0.43.43) (2024-09-10)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
