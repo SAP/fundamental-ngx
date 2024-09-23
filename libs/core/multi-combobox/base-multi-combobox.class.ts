@@ -181,7 +181,6 @@ export abstract class BaseMultiCombobox<T = any> {
      * Should be "false", if the change is made programmatically (internally) by the control, "true" otherwise
      */
     setValue(value: T[], emitOnChange = true): void {
-        console.log('setValue called with:', value);
         this.selectedItems = coerceArraySafe(value);
         this._cva.setValue(this.selectedItems, emitOnChange);
         this._setSelectedSuggestions();
