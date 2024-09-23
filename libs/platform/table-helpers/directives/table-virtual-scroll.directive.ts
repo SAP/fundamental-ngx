@@ -5,6 +5,7 @@ import { BehaviorSubject, filter } from 'rxjs';
 import { FDP_TABLE_VIRTUAL_SCROLL_DIRECTIVE, ROW_HEIGHT } from '../constants';
 import { TableVirtualScroll } from '../models';
 import { TableScrollDispatcherService } from '../services/table-scroll-dispatcher.service';
+import { TableService } from '../services/table.service';
 import { Table } from '../table';
 
 @Directive({
@@ -59,6 +60,11 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
+    constructor(readonly _tableService: TableService) {
+        super();
+    }
+
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (!this._table.tableScrollable) {
             return;
@@ -81,7 +87,14 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
             return;
         }
 
-        const rowHeight = this.rowHeight + 1;
+        let rowHeight = this.rowHeight + 1;
+
+        if (this._tableService.poppingColumns$().length > 0) {
+            rowHeight =
+                rowHeight +
+                this._table.tableContainer.nativeElement.getElementsByClassName('fd-table__row--secondary')[0]
+                    .clientHeight;
+        }
 
         const rowsVisible = this._table._tableRowsVisible;
         const currentlyRenderedRows = this._table.getCurrentlyRenderedRows();
