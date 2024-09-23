@@ -3,6 +3,106 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.31...v0.52.2-rc.32) (2024-09-23)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.30...v0.52.2-rc.31) (2024-09-23)
+
+
+### Features
+
+* **core:** dayPeriod pattern support ([#12354](https://github.com/SAP/fundamental-ngx/issues/12354)) ([c70f83a](https://github.com/SAP/fundamental-ngx/commit/c70f83a7a958d5536aab6313775d916cc3461175))
+
+
+
+
+
+## [0.52.2-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.29...v0.52.2-rc.30) (2024-09-19)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.28...v0.52.2-rc.29) (2024-09-19)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.27...v0.52.2-rc.28) (2024-09-19)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.26...v0.52.2-rc.27) (2024-09-19)
+
+
+### Features
+
+* **core:** add a feature to pick date range in month year format ([#12341](https://github.com/SAP/fundamental-ngx/issues/12341)) ([0ffe265](https://github.com/SAP/fundamental-ngx/commit/0ffe2653b2cd41368c9088b03983c967cee0f350)), closes [#12319](https://github.com/SAP/fundamental-ngx/issues/12319)
+
+
+
+
+
+## [0.52.2-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.25...v0.52.2-rc.26) (2024-09-19)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.24...v0.52.2-rc.25) (2024-09-19)
+
+
+### Bug Fixes
+
+* **core:** address some Dynamic Page header issues ([#12443](https://github.com/SAP/fundamental-ngx/issues/12443)) ([890eaed](https://github.com/SAP/fundamental-ngx/commit/890eaedb13ef7d6c2b33de4ded5b4b8ce0f52f05))
+
+
+
+
+
+## [0.52.2-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.23...v0.52.2-rc.24) (2024-09-18)
+
+
+### Bug Fixes
+
+* **core:** Refactor calendar day view component to use signal version of inputs. add special day rules example for DatePicker ([#12398](https://github.com/SAP/fundamental-ngx/issues/12398)) ([4a0a283](https://github.com/SAP/fundamental-ngx/commit/4a0a2834b2a50d4914c718f8a6d299995fdb4825))
+
+
+
+
+
+## [0.52.2-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.22...v0.52.2-rc.23) (2024-09-18)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.21...v0.52.2-rc.22) (2024-09-18)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 ## [0.52.2-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.20...v0.52.2-rc.21) (2024-09-17)
 
 

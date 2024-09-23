@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Navigasi pemilihan dengan anak panah atas dan bawah.',
         escapeNavigateTokens:
             'Tekan kekunci keluar untuk keluar daripada medan input dan gunakan kekunci anak panah kiri dan kanan untuk navigasi melalui pilihan yang dipilih.',
-        tokensCountText: 'Mengandungi {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Mengandungi jumlah token: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Navigasi Utama',
@@ -329,7 +329,7 @@ export default {
         inputIconTitle: 'Pilih Pilihan',
         mobileShowAllItemsButton: 'Tunjukkan semua item',
         mobileShowSelectedItemsButton: 'Tunjukkan item dipilih',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Entri Tidak Sah'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 aksara melebihi had',
@@ -483,6 +483,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Lajur',
         toolbarActionExpandAllButtonTitle: 'Kembangkan semua',
         toolbarActionCollapseAllButtonTitle: 'Runtuhkan semua',
+        filterDialogBackToColumns: 'Navigasi kembali',
         filterDialogNotFilteredLabel: '(Tidak Ditapis)',
         filterDialogFilterByLabel: 'Tapis mengikut: {filterLabel}',
         filterDialogFilterTitle: 'Penapis',

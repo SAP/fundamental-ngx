@@ -53,7 +53,14 @@
     datetime-picker component through providing <code>[customDateTimeFormat]</code> input. Note that when providing a
     custom format, the <code>[placeholder]</code> input should be set to match the new format as well. The
     <code>dateTimeFormat</code> pipe can also be utilized to convert the date into a string according to the provided
-    format.
+    format. Additionally, support for the <code>dayPeriod</code> pattern has been added to handle day periods like
+    morning, afternoon, evening, and night. To use these transformations in your templates, you can chain the
+    <code>dayPeriodFormat</code> and <code>translateDayPeriod</code> pipes together. For example:
+    <br />
+    <code>Selected: date | dayPeriodFormat: dateTimeFormatWithDayPeriod | translateDayPeriod</code>
+    <br />
+    This example shows how to transform a selected date using the custom day period format, which can then be localized
+    or further customized with the <code>translateDayPeriod</code> pipe.
 </description>
 <component-example>
     <fd-datetime-format-example></fd-datetime-format-example>

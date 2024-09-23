@@ -77,7 +77,7 @@ export default {
         noResults: '无结果。',
         navigateSelectionsWithArrows: '使用向上和向下箭头导航选择。',
         escapeNavigateTokens: '按 escape 退出输入字段并使用向左和向右箭头键浏览所选选项。',
-        tokensCountText: '包含总令牌：{length}。'
+        tokensCountText: '包含的令牌总数：{length}。'
     },
     coreNavigation: {
         mainNavigation: '主导航',
@@ -328,7 +328,7 @@ export default {
         inputIconTitle: '选择选项',
         mobileShowAllItemsButton: '显示所有项目',
         mobileShowSelectedItemsButton: '显示所选项目',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: '无效条目'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '超出限制 1 个字符',
@@ -481,6 +481,7 @@ export default {
         toolbarActionColumnsButtonTitle: '列',
         toolbarActionExpandAllButtonTitle: '全部展开',
         toolbarActionCollapseAllButtonTitle: '全部折叠',
+        filterDialogBackToColumns: '向后导航',
         filterDialogNotFilteredLabel: '（未筛选）',
         filterDialogFilterByLabel: '筛选条件：{filterLabel}',
         filterDialogFilterTitle: '筛选器',

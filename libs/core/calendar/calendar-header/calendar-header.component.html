@@ -14,19 +14,21 @@
         ></button>
     </div>
     @if (isOnDayView || isOnMonthView) {
-        <div class="fd-calendar__action">
-            <!-- Select month button -->
-            <button
-                fd-button
-                type="button"
-                fdType="transparent"
-                [attr.aria-labelledby]="_monthButtonLabelId + ' ' + _selectMonthButtonAriaLabelId"
-                [attr.data-fd-calendar-month]="currentlyDisplayed.month"
-                (click)="_processViewChange('month', $event)"
-            >
-                <span [attr.id]="_monthButtonLabelId">{{ selectMonthLabel }}</span>
-            </button>
-        </div>
+        @if (!isOnMonthView) {
+            <div class="fd-calendar__action">
+                <!-- Select month button -->
+                <button
+                    fd-button
+                    type="button"
+                    fdType="transparent"
+                    [attr.aria-labelledby]="_monthButtonLabelId + ' ' + _selectMonthButtonAriaLabelId"
+                    [attr.data-fd-calendar-month]="currentlyDisplayed.month"
+                    (click)="_processViewChange('month', $event)"
+                >
+                    <span [attr.id]="_monthButtonLabelId">{{ selectMonthLabel }}</span>
+                </button>
+            </div>
+        }
         <div class="fd-calendar__action">
             <!-- Select year button -->
             <button
