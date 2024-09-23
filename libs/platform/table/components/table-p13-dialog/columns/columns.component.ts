@@ -294,7 +294,6 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
      */
     private _initiateColumns(visibleColumnKeys: string[]): void {
         const visibleColumnIndexMap = new Map(visibleColumnKeys.map((key, index) => [key, index]));
-        console.log(this.availableColumns);
         this._selectableColumns = this.availableColumns
             .slice()
             .map(
