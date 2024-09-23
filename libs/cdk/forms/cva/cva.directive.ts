@@ -322,9 +322,8 @@ export class CvaDirective<T = any>
      * @param value
      */
     writeValue(value: T): void {
-        console.log('writeValue called with:', value);
         this.value = value;
-        this.stateChanges.next('writeValue');
+        this.stateChanges.next(`writeValue: ${value}`);
         this._markForCheck();
     }
 
@@ -406,7 +405,6 @@ export class CvaDirective<T = any>
 
     /** @hidden */
     private _markForCheck(): void {
-        console.log('_markForCheck called');
         this.markForCheck.emit();
     }
 }

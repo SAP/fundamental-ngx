@@ -449,6 +449,12 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
                 'platformMultiCombobox.invalidEntryError'
             );
         });
+
+        this._cva.stateChanges.subscribe((data: string) => {
+            if (data.includes('writeValue')) {
+                this._selectedSuggestions = this._fullFlatSuggestions.filter((s) => this.value.includes(s.value));
+            }
+        });
     }
 
     /** @hidden */
