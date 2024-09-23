@@ -51,6 +51,10 @@ $block: fd-datetime;
     }
 }
 
+.fd-popover-full-width {
+    width: 100%;
+}
+
 @media (max-width: 60rem) {
     .fd-datetime {
         &__display-type-switcher {

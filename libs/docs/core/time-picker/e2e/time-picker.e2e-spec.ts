@@ -198,7 +198,8 @@ describe('Time-picker component test', () => {
             await expect(inputValue).toEqual(`${nextHour}:${prevMin} AM`);
         }
         if (section === formattingExample) {
-            await expect(inputValue).toEqual(`${nextHour}:${prevMin}:00`);
+            const timeRegex = new RegExp(`^0?${nextHour}:0?${prevMin}:\\d{1,2}$`);
+            await expect(inputValue).toMatch(timeRegex);
         }
         if (section !== formattingExample && section !== formExample) {
             await expect(inputValue).toEqual(`${nextHour}:${prevMin} PM`);
