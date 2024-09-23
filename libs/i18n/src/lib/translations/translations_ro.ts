@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Navigați printre selecții cu săgețile în sus și în jos.',
         escapeNavigateTokens:
             'Apăsați tasta ESC pentru a ieși din câmpul de intrare și utilizați tastele săgeți la stânga și la dreapta pentru a naviga printre opțiunile selectate.',
-        tokensCountText: 'Conține {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Conține tokenuri totale: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Meniul principal',
@@ -331,7 +331,7 @@ export default {
         inputIconTitle: 'Opțiuni de selecție',
         mobileShowAllItemsButton: 'Afișare toate articolele',
         mobileShowSelectedItemsButton: 'Afișare articole selectate',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Intrare nevalidă'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 caracter peste limită',
@@ -485,6 +485,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Coloane',
         toolbarActionExpandAllButtonTitle: 'Extindere tot',
         toolbarActionCollapseAllButtonTitle: 'Restrângere tot',
+        filterDialogBackToColumns: 'Navigare înapoi',
         filterDialogNotFilteredLabel: '(Nefiltrat)',
         filterDialogFilterByLabel: 'Filtrare după: {filterLabel}',
         filterDialogFilterTitle: 'Filtru',
