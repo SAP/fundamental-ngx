@@ -4,18 +4,19 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     HostBinding,
     Inject,
     Input,
-    OnDestroy,
     Optional,
     QueryList,
     forwardRef,
     inject
 } from '@angular/core';
-import { Observable, Subscription, combineLatest, startWith } from 'rxjs';
+import { Observable, combineLatest, startWith } from 'rxjs';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
@@ -32,7 +33,7 @@ import { NestedListInterface } from './nested-list.interface';
     selector: '[cxNestedList], [fdx-nested-list], ul[fdx-nested-list]',
     providers: [contentDensityObserverProviders()]
 })
-export class NestedListComponent implements AfterContentInit, NestedListInterface, OnDestroy {
+export class NestedListComponent implements AfterContentInit, NestedListInterface {
     /** In case the user wants to no use icons for items in this list */
     @Input()
     @HostBinding('class.fdx-nested-list--text-only')
@@ -91,7 +92,7 @@ export class NestedListComponent implements AfterContentInit, NestedListInterfac
     private _tabindex = '-1';
 
     /** @hidden */
-    private _nestedItemsChangesSubscription = new Subscription();
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _translationResolver = new TranslationResolver();
@@ -112,11 +113,6 @@ export class NestedListComponent implements AfterContentInit, NestedListInterfac
     }
 
     /** @hidden */
-    ngOnDestroy(): void {
-        this._nestedItemsChangesSubscription.unsubscribe();
-    }
-
-    /** @hidden */
     ngAfterContentInit(): void {
         this._handleNestedLevel();
     }
@@ -132,17 +128,14 @@ export class NestedListComponent implements AfterContentInit, NestedListInterfac
 
         this._setAccessibilityProperties(nestedLevel);
 
-        const itemChangesSub = combineLatest([
-            this._language$,
-            this.nestedItems.changes.pipe(startWith(undefined))
-        ]).subscribe(([lang]) => {
-            this._nestedListKeyboardService.refresh$.next();
-            this._setAriaAttributes(nestedLevel, lang);
-            /** Adding class with the nested level */
-            this._elementRef.nativeElement.classList.add('level-' + nestedLevel);
-        });
-
-        this._nestedItemsChangesSubscription.add(itemChangesSub);
+        combineLatest([this._language$, this.nestedItems.changes.pipe(startWith(undefined))])
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe(([lang]) => {
+                this._nestedListKeyboardService.refresh$.next();
+                this._setAriaAttributes(nestedLevel, lang);
+                /** Adding class with the nested level */
+                this._elementRef.nativeElement.classList.add('level-' + nestedLevel);
+            });
     }
 
     /**
