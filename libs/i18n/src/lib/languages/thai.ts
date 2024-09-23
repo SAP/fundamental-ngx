@@ -296,7 +296,7 @@ export const FD_LANGUAGE_THAI: FdLanguage = {
         inputIconTitle: 'เลือกตัวเลือก',
         mobileShowAllItemsButton: 'แสดงไอเท็มทั้งหมด',
         mobileShowSelectedItemsButton: 'แสดงไอเท็มที่เลือก',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'รายการไม่ถูกต้อง'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'เกินขีดจำกัด 1 อักขระ',

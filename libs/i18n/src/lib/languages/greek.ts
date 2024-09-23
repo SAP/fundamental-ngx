@@ -300,7 +300,7 @@ export const FD_LANGUAGE_GREEK: FdLanguage = {
         inputIconTitle: 'Επιλογή Δυνατοτήτων',
         mobileShowAllItemsButton: 'Εμφάνιση όλων των στοιχείων',
         mobileShowSelectedItemsButton: 'Εμφάνιση επιλεγμένων στοιχείων',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Άκυρη Καταχώριση'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 χαρακτήρας πάνω από το όριο',

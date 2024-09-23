@@ -303,7 +303,7 @@ export const FD_LANGUAGE_CROATIAN: FdLanguage = {
         inputIconTitle: 'Odaberi mogućnosti',
         mobileShowAllItemsButton: 'Prikaži sve stavke',
         mobileShowSelectedItemsButton: 'Prikaži odabrane stavke',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Nevaljan unos'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'Broj znakova više od ograničenja: 1',

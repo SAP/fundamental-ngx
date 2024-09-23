@@ -294,7 +294,7 @@ export const FD_LANGUAGE_DANISH: FdLanguage = {
         inputIconTitle: 'Vælg muligheder',
         mobileShowAllItemsButton: 'Vis alle elementer',
         mobileShowSelectedItemsButton: 'Vis valgte elementer',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Ugyldig indtastning'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 tegn over grænsen',

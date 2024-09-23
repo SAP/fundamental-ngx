@@ -297,7 +297,7 @@ export const FD_LANGUAGE_FINNISH: FdLanguage = {
         inputIconTitle: 'Valitse vaihtoehdot',
         mobileShowAllItemsButton: 'Näytä kaikki kohteet',
         mobileShowSelectedItemsButton: 'Näytä valitut kohteet',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Virheellinen merkintä'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 merkki yli rajan',

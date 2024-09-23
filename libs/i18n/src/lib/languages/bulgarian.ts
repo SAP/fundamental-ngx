@@ -304,7 +304,7 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         inputIconTitle: 'Избор на опции',
         mobileShowAllItemsButton: 'Показване на всички позиции',
         mobileShowSelectedItemsButton: 'Показване на избраните позиции',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Невалиден запис'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 символ над ограничението',

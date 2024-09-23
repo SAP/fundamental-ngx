@@ -295,7 +295,7 @@ export const FD_LANGUAGE_NORWEGIAN: FdLanguage = {
         inputIconTitle: 'Velg alternativer',
         mobileShowAllItemsButton: 'Vis alle elementer',
         mobileShowSelectedItemsButton: 'Vis valgte elementer',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Ugyldige data'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 tegn over grensen',

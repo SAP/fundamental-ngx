@@ -296,7 +296,7 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         inputIconTitle: 'აირჩიეთ ოფციები',
         mobileShowAllItemsButton: 'მაჩვენე ყველა',
         mobileShowSelectedItemsButton: 'მაჩვენე არჩეული',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'არასწორი ჩანაწერი'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 სიმბოლო აღემატება ლიმიტს',

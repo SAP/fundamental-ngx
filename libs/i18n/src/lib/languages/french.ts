@@ -306,7 +306,7 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         inputIconTitle: 'Sélectionner des options',
         mobileShowAllItemsButton: 'Afficher tous les éléments',
         mobileShowSelectedItemsButton: 'Afficher les éléments sélectionnés',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Entrée non valide'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 caractère en trop',

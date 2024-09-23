@@ -300,7 +300,7 @@ export const FD_LANGUAGE_GERMAN: FdLanguage = {
         inputIconTitle: 'Optionen auswählen',
         mobileShowAllItemsButton: 'Alle Elemente anzeigen',
         mobileShowSelectedItemsButton: 'Ausgewählte Elemente anzeigen',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Ungültiger Eintrag'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 Zeichen über dem Limit',
