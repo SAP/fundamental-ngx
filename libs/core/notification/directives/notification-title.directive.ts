@@ -1,16 +1,33 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, input } from '@angular/core';
+import { FD_NOTIFICATION_TITLE } from '../token';
+
+let notificationTitleCounter = 0;
 
 @Directive({
     selector: '[fdNotificationTitle], [fd-notification-title]',
-    standalone: true
+    standalone: true,
+    host: {
+        class: 'fd-notification__title',
+        '[class.fd-notification__title--unread]': 'unread()',
+        '[attr.id]': 'id()'
+    },
+    providers: [
+        {
+            provide: FD_NOTIFICATION_TITLE,
+            useExisting: NotificationTitleDirective
+        }
+    ]
 })
 export class NotificationTitleDirective {
-    /** @hidden */
-    @HostBinding('class.fd-notification__title')
-    fdNotificationTitleClass = true;
+    /**
+     * Whether the notification title is unread.
+     * default is false
+     */
+    unread = input(false);
 
-    /** Whether the title is unread. */
-    @Input()
-    @HostBinding('class.fd-notification__title--unread')
-    unread = false;
+    /**
+     * id for the notification title
+     * if not set, a default value is provided
+     */
+    id = input('fd-notification-title-' + ++notificationTitleCounter);
 }

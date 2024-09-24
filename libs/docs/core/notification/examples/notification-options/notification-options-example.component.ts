@@ -2,9 +2,11 @@ import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ActionSheetComponent, ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { NotificationModule } from '@fundamental-ngx/core/notification';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 
 @Component({
     selector: 'fd-notification-options-example',
@@ -17,7 +19,9 @@ import { NotificationModule } from '@fundamental-ngx/core/notification';
         ButtonComponent,
         MessageStripComponent,
         ActionSheetModule,
-        MessageToastModule
+        MessageToastModule,
+        ObjectStatusComponent,
+        IconComponent
     ]
 })
 export class NotificationOptionsExampleComponent {

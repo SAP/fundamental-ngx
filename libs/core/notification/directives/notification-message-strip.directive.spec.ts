@@ -3,13 +3,13 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NotificationModule } from '../notification.module';
 
 @Component({
-    template: `<h2 #directiveElement fd-notification-title [unread]="true">Notification Test</h2> `
+    template: `<div #directiveElement fd-notification-message-strip>Notification Message Strip Test</div> `
 })
 class TestComponent {
     @ViewChild('directiveElement')
     ref: ElementRef;
 }
-describe('NotificationTitleDirective', () => {
+describe('NotificationMessageStripDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
@@ -31,10 +31,6 @@ describe('NotificationTitleDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-notification__title fd-notification__title--unread');
-    });
-
-    it('should have a default id', () => {
-        expect(component.ref.nativeElement.getAttribute('id')).toBeTruthy();
+        expect(component.ref.nativeElement.className).toBe('fd-notification-message-strip');
     });
 });

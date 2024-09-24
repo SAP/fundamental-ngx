@@ -3,13 +3,13 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NotificationModule } from '../notification.module';
 
 @Component({
-    template: `<h2 #directiveElement fd-notification-title [unread]="true">Notification Test</h2> `
+    template: `<span #directiveElement fd-notification-group-header-title>Notification Group Header Title Test</span> `
 })
 class TestComponent {
     @ViewChild('directiveElement')
     ref: ElementRef;
 }
-describe('NotificationTitleDirective', () => {
+describe('NotificationGroupHeaderTitleDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
@@ -31,10 +31,14 @@ describe('NotificationTitleDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-notification__title fd-notification__title--unread');
+        expect(component.ref.nativeElement.className).toBe('fd-notification-group__header-title');
     });
 
-    it('should have a default id', () => {
-        expect(component.ref.nativeElement.getAttribute('id')).toBeTruthy();
+    it('should assign default role', () => {
+        expect(component.ref.nativeElement.getAttribute('role')).toBe('heading');
+    });
+
+    it('should assign default aria level', () => {
+        expect(component.ref.nativeElement.getAttribute('aria-level')).toBe('3');
     });
 });
