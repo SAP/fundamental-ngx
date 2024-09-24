@@ -15,7 +15,7 @@ import {
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Subscription } from 'rxjs';
 
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 import { A11yModule } from '@angular/cdk/a11y';
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';

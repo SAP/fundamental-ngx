@@ -1,4 +1,4 @@
-import { Directive, Input, TemplateRef, inject } from '@angular/core';
+import { Directive, TemplateRef, inject, input } from '@angular/core';
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogRef } from '../utils/dialog-ref.class';
 
@@ -12,8 +12,7 @@ export interface DialogTemplateDirectiveContext<T = DialogConfig<any>, U = T ext
 })
 export class DialogTemplateDirective<T = DialogConfig<any>> {
     /** Custom dialog config model. */
-    @Input()
-    fdDialogTemplateConfig: T;
+    fdDialogTemplateConfig = input<T>();
 
     /** @hidden */
     readonly templateRef = inject(TemplateRef<DialogTemplateDirectiveContext<T>>);
