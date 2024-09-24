@@ -1,4 +1,4 @@
-import { DestroyRef, Directive, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, DestroyRef, Directive, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { BehaviorSubject, filter } from 'rxjs';
@@ -60,7 +60,10 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    constructor(readonly _tableService: TableService) {
+    constructor(
+        readonly _tableService: TableService,
+        private readonly _cdRef: ChangeDetectorRef
+    ) {
         super();
     }
 
@@ -90,11 +93,20 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
         let rowHeight = this.rowHeight + 1;
 
         if (this._tableService.poppingColumns$().length > 0) {
-            rowHeight =
-                rowHeight +
-                this._table.tableContainer.nativeElement.getElementsByClassName('fd-table__row--secondary')[0]
-                    .clientHeight;
+            this._tableService.poppingColumns$().forEach((column) => {
+                column.width = this._table.tableContainer.nativeElement.clientWidth + 'px';
+            });
+            const secondaries =
+                this._table.tableContainer.nativeElement.getElementsByClassName('fd-table__row--secondary');
+            rowHeight = rowHeight + secondaries[0].clientHeight;
+            for (let i = 1; i < secondaries.length; i++) {
+                secondaries[i].style.height = secondaries[0].clientHeight + 'px';
+                secondaries[i].style.maxHeight = secondaries[0].clientHeight + 'px';
+                secondaries[i].style.overflowY = 'hidden';
+            }
         }
+
+        this._cdRef.detectChanges();
 
         const rowsVisible = this._table._tableRowsVisible;
         const currentlyRenderedRows = this._table.getCurrentlyRenderedRows();

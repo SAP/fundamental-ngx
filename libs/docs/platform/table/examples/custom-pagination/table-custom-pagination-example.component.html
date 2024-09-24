@@ -1,23 +1,117 @@
 <fdp-table
+    [nonInteractiveHeader]="true"
     [dataSource]="source"
-    selectionMode="multiple"
     relationKey="children"
     emptyTableMessage="No data found"
-    bodyHeight="300px"
     [pageSize]="pageSize"
     (pageChange)="pageChanged($event.current.currentPage)"
     [state]="state"
+    [pageScrolling]="false"
     [showGrowingButton]="true"
     [showItemsCount]="true"
+    [virtualScroll]="true"
+    bodyHeight="20rem"
+    [noVerticalBorders]="true"
     #table
 >
     <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false" [hideSearchInput]="true"> </fdp-table-toolbar>
 
-    <fdp-column name="name" key="name" label="Name" align="start"> </fdp-column>
+    <fdp-column name="name" key="name" label="{{ 'GUIDELINE_ITEM.LIST.NAME_COLUMN' }}" [sortable]="true">
+        <fdp-table-cell *fdpCellDef="let item; as: itemType">
+            <fdp-link
+                [routerLink]="[item.name]"
+                routerLinkActive="router-link-active"
+                [attr.data-automation-id]="'guidelineItemsList-itemLink'"
+                >{{ item?.name }}</fdp-link
+            >
+        </fdp-table-cell>
+    </fdp-column>
 
-    <fdp-column name="description" key="description" label="Description"> </fdp-column>
+    <fdp-column
+        [fdpTableColumnResponsive]="{ '0': 'popping', '1000': 'visible' }"
+        name="description"
+        key="description"
+        label="{{ 'GUIDELINE_ITEM.LIST.DESCRIPTION_COLUMN' }}"
+        [sortable]="true"
+    >
+    </fdp-column>
 
-    <fdp-column name="price" key="price.value" label="Price" align="end"> </fdp-column>
+    <fdp-column
+        [fdpTableColumnResponsive]="{ '0': 'popping', '1000': 'visible' }"
+        name="property1"
+        key="property1"
+        label="{{ 'GUIDELINE_ITEM.LIST.PROPERTY_1_COLUMN' }}"
+        [sortable]="true"
+    >
+    </fdp-column>
 
-    <fdp-column name="status" key="status" label="Status" align="center"> </fdp-column>
+    <fdp-column
+        [fdpTableColumnResponsive]="{ '0': 'popping', '700': 'visible' }"
+        name="property2"
+        key="property2"
+        label="{{ 'GUIDELINE_ITEM.LIST.PROPERTY_2_COLUMN' }}"
+        [sortable]="true"
+    >
+    </fdp-column>
+
+    <fdp-column
+        [fdpTableColumnResponsive]="{ '0': 'popping', '500': 'visible' }"
+        name="createdAt"
+        key="createdAt"
+        label="{{ 'GUIDELINE_ITEM.LIST.CREATED_ON_COLUMN' }}"
+        [sortable]="true"
+    >
+        <fdp-table-cell *fdpCellDef="let item; as: itemType">{{
+            item?.createdAt | date: 'MMM d, y, h:mm a'
+        }}</fdp-table-cell>
+    </fdp-column>
+
+    <fdp-column name="action" key="action" label="{{ 'GUIDELINE_ITEM.LIST.ACTION_COLUMN' }}" [align]="'end'">
+        <fdp-table-cell *fdpCellDef="let item; as: itemType">
+            <button
+                [disabled]="deletingInProgress"
+                fd-button
+                fdType="transparent"
+                glyph="delete"
+                [attr.data-automation-id]="'guidelineItemsList-deleteButton-' + item"
+                title="{{ 'GUIDELINE_ITEM.LIST.DELETE_ITEM_CONFIRMATION.TITLE' }}"
+                (click)="deleteGuidelineItem(item, messageBoxTemplateDelete)"
+            ></button>
+        </fdp-table-cell>
+    </fdp-column>
 </fdp-table>
+
+<ng-template [fdMessageBoxTemplate] let-messageBox let-messageBoxConfig="messageBoxConfig" #messageBoxTemplateDelete>
+    <fd-message-box
+        class="guideline-items-list-message-box"
+        [messageBoxConfig]="messageBoxConfig"
+        [messageBoxRef]="messageBox"
+    >
+        <fd-message-box-header>
+            <fd-message-box-semantic-icon glyph="incident"></fd-message-box-semantic-icon>
+            <h1 id="fd-message-box-template-base-header" fd-title>
+                {{ 'GUIDELINE_ITEM.LIST.DELETE_ITEM_CONFIRMATION.TITLE' }}
+            </h1>
+        </fd-message-box-header>
+        <fd-message-box-body>
+            <p id="fd-message-box-template-base-body">{{ 'GUIDELINE_ITEM.LIST.DELETE_ITEM_CONFIRMATION.CONTENT' }}?</p>
+        </fd-message-box-body>
+        <fd-message-box-footer>
+            <fd-button-bar
+                fdkInitialFocus
+                label="{{ 'GUIDELINE_ITEM.LIST.DELETE_ITEM_CONFIRMATION.APPROVE_BUTTON' }}"
+                fdType="negative"
+                (click)="messageBox.close('Ok')"
+                ariaLabel="Ok"
+                [attr.data-automation-id]="'guidelineItemsList-deleteApproveButton'"
+            >
+            </fd-button-bar>
+            <fd-button-bar
+                label="{{ 'GUIDELINE_ITEM.LIST.DELETE_ITEM_CONFIRMATION.CANCEL_BUTTON' }}"
+                (click)="messageBox.dismiss('Cancel')"
+                ariaLabel="Cancel"
+                [attr.data-automation-id]="'guidelineItemsList-deleteCancelButton'"
+            ></fd-button-bar>
+        </fd-message-box-footer>
+    </fd-message-box>
+</ng-template>
