@@ -56,13 +56,19 @@ export class AvatarGroupItemRendererDirective implements OnInit, FocusableItem {
      **/
     get width(): number {
         if (this.visible) {
-            this._lastSavedWidth =
-                this.element.getBoundingClientRect().width +
-                parseFloat(getComputedStyle(this.element).marginLeft) +
-                parseFloat(getComputedStyle(this.element).marginRight);
+            const rect = this.element.getBoundingClientRect();
+            const style = getComputedStyle(this.element);
+            const width = rect.width;
+            const marginLeft = parseFloat(style.marginLeft);
+            const marginRight = parseFloat(style.marginRight);
+
+            if (!isNaN(width) && !isNaN(marginLeft) && !isNaN(marginRight)) {
+                this._lastSavedWidth = width + marginLeft + marginRight;
+            }
         }
         return this._lastSavedWidth;
     }
+
 
     /**
      * Rendered element's height or it's last saved height.
