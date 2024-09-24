@@ -23,9 +23,9 @@ import { DialogRef } from '../utils/dialog-ref.class';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[class.fd-button]': 'true',
-        '[class.is-compact]': '!mobile',
+        '[class.is-compact]': '!mobile()',
         '[class.fd-button--transparent]': 'true',
-        '[attr.title]': 'title'
+        '[attr.title]': 'title()'
     }
 })
 export class DialogFullScreenTogglerButtonComponent implements OnInit {

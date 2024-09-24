@@ -14,9 +14,9 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
     host: {
         '[attr.aria-label]': '"close"',
         '[class.fd-button]': 'true',
-        '[class.is-compact]': '!mobile',
+        '[class.is-compact]': '!mobile()',
         '[class.fd-button--transparent]': 'true',
-        '[attr.title]': 'title'
+        '[attr.title]': 'title()'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
