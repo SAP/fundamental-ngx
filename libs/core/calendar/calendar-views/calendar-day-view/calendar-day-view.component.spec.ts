@@ -62,7 +62,7 @@ describe('CalendarDayViewComponent', () => {
 
     it('Should Select Proper multi Date', (done) => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
-        component.allowMultipleSelection = true;
+        component.allowMultipleSelection.set(true);
         component.ngOnInit();
         const dayPicked = component._dayViewGrid[2][3];
         component.selectedMultipleDatesChange.subscribe((date: FdDate[]) => {
@@ -74,7 +74,7 @@ describe('CalendarDayViewComponent', () => {
 
     it('Should mark selected multi date', () => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
-        component.allowMultipleSelection = true;
+        component.allowMultipleSelection.set(true);
         component.selectedMultipleDates = [
             new FdDate(2018, 10, 20),
             new FdDate(2018, 10, 21)
@@ -94,7 +94,7 @@ describe('CalendarDayViewComponent', () => {
 
     it('Should Select Proper First Range Date', (done) => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
-        component.calType = 'range';
+        component.calType.set('range');
         component.ngOnInit();
         const dayPicked = component._dayViewGrid[2][3];
         component.selectedRangeDateChange.subscribe((date: { start: FdDate; end: FdDate }) => {
@@ -106,7 +106,7 @@ describe('CalendarDayViewComponent', () => {
 
     it('Should Select Proper Second Range Date', (done) => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
-        component.calType = 'range';
+        component.calType.set('range');
         component.ngOnInit();
         const dayStartPicked = component._dayViewGrid[2][3];
         const dayEndPicked = component._dayViewGrid[3][3];
@@ -120,7 +120,7 @@ describe('CalendarDayViewComponent', () => {
 
     it('Should add flags to cells, when picked on range', () => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
-        component.calType = 'range';
+        component.calType.set('range');
         component.ngOnInit();
         const dayStartPicked = component._dayViewGrid[1][1];
         const dayEndPicked = component._dayViewGrid[3][3];
@@ -153,13 +153,13 @@ describe('CalendarDayViewComponent', () => {
     });
 
     it('should properly rearrange days when different startingDayOfWeek is used', () => {
-        component.startingDayOfWeek = 1;
+        component.startingDayOfWeek.set(1);
         component.ngOnInit();
         expect(component.shortWeekDays).toEqual(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
-        component.startingDayOfWeek = 2;
+        component.startingDayOfWeek.set(2);
         component.ngOnInit();
         expect(component.shortWeekDays).toEqual(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']);
-        component.startingDayOfWeek = 3;
+        component.startingDayOfWeek.set(3);
         component.ngOnInit();
         expect(component.shortWeekDays).toEqual(['Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon']);
     });
@@ -181,7 +181,7 @@ describe('CalendarDayViewComponent', () => {
     it('should generate proper days for february 2020', () => {
         component.currentlyDisplayed.year = 2020;
         component.currentlyDisplayed.month = 2;
-        component.startingDayOfWeek = 2;
+        component.startingDayOfWeek.set(2);
         component.ngOnInit();
         expect(component._dayViewGrid.map((day) => day.map((_day) => _day.date.day))).toEqual([
             [27, 28, 29, 30, 31, 1, 2],
@@ -215,8 +215,8 @@ describe('CalendarDayViewComponent', () => {
     it('should apply _isOnRangePick flag', () => {
         component.currentlyDisplayed.year = 2015;
         component.currentlyDisplayed.month = 6;
-        component.rangeHoverEffect = true;
-        component.calType = 'range';
+        component.rangeHoverEffect.set(true);
+        component.calType.set('range');
         component.ngOnInit();
         component.selectedRangeDate = { start: null, end: null };
         component.selectDate(component._calendarDayList[10], new MouseEvent('click'));
@@ -227,8 +227,8 @@ describe('CalendarDayViewComponent', () => {
         component.currentlyDisplayed.year = 2020;
         component.currentlyDisplayed.month = 4;
         const date = new FdDate(2020, 4, 15);
-        component.rangeHoverEffect = true;
-        component.calType = 'range';
+        component.rangeHoverEffect.set(true);
+        component.calType.set('range');
         (<any>component)._isOnRangePick = true;
         component.ngOnInit();
         component.selectedRangeDate = { start: date, end: date };
@@ -252,7 +252,7 @@ describe('CalendarDayViewComponent', () => {
     });
 
     it('should put additional property select on range day', () => {
-        component.calType = 'range';
+        component.calType.set('range');
         component.currentlyDisplayed.year = 2020;
         component.currentlyDisplayed.month = 4;
         const startDate = new FdDate(2020, 4, 15);
@@ -273,12 +273,12 @@ describe('CalendarDayViewComponent', () => {
     });
 
     it('should put additional property disabled on range days', () => {
-        component.calType = 'range';
+        component.calType.set('range');
         component.currentlyDisplayed.year = 2020;
         component.currentlyDisplayed.month = 4;
-        component.disableFunction = (fdDate) => fdDate.day === 1;
-        component.disableRangeEndFunction = () => false;
-        component.disableRangeStartFunction = (fdDate) => fdDate.day === 3;
+        component.disableFunction.set((fdDate) => fdDate.day === 1);
+        component.disableRangeEndFunction.set(() => false);
+        component.disableRangeStartFunction.set((fdDate) => fdDate.day === 3);
         component.ngOnInit();
         const startDate = new FdDate(2020, 4, 15);
         const endDate = new FdDate(2020, 4, 20);
@@ -298,8 +298,8 @@ describe('CalendarDayViewComponent', () => {
 
     it('should mark selected multiple date ranges', () => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
-        component.calType = 'range';
-        component.allowMultipleSelection = true;
+        component.calType.set('range');
+        component.allowMultipleSelection.set(true);
 
         // Initialize with specific start and end dates
         const startDate = new FdDate(2018, 10, 20);
@@ -317,8 +317,8 @@ describe('CalendarDayViewComponent', () => {
 
     it('should add flags to cells when multiple ranges are picked', () => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
-        component.calType = 'range';
-        component.allowMultipleSelection = true;
+        component.calType.set('range');
+        component.allowMultipleSelection.set(true);
 
         const startDate1 = new FdDate(2018, 10, 1);
         const endDate1 = new FdDate(2018, 10, 5);
@@ -347,9 +347,9 @@ describe('CalendarDayViewComponent', () => {
     it('should apply _isOnRangePick flag for multiple ranges', () => {
         component.currentlyDisplayed.year = 2015;
         component.currentlyDisplayed.month = 6;
-        component.rangeHoverEffect = true;
-        component.calType = 'range';
-        component.allowMultipleSelection = true;
+        component.rangeHoverEffect.set(true);
+        component.calType.set('range');
+        component.allowMultipleSelection.set(true);
         component.ngOnInit();
         component.selectedMultipleDateRanges = [{ start: null, end: null }];
         component.selectDate(component._calendarDayList[10], new MouseEvent('click'));
@@ -361,9 +361,9 @@ describe('CalendarDayViewComponent', () => {
         component.currentlyDisplayed.month = 4;
         const date = new FdDate(2020, 4, 15);
 
-        component.rangeHoverEffect = true;
-        component.calType = 'range';
-        component.allowMultipleSelection = true;
+        component.rangeHoverEffect.set(true);
+        component.calType.set('range');
+        component.allowMultipleSelection.set(true);
 
         component.ngOnInit();
         component.selectedMultipleDateRanges = [{ start: date, end: date }];
@@ -383,7 +383,7 @@ describe('CalendarDayViewComponent', () => {
         component.currentlyDisplayed.month = 4;
         const date = new FdDate(2020, 4, 15);
         component.selectedDate = date;
-        component.allowMultipleSelection = true;
+        component.allowMultipleSelection.set(true);
         component.ngOnInit();
         component.selectDate(component._calendarDayList[15]);
         expect(component.selectedDate).toEqual(component._calendarDayList[14].date);

@@ -1,6 +1,20 @@
-<fd-time-picker [(ngModel)]="time" [displayFormat]="displayFormat"></fd-time-picker>
+<fd-time-picker [(ngModel)]="time" [displayFormat]="basicDateTimeFormat"></fd-time-picker>
 <br />
 Selected Time:
-@if (time) {
+@if (time && time.isDateValid()) {
     {{ time.toDate() | date: 'shortTime' }}
+} @else {
+    {{ time }}
+}
+
+<br />
+<br />
+
+<fd-time-picker [(ngModel)]="time" [displayFormat]="dateTimeFormatWithDayPeriod"></fd-time-picker>
+<br />
+Selected Time:
+@if (time && time.isDateValid()) {
+    {{ time | dayPeriodFormat: dateTimeFormatWithDayPeriod | translateDayPeriod }}
+} @else {
+    {{ time }}
 }

@@ -31,7 +31,8 @@ describe('CalendarYearViewComponent', () => {
     it('Should select the year when Enter key is clicked', () => {
         const event: any = {
             key: 'Enter',
-            preventDefault: () => {}
+            preventDefault: () => {},
+            stopPropagation: () => {}
         };
         component._onKeydownYearHandler(event, 6);
         expect(component.yearSelected).toEqual(2025);
@@ -40,7 +41,8 @@ describe('CalendarYearViewComponent', () => {
     it('Should select the year when Space key is clicked', () => {
         const event: any = {
             key: ' ',
-            preventDefault: () => {}
+            preventDefault: () => {},
+            stopPropagation: () => {}
         };
         component._onKeydownYearHandler(event, 6);
         expect(component.yearSelected).toEqual(2025);

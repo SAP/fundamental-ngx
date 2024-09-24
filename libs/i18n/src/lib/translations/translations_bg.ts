@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Със стрелките нагоре и надолу може да преминавате през избора.',
         escapeNavigateTokens:
             'За изход от полето за въвеждане, натиснете Escape и използвайте клавишите със стрелки наляво и надясно, за да преминете през избраните опции.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Общ брой на съдържащите се токени: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Основна навигация',
@@ -330,7 +330,7 @@ export default {
         inputIconTitle: 'Избор на опции',
         mobileShowAllItemsButton: 'Показване на всички позиции',
         mobileShowSelectedItemsButton: 'Показване на избраните позиции',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Невалиден запис'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 символ над ограничението',
@@ -484,6 +484,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Колони',
         toolbarActionExpandAllButtonTitle: 'Разгръщане на всички',
         toolbarActionCollapseAllButtonTitle: 'Свиване на всички',
+        filterDialogBackToColumns: 'Назад',
         filterDialogNotFilteredLabel: '(Без филтриране)',
         filterDialogFilterByLabel: 'Филтриране по: {filterLabel}',
         filterDialogFilterTitle: 'Филтър',

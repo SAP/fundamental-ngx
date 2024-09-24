@@ -32,10 +32,21 @@ import {
     FdCalendarView,
     FdCalendarViewEnum
 } from '@fundamental-ngx/core/calendar';
-import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
-import { FormItemControl, PopoverFormMessageService, registerFormItemControl } from '@fundamental-ngx/core/form';
-import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
-import { PopoverService } from '@fundamental-ngx/core/popover';
+import {
+    convertToDesiredFormat,
+    DATE_TIME_FORMATS,
+    DatetimeAdapter,
+    DateTimeFormats,
+    TranslateDayPeriodPipe
+} from '@fundamental-ngx/core/datetime';
+import {
+    FormItemControl,
+    FormMessageComponent,
+    PopoverFormMessageService,
+    registerFormItemControl
+} from '@fundamental-ngx/core/form';
+import { InputGroupInputDirective, InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 
 import { NgClass, NgTemplateOutlet } from '@angular/common';
@@ -43,10 +54,7 @@ import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { DynamicComponentService, FocusTrapService, Nullable } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { FormMessageComponent } from '@fundamental-ngx/core/form';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import { TimeModule } from '@fundamental-ngx/core/time';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -105,7 +113,8 @@ import { FD_DATETIME_PICKER_COMPONENT, FD_DATETIME_PICKER_MOBILE_CONFIG } from '
         NgClass,
         TimeModule,
         BarModule,
-        FdTranslatePipe
+        FdTranslatePipe,
+        TranslateDayPeriodPipe
     ]
 })
 export class DatetimePickerComponent<D>
@@ -331,6 +340,9 @@ export class DatetimePickerComponent<D>
     /** Whether calendar is used inside mobile in portrait mode */
     @Input()
     mobilePortrait = false;
+
+    /** To set input width 100% */
+    @Input() isFullWidth = false;
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
@@ -751,6 +763,9 @@ export class DatetimePickerComponent<D>
             this.onChange(null);
             return;
         }
+
+        inputStr = convertToDesiredFormat(inputStr.toString());
+
         this.date = this._parseDate(inputStr);
         this._isInvalidDateInput = !this._isModelValid(this.date);
 

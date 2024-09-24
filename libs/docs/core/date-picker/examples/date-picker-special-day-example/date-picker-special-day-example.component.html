@@ -1,0 +1,13 @@
+<div class="container">
+    <fd-date-picker
+        #inputElement
+        type="single"
+        [(ngModel)]="customDate"
+        [showTodayButton]="true"
+        [startingDayOfWeek]="2"
+        [required]="true"
+        [state]="'default'"
+        [specialDaysRules]="specialDaysRulesSignal()"
+        (isOpenChange)="onOpenChange($event)"
+    />
+</div>

@@ -18,11 +18,13 @@ import {
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarService } from '../../calendar.service';
 import { CalendarYear, CalendarYearGrid } from '../../models/calendar-year-grid';
 import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
+import { DateRange } from '../../models/date-range';
 
 /** Component representing the YearView of the Calendar Component. */
 @Component({
@@ -56,9 +58,24 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, Focusabl
     @Input()
     yearViewGrid: CalendarYearGrid;
 
+    /** Whether the date range is year format only excluding month and day */
+    @Input()
+    isDateRangeYearFormat: boolean;
+
+    /**
+     * Whether user wants to mark year cells on hover.
+     * Works only on range mode, when start year is selected.
+     */
+    @Input()
+    rangeHoverEffect = false;
+
     /** Event fired when a year is selected. */
     @Output()
     readonly yearClicked: EventEmitter<number> = new EventEmitter<number>();
+
+    /** Event thrown every time selected first or last date in range mode is changed */
+    @Output()
+    readonly selectedRangeDateChange: EventEmitter<DateRange<D>> = new EventEmitter<DateRange<D>>();
 
     /**
      * @hidden
@@ -70,7 +87,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, Focusabl
      * @hidden
      * Parameter that stores the dozen of years that are currently being displayed.
      */
-    _calendarYearListGrid: CalendarYear[][];
+    _calendarYearListGrid: CalendarYear<D>[][];
 
     /**
      * @hidden
@@ -113,6 +130,12 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, Focusabl
     private _initiated = false;
 
     /** @hidden */
+    private _selectedRangeDate: DateRange<D>;
+
+    /** @hidden */
+    private _isOnRangePick = false;
+
+    /** @hidden */
     constructor(
         private _eRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
@@ -146,6 +169,54 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, Focusabl
         }
     }
 
+    /** The currently selected FdDates model start and end in range mode. */
+    @Input()
+    set selectedRangeDate(dateRange: DateRange<D>) {
+        if (
+            dateRange &&
+            this.selectedRangeDate &&
+            this._isSameDate(dateRange.start, this.selectedRangeDate.start) &&
+            this._isSameDate(dateRange.end, this.selectedRangeDate.end)
+        ) {
+            return;
+        }
+        this._selectedRangeDate = dateRange;
+        if (this._calendarYearListGrid) {
+            this._changeSelectedRangeYears(dateRange, this._getYearList());
+        }
+    }
+
+    get selectedRangeDate(): DateRange<D> {
+        return this._selectedRangeDate;
+    }
+
+    /**
+     * @hidden
+     *  Amount of selected years
+     *  0, when there is no year selected, or start year is invalid,
+     *  1, when there is only valid start year, or end year is same as start year,
+     *  2, when both dates are valid
+     */
+    get _selectCounter(): number {
+        if (!this.selectedRangeDate || !this._dateTimeAdapter.isValid(this.selectedRangeDate.start)) {
+            return 0;
+        }
+        if (
+            this.selectedRangeDate.start &&
+            (!this._dateTimeAdapter.isValid(this.selectedRangeDate.end) ||
+                this._isSameDate(this.selectedRangeDate.start, this.selectedRangeDate.end))
+        ) {
+            return 1;
+        }
+        if (
+            this._dateTimeAdapter.isValid(this.selectedRangeDate.start) &&
+            this._dateTimeAdapter.isValid(this.selectedRangeDate.end)
+        ) {
+            return 2;
+        }
+        return 0;
+    }
+
     /** Method used to load the previous {{col * row}} years to be displayed. */
     loadNextYearList(): void {
         this._firstYearInList += this._getAmountOfYearsShownAtOnce();
@@ -159,12 +230,17 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, Focusabl
     }
 
     /** Method that sends the year to the parent component when it is clicked. */
-    selectYear(selectedYear: CalendarYear, event?: MouseEvent): void {
+    selectYear(selectedYear: CalendarYear<D>, event?: MouseEvent | KeyboardEvent): void {
         if (event) {
             event.stopPropagation();
         }
         this.yearSelected = selectedYear.year;
         this.yearClicked.emit(this.yearSelected);
+
+        if (this.isDateRangeYearFormat) {
+            this._selectRangeDate(selectedYear);
+            this._handleRangeHoverEffect(event);
+        }
     }
 
     /**
@@ -217,6 +293,31 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, Focusabl
 
     /**
      * @hidden
+     * Handles hover effect for range selection mode.
+     * @param year The calendar year that is hovered.
+     */
+    _handleRangeHover(year: CalendarYear<D>): void {
+        // Handle range hover
+        const start = this.selectedRangeDate?.start;
+        if (this._isOnRangePick && start) {
+            if (this._dateTimeAdapter.compareDate(year.date, start) < 0) {
+                this._getYearList().forEach((_year) => {
+                    _year.hoverRange =
+                        this._dateTimeAdapter.compareDate(_year.date, year.date) > 0 &&
+                        this._dateTimeAdapter.compareDate(_year.date, start) < 0;
+                });
+            } else {
+                this._getYearList().forEach((_year) => {
+                    _year.hoverRange =
+                        this._dateTimeAdapter.compareDate(_year.date, year.date) < 0 &&
+                        this._dateTimeAdapter.compareDate(_year.date, start) > 0;
+                });
+            }
+        }
+    }
+
+    /**
+     * @hidden
      * Method that returns active cell, which means:
      * if there is any selected year, return selected year
      * if there is no selected year, but there is current year, return current year
@@ -239,12 +340,13 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, Focusabl
     /** @hidden */
     private _constructYearGrid(): void {
         const displayedYearsAmount: number = this.yearViewGrid.cols * this.yearViewGrid.rows;
-        const calendarYearList: CalendarYear[] = [];
+        const calendarYearList: CalendarYear<D>[] = [];
         this._calendarYearListGrid = [];
 
         for (let x = 0; x < displayedYearsAmount; ++x) {
             const year = this._firstYearInList + x;
             calendarYearList.push({
+                date: this._dateTimeAdapter.createDate(year),
                 year,
                 label: this._getYearName(year),
                 ariaLabel: this._getAriaYearName(year),
@@ -253,6 +355,12 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, Focusabl
                 index: x
             });
         }
+
+        // if the date range is selected
+        if (this.isDateRangeYearFormat) {
+            this._changeSelectedRangeYears(this._selectedRangeDate, calendarYearList);
+        }
+
         /** Creating 2d grid */
         while (calendarYearList.length) {
             this._calendarYearListGrid.push(calendarYearList.splice(0, this.yearViewGrid.cols));
@@ -268,6 +376,117 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, Focusabl
         });
 
         this._changeDetectorRef.markForCheck();
+    }
+
+    /**
+     * @hidden
+     * Handles the hover effect for range selection.
+     * Toggles the hover effect based on the selection state and event.
+     * @param event Optional mouse event for handling hover effect.
+     */
+    private _handleRangeHoverEffect(event?: MouseEvent | KeyboardEvent): void {
+        if (this.isDateRangeYearFormat && this.rangeHoverEffect && this._selectCounter === 1 && event) {
+            this._isOnRangePick = !this._isOnRangePick;
+        } else {
+            this._isOnRangePick = false;
+        }
+    }
+
+    /**
+     * @hidden
+     * Change properties of range years, this method is called, to not rebuild whole grid from scratch,
+     * it just changes properties of newly selected/unselected years.
+     */
+    private _changeSelectedRangeYears(dates: DateRange<D>, calendar: CalendarYear<D>[]): void {
+        /** Pull list of calendar year */
+        const calendarList = calendar;
+
+        /** Reset changing properties */
+        calendarList.forEach(
+            (_year) =>
+                (_year.selectedFirst =
+                    _year.selectedLast =
+                    _year.selected =
+                    _year.disabled =
+                    _year.hoverRange =
+                    _year.selectedRange =
+                        false)
+        );
+
+        if (dates) {
+            let startYear: CalendarYear<D> | undefined;
+            let endYear: CalendarYear<D> | undefined;
+            if (dates.start) {
+                /** Find start year and mark it as selected */
+                startYear = calendarList.find((_year) => this._isSameDate(_year.date, dates.start));
+                if (startYear) {
+                    startYear.selected = true;
+                    startYear.selectedFirst = true;
+                }
+            }
+            if (dates.end) {
+                /** Find end year and mark it as selected */
+                endYear = calendarList.find((_year) => this._isSameDate(_year.date, dates.end));
+                if (endYear) {
+                    endYear.selected = true;
+                    endYear.selectedLast = true;
+                }
+            }
+
+            /** Verify if start year and end year is valid, otherwise don't put range selection */
+            if (dates.start && dates.end) {
+                /** Mark all years, which are between start and end date */
+                calendarList
+                    .filter(
+                        (_year) =>
+                            (_year.selectedRange = this._dateTimeAdapter.isBetween(
+                                _year.date,
+                                dates.start!,
+                                dates.end!
+                            ))
+                    )
+                    .forEach((_year) => (_year.selectedRange = true));
+            }
+        }
+    }
+
+    /**
+     * @hidden
+     * Check if dates are equal
+     */
+    private _isSameDate(date1: Nullable<D>, date2: Nullable<D>): boolean {
+        return this._dateTimeAdapter.datesEqual(date1, date2);
+    }
+
+    /**
+     * @hidden
+     * Selects or updates the range of years in range mode.
+     * Handles the start and end years and updates the selected range.
+     * @param year The calendar year to be selected or updated in the range.
+     */
+    private _selectRangeDate(year: CalendarYear<D>): void {
+        if (this._selectCounter === 0 || this._selectCounter === 2) {
+            this._selectedRangeDate = { start: year.date, end: null };
+            this.selectedRangeDateChange.emit(this.selectedRangeDate);
+        } else if (this._selectCounter === 1) {
+            this._selectedRangeDate = this._getOrderedRange(this.selectedRangeDate.start!, year.date);
+            this.selectedRangeDateChange.emit(this.selectedRangeDate);
+        }
+        this._changeSelectedRangeYears(this._selectedRangeDate, this._getYearList());
+    }
+
+    /**
+     * @hidden
+     * Orders the start and end dates for the range selection.
+     * Ensures the start date is before or equal to the end date.
+     * @param date1 The first date.
+     * @param date2 The second date.
+     * @returns An object containing the ordered start and end dates.
+     */
+    private _getOrderedRange(date1: D, date2: D): { start: D; end: D } {
+        return this._dateTimeAdapter.compareDate(date1, date2) < 0
+            ? { start: date1, end: date2 }
+            : { start: date2, end: date1 };
     }
 
     /**
@@ -306,8 +525,8 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, Focusabl
      * @hidden
      * Returns transformed 1d array from 2d year grid.
      */
-    private _getYearList(): CalendarYear[] {
-        return (<CalendarYear[]>[]).concat(...this._calendarYearListGrid);
+    private _getYearList(): CalendarYear<D>[] {
+        return (<CalendarYear<D>[]>[]).concat(...this._calendarYearListGrid);
     }
 
     /**
@@ -327,13 +546,15 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, Focusabl
         this._calendarService.rowAmount = this.yearViewGrid.rows;
         this._calendarService.focusEscapeFunction = this.focusEscapeFunction;
 
-        this._calendarService.onFocusIdChange
-            .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe((index) => this._focusOnCellByIndex(index));
+        this._calendarService.onFocusIdChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
+            this._handleRangeHover(this._getYearList()[index]);
+            this._focusOnCellByIndex(index);
+        });
 
-        this._calendarService.onKeySelect
-            .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe((index) => this.selectYear(this._getYearList()[index]));
+        this._calendarService.onKeySelect.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(({ index, event }) => {
+            this.selectYear(this._getYearList()[index], event);
+            this._focusOnCellByIndex(index);
+        });
 
         this._calendarService.onListStartApproach.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
             this.loadPreviousYearList();

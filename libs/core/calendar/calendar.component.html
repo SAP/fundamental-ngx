@@ -43,6 +43,10 @@
             [year]="_currentlyDisplayed.year"
             [id]="id"
             [focusEscapeFunction]="escapeFocusFunction"
+            [isDateRangeMonthYearFormat]="isDateRangeMonthFormat()"
+            [selectedRangeDate]="selectedRangeDate"
+            [rangeHoverEffect]="rangeHoverEffect"
+            (selectedRangeDateChange)="selectedRangeDateChanged($event)"
             (monthClicked)="handleMonthViewChange($event)"
         ></fd-calendar-month-view>
     } @else if (activeView === 'year') {
@@ -51,6 +55,10 @@
             [yearViewGrid]="yearGrid"
             [id]="id"
             [focusEscapeFunction]="escapeFocusFunction"
+            [isDateRangeYearFormat]="isDateRangeYearFormat()"
+            [selectedRangeDate]="selectedRangeDate"
+            [rangeHoverEffect]="rangeHoverEffect"
+            (selectedRangeDateChange)="selectedRangeDateChanged($event)"
             (yearClicked)="selectedYear($event)"
         >
         </fd-calendar-year-view>

@@ -9,6 +9,7 @@
         [disabled]="disabled"
         [placement]="placement"
         [appendTo]="appendTo"
+        [class.fd-popover-full-width]="isFullWidth"
     >
         <fd-popover-control>
             <ng-template [ngTemplateOutlet]="controlTemplate"></ng-template>
@@ -50,7 +51,7 @@
             [attr.aria-required]="required"
             [placeholder]="placeholder"
             [disabled]="disabled"
-            [ngModel]="_inputFieldDate"
+            [ngModel]="_inputFieldDate | translateDayPeriod"
             (keyup.enter)="handleInputChange($any($event.target).value, false)"
             (ngModelChange)="handleInputChange($event, true)"
             (blur)="handleOnTouched($event)"

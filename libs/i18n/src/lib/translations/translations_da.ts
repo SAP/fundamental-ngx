@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Naviger i valgene med pil op og pil ned.',
         escapeNavigateTokens:
             'Tryk på Escape for at afslutte inputfeltet, og brug venstre og højre piletast til at navigere gennem de valgte muligheder.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Indeholder samlet antal tokens: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Hovednavigation',
@@ -330,7 +330,7 @@ export default {
         inputIconTitle: 'Vælg muligheder',
         mobileShowAllItemsButton: 'Vis alle elementer',
         mobileShowSelectedItemsButton: 'Vis valgte elementer',
-        invalidEntryError: 'Invalid Entry'
+        invalidEntryError: 'Ugyldig indtastning'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 tegn over grænsen',
@@ -484,6 +484,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Kolonner',
         toolbarActionExpandAllButtonTitle: 'Udvid alle',
         toolbarActionCollapseAllButtonTitle: 'Minimer alle',
+        filterDialogBackToColumns: 'Naviger tilbage',
         filterDialogNotFilteredLabel: '(Ikke filtreret)',
         filterDialogFilterByLabel: 'Filtrér efter: {filterLabel}',
         filterDialogFilterTitle: 'Filtrér',

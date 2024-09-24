@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Period',
         decreasePeriodLabel: 'Decrease period',
         navigationInstruction:
-            'To move between items in this list, press top arrow or bottom arrow. To switch between lists press left arrow or right arrow.'
+            'To move between items in this list, press top arrow or bottom arrow. To switch between lists press left arrow or right arrow.',
+        nightLabel: 'night',
+        morningLabel: 'morning',
+        afternoonLabel: 'afternoon',
+        eveningLabel: 'evening'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Time picker input',
