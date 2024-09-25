@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.34...v0.52.2-rc.35) (2024-09-25)
+
+
+### Features
+
+* **platform:** icon tab bar dynamic content ([#12428](https://github.com/SAP/fundamental-ngx/issues/12428)) ([18dbc82](https://github.com/SAP/fundamental-ngx/commit/18dbc82b00f6d7f2cb39fb976cb4ce6a4f55bf2f)), closes [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771)
+
+
+
+
+
 ## [0.52.2-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.33...v0.52.2-rc.34) (2024-09-25)
 
 
