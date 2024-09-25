@@ -1,78 +1,83 @@
-import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 
-import { Component, inject } from '@angular/core';
-import { KeyUtil, RtlService, Size } from '@fundamental-ngx/cdk/utils';
-import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { AvatarGroupComponent, AvatarGroupItemDirective } from '@fundamental-ngx/core/avatar-group';
+import { Component } from '@angular/core';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
-import { AvatarGroupDataExampleService } from '../avatar-group-data-example.service';
+import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform/icon-tab-bar';
+import { AvatarGroupTypeExampleComponent } from './avatar-group-test-example/avatar-group-test-example.component';
 
 @Component({
     selector: 'fd-avatar-group-group-type-example',
     templateUrl: './group-type-example.component.html',
     standalone: true,
-    imports: [AvatarGroupComponent, AvatarComponent, QuickViewModule, LinkComponent, AvatarGroupItemDirective]
+    imports: [
+        ButtonComponent,
+        DynamicPageModule,
+        BreadcrumbModule,
+        LinkComponent,
+        ToolbarComponent,
+        ToolbarItemDirective,
+        ContentDensityDirective,
+        ToolbarSeparatorComponent,
+        FDP_ICON_TAB_BAR,
+        CdkScrollable,
+        BarModule,
+        MessageToastModule,
+        AvatarGroupTypeExampleComponent
+    ],
+    styles: [
+        `
+            .overlay {
+                height: 100%;
+                width: 100%;
+                position: fixed;
+                z-index: 10;
+                top: 0;
+                left: 0;
+                background-color: rgb(255, 255, 255);
+            }
+
+            .fd-dynamic-page-section-example {
+                min-height: 20vh;
+            }
+        `
+    ]
 })
 export class GroupTypeExampleComponent {
-    size: Size = 'l';
-    readonly avatarGroupDataExampleService = inject(AvatarGroupDataExampleService);
-    people = this.avatarGroupDataExampleService.generate();
-    personDetails: any = null;
-    overflowPopoverStage: 'main' | 'detail' = 'main';
+    visible = false;
 
-    get isDetailStage(): boolean {
-        return this.overflowPopoverStage === 'detail';
+    stackedTabs = false;
+
+    pageTitle = 'Balenciaga Tripple S Trainers';
+
+    constructor(private _messageToastService: MessageToastService) {}
+
+    onCollapseChange(): void {
+        console.log('collapse changed');
     }
 
-    getPopoverCtrlAriaLabel(overflowItemsCount = 0): string {
-        return (
-            'Has popup type dialog Conjoined avatars, ' +
-            ((this.people?.length || 0) - overflowItemsCount) +
-            ' avatars displayed, ' +
-            overflowItemsCount +
-            ' avatars hidden, activate for complete list'
-        );
+    openPage(stacked: boolean): void {
+        this.stackedTabs = stacked;
+        this.visible = true;
+        this._openToast('Dynamic Page has been opened');
     }
 
-    constructor(private _rtlService: RtlService) {}
-
-    get isRtl(): boolean {
-        return this._rtlService.rtl.getValue();
+    closePage(): void {
+        this.visible = false;
     }
 
-    isOpenChanged(isOpened: boolean): void {
-        if (isOpened) {
-            this.openOverflowMain();
-        }
+    handleAction(action: string): void {
+        this.closePage();
+        this._openToast(action);
     }
 
-    openOverflowDetails(idx: number): void {
-        this.personDetails = this.people[idx];
-        this.overflowPopoverStage = 'detail';
-    }
-
-    openOverflowMain(): void {
-        this.personDetails = null;
-        this.overflowPopoverStage = 'main';
-    }
-
-    handleControlClick(event: MouseEvent, popover: PopoverComponent): void {
-        popover.open();
-    }
-
-    handleControlKeydown(event: KeyboardEvent, popover: PopoverComponent): void {
-        if (!KeyUtil.isKeyCode(event, [ESCAPE, TAB, SPACE, ENTER])) {
-            return;
-        }
-
-        if (KeyUtil.isKeyCode(event, [ESCAPE, TAB])) {
-            popover.close();
-        }
-
-        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
-            popover.open();
-        }
+    private _openToast(content: string): void {
+        this._messageToastService.open(content, { duration: 3000 });
     }
 }

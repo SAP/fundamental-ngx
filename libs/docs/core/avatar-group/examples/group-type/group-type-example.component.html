@@ -1,101 +1,116 @@
-<fd-avatar-group [size]="'m'" type="group" overflowPopoverTitle="Team members">
-    @for (person of people; track person) {
-        @if (!person.imageUrl && !person.glyph) {
-            <fd-avatar
-                *fdAvatarGroupItem="details; title: person.firstName + ' ' + person.lastName"
-                [circle]="true"
-                [border]="true"
-                [size]="'m'"
-                role="img"
-                [title]="person.firstName + ' ' + person.lastName"
-                [label]="person.firstName + ' ' + person.lastName"
-                [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
-            ></fd-avatar>
-        }
-        @if (person.imageUrl) {
-            <fd-avatar
-                *fdAvatarGroupItem="details; title: person.firstName + ' ' + person.lastName"
-                [circle]="true"
-                [border]="true"
-                [size]="'m'"
-                [image]="person.imageUrl"
-                role="img"
-                [title]="person.firstName + ' ' + person.lastName"
-                [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
-            ></fd-avatar>
-        }
-        @if (person.glyph) {
-            <fd-avatar
-                *fdAvatarGroupItem="details; title: person.firstName + ' ' + person.lastName"
-                [circle]="true"
-                [border]="true"
-                [size]="'m'"
-                [glyph]="person.glyph"
-                role="img"
-                [title]="person.firstName + ' ' + person.lastName"
-                [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
-            ></fd-avatar>
-        }
-        <ng-template #details>
-            <fd-quick-view [id]="person.id">
-                <fd-quick-view-subheader>
-                    @if (!person.imageUrl && !person.glyph) {
-                        <fd-avatar
-                            [circle]="true"
-                            size="s"
-                            role="img"
-                            [label]="person.firstName + ' ' + person.lastName"
-                            [title]="person.firstName + ' ' + person.lastName"
-                            [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
-                        ></fd-avatar>
-                    }
-                    @if (person.imageUrl) {
-                        <fd-avatar
-                            [circle]="true"
-                            size="s"
-                            role="img"
-                            [title]="person.firstName + ' ' + person.lastName"
-                            [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
-                            [image]="person.imageUrl"
-                        ></fd-avatar>
-                    }
-                    @if (person.glyph) {
-                        <fd-avatar
-                            [circle]="true"
-                            size="s"
-                            role="img"
-                            [title]="person.firstName + ' ' + person.lastName"
-                            [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
-                            [glyph]="person.glyph"
-                        ></fd-avatar>
-                    }
-                    <fd-quick-view-subheader-title
-                        >{{ person.firstName }} {{ person.lastName }}</fd-quick-view-subheader-title
-                    >
-                    <fd-quick-view-subheader-subtitle>{{ person.position }}</fd-quick-view-subheader-subtitle>
-                </fd-quick-view-subheader>
-                <fd-quick-view-group>
-                    <fd-quick-view-group-title>Contact Details</fd-quick-view-group-title>
-                    <fd-quick-view-group-item>
-                        <fd-quick-view-group-item-label>Phone</fd-quick-view-group-item-label>
-                        <fd-quick-view-group-item-content>
-                            <a fd-link [href]="'tel:' + person.phone">{{ person.phone }}</a>
-                        </fd-quick-view-group-item-content>
-                    </fd-quick-view-group-item>
-                    <fd-quick-view-group-item>
-                        <fd-quick-view-group-item-label>Mobile</fd-quick-view-group-item-label>
-                        <fd-quick-view-group-item-content>
-                            <a fd-link [href]="'tel:' + person.mobile">{{ person.mobile }}</a>
-                        </fd-quick-view-group-item-content>
-                    </fd-quick-view-group-item>
-                    <fd-quick-view-group-item>
-                        <fd-quick-view-group-item-label>Email</fd-quick-view-group-item-label>
-                        <fd-quick-view-group-item-content>
-                            <a fd-link [href]="'mailto:' + person.email">{{ person.email }}</a>
-                        </fd-quick-view-group-item-content>
-                    </fd-quick-view-group-item>
-                </fd-quick-view-group>
-            </fd-quick-view>
-        </ng-template>
-    }
-</fd-avatar-group>
+<p>Default tabs example:</p>
+<button fd-button (click)="openPage(false)">Click to open full screen</button>
+<p>Stacked tabs example:</p>
+<button fd-button (click)="openPage(true)">Click to open full screen</button>
+@if (visible) {
+    <div class="overlay">
+        <fd-dynamic-page
+            size="large"
+            ariaLabel="Example Dynamic Page"
+            [autoResponsive]="false"
+        >
+            <fd-dynamic-page-header
+                title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                subtitle="sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+            >
+                <fd-dynamic-page-global-actions>
+                    <!-- global actions -->
+                    <fd-toolbar fdType="transparent" [clearBorder]="true">
+                        <button
+                            fd-toolbar-item
+                            fd-button
+                            fdCompact
+                            fdType="positive"
+                            (click)="handleAction('Page is accepted')"
+                            label="Accept"
+                            title="Accept"
+                        ></button>
+                        <button
+                            fd-toolbar-item
+                            fd-button
+                            fdCompact
+                            fdType="negative"
+                            (click)="handleAction('Page is rejected')"
+                            label="Reject"
+                            title="Reject"
+                        ></button>
+                        <fd-toolbar-separator></fd-toolbar-separator>
+                    </fd-toolbar>
+                </fd-dynamic-page-global-actions>
+                <fd-dynamic-page-layout-actions>
+                    <!-- layout actions -->
+                    <fd-toolbar fdType="transparent" [clearBorder]="true">
+                        <button
+                            fd-button
+                            fdType="transparent"
+                            ariaLabel="Resize"
+                            title="Resize"
+                        >
+                            <i class="sap-icon--resize"></i>
+                        </button>
+                        <button
+                            fd-button
+                            fdType="transparent"
+                            ariaLabel="Exit Fullscreen"
+                            (click)="closePage()"
+                            title="Exit Fullscreen"
+                        >
+                            <i class="sap-icon--exitfullscreen"></i>
+                        </button>
+                        <button
+                            fd-button
+                            fdType="transparent"
+                            ariaLabel="Close"
+                            (click)="closePage()"
+                            title="Close"
+                        >
+                            <i class="sap-icon--decline"></i>
+                        </button>
+                    </fd-toolbar>
+                </fd-dynamic-page-layout-actions>
+            </fd-dynamic-page-header>
+            <fd-dynamic-page-subheader
+                [collapsible]="true"
+                [pinnable]="true"
+                [collapsed]="false"
+            >
+                <!-- collapsible header content goes here -->
+                <span
+                >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam
+        possimus corrupti architecto perspiciatis, delectus necessitatibus
+        incidunt numquam asperiores tenetur iure. Cum consequuntur impedit
+        repellendus esse, facere autem optio consequatur nobis?</span
+                >
+            </fd-dynamic-page-subheader>
+            <fdp-icon-tab-bar
+                [stackContent]="stackedTabs"
+                maxContentHeight="auto"
+                ariaRoledescription="Tab Bar"
+            >
+                @for ( tab of [ 'Tab 1', 'Tab 2', 'Tab 3' ]; track tab ) {
+                    <fdp-icon-tab-bar-tab [label]="tab">
+                        <fd-dynamic-page-content [id]="tab" cdkScrollable>
+                            <div class="fd-dynamic-page-section-example">{{ tab }} content.</div>
+                            <fd-avatar-group-group-test-example></fd-avatar-group-group-test-example>
+                            <fd-avatar-group-group-test-example></fd-avatar-group-group-test-example>
+                            <fd-avatar-group-group-test-example></fd-avatar-group-group-test-example>
+                        </fd-dynamic-page-content>
+                    </fdp-icon-tab-bar-tab>
+                }
+            </fdp-icon-tab-bar>
+            <fd-dynamic-page-footer>
+                <!-- page footer content goes here -->
+                <div fd-bar barDesign="floating-footer">
+                    <div fd-bar-right>
+                        <fd-button-bar
+                            label="Save"
+                            fdType="emphasized"
+                            (click)="closePage()"
+                        ></fd-button-bar>
+                        <fd-button-bar label="Cancel" (click)="closePage()"></fd-button-bar>
+                    </div>
+                </div>
+            </fd-dynamic-page-footer>
+        </fd-dynamic-page>
+    </div>
+}
