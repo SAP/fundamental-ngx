@@ -63,7 +63,9 @@ class SelectableColumn {
         /** Active */
         public active: boolean,
         /** Table Column it belongs to */
-        public column: DialogTableColumn
+        public column: DialogTableColumn,
+        /** Table column order */
+        public order: number
     ) {}
 }
 
@@ -294,23 +296,15 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
         const visibleColumnIndexMap = new Map(visibleColumnKeys.map((key, index) => [key, index]));
         this._selectableColumns = this.availableColumns
             .slice()
-            // sorting columns in accordance with the order of visible columns
-            .sort((a, b) => {
-                const aIndex = visibleColumnIndexMap.get(a.key);
-                const bIndex = visibleColumnIndexMap.get(b.key);
-                if (aIndex === undefined || bIndex === undefined) {
-                    // preserving initial order of not selected column
-                    return 0;
-                }
-                return aIndex - bIndex;
-            })
             .map(
                 (column, index: number): SelectableColumn => ({
                     column,
                     selected: visibleColumnKeys.includes(column.key),
-                    active: index === 0
+                    active: index === 0,
+                    order: visibleColumnIndexMap.get(column.key) ?? index
                 })
-            );
+            )
+            .sort((a, b) => a.order - b.order);
 
         // keep count of selected
         this._countSelectedColumns();
@@ -328,12 +322,13 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
             combineLatest([this._showAllItemsSubject, this._searchQuerySubject])
                 .pipe(debounceTime(20))
                 .subscribe(([showAll, searchQuery]) => {
-                    this._filteredColumns = this._selectableColumns
-                        .filter((item) =>
-                            item.column.label.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
-                        )
-                        .filter((item) => showAll || item.selected);
-
+                    this._filteredColumns = this._selectableColumns.filter((item) => {
+                        const matchesSearchQuery = item.column.label
+                            .toLocaleLowerCase()
+                            .includes(searchQuery.toLocaleLowerCase());
+                        const matchesShowAll = showAll || item.selected;
+                        return matchesSearchQuery && matchesShowAll;
+                    });
                     this._onChangeFilteredColumnsList();
 
                     this.cdr.markForCheck();
@@ -366,7 +361,6 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
         this._moveColumnInSelectableList(movedItem, replacedItem);
 
         this._calculateMovementButtonsState();
-
         this._recalculateResetAvailability();
     }
 
