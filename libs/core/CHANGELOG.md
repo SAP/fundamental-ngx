@@ -3,6 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.34...v0.52.2-rc.35) (2024-09-25)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.33...v0.52.2-rc.34) (2024-09-25)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.32...v0.52.2-rc.33) (2024-09-24)
+
+
+### Bug Fixes
+
+* **core:** more customization of aria attributes for multi-input ([#12437](https://github.com/SAP/fundamental-ngx/issues/12437)) ([88d90b7](https://github.com/SAP/fundamental-ngx/commit/88d90b7f797b5935b197c9202d4cc20139074fb9))
+
+
+
+
+
+## [0.52.2-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.31...v0.52.2-rc.32) (2024-09-23)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.30...v0.52.2-rc.31) (2024-09-23)
+
+
+### Features
+
+* **core:** dayPeriod pattern support ([#12354](https://github.com/SAP/fundamental-ngx/issues/12354)) ([c70f83a](https://github.com/SAP/fundamental-ngx/commit/c70f83a7a958d5536aab6313775d916cc3461175))
+
+
+
+
+
 ## [0.52.2-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.29...v0.52.2-rc.30) (2024-09-19)
 
 **Note:** Version bump only for package @fundamental-ngx/core

@@ -3,12 +3,17 @@ import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 
 import { INVALID_DATE_ERROR, LETTERS_UNICODE_RANGE } from '@fundamental-ngx/cdk/utils';
 
+import { FdLanguageKeyIdentifier } from '@fundamental-ngx/i18n';
 import { DatetimeAdapter } from './datetime-adapter';
 import { FdDate } from './fd-date';
 import { range, toIso8601 } from './fd-date.utils';
 
 const AM_DAY_PERIOD_DEFAULT = 'AM';
 const PM_DAY_PERIOD_DEFAULT = 'PM';
+
+type CustomDateTimeFormatOptions = Omit<Intl.DateTimeFormatOptions, 'dayPeriod'> & {
+    dayPeriod?: boolean;
+};
 
 /**
  * DatetimeAdapter implementation based on FdDate.
@@ -17,7 +22,6 @@ const PM_DAY_PERIOD_DEFAULT = 'PM';
  * for formatting and translation purposes.
  *
  */
-
 @Injectable()
 export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     /** Whether to clamp the date between 1 and 9999 to avoid IE and Edge errors. */
@@ -26,9 +30,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     /** @hidden */
     constructor(@Optional() @Inject(LOCALE_ID) localeId: string, platform: Platform) {
         super();
-
         super.setLocale(localeId);
-
         this._fixYearsRangeIssue = platform.TRIDENT || platform.EDGE;
     }
 
@@ -253,7 +255,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     /** Format date object to string */
-    format(date: FdDate, displayFormat: Intl.DateTimeFormatOptions): string {
+    format(date: FdDate, displayFormat: CustomDateTimeFormatOptions): string {
         if (!this.isValid(date)) {
             return INVALID_DATE_ERROR;
         }
@@ -264,12 +266,11 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
             date = this.clone(date);
             date.year = Math.max(1, Math.min(9999, date.year));
         }
-
         displayFormat = { ...displayFormat, timeZone: 'utc' };
 
-        const dateTimeFormatter = new Intl.DateTimeFormat(this.locale, displayFormat);
-        const dateInstance = this._createDateInstanceByFdDate(date);
-        return this._stripDirectionalityCharacters(this._format(dateTimeFormatter, dateInstance));
+        return displayFormat.dayPeriod
+            ? this._formatWithDayPeriod(date, displayFormat)
+            : this._formatWithIntl(date, displayFormat);
     }
 
     /** Add years to a date */
@@ -345,7 +346,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     /** Check if a time format includes a day period */
-    isTimeFormatIncludesDayPeriod(displayFormat: Intl.DateTimeFormatOptions): boolean {
+    isTimeFormatIncludesDayPeriod(displayFormat: CustomDateTimeFormatOptions): boolean {
         if (typeof displayFormat?.hour12 === 'boolean') {
             return displayFormat.hour12;
         }
@@ -367,6 +368,50 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     /** Check if a time format includes seconds */
     isTimeFormatIncludesSeconds(displayFormat: Intl.DateTimeFormatOptions): boolean {
         return typeof displayFormat?.second === 'string';
+    }
+
+    /** Format with custom pattern including day period names */
+    private _formatWithDayPeriod(date: FdDate, displayFormat: CustomDateTimeFormatOptions): string {
+        const formattedTime = this._formatWithIntl(date, { ...displayFormat, dayPeriod: undefined });
+        const dayPeriodName = this._getDayPeriodName(date);
+
+        return this._insertDayPeriod(formattedTime, dayPeriodName, displayFormat);
+    }
+
+    /** Insert day period into the formatted string */
+    private _insertDayPeriod(
+        formattedTime: string,
+        dayPeriodName: FdLanguageKeyIdentifier,
+        displayFormat: CustomDateTimeFormatOptions
+    ): string {
+        if (displayFormat.year || displayFormat.month || displayFormat.day) {
+            return formattedTime
+                .replace(/(\d{1,2}:\d{2})( [AP]M)?/, `$1 ${dayPeriodName}`)
+                .replace(/,\s*(\d{1,2}:\d{2})/, `, at $1 ${dayPeriodName}`);
+        } else {
+            return formattedTime.replace(/(\d{1,2}:\d{2}(:\d{2})?)/, `$1 ${dayPeriodName}`);
+        }
+    }
+
+    /** Get day period name based on the hour */
+    private _getDayPeriodName(date: FdDate): FdLanguageKeyIdentifier {
+        const hour = date.hour;
+        if (hour < 6) {
+            return 'coreTime.nightLabel';
+        } else if (hour < 12) {
+            return 'coreTime.morningLabel';
+        } else if (hour < 18) {
+            return 'coreTime.afternoonLabel';
+        } else {
+            return 'coreTime.eveningLabel';
+        }
+    }
+
+    /** Format date using Intl.DateTimeFormat */
+    private _formatWithIntl(date: FdDate, displayFormat: any): string {
+        const formatter = new Intl.DateTimeFormat(this.locale, displayFormat);
+        const dateInstance = this._createDateInstanceByFdDate(date);
+        return this._stripDirectionalityCharacters(this._format(formatter, dateInstance));
     }
 
     /**

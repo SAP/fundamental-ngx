@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, inject, Input, input, ViewEncapsulation } from '@angular/core';
 import { AsyncOrSyncPipe, Nullable } from '@fundamental-ngx/cdk/utils';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
@@ -7,7 +8,7 @@ import { TabColorAssociations } from '../../interfaces/tab-color-associations.in
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fdp-icon-tab-bar-text-type-tab-item]',
     standalone: true,
-    imports: [AsyncOrSyncPipe],
+    imports: [AsyncOrSyncPipe, NgTemplateOutlet],
     templateUrl: './icon-tab-bar-text-type-tab-item.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

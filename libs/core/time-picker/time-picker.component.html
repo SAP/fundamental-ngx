@@ -25,7 +25,7 @@
                 type="text"
                 class="fd-input"
                 fd-input-group-input
-                [value]="_inputTimeValue"
+                [value]="_inputTimeValue | translateDayPeriod"
                 (focusout)="_timeInputChanged($any($event.currentTarget).value)"
                 (keyup.enter)="_timeInputChanged($any($event.currentTarget).value)"
                 [disabled]="disabled"

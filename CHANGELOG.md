@@ -3,6 +3,61 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.34...v0.52.2-rc.35) (2024-09-25)
+
+
+### Features
+
+* **platform:** icon tab bar dynamic content ([#12428](https://github.com/SAP/fundamental-ngx/issues/12428)) ([18dbc82](https://github.com/SAP/fundamental-ngx/commit/18dbc82b00f6d7f2cb39fb976cb4ce6a4f55bf2f)), closes [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771)
+
+
+
+
+
+## [0.52.2-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.33...v0.52.2-rc.34) (2024-09-25)
+
+
+### Bug Fixes
+
+* **platform:** fdp-table sorting visible columns state get lost ([#12429](https://github.com/SAP/fundamental-ngx/issues/12429)) ([6431533](https://github.com/SAP/fundamental-ngx/commit/6431533c952c85c011ad0ee5723f470fb866dec7)), closes [#12397](https://github.com/SAP/fundamental-ngx/issues/12397) [#12397](https://github.com/SAP/fundamental-ngx/issues/12397) [#12397](https://github.com/SAP/fundamental-ngx/issues/12397) [#12397](https://github.com/SAP/fundamental-ngx/issues/12397)
+
+
+
+
+
+## [0.52.2-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.32...v0.52.2-rc.33) (2024-09-24)
+
+
+### Bug Fixes
+
+* **core:** more customization of aria attributes for multi-input ([#12437](https://github.com/SAP/fundamental-ngx/issues/12437)) ([88d90b7](https://github.com/SAP/fundamental-ngx/commit/88d90b7f797b5935b197c9202d4cc20139074fb9))
+
+
+
+
+
+## [0.52.2-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.31...v0.52.2-rc.32) (2024-09-23)
+
+
+### Bug Fixes
+
+* **cx:** fix cx side bar keyboard navigation ([#12439](https://github.com/SAP/fundamental-ngx/issues/12439)) ([6169818](https://github.com/SAP/fundamental-ngx/commit/6169818a7a7592e9c52232d98667938323358cf6)), closes [#12337](https://github.com/SAP/fundamental-ngx/issues/12337)
+
+
+
+
+
+## [0.52.2-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.30...v0.52.2-rc.31) (2024-09-23)
+
+
+### Features
+
+* **core:** dayPeriod pattern support ([#12354](https://github.com/SAP/fundamental-ngx/issues/12354)) ([c70f83a](https://github.com/SAP/fundamental-ngx/commit/c70f83a7a958d5536aab6313775d916cc3461175))
+
+
+
+
+
 ## [0.52.2-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.29...v0.52.2-rc.30) (2024-09-19)
 
 
