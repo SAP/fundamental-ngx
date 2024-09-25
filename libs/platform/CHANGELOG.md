@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.33...v0.52.2-rc.34) (2024-09-25)
+
+
+### Bug Fixes
+
+* **platform:** fdp-table sorting visible columns state get lost ([#12429](https://github.com/SAP/fundamental-ngx/issues/12429)) ([6431533](https://github.com/SAP/fundamental-ngx/commit/6431533c952c85c011ad0ee5723f470fb866dec7)), closes [#12397](https://github.com/SAP/fundamental-ngx/issues/12397) [#12397](https://github.com/SAP/fundamental-ngx/issues/12397) [#12397](https://github.com/SAP/fundamental-ngx/issues/12397) [#12397](https://github.com/SAP/fundamental-ngx/issues/12397)
+
+
+
+
+
 ## [0.52.2-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.32...v0.52.2-rc.33) (2024-09-24)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
