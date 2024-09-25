@@ -309,6 +309,7 @@ export class IconTabBarComponent implements OnInit, TabList {
             counter: tab.counter(),
             renderer: tab.renderer(),
             id: tab.id(),
+            titleTemplate: tab.titleTemplate(),
             subItems: tab.children().map((c) => this._generateTabConfig(c))
         };
 

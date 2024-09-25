@@ -26,24 +26,28 @@
                 (click)="_selectItem(item)"
                 (keydown)="_keyDownHandler($event, item, idx)"
             >
-                <div class="fd-icon-tab-bar__container">
-                    <span class="fd-icon-tab-bar__icon">
-                        <fd-icon [glyph]="item.icon" [font]="item.iconFont || _defaultFontFamily"></fd-icon>
-                    </span>
-                    @if (item.counter && (!item.label || !showLabel)) {
-                        <span class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
+                @if (item?.titleTemplate) {
+                    <ng-template [ngTemplateOutlet]="item.titleTemplate || null"></ng-template>
+                } @else {
+                    <div class="fd-icon-tab-bar__container">
+                        <span class="fd-icon-tab-bar__icon">
+                            <fd-icon [glyph]="item.icon" [font]="item.iconFont || _defaultFontFamily"></fd-icon>
+                        </span>
+                        @if (item.counter && (!item.label || !showLabel)) {
+                            <span class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
+                        }
+                    </div>
+                    @if (showLabel && item.label) {
+                        <div class="fd-icon-tab-bar__details">
+                            <span class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
+                            <span class="fd-icon-tab-bar__label">{{ item.label }}</span>
+                        </div>
                     }
-                </div>
-                @if (showLabel && item.label) {
-                    <div class="fd-icon-tab-bar__details">
-                        <span class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
-                        <span class="fd-icon-tab-bar__label">{{ item.label }}</span>
-                    </div>
-                }
-                @if (item.color | fdkAsyncOrSync; as itemColor) {
-                    <div class="screenreader-only">
-                        {{ colorAssociations()?.[itemColor] || itemColor }}
-                    </div>
+                    @if (item.color | fdkAsyncOrSync; as itemColor) {
+                        <div class="screenreader-only">
+                            {{ colorAssociations()?.[itemColor] || itemColor }}
+                        </div>
+                    }
                 }
             </a>
             @if (item.closable) {

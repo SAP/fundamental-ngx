@@ -45,15 +45,19 @@
                 (keydown)="_keyDownHandler($event, item, idx + (showTotalTab ? 1 : 0))"
                 role="tab"
             >
-                <div class="fd-icon-tab-bar__container">
-                    <span class="fd-icon-tab-bar__icon">
-                        <fd-icon [glyph]="item.icon"></fd-icon>
-                    </span>
-                    @if (item.counter) {
-                        <span class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
-                    }
-                </div>
-                <div class="fd-icon-tab-bar__label">{{ item.label | fdkAsyncOrSync }}</div>
+                @if (item?.titleTemplate) {
+                    <ng-container [ngTemplateOutlet]="item.titleTemplate || null"></ng-container>
+                } @else {
+                    <div class="fd-icon-tab-bar__container">
+                        <span class="fd-icon-tab-bar__icon">
+                            <fd-icon [glyph]="item.icon"></fd-icon>
+                        </span>
+                        @if (item.counter) {
+                            <span class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
+                        }
+                    </div>
+                    <div class="fd-icon-tab-bar__label">{{ item.label | fdkAsyncOrSync }}</div>
+                }
                 @if (item.color | fdkAsyncOrSync; as itemColor) {
                     <div class="screenreader-only">
                         {{ colorAssociations()?.[itemColor] || itemColor }}
