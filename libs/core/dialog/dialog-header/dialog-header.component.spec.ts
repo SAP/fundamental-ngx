@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ChangeDetectionStrategy, Component, Type, ViewChild } from '@angular/core';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { DialogCloseButtonComponent } from '../dialog-close-button/dialog-close-button.component';
 import { DialogConfig } from '../utils/dialog-config.class';
@@ -56,8 +56,7 @@ describe('DialogHeaderComponent', () => {
             imports: [
                 DialogHeaderComponent,
                 CustomHeaderTestComponent,
-                DefaultHeaderTestComponent,
-                ContentDensityModule
+                DefaultHeaderTestComponent
             ],
             providers: [DialogConfig]
         }).overrideComponent(DialogHeaderComponent, {
@@ -94,6 +93,7 @@ describe('DialogHeaderComponent', () => {
         await wait(fixture);
 
         component.dialogHeaderRef.dialogConfig.mobile = true;
+        component.dialogHeaderRef.dialogConfig.contentDensity = ContentDensityMode.COZY;
 
         await wait(fixture);
         const footerEl = fixture.nativeElement.querySelector('[fd-bar]');

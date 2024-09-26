@@ -1,4 +1,4 @@
-<footer fd-bar class="fd-dialog__footer" barDesign="footer" [fdCozy]="dialogConfig.mobile">
+<footer fd-bar class="fd-dialog__footer" barDesign="footer" [fdContentDensity]="dialogConfig.contentDensity ?? ''">
     <ng-template [ngTemplateOutlet]="footerTemplate ? footerTemplate : defaultTemplate"></ng-template>
 
     <ng-template #defaultTemplate>
