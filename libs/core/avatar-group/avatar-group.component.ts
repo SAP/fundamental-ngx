@@ -17,12 +17,12 @@ import {
 import {
     DynamicPortalComponent,
     FocusableItemDirective,
-    FocusableListDirective,
+    FocusableListDirective, Nullable,
     ResizeObserverDirective,
     RtlService
 } from '@fundamental-ngx/cdk/utils';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { Placement } from '../shared';
+import { Placement } from '@fundamental-ngx/core/shared';
 import { AvatarGroupHostComponent } from './components/avatar-group-host.component';
 import { AvatarGroupOverflowButtonComponent } from './components/avatar-group-overflow-button.component';
 import { DefaultAvatarGroupOverflowBodyComponent } from './components/default-avatar-group-overflow-body/default-avatar-group-overflow-body.component';
@@ -104,6 +104,13 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
      */
     @Input()
     overflowPopoverTitle: string;
+
+    /**
+     * The maximum number of visible avatar items.
+     **/
+    @Input()
+    maxVisibleItems: Nullable<number> = null;
+
 
     /** @hidden */
     @ViewChildren(AvatarGroupItemRendererDirective)

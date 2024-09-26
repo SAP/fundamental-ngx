@@ -73,6 +73,12 @@ export class AvatarGroupHostComponent
     items: QueryList<AvatarGroupItemDirective>;
 
     /**
+     * The maximum number of visible avatar items.
+     **/
+    @Input()
+    maxVisibleItems: Nullable<number> = null;
+
+    /**
      * @hidden
      * The portals to be rendered in the avatar group.
      **/
@@ -166,12 +172,18 @@ export class AvatarGroupHostComponent
                 continue;
             }
             accWidth += item.width;
-            if (accWidth <= containerWidth) {
+            if (accWidth <= containerWidth && (!this.maxVisibleItems || visibleItems.length < this.maxVisibleItems)) {
                 visibleItems.push(item);
             } else if (!item.forceVisibility) {
                 hiddenItems.push(item);
             }
         }
+
+        // Ensure we don't exceed the maxVisibleItems limit
+        if (this.maxVisibleItems && visibleItems.length > this.maxVisibleItems) {
+            hiddenItems.unshift(...visibleItems.splice(this.maxVisibleItems));
+        }
+
         /* take last item from the visibleItems which is not forced to be visible and push it to the hiddenItems
          * This is done to free up the space for the overflow button
          */

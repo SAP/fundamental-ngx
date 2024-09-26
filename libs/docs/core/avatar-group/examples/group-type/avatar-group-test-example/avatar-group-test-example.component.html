@@ -1,4 +1,4 @@
-<fd-avatar-group  [circle]="true" [popoverPlacement]="'bottom'" [size]="'m'" type="group" overflowPopoverTitle="Team members">
+<fd-avatar-group [maxVisibleItems]="3" [circle]="true" [popoverPlacement]="'bottom'" [size]="'m'" type="group" overflowPopoverTitle="Team members">
     @for (person of people; track person) { @if (!person.imageUrl &&
     !person.glyph) {
         <fd-avatar
