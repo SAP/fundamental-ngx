@@ -69,7 +69,6 @@ export class AvatarGroupItemRendererDirective implements OnInit, FocusableItem {
         return this._lastSavedWidth;
     }
 
-
     /**
      * Rendered element's height or it's last saved height.
      **/
