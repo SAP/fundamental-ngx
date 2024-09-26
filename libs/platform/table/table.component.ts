@@ -397,11 +397,16 @@ export class TableComponent<T = any>
     @Input()
     expandOnInit = false;
     /**
-     * Height of the row, required for the virtualScroll,
+     * Minimum height of the row, required for the virtualScroll,
      * default is 44px in cozy, 32px in compact and 24px in condensed (set automatically)
      */
     @Input()
     rowHeight = ROW_HEIGHT.get(ContentDensityMode.COZY)!;
+    /**
+     * Minimum height of the popping column when displayed in pop-in mode. Required when using popping columns and virtual scroll.
+     */
+    @Input()
+    secondaryRowHeight: number | undefined;
     /** Event emitted when the current preset configuration has been changed. */
     /**
      * Whether to load previous pages.
@@ -2006,6 +2011,7 @@ export class TableComponent<T = any>
                     this.rowHeight = ROW_HEIGHT.get(contentDensity) ?? ROW_HEIGHT.get(ContentDensityMode.COZY)!;
                     if (this._virtualScrollDirective?.virtualScroll) {
                         this._virtualScrollDirective.rowHeight = this.rowHeight;
+                        this._virtualScrollDirective.secondaryRowHeight = this.secondaryRowHeight;
                         this._virtualScrollDirective.calculateVirtualScrollRows();
                     }
                 })
