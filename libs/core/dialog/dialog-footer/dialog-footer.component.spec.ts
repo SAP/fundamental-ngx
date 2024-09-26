@@ -5,6 +5,7 @@ import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogButtonClass, DialogFooterComponent } from './dialog-footer.component';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
     template: `
@@ -75,6 +76,7 @@ describe('DialogFooterComponent', () => {
         await wait(fixture);
 
         component.dialogFooterRef.dialogConfig.mobile = true;
+        component.dialogFooterRef.dialogConfig.contentDensity = ContentDensityMode.COZY;
 
         await wait(fixture);
         const footerEl = fixture.nativeElement.querySelector('footer');
