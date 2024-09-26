@@ -8,7 +8,7 @@
             [style.cursor]="visited ? 'pointer' : 'auto'"
             [style.pointer-events]="visited ? 'auto' : 'none'"
             [attr.tabindex]="status === 'current' ? 0 : -1"
-            [attr.aria-roledescription]="ariaRoleDecription"
+            role="navigation"
         >
             <ng-content select="fd-wizard-step-indicator"></ng-content>
             <div class="fd-wizard__label-container" [class.fd-wizard__label-container--optional]="optionalText">
