@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform/icon-tab-bar';
+import { IconTabTitleDirective } from '../../../../../platform/icon-tab-bar/directives/icon-tab-title.directive';
 
 @Component({
     selector: 'fdp-icon-tab-bar-tabs-content-example',
     standalone: true,
-    imports: [FDP_ICON_TAB_BAR],
+    imports: [FDP_ICON_TAB_BAR, IconTabTitleDirective],
     styles: `
     .tab-container-example {
     height: 100px;

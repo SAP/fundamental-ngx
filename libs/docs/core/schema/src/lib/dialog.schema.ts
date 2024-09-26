@@ -56,6 +56,10 @@ export const dialogSchema: any = {
                 },
                 maxWidth: {
                     type: 'string'
+                },
+                contentDensity: {
+                    type: 'string',
+                    enum: ['cozy', 'condensed', 'compact']
                 }
             }
         }

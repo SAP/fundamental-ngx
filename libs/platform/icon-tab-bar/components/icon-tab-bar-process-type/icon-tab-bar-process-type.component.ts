@@ -1,6 +1,7 @@
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { take } from 'rxjs/operators';
 
+import { NgTemplateOutlet } from '@angular/common';
 import { AsyncOrSyncPipe, OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -27,7 +28,8 @@ import { IconTabBarPopoverComponent } from '../popovers/icon-tab-bar-popover/ico
         OverflowListItemDirective,
         IconComponent,
         ButtonComponent,
-        AsyncOrSyncPipe
+        AsyncOrSyncPipe,
+        NgTemplateOutlet
     ]
 })
 export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
