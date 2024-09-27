@@ -50,7 +50,7 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     ariaLabel: Nullable<string>;
 
     /**
-     * The aria-label for the step container.
+     * @deprecated
      */
     @Input()
     ariaRoleDecription = 'Navigation';
