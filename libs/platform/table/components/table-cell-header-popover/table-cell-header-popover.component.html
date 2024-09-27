@@ -1,5 +1,6 @@
 @if (!popoverTemplate) {
     <fd-popover
+        [placement]="mapColumnAlignToPlacement(column?.align)"
         [disabled]="disabled"
         [noArrow]="true"
         fd-table-popover
@@ -99,6 +100,7 @@
                     fd-form-control
                     [id]="'fdp-table-column-filtering-' + column.name"
                     (keydown.enter)="_setColumnHeaderFilterBy(column.key, $any($event.target)?.value)"
+                    (keydown)="$event.stopPropagation()"
                 />
             </div>
         </div>

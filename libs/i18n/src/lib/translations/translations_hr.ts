@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Odabirima navigirajte strelicama Gore i Dolje.',
         escapeNavigateTokens:
             'Za izlaz iz polja unosa pritisnite gumb Escape i upotrijebite gumbe sa strelicama Lijevo i Desno za navigiranje kroz odabrane mogućnosti.',
-        tokensCountText: 'Sadrži ukupno tokena: {length}'
+        tokensCountText: 'Sadržava ukupno tokena: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Glavna navigacija',
@@ -329,7 +329,8 @@ export default {
         inputGlyphAriaLabel: 'Odaberi mogućnosti',
         inputIconTitle: 'Odaberi mogućnosti',
         mobileShowAllItemsButton: 'Prikaži sve stavke',
-        mobileShowSelectedItemsButton: 'Prikaži odabrane stavke'
+        mobileShowSelectedItemsButton: 'Prikaži odabrane stavke',
+        invalidEntryError: 'Nevaljan unos'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'Broj znakova više od ograničenja: 1',
@@ -483,6 +484,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Stupci',
         toolbarActionExpandAllButtonTitle: 'Proširi sve',
         toolbarActionCollapseAllButtonTitle: 'Sažmi sve',
+        filterDialogBackToColumns: 'Navigiraj natrag',
         filterDialogNotFilteredLabel: '(Nije filtrirano)',
         filterDialogFilterByLabel: 'Filtriraj po: {filterLabel}',
         filterDialogFilterTitle: 'Filtar',

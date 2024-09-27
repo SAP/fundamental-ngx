@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'נווט בבחירות עם החצים למעלה ולמטה.',
         escapeNavigateTokens:
             'הקש על Escape כדי לצאת משדה הקלט והשתמש במקשי החצים שמאלה וימינה כדי לנווט בין האפשרויות שנבחרו.',
-        tokensCountText: 'מכיל {length, plural, =0 {ללא אסימון} =1 {אסימון אחד} other {# אסימונים} }.'
+        tokensCountText: 'מכיל סה"כ tokens: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'ניווט ראשי',
@@ -328,7 +328,8 @@ export default {
         inputGlyphAriaLabel: 'בחר אפשרויות',
         inputIconTitle: 'בחר אפשרויות',
         mobileShowAllItemsButton: 'הצג את כל הפריטים',
-        mobileShowSelectedItemsButton: 'הצג פריטים נבחרים'
+        mobileShowSelectedItemsButton: 'הצג פריטים נבחרים',
+        invalidEntryError: 'הזנה לא חוקית'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'תו אחד יותר מהמגבלה',
@@ -481,6 +482,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'עמודות',
         toolbarActionExpandAllButtonTitle: 'הרחב הכול',
         toolbarActionCollapseAllButtonTitle: 'צמצם הכול',
+        filterDialogBackToColumns: 'נווט חזרה',
         filterDialogNotFilteredLabel: '(לא מסונן)',
         filterDialogFilterByLabel: 'סנן לפי: {filterLabel}',
         filterDialogFilterTitle: 'מסנן',

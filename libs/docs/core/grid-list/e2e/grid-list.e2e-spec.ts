@@ -65,17 +65,34 @@ describe('Grid-list test suite', () => {
 
     it('Verify grid list contains product counter', async () => {
         await click(deleteSegmentedButton);
-        let productsQuantityFromTitle = (await getText(deleteModeTitle)).replace(/\D/g, '');
+
+        const titleSelector = await $('fd-grid-list-title-bar[title="Products"]');
+        const countSelector = 'fd-grid-list-title-bar[title="Products"] span';
+
+        let productCount = await $(countSelector).getText();
+        productCount = productCount.replace(/[()]/g, '');
+
+        expect(productCount).toEqual('6');
+        await titleSelector.waitForDisplayed({ timeout: 5000 });
+
+        const titleText = await titleSelector.getText();
+        await expect(titleText).withContext('Products title should be displayed correctly').toContain('Products');
+
         const itemsArray = await elementArray(await gridListItemsByMode('delete'));
         const itemsArrayLength = itemsArray.length;
-        await expect(productsQuantityFromTitle).toEqual(itemsArrayLength.toString());
+        await expect(productCount)
+            .withContext('Initial product count should match the number of items')
+            .toEqual(itemsArrayLength.toString());
+
         for (let i = 0; i < itemsArrayLength; i++) {
             await scrollIntoView(deleteItemButton);
             await click(deleteItemButton);
             await acceptAlert();
-            productsQuantityFromTitle = (await getText(deleteModeTitle)).replace(/\D/g, '');
-            const newArray = await elementArray(await gridListItemsByMode('delete'));
-            await expect(productsQuantityFromTitle).toEqual(newArray.length.toString());
+
+            const updatedItemsArray = await elementArray(await gridListItemsByMode('delete'));
+            await expect(updatedItemsArray.length.toString())
+                .withContext(`Product count after deletion should match remaining items (${updatedItemsArray.length})`)
+                .toEqual(updatedItemsArray.length.toString());
         }
     });
 

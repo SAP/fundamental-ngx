@@ -227,7 +227,7 @@ describe('Datetime picker suite', () => {
             if (!(await getElementClass(datePickerGroup, i)).includes('is-disabled')) {
                 await click(datePickerButton, i);
                 await click(selectMonthButton);
-                await waitForElDisplayed(await filterCalendarValue('month'));
+                await waitForElDisplayed(await filterCalendarValue('month'), 1);
                 await click(buttonFirstMonth);
                 await waitForElDisplayed(await filterCalendarValue('day'));
                 await click(datePickerButton, i);
@@ -294,11 +294,11 @@ describe('Datetime picker suite', () => {
             return;
         }
         await scrollIntoView(datePickerButton, 6);
-        await click(datePickerButton, 6);
+        await click(datePickerButton, 1);
         await clickDayInCalendarButtonByValue(currentDay);
         await selectHoursMinutesAndPeriod();
         await click(okButton);
-        await expect(await getValue(datePickerInput, 6)).toEqual(date2);
+        await expect(await getValue(datePickerInput, 1)).toEqual(date2);
     });
 
     it('verify date time picker i18n example', async () => {

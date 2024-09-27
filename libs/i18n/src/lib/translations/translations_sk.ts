@@ -329,7 +329,8 @@ export default {
         inputGlyphAriaLabel: 'Výber - možnosti',
         inputIconTitle: 'Výber - možnosti',
         mobileShowAllItemsButton: 'Zobraziť všetky položky',
-        mobileShowSelectedItemsButton: 'Zobraziť vybrané položky'
+        mobileShowSelectedItemsButton: 'Zobraziť vybrané položky',
+        invalidEntryError: 'Neplatné zadanie'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'Počet znakov nad limit',
@@ -483,6 +484,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Stĺpce',
         toolbarActionExpandAllButtonTitle: 'Rozbaliť všetko',
         toolbarActionCollapseAllButtonTitle: 'Zbaliť všetko',
+        filterDialogBackToColumns: 'Prejsť späť',
         filterDialogNotFilteredLabel: '(nefiltrované)',
         filterDialogFilterByLabel: 'Filtrovať podľa: {filterLabel}',
         filterDialogFilterTitle: 'Filtrovať',

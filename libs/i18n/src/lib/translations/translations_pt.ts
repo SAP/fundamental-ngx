@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Navegue nas seleções com as setas para cima e para baixo.',
         escapeNavigateTokens:
             'Pressione escape para sair do campo de entrada e use as teclas para a esquerda e para a direita para navegar pelas opções selecionadas.',
-        tokensCountText: 'Contém {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Contém total de tokens: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Navegação principal',
@@ -329,7 +329,8 @@ export default {
         inputGlyphAriaLabel: 'Selecionar opções',
         inputIconTitle: 'Selecionar opções',
         mobileShowAllItemsButton: 'Mostrar todos os itens',
-        mobileShowSelectedItemsButton: 'Mostrar itens selecionados'
+        mobileShowSelectedItemsButton: 'Mostrar itens selecionados',
+        invalidEntryError: 'Entrada inválida'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 caractere acima do limite',
@@ -483,6 +484,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Colunas',
         toolbarActionExpandAllButtonTitle: 'Expandir tudo',
         toolbarActionCollapseAllButtonTitle: 'Recolher tudo',
+        filterDialogBackToColumns: 'Voltar',
         filterDialogNotFilteredLabel: '(Não filtrado)',
         filterDialogFilterByLabel: 'Filtrar por: {filterLabel}',
         filterDialogFilterTitle: 'Filtrar',

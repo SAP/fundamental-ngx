@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Navigera urval med upp- och nedpilarna.',
         escapeNavigateTokens:
             'Tryck på Esc för att stänga inmatningsfältet och använd vänster- och högerpilarna för att navigera genom valda alternativ.',
-        tokensCountText: 'Innehåller {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Innehåller totalt antal token: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Huvudnavigering',
@@ -329,7 +329,8 @@ export default {
         inputGlyphAriaLabel: 'Välj alternativ',
         inputIconTitle: 'Välj alternativ',
         mobileShowAllItemsButton: 'Visa alla artiklar',
-        mobileShowSelectedItemsButton: 'Visa valda artiklar'
+        mobileShowSelectedItemsButton: 'Visa valda artiklar',
+        invalidEntryError: 'Ogiltig inmatning'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 tecken över gränsen',
@@ -483,6 +484,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Kolumner',
         toolbarActionExpandAllButtonTitle: 'Expandera alla',
         toolbarActionCollapseAllButtonTitle: 'Komprimera alla',
+        filterDialogBackToColumns: 'Gå tillbaka',
         filterDialogNotFilteredLabel: '(Ej filtrerat)',
         filterDialogFilterByLabel: 'Filtrera efter: {filterLabel}',
         filterDialogFilterTitle: 'Filtrera',

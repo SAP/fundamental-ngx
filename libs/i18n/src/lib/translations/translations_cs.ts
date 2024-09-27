@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Výběry procházejte šipkami nahoru a dolů.',
         escapeNavigateTokens:
             'Klávesou escape (Esc) opustíte vstupní pole. Vybrané možnosti procházejte šipkami nahoru a dolů.',
-        tokensCountText: 'Obsahuje: {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Celkový počet obsažených tokenů: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Hlavní navigace',
@@ -329,7 +329,8 @@ export default {
         inputGlyphAriaLabel: 'Vybrat možnosti',
         inputIconTitle: 'Vybrat možnosti',
         mobileShowAllItemsButton: 'Zobrazit všechny položky',
-        mobileShowSelectedItemsButton: 'Zobrazit vybrané položky'
+        mobileShowSelectedItemsButton: 'Zobrazit vybrané položky',
+        invalidEntryError: 'Neplatné zadání'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 znak nad limit',
@@ -483,6 +484,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Sloupce',
         toolbarActionExpandAllButtonTitle: 'Rozbalit vše',
         toolbarActionCollapseAllButtonTitle: 'Sbalit vše',
+        filterDialogBackToColumns: 'Přejít zpět',
         filterDialogNotFilteredLabel: '(Nefiltrováno)',
         filterDialogFilterByLabel: 'Filtrovat podle: {filterLabel}',
         filterDialogFilterTitle: 'Filtr',

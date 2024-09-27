@@ -330,7 +330,8 @@ export default {
         inputGlyphAriaLabel: 'Zgjidhni Opsionet',
         inputIconTitle: 'Zgjidhni Opsionet',
         mobileShowAllItemsButton: 'Shfaq të gjithë artikujt',
-        mobileShowSelectedItemsButton: 'Shfaq artikujt e zgjedhur'
+        mobileShowSelectedItemsButton: 'Shfaq artikujt e zgjedhur',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 karakter mbi limitin',

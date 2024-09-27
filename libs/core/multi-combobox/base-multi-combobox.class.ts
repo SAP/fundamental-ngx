@@ -46,7 +46,7 @@ export abstract class BaseMultiCombobox<T = any> {
     abstract secondaryKey: string;
     abstract showSecondaryText: boolean;
     abstract lookupKey: string;
-    abstract invalidEntryMessage: string;
+    abstract invalidEntryMessage: Nullable<string>;
     abstract invalidEntryDisplayTime: number;
     abstract limitless: boolean;
     abstract isGroup: boolean;
@@ -537,13 +537,18 @@ export abstract class BaseMultiCombobox<T = any> {
 
     /** @hidden */
     protected _processingEmptyData(): void {
-        this.inputText = this._previousInputText;
-
-        this._setInvalidEntry();
-
-        if (this._timerSub$) {
-            this._timerSub$.unsubscribe();
+        if (this._cva.disabled) {
+            return;
         }
+
+        if (this._cva.controlInvalid && this._cva.ngControl?.hasError) {
+            this._setInvalidEntry();
+
+            if (this._timerSub$) {
+                this._timerSub$.unsubscribe();
+            }
+        }
+        this.inputText = this._previousInputText;
 
         this._timerSub$ = timer(this.invalidEntryDisplayTime).subscribe(() => this._unsetInvalidEntry());
 

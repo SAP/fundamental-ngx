@@ -399,7 +399,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnChanges
 
         this._calendarService.onKeySelect
             .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe((index) => this.selectYear(this._getYearsList()[index]));
+            .subscribe(({ index }) => this.selectYear(this._getYearsList()[index]));
 
         this._calendarService.onListStartApproach.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
             this.loadPreviousYearsList();

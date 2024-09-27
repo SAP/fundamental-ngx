@@ -1,4 +1,4 @@
-import { SlicePipe } from '@angular/common';
+import { NgTemplateOutlet, SlicePipe } from '@angular/common';
 import { Component, ElementRef, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { AsyncOrSyncPipe, OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -25,7 +25,8 @@ import { IconTabBarPopoverComponent } from '../popovers/icon-tab-bar-popover/ico
         IconTabBarPopoverComponent,
         SlicePipe,
         ButtonComponent,
-        AsyncOrSyncPipe
+        AsyncOrSyncPipe,
+        NgTemplateOutlet
     ]
 })
 export class IconTabBarFilterTypeComponent extends ClosableIconTabBar {

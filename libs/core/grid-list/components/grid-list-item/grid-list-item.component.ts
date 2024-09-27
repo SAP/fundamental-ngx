@@ -1,4 +1,4 @@
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { ENTER, ESCAPE, F2, F7, MAC_ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -14,11 +14,12 @@ import {
     Renderer2,
     ViewChild,
     ViewEncapsulation,
-    booleanAttribute
+    booleanAttribute,
+    signal
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Nullable, TabbableElementService } from '@fundamental-ngx/cdk/utils';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -35,7 +36,11 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { GridListItemBodyDirective } from '../../directives/grid-list-item-body.directive';
 import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';
-import { GridListSelectionActions, GridListSelectionMode } from '../../models/grid-list-selection.models';
+import {
+    GridListSelectionActions,
+    GridListSelectionMode,
+    GridListSelectionModeEnum
+} from '../../models/grid-list-selection.models';
 import { GridListItemFooterBarComponent } from '../grid-list-item-footer-bar/grid-list-item-footer-bar.component';
 import { GridListItemToolbarComponent } from '../grid-list-item-toolbar/grid-list-item-toolbar.component';
 import { GridListTitleBarSpacerComponent } from '../grid-list-title-bar-spacer/grid-list-title-bar-spacer.component';
@@ -144,6 +149,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     set type(value: Nullable<GridListItemType>) {
         this._type = value ?? 'inactive';
     }
+
     get type(): GridListItemType {
         return this._type;
     }
@@ -263,12 +269,13 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     set selectionMode(mode: GridListSelectionMode | undefined) {
         this._selectionMode = mode;
 
-        if (mode !== 'delete' && mode !== 'none' && !this.value) {
+        if (mode !== GridListSelectionModeEnum.DELETE && mode !== GridListSelectionModeEnum.NONE && !this.value) {
             throw new Error('Grid List Item must have [value] attribute.');
         }
 
         if (this.selected && this.value && this._index != null) {
-            const action = this.selectionMode !== 'multiSelect' ? null : GridListSelectionActions.ADD;
+            const action =
+                this.selectionMode !== GridListSelectionModeEnum.MULTI_SELECT ? null : GridListSelectionActions.ADD;
 
             this._gridList.setSelectedItem(this.value, this._index, action);
         }
@@ -279,8 +286,12 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     get selectionMode(): GridListSelectionMode | undefined {
         return this._selectionMode;
     }
+
     /** @hidden */
     _index?: number;
+
+    /** tabIndex of the element */
+    tabIndex = signal(-1);
 
     /** @hidden */
     private _type: GridListItemType = 'inactive';
@@ -295,12 +306,16 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     private readonly subscription = new Subscription();
 
     /** @hidden */
+    private _innerElementFocused = signal<boolean>(false);
+
+    /** @hidden */
     constructor(
         private readonly _cd: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
         private readonly _render: Renderer2,
         private readonly _gridList: GridList<T>,
-        readonly _contentDensityObserver: ContentDensityObserver
+        readonly _contentDensityObserver: ContentDensityObserver,
+        private readonly _tabbableElementService: TabbableElementService
     ) {
         const selectedItemsSub = this._gridList._selectedItems$.subscribe((items) => {
             this._selectedItem = items.selection.find((item) => item === this.value);
@@ -361,7 +376,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
             return;
         }
         const action =
-            this.selectionMode !== 'multiSelect'
+            this.selectionMode !== GridListSelectionModeEnum.MULTI_SELECT
                 ? null
                 : value || value === 0
                   ? GridListSelectionActions.ADD
@@ -422,24 +437,49 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
 
         this.press.emit(this._outputEventValue);
     }
-
     /** @hidden */
     _onKeyDown(event: KeyboardEvent): void {
+        const activeElement = document.activeElement as HTMLElement;
+        const isFocused = activeElement === this._gridListItem.nativeElement;
+        const shouldFocusChild = KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER, F2, F7]) && !event.shiftKey && isFocused;
+        if (shouldFocusChild) {
+            event.stopPropagation();
+            const interactiveElements = this._gridListItem.nativeElement.querySelectorAll(
+                'a, button, input, select, textarea'
+            );
+
+            const firstInteractiveElement = interactiveElements[0] as HTMLElement;
+            firstInteractiveElement.focus();
+            interactiveElements.forEach((element) => {
+                element.setAttribute('tabindex', '0');
+            });
+            this._innerElementFocused.set(true);
+            return;
+        } else if (this._innerElementFocused() && KeyUtil.isKeyCode(event, [F2, F7, ESCAPE])) {
+            event.stopPropagation();
+            this._gridListItem.nativeElement.focus();
+            this._innerElementFocused.set(false);
+            return;
+        }
         const target = event.target as HTMLDivElement;
 
         const isSelectionKeyDown = KeyUtil.isKeyCode(event, [ENTER, SPACE]);
 
-        if (isSelectionKeyDown && this.selectionMode === 'none') {
+        if (isSelectionKeyDown && this.selectionMode === GridListSelectionModeEnum.NONE) {
             this.press.emit(this._outputEventValue);
         }
 
-        if (!isSelectionKeyDown || this.selectionMode === 'none' || !target.classList.contains('fd-grid-list__item')) {
+        if (
+            !isSelectionKeyDown ||
+            this.selectionMode === GridListSelectionModeEnum.NONE ||
+            !target.classList.contains('fd-grid-list__item')
+        ) {
             return;
         }
 
         this._preventDefault(event);
 
-        if (this.selectionMode === 'multiSelect') {
+        if (this.selectionMode === GridListSelectionModeEnum.MULTI_SELECT) {
             this._selectionItem(!this._selectedItem);
 
             return;

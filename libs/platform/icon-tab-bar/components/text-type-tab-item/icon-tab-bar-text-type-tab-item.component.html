@@ -1,19 +1,23 @@
-@if (layoutMode === 'row') {
-    <span class="fd-icon-tab-bar__tag">
-        {{ item?.label | fdkAsyncOrSync }}
-        @if (item?.counter | fdkAsyncOrSync; as itemCounter) {
-            ({{ itemCounter }})
-        }
-    </span>
+@if (item?.titleTemplate) {
+    <ng-template [ngTemplateOutlet]="item?.titleTemplate || null"></ng-template>
 } @else {
-    <span class="fd-icon-tab-bar__counter">{{ item?.counter }}</span>
-    <span class="fd-icon-tab-bar__tag">{{ item?.label | fdkAsyncOrSync }}</span>
-}
-@if (item?.badge) {
-    <span class="fd-icon-tab-bar__badge"></span>
-}
-@if (item?.color | fdkAsyncOrSync; as itemColor) {
-    <div class="screenreader-only">
-        {{ colorAssociations()?.[itemColor] || itemColor }}
-    </div>
+    @if (layoutMode === 'row') {
+        <span class="fd-icon-tab-bar__tag">
+            {{ item?.label | fdkAsyncOrSync }}
+            @if (item?.counter | fdkAsyncOrSync; as itemCounter) {
+                ({{ itemCounter }})
+            }
+        </span>
+    } @else {
+        <span class="fd-icon-tab-bar__counter">{{ item?.counter }}</span>
+        <span class="fd-icon-tab-bar__tag">{{ item?.label | fdkAsyncOrSync }}</span>
+    }
+    @if (item?.badge) {
+        <span class="fd-icon-tab-bar__badge"></span>
+    }
+    @if (item?.color | fdkAsyncOrSync; as itemColor) {
+        <div class="screenreader-only">
+            {{ colorAssociations()?.[itemColor] || itemColor }}
+        </div>
+    }
 }

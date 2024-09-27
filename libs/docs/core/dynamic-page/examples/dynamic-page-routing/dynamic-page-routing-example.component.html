@@ -68,13 +68,10 @@
                     </fd-toolbar>
                 </fd-dynamic-page-layout-actions>
             </fd-dynamic-page-header>
-            <fd-dynamic-page-subheader [collapsible]="true" [pinnable]="true" [collapsed]="false">
-                <!-- collapsible header content goes here -->
-                <span
-                    >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam possimus corrupti architecto
-                    perspiciatis, delectus necessitatibus incidunt numquam asperiores tenetur iure. Cum consequuntur
-                    impedit repellendus esse, facere autem optio consequatur nobis?</span
-                >
+            <fd-dynamic-page-subheader [collapsible]="false" [pinnable]="false" [collapsed]="false">
+                <fd-message-strip type="success" [dismissible]="true">
+                    A dismissible success message strip.
+                </fd-message-strip>
             </fd-dynamic-page-subheader>
             <fdp-icon-tab-bar
                 [tabsConfig]="tabsConfig"

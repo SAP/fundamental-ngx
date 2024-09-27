@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Period',
         decreasePeriodLabel: 'Decrease period',
         navigationInstruction:
-            'To move between items in this list, press top arrow or bottom arrow. To switch between lists press left arrow or right arrow.'
+            'To move between items in this list, press top arrow or bottom arrow. To switch between lists press left arrow or right arrow.',
+        nightLabel: 'night',
+        morningLabel: 'morning',
+        afternoonLabel: 'afternoon',
+        eveningLabel: 'evening'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Time picker input',
@@ -328,7 +332,8 @@ export default {
         inputGlyphAriaLabel: 'Select Options',
         inputIconTitle: 'Select Options',
         mobileShowAllItemsButton: 'Show all items',
-        mobileShowSelectedItemsButton: 'Show selected items'
+        mobileShowSelectedItemsButton: 'Show selected items',
+        invalidEntryError: 'Invalid Entry'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 character over the limit',

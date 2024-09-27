@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: '위쪽 및 아래쪽 화살표를 사용하여 선택항목을 탐색합니다.',
         escapeNavigateTokens:
             '입력 필드를 종료하려면 Esc 키를 누르고 왼쪽 및 오른쪽 화살표 키를 사용하여 선택한 옵션을 탐색합니다.',
-        tokensCountText: '{length, plural, =0 {0개의 토큰} =1 {1개의 토큰} other {#개의 토큰} } 포함.'
+        tokensCountText: '총 토큰 수 포함: {length}.'
     },
     coreNavigation: {
         mainNavigation: '기본 탐색',
@@ -328,7 +328,8 @@ export default {
         inputGlyphAriaLabel: '옵션 선택',
         inputIconTitle: '옵션 선택',
         mobileShowAllItemsButton: '모든 항목 표시',
-        mobileShowSelectedItemsButton: '선택한 항목 표시'
+        mobileShowSelectedItemsButton: '선택한 항목 표시',
+        invalidEntryError: '잘못된 엔트리'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '제한 1자 초과',
@@ -481,6 +482,7 @@ export default {
         toolbarActionColumnsButtonTitle: '열',
         toolbarActionExpandAllButtonTitle: '모두 펼치기',
         toolbarActionCollapseAllButtonTitle: '모두 접기',
+        filterDialogBackToColumns: '뒤로 이동',
         filterDialogNotFilteredLabel: '(필터링 안 함)',
         filterDialogFilterByLabel: '필터링 기준: {filterLabel}',
         filterDialogFilterTitle: '필터',

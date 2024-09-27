@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: '上下の矢印で選択内容をナビゲートします。',
         escapeNavigateTokens:
             'Escape キーを押して入力フィールドを終了し、左右の矢印キーを使用して選択済みオプションをナビゲートします。',
-        tokensCountText: '{length, plural, =0 {no token} =1 {1 token} other {# tokens} } が含まれています。'
+        tokensCountText: '含まれるトークンの合計: {length}'
     },
     coreNavigation: {
         mainNavigation: 'メインナビゲーション',
@@ -329,7 +329,8 @@ export default {
         inputGlyphAriaLabel: 'オプションを選択',
         inputIconTitle: 'オプションを選択',
         mobileShowAllItemsButton: 'すべての項目を表示',
-        mobileShowSelectedItemsButton: '選択した項目を表示'
+        mobileShowSelectedItemsButton: '選択した項目を表示',
+        invalidEntryError: 'エントリが無効です。'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '上限を1文字超えています。',
@@ -482,6 +483,7 @@ export default {
         toolbarActionColumnsButtonTitle: '列',
         toolbarActionExpandAllButtonTitle: 'すべて展開',
         toolbarActionCollapseAllButtonTitle: 'すべて圧縮',
+        filterDialogBackToColumns: '戻る',
         filterDialogNotFilteredLabel: '(フィルタなし)',
         filterDialogFilterByLabel: 'フィルタ基準: {filterLabel}',
         filterDialogFilterTitle: 'フィルタ',

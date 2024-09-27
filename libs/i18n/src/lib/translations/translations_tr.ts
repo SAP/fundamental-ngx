@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Aşağı ve yukarı okları kullanarak seçimler arasında gezinin.',
         escapeNavigateTokens:
             'Giriş alanından çıkmak için escape tuşuna basın ve belirlenen seçenekler arasında gezinmek için sol ve sağ ok tuşlarını kullanın.',
-        tokensCountText: '{length, plural, =0 {0 belirteç} =1 {1 belirteç} other {# belirteç} } içerir.'
+        tokensCountText: 'Toplam belirteç sayısını içerir: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Ana Gezinme Düzeni',
@@ -330,7 +330,8 @@ export default {
         inputGlyphAriaLabel: 'Seçenekleri Belirle',
         inputIconTitle: 'Seçenekleri Belirle',
         mobileShowAllItemsButton: 'Tüm öğeleri göster',
-        mobileShowSelectedItemsButton: 'Seçilen öğeleri göster'
+        mobileShowSelectedItemsButton: 'Seçilen öğeleri göster',
+        invalidEntryError: 'Geçersiz Giriş'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'Limitin 1 karakter üzerinde',
@@ -484,6 +485,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Sütunlar',
         toolbarActionExpandAllButtonTitle: 'Tümünü genişlet',
         toolbarActionCollapseAllButtonTitle: 'Tümünü daralt',
+        filterDialogBackToColumns: 'Geri git',
         filterDialogNotFilteredLabel: '(Filtrelenmemiş)',
         filterDialogFilterByLabel: 'Filtreleme ölçütü: {filterLabel}',
         filterDialogFilterTitle: 'Filtrele',

@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'A le és a fel nyíllal navigálhat a kiválasztott elemek között.',
         escapeNavigateTokens:
             'Az Esc billentyű lenyomásával léphet ki a beviteli mezőből, a jobb és a bal nyílbillentyűt lenyomva navigálhat a kiválasztott lehetőségek között.',
-        tokensCountText: '{length, plural, =0 {no token} =1 {1 token} other {# tokens} } tokent tartalmaz.'
+        tokensCountText: 'Összesen {length} tokent tartalmaz.'
     },
     coreNavigation: {
         mainNavigation: 'Fő navigáció',
@@ -329,7 +329,8 @@ export default {
         inputGlyphAriaLabel: 'Kiválasztási beállítások',
         inputIconTitle: 'Kiválasztási beállítások',
         mobileShowAllItemsButton: 'Minden elem megjelenítése',
-        mobileShowSelectedItemsButton: 'A kiválasztott elemek megjelenítése'
+        mobileShowSelectedItemsButton: 'A kiválasztott elemek megjelenítése',
+        invalidEntryError: 'Érvénytelen bejegyzés'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 karakterrel több a megengedettnél',
@@ -483,6 +484,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Oszlopok',
         toolbarActionExpandAllButtonTitle: 'Összes kibontása',
         toolbarActionCollapseAllButtonTitle: 'Összes visszazárása',
+        filterDialogBackToColumns: 'Visszalépés',
         filterDialogNotFilteredLabel: '(Nincs szűrve)',
         filterDialogFilterByLabel: 'Szűrés alapja: {filterLabel}',
         filterDialogFilterTitle: 'Szűrő',

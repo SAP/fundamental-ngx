@@ -78,14 +78,14 @@ export default {
         navigateSelectionsWithArrows: 'Navigoi valinnoissa ylä- ja alanuolilla.',
         escapeNavigateTokens:
             'Voit poistua syöttökentästä Escape-näppäimellä ja navigoida valituissa vaihtoehdoissa käyttämällä vasenta ja oikeaa nuolinäppäintä.',
-        tokensCountText: 'Sisältää {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Sisältää tunnuksia yhteensä: {length}'
     },
     coreNavigation: {
         mainNavigation: 'Päänavigointi',
         navigationPath: 'Navigointipolku'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Puun kohde {itemDetails}, {index} of {total}{selectedDescription}'
+        linkItemAriaLabel: 'Puun kohde {itemDetails}, {index} / {total}{selectedDescription}'
     },
     coreOverflowLayout: {
         moreItemsButton: '{count} lisää'
@@ -329,7 +329,8 @@ export default {
         inputGlyphAriaLabel: 'Valitse vaihtoehdot',
         inputIconTitle: 'Valitse vaihtoehdot',
         mobileShowAllItemsButton: 'Näytä kaikki kohteet',
-        mobileShowSelectedItemsButton: 'Näytä valitut kohteet'
+        mobileShowSelectedItemsButton: 'Näytä valitut kohteet',
+        invalidEntryError: 'Virheellinen merkintä'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 merkki yli rajan',
@@ -483,6 +484,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Sarakkeet',
         toolbarActionExpandAllButtonTitle: 'Laajenna kaikki',
         toolbarActionCollapseAllButtonTitle: 'Tiivistä kaikki',
+        filterDialogBackToColumns: 'Navigoi takaisin',
         filterDialogNotFilteredLabel: '(Ei suodatettu)',
         filterDialogFilterByLabel: 'Suodatusperuste: {filterLabel}',
         filterDialogFilterTitle: 'Suodatin',

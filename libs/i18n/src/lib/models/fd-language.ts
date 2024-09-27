@@ -462,6 +462,7 @@ export interface FdLanguage {
         inputIconTitle: FdLanguageKey;
         mobileShowAllItemsButton: FdLanguageKey;
         mobileShowSelectedItemsButton: FdLanguageKey;
+        invalidEntryError: FdLanguageKey;
     };
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: FdLanguageKey;

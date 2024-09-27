@@ -10,6 +10,14 @@
                     <td
                         class="fd-calendar__my-item"
                         role="gridcell"
+                        [class.fd-calendar__item--selected]="
+                            monthCell.selectedFirst || monthCell.selectedLast || monthCell.selected
+                        "
+                        [class.fd-calendar__item--range]="
+                            (monthCell.selectedRange || monthCell.hoverRange) &&
+                            !monthCell.selectedFirst &&
+                            !monthCell.selectedLast
+                        "
                         [class.fd-calendar__my-item--current]="monthCell.current"
                         [class.is-active]="monthCell.selected"
                         [attr.tabIndex]="monthCell.tabIndex"
@@ -18,6 +26,7 @@
                         [attr.aria-disabled]="monthCell.disabled"
                         [attr.data-fd-calendar-month]="monthCell.month"
                         (keydown)="_onKeydownMonthHandler($event, monthCell.index)"
+                        (mouseenter)="_handleRangeHover(monthCell)"
                         (click)="selectMonth(monthCell, $event)"
                     >
                         <button

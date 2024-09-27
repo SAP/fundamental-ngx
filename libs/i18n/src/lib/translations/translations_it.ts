@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Navigare tra le selezioni con le frecce su e giù',
         escapeNavigateTokens:
             'Premere Esc per chiudere il campo di immissione e utilizzare le frecce destra e sinistra per navigare tra le opzioni selezionate.',
-        tokensCountText: 'Contiene {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Contiene token totali: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Navigazione principale',
@@ -330,7 +330,8 @@ export default {
         inputGlyphAriaLabel: 'Seleziona opzioni',
         inputIconTitle: 'Seleziona opzioni',
         mobileShowAllItemsButton: 'Mostra tutte le voci',
-        mobileShowSelectedItemsButton: 'Mostra le voci selezionate'
+        mobileShowSelectedItemsButton: 'Mostra le voci selezionate',
+        invalidEntryError: 'Immissione non valida'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 carattere oltre il limite',
@@ -484,6 +485,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Colonne',
         toolbarActionExpandAllButtonTitle: 'Espandi tutto',
         toolbarActionCollapseAllButtonTitle: 'Comprimi tutto',
+        filterDialogBackToColumns: 'Indietro',
         filterDialogNotFilteredLabel: '(Non filtrato)',
         filterDialogFilterByLabel: 'Filtra per: {filterLabel}',
         filterDialogFilterTitle: 'Filtra',

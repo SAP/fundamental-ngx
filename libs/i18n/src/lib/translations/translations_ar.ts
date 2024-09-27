@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'يمكنك التنقل بين التحديدات بالسهم المتجه لأعلى والسهم المتجه لأسفل.',
         escapeNavigateTokens:
             'يمكنك ضغط ’تجاهل‘ للخروج من حقل الإدخال، واستخدام مفتاح السهم لأعلى ومفتاح السهم لأسفل للتنقل بين الخيارات المحددة.',
-        tokensCountText: 'يحتوي على إجمالي الرموز: {length}'
+        tokensCountText: 'يحتوي على إجمالي الرموز المميزة: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'التنقل الرئيسي',
@@ -328,7 +328,8 @@ export default {
         inputGlyphAriaLabel: 'تحديد الخيارات',
         inputIconTitle: 'تحديد الخيارات',
         mobileShowAllItemsButton: 'إظهار جميع البنود',
-        mobileShowSelectedItemsButton: 'إظهار البنود المحددة'
+        mobileShowSelectedItemsButton: 'إظهار البنود المحددة',
+        invalidEntryError: 'إدخال غير صالح'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'تم تجاوز الحد بحرف واحد',
@@ -482,6 +483,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'الأعمدة',
         toolbarActionExpandAllButtonTitle: 'توسيع الكل',
         toolbarActionCollapseAllButtonTitle: 'طي الكل',
+        filterDialogBackToColumns: 'التنقل إلى الخلف',
         filterDialogNotFilteredLabel: '(لم تتم تصفيته)',
         filterDialogFilterByLabel: 'تصفية حسب: {filterLabel}',
         filterDialogFilterTitle: 'تصفية',

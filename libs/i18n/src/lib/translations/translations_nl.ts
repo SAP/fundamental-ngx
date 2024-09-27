@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Gebruik de pijl-omhoog en pijl-omlaag om door de selecties te bladeren.',
         escapeNavigateTokens:
             'Druk op Escape om het invoerveld te sluiten en gebruik pijl-links en pijl-rechts om door de geselecteerde opties te bladeren.',
-        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Totaal aantal tokens: {length}.'
     },
     coreNavigation: {
         mainNavigation: 'Hoofdnavigatie',
@@ -330,7 +330,8 @@ export default {
         inputGlyphAriaLabel: 'Opties selecteren',
         inputIconTitle: 'Opties selecteren',
         mobileShowAllItemsButton: 'Alle items weergeven',
-        mobileShowSelectedItemsButton: 'Geselecteerde items weergeven'
+        mobileShowSelectedItemsButton: 'Geselecteerde items weergeven',
+        invalidEntryError: 'Ongeldig gegeven'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 teken boven de limiet',
@@ -484,6 +485,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Kolommen',
         toolbarActionExpandAllButtonTitle: 'Alles uitvouwen',
         toolbarActionCollapseAllButtonTitle: 'Alles samenvouwen',
+        filterDialogBackToColumns: 'Terug',
         filterDialogNotFilteredLabel: '(niet gefilterd)',
         filterDialogFilterByLabel: 'Filteren op: {filterLabel}',
         filterDialogFilterTitle: 'Filteren',

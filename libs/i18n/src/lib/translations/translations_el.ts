@@ -78,7 +78,7 @@ export default {
         navigateSelectionsWithArrows: 'Πλοήγηση επιλογών με τα βέλη πάνω και κάτω.',
         escapeNavigateTokens:
             'Πατήστε το πλήκτρο διαφυγής (escape) για να κλείσετε το πεδίο και χρησιμοποιήστε τα βέλη δεξιά και αριστερά για να πλοηγηθείτε μέσω των επιλεγμένων δυνατοτήτων.',
-        tokensCountText: 'Περιέχει {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
+        tokensCountText: 'Περιέχει συνολικά διακριτικά: {μήκος}.'
     },
     coreNavigation: {
         mainNavigation: 'Κύρια Πλοήγηση',
@@ -330,7 +330,8 @@ export default {
         inputGlyphAriaLabel: 'Επιλογή Δυνατοτήτων',
         inputIconTitle: 'Επιλογή Δυνατοτήτων',
         mobileShowAllItemsButton: 'Εμφάνιση όλων των στοιχείων',
-        mobileShowSelectedItemsButton: 'Εμφάνιση επιλεγμένων στοιχείων'
+        mobileShowSelectedItemsButton: 'Εμφάνιση επιλεγμένων στοιχείων',
+        invalidEntryError: 'Άκυρη Καταχώριση'
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 χαρακτήρας πάνω από το όριο',
@@ -484,6 +485,7 @@ export default {
         toolbarActionColumnsButtonTitle: 'Στήλες',
         toolbarActionExpandAllButtonTitle: 'Επέκταση όλων',
         toolbarActionCollapseAllButtonTitle: 'Σύμπτηξη όλων',
+        filterDialogBackToColumns: 'Πλοήγηση πίσω',
         filterDialogNotFilteredLabel: '(Μη Φιλτραρισμένο)',
         filterDialogFilterByLabel: 'Φιλτράρισμα βάσει: {filterLabel}',
         filterDialogFilterTitle: 'Φίλτρο',

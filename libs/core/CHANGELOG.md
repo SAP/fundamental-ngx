@@ -3,6 +3,326 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.36...v0.52.2-rc.37) (2024-09-27)
+
+
+### Bug Fixes
+
+* **core:** wizard steps - anchors should have role="navigation" ([#12477](https://github.com/SAP/fundamental-ngx/issues/12477)) ([4b20c72](https://github.com/SAP/fundamental-ngx/commit/4b20c72078522185637aeaaf191c0debd1bcbe58))
+
+
+
+
+
+## [0.52.2-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.35...v0.52.2-rc.36) (2024-09-26)
+
+
+### Features
+
+* **core:** implement ContentDensity to handle all type of themes on demand. ([#12370](https://github.com/SAP/fundamental-ngx/issues/12370)) ([dce41d1](https://github.com/SAP/fundamental-ngx/commit/dce41d12eab690d83d430064cb342b7885690712))
+
+
+
+
+
+## [0.52.2-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.34...v0.52.2-rc.35) (2024-09-25)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.33...v0.52.2-rc.34) (2024-09-25)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.32...v0.52.2-rc.33) (2024-09-24)
+
+
+### Bug Fixes
+
+* **core:** more customization of aria attributes for multi-input ([#12437](https://github.com/SAP/fundamental-ngx/issues/12437)) ([88d90b7](https://github.com/SAP/fundamental-ngx/commit/88d90b7f797b5935b197c9202d4cc20139074fb9))
+
+
+
+
+
+## [0.52.2-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.31...v0.52.2-rc.32) (2024-09-23)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.30...v0.52.2-rc.31) (2024-09-23)
+
+
+### Features
+
+* **core:** dayPeriod pattern support ([#12354](https://github.com/SAP/fundamental-ngx/issues/12354)) ([c70f83a](https://github.com/SAP/fundamental-ngx/commit/c70f83a7a958d5536aab6313775d916cc3461175))
+
+
+
+
+
+## [0.52.2-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.29...v0.52.2-rc.30) (2024-09-19)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.28...v0.52.2-rc.29) (2024-09-19)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.27...v0.52.2-rc.28) (2024-09-19)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.26...v0.52.2-rc.27) (2024-09-19)
+
+
+### Features
+
+* **core:** add a feature to pick date range in month year format ([#12341](https://github.com/SAP/fundamental-ngx/issues/12341)) ([0ffe265](https://github.com/SAP/fundamental-ngx/commit/0ffe2653b2cd41368c9088b03983c967cee0f350)), closes [#12319](https://github.com/SAP/fundamental-ngx/issues/12319)
+
+
+
+
+
+## [0.52.2-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.25...v0.52.2-rc.26) (2024-09-19)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.24...v0.52.2-rc.25) (2024-09-19)
+
+
+### Bug Fixes
+
+* **core:** address some Dynamic Page header issues ([#12443](https://github.com/SAP/fundamental-ngx/issues/12443)) ([890eaed](https://github.com/SAP/fundamental-ngx/commit/890eaedb13ef7d6c2b33de4ded5b4b8ce0f52f05))
+
+
+
+
+
+## [0.52.2-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.23...v0.52.2-rc.24) (2024-09-18)
+
+
+### Bug Fixes
+
+* **core:** Refactor calendar day view component to use signal version of inputs. add special day rules example for DatePicker ([#12398](https://github.com/SAP/fundamental-ngx/issues/12398)) ([4a0a283](https://github.com/SAP/fundamental-ngx/commit/4a0a2834b2a50d4914c718f8a6d299995fdb4825))
+
+
+
+
+
+## [0.52.2-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.22...v0.52.2-rc.23) (2024-09-18)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.21...v0.52.2-rc.22) (2024-09-18)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.20...v0.52.2-rc.21) (2024-09-17)
+
+
+### Bug Fixes
+
+* **core:** handle invalid date inputs gracefully ([#12433](https://github.com/SAP/fundamental-ngx/issues/12433)) ([d49bb37](https://github.com/SAP/fundamental-ngx/commit/d49bb37e3a04f2c09382561e3f2a7a81f0091d6c))
+
+
+
+
+
+## [0.52.2-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.19...v0.52.2-rc.20) (2024-09-17)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.18...v0.52.2-rc.19) (2024-09-16)
+
+
+### Bug Fixes
+
+* datetime adapter passing date format, not dateTime ([#12415](https://github.com/SAP/fundamental-ngx/issues/12415)) ([47b3610](https://github.com/SAP/fundamental-ngx/commit/47b3610898aa006636499bc86a5f7db93ef5dbc7))
+
+
+
+
+
+## [0.52.2-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.17...v0.52.2-rc.18) (2024-09-16)
+
+
+### Bug Fixes
+
+* **platform:** fix fdp-table popover alignment ([#12303](https://github.com/SAP/fundamental-ngx/issues/12303)) ([fc0e314](https://github.com/SAP/fundamental-ngx/commit/fc0e31455fb73c832cfe8f7f3a1b89c0fca91f03)), closes [#11230](https://github.com/SAP/fundamental-ngx/issues/11230) [#11230](https://github.com/SAP/fundamental-ngx/issues/11230) [#11230](https://github.com/SAP/fundamental-ngx/issues/11230) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771)
+
+
+
+
+
+## [0.52.2-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.16...v0.52.2-rc.17) (2024-09-13)
+
+
+### Bug Fixes
+
+* **core:** grid list keyboard support ([#12288](https://github.com/SAP/fundamental-ngx/issues/12288)) ([c0ee76f](https://github.com/SAP/fundamental-ngx/commit/c0ee76f48a0d48a9c35f26a144ee466910ae03e2))
+
+
+
+
+
+## [0.52.2-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.15...v0.52.2-rc.16) (2024-09-13)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.14...v0.52.2-rc.15) (2024-09-13)
+
+
+### Bug Fixes
+
+* **core,platform:** provide translation for multi-combobox Invalid Entry message ([#12409](https://github.com/SAP/fundamental-ngx/issues/12409)) ([622c4f2](https://github.com/SAP/fundamental-ngx/commit/622c4f2f96ae85ee7a3e6a5ebda33370a8272a1d))
+
+
+
+
+
+## [0.52.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.13...v0.52.2-rc.14) (2024-09-13)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.12...v0.52.2-rc.13) (2024-09-13)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.11...v0.52.2-rc.12) (2024-09-13)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.10...v0.52.2-rc.11) (2024-09-12)
+
+
+### Bug Fixes
+
+* **core:** call endClose on dialog close method to handle right seque… ([#12301](https://github.com/SAP/fundamental-ngx/issues/12301)) ([656e3d9](https://github.com/SAP/fundamental-ngx/commit/656e3d9964ea8b2222f7a11a92f2ca081f1a13b4))
+
+
+
+
+
+## [0.52.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.9...v0.52.2-rc.10) (2024-09-10)
+
+
+### Bug Fixes
+
+* **core:** type incorrect assumption of input always existing ([#12240](https://github.com/SAP/fundamental-ngx/issues/12240)) ([1c723ce](https://github.com/SAP/fundamental-ngx/commit/1c723cea86751d07313d0e824190bac1669fb83e))
+
+
+
+
+
+## [0.52.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.8...v0.52.2-rc.9) (2024-09-10)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.7...v0.52.2-rc.8) (2024-09-10)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.6...v0.52.2-rc.7) (2024-09-09)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.5...v0.52.2-rc.6) (2024-09-09)
+
+
+### Bug Fixes
+
+* **core:** update the CSS for Slider Tooltip ([#12377](https://github.com/SAP/fundamental-ngx/issues/12377)) ([778c68c](https://github.com/SAP/fundamental-ngx/commit/778c68c24cf48cfbcb8ade4fa00b0757a0cd6bd7))
+
+
+
+
+
+## [0.52.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.4...v0.52.2-rc.5) (2024-09-06)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.3...v0.52.2-rc.4) (2024-09-04)
+
+
+### Bug Fixes
+
+* **core:** wizard content overllaping fixed ([#12361](https://github.com/SAP/fundamental-ngx/issues/12361)) ([ab12166](https://github.com/SAP/fundamental-ngx/commit/ab1216673a9cfda8ec53b5bbcda4c1066122df54))
+
+
+
+
+
 ## [0.52.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.2...v0.52.2-rc.3) (2024-09-03)
 
 **Note:** Version bump only for package @fundamental-ngx/core

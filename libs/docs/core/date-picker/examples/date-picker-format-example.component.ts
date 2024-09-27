@@ -47,7 +47,7 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
         <br />
         <div>Selected Date: {{ date | dateFormat }}</div>
         <br />
-        <fd-date-picker [(ngModel)]="dates" placeholder="dd-mm-yyyy"></fd-date-picker>
+        <fd-date-picker [(ngModel)]="dates" [allowMultipleSelection]="true" placeholder="dd-mm-yyyy"></fd-date-picker>
         <br />
         <div>
             Selected Dates:<br />
