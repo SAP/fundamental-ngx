@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.36...v0.52.2-rc.37) (2024-09-27)
+
+
+### Bug Fixes
+
+* **core:** wizard steps - anchors should have role="navigation" ([#12477](https://github.com/SAP/fundamental-ngx/issues/12477)) ([4b20c72](https://github.com/SAP/fundamental-ngx/commit/4b20c72078522185637aeaaf191c0debd1bcbe58))
+
+
+
+
+
 ## [0.52.2-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.35...v0.52.2-rc.36) (2024-09-26)
 
 
