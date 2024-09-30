@@ -92,6 +92,10 @@ export class BasePopoverClass {
     @Input()
     closeOnOutsideClick = true;
 
+    /** Wether to apply a background overlay */
+    @Input()
+    applyOverlay = false;
+
     /** Whether the popover should be focusTrapped. */
     @Input()
     focusTrapped = false;

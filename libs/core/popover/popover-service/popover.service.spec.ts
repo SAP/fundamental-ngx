@@ -247,8 +247,9 @@ describe('PopoverService', () => {
         expect((<any>service)._shouldClose(mouseEvent)).not.toEqual(true);
     });
 
-    it('shouldn close on escape keydown from popover body', () => {
+    it("shouldn't close on closeOnOutsideClick from popover body", () => {
         service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
+        service.closeOnOutsideClick = false;
 
         service.open();
 
@@ -256,9 +257,41 @@ describe('PopoverService', () => {
 
         jest.spyOn(service, 'close');
 
-        componentInstance.popoverBody.onClose.next();
+        document.body.click();
 
-        expect(service.close).toHaveBeenCalled();
+        expect(service.close).not.toHaveBeenCalled();
+        
+    });
+
+    it ("shouldn't close on escape keydown from popover body", () => {
+        service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
+        service.closeOnEscapeKey = false;
+
+        service.open();
+
+        fixture.detectChanges();
+
+        jest.spyOn(service, 'close');
+
+        const event = new KeyboardEvent('keydown', { key: 'Escape' });
+        document.dispatchEvent(event);
+
+        expect(service.close).not.toHaveBeenCalled();
+    });
+
+    it("should contain the appropriate classes when checkModalBackground is called and applyOverlay is true", () => {
+        service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
+        service.closeOnOutsideClick = false;
+        service.applyOverlay = true;
+
+        service.open();
+
+        service.checkModalBackground();
+
+        fixture.detectChanges();
+
+        expect(document.body.classList.contains('fd-overlay-active')).toBe(true);
+        expect(document.querySelector('.fd-popover__modal')).toBeTruthy();
     });
 
     it('should resize overlay body at least, on refresh position', () => {
