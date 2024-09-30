@@ -14,6 +14,7 @@ import {
 } from '@fundamental-ngx/core/dialog';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
+import { DialogBodyIndicatorExampleComponent } from './dialog-body-indicator-example.component';
 
 @Component({
     selector: 'fd-template-based-dialog-example',
@@ -36,29 +37,47 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     ]
 })
 export class TemplateBasedDialogExampleComponent {
-    confirmationReason: string;
+    closeReason: string;
 
-    constructor(
-        private _dialogService: DialogService,
-        private _cdr: ChangeDetectorRef
-    ) {}
+    constructor(private _dialogService: DialogService) {}
 
-    openDialog(dialog: TemplateRef<any>): void {
-        const dialogRef = this._dialogService.open(dialog, {
+    open(): void {
+        const dialogRef = this._dialogService.open(DialogBodyIndicatorExampleComponent, {
+            data: {
+                title: `Pineapple Fun Facts`,
+                pinnapleDescription: `
+                The pineapple (Ananas comosus) is a tropical plant with an edible fruit
+                and the most economically significant plant in the family Bromeliaceae.
+                The pineapple is indigenous to South America,
+                where it has been cultivated for many centuries.
+                The introduction of the pineapple to Europe in the 17th
+                century made it a significant cultural icon of luxury.
+                Since the 1820s, pineapple has been commercially grown in
+                greenhouses and many tropical plantations.
+                `,
+                pineappleFunFacts: [
+                    `You can grow your own pineapple by planting the top of the pineapple in soil`,
+                    `Pulling leaves from a pineapple is not an indication of ripeness as many people think`,
+                    `James Dole is considered the “King of Pineapples“`,
+                    `A pineapple cannot continue to ripen after it has been picked`,
+                    `An unripe pineapple not only tastes awful, but can also be poisonous`,
+                    `One of the ways you can tell if a pineapple is ripe is by smelling it`,
+                    `In Hawaii, the word for pineapple is “Hala kahiki“`
+                ]
+            },
+            width: '400px',
+            ariaLabelledBy: 'fd-dialog-header-1',
+            ariaDescribedBy: 'fd-dialog-body-1',
             responsivePadding: true,
-            ariaLabelledBy: 'fd-dialog-header-10',
-            ariaDescribedBy: 'fd-dialog-body-10',
             focusTrapped: true
         });
 
         dialogRef.afterClosed.subscribe(
             (result) => {
-                this.confirmationReason = 'Dialog closed with result: ' + result;
-                this._cdr.detectChanges();
+                this.closeReason = 'Dialog closed with result: ' + result;
             },
             (error) => {
-                this.confirmationReason = 'Dialog dismissed with result: ' + error;
-                this._cdr.detectChanges();
+                this.closeReason = 'Dialog dismissed with result: ' + error;
             }
         );
     }
