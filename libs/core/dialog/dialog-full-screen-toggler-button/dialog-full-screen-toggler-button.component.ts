@@ -2,10 +2,10 @@ import {
     ChangeDetectionStrategy,
     Component,
     DestroyRef,
-    Input,
     OnInit,
     ViewEncapsulation,
     inject,
+    input,
     signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -23,23 +23,20 @@ import { DialogRef } from '../utils/dialog-ref.class';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[class.fd-button]': 'true',
-        '[class.is-compact]': '!mobile',
+        '[class.is-compact]': '!mobile()',
         '[class.fd-button--transparent]': 'true',
-        '[attr.title]': 'title'
+        '[attr.title]': 'title()'
     }
 })
 export class DialogFullScreenTogglerButtonComponent implements OnInit {
     /** Displays dialog close button in mobile mode */
-    @Input()
-    mobile = false;
+    mobile = input(false);
 
     /** DialogRef direct reference. Used with template-based dialogs. */
-    @Input()
-    dialogRef: Nullable<DialogRef>;
+    dialogRef = input<Nullable<DialogRef>>();
 
     /** add title dynamically to add a tooltip */
-    @Input()
-    title: string;
+    title = input<string>();
 
     /** @hidden */
     _fullscreen$ = signal(false);
@@ -54,7 +51,7 @@ export class DialogFullScreenTogglerButtonComponent implements OnInit {
 
     /** @hidden */
     ngOnInit(): void {
-        const ref = this._ref || this.dialogRef;
+        const ref = this._ref || this.dialogRef();
         ref?.fullScreen.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isFullScreen) => {
             this._fullscreen$.set(isFullScreen);
         });
