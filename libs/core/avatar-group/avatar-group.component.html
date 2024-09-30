@@ -1,5 +1,5 @@
 <ng-content></ng-content>
-<pre>{{_avatars.length}}</pre>
+<pre>{{ _avatars.length }}</pre>
 @if (type === 'individual') {
     <fd-avatar-group-host
         #avatarGroupHostComponent
@@ -15,9 +15,7 @@
         (resized)="_detectChanges()"
     >
         @for (item of _avatars; track item) {
-            <fd-popover
-                [placement]="popoverPlacement"
-                [noArrow]="false" [focusAutoCapture]="true">
+            <fd-popover [placement]="popoverPlacement" [noArrow]="false" [focusAutoCapture]="true">
                 <fd-popover-control tabindex="-1" (click)="outletItem.element.focus()">
                     <ng-template
                         #outletItem="fdAvatarGroupItemPortal"
@@ -56,7 +54,13 @@
         </fd-popover>
     </fd-avatar-group-host>
 } @else {
-    <fd-popover [placement]="popoverPlacement" [noArrow]="false" [focusAutoCapture]="true" fdkResizeObserver (resized)="_detectChanges()">
+    <fd-popover
+        [placement]="popoverPlacement"
+        [noArrow]="false"
+        [focusAutoCapture]="false"
+        fdkResizeObserver
+        (resized)="_detectChanges()"
+    >
         <fd-popover-control>
             <fd-avatar-group-host
                 [maxVisibleItems]="maxVisibleItems"
@@ -101,7 +105,7 @@
             [ngTemplateOutletContext]="{ hiddenItems: hiddenItems }"
         />
     } @else {
-        <fd-avatar-group-overflow-button [circle]="circle"  [size]="size" [colorAccent]="1">
+        <fd-avatar-group-overflow-button [circle]="circle" [size]="size" [colorAccent]="1">
             +{{ hiddenItems.length }}
         </fd-avatar-group-overflow-button>
     }

@@ -17,7 +17,8 @@ import {
 import {
     DynamicPortalComponent,
     FocusableItemDirective,
-    FocusableListDirective, Nullable,
+    FocusableListDirective,
+    Nullable,
     ResizeObserverDirective,
     RtlService
 } from '@fundamental-ngx/cdk/utils';
@@ -110,7 +111,6 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
      **/
     @Input()
     maxVisibleItems: Nullable<number> = null;
-
 
     /** @hidden */
     @ViewChildren(AvatarGroupItemRendererDirective)
