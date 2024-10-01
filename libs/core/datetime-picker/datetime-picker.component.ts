@@ -255,8 +255,7 @@ export class DatetimePickerComponent<D>
     }
 
     /**
-     * Whether AddOn Button should be focusable
-     * @default true
+     * @deprecated Popover is toggled with f4 key
      */
     @Input()
     buttonFocusable = true;
