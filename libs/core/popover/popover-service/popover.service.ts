@@ -85,6 +85,15 @@ export class PopoverService extends BasePopoverClass {
     /** @hidden */
     private _ignoreTriggers = false;
 
+    /** @hidden */
+    private _modalBodyClass = 'fd-overlay-active';
+
+    /** @hidden */
+    private _modalTriggerClass = 'fd-popover__modal';
+
+    /** @hidden */
+    private _isModal = false;
+
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _destroyRef = inject(DestroyRef);
 
@@ -112,6 +121,10 @@ export class PopoverService extends BasePopoverClass {
             if (this._overlayRef) {
                 this._overlayRef.detach();
                 this._overlayRef.dispose();
+            }
+
+            if (this._isModal) {
+                this._removeOverlay(this._modalBodyClass, this._modalTriggerClass);
             }
         });
     }
@@ -165,6 +178,7 @@ export class PopoverService extends BasePopoverClass {
             this.isOpenChange.emit(this.isOpen);
         }
 
+        this.checkModalBackground();
         this._focusLastActiveElementBeforeOpen(focusActiveElement);
     }
 
@@ -230,12 +244,24 @@ export class PopoverService extends BasePopoverClass {
         }
     }
 
+    /** Changes background theming when modal */
+    /** @hidden */
+    checkModalBackground(): void {
+        const isClosingConditions = (!this.closeOnOutsideClick || !this.closeOnEscapeKey) && this.applyOverlay;
+        if (isClosingConditions && this.isOpen) {
+            this._addModalOverlay(this._modalBodyClass, this._modalTriggerClass);
+        } else if (isClosingConditions && !this.isOpen) {
+            this._removeOverlay(this._modalBodyClass, this._modalTriggerClass);
+        }
+    }
+
     /** Toggles the popover open state */
     toggle(openAction = true, closeAction = true): void {
         if (this.isOpen) {
             closeAction && this.close();
         } else {
             openAction && this.open();
+            this.checkModalBackground();
         }
     }
 
@@ -402,6 +428,18 @@ export class PopoverService extends BasePopoverClass {
     private _removeTriggerListeners(): void {
         this._eventRef.forEach((event) => event());
         this._eventRef = [];
+    }
+
+    private _addModalOverlay(bodyClass: string, triggerClass: string): void {
+        this._renderer.addClass(document.body, bodyClass);
+        this._renderer.addClass((this._triggerElement as ElementRef).nativeElement, triggerClass);
+        this._isModal = true;
+    }
+
+    private _removeOverlay(bodyClass: string, triggerClass: string): void {
+        this._renderer.removeClass(document.body, bodyClass);
+        this._renderer.removeClass((this._triggerElement as ElementRef).nativeElement, triggerClass);
+        this._isModal = false;
     }
 
     /** Attach template containing popover body to overlay */
