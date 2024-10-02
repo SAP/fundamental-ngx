@@ -1,5 +1,17 @@
+@import 'fundamental-styles/dist/link';
 @import 'fundamental-styles/dist/notification';
 
-.fd-notification-custom-block {
-    display: block;
+.fd-notification {
+    display: flex;
+}
+
+.fd-notification-message-strip:has(.fd-has-display-none) {
+    padding-block: 0;
+    padding-inline: 0;
+}
+
+.fd-notification-container {
+    .fd-notification {
+        margin-block-end: 0.5rem;
+    }
 }

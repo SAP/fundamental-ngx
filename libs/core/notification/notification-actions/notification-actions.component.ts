@@ -1,11 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ContentChildren,
-    HostBinding,
-    QueryList,
-    ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChildren, QueryList, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 
 @Component({
@@ -13,13 +6,12 @@ import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/butt
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    standalone: true,
+    host: {
+        class: 'fd-notification__actions'
+    }
 })
 export class NotificationActionsComponent {
-    /** @hidden */
-    @HostBinding('class.fd-notification__actions')
-    fdNotificationActionsClass = true;
-
     /** @hidden */
     @ContentChildren(FD_BUTTON_COMPONENT)
     buttons: QueryList<ButtonComponent>;

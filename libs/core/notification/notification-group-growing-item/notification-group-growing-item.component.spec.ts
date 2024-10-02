@@ -4,12 +4,12 @@ import { NotificationModule } from '../notification.module';
 import { By } from '@angular/platform-browser';
 
 @Component({
-    selector: 'fd-notification-group-list-test',
-    template: ` <fd-notification-group-list>Notification Group List Test</fd-notification-group-list> `
+    selector: 'fd-notification-group-growing-item-test',
+    template: ` <fd-notification-group-growing-item>Notification Group Growing Item Test</fd-notification-group-growing-item> `
 })
 class TestWrapperComponent {}
 
-describe('NotificationGroupListComponent', () => {
+describe('NotificationGroupGrowingItemComponent', () => {
     let component: TestWrapperComponent;
     let fixture: ComponentFixture<TestWrapperComponent>;
 
@@ -31,12 +31,17 @@ describe('NotificationGroupListComponent', () => {
     });
 
     it('should apply proper class', () => {
-        const attributeElement = fixture.debugElement.query(By.css('fd-notification-group-list'));
-        expect(attributeElement.nativeElement.classList.contains('fd-notification-group__list')).toBe(true);
+        const attributeElement = fixture.debugElement.query(By.css('fd-notification-group-growing-item'));
+        expect(attributeElement.nativeElement.classList.contains('fd-notification-group__growing-item')).toBe(true);
     });
 
     it('should apply proper role', () => {
-        const attributeElement = fixture.debugElement.query(By.css('fd-notification-group-list'));
-        expect(attributeElement.nativeElement.getAttribute('role')).toBe('list');
+        const attributeElement = fixture.debugElement.query(By.css('fd-notification-group-growing-item'));
+        expect(attributeElement.nativeElement.getAttribute('role')).toBe('button');
+    });
+
+    it('should have proper tabindex', () => {
+        const attributeElement = fixture.debugElement.query(By.css('fd-notification-group-growing-item'));
+        expect(attributeElement.nativeElement.getAttribute('tabindex')).toBe('0');
     });
 });
