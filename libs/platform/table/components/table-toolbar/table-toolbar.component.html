@@ -102,43 +102,17 @@
                     fdType="transparent"
                 ></button>
             }
-            @if (sortable()) {
+            @if (sortable() || filterable() || groupable()) {
                 <button
                     fd-button
                     fd-toolbar-item
                     fdOverflowPriority="never"
-                    glyph="sort"
-                    [title]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
-                    [ariaLabel]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
+                    glyph="action-settings"
+                    [title]="'platformTable.toolbarActionButtonTitle' | fdTranslate"
+                    [ariaLabel]="'platformTable.toolbarActionButtonTitle' | fdTranslate"
                     fdType="transparent"
                     aria-haspopup="modal"
                     (click)="openSorting()"
-                ></button>
-            }
-            @if (filterable()) {
-                <button
-                    fd-button
-                    fd-toolbar-item
-                    fdOverflowPriority="never"
-                    glyph="filter"
-                    [title]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
-                    [ariaLabel]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
-                    fdType="transparent"
-                    aria-haspopup="modal"
-                    (click)="openFiltering()"
-                ></button>
-            }
-            @if (groupable()) {
-                <button
-                    fd-button
-                    fd-toolbar-item
-                    fdOverflowPriority="never"
-                    glyph="group-2"
-                    [title]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
-                    [ariaLabel]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
-                    fdType="transparent"
-                    aria-haspopup="modal"
-                    (click)="openGrouping()"
                 ></button>
             }
             @if (columns()) {
@@ -146,7 +120,7 @@
                     fd-button
                     fd-toolbar-item
                     fdOverflowPriority="never"
-                    glyph="action-settings"
+                    glyph="settings"
                     [title]="'platformTable.toolbarActionColumnsButtonTitle' | fdTranslate"
                     [ariaLabel]="'platformTable.toolbarActionColumnsButtonTitle' | fdTranslate"
                     fdType="transparent"
