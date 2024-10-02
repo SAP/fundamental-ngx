@@ -11,7 +11,6 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { NotificationComponentAsContentExampleComponent } from './examples/component-as-content/notification-component-as-content-example.component';
 import { NotificationGroupExampleComponent } from './examples/notification-group/notification-group-example.component';
-import { NotificationMobileExampleComponent } from './examples/notification-mobile/notification-mobile-example.component';
 import { NotificationOptionsExampleComponent } from './examples/notification-options/notification-options-example.component';
 import { NotificationOpenTemplateExampleComponent } from './examples/template-as-content/notification-open-template-example.component';
 
@@ -24,8 +23,6 @@ const templateTs = 'template-as-content/notification-open-template-example.compo
 const templateH = 'template-as-content/notification-open-template-example.component.html';
 const groupTs = 'notification-group/notification-group-example.component.ts';
 const groupH = 'notification-group/notification-group-example.component.html';
-const mobileTs = 'notification-mobile/notification-mobile-example.component.ts';
-const mobileH = 'notification-mobile/notification-mobile-example.component.html';
 
 @Component({
     selector: 'app-notification',
@@ -40,8 +37,7 @@ const mobileH = 'notification-mobile/notification-mobile-example.component.html'
         SeparatorComponent,
         NotificationOpenTemplateExampleComponent,
         NotificationComponentAsContentExampleComponent,
-        NotificationGroupExampleComponent,
-        NotificationMobileExampleComponent
+        NotificationGroupExampleComponent
     ]
 })
 export class NotificationDocsComponent {
@@ -109,20 +105,6 @@ export class NotificationDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(groupH),
             fileName: 'notification-group-example'
-        }
-    ];
-
-    mobile: ExampleFile[] = [
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(mobileTs),
-            fileName: 'notification-mobile-example',
-            component: 'NotificationMobileExampleComponent'
-        },
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(mobileH),
-            fileName: 'notification-mobile-example'
         }
     ];
 }

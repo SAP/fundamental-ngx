@@ -1,20 +1,23 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
 let notificationHeaderCounter = 0;
+
 @Component({
     selector: 'fd-notification-header',
-    template: `<ng-content></ng-content>`,
+    template: `<ng-content select="fd-icon"></ng-content>
+        <ng-content select="[fd-notification-title]"></ng-content> `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    standalone: true,
+    host: {
+        class: 'fd-notification__header',
+        '[attr.id]': 'uniqueId()'
+    }
 })
 export class NotificationHeaderComponent {
-    /** @hidden */
-    @HostBinding('class.fd-notification__header')
-    fdNotificationHeaderClass = true;
-
-    /** Unique id for the notification header */
-    @HostBinding('attr.id')
-    @Input()
-    uniqueId = `fd-notification-header-${++notificationHeaderCounter}`;
+    /**
+     * Unique id for the notification header
+     * if not set, a default value is provided
+     */
+    uniqueId = input('fd-notification-header-' + ++notificationHeaderCounter);
 }

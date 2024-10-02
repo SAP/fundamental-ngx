@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.53.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.53.0-rc.0...v0.53.0-rc.1) (2024-10-02)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.53.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.43...v0.53.0-rc.0) (2024-10-02)
+
+
+### Bug Fixes
+
+* **core:** update Illustrated Messages to lates design and add responsiveness ([#12405](https://github.com/SAP/fundamental-ngx/issues/12405)) ([6f32d8d](https://github.com/SAP/fundamental-ngx/commit/6f32d8d836bab8b46f5d54e328360b2c30c2c508))
+
+
+### Features
+
+* **core:** add avatar indication colors ([#12444](https://github.com/SAP/fundamental-ngx/issues/12444)) ([4362d6f](https://github.com/SAP/fundamental-ngx/commit/4362d6f7a45fb1092acfa6bc7fe5fa813cdeab62))
+* **core:** update Notifications to latest design ([#12476](https://github.com/SAP/fundamental-ngx/issues/12476)) ([3a2ab29](https://github.com/SAP/fundamental-ngx/commit/3a2ab29e481fa19b5000acda4d746108f850f025))
+
+
+### BREAKING CHANGES
+
+* **core:** Refactor Notification and Notification Group components.
+
+
+
+
+
 ## [0.52.2-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.42...v0.52.2-rc.43) (2024-10-02)
 
 

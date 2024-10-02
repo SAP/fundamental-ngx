@@ -25,9 +25,6 @@ export class NotificationConfig<T = any> {
     /** Custom width of the notification. */
     width?: string;
 
-    /** Whether the notification is in mobile mode. */
-    mobile?: boolean;
-
     /**
      * Whether the notification should trap focus within itself.
      * @default true
