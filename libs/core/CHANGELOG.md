@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.2-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.41...v0.52.2-rc.42) (2024-10-01)
+
+
+### Bug Fixes
+
+* **core:** form label white space ([#12491](https://github.com/SAP/fundamental-ngx/issues/12491)) ([4b4b06f](https://github.com/SAP/fundamental-ngx/commit/4b4b06f7162854c22aedda6356b49734e25a618c))
+
+
+
+
+
+## [0.52.2-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.40...v0.52.2-rc.41) (2024-10-01)
+
+
+### Bug Fixes
+
+* **core:** Message strip alert complete ([#12472](https://github.com/SAP/fundamental-ngx/issues/12472)) ([51a9f4c](https://github.com/SAP/fundamental-ngx/commit/51a9f4ce49c3a6dc4cf327649480bcdb0c06f34f))
+
+
+
+
+
 ## [0.52.2-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.39...v0.52.2-rc.40) (2024-09-30)
 
 **Note:** Version bump only for package @fundamental-ngx/core
