@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.53.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.53.0-rc.1...v0.53.0-rc.2) (2024-10-02)
+
+
+### Bug Fixes
+
+* **core:** keep focused option in view when using arrow keys ([#12495](https://github.com/SAP/fundamental-ngx/issues/12495)) ([574e18b](https://github.com/SAP/fundamental-ngx/commit/574e18b6f3e45cc227b38b7e94b3bee0c8bca585))
+
+
+
+
+
 # [0.53.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.53.0-rc.0...v0.53.0-rc.1) (2024-10-02)
 
 **Note:** Version bump only for package @fundamental-ngx/core
