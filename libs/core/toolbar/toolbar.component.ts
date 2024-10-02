@@ -38,6 +38,7 @@ import {
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import { TitleComponent, TitleToken } from '@fundamental-ngx/core/title';
 import { BehaviorSubject, combineLatest, map, Observable, startWith } from 'rxjs';
 import { ToolbarItem } from './abstract-toolbar-item.class';
@@ -139,6 +140,14 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     /** Tabindex of the toolbar element, to be used when fdType="info" */
     @Input()
     tabindex = -1;
+
+    /**
+     * The level of the Toolbar title
+     * Possible options: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+     * Default: 'h2'
+     */
+    @Input()
+    headingLevel: HeadingLevel = 'h2';
 
     /** Toolbar Aria-label attribute. */
     @Input()

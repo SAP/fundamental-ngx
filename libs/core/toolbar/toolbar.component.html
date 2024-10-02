@@ -1,5 +1,7 @@
 @if (title) {
-    <h4 fd-title class="fd-toolbar__title" [id]="titleId" #titleElement>{{ title }}</h4>
+    <span [attr.aria-level]="headingLevel" fd-title class="fd-toolbar__title" [id]="titleId" #titleElement>{{
+        title
+    }}</span>
 }
 <ng-content></ng-content>
 @if (overflownItems.length > 0) {
