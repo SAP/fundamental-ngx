@@ -1,1 +1,5 @@
 @import 'fundamental-styles/dist/illustrated-message';
+
+.fd-illustrated-message__illustration {
+    height: var(--illustrationMaxWidth);
+}

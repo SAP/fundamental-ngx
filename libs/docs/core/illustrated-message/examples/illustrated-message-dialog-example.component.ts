@@ -25,7 +25,9 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
 })
 export class IllustratedMessageDialogExampleComponent {
     dialogSvgConfig = {
-        dialog: { url: 'assets/images/sapIllus-Dialog-NoMail.svg', id: 'sapIllus-Dialog-NoMail' }
+        dialog: { url: 'assets/images/sapIllus-Dialog-NoMail.svg', id: 'sapIllus-Dialog-NoMail' },
+        spot: { url: 'assets/images/sapIllus-Spot-NoMail.svg', id: 'sapIllus-Spot-NoEmail' },
+        dot: { url: 'assets/images/sapIllus-Spot-NoMail.svg', id: 'sapIllus-Spot-NoEmail' }
     };
     dialogId = 'im-dialog-81mf46';
 
