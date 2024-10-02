@@ -16,9 +16,15 @@
     <fd-dialog-body disablePaddings>
         <ul fd-list [selection]="true">
             <li fd-list-group-header>
-                <span fd-list-title>{{ 'platformTable.sortDialogSortOrderHeader' | fdTranslate }}</span>
+                <span fd-list-title id="sort-dialog-sort-order-header">{{
+                    'platformTable.sortDialogSortOrderHeader' | fdTranslate
+                }}</span>
             </li>
-            <li fd-list-item [selected]="direction === SORT_DIRECTION.ASC">
+            <li
+                fd-list-item
+                [selected]="direction === SORT_DIRECTION.ASC"
+                aria-describedby="sort-dialog-sort-order-header"
+            >
                 <fd-radio-button
                     name="sort-order"
                     value="asc"
@@ -28,7 +34,11 @@
                 ></fd-radio-button>
                 <span fd-list-title>{{ 'platformTable.sortDialogSortOrderAsc' | fdTranslate }}</span>
             </li>
-            <li fd-list-item [selected]="direction === SORT_DIRECTION.DESC">
+            <li
+                fd-list-item
+                [selected]="direction === SORT_DIRECTION.DESC"
+                aria-describedby="sort-dialog-sort-order-header"
+            >
                 <fd-radio-button
                     name="sort-order"
                     value="desc"
@@ -41,10 +51,16 @@
         </ul>
         <ul fd-list [selection]="true">
             <li fd-list-group-header>
-                <span fd-list-title>{{ 'platformTable.sortDialogSortByHeader' | fdTranslate }}</span>
+                <span fd-list-title id="sort-dialog-sort-by-header">{{
+                    'platformTable.sortDialogSortByHeader' | fdTranslate
+                }}</span>
             </li>
             @if (allowDisablingSorting) {
-                <li fd-list-item [selected]="field === NOT_SORTED_OPTION_VALUE">
+                <li
+                    fd-list-item
+                    [selected]="field === NOT_SORTED_OPTION_VALUE"
+                    aria-describedby="sort-dialog-sort-by-header"
+                >
                     <fd-radio-button
                         name="sort-by"
                         [value]="NOT_SORTED_OPTION_VALUE"
@@ -56,7 +72,7 @@
                 </li>
             }
             @for (column of columns; track column) {
-                <li fd-list-item [selected]="column.key === field">
+                <li fd-list-item [selected]="column.key === field" aria-describedby="sort-dialog-sort-by-header">
                     <fd-radio-button
                         name="sort-by"
                         [value]="column.key"
