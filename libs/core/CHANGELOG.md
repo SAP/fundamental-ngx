@@ -3,6 +3,172 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.53.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.53.0-rc.1...v0.53.0-rc.2) (2024-10-02)
+
+
+### Bug Fixes
+
+* **core:** keep focused option in view when using arrow keys ([#12495](https://github.com/SAP/fundamental-ngx/issues/12495)) ([574e18b](https://github.com/SAP/fundamental-ngx/commit/574e18b6f3e45cc227b38b7e94b3bee0c8bca585))
+
+
+
+
+
+# [0.53.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.53.0-rc.0...v0.53.0-rc.1) (2024-10-02)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.53.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.43...v0.53.0-rc.0) (2024-10-02)
+
+
+### Bug Fixes
+
+* **core:** update Illustrated Messages to lates design and add responsiveness ([#12405](https://github.com/SAP/fundamental-ngx/issues/12405)) ([6f32d8d](https://github.com/SAP/fundamental-ngx/commit/6f32d8d836bab8b46f5d54e328360b2c30c2c508))
+
+
+### Features
+
+* **core:** add avatar indication colors ([#12444](https://github.com/SAP/fundamental-ngx/issues/12444)) ([4362d6f](https://github.com/SAP/fundamental-ngx/commit/4362d6f7a45fb1092acfa6bc7fe5fa813cdeab62))
+* **core:** update Notifications to latest design ([#12476](https://github.com/SAP/fundamental-ngx/issues/12476)) ([3a2ab29](https://github.com/SAP/fundamental-ngx/commit/3a2ab29e481fa19b5000acda4d746108f850f025))
+
+
+### BREAKING CHANGES
+
+* **core:** Refactor Notification and Notification Group components.
+
+
+
+
+
+## [0.52.2-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.42...v0.52.2-rc.43) (2024-10-02)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.41...v0.52.2-rc.42) (2024-10-01)
+
+
+### Bug Fixes
+
+* **core:** form label white space ([#12491](https://github.com/SAP/fundamental-ngx/issues/12491)) ([4b4b06f](https://github.com/SAP/fundamental-ngx/commit/4b4b06f7162854c22aedda6356b49734e25a618c))
+
+
+
+
+
+## [0.52.2-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.40...v0.52.2-rc.41) (2024-10-01)
+
+
+### Bug Fixes
+
+* **core:** Message strip alert complete ([#12472](https://github.com/SAP/fundamental-ngx/issues/12472)) ([51a9f4c](https://github.com/SAP/fundamental-ngx/commit/51a9f4ce49c3a6dc4cf327649480bcdb0c06f34f))
+
+
+
+
+
+## [0.52.2-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.39...v0.52.2-rc.40) (2024-09-30)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.38...v0.52.2-rc.39) (2024-09-30)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.37...v0.52.2-rc.38) (2024-09-30)
+
+
+### Bug Fixes
+
+* **core:** avatar group rendering/width calculation ([#12469](https://github.com/SAP/fundamental-ngx/issues/12469)) ([9fc16a6](https://github.com/SAP/fundamental-ngx/commit/9fc16a6c735b94ff42b656ceacc1534ad3ecd566)), closes [#12400](https://github.com/SAP/fundamental-ngx/issues/12400) [#12400](https://github.com/SAP/fundamental-ngx/issues/12400)
+
+
+
+
+
+## [0.52.2-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.36...v0.52.2-rc.37) (2024-09-27)
+
+
+### Bug Fixes
+
+* **core:** wizard steps - anchors should have role="navigation" ([#12477](https://github.com/SAP/fundamental-ngx/issues/12477)) ([4b20c72](https://github.com/SAP/fundamental-ngx/commit/4b20c72078522185637aeaaf191c0debd1bcbe58))
+
+
+
+
+
+## [0.52.2-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.35...v0.52.2-rc.36) (2024-09-26)
+
+
+### Features
+
+* **core:** implement ContentDensity to handle all type of themes on demand. ([#12370](https://github.com/SAP/fundamental-ngx/issues/12370)) ([dce41d1](https://github.com/SAP/fundamental-ngx/commit/dce41d12eab690d83d430064cb342b7885690712))
+
+
+
+
+
+## [0.52.2-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.34...v0.52.2-rc.35) (2024-09-25)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.33...v0.52.2-rc.34) (2024-09-25)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.32...v0.52.2-rc.33) (2024-09-24)
+
+
+### Bug Fixes
+
+* **core:** more customization of aria attributes for multi-input ([#12437](https://github.com/SAP/fundamental-ngx/issues/12437)) ([88d90b7](https://github.com/SAP/fundamental-ngx/commit/88d90b7f797b5935b197c9202d4cc20139074fb9))
+
+
+
+
+
+## [0.52.2-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.31...v0.52.2-rc.32) (2024-09-23)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.52.2-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.30...v0.52.2-rc.31) (2024-09-23)
+
+
+### Features
+
+* **core:** dayPeriod pattern support ([#12354](https://github.com/SAP/fundamental-ngx/issues/12354)) ([c70f83a](https://github.com/SAP/fundamental-ngx/commit/c70f83a7a958d5536aab6313775d916cc3461175))
+
+
+
+
+
 ## [0.52.2-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.29...v0.52.2-rc.30) (2024-09-19)
 
 **Note:** Version bump only for package @fundamental-ngx/core

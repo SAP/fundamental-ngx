@@ -48,8 +48,8 @@ describe('IllustratedMessageComponent', () => {
         expect(illustratedMessageElementRef).toBeTruthy();
     });
 
-    it('Should have scene type by default', () => {
-        expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--scene')).toBe(
+    it('Should have assigned class', () => {
+        expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message')).toBe(
             true
         );
     });
@@ -66,6 +66,14 @@ describe('IllustratedMessageComponent', () => {
         testComponent.type = 'spot';
         fixture.detectChanges();
         expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--spot')).toBe(
+            true
+        );
+    });
+
+    it('Should add base type', () => {
+        testComponent.type = 'base';
+        fixture.detectChanges();
+        expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--base')).toBe(
             true
         );
     });

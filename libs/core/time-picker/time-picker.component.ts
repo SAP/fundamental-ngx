@@ -23,10 +23,25 @@ import {
 import { ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
-import { FormItemControl, PopoverFormMessageService, registerFormItemControl } from '@fundamental-ngx/core/form';
-import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
-import { PopoverService } from '@fundamental-ngx/core/popover';
+import {
+    DATE_TIME_FORMATS,
+    DatetimeAdapter,
+    DateTimeFormats,
+    TranslateDayPeriodPipe
+} from '@fundamental-ngx/core/datetime';
+import {
+    FormItemControl,
+    FormMessageComponent,
+    PopoverFormMessageService,
+    registerFormItemControl
+} from '@fundamental-ngx/core/form';
+import { InputGroupComponent, InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
+import {
+    PopoverBodyComponent,
+    PopoverComponent,
+    PopoverControlComponent,
+    PopoverService
+} from '@fundamental-ngx/core/popover';
 import { Placement, ValueStateAriaMessageService } from '@fundamental-ngx/core/shared';
 import { TimeComponent } from '@fundamental-ngx/core/time';
 
@@ -34,9 +49,6 @@ import { NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { FormMessageComponent } from '@fundamental-ngx/core/form';
-import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
-import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { createMissingDateImplementationError } from './errors';
 
@@ -79,7 +91,8 @@ let timePickerCounter = 0;
         FormMessageComponent,
         TimeComponent,
         FormsModule,
-        FdTranslatePipe
+        FdTranslatePipe,
+        TranslateDayPeriodPipe
     ]
 })
 export class TimePickerComponent<D>
@@ -479,6 +492,10 @@ export class TimePickerComponent<D>
         }
 
         if (inputValue !== '') {
+            // Regex to detect and rearrange day period in the time string
+            const dayPeriodPattern = /\b(night|morning|afternoon|evening)\b/g;
+            inputValue = inputValue.replace(dayPeriodPattern, '').trim();
+
             this.time = this._dateTimeAdapter.parse(inputValue, this.getParseFormat());
             this._isInvalidTimeInput = !this._dateTimeAdapter.isValid(this.time!);
         }

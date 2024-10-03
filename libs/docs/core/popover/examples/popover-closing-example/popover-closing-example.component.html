@@ -1,0 +1,69 @@
+<div class="fd-docs-flex-display-helper">
+    <fd-popover [closeOnOutsideClick]="false" [applyOverlay]="true" [focusAutoCapture]="true" [focusTrapped]="true">
+        <fd-popover-control>
+            <button fd-button>Prevent Close on Outside Click</button>
+        </fd-popover-control>
+        <fd-popover-body [style.min-width.px]="400">
+            <div fd-popover-body-header id="popover-bar-simple-header-1">
+                <div fd-bar barDesign="header">
+                    <div fd-bar-left>
+                        <fd-button-bar
+                            id="preventCloseButton"
+                            glyph="navigation-left-arrow"
+                            fdType="transparent"
+                            ariaLabel="Back"
+                        ></fd-button-bar>
+                        <fd-bar-element><h5 fd-title>Header</h5></fd-bar-element>
+                    </div>
+                </div>
+            </div>
+            <fd-avatar [circle]="true" [style.margin.rem]="1" size="xl" glyph="group"></fd-avatar>
+        </fd-popover-body>
+    </fd-popover>
+    <fd-popover [closeOnEscapeKey]="false" [applyOverlay]="true" [focusAutoCapture]="true" [focusTrapped]="true">
+        <fd-popover-control>
+            <button fd-button>Prevent Close on Escape Key</button>
+        </fd-popover-control>
+        <fd-popover-body [style.min-width.px]="400">
+            <div fd-popover-body-header id="popover-bar-simple-header-1">
+                <div fd-bar barDesign="header">
+                    <div fd-bar-left>
+                        <fd-button-bar
+                            glyph="navigation-left-arrow"
+                            fdType="transparent"
+                            ariaLabel="Back"
+                        ></fd-button-bar>
+                        <fd-bar-element><h5 fd-title>Header</h5></fd-bar-element>
+                    </div>
+                </div>
+            </div>
+            <fd-avatar [circle]="true" [style.margin.rem]="1" size="xl" glyph="group"></fd-avatar>
+        </fd-popover-body>
+    </fd-popover>
+    <fd-popover
+        [closeOnEscapeKey]="false"
+        [closeOnOutsideClick]="false"
+        [applyOverlay]="true"
+        [focusAutoCapture]="true"
+        [focusTrapped]="true"
+    >
+        <fd-popover-control>
+            <button fd-button>Prevent Close on Outside Click & on Escape Key</button>
+        </fd-popover-control>
+        <fd-popover-body [style.min-width.px]="400">
+            <div fd-popover-body-header id="popover-bar-simple-header-1">
+                <div fd-bar barDesign="header">
+                    <div fd-bar-left>
+                        <fd-button-bar
+                            glyph="navigation-left-arrow"
+                            fdType="transparent"
+                            ariaLabel="Back"
+                        ></fd-button-bar>
+                        <fd-bar-element><h5 fd-title>Header</h5></fd-bar-element>
+                    </div>
+                </div>
+            </div>
+            <fd-avatar [circle]="true" [style.margin.rem]="1" size="xl" glyph="group"></fd-avatar>
+        </fd-popover-body>
+    </fd-popover>
+</div>

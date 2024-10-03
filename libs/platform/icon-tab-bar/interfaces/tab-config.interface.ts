@@ -19,6 +19,7 @@ export type TabConfig = NullableObject<{
     closable: boolean;
     iconFont: IconFont;
     renderer?: TemplateRef<any>;
+    titleTemplate?: TemplateRef<any>;
     id: string;
 }>;
 
@@ -37,6 +38,7 @@ export type ReactiveTabConfig = NullableObject<{
     closable: InputSignalWithTransform<boolean, unknown>;
     iconFont: InputSignal<IconFont>;
     renderer?: Signal<TemplateRef<any> | undefined>;
+    titleTemplate?: Signal<TemplateRef<any> | undefined>;
     id: InputSignal<string>;
 }>;
 

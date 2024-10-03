@@ -40,29 +40,33 @@
                 [attr.tabindex]="idx === 0 ? 0 : -1"
                 role="tab"
             >
-                @if (item.icon) {
-                    <div class="fd-icon-tab-bar__container">
-                        <span class="fd-icon-tab-bar__icon">
-                            <fd-icon [glyph]="item.icon"></fd-icon>
-                        </span>
+                @if (item?.titleTemplate) {
+                    <ng-container [ngTemplateOutlet]="item.titleTemplate || null"></ng-container>
+                } @else {
+                    @if (item.icon) {
+                        <div class="fd-icon-tab-bar__container">
+                            <span class="fd-icon-tab-bar__icon">
+                                <fd-icon [glyph]="item.icon"></fd-icon>
+                            </span>
+                            @if (item.badge) {
+                                <span class="fd-icon-tab-bar__badge"></span>
+                            }
+                        </div>
+                        <div class="fd-icon-tab-bar__details">
+                            <span class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
+                            <span class="fd-icon-tab-bar__label">{{ item.label | fdkAsyncOrSync }}</span>
+                        </div>
+                    } @else {
+                        <span class="fd-icon-tab-bar__tag">{{ item.label | fdkAsyncOrSync }}</span>
                         @if (item.badge) {
                             <span class="fd-icon-tab-bar__badge"></span>
                         }
-                    </div>
-                    <div class="fd-icon-tab-bar__details">
-                        <span class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
-                        <span class="fd-icon-tab-bar__label">{{ item.label | fdkAsyncOrSync }}</span>
-                    </div>
-                } @else {
-                    <span class="fd-icon-tab-bar__tag">{{ item.label | fdkAsyncOrSync }}</span>
-                    @if (item.badge) {
-                        <span class="fd-icon-tab-bar__badge"></span>
                     }
-                }
-                @if (item.color | fdkAsyncOrSync; as itemColor) {
-                    <div class="screenreader-only">
-                        {{ colorAssociations()?.[itemColor] || itemColor }}
-                    </div>
+                    @if (item.color | fdkAsyncOrSync; as itemColor) {
+                        <div class="screenreader-only">
+                            {{ colorAssociations()?.[itemColor] || itemColor }}
+                        </div>
+                    }
                 }
             </a>
             @if (item.closable) {

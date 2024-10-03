@@ -1,6 +1,7 @@
 export * from './datetime-adapter';
 export * from './datetime-format.pipes';
 export * from './datetime-formats';
+export * from './datetime-utils';
 export * from './fd-date';
 export * from './fd-date-formats';
 export * from './fd-date.utils';

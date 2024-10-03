@@ -3,6 +3,143 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.53.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.53.0-rc.1...v0.53.0-rc.2) (2024-10-02)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.53.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.53.0-rc.0...v0.53.0-rc.1) (2024-10-02)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.53.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.43...v0.53.0-rc.0) (2024-10-02)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.52.2-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.42...v0.52.2-rc.43) (2024-10-02)
+
+
+### Bug Fixes
+
+* **platform:** virtual scroll should account for popping columns ([#12467](https://github.com/SAP/fundamental-ngx/issues/12467)) ([01fc3db](https://github.com/SAP/fundamental-ngx/commit/01fc3dbb8956693943bd49e4aafd0ecdce35ffc5))
+
+
+
+
+
+## [0.52.2-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.41...v0.52.2-rc.42) (2024-10-01)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.52.2-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.40...v0.52.2-rc.41) (2024-10-01)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.52.2-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.39...v0.52.2-rc.40) (2024-09-30)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.52.2-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.38...v0.52.2-rc.39) (2024-09-30)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.52.2-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.37...v0.52.2-rc.38) (2024-09-30)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.52.2-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.36...v0.52.2-rc.37) (2024-09-27)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.52.2-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.35...v0.52.2-rc.36) (2024-09-26)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.52.2-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.34...v0.52.2-rc.35) (2024-09-25)
+
+
+### Features
+
+* **platform:** icon tab bar dynamic content ([#12428](https://github.com/SAP/fundamental-ngx/issues/12428)) ([18dbc82](https://github.com/SAP/fundamental-ngx/commit/18dbc82b00f6d7f2cb39fb976cb4ce6a4f55bf2f)), closes [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771) [#11771](https://github.com/SAP/fundamental-ngx/issues/11771)
+
+
+
+
+
+## [0.52.2-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.33...v0.52.2-rc.34) (2024-09-25)
+
+
+### Bug Fixes
+
+* **platform:** fdp-table sorting visible columns state get lost ([#12429](https://github.com/SAP/fundamental-ngx/issues/12429)) ([6431533](https://github.com/SAP/fundamental-ngx/commit/6431533c952c85c011ad0ee5723f470fb866dec7)), closes [#12397](https://github.com/SAP/fundamental-ngx/issues/12397) [#12397](https://github.com/SAP/fundamental-ngx/issues/12397) [#12397](https://github.com/SAP/fundamental-ngx/issues/12397) [#12397](https://github.com/SAP/fundamental-ngx/issues/12397)
+
+
+
+
+
+## [0.52.2-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.32...v0.52.2-rc.33) (2024-09-24)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.52.2-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.31...v0.52.2-rc.32) (2024-09-23)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.52.2-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.30...v0.52.2-rc.31) (2024-09-23)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
 ## [0.52.2-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.29...v0.52.2-rc.30) (2024-09-19)
 
 

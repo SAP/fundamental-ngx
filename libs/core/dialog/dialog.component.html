@@ -32,7 +32,7 @@
     (cdkDragEnded)="isDragged = false"
     (onResizeEnd)="adjustResponsivePadding()"
 >
-    @if (dialogConfig.resizable && !_fullScreen) {
+    @if (dialogConfig.resizable && !_fullScreen && !dialogConfig.mobile) {
         <span fdkResizeHandle class="fd-dialog__resize-handle"></span>
     }
     <div cdkDragHandle [cdkDragHandleDisabled]="!dialogConfig.draggable">

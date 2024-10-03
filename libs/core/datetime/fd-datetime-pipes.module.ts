@@ -1,7 +1,19 @@
 import { NgModule, Type } from '@angular/core';
-import { DateFormatPipe, DateFromNowPipe, DateTimeFormatPipe } from './datetime-format.pipes';
+import {
+    DateFormatPipe,
+    DateFromNowPipe,
+    DateTimeFormatPipe,
+    DayPeriodFormatPipe,
+    TranslateDayPeriodPipe
+} from './datetime-format.pipes';
 
-const PIPES: Type<unknown>[] = [DateFormatPipe, DateTimeFormatPipe, DateFromNowPipe];
+const PIPES: Type<unknown>[] = [
+    DateFormatPipe,
+    DateTimeFormatPipe,
+    DateFromNowPipe,
+    DayPeriodFormatPipe,
+    TranslateDayPeriodPipe
+];
 
 /**
  * @deprecated

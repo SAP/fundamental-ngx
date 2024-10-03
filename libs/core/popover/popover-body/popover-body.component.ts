@@ -142,6 +142,16 @@ export class PopoverBodyComponent implements AfterViewInit {
         }
     }
 
+    /** Handler for focus when clicking outside */
+    @HostListener('document:click', ['$event.target'])
+    onClick(targetElement: HTMLElement): void {
+        const clickedInside = this._elementRef.nativeElement.contains(targetElement);
+        if (!clickedInside) {
+            // Call the focus logic if clicked outside the popover
+            this._focusFirstTabbableElement();
+        }
+    }
+
     /** @hidden */
     ngAfterViewInit(): void {
         if (this._scrollbar) {
