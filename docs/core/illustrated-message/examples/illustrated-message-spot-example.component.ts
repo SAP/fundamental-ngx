@@ -11,6 +11,7 @@ import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-mess
 })
 export class IllustratedMessageSpotExampleComponent {
     spotConfig = {
-        spot: { url: 'assets/images/sapIllus-Spot-NoMail.svg', id: 'sapIllus-Spot-NoEmail' }
+        spot: { url: 'assets/images/sapIllus-Spot-NoMail.svg', id: 'sapIllus-Spot-NoEmail' },
+        dot: { url: 'assets/images/sapIllus-Spot-NoMail.svg', id: 'sapIllus-Spot-NoEmail' }
     };
 }

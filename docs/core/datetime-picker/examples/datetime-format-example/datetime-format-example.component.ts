@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
@@ -45,15 +46,26 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
         }
     ],
     standalone: true,
-    imports: [DatetimePickerComponent, FormsModule, FdDatetimePipesModule]
+    imports: [DatetimePickerComponent, FormsModule, FdDatetimePipesModule, DatePipe],
+    styles: [
+        `
+            .container-md {
+                width: 50%;
+            }
+        `
+    ]
 })
 export class DatetimeFormatExampleComponent {
     date = FdDate.getNow();
-    specificDateTimeFormat = {
+    basicDateTimeFormat = {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
         hour: '2-digit',
         minute: '2-digit'
+    };
+    dateTimeFormatWithDayPeriod = {
+        ...this.basicDateTimeFormat,
+        dayPeriod: true
     };
 }
