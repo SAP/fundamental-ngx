@@ -47,6 +47,13 @@ export interface SelectableFilter {
         ListLinkDirective,
         ListTitleDirective,
         FdTranslatePipe
+    ],
+    styles: [
+        `
+            .fd-list__item_cursor-pointer {
+                cursor: pointer;
+            }
+        `
     ]
 })
 export class FiltersListStepComponent implements FiltersViewStep {
