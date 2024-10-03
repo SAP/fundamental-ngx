@@ -306,4 +306,57 @@ describe('TableViewSettingsDialogComponent', () => {
         expect(showGroupSettingsInToolbarSpy).toHaveBeenCalledTimes(2);
         expect(showGroupSettingsInToolbarSpy).toHaveBeenCalledWith(true);
     });
+
+    it('should open combined settings dialog with sorting, filtering, and grouping data', () => {
+        const mockTable: Table = new TableComponentMock() as any;
+
+        // Mock data for sorting, filtering, and grouping
+        const mockSortDialogResultData: SettingsSortDialogResultData = { direction: SortDirection.ASC, field: 'name' };
+        const mockGroupDialogResultData: SettingsGroupDialogData = {
+            direction: SortDirection.ASC,
+            field: 'name',
+            columns: [{ label: 'Name', key: 'name' }]
+        };
+        const mockFilterDialogResultData: FiltersDialogData = {
+            filterBy: [{ field: 'status', value: 'valid', strategy: 'equalTo', exclude: false }],
+            columns: [{
+                sortable: true,
+                key: 'status',
+                groupable: true,
+                filterable: true,
+                name: 'status'
+            }] as TableColumn[],
+            viewSettingsFilters: []
+        };
+
+        // Mock dialog service open to return combined result data
+        jest.spyOn(dialogServiceStub, 'open').mockReturnValue({
+            afterClosed: of({
+                sortingData: mockSortDialogResultData,
+                filteringData: mockFilterDialogResultData,
+                groupingData: mockGroupDialogResultData
+            }),
+            dismiss: jest.fn()
+        } as any);
+        jest.spyOn(component, 'showViewSettingsDialog');
+        jest.spyOn(dialogRef, 'dismiss');
+
+        // Set the table and trigger the dialog opening
+        component.table = mockTable as Table;
+        mockTable.openTableFilterSettings.emit();
+        mockTable.openTableSortSettings.emit();
+        mockTable.openTableGroupSettings.emit();
+
+        expect(dialogRef.dismiss).not.toHaveBeenCalled();
+        expect(dialogServiceStub.open).toHaveBeenCalled();
+
+        expect(dialogRef.dismiss).not.toHaveBeenCalled();
+
+        // Verify that the dialog result is applied correctly
+        dialogRef.afterClosed.subscribe((result) => {
+            expect(result.sortingData).toEqual(mockSortDialogResultData);
+            expect(result.filteringData).toEqual(mockFilterDialogResultData);
+            expect(result.groupingData).toEqual(mockGroupDialogResultData);
+        });
+    });
 });

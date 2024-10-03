@@ -28,9 +28,7 @@ import { FiltersDialogData, SettingsGroupDialogData, SettingsSortDialogData } fr
 export const dialogConfig: DialogConfig = {
     responsivePadding: false,
     verticalPadding: false,
-    width: '320px',
-    /** 88px it's the header + footer height */
-    bodyMinHeight: 'calc(50vh - 88px)'
+    width: '340px'
 };
 
 /**
