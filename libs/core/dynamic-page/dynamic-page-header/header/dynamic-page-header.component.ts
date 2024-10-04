@@ -110,11 +110,14 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     _size: DynamicPageResponsiveSize;
 
     /**
-     * The level of the Dynamic Page title
-     * Possible options: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-     * Default: 'h2'
+     * Heading level of the dynamic page header title.
      */
     headingLevel = input<HeadingLevel>('h2');
+
+    /** @hidden */
+    _headingLevel = computed(() =>
+        this.headingLevel() ? Number.parseInt(`${this.headingLevel()}`.replace(/\D/g, ''), 10) : undefined
+    );
 
     /** Dynamic page title id, it has some default value if not set,  */
     titleId = input('fd-dynamic-page-title-id-' + dynamicPageTitleId++);

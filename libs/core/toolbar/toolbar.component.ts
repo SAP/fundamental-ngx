@@ -27,6 +27,7 @@ import {
     applyCssClass,
     CssClassBuilder,
     DynamicPortalComponent,
+    Nullable,
     OVERFLOW_PRIORITY_SCORE,
     OverflowPriority,
     ResizeObserverService
@@ -142,12 +143,16 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     tabindex = -1;
 
     /**
-     * The level of the Toolbar title
-     * Possible options: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-     * Default: 'h2'
+     * Heading level of the toolbar title.
      */
     @Input()
-    headingLevel: HeadingLevel = 'h2';
+    set headingLevel(level: Nullable<HeadingLevel>) {
+        if (typeof level === 'number') {
+            this._headingLevel = level;
+        } else if (typeof level === 'string') {
+            this._headingLevel = Number.parseInt(level.replace(/\D/g, ''), 10);
+        }
+    }
 
     /** Toolbar Aria-label attribute. */
     @Input()
@@ -186,6 +191,9 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
 
     /** @hidden */
     overflownItems: ToolbarItem[] = [];
+
+    /** @hidden */
+    _headingLevel = 2;
 
     /** HTML Element Reference. */
     readonly elementRef = inject(ElementRef);

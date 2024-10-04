@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
+import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FACET_CLASS_NAME, FacetType } from '../constants';
 import { addClassNameToFacetElement } from '../utils';
@@ -47,10 +48,16 @@ export class FacetComponent implements AfterViewInit {
     subtitle: string;
 
     /**
-     * Heading level (i.e. <h1>, <h2>, etc.) of the facet title.
+     * Heading level of the facet title.
      */
     @Input()
-    headingLevel: Nullable<1 | 2 | 3 | 4 | 5 | 6>;
+    set headingLevel(level: Nullable<HeadingLevel>) {
+        if (typeof level === 'number') {
+            this._headingLevel = level;
+        } else if (typeof level === 'string') {
+            this._headingLevel = Number.parseInt(level.replace(/\D/g, ''), 10);
+        }
+    }
 
     /**
      * id for the facet
@@ -80,6 +87,9 @@ export class FacetComponent implements AfterViewInit {
     get ariaLabelledby(): string {
         return this.type !== 'image' ? this.titleId : '';
     }
+
+    /** @hidden */
+    _headingLevel: number;
 
     /** @hidden
      * the internal id for the title to be associated with the aria-labelledby

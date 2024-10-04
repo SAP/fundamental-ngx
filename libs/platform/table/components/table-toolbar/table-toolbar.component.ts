@@ -135,9 +135,7 @@ export class TableToolbarComponent implements TableToolbarInterface {
     disableSearch = false;
 
     /**
-     * The level of the Toolbar title
-     * Possible options: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-     * Default: 'h2'
+     * Heading level of the table toolbar title.
      */
     @Input()
     headingLevel: HeadingLevel = 'h2';
