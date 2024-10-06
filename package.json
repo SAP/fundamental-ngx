@@ -138,7 +138,7 @@
     "jest-environment-jsdom": "29.7.0",
     "jest-environment-node": "^29.4.1",
     "jest-extended": "4.0.2",
-    "jest-preset-angular": "14.1.0",
+    "jest-preset-angular": "14.2.4",
     "jsonc-eslint-parser": "^2.1.0",
     "lerna": "7.4.2",
     "lint-staged": "15.1.0",

@@ -13770,7 +13770,7 @@ __metadata:
     jest-environment-jsdom: "npm:29.7.0"
     jest-environment-node: "npm:^29.4.1"
     jest-extended: "npm:4.0.2"
-    jest-preset-angular: "npm:14.1.0"
+    jest-preset-angular: "npm:14.2.4"
     jsonc-eslint-parser: "npm:^2.1.0"
     lerna: "npm:7.4.2"
     lint-staged: "npm:15.1.0"
@@ -16207,9 +16207,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-preset-angular@npm:14.1.0":
-  version: 14.1.0
-  resolution: "jest-preset-angular@npm:14.1.0"
+"jest-preset-angular@npm:14.2.4":
+  version: 14.2.4
+  resolution: "jest-preset-angular@npm:14.2.4"
   dependencies:
     bs-logger: "npm:^0.2.6"
     esbuild: "npm:>=0.15.13"
@@ -16228,7 +16228,7 @@ __metadata:
   dependenciesMeta:
     esbuild:
       optional: true
-  checksum: 10/df40cb1aa5a5614fb87a4962bb1e2e7ecea6bf893c562b779f46371ab4afd6294bc040da36149c91995b7464b1df84bf3dd66190abdfb59b4f07f437381746a6
+  checksum: 10/d457158b804d9ca54f59a1a52990451a433c03ad556dc82afc0681d0fe87021abed800a02611edf216e7b70b43a1fe6d9ee254b8fd6b1795609f38f00595ec9f
   languageName: node
   linkType: hard
 
