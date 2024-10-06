@@ -69,6 +69,10 @@ export class SelectionChangeEvent {
     selectedItems: BaseListItem[];
     /** Index */
     index: number;
+    /** Selected item */
+    added?: BaseListItem;
+    /** Deselected item */
+    removed?: BaseListItem;
 }
 
 let nextListId = 0;
@@ -513,10 +517,16 @@ export class ListComponent<T>
 
         this._selectionModel = new SelectionModel<BaseListItem>(this._multiSelect, this.selectedItems);
 
-        this._selectionModel.changed.pipe(takeUntilDestroyed(this._destroyed)).subscribe(() => {
+        this._selectionModel.changed.pipe(takeUntilDestroyed(this._destroyed)).subscribe((selection) => {
             this.selectedItems = this._selectionModel.selected;
             const event = new SelectionChangeEvent();
             event.selectedItems = this.selectedItems;
+            if (selection.added?.length) {
+                event.added = selection.added[0];
+            }
+            if (selection.removed?.length) {
+                event.removed = selection.removed[0];
+            }
             this.stateChanges.next(event);
             this.selectedItemChange.emit(event);
         });
@@ -662,6 +672,11 @@ export class ListComponent<T>
     _selectItem(item: BaseListItem): void {
         this._selectionModel.select(item);
         this.stateChanges.next(item);
+    }
+
+    /** @hidden */
+    _clearSelection(): void {
+        this._selectionModel.clear();
     }
 
     /** @hidden */
