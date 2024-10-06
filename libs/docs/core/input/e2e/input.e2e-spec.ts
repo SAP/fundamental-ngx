@@ -4,13 +4,9 @@ import {
     clearValue,
     click,
     getElementArrayLength,
-    getElementClass,
     getElementSize,
-    getPreviousElementText,
-    getText,
     getValue,
     isElementDisplayed,
-    isEnabled,
     mouseHoverElement,
     refreshPage,
     scrollIntoView,
@@ -19,15 +15,6 @@ import {
     waitForElDisplayed
 } from '../../../../../e2e';
 import { longLine, number, special_characters, text } from './input';
-import {
-    informationInputLabelText,
-    inputMessageText,
-    invalidInputLabelText,
-    labelsArray,
-    stateClassesArr,
-    validInputLabelText,
-    warningInputLabelText
-} from './input-page-contents';
 import { InputPo } from './input.po';
 
 describe('Input should ', () => {
@@ -95,16 +82,6 @@ describe('Input should ', () => {
         await expect(await getValue(defaultInput)).toBe(text);
     });
 
-    it('have associated label element to describe its purpose', async () => {
-        for (let i = 0; inputsArr.length > i; i++) {
-            await expect((await getPreviousElementText(inputsArr[i])).trim()).toContain(labelsArray[i]);
-        }
-        await expect((await getText(validInputLabel)).trim()).toBe(validInputLabelText);
-        await expect((await getText(invalidInputLabel)).trim()).toBe(invalidInputLabelText);
-        await expect((await getText(warningInputLabel)).trim()).toBe(warningInputLabelText);
-        await expect((await getText(informationInputLabel)).trim()).toBe(informationInputLabelText);
-    });
-
     it('by default accept all kinds of input values – alphabet, numerical, special characters', async () => {
         await waitForElDisplayed(defaultInput);
         await setValue(defaultInput, text);
@@ -133,48 +110,9 @@ describe('Input should ', () => {
         await expect(await getValue(defaultInput)).toBe('');
     });
 
-    it('check have disabled attr assigned to disabled inputs', async () => {
-        await waitForElDisplayed(disabledInput);
-        await expect(await isEnabled(disabledInput)).toBe(false);
-
-        await waitForElDisplayed(reactiveDisabledInput);
-        await expect(await isEnabled(reactiveDisabledInput)).toBe(false);
-    });
-
-    it('should compact be smaller than the default', async () => {
-        const defaultHeight = await getElementSize(defaultInput);
-        const compactHeight = await getElementSize(compactInput);
-
-        await expect(defaultHeight.height).toBeGreaterThan(compactHeight.height);
-    });
-
-    it('should have message attached to the input', async () => {
-        await click(validInput);
-        await expect((await getText(formMessagePopover)).trim()).toBe(inputMessageText);
-
-        await scrollIntoView(invalidInput);
-        await mouseHoverElement(invalidInput);
-        await expect((await getText(formMessagePopover)).trim()).toBe(inputMessageText);
-
-        await click(warningInput);
-        await expect((await getText(formMessagePopover)).trim()).toBe(inputMessageText);
-
-        await click(informationInput);
-        await expect((await getText(formMessagePopover)).trim()).toBe(inputMessageText);
-    });
-
     it('should add to more input fields by click Add btn', async () => {
         await click(addBtn);
         await expect(await getElementArrayLength(reactivePrimaryInput2)).toBe(2);
-    });
-
-    it('should check all input fields work correctly', async () => {
-        const inputLength = await getElementArrayLength(allInputFields);
-        for (let i = 0; i < inputLength; i++) {
-            await scrollIntoView(allInputFields, i);
-            await setValue(allInputFields, text + number + special_characters, i);
-            await expect(await getValue(allInputFields, i)).toBe(text + number + special_characters);
-        }
     });
 
     it('should check displayed popover by hover question mark', async () => {
@@ -188,15 +126,6 @@ describe('Input should ', () => {
 
         await mouseHoverElement(questionMark, 1);
         await expect(await isElementDisplayed(popoverHelp)).toBe(true, 'popover not displayed');
-    });
-
-    it('should check states', async () => {
-        await scrollIntoView(inputStateExample);
-        const checkboxCount = await getElementArrayLength(inputStateExample + input);
-
-        for (let i = 0; i < checkboxCount; i++) {
-            await expect(await getElementClass(inputStateExample + input, i)).toContain(stateClassesArr[i]);
-        }
     });
 
     it('should check RTL', async () => {

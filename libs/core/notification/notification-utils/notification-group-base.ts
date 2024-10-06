@@ -53,7 +53,7 @@ export abstract class NotificationGroupBaseDirective implements AfterViewInit {
                         .filter((b) => !b.hasAttribute('aria-describedby'))
                         .forEach((b) => {
                             // setting aria-describedby on each button with an id of related header
-                            this._renderer.setAttribute(b, 'aria-describedby', firstHeader.uniqueId);
+                            this._renderer.setAttribute(b, 'aria-describedby', firstHeader.uniqueId());
                         });
                 });
             });

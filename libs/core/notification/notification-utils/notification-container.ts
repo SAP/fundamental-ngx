@@ -11,13 +11,13 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 flex-direction: column;
                 z-index: 5000;
                 align-items: flex-end;
-                top: 4.75rem;
+                top: 2rem;
                 right: 2rem;
             }
         `
     ],
     host: {
-        '[class.fd-notification-container]': 'true'
+        class: 'fd-notification-container'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

@@ -118,6 +118,7 @@ export class MessageStripAlertService {
                                             config.messageStrip.onDismiss &&
                                             config.messageStrip.onDismiss();
                                         onDismiss$.next();
+                                        onDismiss$.complete();
                                     }
                                 }
                             }

@@ -38,6 +38,8 @@ const ALTER_ICON_OPTIONS = {
     DEFAULT_ICON: 'default-icon'
 };
 
+export type IndicationColor = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+
 @Component({
     selector: 'fd-avatar',
     templateUrl: './avatar.component.html',
@@ -115,8 +117,13 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
     /** Whether to apply a border to the Avatar. */
     @Input() border = false;
 
-    /** A number from 1 to 10 representing the background color of the Avatar. */
+    /** A number from 1 to 10 representing the background color of the Avatar.
+     * This property will override the colorIndication property.
+     */
     @Input() colorAccent: Nullable<ColorAccent> = null;
+
+    /** A number from 1 to 10 representing the background color of the Avatar using the Indication Colors. */
+    @Input() colorIndication: Nullable<IndicationColor> = null;
 
     /** Whether to apply random background color to the Avatar. */
     @Input() random = false;
@@ -242,6 +249,9 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
             this.size ? `fd-avatar--${this.size}` : '',
             this.colorAccent && !this.random ? `fd-avatar--accent-color-${this.colorAccent}` : '',
             this.random ? `fd-avatar--accent-color-${getRandomColorAccent()}` : '',
+            this.colorIndication && this.colorAccent === null && !this.random
+                ? `fd-avatar--indication-color-${this.colorIndication}`
+                : '',
             this.circle ? 'fd-avatar--circle' : '',
             this.border ? 'fd-avatar--border' : '',
             this.transparent ? 'fd-avatar--transparent' : '',

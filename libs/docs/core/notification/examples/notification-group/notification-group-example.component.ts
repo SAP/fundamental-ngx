@@ -3,13 +3,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { IndicatorStates, NotificationModule } from '@fundamental-ngx/core/notification';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { MessageStripModule } from '@fundamental-ngx/core/message-strip';
+import { NotificationModule } from '@fundamental-ngx/core/notification';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform/icon-tab-bar';
 
 export type Notification = {
     avatar: string;
-    indicator: IndicatorStates;
     title: string;
     unread: boolean;
     paragraph: string;
@@ -31,7 +34,11 @@ export type Notification = {
         NotificationModule,
         FDP_ICON_TAB_BAR,
         NgTemplateOutlet,
-        AvatarComponent
+        AvatarComponent,
+        MessageStripModule,
+        ToolbarModule,
+        ObjectStatusComponent,
+        IconComponent
     ]
 })
 export class NotificationGroupExampleComponent {
@@ -43,7 +50,6 @@ export class NotificationGroupExampleComponent {
     notifications: Notification[] = [
         {
             avatar: 'batch-payments',
-            indicator: 'success',
             title: 'Your leave request has been accepted',
             unread: false,
             paragraph:
@@ -54,7 +60,6 @@ export class NotificationGroupExampleComponent {
         },
         {
             avatar: 'customer',
-            indicator: 'success',
             title: 'Your leave request has been accepted',
             unread: true,
             paragraph:
@@ -68,7 +73,6 @@ export class NotificationGroupExampleComponent {
     notificationsWarning: Notification[] = [
         {
             avatar: 'work-history',
-            indicator: 'warning',
             title: 'Approve order #1234',
             unread: true,
             paragraph: 'Adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -78,7 +82,6 @@ export class NotificationGroupExampleComponent {
         },
         {
             avatar: 'sap-box',
-            indicator: 'warning',
             title: 'Approve order #5678',
             unread: true,
             paragraph: 'Consectetur adipiscing elit tempor incididunt ut labore et dolore magna aliqua.',
