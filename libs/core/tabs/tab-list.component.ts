@@ -43,7 +43,7 @@ import { ScrollSpyDirective } from '@fundamental-ngx/core/scroll-spy';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { FD_TABLIST, TabList } from '@fundamental-ngx/core/shared';
 import { Observable, Subject, Subscription, fromEvent, merge } from 'rxjs';
-import { debounceTime, delay, filter, first, map, startWith, switchMap, tap } from 'rxjs/operators';
+import { debounceTime, delay, filter, first, map, startWith, switchMap, take, tap } from 'rxjs/operators';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { TabItemDirective } from './tab-item/tab-item.directive';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
@@ -235,6 +235,9 @@ export class TabListComponent
     /** @hidden */
     _init = true;
 
+    /** @hidden */
+    _currentNumberOfTabs = 0;
+
     /** Scrollable element reference. */
     get scrollableElement(): Nullable<ElementRef> {
         return this._scrollbar?.elementRef;
@@ -378,7 +381,12 @@ export class TabListComponent
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
-                this.stackContent && this._scrollSpy?.onScroll(undefined, true);
+                if (this.stackContent && this._currentNumberOfTabs !== this._tabArray.length) {
+                    this._zone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
+                        this._scrollSpy?.onScroll(undefined, true);
+                        this._currentNumberOfTabs = this._tabArray.length;
+                    });
+                }
             });
     }
 
