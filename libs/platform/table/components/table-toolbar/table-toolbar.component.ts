@@ -138,7 +138,7 @@ export class TableToolbarComponent implements TableToolbarInterface {
      * Heading level of the table toolbar title.
      */
     @Input()
-    headingLevel: HeadingLevel = 'h2';
+    headingLevel: HeadingLevel = 2;
 
     /** @hidden */
     @ContentChild(TableToolbarActionsComponent)

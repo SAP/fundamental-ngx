@@ -112,7 +112,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     /**
      * Heading level of the dynamic page header title.
      */
-    headingLevel = input<HeadingLevel>('h2');
+    headingLevel = input<HeadingLevel>(2);
 
     /** @hidden */
     _headingLevel = computed(() =>
