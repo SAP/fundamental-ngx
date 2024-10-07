@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.46](https://github.com/SAP/fundamental-ngx/compare/v0.43.45...v0.43.46) (2024-10-07)
+
+
+### Bug Fixes
+
+* **core:** more customization of aria attributes for multi-input ([#12438](https://github.com/SAP/fundamental-ngx/issues/12438)) ([5b43f22](https://github.com/SAP/fundamental-ngx/commit/5b43f22e3bbf2cad4afc060d786d5114c5b7575e))
+* missing translations for column freeze ([#12503](https://github.com/SAP/fundamental-ngx/issues/12503)) ([ff38ade](https://github.com/SAP/fundamental-ngx/commit/ff38adeab7bb8aad20a7366e9e61858a7ba1f10c))
+
+
+
+
+
 ## [0.43.45](https://github.com/SAP/fundamental-ngx/compare/v0.43.43...v0.43.45) (2024-09-20)
 
 
