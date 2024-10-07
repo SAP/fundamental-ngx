@@ -1,107 +1,85 @@
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     ChangeDetectionStrategy,
     Component,
-    EventEmitter,
-    HostBinding,
-    Input,
-    Output,
+    HostListener,
     ViewEncapsulation,
     computed,
     inject,
+    input,
     signal
 } from '@angular/core';
-import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import {
-    ContentDensityDirective,
-    ContentDensityMode,
-    LocalContentDensityMode
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { NotificationGroupBaseDirective } from '../notification-utils/notification-group-base';
+import { FD_NOTIFICATION_GROUP_HEADER } from '../token';
 
 @Component({
     selector: 'fd-notification-group-header',
     template: `
-        <button
-            fd-button
-            fdType="transparent"
-            role="button"
-            [fdContentDensity]="_expandButtonContentDensity"
-            [attr.aria-expanded]="expanded"
-            [attr.aria-describedby]="expandDescribedBy"
-            [attr.aria-label]="expandAriaLabel"
-            [attr.aria-labelledby]="expandAriaLabelledBy"
-            (click)="toggleExpand()"
-        >
+        <span class="fd-notification-group__header-arrow">
             <fd-icon [glyph]="_buttonIcon$()"></fd-icon>
-        </button>
-        <div class="fd-notification__content">
-            <ng-content select="fd-notification-header"></ng-content>
-        </div>
-        <ng-content select="fd-notification-actions"></ng-content>
+        </span>
+        <ng-content select="fd-notification-group-header-title"></ng-content>
         <ng-content></ng-content>
     `,
+    host: {
+        class: 'fd-notification-group__header',
+        role: 'button',
+        '[tabindex]': '0',
+        '[attr.title]': 'title()',
+        '[attr.aria-controls]': 'ariaControls()',
+        '[attr.aria-expanded]': 'expanded()',
+        '(click)': 'toggleExpand()'
+    },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [ButtonComponent, ContentDensityDirective, IconComponent]
+    imports: [ButtonComponent, ContentDensityDirective, IconComponent],
+    providers: [
+        {
+            provide: FD_NOTIFICATION_GROUP_HEADER,
+            useExisting: NotificationGroupHeaderComponent
+        }
+    ]
 })
 export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirective {
-    /** @hidden */
-    @HostBinding('class.fd-notification__group-header')
-    fdNotificationGroupHeaderClass = true;
+    /**
+     * Title for the group header
+     * default value: "Expand/Collapse"
+     */
+    title = input('Expand/Collapse');
 
-    /** Whether the expand button is in compact mode */
-    @Input()
-    expandCompact: boolean;
-
-    /** aria-label of the expand button */
-    @Input()
-    expandAriaLabel: Nullable<string>;
-
-    /** aria-labelledby of the expand button */
-    @Input()
-    expandAriaLabelledBy: Nullable<string>;
-
-    /** Whether the button is in expanded state */
-    @Input()
-    set expanded(value: boolean) {
-        this._expanded$.set(value);
-    }
-
-    get expanded(): boolean {
-        return this._expanded$();
-    }
-
-    /** Output event triggered when the Expand button is clicked */
-    @Output()
-    expandedChange = new EventEmitter<boolean>();
+    /**
+     * id of the list element that the group header controls
+     * string value
+     */
+    ariaControls = signal<Nullable<string>>('');
 
     /** @hidden */
-    get expandDescribedBy(): string {
-        return this.notificationHeader?.first?.uniqueId;
-    }
+    expanded = signal(false);
 
     /** @hidden */
     readonly _buttonIcon$ = computed(() =>
-        this._expanded$() ? 'slim-arrow-down' : this._rtlService?.rtlSignal() ? 'slim-arrow-left' : 'slim-arrow-right'
+        this.expanded() ? 'slim-arrow-down' : this._rtlService?.rtlSignal() ? 'slim-arrow-left' : 'slim-arrow-right'
     );
-
-    /** @hidden */
-    readonly _expanded$ = signal(true);
-
-    /** @hidden */
-    get _expandButtonContentDensity(): LocalContentDensityMode {
-        return typeof this.expandCompact === 'undefined' ? 'global' : ContentDensityMode.COMPACT;
-    }
 
     /** @hidden */
     private readonly _rtlService = inject(RtlService, { optional: true });
 
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    keydownHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+            this.toggleExpand();
+            event.preventDefault();
+        }
+    }
+
     /** Method that toggles the Notification list content */
     toggleExpand(): void {
-        this._expanded$.update((expanded) => !expanded);
-        this.expandedChange.emit(this.expanded);
+        this.expanded.update((expanded) => !expanded);
     }
 }

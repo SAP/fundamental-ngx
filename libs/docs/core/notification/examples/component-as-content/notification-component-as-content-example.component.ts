@@ -28,8 +28,7 @@ export class NotificationComponentAsContentExampleComponent {
                 title: 'Notification Title',
                 paragraph: 'Notification Description',
                 firstFooterContent: 'SAP Analytics Cloud',
-                secondFooterContent: 'Just Now',
-                open: 'Open'
+                secondFooterContent: 'Just Now'
             },
             width: '500px'
         });

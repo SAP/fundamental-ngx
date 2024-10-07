@@ -262,11 +262,10 @@ export class DatePickerComponent<D>
     }
 
     /**
-     * Whether AddOn Button should be focusable
-     * @default true
+     * @deprecated Popover is toggled with f4 key
      */
     @Input()
-    buttonFocusable = true;
+    buttonFocusable = false;
 
     /**
      * Special days mark, it can be used by passing array of object with

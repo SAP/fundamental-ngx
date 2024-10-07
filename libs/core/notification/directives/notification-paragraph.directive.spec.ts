@@ -33,4 +33,8 @@ describe('NotificationParagraphDirective', () => {
     it('should assign class', () => {
         expect(component.ref.nativeElement.className).toBe('fd-notification__paragraph');
     });
+
+    it('should have a default id', () => {
+        expect(component.ref.nativeElement.getAttribute('id')).toBeTruthy();
+    });
 });

@@ -17,6 +17,7 @@ import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import {
     ToolbarComponent,
     ToolbarItemDirective,
@@ -132,6 +133,12 @@ export class TableToolbarComponent implements TableToolbarInterface {
     /** Whether display search button in the search field */
     @Input()
     disableSearch = false;
+
+    /**
+     * Heading level of the table toolbar title.
+     */
+    @Input()
+    headingLevel: HeadingLevel = 2;
 
     /** @hidden */
     @ContentChild(TableToolbarActionsComponent)
