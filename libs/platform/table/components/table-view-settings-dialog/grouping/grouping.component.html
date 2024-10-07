@@ -49,7 +49,7 @@
 
         <ul fd-list [selection]="true">
             <li fd-list-group-header>
-                <span fd-list-title id="group-dialog-group-by-header">{{
+                <span fd-list-title [attr.id]="groupOrderHeaderId">{{
                     'platformTable.groupDialogGroupByHeader' | fdTranslate
                 }}</span>
             </li>
