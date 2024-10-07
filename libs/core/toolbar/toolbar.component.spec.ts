@@ -104,7 +104,7 @@ describe('ToolbarComponent - Prioritization', () => {
 
     it('should hide element to overflow by priority', (doneFn) => {
         fixture.whenRenderingDone().then(() => {
-            const overflownItems: OverflowPriority[] = ['high', 'low', 'disappear', 'always'];
+            const overflownItems: OverflowPriority[] = ['high', 'high', 'low', 'disappear', 'always'];
             toolbar.overflowItems$.subscribe((actualOverflownItems) => {
                 expect(actualOverflownItems.length).toBeGreaterThan(0);
 
@@ -153,8 +153,10 @@ describe('ToolbarComponent - Prioritization and Grouping', () => {
     it('should hide elements to overflow by group and priority', (doneFn) => {
         fixture.whenRenderingDone().then(() => {
             const expectedOverflownItems: `${number} / ${OverflowPriority}`[] = [
+                '1 / high', 
                 '2 / low',
                 '2 / low',
+                '1 / low',
                 '2 / disappear',
                 '0 / always'
             ];

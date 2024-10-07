@@ -29,6 +29,7 @@ import {
     applyCssClass,
     CssClassBuilder,
     DynamicPortalComponent,
+    Nullable,
     OVERFLOW_PRIORITY_SCORE,
     OverflowPriority,
     ResizeObserverService
@@ -40,6 +41,7 @@ import {
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import { TitleComponent, TitleToken } from '@fundamental-ngx/core/title';
 import { BehaviorSubject, combineLatest, map, Observable, startWith } from 'rxjs';
 import { ToolbarItem } from './abstract-toolbar-item.class';
@@ -143,6 +145,18 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     @Input()
     tabindex = -1;
 
+    /**
+     * Heading level of the toolbar title.
+     */
+    @Input()
+    set headingLevel(level: Nullable<HeadingLevel>) {
+        if (typeof level === 'number') {
+            this._headingLevel = level;
+        } else if (typeof level === 'string') {
+            this._headingLevel = Number.parseInt(level.replace(/\D/g, ''), 10);
+        }
+    }
+
     /** Toolbar Aria-label attribute. */
     @Input()
     @HostBinding('attr.aria-label')
@@ -187,6 +201,12 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     /** @hidden */
     spacerDirectives = contentChildren(ToolbarSpacerDirective);
 
+    /** @hidden */
+    separatorDirectives = contentChildren(ToolbarSeparatorComponent);
+
+    /** @hidden */
+    _headingLevel = 2;
+
     /** HTML Element Reference. */
     readonly elementRef = inject(ElementRef);
 
@@ -199,7 +219,10 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     /** @hidden */
     private get _toolbarWidth(): number {
         const _overflow_btn_size = this._contentDensityObserver.isCompact ? OVERFLOW_BTN_COMPACT : OVERFLOW_BTN_COZY;
-        return (this.elementRef.nativeElement as HTMLElement).clientWidth - (_overflow_btn_size + 2 * ELEMENT_MARGIN);
+        return (
+            (this.elementRef.nativeElement as HTMLElement).clientWidth -
+            (_overflow_btn_size + 4 * ELEMENT_MARGIN + 1 + this.separatorDirectives().length)
+        );
     }
 
     /** @hidden */
@@ -259,7 +282,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
                     const overflowItems: ToolbarItem[] = [];
                     _sortedByPriorityAndGroupItems.reduce(
                         (_contentWidth, toolbarItem) => {
-                            const itemWidth = toolbarItem.width + 5;
+                            const itemWidth = toolbarItem.width + 2;
                             const itemPriority = toolbarItem.priority;
                             const shouldItemBeRemovedByWidth = itemWidth + _contentWidth > toolbarWidth;
                             const shouldAlwaysBeInOverflow =

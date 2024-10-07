@@ -21,6 +21,7 @@ import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/c
 
 import { NgTemplateOutlet } from '@angular/common';
 import { IgnoreClickOnSelectionDirective, Nullable } from '@fundamental-ngx/cdk/utils';
+import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageHeaderSubtitleDirective } from '../../directives/dynamic-page-header-subtitle.directive';
 import { DynamicPageHeaderTitleDirective } from '../../directives/dynamic-page-header-title.directive';
@@ -33,8 +34,6 @@ import { DynamicPageTitleContentComponent } from '../actions/dynamic-page-title-
 import { DynamicPageBreadcrumbComponent } from '../breadcrumb/dynamic-page-breadcrumb.component';
 
 export const ActionSquashBreakpointPx = 1280;
-
-export type HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 let dynamicPageTitleId = 0;
 
@@ -111,11 +110,14 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     _size: DynamicPageResponsiveSize;
 
     /**
-     * The level of the Dynamic Page title
-     * Possible options: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-     * Default: 'h2'
+     * Heading level of the dynamic page header title.
      */
-    headingLevel = input<HeadingLevel>('h2');
+    headingLevel = input<HeadingLevel>(2);
+
+    /** @hidden */
+    _headingLevel = computed(() =>
+        this.headingLevel() ? Number.parseInt(`${this.headingLevel()}`.replace(/\D/g, ''), 10) : undefined
+    );
 
     /** Dynamic page title id, it has some default value if not set,  */
     titleId = input('fd-dynamic-page-title-id-' + dynamicPageTitleId++);
