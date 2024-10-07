@@ -53,6 +53,7 @@ const NOT_SORTED_OPTION_VALUE = null;
 const INITIAL_DIRECTION = SortDirection.ASC;
 
 let sortOrderHeaderUniqueId = 0;
+let sortDialogSortByHeaderUniqueId = 0;
 
 @Component({
     templateUrl: './sorting.component.html',
@@ -94,7 +95,10 @@ export class SortingComponent implements Resettable {
     allowDisablingSorting: boolean;
 
     /** @hidden */
-    sortOrderHeaderId = `fdp-table-group-dialog-group-order-header-${sortOrderHeaderUniqueId++}`;
+    sortOrderHeaderId = `fdp-table-sort-order-header-${sortOrderHeaderUniqueId++}`;
+
+    /** @hidden */
+    sortDialogSortByHeaderId = `fdp-table-sort-dialog-sort-by-header-${sortDialogSortByHeaderUniqueId++}`;
 
     /** Table columns */
     readonly columns: SettingsSortDialogColumn[] = [];
