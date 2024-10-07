@@ -52,6 +52,8 @@ export interface SettingsSortDialogResultData {
 const NOT_SORTED_OPTION_VALUE = null;
 const INITIAL_DIRECTION = SortDirection.ASC;
 
+let sortOrderHeaderUniqueId = 0;
+
 @Component({
     templateUrl: './sorting.component.html',
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => SortingComponent) }],
@@ -90,6 +92,9 @@ export class SortingComponent implements Resettable {
 
     /** Whether to allow selecting '(Not sorted)' option in sorting dialog. */
     allowDisablingSorting: boolean;
+
+    /** @hidden */
+    sortOrderHeaderId = `fdp-table-group-dialog-group-order-header-${sortOrderHeaderUniqueId++}`;
 
     /** Table columns */
     readonly columns: SettingsSortDialogColumn[] = [];
