@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ColorAccent, Nullable } from '@fundamental-ngx/cdk/utils';
 import { AvatarValueStates } from './avatar-value-states.type';
-import { AvatarComponent } from './avatar.component';
+import { AvatarComponent, IndicationColor } from './avatar.component';
 
 @Component({
     selector: 'fd-test-object-status',
@@ -16,6 +16,7 @@ import { AvatarComponent } from './avatar.component';
         [contain]="contain"
         [tile]="tile"
         [colorAccent]="colorAccent"
+        [colorIndication]="colorIndication"
         [random]="random"
         [zoomGlyph]="zoomGlyph"
         [border]="border"
@@ -37,6 +38,7 @@ class TestComponent {
     contain = false;
     tile = false;
     colorAccent: Nullable<ColorAccent> = null;
+    colorIndication: Nullable<IndicationColor> = null;
     random = false;
     zoomGlyph: string | null = null;
     border = false;
@@ -136,6 +138,20 @@ describe('AvatarComponent', () => {
         component.colorAccent = 10;
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.fd-avatar--accent-color-10')).toBeTruthy();
+    });
+
+    it('Should Add Indication Color', () => {
+        component.colorIndication = 1;
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('.fd-avatar--indication-color-1')).toBeTruthy();
+
+        component.colorIndication = 5;
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('.fd-avatar--indication-color-5')).toBeTruthy();
+
+        component.colorIndication = 10;
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('.fd-avatar--indication-color-10')).toBeTruthy();
     });
 
     it('Should Add Random Accent Color', () => {

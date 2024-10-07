@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { NotificationGroupBaseDirective } from '../notification-utils/notification-group-base';
 
 @Component({
@@ -6,10 +6,9 @@ import { NotificationGroupBaseDirective } from '../notification-utils/notificati
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    standalone: true,
+    host: {
+        class: 'fd-notification__body'
+    }
 })
-export class NotificationBodyComponent extends NotificationGroupBaseDirective {
-    /** @hidden */
-    @HostBinding('class.fd-notification__body')
-    fdNotificationBodyClass = true;
-}
+export class NotificationBodyComponent extends NotificationGroupBaseDirective {}
