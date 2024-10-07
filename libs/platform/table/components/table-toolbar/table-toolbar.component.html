@@ -12,6 +12,7 @@
         [titleId]="tableToolbarTitleId"
         [title]="title && !hideItemCount ? title + ' (' + counter() + ')' : title"
         [shouldOverflow]="shouldOverflow"
+        [headingLevel]="headingLevel"
     >
         @if (_tableToolbarLeftActionsComponent) {
             <span fd-toolbar-item fdOverflowPriority="never">
