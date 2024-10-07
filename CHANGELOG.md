@@ -3,6 +3,99 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.0...v0.53.1-rc.1) (2024-10-07)
+
+
+### Bug Fixes
+
+* **core,platform:** make headingLevel a shared type, use for table toolbar ([#12500](https://github.com/SAP/fundamental-ngx/issues/12500)) ([08f5984](https://github.com/SAP/fundamental-ngx/commit/08f5984a67e226039544897f8aac3bb746fd3e09))
+
+
+
+
+
+## [0.53.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.53.0...v0.53.1-rc.0) (2024-10-03)
+
+
+### Bug Fixes
+
+* textarea and input state form message a11y improvements ([#12499](https://github.com/SAP/fundamental-ngx/issues/12499)) ([3f1bec1](https://github.com/SAP/fundamental-ngx/commit/3f1bec1db1a156b2c93e62331b96ded33265741f))
+
+
+
+
+
+# [0.53.0](https://github.com/SAP/fundamental-ngx/compare/v0.53.0-rc.2...v0.53.0) (2024-10-03)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.53.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.53.0-rc.1...v0.53.0-rc.2) (2024-10-02)
+
+
+### Bug Fixes
+
+* **core:** keep focused option in view when using arrow keys ([#12495](https://github.com/SAP/fundamental-ngx/issues/12495)) ([574e18b](https://github.com/SAP/fundamental-ngx/commit/574e18b6f3e45cc227b38b7e94b3bee0c8bca585))
+
+
+
+
+
+# [0.53.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.53.0-rc.0...v0.53.0-rc.1) (2024-10-02)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.53.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.43...v0.53.0-rc.0) (2024-10-02)
+
+
+### Bug Fixes
+
+* **core:** update Illustrated Messages to lates design and add responsiveness ([#12405](https://github.com/SAP/fundamental-ngx/issues/12405)) ([6f32d8d](https://github.com/SAP/fundamental-ngx/commit/6f32d8d836bab8b46f5d54e328360b2c30c2c508))
+
+
+### Features
+
+* **core:** add avatar indication colors ([#12444](https://github.com/SAP/fundamental-ngx/issues/12444)) ([4362d6f](https://github.com/SAP/fundamental-ngx/commit/4362d6f7a45fb1092acfa6bc7fe5fa813cdeab62))
+* **core:** update Notifications to latest design ([#12476](https://github.com/SAP/fundamental-ngx/issues/12476)) ([3a2ab29](https://github.com/SAP/fundamental-ngx/commit/3a2ab29e481fa19b5000acda4d746108f850f025))
+
+
+### BREAKING CHANGES
+
+* **core:** Refactor Notification and Notification Group components.
+
+
+
+
+
+## [0.52.2-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.42...v0.52.2-rc.43) (2024-10-02)
+
+
+### Bug Fixes
+
+* **platform:** virtual scroll should account for popping columns ([#12467](https://github.com/SAP/fundamental-ngx/issues/12467)) ([01fc3db](https://github.com/SAP/fundamental-ngx/commit/01fc3dbb8956693943bd49e4aafd0ecdce35ffc5))
+
+
+
+
+
+## [0.52.2-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.41...v0.52.2-rc.42) (2024-10-01)
+
+
+### Bug Fixes
+
+* **core:** form label white space ([#12491](https://github.com/SAP/fundamental-ngx/issues/12491)) ([4b4b06f](https://github.com/SAP/fundamental-ngx/commit/4b4b06f7162854c22aedda6356b49734e25a618c))
+
+
+
+
+
 ## [0.52.2-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.52.2-rc.40...v0.52.2-rc.41) (2024-10-01)
 
 

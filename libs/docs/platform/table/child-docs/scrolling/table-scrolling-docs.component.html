@@ -32,8 +32,8 @@
     <li><code>[virtualScroll]="true"</code> - enables virtual scroll</li>
     <li><code>[bodyHeight]="value"</code> - sets the height of the table body (viewport)</li>
     <li>
-        <code>[rowHeight]="value"</code> - sets the height of the table row if it is different from default for the
-        current content density
+        <code>[rowHeight]="value"</code> - sets the minimum height of the table row if it is different from default for
+        the current content density
     </li>
 </ul>
 
@@ -41,6 +41,20 @@
     Additionally, you may set the <code>renderAhead</code> input property to specify how many rows should be rendered
     ahead of the current viewport. Default is 20. Or control the table <code>state</code> on the application level to
     control for example a scrolling position so it can be properly restored.
+</p>
+
+<p>
+    Note that all rows must be of the same height in order for virtual scrolling to perform well. As mentioned before,
+    you can set the minimum height with the <code>[rowHeight]</code> input. When using <code>popping</code> columns on
+    smaller width screens, it is recommended to provide a pixel value to the <code>[secondaryRowHeight]</code> input.
+    This input works similarly to <code>[rowHeight]</code> but instead applies to the popping column data that is placed
+    beneath the original row.
+    <br />
+    It is imperative that cells in the popping columns are all the same height as well. If the data loaded in to the
+    cells causes their contents to exceed the height of <code>[rowHeight]</code> or <code>[secondaryRowHeight]</code>,
+    and therefore causing the heights of rows to differ, we recommend using <code>*fdpEditableCellDef</code> or
+    <code>*fdpCellDef</code> to define custom cell templates that will make the contents of the cell fit more
+    predictably.
 </p>
 <description> </description>
 <component-example>

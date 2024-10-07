@@ -17,11 +17,8 @@
 @if (inlineHelpPlacement === 'before' && inlineHelpContent) {
     <ng-template [ngTemplateOutlet]="inlineHelpRef"></ng-template>
 }
-<span class="fd-form-label" [class.fd-form-label--required]="required">
+<span class="fd-form-label" [class.fd-form-label--required]="required" [class.fd-form-label--colon]="colon">
     <ng-content></ng-content>
-    @if (colon) {
-        :
-    }
 </span>
 @if (inlineHelpPlacement === 'after' && inlineHelpContent) {
     <ng-template [ngTemplateOutlet]="inlineHelpRef"></ng-template>

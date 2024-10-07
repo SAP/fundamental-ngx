@@ -3,33 +3,38 @@
 
 <ng-template let-notification #notificationTemplate>
     <fd-notification-body>
-        <fd-avatar [circle]="true" size="xs" glyph="batch-payments"></fd-avatar>
+        <fd-avatar size="xs" glyph="batch-payments"></fd-avatar>
         <fd-notification-content>
             <fd-notification-header>
-                <div fd-notification-indicator type="success"></div>
-                <h2 fd-notification-title [unread]="true">Your leave request has been accepted</h2>
+                <fd-icon glyph="error" color="negative"></fd-icon>
+                <h4 fd-notification-title [unread]="true">Notification Title (unread)</h4>
             </fd-notification-header>
-
-            <p fd-notification-paragraph>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.
-            </p>
-
+            <p fd-notification-paragraph>Description of notification topic.</p>
             <fd-notification-footer>
-                <span fd-notification-footer-content>Long author name - SAP Analytics Cloud incididunt ut labore</span>
+                <span fd-notification-footer-content>Product Name</span>
                 <span fd-notification-separator></span>
-                <span fd-notification-footer-content>7 minutes ago</span>
+                <span fd-notification-footer-content>Feature Name</span>
+                <span fd-notification-separator></span>
+                <span fd-notification-footer-content>11:11 AM</span>
             </fd-notification-footer>
+            <span
+                fd-object-status
+                [indicationColor]="2"
+                [secondaryIndication]="true"
+                [inverted]="true"
+                label="Negative"
+                title="Negative"
+                glyph="high-priority"
+                aria-label="Object status Negative Inverted"
+            ></span>
         </fd-notification-content>
-
         <fd-notification-actions>
-            <button fd-button label="Open" (click)="notification.close('Open Button Clicked')"></button>
             <button
                 fd-button
                 fdType="transparent"
+                ariaLabel="Close"
                 glyph="decline"
                 title="close"
-                ariaLabel="Close"
                 (click)="notification.close('Close Button Click')"
             ></button>
         </fd-notification-actions>

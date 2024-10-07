@@ -1,14 +1,13 @@
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fd-notification-content',
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    standalone: true,
+    host: {
+        class: 'fd-notification__content'
+    }
 })
-export class NotificationContentComponent {
-    /** @hidden */
-    @HostBinding('class.fd-notification__content')
-    fdNotificationFooterClass = true;
-}
+export class NotificationContentComponent {}

@@ -34,6 +34,7 @@ export abstract class TableInitialState {
 
 export abstract class TableVirtualScroll {
     abstract rowHeight: number;
+    abstract secondaryRowHeight: number | undefined;
     abstract virtualScrollTransform$: Observable<number>;
     abstract virtualScroll: boolean;
     abstract virtualScrollTotalHeight: number;
