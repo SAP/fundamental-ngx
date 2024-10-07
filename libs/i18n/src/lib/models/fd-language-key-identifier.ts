@@ -466,4 +466,8 @@ export type FdLanguageKeyIdentifier =
     | 'btpSearchField.clearButtonLabel'
     | 'btpSearchField.searchInputPlaceholder'
     | 'btpSearchField.searchInputAriaLabel'
-    | 'btpToolHeader.menuButtonAriaLabel';
+    | 'btpToolHeader.menuButtonAriaLabel'
+    | 'coreNotification.groupHeaderTitle'
+    | 'coreNotification.groupAriaDescription'
+    | 'coreNotification.groupAriaDescriptionExpanded'
+    | 'coreNotification.groupAriaDescriptionCollapsed';

@@ -3,16 +3,18 @@ import {
     ChangeDetectionStrategy,
     Component,
     HostListener,
+    OnInit,
     ViewEncapsulation,
     computed,
     inject,
-    input,
     signal
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 import { NotificationGroupBaseDirective } from '../notification-utils/notification-group-base';
 import { FD_NOTIFICATION_GROUP_HEADER } from '../token';
 
@@ -45,12 +47,12 @@ import { FD_NOTIFICATION_GROUP_HEADER } from '../token';
         }
     ]
 })
-export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirective {
+export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirective implements OnInit {
     /**
      * Title for the group header
      * default value: "Expand/Collapse"
      */
-    title = input('Expand/Collapse');
+    title = signal<Nullable<string>>('');
 
     /**
      * id of the list element that the group header controls
@@ -70,6 +72,12 @@ export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirec
     private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
+    private readonly _lang$ = inject(FD_LANGUAGE);
+
+    /** @hidden */
+    private _translationResolver = new TranslationResolver();
+
+    /** @hidden */
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
@@ -81,5 +89,12 @@ export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirec
     /** Method that toggles the Notification list content */
     toggleExpand(): void {
         this.expanded.update((expanded) => !expanded);
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._lang$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((lang: FdLanguage) => {
+            this.title.set(this._translationResolver.resolve(lang, 'coreNotification.groupHeaderTitle'));
+        });
     }
 }
