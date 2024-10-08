@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import {
@@ -47,7 +46,7 @@ export class ToolbarSeparatorExampleComponent {}
     selector: 'fd-toolbar-overflow-priority-example',
     templateUrl: './toolbar-overflow-priority-example.component.html',
     standalone: true,
-    imports: [ToolbarComponent, ButtonComponent, ToolbarItemDirective]
+    imports: [ToolbarComponent, ButtonComponent, ToolbarItemDirective, ToolbarSpacerDirective]
 })
 export class ToolbarOverflowPriorityExampleComponent {}
 
@@ -58,11 +57,3 @@ export class ToolbarOverflowPriorityExampleComponent {}
     imports: [ToolbarComponent, ButtonComponent, ToolbarItemDirective]
 })
 export class ToolbarOverflowGroupingExampleComponent {}
-
-@Component({
-    selector: 'fd-toolbar-size-example',
-    templateUrl: './toolbar-size-example.component.html',
-    standalone: true,
-    imports: [ToolbarComponent, ContentDensityDirective, ToolbarLabelDirective]
-})
-export class ToolbarSizeExampleComponent {}
