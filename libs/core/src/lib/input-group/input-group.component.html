@@ -30,7 +30,7 @@
                 [fdType]="inShellbar ? 'standard' : 'transparent'"
                 [id]="_addOnButtonId"
                 [attr.tabindex]="buttonFocusable ? 0 : -1"
-                [attr.title]="iconTitle || glyphAriaLabel || glyph"
+                [attr.title]="iconTitle || glyphAriaLabel"
                 [glyph]="glyph"
                 [class.fd-shellbar__button]="inShellbar"
                 [class.is-expanded]="isExpanded"
@@ -54,7 +54,7 @@
             [id]="_addOnNonButtonId"
             [placement]="placement"
             [attr.aria-label]="glyphAriaLabel || glyph || addOnText"
-            [attr.title]="iconTitle || glyph || addOnText"
+            [attr.title]="iconTitle || addOnText"
         >
             <ng-container *ngIf="!glyph">{{ addOnText }}</ng-container>
 
