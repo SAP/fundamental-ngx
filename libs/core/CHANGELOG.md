@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.2...v0.53.1-rc.3) (2024-10-08)
+
+
+### Bug Fixes
+
+* **core:** toolbar render spacer before overflow conditionally ([#12453](https://github.com/SAP/fundamental-ngx/issues/12453)) ([6e1dc71](https://github.com/SAP/fundamental-ngx/commit/6e1dc711e0239311b22203e6c16687a4bfdf841b))
+
+
+
+
+
 ## [0.53.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.1...v0.53.1-rc.2) (2024-10-07)
 
 
