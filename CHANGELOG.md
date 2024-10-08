@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.3...v0.53.1-rc.4) (2024-10-08)
+
+
+### Bug Fixes
+
+* **core:** stop month/year cell to change size on date picker month/year range selection ([#12526](https://github.com/SAP/fundamental-ngx/issues/12526)) ([29bfe7d](https://github.com/SAP/fundamental-ngx/commit/29bfe7db5d1eebf487067c5155759ec638068f52)), closes [#12522](https://github.com/SAP/fundamental-ngx/issues/12522)
+
+
+
+
+
 ## [0.53.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.2...v0.53.1-rc.3) (2024-10-08)
 
 
