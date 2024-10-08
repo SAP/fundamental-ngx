@@ -466,6 +466,14 @@ describe('DatePickerComponent', () => {
         expect(component.selectedMultipleDateRangesChange.emit).not.toHaveBeenCalled();
         expect(component.isModelValid()).toBe(false);
     });
+
+    it('should toggle the calendar with the f4 key', () => {
+        jest.spyOn(component, 'toggleCalendar');
+        component._inputElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', {
+            key: 'f4'
+        }));
+        expect(component.toggleCalendar).toHaveBeenCalled();
+    });
 });
 
 describe('DatePickerComponent Accessibility', () => {

@@ -9,3 +9,4 @@ export * from './interfaces/tablist.interface';
 export * from './services/value-state-message.service';
 export * from './tokens/dynamic-page-header.token';
 export * from './tokens/tabs.token';
+export * from './types/heading-level';

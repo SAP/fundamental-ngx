@@ -60,6 +60,7 @@
             [attr.aria-describedby]="_formValueStateMessageId"
             [ngModel]="_inputFieldDate"
             (keyup.enter)="handleInputChange($any($event.target).value, false)"
+            (keydown.f4)="toggleCalendar()"
             (ngModelChange)="handleInputChange($event, true)"
             (click)="mobile && openCalendar()"
             (blur)="_onBlur($event)"
