@@ -12,7 +12,6 @@ import {
     ToolbarOverflowGroupingExampleComponent,
     ToolbarOverflowPriorityExampleComponent,
     ToolbarSeparatorExampleComponent,
-    ToolbarSizeExampleComponent,
     ToolbarSpacerExampleComponent,
     ToolbarTitleExampleComponent,
     ToolbarTypeExampleComponent
@@ -27,7 +26,6 @@ const toolbarOverflowExampleTs = 'toolbar-overflow-example.component.ts';
 const toolbarOverflowExampleHtml = 'toolbar-overflow-example.component.html';
 const toolbarOverflowPriorityExampleHtml = 'toolbar-overflow-priority-example.component.html';
 const toolbarOverflowGroupingExampleHtml = 'toolbar-overflow-grouping-example.component.html';
-const toolbarSizeExampleHtml = 'toolbar-size-example.component.html';
 
 @Component({
     selector: 'fd-docs-toolbar',
@@ -45,7 +43,6 @@ const toolbarSizeExampleHtml = 'toolbar-size-example.component.html';
         ToolbarOverflowExampleComponent,
         ToolbarOverflowPriorityExampleComponent,
         ToolbarOverflowGroupingExampleComponent,
-        ToolbarSizeExampleComponent,
         ToolbarSpacerExampleComponent,
         ToolbarSeparatorExampleComponent
     ]
@@ -110,14 +107,6 @@ export class ToolbarDocumentationComponent {
             language: 'html',
             code: getAssetFromModuleAssets(toolbarOverflowGroupingExampleHtml),
             fileName: 'toolbar-overflow-grouping-example'
-        }
-    ];
-
-    toolbarSizeExample: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(toolbarSizeExampleHtml),
-            fileName: 'toolbar-size-example'
         }
     ];
 }

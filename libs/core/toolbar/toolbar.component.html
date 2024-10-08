@@ -5,7 +5,9 @@
 }
 <ng-content></ng-content>
 @if (overflownItems.length > 0) {
-    <fd-toolbar-spacer></fd-toolbar-spacer>
+    @if (!spacerUsed()) {
+        <fd-toolbar-spacer></fd-toolbar-spacer>
+    }
     <fd-toolbar-separator></fd-toolbar-separator>
     <fd-popover placement="bottom-end" [noArrow]="true" class="fd-popover">
         <fd-popover-control>

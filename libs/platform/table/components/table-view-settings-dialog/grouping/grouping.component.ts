@@ -51,6 +51,8 @@ export interface SettingsGroupDialogResultData {
 const NOT_GROUPED_OPTION_VALUE = null;
 const INITIAL_DIRECTION = SortDirection.ASC;
 
+let groupOrderHeaderUniqueId = 0;
+
 @Component({
     templateUrl: './grouping.component.html',
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => GroupingComponent) }],
@@ -86,6 +88,9 @@ export class GroupingComponent implements Resettable {
 
     /** Current selected field */
     field: string | null = null;
+
+    /** @hidden */
+    groupOrderHeaderId = `fdp-table-group-dialog-group-order-header-${groupOrderHeaderUniqueId++}`;
 
     /** Table columns */
     readonly columns: SettingsGroupDialogColumn[] = [];

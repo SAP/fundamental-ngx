@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.4...v0.53.1-rc.5) (2024-10-08)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.53.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.3...v0.53.1-rc.4) (2024-10-08)
+
+
+### Bug Fixes
+
+* **core:** stop month/year cell to change size on date picker month/year range selection ([#12526](https://github.com/SAP/fundamental-ngx/issues/12526)) ([29bfe7d](https://github.com/SAP/fundamental-ngx/commit/29bfe7db5d1eebf487067c5155759ec638068f52)), closes [#12522](https://github.com/SAP/fundamental-ngx/issues/12522)
+
+
+
+
+
+## [0.53.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.2...v0.53.1-rc.3) (2024-10-08)
+
+
+### Bug Fixes
+
+* **core:** toolbar render spacer before overflow conditionally ([#12453](https://github.com/SAP/fundamental-ngx/issues/12453)) ([6e1dc71](https://github.com/SAP/fundamental-ngx/commit/6e1dc711e0239311b22203e6c16687a4bfdf841b))
+
+
+
+
+
+## [0.53.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.1...v0.53.1-rc.2) (2024-10-07)
+
+
+### Bug Fixes
+
+* **core:** datepicker addon button should not be tabindex, popover opens with f4 key ([#12496](https://github.com/SAP/fundamental-ngx/issues/12496)) ([4951310](https://github.com/SAP/fundamental-ngx/commit/49513101aeb6723b4eeacc01a75554e71a0c5028))
+
+
+
+
+
 ## [0.53.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.0...v0.53.1-rc.1) (2024-10-07)
 
 
