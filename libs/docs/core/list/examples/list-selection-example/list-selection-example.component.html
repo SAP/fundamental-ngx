@@ -20,22 +20,40 @@
         </li>
     }
 </ul>
-<h3>Cozy single-selection list</h3>
+<h3 id="cozy-single-selection-list">Cozy single-selection list</h3>
 <ul fd-list [selection]="true">
     <li fd-list-item [selected]="selectionValue === 'radio1'">
-        <fd-radio-button name="radio1" id="radio1" value="radio1" [(ngModel)]="selectionValue"></fd-radio-button>
+        <fd-radio-button
+            name="radio1"
+            id="radio1"
+            value="radio1"
+            [(ngModel)]="selectionValue"
+            aria-labelledby="radio1 cozy-single-selection-list"
+        ></fd-radio-button>
         <span fd-list-title> List item 1 </span>
     </li>
     <li fd-list-item [selected]="selectionValue === 'radio2'">
-        <fd-radio-button name="radio1" id="radio2" value="radio2" [(ngModel)]="selectionValue"></fd-radio-button>
+        <fd-radio-button
+            name="radio1"
+            id="radio2"
+            value="radio2"
+            [(ngModel)]="selectionValue"
+            aria-labelledby="radio2 cozy-single-selection-list"
+        ></fd-radio-button>
         <span fd-list-title> List item 2 </span>
     </li>
     <li fd-list-item [selected]="selectionValue === 'radio3'">
-        <fd-radio-button name="radio1" id="radio3" value="radio3" [(ngModel)]="selectionValue"></fd-radio-button>
+        <fd-radio-button
+            name="radio1"
+            id="radio3"
+            value="radio3"
+            [(ngModel)]="selectionValue"
+            aria-labelledby="radio3 cozy-single-selection-list"
+        ></fd-radio-button>
         <span fd-list-title> List item 3 </span>
     </li>
 </ul>
-<h3>Compact single-selection list</h3>
+<h3 id="compact-single-selection-list">Compact single-selection list</h3>
 <ul fd-list [selection]="true" fdCompact>
     <li fd-list-item [selected]="selectionValueTwo === 'radio1'">
         <fd-radio-button
@@ -44,6 +62,7 @@
             value="radio1"
             fdCompact
             [(ngModel)]="selectionValueTwo"
+            aria-labelledby="radio12 compact-single-selection-list"
         ></fd-radio-button>
         <span fd-list-title> List item 1 </span>
     </li>
@@ -54,6 +73,7 @@
             value="radio2"
             fdCompact
             [(ngModel)]="selectionValueTwo"
+            aria-labelledby="radio22 compact-single-selection-list"
         ></fd-radio-button>
         <span fd-list-title> List item 2 </span>
     </li>
@@ -64,6 +84,7 @@
             value="radio3"
             fdCompact
             [(ngModel)]="selectionValueTwo"
+            aria-labelledby="radio32 compact-single-selection-list"
         ></fd-radio-button>
         <span fd-list-title> List item 3 </span>
     </li>
