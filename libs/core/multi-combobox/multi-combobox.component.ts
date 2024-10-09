@@ -50,7 +50,7 @@ import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-d
 import { TokenComponent, TokenizerComponent } from '@fundamental-ngx/core/token';
 import equal from 'fast-deep-equal';
 import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, startWith } from 'rxjs/operators';
 import { BaseMultiCombobox } from './base-multi-combobox.class';
 import { MobileMultiComboboxComponent } from './mobile/mobile-multi-combobox.component';
 import { MULTI_COMBOBOX_COMPONENT } from './multi-combobox.token';
@@ -234,7 +234,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     /** Value of the multi combobox */
     @Input()
     set value(value: T[]) {
-        this.setValue(value, true);
+        this._cva.setValue(value, true);
     }
 
     get value(): T[] {
@@ -450,11 +450,12 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
             );
         });
 
-        this._cva.stateChanges.subscribe((data: string) => {
-            if (data.includes('writeValue')) {
+        const control = this._cva.ngControl;
+        if (control?.valueChanges) {
+            control.valueChanges.pipe(startWith(control.value)).subscribe((data: any) => {
                 this._selectedSuggestions = this._fullFlatSuggestions.filter((s) => this.value.includes(s.value));
-            }
-        });
+            });
+        }
     }
 
     /** @hidden */

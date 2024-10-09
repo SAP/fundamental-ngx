@@ -323,7 +323,8 @@ export class CvaDirective<T = any>
      */
     writeValue(value: T): void {
         this.value = value;
-        this.stateChanges.next(`writeValue: ${value}`);
+        this.setValue(value);
+        this.stateChanges.next(`writeValue`);
         this._markForCheck();
     }
 
