@@ -1,6 +1,6 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
@@ -110,9 +110,6 @@ export class SettingsDialogComponent implements Resettable {
 
     /**
      * Constructor that initializes dialog data and sets initial values for sorting, filtering, and grouping.
-     * @param dialogRef Dialog reference containing sorting, filtering, and grouping data
-     * @param _table Reference to the table component for fetching initial settings
-     * @param _cd ChangeDetectorRef for triggering view updates
      */
     constructor(
         private readonly dialogRef: DialogRef<{
@@ -120,8 +117,7 @@ export class SettingsDialogComponent implements Resettable {
             filteringData: Nullable<FiltersDialogData>;
             groupingData: Nullable<SettingsGroupDialogData>;
         }>,
-        private readonly _table: Table,
-        private readonly _cd: ChangeDetectorRef
+        private readonly _table: Table
     ) {
         const data = this.dialogRef.data;
         this.sortingData.set(data.sortingData);

@@ -7,12 +7,7 @@
         <li fd-list-group-header>{{ 'platformTable.filterDialogFilterBy' | fdTranslate }}</li>
 
         @for (filter of filters; track filter) {
-            <li
-                fd-list-item
-                [interactive]="true"
-                class="fd-list__item_cursor-pointer"
-                (click)="selectFilter.emit(filter)"
-            >
+            <li fd-list-item [interactive]="true" (click)="selectFilter.emit(filter)">
                 <span fd-list-title>{{ filter.label }}</span>
             </li>
         }

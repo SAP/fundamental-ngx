@@ -3,8 +3,8 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    effect,
     input,
+    Input,
     OnInit,
     output,
     signal,
@@ -64,7 +64,9 @@ import { FiltersListStepComponent, SelectableFilter } from './filters-list-step.
 })
 export class FiltersComponent implements AfterViewInit, OnInit {
     /** Data for the filtering dialog */
-    filteringData = input<FiltersDialogData>();
+    @Input() set filteringData(value: FiltersDialogData) {
+        this._initializeFilterData(value);
+    }
 
     /** Initial set of filters applied */
     initialFilters = input<CollectionFilter[]>([]);
@@ -103,23 +105,10 @@ export class FiltersComponent implements AfterViewInit, OnInit {
     readonly ACTIVE_STEP = ACTIVE_STEP;
 
     /** hidden */
-    constructor(private readonly _cd: ChangeDetectorRef) {
-        effect(
-            () => {
-                const filteringData = this.filteringData();
-                if (filteringData) {
-                    this.filterBy.set([...filteringData.filterBy]);
-                    this.viewSettingsFilters.set(filteringData.viewSettingsFilters);
-                    this.columns.set(filteringData.columns);
-                }
-            },
-            { allowSignalWrites: true }
-        );
-    }
+    constructor(private readonly _cd: ChangeDetectorRef) {}
 
     /** hidden */
     ngOnInit(): void {
-        this._initializeFilterData();
         this._compareSelectedFilters();
     }
 
@@ -190,8 +179,7 @@ export class FiltersComponent implements AfterViewInit, OnInit {
      * Private method to initialize filter data on component initialization.
      * Extracts the initial filter values and table column data.
      */
-    private _initializeFilterData(): void {
-        const filteringData = this.filteringData();
+    private _initializeFilterData(filteringData: FiltersDialogData): void {
         if (filteringData) {
             this.filterBy.set([...filteringData.filterBy]);
             this.viewSettingsFilters.set(filteringData.viewSettingsFilters);
