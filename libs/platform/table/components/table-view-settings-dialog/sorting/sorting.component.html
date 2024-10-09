@@ -1,8 +1,10 @@
 <ul fd-list [selection]="true">
     <li fd-list-group-header>
-        <span fd-list-title>{{ 'platformTable.sortDialogSortOrderHeader' | fdTranslate }}</span>
+        <span fd-list-title [attr.id]="sortOrderHeaderId">
+            {{ 'platformTable.sortDialogSortOrderHeader' | fdTranslate }}
+        </span>
     </li>
-    <li fd-list-item [selected]="direction() === SORT_DIRECTION.ASC">
+    <li fd-list-item [selected]="direction() === SORT_DIRECTION.ASC" [attr.aria-describedby]="sortOrderHeaderId">
         <fd-radio-button
             name="sort-order"
             value="asc"
@@ -12,7 +14,7 @@
         ></fd-radio-button>
         <span fd-list-title>{{ 'platformTable.sortDialogSortOrderAsc' | fdTranslate }}</span>
     </li>
-    <li fd-list-item [selected]="direction() === SORT_DIRECTION.DESC">
+    <li fd-list-item [selected]="direction() === SORT_DIRECTION.DESC" [attr.aria-describedby]="sortOrderHeaderId">
         <fd-radio-button
             name="sort-order"
             value="desc"
@@ -23,12 +25,19 @@
         <span fd-list-title>{{ 'platformTable.sortDialogSortOrderDesc' | fdTranslate }}</span>
     </li>
 </ul>
+
 <ul fd-list [selection]="true">
     <li fd-list-group-header>
-        <span fd-list-title>{{ 'platformTable.sortDialogSortByHeader' | fdTranslate }}</span>
+        <span fd-list-title [attr.id]="sortDialogSortByHeaderId">
+            {{ 'platformTable.sortDialogSortByHeader' | fdTranslate }}
+        </span>
     </li>
     @if (allowDisablingSorting()) {
-        <li fd-list-item [selected]="field() === NOT_SORTED_OPTION_VALUE">
+        <li
+            fd-list-item
+            [selected]="field() === NOT_SORTED_OPTION_VALUE"
+            [attr.aria-describedby]="sortDialogSortByHeaderId"
+        >
             <fd-radio-button
                 name="sort-by"
                 [value]="NOT_SORTED_OPTION_VALUE"
@@ -40,7 +49,7 @@
         </li>
     }
     @for (column of columns(); track column) {
-        <li fd-list-item [selected]="column.key === field()">
+        <li fd-list-item [selected]="column.key === field()" [attr.aria-describedby]="sortDialogSortByHeaderId">
             <fd-radio-button
                 name="sort-by"
                 [value]="column.key"

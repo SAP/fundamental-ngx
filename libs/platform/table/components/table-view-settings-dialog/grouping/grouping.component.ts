@@ -38,6 +38,8 @@ import {
     SettingsGroupDialogResultData
 } from '../table-view-settings.model';
 
+let groupOrderHeaderUniqueId = 0;
+
 @Component({
     selector: 'fdp-grouping',
     templateUrl: './grouping.component.html',
@@ -87,6 +89,9 @@ export class GroupingComponent implements OnInit {
 
     /** Table columns available for grouping */
     columns = signal<SettingsGroupDialogColumn[]>([]);
+
+    /** @hidden */
+    groupOrderHeaderId = `fdp-table-group-dialog-group-order-header-${groupOrderHeaderUniqueId++}`;
 
     /** Constants for grouping directions */
     readonly SORT_DIRECTION = SortDirection;

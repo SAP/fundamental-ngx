@@ -1,10 +1,12 @@
-@if (!noSvg || _inlineSvg) {
-    <svg class="fd-illustrated-message__illustration" [attr.aria-label]="svgAriaLabel">
-        <use [attr.href]="_href"></use>
-    </svg>
-}
-@if (_inlineSvg) {
-    <div [style.display]="'none'" [innerHTML]="_inlineSvg"></div>
-}
-<ng-content select="[fd-illustrated-message-figcaption]"></ng-content>
+<div class="fd-illustrated-message__container">
+    @if (!noSvg || _inlineSvg) {
+        <svg class="fd-illustrated-message__illustration" [attr.aria-label]="svgAriaLabel">
+            <use [attr.href]="_href"></use>
+        </svg>
+    }
+    @if (_inlineSvg) {
+        <div [style.display]="'none'" [innerHTML]="_inlineSvg"></div>
+    }
+    <ng-content select="[fd-illustrated-message-figcaption]"></ng-content>
+</div>
 <ng-content select="fd-illustrated-message-actions"></ng-content>

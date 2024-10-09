@@ -38,6 +38,9 @@ import {
     SettingsSortDialogResultData
 } from '../table-view-settings.model';
 
+let sortOrderHeaderUniqueId = 0;
+let sortDialogSortByHeaderUniqueId = 0;
+
 @Component({
     selector: 'fdp-sorting',
     templateUrl: './sorting.component.html',
@@ -91,6 +94,12 @@ export class SortingComponent implements OnInit {
 
     /** Available table columns for sorting */
     columns = signal<SettingsSortDialogColumn[]>([]);
+
+    /** @hidden */
+    sortOrderHeaderId = `fdp-table-sort-order-header-${sortOrderHeaderUniqueId++}`;
+
+    /** @hidden */
+    sortDialogSortByHeaderId = `fdp-table-sort-dialog-sort-by-header-${sortDialogSortByHeaderUniqueId++}`;
 
     /** @hidden Constants for sort direction */
     readonly SORT_DIRECTION = SortDirection;

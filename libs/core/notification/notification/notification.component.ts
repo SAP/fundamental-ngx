@@ -10,28 +10,29 @@ import {
     ComponentRef,
     DestroyRef,
     EmbeddedViewRef,
-    HostBinding,
     HostListener,
-    Inject,
-    Input,
     OnInit,
-    Optional,
     TemplateRef,
     Type,
-    ViewChild,
     ViewContainerRef,
     ViewEncapsulation,
     computed,
-    inject
+    contentChild,
+    inject,
+    input,
+    signal,
+    viewChild
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationStart, Router } from '@angular/router';
 import { AbstractFdNgxClass, KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
-import { FD_POPOVER_COMPONENT, PopoverComponent } from '@fundamental-ngx/core/popover';
 import { BehaviorSubject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
+import { NotificationParagraphDirective } from '../directives/notification-paragraph.directive';
+import { NotificationTitleDirective } from '../directives/notification-title.directive';
 import { NotificationConfig } from '../notification-utils/notification-config';
 import { NotificationRef } from '../notification-utils/notification-ref';
+import { FD_NOTIFICATION, FD_NOTIFICATION_PARAGRAPH, FD_NOTIFICATION_TITLE } from '../token';
 
 @Component({
     selector: 'fd-notification',
@@ -42,35 +43,59 @@ import { NotificationRef } from '../notification-utils/notification-ref';
     styleUrl: './notification.component.scss',
     encapsulation: ViewEncapsulation.None,
     host: {
-        '[attr.aria-labelledby]': 'ariaLabelledBy',
+        '[attr.aria-labelledby]': 'ariaLabelledBy()',
         '[attr.aria-label]': 'ariaLabel',
+        '[attr.aria-level]': 'ariaLevel()',
+        '[attr.role]': 'role()',
         '[attr.dir]': '_dir$()',
-        role: 'alertdialog',
-        '[attr.id]': 'id'
+        '[attr.id]': 'id',
+        '[tabindex]': '0',
+        '[style.width]': 'width'
     },
+    providers: [
+        {
+            provide: FD_NOTIFICATION,
+            useExisting: NotificationComponent
+        }
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
 export class NotificationComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit {
     /** @hidden */
-    @ViewChild('vc', { read: ViewContainerRef })
-    containerRef: ViewContainerRef;
+    containerRef = viewChild('vc', { read: ViewContainerRef });
 
     /** User defined width for the notification */
-    @HostBinding('style.width')
-    @Input()
-    width: string;
+    width = input<Nullable<string>>();
 
     /** Whether the notificatioon is in mobile mode */
-    @Input() mobile: boolean;
+    mobile = input(false);
 
-    /**
-     * @hidden
-     */
+    /** @hidden */
     _dir$ = computed<Direction>(() => (this._rtlService?.rtlSignal() ? 'rtl' : 'ltr'));
 
     /** ID of the notification */
     id: string;
+
+    /**
+     * aria-level of the Notificaion
+     * should be set to 2 in Notification Group
+     * default value is undefined
+     */
+    ariaLevel = signal<Nullable<number>>(undefined);
+
+    /**
+     * role of the Notificaion
+     * should be set to 'listitem' in Notification Group
+     * default value is undefined
+     */
+    role = signal<Nullable<string>>(undefined);
+
+    /**
+     * whether the Notificaion is selected
+     * default is set to false
+     */
+    selected = input(false);
 
     /** Whether the notification is dismissed with the ESC key */
     escKeyCloseable = false;
@@ -79,7 +104,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     closeOnNavigation = true;
 
     /** aria-labelledby attribute for the notification component element. */
-    ariaLabelledBy: Nullable<string>;
+    ariaLabelledBy = signal<Nullable<string>>(null);
 
     /** aria-label attribute for the notification component element. */
     ariaLabel: Nullable<string>;
@@ -91,7 +116,13 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     childContent: TemplateRef<any> | Type<any> | undefined = undefined;
 
     /** Reference to the component or the embedded view */
-    public componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
+    public componentRef: ComponentRef<any> | EmbeddedViewRef<any> | undefined;
+
+    /** @hidden */
+    private _notificationTitle = contentChild<NotificationTitleDirective>(FD_NOTIFICATION_TITLE);
+
+    /** @hidden */
+    private _notificationParagraph = contentChild<NotificationParagraphDirective>(FD_NOTIFICATION_PARAGRAPH);
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
@@ -103,25 +134,32 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     private _focusTrap: FocusTrap;
 
     /** @hidden */
-    @HostBinding('class.fd-notification--in-dialog')
-    get _inDialog(): boolean {
-        return this._popover?.mobile;
-    }
+    private _cdRef = inject(ChangeDetectorRef);
 
     /** @hidden */
-    constructor(
-        private _componentFactoryResolver: ComponentFactoryResolver,
-        private _cdRef: ChangeDetectorRef,
-        private _router: Router,
-        private _focusTrapFactory: ConfigurableFocusTrapFactory,
-        @Optional() private _notificationConfig: NotificationConfig,
-        @Optional() private _notificationRef: NotificationRef,
-        @Optional() private _rtlService: RtlService,
-        @Optional() @Inject(FD_POPOVER_COMPONENT) private _popover: PopoverComponent
-    ) {
-        super();
+    private _componentFactoryResolver = inject(ComponentFactoryResolver);
 
-        this._setNotificationConfig(this._notificationConfig);
+    /** @hidden */
+    private _router = inject(Router);
+
+    /** @hidden */
+    private _focusTrapFactory = inject(ConfigurableFocusTrapFactory);
+
+    /** @hidden */
+    private _notificationConfig = inject(NotificationConfig, { optional: true });
+
+    /** @hidden */
+    private _notificationRef = inject(NotificationRef, { optional: true });
+
+    /** @hidden */
+    private _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    constructor() {
+        super();
+        if (this._notificationConfig) {
+            this._setNotificationConfig(this._notificationConfig);
+        }
     }
 
     /** @hidden Listen and close notification on Escape key */
@@ -149,6 +187,12 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
                 this._loadFromTemplate(this.childContent);
             }
         }
+
+        if (this._notificationTitle()) {
+            this.ariaLabelledBy.set(this._notificationTitle()?.id());
+        } else if (this._notificationParagraph()) {
+            this.ariaLabelledBy.set(this._notificationParagraph()?.id());
+        }
         this._afterViewInit$.next(true);
         this._cdRef.detectChanges();
     }
@@ -170,10 +214,6 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     /** @hidden */
     _setProperties(): void {
         this._addClassToElement('fd-notification');
-        this._addClassToElement('fd-notification-custom-block');
-        if (this.mobile) {
-            this._addClassToElement('fd-notification--mobile');
-        }
     }
 
     /** @hidden Listen on NavigationStart event and dismiss the dialog */
@@ -184,24 +224,24 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
                     filter((event) => event instanceof NavigationStart && this.closeOnNavigation),
                     takeUntilDestroyed(this._destroyRef)
                 )
-                .subscribe(() => this._notificationRef.dismiss());
+                .subscribe(() => this._notificationRef?.dismiss());
         }
     }
 
     /** @hidden */
     private _loadFromComponent(content: Type<any>): void {
-        this.containerRef.clear();
+        this.containerRef()?.clear();
         const componentFactory = this._componentFactoryResolver.resolveComponentFactory(content);
-        this.componentRef = this.containerRef.createComponent(componentFactory);
+        this.componentRef = this.containerRef()?.createComponent(componentFactory);
     }
 
     /** @hidden */
     private _loadFromTemplate(content: TemplateRef<any>): void {
-        this.containerRef.clear();
+        this.containerRef()?.clear();
         const context = {
             $implicit: this._notificationRef
         };
-        this.componentRef = this.containerRef.createEmbeddedView(content, context);
+        this.componentRef = this.containerRef()?.createEmbeddedView(content, context);
     }
 
     /** @hidden */

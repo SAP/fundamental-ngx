@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { ColorAccent } from '@fundamental-ngx/cdk';
+import { AvatarComponent, IndicationColor } from '@fundamental-ngx/core/avatar';
 
 @Component({
     selector: 'fd-avatar-accent-colors-example',
@@ -15,4 +16,7 @@ import { AvatarComponent } from '@fundamental-ngx/core/avatar';
     standalone: true,
     imports: [AvatarComponent]
 })
-export class AvatarAccentColorsExampleComponent {}
+export class AvatarAccentColorsExampleComponent {
+    colorAccents: ColorAccent[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    colorIndications: IndicationColor[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+}

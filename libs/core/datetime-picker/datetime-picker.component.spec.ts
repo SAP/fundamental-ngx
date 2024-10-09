@@ -175,6 +175,14 @@ describe('DatetimePickerComponent', () => {
         expect(component._inputFieldDate).toEqual('1/25/2022');
         expect(component._isInvalidDateInput).toEqual(false);
     });
+
+    it('should toggle the popover with the f4 key', () => {
+        jest.spyOn(component, 'togglePopover');
+        component._inputElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', {
+            key: 'f4'
+        }));
+        expect(component.togglePopover).toHaveBeenCalled();
+    });
 });
 
 const DATE_TIME_PICKER_IDENTIFIER = 'core-date-time-picker-unit-test';

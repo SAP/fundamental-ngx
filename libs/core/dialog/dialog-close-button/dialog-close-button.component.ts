@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 
 /**
@@ -14,9 +14,9 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
     host: {
         '[attr.aria-label]': '"close"',
         '[class.fd-button]': 'true',
-        '[class.is-compact]': '!mobile',
+        '[class.is-compact]': '!mobile()',
         '[class.fd-button--transparent]': 'true',
-        '[attr.title]': 'title'
+        '[attr.title]': 'title()'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,14 +26,11 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
 })
 export class DialogCloseButtonComponent {
     /** Displays dialog close button in mobile mode */
-    @Input()
-    mobile = false;
+    mobile = input(false);
 
     /** add title dynamically to add a tooltip */
-    @Input()
-    title: string;
+    title = input<string>();
 
     /** add aria label dynamically to add to the button */
-    @Input()
-    ariaLabel: string;
+    ariaLabel = input<string>();
 }

@@ -1,8 +1,10 @@
 <ul fd-list [selection]="true">
     <li fd-list-group-header>
-        <span fd-list-title>{{ 'platformTable.groupDialogGroupOrderHeader' | fdTranslate }}</span>
+        <span fd-list-title [attr.id]="groupOrderHeaderId">
+            {{ 'platformTable.groupDialogGroupOrderHeader' | fdTranslate }}
+        </span>
     </li>
-    <li fd-list-item [selected]="direction() === SORT_DIRECTION.ASC">
+    <li fd-list-item [selected]="direction() === SORT_DIRECTION.ASC" [attr.aria-describedby]="groupOrderHeaderId">
         <fd-radio-button
             name="sort-order"
             value="asc"
@@ -12,7 +14,7 @@
         ></fd-radio-button>
         <span fd-list-title>{{ 'platformTable.groupDialogGroupOrderAsc' | fdTranslate }}</span>
     </li>
-    <li fd-list-item [selected]="direction() === SORT_DIRECTION.DESC">
+    <li fd-list-item [selected]="direction() === SORT_DIRECTION.DESC" [attr.aria-describedby]="groupOrderHeaderId">
         <fd-radio-button
             name="sort-order"
             value="desc"
@@ -26,9 +28,11 @@
 
 <ul fd-list [selection]="true">
     <li fd-list-group-header>
-        <span fd-list-title>{{ 'platformTable.groupDialogGroupByHeader' | fdTranslate }}</span>
+        <span fd-list-title [attr.id]="groupByHeaderId">
+            {{ 'platformTable.groupDialogGroupByHeader' | fdTranslate }}
+        </span>
     </li>
-    <li fd-list-item [selected]="NOT_GROUPED_OPTION_VALUE === field()">
+    <li fd-list-item [selected]="NOT_GROUPED_OPTION_VALUE === field()" [attr.aria-describedby]="groupByHeaderId">
         <fd-radio-button
             name="sort-by"
             [value]="NOT_GROUPED_OPTION_VALUE"
@@ -39,7 +43,7 @@
         <span fd-list-title>{{ 'platformTable.groupDialogNotGroupedLabel' | fdTranslate }}</span>
     </li>
     @for (column of columns(); track column) {
-        <li fd-list-item [selected]="column.key === field()">
+        <li fd-list-item [selected]="column.key === field()" [attr.aria-describedby]="groupByHeaderId">
             <fd-radio-button
                 name="sort-by"
                 [value]="column.key"

@@ -1,7 +1,7 @@
 <div
     fd-bar
     class="fd-dialog__header"
-    [fdCozy]="dialogConfig.mobile"
+    [fdContentDensity]="dialogConfig.contentDensity ?? ''"
     [barDesign]="subHeaderTemplate ? 'header-with-subheader' : 'header'"
 >
     <ng-template [ngTemplateOutlet]="headerTemplate ? headerTemplate : defaultTemplate"></ng-template>
@@ -13,14 +13,21 @@
         </div>
         <div fd-bar-right>
             <fd-bar-element>
-                <ng-content select="[fd-dialog-full-screen-toggler-button]"></ng-content>
+                @if (!dialogConfig.mobile) {
+                    <ng-content select="[fd-dialog-full-screen-toggler-button]"></ng-content>
+                }
                 <ng-content select="[fd-dialog-close-button]"></ng-content>
             </fd-bar-element>
         </div>
     </ng-template>
 </div>
 @if (subHeaderTemplate) {
-    <div fd-bar class="fd-dialog__subheader" barDesign="subheader" [fdCozy]="dialogConfig.mobile">
+    <div
+        fd-bar
+        class="fd-dialog__subheader"
+        barDesign="subheader"
+        [fdContentDensity]="dialogConfig.contentDensity ?? ''"
+    >
         <ng-template [ngTemplateOutlet]="subHeaderTemplate"></ng-template>
     </div>
 }
