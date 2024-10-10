@@ -16,7 +16,7 @@ export abstract class NotificationGroupBaseDirective implements AfterViewInit {
     notificationActions: QueryList<NotificationActionsComponent>;
 
     /** @hidden */
-    private readonly _destroyRef = inject(DestroyRef);
+    protected readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _renderer = inject(Renderer2);

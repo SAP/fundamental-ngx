@@ -3,6 +3,80 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.6...v0.53.1-rc.7) (2024-10-08)
+
+
+### Bug Fixes
+
+* **core:** translations for Notification component ([#12524](https://github.com/SAP/fundamental-ngx/issues/12524)) ([cd8df83](https://github.com/SAP/fundamental-ngx/commit/cd8df832c53cef6d77bfee8cd232e0af52251407))
+
+
+
+
+
+## [0.53.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.5...v0.53.1-rc.6) (2024-10-08)
+
+
+### Bug Fixes
+
+* **core:** remove redundant api calls in dynamic page ([#12504](https://github.com/SAP/fundamental-ngx/issues/12504)) ([d3aaa89](https://github.com/SAP/fundamental-ngx/commit/d3aaa895caa7ffb1bb0360e4576013e8c2adf0c2))
+
+
+
+
+
+## [0.53.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.4...v0.53.1-rc.5) (2024-10-08)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.53.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.3...v0.53.1-rc.4) (2024-10-08)
+
+
+### Bug Fixes
+
+* **core:** stop month/year cell to change size on date picker month/year range selection ([#12526](https://github.com/SAP/fundamental-ngx/issues/12526)) ([29bfe7d](https://github.com/SAP/fundamental-ngx/commit/29bfe7db5d1eebf487067c5155759ec638068f52)), closes [#12522](https://github.com/SAP/fundamental-ngx/issues/12522)
+
+
+
+
+
+## [0.53.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.2...v0.53.1-rc.3) (2024-10-08)
+
+
+### Bug Fixes
+
+* **core:** toolbar render spacer before overflow conditionally ([#12453](https://github.com/SAP/fundamental-ngx/issues/12453)) ([6e1dc71](https://github.com/SAP/fundamental-ngx/commit/6e1dc711e0239311b22203e6c16687a4bfdf841b))
+
+
+
+
+
+## [0.53.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.1...v0.53.1-rc.2) (2024-10-07)
+
+
+### Bug Fixes
+
+* **core:** datepicker addon button should not be tabindex, popover opens with f4 key ([#12496](https://github.com/SAP/fundamental-ngx/issues/12496)) ([4951310](https://github.com/SAP/fundamental-ngx/commit/49513101aeb6723b4eeacc01a75554e71a0c5028))
+
+
+
+
+
+## [0.53.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.0...v0.53.1-rc.1) (2024-10-07)
+
+
+### Bug Fixes
+
+* **core,platform:** make headingLevel a shared type, use for table toolbar ([#12500](https://github.com/SAP/fundamental-ngx/issues/12500)) ([08f5984](https://github.com/SAP/fundamental-ngx/commit/08f5984a67e226039544897f8aac3bb746fd3e09))
+
+
+
+
+
 ## [0.53.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.53.0...v0.53.1-rc.0) (2024-10-03)
 
 **Note:** Version bump only for package @fundamental-ngx/core
