@@ -18,10 +18,12 @@ import {
     DynamicPortalComponent,
     FocusableItemDirective,
     FocusableListDirective,
+    Nullable,
     ResizeObserverDirective,
     RtlService
 } from '@fundamental-ngx/cdk/utils';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { Placement } from '@fundamental-ngx/core/shared';
 import { AvatarGroupHostComponent } from './components/avatar-group-host.component';
 import { AvatarGroupOverflowButtonComponent } from './components/avatar-group-overflow-button.component';
 import { DefaultAvatarGroupOverflowBodyComponent } from './components/default-avatar-group-overflow-body/default-avatar-group-overflow-body.component';
@@ -80,6 +82,10 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     @Input()
     orientation: AvatarGroupHostConfig['orientation'] = 'horizontal';
 
+    /** Whether the avatar overflow button should be displayed as circles. */
+    @Input()
+    circle = false;
+
     /**
      * The spacing between the items depends on the size of the avatars in the group.
      * The size is also used for the default overflow button.
@@ -88,6 +94,10 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     @Input()
     size: AvatarGroupHostConfig['size'] = 'l';
 
+    /** Popover placement */
+    @Input()
+    popoverPlacement: Placement | null = null;
+
     /**
      * The title which is displayed when user opens the overflow popover.
      * This takes effect only when default overflow popover body is used,
@@ -95,6 +105,12 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
      */
     @Input()
     overflowPopoverTitle: string;
+
+    /**
+     * The maximum number of visible avatar items.
+     **/
+    @Input()
+    maxVisibleItems: Nullable<number> = null;
 
     /** @hidden */
     @ViewChildren(AvatarGroupItemRendererDirective)
