@@ -1,8 +1,6 @@
 import { AnimationEvent } from '@angular/animations';
 import {
-    AfterContentChecked,
     AfterViewInit,
-    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ComponentRef,
@@ -41,13 +39,12 @@ import { dialogFade } from '../utils/dialog.animations';
     styleUrl: './dialog-container.component.scss',
     animations: [dialogFade],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [PortalModule]
 })
 export class DialogContainerComponent
     extends DynamicComponentContainer<DialogContentType>
-    implements DialogContainer<any>, AfterViewInit, AfterContentChecked, CssClassBuilder
+    implements DialogContainer<any>, AfterViewInit, CssClassBuilder
 {
     /** Custom classes */
     @Input()
@@ -110,13 +107,6 @@ export class DialogContainerComponent
     }
 
     /** @hidden */
-    ngAfterContentChecked(): void {
-        if (this.portalOutlet) {
-            this._cdr.markForCheck();
-        }
-    }
-
-    /** @hidden */
     protected _attached(event: CdkPortalOutletAttachedRef): void {
         if (event instanceof ComponentRef) {
             event.changeDetectorRef.markForCheck();
@@ -138,7 +128,6 @@ export class DialogContainerComponent
             this._createFromDefaultDialog(this.childContent);
         }
         this._animationStateSignal.set('visible');
-        this._cdr.detectChanges();
     }
 
     /** @hidden Returns context for embedded template*/
@@ -161,7 +150,6 @@ export class DialogContainerComponent
     private _listenOnClose(): void {
         const callback: () => void = () => {
             this._animationStateSignal.set('hidden');
-            this._cdr.detectChanges();
         };
         this.ref.afterClosed.pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
             next: () => callback(),
