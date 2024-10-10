@@ -3,7 +3,7 @@ import { CoreBaseComponentPo, waitForElDisplayed, waitForPresent } from '../../.
 export class MultiInputPo extends CoreBaseComponentPo {
     private url = '/multi-input';
 
-    activeDropdownButtons = 'button[title="value-help"]:not(:disabled)';
+    activeDropdownButtons = 'button:not(:disabled) .sap-icon--value-help';
     activeInputs = '.fd-multi-input-field input:not(:disabled)';
     disableInputs = 'div.is-disabled';
     simpleMultiInputOptions = '.fd-popover-custom-list [fd-list-item] fd-checkbox';
