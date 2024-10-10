@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.6...v0.53.1-rc.7) (2024-10-08)
+
+
+### Bug Fixes
+
+* **core:** translations for Notification component ([#12524](https://github.com/SAP/fundamental-ngx/issues/12524)) ([cd8df83](https://github.com/SAP/fundamental-ngx/commit/cd8df832c53cef6d77bfee8cd232e0af52251407))
+
+
+
+
+
+## [0.53.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.5...v0.53.1-rc.6) (2024-10-08)
+
+
+### Bug Fixes
+
+* **core:** remove redundant api calls in dynamic page ([#12504](https://github.com/SAP/fundamental-ngx/issues/12504)) ([d3aaa89](https://github.com/SAP/fundamental-ngx/commit/d3aaa895caa7ffb1bb0360e4576013e8c2adf0c2))
+
+
+
+
+
+## [0.53.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.4...v0.53.1-rc.5) (2024-10-08)
+
+
+### Bug Fixes
+
+* **core,platform:** radio a11y improvements ([#12525](https://github.com/SAP/fundamental-ngx/issues/12525)) ([350b09a](https://github.com/SAP/fundamental-ngx/commit/350b09a6af867fd7c87d09132e56cde340a957a4))
+
+
+
+
+
+## [0.53.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.3...v0.53.1-rc.4) (2024-10-08)
+
+
+### Bug Fixes
+
+* **core:** stop month/year cell to change size on date picker month/year range selection ([#12526](https://github.com/SAP/fundamental-ngx/issues/12526)) ([29bfe7d](https://github.com/SAP/fundamental-ngx/commit/29bfe7db5d1eebf487067c5155759ec638068f52)), closes [#12522](https://github.com/SAP/fundamental-ngx/issues/12522)
+
+
+
+
+
 ## [0.53.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.2...v0.53.1-rc.3) (2024-10-08)
 
 

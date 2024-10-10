@@ -71,7 +71,7 @@ describe('NotificationGroupComponent', () => {
 
     it('should affect the aria-description when aria-expanded changes', () => {
         const attributeElement = fixture.debugElement.query(By.css('fd-notification-group'));
-        expect(attributeElement.nativeElement.getAttribute('aria-description')).toBe('Notification group expanded');
+        expect(attributeElement.nativeElement.getAttribute('aria-description')).toBe('Notification Group expanded');
     });
 
     it('should set aria-labelledby from fd-notification-group-header-title child element', () => {

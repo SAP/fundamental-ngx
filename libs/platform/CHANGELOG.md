@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.6...v0.53.1-rc.7) (2024-10-08)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.53.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.5...v0.53.1-rc.6) (2024-10-08)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.53.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.4...v0.53.1-rc.5) (2024-10-08)
+
+
+### Bug Fixes
+
+* **core,platform:** radio a11y improvements ([#12525](https://github.com/SAP/fundamental-ngx/issues/12525)) ([350b09a](https://github.com/SAP/fundamental-ngx/commit/350b09a6af867fd7c87d09132e56cde340a957a4))
+
+
+
+
+
+## [0.53.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.3...v0.53.1-rc.4) (2024-10-08)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
 ## [0.53.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.2...v0.53.1-rc.3) (2024-10-08)
 
 **Note:** Version bump only for package @fundamental-ngx/platform

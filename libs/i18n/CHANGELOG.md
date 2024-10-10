@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.6...v0.53.1-rc.7) (2024-10-08)
+
+
+### Bug Fixes
+
+* **core:** translations for Notification component ([#12524](https://github.com/SAP/fundamental-ngx/issues/12524)) ([cd8df83](https://github.com/SAP/fundamental-ngx/commit/cd8df832c53cef6d77bfee8cd232e0af52251407))
+
+
+
+
+
+## [0.53.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.5...v0.53.1-rc.6) (2024-10-08)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+## [0.53.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.4...v0.53.1-rc.5) (2024-10-08)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+## [0.53.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.3...v0.53.1-rc.4) (2024-10-08)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
 ## [0.53.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.2...v0.53.1-rc.3) (2024-10-08)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
