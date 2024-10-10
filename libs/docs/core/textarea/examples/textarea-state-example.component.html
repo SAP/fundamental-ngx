@@ -1,8 +1,14 @@
 <div fd-form-item>
     <label fd-form-label [colon]="true" for="textarea-52">Textarea State: Success</label>
     <fd-form-input-message-group>
-        <textarea fd-form-control id="textarea-52" placeholder="Field placeholder text" state="success"></textarea>
-        <fd-form-message type="success">
+        <textarea
+            fd-form-control
+            id="textarea-52"
+            placeholder="Field placeholder text"
+            state="success"
+            aria-describedby="form-message-52"
+        ></textarea>
+        <fd-form-message type="success" id="form-message-52">
             Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
         </fd-form-message>
     </fd-form-input-message-group>
@@ -11,8 +17,15 @@
 <div fd-form-item>
     <label fd-form-label [colon]="true" for="textarea-53">Textarea State: Error</label>
     <fd-form-input-message-group>
-        <textarea fd-form-control id="textarea-53" placeholder="Field placeholder text" state="error"></textarea>
-        <fd-form-message type="error">
+        <textarea
+            fd-form-control
+            id="textarea-53"
+            aria-errormessage="form-message-53"
+            aria-invalid="true"
+            placeholder="Field placeholder text"
+            state="error"
+        ></textarea>
+        <fd-form-message type="error" id="form-message-53">
             Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
         </fd-form-message>
     </fd-form-input-message-group>
@@ -21,8 +34,14 @@
 <div fd-form-item>
     <label fd-form-label [colon]="true" for="textarea-54">Textarea State: Warning</label>
     <fd-form-input-message-group>
-        <textarea fd-form-control id="textarea-54" placeholder="Field placeholder text" state="warning"></textarea>
-        <fd-form-message type="warning">
+        <textarea
+            fd-form-control
+            id="textarea-54"
+            placeholder="Field placeholder text"
+            state="warning"
+            aria-describedby="form-message-54"
+        ></textarea>
+        <fd-form-message type="warning" id="form-message-54">
             Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
         </fd-form-message>
     </fd-form-input-message-group>
@@ -31,8 +50,14 @@
 <div fd-form-item>
     <label fd-form-label [colon]="true" for="textarea-55">Textarea State: Information</label>
     <fd-form-input-message-group>
-        <textarea fd-form-control id="textarea-55" placeholder="Field placeholder text" state="information"></textarea>
-        <fd-form-message type="information">
+        <textarea
+            fd-form-control
+            id="textarea-55"
+            placeholder="Field placeholder text"
+            state="information"
+            aria-describedby="form-message-55"
+        ></textarea>
+        <fd-form-message type="information" id="form-message-55">
             Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
         </fd-form-message>
     </fd-form-input-message-group>

@@ -29,7 +29,15 @@ export interface SvgItemConfig {
     file: string;
 }
 
-export type IllustratedMessageType = 'scene' | 'dialog' | 'spot' | 'dot';
+export type IllustratedMessageType = 'scene' | 'dialog' | 'spot' | 'dot' | 'base';
+
+export enum IllustratedMessageTypes {
+    SCENE = 'scene',
+    DIALOG = 'dialog',
+    SPOT = 'spot',
+    DOT = 'dot',
+    BASE = 'base'
+}
 
 let illustratedMessageUniqueId = 0;
 
@@ -46,11 +54,11 @@ let illustratedMessageUniqueId = 0;
 export class IllustratedMessageComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit, CssClassBuilder {
     /**
      * The type of the Illustrated Message
-     * Options include: 'scene' | 'spot' | 'dialog' | 'dot'.
+     * Options include: 'scene' | 'spot' | 'dialog' | 'dot' | 'base'.
      * The default type is set to 'scene'
      */
     @Input()
-    type: IllustratedMessageType = 'scene';
+    type: IllustratedMessageType = IllustratedMessageTypes.SCENE;
 
     /**
      * An object containing url and id for each type used to construct the svg href
@@ -95,6 +103,9 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
     _inlineSvg: SafeHtml | undefined;
 
     /** @hidden */
+    _containerWidth: number;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
@@ -131,9 +142,9 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (this.type === 'scene') {
-            this._subscriptions.add(fromEvent(window, 'resize').subscribe(() => this._constructHref()));
-        }
+        this._containerWidth = this.elementRef.nativeElement.offsetWidth;
+        this._constructHref();
+        this._subscriptions.add(fromEvent(window, 'resize').subscribe(() => this._constructHref()));
     }
 
     /** @hidden */
@@ -145,28 +156,47 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
     private _constructHref(): void {
         let inlineSvg: string | undefined;
         this._inlineSvg = undefined;
+
+        this._containerWidth = this.elementRef.nativeElement.offsetWidth;
+
+        if (this._containerWidth >= 682) {
+            this.type = IllustratedMessageTypes.SCENE;
+        }
+
+        if (this._containerWidth >= 361 && this._containerWidth <= 681) {
+            this.type = IllustratedMessageTypes.DIALOG;
+        }
+
+        if (this._containerWidth >= 261 && this._containerWidth <= 360) {
+            this.type = IllustratedMessageTypes.SPOT;
+        }
+
+        if (this._containerWidth >= 161 && this._containerWidth <= 260) {
+            this.type = IllustratedMessageTypes.DOT;
+        }
+
+        if (this._containerWidth <= 160) {
+            this.type = IllustratedMessageTypes.BASE;
+        }
+
         if (this.svgConfig) {
             switch (this.type) {
-                case 'scene':
-                    this._isSmallScreen = window.innerWidth < 600;
-
-                    inlineSvg = this._isSmallScreen ? this.svgConfig.dialog?.file : this.svgConfig.scene?.file;
-
-                    this._href = this._isSmallScreen
-                        ? `${this.svgConfig.dialog?.url || ''}#${this.svgConfig.dialog?.id}`
-                        : `${this.svgConfig.scene?.url || ''}#${this.svgConfig.scene?.id}`;
+                case IllustratedMessageTypes.SCENE:
+                    inlineSvg = this.svgConfig.scene?.file;
+                    this._href = `${this.svgConfig.scene?.url || ''}#${this.svgConfig.scene?.id}`;
                     break;
 
-                case 'dialog':
+                case IllustratedMessageTypes.DIALOG:
                     inlineSvg = this.svgConfig.dialog?.file;
                     this._href = `${this.svgConfig.dialog?.url || ''}#${this.svgConfig.dialog?.id}`;
                     break;
 
-                case 'spot':
+                case IllustratedMessageTypes.SPOT:
                     inlineSvg = this.svgConfig.spot?.file;
                     this._href = `${this.svgConfig.spot?.url || ''}#${this.svgConfig.spot?.id}`;
                     break;
-                case 'dot':
+
+                case IllustratedMessageTypes.DOT:
                     inlineSvg = this.svgConfig.dot?.file;
                     this._href = `${this.svgConfig.dot?.url || ''}#${this.svgConfig.dot?.id}`;
                     break;
@@ -176,6 +206,7 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
             this._inlineSvg = this._sanitizer.bypassSecurityTrustHtml(inlineSvg);
         }
 
+        this.buildComponentCssClass();
         this._cdRef.detectChanges();
     }
 }

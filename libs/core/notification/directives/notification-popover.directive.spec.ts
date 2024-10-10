@@ -3,13 +3,13 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NotificationModule } from '../notification.module';
 
 @Component({
-    template: `<p #directiveElement fd-notification-limit-description>Notification Limit Description Test</p> `
+    template: `<div #directiveElement fd-notification-popover>Notification Popover Test</div> `
 })
 class TestComponent {
     @ViewChild('directiveElement')
     ref: ElementRef;
 }
-describe('NotificationLimitDescriptionDirective', () => {
+describe('NotificationPopoverDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
@@ -31,6 +31,6 @@ describe('NotificationLimitDescriptionDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-notification__limit--description');
+        expect(component.ref.nativeElement.className).toBe('fd-notification-popover');
     });
 });

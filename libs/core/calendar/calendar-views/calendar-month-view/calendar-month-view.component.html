@@ -10,14 +10,6 @@
                     <td
                         class="fd-calendar__my-item"
                         role="gridcell"
-                        [class.fd-calendar__item--selected]="
-                            monthCell.selectedFirst || monthCell.selectedLast || monthCell.selected
-                        "
-                        [class.fd-calendar__item--range]="
-                            (monthCell.selectedRange || monthCell.hoverRange) &&
-                            !monthCell.selectedFirst &&
-                            !monthCell.selectedLast
-                        "
                         [class.fd-calendar__my-item--current]="monthCell.current"
                         [class.is-active]="monthCell.selected"
                         [attr.tabIndex]="monthCell.tabIndex"
@@ -32,6 +24,12 @@
                         <button
                             fd-button
                             fdType="transparent"
+                            [class.fd-button--toggled]="
+                                monthCell.selectedRange ||
+                                monthCell.hoverRange ||
+                                monthCell.selectedFirst ||
+                                monthCell.selectedLast
+                            "
                             class="fd-calendar__my-item-button"
                             [class.is-active]="monthCell.current"
                             tabindex="-1"

@@ -1,57 +1,59 @@
 import {
-    AfterContentInit,
+    AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
-    ContentChild,
-    forwardRef,
-    OnDestroy,
-    ViewEncapsulation
+    ViewEncapsulation,
+    contentChildren,
+    input
 } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { NotificationGroupHeaderComponent } from '../notification-group-header/notification-group-header.component';
+import { NotificationComponent } from '../notification/notification.component';
+import { FD_NOTIFICATION, FD_NOTIFICATION_GROUP_LIST } from '../token';
+
+let notificationGroupListCounter = 0;
 
 @Component({
     selector: 'fd-notification-group-list',
-    template: `
-        <ng-content select="fd-notification-group-header"></ng-content>
-        @if (expanded) {
-            <ng-content></ng-content>
+    template: `<ng-content></ng-content>`,
+    host: {
+        class: 'fd-notification-group__list',
+        role: 'list',
+        '[attr.id]': 'id()'
+    },
+    providers: [
+        {
+            provide: FD_NOTIFICATION_GROUP_LIST,
+            useExisting: NotificationGroupListComponent
         }
-    `,
+    ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: []
 })
-export class NotificationGroupListComponent implements AfterContentInit, OnDestroy {
-    /** @hidden */
-    @ContentChild(forwardRef(() => NotificationGroupHeaderComponent))
-    groupHeader: NotificationGroupHeaderComponent;
+export class NotificationGroupListComponent implements AfterViewInit {
+    /**
+     * id of the element labelling the group list
+     */
+    ariaLabelledBy = input<string>();
 
-    /** Whether the Notification list content is expanded */
-    expanded: boolean;
+    /**
+     * id for the notification group list
+     * if not set, a default value is provided
+     */
+    id = input('fd-notification-group-list-' + ++notificationGroupListCounter);
 
-    /** @hidden */
-    private readonly _subscriptions = new Subscription();
+    /**
+     * @hidden
+     */
+    notifications = contentChildren<NotificationComponent>(FD_NOTIFICATION);
 
-    /** @hidden */
-    constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {}
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-        this.expanded = this.groupHeader.expanded;
-
-        this._subscriptions.add(
-            this.groupHeader.expandedChange.subscribe((value) => {
-                this.expanded = value;
-                this._changeDetectorRef.detectChanges();
-            })
-        );
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
+    /**
+     * @hidden
+     */
+    ngAfterViewInit(): void {
+        this.notifications()?.forEach((notification) => {
+            notification.role.set('listitem');
+            notification.ariaLevel.set(2);
+        });
     }
 }

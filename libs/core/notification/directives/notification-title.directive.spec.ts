@@ -33,4 +33,8 @@ describe('NotificationTitleDirective', () => {
     it('should assign class', () => {
         expect(component.ref.nativeElement.className).toBe('fd-notification__title fd-notification__title--unread');
     });
+
+    it('should have a default id', () => {
+        expect(component.ref.nativeElement.getAttribute('id')).toBeTruthy();
+    });
 });

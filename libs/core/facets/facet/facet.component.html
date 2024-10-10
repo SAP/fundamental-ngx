@@ -3,8 +3,8 @@
 } @else {
     @if (facetTitle) {
         <div
-            [attr.role]="!!headingLevel ? 'heading' : null"
-            [attr.aria-level]="headingLevel"
+            [attr.role]="!!_headingLevel ? 'heading' : null"
+            [attr.aria-level]="_headingLevel"
             fd-title
             [headerSize]="5"
             class="fd-margin-bottom--sm"
