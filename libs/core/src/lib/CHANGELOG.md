@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.47](https://github.com/SAP/fundamental-ngx/compare/v0.43.46...v0.43.47) (2024-10-10)
+
+
+### Bug Fixes
+
+* **core:** input group should not fall back to glyph for button title ([#12528](https://github.com/SAP/fundamental-ngx/issues/12528)) ([fe3cf15](https://github.com/SAP/fundamental-ngx/commit/fe3cf15b9e05ca9f3b436fa3cad3cc1d1812e2c8))
+
+
+
+
+
 ## [0.43.46](https://github.com/SAP/fundamental-ngx/compare/v0.43.45...v0.43.46) (2024-10-07)
 
 

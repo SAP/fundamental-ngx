@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.47](https://github.com/SAP/fundamental-ngx/compare/v0.43.46...v0.43.47) (2024-10-10)
+
+
+### Bug Fixes
+
+* **platform:** add loadingState recheck when async refocusing cell ([#12517](https://github.com/SAP/fundamental-ngx/issues/12517)) ([0831c29](https://github.com/SAP/fundamental-ngx/commit/0831c2962fad2d4936a24d64a6bb3c8a24dc433f))
+
+
+
+
+
 ## [0.43.46](https://github.com/SAP/fundamental-ngx/compare/v0.43.45...v0.43.46) (2024-10-07)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
