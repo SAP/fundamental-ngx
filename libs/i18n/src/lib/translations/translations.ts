@@ -573,5 +573,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Menu button'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Expand/Collapse',
+        groupAriaDescription: 'Notification Group',
+        groupAriaDescriptionExpanded: 'expanded',
+        groupAriaDescriptionCollapsed: 'collapsed'
     }
 };
