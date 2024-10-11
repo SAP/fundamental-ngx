@@ -145,7 +145,7 @@ export class InputGroupComponent implements AfterViewInit, FormItemControl, OnIn
     @Input()
     addonButtonAriaHidden: Nullable<boolean>;
 
-    /** The tooltip for the input group icon. */
+    /** @deprecated Title attributes are being removed from the library. */
     @Input()
     iconTitle: Nullable<string>;
 

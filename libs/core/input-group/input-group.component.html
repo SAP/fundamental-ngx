@@ -28,7 +28,6 @@
                     [fdType]="inShellbar ? 'standard' : 'transparent'"
                     [id]="_addOnButtonId"
                     [attr.tabindex]="buttonFocusable ? 0 : -1"
-                    [attr.title]="iconTitle || glyphAriaLabel"
                     [glyph]="glyph"
                     [glyphFont]="glyphFont"
                     [class.fd-shellbar__button]="inShellbar"
@@ -54,7 +53,6 @@
                 [id]="_addOnNonButtonId"
                 [placement]="placement"
                 [attr.aria-label]="glyphAriaLabel || glyph || addOnText"
-                [attr.title]="iconTitle || addOnText"
             >
                 @if (!glyph) {
                     {{ addOnText }}
