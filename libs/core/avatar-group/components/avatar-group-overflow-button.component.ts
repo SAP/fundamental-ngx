@@ -2,7 +2,6 @@ import {
     ChangeDetectionStrategy,
     Component,
     forwardRef,
-    HostBinding,
     inject,
     Input,
     OnChanges,
@@ -30,6 +29,7 @@ import { AVATAR_GROUP_HOST_CONFIG } from '../tokens';
     template: ` <ng-content></ng-content>`,
     host: {
         role: 'button',
+        class: 'fd-avatar--circle'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
@@ -50,13 +50,6 @@ export class AvatarGroupOverflowButtonComponent
      */
     @Input()
     size: Size = 'l';
-
-    /**
-     * Whether the overflow button should be displayed as a circle.
-     */
-    @Input()
-    @HostBinding('class.fd-avatar--circle')
-    circle = false;
 
     /**
      * A number from 1 to 10 representing the background color of the Avatar.

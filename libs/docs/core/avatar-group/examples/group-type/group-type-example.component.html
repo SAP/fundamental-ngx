@@ -102,7 +102,7 @@
 </fd-avatar-group>
 <br />
 <description> Avatar group with rounded +N button </description>
-<fd-avatar-group [size]="'m'" [circle]="true" type="group" overflowPopoverTitle="Team members">
+<fd-avatar-group [size]="'m'" type="group" overflowPopoverTitle="Team members">
     @for (person of people; track person) {
         @if (!person.imageUrl && !person.glyph) {
             <fd-avatar
@@ -205,7 +205,7 @@
 </fd-avatar-group>
 <br />
 <description> Avatar group with defined size of visible items </description>
-<fd-avatar-group [maxVisibleItems]="10" [size]="'m'" [circle]="true" type="group" overflowPopoverTitle="Team members">
+<fd-avatar-group [maxVisibleItems]="10" [size]="'m'" type="group" overflowPopoverTitle="Team members">
     @for (person of people; track person) {
         @if (!person.imageUrl && !person.glyph) {
             <fd-avatar
