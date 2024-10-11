@@ -3,9 +3,11 @@
     <fd-shellbar-logo>
         <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
     </fd-shellbar-logo>
-    <fd-product-menu [control]="productMenuControl" [closePopoverOnSelect]="true" [items]="productMenuItems">
-    </fd-product-menu>
+    <fd-shellbar-title> Corporate Portal </fd-shellbar-title>
+
     <fd-shellbar-subtitle> Subtitle </fd-shellbar-subtitle>
+    <fd-product-menu [label]="productMenuControl" [closePopoverOnSelect]="true" [items]="productMenuItems">
+    </fd-product-menu>
     <fd-shellbar-actions [user]="user" [userMenu]="userMenu">
         @for (action of actions; track action) {
             <fd-shellbar-action

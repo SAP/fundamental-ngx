@@ -3,6 +3,7 @@ import {
     ShellbarActionsComponent,
     ShellbarComponent,
     ShellbarLogoComponent,
+    ShellbarSubtitleComponent,
     ShellbarTitleComponent,
     ShellbarUser,
     ShellbarUserMenu
@@ -12,7 +13,13 @@ import {
     selector: 'fd-shellbar-basic-example',
     templateUrl: './shellbar-basic-example.component.html',
     standalone: true,
-    imports: [ShellbarComponent, ShellbarLogoComponent, ShellbarTitleComponent, ShellbarActionsComponent]
+    imports: [
+        ShellbarComponent,
+        ShellbarLogoComponent,
+        ShellbarTitleComponent,
+        ShellbarActionsComponent,
+        ShellbarSubtitleComponent
+    ]
 })
 export class ShellbarBasicExampleComponent {
     user: ShellbarUser = {

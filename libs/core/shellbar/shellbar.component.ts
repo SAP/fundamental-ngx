@@ -223,7 +223,8 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         s: 0,
         m: 320,
         l: 600,
-        xl: 1240
+        xl: 1240,
+        xxl: 1600
     });
 
     /** @hidden */

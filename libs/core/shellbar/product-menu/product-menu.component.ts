@@ -62,7 +62,7 @@ export class ProductMenuComponent {
      * represented by the name of the current application.
      */
     @Input()
-    control: string;
+    label: string;
 
     /**
      *  The items in the product menu. If the value is not passed or there is empty array,

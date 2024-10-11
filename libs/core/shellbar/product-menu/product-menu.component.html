@@ -1,5 +1,5 @@
 @if (items && items.length > 0) {
-    <h1 class="fd-sr-only">{{ control }}</h1>
+    <h1 class="fd-sr-only">{{ label }}</h1>
     <button
         fd-button
         fdType="transparent"
@@ -9,8 +9,9 @@
         fdCozy
         [disabled]="disabled"
         [fdMenuTrigger]="menu"
+        [label]="label"
     >
-        <span class="fd-shellbar__title">{{ control }}</span>
+        <ng-content select="[fd-product-menu-button]"></ng-content>
     </button>
     <fd-menu
         #menu
@@ -35,8 +36,4 @@
             </li>
         }
     </fd-menu>
-} @else {
-    <h1 class="fd-shellbar__title fd-product-menu__title">
-        {{ control }}
-    </h1>
 }

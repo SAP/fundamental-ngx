@@ -1,4 +1,4 @@
-export type ShellbarSizes = 's' | 'm' | 'l' | 'xl';
+export type ShellbarSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
 
 export type Breakpoints = Record<ShellbarSizes, number>;
 

@@ -3585,10 +3585,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fundamental-styles/cx@npm:0.38.0":
-  version: 0.38.0
-  resolution: "@fundamental-styles/cx@npm:0.38.0"
-  checksum: 10/f3ad7e8f886849260670a08b1b3a8576bacee6f4eeea1ee8363021f5a554ecd20ddaeebc2fe6e880785acc70ca6b511941bc9fe54e6c6058854317f8d7e53dfe
+"@fundamental-styles/cx@npm:0.39.0-rc.5":
+  version: 0.39.0-rc.5
+  resolution: "@fundamental-styles/cx@npm:0.39.0-rc.5"
+  checksum: 10/2395221d54a5d70a89d05344e1f71b3137cef0561276eb9ab8057a4480402922fc2b913dd361c82d7d29fadc373b06258175e17816a92c296cfd78cf4d282940
   languageName: node
   linkType: hard
 
@@ -13700,7 +13700,7 @@ __metadata:
     "@angular/router": "npm:18.0.3"
     "@commitlint/cli": "npm:18.6.1"
     "@commitlint/config-conventional": "npm:18.6.1"
-    "@fundamental-styles/cx": "npm:0.38.0"
+    "@fundamental-styles/cx": "npm:0.39.0-rc.5"
     "@jsdevtools/npm-publish": "npm:3.0.1"
     "@nx/angular": "npm:19.2.3"
     "@nx/devkit": "npm:19.2.3"
@@ -13757,7 +13757,7 @@ __metadata:
     fast-glob: "npm:3.3.1"
     focus-trap: "npm:7.1.0"
     focus-visible: "npm:5.2.1"
-    fundamental-styles: "npm:0.38.0"
+    fundamental-styles: "npm:0.39.0-rc.5"
     fuse.js: "npm:7.0.0"
     highlight.js: "npm:11.7.0"
     husky: "npm:8.0.2"
@@ -13804,13 +13804,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"fundamental-styles@npm:0.38.0":
-  version: 0.38.0
-  resolution: "fundamental-styles@npm:0.38.0"
+"fundamental-styles@npm:0.39.0-rc.5":
+  version: 0.39.0-rc.5
+  resolution: "fundamental-styles@npm:0.39.0-rc.5"
   peerDependencies:
     "@sap-theming/theming-base-content": ^11.18.0
-    "@sap-ui/common-css": 0.38.0
-  checksum: 10/5df9e1bc5590ba9af9cdb9c4f6d32507267f4d5f9c985535aac23bddcff32bf23707a64ed367f0b16f80134775afcd432f03fe6d12ed654d64a32d7517f40e7e
+    "@sap-ui/common-css": 0.39.0-rc.5
+  checksum: 10/88662cc04691a8de360f777b00b0f48253bd3fabce67716a4890f34790e185a38d47600f5f68978062a60517733d218bb1020e8965334c9aa58b5fbfeaa8eed4
   languageName: node
   linkType: hard
 

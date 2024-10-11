@@ -13,6 +13,7 @@ import {
     ShellbarMenuItem,
     ShellbarSizes,
     ShellbarSubtitleComponent,
+    ShellbarTitleComponent,
     ShellbarUser,
     ShellbarUserMenu
 } from '@fundamental-ngx/core/shellbar';
@@ -39,7 +40,8 @@ import {
         ContentDensityDirective,
         ShellbarActionsComponent,
         ShellbarActionComponent,
-        ProductSwitchModule
+        ProductSwitchModule,
+        ShellbarTitleComponent
     ]
 })
 export class ShellbarCollapsibleExampleComponent {
@@ -58,7 +60,7 @@ export class ShellbarCollapsibleExampleComponent {
 
     inputText = '';
 
-    productMenuControl = 'Corporate Portal';
+    productMenuControl = 'EMEA';
 
     categories: ValueLabelItem[] = [
         {
@@ -169,18 +171,32 @@ export class ShellbarCollapsibleExampleComponent {
 
     actions = [
         {
-            glyph: 'pool',
-            callback: this.actionPoolCallback,
-            label: 'Pool',
-            notificationCount: 3,
-            notificationLabel: 'Pool Count'
+            glyph: 'da',
+            callback: this.actionJouleAssistantCallback,
+            label: 'Joule Digital Assistant',
+            notificationCount: 0,
+            notificationLabel: 'Joule Digital Assistant'
         },
         {
             glyph: 'bell',
             callback: this.actionNotificationCallback,
             label: 'Notifications',
-            notificationCount: 12,
+            notificationCount: 72,
             notificationLabel: 'Unread Notifications'
+        },
+        {
+            glyph: 'feedback',
+            callback: this.actionFeedbackCallback,
+            label: 'Feedback',
+            notificationCount: 0,
+            notificationLabel: 'User Feedback'
+        },
+        {
+            glyph: 'sys-help',
+            callback: this.actionHelpCallback,
+            label: 'Help',
+            notificationCount: 0,
+            notificationLabel: 'Help Center'
         }
     ];
 
@@ -258,14 +274,24 @@ export class ShellbarCollapsibleExampleComponent {
         alert('Sign Out Clicked');
     }
 
+    actionJouleAssistantCallback($event): void {
+        console.log($event);
+        alert('Joule Digital Assistant Clicked');
+    }
+
     actionNotificationCallback($event): void {
         console.log($event);
         alert('Notification Action Clicked');
     }
 
-    actionPoolCallback($event): void {
+    actionFeedbackCallback($event): void {
         console.log($event);
-        alert('Pool Action Clicked');
+        alert('Feedback Clicked');
+    }
+
+    actionHelpCallback($event): void {
+        console.log($event);
+        alert('Help Center Clicked');
     }
 
     productSwitcherCallback(product): void {
