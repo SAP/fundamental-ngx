@@ -82,10 +82,6 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     @Input()
     orientation: AvatarGroupHostConfig['orientation'] = 'horizontal';
 
-    /** Whether the avatar overflow button should be displayed as circles. */
-    @Input()
-    circle = false;
-
     /**
      * The spacing between the items depends on the size of the avatars in the group.
      * The size is also used for the default overflow button.
