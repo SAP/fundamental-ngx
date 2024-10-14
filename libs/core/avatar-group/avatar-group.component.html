@@ -56,11 +56,12 @@
     <fd-popover
         [placement]="popoverPlacement"
         [noArrow]="false"
-        [focusAutoCapture]="false"
+        [focusAutoCapture]="true"
         fdkResizeObserver
         (resized)="_detectChanges()"
+        (isOpenChange)="handlePopoverOpen($event)"
     >
-        <fd-popover-control>
+        <fd-popover-control tabindex="-1">
             <fd-avatar-group-host
                 [maxVisibleItems]="maxVisibleItems"
                 #avatarGroupHostComponent

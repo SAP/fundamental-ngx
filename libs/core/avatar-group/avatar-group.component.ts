@@ -9,6 +9,7 @@ import {
     ContentChildren,
     Input,
     QueryList,
+    ViewChild,
     ViewChildren,
     ViewEncapsulation,
     computed,
@@ -113,6 +114,10 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     _avatarRenderers: QueryList<AvatarGroupItemRendererDirective>;
 
     /** @hidden */
+    @ViewChild(DefaultAvatarGroupOverflowBodyComponent)
+    defaultAvatarGroupOverflowBody: DefaultAvatarGroupOverflowBodyComponent;
+
+    /** @hidden */
     @ContentChildren(AvatarGroupItemDirective)
     _avatars: QueryList<AvatarGroupItemDirective>;
 
@@ -136,5 +141,13 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     /** @hidden */
     _detectChanges(): void {
         this._cdr.detectChanges();
+    }
+
+    /** @hidden */
+    handlePopoverOpen(isOpen: boolean): void {
+        if (isOpen) {
+            this.defaultAvatarGroupOverflowBody._avatarGroupItemPortals.first.setTabbable(true);
+            this.defaultAvatarGroupOverflowBody._avatarGroupItemPortals.first.focus();
+        }
     }
 }
