@@ -74,8 +74,7 @@ import {
         InitialFocusDirective,
         FocusableItemDirective
     ],
-    templateUrl: './settings-dialog.component.html',
-    styleUrls: ['./settings-dialog.component.scss']
+    templateUrl: './settings-dialog.component.html'
 })
 export class SettingsDialogComponent implements Resettable {
     /** Data for sorting */
