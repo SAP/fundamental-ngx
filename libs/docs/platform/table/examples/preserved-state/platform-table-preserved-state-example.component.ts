@@ -7,9 +7,11 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { destroyObservable, FocusableCellPosition } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DatetimeAdapter, FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
+import { FormFieldComponent, FormGroupComponent, InputComponent } from '@fundamental-ngx/platform';
 import {
     CollectionBooleanFilter,
     CollectionDateFilter,
@@ -18,6 +20,7 @@ import {
     CollectionSelectFilter,
     CollectionSort,
     CollectionStringFilter,
+    FilterType,
     PlatformTableModule,
     SortDirection,
     TableColumnsChangeEvent,
@@ -25,6 +28,7 @@ import {
     TableDataProvider,
     TableDataSource,
     TableFilterChangeEvent,
+    TableFilterSelectOption,
     TablePageChangeEvent,
     TableRowsRearrangeEvent,
     TableRowToggleOpenStateEvent,
@@ -53,7 +57,11 @@ import { delay, map, merge, Observable, of, Subject, switchMap, takeUntil } from
         PlatformTableModule,
         TableInitialStateDirective,
         TableDraggableDirective,
-        FdDatetimeModule
+        FdDatetimeModule,
+        FormFieldComponent,
+        FormGroupComponent,
+        InputComponent,
+        FormsModule
     ]
 })
 export class PlatformTablePreservedStateExampleComponent {
@@ -69,6 +77,20 @@ export class PlatformTablePreservedStateExampleComponent {
     private _dateTimeAdapter = inject<DatetimeAdapter<FdDate>>(DatetimeAdapter);
 
     private readonly _cdr = inject(ChangeDetectorRef);
+
+    readonly filterTypeEnum = FilterType;
+    statusFilteringValues: TableFilterSelectOption[] = [
+        { value: 'Stocked on demand', label: 'Stocked on demand' },
+        { value: 'Out of stock', label: 'Out of stock' },
+        { value: 'No info', label: 'No info' },
+        { value: 'Available', label: 'Available' }
+    ];
+
+    statusColorFilteringValues: TableFilterSelectOption[] = [
+        { value: 'informative', label: 'Informative' },
+        { value: 'negative', label: 'Negative' },
+        { value: 'positive', label: 'Positive' }
+    ];
 
     source = new ExampleTableDataSource(new ExampleTableProvider(this.items, this._dateTimeAdapter));
 

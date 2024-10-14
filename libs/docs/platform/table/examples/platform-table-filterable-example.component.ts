@@ -49,14 +49,16 @@ import {
 export class PlatformTableFilterableExampleComponent {
     readonly filterTypeEnum = FilterType;
     statusFilteringValues: TableFilterSelectOption[] = [
+        { value: 'Stocked on demand', label: 'Stocked on demand' },
         { value: 'Out of stock', label: 'Out of stock' },
-        { value: 'Stocked on demand', label: 'Stocked on demand' }
+        { value: 'No info', label: 'No info' },
+        { value: 'Available', label: 'Available' }
     ];
 
     statusColorFilteringValues: TableFilterSelectOption[] = [
-        { value: 'positive', label: 'Positive' },
+        { value: 'informative', label: 'Informative' },
         { value: 'negative', label: 'Negative' },
-        { value: 'critical', label: 'Critical' }
+        { value: 'positive', label: 'Positive' }
     ];
 
     source: TableDataSource<ExampleItem>;

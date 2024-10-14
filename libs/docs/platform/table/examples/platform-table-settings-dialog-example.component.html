@@ -1,22 +1,13 @@
 <fdp-table #table [dataSource]="source" (filterChange)="logFilterChange($event)" emptyTableMessage="No data found">
-    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false"> </fdp-table-toolbar>
+    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false"></fdp-table-toolbar>
 
-    <fdp-column
-        name="name"
-        key="name"
-        label="Name"
-        align="start"
-        [groupable]="true"
-        [filterable]="true"
-        [sortable]="true"
-    ></fdp-column>
+    <fdp-column name="name" key="name" label="Name" align="start" [groupable]="true" [sortable]="true"></fdp-column>
 
     <fdp-column
         name="description"
         key="description"
         label="Description"
         [groupable]="true"
-        [filterable]="true"
         [sortable]="true"
     ></fdp-column>
 
@@ -30,9 +21,25 @@
         [sortable]="true"
     ></fdp-column>
 
-    <fdp-column name="status" key="status" label="Status" align="center"></fdp-column>
+    <fdp-column
+        name="status"
+        key="status"
+        label="Status"
+        align="center"
+        [groupable]="true"
+        [filterable]="true"
+        [sortable]="true"
+    ></fdp-column>
 
-    <fdp-column name="statusColor" key="statusColor" label="Status Color" align="center"> </fdp-column>
+    <fdp-column
+        name="statusColor"
+        key="statusColor"
+        label="Status Color"
+        align="center"
+        [groupable]="true"
+        [filterable]="true"
+        [sortable]="true"
+    ></fdp-column>
 </fdp-table>
 
 <!-- View Settings Dialog-->

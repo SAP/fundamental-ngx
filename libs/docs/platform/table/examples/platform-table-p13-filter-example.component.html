@@ -1,24 +1,34 @@
 <fdp-table #table [dataSource]="source">
     <fdp-table-toolbar title="Order Items"></fdp-table-toolbar>
 
-    <fdp-column name="name" key="name" label="Name" [filterable]="true" [dataType]="dataTypeEnum.STRING"> </fdp-column>
+    <fdp-column name="name" key="name" label="Name" [dataType]="dataTypeEnum.STRING"> </fdp-column>
 
     <fdp-column name="description" key="description" label="Description"> </fdp-column>
 
     <fdp-column name="price" key="price.value" label="Price" [filterable]="true" [dataType]="dataTypeEnum.NUMBER">
     </fdp-column>
 
-    <fdp-column name="updatedOn" key="date" label="Updated On" [filterable]="true" [dataType]="dataTypeEnum.DATE">
+    <fdp-column name="updatedOn" key="date" label="Updated On" [dataType]="dataTypeEnum.DATE">
         <fdp-table-cell *fdpCellDef="let item">
             {{ item.date?.toDateString() }}
         </fdp-table-cell>
     </fdp-column>
 
-    <fdp-column name="verified" key="verified" label="Verified" [filterable]="true" [dataType]="dataTypeEnum.BOOLEAN">
-    </fdp-column>
+    <fdp-column name="verified" key="verified" label="Verified" [dataType]="dataTypeEnum.BOOLEAN"> </fdp-column>
 </fdp-table>
 
-<!-- Connect P13 Dialog to the table -->
-<fdp-table-p13-dialog [table]="table">
-    <fdp-table-p13-filter [validator]="validator"></fdp-table-p13-filter>
-</fdp-table-p13-dialog>
+<!-- View Settings Dialog-->
+<fdp-table-view-settings-dialog [table]="table">
+    <fdp-table-view-settings-filter column="price" label="Price" [type]="filterTypeEnum.CUSTOM">
+        <ng-container *fdpViewSettingsFilterCustomDef="let model">
+            <fdp-form-group #fg1 columnLayout="XL1-L1-M1-S1" labelLayout="vertical">
+                <fdp-form-field label="Minimum Price">
+                    <fdp-input type="number" name="min" [(ngModel)]="model.min"></fdp-input>
+                </fdp-form-field>
+                <fdp-form-field label="Maximum Price">
+                    <fdp-input type="number" name="max" [(ngModel)]="model.max"></fdp-input>
+                </fdp-form-field>
+            </fdp-form-group>
+        </ng-container>
+    </fdp-table-view-settings-filter>
+</fdp-table-view-settings-dialog>
