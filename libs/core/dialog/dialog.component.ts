@@ -201,7 +201,9 @@ export class DialogComponent
     /** @hidden */
     ngOnDestroy(): void {
         super.ngOnDestroy();
-        this._onHidden.unsubscribe();
+        if (this._onHidden) {
+            this._onHidden.unsubscribe();
+        }
     }
 
     /** @hidden */
