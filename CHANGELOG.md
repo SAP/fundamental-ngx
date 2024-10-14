@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.8...v0.53.1-rc.9) (2024-10-11)
+
+
+### Bug Fixes
+
+* **core:** input group should not fall back to glyph for button title ([#12527](https://github.com/SAP/fundamental-ngx/issues/12527)) ([d8967c0](https://github.com/SAP/fundamental-ngx/commit/d8967c081da2bf06bf30db9b193912d8c462e556))
+
+
+
+
+
+## [0.53.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.7...v0.53.1-rc.8) (2024-10-10)
+
+
+### Bug Fixes
+
+* **core:** remove OnPush from dialog container ([#12521](https://github.com/SAP/fundamental-ngx/issues/12521)) ([a4c2eee](https://github.com/SAP/fundamental-ngx/commit/a4c2eee3386343b8155a077f542f46b40269a1af))
+
+
+
+
+
 ## [0.53.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.6...v0.53.1-rc.7) (2024-10-08)
 
 
