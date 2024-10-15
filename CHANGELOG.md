@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.9...v0.53.1-rc.10) (2024-10-15)
+
+
+### Bug Fixes
+
+* **core, platform:** add option to make individual Table header cells non-interactive ([#12552](https://github.com/SAP/fundamental-ngx/issues/12552)) ([f145191](https://github.com/SAP/fundamental-ngx/commit/f145191e83c3601a4c201c246f45de4fcc681d86))
+
+
+
+
+
 ## [0.53.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.8...v0.53.1-rc.9) (2024-10-11)
 
 
