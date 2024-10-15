@@ -61,7 +61,7 @@
         (resized)="_detectChanges()"
         (isOpenChange)="handlePopoverOpen($event)"
     >
-        <fd-popover-control tabindex="-1">
+        <fd-popover-control>
             <fd-avatar-group-host
                 [maxVisibleItems]="maxVisibleItems"
                 #avatarGroupHostComponent
@@ -117,6 +117,10 @@
             [ngTemplateOutletContext]="{ hiddenItems: hiddenItems }"
         />
     } @else {
-        <fd-default-avatar-group-overflow-body [avatars]="hiddenItems" [overflowPopoverTitle]="overflowPopoverTitle" />
+        <fd-default-avatar-group-overflow-body
+            (back)="handleBack()"
+            [avatars]="hiddenItems"
+            [overflowPopoverTitle]="overflowPopoverTitle"
+        />
     }
 </ng-template>

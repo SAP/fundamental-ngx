@@ -138,6 +138,8 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     /** @hidden */
     private readonly _rtlService = inject(RtlService, { optional: true });
 
+    private opened = false;
+
     /** @hidden */
     _detectChanges(): void {
         this._cdr.detectChanges();
@@ -145,9 +147,14 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
 
     /** @hidden */
     handlePopoverOpen(isOpen: boolean): void {
+        this.opened = isOpen;
         if (isOpen) {
             this.defaultAvatarGroupOverflowBody._avatarGroupItemPortals.first.setTabbable(true);
-            this.defaultAvatarGroupOverflowBody._avatarGroupItemPortals.first.focus();
         }
+    }
+
+    /** @hidden */
+    handleBack(): void {
+        this.handlePopoverOpen(this.opened);
     }
 }
