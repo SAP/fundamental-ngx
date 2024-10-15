@@ -67,6 +67,11 @@ export class TableCellDirective extends FocusableItemDirective implements AfterC
     @Input()
     noData = false;
 
+    /** Whether the table cell inside table header should be non-interactive */
+    @HostBinding('class.fd-table__cell--non-interactive')
+    @Input()
+    nonInteractive = false;
+
     /** Key of a cell element, it's used to identify this cell with certain column */
     @Input()
     key: string;
