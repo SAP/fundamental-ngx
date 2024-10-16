@@ -1,15 +1,4 @@
-<!-- @TODO redo the changes-->
-<fdp-table
-    [noBorders]="true"
-    [noBodyBorders]="true"
-    [noHorizontalBorders]="true"
-    [noVerticalBorders]="true"
-    [noOuterBorders]="true"
-    [dataSource]="source"
-    [trackBy]="trackBy"
-    emptyTableMessage="No data found"
-    [nonInteractiveHeader]="true"
->
+<fdp-table [dataSource]="source" [trackBy]="trackBy" emptyTableMessage="No data found" [nonInteractiveHeader]="true">
     <fdp-table-toolbar title="Order Line Items" [shouldOverflow]="true" [disableRefresh]="true">
         <fdp-table-toolbar-actions>
             <fdp-button label="Action One" (click)="alert('Action One')"></fdp-button>
