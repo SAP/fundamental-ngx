@@ -460,6 +460,7 @@ export class TableComponent<T = any>
         this._semanticHighlightingKey = value;
         this._setSemanticHighlighting();
     }
+
     get semanticHighlighting(): string {
         if (!this._semanticHighlightingKey && this._forceSemanticHighlighting) {
             return DEFAULT_HIGHLIGHTING_KEY;
