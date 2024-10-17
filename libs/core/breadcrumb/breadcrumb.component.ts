@@ -53,7 +53,7 @@ import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens'
     selector: 'fd-breadcrumb',
     host: {
         class: 'fd-breadcrumb',
-        role: 'tree'
+        role: 'navigation'
     },
     templateUrl: './breadcrumb.component.html',
     styleUrl: './breadcrumb.component.scss',
