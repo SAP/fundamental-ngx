@@ -20,7 +20,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
                 <h1 id="fd-dialog-header-1" fd-title>{{ dialogRef.data.title }}</h1>
             </fd-dialog-header>
             <fd-dialog-body>
-                <p id="fd-dialog-body-1" role="dialog" [ngStyle]="{ 'text-align': 'justify', margin: 0 }">
+                <p id="fd-dialog-body-1" [ngStyle]="{ 'text-align': 'justify', margin: 0 }">
                     {{ dialogRef.data.pinnapleDescription }}
                 </p>
                 <ul [style.margin-bottom]="0">
