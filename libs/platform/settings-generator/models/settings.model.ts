@@ -130,6 +130,8 @@ export interface TemplateSettingsItem extends BaseSettingsItem {
 
 export interface GroupedTemplateSettingsItem extends BaseSettingsItem {
     /** @hidden */
+    id?: string;
+    /** @hidden */
     items?: never;
     /** @hidden */
     template?: never;
