@@ -54,7 +54,7 @@ import { FormFieldAdvancedStateMessage, FormStates, SingleDropdownValueControl }
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
-import { ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
+import { ListComponent, ListMessageDirective, ListTitleDirective } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { FdOptionSelectionChange, OptionComponent } from './option/option.component';
@@ -109,7 +109,9 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
         ListComponent,
         ListMessageDirective,
         FdTranslatePipe,
-        ButtonComponent
+        ButtonComponent,
+        ListTitleDirective,
+        OptionComponent
     ]
 })
 export class SelectComponent<T = any>
