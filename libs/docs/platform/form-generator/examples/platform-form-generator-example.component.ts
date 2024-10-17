@@ -155,7 +155,10 @@ export class PlatformFormGeneratorExampleComponent {
             default: 'IT',
             choices: ['IT', 'Accounting', 'Management'],
             guiOptions: {
-                column: 2
+                column: 2,
+                additionalData: {
+                    width: '290px'
+                }
             }
         },
         {
