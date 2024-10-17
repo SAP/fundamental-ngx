@@ -2,14 +2,17 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 
 import { Observable, of } from 'rxjs';
 
+import { FormsModule } from '@angular/forms';
 import { DatetimeAdapter, FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { MessageBoxModule, MessageBoxService } from '@fundamental-ngx/core/message-box';
+import { FormFieldComponent, FormGroupComponent, InputComponent } from '@fundamental-ngx/platform';
 import {
     CollectionBooleanFilter,
     CollectionDateFilter,
     CollectionFilter,
     CollectionNumberFilter,
     CollectionStringFilter,
+    FilterType,
     FilterableColumnDataType,
     PlatformTableModule,
     SortDirection,
@@ -40,7 +43,11 @@ import {
         FdpCellDef,
         FdpTableCell,
         FdDatetimeModule,
-        MessageBoxModule
+        MessageBoxModule,
+        FormFieldComponent,
+        FormGroupComponent,
+        InputComponent,
+        FormsModule
     ]
 })
 export class PlatformTableP13FilterExampleComponent {
@@ -49,6 +56,8 @@ export class PlatformTableP13FilterExampleComponent {
     readonly messageBoxService = inject(MessageBoxService);
 
     readonly dataTypeEnum = FilterableColumnDataType;
+
+    readonly filterTypeEnum = FilterType;
 
     constructor(datetimeAdapter: DatetimeAdapter<FdDate>) {
         this.source = new TableDataSource(new TableDataProviderExample(datetimeAdapter));

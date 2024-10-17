@@ -4,7 +4,8 @@ import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/di
 import { SortDirection, Table } from '@fundamental-ngx/platform/table-helpers';
 
 import { PlatformTableModule } from '../../../table.module';
-import { SettingsSortDialogData, SortingComponent } from './sorting.component';
+import { SortingComponent } from './sorting.component';
+import { SettingsSortDialogData } from '../table-view-settings.model';
 
 describe('PlatformTableSortDialogComponent', () => {
     let component: SortingComponent;

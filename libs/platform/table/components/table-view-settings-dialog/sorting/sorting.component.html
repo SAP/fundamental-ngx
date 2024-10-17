@@ -1,94 +1,63 @@
-<fd-dialog>
-    <fd-dialog-header>
-        <ng-template fdkTemplate="header">
-            <div fd-bar-left>
-                <fd-bar-element>
-                    <h4 fd-title [headerSize]="4">{{ 'platformTable.sortDialogHeader' | fdTranslate }}</h4>
-                </fd-bar-element>
-            </div>
-            <div fd-bar-right>
-                <fd-bar-element>
-                    <fdp-table-reset-button></fdp-table-reset-button>
-                </fd-bar-element>
-            </div>
-        </ng-template>
-    </fd-dialog-header>
-    <fd-dialog-body disablePaddings>
-        <ul fd-list [selection]="true">
-            <li fd-list-group-header>
-                <span fd-list-title [attr.id]="sortOrderHeaderId">{{
-                    'platformTable.sortDialogSortOrderHeader' | fdTranslate
-                }}</span>
-            </li>
-            <li fd-list-item [selected]="direction === SORT_DIRECTION.ASC" [attr.aria-describedby]="sortOrderHeaderId">
-                <fd-radio-button
-                    name="sort-order"
-                    value="asc"
-                    state="default"
-                    [ngModel]="direction"
-                    (ngModelChange)="_sortDirectionChange($event)"
-                ></fd-radio-button>
-                <span fd-list-title>{{ 'platformTable.sortDialogSortOrderAsc' | fdTranslate }}</span>
-            </li>
-            <li fd-list-item [selected]="direction === SORT_DIRECTION.DESC" [attr.aria-describedby]="sortOrderHeaderId">
-                <fd-radio-button
-                    name="sort-order"
-                    value="desc"
-                    state="default"
-                    [ngModel]="direction"
-                    (ngModelChange)="_sortDirectionChange($event)"
-                ></fd-radio-button>
-                <span fd-list-title>{{ 'platformTable.sortDialogSortOrderDesc' | fdTranslate }}</span>
-            </li>
-        </ul>
-        <ul fd-list [selection]="true">
-            <li fd-list-group-header>
-                <span fd-list-title [attr.id]="sortDialogSortByHeaderId">{{
-                    'platformTable.sortDialogSortByHeader' | fdTranslate
-                }}</span>
-            </li>
-            @if (allowDisablingSorting) {
-                <li
-                    fd-list-item
-                    [selected]="field === NOT_SORTED_OPTION_VALUE"
-                    [attr.aria-describedby]="sortDialogSortByHeaderId"
-                >
-                    <fd-radio-button
-                        name="sort-by"
-                        [value]="NOT_SORTED_OPTION_VALUE"
-                        state="default"
-                        [ngModel]="field"
-                        (ngModelChange)="_sortFieldChange($event)"
-                    ></fd-radio-button>
-                    <span fd-list-title>{{ 'platformTable.sortDialogNotSortedLabel' | fdTranslate }}</span>
-                </li>
-            }
-            @for (column of columns; track column) {
-                <li fd-list-item [selected]="column.key === field" [attr.aria-describedby]="sortDialogSortByHeaderId">
-                    <fd-radio-button
-                        name="sort-by"
-                        [value]="column.key"
-                        state="default"
-                        [ngModel]="field"
-                        (ngModelChange)="_sortFieldChange($event)"
-                    ></fd-radio-button>
-                    <span fd-list-title>{{ column.label }}</span>
-                </li>
-            }
-        </ul>
-    </fd-dialog-body>
-    <fd-dialog-footer>
-        <fd-button-bar
-            fdType="emphasized"
-            [label]="'platformTable.sortDialogConfirmBtnLabel' | fdTranslate"
-            (click)="confirm()"
+<ul fd-list [selection]="true">
+    <li fd-list-group-header>
+        <span fd-list-title [attr.id]="sortOrderHeaderId">
+            {{ 'platformTable.sortDialogSortOrderHeader' | fdTranslate }}
+        </span>
+    </li>
+    <li fd-list-item [selected]="direction() === SORT_DIRECTION.ASC" [attr.aria-describedby]="sortOrderHeaderId">
+        <fd-radio-button
+            name="sort-order"
+            value="asc"
+            state="default"
+            [ngModel]="direction()"
+            (ngModelChange)="_sortDirectionChange($event)"
+        ></fd-radio-button>
+        <span fd-list-title>{{ 'platformTable.sortDialogSortOrderAsc' | fdTranslate }}</span>
+    </li>
+    <li fd-list-item [selected]="direction() === SORT_DIRECTION.DESC" [attr.aria-describedby]="sortOrderHeaderId">
+        <fd-radio-button
+            name="sort-order"
+            value="desc"
+            state="default"
+            [ngModel]="direction()"
+            (ngModelChange)="_sortDirectionChange($event)"
+        ></fd-radio-button>
+        <span fd-list-title>{{ 'platformTable.sortDialogSortOrderDesc' | fdTranslate }}</span>
+    </li>
+</ul>
+
+<ul fd-list [selection]="true">
+    <li fd-list-group-header>
+        <span fd-list-title [attr.id]="sortDialogSortByHeaderId">
+            {{ 'platformTable.sortDialogSortByHeader' | fdTranslate }}
+        </span>
+    </li>
+    @if (allowDisablingSorting()) {
+        <li
+            fd-list-item
+            [selected]="field() === NOT_SORTED_OPTION_VALUE"
+            [attr.aria-describedby]="sortDialogSortByHeaderId"
         >
-        </fd-button-bar>
-        <fd-button-bar
-            [label]="'platformTable.sortDialogCancelBtnLabel' | fdTranslate"
-            fdkInitialFocus
-            (click)="cancel()"
-        >
-        </fd-button-bar>
-    </fd-dialog-footer>
-</fd-dialog>
+            <fd-radio-button
+                name="sort-by"
+                [value]="NOT_SORTED_OPTION_VALUE"
+                state="default"
+                [ngModel]="field()"
+                (ngModelChange)="_sortFieldChange($event)"
+            ></fd-radio-button>
+            <span fd-list-title>{{ 'platformTable.sortDialogNotSortedLabel' | fdTranslate }}</span>
+        </li>
+    }
+    @for (column of columns(); track column) {
+        <li fd-list-item [selected]="column.key === field()" [attr.aria-describedby]="sortDialogSortByHeaderId">
+            <fd-radio-button
+                name="sort-by"
+                [value]="column.key"
+                state="default"
+                [ngModel]="field()"
+                (ngModelChange)="_sortFieldChange($event)"
+            ></fd-radio-button>
+            <span fd-list-title>{{ column.label }}</span>
+        </li>
+    }
+</ul>

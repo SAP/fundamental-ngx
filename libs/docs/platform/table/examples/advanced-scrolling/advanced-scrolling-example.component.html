@@ -22,8 +22,8 @@
         key="name"
         label="Name"
         align="start"
+        [groupable]="true"
         [sortable]="true"
-        [filterable]="true"
         [dataType]="dataTypeEnum.STRING"
     >
     </fdp-column>
@@ -35,8 +35,9 @@
         key="price.value"
         label="Price"
         align="end"
-        [sortable]="true"
+        [groupable]="true"
         [filterable]="true"
+        [sortable]="true"
         [dataType]="dataTypeEnum.NUMBER"
     >
     </fdp-column>
@@ -46,12 +47,54 @@
         key="status"
         label="Status"
         align="center"
-        [sortable]="true"
+        [groupable]="true"
         [filterable]="true"
+        [sortable]="true"
+        [dataType]="dataTypeEnum.STRING"
+    >
+    </fdp-column>
+
+    <fdp-column
+        name="statusColor"
+        key="statusColor"
+        label="statusColor"
+        align="center"
+        [groupable]="true"
+        [filterable]="true"
+        [sortable]="true"
         [dataType]="dataTypeEnum.STRING"
     >
     </fdp-column>
 </fdp-table>
 
-<!-- Connect P13 Dialog to the table -->
-<fdp-table-p13-dialog [table]="table"></fdp-table-p13-dialog>
+<!-- View Settings Dialog-->
+<fdp-table-view-settings-dialog [table]="table">
+    <fdp-table-view-settings-filter column="price" label="Price" [type]="filterTypeEnum.CUSTOM">
+        <ng-container *fdpViewSettingsFilterCustomDef="let model">
+            <fdp-form-group #fg1 columnLayout="XL1-L1-M1-S1" labelLayout="vertical">
+                <fdp-form-field label="Minimum Price">
+                    <fdp-input type="number" name="min" [(ngModel)]="model.min"></fdp-input>
+                </fdp-form-field>
+                <fdp-form-field label="Maximum Price">
+                    <fdp-input type="number" name="max" [(ngModel)]="model.max"></fdp-input>
+                </fdp-form-field>
+            </fdp-form-group>
+        </ng-container>
+    </fdp-table-view-settings-filter>
+
+    <fdp-table-view-settings-filter
+        column="status"
+        [type]="filterTypeEnum.MULTI"
+        label="Status"
+        [values]="statusFilteringValues"
+    >
+    </fdp-table-view-settings-filter>
+
+    <fdp-table-view-settings-filter
+        column="statusColor"
+        [type]="filterTypeEnum.SINGLE"
+        label="Status Color"
+        [values]="statusColorFilteringValues"
+    >
+    </fdp-table-view-settings-filter>
+</fdp-table-view-settings-dialog>
