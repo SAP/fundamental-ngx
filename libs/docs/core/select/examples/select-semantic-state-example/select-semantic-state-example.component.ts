@@ -9,12 +9,7 @@ import { SelectModule } from '@fundamental-ngx/core/select';
     imports: [FormItemComponent, SelectModule, FormMessageComponent, FormInputMessageGroupComponent]
 })
 export class SelectSemanticStateExampleComponent {
-    options: string[] = [
-        'Apple  Apple Apple Apple Apple Apple Apple Apple  Apple Apple Apple Apple Apple Apple Apple  Apple Apple Apple Apple Apple Apple Apple  Apple Apple Apple Apple Apple Apple Apple  Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple',
-        'Pineapple',
-        'Tomato',
-        'Strawberry'
-    ];
+    options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
     selectedValue1: string;
     selectedValue2: string;
     selectedValue3: string;

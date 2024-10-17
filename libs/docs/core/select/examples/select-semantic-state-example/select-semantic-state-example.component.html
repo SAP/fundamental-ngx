@@ -9,12 +9,7 @@
 </div>
 <h4>Warning state</h4>
 <div fd-form-item>
-    <fd-select
-        placeholder="Select value"
-        stateMessage="Warning message Warning messageWarning messageWarning messageWarning messageWarning messageWarning messageWarning messageWarning messageWarning messageWarning messageWarning messageWarning messageWarning messageWarning messageWarning messageWarning message"
-        [(value)]="selectedValue2"
-        state="warning"
-    >
+    <fd-select placeholder="Select value" stateMessage="Warning message" [(value)]="selectedValue2" state="warning">
         @for (option of options; track option) {
             <li fd-option [value]="option">{{ option }}</li>
         }
@@ -34,7 +29,7 @@
 <div fd-form-item>
     <fd-select
         placeholder="Select value"
-        stateMessage="Information message Information messageInformation messageInformation messageInformation messageInformation messageInformation messageInformation messageInformation messageInformation messageInformation message"
+        stateMessage="Information message"
         [(value)]="selectedValue4"
         state="information"
     >
