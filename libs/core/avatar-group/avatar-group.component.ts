@@ -9,6 +9,7 @@ import {
     ContentChildren,
     Input,
     QueryList,
+    ViewChild,
     ViewChildren,
     ViewEncapsulation,
     computed,
@@ -18,10 +19,12 @@ import {
     DynamicPortalComponent,
     FocusableItemDirective,
     FocusableListDirective,
+    Nullable,
     ResizeObserverDirective,
     RtlService
 } from '@fundamental-ngx/cdk/utils';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { Placement } from '@fundamental-ngx/core/shared';
 import { AvatarGroupHostComponent } from './components/avatar-group-host.component';
 import { AvatarGroupOverflowButtonComponent } from './components/avatar-group-overflow-button.component';
 import { DefaultAvatarGroupOverflowBodyComponent } from './components/default-avatar-group-overflow-body/default-avatar-group-overflow-body.component';
@@ -88,6 +91,10 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     @Input()
     size: AvatarGroupHostConfig['size'] = 'l';
 
+    /** Popover placement */
+    @Input()
+    popoverPlacement: Placement | null = null;
+
     /**
      * The title which is displayed when user opens the overflow popover.
      * This takes effect only when default overflow popover body is used,
@@ -96,9 +103,19 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     @Input()
     overflowPopoverTitle: string;
 
+    /**
+     * The maximum number of visible avatar items.
+     **/
+    @Input()
+    maxVisibleItems: Nullable<number> = null;
+
     /** @hidden */
     @ViewChildren(AvatarGroupItemRendererDirective)
     _avatarRenderers: QueryList<AvatarGroupItemRendererDirective>;
+
+    /** @hidden */
+    @ViewChild(DefaultAvatarGroupOverflowBodyComponent)
+    defaultAvatarGroupOverflowBody: DefaultAvatarGroupOverflowBodyComponent;
 
     /** @hidden */
     @ContentChildren(AvatarGroupItemDirective)
@@ -121,8 +138,23 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     /** @hidden */
     private readonly _rtlService = inject(RtlService, { optional: true });
 
+    private opened = false;
+
     /** @hidden */
     _detectChanges(): void {
         this._cdr.detectChanges();
+    }
+
+    /** @hidden */
+    handlePopoverOpen(isOpen: boolean): void {
+        this.opened = isOpen;
+        if (isOpen) {
+            this.defaultAvatarGroupOverflowBody._avatarGroupItemPortals.first.setTabbable(true);
+        }
+    }
+
+    /** @hidden */
+    handleBack(): void {
+        this.handlePopoverOpen(this.opened);
     }
 }

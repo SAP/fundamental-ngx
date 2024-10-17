@@ -5,8 +5,10 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    EventEmitter,
     Input,
     OnDestroy,
+    Output,
     QueryList,
     Renderer2,
     ViewChildren,
@@ -53,6 +55,10 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
      * */
     @Input()
     overflowPopoverTitle: string;
+
+    /** @hidden */
+    @Output()
+    back = new EventEmitter<void>();
 
     /** @hidden */
     @ViewChildren(AvatarGroupItemRendererDirective)
@@ -122,5 +128,6 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
     _openOverflowMain(): void {
         this._overflowPopoverStage = 'main';
         this._changeDetectorRef.detectChanges();
+        this.back.emit();
     }
 }
