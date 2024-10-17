@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.11...v0.53.1-rc.12) (2024-10-17)
+
+
+### Bug Fixes
+
+* **platform:** add loadingState recheck when async refocusing cell ([#12561](https://github.com/SAP/fundamental-ngx/issues/12561)) ([6393beb](https://github.com/SAP/fundamental-ngx/commit/6393bebe20ae5d06371cb2040fbf6c9d13c3e82b))
+
+
+
+
+
+## [0.53.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.10...v0.53.1-rc.11) (2024-10-16)
+
+
+### Bug Fixes
+
+* **core:** build day view grid on specialDaysRule update. ([#12548](https://github.com/SAP/fundamental-ngx/issues/12548)) ([4884d88](https://github.com/SAP/fundamental-ngx/commit/4884d88e2402510e1a2289d0828cc51e5f88e550))
+
+
+
+
+
 ## [0.53.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.9...v0.53.1-rc.10) (2024-10-15)
 
 
