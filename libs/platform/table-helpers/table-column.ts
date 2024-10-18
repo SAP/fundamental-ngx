@@ -42,6 +42,9 @@ export abstract class TableColumn {
     /** Toggles end column freeze/unfreeze feature in the column header. */
     abstract endFreezable: boolean;
 
+    /**  Whether the table cell inside table header should be non-interactive. */
+    abstract nonInteractive: boolean;
+
     /** Initial visibility state of the column. */
     abstract visible: boolean;
 
