@@ -93,11 +93,15 @@
             <li
                 [attr.aria-label]="stateMessage"
                 fd-list-message
+                class="fd-select-message"
                 tabindex="-1"
                 role="presentation"
                 [type]="state || 'default'"
-                [innerHtml]="stateMessage"
-            ></li>
+            >
+                <span fd-list-title>
+                    {{ stateMessage }}
+                </span>
+            </li>
         }
         @if (advancedStateMessage?.hasErrors && advancedStateMessage?.template) {
             <li fd-list-message tabindex="-1" role="presentation" [type]="state || 'default'">
