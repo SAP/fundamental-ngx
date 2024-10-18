@@ -132,11 +132,11 @@
     >
         <ng-content></ng-content>
         @if (groupFn) {
-            @for (group of displayedValues | listGroupPipe: groupFn; track group) {
+            @for (group of displayedValues | listGroupPipe: groupFn; track group.key) {
                 <li role="group" fd-list-group-header [tabindex]="0">
                     <span fd-list-title>{{ group.key }}</span>
                 </li>
-                @for (term of group.value; track term) {
+                @for (term of group.value; track term.name) {
                     <li
                         role="option"
                         fd-list-item
