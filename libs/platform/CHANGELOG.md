@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.16...v0.53.1-rc.17) (2024-10-18)
+
+
+### Features
+
+* **platform:** form-generator Add support for dynamic width in `Select` component through width property ([#12557](https://github.com/SAP/fundamental-ngx/issues/12557)) ([29d4510](https://github.com/SAP/fundamental-ngx/commit/29d451068cd1bd1563a48d41d66326585a01fa18)), closes [#12302](https://github.com/SAP/fundamental-ngx/issues/12302)
+
+
+
+
+
 ## [0.53.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.15...v0.53.1-rc.16) (2024-10-18)
 
 
