@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.15...v0.53.1-rc.16) (2024-10-18)
+
+
+### Bug Fixes
+
+* **core, platform:** add custom IDs to Setting Generator list items ([#12593](https://github.com/SAP/fundamental-ngx/issues/12593)) ([0e9a4f1](https://github.com/SAP/fundamental-ngx/commit/0e9a4f1f6a6c823dd6422a98bd810df5fc4dbc8a))
+
+
+
+
+
 ## [0.53.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.14...v0.53.1-rc.15) (2024-10-18)
 
 **Note:** Version bump only for package @fundamental-ngx/core
