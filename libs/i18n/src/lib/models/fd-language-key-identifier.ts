@@ -140,6 +140,7 @@ export type FdLanguageKeyIdentifier =
     | 'coreUploadCollection.formItemPlaceholder'
     | 'coreWizard.ariaLabel'
     | 'coreBreadcrumb.overflowTitleMore'
+    | 'coreBreadcrumb.breadcrumbTrailLabel'
     | 'platformApprovalFlow.defaultWatchersLabel'
     | 'platformApprovalFlow.defaultTitle'
     | 'platformApprovalFlow.nextButtonAriaLabel'

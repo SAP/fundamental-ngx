@@ -4,6 +4,7 @@
     [enableKeyboardNavigation]="false"
     (visibleItemsCount)="_onVisibleItemsCountChange($event)"
     (hiddenItemsCount)="_onHiddenItemsCountChange($event)"
+    ariaRole="list"
 >
     @for (breadcrumb of _items$(); track breadcrumb) {
         <div
