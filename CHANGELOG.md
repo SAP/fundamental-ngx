@@ -3,6 +3,61 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.13...v0.53.1-rc.14) (2024-10-18)
+
+
+### Bug Fixes
+
+* **core:** remove role="dialog" from dialog body in docs ([#12550](https://github.com/SAP/fundamental-ngx/issues/12550)) ([42a2589](https://github.com/SAP/fundamental-ngx/commit/42a2589730d08a0b2ace99155b5d22ad34683d7d))
+
+
+
+
+
+## [0.53.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.12...v0.53.1-rc.13) (2024-10-17)
+
+
+### Bug Fixes
+
+* **core:** add bigger z-index to show Dynamic page box-shadow ([#12560](https://github.com/SAP/fundamental-ngx/issues/12560)) ([7179a09](https://github.com/SAP/fundamental-ngx/commit/7179a09541c3634b350498f885844f07d55f7f67))
+
+
+
+
+
+## [0.53.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.11...v0.53.1-rc.12) (2024-10-17)
+
+
+### Bug Fixes
+
+* **platform:** add loadingState recheck when async refocusing cell ([#12561](https://github.com/SAP/fundamental-ngx/issues/12561)) ([6393beb](https://github.com/SAP/fundamental-ngx/commit/6393bebe20ae5d06371cb2040fbf6c9d13c3e82b))
+
+
+
+
+
+## [0.53.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.10...v0.53.1-rc.11) (2024-10-16)
+
+
+### Bug Fixes
+
+* **core:** build day view grid on specialDaysRule update. ([#12548](https://github.com/SAP/fundamental-ngx/issues/12548)) ([4884d88](https://github.com/SAP/fundamental-ngx/commit/4884d88e2402510e1a2289d0828cc51e5f88e550))
+
+
+
+
+
+## [0.53.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.9...v0.53.1-rc.10) (2024-10-15)
+
+
+### Bug Fixes
+
+* **core, platform:** add option to make individual Table header cells non-interactive ([#12552](https://github.com/SAP/fundamental-ngx/issues/12552)) ([f145191](https://github.com/SAP/fundamental-ngx/commit/f145191e83c3601a4c201c246f45de4fcc681d86))
+
+
+
+
+
 ## [0.53.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.8...v0.53.1-rc.9) (2024-10-11)
 
 

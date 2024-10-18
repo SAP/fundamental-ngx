@@ -17,3 +17,17 @@
 .fd-table__cell--focusable[aria-selected='true']:after {
     border-color: var(--sapContent_FocusColor) !important;
 }
+
+.fd-table__header .fd-table__cell.fd-table__cell--non-interactive {
+    &:hover,
+    &.is-hover {
+        background-color: var(--sapList_HeaderBackground);
+        color: var(--sapList_HeaderTextColor);
+    }
+
+    &:active,
+    &.is-active {
+        background-color: var(--sapList_HeaderBackground);
+        color: var(--sapList_HeaderTextColor);
+    }
+}
