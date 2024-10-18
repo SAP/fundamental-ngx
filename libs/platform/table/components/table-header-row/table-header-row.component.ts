@@ -122,6 +122,18 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
     @Input()
     freezeColumnsTo: string;
 
+    /** Table without horizontal borders. */
+    @Input()
+    noHorizontalBorders = false;
+
+    /** Table without vertical borders. */
+    @Input()
+    noVerticalBorders = false;
+
+    /** Table without borders. */
+    @Input()
+    noBorders = false;
+
     /** The column `name` to freeze columns after and including. */
     @Input()
     freezeEndColumnsTo: string;
