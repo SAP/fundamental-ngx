@@ -1,6 +1,7 @@
 <ng-container [formGroup]="form">
     <ng-container [formGroupName]="formGroupName">
         <fdp-select
+            [width]="formItem.guiOptions?.additionalData?.width"
             [id]="id"
             [placeholder]="placeholder"
             [inline]="formItem.guiOptions?.inline !== false"
