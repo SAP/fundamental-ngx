@@ -107,6 +107,10 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     @Input()
     endFreezable = false;
 
+    /** Whether the table cell inside table header should be non-interactive. */
+    @Input()
+    nonInteractive = false;
+
     /** Width of the column cells. */
     @Input()
     set width(value: string) {
