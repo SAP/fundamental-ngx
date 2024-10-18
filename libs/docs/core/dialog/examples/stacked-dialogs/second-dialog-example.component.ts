@@ -15,7 +15,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
             </fd-dialog-header>
 
             <fd-dialog-body>
-                <div id="fd-dialog-body-9" role="dialog">
+                <div id="fd-dialog-body-9">
                     This is the second dialog!<br />
                     It is completely independent from the first dialog and can be controlled separately!
                 </div>

@@ -40,7 +40,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         <fd-dialog-body>
             <p
                 id="fd-dialog-body-1"
-                role="dialog"
                 [ngStyle]="{
                     'text-align': 'justify',
                     margin: 0

@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.14...v0.53.1-rc.15) (2024-10-18)
+
+
+### Bug Fixes
+
+* **platform:** aria improvements to table cell header popover ([#12551](https://github.com/SAP/fundamental-ngx/issues/12551)) ([6f14ebd](https://github.com/SAP/fundamental-ngx/commit/6f14ebd6413324364a1429861aa4592ce7d4f68e))
+
+
+
+
+
+## [0.53.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.13...v0.53.1-rc.14) (2024-10-18)
+
+
+### Bug Fixes
+
+* **core:** remove role="dialog" from dialog body in docs ([#12550](https://github.com/SAP/fundamental-ngx/issues/12550)) ([42a2589](https://github.com/SAP/fundamental-ngx/commit/42a2589730d08a0b2ace99155b5d22ad34683d7d))
+
+
+
+
+
 ## [0.53.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.12...v0.53.1-rc.13) (2024-10-17)
 
 
