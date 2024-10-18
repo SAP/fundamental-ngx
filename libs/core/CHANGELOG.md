@@ -3,6 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.14...v0.53.1-rc.15) (2024-10-18)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.53.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.13...v0.53.1-rc.14) (2024-10-18)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.53.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.12...v0.53.1-rc.13) (2024-10-17)
+
+
+### Bug Fixes
+
+* **core:** add bigger z-index to show Dynamic page box-shadow ([#12560](https://github.com/SAP/fundamental-ngx/issues/12560)) ([7179a09](https://github.com/SAP/fundamental-ngx/commit/7179a09541c3634b350498f885844f07d55f7f67))
+
+
+
+
+
+## [0.53.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.11...v0.53.1-rc.12) (2024-10-17)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.53.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.10...v0.53.1-rc.11) (2024-10-16)
+
+
+### Bug Fixes
+
+* **core:** build day view grid on specialDaysRule update. ([#12548](https://github.com/SAP/fundamental-ngx/issues/12548)) ([4884d88](https://github.com/SAP/fundamental-ngx/commit/4884d88e2402510e1a2289d0828cc51e5f88e550))
+
+
+
+
+
 ## [0.53.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.9...v0.53.1-rc.10) (2024-10-15)
 
 
