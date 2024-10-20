@@ -495,17 +495,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/router@npm:18.0.3":
-  version: 18.0.3
-  resolution: "@angular/router@npm:18.0.3"
+"@angular/router@npm:18.2.8":
+  version: 18.2.8
+  resolution: "@angular/router@npm:18.2.8"
   dependencies:
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/common": 18.0.3
-    "@angular/core": 18.0.3
-    "@angular/platform-browser": 18.0.3
+    "@angular/common": 18.2.8
+    "@angular/core": 18.2.8
+    "@angular/platform-browser": 18.2.8
     rxjs: ^6.5.3 || ^7.4.0
-  checksum: 10/adf9101f422d6e07a41ea61d162f3d9835bf5525f7164dca507fee0d538ec3f6ce2779dc54c4c5bb84c67cbcb2274f1ac21a143a9500a0c0a4b63965facd6c7c
+  checksum: 10/b76385f839062c5b6c116b533438a245be18d7319a9fd50a55bfccd3be31ae083efe996096b604cb8e9199805f4d3d3a79b9c200dfb0f2bb7e578f5949ee49b3
   languageName: node
   linkType: hard
 
@@ -13697,7 +13697,7 @@ __metadata:
     "@angular/language-service": "npm:18.0.3"
     "@angular/platform-browser": "npm:18.0.3"
     "@angular/platform-browser-dynamic": "npm:18.0.3"
-    "@angular/router": "npm:18.0.3"
+    "@angular/router": "npm:18.2.8"
     "@commitlint/cli": "npm:18.6.1"
     "@commitlint/config-conventional": "npm:18.6.1"
     "@fundamental-styles/cx": "npm:0.38.0"
