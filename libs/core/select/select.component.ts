@@ -71,6 +71,13 @@ export const SELECT_PANEL_MAX_HEIGHT = 250;
 /** The height of the select items in `rem` units. */
 export const SELECT_ITEM_HEIGHT_EM = 4;
 
+export type TextOverflowMode = 'full' | 'ellipsis';
+
+export enum TextOverflowModeEnum {
+    FULL = 'full',
+    ELLIPSIS = 'ellipsis'
+}
+
 /**
  * Select component intended to mimic
  * the behaviour of the native select element.
@@ -142,6 +149,15 @@ export class SelectComponent<T = any>
     /** Scrolling strategy to be used for popover. */
     @Input()
     scrollStrategy: ScrollStrategy;
+
+    /**
+     * Controls how long text is displayed in the dropdown list of the Select component.
+     *
+     * - `'ellipsis'`: Truncates the text with an ellipsis (`...`) if it exceeds a certain length.
+     * - `'full'`: Displays the entire text on multiple lines, ensuring full visibility.
+     */
+    @Input()
+    textOverflow: TextOverflowMode = 'ellipsis';
 
     /** The ID of the control. */
     @Input()
@@ -328,6 +344,11 @@ export class SelectComponent<T = any>
 
     /** @hidden */
     _selectionModel: SelectionModel<OptionComponent>;
+
+    /** @hidden */
+    get showEllipsis(): boolean {
+        return this.textOverflow === TextOverflowModeEnum.ELLIPSIS;
+    }
 
     /**
      * @hidden

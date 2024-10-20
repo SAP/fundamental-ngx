@@ -87,20 +87,27 @@
         [hasMessage]="!!stateMessage || (!!advancedStateMessage?.hasErrors && !!advancedStateMessage?.template)"
         [attr.id]="controlId + '-list-box'"
         [style.max-height]="maxHeight || calculatedMaxHeight + 'px'"
+        [style.padding-block-start.rem]="!showEllipsis ? 0 : 2"
         [attr.tooltip]="triggerValue"
     >
         @if (stateMessage) {
             <li
                 [attr.aria-label]="stateMessage"
                 fd-list-message
-                class="fd-select-message"
+                [class.fd-select-message]="!showEllipsis"
                 tabindex="-1"
                 role="presentation"
                 [type]="state || 'default'"
             >
-                <span fd-list-title>
-                    {{ stateMessage }}
-                </span>
+                @if (!showEllipsis) {
+                    <span fd-list-title>
+                        {{ stateMessage }}
+                    </span>
+                } @else {
+                    <span>
+                        {{ stateMessage }}
+                    </span>
+                }
             </li>
         }
         @if (advancedStateMessage?.hasErrors && advancedStateMessage?.template) {

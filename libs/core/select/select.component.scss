@@ -52,7 +52,6 @@ $block: fd-select;
 }
 
 .#{$block}-options {
-    padding-top: 0 !important; // TODO Override padding top property styles. Open for discussion.
     .#{$block}-message {
         min-height: 2rem;
         height: auto;
