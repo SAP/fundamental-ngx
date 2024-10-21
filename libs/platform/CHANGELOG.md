@@ -3,6 +3,74 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.16...v0.53.1-rc.17) (2024-10-18)
+
+
+### Features
+
+* **platform:** form-generator Add support for dynamic width in `Select` component through width property ([#12557](https://github.com/SAP/fundamental-ngx/issues/12557)) ([29d4510](https://github.com/SAP/fundamental-ngx/commit/29d451068cd1bd1563a48d41d66326585a01fa18)), closes [#12302](https://github.com/SAP/fundamental-ngx/issues/12302)
+
+
+
+
+
+## [0.53.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.15...v0.53.1-rc.16) (2024-10-18)
+
+
+### Bug Fixes
+
+* **core, platform:** add custom IDs to Setting Generator list items ([#12593](https://github.com/SAP/fundamental-ngx/issues/12593)) ([0e9a4f1](https://github.com/SAP/fundamental-ngx/commit/0e9a4f1f6a6c823dd6422a98bd810df5fc4dbc8a))
+
+
+
+
+
+## [0.53.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.14...v0.53.1-rc.15) (2024-10-18)
+
+
+### Bug Fixes
+
+* **platform:** aria improvements to table cell header popover ([#12551](https://github.com/SAP/fundamental-ngx/issues/12551)) ([6f14ebd](https://github.com/SAP/fundamental-ngx/commit/6f14ebd6413324364a1429861aa4592ce7d4f68e))
+
+
+
+
+
+## [0.53.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.13...v0.53.1-rc.14) (2024-10-18)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.53.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.12...v0.53.1-rc.13) (2024-10-17)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.53.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.11...v0.53.1-rc.12) (2024-10-17)
+
+
+### Bug Fixes
+
+* **platform:** add loadingState recheck when async refocusing cell ([#12561](https://github.com/SAP/fundamental-ngx/issues/12561)) ([6393beb](https://github.com/SAP/fundamental-ngx/commit/6393bebe20ae5d06371cb2040fbf6c9d13c3e82b))
+
+
+
+
+
+## [0.53.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.10...v0.53.1-rc.11) (2024-10-16)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
 ## [0.53.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.9...v0.53.1-rc.10) (2024-10-15)
 
 

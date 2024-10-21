@@ -9,9 +9,9 @@
         [triggers]="_headerPopoverTriggers"
         (isOpenChange)="_popoverOpened($event)"
     >
-        <fdp-list [noBorder]="true" [navigated]="true">
+        <fdp-list [noBorder]="true" [navigated]="true" role="menu">
             @for (item of _popoverItems$(); track item) {
-                <li fdp-free-content-list-item>
+                <li fdp-free-content-list-item role="menuitem">
                     <ng-template
                         [ngTemplateOutlet]="item"
                         [ngTemplateOutletContext]="{ popover: popover }"
@@ -28,7 +28,7 @@
 }
 @if (column?.sortable) {
     <ng-template fdkTemplate="sortingAscPopoverItem" let-popover="popover">
-        <a
+        <div
             fd-list-link
             role="button"
             [focusable]="true"
@@ -37,10 +37,10 @@
         >
             <span fd-list-icon glyph="sort-ascending"></span>
             <span fd-list-title>{{ 'platformTable.headerMenuSortAsc' | fdTranslate }}</span>
-        </a>
+        </div>
     </ng-template>
     <ng-template fdkTemplate="sortingDescPopoverItem" let-popover="popover">
-        <a
+        <div
             fd-list-link
             role="button"
             [focusable]="true"
@@ -49,12 +49,12 @@
         >
             <span fd-list-icon glyph="sort-descending"></span>
             <span fd-list-title>{{ 'platformTable.headerMenuSortDesc' | fdTranslate }}</span>
-        </a>
+        </div>
     </ng-template>
 }
 @if (column?.groupable) {
     <ng-template fdkTemplate="groupPopoverItem" let-popover="popover">
-        <a
+        <div
             fd-list-link
             role="button"
             [focusable]="true"
@@ -62,13 +62,13 @@
             (keydown.enter)="_setColumnHeaderGroupBy(column.key)"
         >
             <span fd-list-title>{{ 'platformTable.headerMenuGroup' | fdTranslate }}</span>
-        </a>
+        </div>
     </ng-template>
 }
 @if (column?.freezable || column?.endFreezable) {
     <ng-template fdkTemplate="freezePopoverItem" let-popover="popover">
         @if (!columnFrozen) {
-            <a fd-list-link role="button" [focusable]="true" (click)="_freeze()" (keydown.enter)="_freeze()">
+            <div fd-list-link role="button" [focusable]="true" (click)="_freeze()" (keydown.enter)="_freeze()">
                 <span fd-list-title>{{
                     (!column.endFreezable
                         ? columnIndex > 0
@@ -77,14 +77,14 @@
                         : 'platformTable.headerMenuEndFreeze'
                     ) | fdTranslate
                 }}</span>
-            </a>
+            </div>
         } @else {
-            <a fd-list-link role="button" [focusable]="true" (click)="_unFreeze()" (keydown.enter)="_unFreeze()">
+            <div fd-list-link role="button" [focusable]="true" (click)="_unFreeze()" (keydown.enter)="_unFreeze()">
                 <span fd-list-title>{{
                     (columnIndex > 0 ? 'platformTable.headerMenuUnfreezePlural' : 'platformTable.headerMenuUnfreeze')
                         | fdTranslate
                 }}</span>
-            </a>
+            </div>
         }
     </ng-template>
 }
