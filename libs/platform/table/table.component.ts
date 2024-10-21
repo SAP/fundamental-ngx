@@ -147,6 +147,7 @@ import {
     NoDataWrapperComponent,
     PlatformTableColumnResizerComponent,
     TABLE_TOOLBAR,
+    TableAppliedFilter,
     TableToolbarInterface,
     ToolbarContext
 } from './components';
@@ -460,6 +461,7 @@ export class TableComponent<T = any>
         this._semanticHighlightingKey = value;
         this._setSemanticHighlighting();
     }
+
     get semanticHighlighting(): string {
         if (!this._semanticHighlightingKey && this._forceSemanticHighlighting) {
             return DEFAULT_HIGHLIGHTING_KEY;
@@ -810,6 +812,8 @@ export class TableComponent<T = any>
     /** @hidden */
     private readonly _isShownGroupSettingsInToolbar$ = signal(false);
     /** @hidden */
+    private _appliedFilterNames = signal<TableAppliedFilter[]>([]);
+    /** @hidden */
     private readonly _isShownColumnSettingsInToolbar$ = signal(false);
     /**
      * @hidden
@@ -887,7 +891,8 @@ export class TableComponent<T = any>
                     this._isShownFilterSettingsInToolbar$() ||
                     this._isShownGroupSettingsInToolbar$() ||
                     this._isShownColumnSettingsInToolbar$()
-            )
+            ),
+            appliedFilters: this._appliedFilterNames
         };
 
         this.tableColumnsStream = this._tableService.tableColumns$.asObservable();
@@ -1812,7 +1817,6 @@ export class TableComponent<T = any>
                     this._dataSourceDirective._tableDataSource.fetch(state);
                 })
         );
-
         this._subscriptions.add(
             this._tableService.stateChange$.subscribe(({ type, state }) => {
                 switch (type) {
@@ -1824,6 +1828,7 @@ export class TableComponent<T = any>
                         break;
                     case 'filter':
                         this.filterChange.emit(new TableFilterChangeEvent(this, state.current, state.previous));
+                        this._setAppliedFilterNames(state.current);
                         break;
                     case 'freeze':
                         if (!this._lastFreezableColumnCalculation) {
@@ -1850,6 +1855,21 @@ export class TableComponent<T = any>
         );
 
         this._listenToTableRowStateChange();
+    }
+
+    /** @hidden */
+    private _setAppliedFilterNames(filters: CollectionFilter[]): void {
+        this._appliedFilterNames.set(
+            filters.map((f) => ({
+                columnName: this._formatColumnName(f.field),
+                params: f.value
+            }))
+        );
+    }
+
+    /** @hidden */
+    private _formatColumnName(columnName: string): string {
+        return columnName.charAt(0).toUpperCase() + columnName.slice(1);
     }
 
     /** @hidden */

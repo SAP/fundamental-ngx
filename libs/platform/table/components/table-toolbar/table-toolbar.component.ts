@@ -21,6 +21,7 @@ import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import {
     ToolbarComponent,
     ToolbarItemDirective,
+    ToolbarLabelDirective,
     ToolbarSeparatorComponent,
     ToolbarSpacerDirective
 } from '@fundamental-ngx/core/toolbar';
@@ -31,6 +32,11 @@ import { TABLE_TOOLBAR, TableToolbarInterface } from './table-toolbar';
 import { TableToolbarActionsComponent } from './table-toolbar-actions.component';
 import { TableToolbarLeftActionsComponent } from './table-toolbar-left-actions.component';
 
+export interface TableAppliedFilter {
+    columnName: string;
+    params: string;
+}
+
 export interface ToolbarContext {
     counter: Signal<number>;
     sortable: Signal<boolean>;
@@ -38,6 +44,7 @@ export interface ToolbarContext {
     groupable: Signal<boolean>;
     columns: Signal<boolean>;
     hasAnyActions: Signal<boolean>;
+    appliedFilters: Signal<TableAppliedFilter[]>;
 }
 
 export type EditMode = 'none' | 'inline';
@@ -89,7 +96,8 @@ export class TableToolbarTemplateDirective {
         ButtonComponent,
         AsyncPipe,
         FdTranslatePipe,
-        TableToolbarTemplateDirective
+        TableToolbarTemplateDirective,
+        ToolbarLabelDirective
     ]
 })
 export class TableToolbarComponent implements TableToolbarInterface {
