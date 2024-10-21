@@ -111,7 +111,7 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
 
     /** The ID of the list item element */
     @Input()
-    id = 'fd-list-item-' + ++listItemUniqueId;
+    id: Nullable<string> = 'fd-list-item-' + ++listItemUniqueId;
 
     /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     @Output()
