@@ -4,6 +4,7 @@
     [enableKeyboardNavigation]="false"
     (visibleItemsCount)="_onVisibleItemsCountChange($event)"
     (hiddenItemsCount)="_onHiddenItemsCountChange($event)"
+    ariaRole="list"
 >
     @for (breadcrumb of _items$(); track breadcrumb) {
         <div
@@ -55,7 +56,7 @@
                 <a
                     fd-link
                     [attr.aria-label]="'coreBreadcrumb.overflowTitleMore' | fdTranslate"
-                    aria-haspopup="listbox"
+                    aria-haspopup="menu"
                     tabindex="0"
                     class="fd-breadcrumb__collapsed"
                     (keydown.enter)="_keyDownHandle($event)"
