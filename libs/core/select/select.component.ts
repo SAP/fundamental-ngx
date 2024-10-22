@@ -54,7 +54,7 @@ import { FormFieldAdvancedStateMessage, FormStates, SingleDropdownValueControl }
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundamental-ngx/core/icon';
-import { ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
+import { ListComponent, ListMessageDirective, ListTitleDirective } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { FdOptionSelectionChange, OptionComponent } from './option/option.component';
@@ -70,6 +70,13 @@ export const SELECT_PANEL_MAX_HEIGHT = 250;
 
 /** The height of the select items in `rem` units. */
 export const SELECT_ITEM_HEIGHT_EM = 4;
+
+export type TextOverflowMode = 'full' | 'ellipsis';
+
+export enum TextOverflowModeEnum {
+    FULL = 'full',
+    ELLIPSIS = 'ellipsis'
+}
 
 /**
  * Select component intended to mimic
@@ -109,7 +116,9 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
         ListComponent,
         ListMessageDirective,
         FdTranslatePipe,
-        ButtonComponent
+        ButtonComponent,
+        ListTitleDirective,
+        OptionComponent
     ]
 })
 export class SelectComponent<T = any>
@@ -140,6 +149,15 @@ export class SelectComponent<T = any>
     /** Scrolling strategy to be used for popover. */
     @Input()
     scrollStrategy: ScrollStrategy;
+
+    /**
+     * Controls how long text is displayed in the dropdown list of the Select component.
+     *
+     * - `'ellipsis'`: Truncates the text with an ellipsis (`...`) if it exceeds a certain length.
+     * - `'full'`: Displays the entire text on multiple lines, ensuring full visibility.
+     */
+    @Input()
+    textOverflow: TextOverflowMode = 'ellipsis';
 
     /** The ID of the control. */
     @Input()
@@ -326,6 +344,11 @@ export class SelectComponent<T = any>
 
     /** @hidden */
     _selectionModel: SelectionModel<OptionComponent>;
+
+    /** @hidden */
+    get showEllipsis(): boolean {
+        return this.textOverflow === TextOverflowModeEnum.ELLIPSIS;
+    }
 
     /**
      * @hidden

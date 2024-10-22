@@ -51,6 +51,16 @@ $block: fd-select;
     }
 }
 
+.#{$block}-options {
+    .#{$block}-message {
+        min-height: 2rem;
+        height: auto;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+}
+
 .fd-popover__body {
     .#{$block}__form-message {
         // Compensate form field margin.
