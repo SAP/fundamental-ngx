@@ -1,30 +1,34 @@
-<fdp-table
-    #table
-    [dataSource]="source"
-    [initialVisibleColumns]="['updatedOn', 'name', 'price', 'status', 'statusColor']"
-    [initialSortBy]="[{ field: 'price.value', direction: sortDirectionEnum.ASC }]"
-    [initialFilterBy]="initialFilterBy"
-    [initialGroupBy]="[{ field: 'verified', direction: sortDirectionEnum.NONE, showAsColumn: true }]"
->
-    <fdp-table-toolbar title="Order Items"></fdp-table-toolbar>
+<fdp-table #table [dataSource]="source" (filterChange)="logFilterChange($event)" emptyTableMessage="No data found">
+    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false"></fdp-table-toolbar>
 
-    <fdp-column name="name" key="name" label="Name" [sortable]="true" [groupable]="true"> </fdp-column>
+    <fdp-column name="name" key="name" label="Name" align="start" [groupable]="true" [sortable]="true"></fdp-column>
 
-    <fdp-column name="description" key="description" label="Description"> </fdp-column>
+    <fdp-column
+        name="description"
+        key="description"
+        label="Description"
+        [groupable]="true"
+        [sortable]="true"
+    ></fdp-column>
 
-    <fdp-column name="price" key="price.value" label="Price" [sortable]="true" [groupable]="true" [filterable]="true">
-    </fdp-column>
-
-    <fdp-column name="verified" key="verified" label="Verified"></fdp-column>
+    <fdp-column
+        name="price"
+        key="price.value"
+        label="Price"
+        align="end"
+        [groupable]="true"
+        [filterable]="true"
+        [sortable]="true"
+    ></fdp-column>
 
     <fdp-column
         name="status"
         key="status"
         label="Status"
         align="center"
-        [sortable]="true"
         [groupable]="true"
         [filterable]="true"
+        [sortable]="true"
     ></fdp-column>
 
     <fdp-column
@@ -32,9 +36,9 @@
         key="statusColor"
         label="Status Color"
         align="center"
-        [sortable]="true"
         [groupable]="true"
         [filterable]="true"
+        [sortable]="true"
     ></fdp-column>
 </fdp-table>
 

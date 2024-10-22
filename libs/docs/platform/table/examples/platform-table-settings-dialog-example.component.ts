@@ -1,83 +1,52 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    DestroyRef,
-    inject,
-    ViewChild,
-    ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { Observable, of } from 'rxjs';
+
 import { FormsModule } from '@angular/forms';
-import { destroyObservable, FocusableCellPosition } from '@fundamental-ngx/cdk/utils';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DatetimeAdapter, FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
-import { FormFieldComponent, FormGroupComponent, InputComponent } from '@fundamental-ngx/platform';
+import { FdpFormGroupModule, PlatformInputModule } from '@fundamental-ngx/platform/form';
 import {
     CollectionBooleanFilter,
     CollectionDateFilter,
     CollectionFilter,
     CollectionNumberFilter,
     CollectionSelectFilter,
-    CollectionSort,
     CollectionStringFilter,
     FilterType,
     PlatformTableModule,
     SortDirection,
-    TableColumnsChangeEvent,
-    TableComponent,
     TableDataProvider,
     TableDataSource,
     TableFilterChangeEvent,
     TableFilterSelectOption,
-    TablePageChangeEvent,
-    TableRowsRearrangeEvent,
-    TableRowToggleOpenStateEvent,
-    TableSortChangeEvent,
     TableState
 } from '@fundamental-ngx/platform/table';
 import {
+    FdpViewSettingsFilterCustomDef,
     TableDataSourceDirective,
-    TableDraggableDirective,
     TableHeaderResizerDirective,
     TableInitialStateDirective
 } from '@fundamental-ngx/platform/table-helpers';
-import { delay, map, merge, Observable, of, Subject, switchMap, takeUntil } from 'rxjs';
 
 @Component({
-    selector: 'fdp-platform-table-preserved-state-example',
-    templateUrl: './platform-table-preserved-state-example.component.html',
-    encapsulation: ViewEncapsulation.None,
+    selector: 'fdp-platform-table-settings-dialog-example',
+    templateUrl: './platform-table-settings-dialog-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     providers: [provideDateTimeFormats()],
     standalone: true,
     imports: [
-        ButtonComponent,
         TableDataSourceDirective,
         TableHeaderResizerDirective,
         PlatformTableModule,
         TableInitialStateDirective,
-        TableDraggableDirective,
-        FdDatetimeModule,
-        FormFieldComponent,
-        FormGroupComponent,
-        InputComponent,
-        FormsModule
+        FdpViewSettingsFilterCustomDef,
+        FdpFormGroupModule,
+        PlatformInputModule,
+        FormsModule,
+        FdDatetimeModule
     ]
 })
-export class PlatformTablePreservedStateExampleComponent {
-    @ViewChild(TableComponent)
-    table: TableComponent;
-
-    sortBy: CollectionSort[] = [{ field: 'price.value', direction: SortDirection.ASC }];
-
-    columns: string[] = ['name', 'price', 'status'];
-
-    items = [...ITEMS];
-
-    private _dateTimeAdapter = inject<DatetimeAdapter<FdDate>>(DatetimeAdapter);
-
-    private readonly _cdr = inject(ChangeDetectorRef);
-
+export class PlatformTableSettingsDialogExampleComponent {
     readonly filterTypeEnum = FilterType;
     statusFilteringValues: TableFilterSelectOption[] = [
         { value: 'Stocked on demand', label: 'Stocked on demand' },
@@ -92,117 +61,18 @@ export class PlatformTablePreservedStateExampleComponent {
         { value: 'positive', label: 'Positive' }
     ];
 
-    source = new ExampleTableDataSource(new ExampleTableProvider(this.items, this._dateTimeAdapter));
+    source: TableDataSource<ExampleItem>;
 
-    page = 1;
-
-    initialFilterBy: CollectionFilter[] = [];
-
-    displayTable = true;
-
-    tableOffset = 0;
-
-    focusedCell: FocusableCellPosition;
-
-    applyScroll = false;
-
-    private readonly _destroyRef = inject(DestroyRef);
-
-    private _refresh$: Subject<void> = new Subject();
-
-    toggleTable(): void {
-        this.applyScroll = !this.displayTable;
-        this.displayTable = !this.displayTable;
-        this.items = [...ITEMS];
-        this.source = new ExampleTableDataSource(new ExampleTableProvider(this.items, this._dateTimeAdapter));
-
-        this._cdr.detectChanges();
-
-        this._listenOnTableData();
+    constructor(datetimeAdapter: DatetimeAdapter<FdDate>) {
+        this.source = new TableDataSource(new TableDataProviderExample(datetimeAdapter));
     }
 
-    /**
-     * Method that listens on table's dataReceived event, then switches to tableRowsSet event to restore the scroll position.
-     * This is needed for cases when there's a delay in data source data retrieval.
-     */
-    private _listenOnTableData(): void {
-        this._refresh$.next();
-        this._refresh$.complete();
-
-        this._refresh$ = new Subject();
-
-        if (!this.table) {
-            return;
-        }
-
-        const refresh = merge(destroyObservable(this._destroyRef), this._refresh$);
-
-        this.table._dataSourceDirective.onDataReceived
-            .pipe(
-                switchMap(() => this.table.tableRowsSet),
-                takeUntil(refresh)
-            )
-            .subscribe(() => {
-                if (!this.applyScroll) {
-                    return;
-                }
-                this.applyScroll = false;
-                this.table.tableScrollable.setScrollTop(this.tableOffset, false);
-
-                if (this.focusedCell) {
-                    this.table.focusCell(this.focusedCell);
-                }
-            });
-    }
-
-    ngAfterViewInit(): void {
-        this._listenOnTableData();
-    }
-
-    /** Update current set of visible columns. */
-    columnChangeCallback(evt: TableColumnsChangeEvent): void {
-        console.log(evt);
-        this.columns = evt.current;
-    }
-
-    filtersChangeCallback(evt: TableFilterChangeEvent): void {
-        console.log(evt);
-        this.initialFilterBy = evt.current;
-    }
-
-    sortingChangeCallback(evt: TableSortChangeEvent): void {
-        console.log(evt);
-        this.sortBy = evt.current;
-    }
-
-    onRowsRearrange(evt: TableRowsRearrangeEvent<ExampleItem>): void {
-        console.log(evt);
-    }
-
-    rowToggleCallback(evt: TableRowToggleOpenStateEvent<ExampleItem>): void {
-        const rowIndex = ITEMS.findIndex((i) => i.id === evt.row.id);
-        if (rowIndex === -1) {
-            return;
-        }
-        ITEMS[rowIndex].expanded = evt.expanded;
-    }
-
-    pageChangeCallback(evt: TablePageChangeEvent): void {
-        console.log(evt);
-        this.page = evt.current.currentPage;
-    }
-
-    setTableOffset(offset: number): void {
-        this.tableOffset = offset;
-    }
-
-    onCellFocused(event: any): void {
-        this.focusedCell = event;
+    logFilterChange(event: TableFilterChangeEvent): void {
+        console.log('TableFilterChangeEvent -> ', event);
     }
 }
 
 export interface ExampleItem {
-    id: number;
     name: string;
     description: string;
     price: {
@@ -213,57 +83,43 @@ export interface ExampleItem {
     statusColor?: string;
     date: FdDate;
     verified: boolean;
-    children?: ExampleItem[];
-    expanded?: boolean;
-    parentId?: number;
 }
 
-export class ExampleTableDataSource extends TableDataSource<ExampleItem> {
-    constructor(dataProvider: ExampleTableProvider) {
-        super(dataProvider);
-    }
-}
+/**
+ * Table Data Provider Example
+ *
+ */
+export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
+    items: ExampleItem[] = [];
+    totalItems = 0;
 
-export class ExampleTableProvider extends TableDataProvider<ExampleItem> {
-    constructor(
-        items,
-        public dateTimeAdapter: DatetimeAdapter<FdDate>
-    ) {
+    constructor(public dateTimeAdapter: DatetimeAdapter<FdDate>) {
         super();
-        this.items = items;
+    }
+
+    fetch(tableState?: TableState): Observable<ExampleItem[]> {
+        this.items = [...ITEMS];
+
+        // apply searching
+        if (tableState?.searchInput) {
+            this.items = this.search(this.items, tableState);
+        }
+        // apply filtering
+        if (tableState?.filterBy) {
+            this.items = this.filter(tableState);
+        }
+        // apply sorting
+        if (tableState?.sortBy) {
+            this.items = this.sort(tableState);
+        }
+
         this.totalItems = this.items.length;
-    }
-    override fetchData(state: TableState): Observable<ExampleItem[]> {
-        return this.fetch(state).pipe(
-            map((items) => {
-                if (this.searchInput) {
-                    items = this.search(items, { ...state, ...{ searchInput: this.searchInput } });
-                }
-                // apply filtering
-                if (state?.filterBy) {
-                    items = this.filter(items, state);
-                }
-                // apply sorting
-                if (state?.sortBy) {
-                    items = this.sort(state, items);
-                }
-                return buildTree(items).slice(
-                    (state.page.currentPage - 1) * state.page.pageSize,
-                    state.page.currentPage * state.page.pageSize
-                );
-            }),
-            delay(1000)
-        );
+
+        return of(this.items);
     }
 
-    override fetch(tableState?: TableState): Observable<ExampleItem[]> {
-        let items = this.items;
-
-        return of(items);
-    }
-
-    sort({ sortBy }: TableState, items: ExampleItem[]): ExampleItem[] {
-        items = items.slice();
+    private sort({ sortBy }: TableState): ExampleItem[] {
+        const items = this.items.slice();
 
         sortBy = sortBy.filter(({ field }) => !!field);
 
@@ -282,7 +138,9 @@ export class ExampleTableProvider extends TableDataProvider<ExampleItem> {
         );
     }
 
-    private filter(items: ExampleItem[], { filterBy }: TableState): ExampleItem[] {
+    private filter({ filterBy }: TableState): ExampleItem[] {
+        let items = this.items;
+
         filterBy
             .filter(({ field }) => !!field)
             .forEach((rule) => {
@@ -335,6 +193,37 @@ export class ExampleTableProvider extends TableDataProvider<ExampleItem> {
         }
         return filterByString(item, rule as CollectionStringFilter);
     }
+
+    search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
+        const searchText = searchInput?.text || '';
+        const keysToSearchBy = columnKeys;
+
+        if (searchText.trim() === '' || keysToSearchBy.length === 0) {
+            return items;
+        }
+
+        return items.filter((item) => {
+            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item));
+            return valuesForSearch
+                .filter((value) => !!value)
+                .map((value): string => value.toString())
+                .some((value) => value.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
+        });
+    }
+}
+
+/* UTILS */
+
+const sort = <T extends Record<string, any>>(a: T, b: T, key?: string): number => {
+    if (key) {
+        a = getNestedValue(key, a);
+        b = getNestedValue(key, b);
+    }
+    return a > b ? 1 : a === b ? 0 : -1;
+};
+
+function getNestedValue<T extends Record<string, any>>(key: string, object: T): any {
+    return key.split('.').reduce((a, b) => (a ? a[b] : null), object);
 }
 
 const filterByString = (item: ExampleItem, filter: CollectionStringFilter): boolean => {
@@ -470,28 +359,9 @@ const filterBySelect = (item: ExampleItem, filter: CollectionSelectFilter): bool
     return !filterValues.length || filter.exclude ? !result : result;
 };
 
-const sort = <T extends Record<string, any>>(a: T, b: T, key?: string): number => {
-    if (key) {
-        a = getNestedValue(key, a);
-        b = getNestedValue(key, b);
-    }
-    return a > b ? 1 : a === b ? 0 : -1;
-};
-
-function getNestedValue<T extends Record<string, any>>(key: string, object: T): any {
-    return key.split('.').reduce((a, b) => (a ? a[b] : null), object);
-}
-
-function buildTree(items: ExampleItem[], id?: number): ExampleItem[] {
-    return items
-        .filter((item) => item.parentId === id)
-        .map((item) => ({ ...item, children: buildTree(items, item.id) }));
-}
-
 // Example items
 const ITEMS: ExampleItem[] = [
     {
-        id: 1,
         name: '10 Portable DVD player',
         description: 'diam neque vestibulum eget vulputate',
         price: {
@@ -501,11 +371,9 @@ const ITEMS: ExampleItem[] = [
         status: 'Stocked on demand',
         statusColor: 'informative',
         date: new FdDate(2020, 1, 7),
-        verified: true,
-        expanded: false
+        verified: true
     },
     {
-        id: 2,
         name: 'Astro Laptop 1516',
         description: 'pede malesuada',
         price: {
@@ -515,96 +383,9 @@ const ITEMS: ExampleItem[] = [
         status: 'Out of stock',
         statusColor: 'negative',
         date: new FdDate(2020, 2, 5),
-        verified: true,
-        parentId: 1
+        verified: true
     },
     {
-        id: 3,
-        name: 'Benda Laptop 1408',
-        description: 'suspendisse potenti cras in',
-        price: {
-            value: 243.49,
-            currency: 'CNY'
-        },
-        status: 'Stocked on demand',
-        statusColor: 'informative',
-        date: new FdDate(2020, 9, 22),
-        verified: true,
-        parentId: 1
-    },
-    {
-        id: 4,
-        name: 'Astro Laptop 1516',
-        description: 'pede malesuada',
-        price: {
-            value: 489.01,
-            currency: 'EUR'
-        },
-        status: 'Out of stock',
-        statusColor: 'negative',
-        date: new FdDate(2020, 2, 5),
-        verified: true,
-        expanded: true,
-        children: []
-    },
-    {
-        id: 5,
-        name: '10 Portable DVD player',
-        description: 'diam neque vestibulum eget vulputate',
-        price: {
-            value: 66.04,
-            currency: 'CNY'
-        },
-        status: 'Stocked on demand',
-        statusColor: 'informative',
-        date: new FdDate(2020, 1, 7),
-        verified: true,
-        expanded: true,
-        parentId: 4
-    },
-    {
-        id: 6,
-        name: 'Astro Phone 6',
-        description: 'penatibus et magnis',
-        price: {
-            value: 154.1,
-            currency: 'IDR'
-        },
-        status: 'Stocked on demand',
-        statusColor: 'informative',
-        date: new FdDate(2020, 1, 12),
-        verified: true,
-        parentId: 5
-    },
-    {
-        id: 7,
-        name: 'Beam Breaker B-1',
-        description: 'fermentum donec ut',
-        price: {
-            value: 36.56,
-            currency: 'NZD'
-        },
-        status: 'Stocked on demand',
-        statusColor: 'informative',
-        date: new FdDate(2020, 11, 24),
-        verified: false,
-        parentId: 5
-    },
-    {
-        id: 8,
-        name: 'Beam Breaker B-2',
-        description: 'sapien in sapien iaculis congue',
-        price: {
-            value: 332.57,
-            currency: 'NZD'
-        },
-        status: 'No info',
-        date: new FdDate(2020, 10, 23),
-        verified: true,
-        parentId: 5
-    },
-    {
-        id: 9,
         name: 'Astro Phone 6',
         description: 'penatibus et magnis',
         price: {
@@ -617,7 +398,6 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
-        id: 10,
         name: 'Beam Breaker B-1',
         description: 'fermentum donec ut',
         price: {
@@ -630,7 +410,6 @@ const ITEMS: ExampleItem[] = [
         verified: false
     },
     {
-        id: 11,
         name: 'Beam Breaker B-2',
         description: 'sapien in sapien iaculis congue',
         price: {
@@ -642,7 +421,6 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
-        id: 12,
         name: 'Benda Laptop 1408',
         description: 'suspendisse potenti cras in',
         price: {
@@ -655,7 +433,6 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
-        id: 13,
         name: 'Bending Screen 21HD',
         description: 'nunc nisl duis bibendum',
         price: {
@@ -668,7 +445,6 @@ const ITEMS: ExampleItem[] = [
         verified: false
     },
     {
-        id: 14,
         name: 'Blaster Extreme',
         description: 'quisque ut',
         price: {
@@ -681,7 +457,6 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
-        id: 15,
         name: 'Broad Screen 22HD',
         description: 'ultrices posuere',
         price: {
@@ -694,7 +469,6 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
-        id: 16,
         name: 'Camcorder View',
         description: 'integer ac leo pellentesque',
         price: {
@@ -707,7 +481,6 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
-        id: 17,
         name: 'Cepat Tablet 10.5',
         description: 'rutrum rutrum neque aenean auctor',
         price: {
@@ -719,7 +492,6 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
-        id: 18,
         name: 'Ergo Mousepad',
         description: 'tortor duis mattis egestas',
         price: {
@@ -732,7 +504,6 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
-        id: 19,
         name: 'Ergo Screen E-I',
         description: 'massa quis augue luctus tincidunt',
         price: {
@@ -745,7 +516,6 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
-        id: 20,
         name: 'Ergo Screen E-II',
         description: 'orci eget',
         price: {
@@ -757,7 +527,6 @@ const ITEMS: ExampleItem[] = [
         verified: false
     },
     {
-        id: 21,
         name: 'Gaming Monster',
         description: 'cubilia curae',
         price: {
@@ -769,7 +538,6 @@ const ITEMS: ExampleItem[] = [
         verified: false
     },
     {
-        id: 22,
         name: 'Gaming Monster Pro',
         description: 'pharetra magna vestibulum aliquet',
         price: {

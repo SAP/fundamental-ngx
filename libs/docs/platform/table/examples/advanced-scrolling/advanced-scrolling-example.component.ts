@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { DatetimeAdapter, FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { FormFieldComponent, FormGroupComponent, InputComponent } from '@fundamental-ngx/platform';
+import { PlatformTableModule, TableFilterSelectOption } from '@fundamental-ngx/platform/table';
 import {
     ChildTableDataSource,
     CollectionBooleanFilter,
@@ -39,7 +41,11 @@ import { delay } from 'rxjs/operators';
         TableInitialStateDirective,
         TableDraggableDirective,
         TableVirtualScrollDirective,
-        FdDatetimeModule
+        FdDatetimeModule,
+        FormFieldComponent,
+        FormGroupComponent,
+        InputComponent,
+        FormsModule
     ]
 })
 export class AdvancedScrollingExampleComponent {
@@ -47,6 +53,18 @@ export class AdvancedScrollingExampleComponent {
     childSource: ChildTableDataSource<ExampleItem>;
     readonly filterTypeEnum = FilterType;
     readonly dataTypeEnum = FilterableColumnDataType;
+    statusFilteringValues: TableFilterSelectOption[] = [
+        { value: 'Stocked on demand', label: 'Stocked on demand' },
+        { value: 'Out of stock', label: 'Out of stock' },
+        { value: 'No info', label: 'No info' },
+        { value: 'Available', label: 'Available' }
+    ];
+
+    statusColorFilteringValues: TableFilterSelectOption[] = [
+        { value: 'informative', label: 'Informative' },
+        { value: 'negative', label: 'Negative' },
+        { value: 'positive', label: 'Positive' }
+    ];
 
     constructor() {
         this.source = new TableDataSource(new TableDataProviderExample());
