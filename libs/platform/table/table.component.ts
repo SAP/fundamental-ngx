@@ -1828,6 +1828,7 @@ export class TableComponent<T = any>
                         break;
                     case 'filter':
                         this.filterChange.emit(new TableFilterChangeEvent(this, state.current, state.previous));
+                        this.tableColumnFilterChange.emit();
                         this._setAppliedFilterNames(state.current);
                         break;
                     case 'freeze':

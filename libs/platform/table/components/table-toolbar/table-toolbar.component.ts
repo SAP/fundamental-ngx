@@ -9,7 +9,8 @@ import {
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
-    inject
+    inject,
+    signal
 } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -170,6 +171,9 @@ export class TableToolbarComponent implements TableToolbarInterface {
     _searchInputText = '';
 
     /** @hidden */
+    _isFilterToolbarVisible = signal(false);
+
+    /** @hidden */
     readonly tableLoading$: Observable<boolean> = inject(TableService).tableLoading$;
 
     /** @hidden */
@@ -226,6 +230,11 @@ export class TableToolbarComponent implements TableToolbarInterface {
     }
 
     /** @hidden */
+    _closeFilterToolbar(): void {
+        this._isFilterToolbarVisible.set(false);
+    }
+
+    /** @hidden */
     _collapseAll(): void {
         this._table.collapseAll();
     }
@@ -246,6 +255,10 @@ export class TableToolbarComponent implements TableToolbarInterface {
 
         this._table.presetChanged.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((state) => {
             this._searchInputText = state.searchInput?.text ?? '';
+        });
+
+        this._table.tableColumnFilterChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            this._isFilterToolbarVisible.set(true);
         });
     }
 }

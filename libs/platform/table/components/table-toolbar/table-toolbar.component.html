@@ -158,7 +158,7 @@
             }
         }
     </fd-toolbar>
-    @if (appliedFilters().length) {
+    @if (appliedFilters().length && _isFilterToolbarVisible()) {
         <fd-toolbar
             fdType="info"
             [active]="true"
@@ -177,6 +177,7 @@
             </label>
             <fd-toolbar-spacer></fd-toolbar-spacer>
             <button
+                (click)="_closeFilterToolbar()"
                 fd-button
                 fdType="transparent"
                 glyph="decline"
