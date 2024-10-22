@@ -111,7 +111,8 @@ let comboboxUniqueId = 0;
     host: {
         '[class.fd-combobox-custom-class]': 'true',
         '[class.fd-combobox-input]': 'true',
-        '[class.fd-combobox-custom-class--mobile]': 'mobile'
+        '[class.fd-combobox-custom-class--mobile]': 'mobile',
+        '[style.width]': 'width'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -243,6 +244,10 @@ export class ComboboxComponent<T = any>
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
     maxHeight = '50vh';
+
+    /** Custom width of the control. */
+    @Input()
+    width: Nullable<string>;
 
     /** Search function to execute when the Enter key is pressed on the main input. */
     @Input()

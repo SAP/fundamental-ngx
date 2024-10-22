@@ -3,6 +3,63 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.17...v0.53.1-rc.18) (2024-10-21)
+
+
+### Bug Fixes
+
+* **core:** add option to set a custom width to Combobox ([#12594](https://github.com/SAP/fundamental-ngx/issues/12594)) ([ccb85f3](https://github.com/SAP/fundamental-ngx/commit/ccb85f32c906a428e827103d857f385a51ff273c))
+
+
+
+
+
+## [0.53.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.16...v0.53.1-rc.17) (2024-10-18)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.53.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.15...v0.53.1-rc.16) (2024-10-18)
+
+
+### Bug Fixes
+
+* **core, platform:** add custom IDs to Setting Generator list items ([#12593](https://github.com/SAP/fundamental-ngx/issues/12593)) ([0e9a4f1](https://github.com/SAP/fundamental-ngx/commit/0e9a4f1f6a6c823dd6422a98bd810df5fc4dbc8a))
+
+
+
+
+
+## [0.53.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.14...v0.53.1-rc.15) (2024-10-18)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.53.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.13...v0.53.1-rc.14) (2024-10-18)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.53.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.12...v0.53.1-rc.13) (2024-10-17)
+
+
+### Bug Fixes
+
+* **core:** add bigger z-index to show Dynamic page box-shadow ([#12560](https://github.com/SAP/fundamental-ngx/issues/12560)) ([7179a09](https://github.com/SAP/fundamental-ngx/commit/7179a09541c3634b350498f885844f07d55f7f67))
+
+
+
+
+
 ## [0.53.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.11...v0.53.1-rc.12) (2024-10-17)
 
 **Note:** Version bump only for package @fundamental-ngx/core
