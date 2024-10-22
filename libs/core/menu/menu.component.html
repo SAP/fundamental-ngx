@@ -7,12 +7,12 @@
             [id]="id"
             [attr.aria-labelledby]="ariaLabelledby"
             [attr.aria-label]="ariaLabel"
-            role="menu"
+            [attr.role]="_navContainerRole"
             [class.fd-menu--mobile]="mobile"
             [class.fd-menu--icons]="hasAddons"
         >
             <ul
-                role="none"
+                [attr.role]="_menuListContainerRole"
                 class="fd-menu__list fd-menu__list--no-shadow"
                 [class.fd-menu--full-width]="mobile || false"
             >
