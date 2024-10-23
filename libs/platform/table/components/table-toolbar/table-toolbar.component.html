@@ -167,7 +167,7 @@
             [headingLevel]="headingLevel"
         >
             <label fd-toolbar-label>
-                Filtered by:
+                {{ 'platformTable.filteredBy' | fdTranslate }}:
                 @for (filter of appliedFilters(); track filter.columnName; let i = $index) {
                     {{ filter.columnName }} ({{ filter.params }})
                     @if (i < appliedFilters().length - 1) {

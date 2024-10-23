@@ -168,10 +168,10 @@ export default {
         decreasePeriodLabel: 'Decrease period',
         navigationInstruction:
             'To move between items in this list, press top arrow or bottom arrow. To switch between lists press left arrow or right arrow.',
-        nightLabel: 'night',
-        morningLabel: 'morning',
-        afternoonLabel: 'afternoon',
-        eveningLabel: 'evening'
+        nightLabel: 'at night',
+        morningLabel: 'in the morning',
+        afternoonLabel: 'in the afternoon',
+        eveningLabel: 'in the evening'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Time picker input',
@@ -514,7 +514,8 @@ export default {
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR',
-        loadMore: 'Load more'
+        loadMore: 'Load more',
+        filteredBy: 'Filtered by'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edit'
