@@ -8,7 +8,7 @@ fd-checkbox {
     .fd-checkbox__label {
         user-select: none;
 
-        .fd-checkbox__label-container {
+        &-container {
             pointer-events: auto;
         }
     }
