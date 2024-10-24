@@ -257,7 +257,7 @@ export class TableToolbarComponent implements TableToolbarInterface {
             this._searchInputText = state.searchInput?.text ?? '';
         });
 
-        this._table.tableColumnFilterChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+        this._table.tableColumnFilterChange?.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._isFilterToolbarVisible.set(true);
         });
     }
