@@ -427,6 +427,7 @@ export type FdLanguageKeyIdentifier =
     | 'platformTable.deselectSingleRow'
     | 'platformTable.selectSingleRow'
     | 'platformTable.loadMore'
+    | 'platformTable.filteredBy'
     | 'platformWizardGenerator.summarySectionEditStep'
     | 'platformMessagePopover.allErrors'
     | 'platformMessagePopover.defaultErrors.email'

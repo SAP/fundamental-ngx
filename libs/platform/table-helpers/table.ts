@@ -188,6 +188,9 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     /** Toolbar Column Settings button click event */
     readonly openTableColumnSettings: EventEmitter<void> = new EventEmitter<void>();
 
+    /** Event fired when table state changes. */
+    readonly tableColumnFilterChange: EventEmitter<any> = new EventEmitter<void>();
+
     /** Event fired when empty row added. */
     readonly emptyRowAdded: EventEmitter<void>;
 

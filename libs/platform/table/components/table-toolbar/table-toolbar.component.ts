@@ -9,7 +9,8 @@ import {
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
-    inject
+    inject,
+    signal
 } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -21,6 +22,7 @@ import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import {
     ToolbarComponent,
     ToolbarItemDirective,
+    ToolbarLabelDirective,
     ToolbarSeparatorComponent,
     ToolbarSpacerDirective
 } from '@fundamental-ngx/core/toolbar';
@@ -31,6 +33,11 @@ import { TABLE_TOOLBAR, TableToolbarInterface } from './table-toolbar';
 import { TableToolbarActionsComponent } from './table-toolbar-actions.component';
 import { TableToolbarLeftActionsComponent } from './table-toolbar-left-actions.component';
 
+export interface TableAppliedFilter {
+    columnName: string;
+    params: string;
+}
+
 export interface ToolbarContext {
     counter: Signal<number>;
     sortable: Signal<boolean>;
@@ -38,6 +45,7 @@ export interface ToolbarContext {
     groupable: Signal<boolean>;
     columns: Signal<boolean>;
     hasAnyActions: Signal<boolean>;
+    appliedFilters: Signal<TableAppliedFilter[]>;
 }
 
 export type EditMode = 'none' | 'inline';
@@ -89,7 +97,8 @@ export class TableToolbarTemplateDirective {
         ButtonComponent,
         AsyncPipe,
         FdTranslatePipe,
-        TableToolbarTemplateDirective
+        TableToolbarTemplateDirective,
+        ToolbarLabelDirective
     ]
 })
 export class TableToolbarComponent implements TableToolbarInterface {
@@ -162,6 +171,9 @@ export class TableToolbarComponent implements TableToolbarInterface {
     _searchInputText = '';
 
     /** @hidden */
+    _isFilterToolbarVisible = signal(false);
+
+    /** @hidden */
     readonly tableLoading$: Observable<boolean> = inject(TableService).tableLoading$;
 
     /** @hidden */
@@ -218,6 +230,11 @@ export class TableToolbarComponent implements TableToolbarInterface {
     }
 
     /** @hidden */
+    _closeFilterToolbar(): void {
+        this._isFilterToolbarVisible.set(false);
+    }
+
+    /** @hidden */
     _collapseAll(): void {
         this._table.collapseAll();
     }
@@ -238,6 +255,10 @@ export class TableToolbarComponent implements TableToolbarInterface {
 
         this._table.presetChanged.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((state) => {
             this._searchInputText = state.searchInput?.text ?? '';
+        });
+
+        this._table.tableColumnFilterChange?.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+            this._isFilterToolbarVisible.set(true);
         });
     }
 }
