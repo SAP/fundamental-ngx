@@ -144,17 +144,4 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     _detectChanges(): void {
         this._cdr.detectChanges();
     }
-
-    /** @hidden */
-    handlePopoverOpen(isOpen: boolean): void {
-        this.opened = isOpen;
-        if (isOpen) {
-            this.defaultAvatarGroupOverflowBody._avatarGroupItemPortals.first.setTabbable(true);
-        }
-    }
-
-    /** @hidden */
-    handleBack(): void {
-        this.handlePopoverOpen(this.opened);
-    }
 }

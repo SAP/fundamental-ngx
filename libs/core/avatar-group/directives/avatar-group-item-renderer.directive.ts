@@ -147,8 +147,8 @@ export class AvatarGroupItemRendererDirective implements OnInit, FocusableItem {
         this._embeddedViewRef = this._portalOutlet.attach(this._templatePortal);
         this._embeddedViewRef.detectChanges();
         this._element$.next(this.element);
-        this.setTabbable(this._hostConfig.type === 'individual');
-        this._isFocusable = this._hostConfig.type === 'individual';
+        this.setTabbable(true);
+        this._isFocusable = true;
     }
 
     /**
