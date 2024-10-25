@@ -18,6 +18,7 @@ import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import {
     ToolbarComponent,
@@ -98,7 +99,8 @@ export class TableToolbarTemplateDirective {
         AsyncPipe,
         FdTranslatePipe,
         TableToolbarTemplateDirective,
-        ToolbarLabelDirective
+        ToolbarLabelDirective,
+        ContentDensityDirective
     ]
 })
 export class TableToolbarComponent implements TableToolbarInterface {
