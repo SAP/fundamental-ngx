@@ -157,7 +157,7 @@
     "tsconfig-paths": "4.1.0",
     "typedoc": "0.25.12",
     "typedoc-plugin-merge-modules": "5.1.0",
-    "typescript": "5.4.5",
+    "typescript": "5.6.3",
     "wait-on": "6.0.1",
     "wdio-axe": "2.2.3",
     "wdio-chromedriver-service": "6.0.4",
