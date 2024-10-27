@@ -458,10 +458,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/language-service@npm:18.0.3":
-  version: 18.0.3
-  resolution: "@angular/language-service@npm:18.0.3"
-  checksum: 10/6bb55983783ba913d62ac765ec6a5ab0fd2cdec63eac8e6cdaeaccd74bb2ac60ef4385a3d88d37518b9d9e6bbd7af6bf39e9cf713f3d92b9cf212e1d15cdb1ea
+"@angular/language-service@npm:18.2.9":
+  version: 18.2.9
+  resolution: "@angular/language-service@npm:18.2.9"
+  checksum: 10/a2e8a5514ec46477351ccd78b194d32a2a73afb049415212948255d77afc5674fe35eff251a51292ca44c7d9254bad625c34bb867487283d418e29f2d9ec709c
   languageName: node
   linkType: hard
 
@@ -13694,7 +13694,7 @@ __metadata:
     "@angular/compiler-cli": "npm:18.0.3"
     "@angular/core": "npm:18.0.3"
     "@angular/forms": "npm:18.0.3"
-    "@angular/language-service": "npm:18.0.3"
+    "@angular/language-service": "npm:18.2.9"
     "@angular/platform-browser": "npm:18.0.3"
     "@angular/platform-browser-dynamic": "npm:18.0.3"
     "@angular/router": "npm:18.0.3"
