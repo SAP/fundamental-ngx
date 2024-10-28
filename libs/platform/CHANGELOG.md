@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.22...v0.53.1-rc.23) (2024-10-28)
+
+
+### Bug Fixes
+
+* **platform:** icon-tab-bar _generateTabBarItems function improvement ([#12581](https://github.com/SAP/fundamental-ngx/issues/12581)) ([2b183ba](https://github.com/SAP/fundamental-ngx/commit/2b183ba8f41bcc5ed6f8593a2eb1055c2e58ed08))
+
+
+
+
+
 ## [0.53.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.21...v0.53.1-rc.22) (2024-10-28)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
