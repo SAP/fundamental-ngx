@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.18...v0.53.1-rc.19) (2024-10-28)
+
+
+### Bug Fixes
+
+* **core:** prevent potential for infinite loop when two file uploaders have the same ngModel ([#12640](https://github.com/SAP/fundamental-ngx/issues/12640)) ([7339c2a](https://github.com/SAP/fundamental-ngx/commit/7339c2a1416f3ec6013ac61dc090dc7cccc38124))
+
+
+
+
+
+## [0.53.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.17...v0.53.1-rc.18) (2024-10-21)
+
+
+### Bug Fixes
+
+* **core:** add option to set a custom width to Combobox ([#12594](https://github.com/SAP/fundamental-ngx/issues/12594)) ([ccb85f3](https://github.com/SAP/fundamental-ngx/commit/ccb85f32c906a428e827103d857f385a51ff273c))
+
+
+
+
+
 ## [0.53.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.16...v0.53.1-rc.17) (2024-10-18)
 
 
