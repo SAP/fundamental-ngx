@@ -391,9 +391,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         this.isOpen = false;
         this.inputText = '';
         this.searchTermChanged();
-        if (!this.mobile) {
-            this.searchInputElement.nativeElement.focus();
-        }
         this.isOpenChange.emit(false);
         this.openChange.next(false);
         this._cd.markForCheck();
