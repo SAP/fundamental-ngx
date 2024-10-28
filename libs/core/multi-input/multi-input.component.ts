@@ -601,10 +601,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
             return;
         }
 
-        if (!open && this.open && !this.mobile) {
-            this.searchInputElement.nativeElement.focus();
-        }
-
         if (this.open !== open) {
             this.openChange.emit(open);
         }
@@ -672,6 +668,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         this._subscriptions.add(sub);
         if (isListItem) {
             this.openChangeHandle(false);
+            this.searchInputElement?.nativeElement.focus();
         } else {
             // stop propagation on the checkbox so event doesn't reach the list item
             event.stopPropagation();
