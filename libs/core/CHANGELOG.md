@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.21...v0.53.1-rc.22) (2024-10-28)
+
+
+### Bug Fixes
+
+* **core:** remove navigation role from List ([#12663](https://github.com/SAP/fundamental-ngx/issues/12663)) ([843470d](https://github.com/SAP/fundamental-ngx/commit/843470d764172b45b8f5497ca2e6d2c8fe565c98))
+
+
+
+
+
 ## [0.53.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.20...v0.53.1-rc.21) (2024-10-28)
 
 **Note:** Version bump only for package @fundamental-ngx/core
