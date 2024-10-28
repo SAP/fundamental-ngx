@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.19...v0.53.1-rc.20) (2024-10-28)
+
+
+### Bug Fixes
+
+* combobox e2e ([#12666](https://github.com/SAP/fundamental-ngx/issues/12666)) ([49c7ce8](https://github.com/SAP/fundamental-ngx/commit/49c7ce86e01fd9458065a170db36de1aa595a0fb))
+
+
+
+
+
 ## [0.53.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.18...v0.53.1-rc.19) (2024-10-28)
 
 
