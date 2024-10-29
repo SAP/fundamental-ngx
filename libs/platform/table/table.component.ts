@@ -877,7 +877,6 @@ export class TableComponent<T = any>
         this._dndTableDirective?.setTable(this);
         this._virtualScrollDirective?.setTable(this);
         this._dataSourceDirective.setTable(this);
-
         this._rowTrackBy = this._defaultTrackBy;
         this._toolbarContext = {
             counter: this._dataSourceDirective.totalItems$,
@@ -1860,12 +1859,25 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _setAppliedFilterNames(filters: CollectionFilter[]): void {
-        this._appliedFilterNames.set(
-            filters.map((f) => ({
-                columnName: this._formatColumnName(f.field),
-                params: f.value
-            }))
-        );
+        console.log(filters, 'filters');
+
+        const formattedFilters = filters.map((f) => ({
+            columnName: this._formatColumnName(f.field),
+            params: this._formatParams(f.value)
+        }));
+
+        this._appliedFilterNames.set(formattedFilters);
+    }
+
+    // Helper function to format nested parameters
+    private _formatParams(value: any): string {
+        if (typeof value !== 'object' || value === null) {
+            return String(value); // Handle non-object values
+        }
+
+        return Object.entries(value)
+            .map(([key, val]) => `${key}: ${this._formatParams(val)}`) // Recursive call for nested objects
+            .join(', ');
     }
 
     /** @hidden */
