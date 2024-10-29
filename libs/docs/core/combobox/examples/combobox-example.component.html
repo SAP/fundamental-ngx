@@ -1,10 +1,11 @@
 <div class="examples-column">
     <div fd-form-item>
-        <label fd-form-label for="comboboxID1">Standard</label>
+        <label fd-form-label for="comboboxID1">Standard with custom width</label>
         <fd-combobox
             inputId="comboboxID1"
             ariaLabel="Standard"
             maxHeight="250px"
+            width="300px"
             placeholder="Type some text..."
             [dropdownValues]="fruits"
             [(ngModel)]="searchTermOne"

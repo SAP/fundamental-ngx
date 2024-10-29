@@ -108,3 +108,7 @@
     position: relative;
     box-shadow: var(--sapContent_HeaderShadow);
 }
+
+.fd-dynamic-page__header {
+    z-index: 15;
+}
