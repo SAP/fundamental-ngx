@@ -112,6 +112,7 @@ describe('FileUploaderComponent', () => {
     });
 
     it('should call clear when files array is set to empty', () => {
+        component.validFiles = [new File([''], 'file1')];
         jest.spyOn(component, 'clear');
         component.writeValue([]);
         expect(component.clear).toHaveBeenCalled();

@@ -107,6 +107,10 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
     @Input()
     enableKeyboardNavigation = true;
 
+    /** Aria role of the overflow layout. */
+    @Input()
+    ariaRole: string;
+
     /**
      * Event, triggered when amount of visible items has been changed.
      */
