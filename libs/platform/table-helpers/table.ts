@@ -189,7 +189,7 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     readonly openTableColumnSettings: EventEmitter<void> = new EventEmitter<void>();
 
     /** Event fired when table state changes. */
-    readonly tableColumnFilterChange = new EventEmitter<void>();
+    readonly tableColumnFilterChange: EventEmitter<any> = new EventEmitter<void>();
 
     /** Event fired when empty row added. */
     readonly emptyRowAdded: EventEmitter<void>;
