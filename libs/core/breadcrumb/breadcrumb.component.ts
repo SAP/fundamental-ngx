@@ -4,9 +4,11 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     Input,
+    OnInit,
     Output,
     QueryList,
     ViewChild,
@@ -15,6 +17,7 @@ import {
     inject,
     signal
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HasElementRef, RtlService } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
@@ -34,7 +37,7 @@ import {
     OverflowLayoutItemDirective
 } from '@fundamental-ngx/core/overflow-layout';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens';
 
@@ -53,7 +56,8 @@ import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens'
     selector: 'fd-breadcrumb',
     host: {
         class: 'fd-breadcrumb',
-        role: 'tree'
+        role: 'navigation',
+        '[attr.aria-label]': '_ariaLabel'
     },
     templateUrl: './breadcrumb.component.html',
     styleUrl: './breadcrumb.component.scss',
@@ -84,7 +88,7 @@ import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens'
         FdTranslatePipe
     ]
 })
-export class BreadcrumbComponent implements AfterViewInit, HasElementRef {
+export class BreadcrumbComponent implements OnInit, AfterViewInit, HasElementRef {
     /** Whether to append items to the overflow dropdown in reverse order. Default is true. */
     @Input()
     reverse = false;
@@ -117,6 +121,9 @@ export class BreadcrumbComponent implements AfterViewInit, HasElementRef {
     @ViewChild(OverflowLayoutComponent)
     private readonly _overflowLayout: OverflowLayoutComponent;
 
+    /** @hidden */
+    _ariaLabel: string;
+
     /**
      * @hidden
      * Array of breadcrumb items.
@@ -138,6 +145,15 @@ export class BreadcrumbComponent implements AfterViewInit, HasElementRef {
     private readonly _rtl$ = computed<boolean>(() => !!this._rtlService?.rtlSignal());
 
     /** @hidden */
+    private readonly _lang$ = inject(FD_LANGUAGE);
+
+    /** @hidden */
+    private readonly _translationResolver = new TranslationResolver();
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
     onResize(): void {
         this._overflowLayout.triggerRecalculation();
     }
@@ -151,10 +167,20 @@ export class BreadcrumbComponent implements AfterViewInit, HasElementRef {
     }
 
     /** @hidden */
+    ngOnInit(): void {
+        this._lang$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((lang: FdLanguage) => {
+            this._ariaLabel = this._translationResolver.resolve(lang, 'coreBreadcrumb.breadcrumbTrailLabel');
+        });
+    }
+
+    /** @hidden */
     ngAfterViewInit(): void {
         this._setItems();
 
         this._contentItems.changes.subscribe(() => this._setItems());
+
+        this._menuComponent._navContainerRole = 'dialog';
+        this._menuComponent._menuListContainerRole = 'menu';
     }
 
     /** @hidden */
