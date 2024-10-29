@@ -1859,8 +1859,6 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _setAppliedFilterNames(filters: CollectionFilter[]): void {
-        console.log(filters, 'filters');
-
         const formattedFilters = filters.map((f) => ({
             columnName: this._formatColumnName(f.field),
             params: this._formatParams(f.value)
