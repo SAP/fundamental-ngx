@@ -492,6 +492,7 @@ fdk-dynamic-portal {
     &__body-table {
         &.fd-table--pop-in {
             .fd-table__row--secondary {
+                cursor: pointer;
                 .fd-table__cell {
                     border-bottom: var(--sapList_BorderWidth) solid var(--sapList_BorderColor);
 

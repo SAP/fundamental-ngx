@@ -131,6 +131,9 @@
                             }
                             @if (row.type === 'item' && _tableService.poppingColumns$().length > 0) {
                                 <tr
+                                    (keydown.enter)="_onRowClick(row, $event)"
+                                    (keydown.space)="_onRowClick(row, $event)"
+                                    (click)="_onRowClick(row, $event)"
                                     fdp-table-popping-row
                                     [secondary]="true"
                                     [style.height.px]="secondaryRowHeight"
