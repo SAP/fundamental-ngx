@@ -198,7 +198,8 @@ export default {
         ariaLabel: 'Wizard'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'More'
+        overflowTitleMore: 'More',
+        breadcrumbTrailLabel: 'Breadcrumb Trail'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Watchers',

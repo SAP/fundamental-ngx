@@ -195,12 +195,12 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
 
     /** @hidden */
     writeValue(files: File[]): void {
-        if (files && files.length === 0) {
+        if (this.validFiles.length > 0 && files && files.length === 0) {
             this.clear();
         } else if (this._isEmpty()) {
             return;
         } else {
-            this._propagateFiles();
+            this._propagateFiles(false);
         }
     }
 
@@ -288,9 +288,11 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
     }
 
     /** @hidden */
-    private _propagateFiles(): void {
+    private _propagateFiles(handleOnChange: boolean = true): void {
         this.setInputValue(this.validFiles);
-        this.onChange(this.validFiles);
+        if (handleOnChange) {
+            this.onChange(this.validFiles);
+        }
         this.selectedFilesChanged.emit(this.validFiles);
         this.selectedInvalidFiles.emit(this.invalidFiles);
     }
