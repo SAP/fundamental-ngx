@@ -1,23 +1,13 @@
-<fd-text text="example with label buttons"></fd-text>
-<fd-segmented-button [(ngModel)]="value">
-    <button fd-button fdkFocusableItem label="Left" value="first"></button>
-    <button fd-button fdkFocusableItem label="Middle" value="second"></button>
-    <button fd-button fdkFocusableItem label="Right" value="third"></button>
+<fd-segmented-button [ngModel]="currentValue" [toggle]="true">
+    @for (value of values; track value) {
+        <button
+            fdkFocusableItem
+            fd-button
+            [label]="value"
+            [attr.value]="value"
+            (click)="handleValueChange(value)"
+        ></button>
+    }
 </fd-segmented-button>
-
-<fd-text text="example with icon buttons"></fd-text>
-<fd-segmented-button [(ngModel)]="value">
-    <button fd-button fdkFocusableItem glyph="cart" value="first"></button>
-    <button fd-button fdkFocusableItem glyph="action" value="second"></button>
-    <button fd-button fdkFocusableItem glyph="activities" value="third"></button>
-</fd-segmented-button>
-
-<fd-text text="example with Vertical alignment"></fd-text>
-<fd-segmented-button [(ngModel)]="value" vertical>
-    <button fd-button fdkFocusableItem glyph="cart" value="first"></button>
-    <button fd-button fdkFocusableItem glyph="action" value="second"></button>
-    <button fd-button fdkFocusableItem glyph="activities" value="third"></button>
-</fd-segmented-button>
-
 <br />
-<small>value: {{ value }}</small>
+<small>value: {{ currentValue }}</small>

@@ -12,5 +12,10 @@ import { TextComponent } from '@fundamental-ngx/core/text';
     imports: [TextComponent, SegmentedButtonModule, FormsModule, ButtonComponent, FocusableItemDirective]
 })
 export class SegmentedButtonDefaultExampleComponent {
-    value = 'first';
+    values: string[] = ['first', 'second', 'third'];
+    currentValue: string[] = [];
+
+    handleValueChange(value: string): void {
+        this.currentValue = [value];
+    }
 }

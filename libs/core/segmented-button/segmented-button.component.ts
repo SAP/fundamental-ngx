@@ -175,6 +175,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
             .pipe(startWith(1), observeOn(asyncScheduler), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 this._onRefresh$.next();
+                console.log(this._currentValue, '_currentValue');
                 this._toggleDisableButtons(this._isDisabled);
                 this._pickButtonsByValues(this._currentValue);
                 this._buttons.forEach((button) => {
