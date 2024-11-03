@@ -37,6 +37,7 @@ import {
 } from '@fundamental-ngx/platform/table-helpers';
 import { PlatformTableEditableRowsExampleComponent } from './examples/editable-rows/platform-table-editable-rows-example.component';
 import { PlatformTableInitialLoadingExampleComponent } from './examples/initial-loading/platform-table-initial-loading-example.component';
+import { NoDataExampleComponent } from './examples/no-data/no-data-example.component';
 import { PlatformTableColumnsNgforExampleComponent } from './examples/platform-table-columns-ngfor-example.component';
 import { PlatformTableCustomColumnExampleComponent } from './examples/platform-table-custom-column-example.component';
 import { PlatformTableCustomTitleExampleComponent } from './examples/platform-table-custom-title-example.component';
@@ -94,6 +95,9 @@ const platformInitialLoadingTsSrc = 'initial-loading/platform-table-initial-load
 const platformTableNgForSrc = 'platform-table-columns-ngfor-example.component.html';
 const platformTableNgForTsSrc = 'platform-table-columns-ngfor-example.component.ts';
 
+const noDataTableExampleSrc = 'no-data-example.component.html';
+const noDataTableExampleTsSrc = 'no-data-example.component.ts';
+
 const illustrationDialogNoMail = '/assets/images/sapIllus-Dialog-NoMail.svg';
 
 @Component({
@@ -133,7 +137,8 @@ const illustrationDialogNoMail = '/assets/images/sapIllus-Dialog-NoMail.svg';
         TableInitialStateDirective,
         ContentDensityDirective,
         PlatformButtonModule,
-        FdDatetimeModule
+        FdDatetimeModule,
+        NoDataExampleComponent
     ]
 })
 export class PlatformTableDocsComponent {
@@ -425,6 +430,22 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-columns-ngfor-example',
             component: 'PlatformTableColumnsNgforExampleComponent',
             name: 'platform-table-columns-ngfor-example.component.ts'
+        }
+    ];
+
+    noDataExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(noDataTableExampleSrc),
+            fileName: 'no-data-example',
+            name: 'no-data-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(noDataTableExampleTsSrc),
+            fileName: 'no-data-example',
+            component: 'NoDataExampleComponent',
+            name: 'no-data-example.component.ts'
         }
     ];
 

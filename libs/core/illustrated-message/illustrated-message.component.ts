@@ -1,5 +1,5 @@
 import {
-    AfterViewInit,
+    AfterContentChecked,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -51,7 +51,7 @@ let illustratedMessageUniqueId = 0;
     standalone: true,
     imports: []
 })
-export class IllustratedMessageComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit, CssClassBuilder {
+export class IllustratedMessageComponent implements AfterContentChecked, OnChanges, OnDestroy, OnInit, CssClassBuilder {
     /**
      * The type of the Illustrated Message
      * Options include: 'scene' | 'spot' | 'dialog' | 'dot' | 'base'.
@@ -138,13 +138,12 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
     ngOnInit(): void {
         this.buildComponentCssClass();
         this._constructHref();
+        this._subscriptions.add(fromEvent(window, 'resize').subscribe(() => this._constructHref()));
     }
 
     /** @hidden */
-    ngAfterViewInit(): void {
-        this._containerWidth = this.elementRef.nativeElement.offsetWidth;
+    ngAfterContentChecked(): void {
         this._constructHref();
-        this._subscriptions.add(fromEvent(window, 'resize').subscribe(() => this._constructHref()));
     }
 
     /** @hidden */
