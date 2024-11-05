@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.5](https://github.com/SAP/fundamental-ngx/compare/v0.50.4...v0.50.5) (2024-11-05)
+
+
+### Bug Fixes
+
+* **core:** form label white space ([#12491](https://github.com/SAP/fundamental-ngx/issues/12491)) ([f603855](https://github.com/SAP/fundamental-ngx/commit/f6038550b3ca07672841877f63fa607583419cfe))
+
+
+
+
+
 ## [0.50.4](https://github.com/SAP/fundamental-ngx/compare/v0.50.3...v0.50.4) (2024-10-29)
 
 **Note:** Version bump only for package @fundamental-ngx/core
