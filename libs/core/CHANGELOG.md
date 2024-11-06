@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.28...v0.53.1-rc.29) (2024-11-06)
+
+
+### Bug Fixes
+
+* **core:** trim search term in MultiInputComponent to handle leading/trailing spaces ([#12695](https://github.com/SAP/fundamental-ngx/issues/12695)) ([6f110e7](https://github.com/SAP/fundamental-ngx/commit/6f110e7e8c2005fd0fb3df2c249993ea785dbcef)), closes [#12635](https://github.com/SAP/fundamental-ngx/issues/12635)
+
+
+
+
+
 ## [0.53.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.27...v0.53.1-rc.28) (2024-11-06)
 
 **Note:** Version bump only for package @fundamental-ngx/core
