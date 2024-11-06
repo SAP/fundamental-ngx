@@ -183,7 +183,7 @@ export class TableService {
         }
     }
 
-    /** Set new sort rules */
+    /** Set new filter rules */
     setFilters(filterRules: CollectionFilter[] | undefined): void {
         const prevState = this.getTableState();
         const prevFilterRules = (prevState && prevState.filterBy) || [];
@@ -426,6 +426,8 @@ export class TableService {
      * @param state Table state.
      */
     buildFilterRulesMap(state = this.getTableState()): void {
+        const prevState = this.getTableState();
+        const evt = { current: state.filterBy, previous: prevState.filterBy };
         this.filterRules$.set(
             state.filterBy.reduce((hash, rule) => {
                 const key = rule.field;
@@ -436,6 +438,26 @@ export class TableService {
                 return hash;
             }, new Map<string, CollectionFilter[]>())
         );
+        this.stateChange$.next({ type: 'filter', state: evt });
+    }
+
+    /** Reset all filter rules */
+    resetFilters(): void {
+        const prevState = this.getTableState();
+        const prevFilterRules = (prevState && prevState.filterBy) || [];
+
+        const newFilterRules: CollectionFilter[] = [];
+        const state: TableState = { ...prevState, filterBy: newFilterRules };
+
+        if (!equal(prevFilterRules, state.filterBy)) {
+            this.setTableState(setCurrentPageToState(state, 1));
+            const evt = { current: state.filterBy, previous: prevFilterRules };
+
+            this.buildFilterRulesMap();
+            this.needFetch$.next();
+            this.stateChange$.next({ type: 'filter', state: evt });
+            this.filterChange$.next(evt);
+        }
     }
 
     /**
