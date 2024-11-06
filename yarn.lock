@@ -3613,10 +3613,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fundamental-styles/cx@npm:0.38.0":
-  version: 0.38.0
-  resolution: "@fundamental-styles/cx@npm:0.38.0"
-  checksum: 10/f3ad7e8f886849260670a08b1b3a8576bacee6f4eeea1ee8363021f5a554ecd20ddaeebc2fe6e880785acc70ca6b511941bc9fe54e6c6058854317f8d7e53dfe
+"@fundamental-styles/cx@npm:0.39.0-rc.8":
+  version: 0.39.0-rc.8
+  resolution: "@fundamental-styles/cx@npm:0.39.0-rc.8"
+  checksum: 10/76b11356eac03e8bbf47475052be02912812d5c28903d394c6e457d367c5bb946edefa0cd7928d96ab28e5993ac96d328fafd1f484b20d56269077d345f29102
   languageName: node
   linkType: hard
 
@@ -5567,26 +5567,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sap-theming/theming-base-content@npm:11.18.0":
-  version: 11.18.0
-  resolution: "@sap-theming/theming-base-content@npm:11.18.0"
-  checksum: 10/4762f45806c4079bd1202635b1cb27517c662450b75c2fc85f63de1aad3fc9d50bd794cca17b25b48be3bceacc08f001f6e252f964f75a521184eed97995df58
+"@sap-theming/theming-base-content@npm:11.19.0":
+  version: 11.19.0
+  resolution: "@sap-theming/theming-base-content@npm:11.19.0"
+  checksum: 10/bda9e327106cb061a8ed7a1b9133ca3968746cd4cee8ffe6fc9761c38860e780d2c53e46b9bf668e6df879ae51e5f249db799600fc23b2b780d4d783af6ceedd
   languageName: node
   linkType: hard
 
-"@sap-theming/theming-base-content@npm:^11.18.0":
-  version: 11.18.2
-  resolution: "@sap-theming/theming-base-content@npm:11.18.2"
-  checksum: 10/71235613d566767406514ee924bcc6959456fff5be30c63d7731d5f224ab4e9156aaf0d2c01f08db53ea0bcd05539f5d956cddeb07c1911c1c170dad01bb79e6
+"@sap-theming/theming-base-content@npm:^11.19.0":
+  version: 11.20.0
+  resolution: "@sap-theming/theming-base-content@npm:11.20.0"
+  checksum: 10/3a6fbdc3af82cde669005bd0fc8a8030e3032c76d9908e82ded90306fd0dbbf15f6bfc026a2ebf170da58f95717bc887d62039ba4eb2939aa29a2a7f208deaa7
   languageName: node
   linkType: hard
 
-"@sap-ui/common-css@npm:0.38.0":
-  version: 0.38.0
-  resolution: "@sap-ui/common-css@npm:0.38.0"
+"@sap-ui/common-css@npm:0.39.0-rc.8":
+  version: 0.39.0-rc.8
+  resolution: "@sap-ui/common-css@npm:0.39.0-rc.8"
   dependencies:
-    "@sap-theming/theming-base-content": "npm:^11.18.0"
-  checksum: 10/1ae2dc1f5c5f867c06d7026288fd59d7237d18d8f4312e4afb1f279029765cf3ff0ca83fc6e0920c03da21036c127b574526cf0ecb50365856a38e45a29fedc6
+    "@sap-theming/theming-base-content": "npm:^11.19.0"
+  checksum: 10/5ec3f6eb3a74e9c908b275b2fae7c52f47e13bda26782c05ca6e2771f8471a369587f4b25e5edd0a33ad63e61c37d08cacf9fc773eebeab5550cfbd4ba0d8e20
   languageName: node
   linkType: hard
 
@@ -13652,7 +13652,7 @@ __metadata:
     "@angular/router": "npm:18.0.3"
     "@commitlint/cli": "npm:18.6.1"
     "@commitlint/config-conventional": "npm:18.6.1"
-    "@fundamental-styles/cx": "npm:0.38.0"
+    "@fundamental-styles/cx": "npm:0.39.0-rc.8"
     "@jsdevtools/npm-publish": "npm:3.0.1"
     "@nx/angular": "npm:19.2.3"
     "@nx/devkit": "npm:19.2.3"
@@ -13662,8 +13662,8 @@ __metadata:
     "@nx/js": "npm:19.2.3"
     "@nx/plugin": "npm:19.2.3"
     "@nx/workspace": "npm:19.2.3"
-    "@sap-theming/theming-base-content": "npm:11.18.0"
-    "@sap-ui/common-css": "npm:0.38.0"
+    "@sap-theming/theming-base-content": "npm:11.19.0"
+    "@sap-ui/common-css": "npm:0.39.0-rc.8"
     "@schematics/angular": "npm:18.0.4"
     "@stackblitz/sdk": "npm:1.9.0"
     "@swc-node/register": "npm:1.9.2"
@@ -13709,7 +13709,7 @@ __metadata:
     fast-glob: "npm:3.3.1"
     focus-trap: "npm:7.1.0"
     focus-visible: "npm:5.2.1"
-    fundamental-styles: "npm:0.38.0"
+    fundamental-styles: "npm:0.39.0-rc.8"
     fuse.js: "npm:7.0.0"
     highlight.js: "npm:11.7.0"
     husky: "npm:8.0.2"
@@ -13756,13 +13756,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"fundamental-styles@npm:0.38.0":
-  version: 0.38.0
-  resolution: "fundamental-styles@npm:0.38.0"
+"fundamental-styles@npm:0.39.0-rc.8":
+  version: 0.39.0-rc.8
+  resolution: "fundamental-styles@npm:0.39.0-rc.8"
   peerDependencies:
-    "@sap-theming/theming-base-content": ^11.18.0
-    "@sap-ui/common-css": 0.38.0
-  checksum: 10/5df9e1bc5590ba9af9cdb9c4f6d32507267f4d5f9c985535aac23bddcff32bf23707a64ed367f0b16f80134775afcd432f03fe6d12ed654d64a32d7517f40e7e
+    "@sap-theming/theming-base-content": ^11.19.0
+    "@sap-ui/common-css": 0.39.0-rc.8
+  checksum: 10/5a00326e33a1b6ef233cb4757fde8109afce32950bdc81f3b12d9ea6c942ba7fa972cb919fd777296ddeef7a49e498167ba04671cb3c2adc252e102ce1c821f7
   languageName: node
   linkType: hard
 
