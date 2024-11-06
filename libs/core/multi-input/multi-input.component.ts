@@ -859,12 +859,12 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
 
     /** @hidden */
     private _defaultFilter(contentArray: this['dropdownValues'], searchTerm: string = ''): this['dropdownValues'] {
-        const searchLower = searchTerm.toLocaleLowerCase();
+        const trimmedSearchTerm = searchTerm.trim().toLocaleLowerCase();
         return contentArray.filter((item) => {
             if (item) {
                 const displayedValue = isOptionItem(item) ? item.label : this.displayFn(item);
                 const term = displayedValue?.toLocaleLowerCase() || '';
-                return this.typeAheadMatcher(term, searchLower);
+                return this.typeAheadMatcher(term, trimmedSearchTerm);
             }
         });
     }
