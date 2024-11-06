@@ -28,7 +28,8 @@ import equal from 'fast-deep-equal';
 import { BehaviorSubject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { Breakpoints, NormalizedBreakpoint, ShellbarGroupFlexOptions, ShellbarSizes } from './model/shellbar-sizes';
 import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
-import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT } from './tokens';
+import { ShellbarBrandingComponent } from './shellbar-branding/shellbar-branding.component';
+import { FD_SHELLBAR_BRANDING_COMPONENT, FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT } from './tokens';
 
 /**
  * The shellbar offers consistent, responsive navigation across all products and applications.
@@ -164,6 +165,18 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         return this._searchComponent;
     }
 
+    /**
+     * Search component placed inside the shellbar
+     */
+    @ContentChild(FD_SHELLBAR_BRANDING_COMPONENT, { descendants: true, static: false })
+    set brandingComponent(component: Nullable<ShellbarBrandingComponent>) {
+        this._brandingComponent = component;
+    }
+
+    get brandingComponent(): Nullable<ShellbarBrandingComponent> {
+        return this._brandingComponent;
+    }
+
     /** @hidden */
     @ContentChild(ShellbarActionsComponent)
     private _actions?: ShellbarActionsComponent;
@@ -202,6 +215,9 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     private _searchComponent: Nullable<SearchComponent>;
+
+    /** @hidden */
+    private _brandingComponent: Nullable<ShellbarBrandingComponent>;
 
     /** @hidden */
     private readonly _currentSize$ = new BehaviorSubject<ShellbarSizes>(this._currentSize);

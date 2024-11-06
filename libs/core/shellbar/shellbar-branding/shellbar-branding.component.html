@@ -1,0 +1,20 @@
+<div
+    class="fd-shellbar__branding"
+    role="link"
+    tabindex="0"
+    [attr.aria-label]="ariaLabel"
+    (click)="callback ? callback($event) : ''"
+>
+    <span class="fd-shellbar__logo">
+        <ng-content select="fd-shellbar-logo"></ng-content>
+    </span>
+
+    <div class="fd-shellbar__product">
+        <span class="fd-shellbar__title">
+            <ng-content select="fd-shellbar-title"></ng-content>
+        </span>
+        <span class="fd-shellbar__subtitle">
+            <ng-content select="fd-shellbar-subtitle"></ng-content>
+        </span>
+    </div>
+</div>

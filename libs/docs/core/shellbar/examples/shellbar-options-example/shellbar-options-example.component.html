@@ -1,0 +1,69 @@
+<fd-segmented-button [(ngModel)]="currentSize">
+    <button fd-button value="s">S</button>
+    <button fd-button value="m">M</button>
+    <button fd-button value="l">L</button>
+    <button fd-button value="xl">XL</button>
+</fd-segmented-button>
+<div [style.margin-top.px]="60" [style.maxWidth]="sizesWidth[currentSize] + 'px'">
+    <fd-shellbar [size]="currentSize">
+        <fd-shellbar-branding [callback]="brandingCallback" [ariaLabel]="productMenuControl">
+            <fd-shellbar-logo>
+                <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+            </fd-shellbar-logo>
+            <fd-shellbar-title> {{ productMenuControl }}</fd-shellbar-title>
+            <fd-shellbar-subtitle> Subtitle</fd-shellbar-subtitle>
+        </fd-shellbar-branding>
+
+        <fd-shellbar-context-area>
+            <fd-shellbar-separator fdShellbarHidePriority="1"></fd-shellbar-separator>
+            <fd-product-menu
+                fdShellbarHidePriority="2"
+                [control]="'EMEA'"
+                [closePopoverOnSelect]="true"
+                [items]="productMenuItems"
+            >
+            </fd-product-menu>
+            <fd-shellbar-separator fdShellbarHidePriority="3"></fd-shellbar-separator>
+            <button fd-button fdShellbarHidePriority="4">
+                <fd-icon glyph="globe"></fd-icon>
+            </button>
+            <span
+                fd-object-status
+                [indicationColor]="5"
+                [inverted]="true"
+                label="Environment"
+                title="Environment"
+                aria-label="Object status Environment Inverted"
+                fdShellbarHidePriority="5"
+            ></span>
+        </fd-shellbar-context-area>
+
+        @if (showSearch) {
+            <fdp-search-field
+                placeholder="Search"
+                fdCozy
+                [suggestions]="suggestions"
+                [categories]="categories"
+                (searchSubmit)="onSearchSubmit($event)"
+                (inputChange)="onInputChange($event)"
+            ></fdp-search-field>
+        }
+        <fd-shellbar-actions [user]="user" [userMenu]="userMenu">
+            @for (action of actions; track action) {
+                <fd-shellbar-action
+                    [glyph]="action.glyph"
+                    [callback]="action.callback"
+                    [label]="action.label"
+                    [notificationCount]="action.notificationCount"
+                    [notificationLabel]="action.notificationLabel"
+                ></fd-shellbar-action>
+            }
+            <fd-product-switch>
+                <fd-product-switch-body [products]="productSwitcher" [forceListMode]="currentSize === 's'">
+                </fd-product-switch-body>
+            </fd-product-switch>
+        </fd-shellbar-actions>
+    </fd-shellbar>
+</div>
+<p>&nbsp;</p>
+<button fd-button (click)="showSearch = !showSearch">Toggle search</button>

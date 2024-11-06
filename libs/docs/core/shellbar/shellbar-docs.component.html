@@ -91,3 +91,25 @@
     <fd-shellbar-custom-user-menu-example></fd-shellbar-custom-user-menu-example>
 </component-example>
 <code-example [exampleFiles]="shellbarCustomUserMenuExample"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="options" componentName="shellbar">
+    Shellbar with branding and context area
+</fd-docs-section-title>
+<description>
+    <p>
+        This example demonstrates the usage of the Shellbar component with branding and context area. The branding
+        section includes a logo, title, and subtitle, which can be customized using the
+        <code>fd-shellbar-branding</code> component. The context area allows for additional elements such as separators,
+        buttons, and object statuses, which can be managed using the <code>fd-shellbar-context-area</code> component.
+    </p>
+    <p>
+        The <code>fdShellbarHidePriority</code> directive is used to manage the visibility of elements within the
+        context area based on the available space. Elements with higher priority values will be hidden first when there
+        is not enough space.
+    </p>
+</description>
+<component-example>
+    <fd-shellbar-options-example></fd-shellbar-options-example>
+</component-example>
+<code-example [exampleFiles]="shellbarOptionsExample"></code-example>
