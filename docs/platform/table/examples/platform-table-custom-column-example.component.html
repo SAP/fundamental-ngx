@@ -60,19 +60,19 @@
             </fdp-input>
         </fdp-table-cell>
     </fdp-column>
-    <fdp-column name="price" key="price.value">
+    <fdp-column name="price" key="price.value" [nonInteractive]="true">
         <fdp-table-header *fdpHeaderCellDef>Price</fdp-table-header>
         <fdp-table-cell *fdpCellDef="let item; as: exampleItemType">
             {{ item.price.value }} {{ item.price.currency }}
         </fdp-table-cell>
     </fdp-column>
-    <fdp-column name="status" key="status">
+    <fdp-column name="status" key="status" [nonInteractive]="true">
         <fdp-table-header *fdpHeaderCellDef>Status</fdp-table-header>
         <fdp-table-cell *fdpCellDef="let item; as: exampleItemType">
             <span fd-object-status [status]="item.statusColor" [label]="item.status"></span>
         </fdp-table-cell>
     </fdp-column>
-    <fdp-column name="index" key="index">
+    <fdp-column name="index" key="index" [nonInteractive]="true">
         <fdp-table-header *fdpHeaderCellDef>Row index</fdp-table-header>
         <fdp-table-cell *fdpCellDef="let item; as: exampleItemType; let i = rowIndex">
             <span>Row index {{ i }}</span>
