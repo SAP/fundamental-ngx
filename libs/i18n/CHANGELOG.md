@@ -3,6 +3,73 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.25...v0.53.1-rc.26) (2024-11-05)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+## [0.53.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.24...v0.53.1-rc.25) (2024-10-29)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+## [0.53.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.23...v0.53.1-rc.24) (2024-10-29)
+
+
+### Bug Fixes
+
+* **core:** breadcrumb aria updates per new specs ([#12621](https://github.com/SAP/fundamental-ngx/issues/12621)) ([8ab37fd](https://github.com/SAP/fundamental-ngx/commit/8ab37fdaa0577e395886bd9014507114d0f9093c))
+
+
+
+
+
+## [0.53.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.22...v0.53.1-rc.23) (2024-10-28)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+## [0.53.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.21...v0.53.1-rc.22) (2024-10-28)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+## [0.53.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.20...v0.53.1-rc.21) (2024-10-28)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+## [0.53.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.19...v0.53.1-rc.20) (2024-10-28)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+## [0.53.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.18...v0.53.1-rc.19) (2024-10-28)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
 ## [0.53.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.17...v0.53.1-rc.18) (2024-10-21)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n

@@ -132,6 +132,12 @@ export class MenuComponent
     @ContentChildren(SegmentedButtonOptionDirective)
     _segmentedButtonOptions: QueryList<SegmentedButtonOptionDirective<unknown>>;
 
+    /** @hidden */
+    _navContainerRole = 'menu';
+
+    /** @hidden */
+    _menuListContainerRole = 'none';
+
     /** @hidden Whether use a menu in mobile mode */
     private _mobile = false;
 
