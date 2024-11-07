@@ -5567,10 +5567,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sap-theming/theming-base-content@npm:11.18.0":
-  version: 11.18.0
-  resolution: "@sap-theming/theming-base-content@npm:11.18.0"
-  checksum: 10/4762f45806c4079bd1202635b1cb27517c662450b75c2fc85f63de1aad3fc9d50bd794cca17b25b48be3bceacc08f001f6e252f964f75a521184eed97995df58
+"@sap-theming/theming-base-content@npm:11.20.0":
+  version: 11.20.0
+  resolution: "@sap-theming/theming-base-content@npm:11.20.0"
+  checksum: 10/3a6fbdc3af82cde669005bd0fc8a8030e3032c76d9908e82ded90306fd0dbbf15f6bfc026a2ebf170da58f95717bc887d62039ba4eb2939aa29a2a7f208deaa7
   languageName: node
   linkType: hard
 
@@ -13662,7 +13662,7 @@ __metadata:
     "@nx/js": "npm:19.2.3"
     "@nx/plugin": "npm:19.2.3"
     "@nx/workspace": "npm:19.2.3"
-    "@sap-theming/theming-base-content": "npm:11.18.0"
+    "@sap-theming/theming-base-content": "npm:11.20.0"
     "@sap-ui/common-css": "npm:0.38.0"
     "@schematics/angular": "npm:18.0.4"
     "@stackblitz/sdk": "npm:1.9.0"
