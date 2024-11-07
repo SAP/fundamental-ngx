@@ -9,194 +9,194 @@
 </component-example>
 <code-example [exampleFiles]="defaultFormGenerator"></code-example>
 <separator></separator>
-<!--<fd-docs-section-title id="with-observable" componentName="form-generator">-->
-<!--    Form Generator usage with Observable-based values-->
-<!--</fd-docs-section-title>-->
-<!--<description>-->
-<!--    This example shows default scenario of the Form Generator usage with values received from Observable objects.-->
-<!--</description>-->
-<!--<component-example>-->
-<!--    <fdp-platform-form-generator-observable-example></fdp-platform-form-generator-observable-example>-->
-<!--</component-example>-->
-<!--<code-example [exampleFiles]="defaultObservableFormGenerator"></code-example>-->
-<!--<separator></separator>-->
-<!--<fd-docs-section-title id="custom" componentName="form-generator">-->
-<!--    Form generator usage with custom controls-->
-<!--</fd-docs-section-title>-->
-<!--<description>-->
-<!--    If default set of controls is not enough to cover your needs, <code>FormGeneratorService</code> allows to define-->
-<!--    custom controls and render them for respective question types. In order to make your component work properly, it-->
-<!--    should follow these requirements:-->
-<!--    <ul>-->
-<!--        <li>-->
-<!--            Component <b>must</b> include these-->
-<!--            <code>viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]</code>, which can be imported-->
-<!--            from <code>&#64;fundamental-ngx/platform</code>;-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            Component <b>must</b> inherit <code>BaseDynamicFormGeneratorControl</code>, which can be imported from-->
-<!--            <code>&#64;fundamental-ngx/platform</code>;-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            Inner form control should be wrapped with-->
-<!--            <code>&lt;ng-container [formGroup]=&quot;form&quot;&gt;&lt;/ng-container&gt;</code>-->
-<!--            and <code>&lt;ng-container [formGroupName]=&quot;formGroupName&quot;&gt;&lt;/ng-container&gt;</code>-->
-<!--            for appropriate binding to work.-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--</description>-->
-<!--<component-example>-->
-<!--    <fdp-platform-form-generator-custom-component-example></fdp-platform-form-generator-custom-component-example>-->
-<!--</component-example>-->
-<!--<code-example [exampleFiles]="customFormGenerator"></code-example>-->
-<!--<separator></separator>-->
-<!--<fd-docs-section-title id="programmatic-submit" componentName="form-generator">-->
-<!--    Form Generator programmatic submit-->
-<!--</fd-docs-section-title>-->
-<!--<description>-->
-<!--    If you want to trigger form submission outside form generator component, this example shows how to do it.-->
-<!--</description>-->
-<!--<component-example>-->
-<!--    <fdp-platform-form-generator-programatic-submit></fdp-platform-form-generator-programatic-submit>-->
-<!--</component-example>-->
-<!--<code-example [exampleFiles]="programaticSubmit"></code-example>-->
-<!--<separator></separator>-->
-<!--<fd-docs-section-title id="custom-errors" componentName="form-generator">-->
-<!--    Custom errors in Form Generator-->
-<!--</fd-docs-section-title>-->
-<!--<description>-->
-<!--    Form generator supports multiple ways of defining validation error hints:-->
-<!--    <ul>-->
-<!--        <li>With validation function, which returns string if field is invalid;</li>-->
-<!--        <li>With predefined generic texts</li>-->
-<!--    </ul>-->
-<!--    If you want to change default validation error messages, you can use <code>addValidationErrorHint</code> method in-->
-<!--    <code>FormGeneratorService</code>. This will allow you to override default ones, and add new generic validation-->
-<!--    error messages.-->
-<!--</description>-->
-<!--<component-example>-->
-<!--    <fdp-platform-form-generator-custom-error-example></fdp-platform-form-generator-custom-error-example>-->
-<!--</component-example>-->
-<!--<code-example [exampleFiles]="customErrors"></code-example>-->
-<!--<separator></separator>-->
-<!--<fd-docs-section-title id="field-layout" componentName="form-generator">-->
-<!--    Form Generator with form field column layout and inline layout-->
-<!--</fd-docs-section-title>-->
-<!--<description>-->
-<!--    This example shows arrangement of form-field based on <code>columnLayout</code> values and-->
-<!--    <code>inLineLayout</code> values.-->
-<!--</description>-->
-<!--<component-example>-->
-<!--    <fdp-platform-form-generator-field-layout-example></fdp-platform-form-generator-field-layout-example>-->
-<!--</component-example>-->
-<!--<code-example [exampleFiles]="defaultFormGenerator"></code-example>-->
-<!--<separator></separator>-->
-<!--<fd-docs-section-title id="no-colons" componentName="form-generator">-->
-<!--    Form Generator labels without colons-->
-<!--</fd-docs-section-title>-->
-<!--<description>-->
-<!--    By default, form generator labels rendered with colon at the end of the label. To disable this behaviour please-->
-<!--    specify <code>appendColon: false</code> in <code>guiOptions</code> object.-->
-<!--</description>-->
-<!--<component-example>-->
-<!--    <fdp-platform-form-generator-no-colons-example></fdp-platform-form-generator-no-colons-example>-->
-<!--</component-example>-->
-<!--<code-example [exampleFiles]="noLabelColonsFiles"></code-example>-->
-<!--<separator></separator>-->
-<!--<fd-docs-section-title id="grouping-of-fields" componentName="form-generator">-->
-<!--    Grouping of the fields-->
-<!--</fd-docs-section-title>-->
-<!--<description>-->
-<!--    <p>Form generator supports grouping of the fields.</p>-->
-<!--    <p>To achieve this, developers must pass group object into <code>[formItems]</code> input array.</p>-->
-<!--</description>-->
-<!--<component-example>-->
-<!--    <fdp-platform-form-generator-grouping-example></fdp-platform-form-generator-grouping-example>-->
-<!--</component-example>-->
-<!--<code-example [exampleFiles]="groupingFiles"></code-example>-->
-<!--<separator></separator>-->
-<!--<fd-docs-section-title id="custom-field-layout" componentName="form-generator">-->
-<!--    Custom form field column layout-->
-<!--</fd-docs-section-title>-->
-<!--<description>-->
-<!--    <p>-->
-<!--        Developers can define their own grid layout for the form field the same way as it's done for-->
-<!--        <a routerLink="/platform/form-container">Form container</a>.-->
-<!--    </p>-->
-<!--    <p>Below is the example of how to define custom grid layout for the form field component:</p>-->
-<!--</description>-->
-<!--<component-example>-->
-<!--    <fdp-platform-form-generator-custom-field-layout-example></fdp-platform-form-generator-custom-field-layout-example>-->
-<!--</component-example>-->
-<!--<code-example [exampleFiles]="customLayoutFiles"></code-example>-->
-<!--<fd-docs-section-title id="inline-help" componentName="form-generator"> Inline helps </fd-docs-section-title>-->
-<!--<description>-->
-<!--    <code>DynamicFormItem.guiOptions.hint</code> can be either <code>string</code> or <code>HintOptions</code> for more-->
-<!--    control over appearance of hint. By default target for hints is <code>auto</code>, meaning that it will be added to-->
-<!--    the label on <b>S</b> breakpoint and will be added to the input over <b>S</b>. If gap is not provided, then it will-->
-<!--    automatically add gap with size <b>1</b> and subtract <b>1</b> from-->
-<!--    <code>DynamicFormItem.guiOptions.fieldLayoutConfig</code>. If any of the elements have inline help with target-->
-<!--    either <code>input</code> or <code>auto</code>, every form item in form generator will have gap size minimum of-->
-<!--    1(more, if requested, by you, via <code>DynamicFormItem.guiOptions.gapLayoutConfig</code>).-->
-<!--</description>-->
-<!--<component-example>-->
-<!--    <fdp-platform-form-generator-inline-help-example></fdp-platform-form-generator-inline-help-example>-->
-<!--</component-example>-->
-<!--<code-example [exampleFiles]="inlineHelpFiles"></code-example>-->
-<!--<separator></separator>-->
-<!--<fd-docs-section-title id="default-configuration" componentName="form-generator">-->
-<!--    Form Generator with provided default field configuration-->
-<!--</fd-docs-section-title>-->
-<!--<description>-->
-<!--    This code snipped shows an example module which imports Form Generator module and provides default configuration for-->
-<!--    the fields.-->
-<!--</description>-->
-<!--@if (defaultConfigExample | async; as defaultConfigExampleString) {-->
-<!--    <fd-code-snippet language="typescript" [contentBased]="true">{{ defaultConfigExampleString }}</fd-code-snippet>-->
-<!--}-->
-<!--<fd-docs-section-title id="loading" componentName="form-generator"> Initial loading </fd-docs-section-title>-->
-<!--<description>-->
-<!--    <p>-->
-<!--        Before form is created or no form items are provided it will automatically show skeleton placeholders while data-->
-<!--        is being loaded.-->
-<!--    </p>-->
-<!--    <p>-->
-<!--        Please note, that skeleton placeholders only shown before items are loaded for the first time. Every subsequent-->
-<!--        loading will be shown with busy indicator.-->
-<!--    </p>-->
-<!--</description>-->
-<!--<component-example>-->
-<!--    <fdp-platform-form-generator-loading-example></fdp-platform-form-generator-loading-example>-->
-<!--</component-example>-->
-<!--<code-example [exampleFiles]="loadingFormGenerator"></code-example>-->
-<!--<separator></separator>-->
-<!--<fd-docs-section-title id="advanced" componentName="form-generator">-->
-<!--    Advanced control management-->
-<!--</fd-docs-section-title>-->
-<!--<description>-->
-<!--    <p>There are several options on how to manage the control visibility in Form Generator:</p>-->
-<!--    <ul>-->
-<!--        <li>-->
-<!--            With <code>when</code> function. This function reacts on form value changes and calculates whether the-->
-<!--            particular control should be visible or not;-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            With <code>addControl</code> and <code>removeControl</code> methods. The logic of calling these methods-->
-<!--            should be implemented by the developers;-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            With custom control that has inner form. This method allows developers to create groups of controls that can-->
-<!--            be added or removed on the fly;-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--    <p>-->
-<!--        The difference between <code>addControl/removeControl</code> and control with inner form is that with first-->
-<!--        case, control can be placed into any group of Form Generator, where second option will be bound to the control-->
-<!--        itself.-->
-<!--    </p>-->
-<!--</description>-->
-<!--<component-example>-->
-<!--    <fdp-platform-form-generator-advanced-example></fdp-platform-form-generator-advanced-example>-->
-<!--</component-example>-->
-<!--<code-example [exampleFiles]="advancedFormGenerator"></code-example>-->
-<!--<separator></separator>-->
+<fd-docs-section-title id="with-observable" componentName="form-generator">
+    Form Generator usage with Observable-based values
+</fd-docs-section-title>
+<description>
+    This example shows default scenario of the Form Generator usage with values received from Observable objects.
+</description>
+<component-example>
+    <fdp-platform-form-generator-observable-example></fdp-platform-form-generator-observable-example>
+</component-example>
+<code-example [exampleFiles]="defaultObservableFormGenerator"></code-example>
+<separator></separator>
+<fd-docs-section-title id="custom" componentName="form-generator">
+    Form generator usage with custom controls
+</fd-docs-section-title>
+<description>
+    If default set of controls is not enough to cover your needs, <code>FormGeneratorService</code> allows to define
+    custom controls and render them for respective question types. In order to make your component work properly, it
+    should follow these requirements:
+    <ul>
+        <li>
+            Component <b>must</b> include these
+            <code>viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]</code>, which can be imported
+            from <code>&#64;fundamental-ngx/platform</code>;
+        </li>
+        <li>
+            Component <b>must</b> inherit <code>BaseDynamicFormGeneratorControl</code>, which can be imported from
+            <code>&#64;fundamental-ngx/platform</code>;
+        </li>
+        <li>
+            Inner form control should be wrapped with
+            <code>&lt;ng-container [formGroup]=&quot;form&quot;&gt;&lt;/ng-container&gt;</code>
+            and <code>&lt;ng-container [formGroupName]=&quot;formGroupName&quot;&gt;&lt;/ng-container&gt;</code>
+            for appropriate binding to work.
+        </li>
+    </ul>
+</description>
+<component-example>
+    <fdp-platform-form-generator-custom-component-example></fdp-platform-form-generator-custom-component-example>
+</component-example>
+<code-example [exampleFiles]="customFormGenerator"></code-example>
+<separator></separator>
+<fd-docs-section-title id="programmatic-submit" componentName="form-generator">
+    Form Generator programmatic submit
+</fd-docs-section-title>
+<description>
+    If you want to trigger form submission outside form generator component, this example shows how to do it.
+</description>
+<component-example>
+    <fdp-platform-form-generator-programatic-submit></fdp-platform-form-generator-programatic-submit>
+</component-example>
+<code-example [exampleFiles]="programaticSubmit"></code-example>
+<separator></separator>
+<fd-docs-section-title id="custom-errors" componentName="form-generator">
+    Custom errors in Form Generator
+</fd-docs-section-title>
+<description>
+    Form generator supports multiple ways of defining validation error hints:
+    <ul>
+        <li>With validation function, which returns string if field is invalid;</li>
+        <li>With predefined generic texts</li>
+    </ul>
+    If you want to change default validation error messages, you can use <code>addValidationErrorHint</code> method in
+    <code>FormGeneratorService</code>. This will allow you to override default ones, and add new generic validation
+    error messages.
+</description>
+<component-example>
+    <fdp-platform-form-generator-custom-error-example></fdp-platform-form-generator-custom-error-example>
+</component-example>
+<code-example [exampleFiles]="customErrors"></code-example>
+<separator></separator>
+<fd-docs-section-title id="field-layout" componentName="form-generator">
+    Form Generator with form field column layout and inline layout
+</fd-docs-section-title>
+<description>
+    This example shows arrangement of form-field based on <code>columnLayout</code> values and
+    <code>inLineLayout</code> values.
+</description>
+<component-example>
+    <fdp-platform-form-generator-field-layout-example></fdp-platform-form-generator-field-layout-example>
+</component-example>
+<code-example [exampleFiles]="defaultFormGenerator"></code-example>
+<separator></separator>
+<fd-docs-section-title id="no-colons" componentName="form-generator">
+    Form Generator labels without colons
+</fd-docs-section-title>
+<description>
+    By default, form generator labels rendered with colon at the end of the label. To disable this behaviour please
+    specify <code>appendColon: false</code> in <code>guiOptions</code> object.
+</description>
+<component-example>
+    <fdp-platform-form-generator-no-colons-example></fdp-platform-form-generator-no-colons-example>
+</component-example>
+<code-example [exampleFiles]="noLabelColonsFiles"></code-example>
+<separator></separator>
+<fd-docs-section-title id="grouping-of-fields" componentName="form-generator">
+    Grouping of the fields
+</fd-docs-section-title>
+<description>
+    <p>Form generator supports grouping of the fields.</p>
+    <p>To achieve this, developers must pass group object into <code>[formItems]</code> input array.</p>
+</description>
+<component-example>
+    <fdp-platform-form-generator-grouping-example></fdp-platform-form-generator-grouping-example>
+</component-example>
+<code-example [exampleFiles]="groupingFiles"></code-example>
+<separator></separator>
+<fd-docs-section-title id="custom-field-layout" componentName="form-generator">
+    Custom form field column layout
+</fd-docs-section-title>
+<description>
+    <p>
+        Developers can define their own grid layout for the form field the same way as it's done for
+        <a routerLink="/platform/form-container">Form container</a>.
+    </p>
+    <p>Below is the example of how to define custom grid layout for the form field component:</p>
+</description>
+<component-example>
+    <fdp-platform-form-generator-custom-field-layout-example></fdp-platform-form-generator-custom-field-layout-example>
+</component-example>
+<code-example [exampleFiles]="customLayoutFiles"></code-example>
+<fd-docs-section-title id="inline-help" componentName="form-generator"> Inline helps </fd-docs-section-title>
+<description>
+    <code>DynamicFormItem.guiOptions.hint</code> can be either <code>string</code> or <code>HintOptions</code> for more
+    control over appearance of hint. By default target for hints is <code>auto</code>, meaning that it will be added to
+    the label on <b>S</b> breakpoint and will be added to the input over <b>S</b>. If gap is not provided, then it will
+    automatically add gap with size <b>1</b> and subtract <b>1</b> from
+    <code>DynamicFormItem.guiOptions.fieldLayoutConfig</code>. If any of the elements have inline help with target
+    either <code>input</code> or <code>auto</code>, every form item in form generator will have gap size minimum of
+    1(more, if requested, by you, via <code>DynamicFormItem.guiOptions.gapLayoutConfig</code>).
+</description>
+<component-example>
+    <fdp-platform-form-generator-inline-help-example></fdp-platform-form-generator-inline-help-example>
+</component-example>
+<code-example [exampleFiles]="inlineHelpFiles"></code-example>
+<separator></separator>
+<fd-docs-section-title id="default-configuration" componentName="form-generator">
+    Form Generator with provided default field configuration
+</fd-docs-section-title>
+<description>
+    This code snipped shows an example module which imports Form Generator module and provides default configuration for
+    the fields.
+</description>
+@if (defaultConfigExample | async; as defaultConfigExampleString) {
+    <fd-code-snippet language="typescript" [contentBased]="true">{{ defaultConfigExampleString }}</fd-code-snippet>
+}
+<fd-docs-section-title id="loading" componentName="form-generator"> Initial loading </fd-docs-section-title>
+<description>
+    <p>
+        Before form is created or no form items are provided it will automatically show skeleton placeholders while data
+        is being loaded.
+    </p>
+    <p>
+        Please note, that skeleton placeholders only shown before items are loaded for the first time. Every subsequent
+        loading will be shown with busy indicator.
+    </p>
+</description>
+<component-example>
+    <fdp-platform-form-generator-loading-example></fdp-platform-form-generator-loading-example>
+</component-example>
+<code-example [exampleFiles]="loadingFormGenerator"></code-example>
+<separator></separator>
+<fd-docs-section-title id="advanced" componentName="form-generator">
+    Advanced control management
+</fd-docs-section-title>
+<description>
+    <p>There are several options on how to manage the control visibility in Form Generator:</p>
+    <ul>
+        <li>
+            With <code>when</code> function. This function reacts on form value changes and calculates whether the
+            particular control should be visible or not;
+        </li>
+        <li>
+            With <code>addControl</code> and <code>removeControl</code> methods. The logic of calling these methods
+            should be implemented by the developers;
+        </li>
+        <li>
+            With custom control that has inner form. This method allows developers to create groups of controls that can
+            be added or removed on the fly;
+        </li>
+    </ul>
+    <p>
+        The difference between <code>addControl/removeControl</code> and control with inner form is that with first
+        case, control can be placed into any group of Form Generator, where second option will be bound to the control
+        itself.
+    </p>
+</description>
+<component-example>
+    <fdp-platform-form-generator-advanced-example></fdp-platform-form-generator-advanced-example>
+</component-example>
+<code-example [exampleFiles]="advancedFormGenerator"></code-example>
+<separator></separator>

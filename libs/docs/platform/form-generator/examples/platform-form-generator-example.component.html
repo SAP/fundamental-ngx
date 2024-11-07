@@ -7,27 +7,9 @@
 >
 </fdp-form-generator>
 @if (formCreated) {
-    <fdp-button (click)="openDialog(confirmationDialog)" type="submit" label="Submit form"></fdp-button>
+    <fdp-button (click)="submitForm()" type="submit" label="Submit form"></fdp-button>
 }
 <p>Form created: {{ formCreated }}</p>
 @if (formValue) {
     <p>Form value: {{ formValue | json }}</p>
 }
-<ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #confirmationDialog>
-    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
-        <fd-dialog-header>
-            <h1 id="fd-dialog-header-10" fd-title>The History of Pineapple</h1>
-        </fd-dialog-header>
-
-        <fd-dialog-body>
-            <fdp-form-generator
-                columnLayout="XL2-L2-M2-S1"
-                mainTitle="Default Form Generator example"
-                [formItems]="questions2"
-                (formSubmitted)="onFormSubmitted($event)"
-                (formCreated)="onFormCreated()"
-            >
-            </fdp-form-generator>
-        </fd-dialog-body>
-    </fd-dialog>
-</ng-template>

@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { Observable, of } from 'rxjs';
 
 import { FormsModule } from '@angular/forms';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DatetimeAdapter, FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { FdpFormGroupModule, PlatformInputModule } from '@fundamental-ngx/platform/form';
 import {
@@ -44,8 +43,7 @@ import {
         FdpFormGroupModule,
         PlatformInputModule,
         FormsModule,
-        FdDatetimeModule,
-        ButtonComponent
+        FdDatetimeModule
     ]
 })
 export class PlatformTableInitialStateExampleComponent {
@@ -65,22 +63,13 @@ export class PlatformTableInitialStateExampleComponent {
 
     readonly sortDirectionEnum = SortDirection;
 
-    datetimeAdapter: DatetimeAdapter<any>;
-
     readonly initialFilterBy: CollectionCustomFilter<FilterNumberStrategy>[] = [
-        {
-            field: 'price.value',
-            strategy: 'greaterThanOrEqualTo',
-            value: { min: 100 }
-        }
+        { field: 'price.value', strategy: 'greaterThanOrEqualTo', value: { min: 100 } }
     ];
 
     constructor(datetimeAdapter: DatetimeAdapter<FdDate>) {
-        this.datetimeAdapter = datetimeAdapter;
-        this.source = new TableDataSource(new TableDataProviderExample(this.datetimeAdapter, ITEMS));
+        this.source = new TableDataSource(new TableDataProviderExample(datetimeAdapter));
     }
-
-    protected readonly SortDirection = SortDirection;
 }
 
 export interface ExampleItem {
@@ -94,7 +83,6 @@ export interface ExampleItem {
     statusColor?: string;
     date: FdDate;
     verified: boolean;
-    semantic: string;
 }
 
 /**
@@ -105,15 +93,12 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     items: ExampleItem[] = [];
     totalItems = 0;
 
-    constructor(
-        public dateTimeAdapter: DatetimeAdapter<FdDate>,
-        public listOfany: any[]
-    ) {
+    constructor(public dateTimeAdapter: DatetimeAdapter<FdDate>) {
         super();
     }
 
     fetch(tableState?: TableState): Observable<ExampleItem[]> {
-        this.items = this.listOfany;
+        this.items = [...ITEMS];
 
         // apply searching
         if (tableState?.searchInput) {
@@ -386,8 +371,7 @@ const ITEMS: ExampleItem[] = [
         status: 'Stocked on demand',
         statusColor: 'informative',
         date: new FdDate(2020, 1, 7),
-        verified: true,
-        semantic: 'information'
+        verified: true
     },
     {
         name: 'Astro Laptop 1516',
@@ -399,8 +383,7 @@ const ITEMS: ExampleItem[] = [
         status: 'Out of stock',
         statusColor: 'negative',
         date: new FdDate(2020, 2, 5),
-        verified: true,
-        semantic: 'information'
+        verified: true
     },
     {
         name: 'Astro Phone 6',
@@ -412,8 +395,7 @@ const ITEMS: ExampleItem[] = [
         status: 'Stocked on demand',
         statusColor: 'informative',
         date: new FdDate(2020, 1, 12),
-        verified: true,
-        semantic: 'information'
+        verified: true
     },
     {
         name: 'Beam Breaker B-1',
@@ -425,8 +407,7 @@ const ITEMS: ExampleItem[] = [
         status: 'Stocked on demand',
         statusColor: 'informative',
         date: new FdDate(2020, 11, 24),
-        verified: false,
-        semantic: 'information'
+        verified: false
     },
     {
         name: 'Beam Breaker B-2',
@@ -437,8 +418,7 @@ const ITEMS: ExampleItem[] = [
         },
         status: 'No info',
         date: new FdDate(2020, 10, 23),
-        verified: true,
-        semantic: 'information'
+        verified: true
     },
     {
         name: 'Benda Laptop 1408',
@@ -450,7 +430,123 @@ const ITEMS: ExampleItem[] = [
         status: 'Stocked on demand',
         statusColor: 'informative',
         date: new FdDate(2020, 9, 22),
-        verified: true,
-        semantic: 'information'
+        verified: true
+    },
+    {
+        name: 'Bending Screen 21HD',
+        description: 'nunc nisl duis bibendum',
+        price: {
+            value: 66.46,
+            currency: 'EUR'
+        },
+        status: 'Available',
+        statusColor: 'positive',
+        date: new FdDate(2020, 8, 14),
+        verified: false
+    },
+    {
+        name: 'Blaster Extreme',
+        description: 'quisque ut',
+        price: {
+            value: 436.88,
+            currency: 'USD'
+        },
+        status: 'Available',
+        statusColor: 'positive',
+        date: new FdDate(2020, 8, 15),
+        verified: true
+    },
+    {
+        name: 'Broad Screen 22HD',
+        description: 'ultrices posuere',
+        price: {
+            value: 458.18,
+            currency: 'CNY'
+        },
+        status: 'Available',
+        statusColor: 'positive',
+        date: new FdDate(2020, 5, 4),
+        verified: true
+    },
+    {
+        name: 'Camcorder View',
+        description: 'integer ac leo pellentesque',
+        price: {
+            value: 300.52,
+            currency: 'USD'
+        },
+        status: 'Available',
+        statusColor: 'positive',
+        date: new FdDate(2020, 5, 5),
+        verified: true
+    },
+    {
+        name: 'Cepat Tablet 10.5',
+        description: 'rutrum rutrum neque aenean auctor',
+        price: {
+            value: 365.12,
+            currency: 'NZD'
+        },
+        status: 'No info',
+        date: new FdDate(2020, 5, 6),
+        verified: true
+    },
+    {
+        name: 'Ergo Mousepad',
+        description: 'tortor duis mattis egestas',
+        price: {
+            value: 354.46,
+            currency: 'EUR'
+        },
+        status: 'Stocked on demand',
+        statusColor: 'informative',
+        date: new FdDate(2020, 5, 7),
+        verified: true
+    },
+    {
+        name: 'Ergo Screen E-I',
+        description: 'massa quis augue luctus tincidunt',
+        price: {
+            value: 387.23,
+            currency: 'NZD'
+        },
+        status: 'Stocked on demand',
+        statusColor: 'informative',
+        date: new FdDate(2020, 3, 23),
+        verified: true
+    },
+    {
+        name: 'Ergo Screen E-II',
+        description: 'orci eget',
+        price: {
+            value: 75.86,
+            currency: 'EUR'
+        },
+        status: 'No info',
+        date: new FdDate(2020, 3, 20),
+        verified: false
+    },
+    {
+        name: 'Gaming Monster',
+        description: 'cubilia curae',
+        price: {
+            value: 152.95,
+            currency: 'EGP'
+        },
+        status: 'No info',
+        date: new FdDate(2020, 9, 20),
+        verified: false
+    },
+    {
+        name: 'Gaming Monster Pro',
+        description: 'pharetra magna vestibulum aliquet',
+        price: {
+            value: 213.47,
+            currency: 'MZN'
+        },
+        status: 'Out of stock',
+        statusColor: 'negative',
+        date: new FdDate(2020, 4, 17),
+        verified: false
     }
 ];

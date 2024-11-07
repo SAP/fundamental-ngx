@@ -4,27 +4,30 @@
     [initialVisibleColumns]="['updatedOn', 'name', 'price', 'status']"
     [initialSortBy]="[{ field: 'price.value', direction: sortDirectionEnum.ASC }]"
     [initialFilterBy]="initialFilterBy"
-    [rowNavigatable]="true"
-    [initialGroupBy]="[
-        {
-            field: 'name',
-            direction: SortDirection.NONE,
-            showAsColumn: true
-        }
-    ]"
-    semanticHighlighting="semantic"
+    [initialGroupBy]="[{ field: 'verified', direction: sortDirectionEnum.NONE, showAsColumn: true }]"
 >
     <fdp-table-toolbar title="Order Items"></fdp-table-toolbar>
 
-    <fdp-column name="name" key="name" label="Name" [groupable]="true" [filterable]="true"> </fdp-column>
+    <fdp-column name="name" key="name" label="Name" [sortable]="true" [groupable]="true" [filterable]="true">
+    </fdp-column>
 
-    <fdp-column name="description" key="description" label="Description" [filterable]="true"> </fdp-column>
+    <fdp-column
+        name="description"
+        key="description"
+        label="Description"
+        [sortable]="true"
+        [groupable]="true"
+        [filterable]="true"
+    >
+    </fdp-column>
 
-    <fdp-column name="price" key="price.value" label="Price" [sortable]="true" [filterable]="true"> </fdp-column>
+    <fdp-column name="price" key="price.value" label="Price" [sortable]="true" [groupable]="true" [filterable]="true">
+    </fdp-column>
 
-    <fdp-column name="verified" key="verified" label="Verified"> </fdp-column>
+    <fdp-column name="verified" key="verified" label="Verified" [groupable]="true"> </fdp-column>
 
-    <fdp-column name="status" key="status" label="Status" [filterable]="true"> </fdp-column>
+    <fdp-column name="status" key="status" label="Status" [sortable]="true" [groupable]="true" [filterable]="true">
+    </fdp-column>
 </fdp-table>
 
 <!-- View Settings Dialog-->
