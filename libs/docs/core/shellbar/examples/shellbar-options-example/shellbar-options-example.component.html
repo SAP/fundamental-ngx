@@ -5,6 +5,7 @@
     <button fd-button value="xl">XL</button>
 </fd-segmented-button>
 <div [style.margin-top.px]="60" [style.maxWidth]="sizesWidth[currentSize] + 'px'">
+    <h3>Custom reverse context area hiding ordering</h3>
     <fd-shellbar [size]="currentSize">
         <fd-shellbar-branding [callback]="brandingCallback" [ariaLabel]="productMenuControl">
             <fd-shellbar-logo>
@@ -15,18 +16,19 @@
         </fd-shellbar-branding>
 
         <fd-shellbar-context-area>
-            <fd-shellbar-separator fdShellbarHidePriority="1"></fd-shellbar-separator>
+            <fd-shellbar-separator fdShellbarHidePriority="6"></fd-shellbar-separator>
             <fd-product-menu
-                fdShellbarHidePriority="2"
                 [control]="'EMEA'"
                 [closePopoverOnSelect]="true"
                 [items]="productMenuItems"
+                fdShellbarHidePriority="5"
             >
             </fd-product-menu>
-            <fd-shellbar-separator fdShellbarHidePriority="3"></fd-shellbar-separator>
-            <button fd-button fdShellbarHidePriority="4">
+            <fd-shellbar-separator fdShellbarHidePriority="4"></fd-shellbar-separator>
+            <button fd-button fdShellbarHidePriority="3">
                 <fd-icon glyph="globe"></fd-icon>
             </button>
+            <fd-shellbar-spacer fdShellbarHidePriority="2"></fd-shellbar-spacer>
             <span
                 fd-object-status
                 [indicationColor]="5"
@@ -34,7 +36,7 @@
                 label="Environment"
                 title="Environment"
                 aria-label="Object status Environment Inverted"
-                fdShellbarHidePriority="5"
+                fdShellbarHidePriority="1"
             ></span>
         </fd-shellbar-context-area>
 
@@ -65,5 +67,61 @@
         </fd-shellbar-actions>
     </fd-shellbar>
 </div>
-<p>&nbsp;</p>
-<button fd-button (click)="showSearch = !showSearch">Toggle search</button>
+
+<div [style.margin-top.px]="60" [style.maxWidth]="sizesWidth[currentSize] + 'px'">
+    <h3>Default context area hiding ordering</h3>
+    <fd-shellbar [size]="currentSize">
+        <fd-shellbar-branding [callback]="brandingCallback" [ariaLabel]="productMenuControl">
+            <fd-shellbar-logo>
+                <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+            </fd-shellbar-logo>
+            <fd-shellbar-title> {{ productMenuControl }}</fd-shellbar-title>
+            <fd-shellbar-subtitle> Subtitle</fd-shellbar-subtitle>
+        </fd-shellbar-branding>
+
+        <fd-shellbar-context-area>
+            <fd-shellbar-separator></fd-shellbar-separator>
+            <fd-product-menu [control]="'EMEA'" [closePopoverOnSelect]="true" [items]="productMenuItems">
+            </fd-product-menu>
+            <fd-shellbar-separator></fd-shellbar-separator>
+            <button fd-button>
+                <fd-icon glyph="globe"></fd-icon>
+            </button>
+            <fd-shellbar-spacer></fd-shellbar-spacer>
+            <span
+                fd-object-status
+                [indicationColor]="5"
+                [inverted]="true"
+                label="Environment"
+                title="Environment"
+                aria-label="Object status Environment Inverted"
+            ></span>
+        </fd-shellbar-context-area>
+
+        @if (showSearch) {
+            <fdp-search-field
+                placeholder="Search"
+                fdCozy
+                [suggestions]="suggestions"
+                [categories]="categories"
+                (searchSubmit)="onSearchSubmit($event)"
+                (inputChange)="onInputChange($event)"
+            ></fdp-search-field>
+        }
+        <fd-shellbar-actions [user]="user" [userMenu]="userMenu">
+            @for (action of actions; track action) {
+                <fd-shellbar-action
+                    [glyph]="action.glyph"
+                    [callback]="action.callback"
+                    [label]="action.label"
+                    [notificationCount]="action.notificationCount"
+                    [notificationLabel]="action.notificationLabel"
+                ></fd-shellbar-action>
+            }
+            <fd-product-switch>
+                <fd-product-switch-body [products]="productSwitcher" [forceListMode]="currentSize === 's'">
+                </fd-product-switch-body>
+            </fd-product-switch>
+        </fd-shellbar-actions>
+    </fd-shellbar>
+</div>

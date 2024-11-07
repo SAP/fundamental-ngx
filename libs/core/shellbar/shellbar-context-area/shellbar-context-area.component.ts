@@ -1,15 +1,6 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    Component,
-    ContentChildren,
-    DestroyRef,
-    ElementRef,
-    QueryList
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ResizeObserverService } from '@fundamental-ngx/cdk/utils';
-import { ShellbarHidePriorityDirective } from '../shellbar-overflow-priority.directive';
 
 /**
  * Component representing the context area of the shellbar.
@@ -34,12 +25,8 @@ import { ShellbarHidePriorityDirective } from '../shellbar-overflow-priority.dir
 })
 export class ShellbarContextAreaComponent implements AfterViewInit {
     /** @hidden */
-    @ContentChildren(ShellbarHidePriorityDirective, { descendants: true })
-    priorityElements: QueryList<ShellbarHidePriorityDirective>;
-
-    /** @hidden */
     constructor(
-        private el: ElementRef,
+        public el: ElementRef,
         private resizeObserverService: ResizeObserverService,
         private _destroyRef: DestroyRef
     ) {}
@@ -67,30 +54,77 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
      * 6. Ensuring all elements fit within the available width without recursion.
      */
     updateVisibility(): void {
-        const elements = this.priorityElements.toArray().sort((a, b) => a.priority - b.priority);
+        const elements: { el: HTMLElement; priority: number }[] = this.getElementsWithPriority();
         const availableWidth = this.getAvailableWidth();
-        let allItemsWidth = this.calculateShownElementsWidth(elements);
+        const allItemsWidth = this.calculateShownElementsWidth(elements);
 
-        // Hide elements until the total width is within the available width
+        this.hideElementsIfNeeded(elements, availableWidth, allItemsWidth);
+        this.showElementsIfNeeded(elements, availableWidth, allItemsWidth);
+    }
+
+    /**
+     * Retrieves the child elements with their respective priority values.
+     * The elements are sorted based on their priority, with elements having
+     * higher priority shown first.
+     */
+    private getElementsWithPriority(): { el: HTMLElement; priority: number }[] {
+        return [...this.el.nativeElement.childNodes]
+            .map((element: HTMLElement, index) => {
+                const hasPriorityAttribute = element.hasAttribute && element.hasAttribute('fdShellbarHidePriority');
+                const priority = hasPriorityAttribute
+                    ? parseInt(element.getAttribute('fdShellbarHidePriority')!, 10)
+                    : index + 1;
+
+                return { el: element, priority };
+            })
+            .sort((a, b) => a.priority - b.priority);
+    }
+
+    /**
+     * Hides elements if the total width exceeds the available width.
+     * This method will hide the last shown element iteratively until the total width
+     * fits within the available width.
+     */
+    private hideElementsIfNeeded(
+        elements: {
+            el: HTMLElement;
+            priority: number;
+        }[],
+        availableWidth: number,
+        allItemsWidth: number
+    ): void {
         while (allItemsWidth > availableWidth) {
-            const shownElements = elements.filter((el) => el.el.nativeElement.style.display !== 'none');
+            const shownElements = elements.filter((el) => el.el.style.display !== 'none');
             if (shownElements.length === 0) {
                 break;
             }
-            shownElements[shownElements.length - 1].el.nativeElement.style.display = 'none';
+            shownElements[shownElements.length - 1].el.style.display = 'none';
             allItemsWidth = this.calculateShownElementsWidth(elements);
         }
+    }
 
-        // Show elements if there is enough space
-        let hiddenElements = elements.filter((el) => el.el.nativeElement.style.display === 'none');
+    /**
+     * Shows elements if there is enough space available.
+     * This method will show the first hidden element iteratively as long as there
+     * is sufficient space, and hide the element again if the space is exceeded.
+     */
+    private showElementsIfNeeded(
+        elements: {
+            el: HTMLElement;
+            priority: number;
+        }[],
+        availableWidth: number,
+        allItemsWidth: number
+    ): void {
+        let hiddenElements = elements.filter((el) => el.el.style.display === 'none');
         while (hiddenElements.length > 0 && allItemsWidth <= availableWidth) {
-            hiddenElements[0].el.nativeElement.style.display = '';
+            hiddenElements[0].el.style.display = '';
             allItemsWidth = this.calculateShownElementsWidth(elements);
             if (allItemsWidth > availableWidth) {
-                hiddenElements[0].el.nativeElement.style.display = 'none';
+                hiddenElements[0].el.style.display = 'none';
                 break;
             }
-            hiddenElements = elements.filter((el) => el.el.nativeElement.style.display === 'none');
+            hiddenElements = elements.filter((el) => el.el.style.display === 'none');
         }
     }
 
@@ -106,9 +140,9 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
     /**
      * Calculates the total width of the shown elements, including the gaps.
      */
-    private calculateShownElementsWidth(elements: ShellbarHidePriorityDirective[]): number {
-        const shownElements = elements.filter((el) => el.el.nativeElement.style.display !== 'none');
-        const totalWidth = shownElements.reduce((acc, el) => acc + el.el.nativeElement.clientWidth, 0);
+    private calculateShownElementsWidth(elements: { el: HTMLElement; priority: number }[]): number {
+        const shownElements = elements.filter((el) => el.el.style.display !== 'none');
+        const totalWidth = shownElements.reduce((acc, el) => acc + el.el.clientWidth, 0);
         return totalWidth + this.calculateTotalGap(shownElements.length);
     }
 
