@@ -137,7 +137,7 @@
                 <li role="group" fd-list-group-header [tabindex]="0">
                     <span fd-list-title>{{ group.key }}</span>
                 </li>
-                @for (term of group.value; track term.name) {
+                @for (term of group.value; track term) {
                     <li
                         role="option"
                         fd-list-item
