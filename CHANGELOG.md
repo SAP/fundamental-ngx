@@ -3,6 +3,63 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.29...v0.53.1) (2024-11-06)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.53.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.28...v0.53.1-rc.29) (2024-11-06)
+
+
+### Bug Fixes
+
+* **core:** trim search term in MultiInputComponent to handle leading/trailing spaces ([#12695](https://github.com/SAP/fundamental-ngx/issues/12695)) ([6f110e7](https://github.com/SAP/fundamental-ngx/commit/6f110e7e8c2005fd0fb3df2c249993ea785dbcef)), closes [#12635](https://github.com/SAP/fundamental-ngx/issues/12635)
+
+
+
+
+
+## [0.53.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.27...v0.53.1-rc.28) (2024-11-06)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.53.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.26...v0.53.1-rc.27) (2024-11-06)
+
+
+### Bug Fixes
+
+* **platform:** Update info bar table to reflect selected filters ([#12634](https://github.com/SAP/fundamental-ngx/issues/12634)) ([755d38a](https://github.com/SAP/fundamental-ngx/commit/755d38ab87a618ff7d32c1380c015f4b1b30fc05)), closes [#11783](https://github.com/SAP/fundamental-ngx/issues/11783) [#11783](https://github.com/SAP/fundamental-ngx/issues/11783) [#11783](https://github.com/SAP/fundamental-ngx/issues/11783) [#11783](https://github.com/SAP/fundamental-ngx/issues/11783) [#11783](https://github.com/SAP/fundamental-ngx/issues/11783) [#11783](https://github.com/SAP/fundamental-ngx/issues/11783) [#11783](https://github.com/SAP/fundamental-ngx/issues/11783) [#11783](https://github.com/SAP/fundamental-ngx/issues/11783)
+
+
+
+
+
+## [0.53.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.25...v0.53.1-rc.26) (2024-11-05)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.53.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.24...v0.53.1-rc.25) (2024-10-29)
+
+
+### Bug Fixes
+
+* **platform:** platform table border fix ([#12555](https://github.com/SAP/fundamental-ngx/issues/12555)) ([5b81b9c](https://github.com/SAP/fundamental-ngx/commit/5b81b9c222245cd34b1f9e9ea86dde58e635dba1)), closes [#10729](https://github.com/SAP/fundamental-ngx/issues/10729)
+
+
+
+
+
 ## [0.53.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.23...v0.53.1-rc.24) (2024-10-29)
 
 
