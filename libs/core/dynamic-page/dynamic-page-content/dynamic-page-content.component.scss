@@ -2,13 +2,13 @@ fd-dynamic-page .fd-dynamic-page .fd-dynamic-page__content {
     display: block;
     height: 100%;
 
-    // custom css styles for supporting fdp-table 
+    // custom css styles for supporting fdp-table
     // with sticky header inside dynamic page component
     &:has(.fdp-table) {
         padding-top: 0;
     }
 
-    .fdp-table { 
+    .fdp-table {
         margin-top: 16px;
     }
 }
