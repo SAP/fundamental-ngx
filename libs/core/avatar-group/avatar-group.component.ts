@@ -13,7 +13,8 @@ import {
     ViewChildren,
     ViewEncapsulation,
     computed,
-    inject
+    inject,
+    signal
 } from '@angular/core';
 import {
     DynamicPortalComponent,
@@ -130,6 +131,9 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     _avatarGroupPopoverBody: AvatarGroupOverflowBodyDirective;
 
     /** @hidden */
+    opened = signal(false);
+
+    /** @hidden */
     _contentDirection$ = computed<Direction>(() => (this._rtlService?.rtlSignal() ? 'rtl' : 'ltr'));
 
     /** @hidden */
@@ -138,7 +142,10 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     /** @hidden */
     private readonly _rtlService = inject(RtlService, { optional: true });
 
-    private opened = false;
+    /** @hidden */
+    handlePopoverOpen($event: boolean): void {
+        this.opened.set($event);
+    }
 
     /** @hidden */
     _detectChanges(): void {

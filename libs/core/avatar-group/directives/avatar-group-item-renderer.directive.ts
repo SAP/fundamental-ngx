@@ -1,6 +1,7 @@
 import { CdkPortalOutlet, TemplatePortal } from '@angular/cdk/portal';
-import { Directive, EmbeddedViewRef, Input, OnInit, ViewContainerRef, inject } from '@angular/core';
+import { Directive, EmbeddedViewRef, Input, OnInit, ViewContainerRef, effect, inject } from '@angular/core';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItem, Nullable } from '@fundamental-ngx/cdk/utils';
+import { AvatarGroupComponent } from '@fundamental-ngx/core/avatar-group';
 import { BehaviorSubject, Observable, fromEvent } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 import { AVATAR_GROUP_HOST_CONFIG } from '../tokens';
@@ -118,6 +119,11 @@ export class AvatarGroupItemRendererDirective implements OnInit, FocusableItem {
             filter((element) => !!element),
             switchMap((element) => fromEvent(element as unknown as HTMLElement, 'keydown') as Observable<KeyboardEvent>)
         );
+        effect(() => {
+            const config = this._hostConfig as AvatarGroupComponent;
+            this.setTabbable(config.type === 'individual' || config.opened());
+            this._isFocusable = config.type === 'individual' || config.opened();
+        });
     }
 
     /** @hidden */
