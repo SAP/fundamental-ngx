@@ -128,7 +128,7 @@ export class IconBusinessSuiteInAppSymbolsExampleComponent {
         'products',
         'sidepanel',
         'split-screen',
-        'truck-driver',
+        'truck-driver-2',
         'keep-segment',
         'exclude-segment',
         'separate-segments',
@@ -163,6 +163,7 @@ export class IconBusinessSuiteInAppSymbolsExampleComponent {
         'ploygone',
         'no-filter',
         'grip',
+        'add-component',
         'water',
         'gas',
         'liquid',
@@ -243,6 +244,8 @@ export class IconBusinessSuiteInAppSymbolsExampleComponent {
         'cross-union',
         'empty-union',
         'cross-target',
-        'non-stackable'
+        'non-stackable',
+        'back-to-search',
+        'business-objects-folder'
     ];
 }
