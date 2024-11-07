@@ -25,13 +25,13 @@
                 @for (fields of column | fieldGroupRowValue | keyvalue; track $index) {
                     <div class="fd-col fd-form-group" [class]="xlCol">
                         @if ($fieldGroup(column.value); as value) {
-                            <div class="fd-row">
-                                <div class="fd-col">
-                                    @if (value.label) {
+                            @if (value.label) {
+                                <div class="fd-row">
+                                    <div class="fd-col">
                                         <div fdp-form-group-header [fieldGroup]="$index === 0 ? value : null"></div>
-                                    }
+                                    </div>
                                 </div>
-                            </div>
+                            }
                         }
                         @for (field of fields.value; track trackByFieldName($index, field)) {
                             <div class="fd-row fd-form-item">
