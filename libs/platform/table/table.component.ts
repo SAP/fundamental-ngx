@@ -1603,7 +1603,8 @@ export class TableComponent<T = any>
         }
 
         if (row) {
-            const ctrlKey = (event as MouseEvent | KeyboardEvent).ctrlKey;
+            const e = event as MouseEvent | KeyboardEvent;
+            const ctrlKey = e.ctrlKey || e.metaKey;
             this._emitRowNavigate(row, ctrlKey);
             this._emitRowActivate(row, ctrlKey);
         }
