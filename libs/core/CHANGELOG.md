@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.0...v0.53.2-rc.1) (2024-11-08)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.53.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.53.1...v0.53.2-rc.0) (2024-11-08)
+
+
+### Bug Fixes
+
+* **core:** add a11y improvements for Message Toast ([#12702](https://github.com/SAP/fundamental-ngx/issues/12702)) ([ce6e642](https://github.com/SAP/fundamental-ngx/commit/ce6e642d57955159887ca44a5d5cd3e82a36d337))
+* **core:** combobox dynamic groupFn ([#12612](https://github.com/SAP/fundamental-ngx/issues/12612)) ([c97a794](https://github.com/SAP/fundamental-ngx/commit/c97a79498cd88f87d101fcff2e3e21d1d07eff66)), closes [#12518](https://github.com/SAP/fundamental-ngx/issues/12518) [#12518](https://github.com/SAP/fundamental-ngx/issues/12518)
+
+
+
+
+
 ## [0.53.1](https://github.com/SAP/fundamental-ngx/compare/v0.53.1-rc.29...v0.53.1) (2024-11-06)
 
 **Note:** Version bump only for package @fundamental-ngx/core
