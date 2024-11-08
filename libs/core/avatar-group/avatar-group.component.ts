@@ -8,6 +8,7 @@ import {
     ContentChild,
     ContentChildren,
     Input,
+    OnInit,
     QueryList,
     ViewChild,
     ViewChildren,
@@ -24,7 +25,7 @@ import {
     ResizeObserverDirective,
     RtlService
 } from '@fundamental-ngx/cdk/utils';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { AvatarGroupHostComponent } from './components/avatar-group-host.component';
 import { AvatarGroupOverflowButtonComponent } from './components/avatar-group-overflow-button.component';
@@ -48,7 +49,8 @@ import { AvatarGroupHostConfig } from './types';
         {
             provide: AVATAR_GROUP_HOST_CONFIG,
             useExisting: AvatarGroupComponent
-        }
+        },
+        PopoverService
     ],
     imports: [
         AvatarGroupHostComponent,
@@ -65,7 +67,7 @@ import { AvatarGroupHostConfig } from './types';
         ResizeObserverDirective
     ]
 })
-export class AvatarGroupComponent implements AvatarGroupHostConfig {
+export class AvatarGroupComponent implements AvatarGroupHostConfig, OnInit {
     /**
      * The AvatarGroup control has two group types:
      *
@@ -141,6 +143,14 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
 
     /** @hidden */
     private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    private _popoverService = inject(PopoverService);
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._popoverService._forceFocus.set(true);
+    }
 
     /** @hidden */
     handlePopoverOpen($event: boolean): void {

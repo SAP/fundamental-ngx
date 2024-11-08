@@ -17,7 +17,8 @@ import {
     Renderer2,
     TemplateRef,
     ViewContainerRef,
-    inject
+    inject,
+    signal
 } from '@angular/core';
 import { Observable, Subject, merge } from 'rxjs';
 import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
@@ -45,6 +46,9 @@ export class PopoverService extends BasePopoverClass {
 
     /** Template content displayed inside popover body */
     templateContent: Nullable<TemplateRef<any>>;
+
+    /** Whether to focus the first item on space key press */
+    _forceFocus = signal(false);
 
     /** @hidden */
     _onLoad = new Subject<ElementRef>();
@@ -125,6 +129,13 @@ export class PopoverService extends BasePopoverClass {
 
             if (this._isModal) {
                 this._removeOverlay(this._modalBodyClass, this._modalTriggerClass);
+            }
+        });
+
+        // Add keydown listener for space key
+        this._renderer.listen('document', 'keydown', (event: KeyboardEvent) => {
+            if (event.code === 'Space' && this.isOpen) {
+                this._focusFirstTabbableElement();
             }
         });
     }
