@@ -8176,10 +8176,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axe-core@npm:4.5.2":
-  version: 4.5.2
-  resolution: "axe-core@npm:4.5.2"
-  checksum: 10/90eb1a8acdc98562d2595107682f0854c6716e6d8a542f6769a8f1fccf82ef3ee7a295cee14c6debe54ab18464ab526733fc58e2ac5dbed473116257cf5dbfda
+"axe-core@npm:4.10.2":
+  version: 4.10.2
+  resolution: "axe-core@npm:4.10.2"
+  checksum: 10/a69423b2ff16c15922c4ea7cf9cc5112728a2817bbe0f2cc212248d648885ffd1ba554e3a341dfc289cd9e67fc0d06f333b5c6837c5c38ca6652507381216fc1
   languageName: node
   linkType: hard
 
@@ -13685,7 +13685,7 @@ __metadata:
     "@wdio/sauce-service": "npm:7.16.16"
     "@wdio/spec-reporter": "npm:7.7.3"
     autoprefixer: "npm:^10.4.0"
-    axe-core: "npm:4.5.2"
+    axe-core: "npm:4.10.2"
     axe-html-reporter: "npm:2.2.3"
     axios: "npm:1.6.0"
     chromedriver: "npm:99.0.0"
