@@ -21,6 +21,8 @@ import { toastAnimation } from './constants/message-toast.animation';
         '[attr.aria-label]': 'ariaLabel',
         '[attr.aria-live]': '"polite"',
         '[attr.id]': 'id',
+        role: 'alert',
+        tabindex: '-1',
         class: 'fd-message-toast'
     },
     standalone: true,
