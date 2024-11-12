@@ -27,8 +27,8 @@ export class WizardPo extends CoreBaseComponentPo {
     customerInformationSection = this.wizard + '.fd-container:nth-child(4) ';
     column = '.fd-col';
     savedName = this.customerInformationSection + this.column + ':nth-child(2) ' + 'label:nth-child(1)';
-    savedFirstAdress = this.customerInformationSection + this.column + ':nth-child(2) ' + 'label:nth-child(3)';
-    savedSecAdress = this.customerInformationSection + this.column + ':nth-child(2) ' + 'label:nth-child(5)';
+    savedFirstAdress = this.customerInformationSection + this.column + ':nth-child(2) ' + 'label:nth-child(2)';
+    savedSecAdress = this.customerInformationSection + this.column + ':nth-child(2) ' + 'label:nth-child(3)';
     editButton = this.customerInformationSection + this.column + ':nth-child(3) ' + 'a';
 
     contentSection = this.wizard + '.fd-wizard__content ';
