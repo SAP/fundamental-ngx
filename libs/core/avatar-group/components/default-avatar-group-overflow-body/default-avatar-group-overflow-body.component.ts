@@ -80,10 +80,6 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
      **/
     avatars = input<AvatarGroupItemRendererDirective[]>([]);
 
-    /**
-     * Whether to enable tabindex on the avatars.
-     **/
-
     /** @hidden */
     private _itemClickSubscription: Subscription;
 
