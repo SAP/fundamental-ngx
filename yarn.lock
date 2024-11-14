@@ -13815,7 +13815,7 @@ __metadata:
     fast-glob: "npm:3.3.1"
     focus-trap: "npm:7.1.0"
     focus-visible: "npm:5.2.1"
-    fundamental-styles: "npm:0.38.0"
+    fundamental-styles: "npm:0.39.0-rc.22"
     fuse.js: "npm:7.0.0"
     highlight.js: "npm:11.7.0"
     husky: "npm:8.0.2"
@@ -13862,13 +13862,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"fundamental-styles@npm:0.38.0":
-  version: 0.38.0
-  resolution: "fundamental-styles@npm:0.38.0"
+"fundamental-styles@npm:0.39.0-rc.22":
+  version: 0.39.0-rc.22
+  resolution: "fundamental-styles@npm:0.39.0-rc.22"
   peerDependencies:
-    "@sap-theming/theming-base-content": ^11.18.0
-    "@sap-ui/common-css": 0.38.0
-  checksum: 10/5df9e1bc5590ba9af9cdb9c4f6d32507267f4d5f9c985535aac23bddcff32bf23707a64ed367f0b16f80134775afcd432f03fe6d12ed654d64a32d7517f40e7e
+    "@sap-theming/theming-base-content": ^11.22.0
+    "@sap-ui/common-css": 0.39.0-rc.22
+  checksum: 10/286ea524ca0d35d3d1c076a8ab046be9f8c2a01ced7ad3ddc6c2a4002e5b27f9156fb2c3c18032cd45e2043820b772760a305d75a14a289442241fbc7f71f63e
   languageName: node
   linkType: hard
 

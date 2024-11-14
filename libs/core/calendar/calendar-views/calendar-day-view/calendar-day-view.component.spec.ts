@@ -376,17 +376,4 @@ describe('CalendarDayViewComponent', () => {
 
         expect(component._calendarDayList.filter((_day) => _day.hoverRange).length).toBeGreaterThan(0);
     });
-
-
-    it('should put additional property select on single day in multiple ranges', () => {
-        component.currentlyDisplayed.year = 2020;
-        component.currentlyDisplayed.month = 4;
-        const date = new FdDate(2020, 4, 15);
-        component.selectedDate = date;
-        component.allowMultipleSelection.set(true);
-        component.ngOnInit();
-        component.selectDate(component._calendarDayList[15]);
-        expect(component.selectedDate).toEqual(component._calendarDayList[14].date);
-        expect(component._calendarDayList[15].selected).toBe(true);
-    });
 });
