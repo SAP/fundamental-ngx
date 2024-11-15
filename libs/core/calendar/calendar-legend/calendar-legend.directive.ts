@@ -8,3 +8,13 @@ import { Directive } from '@angular/core';
     }
 })
 export class CalendarLegendDirective {}
+
+@Directive({
+    selector:
+        '[fdCalendarLegendAutoColumn], [fd-calendar-legend-auto-column], [fdCalendarLegendCol], [fd-calendar-legend-col]',
+    standalone: true,
+    host: {
+        class: 'fd-calendar-legend fd-calendar-legend--auto-column'
+    }
+})
+export class CalendarLegendAutoColumnDirective {}

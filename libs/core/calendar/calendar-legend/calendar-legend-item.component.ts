@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+
+let id = 0;
 
 @Component({
     selector: 'fd-calendar-legend-item',
@@ -7,19 +10,49 @@ import { Component, Input } from '@angular/core';
     imports: [CommonModule],
     template: `
         <div class="fd-calendar-legend__item">
-            {{ text }}
+            <span class="fd-calendar-legend__marker" [ngClass]="getAppointmentClass()"></span>
+            <span class="fd-calendar-legend__text">
+                <ng-content></ng-content>
+            </span>
         </div>
     `,
+    host: {
+        class: 'fd-calendar-legend__item',
+        '[id]': 'id',
+        '[style.color]': 'color',
+        '[ngClass]': 'getTypeClass()'
+    },
     styleUrl: './calendar-legend-item.component.scss'
 })
 export class LegendItemComponent {
-    /** The text that should be displayed in the legend container */
-    @Input()
-    text: string;
-
     /** The color of the legend item marker */
-    @Input() color: string;
+    color = input<Nullable<string>>('');
 
     /** The type of the legend item  */
-    @Input() type: string;
+    type = input<Nullable<string>>('');
+
+    /** If the marker is a circle or a square */
+    circle = input<boolean>(false);
+
+    /** The id of the legend item */
+    id = input<string>(`fd-calendar-legend-item-${id++}`);
+
+    /** The aria-label of the legend item */
+    ariaLabel = input<string>();
+
+    /** The aria-labelledby of the legend item */
+    ariaLabelledBy = input<string>();
+
+    /** The aria-describedby of the legend item */
+    ariaDescribedBy = input<string>();
+
+    /** @hidden */
+    getTypeClass(): string {
+        return this.type ? `fd-calendar-legend__item--${this.type}` : '';
+    }
+
+    /** @hidden */
+    getAppointmentClass(): string {
+        return this.circle() ? `fd-calendar-legend__item--appointment` : '';
+    }
 }
