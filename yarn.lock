@@ -217,6 +217,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@angular-eslint/bundled-angular-compiler@npm:18.4.0":
+  version: 18.4.0
+  resolution: "@angular-eslint/bundled-angular-compiler@npm:18.4.0"
+  checksum: 10/604917c726469b2b1657b623ecc093d34730c4cd99a80a0dbaae689c3b749502fe6cd53369b82a3b2fb2502def84951d0fbf6db798c25fa5ffb0228df831d3e3
+  languageName: node
+  linkType: hard
+
 "@angular-eslint/eslint-plugin-template@npm:18.0.1":
   version: 18.0.1
   resolution: "@angular-eslint/eslint-plugin-template@npm:18.0.1"
@@ -247,16 +254,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular-eslint/template-parser@npm:18.0.1":
-  version: 18.0.1
-  resolution: "@angular-eslint/template-parser@npm:18.0.1"
+"@angular-eslint/template-parser@npm:18.4.0":
+  version: 18.4.0
+  resolution: "@angular-eslint/template-parser@npm:18.4.0"
   dependencies:
-    "@angular-eslint/bundled-angular-compiler": "npm:18.0.1"
-    eslint-scope: "npm:^8.0.0"
+    "@angular-eslint/bundled-angular-compiler": "npm:18.4.0"
+    eslint-scope: "npm:^8.0.2"
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: "*"
-  checksum: 10/13d720da96d19e8e7af65727ad2dd859c5f14810edb67f77eb3896b25538eb38d69f1f182cd767c0f88181d4cccd91494d7ebbd564787a61214d0c84901619a1
+  checksum: 10/e91df7eb13c2e6aa02060fcacdb6d8d102f6a2ce803f23df2e5820a1a9f5cc6d35dd908b2420453ac0fe1e6682583f50c1035faaf0e412ebb980fef816660431
   languageName: node
   linkType: hard
 
@@ -12608,13 +12615,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-scope@npm:^8.0.0":
-  version: 8.1.0
-  resolution: "eslint-scope@npm:8.1.0"
+"eslint-scope@npm:^8.0.2":
+  version: 8.2.0
+  resolution: "eslint-scope@npm:8.2.0"
   dependencies:
     esrecurse: "npm:^4.3.0"
     estraverse: "npm:^5.2.0"
-  checksum: 10/4c34a12fbeb0677822a9e93e81f2027e39e6f27557c17bc1e5ff76debbd41e748c3673517561792bda9e276245f89fbfd9b0b24fcec3b33a04ee2196729b3489
+  checksum: 10/cd9ab60d5a68f3a0fcac04d1cff5a7383d0f331964d5f1c446259123caec5b3ccc542284d07846e4f4d1389da77750821cc9a6e1ce18558c674977351666f9a6
   languageName: node
   linkType: hard
 
@@ -13637,7 +13644,7 @@ __metadata:
     "@angular-devkit/schematics": "npm:18.0.4"
     "@angular-eslint/eslint-plugin": "npm:18.0.1"
     "@angular-eslint/eslint-plugin-template": "npm:18.0.1"
-    "@angular-eslint/template-parser": "npm:18.0.1"
+    "@angular-eslint/template-parser": "npm:18.4.0"
     "@angular/animations": "npm:18.0.3"
     "@angular/cdk": "npm:18.0.3"
     "@angular/cli": "npm:18.0.4"
