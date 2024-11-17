@@ -217,19 +217,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular-eslint/eslint-plugin-template@npm:18.0.1":
-  version: 18.0.1
-  resolution: "@angular-eslint/eslint-plugin-template@npm:18.0.1"
+"@angular-eslint/bundled-angular-compiler@npm:18.4.0":
+  version: 18.4.0
+  resolution: "@angular-eslint/bundled-angular-compiler@npm:18.4.0"
+  checksum: 10/604917c726469b2b1657b623ecc093d34730c4cd99a80a0dbaae689c3b749502fe6cd53369b82a3b2fb2502def84951d0fbf6db798c25fa5ffb0228df831d3e3
+  languageName: node
+  linkType: hard
+
+"@angular-eslint/eslint-plugin-template@npm:18.4.0":
+  version: 18.4.0
+  resolution: "@angular-eslint/eslint-plugin-template@npm:18.4.0"
   dependencies:
-    "@angular-eslint/bundled-angular-compiler": "npm:18.0.1"
-    "@angular-eslint/utils": "npm:18.0.1"
-    aria-query: "npm:5.3.0"
-    axobject-query: "npm:4.0.0"
+    "@angular-eslint/bundled-angular-compiler": "npm:18.4.0"
+    "@angular-eslint/utils": "npm:18.4.0"
+    aria-query: "npm:5.3.2"
+    axobject-query: "npm:4.1.0"
   peerDependencies:
-    "@typescript-eslint/utils": ^7.11.0 || ^8.0.0-alpha.20
+    "@typescript-eslint/types": ^7.11.0 || ^8.0.0
+    "@typescript-eslint/utils": ^7.11.0 || ^8.0.0
     eslint: ^8.57.0 || ^9.0.0
     typescript: "*"
-  checksum: 10/bb321fcff83fd82f135b7b6a781f050d0e44a3bec37dcadd9187598adcee91c63a09625632140a03e0f6ab48f3c345fd1192cee96f4b8c7c158dc3efcd03d51b
+  checksum: 10/8db27015f03d42308b29525583a7b952fb9d6ea718364bd2fe74c90dd3889e2b3fe88dcac29f88bf21aba421866c27ebe83be4282d34d9cf3b0ed89a7e1a5815
   languageName: node
   linkType: hard
 
@@ -270,6 +278,19 @@ __metadata:
     eslint: ^8.57.0 || ^9.0.0
     typescript: "*"
   checksum: 10/a593ffc610dc8023d914cbf9a8aefa8e99fa8dd42f65bd727fc76021bb4893c8a7d5b737ff668124ba31f6d4cd9667e994696201c50e93a8ae09a00b427cd3ea
+  languageName: node
+  linkType: hard
+
+"@angular-eslint/utils@npm:18.4.0":
+  version: 18.4.0
+  resolution: "@angular-eslint/utils@npm:18.4.0"
+  dependencies:
+    "@angular-eslint/bundled-angular-compiler": "npm:18.4.0"
+  peerDependencies:
+    "@typescript-eslint/utils": ^7.11.0 || ^8.0.0
+    eslint: ^8.57.0 || ^9.0.0
+    typescript: "*"
+  checksum: 10/e3371905abc526f740cfa325027c5edd082630236df9327a34273771c59c1fb99e0a12bddba15c4b86847341b979170f4bb911c6ddaa3fffae0a9322102b1e7a
   languageName: node
   linkType: hard
 
@@ -7933,16 +7954,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aria-query@npm:5.3.0":
-  version: 5.3.0
-  resolution: "aria-query@npm:5.3.0"
-  dependencies:
-    dequal: "npm:^2.0.3"
-  checksum: 10/c3e1ed127cc6886fea4732e97dd6d3c3938e64180803acfb9df8955517c4943760746ffaf4020ce8f7ffaa7556a3b5f85c3769a1f5ca74a1288e02d042f9ae4e
-  languageName: node
-  linkType: hard
-
-"aria-query@npm:^5.0.0":
+"aria-query@npm:5.3.2, aria-query@npm:^5.0.0":
   version: 5.3.2
   resolution: "aria-query@npm:5.3.2"
   checksum: 10/b2fe9bc98bd401bc322ccb99717c1ae2aaf53ea0d468d6e7aebdc02fac736e4a99b46971ee05b783b08ade23c675b2d8b60e4a1222a95f6e27bc4d2a0bfdcc03
@@ -8242,12 +8254,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axobject-query@npm:4.0.0":
-  version: 4.0.0
-  resolution: "axobject-query@npm:4.0.0"
-  dependencies:
-    dequal: "npm:^2.0.3"
-  checksum: 10/5b0bc6a1b1e9701811adc7682953617f40859838275a68584579b0668902111fd16aef3ec9de3855de1065d8c3c0a1af62f6edc9db25395c722cc21c91780587
+"axobject-query@npm:4.1.0":
+  version: 4.1.0
+  resolution: "axobject-query@npm:4.1.0"
+  checksum: 10/e275dea9b673f71170d914f2d2a18be5d57d8d29717b629e7fedd907dcc2ebdc7a37803ff975874810bd423f222f299c020d28fde40a146f537448bf6bfecb6e
   languageName: node
   linkType: hard
 
@@ -11336,7 +11346,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dequal@npm:^2.0.0, dequal@npm:^2.0.3":
+"dequal@npm:^2.0.0":
   version: 2.0.3
   resolution: "dequal@npm:2.0.3"
   checksum: 10/6ff05a7561f33603df87c45e389c9ac0a95e3c056be3da1a0c4702149e3a7f6fe5ffbb294478687ba51a9e95f3a60e8b6b9005993acd79c292c7d15f71964b6b
@@ -13636,7 +13646,7 @@ __metadata:
     "@angular-devkit/core": "npm:18.0.4"
     "@angular-devkit/schematics": "npm:18.0.4"
     "@angular-eslint/eslint-plugin": "npm:18.0.1"
-    "@angular-eslint/eslint-plugin-template": "npm:18.0.1"
+    "@angular-eslint/eslint-plugin-template": "npm:18.4.0"
     "@angular-eslint/template-parser": "npm:18.0.1"
     "@angular/animations": "npm:18.0.3"
     "@angular/cdk": "npm:18.0.3"
