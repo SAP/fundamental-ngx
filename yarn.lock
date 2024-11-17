@@ -13367,12 +13367,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"focus-trap@npm:7.1.0":
-  version: 7.1.0
-  resolution: "focus-trap@npm:7.1.0"
+"focus-trap@npm:7.6.2":
+  version: 7.6.2
+  resolution: "focus-trap@npm:7.6.2"
   dependencies:
-    tabbable: "npm:^6.0.1"
-  checksum: 10/a41feaa8411e4d32945c5b48c0840a04e646f6259c9ab37ef9aa731e236421bf9c5077809b6a560614927347883a212155075add8842b0f68a436e8b84c5c1e1
+    tabbable: "npm:^6.2.0"
+  checksum: 10/7024d3c994bb1018857fdf0ae24e370b134f20e788eb5aa3315ad4a7de2407b69d56bcf0f05a5a6d86b9360a8609923b9ea80397c2710aca75b1fc88292d75d0
   languageName: node
   linkType: hard
 
@@ -13707,7 +13707,7 @@ __metadata:
     eslint-plugin-prefer-arrow: "npm:1.2.3"
     fast-deep-equal: "npm:3.1.3"
     fast-glob: "npm:3.3.1"
-    focus-trap: "npm:7.1.0"
+    focus-trap: "npm:7.6.2"
     focus-visible: "npm:5.2.1"
     fundamental-styles: "npm:0.38.0"
     fuse.js: "npm:7.0.0"
@@ -23259,7 +23259,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tabbable@npm:^6.0.1":
+"tabbable@npm:^6.2.0":
   version: 6.2.0
   resolution: "tabbable@npm:6.2.0"
   checksum: 10/980fa73476026e99dcacfc0d6e000d41d42c8e670faf4682496d30c625495e412c4369694f2a15cf1e5252d22de3c396f2b62edbe8d60b5dadc40d09e3f2dde3
