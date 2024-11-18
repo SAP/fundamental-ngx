@@ -46,7 +46,7 @@
             <fd-grid-list>
                 @for (item of list; track item) {
                     <fd-grid-list-item
-                        (click)="test()"
+                        (press)="test()"
                         [type]="item.type"
                         [counter]="item.counter"
                         [title]="item.title"
