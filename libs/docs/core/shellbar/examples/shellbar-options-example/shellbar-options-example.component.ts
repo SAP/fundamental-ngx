@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { GenericTagComponent, IconComponent, ObjectStatusComponent } from '@fundamental-ngx/core';
+import {
+    GenericTagComponent,
+    IconComponent,
+    ObjectStatusComponent,
+    ToolbarSpacerDirective
+} from '@fundamental-ngx/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
@@ -57,7 +62,8 @@ import {
         GenericTagComponent,
         ObjectStatusComponent,
         FdTranslatePipe,
-        IconComponent
+        IconComponent,
+        ToolbarSpacerDirective
     ]
 })
 export class ShellbarOptionsExampleComponent {

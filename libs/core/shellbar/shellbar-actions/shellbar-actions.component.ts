@@ -6,13 +6,12 @@ import {
     ContentChildren,
     EventEmitter,
     HostBinding,
+    inject,
     Input,
     OnDestroy,
     Output,
     QueryList,
-    ViewChild,
-    ViewEncapsulation,
-    inject
+    ViewChild
 } from '@angular/core';
 
 import { ComboboxInterface, FD_COMBOBOX_COMPONENT } from '@fundamental-ngx/core/combobox';
@@ -25,7 +24,7 @@ import { ShellbarSizes } from '../model/shellbar-sizes';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
-import { ShellbarActionsMobileComponent } from '../shellbar-actions-mobile/shellbar-actions-mobile.component';
+import { ShellbarToolbarComponent } from '../shellbar-toolbar/shellbar-toolbar.component';
 import { FD_SHELLBAR_ACTION_COMPONENT, FD_SHELLBAR_COMPONENT } from '../tokens';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
 
@@ -48,18 +47,23 @@ import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.compo
  * </fd-shellbar-actions>
  * ```
  */
-
 @Component({
     selector: 'fd-shellbar-actions',
     templateUrl: './shellbar-actions.component.html',
-    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[class.fd-shellbar__group]': 'true',
         '[class.fd-shellbar__group--actions]': 'true'
     },
+    styles: [
+        `
+            :host {
+                flex: 1;
+            }
+        `
+    ],
     standalone: true,
-    imports: [PortalModule, ShellbarActionsMobileComponent, ShellbarActionComponent, ShellbarUserMenuComponent]
+    imports: [PortalModule, ShellbarToolbarComponent, ShellbarActionComponent, ShellbarUserMenuComponent]
 })
 export class ShellbarActionsComponent implements OnDestroy {
     /** The user data. */

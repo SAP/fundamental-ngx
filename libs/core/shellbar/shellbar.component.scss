@@ -33,3 +33,25 @@ fd-shellbar-actions {
 .fd-shellbar .fd-shellbar__group .fd-shellbar__button.fd-shellbar__button--menu {
     --fdButtonColor: var(--sapShell_TextColor);
 }
+
+.fd-shellbar__group--context-area > * {
+    flex-shrink: 0;
+}
+
+.fd-shellbar.fd-shellbar--s {
+    gap: 0;
+
+    .fd-shellbar__group--actions {
+        gap: 0;
+    }
+
+    .fd-shellbar__action.fd-shellbar__action--mobile {
+        margin-inline: 0.25rem;
+    }
+
+    .fd-object-status {
+        flex-shrink: 0;
+        white-space: nowrap;
+        min-width: fit-content;
+    }
+}

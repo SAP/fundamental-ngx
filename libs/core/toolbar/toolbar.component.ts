@@ -10,19 +10,22 @@ import {
     contentChildren,
     DestroyRef,
     ElementRef,
+    EventEmitter,
     forwardRef,
     HostBinding,
     inject,
     Inject,
+    input,
     Input,
     Optional,
+    Output,
     QueryList,
     signal,
     SkipSelf,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
+import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader, HeadingLevel } from '@fundamental-ngx/core/shared';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
@@ -34,14 +37,13 @@ import {
     OverflowPriority,
     ResizeObserverService
 } from '@fundamental-ngx/cdk/utils';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ButtonBadgeDirective, ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     ContentDensityMode,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import { TitleComponent, TitleToken } from '@fundamental-ngx/core/title';
 import { BehaviorSubject, combineLatest, map, Observable, startWith } from 'rxjs';
 import { ToolbarItem } from './abstract-toolbar-item.class';
@@ -86,7 +88,8 @@ export const enum OverflowPriorityEnum {
         PopoverModule,
         ButtonComponent,
         DynamicPortalComponent,
-        TitleComponent
+        TitleComponent,
+        ButtonBadgeDirective
     ]
 })
 export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssClassBuilder, AfterContentInit {
@@ -167,6 +170,13 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     @HostBinding('attr.aria-labelledby')
     ariaLabelledBy: string;
 
+    /**
+     * Event emitted whenever the overflow state changes.
+     * Emits an array of items currently in the overflow.
+     */
+    @Output()
+    overflowChanged = new EventEmitter<ToolbarItem[]>();
+
     /** @hidden */
     @ViewChild('titleElement', { read: ElementRef })
     titleElement: ElementRef<HTMLHeadElement>;
@@ -194,6 +204,9 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
 
     /** @hidden */
     overflownItems: ToolbarItem[] = [];
+
+    /** @hidden */
+    badgeCount = input<string | number>();
 
     /** @hidden */
     spacerUsed = signal(false);
@@ -325,6 +338,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         );
         this.overflowItems$.subscribe((items) => {
             this.overflownItems = items;
+            this.overflowChanged.emit(items);
             this._cd.detectChanges();
         });
         this.buildComponentCssClass();

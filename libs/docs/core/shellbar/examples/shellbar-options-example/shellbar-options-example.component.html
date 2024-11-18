@@ -79,25 +79,6 @@
             <fd-shellbar-subtitle> Subtitle</fd-shellbar-subtitle>
         </fd-shellbar-branding>
 
-        <fd-shellbar-context-area>
-            <fd-shellbar-separator></fd-shellbar-separator>
-            <fd-product-menu [control]="'EMEA'" [closePopoverOnSelect]="true" [items]="productMenuItems">
-            </fd-product-menu>
-            <fd-shellbar-separator></fd-shellbar-separator>
-            <button fd-button>
-                <fd-icon glyph="globe"></fd-icon>
-            </button>
-            <fd-shellbar-spacer></fd-shellbar-spacer>
-            <span
-                fd-object-status
-                [indicationColor]="5"
-                [inverted]="true"
-                label="Environment"
-                title="Environment"
-                aria-label="Object status Environment Inverted"
-            ></span>
-        </fd-shellbar-context-area>
-
         @if (showSearch) {
             <fdp-search-field
                 placeholder="Search"

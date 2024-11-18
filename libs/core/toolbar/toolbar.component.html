@@ -8,17 +8,14 @@
     @if (!spacerUsed()) {
         <fd-toolbar-spacer></fd-toolbar-spacer>
     }
-    <fd-toolbar-separator></fd-toolbar-separator>
+    <!--    <fd-toolbar-separator></fd-toolbar-separator>-->
     <fd-popover placement="bottom-end" [noArrow]="true" class="fd-popover">
         <fd-popover-control>
-            <button
-                fd-button
-                title="More"
-                aria-label="More"
-                aria-haspopup="true"
-                fdType="transparent"
-                glyph="overflow"
-            ></button>
+            <button fd-button title="More" aria-label="More" aria-haspopup="true" fdType="transparent" glyph="overflow">
+                @if (badgeCount(); as badgeCount) {
+                    <fd-button-badge [content]="badgeCount"></fd-button-badge>
+                }
+            </button>
         </fd-popover-control>
         <fd-popover-body>
             <div class="fd-toolbar__overflow">
