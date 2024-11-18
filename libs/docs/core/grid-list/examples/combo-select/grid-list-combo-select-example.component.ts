@@ -125,4 +125,8 @@ export class GridListComboSelectComponent {
             alert('Deleted item event ' + event.value);
         }
     }
+
+    test() {
+        alert();
+    }
 }
