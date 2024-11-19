@@ -8,11 +8,10 @@
         [badgeCount]="totalNotifications"
         (overflowChanged)="handleOverflow($event)"
     >
+        <fd-toolbar-spacer></fd-toolbar-spacer>
         @if (searchExists) {
             <button fd-toolbar-item fd-button fdType="transparent" glyph="search" (click)="showSearch.emit()"></button>
         }
-
-        <fd-toolbar-spacer></fd-toolbar-spacer>
 
         @for (action of shellbarActions; track action) {
             <button

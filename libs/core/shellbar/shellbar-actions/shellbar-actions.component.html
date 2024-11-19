@@ -13,9 +13,6 @@
 <div class="fd-shellbar__action fd-shellbar__action--desktop">
     <ng-content></ng-content>
 </div>
-@if (_addSearchIcon && !showSearch) {
-    <fd-shellbar-action glyph="search" [callback]="_toggleSearch"></fd-shellbar-action>
-}
 <div hidden>
     <ng-content select="fd-shellbar-action"></ng-content>
 </div>
