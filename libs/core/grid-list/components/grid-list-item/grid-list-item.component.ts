@@ -217,6 +217,12 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     navigate = new EventEmitter<GridListItemOutputEvent<T>>();
 
     /**
+     * Event is thrown on grid list item click.
+     */
+    @Output()
+    cardClick = new EventEmitter<GridListItemOutputEvent<T>>();
+
+    /**
      * Event is thrown, when state is error, not used GridListItemFooterBarComponent
      * and Draft button was pressed
      */
@@ -427,7 +433,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         }
 
         if (this.type !== 'active' && this.type !== 'detailsAndActive' && this.type !== 'navigation') {
-            this.press.emit(this._outputEventValue);
+            this.cardClick.emit(this._outputEventValue);
             return;
         }
 
@@ -435,6 +441,8 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
             this._onNavigate(event);
             return;
         }
+        this.press.emit(this._outputEventValue);
+        this.cardClick.emit(this._outputEventValue);
     }
     /** @hidden */
     _onKeyDown(event: KeyboardEvent): void {

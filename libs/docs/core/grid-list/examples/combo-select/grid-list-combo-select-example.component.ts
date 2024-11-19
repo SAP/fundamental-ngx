@@ -126,7 +126,7 @@ export class GridListComboSelectComponent {
         }
     }
 
-    test() {
-        alert();
+    onCardClick() {
+        alert('Card clicked');
     }
 }
