@@ -24,7 +24,7 @@ import { ShellbarSizes } from '../model/shellbar-sizes';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
-import { ShellbarToolbarComponent } from '../shellbar-toolbar/shellbar-toolbar.component';
+import { ShellbarActionsToolbarComponent } from '../shellbar-actions-toolbar/shellbar-actions-toolbar.component';
 import { FD_SHELLBAR_ACTION_COMPONENT, FD_SHELLBAR_COMPONENT } from '../tokens';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
 
@@ -63,72 +63,59 @@ import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.compo
         `
     ],
     standalone: true,
-    imports: [PortalModule, ShellbarToolbarComponent, ShellbarActionComponent, ShellbarUserMenuComponent]
+    imports: [PortalModule, ShellbarActionsToolbarComponent, ShellbarActionComponent, ShellbarUserMenuComponent]
 })
 export class ShellbarActionsComponent implements OnDestroy {
     /** The user data. */
-    @Input()
-    user: ShellbarUser;
+    @Input() user: ShellbarUser;
 
     /** The user menu data. */
-    @Input()
-    userMenu: ShellbarUserMenu[];
+    @Input() userMenu: ShellbarUserMenu[];
 
-    /** When set to true, popover list will be closed after selecting the option */
-    @Input()
-    closePopoverOnSelect = false;
+    /** Whether to close the popover after selecting an option. */
+    @Input() closePopoverOnSelect = false;
 
-    /**
-     * Event emitted when search opened.
-     */
-    @Output()
-    searchOpen = new EventEmitter<boolean>();
+    /** Event emitted when the search is toggled. */
+    @Output() searchOpen = new EventEmitter<boolean>();
 
-    /** @hidden */
-    @ContentChildren(FD_SHELLBAR_ACTION_COMPONENT)
-    shellbarActions: QueryList<ShellbarActionComponent>;
+    /** Shellbar action components projected into the content. */
+    @ContentChildren(FD_SHELLBAR_ACTION_COMPONENT) shellbarActions: QueryList<ShellbarActionComponent>;
 
-    /** @hidden */
-    @ContentChild(ShellbarUserMenuComponent)
-    userComponent: ShellbarUserMenuComponent;
+    /** Shellbar user menu component projected into the content. */
+    @ContentChild(ShellbarUserMenuComponent) userComponent: ShellbarUserMenuComponent;
 
-    /** @hidden */
-    @ViewChild(ShellbarUserMenuComponent)
-    userComponentView: ShellbarUserMenuComponent;
+    /** Shellbar user menu component view child. */
+    @ViewChild(ShellbarUserMenuComponent) userComponentView: ShellbarUserMenuComponent;
 
-    /** @hidden */
-    @ContentChild(FD_COMBOBOX_COMPONENT)
-    comboboxComponent: ComboboxInterface;
+    /** Combobox component projected into the content. */
+    @ContentChild(FD_COMBOBOX_COMPONENT) comboboxComponent: ComboboxInterface;
 
-    /** @hidden */
-    @ContentChild(FD_PRODUCT_SWITCH_COMPONENT, { static: false })
-    productSwitchComponent: ProductSwitchComponent;
+    /** Product switch component projected into the content. */
+    @ContentChild(FD_PRODUCT_SWITCH_COMPONENT, { static: false }) productSwitchComponent: ProductSwitchComponent;
 
-    /** @hidden */
-    @ViewChild(CdkPortalOutlet)
-    _portalOutlet: Nullable<CdkPortalOutlet>;
+    /** Portal outlet for search. */
+    @ViewChild(CdkPortalOutlet) _portalOutlet: Nullable<CdkPortalOutlet>;
 
-    /** @hidden */
+    /** Whether to add the search icon. */
     _addSearchIcon = false;
 
-    /** @hidden */
+    /** Portal for search component. */
     _searchPortal: DomPortal;
 
-    /**
-     * Whether to show the search field.
-     */
+    /** Whether to show the search field. */
     showSearch = false;
 
-    /** @hidden */
+    /** Current size of the shellbar. */
     currentSize: ShellbarSizes;
 
     /** @hidden */
     private readonly _cd = inject(ChangeDetectorRef);
 
     /** @hidden */
-    private readonly _shellbar = inject(FD_SHELLBAR_COMPONENT, {
-        optional: true
-    });
+    private readonly _shellbar = inject(FD_SHELLBAR_COMPONENT, { optional: true });
+
+    /** @hidden */
+    private _searchComponent: Nullable<SearchComponent>;
 
     /** @hidden */
     @HostBinding('class.fd-shellbar__group--shrink')
@@ -143,7 +130,9 @@ export class ShellbarActionsComponent implements OnDestroy {
     }
 
     /** @hidden */
-    private _searchComponent: Nullable<SearchComponent>;
+    public get userItem(): ShellbarUser {
+        return this.userComponent ? this.userComponent.user : this.user;
+    }
 
     /** @hidden */
     _toggleSearch: () => void = () => {
@@ -151,20 +140,11 @@ export class ShellbarActionsComponent implements OnDestroy {
     };
 
     /** @hidden */
-    public get userItem(): ShellbarUser {
-        if (this.userComponent) {
-            return this.userComponent.user;
-        } else {
-            return this.user;
-        }
-    }
-
-    /** @hidden */
     ngOnDestroy(): void {
         this._portalOutlet?.dispose();
     }
 
-    /** @hidden */
+    /** Attach the search portal. */
     _attachSearch(portal: DomPortal, searchComponent: Nullable<SearchComponent>, size: ShellbarSizes): void {
         this._searchPortal = portal;
         this._addSearchIcon = true;
@@ -174,39 +154,32 @@ export class ShellbarActionsComponent implements OnDestroy {
         this._cd.detectChanges();
     }
 
-    /** @hidden */
+    /** Detach the search portal. */
     _detachSearch(): void {
-        if (this._portalOutlet?.hasAttached()) {
-            this._portalOutlet.detach();
-        }
-
+        this._portalOutlet?.detach();
         this._addSearchIcon = false;
-
         this._cd.detectChanges();
     }
 
     /** @hidden */
     _triggerItems(): void {
-        if (!this.closePopoverOnSelect) {
-            return;
+        if (this.closePopoverOnSelect) {
+            this.userComponentView?.menu.close();
+            this.userComponent?.menu.close();
         }
-        this.userComponentView?.menu.close();
-        this.userComponent?.menu.close();
     }
 
-    /** @hidden */
+    /** Set the visibility of the search field. */
     _setSearchVisibility(visible: boolean): void {
         this.showSearch = visible;
         this.searchOpen.emit(this.showSearch);
 
-        if (this.currentSize === 's') {
-            return;
+        if (this.currentSize !== 's') {
+            this._toggleSearchPortal(visible, visible);
         }
-
-        this._toggleSearchPortal(visible, visible);
     }
 
-    /** @hidden */
+    /** Toggle the search portal. */
     private _toggleSearchPortal(visible: boolean, focusSearch = false): void {
         if (visible) {
             this._portalOutlet?.detach();
@@ -214,7 +187,9 @@ export class ShellbarActionsComponent implements OnDestroy {
         } else {
             this._portalOutlet?.detach();
         }
+
         this._cd.detectChanges();
+
         if (focusSearch) {
             this._searchComponent?.focus();
         }

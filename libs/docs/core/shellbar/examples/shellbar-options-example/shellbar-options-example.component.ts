@@ -210,7 +210,7 @@ export class ShellbarOptionsExampleComponent {
             glyph: 'feedback',
             callback: this.actionFeedbackCallback,
             label: 'Feedback',
-            notificationCount: 0,
+            notificationCount: 15,
             notificationLabel: 'User Feedback'
         },
         {
