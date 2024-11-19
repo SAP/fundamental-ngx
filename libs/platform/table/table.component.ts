@@ -1873,6 +1873,11 @@ export class TableComponent<T = any>
             return String(value); // Handle non-object values
         }
 
+        // handle array
+        if (Array.isArray(value)) {
+            return value.map((val) => this._formatParams(val)).join(', ');
+        }
+
         return Object.entries(value)
             .map(([key, val]) => `${key}: ${this._formatParams(val)}`) // Recursive call for nested objects
             .join(', ');
