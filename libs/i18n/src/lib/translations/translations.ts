@@ -168,10 +168,10 @@ export default {
         decreasePeriodLabel: 'Decrease period',
         navigationInstruction:
             'To move between items in this list, press top arrow or bottom arrow. To switch between lists press left arrow or right arrow.',
-        nightLabel: 'night',
-        morningLabel: 'morning',
-        afternoonLabel: 'afternoon',
-        eveningLabel: 'evening'
+        nightLabel: 'at night',
+        morningLabel: 'in the morning',
+        afternoonLabel: 'in the afternoon',
+        eveningLabel: 'in the evening'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Time picker input',
@@ -363,6 +363,10 @@ export default {
         synchronizeButtonTitle: 'Synchronize',
         searchSuggestionMessage: '{count} suggestions found.',
         searchSuggestionNavigateMessage: 'use up and down arrows to navigate'
+    },
+    platformSettingsGenerator: {
+        settingsLabel: 'Settings',
+        searchLabel: 'Search'
     },
     platformSwitch: {
         ariaLabel: 'Switch input'

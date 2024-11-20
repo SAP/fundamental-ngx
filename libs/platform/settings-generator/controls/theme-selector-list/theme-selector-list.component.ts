@@ -1,7 +1,16 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation, forwardRef } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Input,
+    OnInit,
+    ViewEncapsulation,
+    forwardRef,
+    inject
+} from '@angular/core';
 import { ClickedDirective } from '@fundamental-ngx/cdk/utils';
 import { ListModule } from '@fundamental-ngx/core/list';
+import { ThemingService } from '@fundamental-ngx/core/theming';
 import {
     BaseDynamicFormGeneratorControl,
     dynamicFormFieldProvider,
@@ -23,6 +32,11 @@ export class ThemeSelectorListComponent extends BaseDynamicFormGeneratorControl 
     currentTheme: string;
 
     /** @hidden */
+    private readonly _themingService = inject(ThemingService, {
+        optional: true
+    });
+
+    /** @hidden */
     ngOnInit(): void {
         this.currentTheme = this.formItem.default;
     }
@@ -32,6 +46,7 @@ export class ThemeSelectorListComponent extends BaseDynamicFormGeneratorControl 
         const control = this.form.get([this.formGroupName, this.name]);
         this.currentTheme = value;
         control?.setValue(value);
+        this._themingService?.setTheme(value);
     }
 }
 

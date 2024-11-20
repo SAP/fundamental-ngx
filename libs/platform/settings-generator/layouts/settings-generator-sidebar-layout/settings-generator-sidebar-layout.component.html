@@ -5,50 +5,72 @@
     [style.min-width]="_mobileSidebarVisible ? null : _sidebarWidth.minWidth"
     [style.max-width]="_mobileSidebarVisible ? null : _sidebarWidth.maxWidth"
 >
-    <ul fd-list [byline]="true" [navigationIndicator]="true">
-        @for (item of settings?.items; track item; let i = $index) {
-            <li (click)="_setSelectedIndex(i)" fd-list-item [selected]="i === _selectedIndex" [id]="item.id">
-                <a fd-list-link [navigated]="i === _selectedIndex">
-                    @if (item.thumbnail) {
-                        <span fd-list-thumbnail>
-                            <fdp-settings-generator-sidebar-icon
-                                [thumbnail]="item.thumbnail"
-                            ></fdp-settings-generator-sidebar-icon>
-                        </span>
-                    }
-                    <div fd-list-content>
-                        @if (item.title | fdkAsyncOrSync; as titleValue) {
-                            <div fd-list-title>{{ titleValue }}</div>
-                        } @else {
-                            <div fd-list-title>
-                                <fd-skeleton
-                                    height="16px"
-                                    type="rectangle"
-                                    width="40%"
-                                    textLines="1"
-                                    [style.margin]="'auto 0'"
-                                ></fd-skeleton>
-                            </div>
+    <div class="fdp-settings-generator__search-header">
+        <h3 fd-title class="fdp-settings-generator__title">
+            {{ 'platformSettingsGenerator.settingsLabel' | fdTranslate }}
+        </h3>
+        <!-- TODO: implement search input
+        @if (_displaySettingsSearchInput()) {
+            <fd-input-group
+                type="search"
+                glyph="search"
+                [glyphAriaLabel]="'platformSettingsGenerator.searchLabel' | fdTranslate"
+                [attr.placeholder]="'platformSettingsGenerator.searchLabel' | fdTranslate"
+                [button]="true"
+                [disabled]="false"
+                [(ngModel)]="searchTerm"
+                class="fdp-settings-generator__search-input"
+            >
+            </fd-input-group>
+        }
+        -->
+    </div>
+    <div class="fdp-settings-generator__list-container" #listElement>
+        <ul fd-list [byline]="true" [navigationIndicator]="true">
+            @for (item of settings?.items; track item; let i = $index) {
+                <li (click)="_setSelectedIndex(i)" fd-list-item [selected]="i === _selectedIndex" [id]="item.id">
+                    <a fd-list-link [navigated]="i === _selectedIndex">
+                        @if (item.thumbnail) {
+                            <span fd-list-thumbnail>
+                                <fdp-settings-generator-sidebar-icon
+                                    [thumbnail]="item.thumbnail"
+                                ></fdp-settings-generator-sidebar-icon>
+                            </span>
                         }
-                        @if (item.description) {
-                            <div fd-list-byline>
-                                @if (item.description | fdkAsyncOrSync; as descriptionValue) {
-                                    {{ descriptionValue }}
-                                } @else {
+                        <div fd-list-content>
+                            @if (item.title | fdkAsyncOrSync; as titleValue) {
+                                <div fd-list-title>{{ titleValue }}</div>
+                            } @else {
+                                <div fd-list-title>
                                     <fd-skeleton
-                                        type="text"
-                                        width="60%"
+                                        height="16px"
+                                        type="rectangle"
+                                        width="40%"
                                         textLines="1"
                                         [style.margin]="'auto 0'"
                                     ></fd-skeleton>
-                                }
-                            </div>
-                        }
-                    </div>
-                </a>
-            </li>
-        }
-    </ul>
+                                </div>
+                            }
+                            @if (item.description) {
+                                <div fd-list-byline>
+                                    @if (item.description | fdkAsyncOrSync; as descriptionValue) {
+                                        {{ descriptionValue }}
+                                    } @else {
+                                        <fd-skeleton
+                                            type="text"
+                                            width="60%"
+                                            textLines="1"
+                                            [style.margin]="'auto 0'"
+                                        ></fd-skeleton>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
 </div>
 <div
     class="fdp-settings-generator__content"
