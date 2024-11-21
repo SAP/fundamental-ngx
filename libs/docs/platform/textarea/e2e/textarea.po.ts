@@ -27,7 +27,7 @@ export class TextareaPo extends PlatformBaseComponentPo {
     compactTextArea = '#compactTextarea';
     compactTextAreaLabel = '#fdp-form-label-compactTextarea > span';
 
-    detailedTextAreaLabel = '#fdp-form-label-detailedDescription > span';
+    detailedTextAreaLabel = '.fd-row .fd-col fdp-form-group-header [fieldGroup]="$index === 0 ? value : null"';
     detailedTextArea = '#detailedDescription';
     detailedTextAreaErrorMessage = '[type="error"]';
     detailedTextAreaCharacterCounter = `fdp-platform-textarea-counter-example fd-popover span`;

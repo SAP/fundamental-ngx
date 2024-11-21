@@ -100,7 +100,6 @@ describe('Verify Textarea component', () => {
         });
 
         it('should not be able enter text in the disabled textarea', async () => {
-            // Is not fully valid
             await expect(await isEnabled(disabledTextArea)).toBe(false);
         });
 
@@ -156,7 +155,6 @@ describe('Verify Textarea component', () => {
         });
 
         it('should show error if more than permitted characters were added', async () => {
-            // need to sendKeys because of the issue with characters counter
             await addValue(detailedTextArea, 'test');
             await mouseHoverElement(detailedTextArea);
             const errorText = await getText(detailedTextAreaErrorMessage);
@@ -193,7 +191,6 @@ describe('Verify Textarea component', () => {
         });
 
         it('should grow if growing option is enabled and no maxLine or maxHeight are ser', async () => {
-            // TODO: Check if clearValue can be removed setValue clears bu default
             await clearValue(withGrowingAndNoLimitsTextarea);
             const textareaSize1 = await getElementSize(withGrowingAndNoLimitsTextarea);
             await setValue(withGrowingAndNoLimitsTextarea, multiple_lines_text_8_lines);
