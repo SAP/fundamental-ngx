@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.4...v0.53.2-rc.5) (2024-11-21)
+
+
+### Bug Fixes
+
+* failing platform table p13 e2e ([#12742](https://github.com/SAP/fundamental-ngx/issues/12742)) ([824986c](https://github.com/SAP/fundamental-ngx/commit/824986c71c847ad7c7e09599dfca64ac85cd0031))
+
+
+
+
+
 ## [0.53.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.3...v0.53.2-rc.4) (2024-11-18)
 
 **Note:** Version bump only for package fundamental-ngx
