@@ -1,6 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    OnChanges,
+    OnInit,
+    ViewEncapsulation,
+    input
+} from '@angular/core';
+import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 let id = 0;
 
@@ -8,21 +16,19 @@ let id = 0;
     selector: 'fd-calendar-legend-item',
     standalone: true,
     imports: [CommonModule],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-        <span class="fd-calendar-legend__marker" [ngClass]="getAppointmentClass()"></span>
+        <span class="fd-calendar-legend__marker"></span>
         <span class="fd-calendar-legend__text">
             <ng-content></ng-content>
         </span>
     `,
     host: {
-        class: 'fd-calendar-legend__item',
-        '[id]': 'id',
-        '[style.color]': 'color',
-        '[ngClass]': 'getTypeClass()'
-    },
-    styleUrl: './calendar-legend-item.component.scss'
+        '[attr.id]': 'id()'
+    }
 })
-export class LegendItemComponent {
+export class LegendItemComponent implements OnChanges, OnInit, CssClassBuilder {
     /** The color of the legend item marker */
     color = input<Nullable<string>>('');
 
@@ -45,8 +51,32 @@ export class LegendItemComponent {
     ariaDescribedBy = input<string>();
 
     /** @hidden */
+    class: string;
+
+    /** @hidden */
+    constructor(public elementRef: ElementRef) {}
+
+    /** @hidden */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [
+            `fd-calendar-legend__item ${this.getTypeClass()} ${this.getAppointmentClass()} ${this.getColorClass()}`
+        ];
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
     getTypeClass(): string {
-        return this.type ? `fd-calendar-legend__item--${this.type}` : '';
+        return this.type() ? `fd-calendar-legend__item--${this.type()}` : '';
     }
 
     /** @hidden */
@@ -56,6 +86,6 @@ export class LegendItemComponent {
 
     /** @hidden */
     getColorClass(): string {
-        return `fd-calendar-legend__item--${this.color()}`;
+        return this.color() ? `fd-calendar-legend__item--${this.color()}` : '';
     }
 }
