@@ -9,12 +9,10 @@ let id = 0;
     standalone: true,
     imports: [CommonModule],
     template: `
-        <div class="fd-calendar-legend__item">
-            <span class="fd-calendar-legend__marker" [ngClass]="getAppointmentClass()"></span>
-            <span class="fd-calendar-legend__text">
-                <ng-content></ng-content>
-            </span>
-        </div>
+        <span class="fd-calendar-legend__marker" [ngClass]="getAppointmentClass()"></span>
+        <span class="fd-calendar-legend__text">
+            <ng-content></ng-content>
+        </span>
     `,
     host: {
         class: 'fd-calendar-legend__item',
@@ -53,6 +51,11 @@ export class LegendItemComponent {
 
     /** @hidden */
     getAppointmentClass(): string {
-        return this.circle() ? `fd-calendar-legend__item--appointment` : '';
+        return this.circle() || this.type() === 'appointment' ? `fd-calendar-legend__item--appointment` : '';
+    }
+
+    /** @hidden */
+    getColorClass(): string {
+        return `fd-calendar-legend__item--${this.color()}`;
     }
 }
