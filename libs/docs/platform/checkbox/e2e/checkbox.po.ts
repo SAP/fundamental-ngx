@@ -10,7 +10,6 @@ export class CheckboxPO extends PlatformBaseComponentPo {
     checkboxWithValue = 'fdp-platform-multiselect-checkbox input';
     tristateCheckboxes = 'fdp-platform-tristate-checkbox input';
     tristateCheckboxParis = '.fd-checkbox__label[for=paris] span.fd-checkbox__checkmark';
-    errorCheckboxes = 'fdp-platform-checkbox-error-handling .fd-checkbox__label';
     presenceCheckbox = 'fdp-platform-checkbox-error-handling #presence';
     submitBtn = 'fdp-platform-checkbox-error-handling button';
     errorTooltip = '[type="error"] span';
