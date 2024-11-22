@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.6...v0.53.2-rc.7) (2024-11-22)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.53.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.5...v0.53.2-rc.6) (2024-11-22)
+
+
+### Bug Fixes
+
+* **core:** wizard section add role attribute ([#12734](https://github.com/SAP/fundamental-ngx/issues/12734)) ([45cd534](https://github.com/SAP/fundamental-ngx/commit/45cd534628a0cab66a7350d5ca08b50497c3a13b)), closes [#12674](https://github.com/SAP/fundamental-ngx/issues/12674)
+
+
+
+
+
+## [0.53.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.4...v0.53.2-rc.5) (2024-11-21)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.53.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.3...v0.53.2-rc.4) (2024-11-18)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 ## [0.53.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.2...v0.53.2-rc.3) (2024-11-15)
 
 
