@@ -61,3 +61,15 @@ runs:
           if: inputs.frozen-lockfile != 'true' || steps.node_modules.outputs.cache-hit != 'true'
           run: yarn install ${{ inputs.frozen-lockfile == 'true' && '--frozen-lockfile' || '' }}
           shell: bash
+
+        - name: Output nx build logs
+          if: failure()
+          run: |
+              log_files=$(find /tmp -name '*.log')
+              echo "Found log files: $log_files"
+
+              for log_file in $log_files; do
+                echo "====== Contents of $log_file ======"
+                cat "$log_file"
+              done
+          shell: bash
