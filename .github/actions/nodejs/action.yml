@@ -5,7 +5,7 @@ inputs:
     node-version:
         description: Node.js version
         required: false
-        default: 20.x
+        default: '20.x'
     frozen-lockfile:
         description: Install dependencies from lock file
         required: false
@@ -14,39 +14,57 @@ inputs:
 runs:
     using: composite
     steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+
         - name: Use Node.js ${{ inputs.node-version }}
           uses: actions/setup-node@v4.1.0
           with:
               node-version: ${{ inputs.node-version }}
 
         - name: Install Corepack
-          shell: bash
-          run: npm install -g corepack
-
-        - name: Enable Corepack for Yarn 4.5.1
-          shell: bash
           run: |
-              corepack enable yarn && yarn
-
-        - name: Install Yarn 4.5.1 (if not available)
+              echo "Installing Corepack..."
+              npm install -g corepack || { echo 'Corepack installation failed'; exit 1; }
+              echo "Corepack installed successfully."
+              corepack --version
           shell: bash
+
+        - name: Enable Corepack
           run: |
-              if ! yarn --version | grep -q "4.5.1"; then
-                npm install -g yarn@4.5.1
-              fi
+              echo "Enabling Corepack..."
+              corepack enable || { echo 'Corepack enable failed'; exit 1; }
+              echo "Corepack enabled successfully."
+              corepack --version
+          shell: bash
+
+        - name: Activate Yarn 4.5.1 and Show Version
+          run: |
+              echo "Preparing and Activating Yarn 4.5.1..."
+              corepack prepare yarn@4.5.1 --activate || { echo 'Yarn activation failed'; exit 1; }
+              echo "Yarn activated successfully."
+              yarn --version
+          shell: bash
 
         - name: Get yarn cache directory path
           id: yarn-cache-dir-path
-          run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+          run: |
+              echo "Fetching Yarn cache folder path..."
+              cache_dir=$(yarn config get cacheFolder)
+              if [ -z "$cache_dir" ]; then
+                echo "Yarn cache directory is empty!"
+              else
+                echo "dir=$cache_dir" >> $GITHUB_OUTPUT
+              fi
           shell: bash
 
         - name: Use the global Yarn cache if available
           uses: actions/cache@v4.1.2
           with:
               path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-              key: ${{ runner.os }}-node-${{ inputs.node_version }}-yarn-${{ hashFiles('**/yarn.lock') }}
+              key: ${{ runner.os }}-node-${{ inputs.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
               restore-keys: |
-                  ${{ runner.os }}-node-${{ inputs.node_version }}-yarn-
+                  ${{ runner.os }}-node-${{ inputs.node-version }}-yarn-
 
         - uses: actions/cache@v4.1.2
           id: node_modules
@@ -57,19 +75,53 @@ runs:
               restore-keys: |
                   ${{ runner.os }}-${{ inputs.node-version }}-node-modules-
 
-        - name: Install dependencies
-          if: inputs.frozen-lockfile != 'true' || steps.node_modules.outputs.cache-hit != 'true'
-          run: yarn install ${{ inputs.frozen-lockfile == 'true' && '--frozen-lockfile' || '' }}
+        - name: Enable Nx debug logs (if supported)
+          run: echo "Enabled NX verbose logging"
+          env:
+              NX_VERBOSE_LOGGING: true # assuming nx supports this env variable for verbose logging
           shell: bash
 
-        - name: Output nx build logs
+        - name: Capture environment details before installation
+          run: |
+              echo "Environment Details:"
+              node --version
+              npm --version
+              corepack --version
+              yarn --version
+              echo "Directory Details (sanitized):"
+              ls -la
+          shell: bash
+
+        - name: Install dependencies and capture output
+          run: |
+              set -xeo pipefail
+              echo "Running yarn install with detailed log capturing..."
+              yarn install ${{ inputs.frozen-lockfile == 'true' && '--immutable' || '' }} 2>&1 | tee build_output.log || { cat build_output.log; echo 'Dependency installation failed'; exit 1; }
+              echo "Yarn install completed successfully."
+          shell: bash
+
+        - name: Output captured build log
+          run: |
+              echo "Displaying captured build logs..."
+              cat build_output.log
+          shell: bash
+
+        - name: Search and output nx build logs, if available
           if: failure()
           run: |
-              log_files=$(find /tmp -name '*.log')
+              echo "Searching for nx build logs in /tmp directory..."
+              log_files=$(find /tmp/xfs-*/build.log 2>/dev/null || echo '')
               echo "Found log files: $log_files"
 
-              for log_file in $log_files; do
-                echo "====== Contents of $log_file ======"
-                cat "$log_file"
-              done
+              if [ -n "$log_files" ]; then
+                for log_file in $log_files; do
+                  if [ -f "$log_file" ]; then
+                    echo "====== Contents of $log_file ======"
+                    cat "$log_file"
+                  else
+                    echo "Log file $log_file not found or is empty."
+                  fi
+                done
+              else
+                echo "No log files found."
           shell: bash
