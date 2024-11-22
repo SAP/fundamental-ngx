@@ -1,5 +1,32 @@
-<div fd-calendar>
-    <fd-calendar-legend-item></fd-calendar-legend-item>
+<!-- <div style="display: flex; justify-content: center; gap: 5rem;">
+    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+        <fd-calendar [fdCompact]="true" [specialDaysRules]="specialDays"></fd-calendar>
+        <div fd-calendar-legend>
+            <fd-calendar-legend-item [circle]="true">Today</fd-calendar-legend-item>
+            <fd-calendar-legend-item color="placeholder-5">Tomorrow</fd-calendar-legend-item>
+            <fd-calendar-legend-item type="appointment" color="placeholder-1">Next Week</fd-calendar-legend-item>
+            <fd-calendar-legend-item color="placeholder-20">Birthday</fd-calendar-legend-item>
+        </div>
+    </div>
+    <div style="display: flex; gap: 0.5rem;">
+        <fd-calendar [fdCompact]="true" style="height: min-content;"></fd-calendar>
+        <div fd-calendar-legend-col style="height: min-content;">
+            <fd-calendar-legend-item [circle]="true">Today</fd-calendar-legend-item>
+            <fd-calendar-legend-item color="placeholder-5">Tomorrow</fd-calendar-legend-item>
+            <fd-calendar-legend-item type="appointment" color="placeholder-1">Next Week</fd-calendar-legend-item>
+            <fd-calendar-legend-item color="placeholder-20">Birthday</fd-calendar-legend-item>
+        </div>
+    </div>
+</div> -->
 
-    <fd-calendar-legend-item></fd-calendar-legend-item>
+<div style="display: flex; justify-content: center; gap: 5rem">
+    <div style="display: flex; flex-direction: column; gap: 0.5rem">
+        <fd-calendar [fdCompact]="true" [specialDaysRules]="specialDays"></fd-calendar>
+        <fd-calendar-legend [specialDaysRules]="specialDays">
+            <fd-calendar-legend-item [circle]="true">Today</fd-calendar-legend-item>
+            <fd-calendar-legend-item color="placeholder-5">Tomorrow</fd-calendar-legend-item>
+            <fd-calendar-legend-item type="appointment" color="placeholder-1">Next Week</fd-calendar-legend-item>
+            <fd-calendar-legend-item color="placeholder-20">Birthday</fd-calendar-legend-item>
+        </fd-calendar-legend>
+    </div>
 </div>

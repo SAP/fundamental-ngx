@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    Input,
     OnChanges,
     OnInit,
     ViewEncapsulation,
@@ -21,7 +22,7 @@ let id = 0;
     template: `
         <span class="fd-calendar-legend__marker"></span>
         <span class="fd-calendar-legend__text">
-            <ng-content></ng-content>
+            <ng-content>{{ text }}</ng-content>
         </span>
     `,
     host: {
@@ -29,6 +30,9 @@ let id = 0;
     }
 })
 export class LegendItemComponent implements OnChanges, OnInit, CssClassBuilder {
+    /** The text of the legend item */
+    @Input() text: string;
+
     /** The color of the legend item marker */
     color = input<Nullable<string>>('');
 

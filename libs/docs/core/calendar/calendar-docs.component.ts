@@ -372,6 +372,12 @@ specialDay: SpecialDayRule[] = [
             component: 'CalendarLegendExampleComponent',
             fileName: 'calendar-legend-example',
             code: getAssetFromModuleAssets(calendarLegendSource)
+        },
+        {
+            language: 'html',
+            component: 'CalendarLegendExampleComponent',
+            fileName: 'calendar-legend-example',
+            code: getAssetFromModuleAssets(calendarLegendSourceHtml)
         }
     ];
 }
