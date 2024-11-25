@@ -1,112 +1,112 @@
-<fd-docs-section-title id="default" componentName="table"> Simple Table</fd-docs-section-title>
-<description>
-    <p>This example shows simple table usage</p>
-    <p>Developers can pass additional content into tables' toolbar left side.</p>
-    <p>
-        To do that, developers need to wrap needed content with <code>fdp-table-toolbar-left-actions</code> component.
-    </p>
-    <p>This example also shows the usage of the overflow functionality of the toolbar.</p>
-</description>
-<component-example>
-    <fdp-platform-table-default-example></fdp-platform-table-default-example>
-</component-example>
-<code-example [exampleFiles]="defaultTableFiles"></code-example>
+<!--<fd-docs-section-title id="default" componentName="table"> Simple Table</fd-docs-section-title>-->
+<!--<description>-->
+<!--    <p>This example shows simple table usage</p>-->
+<!--    <p>Developers can pass additional content into tables' toolbar left side.</p>-->
+<!--    <p>-->
+<!--        To do that, developers need to wrap needed content with <code>fdp-table-toolbar-left-actions</code> component.-->
+<!--    </p>-->
+<!--    <p>This example also shows the usage of the overflow functionality of the toolbar.</p>-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fdp-platform-table-default-example></fdp-platform-table-default-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="defaultTableFiles"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="custom-width" componentName="table">
-    Custom Column Width & Column Resizing
-</fd-docs-section-title>
-<description>
-    <p>
-        Use <code>width</code> on the table column for setting custom width for the column cells. For the columns
-        without width set it will be calculated automatically based on the body cell content but not header cell
-        content.
-    </p>
+<!--<fd-docs-section-title id="custom-width" componentName="table">-->
+<!--    Custom Column Width & Column Resizing-->
+<!--</fd-docs-section-title>-->
+<!--<description>-->
+<!--    <p>-->
+<!--        Use <code>width</code> on the table column for setting custom width for the column cells. For the columns-->
+<!--        without width set it will be calculated automatically based on the body cell content but not header cell-->
+<!--        content.-->
+<!--    </p>-->
 
-    <p>Note that if width is set in percents (%), it will be calculated relatively to initial table width.</p>
+<!--    <p>Note that if width is set in percents (%), it will be calculated relatively to initial table width.</p>-->
 
-    <p>
-        Columns width will be recalculated on any <code>width</code> change but you also can use table's method
-        <code>recalculateTableColumnWidth</code> to recalculate it manually.
-    </p>
-</description>
-<component-example>
-    <fdp-platform-table-custom-width-example></fdp-platform-table-custom-width-example>
-</component-example>
-<code-example [exampleFiles]="customWidthFiles"></code-example>
+<!--    <p>-->
+<!--        Columns width will be recalculated on any <code>width</code> change but you also can use table's method-->
+<!--        <code>recalculateTableColumnWidth</code> to recalculate it manually.-->
+<!--    </p>-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fdp-platform-table-custom-width-example></fdp-platform-table-custom-width-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="customWidthFiles"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="custom-columns" componentName="table"> Custom Column</fd-docs-section-title>
-<description>
-    <p>This example shows custom column definition implementation</p>
-    <p>Developers are able to change the appearance of a regular cell and header cell as well.</p>
-    <p>Additionally, developers can define custom renderer of the header cell popover.</p>
-</description>
-<component-example>
-    <fdp-platform-table-custom-column-example></fdp-platform-table-custom-column-example>
-</component-example>
-<code-example [exampleFiles]="customColumnTableFiles"></code-example>
+<!--<fd-docs-section-title id="custom-columns" componentName="table"> Custom Column</fd-docs-section-title>-->
+<!--<description>-->
+<!--    <p>This example shows custom column definition implementation</p>-->
+<!--    <p>Developers are able to change the appearance of a regular cell and header cell as well.</p>-->
+<!--    <p>Additionally, developers can define custom renderer of the header cell popover.</p>-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fdp-platform-table-custom-column-example></fdp-platform-table-custom-column-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="customColumnTableFiles"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="custom-titles" componentName="table"> Custom Toolbar Title </fd-docs-section-title>
-<description>This example shows how to customize the title of the table</description>
-<component-example>
-    <fdp-platform-table-custom-title-example></fdp-platform-table-custom-title-example>
-</component-example>
-<code-example [exampleFiles]="customTitleTableFiles"></code-example>
+<!--<fd-docs-section-title id="custom-titles" componentName="table"> Custom Toolbar Title </fd-docs-section-title>-->
+<!--<description>This example shows how to customize the title of the table</description>-->
+<!--<component-example>-->
+<!--    <fdp-platform-table-custom-title-example></fdp-platform-table-custom-title-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="customTitleTableFiles"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="freezable" componentName="table"> Column Freezing</fd-docs-section-title>
-<description>
-    <p>Use <code>[freezeColumnsTo]="columnName"</code> to freeze columns up to and including.</p>
-    <p>Use <code>[freezeEndColumnsTo]="columnName"</code> to freeze columns from and to the end of the table.</p>
+<!--<fd-docs-section-title id="freezable" componentName="table"> Column Freezing</fd-docs-section-title>-->
+<!--<description>-->
+<!--    <p>Use <code>[freezeColumnsTo]="columnName"</code> to freeze columns up to and including.</p>-->
+<!--    <p>Use <code>[freezeEndColumnsTo]="columnName"</code> to freeze columns from and to the end of the table.</p>-->
 
-    <p>
-        Designated freezable columns with the <code>[freezable]</code> input, and end-freezable columns with the
-        <code>[endFreezable]</code> input.
-    </p>
+<!--    <p>-->
+<!--        Designated freezable columns with the <code>[freezable]</code> input, and end-freezable columns with the-->
+<!--        <code>[endFreezable]</code> input.-->
+<!--    </p>-->
 
-    <p>
-        When using this feature, it's very important to set the <code>width</code> for every column as table cell width
-        won't be calculated properly without it.
-    </p>
+<!--    <p>-->
+<!--        When using this feature, it's very important to set the <code>width</code> for every column as table cell width-->
+<!--        won't be calculated properly without it.-->
+<!--    </p>-->
 
-    <p>
-        In the example below, "Name" and "Description" are freezable to the start of the table, and "Date" and
-        "Verified" are freezable to the end of the table. The frozen status of these columns can be set or unset by
-        clicking the header cell. The "Price" and "Status" columns cannot be frozen.
-    </p>
-</description>
-<component-example>
-    <fdp-platform-table-freezable-example></fdp-platform-table-freezable-example>
-</component-example>
-<code-example [exampleFiles]="freezableTableFiles"></code-example>
+<!--    <p>-->
+<!--        In the example below, "Name" and "Description" are freezable to the start of the table, and "Date" and-->
+<!--        "Verified" are freezable to the end of the table. The frozen status of these columns can be set or unset by-->
+<!--        clicking the header cell. The "Price" and "Status" columns cannot be frozen.-->
+<!--    </p>-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fdp-platform-table-freezable-example></fdp-platform-table-freezable-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="freezableTableFiles"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="loading" componentName="table"> Loading/Busy State</fd-docs-section-title>
-<description>
-    <p>
-        Use <code>[loading]="true|false"</code> to set busy state. Table component also exposes
-        <code>onDataRequested</code> and <code>onDataReceived</code> outputs, that can be used to implement any external
-        loading logic. These events are tied to the querying process through dataSource.
-    </p>
-    <p>
-        By default, Table tracks these loading events and apply loading state internally. However, you can modify this
-        logic by using <code>onDataRequested</code> and <code>onDataReceived</code> methods and
-        <code>loading</code> input on the component
-    </p>
-</description>
-<component-example>
-    <fdp-platform-table-loading-example></fdp-platform-table-loading-example>
-</component-example>
-<code-example [exampleFiles]="loadingTableFiles"></code-example>
+<!--<fd-docs-section-title id="loading" componentName="table"> Loading/Busy State</fd-docs-section-title>-->
+<!--<description>-->
+<!--    <p>-->
+<!--        Use <code>[loading]="true|false"</code> to set busy state. Table component also exposes-->
+<!--        <code>onDataRequested</code> and <code>onDataReceived</code> outputs, that can be used to implement any external-->
+<!--        loading logic. These events are tied to the querying process through dataSource.-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        By default, Table tracks these loading events and apply loading state internally. However, you can modify this-->
+<!--        logic by using <code>onDataRequested</code> and <code>onDataReceived</code> methods and-->
+<!--        <code>loading</code> input on the component-->
+<!--    </p>-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fdp-platform-table-loading-example></fdp-platform-table-loading-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="loadingTableFiles"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
 <fd-docs-section-title id="initial-state" componentName="table"> Initial State</fd-docs-section-title>
 <description>
@@ -125,303 +125,303 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="tree" componentName="table"> Tree Table</fd-docs-section-title>
-<description>
-    This example shows tree table usage. To setup tree table use next properties:
+<!--<fd-docs-section-title id="tree" componentName="table"> Tree Table</fd-docs-section-title>-->
+<!--<description>-->
+<!--    This example shows tree table usage. To setup tree table use next properties:-->
 
-    <ul>
-        <li><code>[isTreeTable]</code> Whether tree mode enabled or no.</li>
-        <li><code>[relationKey]</code> Name of the field in the object which contains children nodes.</li>
-    </ul>
+<!--    <ul>-->
+<!--        <li><code>[isTreeTable]</code> Whether tree mode enabled or no.</li>-->
+<!--        <li><code>[relationKey]</code> Name of the field in the object which contains children nodes.</li>-->
+<!--    </ul>-->
 
-    <h3>Drag & Drop</h3>
+<!--    <h3>Drag & Drop</h3>-->
 
-    <p>Tree table supports mouse Drag & Drop by default, so rows can be moved & placed inside other rows.</p>
-    <p>
-        Drag & Drop events are simply client-side events and any desired backend changes must be handled by catching the
-        <code>(rowsRearrange)</code> event.
-    </p>
+<!--    <p>Tree table supports mouse Drag & Drop by default, so rows can be moved & placed inside other rows.</p>-->
+<!--    <p>-->
+<!--        Drag & Drop events are simply client-side events and any desired backend changes must be handled by catching the-->
+<!--        <code>(rowsRearrange)</code> event.-->
+<!--    </p>-->
 
-    <br />
+<!--    <br />-->
 
-    <p>
-        Drag and drop is available via keyboard by focusing a row or cell, holding the alt/option key and using the up
-        or down arrows.
-    </p>
-    <p>
-        By default, keyboard drag & drop works in shift mode, which means that focused item will ne moved on the same
-        level as it's siblings.
-    </p>
-    <p>
-        By pressing alt/option + shift key, drag & drop will use 'group' mode with the next sibling based on the
-        direction of drag & drop.
-    </p>
-    <p>Drag and drop can be disabled by setting the <code>[enableRowReordering]</code> input to <code>false</code>.</p>
+<!--    <p>-->
+<!--        Drag and drop is available via keyboard by focusing a row or cell, holding the alt/option key and using the up-->
+<!--        or down arrows.-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        By default, keyboard drag & drop works in shift mode, which means that focused item will ne moved on the same-->
+<!--        level as it's siblings.-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        By pressing alt/option + shift key, drag & drop will use 'group' mode with the next sibling based on the-->
+<!--        direction of drag & drop.-->
+<!--    </p>-->
+<!--    <p>Drag and drop can be disabled by setting the <code>[enableRowReordering]</code> input to <code>false</code>.</p>-->
 
-    <p>
-        Additionally, developers can pass custom <code>[dropPredicate]</code> and
-        <code>[dragoverPredicate]</code> functions to allow/disallow drop on particular row.
-    </p>
-    <p>
-        More info on <code>[dropPredicate]</code> and <code>[dragoverPredicate]</code> can be found on
-        <a routerLink="/cdk/drag-n-drop" fragment="disabled">CDK page</a>
-    </p>
+<!--    <p>-->
+<!--        Additionally, developers can pass custom <code>[dropPredicate]</code> and-->
+<!--        <code>[dragoverPredicate]</code> functions to allow/disallow drop on particular row.-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        More info on <code>[dropPredicate]</code> and <code>[dragoverPredicate]</code> can be found on-->
+<!--        <a routerLink="/cdk/drag-n-drop" fragment="disabled">CDK page</a>-->
+<!--    </p>-->
 
-    <h3>Tree initialization</h3>
-    <p>
-        Tree can be initialized and and its state can be controlled by the application. In order to do this tree needs
-        be instantiated using <code>TableRow</code> interface, where application set initial state.
-    </p>
-    <p>
-        You can also set <code>[enableTristateMode]</code>, to propagate selection from children to parents and parent
-        to children.
-    </p>
-</description>
-<component-example>
-    <fdp-platform-table-tree-example></fdp-platform-table-tree-example>
-</component-example>
-<code-example [exampleFiles]="treeTableFiles"></code-example>
+<!--    <h3>Tree initialization</h3>-->
+<!--    <p>-->
+<!--        Tree can be initialized and and its state can be controlled by the application. In order to do this tree needs-->
+<!--        be instantiated using <code>TableRow</code> interface, where application set initial state.-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        You can also set <code>[enableTristateMode]</code>, to propagate selection from children to parents and parent-->
+<!--        to children.-->
+<!--    </p>-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fdp-platform-table-tree-example></fdp-platform-table-tree-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="treeTableFiles"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="no-data-custom-element" componentName="table">
-    Table to render "No data" message
-</fd-docs-section-title>
-<description>
-    This example demonstrates ability to define table to display when no items are found. Use
-    <code>fdp-table-no-data-wrapper</code> element to define custom "No data" message.
-</description>
-<component-example>
-    <fdp-platform-table-no-items-template-example></fdp-platform-table-no-items-template-example>
-</component-example>
-<code-example [exampleFiles]="noDataCustomMessageFiles"></code-example>
+<!--<fd-docs-section-title id="no-data-custom-element" componentName="table">-->
+<!--    Table to render "No data" message-->
+<!--</fd-docs-section-title>-->
+<!--<description>-->
+<!--    This example demonstrates ability to define table to display when no items are found. Use-->
+<!--    <code>fdp-table-no-data-wrapper</code> element to define custom "No data" message.-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fdp-platform-table-no-items-template-example></fdp-platform-table-no-items-template-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="noDataCustomMessageFiles"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="semantic" componentName="table"> Semantic Highlighting</fd-docs-section-title>
-<description>
-    <p>This example shows semantic highlighting for the rows.</p>
+<!--<fd-docs-section-title id="semantic" componentName="table"> Semantic Highlighting</fd-docs-section-title>-->
+<!--<description>-->
+<!--    <p>This example shows semantic highlighting for the rows.</p>-->
 
-    <p>
-        Use <code>semanticHighlighting="value"</code> input property on the table to show semantic row's status column.
-        Where <code>value</code> (string) is the key of the table row's item with status. Available statuses are
-        <code>valid, warning, information, error</code>. Any other statuses will be percieved as "no status".
-    </p>
-</description>
-<component-example>
-    <fdp-platform-table-semantic-example></fdp-platform-table-semantic-example>
-</component-example>
+<!--    <p>-->
+<!--        Use <code>semanticHighlighting="value"</code> input property on the table to show semantic row's status column.-->
+<!--        Where <code>value</code> (string) is the key of the table row's item with status. Available statuses are-->
+<!--        <code>valid, warning, information, error</code>. Any other statuses will be percieved as "no status".-->
+<!--    </p>-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fdp-platform-table-semantic-example></fdp-platform-table-semantic-example>-->
+<!--</component-example>-->
 
-<code-example [exampleFiles]="semanticFiles"></code-example>
+<!--<code-example [exampleFiles]="semanticFiles"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="row-class" componentName="table"> Row custom CSS class</fd-docs-section-title>
-<description>
-    This example demonstrates ability to apply custom CSS classes to the table rows. Use <code>rowsClass</code> input
-    property of the table component to define custom CSS classes.
-    <ul>
-        <li>Pass string (<code>'customClass'</code>) to set custom CSS classes for every row.</li>
-        <li>
-            Pass function (<code>(row) => row.field ? 'customClass' : 'anotherClass'</code>) which returns string to
-            describe own logic. Row will be passed as function's parameter.
-        </li>
-    </ul>
-</description>
-<component-example>
-    <fdp-platform-table-row-class-example></fdp-platform-table-row-class-example>
-</component-example>
+<!--<fd-docs-section-title id="row-class" componentName="table"> Row custom CSS class</fd-docs-section-title>-->
+<!--<description>-->
+<!--    This example demonstrates ability to apply custom CSS classes to the table rows. Use <code>rowsClass</code> input-->
+<!--    property of the table component to define custom CSS classes.-->
+<!--    <ul>-->
+<!--        <li>Pass string (<code>'customClass'</code>) to set custom CSS classes for every row.</li>-->
+<!--        <li>-->
+<!--            Pass function (<code>(row) => row.field ? 'customClass' : 'anotherClass'</code>) which returns string to-->
+<!--            describe own logic. Row will be passed as function's parameter.-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fdp-platform-table-row-class-example></fdp-platform-table-row-class-example>-->
+<!--</component-example>-->
 
-<code-example [exampleFiles]="rowClassTableFiles"></code-example>
+<!--<code-example [exampleFiles]="rowClassTableFiles"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="text-wrap" componentName="table">Wrapping text in columns</fd-docs-section-title>
-<description>
-    <p>This example demonstrates ability to disable wrapping column text into multiple lines.</p>
-    <p>
-        Pass (<code>[noWrap]="true"</code>) input property to the column definition in order to make text inside it not
-        to wrap.
-    </p>
-</description>
-<component-example>
-    <fdp-platform-table-wrap-example></fdp-platform-table-wrap-example>
-</component-example>
+<!--<fd-docs-section-title id="text-wrap" componentName="table">Wrapping text in columns</fd-docs-section-title>-->
+<!--<description>-->
+<!--    <p>This example demonstrates ability to disable wrapping column text into multiple lines.</p>-->
+<!--    <p>-->
+<!--        Pass (<code>[noWrap]="true"</code>) input property to the column definition in order to make text inside it not-->
+<!--        to wrap.-->
+<!--    </p>-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fdp-platform-table-wrap-example></fdp-platform-table-wrap-example>-->
+<!--</component-example>-->
 
-<code-example [exampleFiles]="textWrapFiles"></code-example>
+<!--<code-example [exampleFiles]="textWrapFiles"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="no-outer-borders" componentName="table"> No outer borders</fd-docs-section-title>
-<description>
-    For a table without outer borders add <code>[noOuterBorders]="true"</code>. Additionally, you can remove the
-    vertical borders with <code>[noVerticalBorders]="true"</code>.</description
->
-<component-example>
-    <fdp-platform-table-no-outer-borders-example></fdp-platform-table-no-outer-borders-example>
-</component-example>
+<!--<fd-docs-section-title id="no-outer-borders" componentName="table"> No outer borders</fd-docs-section-title>-->
+<!--<description>-->
+<!--    For a table without outer borders add <code>[noOuterBorders]="true"</code>. Additionally, you can remove the-->
+<!--    vertical borders with <code>[noVerticalBorders]="true"</code>.</description-->
+<!--&gt;-->
+<!--<component-example>-->
+<!--    <fdp-platform-table-no-outer-borders-example></fdp-platform-table-no-outer-borders-example>-->
+<!--</component-example>-->
 
-<code-example [exampleFiles]="noOuterBordersFiles"></code-example>
+<!--<code-example [exampleFiles]="noOuterBordersFiles"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="basic-add-rows" componentName="table"
-    >Dynamically adding rows to the table
-</fd-docs-section-title>
-<description>
-    <p>
-        Table component supports of adding new rows to it by providing user with new row with form controls to define
-        row columns values.
-    </p>
-    <p>
-        To enable adding new rows "on the fly", provide <code>[editMode]="'inline'"</code> input property for
-        <code>fdp-table-toolbar</code> component.
-    </p>
-    <p>
-        WHen new row added, Table Component tries to generate empty object based on columns definitions. If this object
-        needs to be more sophisticated, developers can pass <code>[editableRowSkeleton]</code> property with configured
-        empty row object.
-    </p>
-    <p>By default, editable cell renders form control based on the column <code>[dataType]</code> input property:</p>
-    <ul>
-        <li><b>Default</b>: text input</li>
-        <li><b>Number</b>: number input</li>
-        <li><b>Boolean</b>: switch</li>
-        <li><b>Date</b>: date picker</li>
-    </ul>
-    <p>
-        If you want to render different form control for a specific column, you need to provide a custom template
-        with<code>*fdpEditableCellDef</code> directive.
-    </p>
-</description>
-<component-example>
-    <fdp-platform-table-editable-rows-example></fdp-platform-table-editable-rows-example>
-</component-example>
+<!--<fd-docs-section-title id="basic-add-rows" componentName="table"-->
+<!--    >Dynamically adding rows to the table-->
+<!--</fd-docs-section-title>-->
+<!--<description>-->
+<!--    <p>-->
+<!--        Table component supports of adding new rows to it by providing user with new row with form controls to define-->
+<!--        row columns values.-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        To enable adding new rows "on the fly", provide <code>[editMode]="'inline'"</code> input property for-->
+<!--        <code>fdp-table-toolbar</code> component.-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        WHen new row added, Table Component tries to generate empty object based on columns definitions. If this object-->
+<!--        needs to be more sophisticated, developers can pass <code>[editableRowSkeleton]</code> property with configured-->
+<!--        empty row object.-->
+<!--    </p>-->
+<!--    <p>By default, editable cell renders form control based on the column <code>[dataType]</code> input property:</p>-->
+<!--    <ul>-->
+<!--        <li><b>Default</b>: text input</li>-->
+<!--        <li><b>Number</b>: number input</li>-->
+<!--        <li><b>Boolean</b>: switch</li>-->
+<!--        <li><b>Date</b>: date picker</li>-->
+<!--    </ul>-->
+<!--    <p>-->
+<!--        If you want to render different form control for a specific column, you need to provide a custom template-->
+<!--        with<code>*fdpEditableCellDef</code> directive.-->
+<!--    </p>-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fdp-platform-table-editable-rows-example></fdp-platform-table-editable-rows-example>-->
+<!--</component-example>-->
 
-<code-example [exampleFiles]="editableRowsFiles"></code-example>
+<!--<code-example [exampleFiles]="editableRowsFiles"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="responsive-columns" componentName="table">
-    Hiding columns depending on the table size
-</fd-docs-section-title>
-<description>
-    <p>it is not recommended to use large amount of columns in a table which has small size.</p>
-    <p>
-        In this case developers can use <code>[fdpTableCellResponsive]</code> directive with responsive breakpoints
-        object.
-    </p>
-    <p>
-        This object should contain key as a minimum width of the breakpoint and value whether or not to show column for
-        this size.
-    </p>
-</description>
-<component-example>
-    <fdp-platform-table-responsive-columns-example></fdp-platform-table-responsive-columns-example>
-</component-example>
+<!--<fd-docs-section-title id="responsive-columns" componentName="table">-->
+<!--    Hiding columns depending on the table size-->
+<!--</fd-docs-section-title>-->
+<!--<description>-->
+<!--    <p>it is not recommended to use large amount of columns in a table which has small size.</p>-->
+<!--    <p>-->
+<!--        In this case developers can use <code>[fdpTableCellResponsive]</code> directive with responsive breakpoints-->
+<!--        object.-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        This object should contain key as a minimum width of the breakpoint and value whether or not to show column for-->
+<!--        this size.-->
+<!--    </p>-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fdp-platform-table-responsive-columns-example></fdp-platform-table-responsive-columns-example>-->
+<!--</component-example>-->
 
-<code-example [exampleFiles]="responsiveColumnsFiles"></code-example>
+<!--<code-example [exampleFiles]="responsiveColumnsFiles"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="initial-loading" componentName="table">Initial Loading</fd-docs-section-title>
-<description>
-    <p>
-        As the Table component supports as input a data source that can return observable, it will automatically show
-        skeleton placeholders while data is being loaded.
-    </p>
+<!--<fd-docs-section-title id="initial-loading" componentName="table">Initial Loading</fd-docs-section-title>-->
+<!--<description>-->
+<!--    <p>-->
+<!--        As the Table component supports as input a data source that can return observable, it will automatically show-->
+<!--        skeleton placeholders while data is being loaded.-->
+<!--    </p>-->
 
-    <p>
-        Please note, that skeleton placeholders only shown before items are loaded for the first time. Every subsequent
-        loading will be shown with busy indicator.
-    </p>
-</description>
-<component-example>
-    <fdp-platform-table-initial-loading-example></fdp-platform-table-initial-loading-example>
-</component-example>
-<code-example [exampleFiles]="initialLoading"></code-example>
+<!--    <p>-->
+<!--        Please note, that skeleton placeholders only shown before items are loaded for the first time. Every subsequent-->
+<!--        loading will be shown with busy indicator.-->
+<!--    </p>-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fdp-platform-table-initial-loading-example></fdp-platform-table-initial-loading-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="initialLoading"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="columns-ngfor" componentName="table"
-    >Rendering columns with ngFor loop</fd-docs-section-title
->
-<description>
-    <p>Platform Table component supports declaring columns with <code>*ngFor</code> loop.</p>
-    <p>When new column added, it will automatically appear in the table.</p>
-    <p>If by default column should be hidden, developers can add <code>[visible]="false"</code> Input property.</p>
-    <p>This way column still will be added to the table configuration dialog, but won't be rendered when added.</p>
-</description>
-<component-example>
-    <fdp-platform-table-columns-ngfor-example></fdp-platform-table-columns-ngfor-example>
-</component-example>
-<code-example [exampleFiles]="ngFor"></code-example>
+<!--<fd-docs-section-title id="columns-ngfor" componentName="table"-->
+<!--    >Rendering columns with ngFor loop</fd-docs-section-title-->
+<!--&gt;-->
+<!--<description>-->
+<!--    <p>Platform Table component supports declaring columns with <code>*ngFor</code> loop.</p>-->
+<!--    <p>When new column added, it will automatically appear in the table.</p>-->
+<!--    <p>If by default column should be hidden, developers can add <code>[visible]="false"</code> Input property.</p>-->
+<!--    <p>This way column still will be added to the table configuration dialog, but won't be rendered when added.</p>-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fdp-platform-table-columns-ngfor-example></fdp-platform-table-columns-ngfor-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="ngFor"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="playground-table" componentName="table"> Playground Area </fd-docs-section-title>
-<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-    <fdp-table
-        [fdContentDensity]="data.table.contentDensity"
-        [dataSource]="dataSource"
-        [noBorders]="data.table.noBorders"
-        [noBodyBorders]="data.table.noBodyBorders"
-        [noHorizontalBorders]="data.table.noHorizontalBorders"
-        [noVerticalBorders]="data.table.noVerticalBorders"
-        [noOuterBorders]="data.table.noOuterBorders"
-        [selectionMode]="data.table.selectionMode"
-        [freezeColumnsTo]="data.table.freezeColumnsTo"
-        [loading]="data.table.loading"
-        [semanticHighlighting]="data.table.semanticHighlighting && 'semantic'"
-        emptyTableMessage="No data found"
-        (rowSelectionChange)="onRowSelectionChange($event)"
-        (sortChange)="onSortChange($event)"
-        (filterChange)="onFilterChange($event)"
-        (columnFreeze)="onFreezeChange($event)"
-        (groupChange)="onGroupChange($event)"
-    >
-        <fdp-table-toolbar [title]="data['table-toolbar'].title" [hideItemCount]="data['table-toolbar'].hideItemCount">
-            <fdp-table-toolbar-actions>
-                <fdp-button label="Action Button"></fdp-button>
-            </fdp-table-toolbar-actions>
-        </fdp-table-toolbar>
+<!--<fd-docs-section-title id="playground-table" componentName="table"> Playground Area </fd-docs-section-title>-->
+<!--<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">-->
+<!--    <fdp-table-->
+<!--        [fdContentDensity]="data.table.contentDensity"-->
+<!--        [dataSource]="dataSource"-->
+<!--        [noBorders]="data.table.noBorders"-->
+<!--        [noBodyBorders]="data.table.noBodyBorders"-->
+<!--        [noHorizontalBorders]="data.table.noHorizontalBorders"-->
+<!--        [noVerticalBorders]="data.table.noVerticalBorders"-->
+<!--        [noOuterBorders]="data.table.noOuterBorders"-->
+<!--        [selectionMode]="data.table.selectionMode"-->
+<!--        [freezeColumnsTo]="data.table.freezeColumnsTo"-->
+<!--        [loading]="data.table.loading"-->
+<!--        [semanticHighlighting]="data.table.semanticHighlighting && 'semantic'"-->
+<!--        emptyTableMessage="No data found"-->
+<!--        (rowSelectionChange)="onRowSelectionChange($event)"-->
+<!--        (sortChange)="onSortChange($event)"-->
+<!--        (filterChange)="onFilterChange($event)"-->
+<!--        (columnFreeze)="onFreezeChange($event)"-->
+<!--        (groupChange)="onGroupChange($event)"-->
+<!--    >-->
+<!--        <fdp-table-toolbar [title]="data['table-toolbar'].title" [hideItemCount]="data['table-toolbar'].hideItemCount">-->
+<!--            <fdp-table-toolbar-actions>-->
+<!--                <fdp-button label="Action Button"></fdp-button>-->
+<!--            </fdp-table-toolbar-actions>-->
+<!--        </fdp-table-toolbar>-->
 
-        <fdp-column
-            name="name"
-            key="name"
-            label="Name"
-            [align]="data['first-column'].align"
-            [sortable]="data['first-column'].sortable"
-            [filterable]="data['first-column'].filterable"
-            [groupable]="data['first-column'].groupable"
-            [width]="data['first-column'].width"
-        >
-        </fdp-column>
+<!--        <fdp-column-->
+<!--            name="name"-->
+<!--            key="name"-->
+<!--            label="Name"-->
+<!--            [align]="data['first-column'].align"-->
+<!--            [sortable]="data['first-column'].sortable"-->
+<!--            [filterable]="data['first-column'].filterable"-->
+<!--            [groupable]="data['first-column'].groupable"-->
+<!--            [width]="data['first-column'].width"-->
+<!--        >-->
+<!--        </fdp-column>-->
 
-        <fdp-column
-            [filterable]="true"
-            name="description"
-            key="description"
-            label="Description"
-            width="200px"
-        ></fdp-column>
+<!--        <fdp-column-->
+<!--            [filterable]="true"-->
+<!--            name="description"-->
+<!--            key="description"-->
+<!--            label="Description"-->
+<!--            width="200px"-->
+<!--        ></fdp-column>-->
 
-        <fdp-column
-            [filterable]="true"
-            name="price"
-            key="price.value"
-            label="Price"
-            align="end"
-            width="100px"
-        ></fdp-column>
+<!--        <fdp-column-->
+<!--            [filterable]="true"-->
+<!--            name="price"-->
+<!--            key="price.value"-->
+<!--            label="Price"-->
+<!--            align="end"-->
+<!--            width="100px"-->
+<!--        ></fdp-column>-->
 
-        <fdp-column
-            [filterable]="true"
-            name="status"
-            key="status"
-            label="Status"
-            align="center"
-            width="150px"
-        ></fdp-column>
-    </fdp-table>
-</playground>
+<!--        <fdp-column-->
+<!--            [filterable]="true"-->
+<!--            name="status"-->
+<!--            key="status"-->
+<!--            label="Status"-->
+<!--            align="center"-->
+<!--            width="150px"-->
+<!--        ></fdp-column>-->
+<!--    </fdp-table>-->
+<!--</playground>-->

@@ -1860,7 +1860,7 @@ export class TableComponent<T = any>
     /** @hidden */
     private _setAppliedFilterNames(filters: CollectionFilter[]): void {
         const formattedFilters = filters.map((f) => ({
-            columnName: this._formatColumnName(f.field),
+            columnName: this._formatColumnName(f.fieldName || ''),
             params: this._formatParams(f.value)
         }));
 
