@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.10...v0.53.2-rc.11) (2024-11-25)
+
+
+### Bug Fixes
+
+* **core:** notification a11y improvements ([#12752](https://github.com/SAP/fundamental-ngx/issues/12752)) ([8a41b6f](https://github.com/SAP/fundamental-ngx/commit/8a41b6fb840bb5b143f6c2b4d83b37ae6d5e780a))
+
+
+
+
+
 ## [0.53.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.9...v0.53.2-rc.10) (2024-11-25)
 
 **Note:** Version bump only for package @fundamental-ngx/core
