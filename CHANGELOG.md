@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.8...v0.53.2-rc.9) (2024-11-22)
+
+
+### Features
+
+* **platform:** propagate ctrlKey from the table row mouse/keyboard event ([#12747](https://github.com/SAP/fundamental-ngx/issues/12747)) ([9f341c9](https://github.com/SAP/fundamental-ngx/commit/9f341c98ab22ac3fe4a4df7cc22f449ae447efe3))
+
+
+
+
+
+## [0.53.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.7...v0.53.2-rc.8) (2024-11-22)
+
+
+### Bug Fixes
+
+* **core:** Checkbox link in  label  is not clickable ([#12636](https://github.com/SAP/fundamental-ngx/issues/12636)) ([e8b42cc](https://github.com/SAP/fundamental-ngx/commit/e8b42cc895fe4b85cff64badde8e0671d8da55fb)), closes [#12577](https://github.com/SAP/fundamental-ngx/issues/12577) [#11783](https://github.com/SAP/fundamental-ngx/issues/11783)
+
+
+
+
+
 ## [0.53.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.6...v0.53.2-rc.7) (2024-11-22)
 
 **Note:** Version bump only for package fundamental-ngx
