@@ -93,7 +93,7 @@
                                         [keyToColumnMap]="_keyToColumnMap"
                                         [tableColumnsLength]="_tableColumnsLength"
                                         (toggleGroupRow)="_toggleGroupRow($event)"
-                                        (click)="_emitRowActivate(row)"
+                                        (click)="_emitRowActivate(row, $event.ctrlKey || $event.metaKey)"
                                     ></tr>
                                 }
                                 @default {
