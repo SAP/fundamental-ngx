@@ -4,6 +4,7 @@
     <fdp-table
         #table
         [dataSource]="source"
+        [initialVisibleColumns]="columns"
         [initialSortBy]="sortBy"
         [initialFilterBy]="initialFilterBy"
         [initialPage]="page"
@@ -25,66 +26,13 @@
         (cellFocused)="onCellFocused($event)"
     >
         <fdp-table-toolbar title="Order Items"></fdp-table-toolbar>
-        <fdp-column name="name" key="name" label="Name" [sortable]="true" [groupable]="true"> </fdp-column>
-        <fdp-column name="description" key="description" label="Description" [sortable]="true" [groupable]="true">
+        <fdp-column name="name" key="name" label="Name" [sortable]="true" [groupable]="true" [filterable]="true">
         </fdp-column>
-        <fdp-column
-            name="price"
-            key="price.value"
-            label="Price"
-            [sortable]="true"
-            [groupable]="true"
-            [filterable]="true"
-        ></fdp-column>
-        <fdp-column name="verified" key="verified" label="Verified" [sortable]="true" [groupable]="true"></fdp-column>
-        <fdp-column
-            name="status"
-            key="status"
-            label="Status"
-            [sortable]="true"
-            [groupable]="true"
-            [filterable]="true"
-        ></fdp-column>
-        <fdp-column
-            name="statusColor"
-            key="statusColor"
-            label="Status Color"
-            align="center"
-            [groupable]="true"
-            [filterable]="true"
-            [sortable]="true"
-        ></fdp-column>
+        <fdp-column name="description" key="description" label="Description" [sortable]="true" [filterable]="true">
+        </fdp-column>
+        <fdp-column name="price" key="price.value" label="Price" [sortable]="true" [filterable]="true"> </fdp-column>
+        <fdp-column name="verified" key="verified" label="Verified"> </fdp-column>
+        <fdp-column name="status" key="status" label="Status" [sortable]="true" [filterable]="true"> </fdp-column>
     </fdp-table>
-
-    <!-- View Settings Dialog-->
-    <fdp-table-view-settings-dialog [table]="table">
-        <fdp-table-view-settings-filter column="price" label="Price" [type]="filterTypeEnum.CUSTOM">
-            <ng-container *fdpViewSettingsFilterCustomDef="let model">
-                <fdp-form-group #fg1 columnLayout="XL1-L1-M1-S1" labelLayout="vertical">
-                    <fdp-form-field label="Minimum Price">
-                        <fdp-input type="number" name="min" [(ngModel)]="model.min"></fdp-input>
-                    </fdp-form-field>
-                    <fdp-form-field label="Maximum Price">
-                        <fdp-input type="number" name="max" [(ngModel)]="model.max"></fdp-input>
-                    </fdp-form-field>
-                </fdp-form-group>
-            </ng-container>
-        </fdp-table-view-settings-filter>
-
-        <fdp-table-view-settings-filter
-            column="status"
-            [type]="filterTypeEnum.MULTI"
-            label="Status"
-            [values]="statusFilteringValues"
-        >
-        </fdp-table-view-settings-filter>
-
-        <fdp-table-view-settings-filter
-            column="statusColor"
-            [type]="filterTypeEnum.SINGLE"
-            label="Status Color"
-            [values]="statusColorFilteringValues"
-        >
-        </fdp-table-view-settings-filter>
-    </fdp-table-view-settings-dialog>
+    <fdp-table-p13-dialog [table]="table"></fdp-table-p13-dialog>
 }
