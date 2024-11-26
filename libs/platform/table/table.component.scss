@@ -500,6 +500,10 @@ fdk-dynamic-portal {
                         white-space: nowrap !important;
                     }
                 }
+
+                &:hover {
+                    background-color: var(--sapList_Hover_Background);
+                }
             }
 
             .#{$block} {
@@ -648,4 +652,8 @@ fdk-dynamic-portal {
 
 th.fd-table__cell .fd-table__inner {
     font-weight: 700;
+}
+
+.tr-hovered {
+    background-color: var(--sapList_Hover_Background) !important;
 }
