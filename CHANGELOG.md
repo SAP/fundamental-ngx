@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.12...v0.53.2-rc.13) (2024-11-26)
+
+
+### Bug Fixes
+
+* **core:** prevent grid list item spacing click. ([#12735](https://github.com/SAP/fundamental-ngx/issues/12735)) ([ccf00b9](https://github.com/SAP/fundamental-ngx/commit/ccf00b91fcce37e91dd0aadc30e0d05aa2f81f9b)), closes [#12633](https://github.com/SAP/fundamental-ngx/issues/12633) [#12633](https://github.com/SAP/fundamental-ngx/issues/12633)
+
+
+
+
+
 ## [0.53.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.11...v0.53.2-rc.12) (2024-11-26)
 
 
