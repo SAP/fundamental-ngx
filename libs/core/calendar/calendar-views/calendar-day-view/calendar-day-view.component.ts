@@ -616,6 +616,11 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         this.nextMonthSelect.emit();
     }
 
+    /** @hidden */
+    private _focusOnLegendsDay(): void {
+        this._focusElementBySelector('.fd-calendar__legend-item');
+    }
+
     /**
      * @hidden
      * Method that creates array of CalendarDay models which will be shown on day grid,

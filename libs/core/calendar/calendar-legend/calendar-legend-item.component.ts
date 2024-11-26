@@ -26,15 +26,19 @@ let id = 0;
         </span>
     `,
     host: {
-        '[attr.id]': 'id()'
+        '[attr.id]': 'id()',
+        '(focus)': 'onFocus()',
+        tabindex: '0'
     }
 })
 export class LegendItemComponent implements OnChanges, OnInit, CssClassBuilder {
     /** The text of the legend item */
+    // text = input<string>('');
     @Input() text: string;
 
     /** The color of the legend item marker */
-    color = input<Nullable<string>>('');
+    // color = input<Nullable<string>>('');
+    @Input() color: string;
 
     /** The type of the legend item  */
     type = input<Nullable<string>>('');
@@ -90,6 +94,12 @@ export class LegendItemComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** @hidden */
     getColorClass(): string {
-        return this.color() ? `fd-calendar-legend__item--${this.color()}` : '';
+        // return this.color() ? `fd-calendar-legend__item--${this.color()}` : '';
+        return this.color ? `fd-calendar-legend__item--${this.color}` : '';
+    }
+
+    /** @hidden */
+    onFocus(): void {
+        console.log('Host element is focused!');
     }
 }

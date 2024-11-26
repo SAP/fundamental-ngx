@@ -53,6 +53,11 @@ export class CalendarLegendExampleComponent {
             specialDayNumber: 10,
             rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) === 15,
             legendText: 'Tomorrow'
+        },
+        {
+            specialDayNumber: 11,
+            rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) === 20,
+            legendText: 'Antoher Day'
         }
     ];
 }
