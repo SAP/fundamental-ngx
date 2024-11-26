@@ -2,6 +2,10 @@
     <th
         [class.fd-table__cell--fixed]="fixed"
         fd-table-cell
+        [ngClass]="{
+            'fd-table__cell--no-horizontal-border': noHorizontalBorders || noBorders,
+            'fd-table__cell--no-vertical-border': noVerticalBorders || noBorders
+        }"
         fd-table-status-indicator
         fdkDisabled
         [style.min-width]="_fdpTableService._semanticHighlightingColumnWidth$()"
@@ -12,6 +16,10 @@
 @if (isShownSelectionColumn) {
     <th
         fd-table-cell
+        [ngClass]="{
+            'fd-table__cell--no-horizontal-border': noHorizontalBorders || noBorders,
+            'fd-table__cell--no-vertical-border': noVerticalBorders || noBorders
+        }"
         [focusable]="true"
         [class.fd-table__cell--fixed]="fixed"
         class="fd-table__cell--checkbox"
@@ -61,6 +69,7 @@
         [id]="rowId + '__' + column.name"
         [attr.aria-colindex]="$index"
         [attr.aria-sort]="_fdpTableService.sortRules$().get(column.key) | fdpTableColumnSortingDirection"
+        [class.fd-table__cell--non-interactive]="column.nonInteractive"
         [ngClass]="[
             'fdp-table__col--' + column.name,
             column._freezed ? 'fd-table__cell--fixed' : '',
@@ -81,6 +90,9 @@
                     : _tableColumnResizeService.getPrevColumnsWidth(column.name)
                     : _tableColumnResizeService.getColumnWidthStyle(column.name)
                     : _tableColumnResizeService.getNextColumnsWidth(column.name)
+                    : noBorders
+                    : noVerticalBorders
+                    : noHorizontalBorders
         "
         [fdPopoverTrigger]="(column | isColumnHasHeaderMenu) ? tablePopover.popover : null"
         (cellFocused)="_tableRowService.cellFocused($event)"
@@ -103,7 +115,15 @@
 }
 
 @if (_fdpTableService._isShownNavigationColumn$()) {
-    <th fd-table-cell class="fdp-table__cell--navigation is-last-child" role="columnheader"></th>
+    <th
+        fd-table-cell
+        [ngClass]="{
+            'fd-table__cell--no-horizontal-border': noHorizontalBorders || noBorders,
+            'fd-table__cell--no-vertical-border': noVerticalBorders || noBorders
+        }"
+        class="fdp-table__cell--navigation is-last-child"
+        role="columnheader"
+    ></th>
 }
 
 <th

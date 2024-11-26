@@ -18,7 +18,7 @@
         }
     </div>
     @if (showGrowingButton) {
-        <fdp-table-growing-button [showItemsCount]="showItemsCount" [showItemsCount]="true"></fdp-table-growing-button>
+        <fdp-table-growing-button [showItemsCount]="showItemsCount"></fdp-table-growing-button>
     }
 </fd-busy-indicator>
 <!-- Table Template -->
@@ -45,6 +45,9 @@
             <thead fd-table-header [nonInteractive]="nonInteractiveHeader" class="fdp-table__header">
                 <tr
                     fdp-table-header-row
+                    [noBorders]="noBorders"
+                    [noHorizontalBorders]="noHorizontalBorders"
+                    [noVerticalBorders]="noVerticalBorders"
                     [rowId]="id"
                     [fixed]="fixed"
                     [isShownSelectionColumn]="isSelectionColumnShown"
@@ -90,7 +93,7 @@
                                         [keyToColumnMap]="_keyToColumnMap"
                                         [tableColumnsLength]="_tableColumnsLength"
                                         (toggleGroupRow)="_toggleGroupRow($event)"
-                                        (click)="_emitRowActivate(row)"
+                                        (click)="_emitRowActivate(row, $event.ctrlKey || $event.metaKey)"
                                     ></tr>
                                 }
                                 @default {

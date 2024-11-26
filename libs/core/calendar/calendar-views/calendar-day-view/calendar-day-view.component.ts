@@ -333,6 +333,9 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         if (changes['startingDayOfWeek']) {
             this._refreshShortWeekDays();
         }
+        if (changes['specialDaysRules']) {
+            this._buildDayViewGrid();
+        }
     }
 
     /**

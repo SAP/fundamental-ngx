@@ -6,6 +6,7 @@
     let-groupable="groupable"
     let-columns="columns"
     let-hasAnyActions="hasAnyActions"
+    let-appliedFilters="appliedFilters"
 >
     <fd-toolbar
         fdType="transparent"
@@ -131,4 +132,33 @@
             }
         }
     </fd-toolbar>
+    @if (appliedFilters().length) {
+        <fd-toolbar
+            fdType="info"
+            [active]="true"
+            [titleId]="tableToolbarTitleId"
+            [shouldOverflow]="shouldOverflow"
+            [headingLevel]="headingLevel"
+        >
+            <label fd-toolbar-label>
+                {{ 'platformTable.filteredBy' | fdTranslate }}:
+                @for (filter of appliedFilters(); track filter.columnName; let i = $index) {
+                    {{ filter.columnName }} ({{ filter.params }})
+                    @if (i < appliedFilters().length - 1) {
+                        ,
+                    }
+                }
+            </label>
+            <fd-toolbar-spacer></fd-toolbar-spacer>
+            <button
+                fdCompact
+                (click)="_closeFilterToolbar()"
+                fd-button
+                fdType="transparent"
+                glyph="decline"
+                ariaLabel="Close Toolbar Button"
+                title="Close Toolbar Button"
+            ></button>
+        </fd-toolbar>
+    }
 </ng-template>

@@ -7,6 +7,17 @@ fd-checkbox {
 
     .fd-checkbox__label {
         user-select: none;
+
+        &-container {
+            pointer-events: auto;
+        }
+    }
+
+    .fd-checkbox.is-disabled,
+    .fd-checkbox.is-readonly {
+        & + .fd-checkbox__label .fd-checkbox__label-container {
+            pointer-events: none !important;
+        }
     }
 
     &.fd-checkbox--standalone {

@@ -32,7 +32,6 @@ describe('Checkbox test suite', () => {
         checkboxWithValue,
         tristateCheckboxes,
         tristateCheckboxParis,
-        errorCheckboxes,
         presenceCheckbox,
         accessibilityCheckboxes,
         disabledAccessibilityCheckbox,
@@ -133,8 +132,7 @@ describe('Checkbox test suite', () => {
 
     describe('Checkbox With Form and State Change on Error', () => {
         it('should check error handling examples', async () => {
-            await scrollIntoView(errorCheckboxes, 1);
-            await click(errorCheckboxes, 1);
+            await clickNextElement(presenceCheckbox);
             await waitForElDisplayed(checkboxPage.errorTooltip);
             await expect((await getText(checkboxPage.errorTooltip)).trim()).toEqual(checkboxErrorTooltip);
             // TODO improve hover check stability for FF
@@ -142,7 +140,7 @@ describe('Checkbox test suite', () => {
                 console.log('skip hover check');
                 return;
             }
-        }, 1);
+        });
 
         it('should check error handling form submission', async () => {
             await click(checkboxPage.submitBtn);

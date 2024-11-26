@@ -601,10 +601,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
             return;
         }
 
-        if (!open && this.open && !this.mobile) {
-            this.searchInputElement.nativeElement.focus();
-        }
-
         if (this.open !== open) {
             this.openChange.emit(open);
         }
@@ -672,6 +668,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         this._subscriptions.add(sub);
         if (isListItem) {
             this.openChangeHandle(false);
+            this.searchInputElement?.nativeElement.focus();
         } else {
             // stop propagation on the checkbox so event doesn't reach the list item
             event.stopPropagation();
@@ -859,12 +856,12 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
 
     /** @hidden */
     private _defaultFilter(contentArray: this['dropdownValues'], searchTerm: string = ''): this['dropdownValues'] {
-        const searchLower = searchTerm.toLocaleLowerCase();
+        const trimmedSearchTerm = searchTerm.trim().toLocaleLowerCase();
         return contentArray.filter((item) => {
             if (item) {
                 const displayedValue = isOptionItem(item) ? item.label : this.displayFn(item);
                 const term = displayedValue?.toLocaleLowerCase() || '';
-                return this.typeAheadMatcher(term, searchLower);
+                return this.typeAheadMatcher(term, trimmedSearchTerm);
             }
         });
     }

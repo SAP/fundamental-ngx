@@ -198,7 +198,8 @@ export default {
         ariaLabel: 'Wizard'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'More'
+        overflowTitleMore: 'More',
+        breadcrumbTrailLabel: 'Breadcrumb Trail'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Watchers',
@@ -518,7 +519,8 @@ export default {
         toolbarActionButtonTitle: 'Settings',
         settingsDialogHeader: 'Settings',
         confirmBtnLabel: 'OK',
-        cancelBtnLabel: 'Cancel'
+        cancelBtnLabel: 'Cancel',
+        filteredBy: 'Filtered by'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edit'
