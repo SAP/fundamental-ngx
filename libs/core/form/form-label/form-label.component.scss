@@ -29,6 +29,10 @@ $form-label-bottom-spacing: 0.125rem;
         position: relative;
         top: 0.125rem;
     }
+
+    &--allow-wrap {
+        text-wrap: auto;
+    }
 }
 
 .fd-form-label__wrapper {

@@ -24,12 +24,11 @@ export class WizardPo extends CoreBaseComponentPo {
     firstAdressInput = '#input-2';
     secAdressInput = '#input-3';
 
-    customerInformationSection = this.wizard + '.fd-container:nth-child(4) ';
-    column = '.fd-col';
-    savedName = this.customerInformationSection + this.column + ':nth-child(2) ' + 'label:nth-child(1)';
-    savedFirstAdress = this.customerInformationSection + this.column + ':nth-child(2) ' + 'label:nth-child(3)';
-    savedSecAdress = this.customerInformationSection + this.column + ':nth-child(2) ' + 'label:nth-child(5)';
-    editButton = this.customerInformationSection + this.column + ':nth-child(3) ' + 'a';
+    customerInformationSection = this.wizard + '.fd-container:nth-of-type(2) ';
+    savedName = this.customerInformationSection + 'div:nth-of-type(1) div:nth-of-type(2) label';
+    savedFirstAdress = this.customerInformationSection + 'div:nth-of-type(2) div:nth-of-type(2) label';
+    savedSecAdress = this.customerInformationSection + 'div:nth-of-type(3) div:nth-of-type(2) label';
+    editButton = this.customerInformationSection + 'div:nth-of-type(3) div:nth-of-type(3) a';
 
     contentSection = this.wizard + '.fd-wizard__content ';
     radioButton = this.contentSection + '.fd-radio';
