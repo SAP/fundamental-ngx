@@ -5,6 +5,7 @@
     let-filterable="filterable"
     let-groupable="groupable"
     let-columns="columns"
+    let-settings="settings"
     let-hasAnyActions="hasAnyActions"
     let-appliedFilters="appliedFilters"
 >
@@ -104,7 +105,7 @@
                     fdType="transparent"
                 ></button>
             }
-            @if (sortable() || filterable() || groupable()) {
+            @if (settings()) {
                 <button
                     fd-button
                     fd-toolbar-item
@@ -115,6 +116,45 @@
                     fdType="transparent"
                     aria-haspopup="modal"
                     (click)="openSorting()"
+                ></button>
+            }
+            @if (sortable()) {
+                <button
+                    fd-button
+                    fd-toolbar-item
+                    fdOverflowPriority="never"
+                    glyph="sort"
+                    [title]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
+                    [ariaLabel]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
+                    fdType="transparent"
+                    aria-haspopup="modal"
+                    (click)="openSorting()"
+                ></button>
+            }
+            @if (filterable()) {
+                <button
+                    fd-button
+                    fd-toolbar-item
+                    fdOverflowPriority="never"
+                    glyph="filter"
+                    [title]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
+                    [ariaLabel]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
+                    fdType="transparent"
+                    aria-haspopup="modal"
+                    (click)="openFiltering()"
+                ></button>
+            }
+            @if (groupable()) {
+                <button
+                    fd-button
+                    fd-toolbar-item
+                    fdOverflowPriority="never"
+                    glyph="group-2"
+                    [title]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
+                    [ariaLabel]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
+                    fdType="transparent"
+                    aria-haspopup="modal"
+                    (click)="openGrouping()"
                 ></button>
             }
             @if (columns()) {

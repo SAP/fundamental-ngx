@@ -3,15 +3,16 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChildren,
+    DestroyRef,
     forwardRef,
+    inject,
     Input,
-    OnDestroy,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { filter, startWith } from 'rxjs/operators';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import {
     CollectionFilter,
@@ -56,7 +57,7 @@ export const dialogConfig: DialogConfig = {
     encapsulation: ViewEncapsulation.None,
     standalone: true
 })
-export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestroy {
+export class TableViewSettingsDialogComponent implements AfterViewInit {
     /** Reference to table component. */
     @Input()
     set table(table: Table) {
@@ -81,11 +82,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
     /** @hidden */
     _dialogRef: DialogRef<TableDialogCommonData, any>;
 
-    /** @hidden */
-    private _subscriptions = new Subscription();
-
-    /** @hidden */
-    private _tableSubscriptions = new Subscription();
+    private readonly destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(private readonly _dialogService: DialogService) {}
@@ -93,12 +90,6 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
     /** @hidden */
     ngAfterViewInit(): void {
         this._listenToFilters();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
-        this._unsubscribeFromTable();
     }
 
     /** Open Sort Settings Dialog */
@@ -142,34 +133,36 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
             this.table.injector
         );
 
-        this._subscriptions.add(
-            this._dialogRef.afterClosed
-                .pipe(filter((result) => !!result))
-                .subscribe(({ sortingData, filteringData, groupingData }) => {
-                    if (sortingData) {
-                        this._applySorting(sortingData.field, sortingData.direction);
-                    }
-                    if (filteringData) {
-                        this._applyFiltering(filteringData.filterBy);
-                    }
-                    if (groupingData) {
-                        this._applyGrouping(groupingData.field, groupingData.direction);
-                    }
-                })
-        );
+        this._dialogRef.afterClosed
+            .pipe(
+                filter((result) => !!result),
+                takeUntilDestroyed(this.destroyRef)
+            )
+            .subscribe(({ sortingData, filteringData, groupingData }) => {
+                if (sortingData) {
+                    this._applySorting(sortingData.field, sortingData.direction);
+                }
+                if (filteringData) {
+                    this._applyFiltering(filteringData.filterBy);
+                }
+                if (groupingData) {
+                    this._applyGrouping(groupingData.field, groupingData.direction);
+                }
+            });
     }
 
     /** @hidden */
     private _listenToFilters(): void {
-        this.filters.changes.pipe(startWith(null)).subscribe(() => {
-            this._table?.showFilterSettingsInToolbar(this.filters.toArray().length > 0);
+        this.filters.changes.pipe(startWith(null), takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+            if (this.filters.toArray().length > 0) {
+                this._table?.showSettingsInToolbar(true);
+            }
         });
     }
 
     /** @hidden */
     private _setTable(table: Table): void {
         this._table = table;
-        this._unsubscribeFromTable();
         this._subscribeToTable();
     }
 
@@ -179,28 +172,22 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
             return;
         }
 
-        this._listenToTableTriggersToOpenDialogs();
+        this._table.openTableSortSettings
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(() => this.showViewSettingsDialog());
 
-        this._listenToTableColumns();
-    }
+        this._table.openTableFilterSettings
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(() => this.showViewSettingsDialog());
 
-    /** @hidden */
-    private _listenToTableTriggersToOpenDialogs(): void {
-        this._tableSubscriptions.add(this._table.openTableSortSettings.subscribe(() => this.showViewSettingsDialog()));
-        this._tableSubscriptions.add(
-            this._table.openTableFilterSettings.subscribe(() => this.showViewSettingsDialog())
-        );
-        this._tableSubscriptions.add(this._table.openTableGroupSettings.subscribe(() => this.showViewSettingsDialog()));
-    }
+        this._table.openTableGroupSettings
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(() => this.showViewSettingsDialog());
 
-    /** @hidden */
-    private _listenToTableColumns(): void {
-        this._tableSubscriptions.add(
-            this._table.tableColumnsStream.subscribe((columns: TableColumn[]) => {
-                this._table?.showSortSettingsInToolbar(columns.some(({ sortable }) => sortable));
-                this._table?.showGroupSettingsInToolbar(columns.some(({ groupable }) => groupable));
-            })
-        );
+        this._table.tableColumnsStream.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((columns: TableColumn[]) => {
+            const show = columns.some(({ sortable }) => sortable) || columns.some(({ groupable }) => groupable);
+            this._table?.showSettingsInToolbar(show);
+        });
     }
 
     /** @hidden */
@@ -226,11 +213,5 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
     /** @hidden */
     private _applyGrouping(field: string | null, direction: SortDirection): void {
         this._table?.group(field ? [{ field, direction, showAsColumn: true }] : []);
-    }
-
-    /** @hidden */
-    private _unsubscribeFromTable(): void {
-        this._tableSubscriptions.unsubscribe();
-        this._tableSubscriptions = new Subscription();
     }
 }
