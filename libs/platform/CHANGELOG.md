@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.11...v0.53.2-rc.12) (2024-11-26)
+
+
+### Bug Fixes
+
+* **core,platform:** wizard template, a11y updates ([#12720](https://github.com/SAP/fundamental-ngx/issues/12720)) ([d4a5f8b](https://github.com/SAP/fundamental-ngx/commit/d4a5f8b8bb2a7d99b5d6e979f911e7ca537f900d))
+
+
+
+
+
 ## [0.53.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.10...v0.53.2-rc.11) (2024-11-25)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
