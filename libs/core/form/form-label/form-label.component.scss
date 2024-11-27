@@ -83,3 +83,8 @@ $form-label-bottom-spacing: 0.125rem;
         }
     }
 }
+
+.fd-form-label--colon {
+    -webkit-padding-end: 0.25rem;
+    padding-inline-end: 0.25rem;
+}
