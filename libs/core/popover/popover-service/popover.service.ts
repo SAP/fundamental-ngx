@@ -135,7 +135,7 @@ export class PopoverService extends BasePopoverClass {
         // Add keydown listener for space key
         this._renderer.listen('document', 'keydown', (event: KeyboardEvent) => {
             if (event.code === 'Space' && this.isOpen) {
-                this._focusFirstTabbableElement();
+                this._storeAndFocusFirstTabbable();
             }
         });
     }
@@ -599,9 +599,14 @@ export class PopoverService extends BasePopoverClass {
     /** @hidden */
     private _focusFirstTabbableElement(focusLastElement = true): void {
         if (focusLastElement && this.focusAutoCapture) {
-            this._lastActiveElement = <HTMLElement>document.activeElement;
-            this._getPopoverBody()?._focusFirstTabbableElement();
+            this._storeAndFocusFirstTabbable();
         }
+    }
+
+    /** @hidden */
+    private _storeAndFocusFirstTabbable(): void {
+        this._lastActiveElement = <HTMLElement>document.activeElement;
+        this._getPopoverBody()?._focusFirstTabbableElement();
     }
 
     /** @hidden */
