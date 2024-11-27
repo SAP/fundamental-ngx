@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.6](https://github.com/SAP/fundamental-ngx/compare/v0.50.5...v0.50.6) (2024-11-27)
+
+
+### Bug Fixes
+
+* **core:** label post space ([cd61992](https://github.com/SAP/fundamental-ngx/commit/cd619926156a6ae91882205023ec5de03f3d2bb3))
+
+
+
+
+
 ## [0.50.5](https://github.com/SAP/fundamental-ngx/compare/v0.50.4...v0.50.5) (2024-11-05)
 
 
