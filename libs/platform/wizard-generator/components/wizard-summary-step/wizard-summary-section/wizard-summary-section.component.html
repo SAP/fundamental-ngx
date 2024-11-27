@@ -1,28 +1,28 @@
 @for (group of step.forms; track _trackFn($index, group)) {
     <h4 fd-title [headerSize]="4">{{ group.title }}</h4>
     <fd-layout-grid [style.margin-bottom.rem]="2">
-        <div fdLayoutGridRow>
-            <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
-                @for (item of group.items; track item) {
+        @for (item of group.items; track item; let index = $index) {
+            <div fdLayoutGridRow>
+                <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
                     <div>
-                        <label fd-form-label> {{ item.label }}: </label>
+                        <label fd-form-label [allowWrap]="true" [alignLabelEnd]="true"> {{ item.label }}: </label>
                     </div>
-                }
-            </div>
-            <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
-                @for (item of group.items; track item) {
+                </div>
+                <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
                     <div>
-                        <label fd-form-label>
+                        <label fd-form-label [allowWrap]="true">
                             {{ item.value || '-' }}
                         </label>
                     </div>
+                </div>
+                @if (index === group.items.length - 1) {
+                    <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
+                        <fdp-link href="#" (click)="_editStep($event)">
+                            {{ 'platformWizardGenerator.summarySectionEditStep' | fdTranslate }}
+                        </fdp-link>
+                    </div>
                 }
             </div>
-            <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
-                <fdp-link href="#" (click)="_editStep($event)">
-                    {{ 'platformWizardGenerator.summarySectionEditStep' | fdTranslate }}
-                </fdp-link>
-            </div>
-        </div>
+        }
     </fd-layout-grid>
 }

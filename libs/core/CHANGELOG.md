@@ -3,6 +3,93 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.12...v0.53.2-rc.13) (2024-11-26)
+
+
+### Bug Fixes
+
+* **core:** prevent grid list item spacing click. ([#12735](https://github.com/SAP/fundamental-ngx/issues/12735)) ([ccf00b9](https://github.com/SAP/fundamental-ngx/commit/ccf00b91fcce37e91dd0aadc30e0d05aa2f81f9b)), closes [#12633](https://github.com/SAP/fundamental-ngx/issues/12633) [#12633](https://github.com/SAP/fundamental-ngx/issues/12633)
+
+
+
+
+
+## [0.53.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.11...v0.53.2-rc.12) (2024-11-26)
+
+
+### Bug Fixes
+
+* **core,platform:** wizard template, a11y updates ([#12720](https://github.com/SAP/fundamental-ngx/issues/12720)) ([d4a5f8b](https://github.com/SAP/fundamental-ngx/commit/d4a5f8b8bb2a7d99b5d6e979f911e7ca537f900d))
+
+
+
+
+
+## [0.53.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.10...v0.53.2-rc.11) (2024-11-25)
+
+
+### Bug Fixes
+
+* **core:** notification a11y improvements ([#12752](https://github.com/SAP/fundamental-ngx/issues/12752)) ([8a41b6f](https://github.com/SAP/fundamental-ngx/commit/8a41b6fb840bb5b143f6c2b4d83b37ae6d5e780a))
+
+
+
+
+
+## [0.53.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.9...v0.53.2-rc.10) (2024-11-25)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.53.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.8...v0.53.2-rc.9) (2024-11-22)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.53.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.7...v0.53.2-rc.8) (2024-11-22)
+
+
+### Bug Fixes
+
+* **core:** Checkbox link in  label  is not clickable ([#12636](https://github.com/SAP/fundamental-ngx/issues/12636)) ([e8b42cc](https://github.com/SAP/fundamental-ngx/commit/e8b42cc895fe4b85cff64badde8e0671d8da55fb)), closes [#12577](https://github.com/SAP/fundamental-ngx/issues/12577) [#11783](https://github.com/SAP/fundamental-ngx/issues/11783)
+
+
+
+
+
+## [0.53.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.6...v0.53.2-rc.7) (2024-11-22)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.53.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.5...v0.53.2-rc.6) (2024-11-22)
+
+
+### Bug Fixes
+
+* **core:** wizard section add role attribute ([#12734](https://github.com/SAP/fundamental-ngx/issues/12734)) ([45cd534](https://github.com/SAP/fundamental-ngx/commit/45cd534628a0cab66a7350d5ca08b50497c3a13b)), closes [#12674](https://github.com/SAP/fundamental-ngx/issues/12674)
+
+
+
+
+
+## [0.53.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.4...v0.53.2-rc.5) (2024-11-21)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 ## [0.53.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.3...v0.53.2-rc.4) (2024-11-18)
 
 **Note:** Version bump only for package @fundamental-ngx/core

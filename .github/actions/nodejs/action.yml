@@ -15,7 +15,7 @@ runs:
     using: composite
     steps:
         - name: Use Node.js ${{ inputs.node-version }}
-          uses: actions/setup-node@v4.0.3
+          uses: actions/setup-node@v4.1.0
           with:
               node-version: ${{ inputs.node-version }}
 
@@ -23,16 +23,16 @@ runs:
           shell: bash
           run: npm install -g corepack
 
-        - name: Enable Corepack for Yarn 4.4.1
+        - name: Enable Corepack for Yarn 4.5.1
           shell: bash
           run: |
               corepack enable yarn && yarn
 
-        - name: Install Yarn 4.4.1 (if not available)
+        - name: Install Yarn 4.5.1 (if not available)
           shell: bash
           run: |
-              if ! yarn --version | grep -q "4.4.1"; then
-                npm install -g yarn@4.4.1
+              if ! yarn --version | grep -q "4.5.1"; then
+                npm install -g yarn@4.5.1
               fi
 
         - name: Get yarn cache directory path
@@ -41,14 +41,14 @@ runs:
           shell: bash
 
         - name: Use the global Yarn cache if available
-          uses: actions/cache@v4.0.2
+          uses: actions/cache@v4.1.2
           with:
               path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
               key: ${{ runner.os }}-node-${{ inputs.node_version }}-yarn-${{ hashFiles('**/yarn.lock') }}
               restore-keys: |
                   ${{ runner.os }}-node-${{ inputs.node_version }}-yarn-
 
-        - uses: actions/cache@v4.0.2
+        - uses: actions/cache@v4.1.2
           id: node_modules
           name: Use project node_modules cache if available
           with:
@@ -60,4 +60,16 @@ runs:
         - name: Install dependencies
           if: inputs.frozen-lockfile != 'true' || steps.node_modules.outputs.cache-hit != 'true'
           run: yarn install ${{ inputs.frozen-lockfile == 'true' && '--frozen-lockfile' || '' }}
+          shell: bash
+
+        - name: Output nx build logs
+          if: failure()
+          run: |
+              log_files=$(find /tmp -name '*.log')
+              echo "Found log files: $log_files"
+
+              for log_file in $log_files; do
+                echo "====== Contents of $log_file ======"
+                cat "$log_file"
+              done
           shell: bash

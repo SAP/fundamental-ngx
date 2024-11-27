@@ -4,7 +4,8 @@ import { Directive } from '@angular/core';
     selector: '[fdNotificationPopover], [fd-notification-popover]',
     standalone: true,
     host: {
-        class: 'fd-notification-popover'
+        class: 'fd-notification-popover',
+        role: 'dialog'
     }
 })
 export class NotificationPopoverDirective {}
