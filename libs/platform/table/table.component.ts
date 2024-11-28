@@ -2119,7 +2119,9 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _calculateTableColumnsLength(): void {
-        this._tableColumnsLength = this.getTableColumns().length + (this._isSelectionColumnShown ? 1 : 0);
+        const isGroupable = this.initialState?.initialGroupBy.length;
+        this._tableColumnsLength =
+            this.getTableColumns().length + (this._isSelectionColumnShown || isGroupable ? 1 : 0);
     }
 
     /** @hidden */
