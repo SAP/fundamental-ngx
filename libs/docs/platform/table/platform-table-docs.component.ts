@@ -37,7 +37,6 @@ import {
 } from '@fundamental-ngx/platform/table-helpers';
 import { PlatformTableEditableRowsExampleComponent } from './examples/editable-rows/platform-table-editable-rows-example.component';
 import { PlatformTableInitialLoadingExampleComponent } from './examples/initial-loading/platform-table-initial-loading-example.component';
-import { NoDataExampleComponent } from './examples/no-data/no-data-example.component';
 import { PlatformTableColumnsNgforExampleComponent } from './examples/platform-table-columns-ngfor-example.component';
 import { PlatformTableCustomColumnExampleComponent } from './examples/platform-table-custom-column-example.component';
 import { PlatformTableCustomTitleExampleComponent } from './examples/platform-table-custom-title-example.component';
@@ -62,8 +61,6 @@ const platformTableCustomColumnSrc = 'platform-table-custom-column-example.compo
 const platformTableCustomColumnTsSrc = 'platform-table-custom-column-example.component.ts';
 const platformTableCustomTitleSrc = 'platform-table-custom-title-example.component.html';
 const platformTableCustomTitleTsSrc = 'platform-table-custom-title-example.component.ts';
-const platformTableCustomWidthSrc = 'platform-table-custom-width-example.component.html';
-const platformTableCustomWidthTsSrc = 'platform-table-custom-width-example.component.ts';
 const platformTableFreezableSrc = 'platform-table-freezable-example.component.html';
 const platformTableFreezableTsSrc = 'platform-table-freezable-example.component.ts';
 const platformTableLoadingSrc = 'platform-table-loading-example.component.html';
@@ -72,8 +69,6 @@ const platformTableInitialStateSrc = 'platform-table-initial-state-example.compo
 const platformTableInitialStateTsSrc = 'platform-table-initial-state-example.component.ts';
 const platformTreeTableDefaultSrc = 'platform-table-tree-example.component.html';
 const platformTreeTableDefaultTsSrc = 'platform-table-tree-example.component.ts';
-const platformTableNoOuterBordersSrc = 'platform-table-navigatable-row-indicator-example.component.html';
-const platformTableNoOuterBordersTsSrc = 'platform-table-navigatable-row-indicator-example.component.ts';
 const platformTableSemanticSrc = 'platform-table-semantic-example.component.html';
 const platformTableSemanticTsSrc = 'platform-table-semantic-example.component.ts';
 const platformTableRowClassSrc = 'platform-table-row-class-example.component.html';
@@ -94,9 +89,6 @@ const platformInitialLoadingTsSrc = 'initial-loading/platform-table-initial-load
 
 const platformTableNgForSrc = 'platform-table-columns-ngfor-example.component.html';
 const platformTableNgForTsSrc = 'platform-table-columns-ngfor-example.component.ts';
-
-const noDataTableExampleSrc = 'no-data-example.component.html';
-const noDataTableExampleTsSrc = 'no-data-example.component.ts';
 
 const illustrationDialogNoMail = '/assets/images/sapIllus-Dialog-NoMail.svg';
 
@@ -137,8 +129,7 @@ const illustrationDialogNoMail = '/assets/images/sapIllus-Dialog-NoMail.svg';
         TableInitialStateDirective,
         ContentDensityDirective,
         PlatformButtonModule,
-        FdDatetimeModule,
-        NoDataExampleComponent
+        FdDatetimeModule
     ]
 })
 export class PlatformTableDocsComponent {
@@ -430,22 +421,6 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-columns-ngfor-example',
             component: 'PlatformTableColumnsNgforExampleComponent',
             name: 'platform-table-columns-ngfor-example.component.ts'
-        }
-    ];
-
-    noDataExample: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(noDataTableExampleSrc),
-            fileName: 'no-data-example',
-            name: 'no-data-example.component.html'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(noDataTableExampleTsSrc),
-            fileName: 'no-data-example',
-            component: 'NoDataExampleComponent',
-            name: 'no-data-example.component.ts'
         }
     ];
 
