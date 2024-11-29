@@ -107,9 +107,6 @@ export class TablePo extends PlatformBaseComponentPo {
 
     constructor(public readonly url: string) {
         super();
-        console.log({
-            url: this.url
-        });
     }
 
     async open(): Promise<void> {
