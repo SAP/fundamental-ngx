@@ -488,7 +488,7 @@ describe('TableComponent Host', () => {
         describe('data source', () => {
             it('fetch should be triggered when call table.filter()', () => {
                 const filterBy: CollectionFilter[] = [
-                    { field: 'status', value: 'valid', strategy: 'equalTo', exclude: false }
+                    { field: 'status', value: 'valid', strategy: 'equalTo', fieldName: 'status', exclude: false }
                 ];
 
                 tableComponent.filter(filterBy);
