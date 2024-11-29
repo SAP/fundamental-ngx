@@ -3,9 +3,11 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    EventEmitter,
     Input,
     OnChanges,
     OnInit,
+    Output,
     ViewEncapsulation,
     input
 } from '@angular/core';
@@ -39,6 +41,9 @@ export class LegendItemComponent implements OnChanges, OnInit, CssClassBuilder {
     /** The color of the legend item marker */
     // color = input<Nullable<string>>('');
     @Input() color: string;
+
+    /** Sending the focused item to parent */
+    @Output() focusedElementEvent = new EventEmitter<string>();
 
     /** The type of the legend item  */
     type = input<Nullable<string>>('');
@@ -100,6 +105,6 @@ export class LegendItemComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** @hidden */
     onFocus(): void {
-        console.log('Host element is focused!');
+        this.focusedElementEvent.emit(this.id());
     }
 }

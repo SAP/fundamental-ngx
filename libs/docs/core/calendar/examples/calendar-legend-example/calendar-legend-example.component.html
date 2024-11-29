@@ -1,7 +1,7 @@
 <div style="display: flex; justify-content: center; gap: 5rem">
     <div style="display: flex; flex-direction: column; gap: 0.5rem">
         <fd-calendar [fdCompact]="true" [specialDaysRules]="specialDays"></fd-calendar>
-        <fd-calendar-legend [specialDaysRules]="specialDays" [col]="true">
+        <fd-calendar-legend [specialDaysRules]="specialDays" [col]="false">
             <fd-calendar-legend-item [circle]="true">Today</fd-calendar-legend-item>
             <fd-calendar-legend-item color="placeholder-5">Tomorrow</fd-calendar-legend-item>
             <fd-calendar-legend-item type="appointment" color="placeholder-1">Next Week</fd-calendar-legend-item>

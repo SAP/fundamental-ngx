@@ -10,11 +10,6 @@ import {
 } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { LegendItemComponent } from '../../../../../../libs/core/calendar/calendar-legend/calendar-legend-item.component';
-import {
-    CalendarLegendAutoColumnDirective,
-    CalendarLegendDirective
-} from '../../../../../../libs/core/calendar/calendar-legend/calendar-legend.directive';
-
 import { CalendarLegendComponent } from '../../../../../../libs/core/calendar/calendar-legend/calendar-legend.component';
 
 @Component({
@@ -31,14 +26,7 @@ import { CalendarLegendComponent } from '../../../../../../libs/core/calendar/ca
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    imports: [
-        CalendarComponent,
-        CalendarLegendDirective,
-        CalendarLegendAutoColumnDirective,
-        LegendItemComponent,
-        ContentDensityDirective,
-        CalendarLegendComponent
-    ]
+    imports: [CalendarComponent, LegendItemComponent, ContentDensityDirective, CalendarLegendComponent]
 })
 export class CalendarLegendExampleComponent {
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
