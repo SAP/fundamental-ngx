@@ -22,7 +22,7 @@ import { CheckboxComponent, FdpFormGroupModule } from '@fundamental-ngx/platform
 export class PlatformChekboxStyleComponent {
     customForm = new FormGroup({
         presence: new FormControl(),
-        aggrement: new FormControl()
+        agreement: new FormControl()
     });
     data = new SomeObject(true, true);
     validators = [Validators.requiredTrue];
@@ -35,6 +35,6 @@ export class PlatformChekboxStyleComponent {
 class SomeObject {
     constructor(
         public presence: boolean,
-        public aggrement: boolean
+        public agreement: boolean
     ) {}
 }

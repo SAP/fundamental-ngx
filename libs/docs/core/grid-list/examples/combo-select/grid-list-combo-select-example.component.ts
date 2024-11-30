@@ -99,7 +99,6 @@ export class GridListComboSelectComponent {
     }
 
     onSelectionChange(event: GridListSelectionEvent<number>): void {
-        return;
         console.log('Multi-Select: selected items', event);
     }
 
@@ -124,5 +123,9 @@ export class GridListComboSelectComponent {
             this.list.splice(event.index, 1);
             alert('Deleted item event ' + event.value);
         }
+    }
+
+    onCardClick() {
+        alert('Card clicked');
     }
 }

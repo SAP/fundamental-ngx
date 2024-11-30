@@ -147,6 +147,7 @@ import {
     NoDataWrapperComponent,
     PlatformTableColumnResizerComponent,
     TABLE_TOOLBAR,
+    TableAppliedFilter,
     TableToolbarInterface,
     ToolbarContext
 } from './components';
@@ -811,6 +812,8 @@ export class TableComponent<T = any>
     /** @hidden */
     private readonly _isShownGroupSettingsInToolbar$ = signal(false);
     /** @hidden */
+    private _appliedFilterNames = signal<TableAppliedFilter[]>([]);
+    /** @hidden */
     private readonly _isShownColumnSettingsInToolbar$ = signal(false);
     /**
      * @hidden
@@ -874,7 +877,6 @@ export class TableComponent<T = any>
         this._dndTableDirective?.setTable(this);
         this._virtualScrollDirective?.setTable(this);
         this._dataSourceDirective.setTable(this);
-
         this._rowTrackBy = this._defaultTrackBy;
         this._toolbarContext = {
             counter: this._dataSourceDirective.totalItems$,
@@ -888,7 +890,8 @@ export class TableComponent<T = any>
                     this._isShownFilterSettingsInToolbar$() ||
                     this._isShownGroupSettingsInToolbar$() ||
                     this._isShownColumnSettingsInToolbar$()
-            )
+            ),
+            appliedFilters: this._appliedFilterNames
         };
 
         this.tableColumnsStream = this._tableService.tableColumns$.asObservable();
@@ -1603,8 +1606,10 @@ export class TableComponent<T = any>
         }
 
         if (row) {
-            this._emitRowNavigate(row);
-            this._emitRowActivate(row);
+            const e = event as MouseEvent | KeyboardEvent;
+            const ctrlKey = e.ctrlKey || e.metaKey;
+            this._emitRowNavigate(row, ctrlKey);
+            this._emitRowActivate(row, ctrlKey);
         }
     }
 
@@ -1614,13 +1619,13 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    _emitRowActivate(row: TableRow<T>): void {
+    _emitRowActivate(row: TableRow<T>, ctrlKey: boolean): void {
         if (!this.rowsActivable) {
             return;
         }
 
         const rowIndex = this._tableRows.indexOf(row);
-        this.rowActivate.emit(new TableRowActivateEvent<T>(rowIndex, row.value));
+        this.rowActivate.emit(new TableRowActivateEvent<T>(rowIndex, ctrlKey, row.value));
     }
 
     /**
@@ -1641,7 +1646,7 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    _emitRowNavigate(row: TableRow<T>): void {
+    _emitRowNavigate(row: TableRow<T>, ctrlKey: boolean): void {
         if (!row.navigatable) {
             return;
         }
@@ -1651,7 +1656,7 @@ export class TableComponent<T = any>
             this._navigatedRowIndex = rowIndex;
         }
 
-        this.rowNavigate.emit(new TableRowActivateEvent<T>(rowIndex, row.value));
+        this.rowNavigate.emit(new TableRowActivateEvent<T>(rowIndex, ctrlKey, row.value));
     }
 
     /** Fetch data source data. */
@@ -1813,7 +1818,6 @@ export class TableComponent<T = any>
                     this._dataSourceDirective._tableDataSource.fetch(state);
                 })
         );
-
         this._subscriptions.add(
             this._tableService.stateChange$.subscribe(({ type, state }) => {
                 switch (type) {
@@ -1825,6 +1829,8 @@ export class TableComponent<T = any>
                         break;
                     case 'filter':
                         this.filterChange.emit(new TableFilterChangeEvent(this, state.current, state.previous));
+                        this.tableColumnFilterChange.emit();
+                        this._setAppliedFilterNames(state.current);
                         break;
                     case 'freeze':
                         if (!this._lastFreezableColumnCalculation) {
@@ -1851,6 +1857,32 @@ export class TableComponent<T = any>
         );
 
         this._listenToTableRowStateChange();
+    }
+
+    /** @hidden */
+    private _setAppliedFilterNames(filters: CollectionFilter[]): void {
+        const formattedFilters = filters.map((f) => ({
+            columnName: this._formatColumnName(f.field),
+            params: this._formatParams(f.value)
+        }));
+
+        this._appliedFilterNames.set(formattedFilters);
+    }
+
+    // Helper function to format nested parameters
+    private _formatParams(value: any): string {
+        if (typeof value !== 'object' || value === null) {
+            return String(value); // Handle non-object values
+        }
+
+        return Object.entries(value)
+            .map(([key, val]) => `${key}: ${this._formatParams(val)}`) // Recursive call for nested objects
+            .join(', ');
+    }
+
+    /** @hidden */
+    private _formatColumnName(columnName: string): string {
+        return columnName.charAt(0).toUpperCase() + columnName.slice(1);
     }
 
     /** @hidden */
@@ -2087,7 +2119,9 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _calculateTableColumnsLength(): void {
-        this._tableColumnsLength = this.getTableColumns().length + (this._isSelectionColumnShown ? 1 : 0);
+        const isGroupable = this.initialState?.initialGroupBy.length;
+        this._tableColumnsLength =
+            this.getTableColumns().length + (this._isSelectionColumnShown || isGroupable ? 1 : 0);
     }
 
     /** @hidden */

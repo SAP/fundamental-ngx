@@ -1,12 +1,12 @@
 <div [style.min-height.px]="500">
-    <fd-popover [noArrow]="false">
+    <fd-popover [noArrow]="false" [focusTrapped]="true" [focusAutoCapture]="true">
         <fd-popover-control>
             <button fd-button label="Open Notification Group"></button>
         </fd-popover-control>
         <fd-popover-body>
-            <div fd-notification-popover>
+            <div fd-notification-popover aria-labelledby="fd-notification-title-1">
                 <fd-toolbar fdType="transparent" [clearBorder]="true">
-                    <h4 fd-title>Notifications(30)</h4>
+                    <h4 fd-title id="fd-notification-title-1">Notifications (30)</h4>
                     <fd-toolbar-spacer></fd-toolbar-spacer>
                     <button fd-button label="Clear All" fdType="transparent" ariaLabel="Clear All"></button>
                     <button
