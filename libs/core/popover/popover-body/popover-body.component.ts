@@ -231,7 +231,7 @@ export class PopoverBodyComponent implements AfterViewInit {
     }
 
     /** @hidden */
-    _focusFirstTabbableElement(forced = true): void {
+    _focusFirstTabbableElement(forced = false): void {
         if (forced || this._focusAutoCapture) {
             this._cdkTrapFocus.focusTrap.focusFirstTabbableElement();
         }
