@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.14...v0.53.2-rc.15) (2024-11-29)
+
+
+### Bug Fixes
+
+* **platform:** table spanning ([#12783](https://github.com/SAP/fundamental-ngx/issues/12783)) ([081c84b](https://github.com/SAP/fundamental-ngx/commit/081c84b3f7c320cea900499961b38f0dfdb0cb32)), closes [#12677](https://github.com/SAP/fundamental-ngx/issues/12677)
+
+
+
+
+
+## [0.53.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.13...v0.53.2-rc.14) (2024-11-28)
+
+
+### Bug Fixes
+
+* **platform:** remove emtpy tab in dynamic page with tabs ([#12786](https://github.com/SAP/fundamental-ngx/issues/12786)) ([0c76d64](https://github.com/SAP/fundamental-ngx/commit/0c76d64f076f7e1313a8f294e1a91457db7c5b4b))
+
+
+
+
+
 ## [0.53.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.12...v0.53.2-rc.13) (2024-11-26)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
