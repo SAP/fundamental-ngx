@@ -68,10 +68,6 @@ export abstract class BaseDynamicFormGeneratorControl<T extends BaseDynamicFormF
 
     /** @hidden */
     get readonly(): boolean {
-        if (this.formItem?.readonly) {
-            return this.formItem?.readonly;
-        } else {
-            return false;
-        }
+        return this.formItem?.readonly ?? false;
     }
 }
