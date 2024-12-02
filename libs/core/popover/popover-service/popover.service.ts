@@ -606,7 +606,7 @@ export class PopoverService extends BasePopoverClass {
     /** @hidden */
     private _storeAndFocusFirstTabbable(): void {
         this._lastActiveElement = <HTMLElement>document.activeElement;
-        this._getPopoverBody()?._focusFirstTabbableElement();
+        this._getPopoverBody()?._focusFirstTabbableElement(true);
     }
 
     /** @hidden */
