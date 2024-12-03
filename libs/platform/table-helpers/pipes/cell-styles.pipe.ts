@@ -14,7 +14,10 @@ export class TableCellStylesPipe implements PipeTransform {
         isFrozenEndColumn: boolean,
         prevColumnWidthPx: number | null,
         columnWidth: string,
-        nextColumnWidthPx: number | null
+        nextColumnWidthPx: number | null,
+        noBorders?: boolean,
+        noBordersY?: boolean,
+        noBordersX?: boolean
     ): Record<string, number | string> {
         const styles: { [property: string]: number | string } = {};
 
@@ -29,9 +32,23 @@ export class TableCellStylesPipe implements PipeTransform {
             styles[key] = (nextColumnWidthPx || 0).toString();
         }
 
-        styles['min-width'] = columnWidth;
-        styles['max-width'] = columnWidth;
-        styles['width'] = columnWidth;
+        if (noBordersY) {
+            styles['border-top'] = 'none';
+            styles['border-bottom'] = 'none';
+        }
+
+        if (noBordersX) {
+            styles['border-left'] = 'none';
+            styles['border-right'] = 'none';
+        }
+
+        if (noBorders) {
+            styles['border'] = 'none';
+        } else {
+            styles['min-width'] = columnWidth;
+            styles['max-width'] = columnWidth;
+            styles['width'] = columnWidth;
+        }
 
         // The "start" value does align left when you are using a LTR browser.
         // In RTL browsers, the "start" value aligns right.

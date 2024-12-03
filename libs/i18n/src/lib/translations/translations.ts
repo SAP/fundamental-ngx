@@ -519,7 +519,8 @@ export default {
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR',
-        loadMore: 'Load more'
+        loadMore: 'Show more',
+        filteredBy: 'Filtered by'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edit'
