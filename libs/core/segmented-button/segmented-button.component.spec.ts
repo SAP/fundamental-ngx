@@ -157,6 +157,22 @@ describe('SegmentedButtonComponent', () => {
         expect(component.thirdButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
         expect(component.segmentedButton['_currentValue']).toEqual(['first', 'second', 'third']);
     });
+
+    it('should disable and enable segmented buttons correctly', () => {
+        component.segmentedButton.setDisabledState(true);
+        fixture.detectChanges();
+
+        expect(component.firstButton.nativeElement.hasAttribute('disabled')).toBe(true);
+        expect(component.secondButton.elementRef.nativeElement.hasAttribute('disabled')).toBe(true);
+        expect(component.thirdButton.nativeElement.hasAttribute('disabled')).toBe(true);
+
+        component.segmentedButton.setDisabledState(false);
+        fixture.detectChanges();
+
+        expect(component.firstButton.nativeElement.hasAttribute('disabled')).toBe(false);
+        expect(component.secondButton.elementRef.nativeElement.hasAttribute('disabled')).toBe(false);
+        expect(component.thirdButton.nativeElement.hasAttribute('disabled')).toBe(false);
+    });
 });
 
 describe('Segmented button component CVA', () => {
@@ -169,13 +185,11 @@ describe('Segmented button component CVA', () => {
             });
         },
         testModuleMetadata: {
-            imports: [SegmentedButtonModule, ButtonModule, HostComponent], // Fixing to import standalone components
+            imports: [SegmentedButtonModule, ButtonModule, HostComponent],
             providers: [RtlService]
         },
         hostTemplate: {
-            // Specify that "SegmentedButtonComponent" should not be tested directly
             hostComponent: HostComponent,
-            // Specify the way to access "SegmentedButtonComponent" from the host template
             getTestingComponent: (fixture) => fixture.componentInstance.segmentedButton
         },
         supportsOnBlur: false,

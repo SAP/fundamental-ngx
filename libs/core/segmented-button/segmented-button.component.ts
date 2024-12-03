@@ -166,6 +166,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     setDisabledState(isDisabled: boolean): void {
         this._isDisabled = isDisabled;
         this._toggleDisableButtons(isDisabled);
+        this._onRefresh$.next();
         this._changeDetRef.detectChanges();
     }
 
@@ -286,10 +287,19 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
             return;
         }
 
-        this._buttons.forEach((button) => (button.disabled = disable));
-        if (disable) {
-            this._buttons.forEach((button) => button.elementRef.nativeElement.setAttribute('disabled', 'true'));
-        }
+        this._buttons.forEach((button) => {
+            button.disabled = disable;
+
+            const element = button.elementRef.nativeElement;
+            if (disable) {
+                element.setAttribute('disabled', 'true');
+                element.setAttribute('tabindex', '-1');
+            } else {
+                element.removeAttribute('disabled');
+                element.setAttribute('tabindex', '0');
+            }
+        });
+
         this._changeDetRef.markForCheck();
     }
 
