@@ -156,6 +156,22 @@ describe('SegmentedButtonComponent', () => {
         expect(component.thirdButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
         expect(component.segmentedButton['_currentValue']).toEqual(['first', 'second', 'third']);
     });
+
+    it('should disable and enable segmented buttons correctly', () => {
+        component.segmentedButton.setDisabledState(true);
+        fixture.detectChanges();
+
+        expect(component.firstButton.nativeElement.hasAttribute('disabled')).toBe(true);
+        expect(component.secondButton.elementRef.nativeElement.hasAttribute('disabled')).toBe(true);
+        expect(component.thirdButton.nativeElement.hasAttribute('disabled')).toBe(true);
+
+        component.segmentedButton.setDisabledState(false);
+        fixture.detectChanges();
+
+        expect(component.firstButton.nativeElement.hasAttribute('disabled')).toBe(false);
+        expect(component.secondButton.elementRef.nativeElement.hasAttribute('disabled')).toBe(false);
+        expect(component.thirdButton.nativeElement.hasAttribute('disabled')).toBe(false);
+    });
 });
 
 describe('Segmented button component CVA', () => {
@@ -170,17 +186,15 @@ describe('Segmented button component CVA', () => {
         testModuleMetadata: {
             declarations: [HostComponent],
             providers: [RtlService],
-            imports: [SegmentedButtonModule, ButtonModule] // <= importing the module for app-select
+            imports: [SegmentedButtonModule, ButtonModule]
         },
         hostTemplate: {
-            // specify that "AppSelectComponent" should not be tested directly
             hostComponent: HostComponent,
-            // specify the way to access "AppSelectComponent" from the host template
             getTestingComponent: (fixture) => fixture.componentInstance.segmentedButton
         },
         supportsOnBlur: false,
         internalValueChangeSetter: null,
         getComponentValue: (fixture) => (fixture.componentInstance.segmentedButton as any)._currentValue,
-        getValues: () => [1, 2, 3] // <= setting the same values as select options in host template
+        getValues: () => ['first', 'second', 'third']
     });
 });
