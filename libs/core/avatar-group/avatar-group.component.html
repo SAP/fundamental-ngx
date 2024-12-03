@@ -91,7 +91,7 @@
                 </ng-template>
             </fd-avatar-group-host>
         </fd-popover-control>
-        <fd-popover-body>
+        <fd-popover-body [focusFirstTabbable]="true">
             <ng-template
                 [ngTemplateOutlet]="avatarGroupOverflowBodyTemplate"
                 [ngTemplateOutletContext]="{ $implicit: _avatarRenderers }"
