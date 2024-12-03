@@ -157,7 +157,6 @@ export class PopoverBodyComponent implements AfterViewInit {
         if (this.focusFirstTabbable()) {
             this._focusFirstTabbableElement(true);
         }
-
     }
 
     /** @hidden */
