@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.5](https://github.com/SAP/fundamental-ngx/compare/v0.52.4...v0.52.5) (2024-12-03)
+
+
+### Bug Fixes
+
+* **core,platform:** form label spacing ([7aac1a1](https://github.com/SAP/fundamental-ngx/commit/7aac1a13ae82f7f156904ecb7a4b4f1313b5a0fd))
+
+
+
+
+
 ## [0.52.4](https://github.com/SAP/fundamental-ngx/compare/v0.52.3...v0.52.4) (2024-11-27)
 
 
