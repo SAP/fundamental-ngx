@@ -82,10 +82,18 @@ export class SettingsGeneratorCustomControlExampleComponent {
         this._formGeneratorService.addComponent(PlatformFormGeneratorCustomSliderElementComponent, ['slider']);
         this.schema = {
             appearance: 'sidebar',
-            sidebarWidth: '20rem',
+            sidebarWidth: {
+                minWidth: '20rem',
+                width: '20rem',
+                maxWidth: '20rem',
+                truncateSidebarTitle: true,
+                truncateSidebarDescription: true
+            },
             items: [
                 {
-                    title: 'First list item',
+                    title: 'First list item with long title text that will be truncated at certain screen sizes',
+                    description:
+                        'This is an example of a description with long text that will be truncated due to custom properties in the sidebar width configuration',
                     id: 'sliderExample',
                     thumbnail: {
                         icon: {
@@ -111,7 +119,8 @@ export class SettingsGeneratorCustomControlExampleComponent {
                                 showTicksLabels: true
                             }
                         }
-                    ]
+                    ],
+                    truncateSectionTitle: true
                 }
             ]
         };
