@@ -191,7 +191,7 @@ export class TableService {
         const newFilterRules: CollectionFilter[] = filterRules
             ? filterRules.map((rule) => ({
                   ...rule,
-                  fieldName: this.getFieldName(rule.field)
+                  fieldName: this._getFieldName(rule.field)
               }))
             : [];
         const state: TableState = { ...prevState, filterBy: newFilterRules };
@@ -216,7 +216,7 @@ export class TableService {
             ...prevFilterRules.filter((existing) => !rulesToAdd.find(({ field }) => field === existing.field)),
             ...rulesToAdd.map((rule) => ({
                 ...rule,
-                fieldName: this.getFieldName(rule.field)
+                fieldName: this._getFieldName(rule.field)
             }))
         ];
         const state: TableState = { ...prevState, filterBy: newFilterRules };
@@ -435,7 +435,7 @@ export class TableService {
     buildFilterRulesMap(state = this.getTableState()): void {
         const filterRulesWithFieldNames = state.filterBy.map((rule) => ({
             ...rule,
-            fieldName: this.getFieldName(rule.field)
+            fieldName: this._getFieldName(rule.field)
         }));
 
         this.filterRules$.set(
@@ -481,7 +481,8 @@ export class TableService {
         this.buildFilterRulesMap();
     }
 
-    private getFieldName(field: string): string {
+    /** @hidden */
+    private _getFieldName(field: string): string {
         const column = this.tableColumns$.getValue().find((col) => col.key === field);
         return column ? column.name : field;
     }
