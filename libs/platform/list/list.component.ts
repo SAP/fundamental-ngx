@@ -292,7 +292,7 @@ export class ListComponent<T>
     @ContentChild(forwardRef(() => ListItemDef))
     listItemDef: ListItemDef;
 
-    /** Load More List item content */
+    /** Show More List item content */
     @ContentChild(LoadMoreContentDirective)
     loadMoreContent: LoadMoreContentDirective;
 
@@ -594,7 +594,7 @@ export class ListComponent<T>
 
     /**
      * @hidden
-     * load more on enter or space press
+     * show more on enter or space press
      */
     _loadOnKeyPress(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {

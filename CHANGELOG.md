@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.2-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.16...v0.53.2-rc.17) (2024-12-02)
+
+
+### Bug Fixes
+
+* **platform:** update Load More label with Show More ([#12806](https://github.com/SAP/fundamental-ngx/issues/12806)) ([dd65765](https://github.com/SAP/fundamental-ngx/commit/dd65765a5c03cc0b7d3a907258bb2f781f139f79))
+
+
+
+
+
+## [0.53.2-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.15...v0.53.2-rc.16) (2024-12-02)
+
+
+### Bug Fixes
+
+* **docs:** extra scrollbar track showing on docs page for chrome ([#12794](https://github.com/SAP/fundamental-ngx/issues/12794)) ([c3ade6c](https://github.com/SAP/fundamental-ngx/commit/c3ade6c7d5181e5059e19e7a664097a11163cb2f))
+
+
+
+
+
 ## [0.53.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.53.2-rc.14...v0.53.2-rc.15) (2024-11-29)
 
 
