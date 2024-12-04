@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.48](https://github.com/SAP/fundamental-ngx/compare/v0.43.47...v0.43.48) (2024-12-04)
+
+
+### Bug Fixes
+
+* **core,platform:** multi input focus switching bug ([#12665](https://github.com/SAP/fundamental-ngx/issues/12665)) ([6f90b39](https://github.com/SAP/fundamental-ngx/commit/6f90b390f33eea182349dc53f791a988abf4f2f6))
+
+
+
+
+
 ## [0.43.47](https://github.com/SAP/fundamental-ngx/compare/v0.43.46...v0.43.47) (2024-10-10)
 
 
