@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Input, ViewEncapsulation } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { FD_SHELLBAR_BRANDING_COMPONENT } from '../tokens';
+import { FD_SHELLBAR_BRANDING_COMPONENT, FD_SHELLBAR_SUBTITLE_COMPONENT, FD_SHELLBAR_TITLE_COMPONENT } from '../tokens';
 
 @Component({
     selector: 'fd-shellbar-branding',
@@ -23,4 +23,10 @@ export class ShellbarBrandingComponent {
     /** add aria label dynamically to add to the button */
     @Input()
     ariaLabel: Nullable<string>;
+
+    /** hidden */
+    @ContentChild(FD_SHELLBAR_TITLE_COMPONENT) titleContent?: HTMLElement;
+
+    /** hidden */
+    @ContentChild(FD_SHELLBAR_SUBTITLE_COMPONENT) subtitleContent?: HTMLElement;
 }

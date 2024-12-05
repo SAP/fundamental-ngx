@@ -14,7 +14,8 @@ import {
     QueryList,
     ViewChild,
     ViewEncapsulation,
-    inject
+    inject,
+    signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
@@ -26,10 +27,21 @@ import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import equal from 'fast-deep-equal';
 import { BehaviorSubject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
-import { Breakpoints, NormalizedBreakpoint, ShellbarGroupFlexOptions, ShellbarSizes } from './model/shellbar-sizes';
+import {
+    Breakpoints,
+    NormalizedBreakpoint,
+    ShellbarGroupFlexOptions,
+    ShellbarSize,
+    ShellbarSizes
+} from './model/shellbar-sizes';
 import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
 import { ShellbarBrandingComponent } from './shellbar-branding/shellbar-branding.component';
-import { FD_SHELLBAR_BRANDING_COMPONENT, FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT } from './tokens';
+import {
+    FD_SHELLBAR_ACTIONS_COMPONENT,
+    FD_SHELLBAR_BRANDING_COMPONENT,
+    FD_SHELLBAR_COMPONENT,
+    FD_SHELLBAR_SEARCH_COMPONENT
+} from './tokens';
 
 /**
  * The shellbar offers consistent, responsive navigation across all products and applications.
@@ -148,7 +160,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((state) => {
                 if (!state.text) {
-                    this._showMobileSearch = false;
+                    this._showMobileSearch.set(false);
                     this._actions?._setSearchVisibility(false);
                     this._cd.detectChanges();
                 }
@@ -178,7 +190,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     }
 
     /** @hidden */
-    @ContentChild(ShellbarActionsComponent)
+    @ContentChild(FD_SHELLBAR_ACTIONS_COMPONENT)
     private _actions?: ShellbarActionsComponent;
 
     /** @hidden */
@@ -191,12 +203,16 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     get _hideTitleComponents(): boolean {
-        return this._currentSize !== 'xl' && this._currentSize !== 'l' && this._showMobileSearch;
+        return (
+            this._currentSize !== ShellbarSize.EXTRA_LARGE &&
+            this._currentSize !== ShellbarSize.LARGE &&
+            this._showMobileSearch()
+        );
     }
 
     /** @hidden */
     get _hideAllComponents(): boolean {
-        return this._currentSize === 's' && this._showMobileSearch;
+        return this._currentSize === ShellbarSize.SMALL && this._showMobileSearch();
     }
 
     /** @hidden */
@@ -205,7 +221,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     }
 
     /** @hidden */
-    _showMobileSearch = false;
+    _showMobileSearch = signal(false);
 
     /** @hidden */
     private _groupFlex: Nullable<ShellbarGroupFlexOptions>;
@@ -226,7 +242,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     private _size: ShellbarSizes | undefined;
 
     /** @hidden */
-    private _breakpointSize: ShellbarSizes = 'm';
+    private _breakpointSize: ShellbarSizes = ShellbarSize.MEDIUM;
 
     /** @hidden */
     private readonly _cd = inject(ChangeDetectorRef);
@@ -282,7 +298,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     _closeMobileSearch(): void {
-        this._showMobileSearch = false;
+        this._showMobileSearch.set(false);
         this._actions?._setSearchVisibility(false);
         this._cd.detectChanges();
     }
@@ -301,9 +317,9 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     /** @hidden */
     private _setSearchComponentListeners(): void {
         this._actions?.searchOpen.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((showSearch) => {
-            this._showMobileSearch = showSearch;
+            this._showMobileSearch.set(showSearch);
             this._cd.detectChanges();
-            if (this._currentSize !== 's') {
+            if (this._currentSize !== ShellbarSize.SMALL) {
                 return;
             }
 
@@ -325,7 +341,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     private _placeSearch(): void {
         const size = this._currentSize$.value;
 
-        if (size === 'xl' || (size === 's' && this._showMobileSearch)) {
+        if (size === 'xl' || (size === ShellbarSize.SMALL && this._showMobileSearch())) {
             this._attachSearch();
         } else {
             this._detachSearch();
@@ -369,6 +385,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     private _attachSearch(shouldFocus = false): void {
+        this._showMobileSearch.set(true);
         if (this._searchPortalOutlet?.hasAttached()) {
             return;
         }

@@ -10,4 +10,12 @@ export const FD_SHELLBAR_BRANDING_COMPONENT = new InjectionToken<SearchComponent
 
 export const FD_SHELLBAR_ACTION_COMPONENT = new InjectionToken('FdShellbarActionComponent');
 
+export const FD_SHELLBAR_ACTIONS_COMPONENT = new InjectionToken('FdShellbarActionSComponent');
+
 export const FD_SHELLBAR_COMPONENT = new InjectionToken<Shellbar>('FdShellbarComponent');
+
+export const FD_SHELLBAR_TITLE_COMPONENT = new InjectionToken<Shellbar>('FdShellbarTitleComponent');
+
+export const FD_SHELLBAR_SUBTITLE_COMPONENT = new InjectionToken<Shellbar>('FdShellbarSubtitleComponent');
+
+export const FD_SHELLBAR_USER_MENU_COMPONENT = new InjectionToken<Shellbar>('FdShellbarUserMenuComponent');

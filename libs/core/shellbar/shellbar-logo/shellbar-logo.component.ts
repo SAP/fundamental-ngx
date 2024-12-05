@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
  * The component that represents a shellbar logo.
@@ -11,9 +13,34 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
  */
 @Component({
     selector: 'fd-shellbar-logo',
-    template: `<ng-content></ng-content>`,
+    template: `
+        <span class="fd-shellbar__logo">
+            @if (src) {
+                <img [ngSrc]="src" [srcset]="srcset" [width]="width" [height]="height" [alt]="alt" />
+            } @else {
+                <ng-content></ng-content>
+            }
+        </span>
+    `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [NgOptimizedImage],
     standalone: true
 })
-export class ShellbarLogoComponent {}
+export class ShellbarLogoComponent {
+    /** Source of the logo image */
+    @Input() src: Nullable<string>;
+
+    /** Srcset for responsive images */
+    @Input()
+    srcset: Nullable<string>;
+
+    /** Width of the logo */
+    @Input() width: Nullable<number | string>;
+
+    /** Height of the logo */
+    @Input() height: Nullable<number | string>;
+
+    /** Alt text for the image */
+    @Input() alt: Nullable<string>;
+}

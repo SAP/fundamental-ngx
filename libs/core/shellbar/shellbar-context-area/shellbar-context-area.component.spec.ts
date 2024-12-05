@@ -5,16 +5,16 @@ import { ElementRef } from '@angular/core';
 import { Subject } from 'rxjs';
 
 export class ResizeObservableServiceMock {
-    private readonly observerMap = new Map<Element | ElementRef<Element>, Subject<ResizeObserverEntry[]>>();
+    private readonly _observerMap = new Map<Element | ElementRef<Element>, Subject<ResizeObserverEntry[]>>();
 
     observe(elementOrRef: Element | ElementRef<Element>): Subject<ResizeObserverEntry[]> {
         const subj = new Subject<ResizeObserverEntry[]>();
-        this.observerMap.set(elementOrRef, subj);
+        this._observerMap.set(elementOrRef, subj);
         return subj;
     }
 
     trigger(elementOrRef: Element | ElementRef<Element>, data: ResizeObserverEntry[]): void {
-        this.observerMap.get(elementOrRef)?.next(data);
+        this._observerMap.get(elementOrRef)?.next(data);
     }
 }
 

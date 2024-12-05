@@ -8,9 +8,15 @@
     <h3>Custom reverse context area hiding ordering</h3>
     <fd-shellbar [size]="currentSize">
         <fd-shellbar-branding [callback]="brandingCallback" [ariaLabel]="productMenuControl">
-            <fd-shellbar-logo>
-                <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
-            </fd-shellbar-logo>
+            <fd-shellbar-logo
+                src="//unpkg.com/fundamental-styles/dist/images/sap-logo.png"
+                [srcset]="
+                    '//unpkg.com/fundamental-styles/dist/images/sap-logo@2x.png 1x, //unpkg.com/fundamental-styles/dist/images/sap-logo@3x.png 2x, //unpkg.com/fundamental-styles/dist/images/sap-logo@4x.png 3x'
+                "
+                width="48"
+                height="24"
+                alt="SAP"
+            ></fd-shellbar-logo>
             <fd-shellbar-title> {{ productMenuControl }}</fd-shellbar-title>
             <fd-shellbar-subtitle> Subtitle</fd-shellbar-subtitle>
         </fd-shellbar-branding>

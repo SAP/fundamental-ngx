@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { FD_SHELLBAR_TITLE_COMPONENT } from '../tokens';
 
 /**
  * The component that represents a shellbar title.
@@ -11,9 +12,26 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
  */
 @Component({
     selector: 'fd-shellbar-title',
-    templateUrl: './shellbar-title.component.html',
+    template: `
+        <span class="fd-shellbar__title">
+            <ng-content></ng-content>
+        </span>
+    `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    standalone: true,
+    styles: [
+        `
+            fd-shellbar__title {
+                display: flex;
+            }
+        `
+    ],
+    providers: [
+        {
+            provide: FD_SHELLBAR_TITLE_COMPONENT,
+            useExisting: ShellbarTitleComponent
+        }
+    ]
 })
 export class ShellbarTitleComponent {}

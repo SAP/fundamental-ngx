@@ -34,7 +34,7 @@
     <div hidden>
         <ng-content></ng-content>
     </div>
-    @if (searchComponent) {
+    @if (searchComponent && _showMobileSearch()) {
         <div
             class="fd-shellbar__group fd-shellbar__group--center fd-shellbar__group--mobile-flex"
             [class.fd-shellbar__group--shrink]="groupFlex?.search?.shrink"

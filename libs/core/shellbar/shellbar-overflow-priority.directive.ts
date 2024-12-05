@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, inject, Input } from '@angular/core';
 
 @Directive({
     selector: '[fdShellbarHidePriority]',
@@ -9,5 +9,5 @@ export class ShellbarHidePriorityDirective {
     @Input('fdShellbarHidePriority') priority: any;
 
     /** @hidden */
-    constructor(public el: ElementRef) {}
+    el = inject(ElementRef);
 }

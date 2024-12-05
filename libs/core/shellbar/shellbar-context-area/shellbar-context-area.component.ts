@@ -27,13 +27,13 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
     /** @hidden */
     constructor(
         public el: ElementRef,
-        private resizeObserverService: ResizeObserverService,
+        private _resizeObserverService: ResizeObserverService,
         private _destroyRef: DestroyRef
     ) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this.resizeObserverService
+        this._resizeObserverService
             .observe(this.el)
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this.updateVisibility());
@@ -54,12 +54,12 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
      * 6. Ensuring all elements fit within the available width without recursion.
      */
     updateVisibility(): void {
-        const elements: { el: HTMLElement; priority: number }[] = this.getElementsWithPriority();
-        const availableWidth = this.getAvailableWidth();
-        const allItemsWidth = this.calculateShownElementsWidth(elements);
+        const elements: { el: HTMLElement; priority: number }[] = this._getElementsWithPriority();
+        const availableWidth = this._getAvailableWidth();
+        const allItemsWidth = this._calculateShownElementsWidth(elements);
 
-        this.hideElementsIfNeeded(elements, availableWidth, allItemsWidth);
-        this.showElementsIfNeeded(elements, availableWidth, allItemsWidth);
+        this._hideElementsIfNeeded(elements, availableWidth, allItemsWidth);
+        this._showElementsIfNeeded(elements, availableWidth, allItemsWidth);
     }
 
     /**
@@ -67,7 +67,7 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
      * The elements are sorted based on their priority, with elements having
      * higher priority shown first.
      */
-    private getElementsWithPriority(): { el: HTMLElement; priority: number }[] {
+    private _getElementsWithPriority(): { el: HTMLElement; priority: number }[] {
         return [...this.el.nativeElement.childNodes]
             .map((element: HTMLElement, index) => {
                 const hasPriorityAttribute = element.hasAttribute && element.hasAttribute('fdShellbarHidePriority');
@@ -85,7 +85,7 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
      * This method will hide the last shown element iteratively until the total width
      * fits within the available width.
      */
-    private hideElementsIfNeeded(
+    private _hideElementsIfNeeded(
         elements: {
             el: HTMLElement;
             priority: number;
@@ -99,7 +99,7 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
                 break;
             }
             shownElements[shownElements.length - 1].el.style.display = 'none';
-            allItemsWidth = this.calculateShownElementsWidth(elements);
+            allItemsWidth = this._calculateShownElementsWidth(elements);
         }
     }
 
@@ -108,7 +108,7 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
      * This method will show the first hidden element iteratively as long as there
      * is sufficient space, and hide the element again if the space is exceeded.
      */
-    private showElementsIfNeeded(
+    private _showElementsIfNeeded(
         elements: {
             el: HTMLElement;
             priority: number;
@@ -119,7 +119,7 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
         let hiddenElements = elements.filter((el) => el.el.style.display === 'none');
         while (hiddenElements.length > 0 && allItemsWidth <= availableWidth) {
             hiddenElements[0].el.style.display = '';
-            allItemsWidth = this.calculateShownElementsWidth(elements);
+            allItemsWidth = this._calculateShownElementsWidth(elements);
             if (allItemsWidth > availableWidth) {
                 hiddenElements[0].el.style.display = 'none';
                 break;
@@ -132,7 +132,7 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
      * Calculates the total gap between the visible elements.
      * Avoids negative gap for single or no elements.
      */
-    private calculateTotalGap(elementsLength: number): number {
+    private _calculateTotalGap(elementsLength: number): number {
         const gap = parseFloat(window.getComputedStyle(this.el.nativeElement).gap || '0');
         return gap * Math.max(elementsLength - 1, 0);
     }
@@ -140,16 +140,16 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
     /**
      * Calculates the total width of the shown elements, including the gaps.
      */
-    private calculateShownElementsWidth(elements: { el: HTMLElement; priority: number }[]): number {
+    private _calculateShownElementsWidth(elements: { el: HTMLElement; priority: number }[]): number {
         const shownElements = elements.filter((el) => el.el.style.display !== 'none');
         const totalWidth = shownElements.reduce((acc, el) => acc + el.el.clientWidth, 0);
-        return totalWidth + this.calculateTotalGap(shownElements.length);
+        return totalWidth + this._calculateTotalGap(shownElements.length);
     }
 
     /**
      * Gets the available width of the container.
      */
-    private getAvailableWidth(): number {
+    private _getAvailableWidth(): number {
         return this.el.nativeElement.offsetWidth;
     }
 }
