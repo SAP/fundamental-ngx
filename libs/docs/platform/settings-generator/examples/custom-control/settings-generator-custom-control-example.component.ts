@@ -86,14 +86,14 @@ export class SettingsGeneratorCustomControlExampleComponent {
                 minWidth: '20rem',
                 width: '20rem',
                 maxWidth: '20rem',
-                truncateSidebarTitle: true,
-                truncateSidebarDescription: true
+                wrapSidebarTitle: true,
+                wrapSidebarDescription: true
             },
             items: [
                 {
-                    title: 'First list item with long title text that will be truncated at certain screen sizes',
+                    title: 'First list item with long title text that wraps rather than truncates at certain screen sizes due to custom properties in the sidebar configuration',
                     description:
-                        'This is an example of a description with long text that will be truncated due to custom properties in the sidebar width configuration',
+                        'This is an example of a description with long text that wraps rather than truncates due to custom properties in the sidebar width configuration',
                     id: 'sliderExample',
                     thumbnail: {
                         icon: {
@@ -120,7 +120,7 @@ export class SettingsGeneratorCustomControlExampleComponent {
                             }
                         }
                     ],
-                    truncateSectionTitle: true
+                    wrapSectionTitle: true
                 }
             ]
         };
