@@ -22,12 +22,17 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FocusableListDirective, KeyUtil, Nullable, RtlService, destroyObservable } from '@fundamental-ngx/cdk/utils';
+import {
+    FocusableItemDirective,
+    FocusableListDirective,
+    KeyUtil,
+    Nullable,
+    RtlService,
+    destroyObservable
+} from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { Subject, asyncScheduler, fromEvent, merge } from 'rxjs';
 import { filter, observeOn, startWith, takeUntil, tap } from 'rxjs/operators';
-
-export const isDisabledClass = 'is-disabled';
 
 export type SegmentedButtonValue = string | (string | null)[] | null;
 
@@ -78,6 +83,10 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     /** @hidden */
     @ContentChildren(FD_BUTTON_COMPONENT)
     _buttons: QueryList<ButtonComponent>;
+
+    /** @hidden */
+    @ContentChildren(FocusableItemDirective)
+    _focusableItems: QueryList<FocusableItemDirective>;
 
     /**
      * Value of segmented button can have 2 types:
@@ -172,7 +181,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
 
     /** @hidden */
     private _listenToButtonChanges(): void {
-        this._buttons.changes
+        merge(this._buttons.changes, this._focusableItems.changes)
             .pipe(startWith(1), observeOn(asyncScheduler), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 this._onRefresh$.next();
@@ -208,14 +217,12 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     /** @hidden */
     private _handleTriggerOnButton(buttonComponent: ButtonComponent): void {
         if (!this._isButtonDisabled(buttonComponent)) {
-            if (!this._isButtonSelected(buttonComponent) && !this.toggle) {
+            if (!this.toggle) {
                 this._buttons.forEach((button) => this._deselectButton(button));
                 this._selectButton(buttonComponent);
                 this._propagateChange();
                 this._changeDetRef.markForCheck();
-            }
-
-            if (this.toggle) {
+            } else {
                 this._toggleButton(buttonComponent);
                 this._propagateChange();
                 this._changeDetRef.markForCheck();
@@ -225,8 +232,9 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
 
     /** @hidden */
     private _propagateChange(): void {
-        this.onChange(this._getValuesBySelected());
-        this._currentValue = this._getValuesBySelected();
+        const selectedValue = this._getValuesBySelected();
+        this.onChange(selectedValue);
+        this._currentValue = selectedValue;
     }
 
     /** @hidden */
@@ -283,22 +291,22 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
 
     /** @hidden */
     private _toggleDisableButtons(disable: boolean): void {
-        if (!this._buttons) {
+        if (!this._buttons || !this._focusableItems) {
             return;
         }
 
-        this._buttons.forEach((button) => {
-            button.disabled = disable;
+        this._buttons.forEach((button) => (button.disabled = disable));
 
-            const element = button.elementRef.nativeElement;
-            if (disable) {
-                element.setAttribute('disabled', 'true');
-                element.setAttribute('tabindex', '-1');
-            } else {
-                element.removeAttribute('disabled');
-                element.setAttribute('tabindex', '0');
-            }
+        this._focusableItems.forEach((focusableItemDirective) => {
+            focusableItemDirective.setTabbable(!disable);
+            focusableItemDirective.fdkFocusableItem = !disable;
         });
+        if (disable) {
+            this._buttons.forEach((button) => {
+                button.elementRef.nativeElement.role = 'option';
+                this._listenToTriggerEvents(button);
+            });
+        }
 
         this._changeDetRef.markForCheck();
     }

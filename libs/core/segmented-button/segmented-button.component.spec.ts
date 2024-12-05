@@ -36,8 +36,7 @@ describe('SegmentedButtonComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [HostComponent],
-            imports: [SegmentedButtonModule, ButtonModule]
+            imports: [HostComponent]
         }).compileComponents();
     }));
 
