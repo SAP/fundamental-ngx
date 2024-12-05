@@ -585,7 +585,7 @@ export class ComboboxComponent<T = any>
             this._value = value;
         }
         this.inputTextChange.emit(value);
-        if (!this.mobile) {
+        if (!this.mobile && !this.communicateByObject) {
             this._propagateChange();
         }
     }
@@ -803,6 +803,9 @@ export class ComboboxComponent<T = any>
             }
         }
         this.handleSearchTermChange();
+        if (this.communicateByObject) {
+            this._propagateChange();
+        }
     }
 
     /** @hidden */
