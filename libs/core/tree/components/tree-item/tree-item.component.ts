@@ -44,7 +44,7 @@ import { TreeItem, TreeItemState } from '../../models/tree-item';
 import { TreeService } from '../../tree.service';
 
 @Component({
-    selector: 'fd-tree-item',
+    selector: 'fd2-tree-item',
     templateUrl: './tree-item.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
