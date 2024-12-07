@@ -75,3 +75,4 @@ sauce_connect.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+/migrations.json
