@@ -46,7 +46,7 @@
     "@angular/forms": "18.0.3",
     "@angular/platform-browser": "18.0.3",
     "@angular/platform-browser-dynamic": "18.0.3",
-    "@angular/router": "18.0.3",
+    "@angular/router": "19.0.3",
     "@fundamental-styles/cx": "0.38.0",
     "@nx/angular": "19.2.3",
     "@sap-theming/theming-base-content": "11.22.0",
