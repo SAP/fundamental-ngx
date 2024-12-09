@@ -24,7 +24,8 @@ import { NestedListPopoverInterface } from './nested-list-popover.interface';
     templateUrl: './nested-list-popover.component.html',
     styleUrl: './nested-list-popover.component.scss',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NestedListPopoverComponent implements NestedListPopoverInterface, OnInit {
     /** @hidden */

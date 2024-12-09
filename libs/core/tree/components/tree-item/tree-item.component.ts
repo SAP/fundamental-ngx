@@ -63,7 +63,6 @@ import { TreeService } from '../../tree.service';
             useExisting: TreeItemComponent
         }
     ],
-    standalone: true,
     imports: [
         SelectableItemDirective,
         NgClass,

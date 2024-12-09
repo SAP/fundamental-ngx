@@ -23,7 +23,6 @@ import { DialogDefaultContent } from '../utils/dialog-default-content.class';
     templateUrl: './dialog-default.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DialogComponent,
         DialogHeaderComponent,

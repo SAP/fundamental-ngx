@@ -6,7 +6,6 @@ import { CxSideNavigationModule } from '@fundamental-ngx/cx/side-navigation';
     selector: 'fdx-side-navigation-overflow-example',
     templateUrl: './side-navigation-overflow-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CxSideNavigationModule, CxNestedListModule]
 })
 export class SideNavigationOverflowExampleComponent {}

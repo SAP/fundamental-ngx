@@ -57,7 +57,6 @@ export class TabCountDirective {
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [IconComponent]
 })
 export class TabIconComponent implements CssClassBuilder, OnChanges {

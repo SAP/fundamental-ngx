@@ -10,7 +10,6 @@ import { TableModule } from '@fundamental-ngx/core/table';
 @Component({
     selector: 'fd-table-focusable-example',
     templateUrl: './table-focusable-example.component.html',
-    standalone: true,
     imports: [
         FocusableGridDirective,
         TableModule,

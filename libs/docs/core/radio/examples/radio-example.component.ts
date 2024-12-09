@@ -12,7 +12,6 @@ import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 @Component({
     selector: 'fd-radio-example',
     templateUrl: './radio-example.component.html',
-    standalone: true,
     imports: [
         FormHeaderComponent,
         FieldsetComponent,

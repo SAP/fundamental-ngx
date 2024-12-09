@@ -150,7 +150,6 @@ export class ListDataProvider extends DataProvider<Product> {
 @Component({
     selector: 'fdp-platform-object-list-item-with-row-selection-example',
     templateUrl: './platform-object-list-item-with-row-selection-example.component.html',
-    standalone: true,
     imports: [
         ToolbarComponent,
         ToolbarLabelDirective,

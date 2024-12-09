@@ -18,7 +18,6 @@ import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
             }
         `
     ],
-    standalone: true,
     imports: [FacetModule, ObjectStatusComponent]
 })
 export class CustomFacetExampleComponent {}

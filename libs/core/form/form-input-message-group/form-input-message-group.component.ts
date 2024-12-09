@@ -23,7 +23,6 @@ import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
     styleUrl: './form-input-message-group.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [PopoverComponent, PopoverControlComponent, PopoverBodyComponent]
 })
 export class FormInputMessageGroupComponent {

@@ -10,7 +10,8 @@ import { NestedListComponent } from '../nested-list/nested-list.component';
     selector: 'fdx-prepared-nested-list',
     templateUrl: './prepared-nested-list.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PreparedNestedListComponent {
     /**

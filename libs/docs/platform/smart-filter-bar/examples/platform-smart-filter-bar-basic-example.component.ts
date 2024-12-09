@@ -22,7 +22,6 @@ import {
     templateUrl: './platform-smart-filter-bar-basic-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ButtonComponent,
         SmartFilterBarComponent,

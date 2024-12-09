@@ -8,7 +8,6 @@ import { ToolbarComponent, ToolbarLabelDirective } from '@fundamental-ngx/core/t
         class: 'fd-col fd-col--12'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ToolbarComponent, ToolbarLabelDirective]
 })
 export class GridListTitleBarComponent {

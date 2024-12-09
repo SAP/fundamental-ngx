@@ -65,7 +65,6 @@ import { TokenComponent } from './token.component';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders()],
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         InputGroupModule,

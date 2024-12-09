@@ -20,7 +20,8 @@ import { NestedListComponent } from '@fundamental-ngx/cx/nested-list';
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     hostDirectives: [ScrollbarDirective],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class SideNavigationMainComponent implements AfterContentInit {
     /** @hidden */

@@ -4,7 +4,6 @@ import { DocPageComponent, HeaderComponent, HeaderTabsComponent, ImportComponent
 @Component({
     selector: 'app-input-header',
     templateUrl: './input-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, ImportComponent, HeaderTabsComponent]
 })
 export class InputHeaderComponent {}

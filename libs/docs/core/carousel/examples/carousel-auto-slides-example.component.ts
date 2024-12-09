@@ -16,7 +16,6 @@ import {
     templateUrl: './carousel-auto-slides-example.component.html',
     styleUrls: ['./carousel-auto-slides-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ButtonComponent,
         ToolbarComponent,

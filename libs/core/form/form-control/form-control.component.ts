@@ -35,8 +35,7 @@ import { FormItemControl, registerFormItemControl } from '../form-item-control/f
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ContentDensityModule],
-    providers: [registerFormItemControl(FormControlComponent), contentDensityObserverProviders()],
-    standalone: true
+    providers: [registerFormItemControl(FormControlComponent), contentDensityObserverProviders()]
 })
 export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges, OnDestroy, FormItemControl {
     /**

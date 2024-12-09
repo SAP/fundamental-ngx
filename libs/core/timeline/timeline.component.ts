@@ -50,7 +50,6 @@ import { TimeLinePositionStrategy, TimelineAxis, TimelineSidePosition } from './
         '[class.fd-timeline--horizontal]': 'axis === "horizontal"',
         '[class.fd-timeline--vertical]': 'axis === "vertical"'
     },
-    standalone: true,
     imports: [
         TimelineFirstListOutletDirective,
         TimelineSecondListOutletDirective,

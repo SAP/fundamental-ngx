@@ -18,7 +18,6 @@ import { MULTI_COMBOBOX_COMPONENT } from '../multi-combobox.token';
     selector: 'fd-mobile-multi-combobox',
     templateUrl: './mobile-multi-combobox.component.html',
     styleUrl: './mobile-multi-combobox.component.scss',
-    standalone: true,
     imports: [
         DialogModule,
         TitleComponent,

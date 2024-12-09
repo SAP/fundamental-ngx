@@ -22,7 +22,6 @@ import { ShellbarMenuItem } from '../model/shellbar-menu-item';
     styleUrl: './product-menu.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ButtonComponent, ContentDensityDirective, MenuModule, IconComponent]
 })
 export class ProductMenuComponent {

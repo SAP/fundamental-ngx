@@ -67,7 +67,6 @@ let cdkPopoverUniqueId = 0;
         '[class.fd-popover-custom--mobile]': 'mobile',
         '[attr.id]': 'id'
     },
-    standalone: true,
     imports: [CdkOverlayOrigin, NgTemplateOutlet]
 })
 export class PopoverComponent

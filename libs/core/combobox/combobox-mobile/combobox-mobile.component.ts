@@ -28,7 +28,6 @@ import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
     templateUrl: './combobox-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DialogModule,
         TitleComponent,

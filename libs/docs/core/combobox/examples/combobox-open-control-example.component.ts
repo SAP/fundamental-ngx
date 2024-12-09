@@ -5,7 +5,6 @@ import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/for
 @Component({
     selector: 'fd-combobox-open-control-example',
     templateUrl: './combobox-open-control-example.component.html',
-    standalone: true,
     imports: [FormItemComponent, FormLabelComponent, ComboboxComponent]
 })
 export class ComboboxOpenControlExampleComponent {

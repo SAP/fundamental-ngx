@@ -10,7 +10,6 @@ import { MarkdownModule } from 'ngx-markdown';
             (error)="onError()"
         ></markdown>
     `,
-    standalone: true,
     imports: [MarkdownModule]
 })
 export class NewComponentPageComponent {

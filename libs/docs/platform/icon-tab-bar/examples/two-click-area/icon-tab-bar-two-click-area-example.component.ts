@@ -5,7 +5,6 @@ import { longTextTypeConfig } from '../config-for-examples/text-type.config';
 
 @Component({
     selector: 'fdp-icon-tab-bar-two-click-area-example',
-    standalone: true,
     imports: [IconTabBarComponent],
     templateUrl: './icon-tab-bar-two-click-area-example.component.html',
     encapsulation: ViewEncapsulation.None,

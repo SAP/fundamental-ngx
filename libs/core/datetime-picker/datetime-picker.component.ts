@@ -100,7 +100,6 @@ import { FD_DATETIME_PICKER_COMPONENT, FD_DATETIME_PICKER_MOBILE_CONFIG } from '
     host: {
         class: 'fd-datetime'
     },
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         PopoverModule,

@@ -63,7 +63,6 @@ const selectCustomComparatorTs = 'select-custom-comparator-example/select-custom
             }
         `
     ],
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

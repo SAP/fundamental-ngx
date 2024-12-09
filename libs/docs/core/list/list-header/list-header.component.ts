@@ -12,7 +12,6 @@ import {
     selector: 'app-list-header',
     templateUrl: './list-header.component.html',
     styleUrls: ['./list-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, RouterLink, ImportComponent, HeaderTabsComponent]
 })
 export class ListHeaderComponent {}

@@ -39,7 +39,6 @@ import { AvatarGroupHostConfig } from './types';
     styleUrl: './avatar-group.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     providers: [
         {
             provide: AVATAR_GROUP_HOST_CONFIG,

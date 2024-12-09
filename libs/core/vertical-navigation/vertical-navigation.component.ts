@@ -31,7 +31,6 @@ import { VerticalNavigationMainNavigationComponent } from './vertical-navigation
     styleUrl: './vertical-navigation.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [VerticalNavigationMainNavigationComponent, ListComponent]
 })
 export class VerticalNavigationComponent implements AfterContentInit, OnDestroy {

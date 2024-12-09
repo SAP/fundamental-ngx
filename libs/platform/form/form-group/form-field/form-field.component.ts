@@ -105,7 +105,6 @@ function rankTransformer(v: string | number): number {
     styleUrl: './form-field.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [formFieldProvider, formGroupChildProvider, FormFieldLayoutService],
-    standalone: true,
     imports: [
         CommonModule,
         FormItemComponent,

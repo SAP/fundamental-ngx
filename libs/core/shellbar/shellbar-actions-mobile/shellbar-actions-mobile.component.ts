@@ -18,7 +18,6 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
     templateUrl: './shellbar-actions-mobile.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ActionSheetModule, ButtonComponent, FdTranslatePipe]
 })
 export class ShellbarActionsMobileComponent implements AfterContentChecked {

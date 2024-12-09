@@ -18,8 +18,7 @@ export interface ExampleNavigationItem {
     templateUrl: './navigation-basic-example.component.html',
     imports: [RouterLink, FormsModule, ButtonComponent, SegmentedButtonComponent, FDB_NAVIGATION],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
-    standalone: true
+    encapsulation: ViewEncapsulation.None
 })
 export class NavigationBasicExampleComponent {
     state: FdbNavigationState = 'expanded';

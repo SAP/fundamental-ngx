@@ -42,7 +42,8 @@ import {
         '[fdx-nested-list-link], button[fdx-nested-list-link], a[fdx-nested-list-link], div[fdx-nested-list-link]',
     host: {
         '[attr.tabindex]': '!_nestedListButton ? 0 : -1'
-    }
+    },
+    standalone: false
 })
 export class NestedLinkComponent {
     /** Function that is called on click event dispatch on this element. */

@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-platform-multi-combobox-header',
     templateUrl: './platform-multi-combobox-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformMultiComboboxHeaderComponent {}

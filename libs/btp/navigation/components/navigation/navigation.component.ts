@@ -49,7 +49,6 @@ interface GroupedDataSourceItems {
     selector: 'fdb-navigation',
     templateUrl: './navigation.component.html',
     styleUrls: ['./navigation.component.scss'],
-    standalone: true,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

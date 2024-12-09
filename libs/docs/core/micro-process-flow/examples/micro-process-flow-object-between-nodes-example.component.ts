@@ -6,7 +6,6 @@ import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow
     selector: 'fd-micro-process-flow-object-between-nodes-example',
     templateUrl: './micro-process-flow-object-between-nodes-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [MicroProcessFlowModule, IconComponent]
 })
 export class MicroProcessFlowObjectBetweenNodesExampleComponent {}

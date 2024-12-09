@@ -14,7 +14,6 @@ import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
     templateUrl: './combobox-states-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
-    standalone: true,
     imports: [FdpFormGroupModule, ContentDensityDirective, PlatformComboboxModule]
 })
 export class ComboboxStateComponent {

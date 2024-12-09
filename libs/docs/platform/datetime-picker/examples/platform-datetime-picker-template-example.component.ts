@@ -13,7 +13,6 @@ import { FdpFormGroupModule, PlatformDatetimePickerComponent } from '@fundamenta
         // Due to the limit of this example we must provide it on this level.
         provideDateTimeFormats()
     ],
-    standalone: true,
     imports: [FdpFormGroupModule, PlatformDatetimePickerComponent, FormsModule]
 })
 export class PlatformDatetimePickerTemplateExampleComponent {

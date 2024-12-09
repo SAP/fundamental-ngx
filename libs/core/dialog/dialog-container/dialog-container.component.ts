@@ -39,7 +39,6 @@ import { dialogFade } from '../utils/dialog.animations';
     styleUrl: './dialog-container.component.scss',
     animations: [dialogFade],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [PortalModule]
 })
 export class DialogContainerComponent

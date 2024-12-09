@@ -42,7 +42,6 @@ const INTERVAL_IN_MS = 10;
     host: {
         class: 'fdp-approval-flow-user-list'
     },
-    standalone: true,
     imports: [ListComponent, FormsModule, StandardListItemComponent, FdTranslatePipe]
 })
 export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, OnDestroy {

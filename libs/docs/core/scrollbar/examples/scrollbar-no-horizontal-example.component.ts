@@ -9,7 +9,6 @@ import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
             <div [style.width.px]="9000" [style.height.px]="9000"></div>
         </div>
     `,
-    standalone: true,
     imports: [CdkScrollable, ScrollbarDirective]
 })
 export class ScrollbarNoHorizontalExampleComponent {}

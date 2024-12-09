@@ -17,7 +17,8 @@ export interface BaseDynamicFormGeneratorControlInterface {
  * Abstract class that used as a base for the Dynamic Form Generator components.
  */
 @Directive({
-    providers: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]
+    providers: [dynamicFormFieldProvider, dynamicFormGroupChildProvider],
+    standalone: false
 })
 export abstract class BaseDynamicFormGeneratorControl<T extends BaseDynamicFormFieldItem = BaseDynamicFormFieldItem>
     implements BaseDynamicFormGeneratorControlInterface

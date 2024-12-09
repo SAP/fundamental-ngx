@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'app-resizable-card-layout-docs-header',
     templateUrl: './resizable-card-layout-docs-header.component.html',
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

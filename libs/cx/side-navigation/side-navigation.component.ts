@@ -43,7 +43,8 @@ import { SideNavigationUtilityDirective } from './side-navigation-utility.direct
     templateUrl: './side-navigation.component.html',
     styleUrl: 'side-navigation.component.scss',
     encapsulation: ViewEncapsulation.None,
-    providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService]
+    providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService],
+    standalone: false
 })
 export class SideNavigationComponent
     implements AfterContentInit, AfterViewInit, OnInit, OnChanges, SideNavigationInterface

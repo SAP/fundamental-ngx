@@ -83,7 +83,6 @@ let sliderId = 0;
         '(mouseleave)': 'this._componentHovered$.next(false)',
         '(focusout)': 'onTouched()'
     },
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         SliderPositionDirective,

@@ -19,7 +19,8 @@ import { DND_ITEM } from '../tokens';
 
 @Directive({
     selector: '[fdkDndItem], [fd-dnd-item]',
-    providers: [DragDrop, { provide: DND_ITEM, useExisting: forwardRef(() => DndItemDirective) }]
+    providers: [DragDrop, { provide: DND_ITEM, useExisting: forwardRef(() => DndItemDirective) }],
+    standalone: false
 })
 export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnDestroy {
     /** Item reference. Used for cases when `[items]` array of dnd list is different than `dndItems` content children. */

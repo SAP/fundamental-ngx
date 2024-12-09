@@ -8,7 +8,6 @@ import { CheckboxComponent, FdpFormGroupModule } from '@fundamental-ngx/platform
 @Component({
     selector: 'fdp-platform-checkbox-error-handling',
     templateUrl: 'platform-checkbox-error-handling.component.html',
-    standalone: true,
     imports: [
         FdpFormGroupModule,
         FormsModule,
