@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.54.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.54.0-rc.0...v0.54.0-rc.1) (2024-12-09)
+
+
+### Bug Fixes
+
+* **core:** fix form field spacing ([#12819](https://github.com/SAP/fundamental-ngx/issues/12819)) ([64ce3e5](https://github.com/SAP/fundamental-ngx/commit/64ce3e56aafe8f48be399376688ee7d6eb531d51))
+
+
+
+
+
 # [0.54.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.53.2...v0.54.0-rc.0) (2024-12-03)
 
 
