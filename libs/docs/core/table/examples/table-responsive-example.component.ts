@@ -8,7 +8,6 @@ import { TableModule } from '@fundamental-ngx/core/table';
     selector: 'fd-table-responsive-example',
     templateUrl: './table-responsive-example.component.html',
     styleUrls: ['table-responsive-example.component.scss'],
-    standalone: true,
     imports: [TableModule, FocusableGridDirective, LinkComponent, IconComponent]
 })
 export class TableResponsiveExampleComponent implements OnInit {

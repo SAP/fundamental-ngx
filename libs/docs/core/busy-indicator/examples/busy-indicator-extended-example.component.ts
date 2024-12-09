@@ -6,7 +6,6 @@ import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/m
 @Component({
     selector: 'fd-busy-indicator-extended-example',
     templateUrl: './busy-indicator-extended-example.component.html',
-    standalone: true,
     imports: [ButtonComponent, BusyIndicatorExtendedDirective, BusyIndicatorComponent, MessageToastModule]
 })
 export class BusyIndicatorExtendedExampleComponent {

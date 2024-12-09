@@ -66,7 +66,6 @@ const optionItemT = 'multi-input-option-item-example/multi-input-option-item-exa
     selector: 'app-multi-input-docs',
     templateUrl: './multi-input-docs.component.html',
     styleUrls: ['./multi-input-docs.component.scss'],
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

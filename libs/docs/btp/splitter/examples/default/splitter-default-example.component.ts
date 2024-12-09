@@ -5,7 +5,6 @@ import { SplitterModule, SplitterPaneResizeEvent } from '@fundamental-ngx/btp/sp
 @Component({
     selector: 'fdb-splitter-default-example',
     templateUrl: './splitter-default-example.component.html',
-    standalone: true,
     imports: [SplitterModule]
 })
 export class SplitterDefaultExampleComponent {

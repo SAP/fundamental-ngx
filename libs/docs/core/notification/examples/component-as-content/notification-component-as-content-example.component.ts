@@ -10,7 +10,6 @@ import { NotificationExampleContentComponent } from './notification-content.comp
         <button fd-button label="Open from Component" (click)="open()"></button>
         <span [style.margin-left.px]="24">{{ closeReason }}</span>
     `,
-    standalone: true,
     imports: [ButtonComponent],
     providers: [NotificationService]
 })

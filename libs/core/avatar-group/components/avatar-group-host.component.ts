@@ -31,7 +31,6 @@ import { AvatarGroupHostConfig } from '../types';
 @Component({
     selector: 'fd-avatar-group-host',
     template: '<ng-content></ng-content>',
-    standalone: true,
     imports: [],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None

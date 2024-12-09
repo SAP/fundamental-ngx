@@ -35,7 +35,6 @@ const fileUploaderMinH = 'file-uploader-min-example/file-uploader-min-example.co
     selector: 'app-file-uploader',
     templateUrl: './file-uploader-docs.component.html',
     styleUrls: ['./file-uploader-docs.component.scss'],
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

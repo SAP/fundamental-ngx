@@ -33,7 +33,6 @@ import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
     selector: 'fdp-text-type-popover',
     templateUrl: './text-type-popover.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         PopoverComponent,
         PopoverControlComponent,

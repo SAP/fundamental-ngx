@@ -21,7 +21,6 @@ let uniqueId = 0;
     selector: 'fdp-radio-button',
     templateUrl: './radio.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CoreRadioButtonComponent, FormsModule, NgTemplateOutlet]
 })
 export class RadioButtonComponent extends BaseInput implements AfterViewInit, FocusableOption {

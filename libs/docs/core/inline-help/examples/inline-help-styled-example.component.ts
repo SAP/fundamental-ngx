@@ -16,7 +16,6 @@ import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
         `
     ],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [IconComponent, InlineHelpModule]
 })
 export class InlineHelpStyledExampleComponent {}

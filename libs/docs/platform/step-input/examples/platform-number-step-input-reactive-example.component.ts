@@ -11,7 +11,6 @@ const MIN_VALUE = 10;
     selector: 'fdp-platform-number-step-input-reactive-example',
     templateUrl: './platform-number-step-input-reactive-example.component.html',
     styleUrls: ['./platform-number-step-input-reactive-example.component.scss'],
-    standalone: true,
     imports: [FdpFormGroupModule, PlatformStepInputModule, FormsModule, ReactiveFormsModule, JsonPipe, ButtonComponent]
 })
 export class PlatformNumberStepInputFormExampleComponent implements AfterViewInit {

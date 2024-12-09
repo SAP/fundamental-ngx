@@ -15,7 +15,6 @@ import { ActionSheetMobileExampleComponent } from './examples/action-sheet-mobil
 @Component({
     selector: 'app-action-sheet',
     templateUrl: './action-sheet-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

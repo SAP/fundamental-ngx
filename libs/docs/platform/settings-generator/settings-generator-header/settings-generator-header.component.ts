@@ -11,7 +11,6 @@ import {
     selector: 'app-settings-generator-header',
     templateUrl: './settings-generator-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class SettingsGeneratorHeaderComponent {}

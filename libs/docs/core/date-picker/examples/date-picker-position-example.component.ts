@@ -27,7 +27,6 @@ import {
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [DatePickerComponent, FormsModule, FdDatetimeModule]
 })
 export class DatePickerPositionExampleComponent {

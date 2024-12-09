@@ -9,7 +9,6 @@ import { CxSideNavigationModule } from '@fundamental-ngx/cx/side-navigation';
     selector: 'fdx-side-navigation-filter-example',
     templateUrl: './side-navigation-filter-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CxSideNavigationModule, FormItemComponent, InputGroupModule, FormsModule, CxNestedListModule]
 })
 export class SideNavigationFilterExampleComponent implements OnInit {

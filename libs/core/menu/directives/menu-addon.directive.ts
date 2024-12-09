@@ -6,7 +6,6 @@ import { GlyphMenuAddonDirective } from './glyph-menu-addon.directive';
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fd-menu-addon',
     template: ` <ng-template cdkPortalOutlet></ng-template> `,
-    standalone: true,
     hostDirectives: [{ directive: GlyphMenuAddonDirective, inputs: ['glyph'] }],
     imports: [PortalModule]
 })

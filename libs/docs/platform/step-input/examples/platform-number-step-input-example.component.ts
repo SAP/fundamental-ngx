@@ -8,7 +8,6 @@ import { PlatformStepInputModule, StepInputAlign, StepInputChangeEvent } from '@
     selector: 'fdp-platform-number-step-input-example',
     templateUrl: './platform-number-step-input-example.component.html',
     styleUrls: ['./platform-number-step-input-example.component.scss'],
-    standalone: true,
     imports: [FormLabelComponent, PlatformStepInputModule, ContentDensityDirective]
 })
 export class PlatformNumberStepInputExampleComponent {

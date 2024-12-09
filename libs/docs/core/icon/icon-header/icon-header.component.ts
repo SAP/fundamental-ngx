@@ -11,7 +11,6 @@ import {
     selector: 'app-icon-header',
     templateUrl: './icon-header.component.html',
     styleUrls: ['./icon-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class IconHeaderComponent {

@@ -21,7 +21,6 @@ import { ApprovalGraphNode } from '../interfaces/approval-node';
     host: {
         class: 'fdp-approval-flow-toolbar-actions'
     },
-    standalone: true,
     imports: [ContentDensityDirective, ButtonComponent, FdTranslatePipe]
 })
 export class ApprovalFlowToolbarActionsComponent {

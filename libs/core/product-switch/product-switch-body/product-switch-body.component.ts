@@ -29,7 +29,6 @@ const containerWidthPx = 776;
     styleUrls: ['./product-switch-body.component.scss', '../../../cdk/utils/drag-and-drop/drag-and-drop.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [DragAndDropModule, IconComponent]
 })
 export class ProductSwitchBodyComponent implements OnInit, OnDestroy {

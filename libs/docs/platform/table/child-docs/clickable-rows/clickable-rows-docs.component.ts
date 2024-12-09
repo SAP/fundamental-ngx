@@ -25,7 +25,6 @@ const platformTableNavigatableRowTsSrc = 'platform-table-navigatable-row-indicat
     templateUrl: './clickable-rows-docs.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

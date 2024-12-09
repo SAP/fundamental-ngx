@@ -7,7 +7,6 @@ import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 @Component({
     selector: 'fd-list-loading-example',
     templateUrl: './list-loading-example.component.html',
-    standalone: true,
     imports: [ButtonComponent, ListModule, RepeatDirective, SkeletonModule]
 })
 export class ListLoadingExampleComponent {

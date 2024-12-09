@@ -9,7 +9,6 @@ export interface Action {
 @Component({
     selector: 'fdp-platform-action-list-item-border-less-example',
     templateUrl: './platform-action-list-item-border-less-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, ActionListItemModule, ContentDensityDirective]
 })
 export class PlatformActionListItemBorderLessExampleComponent {

@@ -17,7 +17,6 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
             <button fd-button fdbNestedButton square ariaLabel="Cancel" glyph="decline"></button>
         </div>
     `,
-    standalone: true,
     imports: [ButtonComponent, NgStyle, NestedButtonDirective]
 })
 export class NestedExampleComponent {}

@@ -31,7 +31,6 @@ export interface ApprovalFlowMessage {
     host: {
         class: 'fdp-approval-flow-messages'
     },
-    standalone: true,
     imports: [MessageStripComponent, FdTranslatePipe]
 })
 export class ApprovalFlowMessagesComponent {

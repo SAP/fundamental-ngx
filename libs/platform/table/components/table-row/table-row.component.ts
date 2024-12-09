@@ -83,7 +83,6 @@ import { TableEditableCellComponent } from '../table-editable-cell/table-editabl
         role: 'row',
         '[attr.aria-expanded]': '_isTreeRow(row) ? row.expanded : null'
     },
-    standalone: true,
     imports: [
         TableCellDirective,
         TableStatusIndicatorDirective,

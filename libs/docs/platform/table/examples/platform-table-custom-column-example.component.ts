@@ -37,7 +37,6 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [provideDateTimeFormats()],
-    standalone: true,
     imports: [
         TableDataSourceDirective,
         TableHeaderResizerDirective,

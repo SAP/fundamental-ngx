@@ -24,7 +24,6 @@ import { map } from 'rxjs/operators';
             }
         `
     ],
-    standalone: true,
     imports: [IconComponent, InlineHelpModule, FormControlComponent, AsyncPipe]
 })
 export class InlineHelpExampleComponent {

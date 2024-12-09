@@ -57,7 +57,6 @@ let stepInputUniqueId = 0;
         class: 'fd-step-input__container',
         '(focusout)': 'handleFocusOut($event)'
     },
-    standalone: true,
     imports: [FormInputMessageGroupComponent, ButtonComponent, FormMessageComponent, FdTranslatePipe]
 })
 export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor, FormItemControl {
@@ -87,7 +86,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Specifies algorithm used to match locale. Check Intl.NumberFormat documentation for more information */
     @Input()
-    localeMatcher: Nullable<string>;
+    localeMatcher: Nullable<'lookup' | 'best fit'>;
 
     /** Sets icon displayed in Increment Button */
     @Input()

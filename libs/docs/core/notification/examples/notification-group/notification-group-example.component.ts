@@ -25,7 +25,6 @@ export type Notification = {
     selector: 'fd-notification-group-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './notification-group-example.component.html',
-    standalone: true,
     imports: [
         PopoverComponent,
         PopoverControlComponent,

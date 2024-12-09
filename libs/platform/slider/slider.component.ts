@@ -24,7 +24,6 @@ export class SliderChangeEvent<T extends SliderControlValue = any> {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: SliderComponent, multi: true }],
-    standalone: true,
     imports: [CoreSliderComponent, FormsModule]
 })
 export class SliderComponent extends BaseInput {

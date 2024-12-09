@@ -17,7 +17,6 @@ import { SwitchComponent } from '@fundamental-ngx/core/switch';
             }
         `
     ],
-    standalone: true,
     imports: [FormLabelComponent, SwitchComponent, ContentDensityDirective]
 })
 export class SemanticSwitchExampleComponent {

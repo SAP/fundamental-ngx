@@ -5,7 +5,6 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
     selector: 'fd-icon-businessSuiteInAppSymbols-example',
     templateUrl: './icon-businessSuiteInAppSymbols-example.component.html',
     styleUrls: ['icon-businessSuiteInAppSymbols-example.component.scss'],
-    standalone: true,
     imports: [IconComponent]
 })
 export class IconBusinessSuiteInAppSymbolsExampleComponent {

@@ -14,7 +14,6 @@ import {
 @Component({
     selector: 'fd-popover-focus-example',
     templateUrl: './popover-focus-example.component.html',
-    standalone: true,
     imports: [
         PopoverComponent,
         PopoverControlComponent,

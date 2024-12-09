@@ -37,7 +37,6 @@ const formGroupChildProvider: Provider = {
     templateUrl: './form-generator-field.component.html',
     providers: [formFieldProvider, formGroupChildProvider],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, DynamicFormControlDirective]
 })
 export class FormGeneratorFieldComponent implements OnInit {

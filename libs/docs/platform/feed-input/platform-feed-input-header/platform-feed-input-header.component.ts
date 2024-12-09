@@ -14,7 +14,6 @@ import {
     selector: 'fd-feed-input-header',
     templateUrl: './platform-feed-input-header.component.html',
     styleUrls: ['./platform-feed-input-header.component.scss'],
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

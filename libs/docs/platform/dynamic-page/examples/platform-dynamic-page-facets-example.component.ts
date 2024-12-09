@@ -27,7 +27,6 @@ import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-
     templateUrl: './platform-dynamic-page-facets-example.component.html',
     styleUrls: ['./platform-dynamic-page-facets-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ButtonComponent,
         PlatformDynamicPageModule,

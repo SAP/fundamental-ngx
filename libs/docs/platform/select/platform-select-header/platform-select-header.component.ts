@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'fdp-select-header',
     templateUrl: './platform-select-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, RouterLink, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformSelectHeaderComponent {}

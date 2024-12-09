@@ -18,7 +18,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     selector: 'fd-form-dialog-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './form-dialog-example.component.html',
-    standalone: true,
     imports: [
         TitleComponent,
         CdkScrollable,

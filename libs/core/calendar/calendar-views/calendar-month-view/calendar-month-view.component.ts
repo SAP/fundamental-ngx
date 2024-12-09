@@ -36,7 +36,6 @@ import { DateRange } from '../../models/date-range';
         '[attr.id]': 'viewId'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ButtonComponent, FdTranslatePipe]
 })
 export class CalendarMonthViewComponent<D> implements OnInit, OnChanges, FocusableCalendarView {

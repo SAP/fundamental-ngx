@@ -6,7 +6,6 @@ import { ObjectListItemModule, PlatformListModule } from '@fundamental-ngx/platf
 @Component({
     selector: 'fdp-platform-object-list-item-example',
     templateUrl: './platform-object-list-item-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, ObjectListItemModule, ObjectMarkerModule, ObjectStatusComponent]
 })
 export class PlatformObjectListItemExampleComponent {}

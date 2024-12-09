@@ -12,7 +12,6 @@ import {
 @Component({
     selector: 'fd-textarea-example',
     templateUrl: './textarea-example.component.html',
-    standalone: true,
     imports: [FormHeaderComponent, FormItemComponent, FormLabelComponent, FormControlComponent, ContentDensityDirective]
 })
 export class TextareaExampleComponent {}
@@ -20,7 +19,6 @@ export class TextareaExampleComponent {}
 @Component({
     selector: 'fd-textarea-inline-help-example',
     templateUrl: './textarea-inline-help-example.component.html',
-    standalone: true,
     imports: [FormItemComponent, FormLabelComponent, FormControlComponent]
 })
 export class TextareaInlineHelpExampleComponent {}
@@ -28,7 +26,6 @@ export class TextareaInlineHelpExampleComponent {}
 @Component({
     selector: 'fd-textarea-state-example',
     templateUrl: './textarea-state-example.component.html',
-    standalone: true,
     imports: [
         FormItemComponent,
         FormLabelComponent,

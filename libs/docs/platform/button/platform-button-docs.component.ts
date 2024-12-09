@@ -23,7 +23,6 @@ const buttonScss = 'platform-button-examples.scss';
 @Component({
     selector: 'app-button',
     templateUrl: './platform-button-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

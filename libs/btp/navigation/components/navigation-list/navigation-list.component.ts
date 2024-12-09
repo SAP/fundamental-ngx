@@ -27,7 +27,6 @@ import { NavigationService } from '../../services/navigation.service';
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'ul[fdb-navigation-list]',
-    standalone: true,
     imports: [NgTemplateOutlet],
     templateUrl: './navigation-list.component.html',
     encapsulation: ViewEncapsulation.None,

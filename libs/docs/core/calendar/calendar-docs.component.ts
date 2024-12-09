@@ -56,7 +56,6 @@ const calendarProgrammaticallySource = 'calendar-programmatically-change-example
 @Component({
     selector: 'app-calendar',
     templateUrl: './calendar-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

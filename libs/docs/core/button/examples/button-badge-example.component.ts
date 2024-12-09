@@ -4,7 +4,6 @@ import { ButtonBadgeDirective, ButtonComponent, badgeEnabledButtonTypes } from '
 
 @Component({
     selector: 'fd-button-badge-example',
-    standalone: true,
     styles: [
         `
             :host {

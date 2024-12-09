@@ -12,7 +12,6 @@ import {
     selector: 'app-textarea-header',
     templateUrl: './platform-textarea-header.component.html',
     styleUrls: ['./platform-textarea-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, RouterLink, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformTextareaHeaderComponent {}

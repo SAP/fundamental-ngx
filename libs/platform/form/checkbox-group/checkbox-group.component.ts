@@ -31,7 +31,6 @@ import { CheckboxComponent } from '../checkbox/checkbox.component';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => CheckboxGroupComponent), multi: true }],
-    standalone: true,
     imports: [FormGroupComponent, NgTemplateOutlet, CheckboxComponent, FormsModule]
 })
 export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {

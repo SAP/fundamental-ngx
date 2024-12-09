@@ -23,7 +23,6 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
     `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FormLabelComponent, CheckboxComponent, FormsModule, ButtonComponent]
 })
 export class CheckboxDisplayModeExampleComponent {

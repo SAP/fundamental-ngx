@@ -10,7 +10,6 @@ import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 @Component({
     selector: 'fd-calendar-disabled-navigation-buttons-example',
     templateUrl: 'calendar-disabled-navigation-buttons-example.component.html',
-    standalone: true,
     imports: [CalendarComponent, FdDatetimeModule]
 })
 export class CalendarDisabledNavigationButtonsExampleComponent {

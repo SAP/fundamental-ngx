@@ -21,7 +21,6 @@ import {
 @Component({
     selector: 'fd-upload-collection-custom-example',
     templateUrl: './upload-collection-custom-example.component.html',
-    standalone: true,
     imports: [
         UploadCollectionComponent,
         ListModule,

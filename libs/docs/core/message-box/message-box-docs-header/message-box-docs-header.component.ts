@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'app-message-box-docs-header',
     templateUrl: './message-box-docs-header.component.html',
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

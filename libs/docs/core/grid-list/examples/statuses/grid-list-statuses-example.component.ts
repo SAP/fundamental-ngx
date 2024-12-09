@@ -8,7 +8,6 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
     selector: 'fd-grid-list-statuses-example',
     templateUrl: './grid-list-statuses-example.component.html',
     styleUrls: ['./grid-list-statuses-example.component.scss'],
-    standalone: true,
     imports: [GridListModule, AvatarComponent, LinkComponent, RouterLink]
 })
 export class GridListStatusesExampleComponent {}

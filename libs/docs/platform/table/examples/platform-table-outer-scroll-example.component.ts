@@ -19,7 +19,6 @@ import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
     templateUrl: './platform-table-outer-scroll-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         TableDataSourceDirective,
         TableHeaderResizerDirective,

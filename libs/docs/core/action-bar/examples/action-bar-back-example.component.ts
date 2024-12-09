@@ -9,7 +9,6 @@ import { map } from 'rxjs/operators';
 @Component({
     selector: 'fd-action-bar-back-example',
     templateUrl: './action-bar-back-example.component.html',
-    standalone: true,
     imports: [ActionBarModule, ButtonComponent, AsyncPipe]
 })
 export class ActionBarBackExampleComponent implements OnInit {

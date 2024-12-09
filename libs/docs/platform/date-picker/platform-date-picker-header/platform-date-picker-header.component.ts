@@ -12,7 +12,6 @@ import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 @Component({
     selector: 'app-date-picker-header',
     templateUrl: './platform-date-picker-header.component.html',
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-scrollbar-header',
     templateUrl: './scrollbar-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class ScrollbarHeaderComponent {}

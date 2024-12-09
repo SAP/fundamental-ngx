@@ -18,7 +18,6 @@ import {
         DescriptionComponent,
         ImportComponent,
         HeaderTabsComponent
-    ],
-    standalone: true
+    ]
 })
 export class RtlServiceHeaderComponent {}

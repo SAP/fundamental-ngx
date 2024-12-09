@@ -4,7 +4,6 @@ import { ProgressIndicatorComponent } from '@fundamental-ngx/core/progress-indic
 @Component({
     selector: 'fd-progress-indicator-truncation',
     templateUrl: './progress-indicator-truncation.component.html',
-    standalone: true,
     imports: [ProgressIndicatorComponent]
 })
 export class ProgressIndicatorTruncationComponent {}

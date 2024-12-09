@@ -15,7 +15,6 @@ const defaultExampleTs = 'default-example/default-example.component.ts';
     selector: 'app-tabs',
     templateUrl: './focusable-list-docs.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [DocsSectionTitleComponent, ComponentExampleComponent, DefaultExampleComponent, CodeExampleComponent]
 })
 export class FocusableListDocsComponent {

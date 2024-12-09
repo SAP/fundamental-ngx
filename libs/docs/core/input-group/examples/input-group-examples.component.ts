@@ -14,7 +14,6 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 @Component({
     selector: 'fd-input-group-button-example',
     templateUrl: './input-group-button-example.component.html',
-    standalone: true,
     imports: [FormItemComponent, FormLabelComponent, InputGroupModule]
 })
 export class InputGroupButtonExampleComponent {}
@@ -22,7 +21,6 @@ export class InputGroupButtonExampleComponent {}
 @Component({
     selector: 'fd-input-group-icon-example',
     templateUrl: './input-group-icon-example.component.html',
-    standalone: true,
     imports: [FormItemComponent, FormLabelComponent, InputGroupModule]
 })
 export class InputGroupIconExampleComponent {}
@@ -30,7 +28,6 @@ export class InputGroupIconExampleComponent {}
 @Component({
     selector: 'fd-input-group-text-example',
     templateUrl: './input-group-text-example.component.html',
-    standalone: true,
     imports: [FormHeaderComponent, FormItemComponent, FormLabelComponent, InputGroupModule]
 })
 export class InputGroupTextExampleComponent {}
@@ -38,7 +35,6 @@ export class InputGroupTextExampleComponent {}
 @Component({
     selector: 'fd-input-group-text-compact-example',
     templateUrl: './input-group-text-compact-example.component.html',
-    standalone: true,
     imports: [FormItemComponent, FormLabelComponent, InputGroupModule, ContentDensityDirective]
 })
 export class InputGroupTextCompactExampleComponent {}
@@ -46,7 +42,6 @@ export class InputGroupTextCompactExampleComponent {}
 @Component({
     selector: 'fd-input-group-complex-example',
     templateUrl: './input-group-complex-example.component.html',
-    standalone: true,
     imports: [FormItemComponent, FormLabelComponent, InputGroupModule, FormControlComponent, ButtonComponent]
 })
 export class InputGroupComplexExampleComponent {}
@@ -54,7 +49,6 @@ export class InputGroupComplexExampleComponent {}
 @Component({
     selector: 'fd-input-group-states-example',
     templateUrl: './input-group-states-example.component.html',
-    standalone: true,
     imports: [
         FormItemComponent,
         FormLabelComponent,

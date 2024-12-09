@@ -38,7 +38,6 @@ const tokenizerCompactTsCode = 'tokenizer-compact-example/tokenizer-compact-exam
     templateUrl: './token-docs.component.html',
     styleUrls: ['./token-docs.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

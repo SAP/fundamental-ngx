@@ -25,7 +25,6 @@ const service = () => ({
 @Component({
     selector: 'app-avatar-group',
     templateUrl: './avatar-group-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

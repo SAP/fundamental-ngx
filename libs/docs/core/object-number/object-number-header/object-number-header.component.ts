@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-object-number-header',
     templateUrl: './object-number-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class ObjectNumberHeaderComponent {}

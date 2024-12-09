@@ -25,7 +25,6 @@ import { WizardSummarySectionComponent } from './wizard-summary-section/wizard-s
     templateUrl: './wizard-summary-step.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [WizardSummarySectionComponent, NgTemplateOutlet]
 })
 export class WizardSummaryStepComponent {

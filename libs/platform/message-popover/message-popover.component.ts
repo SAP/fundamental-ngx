@@ -38,7 +38,6 @@ import { convertFormState, convertFormStateToMessagePopoverState } from './utils
     styleUrl: './message-popover.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         PopoverModule,
         ButtonComponent,

@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-vhd-header',
     templateUrl: './platform-vhd-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformVhdHeaderComponent {}

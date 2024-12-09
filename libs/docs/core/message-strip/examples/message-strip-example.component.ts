@@ -5,7 +5,6 @@ import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
     selector: 'fd-message-strip-example',
     templateUrl: './message-strip-example.component.html',
     styleUrls: ['message-strip-example.component.scss'],
-    standalone: true,
     imports: [MessageStripComponent]
 })
 export class MessageStripExampleComponent {}

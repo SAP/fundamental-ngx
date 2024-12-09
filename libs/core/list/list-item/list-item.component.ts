@@ -59,7 +59,6 @@ let listItemUniqueId = 0;
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [FormItemComponent, DecimalPipe, IconComponent]
 })
 export class ListItemComponent<T = any> extends ListFocusItem<T> implements AfterContentInit, ListItemInterface {

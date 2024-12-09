@@ -14,7 +14,6 @@ interface AdditionalTreeItemData {
     templateUrl: './tree-highlight-indicators-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [DataSourceDirective, CvaDirective, TreeModule, IconComponent]
 })
 export class TreeHighlightIndicatorsExampleComponent {

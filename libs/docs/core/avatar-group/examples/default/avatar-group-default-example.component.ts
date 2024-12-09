@@ -10,8 +10,7 @@ import { AvatarGroupDataExampleService } from '../avatar-group-data-example.serv
     selector: 'fd-avatar-group-default-example',
     templateUrl: './avatar-group-default-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [AvatarGroupComponent, AvatarComponent, QuickViewModule, LinkComponent, AvatarGroupItemDirective],
-    standalone: true
+    imports: [AvatarGroupComponent, AvatarComponent, QuickViewModule, LinkComponent, AvatarGroupItemDirective]
 })
 export class AvatarGroupDefaultExampleComponent {
     readonly avatarGroupDataExampleService: AvatarGroupDataExampleService = inject(AvatarGroupDataExampleService);

@@ -29,7 +29,6 @@ const messageStripWidthExampleHtml = 'message-strip-width-example.component.html
     selector: 'app-message-strip',
     templateUrl: './message-strip-docs.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

@@ -31,7 +31,6 @@ const platformSearchFieldMobileModeTsCode =
 @Component({
     selector: 'app-search-field',
     templateUrl: './platform-search-field-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

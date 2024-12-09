@@ -11,7 +11,6 @@ import {
     selector: 'fd-toolbar-header',
     templateUrl: './toolbar-header.component.html',
     styleUrls: ['./toolbar-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class ToolbarHeaderComponent {}

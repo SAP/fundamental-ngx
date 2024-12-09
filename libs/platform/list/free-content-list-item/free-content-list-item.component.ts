@@ -10,7 +10,6 @@ import { BaseListItem } from '../base-list-item';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => FreeContentListItemComponent) }],
-    standalone: true,
     host: {
         role: 'listitem'
     },

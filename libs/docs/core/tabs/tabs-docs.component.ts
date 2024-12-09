@@ -56,7 +56,6 @@ const defaultTabH = 'default-tab/default-tab-example.component.html';
     templateUrl: './tabs-docs.component.html',
     styleUrls: ['tabs-docs.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

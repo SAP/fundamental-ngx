@@ -54,7 +54,6 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
 @Component({
     selector: 'fdp-platform-vhd-multi-input-example',
     templateUrl: './platform-vhd-multi-input-example.component.html',
-    standalone: true,
     imports: [MultiInputComponent, FormsModule, ButtonComponent, PlatformValueHelpDialogModule]
 })
 export class PlatformVhdMultiInputExampleComponent implements OnInit {

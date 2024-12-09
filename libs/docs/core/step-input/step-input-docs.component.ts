@@ -30,7 +30,6 @@ const stepInputStateSrc = 'step-input-state-example/step-input-state-example.com
     templateUrl: './step-input-docs.component.html',
     styleUrls: ['./step-input-docs.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

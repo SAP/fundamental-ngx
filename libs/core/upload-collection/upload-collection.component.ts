@@ -10,7 +10,6 @@ import { ListModule } from '@fundamental-ngx/core/list';
     </ul>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ListModule]
 })
 export class UploadCollectionComponent {

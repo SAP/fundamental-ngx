@@ -34,7 +34,8 @@ let sideNavigationItemUniqueId = 0;
     providers: [NestedItemService],
     host: {
         role: 'treeitem'
-    }
+    },
+    standalone: false
 })
 export class NestedItemComponent implements AfterContentInit, NestedItemInterface {
     /** Whether item should be expanded */

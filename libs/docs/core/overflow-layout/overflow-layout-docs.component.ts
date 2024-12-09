@@ -26,7 +26,6 @@ const overflowLayoutVisibleItemsExampleTs = 'always-visible/overflow-layout-alwa
 @Component({
     selector: 'app-overflow-layout',
     templateUrl: './overflow-layout-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

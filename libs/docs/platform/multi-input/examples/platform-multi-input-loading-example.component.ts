@@ -65,7 +65,6 @@ const OPTIONS = [
     selector: 'fdp-platform-multi-input-loading-example',
     templateUrl: './platform-multi-input-loading-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FdpFormGroupModule, BusyIndicatorComponent, PlatformMultiInputModule, FormsModule]
 })
 export class PlatformMultiInputLoadingExampleComponent {

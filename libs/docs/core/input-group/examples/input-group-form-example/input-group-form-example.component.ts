@@ -6,7 +6,6 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 @Component({
     selector: 'fd-input-group-form-example',
     templateUrl: './input-group-form-example.component.html',
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

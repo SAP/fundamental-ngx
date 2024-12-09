@@ -10,7 +10,6 @@ import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
     selector: 'fd-date-picker-mobile-mode-example',
     templateUrl: './date-picker-mobile-mode-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [DatePickerComponent, FormsModule, FdDatetimeModule]
 })
 export class DatePickerMobileModeExampleComponent {

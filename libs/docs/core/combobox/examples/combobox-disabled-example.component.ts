@@ -6,7 +6,6 @@ import { FieldsetComponent, FormItemComponent, FormLabelComponent } from '@funda
 @Component({
     selector: 'fd-combobox-disabled-example',
     templateUrl: './combobox-disabled-example.component.html',
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

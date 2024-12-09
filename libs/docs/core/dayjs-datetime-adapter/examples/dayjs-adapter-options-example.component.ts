@@ -17,7 +17,6 @@ import {
         { provide: DatetimeAdapter, useClass: DayjsDatetimeAdapter },
         { provide: DAYJS_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true, strict: true } }
     ],
-    standalone: true,
     imports: [DatetimePickerComponent]
 })
 export class DayjsAdapterOptionsExampleComponent {}

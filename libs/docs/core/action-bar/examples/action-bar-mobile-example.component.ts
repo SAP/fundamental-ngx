@@ -13,7 +13,6 @@ import { MenuModule } from '@fundamental-ngx/core/menu';
 @Component({
     selector: 'fd-action-bar-mobile-example',
     templateUrl: './action-bar-mobile-example.component.html',
-    standalone: true,
     imports: [ActionBarModule, ButtonComponent, MenuModule, AsyncPipe]
 })
 export class ActionBarMobileExampleComponent implements OnInit {

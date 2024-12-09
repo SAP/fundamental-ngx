@@ -5,7 +5,6 @@ import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow
     selector: 'fd-micro-process-flow-example',
     templateUrl: './micro-process-flow-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [MicroProcessFlowModule]
 })
 export class MicroProcessFlowExampleComponent {}

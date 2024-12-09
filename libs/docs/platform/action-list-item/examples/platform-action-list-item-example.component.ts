@@ -11,7 +11,6 @@ export interface Action {
 @Component({
     selector: 'fdp-platform-action-list-item-example',
     templateUrl: './platform-action-list-item-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, ActionListItemModule]
 })
 export class PlatformActionListItemExampleComponent {

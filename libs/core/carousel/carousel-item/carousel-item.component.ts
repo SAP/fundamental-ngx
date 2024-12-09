@@ -23,7 +23,6 @@ let carouselItemCounter = 0;
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [BusyIndicatorComponent]
 })
 export class CarouselItemComponent<T = any> implements CarouselItemInterface {

@@ -6,7 +6,6 @@ import { MultiComboboxComponent } from '@fundamental-ngx/core/multi-combobox';
 
 @Component({
     selector: 'fd-multi-combobox-byline-example',
-    standalone: true,
     imports: [
         FormItemComponent,
         FormLabelComponent,

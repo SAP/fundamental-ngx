@@ -15,7 +15,6 @@ import {
     templateUrl: './platform-object-status-header.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

@@ -12,7 +12,6 @@ import { SwitchComponent } from '@fundamental-ngx/core/switch';
     `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FormLabelComponent, SwitchComponent, FormsModule]
 })
 export class DirectionalityComponent implements OnInit {

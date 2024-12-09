@@ -34,7 +34,6 @@ const buttonSplitTemplateExample = 'split-button-template-example.component.html
     templateUrl: './split-button-docs.component.html',
     styleUrls: ['./split-button-docs.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

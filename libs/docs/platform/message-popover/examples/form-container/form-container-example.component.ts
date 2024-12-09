@@ -25,7 +25,6 @@ interface MaxLengthErrorModel {
     templateUrl: './form-container-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         MessagePopoverFormWrapperComponent,
         FdpFormGroupModule,

@@ -42,7 +42,6 @@ const complexTemplateExampleTs = 'complex-template/message-box-complex-example.c
 @Component({
     selector: 'app-message-box-docs',
     templateUrl: './message-box-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

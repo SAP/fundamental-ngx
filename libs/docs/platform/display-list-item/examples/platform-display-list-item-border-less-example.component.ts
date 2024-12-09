@@ -13,7 +13,6 @@ export interface Movie {
 @Component({
     selector: 'fdp-platform-display-list-item-border-less-example',
     templateUrl: './platform-display-list-item-border-less-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, DisplayListItemModule, ContentDensityDirective]
 })
 export class PlatformDisplayListItemBorderLessExampleComponent {

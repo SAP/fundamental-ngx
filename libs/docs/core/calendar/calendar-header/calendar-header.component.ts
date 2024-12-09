@@ -12,7 +12,6 @@ import {
     selector: 'app-calendar-header',
     templateUrl: './calendar-header.component.html',
     styleUrls: ['./calendar-header.component.scss'],
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

@@ -14,7 +14,6 @@ export interface AdditionalTreeItemData {
     templateUrl: './navigatable-tree-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [DataSourceDirective, CvaDirective, TreeModule, IconComponent]
 })
 export class NavigatableTreeExampleComponent {

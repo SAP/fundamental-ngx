@@ -28,7 +28,6 @@ export class DateUtil {
 
 @Component({
     selector: 'fd-ngx-date-picker-special-day-example',
-    standalone: true,
     imports: [CommonModule, DatePickerComponent, ReactiveFormsModule, FormsModule, FdDatetimeModule, CalendarComponent],
     templateUrl: './date-picker-special-day-example.component.html',
     styleUrl: './date-picker-special-day-example.component.scss'

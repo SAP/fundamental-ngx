@@ -33,7 +33,6 @@ import { BehaviorSubject, filter, map, tap } from 'rxjs';
  */
 @Component({
     selector: 'fdk-dynamic-portal',
-    standalone: true,
     imports: [PortalModule],
     template: ` <ng-template cdkPortalOutlet></ng-template>`
 })

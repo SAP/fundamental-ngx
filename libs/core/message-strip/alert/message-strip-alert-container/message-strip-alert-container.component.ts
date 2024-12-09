@@ -26,7 +26,6 @@ import { MessageStripAlert } from '../message-strip-alert/message-strip-alert.in
     `,
     styleUrl: './message-strip-alert-container.component.scss',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [PortalModule, ScrollbarDirective, MessageStripAlertContainerFooterComponent, AsyncPipe]
 })
 export class MessageStripAlertContainerComponent implements AfterViewInit {

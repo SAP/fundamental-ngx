@@ -8,7 +8,6 @@ import { PlatformStepInputModule } from '@fundamental-ngx/platform/form';
     selector: 'fdp-platform-number-step-input-state-example',
     templateUrl: './platform-number-step-input-state-example.component.html',
     styleUrls: ['./platform-number-step-input-state-example.component.scss'],
-    standalone: true,
     imports: [ContentDensityDirective, FormLabelComponent, PlatformStepInputModule]
 })
 export class PlatformNumberStepInputStateExampleComponent {

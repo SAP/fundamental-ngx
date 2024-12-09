@@ -50,7 +50,6 @@ let titleUniqueId = 0;
     styleUrl: './select-tab.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         TitleComponent,
         CdkScrollable,

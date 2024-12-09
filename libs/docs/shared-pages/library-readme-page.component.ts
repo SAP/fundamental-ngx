@@ -6,7 +6,6 @@ import { MarkdownModule } from 'ngx-markdown';
     template: `
         <markdown class="fd-playground--markdown" [src]="readmeSrc" (load)="onLoad()" (error)="onError()"> </markdown>
     `,
-    standalone: true,
     imports: [MarkdownModule]
 })
 export class LibraryReadmePageComponent {

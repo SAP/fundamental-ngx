@@ -1,5 +1,5 @@
-@import '@sap-ui/common-css/dist/sass/common-mixins';
-@import 'fundamental-styles/dist/avatar-group';
+@import '@sap-ui/common-css/dist/sass/_common-mixins.scss';
+@import 'fundamental-styles/dist/avatar-group.css';
 
 @mixin fd-avatar-element() {
     > .fd-popover__control > fd-popover-control > .fd-avatar {

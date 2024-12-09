@@ -15,7 +15,6 @@ import {
 @Component({
     selector: 'app-moment-datetime-adapter-header',
     templateUrl: './moment-datetime-adapter-header.component.html',
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

@@ -11,7 +11,6 @@ import { SeparatorComponent } from '../seperator/seperator.component';
     templateUrl: './header-tabs.component.html',
     styleUrls: ['./header-tabs.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [TabsModule, RouterLinkActive, RouterLink, SeparatorComponent, AsyncPipe]
 })
 export class HeaderTabsComponent {

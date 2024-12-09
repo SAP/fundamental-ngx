@@ -36,7 +36,6 @@ import { FILTERS_VIEW_STEP_TOKEN, FiltersViewStep } from './filters-active-step'
     encapsulation: ViewEncapsulation.None,
     /** Each filters dialog step must provide FILTERS_VIEW_STEP_TOKEN to be accessible */
     providers: [{ provide: FILTERS_VIEW_STEP_TOKEN, useExisting: forwardRef(() => FilterStepComponent) }],
-    standalone: true,
     imports: [
         ButtonComponent,
         TitleComponent,

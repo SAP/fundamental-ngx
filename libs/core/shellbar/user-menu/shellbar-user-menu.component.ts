@@ -24,7 +24,6 @@ import { ShellbarUserMenuButtonDirective } from './shellbar-user-menu-button.dir
     selector: 'fd-shellbar-user-menu',
     templateUrl: './shellbar-user-menu.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ButtonComponent, MenuModule, AvatarComponent, ShellbarUserMenuButtonDirective]
 })
 export class ShellbarUserMenuComponent {

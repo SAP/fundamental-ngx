@@ -27,7 +27,6 @@ import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
             Value: {{ checkboxValue2 }}
         </div>
     `,
-    standalone: true,
     imports: [CheckboxComponent, FormsModule]
 })
 export class CheckboxCustomValuesExampleComponent {

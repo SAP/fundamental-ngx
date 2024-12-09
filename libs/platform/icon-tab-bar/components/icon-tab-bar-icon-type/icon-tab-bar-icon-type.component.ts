@@ -10,7 +10,6 @@ import { IconTabBarPopoverComponent } from '../popovers/icon-tab-bar-popover/ico
 @Component({
     selector: 'fdp-icon-tab-bar-icon-type',
     templateUrl: './icon-tab-bar-icon-type.component.html',
-    standalone: true,
     providers: [
         {
             provide: IconTabBarBase,

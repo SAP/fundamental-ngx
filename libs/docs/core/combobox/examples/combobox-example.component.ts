@@ -8,7 +8,6 @@ import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/for
     selector: 'fd-combobox-example',
     templateUrl: './combobox-example.component.html',
     styleUrls: ['combobox-example.component.scss'],
-    standalone: true,
     imports: [FormItemComponent, FormLabelComponent, ComboboxComponent, FormsModule, ContentDensityDirective]
 })
 export class ComboboxExampleComponent {

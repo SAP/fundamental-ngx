@@ -27,7 +27,6 @@ export const RESETTABLE_TOKEN = new InjectionToken<Resettable>('Resettable');
     ></button>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [ButtonComponent, FdTranslatePipe]
 })
 export class ResetButtonComponent {

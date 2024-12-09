@@ -4,7 +4,6 @@ import { PlatformFeedInputModule } from '@fundamental-ngx/platform/feed-input';
 @Component({
     selector: 'fdp-feed-input-placeholder-example',
     templateUrl: './platform-feed-input-placeholder-example.component.html',
-    standalone: true,
     imports: [PlatformFeedInputModule]
 })
 export class PlatformFeedInputPlaceholderExampleComponent {}

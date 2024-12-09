@@ -12,7 +12,6 @@ interface Item {
         <fd-multi-input placeholder="Search here..." [selected]="selected" [dropdownValues]="objectValues">
         </fd-multi-input>
     `,
-    standalone: true,
     imports: [MultiInputComponent]
 })
 export class MultiInputOptionItemExampleComponent {

@@ -33,7 +33,6 @@ import { DynamicPageResponsiveSize } from '../../constants';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [contentDensityObserverProviders()],
-    standalone: true,
     imports: [ToolbarComponent, ToolbarItemDirective, NgTemplateOutlet]
 })
 export class DynamicPageTitleContentComponent {

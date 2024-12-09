@@ -33,7 +33,6 @@ const fliMobileT = 'fli-mobile/fli-mobile-example.component.ts';
 @Component({
     selector: 'app-feed-list-item-doc',
     templateUrl: './feed-list-item-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

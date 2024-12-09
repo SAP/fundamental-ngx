@@ -18,7 +18,6 @@ import { MULTICOMBOBOX_COMPONENT, MultiComboboxInterface } from '../../multi-com
     selector: 'fdp-multi-combobox-mobile',
     templateUrl: './multi-combobox-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DialogModule,
         TitleComponent,

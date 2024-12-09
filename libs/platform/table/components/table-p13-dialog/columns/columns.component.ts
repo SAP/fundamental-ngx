@@ -78,7 +78,6 @@ const INITIAL_SHOW_ALL_ITEMS = true;
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13ColumnsDialogComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DialogComponent,
         DialogHeaderComponent,

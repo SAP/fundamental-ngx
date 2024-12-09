@@ -36,7 +36,6 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
         '[class.fd-busy-indicator__container]': 'true',
         '[class.fd-busy-indicator__container--inline]': '!block'
     },
-    standalone: true,
     imports: []
 })
 export class BusyIndicatorComponent {

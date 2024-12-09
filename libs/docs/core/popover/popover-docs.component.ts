@@ -78,7 +78,6 @@ const dynamicContainerHeightTsSrc =
 @Component({
     selector: 'app-popover',
     templateUrl: './popover-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

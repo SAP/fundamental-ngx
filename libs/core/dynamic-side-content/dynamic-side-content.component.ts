@@ -34,7 +34,6 @@ let componentId = 0;
     styleUrl: './dynamic-side-content.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [NgTemplateOutlet]
 })
 export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, OnInit, AfterContentInit {

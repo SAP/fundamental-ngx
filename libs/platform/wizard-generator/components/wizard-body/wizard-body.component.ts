@@ -37,7 +37,6 @@ export interface WizardStepChange {
     templateUrl: './wizard-body.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         WizardModule,
         WizardGeneratorStepComponent,

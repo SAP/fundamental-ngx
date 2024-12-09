@@ -6,7 +6,6 @@ import { CardModule } from '@fundamental-ngx/core/card';
     selector: 'fd-card-object-example',
     templateUrl: 'card-object-example.component.html',
     styleUrls: ['./card-object-example.component.scss'],
-    standalone: true,
     imports: [CardModule, AvatarComponent]
 })
 export class CardObjectExampleComponent {}

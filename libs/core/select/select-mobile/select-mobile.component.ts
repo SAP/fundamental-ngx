@@ -30,7 +30,6 @@ import { SELECT_COMPONENT, SelectInterface } from '../select.interface';
     selector: 'fd-select-mobile',
     templateUrl: './select-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     providers: [DynamicComponentService],
     imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, NgTemplateOutlet, ButtonBarComponent]
 })

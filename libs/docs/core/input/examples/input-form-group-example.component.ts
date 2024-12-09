@@ -15,7 +15,6 @@ import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fu
     selector: 'fd-input-form-group-example',
     templateUrl: './input-form-group-example.component.html',
     styleUrls: ['input-form-group-example.component.scss'],
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

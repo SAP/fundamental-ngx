@@ -68,7 +68,6 @@ import { ToolHeaderComponentClass } from '../../tool-header-component.class';
     selector: 'fdb-tool-header',
     templateUrl: './tool-header.component.html',
     styleUrls: ['./tool-header.component.scss'],
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {

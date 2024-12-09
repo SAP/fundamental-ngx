@@ -15,7 +15,6 @@ import {
 @Component({
     selector: 'fdp-wizard-generator-responsive-dialog-example',
     templateUrl: './wizard-generator-responsive-dialog-example.component.html',
-    standalone: true,
     imports: [PlatformButtonModule, JsonPipe],
     providers: [WizardDialogGeneratorService]
 })

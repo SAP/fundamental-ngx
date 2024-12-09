@@ -6,7 +6,6 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
 @Component({
     selector: 'fd-popover-dynamic-example',
     templateUrl: './popover-dynamic-example.component.html',
-    standalone: true,
     imports: [PopoverComponent, PopoverControlComponent, ButtonComponent, PopoverBodyComponent, AvatarComponent]
 })
 export class PopoverDynamicExampleComponent {

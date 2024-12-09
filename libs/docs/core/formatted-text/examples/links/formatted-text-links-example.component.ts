@@ -4,7 +4,6 @@ import { FormattedTextComponent } from '@fundamental-ngx/core/formatted-text';
 @Component({
     selector: 'fd-formatted-text-links-example',
     templateUrl: './formatted-text-links-example.component.html',
-    standalone: true,
     imports: [FormattedTextComponent]
 })
 export class FormattedTextLinksExampleComponent {

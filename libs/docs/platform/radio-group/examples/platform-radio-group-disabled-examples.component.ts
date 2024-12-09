@@ -6,7 +6,6 @@ import { FdpFormGroupModule, PlatformRadioGroupModule } from '@fundamental-ngx/p
 @Component({
     selector: 'fdp-platform-radio-group-disabled-example',
     templateUrl: './platform-radio-group-disabled-example.component.html',
-    standalone: true,
     imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformRadioGroupModule, ContentDensityDirective]
 })
 export class PlatformRadioGroupDisabledExampleComponent {

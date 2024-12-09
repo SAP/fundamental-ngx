@@ -30,7 +30,6 @@ const textExpandableTs = 'text-expandable.component.ts';
 @Component({
     selector: 'app-input',
     templateUrl: './text-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

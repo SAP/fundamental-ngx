@@ -12,7 +12,6 @@ import {
     selector: 'fdp-wizard-generator-special-elements-example',
     templateUrl: './wizard-generator-special-elements-example.component.html',
     providers: [provideDateTimeFormats()],
-    standalone: true,
     imports: [PlatformWizardGeneratorModule, JsonPipe]
 })
 export class WizardGeneratorSpecialElementsExampleComponent {

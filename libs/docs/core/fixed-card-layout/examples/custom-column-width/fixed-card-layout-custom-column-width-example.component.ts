@@ -12,7 +12,6 @@ import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
     templateUrl: './fixed-card-layout-custom-column-width-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         ButtonComponent,
         CdkScrollable,

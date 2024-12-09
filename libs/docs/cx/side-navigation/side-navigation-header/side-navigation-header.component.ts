@@ -11,7 +11,6 @@ import {
     selector: 'app-side-navigation-header',
     templateUrl: './side-navigation-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class SideNavigationHeaderComponent {}

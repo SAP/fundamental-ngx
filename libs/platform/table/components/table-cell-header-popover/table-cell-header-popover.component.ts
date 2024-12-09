@@ -40,7 +40,6 @@ import { startWith } from 'rxjs/operators';
     templateUrl: './table-cell-header-popover.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         PopoverComponent,
         TablePopoverDirective,

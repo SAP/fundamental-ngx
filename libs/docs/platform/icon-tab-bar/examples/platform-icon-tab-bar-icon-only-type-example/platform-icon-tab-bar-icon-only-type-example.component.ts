@@ -6,7 +6,6 @@ import { iconTypeConfig, longIconTypeConfig } from '../config-for-examples/icon-
 @Component({
     selector: 'fdp-platform-icon-tab-bar-icon-only-type-example',
     templateUrl: './platform-icon-tab-bar-icon-only-type-example.component.html',
-    standalone: true,
     imports: [IconTabBarComponent]
 })
 export class PlatformIconTabBarIconOnlyTypeExampleComponent implements OnInit {

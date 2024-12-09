@@ -41,7 +41,6 @@ const wizardVisibleSummaryTs = 'wizard-visible-summary-example.component.ts';
 @Component({
     selector: 'app-wizard',
     templateUrl: './wizard-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

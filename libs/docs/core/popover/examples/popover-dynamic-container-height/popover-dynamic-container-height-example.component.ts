@@ -22,7 +22,6 @@ import {
             }
         `
     ],
-    standalone: true,
     imports: [
         PopoverContainerDirective,
         ButtonComponent,

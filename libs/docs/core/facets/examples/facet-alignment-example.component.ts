@@ -13,7 +13,6 @@ import { TextComponent } from '@fundamental-ngx/core/text';
     selector: 'fd-facet-alignment-example',
     templateUrl: './facet-alignment-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ButtonComponent,
         FacetComponent,

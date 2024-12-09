@@ -5,7 +5,6 @@ import { SelectModule } from '@fundamental-ngx/core/select';
 @Component({
     selector: 'fd-select-mobile-example',
     templateUrl: './select-mobile-example.component.html',
-    standalone: true,
     imports: [SelectModule]
 })
 export class SelectMobileExampleComponent {

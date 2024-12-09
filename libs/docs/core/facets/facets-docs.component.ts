@@ -29,7 +29,6 @@ const FacetLoadingExampleTs = 'facet-loading-example.component.ts';
 @Component({
     selector: 'app-facet',
     templateUrl: './facet-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

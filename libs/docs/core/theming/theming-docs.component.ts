@@ -24,7 +24,6 @@ const customThemesSrcHtml = 'custom-theme-example.component.html';
 @Component({
     selector: 'app-theming-docs',
     templateUrl: './theming-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

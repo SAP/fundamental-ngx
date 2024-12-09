@@ -1,4 +1,4 @@
-import { DeclarationReflection, DefaultThemeRenderContext, JSX, ReferenceReflection } from 'typedoc';
+import { DeclarationReflection, DefaultThemeRenderContext, JSX } from 'typedoc';
 import { classNames, getDisplayName, reflectionFlags, wbr } from '../utils';
 
 export function member(context: DefaultThemeRenderContext, props: DeclarationReflection) {
@@ -26,9 +26,7 @@ export function member(context: DefaultThemeRenderContext, props: DeclarationRef
                 ? context.memberSignatures(props)
                 : props.hasGetterOrSetter()
                   ? context.memberGetterSetter(props)
-                  : props instanceof ReferenceReflection
-                    ? context.memberReference(props)
-                    : context.memberDeclaration(props)}
+                  : context.memberDeclaration(props)}
 
             {props.groups?.map((item) => item.children.map((item) => !item.hasOwnDocument && context.member(item)))}
         </section>

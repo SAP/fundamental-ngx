@@ -38,7 +38,6 @@ import { SliderTooltipExampleComponent } from './examples/tooltip/slider-tooltip
 @Component({
     selector: 'app-slider',
     templateUrl: './slider-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

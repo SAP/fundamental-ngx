@@ -3,7 +3,8 @@ import { NestedListComponent } from '@fundamental-ngx/cx/nested-list';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[cxSideNavigationUtility], [fdx-side-nav-utility]'
+    selector: '[cxSideNavigationUtility], [fdx-side-nav-utility]',
+    standalone: false
 })
 export class SideNavigationUtilityDirective {
     /** @hidden */

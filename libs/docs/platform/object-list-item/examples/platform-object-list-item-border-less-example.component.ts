@@ -31,7 +31,6 @@ export interface Product {
 @Component({
     selector: 'fdp-platform-object-list-item-border-less-example',
     templateUrl: './platform-object-list-item-border-less-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, ObjectListItemModule, ObjectMarkerModule, ObjectStatusComponent]
 })
 export class PlatformObjectListItemBorderLessExampleComponent {

@@ -5,7 +5,6 @@ import { TextComponent } from '@fundamental-ngx/core/text';
 @Component({
     selector: 'fd-tab-collapsible-overflow-example',
     templateUrl: './tab-collapsible-overflow-example.component.html',
-    standalone: true,
     imports: [TabsModule, TextComponent]
 })
 export class TabCollapsibleOverflowExampleComponent {

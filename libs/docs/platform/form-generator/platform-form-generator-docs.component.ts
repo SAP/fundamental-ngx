@@ -63,7 +63,6 @@ import { PlatformFormGeneratorProgramaticSubmitComponent } from './examples/plat
 @Component({
     selector: 'app-form-generator',
     templateUrl: 'platform-form-generator-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

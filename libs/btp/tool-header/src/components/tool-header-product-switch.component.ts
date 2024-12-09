@@ -57,8 +57,7 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
             provide: FD_PRODUCT_SWITCH_COMPONENT,
             useExisting: ToolHeaderProductSwitchComponent
         }
-    ],
-    standalone: true
+    ]
 })
 export class ToolHeaderProductSwitchComponent extends BasePopoverClass {
     /** Placement of a popover. */

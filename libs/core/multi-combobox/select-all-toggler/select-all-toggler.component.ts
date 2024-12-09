@@ -41,7 +41,6 @@ import { Observable } from 'rxjs';
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ToolbarComponent, FormItemComponent, CheckboxComponent, FormsModule, FdTranslatePipe]
 })
 export class SelectAllTogglerComponent extends ListFocusItem implements OnInit {

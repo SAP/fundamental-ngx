@@ -36,7 +36,6 @@ import 'moment/locale/zh-cn';
             <button fd-button label="Chinese" value="zh"></button>
         </fd-segmented-button>
         <fd-calendar [(ngModel)]="date"></fd-calendar>`,
-    standalone: true,
     imports: [
         FormLabelComponent,
         SegmentedButtonModule,

@@ -58,7 +58,6 @@ import { InputGroupInputComponent } from './input.component';
         { provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => InputGroupComponent), multi: true },
         contentDensityObserverProviders()
     ],
-    standalone: true,
     imports: [
         InputGroupAddonBodyComponent,
         NgTemplateOutlet,

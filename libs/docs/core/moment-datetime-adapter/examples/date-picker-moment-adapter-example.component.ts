@@ -18,7 +18,6 @@ import 'moment/locale/fr';
     selector: 'fd-date-picker-moment-adapter-example',
     templateUrl: './date-picker-moment-adapter-example.component.html',
     providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
-    standalone: true,
     imports: [
         FormLabelComponent,
         SegmentedButtonModule,

@@ -33,7 +33,6 @@ import { VariantManagementDataProvider } from './data-provider';
     templateUrl: './manage-variants-dialog.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DialogComponent,
         DialogHeaderComponent,

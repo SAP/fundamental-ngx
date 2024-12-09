@@ -9,7 +9,6 @@ export interface Corona {
 @Component({
     selector: 'fdp-platform-display-list-item-with-navigation-example',
     templateUrl: './platform-display-list-item-with-navigation-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, DisplayListItemModule]
 })
 export class PlatformDisplayListItemWithNavigationExampleComponent {

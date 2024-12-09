@@ -10,7 +10,6 @@ import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
     templateUrl: './platform-multi-input-compact-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
-    standalone: true,
     imports: [FdpFormGroupModule, PlatformMultiInputModule, ContentDensityDirective, FormsModule, ReactiveFormsModule]
 })
 export class PlatformMultiInputCompactExampleComponent {

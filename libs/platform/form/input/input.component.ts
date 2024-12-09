@@ -47,7 +47,6 @@ export type InputType = 'text' | 'number' | 'email' | 'password';
     styleUrl: './input.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: InputComponent, multi: true }],
-    standalone: true,
     imports: [FormControlComponent, FormsModule]
 })
 export class InputComponent extends BaseInput implements OnInit, AfterViewInit {

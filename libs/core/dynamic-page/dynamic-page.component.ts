@@ -55,7 +55,6 @@ import { FD_DYNAMIC_PAGE } from './dynamic-page.tokens';
             useExisting: DynamicPageComponent
         }
     ],
-    standalone: true,
     imports: [CdkScrollable, ScrollbarDirective]
 })
 export class DynamicPageComponent implements AfterViewInit, DynamicPage {

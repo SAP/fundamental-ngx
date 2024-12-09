@@ -14,7 +14,6 @@ import { MessageToastContentExampleComponent } from './message-toast-content-exa
         `
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ButtonComponent, MessageToastModule]
 })
 export class MessageToastExampleComponent {

@@ -120,7 +120,6 @@ let defaultId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [ApprovalFlowAddNodeViewService],
-    standalone: true,
     imports: [
         ContentDensityDirective,
         ApprovalFlowMessagesComponent,

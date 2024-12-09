@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-radio-header',
     templateUrl: './radio-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class RadioHeaderComponent {}

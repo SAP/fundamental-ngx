@@ -9,7 +9,8 @@
                 "@angular-eslint/directive-selector": ["off"],
                 "@angular-eslint/component-selector": ["off"],
                 "jsdoc/require-jsdoc": "off",
-                "grouped-accessor-pairs": "off"
+                "grouped-accessor-pairs": "off",
+                "@angular-eslint/prefer-standalone": "off"
             }
         },
         {

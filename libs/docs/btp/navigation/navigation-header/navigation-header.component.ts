@@ -9,7 +9,6 @@ import {
 
 @Component({
     templateUrl: './navigation-header.component.html',
-    standalone: true,
     imports: [HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent, RouterOutlet]
 })
 export class NavigationHeaderComponent {

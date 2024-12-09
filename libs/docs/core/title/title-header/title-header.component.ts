@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-title-header',
     templateUrl: './title-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class TitleHeaderComponent {}

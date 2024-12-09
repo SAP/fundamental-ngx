@@ -8,7 +8,6 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
     host: { class: 'fd-upload-collection__form-item' },
     templateUrl: './upload-collection-form-item.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [FormControlComponent, FormsModule, FdTranslatePipe]
 })
 export class UploadCollectionFormItemComponent implements ControlValueAccessor {

@@ -29,7 +29,6 @@ const platformTableCorePaginationTsSrc = 'standard-pagination/platform-table-sta
 
 @Component({
     selector: 'fdp-doc-table-pagination-docs',
-    standalone: true,
     imports: [
         CommonModule,
         PlatformTableStandardPaginationComponent,

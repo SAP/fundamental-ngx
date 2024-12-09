@@ -12,7 +12,6 @@ import {
     selector: 'app-inline-help-header',
     templateUrl: './inline-help-header.component.html',
     styleUrls: ['./inline-help-header.component.scss'],
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

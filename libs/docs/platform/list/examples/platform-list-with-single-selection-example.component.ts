@@ -34,7 +34,6 @@ export class ListDataProvider extends DataProvider<Address> {
 @Component({
     selector: 'fdp-platform-list-with-single-selection-example',
     templateUrl: './platform-list-with-single-selection-example.component.html',
-    standalone: true,
     imports: [ToolbarComponent, ToolbarLabelDirective, PlatformListModule, FormsModule, StandardListItemModule]
 })
 export class PlatformListWithSingleSelectionExampleComponent implements AfterViewInit {

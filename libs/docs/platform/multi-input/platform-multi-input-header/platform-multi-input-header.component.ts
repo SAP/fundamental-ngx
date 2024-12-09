@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-platform-multi-input-header',
     templateUrl: './platform-multi-input-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformMultiInputHeaderComponent {}

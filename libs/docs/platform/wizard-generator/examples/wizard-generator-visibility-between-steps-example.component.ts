@@ -15,7 +15,6 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
     selector: 'fdp-wizard-generator-visibility-between-steps-example',
     templateUrl: './wizard-generator-visibility-between-steps-example.component.html',
-    standalone: true,
     imports: [PlatformButtonModule, JsonPipe],
     providers: [WizardDialogGeneratorService, FormGeneratorService]
 })

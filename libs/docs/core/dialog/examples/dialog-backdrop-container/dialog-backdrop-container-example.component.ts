@@ -28,7 +28,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
             }
         `
     ],
-    standalone: true,
     imports: [
         ButtonComponent,
         TitleComponent,

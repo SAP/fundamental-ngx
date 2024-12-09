@@ -35,7 +35,6 @@ const platformWithIconsMenuTsCode = 'platform-menu-with-icons-example.component.
 @Component({
     selector: 'app-menu',
     templateUrl: './platform-menu-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

@@ -65,7 +65,6 @@ let addOnInputRandomId = 0;
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         InputGroupAddOnDirective,

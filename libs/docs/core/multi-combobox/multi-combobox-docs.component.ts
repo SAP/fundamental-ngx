@@ -41,7 +41,6 @@ const multiComboboxBylineTs = 'multi-combobox-byline/multi-combobox-byline-examp
 @Component({
     selector: 'app-multi-combobox',
     templateUrl: './multi-combobox-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

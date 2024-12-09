@@ -29,7 +29,6 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
         // Due to the limit of this example we must provide it on this level.
         provideDateTimeFormats()
     ],
-    standalone: true,
     imports: [BarModule, PlatformButtonModule, JsonPipe, PlatformFormGeneratorModule]
 })
 export class PlatformFormGeneratorAdvancedExampleComponent {

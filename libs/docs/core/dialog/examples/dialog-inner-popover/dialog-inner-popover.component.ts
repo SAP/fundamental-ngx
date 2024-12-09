@@ -25,7 +25,6 @@ interface Option {
         <button fd-button label="Open from Component" (click)="open()"></button>
         <p>{{ closeReason }}</p>
     `,
-    standalone: true,
     imports: [ButtonComponent]
 })
 export class DialogInnerPopoverComponent {
@@ -127,7 +126,6 @@ export class DialogInnerPopoverComponent {
             </fd-dialog-footer>
         </fd-dialog>
     `,
-    standalone: true,
     imports: [
         TitleComponent,
         CdkScrollable,

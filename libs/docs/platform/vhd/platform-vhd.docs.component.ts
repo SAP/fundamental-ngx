@@ -45,7 +45,6 @@ const initialLoadingVhdTs = 'initial-loading/platform-vhd-initial-loading-exampl
 @Component({
     selector: 'app-platform-vhd',
     templateUrl: './platform-vhd.docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

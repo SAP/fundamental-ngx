@@ -6,7 +6,6 @@ import { ObjectAttributeComponent } from '@fundamental-ngx/core/object-attribute
     selector: 'fd-object-attribute-link-example',
     templateUrl: './object-attribute-link-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ObjectAttributeComponent]
 })
 export class ObjectAttributeLinkExampleComponent {

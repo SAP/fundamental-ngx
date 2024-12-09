@@ -82,7 +82,6 @@ export interface IconTabBarItem extends TabConfig {
 @Component({
     selector: 'fd-icon-tab-bar-docs',
     templateUrl: './platform-icon-tab-bar-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

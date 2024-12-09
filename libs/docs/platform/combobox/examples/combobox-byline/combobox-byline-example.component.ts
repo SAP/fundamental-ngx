@@ -19,7 +19,6 @@ export interface ExampleItem {
 @Component({
     selector: 'fdp-combobox-byline-example',
     templateUrl: './combobox-byline-example.component.html',
-    standalone: true,
     imports: [FdpFormGroupModule, PlatformComboboxModule, TemplateDirective, ListModule, IconComponent, JsonPipe]
 })
 export class ComboboxBylineExampleComponent {

@@ -48,7 +48,6 @@ import { FD_BUTTON_COMPONENT } from './tokens';
             useExisting: ButtonComponent
         }
     ],
-    standalone: true,
     imports: [IconComponent]
 })
 export class ButtonComponent

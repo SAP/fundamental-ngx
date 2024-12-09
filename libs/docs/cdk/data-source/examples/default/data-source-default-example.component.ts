@@ -74,7 +74,6 @@ export class ExampleDataSourceParser<T> implements DataSourceParser<T, ExampleDa
             useClass: ExampleDataSourceParser<number>
         }
     ],
-    standalone: true,
     imports: [SelectModule]
 })
 export class DataSourceDefaultExampleComponent implements OnInit {

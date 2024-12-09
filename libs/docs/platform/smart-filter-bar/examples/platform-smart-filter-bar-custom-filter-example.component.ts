@@ -62,7 +62,6 @@ import { map, take } from 'rxjs/operators';
         </ng-container>
     `,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider, smartFilterBarProvider],
-    standalone: true,
     imports: [FormsModule, ReactiveFormsModule, SliderComponent, FdDatetimeModule]
 })
 export class PlatformSmartFilterBarSliderComponent extends BaseDynamicFormGeneratorControl {
@@ -88,7 +87,6 @@ export class PlatformSmartFilterBarSliderComponent extends BaseDynamicFormGenera
         </ng-container>
     `,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider, smartFilterBarProvider],
-    standalone: true,
     imports: [FormsModule, ReactiveFormsModule, PlatformDatePickerComponent]
 })
 export class PlatformSmartFilterBarDateRendererComponent extends BaseSmartFilterBarConditionField {}
@@ -96,7 +94,6 @@ export class PlatformSmartFilterBarDateRendererComponent extends BaseSmartFilter
 @Component({
     selector: 'fdp-platform-smart-filter-bar-custom-filter-example',
     templateUrl: './platform-smart-filter-bar-custom-filter-example.component.html',
-    standalone: true,
     providers: [provideDateTimeFormats(), SmartFilterBarService, FormGeneratorService],
     imports: [
         PlatformSmartFilterBarModule,

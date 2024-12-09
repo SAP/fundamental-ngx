@@ -24,7 +24,6 @@ import { WizardModule, WizardService, WizardStepComponent } from '@fundamental-n
     host: {
         class: 'fd-wizard-example'
     },
-    standalone: true,
     imports: [ButtonComponent, A11yModule, WizardModule, RepeatDirective, SkeletonModule, BarModule]
 })
 export class WizardLoadingExampleComponent {

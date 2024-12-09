@@ -8,7 +8,6 @@ import { TextComponent } from '@fundamental-ngx/core/text';
 @Component({
     selector: 'fd-segmented-button-default-example',
     templateUrl: './segmented-button-default-example.component.html',
-    standalone: true,
     imports: [TextComponent, SegmentedButtonModule, FormsModule, ButtonComponent, FocusableItemDirective]
 })
 export class SegmentedButtonDefaultExampleComponent {

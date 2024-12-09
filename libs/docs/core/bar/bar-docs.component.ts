@@ -44,7 +44,6 @@ const barCustomShellbarExampleTs = 'bar-custom-shellbar-example.component.ts';
 @Component({
     selector: 'app-bar',
     templateUrl: './bar-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

@@ -31,7 +31,6 @@ import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
     `,
     styleUrls: ['./docs-section-title.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [RouterLink, IconComponent]
 })
 export class DocsSectionTitleComponent implements OnInit, AfterViewInit {

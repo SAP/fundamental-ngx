@@ -12,7 +12,6 @@ import { FdPatchLanguageDirective } from '@fundamental-ngx/i18n';
             }
         `
     ],
-    standalone: true,
     imports: [TokenComponent, FdPatchLanguageDirective]
 })
 export class TokenExampleComponent {

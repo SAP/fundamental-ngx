@@ -11,7 +11,6 @@ import {
     selector: 'app-file-uploader-header',
     templateUrl: './file-uploader-header.component.html',
     styleUrls: ['./file-uploader-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class FileUploaderHeaderComponent {}

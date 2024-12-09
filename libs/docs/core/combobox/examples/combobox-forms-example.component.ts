@@ -14,7 +14,6 @@ interface ComboboxItem {
     selector: 'fd-combobox-forms-example',
     templateUrl: 'combobox-forms-example.component.html',
     styleUrls: ['combobox-forms-example.component.scss'],
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

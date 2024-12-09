@@ -27,7 +27,6 @@ let notificationGroupListCounter = 0;
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: []
 })
 export class NotificationGroupListComponent implements AfterViewInit {

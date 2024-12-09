@@ -30,7 +30,6 @@ const truncationHtml = 'object-number-truncation-example.component.html';
 @Component({
     selector: 'app-object-number',
     templateUrl: './object-number-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

@@ -38,7 +38,6 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
     host: {
         class: 'fd-wizard-example'
     },
-    standalone: true,
     imports: [
         ButtonComponent,
         A11yModule,

@@ -21,7 +21,6 @@ import { SideNavigationWideIcon1LevelExampleComponent } from './examples/side-na
 @Component({
     selector: 'app-side-navigation',
     templateUrl: './side-navigation-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

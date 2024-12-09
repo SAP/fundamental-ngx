@@ -86,7 +86,6 @@ export class TableToolbarTemplateDirective {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: TABLE_TOOLBAR, useExisting: TableToolbarComponent }],
-    standalone: true,
     imports: [
         ToolbarComponent,
         ToolbarItemDirective,

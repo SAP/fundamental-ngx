@@ -24,7 +24,6 @@ export type InfoLabelColorInput = InfoLabelColor | `${InfoLabelColor}`;
     styleUrl: './info-label.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [IconComponent]
 })
 export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder, HasElementRef {

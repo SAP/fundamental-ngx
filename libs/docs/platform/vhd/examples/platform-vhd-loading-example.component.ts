@@ -54,7 +54,6 @@ const data = exampleDataSource();
 @Component({
     selector: 'fdp-platform-vhd-loading-example',
     templateUrl: './platform-vhd-loading-example.component.html',
-    standalone: true,
     imports: [ButtonComponent, PlatformValueHelpDialogModule]
 })
 export class PlatformVhdLoadingExampleComponent {

@@ -33,7 +33,6 @@ import dayjs, { Dayjs } from 'dayjs';
             useClass: DayjsDatetimeAdapter
         }
     ],
-    standalone: true,
     imports: [DatetimePickerComponent, FormsModule]
 })
 export class DayjsDatetimeFormatsExampleComponent {

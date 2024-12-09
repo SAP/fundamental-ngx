@@ -41,3 +41,19 @@
     <fd-illustrated-message-dot-example></fd-illustrated-message-dot-example>
 </component-example>
 <code-example [exampleFiles]="illustratedMessageDotExample"></code-example>
+
+<fd-docs-section-title id="inline" componentName="illustrated-message"> Inline SVG </fd-docs-section-title>
+<description>
+    <p>In some cases it's not applicable to use URLs for the SVG locations.</p>
+    <p>
+        In this case developers can load SVG directly into their js code and pass it as a string to the component. The
+        configuration object passed to <code>[svgConfig]</code> should contain values for 'scene', 'dialog', 'spot' and
+        'dot'.
+    </p>
+</description>
+
+<separator></separator>
+<component-example>
+    <fd-illustrated-message-inline-example></fd-illustrated-message-inline-example>
+</component-example>
+<code-example [exampleFiles]="illustratedMessageInline"></code-example>
