@@ -26,7 +26,12 @@ import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
 import { ShellbarActionsMobileComponent } from '../shellbar-actions-mobile/shellbar-actions-mobile.component';
-import { FD_SHELLBAR_ACTION_COMPONENT, FD_SHELLBAR_COMPONENT } from '../tokens';
+import {
+    FD_SHELLBAR_ACTIONS_COMPONENT,
+    FD_SHELLBAR_ACTION_COMPONENT,
+    FD_SHELLBAR_COMPONENT,
+    FD_SHELLBAR_USER_MENU_COMPONENT
+} from '../tokens';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
 
 /**
@@ -59,7 +64,13 @@ import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.compo
         '[class.fd-shellbar__group--actions]': 'true'
     },
     standalone: true,
-    imports: [PortalModule, ShellbarActionsMobileComponent, ShellbarActionComponent, ShellbarUserMenuComponent]
+    imports: [PortalModule, ShellbarActionsMobileComponent, ShellbarActionComponent, ShellbarUserMenuComponent],
+    providers: [
+        {
+            provide: FD_SHELLBAR_ACTIONS_COMPONENT,
+            useExisting: ShellbarActionsComponent
+        }
+    ]
 })
 export class ShellbarActionsComponent implements OnDestroy {
     /** The user data. */
@@ -85,11 +96,11 @@ export class ShellbarActionsComponent implements OnDestroy {
     shellbarActions: QueryList<ShellbarActionComponent>;
 
     /** @hidden */
-    @ContentChild(ShellbarUserMenuComponent)
+    @ContentChild(FD_SHELLBAR_USER_MENU_COMPONENT)
     userComponent: ShellbarUserMenuComponent;
 
     /** @hidden */
-    @ViewChild(ShellbarUserMenuComponent)
+    @ViewChild(FD_SHELLBAR_USER_MENU_COMPONENT)
     userComponentView: ShellbarUserMenuComponent;
 
     /** @hidden */
@@ -165,6 +176,7 @@ export class ShellbarActionsComponent implements OnDestroy {
         this._searchPortal = portal;
         this._addSearchIcon = true;
         this.currentSize = size;
+        this.showSearch = size === 'xl';
         this._searchComponent = searchComponent;
         this._toggleSearchPortal(this.showSearch);
         this._cd.detectChanges();

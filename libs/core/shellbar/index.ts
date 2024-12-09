@@ -5,7 +5,7 @@ export * from './model/shellbar-user';
 export * from './model/shellbar-user-menu';
 export * from './product-menu/product-menu.component';
 export * from './shellbar-action/shellbar-action.component';
-export * from './shellbar-actions-toolbar/shellbar-actions-toolbar.component';
+export * from './shellbar-actions-mobile/shellbar-actions-mobile.component';
 export * from './shellbar-actions/shellbar-actions.component';
 export * from './shellbar-branding/shellbar-branding.component';
 export * from './shellbar-context-area/shellbar-context-area.component';

@@ -20,11 +20,12 @@
     }
 }
 
-fd-shellbar-actions {
-    .fd-shellbar__search-field {
-        width: 100% !important;
-        min-width: 15rem;
-    }
+.fd-shellbar__action.fd-shellbar__action--desktop:empty {
+    display: none;
+}
+
+.fd-shellbar .fd-shellbar__group .fd-shellbar__button.fd-shellbar__button--menu {
+    --fdButtonColor: var(--sapShell_TextColor);
 }
 
 .fd-shellbar__action.fd-shellbar__action--desktop:empty {

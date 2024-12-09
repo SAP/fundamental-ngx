@@ -27,35 +27,30 @@
         </div>
     }
     @if (!_hideAllComponents) {
-        <ng-container cdkPortalOutlet>
-            <ng-content select="fd-shellbar-context-area"></ng-content>
-        </ng-container>
+        <ng-content select="fd-shellbar-context-area"></ng-content>
     }
     <div hidden>
         <ng-content></ng-content>
     </div>
-    @if (searchComponent && _showMobileSearch()) {
-        <div
-            class="fd-shellbar__group fd-shellbar__group--center fd-shellbar__group--mobile-flex"
-            [class.fd-shellbar__group--shrink]="groupFlex?.search?.shrink"
-            [class.fd-shellbar__group--basis-auto]="groupFlex?.search?.flexBasisAuto"
-        >
-            <div class="fd-shellbar__action fd-shellbar__action--grow">
-                <ng-container cdkPortalOutlet #searchPortalOutlet></ng-container>
-            </div>
-            @if (_currentSize === 'xl' || _hideAllComponents) {
-                <div class="fd-shellbar__action fd-shellbar__action--mobile fd-shellbar__action--shrink">
-                    <button class="fd-button fd-button--transparent" (click)="_closeMobileSearch()">
-                        {{ 'coreShellbar.cancel' | fdTranslate }}
-                    </button>
-                </div>
-            }
-        </div>
-    }
+    <!--    @if (searchComponent) {-->
+    <!--        <div-->
+    <!--            class="fd-shellbar__group fd-shellbar__group&#45;&#45;center fd-shellbar__group&#45;&#45;mobile-flex"-->
+    <!--            [class.fd-shellbar__group&#45;&#45;shrink]="groupFlex?.search?.shrink"-->
+    <!--            [class.fd-shellbar__group&#45;&#45;basis-auto]="groupFlex?.search?.flexBasisAuto"-->
+    <!--        >-->
+    <!--            <div class="fd-shellbar__action fd-shellbar__action&#45;&#45;grow">-->
+    <!--                <ng-container cdkPortalOutlet #searchPortalOutlet></ng-container>-->
+    <!--            </div>-->
+    <!--            @if (_currentSize === 'xl' || _hideAllComponents) {-->
+    <!--                <div class="fd-shellbar__action fd-shellbar__action&#45;&#45;mobile fd-shellbar__action&#45;&#45;shrink">-->
+    <!--                    <button class="fd-button fd-button&#45;&#45;transparent" (click)="_closeMobileSearch()">-->
+    <!--                        {{ 'coreShellbar.cancel' | fdTranslate }}-->
+    <!--                    </button>-->
+    <!--                </div>-->
+    <!--            }-->
+    <!--        </div>-->
+    <!--    }-->
     @if (!_hideAllComponents) {
         <ng-content select="fd-shellbar-actions"></ng-content>
-    }
-    @if (!_hideAllComponents) {
-        <ng-content select="fd-shellbar-action-toolbar"></ng-content>
     }
 </div>

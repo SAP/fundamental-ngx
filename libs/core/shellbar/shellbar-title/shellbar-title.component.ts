@@ -22,7 +22,7 @@ import { FD_SHELLBAR_TITLE_COMPONENT } from '../tokens';
     standalone: true,
     styles: [
         `
-            fd-shellbar__title {
+            fd-shellbar-title {
                 display: flex;
             }
         `

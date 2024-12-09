@@ -1,0 +1,14 @@
+@if (shellbarActions.length > 0 || searchExists) {
+    <fd-overflow-layout [maxVisibleItems]="3">
+        <fd-menu>
+            @for (action of shellbarActions; track action; let i = $index) {
+                <li *fdOverflowItemRef="let hidden" fdOverflowLayoutItem fd-menu-item>
+                    <a fd-menu-interactive href="#">
+                        <fd-menu-addon position="before" [glyph]="action.glyph"></fd-menu-addon>
+                        <span fd-menu-title>{{ action.label }}</span>
+                    </a>
+                </li>
+            }
+        </fd-menu>
+    </fd-overflow-layout>
+}

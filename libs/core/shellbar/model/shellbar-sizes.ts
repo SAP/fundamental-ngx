@@ -1,10 +1,3 @@
-export enum ShellbarSize {
-    SMALL = 's',
-    MEDIUM = 'm',
-    LARGE = 'l',
-    EXTRA_LARGE = 'xl'
-}
-
 export type ShellbarSizes = 's' | 'm' | 'l' | 'xl';
 
 export type Breakpoints = Record<ShellbarSizes, number>;
