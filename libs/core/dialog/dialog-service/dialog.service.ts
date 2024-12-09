@@ -45,6 +45,7 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
         parentInjector?: Injector
     ): DialogRef<T> {
         const dialogRef = new DialogRef();
+        const openerElement = document.activeElement as HTMLElement;
         if (!parentInjector) {
             parentInjector = this._injector;
         }
@@ -72,8 +73,15 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
 
         componentRef.instance.childContent = content;
         componentRef.instance.dialogConfig = dialogConfig;
-
         this._dialogs.push(componentRef);
+        dialogRef.afterClosed.pipe(
+            takeUntilDestroyed(this._destroyRef)
+        ).subscribe(() => {
+            console.log(dialogConfig.focusTrapped);
+            if (dialogConfig.focusTrapped) {
+                openerElement.focus();
+            }
+        });
 
         this.htmlElement && (this.htmlElement.style.overflow = 'hidden');
         dialogRef._endClose$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
