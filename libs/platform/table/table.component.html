@@ -117,7 +117,7 @@
                                         [class.fd-table__row--draggable]="isDraggable"
                                         fdp-table-row
                                         [rowId]="id"
-                                        [class.fd-tr-hovered]="hoveredRowIndex$() === rowIndex"
+                                        [class.fd-tr-hovered]="!row.checked && hoveredRowIndex$() === rowIndex"
                                         [index]="rowIndex"
                                         [row]="row"
                                         [selectionMode]="_selectionMode"
