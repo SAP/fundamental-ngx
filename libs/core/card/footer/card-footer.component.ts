@@ -22,7 +22,6 @@ import { CardFooterActionItemDirective } from './card-footer-action-item.directi
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [NgTemplateOutlet]
 })
 export class CardFooterComponent implements AfterViewInit {

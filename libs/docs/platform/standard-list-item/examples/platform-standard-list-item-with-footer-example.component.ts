@@ -10,7 +10,6 @@ interface Item {
 @Component({
     selector: 'fdp-platform-standard-list-item-with-footer-example',
     templateUrl: './platform-standard-list-item-with-footer-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, StandardListItemModule]
 })
 export class PlatformStandardListItemWithFooterExampleComponent {

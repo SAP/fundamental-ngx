@@ -22,7 +22,6 @@ export const MessageBoxButtonClass = 'fd-message-box__decisive-button';
 @Component({
     selector: 'fd-message-box-footer',
     templateUrl: './message-box-footer.component.html',
-    standalone: true,
     imports: [BarComponent, ContentDensityDirective, NgTemplateOutlet, BarRightDirective]
 })
 export class MessageBoxFooterComponent extends DialogFooterBase implements AfterContentInit, AfterViewInit {

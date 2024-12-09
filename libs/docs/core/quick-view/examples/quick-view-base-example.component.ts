@@ -6,7 +6,6 @@ import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
 @Component({
     selector: 'fd-quick-view-base-example',
     templateUrl: './quick-view-base-example.component.html',
-    standalone: true,
     imports: [QuickViewModule, AvatarComponent, LinkComponent]
 })
 export class QuickViewBaseExampleComponent {

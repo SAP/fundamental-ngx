@@ -236,7 +236,6 @@ let tableUniqueId = 0;
         '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders',
         '[class.fd-table--group]': '_isGroupTable$()'
     },
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         BusyIndicatorComponent,

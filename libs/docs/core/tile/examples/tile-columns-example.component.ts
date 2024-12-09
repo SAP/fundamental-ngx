@@ -13,7 +13,6 @@ import { TileModule } from '@fundamental-ngx/core/tile';
             }
         `
     ],
-    standalone: true,
     imports: [TileModule]
 })
 export class TileColumnsExampleComponent {}

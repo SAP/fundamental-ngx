@@ -19,7 +19,6 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
 @Component({
     selector: 'fdp-platform-form-generator-no-colons-example',
     templateUrl: './platform-form-generator-no-colons-example.component.html',
-    standalone: true,
     imports: [PlatformFormGeneratorModule, PlatformButtonModule, JsonPipe]
 })
 export class PlatformFormGeneratorNoColonsExampleComponent {

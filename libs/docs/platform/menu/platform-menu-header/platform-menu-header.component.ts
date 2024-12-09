@@ -13,7 +13,6 @@ import {
 @Component({
     selector: 'app-menu-header',
     templateUrl: './platform-menu-header.component.html',
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

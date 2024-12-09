@@ -24,7 +24,6 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider],
-    standalone: true,
     imports: [ListModule, ClickedDirective, forwardRef(() => ThemeSelectorListIconComponent), NgTemplateOutlet]
 })
 export class ThemeSelectorListComponent extends BaseDynamicFormGeneratorControl implements OnInit {

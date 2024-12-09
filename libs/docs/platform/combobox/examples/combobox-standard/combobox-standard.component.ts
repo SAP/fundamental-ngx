@@ -13,7 +13,6 @@ import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
     templateUrl: './combobox-standard.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
-    standalone: true,
     imports: [FdpFormGroupModule, PlatformComboboxModule, ContentDensityDirective]
 })
 export class ComboboxStandardComponent {

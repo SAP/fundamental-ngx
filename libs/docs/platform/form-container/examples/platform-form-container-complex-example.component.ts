@@ -17,7 +17,6 @@ import {
     selector: 'fdp-platform-form-container-complex-example',
     templateUrl: './platform-form-container-complex-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         FdpFormGroupModule,
         FormsModule,

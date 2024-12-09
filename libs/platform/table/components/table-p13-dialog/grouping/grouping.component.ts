@@ -67,7 +67,6 @@ class GroupRule {
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13GroupingDialogComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DialogComponent,
         DialogHeaderComponent,

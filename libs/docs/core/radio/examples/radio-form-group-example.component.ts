@@ -7,7 +7,6 @@ import { RadioModule } from '@fundamental-ngx/core/radio';
     selector: 'fd-radio-form-group-example',
     templateUrl: './radio-form-group-example.component.html',
     styleUrls: ['radio-form-group-example.component.scss'],
-    standalone: true,
     imports: [FormsModule, ReactiveFormsModule, FieldsetComponent, FormItemComponent, RadioModule]
 })
 export class RadioFormGroupExampleComponent {

@@ -20,7 +20,6 @@ import { GoogleChartService, Visualization } from './card-kpi-google-charts.serv
     templateUrl: './card-kpi-example.component.html',
     styleUrls: ['./card-kpi-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CardModule, ObjectStatusComponent, BusyIndicatorComponent]
 })
 export class CardKpiExampleComponent implements AfterViewInit {

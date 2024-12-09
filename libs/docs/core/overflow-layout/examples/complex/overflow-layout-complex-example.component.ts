@@ -22,7 +22,6 @@ import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
     styleUrls: ['./overflow-layout-complex-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         QuickViewModule,
         BarModule,

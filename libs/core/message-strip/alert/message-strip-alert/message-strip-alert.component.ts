@@ -33,7 +33,6 @@ export type MessageStripAlertPortalType<ComponentType> =
  */
 @Component({
     templateUrl: `./message-strip-alert.component.html`,
-    standalone: true,
     imports: [MessageStripComponent, PortalModule, AutoDismissMessageStripDirective]
 })
 export class MessageStripAlertComponent<ComponentType = unknown>

@@ -6,7 +6,6 @@ import { CxSideNavigationModule } from '@fundamental-ngx/cx/side-navigation';
     selector: 'fdx-side-navigation-default-example',
     templateUrl: './side-navigation-cozy-wide-text-only-1-level-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CxSideNavigationModule, CxNestedListModule]
 })
 export class SideNavigationCozyWideTextOnly1LevelExampleComponent {}

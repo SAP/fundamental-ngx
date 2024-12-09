@@ -11,7 +11,6 @@ import {
     selector: 'app-segmented-button-header',
     templateUrl: './segmented-button-header.component.html',
     styleUrls: ['./segmented-button-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class SegmentedButtonHeaderComponent {}

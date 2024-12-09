@@ -7,7 +7,6 @@ import { FeedListItemModule } from '@fundamental-ngx/core/feed-list-item';
 @Component({
     selector: 'fd-fli-action-example',
     templateUrl: './fli-action-example.component.html',
-    standalone: true,
     imports: [FeedListItemModule, ButtonComponent, ContentDensityDirective, ActionSheetModule]
 })
 export class FliActionExampleComponent {

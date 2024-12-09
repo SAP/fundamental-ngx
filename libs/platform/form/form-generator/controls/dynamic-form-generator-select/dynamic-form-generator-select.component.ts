@@ -12,7 +12,6 @@ import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../p
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider],
-    standalone: true,
     imports: [FormsModule, ReactiveFormsModule, SelectComponent]
 })
 export class DynamicFormGeneratorSelectComponent extends BaseDynamicFormGeneratorControl<SelectDynamicFormFieldItem> {}

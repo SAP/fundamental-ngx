@@ -60,7 +60,6 @@ let sortDialogSortByHeaderUniqueId = 0;
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => SortingComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DialogComponent,
         DialogHeaderComponent,

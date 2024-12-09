@@ -20,7 +20,6 @@ import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
             }
         `
     ],
-    standalone: true,
     imports: [
         FormItemComponent,
         FormLabelComponent,

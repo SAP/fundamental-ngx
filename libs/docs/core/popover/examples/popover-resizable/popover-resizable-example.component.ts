@@ -7,7 +7,6 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
     selector: 'fd-popover-resizable-example',
     templateUrl: './popover-resizable-example.component.html',
     styleUrls: ['popover-resizable-example.component.scss'],
-    standalone: true,
     imports: [PopoverComponent, PopoverControlComponent, ButtonComponent, PopoverBodyComponent, AvatarComponent]
 })
 export class PopoverResizableExampleComponent {}

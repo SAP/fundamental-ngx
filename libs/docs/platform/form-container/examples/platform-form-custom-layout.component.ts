@@ -8,7 +8,6 @@ import { ColumnLayout } from '@fundamental-ngx/platform/shared';
     templateUrl: './platform-form-custom-layout.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [FdpFormGroupModule, PlatformTextAreaModule, FormsModule, ReactiveFormsModule]
 })
 export class PlatformFormCustomLayoutComponent {

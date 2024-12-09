@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-step-input-header',
     templateUrl: './step-input-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class StepInputHeaderComponent {}

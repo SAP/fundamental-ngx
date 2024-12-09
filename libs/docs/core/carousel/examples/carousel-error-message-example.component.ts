@@ -6,7 +6,6 @@ import { MessagePageModule } from '@fundamental-ngx/core/message-page';
     selector: 'fd-carousel-error-message-example',
     templateUrl: './carousel-error-message-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CarouselComponent, MessagePageModule]
 })
 export class CarouselErrorMessageExampleComponent {}

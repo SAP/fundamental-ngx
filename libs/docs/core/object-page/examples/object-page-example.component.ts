@@ -35,7 +35,6 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
             }
         `
     ],
-    standalone: true,
     imports: [
         ButtonComponent,
         DynamicPageModule,

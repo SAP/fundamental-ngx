@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-input-group-header',
     templateUrl: './input-group-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class InputGroupHeaderComponent {}

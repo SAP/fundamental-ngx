@@ -97,7 +97,6 @@ const illustrationDialogNoMail = '/assets/images/sapIllus-Dialog-NoMail.svg';
     templateUrl: './platform-table-docs.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [RtlService],
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

@@ -40,7 +40,6 @@ const microProcessFlowObjectBetweenNodesExampleTs = 'micro-process-flow-object-b
 @Component({
     selector: 'app-micro-process-flow-docs',
     templateUrl: './micro-process-flow-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

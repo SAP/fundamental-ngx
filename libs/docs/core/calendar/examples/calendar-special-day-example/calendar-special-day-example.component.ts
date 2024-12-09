@@ -25,7 +25,6 @@ import { SpecialDayRule } from '@fundamental-ngx/core/shared';
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [CalendarComponent, CheckboxComponent, FormsModule, FdDatetimeModule]
 })
 export class CalendarSpecialDayExampleComponent {

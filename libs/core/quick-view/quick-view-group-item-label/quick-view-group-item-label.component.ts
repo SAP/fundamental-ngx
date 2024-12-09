@@ -5,7 +5,6 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
     selector: 'fd-quick-view-group-item-label',
     templateUrl: './quick-view-group-item-label.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FormLabelComponent]
 })
 export class QuickViewGroupItemLabelComponent implements AfterViewInit {

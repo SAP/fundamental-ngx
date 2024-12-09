@@ -9,7 +9,6 @@ import { map } from 'rxjs/operators';
 @Component({
     selector: 'fd-action-bar-long-string-title-truncation-example',
     templateUrl: './action-bar-long-string-title-truncation-example.component.html',
-    standalone: true,
     imports: [ActionBarModule, ButtonComponent, AsyncPipe]
 })
 export class ActionBarLongStringTitleTruncationExampleComponent implements OnInit {

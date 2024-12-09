@@ -25,7 +25,6 @@ import {
             }
         `
     ],
-    standalone: true,
     imports: [MessageStripComponent, MessageStripIconDirective, IconComponent]
 })
 export class MessageStripIndicationColorsExampleComponent {

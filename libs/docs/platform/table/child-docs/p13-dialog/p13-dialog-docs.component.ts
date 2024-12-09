@@ -28,7 +28,6 @@ const platformTableP13GroupTsSrc = 'platform-table-p13-group-example.component.t
     selector: 'fdp-doc-p13-dialog-docs',
     templateUrl: './p13-dialog-docs.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

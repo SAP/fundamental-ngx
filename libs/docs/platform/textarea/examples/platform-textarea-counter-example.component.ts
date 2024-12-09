@@ -8,7 +8,6 @@ import { FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/pla
     selector: 'fdp-platform-textarea-counter-example',
     templateUrl: './platform-textarea-counter-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         FdpFormGroupModule,
         FormsModule,

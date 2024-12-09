@@ -4,7 +4,6 @@ import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/pr
 @Component({
     selector: 'fd-product-switch-small-example',
     templateUrl: './product-switch-small-example.component.html',
-    standalone: true,
     imports: [ProductSwitchModule]
 })
 export class ProductSwitchSmallExampleComponent {

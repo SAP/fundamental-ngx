@@ -57,7 +57,6 @@ export class ComboboxSelectionChangeEvent {
         { provide: FD_FORM_FIELD_CONTROL, useExisting: ComboboxComponent, multi: true },
         contentDensityObserverProviders()
     ],
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         PopoverComponent,

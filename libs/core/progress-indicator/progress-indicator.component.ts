@@ -27,7 +27,6 @@ export type ProgressIndicatorState = 'informative' | 'positive' | 'critical' | '
     styleUrl: './progress-indicator.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [NgTemplateOutlet, PopoverComponent, PopoverControlComponent, PopoverBodyComponent, IconComponent]
 })
 export class ProgressIndicatorComponent implements OnInit, OnChanges, AfterViewInit {

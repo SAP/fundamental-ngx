@@ -22,7 +22,6 @@ import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
             Value: {{ checkboxValue2 | json }}
         </div>
     `,
-    standalone: true,
     imports: [CheckboxComponent, FormsModule, JsonPipe]
 })
 export class CheckboxTristateExampleComponent {

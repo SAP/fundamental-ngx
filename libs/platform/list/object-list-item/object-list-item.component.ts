@@ -31,7 +31,6 @@ import { ObjectListItemRowComponent } from './object-list-item-row.component';
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ObjectListItemComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     host: {
         role: 'none'
     },

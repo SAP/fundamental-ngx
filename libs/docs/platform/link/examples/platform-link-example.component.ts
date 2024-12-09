@@ -5,7 +5,6 @@ import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 @Component({
     selector: 'fdp-platform-link-example',
     templateUrl: './platform-link-example.component.html',
-    standalone: true,
     imports: [PlatformLinkModule, IconComponent]
 })
 export class PlatformLinkExampleComponent {}

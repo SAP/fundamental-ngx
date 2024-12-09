@@ -33,7 +33,6 @@ import { MenuInteractiveComponent } from '@fundamental-ngx/core/menu';
         class: 'fd-menu__item',
         tabindex: '-1'
     },
-    standalone: true,
     imports: [NgTemplateOutlet]
 })
 export class MenuItemComponent implements OnDestroy, FocusableOption {

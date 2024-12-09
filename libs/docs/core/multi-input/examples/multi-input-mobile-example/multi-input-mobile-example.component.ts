@@ -8,7 +8,6 @@ import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
 @Component({
     selector: 'fd-multi-input-mobile-example',
     templateUrl: './multi-input-mobile-example.component.html',
-    standalone: true,
     imports: [FormLabelComponent, MultiInputComponent, FormsModule, JsonPipe]
 })
 export class MultiInputMobileExampleComponent {

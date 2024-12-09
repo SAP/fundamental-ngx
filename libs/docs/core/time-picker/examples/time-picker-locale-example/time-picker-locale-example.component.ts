@@ -21,7 +21,6 @@ import { TimePickerModule } from '@fundamental-ngx/core/time-picker';
         // Due to the limit of this example we must provide it on this level.
         provideDateTimeFormats()
     ],
-    standalone: true,
     imports: [FormItemComponent, FormLabelComponent, SelectModule, TimePickerModule, FormsModule, DatePipe]
 })
 export class TimePickerLocaleExampleComponent implements OnInit {

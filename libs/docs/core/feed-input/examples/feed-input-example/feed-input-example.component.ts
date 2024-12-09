@@ -6,7 +6,6 @@ import { FormControlComponent } from '@fundamental-ngx/core/form';
 @Component({
     selector: 'fd-feed-input-example',
     templateUrl: './feed-input-example.component.html',
-    standalone: true,
     imports: [FeedInputModule, AvatarComponent, FormControlComponent]
 })
 export class FeedInputExampleComponent {}

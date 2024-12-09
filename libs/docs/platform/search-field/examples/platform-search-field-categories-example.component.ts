@@ -13,7 +13,6 @@ import {
     templateUrl: './platform-search-field-categories-example.component.html',
     styleUrls: ['./platform-search-field-categories-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [PlatformSearchFieldModule, ContentDensityDirective]
 })
 export class PlatformSearchFieldCategoriesExampleComponent implements OnInit {

@@ -36,7 +36,6 @@ import {
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [ButtonComponent, DatePickerComponent, FormsModule, FdDatetimeModule]
 })
 export class DatePickerDisableFocusScrollExampleComponent {

@@ -5,7 +5,6 @@ import { ContentDensityUserComponent } from '../content-density-user/content-den
 @Component({
     selector: 'fd-directive-usage-example',
     templateUrl: './directive-usage-example.component.html',
-    standalone: true,
     imports: [ContentDensityUserComponent, ContentDensityDirective]
 })
 export class DirectiveUsageExampleComponent {}

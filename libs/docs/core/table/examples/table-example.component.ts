@@ -7,7 +7,6 @@ import { TableModule } from '@fundamental-ngx/core/table';
 @Component({
     selector: 'fd-table-example',
     templateUrl: './table-example.component.html',
-    standalone: true,
     imports: [FocusableGridDirective, TableModule, LinkComponent, IconComponent]
 })
 export class TableExampleComponent implements OnInit {

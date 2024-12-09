@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-facet-header',
     templateUrl: './facet-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class FacetDocsHeaderComponent {}

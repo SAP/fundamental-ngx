@@ -5,7 +5,6 @@ import { ExampleLayoutGridBlockComponent } from './example-layout-grid-block.com
 @Component({
     selector: 'fd-layout-grid-responsive-offset-example',
     templateUrl: './layout-grid-responsive-offset-example.component.html',
-    standalone: true,
     imports: [LayoutGridModule, ExampleLayoutGridBlockComponent]
 })
 export class LayoutGridResponsiveOffsetExampleComponent {}

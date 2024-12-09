@@ -79,7 +79,6 @@ const noDataExampleTs = 'no-data/no-data-example.component.ts';
     selector: 'app-table',
     templateUrl: './table-docs.component.html',
     styleUrls: ['table-docs.component.scss'],
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

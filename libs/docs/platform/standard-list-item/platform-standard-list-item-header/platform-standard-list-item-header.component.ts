@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'app-standard-list-item-header',
     templateUrl: './platform-standard-list-item-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, RouterLink, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformStandardListItemHeaderComponent {}

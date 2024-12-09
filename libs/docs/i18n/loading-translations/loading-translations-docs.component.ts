@@ -12,7 +12,6 @@ import {
 @Component({
     templateUrl: './loading-translations-docs.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

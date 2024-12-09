@@ -18,8 +18,7 @@ import { ToolHeaderAutoModeDirective, ToolHeaderComponent } from '@fundamental-n
         </fdb-tool-header>
         <div [style.margin-top.rem]="2">Last action: {{ lastAction }}</div>
     `,
-    imports: [SearchFieldComponent, ToolHeaderAutoModeDirective, ToolHeaderComponent],
-    standalone: true
+    imports: [SearchFieldComponent, ToolHeaderAutoModeDirective, ToolHeaderComponent]
 })
 export class MenuButtonExampleComponent {
     lastAction: string;

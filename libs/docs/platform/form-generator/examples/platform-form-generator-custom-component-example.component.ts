@@ -32,7 +32,6 @@ import { SliderComponent } from '@fundamental-ngx/platform/slider';
         </ng-container>
     `,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider],
-    standalone: true,
     imports: [FormsModule, ReactiveFormsModule, SliderComponent]
 })
 export class PlatformFormGeneratorCustomSliderElementComponent extends BaseDynamicFormGeneratorControl {
@@ -49,7 +48,6 @@ export interface SliderDynamicFormControl extends BaseDynamicFormFieldItem<{ val
 @Component({
     selector: 'fdp-platform-form-generator-custom-component-example',
     templateUrl: './platform-form-generator-custom-component-example.component.html',
-    standalone: true,
     imports: [PlatformFormGeneratorModule, PlatformButtonModule, JsonPipe]
 })
 export class PlatformFormGeneratorCustomComponentExampleComponent {

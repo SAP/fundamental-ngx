@@ -13,7 +13,6 @@ import {
 @Component({
     selector: 'fd-theming-header',
     templateUrl: './theming-header.component.html',
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

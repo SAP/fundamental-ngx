@@ -7,7 +7,6 @@ import { SelectModule } from '@fundamental-ngx/core/select';
     templateUrl: './select-custom-trigger.component.html',
     styleUrls: ['./select-custom-trigger.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [SelectModule, IconComponent]
 })
 export class SelectCustomTriggerComponent {

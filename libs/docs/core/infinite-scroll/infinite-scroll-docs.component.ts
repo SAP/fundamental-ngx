@@ -15,7 +15,6 @@ const basicInfiniteHtml = 'infinite-scroll-basic-example/infinite-scroll-basic-e
 @Component({
     selector: 'infinite-scroll-docs',
     templateUrl: './infinite-scroll-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

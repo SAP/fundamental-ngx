@@ -11,7 +11,6 @@ import {
     selector: 'app-object-status-header',
     templateUrl: './object-status-header.component.html',
     styleUrls: ['./object-status-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class ObjectStatusHeaderComponent {}

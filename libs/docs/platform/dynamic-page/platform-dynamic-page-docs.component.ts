@@ -52,7 +52,6 @@ const platformDynamicPagePageOverflowServiceTs = 'platform-dynamic-page-page-ove
 @Component({
     selector: 'app-dynamic-page',
     templateUrl: './platform-dynamic-page-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

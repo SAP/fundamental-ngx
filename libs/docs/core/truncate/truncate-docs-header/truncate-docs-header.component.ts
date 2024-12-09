@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-truncate-header',
     templateUrl: './truncate-docs-header.component.html',
-    standalone: true,
     imports: [HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent, RouterOutlet]
 })
 export class TruncateDocsHeaderComponent {}

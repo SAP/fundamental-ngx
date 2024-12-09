@@ -30,7 +30,6 @@ const platformComplexFormContainerTsCode = 'platform-form-container-complex-exam
 @Component({
     selector: 'app-form-container',
     templateUrl: './platform-form-container-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

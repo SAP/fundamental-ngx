@@ -38,7 +38,6 @@ export interface SelectableFilter {
     encapsulation: ViewEncapsulation.None,
     /** Each filters dialog step must provide FILTERS_VIEW_STEP_TOKEN to be accessible */
     providers: [{ provide: FILTERS_VIEW_STEP_TOKEN, useExisting: forwardRef(() => FiltersListStepComponent) }],
-    standalone: true,
     imports: [
         TitleComponent,
         ListComponent,

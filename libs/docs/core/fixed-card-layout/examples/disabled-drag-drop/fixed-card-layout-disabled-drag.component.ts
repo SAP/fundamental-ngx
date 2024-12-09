@@ -15,7 +15,6 @@ import { TableModule } from '@fundamental-ngx/core/table';
     selector: 'fd-fixed-card-layout-disabled-drag',
     templateUrl: './fixed-card-layout-disabled-drag.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ButtonComponent,
         CdkScrollable,

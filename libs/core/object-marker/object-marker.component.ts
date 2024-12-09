@@ -27,7 +27,6 @@ import { FD_DEFAULT_ICON_FONT_FAMILY, IconComponent, IconFont } from '@fundament
         '[attr.tabindex]': 'clickable ? 0 : -1',
         '[attr.role]': 'clickable ? "link" :""'
     },
-    standalone: true,
     imports: [IconComponent]
 })
 export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder {

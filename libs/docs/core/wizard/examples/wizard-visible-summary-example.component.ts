@@ -27,7 +27,6 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
     styleUrls: ['./wizard-visible-summary-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DialogModule,
         TitleComponent,

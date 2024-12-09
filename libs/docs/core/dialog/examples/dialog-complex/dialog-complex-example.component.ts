@@ -27,7 +27,6 @@ interface Fruit {
 @Component({
     selector: 'fd-dialog-complex-example',
     templateUrl: './dialog-complex-example.component.html',
-    standalone: true,
     imports: [
         TemplateDirective,
         BarModule,

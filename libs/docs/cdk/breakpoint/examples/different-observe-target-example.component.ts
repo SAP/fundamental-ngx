@@ -41,7 +41,6 @@ import { BreakpointDirective } from '@fundamental-ngx/cdk/utils';
             }
         `
     ],
-    standalone: true,
     imports: [BreakpointDirective]
 })
 export class DifferentObserveTargetExampleComponent {}

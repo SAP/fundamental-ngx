@@ -25,7 +25,6 @@ let dynamicPageSubHeaderId = 0;
     templateUrl: './dynamic-page-subheader.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [ButtonComponent, FdTranslatePipe, IconComponent],
     providers: [
         {

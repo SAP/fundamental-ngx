@@ -94,7 +94,6 @@ let nextListId = 0;
     host: {
         '[attr.tabindex]': '-1'
     },
-    standalone: true,
     imports: [
         CoreListComponent,
         BusyIndicatorComponent,

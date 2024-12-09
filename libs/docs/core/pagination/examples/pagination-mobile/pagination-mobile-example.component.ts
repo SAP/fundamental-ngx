@@ -5,7 +5,6 @@ import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
 @Component({
     selector: 'fd-pagination-mobile-example',
     templateUrl: './pagination-mobile-example.component.html',
-    standalone: true,
     imports: [PaginationModule, ToolbarItemDirective]
 })
 export class PaginationMobileExampleComponent {

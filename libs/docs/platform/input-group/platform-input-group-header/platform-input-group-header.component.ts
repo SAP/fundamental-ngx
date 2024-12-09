@@ -12,7 +12,6 @@ import {
 @Component({
     selector: 'app-input-group-header',
     templateUrl: './platform-input-group-header.component.html',
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

@@ -15,7 +15,6 @@ const InfoLableExample = 'info-label-example.component.html';
 @Component({
     selector: 'app-info-label',
     templateUrl: './info-label-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

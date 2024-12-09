@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-platform-input-header',
     templateUrl: './platform-input-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformInputHeaderComponent {}

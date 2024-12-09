@@ -6,7 +6,6 @@ import { CxSideNavigationModule } from '@fundamental-ngx/cx/side-navigation';
     selector: 'fdx-side-navigation-dynamic-width-example',
     templateUrl: './side-navigation-dynamic-width-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CxSideNavigationModule, CxNestedListModule]
 })
 export class SideNavigationDynamicWidthExampleComponent {}

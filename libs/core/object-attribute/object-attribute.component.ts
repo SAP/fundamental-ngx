@@ -17,7 +17,6 @@ import { warnOnce } from '@fundamental-ngx/cdk/utils';
     styleUrl: './object-attribute.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: []
 })
 export class ObjectAttributeComponent implements OnInit {

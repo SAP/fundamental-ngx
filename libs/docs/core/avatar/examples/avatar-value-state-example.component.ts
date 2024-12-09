@@ -3,7 +3,6 @@ import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 
 @Component({
     selector: 'fd-avatar-value-state-example',
-    standalone: true,
     imports: [AvatarComponent],
     styles: [
         `

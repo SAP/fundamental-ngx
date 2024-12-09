@@ -8,7 +8,6 @@ import { TableModule } from '@fundamental-ngx/core/table';
     selector: 'fd-card-table-example',
     templateUrl: './card-table-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CardModule, FocusableGridDirective, TableModule, ObjectStatusComponent]
 })
 export class CardTableExampleComponent {}

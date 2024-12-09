@@ -27,7 +27,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
 
 @Component({
     selector: 'fd-dialog-full-screen-inner-example',
-    standalone: true,
     template: ` <fd-dialog>
         <fd-dialog-header>
             <h1 id="fd-dialog-header-1" fd-title>{{ dialogRef.data.title }}</h1>
@@ -89,7 +88,6 @@ export class DialogFullScreenInnerExampleComponent {
 
 @Component({
     selector: 'fd-dialog-full-screen-example',
-    standalone: true,
     imports: [
         ButtonComponent,
         BarModule,

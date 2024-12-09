@@ -5,7 +5,6 @@ import { GenericTagComponent } from '@fundamental-ngx/core/generic-tag';
     selector: 'fd-generic-tag-default-example',
     templateUrl: './generic-tag-default-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [GenericTagComponent],
-    standalone: true
+    imports: [GenericTagComponent]
 })
 export class GenericTagDefaultExampleComponent {}

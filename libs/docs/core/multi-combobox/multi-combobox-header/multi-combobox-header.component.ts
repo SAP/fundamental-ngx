@@ -11,7 +11,6 @@ import {
     selector: 'app-multi-combobox-header',
     templateUrl: './multi-combobox-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class MultiComboboxHeaderComponent {}

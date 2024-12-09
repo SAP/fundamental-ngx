@@ -84,7 +84,6 @@ export class ExampleUserService {
             useValue: FDP_MESSAGE_POPOVER_DEFAULT_CONFIG
         }
     ],
-    standalone: true,
     styles: [
         `
             .fd-dialog__body fdp-message-popover-form-wrapper {

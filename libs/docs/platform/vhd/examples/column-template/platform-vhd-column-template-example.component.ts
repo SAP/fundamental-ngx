@@ -71,7 +71,6 @@ const data = exampleDataSource();
 
 @Component({
     selector: 'fdp-vhd-column-template-example',
-    standalone: true,
     imports: [
         ButtonComponent,
         TokenComponent,

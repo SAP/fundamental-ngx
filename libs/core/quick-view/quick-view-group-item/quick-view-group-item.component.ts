@@ -7,7 +7,6 @@ let quickViewGroupItemUniqueId = 0;
     selector: 'fd-quick-view-group-item',
     templateUrl: './quick-view-group-item.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FormItemComponent]
 })
 export class QuickViewGroupItemComponent {

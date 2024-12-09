@@ -11,7 +11,6 @@ import {
     selector: 'app-pagination-header',
     templateUrl: './pagination-header.component.html',
     styleUrls: ['./pagination-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class PaginationHeaderComponent {}

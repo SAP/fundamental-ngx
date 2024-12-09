@@ -29,7 +29,6 @@ import { MicroProcessFlowItemType } from '../../types';
             }
         `
     ],
-    standalone: true,
     imports: []
 })
 export class MicroProcessFlowItemComponent {

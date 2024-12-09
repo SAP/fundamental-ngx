@@ -16,7 +16,6 @@ let itemsIndex = 0;
     templateUrl: './tree-with-forms-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         SegmentedButtonModule,
         FormsModule,

@@ -17,7 +17,6 @@ const truncateTextTs = 'truncate-text-example.component.ts';
 @Component({
     selector: 'app-truncate',
     templateUrl: './truncate-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

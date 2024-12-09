@@ -6,7 +6,6 @@ import { CxSideNavigationModule } from '@fundamental-ngx/cx/side-navigation';
     selector: 'fdx-side-navigation-cozy-wide-icon-3-level-example',
     templateUrl: './side-navigation-cozy-wide-icon-3-level-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CxSideNavigationModule, CxNestedListModule]
 })
 export class SideNavigationCozyWideIcon3LevelExampleComponent {}

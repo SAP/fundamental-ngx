@@ -55,7 +55,6 @@ import { FD_OVERFLOW_ITEM_REF } from './tokens/overflow-item-ref.token';
         },
         OverflowLayoutService
     ],
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         OverflowLayoutItemContainerDirective,

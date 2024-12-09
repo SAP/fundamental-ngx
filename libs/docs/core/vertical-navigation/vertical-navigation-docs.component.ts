@@ -22,7 +22,6 @@ const VerticalNavigationNoIconsExample = 'vertical-navigation-no-icons-example.c
 @Component({
     selector: 'app-vertical-navigation',
     templateUrl: './vertical-navigation-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

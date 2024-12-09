@@ -21,7 +21,8 @@ import { NestedListExpandIconComponent } from '../nested-list-directives';
     selector: '[cxNestedListContent], [fdx-nested-list-content]',
     host: {
         tabindex: '0'
-    }
+    },
+    standalone: false
 })
 export class NestedListContentDirective implements AfterContentInit {
     /** Whether this element is selected*/

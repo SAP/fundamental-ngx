@@ -31,7 +31,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         }
     ],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DialogModule,
         TitleComponent,

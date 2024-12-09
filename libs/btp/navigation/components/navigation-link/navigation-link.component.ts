@@ -38,7 +38,6 @@ export class NavigationLinkRefDirective {
     selector: 'a[fdb-navigation-link]',
     imports: [IconComponent, NgTemplateOutlet],
     hostDirectives: [RouterLinkActive],
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [

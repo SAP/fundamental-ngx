@@ -8,7 +8,6 @@ import { delay, startWith, switchMap } from 'rxjs/operators';
 @Component({
     selector: 'fd-multi-input-async-example',
     templateUrl: './multi-input-async-example.component.html',
-    standalone: true,
     imports: [MultiInputComponent, FormsModule, AsyncPipe, JsonPipe]
 })
 export class MultiInputAsyncExampleComponent {

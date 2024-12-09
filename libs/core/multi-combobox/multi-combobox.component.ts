@@ -102,7 +102,6 @@ export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory
             useExisting: MultiComboboxComponent
         }
     ],
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         PopoverComponent,

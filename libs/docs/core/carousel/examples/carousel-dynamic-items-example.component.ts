@@ -24,7 +24,6 @@ import { debounceTime } from 'rxjs/operators';
     templateUrl: './carousel-dynamic-items-example.component.html',
     styleUrls: ['./carousel-dynamic-items-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         SegmentedButtonModule,
         FormsModule,

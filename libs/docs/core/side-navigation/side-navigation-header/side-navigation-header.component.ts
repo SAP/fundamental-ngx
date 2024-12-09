@@ -14,7 +14,6 @@ import {
     selector: 'app-side-navigation-header',
     templateUrl: './side-navigation-header.component.html',
     styleUrls: ['./side-navigation-header.component.scss'],
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

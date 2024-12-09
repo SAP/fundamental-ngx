@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-message-page-header',
     templateUrl: './message-page-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class MessagePageHeaderComponent {}

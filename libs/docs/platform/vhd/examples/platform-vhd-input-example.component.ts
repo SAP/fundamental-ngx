@@ -56,7 +56,6 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
 @Component({
     selector: 'fdp-platform-vhd-input-example',
     templateUrl: './platform-vhd-input-example.component.html',
-    standalone: true,
     imports: [
         FormLabelComponent,
         InputGroupModule,

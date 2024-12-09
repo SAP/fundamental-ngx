@@ -12,7 +12,6 @@ import {
 @Component({
     selector: 'fd-platform-page-footer-header',
     templateUrl: './platform-page-footer-header.component.html',
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

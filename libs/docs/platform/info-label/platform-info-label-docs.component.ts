@@ -18,7 +18,6 @@ const platformInfoLabelScss = 'platform-info-label-example.component.scss';
 @Component({
     selector: 'fd-platform-info-label-docs',
     templateUrl: './platform-info-label-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

@@ -22,7 +22,6 @@ import { ThumbnailSettingsItem } from '../../../models/settings.model';
     templateUrl: './settings-generator-sidebar-icon.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [SkeletonComponent, IconComponent, AvatarComponent]
 })
 export class SettingsGeneratorSidebarIconComponent {

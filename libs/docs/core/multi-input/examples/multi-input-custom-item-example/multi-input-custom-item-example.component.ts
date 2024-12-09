@@ -7,7 +7,6 @@ import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
 @Component({
     selector: 'fd-multi-input-custom-item-example',
     templateUrl: './multi-input-custom-item-example.component.html',
-    standalone: true,
     imports: [MultiInputComponent, FormsModule, ListModule, JsonPipe]
 })
 export class MultiInputCustomItemExampleComponent {

@@ -4,7 +4,6 @@ import { IconTabTitleDirective } from '../../../../../platform/icon-tab-bar/dire
 
 @Component({
     selector: 'fdp-icon-tab-bar-tabs-content-example',
-    standalone: true,
     imports: [FDP_ICON_TAB_BAR, IconTabTitleDirective],
     styles: `
     .tab-container-example {

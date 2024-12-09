@@ -33,7 +33,6 @@ let formLabelIdCount = 0;
     styleUrl: './form-label.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [LinkComponent, IconComponent, InlineHelpModule, NgTemplateOutlet]
 })
 export class FormLabelComponent implements OnChanges {

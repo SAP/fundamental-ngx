@@ -22,7 +22,6 @@ type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [DecimalPipe]
 })
 export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder {

@@ -32,7 +32,6 @@ import { ExampleFile } from '../code-example/example-file';
   }
 </pre>
     `,
-    standalone: true,
     imports: [AsyncPipe]
 })
 export class CodeSnippetComponent implements AfterViewInit, OnChanges {

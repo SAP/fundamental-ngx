@@ -40,7 +40,6 @@ let nextUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => CheckboxComponent), multi: true }],
-    standalone: true,
     imports: [FormItemComponent, CoreCheckboxComponent, FormsModule]
 })
 export class CheckboxComponent extends BaseInput implements AfterViewInit {

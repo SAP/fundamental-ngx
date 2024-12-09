@@ -13,7 +13,6 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
     styleUrl: './vertical-navigation.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FdTranslatePipe]
 })
 export class VerticalNavigationMainNavigationComponent {

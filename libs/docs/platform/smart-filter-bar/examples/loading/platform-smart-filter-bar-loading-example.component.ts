@@ -23,7 +23,6 @@ import { Observable } from 'rxjs';
     templateUrl: './platform-smart-filter-bar-loading-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         PlatformSmartFilterBarModule,
         ContentDensityDirective,

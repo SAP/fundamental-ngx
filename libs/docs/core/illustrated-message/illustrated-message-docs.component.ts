@@ -36,7 +36,6 @@ const illustrationSpotNoMail = 'assets/images/sapIllus-Spot-NoMail.svg';
 @Component({
     selector: 'app-illustrated-message',
     templateUrl: './illustrated-message-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

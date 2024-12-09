@@ -28,7 +28,6 @@ import { FD_SHELLBAR_ACTION_COMPONENT } from '../tokens';
             useExisting: ShellbarActionComponent
         }
     ],
-    standalone: true,
     imports: [ButtonComponent, ContentDensityDirective]
 })
 export class ShellbarActionComponent {

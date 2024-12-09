@@ -63,7 +63,6 @@ export type GridListItemStatus = 'success' | 'warning' | 'error' | 'neutral';
     styleUrl: './grid-list-item.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         GridListTitleBarSpacerComponent,

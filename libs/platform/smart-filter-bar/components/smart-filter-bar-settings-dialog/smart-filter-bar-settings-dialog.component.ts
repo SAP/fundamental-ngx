@@ -75,7 +75,6 @@ import { SmartFilterBarOptionsDataProvider } from './data-provider';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: SmartFilterBarSettingsDialogComponent }],
-    standalone: true,
     imports: [
         DialogComponent,
         DialogHeaderComponent,

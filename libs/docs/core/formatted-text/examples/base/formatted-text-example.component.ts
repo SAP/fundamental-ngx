@@ -5,7 +5,6 @@ import { FormattedTextComponent } from '@fundamental-ngx/core/formatted-text';
 @Component({
     selector: 'fd-formatted-text-example',
     templateUrl: './formatted-text-example.component.html',
-    standalone: true,
     imports: [FormattedTextComponent, NgStyle]
 })
 export class FormattedTextExampleComponent {

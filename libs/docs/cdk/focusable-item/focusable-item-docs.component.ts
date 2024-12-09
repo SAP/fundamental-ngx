@@ -12,7 +12,6 @@ import { FocusableItemDefaultExampleComponent } from './examples/default/focusab
 @Component({
     selector: 'app-focusable-item',
     templateUrl: './focusable-item-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

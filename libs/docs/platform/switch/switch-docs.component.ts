@@ -28,7 +28,6 @@ const switchConfigExampleTs = 'switch-config-example/switch-config-example.compo
 @Component({
     selector: 'app-switch',
     templateUrl: './switch-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

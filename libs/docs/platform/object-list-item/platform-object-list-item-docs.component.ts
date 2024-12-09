@@ -30,7 +30,6 @@ const rowNavigationAndSelectionOLITs =
 @Component({
     selector: 'app-object-list-item',
     templateUrl: './platform-object-list-item-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

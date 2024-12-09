@@ -33,7 +33,6 @@ const menuWithSubmenuTs = 'menu-with-submenu-example.component.ts';
 @Component({
     selector: 'app-menu',
     templateUrl: './menu-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

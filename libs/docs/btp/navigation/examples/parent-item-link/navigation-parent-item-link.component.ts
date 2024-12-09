@@ -8,7 +8,6 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
 
 @Component({
     selector: 'fdb-navigation-parent-item-link',
-    standalone: true,
     imports: [RouterLink, FormsModule, ButtonComponent, SegmentedButtonComponent, FDB_NAVIGATION],
     templateUrl: './navigation-parent-item-link.component.html',
     encapsulation: ViewEncapsulation.None,

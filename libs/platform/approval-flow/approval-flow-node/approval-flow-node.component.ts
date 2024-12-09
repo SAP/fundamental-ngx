@@ -67,7 +67,6 @@ let defaultId = 0;
         '[class.fdp-approval-flow-node--first-root]': 'meta?.firstOfMultipleRootNodes',
         '[class.fdp-approval-flow-node--first-final]': 'meta?.firstOfMultipleFinalNodes'
     },
-    standalone: true,
     imports: [
         ButtonComponent,
         ContentDensityDirective,

@@ -9,7 +9,6 @@ import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
     templateUrl: './platform-multi-input-grouped-example.component.html',
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FormsModule, FdpFormGroupModule, PlatformMultiInputModule, ReactiveFormsModule]
 })
 export class PlatformMultiInputGroupedExampleComponent {

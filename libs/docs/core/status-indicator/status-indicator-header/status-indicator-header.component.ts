@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-status-indicator-header',
     templateUrl: './status-indicator-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class StatusIndicatorHeaderComponent {}

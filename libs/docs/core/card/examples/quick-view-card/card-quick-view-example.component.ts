@@ -10,7 +10,6 @@ import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
     selector: 'fd-card-quick-view-example',
     templateUrl: 'card-quick-view-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CardModule, QuickViewModule, AvatarComponent, LinkComponent, ButtonComponent, ContentDensityDirective]
 })
 export class CardQuickViewExampleComponent {

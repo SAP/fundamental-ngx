@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'app-link-header',
     templateUrl: './platform-split-menu-button-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, RouterLink, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformDocsSplitMenuButtonHeaderComponent {}

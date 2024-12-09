@@ -8,7 +8,6 @@ import { CardBarComponent } from './card-bar.component';
     templateUrl: './bar-chart-list-card-example.component.html',
     styleUrls: ['./bar-chart-list-card-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CardModule, ListModule, CardBarComponent]
 })
 export class BarChartListCardExampleComponent {}

@@ -16,7 +16,6 @@ import { of } from 'rxjs';
     selector: 'fd-multi-combobox-datasource-example',
     templateUrl: './multi-combobox-datasource-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         FormItemComponent,
         FormLabelComponent,

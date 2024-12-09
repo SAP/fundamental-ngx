@@ -38,7 +38,6 @@ import { FD_NOTIFICATION_GROUP_HEADER } from '../token';
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ButtonComponent, ContentDensityDirective, IconComponent],
     providers: [
         {

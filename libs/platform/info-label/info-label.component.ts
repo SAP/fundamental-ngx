@@ -16,7 +16,6 @@ import {
     templateUrl: './info-label.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CoreInfoLabelComponent]
 })
 export class InfoLabelComponent {

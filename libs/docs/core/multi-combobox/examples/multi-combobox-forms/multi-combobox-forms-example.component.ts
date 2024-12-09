@@ -10,7 +10,6 @@ import { MultiComboboxComponent, MultiComboboxSelectionChangeEvent } from '@fund
     selector: 'fd-multi-combobox-forms-example',
     templateUrl: './multi-combobox-forms-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

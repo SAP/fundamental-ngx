@@ -5,7 +5,6 @@ import { ClickedDirective, FocusableItemDirective } from '@fundamental-ngx/cdk/u
 @Component({
     selector: 'fdk-clicked-basic-example',
     templateUrl: './basic-example.component.html',
-    standalone: true,
     imports: [FocusableItemDirective, ClickedDirective, JsonPipe]
 })
 export class BasicExampleComponent {

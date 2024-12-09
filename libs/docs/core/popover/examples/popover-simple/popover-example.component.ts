@@ -25,7 +25,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     templateUrl: './popover-example.component.html',
     styleUrls: ['popover-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         PopoverComponent,
         PopoverControlComponent,

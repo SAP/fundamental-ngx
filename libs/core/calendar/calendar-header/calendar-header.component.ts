@@ -38,7 +38,6 @@ import { FdCalendarView, FdCalendarViewEnum } from '../types';
         '[attr.id]': 'viewId'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ButtonComponent, FdTranslatePipe]
 })
 export class CalendarHeaderComponent<D> implements OnInit, OnChanges {

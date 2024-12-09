@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-dialog-docs-header',
     templateUrl: './dialog-docs-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class DialogDocsHeaderComponent {}

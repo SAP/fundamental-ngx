@@ -12,7 +12,6 @@ export interface ListItem {
 @Component({
     selector: 'fdp-platform-standard-list-item-border-less-example',
     templateUrl: './platform-standard-list-item-border-less-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, StandardListItemModule, ContentDensityDirective]
 })
 export class PlatformStandardListItemBorderLessExampleComponent {

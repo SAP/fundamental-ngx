@@ -32,7 +32,6 @@ const CELL_DATA: CellData[] = [
 @Component({
     selector: 'fd-table-custom-columns-example',
     templateUrl: './table-custom-columns-example.component.html',
-    standalone: true,
     imports: [
         FocusableGridDirective,
         TableModule,

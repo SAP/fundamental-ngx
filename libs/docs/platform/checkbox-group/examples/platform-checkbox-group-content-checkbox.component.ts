@@ -5,7 +5,6 @@ import { CheckboxComponent, CheckboxGroupComponent, FdpFormGroupModule } from '@
 @Component({
     selector: 'fdp-platform-checkbox-group-content-checkbox',
     templateUrl: './platform-checkbox-group-content-checkbox.component.html',
-    standalone: true,
     imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, CheckboxGroupComponent, CheckboxComponent]
 })
 export class PlatformCheckboxGroupContentCheckboxComponent {

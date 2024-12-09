@@ -16,7 +16,6 @@ import { ToolHeaderExampleComponent } from './examples/tool-header-example.compo
 
 @Component({
     templateUrl: './button-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

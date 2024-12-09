@@ -29,7 +29,6 @@ let randomButtonBarId = 0;
             useExisting: ButtonBarComponent
         }
     ],
-    standalone: true,
     imports: [ButtonComponent]
 })
 export class ButtonBarComponent extends BaseButton {

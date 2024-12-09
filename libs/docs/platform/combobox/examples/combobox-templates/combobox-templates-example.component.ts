@@ -24,7 +24,6 @@ interface ComboboxTemplateItem {
         '.fd-template-text { margin-right: 12px; margin-left: 12px; }'
     ],
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
-    standalone: true,
     imports: [FdpFormGroupModule, PlatformComboboxModule, TemplateDirective, IconComponent, JsonPipe]
 })
 export class ComboboxTemplatesExampleComponent {

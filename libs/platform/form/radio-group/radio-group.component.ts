@@ -45,7 +45,6 @@ let nextUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => RadioGroupComponent), multi: true }],
-    standalone: true,
     imports: [FormGroupComponent, FormItemComponent, NgTemplateOutlet, RadioButtonComponent]
 })
 export class RadioGroupComponent

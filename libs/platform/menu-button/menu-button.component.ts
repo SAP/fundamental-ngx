@@ -22,7 +22,6 @@ import { BaseComponent } from '@fundamental-ngx/platform/shared';
     templateUrl: './menu-button.component.html',
     styleUrl: './menu-button.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ButtonComponent]
 })
 export class MenuButtonComponent extends BaseComponent {

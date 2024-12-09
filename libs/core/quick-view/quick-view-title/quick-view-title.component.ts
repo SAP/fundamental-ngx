@@ -13,7 +13,6 @@ import { PopoverBodyHeaderDirective } from '@fundamental-ngx/core/popover';
     selector: 'fd-quick-view-title',
     templateUrl: './quick-view-title.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         PopoverBodyHeaderDirective,
         BarComponent,

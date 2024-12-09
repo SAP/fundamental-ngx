@@ -21,7 +21,6 @@ import {
     selector: 'fd-popover-closing-example',
     templateUrl: './popover-closing-example.component.html',
     styleUrls: ['./popover-closing-example.component.scss'],
-    standalone: true,
     encapsulation: ViewEncapsulation.None,
     imports: [
         PopoverComponent,

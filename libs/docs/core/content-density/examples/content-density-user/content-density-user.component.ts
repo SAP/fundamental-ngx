@@ -33,7 +33,6 @@ import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
         })
     ],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [ObjectStatusComponent, AsyncPipe]
 })
 export class ContentDensityUserComponent {

@@ -33,7 +33,6 @@ import moment, { Moment } from 'moment';
             useClass: MomentDatetimeAdapter
         }
     ],
-    standalone: true,
     imports: [DatetimePickerComponent, FormsModule, FdDatetimeAdapterModule]
 })
 export class MomentDatetimeFormatsExampleComponent {

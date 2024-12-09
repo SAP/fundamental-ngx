@@ -58,7 +58,6 @@ export class NavigationListItemMarkerDirective implements HasElementRef {
 
 @Component({
     selector: 'fdb-navigation-list-item',
-    standalone: true,
     imports: [
         CommonModule,
         NgTemplateOutlet,

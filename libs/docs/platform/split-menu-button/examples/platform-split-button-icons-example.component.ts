@@ -6,7 +6,6 @@ import { PlatformSplitMenuButtonModule } from '@fundamental-ngx/platform/split-m
 @Component({
     selector: 'fdp-platform-split-button-icons-example',
     templateUrl: 'platform-split-button-icons-example.component.html',
-    standalone: true,
     imports: [ContentDensityDirective, PlatformSplitMenuButtonModule, PlatformMenuModule]
 })
 export class PlatformDocsSplitMenuButtonIconsComponent {

@@ -31,7 +31,6 @@ const lazyLoadingExampleHtml = 'lazily-loaded-tree-items-example.component.html'
 @Component({
     selector: 'app-tree',
     templateUrl: './tree-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

@@ -38,7 +38,6 @@ import { TableColumn, TableRow, TableService } from '@fundamental-ngx/platform/t
         role: 'row',
         '[attr.aria-expanded]': 'row.expanded'
     },
-    standalone: true,
     imports: [TableCellDirective, NgTemplateOutlet, AsyncPipe]
 })
 export class TableGroupRowComponent<T> extends TableRowDirective implements OnChanges {

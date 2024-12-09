@@ -6,7 +6,6 @@ import { IllustratedMessageModule, SvgConfig } from '@fundamental-ngx/core/illus
 @Component({
     selector: 'fd-illustrated-message-dot-example',
     templateUrl: './illustrated-message-dot-example.component.html',
-    standalone: true,
     imports: [CardModule, IllustratedMessageModule, ButtonComponent]
 })
 export class IllustratedMessageDotExampleComponent {

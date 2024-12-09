@@ -24,7 +24,6 @@ const defaultResizeCardItemTs = 'resizable-card-layout-example-itemconfig.compon
 @Component({
     selector: 'app-resizable-card-layout',
     templateUrl: './resizable-card-layout-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

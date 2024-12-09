@@ -5,7 +5,6 @@ import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
 @Component({
     selector: 'fd-list-example',
     templateUrl: './list-example.component.html',
-    standalone: true,
     imports: [ListModule]
 })
 export class ListExampleComponent {}
@@ -13,7 +12,6 @@ export class ListExampleComponent {}
 @Component({
     selector: 'fd-list-secondary-example',
     templateUrl: './list-secondary-example.component.html',
-    standalone: true,
     imports: [ListModule, NgClass, ListSecondaryDirective]
 })
 export class ListSecondaryExampleComponent {}
@@ -21,7 +19,6 @@ export class ListSecondaryExampleComponent {}
 @Component({
     selector: 'fd-list-icon-example',
     templateUrl: './list-icon-example.component.html',
-    standalone: true,
     imports: [ListModule]
 })
 export class ListIconExampleComponent {}
@@ -29,7 +26,6 @@ export class ListIconExampleComponent {}
 @Component({
     selector: 'fd-list-complex-example',
     templateUrl: './list-complex-example.component.html',
-    standalone: true,
     imports: [ListModule]
 })
 export class ListComplexExampleComponent {}

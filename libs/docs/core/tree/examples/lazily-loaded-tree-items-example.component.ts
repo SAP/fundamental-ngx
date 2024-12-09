@@ -14,7 +14,6 @@ let totalIndex = 0;
     templateUrl: './lazily-loaded-tree-items-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FormsModule, DataSourceDirective, CvaDirective, TreeModule, IconComponent]
 })
 export class LazilyLoadedTreeItemsExampleComponent {

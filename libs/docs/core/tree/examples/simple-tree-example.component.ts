@@ -15,7 +15,6 @@ export interface AdditionalTreeItemData {
     selector: 'fd-simple-tree-example',
     templateUrl: './simple-tree-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [DataSourceDirective, CvaDirective, TreeModule, IconComponent, AvatarComponent, ButtonComponent]
 })
 export class SimpleTreeExampleComponent {

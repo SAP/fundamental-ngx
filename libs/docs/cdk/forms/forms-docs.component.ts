@@ -12,7 +12,6 @@ import { FormsDefaultExampleComponent } from './examples/default/forms-default-e
 @Component({
     selector: 'app-forms',
     templateUrl: './forms-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

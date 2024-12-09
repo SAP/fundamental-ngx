@@ -24,7 +24,6 @@ const sizeExampleTsCode = 'dynamic-side-content-size-example.component.ts';
 
 @Component({
     templateUrl: './dynamic-side-content-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

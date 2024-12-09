@@ -7,7 +7,6 @@ import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
 @Component({
     selector: 'fd-combobox-columns-example',
     templateUrl: './combobox-columns-example.component.html',
-    standalone: true,
     imports: [ComboboxComponent, FormsModule, ListModule, NgClass, ListSecondaryDirective]
 })
 export class ComboboxColumnsExampleComponent {

@@ -11,7 +11,6 @@ import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../p
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider],
-    standalone: true,
     imports: [FormsModule, ReactiveFormsModule, PlatformCheckboxGroupModule]
 })
 export class DynamicFormGeneratorCheckboxComponent extends BaseDynamicFormGeneratorControl {}

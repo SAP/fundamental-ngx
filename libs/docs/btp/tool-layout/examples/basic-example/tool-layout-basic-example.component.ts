@@ -16,7 +16,6 @@ import {
         ToolLayoutContentContainerDirective,
         ToolLayoutHeaderContainerDirective,
         ToolLayoutNavigationContainerDirective
-    ],
-    standalone: true
+    ]
 })
 export class ToolLayoutBasicExampleComponent {}

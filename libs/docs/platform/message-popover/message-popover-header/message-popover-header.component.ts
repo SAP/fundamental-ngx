@@ -13,7 +13,6 @@ import {
     selector: 'app-message-popover-header',
     templateUrl: './message-popover-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

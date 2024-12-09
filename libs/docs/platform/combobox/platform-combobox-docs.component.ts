@@ -54,7 +54,6 @@ const comboboxLoadingTs = 'combobox-loading/combobox-loading-example.component.t
 @Component({
     selector: 'platform-combobox-docs',
     templateUrl: './platform-combobox-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

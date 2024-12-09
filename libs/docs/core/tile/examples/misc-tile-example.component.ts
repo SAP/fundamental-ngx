@@ -14,7 +14,6 @@ import { TileModule } from '@fundamental-ngx/core/tile';
             }
         `
     ],
-    standalone: true,
     imports: [TileModule, ButtonComponent]
 })
 export class MiscTileExampleComponent {

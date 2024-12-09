@@ -31,7 +31,8 @@ import { NestedListInterface } from './nested-list.interface';
     template: ` <ng-content></ng-content> `,
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[cxNestedList], [fdx-nested-list], ul[fdx-nested-list]',
-    providers: [contentDensityObserverProviders()]
+    providers: [contentDensityObserverProviders()],
+    standalone: false
 })
 export class NestedListComponent implements AfterContentInit, NestedListInterface {
     /** In case the user wants to no use icons for items in this list */

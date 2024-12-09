@@ -44,7 +44,6 @@ import { DialogRef } from '../utils/dialog-ref.class';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     hostDirectives: [ScrollbarDirective],
-    standalone: true,
     imports: [DynamicPortalComponent, BusyIndicatorComponent, AsyncPipe]
 })
 export class DialogBodyComponent {

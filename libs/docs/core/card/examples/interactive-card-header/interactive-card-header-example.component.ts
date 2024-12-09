@@ -7,7 +7,6 @@ import { ListModule } from '@fundamental-ngx/core/list';
     selector: 'fd-interactive-card-header-example',
     templateUrl: './interactive-card-header-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CardModule, ListModule, AvatarComponent, ButtonComponent, TextComponent]
 })
 export class InteractiveCardHeaderExampleComponent {}

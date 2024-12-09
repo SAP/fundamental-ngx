@@ -24,7 +24,6 @@ import { MessageStripAlertContainerAlertRefs, MessageStripAlertContainerPosition
             }
         `
     ],
-    standalone: true,
     imports: [PortalModule]
 })
 export class MessageStripAlertContainerFooterComponent implements AfterViewInit {

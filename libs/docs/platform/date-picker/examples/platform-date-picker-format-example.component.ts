@@ -40,7 +40,6 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
             useValue: CUSTOM_FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformDatePickerComponent]
 })
 export class PlatformDatePickerFormatExampleComponent {

@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-illustrated-message-header',
     templateUrl: './illustrated-message-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class IllustratedMessageHeaderComponent {}

@@ -23,7 +23,6 @@ const linkMiscTs = 'platform-link-misc-examples.component.ts';
 @Component({
     selector: 'app-link',
     templateUrl: './platform-link-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

@@ -8,7 +8,6 @@ import { first } from 'rxjs';
 @Component({
     selector: 'fdp-platform-form-generator-inline-help-example',
     templateUrl: './platform-form-generator-inline-help-example.component.html',
-    standalone: true,
     imports: [PlatformFormGeneratorModule, PlatformButtonModule, IconComponent]
 })
 export class PlatformFormGeneratorInlineHelpExampleComponent implements AfterViewInit {

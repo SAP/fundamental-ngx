@@ -6,7 +6,6 @@ import { TextComponent } from '@fundamental-ngx/core/text';
 @Component({
     selector: 'fd-panel-expandable-example',
     templateUrl: './panel-expandable-example.component.html',
-    standalone: true,
     imports: [ButtonComponent, PanelComponent, TextComponent, PanelTitleDirective, PanelContentDirective]
 })
 export class PanelExpandableExampleComponent {

@@ -4,7 +4,6 @@ import { BusyIndicatorComponent, BusyIndicatorSize } from '@fundamental-ngx/core
 @Component({
     selector: 'fd-busy-indicator-size-example',
     templateUrl: './busy-indicator-size-example.component.html',
-    standalone: true,
     imports: [BusyIndicatorComponent]
 })
 export class BusyIndicatorSizeExampleComponent {

@@ -19,7 +19,6 @@ import { ActionBarMobileExampleComponent } from './examples/action-bar-mobile-ex
     selector: 'app-action-bar',
     templateUrl: './action-bar-docs.component.html',
     styleUrls: ['action-bar-docs.component.scss'],
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

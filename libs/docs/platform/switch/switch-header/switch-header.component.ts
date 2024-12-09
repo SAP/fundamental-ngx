@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'fdp-switch-header',
     templateUrl: './switch-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, RouterLink, ImportComponent, HeaderTabsComponent]
 })
 export class SwitchHeaderComponent {}

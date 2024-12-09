@@ -17,7 +17,6 @@ import { NOT_FILTERED_OPTION_VALUE } from './constants';
     templateUrl: './filter-single-select.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [ListComponent, ListItemComponent, RadioButtonComponent, FormsModule, ListTitleDirective, FdTranslatePipe]
 })
 export class FilterSingleSelectComponent {

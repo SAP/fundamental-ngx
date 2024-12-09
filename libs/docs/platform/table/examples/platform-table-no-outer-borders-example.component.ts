@@ -15,7 +15,6 @@ import {
     templateUrl: './platform-table-no-outer-borders-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         TableDataSourceDirective,
         TableHeaderResizerDirective,

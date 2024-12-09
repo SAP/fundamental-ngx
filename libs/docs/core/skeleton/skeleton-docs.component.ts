@@ -18,7 +18,6 @@ const skeletonComplexHtml = 'complex/skeleton-complex-example.component.html';
 @Component({
     selector: 'app-skeleton',
     templateUrl: './skeleton-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

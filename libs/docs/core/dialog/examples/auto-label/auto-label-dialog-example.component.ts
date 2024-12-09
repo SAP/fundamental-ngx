@@ -17,7 +17,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     selector: 'fd-auto-label-dialog-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './auto-label-dialog-example.component.html',
-    standalone: true,
     imports: [
         TitleComponent,
         CdkScrollable,

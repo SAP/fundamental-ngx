@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-select-header',
     templateUrl: './select-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class SelectHeaderComponent {}

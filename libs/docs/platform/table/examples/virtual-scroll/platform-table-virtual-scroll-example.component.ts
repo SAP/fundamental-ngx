@@ -16,7 +16,6 @@ import {
     templateUrl: './platform-table-virtual-scroll-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         TableDataSourceDirective,
         TableHeaderResizerDirective,

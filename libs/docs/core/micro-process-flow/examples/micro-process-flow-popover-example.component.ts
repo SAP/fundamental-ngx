@@ -7,7 +7,6 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
     selector: 'fd-micro-process-flow-popover-example',
     templateUrl: './micro-process-flow-popover-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [MicroProcessFlowModule, PopoverComponent, PopoverControlComponent, PopoverBodyComponent, ListModule]
 })
 export class MicroProcessFlowPopoverExampleComponent {

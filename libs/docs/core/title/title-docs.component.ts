@@ -23,7 +23,6 @@ const titleWrappingHtml = 'title-wrapping-example.component.html';
 @Component({
     selector: 'app-title',
     templateUrl: './title-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

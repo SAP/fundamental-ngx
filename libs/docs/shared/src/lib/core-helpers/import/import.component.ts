@@ -7,7 +7,6 @@ import { CodeSnippetComponent } from '../code-snippet/code-snippet.component';
     selector: 'import',
     template: ` <fd-code-snippet [file]="file"></fd-code-snippet>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CodeSnippetComponent]
 })
 export class ImportComponent implements OnInit {

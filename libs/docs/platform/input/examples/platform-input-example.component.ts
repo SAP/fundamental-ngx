@@ -6,7 +6,6 @@ import { FdpFormGroupModule, PlatformInputModule } from '@fundamental-ngx/platfo
 @Component({
     selector: 'fdp-platform-input-example',
     templateUrl: './platform-input-example.component.html',
-    standalone: true,
     imports: [FormsModule, FdpFormGroupModule, ReactiveFormsModule, PlatformInputModule, ContentDensityDirective]
 })
 export class PlatformInputExampleComponent implements OnInit {

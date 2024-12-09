@@ -14,7 +14,6 @@ import {
     templateUrl: './platform-table-initial-loading-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         TableDataSourceDirective,
         TableHeaderResizerDirective,

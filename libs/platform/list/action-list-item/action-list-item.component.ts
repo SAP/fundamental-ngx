@@ -25,7 +25,6 @@ export class ActionChangeEvent {
     templateUrl: './action-list-item.component.html',
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ActionListItemComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     host: {
         role: 'none'
     },

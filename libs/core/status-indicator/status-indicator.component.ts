@@ -44,7 +44,6 @@ export class Point {
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [NgTemplateOutlet]
 })
 export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssClassBuilder, OnInit {

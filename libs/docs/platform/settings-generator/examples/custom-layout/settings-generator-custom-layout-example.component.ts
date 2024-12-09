@@ -46,7 +46,6 @@ import { take } from 'rxjs/operators';
             </fdp-icon-tab-bar>
         }
     `,
-    standalone: true,
     imports: [FDP_ICON_TAB_BAR, SettingsGeneratorModule, AsyncOrSyncPipe]
 })
 export class SettingsGeneratorTabsLayoutComponent extends BaseSettingsGeneratorLayout {
@@ -85,7 +84,6 @@ export interface FlatSettingsLayout extends BaseSettingsModel<AnyDynamicFormFiel
     templateUrl: './settings-generator-custom-layout-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [MessagePopoverFormWrapperComponent, SettingsGeneratorModule, BarModule, MessagePopoverComponent],
     providers: [
         {

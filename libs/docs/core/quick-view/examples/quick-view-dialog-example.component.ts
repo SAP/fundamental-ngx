@@ -15,7 +15,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
 @Component({
     selector: 'fd-quick-view-dialog-example',
     templateUrl: './quick-view-dialog-example.component.html',
-    standalone: true,
     imports: [
         DialogModule,
         TemplateDirective,

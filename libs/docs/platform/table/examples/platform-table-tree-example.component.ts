@@ -28,7 +28,6 @@ import { delay, tap } from 'rxjs/operators';
     templateUrl: './platform-table-tree-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         TableDataSourceDirective,
         TableHeaderResizerDirective,

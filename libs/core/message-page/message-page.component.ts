@@ -18,7 +18,6 @@ export type MessagePageType = '' | 'filter' | 'search' | 'no-items' | 'error';
     styleUrl: './message-page.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [IconComponent]
 })
 export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder {

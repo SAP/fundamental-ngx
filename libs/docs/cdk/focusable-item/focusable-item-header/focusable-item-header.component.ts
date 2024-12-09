@@ -11,7 +11,6 @@ import {
     selector: 'app-focusable-item-header',
     templateUrl: './focusable-item-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class FocusableItemHeaderComponent {}

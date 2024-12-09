@@ -24,7 +24,6 @@ const objectStatusLargeExampleTs = 'object-status-large-example.component.ts';
 @Component({
     selector: 'app-object-status',
     templateUrl: './object-status-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

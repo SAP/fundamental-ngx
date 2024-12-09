@@ -35,7 +35,6 @@ import { SideNavigationInterface } from './side-navigation.interface';
     styleUrl: './side-navigation.component.scss',
     encapsulation: ViewEncapsulation.None,
     providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService],
-    standalone: true,
     imports: [SideNavigationMainDirective, PreparedNestedListComponent, SideNavigationUtilityDirective]
 })
 export class SideNavigationComponent implements AfterContentInit, AfterViewInit, OnInit, SideNavigationInterface {

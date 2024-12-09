@@ -13,7 +13,6 @@ import {
 @Component({
     selector: 'app-link-header',
     templateUrl: './platform-link-header.component.html',
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

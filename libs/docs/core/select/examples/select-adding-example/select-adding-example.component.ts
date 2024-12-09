@@ -6,7 +6,6 @@ import { SelectModule } from '@fundamental-ngx/core/select';
     selector: 'fd-select-adding-example',
     templateUrl: './select-adding-example.component.html',
     styleUrls: ['./select-adding-example.component.scss'],
-    standalone: true,
     imports: [ButtonComponent, SelectModule]
 })
 export class SelectAddingExampleComponent {

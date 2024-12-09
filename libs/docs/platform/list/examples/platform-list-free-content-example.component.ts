@@ -9,7 +9,6 @@ import { Observable, of } from 'rxjs';
     templateUrl: './platform-list-free-content-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [PlatformListModule, ListModule]
 })
 export class PlatformListFreeContentExampleComponent {

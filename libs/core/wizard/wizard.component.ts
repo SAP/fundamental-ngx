@@ -74,7 +74,6 @@ export const handleTimeoutReference = (): void => {
         role: 'region',
         '[attr.aria-label]': 'ariaLabel || _defaultAriaLabel()'
     },
-    standalone: true,
     imports: [ScrollSpyDirective, CdkScrollable, ScrollbarDirective, NgTemplateOutlet]
 })
 export class WizardComponent implements AfterViewInit, OnDestroy {

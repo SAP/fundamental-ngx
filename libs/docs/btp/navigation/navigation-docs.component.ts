@@ -15,7 +15,6 @@ import { NavigationSelectionExampleComponent } from './examples/selection-exampl
 
 @Component({
     templateUrl: './navigation-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,
