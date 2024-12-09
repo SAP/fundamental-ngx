@@ -43,7 +43,8 @@
     ></fdp-filters-list-step>
 } @else if (activeStep === ACTIVE_STEP.FILTER) {
     <fdp-filter-step
-        [columnKey]="activeFilterColumnKey!"
+        [columnKey]="activeFilter!.column"
+        [columnName]="activeFilter!.label"
         [filter]="activeFilter!"
         [filterBy]="filterBy"
         (back)="goToFilters()"

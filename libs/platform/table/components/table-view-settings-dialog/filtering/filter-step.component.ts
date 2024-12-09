@@ -55,6 +55,10 @@ export class FilterStepComponent implements FiltersViewStep {
     @Input()
     columnKey: string;
 
+    /** Column name to display in the filter */
+    @Input()
+    columnName: string;
+
     /** Table's content density to be used */
     @Input()
     contentDensity: ContentDensity;
@@ -90,7 +94,7 @@ export class FilterStepComponent implements FiltersViewStep {
     /** @hidden */
     _onFilterValueChange(filterValue: any): void {
         const filterBy: CollectionFilter = this._filterBy || {
-            field: this.columnKey,
+            field: this.columnName,
             value: null,
             strategy: FILTER_STRATEGY.EQ,
             exclude: false

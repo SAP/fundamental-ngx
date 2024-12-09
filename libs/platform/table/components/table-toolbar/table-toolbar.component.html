@@ -160,6 +160,7 @@
     </fd-toolbar>
     @if (appliedFilters().length) {
         <fd-toolbar
+            [noShrink]="true"
             fdType="info"
             [active]="true"
             [titleId]="tableToolbarTitleId"
