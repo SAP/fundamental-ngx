@@ -155,7 +155,7 @@
         "ts-jest": "29.1.0",
         "ts-node": "10.9.2",
         "tsconfig-paths": "4.1.0",
-        "typedoc": "0.25.12",
+        "typedoc": "0.27.4",
         "typedoc-plugin-merge-modules": "5.1.0",
         "typescript": "5.6.3",
         "wait-on": "6.0.1",
