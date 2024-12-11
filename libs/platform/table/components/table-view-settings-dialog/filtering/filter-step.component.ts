@@ -94,7 +94,8 @@ export class FilterStepComponent implements FiltersViewStep {
     /** @hidden */
     _onFilterValueChange(filterValue: any): void {
         const filterBy: CollectionFilter = this._filterBy || {
-            field: this.columnName,
+            field: this.columnKey,
+            fieldName: this.columnName,
             value: null,
             strategy: FILTER_STRATEGY.EQ,
             exclude: false

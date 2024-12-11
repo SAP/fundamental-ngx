@@ -155,7 +155,7 @@ export class FiltersComponent implements Resettable, AfterViewInit {
         this.activeFilter = filter as TableViewSettingsFilterComponent;
         this.activeFilterColumnKey = this.columns.find(
             ({ name }) => name === (<TableViewSettingsFilterComponent>filter).column
-        )?.label;
+        )?.key;
         this._cd.detectChanges();
     }
 
