@@ -170,10 +170,7 @@
             <label fd-toolbar-label>
                 {{ 'platformTable.filteredBy' | fdTranslate }}:
                 @for (filter of appliedFilters(); track filter.columnName; let i = $index) {
-                    {{ filter.columnName }} ({{ filter.params }})
-                    @if (i < appliedFilters().length - 1) {
-                        ,
-                    }
+                    {{ filter.columnName }} ({{ filter.params }})@if (i < appliedFilters().length - 1){,}
                 }
             </label>
             <fd-toolbar-spacer></fd-toolbar-spacer>
