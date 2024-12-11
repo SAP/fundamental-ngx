@@ -226,6 +226,16 @@ export class TableToolbarComponent implements TableToolbarInterface {
     }
 
     /** @hidden */
+    _formatAppliedFilters(appliedFilters: { columnName: string; params: string }[]): string {
+        return appliedFilters
+            .map((filter, index) => {
+                const separator = index < appliedFilters.length - 1 ? ', ' : '';
+                return `${filter.columnName} (${filter.params})${separator}`;
+            })
+            .join('');
+    }
+
+    /** @hidden */
     _expandAll(): void {
         this._table.expandAll();
     }

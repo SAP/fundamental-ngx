@@ -6,6 +6,7 @@ import { skip } from 'rxjs/operators';
 import { DEFAULT_TABLE_STATE } from '../constants';
 
 import { toSignal } from '@angular/core/rxjs-interop';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { CollectionFilter, CollectionGroup, CollectionPage, CollectionSort, TableState } from '../interfaces';
 import {
     ColumnsChange,
@@ -17,7 +18,6 @@ import {
     SortChange
 } from '../models';
 import { TableColumn } from '../table-column';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 export type TableStateChange =
     | TableStateProperty<'sort', SortChange>
@@ -485,7 +485,8 @@ export class TableService {
     /** @hidden */
     private _getFieldName(field: string, fieldName: Nullable<string>): string {
         const column = this.tableColumns$.getValue().find((col) => col.key === field);
-        return column ? column.name : fieldName ?? field; }
+        return column ? column.name : fieldName ?? field;
+    }
 }
 
 /** @hidden */
