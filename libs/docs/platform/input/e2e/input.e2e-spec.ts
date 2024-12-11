@@ -159,7 +159,7 @@ describe('Input should ', () => {
     it('should have visual cue for require input', async () => {
         await scrollIntoView(requiredInputLabel);
         await pause(2000);
-        await expect(await executeScriptAfterTagAttr(requiredInputLabel, 'content')).toBe('"*"');
+        await expect(await executeScriptAfterTagAttr(requiredInputLabel, 'content')).toBe('"*" / ""');
     });
 
     it('should have visual cue for information', async () => {

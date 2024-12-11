@@ -121,7 +121,7 @@ describe('Verify Textarea component', () => {
 
         it('should have * if textarea is mandatory', async () => {
             const labelAsterisk = await executeScriptAfterTagAttr(detailedTextAreaLabel, 'content');
-            await expect(labelAsterisk).toBe('"*"');
+            await expect(labelAsterisk).toBe('"*" / ""');
         });
 
         it('should see an error if trying to click empty mandatory textarea', async () => {

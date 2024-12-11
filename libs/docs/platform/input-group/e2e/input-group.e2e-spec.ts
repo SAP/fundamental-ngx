@@ -170,7 +170,7 @@ describe('Input Group should', () => {
 
         await expect(await $$(withFormInputQuestionMark)).toBeTruthy();
 
-        await expect(await executeScriptAfterTagAttr(withFormInputAsterixMark, 'content')).toBe('"*"');
+        await expect(await executeScriptAfterTagAttr(withFormInputAsterixMark, 'content')).toBe('"*" / ""');
         await expect((await getText(inputGroupPage.withFormInputErrorTooltip)).trim()).toEqual('Value is required');
     });
 
