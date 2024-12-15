@@ -217,6 +217,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@angular-eslint/bundled-angular-compiler@npm:19.0.2":
+  version: 19.0.2
+  resolution: "@angular-eslint/bundled-angular-compiler@npm:19.0.2"
+  checksum: 10/2df361af1c809ef708c86feb66f790aaf35ba9c36f9cde8e3740d6052c837597eaa7454030b22fb35b072e99e7f8451a4d4276482391d27c9bb653a0e2500b93
+  languageName: node
+  linkType: hard
+
 "@angular-eslint/eslint-plugin-template@npm:18.0.1":
   version: 18.0.1
   resolution: "@angular-eslint/eslint-plugin-template@npm:18.0.1"
@@ -247,16 +254,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular-eslint/template-parser@npm:18.0.1":
-  version: 18.0.1
-  resolution: "@angular-eslint/template-parser@npm:18.0.1"
+"@angular-eslint/template-parser@npm:19.0.2":
+  version: 19.0.2
+  resolution: "@angular-eslint/template-parser@npm:19.0.2"
   dependencies:
-    "@angular-eslint/bundled-angular-compiler": "npm:18.0.1"
-    eslint-scope: "npm:^8.0.0"
+    "@angular-eslint/bundled-angular-compiler": "npm:19.0.2"
+    eslint-scope: "npm:^8.0.2"
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: "*"
-  checksum: 10/13d720da96d19e8e7af65727ad2dd859c5f14810edb67f77eb3896b25538eb38d69f1f182cd767c0f88181d4cccd91494d7ebbd564787a61214d0c84901619a1
+  checksum: 10/2a4816dc0c4cd3828173d404c24638fd22adc23e491f153f8fa20d30db9cc42a204ef8e4d7d6e1a6741dbb807c12282218e993e56d8a24da1ff83a208ee7f05c
   languageName: node
   linkType: hard
 
@@ -12707,7 +12714,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-scope@npm:^8.0.0":
+"eslint-scope@npm:^8.0.2":
   version: 8.2.0
   resolution: "eslint-scope@npm:8.2.0"
   dependencies:
@@ -13736,7 +13743,7 @@ __metadata:
     "@angular-devkit/schematics": "npm:18.0.4"
     "@angular-eslint/eslint-plugin": "npm:18.0.1"
     "@angular-eslint/eslint-plugin-template": "npm:18.0.1"
-    "@angular-eslint/template-parser": "npm:18.0.1"
+    "@angular-eslint/template-parser": "npm:19.0.2"
     "@angular/animations": "npm:18.0.3"
     "@angular/cdk": "npm:18.0.3"
     "@angular/cli": "npm:18.0.4"
