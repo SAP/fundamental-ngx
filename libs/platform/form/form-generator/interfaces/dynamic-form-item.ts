@@ -133,6 +133,12 @@ export interface BaseDynamicFormFieldItem<T = any> {
 
     /**
      * @description
+     * If true, the form item will be displayed as readonly.
+     */
+    readonly?: boolean;
+
+    /**
+     * @description
      * If true, will fall back to `message` property if `placeholder` was not provided.
      */
     useMessageAsPlaceholder?: boolean;
@@ -339,6 +345,7 @@ type PreparedDynamicFormFieldItemFields = {
     default: any;
     placeholder?: string;
     choices?: SelectItem[];
+    readonly?: boolean;
 };
 
 /**

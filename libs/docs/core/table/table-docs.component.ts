@@ -12,6 +12,7 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { TableLoadingExampleComponent } from './examples/loading/table-loading-example.component';
+import { NoDataExampleComponent } from './examples/no-data/no-data-example.component';
 import { TableActivableExampleComponent } from './examples/table-activable-example.component';
 import { TableCdkExampleComponent } from './examples/table-cdk-example.component';
 import { TableCheckboxesExampleComponent } from './examples/table-checkboxes-example.component';
@@ -71,6 +72,8 @@ const tableFixedTs = 'table-fixed-example.component.ts';
 const tableFixedHtml = 'table-fixed-example.component.html';
 const tablePageScrollHtml = 'table-page-scroll-example.component.html';
 const tablePageScrollTs = 'table-page-scroll-example.component.ts';
+const noDataExampleHtml = 'no-data/no-data-example.component.html';
+const noDataExampleTs = 'no-data/no-data-example.component.ts';
 
 @Component({
     selector: 'app-table',
@@ -101,7 +104,8 @@ const tablePageScrollTs = 'table-page-scroll-example.component.ts';
         TableResponsiveExampleComponent,
         RouterLink,
         TableLoadingExampleComponent,
-        TablePageScrollExampleComponent
+        TablePageScrollExampleComponent,
+        NoDataExampleComponent
     ]
 })
 export class TableDocsComponent {
@@ -370,6 +374,20 @@ export class TableDocsComponent {
             component: 'TablePageScrollExampleComponent',
             code: getAssetFromModuleAssets(tablePageScrollTs),
             fileName: 'table-page-scroll-example'
+        }
+    ];
+
+    noData: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(noDataExampleHtml),
+            fileName: 'no-data-example'
+        },
+        {
+            language: 'typescript',
+            component: 'NoDataExampleComponent',
+            code: getAssetFromModuleAssets(noDataExampleTs),
+            fileName: 'no-data-example'
         }
     ];
 
