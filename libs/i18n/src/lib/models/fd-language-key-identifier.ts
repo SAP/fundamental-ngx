@@ -282,6 +282,8 @@ export type FdLanguageKeyIdentifier =
     | 'platformSearchField.synchronizeButtonTitle'
     | 'platformSearchField.searchSuggestionMessage'
     | 'platformSearchField.searchSuggestionNavigateMessage'
+    | 'platformSettingsGenerator.settingsLabel'
+    | 'platformSettingsGenerator.searchLabel'
     | 'platformSwitch.ariaLabel'
     | 'platformSmartFilterBar.searchPlaceholder'
     | 'platformSmartFilterBar.submitButtonLabel'

@@ -163,14 +163,24 @@
                         >
                             <fd-wizard-step-indicator>5</fd-wizard-step-indicator>
                             <fd-wizard-content size="sm">
-                                <h4 class="fd-title fd-title--h4" id="product-type-title">1. Product Type</h4>
-                                <fd-layout-grid [style.margin-bottom.rem]="2">
+                                <h4
+                                    class="fd-title fd-title--h4"
+                                    id="product-type-title"
+                                    [style.margin-bottom.rem]="0.5"
+                                >
+                                    1. Product Type
+                                </h4>
+                                <fd-layout-grid [noVerticalGap]="true" [style.margin-bottom.rem]="2">
                                     <div fdLayoutGridRow>
                                         <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
-                                            <label fd-form-label [style.float]="'right'">Type:</label>
+                                            <label fd-form-label [style.float]="'right'" [allowWrap]="true"
+                                                >Type:</label
+                                            >
                                         </div>
                                         <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
-                                            <label fd-form-label [style.color]="'black'">Mobile</label>
+                                            <label fd-form-label [style.color]="'black'" [allowWrap]="true"
+                                                >Mobile</label
+                                            >
                                         </div>
                                         <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
                                             <a
@@ -183,28 +193,50 @@
                                         </div>
                                     </div>
                                 </fd-layout-grid>
-                                <h4 class="fd-title fd-title--h4" id="customer-information-title">
+                                <h4
+                                    class="fd-title fd-title--h4"
+                                    id="customer-information-title"
+                                    [style.margin-bottom.rem]="0.5"
+                                >
                                     2. Customer Information
                                 </h4>
-                                <fd-layout-grid>
+                                <fd-layout-grid [noVerticalGap]="true" [style.margin-bottom.rem]="2">
                                     <div fdLayoutGridRow>
                                         <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
-                                            <label fd-form-label [style.float]="'right'">Full Name:</label><br />
-                                            <label fd-form-label [style.float]="'right'">Address Line 1:</label><br />
-                                            <label fd-form-label [style.float]="'right'">Address Line 2:</label><br />
+                                            <label fd-form-label [style.float]="'right'" [allowWrap]="true"
+                                                >Full Name:</label
+                                            >
                                         </div>
                                         <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
-                                            <label fd-form-label [style.color]="'black'">{{ fullName }}</label
-                                            ><br />
-                                            <label fd-form-label [style.color]="'black'">{{ addressLine1 }}</label
-                                            ><br />
-                                            <label fd-form-label [style.color]="'black'">{{ addressLine2 }}</label
-                                            ><br />
+                                            <label fd-form-label [style.color]="'black'" [allowWrap]="true">{{
+                                                fullName
+                                            }}</label>
+                                        </div>
+                                    </div>
+                                    <div fdLayoutGridRow>
+                                        <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
+                                            <label fd-form-label [style.float]="'right'" [allowWrap]="true"
+                                                >Address Line 1:</label
+                                            >
+                                        </div>
+                                        <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <label fd-form-label [style.color]="'black'" [allowWrap]="true">{{
+                                                addressLine1
+                                            }}</label>
+                                        </div>
+                                    </div>
+                                    <div fdLayoutGridRow>
+                                        <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
+                                            <label fd-form-label [style.float]="'right'" [allowWrap]="true"
+                                                >Address Line 2:</label
+                                            >
+                                        </div>
+                                        <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <label fd-form-label [style.color]="'black'" [allowWrap]="true">{{
+                                                addressLine2
+                                            }}</label>
                                         </div>
                                         <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
-                                            <br />
-                                            <br />
-                                            <br />
                                             <a
                                                 [routerLink]="['./']"
                                                 fd-link
@@ -215,27 +247,56 @@
                                         </div>
                                     </div>
                                 </fd-layout-grid>
-                                <h4 class="fd-title fd-title--h4" id="additional-information-id">
+                                <h4
+                                    class="fd-title fd-title--h4"
+                                    id="additional-information-id"
+                                    [style.margin-bottom.rem]="0.5"
+                                >
                                     3. Additional Information
                                 </h4>
-                                <fd-layout-grid>
+                                <fd-layout-grid [noVerticalGap]="true" [style.margin-bottom.rem]="2">
                                     <div fdLayoutGridRow>
                                         <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
-                                            <label fd-form-label [style.float]="'right'">Name:</label><br />
-                                            <label fd-form-label [style.float]="'right'">Weight:</label><br />
-                                            <label fd-form-label [style.float]="'right'">Delicious:</label><br />
-                                            <label fd-form-label [style.float]="'right'">Description:</label>
+                                            <label fd-form-label [style.float]="'right'" [allowWrap]="true"
+                                                >Name:</label
+                                            >
                                         </div>
                                         <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
-                                            <label fd-form-label [style.color]="'black'">Pineapple</label><br />
-                                            <label fd-form-label [style.color]="'black'">1kg</label><br />
-                                            <label fd-form-label [style.color]="'black'">Yes</label><br />
-                                            <label fd-form-label [style.color]="'black'">n/a</label>
+                                            <label fd-form-label [style.color]="'black'" [allowWrap]="true"
+                                                >Pineapple</label
+                                            >
+                                        </div>
+                                    </div>
+                                    <div fdLayoutGridRow>
+                                        <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
+                                            <label fd-form-label [style.float]="'right'" [allowWrap]="true"
+                                                >Weight:</label
+                                            >
+                                        </div>
+                                        <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <label fd-form-label [style.color]="'black'" [allowWrap]="true">1kg</label>
+                                        </div>
+                                    </div>
+                                    <div fdLayoutGridRow>
+                                        <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
+                                            <label fd-form-label [style.float]="'right'" [allowWrap]="true"
+                                                >Delicious:</label
+                                            >
+                                        </div>
+                                        <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <label fd-form-label [style.color]="'black'" [allowWrap]="true">Yes</label>
+                                        </div>
+                                    </div>
+                                    <div fdLayoutGridRow>
+                                        <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
+                                            <label fd-form-label [style.float]="'right'" [allowWrap]="true"
+                                                >Description:</label
+                                            >
+                                        </div>
+                                        <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <label fd-form-label [style.color]="'black'" [allowWrap]="true">n/a</label>
                                         </div>
                                         <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
-                                            <br />
-                                            <br />
-                                            <br />
                                             <a
                                                 [routerLink]="['./']"
                                                 fd-link
@@ -246,14 +307,18 @@
                                         </div>
                                     </div>
                                 </fd-layout-grid>
-                                <h4 class="fd-title fd-title--h4">4. Payment Information</h4>
-                                <fd-layout-grid>
+                                <h4 class="fd-title fd-title--h4" [style.margin-bottom.rem]="0.5">
+                                    4. Payment Information
+                                </h4>
+                                <fd-layout-grid [noVerticalGap]="true" [style.margin-bottom.rem]="2">
                                     <div fdLayoutGridRow>
                                         <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
-                                            <label fd-form-label [style.float]="'right'">Payment Type:</label><br />
+                                            <label fd-form-label [style.float]="'right'" [allowWrap]="true"
+                                                >Payment Type:</label
+                                            >
                                         </div>
                                         <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
-                                            <label fd-form-label [style.color]="'black'"></label><br />
+                                            <label fd-form-label [style.color]="'black'" [allowWrap]="true"></label>
                                         </div>
                                         <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
                                             <a [routerLink]="['./']" fd-link (click)="goToStep(4)">Edit</a>

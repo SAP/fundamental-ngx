@@ -364,6 +364,10 @@ export default {
         searchSuggestionMessage: '{count} suggestions found.',
         searchSuggestionNavigateMessage: 'use up and down arrows to navigate'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Settings',
+        searchLabel: 'Search'
+    },
     platformSwitch: {
         ariaLabel: 'Switch input'
     },
@@ -515,7 +519,7 @@ export default {
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR',
-        loadMore: 'Load more',
+        loadMore: 'Show more',
         toolbarActionButtonTitle: 'Settings',
         settingsDialogHeader: 'Settings',
         confirmBtnLabel: 'OK',
