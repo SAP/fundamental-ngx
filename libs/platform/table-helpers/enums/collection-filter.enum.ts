@@ -70,19 +70,11 @@ export type FilterNumberStrategy = (typeof FILTER_NUMBER_STRATEGY)[keyof typeof 
 export const FILTER_NUMBER_STRATEGIES: ReadonlyArray<FilterNumberStrategy> = Object.values(FILTER_NUMBER_STRATEGY);
 
 /** String Filter Strategies */
-export const FILTER_STRING_STRATEGY: Pick<
-    FilterStrategyType,
-    'BETWEEN' | 'CONTAINS' | 'EQ' | 'BEGINS_WITH' | 'ENDS_WITH' | 'GT' | 'GTE' | 'LT' | 'LTE'
-> = {
+export const FILTER_STRING_STRATEGY: Pick<FilterStrategyType, 'EQ' | 'CONTAINS' | 'BEGINS_WITH' | 'ENDS_WITH'> = {
     CONTAINS: 'contains',
     EQ: 'equalTo',
     BEGINS_WITH: 'beginsWith',
-    BETWEEN: 'between',
-    ENDS_WITH: 'endsWith',
-    GT: 'greaterThan',
-    GTE: 'greaterThanOrEqualTo',
-    LT: 'lessThan',
-    LTE: 'lessThanOrEqualTo'
+    ENDS_WITH: 'endsWith'
 };
 
 export type FilterAllStrategy = (typeof FILTER_STRATEGY)[keyof typeof FILTER_STRATEGY];
@@ -112,7 +104,11 @@ export const FILTER_DEFAULT_STRATEGIES: ReadonlyArray<FilterStringStrategy> = Ob
 // Get Possible strategies based on data type
 export const getFilterStrategiesBasedOnDataType = (
     dataType: FilterableColumnDataType
-): readonly FilterStringStrategy[] | readonly FilterDateStrategy[] => {
+):
+    | readonly FilterStringStrategy[]
+    | readonly FilterDateStrategy[]
+    | readonly FilterNumberStrategy[]
+    | readonly FilterBooleanStrategy[] => {
     switch (dataType) {
         case FilterableColumnDataType.STRING:
             return FILTER_STRING_STRATEGIES;
@@ -122,7 +118,6 @@ export const getFilterStrategiesBasedOnDataType = (
             return FILTER_DATE_STRATEGIES;
         case FilterableColumnDataType.BOOLEAN:
             return FILTER_BOOLEAN_STRATEGIES;
-
         default:
             return FILTER_DEFAULT_STRATEGIES;
     }

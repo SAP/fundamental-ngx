@@ -389,7 +389,6 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
      */
     private _filterString(item: ExampleItem, filter: CollectionStringFilter): boolean {
         const filterValue = filter.value && filter.value.toLocaleLowerCase();
-        const filterValue2 = (filter.value2 && filter.value2.toLocaleLowerCase()) || '';
         let itemValue = get(item, filter.field);
 
         itemValue = itemValue ? itemValue.toLocaleLowerCase() : itemValue;
@@ -399,21 +398,6 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         switch (filter.strategy) {
             case 'equalTo':
                 result = itemValue === filterValue;
-                break;
-            case 'greaterThan':
-                result = itemValue > filterValue;
-                break;
-            case 'greaterThanOrEqualTo':
-                result = itemValue >= filterValue;
-                break;
-            case 'lessThan':
-                result = itemValue < filterValue;
-                break;
-            case 'lessThanOrEqualTo':
-                result = itemValue <= filterValue;
-                break;
-            case 'between':
-                result = itemValue >= filterValue && itemValue <= filterValue2;
                 break;
             case 'beginsWith':
                 result = itemValue.startsWith(filterValue);
