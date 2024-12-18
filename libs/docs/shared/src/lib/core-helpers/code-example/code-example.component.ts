@@ -139,8 +139,7 @@ export class CodeExampleComponent implements OnInit {
     }
 
     openStackBlitz(): void {
-        console.log(this._exampleFiles);
-        // this.stackBlitzService.openCode(this._exampleFiles);
+        this.stackBlitzService.openCode(this._exampleFiles);
     }
 
     copyText(): void {
