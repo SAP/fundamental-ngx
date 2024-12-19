@@ -2,7 +2,9 @@ import { DeclarationHierarchy, DefaultThemeRenderContext, JSX } from 'typedoc';
 import { hierarchyList } from '../utils';
 
 export function hierarchy(context: DefaultThemeRenderContext, props: DeclarationHierarchy | undefined) {
-    if (!props) return;
+    if (!props) {
+        return;
+    }
 
     return (
         <section class="tsd-panel tsd-hierarchy">
