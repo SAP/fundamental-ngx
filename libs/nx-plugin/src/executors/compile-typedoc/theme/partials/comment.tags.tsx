@@ -2,7 +2,9 @@ import { DefaultThemeRenderContext, JSX, Reflection, ReflectionKind } from 'type
 import { camelToTitleCase, fixedMarkdown } from '../utils';
 
 export function commentTags({ markdown }: DefaultThemeRenderContext, props: Reflection) {
-    if (!props.comment) return;
+    if (!props.comment) {
+        return;
+    }
 
     const tags = props.kindOf(ReflectionKind.SomeSignature)
         ? props.comment.blockTags.filter((tag) => tag.tag !== '@returns')
