@@ -43,6 +43,7 @@ import { delay } from 'rxjs/operators';
     ]
 })
 export class AdvancedScrollingExampleComponent {
+    options_demo=['Laptops 1 (Level 1)','Laptops 12 (Level 1)'];
     source: TableDataSource<ExampleItem>;
     childSource: ChildTableDataSource<ExampleItem>;
     readonly filterTypeEnum = FilterType;
