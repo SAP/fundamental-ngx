@@ -338,6 +338,9 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         if (changes['specialDaysRules']) {
             this._buildDayViewGrid();
         }
+        if (this.focusedService.getFocusedElement()) {
+            this._focusOnLegendsDay();
+        }
     }
 
     /**
@@ -620,7 +623,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
 
     /** @hidden */
     private _focusOnLegendsDay(): void {
-        this._focusElementBySelector('.fd-calendar__legend-item');
+        console.log('Focused element', this.focusedService.getFocusedElement());
     }
 
     /**

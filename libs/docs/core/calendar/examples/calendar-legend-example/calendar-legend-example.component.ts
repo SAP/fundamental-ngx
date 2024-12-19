@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CalendarComponent } from '@fundamental-ngx/core/calendar';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -26,7 +25,7 @@ import { CalendarLegendComponent } from '../../../../../../libs/core/calendar/ca
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    imports: [CalendarComponent, LegendItemComponent, ContentDensityDirective, CalendarLegendComponent]
+    imports: [CalendarComponent, LegendItemComponent, CalendarLegendComponent]
 })
 export class CalendarLegendExampleComponent {
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
