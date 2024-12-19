@@ -10,7 +10,6 @@ import {
 import * as ts from 'typescript';
 import { getMainTsFilePath } from './main-ts-file-path';
 
-// eslint-disable-next-line jsdoc/require-jsdoc
 export async function callsProvidersFunction(tree: Tree, projectName: string, functionName: string): Promise<boolean> {
     const mainPath = await getMainTsFilePath(tree, projectName);
     const isStandalone = isStandaloneApp(tree, mainPath);
