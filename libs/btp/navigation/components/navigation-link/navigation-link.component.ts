@@ -1,4 +1,3 @@
-/* eslint-disable @angular-eslint/no-host-metadata-property */
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { NgTemplateOutlet } from '@angular/common';
 import {
