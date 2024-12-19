@@ -317,28 +317,12 @@ function getNestedValue<T extends Record<string, any>>(key: string, object: T): 
 
 const filterByString = (item: ExampleItem, filter: CollectionStringFilter): boolean => {
     const filterValue = filter.value && filter.value.toLocaleLowerCase();
-    const filterValue2 = (filter.value2 && filter.value2.toLocaleLowerCase()) || '';
     const itemValue = getNestedValue(filter.field, item).toLocaleLowerCase();
     let result = false;
 
     switch (filter.strategy) {
         case 'equalTo':
             result = itemValue === filterValue;
-            break;
-        case 'greaterThan':
-            result = itemValue > filterValue;
-            break;
-        case 'greaterThanOrEqualTo':
-            result = itemValue >= filterValue;
-            break;
-        case 'lessThan':
-            result = itemValue < filterValue;
-            break;
-        case 'lessThanOrEqualTo':
-            result = itemValue <= filterValue;
-            break;
-        case 'between':
-            result = itemValue >= filterValue && itemValue <= filterValue2;
             break;
         case 'beginsWith':
             result = itemValue.startsWith(filterValue);
