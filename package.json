@@ -13,7 +13,7 @@
     "yarn": ">= 4.4.1",
     "node": ">= 18"
   },
-  "packageManager": "yarn@4.4.1",
+  "packageManager": "yarn@4.5.1",
   "scripts": {
     "preinstall": "npx only-allow yarn",
     "build": "echo Building default app && nx compile",

@@ -191,6 +191,7 @@ export class TablePo extends PlatformBaseComponentPo {
     async checkSortingColumns(selector: string, transparentButton: string, index: number = 0): Promise<void> {
         await scrollIntoView(selector);
         await click(selector + transparentButton, index);
+        await waitForElDisplayed('fd-dialog-body .fd-list');
         await click(this.dialogMoveToBottom);
         await click(this.dialogItem);
         await click(this.footerButtonOk);

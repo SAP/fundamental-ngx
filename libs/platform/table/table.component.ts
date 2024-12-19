@@ -1606,8 +1606,10 @@ export class TableComponent<T = any>
         }
 
         if (row) {
-            this._emitRowNavigate(row);
-            this._emitRowActivate(row);
+            const e = event as MouseEvent | KeyboardEvent;
+            const ctrlKey = e.ctrlKey || e.metaKey;
+            this._emitRowNavigate(row, ctrlKey);
+            this._emitRowActivate(row, ctrlKey);
         }
     }
 
@@ -1617,13 +1619,13 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    _emitRowActivate(row: TableRow<T>): void {
+    _emitRowActivate(row: TableRow<T>, ctrlKey: boolean): void {
         if (!this.rowsActivable) {
             return;
         }
 
         const rowIndex = this._tableRows.indexOf(row);
-        this.rowActivate.emit(new TableRowActivateEvent<T>(rowIndex, row.value));
+        this.rowActivate.emit(new TableRowActivateEvent<T>(rowIndex, ctrlKey, row.value));
     }
 
     /**
@@ -1644,7 +1646,7 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    _emitRowNavigate(row: TableRow<T>): void {
+    _emitRowNavigate(row: TableRow<T>, ctrlKey: boolean): void {
         if (!row.navigatable) {
             return;
         }
@@ -1654,7 +1656,7 @@ export class TableComponent<T = any>
             this._navigatedRowIndex = rowIndex;
         }
 
-        this.rowNavigate.emit(new TableRowActivateEvent<T>(rowIndex, row.value));
+        this.rowNavigate.emit(new TableRowActivateEvent<T>(rowIndex, ctrlKey, row.value));
     }
 
     /** Fetch data source data. */
@@ -2117,7 +2119,9 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _calculateTableColumnsLength(): void {
-        this._tableColumnsLength = this.getTableColumns().length + (this._isSelectionColumnShown ? 1 : 0);
+        const isGroupable = this.initialState?.initialGroupBy.length;
+        this._tableColumnsLength =
+            this.getTableColumns().length + (this._isSelectionColumnShown || isGroupable ? 1 : 0);
     }
 
     /** @hidden */
