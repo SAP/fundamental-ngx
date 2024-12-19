@@ -13,7 +13,7 @@ module.exports = [
             '@nx/enforce-module-boundaries': [
                 'error',
                 {
-                    allow: [],
+                    allow: ['jest.config.base'],
                     depConstraints: [
                         {
                             sourceTag: 'scope:cdk',
