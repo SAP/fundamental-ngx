@@ -81,6 +81,10 @@ export class FormLabelComponent implements OnChanges {
     @Input()
     inlineHelpPlacement: InlineHelpFormPlacement = 'after';
 
+    /** Whether to allow the text of the form label to wrap. */
+    @Input()
+    allowWrap = false;
+
     /** Inline help label. */
     @Input()
     set inlineHelpLabel(label: string) {
