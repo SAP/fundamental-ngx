@@ -364,6 +364,10 @@ export default {
         searchSuggestionMessage: '{count} suggestions found.',
         searchSuggestionNavigateMessage: 'use up and down arrows to navigate'
     },
+    platformSettingsGenerator: {
+        settingsLabel: 'Settings',
+        searchLabel: 'Search'
+    },
     platformSwitch: {
         ariaLabel: 'Switch input'
     },

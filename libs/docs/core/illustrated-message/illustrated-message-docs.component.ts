@@ -28,13 +28,14 @@ const illustratedMessageSpotTsCode = 'illustrated-message-spot-example.component
 const illustratedMessageDotSrc = 'illustrated-message-dot-example.component.html';
 const illustratedMessageDotTsCode = 'illustrated-message-dot-example.component.ts';
 
+const illustratedMessageInlineScr = 'illustrated-message-inline-example.component.html';
+const illustratedMessageInlineTsCore = 'illustrated-message-inline-example.component.ts';
+
 const illustration = 'assets/images/sapIllus-Dialog-NoMail.svg';
 const illustrationDialogNoMail = 'assets/images/sapIllus-Dialog-NoMail.svg';
 const illustrationSceneNoMail = 'assets/images/sapIllus-Scene-NoMail.svg';
 
 const illustrationSpotNoMail = 'assets/images/sapIllus-Spot-NoMail.svg';
-const illusratedMessageInlineSrc = 'illustrated-message-inline-example.component.ts';
-const illusratedMessageInlineHtmlSrc = 'illustrated-message-inline-example.component.html';
 
 @Component({
     selector: 'app-illustrated-message',
@@ -140,29 +141,17 @@ export class IllustratedMessageDocsComponent {
         }
     ];
 
-    illustratedMessageInlineExample: ExampleFile[] = [
+    illustratedMessageInline: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(illusratedMessageInlineHtmlSrc),
+            code: getAssetFromModuleAssets(illustratedMessageInlineScr),
             fileName: 'illustrated-message-inline-example'
         },
         {
             language: 'typescript',
-            code: getAssetFromModuleAssets(illusratedMessageInlineSrc),
+            code: getAssetFromModuleAssets(illustratedMessageInlineTsCore),
             fileName: 'illustrated-message-inline-example',
             component: 'IllustratedMessageInlineExampleComponent'
-        },
-        {
-            language: 'svg',
-            code: getAsset(illustration),
-            fileName: 'sapIllus-Dialog-NoMail',
-            path: 'src/assets/images'
-        },
-        {
-            language: 'svg',
-            code: getAsset(illustrationSceneNoMail),
-            fileName: 'sapIllus-Scene-NoMail',
-            path: 'src/assets/images'
         }
     ];
 }

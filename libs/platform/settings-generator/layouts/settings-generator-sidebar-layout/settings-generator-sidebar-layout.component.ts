@@ -11,9 +11,13 @@ import {
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 import { AsyncOrSyncPipe, Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { debounceTime, distinctUntilChanged, startWith } from 'rxjs';
 import { SidebarSettingsGeneratorConfig } from '../../models/settings-config.model';
 import {
@@ -39,7 +43,11 @@ import { SettingsGeneratorSidebarIconComponent } from './settings-generator-side
         SettingsGeneratorSidebarIconComponent,
         SkeletonComponent,
         SettingsGeneratorContentComponent,
-        AsyncOrSyncPipe
+        AsyncOrSyncPipe,
+        TitleComponent,
+        FdTranslatePipe,
+        InputGroupComponent,
+        FormsModule
     ]
 })
 export class SettingsGeneratorSidebarLayoutComponent
@@ -57,6 +65,13 @@ export class SettingsGeneratorSidebarLayoutComponent
     /** @hidden */
     @ViewChild('settingsGeneratorContent')
     private readonly _settingsGeneratorContent: SettingsGeneratorContentComponent;
+
+    /** @hidden */
+    @ViewChild('listElement', { read: ElementRef })
+    private _listElement: ElementRef;
+
+    /** @hidden */
+    searchTerm: string;
 
     /**
      * Selected settings section.
@@ -152,6 +167,16 @@ export class SettingsGeneratorSidebarLayoutComponent
                     }
                     this._cdr.detectChanges();
                 });
+        }
+    }
+
+    /** @hidden */
+    _displaySettingsSearchInput(): boolean {
+        const listEl = this._listElement;
+        if (!listEl) {
+            return false;
+        } else {
+            return !!this.searchTerm || listEl.nativeElement.scrollHeight > listEl.nativeElement.clientHeight;
         }
     }
 

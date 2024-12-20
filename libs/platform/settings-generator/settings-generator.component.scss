@@ -2,14 +2,14 @@ $block: fdp-settings-generator;
 
 .#{$block} {
     display: block;
-    .#{$block}__title {
-        background: var(--sapObjectHeader_Background);
-        padding: 1.5rem 1rem 1rem;
-    }
 
     &__sidebar {
         border-right: 0.0625rem solid var(--sapGroup_ContentBorderColor);
         background: var(--sapBaseColor);
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
     &__content {
@@ -27,6 +27,23 @@ $block: fdp-settings-generator;
     &__sidebar-layout {
         display: flex;
         position: relative;
+        overflow: hidden;
+        height: 100%;
+
+        .#{$block}__title {
+            background: var(--sapObjectHeader_Background);
+            padding: 1.5rem 1rem 1rem;
+        }
+        .#{$block}__search-header {
+            .#{$block}__search-input {
+                margin: 0 1rem;
+                display: block;
+            }
+        }
+
+        .#{$block}__list-container {
+            overflow-y: auto;
+        }
 
         &--mobile {
             .#{$block} {

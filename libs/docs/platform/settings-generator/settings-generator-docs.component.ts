@@ -39,7 +39,7 @@ import { SettingsGeneratorMessagePopoverExampleComponent } from './examples/mess
     ]
 })
 export class SettingsGeneratorDocsComponent {
-    defaultConfigExample = getAssetFromModuleAssets('default-config.ts');
+    defaultConfigExample = getAssetFromModuleAssets('default/default-config.ts');
     settingsGeneratorDefaultExample: ExampleFile[] = [
         getExampleFile('default/settings-generator-default-example.component.html'),
         getExampleFile('default/settings-generator-default-example.component.ts', {

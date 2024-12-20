@@ -1,0 +1,32 @@
+<table fd-table aria-label="Default">
+    <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+        </tr>
+    </thead>
+    <tbody fd-table-body>
+        <tr fd-table-row>
+            <td
+                fd-table-cell
+                class="fd-table__cell--no-data fd-table__cell fd-table__cell--focusable"
+                tabindex="0"
+                colspan="5"
+                aria-colindex="0"
+            >
+                <div style="width: 100%; display: flex; justify-content: center">
+                    <figure style="width: 100%" fd-illustrated-message [svgConfig]="sceneConfig">
+                        <figcaption fd-illustrated-message-figcaption>
+                            <h3 fd-illustrated-message-title>Headline text goes here</h3>
+                            <p fd-illustrated-message-text>
+                                Description provides user with clarity and possible next steps.
+                            </p>
+                        </figcaption>
+                        <fd-illustrated-message-actions> </fd-illustrated-message-actions>
+                    </figure>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

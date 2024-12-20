@@ -1,16 +1,9 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    Injectable,
-    TemplateRef,
-    ViewChild
-} from '@angular/core';
+import { AfterViewInit, Component, Inject, Injectable, TemplateRef, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ThemingService } from '@fundamental-ngx/core/theming';
 import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH, FD_LANGUAGE_GERMAN, FdLanguage } from '@fundamental-ngx/i18n';
 import { ListAvatarConfig } from '@fundamental-ngx/platform/list';
 import {
     SettingsGeneratorComponent,
@@ -74,7 +67,6 @@ class ExampleUserService {
 @Component({
     selector: 'fdp-settings-generator-default-example',
     templateUrl: './settings-generator-default-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [ExampleUserService],
     standalone: true,
     imports: [TitleComponent, SettingsGeneratorModule, BarModule]
@@ -96,8 +88,8 @@ export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
 
     constructor(
         private readonly _theming: ThemingService,
-        private readonly _cdr: ChangeDetectorRef,
-        private readonly _userService: ExampleUserService
+        private readonly _userService: ExampleUserService,
+        @Inject(FD_LANGUAGE) private _langSubject$: BehaviorSubject<FdLanguage>
     ) {}
 
     ngAfterViewInit(): void {
@@ -165,6 +157,7 @@ export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
                                     message: 'Email',
                                     type: 'input',
                                     controlType: 'email',
+                                    readonly: true,
                                     default: this._userService.getUser().pipe(map((res) => res.email)),
                                     validators: [Validators.required, Validators.email],
                                     guiOptions: {
@@ -182,6 +175,7 @@ export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
                                     name: 'name',
                                     message: 'Full name',
                                     type: 'input',
+                                    placeholder: 'Enter your Full Name',
                                     controlType: 'text',
                                     default: this._userService.getUser().pipe(map((res) => res.name)),
                                     guiOptions: {
@@ -254,7 +248,17 @@ export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
                                     name: 'language',
                                     message: 'Language',
                                     choices: this._userService.getLanguages(),
-                                    default: this._userService.getUser().pipe(map((res) => res.language))
+                                    default: this._userService.getUser().pipe(map((res) => res.language)),
+                                    onchange: (fieldValue: FdLanguage) => {
+                                        switch (fieldValue.toString()) {
+                                            case 'en':
+                                                this._langSubject$.next(FD_LANGUAGE_ENGLISH);
+                                                break;
+                                            case 'de':
+                                                this._langSubject$.next(FD_LANGUAGE_GERMAN);
+                                                break;
+                                        }
+                                    }
                                 }
                             ]
                         }
@@ -302,7 +306,6 @@ export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
                 }
             ]
         };
-        this._cdr.detectChanges();
     }
 
     submit(): void {

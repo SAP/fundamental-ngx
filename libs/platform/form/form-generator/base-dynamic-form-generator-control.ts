@@ -65,4 +65,9 @@ export abstract class BaseDynamicFormGeneratorControl<T extends BaseDynamicFormF
         }
         return (this.formItem?.useMessageAsPlaceholder && this.formItem?.message) || '';
     }
+
+    /** @hidden */
+    get readonly(): boolean {
+        return this.formItem?.readonly ?? false;
+    }
 }
