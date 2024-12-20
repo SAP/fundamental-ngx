@@ -18,7 +18,7 @@
         }
     </div>
     @if (showGrowingButton) {
-        <fdp-table-growing-button [showItemsCount]="showItemsCount" [showItemsCount]="true"></fdp-table-growing-button>
+        <fdp-table-growing-button [showItemsCount]="showItemsCount"></fdp-table-growing-button>
     }
 </fd-busy-indicator>
 <!-- Table Template -->
@@ -93,7 +93,7 @@
                                         [keyToColumnMap]="_keyToColumnMap"
                                         [tableColumnsLength]="_tableColumnsLength"
                                         (toggleGroupRow)="_toggleGroupRow($event)"
-                                        (click)="_emitRowActivate(row)"
+                                        (click)="_emitRowActivate(row, $event.ctrlKey || $event.metaKey)"
                                     ></tr>
                                 }
                                 @default {
@@ -195,9 +195,7 @@
                         <tr fd-table-row>
                             <td fd-table-cell class="fd-table__cell--no-data" [attr.colspan]="_tableColumnsLength">
                                 <div class="fdp-table__empty-table-message">
-                                    <div>
-                                        <ng-content select="fdp-table-no-data-wrapper"></ng-content>
-                                    </div>
+                                    <ng-content select="fdp-table-no-data-wrapper"></ng-content>
                                     @if (!_noDataWrapper && _tableService.visibleColumnsLength() > 0) {
                                         <div>
                                             {{

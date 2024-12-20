@@ -29,6 +29,10 @@ $form-label-bottom-spacing: 0.125rem;
         position: relative;
         top: 0.125rem;
     }
+
+    &--allow-wrap {
+        text-wrap: auto;
+    }
 }
 
 .fd-form-label__wrapper {
@@ -82,4 +86,27 @@ $form-label-bottom-spacing: 0.125rem;
             @include left-placed();
         }
     }
+}
+
+// remove after adopting fd-styles version 0.39
+.fd-container.fd-form-layout-grid-container.fd-form-group .fd-form-item .fd-form-label--colon,
+.fd-container.fd-form-layout-grid-container .fd-form-group .fd-form-item .fd-form-label--colon {
+    padding-inline-end: 0.25rem;
+}
+.fd-container.fd-form-layout-grid-container.fd-form-group .fd-form-item .fd-form-label--required,
+.fd-container.fd-form-layout-grid-container .fd-form-group .fd-form-item .fd-form-label--required {
+    padding-inline-end: 0.5rem;
+}
+.fd-container.fd-form-layout-grid-container.fd-form-group .fd-form-item .fd-form-label--required.fd-form-label--colon,
+.fd-container.fd-form-layout-grid-container .fd-form-group .fd-form-item .fd-form-label--required.fd-form-label--colon {
+    padding-inline-end: 0.75rem;
+}
+.fd-form-item .fd-form-label--colon {
+    padding-inline-end: 0.25rem;
+}
+.fd-form-item .fd-form-label--required {
+    padding-inline-end: 0.5rem;
+}
+.fd-form-item .fd-form-label--required.fd-form-label--colon {
+    padding-inline-end: 0.75rem;
 }

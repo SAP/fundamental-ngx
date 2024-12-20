@@ -23,7 +23,7 @@ jobs:
             matrix:
                 agent: [1, 2, 3, 4, 5, 6, 7, 8]
         steps:
-            - uses: actions/checkout@v4.1.1
+            - uses: actions/checkout@v4.2.2
             - uses: ./.github/actions/nodejs
             - name: set up xvfb
               run: |
@@ -42,13 +42,13 @@ jobs:
                 working-directory: ${{ github.workspace }}
                 shell: bash
         steps:
-            - uses: actions/checkout@v4.1.1
+            - uses: actions/checkout@v4.2.2
               name: Checkout
               with:
                   ref: ${{ github.event.pull_request.head.sha }}
                   fetch-depth: 0
 
-            - uses: nrwl/nx-set-shas@v4.0.4
+            - uses: nrwl/nx-set-shas@v4.1.2
               name: Derive appropriate SHAs for base and head for nx-affected commands
               with:
                   main-branch-name: main
@@ -63,7 +63,7 @@ jobs:
               env:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
 
-            - uses: wagoid/commitlint-github-action@v5.4.5
+            - uses: wagoid/commitlint-github-action@v6.1.2
               name: Commit lint
 
             - name: Run Build, Lint and test commands
@@ -85,7 +85,7 @@ jobs:
                 working-directory: ${{ github.workspace }}
                 shell: bash
         steps:
-            - uses: actions/checkout@v4.1.1
+            - uses: actions/checkout@v4.2.2
               name: Checkout
               with:
                   fetch-depth: 0
@@ -131,7 +131,7 @@ jobs:
         name: Nx Cloud - Stop Agents
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4.1.1
+            - uses: actions/checkout@v4.2.2
             - uses: ./.github/actions/nodejs
             - name: Stop all running agents for this CI run
               run: npx nx-cloud stop-all-agents
