@@ -35,7 +35,6 @@ const FD_NAVIGATION_OVERFLOW_ITEM_CLASS = 'fd-navigation__container--hidden-over
     imports: [PortalModule, NgTemplateOutlet, NavigationListComponent, NavigationMoreButtonComponent],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    // eslint-disable-next-line @angular-eslint/no-host-metadata-property
     host: {
         class: 'fd-navigation__container fd-navigation__container--top',
         '[style.flex-grow]': '1'
