@@ -1862,7 +1862,8 @@ export class TableComponent<T = any>
     /** @hidden */
     private _setAppliedFilterNames(filters: CollectionFilter[]): void {
         const formattedFilters = filters.map((f) => ({
-            columnName: this._formatColumnName(f.field),
+            columnName: this._formatColumnName(f.fieldName || ''),
+
             params: this._formatParams(f.value)
         }));
 
@@ -1874,6 +1875,12 @@ export class TableComponent<T = any>
         if (typeof value !== 'object' || value === null) {
             return String(value); // Handle non-object values
         }
+
+        // handle array
+        if (Array.isArray(value)) {
+            return value.map((val) => this._formatParams(val)).join(', ');
+        }
+
 
         return Object.entries(value)
             .map(([key, val]) => `${key}: ${this._formatParams(val)}`) // Recursive call for nested objects

@@ -45,6 +45,7 @@
     <fdp-filter-step
         [columnKey]="activeFilterColumnKey!"
         [filter]="activeFilter!"
+        [columnName]="activeFilter!.label"
         [filterBy]="filterBy"
         (back)="goToFilters()"
         (valueChange)="applyFilter($event, activeFilter!)"
