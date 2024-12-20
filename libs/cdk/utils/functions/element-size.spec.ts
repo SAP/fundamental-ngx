@@ -6,7 +6,6 @@ const ELEMENT_DIMENSIONS = { width: 100, margin: 2, padding: 5 };
 
 @Component({
     template: '',
-    // eslint-disable-next-line @angular-eslint/no-host-metadata-property
     host: {
         '[style.display]': '"block"',
         '[style.box-sizing]': '"border-box"',

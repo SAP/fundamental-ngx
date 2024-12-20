@@ -22,7 +22,7 @@ export class CardCounterDirective implements OnInit, OnChanges, CssClassBuilder 
      * the status represented by the Object Status.
      * can be one of the following: 'negative' | 'critical' | 'positive' | 'informative' | 'neutral'
      */
-    statusInput = input<ObjectStatus>('neutral', { alias: 'status' });
+    statusInput = input<ObjectStatus>('neutral');
 
     /** @hidden */
     status: ObjectStatus;

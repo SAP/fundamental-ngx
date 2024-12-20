@@ -14492,7 +14492,7 @@ __metadata:
     ts-node: "npm:10.9.2"
     tsconfig-paths: "npm:4.1.0"
     tslib: "npm:^2.3.0"
-    typedoc: "npm:0.27.4"
+    typedoc: "npm:0.27.5"
     typedoc-plugin-merge-modules: "npm:5.1.0"
     typescript: "npm:5.6.3"
     wait-on: "npm:6.0.1"
@@ -25732,9 +25732,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:0.27.4":
-  version: 0.27.4
-  resolution: "typedoc@npm:0.27.4"
+"typedoc@npm:0.27.5":
+  version: 0.27.5
+  resolution: "typedoc@npm:0.27.5"
   dependencies:
     "@gerrit0/mini-shiki": "npm:^1.24.0"
     lunr: "npm:^2.3.9"
@@ -25745,7 +25745,7 @@ __metadata:
     typescript: 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x || 5.6.x || 5.7.x
   bin:
     typedoc: bin/typedoc
-  checksum: 10/420036e5bdadf0dc2e27d5c347807704cc1d8beb69666149ecd96cbd32b4fa2b5488c73e2d5c47b7712ff4233e63a98903d01f5bd49123cdd75fa09578c0595e
+  checksum: 10/de683457a23d5031a6632801315b82b8a554a4f650aefbcee1cf191b484939be226b45cf5b40a0c831d523cdffd854d27799df546ba173f5b71d60d3c14d0164
   languageName: node
   linkType: hard
 
@@ -25781,11 +25781,11 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A>=3 < 6#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.0.4#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.4.4#optional!builtin<compat/typescript>":
   version: 5.7.3
-  resolution: "typescript@patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=cef18b"
+  resolution: "typescript@patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10/3ac7b7e3e899273d2fbdce6e24b93d4d53a705ad7a7e4cc83b4c57bcb6d25948abcd2a21994f6b9c73ab03960f395aae95f0458de292a66ce0134233261714c3
+  checksum: 10/dc58d777eb4c01973f7fbf1fd808aad49a0efdf545528dab9b07d94fdcb65b8751742804c3057e9619a4627f2d9cc85547fdd49d9f4326992ad0181b49e61d81
   languageName: node
   linkType: hard
 
