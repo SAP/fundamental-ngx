@@ -99,7 +99,6 @@ export class LegendItemComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** @hidden */
     getColorClass(): string {
-        // return this.color() ? `fd-calendar-legend__item--${this.color()}` : '';
         return this.color ? `fd-calendar-legend__item--${this.color}` : '';
     }
 

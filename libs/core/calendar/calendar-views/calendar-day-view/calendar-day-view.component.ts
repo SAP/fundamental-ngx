@@ -319,6 +319,12 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
             this._buildDayViewGrid();
             this.changeDetRef.markForCheck();
         });
+
+        this.focusedService.cellSubject$.subscribe(({ cell, cellNumber }) => {
+            if (cell !== null && cellNumber !== null) {
+                this._focusOnLegendsDay(cell, cellNumber);
+            }
+        });
     }
 
     /** @hidden */
@@ -337,9 +343,6 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         }
         if (changes['specialDaysRules']) {
             this._buildDayViewGrid();
-        }
-        if (this.focusedService.getFocusedElement()) {
-            this._focusOnLegendsDay();
         }
     }
 
@@ -622,8 +625,12 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /** @hidden */
-    private _focusOnLegendsDay(): void {
-        console.log('Focused element', this.focusedService.getFocusedElement());
+    private _focusOnLegendsDay(cell: HTMLElement, specialNumber: number): void {
+        this._calendarDayList.forEach((day, index) => {
+            if (day.specialNumber === specialNumber) {
+                console.log('day', day);
+            }
+        });
     }
 
     /**
