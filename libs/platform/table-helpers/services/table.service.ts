@@ -6,6 +6,7 @@ import { skip } from 'rxjs/operators';
 import { DEFAULT_TABLE_STATE } from '../constants';
 
 import { toSignal } from '@angular/core/rxjs-interop';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { CollectionFilter, CollectionGroup, CollectionPage, CollectionSort, TableState } from '../interfaces';
 import {
     ColumnsChange,
@@ -17,7 +18,6 @@ import {
     SortChange
 } from '../models';
 import { TableColumn } from '../table-column';
-import { Nullable } from '@fundamental-ngx/cdk';
 
 export type TableStateChange =
     | TableStateProperty<'sort', SortChange>
@@ -191,9 +191,9 @@ export class TableService {
 
         const newFilterRules: CollectionFilter[] = filterRules
             ? filterRules.map((rule) => ({
-                ...rule,
-                fieldName: this._getFieldName(rule.field, rule.fieldName)
-            }))
+                  ...rule,
+                  fieldName: this._getFieldName(rule.field, rule.fieldName)
+              }))
             : [];
         const state: TableState = { ...prevState, filterBy: newFilterRules };
 

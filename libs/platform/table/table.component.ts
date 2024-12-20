@@ -1881,7 +1881,6 @@ export class TableComponent<T = any>
             return value.map((val) => this._formatParams(val)).join(', ');
         }
 
-
         return Object.entries(value)
             .map(([key, val]) => `${key}: ${this._formatParams(val)}`) // Recursive call for nested objects
             .join(', ');

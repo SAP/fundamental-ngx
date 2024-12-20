@@ -69,7 +69,6 @@ export class FilterStepComponent implements FiltersViewStep {
     @Input()
     columnName: string;
 
-
     /** Go back event */
     @Output()
     back: EventEmitter<void> = new EventEmitter<void>();
