@@ -16,7 +16,7 @@ export class FdTheme extends DefaultTheme {
 }
 
 export default async function compileTypedocs(_options: CompileTypedocExecutorSchema, context: ExecutorContext) {
-    const projectPath = context.workspace?.projects[context.projectName as string].root as string;
+    const projectPath = context.projectsConfigurations?.projects[context.projectName as string].root as string;
     const { outputPath } = readTargetOptions(
         {
             project: context.projectName as string,
