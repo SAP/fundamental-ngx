@@ -103,7 +103,7 @@ $colors: (
         border: 1px solid var(--sapContent_Illustrative_Color5);
         @for $i from 1 through 9 {
             .settings-selector-list-icon__cls-#{$i} {
-                fill: map-get($set-fill, 'fill_#{$i}');
+                fill: map.get($set-fill, 'fill_#{$i}');
             }
         }
     }
