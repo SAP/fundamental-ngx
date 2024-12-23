@@ -10,8 +10,6 @@ import {
 } from '@angular/core';
 import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { MenuModule } from '@fundamental-ngx/core/menu';
-import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
 
@@ -21,7 +19,7 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [ActionSheetModule, ButtonComponent, FdTranslatePipe, OverflowLayoutModule, MenuModule]
+    imports: [ActionSheetModule, ButtonComponent, FdTranslatePipe]
 })
 export class ShellbarActionsMobileComponent implements AfterContentChecked {
     /** @hidden */

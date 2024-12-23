@@ -1,3 +1,98 @@
+<fd-docs-section-title id="how-it-works" componentName="shellbar"> How it works </fd-docs-section-title>
+<description>
+    <ul>
+        <li>The shellbar should be placed inside the shell layout container.</li>
+        <li>The shellbar is fluid and responsive by default with proper margins and padding built in.</li>
+        <li>The shellbar actions are duplicated into the overflow menu on mobile screens.</li>
+        <li>
+            Product menu data gets passed as inputs to the <code>&lt;fd-product-menu></code> component. The user, user
+            menu and product switcher are passed as inputs to the <code>&lt;fd-shellbar-actions></code> component. Data
+            for each action gets passed as inputs to the <code>&lt;fd-shellbar-action></code> component. The response to
+            clicks on any of these items is handled via callback functions for each object. See the 'collapsible'
+            example to gain an understanding of how this works.
+        </li>
+    </ul>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="basic" componentName="shellbar"> Basic </fd-docs-section-title>
+<description>
+    This example shows the minimum shellbar for a single application product with only user settings. If no user
+    thumbnail is available then display initials.
+</description>
+<component-example>
+    <fd-shellbar-basic-example></fd-shellbar-basic-example>
+</component-example>
+<code-example [exampleFiles]="shellbarBasicExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="overflow-menu" componentName="shellbar">
+    Links with collapsible menu and product switcher.
+</fd-docs-section-title>
+<description>
+    <p>The shellbar can have 4 different sizes <code>'s' | 'm' | 'l' | 'xl'</code>.</p>
+    <p>
+        When a product has multiple links, the product links should collapse into an overflow menu on mobile screens
+        (<code>s</code> size).
+    </p>
+    <p>All actions, except for the user menu, should be collapsed.</p>
+    <p>
+        <code>ProductSwitchComponent</code> and <code>ProductMenuComponent</code> have properties straight from popover
+        component, so some customisation can be added, by passing inputs ex. <code>[position]="'bottom-end'"</code>.
+    </p>
+</description>
+<component-example>
+    <fd-shellbar-collapsible-example></fd-shellbar-collapsible-example>
+</component-example>
+<code-example [exampleFiles]="shellbarCollapsible"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="responsive" componentName="shellbar"> Responsive Shellbar </fd-docs-section-title>
+<description>
+    If no <code>size</code> Input property provided, Shellbar will automatically determine which size to apply based on
+    the current width of it.
+</description>
+<component-example>
+    <fd-shellbar-responsive-example></fd-shellbar-responsive-example>
+</component-example>
+<code-example [exampleFiles]="shellbarResponsive"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="side-growing-group" componentName="shellbar">
+    Shellbar with Growing groups
+</fd-docs-section-title>
+<description>
+    <p>
+        The shellbar is optimized to be used with central group for the search. This creates a necessity of centering
+        the groups by giving them equal width.
+    </p>
+    <p>
+        If the design suggests that each group can have own width, developers can pass <code>[groupFlex]</code> input
+        property defining for each group whether it can shrink, allowing other groups to grow.
+    </p>
+</description>
+<component-example>
+    <fd-shellbar-growing-group-example></fd-shellbar-growing-group-example>
+</component-example>
+<code-example [exampleFiles]="shellbarGrowingGroupExampleFiles"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="custom-user-menu" componentName="shellbar">
+    Shellbar with custom user menu
+</fd-docs-section-title>
+<description>
+    <p>Shellbar has ability to render custom user menu. This can be achieved by passing custom template</p>
+</description>
+<component-example>
+    <fd-shellbar-custom-user-menu-example></fd-shellbar-custom-user-menu-example>
+</component-example>
+<code-example [exampleFiles]="shellbarCustomUserMenuExample"></code-example>
+<separator></separator>
+
 <fd-docs-section-title id="options" componentName="shellbar">
     Shellbar with branding and context area
 </fd-docs-section-title>

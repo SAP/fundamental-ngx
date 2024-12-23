@@ -176,7 +176,6 @@ export class ShellbarActionsComponent implements OnDestroy {
         this._searchPortal = portal;
         this._addSearchIcon = true;
         this.currentSize = size;
-        this.showSearch = size === 'xl';
         this._searchComponent = searchComponent;
         this._toggleSearchPortal(this.showSearch);
         this._cd.detectChanges();
