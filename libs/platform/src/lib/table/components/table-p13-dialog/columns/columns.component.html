@@ -109,6 +109,7 @@
                 [class.fd-select-item--active]="item.active"
                 [selected]="item.selected"
                 (focus)="_setActiveColumn(item)"
+                [preventClick]="true"
             >
                 <fd-checkbox [(ngModel)]="item.selected" (ngModelChange)="_onToggleColumn()"></fd-checkbox>
                 <span fd-list-title>
