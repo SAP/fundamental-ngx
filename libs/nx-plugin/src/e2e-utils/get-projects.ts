@@ -17,5 +17,5 @@ export async function getProjects(
     if (affected) {
         return await affectedProjects(base, head);
     }
-    return Object.keys(context.workspace?.projects || []).map((p) => p);
+    return Object.keys(context.projectsConfigurations?.projects || []).map((p) => p);
 }
