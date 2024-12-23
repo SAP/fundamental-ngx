@@ -63,7 +63,7 @@ module.exports = ({ runner, specs, projectName }) => {
             grep: null,
             invertGrep: null
         },
-        before () {
+        before() {
             browser.addCommand(
                 'focus',
                 function () {
@@ -89,7 +89,7 @@ module.exports = ({ runner, specs, projectName }) => {
         },
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        async afterTest (test, context, { error, result, duration, passed, retries }) {
+        async afterTest(test, context, { error, result, duration, passed, retries }) {
             if (error !== undefined) {
                 const html = await browser.getPageSource();
                 allureReporter.addAttachment('page.html', html, 'text/html');
