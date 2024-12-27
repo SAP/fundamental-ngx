@@ -8,7 +8,7 @@ const lernaJson = JSON.parse(readFileSync(`./lerna.json`, 'utf8'));
 
 const aboveMinorVersion = (version) => {
     const parsed = parse(version);
-    return `^${parsed!.major}.${parsed!.minor}.0`;
+    return `^${parsed?.major}.${parsed?.minor}.0`;
 };
 
 const angularVersion =

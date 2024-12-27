@@ -3,13 +3,12 @@ import {
     DeclarationHierarchy,
     DeclarationReflection,
     DefaultThemeRenderContext,
-    DocumentReflection,
     JSX,
     PageEvent,
     Reflection,
     RenderTemplate,
     SignatureReflection,
-    SomeType
+    Type
 } from 'typedoc';
 import { index } from './partials';
 import { comment } from './partials/comment';
@@ -26,18 +25,13 @@ import { reflectionTemplate } from './partials/reflection';
 import { type } from './partials/type';
 
 export class FdThemeContext extends DefaultThemeRenderContext {
+    override analytics = () => <></>;
     override footer = () => <></>;
     override header = () => <></>;
     override sidebar = () => <></>;
     override pageSidebar = () => <></>;
     override toolbar = () => <></>;
-    override member = (props: DeclarationReflection | DocumentReflection) => {
-        if (props instanceof DeclarationReflection || props instanceof SignatureReflection) {
-            return member(this, props);
-        }
-        // Handle DocumentReflection accordingly, if needed
-        return <>{JSON.stringify(props)}</>; // Example placeholder for handling DocumentReflection
-    };
+    override member = (props: DeclarationReflection) => member(this, props);
     override memberSignatures = (props: DeclarationReflection) => memberSignatures(this, props);
     comment = (props: Reflection) => comment(props);
     override commentTags = (props: Reflection) => commentTags(this, props);
@@ -53,7 +47,7 @@ export class FdThemeContext extends DefaultThemeRenderContext {
 
     override memberGetterSetter = (props: DeclarationReflection) => memberGetterSetter(this, props);
 
-    override type = (tp: SomeType | undefined) => type(this, tp);
+    override type = (tp: Type | undefined) => type(this, tp);
 
     override reflectionTemplate = (props: PageEvent<ContainerReflection>) => reflectionTemplate(this, props);
 }

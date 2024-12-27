@@ -1,5 +1,6 @@
 @use 'sass:math';
-@import 'fundamental-styles/index';
+@use 'fundamental-styles/index.scss' as fundamental-styles;
+@use 'fundamental-styles/mixins';
 
 // These styles will move to fundamental/styles
 $line-container-width: 1.5rem;
@@ -25,7 +26,7 @@ $line-width: 0.0625rem;
     font-size: 1.375rem;
 
     [class*='sap-icon'] {
-        @include fd-flex() {
+        @include mixins.fd-flex() {
             justify-content: center;
         }
     }
@@ -40,7 +41,7 @@ $line-width: 0.0625rem;
 }
 
 .fd-timeline__node-wrapper {
-    @include fd-flex();
+    @include mixins.fd-flex();
     position: relative;
     box-sizing: border-box;
     flex-shrink: 0;
@@ -68,13 +69,13 @@ $line-width: 0.0625rem;
 
             &--icon {
                 .fd-timeline__icon-wrapper {
-                    @include fd-set-padding-left(0.25rem);
+                    @include mixins.fd-set-padding-left(0.25rem);
                 }
             }
         }
 
         .fd-timeline__post {
-            @include fd-set-margin-right(1.25rem);
+            @include mixins.fd-set-margin-right(1.25rem);
         }
 
         .fd-timeline__main-line {
@@ -87,15 +88,15 @@ $line-width: 0.0625rem;
             width: 100%;
             display: flex;
             align-items: center;
-            @include fd-set-position-left(0.5rem);
+            @include mixins.fd-set-position-left(0.5rem);
         }
 
         .fd-timeline__icon-wrapper {
             flex: 0;
-            @include fd-set-padding-left(0.75rem);
-            @include fd-set-padding-right(0.25rem);
+            @include mixins.fd-set-padding-left(0.75rem);
+            @include mixins.fd-set-padding-right(0.25rem);
 
-            @include fd-rtl() {
+            @include mixins.fd-rtl() {
                 padding-left: 0.25rem;
                 padding-right: 0.75rem;
             }
@@ -111,16 +112,16 @@ $line-width: 0.0625rem;
 
                 .fd-timeline__post {
                     margin-bottom: 1rem;
-                    @include fd-after() {
-                        @include fd-timeline-arrow-rotate(135deg);
+                    @include mixins.fd-after() {
+                        @include fundamental-styles.fd-timeline-arrow-rotate(135deg);
 
-                        left: $fd-timeline-arrow-offset;
-                        bottom: $fd-timeline-post-arrow-offset;
+                        left: fundamental-styles.$fd-timeline-arrow-offset;
+                        bottom: fundamental-styles.$fd-timeline-post-arrow-offset;
                     }
 
-                    @include fd-after-rtl() {
+                    @include mixins.fd-after-rtl() {
                         left: auto;
-                        right: $fd-timeline-arrow-offset;
+                        right: fundamental-styles.$fd-timeline-arrow-offset;
                     }
                 }
             }
@@ -134,22 +135,22 @@ $line-width: 0.0625rem;
 
                 .fd-timeline__post {
                     margin-top: 1rem;
-                    @include fd-after() {
-                        @include fd-timeline-arrow-rotate(315deg);
+                    @include mixins.fd-after() {
+                        @include fundamental-styles.fd-timeline-arrow-rotate(315deg);
 
-                        left: $fd-timeline-arrow-offset;
-                        top: $fd-timeline-post-arrow-offset;
+                        left: fundamental-styles.$fd-timeline-arrow-offset;
+                        top: fundamental-styles.$fd-timeline-post-arrow-offset;
                     }
 
-                    @include fd-after-rtl() {
+                    @include mixins.fd-after-rtl() {
                         left: auto;
-                        right: $fd-timeline-arrow-offset;
+                        right: fundamental-styles.$fd-timeline-arrow-offset;
                     }
                 }
             }
 
             &--with-offset {
-                @include fd-set-padding-left(4.688rem);
+                @include mixins.fd-set-padding-left(4.688rem);
             }
         }
     }
@@ -203,25 +204,25 @@ $line-width: 0.0625rem;
 
             &--first {
                 .fd-timeline__node-container {
-                    @include fd-set-position-right(-$line-container-width);
+                    @include mixins.fd-set-position-right(-$line-container-width);
                 }
 
                 .fd-timeline__post {
-                    @include fd-set-margin-right(1rem);
+                    @include mixins.fd-set-margin-right(1rem);
 
-                    @include fd-after() {
-                        @include fd-timeline-arrow-rotate(45deg);
+                    @include mixins.fd-after() {
+                        @include fundamental-styles.fd-timeline-arrow-rotate(45deg);
 
-                        top: $fd-timeline-arrow-offset;
-                        right: $fd-timeline-post-arrow-offset;
+                        top: fundamental-styles.$fd-timeline-arrow-offset;
+                        right: fundamental-styles.$fd-timeline-post-arrow-offset;
                     }
 
-                    @include fd-rtl() {
+                    @include mixins.fd-rtl() {
                         &::after {
-                            @include fd-timeline-arrow-rotate(225deg);
+                            @include fundamental-styles.fd-timeline-arrow-rotate(225deg);
 
                             right: auto;
-                            left: $fd-timeline-post-arrow-offset;
+                            left: fundamental-styles.$fd-timeline-post-arrow-offset;
                         }
                     }
                 }
@@ -229,23 +230,23 @@ $line-width: 0.0625rem;
 
             &--second {
                 .fd-timeline__node-container {
-                    @include fd-set-position-left(-$line-container-width);
+                    @include mixins.fd-set-position-left(-$line-container-width);
                 }
 
                 .fd-timeline__post {
-                    @include fd-set-margin-left(1rem);
-                    @include fd-after() {
-                        @include fd-timeline-arrow-rotate(225deg);
+                    @include mixins.fd-set-margin-left(1rem);
+                    @include mixins.fd-after() {
+                        @include fundamental-styles.fd-timeline-arrow-rotate(225deg);
 
-                        top: $fd-timeline-arrow-offset;
-                        left: $fd-timeline-post-arrow-offset;
+                        top: fundamental-styles.$fd-timeline-arrow-offset;
+                        left: fundamental-styles.$fd-timeline-post-arrow-offset;
                     }
 
-                    @include fd-after-rtl() {
-                        @include fd-timeline-arrow-rotate(45deg);
+                    @include mixins.fd-after-rtl() {
+                        @include fundamental-styles.fd-timeline-arrow-rotate(45deg);
 
                         left: auto;
-                        right: $fd-timeline-post-arrow-offset;
+                        right: fundamental-styles.$fd-timeline-post-arrow-offset;
                     }
                 }
             }

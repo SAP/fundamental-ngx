@@ -25,7 +25,9 @@ export default async function compileTypedocs(_options: CompileTypedocExecutorSc
         },
         context
     );
-    const { tsConfig } = readTargetOptions({ project: context.projectName as string, target: 'build' }, context);
+    const tsConfig: string =
+        _options.tsConfig ||
+        readTargetOptions({ project: context.projectName as string, target: 'build' }, context).tsConfig;
     const ngPackageJsonFiles = fastGlobSync(projectPath + '/**/*/ng-package.json');
     const entryPoints = ngPackageJsonFiles.map((f) => {
         const json = JSON.parse(readFileSync(f, 'utf-8'));
@@ -44,11 +46,6 @@ export default async function compileTypedocs(_options: CompileTypedocExecutorSc
         plugin: ['typedoc-plugin-merge-modules'],
         mergeModulesRenameDefaults: true,
         mergeModulesMergeMode: 'project',
-        compilerOptions: {
-            jsx: 'react',
-            jsxFactory: 'JSX.createElement',
-            jsxFragmentFactory: 'JSX.Fragment'
-        },
         theme: 'fd-typedoc'
     } as unknown as Partial<TypeDocOptions>);
     app.options.addReader(new TSConfigReader());

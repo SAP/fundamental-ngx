@@ -12,7 +12,6 @@ import {
     SignatureReflection,
     TypeParameterReflection
 } from 'typedoc';
-import { Internationalization, TranslatedString } from 'typedoc/dist/lib/internationalization';
 
 export function anchorIcon(context: DefaultThemeRenderContext, anchor: string | undefined) {
     if (!anchor) return <></>;
@@ -34,18 +33,11 @@ export function getDisplayName(refl: Reflection): string {
 }
 
 export function reflectionFlags(_context: DefaultThemeRenderContext, props: Reflection) {
-    let intl: Internationalization;
-    if (_context.theme.application && (_context.theme.application as any).i18n) {
-        intl = (_context.theme.application as any).i18n as Internationalization;
-    } else {
-        intl = _context.theme.owner.application.internationalization;
-    }
-
-    const allFlags: TranslatedString[] = props.flags.getFlagStrings(intl);
+    const allFlags = [...props.flags];
     if (props.comment) {
         for (const tag of props.comment.modifierTags) {
             if (!flagsNotRendered.includes(tag)) {
-                allFlags.push(camelToTitleCase(tag.substring(1)) as unknown as TranslatedString);
+                allFlags.push(camelToTitleCase(tag.substring(1)));
             }
         }
     }
