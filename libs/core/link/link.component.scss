@@ -1,5 +1,5 @@
-@import '@sap-ui/common-css/dist/sass/_common-mixins.scss';
-@import 'fundamental-styles/dist/link.css';
+@use '@sap-ui/common-css/dist/sass/_common-mixins.scss' as sap;
+@use 'fundamental-styles/dist/link.css';
 
 $block: fd-link;
 
@@ -13,11 +13,11 @@ $block: fd-link;
         justify-content: center;
         align-items: center;
         &:first-child {
-            @include sap-set-margin-end(var(--fdLink_Icon_Spacing, 0));
+            @include sap.sap-set-margin-end(var(--fdLink_Icon_Spacing, 0));
         }
 
         &:last-child {
-            @include sap-set-margin-begin(var(--fdLink_Icon_Spacing, 0));
+            @include sap.sap-set-margin-begin(var(--fdLink_Icon_Spacing, 0));
         }
     }
 }

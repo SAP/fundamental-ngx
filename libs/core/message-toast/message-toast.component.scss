@@ -1,5 +1,5 @@
-@import '@angular/cdk/overlay-prebuilt';
-@import 'fundamental-styles/dist/message-toast.css';
+@use '@angular/cdk/overlay-prebuilt.css';
+@use 'fundamental-styles/dist/message-toast.css';
 
 .fn-toast-overlay-container {
     .cdk-overlay-pane {

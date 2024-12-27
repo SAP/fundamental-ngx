@@ -5,9 +5,9 @@ import {
     JSX,
     PageEvent,
     ReflectionKind,
-    SignatureReflection
+    ReflectionType
 } from 'typedoc';
-import { classNames, fixedMarkdown, getKindClass, hasTypeParameters } from '../utils';
+import { classNames, fixedMarkdown, hasTypeParameters } from '../utils';
 
 export function reflectionTemplate(context: DefaultThemeRenderContext, props: PageEvent<ContainerReflection>) {
     if (
@@ -62,12 +62,23 @@ export function reflectionTemplate(context: DefaultThemeRenderContext, props: Pa
                     {!!props.model.signatures && (
                         <section class="tsd-panel">{context.memberSignatures(props.model)}</section>
                     )}
-                    {!!props.model.indexSignatures?.length && (
+                    {!!props.model.indexSignature && (
                         <section class={classNames({ 'tsd-panel': true }, context.getReflectionClasses(props.model))}>
-                            <h4 class="tsd-before-signature">{context.i18n.theme_indexable()}</h4>
-                            <ul class="tsd-signatures">
-                                {props.model.indexSignatures.map((index) => renderIndexSignature(context, index))}
-                            </ul>
+                            <h4 class="tsd-before-signature">Indexable</h4>
+                            <div class="tsd-signature">
+                                <span class="tsd-signature-symbol">[</span>
+                                {props.model.indexSignature.parameters!.map((item) => (
+                                    <>
+                                        {item.name}: {context.type(item.type)}
+                                    </>
+                                ))}
+                                <span class="tsd-signature-symbol">]: </span>
+                                {context.type(props.model.indexSignature.type)}
+                            </div>
+                            {context.commentSummary(props.model.indexSignature)}
+                            {context.commentTags(props.model.indexSignature)}
+                            {props.model.indexSignature?.type instanceof ReflectionType &&
+                                context.parameter(props.model.indexSignature.type.declaration)}
                         </section>
                     )}
                     {/* {!props.model.signatures && context.memberSources(props.model)} */}
@@ -76,26 +87,5 @@ export function reflectionTemplate(context: DefaultThemeRenderContext, props: Pa
             {!!props.model.children?.length && context.index(props.model)}
             {context.members(props.model)}
         </>
-    );
-}
-
-function renderIndexSignature(context: DefaultThemeRenderContext, index: SignatureReflection) {
-    return (
-        <li class="tsd-index-signature">
-            <div class="tsd-signature">
-                {index.flags.isReadonly && <span class="tsd-signature-keyword">readonly </span>}
-                <span class="tsd-signature-symbol">[</span>
-                {index.parameters!.map((item) => (
-                    <>
-                        <span class={getKindClass(item)}>{item.name}</span>: {context.type(item.type)}
-                    </>
-                ))}
-                <span class="tsd-signature-symbol">]: </span>
-                {context.type(index.type)}
-            </div>
-            {context.commentSummary(index)}
-            {context.commentTags(index)}
-            {context.typeDetailsIfUseful(index.type)}
-        </li>
     );
 }
