@@ -626,11 +626,23 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
 
     /** @hidden */
     private _focusOnLegendsDay(cell: HTMLElement, specialNumber: number): void {
-        this._calendarDayList.forEach((day, index) => {
-            if (day.specialNumber === specialNumber) {
-                console.log('day', day);
-            }
-        });
+        const elements = this.eRef.nativeElement.querySelectorAll(`.fd-calendar__item--legend-${specialNumber}`);
+        const allElements = this.eRef.nativeElement.querySelectorAll('.fd-calendar__item');
+
+        if (elements.length > 0) {
+            allElements.forEach((element) => {
+                if (!element.classList.contains(`fd-calendar__item--legend-${specialNumber}`)) {
+                    element.classList.forEach((className) => {
+                        if (
+                            className.startsWith('fd-calendar__item--legend-') &&
+                            !className.endsWith(specialNumber.toString())
+                        ) {
+                            element.classList.remove(className);
+                        }
+                    });
+                }
+            });
+        }
     }
 
     /**
