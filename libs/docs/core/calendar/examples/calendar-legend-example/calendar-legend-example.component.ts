@@ -33,7 +33,7 @@ export class CalendarLegendExampleComponent {
     specialDays: SpecialDayRule<FdDate>[] = [
         {
             specialDayNumber: 5,
-            rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) === 2,
+            rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) in [2, 9, 16],
             legendText: 'Special Day 1'
         },
         {

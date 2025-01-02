@@ -320,9 +320,9 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
             this.changeDetRef.markForCheck();
         });
 
-        this.focusedService.cellSubject$.subscribe(({ cell, cellNumber }) => {
+        this.focusedService.cellSubject$.subscribe(({ cell, calIndex, cellNumber }) => {
             if (cell !== null && cellNumber !== null) {
-                this._focusOnLegendsDay(cell, cellNumber);
+                this._focusOnLegendsDay(cell, calIndex, cellNumber);
             }
         });
     }
@@ -625,35 +625,39 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
     }
 
     /** @hidden */
-    private _focusOnLegendsDay(cell: HTMLElement, specialNumber: number): void {
+    private _focusOnLegendsDay(cell: HTMLElement, calIndex: number | null, specialNumber: number): void {
         const allElements = this.eRef.nativeElement.querySelectorAll('.fd-calendar__item');
         const elementToSpecialDayMap = new Map<HTMLElement, number>();
-        allElements.forEach((element) => {
-            element.classList.forEach((className) => {
-                if (className.startsWith('fd-calendar__item--legend-')) {
-                    elementToSpecialDayMap.set(element, parseInt(className.split('-').pop()!, 10));
-                }
-            });
-            if (!element.classList.contains(`fd-calendar__item--legend-${specialNumber}`)) {
+        const id = this.id();
+
+        if (calIndex !== null && id && Number.parseInt(id.split('')[id.length - 1], 10) === calIndex) {
+            allElements.forEach((element) => {
                 element.classList.forEach((className) => {
-                    if (
-                        className.startsWith('fd-calendar__item--legend-') &&
-                        !className.endsWith(specialNumber.toString())
-                    ) {
-                        element.classList.remove(className);
+                    if (className.startsWith('fd-calendar__item--legend-')) {
+                        elementToSpecialDayMap.set(element, parseInt(className.split('-').pop()!, 10));
                     }
                 });
-            }
-            element.addEventListener('focusout', () => {
-                element.classList.add(`fd-calendar__item--legend-${elementToSpecialDayMap.get(element)}`);
+                if (!element.classList.contains(`fd-calendar__item--legend-${specialNumber}`)) {
+                    element.classList.forEach((className) => {
+                        if (
+                            className.startsWith('fd-calendar__item--legend-') &&
+                            !className.endsWith(specialNumber.toString())
+                        ) {
+                            element.classList.remove(className);
+                        }
+                    });
+                }
+                element.addEventListener('focusout', () => {
+                    element.classList.add(`fd-calendar__item--legend-${elementToSpecialDayMap.get(element)}`);
+                });
             });
-        });
 
-        cell.addEventListener('focusout', () => {
-            elementToSpecialDayMap.forEach((specialElementNumber, element) => {
-                element.classList.add(`fd-calendar__item--legend-${specialElementNumber}`);
+            cell.addEventListener('focusout', () => {
+                elementToSpecialDayMap.forEach((specialElementNumber, element) => {
+                    element.classList.add(`fd-calendar__item--legend-${specialElementNumber}`);
+                });
             });
-        });
+        }
     }
 
     /**

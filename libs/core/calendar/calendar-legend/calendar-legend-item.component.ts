@@ -35,11 +35,9 @@ let id = 0;
 })
 export class LegendItemComponent implements OnChanges, OnInit, CssClassBuilder {
     /** The text of the legend item */
-    // text = input<string>('');
     @Input() text: string;
 
     /** The color of the legend item marker */
-    // color = input<Nullable<string>>('');
     @Input() color: string;
 
     /** Sending the focused item to parent */

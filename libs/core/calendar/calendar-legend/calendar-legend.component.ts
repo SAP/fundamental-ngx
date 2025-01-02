@@ -12,13 +12,16 @@ import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { CalendarLegendFocusingService } from './calendar-legend-focusing.service';
 import { LegendItemComponent } from './calendar-legend-item.component';
 
+let calIndex = 0;
+
 @Component({
     selector: 'fd-calendar-legend',
     standalone: true,
     template: ` <ng-content></ng-content> `,
     host: {
         class: 'fd-calendar-legend',
-        '[class.fd-calendar-legend--auto-column]': 'col()'
+        '[class.fd-calendar-legend--auto-column]': 'col()',
+        '[attr.data-calendar-index]': 'calIndex'
     }
 })
 export class CalendarLegendComponent<D> implements OnInit, AfterContentInit {
@@ -34,6 +37,9 @@ export class CalendarLegendComponent<D> implements OnInit, AfterContentInit {
      * Make it a column instead
      */
     col = input<boolean>(false);
+
+    /** Calendar's index */
+    calIndex = input<number>(calIndex++);
 
     /** Element getting focused */
     focusedElement = input<string>('');
@@ -77,6 +83,10 @@ export class CalendarLegendComponent<D> implements OnInit, AfterContentInit {
 
     /** @hidden */
     focusedElementEventHandle(event: string, specialNumber?: number): void {
-        this.focusingService.setFocusOnCell(this.elementRef.nativeElement.querySelector(`#${event}`), specialNumber);
+        this.focusingService.setFocusOnCell(
+            this.elementRef.nativeElement.querySelector(`#${event}`),
+            this.calIndex(),
+            specialNumber
+        );
     }
 }
