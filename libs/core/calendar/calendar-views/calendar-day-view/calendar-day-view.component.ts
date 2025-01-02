@@ -626,23 +626,34 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
 
     /** @hidden */
     private _focusOnLegendsDay(cell: HTMLElement, specialNumber: number): void {
-        const elements = this.eRef.nativeElement.querySelectorAll(`.fd-calendar__item--legend-${specialNumber}`);
         const allElements = this.eRef.nativeElement.querySelectorAll('.fd-calendar__item');
-
-        if (elements.length > 0) {
-            allElements.forEach((element) => {
-                if (!element.classList.contains(`fd-calendar__item--legend-${specialNumber}`)) {
-                    element.classList.forEach((className) => {
-                        if (
-                            className.startsWith('fd-calendar__item--legend-') &&
-                            !className.endsWith(specialNumber.toString())
-                        ) {
-                            element.classList.remove(className);
-                        }
-                    });
+        const elementToSpecialDayMap = new Map<HTMLElement, number>();
+        allElements.forEach((element) => {
+            element.classList.forEach((className) => {
+                if (className.startsWith('fd-calendar__item--legend-')) {
+                    elementToSpecialDayMap.set(element, parseInt(className.split('-').pop()!, 10));
                 }
             });
-        }
+            if (!element.classList.contains(`fd-calendar__item--legend-${specialNumber}`)) {
+                element.classList.forEach((className) => {
+                    if (
+                        className.startsWith('fd-calendar__item--legend-') &&
+                        !className.endsWith(specialNumber.toString())
+                    ) {
+                        element.classList.remove(className);
+                    }
+                });
+            }
+            element.addEventListener('focusout', () => {
+                element.classList.add(`fd-calendar__item--legend-${elementToSpecialDayMap.get(element)}`);
+            });
+        });
+
+        cell.addEventListener('focusout', () => {
+            elementToSpecialDayMap.forEach((specialElementNumber, element) => {
+                element.classList.add(`fd-calendar__item--legend-${specialElementNumber}`);
+            });
+        });
     }
 
     /**
