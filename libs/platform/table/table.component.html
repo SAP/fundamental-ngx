@@ -137,6 +137,7 @@
                                     (click)="_onRowClick(row, $event)"
                                     fdp-table-popping-row
                                     [secondary]="true"
+                                    [style.cursor]="rowsActivable || !!row.navigatable ? 'pointer' : 'auto'"
                                     [style.height.px]="secondaryRowHeight"
                                     [selectionMode]="selectionMode"
                                     [row]="row"
