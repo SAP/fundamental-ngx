@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.0...v0.54.2-rc.1) (2024-12-30)
+
+
+### Bug Fixes
+
+* **core:** add spinbutton role to step input ([#12881](https://github.com/SAP/fundamental-ngx/issues/12881)) ([cf145ab](https://github.com/SAP/fundamental-ngx/commit/cf145ab26a0ef9c0e59108996ef468bc31e1a3dc))
+
+
+
+
+
+## [0.54.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.54.1...v0.54.2-rc.0) (2024-12-23)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.54.1](https://github.com/SAP/fundamental-ngx/compare/v0.54.1-rc.0...v0.54.1) (2024-12-19)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.54.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.54.0...v0.54.1-rc.0) (2024-12-18)
+
+
+### Bug Fixes
+
+* **core:** bring inline SVG support to illustration message ([#12856](https://github.com/SAP/fundamental-ngx/issues/12856)) ([6a74537](https://github.com/SAP/fundamental-ngx/commit/6a74537c2c1e1b7495f33e0116771c477a939ccc))
+
+
+
+
+
 # [0.54.0](https://github.com/SAP/fundamental-ngx/compare/v0.54.0-rc.2...v0.54.0) (2024-12-10)
 
 **Note:** Version bump only for package fundamental-ngx
