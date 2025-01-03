@@ -39,6 +39,7 @@ class TableComponentMock
     showFilterSettingsInToolbar(): void {}
     showSortSettingsInToolbar(): void {}
     showGroupSettingsInToolbar(): void {}
+    showSettingsInToolbar(): void {}
     group(): void {}
     search(): void {}
     sort(): void {}
