@@ -88,7 +88,7 @@
     "@nx/devkit": "19.2.3",
     "@nx/eslint": "19.2.3",
     "@nx/eslint-plugin": "19.2.3",
-    "@nx/jest": "19.2.3",
+    "@nx/jest": "20.3.0",
     "@nx/js": "19.2.3",
     "@nx/plugin": "19.2.3",
     "@nx/workspace": "19.2.3",
