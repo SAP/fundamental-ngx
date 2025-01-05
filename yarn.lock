@@ -6250,13 +6250,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/easy-table@npm:^0.0.32":
-  version: 0.0.32
-  resolution: "@types/easy-table@npm:0.0.32"
-  checksum: 10/0ac0feb1d586930b794b67009cb75c35f9a10b1e5c621e63ff2248c7020af7a2d54b9d38f325c09c34b4b032fb328118b5b2151c6ca09b57c57e76a2e04f7c80
-  languageName: node
-  linkType: hard
-
 "@types/ejs@npm:^3.0.5":
   version: 3.1.5
   resolution: "@types/ejs@npm:3.1.5"
@@ -6605,6 +6598,15 @@ __metadata:
   dependencies:
     undici-types: "npm:~5.26.4"
   checksum: 10/c6383d4f6f3b3f1d48234b2e71e20d1ead4ac4ee31bbca7ef8719eedd1e79a425b35952d4b1ba3eff0a4e3eebd37b8a6e85e9af3bb88aa7b3fdae9cb66630820
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^20.1.0":
+  version: 20.17.11
+  resolution: "@types/node@npm:20.17.11"
+  dependencies:
+    undici-types: "npm:~6.19.2"
+  checksum: 10/286ee7f9aeda720933a13d6f9060beb1cc07b5a11f2fee02b3436ab4b9bb38d0121795b955209f21eb2c3b3748c1090b14df6f15219cb0d277c619343304baf9
   languageName: node
   linkType: hard
 
@@ -7222,6 +7224,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@wdio/logger@npm:9.4.4":
+  version: 9.4.4
+  resolution: "@wdio/logger@npm:9.4.4"
+  dependencies:
+    chalk: "npm:^5.1.2"
+    loglevel: "npm:^1.6.0"
+    loglevel-plugin-prefix: "npm:^0.8.4"
+    strip-ansi: "npm:^7.1.0"
+  checksum: 10/4a27cb62bff8581ed42978e4ae14ba0096cfc8aa8b9208ecbd3856a20e58273fa774ca79d6455fc0d8e55484052e30f55ad4e33d3d0bc1a891d17ced3196006a
+  languageName: node
+  linkType: hard
+
 "@wdio/protocols@npm:7.16.7":
   version: 7.16.7
   resolution: "@wdio/protocols@npm:7.16.7"
@@ -7265,6 +7279,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@wdio/reporter@npm:9.5.0":
+  version: 9.5.0
+  resolution: "@wdio/reporter@npm:9.5.0"
+  dependencies:
+    "@types/node": "npm:^20.1.0"
+    "@wdio/logger": "npm:9.4.4"
+    "@wdio/types": "npm:9.5.0"
+    diff: "npm:^7.0.0"
+    object-inspect: "npm:^1.12.0"
+  checksum: 10/1705f6fc7ee6666c1b89a9d2406b3f862d87febdf46e44396a865fbf245f736dbaed4efa67b25f1fb9bec751690d739eb853c92ea83602a4a407bc04e4e75374
+  languageName: node
+  linkType: hard
+
 "@wdio/runner@npm:7.16.15":
   version: 7.16.15
   resolution: "@wdio/runner@npm:7.16.15"
@@ -7297,19 +7324,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wdio/spec-reporter@npm:7.7.3":
-  version: 7.7.3
-  resolution: "@wdio/spec-reporter@npm:7.7.3"
+"@wdio/spec-reporter@npm:9.5.0":
+  version: 9.5.0
+  resolution: "@wdio/spec-reporter@npm:9.5.0"
   dependencies:
-    "@types/easy-table": "npm:^0.0.32"
-    "@wdio/reporter": "npm:7.7.3"
-    "@wdio/types": "npm:7.7.3"
-    chalk: "npm:^4.0.0"
-    easy-table: "npm:^1.1.1"
-    pretty-ms: "npm:^7.0.0"
-  peerDependencies:
-    "@wdio/cli": ^7.0.0
-  checksum: 10/bde1fe22a01345c0a6f385fdf7bac9241d4bf17bb7ba3b0be62cac46df0d081b105ee0a1556f0a017020c3c4d14da777927817af7aee9b6419737b2d8b004a4a
+    "@wdio/reporter": "npm:9.5.0"
+    "@wdio/types": "npm:9.5.0"
+    chalk: "npm:^5.1.2"
+    easy-table: "npm:^1.2.0"
+    pretty-ms: "npm:^9.0.0"
+  checksum: 10/a83dd5dd33224ad4fa413da5c069ce7102dd32b6126ad90d1701450288b7cac9725fc0bd3939e9c167c2d662c63d3d3b373b6c8ce6db0db7b3229795db7047f2
   languageName: node
   linkType: hard
 
@@ -7354,6 +7378,15 @@ __metadata:
     "@types/node": "npm:^14.14.31"
     got: "npm:^11.8.1"
   checksum: 10/0b5d80b262b4c2f7d41449561399e4c092c191a1a73664cbead740055a65113534755273cef94896292ca2b77a9b5c8656c9f98a394c2d245a1c680a0949516a
+  languageName: node
+  linkType: hard
+
+"@wdio/types@npm:9.5.0":
+  version: 9.5.0
+  resolution: "@wdio/types@npm:9.5.0"
+  dependencies:
+    "@types/node": "npm:^20.1.0"
+  checksum: 10/24fea965ee7fdba40d70cb8675d9d40cb3edcf1c4381b2e373650fe2aab78f50f8ef48771a931e77ed3185f65f936e1676936325dc9d75c289885980dd540bfe
   languageName: node
   linkType: hard
 
@@ -9042,6 +9075,13 @@ __metadata:
     ansi-styles: "npm:^4.1.0"
     supports-color: "npm:^7.1.0"
   checksum: 10/cb3f3e594913d63b1814d7ca7c9bafbf895f75fbf93b92991980610dfd7b48500af4e3a5d4e3a8f337990a96b168d7eb84ee55efdce965e2ee8efc20f8c8f139
+  languageName: node
+  linkType: hard
+
+"chalk@npm:^5.1.2":
+  version: 5.4.1
+  resolution: "chalk@npm:5.4.1"
+  checksum: 10/29df3ffcdf25656fed6e95962e2ef86d14dfe03cd50e7074b06bad9ffbbf6089adbb40f75c00744d843685c8d008adaf3aed31476780312553caf07fa86e5bc7
   languageName: node
   linkType: hard
 
@@ -11706,6 +11746,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"diff@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "diff@npm:7.0.0"
+  checksum: 10/e9b8e48d054c9c0c093c65ce8e2637af94b35f2427001607b14e5e0589e534ea3413a7f91ebe6d7c5a1494ace49cb7c7c3972f442ddd96a4767ff091999a082e
+  languageName: node
+  linkType: hard
+
 "dir-glob@npm:^3.0.1":
   version: 3.0.1
   resolution: "dir-glob@npm:3.0.1"
@@ -11869,7 +11916,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"easy-table@npm:^1.1.1":
+"easy-table@npm:^1.2.0":
   version: 1.2.0
   resolution: "easy-table@npm:1.2.0"
   dependencies:
@@ -13789,7 +13836,7 @@ __metadata:
     "@wdio/jasmine-framework": "npm:7.0.0"
     "@wdio/local-runner": "npm:7.16.15"
     "@wdio/sauce-service": "npm:7.16.16"
-    "@wdio/spec-reporter": "npm:7.7.3"
+    "@wdio/spec-reporter": "npm:9.5.0"
     autoprefixer: "npm:^10.4.0"
     axe-core: "npm:4.5.2"
     axe-html-reporter: "npm:2.2.3"
@@ -19379,7 +19426,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"object-inspect@npm:^1.13.1, object-inspect@npm:^1.13.3":
+"object-inspect@npm:^1.12.0, object-inspect@npm:^1.13.1, object-inspect@npm:^1.13.3":
   version: 1.13.3
   resolution: "object-inspect@npm:1.13.3"
   checksum: 10/14cb973d8381c69e14d7f1c8c75044eb4caf04c6dabcf40ca5c2ce42dc2073ae0bb2a9939eeca142b0c05215afaa1cd5534adb7c8879c32cba2576e045ed8368
@@ -19872,10 +19919,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse-ms@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "parse-ms@npm:2.1.0"
-  checksum: 10/517eab80cdb9df6ae22a8fad944bfb4289482699bcde5211a1c127091dfea33c3dcb217246b188865fc32e998bcee815bfa4a863f41e3b2d0bcc69f34ef1a543
+"parse-ms@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "parse-ms@npm:4.0.0"
+  checksum: 10/673c801d9f957ff79962d71ed5a24850163f4181a90dd30c4e3666b3a804f53b77f1f0556792e8b2adbb5d58757907d1aa51d7d7dc75997c2a56d72937cbc8b7
   languageName: node
   linkType: hard
 
@@ -21154,12 +21201,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pretty-ms@npm:^7.0.0":
-  version: 7.0.1
-  resolution: "pretty-ms@npm:7.0.1"
+"pretty-ms@npm:^9.0.0":
+  version: 9.2.0
+  resolution: "pretty-ms@npm:9.2.0"
   dependencies:
-    parse-ms: "npm:^2.1.0"
-  checksum: 10/a39aac23cc7dae7a94c70518ab8b6c6db0894a7b84c81ee7abc8778c5ec8bae2d1e71ba991ff641732b38433724bfbdbb37bd3a00418637f797c072e06fe8b4c
+    parse-ms: "npm:^4.0.0"
+  checksum: 10/a65a1d81560867f4f7128862fdbf0e1c2d3c5607bf75cae7758bf8111e2c4b744be46e084704125a38ba918bb43defa7a53aaff0f48c5c2d95367d3148c980d9
   languageName: node
   linkType: hard
 
@@ -23179,7 +23226,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"strip-ansi@npm:^7.0.1":
+"strip-ansi@npm:^7.0.1, strip-ansi@npm:^7.1.0":
   version: 7.1.0
   resolution: "strip-ansi@npm:7.1.0"
   dependencies:
@@ -24355,7 +24402,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici-types@npm:~6.19.8":
+"undici-types@npm:~6.19.2, undici-types@npm:~6.19.8":
   version: 6.19.8
   resolution: "undici-types@npm:6.19.8"
   checksum: 10/cf0b48ed4fc99baf56584afa91aaffa5010c268b8842f62e02f752df209e3dea138b372a60a963b3b2576ed932f32329ce7ddb9cb5f27a6c83040d8cd74b7a70
