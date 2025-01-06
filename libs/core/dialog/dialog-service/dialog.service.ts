@@ -45,7 +45,10 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
         parentInjector?: Injector
     ): DialogRef<T> {
         const dialogRef = new DialogRef();
-        const openerElement = document.activeElement as HTMLElement;
+        let previouslyFocusedElement: HTMLElement | null = null;
+        if (dialogConfig?.focusTrapped && document.activeElement) {
+            previouslyFocusedElement = document.activeElement as HTMLElement;
+        }
         if (!parentInjector) {
             parentInjector = this._injector;
         }
@@ -77,9 +80,8 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
         dialogRef.afterClosed.pipe(
             takeUntilDestroyed(this._destroyRef)
         ).subscribe(() => {
-            console.log(dialogConfig.focusTrapped);
-            if (dialogConfig.focusTrapped) {
-                openerElement.focus();
+            if (dialogConfig.focusTrapped && previouslyFocusedElement) {
+                previouslyFocusedElement.focus();
             }
         });
 
