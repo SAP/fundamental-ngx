@@ -3,6 +3,79 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.1...v0.54.2-rc.2) (2025-01-07)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.54.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.0...v0.54.2-rc.1) (2024-12-30)
+
+
+### Bug Fixes
+
+* **core:** add spinbutton role to step input ([#12881](https://github.com/SAP/fundamental-ngx/issues/12881)) ([cf145ab](https://github.com/SAP/fundamental-ngx/commit/cf145ab26a0ef9c0e59108996ef468bc31e1a3dc))
+
+
+
+
+
+## [0.54.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.54.1...v0.54.2-rc.0) (2024-12-23)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.54.1](https://github.com/SAP/fundamental-ngx/compare/v0.54.1-rc.0...v0.54.1) (2024-12-19)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.54.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.54.0...v0.54.1-rc.0) (2024-12-18)
+
+
+### Bug Fixes
+
+* **core:** bring inline SVG support to illustration message ([#12856](https://github.com/SAP/fundamental-ngx/issues/12856)) ([6a74537](https://github.com/SAP/fundamental-ngx/commit/6a74537c2c1e1b7495f33e0116771c477a939ccc))
+
+
+
+
+
+# [0.54.0](https://github.com/SAP/fundamental-ngx/compare/v0.54.0-rc.2...v0.54.0) (2024-12-10)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.54.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.54.0-rc.1...v0.54.0-rc.2) (2024-12-09)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.54.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.54.0-rc.0...v0.54.0-rc.1) (2024-12-09)
+
+
+### Bug Fixes
+
+* **core:** fix form field spacing ([#12819](https://github.com/SAP/fundamental-ngx/issues/12819)) ([64ce3e5](https://github.com/SAP/fundamental-ngx/commit/64ce3e56aafe8f48be399376688ee7d6eb531d51))
+
+
+
+
+
 # [0.54.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.53.2...v0.54.0-rc.0) (2024-12-03)
 
 
