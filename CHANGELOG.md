@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.1...v0.54.2-rc.2) (2025-01-07)
+
+
+### Features
+
+* **platform:** fdp table - make responsive pop-in areas navigable ([#12673](https://github.com/SAP/fundamental-ngx/issues/12673)) ([38cf776](https://github.com/SAP/fundamental-ngx/commit/38cf776b498e1b4facffeb96ddd014f05536d549)), closes [#11004](https://github.com/SAP/fundamental-ngx/issues/11004) [#11004](https://github.com/SAP/fundamental-ngx/issues/11004) [#11004](https://github.com/SAP/fundamental-ngx/issues/11004) [#11004](https://github.com/SAP/fundamental-ngx/issues/11004)
+
+
+
+
+
 ## [0.54.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.0...v0.54.2-rc.1) (2024-12-30)
 
 
