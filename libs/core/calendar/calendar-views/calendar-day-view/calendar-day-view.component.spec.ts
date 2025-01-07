@@ -389,4 +389,10 @@ describe('CalendarDayViewComponent', () => {
         expect(component.selectedDate).toEqual(component._calendarDayList[14].date);
         expect(component._calendarDayList[15].selected).toBe(true);
     });
+
+    it('should focus on the appropiate cells when clicking on a legend item', () => {
+        component.currentlyDisplayed = { month: 10, year: 2018 };
+        component.ngOnInit();
+        // TODO: Implement test
+    });
 });

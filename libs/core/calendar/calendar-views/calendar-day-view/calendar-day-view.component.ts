@@ -629,32 +629,30 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         const allElements = this.eRef.nativeElement.querySelectorAll('.fd-calendar__item');
         const elementToSpecialDayMap = new Map<HTMLElement, number>();
         const id = this.id();
+        const legendClassName = 'fd-calendar__item--legend-';
 
         if (calIndex !== null && id && Number.parseInt(id.split('')[id.length - 1], 10) === calIndex) {
             allElements.forEach((element) => {
                 element.classList.forEach((className) => {
-                    if (className.startsWith('fd-calendar__item--legend-')) {
+                    if (className.startsWith(legendClassName)) {
                         elementToSpecialDayMap.set(element, parseInt(className.split('-').pop()!, 10));
                     }
                 });
-                if (!element.classList.contains(`fd-calendar__item--legend-${specialNumber}`)) {
+                if (!element.classList.contains(`${legendClassName + specialNumber}`)) {
                     element.classList.forEach((className) => {
-                        if (
-                            className.startsWith('fd-calendar__item--legend-') &&
-                            !className.endsWith(specialNumber.toString())
-                        ) {
+                        if (className.startsWith(legendClassName) && !className.endsWith(specialNumber.toString())) {
                             element.classList.remove(className);
                         }
                     });
                 }
                 element.addEventListener('focusout', () => {
-                    element.classList.add(`fd-calendar__item--legend-${elementToSpecialDayMap.get(element)}`);
+                    element.classList.add(`${legendClassName + elementToSpecialDayMap.get(element)}`);
                 });
             });
 
             cell.addEventListener('focusout', () => {
                 elementToSpecialDayMap.forEach((specialElementNumber, element) => {
-                    element.classList.add(`fd-calendar__item--legend-${specialElementNumber}`);
+                    element.classList.add(`${legendClassName + specialElementNumber}`);
                 });
             });
         }
