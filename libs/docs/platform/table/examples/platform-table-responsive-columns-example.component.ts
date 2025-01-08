@@ -91,6 +91,10 @@ export class PlatformTableResponsiveColumnsExampleComponent implements AfterView
         this.tableWidth = value;
         this._cdr.detectChanges();
     }
+
+    handleNavigate(): void {
+        alert('Navigation event');
+    }
 }
 
 export interface ExampleItem {

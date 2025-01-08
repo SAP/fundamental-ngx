@@ -59,6 +59,7 @@
             @for (item of _filteredColumns; track _filterByColumnKy($index, item)) {
                 <li
                     fd-list-item
+                    [preventClick]="true"
                     [class.fd-select-item--selected]="item.selected"
                     [selected]="item.selected"
                     [class.fd-select-item--active]="item.active"

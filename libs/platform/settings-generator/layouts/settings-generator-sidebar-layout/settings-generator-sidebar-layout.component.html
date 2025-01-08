@@ -39,7 +39,7 @@
                         }
                         <div fd-list-content>
                             @if (item.title | fdkAsyncOrSync; as titleValue) {
-                                <div fd-list-title>{{ titleValue }}</div>
+                                <div fd-list-title [wrap]="!!_sidebarWidth.wrapSidebarTitle">{{ titleValue }}</div>
                             } @else {
                                 <div fd-list-title>
                                     <fd-skeleton
@@ -52,7 +52,7 @@
                                 </div>
                             }
                             @if (item.description) {
-                                <div fd-list-byline>
+                                <div fd-list-byline [wrap]="!!_sidebarWidth.wrapSidebarDescription">
                                     @if (item.description | fdkAsyncOrSync; as descriptionValue) {
                                         {{ descriptionValue }}
                                     } @else {
