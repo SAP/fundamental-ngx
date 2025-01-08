@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.2...v0.54.2-rc.3) (2025-01-08)
+
+
+### Bug Fixes
+
+* **core,platform:** add input to list item to prevent click selection. fix issue with toggling column on p13 dialog ([#12878](https://github.com/SAP/fundamental-ngx/issues/12878)) ([b908419](https://github.com/SAP/fundamental-ngx/commit/b908419673a8422c1140e3d0110a176a1a1985db))
+* **platform:** add configuration options to truncate titles and descriptions in the settings generator ([#12811](https://github.com/SAP/fundamental-ngx/issues/12811)) ([3152649](https://github.com/SAP/fundamental-ngx/commit/31526492811f383425dc3cde9c31de4625dd34c3))
+
+
+
+
+
+## [0.54.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.1...v0.54.2-rc.2) (2025-01-07)
+
+
+### Features
+
+* **platform:** fdp table - make responsive pop-in areas navigable ([#12673](https://github.com/SAP/fundamental-ngx/issues/12673)) ([38cf776](https://github.com/SAP/fundamental-ngx/commit/38cf776b498e1b4facffeb96ddd014f05536d549)), closes [#11004](https://github.com/SAP/fundamental-ngx/issues/11004) [#11004](https://github.com/SAP/fundamental-ngx/issues/11004) [#11004](https://github.com/SAP/fundamental-ngx/issues/11004) [#11004](https://github.com/SAP/fundamental-ngx/issues/11004)
+
+
+
+
+
 ## [0.54.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.0...v0.54.2-rc.1) (2024-12-30)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
