@@ -612,6 +612,9 @@ export class TableComponent<T = any>
     loadedRows$ = signal(0);
 
     /** @hidden */
+    hoveredRowIndex$ = signal<Nullable<number>>(null);
+
+    /** @hidden */
     get initialSortBy(): CollectionSort[] {
         return this.initialState?.initialSortBy ?? [];
     }
@@ -1708,6 +1711,16 @@ export class TableComponent<T = any>
         this._ngZone.run(() => {
             this.setCurrentPage(currentPage + 1);
         });
+    }
+
+    /** @hidden */
+    handleMouseEnter(rowIndex: number): void {
+        this.hoveredRowIndex$.set(rowIndex);
+    }
+
+    /** @hidden */
+    handleMouseLeave(): void {
+        this.hoveredRowIndex$.set(null);
     }
 
     /** Manually update index after we add new items to the main array */
