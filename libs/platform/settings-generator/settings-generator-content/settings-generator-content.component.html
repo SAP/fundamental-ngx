@@ -1,4 +1,4 @@
-<h3 fd-title class="fdp-settings-generator__title">
+<h3 fd-title [wrap]="!!settings?.wrapSectionTitle" class="fdp-settings-generator__title">
     @if (mobile) {
         <button fd-button glyph="menu2" fdType="transparent" (click)="goBack.emit()"></button>
     }
