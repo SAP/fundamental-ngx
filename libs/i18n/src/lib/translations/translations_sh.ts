@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Period',
         decreasePeriodLabel: 'Skrati period',
         navigationInstruction:
-            'Da biste se kretali po stavkama na ovoj listi, pritisnite strelicu gore ili strelicu dole. Da biste se kretali s jedne liste na drugu, pritisnite strelicu levo ili strelicu desno.'
+            'Da biste se kretali po stavkama na ovoj listi, pritisnite strelicu gore ili strelicu dole. Da biste se kretali s jedne liste na drugu, pritisnite strelicu levo ili strelicu desno.',
+        nightLabel: 'noću',
+        morningLabel: 'ujutru',
+        afternoonLabel: 'poslepodne',
+        eveningLabel: 'uveče'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Unos birača vremena',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Čarobnjak'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Više'
+        overflowTitleMore: 'Više',
+        breadcrumbTrailLabel: 'Put usmeravanja'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Posmatrači',
@@ -511,7 +516,9 @@ export default {
         deselectAllCheckboxLabel: 'Poništi odabir za sve',
         deselectSingleRow: 'Da poništite odabir reda, pritisnite SPACEBAR',
         selectSingleRow: 'Da odaberete red, pritisnite SPACEBAR',
-        loadMore: 'Učitaj još'
+        loadMore: 'Učitaj još',
+        filteredBy: 'Filtrirano prema',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Uredi'
@@ -570,5 +577,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Dugme menija'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Proširi/sažmi',
+        groupAriaDescription: 'Grupa obaveštenja',
+        groupAriaDescriptionExpanded: 'prošireno',
+        groupAriaDescriptionCollapsed: 'sažeto'
     }
 };

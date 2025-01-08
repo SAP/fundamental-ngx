@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Období',
         decreasePeriodLabel: 'Snížit období',
         navigationInstruction:
-            'Mezi položkami v seznamu přecházíte klávesami se šipkami nahoru a dolů. Přepínat mezi seznamy můžete šipkami doleva a doprava.'
+            'Mezi položkami v seznamu přecházíte klávesami se šipkami nahoru a dolů. Přepínat mezi seznamy můžete šipkami doleva a doprava.',
+        nightLabel: 'v noci',
+        morningLabel: 'ráno',
+        afternoonLabel: 'odpoledne',
+        eveningLabel: 'večer'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Zadání výběru času',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Průvodce'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Více'
+        overflowTitleMore: 'Více',
+        breadcrumbTrailLabel: 'Navigační cesta'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Sledující',
@@ -511,7 +516,9 @@ export default {
         deselectAllCheckboxLabel: 'Zrušit celý výběr',
         deselectSingleRow: 'Výběr řádky zrušíte stisknutím mezerníku',
         selectSingleRow: 'Řádku vyberete stisknutím mezerníku',
-        loadMore: 'Načíst další'
+        loadMore: 'Načíst další',
+        filteredBy: 'Filtrováno podle',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Upravit'
@@ -570,5 +577,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Tlačítko menu'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Rozbalit/sbalit',
+        groupAriaDescription: 'Skupina oznámení',
+        groupAriaDescriptionExpanded: 'rozbaleno',
+        groupAriaDescriptionCollapsed: 'sbaleno'
     }
 };

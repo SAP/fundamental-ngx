@@ -507,7 +507,8 @@ export default {
         selectAllCheckboxLabel: 'Select all',
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
-        selectSingleRow: 'To select row, press SPACEBAR'
+        selectSingleRow: 'To select row, press SPACEBAR',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'संपादित करें'

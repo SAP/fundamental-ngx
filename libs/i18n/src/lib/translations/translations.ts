@@ -520,7 +520,8 @@ export default {
         deselectSingleRow: 'To deselect row, press SPACEBAR',
         selectSingleRow: 'To select row, press SPACEBAR',
         loadMore: 'Show more',
-        filteredBy: 'Filtered by'
+        filteredBy: 'Filtered by',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edit'

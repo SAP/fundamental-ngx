@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Periodo',
         decreasePeriodLabel: 'Disminuir período',
         navigationInstruction:
-            'Para desplazarse entre elementos de esta lista, pulse la flecha hacia arriba o hacia abajo situadas arriba. Para cambiar entre listas, pulse la flecha izquierda o la flecha derecha.'
+            'Para desplazarse entre elementos de esta lista, pulse la flecha hacia arriba o hacia abajo situadas arriba. Para cambiar entre listas, pulse la flecha izquierda o la flecha derecha.',
+        nightLabel: 'por la noche',
+        morningLabel: 'por la mañana',
+        afternoonLabel: 'por la tarde',
+        eveningLabel: 'por la tarde-noche'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Entrada de selector de tiempo',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Asistente'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Más'
+        overflowTitleMore: 'Más',
+        breadcrumbTrailLabel: 'Ruta de navegación'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Examinadores',
@@ -512,7 +517,9 @@ export default {
         deselectAllCheckboxLabel: 'Deseleccionar todo',
         deselectSingleRow: 'Pulse la barra de espaciado para anular la selección',
         selectSingleRow: 'Pulse la barra de espaciado para seleccionar líneas',
-        loadMore: 'Cargar más'
+        loadMore: 'Cargar más',
+        filteredBy: 'Filtrado por',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Editar'
@@ -571,5 +578,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Botón Menú'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Expandir/Contraer',
+        groupAriaDescription: 'Grupo de notificaciones',
+        groupAriaDescriptionExpanded: 'expandido',
+        groupAriaDescriptionCollapsed: 'contraído'
     }
 };

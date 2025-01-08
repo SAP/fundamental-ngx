@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Periode',
         decreasePeriodLabel: 'Periode verlagen',
         navigationInstruction:
-            'Druk op pijl-omhoog of pijl-omlaag om door de items in deze lijst te bladeren. Druk op pijl-links of pijl-rechts om tussen lijsten te schakelen.'
+            'Druk op pijl-omhoog of pijl-omlaag om door de items in deze lijst te bladeren. Druk op pijl-links of pijl-rechts om tussen lijsten te schakelen.',
+        nightLabel: "'s nachts",
+        morningLabel: "'s morgens",
+        afternoonLabel: "'s middags",
+        eveningLabel: "'s avonds"
     },
     coreTimePicker: {
         timePickerInputLabel: 'Invoer tijdkiezer',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Wizard'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Meer'
+        overflowTitleMore: 'Meer',
+        breadcrumbTrailLabel: 'Navigatiepad'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Controleurs',
@@ -512,7 +517,9 @@ export default {
         deselectAllCheckboxLabel: 'Alle selecties opheffen',
         deselectSingleRow: 'Druk op de spatiebalk om de selectie van de rij op te heffen',
         selectSingleRow: 'Druk op de spatiebalk om de rij te selecteren',
-        loadMore: 'Meer laden'
+        loadMore: 'Meer laden',
+        filteredBy: 'Gefilterd op',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Bewerken'
@@ -571,5 +578,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Knop Menu'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Uitvouwen/samenvouwen',
+        groupAriaDescription: 'Meldingsgroep',
+        groupAriaDescriptionExpanded: 'uitgevouwen',
+        groupAriaDescriptionCollapsed: 'samengevouwen'
     }
 };

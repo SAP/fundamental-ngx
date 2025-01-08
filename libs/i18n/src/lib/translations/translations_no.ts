@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Periode',
         decreasePeriodLabel: 'Reduser periode',
         navigationInstruction:
-            'For å flytte mellom elementer i denne listen, trykker du på den øverste eller nederste pilen. Bytt mellom lister ved å trykke på venstre pil eller høyre pil.'
+            'For å flytte mellom elementer i denne listen, trykker du på den øverste eller nederste pilen. Bytt mellom lister ved å trykke på venstre pil eller høyre pil.',
+        nightLabel: 'om natten',
+        morningLabel: 'om morgenen',
+        afternoonLabel: 'om ettermiddagen',
+        eveningLabel: 'om kvelden'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Inndata for tidsvelger',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Veiviser'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Mer'
+        overflowTitleMore: 'Mer',
+        breadcrumbTrailLabel: 'Navigeringsbane'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Overvåkere',
@@ -512,7 +517,9 @@ export default {
         deselectAllCheckboxLabel: 'Opphev merking av alle',
         deselectSingleRow: 'Trykk på mellomromstast for å oppheve merkingen',
         selectSingleRow: 'Trykk på mellomromstast for å merke rad',
-        loadMore: 'Last inn mer'
+        loadMore: 'Last inn mer',
+        filteredBy: 'Filtrert etter',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Rediger'
@@ -571,5 +578,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Menyknapp'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Utvid/skjul',
+        groupAriaDescription: 'Meldingsgruppe',
+        groupAriaDescriptionExpanded: 'utvidet',
+        groupAriaDescriptionCollapsed: 'komprimert'
     }
 };

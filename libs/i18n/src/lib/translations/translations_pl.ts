@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Okres',
         decreasePeriodLabel: 'Zmniejsz okres',
         navigationInstruction:
-            'Aby poruszać się między pozycjami na liście, naciśnij strzałkę w górę lub strzałkę w dół. Aby przełączać się między listami, naciśnij strzałkę w lewo lub strzałkę w prawo.'
+            'Aby poruszać się między pozycjami na liście, naciśnij strzałkę w górę lub strzałkę w dół. Aby przełączać się między listami, naciśnij strzałkę w lewo lub strzałkę w prawo.',
+        nightLabel: 'w nocy',
+        morningLabel: 'rano',
+        afternoonLabel: 'po południu',
+        eveningLabel: 'wieczorem'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Wpis selektora czasu',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Kreator'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Więcej'
+        overflowTitleMore: 'Więcej',
+        breadcrumbTrailLabel: 'Ścieżka nawigacji'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Osoby obserwujące',
@@ -511,7 +516,9 @@ export default {
         deselectAllCheckboxLabel: 'Odznacz wszystko',
         deselectSingleRow: 'Aby odznaczyć linię, naciśnij SPACJĘ',
         selectSingleRow: 'Aby zaznaczyć linię, naciśnij SPACJĘ',
-        loadMore: 'Załaduj więcej'
+        loadMore: 'Załaduj więcej',
+        filteredBy: 'Odfiltrowane wg',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edytuj'
@@ -570,5 +577,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Przycisk menu'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Rozwiń/zwiń',
+        groupAriaDescription: 'Grupa zawiadomień',
+        groupAriaDescriptionExpanded: 'rozwinięte',
+        groupAriaDescriptionCollapsed: 'zwinięte'
     }
 };

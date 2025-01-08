@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Кезең',
         decreasePeriodLabel: 'Кезеңді азайту',
         navigationInstruction:
-            'Осы тізімдегі тармақтар арасында жылжу үшін жоғары немесе төмен көрсеткісін басыңыз. Тізімдер арасында ауысу үшін сол жақ немесе оң жақ көрсеткіні басыңыз.'
+            'Осы тізімдегі тармақтар арасында жылжу үшін жоғары немесе төмен көрсеткісін басыңыз. Тізімдер арасында ауысу үшін сол жақ немесе оң жақ көрсеткіні басыңыз.',
+        nightLabel: 'түнде',
+        morningLabel: 'таңертең',
+        afternoonLabel: 'түстен кейін',
+        eveningLabel: 'кешке'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Уақыт таңдау құралын енгізу',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Шебер'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Қосымша'
+        overflowTitleMore: 'Қосымша',
+        breadcrumbTrailLabel: 'Өту тізбегінің жолы'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Бақылаушылар',
@@ -511,7 +516,9 @@ export default {
         deselectAllCheckboxLabel: 'Барлығының таңдауын алу',
         deselectSingleRow: 'Қатардың таңадауын алу үшін бос жол пернесін басыңыз',
         selectSingleRow: 'Қатарды таңадау үшін бос жол пернесін басыңыз',
-        loadMore: 'Көбірек жүктеу'
+        loadMore: 'Көбірек жүктеу',
+        filteredBy: 'Сүзгілеу шарты',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Өңдеу'
@@ -570,5 +577,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Мәзір түймесі'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Жаю/жию',
+        groupAriaDescription: 'Хабарландыру тобы',
+        groupAriaDescriptionExpanded: 'жайылған',
+        groupAriaDescriptionCollapsed: 'жиылған'
     }
 };

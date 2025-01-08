@@ -166,7 +166,11 @@ export default {
         periodLabel: '期间',
         decreasePeriodLabel: '减少期间',
         navigationInstruction:
-            '要在此列表中的项目之间移动，请按顶部箭头或底部箭头。要在列表之间切换，请按向左箭头或向右箭头。'
+            '要在此列表中的项目之间移动，请按顶部箭头或底部箭头。要在列表之间切换，请按向左箭头或向右箭头。',
+        nightLabel: '夜晚',
+        morningLabel: '上午',
+        afternoonLabel: '下午',
+        eveningLabel: '晚上'
     },
     coreTimePicker: {
         timePickerInputLabel: '时间选取器输入',
@@ -193,7 +197,8 @@ export default {
         ariaLabel: '向导'
     },
     coreBreadcrumb: {
-        overflowTitleMore: '更多'
+        overflowTitleMore: '更多',
+        breadcrumbTrailLabel: '浏览记录'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: '观察者\\n',
@@ -508,7 +513,9 @@ export default {
         deselectAllCheckboxLabel: '取消全选',
         deselectSingleRow: '要取消选择行，请按空格键',
         selectSingleRow: '要选择行，请按空格键',
-        loadMore: '加载更多'
+        loadMore: '加载更多',
+        filteredBy: '过滤条件',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '编辑'
@@ -567,5 +574,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: '菜单按钮'
+    },
+    coreNotification: {
+        groupHeaderTitle: '展开/折叠',
+        groupAriaDescription: '通知组',
+        groupAriaDescriptionExpanded: '已展开',
+        groupAriaDescriptionCollapsed: '已折叠'
     }
 };
