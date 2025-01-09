@@ -28,7 +28,7 @@ let id = 0;
         </span>
     `,
     host: {
-        '[attr.id]': 'id()',
+        '[attr.id]': 'id',
         '(focus)': 'onFocus()',
         tabindex: '0'
     }
@@ -44,13 +44,13 @@ export class LegendItemComponent implements OnChanges, OnInit, CssClassBuilder {
     @Output() focusedElementEvent = new EventEmitter<string>();
 
     /** The type of the legend item  */
-    type = input<Nullable<string>>('');
+    @Input() type: Nullable<string> = '';
 
     /** If the marker is a circle or a square */
-    circle = input<boolean>(false);
+    @Input() circle = false;
 
     /** The id of the legend item */
-    id = input<string>(`fd-calendar-legend-item-${id++}`);
+    @Input() id = `fd-calendar-legend-item-${id++}`;
 
     /** The aria-label of the legend item */
     ariaLabel = input<string>();
@@ -87,12 +87,12 @@ export class LegendItemComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** @hidden */
     getTypeClass(): string {
-        return this.type() ? `fd-calendar-legend__item--${this.type()}` : '';
+        return this.type ? `fd-calendar-legend__item--${this.type}` : '';
     }
 
     /** @hidden */
     getAppointmentClass(): string {
-        return this.circle() || this.type() === 'appointment' ? `fd-calendar-legend__item--appointment` : '';
+        return this.circle || this.type === 'appointment' ? `fd-calendar-legend__item--appointment` : '';
     }
 
     /** @hidden */
@@ -102,6 +102,6 @@ export class LegendItemComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** @hidden */
     onFocus(): void {
-        this.focusedElementEvent.emit(this.id());
+        this.focusedElementEvent.emit(this.id);
     }
 }

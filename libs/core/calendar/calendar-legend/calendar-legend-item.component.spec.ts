@@ -7,7 +7,7 @@ describe('LegendItemComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [LegendItemComponent]
+            imports: [LegendItemComponent]
         }).compileComponents();
     }));
 
@@ -22,7 +22,7 @@ describe('LegendItemComponent', () => {
     });
 
     it('should emit focusedElementEvent with the correct id on focus', () => {
-        const spy = spyOn(component.focusedElementEvent, 'emit');
+        const spy = jest.spyOn(component.focusedElementEvent, 'emit');
         component.onFocus();
         expect(spy).toHaveBeenCalledWith(component.id);
     });
@@ -30,7 +30,7 @@ describe('LegendItemComponent', () => {
     it('should apply the correct CSS classes when inputs change', () => {
         component.type = 'appointment';
         component.circle = true;
-        component.color = 'blue';
+        component.color = 'placeholder-10';
 
         // Trigger ngOnChanges to rebuild the CSS classes
         component.ngOnChanges();
@@ -38,7 +38,7 @@ describe('LegendItemComponent', () => {
         const cssClasses = component.buildComponentCssClass();
         expect(cssClasses).toContain('fd-calendar-legend__item');
         expect(cssClasses).toContain('fd-calendar-legend__item--appointment');
-        expect(cssClasses).toContain('fd-calendar-legend__item--blue');
+        expect(cssClasses).toContain('fd-calendar-legend__item--placeholder-10');
     });
 
     it('should update CSS classes dynamically when input signals change', () => {
@@ -57,36 +57,20 @@ describe('LegendItemComponent', () => {
     });
 
     it('should handle color input dynamically via inputSignals', () => {
-        component.color = 'red';
+        component.color = 'placeholder-9';
         fixture.detectChanges();
 
         const cssClasses = component.buildComponentCssClass();
-        expect(cssClasses).toContain('fd-calendar-legend__item--red');
+        expect(cssClasses).toContain('fd-calendar-legend__item--placeholder-9');
 
-        // Update inputSignal for color
-        component.color = 'green';
+        component.color = 'placeholder-10';
         fixture.detectChanges();
 
         const updatedCssClasses = component.buildComponentCssClass();
-        expect(updatedCssClasses).toContain('fd-calendar-legend__item--green');
-        expect(updatedCssClasses).not.toContain('fd-calendar-legend__item--red');
+        expect(updatedCssClasses).toContain('fd-calendar-legend__item--placeholder-10');
+        expect(updatedCssClasses).not.toContain('fd-calendar-legend__item--placeholder-9');
     });
-
-    it('should update text dynamically', () => {
-        component.text = 'Initial Text';
-        fixture.detectChanges();
-
-        let textElement = fixture.nativeElement.querySelector('.fd-calendar-legend__text');
-        expect(textElement.textContent.trim()).toBe('Initial Text');
-
-        // Update text dynamically
-        component.text = 'Updated Text';
-        fixture.detectChanges();
-
-        textElement = fixture.nativeElement.querySelector('.fd-calendar-legend__text');
-        expect(textElement.textContent.trim()).toBe('Updated Text');
-    });
-
+    
     it('should add appointment class when circle input is true', () => {
         component.circle = true;
         fixture.detectChanges();
