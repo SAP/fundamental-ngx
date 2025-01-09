@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.49](https://github.com/SAP/fundamental-ngx/compare/v0.43.48...v0.43.49) (2025-01-09)
+
+
+### Bug Fixes
+
+* **core,platform:** add input to list item to prevent click selection. fix issue with toggling column on p13 dialog ([#12879](https://github.com/SAP/fundamental-ngx/issues/12879)) ([145e91c](https://github.com/SAP/fundamental-ngx/commit/145e91c340ae25e150dea82475c57d755ef0c873))
+* **core:** add spinbutton role to step input ([#12880](https://github.com/SAP/fundamental-ngx/issues/12880)) ([fc9a7b6](https://github.com/SAP/fundamental-ngx/commit/fc9a7b6c5efb94518ae7afac87a4378beadaf467))
+* **core:** make popover body have dialog role by default ([#12908](https://github.com/SAP/fundamental-ngx/issues/12908)) ([be56ee2](https://github.com/SAP/fundamental-ngx/commit/be56ee2e2c20862db705812f7f6899c98e6bbb88))
+
+
+
+
+
 ## [0.43.48](https://github.com/SAP/fundamental-ngx/compare/v0.43.47...v0.43.48) (2024-12-04)
 
 
