@@ -3,6 +3,7 @@ import {
     Component,
     ContentChildren,
     ElementRef,
+    Input,
     OnInit,
     QueryList,
     ViewContainerRef,
@@ -20,7 +21,7 @@ let calIndex = 0;
     template: ` <ng-content></ng-content> `,
     host: {
         class: 'fd-calendar-legend',
-        '[class.fd-calendar-legend--auto-column]': 'col()',
+        '[class.fd-calendar-legend--auto-column]': 'col',
         '[attr.data-calendar-index]': 'calIndex'
     }
 })
@@ -31,12 +32,12 @@ export class CalendarLegendComponent<D> implements OnInit, AfterContentInit {
 
     /** Special
      * days rules to be displayed in the legend */
-    specialDaysRules = input<SpecialDayRule<D>[]>([]);
+    @Input() specialDaysRules: SpecialDayRule<D>[] = [];
 
     /**
      * Make it a column instead
      */
-    col = input<boolean>(false);
+    @Input() col = false;
 
     /** Calendar's index */
     calIndex = input<number>(calIndex++);
@@ -67,7 +68,7 @@ export class CalendarLegendComponent<D> implements OnInit, AfterContentInit {
 
     /** @hidden */
     _addCalendarLegend(): void {
-        this.specialDaysRules().forEach((day) => {
+        this.specialDaysRules.forEach((day) => {
             if (day.legendText) {
                 const componentRef = this.viewContainer.createComponent(LegendItemComponent);
                 componentRef.instance.text = day.legendText;
