@@ -8,7 +8,6 @@ import {
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { LegendItemComponent } from '../../../../../../libs/core/calendar/calendar-legend/calendar-legend-item.component';
 import { CalendarLegendComponent } from '../../../../../../libs/core/calendar/calendar-legend/calendar-legend.component';
 
 @Component({
@@ -25,7 +24,7 @@ import { CalendarLegendComponent } from '../../../../../../libs/core/calendar/ca
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    imports: [CalendarComponent, LegendItemComponent, CalendarLegendComponent]
+    imports: [CalendarComponent, CalendarLegendComponent]
 })
 export class CalendarLegendExampleComponent {
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
@@ -34,17 +33,22 @@ export class CalendarLegendExampleComponent {
         {
             specialDayNumber: 5,
             rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) in [2, 9, 16],
-            legendText: 'Special Day 1'
+            legendText: 'Holidays'
+        },
+        {
+            specialDayNumber: 6,
+            rule: (fdDate) => this.datetimeAdapter.getDayOfWeek(fdDate) === 2,
+            legendText: 'Meetings'
         },
         {
             specialDayNumber: 10,
             rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) === 15,
-            legendText: 'Tomorrow'
+            legendText: 'Birthday'
         },
         {
             specialDayNumber: 11,
-            rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) === 20,
-            legendText: 'Antoher Day'
+            rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) === 30,
+            legendText: 'Another Day'
         }
     ];
 }

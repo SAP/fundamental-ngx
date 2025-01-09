@@ -1,12 +1,7 @@
 <div style="display: flex; justify-content: space-around; gap: 5rem; align-items: flex-start">
     <div style="display: flex; flex-direction: column; gap: 0.5rem">
         <fd-calendar [specialDaysRules]="specialDays"></fd-calendar>
-        <fd-calendar-legend [specialDaysRules]="specialDays" [col]="false">
-            <fd-calendar-legend-item [circle]="true">Today</fd-calendar-legend-item>
-            <fd-calendar-legend-item color="placeholder-5">Tomorrow</fd-calendar-legend-item>
-            <fd-calendar-legend-item type="appointment" color="placeholder-1">Next Week</fd-calendar-legend-item>
-            <fd-calendar-legend-item color="placeholder-20">Birthday</fd-calendar-legend-item>
-        </fd-calendar-legend>
+        <fd-calendar-legend [specialDaysRules]="specialDays" [col]="false"> </fd-calendar-legend>
     </div>
     <div style="display: flex; flex-direction: row; gap: 0.5rem; align-items: flex-start">
         <fd-calendar [specialDaysRules]="specialDays"></fd-calendar>

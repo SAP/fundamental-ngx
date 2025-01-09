@@ -89,7 +89,7 @@ describe('CalendarLegendComponent', () => {
 
         expect(setFocusSpy).toHaveBeenCalledWith(
             fixture.nativeElement.querySelector(`#${event}`),
-            host.calendarLegend.calIndex(),
+            host.calendarLegend.calIndex,
             specialNumber
         );
     });

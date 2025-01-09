@@ -41,6 +41,16 @@ export class CalendarLegendFocusingService {
         return this.specialNumber;
     }
 
+    /** Setting the index of the calendar */
+    setCalIndex(calIndex: number): void {
+        this.calIndex = calIndex;
+    }
+
+    /** Getting the index of the calendar */
+    getCalIndex(): number {
+        return this.calIndex;
+    }
+
     /** Clearing the focused element */
     clearFocusedElement(): void {
         this.focusedElement = null;
