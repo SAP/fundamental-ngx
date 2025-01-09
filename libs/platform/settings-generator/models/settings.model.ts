@@ -72,6 +72,8 @@ export interface BaseSettingsItem {
     description?: FdkAsyncProperty<string>;
     /** Settings section title. */
     sectionTitle?: FdkAsyncProperty<string>;
+    /** Whether to wrap the title text in the main section content. By default, the text will be truncated. */
+    wrapSectionTitle?: boolean;
 }
 
 export interface IconBaseSettingsItem {
@@ -141,9 +143,13 @@ export interface GroupedTemplateSettingsItem extends BaseSettingsItem {
 
 export interface SidebarWidthConfiguration {
     /** Min width. */
-    minWidth: string;
+    minWidth?: string;
     /** Max width. */
-    maxWidth: string;
+    maxWidth?: string;
     /** Width. */
-    width: string;
+    width?: string;
+    /** Whether to wrap the title text in the sidebar. By default, the text will truncate. */
+    wrapSidebarTitle?: boolean;
+    /** Whether to wrap the description text in the sidebar. By default, the text will truncate. */
+    wrapSidebarDescription?: boolean;
 }
