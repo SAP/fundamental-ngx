@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.3...v0.54.2-rc.4) (2025-01-10)
+
+
+### Bug Fixes
+
+* **core:** make popover body have dialog role by default ([#12907](https://github.com/SAP/fundamental-ngx/issues/12907)) ([6f33393](https://github.com/SAP/fundamental-ngx/commit/6f33393a592789979976adb2f065350ce77ee9e8))
+
+
+
+
+
 ## [0.54.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.2...v0.54.2-rc.3) (2025-01-08)
 
 
