@@ -4,10 +4,6 @@
     flex-shrink: 0;
 }
 
-.fd-toolbar--no-shrink > * {
-    flex-shrink: 1;
-}
-
 fdk-dynamic-portal {
     &:not(:last-of-type) {
         [fd-toolbar-item] {
