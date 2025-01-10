@@ -98,7 +98,7 @@ export class PopoverBodyComponent implements AfterViewInit {
     _closeOnEscapeKey = false;
 
     /** @hidden Aria role for the popover body. */
-    _bodyRole: Nullable<string> = null;
+    _bodyRole: Nullable<string> = 'dialog';
 
     /** @hidden Aria role for the popover body. */
     _bodyId: Nullable<string> = null;
