@@ -121,10 +121,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     @Input()
     fdType: ToolbarType = 'solid';
 
-    /** Determines if toolbar should be shrunk */
-    @Input()
-    noShrink = false;
-
     /** The title for the toolbar. */
     @Input()
     title: string;
@@ -252,7 +248,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         return [
             'fd-toolbar',
             `fd-toolbar--${this.fdType}`,
-            `${this.noShrink ? 'fd-toolbar--no-shrink' : ''}`,
             `${this.active && this.fdType === 'info' ? 'fd-toolbar--active' : ''}`,
             `${this.title || this.titleComponent ? 'fd-toolbar--title' : ''}`,
             `${this.clearBorder ? 'fd-toolbar--clear' : ''}`,
