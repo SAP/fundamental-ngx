@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CalendarComponent } from '@fundamental-ngx/core/calendar';
+import { CalendarComponent, CalendarLegendComponent } from '@fundamental-ngx/core/calendar';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -8,7 +8,6 @@ import {
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { CalendarLegendComponent } from '../../../../../../libs/core/calendar/calendar-legend/calendar-legend.component';
 
 @Component({
     selector: 'fd-calendar-legend-example',
@@ -33,22 +32,22 @@ export class CalendarLegendExampleComponent {
         {
             specialDayNumber: 5,
             rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) in [2, 9, 16],
-            legendText: 'Holidays'
+            legendText: 'Placeholder-5'
         },
         {
             specialDayNumber: 6,
             rule: (fdDate) => this.datetimeAdapter.getDayOfWeek(fdDate) === 2,
-            legendText: 'Meetings'
+            legendText: 'Placeholder-6'
         },
         {
             specialDayNumber: 10,
             rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) === 15,
-            legendText: 'Birthday'
+            legendText: 'Placeholder-10'
         },
         {
             specialDayNumber: 11,
             rule: (fdDate) => this.datetimeAdapter.getDate(fdDate) === 30,
-            legendText: 'Another Day'
+            legendText: 'Placeholder-11'
         }
     ];
 }
