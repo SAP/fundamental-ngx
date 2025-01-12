@@ -64,7 +64,7 @@
     "intl": "1.2.5",
     "intl-messageformat": "10.5.2",
     "lodash-es": "4.17.21",
-    "marked": "9.0.0",
+    "marked": "15.0.6",
     "moment": "2.29.4",
     "ngx-markdown": "18.0.0",
     "rxjs": "7.8.1",
