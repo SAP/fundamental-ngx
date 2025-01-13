@@ -43,7 +43,7 @@ export class TablePo extends PlatformBaseComponentPo {
     buttonSearch = '.fdp-search-field__submit';
     buttonFilter = 'button[title="Filter"]';
     tableRow = 'tbody .fd-table__row.ng-star-inserted ';
-    tableRowInitialState = 'tbody .fd-table__row.ng-star-inserted:not([aria-rowindex="0"], [aria-rowindex="3"])';
+    tableRowInitialState = 'tbody .fd-table__row.ng-star-inserted:not([aria-rowindex="1"], [aria-rowindex="4"])';
     input = 'input';
     tableCell = 'td';
     tableCellInitialState = '.fd-table__cell--expand';
