@@ -29,8 +29,17 @@
             </a>
         </div>
     } @else if (_table.loadedRows$() === _dataSourceDirective.totalItems$() && showItemsCount) {
-        <li fd-list-item [style.height]="'auto'" ariaRole="none" class="fdp-table__growing-button-content fdp-table__growing-button-total">
-            <span fd-list-title> {{ 'platformTable.showingBlankOfBlank' | fdTranslate: { totalGrowingItemsCount: _table.loadedRows$() } }} </span>
+        <li
+            fd-list-item
+            [style.height]="'auto'"
+            ariaRole="none"
+            class="fdp-table__growing-button-content fdp-table__growing-button-total"
+        >
+            <span fd-list-title>
+                {{
+                    'platformTable.showingBlankOfBlank' | fdTranslate: { totalGrowingItemsCount: _table.loadedRows$() }
+                }}
+            </span>
         </li>
     }
 </div>
