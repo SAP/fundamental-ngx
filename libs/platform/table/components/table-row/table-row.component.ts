@@ -115,7 +115,6 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     row: TableRow<T>;
 
     /** Row index. */
-    @HostBinding('attr.aria-rowindex')
     @Input()
     index: number;
 

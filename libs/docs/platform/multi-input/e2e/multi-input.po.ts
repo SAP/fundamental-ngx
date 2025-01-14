@@ -15,7 +15,7 @@ export class MultiInputPo extends PlatformBaseComponentPo {
     expandedDropdown = 'fdp-list .fd-list';
     activeDropdownButtons = 'button[aria-label="value-help"]';
     activeInputs = '.fd-input-group.fd-input-group--control input';
-    mobileInput = 'div[role="dialog"] input';
+    mobileInput = '.fd-dialog input';
     filledInput = '.fd-tokenizer__inner';
     approveButton = '[fdtype="emphasized"]';
     groupHeader = '.fd-list__group-header';

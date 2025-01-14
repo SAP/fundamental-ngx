@@ -113,6 +113,11 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     @Input()
     id: Nullable<string> = 'fd-list-item-' + ++listItemUniqueId;
 
+    /** Whether to prevent built-in click event logic on the list item.
+     * Helpful when using lists with checkboxes or radio buttons when the list item should be clickable, but should not select/deselect the list item. */
+    @Input()
+    preventClick = false;
+
     /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
@@ -229,16 +234,18 @@ export class ListItemComponent<T = any> extends ListFocusItem<T> implements Afte
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
-        this._clicked$.next(event);
-        if (this.checkbox && !this.link) {
-            if (!this.checkbox.elementRef.nativeElement.contains(event.target as Node)) {
-                // clicking on the checkbox is not suppressed
-                // so we should only process clicks if clicked on the list-item, not checkbox itself
-                this.checkbox.nextValue();
+        if (!this.preventClick) {
+            this._clicked$.next(event);
+            if (this.checkbox && !this.link) {
+                if (!this.checkbox.elementRef.nativeElement.contains(event.target as Node)) {
+                    // clicking on the checkbox is not suppressed
+                    // so we should only process clicks if clicked on the list-item, not checkbox itself
+                    this.checkbox.nextValue();
+                }
             }
-        }
-        if (this.radio && !this.link) {
-            this.radio.labelClicked(event, false);
+            if (this.radio && !this.link) {
+                this.radio.labelClicked(event, false);
+            }
         }
     }
 
