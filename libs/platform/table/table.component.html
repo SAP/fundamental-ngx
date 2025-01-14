@@ -116,6 +116,7 @@
                                         [main]="true"
                                         [class.fd-table__row--draggable]="isDraggable"
                                         fdp-table-row
+                                        [attr.aria-rowindex]="rowIndex + 1"
                                         [rowId]="id"
                                         [class.fd-tr-hovered]="!row.checked && hoveredRowIndex$() === rowIndex"
                                         [index]="rowIndex"

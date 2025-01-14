@@ -137,7 +137,7 @@ describe('Table component test suite', () => {
         it('should check filtering by status color positive', async () => {
             await scrollIntoView(tableFilterableExample);
             await click(tableFilterableExample + toolbarButton);
-            const elem = $('li.last-child');
+            const elem = await $('li.last-child');
             elem.click();
             await expect((await getText(tableCellStatusColor, 1)).trim()).withContext('positive');
         });
@@ -145,7 +145,7 @@ describe('Table component test suite', () => {
         it('should check filtering by status color negative', async () => {
             await scrollIntoView(tableFilterableExample);
             await click(tableFilterableExample + toolbarButton);
-            const elem = $('li.last-child');
+            const elem = await $('li.last-child');
             elem.click();
             await expect((await getText(tableCellStatusColor, 2)).trim()).withContext('negative');
         });
@@ -153,7 +153,7 @@ describe('Table component test suite', () => {
         it('should check no filter results', async () => {
             await scrollIntoView(tableFilterableExample);
             await click(tableFilterableExample + toolbarButton);
-            const elem = $('li.last-child');
+            const elem = await $('li.last-child');
             elem.click();
             await expect(await doesItExist(tableFilterableExample + tableRow)).withContext(false, '');
         });
@@ -161,7 +161,7 @@ describe('Table component test suite', () => {
         it('should check filtering by status', async () => {
             await scrollIntoView(tableFilterableExample);
             await click(tableFilterableExample + toolbarButton);
-            const elem = $('li:nth-child(2)');
+            const elem = await $('li:nth-child(2)');
             elem.click();
             const rowLength = await getElementArrayLength(tableFilterableExample + tableRow);
             for (let i = 0; i < rowLength; i++) {

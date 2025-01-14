@@ -175,6 +175,7 @@
     @if (appliedFilters().length) {
         <fd-toolbar
             fdType="info"
+            class="fdp-table__applied-filters-toolbar"
             [active]="true"
             [titleId]="tableToolbarTitleId"
             [shouldOverflow]="shouldOverflow"
@@ -182,12 +183,7 @@
         >
             <label fd-toolbar-label>
                 {{ 'platformTable.filteredBy' | fdTranslate }}:
-                @for (filter of appliedFilters(); track filter.columnName; let i = $index) {
-                    {{ filter.columnName }} ({{ filter.params }})
-                    @if (i < appliedFilters().length - 1) {
-                        ,
-                    }
-                }
+                {{ _formatAppliedFilters(appliedFilters()) }}
             </label>
             <fd-toolbar-spacer></fd-toolbar-spacer>
             <button

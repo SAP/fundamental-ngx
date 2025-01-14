@@ -16,6 +16,7 @@ export interface BaseCollectionFilter<T> {
     value2?: Nullable<T>;
     exclude?: boolean;
     strategy?: FilterStrategy;
+    fieldName?: string;
 }
 export interface CollectionStringFilter extends BaseCollectionFilter<string> {
     strategy: FilterStringStrategy;

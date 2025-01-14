@@ -167,7 +167,7 @@ export class BasePopoverClass {
     beforeOpen = new EventEmitter();
 
     /** @hidden Aria role for the popover body. */
-    _bodyRole: string | null = null;
+    _bodyRole: string | null = 'dialog';
 
     /** @hidden ID for the popover body. */
     _bodyId: string | null = null;

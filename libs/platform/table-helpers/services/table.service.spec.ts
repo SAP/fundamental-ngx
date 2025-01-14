@@ -72,7 +72,7 @@ describe('TableServiceService', () => {
         const setTableStateSpy = jest.spyOn(service, 'setTableState');
         const filterChangeSpy = jest.spyOn(service.filterChange$, 'next');
         const newFilterBy: CollectionStringFilter[] = [
-            { field: 'name', value: 'Product name', strategy: FILTER_STRING_STRATEGY.CONTAINS }
+            { field: 'name', value: 'Product name', fieldName: 'name', strategy: FILTER_STRING_STRATEGY.CONTAINS }
         ];
         const newState: TableState = { ...DEFAULT_TABLE_STATE, filterBy: newFilterBy };
         const event: FilterChange = { current: newFilterBy, previous: DEFAULT_TABLE_STATE.filterBy };
