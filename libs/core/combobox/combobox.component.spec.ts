@@ -79,7 +79,6 @@ describe('ComboboxComponent', () => {
 
     it('should handle wrong input entry on dropdown mode', () => {
         jest.spyOn(component, 'onChange');
-        component.communicateByObject = true;
         component.displayFn = (item: any): string => {
             if (item) {
                 return item.displayedValue;
@@ -89,6 +88,20 @@ describe('ComboboxComponent', () => {
         };
         component.inputText = 'otherDisplayedValue';
         expect(component.onChange).toHaveBeenCalledWith('otherDisplayedValue');
+    });
+
+    it('should not call onChange when using wrong input entry on dropdown mode with communicateByObject', () => {
+        jest.spyOn(component, 'onChange');
+        component.communicateByObject = true;
+        component.displayFn = (item: any): string => {
+            if (item) {
+                return item.displayedValue;
+            } else {
+                return '';
+            }
+        };
+        component.inputText = 'otherDisplayedValue';
+        expect(component.onChange).not.toHaveBeenCalled();
     });
 
     it('should handle write value from outside on dropdown mode', () => {
@@ -342,8 +355,6 @@ describe('ComboboxComponent', () => {
 
             component.displayFn = (product: Product): string => product?.name ?? '';
 
-            component.communicateByObject = true;
-
             component.dropdownValues = allProducts;
 
             component.groupFn = (products: Product[]) => {
@@ -368,8 +379,6 @@ describe('ComboboxComponent', () => {
             jest.spyOn(component, 'onChange');
 
             component.displayFn = (product: Product): string => product?.name ?? '';
-
-            component.communicateByObject = true;
 
             component.dropdownValues = allProducts;
 

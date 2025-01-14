@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.3...v0.54.2-rc.4) (2025-01-10)
+
+
+### Bug Fixes
+
+* **core:** make popover body have dialog role by default ([#12907](https://github.com/SAP/fundamental-ngx/issues/12907)) ([6f33393](https://github.com/SAP/fundamental-ngx/commit/6f33393a592789979976adb2f065350ce77ee9e8))
+
+
+
+
+
+## [0.54.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.2...v0.54.2-rc.3) (2025-01-08)
+
+
+### Bug Fixes
+
+* **core,platform:** add input to list item to prevent click selection. fix issue with toggling column on p13 dialog ([#12878](https://github.com/SAP/fundamental-ngx/issues/12878)) ([b908419](https://github.com/SAP/fundamental-ngx/commit/b908419673a8422c1140e3d0110a176a1a1985db))
+* **core:** combobox communicateByObject bugs ([#12815](https://github.com/SAP/fundamental-ngx/issues/12815)) ([26fd691](https://github.com/SAP/fundamental-ngx/commit/26fd691e14e8b8e609cd2e554074fdb4c195a537))
+
+
+
+
+
 ## [0.54.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.1...v0.54.2-rc.2) (2025-01-07)
 
 **Note:** Version bump only for package @fundamental-ngx/core
