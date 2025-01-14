@@ -435,7 +435,6 @@ export class TableService {
      * @param state Table state.
      */
     buildFilterRulesMap(state = this.getTableState()): void {
-        const prevState = this.getTableState();
         const filterRulesWithFieldNames = state.filterBy.map((rule) => ({
             ...rule,
             fieldName: this._getFieldName(rule.field, rule.fieldName)

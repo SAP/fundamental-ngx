@@ -1,0 +1,106 @@
+<fd-dialog>
+    <fd-dialog-header>
+        <ng-template fdkTemplate="header">
+            <div fd-bar-left>
+                @if (activeTab() !== 'filter') {
+                    <fd-bar-element>
+                        <h4 fd-title [headerSize]="4">{{ 'platformTable.settingsDialogHeader' | fdTranslate }}</h4>
+                    </fd-bar-element>
+                } @else {
+                    <fd-bar-element>
+                        @if (activeFilterStepView()?.titleTemplateRef) {
+                            <ng-container
+                                [ngTemplateOutlet]="activeFilterStepView()?.titleTemplateRef ?? null"
+                            ></ng-container>
+                        }
+                    </fd-bar-element>
+                }
+            </div>
+            <div fd-bar-right>
+                <fd-bar-element>
+                    <fdp-table-reset-button></fdp-table-reset-button>
+                </fd-bar-element>
+            </div>
+        </ng-template>
+
+        @if (showSubheader()) {
+            <ng-template fdkTemplate="subheader">
+                <fd-segmented-button [(ngModel)]="activeTab" [style.height]="'fit-content'">
+                    @if (sortingData()) {
+                        <button
+                            fd-button
+                            fdkFocusableItem
+                            value="sort"
+                            glyph="sort"
+                            [title]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
+                            [ariaLabel]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
+                        ></button>
+                    }
+                    @if (filteringData()) {
+                        <button
+                            fd-button
+                            fdkFocusableItem
+                            value="filter"
+                            glyph="filter"
+                            [title]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
+                            [ariaLabel]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
+                        ></button>
+                    }
+                    @if (groupingData()) {
+                        <button
+                            fd-button
+                            fdkFocusableItem
+                            value="group"
+                            glyph="group-2"
+                            [title]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
+                            [ariaLabel]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
+                        ></button>
+                    }
+                </fd-segmented-button>
+            </ng-template>
+        }
+    </fd-dialog-header>
+
+    <fd-dialog-body disablePaddings>
+        @switch (activeTab()) {
+            @case ('sort') {
+                <fdp-sorting
+                    [sortingData]="sortingData()!"
+                    [initialSorting]="_initialSorting()"
+                    (sortChange)="onSortChange($event)"
+                    (resetAvailabilityChange)="onResetAvailabilityChange($event)"
+                ></fdp-sorting>
+            }
+            @case ('filter') {
+                <fdp-filters
+                    [filteringData]="filteringData()!"
+                    [initialFilters]="_initialFilters()"
+                    (activeFilterStepViewChange)="onActiveFilterStepViewChange($event)"
+                    (filterChange)="onFilterChange($event)"
+                    (resetAvailabilityChange)="onResetAvailabilityChange($event)"
+                ></fdp-filters>
+            }
+            @case ('group') {
+                <fdp-grouping
+                    [groupingData]="groupingData()!"
+                    [initialGrouping]="_initialGrouping()"
+                    (groupChange)="onGroupChange($event)"
+                    (resetAvailabilityChange)="onResetAvailabilityChange($event)"
+                ></fdp-grouping>
+            }
+        }
+    </fd-dialog-body>
+
+    <fd-dialog-footer>
+        <fd-button-bar
+            fdType="emphasized"
+            [label]="'platformTable.confirmBtnLabel' | fdTranslate"
+            (click)="confirm()"
+        ></fd-button-bar>
+        <fd-button-bar
+            [label]="'platformTable.cancelBtnLabel' | fdTranslate"
+            fdkInitialFocus
+            (click)="cancel()"
+        ></fd-button-bar>
+    </fd-dialog-footer>
+</fd-dialog>
