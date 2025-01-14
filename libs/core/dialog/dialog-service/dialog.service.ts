@@ -77,13 +77,6 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
         componentRef.instance.childContent = content;
         componentRef.instance.dialogConfig = dialogConfig;
         this._dialogs.push(componentRef);
-        dialogRef.afterClosed.pipe(
-            takeUntilDestroyed(this._destroyRef)
-        ).subscribe(() => {
-            if (dialogConfig.focusTrapped && previouslyFocusedElement) {
-                previouslyFocusedElement.focus();
-            }
-        });
 
         this.htmlElement && (this.htmlElement.style.overflow = 'hidden');
         dialogRef._endClose$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
@@ -91,6 +84,9 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
             componentRef.destroy();
             overlayRef.dispose();
             this.htmlElement && (this.htmlElement.style.overflow = '');
+            if (dialogConfig?.focusTrapped && previouslyFocusedElement) {
+                previouslyFocusedElement.focus();
+            }
         });
 
         return dialogRef;
