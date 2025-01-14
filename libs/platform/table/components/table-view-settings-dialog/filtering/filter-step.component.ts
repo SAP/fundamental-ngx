@@ -65,6 +65,10 @@ export class FilterStepComponent implements FiltersViewStep {
         this._filterBy = filterByList.find(({ field }) => field === this.columnKey);
     }
 
+    /** Column name to display in the filter */
+    @Input()
+    columnName: string;
+
     /** Go back event */
     @Output()
     back: EventEmitter<void> = new EventEmitter<void>();
@@ -92,6 +96,7 @@ export class FilterStepComponent implements FiltersViewStep {
         const filterBy: CollectionFilter = this._filterBy || {
             field: this.columnKey,
             value: null,
+            fieldName: this.columnName,
             strategy: FILTER_STRATEGY.EQ,
             exclude: false
         };
