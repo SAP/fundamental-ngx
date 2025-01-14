@@ -6,6 +6,7 @@ import { skip } from 'rxjs/operators';
 import { DEFAULT_TABLE_STATE } from '../constants';
 
 import { toSignal } from '@angular/core/rxjs-interop';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { CollectionFilter, CollectionGroup, CollectionPage, CollectionSort, TableState } from '../interfaces';
 import {
     ColumnsChange,
@@ -188,7 +189,12 @@ export class TableService {
         const prevState = this.getTableState();
         const prevFilterRules = (prevState && prevState.filterBy) || [];
 
-        const newFilterRules: CollectionFilter[] = filterRules ? [...filterRules] : [];
+        const newFilterRules: CollectionFilter[] = filterRules
+            ? filterRules.map((rule) => ({
+                  ...rule,
+                  fieldName: this._getFieldName(rule.field, rule.fieldName)
+              }))
+            : [];
         const state: TableState = { ...prevState, filterBy: newFilterRules };
 
         if (!equal(prevFilterRules, state.filterBy)) {
@@ -209,7 +215,10 @@ export class TableService {
 
         const newFilterRules: CollectionFilter[] = [
             ...prevFilterRules.filter((existing) => !rulesToAdd.find(({ field }) => field === existing.field)),
-            ...rulesToAdd
+            ...rulesToAdd.map((rule) => ({
+                ...rule,
+                fieldName: this._getFieldName(rule.field, rule.fieldName)
+            }))
         ];
 
         const state: TableState = { ...prevState, filterBy: newFilterRules };
@@ -426,10 +435,12 @@ export class TableService {
      * @param state Table state.
      */
     buildFilterRulesMap(state = this.getTableState()): void {
-        const prevState = this.getTableState();
-        const evt = { current: state.filterBy, previous: prevState.filterBy };
+        const filterRulesWithFieldNames = state.filterBy.map((rule) => ({
+            ...rule,
+            fieldName: this._getFieldName(rule.field, rule.fieldName)
+        }));
         this.filterRules$.set(
-            state.filterBy.reduce((hash, rule) => {
+            filterRulesWithFieldNames.reduce((hash, rule) => {
                 const key = rule.field;
                 if (!hash.has(key)) {
                     hash.set(key, []);
@@ -438,6 +449,8 @@ export class TableService {
                 return hash;
             }, new Map<string, CollectionFilter[]>())
         );
+        const evt = { current: filterRulesWithFieldNames, previous: state.filterBy };
+
         this.stateChange$.next({ type: 'filter', state: evt });
     }
 
@@ -467,6 +480,12 @@ export class TableService {
         this.buildGroupRulesMap();
         this.buildSortRulesMap();
         this.buildFilterRulesMap();
+    }
+
+    /** @hidden */
+    private _getFieldName(field: string, fieldName: Nullable<string>): string {
+        const column = this.tableColumns$.getValue().find((col) => col.key === field);
+        return column ? column.name : fieldName ?? field;
     }
 }
 

@@ -135,6 +135,12 @@ fdk-dynamic-portal {
         }
     }
 
+    .fdp-table__applied-filters-toolbar {
+        label {
+            flex-shrink: 1;
+        }
+    }
+
     .#{$block}__body-table,
     .#{$block}__header-table,
     .#{$block}__body-hs-table {
