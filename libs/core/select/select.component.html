@@ -87,7 +87,7 @@
         [hasMessage]="!!stateMessage || (!!advancedStateMessage?.hasErrors && !!advancedStateMessage?.template)"
         [attr.id]="controlId + '-list-box'"
         [style.max-height]="maxHeight || calculatedMaxHeight + 'px'"
-        [style.padding-block-start.rem]="!showEllipsis ? 0 : 2"
+        [style.padding-block-start.rem]="showEllipsis && stateMessage ? 2 : 0"
         [attr.tooltip]="triggerValue"
     >
         @if (stateMessage) {
