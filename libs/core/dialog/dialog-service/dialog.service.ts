@@ -45,6 +45,10 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
         parentInjector?: Injector
     ): DialogRef<T> {
         const dialogRef = new DialogRef();
+        let previouslyFocusedElement: HTMLElement | null = null;
+        if (dialogConfig?.focusTrapped && document.activeElement) {
+            previouslyFocusedElement = document.activeElement as HTMLElement;
+        }
         if (!parentInjector) {
             parentInjector = this._injector;
         }
@@ -72,7 +76,6 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
 
         componentRef.instance.childContent = content;
         componentRef.instance.dialogConfig = dialogConfig;
-
         this._dialogs.push(componentRef);
 
         this.htmlElement && (this.htmlElement.style.overflow = 'hidden');
@@ -81,6 +84,9 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
             componentRef.destroy();
             overlayRef.dispose();
             this.htmlElement && (this.htmlElement.style.overflow = '');
+            if (dialogConfig?.focusTrapped && previouslyFocusedElement) {
+                previouslyFocusedElement.focus();
+            }
         });
 
         return dialogRef;
