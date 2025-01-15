@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.4...v0.54.2-rc.5) (2025-01-15)
+
+
+### Features
+
+* **core:** dialog focus trap ([#12831](https://github.com/SAP/fundamental-ngx/issues/12831)) ([eb000ce](https://github.com/SAP/fundamental-ngx/commit/eb000ce6476a9cb72b2e07e8c6eaa06efaf358cd)), closes [#12768](https://github.com/SAP/fundamental-ngx/issues/12768)
+
+
+
+
+
 ## [0.54.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.3...v0.54.2-rc.4) (2025-01-10)
 
 
