@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.4...v0.54.2-rc.5) (2025-01-15)
+
+
+### Bug Fixes
+
+* **platform:** change aria-rowindex initial value ([#12778](https://github.com/SAP/fundamental-ngx/issues/12778)) ([#12927](https://github.com/SAP/fundamental-ngx/issues/12927)) ([0417dfd](https://github.com/SAP/fundamental-ngx/commit/0417dfd89233f29bdddfca786cea09fd924e8c8b))
+* **platform:** table filter enhancement ([#12864](https://github.com/SAP/fundamental-ngx/issues/12864)) ([e4cf354](https://github.com/SAP/fundamental-ngx/commit/e4cf3542d9d488396ee82ea33c6c2f4b5be72440)), closes [#11783](https://github.com/SAP/fundamental-ngx/issues/11783) [#11783](https://github.com/SAP/fundamental-ngx/issues/11783)
+* **platform:** unused var build error ([#12930](https://github.com/SAP/fundamental-ngx/issues/12930)) ([5ec915c](https://github.com/SAP/fundamental-ngx/commit/5ec915ce4abb9e29117fdd8b0a54b1525c4431c1))
+
+
+
+
+
 ## [0.54.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.3...v0.54.2-rc.4) (2025-01-10)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
