@@ -33,6 +33,7 @@
                         [colorAssociations]="colorAssociations()"
                         [attr.tabindex]="idx === 0 ? 0 : -1"
                         [attr.aria-selected]="item.uId === selectedUid"
+                        [attr.aria-level]="3"
                         (click)="_selectItem(item, $event)"
                         (keydown)="_keyDownHandler($event, item, idx)"
                     >
