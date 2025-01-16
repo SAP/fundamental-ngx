@@ -3,7 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActionBarModule } from './action-bar.module';
 
 @Component({
-    template: ` <div #componentElement fd-action-bar>Action Bar Parent Test Text</div> `
+    template: ` <div #componentElement fd-action-bar>Action Bar Parent Test Text</div> `,
+    standalone: true,
+    imports: [ActionBarModule]
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
@@ -16,8 +18,7 @@ describe('Action Bar Parent Component', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [ActionBarModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

@@ -38,6 +38,8 @@ import { PlatformDatetimePickerModule } from './datetime-picker.module';
             <button type="submit" #submitButton>Submit</button>
         </form>
     `,
+    standalone: true,
+    imports: [ReactiveFormsModule, FdpFormGroupModule, FormModule, PlatformDatetimePickerModule, FdDatetimeModule],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 class TestDatetimePickerComponent {
@@ -72,14 +74,8 @@ describe('PlatformDatetimePickerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestDatetimePickerComponent],
             imports: [
-                PlatformDatetimePickerModule,
-                FdDatetimeModule,
-                FdpFormGroupModule,
-                FormsModule,
-                FormModule,
-                ReactiveFormsModule
+                TestDatetimePickerComponent
             ]
         }).compileComponents();
     }));

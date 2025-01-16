@@ -199,13 +199,21 @@ export class CvaDirective<T = any>
         return this.formField?.getPriorityState() || 'default';
     });
 
+    /** @hidden */
+    protected _subscriptions = new Subscription();
+
+    /**
+     * A private property to hold the ElementRef which might be null
+     */
+    private _elementRefOrNull: ElementRef | null = inject(ElementRef, { optional: true });
+
     /**
      * Element reference.
      */
-    readonly elementRef = inject(ElementRef);
-
-    /** @hidden */
-    protected _subscriptions = new Subscription();
+    get elementRef(): ElementRef {
+        // Return a fallback ElementRef if _elementRefOrNull is null
+        return this._elementRefOrNull || (this._elementRef as ElementRef);
+    }
 
     /** @hidden */
     private _defaultId = `fd-input-id-${randomId++}`;

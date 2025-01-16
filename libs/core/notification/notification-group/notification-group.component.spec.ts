@@ -8,14 +8,17 @@ import { NotificationGroupHeaderComponent } from '../notification-group-header/n
 
 @Component({
     selector: 'fd-notification-group-test',
-    template: ` <fd-notification-group #notificationGroup [expanded]="true" ariaLabel="Notification Group Test Aria Label">
-    <fd-notification-group-header #notificationGroupHeader>
-        <span fd-notification-group-header-title id="fd-notification-group-header-title-test-1">Today</span>
-    </fd-notification-group-header>
-    <fd-notification-group-list #notificationGroupList id="fd-notification-group-list-1">
-        Notifications
-    </fd-notification-group-list>
-</fd-notification-group> `
+    template: ` 
+    <fd-notification-group #notificationGroup [expanded]="true" ariaLabel="Notification Group Test Aria Label">
+        <fd-notification-group-header #notificationGroupHeader>
+            <span fd-notification-group-header-title id="fd-notification-group-header-title-test-1">Today</span>
+        </fd-notification-group-header>
+        <fd-notification-group-list #notificationGroupList id="fd-notification-group-list-1">
+            Notifications
+        </fd-notification-group-list>
+    </fd-notification-group> `,
+    standalone: true,
+    imports: [NotificationModule]
 })
 class TestWrapperComponent {
     notificationGroup = viewChild<NotificationGroupComponent>('notificationGroup');
@@ -29,8 +32,7 @@ describe('NotificationGroupComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [NotificationModule]
+            imports: [TestWrapperComponent]
         }).compileComponents();
     });
 

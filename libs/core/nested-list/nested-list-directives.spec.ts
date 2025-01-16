@@ -13,7 +13,9 @@ import { NestedListModule } from './nested-list.module';
         <div fd-nested-list-title>Title</div>
         <button fd-nested-list-expand-icon></button>
         <span fd-nested-list-icon></span>
-    `
+    `,
+    standalone: true,
+    imports: [NestedListModule]
 })
 class TestNestedContainerComponent {
     @ViewChild(NestedListTitleDirective)
@@ -35,8 +37,7 @@ describe('NestedListDirectives', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [NestedListModule],
-            declarations: [TestNestedContainerComponent],
+            imports: [TestNestedContainerComponent],
             providers: [NestedItemService]
         }).compileComponents();
     }));

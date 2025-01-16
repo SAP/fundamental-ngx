@@ -55,7 +55,9 @@ const { contentDensityDirectiveProvider, setContentDensity } = mockedLocalConten
         <fd-slider class="example-5" [(ngModel)]="value5" [disabled]="true"></fd-slider>
 
         <fd-slider class="example-6" [(ngModel)]="value6" fdCozy></fd-slider>
-    `
+    `,
+    standalone: true,
+    imports: [SliderModule, FormsModule, ContentDensityModule],
 })
 class TestSliderComponent {
     @ViewChildren(SliderComponent)
@@ -91,8 +93,7 @@ describe('SliderComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestSliderComponent],
-            imports: [SliderModule, FormsModule, ContentDensityModule],
+            imports: [TestSliderComponent],
             providers: [contentDensityDirectiveProvider]
         }).compileComponents();
     }));

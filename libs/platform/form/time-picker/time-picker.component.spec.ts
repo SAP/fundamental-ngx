@@ -37,7 +37,9 @@ import { PlatformTimePickerModule } from './time-picker.module';
             <button type="submit" #submitButton>Submit</button>
         </form>
     `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PlatformTimePickerModule, FdpFormGroupModule, FormsModule, ReactiveFormsModule, FdDatetimeModule]
 })
 class TestTimePickerComponent {
     @ViewChild(PlatformTimePickerComponent) timePickerComponent: PlatformTimePickerComponent<FdDate>;
@@ -64,8 +66,7 @@ describe('PlatformTimePickerComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TestTimePickerComponent],
-            imports: [PlatformTimePickerModule, FdpFormGroupModule, FormsModule, ReactiveFormsModule, FdDatetimeModule]
+            imports: [TestTimePickerComponent]
         }).compileComponents();
     });
 

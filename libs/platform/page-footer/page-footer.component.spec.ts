@@ -22,7 +22,9 @@ import { PlatformPageFooterModule } from './page-footer.module';
             <fdp-link id="fd-link-test-4" href="/" title="footer link Cookie Statement">Cookie Statement</fdp-link>
             <fdp-link id="fd-link-test-5" href="/" title="footer link Participant Team">Participant Team</fdp-link>
         </ng-template>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformPageFooterModule, PlatformLinkModule]
 })
 class PlatformFooterTestComponent {
     @ViewChild('platformPageFooter', { static: true, read: ElementRef })
@@ -36,8 +38,7 @@ describe('FooterComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PlatformPageFooterModule, PlatformLinkModule],
-            declarations: [PlatformFooterTestComponent]
+            imports: [PlatformFooterTestComponent]
         }).compileComponents();
     });
 

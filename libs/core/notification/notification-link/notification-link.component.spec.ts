@@ -6,7 +6,9 @@ import { NotificationLinkComponent } from './notification-link.component';
 
 @Component({
     selector: 'fd-notification-link-test',
-    template: ` <fd-notification-link #notificationLink></fd-notification-link> `
+    template: ` <fd-notification-link #notificationLink></fd-notification-link> `,
+    standalone: true,
+    imports: [NotificationModule]
 })
 class TestWrapperComponent {
     notificationLink = viewChild<NotificationLinkComponent>('notificationLink');
@@ -18,8 +20,7 @@ describe('NotificationLinkComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [NotificationModule]
+            imports: [TestWrapperComponent]
         }).compileComponents();
     });
 

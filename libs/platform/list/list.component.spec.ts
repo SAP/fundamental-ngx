@@ -45,7 +45,9 @@ export class ListDataProvider extends DataProvider<Address> {
         >
             <fdp-standard-list-item title="Item1"></fdp-standard-list-item
         ></fdp-list>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformListModule, StandardListItemModule, RouterTestingModule]
 })
 class ListComponentTestComponent {
     @ViewChild(ListComponent, { read: ElementRef, static: true })
@@ -58,8 +60,7 @@ describe('ListComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformListModule, StandardListItemModule, RouterTestingModule],
-            declarations: [ListComponentTestComponent]
+            imports: [ListComponentTestComponent]
         }).compileComponents();
     }));
 
@@ -117,7 +118,9 @@ describe('ListComponent', () => {
             <fdp-standard-list-item #childComponent *fdpItemDef="let address" [title]="address.name">
             </fdp-standard-list-item>
         </fdp-list>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformListModule, StandardListItemModule, RouterTestingModule]
 })
 class ListDataSourceTestComponent {
     @ViewChild(ListComponent, { static: true }) component: ListComponent<Address>;
@@ -130,8 +133,7 @@ describe('ListComponent with DataSource', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ListDataSourceTestComponent],
-            imports: [PlatformListModule, StandardListItemModule, RouterTestingModule]
+            imports: [ListDataSourceTestComponent]
         }).compileComponents();
     }));
 

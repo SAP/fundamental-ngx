@@ -5,6 +5,7 @@ import { ViewportSizeObservable } from '../../tokens/viewport-size.observable';
 import { BreakpointDirective } from './breakpoint.directive';
 
 @Component({
+    standalone: true,
     template: `
         <ng-template
             [fdkBreakpointS]="showOnS"
@@ -16,9 +17,10 @@ import { BreakpointDirective } from './breakpoint.directive';
         >
             <div id="element">Hello World!</div>
         </ng-template>
-    `
+    `,
+    imports: [BreakpointDirective]
 })
-class TestComponent {
+export class TestComponent {
     showOnS: boolean;
     showOnM: boolean;
     showOnL: boolean;
@@ -32,11 +34,11 @@ describe('BreakpointDirective', () => {
     let component: TestComponent;
     const viewportSizeObservable$ = new BehaviorSubject<number>(800);
     const findElement = (): HTMLElement => fixture.nativeElement.querySelector('#element');
+
     beforeEach(() => {
         viewportSizeObservable$.next(1920);
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [BreakpointDirective],
+            imports: [BreakpointDirective, TestComponent],
             providers: [{ provide: ViewportSizeObservable, useValue: viewportSizeObservable$ }]
         });
 

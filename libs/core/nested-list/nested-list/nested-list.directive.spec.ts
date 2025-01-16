@@ -42,7 +42,9 @@ import { NestedListDirective } from './nested-list.directive';
                 </ul>
             </li>
         </ul>
-    `
+    `,
+    standalone: true,
+    imports: [NestedListModule, ContentDensityModule]
 })
 class TestNestedContainerComponent {
     @ViewChild('level4List', { static: true, read: NestedListDirective })
@@ -66,8 +68,7 @@ describe('NestedListDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [NestedListModule, ContentDensityModule],
-            declarations: [TestNestedContainerComponent],
+            imports: [TestNestedContainerComponent],
             providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService]
         }).compileComponents();
     }));

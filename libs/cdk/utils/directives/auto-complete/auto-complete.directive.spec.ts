@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AutoCompleteDirective } from './auto-complete.directive';
 
 @Component({
+    standalone: true,
+    imports: [AutoCompleteDirective],
     template: ` <input [options]="values" fdkAutoComplete />`
 })
 class TestComponent {
@@ -19,8 +21,7 @@ describe('AutoCompleteDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [AutoCompleteDirective]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

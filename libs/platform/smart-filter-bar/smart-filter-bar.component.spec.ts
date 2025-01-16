@@ -70,7 +70,9 @@ import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
                 key="verified"
                 label="Verified"
             ></fdp-column>
-        </fdp-table>`
+        </fdp-table>`,
+        standalone: true,
+        imports: [PlatformTableModule, PlatformSmartFilterBarModule]
 })
 class TestComponent {
     @ViewChild(SmartFilterBarComponent) smartFilterBar: SmartFilterBarComponent;
@@ -311,8 +313,7 @@ describe('SmartFilterBarComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PlatformTableModule, PlatformSmartFilterBarModule, NoopAnimationsModule],
-            declarations: [TestComponent]
+            imports: [TestComponent, NoopAnimationsModule]
         }).compileComponents();
     });
 

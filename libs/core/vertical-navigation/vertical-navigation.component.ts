@@ -76,22 +76,17 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
 
     /** @hidden */
     constructor() {
-        effect(
-            () => {
-                if (!this._contentInited()) {
-                    return;
-                }
-
-                const isCondensed = this._condensed();
-
-                this._mainNavItems().forEach((item) => {
-                    item._condensed.set(isCondensed);
-                });
-            },
-            {
-                allowSignalWrites: true
+        effect(() => {
+            if (!this._contentInited()) {
+                return;
             }
-        );
+
+            const isCondensed = this._condensed();
+
+            this._mainNavItems().forEach((item) => {
+                item._condensed.set(isCondensed);
+            });
+        });
     }
 
     /** @hidden */

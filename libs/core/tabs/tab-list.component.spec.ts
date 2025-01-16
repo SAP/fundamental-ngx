@@ -14,7 +14,9 @@ import { TabsModule } from './tabs.module';
         @if (showDisabled) {
             <fd-tab title="Disabled" id="tab4"> Disabled </fd-tab>
         }
-    </fd-tab-list>`
+    </fd-tab-list>`,
+    standalone: true,
+    imports: [TabsModule]
 })
 class TestTabsComponent {
     @ViewChildren(TabPanelComponent)
@@ -30,8 +32,7 @@ describe('TabListComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestTabsComponent],
-            imports: [TabsModule]
+            imports: [TestTabsComponent]
         }).compileComponents();
     }));
 
@@ -115,7 +116,9 @@ const NUMBER_OF_TABS = 10;
                 <fd-tab [title]="title">{{ title }} content</fd-tab>
             }
         </fd-tab-list>
-    `
+    `,
+    standalone: true,
+    imports: [TabsModule]
 })
 class TestCollapsibleTabsComponent {
     @ViewChildren(TabPanelComponent)
@@ -135,8 +138,7 @@ describe('TabListComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestCollapsibleTabsComponent],
-            imports: [TabsModule]
+            imports: [TestCollapsibleTabsComponent]
         }).compileComponents();
     }));
 

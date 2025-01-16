@@ -37,7 +37,9 @@ function mouseClickOnElement(el: Element): void {
             <fdp-menu-item (itemSelect)="onItemSelect('Second Item')">Second Item</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onItemSelect('Third Item')">Third Item</fdp-menu-item>
         </fdp-menu>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformSplitMenuButtonModule, PlatformMenuModule]
 })
 class TestWrapperComponent {
     @ViewChild(SplitMenuButtonComponent, { static: true })
@@ -66,8 +68,7 @@ describe('SplitMenuButtonComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformMenuModule, PlatformSplitMenuButtonModule],
-            declarations: [TestWrapperComponent],
+            imports: [TestWrapperComponent],
             providers: [RtlService]
         }).compileComponents();
 

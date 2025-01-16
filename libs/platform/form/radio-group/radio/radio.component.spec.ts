@@ -39,7 +39,9 @@ import { RadioButtonComponent } from './radio.component';
             [disabled]="true"
             [(ngModel)]="selectedValue"
         ></fdp-radio-button>
-    `
+    `,
+    standalone: true,
+    imports: [RadioModule, FormModule, FormsModule, PlatformRadioGroupModule]
 })
 class TestRadioButtonComponent {
     @ViewChild('radio1') radioButton1: RadioButtonComponent;
@@ -54,8 +56,7 @@ describe('RadioButtonComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [RadioModule, FormModule, FormsModule, PlatformRadioGroupModule],
-            declarations: [TestRadioButtonComponent]
+            imports: [TestRadioButtonComponent]
         }).compileComponents();
     }));
 

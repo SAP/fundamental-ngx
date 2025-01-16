@@ -1,8 +1,7 @@
 import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
-    selector: '[cxSideNavButton], [fdx-side-nav-button]',
-    standalone: false
+    selector: '[cxSideNavButton], [fdx-side-nav-button]'
 })
 export class SideNavigationButtonDirective {
     /** @hidden */

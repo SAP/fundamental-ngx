@@ -3,7 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MultiAnnouncerDirective } from './multi-announcer.directive';
 
 @Component({
-    template: ` <input fdMultiAnnouncer />`
+    template: ` <input fdMultiAnnouncer />`,
+    standalone: true,
+    imports: [MultiAnnouncerDirective]
 })
 class TestComponent {
     @ViewChild(MultiAnnouncerDirective)
@@ -17,8 +19,7 @@ describe('MultiAnnouncerDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [MultiAnnouncerDirective]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

@@ -5,7 +5,9 @@ import { OptionItem } from '@fundamental-ngx/platform/shared';
 import { AutoCompleteDirective } from './auto-complete.directive';
 
 @Component({
-    template: '<input [options]="options" fdp-auto-complete>'
+    template: '<input [options]="options" fdp-auto-complete>',
+    standalone: true,
+    imports: [AutoCompleteDirective]
 })
 class TestComponent {
     @ViewChild(AutoCompleteDirective)
@@ -42,8 +44,7 @@ describe('AutoCompleteDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [AutoCompleteDirective],
-            declarations: [TestComponent]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

@@ -15,7 +15,9 @@ import { MicroProcessFlowModule } from './micro-process-flow.module';
                 ></fd-micro-process-flow-icon>
             </fd-micro-process-flow-item>
         </fd-micro-process-flow>
-    `
+    `,
+    standalone: true,
+    imports: [MicroProcessFlowModule]
 })
 class TestComponent {
     @ViewChild(MicroProcessFlowFocusableItemDirective)
@@ -31,8 +33,7 @@ describe('MicroProcessFlowFocusableItemDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [MicroProcessFlowModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

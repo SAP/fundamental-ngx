@@ -42,7 +42,9 @@ import { PlatformDatePickerModule } from './date-picker.module';
                 }
             </ng-template>
         </fdp-form-group>
-    `
+    `,
+    standalone: true,
+    imports: [ReactiveFormsModule, FdpFormGroupModule, FormModule, PlatformDatePickerModule, FdDatetimeModule]
 })
 class TestDatePickerComponent {
     @ViewChildren(PlatformDatePickerComponent)
@@ -69,8 +71,7 @@ describe('TestDatePickerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestDatePickerComponent],
-            imports: [PlatformDatePickerModule, ReactiveFormsModule, FdDatetimeModule, FormModule, FdpFormGroupModule]
+            imports: [TestDatePickerComponent]
         }).compileComponents();
     }));
 
@@ -476,7 +477,9 @@ describe('TestDatePickerComponent', () => {
 const DATE_PICKER_IDENTIFIER = 'platform-date-picker-unit-test';
 
 @Component({
-    template: `<fdp-date-picker id="${DATE_PICKER_IDENTIFIER}" name="${DATE_PICKER_IDENTIFIER}"></fdp-date-picker>`
+    template: `<fdp-date-picker id="${DATE_PICKER_IDENTIFIER}" name="${DATE_PICKER_IDENTIFIER}"></fdp-date-picker>`,
+    standalone: true,
+    imports: [PlatformDatePickerModule, FdDatetimeModule]
 })
 class PlatformDatePickerHostComponent {
     @ViewChild(PlatformDatePickerComponent) picker: PlatformDatePickerComponent<FdDate>;
@@ -486,8 +489,7 @@ runValueAccessorTests<PlatformDatePickerComponent<FdDate>, PlatformDatePickerHos
     component: PlatformDatePickerComponent,
     name: 'Date Picker',
     testModuleMetadata: {
-        imports: [PlatformDatePickerModule, FdDatetimeModule],
-        declarations: [PlatformDatePickerHostComponent]
+        imports: [PlatformDatePickerHostComponent]
     },
     hostTemplate: {
         getTestingComponent: (fixture) => fixture.componentInstance.picker,

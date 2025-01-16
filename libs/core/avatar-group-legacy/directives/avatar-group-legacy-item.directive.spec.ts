@@ -3,7 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AvatarGroupLegacyModule } from '../avatar-group-legacy.module';
 
 @Component({
-    template: `<div #directiveElement fd-avatar-group-legacy-item>Avatar Group Item</div>`
+    template: `<div #directiveElement fd-avatar-group-legacy-item>Avatar Group Item</div>`,
+    standalone: true,
+    imports: [AvatarGroupLegacyModule]
 })
 class TestComponent {
     @ViewChild('directiveElement', { static: false })
@@ -16,8 +18,7 @@ describe('AvatarGroupLegacyItemDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [AvatarGroupLegacyModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

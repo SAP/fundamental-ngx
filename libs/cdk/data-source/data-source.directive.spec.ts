@@ -1,20 +1,21 @@
 import { Component, inject } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { Observable, isObservable, of } from 'rxjs';
+import { Observable, of, isObservable } from 'rxjs';
+import { DataSourceDirective } from './data-source.directive';
 import { AbstractDataProvider } from './base/abstract-data-provider.class';
 import { BaseDataSource } from './base/base-data-source.class';
-import { DataSourceDirective } from './data-source.directive';
-import { isDataSource } from './helpers/is-datasource';
 import { DataSource, DataSourceParser, DataSourceProvider } from './models';
 import { FD_DATA_SOURCE_TRANSFORMER } from './tokens';
+import { isDataSource } from './helpers/is-datasource';
 
-export const dataProviderData = [1, 2, 3, 4, 5];
-export const arrayData = [6, 7, 8, 9];
+const dataProviderData = [1, 2, 3, 4, 5];
+const arrayData = [6, 7, 8, 9];
 
-export class MockDataProvider extends AbstractDataProvider<any> {
+class MockDataProvider extends AbstractDataProvider<any> {
     constructor(public items: any[]) {
         super();
     }
+
     fetch(): Observable<any[]> {
         return of(this.items);
     }
@@ -24,21 +25,21 @@ export class MockDataProvider extends AbstractDataProvider<any> {
     }
 }
 
-export class MockArrayDataSource extends BaseDataSource<number> {
+class MockArrayDataSource extends BaseDataSource<number> {
     constructor() {
         super(new MockDataProvider(arrayData));
         this.match('*');
     }
 }
 
-export class MockObservableDataSource extends BaseDataSource<number> {
+class MockObservableDataSource extends BaseDataSource<number> {
     constructor() {
         super(new MockDataProvider(dataProviderData));
         this.match('*');
     }
 }
 
-export class mockDataSourceParser implements DataSourceParser {
+class MockDataSourceParser implements DataSourceParser {
     parse(source: DataSource): DataSourceProvider | undefined {
         if (isDataSource(source)) {
             return source;
@@ -68,13 +69,14 @@ export class HostComponent {
 describe('DataSourceDirective', () => {
     let directive: DataSourceDirective<any>;
     let fixture: ComponentFixture<HostComponent>;
+
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [HostComponent],
             providers: [
                 {
                     provide: FD_DATA_SOURCE_TRANSFORMER,
-                    useClass: mockDataSourceParser
+                    useClass: MockDataSourceParser
                 }
             ]
         }).compileComponents();
@@ -82,6 +84,7 @@ describe('DataSourceDirective', () => {
         fixture = TestBed.createComponent(HostComponent);
         directive = fixture.componentInstance.directive;
     });
+
     it('should create an instance', () => {
         expect(directive).toBeTruthy();
     });
@@ -90,17 +93,15 @@ describe('DataSourceDirective', () => {
         const emitSpy = jest.spyOn(directive.dataChanged, 'emit');
 
         directive.dataSource = arrayData;
-
         tick(2000);
 
-        expect(emitSpy).toHaveBeenCalled();
+        expect(emitSpy).toHaveBeenCalledTimes(1);
         expect(emitSpy).toHaveBeenCalledWith(arrayData);
 
         directive.dataSource = new MockObservableDataSource();
-
         tick(2000);
 
-        expect(emitSpy).toHaveBeenCalled();
+        expect(emitSpy).toHaveBeenCalledTimes(2);
         expect(emitSpy).toHaveBeenCalledWith(dataProviderData);
     }));
 });

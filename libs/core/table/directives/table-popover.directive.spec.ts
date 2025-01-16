@@ -3,7 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TableModule } from '../table.module';
 
 @Component({
-    template: ` <div #tablePopoverElement fd-table-popover>Content</div> `
+    template: ` <div #tablePopoverElement fd-table-popover>Content</div> `,
+    standalone: true,
+    imports: [TableModule]
 })
 class TestComponent {
     @ViewChild('tablePopoverElement')
@@ -16,8 +18,7 @@ describe('TablePopoverDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [TableModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

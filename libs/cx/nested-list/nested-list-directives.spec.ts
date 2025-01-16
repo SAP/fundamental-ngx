@@ -7,14 +7,15 @@ import {
     NestedListIconComponent,
     NestedListTitleDirective
 } from './nested-list-directives';
-import { CxNestedListModule } from './nested-list.module';
 
 @Component({
     template: `
         <div fdx-nested-list-title>Title</div>
         <button fdx-nested-list-expand-icon></button>
         <span fdx-nested-list-icon></span>
-    `
+    `,
+    standalone: true,
+    imports: [NestedListTitleDirective, NestedListExpandIconComponent, NestedListIconComponent]
 })
 class TestNestedContainerComponent {
     @ViewChild(NestedListTitleDirective)
@@ -36,8 +37,7 @@ describe('NestedListDirectives', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CxNestedListModule],
-            declarations: [TestNestedContainerComponent],
+            imports: [TestNestedContainerComponent],
             providers: [NestedItemService]
         }).compileComponents();
     }));

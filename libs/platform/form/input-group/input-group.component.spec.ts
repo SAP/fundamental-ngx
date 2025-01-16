@@ -28,7 +28,9 @@ const INPUT_GROUP_IDENTIFIER = 'platform-input-group-unit-test';
                 <fdp-button label="Button"></fdp-button>
             </fdp-input-group-addon>
         </fdp-input-group>
-    `
+    `,
+    standalone: true,
+    imports: [CommonModule, PlatformButtonModule, PlatformInputGroupModule]
 })
 class InputGroupHostComponent {
     @ViewChild(InputGroupComponent) inputGroupComponent: InputGroupComponent;
@@ -43,8 +45,7 @@ describe('InputGroup component', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformButtonModule, PlatformInputGroupModule],
-            declarations: [InputGroupHostComponent]
+            imports: [InputGroupHostComponent]
         }).compileComponents();
     }));
 
@@ -118,7 +119,9 @@ describe('InputGroup component', () => {
                 }
             </ng-template>
         </fdp-form-group>
-    `
+    `,
+    standalone: true,
+    imports: [CommonModule, ReactiveFormsModule, FdpFormGroupModule, PlatformButtonModule, PlatformInputGroupModule]
 })
 class InputGroupFormTestWrapperComponent {
     @ViewChild(InputGroupComponent)
@@ -137,8 +140,7 @@ describe('Input group within platform form', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformButtonModule, PlatformInputGroupModule],
-            declarations: [InputGroupFormTestWrapperComponent]
+            imports: [InputGroupFormTestWrapperComponent]
         }).compileComponents();
     }));
 

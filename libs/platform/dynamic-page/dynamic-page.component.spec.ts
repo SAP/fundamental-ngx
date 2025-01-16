@@ -44,7 +44,9 @@ import { PlatformDynamicPageModule } from './dynamic-page.module';
             <fdp-dynamic-page-header></fdp-dynamic-page-header>
             <fdp-dynamic-page-content>DynamicPage Content Text</fdp-dynamic-page-content>
         </fdp-dynamic-page>
-    `
+    `,
+    standalone: true,
+    imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ButtonModule]
 })
 class TestComponent {
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
@@ -60,8 +62,7 @@ describe('DynamicPageComponent default values', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ButtonModule],
-            declarations: [TestComponent],
+            imports: [TestComponent],
             providers: []
         }).compileComponents();
     }));
@@ -149,7 +150,9 @@ describe('DynamicPageComponent default values', () => {
                 DynamicPage Content Tabbed 2 Text
             </fdp-dynamic-page-content>
         </fdp-dynamic-page>
-    `
+    `,
+    standalone: true,
+    imports: [CommonModule, PlatformDynamicPageModule, TabsModule]
 })
 class TestTabbedComponent {
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
@@ -165,8 +168,7 @@ describe('DynamicPageComponent tabbed values', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformDynamicPageModule, TabsModule],
-            declarations: [TestTabbedComponent]
+            imports: [TestTabbedComponent]
         }).compileComponents();
     }));
     beforeEach(() => {
@@ -209,7 +211,9 @@ describe('DynamicPageComponent tabbed values', () => {
             <fdp-dynamic-page-header [collapsible]="false" [pinnable]="false"></fdp-dynamic-page-header>
             <fdp-dynamic-page-content>DynamicPage Content</fdp-dynamic-page-content>
         </fdp-dynamic-page>
-    `
+    `,
+    standalone: true,
+    imports: [CommonModule, PlatformDynamicPageModule, TabsModule]
 })
 class TestNonCollapsibleComponent {
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
@@ -221,8 +225,7 @@ describe('DynamicPageComponent with collapsible set to false', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformDynamicPageModule, TabsModule],
-            declarations: [TestNonCollapsibleComponent]
+            imports: [TestNonCollapsibleComponent]
         }).compileComponents();
     }));
     beforeEach(() => {
@@ -294,7 +297,9 @@ describe('DynamicPageComponent with collapsible set to false', () => {
                 <div id="test-footer">DynamicPage Footer</div>
             </fdp-dynamic-page-footer>
         </fdp-dynamic-page>
-    `
+    `,
+    standalone: true,
+    imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ButtonModule]
 })
 class HostTestComponent {
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
@@ -306,8 +311,7 @@ describe('DynamicPageComponent Content Projection', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ButtonModule],
-            declarations: [HostTestComponent]
+            imports: [HostTestComponent]
         }).compileComponents();
     }));
 

@@ -7,7 +7,9 @@ import { ListModule } from '../list.module';
         <li #componentElement fd-list-link [navigated]="navigated" [navigationIndicator]="navigationIndicator">
             ListLinkComponent
         </li>
-    `
+    `,
+    standalone: true,
+    imports: [ListModule]
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
@@ -24,8 +26,7 @@ describe('ListTitleComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [ListModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

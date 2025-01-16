@@ -29,7 +29,9 @@ import { TileActionCloseDirective, TileActionIndicatorDirective, TileRefreshDire
             <div fd-tile-section></div>
         </div>
         <div #container fd-tile-container [list]="true"></div>
-    `
+    `,
+    standalone: true,
+    imports: [TileModule]
 })
 export class TestComponent {
     @ViewChild('header')
@@ -68,8 +70,7 @@ describe('TileDirectives', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TileModule],
-            declarations: [TestComponent]
+            imports: [TestComponent]
         });
     }));
 

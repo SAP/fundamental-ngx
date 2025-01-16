@@ -9,7 +9,9 @@ import { DynamicPageSubheaderComponent } from './dynamic-page-subheader.componen
 
 @Component({
     template: ` <fd-dynamic-page-subheader></fd-dynamic-page-subheader>`,
-    providers: [DynamicPageService]
+    providers: [DynamicPageService],
+    standalone: true,
+    imports: [CommonModule, DynamicPageModule]
 })
 class TestComponent {
     @ViewChild(DynamicPageSubheaderComponent) subHeader: DynamicPageSubheaderComponent;
@@ -24,8 +26,7 @@ describe('DynamicPageHeaderComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, DynamicPageModule],
-            declarations: [TestComponent]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

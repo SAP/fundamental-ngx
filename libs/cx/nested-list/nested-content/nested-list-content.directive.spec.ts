@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedListExpandIconComponent } from '../nested-list-directives';
 import { NestedListStateService } from '../nested-list-state.service';
+import { CommonModule } from '@angular/common';
 import { CxNestedListModule } from '../nested-list.module';
 import { NestedListContentDirective } from './nested-list-content.directive';
 
@@ -15,7 +16,9 @@ import { NestedListContentDirective } from './nested-list-content.directive';
             </a>
             <a fdx-nested-list-expand-icon></a>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [CommonModule, CxNestedListModule]
 })
 class TestNestedContainerComponent {
     @ViewChild(NestedListContentDirective)
@@ -33,8 +36,7 @@ describe('NestedContentDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CxNestedListModule],
-            declarations: [TestNestedContainerComponent],
+            imports: [TestNestedContainerComponent],
             providers: [NestedListStateService, NestedItemService]
         }).compileComponents();
     }));

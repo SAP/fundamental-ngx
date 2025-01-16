@@ -36,7 +36,7 @@ export type DragoverPredicate<T> = (
 @Directive({
     selector: '[fdkDndList], [fd-dnd-list]',
     providers: [{ provide: DND_LIST, useExisting: forwardRef(() => DndListDirective) }],
-    standalone: false
+    standalone: true
 })
 export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     /**

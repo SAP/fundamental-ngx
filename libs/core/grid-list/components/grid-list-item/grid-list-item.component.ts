@@ -32,7 +32,6 @@ import {
 
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
-import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { GridListItemBodyDirective } from '../../directives/grid-list-item-body.directive';
 import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';
@@ -68,7 +67,6 @@ export type GridListItemStatus = 'success' | 'warning' | 'error' | 'neutral';
         GridListTitleBarSpacerComponent,
         ButtonComponent,
         IconComponent,
-        TitleComponent,
         FormsModule,
         ObjectStatusComponent,
         FdTranslatePipe,

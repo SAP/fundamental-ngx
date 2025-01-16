@@ -4,6 +4,7 @@ import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListPopoverComponent } from './nested-list-popover.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('NestedListPopoverComponent', () => {
     let component: NestedListPopoverComponent;
@@ -11,8 +12,7 @@ describe('NestedListPopoverComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PopoverModule],
-            declarations: [NestedListPopoverComponent],
+            imports: [PopoverModule, NoopAnimationsModule, NestedListPopoverComponent ],
             providers: [MenuKeyboardService, NestedListKeyboardService]
         }).compileComponents();
     }));

@@ -17,7 +17,9 @@ import { CarouselConfig, CarouselService } from './carousel.service';
             <div fdCarouselItem value="6" [style.height.px]="30"></div>
             <div fdCarouselItem value="7" [style.height.px]="30"></div>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [CommonModule, CarouselItemDirective, CarouselDirective]
 })
 class VerticalCarouselComponent {
     @ViewChild(CarouselDirective)
@@ -40,7 +42,9 @@ class VerticalCarouselComponent {
             <div fdCarouselItem value="6" [initialWidth]="30" class="element"></div>
             <div fdCarouselItem value="7" [initialWidth]="30" class="element"></div>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [CommonModule, CarouselItemDirective, CarouselDirective]
 })
 class HorizontalCarouselComponent {
     @ViewChild(CarouselDirective)
@@ -56,8 +60,7 @@ describe('CarouselDirective', () => {
     beforeEach(() => {
         TestBed.resetTestingModule();
         TestBed.configureTestingModule({
-            imports: [CommonModule, CarouselItemDirective, CarouselDirective],
-            declarations: [HorizontalCarouselComponent, VerticalCarouselComponent],
+            imports: [HorizontalCarouselComponent, VerticalCarouselComponent],
             providers: [CarouselService]
         }).compileComponents();
     });

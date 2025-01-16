@@ -3,7 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TableModule } from '../table.module';
 
 @Component({
-    template: ` <div #tableInnerElement fd-table-inner>Content</div> `
+    template: ` <div #tableInnerElement fd-table-inner>Content</div> `,
+    standalone: true,
+    imports: [TableModule]
 })
 class TestComponent {
     @ViewChild('tableInnerElement')
@@ -16,8 +18,7 @@ describe('TableInnerDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [TableModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

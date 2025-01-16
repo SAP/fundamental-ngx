@@ -25,7 +25,9 @@ import { MessageBoxHeaderComponent } from './message-box-header.component';
                 </div>
             </ng-template>
         </fd-message-box-header>
-    `
+    `,
+    standalone: true,
+    imports: [BarModule, MessageBoxModule]
 })
 class CustomHeaderTestComponent {
     @ViewChild(MessageBoxHeaderComponent) messageBoxHeader: MessageBoxHeaderComponent;
@@ -39,7 +41,9 @@ class CustomHeaderTestComponent {
             }
             <h1 fd-title>Default Title</h1>
         </fd-message-box-header>
-    `
+    `,
+    standalone: true,
+    imports: [BarModule, MessageBoxModule]
 })
 class HeaderWithProjectedIconTestComponent {
     @ViewChild(MessageBoxHeaderComponent) messageBoxHeader: MessageBoxHeaderComponent;
@@ -51,7 +55,9 @@ class HeaderWithProjectedIconTestComponent {
         <fd-message-box-header>
             <h1 fd-title>Default Title</h1>
         </fd-message-box-header>
-    `
+    `,
+    standalone: true,
+    imports: [BarModule, MessageBoxModule]
 })
 class DefaultHeaderTestComponent {
     @ViewChild(MessageBoxHeaderComponent) messageBoxHeader: MessageBoxHeaderComponent;
@@ -60,8 +66,7 @@ class DefaultHeaderTestComponent {
 describe('MessageBoxHeaderComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [BarModule, MessageBoxModule],
-            declarations: [CustomHeaderTestComponent, DefaultHeaderTestComponent, HeaderWithProjectedIconTestComponent],
+            imports: [CustomHeaderTestComponent, DefaultHeaderTestComponent, HeaderWithProjectedIconTestComponent],
             providers: [
                 {
                     provide: MessageBoxHost,
