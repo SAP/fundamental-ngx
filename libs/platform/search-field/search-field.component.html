@@ -66,6 +66,8 @@
             <input
                 #inputField
                 type="search"
+                (focus)="_isFocused = true"
+                (blur)="_isFocused = false; (null)"
                 [attr.placeholder]="placeholder"
                 class="fdp-search-field__input fd-input fd-input-group__input {{ appearance?.searchFieldClass }}"
                 [attr.id]="_inputId"
