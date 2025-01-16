@@ -13,7 +13,6 @@ import {
     templateUrl: './wizard-generator-onchange-example.component.html',
     // Provide local form generator service here to ignore other example forms on the page.
     providers: [FormGeneratorService],
-    standalone: true,
     imports: [PlatformWizardGeneratorModule, JsonPipe]
 })
 export class WizardGeneratorOnchangeExampleComponent {

@@ -8,7 +8,6 @@ import { FeedListItemModule } from '@fundamental-ngx/core/feed-list-item';
 @Component({
     selector: 'fd-fli-mobile-example',
     templateUrl: './fli-mobile-example.component.html',
-    standalone: true,
     imports: [FeedListItemModule, AvatarComponent, ActionSheetModule, ButtonComponent, ContentDensityDirective]
 })
 export class FliMobileExampleComponent {}

@@ -21,7 +21,6 @@ const diRecipientExampleTs = 'di-example/disabled-recipient.directive.ts';
     selector: 'app-tabs',
     templateUrl: './disabled-docs.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

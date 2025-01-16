@@ -8,7 +8,6 @@ import { MultiComboboxComponent, MultiComboboxSelectionChangeEvent } from '@fund
     selector: 'fd-multi-combobox-columns-example',
     templateUrl: './multi-combobox-columns-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         FormItemComponent,
         FormLabelComponent,

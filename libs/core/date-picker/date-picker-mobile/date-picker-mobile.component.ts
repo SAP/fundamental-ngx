@@ -17,7 +17,6 @@ import { FD_DATE_PICKER_COMPONENT, FD_DATE_PICKER_MOBILE_CONFIG } from '../token
     templateUrl: './date-picker-mobile.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DialogModule,
         TitleModule,

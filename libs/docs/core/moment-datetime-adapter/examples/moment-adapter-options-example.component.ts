@@ -10,7 +10,6 @@ import { MOMENT_DATE_TIME_ADAPTER_OPTIONS, MomentDatetimeAdapter } from '@fundam
         { provide: DatetimeAdapter, useClass: MomentDatetimeAdapter },
         { provide: MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true, strict: true } }
     ],
-    standalone: true,
     imports: [DatetimePickerComponent, FdDatetimeAdapterModule]
 })
 export class MomentAdapterOptionsExampleComponent {}

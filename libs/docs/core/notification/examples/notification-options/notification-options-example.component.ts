@@ -12,7 +12,6 @@ import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
     selector: 'fd-notification-options-example',
     templateUrl: './notification-options-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         NotificationModule,
         AvatarComponent,

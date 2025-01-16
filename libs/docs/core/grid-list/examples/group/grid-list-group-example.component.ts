@@ -16,7 +16,6 @@ interface GridListItem {
     styleUrls: ['./grid-list-group-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [GridListModule, AvatarComponent, LinkComponent, RouterLink]
 })
 export class GridListGroupExampleComponent {

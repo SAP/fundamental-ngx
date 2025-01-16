@@ -5,7 +5,6 @@ import { ExampleLayoutGridBlockComponent } from './example-layout-grid-block.com
 @Component({
     selector: 'fd-layout-grid-row-example',
     templateUrl: './layout-grid-row-example.component.html',
-    standalone: true,
     imports: [LayoutGridModule, ExampleLayoutGridBlockComponent]
 })
 export class LayoutGridRowExampleComponent {}

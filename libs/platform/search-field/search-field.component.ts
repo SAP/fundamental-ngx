@@ -113,7 +113,6 @@ type Appearance = SearchComponent['appearance'] | undefined;
             useExisting: SearchFieldComponent
         }
     ],
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         MenuTriggerDirective,

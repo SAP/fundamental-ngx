@@ -5,7 +5,6 @@ import { TextComponent } from '@fundamental-ngx/core/text';
     selector: 'fd-text-hyphenation',
     templateUrl: './text-hyphenation.component.html',
     styleUrls: ['./text-hyphenation.component.scss'],
-    standalone: true,
     imports: [TextComponent]
 })
 export class TextHyphenationComponent {

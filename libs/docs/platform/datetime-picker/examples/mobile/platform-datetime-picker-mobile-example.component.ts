@@ -8,7 +8,6 @@ import { PlatformDatetimePickerComponent } from '@fundamental-ngx/platform/form'
     templateUrl: './platform-datetime-picker-mobile-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [PlatformDatetimePickerComponent, FdDatetimeModule]
 })
 export class PlatformDatetimePickerMobileExampleComponent {

@@ -47,7 +47,6 @@ const timeFormTsSrc = 'time-form-example.component.ts';
 @Component({
     selector: 'app-time',
     templateUrl: './time-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

@@ -11,7 +11,6 @@ import {
     selector: 'app-tree-header',
     templateUrl: './tree-header.component.html',
     styleUrls: ['./tree-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class TreeHeaderComponent {}

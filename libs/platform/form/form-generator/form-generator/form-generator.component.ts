@@ -97,7 +97,6 @@ export interface SubmitFormEventResult {
             deps: [FormGeneratorComponent]
         }
     ],
-    standalone: true,
     imports: [
         BusyIndicatorModule,
         FdpFormGroupModule,

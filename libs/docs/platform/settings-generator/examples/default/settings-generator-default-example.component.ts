@@ -68,7 +68,6 @@ class ExampleUserService {
     selector: 'fdp-settings-generator-default-example',
     templateUrl: './settings-generator-default-example.component.html',
     providers: [ExampleUserService],
-    standalone: true,
     imports: [TitleComponent, SettingsGeneratorModule, BarModule]
 })
 export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {

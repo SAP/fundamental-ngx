@@ -64,7 +64,6 @@ const splitButtonTextClasses = [splitButtonTextClass];
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [contentDensityObserverProviders()],
-    standalone: true,
     imports: [NgClass, MenuTriggerDirective, ButtonComponent, NgTemplateOutlet, FdTranslatePipe]
 })
 export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDestroy, AfterViewInit {

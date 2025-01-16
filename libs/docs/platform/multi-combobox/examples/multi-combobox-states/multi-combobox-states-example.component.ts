@@ -15,7 +15,6 @@ import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
-    standalone: true,
     imports: [FdpFormGroupModule, PlatformComboboxModule, PlatformMultiComboboxModule]
 })
 export class MultiComboboxStatesExampleComponent {

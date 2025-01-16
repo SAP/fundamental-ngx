@@ -26,7 +26,6 @@ export type SettingsSectionItemsModel = SettingsTemplateTab | SettingsFormTab | 
     templateUrl: './settings-generator-section.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FormGeneratorComponent, NgTemplateOutlet, AsyncOrSyncPipe]
 })
 export class SettingsGeneratorSectionComponent {

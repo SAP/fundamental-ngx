@@ -8,6 +8,10 @@
         "outputPath": {
             "type": "string",
             "description": "Path to the output directory"
+        },
+        "tsConfig": {
+            "type": "string",
+            "description": "Path to the tsconfig file. If not provided, the executor will pick the 'build' target's tsConfig"
         }
     },
     "required": []

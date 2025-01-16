@@ -16,7 +16,6 @@ import { TabTagDirective } from '../tab-utils/tab-directives';
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [TabTagDirective, IconComponent, FdTranslatePipe]
 })
 export class TabItemExpandComponent {}

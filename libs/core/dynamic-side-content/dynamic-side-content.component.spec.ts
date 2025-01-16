@@ -21,7 +21,9 @@ import { DynamicSideContentModule } from './dynamic-side-content.module';
                 <fd-dynamic-side-content-side>{{ sideTextContent }}</fd-dynamic-side-content-side>
             }
         </fd-dynamic-side-content>
-    `
+    `,
+    standalone: true,
+    imports: [CommonModule, DynamicSideContentModule]
 })
 class TestHostComponent {
     @ViewChild(DynamicSideContentComponent) dynamicSideContent: DynamicSideContentComponent;
@@ -41,8 +43,7 @@ describe('DynamicSideContent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, DynamicSideContentModule],
-            declarations: [TestHostComponent]
+            imports: [TestHostComponent]
         }).compileComponents();
     }));
 

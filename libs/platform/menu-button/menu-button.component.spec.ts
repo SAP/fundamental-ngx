@@ -51,7 +51,9 @@ describe('MenuButtonComponent', () => {
         <fdp-menu-button [fdContentDensity]="size" [disabled]="disabled" [type]="type">
             Standard Button with long text
         </fdp-menu-button>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformMenuButtonModule]
 })
 class DisabledMenuButtonComponent {
     @Input()
@@ -72,8 +74,7 @@ describe('Menu Button Disabled test and Type, size test', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformMenuButtonModule],
-            declarations: [DisabledMenuButtonComponent],
+            imports: [DisabledMenuButtonComponent],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     }));
@@ -121,7 +122,9 @@ describe('Menu Button Disabled test and Type, size test', () => {
             <fdp-menu-item (itemSelect)="onItemSelect('Second Item')">Second Item</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onItemSelect('Third Item')">Third Item</fdp-menu-item>
         </fdp-menu>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformMenuModule, PlatformMenuButtonModule]
 })
 class TestMenuButtonComponent {
     @Input()
@@ -158,8 +161,7 @@ describe('Menu Button click on Item select', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformMenuModule, PlatformMenuButtonModule],
-            declarations: [TestMenuButtonComponent],
+            imports: [TestMenuButtonComponent],
             providers: [RtlService]
         }).compileComponents();
     }));

@@ -9,7 +9,6 @@ import { TimePickerModule } from '@fundamental-ngx/core/time-picker';
     selector: 'fd-time-picker-allow-null-example',
     templateUrl: './time-picker-allow-null-example.component.html',
     providers: [provideDateTimeFormats()],
-    standalone: true,
     imports: [TimePickerModule, FormsModule, ReactiveFormsModule, ButtonComponent, DatePipe]
 })
 export class TimePickerAllowNullExampleComponent {

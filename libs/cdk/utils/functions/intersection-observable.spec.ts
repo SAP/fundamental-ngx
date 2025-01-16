@@ -42,13 +42,13 @@ class MockIntersectionObserver implements IntersectionObserver {
 
 @Component({
     template: '',
-    // eslint-disable-next-line @angular-eslint/no-host-metadata-property
     host: {
         '[style.display]': 'elementDisplay',
         '[style.box-sizing]': '"border-box"',
         '[style.width.px]': '100',
         '[style.height.px]': '100'
-    }
+    },
+    standalone: true
 })
 class TestComponent {
     elementDisplay = ELEMENT_DISPLAY;
@@ -66,7 +66,7 @@ describe('Intersection Observable utils', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

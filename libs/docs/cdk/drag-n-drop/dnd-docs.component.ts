@@ -21,7 +21,6 @@ const disabledExampleTs = 'disabled-example/disabled-example.component.ts';
     selector: 'app-dnd',
     templateUrl: './dnd-docs.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

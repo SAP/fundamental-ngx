@@ -4,7 +4,6 @@ import { SideNavigationModel, SideNavigationModule } from '@fundamental-ngx/core
 @Component({
     selector: 'fd-side-navigation-object-example',
     templateUrl: 'side-navigation-object-example.component.html',
-    standalone: true,
     imports: [SideNavigationModule]
 })
 export class SideNavigationObjectExampleComponent {

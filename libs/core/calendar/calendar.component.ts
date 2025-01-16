@@ -94,7 +94,6 @@ let calendarUniqueId = 0;
         class: 'fd-calendar fd-has-display-block'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ContentDensityModule,
         CalendarHeaderComponent,

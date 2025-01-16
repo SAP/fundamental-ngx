@@ -21,7 +21,6 @@ import { ObjectAttributeComponent } from '@fundamental-ngx/core/object-attribute
     styleUrl: './object-list-item.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ObjectAttributeComponent]
 })
 export class ObjectListItemRowComponent {

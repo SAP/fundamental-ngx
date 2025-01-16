@@ -9,7 +9,6 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarLabelDirective } from '@
 @Component({
     selector: 'fd-table-page-scroll-example',
     templateUrl: './table-page-scroll-example.component.html',
-    standalone: true,
     imports: [
         TableModule,
         FocusableGridDirective,

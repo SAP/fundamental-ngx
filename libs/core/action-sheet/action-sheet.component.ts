@@ -46,7 +46,6 @@ import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-m
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [KeyboardSupportService, DynamicComponentService],
-    standalone: true,
     imports: [PopoverComponent, PopoverControlComponent, NgTemplateOutlet, PopoverBodyComponent]
 })
 export class ActionSheetComponent implements AfterContentInit, AfterViewInit, OnDestroy {

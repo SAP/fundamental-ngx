@@ -14,7 +14,6 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
             }
         `
     ],
-    standalone: true,
     imports: [BreadcrumbModule, LinkComponent, RouterLink]
 })
 export class BreadcrumbRouterLinkExampleComponent {
@@ -40,7 +39,6 @@ export class BreadcrumbRouterLinkExampleComponent {
             }
         `
     ],
-    standalone: true,
     imports: [BreadcrumbModule, LinkComponent]
 })
 export class BreadcrumbHrefExampleComponent {

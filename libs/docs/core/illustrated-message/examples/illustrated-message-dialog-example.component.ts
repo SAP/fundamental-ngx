@@ -11,7 +11,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
 @Component({
     selector: 'fd-illustrated-message-dialog-example',
     templateUrl: './illustrated-message-dialog-example.component.html',
-    standalone: true,
     imports: [
         DialogModule,
         TitleComponent,

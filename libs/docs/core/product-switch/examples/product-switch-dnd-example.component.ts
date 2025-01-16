@@ -5,7 +5,6 @@ import { ShellbarActionsComponent, ShellbarComponent } from '@fundamental-ngx/co
 @Component({
     selector: 'fd-product-switch-dnd-example',
     templateUrl: './product-switch-dnd-example.component.html',
-    standalone: true,
     imports: [ShellbarComponent, ShellbarActionsComponent, ProductSwitchModule]
 })
 export class ProductSwitchDndExampleComponent {

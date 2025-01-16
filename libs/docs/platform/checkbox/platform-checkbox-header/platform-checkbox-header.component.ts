@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'app-checkbox-header',
     templateUrl: 'platform-checkbox-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, RouterLink, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformCheckboxHeaderComponent {}

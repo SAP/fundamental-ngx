@@ -51,7 +51,6 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' 
     host: {
         '[attr.tabindex]': 'clickable ? 0 : null'
     },
-    standalone: true,
     imports: [IconComponent, NgTemplateOutlet]
 })
 export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder {

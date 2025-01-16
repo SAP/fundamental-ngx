@@ -53,7 +53,6 @@ export interface ApprovalFlowApproverDetailsDialogRefData {
     host: {
         class: 'fdp-approval-flow-dialog fdp-approval-flow-approver-details'
     },
-    standalone: true,
     imports: [
         DialogComponent,
         DialogHeaderComponent,

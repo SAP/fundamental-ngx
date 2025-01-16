@@ -19,7 +19,6 @@ interface GridListItem {
     styleUrls: ['./grid-list-dnd-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         GridListModule,
         DragAndDropModule,

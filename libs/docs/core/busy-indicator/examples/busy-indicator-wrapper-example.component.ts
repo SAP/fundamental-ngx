@@ -7,7 +7,6 @@ import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fu
 @Component({
     selector: 'fd-busy-indicator-wrapper-example',
     templateUrl: './busy-indicator-wrapper-example.component.html',
-    standalone: true,
     imports: [
         BusyIndicatorComponent,
         FormsModule,

@@ -6,7 +6,6 @@ import { FdpFormGroupModule, PlatformSwitchModule } from '@fundamental-ngx/platf
 @Component({
     selector: 'fdp-semantic-switch-example',
     templateUrl: 'semantic-switch-example.component.html',
-    standalone: true,
     imports: [FdpFormGroupModule, PlatformSwitchModule, ContentDensityDirective, FormsModule]
 })
 export class SemanticSwitchExampleComponent {

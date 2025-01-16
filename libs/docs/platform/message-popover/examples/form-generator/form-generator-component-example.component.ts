@@ -39,7 +39,6 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
             useValue: FDP_MESSAGE_POPOVER_DEFAULT_CONFIG
         }
     ],
-    standalone: true,
     imports: [
         MessagePopoverFormWrapperComponent,
         PlatformFormGeneratorModule,

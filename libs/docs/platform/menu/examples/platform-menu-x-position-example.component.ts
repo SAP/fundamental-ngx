@@ -8,7 +8,6 @@ import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
     templateUrl: './platform-menu-x-position-example.component.html',
     styleUrls: ['./platform-menu-example-styles.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [ButtonComponent, PlatformMenuModule, AvatarComponent]
 })
 export class PlatformMenuXPositionExampleComponent {

@@ -6,7 +6,6 @@ type CarType = { id: string; name: string };
 @Component({
     selector: 'fd-select-custom-comparator-example',
     templateUrl: './select-custom-comparator-example.component.html',
-    standalone: true,
     imports: [SelectModule]
 })
 export class SelectCustomComparatorExample {

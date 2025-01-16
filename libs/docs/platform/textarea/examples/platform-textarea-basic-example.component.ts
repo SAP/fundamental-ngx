@@ -8,7 +8,6 @@ import { FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/pla
     selector: 'fdp-platform-textarea-basic-example',
     templateUrl: './platform-textarea-basic-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         FdpFormGroupModule,
         FormsModule,

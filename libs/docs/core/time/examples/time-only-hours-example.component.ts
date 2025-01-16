@@ -7,7 +7,6 @@ import { TimeModule } from '@fundamental-ngx/core/time';
     selector: 'fd-time-only-hours-example',
     templateUrl: './time-only-hours-example.component.html',
     providers: [provideDateTimeFormats()],
-    standalone: true,
     imports: [TimeModule, FormsModule]
 })
 export class TimeOnlyHoursExampleComponent {

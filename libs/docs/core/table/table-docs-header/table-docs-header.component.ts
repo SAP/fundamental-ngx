@@ -11,7 +11,6 @@ import {
     selector: 'app-table-docs-header',
     templateUrl: './table-docs-header.component.html',
     styleUrls: ['./table-docs-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class TableDocsHeaderComponent {}

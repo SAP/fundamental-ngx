@@ -6,7 +6,6 @@ import { PlatformSearchFieldModule, SearchInput, SuggestionItem } from '@fundame
     selector: 'fdp-platform-search-field-mobile-example',
     templateUrl: './platform-search-field-mobile-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [PlatformSearchFieldModule]
 })
 export class PlatformSearchFieldMobileExampleComponent {

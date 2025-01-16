@@ -5,7 +5,6 @@ import { ListModule } from '@fundamental-ngx/core/list';
 @Component({
     selector: 'fd-list-byline-interactive-example',
     templateUrl: './list-byline-interactive-example.component.html',
-    standalone: true,
     imports: [ListModule, IconComponent]
 })
 export class ListBylineInteractiveExampleComponent {}

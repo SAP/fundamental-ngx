@@ -12,7 +12,6 @@ import {
     selector: 'app-list-header',
     templateUrl: './platform-list-header.component.html',
     styleUrls: ['./platform-list-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, RouterLink, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformListHeaderComponent {}

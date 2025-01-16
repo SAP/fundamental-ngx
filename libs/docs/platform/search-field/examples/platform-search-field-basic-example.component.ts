@@ -8,7 +8,6 @@ import { PlatformSearchFieldModule, SearchInput, SuggestionItem } from '@fundame
     templateUrl: './platform-search-field-basic-example.component.html',
     styleUrls: ['./platform-search-field-basic-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [PlatformSearchFieldModule, ContentDensityDirective]
 })
 export class PlatformSearchFieldBasicExampleComponent {

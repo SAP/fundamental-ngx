@@ -34,7 +34,6 @@ import { SettingsGeneratorSectionComponent } from './settings-generator-section/
     templateUrl: './settings-generator-content.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         TitleComponent,
         ButtonComponent,

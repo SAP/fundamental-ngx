@@ -5,7 +5,6 @@ import { PlatformObjectMarkerModule } from '@fundamental-ngx/platform/object-mar
     selector: 'fdp-object-marker-text-and-icon-example',
     templateUrl: './object-marker-text-and-icon-example.component.html',
     styleUrls: ['./object-marker-text-and-icon-example.component.scss'],
-    standalone: true,
     imports: [PlatformObjectMarkerModule]
 })
 export class ObjectMarkerTextAndIconExampleComponent {}

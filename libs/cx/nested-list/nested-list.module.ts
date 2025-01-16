@@ -22,8 +22,7 @@ import { NestedListComponent } from './nested-list/nested-list.component';
 import { PreparedNestedListComponent } from './prepared-nested-list/prepared-nested-list.component';
 
 @NgModule({
-    imports: [CommonModule, PopoverModule, RouterModule, IconComponent, ContentDensityModule],
-    declarations: [
+    imports: [
         NestedListComponent,
         NestedLinkComponent,
         NestedItemComponent,
@@ -33,8 +32,13 @@ import { PreparedNestedListComponent } from './prepared-nested-list/prepared-nes
         NestedListPopoverComponent,
         PreparedNestedListComponent,
         NestedListExpandIconComponent,
-        NestedListContentDirective,
-        NestedListButtonDirective
+        NestedListButtonDirective,
+        CommonModule,
+        PopoverModule,
+        RouterModule,
+        IconComponent,
+        ContentDensityModule,
+        NestedListContentDirective
     ],
     exports: [
         NestedListComponent,

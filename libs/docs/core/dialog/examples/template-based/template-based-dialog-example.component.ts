@@ -19,7 +19,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     selector: 'fd-template-based-dialog-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './template-based-dialog-example.component.html',
-    standalone: true,
     imports: [
         TitleComponent,
         DialogTemplateDirective,

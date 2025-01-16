@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'app-time-picker-header',
     templateUrl: './platform-time-picker-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, RouterLink, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformTimePickerHeaderComponent {}

@@ -7,7 +7,6 @@ import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/pla
     templateUrl: './platform-standard-list-unread-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [PlatformListModule, StandardListItemModule, ContentDensityDirective]
 })
 export class PlatformStandardListUnreadExampleComponent {}

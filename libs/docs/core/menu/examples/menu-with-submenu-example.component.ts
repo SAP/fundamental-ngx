@@ -6,7 +6,6 @@ import { MenuItemComponent, MenuModule } from '@fundamental-ngx/core/menu';
 @Component({
     selector: 'fd-menu-with-submenu-example',
     templateUrl: './menu-with-submenu-example.component.html',
-    standalone: true,
     imports: [ButtonComponent, MenuModule, NgTemplateOutlet]
 })
 export class MenuWithSubmenuExampleComponent {

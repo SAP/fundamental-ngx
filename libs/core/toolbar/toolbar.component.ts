@@ -79,7 +79,6 @@ export const enum OverflowPriorityEnum {
             useExisting: ToolbarComponent
         }
     ],
-    standalone: true,
     imports: [
         ToolbarSpacerDirective,
         ToolbarSeparatorComponent,

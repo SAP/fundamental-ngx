@@ -92,7 +92,6 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
             useExisting: TabListComponent
         }
     ],
-    standalone: true,
     imports: [
         OverflowLayoutComponent,
         OverflowItemRefDirective,

@@ -11,7 +11,6 @@ import { MultiComboboxComponent, MultiComboboxSelectionChangeEvent } from '@fund
     selector: 'fd-multi-combobox-mobile-example',
     templateUrl: './multi-combobox-mobile-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         FormItemComponent,
         FormLabelComponent,

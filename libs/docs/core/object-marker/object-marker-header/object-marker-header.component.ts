@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-object-marker-header',
     templateUrl: './object-marker-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class ObjectMarkerHeaderComponent {}

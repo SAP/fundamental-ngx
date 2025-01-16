@@ -30,7 +30,6 @@ interface TableMobileItem {
 @Component({
     selector: 'fd-table-navigatable-row-example',
     templateUrl: './table-navigatable-row-example.component.html',
-    standalone: true,
     imports: [FocusableGridDirective, TableModule, LinkComponent, RouterLink, FormLabelComponent, ObjectStatusComponent]
 })
 export class TableNavigatableRowExampleComponent {

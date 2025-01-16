@@ -34,7 +34,6 @@ import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalend
     host: {
         '[attr.id]': 'viewId'
     },
-    standalone: true,
     imports: [ButtonComponent, FdTranslatePipe]
 })
 export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnChanges, FocusableCalendarView {

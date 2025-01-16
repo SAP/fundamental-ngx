@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -29,6 +30,7 @@ import {
     NestedListStateService,
     PreparedNestedListComponent
 } from '@fundamental-ngx/cx/nested-list';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { SideNavigationMainComponent } from './side-navigation-main.component';
 import { SideNavigationModel } from './side-navigation-model';
 import { SideNavigationUtilityDirective } from './side-navigation-utility.directive';
@@ -43,6 +45,7 @@ import { SideNavigationUtilityDirective } from './side-navigation-utility.direct
     templateUrl: './side-navigation.component.html',
     styleUrl: 'side-navigation.component.scss',
     encapsulation: ViewEncapsulation.None,
+    imports: [I18nModule, CommonModule, PreparedNestedListComponent],
     providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService]
 })
 export class SideNavigationComponent

@@ -49,7 +49,6 @@ let fileUploaderInputUniqueId = 0;
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FileUploaderDragndropDirective, ButtonComponent, FileUploaderSelectDirective]
 })
 export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, FormItemControl {

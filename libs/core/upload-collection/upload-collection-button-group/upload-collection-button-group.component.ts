@@ -16,7 +16,6 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
     templateUrl: './upload-collection-button-group.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ButtonComponent, FdTranslatePipe]
 })
 export class UploadCollectionButtonGroupComponent {

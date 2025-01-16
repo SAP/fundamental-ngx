@@ -6,7 +6,6 @@ import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fu
 @Component({
     selector: 'fd-tokenizer-example',
     templateUrl: './tokenizer-example.component.html',
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

@@ -25,7 +25,6 @@ const splitterApiTs = 'api/splitter-api-example.component.ts';
 @Component({
     selector: 'app-splitter',
     templateUrl: './splitter-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

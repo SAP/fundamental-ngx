@@ -8,7 +8,9 @@ const FONT_NAME = 'SAP-icons';
 
 @Component({
     selector: 'fd-test-icon',
-    template: ` <fd-micro-process-flow-icon [font]="fontName" [glyph]="iconName"></fd-micro-process-flow-icon> `
+    template: ` <fd-micro-process-flow-icon [font]="fontName" [glyph]="iconName"></fd-micro-process-flow-icon> `,
+    standalone: true,
+    imports: [MicroProcessFlowModule]
 })
 class TestWrapperComponent {
     readonly iconName = ICON_NAME;
@@ -21,8 +23,7 @@ describe('MicroProcessFlowIconComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [MicroProcessFlowModule]
+            imports: [TestWrapperComponent]
         }).compileComponents();
     });
 

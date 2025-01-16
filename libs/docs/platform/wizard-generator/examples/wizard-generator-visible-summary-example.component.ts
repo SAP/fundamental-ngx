@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fdp-wizard-generator-visible-summary-example',
     templateUrl: './wizard-generator-visible-summary-example.component.html',
-    standalone: true,
     imports: [PlatformWizardGeneratorModule, JsonPipe]
 })
 export class WizardGeneratorVisibleSummaryExampleComponent {

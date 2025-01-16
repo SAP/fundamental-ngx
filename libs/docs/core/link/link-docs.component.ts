@@ -15,7 +15,6 @@ const linkTs = 'link-example.component.ts';
 @Component({
     selector: 'app-link',
     templateUrl: './link-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

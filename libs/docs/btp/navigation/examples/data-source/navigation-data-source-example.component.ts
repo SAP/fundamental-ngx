@@ -17,7 +17,6 @@ interface ExampleNavigationItem {
 
 @Component({
     selector: 'fdb-navigation-data-source-example',
-    standalone: true,
     imports: [RouterLink, FormsModule, SegmentedButtonComponent, ButtonComponent, FDB_NAVIGATION],
     templateUrl: './navigation-data-source-example.component.html',
     encapsulation: ViewEncapsulation.None,

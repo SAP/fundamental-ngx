@@ -25,7 +25,9 @@ import { FixedCardLayoutModule } from './fixed-card-layout.module';
                 <fd-card *fdCardDef="11">1</fd-card>
             </fd-fixed-card-layout>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [FixedCardLayoutModule, CardModule]
 })
 class TestFixedCardLayoutComponent {
     @ViewChild(FixedCardLayoutComponent)
@@ -40,8 +42,7 @@ describe('FixedCardLayoutComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CardModule, FixedCardLayoutModule],
-            declarations: [TestFixedCardLayoutComponent],
+            imports: [TestFixedCardLayoutComponent],
             providers: [RtlService]
         }).compileComponents();
     }));

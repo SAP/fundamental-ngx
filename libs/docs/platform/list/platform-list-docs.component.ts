@@ -58,7 +58,6 @@ import { PlatformListWithSingleSelectionExampleComponent } from './examples/plat
 @Component({
     selector: 'app-list',
     templateUrl: './platform-list-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

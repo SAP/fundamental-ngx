@@ -61,7 +61,6 @@ customThemingConfig.customThemes = [
             useValue: customThemingConfig
         }
     ],
-    standalone: true,
     imports: [ButtonComponent, FormLabelComponent, JsonPipe]
 })
 export class CustomThemeExampleComponent implements OnDestroy {

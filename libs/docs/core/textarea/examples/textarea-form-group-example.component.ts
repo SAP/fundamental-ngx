@@ -12,7 +12,6 @@ import {
     selector: 'fd-textarea-form-group-example',
     templateUrl: './textarea-form-group-example.component.html',
     styleUrls: ['textarea-form-group-example.component.scss'],
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

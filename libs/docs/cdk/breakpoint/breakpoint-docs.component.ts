@@ -21,7 +21,6 @@ const differentSourceExampleTs = 'different-observe-target-example.component.ts'
 
 @Component({
     templateUrl: './breakpoint-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

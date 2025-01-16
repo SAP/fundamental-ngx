@@ -30,7 +30,6 @@ const a11yCheckboxSrc = 'platform-checkbox-a11y.component.ts';
 @Component({
     selector: 'app-checkbox',
     templateUrl: 'platform-checkbox-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

@@ -12,7 +12,6 @@ import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
             }
         `
     ],
-    standalone: true,
     imports: [PlatformLinkModule]
 })
 export class PlatformLinkTypesExampleComponent {}

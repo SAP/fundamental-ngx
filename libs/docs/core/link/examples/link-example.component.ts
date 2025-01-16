@@ -10,7 +10,6 @@ import { BehaviorSubject, of } from 'rxjs';
 @Component({
     selector: 'fd-link-example',
     templateUrl: './link-example.component.html',
-    standalone: true,
     imports: [LinkComponent, RouterLink, IconComponent, AsyncPipe, NgStyle]
 })
 export class LinkExampleComponent {

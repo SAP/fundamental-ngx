@@ -5,7 +5,6 @@ import { FdpFormGroupModule, PlatformSwitchModule } from '@fundamental-ngx/platf
 @Component({
     selector: 'fdp-switch-sizes-example',
     templateUrl: './switch-sizes-example.component.html',
-    standalone: true,
     imports: [FdpFormGroupModule, PlatformSwitchModule, ContentDensityDirective]
 })
 export class SwitchSizesExampleComponent {}

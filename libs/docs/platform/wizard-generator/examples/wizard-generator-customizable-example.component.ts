@@ -26,7 +26,6 @@ import {
 @Component({
     selector: 'fdp-wizard-generator-customizable-example',
     templateUrl: './wizard-generator-customizable-example.component.html',
-    standalone: true,
     imports: [
         PlatformButtonModule,
         ContentDensityDirective,

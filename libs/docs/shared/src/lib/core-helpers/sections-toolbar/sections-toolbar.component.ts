@@ -32,7 +32,6 @@ const SMALL_SCREEN_BREAKPOINT = 992;
     templateUrl: './sections-toolbar.component.html',
     styleUrls: ['./sections-toolbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         InputGroupModule,
         FormsModule,

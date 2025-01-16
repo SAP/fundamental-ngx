@@ -43,7 +43,6 @@ const sliderFormHtml = 'form/slider-form-example.component.html';
 @Component({
     selector: 'app-slider',
     templateUrl: './slider-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

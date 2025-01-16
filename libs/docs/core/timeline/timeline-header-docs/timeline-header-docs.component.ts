@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-timeline-header-docs',
     templateUrl: './timeline-header-docs.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class TimelineHeaderDocsComponent {}

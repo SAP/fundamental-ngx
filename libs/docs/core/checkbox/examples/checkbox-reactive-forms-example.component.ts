@@ -31,7 +31,6 @@ import { map } from 'rxjs/operators';
             Form Valid: {{ registrationForm.valid }}<br />
         </small>
     `,
-    standalone: true,
     imports: [FormsModule, ReactiveFormsModule, CheckboxComponent, JsonPipe]
 })
 export class CheckboxReactiveFormsExampleComponent implements OnInit {

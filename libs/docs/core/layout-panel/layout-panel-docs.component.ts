@@ -23,7 +23,6 @@ const panelFooterVariationsSrc = 'layout-panel-footer-variations-example.compone
 @Component({
     selector: 'app-layout-panel',
     templateUrl: './layout-panel-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-skeleton-header',
     templateUrl: './skeleton-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class SkeletonHeaderComponent {}

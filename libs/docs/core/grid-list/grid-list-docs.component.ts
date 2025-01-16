@@ -46,7 +46,6 @@ const gridListComboSelectHtml = 'combo-select/grid-list-combo-select-example.com
 @Component({
     selector: 'app-grid-list',
     templateUrl: './grid-list-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

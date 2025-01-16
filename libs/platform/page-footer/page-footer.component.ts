@@ -13,7 +13,6 @@ export type footerSize = 'sm' | 'md' | 'lg' | 'xl';
     templateUrl: './page-footer.component.html',
     styleUrl: './page-footer.component.scss',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [NgTemplateOutlet]
 })
 export class PlatformFooterComponent {

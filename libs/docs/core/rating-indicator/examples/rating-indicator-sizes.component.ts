@@ -4,7 +4,6 @@ import { RatingIndicatorModule, RatingIndicatorSize } from '@fundamental-ngx/cor
 @Component({
     selector: 'fd-rating-indicator-sizes',
     templateUrl: './rating-indicator-sizes.component.html',
-    standalone: true,
     imports: [RatingIndicatorModule]
 })
 export class RatingIndicatorSizesExampleComponent {

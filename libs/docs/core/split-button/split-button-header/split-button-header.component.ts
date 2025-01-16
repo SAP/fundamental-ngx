@@ -11,7 +11,6 @@ import {
     selector: 'app-split-button-header',
     templateUrl: './split-button-header.component.html',
     styleUrls: ['./split-button-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class SplitButtonHeaderComponent {}

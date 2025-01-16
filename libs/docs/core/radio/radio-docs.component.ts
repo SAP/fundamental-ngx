@@ -20,7 +20,6 @@ const formGroupInputTs = 'radio-form-group-example.component.ts';
 @Component({
     selector: 'app-radio',
     templateUrl: './radio-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

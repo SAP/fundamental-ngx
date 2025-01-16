@@ -33,7 +33,6 @@ import { BaseComponent } from '@fundamental-ngx/platform/shared';
     templateUrl: './split-menu-button.component.html',
     styleUrl: 'split-menu-button.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ButtonComponent, MenuTriggerDirective]
 })
 export class SplitMenuButtonComponent extends BaseComponent implements OnInit, AfterViewInit {

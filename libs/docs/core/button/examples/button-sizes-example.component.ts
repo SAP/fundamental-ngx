@@ -13,7 +13,6 @@ import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
             }
         `
     ],
-    standalone: true,
     imports: [ButtonComponent, ContentDensityDirective]
 })
 export class ButtonSizesExampleComponent {}

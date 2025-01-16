@@ -72,7 +72,6 @@ import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/for
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

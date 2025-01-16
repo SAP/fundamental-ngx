@@ -50,7 +50,6 @@ import { TimeLinePositionStrategy, TimelineAxis, TimelineSidePosition } from './
         '[class.fd-timeline--horizontal]': 'axis === "horizontal"',
         '[class.fd-timeline--vertical]': 'axis === "vertical"'
     },
-    standalone: true,
     imports: [
         TimelineFirstListOutletDirective,
         TimelineSecondListOutletDirective,
@@ -246,7 +245,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
         if (this._nodeDefs.length === 1) {
             return this._nodeDefs.first;
         }
-        return this._nodeDefs[i];
+        return this._nodeDefs.toArray()[i];
     }
 
     /**

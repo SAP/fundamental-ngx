@@ -57,7 +57,6 @@ let titleUniqueId = 0;
     styleUrl: './define-tab.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         TitleComponent,
         LayoutGridComponent,

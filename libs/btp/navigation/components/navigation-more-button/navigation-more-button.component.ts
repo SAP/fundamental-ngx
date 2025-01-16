@@ -30,7 +30,6 @@ export interface NavigationMoreButtonRefContext {
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'li[fdb-navigation-more-button]',
-    standalone: true,
     imports: [
         NavigationLinkComponent,
         NavigationListComponent,

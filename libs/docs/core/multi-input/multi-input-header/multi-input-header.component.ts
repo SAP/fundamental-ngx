@@ -11,7 +11,6 @@ import {
     selector: 'app-multi-input-header',
     templateUrl: './multi-input-header.component.html',
     styleUrls: ['./multi-input-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class MultiInputHeaderComponent {}

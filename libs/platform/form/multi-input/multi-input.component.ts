@@ -87,7 +87,6 @@ export class MultiInputSelectionChangeEvent {
         },
         contentDensityObserverProviders()
     ],
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         PopoverComponent,

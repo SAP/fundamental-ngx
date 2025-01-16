@@ -22,7 +22,6 @@ import { cloneDeep } from 'lodash-es';
     selector: 'fdk-forms-default-example',
     templateUrl: './forms-default-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         FdpFormGroupModule,
         FormsModule,
@@ -72,7 +71,6 @@ export class FormsDefaultExampleComponent {
         CvaControl,
         { provide: FD_FORM_FIELD_CONTROL, useExisting: CustomCdkControlExampleComponent, multi: true }
     ],
-    standalone: true,
     imports: [FormsModule, ReactiveFormsModule, CheckboxComponent]
 })
 export class CustomCdkControlExampleComponent {

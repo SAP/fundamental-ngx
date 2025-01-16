@@ -10,7 +10,6 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
     selector: 'fd-popover-scroll-example',
     templateUrl: './popover-scroll-example.component.html',
     styleUrls: ['./popover-scroll-example.component.scss'],
-    standalone: true,
     imports: [
         FormLabelComponent,
         PopoverComponent,

@@ -18,7 +18,6 @@ import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-fiel
     selector: 'fdx-side-navigation-shellbar-example',
     templateUrl: './side-navigation-shellbar-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ShellbarComponent,
         ButtonComponent,

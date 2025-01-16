@@ -6,7 +6,6 @@ import { FdpFormGroupModule, PlatformStepInputModule } from '@fundamental-ngx/pl
     selector: 'fdp-platform-number-step-input-template-example',
     templateUrl: './platform-number-step-input-template-example.component.html',
     styleUrls: ['./platform-number-step-input-template-example.component.scss'],
-    standalone: true,
     imports: [FdpFormGroupModule, PlatformStepInputModule, FormsModule]
 })
 export class PlatformNumberStepInputTemplateFormExampleComponent {

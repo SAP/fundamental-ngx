@@ -15,7 +15,6 @@ export interface User {
     templateUrl: './platform-multi-input-mobile-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
-    standalone: true,
     imports: [FdpFormGroupModule, PlatformMultiInputModule, FormsModule, ReactiveFormsModule]
 })
 export class PlatformMultiInputMobileExampleComponent {

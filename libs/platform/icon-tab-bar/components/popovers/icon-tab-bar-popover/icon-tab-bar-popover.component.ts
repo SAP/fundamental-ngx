@@ -9,7 +9,6 @@ import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
 @Component({
     selector: 'fdp-icon-tab-bar-popover',
     templateUrl: './icon-tab-bar-popover.component.html',
-    standalone: true,
     imports: [
         PopoverComponent,
         PopoverControlComponent,

@@ -54,7 +54,6 @@ interface RatingViewItem {
         },
         registerFormItemControl(RatingIndicatorComponent)
     ],
-    standalone: true,
     imports: [NgTemplateOutlet, PopoverTriggerDirective, PopoverComponent, RatingStarLabelPipe]
 })
 export class RatingIndicatorComponent

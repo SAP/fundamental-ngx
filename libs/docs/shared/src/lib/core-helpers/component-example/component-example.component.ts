@@ -32,7 +32,6 @@ let componentExampleUniqueId = 0;
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ContentDensityDirective, DirectionalityComponent, ExampleBackgroundComponent]
 })
 export class ComponentExampleComponent implements OnInit {

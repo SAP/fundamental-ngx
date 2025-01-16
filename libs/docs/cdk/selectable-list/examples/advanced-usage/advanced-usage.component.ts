@@ -21,7 +21,6 @@ import { CustomSelectableItemDirective } from './custom-selectable-item.directiv
         `
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [SelectableListDirective, SelectableItemDirective, CustomSelectableItemDirective]
 })
 export class AdvancedUsageComponent {

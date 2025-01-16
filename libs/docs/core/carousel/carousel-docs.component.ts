@@ -51,7 +51,6 @@ const carouselBackgroundHtml = 'carousel-background-example.component.html';
 @Component({
     selector: 'app-input',
     templateUrl: './carousel-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

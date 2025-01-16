@@ -47,7 +47,6 @@ export interface TimeColumnItemOutput<T> {
     host: {
         class: 'fd-time__col'
     },
-    standalone: true,
     imports: [ButtonComponent, CarouselDirective, CarouselItemDirective, FdTranslatePipe]
 })
 export class TimeColumnComponent<K extends number, T extends SelectableViewItem<K> = SelectableViewItem<K>>

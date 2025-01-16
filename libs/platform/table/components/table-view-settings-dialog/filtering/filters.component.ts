@@ -63,7 +63,6 @@ export enum ACTIVE_STEP {
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => FiltersComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DialogComponent,
         DialogHeaderComponent,

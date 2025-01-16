@@ -14,8 +14,7 @@ import { CSS_CLASS_NAME } from './constants';
     template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders()],
-    imports: [ContentDensityModule],
-    standalone: true
+    imports: [ContentDensityModule]
 })
 export class InputGroupAddonBodyComponent implements OnInit {
     /**

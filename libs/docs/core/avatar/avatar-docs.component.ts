@@ -25,7 +25,6 @@ import { AvatarZoomIconExampleComponent } from './examples/avatar-zoom-icon-exam
 @Component({
     selector: 'app-avatar',
     templateUrl: './avatar-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

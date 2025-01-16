@@ -31,7 +31,6 @@ import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
             }
         `
     ],
-    standalone: true,
     imports: [CheckboxComponent]
 })
 export class CheckboxLabelWrappingExampleComponent {}

@@ -1,4 +1,4 @@
-@import '@sap-ui/common-css/dist/sass/common-mixins';
+@use '@sap-ui/common-css/dist/sass/_common-mixins.scss' as sap;
 
 fd-multi-combobox-select-all-toggler {
     display: block;
@@ -8,7 +8,7 @@ fd-multi-combobox-select-all-toggler {
     top: 0;
     z-index: 1;
 
-    @include sap-fiori-focus();
+    @include sap.sap-fiori-focus();
 
     .fd-toolbar {
         padding-left: 0;
@@ -25,7 +25,7 @@ fd-multi-combobox-select-all-toggler {
             pointer-events: none;
 
             .fd-checkbox__checkmark {
-                @include sap-set-margin-end(0.5rem);
+                @include sap.sap-set-margin-end(0.5rem);
             }
 
             .fd-checkbox__text {

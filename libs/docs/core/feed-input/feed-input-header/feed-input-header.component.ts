@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-feed-input-header',
     templateUrl: './feed-input-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class FeedInputHeaderComponent {}

@@ -54,7 +54,6 @@ import { FD_FLEXIBLE_COLUMN_LAYOUT_COMPONENT } from './tokens';
             useExisting: FlexibleColumnLayoutComponent
         }
     ],
-    standalone: true,
     imports: [NgTemplateOutlet, ButtonComponent, ContentDensityDirective, IconComponent]
 })
 export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit {

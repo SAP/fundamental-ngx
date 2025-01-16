@@ -5,7 +5,6 @@ import { ToolbarComponent, ToolbarLabelDirective, ToolbarSeparatorComponent } fr
 @Component({
     selector: 'fd-fli-footer-example',
     templateUrl: './fli-footer-example.component.html',
-    standalone: true,
     imports: [FeedListItemModule, ToolbarComponent, ToolbarLabelDirective, ToolbarSeparatorComponent]
 })
 export class FliFooterExampleComponent {}

@@ -21,7 +21,6 @@ import { DialogConfig } from '../utils/dialog-config.class';
     templateUrl: './dialog-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [BarModule, ContentDensityDirective, NgTemplateOutlet]
 })
 export class DialogHeaderComponent extends DialogHeaderBase implements AfterContentInit {

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 /**
  * Helper function check whether passed data is a JS object (including function).
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export function isJsObject(obj: any): obj is object | Function {
     return obj !== null && (typeof obj === 'function' || typeof obj === 'object');
 }
@@ -51,7 +51,7 @@ export function isFunction(obj: any): boolean {
 }
 
 /** @hidden */
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export function isType(obj: any): obj is Function {
     return isFunction(obj);
 }

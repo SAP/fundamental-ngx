@@ -6,7 +6,6 @@ import { SliderComponent } from '@fundamental-ngx/core/slider';
     selector: 'fd-slider-form-example',
     templateUrl: './slider-form-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FormsModule, ReactiveFormsModule, SliderComponent]
 })
 export class SliderFormExampleComponent {

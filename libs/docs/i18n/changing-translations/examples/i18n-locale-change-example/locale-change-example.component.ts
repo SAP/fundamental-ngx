@@ -10,7 +10,6 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
     selector: 'fd-locale-change-example',
     templateUrl: './locale-change-example.component.html',
-    standalone: true,
     imports: [ButtonComponent, SegmentedButtonComponent, FormsModule, AsyncPipe, FormControlComponent],
     providers: [
         {

@@ -42,7 +42,6 @@ export interface CombinedVariantManagementPreset {
         `
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ButtonComponent,
         VariantManagementModule,

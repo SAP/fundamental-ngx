@@ -54,7 +54,6 @@ import {
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [
         DatePickerComponent,
         FormsModule,

@@ -21,8 +21,7 @@ import {
         CodeExampleComponent,
         CodeSnippetComponent,
         DocsSectionTitleComponent
-    ],
-    standalone: true
+    ]
 })
 export class WritingTranslationsComponent {
     fromToCode = "'{'{from}'}'-'{'{to}'}'";

@@ -6,7 +6,6 @@ import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
 @Component({
     selector: 'fd-multi-input-filter-example',
     templateUrl: './multi-input-filter-example.component.html',
-    standalone: true,
     imports: [MultiInputComponent, FormsModule, JsonPipe]
 })
 export class MultiInputFilterExampleComponent {

@@ -42,7 +42,6 @@ import { MicroProcessFlowItemComponent } from '../micro-process-flow-item/micro-
         },
         contentDensityObserverProviders()
     ],
-    standalone: true,
     imports: []
 })
 export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewInit {

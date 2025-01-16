@@ -9,7 +9,6 @@ import { AvatarGroupDataExampleService } from '../avatar-group-data-example.serv
 @Component({
     selector: 'fd-avatar-group-vertical-example',
     templateUrl: './avatar-group-vertical-example.component.html',
-    standalone: true,
     imports: [AvatarGroupComponent, AvatarComponent, QuickViewModule, LinkComponent, AvatarGroupItemDirective]
 })
 export class AvatarGroupVerticalExampleComponent {

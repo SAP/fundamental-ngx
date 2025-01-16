@@ -9,7 +9,6 @@ import { SwitchComponent } from '@fundamental-ngx/core/switch';
         <fd-switch [style.margin-bottom.px]="18" (checkedChange)="onChange()"></fd-switch>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FormLabelComponent, SwitchComponent]
 })
 export class ExampleBackgroundComponent {

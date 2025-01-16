@@ -7,7 +7,6 @@ import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 @Component({
     selector: 'fd-combobox-mobile-example',
     templateUrl: './combobox-mobile-example.component.html',
-    standalone: true,
     imports: [FormLabelComponent, ComboboxComponent, FormsModule]
 })
 export class ComboboxMobileExampleComponent {

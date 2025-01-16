@@ -152,7 +152,6 @@ export class ListDataProvider extends DataProvider<Product> {
 @Component({
     selector: 'fdp-platform-object-list-item-with-row-navigation-example',
     templateUrl: './platform-object-list-item-with-row-navigation-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, ObjectListItemModule, ObjectMarkerModule, ObjectStatusComponent]
 })
 export class PlatformObjectListItemWithRowNavigationExampleComponent {

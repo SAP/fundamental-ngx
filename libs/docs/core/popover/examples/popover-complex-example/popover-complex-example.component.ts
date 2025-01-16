@@ -23,7 +23,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     selector: 'fd-popover-complex-example',
     templateUrl: './popover-complex-example.component.html',
     styleUrls: ['./popover-complex-example.component.scss'],
-    standalone: true,
     imports: [
         PopoverComponent,
         PopoverControlComponent,

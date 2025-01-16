@@ -20,7 +20,6 @@ import { SelectableItemDirective, SelectableListDirective } from '@fundamental-n
         `
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [SelectableListDirective, SelectableItemDirective]
 })
 export class DefaultExampleComponent {

@@ -13,7 +13,6 @@ import {
 @Component({
     selector: 'fd-platform-info-label-header',
     templateUrl: './platform-info-label-header.component.html',
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

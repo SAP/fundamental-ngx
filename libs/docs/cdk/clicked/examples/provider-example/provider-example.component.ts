@@ -6,7 +6,6 @@ import { UsageWithProviderDirective } from './usage-with-provider.directive';
 @Component({
     selector: 'fdk-clicked-provider-example',
     templateUrl: './provider-example.component.html',
-    standalone: true,
     imports: [UsageWithProviderDirective, FocusableItemDirective, JsonPipe]
 })
 export class ProviderExampleComponent {

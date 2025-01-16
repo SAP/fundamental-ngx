@@ -37,7 +37,6 @@ import { SettingsGeneratorSidebarIconComponent } from './settings-generator-side
     templateUrl: './settings-generator-sidebar-layout.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         ListModule,
         SettingsGeneratorSidebarIconComponent,

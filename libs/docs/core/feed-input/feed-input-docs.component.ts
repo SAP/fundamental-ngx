@@ -26,7 +26,6 @@ const feedInputCircleAvatarH = 'feed-input-circle-avatar-example/feed-input-circ
 @Component({
     selector: 'app-feed-input',
     templateUrl: './feed-input-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

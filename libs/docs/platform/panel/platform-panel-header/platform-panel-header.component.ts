@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'app-panel-header',
     templateUrl: './platform-panel-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, RouterLink, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformPanelHeaderComponent {}

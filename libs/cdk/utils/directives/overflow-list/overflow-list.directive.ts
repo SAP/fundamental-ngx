@@ -11,9 +11,8 @@ import {
     QueryList,
     inject
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { resizeObservable } from '../../functions';
 import { OverflowListItemDirective } from './overflow-list-item.directive';
 
 @Directive({
@@ -55,6 +54,9 @@ export class OverflowListDirective implements AfterViewInit {
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
+    private observer: ResizeObserver;
+
+    /** @hidden */
     constructor(
         private _el: ElementRef,
         private _ngZone: NgZone
@@ -62,12 +64,11 @@ export class OverflowListDirective implements AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._ngZone.runOutsideAngular(() => {
-            resizeObservable(this._el.nativeElement)
-                .pipe(debounceTime(10), takeUntilDestroyed(this._destroyRef))
-                .subscribe(() => this._ngZone.run(() => this._calculateAmountOfOverflowedItems()));
-        });
-        this._calculateAmountOfOverflowedItems();
+        this.initResizeObserver();
+        this.calculateOverflow();
+        fromEvent(window, 'resize')
+            .pipe(debounceTime(100))
+            .subscribe(() => this.calculateOverflow());
     }
 
     /**
@@ -87,6 +88,39 @@ export class OverflowListDirective implements AfterViewInit {
         }
 
         return this._checkWidthWithOffset(elements, contentWidth);
+    }
+
+    /**
+     * @description Ensuring that calculations run in the Angular zone
+     */
+    public calculateOverflow(): void {
+        this._ngZone.run(() => {
+            setTimeout(() => {
+                const elements = this.overflowItems.map((item) => item.el.nativeElement);
+                const contentWidth = this._el.nativeElement.clientWidth;
+
+                let totalWidth = 0;
+                let overflowCount = 0;
+
+                elements.forEach((elm) => {
+                    const elmWidth = elm.offsetWidth;
+                    totalWidth += elmWidth;
+
+                    if (totalWidth > contentWidth) {
+                        overflowCount++;
+                    }
+                });
+
+                this.overflowChanged.emit(overflowCount);
+            }, 0);
+        });
+    }
+
+    private initResizeObserver(): void {
+        this.observer = new ResizeObserver(() => {
+            this._ngZone.run(() => this.calculateOverflow());
+        });
+        this.observer.observe(this._el.nativeElement);
     }
 
     /** @hidden */

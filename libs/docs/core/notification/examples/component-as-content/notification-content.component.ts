@@ -6,7 +6,6 @@ import { NotificationModule, NotificationRef } from '@fundamental-ngx/core/notif
 @Component({
     selector: 'fd-notification-example-content',
     templateUrl: './notification-content.component.html',
-    standalone: true,
     imports: [MessageStripComponent, NotificationModule, ButtonComponent]
 })
 export class NotificationExampleContentComponent {

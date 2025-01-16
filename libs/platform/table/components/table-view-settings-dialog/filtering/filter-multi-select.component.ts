@@ -16,7 +16,6 @@ type SelectableOption = TableFilterSelectOption & { selected: boolean };
     templateUrl: './filter-multi-select.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [ListComponent, ListItemComponent, CheckboxComponent, FormsModule, ListTitleDirective]
 })
 export class FilterMultiSelectComponent {

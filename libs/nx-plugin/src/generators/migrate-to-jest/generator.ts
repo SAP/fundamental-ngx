@@ -1,6 +1,6 @@
-import { readProjectConfiguration, Tree, updateProjectConfiguration } from '@nrwl/devkit';
-import { jestProjectGenerator } from '@nrwl/jest';
-import { workspaceRoot } from 'nx/src/utils/app-root';
+import { readProjectConfiguration, Tree, updateProjectConfiguration } from '@nx/devkit';
+import { configurationGenerator } from '@nx/jest';
+import { workspaceRoot } from 'nx/src/utils/workspace-root';
 import { relative } from 'path';
 
 export default async function generator(tree: Tree, { project: name }: { project: string }) {
@@ -18,7 +18,7 @@ export default async function generator(tree: Tree, { project: name }: { project
         delete projectConfig.targets[targetName];
         updateProjectConfiguration(tree, name, projectConfig);
         if (targetName === 'test') {
-            await jestProjectGenerator(tree, {
+            await configurationGenerator(tree, {
                 project: name,
                 setupFile: 'angular',
                 supportTsx: false,

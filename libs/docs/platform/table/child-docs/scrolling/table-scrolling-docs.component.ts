@@ -28,7 +28,6 @@ const platformTableOuterScrollTsSrc = 'platform-table-outer-scroll-example.compo
     templateUrl: './table-scrolling-docs.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

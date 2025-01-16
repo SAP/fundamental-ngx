@@ -12,7 +12,6 @@ import {
 @Component({
     selector: 'fd-input-example',
     templateUrl: './input-example.component.html',
-    standalone: true,
     imports: [FormHeaderComponent, FormItemComponent, FormLabelComponent, FormControlComponent, ContentDensityDirective]
 })
 export class InputExampleComponent {}
@@ -20,7 +19,6 @@ export class InputExampleComponent {}
 @Component({
     selector: 'fd-input-inline-help-example',
     templateUrl: './input-inline-help-example.component.html',
-    standalone: true,
     imports: [FormItemComponent, FormLabelComponent, FormControlComponent]
 })
 export class InputInlineHelpExampleComponent {}
@@ -28,7 +26,6 @@ export class InputInlineHelpExampleComponent {}
 @Component({
     selector: 'fd-input-state-example',
     templateUrl: './input-state-example.component.html',
-    standalone: true,
     imports: [
         FormItemComponent,
         FormLabelComponent,

@@ -7,7 +7,6 @@ import { TextComponent } from '@fundamental-ngx/core/text';
 @Component({
     selector: 'fd-tab-process-example',
     templateUrl: './tab-process-example.component.html',
-    standalone: true,
     imports: [TabsModule, ContentDensityDirective, RouterLinkActive, RouterLink, RouterOutlet, TextComponent]
 })
 export class TabProcessExampleComponent {}

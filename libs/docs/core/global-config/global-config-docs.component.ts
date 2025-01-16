@@ -17,7 +17,6 @@ const popoverMobileGlobalConfigExampleSrc =
 @Component({
     selector: 'app-global-config-docs',
     templateUrl: './global-config-docs.component.html',
-    standalone: true,
     imports: [DocsSectionTitleComponent, DescriptionComponent, CodeSnippetComponent, SeparatorComponent]
 })
 export class GlobalConfigDocsComponent {

@@ -25,7 +25,6 @@ import 'dayjs/locale/pl';
             useClass: FdDatetimeAdapter
         }
     ],
-    standalone: true,
     imports: [
         FormLabelComponent,
         SegmentedButtonModule,

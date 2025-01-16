@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-bar-header',
     templateUrl: './bar-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class BarHeaderComponent {}

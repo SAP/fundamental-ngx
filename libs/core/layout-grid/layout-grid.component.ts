@@ -24,7 +24,6 @@ import { LayoutGridRowDirective } from './directives/layout-grid-row.directive';
     styleUrl: './layout-grid.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [NgTemplateOutlet, LayoutGridRowDirective]
 })
 export class LayoutGridComponent implements OnInit, OnChanges, CssClassBuilder {

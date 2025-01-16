@@ -50,7 +50,6 @@ export class TabPanelStateChange {
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: []
 })
 export class TabPanelComponent implements OnChanges {

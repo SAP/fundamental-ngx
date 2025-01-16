@@ -34,6 +34,8 @@ const items = [
             <fdp-wizard-generator-step (formsCreated)="formsCreated($event)" [item]="step"></fdp-wizard-generator-step>
         }
     `,
+    standalone: true,
+    imports: [PlatformWizardGeneratorModule],
     providers: [WizardGeneratorService]
 })
 export class TestComponent {
@@ -55,8 +57,7 @@ describe('WizardGeneratorStepComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformWizardGeneratorModule],
-            declarations: [TestComponent]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

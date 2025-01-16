@@ -139,7 +139,6 @@ export class ListDataProvider extends DataProvider<User> {
     selector: 'fdp-platform-list-with-infinite-scroll-example',
     templateUrl: './platform-list-with-infinite-scroll-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [PlatformListModule, StandardListItemModule]
 })
 export class PlatformListWithInfiniteScrollExampleComponent {

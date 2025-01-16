@@ -31,7 +31,6 @@ import { startWith } from 'rxjs/operators';
     styleUrl: './object-identifier.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: []
 })
 export class ObjectIdentifierComponent implements AfterContentInit {

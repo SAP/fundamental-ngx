@@ -4,7 +4,6 @@ import { TabsModule } from '@fundamental-ngx/core/tabs';
 @Component({
     selector: 'fd-tab-collapsible-example',
     templateUrl: './tab-collapsible-example.component.html',
-    standalone: true,
     imports: [TabsModule]
 })
 export class TabCollapsibleExampleComponent {

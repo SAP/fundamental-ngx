@@ -52,7 +52,6 @@ const sideNavigationCondensedObjectSrcTs =
 @Component({
     selector: 'app-side-navigation',
     templateUrl: './side-navigation-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

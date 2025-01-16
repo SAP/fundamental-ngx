@@ -21,7 +21,6 @@ export class Fruit {
     templateUrl: './platform-select-max-height-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [PlatformSelectModule, JsonPipe]
 })
 export class PlatformSelectMaxHeightExampleComponent {

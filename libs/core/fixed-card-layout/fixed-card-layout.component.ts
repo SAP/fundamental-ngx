@@ -112,7 +112,6 @@ type CardColumn = CardDefinitionDirective[];
     host: {
         class: 'fd-fixed-card-layout'
     },
-    standalone: true,
     imports: [
         CdkDropListGroup,
         DragAndDropModule,

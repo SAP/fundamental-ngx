@@ -9,7 +9,6 @@ import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
     selector: 'fd-notification-open-template-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './notification-open-template-example.component.html',
-    standalone: true,
     imports: [ButtonComponent, NotificationModule, AvatarComponent, ObjectStatusComponent, IconComponent]
 })
 export class NotificationOpenTemplateExampleComponent {

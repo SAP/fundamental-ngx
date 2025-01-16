@@ -15,7 +15,9 @@ import { NestedListContentDirective } from './nested-list-content.directive';
             </a>
             <a fd-nested-list-expand-icon></a>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [NestedListModule]
 })
 class TestNestedContainerComponent {
     @ViewChild(NestedListContentDirective)
@@ -33,8 +35,7 @@ describe('NestedContentDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [NestedListModule],
-            declarations: [TestNestedContainerComponent],
+            imports: [TestNestedContainerComponent],
             providers: [NestedListStateService, NestedItemService]
         }).compileComponents();
     }));

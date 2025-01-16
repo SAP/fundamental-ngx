@@ -6,7 +6,6 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 @Component({
     selector: 'fd-input-group-search-example',
     templateUrl: './input-group-search-example.component.html',
-    standalone: true,
     imports: [FormItemComponent, FormLabelComponent, InputGroupModule, FormsModule]
 })
 export class InputGroupSearchExampleComponent {

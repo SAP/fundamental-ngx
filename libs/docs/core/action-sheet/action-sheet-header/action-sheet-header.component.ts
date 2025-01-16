@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-action-sheet-header',
     templateUrl: './action-sheet-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class ActionSheetHeaderComponent {}

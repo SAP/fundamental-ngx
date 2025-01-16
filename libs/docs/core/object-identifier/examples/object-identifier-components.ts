@@ -5,7 +5,6 @@ import { ObjectIdentifierComponent } from '@fundamental-ngx/core/object-identifi
 @Component({
     selector: 'fd-object-identifier-default-example',
     templateUrl: './object-identifier-default-example.component.html',
-    standalone: true,
     imports: [ObjectIdentifierComponent]
 })
 export class ObjectIdentifierDefaultExampleComponent {}
@@ -13,7 +12,6 @@ export class ObjectIdentifierDefaultExampleComponent {}
 @Component({
     selector: 'fd-object-identifier-link-example',
     templateUrl: './object-identifier-link-example.component.html',
-    standalone: true,
     imports: [ObjectIdentifierComponent, LinkComponent]
 })
 export class ObjectIdentifierLinkExampleComponent {}
@@ -21,7 +19,6 @@ export class ObjectIdentifierLinkExampleComponent {}
 @Component({
     selector: 'fd-object-identifier-bold-example',
     templateUrl: './object-identifier-bold-example.component.html',
-    standalone: true,
     imports: [ObjectIdentifierComponent]
 })
 export class ObjectIdentifierBoldExampleComponent {}
@@ -29,7 +26,6 @@ export class ObjectIdentifierBoldExampleComponent {}
 @Component({
     selector: 'fd-object-identifier-descriptive-example',
     templateUrl: './object-identifier-descriptive-example.component.html',
-    standalone: true,
     imports: [ObjectIdentifierComponent, LinkComponent]
 })
 export class ObjectIdentifierDescriptiveExampleComponent {}

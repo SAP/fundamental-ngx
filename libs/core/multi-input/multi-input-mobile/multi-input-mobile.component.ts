@@ -25,7 +25,6 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.inter
     styleUrl: './multi-input-mobile.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DialogModule,
         TitleComponent,

@@ -7,7 +7,6 @@ import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
 @Component({
     selector: 'fd-multi-input-form-example',
     templateUrl: './multi-input-form-example.component.html',
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

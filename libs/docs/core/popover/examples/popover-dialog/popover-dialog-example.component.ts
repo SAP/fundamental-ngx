@@ -11,7 +11,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
 @Component({
     selector: 'fd-popover-dialog-example',
     templateUrl: './popover-dialog-example.component.html',
-    standalone: true,
     imports: [
         ButtonComponent,
         DialogModule,

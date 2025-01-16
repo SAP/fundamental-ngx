@@ -42,7 +42,6 @@ const StatusIndicatorClickAbleFillingComponentTs = 'status-indicator-clickable-t
     selector: 'fd-status-indicator-docs',
     templateUrl: './status-indicator-docs.component.html',
     styleUrls: ['status-indicator-docs.component.scss'],
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

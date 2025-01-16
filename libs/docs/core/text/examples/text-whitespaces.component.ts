@@ -4,7 +4,6 @@ import { TextComponent } from '@fundamental-ngx/core/text';
 @Component({
     selector: 'fd-text-whitespaces',
     templateUrl: './text-whitespaces.component.html',
-    standalone: true,
     imports: [TextComponent]
 })
 export class TextWhitespacesComponent {

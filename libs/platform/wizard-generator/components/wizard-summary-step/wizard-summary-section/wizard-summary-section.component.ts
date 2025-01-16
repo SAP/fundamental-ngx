@@ -15,7 +15,6 @@ import {
     templateUrl: './wizard-summary-section.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [TitleComponent, LayoutGridModule, FormLabelComponent, LinkComponent, FdTranslatePipe]
 })
 export class WizardSummarySectionComponent {

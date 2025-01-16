@@ -22,7 +22,6 @@ import { TableViewSettingsFilterComponent } from '../table-view-settings-filter.
     // Keep it "Default" intentionally to run ngDoCheck when child template emits changes
     changeDetection: ChangeDetectionStrategy.Default,
     providers: [contentDensityObserverProviders()],
-    standalone: true,
     imports: [NgTemplateOutlet]
 })
 export class FilterCustomComponent implements DoCheck {

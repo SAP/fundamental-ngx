@@ -8,7 +8,6 @@ import { TextComponent } from '@fundamental-ngx/core/text';
     selector: 'fd-tab-selection-example',
     templateUrl: './tab-selection-example.component.html',
     styleUrls: ['tab-selection-example.component.scss'],
-    standalone: true,
     imports: [TabsModule, FormLabelComponent, ButtonComponent, TextComponent]
 })
 export class TabSelectionExampleComponent {}

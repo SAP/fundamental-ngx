@@ -5,7 +5,6 @@ import { MenuModule } from '@fundamental-ngx/core/menu';
 @Component({
     selector: 'fd-menu-scrollbar-example',
     templateUrl: './menu-scrollbar-example.component.html',
-    standalone: true,
     imports: [ButtonComponent, MenuModule]
 })
 export class MenuScrollbarExampleComponent {

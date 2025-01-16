@@ -20,7 +20,9 @@ import { CLASS_NAME } from './constants';
 
             <fd-card-loader>{{ loaderText }}</fd-card-loader>
         </fd-card>
-    `
+    `,
+    standalone: true,
+    imports: [CardModule]
 })
 class CardHostTestComponent {
     @ViewChild(CardComponent) card: CardComponent;
@@ -42,8 +44,7 @@ describe('CardComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CardModule],
-            declarations: [CardHostTestComponent]
+            imports: [CardHostTestComponent]
         }).compileComponents();
     }));
 

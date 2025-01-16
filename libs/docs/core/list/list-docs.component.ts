@@ -57,7 +57,6 @@ const listLoadingTs = 'list-loading-example/list-loading-example.component.ts';
 @Component({
     selector: 'app-list',
     templateUrl: './list-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

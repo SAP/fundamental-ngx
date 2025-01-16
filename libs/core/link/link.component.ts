@@ -47,8 +47,7 @@ import { FD_LINK_COMPONENT } from './tokens';
             ]
         }
     ],
-    imports: [PortalModule],
-    standalone: true
+    imports: [PortalModule]
 })
 export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterViewInit {
     /** @hidden */

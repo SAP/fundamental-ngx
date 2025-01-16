@@ -15,7 +15,6 @@ import { ArrayComboBoxDataSource, DATA_PROVIDERS } from '@fundamental-ngx/platfo
     templateUrl: './multi-combobox-datasource-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
-    standalone: true,
     imports: [FdpFormGroupModule, PlatformMultiComboboxModule, ButtonComponent, JsonPipe]
 })
 export class MultiComboboxDatasourceExampleComponent {

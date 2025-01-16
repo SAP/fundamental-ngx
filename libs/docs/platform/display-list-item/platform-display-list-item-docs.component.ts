@@ -21,7 +21,6 @@ const dliWithNavigationTs = 'platform-display-list-item-with-navigation-example.
 @Component({
     selector: 'app-standard-list-item',
     templateUrl: './platform-display-list-item-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

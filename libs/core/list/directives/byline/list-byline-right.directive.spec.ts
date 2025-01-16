@@ -3,7 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ListModule } from '../../list.module';
 
 @Component({
-    template: ` <div #componentElement fd-list-byline-right status="informative">ListBylineRightDirective</div> `
+    template: ` <div #componentElement fd-list-byline-right status="informative">ListBylineRightDirective</div> `,
+    standalone: true,
+    imports: [ListModule]
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
@@ -16,8 +18,7 @@ describe('ListBylineRightDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [ListModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

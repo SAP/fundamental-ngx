@@ -10,7 +10,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     selector: 'fd-template-based-message-box-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './template-based-message-box-example.component.html',
-    standalone: true,
     imports: [MessageBoxModule, TitleComponent, BarModule, InitialFocusDirective, ButtonComponent]
 })
 export class TemplateBasedMessageBoxExampleComponent {

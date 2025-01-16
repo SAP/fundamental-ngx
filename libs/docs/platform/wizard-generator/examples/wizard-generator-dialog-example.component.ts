@@ -15,7 +15,6 @@ import {
 @Component({
     selector: 'fdp-wizard-generator-dialog-example',
     templateUrl: './wizard-generator-dialog-example.component.html',
-    standalone: true,
     imports: [PlatformButtonModule, JsonPipe],
     providers: [WizardDialogGeneratorService]
 })

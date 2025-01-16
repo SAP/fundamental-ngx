@@ -67,7 +67,6 @@ import { ProductSwitchBodyComponent, ProductSwitchItem } from '@fundamental-ngx/
         ToolHeaderButtonDirective
     ],
     selector: 'fdb-tool-header-auto-mode-example',
-    standalone: true,
     templateUrl: './auto-mode-example.component.html'
 })
 export class ToolHeaderAutoModeExampleComponent {

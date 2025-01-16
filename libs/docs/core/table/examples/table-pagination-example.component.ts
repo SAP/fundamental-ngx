@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
 @Component({
     selector: 'fd-table-pagination-example',
     templateUrl: './table-pagination-example.component.html',
-    standalone: true,
     imports: [FocusableGridDirective, TableModule, LinkComponent, IconComponent, PaginationModule, ToolbarItemDirective]
 })
 export class TablePaginationExampleComponent implements OnInit {

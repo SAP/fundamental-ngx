@@ -29,7 +29,6 @@ import { AvatarGroupLegacyDataExampleService } from './avatar-group-legacy-data-
 @Component({
     selector: 'fd-avatar-group-legacy-group-type-example',
     templateUrl: './avatar-group-legacy-group-type-example.component.html',
-    standalone: true,
     imports: [
         AvatarGroupLegacyComponent,
         PopoverComponent,

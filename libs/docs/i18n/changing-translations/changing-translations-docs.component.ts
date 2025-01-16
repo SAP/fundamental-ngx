@@ -16,7 +16,6 @@ import { LocaleChangeExampleComponent } from './examples/i18n-locale-change-exam
 @Component({
     templateUrl: './changing-translations-docs.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

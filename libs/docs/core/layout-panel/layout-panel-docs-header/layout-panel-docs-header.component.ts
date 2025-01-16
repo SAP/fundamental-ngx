@@ -11,7 +11,6 @@ import {
     selector: 'app-layout-panel-docs-header',
     templateUrl: './layout-panel-docs-header.component.html',
     styleUrls: ['./layout-panel-docs-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class LayoutPanelDocsHeaderComponent {}

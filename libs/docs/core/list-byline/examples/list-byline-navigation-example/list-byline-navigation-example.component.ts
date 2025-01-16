@@ -5,7 +5,6 @@ import { ListModule } from '@fundamental-ngx/core/list';
 @Component({
     selector: 'fd-list-byline-navigation-example',
     templateUrl: './list-byline-navigation-example.component.html',
-    standalone: true,
     imports: [ListModule, IconComponent]
 })
 export class ListBylineNavigationExampleComponent {}

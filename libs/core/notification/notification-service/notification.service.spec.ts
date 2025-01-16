@@ -10,16 +10,17 @@ import { NotificationModule } from '../notification.module';
         <ng-template #testTemplate let-alert>
             <h1>test</h1>
         </ng-template>
-    `
+    `,
+    standalone: true,
+    imports: [NotificationModule, RouterTestingModule]
 })
 class TemplateTestComponent {
     @ViewChild('testTemplate', { static: true }) templateRef: TemplateRef<any>;
 }
 
 @NgModule({
-    imports: [NotificationModule, RouterTestingModule],
-    providers: [NotificationService],
-    declarations: [TemplateTestComponent]
+    imports: [TemplateTestComponent],
+    providers: [NotificationService]
 })
 class TestModule {}
 

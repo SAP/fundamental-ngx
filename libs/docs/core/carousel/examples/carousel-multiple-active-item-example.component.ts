@@ -21,7 +21,6 @@ import { debounceTime } from 'rxjs/operators';
     templateUrl: './carousel-multiple-active-item-example.component.html',
     styleUrls: ['./carousel-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CarouselComponent, CarouselItemComponent, CardModule, AvatarComponent, ListModule]
 })
 export class CarouselMultipleActiveItemExampleComponent implements OnInit, AfterViewInit {

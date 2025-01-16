@@ -13,7 +13,6 @@ let controlUniqId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: EditableTableCell, useExisting: TableEditableCellComponent }],
-    standalone: true,
     imports: [FormsModule, InputComponent, PlatformDatePickerComponent, SwitchComponent, FdTranslatePipe]
 })
 export class TableEditableCellComponent implements EditableTableCell {

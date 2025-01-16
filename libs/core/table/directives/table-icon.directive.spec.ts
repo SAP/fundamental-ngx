@@ -4,7 +4,9 @@ import { TableModule } from '../table.module';
 import { TableIconDirective } from './table-icon.directive';
 
 @Component({
-    template: ` <span fd-table-icon [glyph]="'glyph'" [navigation]="true"></span> `
+    template: ` <span fd-table-icon [glyph]="'glyph'" [navigation]="true"></span> `,
+    standalone: true,
+    imports: [TableModule]
 })
 class TestComponent {
     @ViewChild(TableIconDirective)
@@ -17,8 +19,7 @@ describe('TableIconDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [TableModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

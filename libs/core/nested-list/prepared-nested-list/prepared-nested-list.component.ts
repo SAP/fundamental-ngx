@@ -24,7 +24,6 @@ import { NestedListDirective } from '../nested-list/nested-list.directive';
     styleUrl: './prepared-nested-list.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         NestedListDirective,
         NestedListHeaderDirective,

@@ -65,7 +65,6 @@ const datePickerMobileH = 'mobile-mode/date-picker-mobile-mode-example.component
 @Component({
     selector: 'app-date-picker',
     templateUrl: './date-picker-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

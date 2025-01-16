@@ -22,7 +22,6 @@ import { BaseInput } from '@fundamental-ngx/platform/shared';
     templateUrl: './time-picker.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: PlatformTimePickerComponent, multi: true }],
-    standalone: true,
     imports: [TimePickerComponent, FormsModule]
 })
 export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit, AfterViewInit, OnDestroy {

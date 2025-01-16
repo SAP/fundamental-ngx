@@ -13,7 +13,6 @@ import {
 @Component({
     selector: 'fd-toolbar-type-example',
     templateUrl: './toolbar-type-example.component.html',
-    standalone: true,
     imports: [ToolbarComponent, ToolbarLabelDirective]
 })
 export class ToolbarTypeExampleComponent {}
@@ -21,7 +20,6 @@ export class ToolbarTypeExampleComponent {}
 @Component({
     selector: 'fd-toolbar-title-example',
     templateUrl: './toolbar-title-example.component.html',
-    standalone: true,
     imports: [TitleComponent, ToolbarComponent, IconComponent]
 })
 export class ToolbarTitleExampleComponent {}
@@ -29,7 +27,6 @@ export class ToolbarTitleExampleComponent {}
 @Component({
     selector: 'fd-toolbar-spacer-example',
     templateUrl: './toolbar-spacer-example.component.html',
-    standalone: true,
     imports: [ToolbarComponent, ToolbarLabelDirective, ToolbarSpacerDirective]
 })
 export class ToolbarSpacerExampleComponent {}
@@ -37,7 +34,6 @@ export class ToolbarSpacerExampleComponent {}
 @Component({
     selector: 'fd-toolbar-separator-example',
     templateUrl: './toolbar-separator-example.component.html',
-    standalone: true,
     imports: [ToolbarComponent, ToolbarLabelDirective, ToolbarSeparatorComponent]
 })
 export class ToolbarSeparatorExampleComponent {}
@@ -45,7 +41,6 @@ export class ToolbarSeparatorExampleComponent {}
 @Component({
     selector: 'fd-toolbar-overflow-priority-example',
     templateUrl: './toolbar-overflow-priority-example.component.html',
-    standalone: true,
     imports: [ToolbarComponent, ButtonComponent, ToolbarItemDirective, ToolbarSpacerDirective]
 })
 export class ToolbarOverflowPriorityExampleComponent {}
@@ -53,7 +48,6 @@ export class ToolbarOverflowPriorityExampleComponent {}
 @Component({
     selector: 'fd-toolbar-overflow-grouping-example',
     templateUrl: './toolbar-overflow-grouping-example.component.html',
-    standalone: true,
     imports: [ToolbarComponent, ButtonComponent, ToolbarItemDirective]
 })
 export class ToolbarOverflowGroupingExampleComponent {}

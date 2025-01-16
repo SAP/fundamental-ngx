@@ -6,7 +6,6 @@ import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
     selector: 'fd-datetime-important',
     templateUrl: './datetime-important.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [MessageStripComponent, RouterLink]
 })
 export class DatetimeImportantComponent {

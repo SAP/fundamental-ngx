@@ -30,7 +30,6 @@ import { FilterRule } from './filtering.model';
     templateUrl: './filter-rule.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         LayoutGridRowDirective,
         LayoutGridColDirective,

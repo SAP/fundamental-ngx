@@ -37,7 +37,6 @@ const timePickerFormTsSrc = 'time-picker-form-example.component.ts';
 @Component({
     selector: 'app-time-picker',
     templateUrl: './time-picker-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

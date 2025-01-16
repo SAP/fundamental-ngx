@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'fdp-wizard-generator-responsive-paddings-example',
     templateUrl: './wizard-generator-responsive-paddings-example.component.html',
-    standalone: true,
     imports: [PlatformWizardGeneratorModule, JsonPipe]
 })
 export class WizardGeneratorResponsivePaddingsExampleComponent {

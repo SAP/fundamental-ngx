@@ -22,7 +22,6 @@ import {
     templateUrl: './platform-table-navigatable-row-indicator-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         TableDataSourceDirective,
         TableHeaderResizerDirective,

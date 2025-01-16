@@ -11,7 +11,6 @@ import { TIMELINE_EXAMPLE_DATA } from './timeline-basic-example/timeline-example
 @Component({
     selector: 'fd-timeline-vertical-double-side',
     templateUrl: './timeline-template-example.component.html',
-    standalone: true,
     imports: [
         CdkScrollable,
         ScrollbarDirective,

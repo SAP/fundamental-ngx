@@ -5,7 +5,9 @@ import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'fd-notification-group-list-test',
-    template: ` <fd-notification-group-list>Notification Group List Test</fd-notification-group-list> `
+    template: ` <fd-notification-group-list>Notification Group List Test</fd-notification-group-list> `,
+    standalone: true,
+    imports: [NotificationModule]
 })
 class TestWrapperComponent {}
 
@@ -15,8 +17,7 @@ describe('NotificationGroupListComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [NotificationModule]
+            imports: [TestWrapperComponent]
         }).compileComponents();
     });
 

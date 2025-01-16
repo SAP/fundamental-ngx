@@ -28,7 +28,6 @@ import {
     templateUrl: './shellbar-responsive-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         SegmentedButtonModule,
         FormsModule,

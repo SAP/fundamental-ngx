@@ -48,7 +48,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
             </fd-message-box-footer>
         </fd-message-box>
     `,
-    standalone: true,
     imports: [MessageBoxModule, TemplateDirective, BarModule, TitleComponent]
 })
 export class MessageBoxComplexExampleComponent {

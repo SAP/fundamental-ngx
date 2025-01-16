@@ -23,7 +23,6 @@ import { ApprovalTeam } from '../interfaces';
     host: {
         class: 'fdp-approval-flow-team-list'
     },
-    standalone: true,
     imports: [
         ListComponent,
         ContentDensityDirective,

@@ -35,7 +35,6 @@ import {
             }
         `
     ],
-    standalone: true,
     imports: [
         ButtonComponent,
         DynamicPageModule,

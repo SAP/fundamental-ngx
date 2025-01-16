@@ -33,7 +33,6 @@ const buttonToggledExample = 'button-toggled-example.component';
 @Component({
     selector: 'app-button',
     templateUrl: './button-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

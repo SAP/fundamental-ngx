@@ -29,7 +29,6 @@ let mobilePopoverUniqueId = 0;
     templateUrl: './popover-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, NgTemplateOutlet]
 })
 export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> implements OnInit, OnDestroy {

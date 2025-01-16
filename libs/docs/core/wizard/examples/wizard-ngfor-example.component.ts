@@ -33,7 +33,6 @@ export type WizardStep = {
     host: {
         class: 'fd-wizard-example'
     },
-    standalone: true,
     imports: [
         ButtonComponent,
         A11yModule,

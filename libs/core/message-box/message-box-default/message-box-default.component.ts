@@ -24,7 +24,6 @@ import { MessageBoxContent } from '../utils/message-box-content.class';
     selector: 'fd-message-box-default',
     templateUrl: './message-box-default.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         MessageBoxComponent,
         MessageBoxHeaderComponent,

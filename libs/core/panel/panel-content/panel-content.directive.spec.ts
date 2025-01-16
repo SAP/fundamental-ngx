@@ -4,7 +4,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PanelModule } from '../panel.module';
 
 @Component({
-    template: `<div #directiveElement fd-panel-content [height]="'100px'">Test Panel Content</div>`
+    template: `<div #directiveElement fd-panel-content [height]="'100px'">Test Panel Content</div>`,
+    standalone: true,
+    imports: [PanelModule]
 })
 class TestComponent {
     @ViewChild('directiveElement')
@@ -17,8 +19,7 @@ describe('PanelContentDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [PanelModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

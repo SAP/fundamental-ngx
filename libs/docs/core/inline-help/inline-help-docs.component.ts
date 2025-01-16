@@ -24,7 +24,6 @@ const inlineHelpTemplateHtml = 'inline-help-template-example/inline-help-templat
 @Component({
     selector: 'app-inline-help',
     templateUrl: './inline-help-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

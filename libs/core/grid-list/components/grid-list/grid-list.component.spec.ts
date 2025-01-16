@@ -1,10 +1,13 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { GridListModule } from '../../grid-list.module';
+import { CommonModule } from '@angular/common';
 import { GridListSelectionMode } from '../../models/grid-list-selection.models';
-import { GridListItemType } from '../grid-list-item/grid-list-item.component';
+import { GridListItemComponent, GridListItemType } from '../grid-list-item/grid-list-item.component';
 import { GridListComponent } from './grid-list.component';
+import { GridListTitleBarComponent } from '../grid-list-title-bar/grid-list-title-bar.component';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 
 @Component({
     selector: 'fd-test-grid-list',
@@ -37,7 +40,9 @@ import { GridListComponent } from './grid-list.component';
             </fd-grid-list-item>
         </fd-grid-list>
     `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [GridListTitleBarComponent, GridListItemComponent, GridListComponent, AvatarComponent, TitleComponent, CommonModule]
 })
 class TestComponent {
     @ViewChild(GridListComponent)
@@ -114,8 +119,7 @@ describe('GridListComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [GridListModule],
+            imports: [TestComponent],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     });

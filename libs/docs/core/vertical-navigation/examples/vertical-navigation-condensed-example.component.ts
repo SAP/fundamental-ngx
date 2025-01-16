@@ -7,7 +7,6 @@ import { VerticalNavigationModule } from '@fundamental-ngx/core/vertical-navigat
 @Component({
     selector: 'fd-vertical-navigation-condensed-example',
     templateUrl: './vertical-navigation-condensed-example.component.html',
-    standalone: true,
     imports: [VerticalNavigationModule, ListModule, IconComponent, ButtonComponent]
 })
 export class VerticalNavigationCondensedExampleComponent {

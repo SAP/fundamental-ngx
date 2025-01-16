@@ -69,7 +69,6 @@ import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens'
             useExisting: BreadcrumbComponent
         }
     ],
-    standalone: true,
     imports: [
         OverflowLayoutComponent,
         OverflowItemRefDirective,

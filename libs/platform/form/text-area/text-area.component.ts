@@ -41,7 +41,6 @@ export type WrapType = 'hard' | 'soft' | 'off';
             multi: true
         }
     ],
-    standalone: true,
     imports: [FormControlComponent, FormsModule, FdTranslatePipe]
 })
 export class TextAreaComponent extends BaseInput implements AfterViewChecked, OnInit, AfterViewInit {

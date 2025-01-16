@@ -9,7 +9,6 @@ import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
     selector: 'fd-scroll-spy-offset-example',
     templateUrl: './scroll-spy-offset-example.component.html',
     styleUrls: ['./scroll-spy-offset-example.component.scss'],
-    standalone: true,
     imports: [IconComponent, CdkScrollable, ScrollbarDirective, ScrollSpyModule]
 })
 export class ScrollSpyOffsetExampleComponent implements OnInit {

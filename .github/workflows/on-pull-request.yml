@@ -22,6 +22,7 @@ jobs:
         strategy:
             matrix:
                 agent: [1, 2, 3, 4, 5, 6, 7, 8]
+                node-version: [22.x]
         steps:
             - uses: actions/checkout@v4.2.2
             - uses: ./.github/actions/nodejs

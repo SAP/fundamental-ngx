@@ -27,7 +27,6 @@ const timelineLoadingExampleTs = 'loading/timeline-loading-example.component.ts'
 @Component({
     selector: 'fd-timeline-docs',
     templateUrl: './timeline-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

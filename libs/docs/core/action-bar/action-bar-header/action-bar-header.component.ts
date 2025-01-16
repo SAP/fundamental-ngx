@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'app-action-bar-header',
     templateUrl: './action-bar-header.component.html',
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

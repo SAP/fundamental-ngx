@@ -40,7 +40,6 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [FormLabelComponent, DatePickerComponent, FormsModule, ContentDensityDirective, FdDatetimeModule, JsonPipe]
 })
 export class DatePickerMultiExampleComponent {

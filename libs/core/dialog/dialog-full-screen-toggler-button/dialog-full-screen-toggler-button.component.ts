@@ -16,7 +16,6 @@ import { DialogRef } from '../utils/dialog-ref.class';
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-dialog-full-screen-toggler-button]',
-    standalone: true,
     imports: [IconComponent],
     template: `<fd-icon [glyph]="_fullscreen$() ? 'exitfullscreen' : 'full-screen'"></fd-icon>`,
     encapsulation: ViewEncapsulation.None,

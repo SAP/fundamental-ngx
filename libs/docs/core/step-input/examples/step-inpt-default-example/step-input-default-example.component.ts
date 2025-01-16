@@ -28,7 +28,6 @@ import { StepInputModule } from '@fundamental-ngx/core/step-input';
             </div>
         </div>
     `,
-    standalone: true,
     imports: [FormLabelComponent, StepInputModule, ContentDensityDirective]
 })
 export class StepInputDefaultExampleComponent {

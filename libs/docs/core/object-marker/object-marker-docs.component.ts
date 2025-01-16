@@ -24,7 +24,6 @@ const ObjectMarkerClickAble = 'object-marker-clickable-example.component.ts';
 @Component({
     selector: 'fd-object-marker-docs',
     templateUrl: './object-marker-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

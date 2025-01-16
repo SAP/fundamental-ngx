@@ -41,7 +41,6 @@ import { SliderComponent } from '@fundamental-ngx/core/slider';
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [
         ButtonComponent,
         SelectModule,

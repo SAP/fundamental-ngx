@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { CommonModule } from '@angular/common';
 import { Component, ViewChild, signal } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FdDnDEvent } from './directives/dnd/icon-bar-dnd-container.directive';
 import { IconBarDndItemDirective } from './directives/dnd/icon-bar-dnd-item.directive';
 import { IconTabBarComponent } from './icon-tab-bar.component';
-import { FDP_ICON_TAB_BAR } from './icon-tab-bar.module';
+import { IconTabBarTabComponent } from './components/icon-tab-bar-tab/icon-tab-bar-tab.component';
 import { TabConfig } from './interfaces/tab-config.interface';
 import { generateTestConfig } from './tests-helper';
 import { TabType } from './types';
@@ -43,7 +43,7 @@ class HostComponent {
         </fdp-icon-tab-bar>
     `,
     standalone: true,
-    imports: [FDP_ICON_TAB_BAR]
+    imports: [ IconTabBarComponent, IconTabBarTabComponent ]
 })
 export class ProjectedTestComponent {
     @ViewChild(IconTabBarComponent)
@@ -56,7 +56,7 @@ describe('IconTabBarComponent', () => {
     let fixture: ComponentFixture<HostComponent>;
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [HostComponent]
+            imports: [HostComponent, CommonModule]
         }).compileComponents();
     });
 
@@ -169,7 +169,7 @@ describe('IconTabBarComponent with projected tabs', () => {
     let fixture: ComponentFixture<ProjectedTestComponent>;
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ProjectedTestComponent]
+            imports: [ProjectedTestComponent, CommonModule]
         }).compileComponents();
     });
 

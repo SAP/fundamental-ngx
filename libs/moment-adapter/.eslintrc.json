@@ -27,7 +27,8 @@
                     }
                 ],
                 "jsdoc/require-jsdoc": "off",
-                "grouped-accessor-pairs": "off"
+                "grouped-accessor-pairs": "off",
+                "@angular-eslint/prefer-standalone": "off"
             },
             "plugins": ["@angular-eslint/eslint-plugin", "@typescript-eslint"]
         },

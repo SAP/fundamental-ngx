@@ -37,7 +37,6 @@ import { Subscription, fromEvent } from 'rxjs';
     host: {
         '[style.max-width.%]': '100'
     },
-    standalone: true,
     imports: [FdTranslatePipe]
 })
 export class TokenComponent implements AfterViewInit, OnDestroy {

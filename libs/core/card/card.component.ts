@@ -43,7 +43,6 @@ let cardId = 0;
             useExisting: forwardRef(() => CardComponent)
         }
     ],
-    standalone: true,
     imports: [ObjectStatusComponent],
     host: {
         '[attr.id]': 'id()',

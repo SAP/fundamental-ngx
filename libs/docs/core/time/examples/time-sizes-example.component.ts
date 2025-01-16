@@ -8,7 +8,6 @@ import { TimeModule } from '@fundamental-ngx/core/time';
     selector: 'fd-time-sizes-example',
     templateUrl: './time-sizes-example.component.html',
     providers: [provideDateTimeFormats()],
-    standalone: true,
     imports: [TimeModule, ContentDensityDirective, FormsModule]
 })
 export class TimeSizesExampleComponent {

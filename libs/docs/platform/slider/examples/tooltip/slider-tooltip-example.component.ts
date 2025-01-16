@@ -7,7 +7,6 @@ import { SliderComponent } from '@fundamental-ngx/platform/slider';
     templateUrl: './slider-tooltip-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [SliderComponent, FormsModule]
 })
 export class SliderTooltipExampleComponent {

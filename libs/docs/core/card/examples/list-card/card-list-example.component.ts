@@ -16,7 +16,6 @@ interface Casts {
 @Component({
     selector: 'fd-card-list-example',
     templateUrl: 'card-list-example.component.html',
-    standalone: true,
     imports: [
         CardModule,
         ListModule,

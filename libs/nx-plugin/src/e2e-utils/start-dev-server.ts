@@ -22,7 +22,7 @@ export async function startDevServer(
         return await waitFor(opts.baseUrl, tenSecondsInMs);
     }
 
-    const { project, target, configuration } = parseTargetString(opts.devServerTarget);
+    const { project, target, configuration } = parseTargetString(opts.devServerTarget, context);
     const devServerTargetOpts = readTargetOptions({ project, target, configuration }, context);
     const { port, ssl, host } = devServerTargetOpts;
     const protocol = ssl ? 'https' : 'http';

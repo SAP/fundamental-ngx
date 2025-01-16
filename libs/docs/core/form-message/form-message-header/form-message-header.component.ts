@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-form-message-header',
     templateUrl: './form-message-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class FormMessageHeaderComponent {}

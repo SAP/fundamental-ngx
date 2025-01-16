@@ -7,7 +7,6 @@ import { SwitchComponent } from '@fundamental-ngx/core/switch';
     selector: 'fd-switch-forms-example',
     templateUrl: './switch-forms-example.component.html',
     styleUrls: ['./switch-forms-example.component.scss'],
-    standalone: true,
     imports: [FormsModule, ReactiveFormsModule, FormLabelComponent, SwitchComponent]
 })
 export class SwitchFormsExampleComponent {

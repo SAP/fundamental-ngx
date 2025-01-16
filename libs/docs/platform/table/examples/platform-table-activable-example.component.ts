@@ -22,7 +22,6 @@ import { TableCellActivateEvent } from '../../../../platform/table-helpers/model
     templateUrl: './platform-table-activable-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         TableDataSourceDirective,
         TableHeaderResizerDirective,

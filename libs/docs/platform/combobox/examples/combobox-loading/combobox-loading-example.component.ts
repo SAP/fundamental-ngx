@@ -12,7 +12,6 @@ import { delay } from 'rxjs/operators';
     templateUrl: './combobox-loading-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
-    standalone: true,
     imports: [FdpFormGroupModule, BusyIndicatorComponent, PlatformComboboxModule, FormsModule]
 })
 export class ComboboxLoadingExampleComponent {

@@ -19,7 +19,6 @@ import { TableModule } from '@fundamental-ngx/core/table';
     selector: 'fd-fixed-card-layout-examples',
     templateUrl: './fixed-card-layout-examples.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         SegmentedButtonModule,
         FormsModule,

@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'fd-platform-combobox-header',
     templateUrl: './platform-combobox-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformComboboxHeaderComponent {}

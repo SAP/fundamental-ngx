@@ -48,7 +48,6 @@ import { of } from 'rxjs';
         },
         provideDateTimeFormats()
     ],
-    standalone: true,
     imports: [
         PlatformSmartFilterBarModule,
         TitleComponent,

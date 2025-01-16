@@ -1,4 +1,3 @@
-/* eslint-disable @angular-eslint/no-input-rename,@angular-eslint/no-host-metadata-property */
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { NgTemplateOutlet } from '@angular/common';
@@ -49,7 +48,6 @@ interface GroupedDataSourceItems {
     selector: 'fdb-navigation',
     templateUrl: './navigation.component.html',
     styleUrls: ['./navigation.component.scss'],
-    standalone: true,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

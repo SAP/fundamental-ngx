@@ -8,7 +8,6 @@ import { FdpFormGroupModule, PlatformRadioGroupModule } from '@fundamental-ngx/p
 @Component({
     selector: 'fdp-platform-radio-group-list-example',
     templateUrl: './platform-radio-group-list-example.component.html',
-    standalone: true,
     imports: [
         FormsModule,
         FdpFormGroupModule,

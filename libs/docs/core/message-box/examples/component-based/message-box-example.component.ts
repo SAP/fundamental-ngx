@@ -32,7 +32,6 @@ import { TextData } from './component-based-message-box-example.component';
             </fd-message-box-footer>
         </fd-message-box>
     `,
-    standalone: true,
     imports: [MessageBoxModule, TitleComponent, BarModule]
 })
 export class MessageBoxExampleComponent {

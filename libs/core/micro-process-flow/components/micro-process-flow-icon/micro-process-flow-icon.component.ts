@@ -10,7 +10,6 @@ import { IconComponent, IconFont } from '@fundamental-ngx/core/icon';
     host: {
         class: 'fd-micro-process-flow__icon-container'
     },
-    standalone: true,
     imports: [IconComponent]
 })
 export class MicroProcessFlowIconComponent {

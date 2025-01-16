@@ -6,7 +6,6 @@ import { ListComponent, ListModule } from '@fundamental-ngx/core/list';
 @Component({
     selector: 'fd-list-keyboard-example',
     templateUrl: './list-keyboard-example.component.html',
-    standalone: true,
     imports: [ButtonComponent, ListModule]
 })
 export class ListKeyboardExampleComponent {

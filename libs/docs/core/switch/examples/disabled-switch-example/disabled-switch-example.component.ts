@@ -7,7 +7,6 @@ import { SwitchComponent } from '@fundamental-ngx/core/switch';
     selector: 'fd-disabled-switch-example',
     templateUrl: './disabled-switch-example.component.html',
     styleUrls: ['./disabled-switch-example.component.scss'],
-    standalone: true,
     imports: [FormLabelComponent, SwitchComponent, FormsModule]
 })
 export class DisabledSwitchExampleComponent {

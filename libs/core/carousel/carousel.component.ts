@@ -71,7 +71,6 @@ class CarouselActiveSlides {
     host: {
         '[style.width]': 'width'
     },
-    standalone: true,
     imports: [NgTemplateOutlet, NgClass, ButtonComponent, FdTranslatePipe]
 })
 export class CarouselComponent implements AfterContentInit, AfterViewInit, AfterViewChecked, OnChanges {

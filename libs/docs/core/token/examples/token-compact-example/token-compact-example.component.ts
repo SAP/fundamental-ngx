@@ -12,7 +12,6 @@ import { TokenComponent } from '@fundamental-ngx/core/token';
             }
         `
     ],
-    standalone: true,
     imports: [TokenComponent, ContentDensityDirective]
 })
 export class TokenCompactExampleComponent {}

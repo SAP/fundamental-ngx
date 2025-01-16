@@ -8,7 +8,6 @@ import { FileUploaderModule } from '@fundamental-ngx/core/file-uploader';
     templateUrl: './file-uploader-example.component.html',
     styleUrls: ['./file-uploader-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FileUploaderModule, FormsModule, ButtonComponent]
 })
 export class FileUploaderExampleComponent {

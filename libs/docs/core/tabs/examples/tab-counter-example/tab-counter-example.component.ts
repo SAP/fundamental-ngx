@@ -7,7 +7,6 @@ import { TextComponent } from '@fundamental-ngx/core/text';
 @Component({
     selector: 'fd-tab-counter-example',
     templateUrl: './tab-counter-example.component.html',
-    standalone: true,
     imports: [FormLabelComponent, TabsModule, RouterLinkActive, RouterLink, TextComponent]
 })
 export class TabCounterComponent {}

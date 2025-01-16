@@ -32,7 +32,6 @@ import { WizardStepComponent } from '../wizard-step/wizard-step.component';
             useExisting: WizardStepIndicatorComponent
         }
     ],
-    standalone: true,
     imports: [
         ActionSheetComponent,
         ActionSheetControlComponent,

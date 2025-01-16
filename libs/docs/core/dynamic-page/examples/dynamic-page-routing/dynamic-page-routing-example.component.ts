@@ -16,7 +16,6 @@ import { FDP_ICON_TAB_BAR, IconTabBarItem, TabConfig } from '@fundamental-ngx/pl
 
 @Component({
     selector: 'fd-dummy-stuff',
-    standalone: true,
     imports: [AsyncPipe],
     template: `{{ (route.data | async)?.text }}`
 })
@@ -26,7 +25,6 @@ export class DummyComponent {
 
 @Component({
     selector: 'fd-dynamic-page-routing-example',
-    standalone: true,
     styles: [
         `
             .overlay {

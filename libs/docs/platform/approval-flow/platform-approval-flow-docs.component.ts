@@ -20,7 +20,6 @@ const approvalFlowStatusSrc = 'platform-approval-flow-custom-status-example.comp
 @Component({
     selector: 'app-approval-flow',
     templateUrl: './platform-approval-flow-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

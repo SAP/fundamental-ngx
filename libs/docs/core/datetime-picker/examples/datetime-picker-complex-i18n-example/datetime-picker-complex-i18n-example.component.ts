@@ -48,7 +48,6 @@ const placeholders = new Map([
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [FormLabelComponent, SelectModule, DatetimePickerComponent, FormsModule]
 })
 export class DatetimePickerComplexI18nExampleComponent {

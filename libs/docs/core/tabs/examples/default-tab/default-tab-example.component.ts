@@ -6,7 +6,6 @@ import { TabsModule } from '@fundamental-ngx/core/tabs';
 @Component({
     selector: 'fd-default-tab-example',
     templateUrl: './default-tab-example.component.html',
-    standalone: true,
     imports: [FormLabelComponent, TabsModule, ButtonComponent]
 })
 export class DefaultTabExampleComponent {

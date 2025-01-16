@@ -21,7 +21,6 @@ import {
     selector: 'fd-toolbar-overflow-example',
     templateUrl: './toolbar-overflow-example.component.html',
     providers: [provideDateTimeFormats()],
-    standalone: true,
     imports: [
         ToolbarComponent,
         ButtonComponent,

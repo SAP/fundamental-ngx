@@ -21,7 +21,6 @@ const platformTableActivableRowTsSrc = 'preserved-state/platform-table-preserved
     templateUrl: './preserved-state-docs.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

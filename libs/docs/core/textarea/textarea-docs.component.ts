@@ -27,7 +27,6 @@ const formGroupInputTs = 'textarea-form-group-example.component.ts';
 @Component({
     selector: 'app-input',
     templateUrl: './textarea-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

@@ -7,7 +7,6 @@ import { TableModule } from '@fundamental-ngx/core/table';
 @Component({
     selector: 'fd-table-loading-example',
     templateUrl: './table-loading-example.component.html',
-    standalone: true,
     imports: [ButtonComponent, FocusableGridDirective, TableModule, RepeatDirective, SkeletonModule]
 })
 export class TableLoadingExampleComponent {

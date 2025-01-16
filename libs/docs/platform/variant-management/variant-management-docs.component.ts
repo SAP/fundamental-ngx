@@ -15,7 +15,6 @@ import { VariantManagementTableExampleComponent } from './examples/table/variant
 @Component({
     selector: 'app-variant-management',
     templateUrl: './variant-management-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

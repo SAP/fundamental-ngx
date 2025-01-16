@@ -11,7 +11,6 @@ import {
     selector: 'app-scroll-spy-header',
     templateUrl: './scroll-spy-header.component.html',
     styleUrls: ['./scroll-spy-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class ScrollSpyHeaderComponent {}

@@ -21,7 +21,6 @@ import { BehaviorSubject, map } from 'rxjs';
             </span>
         </div>
     `,
-    standalone: true,
     imports: [AsyncPipe],
     providers: [
         {

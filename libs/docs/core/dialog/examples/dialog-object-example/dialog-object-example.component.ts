@@ -9,7 +9,6 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
     selector: 'fd-dialog-object-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './dialog-object-example.component.html',
-    standalone: true,
     imports: [ButtonComponent, BarModule, InputGroupModule, InitialFocusDirective]
 })
 export class DialogObjectExampleComponent {

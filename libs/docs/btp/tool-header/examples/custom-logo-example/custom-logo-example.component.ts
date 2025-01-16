@@ -29,7 +29,6 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
         ButtonComponent,
         ToolHeaderActionDirective,
         ToolHeaderActionButtonDirective
-    ],
-    standalone: true
+    ]
 })
 export class CustomLogoExampleComponent {}

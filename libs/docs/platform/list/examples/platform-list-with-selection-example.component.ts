@@ -28,7 +28,6 @@ export class ListDataProvider extends DataProvider<Address> {
 @Component({
     selector: 'fdp-platform-list-with-selection-example',
     templateUrl: './platform-list-with-selection-example.component.html',
-    standalone: true,
     imports: [ToolbarComponent, ToolbarLabelDirective, PlatformListModule, FormsModule, StandardListItemModule]
 })
 export class PlatformListWithSelectionExampleComponent implements AfterViewInit {

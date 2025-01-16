@@ -6,7 +6,6 @@ import { SliderComponent } from '@fundamental-ngx/core/slider';
     selector: 'fd-slider-disabled-example',
     templateUrl: './slider-disabled-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [SliderComponent, FormsModule]
 })
 export class SliderDisabledExampleComponent {

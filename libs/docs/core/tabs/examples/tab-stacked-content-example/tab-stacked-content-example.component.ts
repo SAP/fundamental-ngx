@@ -5,7 +5,6 @@ import { TabsModule } from '@fundamental-ngx/core/tabs';
 @Component({
     selector: 'fd-tab-stacked-content-example',
     templateUrl: './tab-stacked-content-example.component.html',
-    standalone: true,
     imports: [TabsModule, ButtonComponent]
 })
 export class TabStackedContentExampleComponent {

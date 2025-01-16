@@ -16,7 +16,6 @@ const objectPageBasicExampleTsCode = 'object-page-example.component.ts';
 @Component({
     selector: 'app-object-page',
     templateUrl: './object-page-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

@@ -6,7 +6,6 @@ import { longTextTypeConfig, textTypeConfig } from '../config-for-examples/text-
 @Component({
     selector: 'fdp-platform-icon-tab-bar-text-type-example',
     templateUrl: './platform-icon-tab-bar-text-type-example.component.html',
-    standalone: true,
     imports: [IconTabBarComponent]
 })
 export class PlatformIconTabBarTextTypeExampleComponent implements OnInit {

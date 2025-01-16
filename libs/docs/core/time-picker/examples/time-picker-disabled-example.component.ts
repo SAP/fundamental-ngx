@@ -8,7 +8,6 @@ import { TimePickerModule } from '@fundamental-ngx/core/time-picker';
     selector: 'fd-time-picker-disabled-example',
     templateUrl: './time-picker-disabled-example.component.html',
     providers: [provideDateTimeFormats()],
-    standalone: true,
     imports: [TimePickerModule, FormsModule, DatePipe]
 })
 export class TimePickerDisabledExampleComponent {

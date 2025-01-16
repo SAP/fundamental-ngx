@@ -22,7 +22,6 @@ import {
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [CalendarComponent, FdDatetimeModule]
 })
 export class CalendarGridExampleComponent {

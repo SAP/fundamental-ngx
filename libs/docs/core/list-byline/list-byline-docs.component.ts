@@ -38,7 +38,6 @@ const bylineUnreadSrcHtml = 'list-byline-unread-example/list-byline-unread-examp
 @Component({
     selector: 'app-list-byline',
     templateUrl: './list-byline-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

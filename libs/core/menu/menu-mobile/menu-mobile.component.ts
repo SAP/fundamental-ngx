@@ -32,7 +32,6 @@ import { MenuService } from '../services/menu.service';
     templateUrl: './menu-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DialogModule,
         TemplateDirective,

@@ -5,7 +5,6 @@ import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-mess
 @Component({
     selector: 'fd-illustrated-message-example',
     templateUrl: './illustrated-message-example.component.html',
-    standalone: true,
     imports: [IllustratedMessageModule, ButtonComponent]
 })
 export class IllustratedMessageExampleComponent {

@@ -34,7 +34,6 @@ const platformInputReactiveFormMinMaxValidationTypesTsSrc =
 @Component({
     selector: 'fd-platform-input-docs',
     templateUrl: './platform-input-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

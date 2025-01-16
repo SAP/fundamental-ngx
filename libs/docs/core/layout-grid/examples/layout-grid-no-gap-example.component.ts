@@ -5,7 +5,6 @@ import { ExampleLayoutGridBlockComponent } from './example-layout-grid-block.com
 @Component({
     selector: 'fd-layout-grid-no-gap-example',
     templateUrl: './layout-grid-no-gap-example.component.html',
-    standalone: true,
     imports: [LayoutGridModule, ExampleLayoutGridBlockComponent]
 })
 export class LayoutGridNoGapExampleComponent {}

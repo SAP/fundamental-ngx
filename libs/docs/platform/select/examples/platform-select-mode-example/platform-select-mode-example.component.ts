@@ -19,7 +19,6 @@ export class Fruit {
     selector: 'fdp-platform-select-mode-example',
     templateUrl: './platform-select-mode-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [PlatformSelectModule, ContentDensityDirective]
 })
 export class PlatformSelectModeExampleComponent {

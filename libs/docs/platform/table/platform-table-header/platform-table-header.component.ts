@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-table-header',
     templateUrl: './platform-table-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformTableHeaderComponent {}

@@ -10,7 +10,6 @@ import { TableModule } from '@fundamental-ngx/core/table';
 @Component({
     selector: 'fd-table-checkboxes-example',
     templateUrl: './table-checkboxes-example.component.html',
-    standalone: true,
     imports: [
         FocusableGridDirective,
         TableModule,

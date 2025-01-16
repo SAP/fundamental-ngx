@@ -61,7 +61,6 @@ import { VariantItem } from './variant-item.class';
             useExisting: VariantManagementComponent
         }
     ],
-    standalone: true,
     imports: [
         PopoverComponent,
         PopoverControlComponent,

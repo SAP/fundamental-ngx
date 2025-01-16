@@ -11,7 +11,6 @@ import {
     selector: 'app-info-label-header',
     templateUrl: './info-label-header.component.html',
     styleUrls: ['./info-label-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class InfoLabelHeaderComponent {}

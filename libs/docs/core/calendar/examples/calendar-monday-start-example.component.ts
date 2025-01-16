@@ -40,7 +40,6 @@ import { SelectModule } from '@fundamental-ngx/core/select';
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [CalendarComponent, FormsModule, FormLabelComponent, SelectModule, FdDatetimeModule]
 })
 export class CalendarMondayStartExampleComponent {

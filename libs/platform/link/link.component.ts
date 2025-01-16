@@ -34,7 +34,6 @@ const VALID_INPUT_TYPES = ['standard', 'emphasized', 'subtle'];
     styleUrl: './link.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [CoreLinkComponent, FdTranslatePipe]
 })
 export class LinkComponent extends BaseComponent implements OnInit, AfterViewInit {

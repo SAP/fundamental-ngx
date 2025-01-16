@@ -6,7 +6,6 @@ import { ListModule } from '@fundamental-ngx/core/list';
 @Component({
     selector: 'fd-list-byline-standard-example',
     templateUrl: './list-byline-standard-example.component.html',
-    standalone: true,
     imports: [ListModule, IconComponent, ContentDensityDirective]
 })
 export class ListBylineStandardExampleComponent {}

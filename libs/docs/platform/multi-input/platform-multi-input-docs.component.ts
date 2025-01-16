@@ -41,7 +41,6 @@ import { PlatformMultiInputReactiveExampleComponent } from './examples/platform-
 @Component({
     selector: 'fd-platform-multi-input-docs',
     templateUrl: './platform-multi-input-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

@@ -8,7 +8,6 @@ import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
         <fd-checkbox [(ngModel)]="checkboxValue"> I accept&nbsp;<a href="#">Terms and conditions</a> </fd-checkbox>
         Value: {{ checkboxValue }}
     `,
-    standalone: true,
     imports: [CheckboxComponent, FormsModule]
 })
 export class CheckboxCustomLabelExampleComponent {

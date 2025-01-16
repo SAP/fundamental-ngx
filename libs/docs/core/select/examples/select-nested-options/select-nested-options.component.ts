@@ -7,7 +7,6 @@ import { SelectModule } from '@fundamental-ngx/core/select';
     selector: 'fd-select-nested-options',
     templateUrl: './select-nested-options.component.html',
     styleUrls: ['select-nested-options.component.scss'],
-    standalone: true,
     imports: [SelectModule, ListModule, NgClass, ListSecondaryDirective, JsonPipe]
 })
 export class SelectNestedOptionsComponent {

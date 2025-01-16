@@ -54,7 +54,6 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
 @Component({
     selector: 'fdp-platform-vhd-mobile-example',
     templateUrl: './platform-vhd-mobile-example.component.html',
-    standalone: true,
     imports: [InputGroupModule, ButtonComponent, PlatformValueHelpDialogModule]
 })
 export class PlatformVhdMobileExampleComponent implements OnInit {

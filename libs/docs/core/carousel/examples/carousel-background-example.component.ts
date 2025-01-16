@@ -8,7 +8,6 @@ import { CarouselComponent, CarouselItemComponent } from '@fundamental-ngx/core/
     styleUrls: ['./carousel-background-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [NgTemplateOutlet, CarouselComponent, CarouselItemComponent]
 })
 export class CarouselBackgroundExampleComponent {}

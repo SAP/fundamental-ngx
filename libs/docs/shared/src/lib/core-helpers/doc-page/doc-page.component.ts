@@ -6,7 +6,6 @@ import { DeprecatedAlertsComponent } from '../deprecated-alerts/deprecated-alert
     selector: 'fd-doc-page',
     templateUrl: './doc-page.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [DeprecatedAlertsComponent, RouterOutlet]
 })
 export class DocPageComponent {

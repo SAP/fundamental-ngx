@@ -19,7 +19,6 @@ import {
 @Component({
     selector: 'fdp-wizard-generator-customizable-embeded-example',
     templateUrl: './wizard-generator-customizable-embeded-example.component.html',
-    standalone: true,
     imports: [
         PlatformWizardGeneratorModule,
         PlatformButtonModule,

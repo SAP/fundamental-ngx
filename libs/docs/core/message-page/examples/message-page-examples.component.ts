@@ -7,7 +7,6 @@ import { MessagePageModule } from '@fundamental-ngx/core/message-page';
 @Component({
     selector: 'fd-message-page-error-example',
     templateUrl: './message-page-error-example.component.html',
-    standalone: true,
     imports: [MessagePageModule, LinkComponent]
 })
 export class MessagePageErrorExampleComponent {}
@@ -15,7 +14,6 @@ export class MessagePageErrorExampleComponent {}
 @Component({
     selector: 'fd-message-page-filter-example',
     templateUrl: './message-page-filter-example.component.html',
-    standalone: true,
     imports: [MessagePageModule]
 })
 export class MessagePageFilterExampleComponent {}
@@ -23,7 +21,6 @@ export class MessagePageFilterExampleComponent {}
 @Component({
     selector: 'fd-message-page-no-items-example',
     templateUrl: './message-page-no-items-example.component.html',
-    standalone: true,
     imports: [MessagePageModule]
 })
 export class MessagePageNoItemsExampleComponent {}
@@ -31,7 +28,6 @@ export class MessagePageNoItemsExampleComponent {}
 @Component({
     selector: 'fd-message-page-search-example',
     templateUrl: './message-page-search-example.component.html',
-    standalone: true,
     imports: [MessagePageModule]
 })
 export class MessagePageSearchExampleComponent {}
@@ -39,7 +35,6 @@ export class MessagePageSearchExampleComponent {}
 @Component({
     selector: 'fd-message-page-actions-example',
     templateUrl: './message-page-actions-example.component.html',
-    standalone: true,
     imports: [MessagePageModule, ButtonComponent, ContentDensityDirective]
 })
 export class MessagePageActionsExampleComponent {}
@@ -47,7 +42,6 @@ export class MessagePageActionsExampleComponent {}
 @Component({
     selector: 'fd-message-page-custom-icon-example',
     templateUrl: './message-page-custom-icon-example.component.html',
-    standalone: true,
     imports: [MessagePageModule, ButtonComponent, ContentDensityDirective]
 })
 export class MessagePageCustomIconExampleComponent {}
@@ -55,7 +49,6 @@ export class MessagePageCustomIconExampleComponent {}
 @Component({
     selector: 'fd-message-page-no-icon-example',
     templateUrl: './message-page-no-icon-example.component.html',
-    standalone: true,
     imports: [MessagePageModule, ButtonComponent, ContentDensityDirective]
 })
 export class MessagePageNoIconExampleComponent {}

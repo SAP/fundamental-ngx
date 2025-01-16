@@ -26,7 +26,6 @@ import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [FormLabelComponent, DatetimePickerComponent, FormsModule]
 })
 export class DatetimeMobileExampleComponent {

@@ -7,7 +7,6 @@ import { TimeModule } from '@fundamental-ngx/core/time';
     selector: 'fd-time-no-spinners-example',
     templateUrl: './time-no-spinners-example.component.html',
     providers: [provideDateTimeFormats()],
-    standalone: true,
     imports: [TimeModule, FormsModule]
 })
 export class TimeNoSpinnersExampleComponent {

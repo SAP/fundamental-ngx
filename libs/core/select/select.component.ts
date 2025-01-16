@@ -105,7 +105,6 @@ export enum TextOverflowModeEnum {
         SelectKeyManagerService,
         contentDensityObserverProviders()
     ],
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         PopoverComponent,

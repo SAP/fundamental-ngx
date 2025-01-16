@@ -3,7 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NotificationModule } from '../notification.module';
 
 @Component({
-    template: `<span #directiveElement fd-notification-footer-content>Notification Footer Content Test</span>`
+    template: `<span #directiveElement fd-notification-footer-content>Notification Footer Content Test</span>`,
+    standalone: true,
+    imports: [NotificationModule]
 })
 class TestComponent {
     @ViewChild('directiveElement')
@@ -15,8 +17,7 @@ describe('NotificationFooterContentDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [NotificationModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

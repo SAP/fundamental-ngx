@@ -18,7 +18,6 @@ export const customPanelConfigProvider = {
     selector: 'fdp-platform-panel-config-example',
     templateUrl: './platform-panel-config-example.component.html',
     providers: [customPanelConfigProvider],
-    standalone: true,
     imports: [PlatformPanelModule]
 })
 export class PlatformPanelConfigExampleComponent {}

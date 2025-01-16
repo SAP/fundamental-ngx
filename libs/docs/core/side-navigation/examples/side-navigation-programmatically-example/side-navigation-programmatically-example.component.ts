@@ -6,7 +6,6 @@ import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 @Component({
     selector: 'fd-side-navigation-programmatically-example',
     templateUrl: './side-navigation-programmatically-example.component.html',
-    standalone: true,
     imports: [SideNavigationModule, NestedListModule, ButtonComponent]
 })
 export class SideNavigationProgrammaticallyExampleComponent {

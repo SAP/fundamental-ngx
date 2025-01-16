@@ -9,7 +9,6 @@ import { ApiDocsService } from '../../services/api-docs.service';
     templateUrl: './api.component.html',
     styleUrls: ['./api.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ButtonComponent, MenuModule]
 })
 export class ApiComponent implements OnInit {

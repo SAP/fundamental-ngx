@@ -6,7 +6,6 @@ import { PlatformMenuButtonModule } from '@fundamental-ngx/platform/menu-button'
 @Component({
     selector: 'fdp-platform-menu-button-example',
     templateUrl: './platform-menu-button-example.component.html',
-    standalone: true,
     imports: [PlatformMenuButtonModule, PlatformMenuModule, ContentDensityDirective]
 })
 export class PlatformMenuButtonExampleComponent {

@@ -15,7 +15,6 @@ import { ListModule } from '@fundamental-ngx/core/list';
     templateUrl: './card-example.component.html',
     styleUrls: ['./card-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         CardModule,
         ListModule,

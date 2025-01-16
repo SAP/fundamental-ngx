@@ -33,7 +33,6 @@ export type GenericTagType = 'error' | 'success' | 'warning' | 'information';
         '[attr.aria-roledescription]': 'ariaRoleDescription',
         role: 'button'
     },
-    standalone: true,
     imports: [NgClass, IconComponent]
 })
 export class GenericTagComponent implements OnChanges, OnInit, CssClassBuilder {

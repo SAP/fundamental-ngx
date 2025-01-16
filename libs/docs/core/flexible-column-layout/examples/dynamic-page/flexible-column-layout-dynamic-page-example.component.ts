@@ -11,7 +11,6 @@ import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
     selector: 'fd-flexible-column-layout-dynamic-page-example',
     templateUrl: './flexible-column-layout-dynamic-page-example.component.html',
     styleUrls: ['./flexible-column-layout-dynamic-page-example.component.scss'],
-    standalone: true,
     imports: [ButtonComponent, FlexibleColumnLayoutModule, DynamicPageModule, ToolbarComponent, NgStyle, CdkScrollable]
 })
 export class FlexibleColumnLayoutDynamicPageExampleComponent {

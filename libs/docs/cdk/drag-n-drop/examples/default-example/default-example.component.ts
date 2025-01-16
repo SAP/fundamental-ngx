@@ -28,7 +28,6 @@ import { DragAndDropModule, FdDndDropEventMode, FdDropEvent } from '@fundamental
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [NgTemplateOutlet, DragAndDropModule, NgStyle]
 })
 export class DefaultExampleComponent {

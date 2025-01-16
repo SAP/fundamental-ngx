@@ -5,7 +5,6 @@ import { ObjectStatusComponent } from '@fundamental-ngx/platform/object-status';
     selector: 'fdp-platform-object-status-large-example',
     templateUrl: './platform-object-status-large-example.component.html',
     styleUrls: ['./platform-object-status-large-example.component.scss'],
-    standalone: true,
     imports: [ObjectStatusComponent]
 })
 export class PlatformObjectStatusLargeExampleComponent {

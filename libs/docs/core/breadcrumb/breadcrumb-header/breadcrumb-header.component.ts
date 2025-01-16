@@ -11,7 +11,6 @@ import {
     selector: 'app-breadcrumb-header',
     templateUrl: './breadcrumb-header.component.html',
     styleUrls: ['./breadcrumb-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class BreadcrumbHeaderComponent {}

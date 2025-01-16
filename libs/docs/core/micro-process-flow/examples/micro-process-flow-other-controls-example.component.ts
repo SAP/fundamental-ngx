@@ -8,7 +8,6 @@ import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
     selector: 'fd-micro-process-flow-other-controls-example',
     templateUrl: './micro-process-flow-other-controls-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [MicroProcessFlowModule, StatusIndicatorModule, AvatarComponent, InfoLabelModule]
 })
 export class MicroProcessFlowOtherControlsExampleComponent {

@@ -110,7 +110,6 @@ const smartFilterBarProvider: Provider = {
         class: 'fdp-smart-filter-bar',
         '[class.fdp-smart-filter-bar--transparent]': 'transparent'
     },
-    standalone: true,
     imports: [
         ToolbarComponent,
         NgTemplateOutlet,

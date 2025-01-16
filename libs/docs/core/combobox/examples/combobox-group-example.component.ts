@@ -8,7 +8,6 @@ export type ComboboxItem = { name: string; type: string };
 @Component({
     selector: 'fd-combobox-group-example',
     templateUrl: './combobox-group-example.component.html',
-    standalone: true,
     imports: [ComboboxComponent, FormsModule]
 })
 export class ComboboxGroupExampleComponent {

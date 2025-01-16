@@ -7,7 +7,6 @@ import { SelectModule } from '@fundamental-ngx/core/select';
     selector: 'fd-select-forms',
     templateUrl: './select-forms.component.html',
     styleUrls: ['select-forms.component.scss'],
-    standalone: true,
     imports: [FormsModule, ReactiveFormsModule, SelectModule, ButtonComponent]
 })
 export class SelectFormsComponent {

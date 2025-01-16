@@ -92,7 +92,6 @@ import { MessagePopoverEntry, MessagePopoverErrorGroup } from '../../models/mess
             ])
         ])
     ],
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         CdkScrollable,

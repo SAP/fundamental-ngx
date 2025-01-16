@@ -22,7 +22,6 @@ type TileSize = null | 's';
     styleUrl: './tile.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: []
 })
 export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges {

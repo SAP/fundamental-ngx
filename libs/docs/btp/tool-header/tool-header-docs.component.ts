@@ -20,7 +20,6 @@ import { UsageWithLayoutExampleComponent } from './examples/usage-with-layout-ex
 
 @Component({
     templateUrl: './tool-header-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

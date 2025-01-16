@@ -38,7 +38,6 @@ import { AvatarGroupItemDirective } from '../../directives/avatar-group-item.dir
     },
     styleUrl: './default-avatar-group-overflow-body.component.scss',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, OnDestroy {

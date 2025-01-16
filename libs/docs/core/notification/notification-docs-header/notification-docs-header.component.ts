@@ -11,7 +11,6 @@ import {
     selector: 'app-notification-docs-header',
     templateUrl: './notification-docs-header.component.html',
     styleUrls: ['./notification-docs-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, ImportComponent, DescriptionComponent, HeaderTabsComponent]
 })
 export class NotificationDocsHeaderComponent {}

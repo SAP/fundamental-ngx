@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'fd-content-density-header',
     templateUrl: './content-density-header.component.html',
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

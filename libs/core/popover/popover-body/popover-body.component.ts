@@ -39,7 +39,6 @@ import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrl: './popover-body.component.scss',
     providers: [contentDensityObserverProviders({ alwaysAddModifiers: true })],
-    standalone: true,
     imports: [A11yModule, CdkScrollable, ScrollbarDirective, NgTemplateOutlet, ResizeHandleDirective, ResizeDirective]
 })
 export class PopoverBodyComponent implements AfterViewInit {

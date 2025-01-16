@@ -45,8 +45,7 @@ class ExampleStripAlertComponent implements OnDestroy {
                 background-color: transparent;
             }
         `
-    ],
-    standalone: true
+    ]
 })
 class ExampleStripAlertFooterComponent {
     alertRefs$ = inject(MessageStripAlertContainerAlertRefs);
@@ -88,7 +87,6 @@ class ExampleStripAlertFooterComponent {
             }
         `
     ],
-    standalone: true,
     imports: [ButtonComponent, ContentDensityDirective]
 })
 export class MessageStripAlertExampleComponent {

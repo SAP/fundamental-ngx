@@ -9,7 +9,6 @@ import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
     selector: 'fd-scroll-spy-custom-example',
     templateUrl: './scroll-spy-custom-example.component.html',
     styleUrls: ['./scroll-spy-custom-example.component.scss'],
-    standalone: true,
     imports: [IconComponent, CdkScrollable, ScrollbarDirective, ScrollSpyModule]
 })
 export class ScrollSpyCustomExampleComponent implements OnInit {

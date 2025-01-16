@@ -28,7 +28,6 @@ const BusyIndicatorWrapperHtml = 'busy-indicator-wrapper-example.component.html'
     selector: 'app-busy-indicator-docs',
     templateUrl: './busy-indicator-docs.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

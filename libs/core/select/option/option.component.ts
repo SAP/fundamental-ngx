@@ -79,7 +79,6 @@ export class FdOptionSelectionChange {
             }
         `
     ],
-    standalone: true,
     imports: [ListTitleDirective, NgTemplateOutlet]
 })
 export class OptionComponent implements AfterViewInit, AfterViewChecked, OnDestroy, FocusableOption, OptionsInterface {

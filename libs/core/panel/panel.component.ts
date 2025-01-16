@@ -34,7 +34,6 @@ let panelExpandUniqueId = 0;
     styleUrl: './panel.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders()],
-    standalone: true,
     imports: [ButtonComponent]
 })
 export class PanelComponent {

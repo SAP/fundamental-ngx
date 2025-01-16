@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'app-object-list-item-header',
     templateUrl: './platform-object-list-item-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, RouterLink, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformObjectListItemHeaderComponent {}

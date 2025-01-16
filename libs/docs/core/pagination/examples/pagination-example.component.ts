@@ -20,7 +20,6 @@ import { delay, tap } from 'rxjs/operators';
             <div>{{ notification }}</div>
         }
     `,
-    standalone: true,
     imports: [PaginationModule, ButtonComponent]
 })
 export class PaginationExampleComponent {

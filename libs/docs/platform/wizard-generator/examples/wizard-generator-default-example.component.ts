@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'fdp-wizard-generator-default-example',
     templateUrl: './wizard-generator-default-example.component.html',
-    standalone: true,
     imports: [PlatformWizardGeneratorModule, JsonPipe]
 })
 export class WizardGeneratorDefaultExampleComponent {

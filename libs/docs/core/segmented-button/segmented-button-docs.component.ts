@@ -26,7 +26,6 @@ const segmentedButtonCustomHtml = 'segmented-button-complex-example/segmented-bu
 @Component({
     selector: 'app-segmented-button',
     templateUrl: './segmented-button-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

@@ -26,7 +26,6 @@ const formGroupInputTs = 'input-form-group-example.component.ts';
 @Component({
     selector: 'app-input',
     templateUrl: './input-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

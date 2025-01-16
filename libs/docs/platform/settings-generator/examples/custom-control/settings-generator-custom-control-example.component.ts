@@ -41,7 +41,6 @@ import { take } from 'rxjs/operators';
         </ng-container>
     `,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider],
-    standalone: true,
     imports: [FormsModule, ReactiveFormsModule, SliderComponent]
 })
 export class PlatformFormGeneratorCustomSliderElementComponent extends BaseDynamicFormGeneratorControl<SliderDynamicFormControl> {
@@ -64,7 +63,6 @@ export interface SliderDynamicFormControl extends BaseDynamicFormFieldItem<{ val
     templateUrl: './settings-generator-custom-control-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [SettingsGeneratorModule, BarModule]
 })
 export class SettingsGeneratorCustomControlExampleComponent {

@@ -5,7 +5,6 @@ import { CheckboxComponent, FdpFormGroupModule } from '@fundamental-ngx/platform
 @Component({
     selector: 'fdp-platform-checkbox-a11y',
     templateUrl: 'platform-checkbox-a11y.component.html',
-    standalone: true,
     imports: [FdpFormGroupModule, CheckboxComponent, FormsModule]
 })
 export class PlatformChekboxA11yExampleComponent {

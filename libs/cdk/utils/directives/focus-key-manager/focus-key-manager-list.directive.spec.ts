@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, waitForAsync } from '@angular/core/testing';
-
 import { RtlService } from '../../services/rtl.service';
 import { FocusKeyManagerItemDirective } from './focus-key-manager-item.directive';
 import { FocusKeyManagerListDirective } from './focus-key-manager-list.directive';
@@ -10,7 +9,9 @@ import { FocusKeyManagerListDirective } from './focus-key-manager-list.directive
         <ul fdkFocusKeyManagerList>
             <li fdkFocusKeyManagerItem></li>
         </ul>
-    `
+    `,
+    standalone: true, // Mark TestComponent as standalone
+    imports: [FocusKeyManagerItemDirective, FocusKeyManagerListDirective]
 })
 class TestComponent {
     @ViewChild(FocusKeyManagerListDirective) list: FocusKeyManagerListDirective;
@@ -23,8 +24,7 @@ describe('FocusKeyManagerList', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [FocusKeyManagerItemDirective, FocusKeyManagerListDirective],
+            imports: [TestComponent],
             providers: [RtlService]
         }).compileComponents();
     }));
@@ -36,7 +36,7 @@ describe('FocusKeyManagerList', () => {
     });
 
     it('should focus element', fakeAsync(() => {
-        const focusMock = jest.spyOn(component.item, 'focus');
+        const focusMock = jest.spyOn(component.item, 'focus' as any);
 
         component.list.ngAfterContentInit();
         component.list.focusItem(0);

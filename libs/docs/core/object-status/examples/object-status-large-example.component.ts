@@ -5,7 +5,6 @@ import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
     selector: 'fd-object-status-large-example',
     templateUrl: './object-status-large-example.component.html',
     styleUrls: ['./object-status-examples.component.scss'],
-    standalone: true,
     imports: [ObjectStatusComponent]
 })
 export class ObjectStatusLargeExampleComponent {

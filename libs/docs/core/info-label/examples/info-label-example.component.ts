@@ -7,7 +7,6 @@ const infoLabelColors: InfoLabelColorInput[] = ['1', '2', '3', '4', '5', '6', '7
     selector: 'fd-info-label-example',
     templateUrl: './info-label-example.component.html',
     styleUrls: ['./info-label-example.component.scss'],
-    standalone: true,
     imports: [InfoLabelModule]
 })
 export class InfoLabelExampleComponent {

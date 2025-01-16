@@ -6,7 +6,6 @@ import { FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/pla
     selector: 'fdp-platform-textarea-autogrow-example',
     templateUrl: './platform-textarea-autogrow-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformTextAreaModule]
 })
 export class PlatformTextareaAutogrowExampleComponent {

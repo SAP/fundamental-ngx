@@ -43,7 +43,6 @@ export type IndicationColorType = ColorAccent;
     templateUrl: './object-status.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CoreObjectStatusComponent]
 })
 export class ObjectStatusComponent {

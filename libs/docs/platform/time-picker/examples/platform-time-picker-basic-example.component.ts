@@ -14,7 +14,6 @@ import { FdpFormGroupModule, PlatformTimePickerModule } from '@fundamental-ngx/p
         // Due to the limit of this example we must provide it on this level.
         provideDateTimeFormats()
     ],
-    standalone: true,
     imports: [FdpFormGroupModule, PlatformTimePickerModule, ContentDensityDirective, FormsModule, ButtonComponent]
 })
 export class PlatformTimePickerBasicExampleComponent {

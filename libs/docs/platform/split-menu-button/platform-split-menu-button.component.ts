@@ -22,7 +22,6 @@ import { PlatformDocsSplitMenuButtonTypesComponent } from './examples/platform-s
 @Component({
     selector: 'app-split-menu-button',
     templateUrl: './platform-split-menu-button.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

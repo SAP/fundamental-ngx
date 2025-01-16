@@ -13,7 +13,6 @@ import { DataSourceDefaultExampleComponent } from './examples/default/data-sourc
 @Component({
     selector: 'app-data-source',
     templateUrl: './data-source-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

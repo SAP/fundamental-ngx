@@ -56,7 +56,6 @@ type Version = {
     styleUrls: ['./toolbar.component.scss'],
     providers: [MenuKeyboardService],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ShellbarComponent,
         ButtonComponent,

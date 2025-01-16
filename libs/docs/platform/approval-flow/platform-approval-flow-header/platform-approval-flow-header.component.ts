@@ -13,7 +13,6 @@ import {
     selector: 'fd-approval-flow-header',
     templateUrl: './platform-approval-flow-header.component.html',
     styleUrls: ['./platform-approval-flow-header.component.scss'],
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

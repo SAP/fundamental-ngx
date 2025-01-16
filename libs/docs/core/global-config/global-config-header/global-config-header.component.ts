@@ -9,7 +9,6 @@ import {
 @Component({
     selector: 'fd-global-config-header',
     templateUrl: './global-config-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, HeaderTabsComponent]
 })
 export class GlobalConfigHeaderComponent {}

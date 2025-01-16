@@ -6,7 +6,6 @@ import { ObjectStatusComponent } from '@fundamental-ngx/platform/object-status';
     selector: 'fdp-platform-object-status-example',
     templateUrl: './platform-object-status-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
-    standalone: true,
     imports: [ObjectStatusComponent]
 })
 export class PlatformObjectStatusExampleComponent {}
@@ -15,7 +14,6 @@ export class PlatformObjectStatusExampleComponent {}
     selector: 'fdp-object-status-text-example',
     templateUrl: './platform-object-status-text-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
-    standalone: true,
     imports: [ObjectStatusComponent]
 })
 export class PlatformObjectStatusTextExampleComponent {}
@@ -24,7 +22,6 @@ export class PlatformObjectStatusTextExampleComponent {}
     selector: 'fdp-object-status-numeric-icon-example',
     templateUrl: './platform-object-status-icon-text-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
-    standalone: true,
     imports: [ObjectStatusComponent]
 })
 export class PlatformObjectStatusTextIconExampleComponent {}
@@ -33,7 +30,6 @@ export class PlatformObjectStatusTextIconExampleComponent {}
     selector: 'fdp-object-status-inverted-example',
     templateUrl: './platform-object-status-inverted-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
-    standalone: true,
     imports: [ObjectStatusComponent]
 })
 export class PlatformObjectStatusInvertedTextExampleComponent {}
@@ -42,7 +38,6 @@ export class PlatformObjectStatusInvertedTextExampleComponent {}
     selector: 'fdp-object-status-inverted-generic-text-example',
     templateUrl: './platform-object-status-inverted-generic-text-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
-    standalone: true,
     imports: [ObjectStatusComponent]
 })
 export class PlatformObjectStatusInvertedGenericTextExampleComponent {

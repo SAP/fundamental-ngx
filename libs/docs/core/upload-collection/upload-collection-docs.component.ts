@@ -29,7 +29,6 @@ const uploadCollectionEmptyTs = 'upload-collection-empty-example.component.ts';
 @Component({
     selector: 'app-upload-collection',
     templateUrl: './upload-collection-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

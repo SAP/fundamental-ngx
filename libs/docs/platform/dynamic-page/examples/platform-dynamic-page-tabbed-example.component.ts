@@ -19,7 +19,6 @@ import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-
     templateUrl: './platform-dynamic-page-tabbed-example.component.html',
     styleUrls: ['./platform-dynamic-page-tabbed-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ButtonComponent,
         PlatformDynamicPageModule,

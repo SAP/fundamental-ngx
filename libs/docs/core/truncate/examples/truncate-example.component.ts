@@ -16,7 +16,6 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
             This element <fd-icon glyph="customer"></fd-icon> should be truncated by default value <b>200px</b>
         </p>
     `,
-    standalone: true,
     imports: [TruncateDirective, IconComponent]
 })
 export class TruncateExampleComponent {}

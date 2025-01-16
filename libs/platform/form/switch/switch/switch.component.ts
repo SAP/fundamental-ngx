@@ -18,7 +18,6 @@ export class SwitchChangeEvent {
     templateUrl: './switch.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: SwitchComponent, multi: true }],
-    standalone: true,
     imports: [CoreSwitchComponent, FdTranslatePipe]
 })
 export class SwitchComponent extends BaseInput {

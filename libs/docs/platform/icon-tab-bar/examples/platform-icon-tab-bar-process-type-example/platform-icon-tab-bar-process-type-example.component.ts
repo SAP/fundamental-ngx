@@ -8,7 +8,6 @@ import { iconTypeConfig, longIconTypeConfig } from '../config-for-examples/icon-
 @Component({
     selector: 'fdp-platform-icon-tab-bar-process-type-example',
     templateUrl: './platform-icon-tab-bar-process-type-example.component.html',
-    standalone: true,
     imports: [IconTabBarComponent, IconTabTitleDirective, IconTabBarTabComponent, IconComponent]
 })
 export class PlatformIconTabBarProcessTypeExampleComponent implements OnInit {

@@ -12,7 +12,6 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
             }
         `
     ],
-    standalone: true,
     imports: [ButtonComponent]
 })
 export class ButtonTypesExampleComponent {}

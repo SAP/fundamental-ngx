@@ -18,7 +18,6 @@ import { addClassNameToElement } from '../utils';
     styleUrl: './dynamic-page-content.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: []
 })
 export class DynamicPageContentComponent implements OnInit {

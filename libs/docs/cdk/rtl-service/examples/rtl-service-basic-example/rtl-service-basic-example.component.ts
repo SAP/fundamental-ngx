@@ -7,8 +7,7 @@ import { ButtonComponent, FormLabelComponent, RtlService, SwitchComponent, TextC
     selector: 'fd-rtl-service-basic-example',
     templateUrl: 'rtl-service-basic-example.component.html',
     imports: [TextComponent, ButtonComponent, FormLabelComponent, SwitchComponent, FormsModule],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RtlServiceBasicExampleComponent {
     // Injecting the RtlService

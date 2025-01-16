@@ -22,7 +22,6 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
     templateUrl: './platform-form-generator-custom-field-layout-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [PlatformFormGeneratorModule, PlatformButtonModule, JsonPipe]
 })
 export class PlatformFormGeneratorCustomFieldLayoutExampleComponent {

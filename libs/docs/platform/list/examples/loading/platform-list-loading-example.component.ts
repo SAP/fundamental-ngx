@@ -5,7 +5,6 @@ import { PlatformListModule } from '@fundamental-ngx/platform/list';
     selector: 'fdp-platform-list-loading-example',
     templateUrl: './platform-list-loading-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [PlatformListModule]
 })
 export class PlatformListLoadingExampleComponent {}

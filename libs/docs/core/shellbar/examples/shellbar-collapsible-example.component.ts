@@ -26,7 +26,6 @@ import {
 @Component({
     selector: 'fd-shellbar-collapsible-example',
     templateUrl: './shellbar-collapsible-example.component.html',
-    standalone: true,
     imports: [
         SegmentedButtonModule,
         FormsModule,

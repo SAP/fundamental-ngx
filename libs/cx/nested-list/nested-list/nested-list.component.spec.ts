@@ -8,8 +8,11 @@ import {
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListStateService } from '../nested-list-state.service';
-import { CxNestedListModule } from '../nested-list.module';
+import { NestedListHeaderDirective, NestedListTitleDirective } from '../nested-list-directives';
 import { NestedListComponent } from './nested-list.component';
+import { NestedItemComponent } from '../nested-item/nested-item.component';
+import { NestedLinkComponent } from '../nested-link/nested-link.component';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 
 @Component({
     template: `
@@ -41,7 +44,15 @@ import { NestedListComponent } from './nested-list.component';
                 </ul>
             </li>
         </ul>
-    `
+    `,
+    standalone: true,
+    imports: [
+        NestedListHeaderDirective, 
+        NestedItemComponent, 
+        NestedLinkComponent, 
+        NestedListTitleDirective, 
+        ContentDensityDirective,
+        NestedListComponent]
 })
 class TestNestedContainerComponent {
     @ViewChild('level4List', { static: true, read: NestedListComponent })
@@ -65,8 +76,7 @@ describe('NestedListDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CxNestedListModule],
-            declarations: [TestNestedContainerComponent],
+            imports: [TestNestedContainerComponent],
             providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService]
         }).compileComponents();
     }));

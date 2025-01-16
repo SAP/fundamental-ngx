@@ -23,8 +23,7 @@ const rtlServiceBasicExampleHtml = 'rtl-service-basic-example/rtl-service-basic-
         RtlServiceBasicExampleComponent,
         CodeExampleComponent,
         CodeSnippetComponent
-    ],
-    standalone: true
+    ]
 })
 export class RtlServiceDocsComponent {
     rtlService: ExampleFile[] = [

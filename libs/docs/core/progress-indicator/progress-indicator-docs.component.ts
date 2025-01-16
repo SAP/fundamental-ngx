@@ -27,7 +27,6 @@ const ProgressIndicatorStateComponentTs = 'progress-indicator-state.component.ts
     selector: 'fd-progress-indicator-docs',
     templateUrl: './progress-indicator-docs.component.html',
     styleUrls: ['progress-indicator-docs.component.scss'],
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

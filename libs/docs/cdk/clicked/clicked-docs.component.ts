@@ -19,7 +19,6 @@ const providerExampleDirectiveTs = 'provider-example/usage-with-provider.directi
 
 @Component({
     templateUrl: './clicked-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

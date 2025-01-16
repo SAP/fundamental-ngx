@@ -9,7 +9,6 @@ import { RadioModule } from '@fundamental-ngx/core/radio';
     selector: 'fd-list-selection-example',
     templateUrl: './list-selection-example.component.html',
     styleUrls: ['./list-selection-example.component.scss'],
-    standalone: true,
     imports: [ListModule, CheckboxComponent, FormsModule, ContentDensityDirective, RadioModule]
 })
 export class ListSelectionExampleComponent {

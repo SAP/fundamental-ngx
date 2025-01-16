@@ -29,7 +29,6 @@ const maxColumnsTs = 'max-columns/fixed-card-layout-max-columns-example.componen
 @Component({
     selector: 'fd-fixed-card-layout-docs',
     templateUrl: './fixed-card-layout-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

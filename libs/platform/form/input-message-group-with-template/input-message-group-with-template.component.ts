@@ -21,7 +21,6 @@ import {
     styleUrl: './input-message-group-with-template.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [PopoverComponent, PopoverControlComponent, NgTemplateOutlet, PopoverBodyComponent]
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix

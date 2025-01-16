@@ -51,7 +51,6 @@ import { IconTabBarBackground, IconTabBarSize, TabDestinyMode, TabType } from '.
     styleUrl: './icon-tab-bar.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     providers: [
         {
             provide: FD_TABLIST,

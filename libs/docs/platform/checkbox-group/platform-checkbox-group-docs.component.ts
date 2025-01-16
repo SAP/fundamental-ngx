@@ -24,7 +24,6 @@ const checkboxGroupExampleTs = 'platform-checkbox-group-examples.component.ts';
 @Component({
     selector: 'app-checkbox-group',
     templateUrl: './platform-checkbox-group-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

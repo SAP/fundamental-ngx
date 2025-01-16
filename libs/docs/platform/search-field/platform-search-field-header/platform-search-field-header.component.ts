@@ -10,7 +10,6 @@ import {
 @Component({
     selector: 'app-search-field-header',
     templateUrl: './platform-search-field-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformSearchFieldHeaderComponent {}

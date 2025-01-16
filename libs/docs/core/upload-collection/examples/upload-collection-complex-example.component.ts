@@ -54,7 +54,6 @@ interface FileItem {
     selector: 'fd-upload-collection-complex-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './upload-collection-complex-example.component.html',
-    standalone: true,
     imports: [
         ToolbarComponent,
         ToolbarLabelDirective,

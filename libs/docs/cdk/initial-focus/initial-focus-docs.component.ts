@@ -14,7 +14,6 @@ import { NestedElementsExampleComponent } from './examples/nested-elements-examp
 @Component({
     selector: 'app-initial-focus',
     templateUrl: './initial-focus-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

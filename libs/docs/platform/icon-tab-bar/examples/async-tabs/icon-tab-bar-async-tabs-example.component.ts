@@ -6,7 +6,6 @@ import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: 'fdp-icon-tab-bar-async-tabs-example',
-    standalone: true,
     imports: [FDP_ICON_TAB_BAR, AsyncPipe, ButtonComponent],
     styles: `
         .tab-container-example {

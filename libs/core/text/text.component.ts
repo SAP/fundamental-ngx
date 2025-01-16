@@ -20,8 +20,7 @@ export type HyphenationType = 'none' | 'manual' | 'auto' | null;
     styleUrl: './text.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [LineClampDirective, LineClampTargetDirective, LinkComponent, FdTranslatePipe],
-    standalone: true
+    imports: [LineClampDirective, LineClampTargetDirective, LinkComponent, FdTranslatePipe]
 })
 export class TextComponent {
     /**

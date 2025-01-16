@@ -7,7 +7,6 @@ import { CheckboxGroupComponent, FdpFormGroupModule } from '@fundamental-ngx/pla
 @Component({
     selector: 'fdp-platform-checkbox-group-list',
     templateUrl: './platform-checkbox-group-list.component.html',
-    standalone: true,
     imports: [
         FdpFormGroupModule,
         FormsModule,

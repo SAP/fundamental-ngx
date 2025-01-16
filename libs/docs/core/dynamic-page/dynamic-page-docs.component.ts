@@ -39,7 +39,6 @@ const dynamicPageRoutingTsCode = 'dynamic-page-routing/dynamic-page-routing-exam
 @Component({
     selector: 'app-dynamic-page',
     templateUrl: './dynamic-page-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

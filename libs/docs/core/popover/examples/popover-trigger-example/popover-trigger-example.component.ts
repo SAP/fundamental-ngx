@@ -5,7 +5,6 @@ import { PopoverComponent, PopoverTriggerDirective } from '@fundamental-ngx/core
 @Component({
     selector: 'fd-popover-trigger-example',
     templateUrl: './popover-trigger-example.component.html',
-    standalone: true,
     imports: [ButtonComponent, PopoverTriggerDirective, PopoverComponent]
 })
 export class PopoverTriggerExampleComponent {}

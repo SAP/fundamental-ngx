@@ -14,7 +14,6 @@ import {
     selector: 'app-tabs-header',
     templateUrl: './tabs-header.component.html',
     styleUrls: ['./tabs-header.component.scss'],
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

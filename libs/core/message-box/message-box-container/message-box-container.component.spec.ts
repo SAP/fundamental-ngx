@@ -10,7 +10,11 @@ import { MessageBoxContent } from '../utils/message-box-content.class';
 import { MessageBoxRef } from '../utils/message-box-ref.class';
 import { MessageBoxContainerComponent } from './message-box-container.component';
 
-@Component({ template: '<ng-template #template></ng-template>' })
+@Component({ 
+    template: '<ng-template #template></ng-template>',
+    standalone: true,
+    imports: [MessageBoxModule]
+})
 class TestComponent {
     @ViewChild('template')
     templateRef: TemplateRef<any>;
@@ -22,9 +26,8 @@ describe('MessageBoxContainerComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TestComponent],
             providers: [MessageBoxRef, MessageBoxConfig, { provide: FD_DIALOG_FOCUS_TRAP_ERROR, useValue: true }],
-            imports: [MessageBoxModule, NoopAnimationsModule]
+            imports: [TestComponent, NoopAnimationsModule]
         }).compileComponents();
     });
 

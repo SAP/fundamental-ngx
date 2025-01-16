@@ -7,7 +7,6 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
     selector: 'fd-popover-placement-example',
     templateUrl: './popover-placement-example.component.html',
     styleUrls: ['popover-placement-example.component.scss'],
-    standalone: true,
     imports: [PopoverComponent, PopoverControlComponent, ButtonComponent, PopoverBodyComponent, AvatarComponent]
 })
 export class PopoverPlacementExampleComponent {}

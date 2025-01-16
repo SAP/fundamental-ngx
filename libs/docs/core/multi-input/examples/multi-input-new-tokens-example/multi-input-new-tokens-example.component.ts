@@ -5,7 +5,6 @@ import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
 @Component({
     selector: 'fd-multi-input-new-tokens-example',
     templateUrl: './multi-input-new-tokens-example.component.html',
-    standalone: true,
     imports: [MultiInputComponent, FormsModule]
 })
 export class MultiInputNewTokensExampleComponent {

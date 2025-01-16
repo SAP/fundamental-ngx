@@ -30,7 +30,9 @@ import { CLASS_NAME } from '../constants';
                 <span fd-card-kpi-analytics-content>Content</span>
             </div>
         </fd-card-kpi-header>
-    `
+    `,
+    standalone: true,
+    imports: [CommonModule, CardModule]
 })
 class CardKpiHeaderHostTestComponent {}
 
@@ -40,8 +42,7 @@ describe('CardKpiHeaderComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, CardModule],
-            declarations: [CardKpiHeaderHostTestComponent]
+            imports: [CardKpiHeaderHostTestComponent]
         }).compileComponents();
     }));
 

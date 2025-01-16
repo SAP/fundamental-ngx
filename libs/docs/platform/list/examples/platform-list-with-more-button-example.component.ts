@@ -142,7 +142,6 @@ export class ListDataProvider extends DataProvider<User> {
     selector: 'fdp-platform-list-with-more-button-example',
     templateUrl: './platform-list-with-more-button-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [PlatformListModule, StandardListItemModule, BusyIndicatorComponent, AsyncPipe]
 })
 export class PlatformListWithMoreButtonExampleComponent {

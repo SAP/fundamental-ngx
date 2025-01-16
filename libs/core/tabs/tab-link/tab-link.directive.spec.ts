@@ -3,7 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TabsModule } from '../tabs.module';
 
 @Component({
-    template: ` <div #directiveElement fd-tab-link>Tab Link Directive</div> `
+    template: ` <div #directiveElement fd-tab-link>Tab Link Directive</div> `,
+    standalone: true,
+    imports: [TabsModule]
 })
 class TestComponent {
     @ViewChild('directiveElement')
@@ -16,8 +18,7 @@ describe('TabLinkDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [TabsModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

@@ -17,7 +17,6 @@ import {
     selector: 'fdp-wizard-generator-external-navigation-example',
     templateUrl: './wizard-generator-external-navigation-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [PlatformWizardGeneratorModule, BarModule, PlatformButtonModule, ContentDensityDirective, JsonPipe]
 })
 export class WizardGeneratorExternalNavigationExampleComponent {

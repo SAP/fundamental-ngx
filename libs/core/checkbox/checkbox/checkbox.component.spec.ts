@@ -292,7 +292,9 @@ describe('CheckboxComponent', () => {
 });
 
 @Component({
-    template: ` <fd-checkbox [value]="checked" (click)="onClicked()"></fd-checkbox> `
+    template: ` <fd-checkbox [value]="checked" (click)="onClicked()"></fd-checkbox> `,
+    standalone: true,
+    imports: [FormsModule, CheckboxModule]
 })
 class TestCheckboxWrapper2Component {
     @ViewChild(CheckboxComponent) checkboxRef: CheckboxComponent;
@@ -310,8 +312,7 @@ describe('CheckboxComponent with external listeners', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule, CheckboxModule],
-            declarations: [TestCheckboxWrapper2Component]
+            imports: [TestCheckboxWrapper2Component]
         }).compileComponents();
     }));
 

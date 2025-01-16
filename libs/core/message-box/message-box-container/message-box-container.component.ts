@@ -31,7 +31,6 @@ import { MessageBoxRef } from '../utils/message-box-ref.class';
     selector: 'fd-message-box-container',
     template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
     animations: [dialogFade],
-    standalone: true,
     imports: [PortalModule]
 })
 export class MessageBoxContainerComponent

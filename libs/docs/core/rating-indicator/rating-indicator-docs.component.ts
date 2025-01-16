@@ -35,7 +35,6 @@ const displayModeTs = 'ri-display-mode-example.component.ts';
 @Component({
     selector: 'app-rating-indicator',
     templateUrl: './rating-indicator-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

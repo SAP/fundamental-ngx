@@ -38,7 +38,6 @@ import { SmartFilterBarService } from '../../smart-filter-bar.service';
     templateUrl: './smart-filter-bar-conditions-dialog.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DialogComponent,
         DialogHeaderComponent,

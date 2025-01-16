@@ -25,7 +25,6 @@ const iconColorExampleScss = 'icon-example.component.scss';
 @Component({
     selector: 'app-icon',
     templateUrl: './icon-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

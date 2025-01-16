@@ -30,7 +30,6 @@ import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform/icon-tab-bar';
             }
         `
     ],
-    standalone: true,
     imports: [
         ButtonComponent,
         DynamicPageModule,

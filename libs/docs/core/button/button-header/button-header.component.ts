@@ -11,7 +11,6 @@ import {
     selector: 'app-button-header',
     templateUrl: './button-header.component.html',
     styleUrls: ['./button-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class ButtonHeaderComponent {}

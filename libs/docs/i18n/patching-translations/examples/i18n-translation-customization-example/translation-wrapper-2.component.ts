@@ -28,7 +28,6 @@ import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
             }
         })
     ],
-    standalone: true,
     imports: [FormLabelComponent, PlatformTextAreaModule]
 })
 export class TranslationWrapper2Component {}

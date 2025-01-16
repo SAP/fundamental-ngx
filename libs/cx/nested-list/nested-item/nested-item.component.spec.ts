@@ -3,14 +3,17 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { NestedLinkComponent } from '../nested-link/nested-link.component';
-import { NestedListExpandIconComponent } from '../nested-list-directives';
+import { NestedListExpandIconComponent, NestedListIconComponent, NestedListTitleDirective } from '../nested-list-directives';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListStateService } from '../nested-list-state.service';
-import { CxNestedListModule } from '../nested-list.module';
 import { NestedItemComponent } from './nested-item.component';
 import { NestedItemService } from './nested-item.service';
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { CxSideNavigationModule } from '@fundamental-ngx/cx/side-navigation';
+import { SideNavigationComponent, SideNavigationMainComponent } from '@fundamental-ngx/cx/side-navigation';
+import { CommonModule } from '@angular/common';
+import { NestedListComponent } from '../nested-list/nested-list.component';
+import { NestedListPopoverComponent } from '../nested-list-popover/nested-list-popover.component';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @Component({
     template: `
@@ -58,7 +61,22 @@ import { CxSideNavigationModule } from '@fundamental-ngx/cx/side-navigation';
                 </ul>
             </div>
         </fdx-side-nav>
-    `
+    `,
+    standalone: true,
+    imports: [
+            CommonModule, 
+            PopoverModule, 
+            SideNavigationComponent,
+            SideNavigationMainComponent,
+            NestedListComponent,
+            NestedItemComponent,
+            NestedListPopoverComponent,
+            NestedLinkComponent,
+            NestedListIconComponent,
+            NestedListTitleDirective,
+            NestedListExpandIconComponent,
+            I18nModule
+        ]
 })
 class TestNestedContainerComponent {
     @ViewChild('listNestedItemElement', { read: NestedItemComponent })
@@ -100,8 +118,7 @@ describe('NestedItemComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CxNestedListModule, PopoverModule, CxSideNavigationModule],
-            declarations: [TestNestedContainerComponent],
+            imports: [TestNestedContainerComponent, CommonModule],
             providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService]
         }).compileComponents();
     }));

@@ -28,7 +28,6 @@ const statesExampleTs = 'platform-number-step-input-state-example.component.ts';
     selector: 'app-step-input',
     templateUrl: './platform-step-input-docs.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

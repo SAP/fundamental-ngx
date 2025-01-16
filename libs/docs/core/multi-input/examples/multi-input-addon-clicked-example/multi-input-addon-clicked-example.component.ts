@@ -6,7 +6,6 @@ import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
     templateUrl: './multi-input-addon-clicked-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [MultiInputComponent]
 })
 export class MultiInputAddonClickedExampleComponent {

@@ -15,7 +15,6 @@ import {
     selector: 'fd-card-main-header',
     templateUrl: './card-header-main.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     providers: [
         {
             provide: FD_CARD_MAIN_HEADER,

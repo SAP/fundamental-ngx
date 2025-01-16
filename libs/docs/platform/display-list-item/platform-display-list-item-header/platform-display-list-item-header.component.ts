@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'app-display-list-item-header',
     templateUrl: './platform-display-list-item-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, RouterLink, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformDisplayListItemHeaderComponent {}

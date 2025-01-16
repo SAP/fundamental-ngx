@@ -72,7 +72,6 @@ import { StepInputModule } from '@fundamental-ngx/core/step-input';
             </div>
         </div>
     `,
-    standalone: true,
     imports: [FormLabelComponent, StepInputModule, FormsModule, ReactiveFormsModule, ButtonComponent]
 })
 export class StepInputFormExampleComponent {

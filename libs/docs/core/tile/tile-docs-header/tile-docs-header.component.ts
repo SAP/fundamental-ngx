@@ -11,7 +11,6 @@ import {
     selector: 'app-tile-docs-header',
     templateUrl: './tile-docs-header.component.html',
     styleUrls: ['./tile-docs-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class TileDocsHeaderComponent {}

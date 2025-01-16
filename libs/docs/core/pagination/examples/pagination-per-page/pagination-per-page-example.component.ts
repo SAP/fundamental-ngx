@@ -8,7 +8,6 @@ import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
 @Component({
     selector: 'fd-pagination-per-page-example',
     templateUrl: './pagination-per-page-example.component.html',
-    standalone: true,
     imports: [PaginationModule, ToolbarItemDirective, SegmentedButtonModule, FormsModule, ButtonComponent]
 })
 export class PaginationPerPageExampleComponent {

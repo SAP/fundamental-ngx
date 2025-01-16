@@ -29,8 +29,7 @@ import {
         ToolHeaderComponent,
         FormsModule,
         AsyncPipe
-    ],
-    standalone: true
+    ]
 })
 export class UsageWithLayoutExampleComponent {
     searchValue: string = '';

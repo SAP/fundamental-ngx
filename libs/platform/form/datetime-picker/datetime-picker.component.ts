@@ -25,7 +25,6 @@ import { createMissingDateImplementationError } from './errors';
     templateUrl: './datetime-picker.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: PlatformDatetimePickerComponent, multi: true }],
-    standalone: true,
     imports: [DatetimePickerComponent, FormsModule]
 })
 export class PlatformDatetimePickerComponent<D> extends BaseInput implements AfterViewInit {

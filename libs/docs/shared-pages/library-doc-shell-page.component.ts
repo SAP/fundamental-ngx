@@ -10,7 +10,6 @@ import {
 
 @Component({
     templateUrl: './library-doc-shell-page.component.html',
-    standalone: true,
     imports: [DocumentationBaseComponent, ToolbarDocsComponent, SectionsToolbarComponent, RouterOutlet, CdkScrollable]
 })
 export class LibraryDocShellPageComponent {

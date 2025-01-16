@@ -19,7 +19,9 @@ import { MessagePageModule } from './message-page.module';
                 {{ moreText }}
             </fd-message-page-more>
         </fd-message-page>
-    `
+    `,
+    standalone: true,
+    imports: [MessagePageModule]
 })
 class TestMessagePageComponent {
     @ViewChild(MessagePageComponent)
@@ -41,8 +43,7 @@ describe('MessagePageComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [MessagePageModule],
-            declarations: [TestMessagePageComponent]
+            imports: [TestMessagePageComponent]
         }).compileComponents();
     }));
 

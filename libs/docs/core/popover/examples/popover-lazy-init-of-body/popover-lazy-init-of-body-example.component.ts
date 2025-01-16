@@ -31,7 +31,6 @@ import { PopoverLazyLoadedBodyComponent } from './popover-lazy-loaded-body.compo
         PopoverBodyFooterDirective,
         ButtonComponent,
         PopoverLazyLoadedBodyComponent
-    ],
-    standalone: true
+    ]
 })
 export class PopoverLazyInitOfBodyExampleComponent {}

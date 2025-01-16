@@ -15,7 +15,6 @@ import { FDP_BUTTON } from './tokens';
     selector: 'fdp-button',
     templateUrl: './button.component.html',
     styleUrl: './button.component.scss',
-    standalone: true,
     providers: [
         {
             provide: FDP_BUTTON,

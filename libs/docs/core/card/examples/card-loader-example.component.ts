@@ -6,7 +6,6 @@ import { CardModule } from '@fundamental-ngx/core/card';
     selector: 'fd-card-loader-example',
     templateUrl: './card-loader-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CardModule, BusyIndicatorComponent]
 })
 export class CardLoaderExampleComponent {}

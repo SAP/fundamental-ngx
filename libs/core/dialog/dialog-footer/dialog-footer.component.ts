@@ -32,7 +32,6 @@ export const DialogButtonClass = 'fd-dialog__decisive-button';
     templateUrl: './dialog-footer.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [BarModule, ContentDensityDirective, NgTemplateOutlet]
 })
 export class DialogFooterComponent extends DialogFooterBase implements AfterContentInit, AfterViewInit {

@@ -4,7 +4,6 @@ import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
 @Component({
     selector: 'fd-status-indicator-circular-fill-anti-clockwise',
     templateUrl: './status-indicator-circular-fill-anti-clockwise.component.html',
-    standalone: true,
     imports: [StatusIndicatorModule]
 })
 export class StatusIndicatorCircularFillAntiClockwiseComponent {

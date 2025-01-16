@@ -45,7 +45,6 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
             useValue: CUSTOM_FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [DatetimePickerComponent, FormsModule, FdDatetimePipesModule, DatePipe],
     styles: [
         `

@@ -64,7 +64,6 @@ export const SUBMENU = new InjectionToken<BaseSubmenu>('Submenu component depend
         '[class.fd-menu__item]': 'true',
         '[class.fd-menu--full-width]': 'menuService?.menuComponent?.mobile || false'
     },
-    standalone: true,
     imports: [NgTemplateOutlet],
     providers: [
         {

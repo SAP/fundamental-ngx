@@ -23,7 +23,6 @@ const dayjsDatetimeFormatsSrcHtml = 'dayjs-datetime-formats-example.component.ht
 @Component({
     selector: 'app-dayjs-datetime-adapter',
     templateUrl: './dayjs-datetime-adapter-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

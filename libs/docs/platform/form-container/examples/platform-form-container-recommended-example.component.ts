@@ -6,7 +6,6 @@ import { CheckboxGroupComponent, FdpFormGroupModule, PlatformTextAreaModule } fr
     selector: 'fdp-platform-form-container-recommended-example',
     templateUrl: './platform-form-container-recommended-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformTextAreaModule, CheckboxGroupComponent]
 })
 export class PlatformFormContainerRecommendedExampleComponent {

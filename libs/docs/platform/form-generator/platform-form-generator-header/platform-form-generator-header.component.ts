@@ -13,7 +13,6 @@ import { defaultFormGeneratorHintOptions } from '@fundamental-ngx/platform/form'
 @Component({
     selector: 'fd-platform-form-generator-header',
     templateUrl: './platform-form-generator-header.component.html',
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

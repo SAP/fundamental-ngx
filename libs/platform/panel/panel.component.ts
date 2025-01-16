@@ -68,7 +68,6 @@ let platformPanelTitleUniqueId = 0;
             }
         })
     ],
-    standalone: true,
     imports: [CorePanelComponent, ContentDensityDirective, PanelTitleDirective, PanelContentDirective]
 })
 export class PanelComponent extends BaseComponent implements OnInit, OnChanges {

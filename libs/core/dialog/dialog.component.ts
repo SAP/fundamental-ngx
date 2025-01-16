@@ -52,7 +52,6 @@ import { DialogRef } from './utils/dialog-ref.class';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [contentDensityObserverProviders({ alwaysAddModifiers: true })],
-    standalone: true,
     imports: [
         ResizeDirective,
         A11yModule,

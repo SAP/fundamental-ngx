@@ -79,7 +79,6 @@ import { TreeService } from './tree.service';
             useClass: TreeDataSourceParser
         }
     ],
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         RepeatDirective,

@@ -33,7 +33,6 @@ import {
         `
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FocusableListDirective, FocusableItemDirective]
 })
 export class DefaultExampleComponent {

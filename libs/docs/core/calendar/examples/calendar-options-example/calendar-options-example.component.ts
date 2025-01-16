@@ -24,7 +24,6 @@ import {
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [CalendarComponent, ContentDensityDirective, CheckboxComponent, FormsModule, FdDatetimeModule]
 })
 export class CalendarOptionsExampleComponent {

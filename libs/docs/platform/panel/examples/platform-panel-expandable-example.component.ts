@@ -27,7 +27,6 @@ import { PlatformConfig } from '@fundamental-ngx/platform/shared';
             deps: [PlatformConfig]
         }
     ],
-    standalone: true,
     imports: [PlatformButtonModule, PlatformPanelModule]
 })
 export class PlatformPanelExpandableExampleComponent {

@@ -51,7 +51,6 @@ import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT } from './tokens';
             useExisting: ShellbarComponent
         }
     ],
-    standalone: true,
     imports: [PortalModule, FdTranslatePipe]
 })
 export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDestroy {

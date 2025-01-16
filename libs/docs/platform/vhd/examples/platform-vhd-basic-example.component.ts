@@ -69,7 +69,6 @@ const data = exampleDataSource();
 @Component({
     selector: 'fdp-platform-vhd-basic-example',
     templateUrl: './platform-vhd-basic-example.component.html',
-    standalone: true,
     imports: [
         ButtonComponent,
         TokenComponent,

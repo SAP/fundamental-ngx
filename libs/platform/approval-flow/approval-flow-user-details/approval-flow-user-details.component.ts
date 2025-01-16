@@ -19,7 +19,6 @@ import { ApprovalUser } from '../interfaces';
     host: {
         class: 'fdp-approval-flow-user-details'
     },
-    standalone: true,
     imports: [AvatarComponent, NgTemplateOutlet, AsyncPipe]
 })
 export class ApprovalFlowUserDetailsComponent {

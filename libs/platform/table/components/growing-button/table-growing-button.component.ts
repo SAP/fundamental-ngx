@@ -6,7 +6,6 @@ import { Table, TableDataSourceDirective, TableService } from '@fundamental-ngx/
 
 @Component({
     selector: 'fdp-table-growing-button',
-    standalone: true,
     imports: [ListComponent, ListItemComponent, ListTitleDirective, ListLinkDirective, AsyncPipe, FdTranslatePipe],
     templateUrl: './table-growing-button.component.html',
     encapsulation: ViewEncapsulation.None,

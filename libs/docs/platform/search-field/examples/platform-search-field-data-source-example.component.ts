@@ -9,7 +9,6 @@ import { SearchFieldDataProvider } from './platform-search-field-data-source-exa
     templateUrl: './platform-search-field-data-source-example.component.html',
     styleUrls: ['./platform-search-field-data-source-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [PlatformSearchFieldModule]
 })
 export class PlatformSearchFieldDataSourceExampleComponent implements OnInit {

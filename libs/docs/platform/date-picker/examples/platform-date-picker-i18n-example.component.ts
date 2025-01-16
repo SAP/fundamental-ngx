@@ -56,7 +56,6 @@ const CUSTOM_DATETIME_FORMATS = {
             useValue: CUSTOM_DATETIME_FORMATS
         }
     ],
-    standalone: true,
     imports: [FormLabelComponent, SegmentedButtonModule, FormsModule, ButtonComponent, PlatformDatePickerComponent]
 })
 export class PlatformDatePickeri18nExampleComponent {

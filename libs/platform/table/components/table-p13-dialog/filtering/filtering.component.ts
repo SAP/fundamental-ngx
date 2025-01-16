@@ -37,7 +37,6 @@ export { FilterDialogData, FilterDialogResultData };
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13FilteringDialogComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DialogComponent,
         DialogHeaderComponent,

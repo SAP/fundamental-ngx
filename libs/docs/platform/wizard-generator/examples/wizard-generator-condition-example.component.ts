@@ -15,7 +15,6 @@ import {
 @Component({
     selector: 'fdp-wizard-generator-condition-example',
     templateUrl: './wizard-generator-condition-example.component.html',
-    standalone: true,
     imports: [PlatformButtonModule, JsonPipe],
     providers: [WizardDialogGeneratorService]
 })

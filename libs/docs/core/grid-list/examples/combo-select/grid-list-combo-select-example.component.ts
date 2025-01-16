@@ -33,7 +33,6 @@ interface GridListItem {
     styleUrls: ['./grid-list-combo-select-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         ButtonComponent,
         CommonModule,

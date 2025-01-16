@@ -4,6 +4,9 @@
     "include": [],
     "references": [
         {
+            "path": "./tsconfig.typedoc.json"
+        },
+        {
             "path": "./tsconfig.lib.json"
         },
         {

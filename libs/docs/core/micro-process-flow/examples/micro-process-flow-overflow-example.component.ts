@@ -11,7 +11,6 @@ interface ExampleItem {
     selector: 'fd-micro-process-flow-overflow-example',
     templateUrl: './micro-process-flow-overflow-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [MicroProcessFlowModule]
 })
 export class MicroProcessFlowOverflowExampleComponent {

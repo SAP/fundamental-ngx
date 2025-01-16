@@ -18,7 +18,6 @@ const formMessageStateTs = 'state-message/form-messaging-state-example.component
 @Component({
     selector: 'app-input',
     templateUrl: './form-message-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

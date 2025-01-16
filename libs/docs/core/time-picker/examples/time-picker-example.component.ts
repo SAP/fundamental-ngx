@@ -9,7 +9,6 @@ import { TimePickerModule } from '@fundamental-ngx/core/time-picker';
     selector: 'fd-time-picker-example',
     templateUrl: './time-picker-example.component.html',
     providers: [provideDateTimeFormats()],
-    standalone: true,
     imports: [FormLabelComponent, TimePickerModule, FormsModule, DatePipe]
 })
 export class TimePickerExampleComponent {

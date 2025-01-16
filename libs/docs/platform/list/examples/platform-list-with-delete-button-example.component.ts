@@ -6,7 +6,6 @@ import { ModifyItemEvent, PlatformListModule, StandardListItemModule } from '@fu
 @Component({
     selector: 'fdp-platform-list-with-delete-button-example',
     templateUrl: './platform-list-with-delete-button-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, StandardListItemModule]
 })
 export class PlatformListWithDeleteButtonExampleComponent {

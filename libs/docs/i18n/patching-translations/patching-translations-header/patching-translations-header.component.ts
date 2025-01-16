@@ -5,7 +5,6 @@ import { DescriptionComponent, HeaderComponent } from '@fundamental-ngx/docs/sha
 @Component({
     selector: 'fd-patching-translations-header',
     templateUrl: './patching-translations-header.component.html',
-    standalone: true,
     imports: [HeaderComponent, DescriptionComponent, RouterOutlet]
 })
 export class PatchingTranslationsHeaderComponent {}

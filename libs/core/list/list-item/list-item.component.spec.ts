@@ -12,7 +12,9 @@ import { ListModule } from '../list.module';
             <button fd-button #button></button>
             List Item Test Text
         </li>
-    `
+    `,
+    standalone: true,
+    imports: [ListModule, ButtonModule]
 })
 class TestComponent {
     @ViewChild('directiveElement', { read: ElementRef })
@@ -36,8 +38,7 @@ describe('ListItemComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [ListModule, ButtonModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

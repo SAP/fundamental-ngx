@@ -9,7 +9,6 @@ import { MultiComboboxComponent, MultiComboboxSelectionChangeEvent } from '@fund
     templateUrl: './multi-combobox-responsive-tokenizer-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FormItemComponent, FormLabelComponent, CvaDirective, DataSourceDirective, MultiComboboxComponent]
 })
 export class MultiComboboxResponsiveTokenizerExampleComponent {

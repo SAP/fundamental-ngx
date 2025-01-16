@@ -12,7 +12,6 @@ import { TabbableDefaultExampleComponent } from './examples/default/tabbable-def
 @Component({
     selector: 'app-tabbable',
     templateUrl: './tabbable-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

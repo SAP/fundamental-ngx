@@ -5,7 +5,6 @@ import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 @Component({
     selector: 'fd-rating-indicator-example',
     templateUrl: './rating-indicator-example.component.html',
-    standalone: true,
     imports: [RatingIndicatorModule, FormsModule]
 })
 export class RatingIndicatorExampleComponent {

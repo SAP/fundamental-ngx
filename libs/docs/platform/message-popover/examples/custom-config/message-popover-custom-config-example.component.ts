@@ -61,7 +61,6 @@ const customErrorsConfig: MessagePopoverConfig = {
             useValue: customErrorsConfig
         }
     ],
-    standalone: true,
     imports: [
         MessagePopoverFormWrapperComponent,
         FdpFormGroupModule,

@@ -42,7 +42,6 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
             </fd-dialog-footer>
         </fd-dialog>
     `,
-    standalone: true,
     imports: [
         TitleComponent,
         CdkScrollable,

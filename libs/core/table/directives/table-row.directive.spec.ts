@@ -10,7 +10,9 @@ import { HIDDEN_CLASS_NAME, TableRowDirective } from './table-row.directive';
         <tr #directiveElement fd-table-row id="row">
             <td *ngFor="let key of keys" fd-table-cell [key]="key">{{ key }}</td>
         </tr>
-    `
+    `,
+    standalone: true,
+    imports: [TableModule, CommonModule]
 })
 class TestComponent {
     @ViewChild(TableRowDirective)
@@ -48,8 +50,7 @@ describe('TableRowDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [TableModule, CommonModule],
+            imports: [TestComponent],
             providers: [TableService]
         }).compileComponents();
     }));

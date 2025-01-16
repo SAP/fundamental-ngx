@@ -14,7 +14,6 @@ import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
     templateUrl: './multi-input-dropdown-width-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         MultiInputComponent,
         FormsModule,

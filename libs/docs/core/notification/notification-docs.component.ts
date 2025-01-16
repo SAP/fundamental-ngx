@@ -27,7 +27,6 @@ const groupH = 'notification-group/notification-group-example.component.html';
 @Component({
     selector: 'app-notification',
     templateUrl: './notification-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,
