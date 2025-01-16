@@ -125,7 +125,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
 }
 
 // Example items
-const ITEMS: ExampleItem[] = new Array(180).fill(null).map((_, index) => ({
+const ITEMS: ExampleItem[] = new Array(5000).fill(null).map((_, index) => ({
     name: 'Laptops ' + index,
     price: {
         value: Math.floor(Math.random() * 1000),
