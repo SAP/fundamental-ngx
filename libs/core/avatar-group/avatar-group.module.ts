@@ -1,3 +1,4 @@
+import { PortalModule } from '@angular/cdk/portal';
 import { NgModule } from '@angular/core';
 import { AvatarGroupComponent } from './avatar-group.component';
 import { AvatarGroupOverflowBodyComponent } from './components/avatar-group-overflow-body/avatar-group-overflow-body.component';
@@ -13,7 +14,8 @@ import { AvatarGroupOverflowButtonDirective } from './directives/avatar-group-ov
         AvatarGroupOverflowButtonComponent,
         AvatarGroupOverflowButtonDirective,
         AvatarGroupOverflowBodyComponent,
-        AvatarGroupOverflowBodyDirective
+        AvatarGroupOverflowBodyDirective,
+        PortalModule
     ],
     exports: [
         AvatarGroupComponent,

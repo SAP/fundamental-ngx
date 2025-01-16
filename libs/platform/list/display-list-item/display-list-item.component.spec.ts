@@ -25,7 +25,9 @@ export interface Name {
             <fdp-display-list-item title="title 4" secondary="secondary 4" navigationIndicator="true">
             </fdp-display-list-item>
         </fdp-list>
-    `
+    `,
+    standalone: true,
+    imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule]
 })
 class DisplayListItemComponentTestComponent {
     @ViewChild(DisplayListItemComponent, { read: ElementRef, static: true })
@@ -38,8 +40,7 @@ describe('DisplayListItemComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
-            declarations: [DisplayListItemComponentTestComponent]
+            imports: [DisplayListItemComponentTestComponent]
         }).compileComponents();
     }));
 
@@ -132,7 +133,9 @@ describe('DisplayListItemComponent', () => {
                 ></fdp-display-list-item>
             }
         </fdp-list>
-    `
+    `,
+    standalone: true,
+    imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule]
 })
 class TestComponentContentComponent {
     @ViewChild(DisplayListItemComponent)
@@ -152,8 +155,7 @@ describe('DisplayListItemComponent Imperative', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
-            declarations: [TestComponentContentComponent]
+            imports: [TestComponentContentComponent]
         }).compileComponents();
     }));
 

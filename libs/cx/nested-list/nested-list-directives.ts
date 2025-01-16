@@ -18,7 +18,7 @@ let uniqueId = 0;
 
 @Directive({
     selector: '[cxNestedDirectivesHeader], [fdx-nested-list-header]',
-    standalone: false
+    standalone: true
 })
 export class NestedListHeaderDirective {
     /** Id of the element. */
@@ -42,8 +42,7 @@ export class NestedListHeaderDirective {
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[cxNestedDirectivesIcon], [fdx-nested-list-icon]',
-    template: `<ng-content></ng-content>`,
-    standalone: false
+    template: `<ng-content></ng-content>`
 })
 export class NestedListIconComponent extends IconComponent {
     /** Role attribute */
@@ -57,8 +56,7 @@ export class NestedListIconComponent extends IconComponent {
 }
 
 @Directive({
-    selector: '[cxNestedDirectivesTitle], [fdx-nested-list-title]',
-    standalone: false
+    selector: '[cxNestedDirectivesTitle], [fdx-nested-list-title]'
 })
 export class NestedListTitleDirective {
     /** @hidden */
@@ -83,8 +81,7 @@ export class NestedListTitleDirective {
         role: 'presentation'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+    encapsulation: ViewEncapsulation.None
 })
 export class NestedListExpandIconComponent {
     /** @hidden */
@@ -143,8 +140,7 @@ export class NestedListExpandIconComponent {
 }
 
 @Directive({
-    selector: '[cxNestedDirectivesButton], [fdx-nested-list-button]',
-    standalone: false
+    selector: '[cxNestedDirectivesButton], [fdx-nested-list-button]'
 })
 export class NestedListButtonDirective implements AfterContentInit {
     /** @hidden */

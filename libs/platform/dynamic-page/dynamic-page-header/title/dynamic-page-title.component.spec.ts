@@ -54,7 +54,9 @@ import { PlatformDynamicPageModule } from '../../dynamic-page.module';
                 </fdp-dynamic-page-layout-actions>
             </fdp-dynamic-page-title>
         </fdp-dynamic-page>
-    `
+    `,
+    standalone: true,
+    imports: [CommonModule, PlatformDynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule]
 })
 class TestComponent implements AfterViewInit {
     @ViewChild(DynamicPageTitleComponent) dynamicPageTitleComponent: DynamicPageTitleComponent;
@@ -85,8 +87,7 @@ describe('DynamicPageTitleComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformDynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
-            declarations: [TestComponent]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

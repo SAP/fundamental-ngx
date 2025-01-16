@@ -1,6 +1,17 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { NestedListContentDirective } from '../nested-content/nested-list-content.directive';
+import { NestedItemComponent } from '../nested-item/nested-item.component';
+import { NestedLinkComponent } from '../nested-link/nested-link.component';
+import {
+    NestedListExpandIconComponent,
+    NestedListHeaderDirective,
+    NestedListIconComponent,
+    NestedListTitleDirective
+} from '../nested-list-directives';
 import { NestedListItem, NestedListModel } from '../nested-list-model';
+import { NestedListPopoverComponent } from '../nested-list-popover/nested-list-popover.component';
 import { NestedListComponent } from '../nested-list/nested-list.component';
 
 /**
@@ -10,8 +21,20 @@ import { NestedListComponent } from '../nested-list/nested-list.component';
     selector: 'fdx-prepared-nested-list',
     templateUrl: './prepared-nested-list.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [
+        NestedListComponent,
+        NestedListHeaderDirective,
+        NestedItemComponent,
+        NestedListPopoverComponent,
+        NestedLinkComponent,
+        RouterModule,
+        NestedListContentDirective,
+        NestedListIconComponent,
+        NestedListTitleDirective,
+        NestedListExpandIconComponent
+    ],
+    standalone: true,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PreparedNestedListComponent {
     /**

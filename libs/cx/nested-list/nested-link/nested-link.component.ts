@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
     ChangeDetectorRef,
     Component,
@@ -37,13 +38,14 @@ import {
             <ng-content select="[fdx-nested-list-expand-icon]"></ng-content>
         </ng-template>
     `,
+    imports: [CommonModule],
+    standalone: true,
     selector:
         // eslint-disable-next-line @angular-eslint/component-selector
         '[fdx-nested-list-link], button[fdx-nested-list-link], a[fdx-nested-list-link], div[fdx-nested-list-link]',
     host: {
         '[attr.tabindex]': '!_nestedListButton ? 0 : -1'
-    },
-    standalone: false
+    }
 })
 export class NestedLinkComponent {
     /** Function that is called on click event dispatch on this element. */

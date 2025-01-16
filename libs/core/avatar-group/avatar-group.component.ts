@@ -1,5 +1,4 @@
 import { Direction } from '@angular/cdk/bidi';
-import { DialogModule } from '@angular/cdk/dialog';
 import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
@@ -15,13 +14,12 @@ import {
     inject
 } from '@angular/core';
 import {
-    DynamicPortalComponent,
     FocusableItemDirective,
     FocusableListDirective,
     ResizeObserverDirective,
     RtlService
 } from '@fundamental-ngx/cdk/utils';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { AvatarGroupHostComponent } from './components/avatar-group-host.component';
 import { AvatarGroupOverflowButtonComponent } from './components/avatar-group-overflow-button.component';
 import { DefaultAvatarGroupOverflowBodyComponent } from './components/default-avatar-group-overflow-body/default-avatar-group-overflow-body.component';
@@ -47,18 +45,19 @@ import { AvatarGroupHostConfig } from './types';
     ],
     imports: [
         AvatarGroupHostComponent,
-        PopoverModule,
+        PopoverComponent,
+        PopoverControlComponent,
+        PopoverBodyComponent,
         NgTemplateOutlet,
         FocusableItemDirective,
-        DynamicPortalComponent,
         FocusableListDirective,
-        DialogModule,
         AvatarGroupItemRendererDirective,
         AvatarGroupOverflowButtonComponent,
         DefaultAvatarGroupOverflowBodyComponent,
         AvatarGroupInternalOverflowButtonDirective,
         ResizeObserverDirective
-    ]
+    ],
+    standalone: true
 })
 export class AvatarGroupComponent implements AvatarGroupHostConfig {
     /**

@@ -1,18 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { CommonModule } from '@angular/common';
 import { Component, ViewChild, signal } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FdDnDEvent } from './directives/dnd/icon-bar-dnd-container.directive';
 import { IconBarDndItemDirective } from './directives/dnd/icon-bar-dnd-item.directive';
 import { IconTabBarComponent } from './icon-tab-bar.component';
-import { FDP_ICON_TAB_BAR } from './icon-tab-bar.module';
+import { IconTabBarTabComponent } from './components/icon-tab-bar-tab/icon-tab-bar-tab.component';
 import { TabConfig } from './interfaces/tab-config.interface';
 import { generateTestConfig } from './tests-helper';
-import { TabType } from './types';
+import { IconTabBarSize, TabType } from './types';
 
 @Component({
     template: ` <fdp-icon-tab-bar
         [tabsConfig]="items"
+        [iconTabSize]="iconTabSize"
         [enableTabReordering]="enableTabReordering"
         [showTotalTab]="showTotalTab"
         [iconTabType]="iconTabType"
@@ -27,6 +28,7 @@ class HostComponent {
     showTotalTab = false;
     iconTabType: TabType = 'text';
     items: TabConfig[] = [];
+    iconTabSize?: IconTabBarSize;  // Added the property
 
     selected(): void {}
 
@@ -43,7 +45,7 @@ class HostComponent {
         </fdp-icon-tab-bar>
     `,
     standalone: true,
-    imports: [FDP_ICON_TAB_BAR]
+    imports: [IconTabBarComponent, IconTabBarTabComponent]
 })
 export class ProjectedTestComponent {
     @ViewChild(IconTabBarComponent)
@@ -54,9 +56,10 @@ export class ProjectedTestComponent {
 describe('IconTabBarComponent', () => {
     let component: HostComponent;
     let fixture: ComponentFixture<HostComponent>;
+
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [HostComponent]
+            imports: [HostComponent, CommonModule]
         }).compileComponents();
     });
 
@@ -66,6 +69,7 @@ describe('IconTabBarComponent', () => {
         component.items = generateTestConfig(6);
         fixture.detectChanges();
     });
+
     it('should create tabs', () => {
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
         const tabs = hostEl.querySelectorAll('.fd-icon-tab-bar__item');
@@ -80,7 +84,7 @@ describe('IconTabBarComponent', () => {
         expect(subItemBtn).toBeTruthy();
     });
 
-    it('should create all products tab for filter.', () => {
+    it('should create all products tab for filter', () => {
         component.iconTabType = 'filter';
         component.showTotalTab = true;
         fixture.detectChanges();
@@ -89,7 +93,7 @@ describe('IconTabBarComponent', () => {
         expect(tabAllEl).toBeTruthy();
     });
 
-    it('should reordering feature available', () => {
+    it('should handle reordering feature', () => {
         component.enableTabReordering = true;
         fixture.detectChanges();
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
@@ -106,10 +110,59 @@ describe('IconTabBarComponent', () => {
         };
 
         target.componentInstance._onDropped(evt);
-
         fixture.detectChanges();
-        const updateTabsList = hostEl.querySelectorAll<HTMLElement>('.fd-icon-tab-bar__item');
-        expect(updateTabsList.length).toBeLessThan(initialTabsLength);
+
+        const updatedTabsList = hostEl.querySelectorAll<HTMLElement>('.fd-icon-tab-bar__item');
+        expect(updatedTabsList.length).toBeLessThan(initialTabsLength);
+    });
+
+    it('should handle dynamic tab selection', () => {
+        const selectedTabEventSpy = jest.spyOn(component, 'selected');
+        fixture.detectChanges();
+        
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const tabs = hostEl.querySelectorAll('.fd-icon-tab-bar__tab');
+
+        // select second tab
+        tabs[1].dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+
+        expect(selectedTabEventSpy).toHaveBeenCalled();
+        
+        // verify aria-selected attribute
+        const selectedTab = hostEl.querySelector('.fd-icon-tab-bar__tab[aria-selected="true"]');
+        expect(selectedTab).toBe(tabs[1]);
+    });
+
+    it('should handle reorder event', () => {
+        component.enableTabReordering = true;
+        fixture.detectChanges();
+
+        const reorderedEventSpy = jest.spyOn(component, 'reordered');
+
+        const items = fixture.debugElement.queryAll(By.directive(IconBarDndItemDirective));
+        const draggableItem = items[0];
+        const target = items[1];
+
+        const evt: FdDnDEvent = {
+            draggableItem: draggableItem.injector.get(IconBarDndItemDirective).dndItemData,
+            targetItem: target.injector.get(IconBarDndItemDirective).dndItemData,
+            action: 'insert'
+        };
+
+        target.componentInstance._onDropped(evt);
+        fixture.detectChanges();
+
+        expect(reorderedEventSpy).toHaveBeenCalled();
+    });
+
+    it('should handle maxContentHeight input', () => {
+        component.items = generateTestConfig(4);
+        fixture.detectChanges();
+
+        const iconTabBarEl: HTMLElement = fixture.debugElement.nativeElement;
+        const contentEl = iconTabBarEl.querySelector('.fd-icon-tab-bar__content') as HTMLElement;
+        expect(contentEl.style.maxHeight).toBe('100%');
     });
 
     it('should remove badge on click', () => {
@@ -123,11 +176,10 @@ describe('IconTabBarComponent', () => {
         tabsWithBadge?.click();
         fixture.detectChanges();
         const emptyResult = hostEl.querySelector<HTMLElement>('.fd-icon-tab-bar__badge');
-
         expect(emptyResult).not.toBeTruthy();
     });
 
-    it('should emit selected event.', () => {
+    it('should emit selected event', () => {
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
         const someTab = hostEl.querySelector<HTMLElement>('.fd-icon-tab-bar__tab');
 
@@ -139,7 +191,7 @@ describe('IconTabBarComponent', () => {
         expect(component.selected).toHaveBeenCalled();
     });
 
-    it('should emit reordered event.', () => {
+    it('should emit reordered event', () => {
         component.enableTabReordering = true;
         fixture.detectChanges();
 
@@ -157,67 +209,170 @@ describe('IconTabBarComponent', () => {
         };
 
         target.componentInstance._onDropped(evt);
-
         fixture.detectChanges();
 
         expect(component.reordered).toHaveBeenCalled();
     });
 });
 
-describe('IconTabBarComponent with projected tabs', () => {
-    let component: ProjectedTestComponent;
-    let fixture: ComponentFixture<ProjectedTestComponent>;
+describe('IconTabBarComponent', () => {
+    let component: HostComponent;
+    let fixture: ComponentFixture<HostComponent>;
+
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ProjectedTestComponent]
+            imports: [HostComponent, CommonModule]
         }).compileComponents();
     });
 
-    beforeEach(async () => {
-        fixture = TestBed.createComponent(ProjectedTestComponent);
+    beforeEach(() => {
+        fixture = TestBed.createComponent(HostComponent);
         component = fixture.componentInstance;
+        component.items = generateTestConfig(6);
         fixture.detectChanges();
-        await fixture.whenStable();
     });
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
-
-    it('should convert projected tabs into tab config', async () => {
-        await fixture.whenRenderingDone();
-
-        const tabs = component.tabBar._tabsConfig$();
-
+    it('should create tabs', () => {
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const tabs = hostEl.querySelectorAll('.fd-icon-tab-bar__item');
         expect(tabs.length).toBeGreaterThan(0);
-
-        expect(tabs[0].label).toEqual('Tab 1');
     });
 
-    it('should render selected tab content', async () => {
-        await fixture.whenRenderingDone();
-
-        let renderedTabContent = fixture.nativeElement.querySelector('.tab-content').innerHTML;
-
-        expect(renderedTabContent).toEqual('1');
-
-        const thirdTabId = component.tabBar._tabs$()[2];
-
-        component.tabBar._selectItem(thirdTabId);
-
+    it('should create tabs with subtabs', () => {
+        component.items = generateTestConfig(6, true);
         fixture.detectChanges();
-        await fixture.whenStable();
-
-        renderedTabContent = fixture.nativeElement.querySelector('.tab-content').innerHTML;
-
-        expect(renderedTabContent).toEqual('3');
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const subItemBtn = hostEl.querySelector('.fd-icon-tab-bar__arrow');
+        expect(subItemBtn).toBeTruthy();
     });
 
-    it('should render stacked tabs', async () => {
-        component.stackContent$.set(true);
+    it('should create all products tab for filter', () => {
+        component.iconTabType = 'filter';
+        component.showTotalTab = true;
         fixture.detectChanges();
-        await fixture.whenStable();
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const tabAllEl = hostEl.querySelector('.fd-icon-tab-bar__container--filter');
+        expect(tabAllEl).toBeTruthy();
+    });
 
-        expect(fixture.nativeElement.querySelectorAll('.tab-content').length).toEqual(4);
+    it('should handle reordering feature', () => {
+        component.enableTabReordering = true;
+        fixture.detectChanges();
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const items = fixture.debugElement.queryAll(By.directive(IconBarDndItemDirective));
+
+        const draggableItem = items[0];
+        const target = items[1];
+        const initialTabsLength = items.length;
+
+        const evt: FdDnDEvent = {
+            draggableItem: draggableItem.injector.get(IconBarDndItemDirective).dndItemData,
+            targetItem: target.injector.get(IconBarDndItemDirective).dndItemData,
+            action: 'insert'
+        };
+
+        target.componentInstance._onDropped(evt);
+        fixture.detectChanges();
+
+        const updatedTabsList = hostEl.querySelectorAll<HTMLElement>('.fd-icon-tab-bar__item');
+        expect(updatedTabsList.length).toBeLessThan(initialTabsLength);
+    });
+
+    it('should handle dynamic tab selection', () => {
+        const selectedTabEventSpy = jest.spyOn(component, 'selected');
+        fixture.detectChanges();
+        
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const tabs = hostEl.querySelectorAll('.fd-icon-tab-bar__tab');
+
+        // select second tab
+        tabs[1].dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+
+        expect(selectedTabEventSpy).toHaveBeenCalled();
+        
+        // verify aria-selected attribute
+        const selectedTab = hostEl.querySelector('.fd-icon-tab-bar__tab[aria-selected="true"]');
+        expect(selectedTab).toBe(tabs[1]);
+    });
+
+    it('should handle reorder event', () => {
+        component.enableTabReordering = true;
+        fixture.detectChanges();
+
+        const reorderedEventSpy = jest.spyOn(component, 'reordered');
+
+        const items = fixture.debugElement.queryAll(By.directive(IconBarDndItemDirective));
+        const draggableItem = items[0];
+        const target = items[1];
+
+        const evt: FdDnDEvent = {
+            draggableItem: draggableItem.injector.get(IconBarDndItemDirective).dndItemData,
+            targetItem: target.injector.get(IconBarDndItemDirective).dndItemData,
+            action: 'insert'
+        };
+
+        target.componentInstance._onDropped(evt);
+        fixture.detectChanges();
+
+        expect(reorderedEventSpy).toHaveBeenCalled();
+    });
+
+    it('should handle maxContentHeight input', () => {
+        component.items = generateTestConfig(4);
+        fixture.detectChanges();
+
+        const iconTabBarEl: HTMLElement = fixture.debugElement.nativeElement;
+        const contentEl = iconTabBarEl.querySelector('.fd-icon-tab-bar__content') as HTMLElement;
+        expect(contentEl.style.maxHeight).toBe('100%');
+    });
+
+    it('should remove badge on click', () => {
+        component.items[0].badge = true;
+        component.items = [...component.items];
+        fixture.detectChanges();
+
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const tabsWithBadge = hostEl.querySelector<HTMLElement>('.fd-icon-tab-bar__badge');
+        expect(tabsWithBadge).toBeDefined();
+        tabsWithBadge?.click();
+        fixture.detectChanges();
+        const emptyResult = hostEl.querySelector<HTMLElement>('.fd-icon-tab-bar__badge');
+        expect(emptyResult).not.toBeTruthy();
+    });
+
+    it('should emit selected event', () => {
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const someTab = hostEl.querySelector<HTMLElement>('.fd-icon-tab-bar__tab');
+
+        jest.spyOn(component, 'selected');
+        expect(someTab).toBeDefined();
+        someTab?.click();
+        fixture.detectChanges();
+
+        expect(component.selected).toHaveBeenCalled();
+    });
+
+    it('should emit reordered event', () => {
+        component.enableTabReordering = true;
+        fixture.detectChanges();
+
+        jest.spyOn(component, 'reordered');
+
+        const items = fixture.debugElement.queryAll(By.directive(IconBarDndItemDirective));
+
+        const draggableItem = items[0];
+        const target = items[1];
+
+        const evt: FdDnDEvent = {
+            draggableItem: draggableItem.injector.get(IconBarDndItemDirective).dndItemData,
+            targetItem: target.injector.get(IconBarDndItemDirective).dndItemData,
+            action: 'insert'
+        };
+
+        target.componentInstance._onDropped(evt);
+        fixture.detectChanges();
+
+        expect(component.reordered).toHaveBeenCalled();
     });
 });

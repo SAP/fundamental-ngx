@@ -4,7 +4,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import { InitialFocusDirective, TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -35,7 +35,7 @@ import { DialogDefaultContent } from '../utils/dialog-default-content.class';
         ScrollbarDirective,
         DialogBodyComponent,
         DialogFooterComponent,
-        BarModule,
+        ButtonBarComponent,
         InitialFocusDirective,
         ContentDensityDirective
     ]

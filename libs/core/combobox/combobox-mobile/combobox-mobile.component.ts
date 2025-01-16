@@ -12,13 +12,18 @@ import { observeOn } from 'rxjs/operators';
 
 import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 
-import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InitialFocusDirective, TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { BarElementDirective, BarMiddleDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
+
+import {
+    DialogBodyComponent,
+    DialogCloseButtonComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent
+} from '@fundamental-ngx/core/dialog';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { asyncScheduler } from 'rxjs';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
@@ -29,13 +34,19 @@ import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     imports: [
-        DialogModule,
+        TemplateDirective,
+        BarMiddleDirective,
+        BarElementDirective,
+        ButtonBarComponent,
+        DialogHeaderComponent,
+        DialogCloseButtonComponent,
+        DialogComponent,
+        DialogBodyComponent,
+        DialogFooterComponent,
+        TitleComponent,
         TitleComponent,
         TemplateDirective,
-        BarModule,
         NgTemplateOutlet,
-        CdkScrollable,
-        ScrollbarDirective,
         InitialFocusDirective
     ]
 })

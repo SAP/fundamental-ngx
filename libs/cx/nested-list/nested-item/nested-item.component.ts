@@ -32,10 +32,10 @@ let sideNavigationItemUniqueId = 0;
     selector: '[cxNestedItem], [fdx-nested-list-item], li[fdx-nested-list-item]',
     template: ` <ng-content></ng-content> `,
     providers: [NestedItemService],
+    standalone: true,
     host: {
         role: 'treeitem'
-    },
-    standalone: false
+    }
 })
 export class NestedItemComponent implements AfterContentInit, NestedItemInterface {
     /** Whether item should be expanded */

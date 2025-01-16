@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { ScrollbarModule } from './scrollbar.module';
+import { By } from '@angular/platform-browser';
+import { ScrollbarDirective } from './scrollbar.directive';
 
 @Component({
     template: `
@@ -12,10 +12,12 @@ import { ScrollbarModule } from './scrollbar.module';
             [noVerticalScroll]="noVerticalScroll"
             [alwaysVisible]="alwaysVisible"
         ></div>
-    `
+    `,
+    standalone: true,
+    imports: [ScrollbarDirective]
 })
 class TestComponent {
-    @ViewChild('componentElement', { read: ElementRef })
+    @ViewChild('componentElement', { read: ElementRef, static: true })
     ref: ElementRef;
 
     noHorizontalScroll = false;
@@ -23,14 +25,13 @@ class TestComponent {
     alwaysVisible = false;
 }
 
-describe('Scrollbar Host Component', () => {
+describe('ScrollbarDirective Host Component', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [ScrollbarModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 
@@ -45,7 +46,7 @@ describe('Scrollbar Host Component', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-scrollbar');
+        expect(component.ref.nativeElement.classList.contains('fd-scrollbar')).toBe(true);
     });
 
     it('should hide horizontal overflow content', () => {

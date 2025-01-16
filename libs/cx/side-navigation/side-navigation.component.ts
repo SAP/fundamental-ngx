@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -20,6 +21,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
 import { warnOnce } from '@fundamental-ngx/core/utils';
@@ -29,6 +31,8 @@ import {
     NestedListStateService,
     PreparedNestedListComponent
 } from '@fundamental-ngx/cx/nested-list';
+import { I18nModule } from '@fundamental-ngx/i18n';
+import { SideNavigationButtonDirective } from './side-navigation-button.directive';
 import { SideNavigationMainComponent } from './side-navigation-main.component';
 import { SideNavigationModel } from './side-navigation-model';
 import { SideNavigationUtilityDirective } from './side-navigation-utility.directive';
@@ -43,8 +47,17 @@ import { SideNavigationUtilityDirective } from './side-navigation-utility.direct
     templateUrl: './side-navigation.component.html',
     styleUrl: 'side-navigation.component.scss',
     encapsulation: ViewEncapsulation.None,
-    providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService],
-    standalone: false
+    imports: [
+        I18nModule,
+        CommonModule,
+        SideNavigationMainComponent,
+        PreparedNestedListComponent,
+        ButtonComponent,
+        SideNavigationUtilityDirective,
+        SideNavigationButtonDirective
+    ],
+    standalone: true,
+    providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService]
 })
 export class SideNavigationComponent
     implements AfterContentInit, AfterViewInit, OnInit, OnChanges, SideNavigationInterface
@@ -194,6 +207,9 @@ export class SideNavigationComponent
     /** @hidden */
     _setupScrollButtons(): void {
         setTimeout(() => {
+            if (!this.sideNavMain) {
+                return;
+            }
             if (
                 this.sideNavMain.elementRef.nativeElement.scrollHeight >
                     this.sideNavMain.elementRef.nativeElement.clientHeight &&

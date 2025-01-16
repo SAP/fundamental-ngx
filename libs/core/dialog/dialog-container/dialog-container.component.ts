@@ -36,9 +36,10 @@ import { dialogFade } from '../utils/dialog.animations';
 @Component({
     selector: 'fd-dialog-container',
     template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
-    styleUrl: './dialog-container.component.scss',
+    styleUrls: ['./dialog-container.component.scss'],
     animations: [dialogFade],
     encapsulation: ViewEncapsulation.None,
+    standalone: true,
     imports: [PortalModule]
 })
 export class DialogContainerComponent
@@ -129,7 +130,7 @@ export class DialogContainerComponent
         this._animationStateSignal.set('visible');
     }
 
-    /** @hidden Returns context for embedded template*/
+    /** @hidden Returns context for embedded template */
     private _templateContext(): DialogTemplateDirectiveContext {
         return { $implicit: this.ref, dialogConfig: this.dialogConfig };
     }

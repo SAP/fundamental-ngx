@@ -24,7 +24,7 @@ import {
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
 import { CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 
-import { NgTemplateOutlet } from '@angular/common';
+import { A11yModule } from '@angular/cdk/a11y';
 import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -54,6 +54,7 @@ let cdkPopoverUniqueId = 0;
     templateUrl: './popover.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
     providers: [
         PopoverService,
         {
@@ -67,7 +68,7 @@ let cdkPopoverUniqueId = 0;
         '[class.fd-popover-custom--mobile]': 'mobile',
         '[attr.id]': 'id'
     },
-    imports: [CdkOverlayOrigin, NgTemplateOutlet]
+    imports: [CdkOverlayOrigin, A11yModule]
 })
 export class PopoverComponent
     extends BasePopoverClass

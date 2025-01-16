@@ -245,7 +245,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
         if (this._nodeDefs.length === 1) {
             return this._nodeDefs.first;
         }
-        return this._nodeDefs[i];
+        return this._nodeDefs.toArray()[i];
     }
 
     /**

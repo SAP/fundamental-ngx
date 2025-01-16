@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angul
 import { InitialFocusDirective } from './initial-focus.directive';
 
 @Component({
+    standalone: true,
+    imports: [InitialFocusDirective],
     template: `
         <button fdkInitialFocus [enabled]="enabled" [attr.tabindex]="rootElementTabIndex" #elementToFocus>
             <span>Non Focusable</span>
@@ -26,8 +28,7 @@ describe('InitialFocusDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [InitialFocusDirective]
+            imports: [TestComponent, InitialFocusDirective] // Use imports instead of declarations
         }).compileComponents();
     }));
 

@@ -61,7 +61,9 @@ import { PlatformRadioGroupModule } from './radio-group.module';
                 </fdp-radio-group>
             </fdp-form-field>
         </fdp-form-group>
-    `
+    `,
+    standalone: true,
+    imports: [FdpFormGroupModule, FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule]
 })
 class TestRadioGroupReactiveFdpGroupComponent {
     @ViewChildren(RadioGroupComponent)
@@ -102,8 +104,7 @@ describe('Radio Group Test with Reactive fdp-form-group', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule],
-            declarations: [TestRadioGroupReactiveFdpGroupComponent]
+            imports: [TestRadioGroupReactiveFdpGroupComponent]
         }).compileComponents();
     }));
 
@@ -300,7 +301,9 @@ describe('Radio Group Test with Reactive fdp-form-group', () => {
                 </fdp-radio-group>
             </fdp-form-field>
         </fdp-form-group>
-    `
+    `,
+    standalone: true,
+    imports: [FdpFormGroupModule, FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule]
 })
 class TestRadioGroupTemplateDrivenFdpGroupComponent {
     @ViewChildren(RadioGroupComponent)
@@ -337,8 +340,7 @@ describe('Radio Group Test with Template Driven fdp-form-group', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule],
-            declarations: [TestRadioGroupTemplateDrivenFdpGroupComponent]
+            imports: [TestRadioGroupTemplateDrivenFdpGroupComponent],
         }).compileComponents();
     }));
 

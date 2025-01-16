@@ -10,8 +10,7 @@ import { RtlService } from '../../services/rtl.service';
  * It should be used together with directive fdDndKeyboardItem.
  */
 @Directive({
-    selector: '[fdkDndKeyboardGroup], [fdDndKeyboardGroup]',
-    standalone: false
+    selector: '[fdkDndKeyboardGroup], [fdDndKeyboardGroup]'
 })
 export class DndKeyboardGroupDirective {
     /** Group of items */

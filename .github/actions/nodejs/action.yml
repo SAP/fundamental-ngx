@@ -23,7 +23,7 @@ runs:
           shell: bash
           run: npm install -g corepack
 
-        - name: Enable Corepack for Yarn 4.5.3
+        - name: Enable Corepack for Yarn 4.6.0
           shell: bash
           run: |
               corepack enable yarn
@@ -33,11 +33,11 @@ runs:
           run: |
               yarn
 
-        - name: Install Yarn 4.5.3 (if not available)
+        - name: Install Yarn 4.6.0 (if not available)
           shell: bash
           run: |
-              if ! yarn --version | grep -q "4.5.3"; then
-                npm install -g yarn@4.5.3
+              if ! yarn --version | grep -q "4.6.0"; then
+                npm install -g yarn@4.6.0
               fi
 
         - name: Print Node.js version
@@ -50,14 +50,14 @@ runs:
           shell: bash
 
         - name: Use the global Yarn cache if available
-          uses: actions/cache@v4.1.2
+          uses: actions/cache@v4.2.0
           with:
               path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
               key: ${{ runner.os }}-node-${{ inputs.node_version }}-yarn-${{ hashFiles('**/yarn.lock') }}
               restore-keys: |
                   ${{ runner.os }}-node-${{ inputs.node_version }}-yarn-
 
-        - uses: actions/cache@v4.1.2
+        - uses: actions/cache@v4.2.0
           id: node_modules
           name: Use project node_modules cache if available
           with:

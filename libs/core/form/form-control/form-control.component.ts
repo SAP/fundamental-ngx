@@ -12,11 +12,7 @@ import {
 } from '@angular/core';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
-import {
-    ContentDensityModule,
-    ContentDensityObserver,
-    contentDensityObserverProviders
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Subscription } from 'rxjs';
 import { FormItemControl, registerFormItemControl } from '../form-item-control/form-item-control';
 
@@ -34,7 +30,6 @@ import { FormItemControl, registerFormItemControl } from '../form-item-control/f
     styleUrl: './form-control.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ContentDensityModule],
     providers: [registerFormItemControl(FormControlComponent), contentDensityObserverProviders()]
 })
 export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges, OnDestroy, FormItemControl {

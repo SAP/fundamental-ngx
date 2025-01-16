@@ -20,6 +20,7 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
     styleUrl: './busy-indicator.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
     providers: [
         {
             provide: FD_BUSY_INDICATOR_COMPONENT,

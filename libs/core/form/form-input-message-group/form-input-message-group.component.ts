@@ -1,3 +1,5 @@
+import { A11yModule } from '@angular/cdk/a11y';
+import { CommonModule } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -15,6 +17,7 @@ import {
     PopoverControlComponent,
     TriggerConfig
 } from '@fundamental-ngx/core/popover';
+
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 @Component({
@@ -23,7 +26,7 @@ import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
     styleUrl: './form-input-message-group.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [PopoverComponent, PopoverControlComponent, PopoverBodyComponent]
+    imports: [PopoverComponent, PopoverControlComponent, PopoverBodyComponent, CommonModule, A11yModule]
 })
 export class FormInputMessageGroupComponent {
     /**

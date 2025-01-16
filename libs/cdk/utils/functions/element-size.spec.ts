@@ -1,10 +1,14 @@
 import { Component, ElementRef } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { getElementCapacity, getElementWidth } from './element-size';
 
 const ELEMENT_DIMENSIONS = { width: 100, margin: 2, padding: 5 };
+const EXPECTED_CAPACITY = ELEMENT_DIMENSIONS.width - ELEMENT_DIMENSIONS.padding * 2;
+const EXPECTED_WIDTH = ELEMENT_DIMENSIONS.width;
+const EXPECTED_WIDTH_WITH_MARGIN = ELEMENT_DIMENSIONS.width + ELEMENT_DIMENSIONS.margin * 2;
 
 @Component({
+    standalone: true,
     template: '',
     host: {
         '[style.display]': '"block"',
@@ -23,33 +27,26 @@ describe('Element size utils', () => {
     let elementRef: ElementRef;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent]
-        }).compileComponents();
-    }));
-
     beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [TestComponent]
+        }).compileComponents();
+
         fixture = TestBed.createComponent(TestComponent);
         elementRef = fixture.componentInstance.elementRef;
         fixture.detectChanges();
     });
 
-    it('should create', () => {
+    it('should create element reference', () => {
         expect(elementRef).toBeTruthy();
     });
 
     it('should return proper capacity', () => {
-        const capacity = ELEMENT_DIMENSIONS.width - ELEMENT_DIMENSIONS.padding * 2;
-
-        expect(getElementCapacity(elementRef)).toEqual(capacity);
+        expect(getElementCapacity(elementRef)).toEqual(EXPECTED_CAPACITY);
     });
 
     it('should return proper element width', () => {
-        const width = ELEMENT_DIMENSIONS.width;
-        const widthWithMargin = ELEMENT_DIMENSIONS.width + ELEMENT_DIMENSIONS.margin * 2;
-
-        expect(getElementWidth(elementRef)).toEqual(width);
-        expect(getElementWidth(elementRef, true)).toEqual(widthWithMargin);
+        expect(getElementWidth(elementRef)).toEqual(EXPECTED_WIDTH);
+        expect(getElementWidth(elementRef, true)).toEqual(EXPECTED_WIDTH_WITH_MARGIN);
     });
 });

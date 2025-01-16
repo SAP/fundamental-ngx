@@ -3,7 +3,13 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { MenuComponent, MenuModule } from '@fundamental-ngx/core/menu';
+import {
+    MenuComponent,
+    MenuInteractiveComponent,
+    MenuItemComponent,
+    MenuTitleDirective,
+    MenuTriggerDirective
+} from '@fundamental-ngx/core/menu';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { ShellbarMenuItem } from '../model/shellbar-menu-item';
 
@@ -22,7 +28,16 @@ import { ShellbarMenuItem } from '../model/shellbar-menu-item';
     styleUrl: './product-menu.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ButtonComponent, ContentDensityDirective, MenuModule, IconComponent]
+    imports: [
+        ButtonComponent,
+        ContentDensityDirective,
+        MenuComponent,
+        MenuItemComponent,
+        MenuInteractiveComponent,
+        MenuTitleDirective,
+        MenuTriggerDirective,
+        IconComponent
+    ]
 })
 export class ProductMenuComponent {
     /** Whether the popover should close when the escape key is pressed. */

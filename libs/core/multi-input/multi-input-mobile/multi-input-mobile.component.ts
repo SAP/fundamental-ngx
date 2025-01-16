@@ -1,4 +1,3 @@
-import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
@@ -10,12 +9,17 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { BarModule } from '@fundamental-ngx/core/bar';
+import { Nullable, TemplateDirective, TemplateModule } from '@fundamental-ngx/cdk/utils';
+import { BarElementDirective, BarMiddleDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
+import {
+    DialogBodyComponent,
+    DialogCloseButtonComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent
+} from '@fundamental-ngx/core/dialog';
 import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
-import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.interface';
 
@@ -26,14 +30,23 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.inter
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     imports: [
-        DialogModule,
+        TemplateModule,
+        BarMiddleDirective,
+        BarElementDirective,
+        ButtonBarComponent,
+        TitleComponent,
         TitleComponent,
         TemplateDirective,
-        BarModule,
+        BarMiddleDirective,
+        BarElementDirective,
+        ButtonBarComponent,
         NgTemplateOutlet,
         ButtonComponent,
-        CdkScrollable,
-        ScrollbarDirective
+        DialogComponent,
+        DialogHeaderComponent,
+        DialogFooterComponent,
+        DialogBodyComponent,
+        DialogCloseButtonComponent
     ]
 })
 export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterface> implements OnInit {

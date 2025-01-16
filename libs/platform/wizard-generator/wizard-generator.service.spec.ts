@@ -104,7 +104,9 @@ const TEST_ITEMS: WizardGeneratorItem[] = [
             ></fdp-wizard-body>
         }
     `,
-    providers: [WizardGeneratorService]
+    providers: [WizardGeneratorService],
+    standalone: true,
+    imports: [PlatformFormGeneratorModule, PlatformWizardGeneratorModule]
 })
 class WizardGeneratorTestComponent extends BaseWizardGenerator {}
 
@@ -115,8 +117,7 @@ describe('WizardGeneratorService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformFormGeneratorModule, PlatformWizardGeneratorModule],
-            declarations: [WizardGeneratorTestComponent]
+            imports: [WizardGeneratorTestComponent]
         }).compileComponents();
 
         fixture = TestBed.createComponent(WizardGeneratorTestComponent);

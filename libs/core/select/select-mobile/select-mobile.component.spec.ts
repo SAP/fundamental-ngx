@@ -8,6 +8,7 @@ import { getMobileModeViewElements, MOBILE_CONFIG_TEST_TOKEN, whenStable } from 
 import { SelectComponent } from '../select.component';
 import { SelectModule } from '../select.module';
 import { SelectMobileModule } from './select-mobile.module';
+import { CommonModule } from '@angular/common';
 
 const MOBILE_CONFIG: MobileModeConfig = { title: 'TITLE', hasCloseButton: true };
 
@@ -19,11 +20,16 @@ const MOBILE_CONFIG: MobileModeConfig = { title: 'TITLE', hasCloseButton: true }
             [mobile]="true"
             [mobileConfig]="mobileConfig"
         >
-            @for (option of options; track option) {
-                <li fd-option [value]="option">{{ option }}</li>
-            }
+            <li *ngFor="let option of options" fd-option [value]="option">{{ option }}</li>
         </fd-select>
-    `
+    `,
+    standalone: true,
+    imports: [
+        CommonModule,
+        SelectModule,
+        SelectMobileModule,
+        RouterTestingModule
+    ]
 })
 class TestWrapperComponent {
     @ViewChild(SelectComponent, { static: true })
@@ -41,8 +47,7 @@ describe('SelectComponent in mobile mode', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [SelectModule, SelectMobileModule, NoopAnimationsModule, RouterTestingModule],
+            imports: [TestWrapperComponent, NoopAnimationsModule],
             providers: [{ provide: MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
         }).overrideComponent(SelectComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } });
     }));

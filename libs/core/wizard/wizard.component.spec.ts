@@ -84,7 +84,17 @@ import { WizardStepComponent } from './wizard-step/wizard-step.component';
             </div>
         </div>
     </fd-dialog-body>
-    `
+    `,
+    standalone: true,
+    imports: [
+        WizardComponent,
+        WizardNavigationComponent,
+        WizardProgressBarDirective,
+        WizardStepComponent,
+        WizardStepIndicatorComponent,
+        WizardContentComponent,
+        WizardNextStepComponent
+    ]
 })
 class TestWrapperComponent {
     @ViewChild(WizardComponent, { static: true })
@@ -105,16 +115,7 @@ describe('WizardComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [
-                WizardComponent,
-                WizardNavigationComponent,
-                WizardProgressBarDirective,
-                WizardStepComponent,
-                WizardStepIndicatorComponent,
-                WizardContentComponent,
-                WizardNextStepComponent
-            ]
+            imports: [TestWrapperComponent]
         })
             .overrideComponent(WizardComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }

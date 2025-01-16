@@ -7,7 +7,6 @@
     "compilerOptions": {
         "baseUrl": ".",
         "outDir": "./dist/out-tsc",
-        "rootDir": ".",
         "sourceMap": true,
         "declaration": false,
         "module": "esnext",

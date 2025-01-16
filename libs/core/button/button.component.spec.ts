@@ -6,20 +6,37 @@ import { ButtonModule } from './button.module';
 
 @Component({
     selector: 'fd-test-component',
-    template: '<button fd-button label="Button"></button>'
+    template: '<button fd-button label="Button"></button>',
+    standalone: true,
+    imports: [ButtonComponent]
 })
 export class TestComponent {}
 
-describe('ButtonComponent', () => {
-    let fixture: ComponentFixture<TestComponent>, debugElement: DebugElement;
+@Component({
+    selector: 'fd-disabled-test-component',
+    template: '<button fd-button label="Button" disabled></button>',
+    standalone: true,
+    imports: [ButtonComponent]
+})
+export class DisabledTestComponent {}
 
+@Component({
+    selector: 'fd-aria-disabled-test-component',
+    template: '<button fd-button label="Button" aria-disabled="true"></button>',
+    standalone: true,
+    imports: [ButtonComponent]
+})
+export class AriaDisabledTestComponent {}
+
+describe('ButtonComponent', () => {
+    let fixture: ComponentFixture<TestComponent>,
+        debugElement: DebugElement;
     let component, componentInstance: ButtonComponent;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ButtonModule],
-            declarations: [TestComponent]
-        });
+            imports: [ButtonModule, TestComponent]
+        }).compileComponents();
     }));
 
     beforeEach(() => {
@@ -30,7 +47,7 @@ describe('ButtonComponent', () => {
         componentInstance = component.injector.get(ButtonComponent);
     });
 
-    it('should create', () => {
+    it('should create TestComponent', () => {
         expect(component).toBeTruthy();
     });
 
@@ -40,7 +57,7 @@ describe('ButtonComponent', () => {
         componentInstance.buildComponentCssClass();
 
         const cssClass = componentInstance.buildComponentCssClass().join(' ');
-        expect(cssClass).toContain('standard');
+        expect(cssClass).toContain('fd-button--standard');
         expect(cssClass).toContain('fd-button--menu');
     });
 
@@ -51,30 +68,16 @@ describe('ButtonComponent', () => {
     });
 });
 
-@Component({
-    selector: 'fd-disabled-test-component',
-    template: '<button fd-button label="Button" disabled></button>'
-})
-export class DisabledTestComponent {}
-
-@Component({
-    selector: 'fd-aria-disabled-test-component',
-    template: '<button fd-button label="Button" aria-disabled="true"></button>'
-})
-export class AriaDisabledTestComponent {}
-
 describe('ButtonComponent – Disabled', () => {
     let disabledFixture: ComponentFixture<DisabledTestComponent>,
         ariaDisabledFixture: ComponentFixture<AriaDisabledTestComponent>,
         debugElement: DebugElement;
-
     let component, componentInstance: ButtonComponent;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ButtonModule],
-            declarations: [DisabledTestComponent, AriaDisabledTestComponent]
-        });
+            imports: [ButtonModule, DisabledTestComponent, AriaDisabledTestComponent]
+        }).compileComponents();
     }));
 
     it('should add is-disabled class to [disabled] button', () => {

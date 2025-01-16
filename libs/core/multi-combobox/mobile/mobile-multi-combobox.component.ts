@@ -1,14 +1,18 @@
-import { CdkScrollable } from '@angular/cdk/overlay';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
-import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { Nullable, TemplateDirective, TemplateModule } from '@fundamental-ngx/cdk/utils';
 import { BarElementDirective, BarMiddleDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
+import {
+    DialogBodyComponent,
+    DialogCloseButtonComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent
+} from '@fundamental-ngx/core/dialog';
 import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
-import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { MobileMultiComboboxInterface } from '../models/multi-combobox.interface';
@@ -19,18 +23,25 @@ import { MULTI_COMBOBOX_COMPONENT } from '../multi-combobox.token';
     templateUrl: './mobile-multi-combobox.component.html',
     styleUrl: './mobile-multi-combobox.component.scss',
     imports: [
-        DialogModule,
+        TemplateModule,
+        BarMiddleDirective,
+        BarElementDirective,
+        ButtonBarComponent,
+        TitleComponent,
         TitleComponent,
         TemplateDirective,
         BarMiddleDirective,
         BarElementDirective,
         NgTemplateOutlet,
         ButtonComponent,
-        CdkScrollable,
-        ScrollbarDirective,
         ButtonBarComponent,
         FdTranslatePipe,
-        AsyncPipe
+        AsyncPipe,
+        DialogComponent,
+        DialogHeaderComponent,
+        DialogCloseButtonComponent,
+        DialogBodyComponent,
+        DialogFooterComponent
     ]
 })
 export class MobileMultiComboboxComponent extends MobileModeBase<MobileMultiComboboxInterface> implements OnInit {

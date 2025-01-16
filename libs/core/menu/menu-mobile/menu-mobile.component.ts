@@ -1,4 +1,3 @@
-import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
@@ -14,14 +13,24 @@ import {
     signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { InitialFocusDirective, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { BarModule } from '@fundamental-ngx/core/bar';
+import { InitialFocusDirective, RtlService, TemplateDirective, TemplateModule } from '@fundamental-ngx/cdk/utils';
+import {
+    BarElementDirective,
+    BarLeftDirective,
+    BarRightDirective,
+    ButtonBarComponent
+} from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { DialogBodyComponent, DialogModule } from '@fundamental-ngx/core/dialog';
+import {
+    DialogBodyComponent,
+    DialogCloseButtonComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent
+} from '@fundamental-ngx/core/dialog';
 import { MobileModeBase, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
-import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { TitleModule } from '@fundamental-ngx/core/title';
+import { TitleComponent, TitleModule } from '@fundamental-ngx/core/title';
 import { startWith, take } from 'rxjs/operators';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MENU_COMPONENT, MenuInterface } from '../menu.interface';
@@ -33,16 +42,27 @@ import { MenuService } from '../services/menu.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     imports: [
-        DialogModule,
+        TemplateModule,
+        BarLeftDirective,
+        BarRightDirective,
+        BarElementDirective,
+        ButtonBarComponent,
+        TitleComponent,
         TemplateDirective,
-        BarModule,
+        BarLeftDirective,
+        BarRightDirective,
+        BarElementDirective,
+        ButtonBarComponent,
         ButtonComponent,
         ContentDensityDirective,
         TitleModule,
-        CdkScrollable,
-        ScrollbarDirective,
         NgTemplateOutlet,
-        InitialFocusDirective
+        InitialFocusDirective,
+        DialogComponent,
+        DialogBodyComponent,
+        DialogHeaderComponent,
+        DialogCloseButtonComponent,
+        DialogFooterComponent
     ]
 })
 export class MenuMobileComponent extends MobileModeBase<MenuInterface> implements OnInit {

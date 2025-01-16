@@ -1,6 +1,13 @@
 import { NgModule } from '@angular/core';
 import { TemplateModule } from '@fundamental-ngx/cdk/utils';
-import { BarModule } from '@fundamental-ngx/core/bar';
+import {
+    BarComponent,
+    BarElementDirective,
+    BarLeftDirective,
+    BarMiddleDirective,
+    BarRightDirective,
+    ButtonBarComponent
+} from '@fundamental-ngx/core/bar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { DialogCloseButtonComponent } from './dialog-close-button/dialog-close-button.component';
@@ -45,14 +52,24 @@ const declarations = [
         declarations,
         // Keeping these two items for backwards compatibility.
         TemplateModule,
-        BarModule,
+        BarComponent,
+        BarLeftDirective,
+        BarMiddleDirective,
+        BarRightDirective,
+        BarElementDirective,
+        ButtonBarComponent,
         TitleComponent
     ],
     exports: [
         declarations,
         // Keeping these two items for backwards compatibility.
         TemplateModule,
-        BarModule,
+        BarComponent,
+        BarLeftDirective,
+        BarMiddleDirective,
+        BarRightDirective,
+        BarElementDirective,
+        ButtonBarComponent,
         TitleComponent
     ],
     providers: [provideDialogService()]

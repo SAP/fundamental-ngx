@@ -1,3 +1,4 @@
+import { PortalModule } from '@angular/cdk/portal';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -10,7 +11,13 @@ import {
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { MenuComponent, MenuModule } from '@fundamental-ngx/core/menu';
+import {
+    MenuComponent,
+    MenuInteractiveComponent,
+    MenuItemComponent,
+    MenuTitleDirective,
+    MenuTriggerDirective
+} from '@fundamental-ngx/core/menu';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
@@ -24,7 +31,17 @@ import { ShellbarUserMenuButtonDirective } from './shellbar-user-menu-button.dir
     selector: 'fd-shellbar-user-menu',
     templateUrl: './shellbar-user-menu.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ButtonComponent, MenuModule, AvatarComponent, ShellbarUserMenuButtonDirective]
+    imports: [
+        ButtonComponent,
+        PortalModule,
+        MenuComponent,
+        MenuItemComponent,
+        MenuInteractiveComponent,
+        MenuTitleDirective,
+        MenuTriggerDirective,
+        AvatarComponent,
+        ShellbarUserMenuButtonDirective
+    ]
 })
 export class ShellbarUserMenuComponent {
     /** The user data. */
