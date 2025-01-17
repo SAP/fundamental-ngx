@@ -166,7 +166,11 @@ export default {
         periodLabel: '期間',
         decreasePeriodLabel: '減少期間',
         navigationInstruction:
-            '若要在此清單的項目間移動，請按向上箭頭或向下箭頭；若要在清單間切換，請按向左箭頭或向右箭頭。'
+            '若要在此清單的項目間移動，請按向上箭頭或向下箭頭；若要在清單間切換，請按向左箭頭或向右箭頭。',
+        nightLabel: '晚上',
+        morningLabel: '早上',
+        afternoonLabel: '下午',
+        eveningLabel: '傍晚'
     },
     coreTimePicker: {
         timePickerInputLabel: '時間選擇器輸入',
@@ -193,7 +197,8 @@ export default {
         ariaLabel: '精靈'
     },
     coreBreadcrumb: {
-        overflowTitleMore: '更多'
+        overflowTitleMore: '更多',
+        breadcrumbTrailLabel: '階層連結軌跡'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: '監控員',
@@ -508,7 +513,9 @@ export default {
         deselectAllCheckboxLabel: '取消全選',
         deselectSingleRow: '若要取消選擇列，請按空白鍵',
         selectSingleRow: '若要選擇列，請按空白鍵',
-        loadMore: '載入更多'
+        loadMore: '載入更多',
+        filteredBy: '篩選依據',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '編輯'
@@ -567,5 +574,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: '功能表按鈕'
+    },
+    coreNotification: {
+        groupHeaderTitle: '展開/摺疊',
+        groupAriaDescription: '通知群組',
+        groupAriaDescriptionExpanded: '已展開',
+        groupAriaDescriptionCollapsed: '已摺疊'
     }
 };

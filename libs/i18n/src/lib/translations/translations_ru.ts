@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Период',
         decreasePeriodLabel: 'Уменьшить период',
         navigationInstruction:
-            'Перемещаться между позициями списка можно с помощью стрелок вверх и вниз. Переключаться между списками можно с помощью стрелок влево и вправо.'
+            'Перемещаться между позициями списка можно с помощью стрелок вверх и вниз. Переключаться между списками можно с помощью стрелок влево и вправо.',
+        nightLabel: 'ночью',
+        morningLabel: 'утром',
+        afternoonLabel: 'днем',
+        eveningLabel: 'вечером'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Ввод средства выбора времени',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Ассистент'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Больше'
+        overflowTitleMore: 'Больше',
+        breadcrumbTrailLabel: 'Путь навигации'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Наблюдатели',
@@ -511,7 +516,9 @@ export default {
         deselectAllCheckboxLabel: 'Отменить выделение',
         deselectSingleRow: 'Для отмены выбора нажмите пробел',
         selectSingleRow: 'Для выбора строки нажмите пробел',
-        loadMore: 'Загрузить еще'
+        loadMore: 'Загрузить еще',
+        filteredBy: 'Отфильтровано по',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Изменить'
@@ -570,5 +577,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Кнопка меню'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Развернуть/свернуть',
+        groupAriaDescription: 'Группа уведомлений',
+        groupAriaDescriptionExpanded: 'развернуто',
+        groupAriaDescriptionCollapsed: 'свернуто'
     }
 };
