@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.5...v0.54.2-rc.6) (2025-01-16)
+
+
+### Bug Fixes
+
+* select whitespace ([#12931](https://github.com/SAP/fundamental-ngx/issues/12931)) ([31fa086](https://github.com/SAP/fundamental-ngx/commit/31fa086706fabcc308f761f7aa0cb96a29311e0b))
+
+
+
+
+
 ## [0.54.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.4...v0.54.2-rc.5) (2025-01-15)
 
 
