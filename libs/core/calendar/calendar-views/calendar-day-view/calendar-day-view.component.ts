@@ -29,6 +29,7 @@ import { NgClass } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { CalendarLegendFocusingService } from '../../calendar-legend/calendar-legend-focusing.service';
 import { CalendarService } from '../../calendar.service';
 import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
 import { CalendarType, CalendarTypeEnum, DaysOfWeek } from '../../types';
@@ -296,6 +297,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         private eRef: ElementRef,
         private changeDetRef: ChangeDetectorRef,
         private calendarService: CalendarService,
+        private focusedService: CalendarLegendFocusingService,
         @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
         public _dateTimeAdapter: DatetimeAdapter<D>
     ) {}
@@ -316,6 +318,12 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
             this._refreshShortWeekDays();
             this._buildDayViewGrid();
             this.changeDetRef.markForCheck();
+        });
+
+        this.focusedService.cellSubject$.subscribe(({ cell, calIndex, cellNumber }) => {
+            if (cell !== null && cellNumber !== null) {
+                this._focusOnLegendsDay(cell, calIndex, cellNumber);
+            }
         });
     }
 
@@ -614,6 +622,40 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, Focusable
         this._currentlyDisplayed = this._getNextMonth();
         this._buildDayViewGrid();
         this.nextMonthSelect.emit();
+    }
+
+    /** @hidden */
+    private _focusOnLegendsDay(cell: HTMLElement, calIndex: number | null, specialNumber: number): void {
+        const allElements = this.eRef.nativeElement.querySelectorAll('.fd-calendar__item');
+        const elementToSpecialDayMap = new Map<HTMLElement, number>();
+        const id = this.id();
+        const legendClassName = 'fd-calendar__item--legend-';
+
+        if (calIndex !== null && id && Number.parseInt(id.split('')[id.length - 1], 10) === calIndex) {
+            allElements.forEach((element) => {
+                element.classList.forEach((className) => {
+                    if (className.startsWith(legendClassName)) {
+                        elementToSpecialDayMap.set(element, parseInt(className.split('-').pop()!, 10));
+                    }
+                });
+                if (!element.classList.contains(`${legendClassName + specialNumber}`)) {
+                    element.classList.forEach((className) => {
+                        if (className.startsWith(legendClassName) && !className.endsWith(specialNumber.toString())) {
+                            element.classList.remove(className);
+                        }
+                    });
+                }
+                element.addEventListener('focusout', () => {
+                    element.classList.add(`${legendClassName + elementToSpecialDayMap.get(element)}`);
+                });
+            });
+
+            cell.addEventListener('focusout', () => {
+                elementToSpecialDayMap.forEach((specialElementNumber, element) => {
+                    element.classList.add(`${legendClassName + specialElementNumber}`);
+                });
+            });
+        }
     }
 
     /**
