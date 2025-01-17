@@ -111,7 +111,10 @@ export class TableColumnResizeService implements OnDestroy {
         this._tableScrollDispatcherService
             ?.horizontallyScrolled()
             .pipe(takeUntilDestroyed(this._destroyed))
-            .subscribe((scrollable) => (this._scrollLeft = scrollable.getScrollLeft()));
+            .subscribe((scrollable) => {
+                this.resizerPosition$.next(0);
+                this._scrollLeft = scrollable.getScrollLeft();
+            });
     }
 
     /** @hidden */
