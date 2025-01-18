@@ -3,7 +3,6 @@ import { Tree } from '@angular-devkit/schematics';
 
 const STYLESHEET_REGEX = /.*\.(css|scss|less|sass)/;
 
-// eslint-disable-next-line jsdoc/require-jsdoc
 export function findStylesheetFiles(tree: Tree, startDirectory: string = '/'): string[] {
     const result: string[] = [];
     const visitDir = (dirPath: Path): void => {

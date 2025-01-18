@@ -42,7 +42,6 @@ class MockIntersectionObserver implements IntersectionObserver {
 
 @Component({
     template: '',
-    // eslint-disable-next-line @angular-eslint/no-host-metadata-property
     host: {
         '[style.display]': 'elementDisplay',
         '[style.box-sizing]': '"border-box"',

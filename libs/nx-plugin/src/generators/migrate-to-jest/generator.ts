@@ -1,6 +1,5 @@
-import { readProjectConfiguration, Tree, updateProjectConfiguration } from '@nrwl/devkit';
-import { jestProjectGenerator } from '@nrwl/jest';
-import { workspaceRoot } from 'nx/src/utils/app-root';
+import { readProjectConfiguration, Tree, updateProjectConfiguration, workspaceRoot } from '@nx/devkit';
+import { jestProjectGenerator } from '@nx/jest';
 import { relative } from 'path';
 
 export default async function generator(tree: Tree, { project: name }: { project: string }) {

@@ -4,7 +4,6 @@ import { updateWorkspace } from '@schematics/angular/utility/workspace';
 
 import { findStylesheetFiles } from '../../utils/file-utils';
 
-// eslint-disable-next-line jsdoc/require-jsdoc
 export default function (): Rule {
     return chain([removeStylesFromConfig(), removeIconFonts(), removeFontStyles(), noticeAddSchematics()]);
 }
