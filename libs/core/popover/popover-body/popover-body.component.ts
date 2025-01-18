@@ -5,6 +5,7 @@ import {
     Component,
     ElementRef,
     HostListener,
+    input,
     Input,
     Renderer2,
     TemplateRef,
@@ -66,6 +67,9 @@ export class PopoverBodyComponent implements AfterViewInit {
     /** @hidden */
     @ViewChild(ScrollbarDirective)
     _scrollbar: ScrollbarDirective;
+
+    /** @hidden */
+    focusFirstTabbable = input(false);
 
     /** Whether to wrap content with fd-scrollbar directive. */
     _disableScrollbar = false;
@@ -149,6 +153,9 @@ export class PopoverBodyComponent implements AfterViewInit {
         if (!clickedInside) {
             // Call the focus logic if clicked outside the popover
             this._focusFirstTabbableElement();
+        }
+        if (this.focusFirstTabbable()) {
+            this._focusFirstTabbableElement(true);
         }
     }
 

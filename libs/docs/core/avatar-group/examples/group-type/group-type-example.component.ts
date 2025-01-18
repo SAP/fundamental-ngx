@@ -7,13 +7,21 @@ import { AvatarGroupComponent, AvatarGroupItemDirective } from '@fundamental-ngx
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
+import { DescriptionComponent } from '@fundamental-ngx/docs/shared';
 import { AvatarGroupDataExampleService } from '../avatar-group-data-example.service';
 
 @Component({
     selector: 'fd-avatar-group-group-type-example',
     templateUrl: './group-type-example.component.html',
     standalone: true,
-    imports: [AvatarGroupComponent, AvatarComponent, QuickViewModule, LinkComponent, AvatarGroupItemDirective]
+    imports: [
+        AvatarGroupComponent,
+        AvatarComponent,
+        QuickViewModule,
+        LinkComponent,
+        AvatarGroupItemDirective,
+        DescriptionComponent
+    ]
 })
 export class GroupTypeExampleComponent {
     size: Size = 'l';

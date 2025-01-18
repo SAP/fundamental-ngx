@@ -14,7 +14,7 @@
         (resized)="_detectChanges()"
     >
         @for (item of _avatars; track item) {
-            <fd-popover [noArrow]="false" [focusAutoCapture]="true">
+            <fd-popover [placement]="popoverPlacement" [noArrow]="false" [focusAutoCapture]="true">
                 <fd-popover-control tabindex="-1" (click)="outletItem.element.focus()">
                     <ng-template
                         #outletItem="fdAvatarGroupItemPortal"
@@ -33,8 +33,10 @@
             </fd-popover>
         }
         <fd-popover
+            [placement]="popoverPlacement"
             [noArrow]="false"
             [focusAutoCapture]="true"
+            (isOpenChange)="handlePopoverOpen($event)"
             *fdAvatarGroupInternalOverflowButton="avatarGroupHostComponent._hiddenItems(); let hiddenItems"
         >
             <fd-popover-control tabindex="-1">
@@ -52,9 +54,17 @@
         </fd-popover>
     </fd-avatar-group-host>
 } @else {
-    <fd-popover [noArrow]="false" [focusAutoCapture]="true" fdkResizeObserver (resized)="_detectChanges()">
-        <fd-popover-control>
+    <fd-popover
+        [placement]="popoverPlacement"
+        [noArrow]="false"
+        [focusAutoCapture]="false"
+        fdkResizeObserver
+        (resized)="_detectChanges()"
+        (isOpenChange)="handlePopoverOpen($event)"
+    >
+        <fd-popover-control tabindex="-1">
             <fd-avatar-group-host
+                [maxVisibleItems]="maxVisibleItems"
                 #avatarGroupHostComponent
                 [type]="type"
                 [size]="size"
@@ -81,7 +91,7 @@
                 </ng-template>
             </fd-avatar-group-host>
         </fd-popover-control>
-        <fd-popover-body>
+        <fd-popover-body [focusFirstTabbable]="true">
             <ng-template
                 [ngTemplateOutlet]="avatarGroupOverflowBodyTemplate"
                 [ngTemplateOutletContext]="{ $implicit: _avatarRenderers }"

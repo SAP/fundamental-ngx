@@ -27,11 +27,11 @@
     navigationDirection="horizontal"
 >
     @if (_overflowPopoverStage === 'main') {
-        @for (item of avatars; track item) {
+        @for (avatar of avatars(); track avatar) {
             <ng-template
                 cdkPortalOutlet
                 fdAvatarGroupItemPortal
-                [avatarGroupItem]="item.avatarGroupItem"
+                [avatarGroupItem]="avatar.avatarGroupItem"
                 [forceVisibility]="true"
             >
             </ng-template>
