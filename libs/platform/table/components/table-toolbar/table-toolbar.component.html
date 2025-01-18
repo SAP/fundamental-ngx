@@ -39,6 +39,7 @@
                 (searchSubmit)="submitSearch($event)"
                 (cancelSearch)="submitSearch($event)"
                 [disableSuggestionsFoundAnnouncer]="true"
+                (inputChange)="searchInputChanged($event)"
             ></fdp-search-field>
         }
         @if (editMode !== 'none') {

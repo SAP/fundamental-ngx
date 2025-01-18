@@ -4,7 +4,9 @@ import {
     ContentChild,
     DestroyRef,
     Directive,
+    EventEmitter,
     Input,
+    Output,
     Signal,
     TemplateRef,
     ViewChild,
@@ -150,6 +152,20 @@ export class TableToolbarComponent implements TableToolbarInterface {
     @Input()
     headingLevel: HeadingLevel = 2;
 
+    /** Search field input text. */
+    @Input()
+    set searchFieldInputText(text: string) {
+        this._searchInputText = text;
+        this.submitSearch({ text, category: null });
+    }
+    get searchFieldInputText(): string {
+        return this._searchInputText;
+    }
+
+    /** Event emitted when the search field input is changed. */
+    @Output()
+    searchFieldInputChange = new EventEmitter<string>();
+
     /** @hidden */
     @ContentChild(TableToolbarActionsComponent)
     tableToolbarActionsComponent: TableToolbarActionsComponent;
@@ -188,6 +204,11 @@ export class TableToolbarComponent implements TableToolbarInterface {
     /** @hidden */
     submitSearch(search: SearchInput): void {
         this._table.search(search);
+    }
+
+    /** @hidden */
+    searchInputChanged(event: SearchInput): void {
+        this.searchFieldInputChange.emit(event.text);
     }
 
     /** @hidden */
