@@ -14,12 +14,15 @@ import { CustomUserMenuExampleComponent } from './examples/custom-user-menu-exam
 import { ShellbarBasicExampleComponent } from './examples/shellbar-basic-example.component';
 import { ShellbarCollapsibleExampleComponent } from './examples/shellbar-collapsible-example.component';
 import { ShellbarGrowingGroupExampleComponent } from './examples/shellbar-growing-group-example/shellbar-growing-group-example.component';
+import { ShellbarOptionsExampleComponent } from './examples/shellbar-options-example/shellbar-options-example.component';
 import { ShellbarResponsiveExampleComponent } from './examples/shellbar-responsive-example/shellbar-responsive-example.component';
 
 const shellbarBasicHTMLSrc = 'shellbar-basic-example.component.html';
 const shellbarBasicTSSrc = 'shellbar-basic-example.component.ts';
 const shellbarCollapsibleHTMLSrc = 'shellbar-collapsible-example.component.html';
 const shellbarCollapsibleTSSrc = 'shellbar-collapsible-example.component.ts';
+const shellbarOptionsHTMLSrc = 'shellbar-options-example.component.html';
+const shellbarOptionsTSSrc = 'shellbar-options-example.component.ts';
 
 @Component({
     selector: 'app-shellbar',
@@ -35,7 +38,8 @@ const shellbarCollapsibleTSSrc = 'shellbar-collapsible-example.component.ts';
         ShellbarCollapsibleExampleComponent,
         ShellbarResponsiveExampleComponent,
         ShellbarGrowingGroupExampleComponent,
-        CustomUserMenuExampleComponent
+        CustomUserMenuExampleComponent,
+        ShellbarOptionsExampleComponent
     ]
 })
 export class ShellbarDocsComponent {
@@ -97,5 +101,19 @@ export class ShellbarDocsComponent {
             selector: 'shellbar-custom-user-menu-example',
             component: 'CustomUserMenuExampleComponent'
         })
+    ];
+
+    shellbarOptionsExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(shellbarOptionsHTMLSrc),
+            fileName: 'shellbar-options-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ShellbarOptionsExampleComponent',
+            code: getAssetFromModuleAssets(shellbarOptionsTSSrc),
+            fileName: 'shellbar-options-example'
+        }
     ];
 }

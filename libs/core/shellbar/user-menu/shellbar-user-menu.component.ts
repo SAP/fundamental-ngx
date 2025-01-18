@@ -14,6 +14,7 @@ import { MenuComponent, MenuModule } from '@fundamental-ngx/core/menu';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
+import { FD_SHELLBAR_USER_MENU_COMPONENT } from '../tokens';
 import { ShellbarUserMenuButtonDirective } from './shellbar-user-menu-button.directive';
 
 /**
@@ -25,7 +26,13 @@ import { ShellbarUserMenuButtonDirective } from './shellbar-user-menu-button.dir
     templateUrl: './shellbar-user-menu.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [ButtonComponent, MenuModule, AvatarComponent, ShellbarUserMenuButtonDirective]
+    imports: [ButtonComponent, MenuModule, AvatarComponent, ShellbarUserMenuButtonDirective],
+    providers: [
+        {
+            provide: FD_SHELLBAR_USER_MENU_COMPONENT,
+            useExisting: ShellbarUserMenuComponent
+        }
+    ]
 })
 export class ShellbarUserMenuComponent {
     /** The user data. */

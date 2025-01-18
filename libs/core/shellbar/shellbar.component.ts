@@ -28,7 +28,13 @@ import equal from 'fast-deep-equal';
 import { BehaviorSubject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { Breakpoints, NormalizedBreakpoint, ShellbarGroupFlexOptions, ShellbarSizes } from './model/shellbar-sizes';
 import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
-import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT } from './tokens';
+import { ShellbarBrandingComponent } from './shellbar-branding/shellbar-branding.component';
+import {
+    FD_SHELLBAR_ACTIONS_COMPONENT,
+    FD_SHELLBAR_BRANDING_COMPONENT,
+    FD_SHELLBAR_COMPONENT,
+    FD_SHELLBAR_SEARCH_COMPONENT
+} from './tokens';
 
 /**
  * The shellbar offers consistent, responsive navigation across all products and applications.
@@ -164,8 +170,20 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         return this._searchComponent;
     }
 
+    /**
+     * branding component
+     */
+    @ContentChild(FD_SHELLBAR_BRANDING_COMPONENT, { descendants: true, static: false })
+    set brandingComponent(component: Nullable<ShellbarBrandingComponent>) {
+        this._brandingComponent = component;
+    }
+
+    get brandingComponent(): Nullable<ShellbarBrandingComponent> {
+        return this._brandingComponent;
+    }
+
     /** @hidden */
-    @ContentChild(ShellbarActionsComponent)
+    @ContentChild(FD_SHELLBAR_ACTIONS_COMPONENT)
     private _actions?: ShellbarActionsComponent;
 
     /** @hidden */
@@ -193,6 +211,9 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     _showMobileSearch = false;
+
+    /** @hidden */
+    private _brandingComponent: Nullable<ShellbarBrandingComponent>;
 
     /** @hidden */
     private _groupFlex: Nullable<ShellbarGroupFlexOptions>;
@@ -309,7 +330,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     private _placeSearch(): void {
         const size = this._currentSize$.value;
 
-        if (size === 'xl' || (size === 's' && this._showMobileSearch)) {
+        if (size === 's' && this._showMobileSearch) {
             this._attachSearch();
         } else {
             this._detachSearch();
