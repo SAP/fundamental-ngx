@@ -122,7 +122,7 @@
     "conventional-recommended-bump": "7.0.1",
     "coveralls": "3.1.1",
     "dependency-tree": "10.0.9",
-    "eslint": "8.57.0",
+    "eslint": "9.18.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsdoc": "46.9.0",
