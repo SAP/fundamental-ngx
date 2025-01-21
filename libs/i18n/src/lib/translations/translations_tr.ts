@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Dönem',
         decreasePeriodLabel: 'Dönemi azalt',
         navigationInstruction:
-            'Bu listedeki öğeler arasında hareket etmek için yukarı veya aşağı oka basın. Listeler arasında geçiş yapmak için sol veya sağ oka basın.'
+            'Bu listedeki öğeler arasında hareket etmek için yukarı veya aşağı oka basın. Listeler arasında geçiş yapmak için sol veya sağ oka basın.',
+        nightLabel: 'gece',
+        morningLabel: 'sabah',
+        afternoonLabel: 'öğleden sonra',
+        eveningLabel: 'akşam'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Saat seçici girişi',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Sihirbaz'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Daha Fazla'
+        overflowTitleMore: 'Daha Fazla',
+        breadcrumbTrailLabel: 'İçerik Haritası Yolu'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'İzleyiciler',
@@ -512,7 +517,9 @@ export default {
         deselectAllCheckboxLabel: 'Tümünün seçimini kaldır',
         deselectSingleRow: 'Satırın seçimi kaldırmak için boşluk tuşuna basın',
         selectSingleRow: 'Satırı seçmek için boşluk tuşuna basın',
-        loadMore: 'Daha fazla yükle'
+        loadMore: 'Daha fazla yükle',
+        filteredBy: 'Filtre ölçütü',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Düzenle'
@@ -571,5 +578,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Menü düğmesi'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Genişlet/Daralt',
+        groupAriaDescription: 'Bildirim Grubu',
+        groupAriaDescriptionExpanded: 'genişletildi',
+        groupAriaDescriptionCollapsed: 'daraltıldı'
     }
 };
