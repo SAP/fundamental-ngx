@@ -1,6 +1,7 @@
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import {
     AfterViewInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -131,6 +132,12 @@ export class RadioButtonComponent<T = any>
     /** Whether the control is a standalone. */
     @Input()
     standalone = false;
+
+    /** Whether input label should be wrapped */
+    @Input({ transform: booleanAttribute }) wrapLabel: boolean;
+
+    /** Vertical position of the label compared to the radio button */
+    @Input() valignLabel: 'top' | 'middle' = 'middle';
 
     /** Whether the radio button is checked. */
     get checked(): boolean {
