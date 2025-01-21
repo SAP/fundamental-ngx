@@ -54,7 +54,7 @@
         <div
             #inputGroup
             class="fdp-search-field__input-group fd-input-group {{ appearance?.searchClass }}"
-            [class.is-focus]="isFocused"
+            [class.is-focus]="_isFocused"
         >
             @if (_showCategoryDropdown) {
                 <span class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.searchCategoryClass }}">
