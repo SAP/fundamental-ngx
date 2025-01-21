@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Perioadă',
         decreasePeriodLabel: 'Scădere perioadă',
         navigationInstruction:
-            'Pentru a vă deplasa între articolele din această listă, apăsați săgeata în sus sau săgeata în jos. Pentru a comuta între liste, apăsați săgeata la stânga sau săgeata la dreapta.'
+            'Pentru a vă deplasa între articolele din această listă, apăsați săgeata în sus sau săgeata în jos. Pentru a comuta între liste, apăsați săgeata la stânga sau săgeata la dreapta.',
+        nightLabel: 'noaptea',
+        morningLabel: 'dimineața',
+        afternoonLabel: 'după-amiaza',
+        eveningLabel: 'seara'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Intrare selector oră',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Aplicație-asistent'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Mai mult'
+        overflowTitleMore: 'Mai mult',
+        breadcrumbTrailLabel: 'Istoric de navigare'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Observatori',
@@ -512,7 +517,9 @@ export default {
         deselectAllCheckboxLabel: 'Deselectare toate',
         deselectSingleRow: 'Pentru a deselecta linia, apăsați pe BARA DE SPAȚIU',
         selectSingleRow: 'Pentru a selecta linia, apăsați pe BARA DE SPAȚIU',
-        loadMore: 'Încărcare mai multe'
+        loadMore: 'Încărcare mai multe',
+        filteredBy: 'Filtrat după',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Modificare'
@@ -571,5 +578,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Buton meniu'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Extindere/Restrângere',
+        groupAriaDescription: 'Grup de notificări',
+        groupAriaDescriptionExpanded: 'extins',
+        groupAriaDescriptionCollapsed: 'restrâns'
     }
 };

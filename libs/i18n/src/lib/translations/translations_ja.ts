@@ -167,7 +167,11 @@ export default {
         periodLabel: '期間',
         decreasePeriodLabel: '期間を減らす',
         navigationInstruction:
-            'この一覧の項目間を移動するには上下の矢印を押してください。一覧を切り替えるには左右の矢印を押してください。'
+            'この一覧の項目間を移動するには上下の矢印を押してください。一覧を切り替えるには左右の矢印を押してください。',
+        nightLabel: '夜間',
+        morningLabel: '午前中',
+        afternoonLabel: '午後',
+        eveningLabel: '夕方'
     },
     coreTimePicker: {
         timePickerInputLabel: '時刻選択の入力',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'ウィザード'
     },
     coreBreadcrumb: {
-        overflowTitleMore: '表示を増やす'
+        overflowTitleMore: '表示を増やす',
+        breadcrumbTrailLabel: '階層リンク'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: '参照者',
@@ -510,7 +515,9 @@ export default {
         deselectAllCheckboxLabel: 'すべて選択解除',
         deselectSingleRow: '行を選択解除するにはスペースキーを押します。',
         selectSingleRow: '行を選択するにはスペースキーを押します。',
-        loadMore: 'さらにロード'
+        loadMore: 'さらにロード',
+        filteredBy: 'フィルタ基準',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '編集'
@@ -569,5 +576,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'メニューボタン'
+    },
+    coreNotification: {
+        groupHeaderTitle: '展開/圧縮',
+        groupAriaDescription: '通知グループ',
+        groupAriaDescriptionExpanded: '表示',
+        groupAriaDescriptionCollapsed: '非表示'
     }
 };

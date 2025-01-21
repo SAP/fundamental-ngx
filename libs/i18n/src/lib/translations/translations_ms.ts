@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Tempoh',
         decreasePeriodLabel: 'Kurangkan tempoh',
         navigationInstruction:
-            'Untuk bergerak antara item dalam senarai ini, tekan anak panah atas atau anak panah bawah. Untuk bertukar antara senarai, tekan anak panah kiri atau anak panah kanan.'
+            'Untuk bergerak antara item dalam senarai ini, tekan anak panah atas atau anak panah bawah. Untuk bertukar antara senarai, tekan anak panah kiri atau anak panah kanan.',
+        nightLabel: 'pada waktu malam',
+        morningLabel: 'pada waktu pagi',
+        afternoonLabel: 'pada waktu tengah hari',
+        eveningLabel: 'pada waktu petang'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Input pemilih masa',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Bestari'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Selanjutnya'
+        overflowTitleMore: 'Selanjutnya',
+        breadcrumbTrailLabel: 'Jejak Tinggalan'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Pemerhati',
@@ -510,7 +515,9 @@ export default {
         deselectAllCheckboxLabel: 'Nyahpilih semua',
         deselectSingleRow: 'Untuk nyahpilih baris, tekan BAR RUANG',
         selectSingleRow: 'Untuk pilih baris, tekan BAR RUANG',
-        loadMore: 'Muatkan lebih lagi'
+        loadMore: 'Muatkan lebih lagi',
+        filteredBy: 'Ditapis mengikut',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edit'
@@ -569,5 +576,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Butang menu'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Kembangkan/Runtuhkan',
+        groupAriaDescription: 'Kumpulan Pemberitahuan',
+        groupAriaDescriptionExpanded: 'dikembangkan',
+        groupAriaDescriptionCollapsed: 'diruntuhkan'
     }
 };

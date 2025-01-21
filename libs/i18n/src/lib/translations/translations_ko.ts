@@ -167,7 +167,11 @@ export default {
         periodLabel: '기간',
         decreasePeriodLabel: '기간 감소',
         navigationInstruction:
-            '이 리스트의 항목 사이를 이동하려면 위쪽 화살표 또는 아래쪽 화살표를 누릅니다. 리스트 간에 전환하려면 왼쪽 화살표 또는 오른쪽 화살표를 누릅니다.'
+            '이 리스트의 항목 사이를 이동하려면 위쪽 화살표 또는 아래쪽 화살표를 누릅니다. 리스트 간에 전환하려면 왼쪽 화살표 또는 오른쪽 화살표를 누릅니다.',
+        nightLabel: '밤에',
+        morningLabel: '오전에',
+        afternoonLabel: '오후에',
+        eveningLabel: '저녁에'
     },
     coreTimePicker: {
         timePickerInputLabel: '시간 선택 도구 입력',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: '마법사'
     },
     coreBreadcrumb: {
-        overflowTitleMore: '더 보기'
+        overflowTitleMore: '더 보기',
+        breadcrumbTrailLabel: '탐색 경로 추적'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: '참조자',
@@ -509,7 +514,9 @@ export default {
         deselectAllCheckboxLabel: '모두 선택 취소',
         deselectSingleRow: '행 선택을 취소하려면 스페이스바를 누르십시오.',
         selectSingleRow: '행을 선택하려면 스페이스바를 누르십시오.',
-        loadMore: '추가 로드'
+        loadMore: '추가 로드',
+        filteredBy: '필터링 기준',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '편집'
@@ -568,5 +575,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: '메뉴 버튼'
+    },
+    coreNotification: {
+        groupHeaderTitle: '펼치기/접기',
+        groupAriaDescription: '통지 그룹',
+        groupAriaDescriptionExpanded: '펼친 상태',
+        groupAriaDescriptionCollapsed: '접힌 상태'
     }
 };
