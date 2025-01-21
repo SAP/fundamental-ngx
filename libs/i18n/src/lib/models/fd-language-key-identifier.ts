@@ -431,6 +431,7 @@ export type FdLanguageKeyIdentifier =
     | 'platformTable.selectSingleRow'
     | 'platformTable.loadMore'
     | 'platformTable.filteredBy'
+    | 'platformTable.showingBlankOfBlank'
     | 'platformWizardGenerator.summarySectionEditStep'
     | 'platformMessagePopover.allErrors'
     | 'platformMessagePopover.defaultErrors.email'

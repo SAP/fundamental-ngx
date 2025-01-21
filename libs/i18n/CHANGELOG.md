@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.7...v0.54.2-rc.8) (2025-01-21)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+## [0.54.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.6...v0.54.2-rc.7) (2025-01-20)
+
+
+### Features
+
+* **platform:** table growing button state ([#12817](https://github.com/SAP/fundamental-ngx/issues/12817)) ([e624121](https://github.com/SAP/fundamental-ngx/commit/e624121ba9ac3b17f55edd2bc4fb43568c22691b)), closes [#12793](https://github.com/SAP/fundamental-ngx/issues/12793) [#12793](https://github.com/SAP/fundamental-ngx/issues/12793)
+
+
+
+
+
 ## [0.54.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.5...v0.54.2-rc.6) (2025-01-16)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
