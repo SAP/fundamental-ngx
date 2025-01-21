@@ -26,9 +26,9 @@
                     </ng-template>
                 </fd-popover-control>
                 @if (item.details) {
-                    <fd-popover-body>
+                    <ng-template fdPopoverBody>
                         <ng-template [ngTemplateOutlet]="item.details"></ng-template>
-                    </fd-popover-body>
+                    </ng-template>
                 }
             </fd-popover>
         }
