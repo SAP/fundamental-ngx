@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.7...v0.54.2-rc.8) (2025-01-21)
+
+
+### Features
+
+* **platform:** add searchFieldInputText input and searchFieldInputChange events to platform table toolbar ([#12937](https://github.com/SAP/fundamental-ngx/issues/12937)) ([d279ccb](https://github.com/SAP/fundamental-ngx/commit/d279ccb11a013c9f5abcc8aabc3a35f296808786))
+
+
+
+
+
 ## [0.54.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.6...v0.54.2-rc.7) (2025-01-20)
 
 
