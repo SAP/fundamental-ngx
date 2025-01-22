@@ -168,7 +168,11 @@ export default {
         periodLabel: 'Période',
         decreasePeriodLabel: 'Diminuer la période',
         navigationInstruction:
-            'Pour vous déplacer entre les éléments de cette liste, appuyez sur la flèche pointant vers le haut ou le bas. Pour changer de liste, appuyez sur la flèche pointant vers la droite ou la gauche.'
+            'Pour vous déplacer entre les éléments de cette liste, appuyez sur la flèche pointant vers le haut ou le bas. Pour changer de liste, appuyez sur la flèche pointant vers la droite ou la gauche.',
+        nightLabel: 'la nuit',
+        morningLabel: 'le matin',
+        afternoonLabel: "l'après-midi",
+        eveningLabel: 'le soir'
     },
     coreTimePicker: {
         timePickerInputLabel: "Entrée du sélecteur d'heure",
@@ -195,7 +199,8 @@ export default {
         ariaLabel: 'Assistant'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Plus'
+        overflowTitleMore: 'Plus',
+        breadcrumbTrailLabel: "Fil d'Ariane"
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Observateurs',
@@ -513,7 +518,9 @@ export default {
         deselectAllCheckboxLabel: 'Tout désélectionner',
         deselectSingleRow: "Pour désélectionner la ligne, appuyer sur la BARRE D'ESPACEMENT",
         selectSingleRow: "Pour sélectionner la ligne, appuyer sur la BARRE D'ESPACEMENT",
-        loadMore: 'Charger plus'
+        loadMore: 'Charger plus',
+        filteredBy: 'Filtré par',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Modifier'
@@ -572,5 +579,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Bouton de menu'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Développer/Réduire',
+        groupAriaDescription: 'Groupe de notifications',
+        groupAriaDescriptionExpanded: 'développé',
+        groupAriaDescriptionCollapsed: 'réduit'
     }
 };

@@ -655,6 +655,7 @@ export interface FdLanguage {
         deselectAllCheckboxLabel: FdLanguageKey;
         deselectSingleRow: FdLanguageKey;
         selectSingleRow: FdLanguageKey;
+        showingBlankOfBlank: FdLanguageKey;
     };
     platformWizardGenerator: {
         summarySectionEditStep: FdLanguageKey;

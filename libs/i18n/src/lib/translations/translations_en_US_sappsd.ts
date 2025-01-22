@@ -516,7 +516,8 @@ export default {
         deselectAllCheckboxLabel: '[[[Ďēşēĺēċţ ąĺĺ∙∙∙∙∙∙∙]]]',
         deselectSingleRow: '[[[Ţŏ ƌēşēĺēċţ ŗŏŵ, ρŗēşş ŜƤĀĈĔƁĀŘ∙∙∙∙∙∙∙∙∙∙]]]',
         selectSingleRow: '[[[Ţŏ şēĺēċţ ŗŏŵ, ρŗēşş ŜƤĀĈĔƁĀŘ∙∙∙∙∙∙∙∙∙]]]',
-        loadMore: '[[[Ļŏąƌ ɱŏŗē∙∙∙∙∙]]]'
+        loadMore: '[[[Ļŏąƌ ɱŏŗē∙∙∙∙∙]]]',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '[[[Ĕƌįţ]]]'

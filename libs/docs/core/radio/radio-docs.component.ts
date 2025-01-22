@@ -11,11 +11,15 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { RadioExampleComponent } from './examples/radio-example.component';
 import { RadioFormGroupExampleComponent } from './examples/radio-form-group-example.component';
+import { RadioTruncationExampleComponent } from './examples/radio-truncation-example.component';
 
 const formHtml = 'radio-example.component.html';
 const formTs = 'radio-example.component.ts';
 const formGroupInputHtml = 'radio-form-group-example.component.html';
 const formGroupInputTs = 'radio-form-group-example.component.ts';
+
+const truncationHtml = 'radio-truncation-example.component.html';
+const truncationTs = 'radio-truncation-example.component.ts';
 
 @Component({
     selector: 'app-radio',
@@ -28,7 +32,8 @@ const formGroupInputTs = 'radio-form-group-example.component.ts';
         CodeExampleComponent,
         SeparatorComponent,
         DescriptionComponent,
-        RadioFormGroupExampleComponent
+        RadioFormGroupExampleComponent,
+        RadioTruncationExampleComponent
     ]
 })
 export class RadioDocsComponent {
@@ -58,6 +63,21 @@ export class RadioDocsComponent {
             code: getAssetFromModuleAssets(formGroupInputTs),
             fileName: 'radio-form-group-example',
             component: 'RadioFormGroupExampleComponent'
+        }
+    ];
+
+    radioTruncation: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(truncationHtml),
+            fileName: 'radio-truncation-example',
+            component: 'RadioTruncationExampleComponent'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(truncationTs),
+            fileName: 'radio-truncation-example',
+            component: 'RadioTruncationExampleComponent'
         }
     ];
 }

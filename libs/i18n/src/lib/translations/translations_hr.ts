@@ -3,7 +3,7 @@
 export default {
     coreCalendar: {
         yearSelectionLabel: 'Odaberi godinu',
-        yearsRangeSelectionLabel: 'Odabiri raspon godina',
+        yearsRangeSelectionLabel: 'Odaberi raspon godina',
         monthSelectionLabel: 'Odaberi mjesec',
         dateSelectionLabel: 'Odaberi datum',
         previousYearLabel: 'Prethodna godina',
@@ -167,7 +167,11 @@ export default {
         periodLabel: 'Razdoblje',
         decreasePeriodLabel: 'Smanji razdoblje',
         navigationInstruction:
-            'Za kretanje između stavki na ovom popisu pritisnite strelicu Gore ili strelicu Dolje. Za prebacivanje s popisa na popis pritisnite strelicu Lijevo ili strelicu Desno.'
+            'Za kretanje između stavki na ovom popisu pritisnite strelicu Gore ili strelicu Dolje. Za prebacivanje s popisa na popis pritisnite strelicu Lijevo ili strelicu Desno.',
+        nightLabel: 'tijekom noći',
+        morningLabel: 'ujutro',
+        afternoonLabel: 'tijekom poslijepodneva',
+        eveningLabel: 'navečer'
     },
     coreTimePicker: {
         timePickerInputLabel: 'Unos odabira vremena',
@@ -194,7 +198,8 @@ export default {
         ariaLabel: 'Čarobnjak'
     },
     coreBreadcrumb: {
-        overflowTitleMore: 'Više'
+        overflowTitleMore: 'Više',
+        breadcrumbTrailLabel: 'Put hijerarhijske navigacije'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Promatrači',
@@ -423,8 +428,8 @@ export default {
         editableCellStringPlaceholder: 'Unesite vrijednost',
         P13ColumnsDialogHeader: 'Stupci',
         P13ColumnsDialogSearchPlaceholder: 'Pretraži',
-        P13ColumnsDialogsShowSelected: 'Prikaži odabrano',
-        P13ColumnsDialogShowAll: 'Prikaži sve',
+        P13ColumnsDialogsShowSelected: 'Pokaži odabrano',
+        P13ColumnsDialogShowAll: 'Pokaži sve',
         P13ColumnsDialogSelectAll: 'Odaberi sve ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',
         P13ColumnsDialogCancelBtnLabel: 'Otkaži',
@@ -460,7 +465,7 @@ export default {
         P13FilterDialogCancelBtnLabel: 'Otkaži',
         P13GroupDialogHeader: 'Grupa',
         P13GroupDialogNoneSelectedColumnSelectPlaceholder: '(nijedno)',
-        P13GroupDialogShowFieldAsColumnCheckboxLabel: 'Prikaži polje kao stupac',
+        P13GroupDialogShowFieldAsColumnCheckboxLabel: 'Pokaži polje kao stupac',
         P13GroupDialogRemoveGroupBtnTitle: 'Ukloni',
         P13GroupDialogAddNewGroupBtnTitle: 'Dodaj novo',
         P13GroupDialogConfirmationBtnLabel: 'OK',
@@ -511,7 +516,9 @@ export default {
         deselectAllCheckboxLabel: 'Poništi sve odabire',
         deselectSingleRow: 'Za poništenje odabira retka pritisnite RAZMAKNICU',
         selectSingleRow: 'Za odabir retka pritisnite RAZMAKNICU',
-        loadMore: 'Učitaj više'
+        loadMore: 'Učitaj više',
+        filteredBy: 'Filtrirano po',
+        showingBlankOfBlank: 'Showing {totalGrowingItemsCount} of {totalGrowingItemsCount}'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Uredi'
@@ -570,5 +577,11 @@ export default {
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Gumb Izbornik'
+    },
+    coreNotification: {
+        groupHeaderTitle: 'Proširi/sažmi',
+        groupAriaDescription: 'Grupa obavijesti',
+        groupAriaDescriptionExpanded: 'prošireno',
+        groupAriaDescriptionCollapsed: 'sažeto'
     }
 };

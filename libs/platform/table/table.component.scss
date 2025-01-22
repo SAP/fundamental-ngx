@@ -568,6 +568,14 @@ fdk-dynamic-portal {
         }
     }
 
+    &__growing-button-total {
+        border-top: var(--fdList_Item_Action_Border) !important;
+
+        .fd-list__title {
+            line-height: 2.75rem;
+        }
+    }
+
     &.fdp-table--outer-scroll {
         .fd-toolbar {
             position: sticky;

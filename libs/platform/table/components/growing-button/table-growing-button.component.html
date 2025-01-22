@@ -1,30 +1,45 @@
 <div fd-list role="none">
-    <div
-        fd-list-item
-        ariaRole="none"
-        class="fdp-table__growing-button"
-        [growing]="true"
-        [style.height]="'auto'"
-        [action]="true"
-    >
-        <a fd-list-link (click)="_loadMore()">
-            <div fd-list-title>
-                <div
-                    class="fdp-table__growing-button-content"
-                    [class.fdp-table__growing-button-content--byline]="showItemsCount"
-                >
-                    @if (!showItemsCount) {
-                        {{ 'platformTable.loadMore' | fdTranslate }}
-                    } @else {
-                        <div class="fdp-table__growing-button__title">
+    @if (_table.loadedRows$() < _dataSourceDirective.totalItems$()) {
+        <div
+            fd-list-item
+            ariaRole="none"
+            class="fdp-table__growing-button"
+            [growing]="true"
+            [style.height]="'auto'"
+            [action]="true"
+        >
+            <a fd-list-link (click)="_loadMore()">
+                <div fd-list-title>
+                    <div
+                        class="fdp-table__growing-button-content"
+                        [class.fdp-table__growing-button-content--byline]="showItemsCount"
+                    >
+                        @if (!showItemsCount) {
                             {{ 'platformTable.loadMore' | fdTranslate }}
-                        </div>
-                        <div class="fdp-table__growing-button__subtitle">
-                            [ {{ _table.loadedRows$() }} / {{ _dataSourceDirective.totalItems$() }} ]
-                        </div>
-                    }
+                        } @else {
+                            <div class="fdp-table__growing-button__title">
+                                {{ 'platformTable.loadMore' | fdTranslate }}
+                            </div>
+                            <div class="fdp-table__growing-button__subtitle">
+                                [ {{ _table.loadedRows$() }} / {{ _dataSourceDirective.totalItems$() }} ]
+                            </div>
+                        }
+                    </div>
                 </div>
-            </div>
-        </a>
-    </div>
+            </a>
+        </div>
+    } @else if (_table.loadedRows$() === _dataSourceDirective.totalItems$() && showItemsCount) {
+        <li
+            fd-list-item
+            [style.height]="'auto'"
+            ariaRole="none"
+            class="fdp-table__growing-button-content fdp-table__growing-button-total"
+        >
+            <span fd-list-title>
+                {{
+                    'platformTable.showingBlankOfBlank' | fdTranslate: { totalGrowingItemsCount: _table.loadedRows$() }
+                }}
+            </span>
+        </li>
+    }
 </div>
