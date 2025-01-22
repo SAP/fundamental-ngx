@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.9...v0.54.2-rc.10) (2025-01-22)
+
+
+### Bug Fixes
+
+* **core:** add label wrapping behavior for Radio Button ([#12956](https://github.com/SAP/fundamental-ngx/issues/12956)) ([f4f64c0](https://github.com/SAP/fundamental-ngx/commit/f4f64c0444eb37e34bf68e9c3e3db6a3794e6d19))
+
+
+
+
+
 ## [0.54.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.8...v0.54.2-rc.9) (2025-01-21)
 
 
