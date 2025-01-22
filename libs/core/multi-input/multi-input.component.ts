@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ENTER, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -735,8 +735,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
             }
         } else if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, ENTER])) {
             this.openChangeHandle(true);
-        } else if (KeyUtil.isKeyCode(event, ESCAPE)) {
-            this.openChangeHandle(false);
         } else if (KeyUtil.isKeyCode(event, TAB) && this.open) {
             this._close();
         } else if (KeyUtil.isKeyType(event, 'alphabetical') || KeyUtil.isKeyType(event, 'numeric')) {
