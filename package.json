@@ -91,7 +91,7 @@
     "@nx/jest": "19.2.3",
     "@nx/js": "19.2.3",
     "@nx/plugin": "19.2.3",
-    "@nx/workspace": "19.2.3",
+    "@nx/workspace": "20.3.3",
     "@sap-ui/common-css": "0.38.0",
     "@schematics/angular": "18.0.4",
     "@swc-node/register": "1.9.2",
