@@ -103,7 +103,7 @@
     "@types/lodash-es": "4.17.6",
     "@types/marked": "5.0.2",
     "@types/node": "^18.16.9",
-    "@typescript-eslint/eslint-plugin": "7.9.0",
+    "@typescript-eslint/eslint-plugin": "8.21.0",
     "@typescript-eslint/parser": "7.9.0",
     "@wdio/allure-reporter": "7.7.3",
     "@wdio/cli": "7.16.16",
