@@ -13818,7 +13818,7 @@ __metadata:
     fundamental-styles: "npm:0.38.0"
     fuse.js: "npm:7.0.0"
     highlight.js: "npm:11.7.0"
-    husky: "npm:8.0.2"
+    husky: "npm:9.1.7"
     intl: "npm:1.2.5"
     intl-messageformat: "npm:10.5.2"
     jasmine-core: "npm:4.5.0"
@@ -14811,12 +14811,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"husky@npm:8.0.2":
-  version: 8.0.2
-  resolution: "husky@npm:8.0.2"
+"husky@npm:9.1.7":
+  version: 9.1.7
+  resolution: "husky@npm:9.1.7"
   bin:
-    husky: lib/bin.js
-  checksum: 10/a988f05c804d8b3d26ad5db343d422f0344ccdadfd9347b03a53100f7e46f2375096cf222176ddd482072a1a8de688cb4f8f825c729a98f4003f7cd5a56759d9
+    husky: bin.js
+  checksum: 10/c2412753f15695db369634ba70f50f5c0b7e5cb13b673d0826c411ec1bd9ddef08c1dad89ea154f57da2521d2605bd64308af748749b27d08c5f563bcd89975f
   languageName: node
   linkType: hard
 
