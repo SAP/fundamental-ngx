@@ -5888,94 +5888,94 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-arm64@npm:1.5.7":
-  version: 1.5.7
-  resolution: "@swc/core-darwin-arm64@npm:1.5.7"
+"@swc/core-darwin-arm64@npm:1.10.9":
+  version: 1.10.9
+  resolution: "@swc/core-darwin-arm64@npm:1.10.9"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-x64@npm:1.5.7":
-  version: 1.5.7
-  resolution: "@swc/core-darwin-x64@npm:1.5.7"
+"@swc/core-darwin-x64@npm:1.10.9":
+  version: 1.10.9
+  resolution: "@swc/core-darwin-x64@npm:1.10.9"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm-gnueabihf@npm:1.5.7":
-  version: 1.5.7
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.5.7"
+"@swc/core-linux-arm-gnueabihf@npm:1.10.9":
+  version: 1.10.9
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.10.9"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-gnu@npm:1.5.7":
-  version: 1.5.7
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.5.7"
+"@swc/core-linux-arm64-gnu@npm:1.10.9":
+  version: 1.10.9
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.10.9"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-musl@npm:1.5.7":
-  version: 1.5.7
-  resolution: "@swc/core-linux-arm64-musl@npm:1.5.7"
+"@swc/core-linux-arm64-musl@npm:1.10.9":
+  version: 1.10.9
+  resolution: "@swc/core-linux-arm64-musl@npm:1.10.9"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-gnu@npm:1.5.7":
-  version: 1.5.7
-  resolution: "@swc/core-linux-x64-gnu@npm:1.5.7"
+"@swc/core-linux-x64-gnu@npm:1.10.9":
+  version: 1.10.9
+  resolution: "@swc/core-linux-x64-gnu@npm:1.10.9"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-musl@npm:1.5.7":
-  version: 1.5.7
-  resolution: "@swc/core-linux-x64-musl@npm:1.5.7"
+"@swc/core-linux-x64-musl@npm:1.10.9":
+  version: 1.10.9
+  resolution: "@swc/core-linux-x64-musl@npm:1.10.9"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-win32-arm64-msvc@npm:1.5.7":
-  version: 1.5.7
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.5.7"
+"@swc/core-win32-arm64-msvc@npm:1.10.9":
+  version: 1.10.9
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.10.9"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-win32-ia32-msvc@npm:1.5.7":
-  version: 1.5.7
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.5.7"
+"@swc/core-win32-ia32-msvc@npm:1.10.9":
+  version: 1.10.9
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.10.9"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@swc/core-win32-x64-msvc@npm:1.5.7":
-  version: 1.5.7
-  resolution: "@swc/core-win32-x64-msvc@npm:1.5.7"
+"@swc/core-win32-x64-msvc@npm:1.10.9":
+  version: 1.10.9
+  resolution: "@swc/core-win32-x64-msvc@npm:1.10.9"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core@npm:1.5.7":
-  version: 1.5.7
-  resolution: "@swc/core@npm:1.5.7"
+"@swc/core@npm:1.10.9":
+  version: 1.10.9
+  resolution: "@swc/core@npm:1.10.9"
   dependencies:
-    "@swc/core-darwin-arm64": "npm:1.5.7"
-    "@swc/core-darwin-x64": "npm:1.5.7"
-    "@swc/core-linux-arm-gnueabihf": "npm:1.5.7"
-    "@swc/core-linux-arm64-gnu": "npm:1.5.7"
-    "@swc/core-linux-arm64-musl": "npm:1.5.7"
-    "@swc/core-linux-x64-gnu": "npm:1.5.7"
-    "@swc/core-linux-x64-musl": "npm:1.5.7"
-    "@swc/core-win32-arm64-msvc": "npm:1.5.7"
-    "@swc/core-win32-ia32-msvc": "npm:1.5.7"
-    "@swc/core-win32-x64-msvc": "npm:1.5.7"
-    "@swc/counter": "npm:^0.1.2"
-    "@swc/types": "npm:0.1.7"
+    "@swc/core-darwin-arm64": "npm:1.10.9"
+    "@swc/core-darwin-x64": "npm:1.10.9"
+    "@swc/core-linux-arm-gnueabihf": "npm:1.10.9"
+    "@swc/core-linux-arm64-gnu": "npm:1.10.9"
+    "@swc/core-linux-arm64-musl": "npm:1.10.9"
+    "@swc/core-linux-x64-gnu": "npm:1.10.9"
+    "@swc/core-linux-x64-musl": "npm:1.10.9"
+    "@swc/core-win32-arm64-msvc": "npm:1.10.9"
+    "@swc/core-win32-ia32-msvc": "npm:1.10.9"
+    "@swc/core-win32-x64-msvc": "npm:1.10.9"
+    "@swc/counter": "npm:^0.1.3"
+    "@swc/types": "npm:^0.1.17"
   peerDependencies:
-    "@swc/helpers": ^0.5.0
+    "@swc/helpers": "*"
   dependenciesMeta:
     "@swc/core-darwin-arm64":
       optional: true
@@ -6000,11 +6000,11 @@ __metadata:
   peerDependenciesMeta:
     "@swc/helpers":
       optional: true
-  checksum: 10/83e03908db40f2133c3624a83d4550336d7a56e64af7d42fd959c746b8da950a253f3c6d9eaa3467e10abeda024aa6b039a987adc839326f969e1d26625f14ef
+  checksum: 10/543e79c249f6052883d656035321d449cf6c0f2ea54f786d5e3b96394d4cf201b293d6c3f897cc604eb145b21cce82f904306931fe9efbc6a50c714a5d5d97f0
   languageName: node
   linkType: hard
 
-"@swc/counter@npm:^0.1.2, @swc/counter@npm:^0.1.3":
+"@swc/counter@npm:^0.1.3":
   version: 0.1.3
   resolution: "@swc/counter@npm:0.1.3"
   checksum: 10/df8f9cfba9904d3d60f511664c70d23bb323b3a0803ec9890f60133954173047ba9bdeabce28cd70ba89ccd3fd6c71c7b0bd58be85f611e1ffbe5d5c18616598
@@ -6020,12 +6020,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/types@npm:0.1.7":
-  version: 0.1.7
-  resolution: "@swc/types@npm:0.1.7"
+"@swc/types@npm:^0.1.17":
+  version: 0.1.17
+  resolution: "@swc/types@npm:0.1.17"
   dependencies:
     "@swc/counter": "npm:^0.1.3"
-  checksum: 10/ed66c26b36972a74f852c1781fadc75946578abfeeea58f110684833b5d1e70f28a77ddb82fd5bf3cf3c4dad0e1b6a1c924d7e2cc7a99f9b16ed16fe266bba25
+  checksum: 10/ddef1ad5bfead3acdfc41f14e79ba43a99200eb325afbad5716058dbe36358b0513400e9f22aff32432be84a98ae93df95a20b94192f69b8687144270e4eaa18
   languageName: node
   linkType: hard
 
@@ -13774,7 +13774,7 @@ __metadata:
     "@stackblitz/sdk": "npm:1.9.0"
     "@swc-node/register": "npm:1.9.2"
     "@swc/cli": "npm:0.3.12"
-    "@swc/core": "npm:1.5.7"
+    "@swc/core": "npm:1.10.9"
     "@swc/helpers": "npm:0.5.11"
     "@types/google.visualization": "npm:0.0.71"
     "@types/jasmine": "npm:5.1.3"
