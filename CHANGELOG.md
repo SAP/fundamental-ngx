@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.10...v0.54.2-rc.11) (2025-01-27)
+
+
+### Features
+
+* **platform:** add option for configuring VHD dialog title heading level ([#12960](https://github.com/SAP/fundamental-ngx/issues/12960)) ([1976699](https://github.com/SAP/fundamental-ngx/commit/1976699249bd4d78fdfe9f0d94dca3135b96925d))
+
+
+
+
+
 ## [0.54.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.9...v0.54.2-rc.10) (2025-01-22)
 
 
