@@ -17,7 +17,8 @@ import {
     ViewChild,
     ViewEncapsulation,
     computed,
-    inject
+    inject,
+    input
 } from '@angular/core';
 import { Observable, Subject, Subscription, filter, isObservable, of, take, tap } from 'rxjs';
 
@@ -49,6 +50,7 @@ import { FormControlComponent, FormLabelComponent } from '@fundamental-ngx/core/
 import { LayoutGridColDirective, LayoutGridComponent, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
 import { ListIconDirective, ListLinkDirective, ListTitleDirective } from '@fundamental-ngx/core/list';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { HeadingLevel } from '@fundamental-ngx/core/shared';
 import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 import { TabItemDirective, TabLinkDirective, TabNavComponent, TabTagDirective } from '@fundamental-ngx/core/tabs';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -292,6 +294,16 @@ export class PlatformValueHelpDialogComponent<T = any> extends VhdComponent impl
     /** @hidden Internal container for dialog */
     @ViewChild('container', { read: TemplateRef })
     dialogContainer: TemplateRef<any>;
+
+    /**
+     * Heading level of the dialog title.
+     */
+    headingLevel = input<HeadingLevel>(5);
+
+    /** @hidden */
+    _headingLevel = computed(() =>
+        this.headingLevel() ? Number.parseInt(`${this.headingLevel()}`.replace(/\D/g, ''), 10) : undefined
+    );
 
     /** @hidden */
     activeDialog?: DialogRef;
