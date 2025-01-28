@@ -20,7 +20,14 @@
     [value]="value"
     [attr.value]="value"
 />
-<label class="fd-radio__label" [attr.title]="title" [for]="id" (click)="labelClicked($event)">
+<label
+    class="fd-radio__label"
+    [class.fd-radio__label--wrap]="wrapLabel && valignLabel === 'middle'"
+    [class.fd-radio__label--wrap-top-aligned]="wrapLabel && valignLabel === 'top'"
+    [attr.title]="title"
+    [for]="id"
+    (click)="labelClicked($event)"
+>
     <span class="fd-radio__text">
         <ng-content></ng-content>
     </span>
