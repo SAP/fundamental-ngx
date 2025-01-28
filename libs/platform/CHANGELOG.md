@@ -3,6 +3,69 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.11...v0.54.2-rc.12) (2025-01-28)
+
+
+### Bug Fixes
+
+* **platform:** table multi-select checkbox a11y improvements ([#12962](https://github.com/SAP/fundamental-ngx/issues/12962)) ([b9ca460](https://github.com/SAP/fundamental-ngx/commit/b9ca460630560a070cb97dc4233e5d03e080f0fd))
+
+
+
+
+
+## [0.54.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.10...v0.54.2-rc.11) (2025-01-27)
+
+
+### Features
+
+* **platform:** add option for configuring VHD dialog title heading level ([#12960](https://github.com/SAP/fundamental-ngx/issues/12960)) ([1976699](https://github.com/SAP/fundamental-ngx/commit/1976699249bd4d78fdfe9f0d94dca3135b96925d))
+
+
+
+
+
+## [0.54.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.9...v0.54.2-rc.10) (2025-01-22)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.54.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.8...v0.54.2-rc.9) (2025-01-21)
+
+
+### Bug Fixes
+
+* **platform:** bug fix for search field not applying active style on initial focus ([#12936](https://github.com/SAP/fundamental-ngx/issues/12936)) ([417d8ee](https://github.com/SAP/fundamental-ngx/commit/417d8eef8698c2c7d11def6fa7aa4ceb30212d24))
+
+
+
+
+
+## [0.54.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.7...v0.54.2-rc.8) (2025-01-21)
+
+
+### Features
+
+* **platform:** add searchFieldInputText input and searchFieldInputChange events to platform table toolbar ([#12937](https://github.com/SAP/fundamental-ngx/issues/12937)) ([d279ccb](https://github.com/SAP/fundamental-ngx/commit/d279ccb11a013c9f5abcc8aabc3a35f296808786))
+
+
+
+
+
+## [0.54.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.6...v0.54.2-rc.7) (2025-01-20)
+
+
+### Features
+
+* **platform:** table growing button state ([#12817](https://github.com/SAP/fundamental-ngx/issues/12817)) ([e624121](https://github.com/SAP/fundamental-ngx/commit/e624121ba9ac3b17f55edd2bc4fb43568c22691b)), closes [#12793](https://github.com/SAP/fundamental-ngx/issues/12793) [#12793](https://github.com/SAP/fundamental-ngx/issues/12793)
+
+
+
+
+
 ## [0.54.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.5...v0.54.2-rc.6) (2025-01-16)
 
 **Note:** Version bump only for package @fundamental-ngx/platform

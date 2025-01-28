@@ -653,6 +653,9 @@ export interface FdLanguage {
         sortDialogCancelBtnLabel: FdLanguageKey;
         selectAllCheckboxLabel: FdLanguageKey;
         deselectAllCheckboxLabel: FdLanguageKey;
+        deselectAllCheckboxLongLabel: FdLanguageKey;
+        selectAllCheckboxLongLabel: FdLanguageKey;
+        selectAllCheckboxMixedLongLabel: FdLanguageKey;
         deselectSingleRow: FdLanguageKey;
         selectSingleRow: FdLanguageKey;
         showingBlankOfBlank: FdLanguageKey;
