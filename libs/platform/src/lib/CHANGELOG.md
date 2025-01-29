@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.50](https://github.com/SAP/fundamental-ngx/compare/v0.43.49...v0.43.50) (2025-01-29)
+
+
+### Bug Fixes
+
+* **platform:** bug where vertical blue resizing line stays after horizontal scrolling platform table ([#12934](https://github.com/SAP/fundamental-ngx/issues/12934)) ([1dc1f67](https://github.com/SAP/fundamental-ngx/commit/1dc1f67ce3bc580af39417c81eb10da03c988dab))
+
+
+
+
+
 ## [0.43.49](https://github.com/SAP/fundamental-ngx/compare/v0.43.48...v0.43.49) (2025-01-09)
 
 
