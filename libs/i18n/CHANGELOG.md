@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.11...v0.54.2-rc.12) (2025-01-28)
+
+
+### Bug Fixes
+
+* **platform:** table multi-select checkbox a11y improvements ([#12962](https://github.com/SAP/fundamental-ngx/issues/12962)) ([b9ca460](https://github.com/SAP/fundamental-ngx/commit/b9ca460630560a070cb97dc4233e5d03e080f0fd))
+
+
+
+
+
 ## [0.54.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.10...v0.54.2-rc.11) (2025-01-27)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
