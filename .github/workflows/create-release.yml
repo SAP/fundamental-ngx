@@ -85,10 +85,10 @@ jobs:
               with:
                   parallel-commands: |
                       npx nx run-many --target=lint --projects=i18n,cdk,core,platform,moment-adapter,datetime-adapter,cx,btp --parallel=2
-                      npx nx run-many --target=build --all --parallel=1
+                      npx nx run-many --target=build --skip-nx-cache --all --parallel=1
 
             - name: Pack libraries
-              run: npx nx run-many --target=prepare --projects=i18n,cdk,core,platform,moment-adapter,datetime-adapter,cx,btp --parallel=3
+              run: npx nx run-many --target=prepare --skip-nx-cache --projects=i18n,cdk,core,platform,moment-adapter,datetime-adapter,cx,btp --parallel=3
               env:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
                   FD_ENV_VERSION_PLACEHOLDER: ${{ steps.bumpVersion.outputs.newVersion }}
