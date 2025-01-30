@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.14...v0.54.2-rc.15) (2025-01-30)
+
+
+### Features
+
+* **core:** added readonly to radio buttons ([#12961](https://github.com/SAP/fundamental-ngx/issues/12961)) ([9178b74](https://github.com/SAP/fundamental-ngx/commit/9178b74e6b5edc497f30354e5d5bb18781882255))
+* **core:** lazy load popover body ([#12955](https://github.com/SAP/fundamental-ngx/issues/12955)) ([ee126e2](https://github.com/SAP/fundamental-ngx/commit/ee126e202d73886f350f2c65bd229669ccd95ac3))
+
+
+
+
+
 ## [0.54.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.54.2-rc.13...v0.54.2-rc.14) (2025-01-29)
 
 **Note:** Version bump only for package @fundamental-ngx/core
