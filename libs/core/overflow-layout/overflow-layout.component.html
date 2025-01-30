@@ -47,7 +47,7 @@
                         {{ 'coreOverflowLayout.moreItemsButton' | fdTranslate: { count: _hiddenItems.length } }}
                     </button>
                 </fd-popover-control>
-                <fd-popover-body>
+                <ng-template fdPopoverBody>
                     <div fdOverflowLayoutPopoverContent [items]="_hiddenItems">
                         @for (item of _hiddenItems; track item) {
                             <ng-template
@@ -63,7 +63,7 @@
                             ></ng-template>
                         }
                     </div>
-                </fd-popover-body>
+                </ng-template>
             </fd-popover>
         </ng-template>
         <ng-template
