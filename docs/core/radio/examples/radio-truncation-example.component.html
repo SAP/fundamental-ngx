@@ -1,0 +1,45 @@
+<fieldset fd-fieldset style="max-width: 400px">
+    <legend fd-form-legend>Text Truncation in Radio buttons</legend>
+    <fd-form-group>
+        <div fd-form-item>
+            <fd-radio-button value="valt1" [id]="'radio-t-1'" name="radio-truncate-1" [(ngModel)]="optionVariable">
+                <b>Default text wrapping behaviour</b> Option One Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Odit nam totam maxime quis, sed molestiae quisquam eveniet ratione corporis quam libero omnis
+                dignissimos delectus error inventore ullam sequi. Dolores, quaerat? Lorem ipsum dolor sit, amet
+                consectetur adipisicing elit. Placeat sit dolor cumque. Doloremque repellat dicta, libero neque dolor
+                aliquam. Eius omnis libero aliquam quisquam magni harum aliquid officia maxime dignissimos!
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                value="valt2"
+                [id]="'radio-t-2'"
+                name="radio-truncate-1"
+                [(ngModel)]="optionVariable"
+                wrapLabel
+            >
+                <b>Wrapping behaviour</b> Option Two Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit nam
+                totam maxime quis, sed molestiae quisquam eveniet ratione corporis quam libero omnis dignissimos
+                delectus error inventore ullam sequi. Dolores, quaerat? Lorem ipsum dolor sit, amet consectetur
+                adipisicing elit. Placeat sit dolor cumque. Doloremque repellat dicta, libero neque dolor aliquam. Eius
+                omnis libero aliquam quisquam magni harum aliquid officia maxime dignissimos!
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                value="valt3"
+                [id]="'radio-t-3'"
+                name="radio-truncate-1"
+                [(ngModel)]="optionVariable"
+                wrapLabel
+                valignLabel="top"
+            >
+                <b>Wrapping behaviour, top aligned</b> Option Three Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Odit nam totam maxime quis, sed molestiae quisquam eveniet ratione corporis quam libero omnis
+                dignissimos delectus error inventore ullam sequi. Dolores, quaerat? Lorem ipsum dolor sit, amet
+                consectetur adipisicing elit. Placeat sit dolor cumque. Doloremque repellat dicta, libero neque dolor
+                aliquam. Eius omnis libero aliquam quisquam magni harum aliquid officia maxime dignissimos!
+            </fd-radio-button>
+        </div>
+    </fd-form-group>
+</fieldset>

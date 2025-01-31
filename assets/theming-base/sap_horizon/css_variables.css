@@ -1,12 +1,12 @@
 /**
 * Copyright (c) 2012-2024 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
-* Theming Engine 14.1.4
-* data:{"Path": "Base.baseLib.sap_horizon.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["baseTheme"], "Tags": ["Fiori_3","LightColorScheme"], "FallbackThemeId": "sap_fiori_3", "Engine": {"Name": "theming-engine", "Version": "14.1.4"}, "Version": { "Build": "11.22.0.20241104101410", "Source": "11.22.0"}}
+* Theming Engine 14.2.8
+* data:{"Path": "Base.baseLib.sap_horizon.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["baseTheme"], "Tags": ["Fiori_3","LightColorScheme"], "FallbackThemeId": "sap_fiori_3", "Engine": {"Name": "theming-engine", "Version": "14.2.8"}, "Version": { "Build": "11.24.0.20241212104249", "Source": "11.24.0"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_horizon.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["baseTheme"], "Tags": ["Fiori_3","LightColorScheme"], "FallbackThemeId": "sap_fiori_3", "Engine": {"Name": "theming-engine", "Version": "14.1.4"}, "Version": { "Build": "11.22.0.20241104101410", "Source": "11.22.0"}}');}
-:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_horizon.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["baseTheme"], "Tags": ["Fiori_3","LightColorScheme"], "FallbackThemeId": "sap_fiori_3", "Engine": {"Name": "theming-engine", "Version": "14.1.4"}, "Version": { "Build": "11.22.0.20241104101410", "Source": "11.22.0"}};}
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_horizon.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["baseTheme"], "Tags": ["Fiori_3","LightColorScheme"], "FallbackThemeId": "sap_fiori_3", "Engine": {"Name": "theming-engine", "Version": "14.2.8"}, "Version": { "Build": "11.24.0.20241212104249", "Source": "11.24.0"}}');}
+:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_horizon.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["baseTheme"], "Tags": ["Fiori_3","LightColorScheme"], "FallbackThemeId": "sap_fiori_3", "Engine": {"Name": "theming-engine", "Version": "14.2.8"}, "Version": { "Build": "11.24.0.20241212104249", "Source": "11.24.0"}};}
 :root {
   --sapBrandColor: #0070f2;
   --sapHighlightColor: #0064d9;
@@ -612,7 +612,7 @@
   --sapGroup_ContentBackground: #fff;
   --sapGroup_ContentBorderColor: #d9d9d9;
   --sapGroup_BorderWidth: .0625rem;
-  --sapGroup_BorderCornerRadius: .5rem;
+  --sapGroup_BorderCornerRadius: .75rem;
   --sapGroup_FooterBackground: transparent;
   --sapToolbar_Background: #fff;
   --sapToolbar_SeparatorColor: #d9d9d9;
@@ -642,10 +642,12 @@
   --sapList_TableFixedBorderColor: #8c8c8c;
   --sapList_TableFixedColumnBorderWidth: .0625rem;
   --sapList_TableFixedRowBorderWidth: .125rem;
+  --sapMessage_BorderWidth: .0625rem;
   --sapMessage_ErrorBorderColor: #ff8ec4;
   --sapMessage_WarningBorderColor: #ffe770;
   --sapMessage_SuccessBorderColor: #cee67e;
   --sapMessage_InformationBorderColor: #7bcfff;
+  --sapMessage_Button_Hover_Background: rgba(234,236,238,0.2);
   --sapPopover_BorderCornerRadius: .5rem;
   --sapProgress_Background: #d5dadd;
   --sapProgress_BorderColor: #d5dadd;
@@ -688,6 +690,7 @@
   --sapSlider_BorderColor: #d5dadd;
   --sapSlider_Selected_Background: #0064d9;
   --sapSlider_Selected_BorderColor: #0064d9;
+  --sapSlider_Selected_Dimension: 111px;
   --sapSlider_HandleBackground: #fff;
   --sapSlider_HandleBorderColor: #b0d5ff;
   --sapSlider_RangeHandleBackground: #fff;
@@ -718,6 +721,32 @@
   --sapObjectHeader_Subtitle_TextColor: #556b82;
   --sapBlockLayer_Background: #000;
   --sapBlockLayer_Opacity: 0.2;
+  --sapTab_TextColor: #1d2d3e;
+  --sapTab_ForegroundColor: #0064d9;
+  --sapTab_IconColor: #0064d9;
+  --sapTab_Background: #fff;
+  --sapTab_Selected_TextColor: #0064d9;
+  --sapTab_Selected_IconColor: #fff;
+  --sapTab_Selected_Background: #0064d9;
+  --sapTab_Selected_Indicator_Dimension: .1875rem;
+  --sapTab_Positive_TextColor: #256f3a;
+  --sapTab_Positive_ForegroundColor: #30914c;
+  --sapTab_Positive_IconColor: #30914c;
+  --sapTab_Positive_Selected_TextColor: #256f3a;
+  --sapTab_Positive_Selected_IconColor: #fff;
+  --sapTab_Positive_Selected_Background: #30914c;
+  --sapTab_Negative_TextColor: #aa0808;
+  --sapTab_Negative_ForegroundColor: #f53232;
+  --sapTab_Negative_IconColor: #f53232;
+  --sapTab_Negative_Selected_TextColor: #aa0808;
+  --sapTab_Negative_Selected_IconColor: #fff;
+  --sapTab_Negative_Selected_Background: #f53232;
+  --sapTab_Critical_TextColor: #b44f00;
+  --sapTab_Critical_ForegroundColor: #e76500;
+  --sapTab_Critical_IconColor: #e76500;
+  --sapTab_Critical_Selected_TextColor: #b44f00;
+  --sapTab_Critical_Selected_IconColor: #fff;
+  --sapTab_Critical_Selected_Background: #e76500;
   --sapTile_Background: #fff;
   --sapTile_Hover_Background: #eaecee;
   --sapTile_Active_Background: #dee2e5;
@@ -764,6 +793,8 @@
   --sapIndicationColor_1_Selected_BorderColor: #fb9d9d;
   --sapIndicationColor_1_Selected_TextColor: #840606;
   --sapIndicationColor_1b: #fb9d9d;
+  --sapIndicationColor_1b_TextColor: #840606;
+  --sapIndicationColor_1b_Background: #fb9d9d;
   --sapIndicationColor_1b_BorderColor: #fb9d9d;
   --sapIndicationColor_1b_Hover_Background: #fa8585;
   --sapIndicationColor_2: #aa0808;
@@ -778,6 +809,8 @@
   --sapIndicationColor_2_Selected_BorderColor: #fcc4c4;
   --sapIndicationColor_2_Selected_TextColor: #aa0808;
   --sapIndicationColor_2b: #fcc4c4;
+  --sapIndicationColor_2b_TextColor: #aa0808;
+  --sapIndicationColor_2b_Background: #fcc4c4;
   --sapIndicationColor_2b_BorderColor: #fcc4c4;
   --sapIndicationColor_2b_Hover_Background: #fbacac;
   --sapIndicationColor_3: #b95100;
@@ -792,6 +825,8 @@
   --sapIndicationColor_3_Selected_BorderColor: #fff2c0;
   --sapIndicationColor_3_Selected_TextColor: #b95100;
   --sapIndicationColor_3b: #fff2c0;
+  --sapIndicationColor_3b_TextColor: #b95100;
+  --sapIndicationColor_3b_Background: #fff2c0;
   --sapIndicationColor_3b_BorderColor: #fff2c0;
   --sapIndicationColor_3b_Hover_Background: #ffeda6;
   --sapIndicationColor_4: #256f3a;
@@ -806,6 +841,8 @@
   --sapIndicationColor_4_Selected_BorderColor: #bae8bc;
   --sapIndicationColor_4_Selected_TextColor: #256f3a;
   --sapIndicationColor_4b: #bae8bc;
+  --sapIndicationColor_4b_TextColor: #256f3a;
+  --sapIndicationColor_4b_Background: #bae8bc;
   --sapIndicationColor_4b_BorderColor: #bae8bc;
   --sapIndicationColor_4b_Hover_Background: #a7e2a9;
   --sapIndicationColor_5: #0070f2;
@@ -820,6 +857,8 @@
   --sapIndicationColor_5_Selected_BorderColor: #d3effd;
   --sapIndicationColor_5_Selected_TextColor: #0070f2;
   --sapIndicationColor_5b: #d3effd;
+  --sapIndicationColor_5b_TextColor: #0070f2;
+  --sapIndicationColor_5b_Background: #d3effd;
   --sapIndicationColor_5b_BorderColor: #d3effd;
   --sapIndicationColor_5b_Hover_Background: #bbe6fc;
   --sapIndicationColor_6: #046c7a;
@@ -834,6 +873,8 @@
   --sapIndicationColor_6_Selected_BorderColor: #cdf5ec;
   --sapIndicationColor_6_Selected_TextColor: #046c7a;
   --sapIndicationColor_6b: #cdf5ec;
+  --sapIndicationColor_6b_TextColor: #046c7a;
+  --sapIndicationColor_6b_Background: #cdf5ec;
   --sapIndicationColor_6b_BorderColor: #cdf5ec;
   --sapIndicationColor_6b_Hover_Background: #b8f1e4;
   --sapIndicationColor_7: #5d36ff;
@@ -848,6 +889,8 @@
   --sapIndicationColor_7_Selected_BorderColor: #e2dbff;
   --sapIndicationColor_7_Selected_TextColor: #5d36ff;
   --sapIndicationColor_7b: #e2dbff;
+  --sapIndicationColor_7b_TextColor: #5d36ff;
+  --sapIndicationColor_7b_Background: #e2dbff;
   --sapIndicationColor_7b_BorderColor: #e2dbff;
   --sapIndicationColor_7b_Hover_Background: #cdc2ff;
   --sapIndicationColor_8: #a100c2;
@@ -862,6 +905,8 @@
   --sapIndicationColor_8_Selected_BorderColor: #f8d6ff;
   --sapIndicationColor_8_Selected_TextColor: #a100c2;
   --sapIndicationColor_8b: #f8d6ff;
+  --sapIndicationColor_8b_TextColor: #a100c2;
+  --sapIndicationColor_8b_Background: #f8d6ff;
   --sapIndicationColor_8b_BorderColor: #f8d6ff;
   --sapIndicationColor_8b_Hover_Background: #f4bdff;
   --sapIndicationColor_9: #1d2d3e;
@@ -876,6 +921,8 @@
   --sapIndicationColor_9_Selected_BorderColor: #d9d9d9;
   --sapIndicationColor_9_Selected_TextColor: #1d2d3e;
   --sapIndicationColor_9b: #fff;
+  --sapIndicationColor_9b_TextColor: #1d2d3e;
+  --sapIndicationColor_9b_Background: #fff;
   --sapIndicationColor_9b_BorderColor: #d9d9d9;
   --sapIndicationColor_9b_Hover_Background: #f2f2f2;
   --sapIndicationColor_10: #45484a;
@@ -890,6 +937,8 @@
   --sapIndicationColor_10_Selected_BorderColor: #eaecee;
   --sapIndicationColor_10_Selected_TextColor: #45484a;
   --sapIndicationColor_10b: #eaecee;
+  --sapIndicationColor_10b_TextColor: #45484a;
+  --sapIndicationColor_10b_Background: #eaecee;
   --sapIndicationColor_10b_BorderColor: #eaecee;
   --sapIndicationColor_10b_Hover_Background: #dcdfe3;
   --sapLegend_WorkingBackground: #fff;
@@ -949,7 +998,7 @@
   --sapChart_Data_ContrastTextColor: #fff;
   --sapChart_Data_InteractiveColor: #000001;
   --sapChart_Data_Active_Background: #dee2e5;
-  --sapChart_OrderedColor_1: #3278be;
+  --sapChart_OrderedColor_1: #168eff;
   --sapChart_OrderedColor_2: #c87b00;
   --sapChart_OrderedColor_3: #75980b;
   --sapChart_OrderedColor_4: #df1278;
@@ -965,32 +1014,32 @@
   --sapChart_Critical: #e26300;
   --sapChart_Good: #30914c;
   --sapChart_Neutral: #758ca4;
-  --sapChart_Sequence_1_Plus3: #84b8eb;
+  --sapChart_Sequence_1_Plus3: #96ccff;
   --sapChart_Sequence_1_Plus3_TextColor: #000;
   --sapChart_Sequence_1_Plus3_TextShadow: 0 0 .125rem #fff;
-  --sapChart_Sequence_1_Plus2: #468acd;
+  --sapChart_Sequence_1_Plus2: #3b9ffe;
   --sapChart_Sequence_1_Plus2_TextColor: #000;
   --sapChart_Sequence_1_Plus2_TextShadow: 0 0 .125rem #fff;
-  --sapChart_Sequence_1_Plus1: #3c8cdd;
+  --sapChart_Sequence_1_Plus1: #3fa2ff;
   --sapChart_Sequence_1_Plus1_TextColor: #000;
   --sapChart_Sequence_1_Plus1_TextShadow: 0 0 .125rem #fff;
-  --sapChart_Sequence_1: #3278be;
-  --sapChart_Sequence_1_TextColor: #fff;
-  --sapChart_Sequence_1_TextShadow: 0 0 .125rem #223548;
-  --sapChart_Sequence_1_BorderColor: #3278be;
-  --sapChart_Sequence_1_Minus1: #31669c;
+  --sapChart_Sequence_1: #168eff;
+  --sapChart_Sequence_1_TextColor: #000;
+  --sapChart_Sequence_1_TextShadow: 0 0 .125rem #fff;
+  --sapChart_Sequence_1_BorderColor: #168eff;
+  --sapChart_Sequence_1_Minus1: #077cea;
   --sapChart_Sequence_1_Minus1_TextColor: #fff;
   --sapChart_Sequence_1_Minus1_TextShadow: 0 0 .125rem #223548;
-  --sapChart_Sequence_1_Minus2: #31669c;
+  --sapChart_Sequence_1_Minus2: #077cea;
   --sapChart_Sequence_1_Minus2_TextColor: #fff;
   --sapChart_Sequence_1_Minus2_TextShadow: 0 0 .125rem #223548;
-  --sapChart_Sequence_1_Minus3: #204060;
+  --sapChart_Sequence_1_Minus3: #06559e;
   --sapChart_Sequence_1_Minus3_TextColor: #fff;
   --sapChart_Sequence_1_Minus3_TextShadow: 0 0 .125rem #223548;
-  --sapChart_Sequence_1_Minus4: #19334e;
+  --sapChart_Sequence_1_Minus4: #054887;
   --sapChart_Sequence_1_Minus4_TextColor: #fff;
   --sapChart_Sequence_1_Minus4_TextShadow: 0 0 .125rem #223548;
-  --sapChart_Sequence_1_Minus5: #13263a;
+  --sapChart_Sequence_1_Minus5: #043b6e;
   --sapChart_Sequence_1_Minus5_TextColor: #fff;
   --sapChart_Sequence_1_Minus5_TextShadow: 0 0 .125rem #223548;
   --sapChart_Sequence_2_Plus3: #efbf72;
@@ -1470,6 +1519,7 @@
   --sapFontUrl_72Mono_Bold_woff: url('../../../Base/baseLib/baseTheme/fonts/72Mono-Bold.woff');
   --sapFontUrl_72Mono_Bold_full_woff2: url('../../../Base/baseLib/baseTheme/fonts/72Mono-Bold-full.woff2');
   --sapFontUrl_72Mono_Bold_full_woff: url('../../../Base/baseLib/baseTheme/fonts/72Mono-Bold-full.woff');
+  --sapSapThemeId: sap_horizon;
   --sapBreakpoint_S_Min: 0;
   --sapBreakpoint_M_Min: 600px;
   --sapBreakpoint_L_Min: 1024px;

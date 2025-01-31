@@ -30,4 +30,5 @@ export class RadioExampleComponent {
     optionFourVariable = 'val1';
     optionFiveVariable = 'val1';
     optionSixVariable = 'val1';
+    optionSevenVariable = 'val1';
 }
