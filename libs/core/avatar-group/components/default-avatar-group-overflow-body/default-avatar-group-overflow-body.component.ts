@@ -5,13 +5,16 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    EventEmitter,
     Input,
     OnDestroy,
+    Output,
     QueryList,
     Renderer2,
     ViewChildren,
     ViewEncapsulation,
-    inject
+    inject,
+    input
 } from '@angular/core';
 import { FocusableListDirective, RtlService, elementClick$ } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
@@ -43,16 +46,14 @@ import { AvatarGroupItemDirective } from '../../directives/avatar-group-item.dir
 })
 export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, OnDestroy {
     /**
-     * List of avatars to be rendered in the overflow popover.
-     **/
-    @Input()
-    avatars: Iterable<AvatarGroupItemRendererDirective> = [];
-
-    /**
      * Title of the overflow popover.
      * */
     @Input()
     overflowPopoverTitle: string;
+
+    /** @hidden */
+    @Output()
+    back = new EventEmitter<void>();
 
     /** @hidden */
     @ViewChildren(AvatarGroupItemRendererDirective)
@@ -73,6 +74,12 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
     get isRtl(): boolean {
         return !!this._rtlService?.rtl.value;
     }
+
+    /**
+     * List of avatars to be rendered in the overflow popover.
+     **/
+    avatars = input<AvatarGroupItemRendererDirective[]>([]);
+
     /** @hidden */
     private _itemClickSubscription: Subscription;
 
@@ -122,5 +129,6 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
     _openOverflowMain(): void {
         this._overflowPopoverStage = 'main';
         this._changeDetectorRef.detectChanges();
+        this.back.emit();
     }
 }

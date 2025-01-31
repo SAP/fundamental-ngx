@@ -8,20 +8,25 @@ import {
     ContentChild,
     ContentChildren,
     Input,
+    OnInit,
     QueryList,
+    ViewChild,
     ViewChildren,
     ViewEncapsulation,
     computed,
-    inject
+    inject,
+    signal
 } from '@angular/core';
 import {
     DynamicPortalComponent,
     FocusableItemDirective,
     FocusableListDirective,
+    Nullable,
     ResizeObserverDirective,
     RtlService
 } from '@fundamental-ngx/cdk/utils';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
+import { Placement } from '@fundamental-ngx/core/shared';
 import { AvatarGroupHostComponent } from './components/avatar-group-host.component';
 import { AvatarGroupOverflowButtonComponent } from './components/avatar-group-overflow-button.component';
 import { DefaultAvatarGroupOverflowBodyComponent } from './components/default-avatar-group-overflow-body/default-avatar-group-overflow-body.component';
@@ -44,7 +49,8 @@ import { AvatarGroupHostConfig } from './types';
         {
             provide: AVATAR_GROUP_HOST_CONFIG,
             useExisting: AvatarGroupComponent
-        }
+        },
+        PopoverService
     ],
     imports: [
         AvatarGroupHostComponent,
@@ -61,7 +67,7 @@ import { AvatarGroupHostConfig } from './types';
         ResizeObserverDirective
     ]
 })
-export class AvatarGroupComponent implements AvatarGroupHostConfig {
+export class AvatarGroupComponent implements AvatarGroupHostConfig, OnInit {
     /**
      * The AvatarGroup control has two group types:
      *
@@ -88,6 +94,10 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     @Input()
     size: AvatarGroupHostConfig['size'] = 'l';
 
+    /** Popover placement */
+    @Input()
+    popoverPlacement: Placement | null = null;
+
     /**
      * The title which is displayed when user opens the overflow popover.
      * This takes effect only when default overflow popover body is used,
@@ -96,9 +106,19 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     @Input()
     overflowPopoverTitle: string;
 
+    /**
+     * The maximum number of visible avatar items.
+     **/
+    @Input()
+    maxVisibleItems: Nullable<number> = null;
+
     /** @hidden */
     @ViewChildren(AvatarGroupItemRendererDirective)
     _avatarRenderers: QueryList<AvatarGroupItemRendererDirective>;
+
+    /** @hidden */
+    @ViewChild(DefaultAvatarGroupOverflowBodyComponent)
+    defaultAvatarGroupOverflowBody: DefaultAvatarGroupOverflowBodyComponent;
 
     /** @hidden */
     @ContentChildren(AvatarGroupItemDirective)
@@ -113,6 +133,9 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     _avatarGroupPopoverBody: AvatarGroupOverflowBodyDirective;
 
     /** @hidden */
+    opened = signal(false);
+
+    /** @hidden */
     _contentDirection$ = computed<Direction>(() => (this._rtlService?.rtlSignal() ? 'rtl' : 'ltr'));
 
     /** @hidden */
@@ -120,6 +143,19 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
 
     /** @hidden */
     private readonly _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    private _popoverService = inject(PopoverService);
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._popoverService._forceFocus.set(true);
+    }
+
+    /** @hidden */
+    handlePopoverOpen($event: boolean): void {
+        this.opened.set($event);
+    }
 
     /** @hidden */
     _detectChanges(): void {
