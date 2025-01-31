@@ -15,7 +15,6 @@ interface AdditionalTreeItemData {
     templateUrl: './tree-action-buttons-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [DataSourceDirective, CvaDirective, TreeModule, IconComponent, ButtonComponent]
 })
 export class TreeActionButtonsExampleComponent {

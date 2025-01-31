@@ -8,7 +8,7 @@ import { CardCounterDirective } from './card-counter.directive';
 import { CLASS_NAME } from '../constants';
 
 @Component({
-    template: `<span fd-card-counter [status]="status">1 of 10</span>`,
+    template: `<span fd-card-counter [statusInput]="status">1 of 10</span>`,
     standalone: true,
     imports: [CardCounterDirective]
 })

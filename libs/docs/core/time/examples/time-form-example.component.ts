@@ -9,7 +9,6 @@ import { TimeModule } from '@fundamental-ngx/core/time';
     styleUrls: ['time-form-example.component.scss'],
     templateUrl: './time-form-example.component.html',
     providers: [provideDateTimeFormats()],
-    standalone: true,
     imports: [FormsModule, ReactiveFormsModule, FormLabelComponent, TimeModule]
 })
 export class TimeFormExampleComponent {

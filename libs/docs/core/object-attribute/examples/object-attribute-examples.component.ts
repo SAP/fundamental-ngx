@@ -5,7 +5,6 @@ import { ObjectAttributeComponent } from '@fundamental-ngx/core/object-attribute
     selector: 'fd-object-attribute-example',
     templateUrl: './object-attribute-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ObjectAttributeComponent]
 })
 export class ObjectAttributeExampleComponent {}
@@ -14,7 +13,6 @@ export class ObjectAttributeExampleComponent {}
     selector: 'fd-object-attribute-truncate-example',
     templateUrl: './object-attribute-truncate-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ObjectAttributeComponent]
 })
 export class ObjectAttributeTruncateExampleComponent {}

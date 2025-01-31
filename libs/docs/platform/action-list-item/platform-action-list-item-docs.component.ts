@@ -20,7 +20,6 @@ const borderLessALITs = 'platform-action-list-item-border-less-example.component
 @Component({
     selector: 'app-action-list-item',
     templateUrl: './platform-action-list-item-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

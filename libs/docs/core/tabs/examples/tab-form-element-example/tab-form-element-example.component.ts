@@ -8,7 +8,6 @@ import { TextComponent } from '@fundamental-ngx/core/text';
 @Component({
     selector: 'fd-tab-form-element-example',
     templateUrl: './tab-form-element-example.component.html',
-    standalone: true,
     imports: [FormLabelComponent, TabsModule, ButtonComponent, FormItemComponent, InputGroupModule, TextComponent]
 })
 export class TabFormElementExampleComponent {}

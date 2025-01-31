@@ -7,7 +7,6 @@ import { TimeModule } from '@fundamental-ngx/core/time';
     selector: 'fd-time-two-digits-example',
     templateUrl: './time-two-digits-example.component.html',
     providers: [provideDateTimeFormats()],
-    standalone: true,
     imports: [TimeModule, FormsModule]
 })
 export class TimeTwoDigitsExampleComponent {

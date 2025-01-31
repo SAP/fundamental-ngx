@@ -5,7 +5,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     selector: 'fd-quick-view-subheader-title',
     templateUrl: './quick-view-subheader-title.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [TitleComponent]
 })
 export class QuickViewSubheaderTitleComponent {}

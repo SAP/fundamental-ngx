@@ -38,7 +38,6 @@ const statesInputHtml = 'input-group-states-example.component.html';
 @Component({
     selector: 'app-input-group',
     templateUrl: './input-group-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

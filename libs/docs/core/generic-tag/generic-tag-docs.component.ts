@@ -19,8 +19,7 @@ import { GenericTagDefaultExampleComponent } from './examples/generic-tag-defaul
         CodeExampleComponent,
         SeparatorComponent,
         GenericTagDefaultExampleComponent
-    ],
-    standalone: true
+    ]
 })
 export class GenericTagDocsComponent {
     genericTagDefault: ExampleFile[] = [

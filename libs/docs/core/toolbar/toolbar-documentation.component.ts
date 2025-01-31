@@ -31,7 +31,6 @@ const toolbarOverflowGroupingExampleHtml = 'toolbar-overflow-grouping-example.co
     selector: 'fd-docs-toolbar',
     templateUrl: './toolbar-documentation.component.html',
     styleUrls: ['./toolbar-documentation.component.scss'],
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

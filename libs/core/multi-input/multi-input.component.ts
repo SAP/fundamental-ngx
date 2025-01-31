@@ -45,19 +45,19 @@ import {
     uuidv4
 } from '@fundamental-ngx/cdk/utils';
 import { FormControlComponent, FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
-import { ListComponent, ListModule } from '@fundamental-ngx/core/list';
+import { ListComponent, ListItemComponent, ListTitleDirective } from '@fundamental-ngx/core/list';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { TokenizerComponent, TokenModule } from '@fundamental-ngx/core/token';
+import { TokenComponent, TokenizerComponent } from '@fundamental-ngx/core/token';
 
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { InputGroupComponent, InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MultiAnnouncerDirective } from '@fundamental-ngx/core/multi-combobox';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -107,12 +107,16 @@ let uniqueHiddenLabel = 0;
         PopoverControlComponent,
         FormsModule,
         PopoverBodyComponent,
-        InputGroupModule,
-        TokenModule,
+        InputGroupComponent,
+        InputGroupInputDirective,
+        TokenComponent,
+        TokenizerComponent,
         FormControlComponent,
         AutoCompleteDirective,
         ReactiveFormsModule,
-        ListModule,
+        ListComponent,
+        ListItemComponent,
+        ListTitleDirective,
         CheckboxComponent,
         LinkComponent,
         AsyncPipe,

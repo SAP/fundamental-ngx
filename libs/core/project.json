@@ -12,7 +12,8 @@
         "compile-typedoc": {
             "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
             "options": {
-                "outputPath": "libs/docs/typedoc/core"
+                "outputPath": "libs/docs/typedoc/core",
+                "tsConfig": "libs/core/tsconfig.typedoc.json"
             },
             "outputs": ["{options.outputPath}"]
         },

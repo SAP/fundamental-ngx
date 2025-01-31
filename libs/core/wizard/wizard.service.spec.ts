@@ -1,7 +1,6 @@
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { WizardStepComponent, WizardStepStatus } from './wizard-step/wizard-step.component';
-
 import { WizardService } from './wizard.service';
 
 @Component({
@@ -9,7 +8,9 @@ import { WizardService } from './wizard.service';
         <a fd-wizard-step href="#" #testTemplate1 [status]="step1status">test</a>
         <a fd-wizard-step href="#" #testTemplate2>test</a>
         <a fd-wizard-step href="#" #testTemplate3>test</a>
-    `
+    `,
+    standalone: true,
+    imports: [WizardService]
 })
 class TemplateTestComponent {
     @ViewChild('testTemplate1', { static: true }) anchor1: WizardStepComponent;
@@ -28,11 +29,10 @@ describe('WizardService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TemplateTestComponent],
-            providers: [WizardService]
+            providers: [WizardService, TemplateTestComponent]
         }).compileComponents();
 
-        service = TestBed.get(WizardService);
+        service = TestBed.inject(WizardService);
     });
 
     it('should create', () => {

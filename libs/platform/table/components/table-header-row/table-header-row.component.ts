@@ -60,7 +60,6 @@ import { TableHeaderCellContentComponent } from '../table-header-cell-content/ta
     host: {
         role: 'row'
     },
-    standalone: true,
     imports: [
         TableCellDirective,
         TableStatusIndicatorDirective,

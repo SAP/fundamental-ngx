@@ -9,7 +9,6 @@ import { SliderComponent, SliderCustomValue } from '@fundamental-ngx/platform/sl
     templateUrl: './slider-custom-values-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [SliderComponent, FormsModule, JsonPipe]
 })
 export class SliderCustomValuesExampleComponent {

@@ -7,7 +7,6 @@ import { CheckboxComponent, FdpFormGroupModule } from '@fundamental-ngx/platform
 @Component({
     selector: 'fdp-platform-binary-checkbox',
     templateUrl: 'platform-binary-checkbox.component.html',
-    standalone: true,
     imports: [
         FdpFormGroupModule,
         CheckboxComponent,

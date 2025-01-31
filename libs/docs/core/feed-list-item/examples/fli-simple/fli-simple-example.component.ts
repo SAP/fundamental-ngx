@@ -5,7 +5,6 @@ import { FdPatchLanguageDirective } from '@fundamental-ngx/i18n';
 @Component({
     selector: 'fd-fli-simple-example',
     templateUrl: './fli-simple-example.component.html',
-    standalone: true,
     imports: [FeedListItemModule, FdPatchLanguageDirective]
 })
 export class FliSimpleExampleComponent {

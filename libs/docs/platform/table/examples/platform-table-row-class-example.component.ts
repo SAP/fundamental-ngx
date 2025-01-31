@@ -32,7 +32,6 @@ import {
             }
         `
     ],
-    standalone: true,
     imports: [
         TableDataSourceDirective,
         TableHeaderResizerDirective,

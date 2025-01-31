@@ -12,7 +12,6 @@ import { AvatarComponent } from '@fundamental-ngx/core/avatar';
         `
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [AvatarComponent]
 })
 export class AvatarInitialsExampleComponent {}

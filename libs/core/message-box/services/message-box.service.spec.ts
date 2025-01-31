@@ -3,11 +3,14 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 
 import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { MessageBoxModule } from '../message-box.module';
 import { MessageBoxService } from './message-box.service';
 
 @Component({
-    template: ``
+    template: ``,
+    standalone: true,
+    imports: [CommonModule, MessageBoxModule]
 })
 class MessageBoxServiceTestComponent {
     constructor(public messageBoxService: MessageBoxService) {}
@@ -15,10 +18,12 @@ class MessageBoxServiceTestComponent {
 
 @Component({
     template: `
-        <ng-template [fdMessageBoxTemplate] let-messageBoxRef let-messageBoxConfig="messageBoxConfig" #testTemplate>
+        <ng-template #testTemplate let-messageBoxRef let-messageBoxConfig="messageBoxConfig">
             <fd-message-box [messageBoxRef]="messageBoxRef" [messageBoxConfig]="messageBoxConfig"></fd-message-box>
         </ng-template>
-    `
+    `,
+    standalone: true,
+    imports: [CommonModule, MessageBoxModule]
 })
 class TemplateTestComponent {
     @ViewChild('testTemplate') templateRef: TemplateRef<any>;
@@ -32,8 +37,13 @@ describe('MessageBoxService', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TemplateTestComponent, MessageBoxServiceTestComponent],
-            imports: [CommonModule, MessageBoxModule, NoopAnimationsModule]
+            imports: [
+                CommonModule,
+                OverlayModule,
+                NoopAnimationsModule,
+                TemplateTestComponent,
+                MessageBoxServiceTestComponent
+            ]
         }).compileComponents();
     });
 
@@ -56,17 +66,12 @@ describe('MessageBoxService', () => {
         const dialogRef = service.open(templateRef);
 
         fixture.detectChanges();
-
         await fixture.whenRenderingDone();
-
         expect(service.hasOpenDialogs()).toBe(true);
 
         dialogRef.dismiss();
-
         fixture.detectChanges();
-
         tick(200);
-
         expect(destroyDialogSpy).toHaveBeenCalled();
         expect(service.hasOpenDialogs()).toBe(false);
     }));
@@ -76,21 +81,15 @@ describe('MessageBoxService', () => {
         const dialogRef = service.open(TemplateTestComponent);
 
         fixture.detectChanges();
-
         expect(service.hasOpenDialogs()).toBe(true);
 
         fixture.detectChanges();
-
         await fixture.whenRenderingDone();
-
         expect(service.hasOpenDialogs()).toBe(true);
 
         dialogRef.dismiss();
-
         fixture.detectChanges();
-
         tick(200);
-
         expect(destroyDialogSpy).toHaveBeenCalled();
         expect(service.hasOpenDialogs()).toBe(false);
     }));
@@ -101,9 +100,7 @@ describe('MessageBoxService', () => {
         service.open(TemplateTestComponent);
 
         expect(service.hasOpenDialogs()).toBe(true);
-
         service.dismissAll();
-
         expect(service.hasOpenDialogs()).toBe(false);
     });
 });

@@ -35,7 +35,9 @@ import { SelectComponent } from '../select/select.component';
                 <p>Form Selected Item: {{ customForm.getRawValue() | json }}</p>
             </fdp-form-field>
         </fdp-form-group>
-    `
+    `,
+    standalone: true,
+    imports: [ReactiveFormsModule, FdpFormGroupModule, FormModule, PlatformSelectModule, ContentDensityModule, CommonModule],
 })
 class SelectStandardComponent {
     @ViewChild(SelectComponent)
@@ -74,15 +76,8 @@ describe('Select Component default values', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
-                FdpFormGroupModule,
-                FormModule,
-                FormsModule,
-                ReactiveFormsModule,
-                CommonModule,
-                PlatformSelectModule,
-                ContentDensityModule
+                SelectStandardComponent
             ],
-            declarations: [SelectStandardComponent],
             providers: [DynamicComponentService, MenuKeyboardService]
         }).compileComponents();
     }));
@@ -153,7 +148,16 @@ describe('Select Component default values', () => {
                 <p>Selected Item: {{ selectedItem }}</p>
             </fdp-form-field>
         </fdp-form-group>
-    `
+    `,
+    standalone: true,
+    imports: [
+        FdpFormGroupModule,
+        FormModule,
+        FormsModule,
+        ReactiveFormsModule,
+        CommonModule,
+        PlatformSelectModule
+    ]
 })
 class TestReactiveSelectComponent {
     @ViewChild(SelectComponent)
@@ -196,15 +200,9 @@ describe('Select component Reactive Form Test', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
-                FdpFormGroupModule,
-                FormModule,
-                FormsModule,
-                ReactiveFormsModule,
-                CommonModule,
-                PlatformSelectModule
+                TestReactiveSelectComponent
             ],
-            providers: [DynamicComponentService, MenuKeyboardService],
-            declarations: [TestReactiveSelectComponent]
+            providers: [DynamicComponentService, MenuKeyboardService]
         }).compileComponents();
     }));
 

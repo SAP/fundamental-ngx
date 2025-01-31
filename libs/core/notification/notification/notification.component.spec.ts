@@ -1,13 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { NotificationService } from '../notification-service/notification.service';
 import { NotificationModule } from '../notification.module';
 import { NotificationComponent } from './notification.component';
-
 import { CommonModule } from '@angular/common';
-import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 
@@ -18,17 +15,13 @@ import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
             <a href="#">testLink</a>
             <button>testBtn</button>
         </ng-template>
-    `
+    `,
+    standalone: true,
+    imports: [CommonModule, NotificationModule, ButtonModule]
 })
 class TemplateTestComponent {
     @ViewChild('testTemplate', { static: true }) templateRef: TemplateRef<any>;
 }
-
-@NgModule({
-    declarations: [TemplateTestComponent],
-    imports: [CommonModule, BrowserModule, NotificationModule, ButtonModule]
-})
-class TestModule {}
 
 describe('NotificationComponent', () => {
     let component: NotificationComponent;
@@ -36,7 +29,14 @@ describe('NotificationComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestModule, RouterTestingModule],
+            imports: [
+                CommonModule,
+                NotificationModule,
+                RouterTestingModule.withRoutes([]),
+                ButtonModule,
+                TemplateTestComponent, // Add TemplateTestComponent to imports
+                NotificationComponent // Add NotificationComponent to imports
+            ],
             providers: [DynamicComponentService, NotificationService]
         }).compileComponents();
     }));

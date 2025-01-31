@@ -24,7 +24,6 @@ export interface CombinedVariantManagementPreset {
     selector: 'fdp-doc-variant-management-default-example',
     templateUrl: './variant-management-default-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         VariantManagementModule,
         PlatformSmartFilterBarModule,

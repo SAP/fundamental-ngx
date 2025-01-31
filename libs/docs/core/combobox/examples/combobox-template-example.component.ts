@@ -13,7 +13,6 @@ interface ComboboxItem {
 @Component({
     selector: 'fd-combobox-template-example',
     templateUrl: './combobox-template-example.component.html',
-    standalone: true,
     imports: [ComboboxComponent, ComboboxItemDirective, FormsModule, ListModule, JsonPipe, SearchHighlightPipe]
 })
 export class ComboboxTemplateExampleComponent {

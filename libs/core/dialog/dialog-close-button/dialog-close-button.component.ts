@@ -21,7 +21,6 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `<fd-icon glyph="decline"></fd-icon><ng-content></ng-content>`,
-    standalone: true,
     imports: [IconComponent]
 })
 export class DialogCloseButtonComponent {

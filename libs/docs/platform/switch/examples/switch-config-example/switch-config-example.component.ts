@@ -17,7 +17,6 @@ export const customSwitchConfigProvider = {
     selector: 'fdp-switch-config-example',
     templateUrl: './switch-config-example.component.html',
     providers: [customSwitchConfigProvider],
-    standalone: true,
     imports: [FdpFormGroupModule, PlatformSwitchModule, FormsModule, ReactiveFormsModule, JsonPipe]
 })
 export class SwitchConfigExampleComponent {

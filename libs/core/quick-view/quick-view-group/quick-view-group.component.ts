@@ -6,7 +6,6 @@ import { FormGroupComponent } from '@fundamental-ngx/core/form';
     templateUrl: './quick-view-group.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [FormGroupComponent]
 })
 export class QuickViewGroupComponent {}

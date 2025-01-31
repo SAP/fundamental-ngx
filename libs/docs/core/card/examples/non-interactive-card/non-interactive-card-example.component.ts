@@ -8,7 +8,6 @@ import { ListModule } from '@fundamental-ngx/core/list';
     selector: 'fd-non-interactive-card-example',
     templateUrl: './non-interactive-card-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CardModule, ListModule, AvatarComponent, ButtonComponent, TextComponent, IllustratedMessageModule]
 })
 export class NonInteractiveCardExampleComponent {

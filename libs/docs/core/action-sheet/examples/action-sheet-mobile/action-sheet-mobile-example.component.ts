@@ -7,7 +7,6 @@ import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/m
     selector: 'fd-action-sheet-mobile-example',
     templateUrl: './action-sheet-mobile-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ActionSheetModule, ButtonComponent, MessageToastModule]
 })
 export class ActionSheetMobileExampleComponent {

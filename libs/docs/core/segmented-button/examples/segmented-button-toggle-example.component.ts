@@ -7,7 +7,6 @@ import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 @Component({
     selector: 'fd-segmented-button-toggle-example',
     templateUrl: './segmented-button-toggle-example.component.html',
-    standalone: true,
     imports: [SegmentedButtonModule, FormsModule, ButtonComponent, FocusableItemDirective]
 })
 export class SegmentedButtonToggleExampleComponent {

@@ -5,7 +5,6 @@ import { longIconTypeConfig } from '../config-for-examples/icon-type-config';
 
 @Component({
     selector: 'fdp-icon-tab-bar-closable-tabs-example',
-    standalone: true,
     imports: [IconTabBarComponent],
     templateUrl: './icon-tab-bar-closable-tabs-example.component.html',
     styles: [],

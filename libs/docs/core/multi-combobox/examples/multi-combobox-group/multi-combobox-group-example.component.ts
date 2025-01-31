@@ -10,7 +10,6 @@ import { MultiComboboxComponent, MultiComboboxSelectionChangeEvent } from '@fund
     selector: 'fd-multi-combobox-group-example',
     templateUrl: './multi-combobox-group-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         FormItemComponent,
         FormLabelComponent,

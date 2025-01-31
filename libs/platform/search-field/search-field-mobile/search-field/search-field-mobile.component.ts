@@ -32,7 +32,6 @@ import {
     templateUrl: 'search-field-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DialogComponent,
         DialogHeaderComponent,

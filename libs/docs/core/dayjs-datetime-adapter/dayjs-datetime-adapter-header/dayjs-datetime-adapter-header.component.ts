@@ -13,7 +13,6 @@ import {
 @Component({
     selector: 'app-datetime-datetime-adapter-header',
     templateUrl: './dayjs-datetime-adapter-header.component.html',
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

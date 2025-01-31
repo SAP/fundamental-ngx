@@ -11,7 +11,6 @@ import {
     selector: 'app-switch-header',
     templateUrl: './switch-header.component.html',
     styleUrls: ['./switch-header.component.scss'],
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class SwitchHeaderComponent {}

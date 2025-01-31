@@ -80,7 +80,6 @@ let timePickerCounter = 0;
     styleUrl: './time-picker.component.scss',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         PopoverComponent,
         PopoverControlComponent,

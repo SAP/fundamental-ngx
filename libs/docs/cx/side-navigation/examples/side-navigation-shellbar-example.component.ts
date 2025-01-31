@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 import {
     ShellbarActionComponent,
     ShellbarActionsComponent,
@@ -10,15 +12,32 @@ import {
     ShellbarUser,
     ShellbarUserMenu
 } from '@fundamental-ngx/core/shellbar';
-import { CxNestedListModule } from '@fundamental-ngx/cx/nested-list';
-import { CxSideNavigationModule } from '@fundamental-ngx/cx/side-navigation';
+import {
+    NestedItemComponent,
+    NestedLinkComponent,
+    NestedListButtonDirective,
+    NestedListComponent,
+    NestedListContentDirective,
+    NestedListExpandIconComponent,
+    NestedListHeaderDirective,
+    NestedListIconComponent,
+    NestedListPopoverComponent,
+    NestedListTitleDirective,
+    PreparedNestedListComponent
+} from '@fundamental-ngx/cx/nested-list';
+import {
+    SideNavigationButtonDirective,
+    SideNavigationComponent,
+    SideNavigationMainComponent,
+    SideNavigationUtilityDirective
+} from '@fundamental-ngx/cx/side-navigation';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 
 @Component({
     selector: 'fdx-side-navigation-shellbar-example',
     templateUrl: './side-navigation-shellbar-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ShellbarComponent,
         ButtonComponent,
@@ -28,8 +47,25 @@ import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-fiel
         PlatformSearchFieldModule,
         ShellbarActionsComponent,
         ShellbarActionComponent,
-        CxSideNavigationModule,
-        CxNestedListModule
+        ButtonComponent,
+        ScrollbarModule,
+        I18nModule,
+        SideNavigationMainComponent,
+        SideNavigationUtilityDirective,
+        SideNavigationButtonDirective,
+        SideNavigationComponent,
+        NestedListComponent,
+        NestedLinkComponent,
+        NestedItemComponent,
+        NestedListIconComponent,
+        NestedListTitleDirective,
+        NestedListHeaderDirective,
+        NestedListPopoverComponent,
+        PreparedNestedListComponent,
+        NestedListExpandIconComponent,
+        NestedListContentDirective,
+        NestedListButtonDirective,
+        ContentDensityModule
     ]
 })
 export class SideNavigationShellbarExampleComponent {

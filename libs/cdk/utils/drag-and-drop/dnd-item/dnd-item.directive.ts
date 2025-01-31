@@ -19,7 +19,8 @@ import { DND_ITEM } from '../tokens';
 
 @Directive({
     selector: '[fdkDndItem], [fd-dnd-item]',
-    providers: [DragDrop, { provide: DND_ITEM, useExisting: forwardRef(() => DndItemDirective) }]
+    providers: [DragDrop, { provide: DND_ITEM, useExisting: forwardRef(() => DndItemDirective) }],
+    standalone: true
 })
 export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnDestroy {
     /** Item reference. Used for cases when `[items]` array of dnd list is different than `dndItems` content children. */
@@ -82,13 +83,13 @@ export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnD
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    private _placeholderElement: HTMLElement | null;
+    private _placeholderElement: HTMLElement | null = null;
 
     /** @hidden */
-    private _lineElement: HTMLElement | null;
+    private _lineElement: HTMLElement | null = null;
 
     /** @hidden */
-    private _replaceIndicator: HTMLElement | null;
+    private _replaceIndicator: HTMLElement | null = null;
 
     /** @hidden */
     constructor(
