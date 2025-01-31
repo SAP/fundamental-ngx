@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { FD_SHELLBAR_SUBTITLE_COMPONENT } from '../tokens';
 
 /**
  * The component that represents a shellbar subtitle.
@@ -11,9 +12,14 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
  */
 @Component({
     selector: 'fd-shellbar-subtitle',
-    templateUrl: './shellbar-subtitle.component.html',
+    template: `
+        <span class="fd-shellbar__subtitle">
+            <ng-content></ng-content>
+        </span>
+    `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
     styles: [
         `
             fd-shellbar-subtitle {
@@ -21,6 +27,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
             }
         `
     ],
-    standalone: true
+    providers: [
+        {
+            provide: FD_SHELLBAR_SUBTITLE_COMPONENT,
+            useExisting: ShellbarSubtitleComponent
+        }
+    ]
 })
 export class ShellbarSubtitleComponent {}
