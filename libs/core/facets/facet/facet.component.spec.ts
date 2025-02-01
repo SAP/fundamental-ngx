@@ -12,7 +12,6 @@ import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 import { TextComponent } from '@fundamental-ngx/core/text';
 import { FACET_CLASS_NAME } from '../constants';
 import { FacetContentComponent } from '../content/facet-content.component';
-import { FacetModule } from '../facet.module';
 import { FacetComponent } from './facet.component';
 
 @Component({

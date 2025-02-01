@@ -457,6 +457,7 @@ export class TimePickerComponent<D>
                 return '';
             }
             formattedTime = this._dateTimeAdapter.format(time!, this.getDisplayFormat());
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (e) {}
 
         return formattedTime;

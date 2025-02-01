@@ -76,6 +76,7 @@ export class FilterCustomComponent implements DoCheck {
             this._valueLastEmitted = { ...this._value };
 
             this.valueChange.emit(this._value);
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (e) {}
     }
 }

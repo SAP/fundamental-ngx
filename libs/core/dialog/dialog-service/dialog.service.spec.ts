@@ -59,44 +59,46 @@ describe('DialogService', () => {
         expect(service.hasOpenDialogs()).toBe(false);
     });
 
-    it('should open dialog from template', fakeAsync(async () => {
+    it('should open dialog from template', fakeAsync(() => {
         const destroyDialogSpy = jest.spyOn(service as any, '_destroyDialog');
         const templateRef = component.templateRef;
         const dialogRef = service.open(templateRef);
 
         fixture.detectChanges();
-        await fixture.whenRenderingDone();
+        tick();
         expect(service.hasOpenDialogs()).toBe(true);
 
         dialogRef.dismiss();
         fixture.detectChanges();
-        tick(200);
+        tick(200); // Wait for the closing animation or processing
         expect(destroyDialogSpy).toHaveBeenCalled();
         expect(service.hasOpenDialogs()).toBe(false);
     }));
 
-    it('should open dialog from component', fakeAsync(async () => {
+    it('should open dialog from component', fakeAsync(() => {
         const destroyDialogSpy = jest.spyOn(service as any, '_destroyDialog');
         const dialogRef = service.open(TemplateTestComponent);
 
         fixture.detectChanges();
-        await fixture.whenRenderingDone();
+        tick();
         expect(service.hasOpenDialogs()).toBe(true);
 
         dialogRef.dismiss();
         fixture.detectChanges();
-        tick(200);
+        tick(200); // Wait for the closing animation or processing
         expect(destroyDialogSpy).toHaveBeenCalled();
         expect(service.hasOpenDialogs()).toBe(false);
     }));
 
-    it('should dismiss all dialogs', () => {
+    it('should dismiss all dialogs', fakeAsync(() => {
         service.open(TemplateTestComponent);
         service.open(TemplateTestComponent);
         service.open(TemplateTestComponent);
 
         expect(service.hasOpenDialogs()).toBe(true);
         service.dismissAll();
+        fixture.detectChanges();
+        tick(); // Wait for the closing animation or processing
         expect(service.hasOpenDialogs()).toBe(false);
-    });
+    }));
 });

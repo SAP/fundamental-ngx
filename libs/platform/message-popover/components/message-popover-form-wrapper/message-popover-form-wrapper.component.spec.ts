@@ -164,9 +164,7 @@ describe('MessagePopoverFormWrapperComponent template form', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should collect errors on form submit', fakeAsync(async () => {
-        tick(1000);
-
+    it('should collect errors on form submit', fakeAsync(() => {
         component.formGroup.max = 11;
         component.formGroup.min = 9;
         component.formGroup.true = false;
@@ -177,10 +175,8 @@ describe('MessagePopoverFormWrapperComponent template form', () => {
 
         fixture.detectChanges();
 
-        await fixture.whenStable();
-
-        tick(100);
-
+        tick(); 
+        
         component.form.onSubmit(new Event('submit'));
 
         tick(500);

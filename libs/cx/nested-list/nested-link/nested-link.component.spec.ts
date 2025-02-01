@@ -4,7 +4,7 @@ import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedLinkComponent } from './nested-link.component';
 import { CommonModule } from '@angular/common';
-import {NestedListTitleDirective} from '../nested-list-directives';
+import { NestedListTitleDirective } from '../nested-list-directives';
 import { NestedListIconComponent } from '../nested-list-directives';
 
 @Component({
