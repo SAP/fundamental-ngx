@@ -3,7 +3,7 @@
     "compilerOptions": {
         "outDir": "../../dist/out-tsc",
         "types": ["jest", "node"],
-        "target": "ES2016"
+        "target": "es2020"
     },
     "include": ["**/*.spec.ts"]
 }

@@ -28,7 +28,7 @@ class HostComponent {
     showTotalTab = false;
     iconTabType: TabType = 'text';
     items: TabConfig[] = [];
-    iconTabSize?: IconTabBarSize;  // Added the property
+    iconTabSize?: IconTabBarSize;
 
     selected(): void {}
 

@@ -190,6 +190,7 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
                                 );
                             }
                             return this._alternativeTo[density]();
+                            // eslint-disable-next-line @typescript-eslint/no-unused-vars
                         } catch (e) {
                             throw new Error(`ContentDensityObserver: density ${density} is not supported`);
                         }

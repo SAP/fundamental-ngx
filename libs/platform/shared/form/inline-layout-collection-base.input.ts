@@ -184,6 +184,7 @@ export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInpu
             this._mdIsInline = !!inlineLayout['M'];
             this._lgIsInline = !!inlineLayout['L'];
             this._xlIsInline = !!inlineLayout['XL'];
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
             this._isInLineLayoutEnabled = false;
         }

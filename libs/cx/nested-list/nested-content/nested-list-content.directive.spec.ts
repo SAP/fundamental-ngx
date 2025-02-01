@@ -4,7 +4,6 @@ import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedListButtonDirective, NestedListExpandIconComponent, NestedListHeaderDirective, NestedListIconComponent, NestedListTitleDirective } from '../nested-list-directives';
 import { NestedListStateService } from '../nested-list-state.service';
 import { CommonModule } from '@angular/common';
-import { CxNestedListModule } from '../nested-list.module';
 import { NestedListContentDirective } from './nested-list-content.directive';
 import { RouterModule } from '@angular/router';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
