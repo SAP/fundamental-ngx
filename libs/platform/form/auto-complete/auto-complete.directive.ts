@@ -1,8 +1,10 @@
 import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, NgZone, Output, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { OptionItem } from '@fundamental-ngx/platform/shared';
+import { fromEvent } from 'rxjs';
 
 export interface AutoCompleteEvent {
     term: string;
@@ -56,7 +58,38 @@ export class AutoCompleteDirective {
     }
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef<HTMLInputElement>) {}
+    private _isComposing = false;
+
+    /** @hidden */
+    private readonly _zone = inject(NgZone);
+
+    /** @hidden */
+    constructor(private readonly _elementRef: ElementRef<HTMLInputElement>) {
+        /**
+         * Fixes #10710 / #12983
+         * With chinese characters inputText property update was triggered after the keyup event trigger.
+         * By ensuring that we set all properties we can proceed with stable data.
+         */
+        this._zone.runOutsideAngular(() => {
+            const keyupEvent = fromEvent<KeyboardEvent>(this._elementRef.nativeElement, 'keyup');
+            const compositionStartEvent = fromEvent<CompositionEvent>(
+                this._elementRef.nativeElement,
+                'compositionstart'
+            );
+            const compositionEndEvent = fromEvent<CompositionEvent>(this._elementRef.nativeElement, 'compositionend');
+
+            keyupEvent.pipe(takeUntilDestroyed()).subscribe((evt) => this.handleKeyboardEvent(evt));
+
+            compositionStartEvent.pipe(takeUntilDestroyed()).subscribe(() => {
+                this._isComposing = true;
+            });
+
+            compositionEndEvent.pipe(takeUntilDestroyed()).subscribe(() => {
+                this._isComposing = false;
+                this.inputText = this._elementRef.nativeElement.value;
+            });
+        });
+    }
 
     /** @hidden */
     @HostListener('blur')
@@ -67,25 +100,26 @@ export class AutoCompleteDirective {
     }
 
     /** @hidden */
-    @HostListener('keyup', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, this._stopKeys)) {
-            this._element.value = this.inputText;
-        } else if (KeyUtil.isKeyCode(event, this._completeKeys)) {
-            this._sendCompleteEvent(true);
-        } else if (KeyUtil.isKeyCode(event, this._fillKeys)) {
-            this._sendCompleteEvent(false);
-        } else if (!this._isControlKey(event) && this.inputText) {
-            /** Prevention from triggering typeahead, when having crtl/cmd + keys */
-            if (!this._triggerTypeAhead()) {
-                return;
-            }
+        if (!this._isComposing) {
+            if (KeyUtil.isKeyCode(event, this._stopKeys)) {
+                this._element.value = this.inputText;
+            } else if (KeyUtil.isKeyCode(event, this._completeKeys)) {
+                this._sendCompleteEvent(true);
+            } else if (KeyUtil.isKeyCode(event, this._fillKeys)) {
+                this._sendCompleteEvent(false);
+            } else if (!this._isControlKey(event) && this.inputText) {
+                /** Prevention from triggering typeahead, when having crtl/cmd + keys */
+                if (!this._triggerTypeAhead()) {
+                    return;
+                }
 
-            this._oldValue = this.inputText;
-            const item = this._searchByStrategy();
+                this._oldValue = this.inputText;
+                const item = this._searchByStrategy();
 
-            if (item) {
-                this._typeahead(item.label);
+                if (item) {
+                    this._typeahead(item.label);
+                }
             }
         }
 
