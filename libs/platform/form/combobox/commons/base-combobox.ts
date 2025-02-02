@@ -479,10 +479,6 @@ export abstract class BaseCombobox
             event.preventDefault();
 
             this._chooseOtherItem(-1);
-        } else if (KeyUtil.isKeyCode(event, ESCAPE)) {
-            event.stopPropagation();
-
-            this.isOpenChangeHandle(false);
         } else if (!event.ctrlKey && !KeyUtil.isKeyCode(event, this._nonOpeningKeys)) {
             if (!KeyUtil.isKeyCode(event, this._numberPadNumberKeys)) {
                 this.isOpenChangeHandle(true);
