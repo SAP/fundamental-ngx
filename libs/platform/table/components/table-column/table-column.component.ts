@@ -95,6 +95,10 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     @Input()
     dataType: FilterableColumnDataType = FilterableColumnDataType.STRING;
 
+    /** Array of available filter options */
+    @Input()
+    filterValuesOptions: string[] = [];
+
     /** Toggles grouping feature for the column. */
     @Input()
     groupable = false;
