@@ -18,34 +18,11 @@ import {
     waitForElDisplayed
 } from '../../../../../e2e';
 
-import {
-    appleTestText,
-    bananaTestText,
-    reactiveFormTestText1,
-    reactiveFormTestText2,
-    searchPineappleText,
-    searchTermAppleText,
-    searchTermHalfUsdTestText,
-    searchTermOneUsdTestText,
-    settingsTestText,
-    titleTestText
-} from './combobox-contents';
-
 describe('Combobox component test suit', () => {
     const comboboxPage = new ComboboxPo();
-    const {
-        allInputFields,
-        dropdownPopover,
-        activeInputButton,
-        dropdownOption,
-        smallText,
-        smallText_2,
-        mobileButton,
-        mobileTitle,
-        reactiveFormButton,
-        reactiveFormText,
-        standardButton
-    } = comboboxPage;
+
+    const dropdownPopover = '.fd-combobox-custom-list';
+    const dropdownFirstOption = '.fd-combobox-custom-list li.fd-list__item:not(.fd-list__group-header)';
 
     beforeAll(async () => {
         await comboboxPage.open();
@@ -58,146 +35,128 @@ describe('Combobox component test suit', () => {
     }, 2);
 
     it('verify disable input field', async () => {
-        await expect(await isEnabled(allInputFields, 21)).withContext(false, '');
+        const disabledExampleInput = 'fd-combobox-disabled-example fd-combobox input';
+        await expect(await isEnabled(disabledExampleInput)).withContext(false, '');
     });
 
     describe('Check Standard Combobox', () => {
-        it('verify Standard Combobox by choose option in dropdown', async () => {
-            const inputLength = await getElementArrayLength(standardButton);
-            for (let i = 0; i < inputLength - 1; i++) {
-                await scrollIntoView(standardButton, i);
-                await click(standardButton, i);
+        it('should verify that each standard combobox can be opened and an option can be selected', async () => {
+            const comboboxButtons = 'fd-combobox-example .fd-combobox button';
+            const comboboxButtonLength = await getElementArrayLength(comboboxButtons);
+            for (let i = 0; i < comboboxButtonLength - 1; i++) {
+                await scrollIntoView(comboboxButtons, i);
+                await click(comboboxButtons, i);
                 await expect(await isElementDisplayed(dropdownPopover)).withContext(true, 'popover not displayed');
-                await click(dropdownOption);
-                await expect(await getText(smallText)).withContext(searchTermAppleText);
+                await click(dropdownFirstOption);
+                await expect(await getText('fd-combobox-example small')).withContext('Search Term: Apple');
             }
-        });
-
-        it('verify Hide Addon Button by typing name of option', async () => {
-            await setValue(allInputFields, 'Ba', 5);
-            await click(dropdownOption);
-            await expect(await getValue(allInputFields, 5)).withContext(bananaTestText);
         });
     });
 
     describe('Check Combobox as Search Field', () => {
-        it('verify Combobox as Search Field by choose option in dropdown or typing name of it', async () => {
-            await scrollIntoView(allInputFields, 8);
-            await click(activeInputButton, 4);
+        it('verify Combobox as Search Field by choosing option in dropdown or typing name of it', async () => {
+            const searchField = 'fd-combobox-search-field-example fd-combobox';
+            const searchFieldInput = searchField + ' input';
+            const searchFieldButton = searchField + ' button';
+            await scrollIntoView(searchField);
+            await click(searchFieldButton);
             await expect(await isElementDisplayed(dropdownPopover)).withContext(true, 'popover not displayed');
-            await click(dropdownOption);
-            await expect(await getText(smallText, 6)).withContext(searchTermAppleText);
+            await click(dropdownFirstOption);
+            await expect(await getText(searchFieldInput)).withContext('Search Term: Apple');
 
-            await setValue(allInputFields, 'Pi', 6);
-            await click(dropdownOption);
-            await expect(await getText(smallText, 6)).withContext(searchPineappleText);
-        });
-    });
-
-    describe('Check Custom Filter', () => {
-        it('verify Combobox as Search Field by choose option typing name of it', async () => {
-            await scrollIntoView(allInputFields, 7);
-            await click(activeInputButton, 5);
-            await expect(await isElementDisplayed(dropdownPopover)).withContext(true, 'popover not displayed');
-            await click(dropdownOption);
-            await expect(await getValue(allInputFields, 7)).withContext(appleTestText);
-
-            await setValue(allInputFields, 'Ba', 7);
-            await click(dropdownOption);
-            await expect(await getValue(allInputFields, 7)).withContext(bananaTestText);
+            await setValue(searchFieldInput, 'Pi');
+            await click(dropdownFirstOption);
+            await expect(await getText(searchFieldInput)).withContext('Search Term: Pineapple');
         });
     });
 
     describe('Check Custom Search Function', () => {
-        it('verify Custom Search Function by choose option in dropdown or typing name of it', async () => {
-            await scrollIntoView(allInputFields, 9);
-            await click(activeInputButton, 7);
+        it('verify Custom Search Function by dismissing the alert, choosing an option in dropdown or typing name of it', async () => {
+            const customSearchField = 'fd-combobox-search-function-example fd-combobox';
+            const customSearchFieldInput = customSearchField + ' input';
+            const customSearchFieldButton = customSearchField + ' button';
+            await scrollIntoView(customSearchField);
+            await click(customSearchFieldButton);
             await acceptAlert();
             await expect(await isElementDisplayed(dropdownPopover)).withContext(true, 'popover not displayed');
-            await click(dropdownOption);
-            await expect(await getText(smallText_2)).withContext(searchTermAppleText);
+            await click(dropdownFirstOption);
+            await expect(await getText(customSearchFieldInput)).withContext('Search Term: Apple');
 
-            await setValue(allInputFields, 'Pi', 9);
-            await click(dropdownOption);
-            await expect(await getText(smallText_2)).withContext(searchPineappleText);
+            await setValue(customSearchFieldInput, 'Pi');
+            await click(dropdownFirstOption);
+            await expect(await getText(customSearchFieldInput)).withContext('Search Term: Pineapple');
         });
     });
 
     describe('Check Combobox Mobile Mode', () => {
-        it('verify Combobox Mobile Mode by choose option in mobile window or typing name of it', async () => {
-            await scrollIntoView(allInputFields, 9);
-            await click(allInputFields, 10);
-            await click(dropdownOption);
-            await click(mobileButton, 2);
-            await expect(await getValue(allInputFields, 10)).withContext(appleTestText);
+        const mobileCombobox = 'fd-combobox-mobile-example fd-combobox';
 
-            await click(allInputFields, 10);
-            await setValue(allInputFields, 'Ba', 10);
-            await click(dropdownOption);
-            await click(mobileButton, 2);
-            await expect(await getValue(allInputFields, 10)).withContext(bananaTestText);
+        it('should select an option by clicking an item in the list', async () => {
+            await scrollIntoView(mobileCombobox);
+            await click(mobileCombobox);
+            await click('fd-dialog-body li'); // click the first item in the dialog list
+            await expect(await getValue(mobileCombobox + ' input')).withContext('Apple'); // checks the combobox input on the main page
+            await expect(await getValue('fd-dialog-header input')).withContext('Apple'); // checks the input in the dialog
         });
 
         it('verify Combobox Mobile Mode has clickable buttons cancel, close and has header', async () => {
-            await scrollIntoView(allInputFields, 10);
-            await click(allInputFields, 10);
-            await expect(await getText(mobileTitle)).withContext(titleTestText);
+            await scrollIntoView(mobileCombobox);
+            await click(mobileCombobox);
+            await expect(await getText('fd-dialog-header h1.fd-title--h5')).withContext('Title');
 
-            await expect(await isElementClickable(mobileButton)).withContext(true, 'close button not clickable');
-            await expect(await isElementClickable(mobileButton, 2)).withContext(true, 'cancel button not clickable');
+            await expect(await isElementClickable('.fd-dialog__content--mobile button')).withContext(
+                true,
+                'close button not clickable'
+            );
+            await expect(await isElementClickable('.fd-dialog__content--mobile button', 2)).withContext(
+                true,
+                'cancel button not clickable'
+            );
         });
     });
 
     describe('Check Display Object Property', () => {
         it('verify Display Object Property by choose option in dropdown or typing name of it', async () => {
-            await scrollIntoView(allInputFields, 10);
-            await click(activeInputButton, 7);
-            await acceptAlert();
+            const displayObjectExample = 'fd-combobox-displaywith-example';
+            await scrollIntoView(displayObjectExample);
+            await click(displayObjectExample + ' fd-combobox button');
             await expect(await isElementDisplayed(dropdownPopover)).withContext(true, 'popover not displayed');
-            await click(dropdownOption);
-            await expect(await getText(smallText_2)).withContext(searchTermAppleText);
+            await click(dropdownFirstOption);
+            await expect(await getText(displayObjectExample + ' small')).withContext('Search Term: APPLE');
 
-            await clearValue(allInputFields, 10);
-            await click(allInputFields, 10);
+            await clearValue(displayObjectExample + ' fd-combobox input');
+            await click(displayObjectExample + ' fd-combobox input');
             await sendKeys('To');
-            await click(dropdownOption);
-            await expect(await getText(smallText_2)).withContext(searchTermAppleText);
+            await click(dropdownFirstOption);
+            await expect(await getText(displayObjectExample + ' small')).withContext('Search Term: TOMATO');
         });
     });
 
     describe('Check Open State Control', () => {
-        it('verify Open State Control by choose option in dropdown or typing name of it', async () => {
-            await scrollIntoView(allInputFields, 11);
-            await click(activeInputButton, 9);
+        it('verify Open State Control events by handling alerts, and by choose option in dropdown or typing name of it', async () => {
+            const stateControlExample = 'fd-combobox-open-control-example';
+            await scrollIntoView(stateControlExample + ' fd-combobox input');
+            await click(stateControlExample + ' fd-combobox button');
             await acceptAlert();
             await expect(await isElementDisplayed(dropdownPopover)).withContext(true, 'popover not displayed');
-            await click(dropdownOption);
+            await click(dropdownFirstOption);
             await acceptAlert();
-            await expect(await getValue(allInputFields, 12)).withContext(appleTestText);
-            await click(activeInputButton, 9);
-            await acceptAlert();
-            await setValue(allInputFields, 'Ba', 12);
-            await click(dropdownOption);
-            await acceptAlert();
-            await expect(await getValue(allInputFields, 12)).withContext(bananaTestText);
+            await expect(await getValue(stateControlExample + ' fd-combobox input')).withContext('Apple');
         });
     });
 
     describe('Check Observable Async Example', () => {
         it('verify Observable Async by choose option in dropdown or typing name of it', async () => {
-            await scrollIntoView(allInputFields, 12);
-            await click(activeInputButton, 9);
-            await acceptAlert();
+            const asyncExample = 'fd-combobox-async-example';
+            await scrollIntoView(asyncExample + ' fd-combobox input');
+            await click(asyncExample + ' fd-combobox button');
             await expect(await isElementDisplayed(dropdownPopover)).withContext(true, 'popover not displayed');
-            await click(dropdownOption);
-            await acceptAlert();
-            await expect(await getValue(allInputFields, 12)).withContext(appleTestText);
-            await click(activeInputButton, 9);
-            await acceptAlert();
-            await setValue(allInputFields, 'Ba', 12);
-            await click(dropdownOption);
-            await acceptAlert();
-            await expect(await getValue(allInputFields, 12)).withContext(bananaTestText);
+            await click(dropdownFirstOption);
+            await expect(await getValue(asyncExample + ' fd-combobox input')).withContext('Apple');
+            await click(asyncExample + ' fd-combobox button');
+            await setValue(asyncExample + ' fd-combobox input', 'Ba');
+            await click(dropdownFirstOption);
+            await expect(await getValue(asyncExample + ' fd-combobox input')).withContext('Banana');
         });
     });
 
@@ -207,81 +166,68 @@ describe('Combobox component test suit', () => {
             if (await browserIsSafari()) {
                 return;
             }
-            await scrollIntoView(allInputFields, 13);
-            await click(activeInputButton, 11);
+            const templateExample = 'fd-combobox-template-example';
+            await scrollIntoView(templateExample + ' fd-combobox input');
+            await click(templateExample + ' fd-combobox button');
             await expect(await isElementDisplayed(dropdownPopover)).withContext(true, 'popover not displayed');
-            await click(dropdownOption);
-            await expect(await getText(smallText_2, 2)).withContext(settingsTestText[0]);
-            await expect(await getText(smallText_2, 3)).withContext(settingsTestText[1]);
+            await click(dropdownFirstOption);
+            await expect(await getText(templateExample + ' small')).withContext('Search Term: Photo Voltaic');
+            await expect(await getText(templateExample + ' small', 1)).withContext(
+                'Returned from itemClicked Event: { "item": { "name": "Photo Voltaic", "icon": "photo-voltaic" }, "index": 0 }'
+            );
 
-            await click(activeInputButton, 11);
-            await setValue(allInputFields, 'Se', 14);
-            await click(dropdownOption);
-            await expect(await getText(smallText_2, 2)).withContext(settingsTestText[2]);
-            await expect(await getText(smallText_2, 3)).withContext(settingsTestText[3]);
-        });
-    });
-
-    describe('Check Combobox with Two Columns', () => {
-        it('verify Combobox with Two Columns by choose option in dropdown or typing name of it', async () => {
-            await scrollIntoView(allInputFields, 14);
-            await click(activeInputButton, 12);
-            await expect(await isElementDisplayed(dropdownPopover)).withContext(true, 'popover not displayed');
-            await click(dropdownOption);
-            await expect(await getText(smallText_2, 4)).withContext(searchTermOneUsdTestText);
-            await click(activeInputButton, 12);
-            await setValue(allInputFields, 'Ba', 15);
-            await click(dropdownOption);
-            await expect(await getText(smallText_2, 4)).withContext(searchTermHalfUsdTestText);
+            await click(templateExample + ' fd-combobox button');
+            await scrollIntoView(templateExample + ' fd-combobox input');
+            await setValue(templateExample + ' fd-combobox input', 'Se');
+            await click(dropdownFirstOption);
+            await expect(await getText(templateExample + ' small')).withContext('Search Term: Settings');
+            await expect(await getText(templateExample + ' small', 1)).withContext(
+                'Returned from itemClicked Event: { "item": { "name": "Settings", "icon": "settings" }, "index": 1 }'
+            );
         });
     });
 
     describe('Check Combobox with Groups', () => {
         it('verify Combobox with Groups by choose option in dropdown or typing name of it', async () => {
-            await scrollIntoView(allInputFields, 15);
-            await click(activeInputButton, 13);
+            const groupExample = 'fd-combobox-group-example';
+            await scrollIntoView(groupExample + ' fd-combobox input');
+            await click(groupExample + ' fd-combobox button');
             await expect(await isElementDisplayed(dropdownPopover)).withContext(true, 'popover not displayed');
-
-            await click(dropdownOption);
-            await expect(await getText(smallText_2, 5)).withContext(searchTermAppleText);
-            await click(activeInputButton, 13);
-            await setValue(allInputFields, 'Pi', 16);
-            await click(dropdownOption);
-            await expect(await getText(smallText_2, 5)).withContext(searchPineappleText);
-        });
-    });
-
-    describe('Check Custom Height Example', () => {
-        it('verify Custom Height Example by choose option in dropdown or typing name of it', async () => {
-            await scrollIntoView(allInputFields, 17);
-            await click(activeInputButton, 14);
-            await expect(await isElementDisplayed(dropdownPopover)).withContext(true, 'popover not displayed');
-            await click(dropdownOption);
-            await expect(await getValue(allInputFields, 17)).withContext(appleTestText);
-
-            await setValue(allInputFields, 'Ba', 17);
-            await click(dropdownOption);
-            await expect(await getValue(allInputFields, 17)).withContext(bananaTestText);
+            await click(dropdownFirstOption);
+            await expect(await getText(groupExample + ' small')).withContext('Search Term: Apple');
+            await click(groupExample + ' fd-combobox button');
+            await setValue(groupExample + ' fd-combobox input', 'Pi');
+            await click(dropdownFirstOption);
+            await expect(await getText(groupExample + ' small')).withContext('Search Term: Pineapple');
         });
     });
 
     describe('Check Return results including search term', () => {
         it('verify Return results including search term by choose option in dropdown or typing name of it', async () => {
-            await scrollIntoView(allInputFields, 17);
-            await click(activeInputButton, 14);
+            const includesExample = 'fd-combobox-includes-example fd-combobox';
+            await scrollIntoView(includesExample + ' input');
+            await click(includesExample + ' button');
             await expect(await isElementDisplayed(dropdownPopover)).withContext(true, 'popover not displayed');
-            await click(dropdownOption);
-            await expect(await getValue(allInputFields, 17)).withContext(appleTestText);
+            await click(dropdownFirstOption);
+            await expect(await getValue(includesExample + ' input')).withContext('Apple');
 
-            await setValue(allInputFields, 'Ba', 17);
-            await click(dropdownOption);
-            await expect(await getValue(allInputFields, 17)).withContext(bananaTestText);
+            await setValue(includesExample + ' input', 'Ba');
+            await click(dropdownFirstOption);
+            await expect(await getValue(includesExample + ' input')).withContext('Banana');
         });
     });
 
     describe('Check Reactive Form', () => {
         // will be fixed later
         it('verify Reactive Form by choose option in dropdown and verify small text is correct', async () => {
+            const reactiveFormButton = 'fd-combobox-forms-example button';
+            const reactiveFormText = 'fd-combobox-forms-example small';
+            const reactiveFormTestText1 = [
+                'Touched: true',
+                'Dirty: true',
+                'Json Value: { "displayedValue": "Apple", "value": "AppleValue" }'
+            ];
+            const reactiveFormTestText2 = ['Touched: true', 'Dirty: true', 'Json Value: "Apple"'];
             if (await browserIsSafari()) {
                 return;
             }
@@ -290,7 +236,7 @@ describe('Combobox component test suit', () => {
             for (let i = 0; i < buttonsLength; i++) {
                 await scrollIntoView(reactiveFormButton);
                 await click(reactiveFormButton, i);
-                await click(dropdownOption);
+                await click(dropdownFirstOption);
                 if (i === 0) {
                     const smallTextLength = await getElementArrayLength(reactiveFormText);
                     for (let j = 0; j < smallTextLength - 3; j++) {

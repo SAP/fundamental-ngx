@@ -1,11 +1,26 @@
 <div class="examples-column">
     <div fd-form-item>
-        <label fd-form-label for="comboboxID1">Standard with custom width</label>
+        <label fd-form-label for="comboboxID1">Standard with custom width (in px)</label>
         <fd-combobox
             inputId="comboboxID1"
             ariaLabel="Standard"
             maxHeight="250px"
             width="300px"
+            placeholder="Type some text..."
+            [dropdownValues]="fruits"
+            [(ngModel)]="searchTermOne"
+        >
+        </fd-combobox>
+    </div>
+    <small>Search Term: {{ searchTermOne }}</small>
+
+    <div fd-form-item>
+        <label fd-form-label for="comboboxIDper">Standard with custom width (in %)</label>
+        <fd-combobox
+            inputId="comboboxIDper"
+            ariaLabel="Standard"
+            maxHeight="250px"
+            width="40%"
             placeholder="Type some text..."
             [dropdownValues]="fruits"
             [(ngModel)]="searchTermOne"
