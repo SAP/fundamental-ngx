@@ -14,7 +14,9 @@ import {
 } from 'typedoc';
 
 export function anchorIcon(context: DefaultThemeRenderContext, anchor: string | undefined) {
-    if (!anchor) return <></>;
+    if (!anchor) {
+        return <></>;
+    }
 
     return (
         <a href={`#${anchor}`} aria-label="Permalink" class="tsd-anchor-icon">
@@ -150,7 +152,9 @@ export function renderTypeParametersSignature(
     context: DefaultThemeRenderContext,
     typeParameters: readonly TypeParameterReflection[] | undefined
 ): JSX.Element {
-    if (!typeParameters || typeParameters.length === 0) return <></>;
+    if (!typeParameters || typeParameters.length === 0) {
+        return <></>;
+    }
     const hideParamTypes = context.options.getValue('hideParameterTypesInTitle');
 
     if (hideParamTypes) {

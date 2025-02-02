@@ -1,11 +1,11 @@
 module.exports = {
-    ifEquals: function (value1, value2, options) {
+    ifEquals(value1, value2, options) {
         return value1 === value2 ? options.fn(this) : options.inverse(this);
     },
-    ifNotEquals: function (value1, value2, options) {
+    ifNotEquals(value1, value2, options) {
         return value1 !== value2 ? options.fn(this) : options.inverse(this);
     },
-    ifDecoratorsContain: function (element, compareValue, options) {
+    ifDecoratorsContain(element, compareValue, options) {
         if (!element || !element.decorators) {
             return options.inverse(this);
         }
@@ -14,7 +14,7 @@ module.exports = {
         );
         return found ? options.fn(this) : options.inverse(this);
     },
-    ifNoDecorators: function (element, options) {
+    ifNoDecorators(element, options) {
         if (!element || !element.decorators) {
             return options.fn(this);
         }
@@ -26,7 +26,7 @@ module.exports = {
         }
         return options.fn(this);
     },
-    ifChildrenContainDecorator: function (array, compareValue, options) {
+    ifChildrenContainDecorator(array, compareValue, options) {
         if (!array || array.length === 0) {
             return options.inverse(this);
         }
@@ -42,7 +42,7 @@ module.exports = {
         }
         return options.inverse(this);
     },
-    ifChildrenContainNonDecorators: function (array, options) {
+    ifChildrenContainNonDecorators(array, options) {
         if (!array || array.length === 0) {
             return options.inverse(this);
         }
@@ -60,30 +60,32 @@ module.exports = {
         }
         return options.inverse(this);
     },
-    parseSelector: function (str) {
+    parseSelector(str) {
         if (typeof str !== 'string') {
             return '';
         }
         let selectorStr = str.match(/(selector: '(.*?)')/g) + '';
-        selectorStr = selectorStr.replace('selector: ', '').replace(/['\[\]]/g, '');
+        selectorStr = selectorStr.replace('selector: ', '').replace(/['[\]]/g, '');
         return selectorStr;
     },
-    getAllWithDecorator: function (groups, decorator, options) {
+    getAllWithDecorator(groups, decorator, options) {
         if (!groups || !decorator) {
             return;
         }
 
-        let total = [];
+        const total = [];
         groups.forEach((group) => {
-            if (group.children)
+            if (group.children) {
                 group.children.forEach((child) => {
-                    if (child.decorators)
+                    if (child.decorators) {
                         child.decorators.forEach((dec) => {
                             if (dec && dec.name.toLocaleUpperCase() === decorator.toLocaleUpperCase()) {
                                 total.push(child);
                             }
                         });
+                    }
                 });
+            }
         });
         return options.fn(total);
     }
