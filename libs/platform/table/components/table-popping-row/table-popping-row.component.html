@@ -12,7 +12,9 @@
 >
     @for (poppingColumn of _fdpTableService.poppingColumns$(); track poppingColumn.name) {
         <div fd-table-text>
-            <label fd-form-label>{{ poppingColumn.label }}:</label>
+            @if (poppingColumn?.label?.length) {
+                <label fd-form-label>{{ poppingColumn.label }}:</label>
+            }
 
             @if (poppingColumn?.columnCellTemplate) {
                 <ng-template
