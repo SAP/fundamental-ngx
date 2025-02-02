@@ -121,7 +121,7 @@
         "conventional-changelog-cli": "3.0.0",
         "conventional-recommended-bump": "7.0.1",
         "coveralls": "3.1.1",
-        "dependency-tree": "10.0.9",
+        "dependency-tree": "11.0.2",
         "eslint": "8.57.0",
         "eslint-config-prettier": "9.0.0",
         "eslint-plugin-import": "2.26.0",
