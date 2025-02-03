@@ -414,9 +414,6 @@ export class ComboboxComponent<T = any>
         SHIFT
     ];
 
-    /** Keys, that will close popover's body, when dispatched on search input */
-    readonly closingKeys: number[] = [ESCAPE];
-
     /** @hidden */
     readonly _repositionScrollStrategy: RepositionScrollStrategy;
 
@@ -533,9 +530,6 @@ export class ComboboxComponent<T = any>
             } else if (KeyUtil.isKeyCode(event, UP_ARROW)) {
                 this._chooseOtherItem(-1);
                 event.preventDefault();
-            } else if (KeyUtil.isKeyCode(event, this.closingKeys)) {
-                this.isOpenChangeHandle(false);
-                event.stopPropagation();
             } else if (
                 this.openOnKeyboardEvent &&
                 !event.ctrlKey &&
