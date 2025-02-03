@@ -55,7 +55,6 @@ export type FdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
         contentDensityObserverProviders()
     ],
     host: { '[attr.tabindex]': '-1' },
-    standalone: true,
     imports: [FormsModule, NgClass, ContentDensityModule, PortalModule]
 })
 export class CheckboxComponent<T = unknown> implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {

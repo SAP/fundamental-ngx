@@ -13,7 +13,6 @@ import {
 @Component({
     selector: 'app-vertical-navigation-header',
     templateUrl: './vertical-navigation-header.component.html',
-    standalone: true,
     imports: [
         DocPageComponent,
         HeaderComponent,

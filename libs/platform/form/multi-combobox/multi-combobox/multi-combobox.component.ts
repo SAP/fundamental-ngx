@@ -69,7 +69,6 @@ let deprecationWarningShown = false;
         },
         contentDensityObserverProviders()
     ],
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         PopoverComponent,

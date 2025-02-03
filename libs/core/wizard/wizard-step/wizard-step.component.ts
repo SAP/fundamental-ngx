@@ -39,7 +39,6 @@ import { WIZARD, WizardComponentInterface } from '../wizard-injection-token';
     },
     templateUrl: './wizard-step.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: []
 })
 export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy {

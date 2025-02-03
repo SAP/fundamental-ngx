@@ -18,7 +18,6 @@ import { NavigationListComponent } from '../navigation-list/navigation-list.comp
 @Component({
     selector: 'fdb-navigation-content-end',
     template: `<ul fdb-navigation-list [listItems]="allListItems$()"></ul>`,
-    standalone: true,
     imports: [NavigationListComponent, NgTemplateOutlet],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,

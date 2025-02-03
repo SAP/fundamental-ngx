@@ -1,61 +1,64 @@
-import { Component, DebugElement, Input } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
 import { TruncateDirective } from './truncate.directive';
 
 @Component({
+    standalone: true,
+    imports: [TruncateDirective],
     template: `
-        <span fdkTruncate [fdkTruncateState]="true" [fdkTruncateWidth]="pixLength">
-            This element should by truncated by width as fdkTruncateWidth is provided
+        <span id="truncate-true" fdkTruncate [fdkTruncateState]="true" [fdkTruncateWidth]="pixLength">
+            Truncated by width
         </span>
-        <span fdkTruncate [fdkTruncateState]="false" [fdkTruncateWidth]="pixLength">
-            This element should not be truncated as fdkTruncateState is false
+        <span id="truncate-false" fdkTruncate [fdkTruncateState]="false" [fdkTruncateWidth]="pixLength">
+            Not truncated
         </span>
-        <span [style.color]="'red'" fdkTruncate [fdkTruncateState]="true">
-            This element should not be truncated as fdkTruncateState is false
+        <span id="retain-color" [style.color]="'red'" fdkTruncate [fdkTruncateState]="true">
+            Retain color
         </span>
     `
 })
 class TestComponent {
-    @Input()
-    text: string;
-
-    @Input()
-    pixLength: number;
+    pixLength = 100;
 }
 
 describe('TruncateDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
-    let truncate: DebugElement[];
+    let truncateTrue: DebugElement;
+    let truncateFalse: DebugElement;
+    let retainColor: DebugElement;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [TruncateDirective]
+            imports: [TestComponent, TruncateDirective]
         });
+
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
-        component.pixLength = 100;
         fixture.detectChanges();
-        truncate = fixture.debugElement.queryAll(By.directive(TruncateDirective));
+
+        truncateTrue = fixture.debugElement.query(By.css('#truncate-true'));
+        truncateFalse = fixture.debugElement.query(By.css('#truncate-false'));
+        retainColor = fixture.debugElement.query(By.css('#retain-color'));
     });
 
     it('should create an instance', () => {
-        expect(truncate).toBeTruthy();
+        expect(truncateTrue).toBeTruthy();
+        expect(truncateFalse).toBeTruthy();
+        expect(retainColor).toBeTruthy();
     });
 
-    it('Should truncate when fdkTruncateState is true', () => {
-        expect(truncate[0].nativeElement.style.maxWidth).toBe(`${component.pixLength}px`);
-        expect(truncate[2].nativeElement.style.maxWidth).toBe(`200px`);
+    it('should apply truncation style when fdkTruncateState is true', () => {
+        expect(truncateTrue.nativeElement.style.maxWidth).toBe(`${component.pixLength}px`);
     });
 
-    it('Should not truncate when fdkTruncateState is false', () => {
-        expect(truncate[1].nativeElement.style.maxWidth).toBe('');
+    it('should not apply truncation style when fdkTruncateState is false', () => {
+        expect(truncateFalse.nativeElement.style.maxWidth).toBe('');
     });
 
-    it("Should preserve element's default style", () => {
-        expect(truncate[2].nativeElement.style.color).toEqual('red');
+    it("should retain element's original style when truncating", () => {
+        expect(retainColor.nativeElement.style.color).toBe('red');
+        expect(retainColor.nativeElement.style.maxWidth).toBe('200px');
     });
 });

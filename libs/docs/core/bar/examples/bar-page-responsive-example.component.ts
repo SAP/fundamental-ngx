@@ -9,7 +9,6 @@ import { map } from 'rxjs/operators';
 @Component({
     selector: 'fd-bar-page-responsive-example',
     templateUrl: './bar-page-responsive-example.component.html',
-    standalone: true,
     imports: [BarModule, AvatarComponent, AsyncPipe]
 })
 export class BarPageResponsiveExampleComponent implements OnInit {

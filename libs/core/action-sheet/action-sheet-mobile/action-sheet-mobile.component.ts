@@ -7,7 +7,6 @@ type OpenChangeHandle = (isOpen: boolean) => void;
     selector: 'fd-action-sheet-mobile',
     templateUrl: './action-sheet-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [NgTemplateOutlet]
 })
 export class ActionSheetMobileComponent {

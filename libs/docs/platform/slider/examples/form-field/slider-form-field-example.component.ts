@@ -16,7 +16,6 @@ import { SliderComponent } from '@fundamental-ngx/platform/slider';
             }
         `
     ],
-    standalone: true,
     imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, SliderComponent, JsonPipe]
 })
 export class SliderFormFieldExampleComponent {

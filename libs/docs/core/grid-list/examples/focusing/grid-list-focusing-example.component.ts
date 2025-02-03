@@ -26,7 +26,6 @@ interface GridListItem {
     styleUrls: ['./grid-list-focusing-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [GridListModule, ButtonComponent, ContentDensityDirective, AvatarComponent, LinkComponent, RouterLink]
 })
 export class GridListFocusingItemExampleComponent {

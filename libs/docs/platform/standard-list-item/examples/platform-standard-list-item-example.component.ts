@@ -5,7 +5,6 @@ import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/pla
 @Component({
     selector: 'fdp-standard-list-item-example',
     templateUrl: './platform-standard-list-item-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, StandardListItemModule, ContentDensityDirective]
 })
 export class PlatformStandardListItemExampleComponent {}
@@ -13,7 +12,6 @@ export class PlatformStandardListItemExampleComponent {}
 @Component({
     selector: 'fdp-non-byline-standard-list-item-example',
     templateUrl: './platform-non-byline-standard-list-item-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, StandardListItemModule]
 })
 export class PlatformNonByLineStandardListItemExampleComponent {}
@@ -21,7 +19,6 @@ export class PlatformNonByLineStandardListItemExampleComponent {}
 @Component({
     selector: 'fdp-standard-list-item-with-secondary-type-example',
     templateUrl: './platform-standard-list-item-with-secondary-type-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, StandardListItemModule]
 })
 export class PlatformStandardListItemWithSecondaryTypeExampleComponent {}
@@ -29,7 +26,6 @@ export class PlatformStandardListItemWithSecondaryTypeExampleComponent {}
 @Component({
     selector: '<fdp-standard-list-item-with-inverted-secondary-type-example>',
     templateUrl: './platform-standard-list-item-with-inverted-secondary-type-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, StandardListItemModule]
 })
 export class PlatformStandardListItemWithInvertedSecondaryTypeExampleComponent {}
@@ -37,7 +33,6 @@ export class PlatformStandardListItemWithInvertedSecondaryTypeExampleComponent {
 @Component({
     selector: 'fdp-standard-list-item-with-group-header-example',
     templateUrl: './platform-standard-list-item-with-group-header-example.component.html',
-    standalone: true,
     imports: [PlatformListModule, StandardListItemModule]
 })
 export class PlatformStandardListItemtWithGroupHeaderExampleComponent {}

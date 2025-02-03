@@ -7,7 +7,6 @@ import { Schema, SchemaComponent } from '@fundamental-ngx/docs/schema';
     styleUrls: ['./playground.components.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [SchemaComponent]
 })
 export class PlayGroundComponent {

@@ -5,7 +5,6 @@ import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 @Component({
     selector: 'fd-combobox-displaywith-example',
     templateUrl: './combobox-displaywith-example.component.html',
-    standalone: true,
     imports: [ComboboxComponent, FormsModule]
 })
 export class ComboboxDisplaywithExampleComponent {

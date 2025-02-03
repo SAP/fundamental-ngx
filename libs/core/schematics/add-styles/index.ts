@@ -51,6 +51,7 @@ function addStylesToConfig(options: Schema): Rule {
                     styles: stylesArray as any
                 };
             }
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (e) {
             throw new SchematicsException(
                 `Unable to find angular.json project styles. Please manually configure your styles array.`
@@ -101,6 +102,7 @@ function addAssetsToConfig(options: Schema): Rule {
             }
 
             (buildTarget.options as any)['assets'] = assetsArray;
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (e) {
             throw new SchematicsException(
                 `Unable to find angular.json project assets. Please manually configure your assets array.`

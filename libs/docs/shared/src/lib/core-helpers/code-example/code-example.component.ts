@@ -40,7 +40,6 @@ interface ExamplesEntity {
     encapsulation: ViewEncapsulation.None,
     animations: [height({ time: 200 })],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ButtonComponent,
         BusyIndicatorComponent,

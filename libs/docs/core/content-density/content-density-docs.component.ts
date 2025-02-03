@@ -25,7 +25,6 @@ const directiveUsageExampleComponentSrcHTMLSrc = 'directive-usage/directive-usag
 @Component({
     selector: 'app-content-density-docs',
     templateUrl: 'content-density-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

@@ -88,7 +88,6 @@ export class DynamicPageTabChangeEvent {
             useExisting: DynamicPageComponent
         }
     ],
-    standalone: true,
     imports: [
         CoreDynamicPageComponent,
         CoreDynamicPageHeaderComponent,

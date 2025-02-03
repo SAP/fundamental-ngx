@@ -44,7 +44,7 @@ import {
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
-import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
+import { PopoverComponent, PopoverTriggerDirective } from '@fundamental-ngx/core/popover';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { MIN_DISTANCE_BETWEEN_TICKS } from './constants';
 import { SliderPositionDirective } from './slider-position.directive';
@@ -83,11 +83,11 @@ let sliderId = 0;
         '(mouseleave)': 'this._componentHovered$.next(false)',
         '(focusout)': 'onTouched()'
     },
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         SliderPositionDirective,
-        PopoverModule,
+        PopoverComponent,
+        PopoverTriggerDirective,
         FormsModule,
         OnlyDigitsDirective,
         FdTranslatePipe
@@ -741,6 +741,7 @@ export class SliderComponent
                 },
                 (_, i) => Number((this.min + i * this.step).toFixed(2))
             );
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (e) {}
     }
 

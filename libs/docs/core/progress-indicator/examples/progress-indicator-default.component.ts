@@ -4,7 +4,6 @@ import { ProgressIndicatorComponent } from '@fundamental-ngx/core/progress-indic
 @Component({
     selector: 'fd-progress-indicator-default',
     templateUrl: './progress-indicator-default.component.html',
-    standalone: true,
     imports: [ProgressIndicatorComponent]
 })
 export class ProgressIndicatorDefaultComponent {

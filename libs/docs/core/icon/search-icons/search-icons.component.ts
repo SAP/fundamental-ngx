@@ -36,7 +36,6 @@ import { FdIconDocsType, availableSapIcons } from './available-sap-icons';
         `
     ],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         TableComponent,
         TableColumnComponent,

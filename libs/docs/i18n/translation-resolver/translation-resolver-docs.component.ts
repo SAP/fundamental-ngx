@@ -17,7 +17,6 @@ import { UsingUtilityFunctionsExampleComponent } from './examples/using-utility-
 @Component({
     templateUrl: './translation-resolver-docs.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

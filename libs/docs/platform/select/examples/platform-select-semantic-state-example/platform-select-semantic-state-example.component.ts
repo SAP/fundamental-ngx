@@ -20,7 +20,6 @@ export class Fruit {
     selector: 'fdp-platform-select-semantic-state-example',
     templateUrl: './platform-select-semantic-state-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [PlatformSelectModule, ContentDensityDirective]
 })
 export class PlatformSelectSemanticStateExampleComponent {

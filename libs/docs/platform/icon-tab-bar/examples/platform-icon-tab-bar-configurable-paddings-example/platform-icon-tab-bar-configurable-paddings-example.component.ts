@@ -14,7 +14,6 @@ import { textTypeConfig } from '../config-for-examples/text-type.config';
             }
         `
     ],
-    standalone: true,
     imports: [IconTabBarComponent]
 })
 export class PlatformIconTabBarConfigurablePaddingsExampleComponent {

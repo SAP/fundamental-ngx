@@ -26,7 +26,6 @@ import { BaseListItem } from '../base-list-item';
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => StandardListItemComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     host: {
         role: 'none'
     },

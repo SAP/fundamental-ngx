@@ -21,7 +21,9 @@ import { TabNavComponent } from './tab-nav.component';
                 <a fd-tab-link [active]="false"> Link </a>
             }
         </nav>
-    `
+    `,
+    standalone: true,
+    imports: [TabsModule, ContentDensityModule]
 })
 class TestNavWrapperComponent {
     @ViewChild(TabNavComponent)
@@ -40,8 +42,7 @@ describe('TabNavDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestNavWrapperComponent],
-            imports: [TabsModule, ContentDensityModule],
+            imports: [TestNavWrapperComponent],
             providers: [RtlService]
         }).compileComponents();
     }));

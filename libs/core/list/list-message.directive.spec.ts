@@ -5,7 +5,9 @@ import { ListMessageDirective } from './list-message.directive';
 import { ListModule } from './list.module';
 
 @Component({
-    template: ` <li #directiveElement fd-list-message [type]="type">List Item Test Text</li> `
+    template: ` <li #directiveElement fd-list-message [type]="type">List Item Test Text</li> `,
+    standalone: true,
+    imports: [ListModule]
 })
 class TestComponent {
     @ViewChild(ListMessageDirective, { static: true })
@@ -19,8 +21,7 @@ describe('ListMessageDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [ListModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

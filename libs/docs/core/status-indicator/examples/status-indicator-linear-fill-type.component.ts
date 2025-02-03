@@ -4,7 +4,6 @@ import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
 @Component({
     selector: 'fd-status-indicator-linear-fill-type',
     templateUrl: './status-indicator-linear-fill-type.component.html',
-    standalone: true,
     imports: [StatusIndicatorModule]
 })
 export class StatusIndicatorLinearFillTypeComponent {

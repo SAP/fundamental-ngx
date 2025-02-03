@@ -14,7 +14,6 @@ const ITEMS_AMOUNT_ON_LOAD = 5;
     selector: 'fd-list-infinite-scroll-example',
     templateUrl: './list-infinite-scroll-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [BusyIndicatorComponent, ListModule, InfiniteScrollModule]
 })
 export class ListInfiniteScrollExampleComponent {

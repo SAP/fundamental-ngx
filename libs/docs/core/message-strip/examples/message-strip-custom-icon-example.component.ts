@@ -10,7 +10,6 @@ import { MessageStripComponent, MessageStripIconDirective } from '@fundamental-n
             A dismissible normal message strip with custom icon.
         </fd-message-strip>
     `,
-    standalone: true,
     imports: [MessageStripComponent, MessageStripIconDirective, IconComponent]
 })
 export class MessageStripCustomIconExampleComponent {}

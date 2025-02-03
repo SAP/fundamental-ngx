@@ -5,7 +5,6 @@ import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
     selector: 'fdp-button-types-example',
     templateUrl: './platform-button-types-example.component.html',
     styleUrls: ['./platform-button-examples.scss'],
-    standalone: true,
     imports: [PlatformButtonModule]
 })
 export class PlatformButtonTypesExampleComponent {}
@@ -14,7 +13,6 @@ export class PlatformButtonTypesExampleComponent {}
     selector: 'fdp-button-icons-example',
     templateUrl: './platform-button-icons-example.component.html',
     styleUrls: ['./platform-button-examples.scss'],
-    standalone: true,
     imports: [PlatformButtonModule]
 })
 export class PlatformButtonIconsExampleComponent {}
@@ -23,7 +21,6 @@ export class PlatformButtonIconsExampleComponent {}
     selector: 'fdp-button-truncate-example',
     templateUrl: './platform-button-truncate-example.component.html',
     styleUrls: ['./platform-button-examples.scss'],
-    standalone: true,
     imports: [PlatformButtonModule]
 })
 export class PlatformButtonTruncateExampleComponent {}

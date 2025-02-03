@@ -14,7 +14,6 @@ import { DisabledRecipientDirective } from './disabled-recipient.directive';
             }
         `
     ],
-    standalone: true,
     imports: [DisabledBehaviorDirective, DisabledRecipientDirective, ButtonComponent, ClickedDirective]
 })
 export class DiExampleComponent {

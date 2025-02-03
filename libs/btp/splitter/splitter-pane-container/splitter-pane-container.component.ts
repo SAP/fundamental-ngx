@@ -79,7 +79,6 @@ export function transformPaneTypeInput(paneType: PaneTypeInput): Nullable<PaneTy
             useExisting: SplitterPaneContainerComponent
         }
     ],
-    standalone: true,
     imports: [NgTemplateOutlet, SplitterPaginationComponent, PortalModule, SplitterResizerComponent, NoDefaultPanePipe]
 })
 export class SplitterPaneContainerComponent
