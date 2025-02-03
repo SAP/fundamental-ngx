@@ -7,7 +7,6 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
     selector: 'fdk-disabled-default-example',
     templateUrl: './default-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ButtonComponent, DisabledBehaviorDirective, LinkComponent, FocusableListDirective, FocusableItemDirective]
 })
 export class DefaultExampleComponent {

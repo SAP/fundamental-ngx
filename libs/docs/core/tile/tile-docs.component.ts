@@ -28,7 +28,6 @@ const miscTs = 'misc-tile-example.component.ts';
 @Component({
     selector: 'app-tile',
     templateUrl: './tile-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

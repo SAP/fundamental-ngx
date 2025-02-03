@@ -14,7 +14,6 @@ import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-
     templateUrl: './platform-dynamic-page-responsive-padding-example.component.html',
     styleUrls: ['./platform-dynamic-page-responsive-padding-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ButtonComponent,
         PlatformDynamicPageModule,

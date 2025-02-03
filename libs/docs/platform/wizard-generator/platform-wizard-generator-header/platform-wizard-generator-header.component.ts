@@ -11,7 +11,6 @@ import {
 @Component({
     selector: 'fdp-platform-wizard-generator-header',
     templateUrl: './platform-wizard-generator-header.component.html',
-    standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, RouterLink, ImportComponent, HeaderTabsComponent]
 })
 export class PlatformWizardGeneratorHeaderComponent {}

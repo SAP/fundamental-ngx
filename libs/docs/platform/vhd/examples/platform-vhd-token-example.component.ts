@@ -45,7 +45,6 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
 @Component({
     selector: 'fdp-platform-vhd-token-example',
     templateUrl: './platform-vhd-token-example.component.html',
-    standalone: true,
     imports: [ButtonComponent, PlatformValueHelpDialogModule]
 })
 export class PlatformVhdTokenExampleComponent implements OnInit {

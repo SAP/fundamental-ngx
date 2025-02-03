@@ -5,7 +5,9 @@ import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'fd-notification-group-growing-item-test',
-    template: ` <fd-notification-group-growing-item>Notification Group Growing Item Test</fd-notification-group-growing-item> `
+    template: ` <fd-notification-group-growing-item>Notification Group Growing Item Test</fd-notification-group-growing-item> `,
+    standalone: true,
+    imports: [NotificationModule]
 })
 class TestWrapperComponent {}
 
@@ -15,8 +17,7 @@ describe('NotificationGroupGrowingItemComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [NotificationModule]
+            imports: [TestWrapperComponent]
         }).compileComponents();
     });
 

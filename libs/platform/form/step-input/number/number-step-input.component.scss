@@ -1,1 +1,6 @@
-@import '../step-input.scss';
+@import 'fundamental-styles/dist/input.css';
+@import 'fundamental-styles/dist/step-input.css';
+
+.fd-step-input {
+    display: flex;
+}

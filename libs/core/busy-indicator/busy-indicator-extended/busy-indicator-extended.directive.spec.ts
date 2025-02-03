@@ -8,7 +8,9 @@ import { BusyIndicatorExtendedDirective } from './busy-indicator-extended.direct
         <div fd-busy-indicator-extended>
             <fd-busy-indicator [loading]="true" label="Please wait" ariaLabel="Please wait"></fd-busy-indicator>
         </div>
-    </div>`
+    </div>`,
+    standalone: true,
+    imports: [BusyIndicatorComponent, BusyIndicatorExtendedDirective]
 })
 class TestComponent {
     @ViewChild('testTemplate', { static: true }) templateRef: TemplateRef<any>;
@@ -21,8 +23,7 @@ describe('BusyIndicatorExtendedDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [BusyIndicatorExtendedDirective, BusyIndicatorComponent]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

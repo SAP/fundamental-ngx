@@ -29,8 +29,8 @@ let randomButtonBarId = 0;
             useExisting: ButtonBarComponent
         }
     ],
-    standalone: true,
-    imports: [ButtonComponent]
+    imports: [ButtonComponent],
+    standalone: true
 })
 export class ButtonBarComponent extends BaseButton {
     /** Whether the element should take the whole width of the container. */

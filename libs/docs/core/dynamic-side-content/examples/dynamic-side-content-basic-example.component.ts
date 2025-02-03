@@ -6,7 +6,6 @@ import { DynamicSideContentModule } from '@fundamental-ngx/core/dynamic-side-con
     templateUrl: './dynamic-side-content-basic-example.component.html',
     styleUrls: ['./dynamic-side-content.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [DynamicSideContentModule]
 })
 export class DynamicSideContentBasicExampleComponent {}

@@ -34,7 +34,6 @@ import { map, take } from 'rxjs/operators';
     templateUrl: './platform-smart-filter-bar-observable-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         PlatformSmartFilterBarModule,
         TitleComponent,

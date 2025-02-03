@@ -98,7 +98,6 @@ export class FilterPipe implements PipeTransform {
             </fd-dialog-footer>
         </fd-dialog>
     `,
-    standalone: true,
     imports: [
         DialogModule,
         TitleComponent,

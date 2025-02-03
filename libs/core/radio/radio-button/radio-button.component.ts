@@ -45,7 +45,6 @@ let uniqueId = 0;
     host: {
         '(focusout)': 'onTouched()'
     },
-    standalone: true,
     imports: [FormsModule]
 })
 export class RadioButtonComponent<T = any>
@@ -96,6 +95,10 @@ export class RadioButtonComponent<T = any>
      */
     @Input()
     disabled = false;
+
+    /** The field is used to tell if radio button should be read only */
+    @Input()
+    readOnly = false;
 
     /** The field should be only used with reactive forms
      * Its purpose is to pass a current selected value from froumGroup
@@ -211,6 +214,12 @@ export class RadioButtonComponent<T = any>
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        this.changeDetectionRef.detectChanges();
+    }
+
+    /** @hidden */
+    setReadonlyState(isReadonly: boolean): void {
+        this.readOnly = isReadonly;
         this.changeDetectionRef.detectChanges();
     }
 

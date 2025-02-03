@@ -4,7 +4,9 @@ import { TabsModule } from '../tabs.module';
 import { TabIconComponent } from './tab-directives';
 
 @Component({
-    template: ` <li fd-tab-icon #directiveElement></li> `
+    template: ` <li fd-tab-icon #directiveElement></li> `,
+    standalone: true,
+    imports: [TabsModule]
 })
 class TestNestedContainerComponent {
     @ViewChild('directiveElement', { static: true, read: TabIconComponent })
@@ -18,8 +20,7 @@ describe('TabIconComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TabsModule],
-            declarations: [TestNestedContainerComponent]
+            imports: [TestNestedContainerComponent]
         }).compileComponents();
     }));
 

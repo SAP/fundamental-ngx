@@ -30,7 +30,6 @@ const flexibleColumnLayoutCustomConfigTs = 'custom-config/flexible-column-layout
 @Component({
     selector: 'fd-flexible-column-layout-docs',
     templateUrl: './flexible-column-layout-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,

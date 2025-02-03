@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -87,7 +87,6 @@ export class MultiInputSelectionChangeEvent {
         },
         contentDensityObserverProviders()
     ],
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         PopoverComponent,
@@ -370,9 +369,6 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
                 this.showList(!this.isOpen);
                 this.searchInputElement.nativeElement.focus();
             }
-        }
-        if (KeyUtil.isKeyCode(event, [ESCAPE])) {
-            this.showList(false);
         }
         this.markForCheck();
     }

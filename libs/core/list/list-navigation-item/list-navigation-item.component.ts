@@ -36,7 +36,6 @@ import { FD_LIST_COMPONENT } from '../tokens';
     host: {
         role: 'treeitem'
     },
-    standalone: true,
     imports: [NgTemplateOutlet, IconComponent]
 })
 export class ListNavigationItemComponent implements AfterContentInit, AfterViewInit, FocusableOption {

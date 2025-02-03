@@ -6,7 +6,6 @@ import { CarouselComponent, CarouselItemComponent } from '@fundamental-ngx/core/
     selector: 'fd-carousel-content-navigation-example',
     templateUrl: './carousel-content-navigation-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [NgTemplateOutlet, CarouselComponent, CarouselItemComponent]
 })
 export class CarouselContentNavigationExampleComponent {}

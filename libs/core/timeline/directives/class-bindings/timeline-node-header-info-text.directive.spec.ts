@@ -8,8 +8,7 @@ describe('TimelineNodeHeaderInfoTextDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [TimelineModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 
@@ -29,7 +28,9 @@ describe('TimelineNodeHeaderInfoTextDirective', () => {
 });
 
 @Component({
-    template: `<span #directiveElement fdTimelineNodeHeaderInfoText>Notification Footer Content Test</span>`
+    template: `<span #directiveElement fdTimelineNodeHeaderInfoText>Notification Footer Content Test</span>`,
+    standalone: true,
+    imports: [TimelineModule]
 })
 class TestComponent {
     @ViewChild('directiveElement')

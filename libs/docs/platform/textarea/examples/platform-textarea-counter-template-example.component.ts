@@ -6,7 +6,6 @@ import { FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/pla
     selector: 'fdp-platform-textarea-counter-template-example',
     templateUrl: './platform-textarea-counter-template-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [FdpFormGroupModule, PlatformTextAreaModule, FormsModule]
 })
 export class PlatformTextareaCounterTemplateExampleComponent {

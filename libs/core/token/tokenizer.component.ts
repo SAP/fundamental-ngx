@@ -50,8 +50,8 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { FD_DEFAULT_ICON_FONT_FAMILY, IconFont } from '@fundamental-ngx/core/icon';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { ListModule } from '@fundamental-ngx/core/list';
+import { InputGroupAddOnDirective } from '@fundamental-ngx/core/input-group';
+import { ListComponent, ListItemComponent } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { BehaviorSubject, Subscription, fromEvent, merge, startWith } from 'rxjs';
@@ -65,15 +65,15 @@ import { TokenComponent } from './token.component';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders()],
-    standalone: true,
     imports: [
         NgTemplateOutlet,
-        InputGroupModule,
+        InputGroupAddOnDirective,
         ButtonComponent,
         PopoverComponent,
         PopoverControlComponent,
         PopoverBodyComponent,
-        ListModule,
+        ListComponent,
+        ListItemComponent,
         FdTranslatePipe
     ]
 })

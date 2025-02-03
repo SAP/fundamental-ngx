@@ -7,7 +7,6 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
     selector: 'fd-popover-programmatic-open-example',
     templateUrl: './popover-programmatic-open-example.component.html',
     styleUrls: ['popover-programmatic-open-example.component.scss'],
-    standalone: true,
     imports: [PopoverComponent, PopoverControlComponent, AvatarComponent, PopoverBodyComponent, ButtonComponent]
 })
 export class PopoverProgrammaticOpenExampleComponent {

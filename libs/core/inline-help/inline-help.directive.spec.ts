@@ -8,7 +8,9 @@ import { InlineHelpModule } from './inline-help.module';
         @if (visible) {
             <div #directiveElement fd-inline-help="123"></div>
         }
-    `
+    `,
+    standalone: true,
+    imports: [InlineHelpModule]
 })
 class TestComponent {
     @ViewChild('directiveElement', { static: false, read: ElementRef })
@@ -22,8 +24,7 @@ describe('InlineHelpDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [InlineHelpModule],
-            declarations: [TestComponent]
+            imports: [TestComponent],
         }).compileComponents();
     }));
 

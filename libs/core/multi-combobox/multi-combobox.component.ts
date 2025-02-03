@@ -102,7 +102,6 @@ export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory
             useExisting: MultiComboboxComponent
         }
     ],
-    standalone: true,
     imports: [
         NgTemplateOutlet,
         PopoverComponent,
@@ -569,7 +568,6 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     _onItemKeyDownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, ESCAPE)) {
             this._focusToSearchField();
-            this.close();
         } else if ((event.ctrlKey || event.metaKey) && event.shiftKey && KeyUtil.isKeyCode(event, A)) {
             event.preventDefault();
             this._handleSelectAllItems(false);
@@ -724,10 +722,6 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
             this._chooseOtherItem(-1);
         } else if (KeyUtil.isKeyCode(event, ENTER)) {
             this._toggleSelectionByInputText();
-        } else if (KeyUtil.isKeyCode(event, ESCAPE)) {
-            event.stopPropagation();
-
-            this._showList(false);
         } else if (!KeyUtil.isKeyCode(event, [...this._nonOpeningKeys, CONTROL])) {
             this._showList(true);
             const acceptedKeys = !KeyUtil.isKeyType(event, 'alphabetical') && !KeyUtil.isKeyType(event, 'numeric');

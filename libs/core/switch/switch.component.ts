@@ -49,7 +49,6 @@ let switchUniqueId = 0;
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [FormsModule, FdTranslatePipe, IconComponent]
 })
 export class SwitchComponent implements OnInit, OnDestroy, FormItemControl {

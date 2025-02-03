@@ -39,7 +39,6 @@ export class IconTabBarTabContentDirective implements HasElementRef {
 
 @Component({
     selector: 'fdp-icon-tab-bar-tab',
-    standalone: true,
     imports: [CommonModule],
     templateUrl: './icon-tab-bar-tab.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush

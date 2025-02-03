@@ -1,8 +1,7 @@
-import { formatFiles } from '@nx/devkit';
+import { formatFiles, workspaceRoot } from '@nx/devkit';
 import { execSync } from 'child_process';
 import { sync as fastGlobSync } from 'fast-glob';
 import { FsTree, flushChanges, printChanges } from 'nx/src/generators/tree';
-import { workspaceRoot } from 'nx/src/utils/app-root';
 import { parse } from 'path';
 import { format, resolveConfig } from 'prettier';
 import { loadProperties, parseProperties } from './duplicates';

@@ -50,7 +50,6 @@ import { BaseInput } from '@fundamental-ngx/platform/shared';
     host: {
         '(blur)': 'onTouched()'
     },
-    standalone: true,
     imports: [DatePickerComponent, FormsModule, CalendarDayViewComponent, CalendarComponent]
 })
 export class PlatformDatePickerComponent<D> extends BaseInput {

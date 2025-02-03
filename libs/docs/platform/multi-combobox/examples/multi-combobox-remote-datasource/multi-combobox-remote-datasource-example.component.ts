@@ -28,8 +28,7 @@ import { Observable, map, of } from 'rxjs';
         </fdp-form-group>
         <p>Selected: {{ selectedItems2 | json }}</p>
     `,
-    imports: [FormGroupComponent, FormFieldComponent, MultiComboboxComponent, JsonPipe],
-    standalone: true
+    imports: [FormGroupComponent, FormFieldComponent, MultiComboboxComponent, JsonPipe]
 })
 export class MultiComboboxRemoteDatasourceExampleComponent {
     dataSource = [

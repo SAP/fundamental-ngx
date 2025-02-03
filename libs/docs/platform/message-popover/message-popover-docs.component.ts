@@ -29,7 +29,6 @@ const customConfigExampleModule = 'custom-config/example-module.ts';
 @Component({
     selector: 'app-message-popover',
     templateUrl: './message-popover-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

@@ -13,7 +13,6 @@ import { SearchFieldBasicExampleComponent } from './examples/basic-example/searc
 
 @Component({
     templateUrl: './search-field-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

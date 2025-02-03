@@ -8,7 +8,6 @@ import { ListModule } from '@fundamental-ngx/core/list';
     templateUrl: './list-byline-unread-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [ListModule, IconComponent, ContentDensityDirective]
 })
 export class ListBylineUnreadExampleComponent {}

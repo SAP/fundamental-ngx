@@ -25,7 +25,6 @@ const listProductSwitchTs = 'product-switch-list/product-switch-list-example.com
 @Component({
     selector: 'app-product-switch',
     templateUrl: './product-switch-docs.component.html',
-    standalone: true,
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,

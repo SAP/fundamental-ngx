@@ -28,7 +28,9 @@ function mouseClickOnElement(el: Element): void {
             <fdp-menu-item (itemSelect)="onSelect('Peach')">Peach</fdp-menu-item>
         </fdp-menu>
         <button #otherButton>Another Button</button>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformMenuModule]
 })
 class SimpleMenuComponent {
     @ViewChild('button', { static: false }) button: ElementRef<HTMLElement>;
@@ -57,8 +59,7 @@ describe('Simple Menu', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformMenuModule],
-            declarations: [SimpleMenuComponent],
+            imports: [SimpleMenuComponent],
             providers: [RtlService]
         }).compileComponents();
 
@@ -313,7 +314,9 @@ describe('Simple Menu', () => {
             <fdp-menu-item (itemSelect)="onSelect('Red Braeburn')">Red Braeburn</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onSelect('Pink Braeburn')">Pink Braeburn</fdp-menu-item>
         </fdp-menu>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformMenuModule]
 })
 class CascadingMenuComponent {
     @ViewChild('button', { static: false }) button: ElementRef<HTMLElement>;
@@ -339,8 +342,7 @@ describe('Cascading Menu', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformMenuModule],
-            declarations: [CascadingMenuComponent],
+            imports: [CascadingMenuComponent],
             providers: [RtlService]
         }).compileComponents();
 
@@ -663,7 +665,9 @@ describe('Cascading Menu', () => {
             <fdp-menu-item (itemSelect)="onSelect('Lady Finger')">Lady Finger</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onSelect('Red')">Red</fdp-menu-item>
         </fdp-menu>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformMenuModule]
 })
 class CascadingBeforeMenuComponent {
     @ViewChild('button', { static: false }) button: ElementRef<HTMLElement>;
@@ -689,8 +693,7 @@ describe('Cascading Menu - Position Before', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformMenuModule],
-            declarations: [CascadingBeforeMenuComponent],
+            imports: [CascadingBeforeMenuComponent],
             providers: [RtlService]
         }).compileComponents();
 
@@ -783,7 +786,9 @@ describe('Cascading Menu - Position Before', () => {
             <fdp-menu-item (itemSelect)="onSelect('Lady Finger')">Lady Finger</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onSelect('Red')">Red</fdp-menu-item>
         </fdp-menu>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformMenuModule]
 })
 class CascadingAfterRTLMenuComponent {
     @ViewChild('button', { static: false }) button: ElementRef<HTMLElement>;
@@ -813,8 +818,7 @@ describe('Cascading Menu - Position After, RTL', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformMenuModule],
-            declarations: [CascadingAfterRTLMenuComponent],
+            imports: [CascadingAfterRTLMenuComponent],
             providers: [
                 {
                     provide: RtlService,
@@ -912,7 +916,9 @@ describe('Cascading Menu - Position After, RTL', () => {
             <fdp-menu-item (itemSelect)="onSelect('Lady Finger')">Lady Finger</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onSelect('Red')">Red</fdp-menu-item>
         </fdp-menu>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformMenuModule]
 })
 class CascadingBeforeRTLMenuComponent {
     @ViewChild('button', { static: false }) button: ElementRef<HTMLElement>;
@@ -942,8 +948,7 @@ describe('Cascading Menu - Position Before, RTL', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformMenuModule],
-            declarations: [CascadingBeforeRTLMenuComponent],
+            imports: [CascadingBeforeRTLMenuComponent],
             providers: [
                 {
                     provide: RtlService,
@@ -1033,7 +1038,9 @@ describe('Cascading Menu - Position Before, RTL', () => {
             <fdp-menu-item (itemSelect)="onSelect('Orange')">Orange</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onSelect('Peach')">Peach</fdp-menu-item>
         </fdp-menu>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformMenuModule]
 })
 class MultipleTriggersMenuComponent {
     @ViewChild('fruitButton') fruitButton: ElementRef<HTMLElement>;
@@ -1062,8 +1069,7 @@ describe('Multiple triggers sharing same menu', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformMenuModule],
-            declarations: [MultipleTriggersMenuComponent],
+            imports: [MultipleTriggersMenuComponent],
             providers: [
                 {
                     provide: RtlService,

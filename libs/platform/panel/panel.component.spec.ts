@@ -14,7 +14,9 @@ import { PlatformPanelModule } from './panel.module';
 @Component({
     template: ` <fdp-panel title="Panel Title">
         <fdp-panel-content>Panel Content Text</fdp-panel-content>
-    </fdp-panel>`
+    </fdp-panel>`,
+    standalone: true,
+    imports: [CommonModule, PlatformPanelModule]
 })
 class PanelWithDefaultValuesComponent {
     @ViewChild(PanelComponent) panel: PanelComponent;
@@ -28,8 +30,7 @@ describe('PanelComponent default values', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformPanelModule],
-            declarations: [PanelWithDefaultValuesComponent]
+            imports: [PanelWithDefaultValuesComponent]
         }).compileComponents();
     }));
 
@@ -73,7 +74,9 @@ describe('PanelComponent default values', () => {
         </fdp-panel-actions>
 
         <fdp-panel-content [contentHeight]="contentHeight">Panel Content Text</fdp-panel-content>
-    </fdp-panel>`
+    </fdp-panel>`,
+    standalone: true,
+    imports: [CommonModule, PlatformPanelModule, PlatformButtonModule]
 })
 class SimplePanelComponent {
     @ViewChild(PanelComponent) panel: PanelComponent;
@@ -101,8 +104,7 @@ describe('Simple PanelComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformPanelModule, PlatformButtonModule],
-            declarations: [SimplePanelComponent]
+            imports: [SimplePanelComponent]
         }).compileComponents();
     }));
 
