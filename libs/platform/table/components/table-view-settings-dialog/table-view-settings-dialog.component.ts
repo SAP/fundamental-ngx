@@ -32,6 +32,12 @@ export const dialogConfig: DialogConfig = {
     width: '340px'
 };
 
+export interface CombinedTableDialogData {
+    sortingData: SettingsSortDialogData | null;
+    filteringData: FiltersDialogData | null;
+    groupingData: SettingsGroupDialogData | null;
+}
+
 /**
  * View settings dialog component.
  *
@@ -80,7 +86,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
     _table: Table;
 
     /** @hidden */
-    _dialogRef: DialogRef<TableDialogCommonData, any>;
+    _dialogRef: DialogRef<TableDialogCommonData | CombinedTableDialogData, any>;
 
     private readonly destroyRef = inject(DestroyRef);
 
